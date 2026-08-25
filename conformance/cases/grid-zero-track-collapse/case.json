@@ -1,0 +1,20 @@
+{
+  "id": "grid-zero-track-collapse",
+  "feature": "grid-tracks",
+  "construct": "a computed grid track list containing a 0px track — the resolved width of an EMPTY slot column (min-content with no occupant)",
+  "why": "The authored-zero fence (P2b) poisoned the computed-evidence plane: fluent.card's CardHeader resolves grid-template-columns \"0px 404px\" (the absent media column) and fluent.dialog's DialogBody \"267px 267px 0px\" — the whole grid promotion abandoned and the parts fell to the emitters' horizontal-row default, gluing header and description onto one line (the rejected census sets). A resolved 0px track occupies no space and hosts no drawn child: it collapses out of the carried list by name and every placement re-indexes.",
+  "expect": "CARRIED",
+  "expectName": "grid-zero-track-collapsed",
+  "expectWhere": "anatomy.root.layout.columns (the collapsed list) + the grid-zero-track-collapsed receipt",
+  "observable": {
+    "part": "root",
+    "channel": "grid-template-columns",
+    "capturedValue": "0px 288px",
+    "carriedValue": "288px"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "the carried single-column grid stacks the two children; the empty 0px slot column draws nothing on either surface"
+  },
+  "blockStage": true
+}

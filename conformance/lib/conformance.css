@@ -12,6 +12,8 @@
 @import '../cases/antd-presence-times-axis-glyph/case.css';
 @import '../cases/aspect-ratio/case.css';
 @import '../cases/backdrop-filter/case.css';
+@import '../cases/block-root-shrink-to-fit/case.css';
+@import '../cases/border-color-control-equal/case.css';
 @import '../cases/border-radius-px/case.css';
 @import '../cases/box-shadow-single/case.css';
 @import '../cases/calc-var/case.css';
@@ -29,6 +31,7 @@
 @import '../cases/display-out-of-vocab/case.css';
 @import '../cases/em-relative-padding/case.css';
 @import '../cases/filter-blur/case.css';
+@import '../cases/flex-direction-by-axis/case.css';
 @import '../cases/flex-gap/case.css';
 @import '../cases/grid-2d/case.css';
 @import '../cases/grid-absolute-overlay/case.css';
@@ -61,6 +64,7 @@
 @import '../cases/grid-track-zero-value/case.css';
 @import '../cases/grid-tracks-mixed-fractional/case.css';
 @import '../cases/grid-two-column/case.css';
+@import '../cases/grid-zero-track-collapse/case.css';
 @import '../cases/mask-image/case.css';
 @import '../cases/media-non-matching/case.css';
 @import '../cases/min-max-width/case.css';
@@ -72,6 +76,7 @@
 @import '../cases/position-absolute-insets/case.css';
 @import '../cases/position-fixed/case.css';
 @import '../cases/position-sticky/case.css';
+@import '../cases/presence-hidden-axis-geometry/case.css';
 @import '../cases/pseudo-backdrop/case.css';
 @import '../cases/pseudo-content-glyph/case.css';
 @import '../cases/pseudo-gradient-only/case.css';
@@ -83,6 +88,7 @@
 @import '../cases/shadow-root-closed/case.css';
 @import '../cases/stage-box-equal/case.css';
 @import '../cases/svg-outside-grammar/case.css';
+@import '../cases/svg-stroke-glyph-fill-none/case.css';
 @import '../cases/text-overflow-ellipsis/case.css';
 @import '../cases/transform-scale-rotate/case.css';
 @import '../cases/transition-channel/case.css';

@@ -140,6 +140,22 @@
       "axes": []
     },
     {
+      "__case": "invariant: a display:block root that filled NOTHING — the flex stage made it a flex item and it shrink-to-fit its content, so its computed width is a harness-text measurement (the astryx.card 114.203px family) — declared REFUSED",
+      "name": "CaseBlockRootShrinkToFit",
+      "importName": "CaseBlockRootShrinkToFit",
+      "contract": "conformance/seeds/block-root-shrink-to-fit.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
+      "__case": "paint: a border-color EQUAL to the bare control element's (a library global like shadcn's `* { border-color: var(--border) }` styles the control too) on a part that draws a real border — declared CARRIED",
+      "name": "CaseBorderColorControlEqual",
+      "importName": "CaseBorderColorControlEqual",
+      "contract": "conformance/seeds/border-color-control-equal.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
       "__case": "geometry: border-radius: 6px — declared CARRIED",
       "name": "CaseBorderRadiusPx",
       "importName": "CaseBorderRadiusPx",
@@ -278,6 +294,16 @@
       "contract": "conformance/seeds/filter-blur.contract.json",
       "sampleText": "",
       "axes": []
+    },
+    {
+      "__case": "layout: flex-direction that VARIES on one enum axis (column at the default value, row on the other) — the fluent.card orientation shape — declared CARRIED",
+      "name": "CaseFlexDirectionByAxis",
+      "importName": "CaseFlexDirectionByAxis",
+      "contract": "conformance/seeds/flex-direction-by-axis.contract.json",
+      "sampleText": "",
+      "axes": [
+        "orientation"
+      ]
     },
     {
       "__case": "layout: column-gap / row-gap in px — declared CARRIED",
@@ -577,6 +603,15 @@
       "blockStage": true
     },
     {
+      "__case": "grid-tracks: a computed grid track list containing a 0px track — the resolved width of an EMPTY slot column (min-content with no occupant) — declared CARRIED",
+      "name": "CaseGridZeroTrackCollapse",
+      "importName": "CaseGridZeroTrackCollapse",
+      "contract": "conformance/seeds/grid-zero-track-collapse.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
       "__case": "effects: mask-image: linear-gradient(...) — declared UNSUPPORTED",
       "name": "CaseMaskImage",
       "importName": "CaseMaskImage",
@@ -669,6 +704,16 @@
       "blockStage": true
     },
     {
+      "__case": "tokens: an absolute part's inset that is a clean function of ONE enum axis, with the part NOT RENDERED at one axis value (polaris.checkbox icon: top/left 0px when checked, -2px when indeterminate, absent when unchecked) — declared CARRIED",
+      "name": "CasePresenceHiddenAxisGeometry",
+      "importName": "CasePresenceHiddenAxisGeometry",
+      "contract": "conformance/seeds/presence-hidden-axis-geometry.contract.json",
+      "sampleText": "",
+      "axes": [
+        "checked"
+      ]
+    },
+    {
       "__case": "pseudo-elements: dialog::backdrop { background-color } — declared UNSUPPORTED",
       "name": "CasePseudoBackdrop",
       "importName": "CasePseudoBackdrop",
@@ -756,6 +801,14 @@
       "name": "CaseSvgOutsideGrammar",
       "importName": "CaseSvgOutsideGrammar",
       "contract": "conformance/seeds/svg-outside-grammar.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
+      "__case": "anatomy: a STROKE-drawn svg glyph whose computed fill is none (the lucide check: an open path, stroke=currentColor, fill=\"none\" on the svg) — declared REFUSED",
+      "name": "CaseSvgStrokeGlyphFillNone",
+      "importName": "CaseSvgStrokeGlyphFillNone",
+      "contract": "conformance/seeds/svg-stroke-glyph-fill-none.contract.json",
       "sampleText": "",
       "axes": []
     },

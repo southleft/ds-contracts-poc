@@ -1,0 +1,18 @@
+{
+  "id": "svg-stroke-glyph-fill-none",
+  "feature": "anatomy",
+  "construct": "a STROKE-drawn svg glyph whose computed fill is none (the lucide check: an open path, stroke=currentColor, fill=\"none\" on the svg)",
+  "why": "The asset reconstruction folded the path's fill:none into the svg tag's inherited none and emitted NO fill attribute \u2014 but SVG's initial fill is BLACK, so the committed asset filled the open check path into a blob the moment it rendered standalone, and the canvas emitter then injected the paint as fill and drew shadcn.checkbox's check as a malformed filled blob overflowing the 16px box (the rejected census set). fill=\"none\" is a paint fact and must survive reconstruction by name. The channel itself has no contract spelling (the glyph is consumed into the reconstructed asset \u2014 the ledger's own 'no schema channel today' row), so the disposition is a NAMED refusal: the receipt that proves fill=\"none\" survived into the asset markup.",
+  "expect": "REFUSED",
+  "expectName": "svg-stroke-glyph-fill-none",
+  "expectWhere": "LEDGER.md (the svg asset reconstruction receipts)",
+  "observable": {
+    "part": "a",
+    "channel": "fill",
+    "capturedValue": "none"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "the check draws as a 2px STROKE; nothing fills the open path on either surface"
+  }
+}

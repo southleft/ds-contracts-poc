@@ -359,7 +359,7 @@ export function promoteGridLayout(
     }
     return out.length > 0 ? out : null;
   };
-  const trackAxis = (axis: 'rows' | 'columns'): { tracks: GridTrackIR[] } | GridPromotionAbandoned => {
+  const trackAxis = (axis: 'rows' | 'columns'): { tracks: GridTrackIR[]; dropped?: number[] } | GridPromotionAbandoned => {
     const ch = axis === 'rows' ? 'grid-template-rows' : 'grid-template-columns';
     const computedRaw = (rep.style[ch] ?? 'none').trim();
     const computedPx = pxList(computedRaw);
@@ -379,6 +379,18 @@ export function promoteGridLayout(
       if (dv.trim() === computedRaw) continue; // all-px declaration — computed carries it below
       const parsed = parseGridTrackList(dv);
       if (parsed.receipts.refusals.length > 0) {
+        // REJECTED-SETS ROUND: a refused DECLARED construct (min-content /
+        // minmax / …) whose COMPUTED resolution is an all-px list WITH an
+        // empty 0px track is the empty-slot-column signature (fluent.card's
+        // CardHeader media column) — the computed-evidence collapse below
+        // decides, receipted; abandoning here left the whole grid to the
+        // horizontal flex-era default.
+        if (computedPx !== null && computedPx.some((n) => n === 0) && computedPx.some((n) => n > 0)) {
+          receipts.push(
+            `grid-declared-refused-computed-decides: ${label}.${ch} declared "${dv}" is a refused track construct (G7), but the computed "${computedRaw}" is an all-px list with an EMPTY 0px track — the computed-evidence zero-track collapse carries the drawn truth (grid-zero-track-collapsed below)`,
+          );
+          continue;
+        }
         // a declared G7 construct (minmax/percent/auto-fit/…) — abandon so
         // lowerGridDisplay's fence names the refusal (one naming source).
         return abandon(`declared ${ch} "${dv}" is a refused track construct — the G7 fence names it`);
@@ -408,6 +420,30 @@ export function promoteGridLayout(
         `${GRID_REFUSALS['grid-implicit-tracks']} — measured on ${label}.${ch}: the declaration "${implicitEvidence.declared}" lists ${implicitEvidence.declaredCount} track(s) while the resolved grid reads "${computedRaw}" (${computedPx?.length ?? '?'} tracks, implicit tracks included in Chromium's resolved value) — the occupancy grew the grid beyond the declared list, and carrying the resolved list would rewrite the declaration inside the contract (P9/N-DISP-02)`,
       );
     }
+    // REJECTED-SETS ROUND (fluent.card cardheader "0px 404px", fluent.dialog
+    // dialogbody "267px 267px 0px"): a COMPUTED all-px track list may contain
+    // 0px tracks — the resolved width of an EMPTY slot column (CardHeader's
+    // absent media column, DialogBody's unused third column). The zero fence
+    // in parseGridTrackList exists for AUTHORED 0px tracks (P2b silent
+    // rewrite) and used to poison the computed-evidence plane too, so the
+    // whole grid promotion abandoned and the part fell to the emitters'
+    // horizontal-row default — the rejected census sets. A resolved 0px
+    // track occupies no space and hosts no drawn child; it is COLLAPSED out
+    // of the carried list with a named receipt, and the caller re-indexes
+    // every child placement across the dropped line(s). A child that STARTS
+    // in a dropped track still abandons by name below.
+    if (computedPx !== null && computedPx.some((n) => n === 0) && computedPx.some((n) => n > 0)) {
+      const dropped: number[] = [];
+      const kept: GridTrackIR[] = [];
+      computedPx.forEach((n, i) => {
+        if (n === 0) dropped.push(i);
+        else kept.push({ px: n });
+      });
+      receipts.push(
+        `grid-zero-track-collapsed: ${label}.${ch} — computed "${computedRaw}" resolves ${dropped.length} EMPTY 0px track(s) at line ${dropped.map((i) => i + 1).join(', ')} (an unoccupied slot column/row, not an authored zero — the P2b fence covers the declared plane); the carried list keeps the ${kept.length} non-zero track(s) and every child placement is re-indexed across the dropped line(s)`,
+      );
+      return { tracks: kept, dropped };
+    }
     const computed = parseGridTrackList(computedRaw);
     if (computed.receipts.refusals.length > 0 || !computed.tracks) {
       return abandon(`computed ${ch} "${computedRaw}" yields no carriageable track list`);
@@ -420,6 +456,33 @@ export function promoteGridLayout(
   if ('abandon' in colsR) return colsR;
   const rows = rowsR.tracks;
   const columns = colsR.tracks;
+  const rowsDropped: number[] = 'dropped' in rowsR ? (rowsR.dropped ?? []) : [];
+  const colsDropped: number[] = 'dropped' in colsR ? (colsR.dropped ?? []) : [];
+  /** Re-index a 0-based {anchor, span} across an axis's collapsed 0px lines.
+   *  Anchoring IN a dropped track abandons (the content sat in a zero-width
+   *  slot — collapsing it would relocate a real child); a span that covers a
+   *  dropped track shrinks by the covered count. */
+  const remapLine = (
+    anchor: number,
+    span: number,
+    droppedAxis: number[],
+    axis: string,
+    who: string,
+  ): { anchor: number; span: number } | GridPromotionAbandoned => {
+    if (droppedAxis.length === 0) return { anchor, span };
+    if (droppedAxis.includes(anchor)) {
+      return abandon(
+        `child "${who}" anchors ${axis} at collapsed 0px track ${anchor + 1} — a real child inside a zero-width track cannot be re-indexed honestly (grid-zero-track-collapsed names the collapse)`,
+      );
+    }
+    const newAnchor = anchor - droppedAxis.filter((d) => d < anchor).length;
+    const covered = droppedAxis.filter((d) => d > anchor && d < anchor + span).length;
+    const newSpan = span - covered;
+    if (newSpan < 1) {
+      return abandon(`child "${who}" ${axis} span collapses to zero across the dropped 0px track(s)`);
+    }
+    return { anchor: newAnchor, span: newSpan };
+  };
 
   // -- flow fence (G5/G7): dense/column refuse via the fallback's fence --
   const flow = parseGridAutoFlow(rep.style['grid-auto-flow'] || 'row');
@@ -643,14 +706,26 @@ export function promoteGridLayout(
       continue;
     }
     const lineOf = (startRaw: string, endRaw: string, axis: string): { anchor: number; span: number } | GridPromotionAbandoned => {
-      const spec = endRaw === 'auto' || endRaw === '' ? startRaw : `${startRaw} / ${endRaw}`;
+      // REJECTED-SETS ROUND (fluent.dialog): Chromium serializes a span-1
+      // explicit item as grid-row-start "1" / grid-row-end "1" — an END LINE
+      // EQUAL to the start line, which CSS Grid §8.3.1 error handling defines
+      // as "remove the end line" (span 1). The 1-based grammar refused it as
+      // "end line must follow start line" and the whole DialogBody grid fell
+      // to the flex-era lowering (grid-two-dimensional). Computed-evidence
+      // plane only; the declared plane keeps the refusal.
+      const eq = endRaw !== '' && endRaw !== 'auto' && endRaw.trim() === startRaw.trim() && /^\d+$/.test(startRaw.trim());
+      const spec = endRaw === 'auto' || endRaw === '' || eq ? startRaw : `${startRaw} / ${endRaw}`;
       const p = parseGridLine(spec);
       if (p.refusal || p.anchor === undefined) return abandon(`child "${c.partName}" ${axis} "${spec}": ${p.refusal ?? 'no anchor'}`);
       return { anchor: p.anchor, span: p.span ?? 1 };
     };
-    const rowLine = lineOf(rs, re, 'grid-row');
+    const rowLineRaw = lineOf(rs, re, 'grid-row');
+    if ('abandon' in rowLineRaw) return rowLineRaw;
+    const colLineRaw = lineOf(cs, ce, 'grid-column');
+    if ('abandon' in colLineRaw) return colLineRaw;
+    const rowLine = remapLine(rowLineRaw.anchor, rowLineRaw.span, rowsDropped, 'grid-row', c.partName);
     if ('abandon' in rowLine) return rowLine;
-    const colLine = lineOf(cs, ce, 'grid-column');
+    const colLine = remapLine(colLineRaw.anchor, colLineRaw.span, colsDropped, 'grid-column', c.partName);
     if ('abandon' in colLine) return colLine;
     placements.set(c.partName, {
       row: rowLine.anchor,
@@ -1576,7 +1651,19 @@ export function reconstructSvg(
         // A 449 radii → viewBox 450 → invisible at iconSize 20). Extent uses
         // endpoints / curve points only — not rx/ry.
         maxCoord = Math.max(maxCoord, pathDataExtent(d));
-        const fill = resolveFill(el.style['fill'] ?? '');
+        // REJECTED-SETS ROUND (shadcn.checkbox blob): a computed fill of
+        // 'none' is a PAINT FACT (the lucide stroke-glyph family), not an
+        // inheritance echo — resolveFill folded it into '' because the svg
+        // tag's inherited fill is also 'none', and the reconstructed asset
+        // then rendered with SVG's initial BLACK fill (the circle branch
+        // below always had this guard; the path branch did not).
+        const pathFillRaw = el.style['fill'] ?? '';
+        const fill = pathFillRaw === 'none' ? 'none' : resolveFill(pathFillRaw);
+        if (fill === 'none' && (el.style['stroke'] ?? 'none') !== 'none') {
+          receipts.push(
+            `svg-stroke-glyph-fill-none: ${label} — path fill 'none' PRESERVED on a stroke-drawn glyph (SVG's initial fill is BLACK, so an absent fill attribute would fill the open path into a blob when the asset renders standalone or through the canvas importer; the stroke channels above carry the paint)`,
+          );
+        }
         const fillRule = el.style['fill-rule'];
         const opacity = el.style['opacity'];
         // STROKE channels (round 4 fix: Polaris's checkmark is a STROKED

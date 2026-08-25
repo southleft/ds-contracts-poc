@@ -2,11 +2,11 @@
   "_marker": "THE DENOMINATOR. Hand-authored per case, generated into one index. Deliberately NOT derived from isFusable / styled / DECLARED_CHANNELS / CHANNEL_TO_COMPUTED / TOKEN_CHANNELS / carriedParts — every instrument in the pipeline derives its denominator from the same filter that decides carriage, which is why a channel the filter never opened scores 100%. This file is the independent one.",
   "generatedBy": "conformance/build.ts",
   "library": "@ds-contracts/conformance@0.1.0",
-  "count": 91,
+  "count": 97,
   "byExpectation": {
-    "CARRIED": 50,
+    "CARRIED": 54,
     "LOWERED": 4,
-    "REFUSED": 19,
+    "REFUSED": 21,
     "UNSUPPORTED": 18
   },
   "cases": [
@@ -225,6 +225,42 @@
       "canvas": {
         "expect": "PRESENT",
         "note": "Figma BACKGROUND_BLUR is an exact match"
+      }
+    },
+    {
+      "id": "block-root-shrink-to-fit",
+      "feature": "invariant",
+      "construct": "a display:block root that filled NOTHING — the flex stage made it a flex item and it shrink-to-fit its content, so its computed width is a harness-text measurement (the astryx.card 114.203px family)",
+      "why": "The block-root width door admitted any block root that measured neither the stage box nor the viewport, with a receipt that said 'the number is the library's' — and the number was the sample text's: astryx.card shipped width 114.203px while a fresh re-fuse of the SAME library version measured 119.016px (a font swap moved the text metrics), and the canvas drew 13 hug-pill variants. The complement of stage-box-equal: a width that is a function of the harness is refused BY NAME whether it equals the harness box or not.",
+      "expect": "REFUSED",
+      "expectName": "block-root-width-refused",
+      "expectWhere": "LEDGER.md / enriched.extension.json receipts",
+      "observable": {
+        "part": "root",
+        "channel": "width",
+        "capturedValue": "50px"
+      },
+      "canvas": {
+        "expect": "ABSENT",
+        "note": "no fixed width is drawn — the canvas hugs; a 50px token here would be a harness fact"
+      }
+    },
+    {
+      "id": "border-color-control-equal",
+      "feature": "paint",
+      "construct": "a border-color EQUAL to the bare control element's (a library global like shadcn's `* { border-color: var(--border) }` styles the control too) on a part that draws a real border",
+      "why": "The styled-channel door subtracts the control, so a global reset that reaches the control erases the subject's base border colour — shadcn.select shipped border style+width with NO base colour, the CSS surface still painted via border-color's currentColor initial-value rule, and the canvas drew NO stroke at all (the rejected census set: a bare trigger with no box). Equality with a control that draws no border proves library authorship, not absence.",
+      "expect": "CARRIED",
+      "expectName": "reset-supplied-border-color-admitted",
+      "expectWhere": "anatomy.root.parts.a.tokens.border-top-color",
+      "observable": {
+        "part": "a",
+        "channel": "border-top-color",
+        "capturedValue": "rgb(0, 0, 0)"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "the 2px border strokes on canvas with the carried colour — width and style alone paint nothing there"
       }
     },
     {
@@ -536,6 +572,34 @@
         "expect": "PRESENT",
         "note": "Figma LAYER_BLUR is an exact match"
       }
+    },
+    {
+      "id": "flex-direction-by-axis",
+      "feature": "layout",
+      "construct": "flex-direction that VARIES on one enum axis (column at the default value, row on the other) — the fluent.card orientation shape",
+      "why": "Uniform-or-nothing layout enrichment dropped flex-direction on ANY component with an orientation-style axis, so the DEFAULT (column) variant drew the emitters' horizontal default — the rejected fluent.card census set glued its preview and header side by side on both surfaces. The base value plus a layoutByProp override is the schema's own v7 spelling.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.layout.direction (base) + anatomy.root.layoutByProp.map.horizontal.direction",
+      "observable": {
+        "part": "root",
+        "channel": "flex-direction",
+        "capturedValue": "column"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "the default variant stacks vertically; the horizontal variant rides layoutByProp and compiles per variant (resolveLayout)"
+      },
+      "axes": [
+        {
+          "prop": "orientation",
+          "values": [
+            "vertical",
+            "horizontal"
+          ],
+          "default": "vertical"
+        }
+      ]
     },
     {
       "id": "flex-gap",
@@ -1525,6 +1589,26 @@
       "dumpSnippet": "dump.snippet.json"
     },
     {
+      "id": "grid-zero-track-collapse",
+      "feature": "grid-tracks",
+      "construct": "a computed grid track list containing a 0px track — the resolved width of an EMPTY slot column (min-content with no occupant)",
+      "why": "The authored-zero fence (P2b) poisoned the computed-evidence plane: fluent.card's CardHeader resolves grid-template-columns \"0px 404px\" (the absent media column) and fluent.dialog's DialogBody \"267px 267px 0px\" — the whole grid promotion abandoned and the parts fell to the emitters' horizontal-row default, gluing header and description onto one line (the rejected census sets). A resolved 0px track occupies no space and hosts no drawn child: it collapses out of the carried list by name and every placement re-indexes.",
+      "expect": "CARRIED",
+      "expectName": "grid-zero-track-collapsed",
+      "expectWhere": "anatomy.root.layout.columns (the collapsed list) + the grid-zero-track-collapsed receipt",
+      "observable": {
+        "part": "root",
+        "channel": "grid-template-columns",
+        "capturedValue": "0px 288px",
+        "carriedValue": "288px"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "the carried single-column grid stacks the two children; the empty 0px slot column draws nothing on either surface"
+      },
+      "blockStage": true
+    },
+    {
       "id": "mask-image",
       "feature": "effects",
       "construct": "mask-image: linear-gradient(...)",
@@ -1728,6 +1812,35 @@
       "blockStage": true
     },
     {
+      "id": "presence-hidden-axis-geometry",
+      "feature": "tokens",
+      "construct": "an absolute part's inset that is a clean function of ONE enum axis, with the part NOT RENDERED at one axis value (polaris.checkbox icon: top/left 0px when checked, -2px when indeterminate, absent when unchecked)",
+      "why": "The mint's single-axis fit refused the map because the presence-hidden value has no observation, and the refusal claimed the values 'differ without correlating to any variant axis' — a false receipt: they correlate exactly; the hole is a presence-gated missing cell. The canvas then drew polaris.checkbox's check icon with NO insets (it fell to static position below the box). The undrawn plane fills from the base-most observed value — ink-invisible there, closing only the dangling-ref hole. (The case's DEFAULT combo renders the part so the observable is measurable; the presence-hidden plane is the non-default 'unchecked' value, exactly the polaris shape.)",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.a — the checked-keyed per-axis carriage of the inset",
+      "observable": {
+        "part": "a",
+        "channel": "top",
+        "capturedValue": "3px"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "the badge pins to the declared inset on the rendered variants; the hidden variant draws nothing"
+      },
+      "axes": [
+        {
+          "prop": "checked",
+          "values": [
+            "checked",
+            "indeterminate",
+            "unchecked"
+          ],
+          "default": "checked"
+        }
+      ]
+    },
+    {
       "id": "pseudo-backdrop",
       "feature": "pseudo-elements",
       "construct": "dialog::backdrop { background-color }",
@@ -1926,6 +2039,24 @@
       "canvas": {
         "expect": "ABSENT",
         "note": "the asset grammar admits path/g only"
+      }
+    },
+    {
+      "id": "svg-stroke-glyph-fill-none",
+      "feature": "anatomy",
+      "construct": "a STROKE-drawn svg glyph whose computed fill is none (the lucide check: an open path, stroke=currentColor, fill=\"none\" on the svg)",
+      "why": "The asset reconstruction folded the path's fill:none into the svg tag's inherited none and emitted NO fill attribute — but SVG's initial fill is BLACK, so the committed asset filled the open check path into a blob the moment it rendered standalone, and the canvas emitter then injected the paint as fill and drew shadcn.checkbox's check as a malformed filled blob overflowing the 16px box (the rejected census set). fill=\"none\" is a paint fact and must survive reconstruction by name. The channel itself has no contract spelling (the glyph is consumed into the reconstructed asset — the ledger's own 'no schema channel today' row), so the disposition is a NAMED refusal: the receipt that proves fill=\"none\" survived into the asset markup.",
+      "expect": "REFUSED",
+      "expectName": "svg-stroke-glyph-fill-none",
+      "expectWhere": "LEDGER.md (the svg asset reconstruction receipts)",
+      "observable": {
+        "part": "a",
+        "channel": "fill",
+        "capturedValue": "none"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "the check draws as a 2px STROKE; nothing fills the open path on either surface"
       }
     },
     {

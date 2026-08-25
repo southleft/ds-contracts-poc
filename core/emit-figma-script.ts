@@ -3357,7 +3357,18 @@ function iconSvg(part: Part, subst: Record<string, string>, ctx: TextCtx): strin
   // parsed it leniently, so this only surfaced on a live canvas.
   const svgTagHasFill = /<svg\b[^>]*\sfill=/.test(out);
   const childHasFill = /<(path|circle|rect|polygon|ellipse|g)[^>]*\sfill=/.test(out);
-  if (hasPaint && !svgTagHasFill && !childHasFill) {
+  // REJECTED-SETS ROUND (shadcn.checkbox census reject): a STROKE-drawn glyph
+  // whose markup carries no fill anywhere (the lucide check: an OPEN path with
+  // stroke=currentColor) must NOT get the paint injected as fill — SVG's
+  // initial fill is BLACK, so the open check path renders as a filled blob
+  // (the browser truth was fill="none" on the <svg> tag; older reconstructed
+  // assets dropped it). Inject fill="none" instead: the stroke pass above
+  // already carries the paint, and the explicit none neutralises the black
+  // default for both the real importer and the committed stroke-only assets.
+  const childHasStroke = /<(path|circle|rect|polygon|ellipse|polyline|line|g)[^>]*\sstroke=/.test(out);
+  if (!svgTagHasFill && !childHasFill && childHasStroke) {
+    out = out.replace(/^<svg /, `<svg fill="none" `);
+  } else if (hasPaint && !svgTagHasFill && !childHasFill) {
     out = out.replace(/^<svg /, `<svg fill="${hex}" `);
   }
   if (part.icon!.size) {
@@ -6270,7 +6281,16 @@ function applyGridChildren(parent, spec, built) {
       ' (P9 overflow absorption / P10 mode-switch loss) — refusing to carry a write the contract did not make'
     );
   }
-  const inFlow = built.filter((p) => !p[0].overlay && !p[0].insetOverlay && !p[0].absolute && p[1].layoutPositioning !== 'ABSOLUTE');
+  // REJECTED-SETS ROUND (fluent.dialog): a grid child with margins is built
+  // INSIDE its "(margin box)" wrapper — the WRAPPER is the node the grid
+  // actually parents, and the child-side placement setter throws 'Node is
+  // not a grid child' on the inner node. Every placement/sizing/align write
+  // below therefore targets the outermost ancestor whose parent IS the grid
+  // frame (the wrapper when one exists, the node itself otherwise).
+  const gridChildOf = (n) => { let m = n; while (m.parent && m.parent !== parent) m = m.parent; return m; };
+  const inFlow = built
+    .filter((p) => !p[0].overlay && !p[0].insetOverlay && !p[0].absolute && p[1].layoutPositioning !== 'ABSOLUTE')
+    .map((p) => [p[0], gridChildOf(p[1])]);
   const placed = inFlow.filter((p) => p[0].cell);
   if (!l.grid.flow) {
     // FC-GRID-APPEND-AUTOPLACE. appendChild does not park a grid child

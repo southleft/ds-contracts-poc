@@ -11,6 +11,8 @@ export { default as CaseAntdPartTransitionChannel } from '../cases/antd-part-tra
 export { default as CaseAntdPresenceTimesAxisGlyph } from '../cases/antd-presence-times-axis-glyph/Case.tsx';
 export { default as CaseAspectRatio } from '../cases/aspect-ratio/Case.tsx';
 export { default as CaseBackdropFilter } from '../cases/backdrop-filter/Case.tsx';
+export { default as CaseBlockRootShrinkToFit } from '../cases/block-root-shrink-to-fit/Case.tsx';
+export { default as CaseBorderColorControlEqual } from '../cases/border-color-control-equal/Case.tsx';
 export { default as CaseBorderRadiusPx } from '../cases/border-radius-px/Case.tsx';
 export { default as CaseBoxShadowSingle } from '../cases/box-shadow-single/Case.tsx';
 export { default as CaseCalcVar } from '../cases/calc-var/Case.tsx';
@@ -28,6 +30,7 @@ export { default as CaseDisplayInlineFlex } from '../cases/display-inline-flex/C
 export { default as CaseDisplayOutOfVocab } from '../cases/display-out-of-vocab/Case.tsx';
 export { default as CaseEmRelativePadding } from '../cases/em-relative-padding/Case.tsx';
 export { default as CaseFilterBlur } from '../cases/filter-blur/Case.tsx';
+export { default as CaseFlexDirectionByAxis } from '../cases/flex-direction-by-axis/Case.tsx';
 export { default as CaseFlexGap } from '../cases/flex-gap/Case.tsx';
 export { default as CaseGrid2d } from '../cases/grid-2d/Case.tsx';
 export { default as CaseGridAbsoluteOverlay } from '../cases/grid-absolute-overlay/Case.tsx';
@@ -60,6 +63,7 @@ export { default as CaseGridTrackPercent } from '../cases/grid-track-percent/Cas
 export { default as CaseGridTrackZeroValue } from '../cases/grid-track-zero-value/Case.tsx';
 export { default as CaseGridTracksMixedFractional } from '../cases/grid-tracks-mixed-fractional/Case.tsx';
 export { default as CaseGridTwoColumn } from '../cases/grid-two-column/Case.tsx';
+export { default as CaseGridZeroTrackCollapse } from '../cases/grid-zero-track-collapse/Case.tsx';
 export { default as CaseMaskImage } from '../cases/mask-image/Case.tsx';
 export { default as CaseMediaNonMatching } from '../cases/media-non-matching/Case.tsx';
 export { default as CaseMinMaxWidth } from '../cases/min-max-width/Case.tsx';
@@ -71,6 +75,7 @@ export { default as CasePercentagePadding } from '../cases/percentage-padding/Ca
 export { default as CasePositionAbsoluteInsets } from '../cases/position-absolute-insets/Case.tsx';
 export { default as CasePositionFixed } from '../cases/position-fixed/Case.tsx';
 export { default as CasePositionSticky } from '../cases/position-sticky/Case.tsx';
+export { default as CasePresenceHiddenAxisGeometry } from '../cases/presence-hidden-axis-geometry/Case.tsx';
 export { default as CasePseudoBackdrop } from '../cases/pseudo-backdrop/Case.tsx';
 export { default as CasePseudoContentGlyph } from '../cases/pseudo-content-glyph/Case.tsx';
 export { default as CasePseudoGradientOnly } from '../cases/pseudo-gradient-only/Case.tsx';
@@ -82,6 +87,7 @@ export { default as CaseShadowPart } from '../cases/shadow-part/Case.tsx';
 export { default as CaseShadowRootClosed } from '../cases/shadow-root-closed/Case.tsx';
 export { default as CaseStageBoxEqual } from '../cases/stage-box-equal/Case.tsx';
 export { default as CaseSvgOutsideGrammar } from '../cases/svg-outside-grammar/Case.tsx';
+export { default as CaseSvgStrokeGlyphFillNone } from '../cases/svg-stroke-glyph-fill-none/Case.tsx';
 export { default as CaseTextOverflowEllipsis } from '../cases/text-overflow-ellipsis/Case.tsx';
 export { default as CaseTransformScaleRotate } from '../cases/transform-scale-rotate/Case.tsx';
 export { default as CaseTransitionChannel } from '../cases/transition-channel/Case.tsx';

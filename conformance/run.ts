@@ -237,6 +237,15 @@ export function carriageOfContract(contract: Record<string, unknown>, trees: Rec
   };
   const push = (ch: string, part: string, where: string, value: string): void => {
     (out.get(ch) ?? out.set(ch, []).get(ch)!).push({ part, where, value: resolveRef(value), raw: value });
+    // REJECTED-SETS ROUND — the border-color SHORTHAND is the proposal's
+    // canonical spelling for a uniform four-side stroke (one Figma strokes
+    // paint serves all four sides), while the computed observable is a side
+    // LONGHAND; the same mirrored-spelling rule the flex/grid facts follow.
+    if (ch === 'border-color') {
+      for (const side of ['top', 'right', 'bottom', 'left']) {
+        (out.get(`border-${side}-color`) ?? out.set(`border-${side}-color`, []).get(`border-${side}-color`)!).push({ part, where: `${where} (border-color shorthand)`, value: resolveRef(value), raw: value });
+      }
+    }
   };
   const eatMap = (part: string, where: string, m: unknown): void => {
     if (!m || typeof m !== 'object') return;
@@ -313,6 +322,58 @@ export function carriageOfContract(contract: Record<string, unknown>, trees: Rec
     eatMap(name, 'states', part.states);
     eatMap(name, 'literals', part.literals);
     eatMap(name, 'layout', part.layout);
+    // REJECTED-SETS ROUND — tokensByProp / stylesWhen carriage: a channel
+    // whose value rides a per-axis map (or a conditional styles block) is
+    // carried vocabulary exactly like a base token; the walk read neither,
+    // so an axis-conditioned carriage was invisible to the gate.
+    {
+      const tbp = part.tokensByProp as unknown;
+      const entries = Array.isArray(tbp) ? tbp : tbp ? [tbp] : [];
+      for (const e of entries as Array<{ prop?: string; map?: Record<string, Record<string, unknown>> }>) {
+        if (!e || typeof e !== 'object' || !e.map) continue;
+        for (const [axisValue, chans] of Object.entries(e.map)) {
+          if (chans && typeof chans === 'object') {
+            for (const [chk, chv] of Object.entries(chans)) {
+              if (typeof chv === 'string' || typeof chv === 'number') push(chk, name, `tokensByProp.${String(e.prop)}=${axisValue}`, String(chv));
+            }
+          }
+        }
+      }
+      const sw = part.stylesWhen as unknown;
+      if (Array.isArray(sw)) {
+        for (const w of sw as Array<{ prop?: string; equals?: unknown; styles?: Record<string, unknown> }>) {
+          for (const [chk, chv] of Object.entries(w?.styles ?? {})) {
+            if (typeof chv === 'string' || typeof chv === 'number') push(chk, name, `stylesWhen.${String(w.prop)}=${String(w.equals)}`, String(chv));
+          }
+        }
+      }
+    }
+    // REJECTED-SETS ROUND — the FLEX layout fields, serialized into their
+    // browser channel spellings so carriage is measurable against the
+    // computed channels the reader records (the same mirrored-spelling rule
+    // eatGrid follows for the grid facts; mirrored, never imported).
+    {
+      const lay = part.layout as Record<string, unknown> | null | undefined;
+      const FLEX_FIELD_TO_CHANNEL: Record<string, string> = {
+        direction: 'flex-direction',
+        align: 'align-items',
+        justify: 'justify-content',
+      };
+      const pushLayoutFields = (m: unknown, where: string): void => {
+        if (!m || typeof m !== 'object') return;
+        for (const [f, ch] of Object.entries(FLEX_FIELD_TO_CHANNEL)) {
+          const v = (m as Record<string, unknown>)[f];
+          if (typeof v === 'string') push(ch, name, where, v);
+        }
+      };
+      pushLayoutFields(lay, 'layout');
+      const lbp = part.layoutByProp as { prop?: string; map?: Record<string, unknown> } | null | undefined;
+      if (lbp && typeof lbp === 'object' && lbp.map && typeof lbp.map === 'object') {
+        for (const [axisValue, over] of Object.entries(lbp.map)) {
+          pushLayoutFields(over, `layoutByProp.${String(lbp.prop)}=${axisValue}`);
+        }
+      }
+    }
     eatGrid(name, part);
     if (typeof part.text === 'string') push('__text', name, 'text', part.text);
     if (typeof part.element === 'string') push('__element', name, 'element', part.element);

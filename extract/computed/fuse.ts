@@ -682,14 +682,27 @@ export function styledChannels(
               : `The root is in normal flow but measures the window exactly, so its containing block is the document body (\`body { margin: 0 }\` on the capture page) — it was mounted OUTSIDE the stage${env.portaled ? ' (this component is captured through the portal reader, whose root is a child of <body>)' : ''}.`
           } A width that is a function of the capture window is a fact about the harness, not about the library: it is REFUSED here rather than minted with a warning, because the emitters read the token and not the receipt — a 900px token draws a 900px frame on canvas whatever the receipt says. The component's own drawn box is a DIFFERENT element (the dialog paper); choosing it is capture's root decision (demoteFullBleedScrim), not fusion's to fabricate.`,
         );
+      } else if (rootW !== null && rootW !== stageContent) {
+        // REJECTED-SETS ROUND (astryx.card census reject: 13 hug-pill
+        // variants at 114.203px). This branch used to ADMIT with the
+        // `block-root-width-source` receipt — "the admission stands — the
+        // number is the library's" — and the number was NOT the library's:
+        // it was the harness sample text's. The shipped astryx.card token
+        // (114.203px) and a fresh re-fuse of the SAME library version
+        // (119.016px) disagree by 4.8px because a font swap moved the text
+        // metrics — proof the measurement is a hug width, not a design
+        // width. A block root that measures neither its stage content box
+        // nor the viewport filled NOTHING (a flex stage makes a block child
+        // a flex item and it shrink-to-fits), so the width is a harness
+        // fact and is REFUSED like its viewport-derived siblings; the
+        // canvas draws HUG. Re-capture with blockStage: true to measure the
+        // real fill width (the fix the config comment on blockStage names).
+        receipts.push(
+          `block-root-width-refused (shrink-to-fit): ${a.partNames[rootPi]} — display:block root, width ${rootStyle['width']} is NOT the stage content box (stage ${env.stage.width}px − 2×${env.stage.padding}px = ${stageContent}px) and NOT the viewport (${env.viewport.width}px): a flex stage made the block root a flex item and it hugged its content (min-width ${rootStyle['min-width'] ?? 'auto'}, max-width ${rootStyle['max-width'] ?? 'none'}). A width that is a function of the harness sample text is a fact about the harness, not about the library — the emitters read the token and not the receipt, so it is REFUSED rather than minted with a warning; the canvas hugs. Re-capture with blockStage: true to measure the real container-fill width.`,
+        );
       } else {
         blockRootAdmit.add(rootPi);
         receipts.push(`block-root-width-admitted: ${a.partNames[rootPi]} — display:block root fills its container in CSS; the captured stage width joins fusion (stage-dependent, receipted — the canvas card draws at the captured block width instead of hugging its text)`);
-        if (rootW !== null && rootW !== stageContent) {
-          receipts.push(
-            `block-root-width-source: ${a.partNames[rootPi]} — the admitted width ${rootStyle['width']} is NOT the stage content box (${stageContent}px) and NOT the viewport (${env.viewport.width}px); this block root did not fill anything, it took its own intrinsic/shrink-to-fit size (a flex stage makes a block child a flex item). The admission stands — the number is the library's — but the sentence above names a container this measurement did not come from.`,
-          );
-        }
       }
     }
   }
@@ -776,6 +789,16 @@ export function styledChannels(
         set.add(p);
         receipts.push(
           `reset-supplied-border-style-admitted: ${a.partNames[pi]}.${p} = ${a.baseFlat[pi].node.style[p]} — EQUAL to the <${tag}> control, so the styled-channel door would normally drop it as "not a fact of this component". Admitted anyway because this part draws a real border (${p.replace('-style', '-width')} = ${a.baseFlat[pi].node.style[p.replace('-style', '-width')]}) and the style comes from the library's GLOBAL CSS (Tailwind preflight's \`* { border-style: solid }\` and its equivalents). The control correctly subtracts the reset; the emitted CSS does not REPRODUCE it, so without this the width and colour ship and the border paints nothing.`,
+        );
+      } else if (pageInheritedInk(p, a.baseFlat[pi].node.style, ctrl)) {
+        set.add(p);
+        receipts.push(
+          `page-inherited-ink-admitted: ${a.partNames[pi]}.color = ${a.baseFlat[pi].node.style['color']} — EQUAL to the <${tag}> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).`,
+        );
+      } else if (resetSuppliedBorderColor(p, a.baseFlat[pi].node.style, ctrl)) {
+        set.add(p);
+        receipts.push(
+          `reset-supplied-border-color-admitted: ${a.partNames[pi]}.${p} = ${a.baseFlat[pi].node.style[p]} — EQUAL to the <${tag}> control, so the styled-channel door would normally drop it as "not a fact of this component". Admitted anyway because this part draws a real border (${p.replace('-color', '-style')} = ${a.baseFlat[pi].node.style[p.replace('-color', '-style')]}, ${p.replace('-color', '-width')} = ${a.baseFlat[pi].node.style[p.replace('-color', '-width')]}) and the colour comes from the library's GLOBAL CSS (shadcn's \`* { border-color: var(--border) }\` and its equivalents) — the control is polluted by the same rule, so equality proves library authorship, not absence. Without this the style and width ship, the CSS surface paints the border via currentColor's initial-value rule, and the canvas draws NO stroke (rejected-sets round, shadcn.select).`,
         );
       }
     }
@@ -1228,7 +1251,18 @@ const LAYOUT_CHANNEL_TO_FIELD: Record<string, { field: 'display' | 'direction' |
 export interface LayoutEnrichment {
   /** per part: layout channels consumed here (excluded from minting). */
   handled: Map<string, Set<string>>;
-  enriched: Array<{ part: string; field: string; value: string | boolean }>;
+  enriched: Array<{
+    part: string;
+    field: string;
+    value: string | boolean;
+    /** REJECTED-SETS ROUND (fluent.card): a layout keyword that VARIES across
+     *  combos but FACTORS on exactly one enum axis carries the base-combo
+     *  value here plus the deviating values as a layoutByProp override map —
+     *  the schema's own v7 vocabulary (resolveLayout merges map[value] over
+     *  the base layout per compiled variant). `overrides` maps axis VALUE →
+     *  canonical layout keyword for this field. */
+    byProp?: { prop: string; overrides: Record<string, string> };
+  }>;
   contradictions: Array<{ part: string; field: string; carried: string; observed: string }>;
   receipts: string[];
 }
@@ -1260,7 +1294,66 @@ export function enrichLayout(
         if (el) values.add(el.node.style[channel]);
       }
       if (values.size !== 1) {
-        out.receipts.push(`layout-not-uniform: ${partName}.${channel} varies across combos — stays code-only`);
+        // REJECTED-SETS ROUND (fluent.card census reject): uniform-or-nothing
+        // dropped flex-direction on ANY component with an orientation-style
+        // axis — the default (vertical → column) variant then drew the
+        // emitter's horizontal default, gluing the Card's preview and header
+        // side by side on BOTH surfaces. When the variance FACTORS on exactly
+        // one enum axis (per-axis-value the channel is uniform), the fact IS
+        // carriageable: base layout carries the base combo's keyword and the
+        // deviating axis values ride layoutByProp — the schema's own v7
+        // spelling, resolved per compiled variant by resolveLayout. Variance
+        // that factors on no single axis keeps the code-only receipt.
+        let factored: { prop: string; byValue: Map<string, string> } | null = null;
+        for (const ax of space.axes) {
+          const byValue = new Map<string, Set<string>>();
+          for (const combo of enabled) {
+            const el = a.getAligned(`${combo.key}__default`)[pi];
+            if (!el) continue;
+            const av = combo.axisValues[ax.prop] ?? '';
+            (byValue.get(av) ?? byValue.set(av, new Set()).get(av)!).add(el.node.style[channel]);
+          }
+          if (byValue.size > 1 && [...byValue.values()].every((vs) => vs.size === 1)) {
+            factored = { prop: ax.prop, byValue: new Map([...byValue].map(([k, vs]) => [k, [...vs][0]])) };
+            break;
+          }
+        }
+        const baseValue = factored ? factored.byValue.get(space.baseAxisValues[factored.prop] ?? '') : undefined;
+        if (
+          factored === null ||
+          baseValue === undefined ||
+          [...factored.byValue.values()].some((v) => spec.map[v] === undefined) ||
+          // layoutByProp is refused on grid parts (P10 mode-switch destruction)
+          // — display itself may not ride the map, only row/column keywords may.
+          channel === 'display'
+        ) {
+          out.receipts.push(`layout-not-uniform: ${partName}.${channel} varies across combos — stays code-only`);
+          continue;
+        }
+        const overrides: Record<string, string> = {};
+        for (const [av, ov] of [...factored.byValue].sort(([x], [y]) => x.localeCompare(y))) {
+          if (ov !== baseValue) overrides[av] = spec.map[ov];
+        }
+        const handledVar = out.handled.get(partName) ?? new Set<string>();
+        out.handled.set(partName, handledVar);
+        const carriedVar = target.layout?.[spec.field];
+        if (carriedVar !== undefined) {
+          handledVar.add(channel);
+          if (spec.map[baseValue] !== carriedVar) {
+            out.contradictions.push({ part: partName, field: spec.field, carried: String(carriedVar), observed: baseValue });
+          }
+          continue;
+        }
+        handledVar.add(channel);
+        out.enriched.push({
+          part: partName,
+          field: spec.field,
+          value: spec.map[baseValue],
+          byProp: { prop: factored.prop, overrides },
+        });
+        out.receipts.push(
+          `layout-factored-on-axis: ${partName}.${channel} varies across combos but factors on enum axis "${factored.prop}" — base (${factored.prop}=${space.baseAxisValues[factored.prop]}) carries layout.${spec.field} = ${spec.map[baseValue]}; deviating value(s) ${Object.entries(overrides).map(([k, v]) => `${factored!.prop}=${k} → ${v}`).join(', ') || '(none differ)'} ride layoutByProp (schema v7; resolveLayout merges per compiled variant)`,
+        );
         continue;
       }
       const observed = [...values][0];
@@ -1691,6 +1784,61 @@ export const CONTROL_TAGS_MIRROR = new Set(['button', 'span', 'a', 'div']);
  *  came from the reset rather than from this component). Drop any one and the
  *  door either misses these two or re-admits the noise the control exists to
  *  remove. */
+/** REJECTED-SETS ROUND (shadcn.select census reject) — the COLOR twin of the
+ *  border-style door above, one channel over. shadcn's global stylesheet sets
+ *  `* { border-color: var(--border) }` (the Tailwind-v4 preflight idiom), so
+ *  the bare control element carries the SAME border-color as the subject
+ *  (--input == --border in the shadcn theme) and the styled-channel door
+ *  dropped the base border colour as "not a fact of this component" — with a
+ *  1px solid border carried, the canvas drew NO stroke while the CSS surface
+ *  painted one (border-color's initial value is currentColor, so CSS always
+ *  paints SOMETHING when style+width are carried; the canvas has no such
+ *  default). The clauses mirror the style door exactly: the channel is a
+ *  border-*-color, the SAME side draws (non-none style, non-zero width), and
+ *  the control agrees (proving the value came from a global reset the library
+ *  ships, not from UA noise). A colour equal to the part's own `color` still
+ *  folds into `color` downstream — the currentColor fold runs after this
+ *  admission, exactly as it does for ordinarily-admitted border colours. */
+/** REJECTED-SETS ROUND (polaris.checkbox label ink) — the INK sibling of the
+ *  two border doors below. Polaris sets the page's text ink globally
+ *  (--p-color-text on the body), so the bare control element computes the
+ *  SAME color as the subject (rgba(48,48,48,1)) and the styled-channel door
+ *  dropped the label's base `color` as "not a fact of this component" — the
+ *  canvas then drew default #000000 ink (the census verdict names the loss).
+ *  The tell is the CONTROL itself: a clean UA control's color is black, so a
+ *  control whose ink is NOT black was inked by the library's own global CSS,
+ *  and equality with it proves library authorship, not absence. Channel
+ *  `color` only; a subject whose ink differs from the control keeps the
+ *  ordinary door. */
+export const pageInheritedInk = (
+  channel: string,
+  style: Record<string, string | undefined>,
+  ctrl: Record<string, string | undefined>,
+): boolean => {
+  if (channel !== 'color') return false;
+  const value = style['color'];
+  if (!value) return false;
+  if (ctrl['color'] !== value) return false; // it differs — the ordinary door already admits it
+  const v = value.replace(/\s+/g, '');
+  return v !== 'rgb(0,0,0)' && v !== 'rgba(0,0,0,1)' && v !== '#000000' && v !== 'oklch(000)';
+};
+
+export const resetSuppliedBorderColor = (
+  channel: string,
+  style: Record<string, string | undefined>,
+  ctrl: Record<string, string | undefined>,
+): boolean => {
+  const m = /^border-(top|right|bottom|left)-color$/.exec(channel);
+  if (!m) return false;
+  const value = style[channel];
+  if (!value || value === 'transparent') return false;
+  if (ctrl[channel] !== value) return false; // it differs — the ordinary door already admits it
+  const sideStyle = style[`border-${m[1]}-style`];
+  if (!sideStyle || sideStyle === 'none') return false;
+  const width = style[`border-${m[1]}-width`];
+  return width !== undefined && width !== '0px' && width !== '0';
+};
+
 export const resetSuppliedBorderStyle = (
   channel: string,
   style: Record<string, string | undefined>,
@@ -1869,10 +2017,14 @@ export function prepareMint(
         const occurrences: MintObservation['occurrences'] = [];
         const rows: Array<{ axisValues: Record<string, string>; value: string }> = [];
         const values = new Set<string>();
+        // REJECTED-SETS ROUND — combos where the PART did not render: the
+        // presence-hidden planes the single-axis mint fit may fill (see
+        // MintObservation.partAbsentCombos — polaris.checkbox's icon insets).
+        const partAbsent: Array<Record<string, string>> = [];
         let unk: string | null = null;
         for (const combo of enabledCombos) {
           const el = a.getAligned(`${combo.key}__default`)[pi];
-          if (!el) continue;
+          if (!el) { partAbsent.push(combo.axisValues); continue; }
           let v = el.node.style[channel];
           // Absolute-position round: computed width/height are CONTENT-box
           // sizes; a canvas frame resize is the BORDER box. For the admitted
@@ -2083,7 +2235,7 @@ export function prepareMint(
             continue;
           }
         }
-        obs.push({ nodePath: `${comp.name}:${partName}`, part: partName === 'root' ? '' : partName, cssProperty: channel, kind: kindOf(channel, [...values][0])!.kind, occurrences });
+        obs.push({ nodePath: `${comp.name}:${partName}`, part: partName === 'root' ? '' : partName, cssProperty: channel, kind: kindOf(channel, [...values][0])!.kind, occurrences, ...(partAbsent.length > 0 ? { partAbsentCombos: partAbsent } : {}) });
       }
     }
     return { obs, codeOnly, declared, pairwiseRefusals };
@@ -2483,7 +2635,29 @@ export function applyMintToContract(
     if (!target) continue;
     target.layout ??= {};
     (target.layout as Record<string, string | boolean>)[le.field] = le.value;
-    enrichmentNotes.push(`layout enriched: ${le.part}.layout.${le.field} = ${le.value} (uniform computed keyword — the schema's own vocabulary)`);
+    if (le.byProp === undefined) {
+      enrichmentNotes.push(`layout enriched: ${le.part}.layout.${le.field} = ${le.value} (uniform computed keyword — the schema's own vocabulary)`);
+      continue;
+    }
+    // REJECTED-SETS ROUND (fluent.card): the axis-factored half. layoutByProp
+    // is a SINGLE {prop, map} per part (schema v7) — a part whose layout
+    // already rides a DIFFERENT axis keeps it, and this enrichment refuses by
+    // name instead of silently rewiring the driving prop.
+    const lbp = (target as { layoutByProp?: { prop: string; map: Record<string, Record<string, string>> } }).layoutByProp;
+    if (lbp !== undefined && lbp.prop !== le.byProp.prop) {
+      enrichmentNotes.push(
+        `layout enrichment refused: ${le.part}.layout.${le.field} factors on axis "${le.byProp.prop}" but the part's layoutByProp already rides "${lbp.prop}" — one driving prop per part (schema v7); the deviating values stay code-only`,
+      );
+      continue;
+    }
+    const map = lbp?.map ?? {};
+    for (const [axisValue, keyword] of Object.entries(le.byProp.overrides)) {
+      map[axisValue] = { ...map[axisValue], [le.field]: keyword };
+    }
+    (target as { layoutByProp?: { prop: string; map: Record<string, Record<string, string>> } }).layoutByProp = { prop: le.byProp.prop, map };
+    enrichmentNotes.push(
+      `layout enriched per axis: ${le.part}.layout.${le.field} = ${le.value} at base; ${Object.entries(le.byProp.overrides).map(([k, v]) => `${le.byProp!.prop}=${k} → ${v}`).join(', ') || 'no deviations'} via layoutByProp (schema v7 — resolveLayout merges per compiled variant)`,
+    );
   }
   // v15 declared facts (S4): uniform registry-channel values → Part.declared;
   // full-coverage uniform state deltas → Part.declaredStates. The reviewed

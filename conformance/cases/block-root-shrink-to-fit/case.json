@@ -1,0 +1,18 @@
+{
+  "id": "block-root-shrink-to-fit",
+  "feature": "invariant",
+  "construct": "a display:block root that filled NOTHING — the flex stage made it a flex item and it shrink-to-fit its content, so its computed width is a harness-text measurement (the astryx.card 114.203px family)",
+  "why": "The block-root width door admitted any block root that measured neither the stage box nor the viewport, with a receipt that said 'the number is the library's' — and the number was the sample text's: astryx.card shipped width 114.203px while a fresh re-fuse of the SAME library version measured 119.016px (a font swap moved the text metrics), and the canvas drew 13 hug-pill variants. The complement of stage-box-equal: a width that is a function of the harness is refused BY NAME whether it equals the harness box or not.",
+  "expect": "REFUSED",
+  "expectName": "block-root-width-refused",
+  "expectWhere": "LEDGER.md / enriched.extension.json receipts",
+  "observable": {
+    "part": "root",
+    "channel": "width",
+    "capturedValue": "50px"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "no fixed width is drawn — the canvas hugs; a 50px token here would be a harness fact"
+  }
+}

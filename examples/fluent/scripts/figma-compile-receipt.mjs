@@ -174,13 +174,13 @@ for (const file of scripts) {
       // this round NAMES it rather than guessing. The pin asserts the gap is
       // exactly where it is believed to be: carried in the contract, absent
       // from the canvas. When the emitter learns to draw it, this fails loudly.
-      const tc = JSON.parse(readFileSync(path.join(CONTRACTS_DIR, 'tooltip.contract.json'), 'utf8'));
-      if (tc.anatomy?.root?.text !== 'Tooltip copy for the Fluent round.') {
-        throw new Error('tooltip root-text pin: the contract no longer carries the bubble copy at anatomy.root.text — the promotion changed and this residual must be re-measured');
-      }
-      if (textIs('Tooltip copy for the Fluent round.').length > 0) {
-        throw new Error('tooltip root-text pin: the bubble copy NOW reaches the canvas — the anatomy.root.text emitter gap is closed; delete this pin and record the fix');
-      }
+      // ROOT-TEXT PIN RETIRED (rejected-sets round): the pin above used to
+      // assert the bubble copy NEVER reached the canvas (the anatomy.root.text
+      // emitter residual). The re-promotion of this round closed the gap —
+      // the emitted set now draws the bubble copy as canvas text — so the pin
+      // is deleted per its own instruction and the closure is recorded here:
+      // fluent.tooltip's root text ships on the canvas surface as of this
+      // round; the E2 wrapper pins below still hold.
       // THE E2 PIN — this round's engine change, asserted on the canvas.
       // Before E2, Fluent's Tooltip captured the FluentProvider portal
       // wrapper: a 900×0 box that declares an opaque fill, draws no ink, and

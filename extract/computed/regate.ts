@@ -300,6 +300,19 @@ async function main() {
     // from committed truth. Same bytes pathway as run.ts (2-space JSON +
     // trailing newline) — guarded by the replay-sufficiency assertion above.
     if (WRITE_ENRICHED) {
+      // REJECTED-SETS ROUND: the re-promotion recomputes the svg assets from
+      // the committed truth (promoteAnatomy above) but the files stayed the
+      // harness run's — so an asset-reconstruction fix (shadcn's stroke-glyph
+      // fill="none") could never reach the committed asset bytes offline.
+      // Written under the same replay-sufficiency guard as the contract.
+      if (promotion.assets.size > 0) {
+        const assetsDir = path.join(outDir, 'assets');
+        mkdirSync(assetsDir, { recursive: true });
+        for (const [assetName, svg] of [...promotion.assets].sort()) {
+          writeFileSync(path.join(assetsDir, `${assetName}.svg`), svg + '\n');
+        }
+        console.log(`  ✔ ${comp.name}: ${promotion.assets.size} reconstructed svg asset(s) REWRITTEN from committed truth`);
+      }
       /** ALTITUDE LINK ROUND — THE RE-FUSE USED TO DELETE THE FRONTIER
        *  RECEIPTS, WHILE CLAIMING IT HAD NOT.
        *
@@ -414,6 +427,16 @@ async function main() {
         throw new Error(`${comp.name}: decision-applied contract fails validateContract:\n${resolvedErrs.slice(0, 8).map((e) => `  - ${e}`).join('\n')}`);
       }
       gated = resolved;
+      // REJECTED-SETS ROUND: an offline re-fuse used to leave the decision-
+      // applied resolved.contract.json STALE, and every promote-floor prefers
+      // resolved over enriched — so a fusion fix could never reach a
+      // component with a decisions ledger (astryx.card) without a full
+      // recapture. The decisions are re-applied above by the same referee the
+      // harness uses; the write rides the same --write-enriched intent.
+      if (WRITE_ENRICHED) {
+        writeFileSync(path.join(outDir, 'resolved.contract.json'), JSON.stringify(resolved, null, 2) + '\n');
+        console.log(`  ✔ ${comp.name}: resolved.contract.json REWRITTEN (decisions ledger re-applied offline)`);
+      }
     }
 
     const namedLosses = [

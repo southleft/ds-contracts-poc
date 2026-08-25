@@ -1,0 +1,21 @@
+{
+  "id": "flex-direction-by-axis",
+  "feature": "layout",
+  "construct": "flex-direction that VARIES on one enum axis (column at the default value, row on the other) — the fluent.card orientation shape",
+  "why": "Uniform-or-nothing layout enrichment dropped flex-direction on ANY component with an orientation-style axis, so the DEFAULT (column) variant drew the emitters' horizontal default — the rejected fluent.card census set glued its preview and header side by side on both surfaces. The base value plus a layoutByProp override is the schema's own v7 spelling.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.layout.direction (base) + anatomy.root.layoutByProp.map.horizontal.direction",
+  "observable": {
+    "part": "root",
+    "channel": "flex-direction",
+    "capturedValue": "column"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "the default variant stacks vertically; the horizontal variant rides layoutByProp and compiles per variant (resolveLayout)"
+  },
+  "axes": [
+    { "prop": "orientation", "values": ["vertical", "horizontal"], "default": "vertical" }
+  ]
+}
