@@ -11,7 +11,7 @@ related: [09-testing-and-gates]
 
 # Reference
 
-> **Currency (2026-08-17):** file-map counts below (51 contracts, 146-check suite) are the 2026-07-21 snapshot. The live corpus is **56 component contracts** and 227/227 evals — see the repository README.
+> **Currency (2026-08-17):** file-map counts below (51 contracts, 146-check suite) are the 2026-07-21 snapshot. The live corpus is **56 component contracts** and 230/230 evals — see the repository README.
 
 ## Glossary
 

@@ -1,7 +1,7 @@
 {
-  "passed": 228,
-  "total": 228,
-  "commit": "565965a0301a113f6df9ed61b985a3c4b647c4dd",
+  "passed": 230,
+  "total": 230,
+  "commit": "703591dfcf5a769dc90213041590ba479c621199",
   "dirty": false,
   "recordedAt": "2026-08-25",
   "results": [
@@ -858,6 +858,16 @@
     {
       "id": "optional-adornment-gating-general-fixture",
       "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "text-indent-off-box-label-not-drawn",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "text-indent-off-box-evidence-refuses-when-inert",
+      "claim": "C2-refusal",
       "pass": true
     },
     {
