@@ -62,6 +62,7 @@
  *   renders it) — named here, not silently dropped.
  */
 import {
+  declaredAnywhere,
   isNativeCheckablePart,
   shapeCssDecls,
   slotsOf,
@@ -318,7 +319,7 @@ export function shadowCss(contract: Contract): string {
   else rootDecls.push('border: 0');
   if ('max-width' in rootTokens) rootDecls.push('width: 100%', 'min-width: fit-content');
   const rootDeclaresCursor =
-    Boolean(root.declared?.['cursor']) || Boolean(root.declaredStates?.['disabled']?.['cursor']);
+    declaredAnywhere(root, 'cursor') !== undefined || Boolean(root.declaredStates?.['disabled']?.['cursor']);
   if (contract.semantics.element === 'button' && !rootDeclaresCursor) rootDecls.push('cursor: pointer');
   if (
     walkAnatomy(contract).some(
@@ -399,6 +400,19 @@ export function shadowCss(contract: Contract): string {
       rootDecls.splice(rootDecls.indexOf('position: relative'), 1);
     }
     rootDecls.push(`${cssProp}: ${value}`);
+  }
+  // v19 (RC2) declaredByProp on the root: per-enum-value declared overrides
+  // ride the SAME enum-class rules the literal byProp field uses — mirrors
+  // emit-html / packages/core css.ts.
+  for (const { prop: dbpProp, map } of root.declaredByProp ?? []) {
+    for (const [value, overrides] of Object.entries(map)) {
+      for (const [cssProp, v] of Object.entries(overrides)) {
+        const key = `${dbpProp} ${value}`;
+        const entry = enumRules.get(key) ?? { prop: dbpProp, value, decls: [] };
+        entry.decls.push(`${cssProp}: ${v}`);
+        enumRules.set(key, entry);
+      }
+    }
   }
   for (const { prop: lbpProp, map } of root.literalsByProp ?? []) {
     for (const [value, overrides] of Object.entries(map)) {
@@ -591,6 +605,14 @@ export function shadowCss(contract: Contract): string {
         `${ROOT_SEL}${sel} ${partSel(name)}`,
         Object.entries(overrides).map(([cssProp, v]) => `${cssProp}: ${v}`),
       ]);
+    }
+    // v19 (RC2) declaredByProp on a nested part.
+    for (const entry of part.declaredByProp ?? []) {
+      for (const [value, overrides] of Object.entries(entry.map)) {
+        const dDecls = Object.entries(overrides).map(([cssProp, v]) => `${cssProp}: ${v}`);
+        if (dDecls.length === 0) continue;
+        subRules.push([`${rootWithEnum(entry.prop, value)} ${partSel(name)}`, dDecls]);
+      }
     }
     for (const entry of part.literalsByProp ?? []) {
       for (const [value, overrides] of Object.entries(entry.map)) {

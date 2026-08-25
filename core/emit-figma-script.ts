@@ -44,6 +44,8 @@ import {
   isNativeCheckablePart,
   pascal,
   resolveLayout,
+  resolveDeclared,
+  declaredAnywhere,
   resolveLiterals,
   resolveTokens,
   slotFigmaProperty,
@@ -3050,24 +3052,29 @@ function applyStyling(
   ctx: TextCtx,
 ): TextCtx {
   const tokens = resolveTokens(part, subst);
+  // v19 (RC2): the declared record FOR THIS COMBO — declaredByProp overrides
+  // merged over `declared`. Every read below goes through it, because a
+  // per-axis declared fact that only the code surface honoured is exactly the
+  // byte-identical-variant-cell defect this field was added to close.
+  const declared = resolveDeclared(part, subst);
   // R7: both passes read the SAME absolute gate the placement pass uses
   // (isAbsoluteThisCombo — declared OR this combo's stylesWhen), so an inset
   // that absolutePartPlacement lowers is never named as an in-flow drop.
   const absolute = isAbsoluteThisCombo(part, subst);
-  const t = applyTokens(spec, tokens, subst, ctx, part.hugsBelowMaxWidth, part.declared, absolute);
+  const t = applyTokens(spec, tokens, subst, ctx, part.hugsBelowMaxWidth, declared, absolute);
   // The literal pass also sees the part's own token map (a token on the
   // same channel wins, by name).
-  const l = applyLiterals(spec, resolveLiterals(part, subst), t, { absolute, position: part.declared?.['position'] ?? 'static' }, tokens);
+  const l = applyLiterals(spec, resolveLiterals(part, subst), t, { absolute, position: declared['position'] ?? 'static' }, tokens);
   // absolute-position round: content-box geometry means captured width/
   // height EXCLUDE padding — a canvas frame resize is border-box, so the
   // carried paddings are added back (MUI's Slider root declares
   // box-sizing: content-box; every border-box part is untouched).
-  if (part.declared?.['box-sizing'] === 'content-box' && spec.lits) {
+  if (declared['box-sizing'] === 'content-box' && spec.lits) {
     const li = spec.lits;
     if (li.height !== undefined) li.height += (li.paddingTop ?? 0) + (li.paddingBottom ?? 0);
     if (li.width !== undefined) li.width += (li.paddingLeft ?? 0) + (li.paddingRight ?? 0);
   }
-  const d = applyDeclared(part.declared, l);
+  const d = applyDeclared(declared, l);
   // FC-OVERFLOW-CLIP-LOST: declared overflow hidden/clip draws natively as
   // clipsContent. It is set HERE, beside the other spec-level declared reads,
   // and not in applyDeclared — that function returns a TextCtx, has no `spec`
@@ -3075,7 +3082,7 @@ function applyStyling(
   // all 102 parts. auto|scroll are excluded by the registry's drawExcept, so
   // they still take the annotate path: Figma has no scroll container.
   for (const axis of ['overflow-x', 'overflow-y'] as const) {
-    const v = part.declared?.[axis];
+    const v = declared[axis];
     if (v !== undefined && channelDraws(axis, v)) spec.clipsContent = true;
   }
   // Round 4: declared aspect-ratio draws natively — height follows the bound
@@ -3091,7 +3098,7 @@ function applyStyling(
   // receipt. Every branch below now NAMES what happened to the ratio (the
   // lowering with its numbers, or why nothing was derived) through the same
   // channelMiss collector applyTokens / applyLiterals use.
-  applyAspectRatio(spec, part.declared?.['aspect-ratio']);
+  applyAspectRatio(spec, declared['aspect-ratio']);
   return d;
 }
 
@@ -3654,7 +3661,8 @@ function shapePlacement(
  *  stylesWhen `position: absolute` (Astryx Slider vertical valueDisplay=text
  *  pins the readout beside the thumb; horizontal stays in-flow). */
 function isAbsoluteThisCombo(part: Part, subst: Record<string, string>): boolean {
-  if (part.declared?.['position'] === 'absolute' || part.declared?.['position'] === 'fixed') return true;
+  const pos = resolveDeclared(part, subst)['position'];
+  if (pos === 'absolute' || pos === 'fixed') return true;
   return (part.stylesWhen ?? []).some(
     (sw) =>
       sw.equals !== undefined &&
@@ -3701,7 +3709,7 @@ function absolutePartPlacement(
   if (left === undefined && right === undefined && top === undefined && bottom === undefined) return null;
   // Per-axis translate rides the SYNTHETIC channels (minted planes resolve
   // per combo); a uniform declared identity matrix is the fallback spelling.
-  const tm = /^matrix\(1, 0, 0, 1, (-?[\d.]+), (-?[\d.]+)\)$/.exec(part.declared?.['transform'] ?? '');
+  const tm = /^matrix\(1, 0, 0, 1, (-?[\d.]+), (-?[\d.]+)\)$/.exec(resolveDeclared(part, subst)['transform'] ?? '');
   const tx = num('translate-x') ?? (tm ? parseFloat(tm[1]) : 0);
   const ty = num('translate-y') ?? (tm ? parseFloat(tm[2]) : 0);
   const a: NonNullable<NodeSpec['absolute']> = { h: 'MIN', v: 'MIN' };
@@ -3727,7 +3735,7 @@ function insetOverlayOffsets(
   part: Part,
   subst: Record<string, string>,
 ): { top: number; right: number; bottom: number; left: number } | null {
-  if (part.declared?.['position'] === 'relative') return null;
+  if (resolveDeclared(part, subst)['position'] === 'relative') return null;
   const tokens = resolveTokens(part, subst);
   const lits = resolveLiterals(part, subst);
   const offsets = { top: 0, right: 0, bottom: 0, left: 0 };
@@ -3852,11 +3860,21 @@ function variantParts(
         return false;
       }
     }
+    // RC2 (v19): a COLLAPSED transform for THIS combo — `matrix(0, 0, 0, 0,
+    // tx, ty)`, what Chromium computes for scale(0) — means the part paints
+    // NOTHING here. The canvas has one honest spelling for a node that paints
+    // nothing and it is not drawing it. MUI Radio hides its inner dot exactly
+    // this way (`.checked-unchecked .icon-2 { transform: scale(0) }`), and
+    // with the value outside the declared grammar the whole channel refused,
+    // the dot inherited the CHECKED identity transform, and every unchecked
+    // radio on the canvas drew a filled dot — it read as SELECTED (blind
+    // re-grade 2026-08-24, mui.radio, confidence "certain").
+    if (/^matrix\(0, 0, 0, 0, /.test(resolveDeclared(p, subst)['transform'] ?? '')) return false;
     // Round 4 base-hidden presence: declared display:none is the BASE state
     // (sr-only parts, defaultless-axis glyphs); a stylesWhen entry matching
     // this combo RESTORES the part. Boolean-conditioned entries evaluate at
     // the drawn cell's boolean defaults (false) — a named canvas limit.
-    if (p.declared?.['display'] === 'none') {
+    if (resolveDeclared(p, subst)['display'] === 'none') {
       const restored = (p.stylesWhen ?? []).some(
         (sw) => sw.equals !== undefined && subst[sw.prop] === sw.equals && sw.styles['display'] !== undefined && sw.styles['display'] !== 'none',
       );
@@ -5211,6 +5229,15 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       });
     };
     for (const [ch, v] of Object.entries(part.declared ?? {})) note(ch, v);
+    // v19 (RC2): per-axis declared values are declared facts too — a byProp
+    // value on an 'annotate' channel (or outside the canvas grammar) must
+    // reach the code-only receipts exactly like the uniform spelling, or the
+    // new field would open a fresh silent-loss door the moment it is used.
+    for (const entry of part.declaredByProp ?? []) {
+      for (const overrides of Object.values(entry.map)) {
+        for (const [ch, v] of Object.entries(overrides)) note(ch, v);
+      }
+    }
     for (const [state, m] of Object.entries(part.declaredStates ?? {})) {
       for (const [ch, v] of Object.entries(m)) note(ch, v, state);
     }

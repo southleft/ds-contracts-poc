@@ -394,6 +394,14 @@ export function validateContract(
         const channels = new Set(Object.values(entry.map).flatMap((o) => Object.keys(o)));
         for (const ch of channels) claim(entry.prop, ch, `literalsByProp[${i}]`);
       });
+      // v19 (RC2): declaredByProp joins the SAME conflict ledger. A declared
+      // channel is disjoint from the token/literal vocabularies by
+      // construction, but two declaredByProp entries claiming one
+      // (prop, channel) pair would resolve by order alone — refuse by name.
+      (part.declaredByProp ?? []).forEach((entry, i) => {
+        const channels = new Set(Object.values(entry.map).flatMap((o) => Object.keys(o)));
+        for (const ch of channels) claim(entry.prop, ch, `declaredByProp[${i}]`);
+      });
     }
     // SILENT-LOSS ROUND (task #33, fix 4) — TOKEN CHANNELS ARE A REGISTRY.
     // `tokens` was typed `z.record(z.string(), TokenRefSchema)` and this
@@ -517,6 +525,50 @@ export function validateContract(
       if (part.literals && cssProp in part.literals) {
         errors.push(
           `${contract.id}: part "${name}" carries channel "${cssProp}" as BOTH a literal and a declared fact — ambiguous, refused by name`,
+        );
+      }
+    }
+    // v19 (RC2 burn-down): per-enum-value declared overrides. SAME registry
+    // and SAME bounded grammar as `declared` (checkDeclaredEntry, one
+    // function, one message) — this field widens WHERE a declared value may
+    // vary, never WHICH values are legal. The prop must be a real enum /
+    // VARIANT-bound boolean and every map key an actual value of it, exactly
+    // like literalsByProp; a channel already claimed by tokens/literals on
+    // the same part stays ambiguous and refuses by name.
+    for (const entry of part.declaredByProp ?? []) {
+      const dbpProp = contract.props.find((pr) => pr.name === entry.prop);
+      if (!dbpProp) {
+        errors.push(`${contract.id}: part "${name}" declaredByProp references unknown prop "${entry.prop}"`);
+      } else if (!isEnum(dbpProp) && !isVariantBool(dbpProp)) {
+        errors.push(
+          `${contract.id}: part "${name}" declaredByProp prop "${entry.prop}" must be an enum prop or VARIANT-bound boolean`,
+        );
+      } else {
+        const allowed = isEnum(dbpProp) ? dbpProp.type.enum : ['true', 'false'];
+        for (const k of Object.keys(entry.map)) {
+          if (!allowed.includes(k)) {
+            errors.push(`${contract.id}: part "${name}" declaredByProp map key "${k}" is not a value of prop "${entry.prop}"`);
+          }
+        }
+      }
+      for (const [value, overrides] of Object.entries(entry.map)) {
+        for (const [cssProp, v] of Object.entries(overrides)) {
+          checkDeclaredEntry(cssProp, v, `declaredByProp.${entry.prop}=${value}`);
+          if (part.tokens && cssProp in part.tokens) {
+            errors.push(
+              `${contract.id}: part "${name}" carries channel "${cssProp}" as BOTH a token binding and a declaredByProp fact — ambiguous, refused by name`,
+            );
+          }
+          if (part.literals && cssProp in part.literals) {
+            errors.push(
+              `${contract.id}: part "${name}" carries channel "${cssProp}" as BOTH a literal and a declaredByProp fact — ambiguous, refused by name`,
+            );
+          }
+        }
+      }
+      if (part.component || part.slot) {
+        errors.push(
+          `${contract.id}: part "${name}" is a ${part.component ? 'component instance' : 'slot'} — declaredByProp facts cannot restyle it (the child contract / consumer owns its styling)`,
         );
       }
     }

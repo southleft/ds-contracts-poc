@@ -802,9 +802,20 @@ export const DECLARED_CHANNELS: Record<string, DeclaredChannelSpec> = {
     // whose capture path orientation differs from the developed receipt
     // (Polaris Spinner gap 12 o'clock → 3 o'clock). Scales/skews stay
     // outside the grammar (named residue).
-    value: /^(?:matrix\(1, 0, 0, 1, -?[\d.]+, -?[\d.]+\)$|rotate\(-?[\d.]+deg\))$/,
+    // RC2 burn-down: the COLLAPSED matrix — `matrix(0, 0, 0, 0, tx, ty)`,
+    // what Chromium computes for `scale(0)`. It is not a decoration, it is
+    // the library's HIDE mechanism: a zero-scale box paints nothing at all.
+    // MUI Radio's inner dot is `scale(0)` when unchecked and `scale(1)` when
+    // checked; with this value outside the grammar the whole channel refused,
+    // the dot inherited the checked identity transform, and EVERY unchecked
+    // radio drew a filled dot (blind re-grade 2026-08-24, mui.radio: "every
+    // unchecked radio reads as SELECTED"). Code renders it verbatim (correct
+    // CSS, paints nothing); the canvas draws it as `visible = false` — the
+    // canvas's only honest spelling for "this node paints nothing".
+    value:
+      /^(?:matrix\(1, 0, 0, 1, -?[\d.]+, -?[\d.]+\)$|matrix\(0, 0, 0, 0, -?[\d.]+, -?[\d.]+\)$|rotate\(-?[\d.]+deg\))$/,
     canvas: "draw",
-    note: "Identity-translate (absolute offset fold) or rotate(<n>deg) for icon/shape orientation (FC-SVG-ROTATION).",
+    note: "Identity-translate (absolute offset fold), collapsed scale(0) (the node paints nothing), or rotate(<n>deg) for icon/shape orientation (FC-SVG-ROTATION).",
   },
   // PSEUDO-DECOR v2 ROUND: the INDEPENDENT `translate` longhand — what
   // Tailwind v4's translate-x-full actually compiles to (the toggle knob),
@@ -1440,6 +1451,17 @@ export const DeclaredValueSchema = z
     'Declared value must be a plain CSS value (no token refs, no "!important", no rule injection)',
   );
 
+/** v19 (RC2 burn-down): per-enum-value declared overrides — the declared
+ *  sibling of LiteralsByPropSchema. `map` is enum value → channel → value;
+ *  the channel registry and each channel's bounded grammar are enforced in
+ *  validateContract exactly as for `declared` (same message, same registry),
+ *  so this field can never smuggle a channel or a value shape that the
+ *  uniform spelling would refuse. */
+export const DeclaredByPropSchema = z.strictObject({
+  prop: z.string(),
+  map: z.record(z.string(), z.record(z.string(), DeclaredValueSchema)),
+});
+
 /** v7 stylesWhen: the tight whitelist of literal CSS properties a
  *  conditional style may set. Deliberately NOT tokens — these are
  *  behavioral/positional properties with no token vocabulary (a color or a
@@ -1851,6 +1873,25 @@ export interface Part {
    *  drawn from the contract's declared `states`. Rendered as state-selector
    *  rules by the CSS emitters; declared-not-drawn on the canvas. */
   declaredStates?: Record<string, Record<string, string>>;
+  /** v19 (RC2 burn-down): PER-ENUM-VALUE DECLARED FACTS — the declared
+   *  sibling of tokensByProp/literalsByProp/layoutByProp.
+   *
+   *  WHY IT EXISTS. `declared` held UNIFORM values only, so a registry
+   *  channel whose observed value is a FUNCTION OF ONE ENUM AXIS was pushed
+   *  to code-only residue ("declared facts carry uniform values only (v15)")
+   *  and the compiled variant plane then minted N byte-identical cells —
+   *  MUI Link's whole `underline` axis (text-decoration-line none/underline)
+   *  and MUI Radio's `checked` axis (the inner dot's scale(0)/identity
+   *  transform, so every UNCHECKED radio drew a filled dot and read as
+   *  selected). The value was measured, the axis was known, and the only
+   *  thing missing was a place to put it.
+   *
+   *  Same channel registry and the same bounded per-channel grammar as
+   *  `declared` — this widens WHERE a declared value may vary, never WHICH
+   *  values are legal. Resolution is `resolveDeclared(part, subst)`:
+   *  per-axis overrides merged over `declared`, ordered, later entries win —
+   *  byte-for-byte the resolveTokens/resolveLiterals rule. */
+  declaredByProp?: Array<z.infer<typeof DeclaredByPropSchema>>;
   /** v18 (antd exam, W4) — CAPTURE-SIDE CODE-ONLY RECEIPTS on this part:
    *  state-plane facts the computed capture OBSERVED and the contract grammar
    *  could not hold (a focus-visible `outline-width` on a nested part — v13
@@ -2228,6 +2269,8 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     declaredStates: z
       .record(z.string(), z.record(z.string(), DeclaredValueSchema))
       .optional(),
+    /** v19 (RC2): per-enum-value declared overrides — see DeclaredByPropSchema. */
+    declaredByProp: z.array(DeclaredByPropSchema).min(1).optional(),
     /** v18 (antd exam, W4): capture-side code-only receipts — see the Part
      *  interface. A receipt the canvas emitter repeats; nothing draws it. */
     codeOnly: z
@@ -2601,6 +2644,47 @@ export function resolveLiterals(
     if (override) out = { ...out, ...override };
   }
   return out;
+}
+
+/** v19 (RC2 burn-down): the declared record a part carries under one concrete
+ *  variant combo — declaredByProp overrides merged over `declared`, with
+ *  resolveTokens/resolveLiterals semantics (ordered, later entries win, an
+ *  axis absent from `subst` contributes nothing).
+ *
+ *  THE ONE READER. Every surface that renders declared facts under a combo
+ *  goes through this, so the uniform spelling and the per-axis spelling can
+ *  never diverge: a consumer that reads `part.declared` directly silently
+ *  drops every per-axis override, which is the exact shape of the defect the
+ *  field was added to close. */
+export function resolveDeclared(
+  part: Part,
+  subst: Record<string, string>,
+): Record<string, string> {
+  let out = part.declared ?? {};
+  for (const entry of part.declaredByProp ?? []) {
+    const override = entry.map[subst[entry.prop] ?? ""];
+    if (override) out = { ...out, ...override };
+  }
+  return out;
+}
+
+/** v19 (RC2): does this part carry a declared value for `channel` under ANY
+ *  compiled variant? The structural reads (position/display/aspect-ratio)
+ *  that decide a node's SHAPE — not its paint — ask this rather than the
+ *  per-combo value, so a per-axis declared fact can never be invisible to the
+ *  shape decisions while being visible to the paint decisions. */
+export function declaredAnywhere(
+  part: Part,
+  channel: string,
+): string | undefined {
+  const base = part.declared?.[channel];
+  if (base !== undefined) return base;
+  for (const entry of part.declaredByProp ?? []) {
+    for (const overrides of Object.values(entry.map)) {
+      if (overrides[channel] !== undefined) return overrides[channel];
+    }
+  }
+  return undefined;
 }
 
 /** A native CHECKABLE control part — a real `<input type="checkbox|radio">`

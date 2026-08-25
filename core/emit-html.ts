@@ -35,6 +35,7 @@
  */
 import {
   borderStyleDecls,
+  declaredAnywhere,
   isNativeCheckablePart,
   shapeCssDecls,
   slotsOf,
@@ -335,7 +336,7 @@ function componentCss(contract: Contract): string[] {
   // chrome (cursor: pointer, :disabled not-allowed) yields to it (mirrors
   // core/emit-react.ts generateCss).
   const rootDeclaresCursor =
-    Boolean(root.declared?.['cursor']) || Boolean(root.declaredStates?.['disabled']?.['cursor']);
+    declaredAnywhere(root, 'cursor') !== undefined || Boolean(root.declaredStates?.['disabled']?.['cursor']);
   if (contract.semantics.element === 'button' && !rootDeclaresCursor) rootDecls.push('cursor: pointer');
   if (
     walkAnatomy(contract).some(
@@ -450,6 +451,20 @@ function componentCss(contract: Contract): string[] {
       rootDecls.splice(rootDecls.indexOf('position: relative'), 1);
     }
     rootDecls.push(`${cssProp}: ${value}`);
+  }
+  // v19 (RC2) declaredByProp on the root: per-enum-value declared overrides
+  // ride the SAME enum-class rules the literal/token byProp fields use. Before
+  // this the axis-varying declared channel was code-only residue and every
+  // cell of the axis rendered identically (mui.link's whole underline axis).
+  for (const { prop: dbpProp, map } of root.declaredByProp ?? []) {
+    for (const [value, overrides] of Object.entries(map)) {
+      const key = `${dbpProp} ${value}`;
+      for (const [cssProp, v] of Object.entries(overrides)) {
+        const entry = enumRules.get(key) ?? { prop: dbpProp, value, decls: [] };
+        entry.decls.push(`${cssProp}: ${v}`);
+        enumRules.set(key, entry);
+      }
+    }
   }
   for (const { prop: lbpProp, map } of root.literalsByProp ?? []) {
     for (const [value, overrides] of Object.entries(map)) {
@@ -705,6 +720,15 @@ function componentCss(contract: Contract): string[] {
         `${rootCls}${sel} ${partCls(name)}`,
         Object.entries(overrides).map(([cssProp, v]) => `${cssProp}: ${v}`),
       ]);
+    }
+    // v19 (RC2) declaredByProp on a nested part: per-enum-value descendant
+    // rules under the root's enum class (MUI Radio's inner dot rides this).
+    for (const entry of part.declaredByProp ?? []) {
+      for (const [value, overrides] of Object.entries(entry.map)) {
+        const dDecls = Object.entries(overrides).map(([cssProp, v]) => `${cssProp}: ${v}`);
+        if (dDecls.length === 0) continue;
+        subRules.push([`${enumCls(entry.prop, value)} ${partCls(name)}`, dDecls]);
+      }
     }
     for (const entry of part.literalsByProp ?? []) {
       for (const [value, overrides] of Object.entries(entry.map)) {

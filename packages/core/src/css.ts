@@ -11,6 +11,7 @@ import {
   refOverrideVar,
   TOKEN_CHANNELS,
   borderStyleDecls,
+  declaredAnywhere,
   isNativeCheckablePart,
   shapeCssDecls,
   tokensByPropEntries,
@@ -365,8 +366,12 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
   // v15: a declared cursor fact is authoritative — the emitter's own button
   // chrome (cursor: pointer, and the :disabled not-allowed rule below) yields
   // to it. The declared fact is captured truth; the chrome was a convention.
+  // v19 (RC2): a per-axis declared cursor is just as authoritative as the
+  // uniform one — declaredAnywhere is the single reader so a byProp spelling
+  // can never be invisible here while being visible in the rules below.
   const rootDeclaresCursor =
-    Boolean(root.declared?.['cursor']) || Boolean(root.declaredStates?.['disabled']?.['cursor']);
+    declaredAnywhere(root, 'cursor') !== undefined ||
+    Boolean(root.declaredStates?.['disabled']?.['cursor']);
   if (contract.semantics.element === 'button' && !rootDeclaresCursor) rootDecls.push('cursor: pointer');
   // v7 overlay / v9 shape placement: any out-of-flow part (an overlay, or a
   // part whose stylesWhen carries position: absolute — the shape-placement
@@ -638,6 +643,20 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
       rootDecls.splice(rootDecls.indexOf('position: relative'), 1);
     }
     rootDecls.push(`${cssProp}: ${value}`);
+  }
+  // v19 (RC2) declaredByProp on the root: per-enum-value overrides ride the
+  // SAME enum-class rules the token/literal byProp fields use, so the root's
+  // `underline-always` class carries `text-decoration-line: underline` while
+  // the base rule keeps the default value. Before this the whole channel was
+  // pushed to code-only residue and the axis minted identical cells.
+  for (const { prop: dbpProp, map } of root.declaredByProp ?? []) {
+    for (const [value, overrides] of Object.entries(map)) {
+      const cls = `${dbpProp}-${value}`;
+      for (const [cssProp, v] of Object.entries(overrides)) {
+        if (!enumRules.has(cls)) enumRules.set(cls, new Map());
+        enumRules.get(cls)!.set(cssProp, v);
+      }
+    }
   }
 
   // a11y.minHitArea: the declared floor is ENFORCED, not aspirational — the
@@ -1031,6 +1050,17 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     // descendant rules under the root's state selector.
     for (const [cssProp, value] of Object.entries(part.declared ?? {})) {
       decls.push(`${cssProp}: ${value}`);
+    }
+    // v19 (RC2) declaredByProp on a nested part: per-enum-value descendant
+    // rules under the root's enum class — the literalsByProp rule shape, on
+    // the declared vocabulary. MUI Radio's inner dot rides this
+    // (`.checked-unchecked .icon-2 { transform: matrix(0,0,0,0,0,0) }`).
+    for (const entry of part.declaredByProp ?? []) {
+      for (const [value, overrides] of Object.entries(entry.map)) {
+        const dDecls = Object.entries(overrides).map(([cssProp, v]) => `  ${cssProp}: ${v};`);
+        if (dDecls.length === 0) continue;
+        nestedSubRules.push(`\n.${entry.prop}-${value} .${name} {\n${dDecls.join('\n')}\n}`);
+      }
     }
     // Round 4: an absolutely-positioned REPLACED part (promoted Thumbnail
     // img) fills its inset box — for replaced elements, auto width under

@@ -428,6 +428,17 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     for (const [cssProp, value] of Object.entries(part.declared ?? {})) {
       s[camel(cssProp)] = value;
     }
+    // v19 (RC2) declaredByProp: per-enum-value declared overrides ride the
+    // SAME per-variant style channel the token/literal byProp fields use.
+    // Without this the whole axis-varying declared fact was code-only residue
+    // and every cell of the axis rendered identically.
+    for (const entry of part.declaredByProp ?? []) {
+      for (const [value, overrides] of Object.entries(entry.map)) {
+        const decls: StyleRecord = {};
+        for (const [cssProp, v] of Object.entries(overrides)) decls[camel(cssProp)] = v;
+        addVariant(entry.prop, value, partName, decls);
+      }
+    }
     // layoutByProp: per-enum-value layout overrides merged over the base.
     if (part.layoutByProp) {
       for (const [value, _override] of Object.entries(part.layoutByProp.map)) {

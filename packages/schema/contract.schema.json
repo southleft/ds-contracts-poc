@@ -1163,6 +1163,39 @@
             }
           }
         },
+        "declaredByProp": {
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "prop": {
+                "type": "string"
+              },
+              "map": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string"
+                },
+                "additionalProperties": {
+                  "type": "object",
+                  "propertyNames": {
+                    "type": "string"
+                  },
+                  "additionalProperties": {
+                    "type": "string",
+                    "pattern": "^[^;{}!]+$"
+                  }
+                }
+              }
+            },
+            "required": [
+              "prop",
+              "map"
+            ],
+            "additionalProperties": false
+          }
+        },
         "codeOnly": {
           "minItems": 1,
           "type": "array",
