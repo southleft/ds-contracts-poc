@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "gray placeholder box on canvas beside the code render's broken-image alt text \u2014 the canvas draws the placeholder the contract describes",
  "reviewedAt": "ef10d9b1",

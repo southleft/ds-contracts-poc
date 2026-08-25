@@ -1,0 +1,67 @@
+{
+  "id": "polaris.banner",
+  "library": "polaris",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@shopify/polaris",
+    "version": "13.9.5",
+    "recipe": "examples/polaris sandbox (.polaris-sandbox; examples/polaris/README) mounted per extract/computed/configs/polaris.json"
+  },
+  "configPath": "extract/computed/configs/polaris.json",
+  "component": "Banner",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "tone-info",
+      "status": "rendered",
+      "png": "ref-tone-info.png",
+      "props": {
+        "title": "Order archived",
+        "tone": "info"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "tone-success",
+      "status": "rendered",
+      "png": "ref-tone-success.png",
+      "props": {
+        "title": "Order archived",
+        "tone": "success"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "tone-warning",
+      "status": "rendered",
+      "png": "ref-tone-warning.png",
+      "props": {
+        "title": "Order archived",
+        "tone": "warning"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "tone-critical",
+      "status": "rendered",
+      "png": "ref-tone-critical.png",
+      "props": {
+        "title": "Order archived",
+        "tone": "critical"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "tone-info__state-focus-visible",
+      "status": "rendered",
+      "png": "ref-tone-info__state-focus-visible.png",
+      "props": {
+        "title": "Order archived",
+        "tone": "info"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 5,
+  "unmappable": 0
+}

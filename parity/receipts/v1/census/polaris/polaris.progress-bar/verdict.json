@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "track + fill matches across tones/sizes",
  "reviewedAt": "ef10d9b1",

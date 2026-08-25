@@ -1,0 +1,61 @@
+{
+  "id": "polaris.thumbnail",
+  "library": "polaris",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@shopify/polaris",
+    "version": "13.9.5",
+    "recipe": "examples/polaris sandbox (.polaris-sandbox; examples/polaris/README) mounted per extract/computed/configs/polaris.json"
+  },
+  "configPath": "extract/computed/configs/polaris.json",
+  "component": "Thumbnail",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "size-medium",
+      "status": "rendered",
+      "png": "ref-size-medium.png",
+      "props": {
+        "alt": "Black choker necklace",
+        "source": "data:image/svg+xml;utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201%201'%3E%3Crect%20width='1'%20height='1'%20fill='%23d8d8d8'/%3E%3C/svg%3E",
+        "size": "medium"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-extra-small",
+      "status": "rendered",
+      "png": "ref-size-extra-small.png",
+      "props": {
+        "alt": "Black choker necklace",
+        "source": "data:image/svg+xml;utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201%201'%3E%3Crect%20width='1'%20height='1'%20fill='%23d8d8d8'/%3E%3C/svg%3E",
+        "size": "extraSmall"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-small",
+      "status": "rendered",
+      "png": "ref-size-small.png",
+      "props": {
+        "alt": "Black choker necklace",
+        "source": "data:image/svg+xml;utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201%201'%3E%3Crect%20width='1'%20height='1'%20fill='%23d8d8d8'/%3E%3C/svg%3E",
+        "size": "small"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-large",
+      "status": "rendered",
+      "png": "ref-size-large.png",
+      "props": {
+        "alt": "Black choker necklace",
+        "source": "data:image/svg+xml;utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201%201'%3E%3Crect%20width='1'%20height='1'%20fill='%23d8d8d8'/%3E%3C/svg%3E",
+        "size": "large"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 4,
+  "unmappable": 0
+}

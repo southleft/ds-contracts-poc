@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [
   "CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading Xs",
   "CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading Sm",

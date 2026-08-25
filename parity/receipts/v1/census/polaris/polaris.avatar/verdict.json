@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "TP magenta avatar across sizes matches; the code render carries a stray glyph overlay the canvas does not",
  "reviewedAt": "ef10d9b1",

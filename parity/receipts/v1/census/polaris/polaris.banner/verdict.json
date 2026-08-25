@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "info banner with icon, title and body matches",
  "reviewedAt": "ef10d9b1",

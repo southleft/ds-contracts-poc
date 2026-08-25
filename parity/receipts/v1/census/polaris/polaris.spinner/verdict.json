@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "arc spinner matches both sizes",
  "reviewedAt": "ef10d9b1",

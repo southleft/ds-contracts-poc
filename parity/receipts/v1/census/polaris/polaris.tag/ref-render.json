@@ -1,0 +1,63 @@
+{
+  "id": "polaris.tag",
+  "library": "polaris",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@shopify/polaris",
+    "version": "13.9.5",
+    "recipe": "examples/polaris sandbox (.polaris-sandbox; examples/polaris/README) mounted per extract/computed/configs/polaris.json"
+  },
+  "configPath": "extract/computed/configs/polaris.json",
+  "component": "Tag",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "size-none",
+      "status": "rendered",
+      "png": "ref-size-none.png",
+      "props": {
+        "size": "none"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-large",
+      "status": "rendered",
+      "png": "ref-size-large.png",
+      "props": {
+        "size": "large"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-none__state-disabled",
+      "status": "rendered",
+      "png": "ref-size-none__state-disabled.png",
+      "props": {
+        "size": "none",
+        "disabled": true
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-none__state-active",
+      "status": "rendered",
+      "png": "ref-size-none__state-active.png",
+      "props": {
+        "size": "none"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-none__state-focus-visible",
+      "status": "rendered",
+      "png": "ref-size-none__state-focus-visible.png",
+      "props": {
+        "size": "none"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 5,
+  "unmappable": 0
+}

@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [
   "CANVAS-PROJECTION:Type=Text, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium",
   "CANVAS-PROJECTION:Type=Text, Input Mode=None, Align=Left, Variant=Inherit, Size=Slim",

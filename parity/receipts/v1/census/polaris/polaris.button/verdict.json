@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "bordered button matches across variants/sizes",
  "reviewedAt": "ef10d9b1",
