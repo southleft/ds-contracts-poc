@@ -1,11 +1,11 @@
 {
   "component": "CaseGridImplicitTracks",
-  "browser": "151.0.7922.34",
+  "browser": "149.0.7827.55",
   "captures": 4,
   "combos": 1,
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
-  "channelsEnumerated": 479,
+  "channelsEnumerated": 476,
   "elementsPerCapture": 4,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
@@ -200,8 +200,8 @@
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 7632,
-    "cellsMatched": 7632,
+    "cellsCompared": 7584,
+    "cellsMatched": 7584,
     "pct": 100,
     "namedExclusions": [
       "app-region",

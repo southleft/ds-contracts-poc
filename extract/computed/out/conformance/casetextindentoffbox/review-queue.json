@@ -3,6 +3,6 @@
   "component": "CaseTextIndentOffBox",
   "contract": "conformance/seeds/text-indent-off-box.contract.json",
   "generatedBy": "extract/computed/run.ts",
-  "browser": "151.0.7922.34",
+  "browser": "149.0.7827.55",
   "items": []
 }

@@ -2,7 +2,7 @@
   "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
   "generatedBy": "extract/computed/run.ts",
   "library": "@ds-contracts/conformance@0.1.0",
-  "browser": "151.0.7922.34",
+  "browser": "149.0.7827.55",
   "mintedTokens": {
     "imported": {
       "shared": {
@@ -113,9 +113,10 @@
   "interactionOnlyPlaneDropCount": 0,
   "structureReceipts": [],
   "styledChannelReceipts": [
-    "control-equal-drop: root — 384 of 399 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "control-equal-drop: root — 381 of 396 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
     "page-global-baseline-corrected: root — 4 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1))",
     "text-part-typography-carried: root — line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "control-equal-drop: root — 375 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
     "geometry-excluded: root — block-size 14px, height 14px, inline-size 43.2188px, perspective-origin 21.6094px 7px, transform-origin 21.6094px 7px, width 43.2188px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (root); -webkit-text-stroke-color (root)",
     "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold."

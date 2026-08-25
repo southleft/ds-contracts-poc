@@ -1,11 +1,11 @@
 {
   "component": "CaseContainerQuery",
-  "browser": "151.0.7922.34",
+  "browser": "149.0.7827.55",
   "captures": 4,
   "combos": 1,
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
-  "channelsEnumerated": 479,
+  "channelsEnumerated": 476,
   "elementsPerCapture": 2,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
@@ -126,8 +126,8 @@
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 3816,
-    "cellsMatched": 3816,
+    "cellsCompared": 3792,
+    "cellsMatched": 3792,
     "pct": 100,
     "namedExclusions": [
       "app-region",
