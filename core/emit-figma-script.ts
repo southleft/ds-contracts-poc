@@ -4743,7 +4743,11 @@ function annotateFillW(rootSpec: NodeSpec): void {
         // hugging displaces it; the flag is the runtime's proof.
         if (c.type === 'text' && !c.textTruncation) c.fillText = true;
       }
-      walk(c, fills || hasOwnWidth(c) || gridParent);
+      // REJECTED-SETS ROUND: an hAligned grid occupant HUGS its width (the
+      // runtime skips FILL for it — CSS justify-self beats the stretch
+      // default), so its subtree is NOT width-established; treating it as
+      // established FILLed the dialog's Close button into its whole cell.
+      walk(c, fills || hasOwnWidth(c) || (gridParent && c.cell?.hAlign === undefined));
     }
   };
   walk(rootSpec, hasOwnWidth(rootSpec));
@@ -6384,14 +6388,22 @@ function applyGridChildren(parent, spec, built) {
     // exactly the right contribution.
     const hugW = !!(l.grid.hugWidth || (childGrid && childGrid.hugWidth));
     const hugH = !!(l.grid.hugHeight || (childGrid && childGrid.hugHeight));
-    if (!cs.fixedWidth && !(cs.lits && cs.lits.width !== undefined) && !hugW) {
+    // REJECTED-SETS ROUND (fluent.dialog actions): G3's FILL is stretch-by-
+    // ABSENCE — a child that CARRIES an alignment on an axis resolves to its
+    // content size there (CSS: justify-self/align-self beat the stretch
+    // default), so an aligned axis HUGS and never fills. Filling it drew the
+    // dialog's Close button 267px wide (modal) and collapsed it to 0 inside
+    // the hugging non-modal grid (the FILL-in-HUG degenerate cycle).
+    const alignedW = !!(cs.cell && cs.cell.hAlign);
+    const alignedH = !!(cs.cell && cs.cell.vAlign);
+    if (!cs.fixedWidth && !(cs.lits && cs.lits.width !== undefined) && !hugW && !alignedW) {
       try { cn.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-GRID-SIZING-REFUSED', cn, 'layoutSizingHorizontal FILL refused; the grid child keeps its drawn width', e); }
-    } else if (l.grid.hugWidth && !cs.fixedWidth && !(cs.lits && cs.lits.width !== undefined)) {
+    } else if ((l.grid.hugWidth || alignedW) && !cs.fixedWidth && !(cs.lits && cs.lits.width !== undefined)) {
       try { cn.layoutSizingHorizontal = 'HUG'; } catch (e) { degrade('FC-RT-GRID-SIZING-REFUSED', cn, 'layoutSizingHorizontal HUG refused; the grid child keeps its drawn width', e); }
     }
-    if (!cs.fixedHeight && !(cs.lits && cs.lits.height !== undefined) && !hugH) {
+    if (!cs.fixedHeight && !(cs.lits && cs.lits.height !== undefined) && !hugH && !alignedH) {
       try { cn.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-GRID-SIZING-REFUSED', cn, 'layoutSizingVertical FILL refused; the grid child keeps its drawn height', e); }
-    } else if (l.grid.hugHeight && !cs.fixedHeight && !(cs.lits && cs.lits.height !== undefined)) {
+    } else if ((l.grid.hugHeight || alignedH) && !cs.fixedHeight && !(cs.lits && cs.lits.height !== undefined)) {
       try { cn.layoutSizingVertical = 'HUG'; } catch (e) { degrade('FC-RT-GRID-SIZING-REFUSED', cn, 'layoutSizingVertical HUG refused; the grid child keeps its drawn height', e); }
     }
   }
