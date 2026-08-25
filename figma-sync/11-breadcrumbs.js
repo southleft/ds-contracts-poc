@@ -54,6 +54,9 @@ const COMPONENTS = [
                 }
               ],
               "slotDescription": "Accepts: ds.breadcrumb-item (preferred — Figma sorts these first; any component may still be placed).",
+              "bindings": {
+                "itemSpacing": "space/inset-y/sm"
+              },
               "slotDefault": [
                 {
                   "dep": "BreadcrumbItem",
@@ -80,10 +83,7 @@ const COMPONENTS = [
                     "Label": "ProgressBar"
                   }
                 }
-              ],
-              "bindings": {
-                "itemSpacing": "space/inset-y/sm"
-              }
+              ]
             }
           ]
         }

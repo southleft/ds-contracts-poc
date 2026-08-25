@@ -66,6 +66,9 @@ const COMPONENTS = [
                 }
               ],
               "slotDescription": "Accepts: ds.list-item (preferred — Figma sorts these first; any component may still be placed).",
+              "bindings": {
+                "itemSpacing": "space/list/balanced"
+              },
               "slotDefault": [
                 {
                   "dep": "ListItem",
@@ -95,9 +98,6 @@ const COMPONENTS = [
                   }
                 }
               ],
-              "bindings": {
-                "itemSpacing": "space/list/balanced"
-              },
               "fillW": true
             }
           ]
@@ -153,6 +153,9 @@ const COMPONENTS = [
                 }
               ],
               "slotDescription": "Accepts: ds.list-item (preferred — Figma sorts these first; any component may still be placed).",
+              "bindings": {
+                "itemSpacing": "space/list/compact"
+              },
               "slotDefault": [
                 {
                   "dep": "ListItem",
@@ -182,9 +185,6 @@ const COMPONENTS = [
                   }
                 }
               ],
-              "bindings": {
-                "itemSpacing": "space/list/compact"
-              },
               "fillW": true
             }
           ]
@@ -240,6 +240,9 @@ const COMPONENTS = [
                 }
               ],
               "slotDescription": "Accepts: ds.list-item (preferred — Figma sorts these first; any component may still be placed).",
+              "bindings": {
+                "itemSpacing": "space/list/spacious"
+              },
               "slotDefault": [
                 {
                   "dep": "ListItem",
@@ -269,9 +272,6 @@ const COMPONENTS = [
                   }
                 }
               ],
-              "bindings": {
-                "itemSpacing": "space/list/spacious"
-              },
               "fillW": true
             }
           ]

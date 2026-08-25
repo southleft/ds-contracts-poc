@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "ds.top-nav",
     "version": "1.0.0",
     "anchorKey": "c82dd683a88f085e804e8d315c8f75dc6f261807",
-    "description": "TopNav — generated from contract ds.top-nav v1.0.0",
+    "description": "TopNav — generated from contract ds.top-nav v1.0.0 † (3 code-only facts — see plugin report)",
     "isSet": false,
     "boolProps": [],
     "textProps": [
@@ -112,6 +112,41 @@ const COMPONENTS = [
     "semantics": {
       "element": "nav"
     },
+    "codeOnlyFacts": [
+      {
+        "part": "endContent",
+        "kind": "channel",
+        "channel": "slot \"endContent\" design-time content",
+        "value": "",
+        "reason": "no defaultContent and not the default `children` slot — the canvas draws an EMPTY region (a hugging axis re-measures to Figma's 1px floor) exactly as the code surfaces render nothing: emit-react's story loop has nothing to sample and emit-html renders the wrapper empty. A placeholder here would be content no code surface has, and a minimum box would be geometry no surface declares. Declare `slot.defaultContent` to give this slot design-time content on BOTH surfaces",
+        "variants": {
+          "count": 1,
+          "of": 1
+        }
+      },
+      {
+        "part": "heading",
+        "kind": "channel",
+        "channel": "slot \"heading\" design-time content",
+        "value": "",
+        "reason": "no defaultContent and not the default `children` slot — the canvas draws an EMPTY region (a hugging axis re-measures to Figma's 1px floor) exactly as the code surfaces render nothing: emit-react's story loop has nothing to sample and emit-html renders the wrapper empty. A placeholder here would be content no code surface has, and a minimum box would be geometry no surface declares. Declare `slot.defaultContent` to give this slot design-time content on BOTH surfaces",
+        "variants": {
+          "count": 1,
+          "of": 1
+        }
+      },
+      {
+        "part": "startContent",
+        "kind": "channel",
+        "channel": "slot \"startContent\" design-time content",
+        "value": "",
+        "reason": "no defaultContent and not the default `children` slot — the canvas draws an EMPTY region (a hugging axis re-measures to Figma's 1px floor) exactly as the code surfaces render nothing: emit-react's story loop has nothing to sample and emit-html renders the wrapper empty. A placeholder here would be content no code surface has, and a minimum box would be geometry no surface declares. Declare `slot.defaultContent` to give this slot design-time content on BOTH surfaces",
+        "variants": {
+          "count": 1,
+          "of": 1
+        }
+      }
+    ],
     "colW": 700
   }
 ];

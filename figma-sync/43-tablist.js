@@ -53,6 +53,9 @@ const COMPONENTS = [
                 }
               ],
               "slotDescription": "Accepts: ds.tab (preferred — Figma sorts these first; any component may still be placed).",
+              "bindings": {
+                "itemSpacing": "space/inset-y/sm"
+              },
               "slotDefault": [
                 {
                   "dep": "Tab",
@@ -79,10 +82,7 @@ const COMPONENTS = [
                     "Label": "Tokens"
                   }
                 }
-              ],
-              "bindings": {
-                "itemSpacing": "space/inset-y/sm"
-              }
+              ]
             }
           ]
         }

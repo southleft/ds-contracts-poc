@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "ds.typeahead-item",
     "version": "1.0.0",
     "anchorKey": "e71ef70ee99e707af6c5eaa57b6336ae906b5690",
-    "description": "TypeaheadItem — generated from contract ds.typeahead-item v1.0.0 † (1 code-only facts — see plugin report)",
+    "description": "TypeaheadItem — generated from contract ds.typeahead-item v1.0.0 † (2 code-only facts — see plugin report)",
     "isSet": false,
     "boolProps": [],
     "textProps": [],
@@ -110,6 +110,17 @@ const COMPONENTS = [
       "role": "option"
     },
     "codeOnlyFacts": [
+      {
+        "part": "iconSlot",
+        "kind": "channel",
+        "channel": "slot \"icon\" design-time content",
+        "value": "",
+        "reason": "no defaultContent and not the default `children` slot — the canvas draws an EMPTY region (a hugging axis re-measures to Figma's 1px floor) exactly as the code surfaces render nothing: emit-react's story loop has nothing to sample and emit-html renders the wrapper empty. A placeholder here would be content no code surface has, and a minimum box would be geometry no surface declares. Declare `slot.defaultContent` to give this slot design-time content on BOTH surfaces",
+        "variants": {
+          "count": 1,
+          "of": 1
+        }
+      },
       {
         "part": "root",
         "kind": "channel",

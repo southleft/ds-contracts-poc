@@ -166,6 +166,21 @@ const COMPONENTS = [
                 "paddingTop": "space/inset-y/md",
                 "paddingBottom": "space/inset-y/md"
               },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "Slot sample",
+                  "slotSample": true,
+                  "characters": "The quick brown fox jumps over the lazy dog.",
+                  "fontSize": 14,
+                  "fontStyle": "Medium",
+                  "fontFamily": "Inter",
+                  "textStyle": "control/sm",
+                  "textFill": "color/text/secondary",
+                  "fillW": true,
+                  "fillText": true
+                }
+              ],
               "fillW": true
             }
           ]
@@ -350,6 +365,9 @@ const COMPONENTS = [
                 }
               ],
               "slotDescription": "Accepts: ds.avatar (preferred — Figma sorts these first; any component may still be placed).",
+              "bindings": {
+                "itemSpacing": "space/avatarGroup/overlap"
+              },
               "slotDefault": [
                 {
                   "dep": "Avatar",
@@ -378,10 +396,7 @@ const COMPONENTS = [
                     "Initials": "EF"
                   }
                 }
-              ],
-              "bindings": {
-                "itemSpacing": "space/avatarGroup/overlap"
-              }
+              ]
             },
             {
               "type": "text",

@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "ds.toast",
     "version": "1.0.0",
     "anchorKey": "0abc553b16f20807f50d984a41dc6cb936958a93",
-    "description": "Toast — generated from contract ds.toast v1.0.0",
+    "description": "Toast — generated from contract ds.toast v1.0.0 † (1 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -56,6 +56,21 @@ const COMPONENTS = [
               "grow": true,
               "slotProperty": "Children",
               "slotAccepts": [],
+              "children": [
+                {
+                  "type": "text",
+                  "name": "Slot sample",
+                  "slotSample": true,
+                  "characters": "The quick brown fox jumps over the lazy dog.",
+                  "fontSize": 14,
+                  "fontStyle": "Medium",
+                  "fontFamily": "Inter",
+                  "textStyle": "control/sm",
+                  "textFill": "color/toast/info/foreground",
+                  "fillW": true,
+                  "fillText": true
+                }
+              ],
               "fillW": true
             },
             {
@@ -120,6 +135,21 @@ const COMPONENTS = [
               "grow": true,
               "slotProperty": "Children",
               "slotAccepts": [],
+              "children": [
+                {
+                  "type": "text",
+                  "name": "Slot sample",
+                  "slotSample": true,
+                  "characters": "The quick brown fox jumps over the lazy dog.",
+                  "fontSize": 14,
+                  "fontStyle": "Medium",
+                  "fontFamily": "Inter",
+                  "textStyle": "control/sm",
+                  "textFill": "color/toast/error/foreground",
+                  "fillW": true,
+                  "fillText": true
+                }
+              ],
               "fillW": true
             },
             {
@@ -151,6 +181,19 @@ const COMPONENTS = [
     "semantics": {
       "element": "div"
     },
+    "codeOnlyFacts": [
+      {
+        "part": "endContent",
+        "kind": "channel",
+        "channel": "slot \"endContent\" design-time content",
+        "value": "",
+        "reason": "no defaultContent and not the default `children` slot — the canvas draws an EMPTY region (a hugging axis re-measures to Figma's 1px floor) exactly as the code surfaces render nothing: emit-react's story loop has nothing to sample and emit-html renders the wrapper empty. A placeholder here would be content no code surface has, and a minimum box would be geometry no surface declares. Declare `slot.defaultContent` to give this slot design-time content on BOTH surfaces",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      }
+    ],
     "colW": 380
   }
 ];
@@ -802,6 +845,55 @@ async function buildNode(spec, registry) {
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
     node.fontSize = spec.fontSize || 16;
     node.characters = spec.characters || '';
+    if (spec.fontFamily) {
+      // PER-FAMILY STYLE SPELLING. The compiled style name comes from
+      // FONT_STYLE_BY_WEIGHT, which is spelled Inter's way ("Semi Bold",
+      // "Extra Light"). Other families spell the same face WITHOUT the space
+      // — IBM Plex Sans ships "SemiBold", "ExtraLight" — so the Inter-spelled
+      // load THROWS and the node silently keeps the Inter fallback assigned
+      // above. That is a SUBSTITUTION, not a failure: nothing was logged,
+      // nothing was refused, and the canvas rendered a different typeface at
+      // different advance widths (altitude heading 194px of Inter Semi Bold
+      // where IBM Plex Sans SemiBold is 185px).
+      //
+      // A space-free retry was tried on 2026-08-08 and REVERTED because the
+      // then-pinned references were CONTRACT renders made by a harness that
+      // loaded no @font-face, so the truer canvas font scored WORSE. That
+      // premise is dead: the references are now the real library renders
+      // (extract/computed/out/<lane>/<comp>/orig-shots/, committed by
+      // run.ts --keep-originals) and the capture harness loads the library's
+      // own faces (cfg.fonts). Truer is now also closer.
+      //
+      // The fallback is kept — a family Figma does not have at all must still
+      // draw something — but it is no longer SILENT: an unresolved style is
+      // named on the console with a stable code.
+      const wantStyle = spec.fontStyle || 'Medium';
+      const styleCandidates = [wantStyle];
+      const tightStyle = wantStyle.split(' ').join('');
+      if (tightStyle !== wantStyle) styleCandidates.push(tightStyle);
+      let fontResolved = false;
+      for (let i = 0; i < styleCandidates.length; i++) {
+        try {
+          await figma.loadFontAsync({ family: spec.fontFamily, style: styleCandidates[i] });
+          node.fontName = { family: spec.fontFamily, style: styleCandidates[i] };
+          fontResolved = true;
+          break;
+        } catch (e) { /* a RETRY, not a swallow: the next candidate is this family's own spelling of the same face; the final outcome is named below */ }
+      }
+      if (!fontResolved) {
+        console.warn(
+          'FC-FONT-STYLE-UNRESOLVED: ' + spec.fontFamily + ' / ' + wantStyle +
+          ' is not available in this file (tried ' + styleCandidates.join(', ') +
+          ') — Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones',
+        );
+        degrade('FC-FONT-STYLE-UNRESOLVED', node, spec.fontFamily + ' / ' + wantStyle + ' is not available in this file (tried ' + styleCandidates.join(', ') + '); Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones');
+      }
+    }
+    if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
+    if (spec.textCase) node.textCase = spec.textCase;
+    if (spec.textDecoration) node.textDecoration = spec.textDecoration;
+    if (spec.textAlignH) node.textAlignHorizontal = spec.textAlignH;
+    if (spec.textTruncation) { try { node.textTruncation = 'ENDING'; } catch (e) { degrade('FC-RT-TRUNCATION-REFUSED', node, 'textTruncation ENDING refused (older Plugin API); the declared ellipsis does not draw', e); } }
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.

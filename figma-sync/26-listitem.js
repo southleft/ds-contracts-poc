@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "ds.list-item",
     "version": "1.0.0",
     "anchorKey": "470b0337773739a1521b294855bed053c8e7eb33",
-    "description": "ListItem — generated from contract ds.list-item v1.0.0",
+    "description": "ListItem — generated from contract ds.list-item v1.0.0 † (2 code-only facts — see plugin report)",
     "isSet": false,
     "boolProps": [],
     "textProps": [],
@@ -117,6 +117,30 @@ const COMPONENTS = [
     "semantics": {
       "element": "li"
     },
+    "codeOnlyFacts": [
+      {
+        "part": "endContent",
+        "kind": "channel",
+        "channel": "slot \"endContent\" design-time content",
+        "value": "",
+        "reason": "no defaultContent and not the default `children` slot — the canvas draws an EMPTY region (a hugging axis re-measures to Figma's 1px floor) exactly as the code surfaces render nothing: emit-react's story loop has nothing to sample and emit-html renders the wrapper empty. A placeholder here would be content no code surface has, and a minimum box would be geometry no surface declares. Declare `slot.defaultContent` to give this slot design-time content on BOTH surfaces",
+        "variants": {
+          "count": 1,
+          "of": 1
+        }
+      },
+      {
+        "part": "startContent",
+        "kind": "channel",
+        "channel": "slot \"startContent\" design-time content",
+        "value": "",
+        "reason": "no defaultContent and not the default `children` slot — the canvas draws an EMPTY region (a hugging axis re-measures to Figma's 1px floor) exactly as the code surfaces render nothing: emit-react's story loop has nothing to sample and emit-html renders the wrapper empty. A placeholder here would be content no code surface has, and a minimum box would be geometry no surface declares. Declare `slot.defaultContent` to give this slot design-time content on BOTH surfaces",
+        "variants": {
+          "count": 1,
+          "of": 1
+        }
+      }
+    ],
     "colW": 380
   }
 ];

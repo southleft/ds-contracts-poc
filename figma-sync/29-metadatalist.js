@@ -68,6 +68,9 @@ const COMPONENTS = [
                 }
               ],
               "slotDescription": "Accepts: ds.metadata-list-item (preferred — Figma sorts these first; any component may still be placed).",
+              "bindings": {
+                "itemSpacing": "space/gap/sm"
+              },
               "slotDefault": [
                 {
                   "dep": "MetadataListItem",
@@ -97,9 +100,6 @@ const COMPONENTS = [
                   }
                 }
               ],
-              "bindings": {
-                "itemSpacing": "space/gap/sm"
-              },
               "fillW": true
             }
           ]

@@ -49,6 +49,9 @@ const COMPONENTS = [
                 }
               ],
               "slotDescription": "Accepts: ds.avatar (preferred — Figma sorts these first; any component may still be placed).",
+              "bindings": {
+                "itemSpacing": "space/avatarGroup/overlap"
+              },
               "slotDefault": [
                 {
                   "dep": "Avatar",
@@ -77,10 +80,7 @@ const COMPONENTS = [
                     "Initials": "EF"
                   }
                 }
-              ],
-              "bindings": {
-                "itemSpacing": "space/avatarGroup/overlap"
-              }
+              ]
             },
             {
               "type": "text",

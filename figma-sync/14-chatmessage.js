@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "ds.chat-message",
     "version": "1.1.0",
     "anchorKey": "4af367f1f1c5044640cd31d2cbdd3e575b1bbb54",
-    "description": "ChatMessage — generated from contract ds.chat-message v1.1.0",
+    "description": "ChatMessage — generated from contract ds.chat-message v1.1.0 † (2 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -105,6 +105,21 @@ const COMPONENTS = [
                     "paddingTop": "space/inset-y/md",
                     "paddingBottom": "space/inset-y/md"
                   },
+                  "children": [
+                    {
+                      "type": "text",
+                      "name": "Slot sample",
+                      "slotSample": true,
+                      "characters": "The quick brown fox jumps over the lazy dog.",
+                      "fontSize": 14,
+                      "fontStyle": "Medium",
+                      "fontFamily": "Inter",
+                      "textStyle": "control/sm",
+                      "textFill": "color/chat/assistant/foreground",
+                      "fillW": true,
+                      "fillText": true
+                    }
+                  ],
                   "fillW": true
                 },
                 {
@@ -200,7 +215,20 @@ const COMPONENTS = [
                     "paddingRight": "space/inset-x/sm",
                     "paddingTop": "space/inset-y/md",
                     "paddingBottom": "space/inset-y/md"
-                  }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "name": "Slot sample",
+                      "slotSample": true,
+                      "characters": "The quick brown fox jumps over the lazy dog.",
+                      "fontSize": 14,
+                      "fontStyle": "Medium",
+                      "fontFamily": "Inter",
+                      "textStyle": "control/sm",
+                      "textFill": "color/chat/user/foreground"
+                    }
+                  ]
                 },
                 {
                   "type": "slot",
@@ -334,6 +362,21 @@ const COMPONENTS = [
                     "paddingTop": "space/inset-y/md",
                     "paddingBottom": "space/inset-y/md"
                   },
+                  "children": [
+                    {
+                      "type": "text",
+                      "name": "Slot sample",
+                      "slotSample": true,
+                      "characters": "The quick brown fox jumps over the lazy dog.",
+                      "fontSize": 14,
+                      "fontStyle": "Medium",
+                      "fontFamily": "Inter",
+                      "textStyle": "control/sm",
+                      "textFill": "color/chat/system/foreground",
+                      "fillW": true,
+                      "fillText": true
+                    }
+                  ],
                   "fillW": true
                 },
                 {
@@ -370,6 +413,30 @@ const COMPONENTS = [
     "semantics": {
       "element": "div"
     },
+    "codeOnlyFacts": [
+      {
+        "part": "avatarSlot",
+        "kind": "channel",
+        "channel": "slot \"avatar\" design-time content",
+        "value": "",
+        "reason": "no defaultContent and not the default `children` slot — the canvas draws an EMPTY region (a hugging axis re-measures to Figma's 1px floor) exactly as the code surfaces render nothing: emit-react's story loop has nothing to sample and emit-html renders the wrapper empty. A placeholder here would be content no code surface has, and a minimum box would be geometry no surface declares. Declare `slot.defaultContent` to give this slot design-time content on BOTH surfaces",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "metadataSlot",
+        "kind": "channel",
+        "channel": "slot \"metadata\" design-time content",
+        "value": "",
+        "reason": "no defaultContent and not the default `children` slot — the canvas draws an EMPTY region (a hugging axis re-measures to Figma's 1px floor) exactly as the code surfaces render nothing: emit-react's story loop has nothing to sample and emit-html renders the wrapper empty. A placeholder here would be content no code surface has, and a minimum box would be geometry no surface declares. Declare `slot.defaultContent` to give this slot design-time content on BOTH surfaces",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      }
+    ],
     "colW": 700
   }
 ];

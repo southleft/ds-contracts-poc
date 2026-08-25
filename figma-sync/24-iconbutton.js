@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "ds.icon-button",
     "version": "1.0.0",
     "anchorKey": "ba2cfd0b9f6f47a728081edaf340c37cdeb53123",
-    "description": "IconButton — generated from contract ds.icon-button v1.0.0 † (3 code-only facts — see plugin report)",
+    "description": "IconButton — generated from contract ds.icon-button v1.0.0 † (4 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -541,6 +541,17 @@ const COMPONENTS = [
       "element": "button"
     },
     "codeOnlyFacts": [
+      {
+        "part": "iconSlot",
+        "kind": "channel",
+        "channel": "slot \"icon\" design-time content",
+        "value": "",
+        "reason": "no defaultContent and not the default `children` slot — the canvas draws an EMPTY region (a hugging axis re-measures to Figma's 1px floor) exactly as the code surfaces render nothing: emit-react's story loop has nothing to sample and emit-html renders the wrapper empty. A placeholder here would be content no code surface has, and a minimum box would be geometry no surface declares. Declare `slot.defaultContent` to give this slot design-time content on BOTH surfaces",
+        "variants": {
+          "count": 12,
+          "of": 12
+        }
+      },
       {
         "part": "root",
         "kind": "channel",

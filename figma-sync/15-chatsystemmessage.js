@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "ds.chat-system-message",
     "version": "1.0.0",
     "anchorKey": "2c5056fcf5f0b075ec7be6019f20eb8cdc9d5efb",
-    "description": "ChatSystemMessage — generated from contract ds.chat-system-message v1.0.0",
+    "description": "ChatSystemMessage — generated from contract ds.chat-system-message v1.0.0 † (1 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -152,6 +152,19 @@ const COMPONENTS = [
     "semantics": {
       "element": "div"
     },
+    "codeOnlyFacts": [
+      {
+        "part": "iconSlot",
+        "kind": "channel",
+        "channel": "slot \"icon\" design-time content",
+        "value": "",
+        "reason": "no defaultContent and not the default `children` slot — the canvas draws an EMPTY region (a hugging axis re-measures to Figma's 1px floor) exactly as the code surfaces render nothing: emit-react's story loop has nothing to sample and emit-html renders the wrapper empty. A placeholder here would be content no code surface has, and a minimum box would be geometry no surface declares. Declare `slot.defaultContent` to give this slot design-time content on BOTH surfaces",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      }
+    ],
     "colW": 380
   }
 ];
