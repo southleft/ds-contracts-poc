@@ -297,9 +297,9 @@
     "combos": 1,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 796,
+      "cellsCompared": 832,
       "cellsEqual": 748,
-      "pctEqual": 93.96984924623115,
+      "pctEqual": 89.90384615384616,
       "rowsFullyEqual": 0,
       "rows": 4
     },
@@ -325,7 +325,7 @@
       "mintedLeavesUnfolded": 42,
       "baseBindings": 156,
       "stateBindings": 2,
-      "codeOnlyChannels": 13,
+      "codeOnlyChannels": 25,
       "overflowBindings": 2,
       "folds": 160
     },
@@ -334,34 +334,54 @@
         "key": "__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 12,
+        "channelsMismatched": 21,
         "unscorable": "no-original"
       },
       {
         "key": "__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 12,
+        "channelsMismatched": 21,
         "unscorable": "no-original"
       },
       {
         "key": "__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 12,
+        "channelsMismatched": 21,
         "unscorable": "no-original"
       },
       {
         "key": "__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 12,
+        "channelsMismatched": 21,
         "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
       [
+        "root.position-anchor",
+        4
+      ],
+      [
+        "tablepagination-toolbar.position-anchor",
+        4
+      ],
+      [
         "tablepagination-spacer.flex-basis",
+        4
+      ],
+      [
+        "tablepagination-spacer.position-anchor",
+        4
+      ],
+      [
+        "label.position-anchor",
+        4
+      ],
+      [
+        "inputbase-root.position-anchor",
         4
       ],
       [
@@ -370,6 +390,10 @@
       ],
       [
         "label-2.animation-name",
+        4
+      ],
+      [
+        "label-2.position-anchor",
         4
       ],
       [
@@ -395,35 +419,35 @@
       [
         "select-nativeinput.border-right-style",
         4
-      ],
-      [
-        "select-nativeinput.border-right-width",
-        4
-      ],
-      [
-        "select-nativeinput.border-top-style",
-        4
-      ],
-      [
-        "select-nativeinput.border-top-width",
-        4
       ]
     ],
     "namedLosses": [
       "overflow: label-2.outline-width [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: label-2.outline-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "code-only: root.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: tablepagination-toolbar.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: tablepagination-spacer.flex-basis — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: tablepagination-spacer.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: label.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: inputbase-root.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-2.animation-duration — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-2.animation-name — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label-2.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-2.text-align-last — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: select-nativeinput.border-bottom-style — declared-channel value outside the bounded grammar — named residue (v15)",
       "code-only: select-nativeinput.border-left-style — declared-channel value outside the bounded grammar — named residue (v15)",
       "code-only: select-nativeinput.border-right-style — declared-channel value outside the bounded grammar — named residue (v15)",
       "code-only: select-nativeinput.border-top-style — declared-channel value outside the bounded grammar — named residue (v15)",
+      "code-only: select-nativeinput.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: icon.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: icon.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: label-3.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: label-3.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: tablepagination-actions.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: buttonbase-root.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: buttonbase-root.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: buttonbase-root-2.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: buttonbase-root-2.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],
     "unresolvedTokenRefs": {
@@ -438,17 +462,47 @@
     "rows": [
       {
         "key": "__default",
-        "channelsCompared": 199,
+        "channelsCompared": 208,
         "channelsEqual": 187,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "tablepagination-toolbar",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
             "part": "tablepagination-spacer",
             "channel": "flex-basis",
             "ours": "auto",
             "theirs": "100%"
+          },
+          {
+            "part": "tablepagination-spacer",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "inputbase-root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -461,6 +515,12 @@
             "channel": "animation-name",
             "ours": "none",
             "theirs": "mui-auto-fill-cancel"
+          },
+          {
+            "part": "label-2",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -515,23 +575,71 @@
             "channel": "border-top-width",
             "ours": "0px",
             "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "label-3",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "tablepagination-actions",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "__hover",
-        "channelsCompared": 199,
+        "channelsCompared": 208,
         "channelsEqual": 187,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "tablepagination-toolbar",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
             "part": "tablepagination-spacer",
             "channel": "flex-basis",
             "ours": "auto",
             "theirs": "100%"
+          },
+          {
+            "part": "tablepagination-spacer",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "inputbase-root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -544,6 +652,12 @@
             "channel": "animation-name",
             "ours": "none",
             "theirs": "mui-auto-fill-cancel"
+          },
+          {
+            "part": "label-2",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -598,23 +712,71 @@
             "channel": "border-top-width",
             "ours": "0px",
             "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "label-3",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "tablepagination-actions",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "__focus-visible",
-        "channelsCompared": 199,
+        "channelsCompared": 208,
         "channelsEqual": 187,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "tablepagination-toolbar",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
             "part": "tablepagination-spacer",
             "channel": "flex-basis",
             "ours": "auto",
             "theirs": "100%"
+          },
+          {
+            "part": "tablepagination-spacer",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "inputbase-root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -627,6 +789,12 @@
             "channel": "animation-name",
             "ours": "none",
             "theirs": "mui-auto-fill-cancel"
+          },
+          {
+            "part": "label-2",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -681,23 +849,71 @@
             "channel": "border-top-width",
             "ours": "0px",
             "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "label-3",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "tablepagination-actions",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "__active",
-        "channelsCompared": 199,
+        "channelsCompared": 208,
         "channelsEqual": 187,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "tablepagination-toolbar",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
             "part": "tablepagination-spacer",
             "channel": "flex-basis",
             "ours": "auto",
             "theirs": "100%"
+          },
+          {
+            "part": "tablepagination-spacer",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "inputbase-root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -710,6 +926,12 @@
             "channel": "animation-name",
             "ours": "none",
             "theirs": "mui-auto-fill-cancel"
+          },
+          {
+            "part": "label-2",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -764,6 +986,24 @@
             "channel": "border-top-width",
             "ours": "0px",
             "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "label-3",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "tablepagination-actions",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"

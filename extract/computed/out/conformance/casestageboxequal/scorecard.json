@@ -6,8 +6,8 @@
   "combos": 1,
   "interactions": 4,
   "computed": {
-    "cellsCompared": 24,
-    "cellsEqual": 24,
+    "cellsCompared": 68,
+    "cellsEqual": 68,
     "pctEqual": 100,
     "rowsFullyEqual": 4,
     "rows": 4
@@ -30,13 +30,13 @@
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
-    "mintedLeaves": 5,
-    "mintedLeavesUnfolded": 5,
-    "baseBindings": 5,
+    "mintedLeaves": 7,
+    "mintedLeavesUnfolded": 7,
+    "baseBindings": 10,
     "stateBindings": 0,
     "codeOnlyChannels": 0,
     "overflowBindings": 0,
-    "folds": 0
+    "folds": 6
   },
   "worstRows": [
     {
@@ -78,16 +78,16 @@
   "rows": [
     {
       "key": "__default",
-      "channelsCompared": 6,
-      "channelsEqual": 6,
+      "channelsCompared": 17,
+      "channelsEqual": 17,
       "pctExact": 60,
       "pctAA": 60,
       "mismatches": []
     },
     {
       "key": "__hover",
-      "channelsCompared": 6,
-      "channelsEqual": 6,
+      "channelsCompared": 17,
+      "channelsEqual": 17,
       "pctExact": 60,
       "pctAA": 60,
       "mismatches": [],
@@ -95,16 +95,16 @@
     },
     {
       "key": "__focus-visible",
-      "channelsCompared": 6,
-      "channelsEqual": 6,
+      "channelsCompared": 17,
+      "channelsEqual": 17,
       "pctExact": 60,
       "pctAA": 60,
       "mismatches": []
     },
     {
       "key": "__active",
-      "channelsCompared": 6,
-      "channelsEqual": 6,
+      "channelsCompared": 17,
+      "channelsEqual": 17,
       "pctExact": 60,
       "pctAA": 60,
       "mismatches": [],

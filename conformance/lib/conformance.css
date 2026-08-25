@@ -68,6 +68,8 @@
 @import '../cases/nonpainting-text-display-none/case.css';
 @import '../cases/nonpainting-text-visibility-hidden/case.css';
 @import '../cases/oklch-color/case.css';
+@import '../cases/page-global-star-rule/case.css';
+@import '../cases/page-inherited-ink/case.css';
 @import '../cases/percentage-padding/case.css';
 @import '../cases/position-absolute-insets/case.css';
 @import '../cases/position-fixed/case.css';

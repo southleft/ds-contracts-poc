@@ -1,0 +1,18 @@
+{
+  "id": "page-global-star-rule",
+  "feature": "cascade",
+  "construct": "* { border-color: var(--cf-color-secondary) } — a PAGE-GLOBAL authored declaration, with the element's border-width and border-style declared locally and its colour reaching it only through the universal rule",
+  "why": "The shadcn Input, verbatim. shadcn ships `* { border-color: var(--border) }`, and the capture harness renders its control elements INSIDE the same document, so the bare control carries the same colour. The control-element delta then compared the Input's real border-top-color EQUAL to the control and dropped it as 'not a fact of this component', while border-top-width: 1px (0px on the control) shipped — a 1px border with no colour, which paints nothing. Nothing named the loss. The fixture had no page-global rule of any kind, so the whole defect class was outside its denominator.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.a.tokens.border-top-color",
+  "observable": {
+    "part": "a",
+    "channel": "border-top-color",
+    "capturedValue": "rgb(102, 51, 153)"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "the 1px stroke is drawn in the authored colour; without it the canvas draws a stroke with no paint"
+  }
+}

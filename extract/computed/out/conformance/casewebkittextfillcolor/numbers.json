@@ -14,8 +14,8 @@
   "folds": {
     "count": 0,
     "receipts": [],
-    "mintedLeavesUnfolded": 4,
-    "mintedLeavesFolded": 4
+    "mintedLeavesUnfolded": 5,
+    "mintedLeavesFolded": 5
   },
   "bound": {
     "cellsChecked": 0,
@@ -24,7 +24,7 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 4,
+    "leaves": 5,
     "baseBindings": 13,
     "stateBindings": 0,
     "byShape": {

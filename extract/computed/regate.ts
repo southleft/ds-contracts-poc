@@ -50,6 +50,7 @@ import {
   prepareMint,
   pseudoFindings,
   styledChannels,
+  uaStyles,
 } from './fuse.js';
 import { reconstructCaptures, type CapturedTruthFile } from './replay.js';
 import { normalizeValue } from './lib.js';
@@ -212,6 +213,8 @@ async function main() {
     const sweep: SweepResult = {
       captures,
       controls: truth.controls,
+      uaControls: truth.uaControls ?? {},
+      uaBaselineBrowser: String(truth._provenance.uaBaselineBrowser ?? truth._provenance.browser ?? 'committed'),
       allProps: truth._provenance.channels,
       // Same rule as the read-boundary receipts below: an offline re-fuse has
       // no browser to ask which stylesheets were unreadable, so this is EMPTY,
@@ -245,7 +248,7 @@ async function main() {
       viewport: cfg.browser.viewport,
       stage: stageFor(cfg, comp),
       portaled: comp.portalCapture === true,
-    });
+    }, uaStyles(truth));
 
     const folds = detectFolds(aligned, styled, styledReceipts);
     const { rows: boundRows } = await boundCheck(aligned, comp, space, probeToken, promotion.contract);

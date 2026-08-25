@@ -82,9 +82,9 @@
     "combos": 5,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 400,
+      "cellsCompared": 425,
       "cellsEqual": 380,
-      "pctEqual": 95,
+      "pctEqual": 89.41176470588235,
       "rowsFullyEqual": 0,
       "rows": 20
     },
@@ -110,7 +110,7 @@
       "mintedLeavesUnfolded": 20,
       "baseBindings": 34,
       "stateBindings": 0,
-      "codeOnlyChannels": 5,
+      "codeOnlyChannels": 10,
       "overflowBindings": 0,
       "folds": 20
     },
@@ -119,35 +119,35 @@
         "key": "xs__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 4,
+        "channelsMismatched": 9,
         "unscorable": "no-original"
       },
       {
         "key": "sm__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 4,
+        "channelsMismatched": 9,
         "unscorable": "no-original"
       },
       {
         "key": "md__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 4,
+        "channelsMismatched": 9,
         "unscorable": "no-original"
       },
       {
         "key": "lg__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 4,
+        "channelsMismatched": 9,
         "unscorable": "no-original"
       },
       {
         "key": "xl__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 4,
+        "channelsMismatched": 9,
         "unscorable": "no-original"
       },
       {
@@ -178,7 +178,15 @@
         5
       ],
       [
+        "root.position-anchor",
+        5
+      ],
+      [
         "backdrop-root.position",
+        5
+      ],
+      [
+        "backdrop-root.position-anchor",
         5
       ],
       [
@@ -186,16 +194,33 @@
         5
       ],
       [
+        "dialog-container.position-anchor",
+        5
+      ],
+      [
         "dialog-paper.max-height",
+        5
+      ],
+      [
+        "dialog-paper.position-anchor",
+        5
+      ],
+      [
+        "label.position-anchor",
         5
       ]
     ],
     "namedLosses": [
       "code-only: root.position — declared-channel value outside the bounded grammar — named residue (v15)",
+      "code-only: root.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: backdrop-root.position — declared-channel value outside the bounded grammar — named residue (v15)",
+      "code-only: backdrop-root.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: backdrop-root.z-index — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: dialog-container.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: dialog-paper.max-height — declared-channel value outside the bounded grammar — named residue (v15)",
-      "code-only: label.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+      "code-only: dialog-paper.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],
     "unresolvedTokenRefs": {
       "count": 0,
@@ -209,7 +234,7 @@
     "rows": [
       {
         "key": "xs__default",
-        "channelsCompared": 80,
+        "channelsCompared": 85,
         "channelsEqual": 76,
         "pctExact": null,
         "pctAA": null,
@@ -222,10 +247,22 @@
             "theirs": "fixed"
           },
           {
+            "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
             "part": "backdrop-root",
             "channel": "position",
             "ours": "static",
             "theirs": "fixed"
+          },
+          {
+            "part": "backdrop-root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "backdrop-root",
@@ -234,10 +271,28 @@
             "theirs": "-1"
           },
           {
+            "part": "dialog-container",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
             "part": "dialog-paper",
             "channel": "max-height",
             "ours": "none",
             "theirs": "calc(100% - 64px)"
+          },
+          {
+            "part": "dialog-paper",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -274,7 +329,7 @@
       },
       {
         "key": "sm__default",
-        "channelsCompared": 80,
+        "channelsCompared": 85,
         "channelsEqual": 76,
         "pctExact": null,
         "pctAA": null,
@@ -287,10 +342,22 @@
             "theirs": "fixed"
           },
           {
+            "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
             "part": "backdrop-root",
             "channel": "position",
             "ours": "static",
             "theirs": "fixed"
+          },
+          {
+            "part": "backdrop-root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "backdrop-root",
@@ -299,10 +366,28 @@
             "theirs": "-1"
           },
           {
+            "part": "dialog-container",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
             "part": "dialog-paper",
             "channel": "max-height",
             "ours": "none",
             "theirs": "calc(100% - 64px)"
+          },
+          {
+            "part": "dialog-paper",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -339,7 +424,7 @@
       },
       {
         "key": "md__default",
-        "channelsCompared": 80,
+        "channelsCompared": 85,
         "channelsEqual": 76,
         "pctExact": null,
         "pctAA": null,
@@ -352,10 +437,22 @@
             "theirs": "fixed"
           },
           {
+            "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
             "part": "backdrop-root",
             "channel": "position",
             "ours": "static",
             "theirs": "fixed"
+          },
+          {
+            "part": "backdrop-root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "backdrop-root",
@@ -364,10 +461,28 @@
             "theirs": "-1"
           },
           {
+            "part": "dialog-container",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
             "part": "dialog-paper",
             "channel": "max-height",
             "ours": "none",
             "theirs": "calc(100% - 64px)"
+          },
+          {
+            "part": "dialog-paper",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -404,7 +519,7 @@
       },
       {
         "key": "lg__default",
-        "channelsCompared": 80,
+        "channelsCompared": 85,
         "channelsEqual": 76,
         "pctExact": null,
         "pctAA": null,
@@ -417,10 +532,22 @@
             "theirs": "fixed"
           },
           {
+            "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
             "part": "backdrop-root",
             "channel": "position",
             "ours": "static",
             "theirs": "fixed"
+          },
+          {
+            "part": "backdrop-root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "backdrop-root",
@@ -429,10 +556,28 @@
             "theirs": "-1"
           },
           {
+            "part": "dialog-container",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
             "part": "dialog-paper",
             "channel": "max-height",
             "ours": "none",
             "theirs": "calc(100% - 64px)"
+          },
+          {
+            "part": "dialog-paper",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -469,7 +614,7 @@
       },
       {
         "key": "xl__default",
-        "channelsCompared": 80,
+        "channelsCompared": 85,
         "channelsEqual": 76,
         "pctExact": null,
         "pctAA": null,
@@ -482,10 +627,22 @@
             "theirs": "fixed"
           },
           {
+            "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
             "part": "backdrop-root",
             "channel": "position",
             "ours": "static",
             "theirs": "fixed"
+          },
+          {
+            "part": "backdrop-root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "backdrop-root",
@@ -494,10 +651,28 @@
             "theirs": "-1"
           },
           {
+            "part": "dialog-container",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
             "part": "dialog-paper",
             "channel": "max-height",
             "ours": "none",
             "theirs": "calc(100% - 64px)"
+          },
+          {
+            "part": "dialog-paper",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"

@@ -6,8 +6,10 @@
   "skips": [
     "root.padding-left: source declares `calc(var(--cf-space-2) * 2)` — a calc() over var(--cf-space-2). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost."
   ],
-  "shorthandCeiling": 0,
-  "shorthandSkips": [],
+  "shorthandCeiling": 1,
+  "shorthandSkips": [
+    "root.border-color: SHORTHAND carrying var(--cf-color-secondary) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
   "calcDeclarations": 1,
   "calcCeiling": 1,
   "stylesheetCeiling": 0,

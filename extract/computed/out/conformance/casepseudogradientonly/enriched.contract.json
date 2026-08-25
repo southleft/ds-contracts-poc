@@ -23,7 +23,12 @@
       },
       "tokens": {
         "background-color": "{imported.case-pseudo-gradient-only.root.background-color}",
+        "border-bottom-color": "{imported.shared.color-663399}",
+        "border-left-color": "{imported.shared.color-663399}",
+        "border-right-color": "{imported.shared.color-663399}",
+        "border-top-color": "{imported.shared.color-663399}",
         "bottom": "{imported.shared.size-0}",
+        "color": "{imported.case-pseudo-gradient-only.root.color}",
         "font-size": "{imported.case-pseudo-gradient-only.root.font-size}",
         "font-weight": "{imported.case-pseudo-gradient-only.root.font-weight}",
         "height": "{imported.case-pseudo-gradient-only.root.height}",

@@ -6,9 +6,9 @@
   "combos": 1,
   "interactions": 4,
   "computed": {
-    "cellsCompared": 48,
-    "cellsEqual": 32,
-    "pctEqual": 66.66666666666667,
+    "cellsCompared": 92,
+    "cellsEqual": 76,
+    "pctEqual": 82.6086956521739,
     "rowsFullyEqual": 0,
     "rows": 4
   },
@@ -23,43 +23,43 @@
       "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
     },
     "meanExact": 13.125,
-    "meanAA": 0.4459635416666667,
-    "maxAA": 0.4459635416666667
+    "meanAA": 0.4231770833333333,
+    "maxAA": 0.4231770833333333
   },
   "fusion": {
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
-    "mintedLeaves": 6,
-    "mintedLeavesUnfolded": 6,
-    "baseBindings": 6,
+    "mintedLeaves": 8,
+    "mintedLeavesUnfolded": 8,
+    "baseBindings": 11,
     "stateBindings": 0,
     "codeOnlyChannels": 5,
     "overflowBindings": 0,
-    "folds": 0
+    "folds": 6
   },
   "worstRows": [
     {
       "key": "__default",
-      "pctAA": 0.4459635416666667,
+      "pctAA": 0.4231770833333333,
       "pctExact": 13.125,
       "channelsMismatched": 4
     },
     {
       "key": "__hover",
-      "pctAA": 0.4459635416666667,
+      "pctAA": 0.4231770833333333,
       "pctExact": 13.125,
       "channelsMismatched": 4
     },
     {
       "key": "__focus-visible",
-      "pctAA": 0.4459635416666667,
+      "pctAA": 0.4231770833333333,
       "pctExact": 13.125,
       "channelsMismatched": 4
     },
     {
       "key": "__active",
-      "pctAA": 0.4459635416666667,
+      "pctAA": 0.4231770833333333,
       "pctExact": 13.125,
       "channelsMismatched": 4
     }
@@ -101,10 +101,10 @@
   "rows": [
     {
       "key": "__default",
-      "channelsCompared": 12,
-      "channelsEqual": 8,
+      "channelsCompared": 23,
+      "channelsEqual": 19,
       "pctExact": 13.125,
-      "pctAA": 0.4459635416666667,
+      "pctAA": 0.4231770833333333,
       "mismatches": [
         {
           "part": "root",
@@ -134,10 +134,10 @@
     },
     {
       "key": "__hover",
-      "channelsCompared": 12,
-      "channelsEqual": 8,
+      "channelsCompared": 23,
+      "channelsEqual": 19,
       "pctExact": 13.125,
-      "pctAA": 0.4459635416666667,
+      "pctAA": 0.4231770833333333,
       "mismatches": [
         {
           "part": "root",
@@ -168,10 +168,10 @@
     },
     {
       "key": "__focus-visible",
-      "channelsCompared": 12,
-      "channelsEqual": 8,
+      "channelsCompared": 23,
+      "channelsEqual": 19,
       "pctExact": 13.125,
-      "pctAA": 0.4459635416666667,
+      "pctAA": 0.4231770833333333,
       "mismatches": [
         {
           "part": "root",
@@ -201,10 +201,10 @@
     },
     {
       "key": "__active",
-      "channelsCompared": 12,
-      "channelsEqual": 8,
+      "channelsCompared": 23,
+      "channelsEqual": 19,
       "pctExact": 13.125,
-      "pctAA": 0.4459635416666667,
+      "pctAA": 0.4231770833333333,
       "mismatches": [
         {
           "part": "root",

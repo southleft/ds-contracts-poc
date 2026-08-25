@@ -21,6 +21,11 @@
         "font-family": "monospace"
       },
       "tokens": {
+        "border-bottom-color": "{imported.shared.color-663399}",
+        "border-left-color": "{imported.shared.color-663399}",
+        "border-right-color": "{imported.shared.color-663399}",
+        "border-top-color": "{imported.shared.color-663399}",
+        "color": "{imported.case-pseudo-selection.root.color}",
         "font-size": "{imported.case-pseudo-selection.root.font-size}",
         "font-weight": "{imported.case-pseudo-selection.root.font-weight}"
       }

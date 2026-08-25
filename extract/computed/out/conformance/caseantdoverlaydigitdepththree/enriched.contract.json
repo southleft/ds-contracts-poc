@@ -33,8 +33,12 @@
           },
           "tokens": {
             "background-color": "{imported.case-antd-overlay-digit-depth-three.label.background-color}",
+            "border-bottom-color": "{imported.shared.color-663399}",
             "border-bottom-left-radius": "{imported.shared.size-4}",
             "border-bottom-right-radius": "{imported.shared.size-4}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
             "border-top-left-radius": "{imported.shared.size-4}",
             "border-top-right-radius": "{imported.shared.size-4}",
             "color": "{imported.shared.color-ffffff}",
@@ -91,6 +95,10 @@
                         "text-wrap-mode": "nowrap"
                       },
                       "tokens": {
+                        "border-bottom-color": "{imported.shared.color-663399}",
+                        "border-left-color": "{imported.shared.color-663399}",
+                        "border-right-color": "{imported.shared.color-663399}",
+                        "border-top-color": "{imported.shared.color-663399}",
                         "color": "{imported.shared.color-ffffff}",
                         "font-size": "{imported.shared.size-12}",
                         "font-weight": "{imported.case-antd-overlay-digit-depth-three.label-2.font-weight}",
@@ -101,6 +109,10 @@
                     }
                   },
                   "tokens": {
+                    "border-bottom-color": "{imported.shared.color-663399}",
+                    "border-left-color": "{imported.shared.color-663399}",
+                    "border-right-color": "{imported.shared.color-663399}",
+                    "border-top-color": "{imported.shared.color-663399}",
                     "color": "{imported.shared.color-ffffff}",
                     "font-size": "{imported.shared.size-12}",
                     "height": "{imported.shared.size-20}",
@@ -112,6 +124,10 @@
                 }
               },
               "tokens": {
+                "border-bottom-color": "{imported.shared.color-663399}",
+                "border-left-color": "{imported.shared.color-663399}",
+                "border-right-color": "{imported.shared.color-663399}",
+                "border-top-color": "{imported.shared.color-663399}",
                 "color": "{imported.shared.color-ffffff}",
                 "font-size": "{imported.shared.size-12}",
                 "line-height": "{imported.shared.size-20}",
@@ -122,8 +138,12 @@
           },
           "tokens": {
             "background-color": "{imported.case-antd-overlay-digit-depth-three.b.background-color}",
+            "border-bottom-color": "{imported.shared.color-663399}",
             "border-bottom-left-radius": "{imported.shared.size-10}",
             "border-bottom-right-radius": "{imported.shared.size-10}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
             "border-top-left-radius": "{imported.shared.size-10}",
             "border-top-right-radius": "{imported.shared.size-10}",
             "bottom": "{imported.shared.size-12}",
@@ -147,7 +167,12 @@
         }
       },
       "tokens": {
+        "border-bottom-color": "{imported.shared.color-663399}",
+        "border-left-color": "{imported.shared.color-663399}",
+        "border-right-color": "{imported.shared.color-663399}",
+        "border-top-color": "{imported.shared.color-663399}",
         "bottom": "{imported.shared.size-0}",
+        "color": "{imported.case-antd-overlay-digit-depth-three.root.color}",
         "font-size": "{imported.shared.size-12}",
         "height": "{imported.case-antd-overlay-digit-depth-three.root.height}",
         "left": "{imported.shared.size-0}",

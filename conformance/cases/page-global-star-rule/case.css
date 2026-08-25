@@ -1,0 +1,14 @@
+/* PAGE-GLOBAL BY CONSTRUCTION — that is the whole construct.
+ *
+ * shadcn ships `* { border-color: var(--border) }` in its base layer. The rule
+ * is not scoped to a component: it lands on every element in the document,
+ * INCLUDING the bare control elements the capture harness renders beside the
+ * component. This case ships the same shape so the fixture can measure whether
+ * a page-global authored value survives the control-element delta. */
+* { border-color: var(--cf-color-secondary); }
+
+[data-cf="page-global-star-rule"] { display: flex; }
+/* The case declares the WIDTH and the STYLE locally and never the colour —
+ * the colour reaches this element only through the page-global rule above,
+ * exactly as shadcn's Input gets its border colour. */
+[data-cf="page-global-star-rule"] .cf-a { width: 40px; height: 16px; border-width: 1px; border-style: solid; }

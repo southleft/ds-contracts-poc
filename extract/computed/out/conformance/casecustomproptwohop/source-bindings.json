@@ -4,10 +4,12 @@
   "varPrefix": "--cf-",
   "facts": [],
   "skips": [
-    "root.color: candidate --cf-hop-b → \"hop-b\" = #123456 (value MATCHES the computed value) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind. The VALUE is right and only the NAME is unrecoverable: this is the shape of a semantic-over-primitive INDIRECTION (the referenced custom property is itself defined as var(<primitive>)), and the reader follows exactly ONE hop — the primitive behind the alias is never reached."
+    "root.color: candidates --cf-hop-a → \"hop-a\" = #123456 (value MATCHES the computed value); --cf-hop-b → \"hop-b\" = #123456 (value MATCHES the computed value) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind. The VALUE is right and only the NAME is unrecoverable: this is the shape of a semantic-over-primitive INDIRECTION (the referenced custom property is itself defined as var(<primitive>)), and the reader follows exactly ONE hop — the primitive behind the alias is never reached."
   ],
-  "shorthandCeiling": 0,
-  "shorthandSkips": [],
+  "shorthandCeiling": 1,
+  "shorthandSkips": [
+    "root.border-color: SHORTHAND carrying var(--cf-color-secondary) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
   "calcDeclarations": 0,
   "calcCeiling": 0,
   "stylesheetCeiling": 0,

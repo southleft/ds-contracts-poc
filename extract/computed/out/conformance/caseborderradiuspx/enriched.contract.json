@@ -22,10 +22,15 @@
       },
       "tokens": {
         "background-color": "{imported.case-border-radius-px.root.background-color}",
+        "border-bottom-color": "{imported.shared.color-663399}",
         "border-bottom-left-radius": "{imported.shared.size-6}",
         "border-bottom-right-radius": "{imported.shared.size-6}",
+        "border-left-color": "{imported.shared.color-663399}",
+        "border-right-color": "{imported.shared.color-663399}",
+        "border-top-color": "{imported.shared.color-663399}",
         "border-top-left-radius": "{imported.shared.size-6}",
         "border-top-right-radius": "{imported.shared.size-6}",
+        "color": "{imported.case-border-radius-px.root.color}",
         "font-size": "{imported.case-border-radius-px.root.font-size}",
         "font-weight": "{imported.case-border-radius-px.root.font-weight}"
       }

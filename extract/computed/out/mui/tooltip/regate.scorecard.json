@@ -77,9 +77,9 @@
     "combos": 2,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 121,
+      "cellsCompared": 126,
       "cellsEqual": 110,
-      "pctEqual": 90.9090909090909,
+      "pctEqual": 87.3015873015873,
       "rowsFullyEqual": 0,
       "rows": 8
     },
@@ -105,7 +105,7 @@
       "mintedLeavesUnfolded": 26,
       "baseBindings": 40,
       "stateBindings": 0,
-      "codeOnlyChannels": 9,
+      "codeOnlyChannels": 12,
       "overflowBindings": 2,
       "folds": 20
     },
@@ -114,14 +114,14 @@
         "key": "on__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 9,
+        "channelsMismatched": 12,
         "unscorable": "no-original"
       },
       {
         "key": "off__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 2,
+        "channelsMismatched": 4,
         "unscorable": "no-original"
       },
       {
@@ -169,7 +169,15 @@
     ],
     "topMismatchedChannels": [
       [
+        "root.position-anchor",
+        2
+      ],
+      [
         "label.overflow-wrap",
+        2
+      ],
+      [
+        "label.position-anchor",
         2
       ],
       [
@@ -203,21 +211,28 @@
       [
         "tooltip-arrow.overflow-wrap",
         1
+      ],
+      [
+        "tooltip-arrow.position-anchor",
+        1
       ]
     ],
     "namedLosses": [
       "promotion: pseudo-decor-outside-grammar: tooltip-arrow::before paints at position:static (11x7.79688, opacity 1) — the bounded decor grammar reads position:absolute boxes only; an in-flow decor box is NOT promoted and NOT on the canvas",
       "overflow: root.height — presence-prop-driven styling (arrow) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (arrow present) is not",
       "overflow: label.margin-bottom — presence-prop-driven styling (arrow) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (arrow present) is not",
+      "code-only: root.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label.bottom — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label.left — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label.position — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "code-only: label.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label.right — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label.top — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: tooltip-arrow.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+      "code-only: tooltip-arrow.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: tooltip-arrow.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],
     "unresolvedTokenRefs": {
       "count": 0,
@@ -231,17 +246,29 @@
     "rows": [
       {
         "key": "off__default",
-        "channelsCompared": 47,
+        "channelsCompared": 49,
         "channelsEqual": 45,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
             "part": "label",
             "channel": "overflow-wrap",
             "ours": "normal",
             "theirs": "break-word"
+          },
+          {
+            "part": "label",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "label",
@@ -284,12 +311,18 @@
       },
       {
         "key": "on__default",
-        "channelsCompared": 74,
+        "channelsCompared": 77,
         "channelsEqual": 65,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
           {
             "part": "label",
             "channel": "bottom",
@@ -322,6 +355,12 @@
           },
           {
             "part": "label",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
             "channel": "right",
             "ours": "auto",
             "theirs": "0px"
@@ -343,6 +382,12 @@
             "channel": "overflow-wrap",
             "ours": "normal",
             "theirs": "break-word"
+          },
+          {
+            "part": "tooltip-arrow",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"

@@ -59,9 +59,9 @@
     "combos": 4,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 464,
+      "cellsCompared": 480,
       "cellsEqual": 388,
-      "pctEqual": 83.62068965517241,
+      "pctEqual": 80.83333333333333,
       "rowsFullyEqual": 0,
       "rows": 16
     },
@@ -87,7 +87,7 @@
       "mintedLeavesUnfolded": 17,
       "baseBindings": 8,
       "stateBindings": 3,
-      "codeOnlyChannels": 1,
+      "codeOnlyChannels": 2,
       "overflowBindings": 0,
       "folds": 10
     },
@@ -96,62 +96,66 @@
         "key": "unset__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 13,
+        "channelsMismatched": 14,
         "unscorable": "no-original"
       },
       {
         "key": "xs__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 13,
+        "channelsMismatched": 14,
         "unscorable": "no-original"
       },
       {
         "key": "sm__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 13,
+        "channelsMismatched": 14,
         "unscorable": "no-original"
       },
       {
         "key": "lg__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 13,
+        "channelsMismatched": 14,
         "unscorable": "no-original"
       },
       {
         "key": "unset__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 2,
+        "channelsMismatched": 3,
         "unscorable": "no-original"
       },
       {
         "key": "unset__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 2,
+        "channelsMismatched": 3,
         "unscorable": "no-original"
       },
       {
         "key": "unset__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 2,
+        "channelsMismatched": 3,
         "unscorable": "no-original"
       },
       {
         "key": "xs__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 2,
+        "channelsMismatched": 3,
         "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
       [
         "root.display",
+        16
+      ],
+      [
+        "root.position-anchor",
         16
       ],
       [
@@ -204,6 +208,7 @@
       ]
     ],
     "namedLosses": [
+      "code-only: root.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: root.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],
     "unresolvedTokenRefs": {
@@ -225,7 +230,7 @@
     "rows": [
       {
         "key": "unset__default",
-        "channelsCompared": 29,
+        "channelsCompared": 30,
         "channelsEqual": 27,
         "pctExact": null,
         "pctAA": null,
@@ -236,6 +241,12 @@
             "channel": "display",
             "ours": "flex",
             "theirs": "inline-flex"
+          },
+          {
+            "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "root",
@@ -248,7 +259,7 @@
       },
       {
         "key": "unset__hover",
-        "channelsCompared": 29,
+        "channelsCompared": 30,
         "channelsEqual": 27,
         "pctExact": null,
         "pctAA": null,
@@ -259,6 +270,12 @@
             "channel": "display",
             "ours": "flex",
             "theirs": "inline-flex"
+          },
+          {
+            "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "root",
@@ -271,7 +288,7 @@
       },
       {
         "key": "unset__focus-visible",
-        "channelsCompared": 29,
+        "channelsCompared": 30,
         "channelsEqual": 27,
         "pctExact": null,
         "pctAA": null,
@@ -285,6 +302,12 @@
           },
           {
             "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal"
@@ -294,7 +317,7 @@
       },
       {
         "key": "unset__active",
-        "channelsCompared": 29,
+        "channelsCompared": 30,
         "channelsEqual": 16,
         "pctExact": null,
         "pctAA": null,
@@ -353,6 +376,12 @@
             "channel": "outline-color",
             "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "root",
@@ -383,7 +412,7 @@
       },
       {
         "key": "xs__default",
-        "channelsCompared": 29,
+        "channelsCompared": 30,
         "channelsEqual": 27,
         "pctExact": null,
         "pctAA": null,
@@ -394,6 +423,12 @@
             "channel": "display",
             "ours": "flex",
             "theirs": "inline-flex"
+          },
+          {
+            "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "root",
@@ -406,7 +441,7 @@
       },
       {
         "key": "xs__hover",
-        "channelsCompared": 29,
+        "channelsCompared": 30,
         "channelsEqual": 27,
         "pctExact": null,
         "pctAA": null,
@@ -417,6 +452,12 @@
             "channel": "display",
             "ours": "flex",
             "theirs": "inline-flex"
+          },
+          {
+            "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "root",
@@ -429,7 +470,7 @@
       },
       {
         "key": "xs__focus-visible",
-        "channelsCompared": 29,
+        "channelsCompared": 30,
         "channelsEqual": 27,
         "pctExact": null,
         "pctAA": null,
@@ -443,6 +484,12 @@
           },
           {
             "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal"
@@ -452,7 +499,7 @@
       },
       {
         "key": "xs__active",
-        "channelsCompared": 29,
+        "channelsCompared": 30,
         "channelsEqual": 16,
         "pctExact": null,
         "pctAA": null,
@@ -511,6 +558,12 @@
             "channel": "outline-color",
             "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "root",
@@ -541,7 +594,7 @@
       },
       {
         "key": "sm__default",
-        "channelsCompared": 29,
+        "channelsCompared": 30,
         "channelsEqual": 27,
         "pctExact": null,
         "pctAA": null,
@@ -552,6 +605,12 @@
             "channel": "display",
             "ours": "flex",
             "theirs": "inline-flex"
+          },
+          {
+            "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "root",
@@ -564,7 +623,7 @@
       },
       {
         "key": "sm__hover",
-        "channelsCompared": 29,
+        "channelsCompared": 30,
         "channelsEqual": 27,
         "pctExact": null,
         "pctAA": null,
@@ -575,6 +634,12 @@
             "channel": "display",
             "ours": "flex",
             "theirs": "inline-flex"
+          },
+          {
+            "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "root",
@@ -587,7 +652,7 @@
       },
       {
         "key": "sm__focus-visible",
-        "channelsCompared": 29,
+        "channelsCompared": 30,
         "channelsEqual": 27,
         "pctExact": null,
         "pctAA": null,
@@ -601,6 +666,12 @@
           },
           {
             "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal"
@@ -610,7 +681,7 @@
       },
       {
         "key": "sm__active",
-        "channelsCompared": 29,
+        "channelsCompared": 30,
         "channelsEqual": 16,
         "pctExact": null,
         "pctAA": null,
@@ -669,6 +740,12 @@
             "channel": "outline-color",
             "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "root",
@@ -699,7 +776,7 @@
       },
       {
         "key": "lg__default",
-        "channelsCompared": 29,
+        "channelsCompared": 30,
         "channelsEqual": 27,
         "pctExact": null,
         "pctAA": null,
@@ -710,6 +787,12 @@
             "channel": "display",
             "ours": "flex",
             "theirs": "inline-flex"
+          },
+          {
+            "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "root",
@@ -722,7 +805,7 @@
       },
       {
         "key": "lg__hover",
-        "channelsCompared": 29,
+        "channelsCompared": 30,
         "channelsEqual": 27,
         "pctExact": null,
         "pctAA": null,
@@ -733,6 +816,12 @@
             "channel": "display",
             "ours": "flex",
             "theirs": "inline-flex"
+          },
+          {
+            "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "root",
@@ -745,7 +834,7 @@
       },
       {
         "key": "lg__focus-visible",
-        "channelsCompared": 29,
+        "channelsCompared": 30,
         "channelsEqual": 27,
         "pctExact": null,
         "pctAA": null,
@@ -759,6 +848,12 @@
           },
           {
             "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal"
@@ -768,7 +863,7 @@
       },
       {
         "key": "lg__active",
-        "channelsCompared": 29,
+        "channelsCompared": 30,
         "channelsEqual": 16,
         "pctExact": null,
         "pctAA": null,
@@ -827,6 +922,12 @@
             "channel": "outline-color",
             "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "root",

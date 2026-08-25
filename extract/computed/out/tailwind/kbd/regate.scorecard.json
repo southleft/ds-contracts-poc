@@ -27,6 +27,11 @@
       },
       {
         "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
         "channel": "font-family",
         "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, \"Helvetica Neue\", \"Noto Sans\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
       }
@@ -42,10 +47,10 @@
     "combos": 1,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 128,
-      "cellsEqual": 128,
-      "pctEqual": 100,
-      "rowsFullyEqual": 4,
+      "cellsCompared": 140,
+      "cellsEqual": 136,
+      "pctEqual": 97.14285714285714,
+      "rowsFullyEqual": 0,
       "rows": 4
     },
     "pixel": {
@@ -66,11 +71,11 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 11,
-      "mintedLeavesUnfolded": 11,
-      "baseBindings": 22,
+      "mintedLeaves": 12,
+      "mintedLeavesUnfolded": 12,
+      "baseBindings": 23,
       "stateBindings": 0,
-      "codeOnlyChannels": 0,
+      "codeOnlyChannels": 1,
       "overflowBindings": 0,
       "folds": 6
     },
@@ -79,33 +84,40 @@
         "key": "__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 0,
+        "channelsMismatched": 1,
         "unscorable": "no-original"
       },
       {
         "key": "__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 0,
+        "channelsMismatched": 1,
         "unscorable": "no-original"
       },
       {
         "key": "__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 0,
+        "channelsMismatched": 1,
         "unscorable": "no-original"
       },
       {
         "key": "__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 0,
+        "channelsMismatched": 1,
         "unscorable": "no-original"
       }
     ],
-    "topMismatchedChannels": [],
-    "namedLosses": [],
+    "topMismatchedChannels": [
+      [
+        "root.text-size-adjust",
+        4
+      ]
+    ],
+    "namedLosses": [
+      "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+    ],
     "unresolvedTokenRefs": {
       "count": 0,
       "refs": []
@@ -125,42 +137,70 @@
     "rows": [
       {
         "key": "__default",
-        "channelsCompared": 32,
-        "channelsEqual": 32,
+        "channelsCompared": 35,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "__hover",
-        "channelsCompared": 32,
-        "channelsEqual": 32,
+        "channelsCompared": 35,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "__focus-visible",
-        "channelsCompared": 32,
-        "channelsEqual": 32,
+        "channelsCompared": 35,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "__active",
-        "channelsCompared": 32,
-        "channelsEqual": 32,
+        "channelsCompared": 35,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       }
     ]

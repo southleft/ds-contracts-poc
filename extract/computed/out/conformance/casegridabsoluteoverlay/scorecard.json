@@ -6,9 +6,9 @@
   "combos": 1,
   "interactions": 4,
   "computed": {
-    "cellsCompared": 140,
-    "cellsEqual": 120,
-    "pctEqual": 85.71428571428571,
+    "cellsCompared": 272,
+    "cellsEqual": 252,
+    "pctEqual": 92.6470588235294,
     "rowsFullyEqual": 0,
     "rows": 4
   },
@@ -23,43 +23,43 @@
       "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
     },
     "meanExact": 7.496744791666667,
-    "meanAA": 0.107421875,
-    "maxAA": 0.107421875
+    "meanAA": 0.10416666666666667,
+    "maxAA": 0.10416666666666667
   },
   "fusion": {
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
-    "mintedLeaves": 15,
-    "mintedLeavesUnfolded": 15,
-    "baseBindings": 24,
+    "mintedLeaves": 17,
+    "mintedLeavesUnfolded": 17,
+    "baseBindings": 39,
     "stateBindings": 0,
     "codeOnlyChannels": 7,
     "overflowBindings": 0,
-    "folds": 0
+    "folds": 18
   },
   "worstRows": [
     {
       "key": "__default",
-      "pctAA": 0.107421875,
+      "pctAA": 0.10416666666666667,
       "pctExact": 7.496744791666667,
       "channelsMismatched": 5
     },
     {
       "key": "__hover",
-      "pctAA": 0.107421875,
+      "pctAA": 0.10416666666666667,
       "pctExact": 7.496744791666667,
       "channelsMismatched": 5
     },
     {
       "key": "__focus-visible",
-      "pctAA": 0.107421875,
+      "pctAA": 0.10416666666666667,
       "pctExact": 7.496744791666667,
       "channelsMismatched": 5
     },
     {
       "key": "__active",
-      "pctAA": 0.107421875,
+      "pctAA": 0.10416666666666667,
       "pctExact": 7.496744791666667,
       "channelsMismatched": 5
     }
@@ -91,8 +91,8 @@
     "code-only: root.display — declared-channel value outside the bounded grammar — named residue (v15)",
     "code-only: root.grid-template-columns — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: root.grid-template-rows — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: label.grid-column-start — grid placement not carried: parent root declined structured grid promotion — child \"label-2\" is auto-placed — the grid-auto-flow (row) placement-from-order fact (G5) is not promoted from the computed floor this round; the flow channel's order fact is dropped with the promotion; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-    "code-only: label.grid-row-start — grid placement not carried: parent root declined structured grid promotion — child \"label-2\" is auto-placed — the grid-auto-flow (row) placement-from-order fact (G5) is not promoted from the computed floor this round; the flow channel's order fact is dropped with the promotion; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+    "code-only: label.grid-column-start — grid placement not carried: parent root declined structured grid promotion — 1 of 2 in-flow children are auto-placed and the rest carry explicit lines — G2 pins that every direct child places explicitly OR none does (auto-flow, G5); mixing is schema-invalid; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+    "code-only: label.grid-row-start — grid placement not carried: parent root declined structured grid promotion — 1 of 2 in-flow children are auto-placed and the rest carry explicit lines — G2 pins that every direct child places explicitly OR none does (auto-flow, G5); mixing is schema-invalid; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
     "code-only: label.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-2.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
   ],
@@ -108,10 +108,10 @@
   "rows": [
     {
       "key": "__default",
-      "channelsCompared": 35,
-      "channelsEqual": 30,
+      "channelsCompared": 68,
+      "channelsEqual": 63,
       "pctExact": 7.496744791666667,
-      "pctAA": 0.107421875,
+      "pctAA": 0.10416666666666667,
       "mismatches": [
         {
           "part": "root",
@@ -147,10 +147,10 @@
     },
     {
       "key": "__hover",
-      "channelsCompared": 35,
-      "channelsEqual": 30,
+      "channelsCompared": 68,
+      "channelsEqual": 63,
       "pctExact": 7.496744791666667,
-      "pctAA": 0.107421875,
+      "pctAA": 0.10416666666666667,
       "mismatches": [
         {
           "part": "root",
@@ -186,10 +186,10 @@
     },
     {
       "key": "__focus-visible",
-      "channelsCompared": 35,
-      "channelsEqual": 30,
+      "channelsCompared": 68,
+      "channelsEqual": 63,
       "pctExact": 7.496744791666667,
-      "pctAA": 0.107421875,
+      "pctAA": 0.10416666666666667,
       "mismatches": [
         {
           "part": "root",
@@ -225,10 +225,10 @@
     },
     {
       "key": "__active",
-      "channelsCompared": 35,
-      "channelsEqual": 30,
+      "channelsCompared": 68,
+      "channelsEqual": 63,
       "pctExact": 7.496744791666667,
-      "pctAA": 0.107421875,
+      "pctAA": 0.10416666666666667,
       "mismatches": [
         {
           "part": "root",

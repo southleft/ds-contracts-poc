@@ -544,6 +544,16 @@ export function viewportDerivedRefusals(
   return { refused, receipts };
 }
 
+/** Read the UA baseline out of a committed `captured-truth.json` as flat style
+ *  maps, or `undefined` when the capture predates the baseline fix. One
+ *  spelling, so no instrument can silently read the in-page probe while the
+ *  next one reads the UA baseline. */
+export function uaStyles(truth: unknown): Record<string, StyleMap> | undefined {
+  const ua = (truth as { uaControls?: Record<string, { style: StyleMap }> } | null)?.uaControls;
+  if (!ua) return undefined;
+  return Object.fromEntries(Object.entries(ua).map(([t, n]) => [t, n.style]));
+}
+
 export function styledChannels(
   a: AlignedSweep,
   space: PropSpace,
@@ -551,6 +561,7 @@ export function styledChannels(
   allProps: string[],
   receipts: string[],
   env: FusionEnv,
+  uaControls?: Record<string, StyleMap>,
 ): Map<string, Set<string>> {
   const out = new Map<string, Set<string>>();
   // ABSOLUTE-POSITION ROUND (MUI Slider/Switch live finding): geometry
@@ -759,25 +770,96 @@ export function styledChannels(
         (p === 'width' && blockRootAdmit.has(pi)) ||
         tokenNamed(p));
     const tag = a.baseFlat[pi].node.tag;
-    const ctrl = controls[tag] ?? controls['span'];
+    const pageCtrl = controls[tag] ?? controls['span'];
     if (!controls[tag]) receipts.push(`control-fallback: no control for <${tag}> — span control used (part ${a.partNames[pi]})`);
+    // ═══ THE BASELINE THIS DOOR SUBTRACTS (door `fuse.control-element-delta`).
+    //
+    // `controls` is the IN-PAGE probe: four bare elements the harness mounts
+    // inside `mount.wrapperOpen`, in the SAME document as the component. Every
+    // page-global rule the library ships lands on them too — shadcn's
+    // `* { border-color: var(--border) }`, Polaris's provider ink, Tailwind
+    // preflight's `border-style: solid`, every library's `body` font-family.
+    // Subtracting that baseline cancels facts the LIBRARY authored, and the
+    // generated surfaces (emit-html / emit-react / the Figma mint) carry no
+    // page chrome at all, so a cancelled fact is a fact that never ships. That
+    // is the shadcn invisible Input and the inkless Polaris/Fluent text.
+    //
+    // `uaControls` is the same four elements measured on a page carrying the
+    // browser, the colour-scheme and the stage box and NOTHING the library
+    // ships (capture.captureUaControls). It is the baseline this door is
+    // ABOUT: the user agent is the only thing a generated surface inherits.
+    //
+    // TWO DELIBERATE NARROWINGS:
+    //  · CUSTOM PROPERTIES (`--*`) keep the IN-PAGE baseline. A `:root` token
+    //    block inherits onto every element in the page; against a UA baseline
+    //    every one of a library's ~90 tokens would "differ" on every part and
+    //    be carried, only to be refused downstream as "a CSS custom property,
+    //    not a styled channel". That is page noise by any definition, and a
+    //    custom property paints nothing on its own — the channels it FEEDS are
+    //    the ones this door now measures honestly.
+    //  · NO uaControls (a capture taken before this door was fixed) falls back
+    //    to the in-page probe and says so, once per part. Silence here would
+    //    make a stale capture look like a clean one.
+    const uaCtrl = uaControls ? (uaControls[tag] ?? uaControls['span']) : undefined;
+    if (uaControls && !uaControls[tag]) receipts.push(`ua-control-fallback: no UA baseline for <${tag}> — span UA control used (part ${a.partNames[pi]})`);
+    const ctrl = uaCtrl ?? pageCtrl;
+    const baseline = (q: string): string | undefined => (uaCtrl && !q.startsWith('--') ? uaCtrl[q] : pageCtrl[q]);
+    // The channels where the two baselines DISAGREE are exactly the channels
+    // the library declared page-globally: measured here, receipted below.
+    const pageGlobal: string[] = [];
+    const droppedAuthored: string[] = [];
+    let dropped = 0;
+    let considered = 0;
     for (const p of allProps) {
       // R4: the -webkit census runs over the SAME comparison the fusion door
       // uses (differs from the control), on the channels the door refuses.
-      if (p.startsWith('-webkit-') && a.baseFlat[pi].node.style[p] !== ctrl[p]) {
+      if (p.startsWith('-webkit-') && a.baseFlat[pi].node.style[p] !== baseline(p)) {
         (webkitStyled.get(p) ?? webkitStyled.set(p, new Set()).get(p)!).add(a.partNames[pi]);
       }
-      if (GEOMETRY_CHANNELS.has(p) && !admit(p) && a.baseFlat[pi].node.style[p] !== ctrl[p]) {
+      if (GEOMETRY_CHANNELS.has(p) && !admit(p) && a.baseFlat[pi].node.style[p] !== baseline(p)) {
         (geometryExcluded.get(a.partNames[pi]) ?? geometryExcluded.set(a.partNames[pi], new Map()).get(a.partNames[pi])!).set(p, a.baseFlat[pi].node.style[p] ?? '');
       }
       if (!admit(p)) continue;
-      if (a.baseFlat[pi].node.style[p] !== ctrl[p]) set.add(p);
+      considered++;
+      const v = a.baseFlat[pi].node.style[p];
+      if (uaCtrl && !p.startsWith('--') && v !== undefined && v === pageCtrl[p] && v !== uaCtrl[p]) {
+        pageGlobal.push(`${p}=${v} (in-page control also read ${v}; UA control reads ${uaCtrl[p] ?? '—'})`);
+      }
+      if (v !== baseline(p)) set.add(p);
       else if (resetSuppliedBorderStyle(p, a.baseFlat[pi].node.style, ctrl)) {
         set.add(p);
         receipts.push(
           `reset-supplied-border-style-admitted: ${a.partNames[pi]}.${p} = ${a.baseFlat[pi].node.style[p]} — EQUAL to the <${tag}> control, so the styled-channel door would normally drop it as "not a fact of this component". Admitted anyway because this part draws a real border (${p.replace('-style', '-width')} = ${a.baseFlat[pi].node.style[p.replace('-style', '-width')]}) and the style comes from the library's GLOBAL CSS (Tailwind preflight's \`* { border-style: solid }\` and its equivalents). The control correctly subtracts the reset; the emitted CSS does not REPRODUCE it, so without this the width and colour ship and the border paints nothing.`,
         );
+      } else {
+        dropped++;
+        // A channel the library's own stylesheet DECLARES on this element and
+        // this door still drops: the residual honest surface. `vrefs` is the
+        // CSS-vars reader's VERIFIED binding — the rule text named a token and
+        // the computed value matched it — so this is not a guess.
+        if ((a.baseFlat[pi].node.vrefs?.[p]?.length ?? 0) > 0 && !p.startsWith('--')) droppedAuthored.push(p);
       }
+    }
+    // ═══ THE DOOR LEAVES A RECEIPT WHEN IT SUBTRACTS (door register rule).
+    if (dropped > 0) {
+      receipts.push(
+        `control-equal-drop: ${a.partNames[pi]} — ${dropped} of ${considered} admitted channels compared EQUAL to the <${tag}> ${uaCtrl ? 'UA baseline control (a page carrying no library CSS)' : 'IN-PAGE control (NO UA baseline in this capture — see the fallback line below)'} and were dropped as user-agent defaults, not facts of this component`,
+      );
+    }
+    if (!uaCtrl) {
+      receipts.push(
+        `ua-baseline-missing: ${a.partNames[pi]} — this capture carries no \`uaControls\`, so the subtraction above used the IN-PAGE control, which inherits every page-global rule the library ships (\`* { border-color }\`, provider ink, preflight resets, the body font). Facts the library authored may have been cancelled; re-capture to measure honestly (door capture.control-baseline-mint)`,
+      );
+    }
+    if (pageGlobal.length > 0) {
+      receipts.push(
+        `page-global-baseline-corrected: ${a.partNames[pi]} — ${pageGlobal.length} channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: ${pageGlobal.slice(0, 24).join('; ')}${pageGlobal.length > 24 ? `; …and ${pageGlobal.length - 24} more` : ''}`,
+      );
+    }
+    if (droppedAuthored.length > 0) {
+      receipts.push(
+        `control-equal-drop-authored: ${a.partNames[pi]} — ${droppedAuthored.length} dropped channel(s) are DECLARED by the library's own stylesheet with a verified token binding, yet compute to the user-agent default: ${droppedAuthored.slice(0, 24).sort().join(', ')}${droppedAuthored.length > 24 ? `, …and ${droppedAuthored.length - 24} more` : ''}. Declaring a value the UA already produces changes nothing on the generated surface either, so the drop is sound — it is named because "equal to the UA" and "the library said nothing" are different facts`,
+      );
     }
     for (const combo of space.enumeration.combos) {
       if (!isEnabled(combo)) continue;

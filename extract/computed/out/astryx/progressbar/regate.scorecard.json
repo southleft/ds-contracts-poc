@@ -6,7 +6,122 @@
   "declared": {
     "base": [
       {
+        "part": "root",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "Figtree, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "part-0",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-0",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-0",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-0",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-0",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "part-0",
+        "channel": "font-family",
+        "value": "Figtree, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
         "part": "label",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "label",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "label",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "label",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "label",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "Figtree, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "progressbar-track",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "progressbar-track",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "progressbar-track",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "progressbar-track",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "progressbar-track",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "progressbar-track",
         "channel": "font-family",
         "value": "Figtree, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
       },
@@ -19,6 +134,36 @@
         "part": "progressbar-track",
         "channel": "overflow-y",
         "value": "hidden"
+      },
+      {
+        "part": "progressbar-fill",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "progressbar-fill",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "progressbar-fill",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "progressbar-fill",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "progressbar-fill",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "progressbar-fill",
+        "channel": "font-family",
+        "value": "Figtree, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
       },
       {
         "part": "progressbar-fill",
@@ -47,9 +192,9 @@
     "combos": 5,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 1100,
-      "cellsEqual": 580,
-      "pctEqual": 52.72727272727273,
+      "cellsCompared": 3160,
+      "cellsEqual": 2440,
+      "pctEqual": 77.21518987341773,
       "rowsFullyEqual": 0,
       "rows": 20
     },
@@ -71,69 +216,69 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 15,
-      "mintedLeavesUnfolded": 15,
-      "baseBindings": 20,
+      "mintedLeaves": 18,
+      "mintedLeavesUnfolded": 18,
+      "baseBindings": 34,
       "stateBindings": 0,
-      "codeOnlyChannels": 26,
+      "codeOnlyChannels": 36,
       "overflowBindings": 0,
-      "folds": 0
+      "folds": 50
     },
     "worstRows": [
       {
         "key": "accent__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 26,
+        "channelsMismatched": 36,
         "unscorable": "no-original"
       },
       {
         "key": "accent__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 26,
+        "channelsMismatched": 36,
         "unscorable": "no-original"
       },
       {
         "key": "accent__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 26,
+        "channelsMismatched": 36,
         "unscorable": "no-original"
       },
       {
         "key": "accent__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 26,
+        "channelsMismatched": 36,
         "unscorable": "no-original"
       },
       {
         "key": "success__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 26,
+        "channelsMismatched": 36,
         "unscorable": "no-original"
       },
       {
         "key": "success__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 26,
+        "channelsMismatched": 36,
         "unscorable": "no-original"
       },
       {
         "key": "success__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 26,
+        "channelsMismatched": 36,
         "unscorable": "no-original"
       },
       {
         "key": "success__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 26,
+        "channelsMismatched": 36,
         "unscorable": "no-original"
       }
     ],
@@ -156,6 +301,14 @@
       ],
       [
         "root.--color-warning",
+        20
+      ],
+      [
+        "root.color-scheme",
+        20
+      ],
+      [
+        "root.text-size-adjust",
         20
       ],
       [
@@ -183,19 +336,11 @@
         20
       ],
       [
-        "label.--color-accent",
+        "part-0.color-scheme",
         20
       ],
       [
-        "label.--color-background-muted",
-        20
-      ],
-      [
-        "label.--color-error",
-        20
-      ],
-      [
-        "label.--color-success",
+        "part-0.text-size-adjust",
         20
       ]
     ],
@@ -205,27 +350,37 @@
       "code-only: root.--color-error — CSS custom property, not a styled channel — `--color-error` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#a50c25, #ffc6c1)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: root.--color-success — CSS custom property, not a styled channel — `--color-success` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#007004, #9fe59b)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: root.--color-warning — CSS custom property, not a styled channel — `--color-warning` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#745b00, #fdcf4f)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "code-only: root.color-scheme — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0.--color-accent — CSS custom property, not a styled channel — `--color-accent` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `#0074e2`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: part-0.--color-background-muted — CSS custom property, not a styled channel — `--color-background-muted` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#d4d4d4, #525252)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: part-0.--color-error — CSS custom property, not a styled channel — `--color-error` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#a50c25, #ffc6c1)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: part-0.--color-success — CSS custom property, not a styled channel — `--color-success` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#007004, #9fe59b)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: part-0.--color-warning — CSS custom property, not a styled channel — `--color-warning` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#745b00, #fdcf4f)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: part-0.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-0.color-scheme — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-0.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label.--color-accent — CSS custom property, not a styled channel — `--color-accent` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `#0074e2`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: label.--color-background-muted — CSS custom property, not a styled channel — `--color-background-muted` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#d4d4d4, #525252)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: label.--color-error — CSS custom property, not a styled channel — `--color-error` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#a50c25, #ffc6c1)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: label.--color-success — CSS custom property, not a styled channel — `--color-success` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#007004, #9fe59b)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: label.--color-warning — CSS custom property, not a styled channel — `--color-warning` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#745b00, #fdcf4f)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "code-only: label.color-scheme — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: progressbar-track.--color-accent — CSS custom property, not a styled channel — `--color-accent` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `#0074e2`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: progressbar-track.--color-background-muted — CSS custom property, not a styled channel — `--color-background-muted` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#d4d4d4, #525252)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: progressbar-track.--color-error — CSS custom property, not a styled channel — `--color-error` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#a50c25, #ffc6c1)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: progressbar-track.--color-success — CSS custom property, not a styled channel — `--color-success` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#007004, #9fe59b)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: progressbar-track.--color-warning — CSS custom property, not a styled channel — `--color-warning` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#745b00, #fdcf4f)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "code-only: progressbar-track.color-scheme — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: progressbar-track.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: progressbar-fill.--color-accent — CSS custom property, not a styled channel — `--color-accent` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `#0074e2`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: progressbar-fill.--color-background-muted — CSS custom property, not a styled channel — `--color-background-muted` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#d4d4d4, #525252)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: progressbar-fill.--color-error — CSS custom property, not a styled channel — `--color-error` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#a50c25, #ffc6c1)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: progressbar-fill.--color-success — CSS custom property, not a styled channel — `--color-success` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#007004, #9fe59b)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
-      "code-only: progressbar-fill.--color-warning — CSS custom property, not a styled channel — `--color-warning` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#745b00, #fdcf4f)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one."
+      "code-only: progressbar-fill.--color-warning — CSS custom property, not a styled channel — `--color-warning` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#745b00, #fdcf4f)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "code-only: progressbar-fill.color-scheme — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: progressbar-fill.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],
     "unresolvedTokenRefs": {
       "count": 0,
@@ -239,8 +394,8 @@
     "rows": [
       {
         "key": "accent__default",
-        "channelsCompared": 55,
-        "channelsEqual": 29,
+        "channelsCompared": 158,
+        "channelsEqual": 122,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -274,6 +429,18 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "part-0",
@@ -312,6 +479,18 @@
             "theirs": "baseline"
           },
           {
+            "part": "part-0",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "part-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -342,6 +521,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-track",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -372,6 +563,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "progressbar-track",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-fill",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -400,14 +603,26 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "accent__hover",
-        "channelsCompared": 55,
-        "channelsEqual": 29,
+        "channelsCompared": 158,
+        "channelsEqual": 122,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -441,6 +656,18 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "part-0",
@@ -479,6 +706,18 @@
             "theirs": "baseline"
           },
           {
+            "part": "part-0",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "part-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -509,6 +748,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-track",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -539,6 +790,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "progressbar-track",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-fill",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -567,14 +830,26 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "accent__focus-visible",
-        "channelsCompared": 55,
-        "channelsEqual": 29,
+        "channelsCompared": 158,
+        "channelsEqual": 122,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -608,6 +883,18 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "part-0",
@@ -646,6 +933,18 @@
             "theirs": "baseline"
           },
           {
+            "part": "part-0",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "part-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -676,6 +975,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-track",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -706,6 +1017,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "progressbar-track",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-fill",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -734,14 +1057,26 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "accent__active",
-        "channelsCompared": 55,
-        "channelsEqual": 29,
+        "channelsCompared": 158,
+        "channelsEqual": 122,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -775,6 +1110,18 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "part-0",
@@ -813,6 +1160,18 @@
             "theirs": "baseline"
           },
           {
+            "part": "part-0",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "part-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -843,6 +1202,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-track",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -873,6 +1244,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "progressbar-track",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-fill",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -901,14 +1284,26 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success__default",
-        "channelsCompared": 55,
-        "channelsEqual": 29,
+        "channelsCompared": 158,
+        "channelsEqual": 122,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -942,6 +1337,18 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "part-0",
@@ -980,6 +1387,18 @@
             "theirs": "baseline"
           },
           {
+            "part": "part-0",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "part-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1010,6 +1429,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-track",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1040,6 +1471,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "progressbar-track",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-fill",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1068,14 +1511,26 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success__hover",
-        "channelsCompared": 55,
-        "channelsEqual": 29,
+        "channelsCompared": 158,
+        "channelsEqual": 122,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1109,6 +1564,18 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "part-0",
@@ -1147,6 +1614,18 @@
             "theirs": "baseline"
           },
           {
+            "part": "part-0",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "part-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1177,6 +1656,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-track",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1207,6 +1698,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "progressbar-track",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-fill",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1235,14 +1738,26 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success__focus-visible",
-        "channelsCompared": 55,
-        "channelsEqual": 29,
+        "channelsCompared": 158,
+        "channelsEqual": 122,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1276,6 +1791,18 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "part-0",
@@ -1314,6 +1841,18 @@
             "theirs": "baseline"
           },
           {
+            "part": "part-0",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "part-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1344,6 +1883,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-track",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1374,6 +1925,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "progressbar-track",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-fill",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1402,14 +1965,26 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success__active",
-        "channelsCompared": 55,
-        "channelsEqual": 29,
+        "channelsCompared": 158,
+        "channelsEqual": 122,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1443,6 +2018,18 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "part-0",
@@ -1481,6 +2068,18 @@
             "theirs": "baseline"
           },
           {
+            "part": "part-0",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "part-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1511,6 +2110,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-track",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1541,6 +2152,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "progressbar-track",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-fill",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1569,14 +2192,26 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning__default",
-        "channelsCompared": 55,
-        "channelsEqual": 29,
+        "channelsCompared": 158,
+        "channelsEqual": 122,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1610,6 +2245,18 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "#ffce2f"
+          },
+          {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "part-0",
@@ -1648,6 +2295,18 @@
             "theirs": "baseline"
           },
           {
+            "part": "part-0",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "part-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1678,6 +2337,18 @@
             "theirs": "#ffce2f"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-track",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1708,6 +2379,18 @@
             "theirs": "#ffce2f"
           },
           {
+            "part": "progressbar-track",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-fill",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1736,14 +2419,26 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "#ffce2f"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning__hover",
-        "channelsCompared": 55,
-        "channelsEqual": 29,
+        "channelsCompared": 158,
+        "channelsEqual": 122,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1777,6 +2472,18 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "#ffce2f"
+          },
+          {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "part-0",
@@ -1815,6 +2522,18 @@
             "theirs": "baseline"
           },
           {
+            "part": "part-0",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "part-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1845,6 +2564,18 @@
             "theirs": "#ffce2f"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-track",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1875,6 +2606,18 @@
             "theirs": "#ffce2f"
           },
           {
+            "part": "progressbar-track",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-fill",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1903,14 +2646,26 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "#ffce2f"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning__focus-visible",
-        "channelsCompared": 55,
-        "channelsEqual": 29,
+        "channelsCompared": 158,
+        "channelsEqual": 122,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1944,6 +2699,18 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "#ffce2f"
+          },
+          {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "part-0",
@@ -1982,6 +2749,18 @@
             "theirs": "baseline"
           },
           {
+            "part": "part-0",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "part-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2012,6 +2791,18 @@
             "theirs": "#ffce2f"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-track",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2042,6 +2833,18 @@
             "theirs": "#ffce2f"
           },
           {
+            "part": "progressbar-track",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-fill",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2070,14 +2873,26 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "#ffce2f"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning__active",
-        "channelsCompared": 55,
-        "channelsEqual": 29,
+        "channelsCompared": 158,
+        "channelsEqual": 122,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2111,6 +2926,18 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "#ffce2f"
+          },
+          {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "part-0",
@@ -2149,6 +2976,18 @@
             "theirs": "baseline"
           },
           {
+            "part": "part-0",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "part-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2179,6 +3018,18 @@
             "theirs": "#ffce2f"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-track",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2209,6 +3060,18 @@
             "theirs": "#ffce2f"
           },
           {
+            "part": "progressbar-track",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-fill",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2237,14 +3100,26 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "#ffce2f"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "neutral__default",
-        "channelsCompared": 55,
-        "channelsEqual": 29,
+        "channelsCompared": 158,
+        "channelsEqual": 122,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2278,6 +3153,18 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "part-0",
@@ -2316,6 +3203,18 @@
             "theirs": "baseline"
           },
           {
+            "part": "part-0",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "part-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2346,6 +3245,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-track",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2376,6 +3287,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "progressbar-track",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-fill",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2404,14 +3327,26 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "neutral__hover",
-        "channelsCompared": 55,
-        "channelsEqual": 29,
+        "channelsCompared": 158,
+        "channelsEqual": 122,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2445,6 +3380,18 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "part-0",
@@ -2483,6 +3430,18 @@
             "theirs": "baseline"
           },
           {
+            "part": "part-0",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "part-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2513,6 +3472,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-track",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2543,6 +3514,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "progressbar-track",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-fill",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2571,14 +3554,26 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "neutral__focus-visible",
-        "channelsCompared": 55,
-        "channelsEqual": 29,
+        "channelsCompared": 158,
+        "channelsEqual": 122,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2612,6 +3607,18 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "part-0",
@@ -2650,6 +3657,18 @@
             "theirs": "baseline"
           },
           {
+            "part": "part-0",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "part-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2680,6 +3699,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-track",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2710,6 +3741,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "progressbar-track",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-fill",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2738,14 +3781,26 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "neutral__active",
-        "channelsCompared": 55,
-        "channelsEqual": 29,
+        "channelsCompared": 158,
+        "channelsEqual": 122,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2779,6 +3834,18 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "part-0",
@@ -2817,6 +3884,18 @@
             "theirs": "baseline"
           },
           {
+            "part": "part-0",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "part-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2847,6 +3926,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-track",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2877,6 +3968,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "progressbar-track",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-fill",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2905,14 +4008,26 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error__default",
-        "channelsCompared": 55,
-        "channelsEqual": 29,
+        "channelsCompared": 158,
+        "channelsEqual": 122,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2946,6 +4061,18 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "part-0",
@@ -2984,6 +4111,18 @@
             "theirs": "baseline"
           },
           {
+            "part": "part-0",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "part-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3014,6 +4153,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-track",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3044,6 +4195,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "progressbar-track",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-fill",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3072,14 +4235,26 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error__hover",
-        "channelsCompared": 55,
-        "channelsEqual": 29,
+        "channelsCompared": 158,
+        "channelsEqual": 122,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3113,6 +4288,18 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "part-0",
@@ -3151,6 +4338,18 @@
             "theirs": "baseline"
           },
           {
+            "part": "part-0",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "part-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3181,6 +4380,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-track",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3211,6 +4422,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "progressbar-track",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-fill",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3239,14 +4462,26 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error__focus-visible",
-        "channelsCompared": 55,
-        "channelsEqual": 29,
+        "channelsCompared": 158,
+        "channelsEqual": 122,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3280,6 +4515,18 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "part-0",
@@ -3318,6 +4565,18 @@
             "theirs": "baseline"
           },
           {
+            "part": "part-0",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "part-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3348,6 +4607,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-track",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3378,6 +4649,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "progressbar-track",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-fill",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3406,14 +4689,26 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error__active",
-        "channelsCompared": 55,
-        "channelsEqual": 29,
+        "channelsCompared": 158,
+        "channelsEqual": 122,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3447,6 +4742,18 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "part-0",
@@ -3485,6 +4792,18 @@
             "theirs": "baseline"
           },
           {
+            "part": "part-0",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "part-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3515,6 +4834,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-track",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3545,6 +4876,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "progressbar-track",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progressbar-fill",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3573,6 +4916,18 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "progressbar-fill",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"

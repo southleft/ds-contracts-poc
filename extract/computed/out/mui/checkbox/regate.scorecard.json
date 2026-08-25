@@ -145,9 +145,9 @@
     "combos": 6,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 1656,
+      "cellsCompared": 1728,
       "cellsEqual": 1200,
-      "pctEqual": 72.46376811594203,
+      "pctEqual": 69.44444444444444,
       "rowsFullyEqual": 0,
       "rows": 24
     },
@@ -173,7 +173,7 @@
       "mintedLeavesUnfolded": 83,
       "baseBindings": 33,
       "stateBindings": 17,
-      "codeOnlyChannels": 2,
+      "codeOnlyChannels": 5,
       "overflowBindings": 14,
       "folds": 30
     },
@@ -182,56 +182,56 @@
         "key": "unchecked.disabled__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 32,
+        "channelsMismatched": 35,
         "unscorable": "no-original"
       },
       {
         "key": "unchecked.disabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 32,
+        "channelsMismatched": 35,
         "unscorable": "no-original"
       },
       {
         "key": "unchecked.disabled__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 32,
+        "channelsMismatched": 35,
         "unscorable": "no-original"
       },
       {
         "key": "unchecked.disabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 32,
+        "channelsMismatched": 35,
         "unscorable": "no-original"
       },
       {
         "key": "checked.disabled__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 32,
+        "channelsMismatched": 35,
         "unscorable": "no-original"
       },
       {
         "key": "checked.disabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 32,
+        "channelsMismatched": 35,
         "unscorable": "no-original"
       },
       {
         "key": "checked.disabled__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 32,
+        "channelsMismatched": 35,
         "unscorable": "no-original"
       },
       {
         "key": "checked.disabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 32,
+        "channelsMismatched": 35,
         "unscorable": "no-original"
       }
     ],
@@ -253,11 +253,23 @@
         24
       ],
       [
+        "root.position-anchor",
+        24
+      ],
+      [
         "root.vertical-align",
         24
       ],
       [
+        "part-0.position-anchor",
+        24
+      ],
+      [
         "icon.overflow-clip-margin",
+        24
+      ],
+      [
+        "icon.position-anchor",
         24
       ],
       [
@@ -283,18 +295,6 @@
       [
         "root.color",
         12
-      ],
-      [
-        "root.column-rule-color",
-        12
-      ],
-      [
-        "root.cursor",
-        12
-      ],
-      [
-        "root.outline-color",
-        12
       ]
     ],
     "namedLosses": [
@@ -312,8 +312,11 @@
       "overflow: part-0.outline-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: part-0.outline-offset [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: part-0.outline-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "code-only: root.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: root.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: icon.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it."
+      "code-only: part-0.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: icon.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: icon.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it."
     ],
     "unresolvedTokenRefs": {
       "count": 0,
@@ -346,7 +349,7 @@
     "rows": [
       {
         "key": "unchecked.enabled__default",
-        "channelsCompared": 69,
+        "channelsCompared": 72,
         "channelsEqual": 63,
         "pctExact": null,
         "pctAA": null,
@@ -378,22 +381,40 @@
           },
           {
             "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
+          },
+          {
+            "part": "part-0",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
+          },
+          {
+            "part": "icon",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "unchecked.enabled__hover",
-        "channelsCompared": 69,
+        "channelsCompared": 72,
         "channelsEqual": 63,
         "pctExact": null,
         "pctAA": null,
@@ -425,22 +446,40 @@
           },
           {
             "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
+          },
+          {
+            "part": "part-0",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
+          },
+          {
+            "part": "icon",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "unchecked.enabled__focus-visible",
-        "channelsCompared": 69,
+        "channelsCompared": 72,
         "channelsEqual": 63,
         "pctExact": null,
         "pctAA": null,
@@ -472,22 +511,40 @@
           },
           {
             "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
+          },
+          {
+            "part": "part-0",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
+          },
+          {
+            "part": "icon",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "unchecked.enabled__active",
-        "channelsCompared": 69,
+        "channelsCompared": 72,
         "channelsEqual": 63,
         "pctExact": null,
         "pctAA": null,
@@ -519,22 +576,40 @@
           },
           {
             "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
+          },
+          {
+            "part": "part-0",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
+          },
+          {
+            "part": "icon",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "unchecked.disabled__default",
-        "channelsCompared": 69,
+        "channelsCompared": 72,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -620,6 +695,12 @@
           },
           {
             "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(0, 0, 0, 0.6)",
             "theirs": "rgba(0, 0, 0, 0.26)"
@@ -647,6 +728,12 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
+          },
+          {
+            "part": "part-0",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
@@ -713,6 +800,12 @@
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
+          },
+          {
+            "part": "icon",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
@@ -737,7 +830,7 @@
       },
       {
         "key": "unchecked.disabled__hover",
-        "channelsCompared": 69,
+        "channelsCompared": 72,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -823,6 +916,12 @@
           },
           {
             "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(0, 0, 0, 0.6)",
             "theirs": "rgba(0, 0, 0, 0.26)"
@@ -850,6 +949,12 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
+          },
+          {
+            "part": "part-0",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
@@ -916,6 +1021,12 @@
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
+          },
+          {
+            "part": "icon",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
@@ -940,7 +1051,7 @@
       },
       {
         "key": "unchecked.disabled__focus-visible",
-        "channelsCompared": 69,
+        "channelsCompared": 72,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -1026,6 +1137,12 @@
           },
           {
             "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(0, 0, 0, 0.6)",
             "theirs": "rgba(0, 0, 0, 0.26)"
@@ -1053,6 +1170,12 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
+          },
+          {
+            "part": "part-0",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
@@ -1119,6 +1242,12 @@
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
+          },
+          {
+            "part": "icon",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
@@ -1143,7 +1272,7 @@
       },
       {
         "key": "unchecked.disabled__active",
-        "channelsCompared": 69,
+        "channelsCompared": 72,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -1229,6 +1358,12 @@
           },
           {
             "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(0, 0, 0, 0.6)",
             "theirs": "rgba(0, 0, 0, 0.26)"
@@ -1256,6 +1391,12 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
+          },
+          {
+            "part": "part-0",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
@@ -1322,6 +1463,12 @@
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
+          },
+          {
+            "part": "icon",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
@@ -1346,7 +1493,7 @@
       },
       {
         "key": "checked.enabled__default",
-        "channelsCompared": 69,
+        "channelsCompared": 72,
         "channelsEqual": 63,
         "pctExact": null,
         "pctAA": null,
@@ -1378,22 +1525,40 @@
           },
           {
             "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
+          },
+          {
+            "part": "part-0",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
+          },
+          {
+            "part": "icon",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "checked.enabled__hover",
-        "channelsCompared": 69,
+        "channelsCompared": 72,
         "channelsEqual": 63,
         "pctExact": null,
         "pctAA": null,
@@ -1425,22 +1590,40 @@
           },
           {
             "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
+          },
+          {
+            "part": "part-0",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
+          },
+          {
+            "part": "icon",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "checked.enabled__focus-visible",
-        "channelsCompared": 69,
+        "channelsCompared": 72,
         "channelsEqual": 63,
         "pctExact": null,
         "pctAA": null,
@@ -1472,22 +1655,40 @@
           },
           {
             "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
+          },
+          {
+            "part": "part-0",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
+          },
+          {
+            "part": "icon",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "checked.enabled__active",
-        "channelsCompared": 69,
+        "channelsCompared": 72,
         "channelsEqual": 63,
         "pctExact": null,
         "pctAA": null,
@@ -1519,22 +1720,40 @@
           },
           {
             "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
+          },
+          {
+            "part": "part-0",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
+          },
+          {
+            "part": "icon",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "checked.disabled__default",
-        "channelsCompared": 69,
+        "channelsCompared": 72,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -1620,6 +1839,12 @@
           },
           {
             "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(25, 118, 210, 1)",
             "theirs": "rgba(0, 0, 0, 0.26)"
@@ -1647,6 +1872,12 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
+          },
+          {
+            "part": "part-0",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
@@ -1713,6 +1944,12 @@
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
+          },
+          {
+            "part": "icon",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
@@ -1737,7 +1974,7 @@
       },
       {
         "key": "checked.disabled__hover",
-        "channelsCompared": 69,
+        "channelsCompared": 72,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -1823,6 +2060,12 @@
           },
           {
             "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(25, 118, 210, 1)",
             "theirs": "rgba(0, 0, 0, 0.26)"
@@ -1850,6 +2093,12 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
+          },
+          {
+            "part": "part-0",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
@@ -1916,6 +2165,12 @@
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
+          },
+          {
+            "part": "icon",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
@@ -1940,7 +2195,7 @@
       },
       {
         "key": "checked.disabled__focus-visible",
-        "channelsCompared": 69,
+        "channelsCompared": 72,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -2026,6 +2281,12 @@
           },
           {
             "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(25, 118, 210, 1)",
             "theirs": "rgba(0, 0, 0, 0.26)"
@@ -2053,6 +2314,12 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
+          },
+          {
+            "part": "part-0",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
@@ -2119,6 +2386,12 @@
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
+          },
+          {
+            "part": "icon",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
@@ -2143,7 +2416,7 @@
       },
       {
         "key": "checked.disabled__active",
-        "channelsCompared": 69,
+        "channelsCompared": 72,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -2229,6 +2502,12 @@
           },
           {
             "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(25, 118, 210, 1)",
             "theirs": "rgba(0, 0, 0, 0.26)"
@@ -2256,6 +2535,12 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
+          },
+          {
+            "part": "part-0",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
@@ -2322,6 +2607,12 @@
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
+          },
+          {
+            "part": "icon",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
@@ -2346,7 +2637,7 @@
       },
       {
         "key": "indeterminate.enabled__default",
-        "channelsCompared": 69,
+        "channelsCompared": 72,
         "channelsEqual": 63,
         "pctExact": null,
         "pctAA": null,
@@ -2378,22 +2669,40 @@
           },
           {
             "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
+          },
+          {
+            "part": "part-0",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
+          },
+          {
+            "part": "icon",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "indeterminate.enabled__hover",
-        "channelsCompared": 69,
+        "channelsCompared": 72,
         "channelsEqual": 63,
         "pctExact": null,
         "pctAA": null,
@@ -2425,22 +2734,40 @@
           },
           {
             "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
+          },
+          {
+            "part": "part-0",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
+          },
+          {
+            "part": "icon",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "indeterminate.enabled__focus-visible",
-        "channelsCompared": 69,
+        "channelsCompared": 72,
         "channelsEqual": 63,
         "pctExact": null,
         "pctAA": null,
@@ -2472,22 +2799,40 @@
           },
           {
             "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
+          },
+          {
+            "part": "part-0",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
+          },
+          {
+            "part": "icon",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "indeterminate.enabled__active",
-        "channelsCompared": 69,
+        "channelsCompared": 72,
         "channelsEqual": 63,
         "pctExact": null,
         "pctAA": null,
@@ -2519,22 +2864,40 @@
           },
           {
             "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
+          },
+          {
+            "part": "part-0",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
+          },
+          {
+            "part": "icon",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "indeterminate.disabled__default",
-        "channelsCompared": 69,
+        "channelsCompared": 72,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -2620,6 +2983,12 @@
           },
           {
             "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(25, 118, 210, 1)",
             "theirs": "rgba(0, 0, 0, 0.26)"
@@ -2647,6 +3016,12 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
+          },
+          {
+            "part": "part-0",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
@@ -2713,6 +3088,12 @@
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
+          },
+          {
+            "part": "icon",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
@@ -2737,7 +3118,7 @@
       },
       {
         "key": "indeterminate.disabled__hover",
-        "channelsCompared": 69,
+        "channelsCompared": 72,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -2823,6 +3204,12 @@
           },
           {
             "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(25, 118, 210, 1)",
             "theirs": "rgba(0, 0, 0, 0.26)"
@@ -2850,6 +3237,12 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
+          },
+          {
+            "part": "part-0",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
@@ -2916,6 +3309,12 @@
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
+          },
+          {
+            "part": "icon",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
@@ -2940,7 +3339,7 @@
       },
       {
         "key": "indeterminate.disabled__focus-visible",
-        "channelsCompared": 69,
+        "channelsCompared": 72,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -3026,6 +3425,12 @@
           },
           {
             "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(25, 118, 210, 1)",
             "theirs": "rgba(0, 0, 0, 0.26)"
@@ -3053,6 +3458,12 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
+          },
+          {
+            "part": "part-0",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
@@ -3119,6 +3530,12 @@
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
+          },
+          {
+            "part": "icon",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
@@ -3143,7 +3560,7 @@
       },
       {
         "key": "indeterminate.disabled__active",
-        "channelsCompared": 69,
+        "channelsCompared": 72,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -3229,6 +3646,12 @@
           },
           {
             "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(25, 118, 210, 1)",
             "theirs": "rgba(0, 0, 0, 0.26)"
@@ -3256,6 +3679,12 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
+          },
+          {
+            "part": "part-0",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",
@@ -3322,6 +3751,12 @@
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
+          },
+          {
+            "part": "icon",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "icon",

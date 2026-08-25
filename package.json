@@ -155,6 +155,8 @@
     "extract:computed:ceiling:check": "tsx extract/computed/stylesheet-ceiling-check.ts",
     "extract:computed:color:check": "tsx extract/computed/color-parse-check.ts",
     "ua-baseline:check": "tsx extract/computed/ua-baseline-check.ts",
+    "extract:computed:ua-baseline:backfill": "tsx extract/computed/ua-baseline-backfill.ts",
+    "ua-baseline:present:check": "tsx extract/computed/ua-baseline-backfill.ts --check",
     "scrim-demotion:check": "tsx extract/computed/scrim-demotion-check.ts",
     "border-style:check": "tsx core/border-style-check.ts",
     "slot-constraints:check": "tsx core/slot-constraints-check.ts",

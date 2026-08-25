@@ -41,8 +41,8 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { CONTROL_TAGS, loadConfig, propSpaceFor, stageFor, type CaptureConfig, type ComponentConfig, type SweepResult } from './capture.js';
-import { CONTROL_TAGS_MIRROR, resetSuppliedBorderStyle, alignSweep, styledChannels, detectFolds, enrichLayout, prepareMint } from './fuse.js';
+import { CONTROL_TAGS, HARNESS_STAGE_STYLE_JS, controlStageCss, uaBaselinePageHtml, loadConfig, propSpaceFor, stageFor, type CaptureConfig, type ComponentConfig, type SweepResult } from './capture.js';
+import { CONTROL_TAGS_MIRROR, resetSuppliedBorderStyle, alignSweep, styledChannels, detectFolds, enrichLayout, prepareMint, uaStyles } from './fuse.js';
 import { promoteAnatomy } from './anatomy.js';
 import { reconstructCaptures, type CapturedTruthFile } from './replay.js';
 import { kebab } from '../types.js';
@@ -76,6 +76,48 @@ console.log('\n1. the mirrored tag list matches capture.ts — one rule, two fil
   } else ok(`CONTROL_TAGS_MIRROR == CONTROL_TAGS (${real.join(', ')})`);
 }
 
+console.log('\n1b. the UA baseline page renders the control in the SAME box the harness does');
+{
+  // THE BASELINE IS ONLY A BASELINE IF IT SHARES THE HARNESS'S STAGE.
+  // `fuse.control-element-delta` subtracts the UA control from the component,
+  // so any difference between the two boxes lands in the contract as a fact of
+  // the component. The harness writes the box as a JS object literal inside its
+  // bundled page (`HARNESS_STAGE_STYLE_JS`); the UA baseline page writes it as
+  // CSS text (`controlStageCss`). Two spellings of one box is the shape of
+  // defect the portal page's LOCKSTEP comment is about, so they are held
+  // together here — parsed, not restated a third time.
+  const st = { width: 320, height: 96, padding: 16 };
+  const css = new Map(
+    controlStageCss(st).split(';').map((d) => {
+      const i = d.indexOf(':');
+      return [d.slice(0, i).trim(), d.slice(i + 1).trim()] as const;
+    }),
+  );
+  const kebab = (k: string): string => k.replace(/[A-Z]/g, (c) => `-${c.toLowerCase()}`);
+  const px = new Set(['width', 'height', 'padding']);
+  // the NON-block branch of stageStyle: display flex + alignItems flex-start.
+  const js = new Map<string, string>([['display', 'flex'], ['align-items', 'flex-start']]);
+  for (const m of HARNESS_STAGE_STYLE_JS.matchAll(/(\w+):\s*(?:st\.(\w+)|'([^']*)')/g)) {
+    const key = kebab(m[1]);
+    if (key === 'display') continue; // the ternary, pinned above
+    if (m[2]) { js.set(key, px.has(m[2]) ? `${st[m[2] as 'width' | 'height' | 'padding']}px` : String(st[m[2] as 'width']));
+    } else if (m[3] !== undefined && m[3] !== 'block') js.set(key, m[3]);
+  }
+  const diffs: string[] = [];
+  for (const [k, v] of js) if (css.get(k) !== v) diffs.push(`${k}: harness ${JSON.stringify(v)} vs UA baseline page ${JSON.stringify(css.get(k) ?? null)}`);
+  for (const k of css.keys()) if (!js.has(k)) diffs.push(`${k}: present on the UA baseline page and ABSENT from the harness stage`);
+  if (diffs.length > 0) {
+    bad(`the UA baseline page's control box differs from the harness stage — every difference is subtracted from the component as if it were a user-agent default:\n      ${diffs.join('\n      ')}`);
+  } else ok(`controlStageCss == HARNESS_STAGE_STYLE_JS on all ${js.size} declarations (${[...js.keys()].sort().join(', ')})`);
+  // And the page itself must carry nothing else: no library sheet, no font
+  // face, no provider. The whole point is the absence.
+  const page = uaBaselinePageHtml({ stage: st, colorScheme: 'light' });
+  const strayTags = [...page.matchAll(/<(script|link|style)\b/g)].map((m) => m[1]);
+  if (strayTags.filter((t) => t !== 'style').length > 0 || strayTags.filter((t) => t === 'style').length !== 1) {
+    bad(`the UA baseline page carries ${strayTags.join('/')} — it must carry exactly one <style> (color-scheme + body margin) and nothing else, or it is not a user-agent baseline`);
+  } else ok('the UA baseline page carries exactly one <style> (color-scheme + body margin) and no script/link — no library CSS can reach the control');
+}
+
 console.log('\n2. the committed corpus re-fuses, and the split is what it is');
 let custom = 0, fellBack = 0, plain = 0, comps = 0;
 const skipped: string[] = [];
@@ -105,9 +147,10 @@ const wrongClaim: string[] = [];
         const promotion = promoteAnatomy(space, comp, aligned.union, kebab(space.contract.name));
         const svgConsumed = new Set([...promotion.consumed].map((i) => aligned.partNames[i]));
         const controlStyles = Object.fromEntries(Object.entries(truth.controls).map(([t, n]) => [t, (n as { style: Record<string, string> }).style]));
+        const uaControlStyles = uaStyles(truth);
         const styled = styledChannels(aligned, space, controlStyles, sweep.allProps, [], {
           viewport: cfg.browser.viewport, stage: stageFor(cfg, comp), portaled: comp.portalCapture === true,
-        });
+        }, uaControlStyles);
         const folds = detectFolds(aligned, styled);
         const layout = enrichLayout(aligned, space, styled, promotion.contract);
         const prep = prepareMint(aligned, comp, space, styled, folds, layout.handled, promotion.contract, svgConsumed, new Set(promotion.partIndex.keys()));

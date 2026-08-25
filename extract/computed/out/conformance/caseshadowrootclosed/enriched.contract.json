@@ -28,6 +28,11 @@
             "grow": true
           },
           "tokens": {
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.case-shadow-root-closed.a.color}",
             "font-size": "{imported.case-shadow-root-closed.a.font-size}"
           }
         }
@@ -38,6 +43,11 @@
       },
       "tokens": {
         "background-color": "{imported.case-shadow-root-closed.root.background-color}",
+        "border-bottom-color": "{imported.shared.color-663399}",
+        "border-left-color": "{imported.shared.color-663399}",
+        "border-right-color": "{imported.shared.color-663399}",
+        "border-top-color": "{imported.shared.color-663399}",
+        "color": "{imported.case-shadow-root-closed.root.color}",
         "font-size": "{imported.case-shadow-root-closed.root.font-size}"
       }
     }

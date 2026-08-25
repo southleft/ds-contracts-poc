@@ -1349,6 +1349,18 @@ export const TOKEN_CHANNELS: Record<string, TokenChannelSpec> = {
     "Figma has no maxHeight field (maxWidth exists; its height twin does not).",
   ),
   "text-indent": annotated("Figma text nodes have no first-line indent."),
+  // BASELINE ISOLATION ROUND (docs/23 D.36) — `html { tab-size: 4 }` is the
+  // first line of every Tailwind-preflight-shaped reset (shadcn, tailwind,
+  // astryx). It is PAGE-GLOBAL and inherited, so before the control baseline
+  // was isolated it landed on the harness's own control elements too and was
+  // cancelled as a user-agent default (the UA default is `8`). It reaches the
+  // mint as a plain number, which is a mintable kind — so with the baseline
+  // fixed, 32 components' contracts carried a channel the registry did not
+  // know and `validateContract` refused the whole component by name. It is a
+  // real CSS property the library authored; the canvas has no field for it.
+  "tab-size": annotated(
+    "Figma text nodes have no tab stop size; a tab character renders as the font's own advance.",
+  ),
   "vertical-align": annotated(
     "Figma has no inline baseline alignment; auto-layout counterAxisAlignItems is the nearest, coarser, fact.",
   ),

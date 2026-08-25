@@ -567,6 +567,102 @@ export function comboProps(comp: ComponentConfig, space: PropSpace, combo: Combo
  *  back to the span control, receipted by the fuser. */
 export const CONTROL_TAGS = ['button', 'span', 'a', 'div'] as const;
 
+/** THE CONTROL STAGE, one spelling. The harness page renders each control
+ *  inside this exact box (`stageStyle` with the config's default stage), and
+ *  the UA baseline page below renders it inside the SAME box — so the only
+ *  difference between the two baselines is the CSS the library shipped, which
+ *  is the whole point of having two. */
+/** The harness page's stage-style function, VERBATIM — spliced into the mount
+ *  page's bundle. Hoisted out of the template so the one other place that has
+ *  to agree with it (`controlStageCss`, the UA baseline page's CSS twin) can be
+ *  held to it without a browser: `ua-baseline:check` parses both and refuses a
+ *  divergence by name. Two spellings of one box is exactly the shape of defect
+ *  the portal page's LOCKSTEP comment is about. */
+export const HARNESS_STAGE_STYLE_JS =
+  "const stageStyle = (st, block) => ({ display: block ? 'block' : 'flex', ...(block ? {} : { alignItems: 'flex-start' }), width: st.width, height: st.height, padding: st.padding, boxSizing: 'border-box', background: '#fff', overflow: 'hidden' });";
+
+export const controlStageCss = (st: { width: number; height: number; padding: number }): string =>
+  `display:flex;align-items:flex-start;width:${st.width}px;height:${st.height}px;padding:${st.padding}px;box-sizing:border-box;background:#fff;overflow:hidden`;
+
+/** The four control boxes as plain HTML — the same elements the harness page
+ *  mounts inside `mount.wrapperOpen`, with the same sample text. */
+export const controlBoxesHtml = (st: { width: number; height: number; padding: number }, prefix: string): string =>
+  CONTROL_TAGS.map((t) => {
+    const inner = t === 'a' ? '<a href="#c">SAMPLE</a>' : `<${t}>SAMPLE</${t}>`;
+    return `<div data-combo="${prefix}${t}" style="${controlStageCss(st)}">${inner}</div>`;
+  }).join('\n');
+
+/** THE UA BASELINE PAGE — the control elements, and NOTHING the library ships.
+ *
+ *  WHY THIS EXISTS (docs/23 §D.36; door `capture.control-baseline-mint`).
+ *  The harness mounts its controls INSIDE `mount.wrapperOpen`, in the same
+ *  document as the component under capture. Every page-global rule the library
+ *  ships therefore lands on the CONTROL as well: shadcn's
+ *  `* { border-color: var(--border) }` gives the bare `<span>` a real
+ *  `border-top-color`, Polaris's provider gives it the body ink, Tailwind
+ *  preflight gives it `border-style: solid`, and every library's `body`
+ *  `font-family` gives it the library face. `fuse.control-element-delta` then
+ *  computed "component minus control" and CANCELLED those facts — the shadcn
+ *  Input shipped `border-top-width: 1px` with no colour (a border that paints
+ *  nothing) and Polaris text shipped with no ink.
+ *
+ *  The control delta is supposed to subtract USER-AGENT defaults, because the
+ *  user agent is the only thing the GENERATED surface inherits: emit-html /
+ *  emit-react / the Figma mint carry the component's own CSS and no page
+ *  chrome at all. So the baseline has to be the user agent, and only the user
+ *  agent. This page carries:
+ *    · the same `color-scheme` (UA defaults are colour-scheme dependent),
+ *    · the same `body { margin: 0 }` and the same stage box (harness facts
+ *      that DO apply to the component and must keep cancelling),
+ *    · no library stylesheet, no `@font-face`, no provider, no preScript.
+ *
+ *  A useful consequence, and the reason this is cheap: the result is a
+ *  function of (browser, colour-scheme, stage) ONLY — it is LIBRARY-INDEPENDENT
+ *  by construction, so it can be measured without the library's harness ever
+ *  being installed. */
+export const uaBaselinePageHtml = (opts: { stage: { width: number; height: number; padding: number }; colorScheme: string }): string =>
+  `<!doctype html><html><head><meta charset="utf-8">
+<style>html { color-scheme: ${opts.colorScheme}; } body { margin: 0; background: #ddd; }</style>
+</head><body>
+${controlBoxesHtml(opts.stage, UA_CONTROL_PREFIX)}
+</body></html>`;
+
+/** data-combo prefix for the UA baseline page's control boxes. Deliberately
+ *  different from the in-page `__control-` prefix so a selector can never read
+ *  one baseline while claiming the other. */
+export const UA_CONTROL_PREFIX = '__ua-control-';
+
+/** The measured UA baseline. `channels` is the capture's OWN channel list
+ *  (`allProps`) rather than a fresh enumeration of this page: a library's
+ *  `:root` custom properties appear in `getComputedStyle(documentElement)` and
+ *  would otherwise be missing here, which would make the two baselines
+ *  incomparable channel-for-channel. Custom properties read empty on this page
+ *  — see the `--` guard in `fuse.styledChannels`.
+ *
+ *  Runs in a page of its own inside the SAME browser context (same Chromium,
+ *  same viewport, same device scale, same font substrate); an iframe would be
+ *  equivalent, a page is simpler and lets the backfill/measurement instruments
+ *  reuse this exact function with no harness at all. */
+export async function captureUaControls(
+  context: { newPage: () => Promise<Page> },
+  opts: { stage: { width: number; height: number; padding: number }; colorScheme: string; channels: string[]; classAllow?: string },
+): Promise<Record<string, CapturedNode>> {
+  const page = await context.newPage();
+  try {
+    await page.setContent(uaBaselinePageHtml({ stage: opts.stage, colorScheme: opts.colorScheme }), { waitUntil: 'load' });
+    await page.evaluate(`(() => { window.__ALL_PROPS = ${JSON.stringify(opts.channels)}; })()`);
+    const out: Record<string, CapturedNode> = {};
+    for (const t of CONTROL_TAGS) {
+      const raw = (await page.evaluate(captureJs(`[data-combo="${UA_CONTROL_PREFIX}${t}"]`, opts.classAllow))) as CapturedNode | null;
+      if (!raw) throw new Error(`UA baseline capture failed: ${t}`);
+      out[t] = normalizeNode(raw);
+    }
+    return out;
+  } finally {
+    await page.close();
+  }
+}
+
 export const stageFor = (cfg: CaptureConfig, comp: ComponentConfig): { width: number; height: number; padding: number } =>
   comp.stage ?? cfg.stage;
 
@@ -784,7 +880,7 @@ const ceProps = (p) => {
   return o;
 };
 const SPECS = ${JSON.stringify(specs)};
-const stageStyle = (st, block) => ({ display: block ? 'block' : 'flex', ...(block ? {} : { alignItems: 'flex-start' }), width: st.width, height: st.height, padding: st.padding, boxSizing: 'border-box', background: '#fff', overflow: 'hidden' });
+${HARNESS_STAGE_STYLE_JS}
 const stage = stageStyle({ width: ${cfg.stage.width}, height: ${cfg.stage.height}, padding: ${cfg.stage.padding} });
 
 // presence-value marker grammar: {"$callback":true} → () => {};
@@ -1548,6 +1644,19 @@ export interface SweepResult {
   /** keyed `${component}:${combo}` per capture. */
   captures: Capture[];
   controls: Record<string, CapturedNode>;
+  /** THE UA BASELINE (door `capture.control-baseline-mint`). The same four
+   *  control tags, measured on a page that carries the browser and the stage
+   *  box and NOTHING the library ships — see `captureUaControls`. This is the
+   *  baseline `fuse.control-element-delta` subtracts; `controls` (the in-page
+   *  probe) stays recorded because it is what makes a page-global authored
+   *  rule VISIBLE: a channel where the two baselines disagree is, by
+   *  construction, a channel the library declared on the page. */
+  uaControls: Record<string, CapturedNode>;
+  /** The browser that measured `uaControls`. Equal to `browserVersion` on a
+   *  live sweep; on a backfilled capture it names the browser that measured
+   *  the baseline, so a UA default measured by a different Chromium than the
+   *  component is a VISIBLE fact rather than a silent one. */
+  uaBaselineBrowser: string;
   allProps: string[];
   /** SILENT-LOSS ROUND — the READ BOUNDARY of the CSS-vars reader. Every
    *  stylesheet (or nested grouping rule) whose `cssRules` THREW, quoted
@@ -1704,7 +1813,7 @@ export function readBoundaryReceipts(
 export async function sweep(
   page: Page,
   mounts: Array<{ comp: ComponentConfig; space: PropSpace }>,
-  opts: { screenshots?: string; fontProbes: string[]; classAllow?: string; varPrefix?: string },
+  opts: { screenshots?: string; fontProbes: string[]; classAllow?: string; varPrefix?: string; uaBaseline: { stage: { width: number; height: number; padding: number }; colorScheme: string } },
 ): Promise<SweepResult> {
   const allProps = (await page.evaluate(
     `(() => { const l = [...getComputedStyle(document.documentElement)].sort(); window.__ALL_PROPS = l; return l; })()`,
@@ -1851,6 +1960,16 @@ export async function sweep(
     controls[t] = normalizeNode(raw);
   }
 
+  // THE UA BASELINE — measured in a page of its own, with none of the
+  // library's CSS. See `captureUaControls` for why the in-page probe above
+  // cannot be the baseline the fusion door subtracts.
+  const uaControls = await captureUaControls(page.context(), {
+    stage: opts.uaBaseline.stage,
+    colorScheme: opts.uaBaseline.colorScheme,
+    channels: allProps,
+    classAllow: opts.classAllow,
+  });
+
   // SILENT-LOSS ROUND: the reader's two `catch`es used to swallow an entire
   // unreadable stylesheet (a cross-origin <link> exposes no cssRules) while
   // source-bindings.json printed `skips: []`. The count is read back here so
@@ -1862,6 +1981,8 @@ export async function sweep(
   return {
     captures,
     controls,
+    uaControls,
+    uaBaselineBrowser: page.context().browser()!.version(),
     allProps,
     stylesheetSkips: [...new Set(stylesheetSkips)].sort(),
     browserVersion: page.context().browser()!.version(),
