@@ -338,6 +338,26 @@
       "axes": []
     },
     {
+      "__case": "interaction-states: a link whose focus ring is spelled ONLY as a KEYWORD flip — the rest plane carries `outline-width: 3px; outline-style: none` with no `outline-color` of its own (so it computes to `currentColor`), and `:focus-visible` sets `outline-style: solid; outline-width: 2px; outline-offset: 2px` and nothing else — declared CARRIED",
+      "name": "CaseFocusRingDeclaredStyleOnly",
+      "importName": "CaseFocusRingDeclaredStyleOnly",
+      "contract": "conformance/seeds/focus-ring-declared-style-only.contract.json",
+      "sampleText": "",
+      "axes": [
+        "size"
+      ]
+    },
+    {
+      "__case": "interaction-states: THE FOCUS-RING RESERVATION IDIOM under a state that changes only the WIDTH: the rest plane is `outline: 2px solid transparent` (a real, drawn `outline-style: solid` over a fully transparent colour) and `:focus-visible` sets `outline-width: 4px` — declared CARRIED",
+      "name": "CaseFocusRingReservationTransparent",
+      "importName": "CaseFocusRingReservationTransparent",
+      "contract": "conformance/seeds/focus-ring-reservation-transparent.contract.json",
+      "sampleText": "",
+      "axes": [
+        "size"
+      ]
+    },
+    {
       "__case": "layout: display: grid + grid-template-columns: 1fr 1fr (children AUTO-PLACED) — declared CARRIED",
       "name": "CaseGrid2d",
       "importName": "CaseGrid2d",

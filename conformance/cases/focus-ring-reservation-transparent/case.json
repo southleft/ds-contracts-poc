@@ -1,0 +1,29 @@
+{
+  "id": "focus-ring-reservation-transparent",
+  "feature": "interaction-states",
+  "construct": "THE FOCUS-RING RESERVATION IDIOM under a state that changes only the WIDTH: the rest plane is `outline: 2px solid transparent` (a real, drawn `outline-style: solid` over a fully transparent colour) and `:focus-visible` sets `outline-width: 4px`",
+  "why": "THE ANTI-LOOSENING GUARD for focus-ring-declared-style-only. Reading the state's outline through the CSS cascade \u2014 the override first, the resting fact behind it \u2014 is what lets the keyword-only ring lower, and the SAME reading would complete the pair here, where the resting colour is `transparent` and CSS paints nothing at any width. That is exactly what Carbon spells on Accordion's icon, Tabs' nav item and TextInput (all three resolve to #00000000, measured), and drawing it would put a canvas ring around parts the library leaves bare \u2014 the HARMFUL class. The colour must still have to PAINT, which is the same value test the base plane's `outlineColorPaints` already applies; the cascade widens where the fact comes from, never whether it inks.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.states.focus-visible.outline-width (the CSS half carries the width faithfully; the refusal this case guards is the CANVAS half)",
+  "observable": {
+    "part": "root",
+    "channel": "outline-width",
+    "capturedValue": "4px"
+  },
+  "statePreviews": true,
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "nothing may draw: a stroke here is a ring around a component the library renders with none, at every width"
+  },
+  "axes": [
+    {
+      "prop": "size",
+      "values": [
+        "sm",
+        "lg"
+      ],
+      "default": "sm"
+    }
+  ]
+}

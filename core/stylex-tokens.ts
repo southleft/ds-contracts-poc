@@ -64,33 +64,8 @@ export interface StylexTokenLayer {
   skipped: StylexTokenSkip[];
 }
 
-/** Split `light-dark(a, b)` into its two branches — paren-aware so nested
- *  `rgba(…, …)` commas do not split. Returns null unless the WHOLE value is
- *  exactly one light-dark() call with exactly two top-level arguments. */
-export function splitLightDark(value: string): { light: string; dark: string } | null {
-  const m = value.trim().match(/^light-dark\((.*)\)$/s);
-  if (!m) return null;
-  const inner = m[1];
-  const parts: string[] = [];
-  let depth = 0;
-  let current = '';
-  for (const ch of inner) {
-    if (ch === '(') depth++;
-    if (ch === ')') depth--;
-    if (depth < 0) return null; // unbalanced — not a clean light-dark()
-    if (ch === ',' && depth === 0) {
-      parts.push(current);
-      current = '';
-    } else {
-      current += ch;
-    }
-  }
-  parts.push(current);
-  if (depth !== 0 || parts.length !== 2) return null;
-  const [light, dark] = parts.map((p) => p.trim());
-  if (!light || !dark) return null;
-  return { light, dark };
-}
+export { splitLightDark } from './light-dark.js';
+import { splitLightDark } from './light-dark.js';
 
 const leaf = (value: string, type?: string): Record<string, unknown> => ({
   $value: value,

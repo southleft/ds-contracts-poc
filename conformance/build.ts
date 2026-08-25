@@ -80,6 +80,34 @@ export interface CaseEntry {
    *  runner enumerates the combos exactly as it does for a real library.
    *  Case.tsx receives each prop by name (default = the declared default). */
   axes?: Array<{ prop: string; values: string[]; default: string }>;
+  /** RC3 (burn-down round 2) — THE INSTRUMENT HOLE THE PREVIOUS ROUND NAMED
+   *  AND COULD NOT CLOSE: "the conformance fixture cannot exercise state
+   *  previews at all", so every ring/border/elevation a library spells on
+   *  `:focus-visible` was un-measurable here and its defect could only be
+   *  written down as a wall.
+   *
+   *  It was never the CAPTURE that was missing — `extract/computed/run.ts`
+   *  already enumerates `__hover` / `__focus-visible` / `__active` for every
+   *  case (the committed `receipts/pair--*__focus-visible.png` prove it). It
+   *  was the SEED: `states: []` with no `bindings.figma.statePreviews`, so
+   *  the state deltas the capture measured had nowhere to land and the
+   *  compiled set drew no State plane to round-trip.
+   *
+   *  It was not the FUSE either: the enriched contract of the existing
+   *  `antd-focus-outline-ring` case already carries
+   *  `states: ["focus-visible"]` with a full outline pair under it. What was
+   *  missing is the ONE binding that decides whether a declared state plane
+   *  is DRAWN — `bindings.figma.statePreviews` — which promote sets for a
+   *  real library and the seed writer never set here. Without it
+   *  core/emit-figma-script.ts:5546 answers every state question with "the
+   *  focus-visible plane is not drawn — bindings.figma.statePreviews is off",
+   *  a true sentence that makes the canvas gate green on a ring nobody drew.
+   *
+   *  A case that declares this gets the binding on its seed, and the states
+   *  the capture already measured become real State preview cells for the
+   *  canvas gate to dump and propose. Cases that do not declare it are
+   *  byte-identical to before. */
+  statePreviews?: boolean;
   /** A2 LAYOUT PROMOTION (conformance/layout-cases-draft): the case's
    *  TWO-DIRECTION disposition spec, carried VERBATIM from the hand-authored
    *  draft. `codeToCanvas` is the direction this fixture's gate measures
@@ -185,7 +213,7 @@ function seedContract(c: CaseEntry): Record<string, unknown> {
     states: [],
     anatomy: { root: {} },
     bindings: {
-      figma: { anchors: { fileKey: null, componentSetKey: null } },
+      figma: { ...(c.statePreviews ? { statePreviews: true } : {}), anchors: { fileKey: null, componentSetKey: null } },
       code: { anchors: { importPath: '@ds-contracts/conformance', export: exportNameFor(c.id) } },
     },
   };

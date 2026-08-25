@@ -35,6 +35,8 @@ export { default as CaseEmRelativePadding } from '../cases/em-relative-padding/C
 export { default as CaseFilterBlur } from '../cases/filter-blur/Case.tsx';
 export { default as CaseFlexDirectionByAxis } from '../cases/flex-direction-by-axis/Case.tsx';
 export { default as CaseFlexGap } from '../cases/flex-gap/Case.tsx';
+export { default as CaseFocusRingDeclaredStyleOnly } from '../cases/focus-ring-declared-style-only/Case.tsx';
+export { default as CaseFocusRingReservationTransparent } from '../cases/focus-ring-reservation-transparent/Case.tsx';
 export { default as CaseGrid2d } from '../cases/grid-2d/Case.tsx';
 export { default as CaseGridAbsoluteOverlay } from '../cases/grid-absolute-overlay/Case.tsx';
 export { default as CaseGridAreaEmptySlot } from '../cases/grid-area-empty-slot/Case.tsx';

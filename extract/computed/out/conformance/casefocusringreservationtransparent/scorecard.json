@@ -1,0 +1,411 @@
+{
+  "component": "CaseFocusRingReservationTransparent",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "151.0.7922.34",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 2,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 224,
+    "cellsEqual": 190,
+    "pctEqual": 84.82142857142857,
+    "rowsFullyEqual": 0,
+    "rows": 8
+  },
+  "pixel": {
+    "pairs": 8,
+    "perfectExact": 0,
+    "perfectAA": 0,
+    "measured": 8,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 8.5986328125,
+    "meanAA": 2.081705729166667,
+    "maxAA": 2.2493489583333335
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 13,
+    "mintedLeavesUnfolded": 11,
+    "baseBindings": 14,
+    "stateBindings": 1,
+    "codeOnlyChannels": 9,
+    "overflowBindings": 0,
+    "folds": 5
+  },
+  "worstRows": [
+    {
+      "key": "lg__focus-visible",
+      "pctAA": 2.2493489583333335,
+      "pctExact": 10.087890625,
+      "channelsMismatched": 5
+    },
+    {
+      "key": "lg__default",
+      "pctAA": 2.2493489583333335,
+      "pctExact": 10.087890625,
+      "channelsMismatched": 4
+    },
+    {
+      "key": "lg__hover",
+      "pctAA": 2.2493489583333335,
+      "pctExact": 10.087890625,
+      "channelsMismatched": 4
+    },
+    {
+      "key": "lg__active",
+      "pctAA": 2.2493489583333335,
+      "pctExact": 10.087890625,
+      "channelsMismatched": 4
+    },
+    {
+      "key": "sm__focus-visible",
+      "pctAA": 1.9140625,
+      "pctExact": 7.109375,
+      "channelsMismatched": 5
+    },
+    {
+      "key": "sm__default",
+      "pctAA": 1.9140625,
+      "pctExact": 7.109375,
+      "channelsMismatched": 4
+    },
+    {
+      "key": "sm__hover",
+      "pctAA": 1.9140625,
+      "pctExact": 7.109375,
+      "channelsMismatched": 4
+    },
+    {
+      "key": "sm__active",
+      "pctAA": 1.9140625,
+      "pctExact": 7.109375,
+      "channelsMismatched": 4
+    }
+  ],
+  "topMismatchedChannels": [
+    [
+      "root.border-bottom-style",
+      8
+    ],
+    [
+      "root.border-left-style",
+      8
+    ],
+    [
+      "root.border-right-style",
+      8
+    ],
+    [
+      "root.border-top-style",
+      8
+    ],
+    [
+      "root.outline-width",
+      2
+    ]
+  ],
+  "namedLosses": [
+    "code-only: root.border-bottom-style — declared-channel value outside the bounded grammar — named residue (v15)",
+    "code-only: root.border-left-style — declared-channel value outside the bounded grammar — named residue (v15)",
+    "code-only: root.border-right-style — declared-channel value outside the bounded grammar — named residue (v15)",
+    "code-only: root.border-top-style — declared-channel value outside the bounded grammar — named residue (v15)",
+    "code-only: root.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only[active]: root.border-bottom-style — value shape outside mintable kinds and outside the declared vocabulary",
+    "code-only[active]: root.border-left-style — value shape outside mintable kinds and outside the declared vocabulary",
+    "code-only[active]: root.border-right-style — value shape outside mintable kinds and outside the declared vocabulary",
+    "code-only[active]: root.border-top-style — value shape outside mintable kinds and outside the declared vocabulary"
+  ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "(none declared)",
+    "leavesAdded": 0,
+    "divergent": []
+  },
+  "rows": [
+    {
+      "key": "sm__default",
+      "channelsCompared": 28,
+      "channelsEqual": 24,
+      "pctExact": 7.109375,
+      "pctAA": 1.9140625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "border-bottom-style",
+          "ours": "none",
+          "theirs": "outset"
+        },
+        {
+          "part": "root",
+          "channel": "border-left-style",
+          "ours": "none",
+          "theirs": "outset"
+        },
+        {
+          "part": "root",
+          "channel": "border-right-style",
+          "ours": "none",
+          "theirs": "outset"
+        },
+        {
+          "part": "root",
+          "channel": "border-top-style",
+          "ours": "none",
+          "theirs": "outset"
+        }
+      ]
+    },
+    {
+      "key": "sm__hover",
+      "channelsCompared": 28,
+      "channelsEqual": 24,
+      "pctExact": 7.109375,
+      "pctAA": 1.9140625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "border-bottom-style",
+          "ours": "none",
+          "theirs": "outset"
+        },
+        {
+          "part": "root",
+          "channel": "border-left-style",
+          "ours": "none",
+          "theirs": "outset"
+        },
+        {
+          "part": "root",
+          "channel": "border-right-style",
+          "ours": "none",
+          "theirs": "outset"
+        },
+        {
+          "part": "root",
+          "channel": "border-top-style",
+          "ours": "none",
+          "theirs": "outset"
+        }
+      ]
+    },
+    {
+      "key": "sm__focus-visible",
+      "channelsCompared": 28,
+      "channelsEqual": 23,
+      "pctExact": 7.109375,
+      "pctAA": 1.9140625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "border-bottom-style",
+          "ours": "none",
+          "theirs": "outset"
+        },
+        {
+          "part": "root",
+          "channel": "border-left-style",
+          "ours": "none",
+          "theirs": "outset"
+        },
+        {
+          "part": "root",
+          "channel": "border-right-style",
+          "ours": "none",
+          "theirs": "outset"
+        },
+        {
+          "part": "root",
+          "channel": "border-top-style",
+          "ours": "none",
+          "theirs": "outset"
+        },
+        {
+          "part": "root",
+          "channel": "outline-width",
+          "ours": "2px",
+          "theirs": "4px"
+        }
+      ]
+    },
+    {
+      "key": "sm__active",
+      "channelsCompared": 28,
+      "channelsEqual": 24,
+      "pctExact": 7.109375,
+      "pctAA": 1.9140625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "border-bottom-style",
+          "ours": "none",
+          "theirs": "inset"
+        },
+        {
+          "part": "root",
+          "channel": "border-left-style",
+          "ours": "none",
+          "theirs": "inset"
+        },
+        {
+          "part": "root",
+          "channel": "border-right-style",
+          "ours": "none",
+          "theirs": "inset"
+        },
+        {
+          "part": "root",
+          "channel": "border-top-style",
+          "ours": "none",
+          "theirs": "inset"
+        }
+      ]
+    },
+    {
+      "key": "lg__default",
+      "channelsCompared": 28,
+      "channelsEqual": 24,
+      "pctExact": 10.087890625,
+      "pctAA": 2.2493489583333335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "border-bottom-style",
+          "ours": "none",
+          "theirs": "outset"
+        },
+        {
+          "part": "root",
+          "channel": "border-left-style",
+          "ours": "none",
+          "theirs": "outset"
+        },
+        {
+          "part": "root",
+          "channel": "border-right-style",
+          "ours": "none",
+          "theirs": "outset"
+        },
+        {
+          "part": "root",
+          "channel": "border-top-style",
+          "ours": "none",
+          "theirs": "outset"
+        }
+      ]
+    },
+    {
+      "key": "lg__hover",
+      "channelsCompared": 28,
+      "channelsEqual": 24,
+      "pctExact": 10.087890625,
+      "pctAA": 2.2493489583333335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "border-bottom-style",
+          "ours": "none",
+          "theirs": "outset"
+        },
+        {
+          "part": "root",
+          "channel": "border-left-style",
+          "ours": "none",
+          "theirs": "outset"
+        },
+        {
+          "part": "root",
+          "channel": "border-right-style",
+          "ours": "none",
+          "theirs": "outset"
+        },
+        {
+          "part": "root",
+          "channel": "border-top-style",
+          "ours": "none",
+          "theirs": "outset"
+        }
+      ]
+    },
+    {
+      "key": "lg__focus-visible",
+      "channelsCompared": 28,
+      "channelsEqual": 23,
+      "pctExact": 10.087890625,
+      "pctAA": 2.2493489583333335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "border-bottom-style",
+          "ours": "none",
+          "theirs": "outset"
+        },
+        {
+          "part": "root",
+          "channel": "border-left-style",
+          "ours": "none",
+          "theirs": "outset"
+        },
+        {
+          "part": "root",
+          "channel": "border-right-style",
+          "ours": "none",
+          "theirs": "outset"
+        },
+        {
+          "part": "root",
+          "channel": "border-top-style",
+          "ours": "none",
+          "theirs": "outset"
+        },
+        {
+          "part": "root",
+          "channel": "outline-width",
+          "ours": "2px",
+          "theirs": "4px"
+        }
+      ]
+    },
+    {
+      "key": "lg__active",
+      "channelsCompared": 28,
+      "channelsEqual": 24,
+      "pctExact": 10.087890625,
+      "pctAA": 2.2493489583333335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "border-bottom-style",
+          "ours": "none",
+          "theirs": "inset"
+        },
+        {
+          "part": "root",
+          "channel": "border-left-style",
+          "ours": "none",
+          "theirs": "inset"
+        },
+        {
+          "part": "root",
+          "channel": "border-right-style",
+          "ours": "none",
+          "theirs": "inset"
+        },
+        {
+          "part": "root",
+          "channel": "border-top-style",
+          "ours": "none",
+          "theirs": "inset"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+[data-cf="focus-ring-reservation-transparent"] { display: inline-flex; align-items: center; background: rgb(244, 244, 244); color: rgb(22, 22, 22); padding: 4px 15px; outline: 2px solid transparent; outline-offset: 0px; }
+[data-cf="focus-ring-reservation-transparent"][data-size="sm"] { font-size: 14px; }
+[data-cf="focus-ring-reservation-transparent"][data-size="lg"] { font-size: 18px; }
+[data-cf="focus-ring-reservation-transparent"]:focus-visible { outline-width: 4px; }

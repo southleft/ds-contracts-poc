@@ -1,0 +1,4 @@
+[data-cf="focus-ring-declared-style-only"] { display: inline-flex; align-items: center; color: rgb(67, 117, 255); text-decoration-line: underline; outline-color: currentColor; outline-width: 3px; outline-style: none; outline-offset: 0px; }
+[data-cf="focus-ring-declared-style-only"][data-size="sm"] { font-size: 14px; }
+[data-cf="focus-ring-declared-style-only"][data-size="lg"] { font-size: 18px; }
+[data-cf="focus-ring-declared-style-only"]:focus-visible { outline-style: solid; outline-width: 2px; outline-offset: 2px; }

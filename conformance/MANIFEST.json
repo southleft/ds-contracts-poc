@@ -2,9 +2,9 @@
   "_marker": "THE DENOMINATOR. Hand-authored per case, generated into one index. Deliberately NOT derived from isFusable / styled / DECLARED_CHANNELS / CHANNEL_TO_COMPUTED / TOKEN_CHANNELS / carriedParts — every instrument in the pipeline derives its denominator from the same filter that decides carriage, which is why a channel the filter never opened scores 100%. This file is the independent one.",
   "generatedBy": "conformance/build.ts",
   "library": "@ds-contracts/conformance@0.1.0",
-  "count": 102,
+  "count": 104,
   "byExpectation": {
-    "CARRIED": 58,
+    "CARRIED": 60,
     "LOWERED": 4,
     "REFUSED": 22,
     "UNSUPPORTED": 18
@@ -675,6 +675,65 @@
         "expect": "PRESENT",
         "note": "itemSpacing"
       }
+    },
+    {
+      "id": "focus-ring-declared-style-only",
+      "feature": "interaction-states",
+      "construct": "a link whose focus ring is spelled ONLY as a KEYWORD flip — the rest plane carries `outline-width: 3px; outline-style: none` with no `outline-color` of its own (so it computes to `currentColor`), and `:focus-visible` sets `outline-style: solid; outline-width: 2px; outline-offset: 2px` and nothing else",
+      "why": "THIS IS altitude.link's EXACT SHAPE, and the row RC3 could not close. `outline-style` is the keyword that decides whether CSS paints a ring at all, so a library that flips only the keyword hands the state plane a WIDTH delta and no colour delta. core/emit-figma-script.ts's translateStateOverrides asks for the pair inside the OVERRIDE — `outline-color !== undefined && outline-width !== undefined` — so the ring never lowers and the focus-visible preview is byte-identical to the base cell. Every fact needed is already measured and carried: the keyword in declaredStates, the width in states, and the hue as the part's own `color` (the currentColor fold that detectFolds records by name). The previous round wrote this down as a wall on the premise that completing the pair 'would mean inventing a hue'; the hue is not invented, it is CSS's own initial value for outline-color and the very ink the generated CSS surface paints the ring with.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.declaredStates.focus-visible.outline-style + anatomy.root.states.focus-visible.outline-width",
+      "observable": {
+        "part": "root",
+        "channel": "outline-width",
+        "capturedValue": "2px"
+      },
+      "statePreviews": true,
+      "canvas": {
+        "expect": "PRESENT",
+        "mustDraw": true,
+        "note": "the State=Focus Visible preview must carry an OUTSIDE-aligned stroke: the declared keyword says the outline paints, the state carries the width, and the hue is the part's own carried `color` by CSS's currentColor rule — the same ink the generated CSS surface paints. A receipt is not a ring, so this case declares mustDraw."
+      },
+      "axes": [
+        {
+          "prop": "size",
+          "values": [
+            "sm",
+            "lg"
+          ],
+          "default": "sm"
+        }
+      ]
+    },
+    {
+      "id": "focus-ring-reservation-transparent",
+      "feature": "interaction-states",
+      "construct": "THE FOCUS-RING RESERVATION IDIOM under a state that changes only the WIDTH: the rest plane is `outline: 2px solid transparent` (a real, drawn `outline-style: solid` over a fully transparent colour) and `:focus-visible` sets `outline-width: 4px`",
+      "why": "THE ANTI-LOOSENING GUARD for focus-ring-declared-style-only. Reading the state's outline through the CSS cascade — the override first, the resting fact behind it — is what lets the keyword-only ring lower, and the SAME reading would complete the pair here, where the resting colour is `transparent` and CSS paints nothing at any width. That is exactly what Carbon spells on Accordion's icon, Tabs' nav item and TextInput (all three resolve to #00000000, measured), and drawing it would put a canvas ring around parts the library leaves bare — the HARMFUL class. The colour must still have to PAINT, which is the same value test the base plane's `outlineColorPaints` already applies; the cascade widens where the fact comes from, never whether it inks.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.states.focus-visible.outline-width (the CSS half carries the width faithfully; the refusal this case guards is the CANVAS half)",
+      "observable": {
+        "part": "root",
+        "channel": "outline-width",
+        "capturedValue": "4px"
+      },
+      "statePreviews": true,
+      "canvas": {
+        "expect": "ABSENT",
+        "note": "nothing may draw: a stroke here is a ring around a component the library renders with none, at every width"
+      },
+      "axes": [
+        {
+          "prop": "size",
+          "values": [
+            "sm",
+            "lg"
+          ],
+          "default": "sm"
+        }
+      ]
     },
     {
       "id": "grid-2d",

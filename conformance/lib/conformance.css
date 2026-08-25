@@ -36,6 +36,8 @@
 @import '../cases/filter-blur/case.css';
 @import '../cases/flex-direction-by-axis/case.css';
 @import '../cases/flex-gap/case.css';
+@import '../cases/focus-ring-declared-style-only/case.css';
+@import '../cases/focus-ring-reservation-transparent/case.css';
 @import '../cases/grid-2d/case.css';
 @import '../cases/grid-absolute-overlay/case.css';
 @import '../cases/grid-area-empty-slot/case.css';

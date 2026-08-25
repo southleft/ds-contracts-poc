@@ -59,7 +59,7 @@ import {
 } from '../scripts/contract-schema.js';
 import { flattenTokens, aliasTarget, px, pxOrNull, type TokenEntry, type TokenTreeInput } from './tokens.js';
 import { cssColorToRgba01, guardedValueUpsertRuntime, ownedCollectionPruneRuntime } from './token-set.js';
-import { splitLightDark } from './stylex-tokens.js';
+import { splitLightDark } from './light-dark.js';
 import { FINGERPRINT_SRC, FINGERPRINT_VERSION } from './canvas-fingerprint.js';
 import { isMultiRoot, topRoots, validateContract } from './emit-react.js';
 
@@ -1909,6 +1909,62 @@ const isReversed = (part: Part, subst: Record<string, string>): boolean =>
   resolveLayout(part, subst)?.direction?.endsWith('-reverse') ?? false;
 
 /** Distribute a part's CSS token bindings into Figma spec fields. */
+/** Does a bound COLOUR ref actually put ink on the page for this combo?
+ *
+ *  ONE READER, two callers. `outline: Npx solid transparent` is the standard
+ *  focus-ring-RESERVATION idiom and CSS-extracted contracts carry it in bulk
+ *  (Carbon's Accordion icon, Tabs nav item and TextInput all resolve to
+ *  #00000000, measured), so a carried outline pair alone never proves a ring.
+ *  This test used to live inline in `applyTokens` and served the BASE plane
+ *  only; RC3 needs the identical question answered for a STATE's effective
+ *  pair, and two copies of a value test is how the two planes drift apart. */
+function colorRefPaints(ref: string | undefined, subst: Record<string, string>): boolean {
+  if (ref === undefined) return false;
+  let path = ref.slice(1, -1);
+  for (const [propName, value] of Object.entries(subst)) path = path.replaceAll(`{${propName}}`, value);
+  const v = String(resolveLiteral(path)).trim().toLowerCase();
+  if (v === 'transparent' || v === 'none') return false;
+  if (/^#[0-9a-f]{6}00$/.test(v) || /^#[0-9a-f]{3}0$/.test(v)) return false;
+  const rgba = v.match(/^rgba?\([^)]*?,\s*0*(?:\.0+)?\s*\)$/);
+  return rgba === null;
+}
+
+/** RC3 — resolve the ring a state paints. See `translateStateOverrides` and
+ *  the `OutlineRing` contract below it for the full reasoning; this is the
+ *  four-step CSS reading itself. Returns null when nothing paints. */
+function outlineRingForState(
+  part: Part,
+  stateName: string,
+  overrides: Record<string, string>,
+  subst: Record<string, string>,
+): OutlineRing | null {
+  // (1) THE OLD RULE, kept verbatim as its own arm: both halves inside the
+  //     state's own delta. Every shape that drew before draws identically.
+  const overrideColor = overrides['outline-color'];
+  const overrideWidth = overrides['outline-width'];
+  if (overrideColor !== undefined && overrideWidth !== undefined) {
+    return { colorRef: overrideColor, widthRef: overrideWidth, viaCascade: false };
+  }
+  // (2) THE KEYWORD. Only a DECLARED painting `outline-style` unlocks the
+  //     cascade — the state's own declaration first, the resting one behind
+  //     it. Absence is not evidence: `outline-style`'s initial value is
+  //     `none`, so an undeclared keyword leaves arm (1) alone in force and a
+  //     Tailwind-style `--tw-outline-style: none` rest keeps drawing nothing.
+  const declaredStyle =
+    part.declaredStates?.[stateName]?.['outline-style'] ?? part.declared?.['outline-style'];
+  if (declaredStyle === undefined || declaredStyle === 'none') return null;
+  // (3) THE PAIR, override over resting — and the hue of last resort is the
+  //     part's own `color`, which is what CSS's currentColor initial value
+  //     for `outline-color` means and what the generated CSS surface paints.
+  const resting = resolveTokens(part, subst);
+  const widthRef = overrideWidth ?? resting['outline-width'];
+  const colorRef = overrideColor ?? resting['outline-color'] ?? resting['color'];
+  if (widthRef === undefined || colorRef === undefined) return null;
+  // (4) AND IT HAS TO INK.
+  if (!colorRefPaints(colorRef, subst)) return null;
+  return { colorRef, widthRef, viaCascade: true };
+}
+
 function applyTokens(
   spec: NodeSpec,
   tokens: Record<string, string>,
@@ -2005,17 +2061,7 @@ function applyTokens(
   // is evaluated per variant-combination, so Avatar's per-state ring draws a
   // canvas stroke on its FOCUSED variants and none on default/hover, which
   // is exactly what the canvas draws.
-  const outlineColorPaints = (() => {
-    const ref = tokens['outline-color'];
-    if (ref === undefined) return false;
-    let path = ref.slice(1, -1);
-    for (const [propName, value] of Object.entries(subst)) path = path.replaceAll(`{${propName}}`, value);
-    const v = String(resolveLiteral(path)).trim().toLowerCase();
-    if (v === 'transparent' || v === 'none') return false;
-    if (/^#[0-9a-f]{6}00$/.test(v) || /^#[0-9a-f]{3}0$/.test(v)) return false;
-    const rgba = v.match(/^rgba?\([^)]*?,\s*0*(?:\.0+)?\s*\)$/);
-    return rgba === null;
-  })();
+  const outlineColorPaints = colorRefPaints(tokens['outline-color'], subst);
   const outlineDrawsStroke =
     outlinePaints &&
     outlineColorPaints &&
@@ -3287,14 +3333,14 @@ function applyChildAspect(spec: NodeSpec, part: Part): void {
  *  must keep falling through applyTokens untranslated. Still an
  *  approximation of a CSS outline (no outline-offset carriage), documented
  *  as such. */
-function translateStateOverrides(overrides: Record<string, string>): Record<string, string> {
-  // The ring preview needs the FULL pair: an outline-color override alone
-  // (the Button hover/active/disabled recolors) is INERT in CSS — the
-  // resting outline-style/width still suppress the ring — so lowering it
-  // would draw a default-width ring the web never shows (caught by the 5d
-  // gate re-run: five critical secondary/tertiary state cells inflated by a
-  // phantom ring).
-  const ring = overrides['outline-color'] !== undefined && overrides['outline-width'] !== undefined;
+function translateStateOverrides(
+  overrides: Record<string, string>,
+  /** RC3 — the state's EFFECTIVE outline, resolved by `outlineRingForState`
+   *  from the CSS cascade rather than from the delta alone. `null` = no ring
+   *  in this state, which is the old behaviour for every shape the old rule
+   *  refused. */
+  ring: OutlineRing | null = null,
+): Record<string, string> {
   const out: Record<string, string> = {};
   for (const [cssProp, ref] of Object.entries(overrides)) {
     if (cssProp === 'outline-color' || cssProp === 'outline-width') {
@@ -3302,7 +3348,61 @@ function translateStateOverrides(overrides: Record<string, string>): Record<stri
       // lone outline channel: fall through untranslated (inert, like base)
     } else out[cssProp] = ref;
   }
+  // THE CASCADE HALF. When the ring's hue or width is not in the OVERRIDE it
+  // comes from the resting plane the state does not touch — that is what a
+  // cascade is — so the missing half is stamped here from the effective ref
+  // `outlineRingForState` resolved. Where both halves were in the override
+  // these two lines are no-ops and the output is byte-identical to before.
+  if (ring) {
+    out['outline-color:outline-preview'] ??= ring.colorRef;
+    out['outline-width:outline-preview'] ??= ring.widthRef;
+  }
   return out;
+}
+
+/** RC3 — the ring a STATE actually paints, read as CSS reads it.
+ *
+ *  THE DEFECT THIS REPLACES. The old rule asked one question of the state's
+ *  own DELTA — `outline-color !== undefined && outline-width !== undefined` —
+ *  and a library that spells its focus ring as a KEYWORD FLIP hands that rule
+ *  a width and no colour, so the ring never lowered and the focus-visible
+ *  preview came out byte-identical to the base cell. altitude.link is exactly
+ *  that shape (`outline-style: none` at rest over a 3px currentColor outline;
+ *  `:focus-visible { outline-style: solid; outline-width: 2px }`), and so is
+ *  every library that rests on `outline-style: none`.
+ *
+ *  WHAT DECIDES, in CSS's own order:
+ *   1. the KEYWORD. `outline-style` is what decides whether an outline paints
+ *      at all, and the contract carries it — `declaredStates[state]` when the
+ *      state flips it, `declared` when it is a resting fact. Absence is not
+ *      evidence of paint (CSS's initial value IS `none`), so absence never
+ *      unlocks the cascade below; it only leaves the OLD rule in force.
+ *   2. the PAIR, override first, resting behind it. A state that changes only
+ *      the width still draws with the resting hue.
+ *   3. the HUE OF LAST RESORT — `color`. `outline-color`'s initial value is
+ *      `currentColor`, and `detectFolds` (extract/computed/fuse.ts) folds a
+ *      measured-equal `outline-color` INTO `color` by name, which is why
+ *      altitude.link's contract carries no `outline-color` at all. Reading
+ *      `color` here is not a guessed hue: it is the CSS rule, and it is the
+ *      ink the generated CSS surface paints that same ring with.
+ *   4. and it has to INK. `transparent` is the focus-ring-reservation idiom
+ *      (`outline: 2px solid transparent` — Carbon's Accordion icon, Tabs nav
+ *      item and TextInput all resolve to #00000000, measured), so the same
+ *      value test the base plane applies gates the cascade too. Without it,
+ *      widening WHERE the fact comes from would have drawn a canvas ring
+ *      around three Carbon parts the library leaves bare — the HARMFUL class.
+ *
+ *  NOT A LOOSENING: the old override-pair rule is kept verbatim as its own
+ *  arm, so every shape that drew before draws identically; the cascade only
+ *  ADDS the rings a declared keyword proves are painted. Measured over the
+ *  whole committed corpus (21 parts carrying a state outline pair): exactly
+ *  one row changes, altitude.link's focus-visible. */
+interface OutlineRing {
+  colorRef: string;
+  widthRef: string;
+  /** true when the pair completed from the resting plane rather than the
+   *  override — the arm the declared keyword unlocks. */
+  viaCascade: boolean;
 }
 
 /** v13 part-level states (P18 second half): inside a State-axis PREVIEW
@@ -3335,7 +3435,13 @@ function withPartStateOverrides(
     }
     const overrides = { ...(part.states?.[stateName] ?? {}), ...byPropOverrides };
     if (Object.keys(overrides).length > 0 && !part.component && !part.slot) {
-      next = { ...next, tokens: { ...(next.tokens ?? {}), ...translateStateOverrides(overrides) } };
+      next = {
+        ...next,
+        tokens: {
+          ...(next.tokens ?? {}),
+          ...translateStateOverrides(overrides, outlineRingForState(part, stateName, overrides, subst)),
+        },
+      };
     }
     if (next !== part) changed = true;
     out[key] = next;
@@ -5088,6 +5194,12 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   // Button (4 variants × 3 sizes, 3 states): 12 base + 4×3 = 24, not 48.
   const stateVariants: VariantSpec[] = [];
   let statePreviewAxis: ComponentData['statePreviewAxis'];
+  /** RC3 — the EXACT combos each state preview is drawn at, recorded as the
+   *  loop draws them. The declared-fact receipt below needs them: whether a
+   *  state's `outline-style` is a code-only wall or a drawn stroke is a
+   *  per-combo answer (the hue can vary on an axis), and a receipt that
+   *  guesses one combo is how a wall outlives the fix that closed it. */
+  const previewSubstsByState = new Map<string, Array<Record<string, string>>>();
   if (contract.bindings?.figma?.statePreviews && contract.states.length > 0) {
     const overrides = root.states ?? {};
     const substProps = statePreviewSubstProps(contract); // validated: ≤1
@@ -5125,6 +5237,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
             `${prop.bindings.figma.property}=${prop.bindings.figma.values?.[value] ?? value}`,
           );
         }
+        (previewSubstsByState.get(stateName) ?? previewSubstsByState.set(stateName, []).get(stateName)!).push({ ...subst });
         const previewName = withStateSegment(nameParts.join(', '), statePreviewLabel(stateName));
         const row = primaryIdx === 0 && primary ? pi : 0;
         const col =
@@ -5147,9 +5260,13 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
           const v = subst[e.prop];
           if (v !== undefined) Object.assign(byPropState, e.map[v] ?? {});
         }
+        const rootStateOverrides = { ...(overrides[stateName] ?? {}), ...byPropState };
         const ctx = applyTokens(
           rootSpec,
-          translateStateOverrides({ ...(overrides[stateName] ?? {}), ...byPropState }),
+          translateStateOverrides(
+            rootStateOverrides,
+            outlineRingForState(root, stateName, rootStateOverrides, subst),
+          ),
           subst,
           baseCtx,
           root.hugsBelowMaxWidth,
@@ -5310,6 +5427,29 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       if (drawn) return;
       // Part D (owner directive, 2026-07-19): the annotation COPY does not
       // land on the canvas as description text — it rides the receipt.
+      // RC3 — `outline-style` is the ONE declared state fact that now
+      // reaches the canvas: it is the keyword that decides whether the
+      // outline paints, and `outlineRingForState` reads it to lower the
+      // ring as an OUTSIDE-aligned stroke. Answered against the combos the
+      // preview loop ACTUALLY drew, so the receipt cannot outlive the fix
+      // (drawn everywhere → no code-only fact at all, drawn nowhere → the
+      // wall below, unchanged, drawn in some → the split, named).
+      if (state && channel === 'outline-style') {
+        const substs = previewSubstsByState.get(state) ?? [];
+        const drawnIn = substs.filter((sb) => outlineRingForState(part, state, { ...(part.states?.[state] ?? {}) }, sb) !== null);
+        if (substs.length > 0 && drawnIn.length === substs.length) return;
+        if (drawnIn.length > 0) {
+          facts.push({
+            part: partName,
+            variant: '',
+            kind: 'declared',
+            channel,
+            value,
+            reason: `declared for the ${state} state and DRAWN in ${drawnIn.length} of ${substs.length} preview cells — the keyword lowers to an OUTSIDE-aligned canvas stroke wherever the state's effective outline pair completes and its colour inks; in the remaining ${substs.length - drawnIn.length} the pair does not complete or the colour is transparent, and nothing is drawn there`,
+          });
+          return;
+        }
+      }
       facts.push({
         part: partName,
         variant: '',
