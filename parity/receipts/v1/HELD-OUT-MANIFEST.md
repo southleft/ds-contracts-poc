@@ -130,12 +130,13 @@ blockers; each subject's README carries the detail.
 > say, are now a gated artifact: [`spec/GRAMMAR-COVERAGE.md`](../../../spec/GRAMMAR-COVERAGE.md)
 > (`npm run grammar-coverage:check`).
 >
-> Finding 7 turned out to have a **third** instance, found by merging this
-> branch forward: `scripts/door-census.ts` carried the same un-namespaced
-> `?? 'extract/computed/out'` fallback behind a hand-maintained ten-entry map,
-> and re-fused first-party `button/`, `badge/` and `spinner/` captures under
-> `bootstrap5` and `radix-themes` names. Fixed the same way, and a config with
-> no captures is now a named absent subject rather than a re-fuse failure.
+> Finding 7 turned out to have a **third** instance, independently hit while
+> landing this branch: `scripts/door-census.ts` carried the same un-namespaced
+> `?? 'extract/computed/out'` fallback, and re-fused first-party `button/`,
+> `badge/` and `spinner/` captures under `bootstrap5` and `radix-themes` names.
+> Fixed on the exam branch itself (`ac9974cf`), which this branch merges: a
+> config with no committed captures is now a named absent subject, excluded
+> from the denominator, rather than a re-fuse failure.
 
 1. **`importName` cannot name a compound export.** The harness emits
    `importName` verbatim into `import { … } from '<library.package>'`, so

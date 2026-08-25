@@ -42,29 +42,20 @@ import { kebab } from '../extract/types.js';
 
 const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CFG_DIR = path.join(REPO, 'extract/computed/configs');
-/*  THE UN-NAMESPACED FALLBACK, FOUND A THIRD TIME. This was a hand-maintained
- *  ten-entry map with `?? 'extract/computed/out'` behind it — the same shape
- *  `extract/computed/drift-check.ts` and `ua-baseline-check.ts` carried until
- *  the held-out round named it (HELD-OUT-MANIFEST finding 7). The root `out/`
- *  ALSO holds the FIRST-PARTY component dirs (`button/`, `badge/`, `spinner/`,
- *  `avatar/`, `checkbox/`, `textfield/`), so any config absent from the map
- *  whose component names collide with those picked up ANOTHER LIBRARY'S
- *  captured truth and re-fused it under its own name. Adding three configs
- *  that have never been captured turned this census red with five confident
- *  findings about them — `bootstrap5.json/Button: base capture missing`,
- *  `radix-themes.json/Badge: base capture missing` and three more. Nothing was
- *  wrong with the configs; the census was reading first-party captures under a
- *  foreign name.
- *
- *  The rule now: `polaris` and `polaris-depth` are the two configs that
- *  legitimately live in the root, named here; every other config resolves to
- *  its own namespaced dir. Every committed library's resolution is
- *  byte-identical — the other eight all had a namespaced dir in the old map —
- *  and a library with no captures is an ordinary named skip instead of a
- *  silent misattribution. Mirrors extract/computed/drift-check.ts. */
-const ROOT_OUT_CONFIGS = new Set(['polaris.json', 'polaris-depth.json']);
-const outRootFor = (cfgFile: string): string =>
-  ROOT_OUT_CONFIGS.has(cfgFile) ? 'extract/computed/out' : `extract/computed/out/${cfgFile.replace(/\.json$/, '')}`;
+/** Mirrors extract/computed/ua-baseline-check.ts — the same config→out map, so
+ *  the two checks measure the same population. */
+const OUT_FOR: Record<string, string> = {
+  'polaris.json': 'extract/computed/out',
+  'polaris-depth.json': 'extract/computed/out',
+  'mui.json': 'extract/computed/out/mui',
+  'carbon.json': 'extract/computed/out/carbon',
+  'altitude.json': 'extract/computed/out/altitude',
+  'astryx.json': 'extract/computed/out/astryx',
+  'tailwind.json': 'extract/computed/out/tailwind',
+  'fluent.json': 'extract/computed/out/fluent',
+  'shadcn.json': 'extract/computed/out/shadcn',
+  'antd.json': 'extract/computed/out/antd',
+};
 
 export interface LibraryCensus {
   library: string;
@@ -85,9 +76,6 @@ export interface LibraryCensus {
 export interface Census {
   components: number;
   skipped: string[];
-  /** Configs with no capture output at all — an ABSENT SUBJECT, not a
-   *  re-fuse failure. The held-out exam subjects live here until they run. */
-  neverCaptured: string[];
   libraries: LibraryCensus[];
   totals: Omit<LibraryCensus, 'library' | 'byPrefix'> & { byPrefix: Record<string, number> };
 }
@@ -97,15 +85,26 @@ const PREFIX_RE = /^([a-z0-9-]+):/;
 export function runCensus(): Census {
   const libraries: LibraryCensus[] = [];
   const skipped: string[] = [];
-  const neverCaptured: string[] = [];
   let components = 0;
 
   for (const cfgFile of readdirSync(CFG_DIR).sort()) {
     if (!cfgFile.endsWith('.json')) continue;
     const cfg: CaptureConfig = loadConfig(REPO, path.join(CFG_DIR, cfgFile));
-    const outRoot = path.join(REPO, outRootFor(cfgFile));
-    if (!existsSync(outRoot)) { neverCaptured.push(`${cfgFile} (no captures under ${outRootFor(cfgFile)})`); continue; }
     const libName = cfgFile.replace(/\.json$/, '');
+    // A config with no entry in OUT_FOR has no committed captures of its own.
+    // The fallback used to be the un-namespaced root `out/`, which also holds the
+    // FIRST-PARTY component dirs (button/, badge/, avatar/, checkbox/, textfield/,
+    // spinner/) — so a never-captured config whose component names collide with
+    // those read ANOTHER library's captures and reported them as its own. The
+    // held-out exam material (bootstrap5, radix-themes, day-picker — captured by
+    // nothing, deliberately) walked straight into it. Only the two configs that
+    // legitimately live in the root are named; everything else is a named skip.
+    // Mirrors extract/computed/{drift,ua-baseline}-check.ts.
+    if (!(cfgFile in OUT_FOR)) {
+      skipped.push(`${cfgFile}: no committed captures (not in OUT_FOR) — never captured, nothing to census`);
+      continue;
+    }
+    const outRoot = path.join(REPO, OUT_FOR[cfgFile]);
     const row: LibraryCensus = {
       library: libName,
       components: 0,
@@ -206,7 +205,7 @@ export function runCensus(): Census {
     totals.codeOnly += l.codeOnly;
     for (const [k, v] of Object.entries(l.byPrefix)) totals.byPrefix[k] = (totals.byPrefix[k] ?? 0) + v;
   }
-  return { components, skipped, neverCaptured, libraries, totals: totals as Census['totals'] };
+  return { components, skipped, libraries, totals: totals as Census['totals'] };
 }
 
 /** The markdown table the register and the PR body carry. */
@@ -232,7 +231,6 @@ if (process.argv[1] && path.resolve(process.argv[1]) === path.resolve(fileURLToP
     console.log(censusTable(c).join('\n'));
     console.log(`\nre-fused ${c.components} committed component(s), ${c.skipped.length} skipped`);
     for (const s of c.skipped.slice(0, 8)) console.log(`  ! ${s}`);
-    if (c.neverCaptured.length > 0) console.log(`  never captured (absent subjects, not failures): ${c.neverCaptured.join(', ')}`);
     const top = Object.entries(c.totals.byPrefix).sort((a, b) => b[1] - a[1]);
     console.log('\nreceipt firings by door prefix:');
     for (const [k, v] of top) console.log(`  ${String(v).padStart(6)}  ${k}`);

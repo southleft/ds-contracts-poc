@@ -219,15 +219,18 @@ export function auditCensus(c: Census): Finding[] {
   const bad = (label: string) => out.push({ ok: false, label });
   const ok = (label: string) => out.push({ ok: true, label });
 
-  if (c.skipped.length > 0) {
-    bad(`${c.skipped.length} component(s) failed to re-fuse — the census below is NOT a denominator:\n      ${c.skipped.slice(0, 5).join('\n      ')}`);
-  } else ok(`all ${c.components} committed components re-fused offline, 0 skipped`);
-  // A config with NO capture output is an ABSENT SUBJECT, not a failure — the
-  // held-out exam subjects are committed before they are ever captured. Named
-  // rather than silent, so an absent subject can never be mistaken for a
-  // measured zero (HELD-OUT-MANIFEST finding 7).
-  if (c.neverCaptured.length > 0) {
-    ok(`${c.neverCaptured.length} config(s) have no captures yet and are named, not counted: ${c.neverCaptured.join(', ')}`);
+  // A config that has never been captured (held-out exam material, by design)
+  // is a NAMED skip, not a failure: there is nothing to census, and saying so
+  // out loud is the anti-silent property. A component that HAS captures and
+  // still would not re-fuse is a real red — the census would not be a
+  // denominator. Keep the two apart.
+  const neverCaptured = c.skipped.filter((s) => s.includes('no committed captures'));
+  const refuseFailures = c.skipped.filter((s) => !s.includes('no committed captures'));
+  if (refuseFailures.length > 0) {
+    bad(`${refuseFailures.length} component(s) failed to re-fuse — the census below is NOT a denominator:\n      ${refuseFailures.slice(0, 5).join('\n      ')}`);
+  } else ok(`all ${c.components} committed components re-fused offline, 0 failed`);
+  if (neverCaptured.length > 0) {
+    ok(`${neverCaptured.length} config(s) never captured, named and excluded from the denominator:\n      ${neverCaptured.join('\n      ')}`);
   }
   if (c.components < 50) {
     bad(`only ${c.components} components re-fused — a check that passes because it measured almost nothing is the defect this repo keeps finding`);
