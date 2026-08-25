@@ -171,10 +171,25 @@ async function renderRow(
   const world = loadLibraryWorld(row.library);
   const outDir = path.join(REPO, CENSUS_DIR, row.library.library, row.row.id);
   mkdirSync(outDir, { recursive: true });
-  // Stale code PNGs from an earlier sample rule are removed; canvas PNGs and
-  // the verdict are the other half's and are never touched here.
-  for (const f of readdirSync(outDir))
-    if (/^code-.*\.png$/.test(f)) rmSync(path.join(outDir, f));
+  /**
+   * Stale code PNGs from an earlier sample rule are removed; canvas PNGs and
+   * the verdict are the other half's and are never touched here.
+   *
+   * DEFERRED TO THE POINT OF REPLACEMENT (2026-08-25, same class as the
+   * first-pass packet defect). This used to run HERE, at the top — and the
+   * next statement after it can be `return receipt` with `unavailable =
+   * "engine compile refused"`, so a row the engine declined lost its
+   * committed renders and got nothing back. A row that writes no PNG now
+   * destroys none: it keeps the pictures from the last run that COULD render
+   * and says `unavailable` beside them.
+   */
+  let cleared = false;
+  const clearStaleCodePngs = (): void => {
+    if (cleared) return;
+    cleared = true;
+    for (const f of readdirSync(outDir))
+      if (/^code-.*\.png$/.test(f)) rmSync(path.join(outDir, f));
+  };
 
   const receipt: CodeRenderReceipt = {
     id: row.row.id,
@@ -273,6 +288,8 @@ async function renderRow(
       );
       const shot = await captureCell(page, String(s.index), v.interaction);
       const file = `code-${s.slug}.png`;
+      // The point of replacement: this row has a raster in hand.
+      clearStaleCodePngs();
       writeFileSync(path.join(outDir, file), shot.png);
       v.status = "rendered";
       v.png = file;
