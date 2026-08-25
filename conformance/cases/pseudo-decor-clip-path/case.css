@@ -1,0 +1,2 @@
+[data-cf="pseudo-decor-clip-path"] { position: relative; display: flex; padding: 6px 8px; background: rgb(255, 255, 255); }
+[data-cf="pseudo-decor-clip-path"]::after { content: ""; position: absolute; bottom: -8px; left: 12px; width: 16px; height: 8px; background: rgba(0, 0, 0, 0.85); clip-path: polygon(50% 0%, 100% 100%, 0% 100%); }

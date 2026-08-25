@@ -78,6 +78,7 @@ export { default as CasePositionSticky } from '../cases/position-sticky/Case.tsx
 export { default as CasePresenceHiddenAxisGeometry } from '../cases/presence-hidden-axis-geometry/Case.tsx';
 export { default as CasePseudoBackdrop } from '../cases/pseudo-backdrop/Case.tsx';
 export { default as CasePseudoContentGlyph } from '../cases/pseudo-content-glyph/Case.tsx';
+export { default as CasePseudoDecorClipPath } from '../cases/pseudo-decor-clip-path/Case.tsx';
 export { default as CasePseudoGradientOnly } from '../cases/pseudo-gradient-only/Case.tsx';
 export { default as CasePseudoMarker } from '../cases/pseudo-marker/Case.tsx';
 export { default as CasePseudoPlaceholder } from '../cases/pseudo-placeholder/Case.tsx';
@@ -86,6 +87,9 @@ export { default as CaseRotateIndependentProperty } from '../cases/rotate-indepe
 export { default as CaseShadowPart } from '../cases/shadow-part/Case.tsx';
 export { default as CaseShadowRootClosed } from '../cases/shadow-root-closed/Case.tsx';
 export { default as CaseStageBoxEqual } from '../cases/stage-box-equal/Case.tsx';
+export { default as CaseSvgGlyphAbsentCells } from '../cases/svg-glyph-absent-cells/Case.tsx';
+export { default as CaseSvgGlyphAxesRagged } from '../cases/svg-glyph-axes-ragged/Case.tsx';
+export { default as CaseSvgGlyphTwoAxis } from '../cases/svg-glyph-two-axis/Case.tsx';
 export { default as CaseSvgOutsideGrammar } from '../cases/svg-outside-grammar/Case.tsx';
 export { default as CaseSvgStrokeGlyphFillNone } from '../cases/svg-stroke-glyph-fill-none/Case.tsx';
 export { default as CaseTextOverflowEllipsis } from '../cases/text-overflow-ellipsis/Case.tsx';

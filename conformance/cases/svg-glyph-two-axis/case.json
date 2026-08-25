@@ -1,0 +1,22 @@
+{
+  "id": "svg-glyph-two-axis",
+  "feature": "svg",
+  "construct": "one glyph whose path data varies over TWO enum axes at once (tone x size), every conjunction drawn — the fluent.checkbox indicator shape",
+  "why": "The asset plan searched for exactly ONE axis whose values partition the markup and, failing, threw the ENTIRE glyph away and promoted the host as an empty box. Fluent's checkbox indicator varies over checked (check vs dash), size (12px and 16px are DIFFERENT authored paths) and shape (mixed square vs circular) at once, so the census minted an empty blue box with no checkmark in it. A rectangular conjunction of per-axis value sets IS spellable in the contract today — visibleWhen on one axis plus stylesWhen display:none on the excluded values of the rest, the pair variantParts and emit-react already resolve.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.a.parts — one per-conjunction icon part per glyph, each with visibleWhen + stylesWhen",
+  "observable": {
+    "part": "a",
+    "channel": "d",
+    "capturedValue": "path(\"M 2 6 L 5 9 L 10 2\")"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "each variant cell draws its own glyph asset; no cell is empty"
+  },
+  "axes": [
+    { "prop": "tone", "values": ["plain", "marked"], "default": "plain" },
+    { "prop": "size", "values": ["sm", "lg"], "default": "sm" }
+  ]
+}

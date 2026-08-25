@@ -79,6 +79,7 @@
 @import '../cases/presence-hidden-axis-geometry/case.css';
 @import '../cases/pseudo-backdrop/case.css';
 @import '../cases/pseudo-content-glyph/case.css';
+@import '../cases/pseudo-decor-clip-path/case.css';
 @import '../cases/pseudo-gradient-only/case.css';
 @import '../cases/pseudo-marker/case.css';
 @import '../cases/pseudo-placeholder/case.css';
@@ -87,6 +88,9 @@
 @import '../cases/shadow-part/case.css';
 @import '../cases/shadow-root-closed/case.css';
 @import '../cases/stage-box-equal/case.css';
+@import '../cases/svg-glyph-absent-cells/case.css';
+@import '../cases/svg-glyph-axes-ragged/case.css';
+@import '../cases/svg-glyph-two-axis/case.css';
 @import '../cases/svg-outside-grammar/case.css';
 @import '../cases/svg-stroke-glyph-fill-none/case.css';
 @import '../cases/text-overflow-ellipsis/case.css';

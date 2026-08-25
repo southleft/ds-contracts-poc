@@ -731,6 +731,14 @@
       "axes": []
     },
     {
+      "__case": "pseudo-elements: a DRAWN ::after decor box whose entire SHAPE is a clip-path (the antd tooltip arrow: a 16x8 solid box cut to a triangle) — declared UNSUPPORTED",
+      "name": "CasePseudoDecorClipPath",
+      "importName": "CasePseudoDecorClipPath",
+      "contract": "conformance/seeds/pseudo-decor-clip-path.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
       "__case": "pseudo-elements: ::after painted ONLY by a linear-gradient — declared REFUSED",
       "name": "CasePseudoGradientOnly",
       "importName": "CasePseudoGradientOnly",
@@ -795,6 +803,39 @@
       "sampleText": "",
       "axes": [],
       "blockStage": true
+    },
+    {
+      "__case": "svg: a glyph shared by (plain,sm) and (marked,lg) whose per-axis rectangle also COVERS (plain,lg) and (marked,sm), where the library draws no glyph at all — declared REFUSED",
+      "name": "CaseSvgGlyphAbsentCells",
+      "importName": "CaseSvgGlyphAbsentCells",
+      "contract": "conformance/seeds/svg-glyph-absent-cells.contract.json",
+      "sampleText": "",
+      "axes": [
+        "tone",
+        "size"
+      ]
+    },
+    {
+      "__case": "svg: glyph markup whose value sets are RAGGED across two axes — one glyph on the (plain,sm)/(marked,lg) diagonal, two others on the opposite one — declared REFUSED",
+      "name": "CaseSvgGlyphAxesRagged",
+      "importName": "CaseSvgGlyphAxesRagged",
+      "contract": "conformance/seeds/svg-glyph-axes-ragged.contract.json",
+      "sampleText": "",
+      "axes": [
+        "tone",
+        "size"
+      ]
+    },
+    {
+      "__case": "svg: one glyph whose path data varies over TWO enum axes at once (tone x size), every conjunction drawn — the fluent.checkbox indicator shape — declared CARRIED",
+      "name": "CaseSvgGlyphTwoAxis",
+      "importName": "CaseSvgGlyphTwoAxis",
+      "contract": "conformance/seeds/svg-glyph-two-axis.contract.json",
+      "sampleText": "",
+      "axes": [
+        "tone",
+        "size"
+      ]
     },
     {
       "__case": "svg: <svg> whose children are <circle> and <rect> — declared REFUSED",

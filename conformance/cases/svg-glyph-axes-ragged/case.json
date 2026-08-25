@@ -1,0 +1,22 @@
+{
+  "id": "svg-glyph-axes-ragged",
+  "feature": "svg",
+  "construct": "glyph markup whose value sets are RAGGED across two axes — one glyph on the (plain,sm)/(marked,lg) diagonal, two others on the opposite one",
+  "why": "THE ANTI-LOOSENING GUARD for svg-glyph-two-axis. Carrying a rectangular conjunction must NOT become 'carry any multi-axis glyph'. A diagonal correlation is a DISJUNCTION: the value sets of the shared glyph span the whole grid, so any visibleWhen + stylesWhen rectangle would draw it in cells the library gives a DIFFERENT glyph. The whole asset must still refuse under its ORIGINAL name and the host must still promote as a box.",
+  "expect": "REFUSED",
+  "expectName": "svg-content-multi-axis",
+  "expectWhere": "LEDGER.md",
+  "observable": {
+    "part": "a",
+    "channel": "d",
+    "capturedValue": "path(\"M 2 6 L 5 9 L 10 2\")"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "a disjunctive glyph correlation has no contract spelling; the host draws as an empty box and the refusal is named"
+  },
+  "axes": [
+    { "prop": "tone", "values": ["plain", "marked"], "default": "plain" },
+    { "prop": "size", "values": ["sm", "lg"], "default": "sm" }
+  ]
+}

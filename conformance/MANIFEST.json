@@ -2,12 +2,12 @@
   "_marker": "THE DENOMINATOR. Hand-authored per case, generated into one index. Deliberately NOT derived from isFusable / styled / DECLARED_CHANNELS / CHANNEL_TO_COMPUTED / TOKEN_CHANNELS / carriedParts — every instrument in the pipeline derives its denominator from the same filter that decides carriage, which is why a channel the filter never opened scores 100%. This file is the independent one.",
   "generatedBy": "conformance/build.ts",
   "library": "@ds-contracts/conformance@0.1.0",
-  "count": 97,
+  "count": 101,
   "byExpectation": {
-    "CARRIED": 54,
+    "CARRIED": 55,
     "LOWERED": 4,
-    "REFUSED": 21,
-    "UNSUPPORTED": 18
+    "REFUSED": 23,
+    "UNSUPPORTED": 19
   },
   "cases": [
     {
@@ -1878,6 +1878,24 @@
       }
     },
     {
+      "id": "pseudo-decor-clip-path",
+      "feature": "pseudo-elements",
+      "construct": "a DRAWN ::after decor box whose entire SHAPE is a clip-path (the antd tooltip arrow: a 16x8 solid box cut to a triangle)",
+      "why": "The decor grammar promotes the box on background-color + border ring and never reads clip-path, so antd's tooltip arrow minted as its UNCLIPPED 16x8 rectangle — a flat-topped tab where the library draws a point. The loss was SILENT TWICE: the pseudo reader consumes the channel so it never reaches codeOnlyChannels, and no artifact in the naming union mentioned it. ShapeSchema is rect / ellipse / REGULAR n-gon, so the region has no contract spelling today; the honest outcome is a NAMED wall carrying the measured clip value, not a guessed polygon.",
+      "expect": "UNSUPPORTED",
+      "expectName": "pseudo-decor-clip-path-uncarried",
+      "expectWhere": "LEDGER.md",
+      "observable": {
+        "part": "root::after",
+        "channel": "clip-path",
+        "capturedValue": "polygon(50% 0%, 100% 100%, 0% 100%)"
+      },
+      "canvas": {
+        "expect": "ABSENT",
+        "note": "the clip region has no frame-level spelling; the decor box is promoted unclipped and the clip is named as a wall beside it"
+      }
+    },
+    {
       "id": "pseudo-gradient-only",
       "feature": "pseudo-elements",
       "construct": "::after painted ONLY by a linear-gradient",
@@ -2022,6 +2040,115 @@
         "note": "a stage-sized box is a measurement artefact, not a component fact"
       },
       "blockStage": true
+    },
+    {
+      "id": "svg-glyph-absent-cells",
+      "feature": "svg",
+      "construct": "a glyph shared by (plain,sm) and (marked,lg) whose per-axis rectangle also COVERS (plain,lg) and (marked,sm), where the library draws no glyph at all",
+      "why": "THE ANTI-OVERDRAW GUARD. A rectangularity test asserted only over the combos where the glyph is PRESENT cannot see the cells the library leaves EMPTY: the value sets tone{plain,marked} x size{sm,lg} look rectangular over the two drawn cells and would mint the glyph in four. Over-draw is the one class the fixture's captured-channel -> contract direction cannot measure, so it is measured here as a NAME: the asset must stay refused under svg-content-multi-axis. An ugly mint is worse than an honest refusal.",
+      "expect": "REFUSED",
+      "expectName": "svg-content-multi-axis",
+      "expectWhere": "LEDGER.md",
+      "observable": {
+        "part": "a",
+        "channel": "d",
+        "capturedValue": "path(\"M 2 6 L 5 9 L 10 2\")"
+      },
+      "canvas": {
+        "expect": "ABSENT",
+        "note": "the conjunction rectangle covers cells the library leaves empty; the whole asset refuses and the host promotes as a box"
+      },
+      "axes": [
+        {
+          "prop": "tone",
+          "values": [
+            "plain",
+            "marked",
+            "other"
+          ],
+          "default": "plain"
+        },
+        {
+          "prop": "size",
+          "values": [
+            "sm",
+            "lg"
+          ],
+          "default": "sm"
+        }
+      ]
+    },
+    {
+      "id": "svg-glyph-axes-ragged",
+      "feature": "svg",
+      "construct": "glyph markup whose value sets are RAGGED across two axes — one glyph on the (plain,sm)/(marked,lg) diagonal, two others on the opposite one",
+      "why": "THE ANTI-LOOSENING GUARD for svg-glyph-two-axis. Carrying a rectangular conjunction must NOT become 'carry any multi-axis glyph'. A diagonal correlation is a DISJUNCTION: the value sets of the shared glyph span the whole grid, so any visibleWhen + stylesWhen rectangle would draw it in cells the library gives a DIFFERENT glyph. The whole asset must still refuse under its ORIGINAL name and the host must still promote as a box.",
+      "expect": "REFUSED",
+      "expectName": "svg-content-multi-axis",
+      "expectWhere": "LEDGER.md",
+      "observable": {
+        "part": "a",
+        "channel": "d",
+        "capturedValue": "path(\"M 2 6 L 5 9 L 10 2\")"
+      },
+      "canvas": {
+        "expect": "ABSENT",
+        "note": "a disjunctive glyph correlation has no contract spelling; the host draws as an empty box and the refusal is named"
+      },
+      "axes": [
+        {
+          "prop": "tone",
+          "values": [
+            "plain",
+            "marked"
+          ],
+          "default": "plain"
+        },
+        {
+          "prop": "size",
+          "values": [
+            "sm",
+            "lg"
+          ],
+          "default": "sm"
+        }
+      ]
+    },
+    {
+      "id": "svg-glyph-two-axis",
+      "feature": "svg",
+      "construct": "one glyph whose path data varies over TWO enum axes at once (tone x size), every conjunction drawn — the fluent.checkbox indicator shape",
+      "why": "The asset plan searched for exactly ONE axis whose values partition the markup and, failing, threw the ENTIRE glyph away and promoted the host as an empty box. Fluent's checkbox indicator varies over checked (check vs dash), size (12px and 16px are DIFFERENT authored paths) and shape (mixed square vs circular) at once, so the census minted an empty blue box with no checkmark in it. A rectangular conjunction of per-axis value sets IS spellable in the contract today — visibleWhen on one axis plus stylesWhen display:none on the excluded values of the rest, the pair variantParts and emit-react already resolve.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.a.parts — one per-conjunction icon part per glyph, each with visibleWhen + stylesWhen",
+      "observable": {
+        "part": "a",
+        "channel": "d",
+        "capturedValue": "path(\"M 2 6 L 5 9 L 10 2\")"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "each variant cell draws its own glyph asset; no cell is empty"
+      },
+      "axes": [
+        {
+          "prop": "tone",
+          "values": [
+            "plain",
+            "marked"
+          ],
+          "default": "plain"
+        },
+        {
+          "prop": "size",
+          "values": [
+            "sm",
+            "lg"
+          ],
+          "default": "sm"
+        }
+      ]
     },
     {
       "id": "svg-outside-grammar",

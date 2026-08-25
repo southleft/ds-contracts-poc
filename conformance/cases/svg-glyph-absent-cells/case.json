@@ -1,0 +1,22 @@
+{
+  "id": "svg-glyph-absent-cells",
+  "feature": "svg",
+  "construct": "a glyph shared by (plain,sm) and (marked,lg) whose per-axis rectangle also COVERS (plain,lg) and (marked,sm), where the library draws no glyph at all",
+  "why": "THE ANTI-OVERDRAW GUARD. A rectangularity test asserted only over the combos where the glyph is PRESENT cannot see the cells the library leaves EMPTY: the value sets tone{plain,marked} x size{sm,lg} look rectangular over the two drawn cells and would mint the glyph in four. Over-draw is the one class the fixture's captured-channel -> contract direction cannot measure, so it is measured here as a NAME: the asset must stay refused under svg-content-multi-axis. An ugly mint is worse than an honest refusal.",
+  "expect": "REFUSED",
+  "expectName": "svg-content-multi-axis",
+  "expectWhere": "LEDGER.md",
+  "observable": {
+    "part": "a",
+    "channel": "d",
+    "capturedValue": "path(\"M 2 6 L 5 9 L 10 2\")"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "the conjunction rectangle covers cells the library leaves empty; the whole asset refuses and the host promotes as a box"
+  },
+  "axes": [
+    { "prop": "tone", "values": ["plain", "marked", "other"], "default": "plain" },
+    { "prop": "size", "values": ["sm", "lg"], "default": "sm" }
+  ]
+}
