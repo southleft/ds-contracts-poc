@@ -152,9 +152,15 @@ No results recorded yet. `npm run hard-corpus:record` reads the measured baselin
    may contain a CSS channel name (the first conformance run had 8 false passes
    because a class named `cf-filter-blur` satisfied a search for `filter`); the
    root is `cf-root` + `data-cf="<id>"`, children are `cf-a` / `cf-b`.
-2. Establish `observable.capturedValue` from a **browser**, not from memory — it
-   is defined as the value Chromium computes, and a wrong one grades UNMEASURED
-   for a reason that is about the fixture rather than the engine.
+2. Establish `observable.capturedValue` from a **browser**, not from memory — a
+   wrong one grades UNMEASURED for a reason that is about the fixture rather
+   than the engine. It is the value the capture READER recorded, which is not
+   always the raw `getComputedStyle` string: colours inside a composite value
+   are normalised to `rgba()`. `hard-gradient-element-fill` was authored with
+   Chromium's `rgb()` spelling and graded UNMEASURED until the fixture (never
+   the expectation) was repaired. When a case grades UNMEASURED, read
+   `extract/computed/out/conformance/<export>/captured-truth.json` before
+   concluding anything about the engine.
 3. Declare `expect` from the closed table the mechanism comes from, before you
    know what the engine does. Add the row to `spec/hard-corpus.json`.
 4. `npx tsx conformance/build.ts && npm run hard-corpus:check -- --write` and

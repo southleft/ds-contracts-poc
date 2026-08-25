@@ -2,14 +2,14 @@
   "id": "hard-gradient-element-fill",
   "feature": "non-stroke-ink",
   "construct": "background-image: linear-gradient on the ELEMENT (not a pseudo)",
-  "why": "RC3, third mechanism. The pseudo-gradient case is REFUSED; a gradient on the element itself is the surface every hero card and every gradient button paints with. spec/channel-table.json classes background-image CARRIED (gradient stacks mint as a whole-value gradient kind).",
+  "why": "RC3, third mechanism. The pseudo-gradient case is REFUSED; a gradient on the element itself is the surface every hero card and every gradient button paints with. spec/channel-table.json classes background-image CARRIED (gradient stacks mint as a whole-value gradient kind). FIXTURE REPAIR (2026-08-25, before any result was recorded): capturedValue first read the raw getComputedStyle spelling `linear-gradient(to right, rgb(255, 255, 255) 0%, rgb(203, 213, 225) 100%)`; the capture reader normalises every colour inside a gradient value to rgba(), so the gate could not match it and graded UNMEASURED for a reason about the fixture rather than the engine. The DECLARED DISPOSITION was not touched.",
   "expect": "CARRIED",
   "expectName": "",
   "expectWhere": "anatomy.root.tokens.background-image",
   "observable": {
     "part": "root",
     "channel": "background-image",
-    "capturedValue": "linear-gradient(to right, rgb(255, 255, 255) 0%, rgb(203, 213, 225) 100%)"
+    "capturedValue": "linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(203, 213, 225, 1) 100%)"
   },
   "canvas": {
     "expect": "PRESENT",
