@@ -219,7 +219,19 @@ const ROOT_CONTROL_FALLBACK = seed('check.placeholder-root-fallback', 'Placehold
   },
 });
 
-/** (e) a form control with NO placeholder concept at all (the checkbox shape). */
+/** (e) a form control with NO placeholder concept at all.
+ *
+ *  TWO parts, and the SECOND one is the load-bearing half. `box` is
+ *  `input[type=checkbox]`, which `isNativeCheckablePart` filters out before
+ *  any spec is built — it compiles to NO node, so it can never fabricate
+ *  anything and pinning it alone proves nothing. `native` is a BARE
+ *  <input> with no `type` and no `placeholder`: the switch's hidden input,
+ *  the slider thumb, the native select box. That part DOES reach
+ *  formControlSpec, and it is the shape the previous attempt fabricated two
+ *  losses on ('this contract carries no default for the bound text prop and
+ *  no literal `placeholder` attr' — asserted of a contract that has no
+ *  placeholder prop at all). Reverting the guard to that attempt's
+ *  `if (placeholderCharacters === '')` turns this case RED on `native`. */
 const NO_CONCEPT = seed('check.placeholder-no-concept', 'PlaceholderNoConcept', {
   semantics: { element: 'div' },
   anatomy: {
@@ -229,6 +241,10 @@ const NO_CONCEPT = seed('check.placeholder-no-concept', 'PlaceholderNoConcept', 
         box: {
           element: 'input',
           attrs: { type: 'checkbox' },
+          tokens: { color: '{field.ink}', 'font-size': '{field.size}' },
+        },
+        native: {
+          element: 'input',
           tokens: { color: '{field.ink}', 'font-size': '{field.size}' },
         },
       },
@@ -439,7 +455,7 @@ console.log('placeholder-ink (e): a form control with NO placeholder concept fab
   const r = await roundTrip(NO_CONCEPT);
   const bogus = r.facts.filter((f) => f.channel.startsWith('placeholder'));
   console.log(`    ${r.facts.length} code-only fact(s); ${bogus.length} of them placeholder-shaped`);
-  check('a checkbox-shaped <input> part names NO placeholder fact (it has no placeholder concept)', bogus.length === 0);
+  check('neither the checkbox-shaped nor the BARE <input> part names a placeholder fact (neither has a placeholder concept)', bogus.length === 0);
   check('…and the set description does not claim placeholder facts', !/placeholder/.test(r.union.split('\n').filter((l) => /code-only fact/.test(l)).join('\n')));
 }
 
