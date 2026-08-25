@@ -227,27 +227,42 @@
     },
     {
       "stage": "mint",
-      "status": "PENDING",
-      "ms": 730,
+      "status": "ok",
+      "ms": 1271,
       "driver": "mcp",
       "command": "npx ds-contracts figma … --file-key byMp6lt0Ij9b2QbkDGFwBh  →  an MCP-holding agent runs it through the figma-console bridge",
-      "message": "runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over stdio to its own client and WebSocket to plugin clients, and this harness is neither — no port, flag or configuration lets a Node process issue the write, so it is performed by an agent holding the figma-console MCP tools and records its own evidence at parity/receipts/v1/first-pass/selftest-altitude/mint-evidence.json. Bundle produced, mint pending: the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact.",
+      "message": "AMENDED IN PLACE, not created: amended=true, nodeId 39:6746, rebuiltVariants=5, addedVariants=[\"Variant=Secondary, Type=Squared, State=Focus Visible\",\"Variant=Info, Type=Squared, State=Focus Visible\",\"Variant=Success, Type=Squared, State=Focus Visible\",\"Variant=Warning, Type=Squared, State=Focus Visible\",\"Variant=Danger, Type=Squared, State=Focus Visible\"], extraVariants=[\"Variant=Secondary, Type=Default\",\"Variant=Info, Type=Default\",\"Variant=Success, Type=Default\",\"Variant=Warning, Type=Default\",\"Variant=Danger, Type=Default\"] — the amend LEFT 5 variants on the canvas that this contract does not carry, and the set now mixes two vocabularies (Type=Default from an earlier mint, Type=Squared, State=Default from this one). 12 code-only facts. newPages=[] — the exam page was current and was ignored. [MCP-driven mint, one attempt, evidence parity/receipts/v1/first-pass/selftest-altitude/mint-evidence.json; operator agent holding the figma-console MCP tools (figma_execute / exportAsync), Figma Desktop Bridge plugin 1.39.0 on ws port 9225; file byMp6lt0Ij9b2QbkDGFwBh, page \"Census / altitude\"]",
       "artifacts": [
         {
           "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-VX09uf/mint/chip.figma.js",
           "sha256": "4c6bbc649226aae43d601fe04c2255b58f481b8104c2da9acb02a99b6838cb11",
           "bytes": 110619,
           "committed": false
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-altitude/chip/canvas-secondary-squared.png",
+          "sha256": "10e786f1b15fde675fbbeacd7b2449b08512aa44f48a2637d5c2a407d22276ac",
+          "bytes": 1422,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-altitude/chip/canvas-info-squared.png",
+          "sha256": "5db43e11dfcf57ead09c89fd09ba1e1d063d397867a0533a998bb5a5d6c64e03",
+          "bytes": 1384,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-altitude/chip/canvas-success-squared.png",
+          "sha256": "d22c2b447a8cdafe4765e9ea73f9afac22238964120fa323f4f559da2a5875a3",
+          "bytes": 1311,
+          "committed": true
         }
-      ]
+      ],
+      "bytesWritten": true
     }
   ],
-  "chainComplete": false,
-  "firstStop": {
-    "stage": "mint",
-    "status": "PENDING",
-    "message": "runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over stdio to its own client and WebSocket to plugin clients, and this harness is neither — no port, flag or configuration lets a Node process issue the write, so it is performed by an agent holding the figma-console MCP tools and records its own evidence at parity/receipts/v1/first-pass/selftest-altitude/mint-evidence.json. Bundle produced, mint pending: the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact."
-  },
+  "chainComplete": true,
+  "firstStop": null,
   "images": {
     "ref": [
       "parity/receipts/v1/first-pass/selftest-altitude/chip/ref-unset-unset.png",
@@ -269,13 +284,33 @@
       "parity/receipts/v1/first-pass/selftest-altitude/chip/code-success-unset.png",
       "parity/receipts/v1/first-pass/selftest-altitude/chip/code-success-squared.png"
     ],
-    "canvas": [],
+    "canvas": [
+      "parity/receipts/v1/first-pass/selftest-altitude/chip/canvas-secondary-squared.png",
+      "parity/receipts/v1/first-pass/selftest-altitude/chip/canvas-info-squared.png",
+      "parity/receipts/v1/first-pass/selftest-altitude/chip/canvas-success-squared.png"
+    ],
     "absent": [
       {
         "kind": "canvas",
-        "reason": "mint PENDING — no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over stdio to its own client and WebSocket to plugin clients, and this harness is neither — no port, flag or configuration lets a Node process issue the write, so it is performed by an agent holding the figma-console MCP tools and records its own evidence at parity/receipts/v1/first-pass/selftest-altitude/mint-evidence.json. Bundle produced, mint pending: the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact."
+        "reason": "unset-unset: the minted set has no cell for the capture's unset Variant plane (FC-UNSET-PLANE-UNDRAWN)"
+      },
+      {
+        "kind": "canvas",
+        "reason": "unset-squared: the minted set has no cell for the capture's unset Variant plane (FC-UNSET-PLANE-UNDRAWN)"
+      },
+      {
+        "kind": "canvas",
+        "reason": "secondary-unset: the contract pins Type=Squared (statePreviewAxis.pinned.Type=\"Squared\"), so the minted set carries no Type-unset cell; the Type=Default variants present on the canvas are the earlier mint's leftovers the amend reported as extraVariants, not this run's output"
+      },
+      {
+        "kind": "canvas",
+        "reason": "info-unset: the contract pins Type=Squared (statePreviewAxis.pinned.Type=\"Squared\"), so the minted set carries no Type-unset cell; the Type=Default variants present on the canvas are the earlier mint's leftovers the amend reported as extraVariants, not this run's output"
+      },
+      {
+        "kind": "canvas",
+        "reason": "success-unset: the contract pins Type=Squared (statePreviewAxis.pinned.Type=\"Squared\"), so the minted set carries no Type-unset cell; the Type=Default variants present on the canvas are the earlier mint's leftovers the amend reported as extraVariants, not this run's output"
       }
     ]
   },
-  "totalMs": 50722
+  "totalMs": 51263
 }

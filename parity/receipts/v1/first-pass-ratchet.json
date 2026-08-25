@@ -13,7 +13,7 @@
     },
     "selftest-altitude": {
       "chain": {
-        "numerator": 0,
+        "numerator": 7,
         "denominator": 8
       },
       "recognisable": {
@@ -48,6 +48,14 @@
       "from": "0/8 — stopped: promote (8 REFUSED)",
       "to": "0/8 — stopped: mint (8 PENDING)",
       "reason": "FLAT, SHAPE MOVED, and this is the finding the exam existed to produce. Every set used to die at promote on “authored alert prop dismissable: prop “dismissable” is not exactly one entry of props[]” — the committed capture record carried an `icon` prop, a `dismissable` prop and six anatomy parts that NO committed input produces (hand-written into the record by ac5e6181, back-porting c924c9c2). Those four facts now ride the authored-facts door as explicit, refusable INPUTS (the door’s new `add` operation), and the record carries only what the capture produces. All eight sets now run capture → promote → validate → generate → bundle clean and stop at mint, which is MCP-DRIVEN and not a capability this harness has (docs/31 §6). The rate is still 0/8 because a PENDING mint is not a completed chain, and it will not move until an agent drives the write and records its evidence."
+    },
+    {
+      "exam": "selftest-altitude",
+      "date": "2026-08-25",
+      "metric": "chain",
+      "from": "0/8 — stopped: mint (8 PENDING)",
+      "to": "7/8 — stopped: mint (1 REFUSED)",
+      "reason": "ROSE, because the mint stage was DRIVEN for the first time. Nothing in the engine changed: the same chain, capture → promote → validate → generate → bundle, ran green on all 8 sets exactly as before. What changed is that `mint` stopped being a permanently-PENDING architectural note and became a stage with an operator, a procedure and evidence (docs/31 §6). An agent holding the figma-console MCP tools fetched each emitted mint/<component>.figma.js INSIDE the plugin sandbox, verified its sha256 against the hash the harness recorded for those same bytes, and evaluated it EXACTLY ONCE — no retry, no repair, no hand-edited script. `--record-mint` folds that evidence in through the exam's own writers and refuses whole on any of the ways it could lie (a forbidden file key, a dropped or added set, a script sha that is not the one the chain emitted, a minted set with no picture of it, a cell with neither an image nor a named reason, or a stage that is not PENDING — so recording can never be a retry). 5 sets WROTE to the canvas, 2 the engine SKIPPED as unchanged (its own specHash already equal to the one stamped on the canvas node, so no byte moved — they complete the chain and are deliberately NOT counted in `minted`), and 1, Divider, REFUSED BY NAME: \"set/standalone shape mismatch (COMPONENT_SET vs isSet=false) — a human retires the old node\". THE FINDING THIS RUN EXISTS TO REPORT, and it is not in the numerator: not one of the 8 took the CREATE path. The operator created an empty page `first-pass altitude 2026-08-25`, cleared it and made it current before every run; all 8 scripts ignored it and `newPages` was [] every time. The emitted script owns file layout — it resolves its target by ds_contracts/contractId across EVERY page and amends in place — and there is no --page flag, no file-scoping and no documented way to confine a mint to one page. In the only writable file, which already carried all 8 altitude stems, a first-pass mint can therefore only ever measure the AMEND path. 7/8 is a true statement about the documented chain and a WEAKER statement than it looks: read it beside that fact, not instead of it."
     }
   ]
 }

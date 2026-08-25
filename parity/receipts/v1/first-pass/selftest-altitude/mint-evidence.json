@@ -1,0 +1,198 @@
+{
+  "exam": "selftest-altitude",
+  "driver": "mcp",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "fileName": "Scratch Project",
+  "recordedAt": "2026-08-25",
+  "engineSha": "dde1d4f4dc1fb0f3da72e577187643d993f8c8fb",
+  "operator": "agent holding the figma-console MCP tools (figma_execute / exportAsync), Figma Desktop Bridge plugin 1.39.0 on ws port 9225",
+  "noRetry": true,
+  "attemptsPerSet": 1,
+  "examPage": {
+    "name": "first-pass altitude 2026-08-25",
+    "id": "56:154",
+    "createdEmpty": true,
+    "childrenAfterRun": 0,
+    "note": "THE HEADLINE FINDING. The operator created this page, cleared it, and made it the CURRENT page before every one of the 8 runs. All 8 emitted scripts ignored it and created no page: `newPages` was [] on every run. The emitted script owns file layout — it resolves the target by ds_contracts/contractId across EVERY page (allSyncTargets/resolveComponentIdentity) and, when no target exists, creates its own page named after the component. There is no --page flag, no file-scoping and no documented way to confine a mint to one page, so a first-pass mint CANNOT be isolated in the only writable file. Every set in this exam resolved to the pre-existing Census / altitude node and took the AMEND path; not one took the CREATE path this metric is meant to measure."
+  },
+  "transport": {
+    "how": "each emitted mint/<component>.figma.js was served over http://localhost:9232 (inside the Desktop Bridge plugin's networkAccess allowlist, 9223-9232), fetched INSIDE the plugin sandbox, sha256-verified against the hash the harness recorded for the same bytes, and only then evaluated. The bytes executed are provably the bytes the harness emitted.",
+    "firstAttemptTransportFailure": "the first fetch used http://127.0.0.1:8791 and the plugin refused it with `Error: Failed to fetch` — the Desktop Bridge manifest allows only http://localhost:9223-9232. The emitted script never ran and no canvas byte moved, so the mint attempt counter was not consumed; the server was rebound to localhost:9232 and each script still ran EXACTLY ONCE."
+  },
+  "sets": {
+    "Button": {
+      "status": "minted",
+      "bytesWritten": true,
+      "script": "button.figma.js",
+      "scriptSha256": "cf6659c95b68a78fb6e0fedf4636ad3750153d95647c8b118d3c8ac430c6c4de",
+      "ms": 1485,
+      "nodeId": "39:6719",
+      "key": "44ac8a4f861b3cd278220ab56f7a70393e8db13d",
+      "landedOnPage": "Census / altitude",
+      "message": "AMENDED IN PLACE, not created: amended=true, nodeId 39:6719, rebuiltVariants=12, addedVariants=[], extraVariants=[], wiredReactions=4, 30 code-only facts stamped. newPages=[] — the exam page was current and was ignored.",
+      "consoleTail": [],
+      "canvas": [
+        { "cell": "secondary", "file": "canvas-secondary.png", "nodeId": "39:6695", "variant": "Variant=Secondary, State=Default" },
+        { "cell": "tertiary", "file": "canvas-tertiary.png", "nodeId": "39:6697", "variant": "Variant=Tertiary, State=Default" },
+        { "cell": "bare", "file": "canvas-bare.png", "nodeId": "39:6699", "variant": "Variant=Bare, State=Default" },
+        { "cell": "danger", "file": "canvas-danger.png", "nodeId": "39:6701", "variant": "Variant=Danger, State=Default" }
+      ],
+      "absentCanvas": [
+        { "cell": "unset", "reason": "the minted set has no cell for the capture's unset plane. The engine names this itself in the run's own code-only facts: root/variant [unset] — \"defaultless axis — the library's own rendering when \\\"variant\\\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 4 declared values only, and a proposal read back from the canvas will call \\\"secondary\\\" the default (FC-UNSET-PLANE-UNDRAWN)\"" }
+      ]
+    },
+    "Badge": {
+      "status": "minted",
+      "bytesWritten": true,
+      "script": "badge.figma.js",
+      "scriptSha256": "2e3376c0592c7ebedbc13da0eceb7db40153263e3674db9a8f9229bc5dfe85d3",
+      "ms": 1096,
+      "nodeId": "39:6692",
+      "key": "c583ebfb365aec0d456ca8b28196bad66e6d7beb",
+      "landedOnPage": "Census / altitude",
+      "message": "AMENDED IN PLACE, not created: amended=true, nodeId 39:6692, rebuiltVariants=8, addedVariants=[], extraVariants=[], 4 code-only facts. newPages=[] — the exam page was current and was ignored.",
+      "consoleTail": [],
+      "canvas": [
+        { "cell": "info-default", "file": "canvas-info-default.png", "nodeId": "39:6680", "variant": "Variant=Info, Dot=Default" },
+        { "cell": "info-dot", "file": "canvas-info-dot.png", "nodeId": "39:6682", "variant": "Variant=Info, Dot=Dot" },
+        { "cell": "success-default", "file": "canvas-success-default.png", "nodeId": "39:6683", "variant": "Variant=Success, Dot=Default" },
+        { "cell": "success-dot", "file": "canvas-success-dot.png", "nodeId": "39:6685", "variant": "Variant=Success, Dot=Dot" },
+        { "cell": "warning-default", "file": "canvas-warning-default.png", "nodeId": "39:6686", "variant": "Variant=Warning, Dot=Default" },
+        { "cell": "warning-dot", "file": "canvas-warning-dot.png", "nodeId": "39:6688", "variant": "Variant=Warning, Dot=Dot" }
+      ],
+      "absentCanvas": [
+        { "cell": "unset-default", "reason": "the minted set enumerates the 4 declared Variant values (Info/Success/Warning/Danger) and has no cell for the capture's unset Variant plane (FC-UNSET-PLANE-UNDRAWN)" },
+        { "cell": "unset-dot", "reason": "the minted set enumerates the 4 declared Variant values (Info/Success/Warning/Danger) and has no cell for the capture's unset Variant plane (FC-UNSET-PLANE-UNDRAWN)" }
+      ]
+    },
+    "Chip": {
+      "status": "minted",
+      "bytesWritten": true,
+      "script": "chip.figma.js",
+      "scriptSha256": "4c6bbc649226aae43d601fe04c2255b58f481b8104c2da9acb02a99b6838cb11",
+      "ms": 1271,
+      "nodeId": "39:6746",
+      "key": "b7aae87bd9277d13a469225dcfb52b9f2e4b304c",
+      "landedOnPage": "Census / altitude",
+      "message": "AMENDED IN PLACE, not created: amended=true, nodeId 39:6746, rebuiltVariants=5, addedVariants=[\"Variant=Secondary, Type=Squared, State=Focus Visible\",\"Variant=Info, Type=Squared, State=Focus Visible\",\"Variant=Success, Type=Squared, State=Focus Visible\",\"Variant=Warning, Type=Squared, State=Focus Visible\",\"Variant=Danger, Type=Squared, State=Focus Visible\"], extraVariants=[\"Variant=Secondary, Type=Default\",\"Variant=Info, Type=Default\",\"Variant=Success, Type=Default\",\"Variant=Warning, Type=Default\",\"Variant=Danger, Type=Default\"] — the amend LEFT 5 variants on the canvas that this contract does not carry, and the set now mixes two vocabularies (Type=Default from an earlier mint, Type=Squared, State=Default from this one). 12 code-only facts. newPages=[] — the exam page was current and was ignored.",
+      "consoleTail": [],
+      "canvas": [
+        { "cell": "secondary-squared", "file": "canvas-secondary-squared.png", "nodeId": "39:6728", "variant": "Variant=Secondary, Type=Squared, State=Default" },
+        { "cell": "info-squared", "file": "canvas-info-squared.png", "nodeId": "39:6732", "variant": "Variant=Info, Type=Squared, State=Default" },
+        { "cell": "success-squared", "file": "canvas-success-squared.png", "nodeId": "39:6736", "variant": "Variant=Success, Type=Squared, State=Default" }
+      ],
+      "absentCanvas": [
+        { "cell": "unset-unset", "reason": "the minted set has no cell for the capture's unset Variant plane (FC-UNSET-PLANE-UNDRAWN)" },
+        { "cell": "unset-squared", "reason": "the minted set has no cell for the capture's unset Variant plane (FC-UNSET-PLANE-UNDRAWN)" },
+        { "cell": "secondary-unset", "reason": "the contract pins Type=Squared (statePreviewAxis.pinned.Type=\"Squared\"), so the minted set carries no Type-unset cell; the Type=Default variants present on the canvas are the earlier mint's leftovers the amend reported as extraVariants, not this run's output" },
+        { "cell": "info-unset", "reason": "the contract pins Type=Squared (statePreviewAxis.pinned.Type=\"Squared\"), so the minted set carries no Type-unset cell; the Type=Default variants present on the canvas are the earlier mint's leftovers the amend reported as extraVariants, not this run's output" },
+        { "cell": "success-unset", "reason": "the contract pins Type=Squared (statePreviewAxis.pinned.Type=\"Squared\"), so the minted set carries no Type-unset cell; the Type=Default variants present on the canvas are the earlier mint's leftovers the amend reported as extraVariants, not this run's output" }
+      ]
+    },
+    "Link": {
+      "status": "skipped-unchanged",
+      "bytesWritten": false,
+      "script": "link.figma.js",
+      "scriptSha256": "a3da4781c00f6ea02946caad100b1d41a37dac361c2029eec9e5fbc0b45fc3bc",
+      "ms": 457,
+      "nodeId": "39:6823",
+      "key": "a85e09e50248d6791638b248a691781a5e376fd1",
+      "landedOnPage": "Census / altitude",
+      "message": "SKIPPED as unchanged: skipped=true, reason=\"unchanged\", nodeId 39:6823. The engine compared its own specHash of the emitted component against ds_contracts/specHash on the canvas node, found them equal (3201776746), and wrote NOTHING. The canvas already carries these exact bytes — from an EARLIER mint, not from this attempt — so the pictures below are a faithful render of what this contract mints, but this run moved no byte. newPages=[] — the exam page was current and was ignored.",
+      "consoleTail": [],
+      "canvas": [
+        { "cell": "xs", "file": "canvas-xs.png", "nodeId": "39:6805", "variant": "Variant=Xs, State=Default" },
+        { "cell": "sm", "file": "canvas-sm.png", "nodeId": "39:6807", "variant": "Variant=Sm, State=Default" },
+        { "cell": "lg", "file": "canvas-lg.png", "nodeId": "39:6809", "variant": "Variant=Lg, State=Default" }
+      ],
+      "absentCanvas": [
+        { "cell": "unset", "reason": "the minted set enumerates the 3 declared Variant values (Xs/Sm/Lg) and has no cell for the capture's unset Variant plane (FC-UNSET-PLANE-UNDRAWN)" }
+      ]
+    },
+    "Avatar": {
+      "status": "minted",
+      "bytesWritten": true,
+      "script": "avatar.figma.js",
+      "scriptSha256": "4ac3b140b8bc26dd1224974e55df8b9d64b19d2fff6705bd0e13470e21f089c1",
+      "ms": 520,
+      "nodeId": "39:6673",
+      "key": "3e7aba7f4de7d88b20c439bd951a9dfc538aea45",
+      "landedOnPage": "Census / altitude",
+      "message": "AMENDED IN PLACE, not created: amended=true, nodeId 39:6673, standalone COMPONENT (isSet=false), 8 code-only facts. newPages=[] — the exam page was current and was ignored.",
+      "consoleTail": [],
+      "canvas": [
+        { "cell": "sm-off", "file": "canvas-sm-off.png", "nodeId": "39:6673", "variant": "the standalone component itself (spec variant \"Variant=Sm\") with its boolean property \"Show HasBadge\" at its minted default of false" }
+      ],
+      "absentCanvas": [
+        { "cell": "unset-off", "reason": "the minted component carries the single declared size (Variant=Sm) and has no cell for the capture's unset size plane (FC-UNSET-PLANE-UNDRAWN)" },
+        { "cell": "unset-on", "reason": "the minted component carries the single declared size (Variant=Sm) and has no cell for the capture's unset size plane (FC-UNSET-PLANE-UNDRAWN)" },
+        { "cell": "sm-on", "reason": "hasBadge is minted as a Figma BOOLEAN COMPONENT PROPERTY (\"Show HasBadge\", default false), not as a variant, so there is no separate node to export for the on state; only the default (off) node exists on the canvas" }
+      ]
+    },
+    "Heading": {
+      "status": "skipped-unchanged",
+      "bytesWritten": false,
+      "script": "heading.figma.js",
+      "scriptSha256": "fadb8d8fd14482d396a64b990028e7fb4694979d7888975946766c450f8c5af7",
+      "ms": 408,
+      "nodeId": "39:6778",
+      "key": "a6adad2801d32e5e4c7bbd46e647235928574b9c",
+      "landedOnPage": "Census / altitude",
+      "message": "SKIPPED as unchanged: skipped=true, reason=\"unchanged\", nodeId 39:6778. The engine's specHash of the emitted component equalled ds_contracts/specHash on the canvas node (3759093838) and it wrote NOTHING. The canvas already carries these exact bytes — from an EARLIER mint, not from this attempt. newPages=[] — the exam page was current and was ignored.",
+      "consoleTail": [],
+      "canvas": [
+        { "cell": "display-lg-regular", "file": "canvas-display-lg-regular.png", "nodeId": "39:6754", "variant": "Variant=Display Lg, Weight=Regular" },
+        { "cell": "display-lg-bold", "file": "canvas-display-lg-bold.png", "nodeId": "39:6756", "variant": "Variant=Display Lg, Weight=Bold" },
+        { "cell": "display-md-regular", "file": "canvas-display-md-regular.png", "nodeId": "39:6758", "variant": "Variant=Display Md, Weight=Regular" },
+        { "cell": "display-md-bold", "file": "canvas-display-md-bold.png", "nodeId": "39:6760", "variant": "Variant=Display Md, Weight=Bold" },
+        { "cell": "display-sm-regular", "file": "canvas-display-sm-regular.png", "nodeId": "39:6762", "variant": "Variant=Display Sm, Weight=Regular" },
+        { "cell": "display-sm-bold", "file": "canvas-display-sm-bold.png", "nodeId": "39:6764", "variant": "Variant=Display Sm, Weight=Bold" }
+      ],
+      "absentCanvas": [
+        { "cell": "unset-regular", "reason": "the minted set enumerates the 6 declared Variant values (Display Lg/Md/Sm, Lg, Md, Sm) and has no cell for the capture's unset Variant plane (FC-UNSET-PLANE-UNDRAWN)" },
+        { "cell": "unset-bold", "reason": "the minted set enumerates the 6 declared Variant values (Display Lg/Md/Sm, Lg, Md, Sm) and has no cell for the capture's unset Variant plane (FC-UNSET-PLANE-UNDRAWN)" }
+      ]
+    },
+    "Divider": {
+      "status": "refused",
+      "bytesWritten": false,
+      "script": "divider.figma.js",
+      "scriptSha256": "cb74234f4587ebbb6d119c458d4170a8055ee77b3fa8d39508bb1e91aebd5e07",
+      "ms": 443,
+      "nodeId": "39:6751",
+      "key": "69e87a844bf2cf97b73d2c110581d77a2f5f4b37",
+      "landedOnPage": null,
+      "message": "REFUSED BY NAME: \"set/standalone shape mismatch (COMPONENT_SET vs isSet=false) — a human retires the old node\". The contract emits altitude.divider as a STANDALONE COMPONENT (isSet=false); the node already carrying ds_contracts/contractId=altitude.divider in this file is a COMPONENT_SET. The engine declined to reconcile across that shape change and wrote nothing but the identity re-stamp. This is the honest outcome the exam exists to collect.",
+      "consoleTail": [],
+      "canvas": [],
+      "absentCanvas": [
+        { "cell": "unset", "reason": "mint REFUSED — set/standalone shape mismatch (COMPONENT_SET vs isSet=false); this run wrote no canvas node, and the COMPONENT_SET standing at 39:6751 is an EARLIER mint's output, so exporting it would be passing another run's pixels off as this attempt's" },
+        { "cell": "vertical", "reason": "mint REFUSED — set/standalone shape mismatch (COMPONENT_SET vs isSet=false); this run wrote no canvas node, and the COMPONENT_SET standing at 39:6751 is an EARLIER mint's output, so exporting it would be passing another run's pixels off as this attempt's" }
+      ]
+    },
+    "IconClose": {
+      "status": "minted",
+      "bytesWritten": true,
+      "script": "icon-close.figma.js",
+      "scriptSha256": "52e011298c7b9bf6f2eaf34d26c035fa9e04f18e74b3d7ded6bfae210bc85889",
+      "ms": 439,
+      "nodeId": "39:6802",
+      "key": "4f295a59bd78ed26b8d82ad5c1abf71c1d388a61",
+      "landedOnPage": "Census / altitude",
+      "message": "AMENDED IN PLACE, not created: amended=true, nodeId 39:6802, rebuiltVariants=7, addedVariants=[], extraVariants=[], 2 code-only facts. newPages=[] — the exam page was current and was ignored.",
+      "consoleTail": [],
+      "canvas": [
+        { "cell": "xs", "file": "canvas-xs.png", "nodeId": "39:6781", "variant": "Size=Xs" },
+        { "cell": "sm", "file": "canvas-sm.png", "nodeId": "39:6784", "variant": "Size=Sm" },
+        { "cell": "md", "file": "canvas-md.png", "nodeId": "39:6787", "variant": "Size=Md" },
+        { "cell": "lg", "file": "canvas-lg.png", "nodeId": "39:6790", "variant": "Size=Lg" },
+        { "cell": "xl", "file": "canvas-xl.png", "nodeId": "39:6793", "variant": "Size=Xl" },
+        { "cell": "xxl", "file": "canvas-xxl.png", "nodeId": "39:6796", "variant": "Size=Xxl" },
+        { "cell": "xxxl", "file": "canvas-xxxl.png", "nodeId": "39:6799", "variant": "Size=Xxxl" }
+      ],
+      "absentCanvas": [
+        { "cell": "unset", "reason": "the minted set enumerates the 7 declared Size values (Xs..Xxxl) and has no cell for the capture's unset Size plane (FC-UNSET-PLANE-UNDRAWN)" }
+      ]
+    }
+  }
+}
