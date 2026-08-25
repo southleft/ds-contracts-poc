@@ -595,6 +595,21 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run census:check -- --phase design-to-code
 
+      # THE DOOR REGISTER (spec/DOOR-REGISTER.md). A door is any rule that
+      # decides a computed fact is NOT a fact of this component, or that a fact
+      # IS admitted — the pipeline's only judgement calls. The gate holds the
+      # register to the code in four directions (an @door marker with no entry,
+      # an entry with no marker, an entry whose line is not where the marker
+      # sits, and a door CLAIMING a receipt whose receipt path does not exist)
+      # and re-measures the subtraction census by re-fusing all 116 committed
+      # captures offline, refusing when the pinned per-library numbers move.
+      - name: door-register:check (every subtractive heuristic named, premised, and its receipt path proved)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run door-register:check
+      - name: door-register self-test (the gate goes red on an unregistered door, an unmarked entry, and a claimed receipt with no path)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run door-register:self-test
+
       # Not one of the 33 named gates, but CONTRIBUTING.md § "The gates" tells
       # contributors to run it and it costs under a second with no extra build.
       - name: test packages/cli (all node:test files)

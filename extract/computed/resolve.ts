@@ -73,6 +73,7 @@ function fail(msg: string): never {
 }
 
 const dir = arg('dir') ?? fail('need --dir <out dir> (e.g. extract/computed/out/button)');
+// @door resolve.explicit-ack-only
 const applyArg = arg('apply') ?? fail('need --apply "<item-id>[,<item-id>…]" — resolution is explicit-ack only, there is no --all');
 const toRef = arg('to');
 const toMapRaw = arg('to-map');
@@ -82,6 +83,7 @@ const toMap: Record<string, string> | null = toMapRaw ? (JSON.parse(toMapRaw) as
 // axis value (Badge white label = color-on-accent(info) / color-on-error
 // (error) — Meta's own source binds per-variant). Items sharing a target
 // group together; the axis-partition rule then applies per target group.
+// @door resolve.per-item-targets
 const toItemsRaw = arg('to-items');
 const toItems: Record<string, string> | null = toItemsRaw ? (JSON.parse(toItemsRaw) as Record<string, string>) : null;
 const configPath = path.resolve(arg('config') ?? path.join(HERE, 'configs', 'polaris.json'));
@@ -94,6 +96,7 @@ const queue = JSON.parse(readFileSync(queuePath, 'utf8')) as {
   contract: string;
   items: QueueItem[];
 };
+// @door resolve.never-mutates-enriched
 const enrichedPath = path.join(dirAbs, 'enriched.contract.json');
 const resolvedPath = path.join(dirAbs, 'resolved.contract.json');
 const decisionsJsonPath = path.join(dirAbs, 'decisions.json');
@@ -111,6 +114,7 @@ const comp = cfg.components.find((c) => c.name === queue.component) ?? fail(`com
 const space = propSpaceFor(REPO, cfg, comp);
 
 const ids = applyArg.split(',').map((s) => s.trim()).filter(Boolean);
+// @door resolve.no-double-resolution
 const alreadyResolved = new Set(priorDecisions.flatMap((d) => d.ids));
 const items = ids.map((id) => {
   const item = queue.items.find((i) => i.id === id) ?? fail(`no queue item with id "${id}"`);
@@ -144,6 +148,7 @@ for (const item of items) {
   g.items.push(item);
   groups.set(key, g);
 }
+// @door resolve.single-group-per-to
 if (toRef && groups.size > 1) fail(`--to targets ONE (part, channel, observed) group; the named items form ${groups.size}`);
 
 const resolved = structuredClone(baseContract) as Contract;
@@ -157,6 +162,7 @@ for (const g of groups.values()) {
   // every OPEN queue item for this (part, channel) — the axis partition must
   // account for all of them, selected or not (partial acks are refused: a
   // half-resolved binding would contradict itself)
+  // @door resolve.whole-binding-site
   const allForChannel = queue.items.filter(
     (i) => i.part === g.part && i.channel === g.channel && !alreadyResolved.has(i.id),
   );
@@ -174,6 +180,7 @@ for (const g of groups.values()) {
   }
 
   const contradictingCombos = new Set(g.items.map((i) => i.combo));
+  // @door resolve.enabled-combos-only
   const enabledCombos = space.enumeration.combos.filter((c) => Object.values(c.stateFlags).every((f) => !f));
   const confirmingCombos = enabledCombos.map((c) => c.key).filter((k) => !contradictingCombos.has(k));
 
@@ -182,6 +189,7 @@ for (const g of groups.values()) {
   // token; the all-named rule above still holds), then the single --to, then
   // the unique-candidate rule.
   let to = toItems?.[g.items[0].id] ?? toMap?.[g.observed] ?? toRef;
+  // @door resolve.unique-dtcg-candidate
   if (!to) {
     const cands = g.items[0].candidates;
     if (cands.length === 0) fail(`${g.part}.${g.channel}: no DTCG candidate equals "${g.observed}" — pass an explicit --to "{token.ref}" (guessing names is forbidden)`);
@@ -193,11 +201,13 @@ for (const g of groups.values()) {
   // 15px padding). Token refs stay brace-wrapped; a literal must look like
   // a plain dimension/number/color-hex (keywords like 'auto'/'normal' are
   // NOT resolvable bindings — they stay open by name).
+  // @door resolve.literal-grammar-fence
   const isTokenRef = /^\{[a-z0-9.-]+\}$/i.test(to);
   const isLiteral = !isTokenRef && /^-?[\d.]+(px|rem|em|%)?$|^#[0-9a-f]{3,8}$/i.test(to);
   if (!isTokenRef && !isLiteral) fail(`--to must be a brace-wrapped token ref or a plain CSS literal value, got "${to}"`);
 
   let scope: Decision['scope'];
+  // @door resolve.uniform-contradiction-base
   if (confirmingCombos.length === 0) {
     // uniform contradiction → computed wins at the BASE binding. Per-value
     // overrides of this channel are removed too: base scope is only reached
@@ -230,6 +240,7 @@ for (const g of groups.values()) {
     }
     scope = 'base';
   } else {
+    // @door resolve.single-axis-partition
     // find the single axis that cleanly partitions the combos
     const axis = space.axes.find((ax) => {
       const cValues = new Set([...contradictingCombos].map((k) => axisValuesOf(k)[ax.prop]));
@@ -241,6 +252,7 @@ for (const g of groups.values()) {
         `${g.part}.${g.channel}: no single enum axis partitions contradicting from confirming combos — a multi-axis contradiction needs schema-level review, not a CLI patch (the evidence stays in review-queue.json)`,
       );
     }
+    // @door resolve.axis-scope-rebind
     const values = [...new Set([...contradictingCombos].map((k) => axisValuesOf(k)[axis.prop]))].sort();
     // merge into tokensByProp WITHOUT violating the v14 refusal rule: reuse
     // the entry (same prop) that already maps this channel, else append one.
@@ -284,6 +296,7 @@ for (const g of groups.values()) {
 }
 
 // the resolved contract must still be a REAL contract
+// @door resolve.schema-generator-referee
 ContractSchema.parse(resolved);
 const errors: string[] = [];
 const iconAssets = new Map<string, string>();
