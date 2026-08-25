@@ -741,6 +741,28 @@
             }
           }
         }
+      ],
+      "declaredByProp": [
+        {
+          "prop": "modalType",
+          "map": {
+            "modal": {
+              "box-sizing": "content-box",
+              "max-height": "none",
+              "max-width": "none"
+            },
+            "non-modal": {
+              "box-sizing": "border-box",
+              "max-height": "1400px",
+              "max-width": "600px"
+            },
+            "alert": {
+              "box-sizing": "content-box",
+              "max-height": "none",
+              "max-width": "none"
+            }
+          }
+        }
       ]
     }
   },

@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "fluent.dialog",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Dialog — generated from contract fluent.dialog v0.2.0 † (49 code-only facts — see plugin report)",
+    "description": "Dialog — generated from contract fluent.dialog v0.2.0 † (53 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -1470,6 +1470,50 @@ const COMPONENTS = [
         "channel": "display",
         "value": "block",
         "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "max-height",
+        "value": "1400px",
+        "reason": "Fluid max-height constraints live in code; the canvas draws the component at its real size (standing choice).",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "max-height",
+        "value": "none",
+        "reason": "Fluid max-height constraints live in code; the canvas draws the component at its real size (standing choice).",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "max-width",
+        "value": "600px",
+        "reason": "Fluid max-width constraints live in code; the canvas draws the component at its real size (standing choice).",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "max-width",
+        "value": "none",
+        "reason": "Fluid max-width constraints live in code; the canvas draws the component at its real size (standing choice).",
         "variants": {
           "count": 3,
           "of": 3

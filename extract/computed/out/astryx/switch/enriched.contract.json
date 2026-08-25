@@ -116,7 +116,8 @@
             "part-0-0": {
               "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
               "layout": {
-                "display": "flex"
+                "display": "flex",
+                "direction": "row"
               },
               "parts": {
                 "label-2": {
@@ -145,7 +146,8 @@
                     }
                   ],
                   "declared": {
-                    "cursor": "pointer"
+                    "cursor": "pointer",
+                    "font-family": "Figtree, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
                   },
                   "tokens": {
                     "color": "{imported.switch.label-2.color}",
@@ -154,7 +156,21 @@
                     "font-weight": "{imported.switch.label-2.font-weight}",
                     "line-height": "{imported.switch.label-2.line-height}",
                     "row-gap": "{imported.shared.size-4}"
-                  }
+                  },
+                  "codeOnly": [
+                    {
+                      "state": "disabled",
+                      "channel": "color",
+                      "value": "rgba(163, 163, 163, 1)",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "cursor",
+                      "value": "not-allowed",
+                      "reason": "declared-channel state delta on 1/2 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                    }
+                  ]
                 },
                 "part-0-0-0": {
                   "element": "input",
@@ -171,6 +187,7 @@
                   },
                   "tokens": {
                     "bottom": "{imported.shared.size-0}",
+                    "color": "{imported.shared.color-171717}",
                     "left": "{imported.shared.size-0}",
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
@@ -179,7 +196,45 @@
                     "top": "{imported.shared.size-0}",
                     "width": "{imported.shared.size-40}",
                     "z-index": "{imported.switch.part-0-0-0.z-index}"
-                  }
+                  },
+                  "codeOnly": [
+                    {
+                      "state": "disabled",
+                      "channel": "anchor-name",
+                      "value": "--astryx-layer-_r_g_",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "cursor",
+                      "value": "not-allowed",
+                      "reason": "declared-channel state delta on 1/2 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-color",
+                      "value": "rgba(0, 95, 204, 1)",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-offset",
+                      "value": "2px",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-style",
+                      "value": "auto",
+                      "reason": "declared-channel state delta on 1/2 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-width",
+                      "value": "1px",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    }
+                  ]
                 },
                 "switch": {
                   "description": "Promoted from the computed floor (round 4): rendered anatomy div|switch — this element exists in the real component's DOM; the static layer had no part for it.",
@@ -238,6 +293,7 @@
                         "border-bottom-right-radius": "{imported.shared.size-9999}",
                         "border-top-left-radius": "{imported.shared.size-9999}",
                         "border-top-right-radius": "{imported.shared.size-9999}",
+                        "color": "{imported.shared.color-171717}",
                         "height": "{imported.shared.size-16}",
                         "width": "{imported.shared.size-16}"
                       }
@@ -254,13 +310,84 @@
                     "border-bottom-right-radius": "{imported.shared.size-9999}",
                     "border-top-left-radius": "{imported.shared.size-9999}",
                     "border-top-right-radius": "{imported.shared.size-9999}",
+                    "color": "{imported.shared.color-171717}",
                     "padding-bottom": "{imported.shared.size-4}",
                     "padding-left": "{imported.shared.size-4}",
                     "padding-right": "{imported.shared.size-4}",
                     "padding-top": "{imported.shared.size-4}",
                     "width": "{imported.shared.size-40}"
+                  },
+                  "codeOnly": [
+                    {
+                      "state": "active",
+                      "channel": "background-color",
+                      "value": "color(srgb 0.789804 0.789804 0.789804)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "opacity",
+                      "value": "0.5",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-color",
+                      "value": "rgba(38, 38, 38, 1)",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-offset",
+                      "value": "2px",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-style",
+                      "value": "solid",
+                      "reason": "declared-channel state delta on 1/2 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-width",
+                      "value": "2px",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "hover",
+                      "channel": "background-color",
+                      "value": "color(srgb 0.789804 0.789804 0.789804)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    }
+                  ]
+                }
+              },
+              "layoutByProp": {
+                "prop": "labelPosition",
+                "map": {
+                  "start": {
+                    "direction": "column"
                   }
                 }
+              },
+              "declaredByProp": [
+                {
+                  "prop": "labelPosition",
+                  "map": {
+                    "start": {
+                      "isolation": "auto",
+                      "position": "static"
+                    },
+                    "end": {
+                      "isolation": "isolate",
+                      "position": "relative"
+                    }
+                  }
+                }
+              ],
+              "tokens": {
+                "color": "{imported.shared.color-171717}"
               },
               "tokensByProp": [
                 {
@@ -281,7 +408,8 @@
             "part-0-1": {
               "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
               "layout": {
-                "display": "flex"
+                "display": "flex",
+                "direction": "column"
               },
               "parts": {
                 "part-0-1-0": {
@@ -299,6 +427,7 @@
                   },
                   "tokens": {
                     "bottom": "{imported.shared.size-0}",
+                    "color": "{imported.shared.color-171717}",
                     "left": "{imported.shared.size-0}",
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
@@ -307,7 +436,45 @@
                     "top": "{imported.shared.size-0}",
                     "width": "{imported.shared.size-40}",
                     "z-index": "{imported.switch.part-0-1-0.z-index}"
-                  }
+                  },
+                  "codeOnly": [
+                    {
+                      "state": "disabled",
+                      "channel": "anchor-name",
+                      "value": "--astryx-layer-_r_8_",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "cursor",
+                      "value": "not-allowed",
+                      "reason": "declared-channel state delta on 1/2 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-color",
+                      "value": "rgba(0, 95, 204, 1)",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-offset",
+                      "value": "2px",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-style",
+                      "value": "auto",
+                      "reason": "declared-channel state delta on 1/2 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-width",
+                      "value": "1px",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    }
+                  ]
                 },
                 "switch-2": {
                   "description": "Promoted from the computed floor (round 4): rendered anatomy div|switch — this element exists in the real component's DOM; the static layer had no part for it.",
@@ -366,6 +533,7 @@
                         "border-bottom-right-radius": "{imported.shared.size-9999}",
                         "border-top-left-radius": "{imported.shared.size-9999}",
                         "border-top-right-radius": "{imported.shared.size-9999}",
+                        "color": "{imported.shared.color-171717}",
                         "height": "{imported.shared.size-16}",
                         "width": "{imported.shared.size-16}"
                       }
@@ -382,12 +550,57 @@
                     "border-bottom-right-radius": "{imported.shared.size-9999}",
                     "border-top-left-radius": "{imported.shared.size-9999}",
                     "border-top-right-radius": "{imported.shared.size-9999}",
+                    "color": "{imported.shared.color-171717}",
                     "padding-bottom": "{imported.shared.size-4}",
                     "padding-left": "{imported.shared.size-4}",
                     "padding-right": "{imported.shared.size-4}",
                     "padding-top": "{imported.shared.size-4}",
                     "width": "{imported.shared.size-40}"
-                  }
+                  },
+                  "codeOnly": [
+                    {
+                      "state": "active",
+                      "channel": "background-color",
+                      "value": "color(srgb 0.789804 0.789804 0.789804)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "opacity",
+                      "value": "0.5",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-color",
+                      "value": "rgba(38, 38, 38, 1)",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-offset",
+                      "value": "2px",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-style",
+                      "value": "solid",
+                      "reason": "declared-channel state delta on 1/2 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-width",
+                      "value": "2px",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "hover",
+                      "channel": "background-color",
+                      "value": "color(srgb 0.789804 0.789804 0.789804)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    }
+                  ]
                 },
                 "label": {
                   "element": "label",
@@ -415,7 +628,8 @@
                     }
                   ],
                   "declared": {
-                    "cursor": "pointer"
+                    "cursor": "pointer",
+                    "font-family": "Figtree, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
                   },
                   "tokens": {
                     "color": "{imported.switch.label.color}",
@@ -424,8 +638,48 @@
                     "font-weight": "{imported.switch.label.font-weight}",
                     "line-height": "{imported.switch.label.line-height}",
                     "row-gap": "{imported.shared.size-4}"
+                  },
+                  "codeOnly": [
+                    {
+                      "state": "disabled",
+                      "channel": "color",
+                      "value": "rgba(163, 163, 163, 1)",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "cursor",
+                      "value": "not-allowed",
+                      "reason": "declared-channel state delta on 1/2 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                    }
+                  ]
+                }
+              },
+              "layoutByProp": {
+                "prop": "labelPosition",
+                "map": {
+                  "start": {
+                    "direction": "row"
                   }
                 }
+              },
+              "declaredByProp": [
+                {
+                  "prop": "labelPosition",
+                  "map": {
+                    "start": {
+                      "isolation": "isolate",
+                      "position": "relative"
+                    },
+                    "end": {
+                      "isolation": "auto",
+                      "position": "static"
+                    }
+                  }
+                }
+              ],
+              "tokens": {
+                "color": "{imported.shared.color-171717}"
               },
               "tokensByProp": [
                 {
@@ -445,6 +699,7 @@
             }
           },
           "tokens": {
+            "color": "{imported.shared.color-171717}",
             "column-gap": "{imported.switch.part-0.column-gap}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}",
@@ -454,6 +709,7 @@
         }
       },
       "tokens": {
+        "color": "{imported.shared.color-171717}",
         "width": "{imported.switch.root.width}"
       }
     }

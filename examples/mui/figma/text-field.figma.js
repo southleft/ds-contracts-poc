@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "mui.text-field",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "TextField — generated from contract mui.text-field v0.2.0 † (33 code-only facts — see plugin report)",
+    "description": "TextField — generated from contract mui.text-field v0.2.0 † (35 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -1652,6 +1652,28 @@ const COMPONENTS = [
         "channel": "position",
         "value": "relative",
         "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 6,
+          "of": 6
+        }
+      },
+      {
+        "part": "root",
+        "kind": "plane",
+        "channel": "variant axis \"Size\"",
+        "value": "medium / small",
+        "reason": "the compiled plane carries NO distinguishing fact for this axis — its 2 values compile to byte-identical cells (3 identical group(s) of 2), so the minted set draws the same picture in every one of them. Either the capture never swept the axis (extract/computed/configs/<lib>.json `axes`) or every fact that separates the values was refused upstream and is named in this component's own code-only facts. NAMED, NOT DROPPED: the axis is still minted as a Figma variant property, because a flat axis can be the library's own truth; nothing here guesses which.",
+        "variants": {
+          "count": 6,
+          "of": 6
+        }
+      },
+      {
+        "part": "root",
+        "kind": "plane",
+        "channel": "variant axis \"Variant\"",
+        "value": "outlined / filled / standard",
+        "reason": "the compiled plane carries NO distinguishing fact for this axis — its 3 values compile to byte-identical cells (2 identical group(s) of 3), so the minted set draws the same picture in every one of them. Either the capture never swept the axis (extract/computed/configs/<lib>.json `axes`) or every fact that separates the values was refused upstream and is named in this component's own code-only facts. NAMED, NOT DROPPED: the axis is still minted as a Figma variant property, because a flat axis can be the library's own truth; nothing here guesses which.",
         "variants": {
           "count": 6,
           "of": 6

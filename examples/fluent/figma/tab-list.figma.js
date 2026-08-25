@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "fluent.tab-list",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "TabList — generated from contract fluent.tab-list v0.2.0 † (49 code-only facts — see plugin report)",
+    "description": "TabList — generated from contract fluent.tab-list v0.2.0 † (50 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -3633,6 +3633,17 @@ const COMPONENTS = [
         "channel": "position",
         "value": "relative",
         "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "root",
+        "kind": "plane",
+        "channel": "variant axis \"Orientation\"",
+        "value": "horizontal / vertical",
+        "reason": "the compiled plane carries NO distinguishing fact for this axis — its 2 values compile to byte-identical cells (12 identical group(s) of 2), so the minted set draws the same picture in every one of them. Either the capture never swept the axis (extract/computed/configs/<lib>.json `axes`) or every fact that separates the values was refused upstream and is named in this component's own code-only facts. NAMED, NOT DROPPED: the axis is still minted as a Figma variant property, because a flat axis can be the library's own truth; nothing here guesses which.",
         "variants": {
           "count": 24,
           "of": 24

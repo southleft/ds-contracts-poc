@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "mui.input-adornment",
     "version": "0.2.0",
     "anchorKey": "mui.input-adornment",
-    "description": "InputAdornment — generated from contract mui.input-adornment v0.2.0 † (6 code-only facts — see plugin report)",
+    "description": "InputAdornment — generated from contract mui.input-adornment v0.2.0 † (7 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -163,6 +163,17 @@ const COMPONENTS = [
         "channel": "text-wrap-mode",
         "value": "nowrap",
         "reason": "Line-breaking rules differ: Figma wraps by box width only.",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "root",
+        "kind": "plane",
+        "channel": "variant axis \"Position\"",
+        "value": "start / end",
+        "reason": "the compiled plane carries NO distinguishing fact for this axis — its 2 values compile to byte-identical cells (1 identical group(s) of 2), so the minted set draws the same picture in every one of them. Either the capture never swept the axis (extract/computed/configs/<lib>.json `axes`) or every fact that separates the values was refused upstream and is named in this component's own code-only facts. NAMED, NOT DROPPED: the axis is still minted as a Figma variant property, because a flat axis can be the library's own truth; nothing here guesses which.",
         "variants": {
           "count": 2,
           "of": 2

@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "mui.accordion",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Accordion — generated from contract mui.accordion v0.2.0 † (48 code-only facts — see plugin report)",
+    "description": "Accordion — generated from contract mui.accordion v0.2.0 † (50 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -426,7 +426,6 @@ const COMPONENTS = [
                 "px": 288,
                 "varName": "imported/accordion/collapse-root/width/elevation"
               },
-              "clipsContent": true,
               "children": [
                 {
                   "type": "frame",
@@ -862,7 +861,6 @@ const COMPONENTS = [
                 "px": 286,
                 "varName": "imported/accordion/collapse-root/width/outlined"
               },
-              "clipsContent": true,
               "children": [
                 {
                   "type": "frame",
@@ -1222,6 +1220,28 @@ const COMPONENTS = [
         "channel": "display",
         "value": "block",
         "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 4,
+          "of": 4
+        }
+      },
+      {
+        "part": "collapse-root",
+        "kind": "declared",
+        "channel": "overflow-x",
+        "value": "visible",
+        "reason": "declared value outside the canvas grammar for this channel — hidden/clip clip natively (clipsContent). auto/scroll are scrolling, which exists only in code.",
+        "variants": {
+          "count": 4,
+          "of": 4
+        }
+      },
+      {
+        "part": "collapse-root",
+        "kind": "declared",
+        "channel": "overflow-y",
+        "value": "visible",
+        "reason": "declared value outside the canvas grammar for this channel — hidden/clip clip natively (clipsContent). auto/scroll are scrolling, which exists only in code.",
         "variants": {
           "count": 4,
           "of": 4

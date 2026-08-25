@@ -144,6 +144,7 @@
                   },
                   "tokens": {
                     "bottom": "{imported.shared.size-0}",
+                    "color": "{imported.shared.color-171717}",
                     "left": "{imported.shared.size-0}",
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
@@ -165,6 +166,26 @@
                           "width": "{imported.checkbox-input.part-0-0-0.width.sm}"
                         }
                       }
+                    }
+                  ],
+                  "codeOnly": [
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-color",
+                      "value": "#005fcc",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-offset",
+                      "value": "2px",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-width",
+                      "value": "1px",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
                     }
                   ]
                 },
@@ -305,11 +326,86 @@
                         }
                       }
                     }
+                  ],
+                  "codeOnly": [
+                    {
+                      "state": "active",
+                      "channel": "background-color",
+                      "value": "color(srgb 0.95 0.95 0.95)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "active",
+                      "channel": "border-bottom-color",
+                      "value": "color(srgb 0.665098 0.665098 0.665098)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "active",
+                      "channel": "border-left-color",
+                      "value": "color(srgb 0.665098 0.665098 0.665098)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "active",
+                      "channel": "border-right-color",
+                      "value": "color(srgb 0.665098 0.665098 0.665098)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "active",
+                      "channel": "border-top-color",
+                      "value": "color(srgb 0.665098 0.665098 0.665098)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-offset",
+                      "value": "2px",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-width",
+                      "value": "2px",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "hover",
+                      "channel": "background-color",
+                      "value": "color(srgb 0.95 0.95 0.95)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "hover",
+                      "channel": "border-bottom-color",
+                      "value": "color(srgb 0.665098 0.665098 0.665098)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "hover",
+                      "channel": "border-left-color",
+                      "value": "color(srgb 0.665098 0.665098 0.665098)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "hover",
+                      "channel": "border-right-color",
+                      "value": "color(srgb 0.665098 0.665098 0.665098)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "hover",
+                      "channel": "border-top-color",
+                      "value": "color(srgb 0.665098 0.665098 0.665098)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    }
                   ]
                 }
               },
               "tokens": {
                 "bottom": "{imported.shared.size-0}",
+                "color": "{imported.shared.color-171717}",
                 "flex-shrink": "{imported.checkbox-input.part-0-0.flex-shrink}",
                 "left": "{imported.shared.size-0}",
                 "right": "{imported.shared.size-0}",
@@ -349,7 +445,8 @@
                     "align": "center"
                   },
                   "declared": {
-                    "cursor": "pointer"
+                    "cursor": "pointer",
+                    "font-family": "Figtree, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
                   },
                   "tokens": {
                     "color": "{imported.checkbox-input.label.color}",
@@ -362,6 +459,7 @@
                 }
               },
               "tokens": {
+                "color": "{imported.shared.color-171717}",
                 "column-gap": "{imported.shared.size-2}",
                 "height": "{imported.checkbox-input.part-0-1.height}",
                 "row-gap": "{imported.shared.size-2}",
@@ -370,6 +468,7 @@
             }
           },
           "tokens": {
+            "color": "{imported.shared.color-171717}",
             "column-gap": "{imported.checkbox-input.part-0.column-gap}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}",
@@ -391,6 +490,9 @@
             }
           ]
         }
+      },
+      "tokens": {
+        "color": "{imported.shared.color-171717}"
       },
       "tokensByProp": [
         {

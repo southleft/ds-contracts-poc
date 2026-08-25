@@ -2,7 +2,7 @@
   "type": "CONTRACTS-BUNDLE",
   "version": 1,
   "tokenSet": {
-    "name": "MUI",
+    "name": "Tokens",
     "base": {
       "palette-common-black": {
         "$type": "color",
@@ -10750,6 +10750,21 @@
                     }
                   }
                 }
+              ],
+              "declaredByProp": [
+                {
+                  "prop": "expanded",
+                  "map": {
+                    "collapsed": {
+                      "overflow-x": "hidden",
+                      "overflow-y": "hidden"
+                    },
+                    "expanded": {
+                      "overflow-x": "visible",
+                      "overflow-y": "visible"
+                    }
+                  }
+                }
               ]
             }
           },
@@ -13386,7 +13401,24 @@
           "tokens": {
             "color": "{imported.circular-progress.root.color}",
             "width": "{imported.circular-progress.root.width}"
-          }
+          },
+          "declaredByProp": [
+            {
+              "prop": "variant",
+              "map": {
+                "determinate": {
+                  "transition-duration": "0.3s",
+                  "transition-property": "transform",
+                  "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
+                },
+                "indeterminate": {
+                  "transition-duration": "0s",
+                  "transition-property": "all",
+                  "transition-timing-function": "ease"
+                }
+              }
+            }
+          ]
         }
       },
       "bindings": {
@@ -14517,6 +14549,19 @@
                     }
                   }
                 }
+              ],
+              "declaredByProp": [
+                {
+                  "prop": "variant",
+                  "map": {
+                    "determinate": {
+                      "transition-duration": "0.4s"
+                    },
+                    "indeterminate": {
+                      "transition-duration": "0.2s"
+                    }
+                  }
+                }
               ]
             },
             "linearprogress-bar-2": {
@@ -14731,6 +14776,22 @@
                 "warning": {
                   "color": "{imported.link.root.color.warning}",
                   "outline-color": "{imported.link.root.outline-color.warning}"
+                }
+              }
+            }
+          ],
+          "declaredByProp": [
+            {
+              "prop": "underline",
+              "map": {
+                "none": {
+                  "text-decoration-line": "none"
+                },
+                "hover": {
+                  "text-decoration-line": "none"
+                },
+                "always": {
+                  "text-decoration-line": "underline"
                 }
               }
             }
@@ -15327,6 +15388,21 @@
                         "unchecked": {
                           "color": "{imported.radio.icon-2.color.{color}.unchecked}",
                           "fill": "{imported.radio.icon-2.fill.{color}.unchecked}"
+                        }
+                      }
+                    }
+                  ],
+                  "declaredByProp": [
+                    {
+                      "prop": "checked",
+                      "map": {
+                        "unchecked": {
+                          "transform": "matrix(0, 0, 0, 0, 0, 0)",
+                          "transition-timing-function": "cubic-bezier(0.4, 0, 1, 1)"
+                        },
+                        "checked": {
+                          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                          "transition-timing-function": "cubic-bezier(0, 0, 0.2, 1)"
                         }
                       }
                     }
@@ -15930,6 +16006,19 @@
                     }
                   }
                 }
+              ],
+              "declaredByProp": [
+                {
+                  "prop": "size",
+                  "map": {
+                    "small": {
+                      "transform": "matrix(1, 0, 0, 1, 0, -1)"
+                    },
+                    "medium": {
+                      "transform": "matrix(1, 0, 0, 1, 0, -2)"
+                    }
+                  }
+                }
               ]
             },
             "slider-track": {
@@ -16010,6 +16099,19 @@
                       "top": "{imported.slider.slider-track.top.small}",
                       "translate-y": "{imported.slider.slider-track.translate-y.small}",
                       "width": "{imported.slider.slider-track.width.small}"
+                    }
+                  }
+                }
+              ],
+              "declaredByProp": [
+                {
+                  "prop": "size",
+                  "map": {
+                    "small": {
+                      "transform": "matrix(1, 0, 0, 1, 0, -1)"
+                    },
+                    "medium": {
+                      "transform": "matrix(1, 0, 0, 1, 0, -3)"
                     }
                   }
                 }
@@ -16165,6 +16267,19 @@
                       "translate-x": "{imported.slider.slider-thumb.translate-x.small}",
                       "translate-y": "{imported.slider.slider-thumb.translate-y.small}",
                       "width": "{imported.slider.slider-thumb.width.small}"
+                    }
+                  }
+                }
+              ],
+              "declaredByProp": [
+                {
+                  "prop": "size",
+                  "map": {
+                    "small": {
+                      "transform": "matrix(1, 0, 0, 1, -6, -6)"
+                    },
+                    "medium": {
+                      "transform": "matrix(1, 0, 0, 1, -10, -10)"
                     }
                   }
                 }
@@ -19718,6 +19833,28 @@
         {
           "part": "collapse-root",
           "kind": "declared",
+          "channel": "overflow-x",
+          "value": "visible",
+          "reason": "declared value outside the canvas grammar for this channel — hidden/clip clip natively (clipsContent). auto/scroll are scrolling, which exists only in code.",
+          "variants": {
+            "count": 4,
+            "of": 4
+          }
+        },
+        {
+          "part": "collapse-root",
+          "kind": "declared",
+          "channel": "overflow-y",
+          "value": "visible",
+          "reason": "declared value outside the canvas grammar for this channel — hidden/clip clip natively (clipsContent). auto/scroll are scrolling, which exists only in code.",
+          "variants": {
+            "count": 4,
+            "of": 4
+          }
+        },
+        {
+          "part": "collapse-root",
+          "kind": "declared",
           "channel": "transition-duration",
           "value": "0.3s",
           "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
@@ -22427,6 +22564,72 @@
             "count": 2,
             "of": 2
           }
+        },
+        {
+          "part": "root",
+          "kind": "declared",
+          "channel": "transition-duration",
+          "value": "0.3s",
+          "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+          "variants": {
+            "count": 2,
+            "of": 2
+          }
+        },
+        {
+          "part": "root",
+          "kind": "declared",
+          "channel": "transition-duration",
+          "value": "0s",
+          "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+          "variants": {
+            "count": 2,
+            "of": 2
+          }
+        },
+        {
+          "part": "root",
+          "kind": "declared",
+          "channel": "transition-property",
+          "value": "all",
+          "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+          "variants": {
+            "count": 2,
+            "of": 2
+          }
+        },
+        {
+          "part": "root",
+          "kind": "declared",
+          "channel": "transition-property",
+          "value": "transform",
+          "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+          "variants": {
+            "count": 2,
+            "of": 2
+          }
+        },
+        {
+          "part": "root",
+          "kind": "declared",
+          "channel": "transition-timing-function",
+          "value": "cubic-bezier(0.4, 0, 0.2, 1)",
+          "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+          "variants": {
+            "count": 2,
+            "of": 2
+          }
+        },
+        {
+          "part": "root",
+          "kind": "declared",
+          "channel": "transition-timing-function",
+          "value": "ease",
+          "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+          "variants": {
+            "count": 2,
+            "of": 2
+          }
         }
       ]
     },
@@ -23658,6 +23861,17 @@
             "count": 2,
             "of": 2
           }
+        },
+        {
+          "part": "root",
+          "kind": "plane",
+          "channel": "variant axis \"Position\"",
+          "value": "start / end",
+          "reason": "the compiled plane carries NO distinguishing fact for this axis — its 2 values compile to byte-identical cells (1 identical group(s) of 2), so the minted set draws the same picture in every one of them. Either the capture never swept the axis (extract/computed/configs/<lib>.json `axes`) or every fact that separates the values was refused upstream and is named in this component's own code-only facts. NAMED, NOT DROPPED: the axis is still minted as a Figma variant property, because a flat axis can be the library's own truth; nothing here guesses which.",
+          "variants": {
+            "count": 2,
+            "of": 2
+          }
         }
       ]
     },
@@ -23682,6 +23896,28 @@
           "channel": "position",
           "value": "absolute",
           "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+          "variants": {
+            "count": 2,
+            "of": 2
+          }
+        },
+        {
+          "part": "linearprogress-bar",
+          "kind": "declared",
+          "channel": "transition-duration",
+          "value": "0.2s",
+          "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+          "variants": {
+            "count": 2,
+            "of": 2
+          }
+        },
+        {
+          "part": "linearprogress-bar",
+          "kind": "declared",
+          "channel": "transition-duration",
+          "value": "0.4s",
+          "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
           "variants": {
             "count": 2,
             "of": 2
@@ -24776,6 +25012,17 @@
         {
           "part": "icon-2",
           "kind": "declared",
+          "channel": "transform",
+          "value": "matrix(0, 0, 0, 0, …)",
+          "reason": "a COLLAPSED transform (scale(0)) for checked=unchecked — Figma has no scale(0), so the canvas lowers it the only honest way it can: the part is NOT DRAWN in those cells. The fact is carried, but it comes back off the canvas as the part's ABSENCE (a visibleWhen on that axis value), never as a transform channel — read it here, not on the node.",
+          "variants": {
+            "count": 14,
+            "of": 14
+          }
+        },
+        {
+          "part": "icon-2",
+          "kind": "declared",
           "channel": "transition-duration",
           "value": "0.15s",
           "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
@@ -24789,6 +25036,28 @@
           "kind": "declared",
           "channel": "transition-property",
           "value": "transform",
+          "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+          "variants": {
+            "count": 14,
+            "of": 14
+          }
+        },
+        {
+          "part": "icon-2",
+          "kind": "declared",
+          "channel": "transition-timing-function",
+          "value": "cubic-bezier(0, 0, 0.2, 1)",
+          "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+          "variants": {
+            "count": 14,
+            "of": 14
+          }
+        },
+        {
+          "part": "icon-2",
+          "kind": "declared",
+          "channel": "transition-timing-function",
+          "value": "cubic-bezier(0.4, 0, 1, 1)",
           "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
           "variants": {
             "count": 14,
@@ -26007,6 +26276,17 @@
           "channel": "z-index",
           "value": "{imported.snackbar.root.z-index}",
           "reason": "paint order on canvas is CHILD ORDER — a z-index a part carries independently of its DOM order has no field.",
+          "variants": {
+            "count": 3,
+            "of": 3
+          }
+        },
+        {
+          "part": "root",
+          "kind": "plane",
+          "channel": "variant axis \"Position\"",
+          "value": "bottom-left / bottom-center / top-right",
+          "reason": "the compiled plane carries NO distinguishing fact for this axis — its 3 values compile to byte-identical cells (1 identical group(s) of 3), so the minted set draws the same picture in every one of them. Either the capture never swept the axis (extract/computed/configs/<lib>.json `axes`) or every fact that separates the values was refused upstream and is named in this component's own code-only facts. NAMED, NOT DROPPED: the axis is still minted as a Figma variant property, because a flat axis can be the library's own truth; nothing here guesses which.",
           "variants": {
             "count": 3,
             "of": 3
@@ -29711,6 +29991,28 @@
           "channel": "position",
           "value": "relative",
           "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+          "variants": {
+            "count": 6,
+            "of": 6
+          }
+        },
+        {
+          "part": "root",
+          "kind": "plane",
+          "channel": "variant axis \"Size\"",
+          "value": "medium / small",
+          "reason": "the compiled plane carries NO distinguishing fact for this axis — its 2 values compile to byte-identical cells (3 identical group(s) of 2), so the minted set draws the same picture in every one of them. Either the capture never swept the axis (extract/computed/configs/<lib>.json `axes`) or every fact that separates the values was refused upstream and is named in this component's own code-only facts. NAMED, NOT DROPPED: the axis is still minted as a Figma variant property, because a flat axis can be the library's own truth; nothing here guesses which.",
+          "variants": {
+            "count": 6,
+            "of": 6
+          }
+        },
+        {
+          "part": "root",
+          "kind": "plane",
+          "channel": "variant axis \"Variant\"",
+          "value": "outlined / filled / standard",
+          "reason": "the compiled plane carries NO distinguishing fact for this axis — its 3 values compile to byte-identical cells (2 identical group(s) of 3), so the minted set draws the same picture in every one of them. Either the capture never swept the axis (extract/computed/configs/<lib>.json `axes`) or every fact that separates the values was refused upstream and is named in this component's own code-only facts. NAMED, NOT DROPPED: the axis is still minted as a Figma variant property, because a flat axis can be the library's own truth; nothing here guesses which.",
           "variants": {
             "count": 6,
             "of": 6

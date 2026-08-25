@@ -578,6 +578,96 @@
         "part": "label",
         "channel": "user-select",
         "value": "none"
+      },
+      {
+        "part": "root",
+        "channel": "transition-duration",
+        "value": "0.5s, 0.1s",
+        "when": {
+          "prop": "active",
+          "equals": "active"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "root",
+        "channel": "transition-duration",
+        "value": "0.5s, 0.1s",
+        "when": {
+          "prop": "active",
+          "equals": "inactive"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "root",
+        "channel": "transition-duration",
+        "value": "0s",
+        "when": {
+          "prop": "active",
+          "equals": "none"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "root",
+        "channel": "transition-property",
+        "value": "transform, opacity",
+        "when": {
+          "prop": "active",
+          "equals": "active"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "root",
+        "channel": "transition-property",
+        "value": "transform, opacity",
+        "when": {
+          "prop": "active",
+          "equals": "inactive"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "root",
+        "channel": "transition-property",
+        "value": "all",
+        "when": {
+          "prop": "active",
+          "equals": "none"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "root",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.8, 0, 0.2, 1), cubic-bezier(0, 0, 1, 1)",
+        "when": {
+          "prop": "active",
+          "equals": "active"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "root",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.33, 0, 0.1, 1), cubic-bezier(0, 0, 1, 1)",
+        "when": {
+          "prop": "active",
+          "equals": "inactive"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "root",
+        "channel": "transition-timing-function",
+        "value": "ease",
+        "when": {
+          "prop": "active",
+          "equals": "none"
+        },
+        "byPropField": "declaredByProp"
       }
     ],
     "state": []
@@ -585,38 +675,17 @@
   "codeOnlyChannels": [
     {
       "part": "root",
-      "channel": "transform",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -1, 0, 0, 0, 1)",
-      "distinctValues": 3
-    },
-    {
-      "part": "root",
-      "channel": "transition-duration",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "0.5s, 0.1s",
-      "distinctValues": 2
-    },
-    {
-      "part": "root",
-      "channel": "transition-property",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "transform, opacity",
-      "distinctValues": 2
-    },
-    {
-      "part": "root",
-      "channel": "transition-timing-function",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "cubic-bezier(0.8, 0, 0.2, 1), cubic-bezier(0, 0, 1, 1)",
-      "distinctValues": 3
-    },
-    {
-      "part": "root",
       "channel": "vertical-align",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "middle",
       "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "transform",
+      "reason": "declared-channel value varies across combos and does NOT factor on any single non-presence, non-state enum axis (or a per-axis value falls outside the channel's bounded grammar) — the by-axis declaredByProp carrier cannot hold it; named residue",
+      "sample": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -1, 0, 0, 0, 1)",
+      "distinctValues": 3
     }
   ],
   "stateOverflow": [],
@@ -751,7 +820,10 @@
     "inheritance-check-rejected: label.color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.line-height — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-only: label.font-size equals ancestor \"root\" on all 96 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
-    "inheritance-only: label.font-weight equals ancestor \"root\" on all 96 captured planes — the part carries no independent font-weight fact (CSS inheritance, observed)"
+    "inheritance-only: label.font-weight equals ancestor \"root\" on all 96 captured planes — the part carries no independent font-weight fact (CSS inheritance, observed)",
+    "declared-by-axis-carried: root.transition-duration varies by \"active\" (active=0.5s, 0.1s, inactive=0.5s, 0.1s, none=0s) — carried as per-value declaredByProp entries (code: `.active-<value> { transition-duration: … }`; canvas: declared-not-drawn, repeated as a code-only fact)",
+    "declared-by-axis-carried: root.transition-property varies by \"active\" (active=transform, opacity, inactive=transform, opacity, none=all) — carried as per-value declaredByProp entries (code: `.active-<value> { transition-property: … }`; canvas: declared-not-drawn, repeated as a code-only fact)",
+    "declared-by-axis-carried: root.transition-timing-function varies by \"active\" (active=cubic-bezier(0.8, 0, 0.2, 1), cubic-bezier(0, 0, 1, 1), inactive=cubic-bezier(0.33, 0, 0.1, 1), cubic-bezier(0, 0, 1, 1), none=ease) — carried as per-value declaredByProp entries (code: `.active-<value> { transition-timing-function: … }`; canvas: declared-not-drawn, repeated as a code-only fact)"
   ],
   "frontierReceipts": [
     "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
@@ -806,6 +878,15 @@
     "pair-with-unset carried: label.border-bottom-left-radius = base plane per shape + placeholder maps per size (emitter capability lift)",
     "pair-with-unset carried: label.border-bottom-right-radius = base plane per shape + placeholder maps per size (emitter capability lift)",
     "pair-with-unset carried: label.border-top-left-radius = base plane per shape + placeholder maps per size (emitter capability lift)",
-    "pair-with-unset carried: label.border-top-right-radius = base plane per shape + placeholder maps per size (emitter capability lift)"
+    "pair-with-unset carried: label.border-top-right-radius = base plane per shape + placeholder maps per size (emitter capability lift)",
+    "declared fact carried per axis value: root.transition-duration = 0.5s, 0.1s when active=active (declaredByProp)",
+    "declared fact carried per axis value: root.transition-duration = 0.5s, 0.1s when active=inactive (declaredByProp)",
+    "declared fact carried per axis value: root.transition-duration = 0s when active=none (declaredByProp)",
+    "declared fact carried per axis value: root.transition-property = transform, opacity when active=active (declaredByProp)",
+    "declared fact carried per axis value: root.transition-property = transform, opacity when active=inactive (declaredByProp)",
+    "declared fact carried per axis value: root.transition-property = all when active=none (declaredByProp)",
+    "declared fact carried per axis value: root.transition-timing-function = cubic-bezier(0.8, 0, 0.2, 1), cubic-bezier(0, 0, 1, 1) when active=active (declaredByProp)",
+    "declared fact carried per axis value: root.transition-timing-function = cubic-bezier(0.33, 0, 0.1, 1), cubic-bezier(0, 0, 1, 1) when active=inactive (declaredByProp)",
+    "declared fact carried per axis value: root.transition-timing-function = ease when active=none (declaredByProp)"
   ]
 }

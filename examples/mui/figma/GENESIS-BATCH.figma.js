@@ -26211,7 +26211,7 @@ const COMPONENTS = [
     "contractId": "mui.accordion",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Accordion — generated from contract mui.accordion v0.2.0 † (48 code-only facts — see plugin report)",
+    "description": "Accordion — generated from contract mui.accordion v0.2.0 † (50 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -26629,7 +26629,6 @@ const COMPONENTS = [
                 "px": 288,
                 "varName": "imported/accordion/collapse-root/width/elevation"
               },
-              "clipsContent": true,
               "children": [
                 {
                   "type": "frame",
@@ -27065,7 +27064,6 @@ const COMPONENTS = [
                 "px": 286,
                 "varName": "imported/accordion/collapse-root/width/outlined"
               },
-              "clipsContent": true,
               "children": [
                 {
                   "type": "frame",
@@ -27425,6 +27423,28 @@ const COMPONENTS = [
         "channel": "display",
         "value": "block",
         "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 4,
+          "of": 4
+        }
+      },
+      {
+        "part": "collapse-root",
+        "kind": "declared",
+        "channel": "overflow-x",
+        "value": "visible",
+        "reason": "declared value outside the canvas grammar for this channel — hidden/clip clip natively (clipsContent). auto/scroll are scrolling, which exists only in code.",
+        "variants": {
+          "count": 4,
+          "of": 4
+        }
+      },
+      {
+        "part": "collapse-root",
+        "kind": "declared",
+        "channel": "overflow-y",
+        "value": "visible",
+        "reason": "declared value outside the canvas grammar for this channel — hidden/clip clip natively (clipsContent). auto/scroll are scrolling, which exists only in code.",
         "variants": {
           "count": 4,
           "of": 4
@@ -49763,7 +49783,7 @@ const COMPONENTS = [
     "contractId": "mui.input-adornment",
     "version": "0.2.0",
     "anchorKey": "mui.input-adornment",
-    "description": "InputAdornment — generated from contract mui.input-adornment v0.2.0 † (6 code-only facts — see plugin report)",
+    "description": "InputAdornment — generated from contract mui.input-adornment v0.2.0 † (7 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -49918,6 +49938,17 @@ const COMPONENTS = [
         "channel": "text-wrap-mode",
         "value": "nowrap",
         "reason": "Line-breaking rules differ: Figma wraps by box width only.",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "root",
+        "kind": "plane",
+        "channel": "variant axis \"Position\"",
+        "value": "start / end",
+        "reason": "the compiled plane carries NO distinguishing fact for this axis — its 2 values compile to byte-identical cells (1 identical group(s) of 2), so the minted set draws the same picture in every one of them. Either the capture never swept the axis (extract/computed/configs/<lib>.json `axes`) or every fact that separates the values was refused upstream and is named in this component's own code-only facts. NAMED, NOT DROPPED: the axis is still minted as a Figma variant property, because a flat axis can be the library's own truth; nothing here guesses which.",
         "variants": {
           "count": 2,
           "of": 2
@@ -51458,7 +51489,7 @@ const COMPONENTS = [
     "contractId": "mui.text-field",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "TextField — generated from contract mui.text-field v0.2.0 † (33 code-only facts — see plugin report)",
+    "description": "TextField — generated from contract mui.text-field v0.2.0 † (35 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -53102,6 +53133,28 @@ const COMPONENTS = [
         "channel": "position",
         "value": "relative",
         "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 6,
+          "of": 6
+        }
+      },
+      {
+        "part": "root",
+        "kind": "plane",
+        "channel": "variant axis \"Size\"",
+        "value": "medium / small",
+        "reason": "the compiled plane carries NO distinguishing fact for this axis — its 2 values compile to byte-identical cells (3 identical group(s) of 2), so the minted set draws the same picture in every one of them. Either the capture never swept the axis (extract/computed/configs/<lib>.json `axes`) or every fact that separates the values was refused upstream and is named in this component's own code-only facts. NAMED, NOT DROPPED: the axis is still minted as a Figma variant property, because a flat axis can be the library's own truth; nothing here guesses which.",
+        "variants": {
+          "count": 6,
+          "of": 6
+        }
+      },
+      {
+        "part": "root",
+        "kind": "plane",
+        "channel": "variant axis \"Variant\"",
+        "value": "outlined / filled / standard",
+        "reason": "the compiled plane carries NO distinguishing fact for this axis — its 3 values compile to byte-identical cells (2 identical group(s) of 3), so the minted set draws the same picture in every one of them. Either the capture never swept the axis (extract/computed/configs/<lib>.json `axes`) or every fact that separates the values was refused upstream and is named in this component's own code-only facts. NAMED, NOT DROPPED: the axis is still minted as a Figma variant property, because a flat axis can be the library's own truth; nothing here guesses which.",
         "variants": {
           "count": 6,
           "of": 6
@@ -61489,7 +61542,7 @@ const COMPONENTS = [
     "contractId": "mui.circular-progress",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "CircularProgress — generated from contract mui.circular-progress v0.2.0 † (1 code-only facts — see plugin report)",
+    "description": "CircularProgress — generated from contract mui.circular-progress v0.2.0 † (7 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -61569,6 +61622,72 @@ const COMPONENTS = [
         "channel": "display",
         "value": "block",
         "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "transition-duration",
+        "value": "0.3s",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "transition-duration",
+        "value": "0s",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "transition-property",
+        "value": "all",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "transition-property",
+        "value": "transform",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "transition-timing-function",
+        "value": "ease",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
         "variants": {
           "count": 2,
           "of": 2
@@ -63065,7 +63184,7 @@ const COMPONENTS = [
     "contractId": "mui.linear-progress",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "LinearProgress — generated from contract mui.linear-progress v0.2.0 † (16 code-only facts — see plugin report)",
+    "description": "LinearProgress — generated from contract mui.linear-progress v0.2.0 † (18 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -63245,6 +63364,28 @@ const COMPONENTS = [
         "channel": "position",
         "value": "absolute",
         "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "linearprogress-bar",
+        "kind": "declared",
+        "channel": "transition-duration",
+        "value": "0.2s",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "linearprogress-bar",
+        "kind": "declared",
+        "channel": "transition-duration",
+        "value": "0.4s",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
         "variants": {
           "count": 2,
           "of": 2
@@ -73025,6 +73166,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/primary",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -73054,6 +73196,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/primary",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -73083,6 +73226,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/primary",
+              "textDecoration": "UNDERLINE",
               "contentProp": "Label"
             }
           ]
@@ -73112,6 +73256,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/secondary",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -73141,6 +73286,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/secondary",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -73170,6 +73316,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/secondary",
+              "textDecoration": "UNDERLINE",
               "contentProp": "Label"
             }
           ]
@@ -73199,6 +73346,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/error",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -73228,6 +73376,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/error",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -73257,6 +73406,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/error",
+              "textDecoration": "UNDERLINE",
               "contentProp": "Label"
             }
           ]
@@ -73286,6 +73436,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/info",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -73315,6 +73466,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/info",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -73344,6 +73496,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/info",
+              "textDecoration": "UNDERLINE",
               "contentProp": "Label"
             }
           ]
@@ -73373,6 +73526,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/success",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -73402,6 +73556,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/success",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -73431,6 +73586,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/success",
+              "textDecoration": "UNDERLINE",
               "contentProp": "Label"
             }
           ]
@@ -73460,6 +73616,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/warning",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -73489,6 +73646,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/warning",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -73518,6 +73676,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/warning",
+              "textDecoration": "UNDERLINE",
               "contentProp": "Label"
             }
           ]
@@ -73547,6 +73706,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/inherit",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -73576,6 +73736,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/inherit",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -73605,6 +73766,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/inherit",
+              "textDecoration": "UNDERLINE",
               "contentProp": "Label"
             }
           ]
@@ -73649,6 +73811,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/primary",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -73683,6 +73846,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/secondary",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -73717,6 +73881,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/error",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -73751,6 +73916,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/info",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -73785,6 +73951,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/success",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -73819,6 +73986,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/warning",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -73853,6 +74021,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/inherit",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -73882,6 +74051,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/primary",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -73911,6 +74081,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/secondary",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -73940,6 +74111,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/error",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -73969,6 +74141,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/info",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -73998,6 +74171,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/success",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -74027,6 +74201,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/warning",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -74056,6 +74231,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/inherit",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -74085,6 +74261,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/primary",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -74114,6 +74291,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/secondary",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -74143,6 +74321,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/error",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -74172,6 +74351,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/info",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -74201,6 +74381,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/success",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -74230,6 +74411,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/warning",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -74259,6 +74441,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/link/root/font-size",
               "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/inherit",
+              "textDecoration": "NONE",
               "contentProp": "Label"
             }
           ]
@@ -75068,6 +75251,55 @@ async function buildNode(spec, registry) {
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
     node.fontSize = spec.fontSize || 16;
     node.characters = spec.characters || '';
+    if (spec.fontFamily) {
+      // PER-FAMILY STYLE SPELLING. The compiled style name comes from
+      // FONT_STYLE_BY_WEIGHT, which is spelled Inter's way ("Semi Bold",
+      // "Extra Light"). Other families spell the same face WITHOUT the space
+      // — IBM Plex Sans ships "SemiBold", "ExtraLight" — so the Inter-spelled
+      // load THROWS and the node silently keeps the Inter fallback assigned
+      // above. That is a SUBSTITUTION, not a failure: nothing was logged,
+      // nothing was refused, and the canvas rendered a different typeface at
+      // different advance widths (altitude heading 194px of Inter Semi Bold
+      // where IBM Plex Sans SemiBold is 185px).
+      //
+      // A space-free retry was tried on 2026-08-08 and REVERTED because the
+      // then-pinned references were CONTRACT renders made by a harness that
+      // loaded no @font-face, so the truer canvas font scored WORSE. That
+      // premise is dead: the references are now the real library renders
+      // (extract/computed/out/<lane>/<comp>/orig-shots/, committed by
+      // run.ts --keep-originals) and the capture harness loads the library's
+      // own faces (cfg.fonts). Truer is now also closer.
+      //
+      // The fallback is kept — a family Figma does not have at all must still
+      // draw something — but it is no longer SILENT: an unresolved style is
+      // named on the console with a stable code.
+      const wantStyle = spec.fontStyle || 'Medium';
+      const styleCandidates = [wantStyle];
+      const tightStyle = wantStyle.split(' ').join('');
+      if (tightStyle !== wantStyle) styleCandidates.push(tightStyle);
+      let fontResolved = false;
+      for (let i = 0; i < styleCandidates.length; i++) {
+        try {
+          await figma.loadFontAsync({ family: spec.fontFamily, style: styleCandidates[i] });
+          node.fontName = { family: spec.fontFamily, style: styleCandidates[i] };
+          fontResolved = true;
+          break;
+        } catch (e) { /* a RETRY, not a swallow: the next candidate is this family's own spelling of the same face; the final outcome is named below */ }
+      }
+      if (!fontResolved) {
+        console.warn(
+          'FC-FONT-STYLE-UNRESOLVED: ' + spec.fontFamily + ' / ' + wantStyle +
+          ' is not available in this file (tried ' + styleCandidates.join(', ') +
+          ') — Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones',
+        );
+        degrade('FC-FONT-STYLE-UNRESOLVED', node, spec.fontFamily + ' / ' + wantStyle + ' is not available in this file (tried ' + styleCandidates.join(', ') + '); Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones');
+      }
+    }
+    if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
+    if (spec.textCase) node.textCase = spec.textCase;
+    if (spec.textDecoration) node.textDecoration = spec.textDecoration;
+    if (spec.textAlignH) node.textAlignHorizontal = spec.textAlignH;
+    if (spec.textTruncation) { try { node.textTruncation = 'ENDING'; } catch (e) { degrade('FC-RT-TRUNCATION-REFUSED', node, 'textTruncation ENDING refused (older Plugin API); the declared ellipsis does not draw', e); } }
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.
@@ -81865,7 +82097,7 @@ const COMPONENTS = [
     "contractId": "mui.radio",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Radio — generated from contract mui.radio v0.2.0 † (48 code-only facts — see plugin report)",
+    "description": "Radio — generated from contract mui.radio v0.2.0 † (51 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -81931,15 +82163,6 @@ const COMPONENTS = [
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
-                },
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/primary/unchecked",
-                  "grow": true,
-                  "iconSize": 24,
-                  "insetOverlay": true
                 }
               ]
             }
@@ -82077,15 +82300,6 @@ const COMPONENTS = [
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
-                },
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/secondary/unchecked",
-                  "grow": true,
-                  "iconSize": 24,
-                  "insetOverlay": true
                 }
               ]
             }
@@ -82223,15 +82437,6 @@ const COMPONENTS = [
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
-                },
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/error/unchecked",
-                  "grow": true,
-                  "iconSize": 24,
-                  "insetOverlay": true
                 }
               ]
             }
@@ -82369,15 +82574,6 @@ const COMPONENTS = [
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
-                },
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/info/unchecked",
-                  "grow": true,
-                  "iconSize": 24,
-                  "insetOverlay": true
                 }
               ]
             }
@@ -82515,15 +82711,6 @@ const COMPONENTS = [
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
-                },
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/success/unchecked",
-                  "grow": true,
-                  "iconSize": 24,
-                  "insetOverlay": true
                 }
               ]
             }
@@ -82661,15 +82848,6 @@ const COMPONENTS = [
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
-                },
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/warning/unchecked",
-                  "grow": true,
-                  "iconSize": 24,
-                  "insetOverlay": true
                 }
               ]
             }
@@ -82807,15 +82985,6 @@ const COMPONENTS = [
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
-                },
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/default/unchecked",
-                  "grow": true,
-                  "iconSize": 24,
-                  "insetOverlay": true
                 }
               ]
             }
@@ -83072,6 +83241,17 @@ const COMPONENTS = [
       {
         "part": "icon-2",
         "kind": "declared",
+        "channel": "transform",
+        "value": "matrix(0, 0, 0, 0, …)",
+        "reason": "a COLLAPSED transform (scale(0)) for checked=unchecked — Figma has no scale(0), so the canvas lowers it the only honest way it can: the part is NOT DRAWN in those cells. The fact is carried, but it comes back off the canvas as the part's ABSENCE (a visibleWhen on that axis value), never as a transform channel — read it here, not on the node.",
+        "variants": {
+          "count": 14,
+          "of": 14
+        }
+      },
+      {
+        "part": "icon-2",
+        "kind": "declared",
         "channel": "transition-duration",
         "value": "0.15s",
         "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
@@ -83085,6 +83265,28 @@ const COMPONENTS = [
         "kind": "declared",
         "channel": "transition-property",
         "value": "transform",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 14,
+          "of": 14
+        }
+      },
+      {
+        "part": "icon-2",
+        "kind": "declared",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0, 0, 0.2, 1)",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 14,
+          "of": 14
+        }
+      },
+      {
+        "part": "icon-2",
+        "kind": "declared",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 1, 1)",
         "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
         "variants": {
           "count": 14,
@@ -87494,7 +87696,7 @@ const COMPONENTS = [
     "contractId": "mui.snackbar",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Snackbar — generated from contract mui.snackbar v0.2.0 † (6 code-only facts — see plugin report)",
+    "description": "Snackbar — generated from contract mui.snackbar v0.2.0 † (7 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -87905,6 +88107,17 @@ const COMPONENTS = [
         "channel": "z-index",
         "value": "{imported.snackbar.root.z-index}",
         "reason": "paint order on canvas is CHILD ORDER — a z-index a part carries independently of its DOM order has no field.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "root",
+        "kind": "plane",
+        "channel": "variant axis \"Position\"",
+        "value": "bottom-left / bottom-center / top-right",
+        "reason": "the compiled plane carries NO distinguishing fact for this axis — its 3 values compile to byte-identical cells (1 identical group(s) of 3), so the minted set draws the same picture in every one of them. Either the capture never swept the axis (extract/computed/configs/<lib>.json `axes`) or every fact that separates the values was refused upstream and is named in this component's own code-only facts. NAMED, NOT DROPPED: the axis is still minted as a Figma variant property, because a flat axis can be the library's own truth; nothing here guesses which.",
         "variants": {
           "count": 3,
           "of": 3

@@ -847,39 +847,101 @@
         "part": "label-3",
         "channel": "transition-timing-function",
         "value": "cubic-bezier(0.33, 0, 0.67, 1)"
+      },
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "content-box",
+        "when": {
+          "prop": "modalType",
+          "equals": "modal"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box",
+        "when": {
+          "prop": "modalType",
+          "equals": "non-modal"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "content-box",
+        "when": {
+          "prop": "modalType",
+          "equals": "alert"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "root",
+        "channel": "max-height",
+        "value": "none",
+        "when": {
+          "prop": "modalType",
+          "equals": "modal"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "root",
+        "channel": "max-height",
+        "value": "1400px",
+        "when": {
+          "prop": "modalType",
+          "equals": "non-modal"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "root",
+        "channel": "max-height",
+        "value": "none",
+        "when": {
+          "prop": "modalType",
+          "equals": "alert"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "root",
+        "channel": "max-width",
+        "value": "none",
+        "when": {
+          "prop": "modalType",
+          "equals": "modal"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "root",
+        "channel": "max-width",
+        "value": "600px",
+        "when": {
+          "prop": "modalType",
+          "equals": "non-modal"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "root",
+        "channel": "max-width",
+        "value": "none",
+        "when": {
+          "prop": "modalType",
+          "equals": "alert"
+        },
+        "byPropField": "declaredByProp"
       }
     ],
     "state": []
   },
   "codeOnlyChannels": [
-    {
-      "part": "root",
-      "channel": "box-sizing",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "content-box",
-      "distinctValues": 2
-    },
-    {
-      "part": "root",
-      "channel": "max-height",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "none",
-      "distinctValues": 2
-    },
-    {
-      "part": "root",
-      "channel": "max-width",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "none",
-      "distinctValues": 2
-    },
-    {
-      "part": "root",
-      "channel": "position",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "absolute",
-      "distinctValues": 2
-    },
     {
       "part": "root",
       "channel": "scale",
@@ -942,6 +1004,13 @@
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "middle",
       "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "position",
+      "reason": "declared-channel value varies across combos and does NOT factor on any single non-presence, non-state enum axis (or a per-axis value falls outside the channel's bounded grammar) — the by-axis declaredByProp carrier cannot hold it; named residue",
+      "sample": "absolute",
+      "distinctValues": 2
     }
   ],
   "stateOverflow": [],
@@ -1070,7 +1139,10 @@
     "inheritance-only: label.color equals ancestor \"dialogbody\" on all 2 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
     "inheritance-only: part-0-1-0.color equals ancestor \"dialogtitle__action\" on all 1 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
     "orphan-mint-refused: part-1-0 was REFUSED by the anatomy promotion (it is not a part of the promoted contract), so its 12 styled channel(s) do not mint — before this door they minted leaves the contract could never reference, and `figma bundle` shipped them as Figma variables nothing binds (task #42). The named promotion refusal is in anatomyPromotion.refusals.",
-    "orphan-mint-refused: part-1-2 was REFUSED by the anatomy promotion (it is not a part of the promoted contract), so its 12 styled channel(s) do not mint — before this door they minted leaves the contract could never reference, and `figma bundle` shipped them as Figma variables nothing binds (task #42). The named promotion refusal is in anatomyPromotion.refusals."
+    "orphan-mint-refused: part-1-2 was REFUSED by the anatomy promotion (it is not a part of the promoted contract), so its 12 styled channel(s) do not mint — before this door they minted leaves the contract could never reference, and `figma bundle` shipped them as Figma variables nothing binds (task #42). The named promotion refusal is in anatomyPromotion.refusals.",
+    "declared-by-axis-carried: root.box-sizing varies by \"modalType\" (modal=content-box, non-modal=border-box, alert=content-box) — carried as per-value declaredByProp entries (code: `.modalType-<value> { box-sizing: … }`; canvas: drawn per compiled variant)",
+    "declared-by-axis-carried: root.max-height varies by \"modalType\" (modal=none, non-modal=1400px, alert=none) — carried as per-value declaredByProp entries (code: `.modalType-<value> { max-height: … }`; canvas: declared-not-drawn, repeated as a code-only fact)",
+    "declared-by-axis-carried: root.max-width varies by \"modalType\" (modal=none, non-modal=600px, alert=none) — carried as per-value declaredByProp entries (code: `.modalType-<value> { max-width: … }`; canvas: declared-not-drawn, repeated as a code-only fact)"
   ],
   "frontierReceipts": [
     "read-boundary-not-read-on-portal-path: Dialog sweeps through capturePortalRoots (two-phase baseline diff), which normalizes each root inside its own reader and never runs readBoundaryReceipts — so the text-fill fold and the closed-shadow-root signature are NOT MEASURED for this component. Zero lines above means UNREAD, not \"none found\"; a named residual of the molecule round, surfaced by the scope-independence fix (before it, this component displayed its SIBLINGS' folds and looked read).",
@@ -1276,6 +1348,15 @@
     "declared fact carried: label-3.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label-3.transition-duration = 0.1s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-3.transition-property = background, border, color (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label-3.transition-timing-function = cubic-bezier(0.33, 0, 0.67, 1) (v15 declared vocabulary — declared-not-drawn on canvas)"
+    "declared fact carried: label-3.transition-timing-function = cubic-bezier(0.33, 0, 0.67, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried per axis value: root.box-sizing = content-box when modalType=modal (declaredByProp)",
+    "declared fact carried per axis value: root.box-sizing = border-box when modalType=non-modal (declaredByProp)",
+    "declared fact carried per axis value: root.box-sizing = content-box when modalType=alert (declaredByProp)",
+    "declared fact carried per axis value: root.max-height = none when modalType=modal (declaredByProp)",
+    "declared fact carried per axis value: root.max-height = 1400px when modalType=non-modal (declaredByProp)",
+    "declared fact carried per axis value: root.max-height = none when modalType=alert (declaredByProp)",
+    "declared fact carried per axis value: root.max-width = none when modalType=modal (declaredByProp)",
+    "declared fact carried per axis value: root.max-width = 600px when modalType=non-modal (declaredByProp)",
+    "declared fact carried per axis value: root.max-width = none when modalType=alert (declaredByProp)"
   ]
 }

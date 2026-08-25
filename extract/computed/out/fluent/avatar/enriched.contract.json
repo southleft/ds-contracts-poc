@@ -261,6 +261,28 @@
             }
           }
         }
+      ],
+      "declaredByProp": [
+        {
+          "prop": "active",
+          "map": {
+            "active": {
+              "transition-duration": "0.5s, 0.1s",
+              "transition-property": "transform, opacity",
+              "transition-timing-function": "cubic-bezier(0.8, 0, 0.2, 1), cubic-bezier(0, 0, 1, 1)"
+            },
+            "inactive": {
+              "transition-duration": "0.5s, 0.1s",
+              "transition-property": "transform, opacity",
+              "transition-timing-function": "cubic-bezier(0.33, 0, 0.1, 1), cubic-bezier(0, 0, 1, 1)"
+            },
+            "none": {
+              "transition-duration": "0s",
+              "transition-property": "all",
+              "transition-timing-function": "ease"
+            }
+          }
+        }
       ]
     }
   },

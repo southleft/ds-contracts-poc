@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "mui.linear-progress",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "LinearProgress — generated from contract mui.linear-progress v0.2.0 † (16 code-only facts — see plugin report)",
+    "description": "LinearProgress — generated from contract mui.linear-progress v0.2.0 † (18 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -188,6 +188,28 @@ const COMPONENTS = [
         "channel": "position",
         "value": "absolute",
         "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "linearprogress-bar",
+        "kind": "declared",
+        "channel": "transition-duration",
+        "value": "0.2s",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "linearprogress-bar",
+        "kind": "declared",
+        "channel": "transition-duration",
+        "value": "0.4s",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
         "variants": {
           "count": 2,
           "of": 2

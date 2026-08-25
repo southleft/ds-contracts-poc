@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "mui.radio",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Radio — generated from contract mui.radio v0.2.0 † (48 code-only facts — see plugin report)",
+    "description": "Radio — generated from contract mui.radio v0.2.0 † (51 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -74,15 +74,6 @@ const COMPONENTS = [
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
-                },
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/primary/unchecked",
-                  "grow": true,
-                  "iconSize": 24,
-                  "insetOverlay": true
                 }
               ]
             }
@@ -220,15 +211,6 @@ const COMPONENTS = [
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
-                },
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/secondary/unchecked",
-                  "grow": true,
-                  "iconSize": 24,
-                  "insetOverlay": true
                 }
               ]
             }
@@ -366,15 +348,6 @@ const COMPONENTS = [
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
-                },
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/error/unchecked",
-                  "grow": true,
-                  "iconSize": 24,
-                  "insetOverlay": true
                 }
               ]
             }
@@ -512,15 +485,6 @@ const COMPONENTS = [
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
-                },
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/info/unchecked",
-                  "grow": true,
-                  "iconSize": 24,
-                  "insetOverlay": true
                 }
               ]
             }
@@ -658,15 +622,6 @@ const COMPONENTS = [
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
-                },
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/success/unchecked",
-                  "grow": true,
-                  "iconSize": 24,
-                  "insetOverlay": true
                 }
               ]
             }
@@ -804,15 +759,6 @@ const COMPONENTS = [
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
-                },
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/warning/unchecked",
-                  "grow": true,
-                  "iconSize": 24,
-                  "insetOverlay": true
                 }
               ]
             }
@@ -950,15 +896,6 @@ const COMPONENTS = [
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
-                },
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/default/unchecked",
-                  "grow": true,
-                  "iconSize": 24,
-                  "insetOverlay": true
                 }
               ]
             }
@@ -1215,6 +1152,17 @@ const COMPONENTS = [
       {
         "part": "icon-2",
         "kind": "declared",
+        "channel": "transform",
+        "value": "matrix(0, 0, 0, 0, …)",
+        "reason": "a COLLAPSED transform (scale(0)) for checked=unchecked — Figma has no scale(0), so the canvas lowers it the only honest way it can: the part is NOT DRAWN in those cells. The fact is carried, but it comes back off the canvas as the part's ABSENCE (a visibleWhen on that axis value), never as a transform channel — read it here, not on the node.",
+        "variants": {
+          "count": 14,
+          "of": 14
+        }
+      },
+      {
+        "part": "icon-2",
+        "kind": "declared",
         "channel": "transition-duration",
         "value": "0.15s",
         "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
@@ -1228,6 +1176,28 @@ const COMPONENTS = [
         "kind": "declared",
         "channel": "transition-property",
         "value": "transform",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 14,
+          "of": 14
+        }
+      },
+      {
+        "part": "icon-2",
+        "kind": "declared",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0, 0, 0.2, 1)",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 14,
+          "of": 14
+        }
+      },
+      {
+        "part": "icon-2",
+        "kind": "declared",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 1, 1)",
         "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
         "variants": {
           "count": 14,

@@ -47,6 +47,26 @@
       },
       {
         "part": "slider-track",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, 0, -2)",
+        "when": {
+          "prop": "orientation",
+          "equals": "horizontal"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "slider-track",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, -2, 0)",
+        "when": {
+          "prop": "orientation",
+          "equals": "vertical"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "slider-track",
         "channel": "user-select",
         "value": "none"
       },
@@ -57,6 +77,26 @@
       },
       {
         "part": "part-1-0-1",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, 0, -2)",
+        "when": {
+          "prop": "orientation",
+          "equals": "horizontal"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "part-1-0-1",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, -2, 0)",
+        "when": {
+          "prop": "orientation",
+          "equals": "vertical"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "part-1-0-1",
         "channel": "user-select",
         "value": "none"
       },
@@ -64,6 +104,26 @@
         "part": "slider-thumb-2",
         "channel": "cursor",
         "value": "grab"
+      },
+      {
+        "part": "slider-thumb-2",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, -10, -10)",
+        "when": {
+          "prop": "orientation",
+          "equals": "horizontal"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "slider-thumb-2",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, -10, 10)",
+        "when": {
+          "prop": "orientation",
+          "equals": "vertical"
+        },
+        "byPropField": "declaredByProp"
       },
       {
         "part": "slider-thumb-2",
@@ -99,6 +159,26 @@
         "part": "slider-thumb",
         "channel": "cursor",
         "value": "grab"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, -10, -10)",
+        "when": {
+          "prop": "orientation",
+          "equals": "horizontal"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, -10, 10)",
+        "when": {
+          "prop": "orientation",
+          "equals": "vertical"
+        },
+        "byPropField": "declaredByProp"
       },
       {
         "part": "slider-thumb",
@@ -191,9 +271,9 @@
     "combos": 6,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 2896,
-      "cellsEqual": 2613,
-      "pctEqual": 90.22790055248619,
+      "cellsCompared": 3056,
+      "cellsEqual": 2857,
+      "pctEqual": 93.48821989528795,
       "rowsFullyEqual": 0,
       "rows": 24
     },
@@ -217,9 +297,9 @@
       "contradictions": 0,
       "mintedLeaves": 122,
       "mintedLeavesUnfolded": 121,
-      "baseBindings": 120,
+      "baseBindings": 129,
       "stateBindings": 0,
-      "codeOnlyChannels": 41,
+      "codeOnlyChannels": 36,
       "overflowBindings": 2,
       "folds": 30
     },
@@ -228,56 +308,56 @@
         "key": "vertical.tooltip__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 19,
+        "channelsMismatched": 15,
         "unscorable": "no-original"
       },
       {
         "key": "vertical.tooltip__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 19,
-        "unscorable": "no-original"
-      },
-      {
-        "key": "vertical.tooltip__default",
-        "pctAA": null,
-        "pctExact": null,
-        "channelsMismatched": 18,
-        "unscorable": "no-original"
-      },
-      {
-        "key": "vertical.tooltip__hover",
-        "pctAA": null,
-        "pctExact": null,
-        "channelsMismatched": 18,
+        "channelsMismatched": 15,
         "unscorable": "no-original"
       },
       {
         "key": "horizontal.tooltip__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 17,
+        "channelsMismatched": 14,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "vertical.tooltip__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 14,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "vertical.tooltip__hover",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 14,
         "unscorable": "no-original"
       },
       {
         "key": "horizontal.tooltip__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 16,
+        "channelsMismatched": 13,
         "unscorable": "no-original"
       },
       {
         "key": "horizontal.tooltip__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 16,
+        "channelsMismatched": 13,
         "unscorable": "no-original"
       },
       {
         "key": "horizontal.tooltip__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 16,
+        "channelsMismatched": 13,
         "unscorable": "no-original"
       }
     ],
@@ -295,14 +375,6 @@
         24
       ],
       [
-        "slider-track.transform",
-        24
-      ],
-      [
-        "part-1-0-1.transform",
-        24
-      ],
-      [
         "slider-thumb-2.left",
         16
       ],
@@ -311,23 +383,11 @@
         16
       ],
       [
-        "slider-thumb-2.transform",
-        16
-      ],
-      [
-        "part-1-0.flex-direction",
-        12
-      ],
-      [
         "part-1-0.justify-content",
         12
       ],
       [
         "slider-thumb.anchor-name",
-        8
-      ],
-      [
-        "slider-thumb.transform",
         8
       ],
       [
@@ -341,21 +401,36 @@
       [
         "tooltip.animation-name",
         8
+      ],
+      [
+        "tooltip.animation-timing-function",
+        8
+      ],
+      [
+        "tooltip.position",
+        8
+      ],
+      [
+        "tooltip.position-anchor",
+        8
+      ],
+      [
+        "tooltip.position-area",
+        8
+      ],
+      [
+        "tooltip.position-try-fallbacks",
+        8
       ]
     ],
     "namedLosses": [
       "overflow: slider-thumb-2.left — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
       "overflow: slider-thumb-2.right — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
       "code-only: part-1-0.anchor-name — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: part-1-0.flex-direction — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-1-0.justify-content — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: slider-track.transform — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "code-only: part-1-0-1.transform — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "code-only: slider-thumb-2.transform — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "code-only: part-1-0-2.height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-1-0-2.width — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: slider-thumb.anchor-name — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: slider-thumb.transform — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "code-only: tooltip.animation-duration — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: tooltip.animation-fill-mode — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: tooltip.animation-name — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -394,7 +469,7 @@
     },
     "shippedMinted": {
       "path": "examples/astryx/tokens/astryx-minted.dtcg.json",
-      "leavesAdded": 287,
+      "leavesAdded": 441,
       "divergent": [
         {
           "token": "imported.slider.label-2.color",
@@ -415,12 +490,6 @@
           "resolvedEqual": true
         },
         {
-          "token": "imported.slider.tooltip.background-color",
-          "fresh": "#171717",
-          "shipped": "{color-background-inverted}",
-          "resolvedEqual": false
-        },
-        {
           "token": "imported.slider.tooltip.color",
           "fresh": "#ffffff",
           "shipped": "{color-on-dark}",
@@ -431,8 +500,8 @@
     "rows": [
       {
         "key": "horizontal.tooltip__default",
-        "channelsCompared": 168,
-        "channelsEqual": 152,
+        "channelsCompared": 175,
+        "channelsEqual": 162,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -456,28 +525,10 @@
             "theirs": "--astryx-layer-_r_4_"
           },
           {
-            "part": "slider-track",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
-          },
-          {
-            "part": "part-1-0-1",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
-          },
-          {
             "part": "slider-thumb",
             "channel": "anchor-name",
             "ours": "none",
             "theirs": "--astryx-layer-_r_5_"
-          },
-          {
-            "part": "slider-thumb",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -10, -10)"
           },
           {
             "part": "tooltip",
@@ -538,8 +589,8 @@
       },
       {
         "key": "horizontal.tooltip__hover",
-        "channelsCompared": 168,
-        "channelsEqual": 152,
+        "channelsCompared": 175,
+        "channelsEqual": 162,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -563,28 +614,10 @@
             "theirs": "--astryx-layer-_r_4_"
           },
           {
-            "part": "slider-track",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
-          },
-          {
-            "part": "part-1-0-1",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
-          },
-          {
             "part": "slider-thumb",
             "channel": "anchor-name",
             "ours": "none",
             "theirs": "--astryx-layer-_r_5_"
-          },
-          {
-            "part": "slider-thumb",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -10, -10)"
           },
           {
             "part": "tooltip",
@@ -645,8 +678,8 @@
       },
       {
         "key": "horizontal.tooltip__focus-visible",
-        "channelsCompared": 168,
-        "channelsEqual": 151,
+        "channelsCompared": 175,
+        "channelsEqual": 161,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -670,28 +703,10 @@
             "theirs": "--astryx-layer-_r_4_"
           },
           {
-            "part": "slider-track",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
-          },
-          {
-            "part": "part-1-0-1",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
-          },
-          {
             "part": "slider-thumb",
             "channel": "anchor-name",
             "ours": "none",
             "theirs": "--astryx-layer-_r_5_"
-          },
-          {
-            "part": "slider-thumb",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -10, -10)"
           },
           {
             "part": "tooltip",
@@ -758,8 +773,8 @@
       },
       {
         "key": "horizontal.tooltip__active",
-        "channelsCompared": 168,
-        "channelsEqual": 152,
+        "channelsCompared": 175,
+        "channelsEqual": 162,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -783,28 +798,10 @@
             "theirs": "--astryx-layer-_r_4_"
           },
           {
-            "part": "slider-track",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
-          },
-          {
-            "part": "part-1-0-1",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
-          },
-          {
             "part": "slider-thumb",
             "channel": "anchor-name",
             "ours": "none",
             "theirs": "--astryx-layer-_r_5_"
-          },
-          {
-            "part": "slider-thumb",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -10, -10)"
           },
           {
             "part": "tooltip",
@@ -865,8 +862,8 @@
       },
       {
         "key": "horizontal.text__default",
-        "channelsCompared": 100,
-        "channelsEqual": 92,
+        "channelsCompared": 107,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -890,18 +887,6 @@
             "theirs": "--astryx-layer-_r_9_"
           },
           {
-            "part": "slider-track",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
-          },
-          {
-            "part": "part-1-0-1",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
-          },
-          {
             "part": "slider-thumb-2",
             "channel": "left",
             "ours": "0px",
@@ -912,20 +897,14 @@
             "channel": "right",
             "ours": "194.328px",
             "theirs": "108.609px"
-          },
-          {
-            "part": "slider-thumb-2",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -10, -10)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "horizontal.text__hover",
-        "channelsCompared": 100,
-        "channelsEqual": 92,
+        "channelsCompared": 107,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -949,18 +928,6 @@
             "theirs": "--astryx-layer-_r_9_"
           },
           {
-            "part": "slider-track",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
-          },
-          {
-            "part": "part-1-0-1",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
-          },
-          {
             "part": "slider-thumb-2",
             "channel": "left",
             "ours": "0px",
@@ -971,20 +938,14 @@
             "channel": "right",
             "ours": "194.328px",
             "theirs": "108.609px"
-          },
-          {
-            "part": "slider-thumb-2",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -10, -10)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "horizontal.text__focus-visible",
-        "channelsCompared": 100,
-        "channelsEqual": 92,
+        "channelsCompared": 107,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1008,18 +969,6 @@
             "theirs": "--astryx-layer-_r_9_"
           },
           {
-            "part": "slider-track",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
-          },
-          {
-            "part": "part-1-0-1",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
-          },
-          {
             "part": "slider-thumb-2",
             "channel": "left",
             "ours": "0px",
@@ -1030,20 +979,14 @@
             "channel": "right",
             "ours": "194.328px",
             "theirs": "108.609px"
-          },
-          {
-            "part": "slider-thumb-2",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -10, -10)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "horizontal.text__active",
-        "channelsCompared": 100,
-        "channelsEqual": 92,
+        "channelsCompared": 107,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1067,18 +1010,6 @@
             "theirs": "--astryx-layer-_r_9_"
           },
           {
-            "part": "slider-track",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
-          },
-          {
-            "part": "part-1-0-1",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
-          },
-          {
             "part": "slider-thumb-2",
             "channel": "left",
             "ours": "0px",
@@ -1089,20 +1020,14 @@
             "channel": "right",
             "ours": "194.328px",
             "theirs": "108.609px"
-          },
-          {
-            "part": "slider-thumb-2",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -10, -10)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "horizontal.none__default",
-        "channelsCompared": 94,
-        "channelsEqual": 86,
+        "channelsCompared": 100,
+        "channelsEqual": 95,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1126,18 +1051,6 @@
             "theirs": "--astryx-layer-_r_d_"
           },
           {
-            "part": "slider-track",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
-          },
-          {
-            "part": "part-1-0-1",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
-          },
-          {
             "part": "slider-thumb-2",
             "channel": "left",
             "ours": "0px",
@@ -1148,20 +1061,14 @@
             "channel": "right",
             "ours": "220px",
             "theirs": "124px"
-          },
-          {
-            "part": "slider-thumb-2",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -10, -10)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "horizontal.none__hover",
-        "channelsCompared": 94,
-        "channelsEqual": 86,
+        "channelsCompared": 100,
+        "channelsEqual": 95,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1185,18 +1092,6 @@
             "theirs": "--astryx-layer-_r_d_"
           },
           {
-            "part": "slider-track",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
-          },
-          {
-            "part": "part-1-0-1",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
-          },
-          {
             "part": "slider-thumb-2",
             "channel": "left",
             "ours": "0px",
@@ -1207,20 +1102,14 @@
             "channel": "right",
             "ours": "220px",
             "theirs": "124px"
-          },
-          {
-            "part": "slider-thumb-2",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -10, -10)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "horizontal.none__focus-visible",
-        "channelsCompared": 94,
-        "channelsEqual": 86,
+        "channelsCompared": 100,
+        "channelsEqual": 95,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1244,18 +1133,6 @@
             "theirs": "--astryx-layer-_r_d_"
           },
           {
-            "part": "slider-track",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
-          },
-          {
-            "part": "part-1-0-1",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
-          },
-          {
             "part": "slider-thumb-2",
             "channel": "left",
             "ours": "0px",
@@ -1266,20 +1143,14 @@
             "channel": "right",
             "ours": "220px",
             "theirs": "124px"
-          },
-          {
-            "part": "slider-thumb-2",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -10, -10)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "horizontal.none__active",
-        "channelsCompared": 94,
-        "channelsEqual": 86,
+        "channelsCompared": 100,
+        "channelsEqual": 95,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1303,18 +1174,6 @@
             "theirs": "--astryx-layer-_r_d_"
           },
           {
-            "part": "slider-track",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
-          },
-          {
-            "part": "part-1-0-1",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
-          },
-          {
             "part": "slider-thumb-2",
             "channel": "left",
             "ours": "0px",
@@ -1325,20 +1184,14 @@
             "channel": "right",
             "ours": "220px",
             "theirs": "124px"
-          },
-          {
-            "part": "slider-thumb-2",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -10, -10)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "vertical.tooltip__default",
-        "channelsCompared": 168,
-        "channelsEqual": 150,
+        "channelsCompared": 175,
+        "channelsEqual": 161,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1363,39 +1216,15 @@
           },
           {
             "part": "part-1-0",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
-          {
-            "part": "part-1-0",
             "channel": "justify-content",
             "ours": "normal",
             "theirs": "center"
-          },
-          {
-            "part": "slider-track",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
-          },
-          {
-            "part": "part-1-0-1",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
           },
           {
             "part": "slider-thumb",
             "channel": "anchor-name",
             "ours": "none",
             "theirs": "--astryx-layer-_r_i_"
-          },
-          {
-            "part": "slider-thumb",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -10, 10)"
           },
           {
             "part": "tooltip",
@@ -1456,8 +1285,8 @@
       },
       {
         "key": "vertical.tooltip__hover",
-        "channelsCompared": 168,
-        "channelsEqual": 150,
+        "channelsCompared": 175,
+        "channelsEqual": 161,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1482,39 +1311,15 @@
           },
           {
             "part": "part-1-0",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
-          {
-            "part": "part-1-0",
             "channel": "justify-content",
             "ours": "normal",
             "theirs": "center"
-          },
-          {
-            "part": "slider-track",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
-          },
-          {
-            "part": "part-1-0-1",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
           },
           {
             "part": "slider-thumb",
             "channel": "anchor-name",
             "ours": "none",
             "theirs": "--astryx-layer-_r_i_"
-          },
-          {
-            "part": "slider-thumb",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -10, 10)"
           },
           {
             "part": "tooltip",
@@ -1575,8 +1380,8 @@
       },
       {
         "key": "vertical.tooltip__focus-visible",
-        "channelsCompared": 168,
-        "channelsEqual": 149,
+        "channelsCompared": 175,
+        "channelsEqual": 160,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1601,39 +1406,15 @@
           },
           {
             "part": "part-1-0",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
-          {
-            "part": "part-1-0",
             "channel": "justify-content",
             "ours": "normal",
             "theirs": "center"
-          },
-          {
-            "part": "slider-track",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
-          },
-          {
-            "part": "part-1-0-1",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
           },
           {
             "part": "slider-thumb",
             "channel": "anchor-name",
             "ours": "none",
             "theirs": "--astryx-layer-_r_i_"
-          },
-          {
-            "part": "slider-thumb",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -10, 10)"
           },
           {
             "part": "tooltip",
@@ -1700,8 +1481,8 @@
       },
       {
         "key": "vertical.tooltip__active",
-        "channelsCompared": 168,
-        "channelsEqual": 149,
+        "channelsCompared": 175,
+        "channelsEqual": 160,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1726,39 +1507,15 @@
           },
           {
             "part": "part-1-0",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
-          {
-            "part": "part-1-0",
             "channel": "justify-content",
             "ours": "normal",
             "theirs": "center"
-          },
-          {
-            "part": "slider-track",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
-          },
-          {
-            "part": "part-1-0-1",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
           },
           {
             "part": "slider-thumb",
             "channel": "anchor-name",
             "ours": "none",
             "theirs": "--astryx-layer-_r_i_"
-          },
-          {
-            "part": "slider-thumb",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -10, 10)"
           },
           {
             "part": "tooltip",
@@ -1825,8 +1582,8 @@
       },
       {
         "key": "vertical.text__default",
-        "channelsCompared": 100,
-        "channelsEqual": 90,
+        "channelsCompared": 107,
+        "channelsEqual": 101,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1851,53 +1608,29 @@
           },
           {
             "part": "part-1-0",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
-          {
-            "part": "part-1-0",
             "channel": "justify-content",
             "ours": "normal",
             "theirs": "center"
           },
           {
-            "part": "slider-track",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
-          },
-          {
-            "part": "part-1-0-1",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
-          },
-          {
             "part": "slider-thumb-2",
             "channel": "left",
-            "ours": "0px",
+            "ours": "97.1562px",
             "theirs": "107.156px"
           },
           {
             "part": "slider-thumb-2",
             "channel": "right",
-            "ours": "194.328px",
+            "ours": "97.1719px",
             "theirs": "87.1719px"
-          },
-          {
-            "part": "slider-thumb-2",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -10, 10)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "vertical.text__hover",
-        "channelsCompared": 100,
-        "channelsEqual": 90,
+        "channelsCompared": 107,
+        "channelsEqual": 101,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1922,53 +1655,29 @@
           },
           {
             "part": "part-1-0",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
-          {
-            "part": "part-1-0",
             "channel": "justify-content",
             "ours": "normal",
             "theirs": "center"
           },
           {
-            "part": "slider-track",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
-          },
-          {
-            "part": "part-1-0-1",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
-          },
-          {
             "part": "slider-thumb-2",
             "channel": "left",
-            "ours": "0px",
+            "ours": "97.1562px",
             "theirs": "107.156px"
           },
           {
             "part": "slider-thumb-2",
             "channel": "right",
-            "ours": "194.328px",
+            "ours": "97.1719px",
             "theirs": "87.1719px"
-          },
-          {
-            "part": "slider-thumb-2",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -10, 10)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "vertical.text__focus-visible",
-        "channelsCompared": 100,
-        "channelsEqual": 90,
+        "channelsCompared": 107,
+        "channelsEqual": 101,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1993,53 +1702,29 @@
           },
           {
             "part": "part-1-0",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
-          {
-            "part": "part-1-0",
             "channel": "justify-content",
             "ours": "normal",
             "theirs": "center"
           },
           {
-            "part": "slider-track",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
-          },
-          {
-            "part": "part-1-0-1",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
-          },
-          {
             "part": "slider-thumb-2",
             "channel": "left",
-            "ours": "0px",
+            "ours": "97.1562px",
             "theirs": "107.156px"
           },
           {
             "part": "slider-thumb-2",
             "channel": "right",
-            "ours": "194.328px",
+            "ours": "97.1719px",
             "theirs": "87.1719px"
-          },
-          {
-            "part": "slider-thumb-2",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -10, 10)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "vertical.text__active",
-        "channelsCompared": 100,
-        "channelsEqual": 90,
+        "channelsCompared": 107,
+        "channelsEqual": 101,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2064,53 +1749,29 @@
           },
           {
             "part": "part-1-0",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
-          {
-            "part": "part-1-0",
             "channel": "justify-content",
             "ours": "normal",
             "theirs": "center"
           },
           {
-            "part": "slider-track",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
-          },
-          {
-            "part": "part-1-0-1",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
-          },
-          {
             "part": "slider-thumb-2",
             "channel": "left",
-            "ours": "0px",
+            "ours": "97.1562px",
             "theirs": "107.156px"
           },
           {
             "part": "slider-thumb-2",
             "channel": "right",
-            "ours": "194.328px",
+            "ours": "97.1719px",
             "theirs": "87.1719px"
-          },
-          {
-            "part": "slider-thumb-2",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -10, 10)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "vertical.none__default",
-        "channelsCompared": 94,
-        "channelsEqual": 84,
+        "channelsCompared": 100,
+        "channelsEqual": 94,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2135,53 +1796,29 @@
           },
           {
             "part": "part-1-0",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
-          {
-            "part": "part-1-0",
             "channel": "justify-content",
             "ours": "normal",
             "theirs": "center"
           },
           {
-            "part": "slider-track",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
-          },
-          {
-            "part": "part-1-0-1",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
-          },
-          {
             "part": "slider-thumb-2",
             "channel": "left",
-            "ours": "0px",
+            "ours": "110px",
             "theirs": "120px"
           },
           {
             "part": "slider-thumb-2",
             "channel": "right",
-            "ours": "220px",
+            "ours": "110px",
             "theirs": "100px"
-          },
-          {
-            "part": "slider-thumb-2",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -10, 10)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "vertical.none__hover",
-        "channelsCompared": 94,
-        "channelsEqual": 84,
+        "channelsCompared": 100,
+        "channelsEqual": 94,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2206,53 +1843,29 @@
           },
           {
             "part": "part-1-0",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
-          {
-            "part": "part-1-0",
             "channel": "justify-content",
             "ours": "normal",
             "theirs": "center"
           },
           {
-            "part": "slider-track",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
-          },
-          {
-            "part": "part-1-0-1",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
-          },
-          {
             "part": "slider-thumb-2",
             "channel": "left",
-            "ours": "0px",
+            "ours": "110px",
             "theirs": "120px"
           },
           {
             "part": "slider-thumb-2",
             "channel": "right",
-            "ours": "220px",
+            "ours": "110px",
             "theirs": "100px"
-          },
-          {
-            "part": "slider-thumb-2",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -10, 10)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "vertical.none__focus-visible",
-        "channelsCompared": 94,
-        "channelsEqual": 84,
+        "channelsCompared": 100,
+        "channelsEqual": 94,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2277,53 +1890,29 @@
           },
           {
             "part": "part-1-0",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
-          {
-            "part": "part-1-0",
             "channel": "justify-content",
             "ours": "normal",
             "theirs": "center"
           },
           {
-            "part": "slider-track",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
-          },
-          {
-            "part": "part-1-0-1",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
-          },
-          {
             "part": "slider-thumb-2",
             "channel": "left",
-            "ours": "0px",
+            "ours": "110px",
             "theirs": "120px"
           },
           {
             "part": "slider-thumb-2",
             "channel": "right",
-            "ours": "220px",
+            "ours": "110px",
             "theirs": "100px"
-          },
-          {
-            "part": "slider-thumb-2",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -10, 10)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "vertical.none__active",
-        "channelsCompared": 94,
-        "channelsEqual": 84,
+        "channelsCompared": 100,
+        "channelsEqual": 94,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2348,45 +1937,21 @@
           },
           {
             "part": "part-1-0",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
-          {
-            "part": "part-1-0",
             "channel": "justify-content",
             "ours": "normal",
             "theirs": "center"
           },
           {
-            "part": "slider-track",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
-          },
-          {
-            "part": "part-1-0-1",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
-          },
-          {
             "part": "slider-thumb-2",
             "channel": "left",
-            "ours": "0px",
+            "ours": "110px",
             "theirs": "120px"
           },
           {
             "part": "slider-thumb-2",
             "channel": "right",
-            "ours": "220px",
+            "ours": "110px",
             "theirs": "100px"
-          },
-          {
-            "part": "slider-thumb-2",
-            "channel": "transform",
-            "ours": "none",
-            "theirs": "matrix(1, 0, 0, 1, -10, 10)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"

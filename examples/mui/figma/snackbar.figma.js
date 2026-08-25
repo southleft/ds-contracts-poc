@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "mui.snackbar",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Snackbar — generated from contract mui.snackbar v0.2.0 † (6 code-only facts — see plugin report)",
+    "description": "Snackbar — generated from contract mui.snackbar v0.2.0 † (7 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -419,6 +419,17 @@ const COMPONENTS = [
         "channel": "z-index",
         "value": "{imported.snackbar.root.z-index}",
         "reason": "paint order on canvas is CHILD ORDER — a z-index a part carries independently of its DOM order has no field.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "root",
+        "kind": "plane",
+        "channel": "variant axis \"Position\"",
+        "value": "bottom-left / bottom-center / top-right",
+        "reason": "the compiled plane carries NO distinguishing fact for this axis — its 3 values compile to byte-identical cells (1 identical group(s) of 3), so the minted set draws the same picture in every one of them. Either the capture never swept the axis (extract/computed/configs/<lib>.json `axes`) or every fact that separates the values was refused upstream and is named in this component's own code-only facts. NAMED, NOT DROPPED: the axis is still minted as a Figma variant property, because a flat axis can be the library's own truth; nothing here guesses which.",
         "variants": {
           "count": 3,
           "of": 3
