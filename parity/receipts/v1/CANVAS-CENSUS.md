@@ -41,199 +41,201 @@ all-defaults cell, then every non-default value of every enum axis with the othe
 
 Code half: `parity/receipts/v1/census/<lib>/<id>/code-<slug>.png` + `code-render.json` (extract/figma/census/render.ts — core/emit-html.ts staged by the catalog gate's buildCssCellDoc, captured by the canvas gate's captureCell at dpr 2; first-party over tokens/, example libraries over the committed `<lib>.bundle.json` tokenSet — the layer the plugin compiles a paste from).
 
+Reference half: `ref-<slug>.png` + `ref-render.json` (extract/figma/census/ref-render.ts) — **THE REAL LIBRARY's own render** (the permanent rule: a visual reference is ONLY the real library's render; the code half is emit-html of the contract and is self-referential). Example libraries render their pinned npm package in the documented sandbox, mounted per the capture config's measured mapping; first-party renders the generated src/components catalog (the implementation itself) through its own Storybook meta. A variant the real library cannot produce is `ref: UNMAPPABLE (<reason>)` by name in ref-render.json — never faked. Verdicts: the original self-grades were voided to `"ungraded"` (kept as `priorSelfGrade`) pending a separate adversarial grading pass against this reference layer.
+
 ## The canvas-half recipe
 
 Scratch file `byMp6lt0Ij9b2QbkDGFwBh` (the only writable file). Page per library (`Census / <library>`); tokens script first, then the row's `figmaScriptPath` re-emitted with `FIGMA_FILE_KEY=byMp6lt0Ij9b2QbkDGFwBh` through the console bridge; for every `variants[]` entry in the row's `code-render.json` with status `rendered`, `figma_take_screenshot` of the COMPONENT child named `variant` at scale 2 → `canvas-<slug>.png` beside `code-<slug>.png`; a variant the drawn set does not carry is a `CANVAS-PROJECTION:<variant>` wall, not a missing file; dump → propose → diff for the adjudication column; then `verdict.json` `{ recognisable: true|false|"unscored", walls: [codes], notes, reviewedAt: <commit>, setNodeId, roundTrip }`. The full recipe with every step is the header of `scripts/canvas-census-check.ts`. Then `npm run census:check -- --phase full` and flip the fast-lane step to `--phase full`.
 
 ## Tally
 
-| library | sets | code rendered | code UNAVAILABLE / MISSING | canvas complete | verdict recognisable | verdict NOT recognisable | verdict pending/unscored |
-|---|---|---|---|---|---|---|---|
-| first-party | 54 | 54 | 0 | 54 | 54 | 0 | 0 |
-| altitude | 8 | 8 | 0 | 8 | 8 | 0 | 0 |
-| antd | 12 | 12 | 0 | 12 | 12 | 0 | 0 |
-| astryx | 13 | 13 | 0 | 13 | 13 | 0 | 0 |
-| carbon | 10 | 10 | 0 | 10 | 10 | 0 | 0 |
-| fluent | 11 | 11 | 0 | 11 | 10 | 1 | 0 |
-| mui | 31 | 31 | 0 | 31 | 31 | 0 | 0 |
-| polaris | 12 | 12 | 0 | 12 | 12 | 0 | 0 |
-| shadcn | 11 | 11 | 0 | 11 | 10 | 1 | 0 |
-| tailwind | 8 | 8 | 0 | 8 | 8 | 0 | 0 |
-| **all** | 170 | 170 | 0 | 170 | 168 | 2 | 0 |
+| library | sets | code rendered | code UNAVAILABLE / MISSING | canvas complete | ref complete | verdict recognisable | verdict NOT recognisable | verdict ungraded | verdict pending/unscored |
+|---|---|---|---|---|---|---|---|---|---|
+| first-party | 54 | 54 | 0 | 54 | 54 | 0 | 0 | 54 | 0 |
+| altitude | 8 | 8 | 0 | 8 | 8 | 0 | 0 | 8 | 0 |
+| antd | 12 | 12 | 0 | 12 | 12 | 0 | 0 | 12 | 0 |
+| astryx | 13 | 13 | 0 | 13 | 13 | 0 | 0 | 13 | 0 |
+| carbon | 10 | 10 | 0 | 10 | 10 | 0 | 0 | 10 | 0 |
+| fluent | 11 | 11 | 0 | 11 | 11 | 0 | 0 | 11 | 0 |
+| mui | 31 | 31 | 0 | 31 | 31 | 0 | 0 | 31 | 0 |
+| polaris | 12 | 12 | 0 | 12 | 12 | 0 | 0 | 12 | 0 |
+| shadcn | 11 | 11 | 0 | 11 | 11 | 0 | 0 | 11 | 0 |
+| tailwind | 8 | 8 | 0 | 8 | 8 | 0 | 0 | 8 | 0 |
+| **all** | 170 | 170 | 0 | 170 | 170 | 0 | 0 | 170 | 0 |
 
 Gate: **GREEN** at phase `full`.
 
 ## Rows
 
-| library | id | archetype | axes × variants (compiled; script rows) | variants rendered | code-render | canvas | verdict | walls |
-|---|---|---|---|---|---|---|---|---|
-| first-party | `ds.accordion-item` | accordion | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | recognisable | — |
-| first-party | `ds.avatar-group` | avatar | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | recognisable | — |
-| first-party | `ds.avatar` | avatar | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | recognisable | — |
-| first-party | `ds.badge` | badge / tag / chip | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | recognisable | — |
-| first-party | `ds.banner` | banner / alert / toast | 2 × 8; 8 | 5/5 of 8 | rendered | 5/5 | recognisable | — |
-| first-party | `ds.bento-grid` | unmapped | 0 × 1; 6 | 1/1 of 1 | rendered | 1/1 | recognisable | — |
-| first-party | `ds.blockquote` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | recognisable | — |
-| first-party | `ds.breadcrumb-item` | breadcrumb | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | recognisable | — |
-| first-party | `ds.breadcrumbs` | breadcrumb | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | recognisable | — |
-| first-party | `ds.button` | button | 2 × 12 + 12 state; 24 | 9/9 of 24 | rendered | 9/9 | recognisable | — |
-| first-party | `ds.card` | card | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | recognisable | — |
-| first-party | `ds.chat-message-metadata` | unmapped | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | recognisable | — |
-| first-party | `ds.chat-message` | unmapped | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | recognisable | — |
-| first-party | `ds.chat-system-message` | unmapped | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | recognisable | — |
-| first-party | `ds.checkbox` | checkbox / radio | 2 × 6; 6 | 4/4 of 6 | rendered | 4/4 | recognisable | — |
-| first-party | `ds.citation` | unmapped | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | recognisable | — |
-| first-party | `ds.code` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | recognisable | — |
-| first-party | `ds.divider` | unmapped | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | recognisable | — |
-| first-party | `ds.empty-state` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | recognisable | — |
-| first-party | `ds.field` | input / field | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | recognisable | — |
-| first-party | `ds.grid-gallery` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | recognisable | — |
-| first-party | `ds.heading` | unmapped | 2 × 18; 18 | 8/8 of 18 | rendered | 8/8 | recognisable | — |
-| first-party | `ds.icon-button` | button | 2 × 12; 12 | 6/6 of 12 | rendered | 6/6 | recognisable | — |
-| first-party | `ds.kbd` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | recognisable | — |
-| first-party | `ds.list-item` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | recognisable | — |
-| first-party | `ds.list` | unmapped | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | recognisable | — |
-| first-party | `ds.metadata-list-item` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | recognisable | — |
-| first-party | `ds.metadata-list` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | recognisable | — |
-| first-party | `ds.page-shell` | unmapped | 0 × 1; 5 | 1/1 of 1 | rendered | 1/1 | recognisable | — |
-| first-party | `ds.pagination` | pagination | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | recognisable | — |
-| first-party | `ds.progress-bar` | progress / spinner | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | recognisable | — |
-| first-party | `ds.section` | unmapped | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | recognisable | — |
-| first-party | `ds.side-nav-item` | nav (top / side) | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | recognisable | — |
-| first-party | `ds.sidebar-layout` | unmapped | 0 × 1; 3 | 1/1 of 1 | rendered | 1/1 | recognisable | — |
-| first-party | `ds.skeleton` | progress / spinner | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | recognisable | — |
-| first-party | `ds.slider` | slider | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | recognisable | — |
-| first-party | `ds.spinner` | progress / spinner | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | recognisable | — |
-| first-party | `ds.status-dot` | unmapped | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | recognisable | — |
-| first-party | `ds.switch` | toggle / switch | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | recognisable | — |
-| first-party | `ds.tab-list` | tabs | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | recognisable | — |
-| first-party | `ds.tab` | tabs | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | recognisable | — |
-| first-party | `ds.table-cell` | table / data-grid | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | recognisable | — |
-| first-party | `ds.table-header-cell` | table / data-grid | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | recognisable | — |
-| first-party | `ds.table-row` | table / data-grid | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | recognisable | — |
-| first-party | `ds.table` | table / data-grid | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | recognisable | — |
-| first-party | `ds.text-area` | input / field | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | recognisable | — |
-| first-party | `ds.text-field` | input / field | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | recognisable | — |
-| first-party | `ds.toast` | banner / alert / toast | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | recognisable | — |
-| first-party | `ds.token` | unmapped | 2 × 33; 33 | 13/13 of 33 | rendered | 13/13 | recognisable | — |
-| first-party | `ds.toolbar` | unmapped | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | recognisable | — |
-| first-party | `ds.top-nav-item` | nav (top / side) | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | recognisable | — |
-| first-party | `ds.top-nav` | nav (top / side) | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | recognisable | — |
-| first-party | `ds.two-column` | unmapped | 0 × 1; 3 | 1/1 of 1 | rendered | 1/1 | recognisable | — |
-| first-party | `ds.typeahead-item` | select / combobox | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | recognisable | — |
-| altitude | `altitude.avatar` | avatar | 1 × 1; 1 | 1/1 of 1 | rendered | 1/1 | recognisable | CODE-RENDER-BLANK:avatar |
-| altitude | `altitude.badge` | badge / tag / chip | 2 × 8; 8 | 5/5 of 8 | rendered | 5/5 | recognisable | — |
-| altitude | `altitude.button` | button | 1 × 4 + 8 state; 12 | 6/6 of 12 | rendered | 6/6 | recognisable | CODE-CANVAS-DISAGREE:button.tertiary/border |
-| altitude | `altitude.chip` | badge / tag / chip | 2 × 10; 10 | 6/6 of 10 | rendered | 6/6 | recognisable | — |
-| altitude | `altitude.divider` | unmapped | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | recognisable | — |
-| altitude | `altitude.heading` | unmapped | 2 × 12; 12 | 7/7 of 12 | rendered | 7/7 | recognisable | — |
-| altitude | `altitude.iconclose` | unmapped | 1 × 7; 7 | 7/7 of 7 | rendered | 7/7 | recognisable | — |
-| altitude | `altitude.link` | unmapped | 1 × 3 + 6 state; 9 | 5/5 of 9 | rendered | 5/5 | recognisable | — |
-| antd | `antd.alert` | banner / alert / toast | 2 × 8; 8 | 5/5 of 8 | rendered | 5/5 | recognisable | — |
-| antd | `antd.avatar` | avatar | 2 × 6; 6 | 4/4 of 6 | rendered | 4/4 | recognisable | — |
-| antd | `antd.badge` | badge / tag / chip | 2 × 6; 6 | 4/4 of 6 | rendered | 4/4 | recognisable | — |
-| antd | `antd.button` | button | 3 × 30; 30 | 8/8 of 30 | rendered | 8/8 | recognisable | — |
-| antd | `antd.card` | card | 2 × 4; 4 | 3/3 of 4 | rendered | 3/3 | recognisable | — |
-| antd | `antd.checkbox` | checkbox / radio | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | recognisable | — |
-| antd | `antd.input` | input / field | 3 × 24 + 16 state; 40 | 11/11 of 40 | rendered | 11/11 | recognisable | CODE-RENDER-BLANK:input |
-| antd | `antd.progress` | progress / spinner | 1 × 4; 4 | 4/4 of 4 | rendered | 4/4 | recognisable | CODE-RENDER-PARTIAL:progress |
-| antd | `antd.radio` | checkbox / radio | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | recognisable | — |
-| antd | `antd.switch` | toggle / switch | 2 × 4 + 8 state; 12 | 7/7 of 12 | rendered | 7/7 | recognisable | — |
-| antd | `antd.tag` | badge / tag / chip | 2 × 14; 14 | 8/8 of 14 | rendered | 8/8 | recognisable | CODE-RENDER-PARTIAL:tag |
-| antd | `antd.tooltip` | tooltip / popover | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | recognisable | — |
-| astryx | `astryx.badge` | badge / tag / chip | 1 × 14; 14 | 14/14 of 14 | rendered | 14/14 | recognisable | — |
-| astryx | `astryx.banner` | banner / alert / toast | 2 × 8; 8 | 5/5 of 8 | rendered | 5/5 | recognisable | — |
-| astryx | `astryx.button` | button | 2 × 12; 12 | 6/6 of 12 | rendered | 6/6 | recognisable | — |
-| astryx | `astryx.card` | card | 1 × 13; 13 | 13/13 of 13 | rendered | 13/13 | recognisable | — |
-| astryx | `astryx.checkbox-input` | checkbox / radio | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | recognisable | — |
-| astryx | `astryx.dropdown-menu-item` | menu / dropdown | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | recognisable | — |
-| astryx | `astryx.dropdown-menu` | menu / dropdown | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | recognisable | — |
-| astryx | `astryx.progress-bar` | progress / spinner | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | recognisable | — |
-| astryx | `astryx.slider` | slider | 2 × 6; 6 | 4/4 of 6 | rendered | 4/4 | recognisable | — |
-| astryx | `astryx.switch` | toggle / switch | 1 × 4; 4 | 3/3 of 4 | rendered | 3/3 | recognisable | — |
-| astryx | `astryx.text-input` | input / field | 2 × 9; 9 | 5/5 of 9 | rendered | 5/5 | recognisable | — |
-| astryx | `astryx.toast` | banner / alert / toast | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | recognisable | CANVAS-SURFACE-WHITE-ON-WHITE:toast |
-| astryx | `astryx.token` | unmapped | 2 × 33; 33 | 13/13 of 33 | rendered | 13/13 | recognisable | — |
-| carbon | `carbon.accordion` | accordion | 2 × 6 + 2 state; 8 | 4/5 of 8 | rendered, 1 refused | 4/4 | recognisable | — |
-| carbon | `carbon.button` | button | 2 × 48 + 32 state; 80 | 16/17 of 80 | rendered, 1 refused | 16/16 | recognisable | FC-EXPORT-RING-UNPAINTED; CODE-CANVAS-DISAGREE:button.tertiary/border |
-| carbon | `carbon.checkbox` | checkbox / radio | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | recognisable | — |
-| carbon | `carbon.iconbutton` | button | 2 × 16; 16 | 7/7 of 16 | rendered | 7/7 | recognisable | CODE-RENDER-UNSTYLED:iconbutton |
-| carbon | `carbon.inlinenotification` | banner / alert / toast | 2 × 12; 12 | 7/7 of 12 | rendered | 7/7 | recognisable | CODE-CANVAS-DISAGREE:inlinenotification.warning-glyph/fill |
-| carbon | `carbon.modal` | modal / dialog | 1 × 4; 4 | 4/4 of 4 | rendered | 4/4 | recognisable | — |
-| carbon | `carbon.tabs` | tabs | 0 × 1 + 2 state; 3 | 3/3 of 3 | rendered | 3/3 | recognisable | — |
-| carbon | `carbon.tag` | badge / tag / chip | 2 × 36; 36 | 14/14 of 36 | rendered | 14/14 | recognisable | — |
-| carbon | `carbon.textinput` | input / field | 1 × 4 + 4 state; 8 | 4/5 of 8 | rendered, 1 refused | 4/4 | recognisable | — |
-| carbon | `carbon.toggle` | toggle / switch | 1 × 2 + 2 state; 4 | 2/3 of 4 | rendered, 1 refused | 2/2 | recognisable | — |
-| fluent | `fluent.avatar` | avatar | 3 × 18; 18 | 6/6 of 18 | rendered | 6/6 | recognisable | — |
-| fluent | `fluent.badge` | badge / tag / chip | 3 × 192; 192 | 16/16 of 192 | rendered | 16/16 | recognisable | — |
-| fluent | `fluent.button` | button | 3 × 45 + 20 state; 65 | 12/13 of 65 | rendered, 1 refused | 12/12 | recognisable | — |
-| fluent | `fluent.card` | card | 3 × 24 + 16 state; 40 | 10/11 of 40 | rendered, 1 refused | 10/10 | recognisable | — |
-| fluent | `fluent.checkbox` | checkbox / radio | 3 × 12 + 12 state; 24 | 8/9 of 24 | rendered, 1 refused | 8/8 | recognisable | — |
-| fluent | `fluent.dialog` | modal / dialog | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | recognisable | — |
-| fluent | `fluent.input` | input / field | 2 × 18 + 24 state; 42 | 11/12 of 42 | rendered, 1 refused | 11/11 | NOT recognisable | CANVAS-OUTLINE-STROKE-ABSENT:input.outline/underline; CODE-RENDER-PARTIAL:input.outline |
-| fluent | `fluent.spinner` | progress / spinner | 3 × 64; 64 | 12/12 of 64 | rendered | 12/12 | recognisable | CODE-CANVAS-CONSISTENT-GLYPH-SUBSTITUTE:spinner-arc |
-| fluent | `fluent.switch` | toggle / switch | 2 × 6 + 4 state; 10 | 5/6 of 10 | rendered, 1 refused | 5/5 | recognisable | — |
-| fluent | `fluent.tab-list` | tabs | 3 × 24; 24 | 7/7 of 24 | rendered | 7/7 | recognisable | — |
-| fluent | `fluent.tooltip` | tooltip / popover | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | recognisable | CODE-RENDER-PARTIAL:tooltip.normal |
-| mui | `mui.accordion` | accordion | 2 × 4; 4 | 3/3 of 4 | rendered | 3/3 | recognisable | — |
-| mui | `mui.alert` | banner / alert / toast | 2 × 12; 12 | 6/6 of 12 | rendered | 6/6 | recognisable | — |
-| mui | `mui.autocomplete` | select / combobox | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | recognisable | — |
-| mui | `mui.avatar` | avatar | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | recognisable | — |
-| mui | `mui.badge` | badge / tag / chip | 2 × 14; 14 | 8/8 of 14 | rendered | 8/8 | recognisable | — |
-| mui | `mui.breadcrumbs` | breadcrumb | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | recognisable | — |
-| mui | `mui.button` | button | 3 × 63 + 12 state; 75 | 15/15 of 75 | rendered | 15/15 | recognisable | — |
-| mui | `mui.card` | card | 1 × 4; 4 | 4/4 of 4 | rendered | 4/4 | recognisable | — |
-| mui | `mui.checkbox` | checkbox / radio | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | recognisable | — |
-| mui | `mui.chip` | badge / tag / chip | 3 × 28; 28 | 9/9 of 28 | rendered | 9/9 | recognisable | — |
-| mui | `mui.circular-progress` | progress / spinner | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | recognisable | — |
-| mui | `mui.dialog` | modal / dialog | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | recognisable | — |
-| mui | `mui.divider` | unmapped | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | recognisable | — |
-| mui | `mui.drawer` | modal / dialog | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | recognisable | — |
-| mui | `mui.fab` | button | 2 × 9; 9 | 5/5 of 9 | rendered | 5/5 | recognisable | — |
-| mui | `mui.icon-button` | button | 2 × 9; 9 | 5/5 of 9 | rendered | 5/5 | recognisable | — |
-| mui | `mui.input-adornment` | input / field | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | recognisable | — |
-| mui | `mui.linear-progress` | progress / spinner | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | recognisable | — |
-| mui | `mui.link` | unmapped | 2 × 21 + 21 state; 42 | 12/12 of 42 | rendered | 12/12 | recognisable | — |
-| mui | `mui.menu` | menu / dropdown | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | recognisable | — |
-| mui | `mui.paper` | unmapped | 2 × 8; 8 | 5/5 of 8 | rendered | 5/5 | recognisable | — |
-| mui | `mui.radio` | checkbox / radio | 2 × 14; 14 | 8/8 of 14 | rendered | 8/8 | recognisable | — |
-| mui | `mui.select` | select / combobox | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | recognisable | — |
-| mui | `mui.slider` | slider | 2 × 12; 12 | 7/7 of 12 | rendered | 7/7 | recognisable | — |
-| mui | `mui.snackbar` | banner / alert / toast | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | recognisable | — |
-| mui | `mui.switch` | toggle / switch | 3 × 28; 28 | 9/9 of 28 | rendered | 9/9 | recognisable | — |
-| mui | `mui.table-pagination` | pagination | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | recognisable | — |
-| mui | `mui.table` | table / data-grid | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | recognisable | — |
-| mui | `mui.tabs` | tabs | 2 × 6; 6 | 4/4 of 6 | rendered | 4/4 | recognisable | — |
-| mui | `mui.text-field` | input / field | 2 × 6; 6 | 4/4 of 6 | rendered | 4/4 | recognisable | CODE-CANVAS-DISAGREE:text-field.label/order |
-| mui | `mui.tooltip` | tooltip / popover | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | recognisable | — |
-| polaris | `polaris.avatar` | avatar | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | recognisable | — |
-| polaris | `polaris.badge` | badge / tag / chip | 2 × 56; 56 | 17/17 of 56 | rendered | 17/17 | recognisable | — |
-| polaris | `polaris.banner` | banner / alert / toast | 1 × 4 + 4 state; 8 | 5/5 of 8 | rendered | 5/5 | recognisable | — |
-| polaris | `polaris.button` | button | 4 × 300 + 20 state; 320 | 17/18 of 320 | rendered, 1 refused | 17/17 | recognisable | — |
-| polaris | `polaris.checkbox` | checkbox / radio | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | recognisable | — |
-| polaris | `polaris.progress-bar` | progress / spinner | 2 × 12; 12 | 6/6 of 12 | rendered | 6/6 | recognisable | — |
-| polaris | `polaris.radio-button` | checkbox / radio | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | recognisable | — |
-| polaris | `polaris.spinner` | progress / spinner | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | recognisable | — |
-| polaris | `polaris.tag` | badge / tag / chip | 1 × 2 + 6 state; 8 | 5/5 of 8 | rendered | 5/5 | recognisable | — |
-| polaris | `polaris.text-field` | input / field | 5 × 1344 + 56 state; 8 | 24/24 of 1400, cap 24 dropped 5, axis coverage INCOMPLETE | rendered | 1/24 (+23 projected out) | recognisable | CANVAS-PROJECTION:Type=Text, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=None, Align=Left, Variant=Inherit, Size=Slim; CANVAS-PROJECTION:Type=Text, Input Mode=None, Align=Left, Variant=Borderless, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=None, Align=Center, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=None, Align=Right, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=Decimal, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=Numeric, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=Tel, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=Search, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=Email, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=Url, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Email, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Number, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Integer, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Password, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Search, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Tel, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Url, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Date, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Datetime Local, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Month, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Time, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Week, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium |
-| polaris | `polaris.text` | unmapped | 5 × 23232; 55 | 24/24 of 23232, cap 24 dropped 14, axis coverage INCOMPLETE | rendered | 0/24 (+24 projected out) | recognisable | CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading Sm; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading Md; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading Lg; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading Xl; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading2xl; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading3xl; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Body Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Body Sm; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Body Md; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Body Lg; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Medium, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Semibold, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Bold, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Disabled, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Inherit, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Success, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Critical, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Caution, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Subdued, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Text Inverse, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Text Inverse Secondary, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Magic, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Magic Subdued, Font Weight=Regular, Variant=Heading Xs |
-| polaris | `polaris.thumbnail` | unmapped | 1 × 4; 4 | 4/4 of 4 | rendered | 4/4 | recognisable | — |
-| shadcn | `shadcn.alert` | banner / alert / toast | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | recognisable | CODE-CANVAS-DISAGREE:root.border-color-unspecified |
-| shadcn | `shadcn.avatar` | avatar | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | recognisable | — |
-| shadcn | `shadcn.badge` | badge / tag / chip | 1 × 6 + 12 state; 18 | 8/8 of 18 | rendered | 8/8 | recognisable | — |
-| shadcn | `shadcn.button` | button | 2 × 48 + 24 state; 72 | 16/17 of 72 | rendered, 1 refused | 16/16 | recognisable | FC-EXPORT-RING-UNPAINTED |
-| shadcn | `shadcn.card` | card | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | recognisable | CODE-CANVAS-DISAGREE:root.border-color-unspecified |
-| shadcn | `shadcn.checkbox` | checkbox / radio | 1 × 3 + 6 state; 9 | 4/5 of 9 | rendered, 1 refused | 4/4 | recognisable | — |
-| shadcn | `shadcn.input` | input / field | 0 × 1 + 3 state; 4 | 3/4 of 4 | rendered, 1 refused | 3/3 | NOT recognisable | CANVAS-LEAF-INPUT-COLLAPSED; CODE-CANVAS-DISAGREE:root.border-color-unspecified |
-| shadcn | `shadcn.select` | select / combobox | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | recognisable | CODE-CANVAS-DISAGREE:root.border-color-unspecified |
-| shadcn | `shadcn.switch` | toggle / switch | 2 × 4 + 4 state; 8 | 4/5 of 8 | rendered, 1 refused | 4/4 | recognisable | — |
-| shadcn | `shadcn.tabs` | tabs | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | recognisable | — |
-| shadcn | `shadcn.tooltip` | tooltip / popover | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | recognisable | — |
-| tailwind | `flowbite.alert` | banner / alert / toast | 1 × 4; 4 | 4/4 of 4 | rendered | 4/4 | recognisable | — |
-| tailwind | `flowbite.badge` | badge / tag / chip | 2 × 12 + 12 state; 24 | 9/9 of 24 | rendered | 9/9 | recognisable | — |
-| tailwind | `flowbite.button` | button | 2 × 25 + 20 state; 45 | 12/13 of 45 | rendered, 1 refused | 12/12 | recognisable | FC-EXPORT-RING-UNPAINTED |
-| tailwind | `flowbite.card` | card | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | recognisable | — |
-| tailwind | `flowbite.helpertext` | unmapped | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | recognisable | — |
-| tailwind | `flowbite.kbd` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | recognisable | — |
-| tailwind | `flowbite.label` | unmapped | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | recognisable | — |
-| tailwind | `flowbite.toggleswitch` | toggle / switch | 2 × 6; 6 | 4/4 of 6 | rendered | 4/4 | recognisable | — |
+| library | id | archetype | axes × variants (compiled; script rows) | variants rendered | code-render | canvas | ref | verdict | walls |
+|---|---|---|---|---|---|---|---|---|---|
+| first-party | `ds.accordion-item` | accordion | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | ungraded | — |
+| first-party | `ds.avatar-group` | avatar | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | — |
+| first-party | `ds.avatar` | avatar | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | ungraded | — |
+| first-party | `ds.badge` | badge / tag / chip | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | 5/5 | ungraded | — |
+| first-party | `ds.banner` | banner / alert / toast | 2 × 8; 8 | 5/5 of 8 | rendered | 5/5 | 5/5 | ungraded | — |
+| first-party | `ds.bento-grid` | unmapped | 0 × 1; 6 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | — |
+| first-party | `ds.blockquote` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | — |
+| first-party | `ds.breadcrumb-item` | breadcrumb | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | — |
+| first-party | `ds.breadcrumbs` | breadcrumb | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | — |
+| first-party | `ds.button` | button | 2 × 12 + 12 state; 24 | 9/9 of 24 | rendered | 9/9 | 9/9 | ungraded | — |
+| first-party | `ds.card` | card | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | — |
+| first-party | `ds.chat-message-metadata` | unmapped | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | 5/5 | ungraded | — |
+| first-party | `ds.chat-message` | unmapped | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | ungraded | — |
+| first-party | `ds.chat-system-message` | unmapped | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | ungraded | — |
+| first-party | `ds.checkbox` | checkbox / radio | 2 × 6; 6 | 4/4 of 6 | rendered | 4/4 | 4/4 | ungraded | — |
+| first-party | `ds.citation` | unmapped | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | ungraded | — |
+| first-party | `ds.code` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | — |
+| first-party | `ds.divider` | unmapped | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | ungraded | — |
+| first-party | `ds.empty-state` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | — |
+| first-party | `ds.field` | input / field | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | — |
+| first-party | `ds.grid-gallery` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | — |
+| first-party | `ds.heading` | unmapped | 2 × 18; 18 | 8/8 of 18 | rendered | 8/8 | 8/8 | ungraded | — |
+| first-party | `ds.icon-button` | button | 2 × 12; 12 | 6/6 of 12 | rendered | 6/6 | 6/6 | ungraded | — |
+| first-party | `ds.kbd` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | — |
+| first-party | `ds.list-item` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | — |
+| first-party | `ds.list` | unmapped | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | ungraded | — |
+| first-party | `ds.metadata-list-item` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | — |
+| first-party | `ds.metadata-list` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | — |
+| first-party | `ds.page-shell` | unmapped | 0 × 1; 5 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | — |
+| first-party | `ds.pagination` | pagination | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | ungraded | — |
+| first-party | `ds.progress-bar` | progress / spinner | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | 5/5 | ungraded | — |
+| first-party | `ds.section` | unmapped | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | ungraded | — |
+| first-party | `ds.side-nav-item` | nav (top / side) | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | ungraded | — |
+| first-party | `ds.sidebar-layout` | unmapped | 0 × 1; 3 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | — |
+| first-party | `ds.skeleton` | progress / spinner | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | ungraded | — |
+| first-party | `ds.slider` | slider | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | — |
+| first-party | `ds.spinner` | progress / spinner | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | — |
+| first-party | `ds.status-dot` | unmapped | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | 5/5 | ungraded | — |
+| first-party | `ds.switch` | toggle / switch | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | ungraded | — |
+| first-party | `ds.tab-list` | tabs | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | — |
+| first-party | `ds.tab` | tabs | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | ungraded | — |
+| first-party | `ds.table-cell` | table / data-grid | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | ungraded | — |
+| first-party | `ds.table-header-cell` | table / data-grid | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | ungraded | — |
+| first-party | `ds.table-row` | table / data-grid | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | ungraded | — |
+| first-party | `ds.table` | table / data-grid | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | ungraded | — |
+| first-party | `ds.text-area` | input / field | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | ungraded | — |
+| first-party | `ds.text-field` | input / field | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | ungraded | — |
+| first-party | `ds.toast` | banner / alert / toast | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | ungraded | — |
+| first-party | `ds.token` | unmapped | 2 × 33; 33 | 13/13 of 33 | rendered | 13/13 | 13/13 | ungraded | — |
+| first-party | `ds.toolbar` | unmapped | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | ungraded | — |
+| first-party | `ds.top-nav-item` | nav (top / side) | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | ungraded | — |
+| first-party | `ds.top-nav` | nav (top / side) | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | — |
+| first-party | `ds.two-column` | unmapped | 0 × 1; 3 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | — |
+| first-party | `ds.typeahead-item` | select / combobox | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | — |
+| altitude | `altitude.avatar` | avatar | 1 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | CODE-RENDER-BLANK:avatar |
+| altitude | `altitude.badge` | badge / tag / chip | 2 × 8; 8 | 5/5 of 8 | rendered | 5/5 | 5/5 | ungraded | — |
+| altitude | `altitude.button` | button | 1 × 4 + 8 state; 12 | 6/6 of 12 | rendered | 6/6 | 6/6 | ungraded | CODE-CANVAS-DISAGREE:button.tertiary/border |
+| altitude | `altitude.chip` | badge / tag / chip | 2 × 10; 10 | 6/6 of 10 | rendered | 6/6 | 6/6 | ungraded | — |
+| altitude | `altitude.divider` | unmapped | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | ungraded | — |
+| altitude | `altitude.heading` | unmapped | 2 × 12; 12 | 7/7 of 12 | rendered | 7/7 | 7/7 | ungraded | — |
+| altitude | `altitude.iconclose` | unmapped | 1 × 7; 7 | 7/7 of 7 | rendered | 7/7 | 7/7 | ungraded | — |
+| altitude | `altitude.link` | unmapped | 1 × 3 + 6 state; 9 | 5/5 of 9 | rendered | 5/5 | 5/5 | ungraded | — |
+| antd | `antd.alert` | banner / alert / toast | 2 × 8; 8 | 5/5 of 8 | rendered | 5/5 | 5/5 | ungraded | — |
+| antd | `antd.avatar` | avatar | 2 × 6; 6 | 4/4 of 6 | rendered | 4/4 | 4/4 | ungraded | — |
+| antd | `antd.badge` | badge / tag / chip | 2 × 6; 6 | 4/4 of 6 | rendered | 4/4 | 4/4 | ungraded | — |
+| antd | `antd.button` | button | 3 × 30; 30 | 8/8 of 30 | rendered | 8/8 | 8/8 | ungraded | — |
+| antd | `antd.card` | card | 2 × 4; 4 | 3/3 of 4 | rendered | 3/3 | 3/3 | ungraded | — |
+| antd | `antd.checkbox` | checkbox / radio | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | ungraded | — |
+| antd | `antd.input` | input / field | 3 × 24 + 16 state; 40 | 11/11 of 40 | rendered | 11/11 | 11/11 | ungraded | CODE-RENDER-BLANK:input |
+| antd | `antd.progress` | progress / spinner | 1 × 4; 4 | 4/4 of 4 | rendered | 4/4 | 4/4 | ungraded | CODE-RENDER-PARTIAL:progress |
+| antd | `antd.radio` | checkbox / radio | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | ungraded | — |
+| antd | `antd.switch` | toggle / switch | 2 × 4 + 8 state; 12 | 7/7 of 12 | rendered | 7/7 | 7/7 | ungraded | — |
+| antd | `antd.tag` | badge / tag / chip | 2 × 14; 14 | 8/8 of 14 | rendered | 8/8 | 8/8 | ungraded | CODE-RENDER-PARTIAL:tag |
+| antd | `antd.tooltip` | tooltip / popover | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | — |
+| astryx | `astryx.badge` | badge / tag / chip | 1 × 14; 14 | 14/14 of 14 | rendered | 14/14 | 14/14 | ungraded | — |
+| astryx | `astryx.banner` | banner / alert / toast | 2 × 8; 8 | 5/5 of 8 | rendered | 5/5 | 5/5 | ungraded | — |
+| astryx | `astryx.button` | button | 2 × 12; 12 | 6/6 of 12 | rendered | 6/6 | 6/6 | ungraded | — |
+| astryx | `astryx.card` | card | 1 × 13; 13 | 13/13 of 13 | rendered | 13/13 | 13/13 | ungraded | — |
+| astryx | `astryx.checkbox-input` | checkbox / radio | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | ungraded | — |
+| astryx | `astryx.dropdown-menu-item` | menu / dropdown | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | — |
+| astryx | `astryx.dropdown-menu` | menu / dropdown | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | — |
+| astryx | `astryx.progress-bar` | progress / spinner | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | 5/5 | ungraded | — |
+| astryx | `astryx.slider` | slider | 2 × 6; 6 | 4/4 of 6 | rendered | 4/4 | 4/4 | ungraded | — |
+| astryx | `astryx.switch` | toggle / switch | 1 × 4; 4 | 3/3 of 4 | rendered | 3/3 | 3/3 | ungraded | — |
+| astryx | `astryx.text-input` | input / field | 2 × 9; 9 | 5/5 of 9 | rendered | 5/5 | 5/5 | ungraded | — |
+| astryx | `astryx.toast` | banner / alert / toast | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | CANVAS-SURFACE-WHITE-ON-WHITE:toast |
+| astryx | `astryx.token` | unmapped | 2 × 33; 33 | 13/13 of 33 | rendered | 13/13 | 13/13 | ungraded | — |
+| carbon | `carbon.accordion` | accordion | 2 × 6 + 2 state; 8 | 4/5 of 8 | rendered, 1 refused | 4/4 | 4/4 | ungraded | — |
+| carbon | `carbon.button` | button | 2 × 48 + 32 state; 80 | 16/17 of 80 | rendered, 1 refused | 16/16 | 16/16 | ungraded | FC-EXPORT-RING-UNPAINTED; CODE-CANVAS-DISAGREE:button.tertiary/border |
+| carbon | `carbon.checkbox` | checkbox / radio | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | ungraded | — |
+| carbon | `carbon.iconbutton` | button | 2 × 16; 16 | 7/7 of 16 | rendered | 7/7 | 7/7 | ungraded | CODE-RENDER-UNSTYLED:iconbutton |
+| carbon | `carbon.inlinenotification` | banner / alert / toast | 2 × 12; 12 | 7/7 of 12 | rendered | 7/7 | 7/7 | ungraded | CODE-CANVAS-DISAGREE:inlinenotification.warning-glyph/fill |
+| carbon | `carbon.modal` | modal / dialog | 1 × 4; 4 | 4/4 of 4 | rendered | 4/4 | 4/4 | ungraded | — |
+| carbon | `carbon.tabs` | tabs | 0 × 1 + 2 state; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | ungraded | — |
+| carbon | `carbon.tag` | badge / tag / chip | 2 × 36; 36 | 14/14 of 36 | rendered | 14/14 | 14/14 | ungraded | — |
+| carbon | `carbon.textinput` | input / field | 1 × 4 + 4 state; 8 | 4/5 of 8 | rendered, 1 refused | 4/4 | 4/4 | ungraded | — |
+| carbon | `carbon.toggle` | toggle / switch | 1 × 2 + 2 state; 4 | 2/3 of 4 | rendered, 1 refused | 2/2 | 2/2 | ungraded | — |
+| fluent | `fluent.avatar` | avatar | 3 × 18; 18 | 6/6 of 18 | rendered | 6/6 | 6/6 | ungraded | — |
+| fluent | `fluent.badge` | badge / tag / chip | 3 × 192; 192 | 16/16 of 192 | rendered | 16/16 | 16/16 | ungraded | — |
+| fluent | `fluent.button` | button | 3 × 45 + 20 state; 65 | 12/13 of 65 | rendered, 1 refused | 12/12 | 12/12 | ungraded | — |
+| fluent | `fluent.card` | card | 3 × 24 + 16 state; 40 | 10/11 of 40 | rendered, 1 refused | 10/10 | 10/10 | ungraded | — |
+| fluent | `fluent.checkbox` | checkbox / radio | 3 × 12 + 12 state; 24 | 8/9 of 24 | rendered, 1 refused | 8/8 | 8/8 | ungraded | — |
+| fluent | `fluent.dialog` | modal / dialog | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | ungraded | — |
+| fluent | `fluent.input` | input / field | 2 × 18 + 24 state; 42 | 11/12 of 42 | rendered, 1 refused | 11/11 | 11/11 | ungraded | CANVAS-OUTLINE-STROKE-ABSENT:input.outline/underline; CODE-RENDER-PARTIAL:input.outline |
+| fluent | `fluent.spinner` | progress / spinner | 3 × 64; 64 | 12/12 of 64 | rendered | 12/12 | 12/12 | ungraded | CODE-CANVAS-CONSISTENT-GLYPH-SUBSTITUTE:spinner-arc |
+| fluent | `fluent.switch` | toggle / switch | 2 × 6 + 4 state; 10 | 5/6 of 10 | rendered, 1 refused | 5/5 | 5/5 | ungraded | — |
+| fluent | `fluent.tab-list` | tabs | 3 × 24; 24 | 7/7 of 24 | rendered | 7/7 | 7/7 | ungraded | — |
+| fluent | `fluent.tooltip` | tooltip / popover | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | ungraded | CODE-RENDER-PARTIAL:tooltip.normal |
+| mui | `mui.accordion` | accordion | 2 × 4; 4 | 3/3 of 4 | rendered | 3/3 | 3/3 | ungraded | — |
+| mui | `mui.alert` | banner / alert / toast | 2 × 12; 12 | 6/6 of 12 | rendered | 6/6 | 6/6 | ungraded | — |
+| mui | `mui.autocomplete` | select / combobox | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | ungraded | — |
+| mui | `mui.avatar` | avatar | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | ungraded | — |
+| mui | `mui.badge` | badge / tag / chip | 2 × 14; 14 | 8/8 of 14 | rendered | 8/8 | 8/8 | ungraded | — |
+| mui | `mui.breadcrumbs` | breadcrumb | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | — |
+| mui | `mui.button` | button | 3 × 63 + 12 state; 75 | 15/15 of 75 | rendered | 15/15 | 15/15 | ungraded | — |
+| mui | `mui.card` | card | 1 × 4; 4 | 4/4 of 4 | rendered | 4/4 | 4/4 | ungraded | — |
+| mui | `mui.checkbox` | checkbox / radio | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | ungraded | — |
+| mui | `mui.chip` | badge / tag / chip | 3 × 28; 28 | 9/9 of 28 | rendered | 9/9 | 9/9 | ungraded | — |
+| mui | `mui.circular-progress` | progress / spinner | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | ungraded | — |
+| mui | `mui.dialog` | modal / dialog | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | 5/5 | ungraded | — |
+| mui | `mui.divider` | unmapped | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | ungraded | — |
+| mui | `mui.drawer` | modal / dialog | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | ungraded | — |
+| mui | `mui.fab` | button | 2 × 9; 9 | 5/5 of 9 | rendered | 5/5 | 5/5 | ungraded | — |
+| mui | `mui.icon-button` | button | 2 × 9; 9 | 5/5 of 9 | rendered | 5/5 | 5/5 | ungraded | — |
+| mui | `mui.input-adornment` | input / field | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | ungraded | — |
+| mui | `mui.linear-progress` | progress / spinner | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | ungraded | — |
+| mui | `mui.link` | unmapped | 2 × 21 + 21 state; 42 | 12/12 of 42 | rendered | 12/12 | 12/12 | ungraded | — |
+| mui | `mui.menu` | menu / dropdown | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | — |
+| mui | `mui.paper` | unmapped | 2 × 8; 8 | 5/5 of 8 | rendered | 5/5 | 5/5 | ungraded | — |
+| mui | `mui.radio` | checkbox / radio | 2 × 14; 14 | 8/8 of 14 | rendered | 8/8 | 8/8 | ungraded | — |
+| mui | `mui.select` | select / combobox | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | ungraded | — |
+| mui | `mui.slider` | slider | 2 × 12; 12 | 7/7 of 12 | rendered | 7/7 | 7/7 | ungraded | — |
+| mui | `mui.snackbar` | banner / alert / toast | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | ungraded | — |
+| mui | `mui.switch` | toggle / switch | 3 × 28; 28 | 9/9 of 28 | rendered | 9/9 | 9/9 | ungraded | — |
+| mui | `mui.table-pagination` | pagination | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | — |
+| mui | `mui.table` | table / data-grid | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | ungraded | — |
+| mui | `mui.tabs` | tabs | 2 × 6; 6 | 4/4 of 6 | rendered | 4/4 | 4/4 | ungraded | — |
+| mui | `mui.text-field` | input / field | 2 × 6; 6 | 4/4 of 6 | rendered | 4/4 | 4/4 | ungraded | CODE-CANVAS-DISAGREE:text-field.label/order |
+| mui | `mui.tooltip` | tooltip / popover | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | — |
+| polaris | `polaris.avatar` | avatar | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | 5/5 | ungraded | — |
+| polaris | `polaris.badge` | badge / tag / chip | 2 × 56; 56 | 17/17 of 56 | rendered | 17/17 | 17/17 | ungraded | — |
+| polaris | `polaris.banner` | banner / alert / toast | 1 × 4 + 4 state; 8 | 5/5 of 8 | rendered | 5/5 | 5/5 | ungraded | — |
+| polaris | `polaris.button` | button | 4 × 300 + 20 state; 320 | 17/18 of 320 | rendered, 1 refused | 17/17 | 17/17 | ungraded | — |
+| polaris | `polaris.checkbox` | checkbox / radio | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | ungraded | — |
+| polaris | `polaris.progress-bar` | progress / spinner | 2 × 12; 12 | 6/6 of 12 | rendered | 6/6 | 6/6 | ungraded | — |
+| polaris | `polaris.radio-button` | checkbox / radio | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | ungraded | — |
+| polaris | `polaris.spinner` | progress / spinner | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | ungraded | — |
+| polaris | `polaris.tag` | badge / tag / chip | 1 × 2 + 6 state; 8 | 5/5 of 8 | rendered | 5/5 | 5/5 | ungraded | — |
+| polaris | `polaris.text-field` | input / field | 5 × 1344 + 56 state; 8 | 24/24 of 1400, cap 24 dropped 5, axis coverage INCOMPLETE | rendered | 1/24 (+23 projected out) | 24/24 | ungraded | CANVAS-PROJECTION:Type=Text, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=None, Align=Left, Variant=Inherit, Size=Slim; CANVAS-PROJECTION:Type=Text, Input Mode=None, Align=Left, Variant=Borderless, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=None, Align=Center, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=None, Align=Right, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=Decimal, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=Numeric, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=Tel, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=Search, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=Email, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=Url, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Email, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Number, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Integer, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Password, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Search, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Tel, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Url, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Date, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Datetime Local, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Month, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Time, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Week, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium |
+| polaris | `polaris.text` | unmapped | 5 × 23232; 55 | 24/24 of 23232, cap 24 dropped 14, axis coverage INCOMPLETE | rendered | 0/24 (+24 projected out) | 24/24 | ungraded | CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading Sm; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading Md; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading Lg; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading Xl; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading2xl; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading3xl; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Body Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Body Sm; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Body Md; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Body Lg; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Medium, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Semibold, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Bold, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Disabled, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Inherit, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Success, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Critical, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Caution, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Subdued, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Text Inverse, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Text Inverse Secondary, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Magic, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Magic Subdued, Font Weight=Regular, Variant=Heading Xs |
+| polaris | `polaris.thumbnail` | unmapped | 1 × 4; 4 | 4/4 of 4 | rendered | 4/4 | 4/4 | ungraded | — |
+| shadcn | `shadcn.alert` | banner / alert / toast | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | ungraded | CODE-CANVAS-DISAGREE:root.border-color-unspecified |
+| shadcn | `shadcn.avatar` | avatar | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | ungraded | — |
+| shadcn | `shadcn.badge` | badge / tag / chip | 1 × 6 + 12 state; 18 | 8/8 of 18 | rendered | 8/8 | 8/8 | ungraded | — |
+| shadcn | `shadcn.button` | button | 2 × 48 + 24 state; 72 | 16/17 of 72 | rendered, 1 refused | 16/16 | 16/16 | ungraded | FC-EXPORT-RING-UNPAINTED |
+| shadcn | `shadcn.card` | card | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | ungraded | CODE-CANVAS-DISAGREE:root.border-color-unspecified |
+| shadcn | `shadcn.checkbox` | checkbox / radio | 1 × 3 + 6 state; 9 | 4/5 of 9 | rendered, 1 refused | 4/4 | 4/4 | ungraded | — |
+| shadcn | `shadcn.input` | input / field | 0 × 1 + 3 state; 4 | 3/4 of 4 | rendered, 1 refused | 3/3 | 3/3 | ungraded | CANVAS-LEAF-INPUT-COLLAPSED; CODE-CANVAS-DISAGREE:root.border-color-unspecified |
+| shadcn | `shadcn.select` | select / combobox | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | CODE-CANVAS-DISAGREE:root.border-color-unspecified |
+| shadcn | `shadcn.switch` | toggle / switch | 2 × 4 + 4 state; 8 | 4/5 of 8 | rendered, 1 refused | 4/4 | 4/4 | ungraded | — |
+| shadcn | `shadcn.tabs` | tabs | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | — |
+| shadcn | `shadcn.tooltip` | tooltip / popover | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | — |
+| tailwind | `flowbite.alert` | banner / alert / toast | 1 × 4; 4 | 4/4 of 4 | rendered | 4/4 | 4/4 | ungraded | — |
+| tailwind | `flowbite.badge` | badge / tag / chip | 2 × 12 + 12 state; 24 | 9/9 of 24 | rendered | 9/9 | 9/9 | ungraded | — |
+| tailwind | `flowbite.button` | button | 2 × 25 + 20 state; 45 | 12/13 of 45 | rendered, 1 refused | 12/12 | 12/12 | ungraded | FC-EXPORT-RING-UNPAINTED |
+| tailwind | `flowbite.card` | card | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | — |
+| tailwind | `flowbite.helpertext` | unmapped | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | 5/5 | ungraded | — |
+| tailwind | `flowbite.kbd` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | — |
+| tailwind | `flowbite.label` | unmapped | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | 5/5 | ungraded | — |
+| tailwind | `flowbite.toggleswitch` | toggle / switch | 2 × 6; 6 | 4/4 of 6 | rendered | 4/4 | 4/4 | ungraded | — |
