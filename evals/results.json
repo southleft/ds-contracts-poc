@@ -1,7 +1,7 @@
 {
-  "passed": 226,
+  "passed": 227,
   "total": 227,
-  "commit": "824675287e3b871648f67c983959c85aa756512b",
+  "commit": "dfb652cff24779454741bafd92ce36872cd53969",
   "dirty": false,
   "recordedAt": "2026-08-25",
   "results": [
@@ -993,8 +993,7 @@
     {
       "id": "css-dom-conformance-frontier",
       "claim": "C3-detection",
-      "pass": false,
-      "error": "Error: conformance/EXPECTATIONS.md is stale — it does not carry \"| cases | **92** |\". Run npm run conformance:report"
+      "pass": true
     },
     {
       "id": "capture-scope-independence",
