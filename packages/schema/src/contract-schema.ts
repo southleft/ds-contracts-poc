@@ -376,7 +376,18 @@ export const LayoutSchema = z
   .strictObject({
     /** "grid" joins the flex spellings (G1) — declared-track grids only. */
     display: z.enum(["flex", "inline-flex", "grid"]).optional(),
-    direction: z.enum(["row", "column"]).optional(),
+    /** The REVERSED spellings are here for the same reason they are in
+     *  VariantLayoutSchema, and they mean the same thing on both surfaces:
+     *  code writes the keyword verbatim, the canvas (which has no reverse)
+     *  compiles the children in reversed order. They belong on the BASE
+     *  layout because a library's DEFAULT combo can be the reversed one —
+     *  Carbon's Accordion `align` prop defaults to `end`, i.e.
+     *  `flex-direction: row-reverse`, so a base restricted to row|column had
+     *  no slot for the measured keyword at all and dropped the whole
+     *  channel. */
+    direction: z
+      .enum(["row", "column", "row-reverse", "column-reverse"])
+      .optional(),
     /** Cross-axis alignment. `baseline` is CARRY-BOTH like the rest: CSS
      *  `align-items: baseline`, canvas `counterAxisAlignItems: 'BASELINE'`
      *  (native on HORIZONTAL auto-layout — on a column the canvas falls back

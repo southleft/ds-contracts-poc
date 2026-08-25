@@ -51,8 +51,7 @@ Zero contradictions.
 
 ## Code-only / overflow (named, in the extension file)
 
-- base channels outside mintable kinds: **3**
-  - root.flex-direction — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today (sample: `row-reverse`, 2 distinct value(s))
+- base channels outside mintable kinds: **2**
   - label.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today (sample: `normal`, 1 distinct value(s))
   - label-2.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today (sample: `normal`, 1 distinct value(s))
 - state channels outside mintable kinds: **0**
@@ -60,6 +59,6 @@ Zero contradictions.
 
 ## Fidelity gate (scorecard.json)
 
-- computed-equality (styled channels, contract-mediated): **98.214%** (220/224 cells; 4/8 combo×state rows fully equal)
-- pixel: 4/8 pairs perfect at threshold 0 · 4/8 at the AA point (mean AA 0.063%, max 0.127%; 8/8 pairs MEASURED — 0 size-mismatched, 0 with no original screenshot, none averaged)
+- computed-equality (styled channels, contract-mediated): **100.000%** (224/224 cells; 8/8 combo×state rows fully equal)
+- pixel: 8/8 pairs perfect at threshold 0 · 8/8 at the AA point (mean AA 0.000%, max 0.000%; 8/8 pairs MEASURED — 0 size-mismatched, 0 with no original screenshot, none averaged)
 

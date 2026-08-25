@@ -607,7 +607,9 @@
               "type": "string",
               "enum": [
                 "row",
-                "column"
+                "column",
+                "row-reverse",
+                "column-reverse"
               ]
             },
             "align": {

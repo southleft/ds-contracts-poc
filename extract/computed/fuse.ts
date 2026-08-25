@@ -1241,12 +1241,53 @@ export function hugEvidence(a: AlignedSweep, space: PropSpace): HugEvidence {
 // truth becomes a named receipt (never silently overridden — the reviewed
 // static layer wins values, the floor wins truth).
 // ---------------------------------------------------------------------------
-const LAYOUT_CHANNEL_TO_FIELD: Record<string, { field: 'display' | 'direction' | 'align' | 'justify'; map: Record<string, string> }> = {
+/** THE VOCABULARY OF THE ONLY READER that turns a captured flex keyword into a
+ *  Part.layout fact. Every absence here has the same silent shape: no map
+ *  entry -> the channel leaves through `layout-value-outside-vocabulary` /
+ *  `layout-not-uniform` -> BOTH emitters draw their own default. That is not a
+ *  refusal a reader can see; it is a different component.
+ *
+ *  Three entries were missing and each was already lowered on both surfaces:
+ *   · row-reverse / column-reverse — VariantLayoutSchema already accepted
+ *     them, packages/core/src/css.ts writes flex-direction verbatim, and
+ *     core/emit-figma-script.ts `isReversed` reverses the compiled children.
+ *     Carbon's Accordion `align` prop DEFAULTS to `end` = row-reverse, so the
+ *     base combo's measured keyword had no slot at all.
+ *   · baseline — a documented CARRY-BOTH value of LayoutSchema.align, lowered
+ *     by packages/core/src/anatomy.ts (ALIGN_CSS) and emit-figma-script
+ *     (ALIGN_FIGMA BASELINE, with the VERTICAL -> MIN projection).
+ *   · flex-wrap — LayoutSchema.wrap is a first-class v15/S4 fact with a real
+ *     lowering on both halves; the map had no entry for the CHANNEL, so the
+ *     fact could only ever arrive from a hand-authored contract.
+ *
+ *  `omit` names the CSS-INITIAL value of a channel: observing it is observing
+ *  nothing, so it is consumed (never re-minted as a token) and never written
+ *  as a layout fact. Without it every flex container in the corpus would
+ *  suddenly carry `wrap: false`, which the schema cannot even spell. */
+const LAYOUT_CHANNEL_TO_FIELD: Record<
+  string,
+  { field: 'display' | 'direction' | 'align' | 'justify' | 'wrap'; map: Record<string, string | boolean>; omit?: string[] }
+> = {
   display: { field: 'display', map: { flex: 'flex', 'inline-flex': 'inline-flex' } },
-  'flex-direction': { field: 'direction', map: { row: 'row', column: 'column' } },
-  'align-items': { field: 'align', map: { 'flex-start': 'start', center: 'center', 'flex-end': 'end', stretch: 'stretch' } },
+  'flex-direction': {
+    field: 'direction',
+    map: { row: 'row', column: 'column', 'row-reverse': 'row-reverse', 'column-reverse': 'column-reverse' },
+  },
+  'align-items': {
+    field: 'align',
+    map: { 'flex-start': 'start', center: 'center', 'flex-end': 'end', stretch: 'stretch', baseline: 'baseline' },
+  },
   'justify-content': { field: 'justify', map: { 'flex-start': 'start', center: 'center', 'flex-end': 'end', 'space-between': 'space-between' } },
+  'flex-wrap': { field: 'wrap', map: { wrap: true }, omit: ['nowrap'] },
 };
+
+/** The reversed spelling of a canonical direction, and back. The canvas has no
+ *  reversed auto-layout, so BOTH surfaces express "reversed" the same way the
+ *  schema documents it: code writes the keyword, the canvas compiles the
+ *  children in the opposite order. Flipping is therefore an involution on the
+ *  four canonical values and is the ONE operation the child-order door needs. */
+const flipReverse = (d: string): string =>
+  d.endsWith('-reverse') ? d.slice(0, -'-reverse'.length) : `${d}-reverse`;
 
 export interface LayoutEnrichment {
   /** per part: layout channels consumed here (excluded from minting). */
@@ -1278,6 +1319,14 @@ export function enrichLayout(
   const staticParts = new Map(walkAnatomy(contract).map((w) => [w.name, w.part] as const));
   const out: LayoutEnrichment = { handled: new Map(), enriched: [], contradictions: [], receipts: [] };
   const enabled = space.enumeration.combos.filter(isEnabled);
+  // The props a layoutByProp map may legally ride: validate.ts:310 requires a
+  // declared ENUM. `space.axes` also carries presence axes, which fuse into
+  // BOOLEAN props.
+  const enumAxisProps = new Set(
+    [...(contract.props ?? []), ...(space.contract.props ?? [])]
+      .filter((pr) => Array.isArray((pr as { type?: { enum?: unknown } }).type?.enum))
+      .map((pr) => pr.name),
+  );
   for (let pi = 0; pi < a.baseFlat.length; pi++) {
     const partName = a.partNames[pi];
     const target = staticParts.get(partName);
@@ -1293,6 +1342,14 @@ export function enrichLayout(
         const el = a.getAligned(`${combo.key}__default`)[pi];
         if (el) values.add(el.node.style[channel]);
       }
+      // A channel observed at its CSS-INITIAL value everywhere is observing
+      // nothing: consume it (so it is not re-minted as a token) and write no
+      // layout fact. `flex-wrap: nowrap` is the whole vocabulary of this rule
+      // today, and the schema has no spelling for the negative anyway.
+      if (spec.omit && values.size === 1 && spec.omit.includes([...values][0])) {
+        (out.handled.get(partName) ?? out.handled.set(partName, new Set()).get(partName)!).add(channel);
+        continue;
+      }
       if (values.size !== 1) {
         // REJECTED-SETS ROUND (fluent.card census reject): uniform-or-nothing
         // dropped flex-direction on ANY component with an orientation-style
@@ -1306,6 +1363,15 @@ export function enrichLayout(
         // that factors on no single axis keeps the code-only receipt.
         let factored: { prop: string; byValue: Map<string, string> } | null = null;
         for (const ax of space.axes) {
+          // packages/core/src/validate.ts requires the layoutByProp driving
+          // prop to be a declared ENUM. `space.axes` also holds PRESENCE axes,
+          // which fuse into BOOLEAN contract props — factoring on one of those
+          // minted a contract the engine's own validator refuses, and that
+          // refusal is a WHOLE-ROUND abort (antd.alert: `layoutByProp prop
+          // "description" must be an enum prop`, no artifact written at all).
+          // A boolean driving axis is REFUSED BY NAME here instead: the loop
+          // falls through to the existing code-only receipt.
+          if (!enumAxisProps.has(ax.prop)) continue;
           const byValue = new Map<string, Set<string>>();
           for (const combo of enabled) {
             const el = a.getAligned(`${combo.key}__default`)[pi];
@@ -1319,6 +1385,16 @@ export function enrichLayout(
           }
         }
         const baseValue = factored ? factored.byValue.get(space.baseAxisValues[factored.prop] ?? '') : undefined;
+        // VariantLayoutSchema carries display/direction/align/justify only —
+        // there is NO per-variant wrap spelling. Flattening the base combo's
+        // answer onto every variant would be a fiction, so the fact stays
+        // code-only and says so by name.
+        if (factored !== null && spec.field === 'wrap') {
+          out.receipts.push(
+            `layout-wrap-varies-by-axis: ${partName}.${channel} varies across combos and factors on enum axis "${factored.prop}", but layoutByProp (VariantLayoutSchema) carries display/direction/align/justify only — there is no per-variant wrap spelling, so the fact stays code-only rather than being flattened onto every variant`,
+          );
+          continue;
+        }
         if (
           factored === null ||
           baseValue === undefined ||
@@ -1332,14 +1408,14 @@ export function enrichLayout(
         }
         const overrides: Record<string, string> = {};
         for (const [av, ov] of [...factored.byValue].sort(([x], [y]) => x.localeCompare(y))) {
-          if (ov !== baseValue) overrides[av] = spec.map[ov];
+          if (ov !== baseValue) overrides[av] = String(spec.map[ov]);
         }
         const handledVar = out.handled.get(partName) ?? new Set<string>();
         out.handled.set(partName, handledVar);
         const carriedVar = target.layout?.[spec.field];
         if (carriedVar !== undefined) {
           handledVar.add(channel);
-          if (spec.map[baseValue] !== carriedVar) {
+          if (String(spec.map[baseValue]) !== String(carriedVar)) {
             out.contradictions.push({ part: partName, field: spec.field, carried: String(carriedVar), observed: baseValue });
           }
           continue;
@@ -1348,7 +1424,7 @@ export function enrichLayout(
         out.enriched.push({
           part: partName,
           field: spec.field,
-          value: spec.map[baseValue],
+          value: String(spec.map[baseValue]),
           byProp: { prop: factored.prop, overrides },
         });
         out.receipts.push(
@@ -1374,6 +1450,178 @@ export function enrichLayout(
       }
       handledSet.add(channel);
       out.enriched.push({ part: partName, field: spec.field, value: canonical });
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // THE CHILD-ORDER DOOR (RC1, burn-down round 2)
+  //
+  // MEASURED ROOT CAUSE. Nothing between capture and contract ever read child
+  // ORDER. buildUnion (extract/computed/anatomy.ts) DETECTS the loss — it
+  // emits `union-order-drift: <combo> @<path> matched behind the cursor —
+  // document order varies across captures (named)` — and then discards it: the
+  // union's DFS order becomes the ONE part order for every combo. enrichLayout
+  // reads `el.node.style[channel]` and nothing else. A container whose children
+  // re-order on an enum axis therefore mints EVERY value of that axis with the
+  // base order, and the deviating variants come out indistinguishable from the
+  // base one. Corpus-wide that receipt fires in exactly two components —
+  // fluent.switch and fluent.spinner — and both were rejected by screenshot
+  // for precisely this: `labelPosition=above` draws the toggle above the label,
+  // the inverse of the library, and `above`/`below` render byte-identically.
+  // A receipt that names a loss while the mint ships a WRONG component is not
+  // an honest refusal; it is a shipped lie with a footnote.
+  //
+  // THE CARRIAGE. The schema already owns the spelling and says so:
+  // VariantLayoutSchema's REVERSED directions exist because "the canvas (which
+  // has no reverse) reverses the compiled child order per variant instead"
+  // (packages/schema/src/contract-schema.ts). Both lowerings are already
+  // written — css.ts emits the keyword, emit-figma-script's `isReversed`
+  // reverses `spec.children`. So a per-value order that is the EXACT REVERSE of
+  // the contract's own part order is carriable today, with no new vocabulary,
+  // by flipping that value's resolved direction. Nothing else is: an arbitrary
+  // permutation has no spelling on either surface and is REFUSED BY NAME rather
+  // than flattened onto the base order.
+  {
+    const idxOf = new Map(a.union.entries.map((e, i) => [e, i] as const));
+    const kidsOf: number[][] = a.union.entries.map((e) =>
+      e.children.map((c) => idxOf.get(c)).filter((j): j is number => j !== undefined),
+    );
+    const lastSeg = (p: string): number => Number(p.slice(p.lastIndexOf('.') + 1));
+    // OUT OF FLOW children are excluded from the comparison and are unaffected
+    // by the carriage: a reversed frame reverses them too, but they are placed
+    // by insets, so their index is not a rendered fact. fluent.Switch's
+    // `position: absolute` input is exactly this case.
+    const inFlow = (el: FlatEl): boolean => {
+      const st = el.node.style;
+      return st['display'] !== 'none' && st['position'] !== 'absolute' && st['position'] !== 'fixed';
+    };
+    for (let pi = 0; pi < a.baseFlat.length; pi++) {
+      const partName = a.partNames[pi];
+      const target = staticParts.get(partName);
+      if (!target || kidsOf[pi].length < 2) continue;
+      const orderFor = (key: string): number[] | null => {
+        let els: (FlatEl | null)[];
+        try {
+          els = a.getAligned(key);
+        } catch {
+          return null;
+        }
+        const rows: Array<{ j: number; at: number }> = [];
+        for (const j of kidsOf[pi]) {
+          const el = els[j];
+          if (!el || !inFlow(el)) continue;
+          rows.push({ j, at: lastSeg(el.path) });
+        }
+        return rows.sort((x, y) => x.at - y.at).map((r) => r.j);
+      };
+      const baseOrder = orderFor(`${space.baseComboKey}__default`);
+      if (!baseOrder || baseOrder.length < 2) continue;
+      const refSet = new Set(baseOrder);
+      // The reference order is the CONTRACT's order (union DFS), restricted to
+      // the base combo's in-flow set — never the base capture's own order,
+      // because the contract is what both emitters walk.
+      const unionOrder = kidsOf[pi].filter((j) => refSet.has(j));
+      const forward = unionOrder.join('>');
+      const backward = [...unionOrder].reverse().join('>');
+      type Verdict = 'same' | 'reverse' | 'other' | 'membership';
+      const verdictOf = (seq: number[] | null): Verdict | null => {
+        if (seq === null) return null;
+        if (seq.length !== unionOrder.length || seq.some((j) => !refSet.has(j))) return 'membership';
+        const k = seq.join('>');
+        return k === forward ? 'same' : k === backward ? 'reverse' : 'other';
+      };
+      const byCombo = new Map<Combo, Verdict>();
+      for (const combo of enabled) {
+        const v = verdictOf(orderFor(`${combo.key}__default`));
+        if (v !== null) byCombo.set(combo, v);
+      }
+      const seen = new Set(byCombo.values());
+      if (seen.size === 0 || (seen.size === 1 && seen.has('same'))) continue;
+      if (seen.has('membership')) {
+        out.receipts.push(
+          `child-order-varies-membership: ${partName}'s in-flow children differ in MEMBERSHIP across combos, not only in order — a per-variant child set is not a layout fact and has no contract spelling; the order stays code-only`,
+        );
+        continue;
+      }
+      if (seen.has('other')) {
+        out.receipts.push(
+          `child-order-varies-unreversible: ${partName}'s children re-order across combos by a permutation that is neither the identity nor a REVERSAL of the contract's part order — the only per-variant child-order spelling either surface has is a reversed main axis (CSS flex-direction: *-reverse / canvas children.reverse()), so an arbitrary permutation stays code-only rather than being flattened onto the base order`,
+        );
+        continue;
+      }
+      // Only 'same' and 'reverse' remain. Establish the base combo's own
+      // verdict and, if the rest deviate, the single ENUM axis they factor on.
+      const baseCombo = enabled.find((c) => c.key === space.baseComboKey);
+      const baseVerdict = (baseCombo && byCombo.get(baseCombo)) ?? 'same';
+      let factored: { prop: string; byValue: Map<string, Verdict> } | null = null;
+      if (seen.size > 1) {
+        for (const ax of space.axes) {
+          if (!enumAxisProps.has(ax.prop)) continue;
+          const byValue = new Map<string, Set<Verdict>>();
+          for (const [combo, v] of byCombo) {
+            const av = combo.axisValues[ax.prop] ?? '';
+            (byValue.get(av) ?? byValue.set(av, new Set()).get(av)!).add(v);
+          }
+          if (byValue.size > 1 && [...byValue.values()].every((vs) => vs.size === 1)) {
+            factored = { prop: ax.prop, byValue: new Map([...byValue].map(([k, vs]) => [k, [...vs][0]])) };
+            break;
+          }
+        }
+        if (factored === null) {
+          out.receipts.push(
+            `child-order-varies-not-factored: ${partName}'s children reverse across combos but the reversal factors on no single enum axis — layoutByProp is one {prop, map} per part (schema v7), so the order stays code-only`,
+          );
+          continue;
+        }
+      }
+      // The direction this part resolves to per axis value BEFORE the flip —
+      // the base layout's own keyword (carried, freshly enriched, or the
+      // measured computed value), plus any override the channel door made.
+      const enrichedDir = out.enriched.find((e) => e.part === partName && e.field === 'direction');
+      const baseDir = String(
+        enrichedDir?.value ?? target.layout?.direction ?? a.baseFlat[pi].node.style['flex-direction'] ?? 'row',
+      );
+      if (LAYOUT_CHANNEL_TO_FIELD['flex-direction'].map[baseDir] === undefined) {
+        out.receipts.push(
+          `child-order-reversal-outside-vocabulary: ${partName}'s children reverse across combos but its base flex-direction is "${baseDir}", which has no canonical spelling — the order stays code-only`,
+        );
+        continue;
+      }
+      if (factored !== null && enrichedDir?.byProp && enrichedDir.byProp.prop !== factored.prop) {
+        out.receipts.push(
+          `child-order-axis-conflicts-with-direction-axis: ${partName}'s child order reverses on enum axis "${factored.prop}" but its flex-direction already rides layoutByProp on "${enrichedDir.byProp.prop}" — one driving prop per part (schema v7), so the order stays code-only`,
+        );
+        continue;
+      }
+      const dirAt = (axisValue: string): string =>
+        String(enrichedDir?.byProp?.overrides[axisValue] ?? baseDir);
+      const newBase = baseVerdict === 'reverse' ? flipReverse(baseDir) : baseDir;
+      const overrides: Record<string, string> = { ...(enrichedDir?.byProp?.overrides ?? {}) };
+      if (factored !== null) {
+        for (const [av, v] of [...factored.byValue].sort(([x], [y]) => x.localeCompare(y))) {
+          const d = v === 'reverse' ? flipReverse(dirAt(av)) : dirAt(av);
+          if (d !== newBase) overrides[av] = d;
+          else delete overrides[av];
+        }
+      }
+      const byProp =
+        Object.keys(overrides).length > 0
+          ? { prop: (factored?.prop ?? enrichedDir?.byProp?.prop) as string, overrides }
+          : undefined;
+      if (enrichedDir) {
+        enrichedDir.value = newBase;
+        enrichedDir.byProp = byProp;
+      } else {
+        out.enriched.push({ part: partName, field: 'direction', value: newBase, byProp });
+      }
+      (out.handled.get(partName) ?? out.handled.set(partName, new Set()).get(partName)!).add('flex-direction');
+      out.receipts.push(
+        `child-order-carried-as-reversed-axis: ${partName}'s children are re-ordered across combos and every deviating order is the EXACT REVERSE of the contract's part order — carried as layout.direction = ${newBase}${
+          byProp
+            ? ` with ${Object.entries(byProp.overrides).map(([k, v]) => `${byProp.prop}=${k} → ${v}`).join(', ')} via layoutByProp`
+            : ''
+        } (the schema's documented spelling: code writes the keyword, the canvas compiles the children in reversed order)`,
+      );
     }
   }
   // ANTD EXAM (heal loop, 2026-08-23) — GROW IS A LAYOUT FACT, NOT A TOKEN.

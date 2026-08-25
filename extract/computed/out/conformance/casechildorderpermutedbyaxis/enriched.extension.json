@@ -66,7 +66,9 @@
       }
     ],
     "contradictions": [],
-    "receipts": [],
+    "receipts": [
+      "child-order-varies-unreversible: root's children re-order across combos by a permutation that is neither the identity nor a REVERSAL of the contract's part order — the only per-variant child-order spelling either surface has is a reversed main axis (CSS flex-direction: *-reverse / canvas children.reverse()), so an arbitrary permutation stays code-only rather than being flattened onto the base order"
+    ],
     "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
   },
   "declaredFacts": {

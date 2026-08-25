@@ -41,7 +41,7 @@
     "state": 0
   },
   "codeOnly": {
-    "base": 3,
+    "base": 2,
     "state": 0,
     "overflowBindings": 0
   },
@@ -140,11 +140,11 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 98.21428571428571,
-    "rowsFullyEqual": 4,
+    "computedPctEqual": 100,
+    "rowsFullyEqual": 8,
     "rows": 8,
-    "pixelPerfectExact": 4,
-    "pixelPerfectAA": 4,
+    "pixelPerfectExact": 8,
+    "pixelPerfectAA": 8,
     "pairs": 8
   },
   "focusVisibleDriverMatched": 0,

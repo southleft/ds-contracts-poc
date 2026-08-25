@@ -61,10 +61,23 @@
         "part": "root",
         "field": "align",
         "value": "center"
+      },
+      {
+        "part": "root",
+        "field": "direction",
+        "value": "row",
+        "byProp": {
+          "prop": "labelPosition",
+          "overrides": {
+            "before": "row-reverse"
+          }
+        }
       }
     ],
     "contradictions": [],
-    "receipts": [],
+    "receipts": [
+      "child-order-carried-as-reversed-axis: root's children are re-ordered across combos and every deviating order is the EXACT REVERSE of the contract's part order — carried as layout.direction = row with labelPosition=before → row-reverse via layoutByProp (the schema's documented spelling: code writes the keyword, the canvas compiles the children in reversed order)"
+    ],
     "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
   },
   "declaredFacts": {
@@ -191,6 +204,7 @@
   },
   "enrichmentNotes": [
     "layout enriched: root.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched per axis: root.layout.direction = row at base; labelPosition=before → row-reverse via layoutByProp (schema v7 — resolveLayout merges per compiled variant)",
     "declared fact carried: root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: root.font-family = monospace (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",

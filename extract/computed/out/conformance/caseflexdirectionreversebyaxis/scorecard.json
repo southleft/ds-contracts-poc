@@ -7,24 +7,24 @@
   "interactions": 4,
   "computed": {
     "cellsCompared": 224,
-    "cellsEqual": 220,
-    "pctEqual": 98.21428571428571,
-    "rowsFullyEqual": 4,
+    "cellsEqual": 224,
+    "pctEqual": 100,
+    "rowsFullyEqual": 8,
     "rows": 8
   },
   "pixel": {
     "pairs": 8,
-    "perfectExact": 4,
-    "perfectAA": 4,
+    "perfectExact": 8,
+    "perfectAA": 8,
     "measured": 8,
     "unscored": {
       "sizeMismatch": 0,
       "noOriginal": 0,
       "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
     },
-    "meanExact": 1.1083984375,
-    "meanAA": 0.0634765625,
-    "maxAA": 0.126953125
+    "meanExact": 0,
+    "meanAA": 0,
+    "maxAA": 0
   },
   "fusion": {
     "boundConfirmed": 0,
@@ -34,34 +34,34 @@
     "mintedLeavesUnfolded": 9,
     "baseBindings": 17,
     "stateBindings": 0,
-    "codeOnlyChannels": 3,
+    "codeOnlyChannels": 2,
     "overflowBindings": 0,
     "folds": 0
   },
   "worstRows": [
     {
       "key": "end__default",
-      "pctAA": 0.126953125,
-      "pctExact": 2.216796875,
-      "channelsMismatched": 1
+      "pctAA": 0,
+      "pctExact": 0,
+      "channelsMismatched": 0
     },
     {
       "key": "end__hover",
-      "pctAA": 0.126953125,
-      "pctExact": 2.216796875,
-      "channelsMismatched": 1
+      "pctAA": 0,
+      "pctExact": 0,
+      "channelsMismatched": 0
     },
     {
       "key": "end__focus-visible",
-      "pctAA": 0.126953125,
-      "pctExact": 2.216796875,
-      "channelsMismatched": 1
+      "pctAA": 0,
+      "pctExact": 0,
+      "channelsMismatched": 0
     },
     {
       "key": "end__active",
-      "pctAA": 0.126953125,
-      "pctExact": 2.216796875,
-      "channelsMismatched": 1
+      "pctAA": 0,
+      "pctExact": 0,
+      "channelsMismatched": 0
     },
     {
       "key": "start__default",
@@ -88,14 +88,8 @@
       "channelsMismatched": 0
     }
   ],
-  "topMismatchedChannels": [
-    [
-      "root.flex-direction",
-      4
-    ]
-  ],
+  "topMismatchedChannels": [],
   "namedLosses": [
-    "code-only: root.flex-direction — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-2.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
   ],
@@ -112,62 +106,34 @@
     {
       "key": "end__default",
       "channelsCompared": 28,
-      "channelsEqual": 27,
-      "pctExact": 2.216796875,
-      "pctAA": 0.126953125,
-      "mismatches": [
-        {
-          "part": "root",
-          "channel": "flex-direction",
-          "ours": "row",
-          "theirs": "row-reverse"
-        }
-      ]
+      "channelsEqual": 28,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
     },
     {
       "key": "end__hover",
       "channelsCompared": 28,
-      "channelsEqual": 27,
-      "pctExact": 2.216796875,
-      "pctAA": 0.126953125,
-      "mismatches": [
-        {
-          "part": "root",
-          "channel": "flex-direction",
-          "ours": "row",
-          "theirs": "row-reverse"
-        }
-      ]
+      "channelsEqual": 28,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
     },
     {
       "key": "end__focus-visible",
       "channelsCompared": 28,
-      "channelsEqual": 27,
-      "pctExact": 2.216796875,
-      "pctAA": 0.126953125,
-      "mismatches": [
-        {
-          "part": "root",
-          "channel": "flex-direction",
-          "ours": "row",
-          "theirs": "row-reverse"
-        }
-      ]
+      "channelsEqual": 28,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
     },
     {
       "key": "end__active",
       "channelsCompared": 28,
-      "channelsEqual": 27,
-      "pctExact": 2.216796875,
-      "pctAA": 0.126953125,
-      "mismatches": [
-        {
-          "part": "root",
-          "channel": "flex-direction",
-          "ours": "row",
-          "theirs": "row-reverse"
-        }
-      ]
+      "channelsEqual": 28,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
     },
     {
       "key": "start__default",

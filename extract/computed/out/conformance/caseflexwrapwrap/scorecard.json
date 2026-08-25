@@ -7,9 +7,9 @@
   "interactions": 4,
   "computed": {
     "cellsCompared": 112,
-    "cellsEqual": 108,
-    "pctEqual": 96.42857142857143,
-    "rowsFullyEqual": 0,
+    "cellsEqual": 112,
+    "pctEqual": 100,
+    "rowsFullyEqual": 4,
     "rows": 4
   },
   "pixel": {
@@ -34,7 +34,7 @@
     "mintedLeavesUnfolded": 9,
     "baseBindings": 17,
     "stateBindings": 0,
-    "codeOnlyChannels": 3,
+    "codeOnlyChannels": 2,
     "overflowBindings": 0,
     "folds": 0
   },
@@ -43,35 +43,29 @@
       "key": "__default",
       "pctAA": 0.80078125,
       "pctExact": 4.8046875,
-      "channelsMismatched": 1
+      "channelsMismatched": 0
     },
     {
       "key": "__hover",
       "pctAA": 0.80078125,
       "pctExact": 4.8046875,
-      "channelsMismatched": 1
+      "channelsMismatched": 0
     },
     {
       "key": "__focus-visible",
       "pctAA": 0.80078125,
       "pctExact": 4.8046875,
-      "channelsMismatched": 1
+      "channelsMismatched": 0
     },
     {
       "key": "__active",
       "pctAA": 0.80078125,
       "pctExact": 4.8046875,
-      "channelsMismatched": 1
+      "channelsMismatched": 0
     }
   ],
-  "topMismatchedChannels": [
-    [
-      "root.flex-wrap",
-      4
-    ]
-  ],
+  "topMismatchedChannels": [],
   "namedLosses": [
-    "code-only: root.flex-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-2.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
   ],
@@ -88,62 +82,34 @@
     {
       "key": "__default",
       "channelsCompared": 28,
-      "channelsEqual": 27,
+      "channelsEqual": 28,
       "pctExact": 4.8046875,
       "pctAA": 0.80078125,
-      "mismatches": [
-        {
-          "part": "root",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
-        }
-      ]
+      "mismatches": []
     },
     {
       "key": "__hover",
       "channelsCompared": 28,
-      "channelsEqual": 27,
+      "channelsEqual": 28,
       "pctExact": 4.8046875,
       "pctAA": 0.80078125,
-      "mismatches": [
-        {
-          "part": "root",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
-        }
-      ]
+      "mismatches": []
     },
     {
       "key": "__focus-visible",
       "channelsCompared": 28,
-      "channelsEqual": 27,
+      "channelsEqual": 28,
       "pctExact": 4.8046875,
       "pctAA": 0.80078125,
-      "mismatches": [
-        {
-          "part": "root",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
-        }
-      ]
+      "mismatches": []
     },
     {
       "key": "__active",
       "channelsCompared": 28,
-      "channelsEqual": 27,
+      "channelsEqual": 28,
       "pctExact": 4.8046875,
       "pctAA": 0.80078125,
-      "mismatches": [
-        {
-          "part": "root",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
-        }
-      ]
+      "mismatches": []
     }
   ]
 }

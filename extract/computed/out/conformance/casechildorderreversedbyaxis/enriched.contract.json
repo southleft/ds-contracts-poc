@@ -38,7 +38,8 @@
     "root": {
       "layout": {
         "display": "flex",
-        "align": "center"
+        "align": "center",
+        "direction": "row"
       },
       "parts": {
         "label": {
@@ -75,6 +76,14 @@
             "padding-left": "{imported.shared.size-6}",
             "padding-right": "{imported.shared.size-6}",
             "padding-top": "{imported.shared.size-2}"
+          }
+        }
+      },
+      "layoutByProp": {
+        "prop": "labelPosition",
+        "map": {
+          "before": {
+            "direction": "row-reverse"
           }
         }
       },

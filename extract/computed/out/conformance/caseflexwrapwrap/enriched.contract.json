@@ -14,7 +14,8 @@
     "root": {
       "layout": {
         "display": "flex",
-        "align": "center"
+        "align": "center",
+        "wrap": true
       },
       "parts": {
         "label": {
