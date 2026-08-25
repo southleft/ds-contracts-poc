@@ -3,9 +3,39 @@
   "component": "Spinner",
   "config": "extract/computed/configs/tailwind.json",
   "capturedBrowser": "Chromium 151.0.7922.34 (playwright-core, headless)",
-  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "declared": {
-    "base": [],
+    "base": [
+      {
+        "part": "root",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, \"Helvetica Neue\", \"Noto Sans\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
+      }
+    ],
     "state": []
   },
   "decisionsReapplied": [],
@@ -13,8 +43,6 @@
     "component": "Spinner",
     "generatedBy": "extract/computed/gate.ts",
     "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
-    "renderedBy": "149.0.7827.55",
-    "browserMismatch": "RENDERED ON A DIFFERENT BROWSER THAN THE CAPTURE — these numbers were produced by Chromium 149.0.7827.55, but the captured truth they are scored against was recorded on Chromium 151.0.7922.34. Computed styles differ between Chromium versions, so cells can be UNEQUAL for that reason alone and this scorecard is not comparable to one recorded on the capture's own browser. Measured 2026-08-25: `position-anchor` computes `none` in 149 and `normal` in 151, and on a raw all-channel replay `flex-line-count`, `ruby-overhang` and `text-fit` move too. Re-run with PLAYWRIGHT_CHROMIUM_PATH set to the capture's browser, or re-capture.",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 40,
     "interactions": 4,
@@ -43,11 +71,11 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 6,
-      "mintedLeavesUnfolded": 6,
-      "baseBindings": 2,
+      "mintedLeaves": 8,
+      "mintedLeavesUnfolded": 8,
+      "baseBindings": 4,
       "stateBindings": 0,
-      "codeOnlyChannels": 0,
+      "codeOnlyChannels": 1,
       "overflowBindings": 0,
       "folds": 30
     },
@@ -111,6 +139,7 @@
     ],
     "topMismatchedChannels": [],
     "namedLosses": [
+      "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "gate.empty-comparison-is-100: computed pctEqual is NULL because cellsCompared === 0 — NOTHING was compared. Every part was excluded by an upstream door (carried-parts-only, icon-part-exclusion, unaligned-truth-el-skip, zero-channel-part-skip) or the enriched contract carries no part at all. A percentage here would be a fabrication, not a measurement — it used to report 100, which read as a perfect score and was averaged into the corpus mean; the pixel side refuses to fabricate its own zero for the same reason (see gate.null-not-zero-means)."
     ],
     "unresolvedTokenRefs": {
