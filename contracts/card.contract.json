@@ -5,6 +5,7 @@
   "version": "1.1.0",
   "status": "draft",
   "description": "Groups related content behind one subject. Composes an Avatar, a bound title, a default body slot, and a constrained actions slot.",
+  "archetype": "card",
   "semantics": {
     "element": "article"
   },

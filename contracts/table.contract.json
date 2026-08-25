@@ -5,6 +5,7 @@
   "version": "1.1.0",
   "status": "draft",
   "description": "Structured data in rows and columns. Composes header cells (with the Table's density mapped into them), and a body slot of rows.",
+  "archetype": "table / data-grid",
   "semantics": {
     "element": "div",
     "role": "table"

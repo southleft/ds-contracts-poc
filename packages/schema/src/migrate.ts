@@ -1,5 +1,7 @@
 /**
- * SCHEMA 17 CODEMOD — the v16 → v17 contract-document migration.
+ * SCHEMA CODEMOD — the contract-document migrations, in one place.
+ *
+ * PART ONE (v16 → v17): the renames.
  *
  * v16 carried four tool-specific fields outside the `bindings.<surface>`
  * namespace that props already used. v17 moves them (a pure rename — nothing
@@ -25,6 +27,8 @@
  * document that validates only after an unrecorded rewrite is a document
  * whose committed bytes lie.
  */
+
+import { archetypeOf } from './archetype.js';
 
 export interface MigrationResult {
   /** The migrated value (a new object graph; the input is not mutated). */
@@ -157,3 +161,71 @@ export function migrateDocumentToV17(doc: unknown): MigrationResult {
  *  A `false` lets a directory walk skip the parse. */
 export const mayCarryV16Spelling = (text: string): boolean =>
   /"(figmaRepresentation|figmaStatePreviews|figmaProperty|anchors)"\s*:/.test(text);
+
+// ---------------------------------------------------------------------------
+// SCHEMA 19 — the archetype seed
+// ---------------------------------------------------------------------------
+
+/**
+ * v19 adds an optional `archetype` to the contract document — the docs/23
+ * §C.1.1 class the REQUIRED-FACTS referee enforces against. Nothing is renamed
+ * and nothing is refused; the codemod SEEDS the field, exactly once, from the
+ * name-map (`archetypeOf`), so that what was a regex guess becomes a reviewed
+ * declaration in the committed bytes.
+ *
+ * Three rules, and they are the whole design:
+ *   · an EXPLICIT field is never touched — the declaration wins forever after,
+ *     which is what lets `mui.drawer` be re-declared away from the modal class
+ *     the regex hands it;
+ *   · a name the map does not reach is left ALONE, not guessed — the tool warns
+ *     "declare archetype" and enforces nothing (a wrong archetype would demand
+ *     facts the component does not owe, or mint one that lies);
+ *   · the field is inserted at a FIXED position (immediately after
+ *     `description`) so the seed is a one-line diff in every file rather than a
+ *     reordering.
+ *
+ * Scope is the CONTRACT FILE (`*.contract.json`), not every JSON document the
+ * walk reaches: a bundle, a receipt or a proposal that embeds contracts
+ * inherits the field when it is rebuilt from them, and seeding it in place
+ * would rewrite thousands of receipt bytes that no referee reads.
+ */
+/** Is this the top level of a contract document? Recognised by VALUE SHAPE,
+ *  never by file name alone — the same discipline the v16 tombstones use, so a
+ *  JSON Schema's `properties` bag is never mistaken for a contract. */
+export function isContractDocument(v: unknown): v is Record<string, unknown> {
+  if (!isRecord(v)) return false;
+  return (
+    typeof v.id === 'string' &&
+    /^[a-z][a-z0-9-]*\.[a-z][a-z0-9-]*$/.test(v.id) &&
+    typeof v.name === 'string' &&
+    typeof v.version === 'string' &&
+    isRecord(v.semantics) &&
+    isRecord(v.anatomy)
+  );
+}
+
+/** The keys `archetype` may follow, best first. `description` is the intended
+ *  home; the rest are the fallbacks for a document that omits it. */
+const SEED_AFTER = ['description', 'status', 'version', 'name'];
+
+/** Seed `archetype` into a contract document from the name-map. Pure. */
+export function seedArchetype(doc: unknown): MigrationResult {
+  const rewrites: string[] = [];
+  if (!isContractDocument(doc)) return { doc, rewrites };
+  if ('archetype' in doc) return { doc, rewrites };
+  const archetype = archetypeOf({ id: doc.id as string, name: doc.name as string });
+  if (archetype === 'unmapped') return { doc, rewrites };
+  const after = SEED_AFTER.find((k) => k in doc) ?? null;
+  const out: Record<string, unknown> = {};
+  let placed = false;
+  for (const [k, v] of Object.entries(doc)) {
+    out[k] = v;
+    if (k === after) {
+      out.archetype = archetype;
+      placed = true;
+    }
+  }
+  if (!placed) out.archetype = archetype;
+  rewrites.push(`archetype: (absent) → ${archetype} (seeded from the name-map)`);
+  return { doc: out, rewrites };
+}

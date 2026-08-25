@@ -5,6 +5,7 @@
   "version": "2.0.1",
   "status": "draft",
   "description": "Toggles a single on/off value \u2014 settings, terms acceptance, opt-ins. API mirrors industry convention (Astryx CheckboxInput): checked, unchecked, and indeterminate are prop-driven appearance states. v2.0.0 (breaking, DOM shape): the control is a NATIVE input[type=checkbox] inside the wrapping label \u2014 checked/indeterminate are DOM state, not ARIA on a button; the box and glyphs are presentational.",
+  "archetype": "checkbox / radio",
   "semantics": {
     "element": "label"
   },

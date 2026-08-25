@@ -5,6 +5,7 @@
   "version": "1.0.0",
   "status": "draft",
   "description": "Brief non-blocking notification confirming an action. API mirrors industry convention (Astryx Toast): the visual element — positioning, stacking, and auto-dismiss belong to the behavior layer and are a declared boundary.",
+  "archetype": "banner / alert / toast",
   "semantics": {
     "element": "div",
     "roleByProp": {

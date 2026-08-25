@@ -5,6 +5,7 @@
   "version": "0.2.0",
   "status": "draft",
   "description": "PROMOTED from the Phase B composition-tier extraction (round 2, StyleX anatomy). One menu row \u2014 the repeated item of astryx.dropdown-menu. Curation receipts: the extracted anatomy leaned on the internal <Item> layout component (astryx.item); promotion FLATTENS it to the element row Item renders (a deep-internal contract is not part of the exhibit set), keeping the extracted StyleX token bindings verbatim. The extracted `description`/`endContent`/icon channels are deferred to a later round \u2014 this exhibit carries the label row, the composition proof's moving part.",
+  "archetype": "menu / dropdown",
   "semantics": {
     "element": "button",
     "role": "menuitem"

@@ -5,6 +5,7 @@
   "version": "1.0.0",
   "status": "draft",
   "description": "One link in a breadcrumb trail with its leading separator. API mirrors industry convention (Astryx BreadcrumbItem); the first item is authored with hasSeparator off (positional part logic is a documented gap), and aria-current needs conditional attributes — also documented.",
+  "archetype": "breadcrumb",
   "semantics": {
     "element": "span"
   },

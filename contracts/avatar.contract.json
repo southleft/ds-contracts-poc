@@ -5,6 +5,7 @@
   "version": "1.0.0",
   "status": "draft",
   "description": "Represents a person or entity with initials. Non-interactive.",
+  "archetype": "avatar",
   "semantics": {
     "element": "span",
     "role": "img"
