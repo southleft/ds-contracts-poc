@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "shadcn.card",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Card — generated from contract shadcn.card v0.2.0 † (9 code-only facts — see plugin report)",
+    "description": "Card — generated from contract shadcn.card v0.2.0 † (8 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -40,6 +40,64 @@ const COMPONENTS = [
             "paddingTop": "imported/card/root/padding-top/default",
             "itemSpacing": "imported/card/root/row-gap/default"
           },
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.0392156862745098,
+                "g": 0.0392156862745098,
+                "b": 0.0392156862745098,
+                "a": 0.1
+              },
+              "spread": 1
+            },
+            {
+              "x": 0,
+              "y": 1,
+              "radius": 2,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.05
+              }
+            }
+          ],
           "clipsContent": true,
           "children": [
             {
@@ -147,6 +205,64 @@ const COMPONENTS = [
             "paddingTop": "imported/card/root/padding-top/sm",
             "itemSpacing": "imported/card/root/row-gap/sm"
           },
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.0392156862745098,
+                "g": 0.0392156862745098,
+                "b": 0.0392156862745098,
+                "a": 0.1
+              },
+              "spread": 1
+            },
+            {
+              "x": 0,
+              "y": 1,
+              "radius": 2,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.05
+              }
+            }
+          ],
           "clipsContent": true,
           "children": [
             {
@@ -337,17 +453,6 @@ const COMPONENTS = [
           "names": [
             "Size=Sm"
           ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "shadow",
-        "channel": "box-shadow",
-        "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0",
-        "reason": "parsed neither as a single drop shadow nor as an effect stack — inexpressible / foreign shadow grammar",
-        "variants": {
-          "count": 2,
-          "of": 2
         }
       }
     ],
@@ -778,6 +883,18 @@ function applyFrameSpec(node, spec) {
     node.strokeAlign = 'INSIDE';
     // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
     if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
+  }
+  if (spec.effectStack) {
+    // v15: full box-shadow stack — multi-layer + inset as native effects.
+    node.effects = spec.effectStack.map((e) => ({
+      type: e.inner ? 'INNER_SHADOW' : 'DROP_SHADOW',
+      color: { r: e.color.r, g: e.color.g, b: e.color.b, a: e.color.a === undefined ? 1 : e.color.a },
+      offset: { x: e.x, y: e.y },
+      radius: e.radius,
+      spread: e.spread || 0,
+      visible: true,
+      blendMode: 'NORMAL',
+    }));
   }
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;

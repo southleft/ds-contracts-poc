@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "shadcn.input",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Input — generated from contract shadcn.input v0.2.0 † (19 code-only facts — see plugin report)",
+    "description": "Input — generated from contract shadcn.input v0.2.0 † (18 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -284,11 +284,12 @@ const COMPONENTS = [
               "y": 0,
               "radius": 0,
               "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0
-              }
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
             },
             {
               "x": 0,
@@ -381,11 +382,12 @@ const COMPONENTS = [
               "y": 0,
               "radius": 0,
               "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0
-              }
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
             },
             {
               "x": 0,
@@ -642,21 +644,6 @@ const COMPONENTS = [
         "variants": {
           "count": 4,
           "of": 4
-        }
-      },
-      {
-        "part": "root",
-        "kind": "shadow",
-        "channel": "box-shadow",
-        "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0",
-        "reason": "parsed neither as a single drop shadow nor as an effect stack — inexpressible / foreign shadow grammar",
-        "variants": {
-          "count": 2,
-          "of": 4,
-          "names": [
-            "State=Active",
-            "State=Focus Visible"
-          ]
         }
       }
     ],

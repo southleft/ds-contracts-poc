@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "shadcn.button",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Button — generated from contract shadcn.button v0.2.0 † (17 code-only facts — see plugin report)",
+    "description": "Button — generated from contract shadcn.button v0.2.0 † (16 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -3444,7 +3444,64 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/default",
           "stroke": "imported/button/root/border-top-color/default",
-          "effectStack": [],
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
           "children": [
             {
               "type": "text",
@@ -3530,11 +3587,12 @@ const COMPONENTS = [
               "y": 0,
               "radius": 0,
               "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0
-              }
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
             },
             {
               "x": 0,
@@ -3594,7 +3652,64 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/secondary",
           "stroke": "imported/button/root/border-top-color/secondary",
-          "effectStack": [],
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
           "children": [
             {
               "type": "text",
@@ -3641,7 +3756,64 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/ghost",
           "stroke": "imported/button/root/border-top-color/ghost",
-          "effectStack": [],
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
           "children": [
             {
               "type": "text",
@@ -3688,7 +3860,64 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/destructive",
           "stroke": "imported/button/root/border-top-color/destructive",
-          "effectStack": [],
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.9058823529411765,
+                "g": 0,
+                "b": 0.043137254901960784,
+                "a": 0.2
+              },
+              "spread": 3
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
           "children": [
             {
               "type": "text",
@@ -3735,7 +3964,64 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/link",
           "stroke": "imported/button/root/border-top-color/link",
-          "effectStack": [],
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
           "children": [
             {
               "type": "text",
@@ -4378,25 +4664,6 @@ const COMPONENTS = [
         "variants": {
           "count": 72,
           "of": 72
-        }
-      },
-      {
-        "part": "root",
-        "kind": "shadow",
-        "channel": "box-shadow",
-        "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0",
-        "reason": "parsed neither as a single drop shadow nor as an effect stack — inexpressible / foreign shadow grammar",
-        "variants": {
-          "count": 6,
-          "of": 72,
-          "names": [
-            "Variant=Default, Size=Default, State=Focus Visible",
-            "Variant=Outline, Size=Default, State=Focus Visible",
-            "Variant=Secondary, Size=Default, State=Focus Visible",
-            "Variant=Ghost, Size=Default, State=Focus Visible",
-            "Variant=Destructive, Size=Default, State=Focus Visible",
-            "Variant=Link, Size=Default, State=Focus Visible"
-          ]
         }
       }
     ],

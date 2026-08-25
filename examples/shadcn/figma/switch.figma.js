@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "shadcn.switch",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Switch — generated from contract shadcn.switch v0.2.0 † (27 code-only facts — see plugin report)",
+    "description": "Switch — generated from contract shadcn.switch v0.2.0 † (25 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -121,6 +121,62 @@ const COMPONENTS = [
                 "topLeftRadius": "imported/shared/size-9999",
                 "topRightRadius": "imported/shared/size-9999"
               },
+              "effectStack": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0.0392156862745098,
+                    "g": 0.0392156862745098,
+                    "b": 0.0392156862745098
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                }
+              ],
               "fixedHeight": {
                 "px": 16,
                 "varName": "imported/switch/part-0/height/default"
@@ -239,6 +295,62 @@ const COMPONENTS = [
                 "topLeftRadius": "imported/shared/size-9999",
                 "topRightRadius": "imported/shared/size-9999"
               },
+              "effectStack": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0.0392156862745098,
+                    "g": 0.0392156862745098,
+                    "b": 0.0392156862745098
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                }
+              ],
               "fixedHeight": {
                 "px": 16,
                 "varName": "imported/switch/part-0/height/default"
@@ -357,6 +469,62 @@ const COMPONENTS = [
                 "topLeftRadius": "imported/shared/size-9999",
                 "topRightRadius": "imported/shared/size-9999"
               },
+              "effectStack": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0.0392156862745098,
+                    "g": 0.0392156862745098,
+                    "b": 0.0392156862745098
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                }
+              ],
               "fixedHeight": {
                 "px": 12,
                 "varName": "imported/switch/part-0/height/sm"
@@ -475,6 +643,62 @@ const COMPONENTS = [
                 "topLeftRadius": "imported/shared/size-9999",
                 "topRightRadius": "imported/shared/size-9999"
               },
+              "effectStack": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0.0392156862745098,
+                    "g": 0.0392156862745098,
+                    "b": 0.0392156862745098
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                }
+              ],
               "fixedHeight": {
                 "px": 12,
                 "varName": "imported/switch/part-0/height/sm"
@@ -603,6 +827,62 @@ const COMPONENTS = [
                 "topLeftRadius": "imported/shared/size-9999",
                 "topRightRadius": "imported/shared/size-9999"
               },
+              "effectStack": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0.0392156862745098,
+                    "g": 0.0392156862745098,
+                    "b": 0.0392156862745098
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                }
+              ],
               "fixedHeight": {
                 "px": 16,
                 "varName": "imported/switch/part-0/height/default"
@@ -722,6 +1002,62 @@ const COMPONENTS = [
                 "topLeftRadius": "imported/shared/size-9999",
                 "topRightRadius": "imported/shared/size-9999"
               },
+              "effectStack": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0.0392156862745098,
+                    "g": 0.0392156862745098,
+                    "b": 0.0392156862745098
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                }
+              ],
               "fixedHeight": {
                 "px": 12,
                 "varName": "imported/switch/part-0/height/sm"
@@ -797,11 +1133,12 @@ const COMPONENTS = [
               "y": 0,
               "radius": 0,
               "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0
-              }
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
             },
             {
               "x": 0,
@@ -840,6 +1177,62 @@ const COMPONENTS = [
                 "topLeftRadius": "imported/shared/size-9999",
                 "topRightRadius": "imported/shared/size-9999"
               },
+              "effectStack": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0.0392156862745098,
+                    "g": 0.0392156862745098,
+                    "b": 0.0392156862745098
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                }
+              ],
               "fixedHeight": {
                 "px": 16,
                 "varName": "imported/switch/part-0/height/default"
@@ -915,11 +1308,12 @@ const COMPONENTS = [
               "y": 0,
               "radius": 0,
               "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0
-              }
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
             },
             {
               "x": 0,
@@ -958,6 +1352,62 @@ const COMPONENTS = [
                 "topLeftRadius": "imported/shared/size-9999",
                 "topRightRadius": "imported/shared/size-9999"
               },
+              "effectStack": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0.0392156862745098,
+                    "g": 0.0392156862745098,
+                    "b": 0.0392156862745098
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                }
+              ],
               "fixedHeight": {
                 "px": 12,
                 "varName": "imported/switch/part-0/height/sm"
@@ -1068,17 +1518,6 @@ const COMPONENTS = [
         "channel": "transition-timing-function",
         "value": "cubic-bezier(0.4, 0, 0.2, 1)",
         "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
-        "variants": {
-          "count": 8,
-          "of": 8
-        }
-      },
-      {
-        "part": "part-0",
-        "kind": "shadow",
-        "channel": "box-shadow",
-        "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0",
-        "reason": "parsed neither as a single drop shadow nor as an effect stack — inexpressible / foreign shadow grammar",
         "variants": {
           "count": 8,
           "of": 8
@@ -1285,21 +1724,6 @@ const COMPONENTS = [
         "variants": {
           "count": 8,
           "of": 8
-        }
-      },
-      {
-        "part": "root",
-        "kind": "shadow",
-        "channel": "box-shadow",
-        "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0",
-        "reason": "parsed neither as a single drop shadow nor as an effect stack — inexpressible / foreign shadow grammar",
-        "variants": {
-          "count": 2,
-          "of": 8,
-          "names": [
-            "Size=Default, Checked=Unchecked, State=Focus Visible",
-            "Size=Sm, Checked=Unchecked, State=Focus Visible"
-          ]
         }
       }
     ],

@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "astryx.toast",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Toast — generated from contract astryx.toast v0.2.0 † (1 code-only facts — see plugin report)",
+    "description": "Toast — generated from contract astryx.toast v0.2.0 † (3 code-only facts — see plugin report)",
     "isSet": false,
     "boolProps": [],
     "textProps": [],
@@ -40,6 +40,43 @@ const COMPONENTS = [
             "bottomRightRadius": "radius-container"
           },
           "fill": "color-background-surface",
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 2,
+              "radius": 4,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.05
+              }
+            },
+            {
+              "x": 0,
+              "y": 4,
+              "radius": 12,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.1
+              }
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              },
+              "spread": 1
+            }
+          ],
           "lits": {
             "width": 360
           },
@@ -117,8 +154,30 @@ const COMPONENTS = [
         "part": "root",
         "kind": "shadow",
         "channel": "box-shadow",
-        "value": "0 2px 4px light-dark(oklch(0 0 0 / 5%), oklch(0 0 0 / 35%)),",
-        "reason": "parsed neither as a single drop shadow nor as an effect stack — inexpressible / foreign shadow grammar",
+        "value": "light-dark(oklch(0 0 0 / 10%), oklch(0 0 0 / 50%))",
+        "reason": "LIGHT_DARK_LIMIT — the value spells its colour as light-dark(<light>, <dark>); the effect DRAWS the light branch and a Figma effect carries no mode binding, so the DARK branch is NOT carried onto the node (it stays in the token set)",
+        "variants": {
+          "count": 1,
+          "of": 1
+        }
+      },
+      {
+        "part": "root",
+        "kind": "shadow",
+        "channel": "box-shadow",
+        "value": "light-dark(oklch(0 0 0 / 5%), oklch(0 0 0 / 35%))",
+        "reason": "LIGHT_DARK_LIMIT — the value spells its colour as light-dark(<light>, <dark>); the effect DRAWS the light branch and a Figma effect carries no mode binding, so the DARK branch is NOT carried onto the node (it stays in the token set)",
+        "variants": {
+          "count": 1,
+          "of": 1
+        }
+      },
+      {
+        "part": "root",
+        "kind": "shadow",
+        "channel": "box-shadow",
+        "value": "light-dark(transparent, oklch(1 0 0 / 12%))",
+        "reason": "LIGHT_DARK_LIMIT — the value spells its colour as light-dark(<light>, <dark>); the effect DRAWS the light branch and a Figma effect carries no mode binding, so the DARK branch is NOT carried onto the node (it stays in the token set)",
         "variants": {
           "count": 1,
           "of": 1
@@ -724,6 +783,18 @@ function applyFrameSpec(node, spec) {
     node.strokeAlign = 'INSIDE';
     // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
     if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
+  }
+  if (spec.effectStack) {
+    // v15: full box-shadow stack — multi-layer + inset as native effects.
+    node.effects = spec.effectStack.map((e) => ({
+      type: e.inner ? 'INNER_SHADOW' : 'DROP_SHADOW',
+      color: { r: e.color.r, g: e.color.g, b: e.color.b, a: e.color.a === undefined ? 1 : e.color.a },
+      offset: { x: e.x, y: e.y },
+      radius: e.radius,
+      spread: e.spread || 0,
+      visible: true,
+      blendMode: 'NORMAL',
+    }));
   }
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;

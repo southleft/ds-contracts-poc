@@ -6531,7 +6531,7 @@ const COMPONENTS = [
     "contractId": "shadcn.button",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Button — generated from contract shadcn.button v0.2.0 † (17 code-only facts — see plugin report)",
+    "description": "Button — generated from contract shadcn.button v0.2.0 † (16 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -9967,7 +9967,64 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/default",
           "stroke": "imported/button/root/border-top-color/default",
-          "effectStack": [],
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
           "children": [
             {
               "type": "text",
@@ -10053,11 +10110,12 @@ const COMPONENTS = [
               "y": 0,
               "radius": 0,
               "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0
-              }
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
             },
             {
               "x": 0,
@@ -10117,7 +10175,64 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/secondary",
           "stroke": "imported/button/root/border-top-color/secondary",
-          "effectStack": [],
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
           "children": [
             {
               "type": "text",
@@ -10164,7 +10279,64 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/ghost",
           "stroke": "imported/button/root/border-top-color/ghost",
-          "effectStack": [],
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
           "children": [
             {
               "type": "text",
@@ -10211,7 +10383,64 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/destructive",
           "stroke": "imported/button/root/border-top-color/destructive",
-          "effectStack": [],
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.9058823529411765,
+                "g": 0,
+                "b": 0.043137254901960784,
+                "a": 0.2
+              },
+              "spread": 3
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
           "children": [
             {
               "type": "text",
@@ -10258,7 +10487,64 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/link",
           "stroke": "imported/button/root/border-top-color/link",
-          "effectStack": [],
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
           "children": [
             {
               "type": "text",
@@ -10901,25 +11187,6 @@ const COMPONENTS = [
         "variants": {
           "count": 72,
           "of": 72
-        }
-      },
-      {
-        "part": "root",
-        "kind": "shadow",
-        "channel": "box-shadow",
-        "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0",
-        "reason": "parsed neither as a single drop shadow nor as an effect stack — inexpressible / foreign shadow grammar",
-        "variants": {
-          "count": 6,
-          "of": 72,
-          "names": [
-            "Variant=Default, Size=Default, State=Focus Visible",
-            "Variant=Outline, Size=Default, State=Focus Visible",
-            "Variant=Secondary, Size=Default, State=Focus Visible",
-            "Variant=Ghost, Size=Default, State=Focus Visible",
-            "Variant=Destructive, Size=Default, State=Focus Visible",
-            "Variant=Link, Size=Default, State=Focus Visible"
-          ]
         }
       }
     ],
@@ -12428,7 +12695,7 @@ const COMPONENTS = [
     "contractId": "shadcn.card",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Card — generated from contract shadcn.card v0.2.0 † (9 code-only facts — see plugin report)",
+    "description": "Card — generated from contract shadcn.card v0.2.0 † (8 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -12460,6 +12727,64 @@ const COMPONENTS = [
             "paddingTop": "imported/card/root/padding-top/default",
             "itemSpacing": "imported/card/root/row-gap/default"
           },
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.0392156862745098,
+                "g": 0.0392156862745098,
+                "b": 0.0392156862745098,
+                "a": 0.1
+              },
+              "spread": 1
+            },
+            {
+              "x": 0,
+              "y": 1,
+              "radius": 2,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.05
+              }
+            }
+          ],
           "clipsContent": true,
           "children": [
             {
@@ -12567,6 +12892,64 @@ const COMPONENTS = [
             "paddingTop": "imported/card/root/padding-top/sm",
             "itemSpacing": "imported/card/root/row-gap/sm"
           },
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.0392156862745098,
+                "g": 0.0392156862745098,
+                "b": 0.0392156862745098,
+                "a": 0.1
+              },
+              "spread": 1
+            },
+            {
+              "x": 0,
+              "y": 1,
+              "radius": 2,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.05
+              }
+            }
+          ],
           "clipsContent": true,
           "children": [
             {
@@ -12757,17 +13140,6 @@ const COMPONENTS = [
           "names": [
             "Size=Sm"
           ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "shadow",
-        "channel": "box-shadow",
-        "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0",
-        "reason": "parsed neither as a single drop shadow nor as an effect stack — inexpressible / foreign shadow grammar",
-        "variants": {
-          "count": 2,
-          "of": 2
         }
       }
     ],
@@ -13198,6 +13570,18 @@ function applyFrameSpec(node, spec) {
     node.strokeAlign = 'INSIDE';
     // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
     if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
+  }
+  if (spec.effectStack) {
+    // v15: full box-shadow stack — multi-layer + inset as native effects.
+    node.effects = spec.effectStack.map((e) => ({
+      type: e.inner ? 'INNER_SHADOW' : 'DROP_SHADOW',
+      color: { r: e.color.r, g: e.color.g, b: e.color.b, a: e.color.a === undefined ? 1 : e.color.a },
+      offset: { x: e.x, y: e.y },
+      radius: e.radius,
+      spread: e.spread || 0,
+      visible: true,
+      blendMode: 'NORMAL',
+    }));
   }
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
@@ -14256,7 +14640,7 @@ const COMPONENTS = [
     "contractId": "shadcn.checkbox",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Checkbox — generated from contract shadcn.checkbox v0.2.0 † (24 code-only facts — see plugin report)",
+    "description": "Checkbox — generated from contract shadcn.checkbox v0.2.0 † (23 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -14920,11 +15304,12 @@ const COMPONENTS = [
               "y": 0,
               "radius": 0,
               "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0
-              }
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
             },
             {
               "x": 0,
@@ -15012,11 +15397,12 @@ const COMPONENTS = [
               "y": 0,
               "radius": 0,
               "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0
-              }
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
             },
             {
               "x": 0,
@@ -15112,11 +15498,12 @@ const COMPONENTS = [
               "y": 0,
               "radius": 0,
               "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0
-              }
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
             },
             {
               "x": 0,
@@ -15434,22 +15821,6 @@ const COMPONENTS = [
         "variants": {
           "count": 9,
           "of": 9
-        }
-      },
-      {
-        "part": "root",
-        "kind": "shadow",
-        "channel": "box-shadow",
-        "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0",
-        "reason": "parsed neither as a single drop shadow nor as an effect stack — inexpressible / foreign shadow grammar",
-        "variants": {
-          "count": 3,
-          "of": 9,
-          "names": [
-            "Checked=Unchecked, State=Focus Visible",
-            "Checked=Checked, State=Focus Visible",
-            "Checked=Indeterminate, State=Focus Visible"
-          ]
         }
       }
     ],
@@ -17064,7 +17435,7 @@ const COMPONENTS = [
     "contractId": "shadcn.input",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Input — generated from contract shadcn.input v0.2.0 † (19 code-only facts — see plugin report)",
+    "description": "Input — generated from contract shadcn.input v0.2.0 † (18 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -17340,11 +17711,12 @@ const COMPONENTS = [
               "y": 0,
               "radius": 0,
               "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0
-              }
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
             },
             {
               "x": 0,
@@ -17437,11 +17809,12 @@ const COMPONENTS = [
               "y": 0,
               "radius": 0,
               "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0
-              }
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
             },
             {
               "x": 0,
@@ -17698,21 +18071,6 @@ const COMPONENTS = [
         "variants": {
           "count": 4,
           "of": 4
-        }
-      },
-      {
-        "part": "root",
-        "kind": "shadow",
-        "channel": "box-shadow",
-        "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0",
-        "reason": "parsed neither as a single drop shadow nor as an effect stack — inexpressible / foreign shadow grammar",
-        "variants": {
-          "count": 2,
-          "of": 4,
-          "names": [
-            "State=Active",
-            "State=Focus Visible"
-          ]
         }
       }
     ],
@@ -21339,7 +21697,7 @@ const COMPONENTS = [
     "contractId": "shadcn.switch",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Switch — generated from contract shadcn.switch v0.2.0 † (27 code-only facts — see plugin report)",
+    "description": "Switch — generated from contract shadcn.switch v0.2.0 † (25 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -21452,6 +21810,62 @@ const COMPONENTS = [
                 "topLeftRadius": "imported/shared/size-9999",
                 "topRightRadius": "imported/shared/size-9999"
               },
+              "effectStack": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0.0392156862745098,
+                    "g": 0.0392156862745098,
+                    "b": 0.0392156862745098
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                }
+              ],
               "fixedHeight": {
                 "px": 16,
                 "varName": "imported/switch/part-0/height/default"
@@ -21570,6 +21984,62 @@ const COMPONENTS = [
                 "topLeftRadius": "imported/shared/size-9999",
                 "topRightRadius": "imported/shared/size-9999"
               },
+              "effectStack": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0.0392156862745098,
+                    "g": 0.0392156862745098,
+                    "b": 0.0392156862745098
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                }
+              ],
               "fixedHeight": {
                 "px": 16,
                 "varName": "imported/switch/part-0/height/default"
@@ -21688,6 +22158,62 @@ const COMPONENTS = [
                 "topLeftRadius": "imported/shared/size-9999",
                 "topRightRadius": "imported/shared/size-9999"
               },
+              "effectStack": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0.0392156862745098,
+                    "g": 0.0392156862745098,
+                    "b": 0.0392156862745098
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                }
+              ],
               "fixedHeight": {
                 "px": 12,
                 "varName": "imported/switch/part-0/height/sm"
@@ -21806,6 +22332,62 @@ const COMPONENTS = [
                 "topLeftRadius": "imported/shared/size-9999",
                 "topRightRadius": "imported/shared/size-9999"
               },
+              "effectStack": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0.0392156862745098,
+                    "g": 0.0392156862745098,
+                    "b": 0.0392156862745098
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                }
+              ],
               "fixedHeight": {
                 "px": 12,
                 "varName": "imported/switch/part-0/height/sm"
@@ -21934,6 +22516,62 @@ const COMPONENTS = [
                 "topLeftRadius": "imported/shared/size-9999",
                 "topRightRadius": "imported/shared/size-9999"
               },
+              "effectStack": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0.0392156862745098,
+                    "g": 0.0392156862745098,
+                    "b": 0.0392156862745098
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                }
+              ],
               "fixedHeight": {
                 "px": 16,
                 "varName": "imported/switch/part-0/height/default"
@@ -22053,6 +22691,62 @@ const COMPONENTS = [
                 "topLeftRadius": "imported/shared/size-9999",
                 "topRightRadius": "imported/shared/size-9999"
               },
+              "effectStack": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0.0392156862745098,
+                    "g": 0.0392156862745098,
+                    "b": 0.0392156862745098
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                }
+              ],
               "fixedHeight": {
                 "px": 12,
                 "varName": "imported/switch/part-0/height/sm"
@@ -22128,11 +22822,12 @@ const COMPONENTS = [
               "y": 0,
               "radius": 0,
               "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0
-              }
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
             },
             {
               "x": 0,
@@ -22171,6 +22866,62 @@ const COMPONENTS = [
                 "topLeftRadius": "imported/shared/size-9999",
                 "topRightRadius": "imported/shared/size-9999"
               },
+              "effectStack": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0.0392156862745098,
+                    "g": 0.0392156862745098,
+                    "b": 0.0392156862745098
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                }
+              ],
               "fixedHeight": {
                 "px": 16,
                 "varName": "imported/switch/part-0/height/default"
@@ -22246,11 +22997,12 @@ const COMPONENTS = [
               "y": 0,
               "radius": 0,
               "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0
-              }
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
             },
             {
               "x": 0,
@@ -22289,6 +23041,62 @@ const COMPONENTS = [
                 "topLeftRadius": "imported/shared/size-9999",
                 "topRightRadius": "imported/shared/size-9999"
               },
+              "effectStack": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0.0392156862745098,
+                    "g": 0.0392156862745098,
+                    "b": 0.0392156862745098
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                }
+              ],
               "fixedHeight": {
                 "px": 12,
                 "varName": "imported/switch/part-0/height/sm"
@@ -22399,17 +23207,6 @@ const COMPONENTS = [
         "channel": "transition-timing-function",
         "value": "cubic-bezier(0.4, 0, 0.2, 1)",
         "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
-        "variants": {
-          "count": 8,
-          "of": 8
-        }
-      },
-      {
-        "part": "part-0",
-        "kind": "shadow",
-        "channel": "box-shadow",
-        "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0",
-        "reason": "parsed neither as a single drop shadow nor as an effect stack — inexpressible / foreign shadow grammar",
         "variants": {
           "count": 8,
           "of": 8
@@ -22616,21 +23413,6 @@ const COMPONENTS = [
         "variants": {
           "count": 8,
           "of": 8
-        }
-      },
-      {
-        "part": "root",
-        "kind": "shadow",
-        "channel": "box-shadow",
-        "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0",
-        "reason": "parsed neither as a single drop shadow nor as an effect stack — inexpressible / foreign shadow grammar",
-        "variants": {
-          "count": 2,
-          "of": 8,
-          "names": [
-            "Size=Default, Checked=Unchecked, State=Focus Visible",
-            "Size=Sm, Checked=Unchecked, State=Focus Visible"
-          ]
         }
       }
     ],

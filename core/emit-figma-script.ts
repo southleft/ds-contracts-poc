@@ -1515,7 +1515,29 @@ function parseCssColor(v: string): { r: number; g: number; b: number; a?: number
   if (t.toLowerCase() === 'transparent') return { r: 0, g: 0, b: 0, a: 0 };
   const c = cssColorToRgba01(t);
   if (!c) return undefined;
-  return c.a === 1 ? { r: c.r, g: c.g, b: c.b } : { r: c.r, g: c.g, b: c.b, a: c.a };
+  // BYTE-PRESERVING. The shared reader always resolves an alpha (1 when the
+  // value carries none); the reader this replaced emitted the `a` field only
+  // when the SPELLING had one. Keeping that rule means widening the accepted
+  // colour spellings moves no byte of any shadow the old reader could already
+  // parse — measured: without it, `rgba(255, 255, 255, 1)` layers across antd,
+  // carbon, polaris, shadcn and tailwind all rewrote `a: 1` away, which is a
+  // no-op on the canvas and pure churn in the diff.
+  return colorSpellsAlpha(t) || c.a !== 1
+    ? { r: c.r, g: c.g, b: c.b, a: c.a }
+    : { r: c.r, g: c.g, b: c.b };
+}
+
+/** Does the SPELLING carry an explicit alpha component? (#rgba / #rrggbbaa,
+ *  a 4th positional argument, or the modern `/ <alpha>` slash form.) */
+function colorSpellsAlpha(v: string): boolean {
+  const t = v.trim();
+  const fn = /^([a-z-]+)\(([\s\S]*)\)$/i.exec(t);
+  if (fn) {
+    if (fn[2].includes('/')) return true;
+    return fn[2].split(',').length > 3;
+  }
+  const h = t.replace('#', '');
+  return h.length === 4 || h.length === 8;
 }
 
 /** Split one shadow LAYER into top-level tokens (paren-aware), so a colour
