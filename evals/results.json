@@ -1,7 +1,7 @@
 {
-  "passed": 225,
-  "total": 225,
-  "commit": "5cb33798274e9f3c48cace0c8d2914970ff1e187",
+  "passed": 226,
+  "total": 227,
+  "commit": "824675287e3b871648f67c983959c85aa756512b",
   "dirty": false,
   "recordedAt": "2026-08-25",
   "results": [
@@ -861,6 +861,16 @@
       "pass": true
     },
     {
+      "id": "text-indent-off-box-label-not-drawn",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "text-indent-off-box-evidence-refuses-when-inert",
+      "claim": "C2-refusal",
+      "pass": true
+    },
+    {
       "id": "portal-capture-modal",
       "claim": "C5-extraction",
       "pass": true
@@ -983,7 +993,8 @@
     {
       "id": "css-dom-conformance-frontier",
       "claim": "C3-detection",
-      "pass": true
+      "pass": false,
+      "error": "Error: conformance/EXPECTATIONS.md is stale — it does not carry \"| cases | **92** |\". Run npm run conformance:report"
     },
     {
       "id": "capture-scope-independence",

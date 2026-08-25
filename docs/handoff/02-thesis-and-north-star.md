@@ -11,7 +11,7 @@ related: [03-determinism, 04-users-and-journeys, 11-roadmap]
 
 # What we are proving, and where this is going
 
-> **Currency (2026-08-17):** this handoff was verified on 2026-07-21. The live first-party corpus is now **56 component contracts**, 282 DTCG tokens, and 225/225 evals — see the repository README. Numbers below are the July 21 snapshot unless a later note says otherwise.
+> **Currency (2026-08-17):** this handoff was verified on 2026-07-21. The live first-party corpus is now **56 component contracts**, 282 DTCG tokens, and 227/227 evals — see the repository README. Numbers below are the July 21 snapshot unless a later note says otherwise.
 
 ## The thesis (what the PoC exists to prove)
 
