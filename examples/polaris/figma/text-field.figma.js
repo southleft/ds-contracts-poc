@@ -163,8 +163,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "SPACE_BETWEEN",
-                "counter": "MIN",
-                "stretchChildren": true
+                "counter": "BASELINE",
+                "wrap": true
               },
               "bindings": {
                 "minHeight": "imported/shared/size-0",
@@ -465,8 +465,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "SPACE_BETWEEN",
-                "counter": "MIN",
-                "stretchChildren": true
+                "counter": "BASELINE",
+                "wrap": true
               },
               "bindings": {
                 "minHeight": "imported/shared/size-0",
@@ -769,8 +769,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "SPACE_BETWEEN",
-                "counter": "MIN",
-                "stretchChildren": true
+                "counter": "BASELINE",
+                "wrap": true
               },
               "bindings": {
                 "minHeight": "imported/shared/size-0",
@@ -1071,8 +1071,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "SPACE_BETWEEN",
-                "counter": "MIN",
-                "stretchChildren": true
+                "counter": "BASELINE",
+                "wrap": true
               },
               "bindings": {
                 "minHeight": "imported/shared/size-0",
@@ -1418,8 +1418,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "SPACE_BETWEEN",
-                "counter": "MIN",
-                "stretchChildren": true
+                "counter": "BASELINE",
+                "wrap": true
               },
               "bindings": {
                 "minHeight": "imported/shared/size-0",
@@ -1720,8 +1720,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "SPACE_BETWEEN",
-                "counter": "MIN",
-                "stretchChildren": true
+                "counter": "BASELINE",
+                "wrap": true
               },
               "bindings": {
                 "minHeight": "imported/shared/size-0",
@@ -2022,8 +2022,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "SPACE_BETWEEN",
-                "counter": "MIN",
-                "stretchChildren": true
+                "counter": "BASELINE",
+                "wrap": true
               },
               "bindings": {
                 "minHeight": "imported/shared/size-0",
@@ -2324,8 +2324,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "SPACE_BETWEEN",
-                "counter": "MIN",
-                "stretchChildren": true
+                "counter": "BASELINE",
+                "wrap": true
               },
               "bindings": {
                 "minHeight": "imported/shared/size-0",
@@ -5187,6 +5187,7 @@ function applyFrameSpec(node, spec) {
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
+  if (l.wrap && node.layoutMode === 'HORIZONTAL') node.layoutWrap = 'WRAP';
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,

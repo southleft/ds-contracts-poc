@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "fluent.spinner",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Spinner — generated from contract fluent.spinner v0.2.0 † (14 code-only facts — see plugin report)",
+    "description": "Spinner — generated from contract fluent.spinner v0.2.0 † (15 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -111,16 +111,16 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Medium, Appearance=Primary, Label Position=Above",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
-          },
-          "bindings": {
-            "itemSpacing": "imported/spinner/root/column-gap"
           },
           "fixedHeight": {
             "px": 62,
             "varName": "imported/spinner/root/height/medium/above"
+          },
+          "bindings": {
+            "itemSpacing": "imported/spinner/root/row-gap"
           },
           "fixedWidth": {
             "px": 60.3438,
@@ -128,6 +128,21 @@ const COMPONENTS = [
           },
           "clipsContent": true,
           "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Loading",
+              "fontSize": 16,
+              "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/spinner/label/font-size/medium",
+              "fontWeightVar": "imported/spinner/label/font-weight/medium",
+              "lineHeightVar": "imported/spinner/label/line-height/medium",
+              "textFill": "imported/spinner/label/color/primary",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              }
+            },
             {
               "type": "frame",
               "name": "spinner",
@@ -169,21 +184,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Loading",
-              "fontSize": 16,
-              "fontStyle": "Semi Bold",
-              "fontSizeVar": "imported/spinner/label/font-size/medium",
-              "fontWeightVar": "imported/spinner/label/font-weight/medium",
-              "lineHeightVar": "imported/spinner/label/line-height/medium",
-              "textFill": "imported/spinner/label/color/primary",
-              "lineHeight": {
-                "value": 22,
-                "unit": "PIXELS"
-              }
             }
           ]
         }
@@ -196,16 +196,16 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Medium, Appearance=Primary, Label Position=Below",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
-          },
-          "bindings": {
-            "itemSpacing": "imported/spinner/root/column-gap"
           },
           "fixedHeight": {
             "px": 62,
             "varName": "imported/spinner/root/height/medium/below"
+          },
+          "bindings": {
+            "itemSpacing": "imported/spinner/root/row-gap"
           },
           "fixedWidth": {
             "px": 60.3438,
@@ -299,6 +299,21 @@ const COMPONENTS = [
           "clipsContent": true,
           "children": [
             {
+              "type": "text",
+              "name": "label",
+              "characters": "Loading",
+              "fontSize": 16,
+              "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/spinner/label/font-size/medium",
+              "fontWeightVar": "imported/spinner/label/font-weight/medium",
+              "lineHeightVar": "imported/spinner/label/line-height/medium",
+              "textFill": "imported/spinner/label/color/primary",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              }
+            },
+            {
               "type": "frame",
               "name": "spinner",
               "layout": {
@@ -339,21 +354,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Loading",
-              "fontSize": 16,
-              "fontStyle": "Semi Bold",
-              "fontSizeVar": "imported/spinner/label/font-size/medium",
-              "fontWeightVar": "imported/spinner/label/font-weight/medium",
-              "lineHeightVar": "imported/spinner/label/line-height/medium",
-              "textFill": "imported/spinner/label/color/primary",
-              "lineHeight": {
-                "value": 22,
-                "unit": "PIXELS"
-              }
             }
           ]
         }
@@ -451,16 +451,16 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Medium, Appearance=Inverted, Label Position=Above",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
-          },
-          "bindings": {
-            "itemSpacing": "imported/spinner/root/column-gap"
           },
           "fixedHeight": {
             "px": 62,
             "varName": "imported/spinner/root/height/medium/above"
+          },
+          "bindings": {
+            "itemSpacing": "imported/spinner/root/row-gap"
           },
           "fixedWidth": {
             "px": 60.3438,
@@ -468,6 +468,21 @@ const COMPONENTS = [
           },
           "clipsContent": true,
           "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Loading",
+              "fontSize": 16,
+              "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/spinner/label/font-size/medium",
+              "fontWeightVar": "imported/spinner/label/font-weight/medium",
+              "lineHeightVar": "imported/spinner/label/line-height/medium",
+              "textFill": "imported/spinner/label/color/inverted",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              }
+            },
             {
               "type": "frame",
               "name": "spinner",
@@ -509,21 +524,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Loading",
-              "fontSize": 16,
-              "fontStyle": "Semi Bold",
-              "fontSizeVar": "imported/spinner/label/font-size/medium",
-              "fontWeightVar": "imported/spinner/label/font-weight/medium",
-              "lineHeightVar": "imported/spinner/label/line-height/medium",
-              "textFill": "imported/spinner/label/color/inverted",
-              "lineHeight": {
-                "value": 22,
-                "unit": "PIXELS"
-              }
             }
           ]
         }
@@ -536,16 +536,16 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Medium, Appearance=Inverted, Label Position=Below",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
-          },
-          "bindings": {
-            "itemSpacing": "imported/spinner/root/column-gap"
           },
           "fixedHeight": {
             "px": 62,
             "varName": "imported/spinner/root/height/medium/below"
+          },
+          "bindings": {
+            "itemSpacing": "imported/spinner/root/row-gap"
           },
           "fixedWidth": {
             "px": 60.3438,
@@ -639,6 +639,21 @@ const COMPONENTS = [
           "clipsContent": true,
           "children": [
             {
+              "type": "text",
+              "name": "label",
+              "characters": "Loading",
+              "fontSize": 16,
+              "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/spinner/label/font-size/medium",
+              "fontWeightVar": "imported/spinner/label/font-weight/medium",
+              "lineHeightVar": "imported/spinner/label/line-height/medium",
+              "textFill": "imported/spinner/label/color/inverted",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              }
+            },
+            {
               "type": "frame",
               "name": "spinner",
               "layout": {
@@ -679,21 +694,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Loading",
-              "fontSize": 16,
-              "fontStyle": "Semi Bold",
-              "fontSizeVar": "imported/spinner/label/font-size/medium",
-              "fontWeightVar": "imported/spinner/label/font-weight/medium",
-              "lineHeightVar": "imported/spinner/label/line-height/medium",
-              "textFill": "imported/spinner/label/color/inverted",
-              "lineHeight": {
-                "value": 22,
-                "unit": "PIXELS"
-              }
             }
           ]
         }
@@ -791,16 +791,16 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Extra Tiny, Appearance=Primary, Label Position=Above",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
-          },
-          "bindings": {
-            "itemSpacing": "imported/spinner/root/column-gap"
           },
           "fixedHeight": {
             "px": 44,
             "varName": "imported/spinner/root/height/extra-tiny/above"
+          },
+          "bindings": {
+            "itemSpacing": "imported/spinner/root/row-gap"
           },
           "fixedWidth": {
             "px": 51.3125,
@@ -808,6 +808,21 @@ const COMPONENTS = [
           },
           "clipsContent": true,
           "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Loading",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "fontSizeVar": "imported/spinner/label/font-size/extra-tiny",
+              "fontWeightVar": "imported/spinner/label/font-weight/extra-tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-tiny",
+              "textFill": "imported/spinner/label/color/primary",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              }
+            },
             {
               "type": "frame",
               "name": "spinner",
@@ -849,21 +864,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Loading",
-              "fontSize": 14,
-              "fontStyle": "Regular",
-              "fontSizeVar": "imported/spinner/label/font-size/extra-tiny",
-              "fontWeightVar": "imported/spinner/label/font-weight/extra-tiny",
-              "lineHeightVar": "imported/spinner/label/line-height/extra-tiny",
-              "textFill": "imported/spinner/label/color/primary",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              }
             }
           ]
         }
@@ -876,16 +876,16 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Extra Tiny, Appearance=Primary, Label Position=Below",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
-          },
-          "bindings": {
-            "itemSpacing": "imported/spinner/root/column-gap"
           },
           "fixedHeight": {
             "px": 44,
             "varName": "imported/spinner/root/height/extra-tiny/below"
+          },
+          "bindings": {
+            "itemSpacing": "imported/spinner/root/row-gap"
           },
           "fixedWidth": {
             "px": 51.3125,
@@ -979,6 +979,21 @@ const COMPONENTS = [
           "clipsContent": true,
           "children": [
             {
+              "type": "text",
+              "name": "label",
+              "characters": "Loading",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "fontSizeVar": "imported/spinner/label/font-size/extra-tiny",
+              "fontWeightVar": "imported/spinner/label/font-weight/extra-tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-tiny",
+              "textFill": "imported/spinner/label/color/primary",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              }
+            },
+            {
               "type": "frame",
               "name": "spinner",
               "layout": {
@@ -1019,21 +1034,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Loading",
-              "fontSize": 14,
-              "fontStyle": "Regular",
-              "fontSizeVar": "imported/spinner/label/font-size/extra-tiny",
-              "fontWeightVar": "imported/spinner/label/font-weight/extra-tiny",
-              "lineHeightVar": "imported/spinner/label/line-height/extra-tiny",
-              "textFill": "imported/spinner/label/color/primary",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              }
             }
           ]
         }
@@ -1131,16 +1131,16 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Extra Tiny, Appearance=Inverted, Label Position=Above",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
-          },
-          "bindings": {
-            "itemSpacing": "imported/spinner/root/column-gap"
           },
           "fixedHeight": {
             "px": 44,
             "varName": "imported/spinner/root/height/extra-tiny/above"
+          },
+          "bindings": {
+            "itemSpacing": "imported/spinner/root/row-gap"
           },
           "fixedWidth": {
             "px": 51.3125,
@@ -1148,6 +1148,21 @@ const COMPONENTS = [
           },
           "clipsContent": true,
           "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Loading",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "fontSizeVar": "imported/spinner/label/font-size/extra-tiny",
+              "fontWeightVar": "imported/spinner/label/font-weight/extra-tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-tiny",
+              "textFill": "imported/spinner/label/color/inverted",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              }
+            },
             {
               "type": "frame",
               "name": "spinner",
@@ -1189,21 +1204,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Loading",
-              "fontSize": 14,
-              "fontStyle": "Regular",
-              "fontSizeVar": "imported/spinner/label/font-size/extra-tiny",
-              "fontWeightVar": "imported/spinner/label/font-weight/extra-tiny",
-              "lineHeightVar": "imported/spinner/label/line-height/extra-tiny",
-              "textFill": "imported/spinner/label/color/inverted",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              }
             }
           ]
         }
@@ -1216,16 +1216,16 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Extra Tiny, Appearance=Inverted, Label Position=Below",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
-          },
-          "bindings": {
-            "itemSpacing": "imported/spinner/root/column-gap"
           },
           "fixedHeight": {
             "px": 44,
             "varName": "imported/spinner/root/height/extra-tiny/below"
+          },
+          "bindings": {
+            "itemSpacing": "imported/spinner/root/row-gap"
           },
           "fixedWidth": {
             "px": 51.3125,
@@ -1319,6 +1319,21 @@ const COMPONENTS = [
           "clipsContent": true,
           "children": [
             {
+              "type": "text",
+              "name": "label",
+              "characters": "Loading",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "fontSizeVar": "imported/spinner/label/font-size/extra-tiny",
+              "fontWeightVar": "imported/spinner/label/font-weight/extra-tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-tiny",
+              "textFill": "imported/spinner/label/color/inverted",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              }
+            },
+            {
               "type": "frame",
               "name": "spinner",
               "layout": {
@@ -1359,21 +1374,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Loading",
-              "fontSize": 14,
-              "fontStyle": "Regular",
-              "fontSizeVar": "imported/spinner/label/font-size/extra-tiny",
-              "fontWeightVar": "imported/spinner/label/font-weight/extra-tiny",
-              "lineHeightVar": "imported/spinner/label/line-height/extra-tiny",
-              "textFill": "imported/spinner/label/color/inverted",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              }
             }
           ]
         }
@@ -1471,16 +1471,16 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Tiny, Appearance=Primary, Label Position=Above",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
-          },
-          "bindings": {
-            "itemSpacing": "imported/spinner/root/column-gap"
           },
           "fixedHeight": {
             "px": 48,
             "varName": "imported/spinner/root/height/tiny/above"
+          },
+          "bindings": {
+            "itemSpacing": "imported/spinner/root/row-gap"
           },
           "fixedWidth": {
             "px": 51.3125,
@@ -1488,6 +1488,21 @@ const COMPONENTS = [
           },
           "clipsContent": true,
           "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Loading",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "fontSizeVar": "imported/spinner/label/font-size/tiny",
+              "fontWeightVar": "imported/spinner/label/font-weight/tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/tiny",
+              "textFill": "imported/spinner/label/color/primary",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              }
+            },
             {
               "type": "frame",
               "name": "spinner",
@@ -1529,21 +1544,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Loading",
-              "fontSize": 14,
-              "fontStyle": "Regular",
-              "fontSizeVar": "imported/spinner/label/font-size/tiny",
-              "fontWeightVar": "imported/spinner/label/font-weight/tiny",
-              "lineHeightVar": "imported/spinner/label/line-height/tiny",
-              "textFill": "imported/spinner/label/color/primary",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              }
             }
           ]
         }
@@ -1556,16 +1556,16 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Tiny, Appearance=Primary, Label Position=Below",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
-          },
-          "bindings": {
-            "itemSpacing": "imported/spinner/root/column-gap"
           },
           "fixedHeight": {
             "px": 48,
             "varName": "imported/spinner/root/height/tiny/below"
+          },
+          "bindings": {
+            "itemSpacing": "imported/spinner/root/row-gap"
           },
           "fixedWidth": {
             "px": 51.3125,
@@ -1659,6 +1659,21 @@ const COMPONENTS = [
           "clipsContent": true,
           "children": [
             {
+              "type": "text",
+              "name": "label",
+              "characters": "Loading",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "fontSizeVar": "imported/spinner/label/font-size/tiny",
+              "fontWeightVar": "imported/spinner/label/font-weight/tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/tiny",
+              "textFill": "imported/spinner/label/color/primary",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              }
+            },
+            {
               "type": "frame",
               "name": "spinner",
               "layout": {
@@ -1699,21 +1714,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Loading",
-              "fontSize": 14,
-              "fontStyle": "Regular",
-              "fontSizeVar": "imported/spinner/label/font-size/tiny",
-              "fontWeightVar": "imported/spinner/label/font-weight/tiny",
-              "lineHeightVar": "imported/spinner/label/line-height/tiny",
-              "textFill": "imported/spinner/label/color/primary",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              }
             }
           ]
         }
@@ -1811,16 +1811,16 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Tiny, Appearance=Inverted, Label Position=Above",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
-          },
-          "bindings": {
-            "itemSpacing": "imported/spinner/root/column-gap"
           },
           "fixedHeight": {
             "px": 48,
             "varName": "imported/spinner/root/height/tiny/above"
+          },
+          "bindings": {
+            "itemSpacing": "imported/spinner/root/row-gap"
           },
           "fixedWidth": {
             "px": 51.3125,
@@ -1828,6 +1828,21 @@ const COMPONENTS = [
           },
           "clipsContent": true,
           "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Loading",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "fontSizeVar": "imported/spinner/label/font-size/tiny",
+              "fontWeightVar": "imported/spinner/label/font-weight/tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/tiny",
+              "textFill": "imported/spinner/label/color/inverted",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              }
+            },
             {
               "type": "frame",
               "name": "spinner",
@@ -1869,21 +1884,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Loading",
-              "fontSize": 14,
-              "fontStyle": "Regular",
-              "fontSizeVar": "imported/spinner/label/font-size/tiny",
-              "fontWeightVar": "imported/spinner/label/font-weight/tiny",
-              "lineHeightVar": "imported/spinner/label/line-height/tiny",
-              "textFill": "imported/spinner/label/color/inverted",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              }
             }
           ]
         }
@@ -1896,16 +1896,16 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Tiny, Appearance=Inverted, Label Position=Below",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
-          },
-          "bindings": {
-            "itemSpacing": "imported/spinner/root/column-gap"
           },
           "fixedHeight": {
             "px": 48,
             "varName": "imported/spinner/root/height/tiny/below"
+          },
+          "bindings": {
+            "itemSpacing": "imported/spinner/root/row-gap"
           },
           "fixedWidth": {
             "px": 51.3125,
@@ -1999,6 +1999,21 @@ const COMPONENTS = [
           "clipsContent": true,
           "children": [
             {
+              "type": "text",
+              "name": "label",
+              "characters": "Loading",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "fontSizeVar": "imported/spinner/label/font-size/tiny",
+              "fontWeightVar": "imported/spinner/label/font-weight/tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/tiny",
+              "textFill": "imported/spinner/label/color/inverted",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              }
+            },
+            {
               "type": "frame",
               "name": "spinner",
               "layout": {
@@ -2039,21 +2054,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Loading",
-              "fontSize": 14,
-              "fontStyle": "Regular",
-              "fontSizeVar": "imported/spinner/label/font-size/tiny",
-              "fontWeightVar": "imported/spinner/label/font-weight/tiny",
-              "lineHeightVar": "imported/spinner/label/line-height/tiny",
-              "textFill": "imported/spinner/label/color/inverted",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              }
             }
           ]
         }
@@ -2151,16 +2151,16 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Extra Small, Appearance=Primary, Label Position=Above",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
-          },
-          "bindings": {
-            "itemSpacing": "imported/spinner/root/column-gap"
           },
           "fixedHeight": {
             "px": 52,
             "varName": "imported/spinner/root/height/extra-small/above"
+          },
+          "bindings": {
+            "itemSpacing": "imported/spinner/root/row-gap"
           },
           "fixedWidth": {
             "px": 51.3125,
@@ -2168,6 +2168,21 @@ const COMPONENTS = [
           },
           "clipsContent": true,
           "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Loading",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "fontSizeVar": "imported/spinner/label/font-size/extra-small",
+              "fontWeightVar": "imported/spinner/label/font-weight/extra-small",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-small",
+              "textFill": "imported/spinner/label/color/primary",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              }
+            },
             {
               "type": "frame",
               "name": "spinner",
@@ -2209,21 +2224,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Loading",
-              "fontSize": 14,
-              "fontStyle": "Regular",
-              "fontSizeVar": "imported/spinner/label/font-size/extra-small",
-              "fontWeightVar": "imported/spinner/label/font-weight/extra-small",
-              "lineHeightVar": "imported/spinner/label/line-height/extra-small",
-              "textFill": "imported/spinner/label/color/primary",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              }
             }
           ]
         }
@@ -2236,16 +2236,16 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Extra Small, Appearance=Primary, Label Position=Below",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
-          },
-          "bindings": {
-            "itemSpacing": "imported/spinner/root/column-gap"
           },
           "fixedHeight": {
             "px": 52,
             "varName": "imported/spinner/root/height/extra-small/below"
+          },
+          "bindings": {
+            "itemSpacing": "imported/spinner/root/row-gap"
           },
           "fixedWidth": {
             "px": 51.3125,
@@ -2339,6 +2339,21 @@ const COMPONENTS = [
           "clipsContent": true,
           "children": [
             {
+              "type": "text",
+              "name": "label",
+              "characters": "Loading",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "fontSizeVar": "imported/spinner/label/font-size/extra-small",
+              "fontWeightVar": "imported/spinner/label/font-weight/extra-small",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-small",
+              "textFill": "imported/spinner/label/color/primary",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              }
+            },
+            {
               "type": "frame",
               "name": "spinner",
               "layout": {
@@ -2379,21 +2394,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Loading",
-              "fontSize": 14,
-              "fontStyle": "Regular",
-              "fontSizeVar": "imported/spinner/label/font-size/extra-small",
-              "fontWeightVar": "imported/spinner/label/font-weight/extra-small",
-              "lineHeightVar": "imported/spinner/label/line-height/extra-small",
-              "textFill": "imported/spinner/label/color/primary",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              }
             }
           ]
         }
@@ -2491,16 +2491,16 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Extra Small, Appearance=Inverted, Label Position=Above",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
-          },
-          "bindings": {
-            "itemSpacing": "imported/spinner/root/column-gap"
           },
           "fixedHeight": {
             "px": 52,
             "varName": "imported/spinner/root/height/extra-small/above"
+          },
+          "bindings": {
+            "itemSpacing": "imported/spinner/root/row-gap"
           },
           "fixedWidth": {
             "px": 51.3125,
@@ -2508,6 +2508,21 @@ const COMPONENTS = [
           },
           "clipsContent": true,
           "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Loading",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "fontSizeVar": "imported/spinner/label/font-size/extra-small",
+              "fontWeightVar": "imported/spinner/label/font-weight/extra-small",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-small",
+              "textFill": "imported/spinner/label/color/inverted",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              }
+            },
             {
               "type": "frame",
               "name": "spinner",
@@ -2549,21 +2564,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Loading",
-              "fontSize": 14,
-              "fontStyle": "Regular",
-              "fontSizeVar": "imported/spinner/label/font-size/extra-small",
-              "fontWeightVar": "imported/spinner/label/font-weight/extra-small",
-              "lineHeightVar": "imported/spinner/label/line-height/extra-small",
-              "textFill": "imported/spinner/label/color/inverted",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              }
             }
           ]
         }
@@ -2576,16 +2576,16 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Extra Small, Appearance=Inverted, Label Position=Below",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
-          },
-          "bindings": {
-            "itemSpacing": "imported/spinner/root/column-gap"
           },
           "fixedHeight": {
             "px": 52,
             "varName": "imported/spinner/root/height/extra-small/below"
+          },
+          "bindings": {
+            "itemSpacing": "imported/spinner/root/row-gap"
           },
           "fixedWidth": {
             "px": 51.3125,
@@ -2679,6 +2679,21 @@ const COMPONENTS = [
           "clipsContent": true,
           "children": [
             {
+              "type": "text",
+              "name": "label",
+              "characters": "Loading",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "fontSizeVar": "imported/spinner/label/font-size/extra-small",
+              "fontWeightVar": "imported/spinner/label/font-weight/extra-small",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-small",
+              "textFill": "imported/spinner/label/color/inverted",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              }
+            },
+            {
               "type": "frame",
               "name": "spinner",
               "layout": {
@@ -2719,21 +2734,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Loading",
-              "fontSize": 14,
-              "fontStyle": "Regular",
-              "fontSizeVar": "imported/spinner/label/font-size/extra-small",
-              "fontWeightVar": "imported/spinner/label/font-weight/extra-small",
-              "lineHeightVar": "imported/spinner/label/line-height/extra-small",
-              "textFill": "imported/spinner/label/color/inverted",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              }
             }
           ]
         }
@@ -2831,16 +2831,16 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Small, Appearance=Primary, Label Position=Above",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
-          },
-          "bindings": {
-            "itemSpacing": "imported/spinner/root/column-gap"
           },
           "fixedHeight": {
             "px": 56,
             "varName": "imported/spinner/root/height/small/above"
+          },
+          "bindings": {
+            "itemSpacing": "imported/spinner/root/row-gap"
           },
           "fixedWidth": {
             "px": 51.3125,
@@ -2848,6 +2848,21 @@ const COMPONENTS = [
           },
           "clipsContent": true,
           "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Loading",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "fontSizeVar": "imported/spinner/label/font-size/small",
+              "fontWeightVar": "imported/spinner/label/font-weight/small",
+              "lineHeightVar": "imported/spinner/label/line-height/small",
+              "textFill": "imported/spinner/label/color/primary",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              }
+            },
             {
               "type": "frame",
               "name": "spinner",
@@ -2889,21 +2904,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Loading",
-              "fontSize": 14,
-              "fontStyle": "Regular",
-              "fontSizeVar": "imported/spinner/label/font-size/small",
-              "fontWeightVar": "imported/spinner/label/font-weight/small",
-              "lineHeightVar": "imported/spinner/label/line-height/small",
-              "textFill": "imported/spinner/label/color/primary",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              }
             }
           ]
         }
@@ -2916,16 +2916,16 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Small, Appearance=Primary, Label Position=Below",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
-          },
-          "bindings": {
-            "itemSpacing": "imported/spinner/root/column-gap"
           },
           "fixedHeight": {
             "px": 56,
             "varName": "imported/spinner/root/height/small/below"
+          },
+          "bindings": {
+            "itemSpacing": "imported/spinner/root/row-gap"
           },
           "fixedWidth": {
             "px": 51.3125,
@@ -3019,6 +3019,21 @@ const COMPONENTS = [
           "clipsContent": true,
           "children": [
             {
+              "type": "text",
+              "name": "label",
+              "characters": "Loading",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "fontSizeVar": "imported/spinner/label/font-size/small",
+              "fontWeightVar": "imported/spinner/label/font-weight/small",
+              "lineHeightVar": "imported/spinner/label/line-height/small",
+              "textFill": "imported/spinner/label/color/primary",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              }
+            },
+            {
               "type": "frame",
               "name": "spinner",
               "layout": {
@@ -3059,21 +3074,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Loading",
-              "fontSize": 14,
-              "fontStyle": "Regular",
-              "fontSizeVar": "imported/spinner/label/font-size/small",
-              "fontWeightVar": "imported/spinner/label/font-weight/small",
-              "lineHeightVar": "imported/spinner/label/line-height/small",
-              "textFill": "imported/spinner/label/color/primary",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              }
             }
           ]
         }
@@ -3171,16 +3171,16 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Small, Appearance=Inverted, Label Position=Above",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
-          },
-          "bindings": {
-            "itemSpacing": "imported/spinner/root/column-gap"
           },
           "fixedHeight": {
             "px": 56,
             "varName": "imported/spinner/root/height/small/above"
+          },
+          "bindings": {
+            "itemSpacing": "imported/spinner/root/row-gap"
           },
           "fixedWidth": {
             "px": 51.3125,
@@ -3188,6 +3188,21 @@ const COMPONENTS = [
           },
           "clipsContent": true,
           "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Loading",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "fontSizeVar": "imported/spinner/label/font-size/small",
+              "fontWeightVar": "imported/spinner/label/font-weight/small",
+              "lineHeightVar": "imported/spinner/label/line-height/small",
+              "textFill": "imported/spinner/label/color/inverted",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              }
+            },
             {
               "type": "frame",
               "name": "spinner",
@@ -3229,21 +3244,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Loading",
-              "fontSize": 14,
-              "fontStyle": "Regular",
-              "fontSizeVar": "imported/spinner/label/font-size/small",
-              "fontWeightVar": "imported/spinner/label/font-weight/small",
-              "lineHeightVar": "imported/spinner/label/line-height/small",
-              "textFill": "imported/spinner/label/color/inverted",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              }
             }
           ]
         }
@@ -3256,16 +3256,16 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Small, Appearance=Inverted, Label Position=Below",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
-          },
-          "bindings": {
-            "itemSpacing": "imported/spinner/root/column-gap"
           },
           "fixedHeight": {
             "px": 56,
             "varName": "imported/spinner/root/height/small/below"
+          },
+          "bindings": {
+            "itemSpacing": "imported/spinner/root/row-gap"
           },
           "fixedWidth": {
             "px": 51.3125,
@@ -3359,6 +3359,21 @@ const COMPONENTS = [
           "clipsContent": true,
           "children": [
             {
+              "type": "text",
+              "name": "label",
+              "characters": "Loading",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "fontSizeVar": "imported/spinner/label/font-size/small",
+              "fontWeightVar": "imported/spinner/label/font-weight/small",
+              "lineHeightVar": "imported/spinner/label/line-height/small",
+              "textFill": "imported/spinner/label/color/inverted",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              }
+            },
+            {
               "type": "frame",
               "name": "spinner",
               "layout": {
@@ -3399,21 +3414,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Loading",
-              "fontSize": 14,
-              "fontStyle": "Regular",
-              "fontSizeVar": "imported/spinner/label/font-size/small",
-              "fontWeightVar": "imported/spinner/label/font-weight/small",
-              "lineHeightVar": "imported/spinner/label/line-height/small",
-              "textFill": "imported/spinner/label/color/inverted",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              }
             }
           ]
         }
@@ -3511,16 +3511,16 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Large, Appearance=Primary, Label Position=Above",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
-          },
-          "bindings": {
-            "itemSpacing": "imported/spinner/root/column-gap"
           },
           "fixedHeight": {
             "px": 66,
             "varName": "imported/spinner/root/height/large/above"
+          },
+          "bindings": {
+            "itemSpacing": "imported/spinner/root/row-gap"
           },
           "fixedWidth": {
             "px": 60.3438,
@@ -3528,6 +3528,21 @@ const COMPONENTS = [
           },
           "clipsContent": true,
           "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Loading",
+              "fontSize": 16,
+              "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/spinner/label/font-size/large",
+              "fontWeightVar": "imported/spinner/label/font-weight/large",
+              "lineHeightVar": "imported/spinner/label/line-height/large",
+              "textFill": "imported/spinner/label/color/primary",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              }
+            },
             {
               "type": "frame",
               "name": "spinner",
@@ -3569,21 +3584,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Loading",
-              "fontSize": 16,
-              "fontStyle": "Semi Bold",
-              "fontSizeVar": "imported/spinner/label/font-size/large",
-              "fontWeightVar": "imported/spinner/label/font-weight/large",
-              "lineHeightVar": "imported/spinner/label/line-height/large",
-              "textFill": "imported/spinner/label/color/primary",
-              "lineHeight": {
-                "value": 22,
-                "unit": "PIXELS"
-              }
             }
           ]
         }
@@ -3596,16 +3596,16 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Large, Appearance=Primary, Label Position=Below",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
-          },
-          "bindings": {
-            "itemSpacing": "imported/spinner/root/column-gap"
           },
           "fixedHeight": {
             "px": 66,
             "varName": "imported/spinner/root/height/large/below"
+          },
+          "bindings": {
+            "itemSpacing": "imported/spinner/root/row-gap"
           },
           "fixedWidth": {
             "px": 60.3438,
@@ -3699,6 +3699,21 @@ const COMPONENTS = [
           "clipsContent": true,
           "children": [
             {
+              "type": "text",
+              "name": "label",
+              "characters": "Loading",
+              "fontSize": 16,
+              "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/spinner/label/font-size/large",
+              "fontWeightVar": "imported/spinner/label/font-weight/large",
+              "lineHeightVar": "imported/spinner/label/line-height/large",
+              "textFill": "imported/spinner/label/color/primary",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              }
+            },
+            {
               "type": "frame",
               "name": "spinner",
               "layout": {
@@ -3739,21 +3754,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Loading",
-              "fontSize": 16,
-              "fontStyle": "Semi Bold",
-              "fontSizeVar": "imported/spinner/label/font-size/large",
-              "fontWeightVar": "imported/spinner/label/font-weight/large",
-              "lineHeightVar": "imported/spinner/label/line-height/large",
-              "textFill": "imported/spinner/label/color/primary",
-              "lineHeight": {
-                "value": 22,
-                "unit": "PIXELS"
-              }
             }
           ]
         }
@@ -3851,16 +3851,16 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Large, Appearance=Inverted, Label Position=Above",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
-          },
-          "bindings": {
-            "itemSpacing": "imported/spinner/root/column-gap"
           },
           "fixedHeight": {
             "px": 66,
             "varName": "imported/spinner/root/height/large/above"
+          },
+          "bindings": {
+            "itemSpacing": "imported/spinner/root/row-gap"
           },
           "fixedWidth": {
             "px": 60.3438,
@@ -3868,6 +3868,21 @@ const COMPONENTS = [
           },
           "clipsContent": true,
           "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Loading",
+              "fontSize": 16,
+              "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/spinner/label/font-size/large",
+              "fontWeightVar": "imported/spinner/label/font-weight/large",
+              "lineHeightVar": "imported/spinner/label/line-height/large",
+              "textFill": "imported/spinner/label/color/inverted",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              }
+            },
             {
               "type": "frame",
               "name": "spinner",
@@ -3909,21 +3924,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Loading",
-              "fontSize": 16,
-              "fontStyle": "Semi Bold",
-              "fontSizeVar": "imported/spinner/label/font-size/large",
-              "fontWeightVar": "imported/spinner/label/font-weight/large",
-              "lineHeightVar": "imported/spinner/label/line-height/large",
-              "textFill": "imported/spinner/label/color/inverted",
-              "lineHeight": {
-                "value": 22,
-                "unit": "PIXELS"
-              }
             }
           ]
         }
@@ -3936,16 +3936,16 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Large, Appearance=Inverted, Label Position=Below",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
-          },
-          "bindings": {
-            "itemSpacing": "imported/spinner/root/column-gap"
           },
           "fixedHeight": {
             "px": 66,
             "varName": "imported/spinner/root/height/large/below"
+          },
+          "bindings": {
+            "itemSpacing": "imported/spinner/root/row-gap"
           },
           "fixedWidth": {
             "px": 60.3438,
@@ -4039,6 +4039,21 @@ const COMPONENTS = [
           "clipsContent": true,
           "children": [
             {
+              "type": "text",
+              "name": "label",
+              "characters": "Loading",
+              "fontSize": 16,
+              "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/spinner/label/font-size/large",
+              "fontWeightVar": "imported/spinner/label/font-weight/large",
+              "lineHeightVar": "imported/spinner/label/line-height/large",
+              "textFill": "imported/spinner/label/color/inverted",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              }
+            },
+            {
               "type": "frame",
               "name": "spinner",
               "layout": {
@@ -4079,21 +4094,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Loading",
-              "fontSize": 16,
-              "fontStyle": "Semi Bold",
-              "fontSizeVar": "imported/spinner/label/font-size/large",
-              "fontWeightVar": "imported/spinner/label/font-weight/large",
-              "lineHeightVar": "imported/spinner/label/line-height/large",
-              "textFill": "imported/spinner/label/color/inverted",
-              "lineHeight": {
-                "value": 22,
-                "unit": "PIXELS"
-              }
             }
           ]
         }
@@ -4191,16 +4191,16 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Extra Large, Appearance=Primary, Label Position=Above",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
-          },
-          "bindings": {
-            "itemSpacing": "imported/spinner/root/column-gap"
           },
           "fixedHeight": {
             "px": 70,
             "varName": "imported/spinner/root/height/extra-large/above"
+          },
+          "bindings": {
+            "itemSpacing": "imported/spinner/root/row-gap"
           },
           "fixedWidth": {
             "px": 60.3438,
@@ -4208,6 +4208,21 @@ const COMPONENTS = [
           },
           "clipsContent": true,
           "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Loading",
+              "fontSize": 16,
+              "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/spinner/label/font-size/extra-large",
+              "fontWeightVar": "imported/spinner/label/font-weight/extra-large",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-large",
+              "textFill": "imported/spinner/label/color/primary",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              }
+            },
             {
               "type": "frame",
               "name": "spinner",
@@ -4249,21 +4264,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Loading",
-              "fontSize": 16,
-              "fontStyle": "Semi Bold",
-              "fontSizeVar": "imported/spinner/label/font-size/extra-large",
-              "fontWeightVar": "imported/spinner/label/font-weight/extra-large",
-              "lineHeightVar": "imported/spinner/label/line-height/extra-large",
-              "textFill": "imported/spinner/label/color/primary",
-              "lineHeight": {
-                "value": 22,
-                "unit": "PIXELS"
-              }
             }
           ]
         }
@@ -4276,16 +4276,16 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Extra Large, Appearance=Primary, Label Position=Below",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
-          },
-          "bindings": {
-            "itemSpacing": "imported/spinner/root/column-gap"
           },
           "fixedHeight": {
             "px": 70,
             "varName": "imported/spinner/root/height/extra-large/below"
+          },
+          "bindings": {
+            "itemSpacing": "imported/spinner/root/row-gap"
           },
           "fixedWidth": {
             "px": 60.3438,
@@ -4379,6 +4379,21 @@ const COMPONENTS = [
           "clipsContent": true,
           "children": [
             {
+              "type": "text",
+              "name": "label",
+              "characters": "Loading",
+              "fontSize": 16,
+              "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/spinner/label/font-size/extra-large",
+              "fontWeightVar": "imported/spinner/label/font-weight/extra-large",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-large",
+              "textFill": "imported/spinner/label/color/primary",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              }
+            },
+            {
               "type": "frame",
               "name": "spinner",
               "layout": {
@@ -4419,21 +4434,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Loading",
-              "fontSize": 16,
-              "fontStyle": "Semi Bold",
-              "fontSizeVar": "imported/spinner/label/font-size/extra-large",
-              "fontWeightVar": "imported/spinner/label/font-weight/extra-large",
-              "lineHeightVar": "imported/spinner/label/line-height/extra-large",
-              "textFill": "imported/spinner/label/color/primary",
-              "lineHeight": {
-                "value": 22,
-                "unit": "PIXELS"
-              }
             }
           ]
         }
@@ -4531,16 +4531,16 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Extra Large, Appearance=Inverted, Label Position=Above",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
-          },
-          "bindings": {
-            "itemSpacing": "imported/spinner/root/column-gap"
           },
           "fixedHeight": {
             "px": 70,
             "varName": "imported/spinner/root/height/extra-large/above"
+          },
+          "bindings": {
+            "itemSpacing": "imported/spinner/root/row-gap"
           },
           "fixedWidth": {
             "px": 60.3438,
@@ -4548,6 +4548,21 @@ const COMPONENTS = [
           },
           "clipsContent": true,
           "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Loading",
+              "fontSize": 16,
+              "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/spinner/label/font-size/extra-large",
+              "fontWeightVar": "imported/spinner/label/font-weight/extra-large",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-large",
+              "textFill": "imported/spinner/label/color/inverted",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              }
+            },
             {
               "type": "frame",
               "name": "spinner",
@@ -4589,21 +4604,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Loading",
-              "fontSize": 16,
-              "fontStyle": "Semi Bold",
-              "fontSizeVar": "imported/spinner/label/font-size/extra-large",
-              "fontWeightVar": "imported/spinner/label/font-weight/extra-large",
-              "lineHeightVar": "imported/spinner/label/line-height/extra-large",
-              "textFill": "imported/spinner/label/color/inverted",
-              "lineHeight": {
-                "value": 22,
-                "unit": "PIXELS"
-              }
             }
           ]
         }
@@ -4616,16 +4616,16 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Extra Large, Appearance=Inverted, Label Position=Below",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
-          },
-          "bindings": {
-            "itemSpacing": "imported/spinner/root/column-gap"
           },
           "fixedHeight": {
             "px": 70,
             "varName": "imported/spinner/root/height/extra-large/below"
+          },
+          "bindings": {
+            "itemSpacing": "imported/spinner/root/row-gap"
           },
           "fixedWidth": {
             "px": 60.3438,
@@ -4719,6 +4719,21 @@ const COMPONENTS = [
           "clipsContent": true,
           "children": [
             {
+              "type": "text",
+              "name": "label",
+              "characters": "Loading",
+              "fontSize": 16,
+              "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/spinner/label/font-size/extra-large",
+              "fontWeightVar": "imported/spinner/label/font-weight/extra-large",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-large",
+              "textFill": "imported/spinner/label/color/inverted",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              }
+            },
+            {
               "type": "frame",
               "name": "spinner",
               "layout": {
@@ -4759,21 +4774,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Loading",
-              "fontSize": 16,
-              "fontStyle": "Semi Bold",
-              "fontSizeVar": "imported/spinner/label/font-size/extra-large",
-              "fontWeightVar": "imported/spinner/label/font-weight/extra-large",
-              "lineHeightVar": "imported/spinner/label/line-height/extra-large",
-              "textFill": "imported/spinner/label/color/inverted",
-              "lineHeight": {
-                "value": 22,
-                "unit": "PIXELS"
-              }
             }
           ]
         }
@@ -4871,16 +4871,16 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Huge, Appearance=Primary, Label Position=Above",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
-          },
-          "bindings": {
-            "itemSpacing": "imported/spinner/root/column-gap"
           },
           "fixedHeight": {
             "px": 80,
             "varName": "imported/spinner/root/height/huge/above"
+          },
+          "bindings": {
+            "itemSpacing": "imported/spinner/root/row-gap"
           },
           "fixedWidth": {
             "px": 73.3906,
@@ -4888,6 +4888,21 @@ const COMPONENTS = [
           },
           "clipsContent": true,
           "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Loading",
+              "fontSize": 20,
+              "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/spinner/label/font-size/huge",
+              "fontWeightVar": "imported/spinner/label/font-weight/huge",
+              "lineHeightVar": "imported/spinner/label/line-height/huge",
+              "textFill": "imported/spinner/label/color/primary",
+              "lineHeight": {
+                "value": 28,
+                "unit": "PIXELS"
+              }
+            },
             {
               "type": "frame",
               "name": "spinner",
@@ -4929,21 +4944,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Loading",
-              "fontSize": 20,
-              "fontStyle": "Semi Bold",
-              "fontSizeVar": "imported/spinner/label/font-size/huge",
-              "fontWeightVar": "imported/spinner/label/font-weight/huge",
-              "lineHeightVar": "imported/spinner/label/line-height/huge",
-              "textFill": "imported/spinner/label/color/primary",
-              "lineHeight": {
-                "value": 28,
-                "unit": "PIXELS"
-              }
             }
           ]
         }
@@ -4956,16 +4956,16 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Huge, Appearance=Primary, Label Position=Below",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
-          },
-          "bindings": {
-            "itemSpacing": "imported/spinner/root/column-gap"
           },
           "fixedHeight": {
             "px": 80,
             "varName": "imported/spinner/root/height/huge/below"
+          },
+          "bindings": {
+            "itemSpacing": "imported/spinner/root/row-gap"
           },
           "fixedWidth": {
             "px": 73.3906,
@@ -5059,6 +5059,21 @@ const COMPONENTS = [
           "clipsContent": true,
           "children": [
             {
+              "type": "text",
+              "name": "label",
+              "characters": "Loading",
+              "fontSize": 20,
+              "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/spinner/label/font-size/huge",
+              "fontWeightVar": "imported/spinner/label/font-weight/huge",
+              "lineHeightVar": "imported/spinner/label/line-height/huge",
+              "textFill": "imported/spinner/label/color/primary",
+              "lineHeight": {
+                "value": 28,
+                "unit": "PIXELS"
+              }
+            },
+            {
               "type": "frame",
               "name": "spinner",
               "layout": {
@@ -5099,21 +5114,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Loading",
-              "fontSize": 20,
-              "fontStyle": "Semi Bold",
-              "fontSizeVar": "imported/spinner/label/font-size/huge",
-              "fontWeightVar": "imported/spinner/label/font-weight/huge",
-              "lineHeightVar": "imported/spinner/label/line-height/huge",
-              "textFill": "imported/spinner/label/color/primary",
-              "lineHeight": {
-                "value": 28,
-                "unit": "PIXELS"
-              }
             }
           ]
         }
@@ -5211,16 +5211,16 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Huge, Appearance=Inverted, Label Position=Above",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
-          },
-          "bindings": {
-            "itemSpacing": "imported/spinner/root/column-gap"
           },
           "fixedHeight": {
             "px": 80,
             "varName": "imported/spinner/root/height/huge/above"
+          },
+          "bindings": {
+            "itemSpacing": "imported/spinner/root/row-gap"
           },
           "fixedWidth": {
             "px": 73.3906,
@@ -5228,6 +5228,21 @@ const COMPONENTS = [
           },
           "clipsContent": true,
           "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Loading",
+              "fontSize": 20,
+              "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/spinner/label/font-size/huge",
+              "fontWeightVar": "imported/spinner/label/font-weight/huge",
+              "lineHeightVar": "imported/spinner/label/line-height/huge",
+              "textFill": "imported/spinner/label/color/inverted",
+              "lineHeight": {
+                "value": 28,
+                "unit": "PIXELS"
+              }
+            },
             {
               "type": "frame",
               "name": "spinner",
@@ -5269,21 +5284,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Loading",
-              "fontSize": 20,
-              "fontStyle": "Semi Bold",
-              "fontSizeVar": "imported/spinner/label/font-size/huge",
-              "fontWeightVar": "imported/spinner/label/font-weight/huge",
-              "lineHeightVar": "imported/spinner/label/line-height/huge",
-              "textFill": "imported/spinner/label/color/inverted",
-              "lineHeight": {
-                "value": 28,
-                "unit": "PIXELS"
-              }
             }
           ]
         }
@@ -5296,16 +5296,16 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Huge, Appearance=Inverted, Label Position=Below",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "CENTER",
             "counter": "CENTER"
-          },
-          "bindings": {
-            "itemSpacing": "imported/spinner/root/column-gap"
           },
           "fixedHeight": {
             "px": 80,
             "varName": "imported/spinner/root/height/huge/below"
+          },
+          "bindings": {
+            "itemSpacing": "imported/spinner/root/row-gap"
           },
           "fixedWidth": {
             "px": 73.3906,
@@ -5399,6 +5399,21 @@ const COMPONENTS = [
           "clipsContent": true,
           "children": [
             {
+              "type": "text",
+              "name": "label",
+              "characters": "Loading",
+              "fontSize": 20,
+              "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/spinner/label/font-size/huge",
+              "fontWeightVar": "imported/spinner/label/font-weight/huge",
+              "lineHeightVar": "imported/spinner/label/line-height/huge",
+              "textFill": "imported/spinner/label/color/inverted",
+              "lineHeight": {
+                "value": 28,
+                "unit": "PIXELS"
+              }
+            },
+            {
               "type": "frame",
               "name": "spinner",
               "layout": {
@@ -5439,21 +5454,6 @@ const COMPONENTS = [
                   "children": []
                 }
               ]
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Loading",
-              "fontSize": 20,
-              "fontStyle": "Semi Bold",
-              "fontSizeVar": "imported/spinner/label/font-size/huge",
-              "fontWeightVar": "imported/spinner/label/font-weight/huge",
-              "lineHeightVar": "imported/spinner/label/line-height/huge",
-              "textFill": "imported/spinner/label/color/inverted",
-              "lineHeight": {
-                "value": 28,
-                "unit": "PIXELS"
-              }
             }
           ]
         }
@@ -5493,12 +5493,77 @@ const COMPONENTS = [
       {
         "part": "root",
         "kind": "channel",
+        "channel": "column-gap",
+        "value": "{imported.spinner.root.column-gap}",
+        "reason": "the cross axis of a VERTICAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 32,
+          "of": 64,
+          "names": [
+            "Size=Medium, Appearance=Primary, Label Position=Above",
+            "Size=Medium, Appearance=Primary, Label Position=Below",
+            "Size=Medium, Appearance=Inverted, Label Position=Above",
+            "Size=Medium, Appearance=Inverted, Label Position=Below",
+            "Size=Extra Tiny, Appearance=Primary, Label Position=Above",
+            "Size=Extra Tiny, Appearance=Primary, Label Position=Below",
+            "Size=Extra Tiny, Appearance=Inverted, Label Position=Above",
+            "Size=Extra Tiny, Appearance=Inverted, Label Position=Below",
+            "Size=Tiny, Appearance=Primary, Label Position=Above",
+            "Size=Tiny, Appearance=Primary, Label Position=Below",
+            "Size=Tiny, Appearance=Inverted, Label Position=Above",
+            "Size=Tiny, Appearance=Inverted, Label Position=Below",
+            "Size=Extra Small, Appearance=Primary, Label Position=Above",
+            "Size=Extra Small, Appearance=Primary, Label Position=Below",
+            "Size=Extra Small, Appearance=Inverted, Label Position=Above",
+            "Size=Extra Small, Appearance=Inverted, Label Position=Below",
+            "Size=Small, Appearance=Primary, Label Position=Above",
+            "Size=Small, Appearance=Primary, Label Position=Below",
+            "Size=Small, Appearance=Inverted, Label Position=Above",
+            "Size=Small, Appearance=Inverted, Label Position=Below",
+            "Size=Large, Appearance=Primary, Label Position=Above",
+            "Size=Large, Appearance=Primary, Label Position=Below",
+            "Size=Large, Appearance=Inverted, Label Position=Above",
+            "Size=Large, Appearance=Inverted, Label Position=Below"
+          ],
+          "more": 8
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
         "channel": "row-gap",
         "value": "{imported.spinner.root.row-gap}",
         "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
         "variants": {
-          "count": 64,
-          "of": 64
+          "count": 32,
+          "of": 64,
+          "names": [
+            "Size=Medium, Appearance=Primary, Label Position=After",
+            "Size=Medium, Appearance=Primary, Label Position=Before",
+            "Size=Medium, Appearance=Inverted, Label Position=After",
+            "Size=Medium, Appearance=Inverted, Label Position=Before",
+            "Size=Extra Tiny, Appearance=Primary, Label Position=After",
+            "Size=Extra Tiny, Appearance=Primary, Label Position=Before",
+            "Size=Extra Tiny, Appearance=Inverted, Label Position=After",
+            "Size=Extra Tiny, Appearance=Inverted, Label Position=Before",
+            "Size=Tiny, Appearance=Primary, Label Position=After",
+            "Size=Tiny, Appearance=Primary, Label Position=Before",
+            "Size=Tiny, Appearance=Inverted, Label Position=After",
+            "Size=Tiny, Appearance=Inverted, Label Position=Before",
+            "Size=Extra Small, Appearance=Primary, Label Position=After",
+            "Size=Extra Small, Appearance=Primary, Label Position=Before",
+            "Size=Extra Small, Appearance=Inverted, Label Position=After",
+            "Size=Extra Small, Appearance=Inverted, Label Position=Before",
+            "Size=Small, Appearance=Primary, Label Position=After",
+            "Size=Small, Appearance=Primary, Label Position=Before",
+            "Size=Small, Appearance=Inverted, Label Position=After",
+            "Size=Small, Appearance=Inverted, Label Position=Before",
+            "Size=Large, Appearance=Primary, Label Position=After",
+            "Size=Large, Appearance=Primary, Label Position=Before",
+            "Size=Large, Appearance=Inverted, Label Position=After",
+            "Size=Large, Appearance=Inverted, Label Position=Before"
+          ],
+          "more": 8
         }
       },
       {

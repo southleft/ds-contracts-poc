@@ -27,6 +27,8 @@
 
 .text-field__labelled__labelwrapper {
   display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
   justify-content: space-between;
   color: var(--imported-shared-color-303030);
   margin-bottom: var(--imported-shared-size-4);
