@@ -120,12 +120,16 @@ async function main(): Promise<void> {
   if (argv.includes("--record-mint")) {
     const r = recordMint(def.exam);
     if (r.failures.length > 0) {
-      console.error(`✖ ${def.exam}: the mint evidence was REFUSED — nothing was written.`);
+      console.error(
+        `✖ ${def.exam}: the mint evidence was REFUSED — nothing was written.`,
+      );
       for (const f of r.failures) console.error(`  · ${f}`);
       process.exitCode = 1;
       return;
     }
-    console.log(`▶ ${def.exam} — MCP-driven mint recorded from ${FIRST_PASS_DIR}/${def.exam}/mint-evidence.json`);
+    console.log(
+      `▶ ${def.exam} — MCP-driven mint recorded from ${FIRST_PASS_DIR}/${def.exam}/mint-evidence.json`,
+    );
     for (const p of r.perSet)
       console.log(
         `  ${p.set.padEnd(30)} mint ${p.from} → ${p.to.padEnd(8)} canvas ${p.canvas}`,
