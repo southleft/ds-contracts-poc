@@ -7,6 +7,7 @@
  * @ds-contracts/schema only.
  */
 import {
+  PSEUDO_ELEMENT_CHANNELS,
   REF_OVERRIDE_CHANNELS,
   refOverrideVar,
   TOKEN_CHANNELS,
@@ -1134,7 +1135,94 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     lines.push('', '@keyframes ds-pulse {', '  0%, 100% { opacity: 1; }', '  50% { opacity: 0.45; }', '}');
   }
 
-  return stripCanvasOnlyChannels(lines.join('\n') + '\n');
+  return finishStylesheet(lines.join('\n') + '\n');
+}
+
+/** THE ONE EXIT EVERY STYLESHEET SURFACE TAKES.
+ *
+ *  Two registry dispositions cannot be written as a plain declaration, and
+ *  both of them used to be able to reach a sheet verbatim from SOME surface:
+ *
+ *   · `canvas-only`     — refused by name (stripCanvasOnlyChannels).
+ *   · `pseudo-element`  — LOWERED to its real rule
+ *                         (lowerPseudoElementChannels).
+ *
+ *  Applied to the FINISHED css text, for the reason stripCanvasOnlyChannels
+ *  already gives: there are eleven `decls.push` sites across the emitters and
+ *  a filter no site can route around is worth more than eleven guarded
+ *  pushes. The web-components emitter builds its OWN shadow stylesheet (it
+ *  uses generateCss only as a validity referee and throws its CSS away), so
+ *  it calls this too — otherwise a channel generateCss lowers would reach the
+ *  shadow sheet as the invalid declaration, unnamed, and the referee could no
+ *  longer catch it. `translate-x`/`translate-y` had exactly that latent hole. */
+export function finishStylesheet(css: string): string {
+  return lowerPseudoElementChannels(stripCanvasOnlyChannels(css));
+}
+
+/** RC7 — A PSEUDO-ELEMENT CHANNEL BECOMES ITS RULE, NOT A DECLARATION.
+ *
+ *  `placeholder-color: var(--field-hint)` is not a CSS declaration: no UA has
+ *  ever had a `placeholder-color` property, so it is dropped in silence
+ *  exactly the way `translate-y` was. The authored fact is a RULE on a
+ *  pseudo-element — `.input::placeholder { color: var(--field-hint) }` — and
+ *  that is what this writes.
+ *
+ *  Two properties this lowering must have, and does:
+ *   · the lowered rule keeps its SOURCE POSITION (it is emitted immediately
+ *     after the rule it came out of), so a later, more specific rule that
+ *     also carries the channel still wins the cascade;
+ *   · a multi-selector rule lowers EVERY selector in the list
+ *     (`.a, .b {` → `.a::placeholder, .b::placeholder {`), so a grouped rule
+ *     does not silently lose all but its first selector.
+ *
+ *  Idempotent (a sheet with no such channel is returned unchanged, and the
+ *  emitted `::placeholder` rules carry `color`, never the channel name). */
+export function lowerPseudoElementChannels(css: string): string {
+  if (PSEUDO_ELEMENT_CHANNELS.length === 0) return css;
+  if (!PSEUDO_ELEMENT_CHANNELS.some(([c]) => css.includes(`${c}:`))) return css;
+  const byChannel = new Map(PSEUDO_ELEMENT_CHANNELS.map(([c, sel, prop]) => [c, { sel, prop }]));
+  const declRe = new RegExp(`^(\\s*)(${PSEUDO_ELEMENT_CHANNELS.map(([c]) => c).join('|')})\\s*:\\s*([^\\n]*?);?\\s*$`);
+  const lines = css.split('\n');
+  const out: string[] = [];
+  // The rule we are currently inside, as its raw selector lines. A rule opens
+  // on a line ending in `{` and closes on a line whose only content is `}`.
+  let openSelector: string[] | null = null;
+  let pending: Array<{ sel: string; prop: string; value: string }> = [];
+  for (const line of lines) {
+    if (openSelector === null) {
+      if (/\{\s*$/.test(line)) {
+        // Collect the selector list: this line's prefix plus any preceding
+        // lines that ended in `,` (a grouped selector spans lines).
+        const selLines: string[] = [line.replace(/\s*\{\s*$/, '')];
+        for (let j = out.length - 1; j >= 0 && /,\s*$/.test(out[j]); j--) selLines.unshift(out[j].replace(/,\s*$/, ''));
+        openSelector = selLines;
+      }
+      out.push(line);
+      continue;
+    }
+    const m = declRe.exec(line);
+    if (m) {
+      const spec = byChannel.get(m[2])!;
+      const selectors = openSelector.map((s) => s.trim()).filter((s) => s.length > 0);
+      pending.push({ sel: selectors.map((s) => `${s}${spec.sel}`).join(',\n'), prop: spec.prop, value: m[3] });
+      continue;
+    }
+    if (/^\s*\}\s*$/.test(line)) {
+      out.push(line);
+      for (const p of pending) out.push('', `${p.sel} {`, `  ${p.prop}: ${p.value};`, '}');
+      pending = [];
+      openSelector = null;
+      continue;
+    }
+    out.push(line);
+  }
+  // An emptied rule (its only declaration was the lowered channel) is noise.
+  const kept: string[] = [];
+  for (let i = 0; i < out.length; i++) {
+    if (/\{\s*$/.test(out[i]) && out[i + 1] !== undefined && /^\s*\}\s*$/.test(out[i + 1])) { i++; continue; }
+    kept.push(out[i]);
+  }
+  return kept.join('\n');
 }
 
 /** SILENT-LOSS ROUND (task #33, fix 4) — CANVAS-ONLY CHANNELS NEVER REACH A

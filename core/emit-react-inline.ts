@@ -988,6 +988,31 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   const canvasOnlyNote = canvasOnlyRefused.size > 0
     ? `\n * Fidelity: ${[...canvasOnlyRefused].sort().join(', ')} REFUSED BY NAME — synthetic\n * canvas-only channel(s) (decomposeTranslate) with no CSS spelling; the canvas\n * lowers them to absolute placement.`
     : '';
+
+  // RC7 — PSEUDO-ELEMENT CHANNELS CANNOT EXIST ON THIS SURFACE, BY NAME.
+  // `placeholder-color` IS real CSS, but it is a RULE on a pseudo-element
+  // (`::placeholder { color: … }`) and an inline style object has no
+  // selector to hang one off. Writing `color` here instead would repaint the
+  // VALUE ink — a different, real fact about the same element — so this
+  // surface refuses and says which fact it could not carry. The stylesheet
+  // surfaces (css / html / web-components) lower it to the real rule.
+  const pseudoKeys = new Map(
+    Object.keys(TOKEN_CHANNELS)
+      .filter((c) => TOKEN_CHANNELS[c].css === 'pseudo-element')
+      .map((c) => [camel(c), c]),
+  );
+  const pseudoRefused = new Set<string>();
+  for (const rec of [...Object.values(baseStyles), ...Object.values(variantFlat)]) {
+    for (const k of Object.keys(rec)) {
+      if (pseudoKeys.has(k)) { delete rec[k]; pseudoRefused.add(k); }
+    }
+  }
+  const pseudoNote = pseudoRefused.size > 0
+    ? `\n * Fidelity: ${[...pseudoRefused].sort().join(', ')} REFUSED BY NAME — ${[...pseudoRefused]
+        .sort()
+        .map((k) => `\`${TOKEN_CHANNELS[pseudoKeys.get(k)!].pseudo!.selector} { ${TOKEN_CHANNELS[pseudoKeys.get(k)!].pseudo!.property} }\``)
+        .join(', ')} is a\n * RULE on a pseudo-element and an inline style object has no selector; writing\n * \`color\` here instead would repaint the VALUE ink, a different real fact.`
+    : '';
   const disabledSubstNote = disabledSubstOmitted.length > 0
     ? `\n * Fidelity: ROOT disabled-state ref(s) ${disabledSubstOmitted.join(', ')} substitute a prop —\n * omitted on this surface (DISABLED_STYLE is one static object; the css/html/\n * web-components surfaces expand them per value).`
     : '';
@@ -1006,7 +1031,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
  * Emitted by core/emit-react-inline.ts — token references RESOLVED to literals.
  * Resolution mode: ${mode} (brand: default).
  * MULTI-ROOT composite — ${topRoots(contract).length} top-level roots (${topRoots(contract).map(([n]) => n).join(', ')})
- * render as SIBLINGS in a Fragment; there is no single wrapping element.${canvasOnlyNote}${disabledSubstNote}${omittedNote}
+ * render as SIBLINGS in a Fragment; there is no single wrapping element.${canvasOnlyNote}${pseudoNote}${disabledSubstNote}${omittedNote}
  */
 import type { ${typeImports} } from 'react';
 ${depImports}${depImports ? '\n' : ''}
@@ -1041,7 +1066,7 @@ export function ${name}({ ${destructured.join(', ')} }: ${name}Props) {
  * Fidelity: :hover/:focus-visible state tokens are not expressible as inline
  * styles and are omitted; ROOT disabled-state tokens apply via the disabled
  * prop; PART-level state overrides (Part.states, v13) are omitted — the same
- * declared limit as the hover states (state-selected descendant styling).${overlapNote}${repeatNote}${canvasOnlyNote}${disabledSubstNote}${omittedNote}
+ * declared limit as the hover states (state-selected descendant styling).${overlapNote}${repeatNote}${canvasOnlyNote}${pseudoNote}${disabledSubstNote}${omittedNote}
  */
 import { forwardRef${events.some((e) => e.toggles) ? ', useState' : ''} } from 'react';
 import type { ${typeImports} } from 'react';

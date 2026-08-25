@@ -335,6 +335,51 @@ export const PSEUDO_KEY_RE = new RegExp(`^(.*)(${READ_PSEUDOS.join('|')})$`);
 export const PILL_RADIUS_SENTINEL = '9999px';
 export const isAbsurdRadius = (v: string | undefined): boolean => /^[\d.]+e\+?\d+px$/.test(v ?? '');
 
+/**
+ * RC7 — THE PLACEHOLDER-INK FOLD (the `-webkit-text-fill-color` pattern,
+ * applied to a plane instead of a property).
+ *
+ * `::placeholder` has been READ since R7 (READ_PSEUDOS above, whose own
+ * comment calls it "real ink a designer notices"), and extract/computed/run.ts
+ * states the consequence outright: "Reading is not carrying". There was no
+ * channel to carry it to, so every leaf form control minted its placeholder
+ * text in the element's own `color` — the VALUE ink — and an empty field read
+ * as a filled one on canvas (antd's #1f1f1f against the library's #bfbfbf;
+ * Carbon near-black against #a8a8a8).
+ *
+ * The fold hoists `::placeholder{color}` onto the HOST element under the
+ * synthetic name `placeholder-color` (registered in TOKEN_CHANNELS with
+ * `css: 'pseudo-element'`, so every stylesheet surface lowers it back to a
+ * real `::placeholder { color: … }` rule and the inline surface refuses it by
+ * name). Exactly like `foldTextFillColor`, it is:
+ *
+ *   · CONDITIONAL — it fires ONLY when the placeholder ink DIFFERS from the
+ *     ink the element already carries. Where they agree, `color` already
+ *     paints the right pixel and minting a second channel would churn every
+ *     committed contract for no pixel;
+ *   · PURE AND IDEMPOTENT, applied at BOTH read boundaries (normalizeNode and
+ *     the replay/regate reconstruction), so an offline re-fuse of a COMMITTED
+ *     capture folds too — that is what lets the four foreign input contracts
+ *     be re-derived from truth already in the tree, with no recapture;
+ *   · a MEASUREMENT, not an invention: the value is the one the subject
+ *     browser reported for that element's placeholder plane.
+ *
+ * The placeholder STRING is NOT here and cannot be: it is an HTML ATTRIBUTE
+ * rendered by the browser through this pseudo-element, and a computed-style
+ * capture reads styles, never attributes (extract/computed/anatomy.ts says
+ * so in its own words). That wall is named at the mint instead.
+ *
+ * Returns the folded ink when it folded (the receipt), else null.
+ */
+export function foldPlaceholderInk(style: StyleMap, pseudo: Record<string, StyleMap | undefined>): string | null {
+  const ph = pseudo['::placeholder'];
+  const ink = ph?.['color'];
+  if (ink === undefined) return null;
+  if (style['color'] !== undefined && style['color'] === ink) return null;
+  style['placeholder-color'] = ink;
+  return ink;
+}
+
 export function normalizeNode(n: CapturedNode): CapturedNode {
   const norm = (s: StyleMap): StyleMap => {
     const out: StyleMap = {};
@@ -343,14 +388,24 @@ export function normalizeNode(n: CapturedNode): CapturedNode {
     foldTextFillColor(out);
     return out;
   };
+  const style = norm(n.style);
+  const pseudo = Object.fromEntries(
+    Object.entries(n.pseudo).map(([k, v]) => [k, norm(v as StyleMap)]),
+  ) as CapturedNode['pseudo'];
+  // The fold needs BOTH maps, so it runs at the node level; the key is
+  // re-sorted in afterwards so the serialized capture stays key-ordered.
+  if (foldPlaceholderInk(style, pseudo as Record<string, StyleMap | undefined>) !== null) {
+    const sorted: StyleMap = {};
+    for (const k of Object.keys(style).sort()) sorted[k] = style[k];
+    for (const k of Object.keys(style)) delete style[k];
+    Object.assign(style, sorted);
+  }
   return {
     tag: n.tag,
     classes: n.classes,
     nodes: n.nodes.map((c) => (c.t === 'text' ? c : { t: 'el' as const, el: normalizeNode(c.el) })),
-    style: norm(n.style),
-    pseudo: Object.fromEntries(
-      Object.entries(n.pseudo).map(([k, v]) => [k, norm(v as StyleMap)]),
-    ) as CapturedNode['pseudo'],
+    style,
+    pseudo,
     // Portal-capture-only attributes: preserved when present, OMITTED when
     // undefined (the census case) so committed captures stay byte-identical.
     ...(n.role !== undefined ? { role: n.role } : {}),

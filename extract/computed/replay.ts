@@ -16,6 +16,7 @@
 import {
   decomposeTranslate,
   flatten,
+  foldPlaceholderInk,
   foldTextFillColor,
   normalizeValue,
   PSEUDO_KEY_RE,
@@ -183,6 +184,13 @@ export function reconstructCaptures(truth: CapturedTruthFile): Capture[] {
       // idempotent — a capture already folded recomputes byte-identically.
       foldTextFillColor(node.style);
       for (const st of Object.values(node.pseudo)) if (st) { decomposeTranslate(st as StyleMap); foldTextFillColor(st as StyleMap); }
+      // RC7 — the placeholder-ink fold rides this boundary for exactly the
+      // reason the two above do: `::placeholder{color}` has been in every
+      // committed capture since R7 and there was no channel to carry it to,
+      // so an offline re-fuse of committed truth is the ONLY way the four
+      // foreign input contracts gain the ink without a recapture wave. Pure
+      // and idempotent (it reads the pseudo plane and writes one key).
+      foldPlaceholderInk(node.style, node.pseudo as Record<string, StyleMap | undefined>);
       for (const c of node.nodes) if (c.t === 'el') walk(c.el);
     };
     walk(cap.root);

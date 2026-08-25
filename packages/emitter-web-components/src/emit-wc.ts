@@ -74,6 +74,7 @@ import {
 import {
   boolProps,
   enumProps,
+  finishStylesheet,
   generateCss,
   isArrayType,
   isEnum,
@@ -677,7 +678,16 @@ export function shadowCss(contract: Contract): string {
   if (usedAnimations.has('pulse')) {
     lines.push('', `@keyframes ${k}-pulse {`, '  0%, 100% { opacity: 1; }', '  50% { opacity: 0.45; }', '}');
   }
-  return lines.join('\n');
+  // THE SAME EXIT THE OTHER STYLESHEET SURFACES TAKE (RC7). This emitter
+  // builds its OWN shadow sheet and uses generateCss only as a validity
+  // referee, throwing its CSS away — so every registry disposition that
+  // cannot be written as a plain declaration had to be re-decided here or it
+  // shipped verbatim. It was not, and both classes were live holes:
+  // `translate-x`/`translate-y` (css: 'canvas-only') reached the shadow sheet
+  // unnamed, and `placeholder-color` (css: 'pseudo-element') would have.
+  // Latent only because no first-party WC sample is a switch or a text field.
+  // One shared exit, so a new disposition can never be forgotten here again.
+  return finishStylesheet(lines.join('\n'));
 }
 
 // ---------------------------------------------------------------------------

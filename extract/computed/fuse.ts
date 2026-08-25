@@ -864,6 +864,39 @@ export function styledChannels(
         );
       }
     }
+    // RC7 — THE PLACEHOLDER-INK DOOR. `placeholder-color` is synthetic
+    // (foldPlaceholderInk hoists `::placeholder{color}` onto the host at the
+    // read boundary) so it lives OUTSIDE `allProps`, the browser property
+    // enumeration, exactly like translate-x/y — the loop above can never see
+    // it and it needs its own admission.
+    //
+    // The STYLED-NESS TEST IS THE FOLD ITSELF: the fold only writes the key
+    // when the placeholder plane paints an ink DIFFERENT from the ink the
+    // element already carries. A control-equality comparison would be
+    // meaningless here (no <span> control has a placeholder plane), and the
+    // difference IS the fact — where the two agree the existing `color`
+    // channel already paints the right pixel and nothing is minted.
+    //
+    // Admitted across the whole enabled default plane the moment ANY combo
+    // carries it, so a per-combo hint ink (Fluent's 112 → 189 on disabled)
+    // fuses as a varying channel instead of vanishing on the combos that
+    // happen to agree with their own value ink.
+    {
+      const phStyles: StyleMap[] = [a.baseFlat[pi].node.style];
+      for (const combo of space.enumeration.combos) {
+        if (!isEnabled(combo)) continue;
+        const el = a.getAligned(`${combo.key}__default`)[pi];
+        if (el) phStyles.push(el.node.style);
+      }
+      if (phStyles.some((st) => st['placeholder-color'] !== undefined)) {
+        set.add('placeholder-color');
+        receipts.push(
+          `placeholder-ink-admitted: ${a.partNames[pi]} — the element's ::placeholder plane paints an ink DIFFERENT from its own color (${
+            phStyles.find((st) => st['placeholder-color'] !== undefined)!['placeholder-color']
+          } vs ${a.baseFlat[pi].node.style['color'] ?? 'unset'}); the synthetic placeholder-color channel joins fusion so an EMPTY field stops minting in VALUE ink (RC7). Where the two inks AGREE the fold does not fire and the existing color channel already paints the right pixel.`,
+        );
+      }
+    }
     // ORGANISM round: an admitted table cell ALWAYS carries width+height —
     // the column width and the row height are facts of the table box model,
     // not deltas from a <span> control baseline.
