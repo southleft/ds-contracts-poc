@@ -1198,6 +1198,10 @@ async function main() {
       origShotsDir: scratchShots,
       outDir,
       browserVersion: run1.browserVersion,
+      // Harness path: capture and gate render in the SAME run on the SAME
+      // browser, so these agree by construction. Passed explicitly all the same
+      // — the gate may not infer a browser fact, it must be told one.
+      renderBrowserVersion: run1.browserVersion,
       iconAssets: iconAssetsMerged,
       fusionCounts: {
         boundConfirmed,

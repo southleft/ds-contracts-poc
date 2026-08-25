@@ -618,6 +618,9 @@ jobs:
       # sits, and a door CLAIMING a receipt whose receipt path does not exist)
       # and re-measures the subtraction census by re-fusing all 116 committed
       # captures offline, refusing when the pinned per-library numbers move.
+      - name: render-browser:check (the render browser is the PINNED revision, and a receipt names what rendered it)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run render-browser:check
       - name: door-register:check (every subtractive heuristic named, premised, and its receipt path proved)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run door-register:check

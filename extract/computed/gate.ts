@@ -56,14 +56,31 @@ export interface GateRow {
 export interface Scorecard {
   component: string;
   generatedBy: string;
+  /** The browser the CAPTURED TRUTH was recorded on. */
   browser: string;
+  /**
+   * The browser that ACTUALLY RENDERED this scorecard's gate page.
+   *
+   * For a harness run these are the same instrument in the same process. For an
+   * OFFLINE re-fuse they need not be, and until 2026-08-25 this file had no way
+   * to say so: the scorecard printed the CAPTURE's browser whatever binary did
+   * the rendering, which is why a stray Chromium went unnoticed across the whole
+   * corpus (see chromiumExecutable() in extract/figma/visual-parity/render.ts).
+   */
+  renderedBy: string;
+  /** Present ONLY when the two above disagree — a receipt may not hide that. */
+  browserMismatch?: string;
   method: string;
   combos: number;
   interactions: number;
   computed: {
     cellsCompared: number;
     cellsEqual: number;
-    pctEqual: number;
+    /**
+     * NULL when `cellsCompared === 0` — nothing was compared, so there is no
+     * percentage to report. Never 100: see the door note at the assignment.
+     */
+    pctEqual: number | null;
     /** combo×state pairs with every compared channel equal. */
     rowsFullyEqual: number;
     rows: number;
@@ -206,6 +223,32 @@ export function gateInventory(
   return { inventory: tokenInventoryFromJson([...baseTrees, merged.tree]), merged, baseTrees };
 }
 
+/**
+ * The sentence a scorecard must carry when the browser that RENDERED it is not
+ * the browser its captured truth was recorded on — and `undefined` when they
+ * agree. Pure, so the guard can falsify it without launching anything.
+ *
+ * Accepts either spelling on either side: the bare `149.0.7827.55` that
+ * `browser.version()` returns, or the decorated
+ * `Chromium 149.0.7827.55 (playwright-core, headless)` a capture's provenance
+ * carries. Comparing the decorated form to the bare one as strings would report
+ * a mismatch on every offline re-fuse and the warning would be worthless.
+ */
+export function browserMismatchNote(capturedVersion: string, renderVersion: string): string | undefined {
+  const bare = (v: string) => /(\d+(?:\.\d+)+)/.exec(v)?.[1] ?? v;
+  const captured = bare(capturedVersion);
+  const rendered = bare(renderVersion);
+  if (captured === rendered) return undefined;
+  return (
+    `RENDERED ON A DIFFERENT BROWSER THAN THE CAPTURE — these numbers were produced by Chromium ${rendered}, ` +
+    `but the captured truth they are scored against was recorded on Chromium ${captured}. Computed styles differ ` +
+    'between Chromium versions, so cells can be UNEQUAL for that reason alone and this scorecard is not comparable ' +
+    "to one recorded on the capture's own browser. Measured 2026-08-25: `position-anchor` computes `none` in 149 " +
+    'and `normal` in 151, and on a raw all-channel replay `flex-line-count`, `ruby-overhang` and `text-fit` move ' +
+    "too. Re-run with PLAYWRIGHT_CHROMIUM_PATH set to the capture's browser, or re-capture."
+  );
+}
+
 export async function runGate(opts: {
   page: Page;
   repoRoot: string;
@@ -218,7 +261,10 @@ export async function runGate(opts: {
   styled: Map<string, Set<string>>;
   origShotsDir: string;
   outDir: string;
+  /** The browser the CAPTURED TRUTH was recorded on. */
   browserVersion: string;
+  /** The browser ACTUALLY rendering this gate run — `browser.version()`, live. */
+  renderBrowserVersion: string;
   fusionCounts: Scorecard['fusion'];
   namedLosses: string[];
   /** Committed icon assets (config `icons` dir) — empty map when none. */
@@ -548,10 +594,14 @@ ${stages.join('\n')}
   const measured = comparable.filter((r) => r.pctExact !== null && r.pctAA !== null) as Array<GateRow & { pctExact: number; pctAA: number }>;
   const sizeMismatched = comparable.filter((r) => r.unscorable === 'size-mismatch');
   const noOriginal = rows.filter((r) => r.unscorable === 'no-original');
+  const browserMismatch = browserMismatchNote(opts.browserVersion, opts.renderBrowserVersion);
+  if (browserMismatch !== undefined) console.warn(`  ! ${comp.name}: ${browserMismatch}`);
   const scorecard: Scorecard = {
     component: comp.name,
     generatedBy: 'extract/computed/gate.ts',
     browser: opts.browserVersion,
+    renderedBy: opts.renderBrowserVersion,
+    ...(browserMismatch !== undefined ? { browserMismatch } : {}),
     method:
       'enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened',
     combos: space.enumeration.combos.length,
@@ -560,7 +610,15 @@ ${stages.join('\n')}
       cellsCompared,
       cellsEqual,
       // @door gate.empty-comparison-is-100
-      pctEqual: cellsCompared === 0 ? 100 : (100 * cellsEqual) / cellsCompared,
+      // @door gate.empty-comparison-is-100
+      // NULL, not 100. 0/0 is not a perfect score; it is the ABSENCE of a
+      // measurement, and the pixel side twenty lines below has always refused to
+      // fabricate its own zero for exactly this reason
+      // (@door gate.null-not-zero-means). Until 2026-08-25 this answered 100 and
+      // a component whose every part had been excluded upstream was
+      // indistinguishable from one that matched on every cell — it also sat in
+      // the corpus mean and in the ">= 90%" counts as a perfect score.
+      pctEqual: cellsCompared === 0 ? null : (100 * cellsEqual) / cellsCompared,
       rowsFullyEqual: rows.filter((r) => r.channelsCompared > 0 && r.channelsEqual === r.channelsCompared).length,
       rows: rows.length,
     },
@@ -601,16 +659,17 @@ ${stages.join('\n')}
     // applies here in the other direction — a fabricated 100 is
     // indistinguishable from a component that matched on every cell.
     //
-    // The NUMBER is not changed here (that is a scoring decision with a
-    // denominator behind it, and this round is visibility only). What changes is
-    // that the fabrication now announces itself in the loss ledger the scorecard
-    // already carries, so a 100 that means "nothing was compared" can never
-    // again be read as a 100 that means "everything matched".
+    // 2026-08-25: the NUMBER is now NULL as well (fix/pin-render-browser). The
+    // visibility round above named the fabrication; naming it was not enough,
+    // because every consumer that averaged the corpus still read the 100 as a
+    // score. `pctEqual` is null when nothing was compared, the loss below still
+    // names it, and the report scripts skip zero-cell cards from their means and
+    // thresholds BY NAME rather than silently.
     namedLosses:
       cellsCompared === 0
         ? [
             ...opts.namedLosses,
-            'gate.empty-comparison-is-100: computed pctEqual reports 100 because cellsCompared === 0 — NOTHING was compared. Every part was excluded by an upstream door (carried-parts-only, icon-part-exclusion, unaligned-truth-el-skip, zero-channel-part-skip) or the enriched contract carries no part at all. This 100 is a fabrication, not a measurement; the pixel side refuses to fabricate its own zero for the same reason (see gate.null-not-zero-means).',
+            'gate.empty-comparison-is-100: computed pctEqual is NULL because cellsCompared === 0 — NOTHING was compared. Every part was excluded by an upstream door (carried-parts-only, icon-part-exclusion, unaligned-truth-el-skip, zero-channel-part-skip) or the enriched contract carries no part at all. A percentage here would be a fabrication, not a measurement — it used to report 100, which read as a perfect score and was averaged into the corpus mean; the pixel side refuses to fabricate its own zero for the same reason (see gate.null-not-zero-means).',
           ]
         : opts.namedLosses,
     unresolvedTokenRefs: { count: unresolvedRefs.length, refs: unresolvedRefs.slice(0, 40) },

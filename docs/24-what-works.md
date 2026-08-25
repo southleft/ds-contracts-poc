@@ -20,9 +20,9 @@ the complete inventory of what this does not do, and it is longer than this one.
 
 Six third-party component libraries — Altitude, Ant Design, Astryx, Carbon, Flowbite / Tailwind, Fluent 2, MUI, Polaris, shadcn/ui — across five styling
 architectures were run through one pipeline. 116 components came out with a measured floor:
-**86.8% mean computed-style equality** against the original npm package rendering in the same pinned
+**86.7% mean computed-style equality** against the original npm package rendering in the same pinned
 Chromium, exact string comparison with no tolerance, over 718,018 compared style cells
-(59 of 116 components at ≥90%, 91 of 116 at ≥80%).
+(58 of 116 components at ≥90%, 90 of 116 at ≥80%).
 In the other direction, a 599-variant Figma kit converted to code scores
 **92.70% visual fidelity** over the 537 statically scorable variants, and the
 canvas→code→canvas executes through the fact diff on **15 of 15** components with every
@@ -112,12 +112,12 @@ pipeline never opened still counts against it.
 | Flowbite / Tailwind | 11 | **90.4** | 90.7 | 6/11 | 10/11 | 13,804 | 93.5 | `extract/computed/out/tailwind/<comp>/scorecard.json` |
 | Fluent 2 | 11 | **82.5** | 82.4 | 4/11 | 7/11 | 132,426 | 80.8 | `extract/computed/out/fluent/<comp>/scorecard.json` |
 | Ant Design | 12 | **88.9** | 91.6 | 7/12 | 10/12 | 134,068 | 85.3 | `extract/computed/out/antd/<comp>/scorecard.json` |
-| **all libraries** | **116** | **86.8** | 90.1 | **59/116** | **91/116** | **718,018** | **85.9** |  |
+| **all libraries** | **116** | **86.7** | 90.0 | **58/116** | **90/116** | **718,018** | **85.9** |  |
 
 **Read every percentage on this page as "on the easy 11.1%."** The 116 components measured here were chosen because they were **tractable**, not at random — they are Button, Badge, Chip, Card, Checkbox, Tag, Avatar, Divider and their siblings. Across the 9 libraries they are 113 of 1,015 components (11.1%). Data grid, tree, virtualized list, date picker, rich text and charts appear in **zero** committed contracts. A mean over this slice is a statement about this slice.
 
 **Two means, both printed, because they answer different questions.** The
-unweighted mean (86.8%) treats a 16-cell Spinner and an 83,520-cell Button as equals;
+unweighted mean (86.7%) treats a 16-cell Spinner and an 83,520-cell Button as equals;
 the cell-weighted figure (85.9%) is what fraction of every style cell in the corpus
 actually matched. Neither is quoted alone. Whole-row exactness is the harshest
 cut of the same data: **2,984 of 11,568** rendered rows
@@ -261,7 +261,7 @@ no scorecard escaped classification.
 | fixture | cases | mean %equal | counted in §3? | source |
 |---|---|---|---|---|
 | synthetic CSS/DOM constructs | 89 | 95.3 | **no** | `extract/computed/out/conformance/*/scorecard.json` |
-| real third-party components | 116 | 86.8 | yes | `extract/computed/out/**/scorecard.json` |
+| real third-party components | 116 | 86.7 | yes | `extract/computed/out/**/scorecard.json` |
 
 ---
 

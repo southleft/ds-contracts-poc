@@ -1022,11 +1022,11 @@
     {
       "library": "tailwind",
       "component": "Spinner",
-      "rerunPctEqual": 100,
+      "rerunPctEqual": null,
       "cellsCompared": 0,
       "unresolvedTokenRefs": 0,
-      "committedPctEqual": 100,
-      "gapCause": ""
+      "committedPctEqual": null,
+      "gapCause": "UNMEASURED, NOT A SCORE (fix/pin-render-browser 2026-08-25). `cellsCompared` is ZERO on this row — every part was excluded by an upstream door (carried-parts-only, icon-part-exclusion, unaligned-truth-el-skip, zero-channel-part-skip) or the enriched contract carries no part at all — so the gate compared NOTHING. It used to report that as 100, which read as a perfect score: it sat in the corpus mean and was counted in the \">= 90%\" and \">= 80%\" tallies of both the capability report and docs. `gate.ts` now returns NULL for a zero-cell comparison, the same refusal the pixel side has always made for its own empty mean (@door gate.null-not-zero-means), and this row pins the ABSENCE of a measurement. It is held exactly as strictly as a number: null -> a number, or a number -> null, is drift and fails. The committed HARNESS scorecard still carries the old 100 next to its zero denominator and was deliberately NOT rewritten — a harness receipt may only be rewritten by a real harness run — so drift-check reads a zero denominator as UNMEASURED rather than trusting that number. What would actually close this row is a capture whose parts survive the doors; until then it is honestly unmeasured."
     },
     {
       "library": "tailwind",

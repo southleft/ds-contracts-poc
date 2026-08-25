@@ -131,12 +131,20 @@ const { libraries: LIBRARIES, skipped: SKIPPED_CONFIGS } = discoverLibraries();
 interface BaselineRow {
   library: string;
   component: string;
-  /** the offline instrument's number — what this check pins. */
-  rerunPctEqual: number;
+  /**
+   * The offline instrument's number — what this check pins.
+   *
+   * NULL means UNMEASURED: `cellsCompared === 0`, so the gate compared nothing
+   * and refuses to report a percentage (@door gate.empty-comparison-is-100).
+   * It used to be recorded as 100 and read as a perfect score. A null pins the
+   * ABSENCE of a measurement and is held exactly as strictly: null -> a number,
+   * or a number -> null, is drift and fails.
+   */
+  rerunPctEqual: number | null;
   cellsCompared: number;
   unresolvedTokenRefs: number;
-  /** the committed harness scorecard's number — context, never the pin. */
-  committedPctEqual: number;
+  /** the committed harness scorecard's number — context, never the pin. NULL = unmeasured. */
+  committedPctEqual: number | null;
   /** CARBON ROUND: per-row tolerance override, in percentage points. Present
    *  ONLY where the offline instrument is measurably not reproducible to the
    *  global 0.001 on that row, and the `gapCause` must say why and quote the
@@ -166,7 +174,7 @@ interface BaselineRow {
 }
 
 interface RegateScorecard {
-  scorecard: { computed: { pctEqual: number; cellsCompared: number }; unresolvedTokenRefs?: { count: number } };
+  scorecard: { computed: { pctEqual: number | null; cellsCompared: number }; unresolvedTokenRefs?: { count: number } };
 }
 
 const componentsOf = (configPath: string): string[] => {
@@ -182,15 +190,27 @@ const readRegate = (file: string) => {
     unresolvedTokenRefs: rg.scorecard.unresolvedTokenRefs?.count ?? 0,
   };
 };
-const readCommitted = (file: string): number =>
-  (JSON.parse(readFileSync(file, 'utf8')) as { computed: { pctEqual: number } }).computed.pctEqual;
+const readCommitted = (file: string): number | null => {
+  const c = (JSON.parse(readFileSync(file, 'utf8')) as { computed: { pctEqual: number | null; cellsCompared: number } }).computed;
+  // A committed harness scorecard written BEFORE gate.ts started returning null
+  // still carries the fabricated 100 next to a zero denominator. Read it as what
+  // it means — UNMEASURED — rather than trusting the number, so this instrument
+  // does not re-import a fabrication it cannot rewrite (a harness scorecard may
+  // only be rewritten by a real harness run).
+  return c.cellsCompared === 0 ? null : c.pctEqual;
+};
 
 const prior: BaselineRow[] = existsSync(BASELINE)
   ? (JSON.parse(readFileSync(BASELINE, 'utf8')) as { rows: BaselineRow[] }).rows
   : [];
 const priorBy = new Map<string, BaselineRow>(prior.map((r) => [`${r.library}/${r.component}`, r]));
 const selected = LIBRARIES.filter((lib) => !ONLY_CONFIG || path.resolve(REPO, ONLY_CONFIG) === path.resolve(REPO, lib.config));
-const fmt = (n: number) => n.toFixed(3);
+const fmt = (n: number | null) => (n === null ? 'UNMEASURED' : n.toFixed(3));
+/** The gap between two pctEquals, or NULL when either side was never measured. */
+const gapOf = (a: number | null, b: number | null): number | null => (a === null || b === null ? null : Math.abs(a - b));
+/** null-aware equality: both unmeasured is EQUAL; one unmeasured is drift. */
+const pctSame = (a: number | null, b: number | null, tol: number): boolean =>
+  a === null || b === null ? a === b : Math.abs(a - b) <= tol;
 const secs = (ms: number) => `${(ms / 1000).toFixed(1)}s`;
 
 const rows: BaselineRow[] = [];
@@ -310,7 +330,7 @@ for (const lib of selected) {
     // for it. VERIFY compares committed bytes to committed bytes and owes no
     // tolerance at all — the artifact IS what the baseline was recorded from.
     const rowTol = REMEASURE ? (p.tolerance ?? TOLERANCE) : 1e-9;
-    if (Math.abs(row.rerunPctEqual - p.rerunPctEqual) > rowTol) {
+    if (!pctSame(row.rerunPctEqual, p.rerunPctEqual, rowTol)) {
       failures.push(
         REMEASURE
           ? `${key}: offline pctEqual ${fmt(p.rerunPctEqual)} → ${fmt(row.rerunPctEqual)} (tolerance ${rowTol}${p.tolerance !== undefined ? " — this row's OWN widened tolerance" : ''})`
@@ -323,17 +343,20 @@ for (const lib of selected) {
     if (row.unresolvedTokenRefs !== p.unresolvedTokenRefs) {
       failures.push(`${key}: unresolved token refs ${p.unresolvedTokenRefs} → ${row.unresolvedTokenRefs} — refs the gate renders as EMPTY custom properties`);
     }
-    if (Math.abs(committedPctEqual - p.committedPctEqual) > 1e-9) {
+    if (!pctSame(committedPctEqual, p.committedPctEqual, 1e-9)) {
       failures.push(`${key}: the committed harness scorecard moved ${fmt(p.committedPctEqual)} → ${fmt(committedPctEqual)} without a baseline re-record`);
     }
     if (REMEASURE && existsSync(trackedPath)) {
       const tracked = readRegate(trackedPath);
-      if (Math.abs(tracked.pctEqual - fresh.pctEqual) > 1e-9 || tracked.cellsCompared !== fresh.cellsCompared) {
+      if (!pctSame(tracked.pctEqual, fresh.pctEqual, 1e-9) || tracked.cellsCompared !== fresh.cellsCompared) {
         failures.push(`${key}: the TRACKED ${path.relative(REPO, trackedPath)} (${fmt(tracked.pctEqual)}, ${tracked.cellsCompared} cells) is not what the current engine produces (${fmt(fresh.pctEqual)}, ${fresh.cellsCompared} cells) — re-record with --write`);
       }
     }
-    const gap = Math.abs(row.rerunPctEqual - row.committedPctEqual);
-    if (gap >= 0.0005 && row.gapCause === '') {
+    // An UNMEASURED row has no gap to name — there is no number on at least one
+    // side. It is not silently excused either: `unmeasured` is pinned above by
+    // pctSame, so it cannot become a number without failing.
+    const gap = gapOf(row.rerunPctEqual, row.committedPctEqual);
+    if (gap !== null && gap >= 0.0005 && row.gapCause === '') {
       failures.push(`${key}: offline ${fmt(row.rerunPctEqual)} vs committed harness ${fmt(row.committedPctEqual)} — UNNAMED gap (name it in the baseline's gapCause)`);
     }
   }
@@ -389,7 +412,7 @@ if (WRITE) {
     ) + '\n',
   );
   console.log(`\n✔ baseline re-recorded: ${rows.length} row(s) → ${path.relative(REPO, BASELINE)}; ${copied} tracked regate.scorecard.json file(s) updated from the re-measure (${secs(Date.now() - started)})`);
-  const unnamed = rows.filter((r) => Math.abs(r.rerunPctEqual - r.committedPctEqual) >= 0.0005 && r.gapCause === '');
+  const unnamed = rows.filter((r) => { const g = gapOf(r.rerunPctEqual, r.committedPctEqual); return g !== null && g >= 0.0005 && r.gapCause === ''; });
   if (unnamed.length > 0) {
     console.log(`  ⚠ ${unnamed.length} row(s) differ from their harness scorecard with NO gapCause — VERIFY will refuse until they are named: ${unnamed.map((r) => `${r.library}/${r.component}`).join(', ')}`);
   }
@@ -398,19 +421,22 @@ if (WRITE) {
 
 console.log('');
 for (const r of rows) {
-  const same = Math.abs(r.rerunPctEqual - r.committedPctEqual) < 0.0005;
+  const gap = gapOf(r.rerunPctEqual, r.committedPctEqual);
+  const same = gap === null || gap < 0.0005;
   // An EXACT row still prints its cause when it has one — a 'repaired:' note,
   // or the reason it carries unresolved refs despite agreeing. Suppressing it
   // is how a closed finding becomes invisible and gets rediscovered.
   const note = r.refused
     ? `REFUSED — ${r.refused.slice(0, 140)}`
+    : r.rerunPctEqual === null || r.committedPctEqual === null
+    ? `UNMEASURED — 0 cells compared, so there is no score to report${r.gapCause ? ` — ${r.gapCause.split(/(?<=\.)\s/)[0]}` : ''}`
     : same
     ? r.gapCause
       ? `EXACT — ${r.gapCause.split(/(?<=\.)\s/)[0]}`
       : 'EXACT'
     : `gap ${(r.rerunPctEqual - r.committedPctEqual).toFixed(3)} — ${r.gapCause ? r.gapCause.split(/(?<=\.)\s/)[0] : 'UNNAMED (name it in the baseline)'}`;
   console.log(
-    `  ${(r.library + '/' + r.component).padEnd(24)} offline ${fmt(r.rerunPctEqual).padStart(7)}%  committed ${fmt(r.committedPctEqual).padStart(7)}%  ${note}${r.tolerance !== undefined ? `  [tolerance ±${r.tolerance}]` : ''}${r.unresolvedTokenRefs ? `  [${r.unresolvedTokenRefs} unresolved refs]` : ''}`,
+    `  ${(r.library + '/' + r.component).padEnd(24)} offline ${fmt(r.rerunPctEqual).padStart(10)}  committed ${fmt(r.committedPctEqual).padStart(10)}  ${note}${r.tolerance !== undefined ? `  [tolerance ±${r.tolerance}]` : ''}${r.unresolvedTokenRefs ? `  [${r.unresolvedTokenRefs} unresolved refs]` : ''}`,
   );
 }
 

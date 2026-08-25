@@ -14,9 +14,11 @@
  * masking (see img.ts) covers the miss, never a fatter threshold.
  *
  * Browser: playwright-core over an already-installed Chromium (ms-playwright
- * cache, or PLAYWRIGHT_CHROMIUM_PATH, or system Chrome) — no download step.
+ * cache at the revision `playwright-core` PINS, or PLAYWRIGHT_CHROMIUM_PATH) —
+ * no download step, and NO substitution: see chromiumExecutable().
  */
-import { existsSync, readdirSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
+import { createRequire } from 'node:module';
 import { homedir } from 'node:os';
 import path from 'node:path';
 import { chromium, type Browser, type Page } from 'playwright-core';
@@ -47,44 +49,107 @@ export interface RenderRefusal {
 
 const CLIP_MARGIN = 48; // px around the painted union box (shadows, outlines)
 
-export function chromiumExecutable(): string {
-  if (process.env.PLAYWRIGHT_CHROMIUM_PATH) return process.env.PLAYWRIGHT_CHROMIUM_PATH;
-  // playwright's browser cache: macOS and Linux locations (Windows untested — use the env var).
-  const caches = [
+/** The chromium revision `playwright-core` PINS, from its own browsers.json. */
+export function pinnedChromiumRevision(): string {
+  // `playwright-core/package.json` IS in the package's exports map; `browsers.json`
+  // is NOT — so resolve the manifest and read its sibling rather than guessing a path.
+  const req = createRequire(import.meta.url);
+  const dir = path.dirname(req.resolve('playwright-core/package.json'));
+  const manifest = JSON.parse(readFileSync(path.join(dir, 'browsers.json'), 'utf8')) as {
+    browsers: Array<{ name: string; revision: string | number }>;
+  };
+  const entry = manifest.browsers.find((b) => b.name === 'chromium');
+  if (!entry) {
+    throw new Error(
+      `playwright-core/browsers.json (${path.join(dir, 'browsers.json')}) names no \`chromium\` entry — ` +
+        'the pinned revision cannot be determined, and this resolver will not guess one.',
+    );
+  }
+  return String(entry.revision);
+}
+
+/** ms-playwright cache roots: macOS and Linux (Windows untested — use the env var). */
+export function chromiumCacheRoots(): string[] {
+  return [
     path.join(homedir(), 'Library', 'Caches', 'ms-playwright'),
     process.env.XDG_CACHE_HOME
       ? path.join(process.env.XDG_CACHE_HOME, 'ms-playwright')
       : path.join(homedir(), '.cache', 'ms-playwright'),
   ];
+}
+
+const BROWSER_RELPATHS = [
+  'chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing',
+  'chrome-mac/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing',
+  'chrome-mac/Chromium.app/Contents/MacOS/Chromium',
+  'chrome-linux/chrome',
+  'chrome-linux64/chrome',
+];
+
+/** The binary for ONE revision under the given cache roots, or null. Exported for the guard. */
+export function chromiumExecutableIn(caches: string[], revision: string): string | null {
   for (const cache of caches) {
-    if (!existsSync(cache)) continue;
-    const revs = readdirSync(cache)
-      .map((d) => /^chromium-(\d+)$/.exec(d))
-      .filter((m): m is RegExpExecArray => m !== null)
-      .sort((a, b) => Number(b[1]) - Number(a[1]));
-    for (const m of revs) {
-      for (const rel of [
-        'chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing',
-        'chrome-mac/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing',
-        'chrome-mac/Chromium.app/Contents/MacOS/Chromium',
-        'chrome-linux/chrome',
-        'chrome-linux64/chrome',
-      ]) {
-        const p = path.join(cache, m[0], rel);
-        if (existsSync(p)) return p;
-      }
+    for (const rel of BROWSER_RELPATHS) {
+      const p = path.join(cache, `chromium-${revision}`, rel);
+      if (existsSync(p)) return p;
     }
   }
-  for (const sys of [
-    '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
-    '/usr/bin/google-chrome',
-    '/usr/bin/chromium',
-    '/usr/bin/chromium-browser',
-  ]) {
-    if (existsSync(sys)) return sys;
+  return null;
+}
+
+/** Every chromium revision present under the given cache roots, newest first. */
+export function chromiumRevisionsPresent(caches: string[]): string[] {
+  const seen = new Set<string>();
+  for (const cache of caches) {
+    if (!existsSync(cache)) continue;
+    for (const d of readdirSync(cache)) {
+      const m = /^chromium-(\d+)$/.exec(d);
+      if (m) seen.add(m[1]);
+    }
   }
+  return [...seen].sort((a, b) => Number(b) - Number(a));
+}
+
+/**
+ * THE PINNED REVISION, OR A REFUSAL — never "whatever is newest on disk".
+ *
+ * WHY (measured 2026-08-25, v1-integration-2). This function used to sort the
+ * ms-playwright cache by revision number and take the HIGHEST present. A dev
+ * machine had a stray `chromium-1234` (Chromium 151.0.7922.34) installed for an
+ * unrelated tool, while `playwright-core` pins `chromium-1228`
+ * (Chromium 149.0.7827.55) — which is what CI installs and what every committed
+ * capture was taken on. So every local recording silently rendered on a browser
+ * CI never runs. The cost: 37 drift rows moved, 88 CI findings, and a `darwin`
+ * platform baseline in evals/fixtures/computed-floor-platform-baseline.json
+ * recorded on the wrong binary. A different Chromium computes different styles
+ * (`position-anchor` alone flipped `none` -> `normal` between those two), so a
+ * receipt recorded on it disagrees with CI while looking perfectly green.
+ *
+ * This is NOT only a dev-machine hazard: the workflows cache
+ * `~/.cache/ms-playwright` with `restore-keys`, so a CI cache accumulates
+ * revisions across lockfile bumps and "highest present" is wrong there too the
+ * moment playwright is downgraded.
+ *
+ * PLAYWRIGHT_CHROMIUM_PATH still wins — that is an operator saying which binary
+ * they mean, on the record, and CI uses it. What is gone is the SILENT
+ * substitution: no highest-revision sort, and no system-Chrome fallback.
+ */
+export function chromiumExecutable(): string {
+  if (process.env.PLAYWRIGHT_CHROMIUM_PATH) return process.env.PLAYWRIGHT_CHROMIUM_PATH;
+  const revision = pinnedChromiumRevision();
+  const caches = chromiumCacheRoots();
+  const found = chromiumExecutableIn(caches, revision);
+  if (found) return found;
+  const present = chromiumRevisionsPresent(caches);
   throw new Error(
-    'No Chromium found — set PLAYWRIGHT_CHROMIUM_PATH, or install one via `npx playwright install chromium`',
+    `No Chromium at the revision playwright-core pins (chromium-${revision}). ` +
+      (present.length > 0
+        ? `The ms-playwright cache holds ${present.map((r) => `chromium-${r}`).join(', ')} — none is the pinned ` +
+          'revision, and this resolver will NOT substitute one: a different Chromium computes different styles, ' +
+          'so anything recorded on it disagrees with CI while looking green. '
+        : 'The ms-playwright cache holds no chromium at all. ') +
+      'Install it with `npx playwright install chromium` (or `npx playwright-core install chromium`), ' +
+      'or set PLAYWRIGHT_CHROMIUM_PATH deliberately to say which binary you mean.',
   );
 }
 
