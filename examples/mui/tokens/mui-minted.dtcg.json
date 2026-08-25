@@ -7317,10 +7317,6 @@
         "color": {
           "$value": "{palette-primary-main}",
           "$type": "color"
-        },
-        "width": {
-          "$value": "40px",
-          "$type": "dimension"
         }
       }
     },

@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "fluent.checkbox",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Checkbox — generated from contract fluent.checkbox v0.2.0 † (99 code-only facts — see plugin report)",
+    "description": "Checkbox — generated from contract fluent.checkbox v0.2.0 † (78 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -479,30 +479,11 @@ const COMPONENTS = [
               "clipsContent": true,
               "children": [
                 {
-                  "type": "frame",
-                  "name": "icon",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "MIN"
-                  },
-                  "clipsContent": true,
-                  "children": [
-                    {
-                      "type": "frame",
-                      "name": "part-1-0-0",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    }
-                  ]
+                  "type": "svg",
+                  "name": "indicator-checked-medium",
+                  "svg": "<svg viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 9.76 3.2 C 10.06 3.49 10.08 3.96 9.8 4.26 L 5.55 8.76 A 0.75 0.75 0 0 1 4.47 8.78 L 2.22 6.53 A 0.75 0.75 0 0 1 3.28 5.47 L 4.98 7.17 L 8.7 3.24 A 0.75 0.75 0 0 1 9.76 3.2\" fill=\"#ffffff\"/></svg>",
+                  "svgPaintVar": "imported/checkbox/indicator/fill/checked",
+                  "iconSize": 12
                 }
               ]
             },
@@ -607,30 +588,11 @@ const COMPONENTS = [
               "clipsContent": true,
               "children": [
                 {
-                  "type": "frame",
-                  "name": "icon",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "MIN"
-                  },
-                  "clipsContent": true,
-                  "children": [
-                    {
-                      "type": "frame",
-                      "name": "part-1-0-0",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    }
-                  ]
+                  "type": "svg",
+                  "name": "indicator-checked-medium",
+                  "svg": "<svg viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 9.76 3.2 C 10.06 3.49 10.08 3.96 9.8 4.26 L 5.55 8.76 A 0.75 0.75 0 0 1 4.47 8.78 L 2.22 6.53 A 0.75 0.75 0 0 1 3.28 5.47 L 4.98 7.17 L 8.7 3.24 A 0.75 0.75 0 0 1 9.76 3.2\" fill=\"#ffffff\"/></svg>",
+                  "svgPaintVar": "imported/checkbox/indicator/fill/checked",
+                  "iconSize": 12
                 }
               ]
             },
@@ -735,30 +697,11 @@ const COMPONENTS = [
               "clipsContent": true,
               "children": [
                 {
-                  "type": "frame",
-                  "name": "icon",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "MIN"
-                  },
-                  "clipsContent": true,
-                  "children": [
-                    {
-                      "type": "frame",
-                      "name": "part-1-0-0",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    }
-                  ]
+                  "type": "svg",
+                  "name": "indicator-checked-large",
+                  "svg": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 14.05 3.49 C 14.33 3.79 14.32 4.26 14.01 4.55 L 6.08 12.02 A 0.85 0.85 0 0 1 4.9 12 L 2.22 9.28 A 0.75 0.75 0 1 1 3.28 8.22 L 5.52 10.49 L 12.99 3.45 A 0.75 0.75 0 0 1 14.05 3.49\" fill=\"#ffffff\"/></svg>",
+                  "svgPaintVar": "imported/checkbox/indicator/fill/checked",
+                  "iconSize": 16
                 }
               ]
             },
@@ -863,30 +806,11 @@ const COMPONENTS = [
               "clipsContent": true,
               "children": [
                 {
-                  "type": "frame",
-                  "name": "icon",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "MIN"
-                  },
-                  "clipsContent": true,
-                  "children": [
-                    {
-                      "type": "frame",
-                      "name": "part-1-0-0",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    }
-                  ]
+                  "type": "svg",
+                  "name": "indicator-checked-large",
+                  "svg": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 14.05 3.49 C 14.33 3.79 14.32 4.26 14.01 4.55 L 6.08 12.02 A 0.85 0.85 0 0 1 4.9 12 L 2.22 9.28 A 0.75 0.75 0 1 1 3.28 8.22 L 5.52 10.49 L 12.99 3.45 A 0.75 0.75 0 0 1 14.05 3.49\" fill=\"#ffffff\"/></svg>",
+                  "svgPaintVar": "imported/checkbox/indicator/fill/checked",
+                  "iconSize": 16
                 }
               ]
             },
@@ -991,30 +915,11 @@ const COMPONENTS = [
               "clipsContent": true,
               "children": [
                 {
-                  "type": "frame",
-                  "name": "icon",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "MIN"
-                  },
-                  "clipsContent": true,
-                  "children": [
-                    {
-                      "type": "frame",
-                      "name": "part-1-0-0",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    }
-                  ]
+                  "type": "svg",
+                  "name": "indicator-mixed-medium-square",
+                  "svg": "<svg viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 2 4 C 2 2.9 2.9 2 4 2 H 8 A 2 2 0 0 1 10 4 V 8 A 2 2 0 0 1 8 10 H 4 A 2 2 0 0 1 2 8 Z\" fill=\"#0f6cbd\"/></svg>",
+                  "svgPaintVar": "imported/checkbox/indicator/fill/mixed",
+                  "iconSize": 12
                 }
               ]
             },
@@ -1119,30 +1024,11 @@ const COMPONENTS = [
               "clipsContent": true,
               "children": [
                 {
-                  "type": "frame",
-                  "name": "icon",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "MIN"
-                  },
-                  "clipsContent": true,
-                  "children": [
-                    {
-                      "type": "frame",
-                      "name": "part-1-0-0",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    }
-                  ]
+                  "type": "svg",
+                  "name": "indicator-mixed-medium-circular",
+                  "svg": "<svg viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#0f6cbd\"/></svg>",
+                  "svgPaintVar": "imported/checkbox/indicator/fill/mixed",
+                  "iconSize": 12
                 }
               ]
             },
@@ -1247,30 +1133,11 @@ const COMPONENTS = [
               "clipsContent": true,
               "children": [
                 {
-                  "type": "frame",
-                  "name": "icon",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "MIN"
-                  },
-                  "clipsContent": true,
-                  "children": [
-                    {
-                      "type": "frame",
-                      "name": "part-1-0-0",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    }
-                  ]
+                  "type": "svg",
+                  "name": "indicator-mixed-large-square",
+                  "svg": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 2 4.5 A 2.5 2.5 0 0 1 4.5 2 H 11.5 A 2.5 2.5 0 0 1 14 4.5 V 11.5 A 2.5 2.5 0 0 1 11.5 14 H 4.5 A 2.5 2.5 0 0 1 2 11.5 Z\" fill=\"#0f6cbd\"/></svg>",
+                  "svgPaintVar": "imported/checkbox/indicator/fill/mixed",
+                  "iconSize": 16
                 }
               ]
             },
@@ -1375,30 +1242,11 @@ const COMPONENTS = [
               "clipsContent": true,
               "children": [
                 {
-                  "type": "frame",
-                  "name": "icon",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "MIN"
-                  },
-                  "clipsContent": true,
-                  "children": [
-                    {
-                      "type": "frame",
-                      "name": "part-1-0-0",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    }
-                  ]
+                  "type": "svg",
+                  "name": "indicator-mixed-large-circular",
+                  "svg": "<svg viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#0f6cbd\"/></svg>",
+                  "svgPaintVar": "imported/checkbox/indicator/fill/mixed",
+                  "iconSize": 16
                 }
               ]
             },
@@ -1614,30 +1462,11 @@ const COMPONENTS = [
               "clipsContent": true,
               "children": [
                 {
-                  "type": "frame",
-                  "name": "icon",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "MIN"
-                  },
-                  "clipsContent": true,
-                  "children": [
-                    {
-                      "type": "frame",
-                      "name": "part-1-0-0",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    }
-                  ]
+                  "type": "svg",
+                  "name": "indicator-checked-medium",
+                  "svg": "<svg viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 9.76 3.2 C 10.06 3.49 10.08 3.96 9.8 4.26 L 5.55 8.76 A 0.75 0.75 0 0 1 4.47 8.78 L 2.22 6.53 A 0.75 0.75 0 0 1 3.28 5.47 L 4.98 7.17 L 8.7 3.24 A 0.75 0.75 0 0 1 9.76 3.2\" fill=\"#ffffff\"/></svg>",
+                  "svgPaintVar": "imported/checkbox/indicator/fill/checked",
+                  "iconSize": 12
                 }
               ]
             },
@@ -1742,30 +1571,11 @@ const COMPONENTS = [
               "clipsContent": true,
               "children": [
                 {
-                  "type": "frame",
-                  "name": "icon",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "MIN"
-                  },
-                  "clipsContent": true,
-                  "children": [
-                    {
-                      "type": "frame",
-                      "name": "part-1-0-0",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    }
-                  ]
+                  "type": "svg",
+                  "name": "indicator-mixed-medium-square",
+                  "svg": "<svg viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 2 4 C 2 2.9 2.9 2 4 2 H 8 A 2 2 0 0 1 10 4 V 8 A 2 2 0 0 1 8 10 H 4 A 2 2 0 0 1 2 8 Z\" fill=\"#0f6cbd\"/></svg>",
+                  "svgPaintVar": "imported/checkbox/indicator/fill/mixed",
+                  "iconSize": 12
                 }
               ]
             },
@@ -1971,30 +1781,11 @@ const COMPONENTS = [
               "clipsContent": true,
               "children": [
                 {
-                  "type": "frame",
-                  "name": "icon",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "MIN"
-                  },
-                  "clipsContent": true,
-                  "children": [
-                    {
-                      "type": "frame",
-                      "name": "part-1-0-0",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    }
-                  ]
+                  "type": "svg",
+                  "name": "indicator-checked-medium",
+                  "svg": "<svg viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 9.76 3.2 C 10.06 3.49 10.08 3.96 9.8 4.26 L 5.55 8.76 A 0.75 0.75 0 0 1 4.47 8.78 L 2.22 6.53 A 0.75 0.75 0 0 1 3.28 5.47 L 4.98 7.17 L 8.7 3.24 A 0.75 0.75 0 0 1 9.76 3.2\" fill=\"#ffffff\"/></svg>",
+                  "svgPaintVar": "imported/checkbox/indicator/fill/checked",
+                  "iconSize": 12
                 }
               ]
             },
@@ -2099,30 +1890,11 @@ const COMPONENTS = [
               "clipsContent": true,
               "children": [
                 {
-                  "type": "frame",
-                  "name": "icon",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "MIN"
-                  },
-                  "clipsContent": true,
-                  "children": [
-                    {
-                      "type": "frame",
-                      "name": "part-1-0-0",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    }
-                  ]
+                  "type": "svg",
+                  "name": "indicator-mixed-medium-square",
+                  "svg": "<svg viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 2 4 C 2 2.9 2.9 2 4 2 H 8 A 2 2 0 0 1 10 4 V 8 A 2 2 0 0 1 8 10 H 4 A 2 2 0 0 1 2 8 Z\" fill=\"#0f6cbd\"/></svg>",
+                  "svgPaintVar": "imported/checkbox/indicator/fill/mixed",
+                  "iconSize": 12
                 }
               ]
             },
@@ -2328,30 +2100,11 @@ const COMPONENTS = [
               "clipsContent": true,
               "children": [
                 {
-                  "type": "frame",
-                  "name": "icon",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "MIN"
-                  },
-                  "clipsContent": true,
-                  "children": [
-                    {
-                      "type": "frame",
-                      "name": "part-1-0-0",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    }
-                  ]
+                  "type": "svg",
+                  "name": "indicator-checked-medium",
+                  "svg": "<svg viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 9.76 3.2 C 10.06 3.49 10.08 3.96 9.8 4.26 L 5.55 8.76 A 0.75 0.75 0 0 1 4.47 8.78 L 2.22 6.53 A 0.75 0.75 0 0 1 3.28 5.47 L 4.98 7.17 L 8.7 3.24 A 0.75 0.75 0 0 1 9.76 3.2\" fill=\"#ffffff\"/></svg>",
+                  "svgPaintVar": "imported/checkbox/indicator/fill/checked",
+                  "iconSize": 12
                 }
               ]
             },
@@ -2456,30 +2209,11 @@ const COMPONENTS = [
               "clipsContent": true,
               "children": [
                 {
-                  "type": "frame",
-                  "name": "icon",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "MIN"
-                  },
-                  "clipsContent": true,
-                  "children": [
-                    {
-                      "type": "frame",
-                      "name": "part-1-0-0",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    }
-                  ]
+                  "type": "svg",
+                  "name": "indicator-mixed-medium-square",
+                  "svg": "<svg viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 2 4 C 2 2.9 2.9 2 4 2 H 8 A 2 2 0 0 1 10 4 V 8 A 2 2 0 0 1 8 10 H 4 A 2 2 0 0 1 2 8 Z\" fill=\"#0f6cbd\"/></svg>",
+                  "svgPaintVar": "imported/checkbox/indicator/fill/mixed",
+                  "iconSize": 12
                 }
               ]
             },
@@ -2685,30 +2419,11 @@ const COMPONENTS = [
               "clipsContent": true,
               "children": [
                 {
-                  "type": "frame",
-                  "name": "icon",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "MIN"
-                  },
-                  "clipsContent": true,
-                  "children": [
-                    {
-                      "type": "frame",
-                      "name": "part-1-0-0",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    }
-                  ]
+                  "type": "svg",
+                  "name": "indicator-checked-medium",
+                  "svg": "<svg viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 9.76 3.2 C 10.06 3.49 10.08 3.96 9.8 4.26 L 5.55 8.76 A 0.75 0.75 0 0 1 4.47 8.78 L 2.22 6.53 A 0.75 0.75 0 0 1 3.28 5.47 L 4.98 7.17 L 8.7 3.24 A 0.75 0.75 0 0 1 9.76 3.2\" fill=\"#ffffff\"/></svg>",
+                  "svgPaintVar": "imported/checkbox/indicator/fill/checked",
+                  "iconSize": 12
                 }
               ]
             },
@@ -2813,30 +2528,11 @@ const COMPONENTS = [
               "clipsContent": true,
               "children": [
                 {
-                  "type": "frame",
-                  "name": "icon",
-                  "layout": {
-                    "mode": "HORIZONTAL",
-                    "primary": "MIN",
-                    "counter": "MIN"
-                  },
-                  "clipsContent": true,
-                  "children": [
-                    {
-                      "type": "frame",
-                      "name": "part-1-0-0",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    }
-                  ]
+                  "type": "svg",
+                  "name": "indicator-mixed-medium-square",
+                  "svg": "<svg viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 2 4 C 2 2.9 2.9 2 4 2 H 8 A 2 2 0 0 1 10 4 V 8 A 2 2 0 0 1 8 10 H 4 A 2 2 0 0 1 2 8 Z\" fill=\"#0f6cbd\"/></svg>",
+                  "svgPaintVar": "imported/checkbox/indicator/fill/mixed",
+                  "iconSize": 12
                 }
               ]
             },
@@ -2932,145 +2628,6 @@ const COMPONENTS = [
       }
     ],
     "codeOnlyFacts": [
-      {
-        "part": "icon",
-        "kind": "capture",
-        "channel": "color [active]",
-        "value": "rgba(15, 84, 140, 1)",
-        "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
-        "variants": {
-          "count": 24,
-          "of": 24
-        }
-      },
-      {
-        "part": "icon",
-        "kind": "capture",
-        "channel": "color [disabled]",
-        "value": "rgba(189, 189, 189, 1)",
-        "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
-        "variants": {
-          "count": 24,
-          "of": 24
-        }
-      },
-      {
-        "part": "icon",
-        "kind": "capture",
-        "channel": "color [hover]",
-        "value": "rgba(17, 94, 163, 1)",
-        "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
-        "variants": {
-          "count": 24,
-          "of": 24
-        }
-      },
-      {
-        "part": "icon",
-        "kind": "capture",
-        "channel": "cursor [disabled]",
-        "value": "default",
-        "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 8/12 combos — partial coverage cannot carry as a state selector (v15); named residue",
-        "variants": {
-          "count": 24,
-          "of": 24
-        }
-      },
-      {
-        "part": "icon",
-        "kind": "capture",
-        "channel": "fill [active]",
-        "value": "rgba(15, 84, 140, 1)",
-        "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
-        "variants": {
-          "count": 24,
-          "of": 24
-        }
-      },
-      {
-        "part": "icon",
-        "kind": "capture",
-        "channel": "fill [disabled]",
-        "value": "rgba(189, 189, 189, 1)",
-        "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
-        "variants": {
-          "count": 24,
-          "of": 24
-        }
-      },
-      {
-        "part": "icon",
-        "kind": "capture",
-        "channel": "fill [hover]",
-        "value": "rgba(17, 94, 163, 1)",
-        "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
-        "variants": {
-          "count": 24,
-          "of": 24
-        }
-      },
-      {
-        "part": "icon",
-        "kind": "channel",
-        "channel": "aspect-ratio",
-        "value": "1 / 1",
-        "reason": "the canvas has no aspect-ratio field — this part carries no bound or literal width to derive a height from, so nothing was drawn from the ratio (a parent that takes its height from this part's ratio names that lowering on itself)",
-        "variants": {
-          "count": 16,
-          "of": 24,
-          "names": [
-            "Checked=Checked, Size=Medium, Shape=Square",
-            "Checked=Checked, Size=Medium, Shape=Circular",
-            "Checked=Checked, Size=Large, Shape=Square",
-            "Checked=Checked, Size=Large, Shape=Circular",
-            "Checked=Mixed, Size=Medium, Shape=Square",
-            "Checked=Mixed, Size=Medium, Shape=Circular",
-            "Checked=Mixed, Size=Large, Shape=Square",
-            "Checked=Mixed, Size=Large, Shape=Circular",
-            "Checked=Checked, Size=Medium, Shape=Square, State=Disabled",
-            "Checked=Mixed, Size=Medium, Shape=Square, State=Disabled",
-            "Checked=Checked, Size=Medium, Shape=Square, State=Focus Visible",
-            "Checked=Mixed, Size=Medium, Shape=Square, State=Focus Visible",
-            "Checked=Checked, Size=Medium, Shape=Square, State=Active",
-            "Checked=Mixed, Size=Medium, Shape=Square, State=Active",
-            "Checked=Checked, Size=Medium, Shape=Square, State=Hover",
-            "Checked=Mixed, Size=Medium, Shape=Square, State=Hover"
-          ]
-        }
-      },
-      {
-        "part": "icon",
-        "kind": "declared",
-        "channel": "cursor",
-        "value": "pointer",
-        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
-        "variants": {
-          "count": 24,
-          "of": 24
-        }
-      },
-      {
-        "part": "icon",
-        "kind": "declared",
-        "channel": "display",
-        "value": "block",
-        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
-        "variants": {
-          "count": 24,
-          "of": 24
-        }
-      },
-      {
-        "part": "icon",
-        "kind": "declared",
-        "channel": "pointer-events",
-        "value": "none",
-        "reason": "Pointer-event gating exists only in the coded component.",
-        "variants": {
-          "count": 24,
-          "of": 24
-        }
-      },
       {
         "part": "indicator",
         "kind": "capture",
@@ -3528,116 +3085,6 @@ const COMPONENTS = [
         "channel": "display",
         "value": "block",
         "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
-        "variants": {
-          "count": 24,
-          "of": 24
-        }
-      },
-      {
-        "part": "part-1-0-0",
-        "kind": "capture",
-        "channel": "color [active]",
-        "value": "rgba(15, 84, 140, 1)",
-        "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
-        "variants": {
-          "count": 24,
-          "of": 24
-        }
-      },
-      {
-        "part": "part-1-0-0",
-        "kind": "capture",
-        "channel": "color [disabled]",
-        "value": "rgba(189, 189, 189, 1)",
-        "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
-        "variants": {
-          "count": 24,
-          "of": 24
-        }
-      },
-      {
-        "part": "part-1-0-0",
-        "kind": "capture",
-        "channel": "color [hover]",
-        "value": "rgba(17, 94, 163, 1)",
-        "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
-        "variants": {
-          "count": 24,
-          "of": 24
-        }
-      },
-      {
-        "part": "part-1-0-0",
-        "kind": "capture",
-        "channel": "cursor [disabled]",
-        "value": "default",
-        "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 8/12 combos — partial coverage cannot carry as a state selector (v15); named residue",
-        "variants": {
-          "count": 24,
-          "of": 24
-        }
-      },
-      {
-        "part": "part-1-0-0",
-        "kind": "capture",
-        "channel": "fill [active]",
-        "value": "rgba(15, 84, 140, 1)",
-        "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
-        "variants": {
-          "count": 24,
-          "of": 24
-        }
-      },
-      {
-        "part": "part-1-0-0",
-        "kind": "capture",
-        "channel": "fill [disabled]",
-        "value": "rgba(189, 189, 189, 1)",
-        "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
-        "variants": {
-          "count": 24,
-          "of": 24
-        }
-      },
-      {
-        "part": "part-1-0-0",
-        "kind": "capture",
-        "channel": "fill [hover]",
-        "value": "rgba(17, 94, 163, 1)",
-        "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
-        "variants": {
-          "count": 24,
-          "of": 24
-        }
-      },
-      {
-        "part": "part-1-0-0",
-        "kind": "declared",
-        "channel": "cursor",
-        "value": "pointer",
-        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
-        "variants": {
-          "count": 24,
-          "of": 24
-        }
-      },
-      {
-        "part": "part-1-0-0",
-        "kind": "declared",
-        "channel": "display",
-        "value": "inline",
-        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
-        "variants": {
-          "count": 24,
-          "of": 24
-        }
-      },
-      {
-        "part": "part-1-0-0",
-        "kind": "declared",
-        "channel": "pointer-events",
-        "value": "none",
-        "reason": "Pointer-event gating exists only in the coded component.",
         "variants": {
           "count": 24,
           "of": 24
@@ -4778,6 +4225,15 @@ async function buildNode(spec, registry) {
     node.fills = [];
     node.clipsContent = false;
     if (spec.iconSize) node.resize(spec.iconSize, spec.iconSize);
+    if (spec.svgPaintVar) {
+      const glyphPaint = boundPaint(spec.svgPaintVar, node);
+      const rebind = (n) => {
+        if (Array.isArray(n.fills) && n.fills.length > 0) n.fills = [glyphPaint];
+        if (Array.isArray(n.strokes) && n.strokes.length > 0) n.strokes = [glyphPaint];
+        if (n.children) for (const c of n.children) rebind(c);
+      };
+      for (const c of node.children) rebind(c);
+    }
     // FC-SVG-ROTATION: CSS-clockwise → Plugin API counterclockwise
     if (typeof spec.rotation === 'number' && spec.rotation !== 0) node.rotation = -spec.rotation;
   } else if (spec.type === 'text') {

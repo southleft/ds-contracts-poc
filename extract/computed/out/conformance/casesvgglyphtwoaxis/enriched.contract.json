@@ -77,46 +77,90 @@
             "font-family": "monospace"
           },
           "parts": {
-            "icon": {
-              "element": "svg",
-              "description": "Promoted from the computed floor (round 4): rendered anatomy svg| — this element exists in the real component's DOM; the static layer had no part for it.",
-              "declared": {
-                "display": "block",
-                "aspect-ratio": "1 / 1",
-                "font-family": "monospace",
-                "overflow-x": "hidden",
-                "overflow-y": "hidden"
+            "a-plain-sm": {
+              "icon": {
+                "asset": "case-svg-glyph-two-axis-a-plain-sm",
+                "size": 12
               },
-              "layout": {
-                "grow": true
+              "visibleWhen": {
+                "prop": "tone",
+                "equals": "plain"
               },
-              "parts": {
-                "part-0-0-0": {
-                  "element": "path",
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy path| — this element exists in the real component's DOM; the static layer had no part for it.",
-                  "declared": {
-                    "display": "inline",
-                    "font-family": "monospace"
-                  },
-                  "tokens": {
-                    "color": "{imported.shared.color-1e5ab4}",
-                    "font-size": "{imported.shared.size-12}",
-                    "min-height": "{imported.case-svg-glyph-two-axis.part-0-0-0.min-height}",
-                    "min-width": "{imported.case-svg-glyph-two-axis.part-0-0-0.min-width}",
-                    "stroke": "{imported.shared.color-1e5ab4}",
-                    "stroke-width": "{imported.case-svg-glyph-two-axis.part-0-0-0.stroke-width}"
+              "stylesWhen": [
+                {
+                  "prop": "size",
+                  "equals": "lg",
+                  "styles": {
+                    "display": "none"
                   }
                 }
+              ],
+              "description": "Per-conjunction svg content promoted from the computed floor: the glyph drawn when tone=plain, size=sm."
+            },
+            "a-plain-lg": {
+              "icon": {
+                "asset": "case-svg-glyph-two-axis-a-plain-lg",
+                "size": 16
               },
-              "tokens": {
-                "color": "{imported.shared.color-1e5ab4}",
-                "font-size": "{imported.shared.size-12}"
-              }
+              "visibleWhen": {
+                "prop": "tone",
+                "equals": "plain"
+              },
+              "stylesWhen": [
+                {
+                  "prop": "size",
+                  "equals": "sm",
+                  "styles": {
+                    "display": "none"
+                  }
+                }
+              ],
+              "description": "Per-conjunction svg content promoted from the computed floor: the glyph drawn when tone=plain, size=lg."
+            },
+            "a-marked-sm": {
+              "icon": {
+                "asset": "case-svg-glyph-two-axis-a-marked-sm",
+                "size": 12
+              },
+              "visibleWhen": {
+                "prop": "tone",
+                "equals": "marked"
+              },
+              "stylesWhen": [
+                {
+                  "prop": "size",
+                  "equals": "lg",
+                  "styles": {
+                    "display": "none"
+                  }
+                }
+              ],
+              "description": "Per-conjunction svg content promoted from the computed floor: the glyph drawn when tone=marked, size=sm."
+            },
+            "a-marked-lg": {
+              "icon": {
+                "asset": "case-svg-glyph-two-axis-a-marked-lg",
+                "size": 16
+              },
+              "visibleWhen": {
+                "prop": "tone",
+                "equals": "marked"
+              },
+              "stylesWhen": [
+                {
+                  "prop": "size",
+                  "equals": "sm",
+                  "styles": {
+                    "display": "none"
+                  }
+                }
+              ],
+              "description": "Per-conjunction svg content promoted from the computed floor: the glyph drawn when tone=marked, size=lg."
             }
           },
           "tokens": {
-            "color": "{imported.shared.color-1e5ab4}",
-            "font-size": "{imported.shared.size-12}"
+            "color": "{imported.case-svg-glyph-two-axis.a.color}",
+            "font-size": "{imported.case-svg-glyph-two-axis.a.font-size}"
           }
         }
       },
@@ -126,7 +170,7 @@
       },
       "tokens": {
         "background-color": "{imported.case-svg-glyph-two-axis.root.background-color}",
-        "font-size": "{imported.shared.size-12}"
+        "font-size": "{imported.case-svg-glyph-two-axis.root.font-size}"
       }
     }
   },

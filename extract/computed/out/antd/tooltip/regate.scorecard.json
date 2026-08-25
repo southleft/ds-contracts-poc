@@ -162,6 +162,7 @@
       ]
     ],
     "namedLosses": [
+      "promotion: pseudo-decor-clip-path-uncarried: tooltip-arrow::before is cut by clip-path path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\") in 1/1 drawn combos - the contract's ShapeSchema is rect / ellipse / REGULAR n-gon and has no spelling for an arbitrary clip region; the box is promoted UNCLIPPED (more ink than the library draws) and the clip is NOT carried",
       "promotion: pseudo-decor-outside-grammar: tooltip-arrow::after is painted by a mechanism the grammar cannot read (box-shadow: rgba(0, 0, 0, 0.05) 2px 2px 5px 0px) — the decor grammar reads background-color alpha and border rings only; the box is NOT promoted",
       "code-only: root.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: tooltip-arrow.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",

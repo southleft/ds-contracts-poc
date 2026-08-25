@@ -90,7 +90,7 @@
   ],
   "topMismatchedChannels": [],
   "namedLosses": [
-    "promotion: svg-content-multi-axis: CaseSvgGlyphAbsentCells.a — markup varies over more than one axis; asset refused (part still promoted as a box)",
+    "promotion: svg-content-multi-axis: CaseSvgGlyphAbsentCells.a - markup varies over more than one axis; asset refused (part still promoted as a box) - the conjunction \"plain-marked\" is not a rectangle over the part's own presence domain: it would draw this glyph in 2 of the 6 combo(s) where \"a\" renders but the library does not (2 draw NO glyph at all: plain.lg, marked.sm; 0 draw a DIFFERENT glyph)",
     "promotion: part-presence-uncorrelated: icon present in 4/6 enabled combos and the presence set does not factor per-axis (nor does its ABSENCE — the round-5c complement spelling was tried) — part NOT promoted (named refusal; a phantom always-drawn part would be worse)"
   ],
   "unresolvedTokenRefs": {

@@ -126,26 +126,53 @@ for (const file of scripts) {
       if (new Set(counts).size !== 1) throw new Error(`${name} Checked-axis pin: axis not orthogonal — ${values.map((v, i) => `${v}:${counts[i]}`).join(' ')}`);
     }
     if (name.startsWith('checkbox')) {
-      // THE TRI-STATE GLYPH PIN, INVERTED BY MEASUREMENT. RECON §5 predicted
-      // "the tri-state glyphs should promote (one-axis discipline)" and the
-      // config honoured that discipline exactly — `checked` is ONE axis, the
-      // axisValueMap maps unchecked/checked/mixed to false/true/"mixed". It
-      // was still not enough, and the reason is a fact about Fluent rather
-      // than about the config: the glyph's viewBox is a function of `size`
-      // too (12×12 at medium, 16×16 at large — see the svg-viewbox-
-      // reconstructed receipts), so the markup varies over TWO axes and the
-      // promotion refuses BY NAME:
-      //   svg-content-multi-axis: Checkbox.indicator — markup varies over
-      //   more than one axis; asset refused (part still promoted as a box)
-      // The single-axis rule is therefore UNSATISFIABLE BY CONFIG here: the
-      // only way to earn the glyph is to pin `size`, i.e. to give up a real
-      // variant axis for an icon. This pin asserts the refusal is present and
-      // NAMED — the honest claim — instead of asserting a promotion this
-      // library cannot produce. If a future round makes the glyph survive two
-      // axes, this pin fails and gets rewritten in that round's terms.
+      // THE TRI-STATE GLYPH PIN, RE-INVERTED (RC4). It used to assert the
+      // REFUSAL, and its own closing sentence promised: "if a future round
+      // makes the glyph survive two axes, this pin fails and gets rewritten in
+      // that round's terms." That round is here - the asset plan now factors
+      // the markup over a RECTANGULAR per-axis conjunction (checked x size x
+      // shape), asserted over the indicator's own presence domain so no cell
+      // the library leaves empty can be minted.
+      //
+      // A DEFECT IN THE INSTRUMENT, FIXED ON THE WAY: the old pin matched the
+      // refusal by SUBSTRING. Had the carriage receipt been named
+      // `svg-content-multi-axis-carried`, this pin would have stayed GREEN over
+      // the exact change it exists to catch. The carriage receipt is therefore
+      // named `svg-glyph-conjunction-carried` - no substring relationship - and
+      // this pin asserts the POSITIVE: the carriage by full name, the ABSENCE
+      // of a bare refusal, six per-conjunction glyph parts each conditioned on
+      // `checked`, and all five path bodies inside the compiled canvas script.
       const ext = JSON.parse(readFileSync(path.join(EX, 'contracts', 'checkbox.extension.json'), 'utf8'));
-      if (!JSON.stringify(ext).includes('svg-content-multi-axis')) {
-        throw new Error('checkbox glyph pin: expected a NAMED svg-content-multi-axis refusal on Checkbox.indicator (the glyph varies over checked AND size); it is absent — either the glyph now promotes (good, rewrite this pin) or the refusal stopped being receipted (bad)');
+      const extJson = JSON.stringify(ext);
+      if (!extJson.includes('svg-glyph-conjunction-carried')) {
+        throw new Error('checkbox glyph pin: expected the NAMED carriage receipt svg-glyph-conjunction-carried on Checkbox.indicator; it is absent - the multi-axis glyph stopped being carried');
+      }
+      if (/svg-content-multi-axis(?!-)/.test(extJson)) {
+        throw new Error('checkbox glyph pin: a bare svg-content-multi-axis REFUSAL is back on Checkbox.indicator - the glyph is being thrown away again');
+      }
+      const contract = JSON.parse(readFileSync(path.join(EX, 'contracts', 'checkbox.contract.json'), 'utf8'));
+      const glyphParts = Object.entries(contract.anatomy?.root?.parts?.indicator?.parts ?? {}).filter(
+        ([, p]) => p && typeof p === 'object' && p.icon,
+      );
+      if (glyphParts.length !== 6) {
+        throw new Error(`checkbox glyph pin: expected 6 per-conjunction glyph parts under root.indicator (checked x {medium,large}; mixed x {medium,large} x {square,circular}), got ${glyphParts.length}`);
+      }
+      for (const [pn, p] of glyphParts) {
+        if (p.visibleWhen?.prop !== 'checked') {
+          throw new Error(`checkbox glyph pin: ${pn} is not conditioned on the checked axis (visibleWhen ${JSON.stringify(p.visibleWhen)})`);
+        }
+      }
+      const assetNames = [...new Set(glyphParts.map(([, p]) => p.icon.asset))];
+      if (assetNames.length !== 5) {
+        throw new Error(`checkbox glyph pin: expected 5 distinct glyph assets over 6 parts (the mixed-circular glyph is ONE authored asset drawn at 12 and 16), got ${assetNames.length}: ${assetNames.join(', ')}`);
+      }
+      for (const a of assetNames) {
+        const svg = readFileSync(path.join(EX, 'assets', 'icons', `${a}.svg`), 'utf8');
+        const body = /\sd="([^"]*)"/.exec(svg)?.[1];
+        if (!body) throw new Error(`checkbox glyph pin: asset ${a}.svg carries no path data`);
+        if (!src.includes(body)) {
+          throw new Error(`checkbox glyph pin: the path body of ${a}.svg is NOT inside the compiled canvas script - the glyph exists in the contract and never reaches the canvas`);
+        }
       }
     }
     if (name.startsWith('message-bar') || name.startsWith('messagebar')) {

@@ -16,13 +16,13 @@ repo it is simply absent from the denominator and scores 100%.
 
 | | |
 |---|---|
-| cases | **91** |
-| 🟢 pass | **88** |
+| cases | **101** |
+| 🟢 pass | **98** |
 | 🔴 red | **3** |
 | 🟡 yellow (UNSUPPORTED, never read) | **0** |
 | **UNSUPPORTED declared — THE RATCHET** | **18** · may only DECREASE without an explicit manifest edit |
 
-Declared dispositions: CARRIED 50 · LOWERED 4 · REFUSED 19 · UNSUPPORTED 18.
+Declared dispositions: CARRIED 55 · LOWERED 4 · REFUSED 24 · UNSUPPORTED 18.
 
 **A green gate here would mean the cases are too easy.** The point of the
 fixture is a measured frontier, and every red below is an open, named defect —
@@ -72,6 +72,7 @@ manifest.
 | 🟢 | `antd-forwarded-root-attrs` | anatomy | `label > [input.sr-only + span.box] + span.text — the component forwards className/data-* to the HIDDEN input, not the visible label root (antd Checkbox/Radio)` | CARRIED | carried | PASS |
 | 🟢 | `antd-overlay-digit-depth-three` | anatomy | `sup(absolute, translate(50%,-50%)) > bdi > span > span — a count digit THREE levels deep in an absolutely positioned overlay, the deepest span carrying NO identity class (antd's rc-scroll-number `current` is transient and dropped by classAllow; the fixture spells the same absence with a bare span — the frontier eval refuses any non-neutral class in a case)` | CARRIED | carried | PASS |
 | 🟢 | `antd-presence-times-axis-glyph` | anatomy | `a child part whose PRESENCE is one prop (showIcon) and whose paint is ANOTHER (type) — the base (default) combo mounts without it (antd Alert)` | CARRIED | carried | PASS |
+| 🟢 | `svg-stroke-glyph-fill-none` | anatomy | `a STROKE-drawn svg glyph whose computed fill is none (the lucide check: an open path, stroke=currentColor, fill="none" on the svg)` | REFUSED | refused, by name | PASS |
 | 🔴 | `container-query` | at-rules | `@container (min-inline-size: 100px) { … }` | UNSUPPORTED | carried | UNDECLARED-CARRY |
 | 🔴 | `media-non-matching` | at-rules | `@media (min-width: 2000px) branch that does NOT match the pinned viewport` | UNSUPPORTED | carried | UNDECLARED-CARRY |
 | 🟢 | `color-hex` | color | `color: #1976d2 (authored as hex)` | CARRIED | carried | PASS |
@@ -127,21 +128,26 @@ manifest.
 | 🟢 | `grid-track-zero-value` | grid-tracks | `a 0px or 0fr track written to the canvas` | REFUSED | refused, by name | PASS |
 | 🟢 | `grid-tracks-mixed-fractional` | grid-tracks | `grid-template-columns: 33.5px 2.5fr 1fr (mixed list, fractional values)` | CARRIED | carried | PASS |
 | 🟢 | `grid-two-column` | grid-tracks | `display: grid; grid-template-columns: 1fr 1fr` | CARRIED | carried | PASS |
+| 🟢 | `grid-zero-track-collapse` | grid-tracks | `a computed grid track list containing a 0px track — the resolved width of an EMPTY slot column (min-content with no occupant)` | CARRIED | carried | PASS |
 | 🟢 | `antd-focus-outline-ring` | interaction-states | `button.root:focus-visible { outline: 3px solid rgb(145, 202, 255); outline-offset: 1px } — the focus ring as an OUTLINE state delta on the ROOT (antd Button, Switch)` | CARRIED | carried | PASS |
 | 🟢 | `antd-focus-outline-ring-child-part` | interaction-states | `label > span > [input.sr-only:focus-visible + span.box { outline: 3px solid rgb(145, 202, 255) }] — the focus ring as an OUTLINE state delta on a NESTED PART (antd Checkbox-inner, Radio-inner)` | REFUSED | refused, by name | PASS |
 | 🟢 | `antd-focus-outline-ring-ua-width` | interaction-states | `button.root { outline-style: none } :focus-visible { outline: 3px solid rgb(145, 202, 255); outline-offset: 1px } — the ring's declared width EQUALS Chromium's own `outline-width: medium` (3px) at rest, so the width never differs between planes (antd Button/Switch: --ant-line-width-focus is 3px)` | CARRIED | carried | PASS |
+| 🟢 | `block-root-shrink-to-fit` | invariant | `a display:block root that filled NOTHING — the flex stage made it a flex item and it shrink-to-fit its content, so its computed width is a harness-text measurement (the astryx.card 114.203px family)` | REFUSED | refused, by name | PASS |
 | 🟢 | `nonpainting-text-display-none` | invariant | `a NON-PAINTING element carrying text (display: none)` | CARRIED | carried | PASS |
 | 🟢 | `nonpainting-text-visibility-hidden` | invariant | `a NON-PAINTING element carrying text (visibility: hidden)` | REFUSED | refused, by name | PASS |
 | 🔴 | `stage-box-equal` | invariant | `a captured box exactly equal to the STAGE box (100% × 100%)` | REFUSED | carried | UNDECLARED-CARRY |
+| 🟢 | `flex-direction-by-axis` | layout | `flex-direction that VARIES on one enum axis (column at the default value, row on the other) — the fluent.card orientation shape` | CARRIED | carried | PASS |
 | 🟢 | `flex-gap` | layout | `column-gap / row-gap in px` | CARRIED | carried | PASS |
 | 🟢 | `grid-2d` | layout | `display: grid + grid-template-columns: 1fr 1fr (children AUTO-PLACED)` | CARRIED | carried | PASS |
 | 🟢 | `antd-part-transition-channel` | motion | `.cf-a { transition: background-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) } — a transition declared on a CHILD PART, not the root (antd's `motionDurationMid` on every interactive part)` | CARRIED | carried | PASS |
 | 🟢 | `transition-channel` | motion | `transition: background-color 200ms ease` | CARRIED | carried | PASS |
+| 🟢 | `border-color-control-equal` | paint | `a border-color EQUAL to the bare control element's (a library global like shadcn's `* { border-color: var(--border) }` styles the control too) on a part that draws a real border` | CARRIED | carried | PASS |
 | 🟢 | `position-absolute-insets` | position | `position: absolute + top/left insets` | CARRIED | carried | PASS |
 | 🟢 | `position-fixed` | position | `position: fixed` | REFUSED | refused, by name | PASS |
 | 🟢 | `position-sticky` | position | `position: sticky + top` | REFUSED | refused, by name | PASS |
 | 🟢 | `pseudo-backdrop` | pseudo-elements | `dialog::backdrop { background-color }` | UNSUPPORTED | not read | PASS |
 | 🟢 | `pseudo-content-glyph` | pseudo-elements | `::before { content: "\2715"; font-family: icons }` | REFUSED | refused, by name | PASS |
+| 🟢 | `pseudo-decor-clip-path` | pseudo-elements | `a DRAWN ::after decor box whose entire SHAPE is a clip-path (the antd tooltip arrow: a 16x8 solid box cut to a triangle)` | REFUSED | refused, by name | PASS |
 | 🟢 | `pseudo-gradient-only` | pseudo-elements | `::after painted ONLY by a linear-gradient` | REFUSED | refused, by name | PASS |
 | 🟢 | `pseudo-marker` | pseudo-elements | `li::marker { color; font-size }` | UNSUPPORTED | refused, by name | PASS |
 | 🟢 | `pseudo-placeholder` | pseudo-elements | `input::placeholder { color }` | UNSUPPORTED | refused, by name | PASS |
@@ -149,9 +155,13 @@ manifest.
 | 🟢 | `content-visibility-auto` | rendering | `content-visibility: auto` | UNSUPPORTED | refused, by name | PASS |
 | 🟢 | `shadow-part` | shadow-dom | `::part(label) styling across an OPEN shadow boundary` | CARRIED | carried | PASS |
 | 🟢 | `shadow-root-closed` | shadow-dom | `a custom element with a CLOSED shadow root` | UNSUPPORTED | not read | PASS |
+| 🟢 | `svg-glyph-absent-cells` | svg | `a glyph shared by (plain,sm) and (marked,lg) whose per-axis rectangle also COVERS (plain,lg) and (marked,sm), where the library draws no glyph at all` | REFUSED | refused, by name | PASS |
+| 🟢 | `svg-glyph-axes-ragged` | svg | `glyph markup whose value sets are RAGGED across two axes — one glyph on the (plain,sm)/(marked,lg) diagonal, two others on the opposite one` | REFUSED | refused, by name | PASS |
+| 🟢 | `svg-glyph-two-axis` | svg | `one glyph whose path data varies over TWO enum axes at once (tone x size), every conjunction drawn — the fluent.checkbox indicator shape` | CARRIED | carried | PASS |
 | 🟢 | `svg-outside-grammar` | svg | `<svg> whose children are <circle> and <rect>` | REFUSED | refused, by name | PASS |
 | 🟢 | `text-overflow-ellipsis` | text | `text-overflow: ellipsis + overflow hidden + nowrap` | CARRIED | carried | PASS |
 | 🟢 | `antd-component-scoped-custom-property` | tokens | `.cf-root { --cf-scoped-pad: 15px } .cf-root .cf-a { padding-inline: var(--cf-scoped-pad) } — a token DECLARED ON THE COMPONENT ROOT (not :root) and consumed by a descendant (antd cssVar component tokens on `.antd.ant-btn`)` | CARRIED | carried | PASS |
+| 🟢 | `presence-hidden-axis-geometry` | tokens | `an absolute part's inset that is a clean function of ONE enum axis, with the part NOT RENDERED at one axis value (polaris.checkbox icon: top/left 0px when checked, -2px when indeterminate, absent when unchecked)` | CARRIED | carried | PASS |
 | 🟢 | `rotate-independent-property` | transform | `rotate: 15deg (the INDEPENDENT transform property)` | UNSUPPORTED | refused, by name | PASS |
 | 🟢 | `transform-scale-rotate` | transform | `transform: rotate(15deg) scale(1.2)` | REFUSED | refused, by name | PASS |
 | 🟢 | `em-relative-padding` | units | `padding: 1.5em against a 12px font-size` | CARRIED | carried | PASS |

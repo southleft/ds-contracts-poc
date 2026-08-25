@@ -12,21 +12,21 @@ declared on that wrapper div, never on `:root` (RECON §2.3).
 
 | script | contract | variant axes | variants | headless execute | text-caused overflows |
 |---|---|---|---|---|---|
-| avatar.figma.js | fluent.avatar | shape(2)×active(3)×size(3) | 18 | tokens 2116 (261 aliased) · 1 set(s) built | 0 |
-| badge.figma.js | fluent.badge | appearance(4)×color(8)×size(6) | 192 | tokens 2116 (261 aliased) · 1 set(s) built | 0 |
-| button.figma.js | fluent.button | appearance(5)×size(3)×shape(3) | 45 | tokens 2116 (261 aliased) · 1 set(s) built | 0 |
-| card.figma.js | fluent.card | appearance(4)×size(3)×orientation(2) | 24 | tokens 2116 (261 aliased) · 1 set(s) built | 0 |
-| checkbox.figma.js | fluent.checkbox | checked(3)×size(2)×shape(2) | 12 | tokens 2116 (261 aliased) · 1 set(s) built | 0 |
-| dialog.figma.js | fluent.dialog | modalType(3) | 3 | tokens 2116 (261 aliased) · 1 set(s) built | 0 |
-| input.figma.js | fluent.input | appearance(6)×size(3) | 18 | tokens 2116 (261 aliased) · 1 set(s) built | 0 |
-| spinner.figma.js | fluent.spinner | size(8)×appearance(2)×labelPosition(4) | 64 | tokens 2116 (261 aliased) · 1 set(s) built | 32 |
-| switch.figma.js | fluent.switch | checked(2)×labelPosition(3) | 6 | tokens 2116 (261 aliased) · 1 set(s) built | 0 |
-| tab-list.figma.js | fluent.tab-list | appearance(4)×size(3)×orientation(2) | 24 | tokens 2116 (261 aliased) · 1 set(s) built | 0 |
-| tooltip.figma.js | fluent.tooltip | appearance(2) | 2 | tokens 2116 (261 aliased) · 1 set(s) built | 2 |
+| avatar.figma.js | fluent.avatar | shape(2)×active(3)×size(3) | 18 | tokens 2112 (261 aliased) · 1 set(s) built | 0 |
+| badge.figma.js | fluent.badge | appearance(4)×color(8)×size(6) | 192 | tokens 2112 (261 aliased) · 1 set(s) built | 0 |
+| button.figma.js | fluent.button | appearance(5)×size(3)×shape(3) | 45 | tokens 2112 (261 aliased) · 1 set(s) built | 0 |
+| card.figma.js | fluent.card | appearance(4)×size(3)×orientation(2) | 24 | tokens 2112 (261 aliased) · 1 set(s) built | 0 |
+| checkbox.figma.js | fluent.checkbox | checked(3)×size(2)×shape(2) | 12 | tokens 2112 (261 aliased) · 1 set(s) built | 0 |
+| dialog.figma.js | fluent.dialog | modalType(3) | 3 | tokens 2112 (261 aliased) · 1 set(s) built | 0 |
+| input.figma.js | fluent.input | appearance(6)×size(3) | 18 | tokens 2112 (261 aliased) · 1 set(s) built | 0 |
+| spinner.figma.js | fluent.spinner | size(8)×appearance(2)×labelPosition(4) | 64 | tokens 2112 (261 aliased) · 1 set(s) built | 32 |
+| switch.figma.js | fluent.switch | checked(2)×labelPosition(3) | 6 | tokens 2112 (261 aliased) · 1 set(s) built | 0 |
+| tab-list.figma.js | fluent.tab-list | appearance(4)×size(3)×orientation(2) | 24 | tokens 2112 (261 aliased) · 1 set(s) built | 0 |
+| tooltip.figma.js | fluent.tooltip | appearance(2) | 2 | tokens 2112 (261 aliased) · 1 set(s) built | 2 |
 
 **11 scripts · 408 variants total · 34 text-caused
 overflow(s) (the corpus-wide text-wrapping gap, counted not hidden).** Each script ran to
-completion against the mocked Figma (00-tokens.figma.js first — 2116 variables
+completion against the mocked Figma (00-tokens.figma.js first — 2112 variables
 including the Figma-native ALIAS pass for source-aliased minted leaves).
 
 **0 failures.**

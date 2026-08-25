@@ -1,6 +1,6 @@
 {
   "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
-  "generatedBy": "extract/computed/run.ts",
+  "generatedBy": "extract/computed/regate.ts --write-enriched (OFFLINE RE-FUSE of the committed captured truth; no library recapture). Differences vs the harness path, NAMED: portal receipts are a capture-time artifact and are absent here; the frontier receipts are capture-time too and are CARRIED FORWARD unchanged from the extension this re-fuse overwrote (13 receipt(s)); every other receipt is recomputed from the same truth.",
   "library": "@mui/material@9.2.0",
   "browser": "151.0.7922.34",
   "mintedTokens": {
@@ -10,10 +10,6 @@
           "color": {
             "$value": "#1976d2",
             "$type": "color"
-          },
-          "width": {
-            "$value": "40px",
-            "$type": "dimension"
           }
         }
       }
@@ -294,10 +290,12 @@
     "signature-drift: determinate__active root: span|CircularProgress-indeterminate.CircularProgress-root → span|CircularProgress-determinate.CircularProgress-root"
   ],
   "styledChannelReceipts": [
-    "block-root-width-admitted: root — display:block root fills its container in CSS; the captured stage width joins fusion (stage-dependent, receipted — the canvas card draws at the captured block width instead of hugging its text)",
-    "block-root-width-source: root — the admitted width 40px is NOT the stage content box (288px) and NOT the viewport (900px); this block root did not fill anything, it took its own intrinsic/shrink-to-fit size (a flex stage makes a block child a flex item). The admission stands — the number is the library's — but the sentence above names a container this measurement did not come from.",
+    "block-root-width-refused (shrink-to-fit): root — display:block root, width 40px is NOT the stage content box (stage 320px − 2×16px = 288px) and NOT the viewport (900px): a flex stage made the block root a flex item and it hugged its content (min-width auto, max-width none). A width that is a function of the harness sample text is a fact about the harness, not about the library — the emitters read the token and not the receipt, so it is REFUSED rather than minted with a warning; the canvas hugs. Re-capture with blockStage: true to measure the real container-fill width.",
     "control-fallback: no control for <svg> — span control used (part icon)",
     "control-fallback: no control for <circle> — span control used (part circularprogress-circle)",
+    "geometry-excluded: circularprogress-circle — block-size auto, height auto, inline-size auto, perspective-origin 0px 0px, transform-origin 0px 0px, width auto — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: icon — block-size 40px, height 40px, inline-size 40px, perspective-origin 20px 20px, transform-origin 20px 20px, width 40px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: root — block-size 40px, height 40px, inline-size 40px, perspective-origin 20px 20px, transform-origin 20px 20px, width 40px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (circularprogress-circle, icon, root); -webkit-text-stroke-color (circularprogress-circle, icon, root)",
     "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold."
   ],
@@ -343,9 +341,9 @@
       "circular-progress-root-indeterminate"
     ],
     "receipts": [
-      "svg-circle-dash-baked: CircularProgress.root@determinate — stroke-dasharray 126.92px / stroke-dashoffset 50.768px carried as absolute user units (progress-ring idiom; not pathLength-relative)",
+      "svg-circle-dash-folded: CircularProgress.root@determinate — stroke-dasharray 126.92px / stroke-dashoffset 50.768px folded to a two-value dasharray \"76.152 50.768\" (visible 60.0% of the circumference) and a rotate(-90) about the captured centre, BECAUSE Figma's SVG importer honours dasharray and ignores dashoffset — carrying the pair verbatim drew the full ring and made the determinate variant identical to the indeterminate one",
       "svg-viewbox-circle-offset: CircularProgress.root@determinate — 22 22 44 44 from shared circle center 44 (MUI CircularProgress idiom; viewBox is not a computed style — named reconstruction)",
-      "svg-circle-dash-unreadable: CircularProgress.root@indeterminate — stroke-dasharray 1px, 200px not px; dashes dropped",
+      "svg-circle-dash-list-carried: CircularProgress.root@indeterminate - stroke-dasharray 1px, 200px carried VERBATIM as \"1 200\" (a list of absolute px lengths is the one dash spelling Figma's SVG importer honours; dropping it drew a closed ring where the library draws 1 user unit(s) of stroke)",
       "svg-viewbox-circle-offset: CircularProgress.root@indeterminate — 22 22 44 44 from shared circle center 44 (MUI CircularProgress idiom; viewBox is not a computed style — named reconstruction)",
       "root-svg-plan-carried: CircularProgress root hosts 2 per-value glyph part(s) (circular-progress-root-determinate, circular-progress-root-indeterminate) — round 5c root-hosted svg plan (the round-5a named promotion drop)"
     ],

@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "mui.circular-progress",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "CircularProgress — generated from contract mui.circular-progress v0.2.0 † (1 code-only facts — see plugin report)",
+    "description": "CircularProgress — generated from contract mui.circular-progress v0.2.0 † (2 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -29,18 +29,14 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 40,
-            "varName": "imported/circular-progress/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "svg",
               "name": "root-indeterminate",
-              "svg": "<svg viewBox=\"22 22 44 44\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"44\" cy=\"44\" r=\"20.2\" fill=\"none\" stroke=\"#1976d2\" stroke-width=\"3.6\"/></svg>",
+              "svg": "<svg viewBox=\"22 22 44 44\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"44\" cy=\"44\" r=\"20.2\" fill=\"none\" stroke=\"#1976d2\" stroke-width=\"3.6\" stroke-dasharray=\"1 200\"/></svg>",
               "svgPaintVar": "imported/circular-progress/root/color",
-              "iconSize": 40,
-              "fillW": true
+              "iconSize": 40
             }
           ]
         }
@@ -58,18 +54,14 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 40,
-            "varName": "imported/circular-progress/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "svg",
               "name": "root-determinate",
-              "svg": "<svg viewBox=\"22 22 44 44\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"44\" cy=\"44\" r=\"20.2\" fill=\"none\" stroke=\"#1976d2\" stroke-width=\"3.6\" stroke-dasharray=\"126.92\" stroke-dashoffset=\"50.768\"/></svg>",
+              "svg": "<svg viewBox=\"22 22 44 44\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"44\" cy=\"44\" r=\"20.2\" fill=\"none\" stroke=\"#1976d2\" stroke-width=\"3.6\" stroke-dasharray=\"76.152 50.768\" transform=\"rotate(-90 44 44)\"/></svg>",
               "svgPaintVar": "imported/circular-progress/root/color",
-              "iconSize": 40,
-              "fillW": true
+              "iconSize": 40
             }
           ]
         }
@@ -88,6 +80,17 @@ const COMPONENTS = [
         "channel": "display",
         "value": "block",
         "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "root",
+        "kind": "preview",
+        "channel": "display",
+        "value": "block",
+        "reason": "a block root has no intrinsic width — the canvas draws a preview width, the code surface fills its container",
         "variants": {
           "count": 2,
           "of": 2

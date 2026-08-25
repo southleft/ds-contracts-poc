@@ -11491,30 +11491,6 @@
               }
             }
           },
-          "icon": {
-            "font-size": {
-              "medium": {
-                "$value": "12px",
-                "$type": "dimension"
-              },
-              "large": {
-                "$value": "16px",
-                "$type": "dimension"
-              }
-            }
-          },
-          "part-1-0-0": {
-            "font-size": {
-              "medium": {
-                "$value": "12px",
-                "$type": "dimension"
-              },
-              "large": {
-                "$value": "16px",
-                "$type": "dimension"
-              }
-            }
-          },
           "label": {
             "color": {
               "unchecked": {
@@ -15422,6 +15398,11 @@
     }
   },
   "icons": {
+    "checkbox-indicator-checked-large": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 14.05 3.49 C 14.33 3.79 14.32 4.26 14.01 4.55 L 6.08 12.02 A 0.85 0.85 0 0 1 4.9 12 L 2.22 9.28 A 0.75 0.75 0 1 1 3.28 8.22 L 5.52 10.49 L 12.99 3.45 A 0.75 0.75 0 0 1 14.05 3.49\" fill=\"currentColor\"/></svg>",
+    "checkbox-indicator-checked-medium": "<svg viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 9.76 3.2 C 10.06 3.49 10.08 3.96 9.8 4.26 L 5.55 8.76 A 0.75 0.75 0 0 1 4.47 8.78 L 2.22 6.53 A 0.75 0.75 0 0 1 3.28 5.47 L 4.98 7.17 L 8.7 3.24 A 0.75 0.75 0 0 1 9.76 3.2\" fill=\"currentColor\"/></svg>",
+    "checkbox-indicator-mixed-large-square": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 2 4.5 A 2.5 2.5 0 0 1 4.5 2 H 11.5 A 2.5 2.5 0 0 1 14 4.5 V 11.5 A 2.5 2.5 0 0 1 11.5 14 H 4.5 A 2.5 2.5 0 0 1 2 11.5 Z\" fill=\"currentColor\"/></svg>",
+    "checkbox-indicator-mixed-medium-circular": "<svg viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"currentColor\"/></svg>",
+    "checkbox-indicator-mixed-medium-square": "<svg viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 2 4 C 2 2.9 2.9 2 4 2 H 8 A 2 2 0 0 1 10 4 V 8 A 2 2 0 0 1 8 10 H 4 A 2 2 0 0 1 2 8 Z\" fill=\"currentColor\"/></svg>",
     "dialog-part-0-1-0": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 4.09 4.22 L 4.15 4.15 A 0.5 0.5 0 0 1 4.78 4.09 L 4.85 4.15 L 10 9.29 L 15.15 4.15 A 0.5 0.5 0 0 1 15.78 4.09 L 15.85 4.15 C 16.03 4.32 16.05 4.59 15.91 4.78 L 15.85 4.85 L 10.71 10 L 15.85 15.15 C 16.03 15.32 16.05 15.59 15.91 15.78 L 15.85 15.85 A 0.5 0.5 0 0 1 15.22 15.91 L 15.15 15.85 L 10 10.71 L 4.85 15.85 A 0.5 0.5 0 0 1 4.22 15.91 L 4.15 15.85 A 0.5 0.5 0 0 1 4.09 15.22 L 4.15 15.15 L 9.29 10 L 4.15 4.85 A 0.5 0.5 0 0 1 4.09 4.22 L 4.15 4.15 Z\" fill=\"currentColor\"/></svg>",
     "switch-indicator": "<svg viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"currentColor\"/></svg>"
   },
@@ -17223,168 +17204,153 @@
                 "pointer-events": "none"
               },
               "parts": {
-                "icon": {
-                  "element": "svg",
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy svg|Icon — this element exists in the real component's DOM; the static layer had no part for it.",
-                  "declared": {
-                    "display": "block",
-                    "aspect-ratio": "1 / 1",
-                    "cursor": "pointer",
-                    "overflow-x": "hidden",
-                    "overflow-y": "hidden",
-                    "pointer-events": "none"
+                "indicator-checked-medium": {
+                  "icon": {
+                    "asset": "checkbox-indicator-checked-medium",
+                    "size": 12
+                  },
+                  "visibleWhen": {
+                    "prop": "checked",
+                    "equals": "checked"
                   },
                   "stylesWhen": [
                     {
-                      "prop": "checked",
-                      "equals": "unchecked",
+                      "prop": "size",
+                      "equals": "large",
                       "styles": {
                         "display": "none"
                       }
                     }
                   ],
-                  "parts": {
-                    "part-1-0-0": {
-                      "element": "path",
-                      "description": "Promoted from the computed floor (round 4): rendered anatomy path| — this element exists in the real component's DOM; the static layer had no part for it.",
-                      "declared": {
-                        "display": "inline",
-                        "cursor": "pointer",
-                        "pointer-events": "none"
-                      },
-                      "stylesWhen": [
-                        {
-                          "prop": "checked",
-                          "equals": "unchecked",
-                          "styles": {
-                            "display": "none"
-                          }
-                        }
-                      ],
-                      "tokens": {
-                        "line-height": "{imported.shared.size-0}",
-                        "min-height": "{imported.shared.size-0}",
-                        "min-width": "{imported.shared.size-0}"
-                      },
-                      "tokensByProp": [
-                        {
-                          "prop": "size",
-                          "map": {
-                            "large": {
-                              "font-size": "{imported.checkbox.part-1-0-0.font-size.large}"
-                            },
-                            "medium": {
-                              "font-size": "{imported.checkbox.part-1-0-0.font-size.medium}"
-                            }
-                          }
-                        }
-                      ],
-                      "codeOnly": [
-                        {
-                          "state": "active",
-                          "channel": "color",
-                          "value": "rgba(15, 84, 140, 1)",
-                          "reason": "default-state values not kind-compatible for padding — cannot correlate"
-                        },
-                        {
-                          "state": "active",
-                          "channel": "fill",
-                          "value": "rgba(15, 84, 140, 1)",
-                          "reason": "default-state values not kind-compatible for padding — cannot correlate"
-                        },
-                        {
-                          "state": "disabled",
-                          "channel": "color",
-                          "value": "rgba(189, 189, 189, 1)",
-                          "reason": "default-state values not kind-compatible for padding — cannot correlate"
-                        },
-                        {
-                          "state": "disabled",
-                          "channel": "cursor",
-                          "value": "default",
-                          "reason": "declared-channel state delta on 8/12 combos — partial coverage cannot carry as a state selector (v15); named residue"
-                        },
-                        {
-                          "state": "disabled",
-                          "channel": "fill",
-                          "value": "rgba(189, 189, 189, 1)",
-                          "reason": "default-state values not kind-compatible for padding — cannot correlate"
-                        },
-                        {
-                          "state": "hover",
-                          "channel": "color",
-                          "value": "rgba(17, 94, 163, 1)",
-                          "reason": "default-state values not kind-compatible for padding — cannot correlate"
-                        },
-                        {
-                          "state": "hover",
-                          "channel": "fill",
-                          "value": "rgba(17, 94, 163, 1)",
-                          "reason": "default-state values not kind-compatible for padding — cannot correlate"
-                        }
-                      ]
-                    }
+                  "description": "Per-conjunction svg content promoted from the computed floor: the glyph drawn when checked=checked, size=medium."
+                },
+                "indicator-checked-large": {
+                  "icon": {
+                    "asset": "checkbox-indicator-checked-large",
+                    "size": 16
                   },
-                  "tokens": {
-                    "line-height": "{imported.shared.size-0}"
+                  "visibleWhen": {
+                    "prop": "checked",
+                    "equals": "checked"
                   },
-                  "tokensByProp": [
+                  "stylesWhen": [
                     {
                       "prop": "size",
-                      "map": {
-                        "large": {
-                          "font-size": "{imported.checkbox.icon.font-size.large}"
-                        },
-                        "medium": {
-                          "font-size": "{imported.checkbox.icon.font-size.medium}"
-                        }
+                      "equals": "medium",
+                      "styles": {
+                        "display": "none"
                       }
                     }
                   ],
-                  "codeOnly": [
+                  "description": "Per-conjunction svg content promoted from the computed floor: the glyph drawn when checked=checked, size=large."
+                },
+                "indicator-mixed-medium-square": {
+                  "icon": {
+                    "asset": "checkbox-indicator-mixed-medium-square",
+                    "size": 12
+                  },
+                  "visibleWhen": {
+                    "prop": "checked",
+                    "equals": "mixed"
+                  },
+                  "stylesWhen": [
                     {
-                      "state": "active",
-                      "channel": "color",
-                      "value": "rgba(15, 84, 140, 1)",
-                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                      "prop": "size",
+                      "equals": "large",
+                      "styles": {
+                        "display": "none"
+                      }
                     },
                     {
-                      "state": "active",
-                      "channel": "fill",
-                      "value": "rgba(15, 84, 140, 1)",
-                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
-                    },
-                    {
-                      "state": "disabled",
-                      "channel": "color",
-                      "value": "rgba(189, 189, 189, 1)",
-                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
-                    },
-                    {
-                      "state": "disabled",
-                      "channel": "cursor",
-                      "value": "default",
-                      "reason": "declared-channel state delta on 8/12 combos — partial coverage cannot carry as a state selector (v15); named residue"
-                    },
-                    {
-                      "state": "disabled",
-                      "channel": "fill",
-                      "value": "rgba(189, 189, 189, 1)",
-                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
-                    },
-                    {
-                      "state": "hover",
-                      "channel": "color",
-                      "value": "rgba(17, 94, 163, 1)",
-                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
-                    },
-                    {
-                      "state": "hover",
-                      "channel": "fill",
-                      "value": "rgba(17, 94, 163, 1)",
-                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                      "prop": "shape",
+                      "equals": "circular",
+                      "styles": {
+                        "display": "none"
+                      }
                     }
-                  ]
+                  ],
+                  "description": "Per-conjunction svg content promoted from the computed floor: the glyph drawn when checked=mixed, size=medium, shape=square."
+                },
+                "indicator-mixed-medium-circular": {
+                  "icon": {
+                    "asset": "checkbox-indicator-mixed-medium-circular",
+                    "size": 12
+                  },
+                  "visibleWhen": {
+                    "prop": "checked",
+                    "equals": "mixed"
+                  },
+                  "stylesWhen": [
+                    {
+                      "prop": "size",
+                      "equals": "large",
+                      "styles": {
+                        "display": "none"
+                      }
+                    },
+                    {
+                      "prop": "shape",
+                      "equals": "square",
+                      "styles": {
+                        "display": "none"
+                      }
+                    }
+                  ],
+                  "description": "Per-conjunction svg content promoted from the computed floor: the glyph drawn when checked=mixed, size=medium, shape=circular."
+                },
+                "indicator-mixed-large-square": {
+                  "icon": {
+                    "asset": "checkbox-indicator-mixed-large-square",
+                    "size": 16
+                  },
+                  "visibleWhen": {
+                    "prop": "checked",
+                    "equals": "mixed"
+                  },
+                  "stylesWhen": [
+                    {
+                      "prop": "size",
+                      "equals": "medium",
+                      "styles": {
+                        "display": "none"
+                      }
+                    },
+                    {
+                      "prop": "shape",
+                      "equals": "circular",
+                      "styles": {
+                        "display": "none"
+                      }
+                    }
+                  ],
+                  "description": "Per-conjunction svg content promoted from the computed floor: the glyph drawn when checked=mixed, size=large, shape=square."
+                },
+                "indicator-mixed-large-circular": {
+                  "icon": {
+                    "asset": "checkbox-indicator-mixed-medium-circular",
+                    "size": 16
+                  },
+                  "visibleWhen": {
+                    "prop": "checked",
+                    "equals": "mixed"
+                  },
+                  "stylesWhen": [
+                    {
+                      "prop": "size",
+                      "equals": "medium",
+                      "styles": {
+                        "display": "none"
+                      }
+                    },
+                    {
+                      "prop": "shape",
+                      "equals": "square",
+                      "styles": {
+                        "display": "none"
+                      }
+                    }
+                  ],
+                  "description": "Per-conjunction svg content promoted from the computed floor: the glyph drawn when checked=mixed, size=large, shape=circular."
                 }
               },
               "declaredStates": {
@@ -22308,145 +22274,6 @@
       "name": "Checkbox",
       "facts": [
         {
-          "part": "icon",
-          "kind": "capture",
-          "channel": "color [active]",
-          "value": "rgba(15, 84, 140, 1)",
-          "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
-          "variants": {
-            "count": 24,
-            "of": 24
-          }
-        },
-        {
-          "part": "icon",
-          "kind": "capture",
-          "channel": "color [disabled]",
-          "value": "rgba(189, 189, 189, 1)",
-          "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
-          "variants": {
-            "count": 24,
-            "of": 24
-          }
-        },
-        {
-          "part": "icon",
-          "kind": "capture",
-          "channel": "color [hover]",
-          "value": "rgba(17, 94, 163, 1)",
-          "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
-          "variants": {
-            "count": 24,
-            "of": 24
-          }
-        },
-        {
-          "part": "icon",
-          "kind": "capture",
-          "channel": "cursor [disabled]",
-          "value": "default",
-          "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 8/12 combos — partial coverage cannot carry as a state selector (v15); named residue",
-          "variants": {
-            "count": 24,
-            "of": 24
-          }
-        },
-        {
-          "part": "icon",
-          "kind": "capture",
-          "channel": "fill [active]",
-          "value": "rgba(15, 84, 140, 1)",
-          "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
-          "variants": {
-            "count": 24,
-            "of": 24
-          }
-        },
-        {
-          "part": "icon",
-          "kind": "capture",
-          "channel": "fill [disabled]",
-          "value": "rgba(189, 189, 189, 1)",
-          "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
-          "variants": {
-            "count": 24,
-            "of": 24
-          }
-        },
-        {
-          "part": "icon",
-          "kind": "capture",
-          "channel": "fill [hover]",
-          "value": "rgba(17, 94, 163, 1)",
-          "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
-          "variants": {
-            "count": 24,
-            "of": 24
-          }
-        },
-        {
-          "part": "icon",
-          "kind": "channel",
-          "channel": "aspect-ratio",
-          "value": "1 / 1",
-          "reason": "the canvas has no aspect-ratio field — this part carries no bound or literal width to derive a height from, so nothing was drawn from the ratio (a parent that takes its height from this part's ratio names that lowering on itself)",
-          "variants": {
-            "count": 16,
-            "of": 24,
-            "names": [
-              "Checked=Checked, Size=Medium, Shape=Square",
-              "Checked=Checked, Size=Medium, Shape=Circular",
-              "Checked=Checked, Size=Large, Shape=Square",
-              "Checked=Checked, Size=Large, Shape=Circular",
-              "Checked=Mixed, Size=Medium, Shape=Square",
-              "Checked=Mixed, Size=Medium, Shape=Circular",
-              "Checked=Mixed, Size=Large, Shape=Square",
-              "Checked=Mixed, Size=Large, Shape=Circular",
-              "Checked=Checked, Size=Medium, Shape=Square, State=Disabled",
-              "Checked=Mixed, Size=Medium, Shape=Square, State=Disabled",
-              "Checked=Checked, Size=Medium, Shape=Square, State=Focus Visible",
-              "Checked=Mixed, Size=Medium, Shape=Square, State=Focus Visible",
-              "Checked=Checked, Size=Medium, Shape=Square, State=Active",
-              "Checked=Mixed, Size=Medium, Shape=Square, State=Active",
-              "Checked=Checked, Size=Medium, Shape=Square, State=Hover",
-              "Checked=Mixed, Size=Medium, Shape=Square, State=Hover"
-            ]
-          }
-        },
-        {
-          "part": "icon",
-          "kind": "declared",
-          "channel": "cursor",
-          "value": "pointer",
-          "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
-          "variants": {
-            "count": 24,
-            "of": 24
-          }
-        },
-        {
-          "part": "icon",
-          "kind": "declared",
-          "channel": "display",
-          "value": "block",
-          "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
-          "variants": {
-            "count": 24,
-            "of": 24
-          }
-        },
-        {
-          "part": "icon",
-          "kind": "declared",
-          "channel": "pointer-events",
-          "value": "none",
-          "reason": "Pointer-event gating exists only in the coded component.",
-          "variants": {
-            "count": 24,
-            "of": 24
-          }
-        },
-        {
           "part": "indicator",
           "kind": "capture",
           "channel": "background-color [active]",
@@ -22903,116 +22730,6 @@
           "channel": "display",
           "value": "block",
           "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
-          "variants": {
-            "count": 24,
-            "of": 24
-          }
-        },
-        {
-          "part": "part-1-0-0",
-          "kind": "capture",
-          "channel": "color [active]",
-          "value": "rgba(15, 84, 140, 1)",
-          "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
-          "variants": {
-            "count": 24,
-            "of": 24
-          }
-        },
-        {
-          "part": "part-1-0-0",
-          "kind": "capture",
-          "channel": "color [disabled]",
-          "value": "rgba(189, 189, 189, 1)",
-          "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
-          "variants": {
-            "count": 24,
-            "of": 24
-          }
-        },
-        {
-          "part": "part-1-0-0",
-          "kind": "capture",
-          "channel": "color [hover]",
-          "value": "rgba(17, 94, 163, 1)",
-          "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
-          "variants": {
-            "count": 24,
-            "of": 24
-          }
-        },
-        {
-          "part": "part-1-0-0",
-          "kind": "capture",
-          "channel": "cursor [disabled]",
-          "value": "default",
-          "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 8/12 combos — partial coverage cannot carry as a state selector (v15); named residue",
-          "variants": {
-            "count": 24,
-            "of": 24
-          }
-        },
-        {
-          "part": "part-1-0-0",
-          "kind": "capture",
-          "channel": "fill [active]",
-          "value": "rgba(15, 84, 140, 1)",
-          "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
-          "variants": {
-            "count": 24,
-            "of": 24
-          }
-        },
-        {
-          "part": "part-1-0-0",
-          "kind": "capture",
-          "channel": "fill [disabled]",
-          "value": "rgba(189, 189, 189, 1)",
-          "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
-          "variants": {
-            "count": 24,
-            "of": 24
-          }
-        },
-        {
-          "part": "part-1-0-0",
-          "kind": "capture",
-          "channel": "fill [hover]",
-          "value": "rgba(17, 94, 163, 1)",
-          "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
-          "variants": {
-            "count": 24,
-            "of": 24
-          }
-        },
-        {
-          "part": "part-1-0-0",
-          "kind": "declared",
-          "channel": "cursor",
-          "value": "pointer",
-          "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
-          "variants": {
-            "count": 24,
-            "of": 24
-          }
-        },
-        {
-          "part": "part-1-0-0",
-          "kind": "declared",
-          "channel": "display",
-          "value": "inline",
-          "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
-          "variants": {
-            "count": 24,
-            "of": 24
-          }
-        },
-        {
-          "part": "part-1-0-0",
-          "kind": "declared",
-          "channel": "pointer-events",
-          "value": "none",
-          "reason": "Pointer-event gating exists only in the coded component.",
           "variants": {
             "count": 24,
             "of": 24

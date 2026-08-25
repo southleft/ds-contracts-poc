@@ -8,40 +8,40 @@ examples/mui/tokens/mui.dtcg.json,examples/mui/tokens/mui-minted.dtcg.json`.
 
 | script | contract | variant axes | variants | headless execute |
 |---|---|---|---|---|
-| accordion.figma.js | mui.accordion | variant(2)×expanded(2) | 4 | tokens 2143 (134 aliased) · 1 set(s) built |
-| alert.figma.js | mui.alert | severity(4)×variant(3) | 12 | tokens 2143 (134 aliased) · 1 set(s) built |
-| autocomplete.figma.js | mui.autocomplete | size(2) | 2 | tokens 2143 (134 aliased) · 1 set(s) built |
-| avatar.figma.js | mui.avatar | variant(3) | 3 | tokens 2143 (134 aliased) · 1 set(s) built |
-| badge.figma.js | mui.badge | color(7)×variant(2) | 14 | tokens 2143 (134 aliased) · 1 set(s) built |
-| breadcrumbs.figma.js | mui.breadcrumbs | standalone | 1 | tokens 2143 (134 aliased) · 0 set(s) built |
-| button.figma.js | mui.button | variant(3)×color(7)×size(3) | 63 | tokens 2143 (134 aliased) · 1 set(s) built |
-| card.figma.js | mui.card | elevation(4) | 4 | tokens 2143 (134 aliased) · 1 set(s) built |
-| checkbox.figma.js | mui.checkbox | checked(3) | 3 | tokens 2143 (134 aliased) · 1 set(s) built |
-| chip.figma.js | mui.chip | variant(2)×color(7)×size(2) | 28 | tokens 2143 (134 aliased) · 1 set(s) built |
-| circular-progress.figma.js | mui.circular-progress | variant(2) | 2 | tokens 2143 (134 aliased) · 1 set(s) built |
-| dialog.figma.js | mui.dialog | maxWidth(5) | 5 | tokens 2143 (134 aliased) · 1 set(s) built |
-| divider.figma.js | mui.divider | variant(3) | 3 | tokens 2143 (134 aliased) · 1 set(s) built |
-| drawer.figma.js | mui.drawer | variant(2) | 2 | tokens 2143 (134 aliased) · 1 set(s) built |
-| fab.figma.js | mui.fab | size(3)×color(3) | 9 | tokens 2143 (134 aliased) · 1 set(s) built |
-| icon-button.figma.js | mui.icon-button | size(3)×color(3) | 9 | tokens 2143 (134 aliased) · 1 set(s) built |
-| input-adornment.figma.js | mui.input-adornment | position(2) | 2 | tokens 2143 (134 aliased) · 1 set(s) built |
-| linear-progress.figma.js | mui.linear-progress | variant(2) | 2 | tokens 2143 (134 aliased) · 1 set(s) built |
-| link.figma.js | mui.link | color(7)×underline(3) | 21 | tokens 2143 (134 aliased) · 1 set(s) built |
-| menu.figma.js | mui.menu | standalone | 1 | tokens 2143 (134 aliased) · 0 set(s) built |
-| paper.figma.js | mui.paper | elevation(4)×variant(2) | 8 | tokens 2143 (134 aliased) · 1 set(s) built |
-| radio.figma.js | mui.radio | color(7)×checked(2) | 14 | tokens 2143 (134 aliased) · 1 set(s) built |
-| select.figma.js | mui.select | size(2) | 2 | tokens 2143 (134 aliased) · 1 set(s) built |
-| slider.figma.js | mui.slider | color(6)×size(2) | 12 | tokens 2143 (134 aliased) · 1 set(s) built |
-| snackbar.figma.js | mui.snackbar | position(3) | 3 | tokens 2143 (134 aliased) · 1 set(s) built |
-| switch.figma.js | mui.switch | color(7)×size(2)×checked(2) | 28 | tokens 2143 (134 aliased) · 1 set(s) built |
-| table-pagination.figma.js | mui.table-pagination | standalone | 1 | tokens 2143 (134 aliased) · 0 set(s) built |
-| table.figma.js | mui.table | size(2) | 2 | tokens 2143 (134 aliased) · 1 set(s) built |
-| tabs.figma.js | mui.tabs | textColor(3)×indicatorColor(2) | 6 | tokens 2143 (134 aliased) · 1 set(s) built |
-| text-field.figma.js | mui.text-field | variant(3)×size(2) | 6 | tokens 2143 (134 aliased) · 2 set(s) built |
-| tooltip.figma.js | mui.tooltip | standalone | 1 | tokens 2143 (134 aliased) · 0 set(s) built |
+| accordion.figma.js | mui.accordion | variant(2)×expanded(2) | 4 | tokens 2142 (134 aliased) · 1 set(s) built |
+| alert.figma.js | mui.alert | severity(4)×variant(3) | 12 | tokens 2142 (134 aliased) · 1 set(s) built |
+| autocomplete.figma.js | mui.autocomplete | size(2) | 2 | tokens 2142 (134 aliased) · 1 set(s) built |
+| avatar.figma.js | mui.avatar | variant(3) | 3 | tokens 2142 (134 aliased) · 1 set(s) built |
+| badge.figma.js | mui.badge | color(7)×variant(2) | 14 | tokens 2142 (134 aliased) · 1 set(s) built |
+| breadcrumbs.figma.js | mui.breadcrumbs | standalone | 1 | tokens 2142 (134 aliased) · 0 set(s) built |
+| button.figma.js | mui.button | variant(3)×color(7)×size(3) | 63 | tokens 2142 (134 aliased) · 1 set(s) built |
+| card.figma.js | mui.card | elevation(4) | 4 | tokens 2142 (134 aliased) · 1 set(s) built |
+| checkbox.figma.js | mui.checkbox | checked(3) | 3 | tokens 2142 (134 aliased) · 1 set(s) built |
+| chip.figma.js | mui.chip | variant(2)×color(7)×size(2) | 28 | tokens 2142 (134 aliased) · 1 set(s) built |
+| circular-progress.figma.js | mui.circular-progress | variant(2) | 2 | tokens 2142 (134 aliased) · 1 set(s) built |
+| dialog.figma.js | mui.dialog | maxWidth(5) | 5 | tokens 2142 (134 aliased) · 1 set(s) built |
+| divider.figma.js | mui.divider | variant(3) | 3 | tokens 2142 (134 aliased) · 1 set(s) built |
+| drawer.figma.js | mui.drawer | variant(2) | 2 | tokens 2142 (134 aliased) · 1 set(s) built |
+| fab.figma.js | mui.fab | size(3)×color(3) | 9 | tokens 2142 (134 aliased) · 1 set(s) built |
+| icon-button.figma.js | mui.icon-button | size(3)×color(3) | 9 | tokens 2142 (134 aliased) · 1 set(s) built |
+| input-adornment.figma.js | mui.input-adornment | position(2) | 2 | tokens 2142 (134 aliased) · 1 set(s) built |
+| linear-progress.figma.js | mui.linear-progress | variant(2) | 2 | tokens 2142 (134 aliased) · 1 set(s) built |
+| link.figma.js | mui.link | color(7)×underline(3) | 21 | tokens 2142 (134 aliased) · 1 set(s) built |
+| menu.figma.js | mui.menu | standalone | 1 | tokens 2142 (134 aliased) · 0 set(s) built |
+| paper.figma.js | mui.paper | elevation(4)×variant(2) | 8 | tokens 2142 (134 aliased) · 1 set(s) built |
+| radio.figma.js | mui.radio | color(7)×checked(2) | 14 | tokens 2142 (134 aliased) · 1 set(s) built |
+| select.figma.js | mui.select | size(2) | 2 | tokens 2142 (134 aliased) · 1 set(s) built |
+| slider.figma.js | mui.slider | color(6)×size(2) | 12 | tokens 2142 (134 aliased) · 1 set(s) built |
+| snackbar.figma.js | mui.snackbar | position(3) | 3 | tokens 2142 (134 aliased) · 1 set(s) built |
+| switch.figma.js | mui.switch | color(7)×size(2)×checked(2) | 28 | tokens 2142 (134 aliased) · 1 set(s) built |
+| table-pagination.figma.js | mui.table-pagination | standalone | 1 | tokens 2142 (134 aliased) · 0 set(s) built |
+| table.figma.js | mui.table | size(2) | 2 | tokens 2142 (134 aliased) · 1 set(s) built |
+| tabs.figma.js | mui.tabs | textColor(3)×indicatorColor(2) | 6 | tokens 2142 (134 aliased) · 1 set(s) built |
+| text-field.figma.js | mui.text-field | variant(3)×size(2) | 6 | tokens 2142 (134 aliased) · 2 set(s) built |
+| tooltip.figma.js | mui.tooltip | standalone | 1 | tokens 2142 (134 aliased) · 0 set(s) built |
 
 **31 scripts · 273 variants total.** Each script ran to completion
-against the mocked Figma (00-tokens.figma.js first — 2143 variables
+against the mocked Figma (00-tokens.figma.js first — 2142 variables
 including the Figma-native ALIAS pass for source-aliased minted leaves).
 
 **0 failures.**

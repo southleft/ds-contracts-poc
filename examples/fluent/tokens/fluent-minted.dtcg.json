@@ -3675,30 +3675,6 @@
           }
         }
       },
-      "icon": {
-        "font-size": {
-          "medium": {
-            "$value": "12px",
-            "$type": "dimension"
-          },
-          "large": {
-            "$value": "16px",
-            "$type": "dimension"
-          }
-        }
-      },
-      "part-1-0-0": {
-        "font-size": {
-          "medium": {
-            "$value": "12px",
-            "$type": "dimension"
-          },
-          "large": {
-            "$value": "16px",
-            "$type": "dimension"
-          }
-        }
-      },
       "label": {
         "color": {
           "unchecked": {

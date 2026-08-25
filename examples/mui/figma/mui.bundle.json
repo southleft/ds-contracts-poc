@@ -8140,10 +8140,6 @@
             "color": {
               "$value": "{palette-primary-main}",
               "$type": "color"
-            },
-            "width": {
-              "$value": "40px",
-              "$type": "dimension"
             }
           }
         },
@@ -10371,8 +10367,8 @@
     "checkbox-icon-checked": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 19 3 H 5 C 3.89 3 3 3.9 3 5 V 19 C 3 20.1 3.89 21 5 21 H 19 C 20.11 21 21 20.1 21 19 V 5 C 21 3.9 20.11 3 19 3 Z M 10 17 L 5 12 L 6.41 10.59 L 10 14.17 L 17.59 6.58 L 19 8 L 10 17 Z\" fill=\"currentColor\"/></svg>",
     "checkbox-icon-indeterminate": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 19 3 H 5 C 3.9 3 3 3.9 3 5 V 19 C 3 20.1 3.9 21 5 21 H 19 C 20.1 21 21 20.1 21 19 V 5 C 21 3.9 20.1 3 19 3 Z M 17 13 H 7 V 11 H 17 V 13 Z\" fill=\"currentColor\"/></svg>",
     "checkbox-icon-unchecked": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 19 5 V 19 H 5 V 5 H 19 M 19 3 H 5 C 3.9 3 3 3.9 3 5 V 19 C 3 20.1 3.9 21 5 21 H 19 C 20.1 21 21 20.1 21 19 V 5 C 21 3.9 20.1 3 19 3 Z\" fill=\"currentColor\"/></svg>",
-    "circular-progress-root-determinate": "<svg viewBox=\"22 22 44 44\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"44\" cy=\"44\" r=\"20.2\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3.6\" stroke-dasharray=\"126.92\" stroke-dashoffset=\"50.768\"/></svg>",
-    "circular-progress-root-indeterminate": "<svg viewBox=\"22 22 44 44\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"44\" cy=\"44\" r=\"20.2\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3.6\"/></svg>",
+    "circular-progress-root-determinate": "<svg viewBox=\"22 22 44 44\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"44\" cy=\"44\" r=\"20.2\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3.6\" stroke-dasharray=\"76.152 50.768\" transform=\"rotate(-90 44 44)\"/></svg>",
+    "circular-progress-root-indeterminate": "<svg viewBox=\"22 22 44 44\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"44\" cy=\"44\" r=\"20.2\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3.6\" stroke-dasharray=\"1 200\"/></svg>",
     "radio-icon": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"currentColor\"/></svg>",
     "radio-icon-2": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"currentColor\"/></svg>",
     "select-icon": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 7 10 L 12 15 L 17 10 Z\" fill=\"currentColor\"/></svg>",
@@ -13384,8 +13380,7 @@
             }
           },
           "tokens": {
-            "color": "{imported.circular-progress.root.color}",
-            "width": "{imported.circular-progress.root.width}"
+            "color": "{imported.circular-progress.root.color}"
           }
         }
       },
@@ -22423,6 +22418,17 @@
           "channel": "display",
           "value": "block",
           "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+          "variants": {
+            "count": 2,
+            "of": 2
+          }
+        },
+        {
+          "part": "root",
+          "kind": "preview",
+          "channel": "display",
+          "value": "block",
+          "reason": "a block root has no intrinsic width — the canvas draws a preview width, the code surface fills its container",
           "variants": {
             "count": 2,
             "of": 2

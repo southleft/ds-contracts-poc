@@ -192,168 +192,153 @@
             "pointer-events": "none"
           },
           "parts": {
-            "icon": {
-              "element": "svg",
-              "description": "Promoted from the computed floor (round 4): rendered anatomy svg|Icon — this element exists in the real component's DOM; the static layer had no part for it.",
-              "declared": {
-                "display": "block",
-                "aspect-ratio": "1 / 1",
-                "cursor": "pointer",
-                "overflow-x": "hidden",
-                "overflow-y": "hidden",
-                "pointer-events": "none"
+            "indicator-checked-medium": {
+              "icon": {
+                "asset": "checkbox-indicator-checked-medium",
+                "size": 12
+              },
+              "visibleWhen": {
+                "prop": "checked",
+                "equals": "checked"
               },
               "stylesWhen": [
                 {
-                  "prop": "checked",
-                  "equals": "unchecked",
+                  "prop": "size",
+                  "equals": "large",
                   "styles": {
                     "display": "none"
                   }
                 }
               ],
-              "parts": {
-                "part-1-0-0": {
-                  "element": "path",
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy path| — this element exists in the real component's DOM; the static layer had no part for it.",
-                  "declared": {
-                    "display": "inline",
-                    "cursor": "pointer",
-                    "pointer-events": "none"
-                  },
-                  "stylesWhen": [
-                    {
-                      "prop": "checked",
-                      "equals": "unchecked",
-                      "styles": {
-                        "display": "none"
-                      }
-                    }
-                  ],
-                  "tokens": {
-                    "line-height": "{imported.shared.size-0}",
-                    "min-height": "{imported.shared.size-0}",
-                    "min-width": "{imported.shared.size-0}"
-                  },
-                  "tokensByProp": [
-                    {
-                      "prop": "size",
-                      "map": {
-                        "large": {
-                          "font-size": "{imported.checkbox.part-1-0-0.font-size.large}"
-                        },
-                        "medium": {
-                          "font-size": "{imported.checkbox.part-1-0-0.font-size.medium}"
-                        }
-                      }
-                    }
-                  ],
-                  "codeOnly": [
-                    {
-                      "state": "active",
-                      "channel": "color",
-                      "value": "rgba(15, 84, 140, 1)",
-                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
-                    },
-                    {
-                      "state": "active",
-                      "channel": "fill",
-                      "value": "rgba(15, 84, 140, 1)",
-                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
-                    },
-                    {
-                      "state": "disabled",
-                      "channel": "color",
-                      "value": "rgba(189, 189, 189, 1)",
-                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
-                    },
-                    {
-                      "state": "disabled",
-                      "channel": "cursor",
-                      "value": "default",
-                      "reason": "declared-channel state delta on 8/12 combos — partial coverage cannot carry as a state selector (v15); named residue"
-                    },
-                    {
-                      "state": "disabled",
-                      "channel": "fill",
-                      "value": "rgba(189, 189, 189, 1)",
-                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
-                    },
-                    {
-                      "state": "hover",
-                      "channel": "color",
-                      "value": "rgba(17, 94, 163, 1)",
-                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
-                    },
-                    {
-                      "state": "hover",
-                      "channel": "fill",
-                      "value": "rgba(17, 94, 163, 1)",
-                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
-                    }
-                  ]
-                }
+              "description": "Per-conjunction svg content promoted from the computed floor: the glyph drawn when checked=checked, size=medium."
+            },
+            "indicator-checked-large": {
+              "icon": {
+                "asset": "checkbox-indicator-checked-large",
+                "size": 16
               },
-              "tokens": {
-                "line-height": "{imported.shared.size-0}"
+              "visibleWhen": {
+                "prop": "checked",
+                "equals": "checked"
               },
-              "tokensByProp": [
+              "stylesWhen": [
                 {
                   "prop": "size",
-                  "map": {
-                    "large": {
-                      "font-size": "{imported.checkbox.icon.font-size.large}"
-                    },
-                    "medium": {
-                      "font-size": "{imported.checkbox.icon.font-size.medium}"
-                    }
+                  "equals": "medium",
+                  "styles": {
+                    "display": "none"
                   }
                 }
               ],
-              "codeOnly": [
+              "description": "Per-conjunction svg content promoted from the computed floor: the glyph drawn when checked=checked, size=large."
+            },
+            "indicator-mixed-medium-square": {
+              "icon": {
+                "asset": "checkbox-indicator-mixed-medium-square",
+                "size": 12
+              },
+              "visibleWhen": {
+                "prop": "checked",
+                "equals": "mixed"
+              },
+              "stylesWhen": [
                 {
-                  "state": "active",
-                  "channel": "color",
-                  "value": "rgba(15, 84, 140, 1)",
-                  "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                  "prop": "size",
+                  "equals": "large",
+                  "styles": {
+                    "display": "none"
+                  }
                 },
                 {
-                  "state": "active",
-                  "channel": "fill",
-                  "value": "rgba(15, 84, 140, 1)",
-                  "reason": "default-state values not kind-compatible for padding — cannot correlate"
-                },
-                {
-                  "state": "disabled",
-                  "channel": "color",
-                  "value": "rgba(189, 189, 189, 1)",
-                  "reason": "default-state values not kind-compatible for padding — cannot correlate"
-                },
-                {
-                  "state": "disabled",
-                  "channel": "cursor",
-                  "value": "default",
-                  "reason": "declared-channel state delta on 8/12 combos — partial coverage cannot carry as a state selector (v15); named residue"
-                },
-                {
-                  "state": "disabled",
-                  "channel": "fill",
-                  "value": "rgba(189, 189, 189, 1)",
-                  "reason": "default-state values not kind-compatible for padding — cannot correlate"
-                },
-                {
-                  "state": "hover",
-                  "channel": "color",
-                  "value": "rgba(17, 94, 163, 1)",
-                  "reason": "default-state values not kind-compatible for padding — cannot correlate"
-                },
-                {
-                  "state": "hover",
-                  "channel": "fill",
-                  "value": "rgba(17, 94, 163, 1)",
-                  "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                  "prop": "shape",
+                  "equals": "circular",
+                  "styles": {
+                    "display": "none"
+                  }
                 }
-              ]
+              ],
+              "description": "Per-conjunction svg content promoted from the computed floor: the glyph drawn when checked=mixed, size=medium, shape=square."
+            },
+            "indicator-mixed-medium-circular": {
+              "icon": {
+                "asset": "checkbox-indicator-mixed-medium-circular",
+                "size": 12
+              },
+              "visibleWhen": {
+                "prop": "checked",
+                "equals": "mixed"
+              },
+              "stylesWhen": [
+                {
+                  "prop": "size",
+                  "equals": "large",
+                  "styles": {
+                    "display": "none"
+                  }
+                },
+                {
+                  "prop": "shape",
+                  "equals": "square",
+                  "styles": {
+                    "display": "none"
+                  }
+                }
+              ],
+              "description": "Per-conjunction svg content promoted from the computed floor: the glyph drawn when checked=mixed, size=medium, shape=circular."
+            },
+            "indicator-mixed-large-square": {
+              "icon": {
+                "asset": "checkbox-indicator-mixed-large-square",
+                "size": 16
+              },
+              "visibleWhen": {
+                "prop": "checked",
+                "equals": "mixed"
+              },
+              "stylesWhen": [
+                {
+                  "prop": "size",
+                  "equals": "medium",
+                  "styles": {
+                    "display": "none"
+                  }
+                },
+                {
+                  "prop": "shape",
+                  "equals": "circular",
+                  "styles": {
+                    "display": "none"
+                  }
+                }
+              ],
+              "description": "Per-conjunction svg content promoted from the computed floor: the glyph drawn when checked=mixed, size=large, shape=square."
+            },
+            "indicator-mixed-large-circular": {
+              "icon": {
+                "asset": "checkbox-indicator-mixed-medium-circular",
+                "size": 16
+              },
+              "visibleWhen": {
+                "prop": "checked",
+                "equals": "mixed"
+              },
+              "stylesWhen": [
+                {
+                  "prop": "size",
+                  "equals": "medium",
+                  "styles": {
+                    "display": "none"
+                  }
+                },
+                {
+                  "prop": "shape",
+                  "equals": "square",
+                  "styles": {
+                    "display": "none"
+                  }
+                }
+              ],
+              "description": "Per-conjunction svg content promoted from the computed floor: the glyph drawn when checked=mixed, size=large, shape=circular."
             }
           },
           "declaredStates": {

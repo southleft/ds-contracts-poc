@@ -66,6 +66,7 @@
   ],
   "topMismatchedChannels": [],
   "namedLosses": [
+    "promotion: pseudo-decor-clip-path-uncarried: root::after is cut by clip-path polygon(50% 0%, 100% 100%, 0% 100%) in 1/1 drawn combos - the contract's ShapeSchema is rect / ellipse / REGULAR n-gon and has no spelling for an arbitrary clip region; the box is promoted UNCLIPPED (more ink than the library draws) and the clip is NOT carried",
     "code-only: root.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
   ],
   "unresolvedTokenRefs": {

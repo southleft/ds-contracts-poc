@@ -389,7 +389,7 @@
       "full-width-carried: icon spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)"
     ],
     "refusals": [
-      "svg-content-multi-axis: CaseSvgGlyphAxesRagged.a — markup varies over more than one axis; asset refused (part still promoted as a box)"
+      "svg-content-multi-axis: CaseSvgGlyphAxesRagged.a - markup varies over more than one axis; asset refused (part still promoted as a box) - two glyph groups both span the whole presence domain - there is no axis value to condition either on"
     ]
   },
   "enrichmentNotes": [

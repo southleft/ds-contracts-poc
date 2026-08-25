@@ -1293,9 +1293,15 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   // 2026-08-22: 2144 → 2143 — the promoter's authored-facts ledger pruned the
   // orphan `imported.link.root.width` leaf (16889547 had unbound it by hand).
   // regen that shipped the node-opacity unbind; both paths still agree.
+  // RC4 (2026-08-25): 2143 -> 2142 - `imported.circular-progress.root.width`
+  // (40px) stops minting when mui.CircularProgress is re-derived. NOT caused by
+  // the RC4 glyph fix: regating the same committed capture with the UNPATCHED
+  // origin/fix/rejected-sets anatomy.ts drops the same leaf, so this is a
+  // stale-corpus effect the re-derivation finally propagated. The EQUIVALENCE
+  // this pin exists for held throughout the move (2142 == 2142).
   assert(
-    mockA.variables.length === 2143 && mockB.variables.length === 2143,
-    `both paths land 2143 variables (bundle ${mockA.variables.length}, script ${mockB.variables.length})`,
+    mockA.variables.length === 2142 && mockB.variables.length === 2142,
+    `both paths land 2142 variables (bundle ${mockA.variables.length}, script ${mockB.variables.length})`,
   );
   assert(
     aliasCountOf(mockA) === 134 && aliasCountOf(mockB) === 134,

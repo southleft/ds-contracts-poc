@@ -198,8 +198,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 6,
-    "mintedLeavesFolded": 6
+    "mintedLeavesUnfolded": 4,
+    "mintedLeavesFolded": 4
   },
   "bound": {
     "cellsChecked": 0,
@@ -208,30 +208,30 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 6,
-    "baseBindings": 12,
+    "leaves": 4,
+    "baseBindings": 4,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 12,
+      "uniform": 4,
       "perAxis": 0,
       "perPair": 0,
       "refused": 0
     }
   },
   "declared": {
-    "base": 8,
+    "base": 4,
     "state": 0
   },
   "codeOnly": {
-    "base": 3,
+    "base": 0,
     "state": 0,
     "overflowBindings": 0
   },
   "pseudoElementFindings": 0,
   "anatomyPromotion": {
-    "partsCarried": 4,
-    "svgAssets": 0,
-    "refusals": 1
+    "partsCarried": 2,
+    "svgAssets": 4,
+    "refusals": 0
   },
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
@@ -309,11 +309,11 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 96.49122807017544,
-    "rowsFullyEqual": 0,
+    "computedPctEqual": 100,
+    "rowsFullyEqual": 16,
     "rows": 16,
-    "pixelPerfectExact": 0,
-    "pixelPerfectAA": 0,
+    "pixelPerfectExact": 16,
+    "pixelPerfectAA": 16,
     "pairs": 16
   },
   "focusVisibleDriverMatched": 0,

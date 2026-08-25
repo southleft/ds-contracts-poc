@@ -14832,8 +14832,7 @@
             "min-width": "{imported.shared.size-0}",
             "width": "{imported.tooltip.root.width}",
             "z-index": "{imported.tooltip.root.z-index}"
-          },
-          "hugsBelowMaxWidth": true
+          }
         }
       },
       "bindings": {
@@ -20494,17 +20493,6 @@
           "channel": "position",
           "value": "absolute",
           "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
-          "variants": {
-            "count": 1,
-            "of": 1
-          }
-        },
-        {
-          "part": "root",
-          "kind": "preview",
-          "channel": "display",
-          "value": "block",
-          "reason": "a block root has no intrinsic width — the canvas draws a preview width, the code surface fills its container",
           "variants": {
             "count": 1,
             "of": 1

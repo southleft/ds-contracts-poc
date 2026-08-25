@@ -130,8 +130,7 @@
         "min-width": "{imported.shared.size-0}",
         "width": "{imported.tooltip.root.width}",
         "z-index": "{imported.tooltip.root.z-index}"
-      },
-      "hugsBelowMaxWidth": true
+      }
     }
   },
   "bindings": {

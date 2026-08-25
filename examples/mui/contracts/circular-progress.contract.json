@@ -64,8 +64,7 @@
         }
       },
       "tokens": {
-        "color": "{imported.circular-progress.root.color}",
-        "width": "{imported.circular-progress.root.width}"
+        "color": "{imported.circular-progress.root.color}"
       }
     }
   },

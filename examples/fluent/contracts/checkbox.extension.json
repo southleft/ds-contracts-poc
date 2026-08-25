@@ -600,30 +600,6 @@
             }
           }
         },
-        "icon": {
-          "font-size": {
-            "medium": {
-              "$value": "12px",
-              "$type": "dimension"
-            },
-            "large": {
-              "$value": "16px",
-              "$type": "dimension"
-            }
-          }
-        },
-        "part-1-0-0": {
-          "font-size": {
-            "medium": {
-              "$value": "12px",
-              "$type": "dimension"
-            },
-            "large": {
-              "$value": "16px",
-              "$type": "dimension"
-            }
-          }
-        },
         "label": {
           "color": {
             "unchecked": {
@@ -1046,16 +1022,6 @@
     }
   ],
   "foldedStateSkips": [
-    "fold-carries-state-delta: [active] icon.border-bottom-color rides its source fact",
-    "fold-carries-state-delta: [active] icon.border-left-color rides its source fact",
-    "fold-carries-state-delta: [active] icon.border-right-color rides its source fact",
-    "fold-carries-state-delta: [active] icon.border-top-color rides its source fact",
-    "fold-carries-state-delta: [active] icon.caret-color rides its source fact",
-    "fold-carries-state-delta: [active] icon.column-rule-color rides its source fact",
-    "fold-carries-state-delta: [active] icon.outline-color rides its source fact",
-    "fold-carries-state-delta: [active] icon.row-rule-color rides its source fact",
-    "fold-carries-state-delta: [active] icon.text-decoration-color rides its source fact",
-    "fold-carries-state-delta: [active] icon.text-emphasis-color rides its source fact",
     "fold-carries-state-delta: [active] indicator.caret-color rides its source fact",
     "fold-carries-state-delta: [active] indicator.column-rule-color rides its source fact",
     "fold-carries-state-delta: [active] indicator.outline-color rides its source fact",
@@ -1072,32 +1038,12 @@
     "fold-carries-state-delta: [active] label.row-rule-color rides its source fact",
     "fold-carries-state-delta: [active] label.text-decoration-color rides its source fact",
     "fold-carries-state-delta: [active] label.text-emphasis-color rides its source fact",
-    "fold-carries-state-delta: [active] part-1-0-0.border-bottom-color rides its source fact",
-    "fold-carries-state-delta: [active] part-1-0-0.border-left-color rides its source fact",
-    "fold-carries-state-delta: [active] part-1-0-0.border-right-color rides its source fact",
-    "fold-carries-state-delta: [active] part-1-0-0.border-top-color rides its source fact",
-    "fold-carries-state-delta: [active] part-1-0-0.caret-color rides its source fact",
-    "fold-carries-state-delta: [active] part-1-0-0.column-rule-color rides its source fact",
-    "fold-carries-state-delta: [active] part-1-0-0.outline-color rides its source fact",
-    "fold-carries-state-delta: [active] part-1-0-0.row-rule-color rides its source fact",
-    "fold-carries-state-delta: [active] part-1-0-0.text-decoration-color rides its source fact",
-    "fold-carries-state-delta: [active] part-1-0-0.text-emphasis-color rides its source fact",
     "fold-carries-state-delta: [active] root.caret-color rides its source fact",
     "fold-carries-state-delta: [active] root.column-rule-color rides its source fact",
     "fold-carries-state-delta: [active] root.outline-color rides its source fact",
     "fold-carries-state-delta: [active] root.row-rule-color rides its source fact",
     "fold-carries-state-delta: [active] root.text-decoration-color rides its source fact",
     "fold-carries-state-delta: [active] root.text-emphasis-color rides its source fact",
-    "fold-carries-state-delta: [disabled] icon.border-bottom-color rides its source fact",
-    "fold-carries-state-delta: [disabled] icon.border-left-color rides its source fact",
-    "fold-carries-state-delta: [disabled] icon.border-right-color rides its source fact",
-    "fold-carries-state-delta: [disabled] icon.border-top-color rides its source fact",
-    "fold-carries-state-delta: [disabled] icon.caret-color rides its source fact",
-    "fold-carries-state-delta: [disabled] icon.column-rule-color rides its source fact",
-    "fold-carries-state-delta: [disabled] icon.outline-color rides its source fact",
-    "fold-carries-state-delta: [disabled] icon.row-rule-color rides its source fact",
-    "fold-carries-state-delta: [disabled] icon.text-decoration-color rides its source fact",
-    "fold-carries-state-delta: [disabled] icon.text-emphasis-color rides its source fact",
     "fold-carries-state-delta: [disabled] indicator.caret-color rides its source fact",
     "fold-carries-state-delta: [disabled] indicator.column-rule-color rides its source fact",
     "fold-carries-state-delta: [disabled] indicator.outline-color rides its source fact",
@@ -1123,32 +1069,12 @@
     "fold-carries-state-delta: [disabled] label.row-rule-color rides its source fact",
     "fold-carries-state-delta: [disabled] label.text-decoration-color rides its source fact",
     "fold-carries-state-delta: [disabled] label.text-emphasis-color rides its source fact",
-    "fold-carries-state-delta: [disabled] part-1-0-0.border-bottom-color rides its source fact",
-    "fold-carries-state-delta: [disabled] part-1-0-0.border-left-color rides its source fact",
-    "fold-carries-state-delta: [disabled] part-1-0-0.border-right-color rides its source fact",
-    "fold-carries-state-delta: [disabled] part-1-0-0.border-top-color rides its source fact",
-    "fold-carries-state-delta: [disabled] part-1-0-0.caret-color rides its source fact",
-    "fold-carries-state-delta: [disabled] part-1-0-0.column-rule-color rides its source fact",
-    "fold-carries-state-delta: [disabled] part-1-0-0.outline-color rides its source fact",
-    "fold-carries-state-delta: [disabled] part-1-0-0.row-rule-color rides its source fact",
-    "fold-carries-state-delta: [disabled] part-1-0-0.text-decoration-color rides its source fact",
-    "fold-carries-state-delta: [disabled] part-1-0-0.text-emphasis-color rides its source fact",
     "fold-carries-state-delta: [disabled] root.caret-color rides its source fact",
     "fold-carries-state-delta: [disabled] root.column-rule-color rides its source fact",
     "fold-carries-state-delta: [disabled] root.outline-color rides its source fact",
     "fold-carries-state-delta: [disabled] root.row-rule-color rides its source fact",
     "fold-carries-state-delta: [disabled] root.text-decoration-color rides its source fact",
     "fold-carries-state-delta: [disabled] root.text-emphasis-color rides its source fact",
-    "fold-carries-state-delta: [hover] icon.border-bottom-color rides its source fact",
-    "fold-carries-state-delta: [hover] icon.border-left-color rides its source fact",
-    "fold-carries-state-delta: [hover] icon.border-right-color rides its source fact",
-    "fold-carries-state-delta: [hover] icon.border-top-color rides its source fact",
-    "fold-carries-state-delta: [hover] icon.caret-color rides its source fact",
-    "fold-carries-state-delta: [hover] icon.column-rule-color rides its source fact",
-    "fold-carries-state-delta: [hover] icon.outline-color rides its source fact",
-    "fold-carries-state-delta: [hover] icon.row-rule-color rides its source fact",
-    "fold-carries-state-delta: [hover] icon.text-decoration-color rides its source fact",
-    "fold-carries-state-delta: [hover] icon.text-emphasis-color rides its source fact",
     "fold-carries-state-delta: [hover] indicator.caret-color rides its source fact",
     "fold-carries-state-delta: [hover] indicator.column-rule-color rides its source fact",
     "fold-carries-state-delta: [hover] indicator.outline-color rides its source fact",
@@ -1165,16 +1091,6 @@
     "fold-carries-state-delta: [hover] label.row-rule-color rides its source fact",
     "fold-carries-state-delta: [hover] label.text-decoration-color rides its source fact",
     "fold-carries-state-delta: [hover] label.text-emphasis-color rides its source fact",
-    "fold-carries-state-delta: [hover] part-1-0-0.border-bottom-color rides its source fact",
-    "fold-carries-state-delta: [hover] part-1-0-0.border-left-color rides its source fact",
-    "fold-carries-state-delta: [hover] part-1-0-0.border-right-color rides its source fact",
-    "fold-carries-state-delta: [hover] part-1-0-0.border-top-color rides its source fact",
-    "fold-carries-state-delta: [hover] part-1-0-0.caret-color rides its source fact",
-    "fold-carries-state-delta: [hover] part-1-0-0.column-rule-color rides its source fact",
-    "fold-carries-state-delta: [hover] part-1-0-0.outline-color rides its source fact",
-    "fold-carries-state-delta: [hover] part-1-0-0.row-rule-color rides its source fact",
-    "fold-carries-state-delta: [hover] part-1-0-0.text-decoration-color rides its source fact",
-    "fold-carries-state-delta: [hover] part-1-0-0.text-emphasis-color rides its source fact",
     "fold-carries-state-delta: [hover] root.caret-color rides its source fact",
     "fold-carries-state-delta: [hover] root.column-rule-color rides its source fact",
     "fold-carries-state-delta: [hover] root.outline-color rides its source fact",
@@ -1293,36 +1209,6 @@
         "value": "none"
       },
       {
-        "part": "icon",
-        "channel": "cursor",
-        "value": "pointer"
-      },
-      {
-        "part": "icon",
-        "channel": "overflow-x",
-        "value": "hidden"
-      },
-      {
-        "part": "icon",
-        "channel": "overflow-y",
-        "value": "hidden"
-      },
-      {
-        "part": "icon",
-        "channel": "pointer-events",
-        "value": "none"
-      },
-      {
-        "part": "part-1-0-0",
-        "channel": "cursor",
-        "value": "pointer"
-      },
-      {
-        "part": "part-1-0-0",
-        "channel": "pointer-events",
-        "value": "none"
-      },
-      {
         "part": "label",
         "channel": "cursor",
         "value": "pointer"
@@ -1389,34 +1275,6 @@
       "distinctValues": 1
     },
     {
-      "part": "icon",
-      "channel": "overflow-clip-margin",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
-      "sample": "content-box",
-      "distinctValues": 1
-    },
-    {
-      "part": "part-1-0-0",
-      "channel": "d",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <path>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <path> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
-      "sample": "path(\"M 9.76 3.2 C 10.06 3.49 10.08 3.96 9.8 4.26 L 5.55 8.76 A 0.75 0.75 0 0 1 4.47 8.78 L 2.22 6.53 A 0.75 0.75 0 0 1 3.28 5.47 L 4.98 7.17 L 8.7 3.24 A 0.75 0.75 0 0 1 9.76 3.2\")",
-      "distinctValues": 5
-    },
-    {
-      "part": "part-1-0-0",
-      "channel": "height",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <path>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <path> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
-      "sample": "auto",
-      "distinctValues": 1
-    },
-    {
-      "part": "part-1-0-0",
-      "channel": "width",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <path>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <path> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
-      "sample": "auto",
-      "distinctValues": 1
-    },
-    {
       "part": "label",
       "channel": "align-self",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <label>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <label> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
@@ -1424,127 +1282,8 @@
       "distinctValues": 1
     }
   ],
-  "stateOverflow": [
-    {
-      "state": "active",
-      "part": "icon",
-      "channel": "color",
-      "sample": "rgba(15, 84, 140, 1)",
-      "reason": "default-state values not kind-compatible for padding — cannot correlate"
-    },
-    {
-      "state": "active",
-      "part": "icon",
-      "channel": "fill",
-      "sample": "rgba(15, 84, 140, 1)",
-      "reason": "default-state values not kind-compatible for padding — cannot correlate"
-    },
-    {
-      "state": "active",
-      "part": "part-1-0-0",
-      "channel": "color",
-      "sample": "rgba(15, 84, 140, 1)",
-      "reason": "default-state values not kind-compatible for padding — cannot correlate"
-    },
-    {
-      "state": "active",
-      "part": "part-1-0-0",
-      "channel": "fill",
-      "sample": "rgba(15, 84, 140, 1)",
-      "reason": "default-state values not kind-compatible for padding — cannot correlate"
-    },
-    {
-      "state": "disabled",
-      "part": "icon",
-      "channel": "color",
-      "sample": "rgba(189, 189, 189, 1)",
-      "reason": "default-state values not kind-compatible for padding — cannot correlate"
-    },
-    {
-      "state": "disabled",
-      "part": "icon",
-      "channel": "cursor",
-      "sample": "default",
-      "reason": "declared-channel state delta on 8/12 combos — partial coverage cannot carry as a state selector (v15); named residue"
-    },
-    {
-      "state": "disabled",
-      "part": "icon",
-      "channel": "fill",
-      "sample": "rgba(189, 189, 189, 1)",
-      "reason": "default-state values not kind-compatible for padding — cannot correlate"
-    },
-    {
-      "state": "disabled",
-      "part": "part-1-0-0",
-      "channel": "color",
-      "sample": "rgba(189, 189, 189, 1)",
-      "reason": "default-state values not kind-compatible for padding — cannot correlate"
-    },
-    {
-      "state": "disabled",
-      "part": "part-1-0-0",
-      "channel": "cursor",
-      "sample": "default",
-      "reason": "declared-channel state delta on 8/12 combos — partial coverage cannot carry as a state selector (v15); named residue"
-    },
-    {
-      "state": "disabled",
-      "part": "part-1-0-0",
-      "channel": "fill",
-      "sample": "rgba(189, 189, 189, 1)",
-      "reason": "default-state values not kind-compatible for padding — cannot correlate"
-    },
-    {
-      "state": "hover",
-      "part": "icon",
-      "channel": "color",
-      "sample": "rgba(17, 94, 163, 1)",
-      "reason": "default-state values not kind-compatible for padding — cannot correlate"
-    },
-    {
-      "state": "hover",
-      "part": "icon",
-      "channel": "fill",
-      "sample": "rgba(17, 94, 163, 1)",
-      "reason": "default-state values not kind-compatible for padding — cannot correlate"
-    },
-    {
-      "state": "hover",
-      "part": "part-1-0-0",
-      "channel": "color",
-      "sample": "rgba(17, 94, 163, 1)",
-      "reason": "default-state values not kind-compatible for padding — cannot correlate"
-    },
-    {
-      "state": "hover",
-      "part": "part-1-0-0",
-      "channel": "fill",
-      "sample": "rgba(17, 94, 163, 1)",
-      "reason": "default-state values not kind-compatible for padding — cannot correlate"
-    }
-  ],
+  "stateOverflow": [],
   "overflowBindings": [
-    {
-      "part": "icon",
-      "channel": "color",
-      "refusal": "resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually"
-    },
-    {
-      "part": "icon",
-      "channel": "fill",
-      "refusal": "resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually"
-    },
-    {
-      "part": "part-1-0-0",
-      "channel": "color",
-      "refusal": "resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually"
-    },
-    {
-      "part": "part-1-0-0",
-      "channel": "fill",
-      "refusal": "resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually"
-    },
     {
       "part": "indicator",
       "channel": "background-color",
@@ -7519,15 +7258,8 @@
   },
   "bindingContradictions": [],
   "interactionOnDisabled": [],
-  "interactionOnlyPlaneDrops": [
-    "icon: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
-    "icon: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
-    "icon: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
-    "part-1-0-0: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
-    "part-1-0-0: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
-    "part-1-0-0: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only"
-  ],
-  "interactionOnlyPlaneDropCount": 6,
+  "interactionOnlyPlaneDrops": [],
+  "interactionOnlyPlaneDropCount": 0,
   "structureReceipts": [
     "union-part-added: checked.medium.square.enabled__default @1.0 (svg|Icon)",
     "union-part-added: checked.medium.square.enabled__default @1.0.0 (path|)"
@@ -7553,7 +7285,6 @@
     "geometry-excluded: root — block-size 32px, inline-size 108.375px, perspective-origin 54.1875px 16px, transform-origin 54.1875px 16px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (icon, indicator, input, label, part-1-0-0, root); -webkit-text-stroke-color (icon, indicator, input, label, part-1-0-0, root)",
     "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
-    "inheritance-check-rejected: icon.line-height — values track ancestor \"indicator\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: indicator.fill — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: indicator.font-size — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: input.font-size — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
@@ -7561,17 +7292,10 @@
     "inheritance-check-rejected: label.font-size — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.font-weight — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.line-height — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-only: icon.caret-color equals ancestor \"indicator\" on all 64 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
-    "inheritance-only: icon.color equals ancestor \"indicator\" on all 64 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
-    "inheritance-only: icon.fill equals ancestor \"indicator\" on all 64 captured planes — the part carries no independent fill fact (CSS inheritance, observed)",
-    "inheritance-only: icon.font-size equals ancestor \"indicator\" on all 64 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
     "inheritance-only: label.caret-color equals ancestor \"root\" on all 96 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
     "inheritance-only: label.color equals ancestor \"root\" on all 96 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-0-0.caret-color equals ancestor \"icon\" on all 64 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-0-0.color equals ancestor \"icon\" on all 64 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-0-0.fill equals ancestor \"icon\" on all 64 captured planes — the part carries no independent fill fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-0-0.font-size equals ancestor \"icon\" on all 64 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-0-0.line-height equals ancestor \"icon\" on all 64 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)"
+    "orphan-mint-refused: icon was REFUSED by the anatomy promotion (it is not a part of the promoted contract), so its 21 styled channel(s) do not mint — before this door they minted leaves the contract could never reference, and `figma bundle` shipped them as Figma variables nothing binds (task #42). The named promotion refusal is in anatomyPromotion.refusals.",
+    "orphan-mint-refused: part-1-0-0 was REFUSED by the anatomy promotion (it is not a part of the promoted contract), so its 22 styled channel(s) do not mint — before this door they minted leaves the contract could never reference, and `figma bundle` shipped them as Figma variables nothing binds (task #42). The named promotion refusal is in anatomyPromotion.refusals."
   ],
   "frontierReceipts": [
     "closed-shadow-root-suspected: Checkbox:checked.large.circular.disabled__active>div>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 12x9 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
@@ -7679,11 +7403,15 @@
       "root",
       "input",
       "indicator",
-      "icon",
-      "part-1-0-0",
       "label"
     ],
-    "svgAssets": [],
+    "svgAssets": [
+      "checkbox-indicator-checked-large",
+      "checkbox-indicator-checked-medium",
+      "checkbox-indicator-mixed-large-square",
+      "checkbox-indicator-mixed-medium-circular",
+      "checkbox-indicator-mixed-medium-square"
+    ],
     "receipts": [
       "svg-viewbox-reconstructed: Checkbox.indicator@checked.medium.square.enabled — 0 0 12 12 from computed size 12×12 (path extent 10.1; viewBox is not a computed style — named reconstruction)",
       "svg-viewbox-reconstructed: Checkbox.indicator@checked.medium.circular.enabled — 0 0 12 12 from computed size 12×12 (path extent 10.1; viewBox is not a computed style — named reconstruction)",
@@ -7693,19 +7421,13 @@
       "svg-viewbox-bumped: Checkbox.indicator@mixed.medium.circular.enabled — computed size 12 < path extent 18; viewBox reconstructed as 0 0 18 18 (named reconstruction)",
       "svg-viewbox-reconstructed: Checkbox.indicator@mixed.large.square.enabled — 0 0 16 16 from computed size 16×16 (path extent 14.0; viewBox is not a computed style — named reconstruction)",
       "svg-viewbox-bumped: Checkbox.indicator@mixed.large.circular.enabled — computed size 16 < path extent 18; viewBox reconstructed as 0 0 18 18 (named reconstruction)",
+      "svg-glyph-conjunction-carried: Checkbox.indicator - 6 glyph/size group(s) over 5 distinct asset(s), keyed by checked x size x shape, carried as per-conjunction icon parts (visibleWhen on one axis + stylesWhen display:none on the excluded values of the rest); RECTANGULARITY asserted over all 12 enabled combo(s) where \"indicator\" renders - absent cells included, so no cell the library leaves empty can be minted",
       "root-display-carried: flex",
       "sr-only-carried-as-hidden: input is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)",
       "aspect-carried: indicator computed width == height in every enabled combo (16/20px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
-      "aspect-carried: icon computed width == height in every enabled combo (12/16px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
-      "state-axis-presence-dropped: icon absent under disabled but the contract has no \"disabled\" prop — factor dropped, part renders in that plane (named residue)",
-      "presence-carried: icon (8/12 combos) →  hidden-when checked=unchecked",
-      "state-axis-presence-dropped: part-1-0-0 absent under disabled but the contract has no \"disabled\" prop — factor dropped, part renders in that plane (named residue)",
-      "presence-carried: part-1-0-0 (8/12 combos) →  hidden-when checked=unchecked",
       "literal-text-carried: label = \"Checkbox\" (no text prop sample matches — the mounted value is carried verbatim)"
     ],
-    "refusals": [
-      "svg-content-multi-axis: Checkbox.indicator — markup varies over more than one axis; asset refused (part still promoted as a box)"
-    ]
+    "refusals": []
   },
   "enrichmentNotes": [
     "layout enriched: indicator.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
@@ -7728,12 +7450,6 @@
     "declared fact carried: indicator.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: indicator.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: indicator.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: icon.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: icon.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: icon.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: icon.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-0.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label.font-family = \"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared state fact carried: [disabled] indicator.cursor = default (v15 declared vocabulary)",
