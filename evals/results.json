@@ -1,7 +1,7 @@
 {
-  "passed": 225,
-  "total": 225,
-  "commit": "9e567343782a88efe7325ac75884f03186173be7",
+  "passed": 223,
+  "total": 228,
+  "commit": "ed6fe8cc129b630d7356deb1355582c68bc04e42",
   "dirty": false,
   "recordedAt": "2026-08-25",
   "results": [
@@ -628,7 +628,8 @@
     {
       "id": "capability-report-is-fresh",
       "claim": "C3-detection",
-      "pass": true
+      "pass": false,
+      "error": "Error: docs/24-what-works.md is STALE vs a rebuild from its committed sources:\nSTALE: docs/24-what-works.md does not match a rebuild from its committed sources.\nEvery number in it is READ from an artifact; one of those artifacts moved.\nRebuild it and commit:  npm run capability:report\n"
     },
     {
       "id": "generated-storybook-trees-are-fresh",
@@ -798,7 +799,8 @@
     {
       "id": "plugin-engine-bundle",
       "claim": "C1-determinism",
-      "pass": true
+      "pass": false,
+      "error": "Error: plugin-engine-check failed:\nfile:///private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/cc45b987-8d09-4532-8495-2986c74f81fb/scratchpad/int2/evals/.scratch/scripts/build-plugin-zip.mjs:251\n    throw new Error(\n          ^\n\nError: plugin-zip: the plugin engine bundle is STALE vs core — a fresh bundle hashes 8010abe631f3… (844848 bytes) but the committed receipt records c32790101f71… (818303 bytes). Core (or tokens/contracts/icons) changed without re-recording. Review the change, then run `node scripts/build-plugin-zip.mjs --update-engine-receipt` and commit engine.receipt.json.\n    at verifyEngineReceipt (file:///private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/cc45b987-8d09-4532-8495-2986c74f81fb/scratchpad/int2/evals/.scratch/scripts/build-plugin-zip.mjs:251:11)\n    at async file:///private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/cc45b987-8d09-4532-8495-2986c74f81fb/scratchpad/int2/evals/.scratch/scripts/plugin-engine-check.mjs:70:1\n\nNode.js v20.19.4\n"
     },
     {
       "id": "deterministic-roundtrip",
@@ -808,17 +810,20 @@
     {
       "id": "plugin-update-report",
       "claim": "C3-detection",
-      "pass": true
+      "pass": false,
+      "error": "Error: plugin-engine-check failed:\nfile:///private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/cc45b987-8d09-4532-8495-2986c74f81fb/scratchpad/int2/evals/.scratch/scripts/build-plugin-zip.mjs:251\n    throw new Error(\n          ^\n\nError: plugin-zip: the plugin engine bundle is STALE vs core — a fresh bundle hashes 8010abe631f3… (844848 bytes) but the committed receipt records c32790101f71… (818303 bytes). Core (or tokens/contracts/icons) changed without re-recording. Review the change, then run `node scripts/build-plugin-zip.mjs --update-engine-receipt` and commit engine.receipt.json.\n    at verifyEngineReceipt (file:///private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/cc45b987-8d09-4532-8495-2986c74f81fb/scratchpad/int2/evals/.scratch/scripts/build-plugin-zip.mjs:251:11)\n    at async file:///private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/cc45b987-8d09-4532-8495-2986c74f81fb/scratchpad/int2/evals/.scratch/scripts/plugin-engine-check.mjs:70:1\n\nNode.js v20.19.4\n"
     },
     {
       "id": "plugin-propose-dry-run",
       "claim": "C4-convergence",
-      "pass": true
+      "pass": false,
+      "error": "Error: plugin-engine-check failed:\nfile:///private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/cc45b987-8d09-4532-8495-2986c74f81fb/scratchpad/int2/evals/.scratch/scripts/build-plugin-zip.mjs:251\n    throw new Error(\n          ^\n\nError: plugin-zip: the plugin engine bundle is STALE vs core — a fresh bundle hashes 8010abe631f3… (844848 bytes) but the committed receipt records c32790101f71… (818303 bytes). Core (or tokens/contracts/icons) changed without re-recording. Review the change, then run `node scripts/build-plugin-zip.mjs --update-engine-receipt` and commit engine.receipt.json.\n    at verifyEngineReceipt (file:///private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/cc45b987-8d09-4532-8495-2986c74f81fb/scratchpad/int2/evals/.scratch/scripts/build-plugin-zip.mjs:251:11)\n    at async file:///private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/cc45b987-8d09-4532-8495-2986c74f81fb/scratchpad/int2/evals/.scratch/scripts/plugin-engine-check.mjs:70:1\n\nNode.js v20.19.4\n"
     },
     {
       "id": "plugin-stale-base-guard",
       "claim": "C2-refusal",
-      "pass": true
+      "pass": false,
+      "error": "Error: plugin-engine-check failed:\nfile:///private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/cc45b987-8d09-4532-8495-2986c74f81fb/scratchpad/int2/evals/.scratch/scripts/build-plugin-zip.mjs:251\n    throw new Error(\n          ^\n\nError: plugin-zip: the plugin engine bundle is STALE vs core — a fresh bundle hashes 8010abe631f3… (844848 bytes) but the committed receipt records c32790101f71… (818303 bytes). Core (or tokens/contracts/icons) changed without re-recording. Review the change, then run `node scripts/build-plugin-zip.mjs --update-engine-receipt` and commit engine.receipt.json.\n    at verifyEngineReceipt (file:///private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/cc45b987-8d09-4532-8495-2986c74f81fb/scratchpad/int2/evals/.scratch/scripts/build-plugin-zip.mjs:251:11)\n    at async file:///private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/cc45b987-8d09-4532-8495-2986c74f81fb/scratchpad/int2/evals/.scratch/scripts/plugin-engine-check.mjs:70:1\n\nNode.js v20.19.4\n"
     },
     {
       "id": "wc-emitter-roundtrip",
@@ -913,6 +918,21 @@
     {
       "id": "checked-axis-projection",
       "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "grammar-compound-import",
+      "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "grammar-ordered-class-tokens",
+      "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "grammar-date-literal",
+      "claim": "C1-determinism",
       "pass": true
     },
     {
