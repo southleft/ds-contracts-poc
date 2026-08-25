@@ -50,6 +50,16 @@ for (const lib of readdirSync(path.join(ROOT, 'examples')).sort()) {
   if (!existsSync(mf)) continue;
   const m = JSON.parse(readFileSync(mf, 'utf8'));
   if (!m.bundle) continue;
+  // A library with no committed contracts/ directory has never been promoted,
+  // so the bundle its manifest declares does not exist and no command in this
+  // repo would produce one. Held-out exam material (examples/{bootstrap5,
+  // radix-themes,day-picker} — prepared blind, deliberately never captured)
+  // ships a manifest with a bundle block precisely so the day it IS captured
+  // the recipe is already written. Rowing it today would name a file nothing
+  // measures, which is the failure the ROWS/committed cross-check below
+  // exists to catch. Same rule as scripts/corpus-reproducible-check.ts and
+  // the canvas census manifest ("not a contract library").
+  if (!existsSync(path.join(ROOT, 'examples', lib, 'contracts'))) continue;
   const args = [
     'figma',
     'bundle',
