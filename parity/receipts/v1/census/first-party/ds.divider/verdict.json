@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "canvas draws the hairline; the code render's 1px rule vanishes at capture dpr",
  "reviewedAt": "66580a14",

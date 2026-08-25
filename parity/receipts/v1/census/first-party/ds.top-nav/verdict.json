@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "slot-only nav bar renders as an empty bar in both halves",
  "reviewedAt": "66580a14",

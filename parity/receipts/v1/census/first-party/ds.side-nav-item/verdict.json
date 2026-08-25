@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "label matches; code render underlines the label, canvas does not",
  "reviewedAt": "66580a14",

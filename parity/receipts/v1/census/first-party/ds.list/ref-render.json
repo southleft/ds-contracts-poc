@@ -1,0 +1,44 @@
+{
+  "id": "ds.list",
+  "library": "first-party",
+  "renderer": "REAL IMPLEMENTATION render — generated React catalog (src/components) via its Storybook meta, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "harness": {
+    "package": "src/components (generated catalog — npm run generate)",
+    "version": "committed tree",
+    "recipe": "the repo's own generated React components ARE the real first-party implementation; mounted through each component's generated Storybook meta (canonical args/render), esbuild-bundled with src/components/tokens.css"
+  },
+  "configPath": null,
+  "component": null,
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "density-balanced",
+      "status": "rendered",
+      "png": "ref-density-balanced.png",
+      "props": {
+        "density": "balanced"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "density-compact",
+      "status": "rendered",
+      "png": "ref-density-compact.png",
+      "props": {
+        "density": "compact"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "density-spacious",
+      "status": "rendered",
+      "png": "ref-density-spacious.png",
+      "props": {
+        "density": "spacious"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 3,
+  "unmappable": 0
+}

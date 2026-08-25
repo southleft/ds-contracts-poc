@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "slot-only grid scaffold renders empty in both halves \u2014 the pair agrees",
  "reviewedAt": "66580a14",

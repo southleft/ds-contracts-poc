@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "slot-bearing quote: code render blank, canvas draws the rule only \u2014 both sides carry no sample copy",
  "reviewedAt": "66580a14",

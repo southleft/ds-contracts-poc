@@ -1,0 +1,97 @@
+{
+  "id": "ds.heading",
+  "library": "first-party",
+  "renderer": "REAL IMPLEMENTATION render — generated React catalog (src/components) via its Storybook meta, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "harness": {
+    "package": "src/components (generated catalog — npm run generate)",
+    "version": "committed tree",
+    "recipe": "the repo's own generated React components ARE the real first-party implementation; mounted through each component's generated Storybook meta (canonical args/render), esbuild-bundled with src/components/tokens.css"
+  },
+  "configPath": null,
+  "component": null,
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "level-h2__size-large",
+      "status": "rendered",
+      "png": "ref-level-h2__size-large.png",
+      "props": {
+        "level": "2",
+        "size": "lg"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "level-h2__size-small",
+      "status": "rendered",
+      "png": "ref-level-h2__size-small.png",
+      "props": {
+        "level": "2",
+        "size": "sm"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "level-h2__size-medium",
+      "status": "rendered",
+      "png": "ref-level-h2__size-medium.png",
+      "props": {
+        "level": "2",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "level-h1__size-large",
+      "status": "rendered",
+      "png": "ref-level-h1__size-large.png",
+      "props": {
+        "level": "1",
+        "size": "lg"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "level-h3__size-large",
+      "status": "rendered",
+      "png": "ref-level-h3__size-large.png",
+      "props": {
+        "level": "3",
+        "size": "lg"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "level-h4__size-large",
+      "status": "rendered",
+      "png": "ref-level-h4__size-large.png",
+      "props": {
+        "level": "4",
+        "size": "lg"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "level-h5__size-large",
+      "status": "rendered",
+      "png": "ref-level-h5__size-large.png",
+      "props": {
+        "level": "5",
+        "size": "lg"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "level-h6__size-large",
+      "status": "rendered",
+      "png": "ref-level-h6__size-large.png",
+      "props": {
+        "level": "6",
+        "size": "lg"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 8,
+  "unmappable": 0
+}

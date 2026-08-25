@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "slot-only section renders as an empty rounded box in both halves",
  "reviewedAt": "66580a14",

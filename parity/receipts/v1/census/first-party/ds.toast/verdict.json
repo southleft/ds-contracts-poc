@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "message pill matches; canvas stretches to the stage width while the code render hugs",
  "reviewedAt": "66580a14",

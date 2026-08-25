@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "icon slot empty in both halves (gray square pair agrees)",
  "reviewedAt": "66580a14",

@@ -1,0 +1,147 @@
+{
+  "id": "ds.token",
+  "library": "first-party",
+  "renderer": "REAL IMPLEMENTATION render — generated React catalog (src/components) via its Storybook meta, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "harness": {
+    "package": "src/components (generated catalog — npm run generate)",
+    "version": "committed tree",
+    "recipe": "the repo's own generated React components ARE the real first-party implementation; mounted through each component's generated Storybook meta (canonical args/render), esbuild-bundled with src/components/tokens.css"
+  },
+  "configPath": null,
+  "component": null,
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "color-default__size-medium",
+      "status": "rendered",
+      "png": "ref-color-default__size-medium.png",
+      "props": {
+        "color": "default",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-default__size-small",
+      "status": "rendered",
+      "png": "ref-color-default__size-small.png",
+      "props": {
+        "color": "default",
+        "size": "sm"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-default__size-large",
+      "status": "rendered",
+      "png": "ref-color-default__size-large.png",
+      "props": {
+        "color": "default",
+        "size": "lg"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-red__size-medium",
+      "status": "rendered",
+      "png": "ref-color-red__size-medium.png",
+      "props": {
+        "color": "red",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-orange__size-medium",
+      "status": "rendered",
+      "png": "ref-color-orange__size-medium.png",
+      "props": {
+        "color": "orange",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-yellow__size-medium",
+      "status": "rendered",
+      "png": "ref-color-yellow__size-medium.png",
+      "props": {
+        "color": "yellow",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-green__size-medium",
+      "status": "rendered",
+      "png": "ref-color-green__size-medium.png",
+      "props": {
+        "color": "green",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-teal__size-medium",
+      "status": "rendered",
+      "png": "ref-color-teal__size-medium.png",
+      "props": {
+        "color": "teal",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-cyan__size-medium",
+      "status": "rendered",
+      "png": "ref-color-cyan__size-medium.png",
+      "props": {
+        "color": "cyan",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-blue__size-medium",
+      "status": "rendered",
+      "png": "ref-color-blue__size-medium.png",
+      "props": {
+        "color": "blue",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-purple__size-medium",
+      "status": "rendered",
+      "png": "ref-color-purple__size-medium.png",
+      "props": {
+        "color": "purple",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-pink__size-medium",
+      "status": "rendered",
+      "png": "ref-color-pink__size-medium.png",
+      "props": {
+        "color": "pink",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-gray__size-medium",
+      "status": "rendered",
+      "png": "ref-color-gray__size-medium.png",
+      "props": {
+        "color": "gray",
+        "size": "md"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 13,
+  "unmappable": 0
+}
