@@ -1098,6 +1098,86 @@
         "part": "label",
         "channel": "font-family",
         "value": "Inter, -apple-system, \"system-ui\", \"San Francisco\", \"Segoe UI\", Roboto, \"Helvetica Neue\", sans-serif"
+      },
+      {
+        "part": "icon-3",
+        "channel": "transition-delay",
+        "value": "0s",
+        "when": {
+          "prop": "checked",
+          "equals": "checked"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "icon-3",
+        "channel": "transition-delay",
+        "value": "0s, 0s",
+        "when": {
+          "prop": "checked",
+          "equals": "indeterminate"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "icon-3",
+        "channel": "transition-duration",
+        "value": "0s",
+        "when": {
+          "prop": "checked",
+          "equals": "checked"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "icon-3",
+        "channel": "transition-duration",
+        "value": "0.15s, 0.15s",
+        "when": {
+          "prop": "checked",
+          "equals": "indeterminate"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "icon-3",
+        "channel": "transition-property",
+        "value": "all",
+        "when": {
+          "prop": "checked",
+          "equals": "checked"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "icon-3",
+        "channel": "transition-property",
+        "value": "opacity, transform",
+        "when": {
+          "prop": "checked",
+          "equals": "indeterminate"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "icon-3",
+        "channel": "transition-timing-function",
+        "value": "ease",
+        "when": {
+          "prop": "checked",
+          "equals": "checked"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "icon-3",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1)",
+        "when": {
+          "prop": "checked",
+          "equals": "indeterminate"
+        },
+        "byPropField": "declaredByProp"
       }
     ],
     "state": [
@@ -1171,34 +1251,6 @@
       "channel": "transition-behavior",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "normal",
-      "distinctValues": 2
-    },
-    {
-      "part": "icon-3",
-      "channel": "transition-delay",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "0s",
-      "distinctValues": 2
-    },
-    {
-      "part": "icon-3",
-      "channel": "transition-duration",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "0s",
-      "distinctValues": 2
-    },
-    {
-      "part": "icon-3",
-      "channel": "transition-property",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "all",
-      "distinctValues": 2
-    },
-    {
-      "part": "icon-3",
-      "channel": "transition-timing-function",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "ease",
       "distinctValues": 2
     },
     {
@@ -1845,7 +1897,11 @@
     "inheritance-only: icon-3.color equals ancestor \"checkbox\" on all 16 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
     "inheritance-only: icon-4.color equals ancestor \"icon-3\" on all 8 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
     "inheritance-only: icon.color equals ancestor \"checkbox\" on all 8 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
-    "inheritance-only: label.color equals ancestor \"choice__label\" on all 24 captured planes — the part carries no independent color fact (CSS inheritance, observed)"
+    "inheritance-only: label.color equals ancestor \"choice__label\" on all 24 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "declared-by-axis-carried: icon-3.transition-delay varies by \"checked\" (checked=0s, indeterminate=0s, 0s) — carried as per-value declaredByProp entries (code: `.checked-<value> { transition-delay: … }`; canvas: declared-not-drawn, repeated as a code-only fact)",
+    "declared-by-axis-carried: icon-3.transition-duration varies by \"checked\" (checked=0s, indeterminate=0.15s, 0.15s) — carried as per-value declaredByProp entries (code: `.checked-<value> { transition-duration: … }`; canvas: declared-not-drawn, repeated as a code-only fact)",
+    "declared-by-axis-carried: icon-3.transition-property varies by \"checked\" (checked=all, indeterminate=opacity, transform) — carried as per-value declaredByProp entries (code: `.checked-<value> { transition-property: … }`; canvas: declared-not-drawn, repeated as a code-only fact)",
+    "declared-by-axis-carried: icon-3.transition-timing-function varies by \"checked\" (checked=ease, indeterminate=cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1)) — carried as per-value declaredByProp entries (code: `.checked-<value> { transition-timing-function: … }`; canvas: declared-not-drawn, repeated as a code-only fact)"
   ],
   "frontierReceipts": [
     "closed-shadow-root-suspected: Checkbox:checked.disabled__active>span>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x6 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
@@ -2036,6 +2092,14 @@
     "declared state fact carried: [disabled] label.cursor = default (v15 declared vocabulary)",
     "declared state fact carried: [disabled] root.cursor = default (v15 declared vocabulary)",
     "declared state fact carried: [focus-visible] backdrop.outline-style = solid (v15 declared vocabulary)",
-    "declared state fact carried: [focus-visible] input.outline-style = auto (v15 declared vocabulary)"
+    "declared state fact carried: [focus-visible] input.outline-style = auto (v15 declared vocabulary)",
+    "declared fact carried per axis value: icon-3.transition-delay = 0s when checked=checked (declaredByProp)",
+    "declared fact carried per axis value: icon-3.transition-delay = 0s, 0s when checked=indeterminate (declaredByProp)",
+    "declared fact carried per axis value: icon-3.transition-duration = 0s when checked=checked (declaredByProp)",
+    "declared fact carried per axis value: icon-3.transition-duration = 0.15s, 0.15s when checked=indeterminate (declaredByProp)",
+    "declared fact carried per axis value: icon-3.transition-property = all when checked=checked (declaredByProp)",
+    "declared fact carried per axis value: icon-3.transition-property = opacity, transform when checked=indeterminate (declaredByProp)",
+    "declared fact carried per axis value: icon-3.transition-timing-function = ease when checked=checked (declaredByProp)",
+    "declared fact carried per axis value: icon-3.transition-timing-function = cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1) when checked=indeterminate (declaredByProp)"
   ]
 }

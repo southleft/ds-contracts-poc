@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "polaris.button",
     "version": "0.4.0",
     "anchorKey": null,
-    "description": "Button — generated from contract polaris.button v0.4.0 † (78 code-only facts — see plugin report)",
+    "description": "Button — generated from contract polaris.button v0.4.0 † (79 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -32530,6 +32530,17 @@ const COMPONENTS = [
             "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Active",
             "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Hover"
           ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "plane",
+        "channel": "variant axis \"Text Align\"",
+        "value": "center / left / right / start / end",
+        "reason": "the compiled plane carries NO distinguishing fact for this axis — its 5 values compile to byte-identical cells (60 identical group(s) of 5), so the minted set draws the same picture in every one of them. Either the capture never swept the axis (extract/computed/configs/<lib>.json `axes`) or every fact that separates the values was refused upstream and is named in this component's own code-only facts. NAMED, NOT DROPPED: the axis is still minted as a Figma variant property, because a flat axis can be the library's own truth; nothing here guesses which.",
+        "variants": {
+          "count": 320,
+          "of": 320
         }
       }
     ],

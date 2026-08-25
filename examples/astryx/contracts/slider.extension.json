@@ -987,6 +987,86 @@
         "part": "label-3",
         "channel": "text-wrap-mode",
         "value": "nowrap"
+      },
+      {
+        "part": "slider-track",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, 0, -2)",
+        "when": {
+          "prop": "orientation",
+          "equals": "horizontal"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "slider-track",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, -2, 0)",
+        "when": {
+          "prop": "orientation",
+          "equals": "vertical"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "part-1-0-1",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, 0, -2)",
+        "when": {
+          "prop": "orientation",
+          "equals": "horizontal"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "part-1-0-1",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, -2, 0)",
+        "when": {
+          "prop": "orientation",
+          "equals": "vertical"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "slider-thumb-2",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, -10, -10)",
+        "when": {
+          "prop": "orientation",
+          "equals": "horizontal"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "slider-thumb-2",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, -10, 10)",
+        "when": {
+          "prop": "orientation",
+          "equals": "vertical"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, -10, -10)",
+        "when": {
+          "prop": "orientation",
+          "equals": "horizontal"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, -10, 10)",
+        "when": {
+          "prop": "orientation",
+          "equals": "vertical"
+        },
+        "byPropField": "declaredByProp"
       }
     ],
     "state": []
@@ -1014,27 +1094,6 @@
       "distinctValues": 2
     },
     {
-      "part": "slider-track",
-      "channel": "transform",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "matrix(1, 0, 0, 1, 0, -2)",
-      "distinctValues": 2
-    },
-    {
-      "part": "part-1-0-1",
-      "channel": "transform",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "matrix(1, 0, 0, 1, 0, -2)",
-      "distinctValues": 2
-    },
-    {
-      "part": "slider-thumb-2",
-      "channel": "transform",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "matrix(1, 0, 0, 1, -10, -10)",
-      "distinctValues": 2
-    },
-    {
       "part": "part-1-0-2",
       "channel": "height",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -1053,13 +1112,6 @@
       "channel": "anchor-name",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "--astryx-layer-_r_5_",
-      "distinctValues": 2
-    },
-    {
-      "part": "slider-thumb",
-      "channel": "transform",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "matrix(1, 0, 0, 1, -10, -10)",
       "distinctValues": 2
     },
     {
@@ -1429,7 +1481,11 @@
     "inheritance-only: label-2.caret-color equals ancestor \"tooltip\" on all 8 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
     "inheritance-only: label-2.color equals ancestor \"tooltip\" on all 8 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
     "inheritance-only: label-2.font-size equals ancestor \"tooltip\" on all 8 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
-    "inheritance-only: label-2.line-height equals ancestor \"tooltip\" on all 8 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)"
+    "inheritance-only: label-2.line-height equals ancestor \"tooltip\" on all 8 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "declared-by-axis-carried: slider-track.transform varies by \"orientation\" (horizontal=matrix(1, 0, 0, 1, 0, -2), vertical=matrix(1, 0, 0, 1, -2, 0)) — carried as per-value declaredByProp entries (code: `.orientation-<value> { transform: … }`; canvas: drawn per compiled variant)",
+    "declared-by-axis-carried: part-1-0-1.transform varies by \"orientation\" (horizontal=matrix(1, 0, 0, 1, 0, -2), vertical=matrix(1, 0, 0, 1, -2, 0)) — carried as per-value declaredByProp entries (code: `.orientation-<value> { transform: … }`; canvas: drawn per compiled variant)",
+    "declared-by-axis-carried: slider-thumb-2.transform varies by \"orientation\" (horizontal=matrix(1, 0, 0, 1, -10, -10), vertical=matrix(1, 0, 0, 1, -10, 10)) — carried as per-value declaredByProp entries (code: `.orientation-<value> { transform: … }`; canvas: drawn per compiled variant)",
+    "declared-by-axis-carried: slider-thumb.transform varies by \"orientation\" (horizontal=matrix(1, 0, 0, 1, -10, -10), vertical=matrix(1, 0, 0, 1, -10, 10)) — carried as per-value declaredByProp entries (code: `.orientation-<value> { transform: … }`; canvas: drawn per compiled variant)"
   ],
   "frontierReceipts": [
     "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
@@ -1565,6 +1621,14 @@
     "nested pair carried: part-1-0-1.right = per-valueDisplay map whose refs substitute orientation (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
     "nested pair carried: part-1-0-1.width = per-valueDisplay map whose refs substitute orientation (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
     "hug-evidence-unmeasurable: label-2.max-width = 300px — not a pixel value, so \"is the used width below the cap\" cannot be asked. No sizing evidence carried; the max-width lowering is unchanged.",
-    "hug-evidence-absent: label-2 carries max-width but the capture produced no uniform pixel measurement for it — no sizing evidence carried (the max-width lowering is unchanged)."
+    "hug-evidence-absent: label-2 carries max-width but the capture produced no uniform pixel measurement for it — no sizing evidence carried (the max-width lowering is unchanged).",
+    "declared fact carried per axis value: slider-track.transform = matrix(1, 0, 0, 1, 0, -2) when orientation=horizontal (declaredByProp)",
+    "declared fact carried per axis value: slider-track.transform = matrix(1, 0, 0, 1, -2, 0) when orientation=vertical (declaredByProp)",
+    "declared fact carried per axis value: part-1-0-1.transform = matrix(1, 0, 0, 1, 0, -2) when orientation=horizontal (declaredByProp)",
+    "declared fact carried per axis value: part-1-0-1.transform = matrix(1, 0, 0, 1, -2, 0) when orientation=vertical (declaredByProp)",
+    "declared fact carried per axis value: slider-thumb-2.transform = matrix(1, 0, 0, 1, -10, -10) when orientation=horizontal (declaredByProp)",
+    "declared fact carried per axis value: slider-thumb-2.transform = matrix(1, 0, 0, 1, -10, 10) when orientation=vertical (declaredByProp)",
+    "declared fact carried per axis value: slider-thumb.transform = matrix(1, 0, 0, 1, -10, -10) when orientation=horizontal (declaredByProp)",
+    "declared fact carried per axis value: slider-thumb.transform = matrix(1, 0, 0, 1, -10, 10) when orientation=vertical (declaredByProp)"
   ]
 }

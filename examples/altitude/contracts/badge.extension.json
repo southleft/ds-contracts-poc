@@ -252,26 +252,51 @@
         "part": "root",
         "channel": "box-sizing",
         "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "max-height",
+        "value": "none",
+        "when": {
+          "prop": "dot",
+          "equals": "default"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "root",
+        "channel": "max-height",
+        "value": "8px",
+        "when": {
+          "prop": "dot",
+          "equals": "dot"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "root",
+        "channel": "max-width",
+        "value": "none",
+        "when": {
+          "prop": "dot",
+          "equals": "default"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "root",
+        "channel": "max-width",
+        "value": "8px",
+        "when": {
+          "prop": "dot",
+          "equals": "dot"
+        },
+        "byPropField": "declaredByProp"
       }
     ],
     "state": []
   },
-  "codeOnlyChannels": [
-    {
-      "part": "root",
-      "channel": "max-height",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "none",
-      "distinctValues": 2
-    },
-    {
-      "part": "root",
-      "channel": "max-width",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "none",
-      "distinctValues": 2
-    }
-  ],
+  "codeOnlyChannels": [],
   "stateOverflow": [],
   "overflowBindings": [],
   "pairwiseRefusals": [],
@@ -331,7 +356,9 @@
   "structureReceipts": [],
   "styledChannelReceipts": [
     "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (root); -webkit-text-stroke-color (root)",
-    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold."
+    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
+    "declared-by-axis-carried: root.max-height varies by \"dot\" (default=none, dot=8px) — carried as per-value declaredByProp entries (code: `.dot-<value> { max-height: … }`; canvas: declared-not-drawn, repeated as a code-only fact)",
+    "declared-by-axis-carried: root.max-width varies by \"dot\" (default=none, dot=8px) — carried as per-value declaredByProp entries (code: `.dot-<value> { max-width: … }`; canvas: declared-not-drawn, repeated as a code-only fact)"
   ],
   "frontierReceipts": [
     "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
@@ -366,6 +393,10 @@
   "enrichmentNotes": [
     "layout enriched: root.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: root.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
-    "declared fact carried: root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)"
+    "declared fact carried: root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried per axis value: root.max-height = none when dot=default (declaredByProp)",
+    "declared fact carried per axis value: root.max-height = 8px when dot=dot (declaredByProp)",
+    "declared fact carried per axis value: root.max-width = none when dot=default (declaredByProp)",
+    "declared fact carried per axis value: root.max-width = 8px when dot=dot (declaredByProp)"
   ]
 }

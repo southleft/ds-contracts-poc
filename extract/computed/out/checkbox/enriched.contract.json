@@ -621,6 +621,25 @@
                       "value": "default",
                       "reason": "declared-channel state delta on 2/3 combos — partial coverage cannot carry as a state selector (v15); named residue"
                     }
+                  ],
+                  "declaredByProp": [
+                    {
+                      "prop": "checked",
+                      "map": {
+                        "checked": {
+                          "transition-delay": "0s",
+                          "transition-duration": "0s",
+                          "transition-property": "all",
+                          "transition-timing-function": "ease"
+                        },
+                        "indeterminate": {
+                          "transition-delay": "0s, 0s",
+                          "transition-duration": "0.15s, 0.15s",
+                          "transition-property": "opacity, transform",
+                          "transition-timing-function": "cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1)"
+                        }
+                      }
+                    }
                   ]
                 },
                 "icon": {

@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "altitude.badge",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Badge — generated from contract altitude.badge v0.2.0 † (4 code-only facts — see plugin report)",
+    "description": "Badge — generated from contract altitude.badge v0.2.0 † (8 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -366,6 +366,50 @@ const COMPONENTS = [
         "channel": "variant [unset]",
         "value": "info|success|warning|danger",
         "reason": "defaultless axis — the library's own rendering when \"variant\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 4 declared values only, and a proposal read back from the canvas will call \"info\" the default (FC-UNSET-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 8,
+          "of": 8
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "max-height",
+        "value": "8px",
+        "reason": "Fluid max-height constraints live in code; the canvas draws the component at its real size (standing choice).",
+        "variants": {
+          "count": 8,
+          "of": 8
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "max-height",
+        "value": "none",
+        "reason": "Fluid max-height constraints live in code; the canvas draws the component at its real size (standing choice).",
+        "variants": {
+          "count": 8,
+          "of": 8
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "max-width",
+        "value": "8px",
+        "reason": "Fluid max-width constraints live in code; the canvas draws the component at its real size (standing choice).",
+        "variants": {
+          "count": 8,
+          "of": 8
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "max-width",
+        "value": "none",
+        "reason": "Fluid max-width constraints live in code; the canvas draws the component at its real size (standing choice).",
         "variants": {
           "count": 8,
           "of": 8

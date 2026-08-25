@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "astryx.text-input",
     "version": "0.3.0",
     "anchorKey": null,
-    "description": "TextInput — generated from contract astryx.text-input v0.3.0 † (26 code-only facts — see plugin report)",
+    "description": "TextInput — generated from contract astryx.text-input v0.3.0 † (28 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -1174,6 +1174,28 @@ const COMPONENTS = [
         "channel": "column-gap",
         "value": "{imported.shared.size-4}",
         "reason": "the cross axis of a VERTICAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 9,
+          "of": 9
+        }
+      },
+      {
+        "part": "root",
+        "kind": "plane",
+        "channel": "variant axis \"Size\"",
+        "value": "md / sm / lg",
+        "reason": "the compiled plane carries NO distinguishing fact for this axis — its 3 values compile to byte-identical cells (3 identical group(s) of 3), so the minted set draws the same picture in every one of them. Either the capture never swept the axis (extract/computed/configs/<lib>.json `axes`) or every fact that separates the values was refused upstream and is named in this component's own code-only facts. NAMED, NOT DROPPED: the axis is still minted as a Figma variant property, because a flat axis can be the library's own truth; nothing here guesses which.",
+        "variants": {
+          "count": 9,
+          "of": 9
+        }
+      },
+      {
+        "part": "root",
+        "kind": "plane",
+        "channel": "variant axis \"Type\"",
+        "value": "text / password / email",
+        "reason": "the compiled plane carries NO distinguishing fact for this axis — its 3 values compile to byte-identical cells (3 identical group(s) of 3), so the minted set draws the same picture in every one of them. Either the capture never swept the axis (extract/computed/configs/<lib>.json `axes`) or every fact that separates the values was refused upstream and is named in this component's own code-only facts. NAMED, NOT DROPPED: the axis is still minted as a Figma variant property, because a flat axis can be the library's own truth; nothing here guesses which.",
         "variants": {
           "count": 9,
           "of": 9

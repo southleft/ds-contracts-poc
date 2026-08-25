@@ -157,6 +157,21 @@
             }
           }
         }
+      ],
+      "declaredByProp": [
+        {
+          "prop": "dot",
+          "map": {
+            "default": {
+              "max-height": "none",
+              "max-width": "none"
+            },
+            "dot": {
+              "max-height": "8px",
+              "max-width": "8px"
+            }
+          }
+        }
       ]
     }
   },
