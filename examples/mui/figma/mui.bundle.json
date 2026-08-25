@@ -10392,6 +10392,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the MUI molecule round — props/axes only; anatomy is promoted from captured DOM truth. Canonical composition: AccordionSummary + AccordionDetails children (childrenSpec). expanded is modeled as an enum axis (collapsed|expanded → boolean via axisValueMap — the Checkbox precedent), so both planes render as variants and gate honestly. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "accordion",
       "semantics": {
         "element": "div"
       },
@@ -10827,6 +10828,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the MUI 50% denominator round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "banner / alert / toast",
       "semantics": {
         "element": "div"
       },
@@ -11108,6 +11110,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the MUI molecule round — props/axes only; anatomy is promoted from captured DOM truth. Multi-select composition: multiple + options + controlled value (two chips in the input); renderInput is the identity render-prop marker {\"$render\":\"@mui/material#TextField\"} — the only function shape the config vocabulary admits. The open listbox popper is NOT captured this round (portal listbox — named residual, PROVENANCE.md). Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "select / combobox",
       "semantics": {
         "element": "div"
       },
@@ -11794,6 +11797,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the MUI Wave 5 denominator round — props/axes only; anatomy is promoted from captured DOM truth. Variant axis only (circular|rounded|square); initials children pinned via sampleText. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "avatar",
       "semantics": {
         "element": "div"
       },
@@ -11919,6 +11923,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the MUI 50% denominator round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "badge / tag / chip",
       "semantics": {
         "element": "span"
       },
@@ -12219,6 +12224,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the MUI 50% denominator round — props/axes only; anatomy is promoted from captured DOM truth. Canonical composition: Link crumbs + current-page Typography (childrenSpec). Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "breadcrumb",
       "semantics": {
         "element": "nav"
       },
@@ -12435,6 +12441,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the MUI computed-floor round — props/axes only; anatomy is promoted from captured DOM truth (Round 4). Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "button",
       "semantics": {
         "element": "button"
       },
@@ -12695,6 +12702,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the MUI computed-floor round — props/axes only; anatomy is promoted from captured DOM truth (Round 4). Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "card",
       "semantics": {
         "element": "div"
       },
@@ -12829,6 +12837,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the MUI ORGANISM round — props/axes only; anatomy is promoted from captured DOM truth. The tri-state rides ONE enum axis (`checked`: unchecked|checked|indeterminate) because the svg-content promotion carries per-value glyph assets only for a single-axis function; the capture config expands each value into MUI's own two-boolean API (checked + indeterminate) through the $props grammar. NAMED RESIDUE: the CODE lowering of the tri-state back to MUI's two props is not spelled by the contract's code binding (canvas-side tri-state, code-side two booleans). disableRipple pinned (the Button/Switch ripple-determinism precedent). Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "checkbox / radio",
       "semantics": {
         "element": "span"
       },
@@ -13089,6 +13098,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the MUI computed-floor round — props/axes only; anatomy is promoted from captured DOM truth (Round 4). Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "badge / tag / chip",
       "semantics": {
         "element": "div"
       },
@@ -13325,6 +13335,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the MUI Wave 5 denominator round — variant axis only (determinate|indeterminate); color/size/value pinned via fixedProps. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "progress / spinner",
       "semantics": {
         "element": "span"
       },
@@ -13411,6 +13422,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the MUI molecule round — props/axes only; anatomy is promoted from captured DOM truth (portal-aware capture: backdrop + container + paper). Canonical composition: DialogContent child (childWrap — the Card precedent). Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "modal / dialog",
       "semantics": {
         "element": "div"
       },
@@ -13719,6 +13731,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the MUI 50% denominator round — variant temporary|permanent; open pinned via fixedProps; portalCapture. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "modal / dialog",
       "semantics": {
         "element": "div"
       },
@@ -13879,6 +13892,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the MUI Wave 5 denominator round — Fab ONLY (not SpeedDial). Bounded size × color cartesian (3×3); variant pinned circular; disableRipple pinned. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "button",
       "semantics": {
         "element": "button"
       },
@@ -14109,6 +14123,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the MUI Wave 5 denominator round — bounded size × color cartesian (3×3); disableRipple pinned. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "button",
       "semantics": {
         "element": "button"
       },
@@ -14324,6 +14339,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the MUI nested-instance round. The position axis provides stable start/end identity for TextField adornment instances. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "input / field",
       "semantics": {
         "element": "div"
       },
@@ -14443,6 +14459,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the MUI Wave 5 denominator round — variant axis only (determinate|indeterminate); color/value pinned via fixedProps; buffer/query excluded. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "progress / spinner",
       "semantics": {
         "element": "span"
       },
@@ -14760,6 +14777,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the MUI molecule round — props/axes only; anatomy is promoted from captured DOM truth (portal-aware capture; anchorReference='anchorPosition' + anchorPosition {top,left} is the pure-JSON anchor — no DOM-node anchorEl in config). Canonical composition: three MenuItem children (childrenSpec). Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "menu / dropdown",
       "semantics": {
         "element": "div"
       },
@@ -15100,6 +15118,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the MUI 50% denominator round — color×checked axes (Switch/Checkbox STATE-PLANE PROJECTION precedent); size held fixed; disableRipple pinned. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "checkbox / radio",
       "semantics": {
         "element": "span"
       },
@@ -15431,6 +15450,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the MUI 50% denominator round — props/axes only; anatomy is promoted from captured DOM truth. Bounded capture: value + MenuItem children pinned; menu held CONTROLLED-CLOSED (open=false — TablePagination select precedent). Small axis: size only. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "select / combobox",
       "semantics": {
         "element": "div"
       },
@@ -15777,6 +15797,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the MUI computed-floor round — props/axes only; anatomy is promoted from captured DOM truth (Round 4). Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "slider",
       "semantics": {
         "element": "span"
       },
@@ -16244,6 +16265,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the MUI 50% denominator round — open=true fixed; position axis expands to nested anchorOrigin via capture axisValueMap $props. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "banner / alert / toast",
       "semantics": {
         "element": "div"
       },
@@ -16363,6 +16385,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the MUI computed-floor round — props/axes only; anatomy is promoted from captured DOM truth (Round 4). STATE-PLANE PROJECTION round: `checked` is an ENUM VARIANT AXIS (unchecked|checked), not a boolean state — a rendering a prop selects is an axis, and `checked` was never in the closed state vocabulary. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "toggle / switch",
       "semantics": {
         "element": "span"
       },
@@ -16791,6 +16814,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the MUI ORGANISM round — props/axes only; anatomy is promoted from captured DOM truth. Mounted as component='div' (the composition every real table ships; the default renders a <td> that only makes sense inside a table footer). count/rowsPerPage/page pinned so the rendered strings are deterministic. NAMED RESIDUE: at count=3 / rowsPerPage=10 / page=0 the component forces BOTH arrow IconButtons Mui-disabled — the ENABLED arrow colors are unobservable at this combo and are absent from the captured truth. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "pagination",
       "semantics": {
         "element": "div"
       },
@@ -17170,6 +17194,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the MUI ORGANISM round — the first ORGANISM through the computed pipeline. Props/axes only; the whole composed DataTable anatomy (head row + 5 columns incl. a checkbox column and a sort-label column, two body rows one of them selected/checked, a right-aligned action cell) is promoted from captured DOM truth via the RECURSIVE childrenSpec tree. NAMED EXCLUSIONS (v1): stickyHeader (position:sticky has no carried spelling); the row overflow menu is captured CLOSED (an open Menu portals a root and the single-portaled-root policy would drop the in-stage table); TableSortLabel direction='asc' only (the direction axis is excluded by name); TableContainer/Paper is not the captured root (axes ride the root mount and `size` is a Table prop); rows are INLINED, not component refs (promotion emits no refs, and MUI's size='small' descendant rule restyles the nested Checkbox's own padding with unchanged child classes). Column widths are deterministic AT THE PINNED STAGE WIDTH — table-layout:auto reflows with available width. NAMED RESIDUE: the schema's semantics vocabulary has no table/thead/tbody/tr/td elements (element=div + role=table, the repo's own ds.table precedent) — the CSS table box model is LOWERED to the flex vocabulary at promotion (table-lowering receipts) rather than growing the bounded grammar with keywords no target renders. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "table / data-grid",
       "semantics": {
         "element": "div",
         "role": "table"
@@ -18649,6 +18674,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the MUI molecule round — props/axes only; anatomy is promoted from captured DOM truth. Canonical composition: three Tab children (childrenSpec, disableRipple pinned — the Button ripple precedent); value pinned to 0 (controlled). Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "tabs",
       "semantics": {
         "element": "div"
       },
@@ -19026,6 +19052,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the MUI nested-instance/input-field round. The canonical capture mounts real start/end InputAdornment elements through the bounded $element marker, plus label and error helper text. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "input / field",
       "semantics": {
         "element": "div"
       },
@@ -19331,6 +19358,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the MUI molecule round — props/axes only; anatomy is promoted from captured DOM truth (portal-aware capture: the popper subtree is the component's rendered contribution; the anchor child is receipted, never carried). Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). placement is HELD FIXED at its default ('bottom') — anchored positioning is not modeled by the vocabulary (named refusal, PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "tooltip / popover",
       "semantics": {
         "element": "div"
       },

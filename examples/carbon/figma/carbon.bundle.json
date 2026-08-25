@@ -8115,6 +8115,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the CARBON round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @carbon/react@1.112.0 + @carbon/styles@1.111.0 (pinned, examples/carbon/PROVENANCE.md). childrenSpec mounts the canonical AccordionItem. NAMED DEFERRAL: expansion (`open`) is an AccordionItem prop, not an Accordion prop — the axis grammar drives the ROOT mount only, so the item is pinned open and an Expanded axis is out of round 1. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @carbon/react@1.112.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/carbon/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Carbon's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "accordion",
       "semantics": {
         "element": "div"
       },
@@ -8447,6 +8448,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the CARBON round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @carbon/react@1.112.0 + @carbon/styles@1.111.0 (pinned, examples/carbon/PROVENANCE.md). ButtonKinds/ButtonSizes read from the library source (lib/components/Button/Button.js). `size` is DEFAULTLESS in Carbon (the destructure has no fallback) — the capture prepends the __unset pseudo-value. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @carbon/react@1.112.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/carbon/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Carbon's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "button",
       "semantics": {
         "element": "button"
       },
@@ -8785,6 +8787,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the CARBON round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @carbon/react@1.112.0 + @carbon/styles@1.111.0 (pinned, examples/carbon/PROVENANCE.md). TRI-STATE ON ONE AXIS (the MUI Checkbox precedent): Carbon spells it as two independent booleans (`checked` + `indeterminate`); the axis value expands into both library props through the $props grammar so the per-value glyph promotion stays single-axis. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @carbon/react@1.112.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/carbon/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Carbon's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "checkbox / radio",
       "semantics": {
         "element": "div"
       },
@@ -9130,6 +9133,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the CARBON round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @carbon/react@1.112.0 + @carbon/styles@1.111.0 (pinned, examples/carbon/PROVENANCE.md). IconButtonKinds read from lib/components/IconButton/index.d.ts; size is the ButtonSize subset xs|sm|md|lg and is DEFAULTLESS. The glyph rides the marker grammar ({\"$import\":\"@carbon/icons-react#Add\"}). NAMED: Carbon’s IconButton mounts its <button> INSIDE a tooltip popover container (span.cds--popover-container.cds--icon-tooltip), so the captured ROOT is that container — the canonical rendering, not a wrapper the harness invented. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @carbon/react@1.112.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/carbon/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Carbon's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "button",
       "semantics": {
         "element": "button"
       },
@@ -9423,6 +9427,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the CARBON round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @carbon/react@1.112.0 + @carbon/styles@1.111.0 (pinned, examples/carbon/PROVENANCE.md). kind enum read from InlineNotificationProps. `lowContrast` is a BOOLEAN in the library and a two-value VARIANT AXIS here (axisValueMap high->false / low->true): it selects a rendering, so it is an axis, not a state. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @carbon/react@1.112.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/carbon/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Carbon's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "banner / alert / toast",
       "semantics": {
         "element": "div"
       },
@@ -9807,6 +9812,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the CARBON round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @carbon/react@1.112.0 + @carbon/styles@1.111.0 (pinned, examples/carbon/PROVENANCE.md). portalCapture + openDriver {open:true}. Carbon’s Modal is NOT portalled — it renders in place as a position:fixed full-bleed scrim — which is exactly the prediction the whole-document baseline-diff reader is being tested against. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @carbon/react@1.112.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/carbon/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Carbon's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "modal / dialog",
       "semantics": {
         "element": "div"
       },
@@ -10403,6 +10409,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the CARBON round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @carbon/react@1.112.0 + @carbon/styles@1.111.0 (pinned, examples/carbon/PROVENANCE.md). childrenSpec is 2-deep (Tabs > TabList > Tab×3 + TabPanels > TabPanel). NAMED DEFERRAL: Carbon spells the line/contained distinction as a BOOLEAN `contained` on TabList (a CHILD), not as a `type` enum on Tabs — the recon predicted an enum and the library does not have one. Root axes: none; `contained` is pinned false (the line tabs) in the childrenSpec. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @carbon/react@1.112.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/carbon/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Carbon's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "tabs",
       "semantics": {
         "element": "div"
       },
@@ -10928,6 +10935,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the CARBON round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @carbon/react@1.112.0 + @carbon/styles@1.111.0 (pinned, examples/carbon/PROVENANCE.md). TYPES/SIZES read from the library source (lib/components/Tag/Tag.js). BOTH axes are defaultless in Carbon. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @carbon/react@1.112.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/carbon/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Carbon's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "badge / tag / chip",
       "semantics": {
         "element": "div"
       },
@@ -11265,6 +11273,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the CARBON round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @carbon/react@1.112.0 + @carbon/styles@1.111.0 (pinned, examples/carbon/PROVENANCE.md). size xs|sm|md|lg, ALL FOUR verified distinct by live probe (24/32/40/48px). The recon predicted xs might not exist because the compiled CSS ships no `.cds--text-input--xs` rule — it does not, and the height still moves: Carbon routes control sizing through the SHARED `.cds--layout--size-*` classes and the :root layout tokens, not through per-component size rules. `invalid`/`warn` are DEFERRED BY NAME from round 1 (they add a validation subtree and a second border plane). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @carbon/react@1.112.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/carbon/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Carbon's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "input / field",
       "semantics": {
         "element": "div"
       },
@@ -11596,6 +11605,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the CARBON round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @carbon/react@1.112.0 + @carbon/styles@1.111.0 (pinned, examples/carbon/PROVENANCE.md). `toggled` is a VARIANT AXIS, never a stateProp (it is outside the closed contract state vocabulary). `size` is PINNED to md in fixedProps — a Size×Toggled knob offset is a two-axis product the decor grammar cannot spell (named in examples/tailwind/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @carbon/react@1.112.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/carbon/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Carbon's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "toggle / switch",
       "semantics": {
         "element": "div"
       },
