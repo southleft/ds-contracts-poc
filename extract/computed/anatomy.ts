@@ -2613,28 +2613,48 @@ export function promoteAnatomy(
         // nothing — the HARMFUL class, and exactly the failure hasWidthSource's
         // own comment exists to prevent, reintroduced through the other door.
         //
-        // So the guard here is PRESENCE OF THE RING BOX OVER THE WHOLE DOMAIN,
-        // not presence of drawn INK — and the difference is the point. Fluent's
-        // `filled` badge has a ring box with a TRANSPARENT colour: the box is
-        // there in every combo, the host's own border-colour is transparent in
-        // exactly those combos, and the folded width therefore paints nothing
-        // there, correctly. A combo with NO ring box at all has no colour to
-        // compare and no fact to fold, and is refused BY NAME with the count
-        // disclosed (`present in N/M`), because the sibling refusal beside it
-        // says "in all drawn combos" and never admits how many combos have no
-        // ring. Both halves are pinned by conformance/cases/
-        // pseudo-inset-ring-{two-axis,partial-presence}.
+        // So the guard here is NOT "the ring box exists in every combo" — that
+        // is the wrong test, and MEASURED wrong on the very row this fold was
+        // built for. Replaying extract/computed/out/fluent/badge/captured-truth
+        // .json over all 191 `__default` combos: `root::after` is
+        // `display: none` in the 48 `ghost` combos and drawn in the other 143.
+        // A domain-complete presence test refuses Fluent outright and leaves
+        // outline/tint minting identical to filled — the census defect intact,
+        // while protecting nothing.
+        //
+        // THE TEST IS THE HARM ITSELF, and it needs BOTH halves: a combo with
+        // NO RING, *and* a host whose own border colour would INK there. Only
+        // then does folding the width manufacture a stroke CSS never paints.
+        // Where the ring is absent and the host's border-{side}-color is
+        // rgba(…, 0) — Fluent's ghost, in all 48 of those combos — the folded
+        // width has no colour to paint with and the canvas stays bare, which is
+        // exactly what CSS does. Anything we cannot PROVE is clear (an absent
+        // host, an unset or non-`rgba(…, 0)` colour) counts as inking and
+        // refuses; the refusal names the count and the combos on both sides, so
+        // the absence is never dropped in silence.
+        //
+        // The three halves are pinned by conformance/cases/
+        // pseudo-inset-ring-{two-axis,partial-presence,absent-host-clear}.
         const ringFold = ():
           | { ok: true; receipt: string; width: number }
           | { ok: false; why: string }
           | null => {
           if (!hostPart || hostIsShapeLeaf) return null;
           const rows: Array<{ combo: Combo; st: Record<string, string>; hs: Record<string, string> }> = [];
+          /** Combos where the ring BOX does not exist: no pseudo record at all
+           *  (`[data-size="small"]::after`), or one the box tree drops
+           *  (`display: none`, `visibility: hidden`, `content: none`). */
+          const bare: Array<{ combo: Combo; hs: Record<string, string> | null }> = [];
           for (const combo of domain) {
             const el = union.alignedByKey.get(`${combo.key}__default`)![i];
             const st = el?.node.pseudo[pe];
-            if (!st || !el) continue;
-            rows.push({ combo, st, hs: el.node.style });
+            const boxed =
+              !!st && !!el &&
+              (st['display'] ?? 'block') !== 'none' &&
+              (st['visibility'] ?? 'visible') !== 'hidden' &&
+              (st['content'] ?? 'none') !== 'none';
+            if (boxed) rows.push({ combo, st: st!, hs: el!.node.style });
+            else bare.push({ combo, hs: el?.node.style ?? null });
           }
           if (rows.length === 0) return null;
           const sideWidths = (st: Record<string, string>): number[] =>
@@ -2684,15 +2704,22 @@ export function promoteAnatomy(
             );
           };
           if (!rows.every(isRingRow) || ringWidth <= 0) return null;
-          // ---- G1 PRESENCE OVER THE WHOLE DOMAIN (the blocker) -------------
-          if (rows.length !== domain.length) {
-            const missing = domain.filter((c) => !rows.some((r) => r.combo.key === c.key));
+          // ---- G1 THE MANUFACTURED-RING GUARD (the blocker) ----------------
+          // A colour PROVABLY paints nothing only when it is spelled with a
+          // zero alpha. Chromium resolves an opaque colour to `rgb(r, g, b)`
+          // and a clear one to `rgba(r, g, b, 0)`, so anything that is not the
+          // latter — including an unset channel or a host we cannot see —
+          // counts as inking and refuses the fold.
+          const paintsNothing = (v: string | undefined): boolean =>
+            (v ?? '').trim() === 'transparent' || /^rgba\(\s*[\d.]+,\s*[\d.]+,\s*[\d.]+,\s*0(?:\.0+)?\s*\)$/.test((v ?? '').trim());
+          const bareInking = bare.filter((b) => !b.hs || BORDER_SIDES.some((sd) => !paintsNothing(b.hs![`border-${sd}-color`])));
+          if (bareInking.length > 0) {
             return {
               ok: false,
               why:
-                `pseudo-decor-ring-fold-partial-presence: ${e.partName}${pe} is a coincident inset ring (border-top-width / border-right-width / border-bottom-width / border-left-width = ${ringWidth}px, uniform) but the ring box is PRESENT IN ONLY ${rows.length}/${domain.length} default-interaction combos — ` +
-                `e.g. ${missing.slice(0, 3).map((c) => c.key).join(', ')}${missing.length > 3 ? `, +${missing.length - 3} more` : ''}. ` +
-                `Folding its widths onto ${e.partName} would complete the width+colour pair in the ${missing.length} combos that have NO RING AT ALL, and the canvas would paint a ${ringWidth}px stroke where CSS paints nothing — a manufactured ring, not a lost one. The widths stay code-only; named refusal`,
+                `pseudo-decor-ring-fold-partial-presence: ${e.partName}${pe} is a coincident inset ring (border-top-width / border-right-width / border-bottom-width / border-left-width = ${ringWidth}px, uniform) but the ring box is PRESENT IN ONLY ${rows.length}/${domain.length} default-interaction combos, and in ${bareInking.length} of the ${bare.length} ring-less ones ${e.partName} still paints a border colour of its own — ` +
+                `e.g. ${bareInking.slice(0, 3).map((b) => `${b.combo.key} (${b.hs?.['border-top-color'] ?? 'host unreadable'})`).join(', ')}${bareInking.length > 3 ? `, +${bareInking.length - 3} more` : ''}. ` +
+                `Folding its widths onto ${e.partName} would complete the width+colour pair in those combos and the canvas would paint a ${ringWidth}px stroke where CSS paints nothing — a manufactured ring, not a lost one. The widths stay code-only; named refusal`,
             };
           }
           // ---- G2 GEOMETRY: coincident, unrotated, at 0,0 -------------------
@@ -2783,9 +2810,12 @@ export function promoteAnatomy(
             ok: true,
             width: ringWidth,
             receipt:
-              `pseudo-decor-ring-folded: ${e.partName}${pe} is a COINCIDENT INSET RING — border-top-width / border-right-width / border-bottom-width / border-left-width = ${ringWidth}px, uniform on all four sides and identical in ${rows.length}/${domain.length} default-interaction combos (PRESENT in every one, not merely in the drawn ones), transparent fill, the host's own radius, at 0,0 over the host's padding box. ` +
+              `pseudo-decor-ring-folded: ${e.partName}${pe} is a COINCIDENT INSET RING — border-top-width / border-right-width / border-bottom-width / border-left-width = ${ringWidth}px, uniform on all four sides and identical in ${rows.length}/${domain.length} default-interaction combos, transparent fill, the host's own radius, at 0,0 over the host's padding box. ` +
               `Its paint does not factor on ONE enum axis, so the decor grammar cannot promote it as its own part; the four UNIFORM widths are folded onto ${e.partName} as literals instead, where the border-{side}-color the contract ALREADY carries completes the pair. ` +
-              `MEASURED-SAFE: the ring's border colour equals ${e.partName}'s own on all four sides in ${rows.length}/${rows.length} combos, so no colour is guessed and a combo the host paints transparent stays bare`,
+              `MEASURED-SAFE: the ring's border colour equals ${e.partName}'s own on all four sides in ${rows.length}/${rows.length} combos with a ring box, so no colour is guessed and a combo the host paints transparent stays bare. ` +
+              (bare.length === 0
+                ? `The ring box is present in every one of the ${domain.length} combos.`
+                : `THE RING BOX IS ABSENT IN ${bare.length}/${domain.length} COMBOS — ${bare.slice(0, 3).map((b) => b.combo.key).join(', ')}${bare.length > 3 ? `, +${bare.length - 3} more` : ''} — and the fold is safe there ONLY because ${e.partName}'s own border-{side}-color is transparent in every one of them, so the folded width paints nothing and the canvas stays bare exactly as CSS does`),
           };
         };
         const folded = ringFold();

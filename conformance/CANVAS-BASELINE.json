@@ -2,8 +2,8 @@
   "_marker": "THE MEASURED ROUND TRIP — contract → Figma (mock) → dump → propose ≡ contract, per conformance case, on the case's own channel. Every SILENT entry is an OPEN DEFECT the engine must name or carry; it is never waivable and leaves this file only by being fixed. The gate refuses drift in EITHER direction: a regression is red, and an improvement must be re-recorded here so a fix can never be absorbed silently.",
   "measuredAt": "extract/computed/out/conformance/<case>/enriched.contract.json through figma-sync/plugin/engine (mock figma) and core/propose-figma (npx tsx conformance/canvas.ts)",
   "counts": {
-    "ROUND-TRIPPED": 33,
-    "NAMED": 14,
+    "ROUND-TRIPPED": 35,
+    "NAMED": 15,
     "DRIFTED": 0,
     "HARMFUL": 0,
     "MUTE": 0,
@@ -303,6 +303,27 @@
       "refIdentical": true,
       "channelAs": "gap",
       "note": "channel respelled: column-gap → gap"
+    },
+    "focus-ring-declared-style-only": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "outline-width",
+      "seed": [
+        "2px"
+      ],
+      "proposed": [
+        "2px"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "focus-ring-reservation-transparent": {
+      "classification": "NAMED",
+      "channel": "outline-width",
+      "seed": [
+        "4px"
+      ],
+      "proposed": [],
+      "note": "code-only channel root.outline-width = {«self».root.outline-width} — a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw."
     },
     "grid-2d": {
       "classification": "REFUSED-BY-NAME",
@@ -605,6 +626,19 @@
         "{imported.case-presence-hidden-axis-geometry.a.top.{checked}}"
       ],
       "note": "value came back as {imported.case-presence-hidden-axis-geometry.a.left.{checked}}, {imported.case-presence-hidden-axis-geometry.a.top.{checked}} (seed 3px) — code-only channel root.top = {imported.shared.size-0} — bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back"
+    },
+    "pseudo-inset-ring-absent-host-clear": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "border-top-width",
+      "seed": [
+        "1px"
+      ],
+      "proposed": [
+        "1px"
+      ],
+      "refIdentical": false,
+      "channelAs": "border-width",
+      "note": "ref respelled: 1px → {imported.case-pseudo-inset-ring-absent-host-clear.root.border-width}; channel respelled: border-top-width → border-width"
     },
     "pseudo-inset-ring-two-axis": {
       "classification": "ROUND-TRIPPED",

@@ -84,6 +84,7 @@ export { default as CasePresenceHiddenAxisGeometry } from '../cases/presence-hid
 export { default as CasePseudoBackdrop } from '../cases/pseudo-backdrop/Case.tsx';
 export { default as CasePseudoContentGlyph } from '../cases/pseudo-content-glyph/Case.tsx';
 export { default as CasePseudoGradientOnly } from '../cases/pseudo-gradient-only/Case.tsx';
+export { default as CasePseudoInsetRingAbsentHostClear } from '../cases/pseudo-inset-ring-absent-host-clear/Case.tsx';
 export { default as CasePseudoInsetRingPartialPresence } from '../cases/pseudo-inset-ring-partial-presence/Case.tsx';
 export { default as CasePseudoInsetRingTwoAxis } from '../cases/pseudo-inset-ring-two-axis/Case.tsx';
 export { default as CasePseudoMarker } from '../cases/pseudo-marker/Case.tsx';

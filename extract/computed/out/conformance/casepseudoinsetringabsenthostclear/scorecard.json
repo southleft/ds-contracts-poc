@@ -1,5 +1,5 @@
 {
-  "component": "CasePseudoInsetRingTwoAxis",
+  "component": "CasePseudoInsetRingAbsentHostClear",
   "generatedBy": "extract/computed/gate.ts",
   "browser": "151.0.7922.34",
   "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
@@ -40,49 +40,49 @@
   },
   "worstRows": [
     {
-      "key": "filled.brand__default",
+      "key": "outline.brand__default",
       "pctAA": 0.3873697916666667,
       "pctExact": 0.80078125,
       "channelsMismatched": 0
     },
     {
-      "key": "filled.brand__hover",
+      "key": "outline.brand__hover",
       "pctAA": 0.3873697916666667,
       "pctExact": 0.80078125,
       "channelsMismatched": 0
     },
     {
-      "key": "filled.brand__focus-visible",
+      "key": "outline.brand__focus-visible",
       "pctAA": 0.3873697916666667,
       "pctExact": 0.80078125,
       "channelsMismatched": 0
     },
     {
-      "key": "filled.brand__active",
+      "key": "outline.brand__active",
       "pctAA": 0.3873697916666667,
       "pctExact": 0.80078125,
       "channelsMismatched": 0
     },
     {
-      "key": "filled.danger__default",
+      "key": "outline.danger__default",
       "pctAA": 0.3873697916666667,
       "pctExact": 0.80078125,
       "channelsMismatched": 0
     },
     {
-      "key": "filled.danger__hover",
+      "key": "outline.danger__hover",
       "pctAA": 0.3873697916666667,
       "pctExact": 0.80078125,
       "channelsMismatched": 0
     },
     {
-      "key": "filled.danger__focus-visible",
+      "key": "outline.danger__focus-visible",
       "pctAA": 0.3873697916666667,
       "pctExact": 0.80078125,
       "channelsMismatched": 0
     },
     {
-      "key": "filled.danger__active",
+      "key": "outline.danger__active",
       "pctAA": 0.3873697916666667,
       "pctExact": 0.80078125,
       "channelsMismatched": 0
@@ -90,7 +90,7 @@
   ],
   "topMismatchedChannels": [],
   "namedLosses": [
-    "promotion: pseudo-decor-ring-folded: root::after is a COINCIDENT INSET RING — border-top-width / border-right-width / border-bottom-width / border-left-width = 1px, uniform on all four sides and identical in 6/6 default-interaction combos, transparent fill, the host's own radius, at 0,0 over the host's padding box. Its paint does not factor on ONE enum axis, so the decor grammar cannot promote it as its own part; the four UNIFORM widths are folded onto root as literals instead, where the border-{side}-color the contract ALREADY carries completes the pair. MEASURED-SAFE: the ring's border colour equals root's own on all four sides in 6/6 combos with a ring box, so no colour is guessed and a combo the host paints transparent stays bare. The ring box is present in every one of the 6 combos.",
+    "promotion: pseudo-decor-ring-folded: root::after is a COINCIDENT INSET RING — border-top-width / border-right-width / border-bottom-width / border-left-width = 1px, uniform on all four sides and identical in 4/6 default-interaction combos, transparent fill, the host's own radius, at 0,0 over the host's padding box. Its paint does not factor on ONE enum axis, so the decor grammar cannot promote it as its own part; the four UNIFORM widths are folded onto root as literals instead, where the border-{side}-color the contract ALREADY carries completes the pair. MEASURED-SAFE: the ring's border colour equals root's own on all four sides in 4/4 combos with a ring box, so no colour is guessed and a combo the host paints transparent stays bare. THE RING BOX IS ABSENT IN 2/6 COMBOS — ghost.brand, ghost.danger — and the fold is safe there ONLY because root's own border-{side}-color is transparent in every one of them, so the folded width paints nothing and the canvas stays bare exactly as CSS does",
     "code-only: label.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
   ],
   "unresolvedTokenRefs": {
@@ -103,70 +103,6 @@
     "divergent": []
   },
   "rows": [
-    {
-      "key": "filled.brand__default",
-      "channelsCompared": 26,
-      "channelsEqual": 26,
-      "pctExact": 0.80078125,
-      "pctAA": 0.3873697916666667,
-      "mismatches": []
-    },
-    {
-      "key": "filled.brand__hover",
-      "channelsCompared": 26,
-      "channelsEqual": 26,
-      "pctExact": 0.80078125,
-      "pctAA": 0.3873697916666667,
-      "mismatches": []
-    },
-    {
-      "key": "filled.brand__focus-visible",
-      "channelsCompared": 26,
-      "channelsEqual": 26,
-      "pctExact": 0.80078125,
-      "pctAA": 0.3873697916666667,
-      "mismatches": []
-    },
-    {
-      "key": "filled.brand__active",
-      "channelsCompared": 26,
-      "channelsEqual": 26,
-      "pctExact": 0.80078125,
-      "pctAA": 0.3873697916666667,
-      "mismatches": []
-    },
-    {
-      "key": "filled.danger__default",
-      "channelsCompared": 26,
-      "channelsEqual": 26,
-      "pctExact": 0.80078125,
-      "pctAA": 0.3873697916666667,
-      "mismatches": []
-    },
-    {
-      "key": "filled.danger__hover",
-      "channelsCompared": 26,
-      "channelsEqual": 26,
-      "pctExact": 0.80078125,
-      "pctAA": 0.3873697916666667,
-      "mismatches": []
-    },
-    {
-      "key": "filled.danger__focus-visible",
-      "channelsCompared": 26,
-      "channelsEqual": 26,
-      "pctExact": 0.80078125,
-      "pctAA": 0.3873697916666667,
-      "mismatches": []
-    },
-    {
-      "key": "filled.danger__active",
-      "channelsCompared": 26,
-      "channelsEqual": 26,
-      "pctExact": 0.80078125,
-      "pctAA": 0.3873697916666667,
-      "mismatches": []
-    },
     {
       "key": "outline.brand__default",
       "channelsCompared": 26,
@@ -289,6 +225,70 @@
     },
     {
       "key": "tint.danger__active",
+      "channelsCompared": 26,
+      "channelsEqual": 26,
+      "pctExact": 0.80078125,
+      "pctAA": 0.3873697916666667,
+      "mismatches": []
+    },
+    {
+      "key": "ghost.brand__default",
+      "channelsCompared": 26,
+      "channelsEqual": 26,
+      "pctExact": 0.80078125,
+      "pctAA": 0.3873697916666667,
+      "mismatches": []
+    },
+    {
+      "key": "ghost.brand__hover",
+      "channelsCompared": 26,
+      "channelsEqual": 26,
+      "pctExact": 0.80078125,
+      "pctAA": 0.3873697916666667,
+      "mismatches": []
+    },
+    {
+      "key": "ghost.brand__focus-visible",
+      "channelsCompared": 26,
+      "channelsEqual": 26,
+      "pctExact": 0.80078125,
+      "pctAA": 0.3873697916666667,
+      "mismatches": []
+    },
+    {
+      "key": "ghost.brand__active",
+      "channelsCompared": 26,
+      "channelsEqual": 26,
+      "pctExact": 0.80078125,
+      "pctAA": 0.3873697916666667,
+      "mismatches": []
+    },
+    {
+      "key": "ghost.danger__default",
+      "channelsCompared": 26,
+      "channelsEqual": 26,
+      "pctExact": 0.80078125,
+      "pctAA": 0.3873697916666667,
+      "mismatches": []
+    },
+    {
+      "key": "ghost.danger__hover",
+      "channelsCompared": 26,
+      "channelsEqual": 26,
+      "pctExact": 0.80078125,
+      "pctAA": 0.3873697916666667,
+      "mismatches": []
+    },
+    {
+      "key": "ghost.danger__focus-visible",
+      "channelsCompared": 26,
+      "channelsEqual": 26,
+      "pctExact": 0.80078125,
+      "pctAA": 0.3873697916666667,
+      "mismatches": []
+    },
+    {
+      "key": "ghost.danger__active",
       "channelsCompared": 26,
       "channelsEqual": 26,
       "pctExact": 0.80078125,

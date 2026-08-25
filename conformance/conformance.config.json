@@ -783,6 +783,17 @@
       "axes": []
     },
     {
+      "__case": "pseudo-elements: the coincident inset ring of pseudo-inset-ring-two-axis, but `[data-appearance=\"ghost\"]::after { display: none }` REMOVES the ring box in a THIRD of the domain — and in exactly those combos the host's own `border-color` is `rgba(0, 0, 0, 0)`, so a folded width there paints nothing — declared CARRIED",
+      "name": "CasePseudoInsetRingAbsentHostClear",
+      "importName": "CasePseudoInsetRingAbsentHostClear",
+      "contract": "conformance/seeds/pseudo-inset-ring-absent-host-clear.contract.json",
+      "sampleText": "",
+      "axes": [
+        "appearance",
+        "tone"
+      ]
+    },
+    {
       "__case": "pseudo-elements: the SAME coincident inset ring as pseudo-inset-ring-two-axis, but the ring pseudo EXISTS IN ONLY HALF THE DOMAIN (`[data-size=\"small\"]::after`) while the host carries an opaque per-combo border-colour and zero border width of its own in ALL eight combos — declared REFUSED",
       "name": "CasePseudoInsetRingPartialPresence",
       "importName": "CasePseudoInsetRingPartialPresence",

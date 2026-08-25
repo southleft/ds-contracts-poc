@@ -15,9 +15,9 @@ never waivable.
 
 | | |
 |---|---|
-| cases (CARRIED + LOWERED) | **62** |
-| 🟢 round-tripped | **33** |
-| 🟢 named (dropped, and a receipt says so) | **14** |
+| cases (CARRIED + LOWERED) | **65** |
+| 🟢 round-tripped | **35** |
+| 🟢 named (dropped, and a receipt says so) | **15** |
 | 🟡 refused by name (the canvas cannot host the seed, and says so) | **15** |
 | ⚪ seed-absent (nothing to round-trip) | **0** |
 | 🔴 red | **0** — SILENT 0 · DRIFTED 0 · HARMFUL 0 · MUTE 0 |
@@ -33,7 +33,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 **MUTE** the manifest says the construct MUST be drawn (`canvas.mustDraw`) and nothing came back — a receipt is not ink ·
 **SILENT** vanished, named by nothing — never waivable.
 
-## 🟢 NAMED — 14
+## 🟢 NAMED — 15
 
 | case | feature | construct | channel | expect | came back | ref | as | note |
 |---|---|---|---|---|---|---|---|---|
@@ -47,6 +47,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `box-shadow-ok-color-ring` | effects | a two-layer box-shadow whose RING layer is spelled in an OKLab colour space — `0 0 0 3px oklch(0.708 0 0 / 0.5), 0 1px 2px rgba(0,0,0,.05)` (Tailwind v4 / shadcn's focus ring, verbatim from examples/shadcn/tokens/shadcn-minted.dtcg.json) | `box-shadow` | CARRIED | 0px 0px 0px 3px #a1a1a180, 0px 1px 2px #0000000d |  |  | value came back as 0px 0px 0px 3px #a1a1a180, 0px 1px 2px #0000000d (seed oklch(0.708 0 0 / 0.5) 0px 0px 0px 3px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px) — «self»:root: a DROP_SHADOW stack (up to 2 layers) proposed as a comma-separated box-sh… |
 | `box-shadow-ok-stack` | effects | a TWO-layer elevation whose every layer colour is an OKLab spelling — the drop half of astryx's `shadow-med` (examples/astryx/tokens/astryx.dtcg.json) | `box-shadow` | CARRIED | 0px 2px 4px #0000000d, 0px 4px 12px #0000001a |  |  | value came back as 0px 2px 4px #0000000d, 0px 4px 12px #0000001a (seed oklch(0 0 0 / 0.05) 0px 2px 4px 0px, oklch(0 0 0 / 0.1) 0px 4px 12px 0px) — «self»:root: a DROP_SHADOW stack (up to 2 layers) proposed as a comma-separated box-shadow v… |
 | `display-block` | display | display: block | `display` | CARRIED | flex |  |  | value came back as flex (seed block) — code-only declared root.display = block — CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-lev… |
+| `focus-ring-reservation-transparent` | interaction-states | THE FOCUS-RING RESERVATION IDIOM under a state that changes only the WIDTH: the rest plane is `outline: 2px solid transparent` (a real, drawn `outline-style: solid` over a fully transparent colour) and `:focus-visible` sets `outline-width: 4px` | `outline-width` | CARRIED | — |  |  | code-only channel root.outline-width = {«self».root.outline-width} — a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws… |
 | `nonpainting-text-display-none` | invariant | a NON-PAINTING element carrying text (display: none) | `__text` | CARRIED | — |  |  | code-only declared label-2.display = none — CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack). |
 | `presence-hidden-axis-geometry` | tokens | an absolute part's inset that is a clean function of ONE enum axis, with the part NOT RENDERED at one axis value (polaris.checkbox icon: top/left 0px when checked, -2px when indeterminate, absent when unchecked) | `top` | CARRIED | {imported.case-presence-hidden-axis-geometry.a.left.{checked}}, {imported.case-presence-hidden-axis-geometry.a.top.{checked}} |  |  | value came back as {imported.case-presence-hidden-axis-geometry.a.left.{checked}}, {imported.case-presence-hidden-axis-geometry.a.top.{checked}} (seed 3px) — code-only channel root.top = {imported.shared.size-0} — bound on an in-flow box (… |
 | `text-overflow-ellipsis` | text | text-overflow: ellipsis + overflow hidden + nowrap | `text-overflow` | CARRIED | — |  |  | degradation text-channel-unsupported @ «self»:«self»/label: text channel(s) with no dump v1 projection: textTruncation ENDING (the canvas twin of CSS text-overflow: ellipsis — drawn, not read back) — typography carries (fontSize, fontStyle… |
@@ -72,7 +73,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `grid-on-component-variant` | grid-composition | layoutMode GRID on a COMPONENT node (canvas variants are components) | `grid-template-rows` | CARRIED | — |  |  | plugin plan: conformance.grid-on-component-variant — anatomy.root.literals.width: grid-axis-indefinite: a grid part must make each axis DEFINITE — a px/token size, "fit-content" (G8), or layout.grow (width, flex parent). Absence is refused… |
 | `grid-row-span` | grid-placement | grid-row: 2 / span 2 (child spans 2 rows) | `grid-row-end` | CARRIED | — |  |  | plugin plan: conformance.grid-row-span — anatomy.root.literals.height: grid-axis-indefinite: a grid part must make each axis DEFINITE — a px/token size, "fit-content" (G8), or layout.grow (width, flex parent). Absence is refused because it… |
 
-## 🟢 ROUND-TRIPPED — 33
+## 🟢 ROUND-TRIPPED — 35
 
 | case | feature | construct | channel | expect | came back | ref | as | note |
 |---|---|---|---|---|---|---|---|---|
@@ -92,6 +93,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `em-relative-padding` | units | padding: 1.5em against a 12px font-size | `padding-left` | CARRIED | 18px | same | `padding-inline` | channel respelled: padding-left → padding-inline |
 | `flex-direction-by-axis` | layout | flex-direction that VARIES on one enum axis (column at the default value, row on the other) — the fluent.card orientation shape | `flex-direction` | CARRIED | column, row | same |  |  |
 | `flex-gap` | layout | column-gap / row-gap in px | `column-gap` | CARRIED | 12px | same | `gap` | channel respelled: column-gap → gap |
+| `focus-ring-declared-style-only` | interaction-states | a link whose focus ring is spelled ONLY as a KEYWORD flip — the rest plane carries `outline-width: 3px; outline-style: none` with no `outline-color` of its own (so it computes to `currentColor`), and `:focus-visible` sets `outline-style: solid; outline-width: 2px; outline-offset: 2px` and nothing else | `outline-width` | CARRIED | 2px | same |  |  |
 | `grid-absolute-overlay` | grid-composition | Part.overlay (layoutPositioning ABSOLUTE) inside a grid parent | `position` | CARRIED | absolute, relative | same |  |  |
 | `grid-auto-flow-row` | grid-flow | grid-auto-flow: row over declared columns AND declared row tracks, placement by child order | `grid-auto-flow` | CARRIED | row | same |  |  |
 | `grid-bento-span-matrix` | grid-placement | 3x4 grid, rows [80px,1fr,2fr], cols [160px,1fr,1fr,120px], gaps 12/16, header 1x4 + sidebar 2x1 + main 1x2 + rail 2x1 + footer 1x2, all cells FILL | `grid-template-columns` | CARRIED | 160px 1fr 1fr 120px | same |  |  |
@@ -104,6 +106,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `oklch-color` | color | background-color: oklch(0.6 0.15 250) | `background-color` | CARRIED | #2784d5 | same |  |  |
 | `percentage-padding` | units | padding-left: 10% (resolved against the PARENT width) | `padding-left` | CARRIED | 28.7969px | same |  |  |
 | `position-absolute-insets` | position | position: absolute + top/left insets | `top` | CARRIED | 4px, 6px | same |  |  |
+| `pseudo-inset-ring-absent-host-clear` | pseudo-elements | the coincident inset ring of pseudo-inset-ring-two-axis, but `[data-appearance="ghost"]::after { display: none }` REMOVES the ring box in a THIRD of the domain — and in exactly those combos the host's own `border-color` is `rgba(0, 0, 0, 0)`, so a folded width there paints nothing | `border-top-width` | CARRIED | 1px | respelled | `border-width` | ref respelled: 1px → {imported.case-pseudo-inset-ring-absent-host-clear.root.border-width}; channel respelled: border-top-width → border-width |
 | `pseudo-inset-ring-two-axis` | pseudo-elements | a COINCIDENT INSET RING pseudo — ::after at inset 0, transparent fill, uniform 1px border, host radius — whose ring COLOUR is a product of TWO enum axes while its four side WIDTHS are uniform across every combo (fluent Badge's `root::after`) | `border-top-width` | CARRIED | 1px | respelled | `border-width` | ref respelled: 1px → {imported.case-pseudo-inset-ring-two-axis.root.border-width}; channel respelled: border-top-width → border-width |
 | `shadow-part` | shadow-dom | ::part(label) styling across an OPEN shadow boundary | `color` | CARRIED | #b4145a | same |  |  |
 | `var-fallback-chain` | custom-properties | color: var(--cf-missing, var(--cf-color-secondary, #333)) | `color` | CARRIED | #663399 | same |  |  |

@@ -2,9 +2,9 @@
   "_marker": "THE DENOMINATOR. Hand-authored per case, generated into one index. Deliberately NOT derived from isFusable / styled / DECLARED_CHANNELS / CHANNEL_TO_COMPUTED / TOKEN_CHANNELS / carriedParts — every instrument in the pipeline derives its denominator from the same filter that decides carriage, which is why a channel the filter never opened scores 100%. This file is the independent one.",
   "generatedBy": "conformance/build.ts",
   "library": "@ds-contracts/conformance@0.1.0",
-  "count": 104,
+  "count": 105,
   "byExpectation": {
-    "CARRIED": 60,
+    "CARRIED": 61,
     "LOWERED": 4,
     "REFUSED": 22,
     "UNSUPPORTED": 18
@@ -2010,6 +2010,44 @@
         "expect": "ABSENT",
         "note": "the v1/v2 decor grammar carries solid paint, not gradient stacks"
       }
+    },
+    {
+      "id": "pseudo-inset-ring-absent-host-clear",
+      "feature": "pseudo-elements",
+      "construct": "the coincident inset ring of pseudo-inset-ring-two-axis, but `[data-appearance=\"ghost\"]::after { display: none }` REMOVES the ring box in a THIRD of the domain — and in exactly those combos the host's own `border-color` is `rgba(0, 0, 0, 0)`, so a folded width there paints nothing",
+      "why": "FLUENT BADGE'S MEASURED SHAPE, and the line between the two halves of this class. Replaying the committed capture (extract/computed/out/fluent/badge/captured-truth.json, all 191 `__default` combos): `root::after` is `display: none` in the 48 `ghost` combos and drawn in the other 143, and in every one of those 48 the HOST's own border-{side}-color is rgba(0, 0, 0, 0). Refusing the ring fold on absence ALONE therefore leaves fluent.badge's outline and tint appearances byte-identical to filled forever — the exact census defect this class is named for — while protecting nothing, because a 1px width folded onto a host that paints NO colour in those combos paints no ring. The harm the presence guard exists to prevent needs BOTH halves: no ring box, AND a host colour that inks. pseudo-inset-ring-partial-presence is the companion case where the host DOES ink in the ring-less combos and the fold must still refuse — the two cases pin the two sides of one line. The ring colour is a {appearance}x{tone} PRODUCT over the drawn combos, so the decor grammar's uniform-or-ONE-axis paint factoring refuses and the fold is the only door left.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.literals.border-top-width (folded onto the host beside the border-{side}-color it already carries), with the ring-less combos disclosed by count in the fold receipt",
+      "observable": {
+        "part": "root::after",
+        "channel": "border-top-width",
+        "capturedValue": "1px"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "mustDraw": true,
+        "note": "the folded 1px must reach the canvas as a real strokeWeight: without it the host's carried border-{side}-color has no width source and outline/tint draw exactly like ghost. A receipt is not a ring, so this case declares mustDraw."
+      },
+      "axes": [
+        {
+          "prop": "appearance",
+          "values": [
+            "outline",
+            "tint",
+            "ghost"
+          ],
+          "default": "outline"
+        },
+        {
+          "prop": "tone",
+          "values": [
+            "brand",
+            "danger"
+          ],
+          "default": "brand"
+        }
+      ]
     },
     {
       "id": "pseudo-inset-ring-partial-presence",

@@ -85,6 +85,7 @@
 @import '../cases/pseudo-backdrop/case.css';
 @import '../cases/pseudo-content-glyph/case.css';
 @import '../cases/pseudo-gradient-only/case.css';
+@import '../cases/pseudo-inset-ring-absent-host-clear/case.css';
 @import '../cases/pseudo-inset-ring-partial-presence/case.css';
 @import '../cases/pseudo-inset-ring-two-axis/case.css';
 @import '../cases/pseudo-marker/case.css';

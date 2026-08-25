@@ -5,23 +5,13 @@
   "browser": "151.0.7922.34",
   "mintedTokens": {
     "imported": {
-      "case-pseudo-inset-ring-two-axis": {
+      "case-pseudo-inset-ring-absent-host-clear": {
         "root": {
           "background-color": {
             "$value": "#ffffff",
             "$type": "color"
           },
           "border-bottom-color": {
-            "filled": {
-              "brand": {
-                "$value": "#00000000",
-                "$type": "color"
-              },
-              "danger": {
-                "$value": "#00000000",
-                "$type": "color"
-              }
-            },
             "outline": {
               "brand": {
                 "$value": "#0f6cbd",
@@ -39,21 +29,21 @@
               },
               "danger": {
                 "$value": "#eeacb2",
+                "$type": "color"
+              }
+            },
+            "ghost": {
+              "brand": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "danger": {
+                "$value": "#00000000",
                 "$type": "color"
               }
             }
           },
           "border-left-color": {
-            "filled": {
-              "brand": {
-                "$value": "#00000000",
-                "$type": "color"
-              },
-              "danger": {
-                "$value": "#00000000",
-                "$type": "color"
-              }
-            },
             "outline": {
               "brand": {
                 "$value": "#0f6cbd",
@@ -71,21 +61,21 @@
               },
               "danger": {
                 "$value": "#eeacb2",
+                "$type": "color"
+              }
+            },
+            "ghost": {
+              "brand": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "danger": {
+                "$value": "#00000000",
                 "$type": "color"
               }
             }
           },
           "border-right-color": {
-            "filled": {
-              "brand": {
-                "$value": "#00000000",
-                "$type": "color"
-              },
-              "danger": {
-                "$value": "#00000000",
-                "$type": "color"
-              }
-            },
             "outline": {
               "brand": {
                 "$value": "#0f6cbd",
@@ -103,21 +93,21 @@
               },
               "danger": {
                 "$value": "#eeacb2",
+                "$type": "color"
+              }
+            },
+            "ghost": {
+              "brand": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "danger": {
+                "$value": "#00000000",
                 "$type": "color"
               }
             }
           },
           "border-top-color": {
-            "filled": {
-              "brand": {
-                "$value": "#00000000",
-                "$type": "color"
-              },
-              "danger": {
-                "$value": "#00000000",
-                "$type": "color"
-              }
-            },
             "outline": {
               "brand": {
                 "$value": "#0f6cbd",
@@ -135,6 +125,16 @@
               },
               "danger": {
                 "$value": "#eeacb2",
+                "$type": "color"
+              }
+            },
+            "ghost": {
+              "brand": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "danger": {
+                "$value": "#00000000",
                 "$type": "color"
               }
             }
@@ -244,24 +244,6 @@
     "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
     "findings": [
       {
-        "combo": "filled.brand",
-        "interaction": "default",
-        "part": "root",
-        "pseudo": "::after",
-        "deltaVsDefault": {
-          "content": "\"\""
-        }
-      },
-      {
-        "combo": "filled.danger",
-        "interaction": "default",
-        "part": "root",
-        "pseudo": "::after",
-        "deltaVsDefault": {
-          "content": "\"\""
-        }
-      },
-      {
         "combo": "outline.brand",
         "interaction": "default",
         "part": "root",
@@ -290,6 +272,24 @@
       },
       {
         "combo": "tint.danger",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "ghost.brand",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "ghost.danger",
         "interaction": "default",
         "part": "root",
         "pseudo": "::after",
@@ -348,7 +348,7 @@
       "full-width-carried: label spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)"
     ],
     "refusals": [
-      "pseudo-decor-ring-folded: root::after is a COINCIDENT INSET RING — border-top-width / border-right-width / border-bottom-width / border-left-width = 1px, uniform on all four sides and identical in 6/6 default-interaction combos, transparent fill, the host's own radius, at 0,0 over the host's padding box. Its paint does not factor on ONE enum axis, so the decor grammar cannot promote it as its own part; the four UNIFORM widths are folded onto root as literals instead, where the border-{side}-color the contract ALREADY carries completes the pair. MEASURED-SAFE: the ring's border colour equals root's own on all four sides in 6/6 combos with a ring box, so no colour is guessed and a combo the host paints transparent stays bare. The ring box is present in every one of the 6 combos."
+      "pseudo-decor-ring-folded: root::after is a COINCIDENT INSET RING — border-top-width / border-right-width / border-bottom-width / border-left-width = 1px, uniform on all four sides and identical in 4/6 default-interaction combos, transparent fill, the host's own radius, at 0,0 over the host's padding box. Its paint does not factor on ONE enum axis, so the decor grammar cannot promote it as its own part; the four UNIFORM widths are folded onto root as literals instead, where the border-{side}-color the contract ALREADY carries completes the pair. MEASURED-SAFE: the ring's border colour equals root's own on all four sides in 4/4 combos with a ring box, so no colour is guessed and a combo the host paints transparent stays bare. THE RING BOX IS ABSENT IN 2/6 COMBOS — ghost.brand, ghost.danger — and the fold is safe there ONLY because root's own border-{side}-color is transparent in every one of them, so the folded width paints nothing and the canvas stays bare exactly as CSS does"
     ]
   },
   "enrichmentNotes": [
