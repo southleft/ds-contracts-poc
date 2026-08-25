@@ -595,6 +595,21 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run census:check -- --phase design-to-code
 
+      # FIRST-PASS EXAM (docs/31 — the owner's criticism, 2026-08-24: "I don't
+      # think I've seen one successful pass on the first try"). Every other
+      # gate in this file measures END-STATE quality, after a heal loop. This
+      # one holds the committed evidence of the OTHER metric: the documented
+      # chain run end to end with zero intervention and NO RETRY. The gate is a
+      # pure reader — it never runs an exam (an exam needs a library sandbox, a
+      # Figma token and a browser); it holds the packets, the MANIFEST
+      # denominator, the artifact hashes, the ratchet and the byte-stable
+      # receipt against each other.
+      - name: first-pass:check (every exam's packets, ratchet and receipt agree)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run first-pass:check
+      - name: first-pass self-test (the gate goes red on a dropped packet, a smuggled packet, a corrupted image, a ratchet raised above the truth, and an edited receipt)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run first-pass:check -- --self-test
       # THE DOOR REGISTER (spec/DOOR-REGISTER.md). A door is any rule that
       # decides a computed fact is NOT a fact of this component, or that a fact
       # IS admitted — the pipeline's only judgement calls. The gate holds the
