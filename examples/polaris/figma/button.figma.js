@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "polaris.button",
     "version": "0.4.0",
     "anchorKey": null,
-    "description": "Button — generated from contract polaris.button v0.4.0 † (77 code-only facts — see plugin report)",
+    "description": "Button — generated from contract polaris.button v0.4.0 † (78 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -34,9 +34,501 @@ const COMPONENTS = [
     ],
     "variants": [
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary",
+        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary",
         "row": 0,
         "col": 0,
+        "spec": {
+          "type": "root",
+          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/secondary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0.7098039215686275,
+                "g": 0.7098039215686275,
+                "b": 0.7098039215686275,
+                "a": 1
+              }
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/secondary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/secondary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain",
+        "row": 0,
+        "col": 1,
+        "spec": {
+          "type": "root",
+          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "fill": "imported/button/root/background-color/plain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/plain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/plain/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary",
+        "row": 0,
+        "col": 2,
+        "spec": {
+          "type": "root",
+          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/primary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.8
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.18823529411764706,
+                "g": 0.18823529411764706,
+                "b": 0.18823529411764706,
+                "a": 1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 0.25
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/primary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-semibold",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/primary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary",
+        "row": 0,
+        "col": 3,
+        "spec": {
+          "type": "root",
+          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/tertiary/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/tertiary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/tertiary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain",
+        "row": 0,
+        "col": 4,
+        "spec": {
+          "type": "root",
+          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "fill": "imported/button/root/background-color/monochromePlain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/monochromePlain/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary",
+        "row": 0,
+        "col": 5,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary",
@@ -160,7 +652,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain",
         "row": 0,
-        "col": 1,
+        "col": 6,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain",
@@ -239,7 +731,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary",
         "row": 0,
-        "col": 2,
+        "col": 7,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary",
@@ -364,7 +856,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary",
         "row": 0,
-        "col": 3,
+        "col": 8,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary",
@@ -449,7 +941,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain",
         "row": 0,
-        "col": 4,
+        "col": 9,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain",
@@ -528,7 +1020,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Center, Tone=Success, Variant=Secondary",
         "row": 0,
-        "col": 5,
+        "col": 10,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Center, Tone=Success, Variant=Secondary",
@@ -652,7 +1144,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Center, Tone=Success, Variant=Plain",
         "row": 0,
-        "col": 6,
+        "col": 11,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Center, Tone=Success, Variant=Plain",
@@ -731,7 +1223,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Center, Tone=Success, Variant=Primary",
         "row": 0,
-        "col": 7,
+        "col": 12,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Center, Tone=Success, Variant=Primary",
@@ -856,7 +1348,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Center, Tone=Success, Variant=Tertiary",
         "row": 0,
-        "col": 8,
+        "col": 13,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Center, Tone=Success, Variant=Tertiary",
@@ -941,7 +1433,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Center, Tone=Success, Variant=Monochrome Plain",
         "row": 0,
-        "col": 9,
+        "col": 14,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Center, Tone=Success, Variant=Monochrome Plain",
@@ -1018,9 +1510,501 @@ const COMPONENTS = [
         }
       },
       {
+        "name": "Size=Medium, Text Align=Left, Tone=Default, Variant=Secondary",
+        "row": 0,
+        "col": 15,
+        "spec": {
+          "type": "root",
+          "name": "Size=Medium, Text Align=Left, Tone=Default, Variant=Secondary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/secondary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0.7098039215686275,
+                "g": 0.7098039215686275,
+                "b": 0.7098039215686275,
+                "a": 1
+              }
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/secondary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/secondary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Medium, Text Align=Left, Tone=Default, Variant=Plain",
+        "row": 0,
+        "col": 16,
+        "spec": {
+          "type": "root",
+          "name": "Size=Medium, Text Align=Left, Tone=Default, Variant=Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "fill": "imported/button/root/background-color/plain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/plain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/plain/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Medium, Text Align=Left, Tone=Default, Variant=Primary",
+        "row": 0,
+        "col": 17,
+        "spec": {
+          "type": "root",
+          "name": "Size=Medium, Text Align=Left, Tone=Default, Variant=Primary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/primary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.8
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.18823529411764706,
+                "g": 0.18823529411764706,
+                "b": 0.18823529411764706,
+                "a": 1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 0.25
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/primary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-semibold",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/primary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Medium, Text Align=Left, Tone=Default, Variant=Tertiary",
+        "row": 0,
+        "col": 18,
+        "spec": {
+          "type": "root",
+          "name": "Size=Medium, Text Align=Left, Tone=Default, Variant=Tertiary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/tertiary/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/tertiary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/tertiary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Medium, Text Align=Left, Tone=Default, Variant=Monochrome Plain",
+        "row": 0,
+        "col": 19,
+        "spec": {
+          "type": "root",
+          "name": "Size=Medium, Text Align=Left, Tone=Default, Variant=Monochrome Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "fill": "imported/button/root/background-color/monochromePlain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/monochromePlain/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
         "name": "Size=Medium, Text Align=Left, Tone=Critical, Variant=Secondary",
         "row": 0,
-        "col": 10,
+        "col": 20,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Left, Tone=Critical, Variant=Secondary",
@@ -1144,7 +2128,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Left, Tone=Critical, Variant=Plain",
         "row": 0,
-        "col": 11,
+        "col": 21,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Left, Tone=Critical, Variant=Plain",
@@ -1223,7 +2207,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Left, Tone=Critical, Variant=Primary",
         "row": 0,
-        "col": 12,
+        "col": 22,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Left, Tone=Critical, Variant=Primary",
@@ -1348,7 +2332,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Left, Tone=Critical, Variant=Tertiary",
         "row": 0,
-        "col": 13,
+        "col": 23,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Left, Tone=Critical, Variant=Tertiary",
@@ -1433,7 +2417,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Left, Tone=Critical, Variant=Monochrome Plain",
         "row": 0,
-        "col": 14,
+        "col": 24,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Left, Tone=Critical, Variant=Monochrome Plain",
@@ -1512,7 +2496,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Left, Tone=Success, Variant=Secondary",
         "row": 0,
-        "col": 15,
+        "col": 25,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Left, Tone=Success, Variant=Secondary",
@@ -1636,7 +2620,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Left, Tone=Success, Variant=Plain",
         "row": 0,
-        "col": 16,
+        "col": 26,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Left, Tone=Success, Variant=Plain",
@@ -1715,7 +2699,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Left, Tone=Success, Variant=Primary",
         "row": 0,
-        "col": 17,
+        "col": 27,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Left, Tone=Success, Variant=Primary",
@@ -1840,7 +2824,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Left, Tone=Success, Variant=Tertiary",
         "row": 0,
-        "col": 18,
+        "col": 28,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Left, Tone=Success, Variant=Tertiary",
@@ -1925,7 +2909,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Left, Tone=Success, Variant=Monochrome Plain",
         "row": 0,
-        "col": 19,
+        "col": 29,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Left, Tone=Success, Variant=Monochrome Plain",
@@ -2002,9 +2986,501 @@ const COMPONENTS = [
         }
       },
       {
+        "name": "Size=Medium, Text Align=Right, Tone=Default, Variant=Secondary",
+        "row": 0,
+        "col": 30,
+        "spec": {
+          "type": "root",
+          "name": "Size=Medium, Text Align=Right, Tone=Default, Variant=Secondary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/secondary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0.7098039215686275,
+                "g": 0.7098039215686275,
+                "b": 0.7098039215686275,
+                "a": 1
+              }
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/secondary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/secondary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Medium, Text Align=Right, Tone=Default, Variant=Plain",
+        "row": 0,
+        "col": 31,
+        "spec": {
+          "type": "root",
+          "name": "Size=Medium, Text Align=Right, Tone=Default, Variant=Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "fill": "imported/button/root/background-color/plain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/plain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/plain/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Medium, Text Align=Right, Tone=Default, Variant=Primary",
+        "row": 0,
+        "col": 32,
+        "spec": {
+          "type": "root",
+          "name": "Size=Medium, Text Align=Right, Tone=Default, Variant=Primary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/primary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.8
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.18823529411764706,
+                "g": 0.18823529411764706,
+                "b": 0.18823529411764706,
+                "a": 1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 0.25
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/primary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-semibold",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/primary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Medium, Text Align=Right, Tone=Default, Variant=Tertiary",
+        "row": 0,
+        "col": 33,
+        "spec": {
+          "type": "root",
+          "name": "Size=Medium, Text Align=Right, Tone=Default, Variant=Tertiary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/tertiary/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/tertiary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/tertiary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Medium, Text Align=Right, Tone=Default, Variant=Monochrome Plain",
+        "row": 0,
+        "col": 34,
+        "spec": {
+          "type": "root",
+          "name": "Size=Medium, Text Align=Right, Tone=Default, Variant=Monochrome Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "fill": "imported/button/root/background-color/monochromePlain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/monochromePlain/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
         "name": "Size=Medium, Text Align=Right, Tone=Critical, Variant=Secondary",
         "row": 0,
-        "col": 20,
+        "col": 35,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Right, Tone=Critical, Variant=Secondary",
@@ -2128,7 +3604,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Right, Tone=Critical, Variant=Plain",
         "row": 0,
-        "col": 21,
+        "col": 36,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Right, Tone=Critical, Variant=Plain",
@@ -2207,7 +3683,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Right, Tone=Critical, Variant=Primary",
         "row": 0,
-        "col": 22,
+        "col": 37,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Right, Tone=Critical, Variant=Primary",
@@ -2332,7 +3808,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Right, Tone=Critical, Variant=Tertiary",
         "row": 0,
-        "col": 23,
+        "col": 38,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Right, Tone=Critical, Variant=Tertiary",
@@ -2417,7 +3893,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Right, Tone=Critical, Variant=Monochrome Plain",
         "row": 0,
-        "col": 24,
+        "col": 39,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Right, Tone=Critical, Variant=Monochrome Plain",
@@ -2496,7 +3972,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Right, Tone=Success, Variant=Secondary",
         "row": 0,
-        "col": 25,
+        "col": 40,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Right, Tone=Success, Variant=Secondary",
@@ -2620,7 +4096,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Right, Tone=Success, Variant=Plain",
         "row": 0,
-        "col": 26,
+        "col": 41,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Right, Tone=Success, Variant=Plain",
@@ -2699,7 +4175,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Right, Tone=Success, Variant=Primary",
         "row": 0,
-        "col": 27,
+        "col": 42,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Right, Tone=Success, Variant=Primary",
@@ -2824,7 +4300,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Right, Tone=Success, Variant=Tertiary",
         "row": 0,
-        "col": 28,
+        "col": 43,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Right, Tone=Success, Variant=Tertiary",
@@ -2909,7 +4385,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Right, Tone=Success, Variant=Monochrome Plain",
         "row": 0,
-        "col": 29,
+        "col": 44,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Right, Tone=Success, Variant=Monochrome Plain",
@@ -2986,9 +4462,501 @@ const COMPONENTS = [
         }
       },
       {
+        "name": "Size=Medium, Text Align=Start, Tone=Default, Variant=Secondary",
+        "row": 0,
+        "col": 45,
+        "spec": {
+          "type": "root",
+          "name": "Size=Medium, Text Align=Start, Tone=Default, Variant=Secondary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/secondary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0.7098039215686275,
+                "g": 0.7098039215686275,
+                "b": 0.7098039215686275,
+                "a": 1
+              }
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/secondary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/secondary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Medium, Text Align=Start, Tone=Default, Variant=Plain",
+        "row": 0,
+        "col": 46,
+        "spec": {
+          "type": "root",
+          "name": "Size=Medium, Text Align=Start, Tone=Default, Variant=Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "fill": "imported/button/root/background-color/plain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/plain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/plain/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Medium, Text Align=Start, Tone=Default, Variant=Primary",
+        "row": 0,
+        "col": 47,
+        "spec": {
+          "type": "root",
+          "name": "Size=Medium, Text Align=Start, Tone=Default, Variant=Primary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/primary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.8
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.18823529411764706,
+                "g": 0.18823529411764706,
+                "b": 0.18823529411764706,
+                "a": 1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 0.25
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/primary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-semibold",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/primary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Medium, Text Align=Start, Tone=Default, Variant=Tertiary",
+        "row": 0,
+        "col": 48,
+        "spec": {
+          "type": "root",
+          "name": "Size=Medium, Text Align=Start, Tone=Default, Variant=Tertiary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/tertiary/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/tertiary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/tertiary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Medium, Text Align=Start, Tone=Default, Variant=Monochrome Plain",
+        "row": 0,
+        "col": 49,
+        "spec": {
+          "type": "root",
+          "name": "Size=Medium, Text Align=Start, Tone=Default, Variant=Monochrome Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "fill": "imported/button/root/background-color/monochromePlain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/monochromePlain/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
         "name": "Size=Medium, Text Align=Start, Tone=Critical, Variant=Secondary",
         "row": 0,
-        "col": 30,
+        "col": 50,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Start, Tone=Critical, Variant=Secondary",
@@ -3112,7 +5080,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Start, Tone=Critical, Variant=Plain",
         "row": 0,
-        "col": 31,
+        "col": 51,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Start, Tone=Critical, Variant=Plain",
@@ -3191,7 +5159,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Start, Tone=Critical, Variant=Primary",
         "row": 0,
-        "col": 32,
+        "col": 52,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Start, Tone=Critical, Variant=Primary",
@@ -3316,7 +5284,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Start, Tone=Critical, Variant=Tertiary",
         "row": 0,
-        "col": 33,
+        "col": 53,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Start, Tone=Critical, Variant=Tertiary",
@@ -3401,7 +5369,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Start, Tone=Critical, Variant=Monochrome Plain",
         "row": 0,
-        "col": 34,
+        "col": 54,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Start, Tone=Critical, Variant=Monochrome Plain",
@@ -3480,7 +5448,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Start, Tone=Success, Variant=Secondary",
         "row": 0,
-        "col": 35,
+        "col": 55,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Start, Tone=Success, Variant=Secondary",
@@ -3604,7 +5572,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Start, Tone=Success, Variant=Plain",
         "row": 0,
-        "col": 36,
+        "col": 56,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Start, Tone=Success, Variant=Plain",
@@ -3683,7 +5651,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Start, Tone=Success, Variant=Primary",
         "row": 0,
-        "col": 37,
+        "col": 57,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Start, Tone=Success, Variant=Primary",
@@ -3808,7 +5776,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Start, Tone=Success, Variant=Tertiary",
         "row": 0,
-        "col": 38,
+        "col": 58,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Start, Tone=Success, Variant=Tertiary",
@@ -3893,7 +5861,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Start, Tone=Success, Variant=Monochrome Plain",
         "row": 0,
-        "col": 39,
+        "col": 59,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Start, Tone=Success, Variant=Monochrome Plain",
@@ -3970,9 +5938,501 @@ const COMPONENTS = [
         }
       },
       {
+        "name": "Size=Medium, Text Align=End, Tone=Default, Variant=Secondary",
+        "row": 0,
+        "col": 60,
+        "spec": {
+          "type": "root",
+          "name": "Size=Medium, Text Align=End, Tone=Default, Variant=Secondary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/secondary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0.7098039215686275,
+                "g": 0.7098039215686275,
+                "b": 0.7098039215686275,
+                "a": 1
+              }
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/secondary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/secondary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Medium, Text Align=End, Tone=Default, Variant=Plain",
+        "row": 0,
+        "col": 61,
+        "spec": {
+          "type": "root",
+          "name": "Size=Medium, Text Align=End, Tone=Default, Variant=Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "fill": "imported/button/root/background-color/plain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/plain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/plain/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Medium, Text Align=End, Tone=Default, Variant=Primary",
+        "row": 0,
+        "col": 62,
+        "spec": {
+          "type": "root",
+          "name": "Size=Medium, Text Align=End, Tone=Default, Variant=Primary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/primary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.8
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.18823529411764706,
+                "g": 0.18823529411764706,
+                "b": 0.18823529411764706,
+                "a": 1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 0.25
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/primary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-semibold",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/primary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Medium, Text Align=End, Tone=Default, Variant=Tertiary",
+        "row": 0,
+        "col": 63,
+        "spec": {
+          "type": "root",
+          "name": "Size=Medium, Text Align=End, Tone=Default, Variant=Tertiary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/tertiary/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/tertiary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/tertiary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Medium, Text Align=End, Tone=Default, Variant=Monochrome Plain",
+        "row": 0,
+        "col": 64,
+        "spec": {
+          "type": "root",
+          "name": "Size=Medium, Text Align=End, Tone=Default, Variant=Monochrome Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "fill": "imported/button/root/background-color/monochromePlain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/monochromePlain/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
         "name": "Size=Medium, Text Align=End, Tone=Critical, Variant=Secondary",
         "row": 0,
-        "col": 40,
+        "col": 65,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=End, Tone=Critical, Variant=Secondary",
@@ -4096,7 +6556,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=End, Tone=Critical, Variant=Plain",
         "row": 0,
-        "col": 41,
+        "col": 66,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=End, Tone=Critical, Variant=Plain",
@@ -4175,7 +6635,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=End, Tone=Critical, Variant=Primary",
         "row": 0,
-        "col": 42,
+        "col": 67,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=End, Tone=Critical, Variant=Primary",
@@ -4300,7 +6760,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=End, Tone=Critical, Variant=Tertiary",
         "row": 0,
-        "col": 43,
+        "col": 68,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=End, Tone=Critical, Variant=Tertiary",
@@ -4385,7 +6845,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=End, Tone=Critical, Variant=Monochrome Plain",
         "row": 0,
-        "col": 44,
+        "col": 69,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=End, Tone=Critical, Variant=Monochrome Plain",
@@ -4464,7 +6924,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=End, Tone=Success, Variant=Secondary",
         "row": 0,
-        "col": 45,
+        "col": 70,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=End, Tone=Success, Variant=Secondary",
@@ -4588,7 +7048,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=End, Tone=Success, Variant=Plain",
         "row": 0,
-        "col": 46,
+        "col": 71,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=End, Tone=Success, Variant=Plain",
@@ -4667,7 +7127,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=End, Tone=Success, Variant=Primary",
         "row": 0,
-        "col": 47,
+        "col": 72,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=End, Tone=Success, Variant=Primary",
@@ -4792,7 +7252,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=End, Tone=Success, Variant=Tertiary",
         "row": 0,
-        "col": 48,
+        "col": 73,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=End, Tone=Success, Variant=Tertiary",
@@ -4877,7 +7337,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=End, Tone=Success, Variant=Monochrome Plain",
         "row": 0,
-        "col": 49,
+        "col": 74,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=End, Tone=Success, Variant=Monochrome Plain",
@@ -4954,9 +7414,501 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Size=Micro, Text Align=Center, Tone=Critical, Variant=Secondary",
+        "name": "Size=Micro, Text Align=Center, Tone=Default, Variant=Secondary",
         "row": 1,
         "col": 0,
+        "spec": {
+          "type": "root",
+          "name": "Size=Micro, Text Align=Center, Tone=Default, Variant=Secondary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-100",
+            "paddingBottom": "p/space-100",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
+            "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/secondary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0.7098039215686275,
+                "g": 0.7098039215686275,
+                "b": 0.7098039215686275,
+                "a": 1
+              }
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/secondary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/secondary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Micro, Text Align=Center, Tone=Default, Variant=Plain",
+        "row": 1,
+        "col": 1,
+        "spec": {
+          "type": "root",
+          "name": "Size=Micro, Text Align=Center, Tone=Default, Variant=Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-100",
+            "paddingBottom": "p/space-100",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
+            "minWidth": "p/width-700"
+          },
+          "fill": "imported/button/root/background-color/plain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/plain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/plain/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Micro, Text Align=Center, Tone=Default, Variant=Primary",
+        "row": 1,
+        "col": 2,
+        "spec": {
+          "type": "root",
+          "name": "Size=Micro, Text Align=Center, Tone=Default, Variant=Primary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-100",
+            "paddingBottom": "p/space-100",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
+            "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/primary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.8
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.18823529411764706,
+                "g": 0.18823529411764706,
+                "b": 0.18823529411764706,
+                "a": 1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 0.25
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/primary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-semibold",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/primary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Micro, Text Align=Center, Tone=Default, Variant=Tertiary",
+        "row": 1,
+        "col": 3,
+        "spec": {
+          "type": "root",
+          "name": "Size=Micro, Text Align=Center, Tone=Default, Variant=Tertiary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-100",
+            "paddingBottom": "p/space-100",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
+            "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/tertiary/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/tertiary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/tertiary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Micro, Text Align=Center, Tone=Default, Variant=Monochrome Plain",
+        "row": 1,
+        "col": 4,
+        "spec": {
+          "type": "root",
+          "name": "Size=Micro, Text Align=Center, Tone=Default, Variant=Monochrome Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-100",
+            "paddingBottom": "p/space-100",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
+            "minWidth": "p/width-700"
+          },
+          "fill": "imported/button/root/background-color/monochromePlain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/monochromePlain/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Micro, Text Align=Center, Tone=Critical, Variant=Secondary",
+        "row": 1,
+        "col": 5,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Center, Tone=Critical, Variant=Secondary",
@@ -5080,7 +8032,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Center, Tone=Critical, Variant=Plain",
         "row": 1,
-        "col": 1,
+        "col": 6,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Center, Tone=Critical, Variant=Plain",
@@ -5159,7 +8111,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Center, Tone=Critical, Variant=Primary",
         "row": 1,
-        "col": 2,
+        "col": 7,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Center, Tone=Critical, Variant=Primary",
@@ -5284,7 +8236,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Center, Tone=Critical, Variant=Tertiary",
         "row": 1,
-        "col": 3,
+        "col": 8,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Center, Tone=Critical, Variant=Tertiary",
@@ -5369,7 +8321,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Center, Tone=Critical, Variant=Monochrome Plain",
         "row": 1,
-        "col": 4,
+        "col": 9,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Center, Tone=Critical, Variant=Monochrome Plain",
@@ -5448,7 +8400,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Center, Tone=Success, Variant=Secondary",
         "row": 1,
-        "col": 5,
+        "col": 10,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Center, Tone=Success, Variant=Secondary",
@@ -5572,7 +8524,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Center, Tone=Success, Variant=Plain",
         "row": 1,
-        "col": 6,
+        "col": 11,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Center, Tone=Success, Variant=Plain",
@@ -5651,7 +8603,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Center, Tone=Success, Variant=Primary",
         "row": 1,
-        "col": 7,
+        "col": 12,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Center, Tone=Success, Variant=Primary",
@@ -5776,7 +8728,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Center, Tone=Success, Variant=Tertiary",
         "row": 1,
-        "col": 8,
+        "col": 13,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Center, Tone=Success, Variant=Tertiary",
@@ -5861,7 +8813,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Center, Tone=Success, Variant=Monochrome Plain",
         "row": 1,
-        "col": 9,
+        "col": 14,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Center, Tone=Success, Variant=Monochrome Plain",
@@ -5938,9 +8890,501 @@ const COMPONENTS = [
         }
       },
       {
+        "name": "Size=Micro, Text Align=Left, Tone=Default, Variant=Secondary",
+        "row": 1,
+        "col": 15,
+        "spec": {
+          "type": "root",
+          "name": "Size=Micro, Text Align=Left, Tone=Default, Variant=Secondary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-100",
+            "paddingBottom": "p/space-100",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
+            "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/secondary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0.7098039215686275,
+                "g": 0.7098039215686275,
+                "b": 0.7098039215686275,
+                "a": 1
+              }
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/secondary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/secondary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Micro, Text Align=Left, Tone=Default, Variant=Plain",
+        "row": 1,
+        "col": 16,
+        "spec": {
+          "type": "root",
+          "name": "Size=Micro, Text Align=Left, Tone=Default, Variant=Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-100",
+            "paddingBottom": "p/space-100",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
+            "minWidth": "p/width-700"
+          },
+          "fill": "imported/button/root/background-color/plain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/plain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/plain/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Micro, Text Align=Left, Tone=Default, Variant=Primary",
+        "row": 1,
+        "col": 17,
+        "spec": {
+          "type": "root",
+          "name": "Size=Micro, Text Align=Left, Tone=Default, Variant=Primary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-100",
+            "paddingBottom": "p/space-100",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
+            "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/primary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.8
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.18823529411764706,
+                "g": 0.18823529411764706,
+                "b": 0.18823529411764706,
+                "a": 1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 0.25
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/primary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-semibold",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/primary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Micro, Text Align=Left, Tone=Default, Variant=Tertiary",
+        "row": 1,
+        "col": 18,
+        "spec": {
+          "type": "root",
+          "name": "Size=Micro, Text Align=Left, Tone=Default, Variant=Tertiary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-100",
+            "paddingBottom": "p/space-100",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
+            "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/tertiary/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/tertiary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/tertiary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Micro, Text Align=Left, Tone=Default, Variant=Monochrome Plain",
+        "row": 1,
+        "col": 19,
+        "spec": {
+          "type": "root",
+          "name": "Size=Micro, Text Align=Left, Tone=Default, Variant=Monochrome Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-100",
+            "paddingBottom": "p/space-100",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
+            "minWidth": "p/width-700"
+          },
+          "fill": "imported/button/root/background-color/monochromePlain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/monochromePlain/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
         "name": "Size=Micro, Text Align=Left, Tone=Critical, Variant=Secondary",
         "row": 1,
-        "col": 10,
+        "col": 20,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Left, Tone=Critical, Variant=Secondary",
@@ -6064,7 +9508,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Left, Tone=Critical, Variant=Plain",
         "row": 1,
-        "col": 11,
+        "col": 21,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Left, Tone=Critical, Variant=Plain",
@@ -6143,7 +9587,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Left, Tone=Critical, Variant=Primary",
         "row": 1,
-        "col": 12,
+        "col": 22,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Left, Tone=Critical, Variant=Primary",
@@ -6268,7 +9712,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Left, Tone=Critical, Variant=Tertiary",
         "row": 1,
-        "col": 13,
+        "col": 23,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Left, Tone=Critical, Variant=Tertiary",
@@ -6353,7 +9797,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Left, Tone=Critical, Variant=Monochrome Plain",
         "row": 1,
-        "col": 14,
+        "col": 24,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Left, Tone=Critical, Variant=Monochrome Plain",
@@ -6432,7 +9876,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Left, Tone=Success, Variant=Secondary",
         "row": 1,
-        "col": 15,
+        "col": 25,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Left, Tone=Success, Variant=Secondary",
@@ -6556,7 +10000,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Left, Tone=Success, Variant=Plain",
         "row": 1,
-        "col": 16,
+        "col": 26,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Left, Tone=Success, Variant=Plain",
@@ -6635,7 +10079,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Left, Tone=Success, Variant=Primary",
         "row": 1,
-        "col": 17,
+        "col": 27,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Left, Tone=Success, Variant=Primary",
@@ -6760,7 +10204,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Left, Tone=Success, Variant=Tertiary",
         "row": 1,
-        "col": 18,
+        "col": 28,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Left, Tone=Success, Variant=Tertiary",
@@ -6845,7 +10289,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Left, Tone=Success, Variant=Monochrome Plain",
         "row": 1,
-        "col": 19,
+        "col": 29,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Left, Tone=Success, Variant=Monochrome Plain",
@@ -6922,9 +10366,501 @@ const COMPONENTS = [
         }
       },
       {
+        "name": "Size=Micro, Text Align=Right, Tone=Default, Variant=Secondary",
+        "row": 1,
+        "col": 30,
+        "spec": {
+          "type": "root",
+          "name": "Size=Micro, Text Align=Right, Tone=Default, Variant=Secondary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-100",
+            "paddingBottom": "p/space-100",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
+            "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/secondary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0.7098039215686275,
+                "g": 0.7098039215686275,
+                "b": 0.7098039215686275,
+                "a": 1
+              }
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/secondary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/secondary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Micro, Text Align=Right, Tone=Default, Variant=Plain",
+        "row": 1,
+        "col": 31,
+        "spec": {
+          "type": "root",
+          "name": "Size=Micro, Text Align=Right, Tone=Default, Variant=Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-100",
+            "paddingBottom": "p/space-100",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
+            "minWidth": "p/width-700"
+          },
+          "fill": "imported/button/root/background-color/plain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/plain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/plain/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Micro, Text Align=Right, Tone=Default, Variant=Primary",
+        "row": 1,
+        "col": 32,
+        "spec": {
+          "type": "root",
+          "name": "Size=Micro, Text Align=Right, Tone=Default, Variant=Primary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-100",
+            "paddingBottom": "p/space-100",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
+            "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/primary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.8
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.18823529411764706,
+                "g": 0.18823529411764706,
+                "b": 0.18823529411764706,
+                "a": 1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 0.25
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/primary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-semibold",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/primary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Micro, Text Align=Right, Tone=Default, Variant=Tertiary",
+        "row": 1,
+        "col": 33,
+        "spec": {
+          "type": "root",
+          "name": "Size=Micro, Text Align=Right, Tone=Default, Variant=Tertiary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-100",
+            "paddingBottom": "p/space-100",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
+            "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/tertiary/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/tertiary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/tertiary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Micro, Text Align=Right, Tone=Default, Variant=Monochrome Plain",
+        "row": 1,
+        "col": 34,
+        "spec": {
+          "type": "root",
+          "name": "Size=Micro, Text Align=Right, Tone=Default, Variant=Monochrome Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-100",
+            "paddingBottom": "p/space-100",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
+            "minWidth": "p/width-700"
+          },
+          "fill": "imported/button/root/background-color/monochromePlain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/monochromePlain/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
         "name": "Size=Micro, Text Align=Right, Tone=Critical, Variant=Secondary",
         "row": 1,
-        "col": 20,
+        "col": 35,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Right, Tone=Critical, Variant=Secondary",
@@ -7048,7 +10984,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Right, Tone=Critical, Variant=Plain",
         "row": 1,
-        "col": 21,
+        "col": 36,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Right, Tone=Critical, Variant=Plain",
@@ -7127,7 +11063,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Right, Tone=Critical, Variant=Primary",
         "row": 1,
-        "col": 22,
+        "col": 37,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Right, Tone=Critical, Variant=Primary",
@@ -7252,7 +11188,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Right, Tone=Critical, Variant=Tertiary",
         "row": 1,
-        "col": 23,
+        "col": 38,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Right, Tone=Critical, Variant=Tertiary",
@@ -7337,7 +11273,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Right, Tone=Critical, Variant=Monochrome Plain",
         "row": 1,
-        "col": 24,
+        "col": 39,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Right, Tone=Critical, Variant=Monochrome Plain",
@@ -7416,7 +11352,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Right, Tone=Success, Variant=Secondary",
         "row": 1,
-        "col": 25,
+        "col": 40,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Right, Tone=Success, Variant=Secondary",
@@ -7540,7 +11476,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Right, Tone=Success, Variant=Plain",
         "row": 1,
-        "col": 26,
+        "col": 41,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Right, Tone=Success, Variant=Plain",
@@ -7619,7 +11555,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Right, Tone=Success, Variant=Primary",
         "row": 1,
-        "col": 27,
+        "col": 42,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Right, Tone=Success, Variant=Primary",
@@ -7744,7 +11680,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Right, Tone=Success, Variant=Tertiary",
         "row": 1,
-        "col": 28,
+        "col": 43,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Right, Tone=Success, Variant=Tertiary",
@@ -7829,7 +11765,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Right, Tone=Success, Variant=Monochrome Plain",
         "row": 1,
-        "col": 29,
+        "col": 44,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Right, Tone=Success, Variant=Monochrome Plain",
@@ -7906,9 +11842,501 @@ const COMPONENTS = [
         }
       },
       {
+        "name": "Size=Micro, Text Align=Start, Tone=Default, Variant=Secondary",
+        "row": 1,
+        "col": 45,
+        "spec": {
+          "type": "root",
+          "name": "Size=Micro, Text Align=Start, Tone=Default, Variant=Secondary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-100",
+            "paddingBottom": "p/space-100",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
+            "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/secondary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0.7098039215686275,
+                "g": 0.7098039215686275,
+                "b": 0.7098039215686275,
+                "a": 1
+              }
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/secondary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/secondary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Micro, Text Align=Start, Tone=Default, Variant=Plain",
+        "row": 1,
+        "col": 46,
+        "spec": {
+          "type": "root",
+          "name": "Size=Micro, Text Align=Start, Tone=Default, Variant=Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-100",
+            "paddingBottom": "p/space-100",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
+            "minWidth": "p/width-700"
+          },
+          "fill": "imported/button/root/background-color/plain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/plain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/plain/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Micro, Text Align=Start, Tone=Default, Variant=Primary",
+        "row": 1,
+        "col": 47,
+        "spec": {
+          "type": "root",
+          "name": "Size=Micro, Text Align=Start, Tone=Default, Variant=Primary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-100",
+            "paddingBottom": "p/space-100",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
+            "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/primary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.8
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.18823529411764706,
+                "g": 0.18823529411764706,
+                "b": 0.18823529411764706,
+                "a": 1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 0.25
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/primary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-semibold",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/primary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Micro, Text Align=Start, Tone=Default, Variant=Tertiary",
+        "row": 1,
+        "col": 48,
+        "spec": {
+          "type": "root",
+          "name": "Size=Micro, Text Align=Start, Tone=Default, Variant=Tertiary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-100",
+            "paddingBottom": "p/space-100",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
+            "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/tertiary/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/tertiary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/tertiary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Micro, Text Align=Start, Tone=Default, Variant=Monochrome Plain",
+        "row": 1,
+        "col": 49,
+        "spec": {
+          "type": "root",
+          "name": "Size=Micro, Text Align=Start, Tone=Default, Variant=Monochrome Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-100",
+            "paddingBottom": "p/space-100",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
+            "minWidth": "p/width-700"
+          },
+          "fill": "imported/button/root/background-color/monochromePlain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/monochromePlain/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
         "name": "Size=Micro, Text Align=Start, Tone=Critical, Variant=Secondary",
         "row": 1,
-        "col": 30,
+        "col": 50,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Start, Tone=Critical, Variant=Secondary",
@@ -8032,7 +12460,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Start, Tone=Critical, Variant=Plain",
         "row": 1,
-        "col": 31,
+        "col": 51,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Start, Tone=Critical, Variant=Plain",
@@ -8111,7 +12539,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Start, Tone=Critical, Variant=Primary",
         "row": 1,
-        "col": 32,
+        "col": 52,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Start, Tone=Critical, Variant=Primary",
@@ -8236,7 +12664,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Start, Tone=Critical, Variant=Tertiary",
         "row": 1,
-        "col": 33,
+        "col": 53,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Start, Tone=Critical, Variant=Tertiary",
@@ -8321,7 +12749,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Start, Tone=Critical, Variant=Monochrome Plain",
         "row": 1,
-        "col": 34,
+        "col": 54,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Start, Tone=Critical, Variant=Monochrome Plain",
@@ -8400,7 +12828,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Start, Tone=Success, Variant=Secondary",
         "row": 1,
-        "col": 35,
+        "col": 55,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Start, Tone=Success, Variant=Secondary",
@@ -8524,7 +12952,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Start, Tone=Success, Variant=Plain",
         "row": 1,
-        "col": 36,
+        "col": 56,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Start, Tone=Success, Variant=Plain",
@@ -8603,7 +13031,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Start, Tone=Success, Variant=Primary",
         "row": 1,
-        "col": 37,
+        "col": 57,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Start, Tone=Success, Variant=Primary",
@@ -8728,7 +13156,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Start, Tone=Success, Variant=Tertiary",
         "row": 1,
-        "col": 38,
+        "col": 58,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Start, Tone=Success, Variant=Tertiary",
@@ -8813,7 +13241,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Start, Tone=Success, Variant=Monochrome Plain",
         "row": 1,
-        "col": 39,
+        "col": 59,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Start, Tone=Success, Variant=Monochrome Plain",
@@ -8890,9 +13318,501 @@ const COMPONENTS = [
         }
       },
       {
+        "name": "Size=Micro, Text Align=End, Tone=Default, Variant=Secondary",
+        "row": 1,
+        "col": 60,
+        "spec": {
+          "type": "root",
+          "name": "Size=Micro, Text Align=End, Tone=Default, Variant=Secondary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-100",
+            "paddingBottom": "p/space-100",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
+            "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/secondary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0.7098039215686275,
+                "g": 0.7098039215686275,
+                "b": 0.7098039215686275,
+                "a": 1
+              }
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/secondary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/secondary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Micro, Text Align=End, Tone=Default, Variant=Plain",
+        "row": 1,
+        "col": 61,
+        "spec": {
+          "type": "root",
+          "name": "Size=Micro, Text Align=End, Tone=Default, Variant=Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-100",
+            "paddingBottom": "p/space-100",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
+            "minWidth": "p/width-700"
+          },
+          "fill": "imported/button/root/background-color/plain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/plain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/plain/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Micro, Text Align=End, Tone=Default, Variant=Primary",
+        "row": 1,
+        "col": 62,
+        "spec": {
+          "type": "root",
+          "name": "Size=Micro, Text Align=End, Tone=Default, Variant=Primary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-100",
+            "paddingBottom": "p/space-100",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
+            "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/primary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.8
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.18823529411764706,
+                "g": 0.18823529411764706,
+                "b": 0.18823529411764706,
+                "a": 1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 0.25
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/primary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-semibold",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/primary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Micro, Text Align=End, Tone=Default, Variant=Tertiary",
+        "row": 1,
+        "col": 63,
+        "spec": {
+          "type": "root",
+          "name": "Size=Micro, Text Align=End, Tone=Default, Variant=Tertiary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-100",
+            "paddingBottom": "p/space-100",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
+            "minWidth": "p/width-700"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/tertiary/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/tertiary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/tertiary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Micro, Text Align=End, Tone=Default, Variant=Monochrome Plain",
+        "row": 1,
+        "col": 64,
+        "spec": {
+          "type": "root",
+          "name": "Size=Micro, Text Align=End, Tone=Default, Variant=Monochrome Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-100",
+            "paddingBottom": "p/space-100",
+            "paddingLeft": "p/space-200",
+            "paddingRight": "p/space-200",
+            "minHeight": "p/height-700",
+            "minWidth": "p/width-700"
+          },
+          "fill": "imported/button/root/background-color/monochromePlain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/monochromePlain/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
         "name": "Size=Micro, Text Align=End, Tone=Critical, Variant=Secondary",
         "row": 1,
-        "col": 40,
+        "col": 65,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=End, Tone=Critical, Variant=Secondary",
@@ -9016,7 +13936,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=End, Tone=Critical, Variant=Plain",
         "row": 1,
-        "col": 41,
+        "col": 66,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=End, Tone=Critical, Variant=Plain",
@@ -9095,7 +14015,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=End, Tone=Critical, Variant=Primary",
         "row": 1,
-        "col": 42,
+        "col": 67,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=End, Tone=Critical, Variant=Primary",
@@ -9220,7 +14140,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=End, Tone=Critical, Variant=Tertiary",
         "row": 1,
-        "col": 43,
+        "col": 68,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=End, Tone=Critical, Variant=Tertiary",
@@ -9305,7 +14225,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=End, Tone=Critical, Variant=Monochrome Plain",
         "row": 1,
-        "col": 44,
+        "col": 69,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=End, Tone=Critical, Variant=Monochrome Plain",
@@ -9384,7 +14304,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=End, Tone=Success, Variant=Secondary",
         "row": 1,
-        "col": 45,
+        "col": 70,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=End, Tone=Success, Variant=Secondary",
@@ -9508,7 +14428,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=End, Tone=Success, Variant=Plain",
         "row": 1,
-        "col": 46,
+        "col": 71,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=End, Tone=Success, Variant=Plain",
@@ -9587,7 +14507,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=End, Tone=Success, Variant=Primary",
         "row": 1,
-        "col": 47,
+        "col": 72,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=End, Tone=Success, Variant=Primary",
@@ -9712,7 +14632,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=End, Tone=Success, Variant=Tertiary",
         "row": 1,
-        "col": 48,
+        "col": 73,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=End, Tone=Success, Variant=Tertiary",
@@ -9797,7 +14717,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=End, Tone=Success, Variant=Monochrome Plain",
         "row": 1,
-        "col": 49,
+        "col": 74,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=End, Tone=Success, Variant=Monochrome Plain",
@@ -9874,9 +14794,501 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Size=Slim, Text Align=Center, Tone=Critical, Variant=Secondary",
+        "name": "Size=Slim, Text Align=Center, Tone=Default, Variant=Secondary",
         "row": 2,
         "col": 0,
+        "spec": {
+          "type": "root",
+          "name": "Size=Slim, Text Align=Center, Tone=Default, Variant=Secondary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/secondary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0.7098039215686275,
+                "g": 0.7098039215686275,
+                "b": 0.7098039215686275,
+                "a": 1
+              }
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/secondary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/secondary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Slim, Text Align=Center, Tone=Default, Variant=Plain",
+        "row": 2,
+        "col": 1,
+        "spec": {
+          "type": "root",
+          "name": "Size=Slim, Text Align=Center, Tone=Default, Variant=Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "fill": "imported/button/root/background-color/plain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/plain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/plain/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Slim, Text Align=Center, Tone=Default, Variant=Primary",
+        "row": 2,
+        "col": 2,
+        "spec": {
+          "type": "root",
+          "name": "Size=Slim, Text Align=Center, Tone=Default, Variant=Primary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/primary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.8
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.18823529411764706,
+                "g": 0.18823529411764706,
+                "b": 0.18823529411764706,
+                "a": 1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 0.25
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/primary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-semibold",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/primary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Slim, Text Align=Center, Tone=Default, Variant=Tertiary",
+        "row": 2,
+        "col": 3,
+        "spec": {
+          "type": "root",
+          "name": "Size=Slim, Text Align=Center, Tone=Default, Variant=Tertiary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/tertiary/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/tertiary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/tertiary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Slim, Text Align=Center, Tone=Default, Variant=Monochrome Plain",
+        "row": 2,
+        "col": 4,
+        "spec": {
+          "type": "root",
+          "name": "Size=Slim, Text Align=Center, Tone=Default, Variant=Monochrome Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "fill": "imported/button/root/background-color/monochromePlain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/monochromePlain/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Slim, Text Align=Center, Tone=Critical, Variant=Secondary",
+        "row": 2,
+        "col": 5,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Center, Tone=Critical, Variant=Secondary",
@@ -10000,7 +15412,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Center, Tone=Critical, Variant=Plain",
         "row": 2,
-        "col": 1,
+        "col": 6,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Center, Tone=Critical, Variant=Plain",
@@ -10079,7 +15491,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Center, Tone=Critical, Variant=Primary",
         "row": 2,
-        "col": 2,
+        "col": 7,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Center, Tone=Critical, Variant=Primary",
@@ -10204,7 +15616,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Center, Tone=Critical, Variant=Tertiary",
         "row": 2,
-        "col": 3,
+        "col": 8,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Center, Tone=Critical, Variant=Tertiary",
@@ -10289,7 +15701,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Center, Tone=Critical, Variant=Monochrome Plain",
         "row": 2,
-        "col": 4,
+        "col": 9,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Center, Tone=Critical, Variant=Monochrome Plain",
@@ -10368,7 +15780,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Center, Tone=Success, Variant=Secondary",
         "row": 2,
-        "col": 5,
+        "col": 10,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Center, Tone=Success, Variant=Secondary",
@@ -10492,7 +15904,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Center, Tone=Success, Variant=Plain",
         "row": 2,
-        "col": 6,
+        "col": 11,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Center, Tone=Success, Variant=Plain",
@@ -10571,7 +15983,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Center, Tone=Success, Variant=Primary",
         "row": 2,
-        "col": 7,
+        "col": 12,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Center, Tone=Success, Variant=Primary",
@@ -10696,7 +16108,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Center, Tone=Success, Variant=Tertiary",
         "row": 2,
-        "col": 8,
+        "col": 13,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Center, Tone=Success, Variant=Tertiary",
@@ -10781,7 +16193,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Center, Tone=Success, Variant=Monochrome Plain",
         "row": 2,
-        "col": 9,
+        "col": 14,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Center, Tone=Success, Variant=Monochrome Plain",
@@ -10858,9 +16270,501 @@ const COMPONENTS = [
         }
       },
       {
+        "name": "Size=Slim, Text Align=Left, Tone=Default, Variant=Secondary",
+        "row": 2,
+        "col": 15,
+        "spec": {
+          "type": "root",
+          "name": "Size=Slim, Text Align=Left, Tone=Default, Variant=Secondary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/secondary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0.7098039215686275,
+                "g": 0.7098039215686275,
+                "b": 0.7098039215686275,
+                "a": 1
+              }
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/secondary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/secondary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Slim, Text Align=Left, Tone=Default, Variant=Plain",
+        "row": 2,
+        "col": 16,
+        "spec": {
+          "type": "root",
+          "name": "Size=Slim, Text Align=Left, Tone=Default, Variant=Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "fill": "imported/button/root/background-color/plain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/plain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/plain/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Slim, Text Align=Left, Tone=Default, Variant=Primary",
+        "row": 2,
+        "col": 17,
+        "spec": {
+          "type": "root",
+          "name": "Size=Slim, Text Align=Left, Tone=Default, Variant=Primary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/primary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.8
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.18823529411764706,
+                "g": 0.18823529411764706,
+                "b": 0.18823529411764706,
+                "a": 1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 0.25
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/primary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-semibold",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/primary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Slim, Text Align=Left, Tone=Default, Variant=Tertiary",
+        "row": 2,
+        "col": 18,
+        "spec": {
+          "type": "root",
+          "name": "Size=Slim, Text Align=Left, Tone=Default, Variant=Tertiary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/tertiary/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/tertiary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/tertiary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Slim, Text Align=Left, Tone=Default, Variant=Monochrome Plain",
+        "row": 2,
+        "col": 19,
+        "spec": {
+          "type": "root",
+          "name": "Size=Slim, Text Align=Left, Tone=Default, Variant=Monochrome Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "fill": "imported/button/root/background-color/monochromePlain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/monochromePlain/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
         "name": "Size=Slim, Text Align=Left, Tone=Critical, Variant=Secondary",
         "row": 2,
-        "col": 10,
+        "col": 20,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Left, Tone=Critical, Variant=Secondary",
@@ -10984,7 +16888,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Left, Tone=Critical, Variant=Plain",
         "row": 2,
-        "col": 11,
+        "col": 21,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Left, Tone=Critical, Variant=Plain",
@@ -11063,7 +16967,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Left, Tone=Critical, Variant=Primary",
         "row": 2,
-        "col": 12,
+        "col": 22,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Left, Tone=Critical, Variant=Primary",
@@ -11188,7 +17092,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Left, Tone=Critical, Variant=Tertiary",
         "row": 2,
-        "col": 13,
+        "col": 23,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Left, Tone=Critical, Variant=Tertiary",
@@ -11273,7 +17177,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Left, Tone=Critical, Variant=Monochrome Plain",
         "row": 2,
-        "col": 14,
+        "col": 24,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Left, Tone=Critical, Variant=Monochrome Plain",
@@ -11352,7 +17256,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Left, Tone=Success, Variant=Secondary",
         "row": 2,
-        "col": 15,
+        "col": 25,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Left, Tone=Success, Variant=Secondary",
@@ -11476,7 +17380,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Left, Tone=Success, Variant=Plain",
         "row": 2,
-        "col": 16,
+        "col": 26,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Left, Tone=Success, Variant=Plain",
@@ -11555,7 +17459,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Left, Tone=Success, Variant=Primary",
         "row": 2,
-        "col": 17,
+        "col": 27,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Left, Tone=Success, Variant=Primary",
@@ -11680,7 +17584,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Left, Tone=Success, Variant=Tertiary",
         "row": 2,
-        "col": 18,
+        "col": 28,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Left, Tone=Success, Variant=Tertiary",
@@ -11765,7 +17669,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Left, Tone=Success, Variant=Monochrome Plain",
         "row": 2,
-        "col": 19,
+        "col": 29,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Left, Tone=Success, Variant=Monochrome Plain",
@@ -11842,9 +17746,501 @@ const COMPONENTS = [
         }
       },
       {
+        "name": "Size=Slim, Text Align=Right, Tone=Default, Variant=Secondary",
+        "row": 2,
+        "col": 30,
+        "spec": {
+          "type": "root",
+          "name": "Size=Slim, Text Align=Right, Tone=Default, Variant=Secondary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/secondary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0.7098039215686275,
+                "g": 0.7098039215686275,
+                "b": 0.7098039215686275,
+                "a": 1
+              }
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/secondary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/secondary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Slim, Text Align=Right, Tone=Default, Variant=Plain",
+        "row": 2,
+        "col": 31,
+        "spec": {
+          "type": "root",
+          "name": "Size=Slim, Text Align=Right, Tone=Default, Variant=Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "fill": "imported/button/root/background-color/plain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/plain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/plain/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Slim, Text Align=Right, Tone=Default, Variant=Primary",
+        "row": 2,
+        "col": 32,
+        "spec": {
+          "type": "root",
+          "name": "Size=Slim, Text Align=Right, Tone=Default, Variant=Primary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/primary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.8
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.18823529411764706,
+                "g": 0.18823529411764706,
+                "b": 0.18823529411764706,
+                "a": 1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 0.25
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/primary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-semibold",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/primary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Slim, Text Align=Right, Tone=Default, Variant=Tertiary",
+        "row": 2,
+        "col": 33,
+        "spec": {
+          "type": "root",
+          "name": "Size=Slim, Text Align=Right, Tone=Default, Variant=Tertiary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/tertiary/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/tertiary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/tertiary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Slim, Text Align=Right, Tone=Default, Variant=Monochrome Plain",
+        "row": 2,
+        "col": 34,
+        "spec": {
+          "type": "root",
+          "name": "Size=Slim, Text Align=Right, Tone=Default, Variant=Monochrome Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "fill": "imported/button/root/background-color/monochromePlain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/monochromePlain/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
         "name": "Size=Slim, Text Align=Right, Tone=Critical, Variant=Secondary",
         "row": 2,
-        "col": 20,
+        "col": 35,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Right, Tone=Critical, Variant=Secondary",
@@ -11968,7 +18364,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Right, Tone=Critical, Variant=Plain",
         "row": 2,
-        "col": 21,
+        "col": 36,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Right, Tone=Critical, Variant=Plain",
@@ -12047,7 +18443,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Right, Tone=Critical, Variant=Primary",
         "row": 2,
-        "col": 22,
+        "col": 37,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Right, Tone=Critical, Variant=Primary",
@@ -12172,7 +18568,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Right, Tone=Critical, Variant=Tertiary",
         "row": 2,
-        "col": 23,
+        "col": 38,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Right, Tone=Critical, Variant=Tertiary",
@@ -12257,7 +18653,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Right, Tone=Critical, Variant=Monochrome Plain",
         "row": 2,
-        "col": 24,
+        "col": 39,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Right, Tone=Critical, Variant=Monochrome Plain",
@@ -12336,7 +18732,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Right, Tone=Success, Variant=Secondary",
         "row": 2,
-        "col": 25,
+        "col": 40,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Right, Tone=Success, Variant=Secondary",
@@ -12460,7 +18856,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Right, Tone=Success, Variant=Plain",
         "row": 2,
-        "col": 26,
+        "col": 41,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Right, Tone=Success, Variant=Plain",
@@ -12539,7 +18935,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Right, Tone=Success, Variant=Primary",
         "row": 2,
-        "col": 27,
+        "col": 42,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Right, Tone=Success, Variant=Primary",
@@ -12664,7 +19060,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Right, Tone=Success, Variant=Tertiary",
         "row": 2,
-        "col": 28,
+        "col": 43,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Right, Tone=Success, Variant=Tertiary",
@@ -12749,7 +19145,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Right, Tone=Success, Variant=Monochrome Plain",
         "row": 2,
-        "col": 29,
+        "col": 44,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Right, Tone=Success, Variant=Monochrome Plain",
@@ -12826,9 +19222,501 @@ const COMPONENTS = [
         }
       },
       {
+        "name": "Size=Slim, Text Align=Start, Tone=Default, Variant=Secondary",
+        "row": 2,
+        "col": 45,
+        "spec": {
+          "type": "root",
+          "name": "Size=Slim, Text Align=Start, Tone=Default, Variant=Secondary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/secondary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0.7098039215686275,
+                "g": 0.7098039215686275,
+                "b": 0.7098039215686275,
+                "a": 1
+              }
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/secondary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/secondary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Slim, Text Align=Start, Tone=Default, Variant=Plain",
+        "row": 2,
+        "col": 46,
+        "spec": {
+          "type": "root",
+          "name": "Size=Slim, Text Align=Start, Tone=Default, Variant=Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "fill": "imported/button/root/background-color/plain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/plain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/plain/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Slim, Text Align=Start, Tone=Default, Variant=Primary",
+        "row": 2,
+        "col": 47,
+        "spec": {
+          "type": "root",
+          "name": "Size=Slim, Text Align=Start, Tone=Default, Variant=Primary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/primary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.8
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.18823529411764706,
+                "g": 0.18823529411764706,
+                "b": 0.18823529411764706,
+                "a": 1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 0.25
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/primary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-semibold",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/primary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Slim, Text Align=Start, Tone=Default, Variant=Tertiary",
+        "row": 2,
+        "col": 48,
+        "spec": {
+          "type": "root",
+          "name": "Size=Slim, Text Align=Start, Tone=Default, Variant=Tertiary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/tertiary/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/tertiary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/tertiary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Slim, Text Align=Start, Tone=Default, Variant=Monochrome Plain",
+        "row": 2,
+        "col": 49,
+        "spec": {
+          "type": "root",
+          "name": "Size=Slim, Text Align=Start, Tone=Default, Variant=Monochrome Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "fill": "imported/button/root/background-color/monochromePlain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/monochromePlain/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
         "name": "Size=Slim, Text Align=Start, Tone=Critical, Variant=Secondary",
         "row": 2,
-        "col": 30,
+        "col": 50,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Start, Tone=Critical, Variant=Secondary",
@@ -12952,7 +19840,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Start, Tone=Critical, Variant=Plain",
         "row": 2,
-        "col": 31,
+        "col": 51,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Start, Tone=Critical, Variant=Plain",
@@ -13031,7 +19919,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Start, Tone=Critical, Variant=Primary",
         "row": 2,
-        "col": 32,
+        "col": 52,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Start, Tone=Critical, Variant=Primary",
@@ -13156,7 +20044,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Start, Tone=Critical, Variant=Tertiary",
         "row": 2,
-        "col": 33,
+        "col": 53,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Start, Tone=Critical, Variant=Tertiary",
@@ -13241,7 +20129,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Start, Tone=Critical, Variant=Monochrome Plain",
         "row": 2,
-        "col": 34,
+        "col": 54,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Start, Tone=Critical, Variant=Monochrome Plain",
@@ -13320,7 +20208,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Start, Tone=Success, Variant=Secondary",
         "row": 2,
-        "col": 35,
+        "col": 55,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Start, Tone=Success, Variant=Secondary",
@@ -13444,7 +20332,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Start, Tone=Success, Variant=Plain",
         "row": 2,
-        "col": 36,
+        "col": 56,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Start, Tone=Success, Variant=Plain",
@@ -13523,7 +20411,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Start, Tone=Success, Variant=Primary",
         "row": 2,
-        "col": 37,
+        "col": 57,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Start, Tone=Success, Variant=Primary",
@@ -13648,7 +20536,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Start, Tone=Success, Variant=Tertiary",
         "row": 2,
-        "col": 38,
+        "col": 58,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Start, Tone=Success, Variant=Tertiary",
@@ -13733,7 +20621,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Start, Tone=Success, Variant=Monochrome Plain",
         "row": 2,
-        "col": 39,
+        "col": 59,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Start, Tone=Success, Variant=Monochrome Plain",
@@ -13810,9 +20698,501 @@ const COMPONENTS = [
         }
       },
       {
+        "name": "Size=Slim, Text Align=End, Tone=Default, Variant=Secondary",
+        "row": 2,
+        "col": 60,
+        "spec": {
+          "type": "root",
+          "name": "Size=Slim, Text Align=End, Tone=Default, Variant=Secondary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/secondary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0.7098039215686275,
+                "g": 0.7098039215686275,
+                "b": 0.7098039215686275,
+                "a": 1
+              }
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/secondary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/secondary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Slim, Text Align=End, Tone=Default, Variant=Plain",
+        "row": 2,
+        "col": 61,
+        "spec": {
+          "type": "root",
+          "name": "Size=Slim, Text Align=End, Tone=Default, Variant=Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "fill": "imported/button/root/background-color/plain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/plain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/plain/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Slim, Text Align=End, Tone=Default, Variant=Primary",
+        "row": 2,
+        "col": 62,
+        "spec": {
+          "type": "root",
+          "name": "Size=Slim, Text Align=End, Tone=Default, Variant=Primary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/primary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.8
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.18823529411764706,
+                "g": 0.18823529411764706,
+                "b": 0.18823529411764706,
+                "a": 1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 0.25
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/primary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-semibold",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/primary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Slim, Text Align=End, Tone=Default, Variant=Tertiary",
+        "row": 2,
+        "col": 63,
+        "spec": {
+          "type": "root",
+          "name": "Size=Slim, Text Align=End, Tone=Default, Variant=Tertiary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/tertiary/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/tertiary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/tertiary/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Slim, Text Align=End, Tone=Default, Variant=Monochrome Plain",
+        "row": 2,
+        "col": 64,
+        "spec": {
+          "type": "root",
+          "name": "Size=Slim, Text Align=End, Tone=Default, Variant=Monochrome Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-800",
+            "minWidth": "p/width-800"
+          },
+          "fill": "imported/button/root/background-color/monochromePlain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-sm-font-line-height",
+              "textFill": "imported/button/root/color/monochromePlain/none",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
         "name": "Size=Slim, Text Align=End, Tone=Critical, Variant=Secondary",
         "row": 2,
-        "col": 40,
+        "col": 65,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=End, Tone=Critical, Variant=Secondary",
@@ -13936,7 +21316,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=End, Tone=Critical, Variant=Plain",
         "row": 2,
-        "col": 41,
+        "col": 66,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=End, Tone=Critical, Variant=Plain",
@@ -14015,7 +21395,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=End, Tone=Critical, Variant=Primary",
         "row": 2,
-        "col": 42,
+        "col": 67,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=End, Tone=Critical, Variant=Primary",
@@ -14140,7 +21520,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=End, Tone=Critical, Variant=Tertiary",
         "row": 2,
-        "col": 43,
+        "col": 68,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=End, Tone=Critical, Variant=Tertiary",
@@ -14225,7 +21605,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=End, Tone=Critical, Variant=Monochrome Plain",
         "row": 2,
-        "col": 44,
+        "col": 69,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=End, Tone=Critical, Variant=Monochrome Plain",
@@ -14304,7 +21684,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=End, Tone=Success, Variant=Secondary",
         "row": 2,
-        "col": 45,
+        "col": 70,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=End, Tone=Success, Variant=Secondary",
@@ -14428,7 +21808,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=End, Tone=Success, Variant=Plain",
         "row": 2,
-        "col": 46,
+        "col": 71,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=End, Tone=Success, Variant=Plain",
@@ -14507,7 +21887,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=End, Tone=Success, Variant=Primary",
         "row": 2,
-        "col": 47,
+        "col": 72,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=End, Tone=Success, Variant=Primary",
@@ -14632,7 +22012,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=End, Tone=Success, Variant=Tertiary",
         "row": 2,
-        "col": 48,
+        "col": 73,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=End, Tone=Success, Variant=Tertiary",
@@ -14717,7 +22097,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=End, Tone=Success, Variant=Monochrome Plain",
         "row": 2,
-        "col": 49,
+        "col": 74,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=End, Tone=Success, Variant=Monochrome Plain",
@@ -14794,9 +22174,501 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Size=Large, Text Align=Center, Tone=Critical, Variant=Secondary",
+        "name": "Size=Large, Text Align=Center, Tone=Default, Variant=Secondary",
         "row": 3,
         "col": 0,
+        "spec": {
+          "type": "root",
+          "name": "Size=Large, Text Align=Center, Tone=Default, Variant=Secondary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
+            "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/secondary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0.7098039215686275,
+                "g": 0.7098039215686275,
+                "b": 0.7098039215686275,
+                "a": 1
+              }
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/secondary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 13,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-md-font-line-height",
+              "textFill": "imported/button/root/color/secondary/none",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Large, Text Align=Center, Tone=Default, Variant=Plain",
+        "row": 3,
+        "col": 1,
+        "spec": {
+          "type": "root",
+          "name": "Size=Large, Text Align=Center, Tone=Default, Variant=Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
+            "minWidth": "p/height-900"
+          },
+          "fill": "imported/button/root/background-color/plain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/plain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 13,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-md-font-line-height",
+              "textFill": "imported/button/root/color/plain/none",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Large, Text Align=Center, Tone=Default, Variant=Primary",
+        "row": 3,
+        "col": 2,
+        "spec": {
+          "type": "root",
+          "name": "Size=Large, Text Align=Center, Tone=Default, Variant=Primary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
+            "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/primary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.8
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.18823529411764706,
+                "g": 0.18823529411764706,
+                "b": 0.18823529411764706,
+                "a": 1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 0.25
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/primary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 13,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
+              "fontWeightVar": "p/font-weight-semibold",
+              "lineHeightVar": "p/text-body-md-font-line-height",
+              "textFill": "imported/button/root/color/primary/none",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Large, Text Align=Center, Tone=Default, Variant=Tertiary",
+        "row": 3,
+        "col": 3,
+        "spec": {
+          "type": "root",
+          "name": "Size=Large, Text Align=Center, Tone=Default, Variant=Tertiary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
+            "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/tertiary/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/tertiary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 13,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-md-font-line-height",
+              "textFill": "imported/button/root/color/tertiary/none",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Large, Text Align=Center, Tone=Default, Variant=Monochrome Plain",
+        "row": 3,
+        "col": 4,
+        "spec": {
+          "type": "root",
+          "name": "Size=Large, Text Align=Center, Tone=Default, Variant=Monochrome Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
+            "minWidth": "p/height-900"
+          },
+          "fill": "imported/button/root/background-color/monochromePlain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 13,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-md-font-line-height",
+              "textFill": "imported/button/root/color/monochromePlain/none",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Large, Text Align=Center, Tone=Critical, Variant=Secondary",
+        "row": 3,
+        "col": 5,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Center, Tone=Critical, Variant=Secondary",
@@ -14920,7 +22792,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Center, Tone=Critical, Variant=Plain",
         "row": 3,
-        "col": 1,
+        "col": 6,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Center, Tone=Critical, Variant=Plain",
@@ -14999,7 +22871,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Center, Tone=Critical, Variant=Primary",
         "row": 3,
-        "col": 2,
+        "col": 7,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Center, Tone=Critical, Variant=Primary",
@@ -15124,7 +22996,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Center, Tone=Critical, Variant=Tertiary",
         "row": 3,
-        "col": 3,
+        "col": 8,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Center, Tone=Critical, Variant=Tertiary",
@@ -15209,7 +23081,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Center, Tone=Critical, Variant=Monochrome Plain",
         "row": 3,
-        "col": 4,
+        "col": 9,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Center, Tone=Critical, Variant=Monochrome Plain",
@@ -15288,7 +23160,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Center, Tone=Success, Variant=Secondary",
         "row": 3,
-        "col": 5,
+        "col": 10,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Center, Tone=Success, Variant=Secondary",
@@ -15412,7 +23284,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Center, Tone=Success, Variant=Plain",
         "row": 3,
-        "col": 6,
+        "col": 11,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Center, Tone=Success, Variant=Plain",
@@ -15491,7 +23363,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Center, Tone=Success, Variant=Primary",
         "row": 3,
-        "col": 7,
+        "col": 12,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Center, Tone=Success, Variant=Primary",
@@ -15616,7 +23488,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Center, Tone=Success, Variant=Tertiary",
         "row": 3,
-        "col": 8,
+        "col": 13,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Center, Tone=Success, Variant=Tertiary",
@@ -15701,7 +23573,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Center, Tone=Success, Variant=Monochrome Plain",
         "row": 3,
-        "col": 9,
+        "col": 14,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Center, Tone=Success, Variant=Monochrome Plain",
@@ -15778,9 +23650,501 @@ const COMPONENTS = [
         }
       },
       {
+        "name": "Size=Large, Text Align=Left, Tone=Default, Variant=Secondary",
+        "row": 3,
+        "col": 15,
+        "spec": {
+          "type": "root",
+          "name": "Size=Large, Text Align=Left, Tone=Default, Variant=Secondary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
+            "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/secondary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0.7098039215686275,
+                "g": 0.7098039215686275,
+                "b": 0.7098039215686275,
+                "a": 1
+              }
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/secondary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 13,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-md-font-line-height",
+              "textFill": "imported/button/root/color/secondary/none",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Large, Text Align=Left, Tone=Default, Variant=Plain",
+        "row": 3,
+        "col": 16,
+        "spec": {
+          "type": "root",
+          "name": "Size=Large, Text Align=Left, Tone=Default, Variant=Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
+            "minWidth": "p/height-900"
+          },
+          "fill": "imported/button/root/background-color/plain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/plain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 13,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-md-font-line-height",
+              "textFill": "imported/button/root/color/plain/none",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Large, Text Align=Left, Tone=Default, Variant=Primary",
+        "row": 3,
+        "col": 17,
+        "spec": {
+          "type": "root",
+          "name": "Size=Large, Text Align=Left, Tone=Default, Variant=Primary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
+            "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/primary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.8
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.18823529411764706,
+                "g": 0.18823529411764706,
+                "b": 0.18823529411764706,
+                "a": 1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 0.25
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/primary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 13,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
+              "fontWeightVar": "p/font-weight-semibold",
+              "lineHeightVar": "p/text-body-md-font-line-height",
+              "textFill": "imported/button/root/color/primary/none",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Large, Text Align=Left, Tone=Default, Variant=Tertiary",
+        "row": 3,
+        "col": 18,
+        "spec": {
+          "type": "root",
+          "name": "Size=Large, Text Align=Left, Tone=Default, Variant=Tertiary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
+            "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/tertiary/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/tertiary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 13,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-md-font-line-height",
+              "textFill": "imported/button/root/color/tertiary/none",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Large, Text Align=Left, Tone=Default, Variant=Monochrome Plain",
+        "row": 3,
+        "col": 19,
+        "spec": {
+          "type": "root",
+          "name": "Size=Large, Text Align=Left, Tone=Default, Variant=Monochrome Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
+            "minWidth": "p/height-900"
+          },
+          "fill": "imported/button/root/background-color/monochromePlain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 13,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-md-font-line-height",
+              "textFill": "imported/button/root/color/monochromePlain/none",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
         "name": "Size=Large, Text Align=Left, Tone=Critical, Variant=Secondary",
         "row": 3,
-        "col": 10,
+        "col": 20,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Left, Tone=Critical, Variant=Secondary",
@@ -15904,7 +24268,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Left, Tone=Critical, Variant=Plain",
         "row": 3,
-        "col": 11,
+        "col": 21,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Left, Tone=Critical, Variant=Plain",
@@ -15983,7 +24347,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Left, Tone=Critical, Variant=Primary",
         "row": 3,
-        "col": 12,
+        "col": 22,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Left, Tone=Critical, Variant=Primary",
@@ -16108,7 +24472,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Left, Tone=Critical, Variant=Tertiary",
         "row": 3,
-        "col": 13,
+        "col": 23,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Left, Tone=Critical, Variant=Tertiary",
@@ -16193,7 +24557,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Left, Tone=Critical, Variant=Monochrome Plain",
         "row": 3,
-        "col": 14,
+        "col": 24,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Left, Tone=Critical, Variant=Monochrome Plain",
@@ -16272,7 +24636,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Left, Tone=Success, Variant=Secondary",
         "row": 3,
-        "col": 15,
+        "col": 25,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Left, Tone=Success, Variant=Secondary",
@@ -16396,7 +24760,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Left, Tone=Success, Variant=Plain",
         "row": 3,
-        "col": 16,
+        "col": 26,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Left, Tone=Success, Variant=Plain",
@@ -16475,7 +24839,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Left, Tone=Success, Variant=Primary",
         "row": 3,
-        "col": 17,
+        "col": 27,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Left, Tone=Success, Variant=Primary",
@@ -16600,7 +24964,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Left, Tone=Success, Variant=Tertiary",
         "row": 3,
-        "col": 18,
+        "col": 28,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Left, Tone=Success, Variant=Tertiary",
@@ -16685,7 +25049,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Left, Tone=Success, Variant=Monochrome Plain",
         "row": 3,
-        "col": 19,
+        "col": 29,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Left, Tone=Success, Variant=Monochrome Plain",
@@ -16762,9 +25126,501 @@ const COMPONENTS = [
         }
       },
       {
+        "name": "Size=Large, Text Align=Right, Tone=Default, Variant=Secondary",
+        "row": 3,
+        "col": 30,
+        "spec": {
+          "type": "root",
+          "name": "Size=Large, Text Align=Right, Tone=Default, Variant=Secondary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
+            "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/secondary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0.7098039215686275,
+                "g": 0.7098039215686275,
+                "b": 0.7098039215686275,
+                "a": 1
+              }
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/secondary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 13,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-md-font-line-height",
+              "textFill": "imported/button/root/color/secondary/none",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Large, Text Align=Right, Tone=Default, Variant=Plain",
+        "row": 3,
+        "col": 31,
+        "spec": {
+          "type": "root",
+          "name": "Size=Large, Text Align=Right, Tone=Default, Variant=Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
+            "minWidth": "p/height-900"
+          },
+          "fill": "imported/button/root/background-color/plain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/plain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 13,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-md-font-line-height",
+              "textFill": "imported/button/root/color/plain/none",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Large, Text Align=Right, Tone=Default, Variant=Primary",
+        "row": 3,
+        "col": 32,
+        "spec": {
+          "type": "root",
+          "name": "Size=Large, Text Align=Right, Tone=Default, Variant=Primary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
+            "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/primary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.8
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.18823529411764706,
+                "g": 0.18823529411764706,
+                "b": 0.18823529411764706,
+                "a": 1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 0.25
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/primary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 13,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
+              "fontWeightVar": "p/font-weight-semibold",
+              "lineHeightVar": "p/text-body-md-font-line-height",
+              "textFill": "imported/button/root/color/primary/none",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Large, Text Align=Right, Tone=Default, Variant=Tertiary",
+        "row": 3,
+        "col": 33,
+        "spec": {
+          "type": "root",
+          "name": "Size=Large, Text Align=Right, Tone=Default, Variant=Tertiary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
+            "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/tertiary/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/tertiary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 13,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-md-font-line-height",
+              "textFill": "imported/button/root/color/tertiary/none",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Large, Text Align=Right, Tone=Default, Variant=Monochrome Plain",
+        "row": 3,
+        "col": 34,
+        "spec": {
+          "type": "root",
+          "name": "Size=Large, Text Align=Right, Tone=Default, Variant=Monochrome Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
+            "minWidth": "p/height-900"
+          },
+          "fill": "imported/button/root/background-color/monochromePlain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 13,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-md-font-line-height",
+              "textFill": "imported/button/root/color/monochromePlain/none",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
         "name": "Size=Large, Text Align=Right, Tone=Critical, Variant=Secondary",
         "row": 3,
-        "col": 20,
+        "col": 35,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Right, Tone=Critical, Variant=Secondary",
@@ -16888,7 +25744,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Right, Tone=Critical, Variant=Plain",
         "row": 3,
-        "col": 21,
+        "col": 36,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Right, Tone=Critical, Variant=Plain",
@@ -16967,7 +25823,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Right, Tone=Critical, Variant=Primary",
         "row": 3,
-        "col": 22,
+        "col": 37,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Right, Tone=Critical, Variant=Primary",
@@ -17092,7 +25948,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Right, Tone=Critical, Variant=Tertiary",
         "row": 3,
-        "col": 23,
+        "col": 38,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Right, Tone=Critical, Variant=Tertiary",
@@ -17177,7 +26033,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Right, Tone=Critical, Variant=Monochrome Plain",
         "row": 3,
-        "col": 24,
+        "col": 39,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Right, Tone=Critical, Variant=Monochrome Plain",
@@ -17256,7 +26112,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Right, Tone=Success, Variant=Secondary",
         "row": 3,
-        "col": 25,
+        "col": 40,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Right, Tone=Success, Variant=Secondary",
@@ -17380,7 +26236,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Right, Tone=Success, Variant=Plain",
         "row": 3,
-        "col": 26,
+        "col": 41,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Right, Tone=Success, Variant=Plain",
@@ -17459,7 +26315,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Right, Tone=Success, Variant=Primary",
         "row": 3,
-        "col": 27,
+        "col": 42,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Right, Tone=Success, Variant=Primary",
@@ -17584,7 +26440,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Right, Tone=Success, Variant=Tertiary",
         "row": 3,
-        "col": 28,
+        "col": 43,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Right, Tone=Success, Variant=Tertiary",
@@ -17669,7 +26525,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Right, Tone=Success, Variant=Monochrome Plain",
         "row": 3,
-        "col": 29,
+        "col": 44,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Right, Tone=Success, Variant=Monochrome Plain",
@@ -17746,9 +26602,501 @@ const COMPONENTS = [
         }
       },
       {
+        "name": "Size=Large, Text Align=Start, Tone=Default, Variant=Secondary",
+        "row": 3,
+        "col": 45,
+        "spec": {
+          "type": "root",
+          "name": "Size=Large, Text Align=Start, Tone=Default, Variant=Secondary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
+            "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/secondary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0.7098039215686275,
+                "g": 0.7098039215686275,
+                "b": 0.7098039215686275,
+                "a": 1
+              }
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/secondary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 13,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-md-font-line-height",
+              "textFill": "imported/button/root/color/secondary/none",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Large, Text Align=Start, Tone=Default, Variant=Plain",
+        "row": 3,
+        "col": 46,
+        "spec": {
+          "type": "root",
+          "name": "Size=Large, Text Align=Start, Tone=Default, Variant=Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
+            "minWidth": "p/height-900"
+          },
+          "fill": "imported/button/root/background-color/plain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/plain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 13,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-md-font-line-height",
+              "textFill": "imported/button/root/color/plain/none",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Large, Text Align=Start, Tone=Default, Variant=Primary",
+        "row": 3,
+        "col": 47,
+        "spec": {
+          "type": "root",
+          "name": "Size=Large, Text Align=Start, Tone=Default, Variant=Primary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
+            "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/primary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.8
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.18823529411764706,
+                "g": 0.18823529411764706,
+                "b": 0.18823529411764706,
+                "a": 1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 0.25
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/primary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 13,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
+              "fontWeightVar": "p/font-weight-semibold",
+              "lineHeightVar": "p/text-body-md-font-line-height",
+              "textFill": "imported/button/root/color/primary/none",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Large, Text Align=Start, Tone=Default, Variant=Tertiary",
+        "row": 3,
+        "col": 48,
+        "spec": {
+          "type": "root",
+          "name": "Size=Large, Text Align=Start, Tone=Default, Variant=Tertiary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
+            "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/tertiary/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/tertiary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 13,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-md-font-line-height",
+              "textFill": "imported/button/root/color/tertiary/none",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Large, Text Align=Start, Tone=Default, Variant=Monochrome Plain",
+        "row": 3,
+        "col": 49,
+        "spec": {
+          "type": "root",
+          "name": "Size=Large, Text Align=Start, Tone=Default, Variant=Monochrome Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
+            "minWidth": "p/height-900"
+          },
+          "fill": "imported/button/root/background-color/monochromePlain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 13,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-md-font-line-height",
+              "textFill": "imported/button/root/color/monochromePlain/none",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
         "name": "Size=Large, Text Align=Start, Tone=Critical, Variant=Secondary",
         "row": 3,
-        "col": 30,
+        "col": 50,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Start, Tone=Critical, Variant=Secondary",
@@ -17872,7 +27220,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Start, Tone=Critical, Variant=Plain",
         "row": 3,
-        "col": 31,
+        "col": 51,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Start, Tone=Critical, Variant=Plain",
@@ -17951,7 +27299,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Start, Tone=Critical, Variant=Primary",
         "row": 3,
-        "col": 32,
+        "col": 52,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Start, Tone=Critical, Variant=Primary",
@@ -18076,7 +27424,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Start, Tone=Critical, Variant=Tertiary",
         "row": 3,
-        "col": 33,
+        "col": 53,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Start, Tone=Critical, Variant=Tertiary",
@@ -18161,7 +27509,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Start, Tone=Critical, Variant=Monochrome Plain",
         "row": 3,
-        "col": 34,
+        "col": 54,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Start, Tone=Critical, Variant=Monochrome Plain",
@@ -18240,7 +27588,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Start, Tone=Success, Variant=Secondary",
         "row": 3,
-        "col": 35,
+        "col": 55,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Start, Tone=Success, Variant=Secondary",
@@ -18364,7 +27712,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Start, Tone=Success, Variant=Plain",
         "row": 3,
-        "col": 36,
+        "col": 56,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Start, Tone=Success, Variant=Plain",
@@ -18443,7 +27791,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Start, Tone=Success, Variant=Primary",
         "row": 3,
-        "col": 37,
+        "col": 57,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Start, Tone=Success, Variant=Primary",
@@ -18568,7 +27916,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Start, Tone=Success, Variant=Tertiary",
         "row": 3,
-        "col": 38,
+        "col": 58,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Start, Tone=Success, Variant=Tertiary",
@@ -18653,7 +28001,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Start, Tone=Success, Variant=Monochrome Plain",
         "row": 3,
-        "col": 39,
+        "col": 59,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Start, Tone=Success, Variant=Monochrome Plain",
@@ -18730,9 +28078,501 @@ const COMPONENTS = [
         }
       },
       {
+        "name": "Size=Large, Text Align=End, Tone=Default, Variant=Secondary",
+        "row": 3,
+        "col": 60,
+        "spec": {
+          "type": "root",
+          "name": "Size=Large, Text Align=End, Tone=Default, Variant=Secondary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
+            "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/secondary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0.7098039215686275,
+                "g": 0.7098039215686275,
+                "b": 0.7098039215686275,
+                "a": 1
+              }
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/secondary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 13,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-md-font-line-height",
+              "textFill": "imported/button/root/color/secondary/none",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Large, Text Align=End, Tone=Default, Variant=Plain",
+        "row": 3,
+        "col": 61,
+        "spec": {
+          "type": "root",
+          "name": "Size=Large, Text Align=End, Tone=Default, Variant=Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
+            "minWidth": "p/height-900"
+          },
+          "fill": "imported/button/root/background-color/plain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/plain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 13,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-md-font-line-height",
+              "textFill": "imported/button/root/color/plain/none",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Large, Text Align=End, Tone=Default, Variant=Primary",
+        "row": 3,
+        "col": 62,
+        "spec": {
+          "type": "root",
+          "name": "Size=Large, Text Align=End, Tone=Default, Variant=Primary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
+            "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/primary/none",
+          "effectStack": [
+            {
+              "inner": true,
+              "x": 0,
+              "y": -1,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.8
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.18823529411764706,
+                "g": 0.18823529411764706,
+                "b": 0.18823529411764706,
+                "a": 1
+              },
+              "spread": 1
+            },
+            {
+              "inner": true,
+              "x": 0,
+              "y": 0.5,
+              "radius": 0,
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 0.25
+              },
+              "spread": 1.5
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/primary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 13,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
+              "fontWeightVar": "p/font-weight-semibold",
+              "lineHeightVar": "p/text-body-md-font-line-height",
+              "textFill": "imported/button/root/color/primary/none",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Large, Text Align=End, Tone=Default, Variant=Tertiary",
+        "row": 3,
+        "col": 63,
+        "spec": {
+          "type": "root",
+          "name": "Size=Large, Text Align=End, Tone=Default, Variant=Tertiary",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
+            "minWidth": "p/height-900"
+          },
+          "margins": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "fill": "imported/button/root/background-color/tertiary/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/tertiary/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 13,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
+              "fontWeightVar": "p/font-weight-medium",
+              "lineHeightVar": "p/text-body-md-font-line-height",
+              "textFill": "imported/button/root/color/tertiary/none",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Large, Text Align=End, Tone=Default, Variant=Monochrome Plain",
+        "row": 3,
+        "col": 64,
+        "spec": {
+          "type": "root",
+          "name": "Size=Large, Text Align=End, Tone=Default, Variant=Monochrome Plain",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "bindings": {
+            "topLeftRadius": "p/border-radius-200",
+            "topRightRadius": "p/border-radius-200",
+            "bottomLeftRadius": "p/border-radius-200",
+            "bottomRightRadius": "p/border-radius-200",
+            "itemSpacing": "p/space-050",
+            "strokeBottomWeight": "imported/shared/size-0",
+            "strokeLeftWeight": "imported/shared/size-0",
+            "strokeRightWeight": "imported/shared/size-0",
+            "strokeTopWeight": "imported/shared/size-0",
+            "paddingTop": "p/space-150",
+            "paddingBottom": "p/space-150",
+            "paddingLeft": "p/space-300",
+            "paddingRight": "p/space-300",
+            "minHeight": "p/height-900",
+            "minWidth": "p/height-900"
+          },
+          "fill": "imported/button/root/background-color/monochromePlain/none",
+          "effectStack": [],
+          "children": [
+            {
+              "type": "frame",
+              "name": "icon",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "MIN",
+                "counter": "MIN"
+              },
+              "margins": {
+                "bottom": -2,
+                "top": -2
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "icon-2",
+                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
+                  "iconSize": 20,
+                  "visibleProp": "Show WithIcon",
+                  "visibleDefault": false
+                }
+              ],
+              "visibleProp": "Show WithIcon",
+              "visibleDefault": false
+            },
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Button",
+              "fontSize": 13,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
+              "fontWeightVar": "p/font-weight-regular",
+              "lineHeightVar": "p/text-body-md-font-line-height",
+              "textFill": "imported/button/root/color/monochromePlain/none",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
+              "letterSpacing": 0,
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
+            }
+          ]
+        }
+      },
+      {
         "name": "Size=Large, Text Align=End, Tone=Critical, Variant=Secondary",
         "row": 3,
-        "col": 40,
+        "col": 65,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=End, Tone=Critical, Variant=Secondary",
@@ -18856,7 +28696,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=End, Tone=Critical, Variant=Plain",
         "row": 3,
-        "col": 41,
+        "col": 66,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=End, Tone=Critical, Variant=Plain",
@@ -18935,7 +28775,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=End, Tone=Critical, Variant=Primary",
         "row": 3,
-        "col": 42,
+        "col": 67,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=End, Tone=Critical, Variant=Primary",
@@ -19060,7 +28900,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=End, Tone=Critical, Variant=Tertiary",
         "row": 3,
-        "col": 43,
+        "col": 68,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=End, Tone=Critical, Variant=Tertiary",
@@ -19145,7 +28985,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=End, Tone=Critical, Variant=Monochrome Plain",
         "row": 3,
-        "col": 44,
+        "col": 69,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=End, Tone=Critical, Variant=Monochrome Plain",
@@ -19224,7 +29064,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=End, Tone=Success, Variant=Secondary",
         "row": 3,
-        "col": 45,
+        "col": 70,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=End, Tone=Success, Variant=Secondary",
@@ -19348,7 +29188,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=End, Tone=Success, Variant=Plain",
         "row": 3,
-        "col": 46,
+        "col": 71,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=End, Tone=Success, Variant=Plain",
@@ -19427,7 +29267,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=End, Tone=Success, Variant=Primary",
         "row": 3,
-        "col": 47,
+        "col": 72,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=End, Tone=Success, Variant=Primary",
@@ -19552,7 +29392,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=End, Tone=Success, Variant=Tertiary",
         "row": 3,
-        "col": 48,
+        "col": 73,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=End, Tone=Success, Variant=Tertiary",
@@ -19637,7 +29477,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=End, Tone=Success, Variant=Monochrome Plain",
         "row": 3,
-        "col": 49,
+        "col": 74,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=End, Tone=Success, Variant=Monochrome Plain",
@@ -19729,12 +29569,12 @@ const COMPONENTS = [
     },
     "stateVariants": [
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Disabled",
+        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Disabled",
         "row": 0,
-        "col": 50,
+        "col": 75,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Disabled",
+          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Disabled",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -19814,12 +29654,12 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain, State=Disabled",
+        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain, State=Disabled",
         "row": 0,
-        "col": 51,
+        "col": 76,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain, State=Disabled",
+          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain, State=Disabled",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -19893,12 +29733,12 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary, State=Disabled",
+        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Disabled",
         "row": 0,
-        "col": 52,
+        "col": 77,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary, State=Disabled",
+          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Disabled",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -19978,12 +29818,12 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary, State=Disabled",
+        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary, State=Disabled",
         "row": 0,
-        "col": 53,
+        "col": 78,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary, State=Disabled",
+          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary, State=Disabled",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -20063,12 +29903,12 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Disabled",
+        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain, State=Disabled",
         "row": 0,
-        "col": 54,
+        "col": 79,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Disabled",
+          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain, State=Disabled",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -20142,12 +29982,12 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Focus Visible",
+        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Focus Visible",
         "row": 0,
-        "col": 55,
+        "col": 80,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Focus Visible",
+          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Focus Visible",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -20269,12 +30109,12 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain, State=Focus Visible",
+        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain, State=Focus Visible",
         "row": 0,
-        "col": 56,
+        "col": 81,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain, State=Focus Visible",
+          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain, State=Focus Visible",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -20351,12 +30191,12 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary, State=Focus Visible",
+        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Focus Visible",
         "row": 0,
-        "col": 57,
+        "col": 82,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary, State=Focus Visible",
+          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Focus Visible",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -20394,9 +30234,9 @@ const COMPONENTS = [
               "y": -1,
               "radius": 0,
               "color": {
-                "r": 0.5568627450980392,
-                "g": 0.12156862745098039,
-                "b": 0.043137254901960784,
+                "r": 0,
+                "g": 0,
+                "b": 0,
                 "a": 0.8
               },
               "spread": 1
@@ -20407,10 +30247,10 @@ const COMPONENTS = [
               "y": 0,
               "radius": 0,
               "color": {
-                "r": 0.7098039215686275,
-                "g": 0.14901960784313725,
-                "b": 0.043137254901960784,
-                "a": 0.8
+                "r": 0.18823529411764706,
+                "g": 0.18823529411764706,
+                "b": 0.18823529411764706,
+                "a": 1
               },
               "spread": 1
             },
@@ -20423,7 +30263,7 @@ const COMPONENTS = [
                 "r": 1,
                 "g": 1,
                 "b": 1,
-                "a": 0.35
+                "a": 0.25
               },
               "spread": 1.5
             }
@@ -20479,12 +30319,12 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary, State=Focus Visible",
+        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary, State=Focus Visible",
         "row": 0,
-        "col": 58,
+        "col": 83,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary, State=Focus Visible",
+          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary, State=Focus Visible",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -20567,12 +30407,12 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Focus Visible",
+        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain, State=Focus Visible",
         "row": 0,
-        "col": 59,
+        "col": 84,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Focus Visible",
+          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain, State=Focus Visible",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -20649,12 +30489,12 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Active",
+        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Active",
         "row": 0,
-        "col": 60,
+        "col": 85,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Active",
+          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Active",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -20771,12 +30611,12 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain, State=Active",
+        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain, State=Active",
         "row": 0,
-        "col": 61,
+        "col": 86,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain, State=Active",
+          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain, State=Active",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -20850,12 +30690,12 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary, State=Active",
+        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Active",
         "row": 0,
-        "col": 62,
+        "col": 87,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary, State=Active",
+          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Active",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -20948,12 +30788,12 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary, State=Active",
+        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary, State=Active",
         "row": 0,
-        "col": 63,
+        "col": 88,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary, State=Active",
+          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary, State=Active",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -21033,12 +30873,12 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Active",
+        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain, State=Active",
         "row": 0,
-        "col": 64,
+        "col": 89,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Active",
+          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain, State=Active",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -21112,12 +30952,12 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Hover",
+        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Hover",
         "row": 0,
-        "col": 65,
+        "col": 90,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Hover",
+          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Hover",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -21236,12 +31076,12 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain, State=Hover",
+        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain, State=Hover",
         "row": 0,
-        "col": 66,
+        "col": 91,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain, State=Hover",
+          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain, State=Hover",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -21315,12 +31155,12 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary, State=Hover",
+        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Hover",
         "row": 0,
-        "col": 67,
+        "col": 92,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary, State=Hover",
+          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Hover",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -21357,9 +31197,9 @@ const COMPONENTS = [
               "y": -1,
               "radius": 0,
               "color": {
-                "r": 0.5568627450980392,
-                "g": 0.12156862745098039,
-                "b": 0.043137254901960784,
+                "r": 0,
+                "g": 0,
+                "b": 0,
                 "a": 0.8
               },
               "spread": 1
@@ -21370,10 +31210,10 @@ const COMPONENTS = [
               "y": 0,
               "radius": 0,
               "color": {
-                "r": 0.7098039215686275,
-                "g": 0.14901960784313725,
-                "b": 0.043137254901960784,
-                "a": 0.8
+                "r": 0.18823529411764706,
+                "g": 0.18823529411764706,
+                "b": 0.18823529411764706,
+                "a": 1
               },
               "spread": 1
             },
@@ -21386,7 +31226,7 @@ const COMPONENTS = [
                 "r": 1,
                 "g": 1,
                 "b": 1,
-                "a": 0.35
+                "a": 0.25
               },
               "spread": 1.5
             }
@@ -21440,12 +31280,12 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary, State=Hover",
+        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary, State=Hover",
         "row": 0,
-        "col": 68,
+        "col": 93,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary, State=Hover",
+          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary, State=Hover",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -21525,12 +31365,12 @@ const COMPONENTS = [
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Hover",
+        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain, State=Hover",
         "row": 0,
-        "col": 69,
+        "col": 94,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Hover",
+          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain, State=Hover",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -21617,59 +31457,59 @@ const COMPONENTS = [
       "pinned": {
         "Size": "Medium",
         "Text Align": "Center",
-        "Tone": "Critical"
+        "Tone": "Default"
       }
     },
     "stateReactions": [
       {
-        "from": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Default",
+        "from": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Default",
         "trigger": "ON_HOVER",
-        "to": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Hover"
+        "to": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Hover"
       },
       {
-        "from": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Default",
+        "from": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Default",
         "trigger": "ON_PRESS",
-        "to": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Active"
+        "to": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Active"
       },
       {
-        "from": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain, State=Default",
+        "from": "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain, State=Default",
         "trigger": "ON_HOVER",
-        "to": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain, State=Hover"
+        "to": "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain, State=Hover"
       },
       {
-        "from": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain, State=Default",
+        "from": "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain, State=Default",
         "trigger": "ON_PRESS",
-        "to": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain, State=Active"
+        "to": "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain, State=Active"
       },
       {
-        "from": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary, State=Default",
+        "from": "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Default",
         "trigger": "ON_HOVER",
-        "to": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary, State=Hover"
+        "to": "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Hover"
       },
       {
-        "from": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary, State=Default",
+        "from": "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Default",
         "trigger": "ON_PRESS",
-        "to": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary, State=Active"
+        "to": "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Active"
       },
       {
-        "from": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary, State=Default",
+        "from": "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary, State=Default",
         "trigger": "ON_HOVER",
-        "to": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary, State=Hover"
+        "to": "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary, State=Hover"
       },
       {
-        "from": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary, State=Default",
+        "from": "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary, State=Default",
         "trigger": "ON_PRESS",
-        "to": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary, State=Active"
+        "to": "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary, State=Active"
       },
       {
-        "from": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Default",
+        "from": "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain, State=Default",
         "trigger": "ON_HOVER",
-        "to": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Hover"
+        "to": "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain, State=Hover"
       },
       {
-        "from": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Default",
+        "from": "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain, State=Default",
         "trigger": "ON_PRESS",
-        "to": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Active"
+        "to": "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain, State=Active"
       }
     ],
     "codeOnlyFacts": [
@@ -21680,8 +31520,8 @@ const COMPONENTS = [
         "value": "rgba(0, 46, 106, 1)",
         "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -21691,8 +31531,8 @@ const COMPONENTS = [
         "value": "rgba(181, 181, 181, 1)",
         "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -21702,8 +31542,8 @@ const COMPONENTS = [
         "value": "rgba(0, 66, 153, 1)",
         "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -21713,8 +31553,8 @@ const COMPONENTS = [
         "value": "rgba(0, 66, 153, 1)",
         "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -21724,8 +31564,8 @@ const COMPONENTS = [
         "value": "rgba(0, 46, 106, 1)",
         "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -21735,8 +31575,8 @@ const COMPONENTS = [
         "value": "none",
         "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 60/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -21746,8 +31586,8 @@ const COMPONENTS = [
         "value": "matrix(1, 0, 0, 1, 0, 1)",
         "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 24/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -21757,8 +31597,8 @@ const COMPONENTS = [
         "value": "pointer",
         "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -21768,8 +31608,8 @@ const COMPONENTS = [
         "value": "block",
         "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -21779,8 +31619,8 @@ const COMPONENTS = [
         "value": "none",
         "reason": "Text-selection behavior (user-select) exists only in the coded component.",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -21790,8 +31630,8 @@ const COMPONENTS = [
         "value": "rgba(0, 46, 106, 1)",
         "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -21801,8 +31641,8 @@ const COMPONENTS = [
         "value": "rgba(181, 181, 181, 1)",
         "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -21812,8 +31652,8 @@ const COMPONENTS = [
         "value": "rgba(0, 66, 153, 1)",
         "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -21823,8 +31663,8 @@ const COMPONENTS = [
         "value": "rgba(0, 66, 153, 1)",
         "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -21834,8 +31674,8 @@ const COMPONENTS = [
         "value": "rgba(0, 46, 106, 1)",
         "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -21845,8 +31685,8 @@ const COMPONENTS = [
         "value": "none",
         "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 60/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -21856,8 +31696,8 @@ const COMPONENTS = [
         "value": "pointer",
         "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -21867,8 +31707,8 @@ const COMPONENTS = [
         "value": "block",
         "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -21878,8 +31718,8 @@ const COMPONENTS = [
         "value": "100%",
         "reason": "Fluid max-height constraints live in code; the canvas draws the component at its real size (standing choice).",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -21889,8 +31729,8 @@ const COMPONENTS = [
         "value": "100%",
         "reason": "Fluid max-width constraints live in code; the canvas draws the component at its real size (standing choice).",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -21900,8 +31740,8 @@ const COMPONENTS = [
         "value": "none",
         "reason": "Text-selection behavior (user-select) exists only in the coded component.",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -21911,8 +31751,8 @@ const COMPONENTS = [
         "value": "{imported.button.label.color-state-active.{variant}.{tone}}",
         "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -21922,8 +31762,8 @@ const COMPONENTS = [
         "value": "{imported.button.label.color-state-disabled.{variant}}",
         "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -21933,8 +31773,8 @@ const COMPONENTS = [
         "value": "{imported.button.label.color-state-focus-visible.{variant}.{tone}}",
         "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -21944,8 +31784,8 @@ const COMPONENTS = [
         "value": "{imported.button.label.color-state-hover.{variant}.{tone}}",
         "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -21955,8 +31795,8 @@ const COMPONENTS = [
         "value": "{imported.button.label.fill-state-active.{variant}.{tone}}",
         "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -21966,8 +31806,8 @@ const COMPONENTS = [
         "value": "matrix(1, 0, 0, 1, 0, 1)",
         "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 48/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -21977,8 +31817,8 @@ const COMPONENTS = [
         "value": "pointer",
         "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -21988,8 +31828,8 @@ const COMPONENTS = [
         "value": "block",
         "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -21999,8 +31839,8 @@ const COMPONENTS = [
         "value": "none",
         "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22010,8 +31850,8 @@ const COMPONENTS = [
         "value": "none",
         "reason": "Text-selection behavior (user-select) exists only in the coded component.",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22021,8 +31861,8 @@ const COMPONENTS = [
         "value": "scroll",
         "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22032,8 +31872,8 @@ const COMPONENTS = [
         "value": "normal",
         "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22043,8 +31883,8 @@ const COMPONENTS = [
         "value": "border-box",
         "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22054,8 +31894,8 @@ const COMPONENTS = [
         "value": "{imported.button.root.background-color-state-active.{variant}.{tone}}",
         "reason": "observed by the computed capture and refused by the contract grammar — state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22065,8 +31905,8 @@ const COMPONENTS = [
         "value": "{imported.button.root.background-color-state-focus-visible.{variant}.{tone}}",
         "reason": "observed by the computed capture and refused by the contract grammar — state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22076,8 +31916,8 @@ const COMPONENTS = [
         "value": "{imported.button.root.background-color-state-hover.{variant}.{tone}}",
         "reason": "observed by the computed capture and refused by the contract grammar — state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22087,8 +31927,8 @@ const COMPONENTS = [
         "value": "padding-box",
         "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22098,8 +31938,8 @@ const COMPONENTS = [
         "value": "0% 0%",
         "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22109,8 +31949,8 @@ const COMPONENTS = [
         "value": "repeat",
         "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22120,8 +31960,8 @@ const COMPONENTS = [
         "value": "auto",
         "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22131,8 +31971,8 @@ const COMPONENTS = [
         "value": "{imported.button.root.box-shadow-state-active.{variant}.{tone}}",
         "reason": "observed by the computed capture and refused by the contract grammar — state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22142,8 +31982,8 @@ const COMPONENTS = [
         "value": "{imported.button.root.color-state-active.{variant}.{tone}}",
         "reason": "observed by the computed capture and refused by the contract grammar — state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22153,8 +31993,8 @@ const COMPONENTS = [
         "value": "{imported.button.root.color-state-focus-visible.{variant}.{tone}}",
         "reason": "observed by the computed capture and refused by the contract grammar — state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22164,8 +32004,8 @@ const COMPONENTS = [
         "value": "{imported.button.root.color-state-hover.{variant}.{tone}}",
         "reason": "observed by the computed capture and refused by the contract grammar — state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22175,8 +32015,8 @@ const COMPONENTS = [
         "value": "{imported.button.root.fill-state-active.{variant}.{tone}}",
         "reason": "observed by the computed capture and refused by the contract grammar — state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22186,8 +32026,8 @@ const COMPONENTS = [
         "value": "{imported.button.root.outline-color-state-active.{variant}.{tone}}",
         "reason": "observed by the computed capture and refused by the contract grammar — state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22197,8 +32037,8 @@ const COMPONENTS = [
         "value": "{imported.button.root.outline-color-state-hover.{variant}.{tone}}",
         "reason": "observed by the computed capture and refused by the contract grammar — state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22208,8 +32048,8 @@ const COMPONENTS = [
         "value": "{imported.button.root.outline-offset-state-focus-visible.{variant}.{size}}",
         "reason": "observed by the computed capture and refused by the contract grammar — state pair ref — root states carry ≤1 placeholder (S3 residue)",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22219,8 +32059,8 @@ const COMPONENTS = [
         "value": "underline",
         "reason": "observed by the computed capture and refused by the contract grammar — value shape outside mintable kinds and outside the declared vocabulary",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22230,8 +32070,8 @@ const COMPONENTS = [
         "value": "underline",
         "reason": "observed by the computed capture and refused by the contract grammar — value shape outside mintable kinds and outside the declared vocabulary",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22241,8 +32081,8 @@ const COMPONENTS = [
         "value": "underline",
         "reason": "observed by the computed capture and refused by the contract grammar — value shape outside mintable kinds and outside the declared vocabulary",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22252,8 +32092,8 @@ const COMPONENTS = [
         "value": "underline",
         "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 24/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22263,8 +32103,8 @@ const COMPONENTS = [
         "value": "underline",
         "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 24/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22274,8 +32114,8 @@ const COMPONENTS = [
         "value": "underline",
         "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 24/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22285,8 +32125,8 @@ const COMPONENTS = [
         "value": "{imported.shared.size-0}",
         "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22296,8 +32136,8 @@ const COMPONENTS = [
         "value": "{imported.shared.size-0}",
         "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22307,30 +32147,35 @@ const COMPONENTS = [
         "value": "-4px/-8px/-4px/-8px",
         "reason": "root margins have no parent auto-layout to wrap — a COMPONENT_SET child is the component itself, so residual root margin is not canvas-drawable (FC-EMIT-ROOT-MARGIN-SILENT)",
         "variants": {
-          "count": 20,
-          "of": 220,
+          "count": 30,
+          "of": 320,
           "names": [
+            "Size=Micro, Text Align=Center, Tone=Default, Variant=Plain",
+            "Size=Micro, Text Align=Center, Tone=Default, Variant=Monochrome Plain",
             "Size=Micro, Text Align=Center, Tone=Critical, Variant=Plain",
             "Size=Micro, Text Align=Center, Tone=Critical, Variant=Monochrome Plain",
             "Size=Micro, Text Align=Center, Tone=Success, Variant=Plain",
             "Size=Micro, Text Align=Center, Tone=Success, Variant=Monochrome Plain",
+            "Size=Micro, Text Align=Left, Tone=Default, Variant=Plain",
+            "Size=Micro, Text Align=Left, Tone=Default, Variant=Monochrome Plain",
             "Size=Micro, Text Align=Left, Tone=Critical, Variant=Plain",
             "Size=Micro, Text Align=Left, Tone=Critical, Variant=Monochrome Plain",
             "Size=Micro, Text Align=Left, Tone=Success, Variant=Plain",
             "Size=Micro, Text Align=Left, Tone=Success, Variant=Monochrome Plain",
+            "Size=Micro, Text Align=Right, Tone=Default, Variant=Plain",
+            "Size=Micro, Text Align=Right, Tone=Default, Variant=Monochrome Plain",
             "Size=Micro, Text Align=Right, Tone=Critical, Variant=Plain",
             "Size=Micro, Text Align=Right, Tone=Critical, Variant=Monochrome Plain",
             "Size=Micro, Text Align=Right, Tone=Success, Variant=Plain",
             "Size=Micro, Text Align=Right, Tone=Success, Variant=Monochrome Plain",
+            "Size=Micro, Text Align=Start, Tone=Default, Variant=Plain",
+            "Size=Micro, Text Align=Start, Tone=Default, Variant=Monochrome Plain",
             "Size=Micro, Text Align=Start, Tone=Critical, Variant=Plain",
             "Size=Micro, Text Align=Start, Tone=Critical, Variant=Monochrome Plain",
             "Size=Micro, Text Align=Start, Tone=Success, Variant=Plain",
-            "Size=Micro, Text Align=Start, Tone=Success, Variant=Monochrome Plain",
-            "Size=Micro, Text Align=End, Tone=Critical, Variant=Plain",
-            "Size=Micro, Text Align=End, Tone=Critical, Variant=Monochrome Plain",
-            "Size=Micro, Text Align=End, Tone=Success, Variant=Plain",
-            "Size=Micro, Text Align=End, Tone=Success, Variant=Monochrome Plain"
-          ]
+            "Size=Micro, Text Align=Start, Tone=Success, Variant=Monochrome Plain"
+          ],
+          "more": 6
         }
       },
       {
@@ -22340,35 +32185,35 @@ const COMPONENTS = [
         "value": "-6px/-12px/-6px/-12px",
         "reason": "root margins have no parent auto-layout to wrap — a COMPONENT_SET child is the component itself, so residual root margin is not canvas-drawable (FC-EMIT-ROOT-MARGIN-SILENT)",
         "variants": {
-          "count": 68,
-          "of": 220,
+          "count": 98,
+          "of": 320,
           "names": [
+            "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain",
+            "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain",
             "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain",
             "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain",
             "Size=Medium, Text Align=Center, Tone=Success, Variant=Plain",
             "Size=Medium, Text Align=Center, Tone=Success, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=Left, Tone=Default, Variant=Plain",
+            "Size=Medium, Text Align=Left, Tone=Default, Variant=Monochrome Plain",
             "Size=Medium, Text Align=Left, Tone=Critical, Variant=Plain",
             "Size=Medium, Text Align=Left, Tone=Critical, Variant=Monochrome Plain",
             "Size=Medium, Text Align=Left, Tone=Success, Variant=Plain",
             "Size=Medium, Text Align=Left, Tone=Success, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=Right, Tone=Default, Variant=Plain",
+            "Size=Medium, Text Align=Right, Tone=Default, Variant=Monochrome Plain",
             "Size=Medium, Text Align=Right, Tone=Critical, Variant=Plain",
             "Size=Medium, Text Align=Right, Tone=Critical, Variant=Monochrome Plain",
             "Size=Medium, Text Align=Right, Tone=Success, Variant=Plain",
             "Size=Medium, Text Align=Right, Tone=Success, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=Start, Tone=Default, Variant=Plain",
+            "Size=Medium, Text Align=Start, Tone=Default, Variant=Monochrome Plain",
             "Size=Medium, Text Align=Start, Tone=Critical, Variant=Plain",
             "Size=Medium, Text Align=Start, Tone=Critical, Variant=Monochrome Plain",
             "Size=Medium, Text Align=Start, Tone=Success, Variant=Plain",
-            "Size=Medium, Text Align=Start, Tone=Success, Variant=Monochrome Plain",
-            "Size=Medium, Text Align=End, Tone=Critical, Variant=Plain",
-            "Size=Medium, Text Align=End, Tone=Critical, Variant=Monochrome Plain",
-            "Size=Medium, Text Align=End, Tone=Success, Variant=Plain",
-            "Size=Medium, Text Align=End, Tone=Success, Variant=Monochrome Plain",
-            "Size=Slim, Text Align=Center, Tone=Critical, Variant=Plain",
-            "Size=Slim, Text Align=Center, Tone=Critical, Variant=Monochrome Plain",
-            "Size=Slim, Text Align=Center, Tone=Success, Variant=Plain",
-            "Size=Slim, Text Align=Center, Tone=Success, Variant=Monochrome Plain"
+            "Size=Medium, Text Align=Start, Tone=Success, Variant=Monochrome Plain"
           ],
-          "more": 44
+          "more": 74
         }
       },
       {
@@ -22378,8 +32223,8 @@ const COMPONENTS = [
         "value": "{imported.button.root.outline-color.{variant}.critical}",
         "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
         "variants": {
-          "count": 120,
-          "of": 220,
+          "count": 100,
+          "of": 320,
           "names": [
             "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary",
             "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain",
@@ -22406,6 +32251,44 @@ const COMPONENTS = [
             "Size=Medium, Text Align=End, Tone=Critical, Variant=Primary",
             "Size=Medium, Text Align=End, Tone=Critical, Variant=Tertiary"
           ],
+          "more": 76
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "outline-color",
+        "value": "{imported.button.root.outline-color.{variant}.none}",
+        "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
+        "variants": {
+          "count": 120,
+          "of": 320,
+          "names": [
+            "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary",
+            "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain",
+            "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary",
+            "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary",
+            "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=Left, Tone=Default, Variant=Secondary",
+            "Size=Medium, Text Align=Left, Tone=Default, Variant=Plain",
+            "Size=Medium, Text Align=Left, Tone=Default, Variant=Primary",
+            "Size=Medium, Text Align=Left, Tone=Default, Variant=Tertiary",
+            "Size=Medium, Text Align=Left, Tone=Default, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=Right, Tone=Default, Variant=Secondary",
+            "Size=Medium, Text Align=Right, Tone=Default, Variant=Plain",
+            "Size=Medium, Text Align=Right, Tone=Default, Variant=Primary",
+            "Size=Medium, Text Align=Right, Tone=Default, Variant=Tertiary",
+            "Size=Medium, Text Align=Right, Tone=Default, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=Start, Tone=Default, Variant=Secondary",
+            "Size=Medium, Text Align=Start, Tone=Default, Variant=Plain",
+            "Size=Medium, Text Align=Start, Tone=Default, Variant=Primary",
+            "Size=Medium, Text Align=Start, Tone=Default, Variant=Tertiary",
+            "Size=Medium, Text Align=Start, Tone=Default, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=End, Tone=Default, Variant=Secondary",
+            "Size=Medium, Text Align=End, Tone=Default, Variant=Plain",
+            "Size=Medium, Text Align=End, Tone=Default, Variant=Primary",
+            "Size=Medium, Text Align=End, Tone=Default, Variant=Tertiary"
+          ],
           "more": 96
         }
       },
@@ -22417,7 +32300,7 @@ const COMPONENTS = [
         "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
         "variants": {
           "count": 100,
-          "of": 220,
+          "of": 320,
           "names": [
             "Size=Medium, Text Align=Center, Tone=Success, Variant=Secondary",
             "Size=Medium, Text Align=Center, Tone=Success, Variant=Plain",
@@ -22454,19 +32337,8 @@ const COMPONENTS = [
         "value": "{imported.shared.size-0}",
         "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
         "variants": {
-          "count": 220,
-          "of": 220
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "tone [unset]",
-        "value": "critical|success",
-        "reason": "defaultless axis — the library's own rendering when \"tone\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 2 declared values only, and a proposal read back from the canvas will call \"critical\" the default (FC-UNSET-PLANE-UNDRAWN)",
-        "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22476,8 +32348,8 @@ const COMPONENTS = [
         "value": "{imported.shared.size-0}",
         "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22487,8 +32359,8 @@ const COMPONENTS = [
         "value": "none",
         "reason": "Native form-control appearance is reset only in the coded component.",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22498,8 +32370,8 @@ const COMPONENTS = [
         "value": "none",
         "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22509,8 +32381,8 @@ const COMPONENTS = [
         "value": "none",
         "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22520,8 +32392,8 @@ const COMPONENTS = [
         "value": "none",
         "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22531,8 +32403,8 @@ const COMPONENTS = [
         "value": "none",
         "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22542,8 +32414,8 @@ const COMPONENTS = [
         "value": "pointer",
         "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22553,8 +32425,8 @@ const COMPONENTS = [
         "value": "\"calt\" 0",
         "reason": "Tabular figures / ligature settings apply only in code — Figma's plugin API cannot set OpenType features.",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22564,8 +32436,8 @@ const COMPONENTS = [
         "value": "solid",
         "reason": "declared for the focus-visible state — state previews do not draw declared facts (a named limit)",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22575,8 +32447,8 @@ const COMPONENTS = [
         "value": "none",
         "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22586,8 +32458,8 @@ const COMPONENTS = [
         "value": "relative",
         "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22597,8 +32469,8 @@ const COMPONENTS = [
         "value": "optimizelegibility",
         "reason": "Text rasterization hints (text-rendering) apply only in code.",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22608,8 +32480,8 @@ const COMPONENTS = [
         "value": "manipulation",
         "reason": "Touch gesture handling (touch-action) exists only in the coded component.",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
         }
       },
       {
@@ -22619,8 +32491,45 @@ const COMPONENTS = [
         "value": "none",
         "reason": "Text-selection behavior (user-select) exists only in the coded component.",
         "variants": {
-          "count": 220,
-          "of": 220
+          "count": 320,
+          "of": 320
+        }
+      },
+      {
+        "part": "root",
+        "kind": "gradient",
+        "channel": "background-image",
+        "value": "linear-gradient(rgba(48, 48, 48, 0) 63.53%, rgba(255, 255, 2",
+        "reason": "did not parse as a linear gradient (radial / conic / foreign grammar) — Figma lowers linear-gradient stacks only",
+        "variants": {
+          "count": 24,
+          "of": 320,
+          "names": [
+            "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary",
+            "Size=Medium, Text Align=Left, Tone=Default, Variant=Primary",
+            "Size=Medium, Text Align=Right, Tone=Default, Variant=Primary",
+            "Size=Medium, Text Align=Start, Tone=Default, Variant=Primary",
+            "Size=Medium, Text Align=End, Tone=Default, Variant=Primary",
+            "Size=Micro, Text Align=Center, Tone=Default, Variant=Primary",
+            "Size=Micro, Text Align=Left, Tone=Default, Variant=Primary",
+            "Size=Micro, Text Align=Right, Tone=Default, Variant=Primary",
+            "Size=Micro, Text Align=Start, Tone=Default, Variant=Primary",
+            "Size=Micro, Text Align=End, Tone=Default, Variant=Primary",
+            "Size=Slim, Text Align=Center, Tone=Default, Variant=Primary",
+            "Size=Slim, Text Align=Left, Tone=Default, Variant=Primary",
+            "Size=Slim, Text Align=Right, Tone=Default, Variant=Primary",
+            "Size=Slim, Text Align=Start, Tone=Default, Variant=Primary",
+            "Size=Slim, Text Align=End, Tone=Default, Variant=Primary",
+            "Size=Large, Text Align=Center, Tone=Default, Variant=Primary",
+            "Size=Large, Text Align=Left, Tone=Default, Variant=Primary",
+            "Size=Large, Text Align=Right, Tone=Default, Variant=Primary",
+            "Size=Large, Text Align=Start, Tone=Default, Variant=Primary",
+            "Size=Large, Text Align=End, Tone=Default, Variant=Primary",
+            "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Disabled",
+            "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Focus Visible",
+            "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Active",
+            "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Hover"
+          ]
         }
       }
     ],

@@ -15,7 +15,7 @@ Every committed `figma/*.figma.js` passed BOTH gates at generation time:
 | `polaris.avatar` | 5 | 1 | 48 | yes |
 | `polaris.badge` | 56 | 2 | 49 | yes |
 | `polaris.banner` | 4 | 1 | 49 | yes |
-| `polaris.button` | 200 | 4 | 62 | yes |
+| `polaris.button` | 300 | 4 | 62 | yes |
 | `polaris.checkbox` | 3 | 1 | 47 | yes |
 | `polaris.progress-bar` | 12 | 2 | 48 | yes |
 | `polaris.radio-button` | 2 | 1 | 48 | yes |

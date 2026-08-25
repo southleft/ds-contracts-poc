@@ -2730,7 +2730,7 @@
       "variantCount": 24,
       "stateVariantCount": 16,
       "compileRefusal": null,
-      "scriptVariantRows": 40
+      "scriptVariantRows": 120
     },
     {
       "id": "fluent.checkbox",
@@ -2796,7 +2796,7 @@
       "variantCount": 3,
       "stateVariantCount": 0,
       "compileRefusal": null,
-      "scriptVariantRows": 3
+      "scriptVariantRows": 13
     },
     {
       "id": "fluent.input",

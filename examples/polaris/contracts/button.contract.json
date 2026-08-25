@@ -4,7 +4,7 @@
   "name": "Button",
   "version": "0.4.0",
   "status": "draft",
-  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Button/Button.tsx (react-tsx adapter) — API surface only; anatomy, tokens, and design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/polaris/scripts/promote-floor.ts): resolved.contract.json — computed-capture truth; minted leaves source-aliased to Polaris's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Button/Button.tsx (react-tsx adapter) \u2014 API surface only; anatomy, tokens, and design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT \u00a9 Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts \u2014 every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/polaris/scripts/promote-floor.ts): resolved.contract.json \u2014 computed-capture truth; minted leaves source-aliased to Polaris's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
   "semantics": {
     "element": "button"
   },
@@ -111,18 +111,21 @@
     },
     {
       "name": "tone",
-      "description": "Sets the color treatment of the Button.",
+      "description": "Sets the color treatment of the Button. Wave B.4 FC-ENUM-HOLE: `default` is the developed unset tone (Polaris tone?: critical|success) \u2014 minted as `{variant}.none` paint paths.",
       "type": {
         "enum": [
+          "default",
           "critical",
           "success"
         ]
       },
+      "default": "default",
       "bindings": {
         "figma": {
           "kind": "VARIANT",
           "property": "Tone",
           "values": {
+            "default": "Default",
             "critical": "Critical",
             "success": "Success"
           }
@@ -289,6 +292,13 @@
         {
           "prop": "tone",
           "map": {
+            "default": {
+              "background-color": "{imported.button.root.background-color.{variant}.none}",
+              "background-image": "{imported.button.root.background-image.{variant}.none}",
+              "box-shadow": "{imported.button.root.box-shadow.{variant}.none}",
+              "color": "{imported.button.root.color.{variant}.none}",
+              "outline-color": "{imported.button.root.outline-color.{variant}.none}"
+            },
             "critical": {
               "background-color": "{imported.button.root.background-color.{variant}.critical}",
               "background-image": "{imported.button.root.background-image.{variant}.critical}",
@@ -345,7 +355,7 @@
       "parts": {
         "icon": {
           "element": "span",
-          "description": "Promoted from the computed floor (round 4): rendered anatomy span|Button__Icon — this element exists in the real component's DOM; the static layer had no part for it.",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|Button__Icon \u2014 this element exists in the real component's DOM; the static layer had no part for it.",
           "declared": {
             "display": "block",
             "cursor": "pointer",
@@ -358,7 +368,7 @@
           "parts": {
             "icon-2": {
               "element": "span",
-              "description": "Promoted from the computed floor (round 4): rendered anatomy span|Icon — this element exists in the real component's DOM; the static layer had no part for it.",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|Icon \u2014 this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "block",
                 "cursor": "pointer",
@@ -383,37 +393,37 @@
                   "state": "active",
                   "channel": "color",
                   "value": "rgba(0, 46, 106, 1)",
-                  "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                  "reason": "default-state values not kind-compatible for padding \u2014 cannot correlate"
                 },
                 {
                   "state": "active",
                   "channel": "fill",
                   "value": "rgba(0, 46, 106, 1)",
-                  "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                  "reason": "default-state values not kind-compatible for padding \u2014 cannot correlate"
                 },
                 {
                   "state": "disabled",
                   "channel": "color",
                   "value": "rgba(181, 181, 181, 1)",
-                  "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                  "reason": "default-state values not kind-compatible for padding \u2014 cannot correlate"
                 },
                 {
                   "state": "disabled",
                   "channel": "pointer-events",
                   "value": "none",
-                  "reason": "declared-channel state delta on 60/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                  "reason": "declared-channel state delta on 60/120 combos \u2014 partial coverage cannot carry as a state selector (v15); named residue"
                 },
                 {
                   "state": "focus-visible",
                   "channel": "color",
                   "value": "rgba(0, 66, 153, 1)",
-                  "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                  "reason": "default-state values not kind-compatible for padding \u2014 cannot correlate"
                 },
                 {
                   "state": "hover",
                   "channel": "color",
                   "value": "rgba(0, 66, 153, 1)",
-                  "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                  "reason": "default-state values not kind-compatible for padding \u2014 cannot correlate"
                 }
               ]
             }
@@ -427,43 +437,43 @@
               "state": "active",
               "channel": "color",
               "value": "rgba(0, 46, 106, 1)",
-              "reason": "default-state values not kind-compatible for padding — cannot correlate"
+              "reason": "default-state values not kind-compatible for padding \u2014 cannot correlate"
             },
             {
               "state": "active",
               "channel": "fill",
               "value": "rgba(0, 46, 106, 1)",
-              "reason": "default-state values not kind-compatible for padding — cannot correlate"
+              "reason": "default-state values not kind-compatible for padding \u2014 cannot correlate"
             },
             {
               "state": "active",
               "channel": "transform",
               "value": "matrix(1, 0, 0, 1, 0, 1)",
-              "reason": "declared-channel state delta on 24/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+              "reason": "declared-channel state delta on 24/120 combos \u2014 partial coverage cannot carry as a state selector (v15); named residue"
             },
             {
               "state": "disabled",
               "channel": "color",
               "value": "rgba(181, 181, 181, 1)",
-              "reason": "default-state values not kind-compatible for padding — cannot correlate"
+              "reason": "default-state values not kind-compatible for padding \u2014 cannot correlate"
             },
             {
               "state": "disabled",
               "channel": "pointer-events",
               "value": "none",
-              "reason": "declared-channel state delta on 60/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+              "reason": "declared-channel state delta on 60/120 combos \u2014 partial coverage cannot carry as a state selector (v15); named residue"
             },
             {
               "state": "focus-visible",
               "channel": "color",
               "value": "rgba(0, 66, 153, 1)",
-              "reason": "default-state values not kind-compatible for padding — cannot correlate"
+              "reason": "default-state values not kind-compatible for padding \u2014 cannot correlate"
             },
             {
               "state": "hover",
               "channel": "color",
               "value": "rgba(0, 66, 153, 1)",
-              "reason": "default-state values not kind-compatible for padding — cannot correlate"
+              "reason": "default-state values not kind-compatible for padding \u2014 cannot correlate"
             }
           ]
         },
@@ -531,7 +541,7 @@
               "state": "active",
               "channel": "transform",
               "value": "matrix(1, 0, 0, 1, 0, 1)",
-              "reason": "declared-channel state delta on 48/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+              "reason": "declared-channel state delta on 48/120 combos \u2014 partial coverage cannot carry as a state selector (v15); named residue"
             },
             {
               "state": "disabled",
@@ -580,37 +590,37 @@
           "state": "active",
           "channel": "background-color",
           "value": "{imported.button.root.background-color-state-active.{variant}.{tone}}",
-          "reason": "state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+          "reason": "state\u00d7tone set-planes beyond the carried unset plane (S3 residue \u2014 leaves exist in the minted tree)"
         },
         {
           "state": "active",
           "channel": "box-shadow",
           "value": "{imported.button.root.box-shadow-state-active.{variant}.{tone}}",
-          "reason": "state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+          "reason": "state\u00d7tone set-planes beyond the carried unset plane (S3 residue \u2014 leaves exist in the minted tree)"
         },
         {
           "state": "active",
           "channel": "color",
           "value": "{imported.button.root.color-state-active.{variant}.{tone}}",
-          "reason": "state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+          "reason": "state\u00d7tone set-planes beyond the carried unset plane (S3 residue \u2014 leaves exist in the minted tree)"
         },
         {
           "state": "active",
           "channel": "fill",
           "value": "{imported.button.root.fill-state-active.{variant}.{tone}}",
-          "reason": "state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+          "reason": "state\u00d7tone set-planes beyond the carried unset plane (S3 residue \u2014 leaves exist in the minted tree)"
         },
         {
           "state": "active",
           "channel": "outline-color",
           "value": "{imported.button.root.outline-color-state-active.{variant}.{tone}}",
-          "reason": "state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+          "reason": "state\u00d7tone set-planes beyond the carried unset plane (S3 residue \u2014 leaves exist in the minted tree)"
         },
         {
           "state": "active",
           "channel": "text-decoration-line",
           "value": "underline",
-          "reason": "declared-channel state delta on 24/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+          "reason": "declared-channel state delta on 24/120 combos \u2014 partial coverage cannot carry as a state selector (v15); named residue"
         },
         {
           "state": "active",
@@ -622,67 +632,67 @@
           "state": "disabled",
           "channel": "background-attachment",
           "value": "scroll",
-          "reason": "declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+          "reason": "declared-channel state delta on 8/120 combos \u2014 partial coverage cannot carry as a state selector (v15); named residue"
         },
         {
           "state": "disabled",
           "channel": "background-blend-mode",
           "value": "normal",
-          "reason": "declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+          "reason": "declared-channel state delta on 8/120 combos \u2014 partial coverage cannot carry as a state selector (v15); named residue"
         },
         {
           "state": "disabled",
           "channel": "background-clip",
           "value": "border-box",
-          "reason": "declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+          "reason": "declared-channel state delta on 8/120 combos \u2014 partial coverage cannot carry as a state selector (v15); named residue"
         },
         {
           "state": "disabled",
           "channel": "background-origin",
           "value": "padding-box",
-          "reason": "declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+          "reason": "declared-channel state delta on 8/120 combos \u2014 partial coverage cannot carry as a state selector (v15); named residue"
         },
         {
           "state": "disabled",
           "channel": "background-position",
           "value": "0% 0%",
-          "reason": "declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+          "reason": "declared-channel state delta on 8/120 combos \u2014 partial coverage cannot carry as a state selector (v15); named residue"
         },
         {
           "state": "disabled",
           "channel": "background-repeat",
           "value": "repeat",
-          "reason": "declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+          "reason": "declared-channel state delta on 8/120 combos \u2014 partial coverage cannot carry as a state selector (v15); named residue"
         },
         {
           "state": "disabled",
           "channel": "background-size",
           "value": "auto",
-          "reason": "declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+          "reason": "declared-channel state delta on 8/120 combos \u2014 partial coverage cannot carry as a state selector (v15); named residue"
         },
         {
           "state": "focus-visible",
           "channel": "background-color",
           "value": "{imported.button.root.background-color-state-focus-visible.{variant}.{tone}}",
-          "reason": "state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+          "reason": "state\u00d7tone set-planes beyond the carried unset plane (S3 residue \u2014 leaves exist in the minted tree)"
         },
         {
           "state": "focus-visible",
           "channel": "color",
           "value": "{imported.button.root.color-state-focus-visible.{variant}.{tone}}",
-          "reason": "state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+          "reason": "state\u00d7tone set-planes beyond the carried unset plane (S3 residue \u2014 leaves exist in the minted tree)"
         },
         {
           "state": "focus-visible",
           "channel": "outline-offset",
           "value": "{imported.button.root.outline-offset-state-focus-visible.{variant}.{size}}",
-          "reason": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+          "reason": "state pair ref \u2014 root states carry \u22641 placeholder (S3 residue)"
         },
         {
           "state": "focus-visible",
           "channel": "text-decoration-line",
           "value": "underline",
-          "reason": "declared-channel state delta on 24/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+          "reason": "declared-channel state delta on 24/120 combos \u2014 partial coverage cannot carry as a state selector (v15); named residue"
         },
         {
           "state": "focus-visible",
@@ -694,25 +704,25 @@
           "state": "hover",
           "channel": "background-color",
           "value": "{imported.button.root.background-color-state-hover.{variant}.{tone}}",
-          "reason": "state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+          "reason": "state\u00d7tone set-planes beyond the carried unset plane (S3 residue \u2014 leaves exist in the minted tree)"
         },
         {
           "state": "hover",
           "channel": "color",
           "value": "{imported.button.root.color-state-hover.{variant}.{tone}}",
-          "reason": "state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+          "reason": "state\u00d7tone set-planes beyond the carried unset plane (S3 residue \u2014 leaves exist in the minted tree)"
         },
         {
           "state": "hover",
           "channel": "outline-color",
           "value": "{imported.button.root.outline-color-state-hover.{variant}.{tone}}",
-          "reason": "state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+          "reason": "state\u00d7tone set-planes beyond the carried unset plane (S3 residue \u2014 leaves exist in the minted tree)"
         },
         {
           "state": "hover",
           "channel": "text-decoration-line",
           "value": "underline",
-          "reason": "declared-channel state delta on 24/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+          "reason": "declared-channel state delta on 24/120 combos \u2014 partial coverage cannot carry as a state selector (v15); named residue"
         },
         {
           "state": "hover",

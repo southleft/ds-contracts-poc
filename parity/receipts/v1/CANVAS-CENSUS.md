@@ -167,9 +167,9 @@ Gate: **GREEN** at phase `full`.
 | fluent | `fluent.avatar` | avatar | 3 × 18; 18 | 6/6 of 18 | rendered | 6/6 | recognisable | — |
 | fluent | `fluent.badge` | badge / tag / chip | 3 × 192; 192 | 16/16 of 192 | rendered | 16/16 | recognisable | — |
 | fluent | `fluent.button` | button | 3 × 45 + 20 state; 65 | 12/13 of 65 | rendered, 1 refused | 12/12 | recognisable | — |
-| fluent | `fluent.card` | card | 3 × 24 + 16 state; 40 | 10/11 of 40 | rendered, 1 refused | 10/10 | recognisable | — |
+| fluent | `fluent.card` | card | 3 × 24 + 16 state; 120 | 10/11 of 40 | rendered, 1 refused | 10/10 | recognisable | — |
 | fluent | `fluent.checkbox` | checkbox / radio | 3 × 12 + 12 state; 24 | 8/9 of 24 | rendered, 1 refused | 8/8 | recognisable | — |
-| fluent | `fluent.dialog` | modal / dialog | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | recognisable | — |
+| fluent | `fluent.dialog` | modal / dialog | 1 × 3; 13 | 3/3 of 3 | rendered | 3/3 | recognisable | — |
 | fluent | `fluent.input` | input / field | 2 × 18 + 24 state; 42 | 11/12 of 42 | rendered, 1 refused | 11/11 | NOT recognisable | CANVAS-OUTLINE-STROKE-ABSENT:input.outline/underline; CODE-RENDER-PARTIAL:input.outline |
 | fluent | `fluent.spinner` | progress / spinner | 3 × 64; 64 | 12/12 of 64 | rendered | 12/12 | recognisable | CODE-CANVAS-CONSISTENT-GLYPH-SUBSTITUTE:spinner-arc |
 | fluent | `fluent.switch` | toggle / switch | 2 × 6 + 4 state; 10 | 5/6 of 10 | rendered, 1 refused | 5/5 | recognisable | — |
