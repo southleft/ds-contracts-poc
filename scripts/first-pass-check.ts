@@ -17,7 +17,18 @@
  *   4. A LYING PACKET — a committed artifact an attempt names that is gone, or
  *      whose sha256 no longer matches what the attempt recorded.
  *   5. A BLANK CELL — a packet with no images and no NAMED absence. "There is
- *      no picture" must always come with a reason.
+ *      no picture" must always come with a reason. Per SURFACE since
+ *      2026-08-25: a packet with no `ref-*` and no ref absence and no
+ *      retained ref is red on its own, because one `canvas` absence used to
+ *      satisfy the whole-packet form of this rule while ref and code had been
+ *      silently wiped.
+ *   5b. AN ORPHAN IMAGE — a PNG in a packet the attempt names neither as its
+ *      own output nor as retained evidence.
+ *   5c. AN UNMEASURED EXAM — every set stopped at ERROR, a stage that died
+ *      without a named refusal. Such a run learned nothing about the engine,
+ *      so `0/N` is not a rate: the ratchet records nothing for it and the
+ *      gate refuses it. "Measured nothing" must never read as "measured
+ *      zero" — the same class as a killed suite reading as a pass.
  *   6. AN UNEXPLAINED VERDICT — `recognisable: false` naming no wall.
  *   7. THE RATCHET — the first-pass rate of an exam may not FALL without a
  *      reasons row naming the exact from/to, and may not RISE without the
@@ -27,10 +38,17 @@
  *
  * FALSIFICATION (`--self-test`, run in CI right after the gate): the whole
  * surface is copied to a temp tree, the gate is proven GREEN on the copy, then
- * five reds are planted one at a time — a deleted packet, a smuggled packet, a
- * corrupted image, a ratchet raised above the truth, an edited receipt. Every
- * one must go red naming the thing. A gate that cannot be shown going red is
- * not a gate.
+ * eight reds are planted one at a time — a deleted packet, a smuggled packet,
+ * a corrupted image, a ratchet raised above the truth, an edited receipt, a
+ * packet CLEARED WITH NO REPLACEMENT AND NO REASON, an ORPHAN image, and an
+ * ALL-INFRASTRUCTURE-FAILURE run trying to record a rate. Every one must go
+ * red naming the thing. A gate that cannot be shown going red is not a gate.
+ *
+ * The runner's PREFLIGHT is falsified in the same pass (`preflightRedCases`):
+ * an exam whose git-ignored sandbox is absent must refuse by name and hand
+ * back the exact command that creates it, and the same exam with its sandbox
+ * present must not refuse. Preflight is what stands between a run that cannot
+ * run and the committed evidence, so it is proven going red too.
  */
 import {
   cpSync,
@@ -53,6 +71,7 @@ import {
   applyRatchet,
   committedExams,
   loadRatchet,
+  preflight,
   ratchetFailures,
   ratchetPath,
   readExamState,
@@ -62,6 +81,7 @@ import {
   stableJson,
   tally,
   type ExamState,
+  type SetAttempt,
 } from "../extract/figma/census/first-pass.js";
 import { REPO } from "../extract/figma/census/corpus.js";
 
@@ -168,6 +188,167 @@ function firstPacket(dir: string): {
   return { exam, set, setDir };
 }
 
+const readAttempt = (setDir: string): SetAttempt =>
+  JSON.parse(
+    readFileSync(path.join(setDir, "attempt.json"), "utf8"),
+  ) as SetAttempt;
+
+const writeAttempt = (setDir: string, a: SetAttempt): void =>
+  writeFileSync(path.join(setDir, "attempt.json"), stableJson(a));
+
+/** Drop the committed-artifact rows so a planted red is refused for the reason
+ *  it plants, not for a hash the plant happened to invalidate. */
+function stripCommittedArtifacts(a: SetAttempt): void {
+  for (const st of a.stages)
+    st.artifacts = st.artifacts.filter((art) => !art.committed);
+}
+
+/**
+ * PREFLIGHT MUST BE SHOWN GOING RED. It is the only thing standing between a
+ * run that cannot run and the committed evidence, so "the sandbox is missing"
+ * is proven to refuse BY NAME and to hand back the command that fixes it —
+ * and the same exam with everything present is proven NOT to refuse, so the
+ * guard cannot be a blanket "no".
+ */
+function preflightRedCases(): boolean {
+  let ok = true;
+  const codeExam = EXAMS.find((e) => e.direction === "code-to-canvas");
+  const canvasExam = EXAMS.find((e) => e.direction === "canvas-to-code");
+  const work = mkdtempSync(path.join(tmpdir(), "first-pass-preflight-"));
+
+  const check = (
+    name: string,
+    failures: ReturnType<typeof preflight>,
+    expect: RegExp | null,
+    expectRemedy?: RegExp,
+  ): void => {
+    if (expect === null) {
+      if (failures.length > 0) {
+        console.error(
+          `✖ self-test: ${name} — preflight refused when it should not:`,
+        );
+        for (const f of failures)
+          console.error(`    ${f.requirement}: ${f.detail}`);
+        ok = false;
+      } else console.log(`  ✔ ${name}`);
+      return;
+    }
+    const hit = failures.find((f) => expect.test(f.requirement));
+    if (!hit) {
+      console.error(
+        `✖ self-test: ${name} — preflight did NOT refuse by name (${failures.length} failure(s))`,
+      );
+      for (const f of failures) console.error(`    ${f.requirement}`);
+      ok = false;
+      return;
+    }
+    if (expectRemedy && !expectRemedy.test(hit.remedy)) {
+      console.error(
+        `✖ self-test: ${name} — preflight refused but named no usable remedy: ${JSON.stringify(hit.remedy)}`,
+      );
+      ok = false;
+      return;
+    }
+    console.log(`  ✔ ${name}`);
+  };
+
+  if (!codeExam || codeExam.direction !== "code-to-canvas") {
+    console.error("✖ self-test: no code-to-canvas exam to preflight");
+    return false;
+  }
+  // 1. THE REPRODUCTION: the git-ignored sandbox is absent.
+  check(
+    "PREFLIGHT: a MISSING library sandbox refuses by name and names the recipe",
+    preflight(
+      { ...codeExam, harness: path.join(work, "no-such-sandbox") },
+      {
+        work,
+        mint: false,
+      },
+    ),
+    /sandbox/,
+    /npm i .+@.+ react@18 react-dom@18 esbuild/,
+  );
+  // 2. A sandbox that exists but has no library installed.
+  mkdirSync(path.join(work, "empty-sandbox", "node_modules"), {
+    recursive: true,
+  });
+  check(
+    "PREFLIGHT: a sandbox with the library NOT installed refuses by name",
+    preflight(
+      { ...codeExam, harness: path.join(work, "empty-sandbox") },
+      {
+        work,
+        mint: false,
+      },
+    ),
+    /has .+ installed/,
+    /npm i /,
+  );
+  // 3. A capture config that is not on disk.
+  check(
+    "PREFLIGHT: an absent capture config refuses by name",
+    preflight(
+      { ...codeExam, captureConfig: "extract/computed/configs/no-such.json" },
+      {
+        work,
+        mint: false,
+      },
+    ),
+    /capture config .* exists/,
+    undefined,
+  );
+  // 4. Direction B with no token in the environment.
+  if (canvasExam && canvasExam.direction === "canvas-to-code")
+    check(
+      "PREFLIGHT: canvas→code with NO Figma token refuses by name",
+      preflight(canvasExam, { work, mint: false, env: {} }),
+      /Figma personal access token/,
+      /FIGMA_TOKEN/,
+    );
+  // 5. THE GUARD IS NOT A BLANKET NO: the same exam with everything present
+  //    (a fabricated sandbox carrying the pinned versions) must NOT refuse.
+  {
+    const cfg = JSON.parse(
+      readFileSync(path.join(REPO, codeExam.captureConfig), "utf8"),
+    ) as { library: { package: string; version: string } };
+    const sandbox = path.join(work, "good-sandbox");
+    const libDir = path.join(
+      sandbox,
+      "node_modules",
+      ...cfg.library.package.split("/"),
+    );
+    mkdirSync(libDir, { recursive: true });
+    writeFileSync(
+      path.join(libDir, "package.json"),
+      JSON.stringify({
+        name: cfg.library.package,
+        version: cfg.library.version,
+      }),
+    );
+    for (const dep of ["react", "react-dom", "esbuild"])
+      mkdirSync(path.join(sandbox, "node_modules", dep), { recursive: true });
+    check(
+      "PREFLIGHT: a COMPLETE sandbox does not refuse (the guard is not a blanket no)",
+      preflight({ ...codeExam, harness: sandbox }, { work, mint: false }),
+      null,
+    );
+    // 6. …and version drift, which would silently change every number, does.
+    writeFileSync(
+      path.join(libDir, "package.json"),
+      JSON.stringify({ name: cfg.library.package, version: "0.0.0-drift" }),
+    );
+    check(
+      "PREFLIGHT: library VERSION DRIFT in the sandbox refuses by name",
+      preflight({ ...codeExam, harness: sandbox }, { work, mint: false }),
+      /the config's pin/,
+      /npm i /,
+    );
+  }
+  rmSync(work, { recursive: true, force: true });
+  return ok;
+}
+
 function selfTest(): boolean {
   const scenarios: Array<{
     name: string;
@@ -236,9 +417,82 @@ function selfTest(): boolean {
       },
       expect: /is STALE vs the rendering/,
     },
+    // ---- the 2026-08-25 class: destroyed evidence, and a rate from a run
+    // that measured nothing --------------------------------------------------
+    {
+      name: "a packet CLEARED WITH NO REPLACEMENT — the images are gone and no absence names why",
+      plant: (dir) => {
+        const { setDir } = firstPacket(dir);
+        const a = readAttempt(setDir);
+        // Exactly what the defect did: every image removed, and the attempt
+        // rewritten as if the packet had never had one. Not one absence names
+        // a ref or a code surface.
+        for (const f of readdirSync(setDir))
+          if (/^(ref|code|canvas)-.*\.png$/.test(f))
+            rmSync(path.join(setDir, f));
+        a.images = {
+          ref: [],
+          code: [],
+          canvas: [],
+          absent: [
+            { kind: "canvas", reason: "mint SKIPPED — no bridge in this run" },
+          ],
+        };
+        stripCommittedArtifacts(a);
+        writeAttempt(setDir, a);
+      },
+      expect: /vanished with no recorded reason/,
+    },
+    {
+      name: "an ORPHAN image — a PNG the attempt names neither as output nor as retained",
+      plant: (dir) => {
+        const { setDir } = firstPacket(dir);
+        writeFileSync(
+          path.join(setDir, "ref-nobody-named-me.png"),
+          "not a png",
+        );
+      },
+      expect: /an orphan image is never allowed/,
+    },
+    {
+      name: "an ALL-INFRASTRUCTURE-FAILURE run trying to record a rate — every set ERROR, zero measured",
+      plant: (dir) => {
+        // The reproduction, frozen into a packet: the sandbox was absent, so
+        // every set died at `capture` without the engine ever speaking. The
+        // gate must refuse to read 0/N off it as a rate.
+        const root = path.join(dir, "first-pass");
+        const exam = readdirSync(root).sort()[0];
+        const examDir = path.join(root, exam);
+        for (const e of readdirSync(examDir, { withFileTypes: true })) {
+          if (!e.isDirectory()) continue;
+          const setDir = path.join(examDir, e.name);
+          const a = readAttempt(setDir);
+          a.chainComplete = false;
+          a.firstStop = {
+            stage: "capture",
+            status: "ERROR",
+            message:
+              "need --harness <dir> with altitude-web-components@1.0.2, react@18, react-dom@18, esbuild installed",
+          };
+          a.stages = [
+            {
+              stage: "capture",
+              status: "ERROR",
+              ms: 1,
+              driver: "harness",
+              command: "npx tsx extract/computed/run.ts --harness …",
+              message: a.firstStop.message,
+              artifacts: [],
+            },
+          ];
+          writeAttempt(setDir, a);
+        }
+      },
+      expect: /UNMEASURED: exam ".*" attempted \d+ set\(s\) and MEASURED NONE/,
+    },
   ];
 
-  let ok = true;
+  let ok = preflightRedCases();
   const base = stage();
   const green = runCheck({});
   if (!green.ok) {
