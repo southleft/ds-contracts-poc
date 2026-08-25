@@ -138,12 +138,12 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 51,
+      "mintedLeaves": 53,
       "mintedLeavesUnfolded": 51,
       "baseBindings": 62,
-      "stateBindings": 13,
+      "stateBindings": 15,
       "codeOnlyChannels": 3,
-      "overflowBindings": 11,
+      "overflowBindings": 13,
       "folds": 10
     },
     "worstRows": [
@@ -268,6 +268,7 @@
     ],
     "namedLosses": [
       "overflow: text-input.outline-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: text-input.outline-width [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: text-input.border-bottom-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: text-input.border-left-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: text-input.border-right-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
@@ -278,6 +279,7 @@
       "overflow: text-input.text-decoration-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: text-input.text-emphasis-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: text-input.outline-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: text-input.outline-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "code-only: label.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <label>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <label> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: text-input.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: text-input__counter-alert.clip — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"

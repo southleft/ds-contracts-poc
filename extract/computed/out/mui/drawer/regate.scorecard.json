@@ -85,7 +85,7 @@
       "mintedLeavesUnfolded": 17,
       "baseBindings": 17,
       "stateBindings": 0,
-      "codeOnlyChannels": 13,
+      "codeOnlyChannels": 12,
       "overflowBindings": 0,
       "folds": 9
     },
@@ -220,7 +220,6 @@
       "code-only: root.z-index — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: backdrop-root.position — declared-channel value outside the bounded grammar — named residue (v15)",
       "code-only: backdrop-root.z-index — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: label.border-right-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "code-only: label.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label.position — declared-channel value outside the bounded grammar — named residue (v15)"
     ],

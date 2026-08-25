@@ -56,9 +56,9 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 6,
-      "mintedLeavesUnfolded": 6,
-      "baseBindings": 5,
+      "mintedLeaves": 8,
+      "mintedLeavesUnfolded": 8,
+      "baseBindings": 6,
       "stateBindings": 0,
       "codeOnlyChannels": 1,
       "overflowBindings": 0,
@@ -167,7 +167,7 @@
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [],
-        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+        "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "unset__focus-visible",
@@ -187,7 +187,7 @@
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [],
-        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+        "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "vertical__default",
@@ -207,7 +207,7 @@
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [],
-        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+        "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "vertical__focus-visible",
@@ -227,7 +227,7 @@
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [],
-        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+        "note": "original screenshot unavailable — pixel not scored"
       }
     ]
   }
