@@ -1,0 +1,122 @@
+[
+  {
+    "key": "plain.sm__default",
+    "pctExact": 0.11067708333333333,
+    "pctAA": 0.048828125
+  },
+  {
+    "key": "plain.sm__hover",
+    "pctExact": 0.11067708333333333,
+    "pctAA": 0.048828125
+  },
+  {
+    "key": "plain.sm__focus-visible",
+    "pctExact": 0.11067708333333333,
+    "pctAA": 0.048828125
+  },
+  {
+    "key": "plain.sm__active",
+    "pctExact": 0.11067708333333333,
+    "pctAA": 0.048828125
+  },
+  {
+    "key": "plain.lg__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "plain.lg__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "plain.lg__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "plain.lg__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "marked.sm__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "marked.sm__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "marked.sm__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "marked.sm__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "marked.lg__default",
+    "pctExact": 0.11067708333333333,
+    "pctAA": 0.048828125
+  },
+  {
+    "key": "marked.lg__hover",
+    "pctExact": 0.11067708333333333,
+    "pctAA": 0.048828125
+  },
+  {
+    "key": "marked.lg__focus-visible",
+    "pctExact": 0.11067708333333333,
+    "pctAA": 0.048828125
+  },
+  {
+    "key": "marked.lg__active",
+    "pctExact": 0.11067708333333333,
+    "pctAA": 0.048828125
+  },
+  {
+    "key": "other.sm__default",
+    "pctExact": 0.13671875,
+    "pctAA": 0.035807291666666664
+  },
+  {
+    "key": "other.sm__hover",
+    "pctExact": 0.13671875,
+    "pctAA": 0.035807291666666664
+  },
+  {
+    "key": "other.sm__focus-visible",
+    "pctExact": 0.13671875,
+    "pctAA": 0.035807291666666664
+  },
+  {
+    "key": "other.sm__active",
+    "pctExact": 0.13671875,
+    "pctAA": 0.035807291666666664
+  },
+  {
+    "key": "other.lg__default",
+    "pctExact": 0.1953125,
+    "pctAA": 0.14322916666666666
+  },
+  {
+    "key": "other.lg__hover",
+    "pctExact": 0.1953125,
+    "pctAA": 0.14322916666666666
+  },
+  {
+    "key": "other.lg__focus-visible",
+    "pctExact": 0.1953125,
+    "pctAA": 0.14322916666666666
+  },
+  {
+    "key": "other.lg__active",
+    "pctExact": 0.1953125,
+    "pctAA": 0.14322916666666666
+  }
+]

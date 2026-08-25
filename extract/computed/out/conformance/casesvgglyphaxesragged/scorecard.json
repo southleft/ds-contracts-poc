@@ -1,0 +1,454 @@
+{
+  "component": "CaseSvgGlyphAxesRagged",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "151.0.7922.34",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 4,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 912,
+    "cellsEqual": 880,
+    "pctEqual": 96.49122807017544,
+    "rowsFullyEqual": 0,
+    "rows": 16
+  },
+  "pixel": {
+    "pairs": 16,
+    "perfectExact": 0,
+    "perfectAA": 0,
+    "measured": 16,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 89.14876302083333,
+    "meanAA": 0.068359375,
+    "maxAA": 0.14322916666666666
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 6,
+    "mintedLeavesUnfolded": 6,
+    "baseBindings": 12,
+    "stateBindings": 0,
+    "codeOnlyChannels": 3,
+    "overflowBindings": 0,
+    "folds": 30
+  },
+  "worstRows": [
+    {
+      "key": "plain.lg__hover",
+      "pctAA": 0.14322916666666666,
+      "pctExact": 93.11197916666667,
+      "channelsMismatched": 2
+    },
+    {
+      "key": "plain.lg__focus-visible",
+      "pctAA": 0.14322916666666666,
+      "pctExact": 93.11197916666667,
+      "channelsMismatched": 2
+    },
+    {
+      "key": "plain.lg__active",
+      "pctAA": 0.14322916666666666,
+      "pctExact": 93.11197916666667,
+      "channelsMismatched": 2
+    },
+    {
+      "key": "plain.lg__default",
+      "pctAA": 0.14322916666666666,
+      "pctExact": 77.48697916666667,
+      "channelsMismatched": 2
+    },
+    {
+      "key": "plain.sm__hover",
+      "pctAA": 0.048828125,
+      "pctExact": 93.02734375,
+      "channelsMismatched": 2
+    },
+    {
+      "key": "plain.sm__focus-visible",
+      "pctAA": 0.048828125,
+      "pctExact": 93.02734375,
+      "channelsMismatched": 2
+    },
+    {
+      "key": "plain.sm__active",
+      "pctAA": 0.048828125,
+      "pctExact": 93.02734375,
+      "channelsMismatched": 2
+    },
+    {
+      "key": "marked.lg__hover",
+      "pctAA": 0.048828125,
+      "pctExact": 93.02734375,
+      "channelsMismatched": 2
+    }
+  ],
+  "topMismatchedChannels": [
+    [
+      "part-0-0-0.d",
+      16
+    ],
+    [
+      "part-0-0-0.fill",
+      16
+    ]
+  ],
+  "namedLosses": [
+    "promotion: svg-content-multi-axis: CaseSvgGlyphAxesRagged.a — markup varies over more than one axis; asset refused (part still promoted as a box)",
+    "code-only: icon.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: part-0-0-0.d — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <path>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <path> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: part-0-0-0.fill — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <path>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <path> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it."
+  ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "(none declared)",
+    "leavesAdded": 0,
+    "divergent": []
+  },
+  "rows": [
+    {
+      "key": "plain.sm__default",
+      "channelsCompared": 57,
+      "channelsEqual": 55,
+      "pctExact": 77.40234375,
+      "pctAA": 0.048828125,
+      "mismatches": [
+        {
+          "part": "part-0-0-0",
+          "channel": "d",
+          "ours": "none",
+          "theirs": "path(\"M 2 6 L 5 9 L 10 2\")"
+        },
+        {
+          "part": "part-0-0-0",
+          "channel": "fill",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "plain.sm__hover",
+      "channelsCompared": 57,
+      "channelsEqual": 55,
+      "pctExact": 93.02734375,
+      "pctAA": 0.048828125,
+      "mismatches": [
+        {
+          "part": "part-0-0-0",
+          "channel": "d",
+          "ours": "none",
+          "theirs": "path(\"M 2 6 L 5 9 L 10 2\")"
+        },
+        {
+          "part": "part-0-0-0",
+          "channel": "fill",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "plain.sm__focus-visible",
+      "channelsCompared": 57,
+      "channelsEqual": 55,
+      "pctExact": 93.02734375,
+      "pctAA": 0.048828125,
+      "mismatches": [
+        {
+          "part": "part-0-0-0",
+          "channel": "d",
+          "ours": "none",
+          "theirs": "path(\"M 2 6 L 5 9 L 10 2\")"
+        },
+        {
+          "part": "part-0-0-0",
+          "channel": "fill",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "plain.sm__active",
+      "channelsCompared": 57,
+      "channelsEqual": 55,
+      "pctExact": 93.02734375,
+      "pctAA": 0.048828125,
+      "mismatches": [
+        {
+          "part": "part-0-0-0",
+          "channel": "d",
+          "ours": "none",
+          "theirs": "path(\"M 2 6 L 5 9 L 10 2\")"
+        },
+        {
+          "part": "part-0-0-0",
+          "channel": "fill",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "plain.lg__default",
+      "channelsCompared": 57,
+      "channelsEqual": 55,
+      "pctExact": 77.48697916666667,
+      "pctAA": 0.14322916666666666,
+      "mismatches": [
+        {
+          "part": "part-0-0-0",
+          "channel": "d",
+          "ours": "none",
+          "theirs": "path(\"M 3 3 L 13 13 M 13 3 L 3 13\")"
+        },
+        {
+          "part": "part-0-0-0",
+          "channel": "fill",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "plain.lg__hover",
+      "channelsCompared": 57,
+      "channelsEqual": 55,
+      "pctExact": 93.11197916666667,
+      "pctAA": 0.14322916666666666,
+      "mismatches": [
+        {
+          "part": "part-0-0-0",
+          "channel": "d",
+          "ours": "none",
+          "theirs": "path(\"M 3 3 L 13 13 M 13 3 L 3 13\")"
+        },
+        {
+          "part": "part-0-0-0",
+          "channel": "fill",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "plain.lg__focus-visible",
+      "channelsCompared": 57,
+      "channelsEqual": 55,
+      "pctExact": 93.11197916666667,
+      "pctAA": 0.14322916666666666,
+      "mismatches": [
+        {
+          "part": "part-0-0-0",
+          "channel": "d",
+          "ours": "none",
+          "theirs": "path(\"M 3 3 L 13 13 M 13 3 L 3 13\")"
+        },
+        {
+          "part": "part-0-0-0",
+          "channel": "fill",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "plain.lg__active",
+      "channelsCompared": 57,
+      "channelsEqual": 55,
+      "pctExact": 93.11197916666667,
+      "pctAA": 0.14322916666666666,
+      "mismatches": [
+        {
+          "part": "part-0-0-0",
+          "channel": "d",
+          "ours": "none",
+          "theirs": "path(\"M 3 3 L 13 13 M 13 3 L 3 13\")"
+        },
+        {
+          "part": "part-0-0-0",
+          "channel": "fill",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "marked.sm__default",
+      "channelsCompared": 57,
+      "channelsEqual": 55,
+      "pctExact": 77.42838541666667,
+      "pctAA": 0.032552083333333336,
+      "mismatches": [
+        {
+          "part": "part-0-0-0",
+          "channel": "d",
+          "ours": "none",
+          "theirs": "path(\"M 2 2 L 10 10\")"
+        },
+        {
+          "part": "part-0-0-0",
+          "channel": "fill",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "marked.sm__hover",
+      "channelsCompared": 57,
+      "channelsEqual": 55,
+      "pctExact": 93.05338541666667,
+      "pctAA": 0.032552083333333336,
+      "mismatches": [
+        {
+          "part": "part-0-0-0",
+          "channel": "d",
+          "ours": "none",
+          "theirs": "path(\"M 2 2 L 10 10\")"
+        },
+        {
+          "part": "part-0-0-0",
+          "channel": "fill",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "marked.sm__focus-visible",
+      "channelsCompared": 57,
+      "channelsEqual": 55,
+      "pctExact": 93.05338541666667,
+      "pctAA": 0.032552083333333336,
+      "mismatches": [
+        {
+          "part": "part-0-0-0",
+          "channel": "d",
+          "ours": "none",
+          "theirs": "path(\"M 2 2 L 10 10\")"
+        },
+        {
+          "part": "part-0-0-0",
+          "channel": "fill",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "marked.sm__active",
+      "channelsCompared": 57,
+      "channelsEqual": 55,
+      "pctExact": 93.05338541666667,
+      "pctAA": 0.032552083333333336,
+      "mismatches": [
+        {
+          "part": "part-0-0-0",
+          "channel": "d",
+          "ours": "none",
+          "theirs": "path(\"M 2 2 L 10 10\")"
+        },
+        {
+          "part": "part-0-0-0",
+          "channel": "fill",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "marked.lg__default",
+      "channelsCompared": 57,
+      "channelsEqual": 55,
+      "pctExact": 77.40234375,
+      "pctAA": 0.048828125,
+      "mismatches": [
+        {
+          "part": "part-0-0-0",
+          "channel": "d",
+          "ours": "none",
+          "theirs": "path(\"M 2 6 L 5 9 L 10 2\")"
+        },
+        {
+          "part": "part-0-0-0",
+          "channel": "fill",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "marked.lg__hover",
+      "channelsCompared": 57,
+      "channelsEqual": 55,
+      "pctExact": 93.02734375,
+      "pctAA": 0.048828125,
+      "mismatches": [
+        {
+          "part": "part-0-0-0",
+          "channel": "d",
+          "ours": "none",
+          "theirs": "path(\"M 2 6 L 5 9 L 10 2\")"
+        },
+        {
+          "part": "part-0-0-0",
+          "channel": "fill",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "marked.lg__focus-visible",
+      "channelsCompared": 57,
+      "channelsEqual": 55,
+      "pctExact": 93.02734375,
+      "pctAA": 0.048828125,
+      "mismatches": [
+        {
+          "part": "part-0-0-0",
+          "channel": "d",
+          "ours": "none",
+          "theirs": "path(\"M 2 6 L 5 9 L 10 2\")"
+        },
+        {
+          "part": "part-0-0-0",
+          "channel": "fill",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "marked.lg__active",
+      "channelsCompared": 57,
+      "channelsEqual": 55,
+      "pctExact": 93.02734375,
+      "pctAA": 0.048828125,
+      "mismatches": [
+        {
+          "part": "part-0-0-0",
+          "channel": "d",
+          "ours": "none",
+          "theirs": "path(\"M 2 6 L 5 9 L 10 2\")"
+        },
+        {
+          "part": "part-0-0-0",
+          "channel": "fill",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "none"
+        }
+      ]
+    }
+  ]
+}
