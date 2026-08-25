@@ -2845,3 +2845,73 @@ export function sortByDependencies(contracts: Contract[]): Contract[] {
   for (const c of contracts) visit(c, []);
   return sorted;
 }
+
+/* ---------------------------------------------------------------------------
+ * DESIGN-TIME SLOT CONTENT — the ONE policy both emitters read.
+ *
+ * A Figma MAIN COMPONENT's slot content and a generated Storybook meta's
+ * canonical args/render are the SAME object: the design-time default that
+ * instances inherit and a fill replaces (Figma's `resetSlot()` returns to it;
+ * a story's `args` is what every args-only story shows). Until RC5 only ONE
+ * emitter computed it. `core/emit-react.ts` spelled a sample sentence into
+ * `args.children` for the default slot; `core/emit-figma-script.ts` had no
+ * counterpart at all, so the component a designer opens was CHILDLESS — and a
+ * childless auto-layout node has nothing to re-measure, so the birth-box
+ * repair (FC-SLOT-BIRTH-BOX) correctly floors it at Figma's 1px minimum. The
+ * measured outcome: ds.blockquote 33x17 with both slots 1x1, ds.toast 320x17,
+ * ds.two-column 640x1 — against a reference render that draws the sample
+ * sentence (parity/receipts/v1/census/first-party/ds.blockquote/ref-*.png).
+ *
+ * The asymmetry is the cause. This function is the cure: ONE policy, three
+ * rules, read by BOTH emitters, so the two design-time surfaces cannot drift.
+ *
+ * RULE 3 IS A DELIBERATE REFUSAL, NOT AN OMISSION. A named slot with no
+ * defaultContent has no design-time content on EITHER surface — emit-react's
+ * `slotStories` loop `continue`s when there is nothing to sample, and the
+ * canonical meta args never fills a named slot. Minting a placeholder there
+ * would put content on the canvas that no code surface has; minting a
+ * MINIMUM BOX would put geometry there that no surface declares. Measured,
+ * from the committed census code halves against the same rows on the mock
+ * canvas: ds.two-column CSS 640x0 vs canvas 640x1, ds.sidebar-layout CSS
+ * 640x0 vs canvas 640x1, ds.grid-gallery CSS 640x16 vs canvas 640x18 — the
+ * canvas is already within Figma's 1px-per-axis floor of what the code
+ * surface draws. The region is empty because the CONTRACT declares no
+ * content, and the remedy is a contract edit (`slot.defaultContent`), not an
+ * engine edit. What the engine owes is a RECEIPT: the emitter names every
+ * such slot instead of shipping a silent sliver.
+ * ------------------------------------------------------------------------- */
+
+/** The slot name that is the code-side default slot (React `children`). */
+export const DEFAULT_CONTENT_SLOT = "children";
+
+/** The design-time sample the generated Storybook meta puts in `args.children`
+ *  — and, since RC5, the string the Figma main component's default slot
+ *  carries too. Spelled ONCE; `core/emit-react.ts` and
+ *  `core/emit-figma-script.ts` both read it from here. */
+export const DEFAULT_SLOT_SAMPLE = "The quick brown fox jumps over the lazy dog.";
+
+export type DesignTimeSlotContent =
+  /** The contract declares the content: both emitters instantiate it. */
+  | { kind: "declared" }
+  /** The default `children` slot with nothing declared: both emitters carry
+   *  DEFAULT_SLOT_SAMPLE (story args on the code side, one TEXT child of the
+   *  SLOT node on the canvas side). */
+  | { kind: "sample"; text: string }
+  /** Nothing to draw on either surface — the canvas draws an EMPTY region and
+   *  says so by name. `reason` is the receipt's words. */
+  | { kind: "none"; reason: string };
+
+/** THE POLICY. Both emitters call this and nothing else. */
+export function designTimeSlotContent(
+  slot: z.infer<typeof SlotSchema>,
+): DesignTimeSlotContent {
+  if ((slot.defaultContent?.length ?? 0) > 0) return { kind: "declared" };
+  if (slot.name === DEFAULT_CONTENT_SLOT) {
+    return { kind: "sample", text: DEFAULT_SLOT_SAMPLE };
+  }
+  return {
+    kind: "none",
+    reason:
+      'no defaultContent and not the default `children` slot — the canvas draws an EMPTY region (a hugging axis re-measures to Figma\'s 1px floor) exactly as the code surfaces render nothing: emit-react\'s story loop has nothing to sample and emit-html renders the wrapper empty. A placeholder here would be content no code surface has, and a minimum box would be geometry no surface declares. Declare `slot.defaultContent` to give this slot design-time content on BOTH surfaces',
+  };
+}
