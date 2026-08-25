@@ -331,7 +331,7 @@ const COMPONENTS = [
         "kind": "channel",
         "channel": "text-indent",
         "value": "{imported.badge.root.text-indent.default}",
-        "reason": "Figma text nodes have no first-line indent.",
+        "reason": "Figma text nodes have no first-line indent. Where the MEASURED indent lays the first line entirely outside the content box (Part.textOutOfBox), the canvas draws NO text child on those combos: the browser paints no text in the box there, so drawing the label at indent 0 would invent ink the library never shows.",
         "variants": {
           "count": 4,
           "of": 8,
@@ -348,7 +348,7 @@ const COMPONENTS = [
         "kind": "channel",
         "channel": "text-indent",
         "value": "{imported.badge.root.text-indent.dot}",
-        "reason": "Figma text nodes have no first-line indent.",
+        "reason": "Figma text nodes have no first-line indent. Where the MEASURED indent lays the first line entirely outside the content box (Part.textOutOfBox), the canvas draws NO text child on those combos: the browser paints no text in the box there, so drawing the label at indent 0 would invent ink the library never shows.",
         "variants": {
           "count": 4,
           "of": 8,

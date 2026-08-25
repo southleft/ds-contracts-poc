@@ -1221,6 +1221,22 @@
         "hugsBelowMaxWidth": {
           "type": "boolean"
         },
+        "textOutOfBox": {
+          "type": "object",
+          "properties": {
+            "prop": {
+              "type": "string"
+            },
+            "values": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
         "states": {
           "type": "object",
           "propertyNames": {

@@ -3,6 +3,6 @@
   "component": "CaseGridInFlexFill",
   "contract": "conformance/seeds/grid-in-flex-fill.contract.json",
   "generatedBy": "extract/computed/run.ts",
-  "browser": "151.0.7922.34",
+  "browser": "149.0.7827.55",
   "items": []
 }

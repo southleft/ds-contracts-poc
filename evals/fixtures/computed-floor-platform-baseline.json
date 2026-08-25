@@ -1,17 +1,26 @@
 {
-  "_note": "Real Chromium computed-style replay is platform-sensitive even at the same pinned browser revision. These are measured run-of-record values, not interchangeable thresholds. Drift in either direction requires review.",
+  "_note": "Measured run-of-record values, not interchangeable thresholds. Drift in either direction requires review.\n\nCORRECTED 2026-08-25 (fix/pin-render-browser). This file used to say: \"Real Chromium computed-style replay is platform-sensitive even at the same pinned browser revision\", and `linux` excluded four channels on that premise. MEASUREMENT FALSIFIED THE PREMISE. Those four channels \u2014 flex-line-count, position-anchor, ruby-overhang, text-fit \u2014 are not platform sensitivity. They are a CAPTURE-vs-REPLAY BROWSER delta: extract/computed/out/button/captured-truth.json was captured on Chromium 151.0.7922.34, while `playwright-core` pins chromium-1228 = Chromium 149.0.7827.55, and those four properties compute differently between the two (position-anchor alone flips `none` -> `normal`).\n\nThe cause was chromiumExecutable() resolving the ms-playwright cache by HIGHEST revision present, so a machine with a stray chromium-1234 replayed on 151 and matched a 151 capture, while CI replayed on the pinned 149 and did not. `darwin` was recorded on the stray and therefore needed no exclusions; `linux` ran the pin, saw the four, and excluded them under a platform-sounding reason that was wrong. That false reason is why this survived: it made a wrong exclusion sound principled.\n\nWith the resolver pinned (extract/figma/visual-parity/render.ts) BOTH platforms replay on Chromium 149.0.7827.55, and once the four browser-delta channels are excluded the two rows below are IDENTICAL \u2014 same pct to every digit, same cellsCompared, same exclusions. There is no measured platform difference left in this instrument. The rows are kept keyed by process.platform because the gate reads them that way, and because a real platform difference appearing later must have somewhere to be recorded and reviewed.\n\nTHE EXCLUSIONS ARE A CONSEQUENCE, NOT A FIX. They exist because the committed capture was taken on a browser we no longer render with. Re-capturing that component on the pinned browser would remove the need for all four; until then they are named here with the real reason.",
   "darwin": {
-    "pct": 99.97537944618236,
+    "pct": 99.97527632344386,
     "tolerancePp": 0.05,
-    "cellsCompared": 4142880,
+    "cellsCompared": 4125600,
     "namedExclusions": [
       "app-region",
       "text-decoration",
       "translate-x",
-      "translate-y"
+      "translate-y",
+      "flex-line-count",
+      "position-anchor",
+      "ruby-overhang",
+      "text-fit"
     ],
-    "extraExclusions": [],
-    "source": "macOS arm64 run-of-record in extract/computed/out/button/numbers.json"
+    "extraExclusions": [
+      "flex-line-count",
+      "position-anchor",
+      "ruby-overhang",
+      "text-fit"
+    ],
+    "source": "macOS arm64 replay on the PINNED browser (chromium-1228 = Chromium 149.0.7827.55), node 20.19.4, after the four capture-vs-replay browser-delta exclusions. Re-measured 2026-08-25; darwin and linux agree to every digit."
   },
   "linux": {
     "pct": 99.97527632344386,
@@ -33,6 +42,6 @@
       "ruby-overhang",
       "text-fit"
     ],
-    "source": "Ubuntu 24.04 x64 replay, node 20.19.4, lockfile Chromium, after named computed-only exclusions"
+    "source": "Ubuntu 24.04 x64 replay on the PINNED browser (chromium-1228 = Chromium 149.0.7827.55), node 20.19.4, after the four capture-vs-replay browser-delta exclusions. Re-measured 2026-08-25; darwin and linux agree to every digit."
   }
 }

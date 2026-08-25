@@ -469,6 +469,8 @@ function anatomyPage(): { route: string; html: string } {
           text: "Static literal text — see below.",
           textByProp:
             'Per-enum-value text overrides merged over <code>text</code> — see <a href="#text-by-prop">text by prop</a>.',
+          textOutOfBox:
+            'MEASURED evidence that the indent evicts the label from its box — see <a href="#text-out-of-box">text out of box</a>.',
           overridable:
             'Root-part consent to per-instance overrides — see <a href="/spec/composition/#ref-overrides">Composition</a>.',
           meter: "Progress fill geometry — see below.",
@@ -539,6 +541,16 @@ function anatomyPage(): { route: string; html: string } {
           },
           "the Slider’s left value label (committed usage: examples/untitled-ui/storybook/contracts/slider.contract.json)",
         ),
+    ),
+    section(
+      "text-out-of-box",
+      "Text out of box",
+      ["generated"],
+      `<p><code>textOutOfBox: { prop?, values? }</code> (schema v18) is MEASURED evidence, never hand-authored: on the named combos the part\u2019s <code>text-indent</code> lays the first line <em>entirely outside</em> the content box, so the browser paints no text in the box at all. The canvas emitter compiles <strong>no text child</strong> for those combos; the <code>text-indent</code> code-only fact already lists the same variant names and carries the reason. The code emitters ignore it \u2014 they write the real declaration, which hides the text exactly as the library does.</p><p>Field case: altitude\u2019s Badge <code>.al-is-dot</code> is an 8px status pip (<code>min/max-width: 8px</code>) whose slotted label is pushed away by <code>text-indent: 9999px</code>. Before this field the first fresh mint painted the word \u201cBadge\u201d across the pip and over its neighbouring cells: dropping the offset and drawing the label at indent 0 does not lose a fact, it INVENTS one.</p>` +
+        `<p><code>prop</code> \u2014 the driving enum prop, by canonical name; ABSENT means every enumerated combo (the sr-only spelling: <code>text-indent: -9999px</code> on a label that is never shown). <code>values</code> \u2014 the canonical values of that prop on which the measurement found the first line outside the box.</p>` +
+        refusals("Refusals:", [
+          "a part with no <code>text-indent</code> channel, or with no text of its own, must not carry it (<code>validateContract</code>)",
+        ]),
     ),
     section(
       "icon",

@@ -16,13 +16,13 @@ repo it is simply absent from the denominator and scores 100%.
 
 | | |
 |---|---|
-| cases | **93** |
-| 🟢 pass | **90** |
+| cases | **94** |
+| 🟢 pass | **91** |
 | 🔴 red | **3** |
 | 🟡 yellow (UNSUPPORTED, never read) | **0** |
 | **UNSUPPORTED declared — THE RATCHET** | **18** · may only DECREASE without an explicit manifest edit |
 
-Declared dispositions: CARRIED 52 · LOWERED 4 · REFUSED 19 · UNSUPPORTED 18.
+Declared dispositions: CARRIED 52 · LOWERED 5 · REFUSED 19 · UNSUPPORTED 18.
 
 **A green gate here would mean the cases are too easy.** The point of the
 fixture is a measured frontier, and every red below is an open, named defect —
@@ -152,6 +152,7 @@ manifest.
 | 🟢 | `shadow-part` | shadow-dom | `::part(label) styling across an OPEN shadow boundary` | CARRIED | carried | PASS |
 | 🟢 | `shadow-root-closed` | shadow-dom | `a custom element with a CLOSED shadow root` | UNSUPPORTED | not read | PASS |
 | 🟢 | `svg-outside-grammar` | svg | `<svg> whose children are <circle> and <rect>` | REFUSED | refused, by name | PASS |
+| 🟢 | `text-indent-off-box` | text | `text-indent: 9999px on a box pinned to 8px (the status-pip idiom: the label is pushed out of the box and only the dot shows)` | LOWERED | carried | PASS |
 | 🟢 | `text-overflow-ellipsis` | text | `text-overflow: ellipsis + overflow hidden + nowrap` | CARRIED | carried | PASS |
 | 🟢 | `antd-component-scoped-custom-property` | tokens | `.cf-root { --cf-scoped-pad: 15px } .cf-root .cf-a { padding-inline: var(--cf-scoped-pad) } — a token DECLARED ON THE COMPONENT ROOT (not :root) and consumed by a descendant (antd cssVar component tokens on `.antd.ant-btn`)` | CARRIED | carried | PASS |
 | 🟢 | `rotate-independent-property` | transform | `rotate: 15deg (the INDEPENDENT transform property)` | UNSUPPORTED | refused, by name | PASS |

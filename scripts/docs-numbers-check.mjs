@@ -165,9 +165,23 @@ for (const stray of new Set(
   fail('extract/computed/out', `scorecards under "${stray}/" belong to no library this script knows — add it to LIB_DIRS (and to docs/22 §8.3) or every capture number below is measured over the wrong population`);
 }
 const realCards = scorecards.filter((s) => LIB_DIRS.has(s.corpus));
-const realPcts = realCards.map((s) => s.v.computed.pctEqual);
+// A scorecard with cellsCompared === 0 compared NOTHING. gate.ts returns NULL
+// for its pctEqual (@door gate.empty-comparison-is-100) — it used to return 100,
+// which sat in this mean and was counted at ">= 90%" as if it were perfect.
+// Excluded from the MEAN and the thresholds by name; still counted as a
+// component, because it exists and was run. An unmeasured component is not
+// ">= 90%", so the thresholds narrow rather than the denominator.
+const unmeasuredCards = realCards.filter((s) => s.v.computed.cellsCompared === 0);
+const realPcts = realCards.filter((s) => s.v.computed.cellsCompared > 0).map((s) => s.v.computed.pctEqual);
 const REAL_N = realCards.length;
-const REAL_MEAN = realPcts.reduce((a, b) => a + b, 0) / (REAL_N || 1);
+const REAL_MEASURED = realPcts.length;
+if (unmeasuredCards.length > 0) {
+  console.log(
+    `  UNMEASURED (0 cells compared, excluded from the mean and the thresholds): ` +
+      unmeasuredCards.map((s) => s.rel ?? s.corpus).join(', '),
+  );
+}
+const REAL_MEAN = realPcts.reduce((a, b) => a + b, 0) / (REAL_MEASURED || 1);
 const REAL_GE90 = realPcts.filter((x) => x >= 90).length;
 const REAL_GE80 = realPcts.filter((x) => x >= 80).length;
 const REAL_CELLS = realCards.reduce((a, s) => a + s.v.computed.cellsCompared, 0);

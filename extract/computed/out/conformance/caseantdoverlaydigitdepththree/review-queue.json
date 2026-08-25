@@ -3,6 +3,6 @@
   "component": "CaseAntdOverlayDigitDepthThree",
   "contract": "conformance/seeds/antd-overlay-digit-depth-three.contract.json",
   "generatedBy": "extract/computed/run.ts",
-  "browser": "151.0.7922.34",
+  "browser": "149.0.7827.55",
   "items": []
 }

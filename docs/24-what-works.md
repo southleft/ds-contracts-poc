@@ -2,7 +2,7 @@
 
 *The success-side counterpart to [23 — Known Limitations](23-known-limitations.md). Written for a design engineer deciding whether to adopt this: what is **proven**, and **how it was measured**.*
 
-> **This file is generated. Do not edit it.** `npm run capability:report` rebuilds it; `npm run capability:fresh` refuses if the committed bytes differ from a rebuild, and one of the 228 evals runs that refusal.
+> **This file is generated. Do not edit it.** `npm run capability:report` rebuilds it; `npm run capability:fresh` refuses if the committed bytes differ from a rebuild, and one of the 230 evals runs that refusal.
 
 This is the most dangerous document in the repository, because its output is
 flattering numbers, and it is built to be read with that in mind. Every number
@@ -20,15 +20,15 @@ the complete inventory of what this does not do, and it is longer than this one.
 
 Six third-party component libraries — Altitude, Ant Design, Astryx, Carbon, Flowbite / Tailwind, Fluent 2, MUI, Polaris, shadcn/ui — across five styling
 architectures were run through one pipeline. 116 components came out with a measured floor:
-**86.8% mean computed-style equality** against the original npm package rendering in the same pinned
+**86.7% mean computed-style equality** against the original npm package rendering in the same pinned
 Chromium, exact string comparison with no tolerance, over 718,018 compared style cells
-(59 of 116 components at ≥90%, 91 of 116 at ≥80%).
+(58 of 116 components at ≥90%, 90 of 116 at ≥80%).
 In the other direction, a 599-variant Figma kit converted to code scores
 **92.70% visual fidelity** over the 537 statically scorable variants, and the
 canvas→code→canvas executes through the fact diff on **15 of 15** components with every
 one of 36,287 facts classified as matched, diverged, lost or invented rather than dropped in silence.
 Exact structured projection is separately evidenced: **0 verified exact, 15 legacy unverified, 0 refused**.
-The whole thing is pinned by 228 executable claim gates and a 292-file byte-identical
+The whole thing is pinned by 230 executable claim gates and a 292-file byte-identical
 generation manifest. **What that does not say:** those 116 components are
 11.1% of the 9 libraries they came from, and they were picked because they were the tractable ones.
 
@@ -112,12 +112,12 @@ pipeline never opened still counts against it.
 | Flowbite / Tailwind | 11 | **90.4** | 90.7 | 6/11 | 10/11 | 13,804 | 93.5 | `extract/computed/out/tailwind/<comp>/scorecard.json` |
 | Fluent 2 | 11 | **82.5** | 82.4 | 4/11 | 7/11 | 132,426 | 80.8 | `extract/computed/out/fluent/<comp>/scorecard.json` |
 | Ant Design | 12 | **88.9** | 91.6 | 7/12 | 10/12 | 134,068 | 85.3 | `extract/computed/out/antd/<comp>/scorecard.json` |
-| **all libraries** | **116** | **86.8** | 90.1 | **59/116** | **91/116** | **718,018** | **85.9** |  |
+| **all libraries** | **116** | **86.7** | 90.0 | **58/116** | **90/116** | **718,018** | **85.9** |  |
 
 **Read every percentage on this page as "on the easy 11.1%."** The 116 components measured here were chosen because they were **tractable**, not at random — they are Button, Badge, Chip, Card, Checkbox, Tag, Avatar, Divider and their siblings. Across the 9 libraries they are 113 of 1,015 components (11.1%). Data grid, tree, virtualized list, date picker, rich text and charts appear in **zero** committed contracts. A mean over this slice is a statement about this slice.
 
 **Two means, both printed, because they answer different questions.** The
-unweighted mean (86.8%) treats a 16-cell Spinner and an 83,520-cell Button as equals;
+unweighted mean (86.7%) treats a 16-cell Spinner and an 83,520-cell Button as equals;
 the cell-weighted figure (85.9%) is what fraction of every style cell in the corpus
 actually matched. Neither is quoted alone. Whole-row exactness is the harshest
 cut of the same data: **2,984 of 11,568** rendered rows
@@ -248,8 +248,8 @@ No component is omitted. The worst row in the corpus is at the top.
 
 ### 3.2 The frontier fixture — held out of every average above
 
-`extract/computed/out/conformance/` holds **91** more scorecards with a mean of
-**98.0%** over 15,504 cells. They are **excluded from §3 entirely** and
+`extract/computed/out/conformance/` holds **92** more scorecards with a mean of
+**98.0%** over 15,620 cells. They are **excluded from §3 entirely** and
 must never be folded into a library mean: they are *synthetic single-construct
 cases* built by this repo to probe one CSS or DOM feature each, not components
 from anyone's design system. Including them would raise the headline number by
@@ -260,8 +260,8 @@ no scorecard escaped classification.
 
 | fixture | cases | mean %equal | counted in §3? | source |
 |---|---|---|---|---|
-| synthetic CSS/DOM constructs | 91 | 98.0 | **no** | `extract/computed/out/conformance/*/scorecard.json` |
-| real third-party components | 116 | 86.8 | yes | `extract/computed/out/**/scorecard.json` |
+| synthetic CSS/DOM constructs | 92 | 98.0 | **no** | `extract/computed/out/conformance/*/scorecard.json` |
+| real third-party components | 116 | 86.7 | yes | `extract/computed/out/**/scorecard.json` |
 
 ---
 
@@ -327,16 +327,16 @@ asserted in prose.
 | pin | value | what it forbids | source |
 |---|---|---|---|
 | generated source, byte-identical | 292 files hashed | a contract change altering generated code without review | `evals/golden.json` |
-| capture double-sweep identity | 207/207 runs | a capture whose second sweep disagrees with its first | `extract/computed/out/**/numbers.json`, `determinism` |
-| browser captures behind the corpus | 11,857 | a floor quoted from a sample smaller than it claims | same files, `captures` |
-| executable claims | 228 gates | a documented behaviour with no test | `evals/results.json` |
+| capture double-sweep identity | 208/208 runs | a capture whose second sweep disagrees with its first | `extract/computed/out/**/numbers.json`, `determinism` |
+| browser captures behind the corpus | 11,861 | a floor quoted from a sample smaller than it claims | same files, `captures` |
+| executable claims | 230 gates | a documented behaviour with no test | `evals/results.json` |
 | dropped-fact receipt count | 116 pinned exactly | honesty being switched off unnoticed — see §6 | `extract/figma/dagger-census.json` |
 | doc numbers vs the repo | gated | a doc quoting a number the repo no longer produces | `scripts/docs-numbers-check.mjs` |
 | this document vs its sources | `--check` | this page going stale while still reading as current | `scripts/build-capability-report.mjs` |
 
 ### 5.1 The claim suite by class
 
-The 228 evals are not all "does it work". They are classified by what they
+The 230 evals are not all "does it work". They are classified by what they
 claim, and the largest classes after extraction are **detection** and
 **refusal** — gates that fail if the engine *stops* saying no. That balance is
 the point: an engine that carries everything is not a better engine, it is one
@@ -345,8 +345,8 @@ that has stopped telling you what it could not do.
 | claim class | gates | what the class asserts | source |
 |---|---|---|---|
 | `C1-determinism` | 36 | same input, same bytes out | `evals/results.json` |
-| `C2-refusal` | 38 | the engine refuses BY NAME rather than guessing | `evals/results.json` |
-| `C3-detection` | 67 | a defect or drift is caught, not silently absorbed | `evals/results.json` |
+| `C2-refusal` | 39 | the engine refuses BY NAME rather than guessing | `evals/results.json` |
+| `C3-detection` | 68 | a defect or drift is caught, not silently absorbed | `evals/results.json` |
 | `C4-convergence` | 4 | a round trip settles instead of oscillating | `evals/results.json` |
 | `C5-extraction` | 64 | a fact is carried out of a real library correctly | `evals/results.json` |
 | `C6-theming` | 1 | a mode/brand switch resolves to the right values | `evals/results.json` |
@@ -399,7 +399,7 @@ filter that decides carriage scores 100% on a channel it never opened.
 | manifest | cases | breakdown | source |
 |---|---|---|---|
 | canvas constructs | 157 | CARRIED 110 · LEDGERED 38 · REFUSED 9 | `extract/figma/conformance/MANIFEST.json` |
-| CSS / DOM frontier | 93 | CARRIED 52 · REFUSED 19 · UNSUPPORTED 18 · LOWERED 4 | `conformance/MANIFEST.json` |
+| CSS / DOM frontier | 94 | CARRIED 52 · REFUSED 19 · UNSUPPORTED 18 · LOWERED 5 | `conformance/MANIFEST.json` |
 
 Of the 157 canvas constructs, **157** are `green`.
 A construct that is neither carried nor named-refused is a hard failure of that
@@ -510,8 +510,8 @@ earlier for a different purpose.
 |---|---|---|---|
 | components measured AND backed by a committed contract = components pinned by the drift instrument | 113 — `extract/computed/out/**/scorecard.json ∩ examples/*/contracts/*.contract.json` | 113 — `docs/22-generality.md §8.3, "pinned" total` | ✔ |
 | contracts committed under `examples/<lib>/contracts` = the coverage table's committed column | 116 — `examples/*/contracts/*.contract.json` | 116 — `docs/22-generality.md §8.3, "contracts committed" total` | ✔ |
-| the eval suite has as many result rows as it claims | 228 — `evals/results.json → results.length` | 228 — `same file → total` | ✔ |
-| every capture run carries the two-sweep determinism receipt | 207 — `extract/computed/out/**/numbers.json` | 207 — `count of numbers.json files` | ✔ |
+| the eval suite has as many result rows as it claims | 230 — `evals/results.json → results.length` | 230 — `same file → total` | ✔ |
+| every capture run carries the two-sweep determinism receipt | 208 — `extract/computed/out/**/numbers.json` | 208 — `count of numbers.json files` | ✔ |
 | every scorecard falls in a known corpus | 0 — `extract/computed/out/**/scorecard.json` | 0 — `the library registry in this script` | ✔ |
 | every round-trip execution reached the fact diff | 15 — `extract/figma/roundtrip-uui/report.json → totals.roundTripClosed` | 15 — `same file → totals.components` | ✔ |
 | Altitude — contracts on disk = the coverage table's committed column | 8 — `examples/altitude/contracts/*.contract.json` | 8 — `docs/22-generality.md §8.3` | ✔ |
@@ -550,13 +550,13 @@ npm run capability:fresh
 
 | artifact | sha256 (12) | bytes | what it supplied |
 |---|---|---|---|
-| `conformance/MANIFEST.json` | `95cd6cbac339` | 89,666 | CSS/DOM frontier vocabulary |
-| `docs/22-generality.md` | `0ac8c380ce9e` | 73,424 | coverage denominators (docs/22 §8.3 table) |
+| `conformance/MANIFEST.json` | `9fd345507b92` | 91,114 | CSS/DOM frontier vocabulary |
+| `docs/22-generality.md` | `cbf206ff7759` | 73,424 | coverage denominators (docs/22 §8.3 table) |
 | `evals/golden.json` | `c3d39dc59798` | 32,256 | generated-source golden manifest |
-| `evals/results.json` | `83d84e69c87d` | 7,062 | executable claim suite (registry ids + size; the pass column is the suite's own output) |
+| `evals/results.json` | `ed20d3b959a4` | 7,150 | executable claim suite (registry ids + size; the pass column is the suite's own output) |
 | `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | Untitled UI scored fidelity table |
-| `extract/computed/out/**/numbers.json` | `f3845e7a8662` | 1,381,030 | capture counts + determinism receipts — 207 files |
-| `extract/computed/out/**/scorecard.json` | `cc55710f11e7` | 19,802,652 | computed-equality per component — 207 files |
+| `extract/computed/out/**/numbers.json` | `bd009128800d` | 1,384,456 | capture counts + determinism receipts — 208 files |
+| `extract/computed/out/**/scorecard.json` | `342114e894e6` | 19,808,656 | computed-equality per component — 208 files |
 | `extract/figma/conformance/MANIFEST.json` | `8e9caedb5f10` | 113,594 | canvas construct vocabulary |
 | `extract/figma/dagger-census.json` | `95dc26ea1aae` | 6,733 | dropped-fact receipt census |
 | `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | canvas→code→canvas round trip |

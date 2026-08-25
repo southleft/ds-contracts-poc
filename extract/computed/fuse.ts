@@ -1396,6 +1396,156 @@ export function hugEvidence(a: AlignedSweep, space: PropSpace): HugEvidence {
 }
 
 // ---------------------------------------------------------------------------
+// TEXT-INDENT OFF-BOX EVIDENCE (mint round, 2026-08-25): does a carried
+// `text-indent` still leave the element's text INSIDE its own box? The
+// answer is a MEASUREMENT, not a list — the same discipline as hugEvidence
+// above.
+//
+// The live-canvas defect: altitude's Badge hides the slotted label of its
+// `.al-is-dot` plane with `text-indent: 9999px` on an 8px pip
+// (min/max-width: 8px). `text-indent` is an `annotate` channel on canvas —
+// Figma text nodes have no first-line indent — so the emitter dropped the
+// offset, kept the label, and drew "Badge" across the pip and over the
+// neighbouring cells of the minted set. Annotating is the honest answer
+// only while the canvas still draws WHAT THE BROWSER DRAWS; here the
+// browser paints no text in the box at all, so drawing the label at indent
+// 0 does not lose a fact, it INVENTS one.
+//
+// The discriminator, from the captured facts: CSS indents the first line
+// box by `text-indent` from the content-box's start edge, so an indent at
+// least as large as the used CONTENT width puts every glyph of that line
+// past the end edge — no part of it can be inside the box, whatever the
+// text is.
+//
+// Deliberately conservative, and evidence is emitted ONLY when:
+//   · the indent, the used width and the horizontal padding/border are all
+//     real pixels (a percentage or calc() indent produces a NAMED receipt
+//     and no field);
+//   · the indent is POSITIVE (a negative indent leaves the box only if it
+//     exceeds the text's own advance, which the capture does not measure —
+//     named, never guessed);
+//   · the off-box combos are either ALL of them or exactly the combos of
+//     one enum axis's value subset, and every one of those values is a
+//     DECLARED value of that contract prop (the capture's `unset`
+//     pseudo-value is not a value the canvas can condition on).
+// Anything else is a named receipt and no field, which leaves the previous
+// behaviour — draw the label, annotate the indent — exactly as it was.
+// ---------------------------------------------------------------------------
+export interface TextOutOfBoxEvidence {
+  /** part → the axis condition under which the first line lands entirely
+   *  outside the content box. An EMPTY object means every enumerated combo.
+   *  Absent from the map = no evidence (see `receipts`), and the consumer
+   *  must keep drawing the text. */
+  outOfBox: Map<string, { prop?: string; values?: string[] }>;
+  receipts: string[];
+}
+
+/** DETECTION ONLY (pure). Reads the captured computed `text-indent`,
+ *  `width`, `box-sizing`, horizontal padding and horizontal border widths of
+ *  every union part across the enabled combos. */
+export function textOutOfBoxEvidence(a: AlignedSweep, space: PropSpace): TextOutOfBoxEvidence {
+  const out: TextOutOfBoxEvidence = { outOfBox: new Map(), receipts: [] };
+  const enabled = space.enumeration.combos.filter(isEnabled);
+  const declaredValuesOf = (prop: string): Set<string> | null => {
+    const p = space.contract.props?.find((q) => q.name === prop);
+    const t = p?.type as { enum?: string[] } | string | undefined;
+    return typeof t === 'object' && Array.isArray(t?.enum) ? new Set(t.enum) : null;
+  };
+  for (let pi = 0; pi < a.baseFlat.length; pi++) {
+    const partName = a.partNames[pi];
+    const offBox: Combo[] = [];
+    const unmeasurable = new Set<string>();
+    const negative = new Set<string>();
+    let seen = 0;
+    for (const combo of enabled) {
+      const el = a.getAligned(`${combo.key}__default`)[pi];
+      if (!el) continue;
+      const indentRaw = el.node.style['text-indent'];
+      // @door fuse.no-text-indent-no-question
+      if (indentRaw === undefined) continue;
+      seen++;
+      const indent = pxValue(indentRaw);
+      if (indent === null) {
+        unmeasurable.add(indentRaw);
+        continue;
+      }
+      if (indent === 0) continue;
+      // @door fuse.negative-indent-advance-unmeasured
+      if (indent < 0) {
+        negative.add(indentRaw);
+        continue;
+      }
+      const width = pxValue(el.node.style['width']);
+      if (width === null) {
+        unmeasurable.add(el.node.style['width'] ?? '(absent)');
+        continue;
+      }
+      // Chromium resolves `width` in the box the element's own `box-sizing`
+      // names; the first line box is indented from the CONTENT edge, so a
+      // border-box width has to give its padding and borders back first.
+      const edge =
+        el.node.style['box-sizing'] === 'border-box'
+          ? (pxValue(el.node.style['padding-left']) ?? 0) +
+            (pxValue(el.node.style['padding-right']) ?? 0) +
+            (pxValue(el.node.style['border-left-width']) ?? 0) +
+            (pxValue(el.node.style['border-right-width']) ?? 0)
+          : 0;
+      if (indent >= width - edge) offBox.push(combo);
+    }
+    if (seen === 0) continue;
+    if (unmeasurable.size > 0) {
+      out.receipts.push(
+        `text-indent-off-box-unmeasurable: ${partName}.text-indent / width = ${[...unmeasurable].sort().join(' / ')} — not a pixel value, so "does the first line still start inside the box" cannot be asked. No text evidence carried; the label is drawn and the indent stays a named annotation.`,
+      );
+      continue;
+    }
+    if (negative.size > 0) {
+      out.receipts.push(
+        `text-indent-off-box-negative: ${partName}.text-indent = ${[...negative].sort().join(' / ')} — a negative indent leaves the box only if it exceeds the text's own advance, which the capture does not measure. No text evidence carried; the label is drawn and the indent stays a named annotation.`,
+      );
+      continue;
+    }
+    if (offBox.length === 0) continue;
+    if (offBox.length === enabled.length) {
+      out.outOfBox.set(partName, {});
+      continue;
+    }
+    // Exactly one enum axis's value subset, or nothing.
+    const offKeys = new Set(offBox.map((c) => c.key));
+    let matched: { prop: string; values: string[] } | null = null;
+    for (const axis of space.axes) {
+      const values = [...new Set(offBox.map((c) => c.axisValues[axis.prop]))];
+      const fits = enabled.every(
+        (c) => values.includes(c.axisValues[axis.prop]) === offKeys.has(c.key),
+      );
+      if (!fits) continue;
+      const declared = declaredValuesOf(axis.prop);
+      // @door fuse.off-box-axis-value-not-declared
+      if (!declared || values.some((v) => !declared.has(v))) {
+        out.receipts.push(
+          `text-indent-off-box-undeclared-value: ${partName}'s first line lands outside the box exactly on ${axis.prop} = ${values.sort().join(', ')}, but ${declared ? 'that is not a DECLARED value of the contract prop' : `"${axis.prop}" is not an enum contract prop`} — the canvas cannot condition on a value it never draws. No text evidence carried; the label is drawn and the indent stays a named annotation.`,
+        );
+        matched = null;
+        break;
+      }
+      matched = { prop: axis.prop, values: values.sort() };
+      break;
+    }
+    // @door fuse.off-box-uncorrelated-kept
+    if (!matched) {
+      if (out.receipts.length === 0 || !out.receipts[out.receipts.length - 1].startsWith('text-indent-off-box-undeclared-value')) {
+        out.receipts.push(
+          `text-indent-off-box-uncorrelated: ${partName}'s first line lands outside the box in ${offBox.length}/${enabled.length} combos without correlating to any single enum axis — no text evidence carried; the label is drawn and the indent stays a named annotation.`,
+        );
+      }
+      continue;
+    }
+    out.outOfBox.set(partName, matched);
+  }
+  return out;
+}
+
+// ---------------------------------------------------------------------------
 // LAYOUT enrichment: computed flex keywords → the contract's OWN layout
 // vocabulary (Part.layout). These channels are keyword-valued, so they can
 // never mint — but the schema already has slots for them. Uniform observed
