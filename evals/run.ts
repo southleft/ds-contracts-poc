@@ -8700,11 +8700,41 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         throw new Error('mintedLeafCount does not agree with the guard on what "exists" means');
       }
       // …and no SHIPPING config leans on the allowance.
+      //
+      // THE ALLOWANCE IS NOT "SOME LIBRARIES ARE EXEMPT" — it is a state, and
+      // the state is READ FROM THE TREE rather than from a list of names. A
+      // library's genuine FIRST-EVER pass has a committed minted tree with
+      // ZERO leaves (nothing has been captured yet); `mintedBootstrap` says so
+      // out loud, and `loadConfig` refuses the flag the moment that tree
+      // carries a leaf (the `outlived` refusal exercised just above). The two
+      // legal shapes are therefore exactly:
+      //
+      //     mintedBootstrap  +  zero-leaf tree   — never captured, declared
+      //     no flag          +  non-empty tree   — shipped, measures against it
+      //
+      // and BOTH crossed shapes are refused here. A blanket ban on the flag
+      // would have been the third shape — a config that cannot describe a
+      // library before its first capture — which is how the held-out exam
+      // subjects (bootstrap5, radix-themes, day-picker: committed complete,
+      // captured by nothing, deliberately) would have been unrepresentable.
+      const bootstrapping: string[] = [];
       for (const f of configs) {
         const c = JSON.parse(readFileSync(path.join(cfgDir, f), 'utf8')) as { tokens?: { minted?: string; mintedBootstrap?: boolean } };
-        if (c.tokens?.mintedBootstrap) throw new Error(`${f} still carries tokens.mintedBootstrap — a shipped library measures against its shipped tree`);
         const n = mintedLeafCount(JSON.parse(readFileSync(path.join(ROOT, c.tokens!.minted!), 'utf8')) as Record<string, unknown>);
+        if (c.tokens?.mintedBootstrap) {
+          if (n > 0) {
+            throw new Error(`${f} still carries tokens.mintedBootstrap but its tree ${c.tokens!.minted} now holds ${n} leaf/leaves — a shipped library measures against its shipped tree; delete the flag`);
+          }
+          bootstrapping.push(f);
+          continue;
+        }
         if (n === 0) throw new Error(`${f}: shipped minted tree ${c.tokens!.minted} carries ZERO leaves`);
+      }
+      // The bootstrapping set must stay NAMED and must stay small; a silent
+      // drift toward "everything is bootstrapping" is the way this guarantee
+      // would rot.
+      if (bootstrapping.length > configs.length / 2) {
+        throw new Error(`${bootstrapping.length} of ${configs.length} configs declare mintedBootstrap — the allowance has stopped being an exception`);
       }
 
       // 2. THE CLASS. astryx Slider's gated contract binds 44 refs that live
