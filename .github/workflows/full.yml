@@ -354,6 +354,17 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:computed:viewport:check
 
+      # THE FUSION SURFACE'S OWN FRESHNESS GATE. figma:fresh re-emits from
+      # committed CONTRACTS and conformance/run.ts reads committed ARTIFACTS,
+      # so neither can see an engine edit that changed what FUSION carries —
+      # an adversarial review found a door change that moved 18 components
+      # with every lane green. This re-fuses all 104 committed captured-truth
+      # corpora offline (~7s, no browser) and names every component whose
+      # carried geometry or geometry receipts moved.
+      - name: extract:computed:geometry:census (a changed fusion door cannot go unseen)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:computed:geometry:census
+
       # Full lane for the same reason as viewport above: both re-check the
       # committed pseudo-decor promotions (Carbon Toggle rotate receipts, the
       # sm/md/lg shape-size ladder) against the live engine over the committed

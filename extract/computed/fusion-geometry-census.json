@@ -1,0 +1,2593 @@
+{
+  "_marker": "THE FUSION-SURFACE FRESHNESS RECORD. Re-derived offline from every committed captured-truth.json by extract/computed/fusion-geometry-census.ts. A row that moves means that component has been re-fused by a changed door and its committed enriched.*/LEDGER.md/contract are stale — see the header of that file for the per-library remedy.",
+  "generatedBy": "extract/computed/fusion-geometry-census.ts --write",
+  "components": 104,
+  "rows": {
+    "altitude/Avatar": {
+      "carried": {
+        "avatar__badge": [
+          "height",
+          "width"
+        ],
+        "badge": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "efe4a84bd34ce066",
+      "receiptCount": 8
+    },
+    "altitude/Badge": {
+      "carried": {},
+      "receipts": "aa8d598b65e2ae30",
+      "receiptCount": 1
+    },
+    "altitude/Button": {
+      "carried": {
+        "root": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ]
+      },
+      "receipts": "c3936c745463c7db",
+      "receiptCount": 2
+    },
+    "altitude/Chip": {
+      "carried": {},
+      "receipts": "525859cb81a5c19e",
+      "receiptCount": 1
+    },
+    "altitude/Divider": {
+      "carried": {
+        "root": [
+          "height",
+          "width"
+        ]
+      },
+      "receipts": "1df4c4e129b8df1a",
+      "receiptCount": 3
+    },
+    "altitude/Heading": {
+      "carried": {
+        "root": [
+          "width"
+        ]
+      },
+      "receipts": "98128130abc1a017",
+      "receiptCount": 2
+    },
+    "altitude/IconClose": {
+      "carried": {
+        "icon": [
+          "height",
+          "width"
+        ]
+      },
+      "receipts": "32db10f1b004f2ea",
+      "receiptCount": 5
+    },
+    "altitude/Link": {
+      "carried": {},
+      "receipts": "e2ba4ef43915a1da",
+      "receiptCount": 1
+    },
+    "antd/Alert": {
+      "carried": {
+        "root": [
+          "bottom",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "31dd5701c02fa573",
+      "receiptCount": 13
+    },
+    "antd/Avatar": {
+      "carried": {
+        "root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "c85f31496dc6d010",
+      "receiptCount": 4
+    },
+    "antd/Badge": {
+      "carried": {
+        "avatar": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "badge-count": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "badge-dot": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-1-0": [
+          "height",
+          "width"
+        ],
+        "root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "scroll-number-only": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "73ee8720668fbaaa",
+      "receiptCount": 20
+    },
+    "antd/Button": {
+      "carried": {
+        "root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top"
+        ]
+      },
+      "receipts": "922c4756aa7a5988",
+      "receiptCount": 11
+    },
+    "antd/Card": {
+      "carried": {
+        "root": [
+          "bottom",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "d4d159dd1d24523f",
+      "receiptCount": 6
+    },
+    "antd/Checkbox": {
+      "carried": {
+        "checkbox": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "checkbox-inner": [
+          "height",
+          "width"
+        ],
+        "checkbox-input": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "root": [
+          "height",
+          "width"
+        ]
+      },
+      "receipts": "cee80cfb752f4c08",
+      "receiptCount": 12
+    },
+    "antd/Input": {
+      "carried": {
+        "root": [
+          "bottom",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "7213b3551439ecf8",
+      "receiptCount": 3
+    },
+    "antd/Progress": {
+      "carried": {
+        "progress-bg": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ],
+        "progress-inner": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ],
+        "root": [
+          "bottom",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "61d610a32a4c2a61",
+      "receiptCount": 10
+    },
+    "antd/Radio": {
+      "carried": {
+        "radio": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "radio-inner": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "radio-input": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "root": [
+          "height",
+          "width"
+        ]
+      },
+      "receipts": "9bb147a074e8cf01",
+      "receiptCount": 12
+    },
+    "antd/Switch": {
+      "carried": {
+        "root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "switch-handle": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "switch-inner": [
+          "height",
+          "width"
+        ],
+        "switch-inner-checked": [
+          "height",
+          "width"
+        ],
+        "switch-inner-unchecked": [
+          "height",
+          "width"
+        ]
+      },
+      "receipts": "972f1250d4387108",
+      "receiptCount": 13
+    },
+    "antd/Tag": {
+      "carried": {
+        "root": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ]
+      },
+      "receipts": "cb4cc98d3d02a25b",
+      "receiptCount": 4
+    },
+    "antd/Tooltip": {
+      "carried": {
+        "root": [
+          "height",
+          "width"
+        ],
+        "tooltip-arrow": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "tooltip-content": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "bed2e23a25140ca6",
+      "receiptCount": 9
+    },
+    "astryx/Badge": {
+      "carried": {},
+      "receipts": "187596e48ab44450",
+      "receiptCount": 1
+    },
+    "astryx/Banner": {
+      "carried": {
+        "root": [
+          "width"
+        ]
+      },
+      "receipts": "45314c96b4ee71d5",
+      "receiptCount": 14
+    },
+    "astryx/Button": {
+      "carried": {
+        "part-0": [
+          "height",
+          "width"
+        ],
+        "part-1": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "839e8198c449bea5",
+      "receiptCount": 8
+    },
+    "astryx/Card": {
+      "carried": {},
+      "receipts": "f31d02d8f78cc9e3",
+      "receiptCount": 1
+    },
+    "astryx/CheckboxInput": {
+      "carried": {
+        "checkbox": [
+          "height",
+          "width"
+        ],
+        "icon": [
+          "height",
+          "width"
+        ],
+        "part-0": [
+          "height",
+          "width"
+        ],
+        "part-0-0": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-0-0-0": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-0-0-1-0-0": [
+          "height",
+          "width"
+        ],
+        "part-0-0-1-1": [
+          "height",
+          "width"
+        ],
+        "part-0-1": [
+          "height",
+          "width"
+        ],
+        "root": [
+          "height",
+          "width"
+        ]
+      },
+      "receipts": "ad7819f0be0066e4",
+      "receiptCount": 20
+    },
+    "astryx/ProgressBar": {
+      "carried": {
+        "root": [
+          "width"
+        ]
+      },
+      "receipts": "d5e1a68ea611dee1",
+      "receiptCount": 7
+    },
+    "astryx/Slider": {
+      "carried": {
+        "part-1-0": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-1-0-1": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-1-0-2": [
+          "height",
+          "width"
+        ],
+        "root": [
+          "height",
+          "width"
+        ],
+        "slider": [
+          "height",
+          "width"
+        ],
+        "slider-thumb": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "slider-thumb-2": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "slider-track": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "tooltip": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "b9a84ed8f91d814e",
+      "receiptCount": 25
+    },
+    "astryx/Switch": {
+      "carried": {
+        "part-0": [
+          "width"
+        ],
+        "part-0-0": [
+          "bottom",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-0-0-0": [
+          "bottom",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-0-1": [
+          "bottom",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-0-1-0": [
+          "bottom",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "root": [
+          "width"
+        ],
+        "switch": [
+          "width"
+        ],
+        "switch-2": [
+          "width"
+        ],
+        "switch-thumb": [
+          "height",
+          "width"
+        ],
+        "switch-thumb-2": [
+          "height",
+          "width"
+        ]
+      },
+      "receipts": "967752dc4ff11007",
+      "receiptCount": 24
+    },
+    "astryx/TextInput": {
+      "carried": {
+        "root": [
+          "width"
+        ],
+        "text-input": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ]
+      },
+      "receipts": "c4ef63265f6efbbd",
+      "receiptCount": 7
+    },
+    "astryx/Token": {
+      "carried": {},
+      "receipts": "25c92fd34a88b911",
+      "receiptCount": 2
+    },
+    "carbon/Accordion": {
+      "carried": {
+        "accordion__heading": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ],
+        "root": [
+          "width"
+        ]
+      },
+      "receipts": "5741b64a926803f9",
+      "receiptCount": 11
+    },
+    "carbon/Button": {
+      "carried": {
+        "root": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ]
+      },
+      "receipts": "93efc73837098876",
+      "receiptCount": 1
+    },
+    "carbon/Checkbox": {
+      "carried": {
+        "checkbox": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "checkbox__validation-msg": [
+          "height",
+          "width"
+        ],
+        "checkbox-label": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "850a96298758d886",
+      "receiptCount": 10
+    },
+    "carbon/IconButton": {
+      "carried": {
+        "btn": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "icon": [
+          "right",
+          "top",
+          "width"
+        ],
+        "label": [
+          "height",
+          "left",
+          "top",
+          "width"
+        ],
+        "part-0-0-0-0": [
+          "height",
+          "width"
+        ],
+        "popover": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "popover-caret": [
+          "height",
+          "left",
+          "top",
+          "width"
+        ],
+        "root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "tooltip-trigger__wrapper": [
+          "height",
+          "width"
+        ]
+      },
+      "receipts": "d603af175b41d47a",
+      "receiptCount": 16
+    },
+    "carbon/InlineNotification": {
+      "carried": {
+        "inline-notification__close-button": [
+          "right",
+          "top"
+        ],
+        "root": [
+          "bottom",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "e06e6de9c47fcb06",
+      "receiptCount": 15
+    },
+    "carbon/Modal": {
+      "carried": {
+        "btn": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "btn-set": [
+          "height",
+          "width"
+        ],
+        "icon": [
+          "height",
+          "width"
+        ],
+        "icon-tooltip": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "label": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "label-4": [
+          "height",
+          "right",
+          "top",
+          "width"
+        ],
+        "label-5": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ],
+        "label-6": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ],
+        "label-7": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ],
+        "label-8": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "modal-close-button": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "modal-container": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "modal-header": [
+          "height",
+          "width"
+        ],
+        "part-1-0-2-0-0-0-0-0": [
+          "height",
+          "width"
+        ],
+        "popover": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "popover-caret": [
+          "height",
+          "right",
+          "top",
+          "width"
+        ],
+        "tooltip-trigger__wrapper": [
+          "height",
+          "width"
+        ]
+      },
+      "receipts": "1d0a92663776fb73",
+      "receiptCount": 46
+    },
+    "carbon/Tabs": {
+      "carried": {
+        "icon": [
+          "width"
+        ],
+        "icon-2": [
+          "width"
+        ],
+        "icon-3": [
+          "width"
+        ],
+        "icon-4": [
+          "width"
+        ],
+        "icon-5": [
+          "width"
+        ],
+        "part-0": [
+          "bottom",
+          "height",
+          "left",
+          "top",
+          "width"
+        ],
+        "part-0-0-0": [
+          "height",
+          "width"
+        ],
+        "part-1": [
+          "height",
+          "width"
+        ],
+        "part-1-1": [
+          "height",
+          "width"
+        ],
+        "part-1-1-0-0-0": [
+          "height",
+          "width"
+        ],
+        "part-1-3": [
+          "height",
+          "width"
+        ],
+        "part-1-3-0-0-0": [
+          "height",
+          "width"
+        ],
+        "part-1-5": [
+          "height",
+          "width"
+        ],
+        "part-1-5-0-0-0": [
+          "height",
+          "width"
+        ],
+        "part-2": [
+          "bottom",
+          "height",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-2-0-0": [
+          "height",
+          "width"
+        ],
+        "root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "tabs__nav-item": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "tabs__nav-item-2": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "tabs__nav-item-3": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "tabs__nav-item-label-wrapper": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "tabs__nav-item-label-wrapper-2": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "tabs__nav-item-label-wrapper-3": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "visually-hidden": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "visually-hidden-2": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "visually-hidden-3": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "9969fe57fb29ae18",
+      "receiptCount": 59
+    },
+    "carbon/Tag": {
+      "carried": {},
+      "receipts": "cc544aeffd686e5a",
+      "receiptCount": 2
+    },
+    "carbon/TextInput": {
+      "carried": {
+        "root": [
+          "height",
+          "width"
+        ],
+        "text-input": [
+          "height",
+          "width"
+        ],
+        "text-input__counter-alert": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "text-input__field-outer-wrapper": [
+          "height",
+          "width"
+        ],
+        "text-input__field-wrapper": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "text-input__label-wrapper": [
+          "height",
+          "width"
+        ]
+      },
+      "receipts": "c2dce9e5c2b5a6ac",
+      "receiptCount": 14
+    },
+    "carbon/Toggle": {
+      "carried": {
+        "root": [
+          "height",
+          "width"
+        ],
+        "toggle__appearance": [
+          "height",
+          "width"
+        ],
+        "toggle__button": [
+          "height",
+          "width"
+        ],
+        "toggle__label": [
+          "height",
+          "width"
+        ],
+        "toggle__switch": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "4a4a4ef39640890a",
+      "receiptCount": 15
+    },
+    "fluent/Avatar": {
+      "carried": {
+        "label": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "311d2682da448c5a",
+      "receiptCount": 4
+    },
+    "fluent/Badge": {
+      "carried": {
+        "root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "beaf619d98bfc28c",
+      "receiptCount": 2
+    },
+    "fluent/Button": {
+      "carried": {},
+      "receipts": "ca5444a54e8ac32d",
+      "receiptCount": 1
+    },
+    "fluent/Card": {
+      "carried": {
+        "cardheader": [
+          "height",
+          "width"
+        ],
+        "checkbox": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "label": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ],
+        "root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "226a3c1103aa004b",
+      "receiptCount": 14
+    },
+    "fluent/Checkbox": {
+      "carried": {
+        "icon": [
+          "height",
+          "width"
+        ],
+        "indicator": [
+          "height",
+          "width"
+        ],
+        "input": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-1-0-0": [
+          "height",
+          "width"
+        ],
+        "root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "2788e480c18fb76d",
+      "receiptCount": 13
+    },
+    "fluent/Dialog": {
+      "carried": {
+        "part-0-1-0": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ],
+        "part-1-0": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ],
+        "part-1-2": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ]
+      },
+      "receipts": "89dbdef481c3095a",
+      "receiptCount": 23
+    },
+    "fluent/Input": {
+      "carried": {
+        "input": [
+          "height",
+          "width"
+        ],
+        "root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "b88614da9607ee97",
+      "receiptCount": 4
+    },
+    "fluent/Spinner": {
+      "carried": {
+        "root": [
+          "height",
+          "width"
+        ],
+        "spinner": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "spinnertail": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "84ff368ece490c2d",
+      "receiptCount": 8
+    },
+    "fluent/Switch": {
+      "carried": {
+        "icon": [
+          "height",
+          "width"
+        ],
+        "indicator": [
+          "width"
+        ],
+        "input": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-1-0-0": [
+          "height",
+          "width"
+        ],
+        "root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "f6009a4a2c82766a",
+      "receiptCount": 13
+    },
+    "fluent/TabList": {
+      "carried": {
+        "root": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ],
+        "tab": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ],
+        "tab-2": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ]
+      },
+      "receipts": "fb52f49905fbd38d",
+      "receiptCount": 10
+    },
+    "fluent/Tooltip": {
+      "carried": {
+        "part-0": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "root": [
+          "bottom",
+          "height",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "28ff3b375e8f404f",
+      "receiptCount": 6
+    },
+    "mui/Accordion": {
+      "carried": {
+        "accordion-heading": [
+          "height",
+          "width"
+        ],
+        "accordion-region": [
+          "height",
+          "width"
+        ],
+        "accordionsummary-gutters": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "collapse-root": [
+          "height",
+          "width"
+        ],
+        "collapse-vertical": [
+          "height",
+          "width"
+        ],
+        "collapse-vertical-2": [
+          "height",
+          "width"
+        ],
+        "root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "19ce7f459724e112",
+      "receiptCount": 19
+    },
+    "mui/Alert": {
+      "carried": {},
+      "receipts": "bf538dfe205214d7",
+      "receiptCount": 5
+    },
+    "mui/Autocomplete": {
+      "carried": {
+        "autocomplete-clearindicator": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "autocomplete-endadornment": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "autocomplete-input": [
+          "height",
+          "width"
+        ],
+        "autocomplete-inputroot": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "autocomplete-popupindicator": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "autocomplete-tag": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "autocomplete-tag-2": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "formcontrol-fullwidth": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "icon": [
+          "height",
+          "width"
+        ],
+        "icon-2": [
+          "height",
+          "width"
+        ],
+        "icon-3": [
+          "height",
+          "width"
+        ],
+        "icon-4": [
+          "height",
+          "width"
+        ],
+        "outlinedinput-notchedoutline": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-0-0-0-1-0": [
+          "height",
+          "width"
+        ],
+        "part-0-0-1-1-0": [
+          "height",
+          "width"
+        ],
+        "part-0-0-3-0-0-0": [
+          "height",
+          "width"
+        ],
+        "part-0-0-3-1-0-0": [
+          "height",
+          "width"
+        ],
+        "part-0-0-4-0": [
+          "height",
+          "width"
+        ],
+        "root": [
+          "height",
+          "width"
+        ]
+      },
+      "receipts": "5dd00a7b7c9dae17",
+      "receiptCount": 44
+    },
+    "mui/Avatar": {
+      "carried": {
+        "root": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ]
+      },
+      "receipts": "4400173b403e4a68",
+      "receiptCount": 1
+    },
+    "mui/Badge": {
+      "carried": {
+        "badge-anchororigintopright": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "label": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ],
+        "label-2": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "5bc47b826a1e3805",
+      "receiptCount": 8
+    },
+    "mui/Breadcrumbs": {
+      "carried": {
+        "root": [
+          "width"
+        ]
+      },
+      "receipts": "4abbf3a90cdbfa63",
+      "receiptCount": 11
+    },
+    "mui/Button": {
+      "carried": {
+        "root": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ]
+      },
+      "receipts": "e33e2faef359530f",
+      "receiptCount": 1
+    },
+    "mui/Card": {
+      "carried": {
+        "root": [
+          "width"
+        ]
+      },
+      "receipts": "d15054f46b86e341",
+      "receiptCount": 3
+    },
+    "mui/Checkbox": {
+      "carried": {
+        "icon": [
+          "height",
+          "width"
+        ],
+        "part-0": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-1-0": [
+          "height",
+          "width"
+        ],
+        "root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "0cb8cd5764c6d3fa",
+      "receiptCount": 8
+    },
+    "mui/Chip": {
+      "carried": {},
+      "receipts": "7d159cc9f4d92d5b",
+      "receiptCount": 2
+    },
+    "mui/CircularProgress": {
+      "carried": {},
+      "receipts": "a6b3bbc8390c0977",
+      "receiptCount": 3
+    },
+    "mui/Dialog": {
+      "carried": {
+        "dialog-paper": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ]
+      },
+      "receipts": "b84346d0d88952b2",
+      "receiptCount": 8
+    },
+    "mui/Divider": {
+      "carried": {
+        "root": [
+          "width"
+        ]
+      },
+      "receipts": "892fa2c84f2a95e0",
+      "receiptCount": 2
+    },
+    "mui/Drawer": {
+      "carried": {
+        "root": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ]
+      },
+      "receipts": "9d7ba56d4e972313",
+      "receiptCount": 6
+    },
+    "mui/Fab": {
+      "carried": {
+        "root": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ]
+      },
+      "receipts": "5cd4b8d042386a22",
+      "receiptCount": 1
+    },
+    "mui/IconButton": {
+      "carried": {
+        "root": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ]
+      },
+      "receipts": "86c1dfc5e52d8946",
+      "receiptCount": 1
+    },
+    "mui/InputAdornment": {
+      "carried": {},
+      "receipts": "0e5140fed4cb9739",
+      "receiptCount": 2
+    },
+    "mui/LinearProgress": {
+      "carried": {
+        "linearprogress-bar": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "linearprogress-bar-2": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "39530737af7bf5b1",
+      "receiptCount": 6
+    },
+    "mui/Link": {
+      "carried": {},
+      "receipts": "b88d1c14522c27fe",
+      "receiptCount": 1
+    },
+    "mui/Menu": {
+      "carried": {
+        "label": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ],
+        "label-2": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ],
+        "label-3": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ],
+        "list-padding": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "root": [
+          "height",
+          "width"
+        ]
+      },
+      "receipts": "50d6189b77f3a817",
+      "receiptCount": 11
+    },
+    "mui/Pagination": {
+      "carried": {
+        "buttonbase-root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "buttonbase-root-2": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "icon": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "icon-2": [
+          "height",
+          "width"
+        ],
+        "icon-3": [
+          "height",
+          "width"
+        ],
+        "inputbase-root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-0-2-2-0": [
+          "height",
+          "width"
+        ],
+        "part-0-4-0-0-0": [
+          "height",
+          "width"
+        ],
+        "part-0-4-1-0-0": [
+          "height",
+          "width"
+        ],
+        "root": [
+          "height",
+          "width"
+        ],
+        "select-nativeinput": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "tablepagination-actions": [
+          "height",
+          "width"
+        ],
+        "tablepagination-spacer": [
+          "height",
+          "width"
+        ],
+        "tablepagination-toolbar": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "0f134c909456b67a",
+      "receiptCount": 34
+    },
+    "mui/Paper": {
+      "carried": {
+        "root": [
+          "width"
+        ]
+      },
+      "receipts": "d29e67b60d283993",
+      "receiptCount": 2
+    },
+    "mui/Radio": {
+      "carried": {
+        "icon": [
+          "height",
+          "width"
+        ],
+        "icon-2": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-0": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-1": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-1-0-0": [
+          "height",
+          "width"
+        ],
+        "part-1-1-0": [
+          "height",
+          "width"
+        ],
+        "root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "3338323c21dd2afb",
+      "receiptCount": 14
+    },
+    "mui/Select": {
+      "carried": {
+        "icon": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "outlinedinput-notchedoutline": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-2-0": [
+          "height",
+          "width"
+        ],
+        "part-3-0": [
+          "height",
+          "width"
+        ],
+        "root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "select-nativeinput": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "e77db08853283761",
+      "receiptCount": 16
+    },
+    "mui/Slider": {
+      "carried": {
+        "part-2-0": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "slider-rail": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "slider-thumb": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "slider-track": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "160ff815d403659d",
+      "receiptCount": 10
+    },
+    "mui/Snackbar": {
+      "carried": {},
+      "receipts": "a6e19c3573ee339d",
+      "receiptCount": 4
+    },
+    "mui/Switch": {
+      "carried": {
+        "buttonbase-root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "switch-input": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "switch-thumb": [
+          "height",
+          "width"
+        ],
+        "switch-track": [
+          "height",
+          "width"
+        ]
+      },
+      "receipts": "bc302623af4cde5a",
+      "receiptCount": 10
+    },
+    "mui/Table": {
+      "carried": {
+        "buttonbase-root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "buttonbase-root-2": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "buttonbase-root-3": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "icon": [
+          "height",
+          "width"
+        ],
+        "icon-2": [
+          "width"
+        ],
+        "icon-3": [
+          "height",
+          "width"
+        ],
+        "icon-4": [
+          "height",
+          "width"
+        ],
+        "label": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ],
+        "label-10": [
+          "height",
+          "width"
+        ],
+        "label-11": [
+          "height",
+          "width"
+        ],
+        "label-12": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ],
+        "label-2": [
+          "height",
+          "width"
+        ],
+        "label-3": [
+          "height",
+          "width"
+        ],
+        "label-4": [
+          "height",
+          "width"
+        ],
+        "label-5": [
+          "height",
+          "width"
+        ],
+        "label-6": [
+          "height",
+          "width"
+        ],
+        "label-7": [
+          "height",
+          "width"
+        ],
+        "label-8": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ],
+        "label-9": [
+          "height",
+          "width"
+        ],
+        "part-0-0-0-0-0": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-0-0-0-0-1-0": [
+          "height",
+          "width"
+        ],
+        "part-0-0-1-0-0-0": [
+          "height",
+          "width"
+        ],
+        "part-1-0-0-0-0": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-1-0-0-0-1-0": [
+          "height",
+          "width"
+        ],
+        "part-1-1-0-0-0": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-1-1-0-0-1-0": [
+          "height",
+          "width"
+        ],
+        "tablecell-alignright": [
+          "height",
+          "width"
+        ],
+        "tablecell-alignright-2": [
+          "height",
+          "width"
+        ],
+        "tablecell-body": [
+          "height",
+          "width"
+        ],
+        "tablecell-body-2": [
+          "height",
+          "width"
+        ],
+        "tablecell-head": [
+          "height",
+          "width"
+        ],
+        "tablecell-head-2": [
+          "height",
+          "width"
+        ]
+      },
+      "receipts": "0f41b969761665f1",
+      "receiptCount": 67
+    },
+    "mui/Tabs": {
+      "carried": {
+        "label": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ],
+        "label-2": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ],
+        "label-3": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ],
+        "root": [
+          "height",
+          "width"
+        ],
+        "tabs-fixed": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "tabs-indicator": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "tabs-list": [
+          "height",
+          "width"
+        ]
+      },
+      "receipts": "914012eb5155fa07",
+      "receiptCount": 14
+    },
+    "mui/TextField": {
+      "carried": {
+        "inputadornment-positionend": [
+          "height",
+          "width"
+        ],
+        "inputadornment-positionstart": [
+          "height",
+          "width"
+        ],
+        "inputbase-adornedend": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "inputbase-input": [
+          "height",
+          "width"
+        ],
+        "label": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "outlinedinput-notchedoutline": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-1-3-0": [
+          "height",
+          "width"
+        ],
+        "root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "84ac0712386aaac6",
+      "receiptCount": 24
+    },
+    "mui/Tooltip": {
+      "carried": {
+        "label": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ],
+        "root": [
+          "height",
+          "width"
+        ],
+        "tooltip-arrow": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "401eb0e970253e14",
+      "receiptCount": 8
+    },
+    "shadcn/Alert": {
+      "carried": {
+        "root": [
+          "bottom",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "8486dbfe373022e9",
+      "receiptCount": 5
+    },
+    "shadcn/Avatar": {
+      "carried": {
+        "label": [
+          "height",
+          "width"
+        ],
+        "root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "4eefbf3cecc50399",
+      "receiptCount": 7
+    },
+    "shadcn/Badge": {
+      "carried": {
+        "root": [
+          "height"
+        ]
+      },
+      "receipts": "e80cf8ead9bfbeb1",
+      "receiptCount": 2
+    },
+    "shadcn/Button": {
+      "carried": {
+        "root": [
+          "height"
+        ]
+      },
+      "receipts": "dabb86761389412a",
+      "receiptCount": 2
+    },
+    "shadcn/Card": {
+      "carried": {
+        "root": [
+          "width"
+        ]
+      },
+      "receipts": "7dcfce8f10f8e997",
+      "receiptCount": 7
+    },
+    "shadcn/Checkbox": {
+      "carried": {
+        "icon": [
+          "height",
+          "width"
+        ],
+        "part-0": [
+          "height",
+          "width"
+        ],
+        "part-0-0-0": [
+          "height",
+          "width"
+        ],
+        "root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "beeb502bf154fa7d",
+      "receiptCount": 10
+    },
+    "shadcn/Input": {
+      "carried": {
+        "root": [
+          "height",
+          "width"
+        ]
+      },
+      "receipts": "3cc29a448144d3c5",
+      "receiptCount": 3
+    },
+    "shadcn/Select": {
+      "carried": {
+        "icon": [
+          "height",
+          "width"
+        ],
+        "root": [
+          "height"
+        ]
+      },
+      "receipts": "0f7478427c0a877f",
+      "receiptCount": 7
+    },
+    "shadcn/Switch": {
+      "carried": {
+        "part-0": [
+          "height",
+          "width"
+        ],
+        "root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "ac2499ffb42ecf24",
+      "receiptCount": 6
+    },
+    "shadcn/Tabs": {
+      "carried": {
+        "label": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "label-2": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "label-3": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-0": [
+          "height",
+          "width"
+        ],
+        "root": [
+          "height",
+          "width"
+        ]
+      },
+      "receipts": "d8e82f67d9a85d71",
+      "receiptCount": 13
+    },
+    "shadcn/Tooltip": {
+      "carried": {
+        "icon": [
+          "height",
+          "width"
+        ],
+        "part-0-0": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-0-0-0-0": [
+          "height",
+          "width"
+        ],
+        "root": [
+          "height",
+          "width"
+        ]
+      },
+      "receipts": "88e2162cfbf8a9f5",
+      "receiptCount": 12
+    },
+    "tailwind/Alert": {
+      "carried": {},
+      "receipts": "f28c45118cf318b5",
+      "receiptCount": 3
+    },
+    "tailwind/Badge": {
+      "carried": {},
+      "receipts": "9be6471526720d75",
+      "receiptCount": 2
+    },
+    "tailwind/Blockquote": {
+      "carried": {
+        "root": [
+          "width"
+        ]
+      },
+      "receipts": "a8efb759e01c463d",
+      "receiptCount": 2
+    },
+    "tailwind/Button": {
+      "carried": {
+        "root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top"
+        ]
+      },
+      "receipts": "c2fb78287be213e1",
+      "receiptCount": 2
+    },
+    "tailwind/Card": {
+      "carried": {},
+      "receipts": "acda7e3cdb977fff",
+      "receiptCount": 2
+    },
+    "tailwind/HelperText": {
+      "carried": {},
+      "receipts": "7da6ddf715ded581",
+      "receiptCount": 1
+    },
+    "tailwind/Kbd": {
+      "carried": {},
+      "receipts": "8640b9a640b52310",
+      "receiptCount": 1
+    },
+    "tailwind/Label": {
+      "carried": {},
+      "receipts": "09907fb522b8df18",
+      "receiptCount": 1
+    },
+    "tailwind/Spinner": {
+      "carried": {
+        "icon": [
+          "height",
+          "width"
+        ]
+      },
+      "receipts": "96d97d3f7d18c980",
+      "receiptCount": 6
+    },
+    "tailwind/TextInput": {
+      "carried": {
+        "part-0": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ]
+      },
+      "receipts": "315028fa2f9267d5",
+      "receiptCount": 3
+    },
+    "tailwind/ToggleSwitch": {
+      "carried": {
+        "part-0": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "root": [
+          "height",
+          "width"
+        ]
+      },
+      "receipts": "1cca88a79a739c8c",
+      "receiptCount": 8
+    }
+  }
+}
