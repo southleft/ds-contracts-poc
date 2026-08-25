@@ -79,8 +79,13 @@
       "imported.avatar.root.border-top-right-radius.unset",
       "imported.avatar.root.font-size.sm",
       "imported.avatar.root.font-size.unset",
+      "imported.avatar.root.height.sm",
+      "imported.avatar.root.height.unset",
       "imported.avatar.root.line-height.sm",
       "imported.avatar.root.line-height.unset",
+      "imported.avatar.root.width.sm",
+      "imported.avatar.root.width.unset",
+      "imported.shared.color-101010",
       "imported.shared.num-600",
       "imported.shared.size-0",
       "imported.shared.size-8"
@@ -101,8 +106,8 @@
       "status": "rendered",
       "png": "code-variant-sm.png",
       "contentBox": {
-        "width": 0,
-        "height": 0
+        "width": 32,
+        "height": 32
       }
     }
   ],
