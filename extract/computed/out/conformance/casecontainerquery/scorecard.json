@@ -1,0 +1,148 @@
+{
+  "component": "CaseContainerQuery",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "151.0.7922.34",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 1,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 60,
+    "cellsEqual": 56,
+    "pctEqual": 93.33333333333333,
+    "rowsFullyEqual": 0,
+    "rows": 4
+  },
+  "pixel": {
+    "pairs": 4,
+    "perfectExact": 0,
+    "perfectAA": 0,
+    "measured": 4,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 5.651041666666667,
+    "meanAA": 5.651041666666667,
+    "maxAA": 5.651041666666667
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 6,
+    "mintedLeavesUnfolded": 6,
+    "baseBindings": 9,
+    "stateBindings": 0,
+    "codeOnlyChannels": 2,
+    "overflowBindings": 0,
+    "folds": 0
+  },
+  "worstRows": [
+    {
+      "key": "__default",
+      "pctAA": 5.651041666666667,
+      "pctExact": 5.651041666666667,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "__hover",
+      "pctAA": 5.651041666666667,
+      "pctExact": 5.651041666666667,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "__focus-visible",
+      "pctAA": 5.651041666666667,
+      "pctExact": 5.651041666666667,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "__active",
+      "pctAA": 5.651041666666667,
+      "pctExact": 5.651041666666667,
+      "channelsMismatched": 1
+    }
+  ],
+  "topMismatchedChannels": [
+    [
+      "root.container-type",
+      4
+    ]
+  ],
+  "namedLosses": [
+    "code-only: root.container-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+  ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "(none declared)",
+    "leavesAdded": 0,
+    "divergent": []
+  },
+  "rows": [
+    {
+      "key": "__default",
+      "channelsCompared": 15,
+      "channelsEqual": 14,
+      "pctExact": 5.651041666666667,
+      "pctAA": 5.651041666666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "container-type",
+          "ours": "normal",
+          "theirs": "inline-size"
+        }
+      ]
+    },
+    {
+      "key": "__hover",
+      "channelsCompared": 15,
+      "channelsEqual": 14,
+      "pctExact": 5.651041666666667,
+      "pctAA": 5.651041666666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "container-type",
+          "ours": "normal",
+          "theirs": "inline-size"
+        }
+      ]
+    },
+    {
+      "key": "__focus-visible",
+      "channelsCompared": 15,
+      "channelsEqual": 14,
+      "pctExact": 5.651041666666667,
+      "pctAA": 5.651041666666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "container-type",
+          "ours": "normal",
+          "theirs": "inline-size"
+        }
+      ]
+    },
+    {
+      "key": "__active",
+      "channelsCompared": 15,
+      "channelsEqual": 14,
+      "pctExact": 5.651041666666667,
+      "pctAA": 5.651041666666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "container-type",
+          "ours": "normal",
+          "theirs": "inline-size"
+        }
+      ]
+    }
+  ]
+}

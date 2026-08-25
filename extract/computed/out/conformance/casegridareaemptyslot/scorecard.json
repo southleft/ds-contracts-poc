@@ -1,0 +1,151 @@
+{
+  "component": "CaseGridAreaEmptySlot",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "151.0.7922.34",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 1,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 80,
+    "cellsEqual": 76,
+    "pctEqual": 95,
+    "rowsFullyEqual": 0,
+    "rows": 4
+  },
+  "pixel": {
+    "pairs": 4,
+    "perfectExact": 0,
+    "perfectAA": 4,
+    "measured": 4,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 10.9375,
+    "meanAA": 0,
+    "maxAA": 0
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 7,
+    "mintedLeavesUnfolded": 7,
+    "baseBindings": 7,
+    "stateBindings": 0,
+    "codeOnlyChannels": 5,
+    "overflowBindings": 0,
+    "folds": 0
+  },
+  "worstRows": [
+    {
+      "key": "__default",
+      "pctAA": 0,
+      "pctExact": 10.9375,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "__hover",
+      "pctAA": 0,
+      "pctExact": 10.9375,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "__focus-visible",
+      "pctAA": 0,
+      "pctExact": 10.9375,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "__active",
+      "pctAA": 0,
+      "pctExact": 10.9375,
+      "channelsMismatched": 1
+    }
+  ],
+  "topMismatchedChannels": [
+    [
+      "root.grid-template-columns",
+      4
+    ]
+  ],
+  "namedLosses": [
+    "code-only: a.grid-column-end — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: a.grid-column-start — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: a.grid-row-end — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: a.grid-row-start — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: a.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+  ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "(none declared)",
+    "leavesAdded": 0,
+    "divergent": []
+  },
+  "rows": [
+    {
+      "key": "__default",
+      "channelsCompared": 20,
+      "channelsEqual": 19,
+      "pctExact": 10.9375,
+      "pctAA": 0,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "grid-template-columns",
+          "ours": "60px 0px",
+          "theirs": "60px 140px"
+        }
+      ]
+    },
+    {
+      "key": "__hover",
+      "channelsCompared": 20,
+      "channelsEqual": 19,
+      "pctExact": 10.9375,
+      "pctAA": 0,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "grid-template-columns",
+          "ours": "60px 0px",
+          "theirs": "60px 140px"
+        }
+      ]
+    },
+    {
+      "key": "__focus-visible",
+      "channelsCompared": 20,
+      "channelsEqual": 19,
+      "pctExact": 10.9375,
+      "pctAA": 0,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "grid-template-columns",
+          "ours": "60px 0px",
+          "theirs": "60px 140px"
+        }
+      ]
+    },
+    {
+      "key": "__active",
+      "channelsCompared": 20,
+      "channelsEqual": 19,
+      "pctExact": 10.9375,
+      "pctAA": 0,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "grid-template-columns",
+          "ours": "60px 0px",
+          "theirs": "60px 140px"
+        }
+      ]
+    }
+  ]
+}

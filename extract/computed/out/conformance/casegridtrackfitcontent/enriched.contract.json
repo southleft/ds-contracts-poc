@@ -1,0 +1,82 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "conformance.grid-track-fit-content",
+  "name": "CaseGridTrackFitContent",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the CSS/DOM conformance fixture case \"grid-track-fit-content\" (grid-tracks). The fixture varies CSS CONSTRUCTS, not prop spaces, so the prop space is deliberately EMPTY: every axis the capture would enumerate is held at nothing, and the whole measurement is the computed truth of one mounted rendering. Construct: grid-template-columns: fit-content(100%) 1fr COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @ds-contracts/conformance@0.1.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {
+        "a": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.case-grid-track-fit-content.a.background-color}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "label": {
+          "text": "B",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|b — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.case-grid-track-fit-content.label.background-color}",
+            "font-size": "{imported.shared.size-12}",
+            "font-weight": "{imported.case-grid-track-fit-content.label.font-weight}"
+          }
+        }
+      },
+      "layout": {
+        "display": "grid",
+        "columns": [
+          {
+            "fit": true
+          },
+          {
+            "fr": 1
+          }
+        ],
+        "flow": "row"
+      },
+      "declared": {
+        "box-sizing": "border-box",
+        "font-family": "monospace"
+      },
+      "tokens": {
+        "background-color": "{imported.case-grid-track-fit-content.root.background-color}",
+        "font-size": "{imported.shared.size-12}",
+        "min-height": "{imported.case-grid-track-fit-content.root.min-height}",
+        "min-width": "{imported.case-grid-track-fit-content.root.min-width}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@ds-contracts/conformance",
+        "export": "CaseGridTrackFitContent"
+      }
+    }
+  }
+}

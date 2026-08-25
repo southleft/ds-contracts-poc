@@ -1,0 +1,116 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "conformance.pseudo-placeholder",
+  "name": "CasePseudoPlaceholder",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the CSS/DOM conformance fixture case \"pseudo-placeholder\" (pseudo-elements). The fixture varies CSS CONSTRUCTS, not prop spaces, so the prop space is deliberately EMPTY: every axis the capture would enumerate is held at nothing, and the whole measurement is the computed truth of one mounted rendering. Construct: input::placeholder { color } COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @ds-contracts/conformance@0.1.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [
+    "active",
+    "focus-visible"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex"
+      },
+      "parts": {
+        "a": {
+          "element": "input",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy input|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "appearance": "auto",
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "box-sizing": "border-box",
+            "cursor": "text",
+            "font-family": "monospace",
+            "overflow-x": "clip",
+            "overflow-y": "clip"
+          },
+          "layout": {
+            "grow": true
+          },
+          "declaredStates": {
+            "active": {
+              "outline-style": "auto"
+            },
+            "focus-visible": {
+              "outline-style": "auto"
+            }
+          },
+          "tokens": {
+            "background-color": "{imported.case-pseudo-placeholder.a.background-color}",
+            "border-bottom-color": "{imported.shared.color-bebebe}",
+            "border-bottom-width": "{imported.shared.size-1}",
+            "border-left-color": "{imported.shared.color-bebebe}",
+            "border-left-width": "{imported.shared.size-1}",
+            "border-right-color": "{imported.shared.color-bebebe}",
+            "border-right-width": "{imported.shared.size-1}",
+            "border-top-color": "{imported.shared.color-bebebe}",
+            "border-top-width": "{imported.shared.size-1}",
+            "font-size": "{imported.case-pseudo-placeholder.a.font-size}",
+            "padding-bottom": "{imported.shared.size-1}",
+            "padding-left": "{imported.case-pseudo-placeholder.a.padding-left}",
+            "padding-right": "{imported.case-pseudo-placeholder.a.padding-right}",
+            "padding-top": "{imported.shared.size-1}"
+          },
+          "codeOnly": [
+            {
+              "state": "active",
+              "channel": "outline-color",
+              "value": "#005fcc",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "active",
+              "channel": "outline-width",
+              "value": "1px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "outline-color",
+              "value": "#005fcc",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "outline-width",
+              "value": "1px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            }
+          ]
+        }
+      },
+      "declared": {
+        "box-sizing": "border-box",
+        "font-family": "monospace"
+      },
+      "tokens": {
+        "font-size": "{imported.case-pseudo-placeholder.root.font-size}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@ds-contracts/conformance",
+        "export": "CasePseudoPlaceholder"
+      }
+    }
+  }
+}

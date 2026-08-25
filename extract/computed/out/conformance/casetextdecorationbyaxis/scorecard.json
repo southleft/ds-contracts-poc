@@ -1,0 +1,194 @@
+{
+  "component": "CaseTextDecorationByAxis",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "151.0.7922.34",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 2,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 152,
+    "cellsEqual": 150,
+    "pctEqual": 98.6842105263158,
+    "rowsFullyEqual": 6,
+    "rows": 8
+  },
+  "pixel": {
+    "pairs": 8,
+    "perfectExact": 0,
+    "perfectAA": 0,
+    "measured": 8,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 0.6160481770833333,
+    "meanAA": 0.321044921875,
+    "maxAA": 0.76171875
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 7,
+    "mintedLeavesUnfolded": 6,
+    "baseBindings": 4,
+    "stateBindings": 3,
+    "codeOnlyChannels": 2,
+    "overflowBindings": 0,
+    "folds": 9
+  },
+  "worstRows": [
+    {
+      "key": "always__focus-visible",
+      "pctAA": 0.76171875,
+      "pctExact": 1.1360677083333333,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "none__focus-visible",
+      "pctAA": 0.6640625,
+      "pctExact": 1.0481770833333333,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "always__default",
+      "pctAA": 0.244140625,
+      "pctExact": 0.5045572916666666,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "always__hover",
+      "pctAA": 0.244140625,
+      "pctExact": 0.5045572916666666,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "always__active",
+      "pctAA": 0.244140625,
+      "pctExact": 0.5045572916666666,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "none__default",
+      "pctAA": 0.13671875,
+      "pctExact": 0.41015625,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "none__hover",
+      "pctAA": 0.13671875,
+      "pctExact": 0.41015625,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "none__active",
+      "pctAA": 0.13671875,
+      "pctExact": 0.41015625,
+      "channelsMismatched": 0
+    }
+  ],
+  "topMismatchedChannels": [
+    [
+      "root.outline-color",
+      2
+    ]
+  ],
+  "namedLosses": [
+    "code-only: root.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: root.text-decoration — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+  ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "(none declared)",
+    "leavesAdded": 0,
+    "divergent": []
+  },
+  "rows": [
+    {
+      "key": "none__default",
+      "channelsCompared": 19,
+      "channelsEqual": 19,
+      "pctExact": 0.41015625,
+      "pctAA": 0.13671875,
+      "mismatches": []
+    },
+    {
+      "key": "none__hover",
+      "channelsCompared": 19,
+      "channelsEqual": 19,
+      "pctExact": 0.41015625,
+      "pctAA": 0.13671875,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "none__focus-visible",
+      "channelsCompared": 19,
+      "channelsEqual": 18,
+      "pctExact": 1.0481770833333333,
+      "pctAA": 0.6640625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "outline-color",
+          "ours": "rgba(25, 118, 210, 1)",
+          "theirs": "rgba(0, 95, 204, 1)"
+        }
+      ]
+    },
+    {
+      "key": "none__active",
+      "channelsCompared": 19,
+      "channelsEqual": 19,
+      "pctExact": 0.41015625,
+      "pctAA": 0.13671875,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "always__default",
+      "channelsCompared": 19,
+      "channelsEqual": 19,
+      "pctExact": 0.5045572916666666,
+      "pctAA": 0.244140625,
+      "mismatches": []
+    },
+    {
+      "key": "always__hover",
+      "channelsCompared": 19,
+      "channelsEqual": 19,
+      "pctExact": 0.5045572916666666,
+      "pctAA": 0.244140625,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "always__focus-visible",
+      "channelsCompared": 19,
+      "channelsEqual": 18,
+      "pctExact": 1.1360677083333333,
+      "pctAA": 0.76171875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "outline-color",
+          "ours": "rgba(25, 118, 210, 1)",
+          "theirs": "rgba(0, 95, 204, 1)"
+        }
+      ]
+    },
+    {
+      "key": "always__active",
+      "channelsCompared": 19,
+      "channelsEqual": 19,
+      "pctExact": 0.5045572916666666,
+      "pctAA": 0.244140625,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    }
+  ]
+}

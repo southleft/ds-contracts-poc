@@ -1,0 +1,172 @@
+{
+  "component": "CaseTransformScaleZeroByAxis",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "151.0.7922.34",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 2,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 120,
+    "cellsEqual": 120,
+    "pctEqual": 100,
+    "rowsFullyEqual": 8,
+    "rows": 8
+  },
+  "pixel": {
+    "pairs": 8,
+    "perfectExact": 0,
+    "perfectAA": 4,
+    "measured": 8,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 1.875,
+    "meanAA": 0.9375,
+    "maxAA": 1.875
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 5,
+    "mintedLeavesUnfolded": 5,
+    "baseBindings": 8,
+    "stateBindings": 0,
+    "codeOnlyChannels": 0,
+    "overflowBindings": 0,
+    "folds": 0
+  },
+  "worstRows": [
+    {
+      "key": "checked__default",
+      "pctAA": 1.875,
+      "pctExact": 1.875,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "checked__hover",
+      "pctAA": 1.875,
+      "pctExact": 1.875,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "checked__focus-visible",
+      "pctAA": 1.875,
+      "pctExact": 1.875,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "checked__active",
+      "pctAA": 1.875,
+      "pctExact": 1.875,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "unchecked__default",
+      "pctAA": 0,
+      "pctExact": 1.875,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "unchecked__hover",
+      "pctAA": 0,
+      "pctExact": 1.875,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "unchecked__focus-visible",
+      "pctAA": 0,
+      "pctExact": 1.875,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "unchecked__active",
+      "pctAA": 0,
+      "pctExact": 1.875,
+      "channelsMismatched": 0
+    }
+  ],
+  "topMismatchedChannels": [],
+  "namedLosses": [],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "(none declared)",
+    "leavesAdded": 0,
+    "divergent": []
+  },
+  "rows": [
+    {
+      "key": "unchecked__default",
+      "channelsCompared": 15,
+      "channelsEqual": 15,
+      "pctExact": 1.875,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "unchecked__hover",
+      "channelsCompared": 15,
+      "channelsEqual": 15,
+      "pctExact": 1.875,
+      "pctAA": 0,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "unchecked__focus-visible",
+      "channelsCompared": 15,
+      "channelsEqual": 15,
+      "pctExact": 1.875,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "unchecked__active",
+      "channelsCompared": 15,
+      "channelsEqual": 15,
+      "pctExact": 1.875,
+      "pctAA": 0,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "checked__default",
+      "channelsCompared": 15,
+      "channelsEqual": 15,
+      "pctExact": 1.875,
+      "pctAA": 1.875,
+      "mismatches": []
+    },
+    {
+      "key": "checked__hover",
+      "channelsCompared": 15,
+      "channelsEqual": 15,
+      "pctExact": 1.875,
+      "pctAA": 1.875,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "checked__focus-visible",
+      "channelsCompared": 15,
+      "channelsEqual": 15,
+      "pctExact": 1.875,
+      "pctAA": 1.875,
+      "mismatches": []
+    },
+    {
+      "key": "checked__active",
+      "channelsCompared": 15,
+      "channelsEqual": 15,
+      "pctExact": 1.875,
+      "pctAA": 1.875,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    }
+  ]
+}

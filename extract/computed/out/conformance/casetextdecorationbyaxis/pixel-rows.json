@@ -1,0 +1,42 @@
+[
+  {
+    "key": "none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "always__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "always__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "always__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "always__active",
+    "pctExact": 0,
+    "pctAA": 0
+  }
+]

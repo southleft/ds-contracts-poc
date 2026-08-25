@@ -1,0 +1,22 @@
+[
+  {
+    "key": "__default",
+    "pctExact": 0.068359375,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "__hover",
+    "pctExact": 0.068359375,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "__focus-visible",
+    "pctExact": 0.068359375,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "__active",
+    "pctExact": 0.068359375,
+    "pctAA": 0.01953125
+  }
+]

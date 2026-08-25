@@ -1,0 +1,96 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "conformance.text-decoration-by-axis",
+  "name": "CaseTextDecorationByAxis",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the CSS/DOM conformance fixture case \"text-decoration-by-axis\" (typography). The fixture varies CSS CONSTRUCTS, not prop spaces, so the prop space is deliberately EMPTY: every axis the capture would enumerate is held at nothing, and the whole measurement is the computed truth of one mounted rendering. Construct: text-decoration-line that VARIES on one enum axis (none at the default value, underline on the other) — the mui.link `underline` shape COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @ds-contracts/conformance@0.1.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "underline",
+      "type": {
+        "enum": [
+          "none",
+          "always"
+        ]
+      },
+      "default": "none",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Underline",
+          "values": {
+            "none": "None",
+            "always": "Always"
+          }
+        },
+        "code": {
+          "prop": "underline"
+        }
+      }
+    }
+  ],
+  "states": [
+    "focus-visible"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex"
+      },
+      "text": "Link",
+      "declared": {
+        "box-sizing": "border-box",
+        "font-family": "monospace"
+      },
+      "declaredByProp": [
+        {
+          "prop": "underline",
+          "map": {
+            "none": {
+              "text-decoration-line": "none"
+            },
+            "always": {
+              "text-decoration-line": "underline"
+            }
+          }
+        }
+      ],
+      "declaredStates": {
+        "focus-visible": {
+          "outline-style": "auto"
+        }
+      },
+      "tokens": {
+        "color": "{imported.case-text-decoration-by-axis.root.color}",
+        "font-size": "{imported.case-text-decoration-by-axis.root.font-size}",
+        "font-weight": "{imported.case-text-decoration-by-axis.root.font-weight}",
+        "outline-color": "{imported.case-text-decoration-by-axis.root.outline-color}"
+      },
+      "states": {
+        "focus-visible": {
+          "outline-color": "{imported.case-text-decoration-by-axis.root.outline-color-state-focus-visible}",
+          "outline-offset": "{imported.case-text-decoration-by-axis.root.outline-offset-state-focus-visible}",
+          "outline-width": "{imported.case-text-decoration-by-axis.root.outline-width-state-focus-visible}"
+        }
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@ds-contracts/conformance",
+        "export": "CaseTextDecorationByAxis"
+      }
+    }
+  }
+}

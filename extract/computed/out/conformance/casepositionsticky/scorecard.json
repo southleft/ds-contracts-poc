@@ -1,0 +1,149 @@
+{
+  "component": "CasePositionSticky",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "151.0.7922.34",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 1,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 100,
+    "cellsEqual": 96,
+    "pctEqual": 96,
+    "rowsFullyEqual": 0,
+    "rows": 4
+  },
+  "pixel": {
+    "pairs": 4,
+    "perfectExact": 0,
+    "perfectAA": 3,
+    "measured": 4,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 2.454427083333333,
+    "meanAA": 0.771484375,
+    "maxAA": 3.0859375
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 9,
+    "mintedLeavesUnfolded": 9,
+    "baseBindings": 15,
+    "stateBindings": 2,
+    "codeOnlyChannels": 3,
+    "overflowBindings": 0,
+    "folds": 0
+  },
+  "worstRows": [
+    {
+      "key": "__focus-visible",
+      "pctAA": 3.0859375,
+      "pctExact": 4.192708333333333,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "__default",
+      "pctAA": 0,
+      "pctExact": 1.875,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "__hover",
+      "pctAA": 0,
+      "pctExact": 1.875,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "__active",
+      "pctAA": 0,
+      "pctExact": 1.875,
+      "channelsMismatched": 1
+    }
+  ],
+  "topMismatchedChannels": [
+    [
+      "label.position",
+      4
+    ]
+  ],
+  "namedLosses": [
+    "code-only: label.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label.position — declared-channel value outside the bounded grammar — named residue (v15)",
+    "code-only: label-2.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+  ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "(none declared)",
+    "leavesAdded": 0,
+    "divergent": []
+  },
+  "rows": [
+    {
+      "key": "__default",
+      "channelsCompared": 25,
+      "channelsEqual": 24,
+      "pctExact": 1.875,
+      "pctAA": 0,
+      "mismatches": [
+        {
+          "part": "label",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "sticky"
+        }
+      ]
+    },
+    {
+      "key": "__hover",
+      "channelsCompared": 25,
+      "channelsEqual": 24,
+      "pctExact": 1.875,
+      "pctAA": 0,
+      "mismatches": [
+        {
+          "part": "label",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "sticky"
+        }
+      ]
+    },
+    {
+      "key": "__focus-visible",
+      "channelsCompared": 25,
+      "channelsEqual": 24,
+      "pctExact": 4.192708333333333,
+      "pctAA": 3.0859375,
+      "mismatches": [
+        {
+          "part": "label",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "sticky"
+        }
+      ]
+    },
+    {
+      "key": "__active",
+      "channelsCompared": 25,
+      "channelsEqual": 24,
+      "pctExact": 1.875,
+      "pctAA": 0,
+      "mismatches": [
+        {
+          "part": "label",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "sticky"
+        }
+      ]
+    }
+  ]
+}

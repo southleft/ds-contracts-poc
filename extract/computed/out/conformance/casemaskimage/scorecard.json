@@ -1,0 +1,150 @@
+{
+  "component": "CaseMaskImage",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "151.0.7922.34",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 1,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 76,
+    "cellsEqual": 72,
+    "pctEqual": 94.73684210526316,
+    "rowsFullyEqual": 0,
+    "rows": 4
+  },
+  "pixel": {
+    "pairs": 4,
+    "perfectExact": 0,
+    "perfectAA": 0,
+    "measured": 4,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 1.8294270833333333,
+    "meanAA": 1.1328125,
+    "maxAA": 1.1328125
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 4,
+    "mintedLeavesUnfolded": 4,
+    "baseBindings": 4,
+    "stateBindings": 0,
+    "codeOnlyChannels": 2,
+    "overflowBindings": 0,
+    "folds": 10
+  },
+  "worstRows": [
+    {
+      "key": "__default",
+      "pctAA": 1.1328125,
+      "pctExact": 1.8294270833333333,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "__hover",
+      "pctAA": 1.1328125,
+      "pctExact": 1.8294270833333333,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "__focus-visible",
+      "pctAA": 1.1328125,
+      "pctExact": 1.8294270833333333,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "__active",
+      "pctAA": 1.1328125,
+      "pctExact": 1.8294270833333333,
+      "channelsMismatched": 1
+    }
+  ],
+  "topMismatchedChannels": [
+    [
+      "root.mask-image",
+      4
+    ]
+  ],
+  "namedLosses": [
+    "code-only: root.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: root.mask-image — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+  ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "(none declared)",
+    "leavesAdded": 0,
+    "divergent": []
+  },
+  "rows": [
+    {
+      "key": "__default",
+      "channelsCompared": 19,
+      "channelsEqual": 18,
+      "pctExact": 1.8294270833333333,
+      "pctAA": 1.1328125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "mask-image",
+          "ours": "none",
+          "theirs": "linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0))"
+        }
+      ]
+    },
+    {
+      "key": "__hover",
+      "channelsCompared": 19,
+      "channelsEqual": 18,
+      "pctExact": 1.8294270833333333,
+      "pctAA": 1.1328125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "mask-image",
+          "ours": "none",
+          "theirs": "linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0))"
+        }
+      ],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "__focus-visible",
+      "channelsCompared": 19,
+      "channelsEqual": 18,
+      "pctExact": 1.8294270833333333,
+      "pctAA": 1.1328125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "mask-image",
+          "ours": "none",
+          "theirs": "linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0))"
+        }
+      ]
+    },
+    {
+      "key": "__active",
+      "channelsCompared": 19,
+      "channelsEqual": 18,
+      "pctExact": 1.8294270833333333,
+      "pctAA": 1.1328125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "mask-image",
+          "ours": "none",
+          "theirs": "linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0))"
+        }
+      ],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    }
+  ]
+}
