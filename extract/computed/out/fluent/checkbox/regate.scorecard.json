@@ -202,8 +202,8 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 151,
-      "mintedLeavesUnfolded": 302,
+      "mintedLeaves": 163,
+      "mintedLeavesUnfolded": 374,
       "baseBindings": 66,
       "stateBindings": 48,
       "codeOnlyChannels": 22,
@@ -332,10 +332,10 @@
     ],
     "namedLosses": [
       "promotion: svg-content-multi-axis: Checkbox.indicator — markup varies over more than one axis; asset refused (part still promoted as a box)",
-      "overflow: icon.color — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
-      "overflow: icon.fill — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
-      "overflow: part-1-0-0.color — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
-      "overflow: part-1-0-0.fill — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
+      "overflow: icon.color — inheritance-only channel with uncarried nested state deltas — the captured value equals this part's ancestor on EVERY plane, and its per-state deltas exceed the nested Part.states vocabulary (plain color-kind refs only); binding the base value would pin all state planes to the resting colour, so the channel stays UNCARRIED and CSS inheritance from the ancestor renders it (leaves exist in the minted tree)",
+      "overflow: icon.fill — inheritance-only channel with uncarried nested state deltas — the captured value equals this part's ancestor on EVERY plane, and its per-state deltas exceed the nested Part.states vocabulary (plain color-kind refs only); binding the base value would pin all state planes to the resting colour, so the channel stays UNCARRIED and CSS inheritance from the ancestor renders it (leaves exist in the minted tree)",
+      "overflow: part-1-0-0.color — inheritance-only channel with uncarried nested state deltas — the captured value equals this part's ancestor on EVERY plane, and its per-state deltas exceed the nested Part.states vocabulary (plain color-kind refs only); binding the base value would pin all state planes to the resting colour, so the channel stays UNCARRIED and CSS inheritance from the ancestor renders it (leaves exist in the minted tree)",
+      "overflow: part-1-0-0.fill — inheritance-only channel with uncarried nested state deltas — the captured value equals this part's ancestor on EVERY plane, and its per-state deltas exceed the nested Part.states vocabulary (plain color-kind refs only); binding the base value would pin all state planes to the resting colour, so the channel stays UNCARRIED and CSS inheritance from the ancestor renders it (leaves exist in the minted tree)",
       "overflow: indicator.background-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: indicator.border-bottom-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: indicator.border-left-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
@@ -389,7 +389,7 @@
     },
     "shippedMinted": {
       "path": "examples/fluent/tokens/fluent-minted.dtcg.json",
-      "leavesAdded": 1513,
+      "leavesAdded": 1506,
       "divergent": [
         {
           "token": "imported.checkbox.label.font-size",

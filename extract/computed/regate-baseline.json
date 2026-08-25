@@ -365,8 +365,8 @@
     {
       "library": "fluent",
       "component": "Avatar",
-      "rerunPctEqual": 92.51412429378531,
-      "cellsCompared": 5664,
+      "rerunPctEqual": 92.63888888888889,
+      "cellsCompared": 5760,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 92.38505747126437,
       "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 96 more cell(s) than the engine the harness scorecard was captured with (5568 -> 5664) and every added cell is EQUAL (5144 -> 5240 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. First pinned 2026-08-23 — this component had a harness scorecard and no baseline row, which the pre-2026-08-23 check skipped in silence."
@@ -392,8 +392,8 @@
     {
       "library": "fluent",
       "component": "Card",
-      "rerunPctEqual": 75.60586734693878,
-      "cellsCompared": 18816,
+      "rerunPctEqual": 78.73179611650485,
+      "cellsCompared": 19776,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 74.83552631578948,
       "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 576 more cell(s) than the engine the harness scorecard was captured with (18240 -> 18816) and every added cell is EQUAL (13650 -> 14226 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. First pinned 2026-08-23 — this component had a harness scorecard and no baseline row, which the pre-2026-08-23 check skipped in silence."
@@ -410,8 +410,8 @@
     {
       "library": "fluent",
       "component": "Dialog",
-      "rerunPctEqual": 82.58928571428571,
-      "cellsCompared": 448,
+      "rerunPctEqual": 90.17094017094017,
+      "cellsCompared": 468,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 82.3529411764706,
       "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 6 more cell(s) than the engine the harness scorecard was captured with (442 -> 448) and every added cell is EQUAL (364 -> 370 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. First pinned 2026-08-23 — this component had a harness scorecard and no baseline row, which the pre-2026-08-23 check skipped in silence."
@@ -419,17 +419,17 @@
     {
       "library": "fluent",
       "component": "Input",
-      "rerunPctEqual": 75.25510204081633,
-      "cellsCompared": 7056,
+      "rerunPctEqual": 75.24509803921569,
+      "cellsCompared": 7344,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 75.25510204081633,
-      "gapCause": ""
+      "gapCause": "VOCABULARY LIFT SINCE CAPTURE, measured on the UNCHANGED e884d672 engine (re-record 2026-08-25): the current engine compares 288 more cell(s) than the engine the harness scorecard was captured with (7056 -> 7344) and 216 of the 288 added cells are EQUAL (5310 -> 5526 equal), so the percentage falls by 0.010 while the equal COUNT rises. Nothing previously compared changed verdict. The harness number is the capture-time engine and is NOT re-captured; which lift added the channels is not bisected. Carries zero layout vocabulary — measured identical with this branch's fuse.ts reverted, so it is trunk drift, not the RC1 layout-axis door."
     },
     {
       "library": "fluent",
       "component": "Spinner",
-      "rerunPctEqual": 83.55263157894737,
-      "cellsCompared": 19456,
+      "rerunPctEqual": 84.41558441558442,
+      "cellsCompared": 19712,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 83.33333333333333,
       "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 256 more cell(s) than the engine the harness scorecard was captured with (19200 -> 19456) and every added cell is EQUAL (16000 -> 16256 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. First pinned 2026-08-23 — this component had a harness scorecard and no baseline row, which the pre-2026-08-23 check skipped in silence."
@@ -437,8 +437,8 @@
     {
       "library": "fluent",
       "component": "Switch",
-      "rerunPctEqual": 81.91287878787878,
-      "cellsCompared": 2112,
+      "rerunPctEqual": 82.33695652173913,
+      "cellsCompared": 2208,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 81.4922480620155,
       "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 48 more cell(s) than the engine the harness scorecard was captured with (2064 -> 2112) and every added cell is EQUAL (1682 -> 1730 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. First pinned 2026-08-23 — this component had a harness scorecard and no baseline row, which the pre-2026-08-23 check skipped in silence."
@@ -446,8 +446,8 @@
     {
       "library": "fluent",
       "component": "TabList",
-      "rerunPctEqual": 65.45493197278911,
-      "cellsCompared": 28224,
+      "rerunPctEqual": 66.02618243243244,
+      "cellsCompared": 28416,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 64.97844827586206,
       "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 384 more cell(s) than the engine the harness scorecard was captured with (27840 -> 28224) and every added cell is EQUAL (18090 -> 18474 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. First pinned 2026-08-23 — this component had a harness scorecard and no baseline row, which the pre-2026-08-23 check skipped in silence."
