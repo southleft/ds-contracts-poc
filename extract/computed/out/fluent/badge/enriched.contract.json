@@ -126,11 +126,18 @@
         "align": "center",
         "justify": "center"
       },
+      "literals": {
+        "border-top-width": "1px",
+        "border-right-width": "1px",
+        "border-bottom-width": "1px",
+        "border-left-width": "1px"
+      },
       "content": {
         "prop": "children"
       },
       "declared": {
         "box-sizing": "border-box",
+        "font-family": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif",
         "position": "relative"
       },
       "tokens": {

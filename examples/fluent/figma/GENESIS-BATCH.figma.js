@@ -3187,7 +3187,7 @@ const COMPONENTS = [
     "contractId": "fluent.badge",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Badge — generated from contract fluent.badge v0.2.0 † (9 code-only facts — see plugin report)",
+    "description": "Badge — generated from contract fluent.badge v0.2.0 † (5 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -3209,6 +3209,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/brand",
+          "stroke": "imported/badge/root/border-top-color/filled/brand",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -3225,6 +3226,14 @@ const COMPONENTS = [
             "px": 20.0156,
             "varName": "imported/badge/root/width/medium"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -3240,6 +3249,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -3258,6 +3268,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/brand",
+          "stroke": "imported/badge/root/border-top-color/filled/brand",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -3274,6 +3285,14 @@ const COMPONENTS = [
             "px": 6,
             "varName": "imported/badge/root/width/tiny"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -3289,6 +3308,7 @@ const COMPONENTS = [
                 "value": 4,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -3307,6 +3327,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/brand",
+          "stroke": "imported/badge/root/border-top-color/filled/brand",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -3323,6 +3344,14 @@ const COMPONENTS = [
             "px": 10,
             "varName": "imported/badge/root/width/extra-small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -3338,6 +3367,7 @@ const COMPONENTS = [
                 "value": 6,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -3356,6 +3386,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/brand",
+          "stroke": "imported/badge/root/border-top-color/filled/brand",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -3372,6 +3403,14 @@ const COMPONENTS = [
             "px": 16,
             "varName": "imported/badge/root/width/small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -3387,6 +3426,7 @@ const COMPONENTS = [
                 "value": 14,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -3405,6 +3445,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/brand",
+          "stroke": "imported/badge/root/border-top-color/filled/brand",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -3421,6 +3462,14 @@ const COMPONENTS = [
             "px": 24,
             "varName": "imported/badge/root/width/large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -3436,6 +3485,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -3454,6 +3504,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/brand",
+          "stroke": "imported/badge/root/border-top-color/filled/brand",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -3470,6 +3521,14 @@ const COMPONENTS = [
             "px": 32,
             "varName": "imported/badge/root/width/extra-large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -3485,6 +3544,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -3503,6 +3563,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/danger",
+          "stroke": "imported/badge/root/border-top-color/filled/danger",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -3519,6 +3580,14 @@ const COMPONENTS = [
             "px": 20.0156,
             "varName": "imported/badge/root/width/medium"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -3534,6 +3603,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -3552,6 +3622,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/danger",
+          "stroke": "imported/badge/root/border-top-color/filled/danger",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -3568,6 +3639,14 @@ const COMPONENTS = [
             "px": 6,
             "varName": "imported/badge/root/width/tiny"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -3583,6 +3662,7 @@ const COMPONENTS = [
                 "value": 4,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -3601,6 +3681,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/danger",
+          "stroke": "imported/badge/root/border-top-color/filled/danger",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -3617,6 +3698,14 @@ const COMPONENTS = [
             "px": 10,
             "varName": "imported/badge/root/width/extra-small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -3632,6 +3721,7 @@ const COMPONENTS = [
                 "value": 6,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -3650,6 +3740,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/danger",
+          "stroke": "imported/badge/root/border-top-color/filled/danger",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -3666,6 +3757,14 @@ const COMPONENTS = [
             "px": 16,
             "varName": "imported/badge/root/width/small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -3681,6 +3780,7 @@ const COMPONENTS = [
                 "value": 14,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -3699,6 +3799,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/danger",
+          "stroke": "imported/badge/root/border-top-color/filled/danger",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -3715,6 +3816,14 @@ const COMPONENTS = [
             "px": 24,
             "varName": "imported/badge/root/width/large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -3730,6 +3839,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -3748,6 +3858,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/danger",
+          "stroke": "imported/badge/root/border-top-color/filled/danger",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -3764,6 +3875,14 @@ const COMPONENTS = [
             "px": 32,
             "varName": "imported/badge/root/width/extra-large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -3779,6 +3898,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -3797,6 +3917,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/important",
+          "stroke": "imported/badge/root/border-top-color/filled/important",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -3813,6 +3934,14 @@ const COMPONENTS = [
             "px": 20.0156,
             "varName": "imported/badge/root/width/medium"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -3828,6 +3957,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -3846,6 +3976,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/important",
+          "stroke": "imported/badge/root/border-top-color/filled/important",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -3862,6 +3993,14 @@ const COMPONENTS = [
             "px": 6,
             "varName": "imported/badge/root/width/tiny"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -3877,6 +4016,7 @@ const COMPONENTS = [
                 "value": 4,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -3895,6 +4035,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/important",
+          "stroke": "imported/badge/root/border-top-color/filled/important",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -3911,6 +4052,14 @@ const COMPONENTS = [
             "px": 10,
             "varName": "imported/badge/root/width/extra-small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -3926,6 +4075,7 @@ const COMPONENTS = [
                 "value": 6,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -3944,6 +4094,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/important",
+          "stroke": "imported/badge/root/border-top-color/filled/important",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -3960,6 +4111,14 @@ const COMPONENTS = [
             "px": 16,
             "varName": "imported/badge/root/width/small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -3975,6 +4134,7 @@ const COMPONENTS = [
                 "value": 14,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -3993,6 +4153,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/important",
+          "stroke": "imported/badge/root/border-top-color/filled/important",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -4009,6 +4170,14 @@ const COMPONENTS = [
             "px": 24,
             "varName": "imported/badge/root/width/large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -4024,6 +4193,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -4042,6 +4212,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/important",
+          "stroke": "imported/badge/root/border-top-color/filled/important",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -4058,6 +4229,14 @@ const COMPONENTS = [
             "px": 32,
             "varName": "imported/badge/root/width/extra-large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -4073,6 +4252,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -4091,6 +4271,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/informative",
+          "stroke": "imported/badge/root/border-top-color/filled/informative",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -4107,6 +4288,14 @@ const COMPONENTS = [
             "px": 20.0156,
             "varName": "imported/badge/root/width/medium"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -4122,6 +4311,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -4140,6 +4330,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/informative",
+          "stroke": "imported/badge/root/border-top-color/filled/informative",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -4156,6 +4347,14 @@ const COMPONENTS = [
             "px": 6,
             "varName": "imported/badge/root/width/tiny"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -4171,6 +4370,7 @@ const COMPONENTS = [
                 "value": 4,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -4189,6 +4389,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/informative",
+          "stroke": "imported/badge/root/border-top-color/filled/informative",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -4205,6 +4406,14 @@ const COMPONENTS = [
             "px": 10,
             "varName": "imported/badge/root/width/extra-small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -4220,6 +4429,7 @@ const COMPONENTS = [
                 "value": 6,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -4238,6 +4448,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/informative",
+          "stroke": "imported/badge/root/border-top-color/filled/informative",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -4254,6 +4465,14 @@ const COMPONENTS = [
             "px": 16,
             "varName": "imported/badge/root/width/small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -4269,6 +4488,7 @@ const COMPONENTS = [
                 "value": 14,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -4287,6 +4507,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/informative",
+          "stroke": "imported/badge/root/border-top-color/filled/informative",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -4303,6 +4524,14 @@ const COMPONENTS = [
             "px": 24,
             "varName": "imported/badge/root/width/large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -4318,6 +4547,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -4336,6 +4566,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/informative",
+          "stroke": "imported/badge/root/border-top-color/filled/informative",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -4352,6 +4583,14 @@ const COMPONENTS = [
             "px": 32,
             "varName": "imported/badge/root/width/extra-large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -4367,6 +4606,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -4385,6 +4625,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/severe",
+          "stroke": "imported/badge/root/border-top-color/filled/severe",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -4401,6 +4642,14 @@ const COMPONENTS = [
             "px": 20.0156,
             "varName": "imported/badge/root/width/medium"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -4416,6 +4665,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -4434,6 +4684,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/severe",
+          "stroke": "imported/badge/root/border-top-color/filled/severe",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -4450,6 +4701,14 @@ const COMPONENTS = [
             "px": 6,
             "varName": "imported/badge/root/width/tiny"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -4465,6 +4724,7 @@ const COMPONENTS = [
                 "value": 4,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -4483,6 +4743,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/severe",
+          "stroke": "imported/badge/root/border-top-color/filled/severe",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -4499,6 +4760,14 @@ const COMPONENTS = [
             "px": 10,
             "varName": "imported/badge/root/width/extra-small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -4514,6 +4783,7 @@ const COMPONENTS = [
                 "value": 6,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -4532,6 +4802,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/severe",
+          "stroke": "imported/badge/root/border-top-color/filled/severe",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -4548,6 +4819,14 @@ const COMPONENTS = [
             "px": 16,
             "varName": "imported/badge/root/width/small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -4563,6 +4842,7 @@ const COMPONENTS = [
                 "value": 14,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -4581,6 +4861,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/severe",
+          "stroke": "imported/badge/root/border-top-color/filled/severe",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -4597,6 +4878,14 @@ const COMPONENTS = [
             "px": 24,
             "varName": "imported/badge/root/width/large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -4612,6 +4901,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -4630,6 +4920,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/severe",
+          "stroke": "imported/badge/root/border-top-color/filled/severe",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -4646,6 +4937,14 @@ const COMPONENTS = [
             "px": 32,
             "varName": "imported/badge/root/width/extra-large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -4661,6 +4960,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -4679,6 +4979,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/subtle",
+          "stroke": "imported/badge/root/border-top-color/filled/subtle",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -4695,6 +4996,14 @@ const COMPONENTS = [
             "px": 20.0156,
             "varName": "imported/badge/root/width/medium"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -4710,6 +5019,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -4728,6 +5038,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/subtle",
+          "stroke": "imported/badge/root/border-top-color/filled/subtle",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -4744,6 +5055,14 @@ const COMPONENTS = [
             "px": 6,
             "varName": "imported/badge/root/width/tiny"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -4759,6 +5078,7 @@ const COMPONENTS = [
                 "value": 4,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -4777,6 +5097,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/subtle",
+          "stroke": "imported/badge/root/border-top-color/filled/subtle",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -4793,6 +5114,14 @@ const COMPONENTS = [
             "px": 10,
             "varName": "imported/badge/root/width/extra-small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -4808,6 +5137,7 @@ const COMPONENTS = [
                 "value": 6,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -4826,6 +5156,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/subtle",
+          "stroke": "imported/badge/root/border-top-color/filled/subtle",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -4842,6 +5173,14 @@ const COMPONENTS = [
             "px": 16,
             "varName": "imported/badge/root/width/small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -4857,6 +5196,7 @@ const COMPONENTS = [
                 "value": 14,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -4875,6 +5215,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/subtle",
+          "stroke": "imported/badge/root/border-top-color/filled/subtle",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -4891,6 +5232,14 @@ const COMPONENTS = [
             "px": 24,
             "varName": "imported/badge/root/width/large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -4906,6 +5255,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -4924,6 +5274,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/subtle",
+          "stroke": "imported/badge/root/border-top-color/filled/subtle",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -4940,6 +5291,14 @@ const COMPONENTS = [
             "px": 32,
             "varName": "imported/badge/root/width/extra-large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -4955,6 +5314,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -4973,6 +5333,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/success",
+          "stroke": "imported/badge/root/border-top-color/filled/success",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -4989,6 +5350,14 @@ const COMPONENTS = [
             "px": 20.0156,
             "varName": "imported/badge/root/width/medium"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -5004,6 +5373,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -5022,6 +5392,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/success",
+          "stroke": "imported/badge/root/border-top-color/filled/success",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -5038,6 +5409,14 @@ const COMPONENTS = [
             "px": 6,
             "varName": "imported/badge/root/width/tiny"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -5053,6 +5432,7 @@ const COMPONENTS = [
                 "value": 4,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -5071,6 +5451,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/success",
+          "stroke": "imported/badge/root/border-top-color/filled/success",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -5087,6 +5468,14 @@ const COMPONENTS = [
             "px": 10,
             "varName": "imported/badge/root/width/extra-small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -5102,6 +5491,7 @@ const COMPONENTS = [
                 "value": 6,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -5120,6 +5510,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/success",
+          "stroke": "imported/badge/root/border-top-color/filled/success",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -5136,6 +5527,14 @@ const COMPONENTS = [
             "px": 16,
             "varName": "imported/badge/root/width/small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -5151,6 +5550,7 @@ const COMPONENTS = [
                 "value": 14,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -5169,6 +5569,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/success",
+          "stroke": "imported/badge/root/border-top-color/filled/success",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -5185,6 +5586,14 @@ const COMPONENTS = [
             "px": 24,
             "varName": "imported/badge/root/width/large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -5200,6 +5609,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -5218,6 +5628,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/success",
+          "stroke": "imported/badge/root/border-top-color/filled/success",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -5234,6 +5645,14 @@ const COMPONENTS = [
             "px": 32,
             "varName": "imported/badge/root/width/extra-large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -5249,6 +5668,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -5267,6 +5687,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/warning",
+          "stroke": "imported/badge/root/border-top-color/filled/warning",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -5283,6 +5704,14 @@ const COMPONENTS = [
             "px": 20.0156,
             "varName": "imported/badge/root/width/medium"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -5298,6 +5727,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -5316,6 +5746,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/warning",
+          "stroke": "imported/badge/root/border-top-color/filled/warning",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -5332,6 +5763,14 @@ const COMPONENTS = [
             "px": 6,
             "varName": "imported/badge/root/width/tiny"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -5347,6 +5786,7 @@ const COMPONENTS = [
                 "value": 4,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -5365,6 +5805,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/warning",
+          "stroke": "imported/badge/root/border-top-color/filled/warning",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -5381,6 +5822,14 @@ const COMPONENTS = [
             "px": 10,
             "varName": "imported/badge/root/width/extra-small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -5396,6 +5845,7 @@ const COMPONENTS = [
                 "value": 6,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -5414,6 +5864,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/warning",
+          "stroke": "imported/badge/root/border-top-color/filled/warning",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -5430,6 +5881,14 @@ const COMPONENTS = [
             "px": 16,
             "varName": "imported/badge/root/width/small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -5445,6 +5904,7 @@ const COMPONENTS = [
                 "value": 14,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -5463,6 +5923,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/warning",
+          "stroke": "imported/badge/root/border-top-color/filled/warning",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -5479,6 +5940,14 @@ const COMPONENTS = [
             "px": 24,
             "varName": "imported/badge/root/width/large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -5494,6 +5963,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -5512,6 +5982,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/filled/warning",
+          "stroke": "imported/badge/root/border-top-color/filled/warning",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -5528,6 +5999,14 @@ const COMPONENTS = [
             "px": 32,
             "varName": "imported/badge/root/width/extra-large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -5543,6 +6022,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -5561,6 +6041,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/brand",
+          "stroke": "imported/badge/root/border-top-color/ghost/brand",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -5577,6 +6058,14 @@ const COMPONENTS = [
             "px": 20.0156,
             "varName": "imported/badge/root/width/medium"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -5592,6 +6081,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -5610,6 +6100,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/brand",
+          "stroke": "imported/badge/root/border-top-color/ghost/brand",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -5626,6 +6117,14 @@ const COMPONENTS = [
             "px": 6,
             "varName": "imported/badge/root/width/tiny"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -5641,6 +6140,7 @@ const COMPONENTS = [
                 "value": 4,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -5659,6 +6159,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/brand",
+          "stroke": "imported/badge/root/border-top-color/ghost/brand",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -5675,6 +6176,14 @@ const COMPONENTS = [
             "px": 10,
             "varName": "imported/badge/root/width/extra-small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -5690,6 +6199,7 @@ const COMPONENTS = [
                 "value": 6,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -5708,6 +6218,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/brand",
+          "stroke": "imported/badge/root/border-top-color/ghost/brand",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -5724,6 +6235,14 @@ const COMPONENTS = [
             "px": 16,
             "varName": "imported/badge/root/width/small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -5739,6 +6258,7 @@ const COMPONENTS = [
                 "value": 14,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -5757,6 +6277,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/brand",
+          "stroke": "imported/badge/root/border-top-color/ghost/brand",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -5773,6 +6294,14 @@ const COMPONENTS = [
             "px": 24,
             "varName": "imported/badge/root/width/large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -5788,6 +6317,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -5806,6 +6336,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/brand",
+          "stroke": "imported/badge/root/border-top-color/ghost/brand",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -5822,6 +6353,14 @@ const COMPONENTS = [
             "px": 32,
             "varName": "imported/badge/root/width/extra-large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -5837,6 +6376,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -5855,6 +6395,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/danger",
+          "stroke": "imported/badge/root/border-top-color/ghost/danger",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -5871,6 +6412,14 @@ const COMPONENTS = [
             "px": 20.0156,
             "varName": "imported/badge/root/width/medium"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -5886,6 +6435,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -5904,6 +6454,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/danger",
+          "stroke": "imported/badge/root/border-top-color/ghost/danger",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -5920,6 +6471,14 @@ const COMPONENTS = [
             "px": 6,
             "varName": "imported/badge/root/width/tiny"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -5935,6 +6494,7 @@ const COMPONENTS = [
                 "value": 4,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -5953,6 +6513,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/danger",
+          "stroke": "imported/badge/root/border-top-color/ghost/danger",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -5969,6 +6530,14 @@ const COMPONENTS = [
             "px": 10,
             "varName": "imported/badge/root/width/extra-small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -5984,6 +6553,7 @@ const COMPONENTS = [
                 "value": 6,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -6002,6 +6572,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/danger",
+          "stroke": "imported/badge/root/border-top-color/ghost/danger",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -6018,6 +6589,14 @@ const COMPONENTS = [
             "px": 16,
             "varName": "imported/badge/root/width/small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -6033,6 +6612,7 @@ const COMPONENTS = [
                 "value": 14,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -6051,6 +6631,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/danger",
+          "stroke": "imported/badge/root/border-top-color/ghost/danger",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -6067,6 +6648,14 @@ const COMPONENTS = [
             "px": 24,
             "varName": "imported/badge/root/width/large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -6082,6 +6671,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -6100,6 +6690,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/danger",
+          "stroke": "imported/badge/root/border-top-color/ghost/danger",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -6116,6 +6707,14 @@ const COMPONENTS = [
             "px": 32,
             "varName": "imported/badge/root/width/extra-large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -6131,6 +6730,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -6149,6 +6749,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/important",
+          "stroke": "imported/badge/root/border-top-color/ghost/important",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -6165,6 +6766,14 @@ const COMPONENTS = [
             "px": 20.0156,
             "varName": "imported/badge/root/width/medium"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -6180,6 +6789,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -6198,6 +6808,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/important",
+          "stroke": "imported/badge/root/border-top-color/ghost/important",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -6214,6 +6825,14 @@ const COMPONENTS = [
             "px": 6,
             "varName": "imported/badge/root/width/tiny"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -6229,6 +6848,7 @@ const COMPONENTS = [
                 "value": 4,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -6247,6 +6867,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/important",
+          "stroke": "imported/badge/root/border-top-color/ghost/important",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -6263,6 +6884,14 @@ const COMPONENTS = [
             "px": 10,
             "varName": "imported/badge/root/width/extra-small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -6278,6 +6907,7 @@ const COMPONENTS = [
                 "value": 6,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -6296,6 +6926,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/important",
+          "stroke": "imported/badge/root/border-top-color/ghost/important",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -6312,6 +6943,14 @@ const COMPONENTS = [
             "px": 16,
             "varName": "imported/badge/root/width/small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -6327,6 +6966,7 @@ const COMPONENTS = [
                 "value": 14,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -6345,6 +6985,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/important",
+          "stroke": "imported/badge/root/border-top-color/ghost/important",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -6361,6 +7002,14 @@ const COMPONENTS = [
             "px": 24,
             "varName": "imported/badge/root/width/large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -6376,6 +7025,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -6394,6 +7044,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/important",
+          "stroke": "imported/badge/root/border-top-color/ghost/important",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -6410,6 +7061,14 @@ const COMPONENTS = [
             "px": 32,
             "varName": "imported/badge/root/width/extra-large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -6425,6 +7084,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -6443,6 +7103,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/informative",
+          "stroke": "imported/badge/root/border-top-color/ghost/informative",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -6459,6 +7120,14 @@ const COMPONENTS = [
             "px": 20.0156,
             "varName": "imported/badge/root/width/medium"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -6474,6 +7143,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -6492,6 +7162,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/informative",
+          "stroke": "imported/badge/root/border-top-color/ghost/informative",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -6508,6 +7179,14 @@ const COMPONENTS = [
             "px": 6,
             "varName": "imported/badge/root/width/tiny"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -6523,6 +7202,7 @@ const COMPONENTS = [
                 "value": 4,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -6541,6 +7221,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/informative",
+          "stroke": "imported/badge/root/border-top-color/ghost/informative",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -6557,6 +7238,14 @@ const COMPONENTS = [
             "px": 10,
             "varName": "imported/badge/root/width/extra-small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -6572,6 +7261,7 @@ const COMPONENTS = [
                 "value": 6,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -6590,6 +7280,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/informative",
+          "stroke": "imported/badge/root/border-top-color/ghost/informative",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -6606,6 +7297,14 @@ const COMPONENTS = [
             "px": 16,
             "varName": "imported/badge/root/width/small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -6621,6 +7320,7 @@ const COMPONENTS = [
                 "value": 14,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -6639,6 +7339,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/informative",
+          "stroke": "imported/badge/root/border-top-color/ghost/informative",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -6655,6 +7356,14 @@ const COMPONENTS = [
             "px": 24,
             "varName": "imported/badge/root/width/large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -6670,6 +7379,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -6688,6 +7398,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/informative",
+          "stroke": "imported/badge/root/border-top-color/ghost/informative",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -6704,6 +7415,14 @@ const COMPONENTS = [
             "px": 32,
             "varName": "imported/badge/root/width/extra-large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -6719,6 +7438,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -6737,6 +7457,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/severe",
+          "stroke": "imported/badge/root/border-top-color/ghost/severe",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -6753,6 +7474,14 @@ const COMPONENTS = [
             "px": 20.0156,
             "varName": "imported/badge/root/width/medium"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -6768,6 +7497,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -6786,6 +7516,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/severe",
+          "stroke": "imported/badge/root/border-top-color/ghost/severe",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -6802,6 +7533,14 @@ const COMPONENTS = [
             "px": 6,
             "varName": "imported/badge/root/width/tiny"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -6817,6 +7556,7 @@ const COMPONENTS = [
                 "value": 4,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -6835,6 +7575,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/severe",
+          "stroke": "imported/badge/root/border-top-color/ghost/severe",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -6851,6 +7592,14 @@ const COMPONENTS = [
             "px": 10,
             "varName": "imported/badge/root/width/extra-small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -6866,6 +7615,7 @@ const COMPONENTS = [
                 "value": 6,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -6884,6 +7634,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/severe",
+          "stroke": "imported/badge/root/border-top-color/ghost/severe",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -6900,6 +7651,14 @@ const COMPONENTS = [
             "px": 16,
             "varName": "imported/badge/root/width/small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -6915,6 +7674,7 @@ const COMPONENTS = [
                 "value": 14,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -6933,6 +7693,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/severe",
+          "stroke": "imported/badge/root/border-top-color/ghost/severe",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -6949,6 +7710,14 @@ const COMPONENTS = [
             "px": 24,
             "varName": "imported/badge/root/width/large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -6964,6 +7733,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -6982,6 +7752,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/severe",
+          "stroke": "imported/badge/root/border-top-color/ghost/severe",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -6998,6 +7769,14 @@ const COMPONENTS = [
             "px": 32,
             "varName": "imported/badge/root/width/extra-large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -7013,6 +7792,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -7031,6 +7811,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/subtle",
+          "stroke": "imported/badge/root/border-top-color/ghost/subtle",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -7047,6 +7828,14 @@ const COMPONENTS = [
             "px": 20.0156,
             "varName": "imported/badge/root/width/medium"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -7062,6 +7851,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -7080,6 +7870,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/subtle",
+          "stroke": "imported/badge/root/border-top-color/ghost/subtle",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -7096,6 +7887,14 @@ const COMPONENTS = [
             "px": 6,
             "varName": "imported/badge/root/width/tiny"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -7111,6 +7910,7 @@ const COMPONENTS = [
                 "value": 4,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -7129,6 +7929,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/subtle",
+          "stroke": "imported/badge/root/border-top-color/ghost/subtle",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -7145,6 +7946,14 @@ const COMPONENTS = [
             "px": 10,
             "varName": "imported/badge/root/width/extra-small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -7160,6 +7969,7 @@ const COMPONENTS = [
                 "value": 6,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -7178,6 +7988,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/subtle",
+          "stroke": "imported/badge/root/border-top-color/ghost/subtle",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -7194,6 +8005,14 @@ const COMPONENTS = [
             "px": 16,
             "varName": "imported/badge/root/width/small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -7209,6 +8028,7 @@ const COMPONENTS = [
                 "value": 14,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -7227,6 +8047,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/subtle",
+          "stroke": "imported/badge/root/border-top-color/ghost/subtle",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -7243,6 +8064,14 @@ const COMPONENTS = [
             "px": 24,
             "varName": "imported/badge/root/width/large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -7258,6 +8087,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -7276,6 +8106,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/subtle",
+          "stroke": "imported/badge/root/border-top-color/ghost/subtle",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -7292,6 +8123,14 @@ const COMPONENTS = [
             "px": 32,
             "varName": "imported/badge/root/width/extra-large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -7307,6 +8146,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -7325,6 +8165,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/success",
+          "stroke": "imported/badge/root/border-top-color/ghost/success",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -7341,6 +8182,14 @@ const COMPONENTS = [
             "px": 20.0156,
             "varName": "imported/badge/root/width/medium"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -7356,6 +8205,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -7374,6 +8224,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/success",
+          "stroke": "imported/badge/root/border-top-color/ghost/success",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -7390,6 +8241,14 @@ const COMPONENTS = [
             "px": 6,
             "varName": "imported/badge/root/width/tiny"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -7405,6 +8264,7 @@ const COMPONENTS = [
                 "value": 4,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -7423,6 +8283,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/success",
+          "stroke": "imported/badge/root/border-top-color/ghost/success",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -7439,6 +8300,14 @@ const COMPONENTS = [
             "px": 10,
             "varName": "imported/badge/root/width/extra-small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -7454,6 +8323,7 @@ const COMPONENTS = [
                 "value": 6,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -7472,6 +8342,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/success",
+          "stroke": "imported/badge/root/border-top-color/ghost/success",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -7488,6 +8359,14 @@ const COMPONENTS = [
             "px": 16,
             "varName": "imported/badge/root/width/small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -7503,6 +8382,7 @@ const COMPONENTS = [
                 "value": 14,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -7521,6 +8401,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/success",
+          "stroke": "imported/badge/root/border-top-color/ghost/success",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -7537,6 +8418,14 @@ const COMPONENTS = [
             "px": 24,
             "varName": "imported/badge/root/width/large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -7552,6 +8441,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -7570,6 +8460,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/success",
+          "stroke": "imported/badge/root/border-top-color/ghost/success",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -7586,6 +8477,14 @@ const COMPONENTS = [
             "px": 32,
             "varName": "imported/badge/root/width/extra-large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -7601,6 +8500,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -7619,6 +8519,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/warning",
+          "stroke": "imported/badge/root/border-top-color/ghost/warning",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -7635,6 +8536,14 @@ const COMPONENTS = [
             "px": 20.0156,
             "varName": "imported/badge/root/width/medium"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -7650,6 +8559,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -7668,6 +8578,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/warning",
+          "stroke": "imported/badge/root/border-top-color/ghost/warning",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -7684,6 +8595,14 @@ const COMPONENTS = [
             "px": 6,
             "varName": "imported/badge/root/width/tiny"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -7699,6 +8618,7 @@ const COMPONENTS = [
                 "value": 4,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -7717,6 +8637,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/warning",
+          "stroke": "imported/badge/root/border-top-color/ghost/warning",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -7733,6 +8654,14 @@ const COMPONENTS = [
             "px": 10,
             "varName": "imported/badge/root/width/extra-small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -7748,6 +8677,7 @@ const COMPONENTS = [
                 "value": 6,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -7766,6 +8696,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/warning",
+          "stroke": "imported/badge/root/border-top-color/ghost/warning",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -7782,6 +8713,14 @@ const COMPONENTS = [
             "px": 16,
             "varName": "imported/badge/root/width/small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -7797,6 +8736,7 @@ const COMPONENTS = [
                 "value": 14,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -7815,6 +8755,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/warning",
+          "stroke": "imported/badge/root/border-top-color/ghost/warning",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -7831,6 +8772,14 @@ const COMPONENTS = [
             "px": 24,
             "varName": "imported/badge/root/width/large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -7846,6 +8795,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -7864,6 +8814,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/ghost/warning",
+          "stroke": "imported/badge/root/border-top-color/ghost/warning",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -7880,6 +8831,14 @@ const COMPONENTS = [
             "px": 32,
             "varName": "imported/badge/root/width/extra-large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -7895,6 +8854,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -7913,6 +8873,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/brand",
+          "stroke": "imported/badge/root/border-top-color/outline/brand",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -7929,6 +8890,14 @@ const COMPONENTS = [
             "px": 20.0156,
             "varName": "imported/badge/root/width/medium"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -7944,6 +8913,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -7962,6 +8932,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/brand",
+          "stroke": "imported/badge/root/border-top-color/outline/brand",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -7978,6 +8949,14 @@ const COMPONENTS = [
             "px": 6,
             "varName": "imported/badge/root/width/tiny"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -7993,6 +8972,7 @@ const COMPONENTS = [
                 "value": 4,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -8011,6 +8991,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/brand",
+          "stroke": "imported/badge/root/border-top-color/outline/brand",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -8027,6 +9008,14 @@ const COMPONENTS = [
             "px": 10,
             "varName": "imported/badge/root/width/extra-small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -8042,6 +9031,7 @@ const COMPONENTS = [
                 "value": 6,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -8060,6 +9050,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/brand",
+          "stroke": "imported/badge/root/border-top-color/outline/brand",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -8076,6 +9067,14 @@ const COMPONENTS = [
             "px": 16,
             "varName": "imported/badge/root/width/small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -8091,6 +9090,7 @@ const COMPONENTS = [
                 "value": 14,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -8109,6 +9109,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/brand",
+          "stroke": "imported/badge/root/border-top-color/outline/brand",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -8125,6 +9126,14 @@ const COMPONENTS = [
             "px": 24,
             "varName": "imported/badge/root/width/large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -8140,6 +9149,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -8158,6 +9168,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/brand",
+          "stroke": "imported/badge/root/border-top-color/outline/brand",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -8174,6 +9185,14 @@ const COMPONENTS = [
             "px": 32,
             "varName": "imported/badge/root/width/extra-large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -8189,6 +9208,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -8207,6 +9227,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/danger",
+          "stroke": "imported/badge/root/border-top-color/outline/danger",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -8223,6 +9244,14 @@ const COMPONENTS = [
             "px": 20.0156,
             "varName": "imported/badge/root/width/medium"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -8238,6 +9267,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -8256,6 +9286,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/danger",
+          "stroke": "imported/badge/root/border-top-color/outline/danger",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -8272,6 +9303,14 @@ const COMPONENTS = [
             "px": 6,
             "varName": "imported/badge/root/width/tiny"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -8287,6 +9326,7 @@ const COMPONENTS = [
                 "value": 4,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -8305,6 +9345,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/danger",
+          "stroke": "imported/badge/root/border-top-color/outline/danger",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -8321,6 +9362,14 @@ const COMPONENTS = [
             "px": 10,
             "varName": "imported/badge/root/width/extra-small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -8336,6 +9385,7 @@ const COMPONENTS = [
                 "value": 6,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -8354,6 +9404,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/danger",
+          "stroke": "imported/badge/root/border-top-color/outline/danger",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -8370,6 +9421,14 @@ const COMPONENTS = [
             "px": 16,
             "varName": "imported/badge/root/width/small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -8385,6 +9444,7 @@ const COMPONENTS = [
                 "value": 14,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -8403,6 +9463,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/danger",
+          "stroke": "imported/badge/root/border-top-color/outline/danger",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -8419,6 +9480,14 @@ const COMPONENTS = [
             "px": 24,
             "varName": "imported/badge/root/width/large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -8434,6 +9503,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -8452,6 +9522,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/danger",
+          "stroke": "imported/badge/root/border-top-color/outline/danger",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -8468,6 +9539,14 @@ const COMPONENTS = [
             "px": 32,
             "varName": "imported/badge/root/width/extra-large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -8483,6 +9562,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -8501,6 +9581,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/important",
+          "stroke": "imported/badge/root/border-top-color/outline/important",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -8517,6 +9598,14 @@ const COMPONENTS = [
             "px": 20.0156,
             "varName": "imported/badge/root/width/medium"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -8532,6 +9621,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -8550,6 +9640,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/important",
+          "stroke": "imported/badge/root/border-top-color/outline/important",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -8566,6 +9657,14 @@ const COMPONENTS = [
             "px": 6,
             "varName": "imported/badge/root/width/tiny"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -8581,6 +9680,7 @@ const COMPONENTS = [
                 "value": 4,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -8599,6 +9699,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/important",
+          "stroke": "imported/badge/root/border-top-color/outline/important",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -8615,6 +9716,14 @@ const COMPONENTS = [
             "px": 10,
             "varName": "imported/badge/root/width/extra-small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -8630,6 +9739,7 @@ const COMPONENTS = [
                 "value": 6,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -8648,6 +9758,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/important",
+          "stroke": "imported/badge/root/border-top-color/outline/important",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -8664,6 +9775,14 @@ const COMPONENTS = [
             "px": 16,
             "varName": "imported/badge/root/width/small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -8679,6 +9798,7 @@ const COMPONENTS = [
                 "value": 14,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -8697,6 +9817,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/important",
+          "stroke": "imported/badge/root/border-top-color/outline/important",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -8713,6 +9834,14 @@ const COMPONENTS = [
             "px": 24,
             "varName": "imported/badge/root/width/large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -8728,6 +9857,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -8746,6 +9876,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/important",
+          "stroke": "imported/badge/root/border-top-color/outline/important",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -8762,6 +9893,14 @@ const COMPONENTS = [
             "px": 32,
             "varName": "imported/badge/root/width/extra-large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -8777,6 +9916,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -8795,6 +9935,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/informative",
+          "stroke": "imported/badge/root/border-top-color/outline/informative",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -8811,6 +9952,14 @@ const COMPONENTS = [
             "px": 20.0156,
             "varName": "imported/badge/root/width/medium"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -8826,6 +9975,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -8844,6 +9994,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/informative",
+          "stroke": "imported/badge/root/border-top-color/outline/informative",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -8860,6 +10011,14 @@ const COMPONENTS = [
             "px": 6,
             "varName": "imported/badge/root/width/tiny"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -8875,6 +10034,7 @@ const COMPONENTS = [
                 "value": 4,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -8893,6 +10053,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/informative",
+          "stroke": "imported/badge/root/border-top-color/outline/informative",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -8909,6 +10070,14 @@ const COMPONENTS = [
             "px": 10,
             "varName": "imported/badge/root/width/extra-small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -8924,6 +10093,7 @@ const COMPONENTS = [
                 "value": 6,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -8942,6 +10112,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/informative",
+          "stroke": "imported/badge/root/border-top-color/outline/informative",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -8958,6 +10129,14 @@ const COMPONENTS = [
             "px": 16,
             "varName": "imported/badge/root/width/small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -8973,6 +10152,7 @@ const COMPONENTS = [
                 "value": 14,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -8991,6 +10171,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/informative",
+          "stroke": "imported/badge/root/border-top-color/outline/informative",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -9007,6 +10188,14 @@ const COMPONENTS = [
             "px": 24,
             "varName": "imported/badge/root/width/large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -9022,6 +10211,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -9040,6 +10230,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/informative",
+          "stroke": "imported/badge/root/border-top-color/outline/informative",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -9056,6 +10247,14 @@ const COMPONENTS = [
             "px": 32,
             "varName": "imported/badge/root/width/extra-large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -9071,6 +10270,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -9089,6 +10289,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/severe",
+          "stroke": "imported/badge/root/border-top-color/outline/severe",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -9105,6 +10306,14 @@ const COMPONENTS = [
             "px": 20.0156,
             "varName": "imported/badge/root/width/medium"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -9120,6 +10329,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -9138,6 +10348,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/severe",
+          "stroke": "imported/badge/root/border-top-color/outline/severe",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -9154,6 +10365,14 @@ const COMPONENTS = [
             "px": 6,
             "varName": "imported/badge/root/width/tiny"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -9169,6 +10388,7 @@ const COMPONENTS = [
                 "value": 4,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -9187,6 +10407,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/severe",
+          "stroke": "imported/badge/root/border-top-color/outline/severe",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -9203,6 +10424,14 @@ const COMPONENTS = [
             "px": 10,
             "varName": "imported/badge/root/width/extra-small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -9218,6 +10447,7 @@ const COMPONENTS = [
                 "value": 6,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -9236,6 +10466,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/severe",
+          "stroke": "imported/badge/root/border-top-color/outline/severe",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -9252,6 +10483,14 @@ const COMPONENTS = [
             "px": 16,
             "varName": "imported/badge/root/width/small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -9267,6 +10506,7 @@ const COMPONENTS = [
                 "value": 14,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -9285,6 +10525,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/severe",
+          "stroke": "imported/badge/root/border-top-color/outline/severe",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -9301,6 +10542,14 @@ const COMPONENTS = [
             "px": 24,
             "varName": "imported/badge/root/width/large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -9316,6 +10565,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -9334,6 +10584,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/severe",
+          "stroke": "imported/badge/root/border-top-color/outline/severe",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -9350,6 +10601,14 @@ const COMPONENTS = [
             "px": 32,
             "varName": "imported/badge/root/width/extra-large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -9365,6 +10624,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -9383,6 +10643,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/subtle",
+          "stroke": "imported/badge/root/border-top-color/outline/subtle",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -9399,6 +10660,14 @@ const COMPONENTS = [
             "px": 20.0156,
             "varName": "imported/badge/root/width/medium"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -9414,6 +10683,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -9432,6 +10702,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/subtle",
+          "stroke": "imported/badge/root/border-top-color/outline/subtle",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -9448,6 +10719,14 @@ const COMPONENTS = [
             "px": 6,
             "varName": "imported/badge/root/width/tiny"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -9463,6 +10742,7 @@ const COMPONENTS = [
                 "value": 4,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -9481,6 +10761,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/subtle",
+          "stroke": "imported/badge/root/border-top-color/outline/subtle",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -9497,6 +10778,14 @@ const COMPONENTS = [
             "px": 10,
             "varName": "imported/badge/root/width/extra-small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -9512,6 +10801,7 @@ const COMPONENTS = [
                 "value": 6,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -9530,6 +10820,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/subtle",
+          "stroke": "imported/badge/root/border-top-color/outline/subtle",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -9546,6 +10837,14 @@ const COMPONENTS = [
             "px": 16,
             "varName": "imported/badge/root/width/small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -9561,6 +10860,7 @@ const COMPONENTS = [
                 "value": 14,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -9579,6 +10879,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/subtle",
+          "stroke": "imported/badge/root/border-top-color/outline/subtle",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -9595,6 +10896,14 @@ const COMPONENTS = [
             "px": 24,
             "varName": "imported/badge/root/width/large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -9610,6 +10919,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -9628,6 +10938,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/subtle",
+          "stroke": "imported/badge/root/border-top-color/outline/subtle",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -9644,6 +10955,14 @@ const COMPONENTS = [
             "px": 32,
             "varName": "imported/badge/root/width/extra-large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -9659,6 +10978,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -9677,6 +10997,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/success",
+          "stroke": "imported/badge/root/border-top-color/outline/success",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -9693,6 +11014,14 @@ const COMPONENTS = [
             "px": 20.0156,
             "varName": "imported/badge/root/width/medium"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -9708,6 +11037,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -9726,6 +11056,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/success",
+          "stroke": "imported/badge/root/border-top-color/outline/success",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -9742,6 +11073,14 @@ const COMPONENTS = [
             "px": 6,
             "varName": "imported/badge/root/width/tiny"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -9757,6 +11096,7 @@ const COMPONENTS = [
                 "value": 4,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -9775,6 +11115,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/success",
+          "stroke": "imported/badge/root/border-top-color/outline/success",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -9791,6 +11132,14 @@ const COMPONENTS = [
             "px": 10,
             "varName": "imported/badge/root/width/extra-small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -9806,6 +11155,7 @@ const COMPONENTS = [
                 "value": 6,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -9824,6 +11174,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/success",
+          "stroke": "imported/badge/root/border-top-color/outline/success",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -9840,6 +11191,14 @@ const COMPONENTS = [
             "px": 16,
             "varName": "imported/badge/root/width/small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -9855,6 +11214,7 @@ const COMPONENTS = [
                 "value": 14,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -9873,6 +11233,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/success",
+          "stroke": "imported/badge/root/border-top-color/outline/success",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -9889,6 +11250,14 @@ const COMPONENTS = [
             "px": 24,
             "varName": "imported/badge/root/width/large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -9904,6 +11273,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -9922,6 +11292,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/success",
+          "stroke": "imported/badge/root/border-top-color/outline/success",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -9938,6 +11309,14 @@ const COMPONENTS = [
             "px": 32,
             "varName": "imported/badge/root/width/extra-large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -9953,6 +11332,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -9971,6 +11351,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/warning",
+          "stroke": "imported/badge/root/border-top-color/outline/warning",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -9987,6 +11368,14 @@ const COMPONENTS = [
             "px": 20.0156,
             "varName": "imported/badge/root/width/medium"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -10002,6 +11391,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -10020,6 +11410,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/warning",
+          "stroke": "imported/badge/root/border-top-color/outline/warning",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -10036,6 +11427,14 @@ const COMPONENTS = [
             "px": 6,
             "varName": "imported/badge/root/width/tiny"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -10051,6 +11450,7 @@ const COMPONENTS = [
                 "value": 4,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -10069,6 +11469,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/warning",
+          "stroke": "imported/badge/root/border-top-color/outline/warning",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -10085,6 +11486,14 @@ const COMPONENTS = [
             "px": 10,
             "varName": "imported/badge/root/width/extra-small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -10100,6 +11509,7 @@ const COMPONENTS = [
                 "value": 6,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -10118,6 +11528,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/warning",
+          "stroke": "imported/badge/root/border-top-color/outline/warning",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -10134,6 +11545,14 @@ const COMPONENTS = [
             "px": 16,
             "varName": "imported/badge/root/width/small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -10149,6 +11568,7 @@ const COMPONENTS = [
                 "value": 14,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -10167,6 +11587,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/warning",
+          "stroke": "imported/badge/root/border-top-color/outline/warning",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -10183,6 +11604,14 @@ const COMPONENTS = [
             "px": 24,
             "varName": "imported/badge/root/width/large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -10198,6 +11627,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -10216,6 +11646,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/outline/warning",
+          "stroke": "imported/badge/root/border-top-color/outline/warning",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -10232,6 +11663,14 @@ const COMPONENTS = [
             "px": 32,
             "varName": "imported/badge/root/width/extra-large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -10247,6 +11686,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -10265,6 +11705,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/brand",
+          "stroke": "imported/badge/root/border-top-color/tint/brand",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -10281,6 +11722,14 @@ const COMPONENTS = [
             "px": 20.0156,
             "varName": "imported/badge/root/width/medium"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -10296,6 +11745,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -10314,6 +11764,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/brand",
+          "stroke": "imported/badge/root/border-top-color/tint/brand",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -10330,6 +11781,14 @@ const COMPONENTS = [
             "px": 6,
             "varName": "imported/badge/root/width/tiny"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -10345,6 +11804,7 @@ const COMPONENTS = [
                 "value": 4,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -10363,6 +11823,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/brand",
+          "stroke": "imported/badge/root/border-top-color/tint/brand",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -10379,6 +11840,14 @@ const COMPONENTS = [
             "px": 10,
             "varName": "imported/badge/root/width/extra-small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -10394,6 +11863,7 @@ const COMPONENTS = [
                 "value": 6,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -10412,6 +11882,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/brand",
+          "stroke": "imported/badge/root/border-top-color/tint/brand",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -10428,6 +11899,14 @@ const COMPONENTS = [
             "px": 16,
             "varName": "imported/badge/root/width/small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -10443,6 +11922,7 @@ const COMPONENTS = [
                 "value": 14,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -10461,6 +11941,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/brand",
+          "stroke": "imported/badge/root/border-top-color/tint/brand",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -10477,6 +11958,14 @@ const COMPONENTS = [
             "px": 24,
             "varName": "imported/badge/root/width/large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -10492,6 +11981,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -10510,6 +12000,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/brand",
+          "stroke": "imported/badge/root/border-top-color/tint/brand",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -10526,6 +12017,14 @@ const COMPONENTS = [
             "px": 32,
             "varName": "imported/badge/root/width/extra-large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -10541,6 +12040,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -10559,6 +12059,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/danger",
+          "stroke": "imported/badge/root/border-top-color/tint/danger",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -10575,6 +12076,14 @@ const COMPONENTS = [
             "px": 20.0156,
             "varName": "imported/badge/root/width/medium"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -10590,6 +12099,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -10608,6 +12118,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/danger",
+          "stroke": "imported/badge/root/border-top-color/tint/danger",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -10624,6 +12135,14 @@ const COMPONENTS = [
             "px": 6,
             "varName": "imported/badge/root/width/tiny"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -10639,6 +12158,7 @@ const COMPONENTS = [
                 "value": 4,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -10657,6 +12177,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/danger",
+          "stroke": "imported/badge/root/border-top-color/tint/danger",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -10673,6 +12194,14 @@ const COMPONENTS = [
             "px": 10,
             "varName": "imported/badge/root/width/extra-small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -10688,6 +12217,7 @@ const COMPONENTS = [
                 "value": 6,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -10706,6 +12236,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/danger",
+          "stroke": "imported/badge/root/border-top-color/tint/danger",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -10722,6 +12253,14 @@ const COMPONENTS = [
             "px": 16,
             "varName": "imported/badge/root/width/small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -10737,6 +12276,7 @@ const COMPONENTS = [
                 "value": 14,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -10755,6 +12295,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/danger",
+          "stroke": "imported/badge/root/border-top-color/tint/danger",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -10771,6 +12312,14 @@ const COMPONENTS = [
             "px": 24,
             "varName": "imported/badge/root/width/large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -10786,6 +12335,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -10804,6 +12354,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/danger",
+          "stroke": "imported/badge/root/border-top-color/tint/danger",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -10820,6 +12371,14 @@ const COMPONENTS = [
             "px": 32,
             "varName": "imported/badge/root/width/extra-large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -10835,6 +12394,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -10853,6 +12413,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/important",
+          "stroke": "imported/badge/root/border-top-color/tint/important",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -10869,6 +12430,14 @@ const COMPONENTS = [
             "px": 20.0156,
             "varName": "imported/badge/root/width/medium"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -10884,6 +12453,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -10902,6 +12472,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/important",
+          "stroke": "imported/badge/root/border-top-color/tint/important",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -10918,6 +12489,14 @@ const COMPONENTS = [
             "px": 6,
             "varName": "imported/badge/root/width/tiny"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -10933,6 +12512,7 @@ const COMPONENTS = [
                 "value": 4,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -10951,6 +12531,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/important",
+          "stroke": "imported/badge/root/border-top-color/tint/important",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -10967,6 +12548,14 @@ const COMPONENTS = [
             "px": 10,
             "varName": "imported/badge/root/width/extra-small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -10982,6 +12571,7 @@ const COMPONENTS = [
                 "value": 6,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -11000,6 +12590,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/important",
+          "stroke": "imported/badge/root/border-top-color/tint/important",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -11016,6 +12607,14 @@ const COMPONENTS = [
             "px": 16,
             "varName": "imported/badge/root/width/small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -11031,6 +12630,7 @@ const COMPONENTS = [
                 "value": 14,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -11049,6 +12649,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/important",
+          "stroke": "imported/badge/root/border-top-color/tint/important",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -11065,6 +12666,14 @@ const COMPONENTS = [
             "px": 24,
             "varName": "imported/badge/root/width/large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -11080,6 +12689,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -11098,6 +12708,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/important",
+          "stroke": "imported/badge/root/border-top-color/tint/important",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -11114,6 +12725,14 @@ const COMPONENTS = [
             "px": 32,
             "varName": "imported/badge/root/width/extra-large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -11129,6 +12748,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -11147,6 +12767,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/informative",
+          "stroke": "imported/badge/root/border-top-color/tint/informative",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -11163,6 +12784,14 @@ const COMPONENTS = [
             "px": 20.0156,
             "varName": "imported/badge/root/width/medium"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -11178,6 +12807,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -11196,6 +12826,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/informative",
+          "stroke": "imported/badge/root/border-top-color/tint/informative",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -11212,6 +12843,14 @@ const COMPONENTS = [
             "px": 6,
             "varName": "imported/badge/root/width/tiny"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -11227,6 +12866,7 @@ const COMPONENTS = [
                 "value": 4,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -11245,6 +12885,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/informative",
+          "stroke": "imported/badge/root/border-top-color/tint/informative",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -11261,6 +12902,14 @@ const COMPONENTS = [
             "px": 10,
             "varName": "imported/badge/root/width/extra-small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -11276,6 +12925,7 @@ const COMPONENTS = [
                 "value": 6,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -11294,6 +12944,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/informative",
+          "stroke": "imported/badge/root/border-top-color/tint/informative",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -11310,6 +12961,14 @@ const COMPONENTS = [
             "px": 16,
             "varName": "imported/badge/root/width/small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -11325,6 +12984,7 @@ const COMPONENTS = [
                 "value": 14,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -11343,6 +13003,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/informative",
+          "stroke": "imported/badge/root/border-top-color/tint/informative",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -11359,6 +13020,14 @@ const COMPONENTS = [
             "px": 24,
             "varName": "imported/badge/root/width/large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -11374,6 +13043,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -11392,6 +13062,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/informative",
+          "stroke": "imported/badge/root/border-top-color/tint/informative",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -11408,6 +13079,14 @@ const COMPONENTS = [
             "px": 32,
             "varName": "imported/badge/root/width/extra-large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -11423,6 +13102,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -11441,6 +13121,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/severe",
+          "stroke": "imported/badge/root/border-top-color/tint/severe",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -11457,6 +13138,14 @@ const COMPONENTS = [
             "px": 20.0156,
             "varName": "imported/badge/root/width/medium"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -11472,6 +13161,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -11490,6 +13180,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/severe",
+          "stroke": "imported/badge/root/border-top-color/tint/severe",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -11506,6 +13197,14 @@ const COMPONENTS = [
             "px": 6,
             "varName": "imported/badge/root/width/tiny"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -11521,6 +13220,7 @@ const COMPONENTS = [
                 "value": 4,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -11539,6 +13239,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/severe",
+          "stroke": "imported/badge/root/border-top-color/tint/severe",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -11555,6 +13256,14 @@ const COMPONENTS = [
             "px": 10,
             "varName": "imported/badge/root/width/extra-small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -11570,6 +13279,7 @@ const COMPONENTS = [
                 "value": 6,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -11588,6 +13298,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/severe",
+          "stroke": "imported/badge/root/border-top-color/tint/severe",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -11604,6 +13315,14 @@ const COMPONENTS = [
             "px": 16,
             "varName": "imported/badge/root/width/small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -11619,6 +13338,7 @@ const COMPONENTS = [
                 "value": 14,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -11637,6 +13357,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/severe",
+          "stroke": "imported/badge/root/border-top-color/tint/severe",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -11653,6 +13374,14 @@ const COMPONENTS = [
             "px": 24,
             "varName": "imported/badge/root/width/large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -11668,6 +13397,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -11686,6 +13416,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/severe",
+          "stroke": "imported/badge/root/border-top-color/tint/severe",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -11702,6 +13433,14 @@ const COMPONENTS = [
             "px": 32,
             "varName": "imported/badge/root/width/extra-large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -11717,6 +13456,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -11735,6 +13475,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/subtle",
+          "stroke": "imported/badge/root/border-top-color/tint/subtle",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -11751,6 +13492,14 @@ const COMPONENTS = [
             "px": 20.0156,
             "varName": "imported/badge/root/width/medium"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -11766,6 +13515,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -11784,6 +13534,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/subtle",
+          "stroke": "imported/badge/root/border-top-color/tint/subtle",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -11800,6 +13551,14 @@ const COMPONENTS = [
             "px": 6,
             "varName": "imported/badge/root/width/tiny"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -11815,6 +13574,7 @@ const COMPONENTS = [
                 "value": 4,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -11833,6 +13593,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/subtle",
+          "stroke": "imported/badge/root/border-top-color/tint/subtle",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -11849,6 +13610,14 @@ const COMPONENTS = [
             "px": 10,
             "varName": "imported/badge/root/width/extra-small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -11864,6 +13633,7 @@ const COMPONENTS = [
                 "value": 6,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -11882,6 +13652,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/subtle",
+          "stroke": "imported/badge/root/border-top-color/tint/subtle",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -11898,6 +13669,14 @@ const COMPONENTS = [
             "px": 16,
             "varName": "imported/badge/root/width/small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -11913,6 +13692,7 @@ const COMPONENTS = [
                 "value": 14,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -11931,6 +13711,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/subtle",
+          "stroke": "imported/badge/root/border-top-color/tint/subtle",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -11947,6 +13728,14 @@ const COMPONENTS = [
             "px": 24,
             "varName": "imported/badge/root/width/large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -11962,6 +13751,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -11980,6 +13770,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/subtle",
+          "stroke": "imported/badge/root/border-top-color/tint/subtle",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -11996,6 +13787,14 @@ const COMPONENTS = [
             "px": 32,
             "varName": "imported/badge/root/width/extra-large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -12011,6 +13810,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -12029,6 +13829,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/success",
+          "stroke": "imported/badge/root/border-top-color/tint/success",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -12045,6 +13846,14 @@ const COMPONENTS = [
             "px": 20.0156,
             "varName": "imported/badge/root/width/medium"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -12060,6 +13869,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -12078,6 +13888,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/success",
+          "stroke": "imported/badge/root/border-top-color/tint/success",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -12094,6 +13905,14 @@ const COMPONENTS = [
             "px": 6,
             "varName": "imported/badge/root/width/tiny"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -12109,6 +13928,7 @@ const COMPONENTS = [
                 "value": 4,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -12127,6 +13947,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/success",
+          "stroke": "imported/badge/root/border-top-color/tint/success",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -12143,6 +13964,14 @@ const COMPONENTS = [
             "px": 10,
             "varName": "imported/badge/root/width/extra-small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -12158,6 +13987,7 @@ const COMPONENTS = [
                 "value": 6,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -12176,6 +14006,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/success",
+          "stroke": "imported/badge/root/border-top-color/tint/success",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -12192,6 +14023,14 @@ const COMPONENTS = [
             "px": 16,
             "varName": "imported/badge/root/width/small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -12207,6 +14046,7 @@ const COMPONENTS = [
                 "value": 14,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -12225,6 +14065,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/success",
+          "stroke": "imported/badge/root/border-top-color/tint/success",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -12241,6 +14082,14 @@ const COMPONENTS = [
             "px": 24,
             "varName": "imported/badge/root/width/large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -12256,6 +14105,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -12274,6 +14124,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/success",
+          "stroke": "imported/badge/root/border-top-color/tint/success",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -12290,6 +14141,14 @@ const COMPONENTS = [
             "px": 32,
             "varName": "imported/badge/root/width/extra-large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -12305,6 +14164,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -12323,6 +14183,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/warning",
+          "stroke": "imported/badge/root/border-top-color/tint/warning",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -12339,6 +14200,14 @@ const COMPONENTS = [
             "px": 20.0156,
             "varName": "imported/badge/root/width/medium"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -12354,6 +14223,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -12372,6 +14242,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/warning",
+          "stroke": "imported/badge/root/border-top-color/tint/warning",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -12388,6 +14259,14 @@ const COMPONENTS = [
             "px": 6,
             "varName": "imported/badge/root/width/tiny"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -12403,6 +14282,7 @@ const COMPONENTS = [
                 "value": 4,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -12421,6 +14301,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/warning",
+          "stroke": "imported/badge/root/border-top-color/tint/warning",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -12437,6 +14318,14 @@ const COMPONENTS = [
             "px": 10,
             "varName": "imported/badge/root/width/extra-small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -12452,6 +14341,7 @@ const COMPONENTS = [
                 "value": 6,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -12470,6 +14360,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/warning",
+          "stroke": "imported/badge/root/border-top-color/tint/warning",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -12486,6 +14377,14 @@ const COMPONENTS = [
             "px": 16,
             "varName": "imported/badge/root/width/small"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -12501,6 +14400,7 @@ const COMPONENTS = [
                 "value": 14,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -12519,6 +14419,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/warning",
+          "stroke": "imported/badge/root/border-top-color/tint/warning",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -12535,6 +14436,14 @@ const COMPONENTS = [
             "px": 24,
             "varName": "imported/badge/root/width/large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -12550,6 +14459,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -12568,6 +14478,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/badge/root/background-color/tint/warning",
+          "stroke": "imported/badge/root/border-top-color/tint/warning",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-10000",
             "bottomRightRadius": "imported/shared/size-10000",
@@ -12584,6 +14495,14 @@ const COMPONENTS = [
             "px": 32,
             "varName": "imported/badge/root/width/extra-large"
           },
+          "lits": {
+            "strokeSides": {
+              "top": 1,
+              "right": 1,
+              "bottom": 1,
+              "left": 1
+            }
+          },
           "children": [
             {
               "type": "text",
@@ -12599,6 +14518,7 @@ const COMPONENTS = [
                 "value": 16,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Segoe UI",
               "contentProp": "Content"
             }
           ]
@@ -12615,50 +14535,6 @@ const COMPONENTS = [
       "element": "div"
     },
     "codeOnlyFacts": [
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-bottom-color",
-        "value": "{imported.badge.root.border-bottom-color.{appearance}.{color}}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 192,
-          "of": 192
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-left-color",
-        "value": "{imported.badge.root.border-left-color.{appearance}.{color}}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 192,
-          "of": 192
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-right-color",
-        "value": "{imported.badge.root.border-right-color.{appearance}.{color}}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 192,
-          "of": 192
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-top-color",
-        "value": "{imported.badge.root.border-top-color.{appearance}.{color}}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 192,
-          "of": 192
-        }
-      },
       {
         "part": "root",
         "kind": "channel",
@@ -13160,6 +15036,61 @@ function applyFrameSpec(node, spec) {
       if (spec.fixedHeight.varName) node.setBoundVariable('height', need(spec.fixedHeight.varName));
     }
   }
+  if (spec.lits) {
+    // v14 literals: no variable to bind — plain values, compile-parsed.
+    const li = spec.lits;
+    if (li.paddingTop !== undefined) node.paddingTop = li.paddingTop;
+    if (li.paddingBottom !== undefined) node.paddingBottom = li.paddingBottom;
+    if (li.paddingLeft !== undefined) node.paddingLeft = li.paddingLeft;
+    if (li.paddingRight !== undefined) node.paddingRight = li.paddingRight;
+    if (li.itemSpacing !== undefined) node.itemSpacing = li.itemSpacing;
+    if (li.radius !== undefined) node.cornerRadius = li.radius;
+    if (li.strokeWeight !== undefined) node.strokeWeight = li.strokeWeight;
+    if (li.minWidth !== undefined) { try { node.minWidth = li.minWidth; } catch (e) { degrade('FC-RT-MIN-SIZE-REFUSED', node, 'minWidth ' + li.minWidth + ' refused (needs auto-layout); the literal min-width does not draw', e); } }
+    if (li.minHeight !== undefined) { try { node.minHeight = li.minHeight; } catch (e) { degrade('FC-RT-MIN-SIZE-REFUSED', node, 'minHeight ' + li.minHeight + ' refused (needs auto-layout); the literal min-height does not draw', e); } }
+    // #60 fix 1 (fillClear precedence): a spec-carried fill is NEVER
+    // trampled — fillClear only clears when no fill was spec'd. The compile
+    // side already drops fillClear when a fill binding exists (applyLiterals);
+    // this runtime guard makes the emitted script safe even for hand-fed
+    // specs carrying both.
+    if (li.fillClear && !spec.fill) node.fills = [];
+    else if (li.fillColor) node.fills = [{ type: 'SOLID', color: { r: li.fillColor.r, g: li.fillColor.g, b: li.fillColor.b }, opacity: li.fillColor.a === undefined ? 1 : li.fillColor.a }];
+    if (li.radiusCorners) {
+      const rc = li.radiusCorners;
+      if (rc.tl !== undefined) node.topLeftRadius = rc.tl;
+      if (rc.tr !== undefined) node.topRightRadius = rc.tr;
+      if (rc.bl !== undefined) node.bottomLeftRadius = rc.bl;
+      if (rc.br !== undefined) node.bottomRightRadius = rc.br;
+    }
+    if (li.strokeSides) {
+      const sw = li.strokeSides;
+      // ELLIPSE/LINE expose strokeWeight only — per-side props throw
+      // "Cannot add property strokeTopWeight, object is not extensible"
+      // (Tailwind ToggleSwitch thumb live finding, Wave B.1).
+      if ('strokeTopWeight' in node) {
+        if (sw.top !== undefined) node.strokeTopWeight = sw.top;
+        if (sw.right !== undefined) node.strokeRightWeight = sw.right;
+        if (sw.bottom !== undefined) node.strokeBottomWeight = sw.bottom;
+        if (sw.left !== undefined) node.strokeLeftWeight = sw.left;
+      } else {
+        const w = sw.top !== undefined ? sw.top : (sw.right !== undefined ? sw.right : (sw.bottom !== undefined ? sw.bottom : sw.left));
+        if (w !== undefined) node.strokeWeight = w;
+      }
+    }
+    if (li.width !== undefined || li.height !== undefined) {
+      node.resize(li.width !== undefined ? li.width : node.width, li.height !== undefined ? li.height : node.height);
+      // GRID's primary axis is HORIZONTAL (GP1b: primaryAxisSizingMode='AUTO'
+      // reads back as layoutSizingHorizontal 'HUG'), like a HORIZONTAL frame.
+      const gm = (spec.layout || { mode: 'HORIZONTAL' }).mode;
+      const horizontalIsPrimary = gm === 'HORIZONTAL' || gm === 'GRID';
+      if (li.width !== undefined) {
+        if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED'; else node.counterAxisSizingMode = 'FIXED';
+      }
+      if (li.height !== undefined) {
+        if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED'; else node.primaryAxisSizingMode = 'FIXED';
+      }
+    }
+  }
 }
 
 // v7 overlay: out-of-flow edge attachment. Must run AFTER appendChild —
@@ -13198,6 +15129,55 @@ async function buildNode(spec, registry) {
     else if (spec.lineHeight && typeof spec.lineHeight === 'object' && typeof spec.lineHeight.value === 'number') {
       node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
     }
+    if (spec.fontFamily) {
+      // PER-FAMILY STYLE SPELLING. The compiled style name comes from
+      // FONT_STYLE_BY_WEIGHT, which is spelled Inter's way ("Semi Bold",
+      // "Extra Light"). Other families spell the same face WITHOUT the space
+      // — IBM Plex Sans ships "SemiBold", "ExtraLight" — so the Inter-spelled
+      // load THROWS and the node silently keeps the Inter fallback assigned
+      // above. That is a SUBSTITUTION, not a failure: nothing was logged,
+      // nothing was refused, and the canvas rendered a different typeface at
+      // different advance widths (altitude heading 194px of Inter Semi Bold
+      // where IBM Plex Sans SemiBold is 185px).
+      //
+      // A space-free retry was tried on 2026-08-08 and REVERTED because the
+      // then-pinned references were CONTRACT renders made by a harness that
+      // loaded no @font-face, so the truer canvas font scored WORSE. That
+      // premise is dead: the references are now the real library renders
+      // (extract/computed/out/<lane>/<comp>/orig-shots/, committed by
+      // run.ts --keep-originals) and the capture harness loads the library's
+      // own faces (cfg.fonts). Truer is now also closer.
+      //
+      // The fallback is kept — a family Figma does not have at all must still
+      // draw something — but it is no longer SILENT: an unresolved style is
+      // named on the console with a stable code.
+      const wantStyle = spec.fontStyle || 'Medium';
+      const styleCandidates = [wantStyle];
+      const tightStyle = wantStyle.split(' ').join('');
+      if (tightStyle !== wantStyle) styleCandidates.push(tightStyle);
+      let fontResolved = false;
+      for (let i = 0; i < styleCandidates.length; i++) {
+        try {
+          await figma.loadFontAsync({ family: spec.fontFamily, style: styleCandidates[i] });
+          node.fontName = { family: spec.fontFamily, style: styleCandidates[i] };
+          fontResolved = true;
+          break;
+        } catch (e) { /* a RETRY, not a swallow: the next candidate is this family's own spelling of the same face; the final outcome is named below */ }
+      }
+      if (!fontResolved) {
+        console.warn(
+          'FC-FONT-STYLE-UNRESOLVED: ' + spec.fontFamily + ' / ' + wantStyle +
+          ' is not available in this file (tried ' + styleCandidates.join(', ') +
+          ') — Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones',
+        );
+        degrade('FC-FONT-STYLE-UNRESOLVED', node, spec.fontFamily + ' / ' + wantStyle + ' is not available in this file (tried ' + styleCandidates.join(', ') + '); Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones');
+      }
+    }
+    if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
+    if (spec.textCase) node.textCase = spec.textCase;
+    if (spec.textDecoration) node.textDecoration = spec.textDecoration;
+    if (spec.textAlignH) node.textAlignHorizontal = spec.textAlignH;
+    if (spec.textTruncation) { try { node.textTruncation = 'ENDING'; } catch (e) { degrade('FC-RT-TRUNCATION-REFUSED', node, 'textTruncation ENDING refused (older Plugin API); the declared ellipsis does not draw', e); } }
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.

@@ -15835,11 +15835,18 @@
             "align": "center",
             "justify": "center"
           },
+          "literals": {
+            "border-top-width": "1px",
+            "border-right-width": "1px",
+            "border-bottom-width": "1px",
+            "border-left-width": "1px"
+          },
           "content": {
             "prop": "children"
           },
           "declared": {
             "box-sizing": "border-box",
+            "font-family": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif",
             "position": "relative"
           },
           "tokens": {
@@ -20373,50 +20380,6 @@
       "contractId": "fluent.badge",
       "name": "Badge",
       "facts": [
-        {
-          "part": "root",
-          "kind": "channel",
-          "channel": "border-bottom-color",
-          "value": "{imported.badge.root.border-bottom-color.{appearance}.{color}}",
-          "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-          "variants": {
-            "count": 192,
-            "of": 192
-          }
-        },
-        {
-          "part": "root",
-          "kind": "channel",
-          "channel": "border-left-color",
-          "value": "{imported.badge.root.border-left-color.{appearance}.{color}}",
-          "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-          "variants": {
-            "count": 192,
-            "of": 192
-          }
-        },
-        {
-          "part": "root",
-          "kind": "channel",
-          "channel": "border-right-color",
-          "value": "{imported.badge.root.border-right-color.{appearance}.{color}}",
-          "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-          "variants": {
-            "count": 192,
-            "of": 192
-          }
-        },
-        {
-          "part": "root",
-          "kind": "channel",
-          "channel": "border-top-color",
-          "value": "{imported.badge.root.border-top-color.{appearance}.{color}}",
-          "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-          "variants": {
-            "count": 192,
-            "of": 192
-          }
-        },
         {
           "part": "root",
           "kind": "channel",
