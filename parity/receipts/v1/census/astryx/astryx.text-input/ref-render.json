@@ -1,0 +1,97 @@
+{
+  "id": "astryx.text-input",
+  "library": "astryx",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@astryxdesign/core",
+    "version": "0.1.6",
+    "recipe": "examples/astryx sandbox (.astryx-sandbox; examples/astryx/README) mounted per extract/computed/configs/astryx.json"
+  },
+  "configPath": "extract/computed/configs/astryx.json",
+  "component": "TextInput",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "type-text__size-md",
+      "status": "rendered",
+      "png": "ref-type-text__size-md.png",
+      "props": {
+        "label": "Email",
+        "placeholder": "you@example.com",
+        "value": "",
+        "type": "text",
+        "size": "md",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-text__size-sm",
+      "status": "rendered",
+      "png": "ref-type-text__size-sm.png",
+      "props": {
+        "label": "Email",
+        "placeholder": "you@example.com",
+        "value": "",
+        "type": "text",
+        "size": "sm",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-text__size-lg",
+      "status": "rendered",
+      "png": "ref-type-text__size-lg.png",
+      "props": {
+        "label": "Email",
+        "placeholder": "you@example.com",
+        "value": "",
+        "type": "text",
+        "size": "lg",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-password__size-md",
+      "status": "rendered",
+      "png": "ref-type-password__size-md.png",
+      "props": {
+        "label": "Email",
+        "placeholder": "you@example.com",
+        "value": "",
+        "type": "password",
+        "size": "md",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-email__size-md",
+      "status": "rendered",
+      "png": "ref-type-email__size-md.png",
+      "props": {
+        "label": "Email",
+        "placeholder": "you@example.com",
+        "value": "",
+        "type": "email",
+        "size": "md",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 5,
+  "unmappable": 0
+}

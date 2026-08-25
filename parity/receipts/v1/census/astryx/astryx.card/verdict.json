@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "all variant fills incl. transparent/muted match; default border box present",
  "reviewedAt": "796581f0",

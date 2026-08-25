@@ -1,0 +1,36 @@
+{
+  "id": "astryx.dropdown-menu",
+  "library": "astryx",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@astryxdesign/core",
+    "version": "0.1.6",
+    "recipe": "examples/astryx sandbox (.astryx-sandbox; examples/astryx/README) mounted per extract/computed/configs/astryx.json"
+  },
+  "configPath": "extract/computed/configs/astryx.json",
+  "component": "DropdownMenu",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "dropdownmenu",
+      "status": "rendered",
+      "png": "ref-dropdownmenu.png",
+      "props": {
+        "items": [
+          {
+            "label": "Menu item"
+          },
+          {
+            "label": "Second item"
+          },
+          {
+            "label": "Third item"
+          }
+        ]
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 1,
+  "unmappable": 0
+}

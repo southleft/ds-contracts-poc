@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "box + label both sizes match",
  "reviewedAt": "796581f0",

@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "menu item pill matches (canvas without hover fill)",
  "reviewedAt": "796581f0",

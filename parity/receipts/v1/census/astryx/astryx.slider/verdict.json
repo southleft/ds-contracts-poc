@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "track, thumb, value tooltip/text across orientations match",
  "reviewedAt": "796581f0",

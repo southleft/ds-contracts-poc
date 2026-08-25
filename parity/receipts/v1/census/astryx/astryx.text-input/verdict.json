@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "label + bordered field with leading glyph and placeholder across types/sizes match",
  "reviewedAt": "796581f0",

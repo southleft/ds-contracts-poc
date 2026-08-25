@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "trigger + Edit/Duplicate/Delete list matches; canvas menu card is white-on-white (shadow not visible in export)",
  "reviewedAt": "796581f0",

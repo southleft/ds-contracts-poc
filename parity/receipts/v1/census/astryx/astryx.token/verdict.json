@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "all 11 colors and 3 sizes match",
  "reviewedAt": "796581f0",
