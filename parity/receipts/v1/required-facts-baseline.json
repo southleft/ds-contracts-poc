@@ -1,0 +1,1292 @@
+{
+  "_marker": "REQUIRED-FACTS BASELINE — the archetype required-facts referee (@ds-contracts/core required-facts.ts) run over every committed contract in every corpus library. Each row pins the REQUIRED facts that contract does NOT carry today, by fact id. A missing fact this file does not pin is a NEW red and fails the gate; a pinned red that stops reproducing must be re-recorded with its cause named. NOT a list of acceptable defects — it is the burn-down queue, written up in parity/receipts/v1/REQUIRED-FACTS.md. Re-record deliberately with `npm run required-facts:check -- --write` and say what moved. Verified in the fast lane by `npm run required-facts:check`.",
+  "recordedAt": "2026-08-25",
+  "totals": {
+    "contracts": 172,
+    "red": 22,
+    "missingFacts": 31,
+    "declaredArchetype": 134,
+    "undeclaredArchetype": 38
+  },
+  "rows": [
+    {
+      "library": "first-party",
+      "id": "ds.accordion-item",
+      "archetype": "accordion",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.avatar-group",
+      "archetype": "avatar",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.avatar",
+      "archetype": "avatar",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.badge",
+      "archetype": "badge / tag / chip",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.banner",
+      "archetype": "banner / alert / toast",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.bento-grid",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.blockquote",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.breadcrumb-item",
+      "archetype": "breadcrumb",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.breadcrumbs",
+      "archetype": "breadcrumb",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.button",
+      "archetype": "button",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.card",
+      "archetype": "card",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.chat-message-metadata",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.chat-message",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.chat-system-message",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.checkbox",
+      "archetype": "checkbox / radio",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.citation",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.code",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.divider",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.empty-state",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.field",
+      "archetype": "input / field",
+      "source": "declared",
+      "missing": [
+        "input/box-grammar",
+        "input/padding-inline"
+      ],
+      "cause": "(iii) fragment — ds.field is the label+description wrapper; its `control` part is an open slot, and the box grammar and inline padding live in the slotted control (ds.text-field carries border-color and padding-inline). Closes when the referee follows slot.accepts."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.grid-gallery",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.heading",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.icon-button",
+      "archetype": "button",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.inline",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.kbd",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.list-item",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.list",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.metadata-list-item",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.metadata-list",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.page-shell",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.pagination",
+      "archetype": "pagination",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.progress-bar",
+      "archetype": "progress / spinner",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.section",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.side-nav-item",
+      "archetype": "nav (top / side)",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.sidebar-layout",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.skeleton",
+      "archetype": "progress / spinner",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.slider",
+      "archetype": "slider",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.spinner",
+      "archetype": "progress / spinner",
+      "source": "declared",
+      "missing": [
+        "progress/geometry"
+      ],
+      "cause": "(ii) capture/authoring loss — the only child `arc` is icon.asset \"spinner\" with no `size`, and no part carries width/height; the contract's own description already flags that the size scale needs per-variant icon sizing."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.stack",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.status-dot",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.switch",
+      "archetype": "toggle / switch",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.tab-list",
+      "archetype": "tabs",
+      "source": "declared",
+      "missing": [
+        "tabs/active-indicator"
+      ],
+      "cause": "(iii) fragment — `props: []` and `states: []`; the selected axis lives on the child ds.tab (state enum + per-part states), reachable only through slot defaultContent."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.tab",
+      "archetype": "tabs",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.table-cell",
+      "archetype": "table / data-grid",
+      "source": "declared",
+      "missing": [
+        "table/column-stack",
+        "table/row-rule"
+      ],
+      "cause": "(iii) fragment — a cell is a leaf row with padding/type/min-width and no border channel at all; the column stack and the rules belong to ds.table."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.table-header-cell",
+      "archetype": "table / data-grid",
+      "source": "declared",
+      "missing": [
+        "table/column-stack",
+        "table/row-rule"
+      ],
+      "cause": "(iii) fragment — same shape as ds.table-cell: a row with padding/type/font-weight and zero border channels; the stack and rules live in ds.table."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.table-row",
+      "archetype": "table / data-grid",
+      "source": "declared",
+      "missing": [
+        "table/cell-padding",
+        "table/column-stack",
+        "table/row-rule"
+      ],
+      "cause": "(iii) fragment — root is a row styled only by background-color {color.table.row.{state}}; cell padding sits in its slotted ds.table-cell children and nothing draws a top/bottom rule (the striping is a fill, not a rule)."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.table",
+      "archetype": "table / data-grid",
+      "source": "declared",
+      "missing": [
+        "table/cell-padding",
+        "table/row-rule"
+      ],
+      "cause": "(iii) composed — root IS a column, but the padding lives in the `component`-referenced ds.table-header-cell / ds.table-cell and the referee does not traverse component refs; rows are separated by fills rather than rules."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.text-area",
+      "archetype": "input / field",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.text-field",
+      "archetype": "input / field",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.toast",
+      "archetype": "banner / alert / toast",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.token",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.toolbar",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.top-nav-item",
+      "archetype": "nav (top / side)",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.top-nav",
+      "archetype": "nav (top / side)",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.two-column",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "first-party",
+      "id": "ds.typeahead-item",
+      "archetype": "select / combobox",
+      "source": "declared",
+      "missing": [
+        "select/chevron"
+      ],
+      "cause": "(i) absent by design — this is the listbox option row (role=\"option\"), not a combobox trigger; its iconSlot is an open slot with no `accepts`, and the trigger contract that would carry a chevron does not exist yet."
+    },
+    {
+      "library": "altitude",
+      "id": "altitude.avatar",
+      "archetype": "avatar",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "altitude",
+      "id": "altitude.badge",
+      "archetype": "badge / tag / chip",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "altitude",
+      "id": "altitude.button",
+      "archetype": "button",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "altitude",
+      "id": "altitude.chip",
+      "archetype": "badge / tag / chip",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "altitude",
+      "id": "altitude.divider",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "altitude",
+      "id": "altitude.heading",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "altitude",
+      "id": "altitude.iconclose",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "altitude",
+      "id": "altitude.link",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "antd",
+      "id": "antd.alert",
+      "archetype": "banner / alert / toast",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "antd",
+      "id": "antd.avatar",
+      "archetype": "avatar",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "antd",
+      "id": "antd.badge",
+      "archetype": "badge / tag / chip",
+      "source": "declared",
+      "missing": [
+        "badge/padding"
+      ],
+      "cause": "(ii) capture loss — no part carries any padding channel; the badge-count/badge-dot sups are sized by height + min-width + radius, while sibling antd contracts from the same capture DO carry padding-left."
+    },
+    {
+      "library": "antd",
+      "id": "antd.button",
+      "archetype": "button",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "antd",
+      "id": "antd.card",
+      "archetype": "card",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "antd",
+      "id": "antd.checkbox",
+      "archetype": "checkbox / radio",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "antd",
+      "id": "antd.input",
+      "archetype": "input / field",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "antd",
+      "id": "antd.progress",
+      "archetype": "progress / spinner",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "antd",
+      "id": "antd.radio",
+      "archetype": "checkbox / radio",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "antd",
+      "id": "antd.switch",
+      "archetype": "toggle / switch",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "antd",
+      "id": "antd.tag",
+      "archetype": "badge / tag / chip",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "antd",
+      "id": "antd.tooltip",
+      "archetype": "tooltip / popover",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "astryx",
+      "id": "astryx.badge",
+      "archetype": "badge / tag / chip",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "astryx",
+      "id": "astryx.banner",
+      "archetype": "banner / alert / toast",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "astryx",
+      "id": "astryx.button",
+      "archetype": "button",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "astryx",
+      "id": "astryx.card",
+      "archetype": "card",
+      "source": "declared",
+      "missing": [
+        "card/interior-stack"
+      ],
+      "cause": "(i) absent in the source — the anatomy is a single root div with display:block and NO parts; Astryx Card is one padded surface whose header/body/footer are consumer children. THE PILL: this is the reject that started the round."
+    },
+    {
+      "library": "astryx",
+      "id": "astryx.checkbox-input",
+      "archetype": "checkbox / radio",
+      "source": "declared",
+      "missing": [
+        "checkbox/glyph"
+      ],
+      "cause": "(ii) extraction loss — Phase-A code extraction landed only the resting `control` span (w/h/border/bg); there is no checked prop, no state and no icon part, so the check mark was never extracted."
+    },
+    {
+      "library": "astryx",
+      "id": "astryx.dropdown-menu-item",
+      "archetype": "menu / dropdown",
+      "source": "declared",
+      "missing": [
+        "menu/column-stack",
+        "menu/surface"
+      ],
+      "cause": "(iii) fragment — its own description calls it \"the repeated item of astryx.dropdown-menu\", and that sibling's `menu` part carries direction:column and background-color {color-background-surface}."
+    },
+    {
+      "library": "astryx",
+      "id": "astryx.dropdown-menu",
+      "archetype": "menu / dropdown",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "astryx",
+      "id": "astryx.progress-bar",
+      "archetype": "progress / spinner",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "astryx",
+      "id": "astryx.slider",
+      "archetype": "slider",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "astryx",
+      "id": "astryx.switch",
+      "archetype": "toggle / switch",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "astryx",
+      "id": "astryx.text-input",
+      "archetype": "input / field",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "astryx",
+      "id": "astryx.toast",
+      "archetype": "banner / alert / toast",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "astryx",
+      "id": "astryx.token",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "carbon",
+      "id": "carbon.accordion",
+      "archetype": "accordion",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "carbon",
+      "id": "carbon.button",
+      "archetype": "button",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "carbon",
+      "id": "carbon.checkbox",
+      "archetype": "checkbox / radio",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "carbon",
+      "id": "carbon.iconbutton",
+      "archetype": "button",
+      "source": "declared",
+      "missing": [
+        "button/row-layout",
+        "button/surface-ink"
+      ],
+      "cause": "(ii) capture loss — the anatomy is rooted at the Tooltip WRAPPER (declared display:block, position:relative); the flex row and the background/border ink sit two levels down on `btn`, and both facts are root-scoped. Re-root the capture at `btn`."
+    },
+    {
+      "library": "carbon",
+      "id": "carbon.inlinenotification",
+      "archetype": "banner / alert / toast",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "carbon",
+      "id": "carbon.modal",
+      "archetype": "modal / dialog",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "carbon",
+      "id": "carbon.tabs",
+      "archetype": "tabs",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "carbon",
+      "id": "carbon.tag",
+      "archetype": "badge / tag / chip",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "carbon",
+      "id": "carbon.textinput",
+      "archetype": "input / field",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "carbon",
+      "id": "carbon.toggle",
+      "archetype": "toggle / switch",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "fluent",
+      "id": "fluent.avatar",
+      "archetype": "avatar",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "fluent",
+      "id": "fluent.badge",
+      "archetype": "badge / tag / chip",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "fluent",
+      "id": "fluent.button",
+      "archetype": "button",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "fluent",
+      "id": "fluent.card",
+      "archetype": "card",
+      "source": "declared",
+      "missing": [
+        "card/interior-stack"
+      ],
+      "cause": "(ii) lowering gap — root layout is {display:\"flex\"} with no direction, and NO fluent contract in the library carries a `direction` key at all: the Griffel lowering never emitted flex-direction despite the orientation enum. Flex with no direction IS a row, so this mints as one."
+    },
+    {
+      "library": "fluent",
+      "id": "fluent.checkbox",
+      "archetype": "checkbox / radio",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "fluent",
+      "id": "fluent.dialog",
+      "archetype": "modal / dialog",
+      "source": "declared",
+      "missing": [
+        "dialog/panel-stack"
+      ],
+      "cause": "(ii) same lowering gap as fluent.card — dialogsurface/dialogbody carry row-gap/column-gap (Griffel's grid) but no captured display or direction, so no part declares the column. THE ONE-ROW DIALOG."
+    },
+    {
+      "library": "fluent",
+      "id": "fluent.input",
+      "archetype": "input / field",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "fluent",
+      "id": "fluent.spinner",
+      "archetype": "progress / spinner",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "fluent",
+      "id": "fluent.switch",
+      "archetype": "toggle / switch",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "fluent",
+      "id": "fluent.tab-list",
+      "archetype": "tabs",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "fluent",
+      "id": "fluent.tooltip",
+      "archetype": "tooltip / popover",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "mui",
+      "id": "mui.accordion",
+      "archetype": "accordion",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "mui",
+      "id": "mui.alert",
+      "archetype": "banner / alert / toast",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "mui",
+      "id": "mui.autocomplete",
+      "archetype": "select / combobox",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "mui",
+      "id": "mui.avatar",
+      "archetype": "avatar",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "mui",
+      "id": "mui.badge",
+      "archetype": "badge / tag / chip",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "mui",
+      "id": "mui.breadcrumbs",
+      "archetype": "breadcrumb",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "mui",
+      "id": "mui.button",
+      "archetype": "button",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "mui",
+      "id": "mui.card",
+      "archetype": "card",
+      "source": "declared",
+      "missing": [
+        "card/interior-stack"
+      ],
+      "cause": "(i) absent in the source — the anatomy is the Paper root (display:block) plus one materialized `label` text child; MUI Card owns no interior regions, its stacked content is consumer-supplied."
+    },
+    {
+      "library": "mui",
+      "id": "mui.checkbox",
+      "archetype": "checkbox / radio",
+      "source": "declared",
+      "missing": [
+        "checkbox/base-border-or-fill"
+      ],
+      "cause": "(iv) arguable predicate, left red deliberately — root carries radii + width/height only, because MUI draws the resting square as the SVG path inside `icon-unchecked`. If that asset is not carried the control IS invisible at rest, so the red is the honest reading until the SVG-asset door is proven for this part."
+    },
+    {
+      "library": "mui",
+      "id": "mui.chip",
+      "archetype": "badge / tag / chip",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "mui",
+      "id": "mui.circular-progress",
+      "archetype": "progress / spinner",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "mui",
+      "id": "mui.dialog",
+      "archetype": "modal / dialog",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "mui",
+      "id": "mui.divider",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "mui",
+      "id": "mui.drawer",
+      "archetype": "modal / dialog",
+      "source": "declared",
+      "missing": [
+        "dialog/padding"
+      ],
+      "cause": "(i) absent in the source — no part carries padding; MUI's drawer paper (direction column, background + shadow) is deliberately unpadded and the interior padding belongs to the consumer's children."
+    },
+    {
+      "library": "mui",
+      "id": "mui.fab",
+      "archetype": "button",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "mui",
+      "id": "mui.icon-button",
+      "archetype": "button",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "mui",
+      "id": "mui.input-adornment",
+      "archetype": "input / field",
+      "source": "declared",
+      "missing": [
+        "input/box-grammar",
+        "input/padding-inline"
+      ],
+      "cause": "(iii) fragment — a piece of mui.text-field, whose outlinedinput-notchedoutline carries border-top-color and inputbase-adornedend the padding-left; the adornment itself is bare."
+    },
+    {
+      "library": "mui",
+      "id": "mui.linear-progress",
+      "archetype": "progress / spinner",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "mui",
+      "id": "mui.link",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "mui",
+      "id": "mui.menu",
+      "archetype": "menu / dropdown",
+      "source": "declared",
+      "missing": [
+        "menu/column-stack"
+      ],
+      "cause": "(ii) lowering gap — the `list-padding` <ul> stacks by BLOCK FLOW (display:block captured as a channel, `layout` empty). CSS stacks it; the canvas defaults a layout-less frame to HORIZONTAL auto-layout, so it mints as a row. Exactly the silent composition this gate exists for."
+    },
+    {
+      "library": "mui",
+      "id": "mui.paper",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "mui",
+      "id": "mui.radio",
+      "archetype": "checkbox / radio",
+      "source": "declared",
+      "missing": [
+        "checkbox/base-border-or-fill"
+      ],
+      "cause": "(iv) arguable predicate, left red deliberately — same as mui.checkbox: radii + w/h only, the ring is the SVG circle in `icon`/`icon-2`, and MUI sets no border or background on the control itself."
+    },
+    {
+      "library": "mui",
+      "id": "mui.select",
+      "archetype": "select / combobox",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "mui",
+      "id": "mui.slider",
+      "archetype": "slider",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "mui",
+      "id": "mui.snackbar",
+      "archetype": "banner / alert / toast",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "mui",
+      "id": "mui.switch",
+      "archetype": "toggle / switch",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "mui",
+      "id": "mui.table-pagination",
+      "archetype": "pagination",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "mui",
+      "id": "mui.table",
+      "archetype": "table / data-grid",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "mui",
+      "id": "mui.tabs",
+      "archetype": "tabs",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "mui",
+      "id": "mui.text-field",
+      "archetype": "input / field",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "mui",
+      "id": "mui.tooltip",
+      "archetype": "tooltip / popover",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.avatar",
+      "archetype": "avatar",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.badge",
+      "archetype": "badge / tag / chip",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.banner",
+      "archetype": "banner / alert / toast",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.button",
+      "archetype": "button",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.checkbox",
+      "archetype": "checkbox / radio",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.progress-bar",
+      "archetype": "progress / spinner",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.radio-button",
+      "archetype": "checkbox / radio",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.spinner",
+      "archetype": "progress / spinner",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.tag",
+      "archetype": "badge / tag / chip",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.text-field",
+      "archetype": "input / field",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.text",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.thumbnail",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "shadcn",
+      "id": "shadcn.alert",
+      "archetype": "banner / alert / toast",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "shadcn",
+      "id": "shadcn.avatar",
+      "archetype": "avatar",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "shadcn",
+      "id": "shadcn.badge",
+      "archetype": "badge / tag / chip",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "shadcn",
+      "id": "shadcn.button",
+      "archetype": "button",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "shadcn",
+      "id": "shadcn.card",
+      "archetype": "card",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "shadcn",
+      "id": "shadcn.checkbox",
+      "archetype": "checkbox / radio",
+      "source": "declared",
+      "missing": [
+        "checkbox/label-gap"
+      ],
+      "cause": "(i) absent in the source — the contract is Radix Checkbox.Root + Indicator only (root + part-0); the component has no label part, so there is no control/label gap to carry."
+    },
+    {
+      "library": "shadcn",
+      "id": "shadcn.input",
+      "archetype": "input / field",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "shadcn",
+      "id": "shadcn.select",
+      "archetype": "select / combobox",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "shadcn",
+      "id": "shadcn.switch",
+      "archetype": "toggle / switch",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "shadcn",
+      "id": "shadcn.tabs",
+      "archetype": "tabs",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "shadcn",
+      "id": "shadcn.tooltip",
+      "archetype": "tooltip / popover",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "tailwind",
+      "id": "flowbite.alert",
+      "archetype": "banner / alert / toast",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "tailwind",
+      "id": "flowbite.badge",
+      "archetype": "badge / tag / chip",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "tailwind",
+      "id": "flowbite.button",
+      "archetype": "button",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "tailwind",
+      "id": "flowbite.card",
+      "archetype": "card",
+      "source": "declared",
+      "missing": []
+    },
+    {
+      "library": "tailwind",
+      "id": "flowbite.helpertext",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "tailwind",
+      "id": "flowbite.kbd",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "tailwind",
+      "id": "flowbite.label",
+      "archetype": "unmapped",
+      "source": "unmapped",
+      "missing": []
+    },
+    {
+      "library": "tailwind",
+      "id": "flowbite.toggleswitch",
+      "archetype": "toggle / switch",
+      "source": "declared",
+      "missing": []
+    }
+  ]
+}
