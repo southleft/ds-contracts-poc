@@ -3487,6 +3487,8 @@ function placeholderInkCtx(ctx: TextCtx): { ctx: TextCtx; carried: boolean } {
 /** The two NAMED walls of this class, worded once. */
 const PLACEHOLDER_INK_FALLBACK_REASON =
   'this contract carries no `placeholder-color`, so the placeholder text is drawn in the control\'s OWN `color` — the VALUE ink. An empty field therefore reads as a filled one. The ink IS measurable (`::placeholder{color}` is read on every capture and folds to `placeholder-color`); re-derive this contract to carry it.';
+const PLACEHOLDER_VALUE_INK_REASON =
+  'this control paints its placeholder in `placeholder-color`, so its own `color` — the ink the field would draw a TYPED VALUE in — is on no node. An EMPTY field has no value text, and Figma has no second text plane to hold the ink of text that is not there. Carried by the CSS surfaces (`color` on the control), NAMED here rather than painted over the placeholder (which is the RC7 defect this class exists to close).';
 const PLACEHOLDER_STRING_REASON =
   'the placeholder STRING is an HTML attribute the browser renders through `::placeholder`, not DOM text — a computed-style capture reads its ink and never its characters, and this contract carries no default for the bound text prop and no literal `placeholder` attr. The TEXT node is kept so the Figma TEXT property can bind to it, and it is left EMPTY rather than filled with an invented string.';
 
@@ -3529,6 +3531,9 @@ function formControlSpec(
   const ink = placeholderInkCtx(childCtx);
   if (concept !== null && !ink.carried && (childCtx.textFill !== undefined || childCtx.textFillLit !== undefined)) {
     miss(spec, 'placeholder-color', PLACEHOLDER_INK_FALLBACK_REASON, childCtx.textFill ?? childCtx.textFillLitCss ?? '');
+  }
+  if (ink.carried && (part.tokens?.['color'] !== undefined || part.literals?.['color'] !== undefined)) {
+    miss(spec, 'color', PLACEHOLDER_VALUE_INK_REASON, part.tokens?.['color'] ?? part.literals?.['color'] ?? '');
   }
   if (concept !== null && placeholderCharacters === '') {
     miss(spec, 'placeholder', PLACEHOLDER_STRING_REASON, '');
@@ -3597,6 +3602,9 @@ function rootPlaceholderLabel(
   const ink = placeholderInkCtx(ctx);
   if (!ink.carried && (ctx.textFill !== undefined || ctx.textFillLit !== undefined)) {
     miss(rootSpec, 'placeholder-color', PLACEHOLDER_INK_FALLBACK_REASON, ctx.textFill ?? ctx.textFillLitCss ?? '');
+  }
+  if (ink.carried && (root.tokens?.['color'] !== undefined || root.literals?.['color'] !== undefined)) {
+    miss(rootSpec, 'color', PLACEHOLDER_VALUE_INK_REASON, root.tokens?.['color'] ?? root.literals?.['color'] ?? '');
   }
   if (characters === '') {
     miss(rootSpec, 'placeholder', PLACEHOLDER_STRING_REASON, '');

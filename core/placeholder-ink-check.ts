@@ -382,7 +382,16 @@ console.log('placeholder-ink (a): a control that CARRIES placeholder-color draws
     `the return leg proposes it back at the EXACT spelling input.tokens['placeholder-color']${back ? ` = ${back}` : ''}`,
     back === '{field.hint}',
   );
-  check('…and the control keeps its own VALUE ink (input.tokens.color = {field.ink})', (input?.tokens as Record<string, string> | undefined)?.color === '{field.ink}');
+  console.log(`    proposed input part: ${JSON.stringify(input)}`);
+  // THE HONEST CONSEQUENCE, pinned so it can never become silent: once the
+  // placeholder node paints HINT ink, the control's own `color` — the ink a
+  // TYPED VALUE would draw in — is on no canvas node at all. An empty field
+  // has no value text and Figma has no second text plane to hold the colour
+  // of text that is not there. Painting it over the placeholder instead IS
+  // the RC7 defect. So it is NAMED, and the return leg says so too.
+  const valueInk = r.facts.filter((f) => f.channel === 'color' && f.part === 'input');
+  check('the control\'s own VALUE ink is NAMED as a code-only fact (it is on no canvas node once the placeholder takes hint ink)', valueInk.length === 1 && valueInk[0].value === '{field.ink}');
+  check('…whose reason says an EMPTY field has no value text', valueInk.some((f) => /EMPTY field has no value text/.test(f.reason)));
 }
 
 console.log('placeholder-ink (b): NO placeholder-color — the value-ink fallback still draws, and is NAMED');
