@@ -48,8 +48,8 @@
     "interactions": 4,
     "computed": {
       "cellsCompared": 19712,
-      "cellsEqual": 16640,
-      "pctEqual": 84.41558441558442,
+      "cellsEqual": 16512,
+      "pctEqual": 83.76623376623377,
       "rowsFullyEqual": 0,
       "rows": 256
     },
@@ -84,56 +84,56 @@
         "key": "extra-tiny.primary.above__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 12,
+        "channelsMismatched": 13,
         "unscorable": "no-original"
       },
       {
         "key": "extra-tiny.primary.above__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 12,
+        "channelsMismatched": 13,
         "unscorable": "no-original"
       },
       {
         "key": "extra-tiny.primary.above__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 12,
+        "channelsMismatched": 13,
         "unscorable": "no-original"
       },
       {
         "key": "extra-tiny.primary.above__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 12,
+        "channelsMismatched": 13,
         "unscorable": "no-original"
       },
       {
-        "key": "extra-tiny.primary.below__default",
+        "key": "extra-tiny.primary.before__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 12,
+        "channelsMismatched": 13,
         "unscorable": "no-original"
       },
       {
-        "key": "extra-tiny.primary.below__hover",
+        "key": "extra-tiny.primary.before__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 12,
+        "channelsMismatched": 13,
         "unscorable": "no-original"
       },
       {
-        "key": "extra-tiny.primary.below__focus-visible",
+        "key": "extra-tiny.primary.before__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 12,
+        "channelsMismatched": 13,
         "unscorable": "no-original"
       },
       {
-        "key": "extra-tiny.primary.below__active",
+        "key": "extra-tiny.primary.before__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 12,
+        "channelsMismatched": 13,
         "unscorable": "no-original"
       }
     ],
@@ -185,6 +185,10 @@
       [
         "spinnertail.transform",
         256
+      ],
+      [
+        "root.flex-direction",
+        128
       ]
     ],
     "namedLosses": [
@@ -397,11 +401,17 @@
       {
         "key": "extra-tiny.primary.above__default",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -480,11 +490,17 @@
       {
         "key": "extra-tiny.primary.above__hover",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -563,11 +579,17 @@
       {
         "key": "extra-tiny.primary.above__focus-visible",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -646,11 +668,17 @@
       {
         "key": "extra-tiny.primary.above__active",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -1061,11 +1089,17 @@
       {
         "key": "extra-tiny.primary.before__default",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -1144,11 +1178,17 @@
       {
         "key": "extra-tiny.primary.before__hover",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -1227,11 +1267,17 @@
       {
         "key": "extra-tiny.primary.before__focus-visible",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -1310,11 +1356,17 @@
       {
         "key": "extra-tiny.primary.before__active",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -1725,11 +1777,17 @@
       {
         "key": "extra-tiny.inverted.above__default",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -1808,11 +1866,17 @@
       {
         "key": "extra-tiny.inverted.above__hover",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -1891,11 +1955,17 @@
       {
         "key": "extra-tiny.inverted.above__focus-visible",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -1974,11 +2044,17 @@
       {
         "key": "extra-tiny.inverted.above__active",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -2389,11 +2465,17 @@
       {
         "key": "extra-tiny.inverted.before__default",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -2472,11 +2554,17 @@
       {
         "key": "extra-tiny.inverted.before__hover",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -2555,11 +2643,17 @@
       {
         "key": "extra-tiny.inverted.before__focus-visible",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -2638,11 +2732,17 @@
       {
         "key": "extra-tiny.inverted.before__active",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -3053,11 +3153,17 @@
       {
         "key": "tiny.primary.above__default",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -3136,11 +3242,17 @@
       {
         "key": "tiny.primary.above__hover",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -3219,11 +3331,17 @@
       {
         "key": "tiny.primary.above__focus-visible",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -3302,11 +3420,17 @@
       {
         "key": "tiny.primary.above__active",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -3717,11 +3841,17 @@
       {
         "key": "tiny.primary.before__default",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -3800,11 +3930,17 @@
       {
         "key": "tiny.primary.before__hover",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -3883,11 +4019,17 @@
       {
         "key": "tiny.primary.before__focus-visible",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -3966,11 +4108,17 @@
       {
         "key": "tiny.primary.before__active",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -4381,11 +4529,17 @@
       {
         "key": "tiny.inverted.above__default",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -4464,11 +4618,17 @@
       {
         "key": "tiny.inverted.above__hover",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -4547,11 +4707,17 @@
       {
         "key": "tiny.inverted.above__focus-visible",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -4630,11 +4796,17 @@
       {
         "key": "tiny.inverted.above__active",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -5045,11 +5217,17 @@
       {
         "key": "tiny.inverted.before__default",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -5128,11 +5306,17 @@
       {
         "key": "tiny.inverted.before__hover",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -5211,11 +5395,17 @@
       {
         "key": "tiny.inverted.before__focus-visible",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -5294,11 +5484,17 @@
       {
         "key": "tiny.inverted.before__active",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -5709,11 +5905,17 @@
       {
         "key": "extra-small.primary.above__default",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -5792,11 +5994,17 @@
       {
         "key": "extra-small.primary.above__hover",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -5875,11 +6083,17 @@
       {
         "key": "extra-small.primary.above__focus-visible",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -5958,11 +6172,17 @@
       {
         "key": "extra-small.primary.above__active",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -6373,11 +6593,17 @@
       {
         "key": "extra-small.primary.before__default",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -6456,11 +6682,17 @@
       {
         "key": "extra-small.primary.before__hover",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -6539,11 +6771,17 @@
       {
         "key": "extra-small.primary.before__focus-visible",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -6622,11 +6860,17 @@
       {
         "key": "extra-small.primary.before__active",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -7037,11 +7281,17 @@
       {
         "key": "extra-small.inverted.above__default",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -7120,11 +7370,17 @@
       {
         "key": "extra-small.inverted.above__hover",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -7203,11 +7459,17 @@
       {
         "key": "extra-small.inverted.above__focus-visible",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -7286,11 +7548,17 @@
       {
         "key": "extra-small.inverted.above__active",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -7701,11 +7969,17 @@
       {
         "key": "extra-small.inverted.before__default",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -7784,11 +8058,17 @@
       {
         "key": "extra-small.inverted.before__hover",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -7867,11 +8147,17 @@
       {
         "key": "extra-small.inverted.before__focus-visible",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -7950,11 +8236,17 @@
       {
         "key": "extra-small.inverted.before__active",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -8365,11 +8657,17 @@
       {
         "key": "small.primary.above__default",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -8448,11 +8746,17 @@
       {
         "key": "small.primary.above__hover",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -8531,11 +8835,17 @@
       {
         "key": "small.primary.above__focus-visible",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -8614,11 +8924,17 @@
       {
         "key": "small.primary.above__active",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -9029,11 +9345,17 @@
       {
         "key": "small.primary.before__default",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -9112,11 +9434,17 @@
       {
         "key": "small.primary.before__hover",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -9195,11 +9523,17 @@
       {
         "key": "small.primary.before__focus-visible",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -9278,11 +9612,17 @@
       {
         "key": "small.primary.before__active",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -9693,11 +10033,17 @@
       {
         "key": "small.inverted.above__default",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -9776,11 +10122,17 @@
       {
         "key": "small.inverted.above__hover",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -9859,11 +10211,17 @@
       {
         "key": "small.inverted.above__focus-visible",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -9942,11 +10300,17 @@
       {
         "key": "small.inverted.above__active",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -10357,11 +10721,17 @@
       {
         "key": "small.inverted.before__default",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -10440,11 +10810,17 @@
       {
         "key": "small.inverted.before__hover",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -10523,11 +10899,17 @@
       {
         "key": "small.inverted.before__focus-visible",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -10606,11 +10988,17 @@
       {
         "key": "small.inverted.before__active",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -11021,11 +11409,17 @@
       {
         "key": "medium.primary.above__default",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -11104,11 +11498,17 @@
       {
         "key": "medium.primary.above__hover",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -11187,11 +11587,17 @@
       {
         "key": "medium.primary.above__focus-visible",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -11270,11 +11676,17 @@
       {
         "key": "medium.primary.above__active",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -11685,11 +12097,17 @@
       {
         "key": "medium.primary.before__default",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -11768,11 +12186,17 @@
       {
         "key": "medium.primary.before__hover",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -11851,11 +12275,17 @@
       {
         "key": "medium.primary.before__focus-visible",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -11934,11 +12364,17 @@
       {
         "key": "medium.primary.before__active",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -12349,11 +12785,17 @@
       {
         "key": "medium.inverted.above__default",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -12432,11 +12874,17 @@
       {
         "key": "medium.inverted.above__hover",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -12515,11 +12963,17 @@
       {
         "key": "medium.inverted.above__focus-visible",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -12598,11 +13052,17 @@
       {
         "key": "medium.inverted.above__active",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -13013,11 +13473,17 @@
       {
         "key": "medium.inverted.before__default",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -13096,11 +13562,17 @@
       {
         "key": "medium.inverted.before__hover",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -13179,11 +13651,17 @@
       {
         "key": "medium.inverted.before__focus-visible",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -13262,11 +13740,17 @@
       {
         "key": "medium.inverted.before__active",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -13677,11 +14161,17 @@
       {
         "key": "large.primary.above__default",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -13760,11 +14250,17 @@
       {
         "key": "large.primary.above__hover",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -13843,11 +14339,17 @@
       {
         "key": "large.primary.above__focus-visible",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -13926,11 +14428,17 @@
       {
         "key": "large.primary.above__active",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -14341,11 +14849,17 @@
       {
         "key": "large.primary.before__default",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -14424,11 +14938,17 @@
       {
         "key": "large.primary.before__hover",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -14507,11 +15027,17 @@
       {
         "key": "large.primary.before__focus-visible",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -14590,11 +15116,17 @@
       {
         "key": "large.primary.before__active",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -15005,11 +15537,17 @@
       {
         "key": "large.inverted.above__default",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -15088,11 +15626,17 @@
       {
         "key": "large.inverted.above__hover",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -15171,11 +15715,17 @@
       {
         "key": "large.inverted.above__focus-visible",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -15254,11 +15804,17 @@
       {
         "key": "large.inverted.above__active",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -15669,11 +16225,17 @@
       {
         "key": "large.inverted.before__default",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -15752,11 +16314,17 @@
       {
         "key": "large.inverted.before__hover",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -15835,11 +16403,17 @@
       {
         "key": "large.inverted.before__focus-visible",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -15918,11 +16492,17 @@
       {
         "key": "large.inverted.before__active",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -16333,11 +16913,17 @@
       {
         "key": "extra-large.primary.above__default",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -16416,11 +17002,17 @@
       {
         "key": "extra-large.primary.above__hover",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -16499,11 +17091,17 @@
       {
         "key": "extra-large.primary.above__focus-visible",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -16582,11 +17180,17 @@
       {
         "key": "extra-large.primary.above__active",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -16997,11 +17601,17 @@
       {
         "key": "extra-large.primary.before__default",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -17080,11 +17690,17 @@
       {
         "key": "extra-large.primary.before__hover",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -17163,11 +17779,17 @@
       {
         "key": "extra-large.primary.before__focus-visible",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -17246,11 +17868,17 @@
       {
         "key": "extra-large.primary.before__active",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -17661,11 +18289,17 @@
       {
         "key": "extra-large.inverted.above__default",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -17744,11 +18378,17 @@
       {
         "key": "extra-large.inverted.above__hover",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -17827,11 +18467,17 @@
       {
         "key": "extra-large.inverted.above__focus-visible",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -17910,11 +18556,17 @@
       {
         "key": "extra-large.inverted.above__active",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -18325,11 +18977,17 @@
       {
         "key": "extra-large.inverted.before__default",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -18408,11 +19066,17 @@
       {
         "key": "extra-large.inverted.before__hover",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -18491,11 +19155,17 @@
       {
         "key": "extra-large.inverted.before__focus-visible",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -18574,11 +19244,17 @@
       {
         "key": "extra-large.inverted.before__active",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -18989,11 +19665,17 @@
       {
         "key": "huge.primary.above__default",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -19072,11 +19754,17 @@
       {
         "key": "huge.primary.above__hover",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -19155,11 +19843,17 @@
       {
         "key": "huge.primary.above__focus-visible",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -19238,11 +19932,17 @@
       {
         "key": "huge.primary.above__active",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -19653,11 +20353,17 @@
       {
         "key": "huge.primary.before__default",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -19736,11 +20442,17 @@
       {
         "key": "huge.primary.before__hover",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -19819,11 +20531,17 @@
       {
         "key": "huge.primary.before__focus-visible",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -19902,11 +20620,17 @@
       {
         "key": "huge.primary.before__active",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -20317,11 +21041,17 @@
       {
         "key": "huge.inverted.above__default",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -20400,11 +21130,17 @@
       {
         "key": "huge.inverted.above__hover",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -20483,11 +21219,17 @@
       {
         "key": "huge.inverted.above__focus-visible",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -20566,11 +21308,17 @@
       {
         "key": "huge.inverted.above__active",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "column-reverse",
+            "theirs": "column"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -20981,11 +21729,17 @@
       {
         "key": "huge.inverted.before__default",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -21064,11 +21818,17 @@
       {
         "key": "huge.inverted.before__hover",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -21147,11 +21907,17 @@
       {
         "key": "huge.inverted.before__focus-visible",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -21230,11 +21996,17 @@
       {
         "key": "huge.inverted.before__active",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
