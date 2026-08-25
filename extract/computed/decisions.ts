@@ -23,6 +23,7 @@
  * skip (never silent) — the caller quotes skips in the ledger.
  *
  * APPLY-TIME VALUE CHECK (repair round — the polaris Badge finding). Matching
+ // @door decisions.ids-are-provenance
  * is by (part, channel, scope): `ids` are provenance, never a selector. That
  * is deliberate — combo-key vocabularies drift between rounds, so keying off
  * ids would refuse legitimate ledgers (MEASURED: 6 of the 9 polaris ledgers
@@ -64,12 +65,14 @@ export function applyDecisions(
   /** Flat token-path inventory for THIS library (tokenInventoryFromJson over
    *  cfg.tokens.dtcg + the minted tree). When given, a decision whose `to`
    *  ref is absent from it is refused BY NAME — see the header. */
+  // @door decisions.inventory-optional
   inventory?: Set<string>,
 ): { applied: string[]; skipped: string[] } {
   const applied: string[] = [];
   const skipped: string[] = [];
   const partByName = new Map(walkAnatomy(contract).map((w) => [w.name, w.part] as const));
   for (const d of decisions) {
+    // @door decisions.part-must-exist
     const target: Part | undefined = partByName.get(d.part);
     if (!target) {
       skipped.push(`${d.part}.${d.channel} [${d.scope}] → ${d.to}: part not in the promoted anatomy — NAMED skip`);
@@ -78,8 +81,10 @@ export function applyDecisions(
     // Phase B: a decision target may be a LITERAL CSS value (v14 literals
     // channel — resolve.ts routing, mirrored here so re-application is
     // faithful). Token refs stay brace-wrapped.
+    // @door decisions.token-ref-shape
     const isTokenRef = /^\{[a-z0-9.-]+\}$/i.test(d.to);
     // Apply-time value check (header): never write a ref that cannot render.
+    // @door decisions.inventory-membership
     if (isTokenRef && inventory && !inventory.has(d.to.slice(1, -1))) {
       skipped.push(
         `${d.part}.${d.channel} [${d.scope}] → ${d.to}: target token is NOT in this library's inventory — NAMED skip (an acked resolution that cannot resolve would render as an EMPTY custom property; a ledger recorded against a different library is the known cause)`,
@@ -96,6 +101,7 @@ export function applyDecisions(
         (target.literals as Record<string, unknown>)[d.channel] = d.to;
         if (target.tokens) delete (target.tokens as Record<string, unknown>)[d.channel];
       }
+      // @door decisions.base-scope-strips-overrides
       for (const field of ['tokensByProp', 'literalsByProp'] as const) {
         const raw = target[field] as
           | Array<{ prop: string; map: Record<string, Record<string, unknown>> }>
@@ -116,6 +122,7 @@ export function applyDecisions(
       applied.push(`${d.part}.${d.channel} [base] → ${d.to}`);
       continue;
     }
+    // @door decisions.scope-grammar
     const m = /^axis:([\w-]+)=(.+)$/.exec(d.scope);
     if (!m) {
       skipped.push(`${d.part}.${d.channel}: unrecognized scope "${d.scope}" — NAMED skip`);
@@ -124,6 +131,7 @@ export function applyDecisions(
     const [, prop, valueList] = m;
     const values = valueList.split('|');
     if (isTokenRef) {
+      // @door decisions.axis-entry-reuse
       const entries = tokensByPropEntries(target).map((e) => structuredClone(e));
       let entry = entries.find((e) => e.prop === prop && Object.values(e.map).some((mm) => d.channel in mm));
       if (!entry) entry = entries.find((e) => e.prop === prop && entries.filter((x) => x.prop === prop).length === 1);

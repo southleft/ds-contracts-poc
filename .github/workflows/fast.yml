@@ -498,6 +498,17 @@ jobs:
       - name: exact-proposal:check (strict proposal refuses legacy and semantic ambiguity)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run exact-proposal:check
+      # THE CHANNEL TABLE (docs/30). Every CSS computed property the capture
+      # can observe is classified exactly once (spec/channel-table.json); this
+      # refuses on an unclassified observed property, a ghost CARRIED anchor,
+      # a missing schema/conformance row, or drifted totals — then proves it
+      # can go red at all.
+      - name: channel-table:check (no unclassified channel; every CARRIED anchor exists)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run channel-table:check
+      - name: channel-table self-test (a dropped row, a ghost anchor and a stray byte each go red)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run channel-table:check -- --self-test
       - name: string-boolean-coercion:check (maintain — a string "true" never becomes a boolean property)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run string-boolean-coercion:check
@@ -599,6 +610,20 @@ jobs:
       - name: first-pass self-test (the gate goes red on a dropped packet, a smuggled packet, a corrupted image, a ratchet raised above the truth, and an edited receipt)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run first-pass:check -- --self-test
+      # THE DOOR REGISTER (spec/DOOR-REGISTER.md). A door is any rule that
+      # decides a computed fact is NOT a fact of this component, or that a fact
+      # IS admitted — the pipeline's only judgement calls. The gate holds the
+      # register to the code in four directions (an @door marker with no entry,
+      # an entry with no marker, an entry whose line is not where the marker
+      # sits, and a door CLAIMING a receipt whose receipt path does not exist)
+      # and re-measures the subtraction census by re-fusing all 116 committed
+      # captures offline, refusing when the pinned per-library numbers move.
+      - name: door-register:check (every subtractive heuristic named, premised, and its receipt path proved)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run door-register:check
+      - name: door-register self-test (the gate goes red on an unregistered door, an unmarked entry, and a claimed receipt with no path)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run door-register:self-test
 
       # CORPUS REPRODUCIBILITY — the twin of the gate above, and the reason the
       # first-pass exam went 0/8 the day it first ran: the committed contracts
