@@ -200,7 +200,33 @@
                     "disabled": {
                       "color": "{imported.checkbox.input.color-state-disabled}"
                     }
-                  }
+                  },
+                  "codeOnly": [
+                    {
+                      "state": "disabled",
+                      "channel": "outline-color",
+                      "value": "#545454",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-color",
+                      "value": "#005fcc",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-offset",
+                      "value": "2px",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-width",
+                      "value": "1px",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    }
+                  ]
                 },
                 "backdrop": {
                   "shape": {
@@ -209,11 +235,13 @@
                     "height": 18
                   },
                   "tokens": {
+                    "border-width": "{p.border-width-0}",
                     "border-bottom-left-radius": "{imported.shared.size-4}",
                     "border-bottom-right-radius": "{imported.shared.size-4}",
                     "border-top-left-radius": "{imported.shared.size-4}",
                     "border-top-right-radius": "{imported.shared.size-4}",
                     "bottom": "{imported.shared.size-0}",
+                    "color": "{imported.shared.color-303030}",
                     "height": "{imported.shared.size-18}",
                     "left": "{imported.shared.size-0}",
                     "min-height": "{imported.shared.size-0}",
@@ -252,39 +280,153 @@
                       "outline-style": "solid"
                     }
                   },
-                  "literalsByProp": [
+                  "tokensByProp": [
                     {
                       "prop": "checked",
                       "map": {
-                        "unchecked": {
-                          "background-color": "rgba(255, 255, 255, 1)",
-                          "border-top-width": "1px",
-                          "border-right-width": "1px",
-                          "border-bottom-width": "1px",
-                          "border-left-width": "1px",
-                          "border-top-color": "rgba(138, 138, 138, 1)",
-                          "border-right-color": "rgba(138, 138, 138, 1)",
-                          "border-bottom-color": "rgba(138, 138, 138, 1)",
-                          "border-left-color": "rgba(138, 138, 138, 1)"
-                        },
                         "checked": {
-                          "background-color": "rgba(48, 48, 48, 1)",
-                          "border-top-width": "0px",
-                          "border-right-width": "0px",
-                          "border-bottom-width": "0px",
-                          "border-left-width": "0px"
+                          "background-color": "{imported.checkbox.backdrop.background-color.checked}",
+                          "box-shadow": "{imported.checkbox.backdrop.box-shadow.checked}"
                         },
                         "indeterminate": {
-                          "background-color": "rgba(48, 48, 48, 1)",
-                          "border-top-width": "0px",
-                          "border-right-width": "0px",
-                          "border-bottom-width": "0px",
-                          "border-left-width": "0px"
+                          "background-color": "{imported.checkbox.backdrop.background-color.indeterminate}",
+                          "box-shadow": "{imported.checkbox.backdrop.box-shadow.indeterminate}"
+                        },
+                        "unchecked": {
+                          "background-color": "{imported.checkbox.backdrop.background-color.unchecked}",
+                          "box-shadow": "{imported.checkbox.backdrop.box-shadow.unchecked}"
                         }
                       }
                     }
                   ],
-                  "description": "Canvas geometry (console-loop visual fix): per-axis literal border+fill replaces inset box-shadow tokens — unchecked = white 18×18 + 1px #8a8a8a ring; checked/indeterminate = #303030 fill, no border (matches examples/polaris/receipts/checkbox/default.png)."
+                  "codeOnly": [
+                    {
+                      "state": "active",
+                      "channel": "background-color",
+                      "value": "{imported.checkbox.backdrop.background-color-state-active.{checked}}",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "active",
+                      "channel": "border-bottom-color",
+                      "value": "#303030",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "active",
+                      "channel": "border-left-color",
+                      "value": "#303030",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "active",
+                      "channel": "border-right-color",
+                      "value": "#303030",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "active",
+                      "channel": "border-top-color",
+                      "value": "#303030",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "active",
+                      "channel": "box-shadow",
+                      "value": "{imported.checkbox.backdrop.box-shadow-state-active.{checked}}",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "border-bottom-color",
+                      "value": "#00000000",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "border-left-color",
+                      "value": "#00000000",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "border-right-color",
+                      "value": "#00000000",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "border-top-color",
+                      "value": "#00000000",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "box-shadow",
+                      "value": "none",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "background-color",
+                      "value": "{imported.checkbox.backdrop.background-color-state-focus-visible.{checked}}",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-color",
+                      "value": "#005bd3",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-offset",
+                      "value": "1px",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-width",
+                      "value": "2px",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "hover",
+                      "channel": "background-color",
+                      "value": "{imported.checkbox.backdrop.background-color-state-hover.{checked}}",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "hover",
+                      "channel": "border-bottom-color",
+                      "value": "{imported.checkbox.backdrop.border-bottom-color-state-hover.{checked}}",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "hover",
+                      "channel": "border-left-color",
+                      "value": "{imported.checkbox.backdrop.border-left-color-state-hover.{checked}}",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "hover",
+                      "channel": "border-right-color",
+                      "value": "{imported.checkbox.backdrop.border-right-color-state-hover.{checked}}",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "hover",
+                      "channel": "border-top-color",
+                      "value": "{imported.checkbox.backdrop.border-top-color-state-hover.{checked}}",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "hover",
+                      "channel": "box-shadow",
+                      "value": "{imported.checkbox.backdrop.box-shadow-state-hover.{checked}}",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    }
+                  ]
                 },
                 "icon-3": {
                   "element": "span",
@@ -349,14 +491,21 @@
                         "size": 22
                       },
                       "tokens": {
-                        "fill": "{imported.checkbox.icon-6.color}",
+                        "color": "{imported.shared.color-303030}",
                         "margin-left": "{imported.shared.size-1}",
                         "margin-right": "{imported.shared.size-1}",
                         "min-height": "{imported.shared.size-0}",
                         "min-width": "{imported.shared.size-0}",
                         "width": "{imported.shared.size-20}"
                       },
-                      "description": "Indeterminate minus glyph — fill bound to icon-6 white (#fff) on #303030 backdrop (was shared #303030, invisible on canvas)."
+                      "codeOnly": [
+                        {
+                          "state": "disabled",
+                          "channel": "cursor",
+                          "value": "default",
+                          "reason": "declared-channel state delta on 1/3 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                        }
+                      ]
                     },
                     "icon-6": {
                       "description": "Promoted from the computed floor (round 4): rendered anatomy svg| — this element exists in the real component's DOM; the static layer had no part for it.",
@@ -406,14 +555,73 @@
                         "right": "{imported.shared.size-0}",
                         "top": "{imported.shared.size-0}",
                         "width": "{imported.shared.size-14}"
-                      }
+                      },
+                      "codeOnly": [
+                        {
+                          "state": "disabled",
+                          "channel": "cursor",
+                          "value": "default",
+                          "reason": "declared-channel state delta on 1/3 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                        }
+                      ]
                     }
                   },
                   "tokens": {
                     "color": "{imported.shared.color-303030}",
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}"
-                  }
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "checked",
+                      "map": {
+                        "checked": {
+                          "bottom": "{imported.checkbox.icon-3.bottom.checked}",
+                          "height": "{imported.checkbox.icon-3.height.checked}",
+                          "left": "{imported.checkbox.icon-3.left.checked}",
+                          "margin-bottom": "{imported.checkbox.icon-3.margin-bottom.checked}",
+                          "margin-left": "{imported.checkbox.icon-3.margin-left.checked}",
+                          "margin-right": "{imported.checkbox.icon-3.margin-right.checked}",
+                          "margin-top": "{imported.checkbox.icon-3.margin-top.checked}",
+                          "right": "{imported.checkbox.icon-3.right.checked}",
+                          "top": "{imported.checkbox.icon-3.top.checked}",
+                          "width": "{imported.checkbox.icon-3.width.checked}"
+                        },
+                        "indeterminate": {
+                          "bottom": "{imported.checkbox.icon-3.bottom.indeterminate}",
+                          "height": "{imported.checkbox.icon-3.height.indeterminate}",
+                          "left": "{imported.checkbox.icon-3.left.indeterminate}",
+                          "margin-bottom": "{imported.checkbox.icon-3.margin-bottom.indeterminate}",
+                          "margin-left": "{imported.checkbox.icon-3.margin-left.indeterminate}",
+                          "margin-right": "{imported.checkbox.icon-3.margin-right.indeterminate}",
+                          "margin-top": "{imported.checkbox.icon-3.margin-top.indeterminate}",
+                          "right": "{imported.checkbox.icon-3.right.indeterminate}",
+                          "top": "{imported.checkbox.icon-3.top.indeterminate}",
+                          "width": "{imported.checkbox.icon-3.width.indeterminate}"
+                        },
+                        "unchecked": {
+                          "bottom": "{imported.checkbox.icon-3.bottom.unchecked}",
+                          "height": "{imported.checkbox.icon-3.height.unchecked}",
+                          "left": "{imported.checkbox.icon-3.left.unchecked}",
+                          "margin-bottom": "{imported.checkbox.icon-3.margin-bottom.unchecked}",
+                          "margin-left": "{imported.checkbox.icon-3.margin-left.unchecked}",
+                          "margin-right": "{imported.checkbox.icon-3.margin-right.unchecked}",
+                          "margin-top": "{imported.checkbox.icon-3.margin-top.unchecked}",
+                          "right": "{imported.checkbox.icon-3.right.unchecked}",
+                          "top": "{imported.checkbox.icon-3.top.unchecked}",
+                          "width": "{imported.checkbox.icon-3.width.unchecked}"
+                        }
+                      }
+                    }
+                  ],
+                  "codeOnly": [
+                    {
+                      "state": "disabled",
+                      "channel": "cursor",
+                      "value": "default",
+                      "reason": "declared-channel state delta on 2/3 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                    }
+                  ]
                 },
                 "icon": {
                   "element": "span",
@@ -439,7 +647,15 @@
                     "right": "{imported.shared.size-0}",
                     "top": "{imported.shared.size-0}",
                     "width": "{imported.shared.size-14}"
-                  }
+                  },
+                  "codeOnly": [
+                    {
+                      "state": "disabled",
+                      "channel": "cursor",
+                      "value": "default",
+                      "reason": "declared-channel state delta on 1/3 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                    }
+                  ]
                 }
               },
               "declaredStates": {
@@ -449,6 +665,7 @@
               },
               "tokens": {
                 "bottom": "{imported.shared.size-0}",
+                "color": "{imported.shared.color-303030}",
                 "height": "{imported.shared.size-18}",
                 "left": "{imported.shared.size-0}",
                 "margin-bottom": "{imported.shared.size-1}",
@@ -470,6 +687,7 @@
             }
           },
           "tokens": {
+            "color": "{imported.shared.color-303030}",
             "flex-shrink": "{imported.shared.num-0}",
             "margin-right": "{imported.checkbox.choice-control.margin-right}",
             "width": "{imported.shared.size-20}"
@@ -484,11 +702,12 @@
           },
           "parts": {
             "label": {
-              "text": "Save this information",
+              "text": "Save this product",
               "description": "Promoted from the computed floor (round 4): rendered anatomy span|Text — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "inline",
-                "cursor": "pointer"
+                "cursor": "pointer",
+                "font-family": "Inter, -apple-system, \"system-ui\", \"San Francisco\", \"Segoe UI\", Roboto, \"Helvetica Neue\", sans-serif"
               },
               "declaredStates": {
                 "disabled": {
@@ -496,6 +715,7 @@
                 }
               },
               "tokens": {
+                "color": "{imported.shared.color-303030}",
                 "font-size": "{imported.checkbox.label.font-size}",
                 "font-weight": "{imported.checkbox.label.font-weight}",
                 "line-height": "{imported.shared.size-20}",
@@ -506,7 +726,69 @@
                 "disabled": {
                   "color": "{imported.shared.color-b5b5b5}"
                 }
-              }
+              },
+              "codeOnly": [
+                {
+                  "state": "disabled",
+                  "channel": "border-bottom-color",
+                  "value": "#b5b5b5",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "border-left-color",
+                  "value": "#b5b5b5",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "border-right-color",
+                  "value": "#b5b5b5",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "border-top-color",
+                  "value": "#b5b5b5",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "caret-color",
+                  "value": "#b5b5b5",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "column-rule-color",
+                  "value": "#b5b5b5",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "outline-color",
+                  "value": "#b5b5b5",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "row-rule-color",
+                  "value": "#b5b5b5",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "text-decoration-color",
+                  "value": "#b5b5b5",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "text-emphasis-color",
+                  "value": "#b5b5b5",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                }
+              ]
             }
           },
           "declaredStates": {
@@ -514,12 +796,77 @@
               "cursor": "default"
             }
           },
-          "tokens": {},
+          "tokens": {
+            "color": "{imported.shared.color-303030}",
+            "width": "{imported.checkbox.choice-label.width}"
+          },
           "states": {
             "disabled": {
               "color": "{imported.shared.color-b5b5b5}"
             }
-          }
+          },
+          "codeOnly": [
+            {
+              "state": "disabled",
+              "channel": "border-bottom-color",
+              "value": "#b5b5b5",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "border-left-color",
+              "value": "#b5b5b5",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "border-right-color",
+              "value": "#b5b5b5",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "border-top-color",
+              "value": "#b5b5b5",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "caret-color",
+              "value": "#b5b5b5",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "column-rule-color",
+              "value": "#b5b5b5",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "outline-color",
+              "value": "#b5b5b5",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "row-rule-color",
+              "value": "#b5b5b5",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "text-decoration-color",
+              "value": "#b5b5b5",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "text-emphasis-color",
+              "value": "#b5b5b5",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            }
+          ]
         }
       },
       "declared": {
@@ -531,9 +878,11 @@
         }
       },
       "tokens": {
+        "color": "{imported.shared.color-303030}",
         "height": "{imported.checkbox.root.height}",
         "padding-bottom": "{imported.shared.size-4}",
-        "padding-top": "{imported.shared.size-4}"
+        "padding-top": "{imported.shared.size-4}",
+        "width": "{imported.checkbox.root.width}"
       }
     }
   },

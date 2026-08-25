@@ -248,49 +248,6 @@
   margin-top: var(--imported-button-root-margin-top-monochromePlain-large);
 }
 
-.tone-default {
-}
-
-.tone-default.variant-plain {
-  background-color: var(--imported-button-root-background-color-plain-none);
-  background-image: var(--imported-button-root-background-image-plain-none);
-  box-shadow: var(--imported-button-root-box-shadow-plain-none);
-  color: var(--imported-button-root-color-plain-none);
-  outline-color: var(--imported-button-root-outline-color-plain-none);
-}
-
-.tone-default.variant-primary {
-  background-color: var(--imported-button-root-background-color-primary-none);
-  background-image: var(--imported-button-root-background-image-primary-none);
-  box-shadow: var(--imported-button-root-box-shadow-primary-none);
-  color: var(--imported-button-root-color-primary-none);
-  outline-color: var(--imported-button-root-outline-color-primary-none);
-}
-
-.tone-default.variant-secondary {
-  background-color: var(--imported-button-root-background-color-secondary-none);
-  background-image: var(--imported-button-root-background-image-secondary-none);
-  box-shadow: var(--imported-button-root-box-shadow-secondary-none);
-  color: var(--imported-button-root-color-secondary-none);
-  outline-color: var(--imported-button-root-outline-color-secondary-none);
-}
-
-.tone-default.variant-tertiary {
-  background-color: var(--imported-button-root-background-color-tertiary-none);
-  background-image: var(--imported-button-root-background-image-tertiary-none);
-  box-shadow: var(--imported-button-root-box-shadow-tertiary-none);
-  color: var(--imported-button-root-color-tertiary-none);
-  outline-color: var(--imported-button-root-outline-color-tertiary-none);
-}
-
-.tone-default.variant-monochromePlain {
-  background-color: var(--imported-button-root-background-color-monochromePlain-none);
-  background-image: var(--imported-button-root-background-image-monochromePlain-none);
-  box-shadow: var(--imported-button-root-box-shadow-monochromePlain-none);
-  color: var(--imported-button-root-color-monochromePlain-none);
-  outline-color: var(--imported-button-root-outline-color-monochromePlain-none);
-}
-
 .tone-critical {
 }
 
@@ -772,6 +729,7 @@
   letter-spacing: var(--p-text-body-sm-font-letter-spacing);
   display: block;
   cursor: pointer;
+  font-family: Inter, -apple-system, "system-ui", "San Francisco", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
   text-align: center;
   user-select: none;
 }

@@ -67,9 +67,9 @@
     "combos": 2,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 472,
+      "cellsCompared": 504,
       "cellsEqual": 312,
-      "pctEqual": 66.10169491525424,
+      "pctEqual": 61.904761904761905,
       "rowsFullyEqual": 0,
       "rows": 8
     },
@@ -91,9 +91,9 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 18,
-      "mintedLeavesUnfolded": 48,
-      "baseBindings": 28,
+      "mintedLeaves": 19,
+      "mintedLeavesUnfolded": 49,
+      "baseBindings": 32,
       "stateBindings": 0,
       "codeOnlyChannels": 1,
       "overflowBindings": 0,
@@ -104,62 +104,78 @@
         "key": "default__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 20,
+        "channelsMismatched": 24,
         "unscorable": "no-original"
       },
       {
         "key": "default__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 20,
+        "channelsMismatched": 24,
         "unscorable": "no-original"
       },
       {
         "key": "default__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 20,
+        "channelsMismatched": 24,
         "unscorable": "no-original"
       },
       {
         "key": "default__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 20,
+        "channelsMismatched": 24,
         "unscorable": "no-original"
       },
       {
         "key": "destructive__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 20,
+        "channelsMismatched": 24,
         "unscorable": "no-original"
       },
       {
         "key": "destructive__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 20,
+        "channelsMismatched": 24,
         "unscorable": "no-original"
       },
       {
         "key": "destructive__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 20,
+        "channelsMismatched": 24,
         "unscorable": "no-original"
       },
       {
         "key": "destructive__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 20,
+        "channelsMismatched": 24,
         "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
       [
         "root.background-color",
+        8
+      ],
+      [
+        "root.border-bottom-color",
+        8
+      ],
+      [
+        "root.border-left-color",
+        8
+      ],
+      [
+        "root.border-right-color",
+        8
+      ],
+      [
+        "root.border-top-color",
         8
       ],
       [
@@ -200,22 +216,6 @@
       ],
       [
         "label.row-rule-color",
-        8
-      ],
-      [
-        "label.text-decoration-color",
-        8
-      ],
-      [
-        "label.text-emphasis-color",
-        8
-      ],
-      [
-        "label-2.caret-color",
-        8
-      ],
-      [
-        "label-2.color",
         8
       ]
     ],
@@ -265,7 +265,7 @@
     "rows": [
       {
         "key": "default__default",
-        "channelsCompared": 59,
+        "channelsCompared": 63,
         "channelsEqual": 39,
         "pctExact": null,
         "pctAA": null,
@@ -276,6 +276,30 @@
             "channel": "background-color",
             "ours": "rgba(255, 255, 255, 1)",
             "theirs": "oklch(1 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
           },
           {
             "part": "root",
@@ -396,7 +420,7 @@
       },
       {
         "key": "default__hover",
-        "channelsCompared": 59,
+        "channelsCompared": 63,
         "channelsEqual": 39,
         "pctExact": null,
         "pctAA": null,
@@ -407,6 +431,30 @@
             "channel": "background-color",
             "ours": "rgba(255, 255, 255, 1)",
             "theirs": "oklch(1 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
           },
           {
             "part": "root",
@@ -527,7 +575,7 @@
       },
       {
         "key": "default__focus-visible",
-        "channelsCompared": 59,
+        "channelsCompared": 63,
         "channelsEqual": 39,
         "pctExact": null,
         "pctAA": null,
@@ -538,6 +586,30 @@
             "channel": "background-color",
             "ours": "rgba(255, 255, 255, 1)",
             "theirs": "oklch(1 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
           },
           {
             "part": "root",
@@ -658,7 +730,7 @@
       },
       {
         "key": "default__active",
-        "channelsCompared": 59,
+        "channelsCompared": 63,
         "channelsEqual": 39,
         "pctExact": null,
         "pctAA": null,
@@ -669,6 +741,30 @@
             "channel": "background-color",
             "ours": "rgba(255, 255, 255, 1)",
             "theirs": "oklch(1 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
           },
           {
             "part": "root",
@@ -789,7 +885,7 @@
       },
       {
         "key": "destructive__default",
-        "channelsCompared": 59,
+        "channelsCompared": 63,
         "channelsEqual": 39,
         "pctExact": null,
         "pctAA": null,
@@ -800,6 +896,30 @@
             "channel": "background-color",
             "ours": "rgba(255, 255, 255, 1)",
             "theirs": "oklch(1 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
           },
           {
             "part": "root",
@@ -920,7 +1040,7 @@
       },
       {
         "key": "destructive__hover",
-        "channelsCompared": 59,
+        "channelsCompared": 63,
         "channelsEqual": 39,
         "pctExact": null,
         "pctAA": null,
@@ -931,6 +1051,30 @@
             "channel": "background-color",
             "ours": "rgba(255, 255, 255, 1)",
             "theirs": "oklch(1 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
           },
           {
             "part": "root",
@@ -1051,7 +1195,7 @@
       },
       {
         "key": "destructive__focus-visible",
-        "channelsCompared": 59,
+        "channelsCompared": 63,
         "channelsEqual": 39,
         "pctExact": null,
         "pctAA": null,
@@ -1062,6 +1206,30 @@
             "channel": "background-color",
             "ours": "rgba(255, 255, 255, 1)",
             "theirs": "oklch(1 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
           },
           {
             "part": "root",
@@ -1182,7 +1350,7 @@
       },
       {
         "key": "destructive__active",
-        "channelsCompared": 59,
+        "channelsCompared": 63,
         "channelsEqual": 39,
         "pctExact": null,
         "pctAA": null,
@@ -1193,6 +1361,30 @@
             "channel": "background-color",
             "ours": "rgba(255, 255, 255, 1)",
             "theirs": "oklch(1 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
           },
           {
             "part": "root",

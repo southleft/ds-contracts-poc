@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "fluent.checkbox",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Checkbox — generated from contract fluent.checkbox v0.2.0 † (61 code-only facts — see plugin report)",
+    "description": "Checkbox — generated from contract fluent.checkbox v0.2.0 † (99 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -97,7 +97,8 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
-                  }
+                  },
+                  "fontFamily": "Segoe UI"
                 }
               ],
               "bindings": {
@@ -197,7 +198,8 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
-                  }
+                  },
+                  "fontFamily": "Segoe UI"
                 }
               ],
               "bindings": {
@@ -297,7 +299,8 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
-                  }
+                  },
+                  "fontFamily": "Segoe UI"
                 }
               ],
               "bindings": {
@@ -397,7 +400,8 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
-                  }
+                  },
+                  "fontFamily": "Segoe UI"
                 }
               ],
               "bindings": {
@@ -524,7 +528,8 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
-                  }
+                  },
+                  "fontFamily": "Segoe UI"
                 }
               ],
               "bindings": {
@@ -651,7 +656,8 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
-                  }
+                  },
+                  "fontFamily": "Segoe UI"
                 }
               ],
               "bindings": {
@@ -778,7 +784,8 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
-                  }
+                  },
+                  "fontFamily": "Segoe UI"
                 }
               ],
               "bindings": {
@@ -905,7 +912,8 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
-                  }
+                  },
+                  "fontFamily": "Segoe UI"
                 }
               ],
               "bindings": {
@@ -1032,7 +1040,8 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
-                  }
+                  },
+                  "fontFamily": "Segoe UI"
                 }
               ],
               "bindings": {
@@ -1159,7 +1168,8 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
-                  }
+                  },
+                  "fontFamily": "Segoe UI"
                 }
               ],
               "bindings": {
@@ -1286,7 +1296,8 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
-                  }
+                  },
+                  "fontFamily": "Segoe UI"
                 }
               ],
               "bindings": {
@@ -1413,7 +1424,8 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
-                  }
+                  },
+                  "fontFamily": "Segoe UI"
                 }
               ],
               "bindings": {
@@ -1523,7 +1535,8 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
-                  }
+                  },
+                  "fontFamily": "Segoe UI"
                 }
               ],
               "bindings": {
@@ -1650,7 +1663,8 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
-                  }
+                  },
+                  "fontFamily": "Segoe UI"
                 }
               ],
               "bindings": {
@@ -1777,7 +1791,8 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
-                  }
+                  },
+                  "fontFamily": "Segoe UI"
                 }
               ],
               "bindings": {
@@ -1877,7 +1892,8 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
-                  }
+                  },
+                  "fontFamily": "Segoe UI"
                 }
               ],
               "bindings": {
@@ -2004,7 +2020,8 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
-                  }
+                  },
+                  "fontFamily": "Segoe UI"
                 }
               ],
               "bindings": {
@@ -2131,7 +2148,8 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
-                  }
+                  },
+                  "fontFamily": "Segoe UI"
                 }
               ],
               "bindings": {
@@ -2231,7 +2249,8 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
-                  }
+                  },
+                  "fontFamily": "Segoe UI"
                 }
               ],
               "bindings": {
@@ -2358,7 +2377,8 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
-                  }
+                  },
+                  "fontFamily": "Segoe UI"
                 }
               ],
               "bindings": {
@@ -2485,7 +2505,8 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
-                  }
+                  },
+                  "fontFamily": "Segoe UI"
                 }
               ],
               "bindings": {
@@ -2585,7 +2606,8 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
-                  }
+                  },
+                  "fontFamily": "Segoe UI"
                 }
               ],
               "bindings": {
@@ -2712,7 +2734,8 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
-                  }
+                  },
+                  "fontFamily": "Segoe UI"
                 }
               ],
               "bindings": {
@@ -2839,7 +2862,8 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
-                  }
+                  },
+                  "fontFamily": "Segoe UI"
                 }
               ],
               "bindings": {
@@ -2910,6 +2934,83 @@ const COMPONENTS = [
     "codeOnlyFacts": [
       {
         "part": "icon",
+        "kind": "capture",
+        "channel": "color [active]",
+        "value": "rgba(15, 84, 140, 1)",
+        "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "icon",
+        "kind": "capture",
+        "channel": "color [disabled]",
+        "value": "rgba(189, 189, 189, 1)",
+        "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "icon",
+        "kind": "capture",
+        "channel": "color [hover]",
+        "value": "rgba(17, 94, 163, 1)",
+        "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "icon",
+        "kind": "capture",
+        "channel": "cursor [disabled]",
+        "value": "default",
+        "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 8/12 combos — partial coverage cannot carry as a state selector (v15); named residue",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "icon",
+        "kind": "capture",
+        "channel": "fill [active]",
+        "value": "rgba(15, 84, 140, 1)",
+        "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "icon",
+        "kind": "capture",
+        "channel": "fill [disabled]",
+        "value": "rgba(189, 189, 189, 1)",
+        "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "icon",
+        "kind": "capture",
+        "channel": "fill [hover]",
+        "value": "rgba(17, 94, 163, 1)",
+        "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "icon",
         "kind": "channel",
         "channel": "aspect-ratio",
         "value": "1 / 1",
@@ -2965,6 +3066,215 @@ const COMPONENTS = [
         "channel": "pointer-events",
         "value": "none",
         "reason": "Pointer-event gating exists only in the coded component.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "capture",
+        "channel": "background-color [active]",
+        "value": "{imported.checkbox.indicator.background-color-state-active.{checked}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "capture",
+        "channel": "background-color [hover]",
+        "value": "{imported.checkbox.indicator.background-color-state-hover.{checked}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "capture",
+        "channel": "border-bottom-color [active]",
+        "value": "{imported.checkbox.indicator.border-bottom-color-state-active.{checked}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "capture",
+        "channel": "border-bottom-color [disabled]",
+        "value": "#e0e0e0",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "capture",
+        "channel": "border-bottom-color [hover]",
+        "value": "{imported.checkbox.indicator.border-bottom-color-state-hover.{checked}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "capture",
+        "channel": "border-left-color [active]",
+        "value": "{imported.checkbox.indicator.border-left-color-state-active.{checked}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "capture",
+        "channel": "border-left-color [disabled]",
+        "value": "#e0e0e0",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "capture",
+        "channel": "border-left-color [hover]",
+        "value": "{imported.checkbox.indicator.border-left-color-state-hover.{checked}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "capture",
+        "channel": "border-right-color [active]",
+        "value": "{imported.checkbox.indicator.border-right-color-state-active.{checked}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "capture",
+        "channel": "border-right-color [disabled]",
+        "value": "#e0e0e0",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "capture",
+        "channel": "border-right-color [hover]",
+        "value": "{imported.checkbox.indicator.border-right-color-state-hover.{checked}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "capture",
+        "channel": "border-top-color [active]",
+        "value": "{imported.checkbox.indicator.border-top-color-state-active.{checked}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "capture",
+        "channel": "border-top-color [disabled]",
+        "value": "#e0e0e0",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "capture",
+        "channel": "border-top-color [hover]",
+        "value": "{imported.checkbox.indicator.border-top-color-state-hover.{checked}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "capture",
+        "channel": "color [active]",
+        "value": "{imported.checkbox.indicator.color-state-active.{checked}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "capture",
+        "channel": "color [hover]",
+        "value": "{imported.checkbox.indicator.color-state-hover.{checked}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "capture",
+        "channel": "fill [active]",
+        "value": "{imported.checkbox.indicator.fill-state-active.{checked}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "capture",
+        "channel": "fill [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "capture",
+        "channel": "fill [hover]",
+        "value": "{imported.checkbox.indicator.fill-state-hover.{checked}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
         "variants": {
           "count": 24,
           "of": 24
@@ -3071,6 +3381,50 @@ const COMPONENTS = [
       },
       {
         "part": "input",
+        "kind": "capture",
+        "channel": "outline-color [disabled]",
+        "value": "#545454",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "input",
+        "kind": "capture",
+        "channel": "outline-color [focus-visible]",
+        "value": "#005fcc",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "input",
+        "kind": "capture",
+        "channel": "outline-offset [focus-visible]",
+        "value": "2px",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "input",
+        "kind": "capture",
+        "channel": "outline-width [focus-visible]",
+        "value": "1px",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "input",
         "kind": "declared",
         "channel": "appearance",
         "value": "auto",
@@ -3137,6 +3491,17 @@ const COMPONENTS = [
       },
       {
         "part": "label",
+        "kind": "capture",
+        "channel": "color [hover]",
+        "value": "{imported.checkbox.label.color-state-hover.{checked}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "label",
         "kind": "declared",
         "channel": "cursor",
         "value": "default",
@@ -3163,6 +3528,83 @@ const COMPONENTS = [
         "channel": "display",
         "value": "block",
         "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "part-1-0-0",
+        "kind": "capture",
+        "channel": "color [active]",
+        "value": "rgba(15, 84, 140, 1)",
+        "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "part-1-0-0",
+        "kind": "capture",
+        "channel": "color [disabled]",
+        "value": "rgba(189, 189, 189, 1)",
+        "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "part-1-0-0",
+        "kind": "capture",
+        "channel": "color [hover]",
+        "value": "rgba(17, 94, 163, 1)",
+        "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "part-1-0-0",
+        "kind": "capture",
+        "channel": "cursor [disabled]",
+        "value": "default",
+        "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 8/12 combos — partial coverage cannot carry as a state selector (v15); named residue",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "part-1-0-0",
+        "kind": "capture",
+        "channel": "fill [active]",
+        "value": "rgba(15, 84, 140, 1)",
+        "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "part-1-0-0",
+        "kind": "capture",
+        "channel": "fill [disabled]",
+        "value": "rgba(189, 189, 189, 1)",
+        "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "part-1-0-0",
+        "kind": "capture",
+        "channel": "fill [hover]",
+        "value": "rgba(17, 94, 163, 1)",
+        "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
         "variants": {
           "count": 24,
           "of": 24
@@ -4347,6 +4789,55 @@ async function buildNode(spec, registry) {
     else if (spec.lineHeight && typeof spec.lineHeight === 'object' && typeof spec.lineHeight.value === 'number') {
       node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
     }
+    if (spec.fontFamily) {
+      // PER-FAMILY STYLE SPELLING. The compiled style name comes from
+      // FONT_STYLE_BY_WEIGHT, which is spelled Inter's way ("Semi Bold",
+      // "Extra Light"). Other families spell the same face WITHOUT the space
+      // — IBM Plex Sans ships "SemiBold", "ExtraLight" — so the Inter-spelled
+      // load THROWS and the node silently keeps the Inter fallback assigned
+      // above. That is a SUBSTITUTION, not a failure: nothing was logged,
+      // nothing was refused, and the canvas rendered a different typeface at
+      // different advance widths (altitude heading 194px of Inter Semi Bold
+      // where IBM Plex Sans SemiBold is 185px).
+      //
+      // A space-free retry was tried on 2026-08-08 and REVERTED because the
+      // then-pinned references were CONTRACT renders made by a harness that
+      // loaded no @font-face, so the truer canvas font scored WORSE. That
+      // premise is dead: the references are now the real library renders
+      // (extract/computed/out/<lane>/<comp>/orig-shots/, committed by
+      // run.ts --keep-originals) and the capture harness loads the library's
+      // own faces (cfg.fonts). Truer is now also closer.
+      //
+      // The fallback is kept — a family Figma does not have at all must still
+      // draw something — but it is no longer SILENT: an unresolved style is
+      // named on the console with a stable code.
+      const wantStyle = spec.fontStyle || 'Medium';
+      const styleCandidates = [wantStyle];
+      const tightStyle = wantStyle.split(' ').join('');
+      if (tightStyle !== wantStyle) styleCandidates.push(tightStyle);
+      let fontResolved = false;
+      for (let i = 0; i < styleCandidates.length; i++) {
+        try {
+          await figma.loadFontAsync({ family: spec.fontFamily, style: styleCandidates[i] });
+          node.fontName = { family: spec.fontFamily, style: styleCandidates[i] };
+          fontResolved = true;
+          break;
+        } catch (e) { /* a RETRY, not a swallow: the next candidate is this family's own spelling of the same face; the final outcome is named below */ }
+      }
+      if (!fontResolved) {
+        console.warn(
+          'FC-FONT-STYLE-UNRESOLVED: ' + spec.fontFamily + ' / ' + wantStyle +
+          ' is not available in this file (tried ' + styleCandidates.join(', ') +
+          ') — Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones',
+        );
+        degrade('FC-FONT-STYLE-UNRESOLVED', node, spec.fontFamily + ' / ' + wantStyle + ' is not available in this file (tried ' + styleCandidates.join(', ') + '); Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones');
+      }
+    }
+    if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
+    if (spec.textCase) node.textCase = spec.textCase;
+    if (spec.textDecoration) node.textDecoration = spec.textDecoration;
+    if (spec.textAlignH) node.textAlignHorizontal = spec.textAlignH;
+    if (spec.textTruncation) { try { node.textTruncation = 'ENDING'; } catch (e) { degrade('FC-RT-TRUNCATION-REFUSED', node, 'textTruncation ENDING refused (older Plugin API); the declared ellipsis does not draw', e); } }
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.

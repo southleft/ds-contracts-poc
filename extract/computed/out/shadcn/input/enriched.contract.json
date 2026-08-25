@@ -37,16 +37,22 @@
         }
       },
       "tokens": {
+        "border-bottom-color": "{imported.shared.color-e5e5e5}",
         "border-bottom-left-radius": "{imported.shared.size-8}",
         "border-bottom-right-radius": "{imported.shared.size-8}",
         "border-bottom-width": "{imported.shared.size-1}",
+        "border-left-color": "{imported.shared.color-e5e5e5}",
         "border-left-width": "{imported.shared.size-1}",
+        "border-right-color": "{imported.shared.color-e5e5e5}",
         "border-right-width": "{imported.shared.size-1}",
+        "border-top-color": "{imported.shared.color-e5e5e5}",
         "border-top-left-radius": "{imported.shared.size-8}",
         "border-top-right-radius": "{imported.shared.size-8}",
         "border-top-width": "{imported.shared.size-1}",
         "box-shadow": "{imported.input.root.box-shadow}",
+        "color": "{imported.input.root.color}",
         "font-size": "{imported.input.root.font-size}",
+        "height": "{imported.input.root.height}",
         "line-height": "{imported.input.root.line-height}",
         "min-width": "{imported.input.root.min-width}",
         "padding-bottom": "{imported.input.root.padding-bottom}",
@@ -75,7 +81,21 @@
           "box-shadow": "{imported.input.root.box-shadow-state-focus-visible}",
           "outline-width": "{imported.input.root.outline-width-state-focus-visible}"
         }
-      }
+      },
+      "codeOnly": [
+        {
+          "state": "active",
+          "channel": "--tw-ring-shadow",
+          "value": "0 0 0 calc(3px + 0px) color-mix(in oklab, oklch(0.708 0 0) 50%, transparent)",
+          "reason": "CSS custom property, not a styled channel — the same door the base plane applies: a custom property is a token DECLARATION the library sets on this element (its plumbing), never a rendered fact; the rendered state delta rides the consuming channel"
+        },
+        {
+          "state": "focus-visible",
+          "channel": "--tw-ring-shadow",
+          "value": "0 0 0 calc(3px + 0px) color-mix(in oklab, oklch(0.708 0 0) 50%, transparent)",
+          "reason": "CSS custom property, not a styled channel — the same door the base plane applies: a custom property is a token DECLARATION the library sets on this element (its plumbing), never a rendered fact; the rendered state delta rides the consuming channel"
+        }
+      ]
     }
   },
   "bindings": {

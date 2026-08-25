@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "polaris.button",
     "version": "0.4.0",
     "anchorKey": null,
-    "description": "Button — generated from contract polaris.button v0.4.0 † (37 code-only facts — see plugin report)",
+    "description": "Button — generated from contract polaris.button v0.4.0 † (77 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -34,496 +34,9 @@ const COMPONENTS = [
     ],
     "variants": [
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary",
-        "row": 0,
-        "col": 0,
-        "spec": {
-          "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/secondary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0.7098039215686275,
-                "g": 0.7098039215686275,
-                "b": 0.7098039215686275,
-                "a": 1
-              }
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 1
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/secondary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/secondary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain",
-        "row": 0,
-        "col": 1,
-        "spec": {
-          "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "fill": "imported/button/root/background-color/plain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/plain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/plain/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary",
-        "row": 0,
-        "col": 2,
-        "spec": {
-          "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/primary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.8
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0.18823529411764706,
-                "g": 0.18823529411764706,
-                "b": 0.18823529411764706,
-                "a": 1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 0.25
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/primary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-semibold",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/primary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary",
-        "row": 0,
-        "col": 3,
-        "spec": {
-          "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/tertiary/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/tertiary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/tertiary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain",
-        "row": 0,
-        "col": 4,
-        "spec": {
-          "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "fill": "imported/button/root/background-color/monochromePlain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/monochromePlain/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
         "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary",
         "row": 0,
-        "col": 5,
+        "col": 0,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary",
@@ -638,7 +151,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -646,7 +160,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain",
         "row": 0,
-        "col": 6,
+        "col": 1,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain",
@@ -716,7 +230,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -724,7 +239,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary",
         "row": 0,
-        "col": 7,
+        "col": 2,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary",
@@ -840,7 +355,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -848,7 +364,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary",
         "row": 0,
-        "col": 8,
+        "col": 3,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary",
@@ -924,7 +440,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -932,7 +449,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain",
         "row": 0,
-        "col": 9,
+        "col": 4,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain",
@@ -1002,7 +519,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -1010,7 +528,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Center, Tone=Success, Variant=Secondary",
         "row": 0,
-        "col": 10,
+        "col": 5,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Center, Tone=Success, Variant=Secondary",
@@ -1125,7 +643,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -1133,7 +652,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Center, Tone=Success, Variant=Plain",
         "row": 0,
-        "col": 11,
+        "col": 6,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Center, Tone=Success, Variant=Plain",
@@ -1203,7 +722,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -1211,7 +731,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Center, Tone=Success, Variant=Primary",
         "row": 0,
-        "col": 12,
+        "col": 7,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Center, Tone=Success, Variant=Primary",
@@ -1327,7 +847,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -1335,7 +856,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Center, Tone=Success, Variant=Tertiary",
         "row": 0,
-        "col": 13,
+        "col": 8,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Center, Tone=Success, Variant=Tertiary",
@@ -1411,7 +932,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -1419,7 +941,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Center, Tone=Success, Variant=Monochrome Plain",
         "row": 0,
-        "col": 14,
+        "col": 9,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Center, Tone=Success, Variant=Monochrome Plain",
@@ -1489,494 +1011,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Medium, Text Align=Left, Tone=Default, Variant=Secondary",
-        "row": 0,
-        "col": 15,
-        "spec": {
-          "type": "root",
-          "name": "Size=Medium, Text Align=Left, Tone=Default, Variant=Secondary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/secondary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0.7098039215686275,
-                "g": 0.7098039215686275,
-                "b": 0.7098039215686275,
-                "a": 1
-              }
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 1
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/secondary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/secondary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Medium, Text Align=Left, Tone=Default, Variant=Plain",
-        "row": 0,
-        "col": 16,
-        "spec": {
-          "type": "root",
-          "name": "Size=Medium, Text Align=Left, Tone=Default, Variant=Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "fill": "imported/button/root/background-color/plain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/plain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/plain/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Medium, Text Align=Left, Tone=Default, Variant=Primary",
-        "row": 0,
-        "col": 17,
-        "spec": {
-          "type": "root",
-          "name": "Size=Medium, Text Align=Left, Tone=Default, Variant=Primary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/primary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.8
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0.18823529411764706,
-                "g": 0.18823529411764706,
-                "b": 0.18823529411764706,
-                "a": 1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 0.25
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/primary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-semibold",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/primary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Medium, Text Align=Left, Tone=Default, Variant=Tertiary",
-        "row": 0,
-        "col": 18,
-        "spec": {
-          "type": "root",
-          "name": "Size=Medium, Text Align=Left, Tone=Default, Variant=Tertiary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/tertiary/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/tertiary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/tertiary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Medium, Text Align=Left, Tone=Default, Variant=Monochrome Plain",
-        "row": 0,
-        "col": 19,
-        "spec": {
-          "type": "root",
-          "name": "Size=Medium, Text Align=Left, Tone=Default, Variant=Monochrome Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "fill": "imported/button/root/background-color/monochromePlain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/monochromePlain/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -1984,7 +1020,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Left, Tone=Critical, Variant=Secondary",
         "row": 0,
-        "col": 20,
+        "col": 10,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Left, Tone=Critical, Variant=Secondary",
@@ -2099,7 +1135,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -2107,7 +1144,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Left, Tone=Critical, Variant=Plain",
         "row": 0,
-        "col": 21,
+        "col": 11,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Left, Tone=Critical, Variant=Plain",
@@ -2177,7 +1214,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -2185,7 +1223,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Left, Tone=Critical, Variant=Primary",
         "row": 0,
-        "col": 22,
+        "col": 12,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Left, Tone=Critical, Variant=Primary",
@@ -2301,7 +1339,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -2309,7 +1348,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Left, Tone=Critical, Variant=Tertiary",
         "row": 0,
-        "col": 23,
+        "col": 13,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Left, Tone=Critical, Variant=Tertiary",
@@ -2385,7 +1424,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -2393,7 +1433,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Left, Tone=Critical, Variant=Monochrome Plain",
         "row": 0,
-        "col": 24,
+        "col": 14,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Left, Tone=Critical, Variant=Monochrome Plain",
@@ -2463,7 +1503,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -2471,7 +1512,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Left, Tone=Success, Variant=Secondary",
         "row": 0,
-        "col": 25,
+        "col": 15,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Left, Tone=Success, Variant=Secondary",
@@ -2586,7 +1627,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -2594,7 +1636,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Left, Tone=Success, Variant=Plain",
         "row": 0,
-        "col": 26,
+        "col": 16,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Left, Tone=Success, Variant=Plain",
@@ -2664,7 +1706,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -2672,7 +1715,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Left, Tone=Success, Variant=Primary",
         "row": 0,
-        "col": 27,
+        "col": 17,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Left, Tone=Success, Variant=Primary",
@@ -2788,7 +1831,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -2796,7 +1840,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Left, Tone=Success, Variant=Tertiary",
         "row": 0,
-        "col": 28,
+        "col": 18,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Left, Tone=Success, Variant=Tertiary",
@@ -2872,7 +1916,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -2880,7 +1925,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Left, Tone=Success, Variant=Monochrome Plain",
         "row": 0,
-        "col": 29,
+        "col": 19,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Left, Tone=Success, Variant=Monochrome Plain",
@@ -2950,494 +1995,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Medium, Text Align=Right, Tone=Default, Variant=Secondary",
-        "row": 0,
-        "col": 30,
-        "spec": {
-          "type": "root",
-          "name": "Size=Medium, Text Align=Right, Tone=Default, Variant=Secondary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/secondary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0.7098039215686275,
-                "g": 0.7098039215686275,
-                "b": 0.7098039215686275,
-                "a": 1
-              }
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 1
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/secondary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/secondary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Medium, Text Align=Right, Tone=Default, Variant=Plain",
-        "row": 0,
-        "col": 31,
-        "spec": {
-          "type": "root",
-          "name": "Size=Medium, Text Align=Right, Tone=Default, Variant=Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "fill": "imported/button/root/background-color/plain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/plain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/plain/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Medium, Text Align=Right, Tone=Default, Variant=Primary",
-        "row": 0,
-        "col": 32,
-        "spec": {
-          "type": "root",
-          "name": "Size=Medium, Text Align=Right, Tone=Default, Variant=Primary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/primary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.8
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0.18823529411764706,
-                "g": 0.18823529411764706,
-                "b": 0.18823529411764706,
-                "a": 1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 0.25
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/primary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-semibold",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/primary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Medium, Text Align=Right, Tone=Default, Variant=Tertiary",
-        "row": 0,
-        "col": 33,
-        "spec": {
-          "type": "root",
-          "name": "Size=Medium, Text Align=Right, Tone=Default, Variant=Tertiary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/tertiary/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/tertiary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/tertiary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Medium, Text Align=Right, Tone=Default, Variant=Monochrome Plain",
-        "row": 0,
-        "col": 34,
-        "spec": {
-          "type": "root",
-          "name": "Size=Medium, Text Align=Right, Tone=Default, Variant=Monochrome Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "fill": "imported/button/root/background-color/monochromePlain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/monochromePlain/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -3445,7 +2004,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Right, Tone=Critical, Variant=Secondary",
         "row": 0,
-        "col": 35,
+        "col": 20,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Right, Tone=Critical, Variant=Secondary",
@@ -3560,7 +2119,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -3568,7 +2128,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Right, Tone=Critical, Variant=Plain",
         "row": 0,
-        "col": 36,
+        "col": 21,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Right, Tone=Critical, Variant=Plain",
@@ -3638,7 +2198,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -3646,7 +2207,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Right, Tone=Critical, Variant=Primary",
         "row": 0,
-        "col": 37,
+        "col": 22,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Right, Tone=Critical, Variant=Primary",
@@ -3762,7 +2323,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -3770,7 +2332,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Right, Tone=Critical, Variant=Tertiary",
         "row": 0,
-        "col": 38,
+        "col": 23,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Right, Tone=Critical, Variant=Tertiary",
@@ -3846,7 +2408,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -3854,7 +2417,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Right, Tone=Critical, Variant=Monochrome Plain",
         "row": 0,
-        "col": 39,
+        "col": 24,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Right, Tone=Critical, Variant=Monochrome Plain",
@@ -3924,7 +2487,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -3932,7 +2496,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Right, Tone=Success, Variant=Secondary",
         "row": 0,
-        "col": 40,
+        "col": 25,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Right, Tone=Success, Variant=Secondary",
@@ -4047,7 +2611,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -4055,7 +2620,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Right, Tone=Success, Variant=Plain",
         "row": 0,
-        "col": 41,
+        "col": 26,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Right, Tone=Success, Variant=Plain",
@@ -4125,7 +2690,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -4133,7 +2699,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Right, Tone=Success, Variant=Primary",
         "row": 0,
-        "col": 42,
+        "col": 27,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Right, Tone=Success, Variant=Primary",
@@ -4249,7 +2815,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -4257,7 +2824,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Right, Tone=Success, Variant=Tertiary",
         "row": 0,
-        "col": 43,
+        "col": 28,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Right, Tone=Success, Variant=Tertiary",
@@ -4333,7 +2900,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -4341,7 +2909,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Right, Tone=Success, Variant=Monochrome Plain",
         "row": 0,
-        "col": 44,
+        "col": 29,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Right, Tone=Success, Variant=Monochrome Plain",
@@ -4411,494 +2979,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Medium, Text Align=Start, Tone=Default, Variant=Secondary",
-        "row": 0,
-        "col": 45,
-        "spec": {
-          "type": "root",
-          "name": "Size=Medium, Text Align=Start, Tone=Default, Variant=Secondary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/secondary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0.7098039215686275,
-                "g": 0.7098039215686275,
-                "b": 0.7098039215686275,
-                "a": 1
-              }
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 1
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/secondary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/secondary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Medium, Text Align=Start, Tone=Default, Variant=Plain",
-        "row": 0,
-        "col": 46,
-        "spec": {
-          "type": "root",
-          "name": "Size=Medium, Text Align=Start, Tone=Default, Variant=Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "fill": "imported/button/root/background-color/plain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/plain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/plain/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Medium, Text Align=Start, Tone=Default, Variant=Primary",
-        "row": 0,
-        "col": 47,
-        "spec": {
-          "type": "root",
-          "name": "Size=Medium, Text Align=Start, Tone=Default, Variant=Primary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/primary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.8
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0.18823529411764706,
-                "g": 0.18823529411764706,
-                "b": 0.18823529411764706,
-                "a": 1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 0.25
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/primary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-semibold",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/primary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Medium, Text Align=Start, Tone=Default, Variant=Tertiary",
-        "row": 0,
-        "col": 48,
-        "spec": {
-          "type": "root",
-          "name": "Size=Medium, Text Align=Start, Tone=Default, Variant=Tertiary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/tertiary/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/tertiary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/tertiary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Medium, Text Align=Start, Tone=Default, Variant=Monochrome Plain",
-        "row": 0,
-        "col": 49,
-        "spec": {
-          "type": "root",
-          "name": "Size=Medium, Text Align=Start, Tone=Default, Variant=Monochrome Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "fill": "imported/button/root/background-color/monochromePlain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/monochromePlain/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -4906,7 +2988,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Start, Tone=Critical, Variant=Secondary",
         "row": 0,
-        "col": 50,
+        "col": 30,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Start, Tone=Critical, Variant=Secondary",
@@ -5021,7 +3103,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -5029,7 +3112,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Start, Tone=Critical, Variant=Plain",
         "row": 0,
-        "col": 51,
+        "col": 31,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Start, Tone=Critical, Variant=Plain",
@@ -5099,7 +3182,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -5107,7 +3191,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Start, Tone=Critical, Variant=Primary",
         "row": 0,
-        "col": 52,
+        "col": 32,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Start, Tone=Critical, Variant=Primary",
@@ -5223,7 +3307,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -5231,7 +3316,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Start, Tone=Critical, Variant=Tertiary",
         "row": 0,
-        "col": 53,
+        "col": 33,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Start, Tone=Critical, Variant=Tertiary",
@@ -5307,7 +3392,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -5315,7 +3401,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Start, Tone=Critical, Variant=Monochrome Plain",
         "row": 0,
-        "col": 54,
+        "col": 34,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Start, Tone=Critical, Variant=Monochrome Plain",
@@ -5385,7 +3471,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -5393,7 +3480,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Start, Tone=Success, Variant=Secondary",
         "row": 0,
-        "col": 55,
+        "col": 35,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Start, Tone=Success, Variant=Secondary",
@@ -5508,7 +3595,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -5516,7 +3604,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Start, Tone=Success, Variant=Plain",
         "row": 0,
-        "col": 56,
+        "col": 36,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Start, Tone=Success, Variant=Plain",
@@ -5586,7 +3674,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -5594,7 +3683,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Start, Tone=Success, Variant=Primary",
         "row": 0,
-        "col": 57,
+        "col": 37,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Start, Tone=Success, Variant=Primary",
@@ -5710,7 +3799,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -5718,7 +3808,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Start, Tone=Success, Variant=Tertiary",
         "row": 0,
-        "col": 58,
+        "col": 38,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Start, Tone=Success, Variant=Tertiary",
@@ -5794,7 +3884,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -5802,7 +3893,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=Start, Tone=Success, Variant=Monochrome Plain",
         "row": 0,
-        "col": 59,
+        "col": 39,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=Start, Tone=Success, Variant=Monochrome Plain",
@@ -5872,494 +3963,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Medium, Text Align=End, Tone=Default, Variant=Secondary",
-        "row": 0,
-        "col": 60,
-        "spec": {
-          "type": "root",
-          "name": "Size=Medium, Text Align=End, Tone=Default, Variant=Secondary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/secondary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0.7098039215686275,
-                "g": 0.7098039215686275,
-                "b": 0.7098039215686275,
-                "a": 1
-              }
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 1
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/secondary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/secondary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Medium, Text Align=End, Tone=Default, Variant=Plain",
-        "row": 0,
-        "col": 61,
-        "spec": {
-          "type": "root",
-          "name": "Size=Medium, Text Align=End, Tone=Default, Variant=Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "fill": "imported/button/root/background-color/plain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/plain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/plain/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Medium, Text Align=End, Tone=Default, Variant=Primary",
-        "row": 0,
-        "col": 62,
-        "spec": {
-          "type": "root",
-          "name": "Size=Medium, Text Align=End, Tone=Default, Variant=Primary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/primary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.8
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0.18823529411764706,
-                "g": 0.18823529411764706,
-                "b": 0.18823529411764706,
-                "a": 1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 0.25
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/primary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-semibold",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/primary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Medium, Text Align=End, Tone=Default, Variant=Tertiary",
-        "row": 0,
-        "col": 63,
-        "spec": {
-          "type": "root",
-          "name": "Size=Medium, Text Align=End, Tone=Default, Variant=Tertiary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/tertiary/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/tertiary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/tertiary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Medium, Text Align=End, Tone=Default, Variant=Monochrome Plain",
-        "row": 0,
-        "col": 64,
-        "spec": {
-          "type": "root",
-          "name": "Size=Medium, Text Align=End, Tone=Default, Variant=Monochrome Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "fill": "imported/button/root/background-color/monochromePlain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/monochromePlain/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -6367,7 +3972,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=End, Tone=Critical, Variant=Secondary",
         "row": 0,
-        "col": 65,
+        "col": 40,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=End, Tone=Critical, Variant=Secondary",
@@ -6482,7 +4087,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -6490,7 +4096,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=End, Tone=Critical, Variant=Plain",
         "row": 0,
-        "col": 66,
+        "col": 41,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=End, Tone=Critical, Variant=Plain",
@@ -6560,7 +4166,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -6568,7 +4175,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=End, Tone=Critical, Variant=Primary",
         "row": 0,
-        "col": 67,
+        "col": 42,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=End, Tone=Critical, Variant=Primary",
@@ -6684,7 +4291,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -6692,7 +4300,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=End, Tone=Critical, Variant=Tertiary",
         "row": 0,
-        "col": 68,
+        "col": 43,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=End, Tone=Critical, Variant=Tertiary",
@@ -6768,7 +4376,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -6776,7 +4385,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=End, Tone=Critical, Variant=Monochrome Plain",
         "row": 0,
-        "col": 69,
+        "col": 44,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=End, Tone=Critical, Variant=Monochrome Plain",
@@ -6846,7 +4455,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -6854,7 +4464,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=End, Tone=Success, Variant=Secondary",
         "row": 0,
-        "col": 70,
+        "col": 45,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=End, Tone=Success, Variant=Secondary",
@@ -6969,7 +4579,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -6977,7 +4588,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=End, Tone=Success, Variant=Plain",
         "row": 0,
-        "col": 71,
+        "col": 46,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=End, Tone=Success, Variant=Plain",
@@ -7047,7 +4658,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -7055,7 +4667,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=End, Tone=Success, Variant=Primary",
         "row": 0,
-        "col": 72,
+        "col": 47,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=End, Tone=Success, Variant=Primary",
@@ -7171,7 +4783,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -7179,7 +4792,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=End, Tone=Success, Variant=Tertiary",
         "row": 0,
-        "col": 73,
+        "col": 48,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=End, Tone=Success, Variant=Tertiary",
@@ -7255,7 +4868,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -7263,7 +4877,7 @@ const COMPONENTS = [
       {
         "name": "Size=Medium, Text Align=End, Tone=Success, Variant=Monochrome Plain",
         "row": 0,
-        "col": 74,
+        "col": 49,
         "spec": {
           "type": "root",
           "name": "Size=Medium, Text Align=End, Tone=Success, Variant=Monochrome Plain",
@@ -7333,494 +4947,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Micro, Text Align=Center, Tone=Default, Variant=Secondary",
-        "row": 1,
-        "col": 0,
-        "spec": {
-          "type": "root",
-          "name": "Size=Micro, Text Align=Center, Tone=Default, Variant=Secondary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-100",
-            "paddingBottom": "p/space-100",
-            "paddingLeft": "p/space-200",
-            "paddingRight": "p/space-200",
-            "minHeight": "p/height-700",
-            "minWidth": "p/width-700"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/secondary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0.7098039215686275,
-                "g": 0.7098039215686275,
-                "b": 0.7098039215686275,
-                "a": 1
-              }
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 1
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/secondary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/secondary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Micro, Text Align=Center, Tone=Default, Variant=Plain",
-        "row": 1,
-        "col": 1,
-        "spec": {
-          "type": "root",
-          "name": "Size=Micro, Text Align=Center, Tone=Default, Variant=Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-100",
-            "paddingBottom": "p/space-100",
-            "paddingLeft": "p/space-200",
-            "paddingRight": "p/space-200",
-            "minHeight": "p/height-700",
-            "minWidth": "p/width-700"
-          },
-          "fill": "imported/button/root/background-color/plain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/plain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/plain/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Micro, Text Align=Center, Tone=Default, Variant=Primary",
-        "row": 1,
-        "col": 2,
-        "spec": {
-          "type": "root",
-          "name": "Size=Micro, Text Align=Center, Tone=Default, Variant=Primary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-100",
-            "paddingBottom": "p/space-100",
-            "paddingLeft": "p/space-200",
-            "paddingRight": "p/space-200",
-            "minHeight": "p/height-700",
-            "minWidth": "p/width-700"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/primary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.8
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0.18823529411764706,
-                "g": 0.18823529411764706,
-                "b": 0.18823529411764706,
-                "a": 1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 0.25
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/primary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-semibold",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/primary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Micro, Text Align=Center, Tone=Default, Variant=Tertiary",
-        "row": 1,
-        "col": 3,
-        "spec": {
-          "type": "root",
-          "name": "Size=Micro, Text Align=Center, Tone=Default, Variant=Tertiary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-100",
-            "paddingBottom": "p/space-100",
-            "paddingLeft": "p/space-200",
-            "paddingRight": "p/space-200",
-            "minHeight": "p/height-700",
-            "minWidth": "p/width-700"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/tertiary/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/tertiary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/tertiary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Micro, Text Align=Center, Tone=Default, Variant=Monochrome Plain",
-        "row": 1,
-        "col": 4,
-        "spec": {
-          "type": "root",
-          "name": "Size=Micro, Text Align=Center, Tone=Default, Variant=Monochrome Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-100",
-            "paddingBottom": "p/space-100",
-            "paddingLeft": "p/space-200",
-            "paddingRight": "p/space-200",
-            "minHeight": "p/height-700",
-            "minWidth": "p/width-700"
-          },
-          "fill": "imported/button/root/background-color/monochromePlain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/monochromePlain/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -7828,7 +4956,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Center, Tone=Critical, Variant=Secondary",
         "row": 1,
-        "col": 5,
+        "col": 0,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Center, Tone=Critical, Variant=Secondary",
@@ -7943,7 +5071,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -7951,7 +5080,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Center, Tone=Critical, Variant=Plain",
         "row": 1,
-        "col": 6,
+        "col": 1,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Center, Tone=Critical, Variant=Plain",
@@ -8021,7 +5150,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -8029,7 +5159,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Center, Tone=Critical, Variant=Primary",
         "row": 1,
-        "col": 7,
+        "col": 2,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Center, Tone=Critical, Variant=Primary",
@@ -8145,7 +5275,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -8153,7 +5284,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Center, Tone=Critical, Variant=Tertiary",
         "row": 1,
-        "col": 8,
+        "col": 3,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Center, Tone=Critical, Variant=Tertiary",
@@ -8229,7 +5360,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -8237,7 +5369,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Center, Tone=Critical, Variant=Monochrome Plain",
         "row": 1,
-        "col": 9,
+        "col": 4,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Center, Tone=Critical, Variant=Monochrome Plain",
@@ -8307,7 +5439,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -8315,7 +5448,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Center, Tone=Success, Variant=Secondary",
         "row": 1,
-        "col": 10,
+        "col": 5,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Center, Tone=Success, Variant=Secondary",
@@ -8430,7 +5563,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -8438,7 +5572,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Center, Tone=Success, Variant=Plain",
         "row": 1,
-        "col": 11,
+        "col": 6,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Center, Tone=Success, Variant=Plain",
@@ -8508,7 +5642,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -8516,7 +5651,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Center, Tone=Success, Variant=Primary",
         "row": 1,
-        "col": 12,
+        "col": 7,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Center, Tone=Success, Variant=Primary",
@@ -8632,7 +5767,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -8640,7 +5776,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Center, Tone=Success, Variant=Tertiary",
         "row": 1,
-        "col": 13,
+        "col": 8,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Center, Tone=Success, Variant=Tertiary",
@@ -8716,7 +5852,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -8724,7 +5861,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Center, Tone=Success, Variant=Monochrome Plain",
         "row": 1,
-        "col": 14,
+        "col": 9,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Center, Tone=Success, Variant=Monochrome Plain",
@@ -8794,494 +5931,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Micro, Text Align=Left, Tone=Default, Variant=Secondary",
-        "row": 1,
-        "col": 15,
-        "spec": {
-          "type": "root",
-          "name": "Size=Micro, Text Align=Left, Tone=Default, Variant=Secondary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-100",
-            "paddingBottom": "p/space-100",
-            "paddingLeft": "p/space-200",
-            "paddingRight": "p/space-200",
-            "minHeight": "p/height-700",
-            "minWidth": "p/width-700"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/secondary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0.7098039215686275,
-                "g": 0.7098039215686275,
-                "b": 0.7098039215686275,
-                "a": 1
-              }
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 1
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/secondary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/secondary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Micro, Text Align=Left, Tone=Default, Variant=Plain",
-        "row": 1,
-        "col": 16,
-        "spec": {
-          "type": "root",
-          "name": "Size=Micro, Text Align=Left, Tone=Default, Variant=Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-100",
-            "paddingBottom": "p/space-100",
-            "paddingLeft": "p/space-200",
-            "paddingRight": "p/space-200",
-            "minHeight": "p/height-700",
-            "minWidth": "p/width-700"
-          },
-          "fill": "imported/button/root/background-color/plain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/plain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/plain/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Micro, Text Align=Left, Tone=Default, Variant=Primary",
-        "row": 1,
-        "col": 17,
-        "spec": {
-          "type": "root",
-          "name": "Size=Micro, Text Align=Left, Tone=Default, Variant=Primary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-100",
-            "paddingBottom": "p/space-100",
-            "paddingLeft": "p/space-200",
-            "paddingRight": "p/space-200",
-            "minHeight": "p/height-700",
-            "minWidth": "p/width-700"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/primary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.8
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0.18823529411764706,
-                "g": 0.18823529411764706,
-                "b": 0.18823529411764706,
-                "a": 1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 0.25
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/primary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-semibold",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/primary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Micro, Text Align=Left, Tone=Default, Variant=Tertiary",
-        "row": 1,
-        "col": 18,
-        "spec": {
-          "type": "root",
-          "name": "Size=Micro, Text Align=Left, Tone=Default, Variant=Tertiary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-100",
-            "paddingBottom": "p/space-100",
-            "paddingLeft": "p/space-200",
-            "paddingRight": "p/space-200",
-            "minHeight": "p/height-700",
-            "minWidth": "p/width-700"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/tertiary/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/tertiary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/tertiary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Micro, Text Align=Left, Tone=Default, Variant=Monochrome Plain",
-        "row": 1,
-        "col": 19,
-        "spec": {
-          "type": "root",
-          "name": "Size=Micro, Text Align=Left, Tone=Default, Variant=Monochrome Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-100",
-            "paddingBottom": "p/space-100",
-            "paddingLeft": "p/space-200",
-            "paddingRight": "p/space-200",
-            "minHeight": "p/height-700",
-            "minWidth": "p/width-700"
-          },
-          "fill": "imported/button/root/background-color/monochromePlain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/monochromePlain/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -9289,7 +5940,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Left, Tone=Critical, Variant=Secondary",
         "row": 1,
-        "col": 20,
+        "col": 10,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Left, Tone=Critical, Variant=Secondary",
@@ -9404,7 +6055,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -9412,7 +6064,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Left, Tone=Critical, Variant=Plain",
         "row": 1,
-        "col": 21,
+        "col": 11,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Left, Tone=Critical, Variant=Plain",
@@ -9482,7 +6134,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -9490,7 +6143,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Left, Tone=Critical, Variant=Primary",
         "row": 1,
-        "col": 22,
+        "col": 12,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Left, Tone=Critical, Variant=Primary",
@@ -9606,7 +6259,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -9614,7 +6268,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Left, Tone=Critical, Variant=Tertiary",
         "row": 1,
-        "col": 23,
+        "col": 13,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Left, Tone=Critical, Variant=Tertiary",
@@ -9690,7 +6344,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -9698,7 +6353,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Left, Tone=Critical, Variant=Monochrome Plain",
         "row": 1,
-        "col": 24,
+        "col": 14,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Left, Tone=Critical, Variant=Monochrome Plain",
@@ -9768,7 +6423,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -9776,7 +6432,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Left, Tone=Success, Variant=Secondary",
         "row": 1,
-        "col": 25,
+        "col": 15,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Left, Tone=Success, Variant=Secondary",
@@ -9891,7 +6547,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -9899,7 +6556,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Left, Tone=Success, Variant=Plain",
         "row": 1,
-        "col": 26,
+        "col": 16,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Left, Tone=Success, Variant=Plain",
@@ -9969,7 +6626,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -9977,7 +6635,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Left, Tone=Success, Variant=Primary",
         "row": 1,
-        "col": 27,
+        "col": 17,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Left, Tone=Success, Variant=Primary",
@@ -10093,7 +6751,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -10101,7 +6760,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Left, Tone=Success, Variant=Tertiary",
         "row": 1,
-        "col": 28,
+        "col": 18,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Left, Tone=Success, Variant=Tertiary",
@@ -10177,7 +6836,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -10185,7 +6845,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Left, Tone=Success, Variant=Monochrome Plain",
         "row": 1,
-        "col": 29,
+        "col": 19,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Left, Tone=Success, Variant=Monochrome Plain",
@@ -10255,494 +6915,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Micro, Text Align=Right, Tone=Default, Variant=Secondary",
-        "row": 1,
-        "col": 30,
-        "spec": {
-          "type": "root",
-          "name": "Size=Micro, Text Align=Right, Tone=Default, Variant=Secondary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-100",
-            "paddingBottom": "p/space-100",
-            "paddingLeft": "p/space-200",
-            "paddingRight": "p/space-200",
-            "minHeight": "p/height-700",
-            "minWidth": "p/width-700"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/secondary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0.7098039215686275,
-                "g": 0.7098039215686275,
-                "b": 0.7098039215686275,
-                "a": 1
-              }
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 1
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/secondary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/secondary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Micro, Text Align=Right, Tone=Default, Variant=Plain",
-        "row": 1,
-        "col": 31,
-        "spec": {
-          "type": "root",
-          "name": "Size=Micro, Text Align=Right, Tone=Default, Variant=Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-100",
-            "paddingBottom": "p/space-100",
-            "paddingLeft": "p/space-200",
-            "paddingRight": "p/space-200",
-            "minHeight": "p/height-700",
-            "minWidth": "p/width-700"
-          },
-          "fill": "imported/button/root/background-color/plain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/plain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/plain/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Micro, Text Align=Right, Tone=Default, Variant=Primary",
-        "row": 1,
-        "col": 32,
-        "spec": {
-          "type": "root",
-          "name": "Size=Micro, Text Align=Right, Tone=Default, Variant=Primary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-100",
-            "paddingBottom": "p/space-100",
-            "paddingLeft": "p/space-200",
-            "paddingRight": "p/space-200",
-            "minHeight": "p/height-700",
-            "minWidth": "p/width-700"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/primary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.8
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0.18823529411764706,
-                "g": 0.18823529411764706,
-                "b": 0.18823529411764706,
-                "a": 1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 0.25
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/primary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-semibold",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/primary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Micro, Text Align=Right, Tone=Default, Variant=Tertiary",
-        "row": 1,
-        "col": 33,
-        "spec": {
-          "type": "root",
-          "name": "Size=Micro, Text Align=Right, Tone=Default, Variant=Tertiary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-100",
-            "paddingBottom": "p/space-100",
-            "paddingLeft": "p/space-200",
-            "paddingRight": "p/space-200",
-            "minHeight": "p/height-700",
-            "minWidth": "p/width-700"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/tertiary/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/tertiary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/tertiary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Micro, Text Align=Right, Tone=Default, Variant=Monochrome Plain",
-        "row": 1,
-        "col": 34,
-        "spec": {
-          "type": "root",
-          "name": "Size=Micro, Text Align=Right, Tone=Default, Variant=Monochrome Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-100",
-            "paddingBottom": "p/space-100",
-            "paddingLeft": "p/space-200",
-            "paddingRight": "p/space-200",
-            "minHeight": "p/height-700",
-            "minWidth": "p/width-700"
-          },
-          "fill": "imported/button/root/background-color/monochromePlain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/monochromePlain/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -10750,7 +6924,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Right, Tone=Critical, Variant=Secondary",
         "row": 1,
-        "col": 35,
+        "col": 20,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Right, Tone=Critical, Variant=Secondary",
@@ -10865,7 +7039,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -10873,7 +7048,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Right, Tone=Critical, Variant=Plain",
         "row": 1,
-        "col": 36,
+        "col": 21,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Right, Tone=Critical, Variant=Plain",
@@ -10943,7 +7118,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -10951,7 +7127,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Right, Tone=Critical, Variant=Primary",
         "row": 1,
-        "col": 37,
+        "col": 22,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Right, Tone=Critical, Variant=Primary",
@@ -11067,7 +7243,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -11075,7 +7252,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Right, Tone=Critical, Variant=Tertiary",
         "row": 1,
-        "col": 38,
+        "col": 23,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Right, Tone=Critical, Variant=Tertiary",
@@ -11151,7 +7328,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -11159,7 +7337,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Right, Tone=Critical, Variant=Monochrome Plain",
         "row": 1,
-        "col": 39,
+        "col": 24,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Right, Tone=Critical, Variant=Monochrome Plain",
@@ -11229,7 +7407,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -11237,7 +7416,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Right, Tone=Success, Variant=Secondary",
         "row": 1,
-        "col": 40,
+        "col": 25,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Right, Tone=Success, Variant=Secondary",
@@ -11352,7 +7531,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -11360,7 +7540,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Right, Tone=Success, Variant=Plain",
         "row": 1,
-        "col": 41,
+        "col": 26,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Right, Tone=Success, Variant=Plain",
@@ -11430,7 +7610,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -11438,7 +7619,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Right, Tone=Success, Variant=Primary",
         "row": 1,
-        "col": 42,
+        "col": 27,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Right, Tone=Success, Variant=Primary",
@@ -11554,7 +7735,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -11562,7 +7744,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Right, Tone=Success, Variant=Tertiary",
         "row": 1,
-        "col": 43,
+        "col": 28,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Right, Tone=Success, Variant=Tertiary",
@@ -11638,7 +7820,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -11646,7 +7829,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Right, Tone=Success, Variant=Monochrome Plain",
         "row": 1,
-        "col": 44,
+        "col": 29,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Right, Tone=Success, Variant=Monochrome Plain",
@@ -11716,494 +7899,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Micro, Text Align=Start, Tone=Default, Variant=Secondary",
-        "row": 1,
-        "col": 45,
-        "spec": {
-          "type": "root",
-          "name": "Size=Micro, Text Align=Start, Tone=Default, Variant=Secondary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-100",
-            "paddingBottom": "p/space-100",
-            "paddingLeft": "p/space-200",
-            "paddingRight": "p/space-200",
-            "minHeight": "p/height-700",
-            "minWidth": "p/width-700"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/secondary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0.7098039215686275,
-                "g": 0.7098039215686275,
-                "b": 0.7098039215686275,
-                "a": 1
-              }
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 1
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/secondary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/secondary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Micro, Text Align=Start, Tone=Default, Variant=Plain",
-        "row": 1,
-        "col": 46,
-        "spec": {
-          "type": "root",
-          "name": "Size=Micro, Text Align=Start, Tone=Default, Variant=Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-100",
-            "paddingBottom": "p/space-100",
-            "paddingLeft": "p/space-200",
-            "paddingRight": "p/space-200",
-            "minHeight": "p/height-700",
-            "minWidth": "p/width-700"
-          },
-          "fill": "imported/button/root/background-color/plain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/plain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/plain/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Micro, Text Align=Start, Tone=Default, Variant=Primary",
-        "row": 1,
-        "col": 47,
-        "spec": {
-          "type": "root",
-          "name": "Size=Micro, Text Align=Start, Tone=Default, Variant=Primary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-100",
-            "paddingBottom": "p/space-100",
-            "paddingLeft": "p/space-200",
-            "paddingRight": "p/space-200",
-            "minHeight": "p/height-700",
-            "minWidth": "p/width-700"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/primary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.8
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0.18823529411764706,
-                "g": 0.18823529411764706,
-                "b": 0.18823529411764706,
-                "a": 1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 0.25
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/primary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-semibold",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/primary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Micro, Text Align=Start, Tone=Default, Variant=Tertiary",
-        "row": 1,
-        "col": 48,
-        "spec": {
-          "type": "root",
-          "name": "Size=Micro, Text Align=Start, Tone=Default, Variant=Tertiary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-100",
-            "paddingBottom": "p/space-100",
-            "paddingLeft": "p/space-200",
-            "paddingRight": "p/space-200",
-            "minHeight": "p/height-700",
-            "minWidth": "p/width-700"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/tertiary/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/tertiary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/tertiary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Micro, Text Align=Start, Tone=Default, Variant=Monochrome Plain",
-        "row": 1,
-        "col": 49,
-        "spec": {
-          "type": "root",
-          "name": "Size=Micro, Text Align=Start, Tone=Default, Variant=Monochrome Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-100",
-            "paddingBottom": "p/space-100",
-            "paddingLeft": "p/space-200",
-            "paddingRight": "p/space-200",
-            "minHeight": "p/height-700",
-            "minWidth": "p/width-700"
-          },
-          "fill": "imported/button/root/background-color/monochromePlain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/monochromePlain/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -12211,7 +7908,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Start, Tone=Critical, Variant=Secondary",
         "row": 1,
-        "col": 50,
+        "col": 30,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Start, Tone=Critical, Variant=Secondary",
@@ -12326,7 +8023,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -12334,7 +8032,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Start, Tone=Critical, Variant=Plain",
         "row": 1,
-        "col": 51,
+        "col": 31,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Start, Tone=Critical, Variant=Plain",
@@ -12404,7 +8102,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -12412,7 +8111,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Start, Tone=Critical, Variant=Primary",
         "row": 1,
-        "col": 52,
+        "col": 32,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Start, Tone=Critical, Variant=Primary",
@@ -12528,7 +8227,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -12536,7 +8236,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Start, Tone=Critical, Variant=Tertiary",
         "row": 1,
-        "col": 53,
+        "col": 33,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Start, Tone=Critical, Variant=Tertiary",
@@ -12612,7 +8312,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -12620,7 +8321,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Start, Tone=Critical, Variant=Monochrome Plain",
         "row": 1,
-        "col": 54,
+        "col": 34,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Start, Tone=Critical, Variant=Monochrome Plain",
@@ -12690,7 +8391,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -12698,7 +8400,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Start, Tone=Success, Variant=Secondary",
         "row": 1,
-        "col": 55,
+        "col": 35,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Start, Tone=Success, Variant=Secondary",
@@ -12813,7 +8515,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -12821,7 +8524,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Start, Tone=Success, Variant=Plain",
         "row": 1,
-        "col": 56,
+        "col": 36,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Start, Tone=Success, Variant=Plain",
@@ -12891,7 +8594,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -12899,7 +8603,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Start, Tone=Success, Variant=Primary",
         "row": 1,
-        "col": 57,
+        "col": 37,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Start, Tone=Success, Variant=Primary",
@@ -13015,7 +8719,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -13023,7 +8728,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Start, Tone=Success, Variant=Tertiary",
         "row": 1,
-        "col": 58,
+        "col": 38,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Start, Tone=Success, Variant=Tertiary",
@@ -13099,7 +8804,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -13107,7 +8813,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=Start, Tone=Success, Variant=Monochrome Plain",
         "row": 1,
-        "col": 59,
+        "col": 39,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=Start, Tone=Success, Variant=Monochrome Plain",
@@ -13177,494 +8883,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Micro, Text Align=End, Tone=Default, Variant=Secondary",
-        "row": 1,
-        "col": 60,
-        "spec": {
-          "type": "root",
-          "name": "Size=Micro, Text Align=End, Tone=Default, Variant=Secondary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-100",
-            "paddingBottom": "p/space-100",
-            "paddingLeft": "p/space-200",
-            "paddingRight": "p/space-200",
-            "minHeight": "p/height-700",
-            "minWidth": "p/width-700"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/secondary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0.7098039215686275,
-                "g": 0.7098039215686275,
-                "b": 0.7098039215686275,
-                "a": 1
-              }
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 1
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/secondary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/secondary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Micro, Text Align=End, Tone=Default, Variant=Plain",
-        "row": 1,
-        "col": 61,
-        "spec": {
-          "type": "root",
-          "name": "Size=Micro, Text Align=End, Tone=Default, Variant=Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-100",
-            "paddingBottom": "p/space-100",
-            "paddingLeft": "p/space-200",
-            "paddingRight": "p/space-200",
-            "minHeight": "p/height-700",
-            "minWidth": "p/width-700"
-          },
-          "fill": "imported/button/root/background-color/plain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/plain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/plain/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Micro, Text Align=End, Tone=Default, Variant=Primary",
-        "row": 1,
-        "col": 62,
-        "spec": {
-          "type": "root",
-          "name": "Size=Micro, Text Align=End, Tone=Default, Variant=Primary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-100",
-            "paddingBottom": "p/space-100",
-            "paddingLeft": "p/space-200",
-            "paddingRight": "p/space-200",
-            "minHeight": "p/height-700",
-            "minWidth": "p/width-700"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/primary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.8
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0.18823529411764706,
-                "g": 0.18823529411764706,
-                "b": 0.18823529411764706,
-                "a": 1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 0.25
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/primary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-semibold",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/primary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Micro, Text Align=End, Tone=Default, Variant=Tertiary",
-        "row": 1,
-        "col": 63,
-        "spec": {
-          "type": "root",
-          "name": "Size=Micro, Text Align=End, Tone=Default, Variant=Tertiary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-100",
-            "paddingBottom": "p/space-100",
-            "paddingLeft": "p/space-200",
-            "paddingRight": "p/space-200",
-            "minHeight": "p/height-700",
-            "minWidth": "p/width-700"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/tertiary/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/tertiary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/tertiary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Micro, Text Align=End, Tone=Default, Variant=Monochrome Plain",
-        "row": 1,
-        "col": 64,
-        "spec": {
-          "type": "root",
-          "name": "Size=Micro, Text Align=End, Tone=Default, Variant=Monochrome Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-100",
-            "paddingBottom": "p/space-100",
-            "paddingLeft": "p/space-200",
-            "paddingRight": "p/space-200",
-            "minHeight": "p/height-700",
-            "minWidth": "p/width-700"
-          },
-          "fill": "imported/button/root/background-color/monochromePlain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/monochromePlain/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -13672,7 +8892,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=End, Tone=Critical, Variant=Secondary",
         "row": 1,
-        "col": 65,
+        "col": 40,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=End, Tone=Critical, Variant=Secondary",
@@ -13787,7 +9007,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -13795,7 +9016,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=End, Tone=Critical, Variant=Plain",
         "row": 1,
-        "col": 66,
+        "col": 41,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=End, Tone=Critical, Variant=Plain",
@@ -13865,7 +9086,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -13873,7 +9095,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=End, Tone=Critical, Variant=Primary",
         "row": 1,
-        "col": 67,
+        "col": 42,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=End, Tone=Critical, Variant=Primary",
@@ -13989,7 +9211,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -13997,7 +9220,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=End, Tone=Critical, Variant=Tertiary",
         "row": 1,
-        "col": 68,
+        "col": 43,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=End, Tone=Critical, Variant=Tertiary",
@@ -14073,7 +9296,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -14081,7 +9305,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=End, Tone=Critical, Variant=Monochrome Plain",
         "row": 1,
-        "col": 69,
+        "col": 44,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=End, Tone=Critical, Variant=Monochrome Plain",
@@ -14151,7 +9375,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -14159,7 +9384,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=End, Tone=Success, Variant=Secondary",
         "row": 1,
-        "col": 70,
+        "col": 45,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=End, Tone=Success, Variant=Secondary",
@@ -14274,7 +9499,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -14282,7 +9508,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=End, Tone=Success, Variant=Plain",
         "row": 1,
-        "col": 71,
+        "col": 46,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=End, Tone=Success, Variant=Plain",
@@ -14352,7 +9578,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -14360,7 +9587,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=End, Tone=Success, Variant=Primary",
         "row": 1,
-        "col": 72,
+        "col": 47,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=End, Tone=Success, Variant=Primary",
@@ -14476,7 +9703,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -14484,7 +9712,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=End, Tone=Success, Variant=Tertiary",
         "row": 1,
-        "col": 73,
+        "col": 48,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=End, Tone=Success, Variant=Tertiary",
@@ -14560,7 +9788,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -14568,7 +9797,7 @@ const COMPONENTS = [
       {
         "name": "Size=Micro, Text Align=End, Tone=Success, Variant=Monochrome Plain",
         "row": 1,
-        "col": 74,
+        "col": 49,
         "spec": {
           "type": "root",
           "name": "Size=Micro, Text Align=End, Tone=Success, Variant=Monochrome Plain",
@@ -14638,494 +9867,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Slim, Text Align=Center, Tone=Default, Variant=Secondary",
-        "row": 2,
-        "col": 0,
-        "spec": {
-          "type": "root",
-          "name": "Size=Slim, Text Align=Center, Tone=Default, Variant=Secondary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/secondary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0.7098039215686275,
-                "g": 0.7098039215686275,
-                "b": 0.7098039215686275,
-                "a": 1
-              }
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 1
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/secondary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/secondary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Slim, Text Align=Center, Tone=Default, Variant=Plain",
-        "row": 2,
-        "col": 1,
-        "spec": {
-          "type": "root",
-          "name": "Size=Slim, Text Align=Center, Tone=Default, Variant=Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "fill": "imported/button/root/background-color/plain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/plain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/plain/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Slim, Text Align=Center, Tone=Default, Variant=Primary",
-        "row": 2,
-        "col": 2,
-        "spec": {
-          "type": "root",
-          "name": "Size=Slim, Text Align=Center, Tone=Default, Variant=Primary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/primary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.8
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0.18823529411764706,
-                "g": 0.18823529411764706,
-                "b": 0.18823529411764706,
-                "a": 1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 0.25
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/primary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-semibold",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/primary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Slim, Text Align=Center, Tone=Default, Variant=Tertiary",
-        "row": 2,
-        "col": 3,
-        "spec": {
-          "type": "root",
-          "name": "Size=Slim, Text Align=Center, Tone=Default, Variant=Tertiary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/tertiary/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/tertiary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/tertiary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Slim, Text Align=Center, Tone=Default, Variant=Monochrome Plain",
-        "row": 2,
-        "col": 4,
-        "spec": {
-          "type": "root",
-          "name": "Size=Slim, Text Align=Center, Tone=Default, Variant=Monochrome Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "fill": "imported/button/root/background-color/monochromePlain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/monochromePlain/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -15133,7 +9876,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Center, Tone=Critical, Variant=Secondary",
         "row": 2,
-        "col": 5,
+        "col": 0,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Center, Tone=Critical, Variant=Secondary",
@@ -15248,7 +9991,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -15256,7 +10000,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Center, Tone=Critical, Variant=Plain",
         "row": 2,
-        "col": 6,
+        "col": 1,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Center, Tone=Critical, Variant=Plain",
@@ -15326,7 +10070,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -15334,7 +10079,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Center, Tone=Critical, Variant=Primary",
         "row": 2,
-        "col": 7,
+        "col": 2,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Center, Tone=Critical, Variant=Primary",
@@ -15450,7 +10195,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -15458,7 +10204,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Center, Tone=Critical, Variant=Tertiary",
         "row": 2,
-        "col": 8,
+        "col": 3,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Center, Tone=Critical, Variant=Tertiary",
@@ -15534,7 +10280,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -15542,7 +10289,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Center, Tone=Critical, Variant=Monochrome Plain",
         "row": 2,
-        "col": 9,
+        "col": 4,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Center, Tone=Critical, Variant=Monochrome Plain",
@@ -15612,7 +10359,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -15620,7 +10368,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Center, Tone=Success, Variant=Secondary",
         "row": 2,
-        "col": 10,
+        "col": 5,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Center, Tone=Success, Variant=Secondary",
@@ -15735,7 +10483,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -15743,7 +10492,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Center, Tone=Success, Variant=Plain",
         "row": 2,
-        "col": 11,
+        "col": 6,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Center, Tone=Success, Variant=Plain",
@@ -15813,7 +10562,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -15821,7 +10571,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Center, Tone=Success, Variant=Primary",
         "row": 2,
-        "col": 12,
+        "col": 7,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Center, Tone=Success, Variant=Primary",
@@ -15937,7 +10687,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -15945,7 +10696,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Center, Tone=Success, Variant=Tertiary",
         "row": 2,
-        "col": 13,
+        "col": 8,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Center, Tone=Success, Variant=Tertiary",
@@ -16021,7 +10772,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -16029,7 +10781,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Center, Tone=Success, Variant=Monochrome Plain",
         "row": 2,
-        "col": 14,
+        "col": 9,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Center, Tone=Success, Variant=Monochrome Plain",
@@ -16099,494 +10851,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Slim, Text Align=Left, Tone=Default, Variant=Secondary",
-        "row": 2,
-        "col": 15,
-        "spec": {
-          "type": "root",
-          "name": "Size=Slim, Text Align=Left, Tone=Default, Variant=Secondary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/secondary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0.7098039215686275,
-                "g": 0.7098039215686275,
-                "b": 0.7098039215686275,
-                "a": 1
-              }
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 1
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/secondary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/secondary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Slim, Text Align=Left, Tone=Default, Variant=Plain",
-        "row": 2,
-        "col": 16,
-        "spec": {
-          "type": "root",
-          "name": "Size=Slim, Text Align=Left, Tone=Default, Variant=Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "fill": "imported/button/root/background-color/plain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/plain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/plain/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Slim, Text Align=Left, Tone=Default, Variant=Primary",
-        "row": 2,
-        "col": 17,
-        "spec": {
-          "type": "root",
-          "name": "Size=Slim, Text Align=Left, Tone=Default, Variant=Primary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/primary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.8
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0.18823529411764706,
-                "g": 0.18823529411764706,
-                "b": 0.18823529411764706,
-                "a": 1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 0.25
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/primary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-semibold",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/primary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Slim, Text Align=Left, Tone=Default, Variant=Tertiary",
-        "row": 2,
-        "col": 18,
-        "spec": {
-          "type": "root",
-          "name": "Size=Slim, Text Align=Left, Tone=Default, Variant=Tertiary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/tertiary/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/tertiary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/tertiary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Slim, Text Align=Left, Tone=Default, Variant=Monochrome Plain",
-        "row": 2,
-        "col": 19,
-        "spec": {
-          "type": "root",
-          "name": "Size=Slim, Text Align=Left, Tone=Default, Variant=Monochrome Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "fill": "imported/button/root/background-color/monochromePlain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/monochromePlain/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -16594,7 +10860,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Left, Tone=Critical, Variant=Secondary",
         "row": 2,
-        "col": 20,
+        "col": 10,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Left, Tone=Critical, Variant=Secondary",
@@ -16709,7 +10975,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -16717,7 +10984,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Left, Tone=Critical, Variant=Plain",
         "row": 2,
-        "col": 21,
+        "col": 11,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Left, Tone=Critical, Variant=Plain",
@@ -16787,7 +11054,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -16795,7 +11063,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Left, Tone=Critical, Variant=Primary",
         "row": 2,
-        "col": 22,
+        "col": 12,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Left, Tone=Critical, Variant=Primary",
@@ -16911,7 +11179,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -16919,7 +11188,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Left, Tone=Critical, Variant=Tertiary",
         "row": 2,
-        "col": 23,
+        "col": 13,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Left, Tone=Critical, Variant=Tertiary",
@@ -16995,7 +11264,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -17003,7 +11273,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Left, Tone=Critical, Variant=Monochrome Plain",
         "row": 2,
-        "col": 24,
+        "col": 14,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Left, Tone=Critical, Variant=Monochrome Plain",
@@ -17073,7 +11343,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -17081,7 +11352,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Left, Tone=Success, Variant=Secondary",
         "row": 2,
-        "col": 25,
+        "col": 15,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Left, Tone=Success, Variant=Secondary",
@@ -17196,7 +11467,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -17204,7 +11476,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Left, Tone=Success, Variant=Plain",
         "row": 2,
-        "col": 26,
+        "col": 16,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Left, Tone=Success, Variant=Plain",
@@ -17274,7 +11546,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -17282,7 +11555,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Left, Tone=Success, Variant=Primary",
         "row": 2,
-        "col": 27,
+        "col": 17,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Left, Tone=Success, Variant=Primary",
@@ -17398,7 +11671,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -17406,7 +11680,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Left, Tone=Success, Variant=Tertiary",
         "row": 2,
-        "col": 28,
+        "col": 18,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Left, Tone=Success, Variant=Tertiary",
@@ -17482,7 +11756,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -17490,7 +11765,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Left, Tone=Success, Variant=Monochrome Plain",
         "row": 2,
-        "col": 29,
+        "col": 19,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Left, Tone=Success, Variant=Monochrome Plain",
@@ -17560,494 +11835,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Slim, Text Align=Right, Tone=Default, Variant=Secondary",
-        "row": 2,
-        "col": 30,
-        "spec": {
-          "type": "root",
-          "name": "Size=Slim, Text Align=Right, Tone=Default, Variant=Secondary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/secondary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0.7098039215686275,
-                "g": 0.7098039215686275,
-                "b": 0.7098039215686275,
-                "a": 1
-              }
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 1
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/secondary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/secondary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Slim, Text Align=Right, Tone=Default, Variant=Plain",
-        "row": 2,
-        "col": 31,
-        "spec": {
-          "type": "root",
-          "name": "Size=Slim, Text Align=Right, Tone=Default, Variant=Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "fill": "imported/button/root/background-color/plain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/plain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/plain/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Slim, Text Align=Right, Tone=Default, Variant=Primary",
-        "row": 2,
-        "col": 32,
-        "spec": {
-          "type": "root",
-          "name": "Size=Slim, Text Align=Right, Tone=Default, Variant=Primary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/primary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.8
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0.18823529411764706,
-                "g": 0.18823529411764706,
-                "b": 0.18823529411764706,
-                "a": 1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 0.25
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/primary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-semibold",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/primary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Slim, Text Align=Right, Tone=Default, Variant=Tertiary",
-        "row": 2,
-        "col": 33,
-        "spec": {
-          "type": "root",
-          "name": "Size=Slim, Text Align=Right, Tone=Default, Variant=Tertiary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/tertiary/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/tertiary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/tertiary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Slim, Text Align=Right, Tone=Default, Variant=Monochrome Plain",
-        "row": 2,
-        "col": 34,
-        "spec": {
-          "type": "root",
-          "name": "Size=Slim, Text Align=Right, Tone=Default, Variant=Monochrome Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "fill": "imported/button/root/background-color/monochromePlain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/monochromePlain/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -18055,7 +11844,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Right, Tone=Critical, Variant=Secondary",
         "row": 2,
-        "col": 35,
+        "col": 20,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Right, Tone=Critical, Variant=Secondary",
@@ -18170,7 +11959,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -18178,7 +11968,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Right, Tone=Critical, Variant=Plain",
         "row": 2,
-        "col": 36,
+        "col": 21,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Right, Tone=Critical, Variant=Plain",
@@ -18248,7 +12038,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -18256,7 +12047,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Right, Tone=Critical, Variant=Primary",
         "row": 2,
-        "col": 37,
+        "col": 22,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Right, Tone=Critical, Variant=Primary",
@@ -18372,7 +12163,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -18380,7 +12172,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Right, Tone=Critical, Variant=Tertiary",
         "row": 2,
-        "col": 38,
+        "col": 23,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Right, Tone=Critical, Variant=Tertiary",
@@ -18456,7 +12248,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -18464,7 +12257,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Right, Tone=Critical, Variant=Monochrome Plain",
         "row": 2,
-        "col": 39,
+        "col": 24,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Right, Tone=Critical, Variant=Monochrome Plain",
@@ -18534,7 +12327,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -18542,7 +12336,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Right, Tone=Success, Variant=Secondary",
         "row": 2,
-        "col": 40,
+        "col": 25,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Right, Tone=Success, Variant=Secondary",
@@ -18657,7 +12451,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -18665,7 +12460,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Right, Tone=Success, Variant=Plain",
         "row": 2,
-        "col": 41,
+        "col": 26,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Right, Tone=Success, Variant=Plain",
@@ -18735,7 +12530,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -18743,7 +12539,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Right, Tone=Success, Variant=Primary",
         "row": 2,
-        "col": 42,
+        "col": 27,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Right, Tone=Success, Variant=Primary",
@@ -18859,7 +12655,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -18867,7 +12664,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Right, Tone=Success, Variant=Tertiary",
         "row": 2,
-        "col": 43,
+        "col": 28,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Right, Tone=Success, Variant=Tertiary",
@@ -18943,7 +12740,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -18951,7 +12749,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Right, Tone=Success, Variant=Monochrome Plain",
         "row": 2,
-        "col": 44,
+        "col": 29,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Right, Tone=Success, Variant=Monochrome Plain",
@@ -19021,494 +12819,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Slim, Text Align=Start, Tone=Default, Variant=Secondary",
-        "row": 2,
-        "col": 45,
-        "spec": {
-          "type": "root",
-          "name": "Size=Slim, Text Align=Start, Tone=Default, Variant=Secondary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/secondary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0.7098039215686275,
-                "g": 0.7098039215686275,
-                "b": 0.7098039215686275,
-                "a": 1
-              }
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 1
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/secondary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/secondary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Slim, Text Align=Start, Tone=Default, Variant=Plain",
-        "row": 2,
-        "col": 46,
-        "spec": {
-          "type": "root",
-          "name": "Size=Slim, Text Align=Start, Tone=Default, Variant=Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "fill": "imported/button/root/background-color/plain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/plain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/plain/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Slim, Text Align=Start, Tone=Default, Variant=Primary",
-        "row": 2,
-        "col": 47,
-        "spec": {
-          "type": "root",
-          "name": "Size=Slim, Text Align=Start, Tone=Default, Variant=Primary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/primary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.8
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0.18823529411764706,
-                "g": 0.18823529411764706,
-                "b": 0.18823529411764706,
-                "a": 1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 0.25
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/primary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-semibold",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/primary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Slim, Text Align=Start, Tone=Default, Variant=Tertiary",
-        "row": 2,
-        "col": 48,
-        "spec": {
-          "type": "root",
-          "name": "Size=Slim, Text Align=Start, Tone=Default, Variant=Tertiary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/tertiary/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/tertiary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/tertiary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Slim, Text Align=Start, Tone=Default, Variant=Monochrome Plain",
-        "row": 2,
-        "col": 49,
-        "spec": {
-          "type": "root",
-          "name": "Size=Slim, Text Align=Start, Tone=Default, Variant=Monochrome Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "fill": "imported/button/root/background-color/monochromePlain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/monochromePlain/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -19516,7 +12828,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Start, Tone=Critical, Variant=Secondary",
         "row": 2,
-        "col": 50,
+        "col": 30,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Start, Tone=Critical, Variant=Secondary",
@@ -19631,7 +12943,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -19639,7 +12952,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Start, Tone=Critical, Variant=Plain",
         "row": 2,
-        "col": 51,
+        "col": 31,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Start, Tone=Critical, Variant=Plain",
@@ -19709,7 +13022,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -19717,7 +13031,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Start, Tone=Critical, Variant=Primary",
         "row": 2,
-        "col": 52,
+        "col": 32,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Start, Tone=Critical, Variant=Primary",
@@ -19833,7 +13147,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -19841,7 +13156,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Start, Tone=Critical, Variant=Tertiary",
         "row": 2,
-        "col": 53,
+        "col": 33,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Start, Tone=Critical, Variant=Tertiary",
@@ -19917,7 +13232,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -19925,7 +13241,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Start, Tone=Critical, Variant=Monochrome Plain",
         "row": 2,
-        "col": 54,
+        "col": 34,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Start, Tone=Critical, Variant=Monochrome Plain",
@@ -19995,7 +13311,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -20003,7 +13320,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Start, Tone=Success, Variant=Secondary",
         "row": 2,
-        "col": 55,
+        "col": 35,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Start, Tone=Success, Variant=Secondary",
@@ -20118,7 +13435,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -20126,7 +13444,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Start, Tone=Success, Variant=Plain",
         "row": 2,
-        "col": 56,
+        "col": 36,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Start, Tone=Success, Variant=Plain",
@@ -20196,7 +13514,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -20204,7 +13523,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Start, Tone=Success, Variant=Primary",
         "row": 2,
-        "col": 57,
+        "col": 37,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Start, Tone=Success, Variant=Primary",
@@ -20320,7 +13639,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -20328,7 +13648,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Start, Tone=Success, Variant=Tertiary",
         "row": 2,
-        "col": 58,
+        "col": 38,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Start, Tone=Success, Variant=Tertiary",
@@ -20404,7 +13724,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -20412,7 +13733,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=Start, Tone=Success, Variant=Monochrome Plain",
         "row": 2,
-        "col": 59,
+        "col": 39,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=Start, Tone=Success, Variant=Monochrome Plain",
@@ -20482,494 +13803,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Slim, Text Align=End, Tone=Default, Variant=Secondary",
-        "row": 2,
-        "col": 60,
-        "spec": {
-          "type": "root",
-          "name": "Size=Slim, Text Align=End, Tone=Default, Variant=Secondary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/secondary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0.7098039215686275,
-                "g": 0.7098039215686275,
-                "b": 0.7098039215686275,
-                "a": 1
-              }
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 1
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/secondary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/secondary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Slim, Text Align=End, Tone=Default, Variant=Plain",
-        "row": 2,
-        "col": 61,
-        "spec": {
-          "type": "root",
-          "name": "Size=Slim, Text Align=End, Tone=Default, Variant=Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "fill": "imported/button/root/background-color/plain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/plain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/plain/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Slim, Text Align=End, Tone=Default, Variant=Primary",
-        "row": 2,
-        "col": 62,
-        "spec": {
-          "type": "root",
-          "name": "Size=Slim, Text Align=End, Tone=Default, Variant=Primary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/primary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.8
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0.18823529411764706,
-                "g": 0.18823529411764706,
-                "b": 0.18823529411764706,
-                "a": 1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 0.25
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/primary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-semibold",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/primary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Slim, Text Align=End, Tone=Default, Variant=Tertiary",
-        "row": 2,
-        "col": 63,
-        "spec": {
-          "type": "root",
-          "name": "Size=Slim, Text Align=End, Tone=Default, Variant=Tertiary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/tertiary/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/tertiary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/tertiary/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Slim, Text Align=End, Tone=Default, Variant=Monochrome Plain",
-        "row": 2,
-        "col": 64,
-        "spec": {
-          "type": "root",
-          "name": "Size=Slim, Text Align=End, Tone=Default, Variant=Monochrome Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-800",
-            "minWidth": "p/width-800"
-          },
-          "fill": "imported/button/root/background-color/monochromePlain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 12,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-sm-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-sm-font-line-height",
-              "textFill": "imported/button/root/color/monochromePlain/none",
-              "lineHeight": {
-                "value": 16,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -20977,7 +13812,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=End, Tone=Critical, Variant=Secondary",
         "row": 2,
-        "col": 65,
+        "col": 40,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=End, Tone=Critical, Variant=Secondary",
@@ -21092,7 +13927,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -21100,7 +13936,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=End, Tone=Critical, Variant=Plain",
         "row": 2,
-        "col": 66,
+        "col": 41,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=End, Tone=Critical, Variant=Plain",
@@ -21170,7 +14006,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -21178,7 +14015,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=End, Tone=Critical, Variant=Primary",
         "row": 2,
-        "col": 67,
+        "col": 42,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=End, Tone=Critical, Variant=Primary",
@@ -21294,7 +14131,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -21302,7 +14140,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=End, Tone=Critical, Variant=Tertiary",
         "row": 2,
-        "col": 68,
+        "col": 43,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=End, Tone=Critical, Variant=Tertiary",
@@ -21378,7 +14216,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -21386,7 +14225,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=End, Tone=Critical, Variant=Monochrome Plain",
         "row": 2,
-        "col": 69,
+        "col": 44,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=End, Tone=Critical, Variant=Monochrome Plain",
@@ -21456,7 +14295,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -21464,7 +14304,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=End, Tone=Success, Variant=Secondary",
         "row": 2,
-        "col": 70,
+        "col": 45,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=End, Tone=Success, Variant=Secondary",
@@ -21579,7 +14419,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -21587,7 +14428,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=End, Tone=Success, Variant=Plain",
         "row": 2,
-        "col": 71,
+        "col": 46,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=End, Tone=Success, Variant=Plain",
@@ -21657,7 +14498,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -21665,7 +14507,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=End, Tone=Success, Variant=Primary",
         "row": 2,
-        "col": 72,
+        "col": 47,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=End, Tone=Success, Variant=Primary",
@@ -21781,7 +14623,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -21789,7 +14632,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=End, Tone=Success, Variant=Tertiary",
         "row": 2,
-        "col": 73,
+        "col": 48,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=End, Tone=Success, Variant=Tertiary",
@@ -21865,7 +14708,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -21873,7 +14717,7 @@ const COMPONENTS = [
       {
         "name": "Size=Slim, Text Align=End, Tone=Success, Variant=Monochrome Plain",
         "row": 2,
-        "col": 74,
+        "col": 49,
         "spec": {
           "type": "root",
           "name": "Size=Slim, Text Align=End, Tone=Success, Variant=Monochrome Plain",
@@ -21943,494 +14787,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Large, Text Align=Center, Tone=Default, Variant=Secondary",
-        "row": 3,
-        "col": 0,
-        "spec": {
-          "type": "root",
-          "name": "Size=Large, Text Align=Center, Tone=Default, Variant=Secondary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-900",
-            "minWidth": "p/height-900"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/secondary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0.7098039215686275,
-                "g": 0.7098039215686275,
-                "b": 0.7098039215686275,
-                "a": 1
-              }
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 1
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/secondary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 13,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-md-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-md-font-line-height",
-              "textFill": "imported/button/root/color/secondary/none",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Large, Text Align=Center, Tone=Default, Variant=Plain",
-        "row": 3,
-        "col": 1,
-        "spec": {
-          "type": "root",
-          "name": "Size=Large, Text Align=Center, Tone=Default, Variant=Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-900",
-            "minWidth": "p/height-900"
-          },
-          "fill": "imported/button/root/background-color/plain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/plain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 13,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-md-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-md-font-line-height",
-              "textFill": "imported/button/root/color/plain/none",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Large, Text Align=Center, Tone=Default, Variant=Primary",
-        "row": 3,
-        "col": 2,
-        "spec": {
-          "type": "root",
-          "name": "Size=Large, Text Align=Center, Tone=Default, Variant=Primary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-900",
-            "minWidth": "p/height-900"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/primary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.8
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0.18823529411764706,
-                "g": 0.18823529411764706,
-                "b": 0.18823529411764706,
-                "a": 1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 0.25
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/primary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 13,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-md-font-size",
-              "fontWeightVar": "p/font-weight-semibold",
-              "lineHeightVar": "p/text-body-md-font-line-height",
-              "textFill": "imported/button/root/color/primary/none",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Large, Text Align=Center, Tone=Default, Variant=Tertiary",
-        "row": 3,
-        "col": 3,
-        "spec": {
-          "type": "root",
-          "name": "Size=Large, Text Align=Center, Tone=Default, Variant=Tertiary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-900",
-            "minWidth": "p/height-900"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/tertiary/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/tertiary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 13,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-md-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-md-font-line-height",
-              "textFill": "imported/button/root/color/tertiary/none",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Large, Text Align=Center, Tone=Default, Variant=Monochrome Plain",
-        "row": 3,
-        "col": 4,
-        "spec": {
-          "type": "root",
-          "name": "Size=Large, Text Align=Center, Tone=Default, Variant=Monochrome Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-900",
-            "minWidth": "p/height-900"
-          },
-          "fill": "imported/button/root/background-color/monochromePlain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 13,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-md-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-md-font-line-height",
-              "textFill": "imported/button/root/color/monochromePlain/none",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -22438,7 +14796,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Center, Tone=Critical, Variant=Secondary",
         "row": 3,
-        "col": 5,
+        "col": 0,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Center, Tone=Critical, Variant=Secondary",
@@ -22553,7 +14911,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -22561,7 +14920,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Center, Tone=Critical, Variant=Plain",
         "row": 3,
-        "col": 6,
+        "col": 1,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Center, Tone=Critical, Variant=Plain",
@@ -22631,7 +14990,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -22639,7 +14999,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Center, Tone=Critical, Variant=Primary",
         "row": 3,
-        "col": 7,
+        "col": 2,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Center, Tone=Critical, Variant=Primary",
@@ -22755,7 +15115,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -22763,7 +15124,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Center, Tone=Critical, Variant=Tertiary",
         "row": 3,
-        "col": 8,
+        "col": 3,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Center, Tone=Critical, Variant=Tertiary",
@@ -22839,7 +15200,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -22847,7 +15209,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Center, Tone=Critical, Variant=Monochrome Plain",
         "row": 3,
-        "col": 9,
+        "col": 4,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Center, Tone=Critical, Variant=Monochrome Plain",
@@ -22917,7 +15279,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -22925,7 +15288,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Center, Tone=Success, Variant=Secondary",
         "row": 3,
-        "col": 10,
+        "col": 5,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Center, Tone=Success, Variant=Secondary",
@@ -23040,7 +15403,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -23048,7 +15412,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Center, Tone=Success, Variant=Plain",
         "row": 3,
-        "col": 11,
+        "col": 6,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Center, Tone=Success, Variant=Plain",
@@ -23118,7 +15482,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -23126,7 +15491,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Center, Tone=Success, Variant=Primary",
         "row": 3,
-        "col": 12,
+        "col": 7,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Center, Tone=Success, Variant=Primary",
@@ -23242,7 +15607,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -23250,7 +15616,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Center, Tone=Success, Variant=Tertiary",
         "row": 3,
-        "col": 13,
+        "col": 8,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Center, Tone=Success, Variant=Tertiary",
@@ -23326,7 +15692,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -23334,7 +15701,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Center, Tone=Success, Variant=Monochrome Plain",
         "row": 3,
-        "col": 14,
+        "col": 9,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Center, Tone=Success, Variant=Monochrome Plain",
@@ -23404,494 +15771,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Large, Text Align=Left, Tone=Default, Variant=Secondary",
-        "row": 3,
-        "col": 15,
-        "spec": {
-          "type": "root",
-          "name": "Size=Large, Text Align=Left, Tone=Default, Variant=Secondary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-900",
-            "minWidth": "p/height-900"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/secondary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0.7098039215686275,
-                "g": 0.7098039215686275,
-                "b": 0.7098039215686275,
-                "a": 1
-              }
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 1
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/secondary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 13,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-md-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-md-font-line-height",
-              "textFill": "imported/button/root/color/secondary/none",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Large, Text Align=Left, Tone=Default, Variant=Plain",
-        "row": 3,
-        "col": 16,
-        "spec": {
-          "type": "root",
-          "name": "Size=Large, Text Align=Left, Tone=Default, Variant=Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-900",
-            "minWidth": "p/height-900"
-          },
-          "fill": "imported/button/root/background-color/plain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/plain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 13,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-md-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-md-font-line-height",
-              "textFill": "imported/button/root/color/plain/none",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Large, Text Align=Left, Tone=Default, Variant=Primary",
-        "row": 3,
-        "col": 17,
-        "spec": {
-          "type": "root",
-          "name": "Size=Large, Text Align=Left, Tone=Default, Variant=Primary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-900",
-            "minWidth": "p/height-900"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/primary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.8
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0.18823529411764706,
-                "g": 0.18823529411764706,
-                "b": 0.18823529411764706,
-                "a": 1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 0.25
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/primary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 13,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-md-font-size",
-              "fontWeightVar": "p/font-weight-semibold",
-              "lineHeightVar": "p/text-body-md-font-line-height",
-              "textFill": "imported/button/root/color/primary/none",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Large, Text Align=Left, Tone=Default, Variant=Tertiary",
-        "row": 3,
-        "col": 18,
-        "spec": {
-          "type": "root",
-          "name": "Size=Large, Text Align=Left, Tone=Default, Variant=Tertiary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-900",
-            "minWidth": "p/height-900"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/tertiary/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/tertiary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 13,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-md-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-md-font-line-height",
-              "textFill": "imported/button/root/color/tertiary/none",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Large, Text Align=Left, Tone=Default, Variant=Monochrome Plain",
-        "row": 3,
-        "col": 19,
-        "spec": {
-          "type": "root",
-          "name": "Size=Large, Text Align=Left, Tone=Default, Variant=Monochrome Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-900",
-            "minWidth": "p/height-900"
-          },
-          "fill": "imported/button/root/background-color/monochromePlain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 13,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-md-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-md-font-line-height",
-              "textFill": "imported/button/root/color/monochromePlain/none",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -23899,7 +15780,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Left, Tone=Critical, Variant=Secondary",
         "row": 3,
-        "col": 20,
+        "col": 10,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Left, Tone=Critical, Variant=Secondary",
@@ -24014,7 +15895,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -24022,7 +15904,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Left, Tone=Critical, Variant=Plain",
         "row": 3,
-        "col": 21,
+        "col": 11,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Left, Tone=Critical, Variant=Plain",
@@ -24092,7 +15974,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -24100,7 +15983,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Left, Tone=Critical, Variant=Primary",
         "row": 3,
-        "col": 22,
+        "col": 12,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Left, Tone=Critical, Variant=Primary",
@@ -24216,7 +16099,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -24224,7 +16108,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Left, Tone=Critical, Variant=Tertiary",
         "row": 3,
-        "col": 23,
+        "col": 13,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Left, Tone=Critical, Variant=Tertiary",
@@ -24300,7 +16184,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -24308,7 +16193,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Left, Tone=Critical, Variant=Monochrome Plain",
         "row": 3,
-        "col": 24,
+        "col": 14,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Left, Tone=Critical, Variant=Monochrome Plain",
@@ -24378,7 +16263,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -24386,7 +16272,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Left, Tone=Success, Variant=Secondary",
         "row": 3,
-        "col": 25,
+        "col": 15,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Left, Tone=Success, Variant=Secondary",
@@ -24501,7 +16387,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -24509,7 +16396,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Left, Tone=Success, Variant=Plain",
         "row": 3,
-        "col": 26,
+        "col": 16,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Left, Tone=Success, Variant=Plain",
@@ -24579,7 +16466,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -24587,7 +16475,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Left, Tone=Success, Variant=Primary",
         "row": 3,
-        "col": 27,
+        "col": 17,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Left, Tone=Success, Variant=Primary",
@@ -24703,7 +16591,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -24711,7 +16600,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Left, Tone=Success, Variant=Tertiary",
         "row": 3,
-        "col": 28,
+        "col": 18,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Left, Tone=Success, Variant=Tertiary",
@@ -24787,7 +16676,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -24795,7 +16685,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Left, Tone=Success, Variant=Monochrome Plain",
         "row": 3,
-        "col": 29,
+        "col": 19,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Left, Tone=Success, Variant=Monochrome Plain",
@@ -24865,494 +16755,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Large, Text Align=Right, Tone=Default, Variant=Secondary",
-        "row": 3,
-        "col": 30,
-        "spec": {
-          "type": "root",
-          "name": "Size=Large, Text Align=Right, Tone=Default, Variant=Secondary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-900",
-            "minWidth": "p/height-900"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/secondary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0.7098039215686275,
-                "g": 0.7098039215686275,
-                "b": 0.7098039215686275,
-                "a": 1
-              }
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 1
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/secondary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 13,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-md-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-md-font-line-height",
-              "textFill": "imported/button/root/color/secondary/none",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Large, Text Align=Right, Tone=Default, Variant=Plain",
-        "row": 3,
-        "col": 31,
-        "spec": {
-          "type": "root",
-          "name": "Size=Large, Text Align=Right, Tone=Default, Variant=Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-900",
-            "minWidth": "p/height-900"
-          },
-          "fill": "imported/button/root/background-color/plain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/plain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 13,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-md-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-md-font-line-height",
-              "textFill": "imported/button/root/color/plain/none",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Large, Text Align=Right, Tone=Default, Variant=Primary",
-        "row": 3,
-        "col": 32,
-        "spec": {
-          "type": "root",
-          "name": "Size=Large, Text Align=Right, Tone=Default, Variant=Primary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-900",
-            "minWidth": "p/height-900"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/primary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.8
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0.18823529411764706,
-                "g": 0.18823529411764706,
-                "b": 0.18823529411764706,
-                "a": 1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 0.25
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/primary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 13,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-md-font-size",
-              "fontWeightVar": "p/font-weight-semibold",
-              "lineHeightVar": "p/text-body-md-font-line-height",
-              "textFill": "imported/button/root/color/primary/none",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Large, Text Align=Right, Tone=Default, Variant=Tertiary",
-        "row": 3,
-        "col": 33,
-        "spec": {
-          "type": "root",
-          "name": "Size=Large, Text Align=Right, Tone=Default, Variant=Tertiary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-900",
-            "minWidth": "p/height-900"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/tertiary/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/tertiary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 13,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-md-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-md-font-line-height",
-              "textFill": "imported/button/root/color/tertiary/none",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Large, Text Align=Right, Tone=Default, Variant=Monochrome Plain",
-        "row": 3,
-        "col": 34,
-        "spec": {
-          "type": "root",
-          "name": "Size=Large, Text Align=Right, Tone=Default, Variant=Monochrome Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-900",
-            "minWidth": "p/height-900"
-          },
-          "fill": "imported/button/root/background-color/monochromePlain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 13,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-md-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-md-font-line-height",
-              "textFill": "imported/button/root/color/monochromePlain/none",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -25360,7 +16764,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Right, Tone=Critical, Variant=Secondary",
         "row": 3,
-        "col": 35,
+        "col": 20,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Right, Tone=Critical, Variant=Secondary",
@@ -25475,7 +16879,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -25483,7 +16888,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Right, Tone=Critical, Variant=Plain",
         "row": 3,
-        "col": 36,
+        "col": 21,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Right, Tone=Critical, Variant=Plain",
@@ -25553,7 +16958,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -25561,7 +16967,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Right, Tone=Critical, Variant=Primary",
         "row": 3,
-        "col": 37,
+        "col": 22,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Right, Tone=Critical, Variant=Primary",
@@ -25677,7 +17083,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -25685,7 +17092,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Right, Tone=Critical, Variant=Tertiary",
         "row": 3,
-        "col": 38,
+        "col": 23,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Right, Tone=Critical, Variant=Tertiary",
@@ -25761,7 +17168,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -25769,7 +17177,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Right, Tone=Critical, Variant=Monochrome Plain",
         "row": 3,
-        "col": 39,
+        "col": 24,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Right, Tone=Critical, Variant=Monochrome Plain",
@@ -25839,7 +17247,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -25847,7 +17256,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Right, Tone=Success, Variant=Secondary",
         "row": 3,
-        "col": 40,
+        "col": 25,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Right, Tone=Success, Variant=Secondary",
@@ -25962,7 +17371,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -25970,7 +17380,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Right, Tone=Success, Variant=Plain",
         "row": 3,
-        "col": 41,
+        "col": 26,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Right, Tone=Success, Variant=Plain",
@@ -26040,7 +17450,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -26048,7 +17459,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Right, Tone=Success, Variant=Primary",
         "row": 3,
-        "col": 42,
+        "col": 27,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Right, Tone=Success, Variant=Primary",
@@ -26164,7 +17575,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -26172,7 +17584,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Right, Tone=Success, Variant=Tertiary",
         "row": 3,
-        "col": 43,
+        "col": 28,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Right, Tone=Success, Variant=Tertiary",
@@ -26248,7 +17660,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -26256,7 +17669,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Right, Tone=Success, Variant=Monochrome Plain",
         "row": 3,
-        "col": 44,
+        "col": 29,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Right, Tone=Success, Variant=Monochrome Plain",
@@ -26326,494 +17739,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Large, Text Align=Start, Tone=Default, Variant=Secondary",
-        "row": 3,
-        "col": 45,
-        "spec": {
-          "type": "root",
-          "name": "Size=Large, Text Align=Start, Tone=Default, Variant=Secondary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-900",
-            "minWidth": "p/height-900"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/secondary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0.7098039215686275,
-                "g": 0.7098039215686275,
-                "b": 0.7098039215686275,
-                "a": 1
-              }
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 1
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/secondary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 13,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-md-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-md-font-line-height",
-              "textFill": "imported/button/root/color/secondary/none",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Large, Text Align=Start, Tone=Default, Variant=Plain",
-        "row": 3,
-        "col": 46,
-        "spec": {
-          "type": "root",
-          "name": "Size=Large, Text Align=Start, Tone=Default, Variant=Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-900",
-            "minWidth": "p/height-900"
-          },
-          "fill": "imported/button/root/background-color/plain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/plain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 13,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-md-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-md-font-line-height",
-              "textFill": "imported/button/root/color/plain/none",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Large, Text Align=Start, Tone=Default, Variant=Primary",
-        "row": 3,
-        "col": 47,
-        "spec": {
-          "type": "root",
-          "name": "Size=Large, Text Align=Start, Tone=Default, Variant=Primary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-900",
-            "minWidth": "p/height-900"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/primary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.8
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0.18823529411764706,
-                "g": 0.18823529411764706,
-                "b": 0.18823529411764706,
-                "a": 1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 0.25
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/primary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 13,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-md-font-size",
-              "fontWeightVar": "p/font-weight-semibold",
-              "lineHeightVar": "p/text-body-md-font-line-height",
-              "textFill": "imported/button/root/color/primary/none",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Large, Text Align=Start, Tone=Default, Variant=Tertiary",
-        "row": 3,
-        "col": 48,
-        "spec": {
-          "type": "root",
-          "name": "Size=Large, Text Align=Start, Tone=Default, Variant=Tertiary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-900",
-            "minWidth": "p/height-900"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/tertiary/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/tertiary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 13,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-md-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-md-font-line-height",
-              "textFill": "imported/button/root/color/tertiary/none",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Large, Text Align=Start, Tone=Default, Variant=Monochrome Plain",
-        "row": 3,
-        "col": 49,
-        "spec": {
-          "type": "root",
-          "name": "Size=Large, Text Align=Start, Tone=Default, Variant=Monochrome Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-900",
-            "minWidth": "p/height-900"
-          },
-          "fill": "imported/button/root/background-color/monochromePlain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 13,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-md-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-md-font-line-height",
-              "textFill": "imported/button/root/color/monochromePlain/none",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -26821,7 +17748,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Start, Tone=Critical, Variant=Secondary",
         "row": 3,
-        "col": 50,
+        "col": 30,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Start, Tone=Critical, Variant=Secondary",
@@ -26936,7 +17863,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -26944,7 +17872,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Start, Tone=Critical, Variant=Plain",
         "row": 3,
-        "col": 51,
+        "col": 31,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Start, Tone=Critical, Variant=Plain",
@@ -27014,7 +17942,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -27022,7 +17951,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Start, Tone=Critical, Variant=Primary",
         "row": 3,
-        "col": 52,
+        "col": 32,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Start, Tone=Critical, Variant=Primary",
@@ -27138,7 +18067,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -27146,7 +18076,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Start, Tone=Critical, Variant=Tertiary",
         "row": 3,
-        "col": 53,
+        "col": 33,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Start, Tone=Critical, Variant=Tertiary",
@@ -27222,7 +18152,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -27230,7 +18161,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Start, Tone=Critical, Variant=Monochrome Plain",
         "row": 3,
-        "col": 54,
+        "col": 34,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Start, Tone=Critical, Variant=Monochrome Plain",
@@ -27300,7 +18231,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -27308,7 +18240,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Start, Tone=Success, Variant=Secondary",
         "row": 3,
-        "col": 55,
+        "col": 35,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Start, Tone=Success, Variant=Secondary",
@@ -27423,7 +18355,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -27431,7 +18364,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Start, Tone=Success, Variant=Plain",
         "row": 3,
-        "col": 56,
+        "col": 36,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Start, Tone=Success, Variant=Plain",
@@ -27501,7 +18434,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -27509,7 +18443,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Start, Tone=Success, Variant=Primary",
         "row": 3,
-        "col": 57,
+        "col": 37,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Start, Tone=Success, Variant=Primary",
@@ -27625,7 +18559,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -27633,7 +18568,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Start, Tone=Success, Variant=Tertiary",
         "row": 3,
-        "col": 58,
+        "col": 38,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Start, Tone=Success, Variant=Tertiary",
@@ -27709,7 +18644,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -27717,7 +18653,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=Start, Tone=Success, Variant=Monochrome Plain",
         "row": 3,
-        "col": 59,
+        "col": 39,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=Start, Tone=Success, Variant=Monochrome Plain",
@@ -27787,494 +18723,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Large, Text Align=End, Tone=Default, Variant=Secondary",
-        "row": 3,
-        "col": 60,
-        "spec": {
-          "type": "root",
-          "name": "Size=Large, Text Align=End, Tone=Default, Variant=Secondary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-900",
-            "minWidth": "p/height-900"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/secondary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0.7098039215686275,
-                "g": 0.7098039215686275,
-                "b": 0.7098039215686275,
-                "a": 1
-              }
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 1
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/secondary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 13,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-md-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-md-font-line-height",
-              "textFill": "imported/button/root/color/secondary/none",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Large, Text Align=End, Tone=Default, Variant=Plain",
-        "row": 3,
-        "col": 61,
-        "spec": {
-          "type": "root",
-          "name": "Size=Large, Text Align=End, Tone=Default, Variant=Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-900",
-            "minWidth": "p/height-900"
-          },
-          "fill": "imported/button/root/background-color/plain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/plain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 13,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-md-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-md-font-line-height",
-              "textFill": "imported/button/root/color/plain/none",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Large, Text Align=End, Tone=Default, Variant=Primary",
-        "row": 3,
-        "col": 62,
-        "spec": {
-          "type": "root",
-          "name": "Size=Large, Text Align=End, Tone=Default, Variant=Primary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-900",
-            "minWidth": "p/height-900"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/primary/none",
-          "effectStack": [
-            {
-              "inner": true,
-              "x": 0,
-              "y": -1,
-              "radius": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0.8
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0,
-              "radius": 0,
-              "color": {
-                "r": 0.18823529411764706,
-                "g": 0.18823529411764706,
-                "b": 0.18823529411764706,
-                "a": 1
-              },
-              "spread": 1
-            },
-            {
-              "inner": true,
-              "x": 0,
-              "y": 0.5,
-              "radius": 0,
-              "color": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "a": 0.25
-              },
-              "spread": 1.5
-            }
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/primary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 13,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-md-font-size",
-              "fontWeightVar": "p/font-weight-semibold",
-              "lineHeightVar": "p/text-body-md-font-line-height",
-              "textFill": "imported/button/root/color/primary/none",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Large, Text Align=End, Tone=Default, Variant=Tertiary",
-        "row": 3,
-        "col": 63,
-        "spec": {
-          "type": "root",
-          "name": "Size=Large, Text Align=End, Tone=Default, Variant=Tertiary",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-900",
-            "minWidth": "p/height-900"
-          },
-          "margins": {
-            "bottom": 0,
-            "left": 0,
-            "right": 0,
-            "top": 0
-          },
-          "fill": "imported/button/root/background-color/tertiary/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/tertiary/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 13,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-md-font-size",
-              "fontWeightVar": "p/font-weight-medium",
-              "lineHeightVar": "p/text-body-md-font-line-height",
-              "textFill": "imported/button/root/color/tertiary/none",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Large, Text Align=End, Tone=Default, Variant=Monochrome Plain",
-        "row": 3,
-        "col": 64,
-        "spec": {
-          "type": "root",
-          "name": "Size=Large, Text Align=End, Tone=Default, Variant=Monochrome Plain",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "bindings": {
-            "topLeftRadius": "p/border-radius-200",
-            "topRightRadius": "p/border-radius-200",
-            "bottomLeftRadius": "p/border-radius-200",
-            "bottomRightRadius": "p/border-radius-200",
-            "itemSpacing": "p/space-050",
-            "strokeBottomWeight": "imported/shared/size-0",
-            "strokeLeftWeight": "imported/shared/size-0",
-            "strokeRightWeight": "imported/shared/size-0",
-            "strokeTopWeight": "imported/shared/size-0",
-            "paddingTop": "p/space-150",
-            "paddingBottom": "p/space-150",
-            "paddingLeft": "p/space-300",
-            "paddingRight": "p/space-300",
-            "minHeight": "p/height-900",
-            "minWidth": "p/height-900"
-          },
-          "fill": "imported/button/root/background-color/monochromePlain/none",
-          "effectStack": [],
-          "children": [
-            {
-              "type": "frame",
-              "name": "icon",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "margins": {
-                "bottom": -2,
-                "top": -2
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
-                  "svgPaintVar": "imported/button/root/color/monochromePlain/none",
-                  "iconSize": 20,
-                  "visibleProp": "Show WithIcon",
-                  "visibleDefault": false
-                }
-              ],
-              "visibleProp": "Show WithIcon",
-              "visibleDefault": false
-            },
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Button",
-              "fontSize": 13,
-              "fontStyle": "Medium",
-              "fontSizeVar": "p/text-body-md-font-size",
-              "fontWeightVar": "p/font-weight-regular",
-              "lineHeightVar": "p/text-body-md-font-line-height",
-              "textFill": "imported/button/root/color/monochromePlain/none",
-              "lineHeight": {
-                "value": 20,
-                "unit": "PIXELS"
-              },
-              "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -28282,7 +18732,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=End, Tone=Critical, Variant=Secondary",
         "row": 3,
-        "col": 65,
+        "col": 40,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=End, Tone=Critical, Variant=Secondary",
@@ -28397,7 +18847,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -28405,7 +18856,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=End, Tone=Critical, Variant=Plain",
         "row": 3,
-        "col": 66,
+        "col": 41,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=End, Tone=Critical, Variant=Plain",
@@ -28475,7 +18926,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -28483,7 +18935,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=End, Tone=Critical, Variant=Primary",
         "row": 3,
-        "col": 67,
+        "col": 42,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=End, Tone=Critical, Variant=Primary",
@@ -28599,7 +19051,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -28607,7 +19060,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=End, Tone=Critical, Variant=Tertiary",
         "row": 3,
-        "col": 68,
+        "col": 43,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=End, Tone=Critical, Variant=Tertiary",
@@ -28683,7 +19136,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -28691,7 +19145,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=End, Tone=Critical, Variant=Monochrome Plain",
         "row": 3,
-        "col": 69,
+        "col": 44,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=End, Tone=Critical, Variant=Monochrome Plain",
@@ -28761,7 +19215,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -28769,7 +19224,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=End, Tone=Success, Variant=Secondary",
         "row": 3,
-        "col": 70,
+        "col": 45,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=End, Tone=Success, Variant=Secondary",
@@ -28884,7 +19339,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -28892,7 +19348,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=End, Tone=Success, Variant=Plain",
         "row": 3,
-        "col": 71,
+        "col": 46,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=End, Tone=Success, Variant=Plain",
@@ -28962,7 +19418,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -28970,7 +19427,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=End, Tone=Success, Variant=Primary",
         "row": 3,
-        "col": 72,
+        "col": 47,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=End, Tone=Success, Variant=Primary",
@@ -29086,7 +19543,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -29094,7 +19552,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=End, Tone=Success, Variant=Tertiary",
         "row": 3,
-        "col": 73,
+        "col": 48,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=End, Tone=Success, Variant=Tertiary",
@@ -29170,7 +19628,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -29178,7 +19637,7 @@ const COMPONENTS = [
       {
         "name": "Size=Large, Text Align=End, Tone=Success, Variant=Monochrome Plain",
         "row": 3,
-        "col": 74,
+        "col": 49,
         "spec": {
           "type": "root",
           "name": "Size=Large, Text Align=End, Tone=Success, Variant=Monochrome Plain",
@@ -29248,7 +19707,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -29269,12 +19729,12 @@ const COMPONENTS = [
     },
     "stateVariants": [
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Disabled",
+        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Disabled",
         "row": 0,
-        "col": 75,
+        "col": 50,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Disabled",
+          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Disabled",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -29347,18 +19807,19 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain, State=Disabled",
+        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain, State=Disabled",
         "row": 0,
-        "col": 76,
+        "col": 51,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain, State=Disabled",
+          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain, State=Disabled",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -29425,18 +19886,19 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Disabled",
+        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary, State=Disabled",
         "row": 0,
-        "col": 77,
+        "col": 52,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Disabled",
+          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary, State=Disabled",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -29509,18 +19971,19 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary, State=Disabled",
+        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary, State=Disabled",
         "row": 0,
-        "col": 78,
+        "col": 53,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary, State=Disabled",
+          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary, State=Disabled",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -29593,18 +20056,19 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain, State=Disabled",
+        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Disabled",
         "row": 0,
-        "col": 79,
+        "col": 54,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain, State=Disabled",
+          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Disabled",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -29671,18 +20135,19 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Focus Visible",
+        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Focus Visible",
         "row": 0,
-        "col": 80,
+        "col": 55,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Focus Visible",
+          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Focus Visible",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -29797,18 +20262,19 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain, State=Focus Visible",
+        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain, State=Focus Visible",
         "row": 0,
-        "col": 81,
+        "col": 56,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain, State=Focus Visible",
+          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain, State=Focus Visible",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -29878,18 +20344,19 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Focus Visible",
+        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary, State=Focus Visible",
         "row": 0,
-        "col": 82,
+        "col": 57,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Focus Visible",
+          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary, State=Focus Visible",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -29927,9 +20394,9 @@ const COMPONENTS = [
               "y": -1,
               "radius": 0,
               "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
+                "r": 0.5568627450980392,
+                "g": 0.12156862745098039,
+                "b": 0.043137254901960784,
                 "a": 0.8
               },
               "spread": 1
@@ -29940,10 +20407,10 @@ const COMPONENTS = [
               "y": 0,
               "radius": 0,
               "color": {
-                "r": 0.18823529411764706,
-                "g": 0.18823529411764706,
-                "b": 0.18823529411764706,
-                "a": 1
+                "r": 0.7098039215686275,
+                "g": 0.14901960784313725,
+                "b": 0.043137254901960784,
+                "a": 0.8
               },
               "spread": 1
             },
@@ -29956,7 +20423,7 @@ const COMPONENTS = [
                 "r": 1,
                 "g": 1,
                 "b": 1,
-                "a": 0.25
+                "a": 0.35
               },
               "spread": 1.5
             }
@@ -30005,18 +20472,19 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary, State=Focus Visible",
+        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary, State=Focus Visible",
         "row": 0,
-        "col": 83,
+        "col": 58,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary, State=Focus Visible",
+          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary, State=Focus Visible",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -30092,18 +20560,19 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain, State=Focus Visible",
+        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Focus Visible",
         "row": 0,
-        "col": 84,
+        "col": 59,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain, State=Focus Visible",
+          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Focus Visible",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -30173,18 +20642,19 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Active",
+        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Active",
         "row": 0,
-        "col": 85,
+        "col": 60,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Active",
+          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Active",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -30294,18 +20764,19 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain, State=Active",
+        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain, State=Active",
         "row": 0,
-        "col": 86,
+        "col": 61,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain, State=Active",
+          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain, State=Active",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -30372,18 +20843,19 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Active",
+        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary, State=Active",
         "row": 0,
-        "col": 87,
+        "col": 62,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Active",
+          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary, State=Active",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -30469,18 +20941,19 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary, State=Active",
+        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary, State=Active",
         "row": 0,
-        "col": 88,
+        "col": 63,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary, State=Active",
+          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary, State=Active",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -30553,18 +21026,19 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain, State=Active",
+        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Active",
         "row": 0,
-        "col": 89,
+        "col": 64,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain, State=Active",
+          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Active",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -30631,18 +21105,19 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Hover",
+        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Hover",
         "row": 0,
-        "col": 90,
+        "col": 65,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Hover",
+          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Hover",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -30754,18 +21229,19 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain, State=Hover",
+        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain, State=Hover",
         "row": 0,
-        "col": 91,
+        "col": 66,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain, State=Hover",
+          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain, State=Hover",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -30832,18 +21308,19 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Hover",
+        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary, State=Hover",
         "row": 0,
-        "col": 92,
+        "col": 67,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Hover",
+          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary, State=Hover",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -30880,9 +21357,9 @@ const COMPONENTS = [
               "y": -1,
               "radius": 0,
               "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
+                "r": 0.5568627450980392,
+                "g": 0.12156862745098039,
+                "b": 0.043137254901960784,
                 "a": 0.8
               },
               "spread": 1
@@ -30893,10 +21370,10 @@ const COMPONENTS = [
               "y": 0,
               "radius": 0,
               "color": {
-                "r": 0.18823529411764706,
-                "g": 0.18823529411764706,
-                "b": 0.18823529411764706,
-                "a": 1
+                "r": 0.7098039215686275,
+                "g": 0.14901960784313725,
+                "b": 0.043137254901960784,
+                "a": 0.8
               },
               "spread": 1
             },
@@ -30909,7 +21386,7 @@ const COMPONENTS = [
                 "r": 1,
                 "g": 1,
                 "b": 1,
-                "a": 0.25
+                "a": 0.35
               },
               "spread": 1.5
             }
@@ -30956,18 +21433,19 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary, State=Hover",
+        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary, State=Hover",
         "row": 0,
-        "col": 93,
+        "col": 68,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary, State=Hover",
+          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary, State=Hover",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -31040,18 +21518,19 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
       },
       {
-        "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain, State=Hover",
+        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Hover",
         "row": 0,
-        "col": 94,
+        "col": 69,
         "spec": {
           "type": "root",
-          "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain, State=Hover",
+          "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Hover",
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "CENTER",
@@ -31118,7 +21597,8 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "letterSpacing": 0,
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter"
             }
           ]
         }
@@ -31137,62 +21617,139 @@ const COMPONENTS = [
       "pinned": {
         "Size": "Medium",
         "Text Align": "Center",
-        "Tone": "Default"
+        "Tone": "Critical"
       }
     },
     "stateReactions": [
       {
-        "from": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Default",
+        "from": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Default",
         "trigger": "ON_HOVER",
-        "to": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Hover"
+        "to": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Hover"
       },
       {
-        "from": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Default",
+        "from": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Default",
         "trigger": "ON_PRESS",
-        "to": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Active"
+        "to": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Active"
       },
       {
-        "from": "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain, State=Default",
+        "from": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain, State=Default",
         "trigger": "ON_HOVER",
-        "to": "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain, State=Hover"
+        "to": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain, State=Hover"
       },
       {
-        "from": "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain, State=Default",
+        "from": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain, State=Default",
         "trigger": "ON_PRESS",
-        "to": "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain, State=Active"
+        "to": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain, State=Active"
       },
       {
-        "from": "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Default",
+        "from": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary, State=Default",
         "trigger": "ON_HOVER",
-        "to": "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Hover"
+        "to": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary, State=Hover"
       },
       {
-        "from": "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Default",
+        "from": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary, State=Default",
         "trigger": "ON_PRESS",
-        "to": "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Active"
+        "to": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary, State=Active"
       },
       {
-        "from": "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary, State=Default",
+        "from": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary, State=Default",
         "trigger": "ON_HOVER",
-        "to": "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary, State=Hover"
+        "to": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary, State=Hover"
       },
       {
-        "from": "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary, State=Default",
+        "from": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary, State=Default",
         "trigger": "ON_PRESS",
-        "to": "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary, State=Active"
+        "to": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary, State=Active"
       },
       {
-        "from": "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain, State=Default",
+        "from": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Default",
         "trigger": "ON_HOVER",
-        "to": "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain, State=Hover"
+        "to": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Hover"
       },
       {
-        "from": "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain, State=Default",
+        "from": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Default",
         "trigger": "ON_PRESS",
-        "to": "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain, State=Active"
+        "to": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Active"
       }
     ],
     "codeOnlyFacts": [
+      {
+        "part": "icon",
+        "kind": "capture",
+        "channel": "color [active]",
+        "value": "rgba(0, 46, 106, 1)",
+        "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "icon",
+        "kind": "capture",
+        "channel": "color [disabled]",
+        "value": "rgba(181, 181, 181, 1)",
+        "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "icon",
+        "kind": "capture",
+        "channel": "color [focus-visible]",
+        "value": "rgba(0, 66, 153, 1)",
+        "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "icon",
+        "kind": "capture",
+        "channel": "color [hover]",
+        "value": "rgba(0, 66, 153, 1)",
+        "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "icon",
+        "kind": "capture",
+        "channel": "fill [active]",
+        "value": "rgba(0, 46, 106, 1)",
+        "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "icon",
+        "kind": "capture",
+        "channel": "pointer-events [disabled]",
+        "value": "none",
+        "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 60/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "icon",
+        "kind": "capture",
+        "channel": "transform [active]",
+        "value": "matrix(1, 0, 0, 1, 0, 1)",
+        "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 24/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
       {
         "part": "icon",
         "kind": "declared",
@@ -31200,8 +21757,8 @@ const COMPONENTS = [
         "value": "pointer",
         "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
         "variants": {
-          "count": 320,
-          "of": 320
+          "count": 220,
+          "of": 220
         }
       },
       {
@@ -31211,8 +21768,8 @@ const COMPONENTS = [
         "value": "block",
         "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
         "variants": {
-          "count": 320,
-          "of": 320
+          "count": 220,
+          "of": 220
         }
       },
       {
@@ -31222,8 +21779,74 @@ const COMPONENTS = [
         "value": "none",
         "reason": "Text-selection behavior (user-select) exists only in the coded component.",
         "variants": {
-          "count": 320,
-          "of": 320
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "icon-2",
+        "kind": "capture",
+        "channel": "color [active]",
+        "value": "rgba(0, 46, 106, 1)",
+        "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "icon-2",
+        "kind": "capture",
+        "channel": "color [disabled]",
+        "value": "rgba(181, 181, 181, 1)",
+        "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "icon-2",
+        "kind": "capture",
+        "channel": "color [focus-visible]",
+        "value": "rgba(0, 66, 153, 1)",
+        "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "icon-2",
+        "kind": "capture",
+        "channel": "color [hover]",
+        "value": "rgba(0, 66, 153, 1)",
+        "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "icon-2",
+        "kind": "capture",
+        "channel": "fill [active]",
+        "value": "rgba(0, 46, 106, 1)",
+        "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "icon-2",
+        "kind": "capture",
+        "channel": "pointer-events [disabled]",
+        "value": "none",
+        "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 60/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
+        "variants": {
+          "count": 220,
+          "of": 220
         }
       },
       {
@@ -31233,8 +21856,8 @@ const COMPONENTS = [
         "value": "pointer",
         "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
         "variants": {
-          "count": 320,
-          "of": 320
+          "count": 220,
+          "of": 220
         }
       },
       {
@@ -31244,8 +21867,8 @@ const COMPONENTS = [
         "value": "block",
         "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
         "variants": {
-          "count": 320,
-          "of": 320
+          "count": 220,
+          "of": 220
         }
       },
       {
@@ -31255,8 +21878,8 @@ const COMPONENTS = [
         "value": "100%",
         "reason": "Fluid max-height constraints live in code; the canvas draws the component at its real size (standing choice).",
         "variants": {
-          "count": 320,
-          "of": 320
+          "count": 220,
+          "of": 220
         }
       },
       {
@@ -31266,8 +21889,8 @@ const COMPONENTS = [
         "value": "100%",
         "reason": "Fluid max-width constraints live in code; the canvas draws the component at its real size (standing choice).",
         "variants": {
-          "count": 320,
-          "of": 320
+          "count": 220,
+          "of": 220
         }
       },
       {
@@ -31277,8 +21900,74 @@ const COMPONENTS = [
         "value": "none",
         "reason": "Text-selection behavior (user-select) exists only in the coded component.",
         "variants": {
-          "count": 320,
-          "of": 320
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "label",
+        "kind": "capture",
+        "channel": "color [active]",
+        "value": "{imported.button.label.color-state-active.{variant}.{tone}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "label",
+        "kind": "capture",
+        "channel": "color [disabled]",
+        "value": "{imported.button.label.color-state-disabled.{variant}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "label",
+        "kind": "capture",
+        "channel": "color [focus-visible]",
+        "value": "{imported.button.label.color-state-focus-visible.{variant}.{tone}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "label",
+        "kind": "capture",
+        "channel": "color [hover]",
+        "value": "{imported.button.label.color-state-hover.{variant}.{tone}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "label",
+        "kind": "capture",
+        "channel": "fill [active]",
+        "value": "{imported.button.label.fill-state-active.{variant}.{tone}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "label",
+        "kind": "capture",
+        "channel": "transform [active]",
+        "value": "matrix(1, 0, 0, 1, 0, 1)",
+        "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 48/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
+        "variants": {
+          "count": 220,
+          "of": 220
         }
       },
       {
@@ -31288,8 +21977,8 @@ const COMPONENTS = [
         "value": "pointer",
         "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
         "variants": {
-          "count": 320,
-          "of": 320
+          "count": 220,
+          "of": 220
         }
       },
       {
@@ -31299,8 +21988,8 @@ const COMPONENTS = [
         "value": "block",
         "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
         "variants": {
-          "count": 320,
-          "of": 320
+          "count": 220,
+          "of": 220
         }
       },
       {
@@ -31310,8 +21999,8 @@ const COMPONENTS = [
         "value": "none",
         "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
         "variants": {
-          "count": 320,
-          "of": 320
+          "count": 220,
+          "of": 220
         }
       },
       {
@@ -31321,8 +22010,272 @@ const COMPONENTS = [
         "value": "none",
         "reason": "Text-selection behavior (user-select) exists only in the coded component.",
         "variants": {
-          "count": 320,
-          "of": 320
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "background-attachment [disabled]",
+        "value": "scroll",
+        "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "background-blend-mode [disabled]",
+        "value": "normal",
+        "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "background-clip [disabled]",
+        "value": "border-box",
+        "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "background-color [active]",
+        "value": "{imported.button.root.background-color-state-active.{variant}.{tone}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "background-color [focus-visible]",
+        "value": "{imported.button.root.background-color-state-focus-visible.{variant}.{tone}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "background-color [hover]",
+        "value": "{imported.button.root.background-color-state-hover.{variant}.{tone}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "background-origin [disabled]",
+        "value": "padding-box",
+        "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "background-position [disabled]",
+        "value": "0% 0%",
+        "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "background-repeat [disabled]",
+        "value": "repeat",
+        "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "background-size [disabled]",
+        "value": "auto",
+        "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "box-shadow [active]",
+        "value": "{imported.button.root.box-shadow-state-active.{variant}.{tone}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "color [active]",
+        "value": "{imported.button.root.color-state-active.{variant}.{tone}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "color [focus-visible]",
+        "value": "{imported.button.root.color-state-focus-visible.{variant}.{tone}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "color [hover]",
+        "value": "{imported.button.root.color-state-hover.{variant}.{tone}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "fill [active]",
+        "value": "{imported.button.root.fill-state-active.{variant}.{tone}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "outline-color [active]",
+        "value": "{imported.button.root.outline-color-state-active.{variant}.{tone}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "outline-color [hover]",
+        "value": "{imported.button.root.outline-color-state-hover.{variant}.{tone}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "outline-offset [focus-visible]",
+        "value": "{imported.button.root.outline-offset-state-focus-visible.{variant}.{size}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — state pair ref — root states carry ≤1 placeholder (S3 residue)",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "text-decoration [active]",
+        "value": "underline",
+        "reason": "observed by the computed capture and refused by the contract grammar — value shape outside mintable kinds and outside the declared vocabulary",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "text-decoration [focus-visible]",
+        "value": "underline",
+        "reason": "observed by the computed capture and refused by the contract grammar — value shape outside mintable kinds and outside the declared vocabulary",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "text-decoration [hover]",
+        "value": "underline",
+        "reason": "observed by the computed capture and refused by the contract grammar — value shape outside mintable kinds and outside the declared vocabulary",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "text-decoration-line [active]",
+        "value": "underline",
+        "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 24/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "text-decoration-line [focus-visible]",
+        "value": "underline",
+        "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 24/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
+        "variants": {
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "text-decoration-line [hover]",
+        "value": "underline",
+        "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 24/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
+        "variants": {
+          "count": 220,
+          "of": 220
         }
       },
       {
@@ -31332,8 +22285,8 @@ const COMPONENTS = [
         "value": "{imported.shared.size-0}",
         "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
         "variants": {
-          "count": 320,
-          "of": 320
+          "count": 220,
+          "of": 220
         }
       },
       {
@@ -31343,8 +22296,8 @@ const COMPONENTS = [
         "value": "{imported.shared.size-0}",
         "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
         "variants": {
-          "count": 320,
-          "of": 320
+          "count": 220,
+          "of": 220
         }
       },
       {
@@ -31354,35 +22307,30 @@ const COMPONENTS = [
         "value": "-4px/-8px/-4px/-8px",
         "reason": "root margins have no parent auto-layout to wrap — a COMPONENT_SET child is the component itself, so residual root margin is not canvas-drawable (FC-EMIT-ROOT-MARGIN-SILENT)",
         "variants": {
-          "count": 30,
-          "of": 320,
+          "count": 20,
+          "of": 220,
           "names": [
-            "Size=Micro, Text Align=Center, Tone=Default, Variant=Plain",
-            "Size=Micro, Text Align=Center, Tone=Default, Variant=Monochrome Plain",
             "Size=Micro, Text Align=Center, Tone=Critical, Variant=Plain",
             "Size=Micro, Text Align=Center, Tone=Critical, Variant=Monochrome Plain",
             "Size=Micro, Text Align=Center, Tone=Success, Variant=Plain",
             "Size=Micro, Text Align=Center, Tone=Success, Variant=Monochrome Plain",
-            "Size=Micro, Text Align=Left, Tone=Default, Variant=Plain",
-            "Size=Micro, Text Align=Left, Tone=Default, Variant=Monochrome Plain",
             "Size=Micro, Text Align=Left, Tone=Critical, Variant=Plain",
             "Size=Micro, Text Align=Left, Tone=Critical, Variant=Monochrome Plain",
             "Size=Micro, Text Align=Left, Tone=Success, Variant=Plain",
             "Size=Micro, Text Align=Left, Tone=Success, Variant=Monochrome Plain",
-            "Size=Micro, Text Align=Right, Tone=Default, Variant=Plain",
-            "Size=Micro, Text Align=Right, Tone=Default, Variant=Monochrome Plain",
             "Size=Micro, Text Align=Right, Tone=Critical, Variant=Plain",
             "Size=Micro, Text Align=Right, Tone=Critical, Variant=Monochrome Plain",
             "Size=Micro, Text Align=Right, Tone=Success, Variant=Plain",
             "Size=Micro, Text Align=Right, Tone=Success, Variant=Monochrome Plain",
-            "Size=Micro, Text Align=Start, Tone=Default, Variant=Plain",
-            "Size=Micro, Text Align=Start, Tone=Default, Variant=Monochrome Plain",
             "Size=Micro, Text Align=Start, Tone=Critical, Variant=Plain",
             "Size=Micro, Text Align=Start, Tone=Critical, Variant=Monochrome Plain",
             "Size=Micro, Text Align=Start, Tone=Success, Variant=Plain",
-            "Size=Micro, Text Align=Start, Tone=Success, Variant=Monochrome Plain"
-          ],
-          "more": 6
+            "Size=Micro, Text Align=Start, Tone=Success, Variant=Monochrome Plain",
+            "Size=Micro, Text Align=End, Tone=Critical, Variant=Plain",
+            "Size=Micro, Text Align=End, Tone=Critical, Variant=Monochrome Plain",
+            "Size=Micro, Text Align=End, Tone=Success, Variant=Plain",
+            "Size=Micro, Text Align=End, Tone=Success, Variant=Monochrome Plain"
+          ]
         }
       },
       {
@@ -31392,225 +22340,111 @@ const COMPONENTS = [
         "value": "-6px/-12px/-6px/-12px",
         "reason": "root margins have no parent auto-layout to wrap — a COMPONENT_SET child is the component itself, so residual root margin is not canvas-drawable (FC-EMIT-ROOT-MARGIN-SILENT)",
         "variants": {
-          "count": 98,
-          "of": 320,
+          "count": 68,
+          "of": 220,
           "names": [
-            "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain",
-            "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain",
             "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain",
             "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain",
             "Size=Medium, Text Align=Center, Tone=Success, Variant=Plain",
             "Size=Medium, Text Align=Center, Tone=Success, Variant=Monochrome Plain",
-            "Size=Medium, Text Align=Left, Tone=Default, Variant=Plain",
-            "Size=Medium, Text Align=Left, Tone=Default, Variant=Monochrome Plain",
             "Size=Medium, Text Align=Left, Tone=Critical, Variant=Plain",
             "Size=Medium, Text Align=Left, Tone=Critical, Variant=Monochrome Plain",
             "Size=Medium, Text Align=Left, Tone=Success, Variant=Plain",
             "Size=Medium, Text Align=Left, Tone=Success, Variant=Monochrome Plain",
-            "Size=Medium, Text Align=Right, Tone=Default, Variant=Plain",
-            "Size=Medium, Text Align=Right, Tone=Default, Variant=Monochrome Plain",
             "Size=Medium, Text Align=Right, Tone=Critical, Variant=Plain",
             "Size=Medium, Text Align=Right, Tone=Critical, Variant=Monochrome Plain",
             "Size=Medium, Text Align=Right, Tone=Success, Variant=Plain",
             "Size=Medium, Text Align=Right, Tone=Success, Variant=Monochrome Plain",
-            "Size=Medium, Text Align=Start, Tone=Default, Variant=Plain",
-            "Size=Medium, Text Align=Start, Tone=Default, Variant=Monochrome Plain",
             "Size=Medium, Text Align=Start, Tone=Critical, Variant=Plain",
             "Size=Medium, Text Align=Start, Tone=Critical, Variant=Monochrome Plain",
             "Size=Medium, Text Align=Start, Tone=Success, Variant=Plain",
-            "Size=Medium, Text Align=Start, Tone=Success, Variant=Monochrome Plain"
-          ],
-          "more": 74
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "outline-color",
-        "value": "{imported.button.root.outline-color.monochromePlain.none}",
-        "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
-        "variants": {
-          "count": 64,
-          "of": 320,
-          "names": [
-            "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain",
-            "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain",
-            "Size=Medium, Text Align=Center, Tone=Success, Variant=Monochrome Plain",
-            "Size=Medium, Text Align=Left, Tone=Default, Variant=Monochrome Plain",
-            "Size=Medium, Text Align=Left, Tone=Critical, Variant=Monochrome Plain",
-            "Size=Medium, Text Align=Left, Tone=Success, Variant=Monochrome Plain",
-            "Size=Medium, Text Align=Right, Tone=Default, Variant=Monochrome Plain",
-            "Size=Medium, Text Align=Right, Tone=Critical, Variant=Monochrome Plain",
-            "Size=Medium, Text Align=Right, Tone=Success, Variant=Monochrome Plain",
-            "Size=Medium, Text Align=Start, Tone=Default, Variant=Monochrome Plain",
-            "Size=Medium, Text Align=Start, Tone=Critical, Variant=Monochrome Plain",
             "Size=Medium, Text Align=Start, Tone=Success, Variant=Monochrome Plain",
-            "Size=Medium, Text Align=End, Tone=Default, Variant=Monochrome Plain",
-            "Size=Medium, Text Align=End, Tone=Critical, Variant=Monochrome Plain",
-            "Size=Medium, Text Align=End, Tone=Success, Variant=Monochrome Plain",
-            "Size=Micro, Text Align=Center, Tone=Default, Variant=Monochrome Plain",
-            "Size=Micro, Text Align=Center, Tone=Critical, Variant=Monochrome Plain",
-            "Size=Micro, Text Align=Center, Tone=Success, Variant=Monochrome Plain",
-            "Size=Micro, Text Align=Left, Tone=Default, Variant=Monochrome Plain",
-            "Size=Micro, Text Align=Left, Tone=Critical, Variant=Monochrome Plain",
-            "Size=Micro, Text Align=Left, Tone=Success, Variant=Monochrome Plain",
-            "Size=Micro, Text Align=Right, Tone=Default, Variant=Monochrome Plain",
-            "Size=Micro, Text Align=Right, Tone=Critical, Variant=Monochrome Plain",
-            "Size=Micro, Text Align=Right, Tone=Success, Variant=Monochrome Plain"
-          ],
-          "more": 40
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "outline-color",
-        "value": "{imported.button.root.outline-color.plain.none}",
-        "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
-        "variants": {
-          "count": 64,
-          "of": 320,
-          "names": [
-            "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain",
-            "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain",
-            "Size=Medium, Text Align=Center, Tone=Success, Variant=Plain",
-            "Size=Medium, Text Align=Left, Tone=Default, Variant=Plain",
-            "Size=Medium, Text Align=Left, Tone=Critical, Variant=Plain",
-            "Size=Medium, Text Align=Left, Tone=Success, Variant=Plain",
-            "Size=Medium, Text Align=Right, Tone=Default, Variant=Plain",
-            "Size=Medium, Text Align=Right, Tone=Critical, Variant=Plain",
-            "Size=Medium, Text Align=Right, Tone=Success, Variant=Plain",
-            "Size=Medium, Text Align=Start, Tone=Default, Variant=Plain",
-            "Size=Medium, Text Align=Start, Tone=Critical, Variant=Plain",
-            "Size=Medium, Text Align=Start, Tone=Success, Variant=Plain",
-            "Size=Medium, Text Align=End, Tone=Default, Variant=Plain",
             "Size=Medium, Text Align=End, Tone=Critical, Variant=Plain",
+            "Size=Medium, Text Align=End, Tone=Critical, Variant=Monochrome Plain",
             "Size=Medium, Text Align=End, Tone=Success, Variant=Plain",
-            "Size=Micro, Text Align=Center, Tone=Default, Variant=Plain",
-            "Size=Micro, Text Align=Center, Tone=Critical, Variant=Plain",
-            "Size=Micro, Text Align=Center, Tone=Success, Variant=Plain",
-            "Size=Micro, Text Align=Left, Tone=Default, Variant=Plain",
-            "Size=Micro, Text Align=Left, Tone=Critical, Variant=Plain",
-            "Size=Micro, Text Align=Left, Tone=Success, Variant=Plain",
-            "Size=Micro, Text Align=Right, Tone=Default, Variant=Plain",
-            "Size=Micro, Text Align=Right, Tone=Critical, Variant=Plain",
-            "Size=Micro, Text Align=Right, Tone=Success, Variant=Plain"
+            "Size=Medium, Text Align=End, Tone=Success, Variant=Monochrome Plain",
+            "Size=Slim, Text Align=Center, Tone=Critical, Variant=Plain",
+            "Size=Slim, Text Align=Center, Tone=Critical, Variant=Monochrome Plain",
+            "Size=Slim, Text Align=Center, Tone=Success, Variant=Plain",
+            "Size=Slim, Text Align=Center, Tone=Success, Variant=Monochrome Plain"
           ],
-          "more": 40
+          "more": 44
         }
       },
       {
         "part": "root",
         "kind": "channel",
         "channel": "outline-color",
-        "value": "{imported.button.root.outline-color.primary.none}",
+        "value": "{imported.button.root.outline-color.{variant}.critical}",
         "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
         "variants": {
-          "count": 64,
-          "of": 320,
+          "count": 120,
+          "of": 220,
           "names": [
-            "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary",
-            "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary",
-            "Size=Medium, Text Align=Center, Tone=Success, Variant=Primary",
-            "Size=Medium, Text Align=Left, Tone=Default, Variant=Primary",
-            "Size=Medium, Text Align=Left, Tone=Critical, Variant=Primary",
-            "Size=Medium, Text Align=Left, Tone=Success, Variant=Primary",
-            "Size=Medium, Text Align=Right, Tone=Default, Variant=Primary",
-            "Size=Medium, Text Align=Right, Tone=Critical, Variant=Primary",
-            "Size=Medium, Text Align=Right, Tone=Success, Variant=Primary",
-            "Size=Medium, Text Align=Start, Tone=Default, Variant=Primary",
-            "Size=Medium, Text Align=Start, Tone=Critical, Variant=Primary",
-            "Size=Medium, Text Align=Start, Tone=Success, Variant=Primary",
-            "Size=Medium, Text Align=End, Tone=Default, Variant=Primary",
-            "Size=Medium, Text Align=End, Tone=Critical, Variant=Primary",
-            "Size=Medium, Text Align=End, Tone=Success, Variant=Primary",
-            "Size=Micro, Text Align=Center, Tone=Default, Variant=Primary",
-            "Size=Micro, Text Align=Center, Tone=Critical, Variant=Primary",
-            "Size=Micro, Text Align=Center, Tone=Success, Variant=Primary",
-            "Size=Micro, Text Align=Left, Tone=Default, Variant=Primary",
-            "Size=Micro, Text Align=Left, Tone=Critical, Variant=Primary",
-            "Size=Micro, Text Align=Left, Tone=Success, Variant=Primary",
-            "Size=Micro, Text Align=Right, Tone=Default, Variant=Primary",
-            "Size=Micro, Text Align=Right, Tone=Critical, Variant=Primary",
-            "Size=Micro, Text Align=Right, Tone=Success, Variant=Primary"
-          ],
-          "more": 40
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "outline-color",
-        "value": "{imported.button.root.outline-color.secondary.none}",
-        "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
-        "variants": {
-          "count": 64,
-          "of": 320,
-          "names": [
-            "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary",
             "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary",
-            "Size=Medium, Text Align=Center, Tone=Success, Variant=Secondary",
-            "Size=Medium, Text Align=Left, Tone=Default, Variant=Secondary",
+            "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain",
+            "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary",
+            "Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary",
+            "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain",
             "Size=Medium, Text Align=Left, Tone=Critical, Variant=Secondary",
-            "Size=Medium, Text Align=Left, Tone=Success, Variant=Secondary",
-            "Size=Medium, Text Align=Right, Tone=Default, Variant=Secondary",
+            "Size=Medium, Text Align=Left, Tone=Critical, Variant=Plain",
+            "Size=Medium, Text Align=Left, Tone=Critical, Variant=Primary",
+            "Size=Medium, Text Align=Left, Tone=Critical, Variant=Tertiary",
+            "Size=Medium, Text Align=Left, Tone=Critical, Variant=Monochrome Plain",
             "Size=Medium, Text Align=Right, Tone=Critical, Variant=Secondary",
-            "Size=Medium, Text Align=Right, Tone=Success, Variant=Secondary",
-            "Size=Medium, Text Align=Start, Tone=Default, Variant=Secondary",
+            "Size=Medium, Text Align=Right, Tone=Critical, Variant=Plain",
+            "Size=Medium, Text Align=Right, Tone=Critical, Variant=Primary",
+            "Size=Medium, Text Align=Right, Tone=Critical, Variant=Tertiary",
+            "Size=Medium, Text Align=Right, Tone=Critical, Variant=Monochrome Plain",
             "Size=Medium, Text Align=Start, Tone=Critical, Variant=Secondary",
-            "Size=Medium, Text Align=Start, Tone=Success, Variant=Secondary",
-            "Size=Medium, Text Align=End, Tone=Default, Variant=Secondary",
+            "Size=Medium, Text Align=Start, Tone=Critical, Variant=Plain",
+            "Size=Medium, Text Align=Start, Tone=Critical, Variant=Primary",
+            "Size=Medium, Text Align=Start, Tone=Critical, Variant=Tertiary",
+            "Size=Medium, Text Align=Start, Tone=Critical, Variant=Monochrome Plain",
             "Size=Medium, Text Align=End, Tone=Critical, Variant=Secondary",
-            "Size=Medium, Text Align=End, Tone=Success, Variant=Secondary",
-            "Size=Micro, Text Align=Center, Tone=Default, Variant=Secondary",
-            "Size=Micro, Text Align=Center, Tone=Critical, Variant=Secondary",
-            "Size=Micro, Text Align=Center, Tone=Success, Variant=Secondary",
-            "Size=Micro, Text Align=Left, Tone=Default, Variant=Secondary",
-            "Size=Micro, Text Align=Left, Tone=Critical, Variant=Secondary",
-            "Size=Micro, Text Align=Left, Tone=Success, Variant=Secondary",
-            "Size=Micro, Text Align=Right, Tone=Default, Variant=Secondary",
-            "Size=Micro, Text Align=Right, Tone=Critical, Variant=Secondary",
-            "Size=Micro, Text Align=Right, Tone=Success, Variant=Secondary"
+            "Size=Medium, Text Align=End, Tone=Critical, Variant=Plain",
+            "Size=Medium, Text Align=End, Tone=Critical, Variant=Primary",
+            "Size=Medium, Text Align=End, Tone=Critical, Variant=Tertiary"
           ],
-          "more": 40
+          "more": 96
         }
       },
       {
         "part": "root",
         "kind": "channel",
         "channel": "outline-color",
-        "value": "{imported.button.root.outline-color.tertiary.none}",
+        "value": "{imported.button.root.outline-color.{variant}.success}",
         "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
         "variants": {
-          "count": 64,
-          "of": 320,
+          "count": 100,
+          "of": 220,
           "names": [
-            "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary",
-            "Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary",
+            "Size=Medium, Text Align=Center, Tone=Success, Variant=Secondary",
+            "Size=Medium, Text Align=Center, Tone=Success, Variant=Plain",
+            "Size=Medium, Text Align=Center, Tone=Success, Variant=Primary",
             "Size=Medium, Text Align=Center, Tone=Success, Variant=Tertiary",
-            "Size=Medium, Text Align=Left, Tone=Default, Variant=Tertiary",
-            "Size=Medium, Text Align=Left, Tone=Critical, Variant=Tertiary",
+            "Size=Medium, Text Align=Center, Tone=Success, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=Left, Tone=Success, Variant=Secondary",
+            "Size=Medium, Text Align=Left, Tone=Success, Variant=Plain",
+            "Size=Medium, Text Align=Left, Tone=Success, Variant=Primary",
             "Size=Medium, Text Align=Left, Tone=Success, Variant=Tertiary",
-            "Size=Medium, Text Align=Right, Tone=Default, Variant=Tertiary",
-            "Size=Medium, Text Align=Right, Tone=Critical, Variant=Tertiary",
+            "Size=Medium, Text Align=Left, Tone=Success, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=Right, Tone=Success, Variant=Secondary",
+            "Size=Medium, Text Align=Right, Tone=Success, Variant=Plain",
+            "Size=Medium, Text Align=Right, Tone=Success, Variant=Primary",
             "Size=Medium, Text Align=Right, Tone=Success, Variant=Tertiary",
-            "Size=Medium, Text Align=Start, Tone=Default, Variant=Tertiary",
-            "Size=Medium, Text Align=Start, Tone=Critical, Variant=Tertiary",
+            "Size=Medium, Text Align=Right, Tone=Success, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=Start, Tone=Success, Variant=Secondary",
+            "Size=Medium, Text Align=Start, Tone=Success, Variant=Plain",
+            "Size=Medium, Text Align=Start, Tone=Success, Variant=Primary",
             "Size=Medium, Text Align=Start, Tone=Success, Variant=Tertiary",
-            "Size=Medium, Text Align=End, Tone=Default, Variant=Tertiary",
-            "Size=Medium, Text Align=End, Tone=Critical, Variant=Tertiary",
-            "Size=Medium, Text Align=End, Tone=Success, Variant=Tertiary",
-            "Size=Micro, Text Align=Center, Tone=Default, Variant=Tertiary",
-            "Size=Micro, Text Align=Center, Tone=Critical, Variant=Tertiary",
-            "Size=Micro, Text Align=Center, Tone=Success, Variant=Tertiary",
-            "Size=Micro, Text Align=Left, Tone=Default, Variant=Tertiary",
-            "Size=Micro, Text Align=Left, Tone=Critical, Variant=Tertiary",
-            "Size=Micro, Text Align=Left, Tone=Success, Variant=Tertiary",
-            "Size=Micro, Text Align=Right, Tone=Default, Variant=Tertiary",
-            "Size=Micro, Text Align=Right, Tone=Critical, Variant=Tertiary",
-            "Size=Micro, Text Align=Right, Tone=Success, Variant=Tertiary"
+            "Size=Medium, Text Align=Start, Tone=Success, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=End, Tone=Success, Variant=Secondary",
+            "Size=Medium, Text Align=End, Tone=Success, Variant=Plain",
+            "Size=Medium, Text Align=End, Tone=Success, Variant=Primary",
+            "Size=Medium, Text Align=End, Tone=Success, Variant=Tertiary"
           ],
-          "more": 40
+          "more": 76
         }
       },
       {
@@ -31620,8 +22454,19 @@ const COMPONENTS = [
         "value": "{imported.shared.size-0}",
         "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
         "variants": {
-          "count": 320,
-          "of": 320
+          "count": 220,
+          "of": 220
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "tone [unset]",
+        "value": "critical|success",
+        "reason": "defaultless axis — the library's own rendering when \"tone\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 2 declared values only, and a proposal read back from the canvas will call \"critical\" the default (FC-UNSET-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 220,
+          "of": 220
         }
       },
       {
@@ -31631,8 +22476,8 @@ const COMPONENTS = [
         "value": "{imported.shared.size-0}",
         "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
         "variants": {
-          "count": 320,
-          "of": 320
+          "count": 220,
+          "of": 220
         }
       },
       {
@@ -31642,8 +22487,8 @@ const COMPONENTS = [
         "value": "none",
         "reason": "Native form-control appearance is reset only in the coded component.",
         "variants": {
-          "count": 320,
-          "of": 320
+          "count": 220,
+          "of": 220
         }
       },
       {
@@ -31653,8 +22498,8 @@ const COMPONENTS = [
         "value": "none",
         "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
         "variants": {
-          "count": 320,
-          "of": 320
+          "count": 220,
+          "of": 220
         }
       },
       {
@@ -31664,8 +22509,8 @@ const COMPONENTS = [
         "value": "none",
         "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
         "variants": {
-          "count": 320,
-          "of": 320
+          "count": 220,
+          "of": 220
         }
       },
       {
@@ -31675,8 +22520,8 @@ const COMPONENTS = [
         "value": "none",
         "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
         "variants": {
-          "count": 320,
-          "of": 320
+          "count": 220,
+          "of": 220
         }
       },
       {
@@ -31686,8 +22531,8 @@ const COMPONENTS = [
         "value": "none",
         "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
         "variants": {
-          "count": 320,
-          "of": 320
+          "count": 220,
+          "of": 220
         }
       },
       {
@@ -31697,8 +22542,8 @@ const COMPONENTS = [
         "value": "pointer",
         "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
         "variants": {
-          "count": 320,
-          "of": 320
+          "count": 220,
+          "of": 220
         }
       },
       {
@@ -31708,8 +22553,8 @@ const COMPONENTS = [
         "value": "\"calt\" 0",
         "reason": "Tabular figures / ligature settings apply only in code — Figma's plugin API cannot set OpenType features.",
         "variants": {
-          "count": 320,
-          "of": 320
+          "count": 220,
+          "of": 220
         }
       },
       {
@@ -31719,8 +22564,8 @@ const COMPONENTS = [
         "value": "solid",
         "reason": "declared for the focus-visible state — state previews do not draw declared facts (a named limit)",
         "variants": {
-          "count": 320,
-          "of": 320
+          "count": 220,
+          "of": 220
         }
       },
       {
@@ -31730,8 +22575,8 @@ const COMPONENTS = [
         "value": "none",
         "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
         "variants": {
-          "count": 320,
-          "of": 320
+          "count": 220,
+          "of": 220
         }
       },
       {
@@ -31741,8 +22586,8 @@ const COMPONENTS = [
         "value": "relative",
         "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
         "variants": {
-          "count": 320,
-          "of": 320
+          "count": 220,
+          "of": 220
         }
       },
       {
@@ -31752,8 +22597,8 @@ const COMPONENTS = [
         "value": "optimizelegibility",
         "reason": "Text rasterization hints (text-rendering) apply only in code.",
         "variants": {
-          "count": 320,
-          "of": 320
+          "count": 220,
+          "of": 220
         }
       },
       {
@@ -31763,8 +22608,8 @@ const COMPONENTS = [
         "value": "manipulation",
         "reason": "Touch gesture handling (touch-action) exists only in the coded component.",
         "variants": {
-          "count": 320,
-          "of": 320
+          "count": 220,
+          "of": 220
         }
       },
       {
@@ -31774,46 +22619,8 @@ const COMPONENTS = [
         "value": "none",
         "reason": "Text-selection behavior (user-select) exists only in the coded component.",
         "variants": {
-          "count": 320,
-          "of": 320
-        }
-      },
-      {
-        "part": "root",
-        "kind": "gradient",
-        "channel": "background-image",
-        "value": "linear-gradient(rgba(48, 48, 48, 0) 63.53%, rgba(255, 255, 2",
-        "reason": "did not parse as a linear gradient (radial / conic / foreign grammar) — Figma lowers linear-gradient stacks only",
-        "variants": {
-          "count": 64,
-          "of": 320,
-          "names": [
-            "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary",
-            "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary",
-            "Size=Medium, Text Align=Center, Tone=Success, Variant=Primary",
-            "Size=Medium, Text Align=Left, Tone=Default, Variant=Primary",
-            "Size=Medium, Text Align=Left, Tone=Critical, Variant=Primary",
-            "Size=Medium, Text Align=Left, Tone=Success, Variant=Primary",
-            "Size=Medium, Text Align=Right, Tone=Default, Variant=Primary",
-            "Size=Medium, Text Align=Right, Tone=Critical, Variant=Primary",
-            "Size=Medium, Text Align=Right, Tone=Success, Variant=Primary",
-            "Size=Medium, Text Align=Start, Tone=Default, Variant=Primary",
-            "Size=Medium, Text Align=Start, Tone=Critical, Variant=Primary",
-            "Size=Medium, Text Align=Start, Tone=Success, Variant=Primary",
-            "Size=Medium, Text Align=End, Tone=Default, Variant=Primary",
-            "Size=Medium, Text Align=End, Tone=Critical, Variant=Primary",
-            "Size=Medium, Text Align=End, Tone=Success, Variant=Primary",
-            "Size=Micro, Text Align=Center, Tone=Default, Variant=Primary",
-            "Size=Micro, Text Align=Center, Tone=Critical, Variant=Primary",
-            "Size=Micro, Text Align=Center, Tone=Success, Variant=Primary",
-            "Size=Micro, Text Align=Left, Tone=Default, Variant=Primary",
-            "Size=Micro, Text Align=Left, Tone=Critical, Variant=Primary",
-            "Size=Micro, Text Align=Left, Tone=Success, Variant=Primary",
-            "Size=Micro, Text Align=Right, Tone=Default, Variant=Primary",
-            "Size=Micro, Text Align=Right, Tone=Critical, Variant=Primary",
-            "Size=Micro, Text Align=Right, Tone=Success, Variant=Primary"
-          ],
-          "more": 40
+          "count": 220,
+          "of": 220
         }
       }
     ],
@@ -31831,14 +22638,14 @@ await figma.loadAllPagesAsync();
 
 // ---------------------------------------------------------------------------
 // PROVISIONAL VARIABLES — minted from resolved values by a degraded import.
-// This contract binds 1242 provisional token(s) whose real variable names were
+// This contract binds 1287 provisional token(s) whose real variable names were
 // unrecoverable, so this section upserts each one as a Figma variable in a
 // collection named 'Imported (provisional)' — idempotent by name, within that
 // collection only — before the bindings below look anything up. The values
 // are literal-fidelity stand-ins, not your design vocabulary: rename them
 // against your real tokens when you adopt the contract.
 // ---------------------------------------------------------------------------
-const MINTED_VARIABLES = [{"name":"imported/button/root/background-color/plain/none","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color/plain/critical","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color/plain/success","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color/primary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/root/background-color/primary/critical","type":"COLOR","value":"#c70a24"},{"name":"imported/button/root/background-color/primary/success","type":"COLOR","value":"#047b5d"},{"name":"imported/button/root/background-color/secondary/none","type":"COLOR","value":"#ffffff"},{"name":"imported/button/root/background-color/secondary/critical","type":"COLOR","value":"#ffffff"},{"name":"imported/button/root/background-color/secondary/success","type":"COLOR","value":"#ffffff"},{"name":"imported/button/root/background-color/tertiary/none","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color/tertiary/critical","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color/tertiary/success","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color/monochromePlain/none","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color/monochromePlain/critical","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color/monochromePlain/success","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/color/plain/none","type":"COLOR","value":"rgba(0, 91, 211, 1)","alias":"p/color-text-link"},{"name":"imported/button/root/color/plain/critical","type":"COLOR","value":"rgba(142, 11, 33, 1)","alias":"p/color-text-critical"},{"name":"imported/button/root/color/plain/success","type":"COLOR","value":"rgba(1, 75, 64, 1)","alias":"p/color-text-success"},{"name":"imported/button/root/color/primary/none","type":"COLOR","value":"rgba(255, 255, 255, 1)","alias":"p/color-text-brand-on-bg-fill"},{"name":"imported/button/root/color/primary/critical","type":"COLOR","value":"rgba(255, 255, 255, 1)","alias":"p/color-text-brand-on-bg-fill"},{"name":"imported/button/root/color/primary/success","type":"COLOR","value":"rgba(255, 255, 255, 1)","alias":"p/color-text-brand-on-bg-fill"},{"name":"imported/button/root/color/secondary/none","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-text"},{"name":"imported/button/root/color/secondary/critical","type":"COLOR","value":"rgba(142, 11, 33, 1)","alias":"p/color-text-critical"},{"name":"imported/button/root/color/secondary/success","type":"COLOR","value":"rgba(1, 75, 64, 1)","alias":"p/color-text-success"},{"name":"imported/button/root/color/tertiary/none","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-text"},{"name":"imported/button/root/color/tertiary/critical","type":"COLOR","value":"rgba(142, 11, 33, 1)","alias":"p/color-text-critical"},{"name":"imported/button/root/color/tertiary/success","type":"COLOR","value":"rgba(1, 75, 64, 1)","alias":"p/color-text-success"},{"name":"imported/button/root/color/monochromePlain/none","type":"COLOR","value":"#303030"},{"name":"imported/button/root/color/monochromePlain/critical","type":"COLOR","value":"#303030"},{"name":"imported/button/root/color/monochromePlain/success","type":"COLOR","value":"#303030"},{"name":"imported/button/root/font-size","type":"FLOAT","value":13},{"name":"imported/button/root/font-weight","type":"FLOAT","value":450},{"name":"imported/button/root/line-height","type":"FLOAT","value":20},{"name":"imported/button/root/margin-bottom/plain/micro","type":"FLOAT","value":-4},{"name":"imported/button/root/margin-bottom/plain/slim","type":"FLOAT","value":-6},{"name":"imported/button/root/margin-bottom/plain/medium","type":"FLOAT","value":-6},{"name":"imported/button/root/margin-bottom/plain/large","type":"FLOAT","value":-6},{"name":"imported/button/root/margin-bottom/primary/micro","type":"FLOAT","value":0},{"name":"imported/button/root/margin-bottom/primary/slim","type":"FLOAT","value":0},{"name":"imported/button/root/margin-bottom/primary/medium","type":"FLOAT","value":0},{"name":"imported/button/root/margin-bottom/primary/large","type":"FLOAT","value":0},{"name":"imported/button/root/margin-bottom/secondary/micro","type":"FLOAT","value":0},{"name":"imported/button/root/margin-bottom/secondary/slim","type":"FLOAT","value":0},{"name":"imported/button/root/margin-bottom/secondary/medium","type":"FLOAT","value":0},{"name":"imported/button/root/margin-bottom/secondary/large","type":"FLOAT","value":0},{"name":"imported/button/root/margin-bottom/tertiary/micro","type":"FLOAT","value":0},{"name":"imported/button/root/margin-bottom/tertiary/slim","type":"FLOAT","value":0},{"name":"imported/button/root/margin-bottom/tertiary/medium","type":"FLOAT","value":0},{"name":"imported/button/root/margin-bottom/tertiary/large","type":"FLOAT","value":0},{"name":"imported/button/root/margin-bottom/monochromePlain/micro","type":"FLOAT","value":-4},{"name":"imported/button/root/margin-bottom/monochromePlain/slim","type":"FLOAT","value":-6},{"name":"imported/button/root/margin-bottom/monochromePlain/medium","type":"FLOAT","value":-6},{"name":"imported/button/root/margin-bottom/monochromePlain/large","type":"FLOAT","value":-6},{"name":"imported/button/root/margin-left/plain/micro","type":"FLOAT","value":-8},{"name":"imported/button/root/margin-left/plain/slim","type":"FLOAT","value":-12},{"name":"imported/button/root/margin-left/plain/medium","type":"FLOAT","value":-12},{"name":"imported/button/root/margin-left/plain/large","type":"FLOAT","value":-12},{"name":"imported/button/root/margin-left/primary/micro","type":"FLOAT","value":0},{"name":"imported/button/root/margin-left/primary/slim","type":"FLOAT","value":0},{"name":"imported/button/root/margin-left/primary/medium","type":"FLOAT","value":0},{"name":"imported/button/root/margin-left/primary/large","type":"FLOAT","value":0},{"name":"imported/button/root/margin-left/secondary/micro","type":"FLOAT","value":0},{"name":"imported/button/root/margin-left/secondary/slim","type":"FLOAT","value":0},{"name":"imported/button/root/margin-left/secondary/medium","type":"FLOAT","value":0},{"name":"imported/button/root/margin-left/secondary/large","type":"FLOAT","value":0},{"name":"imported/button/root/margin-left/tertiary/micro","type":"FLOAT","value":0},{"name":"imported/button/root/margin-left/tertiary/slim","type":"FLOAT","value":0},{"name":"imported/button/root/margin-left/tertiary/medium","type":"FLOAT","value":0},{"name":"imported/button/root/margin-left/tertiary/large","type":"FLOAT","value":0},{"name":"imported/button/root/margin-left/monochromePlain/micro","type":"FLOAT","value":-8},{"name":"imported/button/root/margin-left/monochromePlain/slim","type":"FLOAT","value":-12},{"name":"imported/button/root/margin-left/monochromePlain/medium","type":"FLOAT","value":-12},{"name":"imported/button/root/margin-left/monochromePlain/large","type":"FLOAT","value":-12},{"name":"imported/button/root/margin-right/plain/micro","type":"FLOAT","value":-8},{"name":"imported/button/root/margin-right/plain/slim","type":"FLOAT","value":-12},{"name":"imported/button/root/margin-right/plain/medium","type":"FLOAT","value":-12},{"name":"imported/button/root/margin-right/plain/large","type":"FLOAT","value":-12},{"name":"imported/button/root/margin-right/primary/micro","type":"FLOAT","value":0},{"name":"imported/button/root/margin-right/primary/slim","type":"FLOAT","value":0},{"name":"imported/button/root/margin-right/primary/medium","type":"FLOAT","value":0},{"name":"imported/button/root/margin-right/primary/large","type":"FLOAT","value":0},{"name":"imported/button/root/margin-right/secondary/micro","type":"FLOAT","value":0},{"name":"imported/button/root/margin-right/secondary/slim","type":"FLOAT","value":0},{"name":"imported/button/root/margin-right/secondary/medium","type":"FLOAT","value":0},{"name":"imported/button/root/margin-right/secondary/large","type":"FLOAT","value":0},{"name":"imported/button/root/margin-right/tertiary/micro","type":"FLOAT","value":0},{"name":"imported/button/root/margin-right/tertiary/slim","type":"FLOAT","value":0},{"name":"imported/button/root/margin-right/tertiary/medium","type":"FLOAT","value":0},{"name":"imported/button/root/margin-right/tertiary/large","type":"FLOAT","value":0},{"name":"imported/button/root/margin-right/monochromePlain/micro","type":"FLOAT","value":-8},{"name":"imported/button/root/margin-right/monochromePlain/slim","type":"FLOAT","value":-12},{"name":"imported/button/root/margin-right/monochromePlain/medium","type":"FLOAT","value":-12},{"name":"imported/button/root/margin-right/monochromePlain/large","type":"FLOAT","value":-12},{"name":"imported/button/root/margin-top/plain/micro","type":"FLOAT","value":-4},{"name":"imported/button/root/margin-top/plain/slim","type":"FLOAT","value":-6},{"name":"imported/button/root/margin-top/plain/medium","type":"FLOAT","value":-6},{"name":"imported/button/root/margin-top/plain/large","type":"FLOAT","value":-6},{"name":"imported/button/root/margin-top/primary/micro","type":"FLOAT","value":0},{"name":"imported/button/root/margin-top/primary/slim","type":"FLOAT","value":0},{"name":"imported/button/root/margin-top/primary/medium","type":"FLOAT","value":0},{"name":"imported/button/root/margin-top/primary/large","type":"FLOAT","value":0},{"name":"imported/button/root/margin-top/secondary/micro","type":"FLOAT","value":0},{"name":"imported/button/root/margin-top/secondary/slim","type":"FLOAT","value":0},{"name":"imported/button/root/margin-top/secondary/medium","type":"FLOAT","value":0},{"name":"imported/button/root/margin-top/secondary/large","type":"FLOAT","value":0},{"name":"imported/button/root/margin-top/tertiary/micro","type":"FLOAT","value":0},{"name":"imported/button/root/margin-top/tertiary/slim","type":"FLOAT","value":0},{"name":"imported/button/root/margin-top/tertiary/medium","type":"FLOAT","value":0},{"name":"imported/button/root/margin-top/tertiary/large","type":"FLOAT","value":0},{"name":"imported/button/root/margin-top/monochromePlain/micro","type":"FLOAT","value":-4},{"name":"imported/button/root/margin-top/monochromePlain/slim","type":"FLOAT","value":-6},{"name":"imported/button/root/margin-top/monochromePlain/medium","type":"FLOAT","value":-6},{"name":"imported/button/root/margin-top/monochromePlain/large","type":"FLOAT","value":-6},{"name":"imported/button/root/outline-color/plain/none","type":"COLOR","value":"#005bd3"},{"name":"imported/button/root/outline-color/plain/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/button/root/outline-color/plain/success","type":"COLOR","value":"#014b40"},{"name":"imported/button/root/outline-color/primary/none","type":"COLOR","value":"#ffffff"},{"name":"imported/button/root/outline-color/primary/critical","type":"COLOR","value":"#ffffff"},{"name":"imported/button/root/outline-color/primary/success","type":"COLOR","value":"#ffffff"},{"name":"imported/button/root/outline-color/secondary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/root/outline-color/secondary/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/button/root/outline-color/secondary/success","type":"COLOR","value":"#014b40"},{"name":"imported/button/root/outline-color/tertiary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/root/outline-color/tertiary/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/button/root/outline-color/tertiary/success","type":"COLOR","value":"#014b40"},{"name":"imported/button/root/outline-color/monochromePlain/none","type":"COLOR","value":"#303030"},{"name":"imported/button/root/outline-color/monochromePlain/critical","type":"COLOR","value":"#303030"},{"name":"imported/button/root/outline-color/monochromePlain/success","type":"COLOR","value":"#303030"},{"name":"imported/button/root/background-color-state-active/primary/none","type":"COLOR","value":"#1a1a1a"},{"name":"imported/button/root/background-color-state-active/primary/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/button/root/background-color-state-active/primary/success","type":"COLOR","value":"#014b40"},{"name":"imported/button/root/background-color-state-active/secondary/none","type":"COLOR","value":"#f7f7f7"},{"name":"imported/button/root/background-color-state-active/secondary/critical","type":"COLOR","value":"#f7f7f7"},{"name":"imported/button/root/background-color-state-active/secondary/success","type":"COLOR","value":"#f7f7f7"},{"name":"imported/button/root/background-color-state-active/tertiary/none","type":"COLOR","value":"#00000014"},{"name":"imported/button/root/background-color-state-active/tertiary/critical","type":"COLOR","value":"#00000014"},{"name":"imported/button/root/background-color-state-active/tertiary/success","type":"COLOR","value":"#00000014"},{"name":"imported/button/root/background-color-state-active/plain/none","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color-state-active/plain/critical","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color-state-active/plain/success","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color-state-active/monochromePlain/none","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color-state-active/monochromePlain/critical","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color-state-active/monochromePlain/success","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/color-state-active/plain/none","type":"COLOR","value":"#002e6a"},{"name":"imported/button/root/color-state-active/plain/critical","type":"COLOR","value":"#2f040b"},{"name":"imported/button/root/color-state-active/plain/success","type":"COLOR","value":"#022622"},{"name":"imported/button/root/color-state-active/secondary/critical","type":"COLOR","value":"#2f040b"},{"name":"imported/button/root/color-state-active/secondary/success","type":"COLOR","value":"#022622"},{"name":"imported/button/root/color-state-active/secondary/none","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-text"},{"name":"imported/button/root/color-state-active/tertiary/critical","type":"COLOR","value":"#2f040b"},{"name":"imported/button/root/color-state-active/tertiary/success","type":"COLOR","value":"#022622"},{"name":"imported/button/root/color-state-active/tertiary/none","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-text"},{"name":"imported/button/root/color-state-active/primary/none","type":"COLOR","value":"rgba(255, 255, 255, 1)","alias":"p/color-text-brand-on-bg-fill"},{"name":"imported/button/root/color-state-active/primary/critical","type":"COLOR","value":"rgba(255, 255, 255, 1)","alias":"p/color-text-brand-on-bg-fill"},{"name":"imported/button/root/color-state-active/primary/success","type":"COLOR","value":"rgba(255, 255, 255, 1)","alias":"p/color-text-brand-on-bg-fill"},{"name":"imported/button/root/color-state-active/monochromePlain/none","type":"COLOR","value":"#303030"},{"name":"imported/button/root/color-state-active/monochromePlain/critical","type":"COLOR","value":"#303030"},{"name":"imported/button/root/color-state-active/monochromePlain/success","type":"COLOR","value":"#303030"},{"name":"imported/button/root/fill-state-active/plain/none","type":"COLOR","value":"#002e6a"},{"name":"imported/button/root/fill-state-active/plain/critical","type":"COLOR","value":"#2f040b"},{"name":"imported/button/root/fill-state-active/plain/success","type":"COLOR","value":"#022622"},{"name":"imported/button/root/fill-state-active/primary/none","type":"COLOR","value":"#ffffff"},{"name":"imported/button/root/fill-state-active/primary/critical","type":"COLOR","value":"#ffffff"},{"name":"imported/button/root/fill-state-active/primary/success","type":"COLOR","value":"#ffffff"},{"name":"imported/button/root/fill-state-active/secondary/none","type":"COLOR","value":"#4a4a4a"},{"name":"imported/button/root/fill-state-active/secondary/critical","type":"COLOR","value":"#2f040b"},{"name":"imported/button/root/fill-state-active/secondary/success","type":"COLOR","value":"#022622"},{"name":"imported/button/root/fill-state-active/tertiary/none","type":"COLOR","value":"#4a4a4a"},{"name":"imported/button/root/fill-state-active/tertiary/critical","type":"COLOR","value":"#2f040b"},{"name":"imported/button/root/fill-state-active/tertiary/success","type":"COLOR","value":"#022622"},{"name":"imported/button/root/fill-state-active/monochromePlain/none","type":"COLOR","value":"#303030"},{"name":"imported/button/root/fill-state-active/monochromePlain/critical","type":"COLOR","value":"#303030"},{"name":"imported/button/root/fill-state-active/monochromePlain/success","type":"COLOR","value":"#303030"},{"name":"imported/button/root/outline-color-state-active/plain/none","type":"COLOR","value":"#002e6a"},{"name":"imported/button/root/outline-color-state-active/plain/critical","type":"COLOR","value":"#2f040b"},{"name":"imported/button/root/outline-color-state-active/plain/success","type":"COLOR","value":"#022622"},{"name":"imported/button/root/outline-color-state-active/secondary/critical","type":"COLOR","value":"#2f040b"},{"name":"imported/button/root/outline-color-state-active/secondary/success","type":"COLOR","value":"#022622"},{"name":"imported/button/root/outline-color-state-active/secondary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/root/outline-color-state-active/tertiary/critical","type":"COLOR","value":"#2f040b"},{"name":"imported/button/root/outline-color-state-active/tertiary/success","type":"COLOR","value":"#022622"},{"name":"imported/button/root/outline-color-state-active/tertiary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/root/outline-color-state-active/primary/none","type":"COLOR","value":"#ffffff"},{"name":"imported/button/root/outline-color-state-active/primary/critical","type":"COLOR","value":"#ffffff"},{"name":"imported/button/root/outline-color-state-active/primary/success","type":"COLOR","value":"#ffffff"},{"name":"imported/button/root/outline-color-state-active/monochromePlain/none","type":"COLOR","value":"#303030"},{"name":"imported/button/root/outline-color-state-active/monochromePlain/critical","type":"COLOR","value":"#303030"},{"name":"imported/button/root/outline-color-state-active/monochromePlain/success","type":"COLOR","value":"#303030"},{"name":"imported/button/root/background-color-state-disabled/primary","type":"COLOR","value":"#0000002b"},{"name":"imported/button/root/background-color-state-disabled/secondary","type":"COLOR","value":"#0000000d"},{"name":"imported/button/root/background-color-state-disabled/plain","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color-state-disabled/tertiary","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color-state-disabled/monochromePlain","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/color-state-disabled/plain","type":"COLOR","value":"#b5b5b5"},{"name":"imported/button/root/color-state-disabled/secondary","type":"COLOR","value":"#b5b5b5"},{"name":"imported/button/root/color-state-disabled/tertiary","type":"COLOR","value":"#b5b5b5"},{"name":"imported/button/root/color-state-disabled/monochromePlain","type":"COLOR","value":"#b5b5b5"},{"name":"imported/button/root/color-state-disabled/primary","type":"COLOR","value":"rgba(255, 255, 255, 1)","alias":"p/color-text-brand-on-bg-fill"},{"name":"imported/button/root/outline-color-state-disabled/plain","type":"COLOR","value":"#b5b5b5"},{"name":"imported/button/root/outline-color-state-disabled/secondary","type":"COLOR","value":"#b5b5b5"},{"name":"imported/button/root/outline-color-state-disabled/tertiary","type":"COLOR","value":"#b5b5b5"},{"name":"imported/button/root/outline-color-state-disabled/monochromePlain","type":"COLOR","value":"#b5b5b5"},{"name":"imported/button/root/outline-color-state-disabled/primary","type":"COLOR","value":"#ffffff"},{"name":"imported/button/root/background-color-state-focus-visible/primary/none","type":"COLOR","value":"#1a1a1a"},{"name":"imported/button/root/background-color-state-focus-visible/primary/critical","type":"COLOR","value":"#a30a24"},{"name":"imported/button/root/background-color-state-focus-visible/primary/success","type":"COLOR","value":"#035e4c"},{"name":"imported/button/root/background-color-state-focus-visible/secondary/none","type":"COLOR","value":"#fafafa"},{"name":"imported/button/root/background-color-state-focus-visible/secondary/critical","type":"COLOR","value":"#fafafa"},{"name":"imported/button/root/background-color-state-focus-visible/secondary/success","type":"COLOR","value":"#fafafa"},{"name":"imported/button/root/background-color-state-focus-visible/tertiary/none","type":"COLOR","value":"#0000000d"},{"name":"imported/button/root/background-color-state-focus-visible/tertiary/critical","type":"COLOR","value":"#0000000d"},{"name":"imported/button/root/background-color-state-focus-visible/tertiary/success","type":"COLOR","value":"#0000000d"},{"name":"imported/button/root/background-color-state-focus-visible/plain/none","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color-state-focus-visible/plain/critical","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color-state-focus-visible/plain/success","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color-state-focus-visible/monochromePlain/none","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color-state-focus-visible/monochromePlain/critical","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color-state-focus-visible/monochromePlain/success","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/border-bottom-left-radius-state-focus-visible/plain","type":"FLOAT","value":12},{"name":"imported/button/root/border-bottom-left-radius-state-focus-visible/monochromePlain","type":"FLOAT","value":12},{"name":"imported/button/root/border-bottom-left-radius-state-focus-visible/primary","type":"FLOAT","value":8},{"name":"imported/button/root/border-bottom-left-radius-state-focus-visible/secondary","type":"FLOAT","value":8},{"name":"imported/button/root/border-bottom-left-radius-state-focus-visible/tertiary","type":"FLOAT","value":8},{"name":"imported/button/root/border-bottom-right-radius-state-focus-visible/plain","type":"FLOAT","value":12},{"name":"imported/button/root/border-bottom-right-radius-state-focus-visible/monochromePlain","type":"FLOAT","value":12},{"name":"imported/button/root/border-bottom-right-radius-state-focus-visible/primary","type":"FLOAT","value":8},{"name":"imported/button/root/border-bottom-right-radius-state-focus-visible/secondary","type":"FLOAT","value":8},{"name":"imported/button/root/border-bottom-right-radius-state-focus-visible/tertiary","type":"FLOAT","value":8},{"name":"imported/button/root/border-top-left-radius-state-focus-visible/plain","type":"FLOAT","value":12},{"name":"imported/button/root/border-top-left-radius-state-focus-visible/monochromePlain","type":"FLOAT","value":12},{"name":"imported/button/root/border-top-left-radius-state-focus-visible/primary","type":"FLOAT","value":8},{"name":"imported/button/root/border-top-left-radius-state-focus-visible/secondary","type":"FLOAT","value":8},{"name":"imported/button/root/border-top-left-radius-state-focus-visible/tertiary","type":"FLOAT","value":8},{"name":"imported/button/root/border-top-right-radius-state-focus-visible/plain","type":"FLOAT","value":12},{"name":"imported/button/root/border-top-right-radius-state-focus-visible/monochromePlain","type":"FLOAT","value":12},{"name":"imported/button/root/border-top-right-radius-state-focus-visible/primary","type":"FLOAT","value":8},{"name":"imported/button/root/border-top-right-radius-state-focus-visible/secondary","type":"FLOAT","value":8},{"name":"imported/button/root/border-top-right-radius-state-focus-visible/tertiary","type":"FLOAT","value":8},{"name":"imported/button/root/color-state-focus-visible/plain/none","type":"COLOR","value":"#004299"},{"name":"imported/button/root/color-state-focus-visible/plain/critical","type":"COLOR","value":"#5f0716"},{"name":"imported/button/root/color-state-focus-visible/plain/success","type":"COLOR","value":"#073630"},{"name":"imported/button/root/color-state-focus-visible/secondary/critical","type":"COLOR","value":"#5f0716"},{"name":"imported/button/root/color-state-focus-visible/secondary/success","type":"COLOR","value":"#073630"},{"name":"imported/button/root/color-state-focus-visible/secondary/none","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-text"},{"name":"imported/button/root/color-state-focus-visible/tertiary/critical","type":"COLOR","value":"#5f0716"},{"name":"imported/button/root/color-state-focus-visible/tertiary/success","type":"COLOR","value":"#073630"},{"name":"imported/button/root/color-state-focus-visible/tertiary/none","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-text"},{"name":"imported/button/root/color-state-focus-visible/primary/none","type":"COLOR","value":"rgba(255, 255, 255, 1)","alias":"p/color-text-brand-on-bg-fill"},{"name":"imported/button/root/color-state-focus-visible/primary/critical","type":"COLOR","value":"rgba(255, 255, 255, 1)","alias":"p/color-text-brand-on-bg-fill"},{"name":"imported/button/root/color-state-focus-visible/primary/success","type":"COLOR","value":"rgba(255, 255, 255, 1)","alias":"p/color-text-brand-on-bg-fill"},{"name":"imported/button/root/color-state-focus-visible/monochromePlain/none","type":"COLOR","value":"#303030"},{"name":"imported/button/root/color-state-focus-visible/monochromePlain/critical","type":"COLOR","value":"#303030"},{"name":"imported/button/root/color-state-focus-visible/monochromePlain/success","type":"COLOR","value":"#303030"},{"name":"imported/button/root/outline-color-state-focus-visible","type":"COLOR","value":"#005bd3"},{"name":"imported/button/root/outline-offset-state-focus-visible/plain/micro","type":"FLOAT","value":-4},{"name":"imported/button/root/outline-offset-state-focus-visible/plain/slim","type":"FLOAT","value":-6},{"name":"imported/button/root/outline-offset-state-focus-visible/plain/medium","type":"FLOAT","value":-6},{"name":"imported/button/root/outline-offset-state-focus-visible/plain/large","type":"FLOAT","value":-6},{"name":"imported/button/root/outline-offset-state-focus-visible/primary/micro","type":"FLOAT","value":1},{"name":"imported/button/root/outline-offset-state-focus-visible/primary/slim","type":"FLOAT","value":1},{"name":"imported/button/root/outline-offset-state-focus-visible/primary/medium","type":"FLOAT","value":1},{"name":"imported/button/root/outline-offset-state-focus-visible/primary/large","type":"FLOAT","value":1},{"name":"imported/button/root/outline-offset-state-focus-visible/secondary/micro","type":"FLOAT","value":1},{"name":"imported/button/root/outline-offset-state-focus-visible/secondary/slim","type":"FLOAT","value":1},{"name":"imported/button/root/outline-offset-state-focus-visible/secondary/medium","type":"FLOAT","value":1},{"name":"imported/button/root/outline-offset-state-focus-visible/secondary/large","type":"FLOAT","value":1},{"name":"imported/button/root/outline-offset-state-focus-visible/tertiary/micro","type":"FLOAT","value":1},{"name":"imported/button/root/outline-offset-state-focus-visible/tertiary/slim","type":"FLOAT","value":1},{"name":"imported/button/root/outline-offset-state-focus-visible/tertiary/medium","type":"FLOAT","value":1},{"name":"imported/button/root/outline-offset-state-focus-visible/tertiary/large","type":"FLOAT","value":1},{"name":"imported/button/root/outline-offset-state-focus-visible/monochromePlain/micro","type":"FLOAT","value":-4},{"name":"imported/button/root/outline-offset-state-focus-visible/monochromePlain/slim","type":"FLOAT","value":-6},{"name":"imported/button/root/outline-offset-state-focus-visible/monochromePlain/medium","type":"FLOAT","value":-6},{"name":"imported/button/root/outline-offset-state-focus-visible/monochromePlain/large","type":"FLOAT","value":-6},{"name":"imported/button/root/outline-width-state-focus-visible","type":"FLOAT","value":2},{"name":"imported/button/root/background-color-state-hover/primary/none","type":"COLOR","value":"#1a1a1a"},{"name":"imported/button/root/background-color-state-hover/primary/critical","type":"COLOR","value":"#a30a24"},{"name":"imported/button/root/background-color-state-hover/primary/success","type":"COLOR","value":"#035e4c"},{"name":"imported/button/root/background-color-state-hover/secondary/none","type":"COLOR","value":"#fafafa"},{"name":"imported/button/root/background-color-state-hover/secondary/critical","type":"COLOR","value":"#fafafa"},{"name":"imported/button/root/background-color-state-hover/secondary/success","type":"COLOR","value":"#fafafa"},{"name":"imported/button/root/background-color-state-hover/tertiary/none","type":"COLOR","value":"#0000000d"},{"name":"imported/button/root/background-color-state-hover/tertiary/critical","type":"COLOR","value":"#0000000d"},{"name":"imported/button/root/background-color-state-hover/tertiary/success","type":"COLOR","value":"#0000000d"},{"name":"imported/button/root/background-color-state-hover/plain/none","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color-state-hover/plain/critical","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color-state-hover/plain/success","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color-state-hover/monochromePlain/none","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color-state-hover/monochromePlain/critical","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color-state-hover/monochromePlain/success","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/color-state-hover/plain/none","type":"COLOR","value":"#004299"},{"name":"imported/button/root/color-state-hover/plain/critical","type":"COLOR","value":"#5f0716"},{"name":"imported/button/root/color-state-hover/plain/success","type":"COLOR","value":"#073630"},{"name":"imported/button/root/color-state-hover/secondary/critical","type":"COLOR","value":"#5f0716"},{"name":"imported/button/root/color-state-hover/secondary/success","type":"COLOR","value":"#073630"},{"name":"imported/button/root/color-state-hover/secondary/none","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-text"},{"name":"imported/button/root/color-state-hover/tertiary/critical","type":"COLOR","value":"#5f0716"},{"name":"imported/button/root/color-state-hover/tertiary/success","type":"COLOR","value":"#073630"},{"name":"imported/button/root/color-state-hover/tertiary/none","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-text"},{"name":"imported/button/root/color-state-hover/primary/none","type":"COLOR","value":"rgba(255, 255, 255, 1)","alias":"p/color-text-brand-on-bg-fill"},{"name":"imported/button/root/color-state-hover/primary/critical","type":"COLOR","value":"rgba(255, 255, 255, 1)","alias":"p/color-text-brand-on-bg-fill"},{"name":"imported/button/root/color-state-hover/primary/success","type":"COLOR","value":"rgba(255, 255, 255, 1)","alias":"p/color-text-brand-on-bg-fill"},{"name":"imported/button/root/color-state-hover/monochromePlain/none","type":"COLOR","value":"#303030"},{"name":"imported/button/root/color-state-hover/monochromePlain/critical","type":"COLOR","value":"#303030"},{"name":"imported/button/root/color-state-hover/monochromePlain/success","type":"COLOR","value":"#303030"},{"name":"imported/button/root/outline-color-state-hover/plain/none","type":"COLOR","value":"#004299"},{"name":"imported/button/root/outline-color-state-hover/plain/critical","type":"COLOR","value":"#5f0716"},{"name":"imported/button/root/outline-color-state-hover/plain/success","type":"COLOR","value":"#073630"},{"name":"imported/button/root/outline-color-state-hover/secondary/critical","type":"COLOR","value":"#5f0716"},{"name":"imported/button/root/outline-color-state-hover/secondary/success","type":"COLOR","value":"#073630"},{"name":"imported/button/root/outline-color-state-hover/secondary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/root/outline-color-state-hover/tertiary/critical","type":"COLOR","value":"#5f0716"},{"name":"imported/button/root/outline-color-state-hover/tertiary/success","type":"COLOR","value":"#073630"},{"name":"imported/button/root/outline-color-state-hover/tertiary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/root/outline-color-state-hover/primary/none","type":"COLOR","value":"#ffffff"},{"name":"imported/button/root/outline-color-state-hover/primary/critical","type":"COLOR","value":"#ffffff"},{"name":"imported/button/root/outline-color-state-hover/primary/success","type":"COLOR","value":"#ffffff"},{"name":"imported/button/root/outline-color-state-hover/monochromePlain/none","type":"COLOR","value":"#303030"},{"name":"imported/button/root/outline-color-state-hover/monochromePlain/critical","type":"COLOR","value":"#303030"},{"name":"imported/button/root/outline-color-state-hover/monochromePlain/success","type":"COLOR","value":"#303030"},{"name":"imported/button/icon/color/plain/none","type":"COLOR","value":"#005bd3"},{"name":"imported/button/icon/color/plain/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/button/icon/color/plain/success","type":"COLOR","value":"#014b40"},{"name":"imported/button/icon/color/primary/none","type":"COLOR","value":"#ffffff"},{"name":"imported/button/icon/color/primary/critical","type":"COLOR","value":"#ffffff"},{"name":"imported/button/icon/color/primary/success","type":"COLOR","value":"#ffffff"},{"name":"imported/button/icon/color/secondary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/icon/color/secondary/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/button/icon/color/secondary/success","type":"COLOR","value":"#014b40"},{"name":"imported/button/icon/color/tertiary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/icon/color/tertiary/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/button/icon/color/tertiary/success","type":"COLOR","value":"#014b40"},{"name":"imported/button/icon/color/monochromePlain/none","type":"COLOR","value":"#303030"},{"name":"imported/button/icon/color/monochromePlain/critical","type":"COLOR","value":"#303030"},{"name":"imported/button/icon/color/monochromePlain/success","type":"COLOR","value":"#303030"},{"name":"imported/button/icon/margin-bottom","type":"FLOAT","value":-2},{"name":"imported/button/icon/margin-top","type":"FLOAT","value":-2},{"name":"imported/button/icon-2/color/plain/none","type":"COLOR","value":"#005bd3"},{"name":"imported/button/icon-2/color/plain/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/button/icon-2/color/plain/success","type":"COLOR","value":"#014b40"},{"name":"imported/button/icon-2/color/primary/none","type":"COLOR","value":"#ffffff"},{"name":"imported/button/icon-2/color/primary/critical","type":"COLOR","value":"#ffffff"},{"name":"imported/button/icon-2/color/primary/success","type":"COLOR","value":"#ffffff"},{"name":"imported/button/icon-2/color/secondary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/icon-2/color/secondary/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/button/icon-2/color/secondary/success","type":"COLOR","value":"#014b40"},{"name":"imported/button/icon-2/color/tertiary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/icon-2/color/tertiary/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/button/icon-2/color/tertiary/success","type":"COLOR","value":"#014b40"},{"name":"imported/button/icon-2/color/monochromePlain/none","type":"COLOR","value":"#303030"},{"name":"imported/button/icon-2/color/monochromePlain/critical","type":"COLOR","value":"#303030"},{"name":"imported/button/icon-2/color/monochromePlain/success","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color/plain/none","type":"COLOR","value":"#005bd3"},{"name":"imported/button/label/color/plain/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/button/label/color/plain/success","type":"COLOR","value":"#014b40"},{"name":"imported/button/label/color/primary/none","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/color/primary/critical","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/color/primary/success","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/color/secondary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color/secondary/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/button/label/color/secondary/success","type":"COLOR","value":"#014b40"},{"name":"imported/button/label/color/tertiary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color/tertiary/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/button/label/color/tertiary/success","type":"COLOR","value":"#014b40"},{"name":"imported/button/label/color/monochromePlain/none","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color/monochromePlain/critical","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color/monochromePlain/success","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color-state-active/plain/none","type":"COLOR","value":"#002e6a"},{"name":"imported/button/label/color-state-active/plain/critical","type":"COLOR","value":"#2f040b"},{"name":"imported/button/label/color-state-active/plain/success","type":"COLOR","value":"#022622"},{"name":"imported/button/label/color-state-active/secondary/critical","type":"COLOR","value":"#2f040b"},{"name":"imported/button/label/color-state-active/secondary/success","type":"COLOR","value":"#022622"},{"name":"imported/button/label/color-state-active/secondary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color-state-active/tertiary/critical","type":"COLOR","value":"#2f040b"},{"name":"imported/button/label/color-state-active/tertiary/success","type":"COLOR","value":"#022622"},{"name":"imported/button/label/color-state-active/tertiary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color-state-active/primary/none","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/color-state-active/primary/critical","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/color-state-active/primary/success","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/color-state-active/monochromePlain/none","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color-state-active/monochromePlain/critical","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color-state-active/monochromePlain/success","type":"COLOR","value":"#303030"},{"name":"imported/button/label/fill-state-active/plain/none","type":"COLOR","value":"#002e6a"},{"name":"imported/button/label/fill-state-active/plain/critical","type":"COLOR","value":"#2f040b"},{"name":"imported/button/label/fill-state-active/plain/success","type":"COLOR","value":"#022622"},{"name":"imported/button/label/fill-state-active/primary/none","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/fill-state-active/primary/critical","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/fill-state-active/primary/success","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/fill-state-active/secondary/none","type":"COLOR","value":"#4a4a4a"},{"name":"imported/button/label/fill-state-active/secondary/critical","type":"COLOR","value":"#2f040b"},{"name":"imported/button/label/fill-state-active/secondary/success","type":"COLOR","value":"#022622"},{"name":"imported/button/label/fill-state-active/tertiary/none","type":"COLOR","value":"#4a4a4a"},{"name":"imported/button/label/fill-state-active/tertiary/critical","type":"COLOR","value":"#2f040b"},{"name":"imported/button/label/fill-state-active/tertiary/success","type":"COLOR","value":"#022622"},{"name":"imported/button/label/fill-state-active/monochromePlain/none","type":"COLOR","value":"#303030"},{"name":"imported/button/label/fill-state-active/monochromePlain/critical","type":"COLOR","value":"#303030"},{"name":"imported/button/label/fill-state-active/monochromePlain/success","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color-state-disabled/plain","type":"COLOR","value":"#b5b5b5"},{"name":"imported/button/label/color-state-disabled/secondary","type":"COLOR","value":"#b5b5b5"},{"name":"imported/button/label/color-state-disabled/tertiary","type":"COLOR","value":"#b5b5b5"},{"name":"imported/button/label/color-state-disabled/monochromePlain","type":"COLOR","value":"#b5b5b5"},{"name":"imported/button/label/color-state-disabled/primary","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/color-state-focus-visible/plain/none","type":"COLOR","value":"#004299"},{"name":"imported/button/label/color-state-focus-visible/plain/critical","type":"COLOR","value":"#5f0716"},{"name":"imported/button/label/color-state-focus-visible/plain/success","type":"COLOR","value":"#073630"},{"name":"imported/button/label/color-state-focus-visible/secondary/critical","type":"COLOR","value":"#5f0716"},{"name":"imported/button/label/color-state-focus-visible/secondary/success","type":"COLOR","value":"#073630"},{"name":"imported/button/label/color-state-focus-visible/secondary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color-state-focus-visible/tertiary/critical","type":"COLOR","value":"#5f0716"},{"name":"imported/button/label/color-state-focus-visible/tertiary/success","type":"COLOR","value":"#073630"},{"name":"imported/button/label/color-state-focus-visible/tertiary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color-state-focus-visible/primary/none","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/color-state-focus-visible/primary/critical","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/color-state-focus-visible/primary/success","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/color-state-focus-visible/monochromePlain/none","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color-state-focus-visible/monochromePlain/critical","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color-state-focus-visible/monochromePlain/success","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color-state-hover/plain/none","type":"COLOR","value":"#004299"},{"name":"imported/button/label/color-state-hover/plain/critical","type":"COLOR","value":"#5f0716"},{"name":"imported/button/label/color-state-hover/plain/success","type":"COLOR","value":"#073630"},{"name":"imported/button/label/color-state-hover/secondary/critical","type":"COLOR","value":"#5f0716"},{"name":"imported/button/label/color-state-hover/secondary/success","type":"COLOR","value":"#073630"},{"name":"imported/button/label/color-state-hover/secondary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color-state-hover/tertiary/critical","type":"COLOR","value":"#5f0716"},{"name":"imported/button/label/color-state-hover/tertiary/success","type":"COLOR","value":"#073630"},{"name":"imported/button/label/color-state-hover/tertiary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color-state-hover/primary/none","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/color-state-hover/primary/critical","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/color-state-hover/primary/success","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/color-state-hover/monochromePlain/none","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color-state-hover/monochromePlain/critical","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color-state-hover/monochromePlain/success","type":"COLOR","value":"#303030"},{"name":"imported/shared/size-0","type":"FLOAT","value":0},{"name":"imported/shared/size-8","type":"FLOAT","value":8},{"name":"imported/shared/size-59-9219","type":"FLOAT","value":59.9219},{"name":"imported/shared/size-20","type":"FLOAT","value":20},{"name":"imported/shared/size-12","type":"FLOAT","value":12},{"name":"imported/shared/size-7","type":"FLOAT","value":7},{"name":"imported/shared/size-2","type":"FLOAT","value":2},{"name":"imported/shared/color-8a8a8a","type":"COLOR","value":"#8a8a8a"},{"name":"imported/shared/num-0","type":"FLOAT","value":0},{"name":"imported/shared/size-18","type":"FLOAT","value":18},{"name":"imported/shared/size-1","type":"FLOAT","value":1},{"name":"imported/shared/color-b5b5b5","type":"COLOR","value":"#b5b5b5"},{"name":"imported/shared/size-319-328","type":"FLOAT","value":319.328},{"name":"imported/shared/size-295-328","type":"FLOAT","value":295.328},{"name":"imported/shared/size-4","type":"FLOAT","value":4},{"name":"imported/shared/color-303030","type":"COLOR","value":"#303030"},{"name":"imported/shared/size-13","type":"FLOAT","value":13},{"name":"imported/shared/num-450","type":"FLOAT","value":450},{"name":"imported/shared/size-32","type":"FLOAT","value":32},{"name":"imported/shared/size-neg-4","type":"FLOAT","value":-4},{"name":"imported/shared/size-14","type":"FLOAT","value":14},{"name":"imported/shared/color-00000000","type":"COLOR","value":"#00000000"},{"name":"imported/shared/num-1","type":"FLOAT","value":1},{"name":"imported/shared/num-20","type":"FLOAT","value":20},{"name":"imported/shared/color-616161","type":"COLOR","value":"#616161"},{"name":"imported/shared/color-1a1a1a","type":"COLOR","value":"#1a1a1a"},{"name":"imported/tag/root/font-weight/off","type":"FLOAT","value":450},{"name":"imported/tag/root/font-weight/on","type":"FLOAT","value":400},{"name":"imported/tag/root/height/none","type":"FLOAT","value":20},{"name":"imported/tag/root/height/large","type":"FLOAT","value":24},{"name":"imported/tag/root/outline-color/off","type":"COLOR","value":"#303030"},{"name":"imported/tag/root/outline-color/on","type":"COLOR","value":"#00000000"},{"name":"imported/tag/root/outline-width/off","type":"FLOAT","value":3},{"name":"imported/tag/root/outline-width/on","type":"FLOAT","value":1},{"name":"imported/tag/root/background-color-state-active/off/off/on","type":"COLOR","value":"#cccccc"},{"name":"imported/tag/root/background-color-state-active/off/off/off","type":"COLOR","value":"rgba(227, 227, 227, 1)","alias":"p/color-bg-fill-tertiary"},{"name":"imported/tag/root/background-color-state-active/off/on/off","type":"COLOR","value":"#cccccc"},{"name":"imported/tag/root/background-color-state-active/off/on/on","type":"COLOR","value":"#cccccc"},{"name":"imported/tag/root/background-color-state-active/on/off/on","type":"COLOR","value":"#d4d4d4"},{"name":"imported/tag/root/background-color-state-active/on/off/off","type":"COLOR","value":"rgba(227, 227, 227, 1)","alias":"p/color-bg-fill-tertiary"},{"name":"imported/tag/root/background-color-state-active/on/on/off","type":"COLOR","value":"#cccccc"},{"name":"imported/tag/root/background-color-state-active/on/on/on","type":"COLOR","value":"#d4d4d4"},{"name":"imported/tag/root/outline-color-state-active","type":"COLOR","value":"#303030"},{"name":"imported/tag/root/outline-width-state-active","type":"FLOAT","value":3},{"name":"imported/tag/root/background-color-state-disabled","type":"COLOR","value":"#0000000d"},{"name":"imported/tag/root/outline-color-state-disabled/off","type":"COLOR","value":"#b5b5b5"},{"name":"imported/tag/root/outline-color-state-disabled/on","type":"COLOR","value":"#00000000"},{"name":"imported/tag/root/padding-left-state-disabled/large/off/on","type":"FLOAT","value":6},{"name":"imported/tag/root/padding-left-state-disabled/large/off/off","type":"FLOAT","value":8},{"name":"imported/tag/root/padding-left-state-disabled/large/on/off","type":"FLOAT","value":8},{"name":"imported/tag/root/padding-left-state-disabled/large/on/on","type":"FLOAT","value":8},{"name":"imported/tag/root/padding-left-state-disabled/none/off/off","type":"FLOAT","value":6},{"name":"imported/tag/root/padding-left-state-disabled/none/off/on","type":"FLOAT","value":6},{"name":"imported/tag/root/padding-left-state-disabled/none/on/off","type":"FLOAT","value":6},{"name":"imported/tag/root/padding-left-state-disabled/none/on/on","type":"FLOAT","value":6},{"name":"imported/tag/root/padding-right-state-disabled/large/off/on","type":"FLOAT","value":6},{"name":"imported/tag/root/padding-right-state-disabled/large/off/off","type":"FLOAT","value":8},{"name":"imported/tag/root/padding-right-state-disabled/large/on/off","type":"FLOAT","value":8},{"name":"imported/tag/root/padding-right-state-disabled/large/on/on","type":"FLOAT","value":8},{"name":"imported/tag/root/padding-right-state-disabled/none/off/off","type":"FLOAT","value":6},{"name":"imported/tag/root/padding-right-state-disabled/none/off/on","type":"FLOAT","value":6},{"name":"imported/tag/root/padding-right-state-disabled/none/on/off","type":"FLOAT","value":0},{"name":"imported/tag/root/padding-right-state-disabled/none/on/on","type":"FLOAT","value":0},{"name":"imported/tag/root/outline-color-state-focus-visible","type":"COLOR","value":"#303030"},{"name":"imported/tag/root/outline-width-state-focus-visible","type":"FLOAT","value":3},{"name":"imported/tag/root/background-color-state-hover/off/on","type":"COLOR","value":"#d4d4d4"},{"name":"imported/tag/root/background-color-state-hover/off/off","type":"COLOR","value":"rgba(227, 227, 227, 1)","alias":"p/color-bg-fill-tertiary"},{"name":"imported/tag/root/background-color-state-hover/on/off","type":"COLOR","value":"#d4d4d4"},{"name":"imported/tag/root/background-color-state-hover/on/on","type":"COLOR","value":"#d4d4d4"},{"name":"imported/tag/link/color","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-text"},{"name":"imported/tag/text-2/line-height","type":"FLOAT","value":16},{"name":"imported/tag/label-2/font-weight","type":"FLOAT","value":450},{"name":"imported/tag/text/line-height","type":"FLOAT","value":16},{"name":"imported/tag/button/background-color/off","type":"COLOR","value":"rgba(227, 227, 227, 1)","alias":"p/color-bg-fill-tertiary"},{"name":"imported/tag/button/background-color/on","type":"COLOR","value":"rgba(212, 212, 212, 1)","alias":"p/color-bg-fill-tertiary-hover"},{"name":"imported/tag/button/font-size","type":"FLOAT","value":13},{"name":"imported/tag/button/left","type":"FLOAT","value":53.9219},{"name":"imported/tag/button-2/background-color","type":"COLOR","value":"#00000000"},{"name":"imported/tag/button-2/font-size","type":"FLOAT","value":13},{"name":"imported/tag/icon-3/font-weight","type":"FLOAT","value":400},{"name":"imported/badge/root/background-color/none","type":"COLOR","value":"#0000000f"},{"name":"imported/badge/root/background-color/info","type":"COLOR","value":"rgba(213, 235, 255, 1)","alias":"p/color-bg-fill-info-secondary"},{"name":"imported/badge/root/background-color/success","type":"COLOR","value":"rgba(175, 254, 191, 1)","alias":"p/color-bg-fill-success-secondary"},{"name":"imported/badge/root/background-color/warning","type":"COLOR","value":"rgba(255, 214, 164, 1)","alias":"p/color-bg-fill-warning-secondary"},{"name":"imported/badge/root/background-color/critical","type":"COLOR","value":"rgba(254, 209, 215, 1)","alias":"p/color-bg-fill-critical-secondary"},{"name":"imported/badge/root/background-color/attention","type":"COLOR","value":"rgba(255, 235, 120, 1)","alias":"p/color-bg-fill-caution-secondary"},{"name":"imported/badge/root/background-color/new","type":"COLOR","value":"#0000000f"},{"name":"imported/badge/root/background-color/magic","type":"COLOR","value":"rgba(233, 229, 255, 1)","alias":"p/color-bg-fill-magic-secondary"},{"name":"imported/badge/root/background-color/info-strong","type":"COLOR","value":"rgba(145, 208, 255, 1)","alias":"p/color-bg-fill-info"},{"name":"imported/badge/root/background-color/success-strong","type":"COLOR","value":"rgba(4, 123, 93, 1)","alias":"p/color-bg-fill-success"},{"name":"imported/badge/root/background-color/warning-strong","type":"COLOR","value":"rgba(255, 184, 0, 1)","alias":"p/color-bg-fill-warning"},{"name":"imported/badge/root/background-color/critical-strong","type":"COLOR","value":"rgba(199, 10, 36, 1)","alias":"p/color-bg-fill-critical"},{"name":"imported/badge/root/background-color/attention-strong","type":"COLOR","value":"rgba(255, 230, 0, 1)","alias":"p/color-bg-fill-caution"},{"name":"imported/badge/root/background-color/read-only","type":"COLOR","value":"#00000000"},{"name":"imported/badge/root/background-color/enabled","type":"COLOR","value":"#0000000f"},{"name":"imported/badge/root/color/none","type":"COLOR","value":"rgba(97, 97, 97, 1)","alias":"p/color-text-secondary"},{"name":"imported/badge/root/color/info","type":"COLOR","value":"rgba(0, 58, 90, 1)","alias":"p/color-text-info"},{"name":"imported/badge/root/color/success","type":"COLOR","value":"rgba(1, 75, 64, 1)","alias":"p/color-text-success"},{"name":"imported/badge/root/color/warning","type":"COLOR","value":"rgba(94, 66, 0, 1)","alias":"p/color-text-warning"},{"name":"imported/badge/root/color/critical","type":"COLOR","value":"rgba(142, 11, 33, 1)","alias":"p/color-text-critical"},{"name":"imported/badge/root/color/attention","type":"COLOR","value":"rgba(79, 71, 0, 1)","alias":"p/color-text-caution"},{"name":"imported/badge/root/color/new","type":"COLOR","value":"rgba(97, 97, 97, 1)","alias":"p/color-text-secondary"},{"name":"imported/badge/root/color/magic","type":"COLOR","value":"rgba(87, 0, 209, 1)","alias":"p/color-text-magic"},{"name":"imported/badge/root/color/info-strong","type":"COLOR","value":"rgba(0, 33, 51, 1)","alias":"p/color-text-info-on-bg-fill"},{"name":"imported/badge/root/color/success-strong","type":"COLOR","value":"rgba(250, 255, 251, 1)","alias":"p/color-text-success-on-bg-fill"},{"name":"imported/badge/root/color/warning-strong","type":"COLOR","value":"rgba(37, 26, 0, 1)","alias":"p/color-text-warning-on-bg-fill"},{"name":"imported/badge/root/color/critical-strong","type":"COLOR","value":"rgba(255, 250, 251, 1)","alias":"p/color-text-critical-on-bg-fill"},{"name":"imported/badge/root/color/attention-strong","type":"COLOR","value":"rgba(51, 46, 0, 1)","alias":"p/color-text-caution-on-bg-fill"},{"name":"imported/badge/root/color/read-only","type":"COLOR","value":"rgba(97, 97, 97, 1)","alias":"p/color-text-secondary"},{"name":"imported/badge/root/color/enabled","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-text"},{"name":"imported/badge/root/font-weight/none","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/badge/root/font-weight/info","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/badge/root/font-weight/success","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/badge/root/font-weight/warning","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/badge/root/font-weight/critical","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/badge/root/font-weight/attention","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/badge/root/font-weight/new","type":"FLOAT","value":700,"alias":"p/font-weight-bold"},{"name":"imported/badge/root/font-weight/magic","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/badge/root/font-weight/info-strong","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/badge/root/font-weight/success-strong","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/badge/root/font-weight/warning-strong","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/badge/root/font-weight/critical-strong","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/badge/root/font-weight/attention-strong","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/badge/root/font-weight/read-only","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/badge/root/font-weight/enabled","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/badge/root/width/none/none","type":"FLOAT","value":61.0312},{"name":"imported/badge/root/width/none/incomplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/none/partiallyComplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/none/complete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/info/none","type":"FLOAT","value":61.0312},{"name":"imported/badge/root/width/info/incomplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/info/partiallyComplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/info/complete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/success/none","type":"FLOAT","value":61.0312},{"name":"imported/badge/root/width/success/incomplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/success/partiallyComplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/success/complete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/warning/none","type":"FLOAT","value":61.0312},{"name":"imported/badge/root/width/warning/incomplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/warning/partiallyComplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/warning/complete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/critical/none","type":"FLOAT","value":61.0312},{"name":"imported/badge/root/width/critical/incomplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/critical/partiallyComplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/critical/complete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/attention/none","type":"FLOAT","value":61.0312},{"name":"imported/badge/root/width/attention/incomplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/attention/partiallyComplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/attention/complete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/new/none","type":"FLOAT","value":61.875},{"name":"imported/badge/root/width/new/incomplete","type":"FLOAT","value":73.875},{"name":"imported/badge/root/width/new/partiallyComplete","type":"FLOAT","value":73.875},{"name":"imported/badge/root/width/new/complete","type":"FLOAT","value":73.875},{"name":"imported/badge/root/width/magic/none","type":"FLOAT","value":61.0312},{"name":"imported/badge/root/width/magic/incomplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/magic/partiallyComplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/magic/complete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/info-strong/none","type":"FLOAT","value":61.0312},{"name":"imported/badge/root/width/info-strong/incomplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/info-strong/partiallyComplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/info-strong/complete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/success-strong/none","type":"FLOAT","value":61.0312},{"name":"imported/badge/root/width/success-strong/incomplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/success-strong/partiallyComplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/success-strong/complete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/warning-strong/none","type":"FLOAT","value":61.0312},{"name":"imported/badge/root/width/warning-strong/incomplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/warning-strong/partiallyComplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/warning-strong/complete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/critical-strong/none","type":"FLOAT","value":61.0312},{"name":"imported/badge/root/width/critical-strong/incomplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/critical-strong/partiallyComplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/critical-strong/complete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/attention-strong/none","type":"FLOAT","value":61.0312},{"name":"imported/badge/root/width/attention-strong/incomplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/attention-strong/partiallyComplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/attention-strong/complete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/read-only/none","type":"FLOAT","value":61.0312},{"name":"imported/badge/root/width/read-only/incomplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/read-only/partiallyComplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/read-only/complete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/enabled/none","type":"FLOAT","value":61.0312},{"name":"imported/badge/root/width/enabled/incomplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/enabled/partiallyComplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/enabled/complete","type":"FLOAT","value":73.0312},{"name":"imported/badge/label-2/bottom","type":"FLOAT","value":799},{"name":"imported/badge/label-2/left","type":"FLOAT","value":24},{"name":"imported/badge/label-2/right","type":"FLOAT","value":575},{"name":"imported/badge/icon/color/none","type":"COLOR","value":"#616161"},{"name":"imported/badge/icon/color/info","type":"COLOR","value":"#003a5a"},{"name":"imported/badge/icon/color/success","type":"COLOR","value":"#014b40"},{"name":"imported/badge/icon/color/warning","type":"COLOR","value":"#5e4200"},{"name":"imported/badge/icon/color/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/badge/icon/color/attention","type":"COLOR","value":"#4f4700"},{"name":"imported/badge/icon/color/new","type":"COLOR","value":"#616161"},{"name":"imported/badge/icon/color/magic","type":"COLOR","value":"#5700d1"},{"name":"imported/badge/icon/color/info-strong","type":"COLOR","value":"#002133"},{"name":"imported/badge/icon/color/success-strong","type":"COLOR","value":"#fafffb"},{"name":"imported/badge/icon/color/warning-strong","type":"COLOR","value":"#251a00"},{"name":"imported/badge/icon/color/critical-strong","type":"COLOR","value":"#fffafb"},{"name":"imported/badge/icon/color/attention-strong","type":"COLOR","value":"#332e00"},{"name":"imported/badge/icon/color/read-only","type":"COLOR","value":"#616161"},{"name":"imported/badge/icon/color/enabled","type":"COLOR","value":"#303030"},{"name":"imported/badge/icon/font-weight/none","type":"FLOAT","value":550},{"name":"imported/badge/icon/font-weight/info","type":"FLOAT","value":550},{"name":"imported/badge/icon/font-weight/success","type":"FLOAT","value":550},{"name":"imported/badge/icon/font-weight/warning","type":"FLOAT","value":550},{"name":"imported/badge/icon/font-weight/critical","type":"FLOAT","value":550},{"name":"imported/badge/icon/font-weight/attention","type":"FLOAT","value":550},{"name":"imported/badge/icon/font-weight/new","type":"FLOAT","value":700},{"name":"imported/badge/icon/font-weight/magic","type":"FLOAT","value":550},{"name":"imported/badge/icon/font-weight/info-strong","type":"FLOAT","value":550},{"name":"imported/badge/icon/font-weight/success-strong","type":"FLOAT","value":550},{"name":"imported/badge/icon/font-weight/warning-strong","type":"FLOAT","value":550},{"name":"imported/badge/icon/font-weight/critical-strong","type":"FLOAT","value":550},{"name":"imported/badge/icon/font-weight/attention-strong","type":"FLOAT","value":550},{"name":"imported/badge/icon/font-weight/read-only","type":"FLOAT","value":550},{"name":"imported/badge/icon/font-weight/enabled","type":"FLOAT","value":550},{"name":"imported/badge/icon/margin-bottom","type":"FLOAT","value":-2},{"name":"imported/badge/icon/margin-left","type":"FLOAT","value":-8},{"name":"imported/badge/icon/margin-top","type":"FLOAT","value":-2},{"name":"imported/badge/icon-2/color/none","type":"COLOR","value":"#616161"},{"name":"imported/badge/icon-2/color/info","type":"COLOR","value":"#003a5a"},{"name":"imported/badge/icon-2/color/success","type":"COLOR","value":"#014b40"},{"name":"imported/badge/icon-2/color/warning","type":"COLOR","value":"#5e4200"},{"name":"imported/badge/icon-2/color/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/badge/icon-2/color/attention","type":"COLOR","value":"#4f4700"},{"name":"imported/badge/icon-2/color/new","type":"COLOR","value":"#616161"},{"name":"imported/badge/icon-2/color/magic","type":"COLOR","value":"#5700d1"},{"name":"imported/badge/icon-2/color/info-strong","type":"COLOR","value":"#002133"},{"name":"imported/badge/icon-2/color/success-strong","type":"COLOR","value":"#fafffb"},{"name":"imported/badge/icon-2/color/warning-strong","type":"COLOR","value":"#251a00"},{"name":"imported/badge/icon-2/color/critical-strong","type":"COLOR","value":"#fffafb"},{"name":"imported/badge/icon-2/color/attention-strong","type":"COLOR","value":"#332e00"},{"name":"imported/badge/icon-2/color/read-only","type":"COLOR","value":"#616161"},{"name":"imported/badge/icon-2/color/enabled","type":"COLOR","value":"#303030"},{"name":"imported/badge/icon-2/font-weight/none","type":"FLOAT","value":550},{"name":"imported/badge/icon-2/font-weight/info","type":"FLOAT","value":550},{"name":"imported/badge/icon-2/font-weight/success","type":"FLOAT","value":550},{"name":"imported/badge/icon-2/font-weight/warning","type":"FLOAT","value":550},{"name":"imported/badge/icon-2/font-weight/critical","type":"FLOAT","value":550},{"name":"imported/badge/icon-2/font-weight/attention","type":"FLOAT","value":550},{"name":"imported/badge/icon-2/font-weight/new","type":"FLOAT","value":700},{"name":"imported/badge/icon-2/font-weight/magic","type":"FLOAT","value":550},{"name":"imported/badge/icon-2/font-weight/info-strong","type":"FLOAT","value":550},{"name":"imported/badge/icon-2/font-weight/success-strong","type":"FLOAT","value":550},{"name":"imported/badge/icon-2/font-weight/warning-strong","type":"FLOAT","value":550},{"name":"imported/badge/icon-2/font-weight/critical-strong","type":"FLOAT","value":550},{"name":"imported/badge/icon-2/font-weight/attention-strong","type":"FLOAT","value":550},{"name":"imported/badge/icon-2/font-weight/read-only","type":"FLOAT","value":550},{"name":"imported/badge/icon-2/font-weight/enabled","type":"FLOAT","value":550},{"name":"imported/badge/label-3/bottom","type":"FLOAT","value":799},{"name":"imported/badge/label-3/color/none","type":"COLOR","value":"#616161"},{"name":"imported/badge/label-3/color/info","type":"COLOR","value":"#003a5a"},{"name":"imported/badge/label-3/color/success","type":"COLOR","value":"#014b40"},{"name":"imported/badge/label-3/color/warning","type":"COLOR","value":"#5e4200"},{"name":"imported/badge/label-3/color/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/badge/label-3/color/attention","type":"COLOR","value":"#4f4700"},{"name":"imported/badge/label-3/color/new","type":"COLOR","value":"#616161"},{"name":"imported/badge/label-3/color/magic","type":"COLOR","value":"#5700d1"},{"name":"imported/badge/label-3/color/info-strong","type":"COLOR","value":"#002133"},{"name":"imported/badge/label-3/color/success-strong","type":"COLOR","value":"#fafffb"},{"name":"imported/badge/label-3/color/warning-strong","type":"COLOR","value":"#251a00"},{"name":"imported/badge/label-3/color/critical-strong","type":"COLOR","value":"#fffafb"},{"name":"imported/badge/label-3/color/attention-strong","type":"COLOR","value":"#332e00"},{"name":"imported/badge/label-3/color/read-only","type":"COLOR","value":"#616161"},{"name":"imported/badge/label-3/color/enabled","type":"COLOR","value":"#303030"},{"name":"imported/badge/label-3/font-weight/none","type":"FLOAT","value":550},{"name":"imported/badge/label-3/font-weight/info","type":"FLOAT","value":550},{"name":"imported/badge/label-3/font-weight/success","type":"FLOAT","value":550},{"name":"imported/badge/label-3/font-weight/warning","type":"FLOAT","value":550},{"name":"imported/badge/label-3/font-weight/critical","type":"FLOAT","value":550},{"name":"imported/badge/label-3/font-weight/attention","type":"FLOAT","value":550},{"name":"imported/badge/label-3/font-weight/new","type":"FLOAT","value":700},{"name":"imported/badge/label-3/font-weight/magic","type":"FLOAT","value":550},{"name":"imported/badge/label-3/font-weight/info-strong","type":"FLOAT","value":550},{"name":"imported/badge/label-3/font-weight/success-strong","type":"FLOAT","value":550},{"name":"imported/badge/label-3/font-weight/warning-strong","type":"FLOAT","value":550},{"name":"imported/badge/label-3/font-weight/critical-strong","type":"FLOAT","value":550},{"name":"imported/badge/label-3/font-weight/attention-strong","type":"FLOAT","value":550},{"name":"imported/badge/label-3/font-weight/read-only","type":"FLOAT","value":550},{"name":"imported/badge/label-3/font-weight/enabled","type":"FLOAT","value":550},{"name":"imported/badge/label-3/left","type":"FLOAT","value":16},{"name":"imported/badge/label-3/right","type":"FLOAT","value":583},{"name":"imported/badge/icon-3/color/none","type":"COLOR","value":"#616161"},{"name":"imported/badge/icon-3/color/info","type":"COLOR","value":"#003a5a"},{"name":"imported/badge/icon-3/color/success","type":"COLOR","value":"#014b40"},{"name":"imported/badge/icon-3/color/warning","type":"COLOR","value":"#5e4200"},{"name":"imported/badge/icon-3/color/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/badge/icon-3/color/attention","type":"COLOR","value":"#4f4700"},{"name":"imported/badge/icon-3/color/new","type":"COLOR","value":"#616161"},{"name":"imported/badge/icon-3/color/magic","type":"COLOR","value":"#5700d1"},{"name":"imported/badge/icon-3/color/info-strong","type":"COLOR","value":"#002133"},{"name":"imported/badge/icon-3/color/success-strong","type":"COLOR","value":"#fafffb"},{"name":"imported/badge/icon-3/color/warning-strong","type":"COLOR","value":"#251a00"},{"name":"imported/badge/icon-3/color/critical-strong","type":"COLOR","value":"#fffafb"},{"name":"imported/badge/icon-3/color/attention-strong","type":"COLOR","value":"#332e00"},{"name":"imported/badge/icon-3/color/read-only","type":"COLOR","value":"#616161"},{"name":"imported/badge/icon-3/color/enabled","type":"COLOR","value":"#303030"},{"name":"imported/badge/icon-3/fill/none","type":"COLOR","value":"rgba(97, 97, 97, 1)","alias":"p/color-text-secondary"},{"name":"imported/badge/icon-3/fill/info","type":"COLOR","value":"rgba(0, 148, 213, 1)","alias":"p/color-icon-info"},{"name":"imported/badge/icon-3/fill/success","type":"COLOR","value":"rgba(4, 123, 93, 1)","alias":"p/color-icon-success"},{"name":"imported/badge/icon-3/fill/warning","type":"COLOR","value":"rgba(178, 132, 0, 1)","alias":"p/color-icon-warning"},{"name":"imported/badge/icon-3/fill/critical","type":"COLOR","value":"rgba(226, 44, 56, 1)","alias":"p/color-icon-critical"},{"name":"imported/badge/icon-3/fill/attention","type":"COLOR","value":"rgba(153, 138, 0, 1)","alias":"p/color-icon-caution"},{"name":"imported/badge/icon-3/fill/new","type":"COLOR","value":"rgba(97, 97, 97, 1)","alias":"p/color-text-secondary"},{"name":"imported/badge/icon-3/fill/magic","type":"COLOR","value":"rgba(87, 0, 209, 1)","alias":"p/color-text-magic"},{"name":"imported/badge/icon-3/fill/info-strong","type":"COLOR","value":"rgba(0, 33, 51, 1)","alias":"p/color-text-info-on-bg-fill"},{"name":"imported/badge/icon-3/fill/success-strong","type":"COLOR","value":"rgba(250, 255, 251, 1)","alias":"p/color-text-success-on-bg-fill"},{"name":"imported/badge/icon-3/fill/warning-strong","type":"COLOR","value":"rgba(37, 26, 0, 1)","alias":"p/color-text-warning-on-bg-fill"},{"name":"imported/badge/icon-3/fill/critical-strong","type":"COLOR","value":"rgba(255, 250, 251, 1)","alias":"p/color-text-critical-on-bg-fill"},{"name":"imported/badge/icon-3/fill/attention-strong","type":"COLOR","value":"rgba(51, 46, 0, 1)","alias":"p/color-text-caution-on-bg-fill"},{"name":"imported/badge/icon-3/fill/read-only","type":"COLOR","value":"rgba(138, 138, 138, 1)","alias":"p/color-icon-secondary"},{"name":"imported/badge/icon-3/fill/enabled","type":"COLOR","value":"rgba(4, 123, 93, 1)","alias":"p/color-icon-success"},{"name":"imported/badge/icon-3/font-weight/none","type":"FLOAT","value":550},{"name":"imported/badge/icon-3/font-weight/info","type":"FLOAT","value":550},{"name":"imported/badge/icon-3/font-weight/success","type":"FLOAT","value":550},{"name":"imported/badge/icon-3/font-weight/warning","type":"FLOAT","value":550},{"name":"imported/badge/icon-3/font-weight/critical","type":"FLOAT","value":550},{"name":"imported/badge/icon-3/font-weight/attention","type":"FLOAT","value":550},{"name":"imported/badge/icon-3/font-weight/new","type":"FLOAT","value":700},{"name":"imported/badge/icon-3/font-weight/magic","type":"FLOAT","value":550},{"name":"imported/badge/icon-3/font-weight/info-strong","type":"FLOAT","value":550},{"name":"imported/badge/icon-3/font-weight/success-strong","type":"FLOAT","value":550},{"name":"imported/badge/icon-3/font-weight/warning-strong","type":"FLOAT","value":550},{"name":"imported/badge/icon-3/font-weight/critical-strong","type":"FLOAT","value":550},{"name":"imported/badge/icon-3/font-weight/attention-strong","type":"FLOAT","value":550},{"name":"imported/badge/icon-3/font-weight/read-only","type":"FLOAT","value":550},{"name":"imported/badge/icon-3/font-weight/enabled","type":"FLOAT","value":550},{"name":"imported/badge/label/color/none","type":"COLOR","value":"#616161"},{"name":"imported/badge/label/color/info","type":"COLOR","value":"#003a5a"},{"name":"imported/badge/label/color/success","type":"COLOR","value":"#014b40"},{"name":"imported/badge/label/color/warning","type":"COLOR","value":"#5e4200"},{"name":"imported/badge/label/color/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/badge/label/color/attention","type":"COLOR","value":"#4f4700"},{"name":"imported/badge/label/color/new","type":"COLOR","value":"#616161"},{"name":"imported/badge/label/color/magic","type":"COLOR","value":"#5700d1"},{"name":"imported/badge/label/color/info-strong","type":"COLOR","value":"#002133"},{"name":"imported/badge/label/color/success-strong","type":"COLOR","value":"#fafffb"},{"name":"imported/badge/label/color/warning-strong","type":"COLOR","value":"#251a00"},{"name":"imported/badge/label/color/critical-strong","type":"COLOR","value":"#fffafb"},{"name":"imported/badge/label/color/attention-strong","type":"COLOR","value":"#332e00"},{"name":"imported/badge/label/color/read-only","type":"COLOR","value":"#616161"},{"name":"imported/badge/label/color/enabled","type":"COLOR","value":"#303030"},{"name":"imported/badge/label/font-size","type":"FLOAT","value":12},{"name":"imported/badge/label/font-weight/none","type":"FLOAT","value":450},{"name":"imported/badge/label/font-weight/info","type":"FLOAT","value":450},{"name":"imported/badge/label/font-weight/success","type":"FLOAT","value":450},{"name":"imported/badge/label/font-weight/warning","type":"FLOAT","value":450},{"name":"imported/badge/label/font-weight/critical","type":"FLOAT","value":450},{"name":"imported/badge/label/font-weight/attention","type":"FLOAT","value":450},{"name":"imported/badge/label/font-weight/new","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/badge/label/font-weight/magic","type":"FLOAT","value":450},{"name":"imported/badge/label/font-weight/info-strong","type":"FLOAT","value":450},{"name":"imported/badge/label/font-weight/success-strong","type":"FLOAT","value":450},{"name":"imported/badge/label/font-weight/warning-strong","type":"FLOAT","value":450},{"name":"imported/badge/label/font-weight/critical-strong","type":"FLOAT","value":450},{"name":"imported/badge/label/font-weight/attention-strong","type":"FLOAT","value":450},{"name":"imported/badge/label/font-weight/read-only","type":"FLOAT","value":450},{"name":"imported/badge/label/font-weight/enabled","type":"FLOAT","value":450},{"name":"imported/badge/label/line-height","type":"FLOAT","value":16},{"name":"imported/banner/root/height/off/off","type":"FLOAT","value":88},{"name":"imported/banner/root/height/off/on","type":"FLOAT","value":128},{"name":"imported/banner/root/height/on/off","type":"FLOAT","value":92},{"name":"imported/banner/root/height/on/on","type":"FLOAT","value":132},{"name":"imported/banner/root/outline-color-state-focus-visible","type":"COLOR","value":"#005bd3"},{"name":"imported/banner/root/outline-width-state-focus-visible","type":"FLOAT","value":2},{"name":"imported/banner/box/height/off/off","type":"FLOAT","value":88},{"name":"imported/banner/box/height/off/on","type":"FLOAT","value":128},{"name":"imported/banner/box/height/on/off","type":"FLOAT","value":92},{"name":"imported/banner/box/height/on/on","type":"FLOAT","value":132},{"name":"imported/banner/blockstack/height/off/off","type":"FLOAT","value":88},{"name":"imported/banner/blockstack/height/off/on","type":"FLOAT","value":128},{"name":"imported/banner/blockstack/height/on/off","type":"FLOAT","value":92},{"name":"imported/banner/blockstack/height/on/on","type":"FLOAT","value":132},{"name":"imported/banner/box-2/background-color/success","type":"COLOR","value":"#047b5d"},{"name":"imported/banner/box-2/background-color/info","type":"COLOR","value":"#91d0ff"},{"name":"imported/banner/box-2/background-color/warning","type":"COLOR","value":"#ffb800"},{"name":"imported/banner/box-2/background-color/critical","type":"COLOR","value":"#c70a24"},{"name":"imported/banner/box-2/color/success","type":"COLOR","value":"#fafffb"},{"name":"imported/banner/box-2/color/info","type":"COLOR","value":"#002133"},{"name":"imported/banner/box-2/color/warning","type":"COLOR","value":"#251a00"},{"name":"imported/banner/box-2/color/critical","type":"COLOR","value":"#fffafb"},{"name":"imported/banner/box-2/height/off","type":"FLOAT","value":44},{"name":"imported/banner/box-2/height/on","type":"FLOAT","value":48},{"name":"imported/banner/inlinestack/color/success","type":"COLOR","value":"#fafffb"},{"name":"imported/banner/inlinestack/color/info","type":"COLOR","value":"#002133"},{"name":"imported/banner/inlinestack/color/warning","type":"COLOR","value":"#251a00"},{"name":"imported/banner/inlinestack/color/critical","type":"COLOR","value":"#fffafb"},{"name":"imported/banner/inlinestack/height/off","type":"FLOAT","value":20},{"name":"imported/banner/inlinestack/height/on","type":"FLOAT","value":24},{"name":"imported/banner/inlinestack-2/color/success","type":"COLOR","value":"#fafffb"},{"name":"imported/banner/inlinestack-2/color/info","type":"COLOR","value":"#002133"},{"name":"imported/banner/inlinestack-2/color/warning","type":"COLOR","value":"#251a00"},{"name":"imported/banner/inlinestack-2/color/critical","type":"COLOR","value":"#fffafb"},{"name":"imported/banner/inlinestack-2/width","type":"FLOAT","value":118.609},{"name":"imported/banner/part-0-0-0-0-0-0/color/success","type":"COLOR","value":"#fafffb"},{"name":"imported/banner/part-0-0-0-0-0-0/color/info","type":"COLOR","value":"#002133"},{"name":"imported/banner/part-0-0-0-0-0-0/color/warning","type":"COLOR","value":"#251a00"},{"name":"imported/banner/part-0-0-0-0-0-0/color/critical","type":"COLOR","value":"#fffafb"},{"name":"imported/banner/icon/color/success","type":"COLOR","value":"#fafffb"},{"name":"imported/banner/icon/color/info","type":"COLOR","value":"#002133"},{"name":"imported/banner/icon/color/warning","type":"COLOR","value":"#251a00"},{"name":"imported/banner/icon/color/critical","type":"COLOR","value":"#fffafb"},{"name":"imported/banner/title/color/success","type":"COLOR","value":"#fafffb"},{"name":"imported/banner/title/color/info","type":"COLOR","value":"#002133"},{"name":"imported/banner/title/color/warning","type":"COLOR","value":"#251a00"},{"name":"imported/banner/title/color/critical","type":"COLOR","value":"#fffafb"},{"name":"imported/banner/button/background-color","type":"COLOR","value":"#00000000"},{"name":"imported/banner/button-icon/margin-bottom","type":"FLOAT","value":-2},{"name":"imported/banner/button-icon/margin-top","type":"FLOAT","value":-2},{"name":"imported/banner/box-3/height/off","type":"FLOAT","value":44},{"name":"imported/banner/box-3/height/on","type":"FLOAT","value":84},{"name":"imported/banner/blockstack-2/height/off","type":"FLOAT","value":20},{"name":"imported/banner/blockstack-2/height/on","type":"FLOAT","value":60},{"name":"imported/banner/buttongroup/height","type":"FLOAT","value":40},{"name":"imported/banner/buttongroup/margin-left","type":"FLOAT","value":-8},{"name":"imported/banner/buttongroup/margin-top","type":"FLOAT","value":-8},{"name":"imported/banner/buttongroup/width","type":"FLOAT","value":303.328},{"name":"imported/banner/buttongroup-item/width","type":"FLOAT","value":82.0781},{"name":"imported/banner/button-2/background-color","type":"COLOR","value":"#ffffff"},{"name":"imported/banner/button-2/padding-bottom","type":"FLOAT","value":6},{"name":"imported/banner/button-2/padding-top","type":"FLOAT","value":6},{"name":"imported/banner/button-2/width","type":"FLOAT","value":82.0781},{"name":"imported/banner/label-3/font-weight","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/banner/label-3/line-height","type":"FLOAT","value":16},{"name":"imported/checkbox/root/height","type":"FLOAT","value":28},{"name":"imported/checkbox/choice-control/margin-right","type":"FLOAT","value":8},{"name":"imported/checkbox/input/color","type":"COLOR","value":"#000000"},{"name":"imported/checkbox/input/font-size","type":"FLOAT","value":13.3333},{"name":"imported/checkbox/input/font-weight","type":"FLOAT","value":400},{"name":"imported/checkbox/input/outline-color","type":"COLOR","value":"#000000"},{"name":"imported/checkbox/input/z-index","type":"FLOAT","value":100,"alias":"p/z-index-1"},{"name":"imported/checkbox/input/color-state-disabled","type":"COLOR","value":"#545454"},{"name":"imported/checkbox/input/outline-color-state-disabled","type":"COLOR","value":"#545454"},{"name":"imported/checkbox/input/outline-color-state-focus-visible","type":"COLOR","value":"#005fcc"},{"name":"imported/checkbox/input/outline-offset-state-focus-visible","type":"FLOAT","value":2},{"name":"imported/checkbox/input/outline-width-state-focus-visible","type":"FLOAT","value":1},{"name":"imported/checkbox/backdrop/background-color-state-active/unchecked","type":"COLOR","value":"#fafafa"},{"name":"imported/checkbox/backdrop/background-color-state-active/checked","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-bg-fill-brand-selected"},{"name":"imported/checkbox/backdrop/background-color-state-active/indeterminate","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-bg-fill-brand-selected"},{"name":"imported/checkbox/backdrop/background-color-state-disabled","type":"COLOR","value":"#00000014"},{"name":"imported/checkbox/backdrop/background-color-state-focus-visible/unchecked","type":"COLOR","value":"#fafafa"},{"name":"imported/checkbox/backdrop/background-color-state-focus-visible/checked","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-bg-fill-brand-selected"},{"name":"imported/checkbox/backdrop/background-color-state-focus-visible/indeterminate","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-bg-fill-brand-selected"},{"name":"imported/checkbox/backdrop/outline-color-state-focus-visible","type":"COLOR","value":"#005bd3"},{"name":"imported/checkbox/backdrop/outline-offset-state-focus-visible","type":"FLOAT","value":1},{"name":"imported/checkbox/backdrop/outline-width-state-focus-visible","type":"FLOAT","value":2},{"name":"imported/checkbox/backdrop/background-color-state-hover/unchecked","type":"COLOR","value":"#fafafa"},{"name":"imported/checkbox/backdrop/background-color-state-hover/checked","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-bg-fill-brand-selected"},{"name":"imported/checkbox/backdrop/background-color-state-hover/indeterminate","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-bg-fill-brand-selected"},{"name":"imported/checkbox/backdrop/border-bottom-color-state-hover/unchecked","type":"COLOR","value":"#616161"},{"name":"imported/checkbox/backdrop/border-bottom-color-state-hover/checked","type":"COLOR","value":"#303030"},{"name":"imported/checkbox/backdrop/border-bottom-color-state-hover/indeterminate","type":"COLOR","value":"#303030"},{"name":"imported/checkbox/backdrop/border-left-color-state-hover/unchecked","type":"COLOR","value":"#616161"},{"name":"imported/checkbox/backdrop/border-left-color-state-hover/checked","type":"COLOR","value":"#303030"},{"name":"imported/checkbox/backdrop/border-left-color-state-hover/indeterminate","type":"COLOR","value":"#303030"},{"name":"imported/checkbox/backdrop/border-right-color-state-hover/unchecked","type":"COLOR","value":"#616161"},{"name":"imported/checkbox/backdrop/border-right-color-state-hover/checked","type":"COLOR","value":"#303030"},{"name":"imported/checkbox/backdrop/border-right-color-state-hover/indeterminate","type":"COLOR","value":"#303030"},{"name":"imported/checkbox/backdrop/border-top-color-state-hover/unchecked","type":"COLOR","value":"#616161"},{"name":"imported/checkbox/backdrop/border-top-color-state-hover/checked","type":"COLOR","value":"#303030"},{"name":"imported/checkbox/backdrop/border-top-color-state-hover/indeterminate","type":"COLOR","value":"#303030"},{"name":"imported/checkbox/icon-6/color","type":"COLOR","value":"#ffffff"},{"name":"imported/checkbox/icon-6/fill","type":"COLOR","value":"rgba(255, 255, 255, 1)","alias":"p/color-text-brand-on-bg-fill"},{"name":"imported/checkbox/label/font-size","type":"FLOAT","value":13},{"name":"imported/checkbox/label/font-weight","type":"FLOAT","value":450},{"name":"imported/radio-button/root/height","type":"FLOAT","value":28},{"name":"imported/radio-button/root/padding-bottom","type":"FLOAT","value":4},{"name":"imported/radio-button/root/padding-top","type":"FLOAT","value":4},{"name":"imported/radio-button/root/width","type":"FLOAT","value":166.328},{"name":"imported/radio-button/choice-control/flex-shrink","type":"FLOAT","value":0},{"name":"imported/radio-button/choice-control/margin-right","type":"FLOAT","value":8},{"name":"imported/radio-button/choice-control/width","type":"FLOAT","value":20},{"name":"imported/radio-button/input/bottom","type":"FLOAT","value":17},{"name":"imported/radio-button/input/color","type":"COLOR","value":"#000000"},{"name":"imported/radio-button/input/font-size","type":"FLOAT","value":13.3333},{"name":"imported/radio-button/input/font-weight","type":"FLOAT","value":400},{"name":"imported/radio-button/input/outline-color","type":"COLOR","value":"#000000"},{"name":"imported/radio-button/input/right","type":"FLOAT","value":17},{"name":"imported/radio-button/input/color-state-disabled","type":"COLOR","value":"#545454"},{"name":"imported/radio-button/input/outline-color-state-disabled","type":"COLOR","value":"#545454"},{"name":"imported/radio-button/input/outline-color-state-focus-visible","type":"COLOR","value":"#005fcc"},{"name":"imported/radio-button/input/outline-width-state-focus-visible","type":"FLOAT","value":1},{"name":"imported/radio-button/backdrop/background-color-state-active/unchecked","type":"COLOR","value":"#fafafa"},{"name":"imported/radio-button/backdrop/background-color-state-active/checked","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-bg-fill-brand-selected"},{"name":"imported/radio-button/backdrop/background-color-state-disabled","type":"COLOR","value":"#00000014"},{"name":"imported/radio-button/backdrop/outline-color-state-focus-visible","type":"COLOR","value":"#005bd3"},{"name":"imported/radio-button/backdrop/outline-offset-state-focus-visible","type":"FLOAT","value":1},{"name":"imported/radio-button/backdrop/background-color-state-hover/unchecked","type":"COLOR","value":"#fafafa"},{"name":"imported/radio-button/backdrop/background-color-state-hover/checked","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-bg-fill-brand-selected"},{"name":"imported/radio-button/backdrop/border-bottom-color-state-hover/unchecked","type":"COLOR","value":"#616161"},{"name":"imported/radio-button/backdrop/border-bottom-color-state-hover/checked","type":"COLOR","value":"#303030"},{"name":"imported/radio-button/backdrop/border-left-color-state-hover/unchecked","type":"COLOR","value":"#616161"},{"name":"imported/radio-button/backdrop/border-left-color-state-hover/checked","type":"COLOR","value":"#303030"},{"name":"imported/radio-button/backdrop/border-right-color-state-hover/unchecked","type":"COLOR","value":"#616161"},{"name":"imported/radio-button/backdrop/border-right-color-state-hover/checked","type":"COLOR","value":"#303030"},{"name":"imported/radio-button/backdrop/border-top-color-state-hover/unchecked","type":"COLOR","value":"#616161"},{"name":"imported/radio-button/backdrop/border-top-color-state-hover/checked","type":"COLOR","value":"#303030"},{"name":"imported/radio-button/choice-label/width","type":"FLOAT","value":138.328},{"name":"imported/radio-button/label/font-size","type":"FLOAT","value":13},{"name":"imported/radio-button/label/font-weight","type":"FLOAT","value":450},{"name":"imported/radio-button/label/line-height","type":"FLOAT","value":20},{"name":"imported/avatar/root/border-bottom-left-radius/xs","type":"FLOAT","value":4},{"name":"imported/avatar/root/border-bottom-left-radius/sm","type":"FLOAT","value":6},{"name":"imported/avatar/root/border-bottom-left-radius/md","type":"FLOAT","value":6},{"name":"imported/avatar/root/border-bottom-left-radius/lg","type":"FLOAT","value":8},{"name":"imported/avatar/root/border-bottom-left-radius/xl","type":"FLOAT","value":8},{"name":"imported/avatar/root/border-bottom-right-radius/xs","type":"FLOAT","value":4},{"name":"imported/avatar/root/border-bottom-right-radius/sm","type":"FLOAT","value":6},{"name":"imported/avatar/root/border-bottom-right-radius/md","type":"FLOAT","value":6},{"name":"imported/avatar/root/border-bottom-right-radius/lg","type":"FLOAT","value":8},{"name":"imported/avatar/root/border-bottom-right-radius/xl","type":"FLOAT","value":8},{"name":"imported/avatar/root/border-top-left-radius/xs","type":"FLOAT","value":4},{"name":"imported/avatar/root/border-top-left-radius/sm","type":"FLOAT","value":6},{"name":"imported/avatar/root/border-top-left-radius/md","type":"FLOAT","value":6},{"name":"imported/avatar/root/border-top-left-radius/lg","type":"FLOAT","value":8},{"name":"imported/avatar/root/border-top-left-radius/xl","type":"FLOAT","value":8},{"name":"imported/avatar/root/border-top-right-radius/xs","type":"FLOAT","value":4},{"name":"imported/avatar/root/border-top-right-radius/sm","type":"FLOAT","value":6},{"name":"imported/avatar/root/border-top-right-radius/md","type":"FLOAT","value":6},{"name":"imported/avatar/root/border-top-right-radius/lg","type":"FLOAT","value":8},{"name":"imported/avatar/root/border-top-right-radius/xl","type":"FLOAT","value":8},{"name":"imported/avatar/root/height/xs","type":"FLOAT","value":20},{"name":"imported/avatar/root/height/sm","type":"FLOAT","value":24},{"name":"imported/avatar/root/height/md","type":"FLOAT","value":28},{"name":"imported/avatar/root/height/lg","type":"FLOAT","value":32},{"name":"imported/avatar/root/height/xl","type":"FLOAT","value":40},{"name":"imported/avatar/root/width/xs","type":"FLOAT","value":20},{"name":"imported/avatar/root/width/sm","type":"FLOAT","value":24},{"name":"imported/avatar/root/width/md","type":"FLOAT","value":28},{"name":"imported/avatar/root/width/lg","type":"FLOAT","value":32},{"name":"imported/avatar/root/width/xl","type":"FLOAT","value":40},{"name":"imported/avatar/initials/color/off","type":"COLOR","value":"#fdeffd"},{"name":"imported/avatar/initials/color/on","type":"COLOR","value":"#fff6f8"},{"name":"imported/avatar/initials/height/xs","type":"FLOAT","value":20},{"name":"imported/avatar/initials/height/sm","type":"FLOAT","value":24},{"name":"imported/avatar/initials/height/md","type":"FLOAT","value":28},{"name":"imported/avatar/initials/height/lg","type":"FLOAT","value":32},{"name":"imported/avatar/initials/height/xl","type":"FLOAT","value":40},{"name":"imported/avatar/initials/width/xs","type":"FLOAT","value":20},{"name":"imported/avatar/initials/width/sm","type":"FLOAT","value":24},{"name":"imported/avatar/initials/width/md","type":"FLOAT","value":28},{"name":"imported/avatar/initials/width/lg","type":"FLOAT","value":32},{"name":"imported/avatar/initials/width/xl","type":"FLOAT","value":40},{"name":"imported/spinner/root/color","type":"COLOR","value":"#303030"},{"name":"imported/spinner/root/width/small","type":"FLOAT","value":20},{"name":"imported/spinner/root/width/large","type":"FLOAT","value":44},{"name":"imported/progress-bar/root/height/small","type":"FLOAT","value":8},{"name":"imported/progress-bar/root/height/medium","type":"FLOAT","value":16},{"name":"imported/progress-bar/root/height/large","type":"FLOAT","value":32},{"name":"imported/progress-bar/root/width","type":"FLOAT","value":288},{"name":"imported/progress-bar/progress/bottom","type":"FLOAT","value":799},{"name":"imported/progress-bar/progress/left","type":"FLOAT","value":16},{"name":"imported/progress-bar/progress/right","type":"FLOAT","value":583},{"name":"imported/progress-bar/progress/vertical-align","type":"FLOAT","value":-2.6},{"name":"imported/progress-bar/indicator/height/small","type":"FLOAT","value":8},{"name":"imported/progress-bar/indicator/height/medium","type":"FLOAT","value":16},{"name":"imported/progress-bar/indicator/height/large","type":"FLOAT","value":32},{"name":"imported/progress-bar/label/bottom/small","type":"FLOAT","value":7},{"name":"imported/progress-bar/label/bottom/medium","type":"FLOAT","value":15},{"name":"imported/progress-bar/label/bottom/large","type":"FLOAT","value":31},{"name":"imported/progress-bar/label/right","type":"FLOAT","value":287},{"name":"imported/thumbnail/root/height/extraSmall","type":"FLOAT","value":24},{"name":"imported/thumbnail/root/height/small","type":"FLOAT","value":40},{"name":"imported/thumbnail/root/height/medium","type":"FLOAT","value":60},{"name":"imported/thumbnail/root/height/large","type":"FLOAT","value":80},{"name":"imported/thumbnail/root/width/extraSmall","type":"FLOAT","value":24},{"name":"imported/thumbnail/root/width/small","type":"FLOAT","value":40},{"name":"imported/thumbnail/root/width/medium","type":"FLOAT","value":60},{"name":"imported/thumbnail/root/width/large","type":"FLOAT","value":80},{"name":"imported/thumbnail/part-0/color","type":"COLOR","value":"rgba(138, 138, 138, 1)","alias":"p/color-icon-secondary"},{"name":"imported/thumbnail/part-0/height/extraSmall","type":"FLOAT","value":24},{"name":"imported/thumbnail/part-0/height/small","type":"FLOAT","value":40},{"name":"imported/thumbnail/part-0/height/medium","type":"FLOAT","value":60},{"name":"imported/thumbnail/part-0/height/large","type":"FLOAT","value":80},{"name":"imported/thumbnail/part-0/width/extraSmall","type":"FLOAT","value":24},{"name":"imported/thumbnail/part-0/width/small","type":"FLOAT","value":40},{"name":"imported/thumbnail/part-0/width/medium","type":"FLOAT","value":60},{"name":"imported/thumbnail/part-0/width/large","type":"FLOAT","value":80},{"name":"imported/text/root/color/none","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-text"},{"name":"imported/text/root/color/base","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-text"},{"name":"imported/text/root/color/disabled","type":"COLOR","value":"rgba(181, 181, 181, 1)","alias":"p/color-text-disabled"},{"name":"imported/text/root/color/inherit","type":"COLOR","value":"#303030"},{"name":"imported/text/root/color/success","type":"COLOR","value":"rgba(1, 75, 64, 1)","alias":"p/color-text-success"},{"name":"imported/text/root/color/critical","type":"COLOR","value":"rgba(142, 11, 33, 1)","alias":"p/color-text-critical"},{"name":"imported/text/root/color/caution","type":"COLOR","value":"rgba(79, 71, 0, 1)","alias":"p/color-text-caution"},{"name":"imported/text/root/color/subdued","type":"COLOR","value":"rgba(97, 97, 97, 1)","alias":"p/color-text-secondary"},{"name":"imported/text/root/color/text-inverse","type":"COLOR","value":"rgba(227, 227, 227, 1)","alias":"p/color-text-inverse"},{"name":"imported/text/root/color/text-inverse-secondary","type":"COLOR","value":"rgba(181, 181, 181, 1)","alias":"p/color-text-inverse-secondary"},{"name":"imported/text/root/color/magic","type":"COLOR","value":"rgba(87, 0, 209, 1)","alias":"p/color-text-magic"},{"name":"imported/text/root/color/magic-subdued","type":"COLOR","value":"rgba(113, 38, 255, 1)","alias":"p/color-text-magic-secondary"},{"name":"imported/text/root/font-size/none","type":"FLOAT","value":13},{"name":"imported/text/root/font-size/headingXs","type":"FLOAT","value":12},{"name":"imported/text/root/font-size/headingSm","type":"FLOAT","value":13},{"name":"imported/text/root/font-size/headingMd","type":"FLOAT","value":14},{"name":"imported/text/root/font-size/headingLg","type":"FLOAT","value":20},{"name":"imported/text/root/font-size/headingXl","type":"FLOAT","value":20},{"name":"imported/text/root/font-size/heading2xl","type":"FLOAT","value":24},{"name":"imported/text/root/font-size/heading3xl","type":"FLOAT","value":30},{"name":"imported/text/root/font-size/bodyXs","type":"FLOAT","value":11},{"name":"imported/text/root/font-size/bodySm","type":"FLOAT","value":12},{"name":"imported/text/root/font-size/bodyMd","type":"FLOAT","value":13},{"name":"imported/text/root/font-size/bodyLg","type":"FLOAT","value":14},{"name":"imported/text/root/font-weight/none/none","type":"FLOAT","value":450,"alias":"p/font-weight-regular"},{"name":"imported/text/root/font-weight/none/regular","type":"FLOAT","value":450,"alias":"p/font-weight-regular"},{"name":"imported/text/root/font-weight/none/medium","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/text/root/font-weight/none/semibold","type":"FLOAT","value":650,"alias":"p/font-weight-semibold"},{"name":"imported/text/root/font-weight/none/bold","type":"FLOAT","value":700,"alias":"p/font-weight-bold"},{"name":"imported/text/root/font-weight/headingXs/none","type":"FLOAT","value":650,"alias":"p/font-weight-semibold"},{"name":"imported/text/root/font-weight/headingXs/semibold","type":"FLOAT","value":650,"alias":"p/font-weight-semibold"},{"name":"imported/text/root/font-weight/headingXs/bold","type":"FLOAT","value":700,"alias":"p/font-weight-bold"},{"name":"imported/text/root/font-weight/headingXs/regular","type":"FLOAT","value":450,"alias":"p/font-weight-regular"},{"name":"imported/text/root/font-weight/headingXs/medium","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/text/root/font-weight/headingSm/none","type":"FLOAT","value":650,"alias":"p/font-weight-semibold"},{"name":"imported/text/root/font-weight/headingSm/regular","type":"FLOAT","value":450,"alias":"p/font-weight-regular"},{"name":"imported/text/root/font-weight/headingSm/medium","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/text/root/font-weight/headingSm/semibold","type":"FLOAT","value":650,"alias":"p/font-weight-semibold"},{"name":"imported/text/root/font-weight/headingSm/bold","type":"FLOAT","value":700,"alias":"p/font-weight-bold"},{"name":"imported/text/root/font-weight/headingMd/none","type":"FLOAT","value":650,"alias":"p/font-weight-semibold"},{"name":"imported/text/root/font-weight/headingMd/medium","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/text/root/font-weight/headingMd/semibold","type":"FLOAT","value":650,"alias":"p/font-weight-semibold"},{"name":"imported/text/root/font-weight/headingMd/bold","type":"FLOAT","value":700,"alias":"p/font-weight-bold"},{"name":"imported/text/root/font-weight/headingMd/regular","type":"FLOAT","value":450,"alias":"p/font-weight-regular"},{"name":"imported/text/root/font-weight/headingLg/none","type":"FLOAT","value":650,"alias":"p/font-weight-semibold"},{"name":"imported/text/root/font-weight/headingLg/bold","type":"FLOAT","value":700,"alias":"p/font-weight-bold"},{"name":"imported/text/root/font-weight/headingLg/regular","type":"FLOAT","value":450,"alias":"p/font-weight-regular"},{"name":"imported/text/root/font-weight/headingLg/medium","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/text/root/font-weight/headingLg/semibold","type":"FLOAT","value":650,"alias":"p/font-weight-semibold"},{"name":"imported/text/root/font-weight/headingXl/none","type":"FLOAT","value":650,"alias":"p/font-weight-semibold"},{"name":"imported/text/root/font-weight/headingXl/regular","type":"FLOAT","value":450,"alias":"p/font-weight-regular"},{"name":"imported/text/root/font-weight/headingXl/medium","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/text/root/font-weight/headingXl/semibold","type":"FLOAT","value":650,"alias":"p/font-weight-semibold"},{"name":"imported/text/root/font-weight/headingXl/bold","type":"FLOAT","value":700,"alias":"p/font-weight-bold"},{"name":"imported/text/root/font-weight/heading2xl/none","type":"FLOAT","value":700,"alias":"p/font-weight-bold"},{"name":"imported/text/root/font-weight/heading2xl/semibold","type":"FLOAT","value":650,"alias":"p/font-weight-semibold"},{"name":"imported/text/root/font-weight/heading2xl/bold","type":"FLOAT","value":700,"alias":"p/font-weight-bold"},{"name":"imported/text/root/font-weight/heading2xl/regular","type":"FLOAT","value":450,"alias":"p/font-weight-regular"},{"name":"imported/text/root/font-weight/heading2xl/medium","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/text/root/font-weight/heading3xl/none","type":"FLOAT","value":700,"alias":"p/font-weight-bold"},{"name":"imported/text/root/font-weight/heading3xl/regular","type":"FLOAT","value":450,"alias":"p/font-weight-regular"},{"name":"imported/text/root/font-weight/heading3xl/medium","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/text/root/font-weight/heading3xl/semibold","type":"FLOAT","value":650,"alias":"p/font-weight-semibold"},{"name":"imported/text/root/font-weight/heading3xl/bold","type":"FLOAT","value":700,"alias":"p/font-weight-bold"},{"name":"imported/text/root/font-weight/bodyXs/none","type":"FLOAT","value":450,"alias":"p/font-weight-regular"},{"name":"imported/text/root/font-weight/bodyXs/medium","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/text/root/font-weight/bodyXs/semibold","type":"FLOAT","value":650,"alias":"p/font-weight-semibold"},{"name":"imported/text/root/font-weight/bodyXs/bold","type":"FLOAT","value":700,"alias":"p/font-weight-bold"},{"name":"imported/text/root/font-weight/bodyXs/regular","type":"FLOAT","value":450,"alias":"p/font-weight-regular"},{"name":"imported/text/root/font-weight/bodySm/none","type":"FLOAT","value":450,"alias":"p/font-weight-regular"},{"name":"imported/text/root/font-weight/bodySm/bold","type":"FLOAT","value":700,"alias":"p/font-weight-bold"},{"name":"imported/text/root/font-weight/bodySm/regular","type":"FLOAT","value":450,"alias":"p/font-weight-regular"},{"name":"imported/text/root/font-weight/bodySm/medium","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/text/root/font-weight/bodySm/semibold","type":"FLOAT","value":650,"alias":"p/font-weight-semibold"},{"name":"imported/text/root/font-weight/bodyMd/none","type":"FLOAT","value":450,"alias":"p/font-weight-regular"},{"name":"imported/text/root/font-weight/bodyMd/regular","type":"FLOAT","value":450,"alias":"p/font-weight-regular"},{"name":"imported/text/root/font-weight/bodyMd/medium","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/text/root/font-weight/bodyMd/semibold","type":"FLOAT","value":650,"alias":"p/font-weight-semibold"},{"name":"imported/text/root/font-weight/bodyMd/bold","type":"FLOAT","value":700,"alias":"p/font-weight-bold"},{"name":"imported/text/root/font-weight/bodyLg/none","type":"FLOAT","value":450,"alias":"p/font-weight-regular"},{"name":"imported/text/root/font-weight/bodyLg/semibold","type":"FLOAT","value":650,"alias":"p/font-weight-semibold"},{"name":"imported/text/root/font-weight/bodyLg/bold","type":"FLOAT","value":700,"alias":"p/font-weight-bold"},{"name":"imported/text/root/font-weight/bodyLg/regular","type":"FLOAT","value":450,"alias":"p/font-weight-regular"},{"name":"imported/text/root/font-weight/bodyLg/medium","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/text/root/line-height/none","type":"FLOAT","value":20},{"name":"imported/text/root/line-height/headingXs","type":"FLOAT","value":16},{"name":"imported/text/root/line-height/headingSm","type":"FLOAT","value":20},{"name":"imported/text/root/line-height/headingMd","type":"FLOAT","value":20},{"name":"imported/text/root/line-height/headingLg","type":"FLOAT","value":24},{"name":"imported/text/root/line-height/headingXl","type":"FLOAT","value":24},{"name":"imported/text/root/line-height/heading2xl","type":"FLOAT","value":32},{"name":"imported/text/root/line-height/heading3xl","type":"FLOAT","value":40},{"name":"imported/text/root/line-height/bodyXs","type":"FLOAT","value":12},{"name":"imported/text/root/line-height/bodySm","type":"FLOAT","value":16},{"name":"imported/text/root/line-height/bodyMd","type":"FLOAT","value":20},{"name":"imported/text/root/line-height/bodyLg","type":"FLOAT","value":20},{"name":"imported/text/root/width/none/none","type":"FLOAT","value":144.75},{"name":"imported/text/root/width/none/regular","type":"FLOAT","value":144.75},{"name":"imported/text/root/width/none/medium","type":"FLOAT","value":146.328},{"name":"imported/text/root/width/none/semibold","type":"FLOAT","value":147.906},{"name":"imported/text/root/width/none/bold","type":"FLOAT","value":147.906},{"name":"imported/text/root/width/headingXs/none","type":"FLOAT","value":136.531},{"name":"imported/text/root/width/headingXs/semibold","type":"FLOAT","value":136.531},{"name":"imported/text/root/width/headingXs/bold","type":"FLOAT","value":136.531},{"name":"imported/text/root/width/headingXs/regular","type":"FLOAT","value":133.609},{"name":"imported/text/root/width/headingXs/medium","type":"FLOAT","value":135.062},{"name":"imported/text/root/width/headingSm/none","type":"FLOAT","value":147.906},{"name":"imported/text/root/width/headingSm/regular","type":"FLOAT","value":144.75},{"name":"imported/text/root/width/headingSm/medium","type":"FLOAT","value":146.328},{"name":"imported/text/root/width/headingSm/semibold","type":"FLOAT","value":147.906},{"name":"imported/text/root/width/headingSm/bold","type":"FLOAT","value":147.906},{"name":"imported/text/root/width/headingMd/none","type":"FLOAT","value":159.281},{"name":"imported/text/root/width/headingMd/medium","type":"FLOAT","value":157.578},{"name":"imported/text/root/width/headingMd/semibold","type":"FLOAT","value":159.281},{"name":"imported/text/root/width/headingMd/bold","type":"FLOAT","value":159.281},{"name":"imported/text/root/width/headingMd/regular","type":"FLOAT","value":155.875},{"name":"imported/text/root/width/headingLg/none","type":"FLOAT","value":219.031},{"name":"imported/text/root/width/headingLg/bold","type":"FLOAT","value":219.031},{"name":"imported/text/root/width/headingLg/regular","type":"FLOAT","value":212.828},{"name":"imported/text/root/width/headingLg/medium","type":"FLOAT","value":215.938},{"name":"imported/text/root/width/headingLg/semibold","type":"FLOAT","value":219.031},{"name":"imported/text/root/width/headingXl/none","type":"FLOAT","value":219.031},{"name":"imported/text/root/width/headingXl/regular","type":"FLOAT","value":212.828},{"name":"imported/text/root/width/headingXl/medium","type":"FLOAT","value":215.938},{"name":"imported/text/root/width/headingXl/semibold","type":"FLOAT","value":219.031},{"name":"imported/text/root/width/headingXl/bold","type":"FLOAT","value":219.031},{"name":"imported/text/root/width/heading2xl/none","type":"FLOAT","value":260.438},{"name":"imported/text/root/width/heading2xl/semibold","type":"FLOAT","value":260.438},{"name":"imported/text/root/width/heading2xl/bold","type":"FLOAT","value":260.438},{"name":"imported/text/root/width/heading2xl/regular","type":"FLOAT","value":251.906},{"name":"imported/text/root/width/heading2xl/medium","type":"FLOAT","value":256.172},{"name":"imported/text/root/width/heading3xl/none","type":"FLOAT","value":288},{"name":"imported/text/root/width/heading3xl/regular","type":"FLOAT","value":288},{"name":"imported/text/root/width/heading3xl/medium","type":"FLOAT","value":288},{"name":"imported/text/root/width/heading3xl/semibold","type":"FLOAT","value":288},{"name":"imported/text/root/width/heading3xl/bold","type":"FLOAT","value":288},{"name":"imported/text/root/width/bodyXs/none","type":"FLOAT","value":122.484},{"name":"imported/text/root/width/bodyXs/medium","type":"FLOAT","value":123.812},{"name":"imported/text/root/width/bodyXs/semibold","type":"FLOAT","value":125.141},{"name":"imported/text/root/width/bodyXs/bold","type":"FLOAT","value":125.141},{"name":"imported/text/root/width/bodyXs/regular","type":"FLOAT","value":122.484},{"name":"imported/text/root/width/bodySm/none","type":"FLOAT","value":133.609},{"name":"imported/text/root/width/bodySm/bold","type":"FLOAT","value":136.531},{"name":"imported/text/root/width/bodySm/regular","type":"FLOAT","value":133.609},{"name":"imported/text/root/width/bodySm/medium","type":"FLOAT","value":135.062},{"name":"imported/text/root/width/bodySm/semibold","type":"FLOAT","value":136.531},{"name":"imported/text/root/width/bodyMd/none","type":"FLOAT","value":144.75},{"name":"imported/text/root/width/bodyMd/regular","type":"FLOAT","value":144.75},{"name":"imported/text/root/width/bodyMd/medium","type":"FLOAT","value":146.328},{"name":"imported/text/root/width/bodyMd/semibold","type":"FLOAT","value":147.906},{"name":"imported/text/root/width/bodyMd/bold","type":"FLOAT","value":147.906},{"name":"imported/text/root/width/bodyLg/none","type":"FLOAT","value":155.875},{"name":"imported/text/root/width/bodyLg/semibold","type":"FLOAT","value":159.281},{"name":"imported/text/root/width/bodyLg/bold","type":"FLOAT","value":159.281},{"name":"imported/text/root/width/bodyLg/regular","type":"FLOAT","value":155.875},{"name":"imported/text/root/width/bodyLg/medium","type":"FLOAT","value":157.578},{"name":"imported/text-field/root/height/slim","type":"FLOAT","value":52},{"name":"imported/text-field/root/height/medium","type":"FLOAT","value":60},{"name":"imported/text-field/root/width/off/off","type":"FLOAT","value":211},{"name":"imported/text-field/root/width/off/on","type":"FLOAT","value":242.406},{"name":"imported/text-field/root/width/on/off","type":"FLOAT","value":225.406},{"name":"imported/text-field/root/width/on/on","type":"FLOAT","value":256.812},{"name":"imported/text-field/labelled-labelwrapper/width/off/off","type":"FLOAT","value":211},{"name":"imported/text-field/labelled-labelwrapper/width/off/on","type":"FLOAT","value":242.406},{"name":"imported/text-field/labelled-labelwrapper/width/on/off","type":"FLOAT","value":225.406},{"name":"imported/text-field/labelled-labelwrapper/width/on/on","type":"FLOAT","value":256.812},{"name":"imported/text-field/label/width","type":"FLOAT","value":70.8125},{"name":"imported/text-field/label-text/width","type":"FLOAT","value":70.8125},{"name":"imported/text-field/connected/height/slim","type":"FLOAT","value":28},{"name":"imported/text-field/connected/height/medium","type":"FLOAT","value":36},{"name":"imported/text-field/connected/width/off/off","type":"FLOAT","value":211},{"name":"imported/text-field/connected/width/off/on","type":"FLOAT","value":242.406},{"name":"imported/text-field/connected/width/on/off","type":"FLOAT","value":225.406},{"name":"imported/text-field/connected/width/on/on","type":"FLOAT","value":256.812},{"name":"imported/text-field/connected-item/height/slim","type":"FLOAT","value":28},{"name":"imported/text-field/connected-item/height/medium","type":"FLOAT","value":36},{"name":"imported/text-field/connected-item/width/off/off","type":"FLOAT","value":211},{"name":"imported/text-field/connected-item/width/off/on","type":"FLOAT","value":242.406},{"name":"imported/text-field/connected-item/width/on/off","type":"FLOAT","value":225.406},{"name":"imported/text-field/connected-item/width/on/on","type":"FLOAT","value":256.812},{"name":"imported/text-field/connected-item/z-index-state-active","type":"FLOAT","value":30},{"name":"imported/text-field/connected-item/z-index-state-focus-visible","type":"FLOAT","value":30},{"name":"imported/text-field/textfield/height/slim","type":"FLOAT","value":28},{"name":"imported/text-field/textfield/height/medium","type":"FLOAT","value":36},{"name":"imported/text-field/textfield/width/off/off","type":"FLOAT","value":211},{"name":"imported/text-field/textfield/width/off/on","type":"FLOAT","value":242.406},{"name":"imported/text-field/textfield/width/on/off","type":"FLOAT","value":225.406},{"name":"imported/text-field/textfield/width/on/on","type":"FLOAT","value":256.812},{"name":"imported/text-field/prefix/margin-right","type":"FLOAT","value":6},{"name":"imported/text-field/prefix/width","type":"FLOAT","value":8.40625},{"name":"imported/text-field/input/height/slim","type":"FLOAT","value":28},{"name":"imported/text-field/input/height/medium","type":"FLOAT","value":36},{"name":"imported/text-field/input/width/off/off","type":"FLOAT","value":211},{"name":"imported/text-field/input/width/off/on","type":"FLOAT","value":199},{"name":"imported/text-field/input/width/on/off","type":"FLOAT","value":199},{"name":"imported/text-field/input/width/on/on","type":"FLOAT","value":187},{"name":"imported/text-field/suffix/width","type":"FLOAT","value":27.4062},{"name":"imported/text-field/clearbutton-2/background-color","type":"COLOR","value":"#00000000"},{"name":"imported/text-field/clearbutton-2/bottom/slim","type":"FLOAT","value":4},{"name":"imported/text-field/clearbutton-2/bottom/medium","type":"FLOAT","value":8},{"name":"imported/text-field/clearbutton-2/color","type":"COLOR","value":"#303030"},{"name":"imported/text-field/clearbutton-2/left/off/off","type":"FLOAT","value":175},{"name":"imported/text-field/clearbutton-2/left/off/on","type":"FLOAT","value":206.406},{"name":"imported/text-field/clearbutton-2/left/on/off","type":"FLOAT","value":189.406},{"name":"imported/text-field/clearbutton-2/left/on/on","type":"FLOAT","value":220.812},{"name":"imported/text-field/clearbutton-2/top/slim","type":"FLOAT","value":4},{"name":"imported/text-field/clearbutton-2/top/medium","type":"FLOAT","value":8},{"name":"imported/text-field/backdrop/height/slim","type":"FLOAT","value":28},{"name":"imported/text-field/backdrop/height/medium","type":"FLOAT","value":36},{"name":"imported/text-field/backdrop/width/off/off","type":"FLOAT","value":211},{"name":"imported/text-field/backdrop/width/off/on","type":"FLOAT","value":242.406},{"name":"imported/text-field/backdrop/width/on/off","type":"FLOAT","value":225.406},{"name":"imported/text-field/backdrop/width/on/on","type":"FLOAT","value":256.812},{"name":"imported/text-field/backdrop/z-index","type":"FLOAT","value":10},{"name":"imported/text-field/backdrop/background-color-state-active","type":"COLOR","value":"#f7f7f7"},{"name":"imported/text-field/backdrop/outline-color-state-active","type":"COLOR","value":"#005bd3"},{"name":"imported/text-field/backdrop/outline-offset-state-active/inherit/slim","type":"FLOAT","value":1},{"name":"imported/text-field/backdrop/outline-offset-state-active/inherit/medium","type":"FLOAT","value":1},{"name":"imported/text-field/backdrop/outline-offset-state-active/borderless/medium","type":"FLOAT","value":1},{"name":"imported/text-field/backdrop/outline-offset-state-active/borderless/slim","type":"FLOAT","value":0},{"name":"imported/text-field/backdrop/outline-width-state-active","type":"FLOAT","value":2},{"name":"imported/text-field/backdrop/background-color-state-disabled","type":"COLOR","value":"#0000000d"},{"name":"imported/text-field/backdrop/background-color-state-focus-visible","type":"COLOR","value":"#f7f7f7"},{"name":"imported/text-field/backdrop/outline-color-state-focus-visible","type":"COLOR","value":"#005bd3"},{"name":"imported/text-field/backdrop/outline-offset-state-focus-visible/inherit/slim","type":"FLOAT","value":1},{"name":"imported/text-field/backdrop/outline-offset-state-focus-visible/inherit/medium","type":"FLOAT","value":1},{"name":"imported/text-field/backdrop/outline-offset-state-focus-visible/borderless/medium","type":"FLOAT","value":1},{"name":"imported/text-field/backdrop/outline-offset-state-focus-visible/borderless/slim","type":"FLOAT","value":0},{"name":"imported/text-field/backdrop/outline-width-state-focus-visible","type":"FLOAT","value":2},{"name":"imported/text-field/backdrop/background-color-state-hover","type":"COLOR","value":"#fafafa"}];
+const MINTED_VARIABLES = [{"name":"imported/button/root/background-color/plain/none","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color/plain/critical","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color/plain/success","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color/primary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/root/background-color/primary/critical","type":"COLOR","value":"#c70a24"},{"name":"imported/button/root/background-color/primary/success","type":"COLOR","value":"#047b5d"},{"name":"imported/button/root/background-color/secondary/none","type":"COLOR","value":"#ffffff"},{"name":"imported/button/root/background-color/secondary/critical","type":"COLOR","value":"#ffffff"},{"name":"imported/button/root/background-color/secondary/success","type":"COLOR","value":"#ffffff"},{"name":"imported/button/root/background-color/tertiary/none","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color/tertiary/critical","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color/tertiary/success","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color/monochromePlain/none","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color/monochromePlain/critical","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color/monochromePlain/success","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/color/plain/none","type":"COLOR","value":"rgba(0, 91, 211, 1)","alias":"p/color-text-link"},{"name":"imported/button/root/color/plain/critical","type":"COLOR","value":"rgba(142, 11, 33, 1)","alias":"p/color-text-critical"},{"name":"imported/button/root/color/plain/success","type":"COLOR","value":"rgba(1, 75, 64, 1)","alias":"p/color-text-success"},{"name":"imported/button/root/color/primary/none","type":"COLOR","value":"rgba(255, 255, 255, 1)","alias":"p/color-text-brand-on-bg-fill"},{"name":"imported/button/root/color/primary/critical","type":"COLOR","value":"rgba(255, 255, 255, 1)","alias":"p/color-text-brand-on-bg-fill"},{"name":"imported/button/root/color/primary/success","type":"COLOR","value":"rgba(255, 255, 255, 1)","alias":"p/color-text-brand-on-bg-fill"},{"name":"imported/button/root/color/secondary/none","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-text"},{"name":"imported/button/root/color/secondary/critical","type":"COLOR","value":"rgba(142, 11, 33, 1)","alias":"p/color-text-critical"},{"name":"imported/button/root/color/secondary/success","type":"COLOR","value":"rgba(1, 75, 64, 1)","alias":"p/color-text-success"},{"name":"imported/button/root/color/tertiary/none","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-text"},{"name":"imported/button/root/color/tertiary/critical","type":"COLOR","value":"rgba(142, 11, 33, 1)","alias":"p/color-text-critical"},{"name":"imported/button/root/color/tertiary/success","type":"COLOR","value":"rgba(1, 75, 64, 1)","alias":"p/color-text-success"},{"name":"imported/button/root/color/monochromePlain/none","type":"COLOR","value":"#303030"},{"name":"imported/button/root/color/monochromePlain/critical","type":"COLOR","value":"#303030"},{"name":"imported/button/root/color/monochromePlain/success","type":"COLOR","value":"#303030"},{"name":"imported/button/root/font-size","type":"FLOAT","value":13},{"name":"imported/button/root/font-weight","type":"FLOAT","value":450},{"name":"imported/button/root/line-height","type":"FLOAT","value":20},{"name":"imported/button/root/margin-bottom/plain/micro","type":"FLOAT","value":-4},{"name":"imported/button/root/margin-bottom/plain/slim","type":"FLOAT","value":-6},{"name":"imported/button/root/margin-bottom/plain/medium","type":"FLOAT","value":-6},{"name":"imported/button/root/margin-bottom/plain/large","type":"FLOAT","value":-6},{"name":"imported/button/root/margin-bottom/primary/micro","type":"FLOAT","value":0},{"name":"imported/button/root/margin-bottom/primary/slim","type":"FLOAT","value":0},{"name":"imported/button/root/margin-bottom/primary/medium","type":"FLOAT","value":0},{"name":"imported/button/root/margin-bottom/primary/large","type":"FLOAT","value":0},{"name":"imported/button/root/margin-bottom/secondary/micro","type":"FLOAT","value":0},{"name":"imported/button/root/margin-bottom/secondary/slim","type":"FLOAT","value":0},{"name":"imported/button/root/margin-bottom/secondary/medium","type":"FLOAT","value":0},{"name":"imported/button/root/margin-bottom/secondary/large","type":"FLOAT","value":0},{"name":"imported/button/root/margin-bottom/tertiary/micro","type":"FLOAT","value":0},{"name":"imported/button/root/margin-bottom/tertiary/slim","type":"FLOAT","value":0},{"name":"imported/button/root/margin-bottom/tertiary/medium","type":"FLOAT","value":0},{"name":"imported/button/root/margin-bottom/tertiary/large","type":"FLOAT","value":0},{"name":"imported/button/root/margin-bottom/monochromePlain/micro","type":"FLOAT","value":-4},{"name":"imported/button/root/margin-bottom/monochromePlain/slim","type":"FLOAT","value":-6},{"name":"imported/button/root/margin-bottom/monochromePlain/medium","type":"FLOAT","value":-6},{"name":"imported/button/root/margin-bottom/monochromePlain/large","type":"FLOAT","value":-6},{"name":"imported/button/root/margin-left/plain/micro","type":"FLOAT","value":-8},{"name":"imported/button/root/margin-left/plain/slim","type":"FLOAT","value":-12},{"name":"imported/button/root/margin-left/plain/medium","type":"FLOAT","value":-12},{"name":"imported/button/root/margin-left/plain/large","type":"FLOAT","value":-12},{"name":"imported/button/root/margin-left/primary/micro","type":"FLOAT","value":0},{"name":"imported/button/root/margin-left/primary/slim","type":"FLOAT","value":0},{"name":"imported/button/root/margin-left/primary/medium","type":"FLOAT","value":0},{"name":"imported/button/root/margin-left/primary/large","type":"FLOAT","value":0},{"name":"imported/button/root/margin-left/secondary/micro","type":"FLOAT","value":0},{"name":"imported/button/root/margin-left/secondary/slim","type":"FLOAT","value":0},{"name":"imported/button/root/margin-left/secondary/medium","type":"FLOAT","value":0},{"name":"imported/button/root/margin-left/secondary/large","type":"FLOAT","value":0},{"name":"imported/button/root/margin-left/tertiary/micro","type":"FLOAT","value":0},{"name":"imported/button/root/margin-left/tertiary/slim","type":"FLOAT","value":0},{"name":"imported/button/root/margin-left/tertiary/medium","type":"FLOAT","value":0},{"name":"imported/button/root/margin-left/tertiary/large","type":"FLOAT","value":0},{"name":"imported/button/root/margin-left/monochromePlain/micro","type":"FLOAT","value":-8},{"name":"imported/button/root/margin-left/monochromePlain/slim","type":"FLOAT","value":-12},{"name":"imported/button/root/margin-left/monochromePlain/medium","type":"FLOAT","value":-12},{"name":"imported/button/root/margin-left/monochromePlain/large","type":"FLOAT","value":-12},{"name":"imported/button/root/margin-right/plain/micro","type":"FLOAT","value":-8},{"name":"imported/button/root/margin-right/plain/slim","type":"FLOAT","value":-12},{"name":"imported/button/root/margin-right/plain/medium","type":"FLOAT","value":-12},{"name":"imported/button/root/margin-right/plain/large","type":"FLOAT","value":-12},{"name":"imported/button/root/margin-right/primary/micro","type":"FLOAT","value":0},{"name":"imported/button/root/margin-right/primary/slim","type":"FLOAT","value":0},{"name":"imported/button/root/margin-right/primary/medium","type":"FLOAT","value":0},{"name":"imported/button/root/margin-right/primary/large","type":"FLOAT","value":0},{"name":"imported/button/root/margin-right/secondary/micro","type":"FLOAT","value":0},{"name":"imported/button/root/margin-right/secondary/slim","type":"FLOAT","value":0},{"name":"imported/button/root/margin-right/secondary/medium","type":"FLOAT","value":0},{"name":"imported/button/root/margin-right/secondary/large","type":"FLOAT","value":0},{"name":"imported/button/root/margin-right/tertiary/micro","type":"FLOAT","value":0},{"name":"imported/button/root/margin-right/tertiary/slim","type":"FLOAT","value":0},{"name":"imported/button/root/margin-right/tertiary/medium","type":"FLOAT","value":0},{"name":"imported/button/root/margin-right/tertiary/large","type":"FLOAT","value":0},{"name":"imported/button/root/margin-right/monochromePlain/micro","type":"FLOAT","value":-8},{"name":"imported/button/root/margin-right/monochromePlain/slim","type":"FLOAT","value":-12},{"name":"imported/button/root/margin-right/monochromePlain/medium","type":"FLOAT","value":-12},{"name":"imported/button/root/margin-right/monochromePlain/large","type":"FLOAT","value":-12},{"name":"imported/button/root/margin-top/plain/micro","type":"FLOAT","value":-4},{"name":"imported/button/root/margin-top/plain/slim","type":"FLOAT","value":-6},{"name":"imported/button/root/margin-top/plain/medium","type":"FLOAT","value":-6},{"name":"imported/button/root/margin-top/plain/large","type":"FLOAT","value":-6},{"name":"imported/button/root/margin-top/primary/micro","type":"FLOAT","value":0},{"name":"imported/button/root/margin-top/primary/slim","type":"FLOAT","value":0},{"name":"imported/button/root/margin-top/primary/medium","type":"FLOAT","value":0},{"name":"imported/button/root/margin-top/primary/large","type":"FLOAT","value":0},{"name":"imported/button/root/margin-top/secondary/micro","type":"FLOAT","value":0},{"name":"imported/button/root/margin-top/secondary/slim","type":"FLOAT","value":0},{"name":"imported/button/root/margin-top/secondary/medium","type":"FLOAT","value":0},{"name":"imported/button/root/margin-top/secondary/large","type":"FLOAT","value":0},{"name":"imported/button/root/margin-top/tertiary/micro","type":"FLOAT","value":0},{"name":"imported/button/root/margin-top/tertiary/slim","type":"FLOAT","value":0},{"name":"imported/button/root/margin-top/tertiary/medium","type":"FLOAT","value":0},{"name":"imported/button/root/margin-top/tertiary/large","type":"FLOAT","value":0},{"name":"imported/button/root/margin-top/monochromePlain/micro","type":"FLOAT","value":-4},{"name":"imported/button/root/margin-top/monochromePlain/slim","type":"FLOAT","value":-6},{"name":"imported/button/root/margin-top/monochromePlain/medium","type":"FLOAT","value":-6},{"name":"imported/button/root/margin-top/monochromePlain/large","type":"FLOAT","value":-6},{"name":"imported/button/root/outline-color/plain/none","type":"COLOR","value":"#005bd3"},{"name":"imported/button/root/outline-color/plain/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/button/root/outline-color/plain/success","type":"COLOR","value":"#014b40"},{"name":"imported/button/root/outline-color/primary/none","type":"COLOR","value":"#ffffff"},{"name":"imported/button/root/outline-color/primary/critical","type":"COLOR","value":"#ffffff"},{"name":"imported/button/root/outline-color/primary/success","type":"COLOR","value":"#ffffff"},{"name":"imported/button/root/outline-color/secondary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/root/outline-color/secondary/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/button/root/outline-color/secondary/success","type":"COLOR","value":"#014b40"},{"name":"imported/button/root/outline-color/tertiary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/root/outline-color/tertiary/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/button/root/outline-color/tertiary/success","type":"COLOR","value":"#014b40"},{"name":"imported/button/root/outline-color/monochromePlain/none","type":"COLOR","value":"#303030"},{"name":"imported/button/root/outline-color/monochromePlain/critical","type":"COLOR","value":"#303030"},{"name":"imported/button/root/outline-color/monochromePlain/success","type":"COLOR","value":"#303030"},{"name":"imported/button/root/background-color-state-active/primary/none","type":"COLOR","value":"#1a1a1a"},{"name":"imported/button/root/background-color-state-active/primary/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/button/root/background-color-state-active/primary/success","type":"COLOR","value":"#014b40"},{"name":"imported/button/root/background-color-state-active/secondary/none","type":"COLOR","value":"#f7f7f7"},{"name":"imported/button/root/background-color-state-active/secondary/critical","type":"COLOR","value":"#f7f7f7"},{"name":"imported/button/root/background-color-state-active/secondary/success","type":"COLOR","value":"#f7f7f7"},{"name":"imported/button/root/background-color-state-active/tertiary/none","type":"COLOR","value":"#00000014"},{"name":"imported/button/root/background-color-state-active/tertiary/critical","type":"COLOR","value":"#00000014"},{"name":"imported/button/root/background-color-state-active/tertiary/success","type":"COLOR","value":"#00000014"},{"name":"imported/button/root/background-color-state-active/plain/none","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color-state-active/plain/critical","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color-state-active/plain/success","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color-state-active/monochromePlain/none","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color-state-active/monochromePlain/critical","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color-state-active/monochromePlain/success","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/color-state-active/plain/none","type":"COLOR","value":"#002e6a"},{"name":"imported/button/root/color-state-active/plain/critical","type":"COLOR","value":"#2f040b"},{"name":"imported/button/root/color-state-active/plain/success","type":"COLOR","value":"#022622"},{"name":"imported/button/root/color-state-active/secondary/critical","type":"COLOR","value":"#2f040b"},{"name":"imported/button/root/color-state-active/secondary/success","type":"COLOR","value":"#022622"},{"name":"imported/button/root/color-state-active/secondary/none","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-text"},{"name":"imported/button/root/color-state-active/tertiary/critical","type":"COLOR","value":"#2f040b"},{"name":"imported/button/root/color-state-active/tertiary/success","type":"COLOR","value":"#022622"},{"name":"imported/button/root/color-state-active/tertiary/none","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-text"},{"name":"imported/button/root/color-state-active/primary/none","type":"COLOR","value":"rgba(255, 255, 255, 1)","alias":"p/color-text-brand-on-bg-fill"},{"name":"imported/button/root/color-state-active/primary/critical","type":"COLOR","value":"rgba(255, 255, 255, 1)","alias":"p/color-text-brand-on-bg-fill"},{"name":"imported/button/root/color-state-active/primary/success","type":"COLOR","value":"rgba(255, 255, 255, 1)","alias":"p/color-text-brand-on-bg-fill"},{"name":"imported/button/root/color-state-active/monochromePlain/none","type":"COLOR","value":"#303030"},{"name":"imported/button/root/color-state-active/monochromePlain/critical","type":"COLOR","value":"#303030"},{"name":"imported/button/root/color-state-active/monochromePlain/success","type":"COLOR","value":"#303030"},{"name":"imported/button/root/fill-state-active/plain/none","type":"COLOR","value":"#002e6a"},{"name":"imported/button/root/fill-state-active/plain/critical","type":"COLOR","value":"#2f040b"},{"name":"imported/button/root/fill-state-active/plain/success","type":"COLOR","value":"#022622"},{"name":"imported/button/root/fill-state-active/primary/none","type":"COLOR","value":"#ffffff"},{"name":"imported/button/root/fill-state-active/primary/critical","type":"COLOR","value":"#ffffff"},{"name":"imported/button/root/fill-state-active/primary/success","type":"COLOR","value":"#ffffff"},{"name":"imported/button/root/fill-state-active/secondary/none","type":"COLOR","value":"#4a4a4a"},{"name":"imported/button/root/fill-state-active/secondary/critical","type":"COLOR","value":"#2f040b"},{"name":"imported/button/root/fill-state-active/secondary/success","type":"COLOR","value":"#022622"},{"name":"imported/button/root/fill-state-active/tertiary/none","type":"COLOR","value":"#4a4a4a"},{"name":"imported/button/root/fill-state-active/tertiary/critical","type":"COLOR","value":"#2f040b"},{"name":"imported/button/root/fill-state-active/tertiary/success","type":"COLOR","value":"#022622"},{"name":"imported/button/root/fill-state-active/monochromePlain/none","type":"COLOR","value":"#303030"},{"name":"imported/button/root/fill-state-active/monochromePlain/critical","type":"COLOR","value":"#303030"},{"name":"imported/button/root/fill-state-active/monochromePlain/success","type":"COLOR","value":"#303030"},{"name":"imported/button/root/outline-color-state-active/plain/none","type":"COLOR","value":"#002e6a"},{"name":"imported/button/root/outline-color-state-active/plain/critical","type":"COLOR","value":"#2f040b"},{"name":"imported/button/root/outline-color-state-active/plain/success","type":"COLOR","value":"#022622"},{"name":"imported/button/root/outline-color-state-active/secondary/critical","type":"COLOR","value":"#2f040b"},{"name":"imported/button/root/outline-color-state-active/secondary/success","type":"COLOR","value":"#022622"},{"name":"imported/button/root/outline-color-state-active/secondary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/root/outline-color-state-active/tertiary/critical","type":"COLOR","value":"#2f040b"},{"name":"imported/button/root/outline-color-state-active/tertiary/success","type":"COLOR","value":"#022622"},{"name":"imported/button/root/outline-color-state-active/tertiary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/root/outline-color-state-active/primary/none","type":"COLOR","value":"#ffffff"},{"name":"imported/button/root/outline-color-state-active/primary/critical","type":"COLOR","value":"#ffffff"},{"name":"imported/button/root/outline-color-state-active/primary/success","type":"COLOR","value":"#ffffff"},{"name":"imported/button/root/outline-color-state-active/monochromePlain/none","type":"COLOR","value":"#303030"},{"name":"imported/button/root/outline-color-state-active/monochromePlain/critical","type":"COLOR","value":"#303030"},{"name":"imported/button/root/outline-color-state-active/monochromePlain/success","type":"COLOR","value":"#303030"},{"name":"imported/button/root/background-color-state-disabled/primary","type":"COLOR","value":"#0000002b"},{"name":"imported/button/root/background-color-state-disabled/secondary","type":"COLOR","value":"#0000000d"},{"name":"imported/button/root/background-color-state-disabled/plain","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color-state-disabled/tertiary","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color-state-disabled/monochromePlain","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/color-state-disabled/plain","type":"COLOR","value":"#b5b5b5"},{"name":"imported/button/root/color-state-disabled/secondary","type":"COLOR","value":"#b5b5b5"},{"name":"imported/button/root/color-state-disabled/tertiary","type":"COLOR","value":"#b5b5b5"},{"name":"imported/button/root/color-state-disabled/monochromePlain","type":"COLOR","value":"#b5b5b5"},{"name":"imported/button/root/color-state-disabled/primary","type":"COLOR","value":"rgba(255, 255, 255, 1)","alias":"p/color-text-brand-on-bg-fill"},{"name":"imported/button/root/outline-color-state-disabled/plain","type":"COLOR","value":"#b5b5b5"},{"name":"imported/button/root/outline-color-state-disabled/secondary","type":"COLOR","value":"#b5b5b5"},{"name":"imported/button/root/outline-color-state-disabled/tertiary","type":"COLOR","value":"#b5b5b5"},{"name":"imported/button/root/outline-color-state-disabled/monochromePlain","type":"COLOR","value":"#b5b5b5"},{"name":"imported/button/root/outline-color-state-disabled/primary","type":"COLOR","value":"#ffffff"},{"name":"imported/button/root/background-color-state-focus-visible/primary/none","type":"COLOR","value":"#1a1a1a"},{"name":"imported/button/root/background-color-state-focus-visible/primary/critical","type":"COLOR","value":"#a30a24"},{"name":"imported/button/root/background-color-state-focus-visible/primary/success","type":"COLOR","value":"#035e4c"},{"name":"imported/button/root/background-color-state-focus-visible/secondary/none","type":"COLOR","value":"#fafafa"},{"name":"imported/button/root/background-color-state-focus-visible/secondary/critical","type":"COLOR","value":"#fafafa"},{"name":"imported/button/root/background-color-state-focus-visible/secondary/success","type":"COLOR","value":"#fafafa"},{"name":"imported/button/root/background-color-state-focus-visible/tertiary/none","type":"COLOR","value":"#0000000d"},{"name":"imported/button/root/background-color-state-focus-visible/tertiary/critical","type":"COLOR","value":"#0000000d"},{"name":"imported/button/root/background-color-state-focus-visible/tertiary/success","type":"COLOR","value":"#0000000d"},{"name":"imported/button/root/background-color-state-focus-visible/plain/none","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color-state-focus-visible/plain/critical","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color-state-focus-visible/plain/success","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color-state-focus-visible/monochromePlain/none","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color-state-focus-visible/monochromePlain/critical","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color-state-focus-visible/monochromePlain/success","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/border-bottom-left-radius-state-focus-visible/plain","type":"FLOAT","value":12},{"name":"imported/button/root/border-bottom-left-radius-state-focus-visible/monochromePlain","type":"FLOAT","value":12},{"name":"imported/button/root/border-bottom-left-radius-state-focus-visible/primary","type":"FLOAT","value":8},{"name":"imported/button/root/border-bottom-left-radius-state-focus-visible/secondary","type":"FLOAT","value":8},{"name":"imported/button/root/border-bottom-left-radius-state-focus-visible/tertiary","type":"FLOAT","value":8},{"name":"imported/button/root/border-bottom-right-radius-state-focus-visible/plain","type":"FLOAT","value":12},{"name":"imported/button/root/border-bottom-right-radius-state-focus-visible/monochromePlain","type":"FLOAT","value":12},{"name":"imported/button/root/border-bottom-right-radius-state-focus-visible/primary","type":"FLOAT","value":8},{"name":"imported/button/root/border-bottom-right-radius-state-focus-visible/secondary","type":"FLOAT","value":8},{"name":"imported/button/root/border-bottom-right-radius-state-focus-visible/tertiary","type":"FLOAT","value":8},{"name":"imported/button/root/border-top-left-radius-state-focus-visible/plain","type":"FLOAT","value":12},{"name":"imported/button/root/border-top-left-radius-state-focus-visible/monochromePlain","type":"FLOAT","value":12},{"name":"imported/button/root/border-top-left-radius-state-focus-visible/primary","type":"FLOAT","value":8},{"name":"imported/button/root/border-top-left-radius-state-focus-visible/secondary","type":"FLOAT","value":8},{"name":"imported/button/root/border-top-left-radius-state-focus-visible/tertiary","type":"FLOAT","value":8},{"name":"imported/button/root/border-top-right-radius-state-focus-visible/plain","type":"FLOAT","value":12},{"name":"imported/button/root/border-top-right-radius-state-focus-visible/monochromePlain","type":"FLOAT","value":12},{"name":"imported/button/root/border-top-right-radius-state-focus-visible/primary","type":"FLOAT","value":8},{"name":"imported/button/root/border-top-right-radius-state-focus-visible/secondary","type":"FLOAT","value":8},{"name":"imported/button/root/border-top-right-radius-state-focus-visible/tertiary","type":"FLOAT","value":8},{"name":"imported/button/root/color-state-focus-visible/plain/none","type":"COLOR","value":"#004299"},{"name":"imported/button/root/color-state-focus-visible/plain/critical","type":"COLOR","value":"#5f0716"},{"name":"imported/button/root/color-state-focus-visible/plain/success","type":"COLOR","value":"#073630"},{"name":"imported/button/root/color-state-focus-visible/secondary/critical","type":"COLOR","value":"#5f0716"},{"name":"imported/button/root/color-state-focus-visible/secondary/success","type":"COLOR","value":"#073630"},{"name":"imported/button/root/color-state-focus-visible/secondary/none","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-text"},{"name":"imported/button/root/color-state-focus-visible/tertiary/critical","type":"COLOR","value":"#5f0716"},{"name":"imported/button/root/color-state-focus-visible/tertiary/success","type":"COLOR","value":"#073630"},{"name":"imported/button/root/color-state-focus-visible/tertiary/none","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-text"},{"name":"imported/button/root/color-state-focus-visible/primary/none","type":"COLOR","value":"rgba(255, 255, 255, 1)","alias":"p/color-text-brand-on-bg-fill"},{"name":"imported/button/root/color-state-focus-visible/primary/critical","type":"COLOR","value":"rgba(255, 255, 255, 1)","alias":"p/color-text-brand-on-bg-fill"},{"name":"imported/button/root/color-state-focus-visible/primary/success","type":"COLOR","value":"rgba(255, 255, 255, 1)","alias":"p/color-text-brand-on-bg-fill"},{"name":"imported/button/root/color-state-focus-visible/monochromePlain/none","type":"COLOR","value":"#303030"},{"name":"imported/button/root/color-state-focus-visible/monochromePlain/critical","type":"COLOR","value":"#303030"},{"name":"imported/button/root/color-state-focus-visible/monochromePlain/success","type":"COLOR","value":"#303030"},{"name":"imported/button/root/outline-color-state-focus-visible","type":"COLOR","value":"#005bd3"},{"name":"imported/button/root/outline-offset-state-focus-visible/plain/micro","type":"FLOAT","value":-4},{"name":"imported/button/root/outline-offset-state-focus-visible/plain/slim","type":"FLOAT","value":-6},{"name":"imported/button/root/outline-offset-state-focus-visible/plain/medium","type":"FLOAT","value":-6},{"name":"imported/button/root/outline-offset-state-focus-visible/plain/large","type":"FLOAT","value":-6},{"name":"imported/button/root/outline-offset-state-focus-visible/primary/micro","type":"FLOAT","value":1},{"name":"imported/button/root/outline-offset-state-focus-visible/primary/slim","type":"FLOAT","value":1},{"name":"imported/button/root/outline-offset-state-focus-visible/primary/medium","type":"FLOAT","value":1},{"name":"imported/button/root/outline-offset-state-focus-visible/primary/large","type":"FLOAT","value":1},{"name":"imported/button/root/outline-offset-state-focus-visible/secondary/micro","type":"FLOAT","value":1},{"name":"imported/button/root/outline-offset-state-focus-visible/secondary/slim","type":"FLOAT","value":1},{"name":"imported/button/root/outline-offset-state-focus-visible/secondary/medium","type":"FLOAT","value":1},{"name":"imported/button/root/outline-offset-state-focus-visible/secondary/large","type":"FLOAT","value":1},{"name":"imported/button/root/outline-offset-state-focus-visible/tertiary/micro","type":"FLOAT","value":1},{"name":"imported/button/root/outline-offset-state-focus-visible/tertiary/slim","type":"FLOAT","value":1},{"name":"imported/button/root/outline-offset-state-focus-visible/tertiary/medium","type":"FLOAT","value":1},{"name":"imported/button/root/outline-offset-state-focus-visible/tertiary/large","type":"FLOAT","value":1},{"name":"imported/button/root/outline-offset-state-focus-visible/monochromePlain/micro","type":"FLOAT","value":-4},{"name":"imported/button/root/outline-offset-state-focus-visible/monochromePlain/slim","type":"FLOAT","value":-6},{"name":"imported/button/root/outline-offset-state-focus-visible/monochromePlain/medium","type":"FLOAT","value":-6},{"name":"imported/button/root/outline-offset-state-focus-visible/monochromePlain/large","type":"FLOAT","value":-6},{"name":"imported/button/root/outline-width-state-focus-visible","type":"FLOAT","value":2},{"name":"imported/button/root/background-color-state-hover/primary/none","type":"COLOR","value":"#1a1a1a"},{"name":"imported/button/root/background-color-state-hover/primary/critical","type":"COLOR","value":"#a30a24"},{"name":"imported/button/root/background-color-state-hover/primary/success","type":"COLOR","value":"#035e4c"},{"name":"imported/button/root/background-color-state-hover/secondary/none","type":"COLOR","value":"#fafafa"},{"name":"imported/button/root/background-color-state-hover/secondary/critical","type":"COLOR","value":"#fafafa"},{"name":"imported/button/root/background-color-state-hover/secondary/success","type":"COLOR","value":"#fafafa"},{"name":"imported/button/root/background-color-state-hover/tertiary/none","type":"COLOR","value":"#0000000d"},{"name":"imported/button/root/background-color-state-hover/tertiary/critical","type":"COLOR","value":"#0000000d"},{"name":"imported/button/root/background-color-state-hover/tertiary/success","type":"COLOR","value":"#0000000d"},{"name":"imported/button/root/background-color-state-hover/plain/none","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color-state-hover/plain/critical","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color-state-hover/plain/success","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color-state-hover/monochromePlain/none","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color-state-hover/monochromePlain/critical","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/background-color-state-hover/monochromePlain/success","type":"COLOR","value":"#00000000"},{"name":"imported/button/root/color-state-hover/plain/none","type":"COLOR","value":"#004299"},{"name":"imported/button/root/color-state-hover/plain/critical","type":"COLOR","value":"#5f0716"},{"name":"imported/button/root/color-state-hover/plain/success","type":"COLOR","value":"#073630"},{"name":"imported/button/root/color-state-hover/secondary/critical","type":"COLOR","value":"#5f0716"},{"name":"imported/button/root/color-state-hover/secondary/success","type":"COLOR","value":"#073630"},{"name":"imported/button/root/color-state-hover/secondary/none","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-text"},{"name":"imported/button/root/color-state-hover/tertiary/critical","type":"COLOR","value":"#5f0716"},{"name":"imported/button/root/color-state-hover/tertiary/success","type":"COLOR","value":"#073630"},{"name":"imported/button/root/color-state-hover/tertiary/none","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-text"},{"name":"imported/button/root/color-state-hover/primary/none","type":"COLOR","value":"rgba(255, 255, 255, 1)","alias":"p/color-text-brand-on-bg-fill"},{"name":"imported/button/root/color-state-hover/primary/critical","type":"COLOR","value":"rgba(255, 255, 255, 1)","alias":"p/color-text-brand-on-bg-fill"},{"name":"imported/button/root/color-state-hover/primary/success","type":"COLOR","value":"rgba(255, 255, 255, 1)","alias":"p/color-text-brand-on-bg-fill"},{"name":"imported/button/root/color-state-hover/monochromePlain/none","type":"COLOR","value":"#303030"},{"name":"imported/button/root/color-state-hover/monochromePlain/critical","type":"COLOR","value":"#303030"},{"name":"imported/button/root/color-state-hover/monochromePlain/success","type":"COLOR","value":"#303030"},{"name":"imported/button/root/outline-color-state-hover/plain/none","type":"COLOR","value":"#004299"},{"name":"imported/button/root/outline-color-state-hover/plain/critical","type":"COLOR","value":"#5f0716"},{"name":"imported/button/root/outline-color-state-hover/plain/success","type":"COLOR","value":"#073630"},{"name":"imported/button/root/outline-color-state-hover/secondary/critical","type":"COLOR","value":"#5f0716"},{"name":"imported/button/root/outline-color-state-hover/secondary/success","type":"COLOR","value":"#073630"},{"name":"imported/button/root/outline-color-state-hover/secondary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/root/outline-color-state-hover/tertiary/critical","type":"COLOR","value":"#5f0716"},{"name":"imported/button/root/outline-color-state-hover/tertiary/success","type":"COLOR","value":"#073630"},{"name":"imported/button/root/outline-color-state-hover/tertiary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/root/outline-color-state-hover/primary/none","type":"COLOR","value":"#ffffff"},{"name":"imported/button/root/outline-color-state-hover/primary/critical","type":"COLOR","value":"#ffffff"},{"name":"imported/button/root/outline-color-state-hover/primary/success","type":"COLOR","value":"#ffffff"},{"name":"imported/button/root/outline-color-state-hover/monochromePlain/none","type":"COLOR","value":"#303030"},{"name":"imported/button/root/outline-color-state-hover/monochromePlain/critical","type":"COLOR","value":"#303030"},{"name":"imported/button/root/outline-color-state-hover/monochromePlain/success","type":"COLOR","value":"#303030"},{"name":"imported/button/icon/color/plain/none","type":"COLOR","value":"#005bd3"},{"name":"imported/button/icon/color/plain/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/button/icon/color/plain/success","type":"COLOR","value":"#014b40"},{"name":"imported/button/icon/color/primary/none","type":"COLOR","value":"#ffffff"},{"name":"imported/button/icon/color/primary/critical","type":"COLOR","value":"#ffffff"},{"name":"imported/button/icon/color/primary/success","type":"COLOR","value":"#ffffff"},{"name":"imported/button/icon/color/secondary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/icon/color/secondary/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/button/icon/color/secondary/success","type":"COLOR","value":"#014b40"},{"name":"imported/button/icon/color/tertiary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/icon/color/tertiary/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/button/icon/color/tertiary/success","type":"COLOR","value":"#014b40"},{"name":"imported/button/icon/color/monochromePlain/none","type":"COLOR","value":"#303030"},{"name":"imported/button/icon/color/monochromePlain/critical","type":"COLOR","value":"#303030"},{"name":"imported/button/icon/color/monochromePlain/success","type":"COLOR","value":"#303030"},{"name":"imported/button/icon/margin-bottom","type":"FLOAT","value":-2},{"name":"imported/button/icon/margin-top","type":"FLOAT","value":-2},{"name":"imported/button/icon-2/color/plain/none","type":"COLOR","value":"#005bd3"},{"name":"imported/button/icon-2/color/plain/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/button/icon-2/color/plain/success","type":"COLOR","value":"#014b40"},{"name":"imported/button/icon-2/color/primary/none","type":"COLOR","value":"#ffffff"},{"name":"imported/button/icon-2/color/primary/critical","type":"COLOR","value":"#ffffff"},{"name":"imported/button/icon-2/color/primary/success","type":"COLOR","value":"#ffffff"},{"name":"imported/button/icon-2/color/secondary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/icon-2/color/secondary/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/button/icon-2/color/secondary/success","type":"COLOR","value":"#014b40"},{"name":"imported/button/icon-2/color/tertiary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/icon-2/color/tertiary/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/button/icon-2/color/tertiary/success","type":"COLOR","value":"#014b40"},{"name":"imported/button/icon-2/color/monochromePlain/none","type":"COLOR","value":"#303030"},{"name":"imported/button/icon-2/color/monochromePlain/critical","type":"COLOR","value":"#303030"},{"name":"imported/button/icon-2/color/monochromePlain/success","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color/plain/none","type":"COLOR","value":"#005bd3"},{"name":"imported/button/label/color/plain/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/button/label/color/plain/success","type":"COLOR","value":"#014b40"},{"name":"imported/button/label/color/primary/none","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/color/primary/critical","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/color/primary/success","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/color/secondary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color/secondary/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/button/label/color/secondary/success","type":"COLOR","value":"#014b40"},{"name":"imported/button/label/color/tertiary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color/tertiary/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/button/label/color/tertiary/success","type":"COLOR","value":"#014b40"},{"name":"imported/button/label/color/monochromePlain/none","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color/monochromePlain/critical","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color/monochromePlain/success","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color-state-active/plain/none","type":"COLOR","value":"#002e6a"},{"name":"imported/button/label/color-state-active/plain/critical","type":"COLOR","value":"#2f040b"},{"name":"imported/button/label/color-state-active/plain/success","type":"COLOR","value":"#022622"},{"name":"imported/button/label/color-state-active/secondary/critical","type":"COLOR","value":"#2f040b"},{"name":"imported/button/label/color-state-active/secondary/success","type":"COLOR","value":"#022622"},{"name":"imported/button/label/color-state-active/secondary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color-state-active/tertiary/critical","type":"COLOR","value":"#2f040b"},{"name":"imported/button/label/color-state-active/tertiary/success","type":"COLOR","value":"#022622"},{"name":"imported/button/label/color-state-active/tertiary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color-state-active/primary/none","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/color-state-active/primary/critical","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/color-state-active/primary/success","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/color-state-active/monochromePlain/none","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color-state-active/monochromePlain/critical","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color-state-active/monochromePlain/success","type":"COLOR","value":"#303030"},{"name":"imported/button/label/fill-state-active/plain/none","type":"COLOR","value":"#002e6a"},{"name":"imported/button/label/fill-state-active/plain/critical","type":"COLOR","value":"#2f040b"},{"name":"imported/button/label/fill-state-active/plain/success","type":"COLOR","value":"#022622"},{"name":"imported/button/label/fill-state-active/primary/none","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/fill-state-active/primary/critical","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/fill-state-active/primary/success","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/fill-state-active/secondary/none","type":"COLOR","value":"#4a4a4a"},{"name":"imported/button/label/fill-state-active/secondary/critical","type":"COLOR","value":"#2f040b"},{"name":"imported/button/label/fill-state-active/secondary/success","type":"COLOR","value":"#022622"},{"name":"imported/button/label/fill-state-active/tertiary/none","type":"COLOR","value":"#4a4a4a"},{"name":"imported/button/label/fill-state-active/tertiary/critical","type":"COLOR","value":"#2f040b"},{"name":"imported/button/label/fill-state-active/tertiary/success","type":"COLOR","value":"#022622"},{"name":"imported/button/label/fill-state-active/monochromePlain/none","type":"COLOR","value":"#303030"},{"name":"imported/button/label/fill-state-active/monochromePlain/critical","type":"COLOR","value":"#303030"},{"name":"imported/button/label/fill-state-active/monochromePlain/success","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color-state-disabled/plain","type":"COLOR","value":"#b5b5b5"},{"name":"imported/button/label/color-state-disabled/secondary","type":"COLOR","value":"#b5b5b5"},{"name":"imported/button/label/color-state-disabled/tertiary","type":"COLOR","value":"#b5b5b5"},{"name":"imported/button/label/color-state-disabled/monochromePlain","type":"COLOR","value":"#b5b5b5"},{"name":"imported/button/label/color-state-disabled/primary","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/color-state-focus-visible/plain/none","type":"COLOR","value":"#004299"},{"name":"imported/button/label/color-state-focus-visible/plain/critical","type":"COLOR","value":"#5f0716"},{"name":"imported/button/label/color-state-focus-visible/plain/success","type":"COLOR","value":"#073630"},{"name":"imported/button/label/color-state-focus-visible/secondary/critical","type":"COLOR","value":"#5f0716"},{"name":"imported/button/label/color-state-focus-visible/secondary/success","type":"COLOR","value":"#073630"},{"name":"imported/button/label/color-state-focus-visible/secondary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color-state-focus-visible/tertiary/critical","type":"COLOR","value":"#5f0716"},{"name":"imported/button/label/color-state-focus-visible/tertiary/success","type":"COLOR","value":"#073630"},{"name":"imported/button/label/color-state-focus-visible/tertiary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color-state-focus-visible/primary/none","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/color-state-focus-visible/primary/critical","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/color-state-focus-visible/primary/success","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/color-state-focus-visible/monochromePlain/none","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color-state-focus-visible/monochromePlain/critical","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color-state-focus-visible/monochromePlain/success","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color-state-hover/plain/none","type":"COLOR","value":"#004299"},{"name":"imported/button/label/color-state-hover/plain/critical","type":"COLOR","value":"#5f0716"},{"name":"imported/button/label/color-state-hover/plain/success","type":"COLOR","value":"#073630"},{"name":"imported/button/label/color-state-hover/secondary/critical","type":"COLOR","value":"#5f0716"},{"name":"imported/button/label/color-state-hover/secondary/success","type":"COLOR","value":"#073630"},{"name":"imported/button/label/color-state-hover/secondary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color-state-hover/tertiary/critical","type":"COLOR","value":"#5f0716"},{"name":"imported/button/label/color-state-hover/tertiary/success","type":"COLOR","value":"#073630"},{"name":"imported/button/label/color-state-hover/tertiary/none","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color-state-hover/primary/none","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/color-state-hover/primary/critical","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/color-state-hover/primary/success","type":"COLOR","value":"#ffffff"},{"name":"imported/button/label/color-state-hover/monochromePlain/none","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color-state-hover/monochromePlain/critical","type":"COLOR","value":"#303030"},{"name":"imported/button/label/color-state-hover/monochromePlain/success","type":"COLOR","value":"#303030"},{"name":"imported/shared/size-0","type":"FLOAT","value":0},{"name":"imported/shared/size-8","type":"FLOAT","value":8},{"name":"imported/shared/size-59-9219","type":"FLOAT","value":59.9219},{"name":"imported/shared/size-20","type":"FLOAT","value":20},{"name":"imported/shared/size-12","type":"FLOAT","value":12},{"name":"imported/shared/size-7","type":"FLOAT","value":7},{"name":"imported/shared/size-2","type":"FLOAT","value":2},{"name":"imported/shared/color-8a8a8a","type":"COLOR","value":"#8a8a8a"},{"name":"imported/shared/num-0","type":"FLOAT","value":0},{"name":"imported/shared/size-18","type":"FLOAT","value":18},{"name":"imported/shared/size-1","type":"FLOAT","value":1},{"name":"imported/shared/color-b5b5b5","type":"COLOR","value":"#b5b5b5"},{"name":"imported/shared/size-319-328","type":"FLOAT","value":319.328},{"name":"imported/shared/size-295-328","type":"FLOAT","value":295.328},{"name":"imported/shared/size-4","type":"FLOAT","value":4},{"name":"imported/shared/color-303030","type":"COLOR","value":"#303030"},{"name":"imported/shared/size-13","type":"FLOAT","value":13},{"name":"imported/shared/num-450","type":"FLOAT","value":450},{"name":"imported/shared/size-32","type":"FLOAT","value":32},{"name":"imported/shared/size-neg-4","type":"FLOAT","value":-4},{"name":"imported/shared/size-14","type":"FLOAT","value":14},{"name":"imported/shared/color-00000000","type":"COLOR","value":"#00000000"},{"name":"imported/shared/num-1","type":"FLOAT","value":1},{"name":"imported/shared/num-20","type":"FLOAT","value":20},{"name":"imported/shared/color-616161","type":"COLOR","value":"#616161"},{"name":"imported/shared/color-1a1a1a","type":"COLOR","value":"#1a1a1a"},{"name":"imported/tag/root/font-weight/off","type":"FLOAT","value":450},{"name":"imported/tag/root/font-weight/on","type":"FLOAT","value":400},{"name":"imported/tag/root/height/none","type":"FLOAT","value":20},{"name":"imported/tag/root/height/large","type":"FLOAT","value":24},{"name":"imported/tag/root/outline-color/off","type":"COLOR","value":"#303030"},{"name":"imported/tag/root/outline-color/on","type":"COLOR","value":"#00000000"},{"name":"imported/tag/root/outline-width/off","type":"FLOAT","value":3},{"name":"imported/tag/root/outline-width/on","type":"FLOAT","value":1},{"name":"imported/tag/root/background-color-state-active/off/off/on","type":"COLOR","value":"#cccccc"},{"name":"imported/tag/root/background-color-state-active/off/off/off","type":"COLOR","value":"rgba(227, 227, 227, 1)","alias":"p/color-bg-fill-tertiary"},{"name":"imported/tag/root/background-color-state-active/off/on/off","type":"COLOR","value":"#cccccc"},{"name":"imported/tag/root/background-color-state-active/off/on/on","type":"COLOR","value":"#cccccc"},{"name":"imported/tag/root/background-color-state-active/on/off/on","type":"COLOR","value":"#d4d4d4"},{"name":"imported/tag/root/background-color-state-active/on/off/off","type":"COLOR","value":"rgba(227, 227, 227, 1)","alias":"p/color-bg-fill-tertiary"},{"name":"imported/tag/root/background-color-state-active/on/on/off","type":"COLOR","value":"#cccccc"},{"name":"imported/tag/root/background-color-state-active/on/on/on","type":"COLOR","value":"#d4d4d4"},{"name":"imported/tag/root/outline-color-state-active","type":"COLOR","value":"#303030"},{"name":"imported/tag/root/outline-width-state-active","type":"FLOAT","value":3},{"name":"imported/tag/root/background-color-state-disabled","type":"COLOR","value":"#0000000d"},{"name":"imported/tag/root/outline-color-state-disabled/off","type":"COLOR","value":"#b5b5b5"},{"name":"imported/tag/root/outline-color-state-disabled/on","type":"COLOR","value":"#00000000"},{"name":"imported/tag/root/padding-left-state-disabled/large/off/on","type":"FLOAT","value":6},{"name":"imported/tag/root/padding-left-state-disabled/large/off/off","type":"FLOAT","value":8},{"name":"imported/tag/root/padding-left-state-disabled/large/on/off","type":"FLOAT","value":8},{"name":"imported/tag/root/padding-left-state-disabled/large/on/on","type":"FLOAT","value":8},{"name":"imported/tag/root/padding-left-state-disabled/none/off/off","type":"FLOAT","value":6},{"name":"imported/tag/root/padding-left-state-disabled/none/off/on","type":"FLOAT","value":6},{"name":"imported/tag/root/padding-left-state-disabled/none/on/off","type":"FLOAT","value":6},{"name":"imported/tag/root/padding-left-state-disabled/none/on/on","type":"FLOAT","value":6},{"name":"imported/tag/root/padding-right-state-disabled/large/off/on","type":"FLOAT","value":6},{"name":"imported/tag/root/padding-right-state-disabled/large/off/off","type":"FLOAT","value":8},{"name":"imported/tag/root/padding-right-state-disabled/large/on/off","type":"FLOAT","value":8},{"name":"imported/tag/root/padding-right-state-disabled/large/on/on","type":"FLOAT","value":8},{"name":"imported/tag/root/padding-right-state-disabled/none/off/off","type":"FLOAT","value":6},{"name":"imported/tag/root/padding-right-state-disabled/none/off/on","type":"FLOAT","value":6},{"name":"imported/tag/root/padding-right-state-disabled/none/on/off","type":"FLOAT","value":0},{"name":"imported/tag/root/padding-right-state-disabled/none/on/on","type":"FLOAT","value":0},{"name":"imported/tag/root/outline-color-state-focus-visible","type":"COLOR","value":"#303030"},{"name":"imported/tag/root/outline-width-state-focus-visible","type":"FLOAT","value":3},{"name":"imported/tag/root/background-color-state-hover/off/on","type":"COLOR","value":"#d4d4d4"},{"name":"imported/tag/root/background-color-state-hover/off/off","type":"COLOR","value":"rgba(227, 227, 227, 1)","alias":"p/color-bg-fill-tertiary"},{"name":"imported/tag/root/background-color-state-hover/on/off","type":"COLOR","value":"#d4d4d4"},{"name":"imported/tag/root/background-color-state-hover/on/on","type":"COLOR","value":"#d4d4d4"},{"name":"imported/tag/link/color","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-text"},{"name":"imported/tag/text-2/line-height","type":"FLOAT","value":16},{"name":"imported/tag/label-2/font-weight","type":"FLOAT","value":450},{"name":"imported/tag/text/line-height","type":"FLOAT","value":16},{"name":"imported/tag/button/background-color/off","type":"COLOR","value":"rgba(227, 227, 227, 1)","alias":"p/color-bg-fill-tertiary"},{"name":"imported/tag/button/background-color/on","type":"COLOR","value":"rgba(212, 212, 212, 1)","alias":"p/color-bg-fill-tertiary-hover"},{"name":"imported/tag/button/font-size","type":"FLOAT","value":13},{"name":"imported/tag/button/left","type":"FLOAT","value":53.9219},{"name":"imported/tag/button-2/background-color","type":"COLOR","value":"#00000000"},{"name":"imported/tag/button-2/font-size","type":"FLOAT","value":13},{"name":"imported/tag/icon-3/font-weight","type":"FLOAT","value":400},{"name":"imported/badge/root/background-color/none","type":"COLOR","value":"#0000000f"},{"name":"imported/badge/root/background-color/info","type":"COLOR","value":"rgba(213, 235, 255, 1)","alias":"p/color-bg-fill-info-secondary"},{"name":"imported/badge/root/background-color/success","type":"COLOR","value":"rgba(175, 254, 191, 1)","alias":"p/color-bg-fill-success-secondary"},{"name":"imported/badge/root/background-color/warning","type":"COLOR","value":"rgba(255, 214, 164, 1)","alias":"p/color-bg-fill-warning-secondary"},{"name":"imported/badge/root/background-color/critical","type":"COLOR","value":"rgba(254, 209, 215, 1)","alias":"p/color-bg-fill-critical-secondary"},{"name":"imported/badge/root/background-color/attention","type":"COLOR","value":"rgba(255, 235, 120, 1)","alias":"p/color-bg-fill-caution-secondary"},{"name":"imported/badge/root/background-color/new","type":"COLOR","value":"#0000000f"},{"name":"imported/badge/root/background-color/magic","type":"COLOR","value":"rgba(233, 229, 255, 1)","alias":"p/color-bg-fill-magic-secondary"},{"name":"imported/badge/root/background-color/info-strong","type":"COLOR","value":"rgba(145, 208, 255, 1)","alias":"p/color-bg-fill-info"},{"name":"imported/badge/root/background-color/success-strong","type":"COLOR","value":"rgba(4, 123, 93, 1)","alias":"p/color-bg-fill-success"},{"name":"imported/badge/root/background-color/warning-strong","type":"COLOR","value":"rgba(255, 184, 0, 1)","alias":"p/color-bg-fill-warning"},{"name":"imported/badge/root/background-color/critical-strong","type":"COLOR","value":"rgba(199, 10, 36, 1)","alias":"p/color-bg-fill-critical"},{"name":"imported/badge/root/background-color/attention-strong","type":"COLOR","value":"rgba(255, 230, 0, 1)","alias":"p/color-bg-fill-caution"},{"name":"imported/badge/root/background-color/read-only","type":"COLOR","value":"#00000000"},{"name":"imported/badge/root/background-color/enabled","type":"COLOR","value":"#0000000f"},{"name":"imported/badge/root/color/none","type":"COLOR","value":"rgba(97, 97, 97, 1)","alias":"p/color-text-secondary"},{"name":"imported/badge/root/color/info","type":"COLOR","value":"rgba(0, 58, 90, 1)","alias":"p/color-text-info"},{"name":"imported/badge/root/color/success","type":"COLOR","value":"rgba(1, 75, 64, 1)","alias":"p/color-text-success"},{"name":"imported/badge/root/color/warning","type":"COLOR","value":"rgba(94, 66, 0, 1)","alias":"p/color-text-warning"},{"name":"imported/badge/root/color/critical","type":"COLOR","value":"rgba(142, 11, 33, 1)","alias":"p/color-text-critical"},{"name":"imported/badge/root/color/attention","type":"COLOR","value":"rgba(79, 71, 0, 1)","alias":"p/color-text-caution"},{"name":"imported/badge/root/color/new","type":"COLOR","value":"rgba(97, 97, 97, 1)","alias":"p/color-text-secondary"},{"name":"imported/badge/root/color/magic","type":"COLOR","value":"rgba(87, 0, 209, 1)","alias":"p/color-text-magic"},{"name":"imported/badge/root/color/info-strong","type":"COLOR","value":"rgba(0, 33, 51, 1)","alias":"p/color-text-info-on-bg-fill"},{"name":"imported/badge/root/color/success-strong","type":"COLOR","value":"rgba(250, 255, 251, 1)","alias":"p/color-text-success-on-bg-fill"},{"name":"imported/badge/root/color/warning-strong","type":"COLOR","value":"rgba(37, 26, 0, 1)","alias":"p/color-text-warning-on-bg-fill"},{"name":"imported/badge/root/color/critical-strong","type":"COLOR","value":"rgba(255, 250, 251, 1)","alias":"p/color-text-critical-on-bg-fill"},{"name":"imported/badge/root/color/attention-strong","type":"COLOR","value":"rgba(51, 46, 0, 1)","alias":"p/color-text-caution-on-bg-fill"},{"name":"imported/badge/root/color/read-only","type":"COLOR","value":"rgba(97, 97, 97, 1)","alias":"p/color-text-secondary"},{"name":"imported/badge/root/color/enabled","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-text"},{"name":"imported/badge/root/font-weight/none","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/badge/root/font-weight/info","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/badge/root/font-weight/success","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/badge/root/font-weight/warning","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/badge/root/font-weight/critical","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/badge/root/font-weight/attention","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/badge/root/font-weight/new","type":"FLOAT","value":700,"alias":"p/font-weight-bold"},{"name":"imported/badge/root/font-weight/magic","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/badge/root/font-weight/info-strong","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/badge/root/font-weight/success-strong","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/badge/root/font-weight/warning-strong","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/badge/root/font-weight/critical-strong","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/badge/root/font-weight/attention-strong","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/badge/root/font-weight/read-only","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/badge/root/font-weight/enabled","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/badge/root/width/none/none","type":"FLOAT","value":61.0312},{"name":"imported/badge/root/width/none/incomplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/none/partiallyComplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/none/complete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/info/none","type":"FLOAT","value":61.0312},{"name":"imported/badge/root/width/info/incomplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/info/partiallyComplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/info/complete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/success/none","type":"FLOAT","value":61.0312},{"name":"imported/badge/root/width/success/incomplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/success/partiallyComplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/success/complete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/warning/none","type":"FLOAT","value":61.0312},{"name":"imported/badge/root/width/warning/incomplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/warning/partiallyComplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/warning/complete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/critical/none","type":"FLOAT","value":61.0312},{"name":"imported/badge/root/width/critical/incomplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/critical/partiallyComplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/critical/complete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/attention/none","type":"FLOAT","value":61.0312},{"name":"imported/badge/root/width/attention/incomplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/attention/partiallyComplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/attention/complete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/new/none","type":"FLOAT","value":61.875},{"name":"imported/badge/root/width/new/incomplete","type":"FLOAT","value":73.875},{"name":"imported/badge/root/width/new/partiallyComplete","type":"FLOAT","value":73.875},{"name":"imported/badge/root/width/new/complete","type":"FLOAT","value":73.875},{"name":"imported/badge/root/width/magic/none","type":"FLOAT","value":61.0312},{"name":"imported/badge/root/width/magic/incomplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/magic/partiallyComplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/magic/complete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/info-strong/none","type":"FLOAT","value":61.0312},{"name":"imported/badge/root/width/info-strong/incomplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/info-strong/partiallyComplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/info-strong/complete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/success-strong/none","type":"FLOAT","value":61.0312},{"name":"imported/badge/root/width/success-strong/incomplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/success-strong/partiallyComplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/success-strong/complete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/warning-strong/none","type":"FLOAT","value":61.0312},{"name":"imported/badge/root/width/warning-strong/incomplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/warning-strong/partiallyComplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/warning-strong/complete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/critical-strong/none","type":"FLOAT","value":61.0312},{"name":"imported/badge/root/width/critical-strong/incomplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/critical-strong/partiallyComplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/critical-strong/complete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/attention-strong/none","type":"FLOAT","value":61.0312},{"name":"imported/badge/root/width/attention-strong/incomplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/attention-strong/partiallyComplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/attention-strong/complete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/read-only/none","type":"FLOAT","value":61.0312},{"name":"imported/badge/root/width/read-only/incomplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/read-only/partiallyComplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/read-only/complete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/enabled/none","type":"FLOAT","value":61.0312},{"name":"imported/badge/root/width/enabled/incomplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/enabled/partiallyComplete","type":"FLOAT","value":73.0312},{"name":"imported/badge/root/width/enabled/complete","type":"FLOAT","value":73.0312},{"name":"imported/badge/label-2/bottom","type":"FLOAT","value":799},{"name":"imported/badge/label-2/left","type":"FLOAT","value":24},{"name":"imported/badge/label-2/right","type":"FLOAT","value":575},{"name":"imported/badge/icon/color/none","type":"COLOR","value":"#616161"},{"name":"imported/badge/icon/color/info","type":"COLOR","value":"#003a5a"},{"name":"imported/badge/icon/color/success","type":"COLOR","value":"#014b40"},{"name":"imported/badge/icon/color/warning","type":"COLOR","value":"#5e4200"},{"name":"imported/badge/icon/color/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/badge/icon/color/attention","type":"COLOR","value":"#4f4700"},{"name":"imported/badge/icon/color/new","type":"COLOR","value":"#616161"},{"name":"imported/badge/icon/color/magic","type":"COLOR","value":"#5700d1"},{"name":"imported/badge/icon/color/info-strong","type":"COLOR","value":"#002133"},{"name":"imported/badge/icon/color/success-strong","type":"COLOR","value":"#fafffb"},{"name":"imported/badge/icon/color/warning-strong","type":"COLOR","value":"#251a00"},{"name":"imported/badge/icon/color/critical-strong","type":"COLOR","value":"#fffafb"},{"name":"imported/badge/icon/color/attention-strong","type":"COLOR","value":"#332e00"},{"name":"imported/badge/icon/color/read-only","type":"COLOR","value":"#616161"},{"name":"imported/badge/icon/color/enabled","type":"COLOR","value":"#303030"},{"name":"imported/badge/icon/font-weight/none","type":"FLOAT","value":550},{"name":"imported/badge/icon/font-weight/info","type":"FLOAT","value":550},{"name":"imported/badge/icon/font-weight/success","type":"FLOAT","value":550},{"name":"imported/badge/icon/font-weight/warning","type":"FLOAT","value":550},{"name":"imported/badge/icon/font-weight/critical","type":"FLOAT","value":550},{"name":"imported/badge/icon/font-weight/attention","type":"FLOAT","value":550},{"name":"imported/badge/icon/font-weight/new","type":"FLOAT","value":700},{"name":"imported/badge/icon/font-weight/magic","type":"FLOAT","value":550},{"name":"imported/badge/icon/font-weight/info-strong","type":"FLOAT","value":550},{"name":"imported/badge/icon/font-weight/success-strong","type":"FLOAT","value":550},{"name":"imported/badge/icon/font-weight/warning-strong","type":"FLOAT","value":550},{"name":"imported/badge/icon/font-weight/critical-strong","type":"FLOAT","value":550},{"name":"imported/badge/icon/font-weight/attention-strong","type":"FLOAT","value":550},{"name":"imported/badge/icon/font-weight/read-only","type":"FLOAT","value":550},{"name":"imported/badge/icon/font-weight/enabled","type":"FLOAT","value":550},{"name":"imported/badge/icon/margin-bottom","type":"FLOAT","value":-2},{"name":"imported/badge/icon/margin-left","type":"FLOAT","value":-8},{"name":"imported/badge/icon/margin-top","type":"FLOAT","value":-2},{"name":"imported/badge/icon-2/color/none","type":"COLOR","value":"#616161"},{"name":"imported/badge/icon-2/color/info","type":"COLOR","value":"#003a5a"},{"name":"imported/badge/icon-2/color/success","type":"COLOR","value":"#014b40"},{"name":"imported/badge/icon-2/color/warning","type":"COLOR","value":"#5e4200"},{"name":"imported/badge/icon-2/color/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/badge/icon-2/color/attention","type":"COLOR","value":"#4f4700"},{"name":"imported/badge/icon-2/color/new","type":"COLOR","value":"#616161"},{"name":"imported/badge/icon-2/color/magic","type":"COLOR","value":"#5700d1"},{"name":"imported/badge/icon-2/color/info-strong","type":"COLOR","value":"#002133"},{"name":"imported/badge/icon-2/color/success-strong","type":"COLOR","value":"#fafffb"},{"name":"imported/badge/icon-2/color/warning-strong","type":"COLOR","value":"#251a00"},{"name":"imported/badge/icon-2/color/critical-strong","type":"COLOR","value":"#fffafb"},{"name":"imported/badge/icon-2/color/attention-strong","type":"COLOR","value":"#332e00"},{"name":"imported/badge/icon-2/color/read-only","type":"COLOR","value":"#616161"},{"name":"imported/badge/icon-2/color/enabled","type":"COLOR","value":"#303030"},{"name":"imported/badge/icon-2/font-weight/none","type":"FLOAT","value":550},{"name":"imported/badge/icon-2/font-weight/info","type":"FLOAT","value":550},{"name":"imported/badge/icon-2/font-weight/success","type":"FLOAT","value":550},{"name":"imported/badge/icon-2/font-weight/warning","type":"FLOAT","value":550},{"name":"imported/badge/icon-2/font-weight/critical","type":"FLOAT","value":550},{"name":"imported/badge/icon-2/font-weight/attention","type":"FLOAT","value":550},{"name":"imported/badge/icon-2/font-weight/new","type":"FLOAT","value":700},{"name":"imported/badge/icon-2/font-weight/magic","type":"FLOAT","value":550},{"name":"imported/badge/icon-2/font-weight/info-strong","type":"FLOAT","value":550},{"name":"imported/badge/icon-2/font-weight/success-strong","type":"FLOAT","value":550},{"name":"imported/badge/icon-2/font-weight/warning-strong","type":"FLOAT","value":550},{"name":"imported/badge/icon-2/font-weight/critical-strong","type":"FLOAT","value":550},{"name":"imported/badge/icon-2/font-weight/attention-strong","type":"FLOAT","value":550},{"name":"imported/badge/icon-2/font-weight/read-only","type":"FLOAT","value":550},{"name":"imported/badge/icon-2/font-weight/enabled","type":"FLOAT","value":550},{"name":"imported/badge/label-3/bottom","type":"FLOAT","value":799},{"name":"imported/badge/label-3/color/none","type":"COLOR","value":"#616161"},{"name":"imported/badge/label-3/color/info","type":"COLOR","value":"#003a5a"},{"name":"imported/badge/label-3/color/success","type":"COLOR","value":"#014b40"},{"name":"imported/badge/label-3/color/warning","type":"COLOR","value":"#5e4200"},{"name":"imported/badge/label-3/color/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/badge/label-3/color/attention","type":"COLOR","value":"#4f4700"},{"name":"imported/badge/label-3/color/new","type":"COLOR","value":"#616161"},{"name":"imported/badge/label-3/color/magic","type":"COLOR","value":"#5700d1"},{"name":"imported/badge/label-3/color/info-strong","type":"COLOR","value":"#002133"},{"name":"imported/badge/label-3/color/success-strong","type":"COLOR","value":"#fafffb"},{"name":"imported/badge/label-3/color/warning-strong","type":"COLOR","value":"#251a00"},{"name":"imported/badge/label-3/color/critical-strong","type":"COLOR","value":"#fffafb"},{"name":"imported/badge/label-3/color/attention-strong","type":"COLOR","value":"#332e00"},{"name":"imported/badge/label-3/color/read-only","type":"COLOR","value":"#616161"},{"name":"imported/badge/label-3/color/enabled","type":"COLOR","value":"#303030"},{"name":"imported/badge/label-3/font-weight/none","type":"FLOAT","value":550},{"name":"imported/badge/label-3/font-weight/info","type":"FLOAT","value":550},{"name":"imported/badge/label-3/font-weight/success","type":"FLOAT","value":550},{"name":"imported/badge/label-3/font-weight/warning","type":"FLOAT","value":550},{"name":"imported/badge/label-3/font-weight/critical","type":"FLOAT","value":550},{"name":"imported/badge/label-3/font-weight/attention","type":"FLOAT","value":550},{"name":"imported/badge/label-3/font-weight/new","type":"FLOAT","value":700},{"name":"imported/badge/label-3/font-weight/magic","type":"FLOAT","value":550},{"name":"imported/badge/label-3/font-weight/info-strong","type":"FLOAT","value":550},{"name":"imported/badge/label-3/font-weight/success-strong","type":"FLOAT","value":550},{"name":"imported/badge/label-3/font-weight/warning-strong","type":"FLOAT","value":550},{"name":"imported/badge/label-3/font-weight/critical-strong","type":"FLOAT","value":550},{"name":"imported/badge/label-3/font-weight/attention-strong","type":"FLOAT","value":550},{"name":"imported/badge/label-3/font-weight/read-only","type":"FLOAT","value":550},{"name":"imported/badge/label-3/font-weight/enabled","type":"FLOAT","value":550},{"name":"imported/badge/label-3/left","type":"FLOAT","value":16},{"name":"imported/badge/label-3/right","type":"FLOAT","value":583},{"name":"imported/badge/icon-3/color/none","type":"COLOR","value":"#616161"},{"name":"imported/badge/icon-3/color/info","type":"COLOR","value":"#003a5a"},{"name":"imported/badge/icon-3/color/success","type":"COLOR","value":"#014b40"},{"name":"imported/badge/icon-3/color/warning","type":"COLOR","value":"#5e4200"},{"name":"imported/badge/icon-3/color/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/badge/icon-3/color/attention","type":"COLOR","value":"#4f4700"},{"name":"imported/badge/icon-3/color/new","type":"COLOR","value":"#616161"},{"name":"imported/badge/icon-3/color/magic","type":"COLOR","value":"#5700d1"},{"name":"imported/badge/icon-3/color/info-strong","type":"COLOR","value":"#002133"},{"name":"imported/badge/icon-3/color/success-strong","type":"COLOR","value":"#fafffb"},{"name":"imported/badge/icon-3/color/warning-strong","type":"COLOR","value":"#251a00"},{"name":"imported/badge/icon-3/color/critical-strong","type":"COLOR","value":"#fffafb"},{"name":"imported/badge/icon-3/color/attention-strong","type":"COLOR","value":"#332e00"},{"name":"imported/badge/icon-3/color/read-only","type":"COLOR","value":"#616161"},{"name":"imported/badge/icon-3/color/enabled","type":"COLOR","value":"#303030"},{"name":"imported/badge/icon-3/fill/none","type":"COLOR","value":"rgba(97, 97, 97, 1)","alias":"p/color-text-secondary"},{"name":"imported/badge/icon-3/fill/info","type":"COLOR","value":"rgba(0, 148, 213, 1)","alias":"p/color-icon-info"},{"name":"imported/badge/icon-3/fill/success","type":"COLOR","value":"rgba(4, 123, 93, 1)","alias":"p/color-icon-success"},{"name":"imported/badge/icon-3/fill/warning","type":"COLOR","value":"rgba(178, 132, 0, 1)","alias":"p/color-icon-warning"},{"name":"imported/badge/icon-3/fill/critical","type":"COLOR","value":"rgba(226, 44, 56, 1)","alias":"p/color-icon-critical"},{"name":"imported/badge/icon-3/fill/attention","type":"COLOR","value":"rgba(153, 138, 0, 1)","alias":"p/color-icon-caution"},{"name":"imported/badge/icon-3/fill/new","type":"COLOR","value":"rgba(97, 97, 97, 1)","alias":"p/color-text-secondary"},{"name":"imported/badge/icon-3/fill/magic","type":"COLOR","value":"rgba(87, 0, 209, 1)","alias":"p/color-text-magic"},{"name":"imported/badge/icon-3/fill/info-strong","type":"COLOR","value":"rgba(0, 33, 51, 1)","alias":"p/color-text-info-on-bg-fill"},{"name":"imported/badge/icon-3/fill/success-strong","type":"COLOR","value":"rgba(250, 255, 251, 1)","alias":"p/color-text-success-on-bg-fill"},{"name":"imported/badge/icon-3/fill/warning-strong","type":"COLOR","value":"rgba(37, 26, 0, 1)","alias":"p/color-text-warning-on-bg-fill"},{"name":"imported/badge/icon-3/fill/critical-strong","type":"COLOR","value":"rgba(255, 250, 251, 1)","alias":"p/color-text-critical-on-bg-fill"},{"name":"imported/badge/icon-3/fill/attention-strong","type":"COLOR","value":"rgba(51, 46, 0, 1)","alias":"p/color-text-caution-on-bg-fill"},{"name":"imported/badge/icon-3/fill/read-only","type":"COLOR","value":"rgba(138, 138, 138, 1)","alias":"p/color-icon-secondary"},{"name":"imported/badge/icon-3/fill/enabled","type":"COLOR","value":"rgba(4, 123, 93, 1)","alias":"p/color-icon-success"},{"name":"imported/badge/icon-3/font-weight/none","type":"FLOAT","value":550},{"name":"imported/badge/icon-3/font-weight/info","type":"FLOAT","value":550},{"name":"imported/badge/icon-3/font-weight/success","type":"FLOAT","value":550},{"name":"imported/badge/icon-3/font-weight/warning","type":"FLOAT","value":550},{"name":"imported/badge/icon-3/font-weight/critical","type":"FLOAT","value":550},{"name":"imported/badge/icon-3/font-weight/attention","type":"FLOAT","value":550},{"name":"imported/badge/icon-3/font-weight/new","type":"FLOAT","value":700},{"name":"imported/badge/icon-3/font-weight/magic","type":"FLOAT","value":550},{"name":"imported/badge/icon-3/font-weight/info-strong","type":"FLOAT","value":550},{"name":"imported/badge/icon-3/font-weight/success-strong","type":"FLOAT","value":550},{"name":"imported/badge/icon-3/font-weight/warning-strong","type":"FLOAT","value":550},{"name":"imported/badge/icon-3/font-weight/critical-strong","type":"FLOAT","value":550},{"name":"imported/badge/icon-3/font-weight/attention-strong","type":"FLOAT","value":550},{"name":"imported/badge/icon-3/font-weight/read-only","type":"FLOAT","value":550},{"name":"imported/badge/icon-3/font-weight/enabled","type":"FLOAT","value":550},{"name":"imported/badge/label/color/none","type":"COLOR","value":"#616161"},{"name":"imported/badge/label/color/info","type":"COLOR","value":"#003a5a"},{"name":"imported/badge/label/color/success","type":"COLOR","value":"#014b40"},{"name":"imported/badge/label/color/warning","type":"COLOR","value":"#5e4200"},{"name":"imported/badge/label/color/critical","type":"COLOR","value":"#8e0b21"},{"name":"imported/badge/label/color/attention","type":"COLOR","value":"#4f4700"},{"name":"imported/badge/label/color/new","type":"COLOR","value":"#616161"},{"name":"imported/badge/label/color/magic","type":"COLOR","value":"#5700d1"},{"name":"imported/badge/label/color/info-strong","type":"COLOR","value":"#002133"},{"name":"imported/badge/label/color/success-strong","type":"COLOR","value":"#fafffb"},{"name":"imported/badge/label/color/warning-strong","type":"COLOR","value":"#251a00"},{"name":"imported/badge/label/color/critical-strong","type":"COLOR","value":"#fffafb"},{"name":"imported/badge/label/color/attention-strong","type":"COLOR","value":"#332e00"},{"name":"imported/badge/label/color/read-only","type":"COLOR","value":"#616161"},{"name":"imported/badge/label/color/enabled","type":"COLOR","value":"#303030"},{"name":"imported/badge/label/font-size","type":"FLOAT","value":12},{"name":"imported/badge/label/font-weight/none","type":"FLOAT","value":450},{"name":"imported/badge/label/font-weight/info","type":"FLOAT","value":450},{"name":"imported/badge/label/font-weight/success","type":"FLOAT","value":450},{"name":"imported/badge/label/font-weight/warning","type":"FLOAT","value":450},{"name":"imported/badge/label/font-weight/critical","type":"FLOAT","value":450},{"name":"imported/badge/label/font-weight/attention","type":"FLOAT","value":450},{"name":"imported/badge/label/font-weight/new","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/badge/label/font-weight/magic","type":"FLOAT","value":450},{"name":"imported/badge/label/font-weight/info-strong","type":"FLOAT","value":450},{"name":"imported/badge/label/font-weight/success-strong","type":"FLOAT","value":450},{"name":"imported/badge/label/font-weight/warning-strong","type":"FLOAT","value":450},{"name":"imported/badge/label/font-weight/critical-strong","type":"FLOAT","value":450},{"name":"imported/badge/label/font-weight/attention-strong","type":"FLOAT","value":450},{"name":"imported/badge/label/font-weight/read-only","type":"FLOAT","value":450},{"name":"imported/badge/label/font-weight/enabled","type":"FLOAT","value":450},{"name":"imported/badge/label/line-height","type":"FLOAT","value":16},{"name":"imported/banner/root/height/off/off","type":"FLOAT","value":88},{"name":"imported/banner/root/height/off/on","type":"FLOAT","value":128},{"name":"imported/banner/root/height/on/off","type":"FLOAT","value":92},{"name":"imported/banner/root/height/on/on","type":"FLOAT","value":132},{"name":"imported/banner/root/outline-color-state-focus-visible","type":"COLOR","value":"#005bd3"},{"name":"imported/banner/root/outline-width-state-focus-visible","type":"FLOAT","value":2},{"name":"imported/banner/box/height/off/off","type":"FLOAT","value":88},{"name":"imported/banner/box/height/off/on","type":"FLOAT","value":128},{"name":"imported/banner/box/height/on/off","type":"FLOAT","value":92},{"name":"imported/banner/box/height/on/on","type":"FLOAT","value":132},{"name":"imported/banner/blockstack/height/off/off","type":"FLOAT","value":88},{"name":"imported/banner/blockstack/height/off/on","type":"FLOAT","value":128},{"name":"imported/banner/blockstack/height/on/off","type":"FLOAT","value":92},{"name":"imported/banner/blockstack/height/on/on","type":"FLOAT","value":132},{"name":"imported/banner/box-2/background-color/success","type":"COLOR","value":"#047b5d"},{"name":"imported/banner/box-2/background-color/info","type":"COLOR","value":"#91d0ff"},{"name":"imported/banner/box-2/background-color/warning","type":"COLOR","value":"#ffb800"},{"name":"imported/banner/box-2/background-color/critical","type":"COLOR","value":"#c70a24"},{"name":"imported/banner/box-2/color/success","type":"COLOR","value":"#fafffb"},{"name":"imported/banner/box-2/color/info","type":"COLOR","value":"#002133"},{"name":"imported/banner/box-2/color/warning","type":"COLOR","value":"#251a00"},{"name":"imported/banner/box-2/color/critical","type":"COLOR","value":"#fffafb"},{"name":"imported/banner/box-2/height/off","type":"FLOAT","value":44},{"name":"imported/banner/box-2/height/on","type":"FLOAT","value":48},{"name":"imported/banner/inlinestack/color/success","type":"COLOR","value":"#fafffb"},{"name":"imported/banner/inlinestack/color/info","type":"COLOR","value":"#002133"},{"name":"imported/banner/inlinestack/color/warning","type":"COLOR","value":"#251a00"},{"name":"imported/banner/inlinestack/color/critical","type":"COLOR","value":"#fffafb"},{"name":"imported/banner/inlinestack/height/off","type":"FLOAT","value":20},{"name":"imported/banner/inlinestack/height/on","type":"FLOAT","value":24},{"name":"imported/banner/inlinestack-2/color/success","type":"COLOR","value":"#fafffb"},{"name":"imported/banner/inlinestack-2/color/info","type":"COLOR","value":"#002133"},{"name":"imported/banner/inlinestack-2/color/warning","type":"COLOR","value":"#251a00"},{"name":"imported/banner/inlinestack-2/color/critical","type":"COLOR","value":"#fffafb"},{"name":"imported/banner/inlinestack-2/width","type":"FLOAT","value":118.609},{"name":"imported/banner/part-0-0-0-0-0-0/color/success","type":"COLOR","value":"#fafffb"},{"name":"imported/banner/part-0-0-0-0-0-0/color/info","type":"COLOR","value":"#002133"},{"name":"imported/banner/part-0-0-0-0-0-0/color/warning","type":"COLOR","value":"#251a00"},{"name":"imported/banner/part-0-0-0-0-0-0/color/critical","type":"COLOR","value":"#fffafb"},{"name":"imported/banner/icon/color/success","type":"COLOR","value":"#fafffb"},{"name":"imported/banner/icon/color/info","type":"COLOR","value":"#002133"},{"name":"imported/banner/icon/color/warning","type":"COLOR","value":"#251a00"},{"name":"imported/banner/icon/color/critical","type":"COLOR","value":"#fffafb"},{"name":"imported/banner/title/color/success","type":"COLOR","value":"#fafffb"},{"name":"imported/banner/title/color/info","type":"COLOR","value":"#002133"},{"name":"imported/banner/title/color/warning","type":"COLOR","value":"#251a00"},{"name":"imported/banner/title/color/critical","type":"COLOR","value":"#fffafb"},{"name":"imported/banner/button/background-color","type":"COLOR","value":"#00000000"},{"name":"imported/banner/button-icon/margin-bottom","type":"FLOAT","value":-2},{"name":"imported/banner/button-icon/margin-top","type":"FLOAT","value":-2},{"name":"imported/banner/box-3/height/off","type":"FLOAT","value":44},{"name":"imported/banner/box-3/height/on","type":"FLOAT","value":84},{"name":"imported/banner/blockstack-2/height/off","type":"FLOAT","value":20},{"name":"imported/banner/blockstack-2/height/on","type":"FLOAT","value":60},{"name":"imported/banner/buttongroup/height","type":"FLOAT","value":40},{"name":"imported/banner/buttongroup/margin-left","type":"FLOAT","value":-8},{"name":"imported/banner/buttongroup/margin-top","type":"FLOAT","value":-8},{"name":"imported/banner/buttongroup/width","type":"FLOAT","value":303.328},{"name":"imported/banner/buttongroup-item/width","type":"FLOAT","value":82.0781},{"name":"imported/banner/button-2/background-color","type":"COLOR","value":"#ffffff"},{"name":"imported/banner/button-2/padding-bottom","type":"FLOAT","value":6},{"name":"imported/banner/button-2/padding-top","type":"FLOAT","value":6},{"name":"imported/banner/button-2/width","type":"FLOAT","value":82.0781},{"name":"imported/banner/label-3/font-weight","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/banner/label-3/line-height","type":"FLOAT","value":16},{"name":"imported/checkbox/root/height","type":"FLOAT","value":28},{"name":"imported/checkbox/root/width","type":"FLOAT","value":136.359},{"name":"imported/checkbox/choice-control/margin-right","type":"FLOAT","value":8},{"name":"imported/checkbox/input/color","type":"COLOR","value":"#000000"},{"name":"imported/checkbox/input/font-size","type":"FLOAT","value":13.3333},{"name":"imported/checkbox/input/font-weight","type":"FLOAT","value":400},{"name":"imported/checkbox/input/outline-color","type":"COLOR","value":"#000000"},{"name":"imported/checkbox/input/z-index","type":"FLOAT","value":100,"alias":"p/z-index-1"},{"name":"imported/checkbox/input/color-state-disabled","type":"COLOR","value":"#545454"},{"name":"imported/checkbox/input/outline-color-state-disabled","type":"COLOR","value":"#545454"},{"name":"imported/checkbox/input/outline-color-state-focus-visible","type":"COLOR","value":"#005fcc"},{"name":"imported/checkbox/input/outline-offset-state-focus-visible","type":"FLOAT","value":2},{"name":"imported/checkbox/input/outline-width-state-focus-visible","type":"FLOAT","value":1},{"name":"imported/checkbox/backdrop/background-color/unchecked","type":"COLOR","value":"rgba(255, 255, 255, 1)","alias":"p/color-bg-surface"},{"name":"imported/checkbox/backdrop/background-color/checked","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-bg-fill-brand-selected"},{"name":"imported/checkbox/backdrop/background-color/indeterminate","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-bg-fill-brand-selected"},{"name":"imported/checkbox/backdrop/background-color-state-active/unchecked","type":"COLOR","value":"#fafafa"},{"name":"imported/checkbox/backdrop/background-color-state-active/checked","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-bg-fill-brand-selected"},{"name":"imported/checkbox/backdrop/background-color-state-active/indeterminate","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-bg-fill-brand-selected"},{"name":"imported/checkbox/backdrop/background-color-state-disabled","type":"COLOR","value":"#00000014"},{"name":"imported/checkbox/backdrop/background-color-state-focus-visible/unchecked","type":"COLOR","value":"#fafafa"},{"name":"imported/checkbox/backdrop/background-color-state-focus-visible/checked","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-bg-fill-brand-selected"},{"name":"imported/checkbox/backdrop/background-color-state-focus-visible/indeterminate","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-bg-fill-brand-selected"},{"name":"imported/checkbox/backdrop/outline-color-state-focus-visible","type":"COLOR","value":"#005bd3"},{"name":"imported/checkbox/backdrop/outline-offset-state-focus-visible","type":"FLOAT","value":1},{"name":"imported/checkbox/backdrop/outline-width-state-focus-visible","type":"FLOAT","value":2},{"name":"imported/checkbox/backdrop/background-color-state-hover/unchecked","type":"COLOR","value":"#fafafa"},{"name":"imported/checkbox/backdrop/background-color-state-hover/checked","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-bg-fill-brand-selected"},{"name":"imported/checkbox/backdrop/background-color-state-hover/indeterminate","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-bg-fill-brand-selected"},{"name":"imported/checkbox/backdrop/border-bottom-color-state-hover/unchecked","type":"COLOR","value":"#616161"},{"name":"imported/checkbox/backdrop/border-bottom-color-state-hover/checked","type":"COLOR","value":"#303030"},{"name":"imported/checkbox/backdrop/border-bottom-color-state-hover/indeterminate","type":"COLOR","value":"#303030"},{"name":"imported/checkbox/backdrop/border-left-color-state-hover/unchecked","type":"COLOR","value":"#616161"},{"name":"imported/checkbox/backdrop/border-left-color-state-hover/checked","type":"COLOR","value":"#303030"},{"name":"imported/checkbox/backdrop/border-left-color-state-hover/indeterminate","type":"COLOR","value":"#303030"},{"name":"imported/checkbox/backdrop/border-right-color-state-hover/unchecked","type":"COLOR","value":"#616161"},{"name":"imported/checkbox/backdrop/border-right-color-state-hover/checked","type":"COLOR","value":"#303030"},{"name":"imported/checkbox/backdrop/border-right-color-state-hover/indeterminate","type":"COLOR","value":"#303030"},{"name":"imported/checkbox/backdrop/border-top-color-state-hover/unchecked","type":"COLOR","value":"#616161"},{"name":"imported/checkbox/backdrop/border-top-color-state-hover/checked","type":"COLOR","value":"#303030"},{"name":"imported/checkbox/backdrop/border-top-color-state-hover/indeterminate","type":"COLOR","value":"#303030"},{"name":"imported/checkbox/icon-3/bottom/checked","type":"FLOAT","value":0},{"name":"imported/checkbox/icon-3/bottom/indeterminate","type":"FLOAT","value":-2},{"name":"imported/checkbox/icon-3/bottom/unchecked","type":"FLOAT","value":0},{"name":"imported/checkbox/icon-3/height/checked","type":"FLOAT","value":14},{"name":"imported/checkbox/icon-3/height/indeterminate","type":"FLOAT","value":22},{"name":"imported/checkbox/icon-3/height/unchecked","type":"FLOAT","value":14},{"name":"imported/checkbox/icon-3/left/checked","type":"FLOAT","value":0},{"name":"imported/checkbox/icon-3/left/indeterminate","type":"FLOAT","value":-2},{"name":"imported/checkbox/icon-3/left/unchecked","type":"FLOAT","value":0},{"name":"imported/checkbox/icon-3/margin-bottom/checked","type":"FLOAT","value":2},{"name":"imported/checkbox/icon-3/margin-bottom/indeterminate","type":"FLOAT","value":0},{"name":"imported/checkbox/icon-3/margin-bottom/unchecked","type":"FLOAT","value":2},{"name":"imported/checkbox/icon-3/margin-left/checked","type":"FLOAT","value":2},{"name":"imported/checkbox/icon-3/margin-left/indeterminate","type":"FLOAT","value":0},{"name":"imported/checkbox/icon-3/margin-left/unchecked","type":"FLOAT","value":2},{"name":"imported/checkbox/icon-3/margin-right/checked","type":"FLOAT","value":2},{"name":"imported/checkbox/icon-3/margin-right/indeterminate","type":"FLOAT","value":0},{"name":"imported/checkbox/icon-3/margin-right/unchecked","type":"FLOAT","value":2},{"name":"imported/checkbox/icon-3/margin-top/checked","type":"FLOAT","value":2},{"name":"imported/checkbox/icon-3/margin-top/indeterminate","type":"FLOAT","value":0},{"name":"imported/checkbox/icon-3/margin-top/unchecked","type":"FLOAT","value":2},{"name":"imported/checkbox/icon-3/right/checked","type":"FLOAT","value":0},{"name":"imported/checkbox/icon-3/right/indeterminate","type":"FLOAT","value":-2},{"name":"imported/checkbox/icon-3/right/unchecked","type":"FLOAT","value":0},{"name":"imported/checkbox/icon-3/top/checked","type":"FLOAT","value":0},{"name":"imported/checkbox/icon-3/top/indeterminate","type":"FLOAT","value":-2},{"name":"imported/checkbox/icon-3/top/unchecked","type":"FLOAT","value":0},{"name":"imported/checkbox/icon-3/width/checked","type":"FLOAT","value":14},{"name":"imported/checkbox/icon-3/width/indeterminate","type":"FLOAT","value":22},{"name":"imported/checkbox/icon-3/width/unchecked","type":"FLOAT","value":14},{"name":"imported/checkbox/icon-6/color","type":"COLOR","value":"#ffffff"},{"name":"imported/checkbox/icon-6/fill","type":"COLOR","value":"rgba(255, 255, 255, 1)","alias":"p/color-text-brand-on-bg-fill"},{"name":"imported/checkbox/choice-label/width","type":"FLOAT","value":108.359},{"name":"imported/checkbox/label/font-size","type":"FLOAT","value":13},{"name":"imported/checkbox/label/font-weight","type":"FLOAT","value":450},{"name":"imported/radio-button/root/height","type":"FLOAT","value":28},{"name":"imported/radio-button/root/padding-bottom","type":"FLOAT","value":4},{"name":"imported/radio-button/root/padding-top","type":"FLOAT","value":4},{"name":"imported/radio-button/root/width","type":"FLOAT","value":166.328},{"name":"imported/radio-button/choice-control/flex-shrink","type":"FLOAT","value":0},{"name":"imported/radio-button/choice-control/margin-right","type":"FLOAT","value":8},{"name":"imported/radio-button/choice-control/width","type":"FLOAT","value":20},{"name":"imported/radio-button/input/bottom","type":"FLOAT","value":17},{"name":"imported/radio-button/input/color","type":"COLOR","value":"#000000"},{"name":"imported/radio-button/input/font-size","type":"FLOAT","value":13.3333},{"name":"imported/radio-button/input/font-weight","type":"FLOAT","value":400},{"name":"imported/radio-button/input/outline-color","type":"COLOR","value":"#000000"},{"name":"imported/radio-button/input/right","type":"FLOAT","value":17},{"name":"imported/radio-button/input/color-state-disabled","type":"COLOR","value":"#545454"},{"name":"imported/radio-button/input/outline-color-state-disabled","type":"COLOR","value":"#545454"},{"name":"imported/radio-button/input/outline-color-state-focus-visible","type":"COLOR","value":"#005fcc"},{"name":"imported/radio-button/input/outline-width-state-focus-visible","type":"FLOAT","value":1},{"name":"imported/radio-button/backdrop/background-color/unchecked","type":"COLOR","value":"rgba(253, 253, 253, 1)","alias":"p/color-input-bg-surface"},{"name":"imported/radio-button/backdrop/background-color/checked","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-bg-fill-brand-selected"},{"name":"imported/radio-button/backdrop/border-bottom-color/unchecked","type":"COLOR","value":"#8a8a8a"},{"name":"imported/radio-button/backdrop/border-bottom-color/checked","type":"COLOR","value":"#303030"},{"name":"imported/radio-button/backdrop/border-left-color/unchecked","type":"COLOR","value":"#8a8a8a"},{"name":"imported/radio-button/backdrop/border-left-color/checked","type":"COLOR","value":"#303030"},{"name":"imported/radio-button/backdrop/border-right-color/unchecked","type":"COLOR","value":"#8a8a8a"},{"name":"imported/radio-button/backdrop/border-right-color/checked","type":"COLOR","value":"#303030"},{"name":"imported/radio-button/backdrop/border-top-color/unchecked","type":"COLOR","value":"#8a8a8a"},{"name":"imported/radio-button/backdrop/border-top-color/checked","type":"COLOR","value":"#303030"},{"name":"imported/radio-button/backdrop/background-color-state-active/unchecked","type":"COLOR","value":"#fafafa"},{"name":"imported/radio-button/backdrop/background-color-state-active/checked","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-bg-fill-brand-selected"},{"name":"imported/radio-button/backdrop/background-color-state-disabled","type":"COLOR","value":"#00000014"},{"name":"imported/radio-button/backdrop/outline-color-state-focus-visible","type":"COLOR","value":"#005bd3"},{"name":"imported/radio-button/backdrop/outline-offset-state-focus-visible","type":"FLOAT","value":1},{"name":"imported/radio-button/backdrop/background-color-state-hover/unchecked","type":"COLOR","value":"#fafafa"},{"name":"imported/radio-button/backdrop/background-color-state-hover/checked","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-bg-fill-brand-selected"},{"name":"imported/radio-button/backdrop/border-bottom-color-state-hover/unchecked","type":"COLOR","value":"#616161"},{"name":"imported/radio-button/backdrop/border-bottom-color-state-hover/checked","type":"COLOR","value":"#303030"},{"name":"imported/radio-button/backdrop/border-left-color-state-hover/unchecked","type":"COLOR","value":"#616161"},{"name":"imported/radio-button/backdrop/border-left-color-state-hover/checked","type":"COLOR","value":"#303030"},{"name":"imported/radio-button/backdrop/border-right-color-state-hover/unchecked","type":"COLOR","value":"#616161"},{"name":"imported/radio-button/backdrop/border-right-color-state-hover/checked","type":"COLOR","value":"#303030"},{"name":"imported/radio-button/backdrop/border-top-color-state-hover/unchecked","type":"COLOR","value":"#616161"},{"name":"imported/radio-button/backdrop/border-top-color-state-hover/checked","type":"COLOR","value":"#303030"},{"name":"imported/radio-button/choice-label/width","type":"FLOAT","value":138.328},{"name":"imported/radio-button/label/font-size","type":"FLOAT","value":13},{"name":"imported/radio-button/label/font-weight","type":"FLOAT","value":450},{"name":"imported/radio-button/label/line-height","type":"FLOAT","value":20},{"name":"imported/avatar/root/border-bottom-left-radius/xs","type":"FLOAT","value":4},{"name":"imported/avatar/root/border-bottom-left-radius/sm","type":"FLOAT","value":6},{"name":"imported/avatar/root/border-bottom-left-radius/md","type":"FLOAT","value":6},{"name":"imported/avatar/root/border-bottom-left-radius/lg","type":"FLOAT","value":8},{"name":"imported/avatar/root/border-bottom-left-radius/xl","type":"FLOAT","value":8},{"name":"imported/avatar/root/border-bottom-right-radius/xs","type":"FLOAT","value":4},{"name":"imported/avatar/root/border-bottom-right-radius/sm","type":"FLOAT","value":6},{"name":"imported/avatar/root/border-bottom-right-radius/md","type":"FLOAT","value":6},{"name":"imported/avatar/root/border-bottom-right-radius/lg","type":"FLOAT","value":8},{"name":"imported/avatar/root/border-bottom-right-radius/xl","type":"FLOAT","value":8},{"name":"imported/avatar/root/border-top-left-radius/xs","type":"FLOAT","value":4},{"name":"imported/avatar/root/border-top-left-radius/sm","type":"FLOAT","value":6},{"name":"imported/avatar/root/border-top-left-radius/md","type":"FLOAT","value":6},{"name":"imported/avatar/root/border-top-left-radius/lg","type":"FLOAT","value":8},{"name":"imported/avatar/root/border-top-left-radius/xl","type":"FLOAT","value":8},{"name":"imported/avatar/root/border-top-right-radius/xs","type":"FLOAT","value":4},{"name":"imported/avatar/root/border-top-right-radius/sm","type":"FLOAT","value":6},{"name":"imported/avatar/root/border-top-right-radius/md","type":"FLOAT","value":6},{"name":"imported/avatar/root/border-top-right-radius/lg","type":"FLOAT","value":8},{"name":"imported/avatar/root/border-top-right-radius/xl","type":"FLOAT","value":8},{"name":"imported/avatar/root/height/xs","type":"FLOAT","value":20},{"name":"imported/avatar/root/height/sm","type":"FLOAT","value":24},{"name":"imported/avatar/root/height/md","type":"FLOAT","value":28},{"name":"imported/avatar/root/height/lg","type":"FLOAT","value":32},{"name":"imported/avatar/root/height/xl","type":"FLOAT","value":40},{"name":"imported/avatar/root/width/xs","type":"FLOAT","value":20},{"name":"imported/avatar/root/width/sm","type":"FLOAT","value":24},{"name":"imported/avatar/root/width/md","type":"FLOAT","value":28},{"name":"imported/avatar/root/width/lg","type":"FLOAT","value":32},{"name":"imported/avatar/root/width/xl","type":"FLOAT","value":40},{"name":"imported/avatar/initials/color/off","type":"COLOR","value":"#fdeffd"},{"name":"imported/avatar/initials/color/on","type":"COLOR","value":"#fff6f8"},{"name":"imported/avatar/initials/height/xs","type":"FLOAT","value":20},{"name":"imported/avatar/initials/height/sm","type":"FLOAT","value":24},{"name":"imported/avatar/initials/height/md","type":"FLOAT","value":28},{"name":"imported/avatar/initials/height/lg","type":"FLOAT","value":32},{"name":"imported/avatar/initials/height/xl","type":"FLOAT","value":40},{"name":"imported/avatar/initials/width/xs","type":"FLOAT","value":20},{"name":"imported/avatar/initials/width/sm","type":"FLOAT","value":24},{"name":"imported/avatar/initials/width/md","type":"FLOAT","value":28},{"name":"imported/avatar/initials/width/lg","type":"FLOAT","value":32},{"name":"imported/avatar/initials/width/xl","type":"FLOAT","value":40},{"name":"imported/spinner/root/color","type":"COLOR","value":"#303030"},{"name":"imported/spinner/root/width/small","type":"FLOAT","value":20},{"name":"imported/spinner/root/width/large","type":"FLOAT","value":44},{"name":"imported/progress-bar/root/height/small","type":"FLOAT","value":8},{"name":"imported/progress-bar/root/height/medium","type":"FLOAT","value":16},{"name":"imported/progress-bar/root/height/large","type":"FLOAT","value":32},{"name":"imported/progress-bar/root/width","type":"FLOAT","value":288},{"name":"imported/progress-bar/progress/bottom","type":"FLOAT","value":799},{"name":"imported/progress-bar/progress/left","type":"FLOAT","value":16},{"name":"imported/progress-bar/progress/right","type":"FLOAT","value":583},{"name":"imported/progress-bar/progress/vertical-align","type":"FLOAT","value":-2.6},{"name":"imported/progress-bar/indicator/height/small","type":"FLOAT","value":8},{"name":"imported/progress-bar/indicator/height/medium","type":"FLOAT","value":16},{"name":"imported/progress-bar/indicator/height/large","type":"FLOAT","value":32},{"name":"imported/progress-bar/indicator/width","type":"FLOAT","value":288},{"name":"imported/progress-bar/label/bottom/small","type":"FLOAT","value":7},{"name":"imported/progress-bar/label/bottom/medium","type":"FLOAT","value":15},{"name":"imported/progress-bar/label/bottom/large","type":"FLOAT","value":31},{"name":"imported/progress-bar/label/right","type":"FLOAT","value":287},{"name":"imported/thumbnail/root/height/extraSmall","type":"FLOAT","value":24},{"name":"imported/thumbnail/root/height/small","type":"FLOAT","value":40},{"name":"imported/thumbnail/root/height/medium","type":"FLOAT","value":60},{"name":"imported/thumbnail/root/height/large","type":"FLOAT","value":80},{"name":"imported/thumbnail/root/width/extraSmall","type":"FLOAT","value":24},{"name":"imported/thumbnail/root/width/small","type":"FLOAT","value":40},{"name":"imported/thumbnail/root/width/medium","type":"FLOAT","value":60},{"name":"imported/thumbnail/root/width/large","type":"FLOAT","value":80},{"name":"imported/thumbnail/part-0/color","type":"COLOR","value":"rgba(138, 138, 138, 1)","alias":"p/color-icon-secondary"},{"name":"imported/thumbnail/part-0/height/extraSmall","type":"FLOAT","value":24},{"name":"imported/thumbnail/part-0/height/small","type":"FLOAT","value":40},{"name":"imported/thumbnail/part-0/height/medium","type":"FLOAT","value":60},{"name":"imported/thumbnail/part-0/height/large","type":"FLOAT","value":80},{"name":"imported/thumbnail/part-0/width/extraSmall","type":"FLOAT","value":24},{"name":"imported/thumbnail/part-0/width/small","type":"FLOAT","value":40},{"name":"imported/thumbnail/part-0/width/medium","type":"FLOAT","value":60},{"name":"imported/thumbnail/part-0/width/large","type":"FLOAT","value":80},{"name":"imported/text/root/color/none","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-text"},{"name":"imported/text/root/color/base","type":"COLOR","value":"rgba(48, 48, 48, 1)","alias":"p/color-text"},{"name":"imported/text/root/color/disabled","type":"COLOR","value":"rgba(181, 181, 181, 1)","alias":"p/color-text-disabled"},{"name":"imported/text/root/color/inherit","type":"COLOR","value":"#303030"},{"name":"imported/text/root/color/success","type":"COLOR","value":"rgba(1, 75, 64, 1)","alias":"p/color-text-success"},{"name":"imported/text/root/color/critical","type":"COLOR","value":"rgba(142, 11, 33, 1)","alias":"p/color-text-critical"},{"name":"imported/text/root/color/caution","type":"COLOR","value":"rgba(79, 71, 0, 1)","alias":"p/color-text-caution"},{"name":"imported/text/root/color/subdued","type":"COLOR","value":"rgba(97, 97, 97, 1)","alias":"p/color-text-secondary"},{"name":"imported/text/root/color/text-inverse","type":"COLOR","value":"rgba(227, 227, 227, 1)","alias":"p/color-text-inverse"},{"name":"imported/text/root/color/text-inverse-secondary","type":"COLOR","value":"rgba(181, 181, 181, 1)","alias":"p/color-text-inverse-secondary"},{"name":"imported/text/root/color/magic","type":"COLOR","value":"rgba(87, 0, 209, 1)","alias":"p/color-text-magic"},{"name":"imported/text/root/color/magic-subdued","type":"COLOR","value":"rgba(113, 38, 255, 1)","alias":"p/color-text-magic-secondary"},{"name":"imported/text/root/font-size/none","type":"FLOAT","value":13},{"name":"imported/text/root/font-size/headingXs","type":"FLOAT","value":12},{"name":"imported/text/root/font-size/headingSm","type":"FLOAT","value":13},{"name":"imported/text/root/font-size/headingMd","type":"FLOAT","value":14},{"name":"imported/text/root/font-size/headingLg","type":"FLOAT","value":20},{"name":"imported/text/root/font-size/headingXl","type":"FLOAT","value":20},{"name":"imported/text/root/font-size/heading2xl","type":"FLOAT","value":24},{"name":"imported/text/root/font-size/heading3xl","type":"FLOAT","value":30},{"name":"imported/text/root/font-size/bodyXs","type":"FLOAT","value":11},{"name":"imported/text/root/font-size/bodySm","type":"FLOAT","value":12},{"name":"imported/text/root/font-size/bodyMd","type":"FLOAT","value":13},{"name":"imported/text/root/font-size/bodyLg","type":"FLOAT","value":14},{"name":"imported/text/root/font-weight/none/none","type":"FLOAT","value":450,"alias":"p/font-weight-regular"},{"name":"imported/text/root/font-weight/none/regular","type":"FLOAT","value":450,"alias":"p/font-weight-regular"},{"name":"imported/text/root/font-weight/none/medium","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/text/root/font-weight/none/semibold","type":"FLOAT","value":650,"alias":"p/font-weight-semibold"},{"name":"imported/text/root/font-weight/none/bold","type":"FLOAT","value":700,"alias":"p/font-weight-bold"},{"name":"imported/text/root/font-weight/headingXs/none","type":"FLOAT","value":650,"alias":"p/font-weight-semibold"},{"name":"imported/text/root/font-weight/headingXs/semibold","type":"FLOAT","value":650,"alias":"p/font-weight-semibold"},{"name":"imported/text/root/font-weight/headingXs/bold","type":"FLOAT","value":700,"alias":"p/font-weight-bold"},{"name":"imported/text/root/font-weight/headingXs/regular","type":"FLOAT","value":450,"alias":"p/font-weight-regular"},{"name":"imported/text/root/font-weight/headingXs/medium","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/text/root/font-weight/headingSm/none","type":"FLOAT","value":650,"alias":"p/font-weight-semibold"},{"name":"imported/text/root/font-weight/headingSm/regular","type":"FLOAT","value":450,"alias":"p/font-weight-regular"},{"name":"imported/text/root/font-weight/headingSm/medium","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/text/root/font-weight/headingSm/semibold","type":"FLOAT","value":650,"alias":"p/font-weight-semibold"},{"name":"imported/text/root/font-weight/headingSm/bold","type":"FLOAT","value":700,"alias":"p/font-weight-bold"},{"name":"imported/text/root/font-weight/headingMd/none","type":"FLOAT","value":650,"alias":"p/font-weight-semibold"},{"name":"imported/text/root/font-weight/headingMd/medium","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/text/root/font-weight/headingMd/semibold","type":"FLOAT","value":650,"alias":"p/font-weight-semibold"},{"name":"imported/text/root/font-weight/headingMd/bold","type":"FLOAT","value":700,"alias":"p/font-weight-bold"},{"name":"imported/text/root/font-weight/headingMd/regular","type":"FLOAT","value":450,"alias":"p/font-weight-regular"},{"name":"imported/text/root/font-weight/headingLg/none","type":"FLOAT","value":650,"alias":"p/font-weight-semibold"},{"name":"imported/text/root/font-weight/headingLg/bold","type":"FLOAT","value":700,"alias":"p/font-weight-bold"},{"name":"imported/text/root/font-weight/headingLg/regular","type":"FLOAT","value":450,"alias":"p/font-weight-regular"},{"name":"imported/text/root/font-weight/headingLg/medium","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/text/root/font-weight/headingLg/semibold","type":"FLOAT","value":650,"alias":"p/font-weight-semibold"},{"name":"imported/text/root/font-weight/headingXl/none","type":"FLOAT","value":650,"alias":"p/font-weight-semibold"},{"name":"imported/text/root/font-weight/headingXl/regular","type":"FLOAT","value":450,"alias":"p/font-weight-regular"},{"name":"imported/text/root/font-weight/headingXl/medium","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/text/root/font-weight/headingXl/semibold","type":"FLOAT","value":650,"alias":"p/font-weight-semibold"},{"name":"imported/text/root/font-weight/headingXl/bold","type":"FLOAT","value":700,"alias":"p/font-weight-bold"},{"name":"imported/text/root/font-weight/heading2xl/none","type":"FLOAT","value":700,"alias":"p/font-weight-bold"},{"name":"imported/text/root/font-weight/heading2xl/semibold","type":"FLOAT","value":650,"alias":"p/font-weight-semibold"},{"name":"imported/text/root/font-weight/heading2xl/bold","type":"FLOAT","value":700,"alias":"p/font-weight-bold"},{"name":"imported/text/root/font-weight/heading2xl/regular","type":"FLOAT","value":450,"alias":"p/font-weight-regular"},{"name":"imported/text/root/font-weight/heading2xl/medium","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/text/root/font-weight/heading3xl/none","type":"FLOAT","value":700,"alias":"p/font-weight-bold"},{"name":"imported/text/root/font-weight/heading3xl/regular","type":"FLOAT","value":450,"alias":"p/font-weight-regular"},{"name":"imported/text/root/font-weight/heading3xl/medium","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/text/root/font-weight/heading3xl/semibold","type":"FLOAT","value":650,"alias":"p/font-weight-semibold"},{"name":"imported/text/root/font-weight/heading3xl/bold","type":"FLOAT","value":700,"alias":"p/font-weight-bold"},{"name":"imported/text/root/font-weight/bodyXs/none","type":"FLOAT","value":450,"alias":"p/font-weight-regular"},{"name":"imported/text/root/font-weight/bodyXs/medium","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/text/root/font-weight/bodyXs/semibold","type":"FLOAT","value":650,"alias":"p/font-weight-semibold"},{"name":"imported/text/root/font-weight/bodyXs/bold","type":"FLOAT","value":700,"alias":"p/font-weight-bold"},{"name":"imported/text/root/font-weight/bodyXs/regular","type":"FLOAT","value":450,"alias":"p/font-weight-regular"},{"name":"imported/text/root/font-weight/bodySm/none","type":"FLOAT","value":450,"alias":"p/font-weight-regular"},{"name":"imported/text/root/font-weight/bodySm/bold","type":"FLOAT","value":700,"alias":"p/font-weight-bold"},{"name":"imported/text/root/font-weight/bodySm/regular","type":"FLOAT","value":450,"alias":"p/font-weight-regular"},{"name":"imported/text/root/font-weight/bodySm/medium","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/text/root/font-weight/bodySm/semibold","type":"FLOAT","value":650,"alias":"p/font-weight-semibold"},{"name":"imported/text/root/font-weight/bodyMd/none","type":"FLOAT","value":450,"alias":"p/font-weight-regular"},{"name":"imported/text/root/font-weight/bodyMd/regular","type":"FLOAT","value":450,"alias":"p/font-weight-regular"},{"name":"imported/text/root/font-weight/bodyMd/medium","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/text/root/font-weight/bodyMd/semibold","type":"FLOAT","value":650,"alias":"p/font-weight-semibold"},{"name":"imported/text/root/font-weight/bodyMd/bold","type":"FLOAT","value":700,"alias":"p/font-weight-bold"},{"name":"imported/text/root/font-weight/bodyLg/none","type":"FLOAT","value":450,"alias":"p/font-weight-regular"},{"name":"imported/text/root/font-weight/bodyLg/semibold","type":"FLOAT","value":650,"alias":"p/font-weight-semibold"},{"name":"imported/text/root/font-weight/bodyLg/bold","type":"FLOAT","value":700,"alias":"p/font-weight-bold"},{"name":"imported/text/root/font-weight/bodyLg/regular","type":"FLOAT","value":450,"alias":"p/font-weight-regular"},{"name":"imported/text/root/font-weight/bodyLg/medium","type":"FLOAT","value":550,"alias":"p/font-weight-medium"},{"name":"imported/text/root/line-height/none","type":"FLOAT","value":20},{"name":"imported/text/root/line-height/headingXs","type":"FLOAT","value":16},{"name":"imported/text/root/line-height/headingSm","type":"FLOAT","value":20},{"name":"imported/text/root/line-height/headingMd","type":"FLOAT","value":20},{"name":"imported/text/root/line-height/headingLg","type":"FLOAT","value":24},{"name":"imported/text/root/line-height/headingXl","type":"FLOAT","value":24},{"name":"imported/text/root/line-height/heading2xl","type":"FLOAT","value":32},{"name":"imported/text/root/line-height/heading3xl","type":"FLOAT","value":40},{"name":"imported/text/root/line-height/bodyXs","type":"FLOAT","value":12},{"name":"imported/text/root/line-height/bodySm","type":"FLOAT","value":16},{"name":"imported/text/root/line-height/bodyMd","type":"FLOAT","value":20},{"name":"imported/text/root/line-height/bodyLg","type":"FLOAT","value":20},{"name":"imported/text/root/width/none/none","type":"FLOAT","value":144.75},{"name":"imported/text/root/width/none/regular","type":"FLOAT","value":144.75},{"name":"imported/text/root/width/none/medium","type":"FLOAT","value":146.328},{"name":"imported/text/root/width/none/semibold","type":"FLOAT","value":147.906},{"name":"imported/text/root/width/none/bold","type":"FLOAT","value":147.906},{"name":"imported/text/root/width/headingXs/none","type":"FLOAT","value":136.531},{"name":"imported/text/root/width/headingXs/semibold","type":"FLOAT","value":136.531},{"name":"imported/text/root/width/headingXs/bold","type":"FLOAT","value":136.531},{"name":"imported/text/root/width/headingXs/regular","type":"FLOAT","value":133.609},{"name":"imported/text/root/width/headingXs/medium","type":"FLOAT","value":135.062},{"name":"imported/text/root/width/headingSm/none","type":"FLOAT","value":147.906},{"name":"imported/text/root/width/headingSm/regular","type":"FLOAT","value":144.75},{"name":"imported/text/root/width/headingSm/medium","type":"FLOAT","value":146.328},{"name":"imported/text/root/width/headingSm/semibold","type":"FLOAT","value":147.906},{"name":"imported/text/root/width/headingSm/bold","type":"FLOAT","value":147.906},{"name":"imported/text/root/width/headingMd/none","type":"FLOAT","value":159.281},{"name":"imported/text/root/width/headingMd/medium","type":"FLOAT","value":157.578},{"name":"imported/text/root/width/headingMd/semibold","type":"FLOAT","value":159.281},{"name":"imported/text/root/width/headingMd/bold","type":"FLOAT","value":159.281},{"name":"imported/text/root/width/headingMd/regular","type":"FLOAT","value":155.875},{"name":"imported/text/root/width/headingLg/none","type":"FLOAT","value":219.031},{"name":"imported/text/root/width/headingLg/bold","type":"FLOAT","value":219.031},{"name":"imported/text/root/width/headingLg/regular","type":"FLOAT","value":212.828},{"name":"imported/text/root/width/headingLg/medium","type":"FLOAT","value":215.938},{"name":"imported/text/root/width/headingLg/semibold","type":"FLOAT","value":219.031},{"name":"imported/text/root/width/headingXl/none","type":"FLOAT","value":219.031},{"name":"imported/text/root/width/headingXl/regular","type":"FLOAT","value":212.828},{"name":"imported/text/root/width/headingXl/medium","type":"FLOAT","value":215.938},{"name":"imported/text/root/width/headingXl/semibold","type":"FLOAT","value":219.031},{"name":"imported/text/root/width/headingXl/bold","type":"FLOAT","value":219.031},{"name":"imported/text/root/width/heading2xl/none","type":"FLOAT","value":260.438},{"name":"imported/text/root/width/heading2xl/semibold","type":"FLOAT","value":260.438},{"name":"imported/text/root/width/heading2xl/bold","type":"FLOAT","value":260.438},{"name":"imported/text/root/width/heading2xl/regular","type":"FLOAT","value":251.906},{"name":"imported/text/root/width/heading2xl/medium","type":"FLOAT","value":256.172},{"name":"imported/text/root/width/heading3xl/none","type":"FLOAT","value":288},{"name":"imported/text/root/width/heading3xl/regular","type":"FLOAT","value":288},{"name":"imported/text/root/width/heading3xl/medium","type":"FLOAT","value":288},{"name":"imported/text/root/width/heading3xl/semibold","type":"FLOAT","value":288},{"name":"imported/text/root/width/heading3xl/bold","type":"FLOAT","value":288},{"name":"imported/text/root/width/bodyXs/none","type":"FLOAT","value":122.484},{"name":"imported/text/root/width/bodyXs/medium","type":"FLOAT","value":123.812},{"name":"imported/text/root/width/bodyXs/semibold","type":"FLOAT","value":125.141},{"name":"imported/text/root/width/bodyXs/bold","type":"FLOAT","value":125.141},{"name":"imported/text/root/width/bodyXs/regular","type":"FLOAT","value":122.484},{"name":"imported/text/root/width/bodySm/none","type":"FLOAT","value":133.609},{"name":"imported/text/root/width/bodySm/bold","type":"FLOAT","value":136.531},{"name":"imported/text/root/width/bodySm/regular","type":"FLOAT","value":133.609},{"name":"imported/text/root/width/bodySm/medium","type":"FLOAT","value":135.062},{"name":"imported/text/root/width/bodySm/semibold","type":"FLOAT","value":136.531},{"name":"imported/text/root/width/bodyMd/none","type":"FLOAT","value":144.75},{"name":"imported/text/root/width/bodyMd/regular","type":"FLOAT","value":144.75},{"name":"imported/text/root/width/bodyMd/medium","type":"FLOAT","value":146.328},{"name":"imported/text/root/width/bodyMd/semibold","type":"FLOAT","value":147.906},{"name":"imported/text/root/width/bodyMd/bold","type":"FLOAT","value":147.906},{"name":"imported/text/root/width/bodyLg/none","type":"FLOAT","value":155.875},{"name":"imported/text/root/width/bodyLg/semibold","type":"FLOAT","value":159.281},{"name":"imported/text/root/width/bodyLg/bold","type":"FLOAT","value":159.281},{"name":"imported/text/root/width/bodyLg/regular","type":"FLOAT","value":155.875},{"name":"imported/text/root/width/bodyLg/medium","type":"FLOAT","value":157.578},{"name":"imported/text-field/root/height/slim","type":"FLOAT","value":52},{"name":"imported/text-field/root/height/medium","type":"FLOAT","value":60},{"name":"imported/text-field/root/width/off/off","type":"FLOAT","value":211},{"name":"imported/text-field/root/width/off/on","type":"FLOAT","value":242.406},{"name":"imported/text-field/root/width/on/off","type":"FLOAT","value":225.406},{"name":"imported/text-field/root/width/on/on","type":"FLOAT","value":256.812},{"name":"imported/text-field/labelled-labelwrapper/width/off/off","type":"FLOAT","value":211},{"name":"imported/text-field/labelled-labelwrapper/width/off/on","type":"FLOAT","value":242.406},{"name":"imported/text-field/labelled-labelwrapper/width/on/off","type":"FLOAT","value":225.406},{"name":"imported/text-field/labelled-labelwrapper/width/on/on","type":"FLOAT","value":256.812},{"name":"imported/text-field/label/width","type":"FLOAT","value":70.8125},{"name":"imported/text-field/label-text/width","type":"FLOAT","value":70.8125},{"name":"imported/text-field/connected/height/slim","type":"FLOAT","value":28},{"name":"imported/text-field/connected/height/medium","type":"FLOAT","value":36},{"name":"imported/text-field/connected/width/off/off","type":"FLOAT","value":211},{"name":"imported/text-field/connected/width/off/on","type":"FLOAT","value":242.406},{"name":"imported/text-field/connected/width/on/off","type":"FLOAT","value":225.406},{"name":"imported/text-field/connected/width/on/on","type":"FLOAT","value":256.812},{"name":"imported/text-field/connected-item/height/slim","type":"FLOAT","value":28},{"name":"imported/text-field/connected-item/height/medium","type":"FLOAT","value":36},{"name":"imported/text-field/connected-item/width/off/off","type":"FLOAT","value":211},{"name":"imported/text-field/connected-item/width/off/on","type":"FLOAT","value":242.406},{"name":"imported/text-field/connected-item/width/on/off","type":"FLOAT","value":225.406},{"name":"imported/text-field/connected-item/width/on/on","type":"FLOAT","value":256.812},{"name":"imported/text-field/connected-item/z-index-state-active","type":"FLOAT","value":30},{"name":"imported/text-field/connected-item/z-index-state-focus-visible","type":"FLOAT","value":30},{"name":"imported/text-field/textfield/height/slim","type":"FLOAT","value":28},{"name":"imported/text-field/textfield/height/medium","type":"FLOAT","value":36},{"name":"imported/text-field/textfield/width/off/off","type":"FLOAT","value":211},{"name":"imported/text-field/textfield/width/off/on","type":"FLOAT","value":242.406},{"name":"imported/text-field/textfield/width/on/off","type":"FLOAT","value":225.406},{"name":"imported/text-field/textfield/width/on/on","type":"FLOAT","value":256.812},{"name":"imported/text-field/prefix/margin-right","type":"FLOAT","value":6},{"name":"imported/text-field/prefix/width","type":"FLOAT","value":8.40625},{"name":"imported/text-field/input/height/slim","type":"FLOAT","value":28},{"name":"imported/text-field/input/height/medium","type":"FLOAT","value":36},{"name":"imported/text-field/input/width/off/off","type":"FLOAT","value":211},{"name":"imported/text-field/input/width/off/on","type":"FLOAT","value":199},{"name":"imported/text-field/input/width/on/off","type":"FLOAT","value":199},{"name":"imported/text-field/input/width/on/on","type":"FLOAT","value":187},{"name":"imported/text-field/suffix/width","type":"FLOAT","value":27.4062},{"name":"imported/text-field/clearbutton-2/background-color","type":"COLOR","value":"#00000000"},{"name":"imported/text-field/clearbutton-2/bottom/slim","type":"FLOAT","value":4},{"name":"imported/text-field/clearbutton-2/bottom/medium","type":"FLOAT","value":8},{"name":"imported/text-field/clearbutton-2/left/off/off","type":"FLOAT","value":175},{"name":"imported/text-field/clearbutton-2/left/off/on","type":"FLOAT","value":206.406},{"name":"imported/text-field/clearbutton-2/left/on/off","type":"FLOAT","value":189.406},{"name":"imported/text-field/clearbutton-2/left/on/on","type":"FLOAT","value":220.812},{"name":"imported/text-field/clearbutton-2/top/slim","type":"FLOAT","value":4},{"name":"imported/text-field/clearbutton-2/top/medium","type":"FLOAT","value":8},{"name":"imported/text-field/backdrop/height/slim","type":"FLOAT","value":28},{"name":"imported/text-field/backdrop/height/medium","type":"FLOAT","value":36},{"name":"imported/text-field/backdrop/width/off/off","type":"FLOAT","value":211},{"name":"imported/text-field/backdrop/width/off/on","type":"FLOAT","value":242.406},{"name":"imported/text-field/backdrop/width/on/off","type":"FLOAT","value":225.406},{"name":"imported/text-field/backdrop/width/on/on","type":"FLOAT","value":256.812},{"name":"imported/text-field/backdrop/z-index","type":"FLOAT","value":10},{"name":"imported/text-field/backdrop/background-color-state-active","type":"COLOR","value":"#f7f7f7"},{"name":"imported/text-field/backdrop/outline-color-state-active","type":"COLOR","value":"#005bd3"},{"name":"imported/text-field/backdrop/outline-offset-state-active/inherit/slim","type":"FLOAT","value":1},{"name":"imported/text-field/backdrop/outline-offset-state-active/inherit/medium","type":"FLOAT","value":1},{"name":"imported/text-field/backdrop/outline-offset-state-active/borderless/medium","type":"FLOAT","value":1},{"name":"imported/text-field/backdrop/outline-offset-state-active/borderless/slim","type":"FLOAT","value":0},{"name":"imported/text-field/backdrop/outline-width-state-active","type":"FLOAT","value":2},{"name":"imported/text-field/backdrop/background-color-state-disabled","type":"COLOR","value":"#0000000d"},{"name":"imported/text-field/backdrop/background-color-state-focus-visible","type":"COLOR","value":"#f7f7f7"},{"name":"imported/text-field/backdrop/outline-color-state-focus-visible","type":"COLOR","value":"#005bd3"},{"name":"imported/text-field/backdrop/outline-offset-state-focus-visible/inherit/slim","type":"FLOAT","value":1},{"name":"imported/text-field/backdrop/outline-offset-state-focus-visible/inherit/medium","type":"FLOAT","value":1},{"name":"imported/text-field/backdrop/outline-offset-state-focus-visible/borderless/medium","type":"FLOAT","value":1},{"name":"imported/text-field/backdrop/outline-offset-state-focus-visible/borderless/slim","type":"FLOAT","value":0},{"name":"imported/text-field/backdrop/outline-width-state-focus-visible","type":"FLOAT","value":2},{"name":"imported/text-field/backdrop/background-color-state-hover","type":"COLOR","value":"#fafafa"}];
 {
   // Minted colors may be 8-digit hex (paint opacity captured by dump v1.1) —
   // Figma COLOR variables accept RGBA, so the alpha channel survives.

@@ -1,0 +1,96 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "conformance.grid-zero-track-collapse",
+  "name": "CaseGridZeroTrackCollapse",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the CSS/DOM conformance fixture case \"grid-zero-track-collapse\" (grid-tracks). The fixture varies CSS CONSTRUCTS, not prop spaces, so the prop space is deliberately EMPTY: every axis the capture would enumerate is held at nothing, and the whole measurement is the computed truth of one mounted rendering. Construct: a computed grid track list containing a 0px track — the resolved width of an EMPTY slot column (min-content with no occupant) COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @ds-contracts/conformance@0.1.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {
+        "label": {
+          "text": "Header",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "placement": {
+            "row": 0,
+            "column": 0
+          },
+          "tokens": {
+            "font-size": "{imported.shared.size-12}",
+            "font-weight": "{imported.case-grid-zero-track-collapse.label.font-weight}"
+          }
+        },
+        "label-2": {
+          "text": "Description",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|b — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "placement": {
+            "row": 1,
+            "column": 0
+          },
+          "tokens": {
+            "font-size": "{imported.shared.size-12}",
+            "font-weight": "{imported.case-grid-zero-track-collapse.label-2.font-weight}"
+          }
+        }
+      },
+      "layout": {
+        "display": "grid",
+        "rows": [
+          {
+            "px": 14
+          },
+          {
+            "px": 14
+          }
+        ],
+        "columns": [
+          {
+            "px": 288
+          }
+        ]
+      },
+      "literals": {
+        "width": "fit-content",
+        "height": "fit-content"
+      },
+      "declared": {
+        "box-sizing": "border-box",
+        "font-family": "monospace"
+      },
+      "tokens": {
+        "font-size": "{imported.shared.size-12}",
+        "min-height": "{imported.case-grid-zero-track-collapse.root.min-height}",
+        "min-width": "{imported.case-grid-zero-track-collapse.root.min-width}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@ds-contracts/conformance",
+        "export": "CaseGridZeroTrackCollapse"
+      }
+    }
+  }
+}

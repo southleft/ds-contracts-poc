@@ -152,7 +152,6 @@
             "alt": "{alt}"
           },
           "tokens": {
-            "border-radius": "{p.border-radius-200}",
             "bottom": "{imported.shared.size-0}",
             "color": "{imported.thumbnail.part-0.color}",
             "left": "{imported.shared.size-0}",
@@ -166,7 +165,6 @@
               "prop": "size",
               "map": {
                 "extraSmall": {
-                  "border-radius": "{p.border-radius-150}",
                   "height": "{imported.thumbnail.part-0.height.extraSmall}",
                   "width": "{imported.thumbnail.part-0.width.extraSmall}"
                 },

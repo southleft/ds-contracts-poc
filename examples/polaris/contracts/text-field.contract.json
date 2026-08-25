@@ -13,7 +13,6 @@
       "name": "placeholder",
       "description": "Hint text to display",
       "type": "text",
-      "default": "Example",
       "bindings": {
         "figma": {
           "kind": "TEXT",
@@ -627,8 +626,7 @@
   "anatomy": {
     "root": {
       "layout": {
-        "direction": "column",
-        "align": "stretch"
+        "align": "center"
       },
       "tokens": {
         "color": "{p.color-text}"
@@ -663,9 +661,11 @@
                       "description": "Promoted from the computed floor (round 4): rendered anatomy span|Text — this element exists in the real component's DOM; the static layer had no part for it.",
                       "declared": {
                         "display": "inline",
-                        "cursor": "default"
+                        "cursor": "default",
+                        "font-family": "Inter, -apple-system, \"system-ui\", \"San Francisco\", \"Segoe UI\", Roboto, \"Helvetica Neue\", sans-serif"
                       },
                       "tokens": {
+                        "color": "{imported.shared.color-303030}",
                         "font-size": "{imported.shared.size-13}",
                         "font-weight": "{imported.shared.num-450}",
                         "line-height": "{imported.shared.size-20}",
@@ -676,10 +676,73 @@
                         "disabled": {
                           "color": "{imported.shared.color-b5b5b5}"
                         }
-                      }
+                      },
+                      "codeOnly": [
+                        {
+                          "state": "disabled",
+                          "channel": "border-bottom-color",
+                          "value": "#b5b5b5",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "border-left-color",
+                          "value": "#b5b5b5",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "border-right-color",
+                          "value": "#b5b5b5",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "border-top-color",
+                          "value": "#b5b5b5",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "caret-color",
+                          "value": "#b5b5b5",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "column-rule-color",
+                          "value": "#b5b5b5",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "outline-color",
+                          "value": "#b5b5b5",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "row-rule-color",
+                          "value": "#b5b5b5",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "text-decoration-color",
+                          "value": "#b5b5b5",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "text-emphasis-color",
+                          "value": "#b5b5b5",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        }
+                      ]
                     }
                   },
                   "tokens": {
+                    "color": "{imported.shared.color-303030}",
                     "flex-grow": "{imported.shared.num-1}",
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
@@ -689,20 +752,146 @@
                     "disabled": {
                       "color": "{imported.shared.color-b5b5b5}"
                     }
-                  }
+                  },
+                  "codeOnly": [
+                    {
+                      "state": "disabled",
+                      "channel": "border-bottom-color",
+                      "value": "#b5b5b5",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "border-left-color",
+                      "value": "#b5b5b5",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "border-right-color",
+                      "value": "#b5b5b5",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "border-top-color",
+                      "value": "#b5b5b5",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "caret-color",
+                      "value": "#b5b5b5",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "column-rule-color",
+                      "value": "#b5b5b5",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "outline-color",
+                      "value": "#b5b5b5",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "row-rule-color",
+                      "value": "#b5b5b5",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "text-decoration-color",
+                      "value": "#b5b5b5",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "text-emphasis-color",
+                      "value": "#b5b5b5",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    }
+                  ]
                 }
               },
               "tokens": {
+                "color": "{imported.shared.color-303030}",
                 "width": "{imported.text-field.label.width}"
               },
               "states": {
                 "disabled": {
                   "color": "{imported.shared.color-b5b5b5}"
                 }
-              }
+              },
+              "codeOnly": [
+                {
+                  "state": "disabled",
+                  "channel": "border-bottom-color",
+                  "value": "#b5b5b5",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "border-left-color",
+                  "value": "#b5b5b5",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "border-right-color",
+                  "value": "#b5b5b5",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "border-top-color",
+                  "value": "#b5b5b5",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "caret-color",
+                  "value": "#b5b5b5",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "column-rule-color",
+                  "value": "#b5b5b5",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "outline-color",
+                  "value": "#b5b5b5",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "row-rule-color",
+                  "value": "#b5b5b5",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "text-decoration-color",
+                  "value": "#b5b5b5",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "text-emphasis-color",
+                  "value": "#b5b5b5",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                }
+              ]
             }
           },
           "tokens": {
+            "color": "{imported.shared.color-303030}",
             "margin-bottom": "{imported.shared.size-4}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}"
@@ -711,7 +900,69 @@
             "disabled": {
               "color": "{imported.shared.color-b5b5b5}"
             }
-          }
+          },
+          "codeOnly": [
+            {
+              "state": "disabled",
+              "channel": "border-bottom-color",
+              "value": "#b5b5b5",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "border-left-color",
+              "value": "#b5b5b5",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "border-right-color",
+              "value": "#b5b5b5",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "border-top-color",
+              "value": "#b5b5b5",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "caret-color",
+              "value": "#b5b5b5",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "column-rule-color",
+              "value": "#b5b5b5",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "outline-color",
+              "value": "#b5b5b5",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "row-rule-color",
+              "value": "#b5b5b5",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "text-decoration-color",
+              "value": "#b5b5b5",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "text-emphasis-color",
+              "value": "#b5b5b5",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            }
+          ]
         },
         "connected": {
           "description": "Promoted from the computed floor (round 4): rendered anatomy div|Connected — this element exists in the real component's DOM; the static layer had no part for it.",
@@ -734,8 +985,7 @@
                   "description": "Promoted from the computed floor (round 4): rendered anatomy div|TextField — this element exists in the real component's DOM; the static layer had no part for it.",
                   "layout": {
                     "display": "flex",
-                    "align": "center",
-                    "grow": true
+                    "align": "center"
                   },
                   "parts": {
                     "prefix": {
@@ -764,6 +1014,7 @@
                           "declared": {
                             "display": "inline",
                             "cursor": "text",
+                            "font-family": "Inter, -apple-system, \"system-ui\", \"San Francisco\", \"Segoe UI\", Roboto, \"Helvetica Neue\", sans-serif",
                             "user-select": "none"
                           },
                           "visibleWhen": {
@@ -784,7 +1035,15 @@
                             "line-height": "{imported.shared.size-20}",
                             "min-height": "{imported.shared.size-0}",
                             "min-width": "{imported.shared.size-0}"
-                          }
+                          },
+                          "codeOnly": [
+                            {
+                              "state": "disabled",
+                              "channel": "cursor",
+                              "value": "auto",
+                              "reason": "declared-channel state delta on 16/32 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                            }
+                          ]
                         }
                       },
                       "tokens": {
@@ -798,13 +1057,22 @@
                         "top": "{imported.shared.size-0}",
                         "width": "{imported.text-field.prefix.width}",
                         "z-index": "{imported.shared.num-20}"
-                      }
+                      },
+                      "codeOnly": [
+                        {
+                          "state": "disabled",
+                          "channel": "cursor",
+                          "value": "auto",
+                          "reason": "declared-channel state delta on 16/32 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                        }
+                      ]
                     },
                     "input": {
                       "element": "input",
                       "layout": {
                         "display": "flex",
-                        "align": "center"
+                        "align": "center",
+                        "grow": true
                       },
                       "tokens": {
                         "color": "{p.color-text}",
@@ -872,7 +1140,63 @@
                         "disabled": {
                           "cursor": "default"
                         }
-                      }
+                      },
+                      "codeOnly": [
+                        {
+                          "state": "disabled",
+                          "channel": "border-bottom-color",
+                          "value": "#b5b5b5",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "border-left-color",
+                          "value": "#b5b5b5",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "border-right-color",
+                          "value": "#b5b5b5",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "border-top-color",
+                          "value": "#b5b5b5",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "column-rule-color",
+                          "value": "#b5b5b5",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "outline-color",
+                          "value": "#b5b5b5",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "row-rule-color",
+                          "value": "#b5b5b5",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "text-decoration-color",
+                          "value": "#b5b5b5",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "text-emphasis-color",
+                          "value": "#b5b5b5",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        }
+                      ]
                     },
                     "suffix": {
                       "description": "Promoted from the computed floor (round 4): rendered anatomy div|TextField__Suffix — this element exists in the real component's DOM; the static layer had no part for it.",
@@ -900,6 +1224,7 @@
                           "declared": {
                             "display": "inline",
                             "cursor": "text",
+                            "font-family": "Inter, -apple-system, \"system-ui\", \"San Francisco\", \"Segoe UI\", Roboto, \"Helvetica Neue\", sans-serif",
                             "user-select": "none"
                           },
                           "visibleWhen": {
@@ -920,7 +1245,15 @@
                             "line-height": "{imported.shared.size-20}",
                             "min-height": "{imported.shared.size-0}",
                             "min-width": "{imported.shared.size-0}"
-                          }
+                          },
+                          "codeOnly": [
+                            {
+                              "state": "disabled",
+                              "channel": "cursor",
+                              "value": "auto",
+                              "reason": "declared-channel state delta on 16/32 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                            }
+                          ]
                         }
                       },
                       "tokens": {
@@ -934,7 +1267,15 @@
                         "top": "{imported.shared.size-0}",
                         "width": "{imported.text-field.suffix.width}",
                         "z-index": "{imported.shared.num-20}"
-                      }
+                      },
+                      "codeOnly": [
+                        {
+                          "state": "disabled",
+                          "channel": "cursor",
+                          "value": "auto",
+                          "reason": "declared-channel state delta on 16/32 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                        }
+                      ]
                     },
                     "clearbutton-2": {
                       "element": "button",
@@ -959,7 +1300,6 @@
                         "border-left-width": "{imported.shared.size-0}",
                         "border-right-width": "{imported.shared.size-0}",
                         "border-top-width": "{imported.shared.size-0}",
-                        "color": "{imported.text-field.clearbutton-2.color}",
                         "font-size": "{imported.shared.size-13}",
                         "height": "{imported.shared.size-20}",
                         "line-height": "{imported.shared.size-20}",
@@ -990,6 +1330,20 @@
                             }
                           }
                         }
+                      ],
+                      "codeOnly": [
+                        {
+                          "state": "disabled",
+                          "channel": "color",
+                          "value": "rgba(181, 181, 181, 1)",
+                          "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "cursor",
+                          "value": "default",
+                          "reason": "declared-channel state delta on 16/32 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                        }
                       ]
                     },
                     "backdrop": {
@@ -997,8 +1351,10 @@
                       "tokens": {
                         "background-color": "{p.color-input-bg-surface}",
                         "border-radius": "{p.border-radius-200}",
+                        "border-width": "{p.border-width-0165}",
                         "border-color": "{p.color-input-border}",
                         "bottom": "{imported.shared.size-0}",
+                        "color": "{imported.shared.color-303030}",
                         "left": "{imported.shared.size-0}",
                         "min-width": "{imported.shared.size-0}",
                         "right": "{imported.shared.size-0}",
@@ -1049,11 +1405,7 @@
                           "outline-style": "solid"
                         },
                         "disabled": {
-                          "cursor": "auto",
-                          "border-top-style": "none",
-                          "border-right-style": "none",
-                          "border-bottom-style": "none",
-                          "border-left-style": "none"
+                          "cursor": "auto"
                         },
                         "focus-visible": {
                           "outline-style": "solid"
@@ -1074,30 +1426,224 @@
                           "background-color": "{imported.text-field.backdrop.background-color-state-hover}"
                         }
                       },
-                      "literalsByProp": [
+                      "codeOnly": [
                         {
-                          "prop": "variant",
-                          "map": {
-                            "inherit": {
-                              "border-top-width": "1px",
-                              "border-right-width": "1px",
-                              "border-bottom-width": "1px",
-                              "border-left-width": "1px",
-                              "border-top-color": "rgba(138, 138, 138, 1)",
-                              "border-right-color": "rgba(138, 138, 138, 1)",
-                              "border-bottom-color": "rgba(138, 138, 138, 1)",
-                              "border-left-color": "rgba(138, 138, 138, 1)"
-                            },
-                            "borderless": {
-                              "border-top-width": "0px",
-                              "border-right-width": "0px",
-                              "border-bottom-width": "0px",
-                              "border-left-width": "0px"
-                            }
-                          }
+                          "state": "active",
+                          "channel": "border-bottom-color",
+                          "value": "#1a1a1a",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "active",
+                          "channel": "border-left-color",
+                          "value": "#1a1a1a",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "active",
+                          "channel": "border-right-color",
+                          "value": "#1a1a1a",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "active",
+                          "channel": "border-top-color",
+                          "value": "#1a1a1a",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "active",
+                          "channel": "outline-color",
+                          "value": "#005bd3",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "active",
+                          "channel": "outline-offset",
+                          "value": "{imported.text-field.backdrop.outline-offset-state-active.{variant}.{size}}",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "active",
+                          "channel": "outline-width",
+                          "value": "2px",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "border-bottom-color",
+                          "value": "#b5b5b5",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "border-bottom-style",
+                          "value": "none",
+                          "reason": "declared-channel state delta on 16/32 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "border-bottom-width",
+                          "value": "0px",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "border-left-color",
+                          "value": "#b5b5b5",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "border-left-style",
+                          "value": "none",
+                          "reason": "declared-channel state delta on 16/32 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "border-left-width",
+                          "value": "0px",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "border-right-color",
+                          "value": "#b5b5b5",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "border-right-style",
+                          "value": "none",
+                          "reason": "declared-channel state delta on 16/32 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "border-right-width",
+                          "value": "0px",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "border-top-color",
+                          "value": "#b5b5b5",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "border-top-style",
+                          "value": "none",
+                          "reason": "declared-channel state delta on 16/32 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "border-top-width",
+                          "value": "0px",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "caret-color",
+                          "value": "#b5b5b5",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "column-rule-color",
+                          "value": "#b5b5b5",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "outline-color",
+                          "value": "#b5b5b5",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "row-rule-color",
+                          "value": "#b5b5b5",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "text-decoration-color",
+                          "value": "#b5b5b5",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "text-emphasis-color",
+                          "value": "#b5b5b5",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "focus-visible",
+                          "channel": "border-bottom-color",
+                          "value": "#1a1a1a",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "focus-visible",
+                          "channel": "border-left-color",
+                          "value": "#1a1a1a",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "focus-visible",
+                          "channel": "border-right-color",
+                          "value": "#1a1a1a",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "focus-visible",
+                          "channel": "border-top-color",
+                          "value": "#1a1a1a",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "focus-visible",
+                          "channel": "outline-color",
+                          "value": "#005bd3",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "focus-visible",
+                          "channel": "outline-offset",
+                          "value": "{imported.text-field.backdrop.outline-offset-state-focus-visible.{variant}.{size}}",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "focus-visible",
+                          "channel": "outline-width",
+                          "value": "2px",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "hover",
+                          "channel": "border-bottom-color",
+                          "value": "#616161",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "hover",
+                          "channel": "border-left-color",
+                          "value": "#616161",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "hover",
+                          "channel": "border-right-color",
+                          "value": "#616161",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "hover",
+                          "channel": "border-top-color",
+                          "value": "#616161",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
                         }
-                      ],
-                      "description": "Canvas geometry (console-loop visual fix): literal 1px #8a8a8a border on inherit variant replaces p.border-width-0165 (0.66px on Figma canvas); disabled state drops border; borderless = 0 (matches examples/polaris/receipts/text-field/default.png)."
+                      ]
                     }
                   },
                   "declared": {
@@ -1111,6 +1657,7 @@
                   },
                   "tokens": {
                     "bottom": "{imported.shared.size-0}",
+                    "color": "{imported.shared.color-303030}",
                     "left": "{imported.shared.size-0}",
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
@@ -1134,11 +1681,74 @@
                         }
                       }
                     }
+                  ],
+                  "codeOnly": [
+                    {
+                      "state": "disabled",
+                      "channel": "border-bottom-color",
+                      "value": "#b5b5b5",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "border-left-color",
+                      "value": "#b5b5b5",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "border-right-color",
+                      "value": "#b5b5b5",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "border-top-color",
+                      "value": "#b5b5b5",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "caret-color",
+                      "value": "#b5b5b5",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "column-rule-color",
+                      "value": "#b5b5b5",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "outline-color",
+                      "value": "#b5b5b5",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "row-rule-color",
+                      "value": "#b5b5b5",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "text-decoration-color",
+                      "value": "#b5b5b5",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "text-emphasis-color",
+                      "value": "#b5b5b5",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    }
                   ]
                 }
               },
               "tokens": {
                 "bottom": "{imported.shared.size-0}",
+                "color": "{imported.shared.color-303030}",
                 "flex-grow": "{imported.shared.num-1}",
                 "left": "{imported.shared.size-0}",
                 "right": "{imported.shared.size-0}",
@@ -1157,6 +1767,20 @@
                     }
                   }
                 }
+              ],
+              "codeOnly": [
+                {
+                  "state": "active",
+                  "channel": "z-index",
+                  "value": "30",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "z-index",
+                  "value": "30",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                }
               ]
             }
           },
@@ -1165,12 +1789,12 @@
           },
           "tokens": {
             "bottom": "{imported.shared.size-0}",
+            "color": "{imported.shared.color-303030}",
             "left": "{imported.shared.size-0}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}",
             "right": "{imported.shared.size-0}",
-            "top": "{imported.shared.size-0}",
-            "width": "{imported.text-field.connected.width.off.off}"
+            "top": "{imported.shared.size-0}"
           },
           "tokensByProp": [
             {
@@ -1186,9 +1810,6 @@
             }
           ]
         }
-      },
-      "tokens": {
-        "width": "{imported.text-field.connected.width.off.off}"
       },
       "tokensByProp": [
         {

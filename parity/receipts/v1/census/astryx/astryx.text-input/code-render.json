@@ -3,7 +3,7 @@
   "name": "TextInput",
   "library": "astryx",
   "contractPath": "examples/astryx/contracts/text-input.contract.json",
-  "contractVersion": "0.2.0",
+  "contractVersion": "0.3.0",
   "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
   "tokenSource": "examples/astryx/figma/astryx.bundle.json tokenSet (flat base + minted + light mode)",
   "platform": "darwin/arm64",
@@ -63,44 +63,34 @@
     "parts": [
       "root",
       "label",
-      "field",
-      "start-icon",
-      "icon-text",
-      "icon-email",
-      "icon-password",
-      "placeholder-text"
+      "part-1",
+      "text-input",
+      "part-1-0-0"
     ],
     "contentSlots": [
       {
         "part": "label",
         "prop": "label"
-      },
-      {
-        "part": "placeholder-text",
-        "prop": "placeholder"
       }
     ],
     "tokenRefs": [
-      "border-width",
-      "color-background-surface",
-      "color-border-emphasized",
-      "color-icon-secondary",
-      "color-text-primary",
-      "color-text-secondary",
-      "font-family-body",
-      "font-size-sm",
-      "font-size-xs",
-      "radius-element",
-      "spacing-1",
-      "spacing-2",
-      "spacing-3",
-      "spacing-4"
+      "imported.shared.color-d4d4d4",
+      "imported.shared.size-0",
+      "imported.shared.size-1",
+      "imported.shared.size-10",
+      "imported.shared.size-4",
+      "imported.shared.size-8",
+      "imported.text-input.label.color",
+      "imported.text-input.label.font-size",
+      "imported.text-input.label.font-weight",
+      "imported.text-input.label.line-height",
+      "imported.text-input.part-1-0-0.flex-grow",
+      "imported.text-input.part-1-0-0.font-size",
+      "imported.text-input.part-1-0-0.line-height",
+      "imported.text-input.text-input.background-color",
+      "imported.text-input.text-input.z-index"
     ],
-    "icons": [
-      "text-input-lock",
-      "text-input-mail",
-      "text-input-user"
-    ],
+    "icons": [],
     "events": []
   },
   "variants": [
@@ -117,8 +107,8 @@
       "status": "rendered",
       "png": "code-type-text__size-md.png",
       "contentBox": {
-        "width": 320,
-        "height": 50
+        "width": 164,
+        "height": 54
       }
     },
     {
@@ -134,8 +124,8 @@
       "status": "rendered",
       "png": "code-type-text__size-sm.png",
       "contentBox": {
-        "width": 320,
-        "height": 42
+        "width": 164,
+        "height": 54
       }
     },
     {
@@ -151,8 +141,8 @@
       "status": "rendered",
       "png": "code-type-text__size-lg.png",
       "contentBox": {
-        "width": 320,
-        "height": 58
+        "width": 164,
+        "height": 54
       }
     },
     {
@@ -168,8 +158,8 @@
       "status": "rendered",
       "png": "code-type-password__size-md.png",
       "contentBox": {
-        "width": 320,
-        "height": 50
+        "width": 164,
+        "height": 54
       }
     },
     {
@@ -185,8 +175,8 @@
       "status": "rendered",
       "png": "code-type-email__size-md.png",
       "contentBox": {
-        "width": 320,
-        "height": 50
+        "width": 164,
+        "height": 54
       }
     }
   ],

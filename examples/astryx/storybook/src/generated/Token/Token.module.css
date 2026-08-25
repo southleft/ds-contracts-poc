@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/token.contract.json (astryx.token v0.1.0)
+ * Source of truth: contracts/token.contract.json (astryx.token v0.3.0)
  * Regenerate with: npm run generate
  */
 
@@ -11,88 +11,139 @@
 }
 
 .root {
-  display: inline-flex;
-  flex-direction: row;
+  display: flex;
   align-items: center;
-  justify-content: center;
   border: 0;
-  background-color: var(--color-background-gray);
-  color: var(--color-text-primary);
-  border-radius: var(--radius-full);
-  gap: var(--spacing-1);
-  font-family: var(--font-family-body);
-  font-weight: var(--font-weight-medium);
-}
-
-.color-default {
-  background-color: var(--color-background-muted);
-  color: var(--color-text-primary);
-}
-
-.color-red {
-  background-color: var(--color-background-red);
-  color: var(--color-text-red);
-}
-
-.color-orange {
-  background-color: var(--color-background-orange);
-  color: var(--color-text-orange);
-}
-
-.color-yellow {
-  background-color: var(--color-background-yellow);
-  color: var(--color-text-yellow);
-}
-
-.color-green {
-  background-color: var(--color-background-green);
-  color: var(--color-text-green);
-}
-
-.color-teal {
-  background-color: var(--color-background-teal);
-  color: var(--color-text-teal);
-}
-
-.color-cyan {
-  background-color: var(--color-background-cyan);
-  color: var(--color-text-cyan);
+  border-bottom-left-radius: var(--imported-shared-size-6);
+  border-bottom-right-radius: var(--imported-shared-size-6);
+  border-top-left-radius: var(--imported-shared-size-6);
+  border-top-right-radius: var(--imported-shared-size-6);
+  column-gap: var(--imported-token-root-column-gap);
+  font-size: var(--imported-token-root-font-size);
+  font-weight: var(--imported-token-root-font-weight);
+  line-height: var(--imported-token-root-line-height);
+  padding-left: var(--imported-token-root-padding-left);
+  padding-right: var(--imported-token-root-padding-right);
+  row-gap: var(--imported-token-root-row-gap);
+  border-bottom-style: none;
+  border-left-style: none;
+  border-right-style: none;
+  border-top-style: none;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  text-wrap-mode: nowrap;
 }
 
 .color-blue {
-  background-color: var(--color-background-blue);
-  color: var(--color-text-blue);
+  background-color: var(--imported-token-root-background-color-blue);
+  color: var(--imported-token-root-color-blue);
 }
 
-.color-purple {
-  background-color: var(--color-background-purple);
-  color: var(--color-text-purple);
+.color-cyan {
+  background-color: var(--imported-token-root-background-color-cyan);
+  color: var(--imported-token-root-color-cyan);
 }
 
-.color-pink {
-  background-color: var(--color-background-pink);
-  color: var(--color-text-pink);
+.color-default {
+  background-color: var(--imported-token-root-background-color-default);
+  color: var(--imported-token-root-color-default);
 }
 
 .color-gray {
-  background-color: var(--color-background-gray);
-  color: var(--color-text-gray);
+  background-color: var(--imported-token-root-background-color-gray);
+  color: var(--imported-token-root-color-gray);
 }
 
-.size-sm {
-  padding-block: var(--spacing-0-5);
-  padding-inline: var(--spacing-1-5);
-  font-size: var(--font-size-2xs);
+.color-green {
+  background-color: var(--imported-token-root-background-color-green);
+  color: var(--imported-token-root-color-green);
 }
 
-.size-md {
-  padding-block: var(--spacing-0-5);
-  padding-inline: var(--spacing-2);
-  font-size: var(--font-size-xs);
+.color-orange {
+  background-color: var(--imported-token-root-background-color-orange);
+  color: var(--imported-token-root-color-orange);
 }
 
-.size-lg {
-  padding-block: var(--spacing-1);
-  padding-inline: var(--spacing-3);
-  font-size: var(--font-size-sm);
+.color-pink {
+  background-color: var(--imported-token-root-background-color-pink);
+  color: var(--imported-token-root-color-pink);
+}
+
+.color-purple {
+  background-color: var(--imported-token-root-background-color-purple);
+  color: var(--imported-token-root-color-purple);
+}
+
+.color-red {
+  background-color: var(--imported-token-root-background-color-red);
+  color: var(--imported-token-root-color-red);
+}
+
+.color-teal {
+  background-color: var(--imported-token-root-background-color-teal);
+  color: var(--imported-token-root-color-teal);
+}
+
+.color-yellow {
+  background-color: var(--imported-token-root-background-color-yellow);
+  color: var(--imported-token-root-color-yellow);
+}
+
+.label {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: var(--imported-token-label-font-size);
+  font-weight: var(--imported-token-label-font-weight);
+  line-height: var(--imported-token-label-line-height);
+  min-width: var(--imported-token-label-min-width);
+  display: block;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  text-overflow: ellipsis;
+  text-wrap-mode: nowrap;
+}
+
+.color-blue .label {
+  color: var(--imported-token-label-color-blue);
+}
+
+.color-cyan .label {
+  color: var(--imported-token-label-color-cyan);
+}
+
+.color-default .label {
+  color: var(--imported-token-label-color-default);
+}
+
+.color-gray .label {
+  color: var(--imported-token-label-color-gray);
+}
+
+.color-green .label {
+  color: var(--imported-token-label-color-green);
+}
+
+.color-orange .label {
+  color: var(--imported-token-label-color-orange);
+}
+
+.color-pink .label {
+  color: var(--imported-token-label-color-pink);
+}
+
+.color-purple .label {
+  color: var(--imported-token-label-color-purple);
+}
+
+.color-red .label {
+  color: var(--imported-token-label-color-red);
+}
+
+.color-teal .label {
+  color: var(--imported-token-label-color-teal);
+}
+
+.color-yellow .label {
+  color: var(--imported-token-label-color-yellow);
 }

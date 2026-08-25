@@ -58,7 +58,6 @@
       "imported.card.cardheader.flex-grow.horizontal",
       "imported.card.cardheader.flex-grow.vertical",
       "imported.card.cardheader.flex-shrink",
-      "imported.card.cardheader.height",
       "imported.card.checkbox.color",
       "imported.card.checkbox.color-state-disabled",
       "imported.card.checkbox.font-size",
@@ -118,6 +117,7 @@
       "imported.card.root.row-gap.small",
       "imported.card.root.width",
       "imported.shared.color-00000000",
+      "imported.shared.color-242424",
       "imported.shared.color-bdbdbd",
       "imported.shared.color-e0e0e0",
       "imported.shared.num-400",
@@ -144,7 +144,7 @@
       "status": "rendered",
       "png": "code-appearance-filled__size-medium__orientation-vertical.png",
       "contentBox": {
-        "width": 453.8,
+        "width": 428,
         "height": 84
       }
     },
@@ -162,7 +162,7 @@
       "status": "rendered",
       "png": "code-appearance-filled__size-medium__orientation-horizontal.png",
       "contentBox": {
-        "width": 428,
+        "width": 466.72,
         "height": 64
       }
     },
@@ -180,7 +180,7 @@
       "status": "rendered",
       "png": "code-appearance-filled__size-small__orientation-vertical.png",
       "contentBox": {
-        "width": 461.8,
+        "width": 428,
         "height": 76
       }
     },
@@ -198,7 +198,7 @@
       "status": "rendered",
       "png": "code-appearance-filled__size-large__orientation-vertical.png",
       "contentBox": {
-        "width": 445.8,
+        "width": 428,
         "height": 92
       }
     },
@@ -216,7 +216,7 @@
       "status": "rendered",
       "png": "code-appearance-filled-alternative__size-medium__orientation-vertical.png",
       "contentBox": {
-        "width": 453.8,
+        "width": 428,
         "height": 84
       }
     },
@@ -234,7 +234,7 @@
       "status": "rendered",
       "png": "code-appearance-outline__size-medium__orientation-vertical.png",
       "contentBox": {
-        "width": 453.8,
+        "width": 428,
         "height": 84
       }
     },
@@ -252,7 +252,7 @@
       "status": "rendered",
       "png": "code-appearance-subtle__size-medium__orientation-vertical.png",
       "contentBox": {
-        "width": 453.8,
+        "width": 428,
         "height": 84
       }
     },
@@ -286,7 +286,7 @@
       "status": "rendered",
       "png": "code-appearance-filled__size-medium__orientation-vertical__state-focus-visible.png",
       "contentBox": {
-        "width": 453.8,
+        "width": 428,
         "height": 84
       }
     },
@@ -305,7 +305,7 @@
       "status": "rendered",
       "png": "code-appearance-filled__size-medium__orientation-vertical__state-active.png",
       "contentBox": {
-        "width": 453.8,
+        "width": 428,
         "height": 84
       }
     },
@@ -324,7 +324,7 @@
       "status": "rendered",
       "png": "code-appearance-filled__size-medium__orientation-vertical__state-hover.png",
       "contentBox": {
-        "width": 453.8,
+        "width": 428,
         "height": 84
       }
     }

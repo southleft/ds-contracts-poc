@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "astryx.button",
     "version": "0.3.0",
     "anchorKey": null,
-    "description": "Button — generated from contract astryx.button v0.3.0 † (45 code-only facts — see plugin report)",
+    "description": "Button — generated from contract astryx.button v0.3.0 † (46 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -42,10 +42,10 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-8",
-            "bottomRightRadius": "imported/shared/size-8",
-            "topLeftRadius": "imported/shared/size-8",
-            "topRightRadius": "imported/shared/size-8",
+            "bottomLeftRadius": "imported/shared/size-10",
+            "bottomRightRadius": "imported/shared/size-10",
+            "topLeftRadius": "imported/shared/size-10",
+            "topRightRadius": "imported/shared/size-10",
             "itemSpacing": "spacing-2",
             "paddingBottom": "imported/shared/size-8",
             "paddingLeft": "imported/button/root/padding-left",
@@ -53,7 +53,7 @@ const COMPONENTS = [
             "paddingTop": "imported/shared/size-8"
           },
           "fixedWidth": {
-            "px": 99.8125,
+            "px": 67.0781,
             "varName": "imported/button/root/width"
           },
           "fixedHeight": {
@@ -81,6 +81,7 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "textAlignH": "CENTER",
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -100,10 +101,10 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-8",
-            "bottomRightRadius": "imported/shared/size-8",
-            "topLeftRadius": "imported/shared/size-8",
-            "topRightRadius": "imported/shared/size-8",
+            "bottomLeftRadius": "imported/shared/size-10",
+            "bottomRightRadius": "imported/shared/size-10",
+            "topLeftRadius": "imported/shared/size-10",
+            "topRightRadius": "imported/shared/size-10",
             "itemSpacing": "spacing-2",
             "paddingBottom": "spacing-2",
             "paddingLeft": "spacing-3",
@@ -111,7 +112,7 @@ const COMPONENTS = [
             "paddingTop": "spacing-2"
           },
           "fixedWidth": {
-            "px": 99.8125,
+            "px": 67.0781,
             "varName": "imported/button/root/width"
           },
           "fixedHeight": {
@@ -139,6 +140,7 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "textAlignH": "CENTER",
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -158,10 +160,10 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-8",
-            "bottomRightRadius": "imported/shared/size-8",
-            "topLeftRadius": "imported/shared/size-8",
-            "topRightRadius": "imported/shared/size-8",
+            "bottomLeftRadius": "imported/shared/size-10",
+            "bottomRightRadius": "imported/shared/size-10",
+            "topLeftRadius": "imported/shared/size-10",
+            "topRightRadius": "imported/shared/size-10",
             "itemSpacing": "spacing-2",
             "paddingBottom": "spacing-2",
             "paddingLeft": "spacing-3",
@@ -169,7 +171,7 @@ const COMPONENTS = [
             "paddingTop": "spacing-2"
           },
           "fixedWidth": {
-            "px": 99.8125,
+            "px": 67.0781,
             "varName": "imported/button/root/width"
           },
           "fixedHeight": {
@@ -197,6 +199,7 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "textAlignH": "CENTER",
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -216,10 +219,10 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-8",
-            "bottomRightRadius": "imported/shared/size-8",
-            "topLeftRadius": "imported/shared/size-8",
-            "topRightRadius": "imported/shared/size-8",
+            "bottomLeftRadius": "imported/shared/size-10",
+            "bottomRightRadius": "imported/shared/size-10",
+            "topLeftRadius": "imported/shared/size-10",
+            "topRightRadius": "imported/shared/size-10",
             "itemSpacing": "spacing-2",
             "paddingBottom": "imported/shared/size-8",
             "paddingLeft": "imported/button/root/padding-left",
@@ -227,7 +230,7 @@ const COMPONENTS = [
             "paddingTop": "imported/shared/size-8"
           },
           "fixedWidth": {
-            "px": 99.8125,
+            "px": 67.0781,
             "varName": "imported/button/root/width"
           },
           "fixedHeight": {
@@ -255,6 +258,7 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "textAlignH": "CENTER",
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -274,10 +278,10 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-8",
-            "bottomRightRadius": "imported/shared/size-8",
-            "topLeftRadius": "imported/shared/size-8",
-            "topRightRadius": "imported/shared/size-8",
+            "bottomLeftRadius": "imported/shared/size-10",
+            "bottomRightRadius": "imported/shared/size-10",
+            "topLeftRadius": "imported/shared/size-10",
+            "topRightRadius": "imported/shared/size-10",
             "itemSpacing": "spacing-2",
             "paddingBottom": "spacing-2",
             "paddingLeft": "spacing-3",
@@ -285,7 +289,7 @@ const COMPONENTS = [
             "paddingTop": "spacing-2"
           },
           "fixedWidth": {
-            "px": 99.8125,
+            "px": 67.0781,
             "varName": "imported/button/root/width"
           },
           "fixedHeight": {
@@ -313,6 +317,7 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "textAlignH": "CENTER",
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -332,10 +337,10 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-8",
-            "bottomRightRadius": "imported/shared/size-8",
-            "topLeftRadius": "imported/shared/size-8",
-            "topRightRadius": "imported/shared/size-8",
+            "bottomLeftRadius": "imported/shared/size-10",
+            "bottomRightRadius": "imported/shared/size-10",
+            "topLeftRadius": "imported/shared/size-10",
+            "topRightRadius": "imported/shared/size-10",
             "itemSpacing": "spacing-2",
             "paddingBottom": "spacing-2",
             "paddingLeft": "spacing-3",
@@ -343,7 +348,7 @@ const COMPONENTS = [
             "paddingTop": "spacing-2"
           },
           "fixedWidth": {
-            "px": 99.8125,
+            "px": 67.0781,
             "varName": "imported/button/root/width"
           },
           "fixedHeight": {
@@ -371,6 +376,7 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "textAlignH": "CENTER",
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -390,10 +396,10 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-8",
-            "bottomRightRadius": "imported/shared/size-8",
-            "topLeftRadius": "imported/shared/size-8",
-            "topRightRadius": "imported/shared/size-8",
+            "bottomLeftRadius": "imported/shared/size-10",
+            "bottomRightRadius": "imported/shared/size-10",
+            "topLeftRadius": "imported/shared/size-10",
+            "topRightRadius": "imported/shared/size-10",
             "itemSpacing": "spacing-2",
             "paddingBottom": "imported/shared/size-8",
             "paddingLeft": "imported/button/root/padding-left",
@@ -401,7 +407,7 @@ const COMPONENTS = [
             "paddingTop": "imported/shared/size-8"
           },
           "fixedWidth": {
-            "px": 99.8125,
+            "px": 67.0781,
             "varName": "imported/button/root/width"
           },
           "fixedHeight": {
@@ -429,6 +435,7 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "textAlignH": "CENTER",
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -448,10 +455,10 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-8",
-            "bottomRightRadius": "imported/shared/size-8",
-            "topLeftRadius": "imported/shared/size-8",
-            "topRightRadius": "imported/shared/size-8",
+            "bottomLeftRadius": "imported/shared/size-10",
+            "bottomRightRadius": "imported/shared/size-10",
+            "topLeftRadius": "imported/shared/size-10",
+            "topRightRadius": "imported/shared/size-10",
             "itemSpacing": "spacing-2",
             "paddingBottom": "spacing-2",
             "paddingLeft": "spacing-3",
@@ -459,7 +466,7 @@ const COMPONENTS = [
             "paddingTop": "spacing-2"
           },
           "fixedWidth": {
-            "px": 99.8125,
+            "px": 67.0781,
             "varName": "imported/button/root/width"
           },
           "fixedHeight": {
@@ -487,6 +494,7 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "textAlignH": "CENTER",
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -506,10 +514,10 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-8",
-            "bottomRightRadius": "imported/shared/size-8",
-            "topLeftRadius": "imported/shared/size-8",
-            "topRightRadius": "imported/shared/size-8",
+            "bottomLeftRadius": "imported/shared/size-10",
+            "bottomRightRadius": "imported/shared/size-10",
+            "topLeftRadius": "imported/shared/size-10",
+            "topRightRadius": "imported/shared/size-10",
             "itemSpacing": "spacing-2",
             "paddingBottom": "spacing-2",
             "paddingLeft": "spacing-3",
@@ -517,7 +525,7 @@ const COMPONENTS = [
             "paddingTop": "spacing-2"
           },
           "fixedWidth": {
-            "px": 99.8125,
+            "px": 67.0781,
             "varName": "imported/button/root/width"
           },
           "fixedHeight": {
@@ -545,6 +553,7 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "textAlignH": "CENTER",
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -564,10 +573,10 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-8",
-            "bottomRightRadius": "imported/shared/size-8",
-            "topLeftRadius": "imported/shared/size-8",
-            "topRightRadius": "imported/shared/size-8",
+            "bottomLeftRadius": "imported/shared/size-10",
+            "bottomRightRadius": "imported/shared/size-10",
+            "topLeftRadius": "imported/shared/size-10",
+            "topRightRadius": "imported/shared/size-10",
             "itemSpacing": "spacing-2",
             "paddingBottom": "imported/shared/size-8",
             "paddingLeft": "imported/button/root/padding-left",
@@ -575,7 +584,7 @@ const COMPONENTS = [
             "paddingTop": "imported/shared/size-8"
           },
           "fixedWidth": {
-            "px": 99.8125,
+            "px": 67.0781,
             "varName": "imported/button/root/width"
           },
           "fixedHeight": {
@@ -603,6 +612,7 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "textAlignH": "CENTER",
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -622,10 +632,10 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-8",
-            "bottomRightRadius": "imported/shared/size-8",
-            "topLeftRadius": "imported/shared/size-8",
-            "topRightRadius": "imported/shared/size-8",
+            "bottomLeftRadius": "imported/shared/size-10",
+            "bottomRightRadius": "imported/shared/size-10",
+            "topLeftRadius": "imported/shared/size-10",
+            "topRightRadius": "imported/shared/size-10",
             "itemSpacing": "spacing-2",
             "paddingBottom": "spacing-2",
             "paddingLeft": "spacing-3",
@@ -633,7 +643,7 @@ const COMPONENTS = [
             "paddingTop": "spacing-2"
           },
           "fixedWidth": {
-            "px": 99.8125,
+            "px": 67.0781,
             "varName": "imported/button/root/width"
           },
           "fixedHeight": {
@@ -661,6 +671,7 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "textAlignH": "CENTER",
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -680,10 +691,10 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-8",
-            "bottomRightRadius": "imported/shared/size-8",
-            "topLeftRadius": "imported/shared/size-8",
-            "topRightRadius": "imported/shared/size-8",
+            "bottomLeftRadius": "imported/shared/size-10",
+            "bottomRightRadius": "imported/shared/size-10",
+            "topLeftRadius": "imported/shared/size-10",
+            "topRightRadius": "imported/shared/size-10",
             "itemSpacing": "spacing-2",
             "paddingBottom": "spacing-2",
             "paddingLeft": "spacing-3",
@@ -691,7 +702,7 @@ const COMPONENTS = [
             "paddingTop": "spacing-2"
           },
           "fixedWidth": {
-            "px": 99.8125,
+            "px": 67.0781,
             "varName": "imported/button/root/width"
           },
           "fixedHeight": {
@@ -719,6 +730,7 @@ const COMPONENTS = [
                 "unit": "PIXELS"
               },
               "textAlignH": "CENTER",
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -942,6 +954,17 @@ const COMPONENTS = [
         "channel": "user-select",
         "value": "none",
         "reason": "Text-selection behavior (user-select) exists only in the coded component.",
+        "variants": {
+          "count": 12,
+          "of": 12
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "transform [active]",
+        "value": "matrix(0.98, 0, 0, 0.98, 0, 0)",
+        "reason": "observed by the computed capture and refused by the contract grammar — value shape outside mintable kinds and outside the declared vocabulary",
         "variants": {
           "count": 12,
           "of": 12
@@ -1224,7 +1247,7 @@ const COMPONENTS = [
         "part": "root",
         "kind": "declared",
         "channel": "transition-duration",
-        "value": "0.175s",
+        "value": "0.125s",
         "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
         "variants": {
           "count": 12,

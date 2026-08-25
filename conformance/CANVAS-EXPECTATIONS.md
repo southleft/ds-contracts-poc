@@ -15,9 +15,9 @@ never waivable.
 
 | | |
 |---|---|
-| cases (CARRIED + LOWERED) | **54** |
-| 🟢 round-tripped | **29** |
-| 🟢 named (dropped, and a receipt says so) | **10** |
+| cases (CARRIED + LOWERED) | **58** |
+| 🟢 round-tripped | **32** |
+| 🟢 named (dropped, and a receipt says so) | **11** |
 | 🟡 refused by name (the canvas cannot host the seed, and says so) | **15** |
 | ⚪ seed-absent (nothing to round-trip) | **0** |
 | 🔴 red | **0** — SILENT 0 · DRIFTED 0 · HARMFUL 0 |
@@ -32,7 +32,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 **HARMFUL** the manifest says no canvas spelling exists and it came back anyway ·
 **SILENT** vanished, named by nothing — never waivable.
 
-## 🟢 NAMED — 10
+## 🟢 NAMED — 11
 
 | case | feature | construct | channel | expect | came back | ref | as | note |
 |---|---|---|---|---|---|---|---|---|
@@ -44,6 +44,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `aspect-ratio` | geometry | aspect-ratio: 2 / 1 | `aspect-ratio` | CARRIED | — |  |  | code-only channel root.aspect-ratio = 2 / 1 — the canvas has no aspect-ratio field — LOWERED to a fixed height of 40px (bound width 80px ÷ 2); the ratio does not reach the canvas, a width change there will not follow it, and the dump reads… |
 | `display-block` | display | display: block | `display` | CARRIED | flex |  |  | value came back as flex (seed block) — code-only declared root.display = block — CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-lev… |
 | `nonpainting-text-display-none` | invariant | a NON-PAINTING element carrying text (display: none) | `__text` | CARRIED | — |  |  | code-only declared label-2.display = none — CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack). |
+| `presence-hidden-axis-geometry` | tokens | an absolute part's inset that is a clean function of ONE enum axis, with the part NOT RENDERED at one axis value (polaris.checkbox icon: top/left 0px when checked, -2px when indeterminate, absent when unchecked) | `top` | CARRIED | {imported.case-presence-hidden-axis-geometry.a.left.{checked}}, {imported.case-presence-hidden-axis-geometry.a.top.{checked}} |  |  | value came back as {imported.case-presence-hidden-axis-geometry.a.left.{checked}}, {imported.case-presence-hidden-axis-geometry.a.top.{checked}} (seed 3px) — code-only channel root.top = {imported.shared.size-0} — bound on an in-flow box (… |
 | `text-overflow-ellipsis` | text | text-overflow: ellipsis + overflow hidden + nowrap | `text-overflow` | CARRIED | — |  |  | degradation text-channel-unsupported @ «self»:«self»/label: text channel(s) with no dump v1 projection: textTruncation ENDING (the canvas twin of CSS text-overflow: ellipsis — drawn, not read back) — typography carries (fontSize, fontStyle… |
 | `transition-channel` | motion | transition: background-color 200ms ease | `transition-duration` | CARRIED | — |  |  | code-only declared root.transition-duration = 0.2s — Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame. |
 
@@ -67,13 +68,14 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `grid-on-component-variant` | grid-composition | layoutMode GRID on a COMPONENT node (canvas variants are components) | `grid-template-rows` | CARRIED | — |  |  | plugin plan: conformance.grid-on-component-variant — anatomy.root.literals.width: grid-axis-indefinite: a grid part must make each axis DEFINITE — a px/token size, "fit-content" (G8), or layout.grow (width, flex parent). Absence is refused… |
 | `grid-row-span` | grid-placement | grid-row: 2 / span 2 (child spans 2 rows) | `grid-row-end` | CARRIED | — |  |  | plugin plan: conformance.grid-row-span — anatomy.root.literals.height: grid-axis-indefinite: a grid part must make each axis DEFINITE — a px/token size, "fit-content" (G8), or layout.grow (width, flex parent). Absence is refused because it… |
 
-## 🟢 ROUND-TRIPPED — 29
+## 🟢 ROUND-TRIPPED — 32
 
 | case | feature | construct | channel | expect | came back | ref | as | note |
 |---|---|---|---|---|---|---|---|---|
 | `antd-component-scoped-custom-property` | tokens | .cf-root { --cf-scoped-pad: 15px } .cf-root .cf-a { padding-inline: var(--cf-scoped-pad) } — a token DECLARED ON THE COMPONENT ROOT (not :root) and consumed by a descendant (antd cssVar component tokens on `.antd.ant-btn`) | `padding-left` | CARRIED | 15px | same |  |  |
 | `antd-forwarded-root-attrs` | anatomy | label > [input.sr-only + span.box] + span.text — the component forwards className/data-* to the HIDDEN input, not the visible label root (antd Checkbox/Radio) | `background-color` | CARRIED | #1677ff | same |  |  |
 | `antd-presence-times-axis-glyph` | anatomy | a child part whose PRESENCE is one prop (showIcon) and whose paint is ANOTHER (type) — the base (default) combo mounts without it (antd Alert) | `color` | CARRIED | #000000e0 | same |  |  |
+| `border-color-control-equal` | paint | a border-color EQUAL to the bare control element's (a library global like shadcn's `* { border-color: var(--border) }` styles the control too) on a part that draws a real border | `border-top-color` | CARRIED | #000000 | same |  |  |
 | `border-radius-px` | geometry | border-radius: 6px | `border-top-left-radius` | CARRIED | 6px | same | `border-radius` | channel respelled: border-top-left-radius → border-radius |
 | `box-shadow-single` | effects | box-shadow: 0 1px 3px rgba(0,0,0,0.2) | `box-shadow` | CARRIED | rgba(0, 0, 0, 0.2) 0px 1px 3px 0px | same |  |  |
 | `calc-var` | custom-properties | padding-left: calc(var(--cf-space-2) * 2) | `padding-left` | LOWERED | 16px | same |  |  |
@@ -84,6 +86,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `display-flex` | display | display: flex | `display` | CARRIED | flex | same |  |  |
 | `display-inline-flex` | display | display: inline-flex | `display` | CARRIED | flex | same |  |  |
 | `em-relative-padding` | units | padding: 1.5em against a 12px font-size | `padding-left` | CARRIED | 18px | same | `padding-inline` | channel respelled: padding-left → padding-inline |
+| `flex-direction-by-axis` | layout | flex-direction that VARIES on one enum axis (column at the default value, row on the other) — the fluent.card orientation shape | `flex-direction` | CARRIED | column, row | same |  |  |
 | `flex-gap` | layout | column-gap / row-gap in px | `column-gap` | CARRIED | 12px | same | `gap` | channel respelled: column-gap → gap |
 | `grid-absolute-overlay` | grid-composition | Part.overlay (layoutPositioning ABSOLUTE) inside a grid parent | `position` | CARRIED | absolute, relative | same |  |  |
 | `grid-auto-flow-row` | grid-flow | grid-auto-flow: row over declared columns AND declared row tracks, placement by child order | `grid-auto-flow` | CARRIED | row | same |  |  |
@@ -92,6 +95,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `grid-track-fit-content` | grid-tracks | grid-template-columns: fit-content(100%) 1fr | `grid-template-columns` | CARRIED | fit-content(100%) 1fr | same |  |  |
 | `grid-tracks-mixed-fractional` | grid-tracks | grid-template-columns: 33.5px 2.5fr 1fr (mixed list, fractional values) | `grid-template-columns` | CARRIED | 33.5px 2.5fr 1fr | same |  |  |
 | `grid-two-column` | grid-tracks | display: grid; grid-template-columns: 1fr 1fr | `grid-template-columns` | CARRIED | 1fr 1fr | same |  |  |
+| `grid-zero-track-collapse` | grid-tracks | a computed grid track list containing a 0px track — the resolved width of an EMPTY slot column (min-content with no occupant) | `grid-template-columns` | CARRIED | 288px | same |  |  |
 | `min-max-width` | geometry | min-width / max-width in px | `min-width` | CARRIED | 96px | same |  |  |
 | `oklch-color` | color | background-color: oklch(0.6 0.15 250) | `background-color` | CARRIED | #2784d5 | same |  |  |
 | `percentage-padding` | units | padding-left: 10% (resolved against the PARENT width) | `padding-left` | CARRIED | 28.7969px | same |  |  |

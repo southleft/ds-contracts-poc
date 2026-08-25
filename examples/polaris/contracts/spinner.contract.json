@@ -65,12 +65,6 @@
   "states": [],
   "anatomy": {
     "root": {
-      "layout": {
-        "display": "flex",
-        "direction": "row",
-        "align": "center",
-        "justify": "center"
-      },
       "declared": {
         "display": "block"
       },
@@ -80,28 +74,22 @@
             "asset": "spinner-root-small",
             "size": 20
           },
-          "declared": {
-            "transform": "rotate(90deg)"
-          },
           "visibleWhen": {
             "prop": "size",
             "equals": "small"
           },
-          "description": "Per-value svg content promoted from the computed floor: the glyph drawn when size=small. FC-SVG-ROTATION: capture path gaps at 12 o'clock; developed Polaris receipt opens at ~3 o'clock."
+          "description": "Per-value svg content promoted from the computed floor: the glyph drawn when size=small."
         },
         "root-large": {
           "icon": {
             "asset": "spinner-root-large",
             "size": 44
           },
-          "declared": {
-            "transform": "rotate(90deg)"
-          },
           "visibleWhen": {
             "prop": "size",
             "equals": "large"
           },
-          "description": "Per-value svg content promoted from the computed floor: the glyph drawn when size=large. FC-SVG-ROTATION: capture path gaps at 12 o'clock; developed Polaris receipt opens at ~3 o'clock."
+          "description": "Per-value svg content promoted from the computed floor: the glyph drawn when size=large."
         }
       },
       "tokens": {

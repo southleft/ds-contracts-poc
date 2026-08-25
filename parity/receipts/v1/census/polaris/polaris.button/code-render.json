@@ -14,8 +14,8 @@
     "rule": "see census-manifest.json sampleRule",
     "cap": {
       "limit": 24,
-      "derived": 320,
-      "sampled": 18,
+      "derived": 220,
+      "sampled": 17,
       "dropped": 0
     },
     "axisCoverageComplete": true,
@@ -51,7 +51,7 @@
       {
         "name": "tone",
         "type": "enum",
-        "default": "default"
+        "default": null
       },
       {
         "name": "variant",
@@ -136,101 +136,6 @@
   },
   "variants": [
     {
-      "slug": "size-medium__text-align-center__tone-default__variant-secondary",
-      "variant": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary",
-      "kind": "base",
-      "subst": {
-        "size": "medium",
-        "textAlign": "center",
-        "tone": "default",
-        "variant": "secondary"
-      },
-      "bools": {},
-      "interaction": "default",
-      "status": "rendered",
-      "png": "code-size-medium__text-align-center__tone-default__variant-secondary.png",
-      "contentBox": {
-        "width": 62.66,
-        "height": 32
-      }
-    },
-    {
-      "slug": "size-medium__text-align-center__tone-default__variant-plain",
-      "variant": "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain",
-      "kind": "base",
-      "subst": {
-        "size": "medium",
-        "textAlign": "center",
-        "tone": "default",
-        "variant": "plain"
-      },
-      "bools": {},
-      "interaction": "default",
-      "status": "rendered",
-      "png": "code-size-medium__text-align-center__tone-default__variant-plain.png",
-      "contentBox": {
-        "width": 58.7,
-        "height": 32
-      }
-    },
-    {
-      "slug": "size-medium__text-align-center__tone-default__variant-primary",
-      "variant": "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary",
-      "kind": "base",
-      "subst": {
-        "size": "medium",
-        "textAlign": "center",
-        "tone": "default",
-        "variant": "primary"
-      },
-      "bools": {},
-      "interaction": "default",
-      "status": "rendered",
-      "png": "code-size-medium__text-align-center__tone-default__variant-primary.png",
-      "contentBox": {
-        "width": 62.66,
-        "height": 32
-      }
-    },
-    {
-      "slug": "size-medium__text-align-center__tone-default__variant-tertiary",
-      "variant": "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary",
-      "kind": "base",
-      "subst": {
-        "size": "medium",
-        "textAlign": "center",
-        "tone": "default",
-        "variant": "tertiary"
-      },
-      "bools": {},
-      "interaction": "default",
-      "status": "rendered",
-      "png": "code-size-medium__text-align-center__tone-default__variant-tertiary.png",
-      "contentBox": {
-        "width": 62.66,
-        "height": 32
-      }
-    },
-    {
-      "slug": "size-medium__text-align-center__tone-default__variant-monochrome-plain",
-      "variant": "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain",
-      "kind": "base",
-      "subst": {
-        "size": "medium",
-        "textAlign": "center",
-        "tone": "default",
-        "variant": "monochromePlain"
-      },
-      "bools": {},
-      "interaction": "default",
-      "status": "rendered",
-      "png": "code-size-medium__text-align-center__tone-default__variant-monochrome-plain.png",
-      "contentBox": {
-        "width": 58.7,
-        "height": 32
-      }
-    },
-    {
       "slug": "size-medium__text-align-center__tone-critical__variant-secondary",
       "variant": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary",
       "kind": "base",
@@ -245,7 +150,83 @@
       "status": "rendered",
       "png": "code-size-medium__text-align-center__tone-critical__variant-secondary.png",
       "contentBox": {
-        "width": 62.66,
+        "width": 62.19,
+        "height": 32
+      }
+    },
+    {
+      "slug": "size-medium__text-align-center__tone-critical__variant-plain",
+      "variant": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain",
+      "kind": "base",
+      "subst": {
+        "size": "medium",
+        "textAlign": "center",
+        "tone": "critical",
+        "variant": "plain"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-medium__text-align-center__tone-critical__variant-plain.png",
+      "contentBox": {
+        "width": 61.58,
+        "height": 32
+      }
+    },
+    {
+      "slug": "size-medium__text-align-center__tone-critical__variant-primary",
+      "variant": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary",
+      "kind": "base",
+      "subst": {
+        "size": "medium",
+        "textAlign": "center",
+        "tone": "critical",
+        "variant": "primary"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-medium__text-align-center__tone-critical__variant-primary.png",
+      "contentBox": {
+        "width": 62.8,
+        "height": 32
+      }
+    },
+    {
+      "slug": "size-medium__text-align-center__tone-critical__variant-tertiary",
+      "variant": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary",
+      "kind": "base",
+      "subst": {
+        "size": "medium",
+        "textAlign": "center",
+        "tone": "critical",
+        "variant": "tertiary"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-medium__text-align-center__tone-critical__variant-tertiary.png",
+      "contentBox": {
+        "width": 62.19,
+        "height": 32
+      }
+    },
+    {
+      "slug": "size-medium__text-align-center__tone-critical__variant-monochrome-plain",
+      "variant": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain",
+      "kind": "base",
+      "subst": {
+        "size": "medium",
+        "textAlign": "center",
+        "tone": "critical",
+        "variant": "monochromePlain"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-medium__text-align-center__tone-critical__variant-monochrome-plain.png",
+      "contentBox": {
+        "width": 61.58,
         "height": 32
       }
     },
@@ -264,152 +245,152 @@
       "status": "rendered",
       "png": "code-size-medium__text-align-center__tone-success__variant-secondary.png",
       "contentBox": {
-        "width": 62.66,
+        "width": 62.19,
         "height": 32
       }
     },
     {
-      "slug": "size-medium__text-align-left__tone-default__variant-secondary",
-      "variant": "Size=Medium, Text Align=Left, Tone=Default, Variant=Secondary",
+      "slug": "size-medium__text-align-left__tone-critical__variant-secondary",
+      "variant": "Size=Medium, Text Align=Left, Tone=Critical, Variant=Secondary",
       "kind": "base",
       "subst": {
         "size": "medium",
         "textAlign": "left",
-        "tone": "default",
+        "tone": "critical",
         "variant": "secondary"
       },
       "bools": {},
       "interaction": "default",
       "status": "rendered",
-      "png": "code-size-medium__text-align-left__tone-default__variant-secondary.png",
+      "png": "code-size-medium__text-align-left__tone-critical__variant-secondary.png",
       "contentBox": {
-        "width": 62.66,
+        "width": 62.19,
         "height": 32
       }
     },
     {
-      "slug": "size-medium__text-align-right__tone-default__variant-secondary",
-      "variant": "Size=Medium, Text Align=Right, Tone=Default, Variant=Secondary",
+      "slug": "size-medium__text-align-right__tone-critical__variant-secondary",
+      "variant": "Size=Medium, Text Align=Right, Tone=Critical, Variant=Secondary",
       "kind": "base",
       "subst": {
         "size": "medium",
         "textAlign": "right",
-        "tone": "default",
+        "tone": "critical",
         "variant": "secondary"
       },
       "bools": {},
       "interaction": "default",
       "status": "rendered",
-      "png": "code-size-medium__text-align-right__tone-default__variant-secondary.png",
+      "png": "code-size-medium__text-align-right__tone-critical__variant-secondary.png",
       "contentBox": {
-        "width": 62.66,
+        "width": 62.19,
         "height": 32
       }
     },
     {
-      "slug": "size-medium__text-align-start__tone-default__variant-secondary",
-      "variant": "Size=Medium, Text Align=Start, Tone=Default, Variant=Secondary",
+      "slug": "size-medium__text-align-start__tone-critical__variant-secondary",
+      "variant": "Size=Medium, Text Align=Start, Tone=Critical, Variant=Secondary",
       "kind": "base",
       "subst": {
         "size": "medium",
         "textAlign": "start",
-        "tone": "default",
+        "tone": "critical",
         "variant": "secondary"
       },
       "bools": {},
       "interaction": "default",
       "status": "rendered",
-      "png": "code-size-medium__text-align-start__tone-default__variant-secondary.png",
+      "png": "code-size-medium__text-align-start__tone-critical__variant-secondary.png",
       "contentBox": {
-        "width": 62.66,
+        "width": 62.19,
         "height": 32
       }
     },
     {
-      "slug": "size-medium__text-align-end__tone-default__variant-secondary",
-      "variant": "Size=Medium, Text Align=End, Tone=Default, Variant=Secondary",
+      "slug": "size-medium__text-align-end__tone-critical__variant-secondary",
+      "variant": "Size=Medium, Text Align=End, Tone=Critical, Variant=Secondary",
       "kind": "base",
       "subst": {
         "size": "medium",
         "textAlign": "end",
-        "tone": "default",
+        "tone": "critical",
         "variant": "secondary"
       },
       "bools": {},
       "interaction": "default",
       "status": "rendered",
-      "png": "code-size-medium__text-align-end__tone-default__variant-secondary.png",
+      "png": "code-size-medium__text-align-end__tone-critical__variant-secondary.png",
       "contentBox": {
-        "width": 62.66,
+        "width": 62.19,
         "height": 32
       }
     },
     {
-      "slug": "size-micro__text-align-center__tone-default__variant-secondary",
-      "variant": "Size=Micro, Text Align=Center, Tone=Default, Variant=Secondary",
+      "slug": "size-micro__text-align-center__tone-critical__variant-secondary",
+      "variant": "Size=Micro, Text Align=Center, Tone=Critical, Variant=Secondary",
       "kind": "base",
       "subst": {
         "size": "micro",
         "textAlign": "center",
-        "tone": "default",
+        "tone": "critical",
         "variant": "secondary"
       },
       "bools": {},
       "interaction": "default",
       "status": "rendered",
-      "png": "code-size-micro__text-align-center__tone-default__variant-secondary.png",
+      "png": "code-size-micro__text-align-center__tone-critical__variant-secondary.png",
       "contentBox": {
-        "width": 54.66,
+        "width": 54.19,
         "height": 28
       }
     },
     {
-      "slug": "size-slim__text-align-center__tone-default__variant-secondary",
-      "variant": "Size=Slim, Text Align=Center, Tone=Default, Variant=Secondary",
+      "slug": "size-slim__text-align-center__tone-critical__variant-secondary",
+      "variant": "Size=Slim, Text Align=Center, Tone=Critical, Variant=Secondary",
       "kind": "base",
       "subst": {
         "size": "slim",
         "textAlign": "center",
-        "tone": "default",
+        "tone": "critical",
         "variant": "secondary"
       },
       "bools": {},
       "interaction": "default",
       "status": "rendered",
-      "png": "code-size-slim__text-align-center__tone-default__variant-secondary.png",
+      "png": "code-size-slim__text-align-center__tone-critical__variant-secondary.png",
       "contentBox": {
-        "width": 62.66,
+        "width": 62.19,
         "height": 32
       }
     },
     {
-      "slug": "size-large__text-align-center__tone-default__variant-secondary",
-      "variant": "Size=Large, Text Align=Center, Tone=Default, Variant=Secondary",
+      "slug": "size-large__text-align-center__tone-critical__variant-secondary",
+      "variant": "Size=Large, Text Align=Center, Tone=Critical, Variant=Secondary",
       "kind": "base",
       "subst": {
         "size": "large",
         "textAlign": "center",
-        "tone": "default",
+        "tone": "critical",
         "variant": "secondary"
       },
       "bools": {},
       "interaction": "default",
       "status": "rendered",
-      "png": "code-size-large__text-align-center__tone-default__variant-secondary.png",
+      "png": "code-size-large__text-align-center__tone-critical__variant-secondary.png",
       "contentBox": {
-        "width": 65.88,
+        "width": 65.38,
         "height": 36
       }
     },
     {
-      "slug": "size-medium__text-align-center__tone-default__variant-secondary__state-disabled",
-      "variant": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Disabled",
+      "slug": "size-medium__text-align-center__tone-critical__variant-secondary__state-disabled",
+      "variant": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Disabled",
       "kind": "state",
       "state": "disabled",
       "subst": {
         "size": "medium",
         "textAlign": "center",
-        "tone": "default",
+        "tone": "critical",
         "variant": "secondary"
       },
       "bools": {},
@@ -418,67 +399,67 @@
       "error": "state \"disabled\" drives boolean prop \"disabled\", which polaris.button does not declare"
     },
     {
-      "slug": "size-medium__text-align-center__tone-default__variant-secondary__state-focus-visible",
-      "variant": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Focus Visible",
+      "slug": "size-medium__text-align-center__tone-critical__variant-secondary__state-focus-visible",
+      "variant": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Focus Visible",
       "kind": "state",
       "state": "focus-visible",
       "subst": {
         "size": "medium",
         "textAlign": "center",
-        "tone": "default",
+        "tone": "critical",
         "variant": "secondary"
       },
       "bools": {},
       "interaction": "focus-visible",
       "status": "rendered",
-      "png": "code-size-medium__text-align-center__tone-default__variant-secondary__state-focus-visible.png",
+      "png": "code-size-medium__text-align-center__tone-critical__variant-secondary__state-focus-visible.png",
       "contentBox": {
-        "width": 62.66,
+        "width": 62.19,
         "height": 32
       }
     },
     {
-      "slug": "size-medium__text-align-center__tone-default__variant-secondary__state-active",
-      "variant": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Active",
+      "slug": "size-medium__text-align-center__tone-critical__variant-secondary__state-active",
+      "variant": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Active",
       "kind": "state",
       "state": "active",
       "subst": {
         "size": "medium",
         "textAlign": "center",
-        "tone": "default",
+        "tone": "critical",
         "variant": "secondary"
       },
       "bools": {},
       "interaction": "active",
       "status": "rendered",
-      "png": "code-size-medium__text-align-center__tone-default__variant-secondary__state-active.png",
+      "png": "code-size-medium__text-align-center__tone-critical__variant-secondary__state-active.png",
       "contentBox": {
-        "width": 62.66,
+        "width": 62.19,
         "height": 32
       }
     },
     {
-      "slug": "size-medium__text-align-center__tone-default__variant-secondary__state-hover",
-      "variant": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Hover",
+      "slug": "size-medium__text-align-center__tone-critical__variant-secondary__state-hover",
+      "variant": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Hover",
       "kind": "state",
       "state": "hover",
       "subst": {
         "size": "medium",
         "textAlign": "center",
-        "tone": "default",
+        "tone": "critical",
         "variant": "secondary"
       },
       "bools": {},
       "interaction": "hover",
       "status": "rendered",
-      "png": "code-size-medium__text-align-center__tone-default__variant-secondary__state-hover.png",
+      "png": "code-size-medium__text-align-center__tone-critical__variant-secondary__state-hover.png",
       "contentBox": {
-        "width": 62.66,
+        "width": 62.19,
         "height": 32
       }
     }
   ],
-  "rendered": 17,
+  "rendered": 16,
   "refused": 1,
   "unavailable": null
 }

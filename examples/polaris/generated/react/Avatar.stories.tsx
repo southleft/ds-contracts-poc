@@ -17,17 +17,16 @@ const meta = {
   argTypes: {
     size: { control: 'select', options: ['xs', 'sm', 'md', 'lg', 'xl'], description: 'Size of avatar' },
     name: { control: 'text', description: 'The name of the person' },
-    initials: { control: 'text', description: 'Initials of person to display. Default TP matches developed receipt (examples/polaris/receipts/avatar/default.png); without a string default, contentFallsThrough kept only the silhouette SVG children.' },
+    initials: { control: 'text', description: 'Initials of person to display' },
     customer: { control: 'boolean', description: 'Whether the avatar is for a customer' },
     source: { control: 'text', description: 'URL of the avatar image which falls back to initials if the image fails to load' },
     accessibilityLabel: { control: 'text', description: 'Accessible label for the avatar image' },
-    withInitials: { control: 'boolean', description: 'Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library\'s `initials` ("TP"); the created subtree is carried as parts gated on this prop. Default true so canvas showcase matches developed initials receipt (silhouette remains via Show WithInitials=false + icon assets once gated).' },
+    withInitials: { control: 'boolean', description: 'Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library\'s `initials` ("TP"); the created subtree is carried as parts gated on this prop.' },
   },
   args: {
     size: 'md',
-    initials: 'TP',
     customer: false,
-    withInitials: true,
+    withInitials: false,
   },
 } satisfies Meta<typeof Avatar>;
 

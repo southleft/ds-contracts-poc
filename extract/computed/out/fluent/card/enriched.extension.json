@@ -1,6 +1,6 @@
 {
   "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
-  "generatedBy": "extract/computed/run.ts",
+  "generatedBy": "extract/computed/regate.ts --write-enriched (OFFLINE RE-FUSE of the committed captured truth; no library recapture). Differences vs the harness path, NAMED: portal receipts are a capture-time artifact and are absent here; the frontier receipts are capture-time too and are CARRIED FORWARD unchanged from the extension this re-fuse overwrote (5 receipt(s)); every other receipt is recomputed from the same truth.",
   "library": "@fluentui/react-components@9.74.5",
   "browser": "151.0.7922.34",
   "mintedTokens": {
@@ -574,42 +574,6 @@
           "flex-shrink": {
             "$value": "0",
             "$type": "number"
-          },
-          "height": {
-            "$value": "40px",
-            "$type": "dimension"
-          },
-          "width": {
-            "small": {
-              "horizontal": {
-                "$value": "361.281px",
-                "$type": "dimension"
-              },
-              "vertical": {
-                "$value": "412px",
-                "$type": "dimension"
-              }
-            },
-            "medium": {
-              "horizontal": {
-                "$value": "353.281px",
-                "$type": "dimension"
-              },
-              "vertical": {
-                "$value": "404px",
-                "$type": "dimension"
-              }
-            },
-            "large": {
-              "horizontal": {
-                "$value": "345.281px",
-                "$type": "dimension"
-              },
-              "vertical": {
-                "$value": "396px",
-                "$type": "dimension"
-              }
-            }
           }
         }
       },
@@ -617,6 +581,10 @@
         "size-0": {
           "$value": "0px",
           "$type": "dimension"
+        },
+        "color-242424": {
+          "$value": "#242424",
+          "$type": "color"
         },
         "size-3": {
           "$value": "3px",
@@ -717,10 +685,22 @@
     "fold-carries-state-delta: [disabled] checkbox.text-emphasis-color rides its source fact"
   ],
   "layout": {
-    "enriched": [],
+    "enriched": [
+      {
+        "part": "root",
+        "field": "direction",
+        "value": "column",
+        "byProp": {
+          "prop": "orientation",
+          "overrides": {
+            "horizontal": "row"
+          }
+        }
+      }
+    ],
     "contradictions": [],
     "receipts": [
-      "layout-not-uniform: root.flex-direction varies across combos — stays code-only",
+      "layout-factored-on-axis: root.flex-direction varies across combos but factors on enum axis \"orientation\" — base (orientation=vertical) carries layout.direction = column; deviating value(s) orientation=horizontal → row ride layoutByProp (schema v7; resolveLayout merges per compiled variant)",
       "layout-not-uniform: root.align-items varies across combos — stays code-only"
     ],
     "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
@@ -805,6 +785,11 @@
       },
       {
         "part": "label",
+        "channel": "font-family",
+        "value": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
+      },
+      {
+        "part": "label",
         "channel": "position",
         "value": "relative"
       },
@@ -819,9 +804,19 @@
         "value": "pointer"
       },
       {
+        "part": "label-2",
+        "channel": "font-family",
+        "value": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
+      },
+      {
         "part": "label-3",
         "channel": "cursor",
         "value": "pointer"
+      },
+      {
+        "part": "label-3",
+        "channel": "font-family",
+        "value": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
       }
     ],
     "state": [
@@ -908,13 +903,6 @@
       "distinctValues": 2
     },
     {
-      "part": "root",
-      "channel": "flex-direction",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "row",
-      "distinctValues": 2
-    },
-    {
       "part": "checkbox",
       "channel": "clip",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
@@ -944,58 +932,9 @@
     },
     {
       "part": "cardheader",
-      "channel": "display",
-      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
-      "sample": "grid",
-      "distinctValues": 1
-    },
-    {
-      "part": "cardheader",
       "channel": "grid-auto-columns",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "min-content 1fr min-content",
-      "distinctValues": 1
-    },
-    {
-      "part": "cardheader",
-      "channel": "grid-template-columns",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "0px 361.281px",
-      "distinctValues": 6
-    },
-    {
-      "part": "cardheader",
-      "channel": "grid-template-rows",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "20px 20px",
-      "distinctValues": 1
-    },
-    {
-      "part": "label-2",
-      "channel": "grid-column-start",
-      "reason": "grid placement not carried: parent cardheader declined structured grid promotion — computed grid-template-columns \"0px 404px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "sample": "2",
-      "distinctValues": 1
-    },
-    {
-      "part": "label-2",
-      "channel": "grid-row-start",
-      "reason": "grid placement not carried: parent cardheader declined structured grid promotion — computed grid-template-columns \"0px 404px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "sample": "1",
-      "distinctValues": 1
-    },
-    {
-      "part": "label-3",
-      "channel": "grid-column-start",
-      "reason": "grid placement not carried: parent cardheader declined structured grid promotion — computed grid-template-columns \"0px 404px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "sample": "2",
-      "distinctValues": 1
-    },
-    {
-      "part": "label-3",
-      "channel": "grid-row-start",
-      "reason": "grid placement not carried: parent cardheader declined structured grid promotion — computed grid-template-columns \"0px 404px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "sample": "2",
       "distinctValues": 1
     }
   ],
@@ -1315,6 +1254,15 @@
     "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
     "findings": [
       {
+        "combo": "filled.medium.vertical.enabled",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
         "combo": "filled.small.horizontal.enabled",
         "interaction": "default",
         "part": "root",
@@ -1472,15 +1420,6 @@
         "deltaVsDefault": {
           "content": "\"\""
         }
-      },
-      {
-        "combo": "filled.medium.horizontal.disabled",
-        "interaction": "default",
-        "part": "root",
-        "pseudo": "::after",
-        "deltaVsDefault": {
-          "content": "\"\""
-        }
       }
     ],
     "totalFindings": 108
@@ -1497,14 +1436,26 @@
     "absolute-geometry-admitted: root — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: checkbox — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: cardheader — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "page-inherited-ink-admitted: root.color = rgba(36, 36, 36, 1) — EQUAL to the <div> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
     "control-fallback: no control for <input> — span control used (part checkbox)",
-    "text-part-typography-carried: label — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
-    "text-part-typography-carried: label-2 — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
-    "text-part-typography-carried: label-3 — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "page-inherited-ink-admitted: label.color = rgba(36, 36, 36, 1) — EQUAL to the <div> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
+    "text-part-typography-carried: label — font-size/line-height/font-weight/font-family carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "page-inherited-ink-admitted: cardheader.color = rgba(36, 36, 36, 1) — EQUAL to the <div> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
+    "page-inherited-ink-admitted: label-2.color = rgba(36, 36, 36, 1) — EQUAL to the <div> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
+    "text-part-typography-carried: label-2 — font-size/line-height/font-weight/font-family carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "page-inherited-ink-admitted: label-3.color = rgba(36, 36, 36, 1) — EQUAL to the <div> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
+    "text-part-typography-carried: label-3 — font-size/line-height/font-weight/font-family carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "geometry-excluded: cardheader — block-size 40px, inline-size 404px, perspective-origin 202px 20px, transform-origin 202px 20px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: checkbox — block-size 1px, inline-size 1px, perspective-origin 0.5px 0.5px, transform-origin 0.5px 0.5px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label — inline-size 428px, perspective-origin 214px 10px, transform-origin 214px 10px, width 428px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label-2 — inline-size 404px, perspective-origin 202px 10px, transform-origin 202px 10px, width 404px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label-3 — inline-size 404px, perspective-origin 202px 10px, transform-origin 202px 10px, width 404px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: root — block-size 84px, inline-size 428px, perspective-origin 214px 42px, transform-origin 214px 42px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (checkbox); -webkit-text-stroke-color (checkbox)",
     "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
+    "carried-axis-not-reminted: cardheader.height — the promotion states it as literals.height \"fit-content\" (grid-axis-definite, G8); the computed 40px is that literal's base-plane used box, not a second fact, and is NOT minted beside it (one carrier per channel — validateContract refuses two)",
+    "carried-axis-not-reminted: cardheader.width — the promotion states it as literals.width \"fit-content\" (grid-axis-definite, G8); the computed 404px is that literal's base-plane used box, not a second fact, and is NOT minted beside it (one carrier per channel — validateContract refuses two)",
     "inheritance-check-rejected: checkbox.caret-color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: checkbox.color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: checkbox.font-size — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: checkbox.line-height — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label-2.font-size — values track ancestor \"cardheader\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
@@ -1515,7 +1466,11 @@
     "inheritance-check-rejected: label-3.line-height — values track ancestor \"cardheader\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.font-size — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.font-weight — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label.line-height — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)"
+    "inheritance-check-rejected: label.line-height — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-only: cardheader.color equals ancestor \"root\" on all 192 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.color equals ancestor \"cardheader\" on all 192 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label-3.color equals ancestor \"cardheader\" on all 192 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label.color equals ancestor \"root\" on all 192 captured planes — the part carries no independent color fact (CSS inheritance, observed)"
   ],
   "frontierReceipts": [
     "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
@@ -1570,34 +1525,40 @@
       "literal-text-carried: label = \"Preview\" (no text prop sample matches — the mounted value is carried verbatim)",
       "literal-text-carried: label-2 = \"Card header\" (no text prop sample matches — the mounted value is carried verbatim)",
       "literal-text-carried: label-3 = \"Card description\" (no text prop sample matches — the mounted value is carried verbatim)",
-      "grid-promotion-fallback: cardheader — computed grid-template-columns \"0px 404px\" yields no carriageable track list; the flex-era lowering decides (named)"
+      "grid-zero-track-collapsed: cardheader.grid-template-columns — computed \"0px 404px\" resolves 1 EMPTY 0px track(s) at line 1 (an unoccupied slot column/row, not an authored zero — the P2b fence covers the declared plane); the carried list keeps the 1 non-zero track(s) and every child placement is re-indexed across the dropped line(s)",
+      "grid-promoted: cardheader — 2×1 declared tracks carried as layout.rows/columns; 2 child placement(s) (0-based cells, spans, per-cell align — A2 G1/G2/G4)",
+      "grid-axis-definite: cardheader width carried as literals.width \"fit-content\" (G8) — the used box 404px equals the intrinsic track sum (404px), so the box IS its content and the canvas can hug it instead of keeping createFrame's FIXED 100 default (FC-GRID-ROOT-VSIZE)",
+      "grid-axis-definite: cardheader height carried as literals.height \"fit-content\" (G8) — the used box 40px equals the intrinsic track sum (40px), so the box IS its content and the canvas can hug it instead of keeping createFrame's FIXED 100 default (FC-GRID-ROOT-VSIZE)"
     ],
     "refusals": [
-      "grid-two-dimensional: grid resolves 2 columns × 2 rows — a two-dimensional grid has no auto-layout spelling (one axis would have to be invented); no layout carried (named refusal) (part cardheader)",
       "pseudo-decor-outside-grammar: root::before occupies 428x92 at position:absolute but paints nothing the grammar reads (background-color rgba(0, 0, 0, 0), border 0px rgba(189, 189, 189, 1)) — NOT promoted",
       "pseudo-decor-size-varies: root::after drawn at 426×54 vs 426×74 vs 426×62 vs 426×82 vs 426×70 vs 426×90 — size does not factor as a function of ONE enum axis (per-variant resize spelling is literalsByProp width/height on a single axis); named refusal"
     ]
   },
   "enrichmentNotes": [
+    "layout enriched per axis: root.layout.direction = column at base; orientation=horizontal → row via layoutByProp (schema v7 — resolveLayout merges per compiled variant)",
     "declared fact carried: root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: root.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: root.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: root.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: checkbox.appearance = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: checkbox.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: checkbox.cursor = default (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: checkbox.font-family = Arial (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: checkbox.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: checkbox.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: checkbox.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: checkbox.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: checkbox.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: checkbox.text-align = start (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: checkbox.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.font-family = \"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: cardheader.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.font-family = \"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label-3.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.font-family = \"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared state fact carried: [disabled] cardheader.cursor = not-allowed (v15 declared vocabulary)",
     "declared state fact carried: [disabled] cardheader.user-select = none (v15 declared vocabulary)",
     "declared state fact carried: [disabled] checkbox.user-select = none (v15 declared vocabulary)",
@@ -1613,7 +1574,6 @@
     "nested pair carried: checkbox.bottom = per-orientation map whose refs substitute size (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
     "nested pair carried: checkbox.top = per-orientation map whose refs substitute size (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
     "nested pair carried: label.margin-bottom = per-orientation map whose refs substitute size (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
-    "nested pair carried: label.margin-right = per-orientation map whose refs substitute size (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
-    "nested pair carried: cardheader.width = per-orientation map whose refs substitute size (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)"
+    "nested pair carried: label.margin-right = per-orientation map whose refs substitute size (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)"
   ]
 }

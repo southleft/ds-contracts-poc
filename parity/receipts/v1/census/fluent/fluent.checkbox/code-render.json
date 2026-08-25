@@ -160,7 +160,7 @@
       "status": "rendered",
       "png": "code-checked-unchecked__size-medium__shape-square.png",
       "contentBox": {
-        "width": 106.27,
+        "width": 108.38,
         "height": 36
       }
     },
@@ -178,7 +178,7 @@
       "status": "rendered",
       "png": "code-checked-unchecked__size-medium__shape-circular.png",
       "contentBox": {
-        "width": 106.27,
+        "width": 108.38,
         "height": 36
       }
     },
@@ -196,7 +196,7 @@
       "status": "rendered",
       "png": "code-checked-unchecked__size-large__shape-square.png",
       "contentBox": {
-        "width": 110.27,
+        "width": 112.38,
         "height": 36
       }
     },
@@ -214,7 +214,7 @@
       "status": "rendered",
       "png": "code-checked-checked__size-medium__shape-square.png",
       "contentBox": {
-        "width": 106.27,
+        "width": 108.38,
         "height": 36
       }
     },
@@ -232,7 +232,7 @@
       "status": "rendered",
       "png": "code-checked-mixed__size-medium__shape-square.png",
       "contentBox": {
-        "width": 106.27,
+        "width": 108.38,
         "height": 36
       }
     },
@@ -266,7 +266,7 @@
       "status": "rendered",
       "png": "code-checked-unchecked__size-medium__shape-square__state-focus-visible.png",
       "contentBox": {
-        "width": 106.27,
+        "width": 108.38,
         "height": 36
       }
     },
@@ -285,7 +285,7 @@
       "status": "rendered",
       "png": "code-checked-unchecked__size-medium__shape-square__state-active.png",
       "contentBox": {
-        "width": 106.27,
+        "width": 108.38,
         "height": 36
       }
     },
@@ -304,7 +304,7 @@
       "status": "rendered",
       "png": "code-checked-unchecked__size-medium__shape-square__state-hover.png",
       "contentBox": {
-        "width": 106.27,
+        "width": 108.38,
         "height": 36
       }
     }

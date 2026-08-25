@@ -1,6 +1,6 @@
 {
   "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
-  "generatedBy": "extract/computed/run.ts",
+  "generatedBy": "extract/computed/regate.ts --write-enriched (OFFLINE RE-FUSE of the committed captured truth; no library recapture). Differences vs the harness path, NAMED: portal receipts are a capture-time artifact and are absent here; the frontier receipts are capture-time too and are CARRIED FORWARD unchanged from the extension this re-fuse overwrote (6 receipt(s)); every other receipt is recomputed from the same truth.",
   "library": "@fluentui/react-components@9.74.5",
   "browser": "151.0.7922.34",
   "mintedTokens": {
@@ -10,12 +10,12 @@
           "$value": "#ffffff",
           "$type": "color"
         },
+        "color-242424": {
+          "$value": "#242424",
+          "$type": "color"
+        },
         "size-0": {
           "$value": "0px",
-          "$type": "dimension"
-        },
-        "size-8": {
-          "$value": "8px",
           "$type": "dimension"
         },
         "size-20": {
@@ -30,10 +30,6 @@
           "$value": "#00000000",
           "$type": "color"
         },
-        "color-242424": {
-          "$value": "#242424",
-          "$type": "color"
-        },
         "size-14": {
           "$value": "14px",
           "$type": "dimension"
@@ -44,6 +40,10 @@
         },
         "size-2": {
           "$value": "2px",
+          "$type": "dimension"
+        },
+        "size-8": {
+          "$value": "8px",
           "$type": "dimension"
         },
         "color-d1d1d1": {
@@ -614,6 +614,11 @@
         "value": "border-box"
       },
       {
+        "part": "label-4",
+        "channel": "font-family",
+        "value": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
+      },
+      {
         "part": "part-0-1-0",
         "channel": "border-bottom-style",
         "value": "none"
@@ -662,6 +667,11 @@
         "part": "label-5",
         "channel": "box-sizing",
         "value": "border-box"
+      },
+      {
+        "part": "label-5",
+        "channel": "font-family",
+        "value": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
       },
       {
         "part": "label-5",
@@ -759,9 +769,19 @@
         "value": "border-box"
       },
       {
+        "part": "label",
+        "channel": "font-family",
+        "value": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
+      },
+      {
         "part": "label-2",
         "channel": "box-sizing",
         "value": "border-box"
+      },
+      {
+        "part": "label-2",
+        "channel": "font-family",
+        "value": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
       },
       {
         "part": "label-2",
@@ -834,34 +854,6 @@
   "codeOnlyChannels": [
     {
       "part": "root",
-      "channel": "border-bottom-style",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "none",
-      "distinctValues": 2
-    },
-    {
-      "part": "root",
-      "channel": "border-left-style",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "none",
-      "distinctValues": 2
-    },
-    {
-      "part": "root",
-      "channel": "border-right-style",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "none",
-      "distinctValues": 2
-    },
-    {
-      "part": "root",
-      "channel": "border-top-style",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "none",
-      "distinctValues": 2
-    },
-    {
-      "part": "root",
       "channel": "box-sizing",
       "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "content-box",
@@ -903,55 +895,6 @@
       "distinctValues": 2
     },
     {
-      "part": "dialogbody-2",
-      "channel": "display",
-      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
-      "sample": "grid",
-      "distinctValues": 1
-    },
-    {
-      "part": "dialogbody-2",
-      "channel": "grid-template-columns",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "257px 257px 20px",
-      "distinctValues": 1
-    },
-    {
-      "part": "dialogbody-2",
-      "channel": "grid-template-rows",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "28px 28px 32px",
-      "distinctValues": 1
-    },
-    {
-      "part": "label-4",
-      "channel": "grid-column-end",
-      "reason": "grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "sample": "3",
-      "distinctValues": 1
-    },
-    {
-      "part": "label-4",
-      "channel": "grid-column-start",
-      "reason": "grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "sample": "1",
-      "distinctValues": 1
-    },
-    {
-      "part": "label-4",
-      "channel": "grid-row-end",
-      "reason": "grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "sample": "1",
-      "distinctValues": 1
-    },
-    {
-      "part": "label-4",
-      "channel": "grid-row-start",
-      "reason": "grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "sample": "1",
-      "distinctValues": 1
-    },
-    {
       "part": "label-4",
       "channel": "unicode-bidi",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <h2>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <h2> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
@@ -959,108 +902,10 @@
       "distinctValues": 1
     },
     {
-      "part": "dialogtitle__action",
-      "channel": "align-self",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "start",
-      "distinctValues": 1
-    },
-    {
-      "part": "dialogtitle__action",
-      "channel": "grid-column-start",
-      "reason": "grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "sample": "3",
-      "distinctValues": 1
-    },
-    {
-      "part": "dialogtitle__action",
-      "channel": "grid-row-end",
-      "reason": "grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "sample": "1",
-      "distinctValues": 1
-    },
-    {
-      "part": "dialogtitle__action",
-      "channel": "grid-row-start",
-      "reason": "grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "sample": "1",
-      "distinctValues": 1
-    },
-    {
-      "part": "dialogtitle__action",
-      "channel": "justify-self",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "end",
-      "distinctValues": 1
-    },
-    {
       "part": "part-0-1-0",
       "channel": "appearance",
       "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
       "sample": "button",
-      "distinctValues": 1
-    },
-    {
-      "part": "label-5",
-      "channel": "grid-column-end",
-      "reason": "grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "sample": "4",
-      "distinctValues": 1
-    },
-    {
-      "part": "label-5",
-      "channel": "grid-column-start",
-      "reason": "grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "sample": "1",
-      "distinctValues": 1
-    },
-    {
-      "part": "label-5",
-      "channel": "grid-row-end",
-      "reason": "grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "sample": "2",
-      "distinctValues": 1
-    },
-    {
-      "part": "label-5",
-      "channel": "grid-row-start",
-      "reason": "grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "sample": "2",
-      "distinctValues": 1
-    },
-    {
-      "part": "dialogactions-2",
-      "channel": "grid-column-end",
-      "reason": "grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "sample": "4",
-      "distinctValues": 1
-    },
-    {
-      "part": "dialogactions-2",
-      "channel": "grid-column-start",
-      "reason": "grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "sample": "2",
-      "distinctValues": 1
-    },
-    {
-      "part": "dialogactions-2",
-      "channel": "grid-row-end",
-      "reason": "grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "sample": "3",
-      "distinctValues": 1
-    },
-    {
-      "part": "dialogactions-2",
-      "channel": "grid-row-start",
-      "reason": "grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "sample": "3",
-      "distinctValues": 1
-    },
-    {
-      "part": "dialogactions-2",
-      "channel": "justify-self",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "end",
       "distinctValues": 1
     },
     {
@@ -1085,122 +930,10 @@
       "distinctValues": 1
     },
     {
-      "part": "dialogbody",
-      "channel": "display",
-      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
-      "sample": "grid",
-      "distinctValues": 1
-    },
-    {
-      "part": "dialogbody",
-      "channel": "grid-template-columns",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "267px 267px 0px",
-      "distinctValues": 1
-    },
-    {
-      "part": "dialogbody",
-      "channel": "grid-template-rows",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "28px 28px 32px",
-      "distinctValues": 1
-    },
-    {
-      "part": "label",
-      "channel": "grid-column-end",
-      "reason": "grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "sample": "4",
-      "distinctValues": 1
-    },
-    {
-      "part": "label",
-      "channel": "grid-column-start",
-      "reason": "grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "sample": "1",
-      "distinctValues": 1
-    },
-    {
-      "part": "label",
-      "channel": "grid-row-end",
-      "reason": "grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "sample": "1",
-      "distinctValues": 1
-    },
-    {
-      "part": "label",
-      "channel": "grid-row-start",
-      "reason": "grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "sample": "1",
-      "distinctValues": 1
-    },
-    {
       "part": "label",
       "channel": "unicode-bidi",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <h2>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <h2> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "sample": "isolate",
-      "distinctValues": 1
-    },
-    {
-      "part": "label-2",
-      "channel": "grid-column-end",
-      "reason": "grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "sample": "4",
-      "distinctValues": 1
-    },
-    {
-      "part": "label-2",
-      "channel": "grid-column-start",
-      "reason": "grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "sample": "1",
-      "distinctValues": 1
-    },
-    {
-      "part": "label-2",
-      "channel": "grid-row-end",
-      "reason": "grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "sample": "2",
-      "distinctValues": 1
-    },
-    {
-      "part": "label-2",
-      "channel": "grid-row-start",
-      "reason": "grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "sample": "2",
-      "distinctValues": 1
-    },
-    {
-      "part": "dialogactions",
-      "channel": "grid-column-end",
-      "reason": "grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "sample": "4",
-      "distinctValues": 1
-    },
-    {
-      "part": "dialogactions",
-      "channel": "grid-column-start",
-      "reason": "grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "sample": "2",
-      "distinctValues": 1
-    },
-    {
-      "part": "dialogactions",
-      "channel": "grid-row-end",
-      "reason": "grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "sample": "3",
-      "distinctValues": 1
-    },
-    {
-      "part": "dialogactions",
-      "channel": "grid-row-start",
-      "reason": "grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "sample": "3",
-      "distinctValues": 1
-    },
-    {
-      "part": "dialogactions",
-      "channel": "justify-self",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "end",
       "distinctValues": 1
     },
     {
@@ -1224,7 +957,6 @@
   "interactionOnlyPlaneDrops": [],
   "interactionOnlyPlaneDropCount": 0,
   "structureReceipts": [
-    "root-signature-varies: non-modal__default: div| → div|DialogSurface (element-varies receipt; root always aligns)",
     "union-part-added: non-modal__default @0 (div|DialogBody)",
     "union-part-added: non-modal__default @0.0 (h2|DialogTitle)",
     "union-part-added: non-modal__default @0.1 (div|DialogTitle__action)",
@@ -1234,7 +966,6 @@
     "union-part-added: non-modal__default @0.2 (div|DialogContent)",
     "union-part-added: non-modal__default @0.3 (div|DialogActions)",
     "union-part-added: non-modal__default @0.3.0 (button|Button)",
-    "signature-drift: non-modal__default root: div| → div|DialogSurface",
     "part-missing: non-modal__default dialogsurface__backdrop",
     "part-missing: non-modal__default dialogsurface",
     "part-missing: non-modal__default part-1-0",
@@ -1243,39 +974,68 @@
     "part-missing: non-modal__default label-2",
     "part-missing: non-modal__default dialogactions",
     "part-missing: non-modal__default label-3",
-    "part-missing: non-modal__default part-1-2",
-    "portal-inert-roots-dropped: modal — 3 new document-level root(s) draw no box, carry no library class and contain nothing (focus-manager sentinels appended to the document rather than to the portal node); dropped BEFORE the single-root policy, which would otherwise have refused MULTI-ROOT-CAPTURE over DOM that paints no ink: <i> portaled, <span> in-stage, <i> portaled",
-    "portal-inert-children-dropped: modal — 1 direct child element(s) of the captured root draw no box, carry no library class and contain nothing (focus-trap sentinels); they lowered to full-bleed invisible frames over the component and are not anatomy",
-    "portal-autofocus-neutralized: modal — focus was on \"button|fui-Button.r1f29ykk\" when the overlay settled (the library autofocuses on open); blurred BEFORE sampling so the default-interaction plane is not silently a :focus-visible plane",
-    "portal-inert-roots-dropped: non-modal — 3 new document-level root(s) draw no box, carry no library class and contain nothing (focus-manager sentinels appended to the document rather than to the portal node); dropped BEFORE the single-root policy, which would otherwise have refused MULTI-ROOT-CAPTURE over DOM that paints no ink: <i> portaled, <span> in-stage, <i> portaled",
-    "portal-wrapper-unwrapped: non-modal — 1 pass-through portal WRAPPER element(s) between document.body and the overlay were unwrapped BEFORE the single-root policy ran; the captured root is the wrapper's one element child (div|fui-DialogSurface). Decided by MEASUREMENT, never by attribute name: <div [class dir data-portal-node]> position:absolute; display:block; 1100×0; 2 element child (1 inert focus-manager sentinel(s) excluded from the one-child test); draws no box",
-    "portal-autofocus-neutralized: non-modal — focus was on \"button|r2avt6e\" when the overlay settled (the library autofocuses on open); blurred BEFORE sampling so the default-interaction plane is not silently a :focus-visible plane",
-    "portal-inert-roots-dropped: alert — 3 new document-level root(s) draw no box, carry no library class and contain nothing (focus-manager sentinels appended to the document rather than to the portal node); dropped BEFORE the single-root policy, which would otherwise have refused MULTI-ROOT-CAPTURE over DOM that paints no ink: <i> portaled, <span> in-stage, <i> portaled",
-    "portal-inert-children-dropped: alert — 1 direct child element(s) of the captured root draw no box, carry no library class and contain nothing (focus-trap sentinels); they lowered to full-bleed invisible frames over the component and are not anatomy",
-    "portal-autofocus-neutralized: alert — focus was on \"button|fui-Button.r1f29ykk\" when the overlay settled (the library autofocuses on open); blurred BEFORE sampling so the default-interaction plane is not silently a :focus-visible plane"
+    "part-missing: non-modal__default part-1-2"
   ],
   "styledChannelReceipts": [
     "viewport-derived-geometry-refused: root (position:absolute) — bottom, left, right, top, width NOT minted. The part is out of flow and no ancestor in the captured tree establishes its containing block, so its box was laid out against the INITIAL CONTAINING BLOCK — the capture window: left 0px + box 1100px + right 0px = 1100px = browser.viewport.width (1100px); top 0px + box 0px + bottom 1400px = 1400px = browser.viewport.height (1400px). These numbers are a function of the harness viewport, not of the library; a canvas frame has no window, and Chromium reports a resolved `auto` inset with the same syntax as an authored one, so the pair is refused together rather than half-guessed.",
     "viewport-derived-geometry-refused: dialogsurface__backdrop (position:fixed) — bottom, height, left, right, top, width NOT minted. The part is out of flow and no ancestor in the captured tree establishes its containing block, so its box was laid out against the INITIAL CONTAINING BLOCK — the capture window: left 0px + box 1100px + right 0px = 1100px = browser.viewport.width (1100px); top 0px + box 1400px + bottom 0px = 1400px = browser.viewport.height (1400px). These numbers are a function of the harness viewport, not of the library; a canvas frame has no window, and Chromium reports a resolved `auto` inset with the same syntax as an authored one, so the pair is refused together rather than half-guessed.",
     "viewport-derived-geometry-refused: dialogsurface (position:fixed) — bottom, left, right, top NOT minted. The part is out of flow and no ancestor in the captured tree establishes its containing block, so its box was laid out against the INITIAL CONTAINING BLOCK — the capture window: left 0px + box 600px + right 0px = 1100px = browser.viewport.width (1100px); top 0px + box 154px + bottom 0px = 1400px = browser.viewport.height (1400px). These numbers are a function of the harness viewport, not of the library; a canvas frame has no window, and Chromium reports a resolved `auto` inset with the same syntax as an authored one, so the pair is refused together rather than half-guessed.",
     "block-root-width-refused: root — display:block root, width 1100px = browser.viewport.width (1100px), NOT the stage content box (stage 600px − 2×16px = 568px). The root is position:absolute pinned to the initial containing block, so the window STRETCHED it; it is not \"filling its container\" in any sense the library chose. A width that is a function of the capture window is a fact about the harness, not about the library: it is REFUSED here rather than minted with a warning, because the emitters read the token and not the receipt — a 900px token draws a 900px frame on canvas whatever the receipt says. The component's own drawn box is a DIFFERENT element (the dialog paper); choosing it is capture's root decision (demoteFullBleedScrim), not fusion's to fabricate.",
+    "page-inherited-ink-admitted: root.color = rgba(36, 36, 36, 1) — EQUAL to the <div> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
+    "page-inherited-ink-admitted: dialogbody-2.color = rgba(36, 36, 36, 1) — EQUAL to the <div> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
     "control-fallback: no control for <h2> — span control used (part label-4)",
+    "page-inherited-ink-admitted: label-4.color = rgba(36, 36, 36, 1) — EQUAL to the <h2> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
+    "text-part-typography-carried: label-4 — font-family carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "page-inherited-ink-admitted: dialogtitle__action.color = rgba(36, 36, 36, 1) — EQUAL to the <div> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
     "control-fallback: no control for <svg> — span control used (part icon)",
+    "page-inherited-ink-admitted: icon.color = rgba(36, 36, 36, 1) — EQUAL to the <svg> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
     "control-fallback: no control for <path> — span control used (part part-0-1-0-0-0)",
-    "text-part-typography-carried: label-5 — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "page-inherited-ink-admitted: part-0-1-0-0-0.color = rgba(36, 36, 36, 1) — EQUAL to the <path> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
+    "page-inherited-ink-admitted: label-5.color = rgba(36, 36, 36, 1) — EQUAL to the <div> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
+    "text-part-typography-carried: label-5 — font-size/line-height/font-weight/font-family carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "page-inherited-ink-admitted: dialogactions-2.color = rgba(36, 36, 36, 1) — EQUAL to the <div> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
+    "page-inherited-ink-admitted: dialogsurface__backdrop.color = rgba(36, 36, 36, 1) — EQUAL to the <div> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
+    "page-inherited-ink-admitted: dialogsurface.color = rgba(36, 36, 36, 1) — EQUAL to the <div> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
     "control-fallback: no control for <i> — span control used (part part-1-0)",
+    "page-inherited-ink-admitted: part-1-0.color = rgba(36, 36, 36, 1) — EQUAL to the <i> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
+    "page-inherited-ink-admitted: dialogbody.color = rgba(36, 36, 36, 1) — EQUAL to the <div> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
     "control-fallback: no control for <h2> — span control used (part label)",
-    "text-part-typography-carried: label-2 — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "page-inherited-ink-admitted: label.color = rgba(36, 36, 36, 1) — EQUAL to the <h2> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
+    "text-part-typography-carried: label — font-family carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "page-inherited-ink-admitted: label-2.color = rgba(36, 36, 36, 1) — EQUAL to the <div> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
+    "text-part-typography-carried: label-2 — font-size/line-height/font-weight/font-family carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "page-inherited-ink-admitted: dialogactions.color = rgba(36, 36, 36, 1) — EQUAL to the <div> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
     "control-fallback: no control for <i> — span control used (part part-1-2)",
+    "page-inherited-ink-admitted: part-1-2.color = rgba(36, 36, 36, 1) — EQUAL to the <i> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
+    "geometry-excluded: dialogactions — block-size 32px, height 32px, inline-size 96px, perspective-origin 48px 16px, transform-origin 48px 16px, width 96px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: dialogactions-2 — block-size 32px, height 32px, inline-size 96px, perspective-origin 48px 16px, transform-origin 48px 16px, width 96px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: dialogbody — block-size 104px, height 104px, inline-size 550px, perspective-origin 275px 52px, transform-origin 275px 52px, width 550px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: dialogbody-2 — block-size 104px, height 104px, inline-size 550px, perspective-origin 275px 52px, transform-origin 275px 52px, width 550px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: dialogsurface — block-size 154px, height 154px, inline-size 600px, perspective-origin 300px 77px, transform-origin 300px 77px, width 600px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: dialogsurface__backdrop — block-size 1400px, height 1400px, inline-size 1100px, perspective-origin 550px 700px, transform-origin 550px 700px, width 1100px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: dialogtitle__action — block-size 25px, height 25px, inline-size 20px, perspective-origin 10px 12.5px, transform-origin 10px 12.5px, width 20px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: icon — inline-size 20px, perspective-origin 10px 10px, transform-origin 10px 10px, width 20px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label — block-size 28px, height 28px, inline-size 550px, perspective-origin 275px 14px, transform-origin 275px 14px, width 550px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label-2 — block-size 32px, height 32px, inline-size 554px, perspective-origin 277px 16px, transform-origin 277px 16px, width 554px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label-3 — block-size 32px, height 32px, inline-size 96px, perspective-origin 48px 16px, transform-origin 48px 16px, width 96px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label-4 — block-size 28px, height 28px, inline-size 522px, perspective-origin 261px 14px, transform-origin 261px 14px, width 522px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label-5 — block-size 32px, height 32px, inline-size 554px, perspective-origin 277px 16px, transform-origin 277px 16px, width 554px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label-6 — block-size 32px, height 32px, inline-size 96px, perspective-origin 48px 16px, transform-origin 48px 16px, width 96px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: part-0-1-0 — block-size 20px, height 20px, inline-size 20px, perspective-origin 10px 10px, transform-origin 10px 10px, width 20px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: part-0-1-0-0-0 — block-size auto, height auto, inline-size auto, perspective-origin 0px 0px, transform-origin 0px 0px, width auto — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: part-1-0 — block-size 1px, height 1px, inline-size 1px, perspective-origin 0.5px 0.5px, transform-origin 0.5px 0.5px, width 1px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: part-1-2 — block-size 1px, height 1px, inline-size 1px, perspective-origin 0.5px 0.5px, transform-origin 0.5px 0.5px, width 1px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: root — block-size 0px, height 0px, inline-size 1100px, perspective-origin 550px 0px, transform-origin 550px 0px, width 1100px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (label-3, label-6, part-0-1-0); -webkit-text-stroke-color (label-3, label-6, part-0-1-0)",
     "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
-    "orphan-mint-refused: part-1-0 was REFUSED by the anatomy promotion (it is not a part of the promoted contract), so its 11 styled channel(s) do not mint — before this door they minted leaves the contract could never reference, and `figma bundle` shipped them as Figma variables nothing binds (task #42). The named promotion refusal is in anatomyPromotion.refusals.",
-    "orphan-mint-refused: part-1-2 was REFUSED by the anatomy promotion (it is not a part of the promoted contract), so its 11 styled channel(s) do not mint — before this door they minted leaves the contract could never reference, and `figma bundle` shipped them as Figma variables nothing binds (task #42). The named promotion refusal is in anatomyPromotion.refusals.",
+    "border-style-by-axis-carried: root.border-bottom-style varies by \"modalType\" (modal=none, non-modal=solid, alert=none) — carried as per-value stylesWhen rules (code: `.modalType-<value> { border-bottom-style: … }`; canvas: a dashPattern on that variant's stroke)",
+    "border-style-by-axis-carried: root.border-left-style varies by \"modalType\" (modal=none, non-modal=solid, alert=none) — carried as per-value stylesWhen rules (code: `.modalType-<value> { border-left-style: … }`; canvas: a dashPattern on that variant's stroke)",
+    "border-style-by-axis-carried: root.border-right-style varies by \"modalType\" (modal=none, non-modal=solid, alert=none) — carried as per-value stylesWhen rules (code: `.modalType-<value> { border-right-style: … }`; canvas: a dashPattern on that variant's stroke)",
+    "border-style-by-axis-carried: root.border-top-style varies by \"modalType\" (modal=none, non-modal=solid, alert=none) — carried as per-value stylesWhen rules (code: `.modalType-<value> { border-top-style: … }`; canvas: a dashPattern on that variant's stroke)",
     "inheritance-check-rejected: label-2.font-size — values track ancestor \"dialogbody\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label-2.font-weight — values track ancestor \"dialogbody\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label-2.line-height — values track ancestor \"dialogbody\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label-3.caret-color — values track ancestor \"dialogactions\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-3.color — values track ancestor \"dialogactions\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label-3.font-size — values track ancestor \"dialogactions\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label-3.font-weight — values track ancestor \"dialogactions\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label-3.line-height — values track ancestor \"dialogactions\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
@@ -1286,7 +1046,6 @@
     "inheritance-check-rejected: label-5.font-weight — values track ancestor \"dialogbody-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label-5.line-height — values track ancestor \"dialogbody-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label-6.caret-color — values track ancestor \"dialogactions-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-6.color — values track ancestor \"dialogactions-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label-6.font-size — values track ancestor \"dialogactions-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label-6.font-weight — values track ancestor \"dialogactions-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label-6.line-height — values track ancestor \"dialogactions-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
@@ -1294,9 +1053,24 @@
     "inheritance-check-rejected: label.font-weight — values track ancestor \"dialogbody\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.line-height — values track ancestor \"dialogbody\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: part-0-1-0.caret-color — values track ancestor \"dialogtitle__action\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: part-0-1-0.color — values track ancestor \"dialogtitle__action\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: part-0-1-0.font-size — values track ancestor \"dialogtitle__action\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: part-0-1-0.line-height — values track ancestor \"dialogtitle__action\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)"
+    "inheritance-check-rejected: part-0-1-0.line-height — values track ancestor \"dialogtitle__action\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-only: dialogactions-2.color equals ancestor \"dialogbody-2\" on all 1 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: dialogactions.color equals ancestor \"dialogbody\" on all 2 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: dialogbody-2.color equals ancestor \"root\" on all 1 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: dialogbody.color equals ancestor \"dialogsurface\" on all 2 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: dialogsurface.color equals ancestor \"root\" on all 2 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: dialogsurface__backdrop.color equals ancestor \"root\" on all 2 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: dialogtitle__action.color equals ancestor \"dialogbody-2\" on all 1 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.color equals ancestor \"dialogbody\" on all 2 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label-3.color equals ancestor \"dialogactions\" on all 2 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label-4.color equals ancestor \"dialogbody-2\" on all 1 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label-5.color equals ancestor \"dialogbody-2\" on all 1 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label-6.color equals ancestor \"dialogactions-2\" on all 1 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label.color equals ancestor \"dialogbody\" on all 2 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: part-0-1-0.color equals ancestor \"dialogtitle__action\" on all 1 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "orphan-mint-refused: part-1-0 was REFUSED by the anatomy promotion (it is not a part of the promoted contract), so its 12 styled channel(s) do not mint — before this door they minted leaves the contract could never reference, and `figma bundle` shipped them as Figma variables nothing binds (task #42). The named promotion refusal is in anatomyPromotion.refusals.",
+    "orphan-mint-refused: part-1-2 was REFUSED by the anatomy promotion (it is not a part of the promoted contract), so its 12 styled channel(s) do not mint — before this door they minted leaves the contract could never reference, and `figma bundle` shipped them as Figma variables nothing binds (task #42). The named promotion refusal is in anatomyPromotion.refusals."
   ],
   "frontierReceipts": [
     "read-boundary-not-read-on-portal-path: Dialog sweeps through capturePortalRoots (two-phase baseline diff), which normalizes each root inside its own reader and never runs readBoundaryReceipts — so the text-fill fold and the closed-shadow-root signature are NOT MEASURED for this component. Zero lines above means UNREAD, not \"none found\"; a named residual of the molecule round, surfaced by the scope-independence fix (before it, this component displayed its SIBLINGS' folds and looked read).",
@@ -1422,7 +1196,11 @@
       "literal-text-carried: label-6 = \"Close\" (no text prop sample matches — the mounted value is carried verbatim)",
       "full-width-carried: label-6 spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)",
       "presence-carried: label-6 (1/3 combos) →  hidden-when modalType=modal, modalType=alert",
-      "grid-promotion-fallback: dialogbody-2 — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; the flex-era lowering decides (named)",
+      "grid-gap-shorthand: dialogbody-2 row-gap/column-gap carried as the independent {row: 8, column: 8} pair (G1/P2: gridRowGap and gridColumnGap are separate canvas facts) — an authored `gap` shorthand (`gap: R C` / one-value `gap: R`) is LOWERED into this pair; the two authored spellings are indistinguishable in CSSOM (rule cssText re-serializes both as the shorthand — probe 2026-08-08), so the lowering is receipted here by name",
+      "grid-area-nonrectangular: dialogbody-2 — the 4 placed rect(s) occupy 8 of 9 declared cells (gapped occupancy) and declare no area names, so no grid-template-areas + grid-area spelling exists for the code side (G4: areas require contract-owned names tiling rectangles); the occupancy is carried as per-child grid-row/grid-column LONGHAND rects (Part.placement) — the named LOWERED disposition",
+      "grid-promoted: dialogbody-2 — 3×3 declared tracks carried as layout.rows/columns, gap 8/8; 4 child placement(s) (0-based cells, spans, per-cell align — A2 G1/G2/G4)",
+      "grid-axis-definite: dialogbody-2 width carried as literals.width \"fit-content\" (G8) — the used box 550px equals the intrinsic track sum (550px), so the box IS its content and the canvas can hug it instead of keeping createFrame's FIXED 100 default (FC-GRID-ROOT-VSIZE)",
+      "grid-axis-definite: dialogbody-2 height carried as literals.height \"fit-content\" (G8) — the used box 104px equals the intrinsic track sum (104px), so the box IS its content and the canvas can hug it instead of keeping createFrame's FIXED 100 default (FC-GRID-ROOT-VSIZE)",
       "presence-carried: dialogsurface__backdrop (2/3 combos) →  hidden-when modalType=non-modal",
       "presence-carried: dialogsurface (2/3 combos) →  hidden-when modalType=non-modal",
       "presence-carried: dialogbody (2/3 combos) →  hidden-when modalType=non-modal",
@@ -1434,12 +1212,15 @@
       "literal-text-carried: label-3 = \"Close\" (no text prop sample matches — the mounted value is carried verbatim)",
       "full-width-carried: label-3 spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)",
       "presence-carried: label-3 (2/3 combos) →  hidden-when modalType=non-modal",
-      "grid-promotion-fallback: dialogbody — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; the flex-era lowering decides (named)"
+      "grid-zero-track-collapsed: dialogbody.grid-template-columns — computed \"267px 267px 0px\" resolves 1 EMPTY 0px track(s) at line 3 (an unoccupied slot column/row, not an authored zero — the P2b fence covers the declared plane); the carried list keeps the 2 non-zero track(s) and every child placement is re-indexed across the dropped line(s)",
+      "grid-gap-shorthand: dialogbody row-gap/column-gap carried as the independent {row: 8, column: 8} pair (G1/P2: gridRowGap and gridColumnGap are separate canvas facts) — an authored `gap` shorthand (`gap: R C` / one-value `gap: R`) is LOWERED into this pair; the two authored spellings are indistinguishable in CSSOM (rule cssText re-serializes both as the shorthand — probe 2026-08-08), so the lowering is receipted here by name",
+      "grid-area-nonrectangular: dialogbody — the 3 placed rect(s) occupy 5 of 6 declared cells (gapped occupancy) and declare no area names, so no grid-template-areas + grid-area spelling exists for the code side (G4: areas require contract-owned names tiling rectangles); the occupancy is carried as per-child grid-row/grid-column LONGHAND rects (Part.placement) — the named LOWERED disposition",
+      "grid-promoted: dialogbody — 3×2 declared tracks carried as layout.rows/columns, gap 8/8; 3 child placement(s) (0-based cells, spans, per-cell align — A2 G1/G2/G4)",
+      "grid-axis-definite: dialogbody width carried as literals.width 550px (G8) — the used box exceeds the intrinsic track sum (542px), so the size is established from OUTSIDE the part and \"fit-content\" would silently shrink it",
+      "grid-axis-definite: dialogbody height carried as literals.height \"fit-content\" (G8) — the used box 104px equals the intrinsic track sum (104px), so the box IS its content and the canvas can hug it instead of keeping createFrame's FIXED 100 default (FC-GRID-ROOT-VSIZE)"
     ],
     "refusals": [
-      "grid-two-dimensional: grid resolves 3 columns × 3 rows — a two-dimensional grid has no auto-layout spelling (one axis would have to be invented); no layout carried (named refusal) (part dialogbody-2)",
       "non-painting-part: part-1-0 <i> renders NO INK in any combo it appears in (content-visibility: hidden) and no descendant paints — NOT promoted. A part that paints nowhere must carry the fact that hides it (declared display:none / an opacity token) or be refused by name; neither `visibility` nor `content-visibility` has a carried spelling, so promoting this box would put a VISIBLE frame on the canvas that the browser draws nowhere (the general form of the SVG <title> defect)",
-      "grid-two-dimensional: grid resolves 3 columns × 3 rows — a two-dimensional grid has no auto-layout spelling (one axis would have to be invented); no layout carried (named refusal) (part dialogbody)",
       "non-painting-part: part-1-2 <i> renders NO INK in any combo it appears in (content-visibility: hidden) and no descendant paints — NOT promoted. A part that paints nowhere must carry the fact that hides it (declared display:none / an opacity token) or be refused by name; neither `visibility` nor `content-visibility` has a carried spelling, so promoting this box would put a VISIBLE frame on the canvas that the browser draws nowhere (the general form of the SVG <title> defect)"
     ]
   },
@@ -1449,6 +1230,7 @@
     "layout enriched: label-3.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: label-3.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
     "declared fact carried: dialogbody-2.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-4.font-family = \"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: part-0-1-0.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-0-1-0.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-0-1-0.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
@@ -1459,16 +1241,17 @@
     "declared fact carried: part-0-1-0.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-0-1-0.text-align = left (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label-5.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: label-5.overflow-x = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label-5.overflow-y = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-5.font-family = \"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-5.overflow-x = auto (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-5.overflow-y = auto (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: dialogactions-2.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label-6.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-6.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-6.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-6.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-6.font-family = \"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: label-6.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label-6.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-6.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-6.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label-6.transition-duration = 0.1s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-6.transition-property = background, border, color (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-6.transition-timing-function = cubic-bezier(0.33, 0, 0.67, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
@@ -1478,20 +1261,21 @@
     "declared fact carried: dialogsurface.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: dialogsurface.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: dialogbody.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.font-family = \"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label-2.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: label-2.overflow-x = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label-2.overflow-y = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.font-family = \"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-2.overflow-x = auto (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-2.overflow-y = auto (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: dialogactions.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label-3.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-3.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-3.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-3.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-3.font-family = \"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: label-3.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label-3.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-3.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label-3.transition-duration = 0.1s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-3.transition-property = background, border, color (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label-3.transition-timing-function = cubic-bezier(0.33, 0, 0.67, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "sizing evidence measured, NOT carried: dialogsurface sits AT its max-width in every combo — the value may be a genuine design width, so the fixed-width lowering stands."
+    "declared fact carried: label-3.transition-timing-function = cubic-bezier(0.33, 0, 0.67, 1) (v15 declared vocabulary — declared-not-drawn on canvas)"
   ]
 }

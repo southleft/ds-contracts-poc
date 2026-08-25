@@ -22,7 +22,7 @@ const meta = {
     tone: { control: 'select', options: ['highlight', 'primary', 'success', 'critical'], description: 'Color of progressbar' },
   },
   args: {
-    progress: 40,
+    progress: 0,
     size: 'medium',
     animated: false,
     tone: 'highlight',

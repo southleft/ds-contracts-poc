@@ -36,15 +36,19 @@
     "contentSlots": [],
     "tokenRefs": [
       "imported.select.icon.flex-shrink",
+      "imported.select.icon.height",
       "imported.select.icon.stroke-width",
+      "imported.select.icon.width",
       "imported.select.label.font-weight",
       "imported.select.root.box-shadow",
       "imported.select.root.box-shadow-state-focus-visible",
+      "imported.select.root.height",
       "imported.select.root.opacity-state-disabled",
       "imported.select.root.outline-width-state-focus-visible",
       "imported.select.root.padding-left",
       "imported.shared.color-737373",
       "imported.shared.color-a1a1a1",
+      "imported.shared.color-e5e5e5",
       "imported.shared.size-1",
       "imported.shared.size-14",
       "imported.shared.size-20",
@@ -68,7 +72,7 @@
       "png": "code-select.png",
       "contentBox": {
         "width": 142.41,
-        "height": 38
+        "height": 36
       }
     }
   ],

@@ -50,11 +50,6 @@
         "part-0": {
           "element": "span",
           "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
-          "layout": {
-            "display": "flex",
-            "direction": "column",
-            "align": "stretch"
-          },
           "stylesWhen": [
             {
               "prop": "checked",
@@ -79,7 +74,31 @@
             "grid-template-rows": "{imported.shared.size-14}",
             "height": "{imported.shared.size-14}",
             "width": "{imported.shared.size-14}"
-          }
+          },
+          "tokensByProp": [
+            {
+              "prop": "checked",
+              "map": {
+                "checked": {
+                  "color": "{imported.checkbox.part-0.color.checked}"
+                },
+                "indeterminate": {
+                  "color": "{imported.checkbox.part-0.color.indeterminate}"
+                },
+                "unchecked": {
+                  "color": "{imported.checkbox.part-0.color.unchecked}"
+                }
+              }
+            }
+          ],
+          "codeOnly": [
+            {
+              "state": "disabled",
+              "channel": "cursor",
+              "value": "not-allowed",
+              "reason": "declared-channel state delta on 2/3 combos — partial coverage cannot carry as a state selector (v15); named residue"
+            }
+          ]
         }
       },
       "declared": {
@@ -157,6 +176,14 @@
               "color": "{imported.checkbox.root.color.unchecked}"
             }
           }
+        }
+      ],
+      "codeOnly": [
+        {
+          "state": "focus-visible",
+          "channel": "--tw-ring-shadow",
+          "value": "0 0 0 calc(3px + 0px) color-mix(in oklab, oklch(0.708 0 0) 50%, transparent)",
+          "reason": "CSS custom property, not a styled channel — the same door the base plane applies: a custom property is a token DECLARATION the library sets on this element (its plumbing), never a rendered fact; the rendered state delta rides the consuming channel"
         }
       ]
     }

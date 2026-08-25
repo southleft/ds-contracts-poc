@@ -15,11 +15,15 @@
   align-items: center;
   justify-content: space-between;
   border: 0;
+  border-bottom-color: var(--imported-shared-color-e5e5e5);
   border-bottom-left-radius: var(--imported-shared-size-8);
   border-bottom-right-radius: var(--imported-shared-size-8);
   border-bottom-width: var(--imported-shared-size-1);
+  border-left-color: var(--imported-shared-color-e5e5e5);
   border-left-width: var(--imported-shared-size-1);
+  border-right-color: var(--imported-shared-color-e5e5e5);
   border-right-width: var(--imported-shared-size-1);
+  border-top-color: var(--imported-shared-color-e5e5e5);
   border-top-left-radius: var(--imported-shared-size-8);
   border-top-right-radius: var(--imported-shared-size-8);
   border-top-width: var(--imported-shared-size-1);
@@ -27,6 +31,7 @@
   color: var(--imported-shared-color-737373);
   column-gap: var(--imported-shared-size-6);
   font-size: var(--imported-shared-size-14);
+  height: var(--imported-select-root-height);
   line-height: var(--imported-shared-size-20);
   padding-bottom: var(--imported-shared-size-8);
   padding-left: var(--imported-select-root-padding-left);
@@ -95,6 +100,7 @@
   line-height: var(--imported-shared-size-20);
   row-gap: var(--imported-shared-size-6);
   cursor: default;
+  font-family: 'Inter Variable', sans-serif;
   overflow-x: hidden;
   overflow-y: hidden;
   pointer-events: none;
@@ -117,9 +123,11 @@
   color: var(--imported-shared-color-737373);
   flex-shrink: var(--imported-select-icon-flex-shrink);
   font-size: var(--imported-shared-size-14);
+  height: var(--imported-select-icon-height);
   line-height: var(--imported-shared-size-20);
   stroke: var(--imported-shared-color-737373);
   stroke-width: var(--imported-select-icon-stroke-width);
+  width: var(--imported-select-icon-width);
   display: block;
   cursor: default;
   overflow-x: hidden;

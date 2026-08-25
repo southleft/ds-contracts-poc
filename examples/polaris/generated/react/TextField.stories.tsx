@@ -54,7 +54,6 @@ const meta = {
     onFocus: { control: false, description: 'Callback fired when input is focused' },
   },
   args: {
-    placeholder: 'Example',
     value: '',
     labelHidden: false,
     disabled: false,

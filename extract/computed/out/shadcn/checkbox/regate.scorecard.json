@@ -108,12 +108,12 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 30,
-      "mintedLeavesUnfolded": 44,
+      "mintedLeaves": 33,
+      "mintedLeavesUnfolded": 62,
       "baseBindings": 27,
       "stateBindings": 7,
       "codeOnlyChannels": 7,
-      "overflowBindings": 1,
+      "overflowBindings": 0,
       "folds": 20
     },
     "worstRows": [
@@ -230,7 +230,6 @@
     ],
     "namedLosses": [
       "promotion: pseudo-decor-outside-grammar: root::after occupies 38x30 at position:absolute but paints nothing the grammar reads (background-color rgba(0, 0, 0, 0), border 0px oklch(0.145 0 0)) — NOT promoted",
-      "overflow: part-0.color — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
       "code-only: root.--tw-outline-style — CSS custom property, not a styled channel — `--tw-outline-style` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `none`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: root.--tw-shadow — CSS custom property, not a styled channel — `--tw-shadow` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `0 1px 2px 0 rgb(0 0 0 / 0.05)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: part-0.align-content — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",

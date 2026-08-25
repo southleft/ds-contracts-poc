@@ -31,6 +31,7 @@
           },
           "declared": {
             "cursor": "default",
+            "font-family": "\"Inter Variable\", sans-serif",
             "overflow-x": "hidden",
             "overflow-y": "hidden",
             "pointer-events": "none",
@@ -75,9 +76,11 @@
             "color": "{imported.shared.color-737373}",
             "flex-shrink": "{imported.select.icon.flex-shrink}",
             "font-size": "{imported.shared.size-14}",
+            "height": "{imported.select.icon.height}",
             "line-height": "{imported.shared.size-20}",
             "stroke": "{imported.shared.color-737373}",
-            "stroke-width": "{imported.select.icon.stroke-width}"
+            "stroke-width": "{imported.select.icon.stroke-width}",
+            "width": "{imported.select.icon.width}"
           }
         }
       },
@@ -101,11 +104,15 @@
         }
       },
       "tokens": {
+        "border-bottom-color": "{imported.shared.color-e5e5e5}",
         "border-bottom-left-radius": "{imported.shared.size-8}",
         "border-bottom-right-radius": "{imported.shared.size-8}",
         "border-bottom-width": "{imported.shared.size-1}",
+        "border-left-color": "{imported.shared.color-e5e5e5}",
         "border-left-width": "{imported.shared.size-1}",
+        "border-right-color": "{imported.shared.color-e5e5e5}",
         "border-right-width": "{imported.shared.size-1}",
+        "border-top-color": "{imported.shared.color-e5e5e5}",
         "border-top-left-radius": "{imported.shared.size-8}",
         "border-top-right-radius": "{imported.shared.size-8}",
         "border-top-width": "{imported.shared.size-1}",
@@ -113,6 +120,7 @@
         "color": "{imported.shared.color-737373}",
         "column-gap": "{imported.shared.size-6}",
         "font-size": "{imported.shared.size-14}",
+        "height": "{imported.select.root.height}",
         "line-height": "{imported.shared.size-20}",
         "padding-bottom": "{imported.shared.size-8}",
         "padding-left": "{imported.select.root.padding-left}",
@@ -132,7 +140,15 @@
           "box-shadow": "{imported.select.root.box-shadow-state-focus-visible}",
           "outline-width": "{imported.select.root.outline-width-state-focus-visible}"
         }
-      }
+      },
+      "codeOnly": [
+        {
+          "state": "focus-visible",
+          "channel": "--tw-ring-shadow",
+          "value": "0 0 0 calc(3px + 0px) color-mix(in oklab, oklch(0.708 0 0) 50%, transparent)",
+          "reason": "CSS custom property, not a styled channel — the same door the base plane applies: a custom property is a token DECLARATION the library sets on this element (its plumbing), never a rendered fact; the rendered state delta rides the consuming channel"
+        }
+      ]
     }
   },
   "bindings": {

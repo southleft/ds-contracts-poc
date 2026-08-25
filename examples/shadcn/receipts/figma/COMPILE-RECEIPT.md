@@ -8,21 +8,21 @@ examples/shadcn/tokens/shadcn.dtcg.json,examples/shadcn/tokens/shadcn-minted.dtc
 
 | script | contract | variant axes | variants | headless execute | text-caused overflows |
 |---|---|---|---|---|---|
-| alert.figma.js | shadcn.alert | variant(2) | 2 | tokens 418 (48 aliased) · 1 set(s) built | 0 |
-| avatar.figma.js | shadcn.avatar | size(3) | 3 | tokens 418 (48 aliased) · 1 set(s) built | 0 |
-| badge.figma.js | shadcn.badge | variant(6) | 6 | tokens 418 (48 aliased) · 1 set(s) built | 0 |
-| button.figma.js | shadcn.button | variant(6)×size(8) | 48 | tokens 418 (48 aliased) · 1 set(s) built | 0 |
-| card.figma.js | shadcn.card | size(2) | 2 | tokens 418 (48 aliased) · 1 set(s) built | 0 |
-| checkbox.figma.js | shadcn.checkbox | checked(3) | 3 | tokens 418 (48 aliased) · 1 set(s) built | 0 |
-| input.figma.js | shadcn.input | standalone | 1 | tokens 418 (48 aliased) · 1 set(s) built | 0 |
-| select.figma.js | shadcn.select | standalone | 1 | tokens 418 (48 aliased) · 0 set(s) built | 0 |
-| switch.figma.js | shadcn.switch | size(2)×checked(2) | 4 | tokens 418 (48 aliased) · 1 set(s) built | 0 |
-| tabs.figma.js | shadcn.tabs | standalone | 1 | tokens 418 (48 aliased) · 0 set(s) built | 1 |
-| tooltip.figma.js | shadcn.tooltip | standalone | 1 | tokens 418 (48 aliased) · 0 set(s) built | 1 |
+| alert.figma.js | shadcn.alert | variant(2) | 2 | tokens 424 (48 aliased) · 1 set(s) built | 2 |
+| avatar.figma.js | shadcn.avatar | size(3) | 3 | tokens 424 (48 aliased) · 1 set(s) built | 0 |
+| badge.figma.js | shadcn.badge | variant(6) | 6 | tokens 424 (48 aliased) · 1 set(s) built | 0 |
+| button.figma.js | shadcn.button | variant(6)×size(8) | 48 | tokens 424 (48 aliased) · 1 set(s) built | 0 |
+| card.figma.js | shadcn.card | size(2) | 2 | tokens 424 (48 aliased) · 1 set(s) built | 0 |
+| checkbox.figma.js | shadcn.checkbox | checked(3) | 3 | tokens 424 (48 aliased) · 1 set(s) built | 0 |
+| input.figma.js | shadcn.input | standalone | 1 | tokens 424 (48 aliased) · 1 set(s) built | 0 |
+| select.figma.js | shadcn.select | standalone | 1 | tokens 424 (48 aliased) · 0 set(s) built | 0 |
+| switch.figma.js | shadcn.switch | size(2)×checked(2) | 4 | tokens 424 (48 aliased) · 1 set(s) built | 0 |
+| tabs.figma.js | shadcn.tabs | standalone | 1 | tokens 424 (48 aliased) · 0 set(s) built | 1 |
+| tooltip.figma.js | shadcn.tooltip | standalone | 1 | tokens 424 (48 aliased) · 0 set(s) built | 1 |
 
-**11 scripts · 72 variants total · 2 text-caused
+**11 scripts · 72 variants total · 4 text-caused
 overflow(s) (the corpus-wide text-wrapping gap, counted not hidden).** Each script ran to
-completion against the mocked Figma (00-tokens.figma.js first — 418 variables
+completion against the mocked Figma (00-tokens.figma.js first — 424 variables
 including the Figma-native ALIAS pass for source-aliased minted leaves).
 
 **0 failures.**

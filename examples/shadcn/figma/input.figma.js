@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "shadcn.input",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Input — generated from contract shadcn.input v0.2.0 † (17 code-only facts — see plugin report)",
+    "description": "Input — generated from contract shadcn.input v0.2.0 † (19 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -29,6 +29,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
+          "stroke": "imported/shared/color-e5e5e5",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-8",
             "bottomRightRadius": "imported/shared/size-8",
@@ -101,6 +102,10 @@ const COMPONENTS = [
               }
             }
           ],
+          "fixedHeight": {
+            "px": 36,
+            "varName": "imported/input/root/height"
+          },
           "fixedWidth": {
             "px": 288,
             "varName": "imported/input/root/width"
@@ -126,6 +131,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
+          "stroke": "imported/shared/color-e5e5e5",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-8",
             "bottomRightRadius": "imported/shared/size-8",
@@ -198,6 +204,10 @@ const COMPONENTS = [
               }
             }
           ],
+          "fixedHeight": {
+            "px": 36,
+            "varName": "imported/input/root/height"
+          },
           "fixedWidth": {
             "px": 288,
             "varName": "imported/input/root/width"
@@ -219,6 +229,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
+          "stroke": "imported/shared/color-e5e5e5",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-8",
             "bottomRightRadius": "imported/shared/size-8",
@@ -291,6 +302,10 @@ const COMPONENTS = [
               }
             }
           ],
+          "fixedHeight": {
+            "px": 36,
+            "varName": "imported/input/root/height"
+          },
           "fixedWidth": {
             "px": 288,
             "varName": "imported/input/root/width"
@@ -311,6 +326,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
+          "stroke": "imported/shared/color-e5e5e5",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-8",
             "bottomRightRadius": "imported/shared/size-8",
@@ -383,6 +399,10 @@ const COMPONENTS = [
               }
             }
           ],
+          "fixedHeight": {
+            "px": 36,
+            "varName": "imported/input/root/height"
+          },
           "fixedWidth": {
             "px": 288,
             "varName": "imported/input/root/width"
@@ -410,6 +430,28 @@ const COMPONENTS = [
       }
     ],
     "codeOnlyFacts": [
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "--tw-ring-shadow [active]",
+        "value": "0 0 0 calc(3px + 0px) color-mix(in oklab, oklch(0.708 0 0) 50%, transparent)",
+        "reason": "observed by the computed capture and refused by the contract grammar — CSS custom property, not a styled channel — the same door the base plane applies: a custom property is a token DECLARATION the library sets on this element (its plumbing), never a rendered fact; the rendered state delta rides the consuming channel",
+        "variants": {
+          "count": 4,
+          "of": 4
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "--tw-ring-shadow [focus-visible]",
+        "value": "0 0 0 calc(3px + 0px) color-mix(in oklab, oklch(0.708 0 0) 50%, transparent)",
+        "reason": "observed by the computed capture and refused by the contract grammar — CSS custom property, not a styled channel — the same door the base plane applies: a custom property is a token DECLARATION the library sets on this element (its plumbing), never a rendered fact; the rendered state delta rides the consuming channel",
+        "variants": {
+          "count": 4,
+          "of": 4
+        }
+      },
       {
         "part": "root",
         "kind": "channel",

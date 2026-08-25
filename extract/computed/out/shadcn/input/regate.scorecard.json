@@ -85,9 +85,9 @@
     "combos": 2,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 232,
+      "cellsCompared": 272,
       "cellsEqual": 216,
-      "pctEqual": 93.10344827586206,
+      "pctEqual": 79.41176470588235,
       "rowsFullyEqual": 0,
       "rows": 8
     },
@@ -109,9 +109,9 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 17,
-      "mintedLeavesUnfolded": 15,
-      "baseBindings": 17,
+      "mintedLeaves": 20,
+      "mintedLeavesUnfolded": 18,
+      "baseBindings": 23,
       "stateBindings": 13,
       "codeOnlyChannels": 4,
       "overflowBindings": 0,
@@ -122,56 +122,56 @@
         "key": "enabled__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 2,
+        "channelsMismatched": 7,
         "unscorable": "no-original"
       },
       {
         "key": "enabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 2,
+        "channelsMismatched": 7,
         "unscorable": "no-original"
       },
       {
         "key": "enabled__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 2,
+        "channelsMismatched": 7,
         "unscorable": "no-original"
       },
       {
         "key": "enabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 2,
+        "channelsMismatched": 7,
         "unscorable": "no-original"
       },
       {
         "key": "disabled__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 2,
+        "channelsMismatched": 7,
         "unscorable": "no-original"
       },
       {
         "key": "disabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 2,
+        "channelsMismatched": 7,
         "unscorable": "no-original"
       },
       {
         "key": "disabled__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 2,
+        "channelsMismatched": 7,
         "unscorable": "no-original"
       },
       {
         "key": "disabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 2,
+        "channelsMismatched": 7,
         "unscorable": "no-original"
       }
     ],
@@ -182,6 +182,26 @@
       ],
       [
         "root.--tw-shadow",
+        8
+      ],
+      [
+        "root.border-bottom-color",
+        8
+      ],
+      [
+        "root.border-left-color",
+        8
+      ],
+      [
+        "root.border-right-color",
+        8
+      ],
+      [
+        "root.border-top-color",
+        8
+      ],
+      [
+        "root.color",
         8
       ]
     ],
@@ -203,7 +223,7 @@
     "rows": [
       {
         "key": "enabled__default",
-        "channelsCompared": 29,
+        "channelsCompared": 34,
         "channelsEqual": 27,
         "pctExact": null,
         "pctAA": null,
@@ -220,13 +240,43 @@
             "channel": "--tw-shadow",
             "ours": "",
             "theirs": "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "color",
+            "ours": "rgba(10, 10, 10, 1)",
+            "theirs": "oklch(0.145 0 0)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "enabled__hover",
-        "channelsCompared": 29,
+        "channelsCompared": 34,
         "channelsEqual": 27,
         "pctExact": null,
         "pctAA": null,
@@ -243,13 +293,43 @@
             "channel": "--tw-shadow",
             "ours": "",
             "theirs": "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "color",
+            "ours": "rgba(10, 10, 10, 1)",
+            "theirs": "oklch(0.145 0 0)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "enabled__focus-visible",
-        "channelsCompared": 29,
+        "channelsCompared": 34,
         "channelsEqual": 27,
         "pctExact": null,
         "pctAA": null,
@@ -266,13 +346,43 @@
             "channel": "--tw-shadow",
             "ours": "",
             "theirs": "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-color",
+            "ours": "rgba(161, 161, 161, 1)",
+            "theirs": "oklch(0.708 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-color",
+            "ours": "rgba(161, 161, 161, 1)",
+            "theirs": "oklch(0.708 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-color",
+            "ours": "rgba(161, 161, 161, 1)",
+            "theirs": "oklch(0.708 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-color",
+            "ours": "rgba(161, 161, 161, 1)",
+            "theirs": "oklch(0.708 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "color",
+            "ours": "rgba(10, 10, 10, 1)",
+            "theirs": "oklch(0.145 0 0)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "enabled__active",
-        "channelsCompared": 29,
+        "channelsCompared": 34,
         "channelsEqual": 27,
         "pctExact": null,
         "pctAA": null,
@@ -289,13 +399,43 @@
             "channel": "--tw-shadow",
             "ours": "",
             "theirs": "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-color",
+            "ours": "rgba(161, 161, 161, 1)",
+            "theirs": "oklch(0.708 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-color",
+            "ours": "rgba(161, 161, 161, 1)",
+            "theirs": "oklch(0.708 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-color",
+            "ours": "rgba(161, 161, 161, 1)",
+            "theirs": "oklch(0.708 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-color",
+            "ours": "rgba(161, 161, 161, 1)",
+            "theirs": "oklch(0.708 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "color",
+            "ours": "rgba(10, 10, 10, 1)",
+            "theirs": "oklch(0.145 0 0)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "disabled__default",
-        "channelsCompared": 29,
+        "channelsCompared": 34,
         "channelsEqual": 27,
         "pctExact": null,
         "pctAA": null,
@@ -312,13 +452,43 @@
             "channel": "--tw-shadow",
             "ours": "",
             "theirs": "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "color",
+            "ours": "rgba(10, 10, 10, 1)",
+            "theirs": "oklch(0.145 0 0)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "disabled__hover",
-        "channelsCompared": 29,
+        "channelsCompared": 34,
         "channelsEqual": 27,
         "pctExact": null,
         "pctAA": null,
@@ -335,13 +505,43 @@
             "channel": "--tw-shadow",
             "ours": "",
             "theirs": "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "color",
+            "ours": "rgba(10, 10, 10, 1)",
+            "theirs": "oklch(0.145 0 0)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "disabled__focus-visible",
-        "channelsCompared": 29,
+        "channelsCompared": 34,
         "channelsEqual": 27,
         "pctExact": null,
         "pctAA": null,
@@ -358,13 +558,43 @@
             "channel": "--tw-shadow",
             "ours": "",
             "theirs": "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "color",
+            "ours": "rgba(10, 10, 10, 1)",
+            "theirs": "oklch(0.145 0 0)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "disabled__active",
-        "channelsCompared": 29,
+        "channelsCompared": 34,
         "channelsEqual": 27,
         "pctExact": null,
         "pctAA": null,
@@ -381,6 +611,36 @@
             "channel": "--tw-shadow",
             "ours": "",
             "theirs": "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "color",
+            "ours": "rgba(10, 10, 10, 1)",
+            "theirs": "oklch(0.145 0 0)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"

@@ -10,6 +10,10 @@
           "$value": "4px",
           "$type": "dimension"
         },
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
         "size-14": {
           "$value": "14px",
           "$type": "dimension"
@@ -22,10 +26,6 @@
           "$value": "8px",
           "$type": "dimension"
         },
-        "size-0": {
-          "$value": "0px",
-          "$type": "dimension"
-        },
         "num-1": {
           "$value": "1",
           "$type": "number"
@@ -34,8 +34,8 @@
           "$value": "9999px",
           "$type": "dimension"
         },
-        "color-0064e0": {
-          "$value": "#0064e0",
+        "color-262626": {
+          "$value": "#262626",
           "$type": "color"
         },
         "size-20": {
@@ -80,13 +80,13 @@
             }
           },
           "width": {
-            "$value": "49.1562px",
+            "$value": "240px",
             "$type": "dimension"
           }
         },
         "label": {
           "color": {
-            "$value": "#4e606f",
+            "$value": "#737373",
             "$type": "color"
           },
           "font-weight": {
@@ -126,7 +126,7 @@
             }
           },
           "width": {
-            "$value": "49.1562px",
+            "$value": "240px",
             "$type": "dimension"
           }
         },
@@ -143,15 +143,15 @@
           },
           "width": {
             "tooltip": {
-              "$value": "49.1562px",
+              "$value": "240px",
               "$type": "dimension"
             },
             "text": {
-              "$value": "23.625px",
+              "$value": "214.328px",
               "$type": "dimension"
             },
             "none": {
-              "$value": "49.1562px",
+              "$value": "240px",
               "$type": "dimension"
             }
           }
@@ -198,15 +198,15 @@
             },
             "vertical": {
               "tooltip": {
-                "$value": "24.5781px",
+                "$value": "120px",
                 "$type": "dimension"
               },
               "text": {
-                "$value": "11.8125px",
+                "$value": "107.156px",
                 "$type": "dimension"
               },
               "none": {
-                "$value": "24.5781px",
+                "$value": "120px",
                 "$type": "dimension"
               }
             }
@@ -228,15 +228,15 @@
             },
             "vertical": {
               "tooltip": {
-                "$value": "20.5781px",
+                "$value": "116px",
                 "$type": "dimension"
               },
               "text": {
-                "$value": "7.8125px",
+                "$value": "103.172px",
                 "$type": "dimension"
               },
               "none": {
-                "$value": "20.5781px",
+                "$value": "116px",
                 "$type": "dimension"
               }
             }
@@ -274,15 +274,15 @@
           "width": {
             "horizontal": {
               "tooltip": {
-                "$value": "49.1562px",
+                "$value": "240px",
                 "$type": "dimension"
               },
               "text": {
-                "$value": "23.625px",
+                "$value": "214.328px",
                 "$type": "dimension"
               },
               "none": {
-                "$value": "49.1562px",
+                "$value": "240px",
                 "$type": "dimension"
               }
             },
@@ -340,15 +340,15 @@
             },
             "vertical": {
               "tooltip": {
-                "$value": "24.5781px",
+                "$value": "120px",
                 "$type": "dimension"
               },
               "text": {
-                "$value": "11.8125px",
+                "$value": "107.156px",
                 "$type": "dimension"
               },
               "none": {
-                "$value": "24.5781px",
+                "$value": "120px",
                 "$type": "dimension"
               }
             }
@@ -356,29 +356,29 @@
           "right": {
             "horizontal": {
               "tooltip": {
-                "$value": "29.5px",
+                "$value": "144px",
                 "$type": "dimension"
               },
               "text": {
-                "$value": "14.1875px",
+                "$value": "128.609px",
                 "$type": "dimension"
               },
               "none": {
-                "$value": "29.5px",
+                "$value": "144px",
                 "$type": "dimension"
               }
             },
             "vertical": {
               "tooltip": {
-                "$value": "20.5781px",
+                "$value": "116px",
                 "$type": "dimension"
               },
               "text": {
-                "$value": "7.8125px",
+                "$value": "103.172px",
                 "$type": "dimension"
               },
               "none": {
-                "$value": "20.5781px",
+                "$value": "116px",
                 "$type": "dimension"
               }
             }
@@ -416,15 +416,15 @@
           "width": {
             "horizontal": {
               "tooltip": {
-                "$value": "19.6562px",
+                "$value": "96px",
                 "$type": "dimension"
               },
               "text": {
-                "$value": "9.4375px",
+                "$value": "85.7188px",
                 "$type": "dimension"
               },
               "none": {
-                "$value": "19.6562px",
+                "$value": "96px",
                 "$type": "dimension"
               }
             },
@@ -493,21 +493,21 @@
           },
           "left": {
             "horizontal": {
-              "$value": "19.6562px",
+              "$value": "96px",
               "$type": "dimension"
             },
             "vertical": {
-              "$value": "24.5781px",
+              "$value": "120px",
               "$type": "dimension"
             }
           },
           "right": {
             "horizontal": {
-              "$value": "9.5px",
+              "$value": "124px",
               "$type": "dimension"
             },
             "vertical": {
-              "$value": "4.57812px",
+              "$value": "100px",
               "$type": "dimension"
             }
           },
@@ -538,7 +538,7 @@
         },
         "tooltip": {
           "background-color": {
-            "$value": "#0a1317",
+            "$value": "#171717",
             "$type": "color"
           },
           "color": {
@@ -601,10 +601,6 @@
           }
         },
         "label-3": {
-          "color": {
-            "$value": "#0a1317",
-            "$type": "color"
-          },
           "flex-shrink": {
             "$value": "0",
             "$type": "number"
@@ -801,66 +797,6 @@
       "channel": "text-emphasis-color",
       "foldedInto": "color",
       "class": "currentColor"
-    },
-    {
-      "part": "label-3",
-      "channel": "border-bottom-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label-3",
-      "channel": "border-left-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label-3",
-      "channel": "border-right-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label-3",
-      "channel": "border-top-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label-3",
-      "channel": "caret-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label-3",
-      "channel": "column-rule-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label-3",
-      "channel": "outline-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label-3",
-      "channel": "row-rule-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label-3",
-      "channel": "text-decoration-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label-3",
-      "channel": "text-emphasis-color",
-      "foldedInto": "color",
-      "class": "currentColor"
     }
   ],
   "foldedStateSkips": [],
@@ -901,11 +837,6 @@
         "part": "label",
         "channel": "cursor",
         "value": "pointer"
-      },
-      {
-        "part": "label",
-        "channel": "font-family",
-        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
       },
       {
         "part": "part-1-0",
@@ -960,7 +891,7 @@
       {
         "part": "slider-thumb-2",
         "channel": "transition-duration",
-        "value": "0.175s"
+        "value": "0.125s"
       },
       {
         "part": "slider-thumb-2",
@@ -995,7 +926,7 @@
       {
         "part": "slider-thumb",
         "channel": "transition-duration",
-        "value": "0.175s"
+        "value": "0.125s"
       },
       {
         "part": "slider-thumb",
@@ -1039,11 +970,6 @@
       },
       {
         "part": "tooltip",
-        "channel": "font-family",
-        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
-      },
-      {
-        "part": "tooltip",
         "channel": "user-select",
         "value": "none"
       },
@@ -1054,18 +980,8 @@
       },
       {
         "part": "label-2",
-        "channel": "font-family",
-        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
-      },
-      {
-        "part": "label-2",
         "channel": "user-select",
         "value": "none"
-      },
-      {
-        "part": "label-3",
-        "channel": "font-family",
-        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
       },
       {
         "part": "label-3",
@@ -1080,7 +996,7 @@
       "part": "part-1-0",
       "channel": "anchor-name",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "--astryx-layer-_r_1b_",
+      "sample": "--astryx-layer-_r_4_",
       "distinctValues": 6
     },
     {
@@ -1136,7 +1052,7 @@
       "part": "slider-thumb",
       "channel": "anchor-name",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "--astryx-layer-_r_1c_",
+      "sample": "--astryx-layer-_r_5_",
       "distinctValues": 2
     },
     {
@@ -1150,7 +1066,7 @@
       "part": "tooltip",
       "channel": "animation-duration",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "0.23s",
+      "sample": "0.165s",
       "distinctValues": 1
     },
     {
@@ -1192,7 +1108,7 @@
       "part": "tooltip",
       "channel": "position-anchor",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "--astryx-layer-_r_1c_",
+      "sample": "--astryx-layer-_r_5_",
       "distinctValues": 2
     },
     {
@@ -1229,7 +1145,7 @@
       "state": "active",
       "part": "slider-thumb-2",
       "channel": "outline-color",
-      "sample": "rgba(0, 100, 224, 1)",
+      "sample": "rgba(38, 38, 38, 1)",
       "reason": "default-state values not kind-compatible for padding — cannot correlate"
     },
     {
@@ -1244,7 +1160,7 @@
       "part": "slider-thumb-2",
       "channel": "outline-style",
       "sample": "solid",
-      "reason": "declared-channel state delta on 1/6 combos — partial coverage cannot carry as a state selector (v15); named residue"
+      "reason": "declared-channel state delta on 2/6 combos — partial coverage cannot carry as a state selector (v15); named residue"
     },
     {
       "state": "active",
@@ -1257,7 +1173,7 @@
       "state": "active",
       "part": "slider-thumb",
       "channel": "outline-color",
-      "sample": "rgba(0, 100, 224, 1)",
+      "sample": "rgba(38, 38, 38, 1)",
       "reason": "default-state values not kind-compatible for padding — cannot correlate"
     },
     {
@@ -1296,17 +1212,10 @@
       "reason": "value shape outside mintable kinds and outside the declared vocabulary"
     },
     {
-      "state": "active",
-      "part": "tooltip",
-      "channel": "position-area",
-      "sample": "self-inline-end",
-      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
-    },
-    {
       "state": "focus-visible",
       "part": "slider-thumb-2",
       "channel": "outline-color",
-      "sample": "rgba(0, 100, 224, 1)",
+      "sample": "rgba(38, 38, 38, 1)",
       "reason": "default-state values not kind-compatible for padding — cannot correlate"
     },
     {
@@ -1334,7 +1243,7 @@
       "state": "focus-visible",
       "part": "slider-thumb",
       "channel": "outline-color",
-      "sample": "rgba(0, 100, 224, 1)",
+      "sample": "rgba(38, 38, 38, 1)",
       "reason": "default-state values not kind-compatible for padding — cannot correlate"
     },
     {
@@ -1371,13 +1280,6 @@
       "channel": "overlay",
       "sample": "auto",
       "reason": "value shape outside mintable kinds and outside the declared vocabulary"
-    },
-    {
-      "state": "focus-visible",
-      "part": "tooltip",
-      "channel": "position-area",
-      "sample": "self-inline-end",
-      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
     }
   ],
   "overflowBindings": [
@@ -1400,6 +1302,27 @@
   },
   "bindingContradictions": [],
   "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [
+    "label-2: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "label-2: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "label-2: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "label-3: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "label-3: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "label-3: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "part-1-0-2: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "part-1-0-2: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "part-1-0-2: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "slider-thumb-2: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "slider-thumb-2: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "slider-thumb-2: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "slider-thumb: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "slider-thumb: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "slider-thumb: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "tooltip: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "tooltip: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "tooltip: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only"
+  ],
+  "interactionOnlyPlaneDropCount": 18,
   "structureReceipts": [
     "union-part-added: horizontal.text__default @1.0.2 (div|slider-thumb)",
     "union-part-added: horizontal.text__default @1.1 (span|)",
@@ -1488,11 +1411,9 @@
     "translate-door-generalized: slider-thumb — translate motion observed on a non-base combo (base at rest); translate-x/y admitted across the whole enabled default plane with ABSENT ≡ 0px (the v1 door required the BASE combo to carry the key and dropped state-plane motion into code-only) — pseudo-decor v2 round",
     "text-part-typography-carried: label-2 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
     "text-part-typography-carried: label-3 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
-    "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (label, label-2, label-3, tooltip); -webkit-text-stroke-color (label, label-2, label-3, tooltip)",
+    "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (label, label-2, tooltip); -webkit-text-stroke-color (label, label-2, tooltip)",
     "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
     "inheritance-check-rejected: label-2.font-weight — values track ancestor \"tooltip\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-3.caret-color — values track ancestor \"slider\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-3.color — values track ancestor \"slider\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label-3.font-size — values track ancestor \"slider\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label-3.font-weight — values track ancestor \"slider\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label-3.line-height — values track ancestor \"slider\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
@@ -1606,7 +1527,6 @@
     "layout enriched: slider.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: part-1-0.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
     "declared fact carried: label.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: part-1-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-1-0.isolation = isolate (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-1-0.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
@@ -1617,14 +1537,14 @@
     "declared fact carried: part-1-0-1.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-1-0-1.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: slider-thumb-2.cursor = grab (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: slider-thumb-2.transition-duration = 0.175s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb-2.transition-duration = 0.125s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: slider-thumb-2.transition-property = background-color, box-shadow (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: slider-thumb-2.transition-timing-function = cubic-bezier(0.24, 1, 0.4, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: slider-thumb-2.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-1-0-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-1-0-2.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: slider-thumb.cursor = grab (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: slider-thumb.transition-duration = 0.175s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb.transition-duration = 0.125s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: slider-thumb.transition-property = background-color, box-shadow (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: slider-thumb.transition-timing-function = cubic-bezier(0.24, 1, 0.4, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: slider-thumb.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
@@ -1633,12 +1553,9 @@
     "declared fact carried: tooltip.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: tooltip.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: tooltip.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: tooltip.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: tooltip.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label-2.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label-2.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label-3.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label-3.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
     "nested pair carried: slider.height = per-valueDisplay map whose refs substitute orientation (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
     "nested pair carried: slider-track.left = per-valueDisplay map whose refs substitute orientation (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",

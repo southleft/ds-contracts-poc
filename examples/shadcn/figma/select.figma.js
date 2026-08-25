@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "shadcn.select",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Select — generated from contract shadcn.select v0.2.0 † (29 code-only facts — see plugin report)",
+    "description": "Select — generated from contract shadcn.select v0.2.0 † (30 code-only facts — see plugin report)",
     "isSet": false,
     "boolProps": [],
     "textProps": [],
@@ -29,6 +29,7 @@ const COMPONENTS = [
             "primary": "SPACE_BETWEEN",
             "counter": "CENTER"
           },
+          "stroke": "imported/shared/color-e5e5e5",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-8",
             "bottomRightRadius": "imported/shared/size-8",
@@ -101,6 +102,10 @@ const COMPONENTS = [
               }
             }
           ],
+          "fixedHeight": {
+            "px": 36,
+            "varName": "imported/select/root/height"
+          },
           "children": [
             {
               "type": "text",
@@ -120,12 +125,13 @@ const COMPONENTS = [
                 "value": 20,
                 "unit": "PIXELS"
               },
-              "textAlignH": "CENTER"
+              "textAlignH": "CENTER",
+              "fontFamily": "Inter Variable"
             },
             {
               "type": "svg",
               "name": "icon",
-              "svg": "<svg fill=\"#737373\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6 9 L 12 15 L 18 9\" stroke=\"#737373\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "svg": "<svg viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6 9 L 12 15 L 18 9\" fill=\"none\" stroke=\"#737373\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
               "svgPaintVar": "imported/shared/color-737373",
               "iconSize": 16
             }
@@ -242,6 +248,17 @@ const COMPONENTS = [
         "channel": "text-wrap-mode",
         "value": "nowrap",
         "reason": "Line-breaking rules differ: Figma wraps by box width only.",
+        "variants": {
+          "count": 1,
+          "of": 1
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "--tw-ring-shadow [focus-visible]",
+        "value": "0 0 0 calc(3px + 0px) color-mix(in oklab, oklch(0.708 0 0) 50%, transparent)",
+        "reason": "observed by the computed capture and refused by the contract grammar — CSS custom property, not a styled channel — the same door the base plane applies: a custom property is a token DECLARATION the library sets on this element (its plumbing), never a rendered fact; the rendered state delta rides the consuming channel",
         "variants": {
           "count": 1,
           "of": 1

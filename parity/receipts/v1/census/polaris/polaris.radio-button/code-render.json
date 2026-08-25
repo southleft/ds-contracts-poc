@@ -71,6 +71,16 @@
     "contentSlots": [],
     "tokenRefs": [
       "imported.radio-button.backdrop.background-color-state-disabled",
+      "imported.radio-button.backdrop.background-color.checked",
+      "imported.radio-button.backdrop.background-color.unchecked",
+      "imported.radio-button.backdrop.border-bottom-color.checked",
+      "imported.radio-button.backdrop.border-bottom-color.unchecked",
+      "imported.radio-button.backdrop.border-left-color.checked",
+      "imported.radio-button.backdrop.border-left-color.unchecked",
+      "imported.radio-button.backdrop.border-right-color.checked",
+      "imported.radio-button.backdrop.border-right-color.unchecked",
+      "imported.radio-button.backdrop.border-top-color.checked",
+      "imported.radio-button.backdrop.border-top-color.unchecked",
       "imported.radio-button.choice-control.flex-shrink",
       "imported.radio-button.choice-control.margin-right",
       "imported.radio-button.choice-control.width",
@@ -89,12 +99,14 @@
       "imported.radio-button.root.padding-bottom",
       "imported.radio-button.root.padding-top",
       "imported.radio-button.root.width",
+      "imported.shared.color-303030",
       "imported.shared.color-b5b5b5",
       "imported.shared.size-0",
       "imported.shared.size-1",
       "imported.shared.size-18",
       "name",
       "p.border-radius-full",
+      "p.border-width-0165",
       "value"
     ],
     "icons": [],
@@ -113,7 +125,7 @@
       "status": "rendered",
       "png": "code-checked-unchecked.png",
       "contentBox": {
-        "width": 166.31,
+        "width": 166.33,
         "height": 28
       }
     },
@@ -129,7 +141,7 @@
       "status": "rendered",
       "png": "code-checked-checked.png",
       "contentBox": {
-        "width": 166.31,
+        "width": 166.33,
         "height": 28
       }
     }

@@ -4462,7 +4462,16 @@ function applyGridChildren(parent, spec, built) {
       ' (P9 overflow absorption / P10 mode-switch loss) — refusing to carry a write the contract did not make'
     );
   }
-  const inFlow = built.filter((p) => !p[0].overlay && !p[0].insetOverlay && !p[0].absolute && p[1].layoutPositioning !== 'ABSOLUTE');
+  // REJECTED-SETS ROUND (fluent.dialog): a grid child with margins is built
+  // INSIDE its "(margin box)" wrapper — the WRAPPER is the node the grid
+  // actually parents, and the child-side placement setter throws 'Node is
+  // not a grid child' on the inner node. Every placement/sizing/align write
+  // below therefore targets the outermost ancestor whose parent IS the grid
+  // frame (the wrapper when one exists, the node itself otherwise).
+  const gridChildOf = (n) => { let m = n; while (m.parent && m.parent !== parent) m = m.parent; return m; };
+  const inFlow = built
+    .filter((p) => !p[0].overlay && !p[0].insetOverlay && !p[0].absolute && p[1].layoutPositioning !== 'ABSOLUTE')
+    .map((p) => [p[0], gridChildOf(p[1])]);
   const placed = inFlow.filter((p) => p[0].cell);
   if (!l.grid.flow) {
     // FC-GRID-APPEND-AUTOPLACE. appendChild does not park a grid child
@@ -4556,14 +4565,22 @@ function applyGridChildren(parent, spec, built) {
     // exactly the right contribution.
     const hugW = !!(l.grid.hugWidth || (childGrid && childGrid.hugWidth));
     const hugH = !!(l.grid.hugHeight || (childGrid && childGrid.hugHeight));
-    if (!cs.fixedWidth && !(cs.lits && cs.lits.width !== undefined) && !hugW) {
+    // REJECTED-SETS ROUND (fluent.dialog actions): G3's FILL is stretch-by-
+    // ABSENCE — a child that CARRIES an alignment on an axis resolves to its
+    // content size there (CSS: justify-self/align-self beat the stretch
+    // default), so an aligned axis HUGS and never fills. Filling it drew the
+    // dialog's Close button 267px wide (modal) and collapsed it to 0 inside
+    // the hugging non-modal grid (the FILL-in-HUG degenerate cycle).
+    const alignedW = !!(cs.cell && cs.cell.hAlign);
+    const alignedH = !!(cs.cell && cs.cell.vAlign);
+    if (!cs.fixedWidth && !(cs.lits && cs.lits.width !== undefined) && !hugW && !alignedW) {
       try { cn.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-GRID-SIZING-REFUSED', cn, 'layoutSizingHorizontal FILL refused; the grid child keeps its drawn width', e); }
-    } else if (l.grid.hugWidth && !cs.fixedWidth && !(cs.lits && cs.lits.width !== undefined)) {
+    } else if ((l.grid.hugWidth || alignedW) && !cs.fixedWidth && !(cs.lits && cs.lits.width !== undefined)) {
       try { cn.layoutSizingHorizontal = 'HUG'; } catch (e) { degrade('FC-RT-GRID-SIZING-REFUSED', cn, 'layoutSizingHorizontal HUG refused; the grid child keeps its drawn width', e); }
     }
-    if (!cs.fixedHeight && !(cs.lits && cs.lits.height !== undefined) && !hugH) {
+    if (!cs.fixedHeight && !(cs.lits && cs.lits.height !== undefined) && !hugH && !alignedH) {
       try { cn.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-GRID-SIZING-REFUSED', cn, 'layoutSizingVertical FILL refused; the grid child keeps its drawn height', e); }
-    } else if (l.grid.hugHeight && !cs.fixedHeight && !(cs.lits && cs.lits.height !== undefined)) {
+    } else if ((l.grid.hugHeight || alignedH) && !cs.fixedHeight && !(cs.lits && cs.lits.height !== undefined)) {
       try { cn.layoutSizingVertical = 'HUG'; } catch (e) { degrade('FC-RT-GRID-SIZING-REFUSED', cn, 'layoutSizingVertical HUG refused; the grid child keeps its drawn height', e); }
     }
   }
