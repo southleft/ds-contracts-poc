@@ -15,8 +15,8 @@ never waivable.
 
 | | |
 |---|---|
-| cases (CARRIED + LOWERED) | **58** |
-| 🟢 round-tripped | **32** |
+| cases (CARRIED + LOWERED) | **62** |
+| 🟢 round-tripped | **36** |
 | 🟢 named (dropped, and a receipt says so) | **11** |
 | 🟡 refused by name (the canvas cannot host the seed, and says so) | **15** |
 | ⚪ seed-absent (nothing to round-trip) | **0** |
@@ -68,10 +68,11 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `grid-on-component-variant` | grid-composition | layoutMode GRID on a COMPONENT node (canvas variants are components) | `grid-template-rows` | CARRIED | — |  |  | plugin plan: conformance.grid-on-component-variant — anatomy.root.literals.width: grid-axis-indefinite: a grid part must make each axis DEFINITE — a px/token size, "fit-content" (G8), or layout.grow (width, flex parent). Absence is refused… |
 | `grid-row-span` | grid-placement | grid-row: 2 / span 2 (child spans 2 rows) | `grid-row-end` | CARRIED | — |  |  | plugin plan: conformance.grid-row-span — anatomy.root.literals.height: grid-axis-indefinite: a grid part must make each axis DEFINITE — a px/token size, "fit-content" (G8), or layout.grow (width, flex parent). Absence is refused because it… |
 
-## 🟢 ROUND-TRIPPED — 32
+## 🟢 ROUND-TRIPPED — 36
 
 | case | feature | construct | channel | expect | came back | ref | as | note |
 |---|---|---|---|---|---|---|---|---|
+| `align-items-baseline` | layout | uniform align-items: baseline on a flex row of two differing font sizes | `align-items` | CARRIED | baseline | same |  |  |
 | `antd-component-scoped-custom-property` | tokens | .cf-root { --cf-scoped-pad: 15px } .cf-root .cf-a { padding-inline: var(--cf-scoped-pad) } — a token DECLARED ON THE COMPONENT ROOT (not :root) and consumed by a descendant (antd cssVar component tokens on `.antd.ant-btn`) | `padding-left` | CARRIED | 15px | same |  |  |
 | `antd-forwarded-root-attrs` | anatomy | label > [input.sr-only + span.box] + span.text — the component forwards className/data-* to the HIDDEN input, not the visible label root (antd Checkbox/Radio) | `background-color` | CARRIED | #1677ff | same |  |  |
 | `antd-presence-times-axis-glyph` | anatomy | a child part whose PRESENCE is one prop (showIcon) and whose paint is ANOTHER (type) — the base (default) combo mounts without it (antd Alert) | `color` | CARRIED | #000000e0 | same |  |  |
@@ -79,6 +80,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `border-radius-px` | geometry | border-radius: 6px | `border-top-left-radius` | CARRIED | 6px | same | `border-radius` | channel respelled: border-top-left-radius → border-radius |
 | `box-shadow-single` | effects | box-shadow: 0 1px 3px rgba(0,0,0,0.2) | `box-shadow` | CARRIED | rgba(0, 0, 0, 0.2) 0px 1px 3px 0px | same |  |  |
 | `calc-var` | custom-properties | padding-left: calc(var(--cf-space-2) * 2) | `padding-left` | LOWERED | 16px | same |  |  |
+| `child-order-reversed-by-axis` | layout | CHILD ORDER that varies on one enum axis — the container's flex-direction keyword is `row` for BOTH values and the DOM order of the two children is reversed instead (the fluent.switch / fluent.spinner labelPosition shape) | `__child-order` | CARRIED | span\|a>span\|b, span\|b>span\|a | same |  |  |
 | `color-hex` | color | color: #1976d2 (authored as hex) | `color` | CARRIED | #1976d2 | same |  |  |
 | `color-rgb-solid` | color | background-color: rgb(25, 118, 210) | `background-color` | CARRIED | #1976d2 | same |  |  |
 | `color-rgba-alpha` | color | background-color: rgba(25, 118, 210, 0.5) | `background-color` | CARRIED | #1976d280 | same |  |  |
@@ -87,7 +89,9 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `display-inline-flex` | display | display: inline-flex | `display` | CARRIED | flex | same |  |  |
 | `em-relative-padding` | units | padding: 1.5em against a 12px font-size | `padding-left` | CARRIED | 18px | same | `padding-inline` | channel respelled: padding-left → padding-inline |
 | `flex-direction-by-axis` | layout | flex-direction that VARIES on one enum axis (column at the default value, row on the other) — the fluent.card orientation shape | `flex-direction` | CARRIED | column, row | same |  |  |
+| `flex-direction-reverse-by-axis` | layout | flex-direction: row-reverse at the DEFAULT axis value and row at the other (the carbon.accordion `align` shape, whose default IS the reversed one) | `flex-direction` | CARRIED | row, row-reverse | same |  |  |
 | `flex-gap` | layout | column-gap / row-gap in px | `column-gap` | CARRIED | 12px | same | `gap` | channel respelled: column-gap → gap |
+| `flex-wrap-wrap` | layout | uniform flex-wrap: wrap on a flex row narrow enough to wrap | `flex-wrap` | CARRIED | wrap | same |  |  |
 | `grid-absolute-overlay` | grid-composition | Part.overlay (layoutPositioning ABSOLUTE) inside a grid parent | `position` | CARRIED | absolute, relative | same |  |  |
 | `grid-auto-flow-row` | grid-flow | grid-auto-flow: row over declared columns AND declared row tracks, placement by child order | `grid-auto-flow` | CARRIED | row | same |  |  |
 | `grid-bento-span-matrix` | grid-placement | 3x4 grid, rows [80px,1fr,2fr], cols [160px,1fr,1fr,120px], gaps 12/16, header 1x4 + sidebar 2x1 + main 1x2 + rail 2x1 + footer 1x2, all cells FILL | `grid-template-columns` | CARRIED | 160px 1fr 1fr 120px | same |  |  |

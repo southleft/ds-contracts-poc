@@ -2,7 +2,7 @@
   "_marker": "THE MEASURED ROUND TRIP — contract → Figma (mock) → dump → propose ≡ contract, per conformance case, on the case's own channel. Every SILENT entry is an OPEN DEFECT the engine must name or carry; it is never waivable and leaves this file only by being fixed. The gate refuses drift in EITHER direction: a regression is red, and an improvement must be re-recorded here so a fix can never be absorbed silently.",
   "measuredAt": "extract/computed/out/conformance/<case>/enriched.contract.json through figma-sync/plugin/engine (mock figma) and core/propose-figma (npx tsx conformance/canvas.ts)",
   "counts": {
-    "ROUND-TRIPPED": 32,
+    "ROUND-TRIPPED": 36,
     "NAMED": 11,
     "DRIFTED": 0,
     "HARMFUL": 0,
@@ -11,6 +11,18 @@
     "SEED-ABSENT": 0
   },
   "cases": {
+    "align-items-baseline": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "align-items",
+      "seed": [
+        "baseline"
+      ],
+      "proposed": [
+        "baseline"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
     "antd-component-scoped-custom-property": {
       "classification": "ROUND-TRIPPED",
       "channel": "padding-left",
@@ -150,6 +162,19 @@
       "refIdentical": true,
       "note": ""
     },
+    "child-order-reversed-by-axis": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "__child-order",
+      "seed": [
+        "span|b>span|a"
+      ],
+      "proposed": [
+        "span|a>span|b",
+        "span|b>span|a"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
     "color-hex": {
       "classification": "ROUND-TRIPPED",
       "channel": "color",
@@ -259,6 +284,19 @@
       "refIdentical": true,
       "note": ""
     },
+    "flex-direction-reverse-by-axis": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "flex-direction",
+      "seed": [
+        "row-reverse"
+      ],
+      "proposed": [
+        "row",
+        "row-reverse"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
     "flex-gap": {
       "classification": "ROUND-TRIPPED",
       "channel": "column-gap",
@@ -271,6 +309,18 @@
       "refIdentical": true,
       "channelAs": "gap",
       "note": "channel respelled: column-gap → gap"
+    },
+    "flex-wrap-wrap": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "flex-wrap",
+      "seed": [
+        "wrap"
+      ],
+      "proposed": [
+        "wrap"
+      ],
+      "refIdentical": true,
+      "note": ""
     },
     "grid-2d": {
       "classification": "REFUSED-BY-NAME",

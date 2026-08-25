@@ -233,42 +233,53 @@ export function readObservations(outDir: string): Map<string, Map<string, Set<st
 /** Every (part, channel, value) the CONTRACT carries — tokens, declared,
  *  declaredStates, states, literals and layout, at every anatomy depth. Token
  *  refs are resolved against the run's own minted tree + the fixture DTCG. */
+/** `__child-order` MIRROR — the per-variant child order a CONTRACT carries.
+ *
+ *  Both emitters express a per-variant child order the same way and only that
+ *  way: CSS writes `flex-direction: *-reverse` (packages/core/src/css.ts) and
+ *  the canvas reverses the compiled children (core/emit-figma-script.ts
+ *  `isReversed`). So the order a contract CARRIES for a variant is the
+ *  anatomy's own part order, reversed exactly when that variant's resolved
+ *  direction is a reversed spelling. Mirrored here from the two lowerings,
+ *  never imported from them.
+ *
+ *  EXPORTED because the CANVAS round-trip gate (conformance/canvas.ts) reads a
+ *  seed's carriage through `carriageOfContract`, which knows only real CSS
+ *  channels. Without this the child-order fact was invisible to that gate and
+ *  every such case reported SEED-ABSENT — "nothing to round-trip" — while the
+ *  fact was in the contract the whole time. One mirror, both gates. */
+export function childOrderCarriage(contract: Record<string, unknown>, outDir: string): CarriageHit[] {
+  const truth = readJson<{ anatomy?: Array<{ part: string; signature?: string }> }>(path.join(outDir, 'captured-truth.json'));
+  const sigByPart = new Map((truth?.anatomy ?? []).flatMap((a) => (a.signature ? [[a.part, a.signature] as const] : [])));
+  const rows: CarriageHit[] = [];
+  const isRev = (d: unknown): boolean => typeof d === 'string' && d.endsWith('-reverse');
+  const walkOrder = (name: string, part: Record<string, unknown>): void => {
+    const kids = Object.keys((part.parts ?? {}) as Record<string, unknown>);
+    if (kids.length > 1) {
+      const sigs = kids.map((k) => sigByPart.get(k) ?? k);
+      const order = (rev: boolean): string => (rev ? [...sigs].reverse() : sigs).join('>');
+      const lay = part.layout as Record<string, unknown> | null | undefined;
+      rows.push({ part: name, where: 'layout(child order)', value: order(isRev(lay?.direction)), raw: order(isRev(lay?.direction)) });
+      const lbp = part.layoutByProp as { prop?: string; map?: Record<string, Record<string, unknown>> } | null | undefined;
+      for (const [av, over] of Object.entries(lbp?.map ?? {})) {
+        const d = over && over.direction !== undefined ? over.direction : lay?.direction;
+        rows.push({ part: name, where: `layoutByProp.${String(lbp?.prop)}=${av}(child order)`, value: order(isRev(d)), raw: order(isRev(d)) });
+      }
+    }
+    for (const [n, p] of Object.entries((part.parts ?? {}) as Record<string, Record<string, unknown>>)) walkOrder(n, p);
+  };
+  for (const [n, p] of Object.entries((contract.anatomy ?? {}) as Record<string, Record<string, unknown>>)) walkOrder(n, p);
+  return rows;
+}
+
 export function readCarriage(outDir: string): Map<string, Array<{ part: string; where: string; value: string }>> {
   const contract = readJson<Record<string, unknown>>(path.join(outDir, 'enriched.contract.json'));
   const ext = readJson<{ mintedTokens?: Record<string, unknown> }>(path.join(outDir, 'enriched.extension.json'));
   const dtcg = readJson<Record<string, unknown>>(path.join(REPO, 'conformance', 'tokens', 'conformance.dtcg.json')) ?? {};
   if (!contract) return new Map();
   const carriage = carriageOfContract(contract, [ext?.mintedTokens ?? {}, dtcg]);
-  // `__child-order` MIRROR. Both emitters express a per-variant child order the
-  // same way and only that way: CSS writes `flex-direction: *-reverse`
-  // (packages/core/src/css.ts) and the canvas reverses the compiled children
-  // (core/emit-figma-script.ts `isReversed`). So the order a contract CARRIES
-  // for a variant is the anatomy's own part order, reversed exactly when that
-  // variant's resolved direction is a reversed spelling. Mirrored here from
-  // the two lowerings, never imported from them.
-  {
-    const truth = readJson<{ anatomy?: Array<{ part: string; signature?: string }> }>(path.join(outDir, 'captured-truth.json'));
-    const sigByPart = new Map((truth?.anatomy ?? []).flatMap((a) => (a.signature ? [[a.part, a.signature] as const] : [])));
-    const rows: CarriageHit[] = [];
-    const isRev = (d: unknown): boolean => typeof d === 'string' && d.endsWith('-reverse');
-    const walkOrder = (name: string, part: Record<string, unknown>): void => {
-      const kids = Object.keys((part.parts ?? {}) as Record<string, unknown>);
-      if (kids.length > 1) {
-        const sigs = kids.map((k) => sigByPart.get(k) ?? k);
-        const order = (rev: boolean): string => (rev ? [...sigs].reverse() : sigs).join('>');
-        const lay = part.layout as Record<string, unknown> | null | undefined;
-        rows.push({ part: name, where: 'layout(child order)', value: order(isRev(lay?.direction)), raw: order(isRev(lay?.direction)) });
-        const lbp = part.layoutByProp as { prop?: string; map?: Record<string, Record<string, unknown>> } | null | undefined;
-        for (const [av, over] of Object.entries(lbp?.map ?? {})) {
-          const d = over && over.direction !== undefined ? over.direction : lay?.direction;
-          rows.push({ part: name, where: `layoutByProp.${String(lbp?.prop)}=${av}(child order)`, value: order(isRev(d)), raw: order(isRev(d)) });
-        }
-      }
-      for (const [n, p] of Object.entries((part.parts ?? {}) as Record<string, Record<string, unknown>>)) walkOrder(n, p);
-    };
-    for (const [n, p] of Object.entries((contract.anatomy ?? {}) as Record<string, Record<string, unknown>>)) walkOrder(n, p);
-    if (rows.length) carriage.set('__child-order', [...(carriage.get('__child-order') ?? []), ...rows]);
-  }
+  const rows = childOrderCarriage(contract, outDir);
+  if (rows.length) carriage.set('__child-order', [...(carriage.get('__child-order') ?? []), ...rows]);
   return carriage;
 }
 
