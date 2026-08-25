@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "colors, radius, padding match; text weight renders lighter on canvas (Inter substrate)",
  "reviewedAt": "ad1e0fbb",

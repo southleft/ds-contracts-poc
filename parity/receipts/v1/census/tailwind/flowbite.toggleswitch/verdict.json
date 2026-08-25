@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "track/thumb geometry + checked fill match; label gap slightly wider on canvas",
  "reviewedAt": "ad1e0fbb",

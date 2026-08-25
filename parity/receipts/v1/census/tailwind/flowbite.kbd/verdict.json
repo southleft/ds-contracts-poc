@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "key cap with border + radius matches",
  "reviewedAt": "ad1e0fbb",

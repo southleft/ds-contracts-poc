@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "all 7 colors + sm + state previews match; hover/active previews identical to default by design (bg-only deltas)",
  "reviewedAt": "ad1e0fbb",

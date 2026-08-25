@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "box, radius, shadow match; label column top-aligned on canvas vs centered block in code render",
  "reviewedAt": "ad1e0fbb",
