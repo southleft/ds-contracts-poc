@@ -2,10 +2,10 @@
   "_marker": "THE DENOMINATOR. Hand-authored per case, generated into one index. Deliberately NOT derived from isFusable / styled / DECLARED_CHANNELS / CHANNEL_TO_COMPUTED / TOKEN_CHANNELS / carriedParts — every instrument in the pipeline derives its denominator from the same filter that decides carriage, which is why a channel the filter never opened scores 100%. This file is the independent one.",
   "generatedBy": "conformance/build.ts",
   "library": "@ds-contracts/conformance@0.1.0",
-  "count": 91,
+  "count": 92,
   "byExpectation": {
     "CARRIED": 50,
-    "LOWERED": 4,
+    "LOWERED": 5,
     "REFUSED": 19,
     "UNSUPPORTED": 18
   },
@@ -1926,6 +1926,24 @@
       "canvas": {
         "expect": "ABSENT",
         "note": "the asset grammar admits path/g only"
+      }
+    },
+    {
+      "id": "text-indent-off-box",
+      "feature": "text",
+      "construct": "text-indent: 9999px on a box pinned to 8px (the status-pip idiom: the label is pushed out of the box and only the dot shows)",
+      "why": "The idiom that hides a label without removing it — altitude's Badge dot plane, and the -9999px half of it is the classic visually-hidden rule. `text-indent` is an ANNOTATE channel: Figma text nodes have no first-line indent. Annotating is honest only while the canvas still draws what the browser draws, and here the browser paints NO text in the box, so drawing the label at indent 0 does not lose a fact — it invents one. The first fresh mint of altitude's Badge came back with 'Badge' painted across an 8px pip and over its neighbouring cells. This case pins the measurement (Part.textOutOfBox, fuse.ts textOutOfBoxEvidence) that lets the canvas withhold exactly the ink CSS withholds.",
+      "expect": "LOWERED",
+      "expectName": "text-indent",
+      "expectWhere": "anatomy.root.tokens.text-indent + the text-indent code-only fact (Part.textOutOfBox withholds the label)",
+      "observable": {
+        "part": "root",
+        "channel": "text-indent",
+        "capturedValue": "9999px"
+      },
+      "canvas": {
+        "expect": "ABSENT",
+        "note": "Figma text nodes have no first-line indent; the measured off-box evidence draws no text child at all rather than a label at indent 0"
       }
     },
     {

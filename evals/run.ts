@@ -6955,6 +6955,152 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       console.log('optional-adornment-gating-general-fixture: default variant plain (no pip), pip=a variant has it, "Show Icon" boolean exposed default OFF (icon node visibleDefault false), unset value enumerated as a real variant');
     },
   },
+  {
+    // MINT ROUND (2026-08-25) — THE OFF-BOX LABEL. altitude's Badge hides
+    // the label of its `.al-is-dot` plane with `text-indent: 9999px` on an
+    // 8px pip. `text-indent` is an `annotate` channel (Figma text nodes have
+    // no first-line indent), so the canvas dropped the OFFSET and kept the
+    // LABEL — the first fresh mint of the set came back with "Badge" painted
+    // across the 8px pip and over its neighbouring cells. Annotating is the
+    // honest answer only while the canvas still draws what the browser draws;
+    // here the browser paints no text in the box at all, so drawing it at
+    // indent 0 does not lose a fact, it INVENTS one.
+    //
+    // The gate is the MEASUREMENT (Part.textOutOfBox, emitted by
+    // extract/computed fuse.ts `textOutOfBoxEvidence`), never the channel and
+    // never a component name — this fixture carries the SAME text-indent
+    // channel on both planes and proves the label survives wherever the
+    // measurement does not say the first line left the box.
+    id: 'text-indent-off-box-label-not-drawn',
+    claim: 'C3-detection',
+    run: () => {
+      const emptyTokens = { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } };
+      const engine = createFigmaEngine({ tokens: emptyTokens, icons: new Map() });
+      const make = (withEvidence: boolean): any => ({
+        id: 'fixture.pip', name: 'Pip', version: '0.0.0', status: 'draft',
+        description: 'synthesized off-box-label fixture', semantics: { element: 'span' },
+        props: [
+          { name: 'children', type: 'text', default: 'Sample',
+            bindings: { figma: { kind: 'TEXT', property: 'Content' }, code: { prop: 'children' } } },
+          { name: 'dot', type: { enum: ['default', 'dot'] }, default: 'default',
+            bindings: { figma: { kind: 'VARIANT', property: 'Dot', values: { default: 'Default', dot: 'Dot' } }, code: { prop: 'isDot' } } },
+        ],
+        states: [],
+        anatomy: {
+          root: {
+            layout: { display: 'flex', align: 'center', justify: 'center' },
+            content: { prop: 'children' },
+            literals: { 'background-color': '#4375ff' },
+            ...(withEvidence ? { textOutOfBox: { prop: 'dot', values: ['dot'] } } : {}),
+            tokensByProp: [
+              { prop: 'dot', map: {
+                default: { 'text-indent': '{fixture.pip.indent.default}' },
+                dot: { 'text-indent': '{fixture.pip.indent.dot}' },
+              } },
+            ],
+          },
+        },
+        bindings: { figma: { anchors: { fileKey: null, componentSetKey: null } }, code: { anchors: { importPath: 'x', export: 'Pip' } } },
+      });
+      const textOf = (v: any): string[] =>
+        (v.spec.children ?? []).filter((c: any) => c.type === 'text').map((c: any) => c.characters);
+      const compile = (c: any) => {
+        ContractSchema.parse(c);
+        return engine.compileComponentData(c, new Map([[c.id, c]]));
+      };
+
+      // WITHOUT the measurement nothing changes: the label is drawn on BOTH
+      // planes, exactly as before this round. (The channel alone must never
+      // be the trigger — a 4px indent still draws its label.)
+      const before = compile(make(false));
+      for (const v of before.variants) {
+        if (textOf(v).length !== 1) {
+          throw new Error(`no-evidence: variant "${v.name}" should still draw its label, drew ${JSON.stringify(textOf(v))}`);
+        }
+      }
+
+      // WITH it, the label is withheld on exactly the measured plane.
+      const after = compile(make(true));
+      const def = after.variants.find((v: any) => /Dot=Default/.test(v.name));
+      const dot = after.variants.find((v: any) => /Dot=Dot/.test(v.name));
+      if (!def || !dot) throw new Error(`both Dot planes must be enumerated, got ${after.variants.map((v: any) => v.name).join(' | ')}`);
+      if (textOf(def).length !== 1 || textOf(def)[0] !== 'Sample') {
+        throw new Error(`Dot=Default lost its label: ${JSON.stringify(textOf(def))}`);
+      }
+      if (textOf(dot).length !== 0) {
+        throw new Error(`Dot=Dot DREW the off-box label — the canvas invented ink the browser never paints: ${JSON.stringify(textOf(dot))}`);
+      }
+      // The drop is NAMED, not silent: the text-indent code-only fact carries
+      // the reason and names the plane it applies to.
+      const facts: any[] = after.codeOnlyFacts ?? [];
+      const indentFacts = facts.filter((f) => f.channel === 'text-indent');
+      if (indentFacts.length === 0) throw new Error('the text-indent drop is not named in codeOnlyFacts');
+      if (!indentFacts.some((f) => /draws NO text child/.test(String(f.reason)))) {
+        throw new Error(`the text-indent fact does not say the label is withheld: ${JSON.stringify(indentFacts.map((f) => f.reason))}`);
+      }
+      if (!indentFacts.some((f) => (f.variants?.names ?? []).some((n: string) => /Dot=Dot/.test(n)))) {
+        throw new Error('the text-indent fact does not name the Dot=Dot plane it applies to');
+      }
+      console.log('text-indent-off-box-label-not-drawn: no evidence ⇒ both planes keep their label; MEASURED textOutOfBox ⇒ Dot=Dot draws no text child and the text-indent code-only fact names the withheld label on that plane');
+    },
+  },
+  {
+    // The same round, the referee half: MEASURED evidence qualifies ONE
+    // channel and withholds ONE thing. A flag that qualifies nothing is a
+    // contract error, not a no-op — the hugsBelowMaxWidth discipline.
+    id: 'text-indent-off-box-evidence-refuses-when-inert',
+    claim: 'C2-refusal',
+    run: () => {
+      const base = (): any => ({
+        id: 'fixture.inert', name: 'Inert', version: '0.0.0', status: 'draft',
+        description: 'synthesized inert-evidence fixture', semantics: { element: 'span' },
+        props: [
+          { name: 'children', type: 'text', default: 'Sample',
+            bindings: { figma: { kind: 'TEXT', property: 'Content' }, code: { prop: 'children' } } },
+          { name: 'dot', type: { enum: ['default', 'dot'] }, default: 'default',
+            bindings: { figma: { kind: 'VARIANT', property: 'Dot', values: { default: 'Default', dot: 'Dot' } }, code: { prop: 'isDot' } } },
+        ],
+        states: [],
+        anatomy: { root: { layout: { display: 'flex' }, content: { prop: 'children' }, literals: { 'text-indent': '9999px' } } },
+        bindings: { figma: { anchors: { fileKey: null, componentSetKey: null } }, code: { anchors: { importPath: 'x', export: 'Inert' } } },
+      });
+      const errsFor = (edit: (c: any) => void): string[] => {
+        const c = base();
+        edit(c);
+        ContractSchema.parse(c);
+        const errs: string[] = [];
+        coreValidateContract(c, new Map([[c.id, c]]), errs, new Map());
+        return errs;
+      };
+      const expect = (label: string, edit: (c: any) => void, needle: RegExp) => {
+        const errs = errsFor(edit);
+        if (!errs.some((e) => needle.test(e))) {
+          throw new Error(`${label}: expected a refusal matching ${needle}, got ${JSON.stringify(errs)}`);
+        }
+      };
+      // No text of its own — nothing for the canvas to withhold.
+      expect('no text', (c) => {
+        delete c.anatomy.root.content;
+        c.anatomy.root.parts = { box: { element: 'span', declared: { width: '8px' } } };
+        c.anatomy.root.textOutOfBox = {};
+      }, /no text of its own/);
+      // No text-indent channel — the evidence qualifies nothing.
+      expect('no channel', (c) => {
+        delete c.anatomy.root.literals;
+        c.anatomy.root.textOutOfBox = {};
+      }, /no "text-indent" channel/);
+      // Half an axis condition.
+      expect('prop without values', (c) => { c.anatomy.root.textOutOfBox = { prop: 'dot' }; }, /"prop" without "values"/);
+      // A value the prop does not have.
+      expect('undeclared value', (c) => { c.anatomy.root.textOutOfBox = { prop: 'dot', values: ['pip'] }; }, /not a value of prop "dot"/);
+      // An unknown prop.
+      expect('unknown prop', (c) => { c.anatomy.root.textOutOfBox = { prop: 'nope', values: ['x'] }; }, /unknown prop "nope"/);
+      // The honest spelling passes.
+      const ok = errsFor((c) => { c.anatomy.root.textOutOfBox = { prop: 'dot', values: ['dot'] }; });
+      if (ok.some((e) => /textOutOfBox/.test(e))) throw new Error(`the measured spelling was refused: ${JSON.stringify(ok)}`);
+      console.log('text-indent-off-box-evidence-refuses-when-inert: 5 inert/ill-formed spellings refused by name (no text, no channel, half a condition, undeclared value, unknown prop); the measured spelling passes');
+    },
+  },
   // -------------------------------------------------------------------------
   // DEPTH BUILD — Stage A+B pins (portal-aware capture + multi-root anatomy).
   // Deterministic + browser-free: they read the committed production receipt

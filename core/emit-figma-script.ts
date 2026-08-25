@@ -4038,6 +4038,12 @@ function rootTextSpecs(
   // same way a child `content` part is (a TEXT child named `label` linked to
   // the text property). A root with NO parts keeps the `children` branch.
   if (root.text === undefined && root.content === undefined) return [];
+  // MINT ROUND (2026-08-25): the root's own `text-indent` was MEASURED
+  // laying its first line entirely outside its content box on this combo
+  // (Part.textOutOfBox) — the browser paints no text in the box there, so
+  // the canvas hosts none. The `text-indent` code-only fact names the drop
+  // and already lists these exact variants.
+  if (textOutOfBoxOn(root as Part, subst)) return [];
   const hosted: Part = root.text !== undefined
     ? ({ text: root.text, ...(root.textByProp ? { textByProp: root.textByProp } : {}) } as Part)
     : ({ content: root.content } as Part);
@@ -4061,6 +4067,23 @@ function partToSpec(
   return spec;
 }
 
+/** MINT ROUND (2026-08-25) — MEASURED text-indent evidence
+ *  (Part.textOutOfBox, extract/computed fuse.ts `textOutOfBoxEvidence`): on
+ *  these combos CSS lays the element's first line entirely outside its own
+ *  content box, so the browser paints no text in the box. `text-indent` is
+ *  an `annotate` channel (Figma text nodes have no first-line indent) — but
+ *  annotating an offset and then drawing the label at indent 0 does not
+ *  lose a fact, it INVENTS one (altitude's Badge dot pip, whose 8px cell
+ *  came back from the first fresh mint with "Badge" painted across it). An
+ *  EMPTY condition means every combo. */
+function textOutOfBoxOn(part: Part, subst: Record<string, string>): boolean {
+  const ev = part.textOutOfBox;
+  if (!ev) return false;
+  if (ev.prop === undefined) return true;
+  const value = subst[ev.prop];
+  return value !== undefined && (ev.values ?? []).includes(value);
+}
+
 function partToSpecInner(
   name: string,
   part: Part,
@@ -4069,6 +4092,19 @@ function partToSpecInner(
   ctx: TextCtx,
   subst: Record<string, string>,
 ): NodeSpec {
+  // The box still paints (background, border, size) — only its own text is
+  // withheld, exactly as the browser withholds it. A part that carried
+  // nothing but that text compiles to the empty box CSS draws.
+  if (
+    textOutOfBoxOn(part, subst) &&
+    (part.text !== undefined || part.content !== undefined)
+  ) {
+    const stripped = { ...part };
+    delete stripped.text;
+    delete stripped.content;
+    delete stripped.textByProp;
+    part = stripped;
+  }
   if (part.icon) {
     // The part's own tokens (e.g. a color override) apply to the glyph.
     const iconCtx = applyTokens({ type: 'frame', name: '_' }, resolveTokens(part, subst), subst, ctx);
@@ -4925,7 +4961,10 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       if (isReversed(root, subst)) rootSpec.children.reverse();
       centerStrokeGlyphsInHosts(rootSpec.children);
       stampGridCells(rootSpec, root, subst); // A2 grid — see stampGridCells
-    } else if (textProp) {
+    } else if (textProp && !textOutOfBoxOn(root as Part, subst)) {
+      // MINT ROUND (2026-08-25): a bound root label is withheld on the
+      // combos where the MEASURED text-indent laid the first line outside
+      // the box — the same discipline as rootTextSpecs (Part.textOutOfBox).
       // ANTD EXAM (heal loop): a root whose label is a NON-children text prop
       // is an <input> drawing its placeholder — text starts at the padding
       // edge (antd `text-align: start`), it is never centred like a Button.
@@ -5055,7 +5094,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
           if (isReversed(root, subst)) rootSpec.children.reverse();
           centerStrokeGlyphsInHosts(rootSpec.children);
           stampGridCells(rootSpec, root, subst); // A2 grid — see stampGridCells
-        } else if (textProp) {
+        } else if (textProp && !textOutOfBoxOn(root as Part, subst)) {
           rootSpec.children = [
             {
               type: 'text',

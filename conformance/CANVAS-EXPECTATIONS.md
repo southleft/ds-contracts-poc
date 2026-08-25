@@ -15,9 +15,9 @@ never waivable.
 
 | | |
 |---|---|
-| cases (CARRIED + LOWERED) | **54** |
+| cases (CARRIED + LOWERED) | **55** |
 | 🟢 round-tripped | **29** |
-| 🟢 named (dropped, and a receipt says so) | **10** |
+| 🟢 named (dropped, and a receipt says so) | **11** |
 | 🟡 refused by name (the canvas cannot host the seed, and says so) | **15** |
 | ⚪ seed-absent (nothing to round-trip) | **0** |
 | 🔴 red | **0** — SILENT 0 · DRIFTED 0 · HARMFUL 0 |
@@ -32,7 +32,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 **HARMFUL** the manifest says no canvas spelling exists and it came back anyway ·
 **SILENT** vanished, named by nothing — never waivable.
 
-## 🟢 NAMED — 10
+## 🟢 NAMED — 11
 
 | case | feature | construct | channel | expect | came back | ref | as | note |
 |---|---|---|---|---|---|---|---|---|
@@ -44,6 +44,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `aspect-ratio` | geometry | aspect-ratio: 2 / 1 | `aspect-ratio` | CARRIED | — |  |  | code-only channel root.aspect-ratio = 2 / 1 — the canvas has no aspect-ratio field — LOWERED to a fixed height of 40px (bound width 80px ÷ 2); the ratio does not reach the canvas, a width change there will not follow it, and the dump reads… |
 | `display-block` | display | display: block | `display` | CARRIED | flex |  |  | value came back as flex (seed block) — code-only declared root.display = block — CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-lev… |
 | `nonpainting-text-display-none` | invariant | a NON-PAINTING element carrying text (display: none) | `__text` | CARRIED | — |  |  | code-only declared label-2.display = none — CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack). |
+| `text-indent-off-box` | text | text-indent: 9999px on a box pinned to 8px (the status-pip idiom: the label is pushed out of the box and only the dot shows) | `text-indent` | LOWERED | — |  |  | code-only channel root.text-indent = {«self».root.text-indent} — Figma text nodes have no first-line indent. Where the MEASURED indent lays the first line entirely outside the content box (Part.textOutOfBox), the canvas draws NO text child… |
 | `text-overflow-ellipsis` | text | text-overflow: ellipsis + overflow hidden + nowrap | `text-overflow` | CARRIED | — |  |  | degradation text-channel-unsupported @ «self»:«self»/label: text channel(s) with no dump v1 projection: textTruncation ENDING (the canvas twin of CSS text-overflow: ellipsis — drawn, not read back) — typography carries (fontSize, fontStyle… |
 | `transition-channel` | motion | transition: background-color 200ms ease | `transition-duration` | CARRIED | — |  |  | code-only declared root.transition-duration = 0.2s — Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame. |
 
