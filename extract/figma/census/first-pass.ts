@@ -449,10 +449,14 @@ export function preflight(
       detail: w,
       remedy: "",
     });
-  const pw = writable(examDir(def.exam));
+  // The PACKET TREE, not the exam's own directory: probing `<dir>/<exam>`
+  // would CREATE it, and a preflight that refuses must leave nothing behind —
+  // an empty exam directory is a packet with no MANIFEST, which the gate
+  // rightly refuses. Preflight may not manufacture the red it is preventing.
+  const pw = writable(abs(PATHS.dir));
   if (pw !== null)
     out.push({
-      requirement: `the packet directory ${FIRST_PASS_DIR}/${def.exam} is writable`,
+      requirement: `the packet tree ${FIRST_PASS_DIR} is writable`,
       detail: pw,
       remedy: "",
     });

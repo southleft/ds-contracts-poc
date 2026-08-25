@@ -70,6 +70,7 @@ import {
   FIRST_PASS_RECEIPT,
   applyRatchet,
   committedExams,
+  examDir,
   loadRatchet,
   preflight,
   ratchetFailures,
@@ -344,6 +345,25 @@ function preflightRedCases(): boolean {
       /the config's pin/,
       /npm i /,
     );
+  }
+  // 7. PREFLIGHT MUST LEAVE NOTHING BEHIND. Probing `<packet dir>/<exam>` for
+  //    writability would CREATE it, and an empty exam directory is a packet
+  //    with no MANIFEST — the very red the gate exists to catch. A guard that
+  //    manufactures the failure it prevents is not a guard.
+  {
+    const ghost = `preflight-probe-${process.pid}`;
+    preflight({ ...codeExam, exam: ghost }, { work, mint: false });
+    if (existsSync(examDir(ghost))) {
+      console.error(
+        `✖ self-test: PREFLIGHT created ${examDir(ghost)} — a refusing preflight must touch nothing`,
+      );
+      rmSync(examDir(ghost), { recursive: true, force: true });
+      ok = false;
+    } else {
+      console.log(
+        "  ✔ PREFLIGHT: a refusing run creates no packet directory of its own",
+      );
+    }
   }
   rmSync(work, { recursive: true, force: true });
   return ok;
