@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "shadcn.button",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Button — generated from contract shadcn.button v0.2.0 † (16 code-only facts — see plugin report)",
+    "description": "Button — generated from contract shadcn.button v0.2.0 † (12 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -3443,7 +3443,7 @@ const COMPONENTS = [
             "paddingRight": "imported/button/root/padding-right/default"
           },
           "fill": "imported/button/root/background-color/default",
-          "stroke": "imported/button/root/border-top-color/default",
+          "stroke": "imported/button/root/border-top-color-state-focus-visible/default",
           "effectStack": [
             {
               "x": 0,
@@ -3547,7 +3547,7 @@ const COMPONENTS = [
             "paddingRight": "imported/button/root/padding-right/default"
           },
           "fill": "imported/button/root/background-color/outline",
-          "stroke": "imported/button/root/border-top-color/outline",
+          "stroke": "imported/button/root/border-top-color-state-focus-visible/outline",
           "effectStack": [
             {
               "x": 0,
@@ -3651,7 +3651,7 @@ const COMPONENTS = [
             "paddingRight": "imported/button/root/padding-right/default"
           },
           "fill": "imported/button/root/background-color/secondary",
-          "stroke": "imported/button/root/border-top-color/secondary",
+          "stroke": "imported/button/root/border-top-color-state-focus-visible/secondary",
           "effectStack": [
             {
               "x": 0,
@@ -3755,7 +3755,7 @@ const COMPONENTS = [
             "paddingRight": "imported/button/root/padding-right/default"
           },
           "fill": "imported/button/root/background-color/ghost",
-          "stroke": "imported/button/root/border-top-color/ghost",
+          "stroke": "imported/button/root/border-top-color-state-focus-visible/ghost",
           "effectStack": [
             {
               "x": 0,
@@ -3859,7 +3859,7 @@ const COMPONENTS = [
             "paddingRight": "imported/button/root/padding-right/default"
           },
           "fill": "imported/button/root/background-color/destructive",
-          "stroke": "imported/button/root/border-top-color/destructive",
+          "stroke": "imported/button/root/border-top-color-state-focus-visible/destructive",
           "effectStack": [
             {
               "x": 0,
@@ -3963,7 +3963,7 @@ const COMPONENTS = [
             "paddingRight": "imported/button/root/padding-right/default"
           },
           "fill": "imported/button/root/background-color/link",
-          "stroke": "imported/button/root/border-top-color/link",
+          "stroke": "imported/button/root/border-top-color-state-focus-visible/link",
           "effectStack": [
             {
               "x": 0,
@@ -4458,82 +4458,6 @@ const COMPONENTS = [
       }
     ],
     "codeOnlyFacts": [
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-bottom-color",
-        "value": "{imported.button.root.border-bottom-color-state-focus-visible.{variant}}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 6,
-          "of": 72,
-          "names": [
-            "Variant=Default, Size=Default, State=Focus Visible",
-            "Variant=Outline, Size=Default, State=Focus Visible",
-            "Variant=Secondary, Size=Default, State=Focus Visible",
-            "Variant=Ghost, Size=Default, State=Focus Visible",
-            "Variant=Destructive, Size=Default, State=Focus Visible",
-            "Variant=Link, Size=Default, State=Focus Visible"
-          ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-left-color",
-        "value": "{imported.button.root.border-left-color-state-focus-visible.{variant}}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 6,
-          "of": 72,
-          "names": [
-            "Variant=Default, Size=Default, State=Focus Visible",
-            "Variant=Outline, Size=Default, State=Focus Visible",
-            "Variant=Secondary, Size=Default, State=Focus Visible",
-            "Variant=Ghost, Size=Default, State=Focus Visible",
-            "Variant=Destructive, Size=Default, State=Focus Visible",
-            "Variant=Link, Size=Default, State=Focus Visible"
-          ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-right-color",
-        "value": "{imported.button.root.border-right-color-state-focus-visible.{variant}}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 6,
-          "of": 72,
-          "names": [
-            "Variant=Default, Size=Default, State=Focus Visible",
-            "Variant=Outline, Size=Default, State=Focus Visible",
-            "Variant=Secondary, Size=Default, State=Focus Visible",
-            "Variant=Ghost, Size=Default, State=Focus Visible",
-            "Variant=Destructive, Size=Default, State=Focus Visible",
-            "Variant=Link, Size=Default, State=Focus Visible"
-          ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-top-color",
-        "value": "{imported.button.root.border-top-color-state-focus-visible.{variant}}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 6,
-          "of": 72,
-          "names": [
-            "Variant=Default, Size=Default, State=Focus Visible",
-            "Variant=Outline, Size=Default, State=Focus Visible",
-            "Variant=Secondary, Size=Default, State=Focus Visible",
-            "Variant=Ghost, Size=Default, State=Focus Visible",
-            "Variant=Destructive, Size=Default, State=Focus Visible",
-            "Variant=Link, Size=Default, State=Focus Visible"
-          ]
-        }
-      },
       {
         "part": "root",
         "kind": "channel",

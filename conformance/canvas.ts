@@ -70,6 +70,14 @@
  *                     with no shadow on it. RED, and opt-in per case so it
  *                     can only ever ADD reds: a case that does not declare
  *                     mustDraw is graded exactly as before.
+ *                     ITS BLIND SPOT is `canvas.mustMatch`: MUTE needs the
+ *                     channel to come back EMPTY, and a state plane that fails
+ *                     to repaint what the base plane already drew comes back
+ *                     with the BASE value instead — something, and the wrong
+ *                     thing. A case that declares mustMatch grades that
+ *                     DRIFTED (red) even when a receipt names it, because a
+ *                     name over a wrong value is not a wall. Opt-in, so it too
+ *                     can only ADD reds.
  *   SILENT            neither — the construct vanished and nothing says so.
  *                     RED, NEVER WAIVABLE: there is no receipt that turns a
  *                     SILENT green; it leaves the baseline only by being
@@ -475,6 +483,20 @@ export async function roundTrip(c: CaseEntry, verbose = false): Promise<CanvasMe
   const differs = comparable.length > 0 ? `value came back as ${base.proposed.join(', ')} (seed ${base.seed.join(', ')})` : '';
   if (c.canvas.mustDraw && comparable.length === 0) {
     return { ...base, classification: 'MUTE', reached: 'diff', note: muteNote(named ? namingQuote : 'and nothing names it either') };
+  }
+  /** RC3 — `mustDraw`'s blind spot: something came back, and it is the WRONG
+   *  thing. A receipt naming the channel then buys NAMED (green) for a canvas
+   *  that drew the base plane's value where the contract carries the state's.
+   *  Opt-in per case, so it can only ADD reds. */
+  if (c.canvas.mustMatch && comparable.length > 0) {
+    return {
+      ...base,
+      classification: 'DRIFTED',
+      reached: 'diff',
+      note:
+        `the manifest says "${ch}" must come back with the SEED's value (${c.canvas.note}) — ${differs}` +
+        (named ? `; a receipt names it, and a name over a wrong value is not a wall: ${namingQuote}` : '; nothing names the lowering'),
+    };
   }
   if (named) return { ...base, classification: 'NAMED', reached: 'diff', note: `${differs ? differs + ' — ' : ''}${namingQuote}` };
   if (comparable.length > 0) {

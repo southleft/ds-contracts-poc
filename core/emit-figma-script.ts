@@ -1997,6 +1997,20 @@ function applyTokens(
    *  themed colour. Callers that do not pass it keep the token-only test
    *  byte-identically. */
   lits?: Record<string, string>,
+  /** RC3 — THE RESTING PLANE THIS CALL IS A STATE DELTA OVER.
+   *
+   *  A state's `tokens` map is a DELTA, not a whole plane: shadcn's Switch
+   *  spells its focus ring `focus-visible:border-ring`, so
+   *  `states['focus-visible']` carries the four `border-{side}-color` refs and
+   *  NOTHING else — the width lives on the resting plane the state does not
+   *  touch. Asked of the delta alone, `hasWidthSource` answered NO and the
+   *  four opaque #a1a1a1 sides were refused with a sentence that is FALSE on
+   *  both counts ("per-side border COLOURS disagree (or no border width is
+   *  carried)"): the sides agree, and the width is carried one plane down.
+   *  Passing the resting maps here reads the cascade the way CSS reads it, the
+   *  same move `outlineRingForState` arm (3) already makes for the outline
+   *  pair. Callers that omit it keep the delta-only test byte-identically. */
+  cascade?: { tokens: Record<string, string>; lits?: Record<string, string> },
 ): TextCtx {
   const next: TextCtx = { ...ctx };
   const inFlowInsets = absoluteThisCombo === undefined ? (declared?.position ?? 'static') !== 'absolute' : !absoluteThisCombo;
@@ -2020,8 +2034,12 @@ function applyTokens(
   // side resolves to the same variable; disagreeing sides keep the CSS-side
   // truth (the same one-paint limit the per-side width fields do not have).
   const SIDE_COLOR_CHANNELS = ['border-top-color', 'border-right-color', 'border-bottom-color', 'border-left-color'];
-  const sidePaths = SIDE_COLOR_CHANNELS.filter((chn) => tokens[chn] !== undefined).map((chn) => {
-    let p = tokens[chn].slice(1, -1);
+  // THE CASCADE, on the side colours too: a state that repaints THREE sides
+  // still draws the fourth with the resting hue. `tokens` first, resting
+  // behind it — and with no `cascade` this is exactly the old expression.
+  const sideRef = (chn: string): string | undefined => tokens[chn] ?? cascade?.tokens[chn];
+  const sidePaths = SIDE_COLOR_CHANNELS.filter((chn) => sideRef(chn) !== undefined).map((chn) => {
+    let p = sideRef(chn)!.slice(1, -1);
     for (const [propName, value] of Object.entries(subst)) p = p.replaceAll(`{${propName}}`, value);
     return p;
   });
@@ -2037,14 +2055,44 @@ function applyTokens(
   // token arm cannot check its value here (the ref may resolve per combo);
   // the literal arm can, and `border-width: 0px` is precisely the
   // focus-ring-reservation shape this guard exists to refuse, so it is tested.
+  const widthInks = (v: string | undefined): boolean => {
+    if (v === undefined) return false;
+    const n = parseLitPx(v);
+    return n !== undefined && n > 0;
+  };
+  /** A BOUND width the CASCADE lends, asked the same value question the
+   *  literal arm asks.
+   *
+   *  RC3 — the width test on THIS plane's own map stays presence-only, exactly
+   *  as it was ("the ref may resolve per combo"). The cascade arm cannot: it
+   *  is a NEW door, and a state that repaints the border of a part whose
+   *  resting width is a bound ZERO (`{imported.shared.size-0}` — the
+   *  focus-ring-reservation idiom spelled with a token instead of a literal)
+   *  would otherwise complete the pair and draw an opaque ring around a
+   *  component CSS leaves bare. `subst` is in hand and `colorRefPaints` two
+   *  functions up already resolves a bound COLOUR exactly this way. A ref that
+   *  does NOT resolve to a px literal keeps the presence answer.
+   *
+   *  MEASURED, AND LEFT ALONE ON PURPOSE: asking the same question of THIS
+   *  plane's own `tokens` map changes 19 committed scripts across 8 libraries
+   *  — it deletes the manufactured strokes on antd.card Borderless, mui.paper
+   *  / mui.accordion / mui.button, carbon.button danger--primary, tailwind
+   *  .button and fluent.button / tab-list, every one of which binds a border
+   *  colour over a width that resolves to 0. That is a real defect and a real
+   *  fix, and it is NOT this round's: it moves ink in seven libraries this
+   *  class never measured. Named in this round's residual walls instead. */
+  const cascadeWidthInks = (ref: string | undefined): boolean => {
+    if (ref === undefined) return false;
+    let path = ref.slice(1, -1);
+    for (const [propName, value] of Object.entries(subst)) path = path.replaceAll(`{${propName}}`, value);
+    const resolved = resolveLiteral(path);
+    if (resolved === undefined || resolved === null) return true;
+    const n = parseLitPx(String(resolved));
+    return n === undefined ? true : n > 0;
+  };
   const hasWidthSource =
-    BORDER_WIDTH_CHANNELS.some((chn) => tokens[chn] !== undefined) ||
-    BORDER_WIDTH_CHANNELS.some((chn) => {
-      const v = lits?.[chn];
-      if (v === undefined) return false;
-      const n = parseLitPx(v);
-      return n !== undefined && n > 0;
-    });
+    BORDER_WIDTH_CHANNELS.some((chn) => tokens[chn] !== undefined || cascadeWidthInks(cascade?.tokens[chn])) ||
+    BORDER_WIDTH_CHANNELS.some((chn) => widthInks(lits?.[chn]) || widthInks(cascade?.lits?.[chn]));
   const uniformSideStroke = sidePaths.length > 0 && sideValues.size === 1 && hasWidthSource ? figmaName(sidePaths[0]) : null;
   // Decided BEFORE the loop so it cannot depend on which channel the switch
   // happens to reach first: a Figma node has ONE strokes paint, so a drawn
@@ -2090,7 +2138,13 @@ function applyTokens(
       case 'border-right-color':
       case 'border-bottom-color':
       case 'border-left-color':
-        if (uniformSideStroke !== null && spec.stroke === undefined) spec.stroke = uniformSideStroke;
+        // `spec.stroke === undefined` is the intra-call precedence guard (one
+        // strokes paint; the BORDER wins over a drawn outline). A STATE DELTA
+        // is a different call over an ALREADY-STYLED spec — the base plane put
+        // its resting hue there — so that guard, unqualified, made every state
+        // border-colour override a silent no-op. A state that names the
+        // channel is the more specific rule and repaints.
+        if (uniformSideStroke !== null && (spec.stroke === undefined || cascade !== undefined)) spec.stroke = uniformSideStroke;
         // fix 3: ONE strokes paint list serves all four sides (matrix §2), so
         // per-side colours only lower when every carried side agrees AND a
         // width source exists. Disagreeing sides used to no-op in silence.
@@ -5270,6 +5324,13 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
           subst,
           baseCtx,
           root.hugsBelowMaxWidth,
+          undefined,
+          undefined,
+          undefined,
+          // RC3 — this call is a STATE DELTA over the root's resting plane, and
+          // the width half of a repainted border lives down there. See the
+          // `cascade` parameter's own comment on applyTokens.
+          { tokens: resolveTokens(root, subst), lits: resolveLiterals(root, subst) },
         );
         applyStylesWhenOpacity(rootSpec, root, contract, subst);
         boundFullBleedScrimRoot(rootSpec, root, subst, scrimNotes);

@@ -1404,7 +1404,7 @@ const COMPONENTS = [
             "varName": "imported/input/root/width"
           },
           "fill": "imported/input/root/background-color-state-disabled/outlined",
-          "stroke": "imported/input/root/border-top-color/error/outlined",
+          "stroke": "imported/input/root/border-top-color-state-disabled/unset/outlined",
           "clipsContent": true,
           "children": [
             {
@@ -1516,7 +1516,7 @@ const COMPONENTS = [
             "varName": "imported/input/root/width"
           },
           "fill": "imported/input/root/background-color-state-disabled/filled",
-          "stroke": "imported/input/root/border-top-color/error/filled",
+          "stroke": "imported/input/root/border-top-color-state-disabled/unset/filled",
           "clipsContent": true,
           "children": [
             {
@@ -1627,7 +1627,7 @@ const COMPONENTS = [
             "varName": "imported/input/root/width"
           },
           "fill": "imported/input/root/background-color-state-focus-visible/outlined",
-          "stroke": "imported/input/root/border-top-color/error/outlined",
+          "stroke": "imported/input/root/border-top-color-state-focus-visible/unset/outlined",
           "clipsContent": true,
           "effectStack": [
             {
@@ -1754,7 +1754,7 @@ const COMPONENTS = [
             "varName": "imported/input/root/width"
           },
           "fill": "imported/input/root/background-color-state-focus-visible/filled",
-          "stroke": "imported/input/root/border-top-color/error/filled",
+          "stroke": "imported/input/root/border-top-color-state-focus-visible/unset/filled",
           "clipsContent": true,
           "effectStack": [],
           "children": [
@@ -1867,7 +1867,7 @@ const COMPONENTS = [
             "varName": "imported/input/root/width"
           },
           "fill": "imported/input/root/background-color-state-hover/unset/outlined",
-          "stroke": "imported/input/root/border-top-color/error/outlined",
+          "stroke": "imported/input/root/border-top-color-state-hover/unset/outlined",
           "clipsContent": true,
           "children": [
             {
@@ -1979,7 +1979,7 @@ const COMPONENTS = [
             "varName": "imported/input/root/width"
           },
           "fill": "imported/input/root/background-color-state-hover/unset/filled",
-          "stroke": "imported/input/root/border-top-color/error/filled",
+          "stroke": "imported/input/root/border-top-color-state-hover/unset/filled",
           "clipsContent": true,
           "children": [
             {
@@ -2090,7 +2090,7 @@ const COMPONENTS = [
             "varName": "imported/input/root/width"
           },
           "fill": "imported/input/root/background-color-state-active/outlined",
-          "stroke": "imported/input/root/border-top-color/error/outlined",
+          "stroke": "imported/input/root/border-top-color-state-active/unset/outlined",
           "clipsContent": true,
           "effectStack": [
             {
@@ -2217,7 +2217,7 @@ const COMPONENTS = [
             "varName": "imported/input/root/width"
           },
           "fill": "imported/input/root/background-color-state-active/filled",
-          "stroke": "imported/input/root/border-top-color/error/filled",
+          "stroke": "imported/input/root/border-top-color-state-active/unset/filled",
           "clipsContent": true,
           "effectStack": [],
           "children": [
@@ -2583,12 +2583,10 @@ const COMPONENTS = [
         "value": "{imported.input.root.border-bottom-color-state-active.unset.{variant}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 4,
+          "count": 2,
           "of": 40,
           "names": [
-            "Size=Middle, Status=Error, Variant=Outlined, State=Active",
             "Size=Middle, Status=Error, Variant=Borderless, State=Active",
-            "Size=Middle, Status=Error, Variant=Filled, State=Active",
             "Size=Middle, Status=Error, Variant=Underlined, State=Active"
           ]
         }
@@ -2600,12 +2598,10 @@ const COMPONENTS = [
         "value": "{imported.input.root.border-bottom-color-state-disabled.unset.{variant}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 4,
+          "count": 2,
           "of": 40,
           "names": [
-            "Size=Middle, Status=Error, Variant=Outlined, State=Disabled",
             "Size=Middle, Status=Error, Variant=Borderless, State=Disabled",
-            "Size=Middle, Status=Error, Variant=Filled, State=Disabled",
             "Size=Middle, Status=Error, Variant=Underlined, State=Disabled"
           ]
         }
@@ -2617,12 +2613,10 @@ const COMPONENTS = [
         "value": "{imported.input.root.border-bottom-color-state-focus-visible.unset.{variant}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 4,
+          "count": 2,
           "of": 40,
           "names": [
-            "Size=Middle, Status=Error, Variant=Outlined, State=Focus Visible",
             "Size=Middle, Status=Error, Variant=Borderless, State=Focus Visible",
-            "Size=Middle, Status=Error, Variant=Filled, State=Focus Visible",
             "Size=Middle, Status=Error, Variant=Underlined, State=Focus Visible"
           ]
         }
@@ -2634,12 +2628,10 @@ const COMPONENTS = [
         "value": "{imported.input.root.border-bottom-color-state-hover.unset.{variant}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 4,
+          "count": 2,
           "of": 40,
           "names": [
-            "Size=Middle, Status=Error, Variant=Outlined, State=Hover",
             "Size=Middle, Status=Error, Variant=Borderless, State=Hover",
-            "Size=Middle, Status=Error, Variant=Filled, State=Hover",
             "Size=Middle, Status=Error, Variant=Underlined, State=Hover"
           ]
         }
@@ -2687,12 +2679,10 @@ const COMPONENTS = [
         "value": "{imported.input.root.border-left-color-state-active.unset.{variant}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 4,
+          "count": 2,
           "of": 40,
           "names": [
-            "Size=Middle, Status=Error, Variant=Outlined, State=Active",
             "Size=Middle, Status=Error, Variant=Borderless, State=Active",
-            "Size=Middle, Status=Error, Variant=Filled, State=Active",
             "Size=Middle, Status=Error, Variant=Underlined, State=Active"
           ]
         }
@@ -2704,12 +2694,10 @@ const COMPONENTS = [
         "value": "{imported.input.root.border-left-color-state-disabled.unset.{variant}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 4,
+          "count": 2,
           "of": 40,
           "names": [
-            "Size=Middle, Status=Error, Variant=Outlined, State=Disabled",
             "Size=Middle, Status=Error, Variant=Borderless, State=Disabled",
-            "Size=Middle, Status=Error, Variant=Filled, State=Disabled",
             "Size=Middle, Status=Error, Variant=Underlined, State=Disabled"
           ]
         }
@@ -2721,12 +2709,10 @@ const COMPONENTS = [
         "value": "{imported.input.root.border-left-color-state-focus-visible.unset.{variant}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 4,
+          "count": 2,
           "of": 40,
           "names": [
-            "Size=Middle, Status=Error, Variant=Outlined, State=Focus Visible",
             "Size=Middle, Status=Error, Variant=Borderless, State=Focus Visible",
-            "Size=Middle, Status=Error, Variant=Filled, State=Focus Visible",
             "Size=Middle, Status=Error, Variant=Underlined, State=Focus Visible"
           ]
         }
@@ -2738,12 +2724,10 @@ const COMPONENTS = [
         "value": "{imported.input.root.border-left-color-state-hover.unset.{variant}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 4,
+          "count": 2,
           "of": 40,
           "names": [
-            "Size=Middle, Status=Error, Variant=Outlined, State=Hover",
             "Size=Middle, Status=Error, Variant=Borderless, State=Hover",
-            "Size=Middle, Status=Error, Variant=Filled, State=Hover",
             "Size=Middle, Status=Error, Variant=Underlined, State=Hover"
           ]
         }
@@ -2791,12 +2775,10 @@ const COMPONENTS = [
         "value": "{imported.input.root.border-right-color-state-active.unset.{variant}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 4,
+          "count": 2,
           "of": 40,
           "names": [
-            "Size=Middle, Status=Error, Variant=Outlined, State=Active",
             "Size=Middle, Status=Error, Variant=Borderless, State=Active",
-            "Size=Middle, Status=Error, Variant=Filled, State=Active",
             "Size=Middle, Status=Error, Variant=Underlined, State=Active"
           ]
         }
@@ -2808,12 +2790,10 @@ const COMPONENTS = [
         "value": "{imported.input.root.border-right-color-state-disabled.unset.{variant}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 4,
+          "count": 2,
           "of": 40,
           "names": [
-            "Size=Middle, Status=Error, Variant=Outlined, State=Disabled",
             "Size=Middle, Status=Error, Variant=Borderless, State=Disabled",
-            "Size=Middle, Status=Error, Variant=Filled, State=Disabled",
             "Size=Middle, Status=Error, Variant=Underlined, State=Disabled"
           ]
         }
@@ -2825,12 +2805,10 @@ const COMPONENTS = [
         "value": "{imported.input.root.border-right-color-state-focus-visible.unset.{variant}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 4,
+          "count": 2,
           "of": 40,
           "names": [
-            "Size=Middle, Status=Error, Variant=Outlined, State=Focus Visible",
             "Size=Middle, Status=Error, Variant=Borderless, State=Focus Visible",
-            "Size=Middle, Status=Error, Variant=Filled, State=Focus Visible",
             "Size=Middle, Status=Error, Variant=Underlined, State=Focus Visible"
           ]
         }
@@ -2842,12 +2820,10 @@ const COMPONENTS = [
         "value": "{imported.input.root.border-right-color-state-hover.unset.{variant}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 4,
+          "count": 2,
           "of": 40,
           "names": [
-            "Size=Middle, Status=Error, Variant=Outlined, State=Hover",
             "Size=Middle, Status=Error, Variant=Borderless, State=Hover",
-            "Size=Middle, Status=Error, Variant=Filled, State=Hover",
             "Size=Middle, Status=Error, Variant=Underlined, State=Hover"
           ]
         }
@@ -2895,12 +2871,10 @@ const COMPONENTS = [
         "value": "{imported.input.root.border-top-color-state-active.unset.{variant}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 4,
+          "count": 2,
           "of": 40,
           "names": [
-            "Size=Middle, Status=Error, Variant=Outlined, State=Active",
             "Size=Middle, Status=Error, Variant=Borderless, State=Active",
-            "Size=Middle, Status=Error, Variant=Filled, State=Active",
             "Size=Middle, Status=Error, Variant=Underlined, State=Active"
           ]
         }
@@ -2912,12 +2886,10 @@ const COMPONENTS = [
         "value": "{imported.input.root.border-top-color-state-disabled.unset.{variant}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 4,
+          "count": 2,
           "of": 40,
           "names": [
-            "Size=Middle, Status=Error, Variant=Outlined, State=Disabled",
             "Size=Middle, Status=Error, Variant=Borderless, State=Disabled",
-            "Size=Middle, Status=Error, Variant=Filled, State=Disabled",
             "Size=Middle, Status=Error, Variant=Underlined, State=Disabled"
           ]
         }
@@ -2929,12 +2901,10 @@ const COMPONENTS = [
         "value": "{imported.input.root.border-top-color-state-focus-visible.unset.{variant}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 4,
+          "count": 2,
           "of": 40,
           "names": [
-            "Size=Middle, Status=Error, Variant=Outlined, State=Focus Visible",
             "Size=Middle, Status=Error, Variant=Borderless, State=Focus Visible",
-            "Size=Middle, Status=Error, Variant=Filled, State=Focus Visible",
             "Size=Middle, Status=Error, Variant=Underlined, State=Focus Visible"
           ]
         }
@@ -2946,12 +2916,10 @@ const COMPONENTS = [
         "value": "{imported.input.root.border-top-color-state-hover.unset.{variant}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 4,
+          "count": 2,
           "of": 40,
           "names": [
-            "Size=Middle, Status=Error, Variant=Outlined, State=Hover",
             "Size=Middle, Status=Error, Variant=Borderless, State=Hover",
-            "Size=Middle, Status=Error, Variant=Filled, State=Hover",
             "Size=Middle, Status=Error, Variant=Underlined, State=Hover"
           ]
         }

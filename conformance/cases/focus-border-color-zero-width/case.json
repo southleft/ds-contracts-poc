@@ -1,0 +1,29 @@
+{
+  "id": "focus-border-color-zero-width",
+  "feature": "interaction-states",
+  "construct": "the SAME state-only `border-color` repaint as focus-border-color-state, but the resting plane is `border-width: 0px` over a transparent colour \u2014 CSS paints no border at any hue",
+  "why": "THE ANTI-LOOSENING GUARD. Reading the state's border through the CSS cascade \u2014 the override's colour over the resting width \u2014 is what lets a keyword-thin focus ring lower; the SAME reading must not manufacture one where the resting width is ZERO. `border-color` with `border-width: 0` is invisible in CSS, and lowering it would let the renderer's 1px default draw a ring the component never has \u2014 the HARMFUL class, and the exact failure `hasWidthSource`'s own comment exists to prevent. The cascade widens WHERE the width comes from, never whether it inks.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.states.focus-visible.border-top-color (the CSS half carries the colour faithfully; the refusal this case guards is the CANVAS half)",
+  "observable": {
+    "part": "root",
+    "channel": "border-top-color",
+    "capturedValue": "rgb(161, 161, 161)"
+  },
+  "statePreviews": true,
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "nothing may draw: a stroke here is a ring around a component the library renders with none, at every hue"
+  },
+  "axes": [
+    {
+      "prop": "size",
+      "values": [
+        "sm",
+        "lg"
+      ],
+      "default": "sm"
+    }
+  ]
+}

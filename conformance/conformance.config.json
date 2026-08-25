@@ -338,6 +338,26 @@
       "axes": []
     },
     {
+      "__case": "interaction-states: a resting BORDER (1px solid #d4d4d8) whose `:focus-visible` rule repaints ONLY `border-color` — the state plane carries the four side colours and no width of its own — declared CARRIED",
+      "name": "CaseFocusBorderColorState",
+      "importName": "CaseFocusBorderColorState",
+      "contract": "conformance/seeds/focus-border-color-state.contract.json",
+      "sampleText": "",
+      "axes": [
+        "size"
+      ]
+    },
+    {
+      "__case": "interaction-states: the SAME state-only `border-color` repaint as focus-border-color-state, but the resting plane is `border-width: 0px` over a transparent colour — CSS paints no border at any hue — declared CARRIED",
+      "name": "CaseFocusBorderColorZeroWidth",
+      "importName": "CaseFocusBorderColorZeroWidth",
+      "contract": "conformance/seeds/focus-border-color-zero-width.contract.json",
+      "sampleText": "",
+      "axes": [
+        "size"
+      ]
+    },
+    {
       "__case": "interaction-states: a link whose focus ring is spelled ONLY as a KEYWORD flip — the rest plane carries `outline-width: 3px; outline-style: none` with no `outline-color` of its own (so it computes to `currentColor`), and `:focus-visible` sets `outline-style: solid; outline-width: 2px; outline-offset: 2px` and nothing else — declared CARRIED",
       "name": "CaseFocusRingDeclaredStyleOnly",
       "importName": "CaseFocusRingDeclaredStyleOnly",

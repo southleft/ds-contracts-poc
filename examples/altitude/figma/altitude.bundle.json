@@ -7807,11 +7807,10 @@
           "value": "{imported.button.root.border-bottom-color-state-hover.unset}",
           "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
           "variants": {
-            "count": 4,
+            "count": 3,
             "of": 12,
             "names": [
               "Variant=Secondary, State=Hover",
-              "Variant=Tertiary, State=Hover",
               "Variant=Bare, State=Hover",
               "Variant=Danger, State=Hover"
             ]
@@ -7824,11 +7823,10 @@
           "value": "{imported.button.root.border-left-color-state-hover.unset}",
           "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
           "variants": {
-            "count": 4,
+            "count": 3,
             "of": 12,
             "names": [
               "Variant=Secondary, State=Hover",
-              "Variant=Tertiary, State=Hover",
               "Variant=Bare, State=Hover",
               "Variant=Danger, State=Hover"
             ]
@@ -7841,11 +7839,10 @@
           "value": "{imported.button.root.border-right-color-state-hover.unset}",
           "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
           "variants": {
-            "count": 4,
+            "count": 3,
             "of": 12,
             "names": [
               "Variant=Secondary, State=Hover",
-              "Variant=Tertiary, State=Hover",
               "Variant=Bare, State=Hover",
               "Variant=Danger, State=Hover"
             ]
@@ -7858,11 +7855,10 @@
           "value": "{imported.button.root.border-top-color-state-hover.unset}",
           "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
           "variants": {
-            "count": 4,
+            "count": 3,
             "of": 12,
             "names": [
               "Variant=Secondary, State=Hover",
-              "Variant=Tertiary, State=Hover",
               "Variant=Bare, State=Hover",
               "Variant=Danger, State=Hover"
             ]

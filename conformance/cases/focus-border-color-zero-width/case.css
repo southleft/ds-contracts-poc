@@ -1,0 +1,4 @@
+[data-cf="focus-border-color-zero-width"] { display: inline-flex; align-items: center; background: rgb(228, 228, 231); border-style: solid; border-width: 0px; border-color: rgba(0, 0, 0, 0); border-radius: 9999px; padding: 2px; outline-style: none; outline-width: 0px; outline-color: rgba(0, 0, 0, 0); }
+[data-cf="focus-border-color-zero-width"][data-size="sm"] { width: 32px; height: 18px; }
+[data-cf="focus-border-color-zero-width"][data-size="lg"] { width: 44px; height: 24px; }
+[data-cf="focus-border-color-zero-width"]:focus-visible { border-color: rgb(161, 161, 161); }

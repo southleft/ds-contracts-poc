@@ -3836,7 +3836,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/button/root/background-color-state-disabled/outlined",
-          "stroke": "imported/button/root/border-top-color/outlined/primary",
+          "stroke": "imported/button/root/border-top-color-state-disabled/outlined",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-4",
             "bottomRightRadius": "imported/shared/size-4",
@@ -4456,12 +4456,11 @@ const COMPONENTS = [
         "value": "{imported.button.root.border-bottom-color-state-disabled.{variant}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 3,
+          "count": 2,
           "of": 75,
           "names": [
             "Variant=Text, Color=Primary, Size=Medium, State=Disabled",
-            "Variant=Contained, Color=Primary, Size=Medium, State=Disabled",
-            "Variant=Outlined, Color=Primary, Size=Medium, State=Disabled"
+            "Variant=Contained, Color=Primary, Size=Medium, State=Disabled"
           ]
         }
       },
@@ -4472,12 +4471,11 @@ const COMPONENTS = [
         "value": "{imported.button.root.border-left-color-state-disabled.{variant}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 3,
+          "count": 2,
           "of": 75,
           "names": [
             "Variant=Text, Color=Primary, Size=Medium, State=Disabled",
-            "Variant=Contained, Color=Primary, Size=Medium, State=Disabled",
-            "Variant=Outlined, Color=Primary, Size=Medium, State=Disabled"
+            "Variant=Contained, Color=Primary, Size=Medium, State=Disabled"
           ]
         }
       },
@@ -4488,12 +4486,11 @@ const COMPONENTS = [
         "value": "{imported.button.root.border-right-color-state-disabled.{variant}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 3,
+          "count": 2,
           "of": 75,
           "names": [
             "Variant=Text, Color=Primary, Size=Medium, State=Disabled",
-            "Variant=Contained, Color=Primary, Size=Medium, State=Disabled",
-            "Variant=Outlined, Color=Primary, Size=Medium, State=Disabled"
+            "Variant=Contained, Color=Primary, Size=Medium, State=Disabled"
           ]
         }
       },
@@ -4504,12 +4501,11 @@ const COMPONENTS = [
         "value": "{imported.button.root.border-top-color-state-disabled.{variant}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 3,
+          "count": 2,
           "of": 75,
           "names": [
             "Variant=Text, Color=Primary, Size=Medium, State=Disabled",
-            "Variant=Contained, Color=Primary, Size=Medium, State=Disabled",
-            "Variant=Outlined, Color=Primary, Size=Medium, State=Disabled"
+            "Variant=Contained, Color=Primary, Size=Medium, State=Disabled"
           ]
         }
       },

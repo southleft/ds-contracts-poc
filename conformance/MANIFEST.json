@@ -2,9 +2,9 @@
   "_marker": "THE DENOMINATOR. Hand-authored per case, generated into one index. Deliberately NOT derived from isFusable / styled / DECLARED_CHANNELS / CHANNEL_TO_COMPUTED / TOKEN_CHANNELS / carriedParts — every instrument in the pipeline derives its denominator from the same filter that decides carriage, which is why a channel the filter never opened scores 100%. This file is the independent one.",
   "generatedBy": "conformance/build.ts",
   "library": "@ds-contracts/conformance@0.1.0",
-  "count": 105,
+  "count": 107,
   "byExpectation": {
-    "CARRIED": 61,
+    "CARRIED": 63,
     "LOWERED": 4,
     "REFUSED": 22,
     "UNSUPPORTED": 18
@@ -675,6 +675,66 @@
         "expect": "PRESENT",
         "note": "itemSpacing"
       }
+    },
+    {
+      "id": "focus-border-color-state",
+      "feature": "interaction-states",
+      "construct": "a resting BORDER (1px solid #d4d4d8) whose `:focus-visible` rule repaints ONLY `border-color` — the state plane carries the four side colours and no width of its own",
+      "why": "SHADCN SWITCH'S EXACT SHAPE, and the residual an adversarial verifier left on this class's own fixed row. Tailwind v4 spells the focused switch `focus-visible:border-ring`, so examples/shadcn/contracts/switch.contract.json carries states['focus-visible'].border-{side}-color = {imported.shared.color-a1a1a1} over a resting 1px border. core/emit-figma-script.ts's applyTokens answers 'is there a border width?' from the map it was HANDED, and for a state preview that map is the DELTA — so the four opaque sides were refused with a sentence false on both counts, 'per-side border COLOURS disagree (or no border width is carried)': the sides agree, and the width is carried one plane down. The second half is the stroke write itself, gated on `spec.stroke === undefined` — an intra-call precedence rule (one Figma strokes paint; the border beats a drawn outline) that, unqualified, makes EVERY state border-colour override a silent no-op over an already-styled spec.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.states.focus-visible.border-top-color (the width stays on the resting plane, which is what a cascade is)",
+      "observable": {
+        "part": "root",
+        "channel": "border-top-color",
+        "capturedValue": "rgb(161, 161, 161)"
+      },
+      "statePreviews": true,
+      "canvas": {
+        "expect": "PRESENT",
+        "mustDraw": true,
+        "note": "the State=Focus Visible preview must carry the REPAINTED stroke (#a1a1a1), not the resting #d4d4d8 the base cell draws. A receipt naming the channel over the WRONG value is not a wall, so this case declares mustMatch as well as mustDraw.",
+        "mustMatch": true
+      },
+      "axes": [
+        {
+          "prop": "size",
+          "values": [
+            "sm",
+            "lg"
+          ],
+          "default": "sm"
+        }
+      ]
+    },
+    {
+      "id": "focus-border-color-zero-width",
+      "feature": "interaction-states",
+      "construct": "the SAME state-only `border-color` repaint as focus-border-color-state, but the resting plane is `border-width: 0px` over a transparent colour — CSS paints no border at any hue",
+      "why": "THE ANTI-LOOSENING GUARD. Reading the state's border through the CSS cascade — the override's colour over the resting width — is what lets a keyword-thin focus ring lower; the SAME reading must not manufacture one where the resting width is ZERO. `border-color` with `border-width: 0` is invisible in CSS, and lowering it would let the renderer's 1px default draw a ring the component never has — the HARMFUL class, and the exact failure `hasWidthSource`'s own comment exists to prevent. The cascade widens WHERE the width comes from, never whether it inks.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.states.focus-visible.border-top-color (the CSS half carries the colour faithfully; the refusal this case guards is the CANVAS half)",
+      "observable": {
+        "part": "root",
+        "channel": "border-top-color",
+        "capturedValue": "rgb(161, 161, 161)"
+      },
+      "statePreviews": true,
+      "canvas": {
+        "expect": "ABSENT",
+        "note": "nothing may draw: a stroke here is a ring around a component the library renders with none, at every hue"
+      },
+      "axes": [
+        {
+          "prop": "size",
+          "values": [
+            "sm",
+            "lg"
+          ],
+          "default": "sm"
+        }
+      ]
     },
     {
       "id": "focus-ring-declared-style-only",

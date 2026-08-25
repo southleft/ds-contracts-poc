@@ -524,7 +524,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/button/root/background-color-state-hover/unset",
-          "stroke": "imported/button/root/border-top-color/tertiary",
+          "stroke": "imported/button/root/border-top-color-state-hover/unset",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-4",
             "bottomRightRadius": "imported/shared/size-4",
@@ -733,11 +733,10 @@ const COMPONENTS = [
         "value": "{imported.button.root.border-bottom-color-state-hover.unset}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 4,
+          "count": 3,
           "of": 12,
           "names": [
             "Variant=Secondary, State=Hover",
-            "Variant=Tertiary, State=Hover",
             "Variant=Bare, State=Hover",
             "Variant=Danger, State=Hover"
           ]
@@ -750,11 +749,10 @@ const COMPONENTS = [
         "value": "{imported.button.root.border-left-color-state-hover.unset}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 4,
+          "count": 3,
           "of": 12,
           "names": [
             "Variant=Secondary, State=Hover",
-            "Variant=Tertiary, State=Hover",
             "Variant=Bare, State=Hover",
             "Variant=Danger, State=Hover"
           ]
@@ -767,11 +765,10 @@ const COMPONENTS = [
         "value": "{imported.button.root.border-right-color-state-hover.unset}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 4,
+          "count": 3,
           "of": 12,
           "names": [
             "Variant=Secondary, State=Hover",
-            "Variant=Tertiary, State=Hover",
             "Variant=Bare, State=Hover",
             "Variant=Danger, State=Hover"
           ]
@@ -784,11 +781,10 @@ const COMPONENTS = [
         "value": "{imported.button.root.border-top-color-state-hover.unset}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 4,
+          "count": 3,
           "of": 12,
           "names": [
             "Variant=Secondary, State=Hover",
-            "Variant=Tertiary, State=Hover",
             "Variant=Bare, State=Hover",
             "Variant=Danger, State=Hover"
           ]

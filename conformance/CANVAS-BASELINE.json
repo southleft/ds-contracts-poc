@@ -2,8 +2,8 @@
   "_marker": "THE MEASURED ROUND TRIP — contract → Figma (mock) → dump → propose ≡ contract, per conformance case, on the case's own channel. Every SILENT entry is an OPEN DEFECT the engine must name or carry; it is never waivable and leaves this file only by being fixed. The gate refuses drift in EITHER direction: a regression is red, and an improvement must be re-recorded here so a fix can never be absorbed silently.",
   "measuredAt": "extract/computed/out/conformance/<case>/enriched.contract.json through figma-sync/plugin/engine (mock figma) and core/propose-figma (npx tsx conformance/canvas.ts)",
   "counts": {
-    "ROUND-TRIPPED": 35,
-    "NAMED": 15,
+    "ROUND-TRIPPED": 36,
+    "NAMED": 16,
     "DRIFTED": 0,
     "HARMFUL": 0,
     "MUTE": 0,
@@ -303,6 +303,28 @@
       "refIdentical": true,
       "channelAs": "gap",
       "note": "channel respelled: column-gap → gap"
+    },
+    "focus-border-color-state": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "border-top-color",
+      "seed": [
+        "#a1a1a1"
+      ],
+      "proposed": [
+        "#a1a1a1",
+        "#d4d4d8"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "focus-border-color-zero-width": {
+      "classification": "NAMED",
+      "channel": "border-top-color",
+      "seed": [
+        "#a1a1a1"
+      ],
+      "proposed": [],
+      "note": "code-only channel root.border-top-color = {imported.shared.color-a1a1a1} — per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides."
     },
     "focus-ring-declared-style-only": {
       "classification": "ROUND-TRIPPED",

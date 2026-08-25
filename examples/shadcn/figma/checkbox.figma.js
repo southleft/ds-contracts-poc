@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "shadcn.checkbox",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Checkbox — generated from contract shadcn.checkbox v0.2.0 † (23 code-only facts — see plugin report)",
+    "description": "Checkbox — generated from contract shadcn.checkbox v0.2.0 † (19 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -700,7 +700,7 @@ const COMPONENTS = [
             "varName": "imported/checkbox/root/width"
           },
           "fill": "imported/checkbox/root/background-color/unchecked",
-          "stroke": "imported/checkbox/root/border-top-color/unchecked",
+          "stroke": "imported/shared/color-a1a1a1",
           "children": []
         }
       },
@@ -793,7 +793,7 @@ const COMPONENTS = [
             "varName": "imported/checkbox/root/width"
           },
           "fill": "imported/checkbox/root/background-color/checked",
-          "stroke": "imported/checkbox/root/border-top-color/checked",
+          "stroke": "imported/shared/color-a1a1a1",
           "children": [
             {
               "type": "svg",
@@ -894,7 +894,7 @@ const COMPONENTS = [
             "varName": "imported/checkbox/root/width"
           },
           "fill": "imported/checkbox/root/background-color/indeterminate",
-          "stroke": "imported/checkbox/root/border-top-color/indeterminate",
+          "stroke": "imported/shared/color-a1a1a1",
           "children": [
             {
               "type": "svg",
@@ -971,70 +971,6 @@ const COMPONENTS = [
         "variants": {
           "count": 9,
           "of": 9
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-bottom-color",
-        "value": "{imported.shared.color-a1a1a1}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 3,
-          "of": 9,
-          "names": [
-            "Checked=Unchecked, State=Focus Visible",
-            "Checked=Checked, State=Focus Visible",
-            "Checked=Indeterminate, State=Focus Visible"
-          ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-left-color",
-        "value": "{imported.shared.color-a1a1a1}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 3,
-          "of": 9,
-          "names": [
-            "Checked=Unchecked, State=Focus Visible",
-            "Checked=Checked, State=Focus Visible",
-            "Checked=Indeterminate, State=Focus Visible"
-          ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-right-color",
-        "value": "{imported.shared.color-a1a1a1}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 3,
-          "of": 9,
-          "names": [
-            "Checked=Unchecked, State=Focus Visible",
-            "Checked=Checked, State=Focus Visible",
-            "Checked=Indeterminate, State=Focus Visible"
-          ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-top-color",
-        "value": "{imported.shared.color-a1a1a1}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 3,
-          "of": 9,
-          "names": [
-            "Checked=Unchecked, State=Focus Visible",
-            "Checked=Checked, State=Focus Visible",
-            "Checked=Indeterminate, State=Focus Visible"
-          ]
         }
       },
       {

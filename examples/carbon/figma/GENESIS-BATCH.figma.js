@@ -5915,7 +5915,7 @@ const COMPONENTS = [
           },
           "hugCeiling": true,
           "fill": "imported/button/root/background-color-state-disabled/primary",
-          "stroke": "imported/button/root/border-top-color/primary",
+          "stroke": "imported/button/root/border-top-color-state-disabled/primary",
           "children": [
             {
               "type": "text",
@@ -5965,7 +5965,7 @@ const COMPONENTS = [
           },
           "hugCeiling": true,
           "fill": "imported/button/root/background-color-state-disabled/secondary",
-          "stroke": "imported/button/root/border-top-color/secondary",
+          "stroke": "imported/button/root/border-top-color-state-disabled/secondary",
           "children": [
             {
               "type": "text",
@@ -6015,7 +6015,7 @@ const COMPONENTS = [
           },
           "hugCeiling": true,
           "fill": "imported/button/root/background-color-state-disabled/tertiary",
-          "stroke": "imported/button/root/border-top-color/tertiary",
+          "stroke": "imported/button/root/border-top-color-state-disabled/tertiary",
           "children": [
             {
               "type": "text",
@@ -6065,7 +6065,7 @@ const COMPONENTS = [
           },
           "hugCeiling": true,
           "fill": "imported/button/root/background-color-state-disabled/ghost",
-          "stroke": "imported/button/root/border-top-color/ghost",
+          "stroke": "imported/button/root/border-top-color-state-disabled/ghost",
           "children": [
             {
               "type": "text",
@@ -6115,7 +6115,7 @@ const COMPONENTS = [
           },
           "hugCeiling": true,
           "fill": "imported/button/root/background-color-state-disabled/danger",
-          "stroke": "imported/button/root/border-top-color/danger",
+          "stroke": "imported/button/root/border-top-color-state-disabled/danger",
           "children": [
             {
               "type": "text",
@@ -6215,7 +6215,7 @@ const COMPONENTS = [
           },
           "hugCeiling": true,
           "fill": "imported/button/root/background-color-state-disabled/danger--ghost",
-          "stroke": "imported/button/root/border-top-color/danger--ghost",
+          "stroke": "imported/button/root/border-top-color-state-disabled/danger--ghost",
           "children": [
             {
               "type": "text",
@@ -6265,7 +6265,7 @@ const COMPONENTS = [
           },
           "hugCeiling": true,
           "fill": "imported/button/root/background-color-state-disabled/danger--tertiary",
-          "stroke": "imported/button/root/border-top-color/danger--tertiary",
+          "stroke": "imported/button/root/border-top-color-state-disabled/danger--tertiary",
           "children": [
             {
               "type": "text",
@@ -6315,7 +6315,7 @@ const COMPONENTS = [
           },
           "hugCeiling": true,
           "fill": "imported/button/root/background-color-state-active/primary",
-          "stroke": "imported/button/root/border-top-color/primary",
+          "stroke": "imported/button/root/border-top-color-state-active/primary",
           "effectStack": [
             {
               "inner": true,
@@ -6393,7 +6393,7 @@ const COMPONENTS = [
           },
           "hugCeiling": true,
           "fill": "imported/button/root/background-color-state-active/secondary",
-          "stroke": "imported/button/root/border-top-color/secondary",
+          "stroke": "imported/button/root/border-top-color-state-active/secondary",
           "effectStack": [
             {
               "inner": true,
@@ -6471,7 +6471,7 @@ const COMPONENTS = [
           },
           "hugCeiling": true,
           "fill": "imported/button/root/background-color-state-active/tertiary",
-          "stroke": "imported/button/root/border-top-color/tertiary",
+          "stroke": "imported/button/root/border-top-color-state-active/tertiary",
           "effectStack": [
             {
               "inner": true,
@@ -6549,7 +6549,7 @@ const COMPONENTS = [
           },
           "hugCeiling": true,
           "fill": "imported/button/root/background-color-state-active/ghost",
-          "stroke": "imported/button/root/border-top-color/ghost",
+          "stroke": "imported/button/root/border-top-color-state-active/ghost",
           "effectStack": [
             {
               "inner": true,
@@ -6627,7 +6627,7 @@ const COMPONENTS = [
           },
           "hugCeiling": true,
           "fill": "imported/button/root/background-color-state-active/danger",
-          "stroke": "imported/button/root/border-top-color/danger",
+          "stroke": "imported/button/root/border-top-color-state-active/danger",
           "effectStack": [
             {
               "inner": true,
@@ -6756,7 +6756,7 @@ const COMPONENTS = [
           },
           "hugCeiling": true,
           "fill": "imported/button/root/background-color-state-active/danger--ghost",
-          "stroke": "imported/button/root/border-top-color/danger--ghost",
+          "stroke": "imported/button/root/border-top-color-state-active/danger--ghost",
           "effectStack": [
             {
               "inner": true,
@@ -6834,7 +6834,7 @@ const COMPONENTS = [
           },
           "hugCeiling": true,
           "fill": "imported/button/root/background-color-state-active/danger--tertiary",
-          "stroke": "imported/button/root/border-top-color/danger--tertiary",
+          "stroke": "imported/button/root/border-top-color-state-active/danger--tertiary",
           "effectStack": [
             {
               "inner": true,
@@ -6912,7 +6912,7 @@ const COMPONENTS = [
           },
           "hugCeiling": true,
           "fill": "imported/button/root/background-color-state-focus-visible/primary",
-          "stroke": "imported/button/root/border-top-color/primary",
+          "stroke": "imported/button/root/border-top-color-state-focus-visible/primary",
           "effectStack": [
             {
               "inner": true,
@@ -6990,7 +6990,7 @@ const COMPONENTS = [
           },
           "hugCeiling": true,
           "fill": "imported/button/root/background-color-state-focus-visible/secondary",
-          "stroke": "imported/button/root/border-top-color/secondary",
+          "stroke": "imported/button/root/border-top-color-state-focus-visible/secondary",
           "effectStack": [
             {
               "inner": true,
@@ -7068,7 +7068,7 @@ const COMPONENTS = [
           },
           "hugCeiling": true,
           "fill": "imported/button/root/background-color-state-focus-visible/tertiary",
-          "stroke": "imported/button/root/border-top-color/tertiary",
+          "stroke": "imported/button/root/border-top-color-state-focus-visible/tertiary",
           "effectStack": [
             {
               "inner": true,
@@ -7146,7 +7146,7 @@ const COMPONENTS = [
           },
           "hugCeiling": true,
           "fill": "imported/button/root/background-color-state-focus-visible/ghost",
-          "stroke": "imported/button/root/border-top-color/ghost",
+          "stroke": "imported/button/root/border-top-color-state-focus-visible/ghost",
           "effectStack": [
             {
               "inner": true,
@@ -7224,7 +7224,7 @@ const COMPONENTS = [
           },
           "hugCeiling": true,
           "fill": "imported/button/root/background-color-state-focus-visible/danger",
-          "stroke": "imported/button/root/border-top-color/danger",
+          "stroke": "imported/button/root/border-top-color-state-focus-visible/danger",
           "effectStack": [
             {
               "inner": true,
@@ -7353,7 +7353,7 @@ const COMPONENTS = [
           },
           "hugCeiling": true,
           "fill": "imported/button/root/background-color-state-focus-visible/danger--ghost",
-          "stroke": "imported/button/root/border-top-color/danger--ghost",
+          "stroke": "imported/button/root/border-top-color-state-focus-visible/danger--ghost",
           "effectStack": [
             {
               "inner": true,
@@ -7431,7 +7431,7 @@ const COMPONENTS = [
           },
           "hugCeiling": true,
           "fill": "imported/button/root/background-color-state-focus-visible/danger--tertiary",
-          "stroke": "imported/button/root/border-top-color/danger--tertiary",
+          "stroke": "imported/button/root/border-top-color-state-focus-visible/danger--tertiary",
           "effectStack": [
             {
               "inner": true,
@@ -7509,7 +7509,7 @@ const COMPONENTS = [
           },
           "hugCeiling": true,
           "fill": "imported/button/root/background-color-state-hover/primary",
-          "stroke": "imported/button/root/border-top-color/primary",
+          "stroke": "imported/button/root/border-top-color-state-hover/primary",
           "children": [
             {
               "type": "text",
@@ -7559,7 +7559,7 @@ const COMPONENTS = [
           },
           "hugCeiling": true,
           "fill": "imported/button/root/background-color-state-hover/secondary",
-          "stroke": "imported/button/root/border-top-color/secondary",
+          "stroke": "imported/button/root/border-top-color-state-hover/secondary",
           "children": [
             {
               "type": "text",
@@ -7609,7 +7609,7 @@ const COMPONENTS = [
           },
           "hugCeiling": true,
           "fill": "imported/button/root/background-color-state-hover/tertiary",
-          "stroke": "imported/button/root/border-top-color/tertiary",
+          "stroke": "imported/button/root/border-top-color-state-hover/tertiary",
           "children": [
             {
               "type": "text",
@@ -7659,7 +7659,7 @@ const COMPONENTS = [
           },
           "hugCeiling": true,
           "fill": "imported/button/root/background-color-state-hover/ghost",
-          "stroke": "imported/button/root/border-top-color/ghost",
+          "stroke": "imported/button/root/border-top-color-state-hover/ghost",
           "children": [
             {
               "type": "text",
@@ -7709,7 +7709,7 @@ const COMPONENTS = [
           },
           "hugCeiling": true,
           "fill": "imported/button/root/background-color-state-hover/danger",
-          "stroke": "imported/button/root/border-top-color/danger",
+          "stroke": "imported/button/root/border-top-color-state-hover/danger",
           "children": [
             {
               "type": "text",
@@ -7809,7 +7809,7 @@ const COMPONENTS = [
           },
           "hugCeiling": true,
           "fill": "imported/button/root/background-color-state-hover/danger--ghost",
-          "stroke": "imported/button/root/border-top-color/danger--ghost",
+          "stroke": "imported/button/root/border-top-color-state-hover/danger--ghost",
           "children": [
             {
               "type": "text",
@@ -7859,7 +7859,7 @@ const COMPONENTS = [
           },
           "hugCeiling": true,
           "fill": "imported/button/root/background-color-state-hover/danger--tertiary",
-          "stroke": "imported/button/root/border-top-color/danger--tertiary",
+          "stroke": "imported/button/root/border-top-color-state-hover/danger--tertiary",
           "children": [
             {
               "type": "text",
@@ -7987,17 +7987,10 @@ const COMPONENTS = [
         "value": "{imported.button.root.border-bottom-color-state-active.{kind}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 8,
+          "count": 1,
           "of": 80,
           "names": [
-            "Kind=Primary, Size=Xs, State=Active",
-            "Kind=Secondary, Size=Xs, State=Active",
-            "Kind=Tertiary, Size=Xs, State=Active",
-            "Kind=Ghost, Size=Xs, State=Active",
-            "Kind=Danger, Size=Xs, State=Active",
-            "Kind=Danger Primary, Size=Xs, State=Active",
-            "Kind=Danger Ghost, Size=Xs, State=Active",
-            "Kind=Danger Tertiary, Size=Xs, State=Active"
+            "Kind=Danger Primary, Size=Xs, State=Active"
           ]
         }
       },
@@ -8008,17 +8001,10 @@ const COMPONENTS = [
         "value": "{imported.button.root.border-bottom-color-state-disabled.{kind}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 8,
+          "count": 1,
           "of": 80,
           "names": [
-            "Kind=Primary, Size=Xs, State=Disabled",
-            "Kind=Secondary, Size=Xs, State=Disabled",
-            "Kind=Tertiary, Size=Xs, State=Disabled",
-            "Kind=Ghost, Size=Xs, State=Disabled",
-            "Kind=Danger, Size=Xs, State=Disabled",
-            "Kind=Danger Primary, Size=Xs, State=Disabled",
-            "Kind=Danger Ghost, Size=Xs, State=Disabled",
-            "Kind=Danger Tertiary, Size=Xs, State=Disabled"
+            "Kind=Danger Primary, Size=Xs, State=Disabled"
           ]
         }
       },
@@ -8029,17 +8015,10 @@ const COMPONENTS = [
         "value": "{imported.button.root.border-bottom-color-state-focus-visible.{kind}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 8,
+          "count": 1,
           "of": 80,
           "names": [
-            "Kind=Primary, Size=Xs, State=Focus Visible",
-            "Kind=Secondary, Size=Xs, State=Focus Visible",
-            "Kind=Tertiary, Size=Xs, State=Focus Visible",
-            "Kind=Ghost, Size=Xs, State=Focus Visible",
-            "Kind=Danger, Size=Xs, State=Focus Visible",
-            "Kind=Danger Primary, Size=Xs, State=Focus Visible",
-            "Kind=Danger Ghost, Size=Xs, State=Focus Visible",
-            "Kind=Danger Tertiary, Size=Xs, State=Focus Visible"
+            "Kind=Danger Primary, Size=Xs, State=Focus Visible"
           ]
         }
       },
@@ -8050,17 +8029,10 @@ const COMPONENTS = [
         "value": "{imported.button.root.border-bottom-color-state-hover.{kind}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 8,
+          "count": 1,
           "of": 80,
           "names": [
-            "Kind=Primary, Size=Xs, State=Hover",
-            "Kind=Secondary, Size=Xs, State=Hover",
-            "Kind=Tertiary, Size=Xs, State=Hover",
-            "Kind=Ghost, Size=Xs, State=Hover",
-            "Kind=Danger, Size=Xs, State=Hover",
-            "Kind=Danger Primary, Size=Xs, State=Hover",
-            "Kind=Danger Ghost, Size=Xs, State=Hover",
-            "Kind=Danger Tertiary, Size=Xs, State=Hover"
+            "Kind=Danger Primary, Size=Xs, State=Hover"
           ]
         }
       },
@@ -8071,17 +8043,10 @@ const COMPONENTS = [
         "value": "{imported.button.root.border-left-color-state-active.{kind}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 8,
+          "count": 1,
           "of": 80,
           "names": [
-            "Kind=Primary, Size=Xs, State=Active",
-            "Kind=Secondary, Size=Xs, State=Active",
-            "Kind=Tertiary, Size=Xs, State=Active",
-            "Kind=Ghost, Size=Xs, State=Active",
-            "Kind=Danger, Size=Xs, State=Active",
-            "Kind=Danger Primary, Size=Xs, State=Active",
-            "Kind=Danger Ghost, Size=Xs, State=Active",
-            "Kind=Danger Tertiary, Size=Xs, State=Active"
+            "Kind=Danger Primary, Size=Xs, State=Active"
           ]
         }
       },
@@ -8092,17 +8057,10 @@ const COMPONENTS = [
         "value": "{imported.button.root.border-left-color-state-disabled.{kind}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 8,
+          "count": 1,
           "of": 80,
           "names": [
-            "Kind=Primary, Size=Xs, State=Disabled",
-            "Kind=Secondary, Size=Xs, State=Disabled",
-            "Kind=Tertiary, Size=Xs, State=Disabled",
-            "Kind=Ghost, Size=Xs, State=Disabled",
-            "Kind=Danger, Size=Xs, State=Disabled",
-            "Kind=Danger Primary, Size=Xs, State=Disabled",
-            "Kind=Danger Ghost, Size=Xs, State=Disabled",
-            "Kind=Danger Tertiary, Size=Xs, State=Disabled"
+            "Kind=Danger Primary, Size=Xs, State=Disabled"
           ]
         }
       },
@@ -8113,17 +8071,10 @@ const COMPONENTS = [
         "value": "{imported.button.root.border-left-color-state-focus-visible.{kind}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 8,
+          "count": 1,
           "of": 80,
           "names": [
-            "Kind=Primary, Size=Xs, State=Focus Visible",
-            "Kind=Secondary, Size=Xs, State=Focus Visible",
-            "Kind=Tertiary, Size=Xs, State=Focus Visible",
-            "Kind=Ghost, Size=Xs, State=Focus Visible",
-            "Kind=Danger, Size=Xs, State=Focus Visible",
-            "Kind=Danger Primary, Size=Xs, State=Focus Visible",
-            "Kind=Danger Ghost, Size=Xs, State=Focus Visible",
-            "Kind=Danger Tertiary, Size=Xs, State=Focus Visible"
+            "Kind=Danger Primary, Size=Xs, State=Focus Visible"
           ]
         }
       },
@@ -8134,17 +8085,10 @@ const COMPONENTS = [
         "value": "{imported.button.root.border-left-color-state-hover.{kind}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 8,
+          "count": 1,
           "of": 80,
           "names": [
-            "Kind=Primary, Size=Xs, State=Hover",
-            "Kind=Secondary, Size=Xs, State=Hover",
-            "Kind=Tertiary, Size=Xs, State=Hover",
-            "Kind=Ghost, Size=Xs, State=Hover",
-            "Kind=Danger, Size=Xs, State=Hover",
-            "Kind=Danger Primary, Size=Xs, State=Hover",
-            "Kind=Danger Ghost, Size=Xs, State=Hover",
-            "Kind=Danger Tertiary, Size=Xs, State=Hover"
+            "Kind=Danger Primary, Size=Xs, State=Hover"
           ]
         }
       },
@@ -8155,17 +8099,10 @@ const COMPONENTS = [
         "value": "{imported.button.root.border-right-color-state-active.{kind}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 8,
+          "count": 1,
           "of": 80,
           "names": [
-            "Kind=Primary, Size=Xs, State=Active",
-            "Kind=Secondary, Size=Xs, State=Active",
-            "Kind=Tertiary, Size=Xs, State=Active",
-            "Kind=Ghost, Size=Xs, State=Active",
-            "Kind=Danger, Size=Xs, State=Active",
-            "Kind=Danger Primary, Size=Xs, State=Active",
-            "Kind=Danger Ghost, Size=Xs, State=Active",
-            "Kind=Danger Tertiary, Size=Xs, State=Active"
+            "Kind=Danger Primary, Size=Xs, State=Active"
           ]
         }
       },
@@ -8176,17 +8113,10 @@ const COMPONENTS = [
         "value": "{imported.button.root.border-right-color-state-disabled.{kind}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 8,
+          "count": 1,
           "of": 80,
           "names": [
-            "Kind=Primary, Size=Xs, State=Disabled",
-            "Kind=Secondary, Size=Xs, State=Disabled",
-            "Kind=Tertiary, Size=Xs, State=Disabled",
-            "Kind=Ghost, Size=Xs, State=Disabled",
-            "Kind=Danger, Size=Xs, State=Disabled",
-            "Kind=Danger Primary, Size=Xs, State=Disabled",
-            "Kind=Danger Ghost, Size=Xs, State=Disabled",
-            "Kind=Danger Tertiary, Size=Xs, State=Disabled"
+            "Kind=Danger Primary, Size=Xs, State=Disabled"
           ]
         }
       },
@@ -8197,17 +8127,10 @@ const COMPONENTS = [
         "value": "{imported.button.root.border-right-color-state-focus-visible.{kind}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 8,
+          "count": 1,
           "of": 80,
           "names": [
-            "Kind=Primary, Size=Xs, State=Focus Visible",
-            "Kind=Secondary, Size=Xs, State=Focus Visible",
-            "Kind=Tertiary, Size=Xs, State=Focus Visible",
-            "Kind=Ghost, Size=Xs, State=Focus Visible",
-            "Kind=Danger, Size=Xs, State=Focus Visible",
-            "Kind=Danger Primary, Size=Xs, State=Focus Visible",
-            "Kind=Danger Ghost, Size=Xs, State=Focus Visible",
-            "Kind=Danger Tertiary, Size=Xs, State=Focus Visible"
+            "Kind=Danger Primary, Size=Xs, State=Focus Visible"
           ]
         }
       },
@@ -8218,17 +8141,10 @@ const COMPONENTS = [
         "value": "{imported.button.root.border-right-color-state-hover.{kind}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 8,
+          "count": 1,
           "of": 80,
           "names": [
-            "Kind=Primary, Size=Xs, State=Hover",
-            "Kind=Secondary, Size=Xs, State=Hover",
-            "Kind=Tertiary, Size=Xs, State=Hover",
-            "Kind=Ghost, Size=Xs, State=Hover",
-            "Kind=Danger, Size=Xs, State=Hover",
-            "Kind=Danger Primary, Size=Xs, State=Hover",
-            "Kind=Danger Ghost, Size=Xs, State=Hover",
-            "Kind=Danger Tertiary, Size=Xs, State=Hover"
+            "Kind=Danger Primary, Size=Xs, State=Hover"
           ]
         }
       },
@@ -8239,17 +8155,10 @@ const COMPONENTS = [
         "value": "{imported.button.root.border-top-color-state-active.{kind}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 8,
+          "count": 1,
           "of": 80,
           "names": [
-            "Kind=Primary, Size=Xs, State=Active",
-            "Kind=Secondary, Size=Xs, State=Active",
-            "Kind=Tertiary, Size=Xs, State=Active",
-            "Kind=Ghost, Size=Xs, State=Active",
-            "Kind=Danger, Size=Xs, State=Active",
-            "Kind=Danger Primary, Size=Xs, State=Active",
-            "Kind=Danger Ghost, Size=Xs, State=Active",
-            "Kind=Danger Tertiary, Size=Xs, State=Active"
+            "Kind=Danger Primary, Size=Xs, State=Active"
           ]
         }
       },
@@ -8260,17 +8169,10 @@ const COMPONENTS = [
         "value": "{imported.button.root.border-top-color-state-disabled.{kind}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 8,
+          "count": 1,
           "of": 80,
           "names": [
-            "Kind=Primary, Size=Xs, State=Disabled",
-            "Kind=Secondary, Size=Xs, State=Disabled",
-            "Kind=Tertiary, Size=Xs, State=Disabled",
-            "Kind=Ghost, Size=Xs, State=Disabled",
-            "Kind=Danger, Size=Xs, State=Disabled",
-            "Kind=Danger Primary, Size=Xs, State=Disabled",
-            "Kind=Danger Ghost, Size=Xs, State=Disabled",
-            "Kind=Danger Tertiary, Size=Xs, State=Disabled"
+            "Kind=Danger Primary, Size=Xs, State=Disabled"
           ]
         }
       },
@@ -8281,17 +8183,10 @@ const COMPONENTS = [
         "value": "{imported.button.root.border-top-color-state-focus-visible.{kind}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 8,
+          "count": 1,
           "of": 80,
           "names": [
-            "Kind=Primary, Size=Xs, State=Focus Visible",
-            "Kind=Secondary, Size=Xs, State=Focus Visible",
-            "Kind=Tertiary, Size=Xs, State=Focus Visible",
-            "Kind=Ghost, Size=Xs, State=Focus Visible",
-            "Kind=Danger, Size=Xs, State=Focus Visible",
-            "Kind=Danger Primary, Size=Xs, State=Focus Visible",
-            "Kind=Danger Ghost, Size=Xs, State=Focus Visible",
-            "Kind=Danger Tertiary, Size=Xs, State=Focus Visible"
+            "Kind=Danger Primary, Size=Xs, State=Focus Visible"
           ]
         }
       },
@@ -8302,17 +8197,10 @@ const COMPONENTS = [
         "value": "{imported.button.root.border-top-color-state-hover.{kind}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 8,
+          "count": 1,
           "of": 80,
           "names": [
-            "Kind=Primary, Size=Xs, State=Hover",
-            "Kind=Secondary, Size=Xs, State=Hover",
-            "Kind=Tertiary, Size=Xs, State=Hover",
-            "Kind=Ghost, Size=Xs, State=Hover",
-            "Kind=Danger, Size=Xs, State=Hover",
-            "Kind=Danger Primary, Size=Xs, State=Hover",
-            "Kind=Danger Ghost, Size=Xs, State=Hover",
-            "Kind=Danger Tertiary, Size=Xs, State=Hover"
+            "Kind=Danger Primary, Size=Xs, State=Hover"
           ]
         }
       },

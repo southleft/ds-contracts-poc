@@ -16,13 +16,13 @@ repo it is simply absent from the denominator and scores 100%.
 
 | | |
 |---|---|
-| cases | **102** |
-| 🟢 pass | **99** |
+| cases | **107** |
+| 🟢 pass | **104** |
 | 🔴 red | **3** |
 | 🟡 yellow (UNSUPPORTED, never read) | **0** |
 | **UNSUPPORTED declared — THE RATCHET** | **18** · may only DECREASE without an explicit manifest edit |
 
-Declared dispositions: CARRIED 58 · LOWERED 4 · REFUSED 22 · UNSUPPORTED 18.
+Declared dispositions: CARRIED 63 · LOWERED 4 · REFUSED 22 · UNSUPPORTED 18.
 
 **A green gate here would mean the cases are too easy.** The point of the
 fixture is a measured frontier, and every red below is an open, named defect —
@@ -135,6 +135,10 @@ manifest.
 | 🟢 | `antd-focus-outline-ring` | interaction-states | `button.root:focus-visible { outline: 3px solid rgb(145, 202, 255); outline-offset: 1px } — the focus ring as an OUTLINE state delta on the ROOT (antd Button, Switch)` | CARRIED | carried | PASS |
 | 🟢 | `antd-focus-outline-ring-child-part` | interaction-states | `label > span > [input.sr-only:focus-visible + span.box { outline: 3px solid rgb(145, 202, 255) }] — the focus ring as an OUTLINE state delta on a NESTED PART (antd Checkbox-inner, Radio-inner)` | REFUSED | refused, by name | PASS |
 | 🟢 | `antd-focus-outline-ring-ua-width` | interaction-states | `button.root { outline-style: none } :focus-visible { outline: 3px solid rgb(145, 202, 255); outline-offset: 1px } — the ring's declared width EQUALS Chromium's own `outline-width: medium` (3px) at rest, so the width never differs between planes (antd Button/Switch: --ant-line-width-focus is 3px)` | CARRIED | carried | PASS |
+| 🟢 | `focus-border-color-state` | interaction-states | `a resting BORDER (1px solid #d4d4d8) whose `:focus-visible` rule repaints ONLY `border-color` — the state plane carries the four side colours and no width of its own` | CARRIED | carried | PASS |
+| 🟢 | `focus-border-color-zero-width` | interaction-states | `the SAME state-only `border-color` repaint as focus-border-color-state, but the resting plane is `border-width: 0px` over a transparent colour — CSS paints no border at any hue` | CARRIED | carried | PASS |
+| 🟢 | `focus-ring-declared-style-only` | interaction-states | `a link whose focus ring is spelled ONLY as a KEYWORD flip — the rest plane carries `outline-width: 3px; outline-style: none` with no `outline-color` of its own (so it computes to `currentColor`), and `:focus-visible` sets `outline-style: solid; outline-width: 2px; outline-offset: 2px` and nothing else` | CARRIED | carried | PASS |
+| 🟢 | `focus-ring-reservation-transparent` | interaction-states | `THE FOCUS-RING RESERVATION IDIOM under a state that changes only the WIDTH: the rest plane is `outline: 2px solid transparent` (a real, drawn `outline-style: solid` over a fully transparent colour) and `:focus-visible` sets `outline-width: 4px`` | CARRIED | carried | PASS |
 | 🟢 | `block-root-shrink-to-fit` | invariant | `a display:block root that filled NOTHING — the flex stage made it a flex item and it shrink-to-fit its content, so its computed width is a harness-text measurement (the astryx.card 114.203px family)` | REFUSED | refused, by name | PASS |
 | 🟢 | `nonpainting-text-display-none` | invariant | `a NON-PAINTING element carrying text (display: none)` | CARRIED | carried | PASS |
 | 🟢 | `nonpainting-text-visibility-hidden` | invariant | `a NON-PAINTING element carrying text (visibility: hidden)` | REFUSED | refused, by name | PASS |
@@ -151,6 +155,7 @@ manifest.
 | 🟢 | `pseudo-backdrop` | pseudo-elements | `dialog::backdrop { background-color }` | UNSUPPORTED | not read | PASS |
 | 🟢 | `pseudo-content-glyph` | pseudo-elements | `::before { content: "\2715"; font-family: icons }` | REFUSED | refused, by name | PASS |
 | 🟢 | `pseudo-gradient-only` | pseudo-elements | `::after painted ONLY by a linear-gradient` | REFUSED | refused, by name | PASS |
+| 🟢 | `pseudo-inset-ring-absent-host-clear` | pseudo-elements | `the coincident inset ring of pseudo-inset-ring-two-axis, but `[data-appearance="ghost"]::after { display: none }` REMOVES the ring box in a THIRD of the domain — and in exactly those combos the host's own `border-color` is `rgba(0, 0, 0, 0)`, so a folded width there paints nothing` | CARRIED | carried | PASS |
 | 🟢 | `pseudo-inset-ring-partial-presence` | pseudo-elements | `the SAME coincident inset ring as pseudo-inset-ring-two-axis, but the ring pseudo EXISTS IN ONLY HALF THE DOMAIN (`[data-size="small"]::after`) while the host carries an opaque per-combo border-colour and zero border width of its own in ALL eight combos` | REFUSED | refused, by name | PASS |
 | 🟢 | `pseudo-inset-ring-two-axis` | pseudo-elements | `a COINCIDENT INSET RING pseudo — ::after at inset 0, transparent fill, uniform 1px border, host radius — whose ring COLOUR is a product of TWO enum axes while its four side WIDTHS are uniform across every combo (fluent Badge's `root::after`)` | CARRIED | carried | PASS |
 | 🟢 | `pseudo-marker` | pseudo-elements | `li::marker { color; font-size }` | UNSUPPORTED | refused, by name | PASS |

@@ -1,0 +1,42 @@
+[
+  {
+    "key": "sm__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg__active",
+    "pctExact": 0,
+    "pctAA": 0
+  }
+]

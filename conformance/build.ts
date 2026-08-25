@@ -68,6 +68,19 @@ export interface CaseEntry {
      *  a real named wall); adopting them is a separate round, named in
      *  conformance/README.md, not a hole this flag opens. */
     mustDraw?: boolean;
+    /** RC3 (burn-down round 2, finishing pass) — `mustDraw`'s own blind spot.
+     *  MUTE fires only when NOTHING comes back. A state plane that fails to
+     *  repaint a fact the base plane already drew comes back with the BASE
+     *  value — something, and the wrong thing — and a receipt naming the
+     *  channel then lands it on NAMED, green. That is precisely what
+     *  shadcn.switch's focus ring produced: the canvas held the resting
+     *  #d4d4d8 where the contract says #a1a1a1, under the sentence "per-side
+     *  border COLOURS disagree (or no border width is carried)" — a receipt
+     *  that is FALSE on both counts. `mustMatch` says a name over a WRONG
+     *  value is not a wall: a comparable hit that agrees with nothing in the
+     *  seed is DRIFTED (red), not NAMED. Same discipline as mustDraw — opt-in
+     *  per case, so it can only ever ADD reds. */
+    mustMatch?: boolean;
     note: string;
   };
   blockStage?: boolean;

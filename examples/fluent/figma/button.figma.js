@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "fluent.button",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Button — generated from contract fluent.button v0.2.0 † (32 code-only facts — see plugin report)",
+    "description": "Button — generated from contract fluent.button v0.2.0 † (16 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -2352,7 +2352,7 @@ const COMPONENTS = [
             "paddingTop": "imported/button/root/padding-top/medium"
           },
           "fill": "imported/button/root/background-color-state-active/secondary",
-          "stroke": "imported/button/root/border-top-color/secondary",
+          "stroke": "imported/button/root/border-top-color-state-active/secondary",
           "clipsContent": true,
           "children": [
             {
@@ -2403,7 +2403,7 @@ const COMPONENTS = [
             "paddingTop": "imported/button/root/padding-top/medium"
           },
           "fill": "imported/button/root/background-color-state-active/primary",
-          "stroke": "imported/button/root/border-top-color/primary",
+          "stroke": "imported/button/root/border-top-color-state-active/primary",
           "clipsContent": true,
           "children": [
             {
@@ -2454,7 +2454,7 @@ const COMPONENTS = [
             "paddingTop": "imported/button/root/padding-top/medium"
           },
           "fill": "imported/button/root/background-color-state-active/outline",
-          "stroke": "imported/button/root/border-top-color/outline",
+          "stroke": "imported/button/root/border-top-color-state-active/outline",
           "clipsContent": true,
           "children": [
             {
@@ -2505,7 +2505,7 @@ const COMPONENTS = [
             "paddingTop": "imported/button/root/padding-top/medium"
           },
           "fill": "imported/button/root/background-color-state-active/subtle",
-          "stroke": "imported/button/root/border-top-color/subtle",
+          "stroke": "imported/button/root/border-top-color-state-active/subtle",
           "clipsContent": true,
           "children": [
             {
@@ -2556,7 +2556,7 @@ const COMPONENTS = [
             "paddingTop": "imported/button/root/padding-top/medium"
           },
           "fill": "imported/button/root/background-color-state-active/transparent",
-          "stroke": "imported/button/root/border-top-color/transparent",
+          "stroke": "imported/button/root/border-top-color-state-active/transparent",
           "clipsContent": true,
           "children": [
             {
@@ -2607,7 +2607,7 @@ const COMPONENTS = [
             "paddingTop": "imported/button/root/padding-top/medium"
           },
           "fill": "imported/button/root/background-color-state-disabled/secondary",
-          "stroke": "imported/button/root/border-top-color/secondary",
+          "stroke": "imported/button/root/border-top-color-state-disabled/secondary",
           "clipsContent": true,
           "children": [
             {
@@ -2658,7 +2658,7 @@ const COMPONENTS = [
             "paddingTop": "imported/button/root/padding-top/medium"
           },
           "fill": "imported/button/root/background-color-state-disabled/primary",
-          "stroke": "imported/button/root/border-top-color/primary",
+          "stroke": "imported/button/root/border-top-color-state-disabled/primary",
           "clipsContent": true,
           "children": [
             {
@@ -2709,7 +2709,7 @@ const COMPONENTS = [
             "paddingTop": "imported/button/root/padding-top/medium"
           },
           "fill": "imported/button/root/background-color-state-disabled/outline",
-          "stroke": "imported/button/root/border-top-color/outline",
+          "stroke": "imported/button/root/border-top-color-state-disabled/outline",
           "clipsContent": true,
           "children": [
             {
@@ -2760,7 +2760,7 @@ const COMPONENTS = [
             "paddingTop": "imported/button/root/padding-top/medium"
           },
           "fill": "imported/button/root/background-color-state-disabled/subtle",
-          "stroke": "imported/button/root/border-top-color/subtle",
+          "stroke": "imported/button/root/border-top-color-state-disabled/subtle",
           "clipsContent": true,
           "children": [
             {
@@ -2811,7 +2811,7 @@ const COMPONENTS = [
             "paddingTop": "imported/button/root/padding-top/medium"
           },
           "fill": "imported/button/root/background-color-state-disabled/transparent",
-          "stroke": "imported/button/root/border-top-color/transparent",
+          "stroke": "imported/button/root/border-top-color-state-disabled/transparent",
           "clipsContent": true,
           "children": [
             {
@@ -3237,7 +3237,7 @@ const COMPONENTS = [
             "paddingTop": "imported/button/root/padding-top/medium"
           },
           "fill": "imported/button/root/background-color-state-hover/secondary",
-          "stroke": "imported/button/root/border-top-color/secondary",
+          "stroke": "imported/button/root/border-top-color-state-hover/secondary",
           "clipsContent": true,
           "children": [
             {
@@ -3288,7 +3288,7 @@ const COMPONENTS = [
             "paddingTop": "imported/button/root/padding-top/medium"
           },
           "fill": "imported/button/root/background-color-state-hover/primary",
-          "stroke": "imported/button/root/border-top-color/primary",
+          "stroke": "imported/button/root/border-top-color-state-hover/primary",
           "clipsContent": true,
           "children": [
             {
@@ -3339,7 +3339,7 @@ const COMPONENTS = [
             "paddingTop": "imported/button/root/padding-top/medium"
           },
           "fill": "imported/button/root/background-color-state-hover/outline",
-          "stroke": "imported/button/root/border-top-color/outline",
+          "stroke": "imported/button/root/border-top-color-state-hover/outline",
           "clipsContent": true,
           "children": [
             {
@@ -3390,7 +3390,7 @@ const COMPONENTS = [
             "paddingTop": "imported/button/root/padding-top/medium"
           },
           "fill": "imported/button/root/background-color-state-hover/subtle",
-          "stroke": "imported/button/root/border-top-color/subtle",
+          "stroke": "imported/button/root/border-top-color-state-hover/subtle",
           "clipsContent": true,
           "children": [
             {
@@ -3441,7 +3441,7 @@ const COMPONENTS = [
             "paddingTop": "imported/button/root/padding-top/medium"
           },
           "fill": "imported/button/root/background-color-state-hover/transparent",
-          "stroke": "imported/button/root/border-top-color/transparent",
+          "stroke": "imported/button/root/border-top-color-state-hover/transparent",
           "clipsContent": true,
           "children": [
             {
@@ -3533,294 +3533,6 @@ const COMPONENTS = [
       }
     ],
     "codeOnlyFacts": [
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-bottom-color",
-        "value": "{imported.button.root.border-bottom-color-state-active.{appearance}}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 5,
-          "of": 65,
-          "names": [
-            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Active",
-            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Active",
-            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Active",
-            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Active",
-            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Active"
-          ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-bottom-color",
-        "value": "{imported.button.root.border-bottom-color-state-disabled.{appearance}}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 5,
-          "of": 65,
-          "names": [
-            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Disabled",
-            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Disabled",
-            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Disabled",
-            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Disabled",
-            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Disabled"
-          ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-bottom-color",
-        "value": "{imported.button.root.border-bottom-color-state-hover.{appearance}}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 5,
-          "of": 65,
-          "names": [
-            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Hover",
-            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Hover",
-            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Hover",
-            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Hover",
-            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Hover"
-          ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-bottom-color",
-        "value": "{imported.shared.color-000000}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 5,
-          "of": 65,
-          "names": [
-            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Focus Visible",
-            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Focus Visible",
-            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Focus Visible",
-            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Focus Visible",
-            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Focus Visible"
-          ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-left-color",
-        "value": "{imported.button.root.border-left-color-state-active.{appearance}}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 5,
-          "of": 65,
-          "names": [
-            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Active",
-            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Active",
-            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Active",
-            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Active",
-            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Active"
-          ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-left-color",
-        "value": "{imported.button.root.border-left-color-state-disabled.{appearance}}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 5,
-          "of": 65,
-          "names": [
-            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Disabled",
-            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Disabled",
-            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Disabled",
-            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Disabled",
-            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Disabled"
-          ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-left-color",
-        "value": "{imported.button.root.border-left-color-state-hover.{appearance}}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 5,
-          "of": 65,
-          "names": [
-            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Hover",
-            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Hover",
-            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Hover",
-            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Hover",
-            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Hover"
-          ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-left-color",
-        "value": "{imported.shared.color-000000}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 5,
-          "of": 65,
-          "names": [
-            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Focus Visible",
-            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Focus Visible",
-            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Focus Visible",
-            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Focus Visible",
-            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Focus Visible"
-          ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-right-color",
-        "value": "{imported.button.root.border-right-color-state-active.{appearance}}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 5,
-          "of": 65,
-          "names": [
-            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Active",
-            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Active",
-            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Active",
-            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Active",
-            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Active"
-          ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-right-color",
-        "value": "{imported.button.root.border-right-color-state-disabled.{appearance}}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 5,
-          "of": 65,
-          "names": [
-            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Disabled",
-            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Disabled",
-            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Disabled",
-            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Disabled",
-            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Disabled"
-          ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-right-color",
-        "value": "{imported.button.root.border-right-color-state-hover.{appearance}}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 5,
-          "of": 65,
-          "names": [
-            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Hover",
-            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Hover",
-            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Hover",
-            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Hover",
-            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Hover"
-          ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-right-color",
-        "value": "{imported.shared.color-000000}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 5,
-          "of": 65,
-          "names": [
-            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Focus Visible",
-            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Focus Visible",
-            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Focus Visible",
-            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Focus Visible",
-            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Focus Visible"
-          ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-top-color",
-        "value": "{imported.button.root.border-top-color-state-active.{appearance}}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 5,
-          "of": 65,
-          "names": [
-            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Active",
-            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Active",
-            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Active",
-            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Active",
-            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Active"
-          ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-top-color",
-        "value": "{imported.button.root.border-top-color-state-disabled.{appearance}}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 5,
-          "of": 65,
-          "names": [
-            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Disabled",
-            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Disabled",
-            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Disabled",
-            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Disabled",
-            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Disabled"
-          ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-top-color",
-        "value": "{imported.button.root.border-top-color-state-hover.{appearance}}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 5,
-          "of": 65,
-          "names": [
-            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Hover",
-            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Hover",
-            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Hover",
-            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Hover",
-            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Hover"
-          ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-top-color",
-        "value": "{imported.shared.color-000000}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 5,
-          "of": 65,
-          "names": [
-            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Focus Visible",
-            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Focus Visible",
-            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Focus Visible",
-            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Focus Visible",
-            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Focus Visible"
-          ]
-        }
-      },
       {
         "part": "root",
         "kind": "channel",

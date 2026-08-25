@@ -1,0 +1,99 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "conformance.focus-border-color-state",
+  "name": "CaseFocusBorderColorState",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the CSS/DOM conformance fixture case \"focus-border-color-state\" (interaction-states). The fixture varies CSS CONSTRUCTS, not prop spaces, so the prop space is deliberately EMPTY: every axis the capture would enumerate is held at nothing, and the whole measurement is the computed truth of one mounted rendering. Construct: a resting BORDER (1px solid #d4d4d8) whose `:focus-visible` rule repaints ONLY `border-color` — the state plane carries the four side colours and no width of its own COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @ds-contracts/conformance@0.1.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "sm",
+          "lg"
+        ]
+      },
+      "default": "sm",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "sm": "Sm",
+            "lg": "Lg"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    }
+  ],
+  "states": [
+    "focus-visible"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "center"
+      },
+      "declared": {
+        "border-bottom-style": "solid",
+        "border-left-style": "solid",
+        "border-right-style": "solid",
+        "border-top-style": "solid",
+        "font-family": "monospace"
+      },
+      "tokens": {
+        "background-color": "{imported.case-focus-border-color-state.root.background-color}",
+        "border-bottom-color": "{imported.shared.color-d4d4d8}",
+        "border-bottom-left-radius": "{imported.shared.size-9999}",
+        "border-bottom-right-radius": "{imported.shared.size-9999}",
+        "border-bottom-width": "{imported.shared.size-1}",
+        "border-left-color": "{imported.shared.color-d4d4d8}",
+        "border-left-width": "{imported.shared.size-1}",
+        "border-right-color": "{imported.shared.color-d4d4d8}",
+        "border-right-width": "{imported.shared.size-1}",
+        "border-top-color": "{imported.shared.color-d4d4d8}",
+        "border-top-left-radius": "{imported.shared.size-9999}",
+        "border-top-right-radius": "{imported.shared.size-9999}",
+        "border-top-width": "{imported.shared.size-1}",
+        "font-size": "{imported.case-focus-border-color-state.root.font-size}",
+        "outline-color": "{imported.case-focus-border-color-state.root.outline-color}",
+        "outline-width": "{imported.case-focus-border-color-state.root.outline-width}",
+        "padding-bottom": "{imported.shared.size-2}",
+        "padding-left": "{imported.shared.size-2}",
+        "padding-right": "{imported.shared.size-2}",
+        "padding-top": "{imported.shared.size-2}"
+      },
+      "states": {
+        "focus-visible": {
+          "border-bottom-color": "{imported.shared.color-a1a1a1}",
+          "border-left-color": "{imported.shared.color-a1a1a1}",
+          "border-right-color": "{imported.shared.color-a1a1a1}",
+          "border-top-color": "{imported.shared.color-a1a1a1}"
+        }
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "statePreviews": true,
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@ds-contracts/conformance",
+        "export": "CaseFocusBorderColorState"
+      }
+    }
+  }
+}

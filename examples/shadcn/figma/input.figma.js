@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "shadcn.input",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Input — generated from contract shadcn.input v0.2.0 † (18 code-only facts — see plugin report)",
+    "description": "Input — generated from contract shadcn.input v0.2.0 † (14 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -229,7 +229,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "stroke": "imported/shared/color-e5e5e5",
+          "stroke": "imported/shared/color-a1a1a1",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-8",
             "bottomRightRadius": "imported/shared/size-8",
@@ -327,7 +327,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "stroke": "imported/shared/color-e5e5e5",
+          "stroke": "imported/shared/color-a1a1a1",
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-8",
             "bottomRightRadius": "imported/shared/size-8",
@@ -452,66 +452,6 @@ const COMPONENTS = [
         "variants": {
           "count": 4,
           "of": 4
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-bottom-color",
-        "value": "{imported.shared.color-a1a1a1}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 2,
-          "of": 4,
-          "names": [
-            "State=Active",
-            "State=Focus Visible"
-          ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-left-color",
-        "value": "{imported.shared.color-a1a1a1}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 2,
-          "of": 4,
-          "names": [
-            "State=Active",
-            "State=Focus Visible"
-          ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-right-color",
-        "value": "{imported.shared.color-a1a1a1}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 2,
-          "of": 4,
-          "names": [
-            "State=Active",
-            "State=Focus Visible"
-          ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-top-color",
-        "value": "{imported.shared.color-a1a1a1}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 2,
-          "of": 4,
-          "names": [
-            "State=Active",
-            "State=Focus Visible"
-          ]
         }
       },
       {

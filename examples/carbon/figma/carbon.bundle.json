@@ -12407,17 +12407,10 @@
           "value": "{imported.button.root.border-bottom-color-state-active.{kind}}",
           "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
           "variants": {
-            "count": 8,
+            "count": 1,
             "of": 80,
             "names": [
-              "Kind=Primary, Size=Xs, State=Active",
-              "Kind=Secondary, Size=Xs, State=Active",
-              "Kind=Tertiary, Size=Xs, State=Active",
-              "Kind=Ghost, Size=Xs, State=Active",
-              "Kind=Danger, Size=Xs, State=Active",
-              "Kind=Danger Primary, Size=Xs, State=Active",
-              "Kind=Danger Ghost, Size=Xs, State=Active",
-              "Kind=Danger Tertiary, Size=Xs, State=Active"
+              "Kind=Danger Primary, Size=Xs, State=Active"
             ]
           }
         },
@@ -12428,17 +12421,10 @@
           "value": "{imported.button.root.border-bottom-color-state-disabled.{kind}}",
           "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
           "variants": {
-            "count": 8,
+            "count": 1,
             "of": 80,
             "names": [
-              "Kind=Primary, Size=Xs, State=Disabled",
-              "Kind=Secondary, Size=Xs, State=Disabled",
-              "Kind=Tertiary, Size=Xs, State=Disabled",
-              "Kind=Ghost, Size=Xs, State=Disabled",
-              "Kind=Danger, Size=Xs, State=Disabled",
-              "Kind=Danger Primary, Size=Xs, State=Disabled",
-              "Kind=Danger Ghost, Size=Xs, State=Disabled",
-              "Kind=Danger Tertiary, Size=Xs, State=Disabled"
+              "Kind=Danger Primary, Size=Xs, State=Disabled"
             ]
           }
         },
@@ -12449,17 +12435,10 @@
           "value": "{imported.button.root.border-bottom-color-state-focus-visible.{kind}}",
           "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
           "variants": {
-            "count": 8,
+            "count": 1,
             "of": 80,
             "names": [
-              "Kind=Primary, Size=Xs, State=Focus Visible",
-              "Kind=Secondary, Size=Xs, State=Focus Visible",
-              "Kind=Tertiary, Size=Xs, State=Focus Visible",
-              "Kind=Ghost, Size=Xs, State=Focus Visible",
-              "Kind=Danger, Size=Xs, State=Focus Visible",
-              "Kind=Danger Primary, Size=Xs, State=Focus Visible",
-              "Kind=Danger Ghost, Size=Xs, State=Focus Visible",
-              "Kind=Danger Tertiary, Size=Xs, State=Focus Visible"
+              "Kind=Danger Primary, Size=Xs, State=Focus Visible"
             ]
           }
         },
@@ -12470,17 +12449,10 @@
           "value": "{imported.button.root.border-bottom-color-state-hover.{kind}}",
           "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
           "variants": {
-            "count": 8,
+            "count": 1,
             "of": 80,
             "names": [
-              "Kind=Primary, Size=Xs, State=Hover",
-              "Kind=Secondary, Size=Xs, State=Hover",
-              "Kind=Tertiary, Size=Xs, State=Hover",
-              "Kind=Ghost, Size=Xs, State=Hover",
-              "Kind=Danger, Size=Xs, State=Hover",
-              "Kind=Danger Primary, Size=Xs, State=Hover",
-              "Kind=Danger Ghost, Size=Xs, State=Hover",
-              "Kind=Danger Tertiary, Size=Xs, State=Hover"
+              "Kind=Danger Primary, Size=Xs, State=Hover"
             ]
           }
         },
@@ -12491,17 +12463,10 @@
           "value": "{imported.button.root.border-left-color-state-active.{kind}}",
           "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
           "variants": {
-            "count": 8,
+            "count": 1,
             "of": 80,
             "names": [
-              "Kind=Primary, Size=Xs, State=Active",
-              "Kind=Secondary, Size=Xs, State=Active",
-              "Kind=Tertiary, Size=Xs, State=Active",
-              "Kind=Ghost, Size=Xs, State=Active",
-              "Kind=Danger, Size=Xs, State=Active",
-              "Kind=Danger Primary, Size=Xs, State=Active",
-              "Kind=Danger Ghost, Size=Xs, State=Active",
-              "Kind=Danger Tertiary, Size=Xs, State=Active"
+              "Kind=Danger Primary, Size=Xs, State=Active"
             ]
           }
         },
@@ -12512,17 +12477,10 @@
           "value": "{imported.button.root.border-left-color-state-disabled.{kind}}",
           "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
           "variants": {
-            "count": 8,
+            "count": 1,
             "of": 80,
             "names": [
-              "Kind=Primary, Size=Xs, State=Disabled",
-              "Kind=Secondary, Size=Xs, State=Disabled",
-              "Kind=Tertiary, Size=Xs, State=Disabled",
-              "Kind=Ghost, Size=Xs, State=Disabled",
-              "Kind=Danger, Size=Xs, State=Disabled",
-              "Kind=Danger Primary, Size=Xs, State=Disabled",
-              "Kind=Danger Ghost, Size=Xs, State=Disabled",
-              "Kind=Danger Tertiary, Size=Xs, State=Disabled"
+              "Kind=Danger Primary, Size=Xs, State=Disabled"
             ]
           }
         },
@@ -12533,17 +12491,10 @@
           "value": "{imported.button.root.border-left-color-state-focus-visible.{kind}}",
           "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
           "variants": {
-            "count": 8,
+            "count": 1,
             "of": 80,
             "names": [
-              "Kind=Primary, Size=Xs, State=Focus Visible",
-              "Kind=Secondary, Size=Xs, State=Focus Visible",
-              "Kind=Tertiary, Size=Xs, State=Focus Visible",
-              "Kind=Ghost, Size=Xs, State=Focus Visible",
-              "Kind=Danger, Size=Xs, State=Focus Visible",
-              "Kind=Danger Primary, Size=Xs, State=Focus Visible",
-              "Kind=Danger Ghost, Size=Xs, State=Focus Visible",
-              "Kind=Danger Tertiary, Size=Xs, State=Focus Visible"
+              "Kind=Danger Primary, Size=Xs, State=Focus Visible"
             ]
           }
         },
@@ -12554,17 +12505,10 @@
           "value": "{imported.button.root.border-left-color-state-hover.{kind}}",
           "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
           "variants": {
-            "count": 8,
+            "count": 1,
             "of": 80,
             "names": [
-              "Kind=Primary, Size=Xs, State=Hover",
-              "Kind=Secondary, Size=Xs, State=Hover",
-              "Kind=Tertiary, Size=Xs, State=Hover",
-              "Kind=Ghost, Size=Xs, State=Hover",
-              "Kind=Danger, Size=Xs, State=Hover",
-              "Kind=Danger Primary, Size=Xs, State=Hover",
-              "Kind=Danger Ghost, Size=Xs, State=Hover",
-              "Kind=Danger Tertiary, Size=Xs, State=Hover"
+              "Kind=Danger Primary, Size=Xs, State=Hover"
             ]
           }
         },
@@ -12575,17 +12519,10 @@
           "value": "{imported.button.root.border-right-color-state-active.{kind}}",
           "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
           "variants": {
-            "count": 8,
+            "count": 1,
             "of": 80,
             "names": [
-              "Kind=Primary, Size=Xs, State=Active",
-              "Kind=Secondary, Size=Xs, State=Active",
-              "Kind=Tertiary, Size=Xs, State=Active",
-              "Kind=Ghost, Size=Xs, State=Active",
-              "Kind=Danger, Size=Xs, State=Active",
-              "Kind=Danger Primary, Size=Xs, State=Active",
-              "Kind=Danger Ghost, Size=Xs, State=Active",
-              "Kind=Danger Tertiary, Size=Xs, State=Active"
+              "Kind=Danger Primary, Size=Xs, State=Active"
             ]
           }
         },
@@ -12596,17 +12533,10 @@
           "value": "{imported.button.root.border-right-color-state-disabled.{kind}}",
           "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
           "variants": {
-            "count": 8,
+            "count": 1,
             "of": 80,
             "names": [
-              "Kind=Primary, Size=Xs, State=Disabled",
-              "Kind=Secondary, Size=Xs, State=Disabled",
-              "Kind=Tertiary, Size=Xs, State=Disabled",
-              "Kind=Ghost, Size=Xs, State=Disabled",
-              "Kind=Danger, Size=Xs, State=Disabled",
-              "Kind=Danger Primary, Size=Xs, State=Disabled",
-              "Kind=Danger Ghost, Size=Xs, State=Disabled",
-              "Kind=Danger Tertiary, Size=Xs, State=Disabled"
+              "Kind=Danger Primary, Size=Xs, State=Disabled"
             ]
           }
         },
@@ -12617,17 +12547,10 @@
           "value": "{imported.button.root.border-right-color-state-focus-visible.{kind}}",
           "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
           "variants": {
-            "count": 8,
+            "count": 1,
             "of": 80,
             "names": [
-              "Kind=Primary, Size=Xs, State=Focus Visible",
-              "Kind=Secondary, Size=Xs, State=Focus Visible",
-              "Kind=Tertiary, Size=Xs, State=Focus Visible",
-              "Kind=Ghost, Size=Xs, State=Focus Visible",
-              "Kind=Danger, Size=Xs, State=Focus Visible",
-              "Kind=Danger Primary, Size=Xs, State=Focus Visible",
-              "Kind=Danger Ghost, Size=Xs, State=Focus Visible",
-              "Kind=Danger Tertiary, Size=Xs, State=Focus Visible"
+              "Kind=Danger Primary, Size=Xs, State=Focus Visible"
             ]
           }
         },
@@ -12638,17 +12561,10 @@
           "value": "{imported.button.root.border-right-color-state-hover.{kind}}",
           "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
           "variants": {
-            "count": 8,
+            "count": 1,
             "of": 80,
             "names": [
-              "Kind=Primary, Size=Xs, State=Hover",
-              "Kind=Secondary, Size=Xs, State=Hover",
-              "Kind=Tertiary, Size=Xs, State=Hover",
-              "Kind=Ghost, Size=Xs, State=Hover",
-              "Kind=Danger, Size=Xs, State=Hover",
-              "Kind=Danger Primary, Size=Xs, State=Hover",
-              "Kind=Danger Ghost, Size=Xs, State=Hover",
-              "Kind=Danger Tertiary, Size=Xs, State=Hover"
+              "Kind=Danger Primary, Size=Xs, State=Hover"
             ]
           }
         },
@@ -12659,17 +12575,10 @@
           "value": "{imported.button.root.border-top-color-state-active.{kind}}",
           "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
           "variants": {
-            "count": 8,
+            "count": 1,
             "of": 80,
             "names": [
-              "Kind=Primary, Size=Xs, State=Active",
-              "Kind=Secondary, Size=Xs, State=Active",
-              "Kind=Tertiary, Size=Xs, State=Active",
-              "Kind=Ghost, Size=Xs, State=Active",
-              "Kind=Danger, Size=Xs, State=Active",
-              "Kind=Danger Primary, Size=Xs, State=Active",
-              "Kind=Danger Ghost, Size=Xs, State=Active",
-              "Kind=Danger Tertiary, Size=Xs, State=Active"
+              "Kind=Danger Primary, Size=Xs, State=Active"
             ]
           }
         },
@@ -12680,17 +12589,10 @@
           "value": "{imported.button.root.border-top-color-state-disabled.{kind}}",
           "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
           "variants": {
-            "count": 8,
+            "count": 1,
             "of": 80,
             "names": [
-              "Kind=Primary, Size=Xs, State=Disabled",
-              "Kind=Secondary, Size=Xs, State=Disabled",
-              "Kind=Tertiary, Size=Xs, State=Disabled",
-              "Kind=Ghost, Size=Xs, State=Disabled",
-              "Kind=Danger, Size=Xs, State=Disabled",
-              "Kind=Danger Primary, Size=Xs, State=Disabled",
-              "Kind=Danger Ghost, Size=Xs, State=Disabled",
-              "Kind=Danger Tertiary, Size=Xs, State=Disabled"
+              "Kind=Danger Primary, Size=Xs, State=Disabled"
             ]
           }
         },
@@ -12701,17 +12603,10 @@
           "value": "{imported.button.root.border-top-color-state-focus-visible.{kind}}",
           "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
           "variants": {
-            "count": 8,
+            "count": 1,
             "of": 80,
             "names": [
-              "Kind=Primary, Size=Xs, State=Focus Visible",
-              "Kind=Secondary, Size=Xs, State=Focus Visible",
-              "Kind=Tertiary, Size=Xs, State=Focus Visible",
-              "Kind=Ghost, Size=Xs, State=Focus Visible",
-              "Kind=Danger, Size=Xs, State=Focus Visible",
-              "Kind=Danger Primary, Size=Xs, State=Focus Visible",
-              "Kind=Danger Ghost, Size=Xs, State=Focus Visible",
-              "Kind=Danger Tertiary, Size=Xs, State=Focus Visible"
+              "Kind=Danger Primary, Size=Xs, State=Focus Visible"
             ]
           }
         },
@@ -12722,17 +12617,10 @@
           "value": "{imported.button.root.border-top-color-state-hover.{kind}}",
           "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
           "variants": {
-            "count": 8,
+            "count": 1,
             "of": 80,
             "names": [
-              "Kind=Primary, Size=Xs, State=Hover",
-              "Kind=Secondary, Size=Xs, State=Hover",
-              "Kind=Tertiary, Size=Xs, State=Hover",
-              "Kind=Ghost, Size=Xs, State=Hover",
-              "Kind=Danger, Size=Xs, State=Hover",
-              "Kind=Danger Primary, Size=Xs, State=Hover",
-              "Kind=Danger Ghost, Size=Xs, State=Hover",
-              "Kind=Danger Tertiary, Size=Xs, State=Hover"
+              "Kind=Danger Primary, Size=Xs, State=Hover"
             ]
           }
         },
