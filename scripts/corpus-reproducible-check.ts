@@ -315,6 +315,13 @@ export function structuralDivergence(
 
 export interface CaptureResultRow {
   library: string;
+  /** The Chromium build the FRESH sweep ran on, read from its own
+   *  `captured-truth.json` `_provenance.browser`. Recorded because a
+   *  structural divergence is only comparable against the browser that
+   *  produced it — and because reading it from the COMMITTED record instead
+   *  would name the browser of the run being CHECKED, which is the one fact
+   *  this file must never confuse. */
+  browser?: string;
   /** component → divergence lines (empty = reproduces). */
   byComponent: Map<string, string[]>;
   pending: string | null;
@@ -401,7 +408,27 @@ export function compareCaptureTree(
       `the documented capture REFUSED and produced no record: ${refusalFor(c)}`,
     ]);
   }
-  return { library: def.library, byComponent, pending: null };
+  return {
+    library: def.library,
+    byComponent,
+    pending: null,
+    browser: freshBrowser(dir, [...byComponent.keys()]),
+  };
+}
+
+/** The Chromium build a FRESH capture tree ran on. */
+function freshBrowser(dir: string, comps: string[]): string | undefined {
+  for (const c of comps) {
+    const p = path.join(dir, c, "captured-truth.json");
+    if (!existsSync(p)) continue;
+    const b = (
+      JSON.parse(readFileSync(p, "utf8")) as {
+        _provenance?: { browser?: string };
+      }
+    )._provenance?.browser;
+    if (b) return b;
+  }
+  return undefined;
 }
 
 export function recapture(
@@ -499,7 +526,12 @@ export function recapture(
       );
     }
   }
-  return { library: def.library, byComponent, pending: null };
+  return {
+    library: def.library,
+    byComponent,
+    pending: null,
+    browser: freshBrowser(out, [...byComponent.keys()]),
+  };
 }
 
 // ---------------------------------------------------------------------------
@@ -663,6 +695,14 @@ export function renderReceipt(
     "## B · CAPTURE — committed seed + config + sandbox → the committed capture record (STRUCTURE)",
   );
   L.push("");
+  const measured = loadMeasurement();
+  if (measured) {
+    L.push(
+      `Last measured **${measured.measuredAt}** on **${measured.browser}**, recorded in \`${MEASURED_PATH}\` — the capture half needs Chromium and the ` +
+        "git-ignored sandboxes, so it runs out of band and the fast lane judges its committed record. That is what makes this verdict the same on every machine.",
+    );
+    L.push("");
+  }
   L.push(
     "Compared: the anatomy's part paths, the props (name / type / default) and the state names. Values — `declared`, `tokensByProp`, `codeOnly` — move " +
       "with the engine and with the Chromium build; they are `npm run extract:computed:drift`'s instrument, not this one. STRUCTURE is what carries " +
@@ -751,31 +791,12 @@ function run(
   }
 }
 
-/** The Chromium build the measuring run used, read from a capture record the
- *  run just compared against (its `_provenance.browser`). A divergence is only
- *  comparable against the browser that produced it, so it is recorded. */
+/** The Chromium build the measuring run used, taken from the sweep's OWN
+ *  records — never from the committed corpus, which would name the browser of
+ *  the run being CHECKED rather than the run doing the checking. */
 function browserBuild(rows: CaptureResultRow[]): string {
-  for (const row of rows) {
-    if (row.pending) continue;
-    const def = libraries(REPO).find((d) => d.library === row.library);
-    if (!def) continue;
-    for (const comp of row.byComponent.keys()) {
-      const p = path.join(
-        REPO,
-        def.manifest.captureOut,
-        comp,
-        "captured-truth.json",
-      );
-      if (!existsSync(p)) continue;
-      const browser = (
-        JSON.parse(readFileSync(p, "utf8")) as {
-          _provenance?: { browser?: string };
-        }
-      )._provenance?.browser;
-      if (browser) return browser;
-    }
-  }
-  return "(not recorded — no capture record named one)";
+  for (const row of rows) if (!row.pending && row.browser) return row.browser;
+  return "(not recorded — the measuring sweep named no browser)";
 }
 
 /** The capture half's own record — written only by a run that MEASURED. */
