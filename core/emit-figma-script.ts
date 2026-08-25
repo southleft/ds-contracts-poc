@@ -490,7 +490,7 @@ export interface CodeOnlyFact {
    *  observed and the contract grammar refused — carried on the part as
    *  `Part.codeOnly` so the bundle, the plugin report and the set's plugin
    *  data repeat it. The channel is spelled `outline-width [focus-visible]`. */
-  kind: 'channel' | 'declared' | 'gradient' | 'shadow' | 'event' | 'meter' | 'scrim' | 'preview' | 'capture';
+  kind: 'channel' | 'declared' | 'gradient' | 'shadow' | 'event' | 'meter' | 'scrim' | 'preview' | 'capture' | 'plane';
   channel: string;
   value: string;
   reason: string;
@@ -5238,6 +5238,41 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
         for (const [ch, v] of Object.entries(overrides)) note(ch, v);
       }
     }
+    // RC2 (v19) — THE COLLAPSED TRANSFORM IS LOWERED TO ABSENCE, AND THAT
+    // LOWERING MUST BE NAMED. variantParts refuses to draw a part whose
+    // resolved transform is `matrix(0, 0, 0, 0, …)` (scale(0)) because the
+    // canvas has exactly one honest spelling for a node that paints nothing.
+    // `note()` above cannot say so: DECLARED_CHANNELS calls `transform` a
+    // DRAWN channel, so the receipt returned early and the construct left the
+    // canvas with NOTHING naming it — measured by conformance/canvas.ts on
+    // transform-scale-zero-by-axis as `SILENT … proposal carries nothing on
+    // this channel; 6 code-only fact(s), none of them this`, and SILENT is
+    // the one verdict this project never waives. The value IS carried (the
+    // part is absent in exactly those cells, which is what scale(0) draws);
+    // what was missing is the sentence that says the round trip returns it as
+    // absence rather than as a transform.
+    const collapsed = (v: string | undefined): boolean => /^matrix\(0, 0, 0, 0, /.test(v ?? '');
+    const collapsedWhen: string[] = [];
+    if (collapsed(part.declared?.['transform'])) collapsedWhen.push('every compiled cell');
+    for (const entry of part.declaredByProp ?? []) {
+      for (const [axisValue, overrides] of Object.entries(entry.map)) {
+        if (collapsed(overrides['transform'])) collapsedWhen.push(`${entry.prop}=${axisValue}`);
+      }
+    }
+    if (collapsedWhen.length > 0) {
+      facts.push({
+        part: partName,
+        variant: '',
+        kind: 'declared',
+        channel: 'transform',
+        value: 'matrix(0, 0, 0, 0, …)',
+        reason:
+          `a COLLAPSED transform (scale(0)) for ${collapsedWhen.join(', ')} — Figma has no scale(0), so the canvas ` +
+          `lowers it the only honest way it can: the part is NOT DRAWN in those cells. The fact is carried, but it ` +
+          `comes back off the canvas as the part's ABSENCE (a visibleWhen on that axis value), never as a transform ` +
+          `channel — read it here, not on the node.`,
+      });
+    }
     for (const [state, m] of Object.entries(part.declaredStates ?? {})) {
       for (const [ch, v] of Object.entries(m)) note(ch, v, state);
     }
@@ -5493,6 +5528,68 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     });
   }
   facts.push(...scrimNotes);
+  // RC2 BURN-DOWN — THE VARIANT-PLANE GATE. Nothing in the engine refused a
+  // compiled variant plane whose cells carry NO distinguishing fact. Measured:
+  // mui.text-field mints 3x2 cells from a capture config that declares
+  // `axes: []` — the sweep never varied `variant` or `size`, so all six cells
+  // compile byte-identically and the census graded four identical PNGs; the
+  // same silence covers fluent.avatar's `active` axis, fluent.badge's
+  // outline/ghost, mui.link's underline axis and astryx.checkbox-input's size
+  // axis. A designer opens a six-cell set, every cell is the same picture, and
+  // NOTHING anywhere said so.
+  //
+  // This measures the FINAL compiled specs — after stripMisses, the margin
+  // lowering, annotateFillW and the rest — i.e. the bytes that actually mint,
+  // so a contract cannot pass by carrying a fact that never lowers. The root
+  // spec's `name` is the only field that encodes the axis values, so it is the
+  // only field removed before comparison.
+  //
+  // It NAMES, it does not refuse to emit: a flat axis is a real property of
+  // the source library often enough (a purely semantic prop) that dropping the
+  // whole component would be the bigger lie. The receipt rides every surface
+  // the other code-only facts ride (bundle JSON, plugin plan, set plugin data,
+  // run report), and `code-only-facts:check` pins the counts so a plane going
+  // flat in a later round cannot arrive silently.
+  if (axes.length > 0 && variants.length === combos.length && combos.length > 1) {
+    const cellKey = (v: VariantSpec): string => {
+      const { name: _dropped, ...rest } = v.spec;
+      return JSON.stringify(rest);
+    };
+    const keys = variants.map(cellKey);
+    for (let a = 0; a < axes.length; a++) {
+      const axis = axes[a];
+      if (axis.values.length < 2) continue;
+      // Group the plane by every OTHER axis's coordinate; inside a group the
+      // cells differ in axis `a` alone. The axis is flat when no group
+      // contains two different cells.
+      const groups = new Map<string, string[]>();
+      for (let i = 0; i < combos.length; i++) {
+        const rest = combos[i].filter((_, ai) => ai !== a).join(',');
+        (groups.get(rest) ?? groups.set(rest, []).get(rest)!).push(keys[i]);
+      }
+      let flat = true;
+      for (const g of groups.values()) {
+        if (g.some((k) => k !== g[0])) { flat = false; break; }
+      }
+      if (!flat) continue;
+      const cells = combos.length / axis.values.length;
+      facts.push({
+        part: 'root',
+        variant: '',
+        kind: 'plane',
+        channel: `variant axis "${axis.prop.bindings.figma.property ?? axis.prop.name}"`,
+        value: axis.values.join(' / '),
+        reason:
+          `the compiled plane carries NO distinguishing fact for this axis — its ${axis.values.length} values ` +
+          `compile to byte-identical cells (${cells} identical group(s) of ${axis.values.length}), so the minted set ` +
+          `draws the same picture in every one of them. Either the capture never swept the axis ` +
+          `(extract/computed/configs/<lib>.json \`axes\`) or every fact that separates the values was refused ` +
+          `upstream and is named in this component's own code-only facts. NAMED, NOT DROPPED: the axis is still ` +
+          `minted as a Figma variant property, because a flat axis can be the library's own truth; nothing here ` +
+          `guesses which.`,
+      });
+    }
+  }
   const codeOnlyFacts = foldCodeOnlyFacts(facts, variants.length + stateVariants.length);
   // Part D (owner directive): the canvas CAPTION carries one trailing † —
   // with the count beside it now, pointing at where the names live.
