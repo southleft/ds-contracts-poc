@@ -1,0 +1,77 @@
+{
+  "id": "altitude.chip",
+  "library": "altitude",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "altitude-web-components",
+    "version": "1.0.2",
+    "recipe": "examples/altitude sandbox (.altitude-sandbox; examples/altitude/README) mounted per extract/computed/configs/altitude.json"
+  },
+  "configPath": "extract/computed/configs/altitude.json",
+  "component": "Chip",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "variant-secondary__type-default",
+      "status": "rendered",
+      "png": "ref-variant-secondary__type-default.png",
+      "props": {
+        "variant": "secondary",
+        "type": "default"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-secondary__type-squared",
+      "status": "rendered",
+      "png": "ref-variant-secondary__type-squared.png",
+      "props": {
+        "variant": "secondary",
+        "type": "squared"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-info__type-default",
+      "status": "rendered",
+      "png": "ref-variant-info__type-default.png",
+      "props": {
+        "variant": "info",
+        "type": "default"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-success__type-default",
+      "status": "rendered",
+      "png": "ref-variant-success__type-default.png",
+      "props": {
+        "variant": "success",
+        "type": "default"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-warning__type-default",
+      "status": "rendered",
+      "png": "ref-variant-warning__type-default.png",
+      "props": {
+        "variant": "warning",
+        "type": "default"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-danger__type-default",
+      "status": "rendered",
+      "png": "ref-variant-danger__type-default.png",
+      "props": {
+        "variant": "danger",
+        "type": "default"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 6,
+  "unmappable": 0
+}

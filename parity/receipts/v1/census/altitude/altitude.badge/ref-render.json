@@ -1,0 +1,63 @@
+{
+  "id": "altitude.badge",
+  "library": "altitude",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "altitude-web-components",
+    "version": "1.0.2",
+    "recipe": "examples/altitude sandbox (.altitude-sandbox; examples/altitude/README) mounted per extract/computed/configs/altitude.json"
+  },
+  "configPath": "extract/computed/configs/altitude.json",
+  "component": "Badge",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "variant-info__dot-default",
+      "status": "rendered",
+      "png": "ref-variant-info__dot-default.png",
+      "props": {
+        "variant": "info"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-info__dot-dot",
+      "status": "rendered",
+      "png": "ref-variant-info__dot-dot.png",
+      "props": {
+        "variant": "info",
+        "isDot": true
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-success__dot-default",
+      "status": "rendered",
+      "png": "ref-variant-success__dot-default.png",
+      "props": {
+        "variant": "success"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-warning__dot-default",
+      "status": "rendered",
+      "png": "ref-variant-warning__dot-default.png",
+      "props": {
+        "variant": "warning"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-danger__dot-default",
+      "status": "rendered",
+      "png": "ref-variant-danger__dot-default.png",
+      "props": {
+        "variant": "danger"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 5,
+  "unmappable": 0
+}

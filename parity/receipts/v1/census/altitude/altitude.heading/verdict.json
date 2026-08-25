@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "display/lg/md/sm levels and bold weight match; regular weight renders slightly lighter (Inter substrate)",
  "reviewedAt": "6804cb8f",

@@ -1,0 +1,71 @@
+{
+  "id": "altitude.button",
+  "library": "altitude",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "altitude-web-components",
+    "version": "1.0.2",
+    "recipe": "examples/altitude sandbox (.altitude-sandbox; examples/altitude/README) mounted per extract/computed/configs/altitude.json"
+  },
+  "configPath": "extract/computed/configs/altitude.json",
+  "component": "Button",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "variant-secondary",
+      "status": "rendered",
+      "png": "ref-variant-secondary.png",
+      "props": {
+        "variant": "secondary"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-tertiary",
+      "status": "rendered",
+      "png": "ref-variant-tertiary.png",
+      "props": {
+        "variant": "tertiary"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-bare",
+      "status": "rendered",
+      "png": "ref-variant-bare.png",
+      "props": {
+        "variant": "bare"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-danger",
+      "status": "rendered",
+      "png": "ref-variant-danger.png",
+      "props": {
+        "variant": "danger"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-secondary__state-focus-visible",
+      "status": "rendered",
+      "png": "ref-variant-secondary__state-focus-visible.png",
+      "props": {
+        "variant": "secondary"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-secondary__state-hover",
+      "status": "rendered",
+      "png": "ref-variant-secondary__state-hover.png",
+      "props": {
+        "variant": "secondary"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 6,
+  "unmappable": 0
+}

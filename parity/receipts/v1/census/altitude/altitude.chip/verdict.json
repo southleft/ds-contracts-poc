@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "pill chips match across variants and squared type",
  "reviewedAt": "6804cb8f",

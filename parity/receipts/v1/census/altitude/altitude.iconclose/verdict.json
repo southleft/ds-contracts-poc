@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "close glyph across 7 sizes matches",
  "reviewedAt": "6804cb8f",
