@@ -4841,8 +4841,16 @@
   ],
   "excluded": [
     {
+      "what": "examples/bootstrap5",
+      "reason": "no examples/bootstrap5/contracts/ directory — not a contract library"
+    },
+    {
       "what": "examples/ci",
       "reason": "no examples/ci/contracts/ directory — not a contract library"
+    },
+    {
+      "what": "examples/day-picker",
+      "reason": "no examples/day-picker/contracts/ directory — not a contract library"
     },
     {
       "what": "examples/depth-composite",
@@ -4855,6 +4863,10 @@
     {
       "what": "examples/eventz-vars",
       "reason": "examples/eventz-vars/contracts/ exists but the library carries no examples/eventz-vars/figma/*.figma.js and no eventz-vars.bundle.json — contract → canvas was never emitted for it"
+    },
+    {
+      "what": "examples/radix-themes",
+      "reason": "no examples/radix-themes/contracts/ directory — not a contract library"
     },
     {
       "what": "examples/untitled-ui",

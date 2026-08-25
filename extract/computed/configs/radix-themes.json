@@ -1,0 +1,255 @@
+{
+  "__note": "HELD-OUT SUBJECT #1 — Radix Themes 3.3.0. BLINDNESS RULE (non-negotiable): this file was authored from the library's own documentation and shipped source ONLY. No capture/promote/emit stage of this repo was run against this library, no output of ours for it was read, and nothing here was tuned in response to our pipeline's behaviour. See parity/receipts/v1/HELD-OUT-MANIFEST.md. AUTHORED FROM: the shipped propDefs (node_modules/@radix-ui/themes/dist/esm/components/*.props.js — every axis value list below is copied from them verbatim), styles.css/tokens.css, and the public docs at radix-ui.com/themes. Styling method: ONE prebuilt stylesheet + 1068 unprefixed CSS custom properties, scoped to :root/.light/.light-theme and :where(.radix-themes), with prop values expressed as data-attributes and rt-* classes. Closest committed precedent: shadcn (CSS variables + Radix primitives) and Carbon (one prebuilt stylesheet).",
+  "library": {
+    "__note": "PACKAGE IS THE SANDBOX BARREL, NOT THE LIBRARY. importName is emitted verbatim into `import { <importName> } from '<library.package>'`, so it can only name a BARE export; Radix Themes ships TextField/Callout/Tabs as NAMESPACE OBJECTS (TextField.Root) and a dotted name is not an import specifier. @radix-themes-sandbox/ui re-exports those members flat and adds nothing else (see the sandbox recipe in examples/radix-themes/README.md §2). The REAL pin is @radix-ui/themes@3.3.0 in the sandbox package-lock. Precedent: shadcn's @shadcn-sandbox/ui barrel. classAllow keeps the rt-<PascalCase> IDENTITY classes (rt-Button, rt-BaseButton, rt-CheckboxRoot) and drops the per-combo value classes (rt-r-size-2, rt-variant-solid, rt-high-contrast) and the rt-reset base — a part signature must not change when an axis moves. varPrefix \"--\" because Radix Themes' vocabulary is UNPREFIXED (--accent-9, --gray-a3, --space-3, --radius-3); there is no narrower prefix that would keep it. NOTE the docs/21 §4.2 scope hazard: these are bound on .radix-themes (the <Theme> element), NOT on :root — the mount wrapper is what makes them resolve at all.",
+    "package": "@radix-themes-sandbox/ui",
+    "version": "0.0.1",
+    "framework": "react",
+    "classPrefix": "rt-",
+    "classAllow": "^rt-[A-Z][A-Za-z]*$",
+    "varPrefix": "--"
+  },
+  "mount": {
+    "__note": "Radix Themes REQUIRES both lines. styles.css is the whole shipped stylesheet (tokens + components + utilities) and contains ZERO url() references, so the harness stays network-free with no loader configuration. <Theme> is NOT context-only — it renders a real <div class=\"radix-themes\"> and that div is where every custom property is declared; the component stages mount INSIDE it, so the box is an ANCESTOR of every captured root, not a wrapper around one. Props left at their documented defaults (accentColor indigo, grayColor auto, radius medium, scaling 100%, appearance light) — a first pass should measure the library as it ships.",
+    "imports": [
+      "import '@radix-ui/themes/styles.css';",
+      "import { Theme } from '@radix-themes-sandbox/ui';"
+    ],
+    "wrapperOpen": "<Theme>",
+    "wrapperClose": "</Theme>"
+  },
+  "tokens": {
+    "dtcg": [
+      "examples/radix-themes/tokens/radix-themes.dtcg.json"
+    ],
+    "css": "examples/radix-themes/tokens/radix-themes.vars.css",
+    "minted": "examples/radix-themes/tokens/radix-themes-minted.dtcg.json",
+    "mintedBootstrap": true,
+    "__note:mintedBootstrap": "GENUINE FIRST-EVER PASS. The minted tree is a committed ZERO-LEAF stub and the bootstrap allowance (extract/computed/capture.ts loadConfig, task #28) is the only legal way to gate against it. The exam's first pass is what fills it; the flag must be deleted the moment it carries leaves — loadConfig refuses a stale allowance by name."
+  },
+  "browser": {
+    "viewport": {
+      "width": 1000,
+      "height": 1200
+    },
+    "deviceScaleFactor": 1,
+    "colorScheme": "light"
+  },
+  "stage": {
+    "width": 360,
+    "height": 160,
+    "padding": 16
+  },
+  "enumeration": {
+    "cartesianLimit": 512,
+    "unsetLabel": "unset"
+  },
+  "components": [
+    {
+      "name": "Button",
+      "importName": "Button",
+      "contract": "examples/radix-themes/contracts-seed/button.contract.json",
+      "sampleText": "Button",
+      "axes": [
+        "variant",
+        "size"
+      ],
+      "fixedProps": {
+        "loading": false
+      },
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ]
+    },
+    {
+      "name": "Badge",
+      "importName": "Badge",
+      "contract": "examples/radix-themes/contracts-seed/badge.contract.json",
+      "sampleText": "Badge",
+      "axes": [
+        "variant",
+        "size"
+      ]
+    },
+    {
+      "name": "Checkbox",
+      "importName": "Checkbox",
+      "contract": "examples/radix-themes/contracts-seed/checkbox.contract.json",
+      "sampleText": "",
+      "axes": [
+        "variant",
+        "size",
+        "checked"
+      ],
+      "axisValueMap": {
+        "checked": {
+          "unchecked": false,
+          "checked": true,
+          "indeterminate": "indeterminate"
+        }
+      },
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ]
+    },
+    {
+      "name": "Switch",
+      "importName": "Switch",
+      "contract": "examples/radix-themes/contracts-seed/switch.contract.json",
+      "sampleText": "",
+      "axes": [
+        "variant",
+        "size",
+        "checked"
+      ],
+      "axisValueMap": {
+        "checked": {
+          "unchecked": false,
+          "checked": true
+        }
+      },
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ]
+    },
+    {
+      "name": "TextField",
+      "importName": "TextFieldRoot",
+      "contract": "examples/radix-themes/contracts-seed/text-field.contract.json",
+      "sampleText": "",
+      "axes": [
+        "variant",
+        "size"
+      ],
+      "fixedProps": {
+        "placeholder": "Search the docs…"
+      },
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ]
+    },
+    {
+      "name": "Callout",
+      "importName": "CalloutRoot",
+      "contract": "examples/radix-themes/contracts-seed/callout.contract.json",
+      "sampleText": "",
+      "axes": [
+        "variant",
+        "size"
+      ],
+      "childrenSpec": [
+        {
+          "importName": "CalloutText",
+          "text": "You will need admin privileges to install and access this application."
+        }
+      ]
+    },
+    {
+      "__note": "blockStage + STAGE OVERRIDE, and the padding is 48 ON PURPOSE. Radix's GHOST Card bleeds its own padding back out with margin-inline: -48px at size \"5\" (components.css .rt-variant-ghost), so a block-filling ghost Card measures stage-inner + 96 and a 16px stage clips it on both sides. 48 is the largest size-5 padding, so the widest combo lands exactly inside the stage box. NAMED HAZARD (docs/23, the viewport-geometry class): a block-rooted surface fills the stage, so its captured width IS the stage width — a harness fact, not a library fact.",
+      "name": "Card",
+      "importName": "Card",
+      "contract": "examples/radix-themes/contracts-seed/card.contract.json",
+      "sampleText": "",
+      "axes": [
+        "variant",
+        "size"
+      ],
+      "childrenSpec": [
+        {
+          "importName": "Text",
+          "text": "Card body copy for the held-out round."
+        }
+      ],
+      "blockStage": true,
+      "stage": {
+        "width": 480,
+        "height": 240,
+        "padding": 48
+      }
+    },
+    {
+      "__note": "STAGE OVERRIDE: size \"9\" measures 160x160 in the sandbox, which overflows the 360x160 default stage. Measured at the largest combo before any capture ran.",
+      "name": "Avatar",
+      "importName": "Avatar",
+      "contract": "examples/radix-themes/contracts-seed/avatar.contract.json",
+      "sampleText": "",
+      "axes": [
+        "variant",
+        "size"
+      ],
+      "fixedProps": {
+        "fallback": "TP"
+      },
+      "stage": {
+        "width": 224,
+        "height": 224,
+        "padding": 16
+      }
+    },
+    {
+      "name": "Progress",
+      "importName": "Progress",
+      "contract": "examples/radix-themes/contracts-seed/progress.contract.json",
+      "sampleText": "",
+      "axes": [
+        "variant",
+        "size"
+      ],
+      "fixedProps": {
+        "value": 60
+      },
+      "blockStage": true
+    },
+    {
+      "name": "Tabs",
+      "importName": "TabsRoot",
+      "contract": "examples/radix-themes/contracts-seed/tabs.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "fixedProps": {
+        "defaultValue": "account"
+      },
+      "childrenSpec": [
+        {
+          "importName": "TabsList",
+          "children": [
+            {
+              "importName": "TabsTrigger",
+              "props": {
+                "value": "account"
+              },
+              "text": "Account"
+            },
+            {
+              "importName": "TabsTrigger",
+              "props": {
+                "value": "documents"
+              },
+              "text": "Documents"
+            },
+            {
+              "importName": "TabsTrigger",
+              "props": {
+                "value": "settings"
+              },
+              "text": "Settings"
+            }
+          ]
+        }
+      ],
+      "blockStage": true
+    }
+  ]
+}

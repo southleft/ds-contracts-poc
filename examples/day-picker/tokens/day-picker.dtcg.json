@@ -1,0 +1,199 @@
+{
+  "rdp-accent-background-color": {
+    "$type": "color",
+    "$value": "#f0f0ff"
+  },
+  "rdp-accent-color": {
+    "$type": "color",
+    "$value": "blue"
+  },
+  "rdp-animation_duration": {
+    "$type": "string",
+    "$value": "0.3s"
+  },
+  "rdp-animation_timing": {
+    "$type": "string",
+    "$value": "cubic-bezier(0.4, 0, 0.2, 1)"
+  },
+  "rdp-day-height": {
+    "$type": "dimension",
+    "$value": "44px"
+  },
+  "rdp-day-width": {
+    "$type": "dimension",
+    "$value": "44px"
+  },
+  "rdp-day_button-border": {
+    "$type": "string",
+    "$value": "2px solid transparent"
+  },
+  "rdp-day_button-border-radius": {
+    "$type": "string",
+    "$value": "100%"
+  },
+  "rdp-day_button-height": {
+    "$type": "dimension",
+    "$value": "42px"
+  },
+  "rdp-day_button-width": {
+    "$type": "dimension",
+    "$value": "42px"
+  },
+  "rdp-disabled-opacity": {
+    "$type": "number",
+    "$value": "0.5"
+  },
+  "rdp-dropdown-gap": {
+    "$type": "dimension",
+    "$value": "0.5rem"
+  },
+  "rdp-gradient-direction": {
+    "$type": "string",
+    "$value": "90deg"
+  },
+  "rdp-months-gap": {
+    "$type": "dimension",
+    "$value": "2rem"
+  },
+  "rdp-nav-height": {
+    "$type": "dimension",
+    "$value": "2.75rem"
+  },
+  "rdp-nav_button-disabled-opacity": {
+    "$type": "number",
+    "$value": "0.5"
+  },
+  "rdp-nav_button-height": {
+    "$type": "dimension",
+    "$value": "2.25rem"
+  },
+  "rdp-nav_button-width": {
+    "$type": "dimension",
+    "$value": "2.25rem"
+  },
+  "rdp-outside-opacity": {
+    "$type": "number",
+    "$value": "0.75"
+  },
+  "rdp-range_end-background": {
+    "$type": "string",
+    "$value": "linear-gradient(\n    90deg,\n    #f0f0ff 50%,\n    transparent 50%\n  )",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "linear-gradient(\n    var(--rdp-gradient-direction),\n    var(--rdp-range_middle-background-color) 50%,\n    transparent 50%\n  )"
+      }
+    }
+  },
+  "rdp-range_end-color": {
+    "$type": "color",
+    "$value": "white"
+  },
+  "rdp-range_end-date-background-color": {
+    "$type": "color",
+    "$value": "blue",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--rdp-accent-color)"
+      }
+    }
+  },
+  "rdp-range_middle-background-color": {
+    "$type": "color",
+    "$value": "#f0f0ff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--rdp-accent-background-color)"
+      }
+    }
+  },
+  "rdp-range_middle-color": {
+    "$type": "string",
+    "$value": "inherit"
+  },
+  "rdp-range_start-background": {
+    "$type": "string",
+    "$value": "linear-gradient(\n    90deg,\n    transparent 50%,\n    #f0f0ff 50%\n  )",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "linear-gradient(\n    var(--rdp-gradient-direction),\n    transparent 50%,\n    var(--rdp-range_middle-background-color) 50%\n  )"
+      }
+    }
+  },
+  "rdp-range_start-color": {
+    "$type": "color",
+    "$value": "white"
+  },
+  "rdp-range_start-date-background-color": {
+    "$type": "color",
+    "$value": "blue",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--rdp-accent-color)"
+      }
+    }
+  },
+  "rdp-selected-border": {
+    "$type": "string",
+    "$value": "2px solid blue",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "2px solid var(--rdp-accent-color)"
+      }
+    }
+  },
+  "rdp-today-color": {
+    "$type": "color",
+    "$value": "blue",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--rdp-accent-color)"
+      }
+    }
+  },
+  "rdp-week_number-border": {
+    "$type": "string",
+    "$value": "2px solid transparent"
+  },
+  "rdp-week_number-border-radius": {
+    "$type": "string",
+    "$value": "100%"
+  },
+  "rdp-week_number-height": {
+    "$type": "dimension",
+    "$value": "44px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--rdp-day-height)"
+      }
+    }
+  },
+  "rdp-week_number-opacity": {
+    "$type": "number",
+    "$value": "0.75"
+  },
+  "rdp-week_number-width": {
+    "$type": "dimension",
+    "$value": "44px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--rdp-day-width)"
+      }
+    }
+  },
+  "rdp-weekday-opacity": {
+    "$type": "number",
+    "$value": "0.75"
+  },
+  "rdp-weekday-padding": {
+    "$type": "string",
+    "$value": "0.5rem 0rem"
+  },
+  "rdp-weekday-text-align": {
+    "$type": "string",
+    "$value": "center"
+  },
+  "rdp-weeknumber-text-align": {
+    "$type": "string",
+    "$value": "center"
+  }
+}

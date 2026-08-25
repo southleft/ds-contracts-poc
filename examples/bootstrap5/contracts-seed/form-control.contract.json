@@ -1,0 +1,58 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "bootstrap5.form-control",
+  "name": "FormControl",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the HELD-OUT FIRST-PASS EXAM — props/axes only; anatomy is promoted from captured DOM truth. Subject: bootstrap@5.3.8 (plain CSS; no component runtime). BLINDNESS RULE (non-negotiable): this file was authored from the library's own documentation and shipped source ONLY. No capture/promote/emit stage of this repo was run against this library, no output of ours for it was read, and nothing here was tuned in response to our pipeline's behaviour. See parity/receipts/v1/HELD-OUT-MANIFEST.md.",
+  "semantics": {
+    "element": "input"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "sm",
+          "default",
+          "lg"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "sm": "Sm",
+            "default": "Default",
+            "lg": "Lg"
+          }
+        },
+        "code": {
+          "prop": "className"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled"
+  ],
+  "anatomy": {
+    "root": {}
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "bootstrap",
+        "export": "input"
+      }
+    }
+  }
+}

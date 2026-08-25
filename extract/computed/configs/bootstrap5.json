@@ -1,0 +1,613 @@
+{
+  "__note": "HELD-OUT SUBJECT #2 — Bootstrap 5.3.8. BLINDNESS RULE (non-negotiable): this file was authored from the library's own documentation and shipped source ONLY. No capture/promote/emit stage of this repo was run against this library, no output of ours for it was read, and nothing here was tuned in response to our pipeline's behaviour. See parity/receipts/v1/HELD-OUT-MANIFEST.md. AUTHORED FROM: getbootstrap.com/docs/5.3 component pages and the shipped dist/css/bootstrap.css. THE STRUCTURAL FACT: Bootstrap is NOT a component library. It ships no importable components at all — a \"Bootstrap Button\" is the string `class=\"btn btn-primary\"` on an <button> you write yourself. Every mount below is therefore Bootstrap's own documented markup, expressed through the one non-React-export door the config grammar has (library.customElements, which makes importName a TAG NAME) with the class token riding axisValueMap $props.className. No React component was invented for this subject. Every JS behaviour (bootstrap.bundle.js) is OUT of this config by design: the only component here that normally needs it is Modal, and Bootstrap documents a JS-free \"static example\" rendering — that is what is mounted.",
+  "library": {
+    "__note": "customElements:true is the ONLY mount the grammar offers for a library that exports no React components (extract/computed/capture.ts library.customElements). It makes importName a tag name mounted as React.createElement(tag, props) — the DOM it produces is Bootstrap's documented markup verbatim. Two documented side effects come with the flag and neither harms this subject: `false`/function props are dropped before mount (Bootstrap uses neither), and the shadow-descent capture path switches on (documented to degrade to the plain element walk when no shadow root exists — Bootstrap has none). classAllow keeps Bootstrap's STRUCTURAL classes and drops the theme-colour modifiers, because those are the axis VALUE and a part signature must not move when an axis moves; the excluded list is Bootstrap's own documented $theme-colors map plus text-bg-*/btn-outline-*. varPrefix \"--bs-\" is Bootstrap's documented CSS-variable prefix: the global palette sits on :root and every component ALSO declares its own local --bs-<component>-* set on its root element (--bs-btn-bg, --bs-alert-color), which is exactly the seam the CSS-vars reader binds.",
+    "package": "bootstrap",
+    "version": "5.3.8",
+    "framework": "react",
+    "customElements": true,
+    "classPrefix": "",
+    "classAllow": "^(?!.*\\b(?:btn|alert|badge|text-bg|bg|border|link|list-group-item|nav-link|table|spinner-border|spinner-grow)-(?:primary|secondary|success|danger|warning|info|light|dark)$)(?!btn-outline-).+$",
+    "varPrefix": "--bs-"
+  },
+  "mount": {
+    "__note": "ONE import: the shipped, precompiled stylesheet. bootstrap.css contains url() only as inline data: SVGs (form-check indicators, .btn-close, the accordion chevron), so the harness stays network-free with no loader configuration. No provider, no wrapper element, no JS — bootstrap.bundle.js is deliberately absent (see the config __note).",
+    "imports": [
+      "import 'bootstrap/dist/css/bootstrap.css';"
+    ],
+    "wrapperOpen": "<>",
+    "wrapperClose": "</>"
+  },
+  "tokens": {
+    "dtcg": [
+      "examples/bootstrap5/tokens/bootstrap5.dtcg.json"
+    ],
+    "css": "examples/bootstrap5/tokens/bootstrap5.vars.css",
+    "minted": "examples/bootstrap5/tokens/bootstrap5-minted.dtcg.json",
+    "mintedBootstrap": true,
+    "__note:mintedBootstrap": "GENUINE FIRST-EVER PASS. The minted tree is a committed ZERO-LEAF stub and the bootstrap allowance (extract/computed/capture.ts loadConfig, task #28) is the only legal way to gate against it. The exam's first pass is what fills it; the flag must be deleted the moment it carries leaves — loadConfig refuses a stale allowance by name."
+  },
+  "browser": {
+    "viewport": {
+      "width": 1000,
+      "height": 1200
+    },
+    "deviceScaleFactor": 1,
+    "colorScheme": "light"
+  },
+  "stage": {
+    "width": 380,
+    "height": 140,
+    "padding": 16
+  },
+  "enumeration": {
+    "cartesianLimit": 512,
+    "unsetLabel": "unset"
+  },
+  "components": [
+    {
+      "name": "Button",
+      "importName": "button",
+      "contract": "examples/bootstrap5/contracts-seed/button.contract.json",
+      "sampleText": "Button",
+      "axes": [
+        "variant"
+      ],
+      "axisValueMap": {
+        "variant": {
+          "primary": {
+            "$props": {
+              "className": "btn btn-primary"
+            }
+          },
+          "secondary": {
+            "$props": {
+              "className": "btn btn-secondary"
+            }
+          },
+          "success": {
+            "$props": {
+              "className": "btn btn-success"
+            }
+          },
+          "danger": {
+            "$props": {
+              "className": "btn btn-danger"
+            }
+          },
+          "warning": {
+            "$props": {
+              "className": "btn btn-warning"
+            }
+          },
+          "info": {
+            "$props": {
+              "className": "btn btn-info"
+            }
+          },
+          "light": {
+            "$props": {
+              "className": "btn btn-light"
+            }
+          },
+          "dark": {
+            "$props": {
+              "className": "btn btn-dark"
+            }
+          },
+          "link": {
+            "$props": {
+              "className": "btn btn-link"
+            }
+          },
+          "outline-primary": {
+            "$props": {
+              "className": "btn btn-outline-primary"
+            }
+          },
+          "outline-secondary": {
+            "$props": {
+              "className": "btn btn-outline-secondary"
+            }
+          }
+        }
+      },
+      "fixedProps": {
+        "type": "button"
+      },
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ]
+    },
+    {
+      "name": "Alert",
+      "importName": "div",
+      "contract": "examples/bootstrap5/contracts-seed/alert.contract.json",
+      "sampleText": "A simple alert—check it out!",
+      "axes": [
+        "variant"
+      ],
+      "axisValueMap": {
+        "variant": {
+          "primary": {
+            "$props": {
+              "className": "alert alert-primary"
+            }
+          },
+          "secondary": {
+            "$props": {
+              "className": "alert alert-secondary"
+            }
+          },
+          "success": {
+            "$props": {
+              "className": "alert alert-success"
+            }
+          },
+          "danger": {
+            "$props": {
+              "className": "alert alert-danger"
+            }
+          },
+          "warning": {
+            "$props": {
+              "className": "alert alert-warning"
+            }
+          },
+          "info": {
+            "$props": {
+              "className": "alert alert-info"
+            }
+          },
+          "light": {
+            "$props": {
+              "className": "alert alert-light"
+            }
+          },
+          "dark": {
+            "$props": {
+              "className": "alert alert-dark"
+            }
+          }
+        }
+      },
+      "fixedProps": {
+        "role": "alert"
+      }
+    },
+    {
+      "name": "Badge",
+      "importName": "span",
+      "contract": "examples/bootstrap5/contracts-seed/badge.contract.json",
+      "sampleText": "New",
+      "axes": [
+        "variant"
+      ],
+      "axisValueMap": {
+        "variant": {
+          "primary": {
+            "$props": {
+              "className": "badge text-bg-primary"
+            }
+          },
+          "secondary": {
+            "$props": {
+              "className": "badge text-bg-secondary"
+            }
+          },
+          "success": {
+            "$props": {
+              "className": "badge text-bg-success"
+            }
+          },
+          "danger": {
+            "$props": {
+              "className": "badge text-bg-danger"
+            }
+          },
+          "warning": {
+            "$props": {
+              "className": "badge text-bg-warning"
+            }
+          },
+          "info": {
+            "$props": {
+              "className": "badge text-bg-info"
+            }
+          },
+          "light": {
+            "$props": {
+              "className": "badge text-bg-light"
+            }
+          },
+          "dark": {
+            "$props": {
+              "className": "badge text-bg-dark"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "FormControl",
+      "importName": "input",
+      "contract": "examples/bootstrap5/contracts-seed/form-control.contract.json",
+      "sampleText": "",
+      "axes": [
+        "size"
+      ],
+      "axisValueMap": {
+        "size": {
+          "sm": {
+            "$props": {
+              "className": "form-control form-control-sm"
+            }
+          },
+          "default": {
+            "$props": {
+              "className": "form-control"
+            }
+          },
+          "lg": {
+            "$props": {
+              "className": "form-control form-control-lg"
+            }
+          }
+        }
+      },
+      "fixedProps": {
+        "type": "text",
+        "placeholder": "Email address",
+        "aria-label": "Email address"
+      },
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ]
+    },
+    {
+      "name": "FormCheck",
+      "importName": "div",
+      "contract": "examples/bootstrap5/contracts-seed/form-check.contract.json",
+      "sampleText": "",
+      "axes": [
+        "variant"
+      ],
+      "axisValueMap": {
+        "variant": {
+          "check": {
+            "$props": {
+              "className": "form-check"
+            }
+          },
+          "switch": {
+            "$props": {
+              "className": "form-check form-switch"
+            }
+          },
+          "inline": {
+            "$props": {
+              "className": "form-check form-check-inline"
+            }
+          }
+        }
+      },
+      "childrenSpec": [
+        {
+          "importName": "input",
+          "props": {
+            "className": "form-check-input",
+            "type": "checkbox",
+            "id": "bs5-check",
+            "defaultChecked": true
+          }
+        },
+        {
+          "importName": "label",
+          "props": {
+            "className": "form-check-label",
+            "htmlFor": "bs5-check"
+          },
+          "text": "Check me out"
+        }
+      ]
+    },
+    {
+      "__note": "STAGE OVERRIDE: the documented card body measures 348x168 in the sandbox.",
+      "name": "Card",
+      "importName": "div",
+      "contract": "examples/bootstrap5/contracts-seed/card.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "fixedProps": {
+        "className": "card"
+      },
+      "childrenSpec": [
+        {
+          "importName": "div",
+          "props": {
+            "className": "card-body"
+          },
+          "children": [
+            {
+              "importName": "h5",
+              "props": {
+                "className": "card-title"
+              },
+              "text": "Card title"
+            },
+            {
+              "importName": "p",
+              "props": {
+                "className": "card-text"
+              },
+              "text": "Some quick example text to build on the card title."
+            },
+            {
+              "importName": "a",
+              "props": {
+                "className": "btn btn-primary",
+                "href": "#"
+              },
+              "text": "Go somewhere"
+            }
+          ]
+        }
+      ],
+      "blockStage": true,
+      "stage": {
+        "width": 380,
+        "height": 224,
+        "padding": 16
+      }
+    },
+    {
+      "name": "Progress",
+      "importName": "div",
+      "contract": "examples/bootstrap5/contracts-seed/progress.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "fixedProps": {
+        "className": "progress",
+        "role": "progressbar",
+        "aria-label": "Example",
+        "aria-valuenow": 60,
+        "aria-valuemin": 0,
+        "aria-valuemax": 100
+      },
+      "childrenSpec": [
+        {
+          "importName": "div",
+          "props": {
+            "className": "progress-bar",
+            "style": {
+              "width": "60%"
+            }
+          }
+        }
+      ],
+      "blockStage": true
+    },
+    {
+      "name": "Spinner",
+      "importName": "div",
+      "contract": "examples/bootstrap5/contracts-seed/spinner.contract.json",
+      "sampleText": "",
+      "axes": [
+        "variant"
+      ],
+      "axisValueMap": {
+        "variant": {
+          "border": {
+            "$props": {
+              "className": "spinner-border"
+            }
+          },
+          "grow": {
+            "$props": {
+              "className": "spinner-grow"
+            }
+          }
+        }
+      },
+      "fixedProps": {
+        "role": "status"
+      },
+      "childrenSpec": [
+        {
+          "importName": "span",
+          "props": {
+            "className": "visually-hidden"
+          },
+          "text": "Loading..."
+        }
+      ]
+    },
+    {
+      "name": "NavTabs",
+      "importName": "ul",
+      "contract": "examples/bootstrap5/contracts-seed/nav-tabs.contract.json",
+      "sampleText": "",
+      "axes": [
+        "variant"
+      ],
+      "axisValueMap": {
+        "variant": {
+          "tabs": {
+            "$props": {
+              "className": "nav nav-tabs"
+            }
+          },
+          "pills": {
+            "$props": {
+              "className": "nav nav-pills"
+            }
+          },
+          "underline": {
+            "$props": {
+              "className": "nav nav-underline"
+            }
+          }
+        }
+      },
+      "childrenSpec": [
+        {
+          "importName": "li",
+          "props": {
+            "className": "nav-item"
+          },
+          "children": [
+            {
+              "importName": "a",
+              "props": {
+                "className": "nav-link active",
+                "aria-current": "page",
+                "href": "#"
+              },
+              "text": "Active"
+            }
+          ]
+        },
+        {
+          "importName": "li",
+          "props": {
+            "className": "nav-item"
+          },
+          "children": [
+            {
+              "importName": "a",
+              "props": {
+                "className": "nav-link",
+                "href": "#"
+              },
+              "text": "Link"
+            }
+          ]
+        },
+        {
+          "importName": "li",
+          "props": {
+            "className": "nav-item"
+          },
+          "children": [
+            {
+              "importName": "a",
+              "props": {
+                "className": "nav-link disabled",
+                "aria-disabled": "true",
+                "href": "#"
+              },
+              "text": "Disabled"
+            }
+          ]
+        }
+      ],
+      "blockStage": true
+    },
+    {
+      "__note": "BOOTSTRAP'S DOCUMENTED MODAL MARKUP, FORCED OPEN. The subtree is verbatim from the docs; two things are OURS and are named as ours. (1) .fade is omitted — Bootstrap documents that removal (\"Remove the .fade class from the modal markup to disable the fade-in animation\"), and an animation that never settles has no honest steady-state geometry. (2) style=\"display:block; position:static\" stands in for what bootstrap.bundle.js normally does on open: .modal ships display:none, so without this there is nothing to capture, and it ships position:fixed, which would lift the dialog OUT of the stage and pin it to the viewport. There is no .modal-backdrop sibling because the JS creates it, and this config loads no JS. A JS-driven modal (portal-to-body overlay + .fade transition + .show rules + backdrop) is NOT what is captured here and the README says so.",
+      "name": "Modal",
+      "importName": "div",
+      "contract": "examples/bootstrap5/contracts-seed/modal.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "fixedProps": {
+        "className": "modal",
+        "style": {
+          "display": "block",
+          "position": "static"
+        },
+        "tabIndex": -1
+      },
+      "childrenSpec": [
+        {
+          "importName": "div",
+          "props": {
+            "className": "modal-dialog"
+          },
+          "children": [
+            {
+              "importName": "div",
+              "props": {
+                "className": "modal-content"
+              },
+              "children": [
+                {
+                  "importName": "div",
+                  "props": {
+                    "className": "modal-header"
+                  },
+                  "children": [
+                    {
+                      "importName": "h5",
+                      "props": {
+                        "className": "modal-title"
+                      },
+                      "text": "Modal title"
+                    },
+                    {
+                      "importName": "button",
+                      "props": {
+                        "type": "button",
+                        "className": "btn-close",
+                        "aria-label": "Close"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "importName": "div",
+                  "props": {
+                    "className": "modal-body"
+                  },
+                  "children": [
+                    {
+                      "importName": "p",
+                      "props": {},
+                      "text": "Modal body text goes here."
+                    }
+                  ]
+                },
+                {
+                  "importName": "div",
+                  "props": {
+                    "className": "modal-footer"
+                  },
+                  "children": [
+                    {
+                      "importName": "button",
+                      "props": {
+                        "type": "button",
+                        "className": "btn btn-secondary"
+                      },
+                      "text": "Close"
+                    },
+                    {
+                      "importName": "button",
+                      "props": {
+                        "type": "button",
+                        "className": "btn btn-primary"
+                      },
+                      "text": "Save changes"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "blockStage": true,
+      "stage": {
+        "width": 560,
+        "height": 440,
+        "padding": 16
+      }
+    }
+  ]
+}
