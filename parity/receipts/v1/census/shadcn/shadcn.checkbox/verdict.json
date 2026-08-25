@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "unchecked/checked/indeterminate + focus preview match; canvas check glyph geometry slightly rotated vs code",
  "reviewedAt": "60793cc0",

@@ -1,5 +1,6 @@
 {
- "recognisable": false,
+ "recognisable": "ungraded",
+ "priorSelfGrade": false,
  "walls": [
   "CANVAS-LEAF-INPUT-COLLAPSED",
   "CODE-CANVAS-DISAGREE:root.border-color-unspecified"

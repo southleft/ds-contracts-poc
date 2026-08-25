@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "default/secondary/destructive/outline/ghost/link + state previews match",
  "reviewedAt": "60793cc0",

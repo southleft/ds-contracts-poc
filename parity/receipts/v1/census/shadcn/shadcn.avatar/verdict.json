@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "CN circle across 3 sizes matches",
  "reviewedAt": "60793cc0",

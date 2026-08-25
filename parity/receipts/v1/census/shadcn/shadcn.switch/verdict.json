@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "track/thumb both states + focus preview match",
  "reviewedAt": "60793cc0",

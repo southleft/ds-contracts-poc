@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [
   "CODE-CANVAS-DISAGREE:root.border-color-unspecified"
  ],
