@@ -2870,15 +2870,34 @@ export function sortByDependencies(contracts: Contract[]): Contract[] {
  * `slotStories` loop `continue`s when there is nothing to sample, and the
  * canonical meta args never fills a named slot. Minting a placeholder there
  * would put content on the canvas that no code surface has; minting a
- * MINIMUM BOX would put geometry there that no surface declares. Measured,
- * from the committed census code halves against the same rows on the mock
- * canvas: ds.two-column CSS 640x0 vs canvas 640x1, ds.sidebar-layout CSS
- * 640x0 vs canvas 640x1, ds.grid-gallery CSS 640x16 vs canvas 640x18 — the
- * canvas is already within Figma's 1px-per-axis floor of what the code
- * surface draws. The region is empty because the CONTRACT declares no
- * content, and the remedy is a contract edit (`slot.defaultContent`), not an
- * engine edit. What the engine owes is a RECEIPT: the emitter names every
- * such slot instead of shipping a silent sliver.
+ * MINIMUM BOX would put geometry there that no surface declares.
+ *
+ * THAT SECOND HALF WAS RE-MEASURED, not assumed, because the first round of
+ * this fix was refuted for skipping it. The census code halves are captured
+ * by extract/figma/canvas-gate/shots.ts with CLIP_MARGIN = 24 on every side,
+ * so the PNG is the content box plus 48 CSS px per axis at dpr 2 — the
+ * content box is (png/2 - 48). Committed bytes, both surfaces:
+ *
+ *   row                code PNG      CSS content   canvas (mock)   delta
+ *   ds.two-column      1200x96       640x0         640x1           +1 (1 row)
+ *   ds.sidebar-layout  1200x96       640x0         640x1           +1 (1 row)
+ *   ds.grid-gallery    1200x128      640x16        640x18          +2 (2 rows)
+ *
+ * Every delta is exactly ONE Figma 1px floor per flooring row. The canvas is
+ * already drawing the same nothing the CSS draws; a minimum box would put
+ * geometry on the canvas that neither the contract nor either code surface
+ * has. The region is empty because the CONTRACT declares no content, the
+ * remedy is a contract edit (`slot.defaultContent`), and what the engine owes
+ * is a RECEIPT: the emitter names every such slot instead of shipping a
+ * silent sliver. `evals/fixtures/native-slots-check.ts` §11 pins the delta so
+ * this stops being prose.
+ *
+ * NOT THIS CLASS, and named so it is not mistaken for it: ds.toolbar and
+ * ds.top-nav mint 640 wide against a CSS surface that hugs to 58 and 66. That
+ * is `max-width` lowering as a FIXED width on a root with no measured
+ * `hugsBelowMaxWidth` (core/emit-figma-script.ts, the `max-width` case) — a
+ * different door, deliberately held open there for the hand-authored design
+ * widths, and untouched here.
  * ------------------------------------------------------------------------- */
 
 /** The slot name that is the code-side default slot (React `children`). */
@@ -2889,6 +2908,46 @@ export const DEFAULT_CONTENT_SLOT = "children";
  *  carries too. Spelled ONCE; `core/emit-react.ts` and
  *  `core/emit-figma-script.ts` both read it from here. */
 export const DEFAULT_SLOT_SAMPLE = "The quick brown fox jumps over the lazy dog.";
+
+/** THE CARRIER. The layer name the canvas emitter gives its own design-time
+ *  sample, and the reason the inverse path can drop it without guessing.
+ *
+ *  A layer name round-trips (the plugin dump records `name` on every node), so
+ *  the emitter's sample arrives back at `core/propose-figma.ts` still wearing
+ *  it. The FIRST attempt at this fix dropped any TEXT child of any native SLOT
+ *  whose characters equalled DEFAULT_SLOT_SAMPLE — which also swallowed a
+ *  DESIGNER's text, in a slot the emitter never samples, with no receipt: a
+ *  real canvas fact vanishing silently, the exact failure class this whole
+ *  round exists to remove. `isDesignTimeSlotSample` below is the narrowed
+ *  rule, and it is spelled HERE so the emitter and the inverter cannot drift. */
+export const SLOT_SAMPLE_LAYER = "Slot sample";
+
+/** THE INVERSE OF THE `sample` RULE — the one predicate `core/propose-figma.ts`
+ *  uses to recognise the canvas emitter's OWN design-time sample and drop it,
+ *  so contract → Figma → dump → propose stays identical.
+ *
+ *  Every conjunct is load-bearing, and each one is a way a designer's real
+ *  content gets NAMED instead of swallowed:
+ *    · SOLE CHILD — the emitter mints exactly one; anything beside it means a
+ *      person has been in the slot.
+ *    · TEXT — the emitter mints a TEXT node and nothing else.
+ *    · THE LAYER NAME — Figma names a hand-drawn text layer after its own
+ *      characters, never this.
+ *    · THE CHARACTERS — edited copy is a designer's copy, and comes back.
+ *  Deliberately NOT gated on the slot's property name: `contracts/card.contract.json`
+ *  binds its `children` slot to the Figma property "Body", so a name test
+ *  would silently stop inverting the very row this fix repairs. */
+export function isDesignTimeSlotSample(
+  children: ReadonlyArray<{ type: string; name: string; characters?: string | null }>,
+): boolean {
+  if (children.length !== 1) return false;
+  const only = children[0];
+  return (
+    only.type === "TEXT" &&
+    only.name === SLOT_SAMPLE_LAYER &&
+    only.characters === DEFAULT_SLOT_SAMPLE
+  );
+}
 
 export type DesignTimeSlotContent =
   /** The contract declares the content: both emitters instantiate it. */

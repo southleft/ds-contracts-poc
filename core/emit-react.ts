@@ -26,6 +26,8 @@
  *   - optional parts render conditionally on their slot prop
  */
 import {
+  DEFAULT_CONTENT_SLOT,
+  designTimeSlotContent,
   isNativeCheckablePart,
   pascal,
   slotsOf,
@@ -857,14 +859,23 @@ export function generateStories(contract: Contract, byId: Map<string, Contract>)
     const evDesc = (ev.description ?? `Fires when the ${ev.trigger} is activated.`).replace(/'/g, "\\'");
     argTypes.push(`    ${ev.bindings.code.prop}: { control: false, description: '${evDesc}' },`);
   }
-  const defaultSlot = slotsOf(contract).find((s) => s.slot.name === 'children');
+  const defaultSlot = slotsOf(contract).find((s) => s.slot.name === DEFAULT_CONTENT_SLOT);
   const defaultSample =
     defaultSlot && (defaultSlot.slot.defaultContent?.length ?? 0) > 0
       ? sampleJSX(defaultSlot.slot.defaultContent!, byId)
       : null;
-  if (hasDefaultSlot && !defaultSample) {
+  // RC5 — the design-time sample is no longer spelled here. `args.children` is
+  // the canonical design-time content of the default slot on the CODE surface;
+  // the Figma main component's slot content is the same object on the CANVAS
+  // surface. Both emitters now read ONE policy (designTimeSlotContent), so the
+  // two surfaces cannot drift apart: the string a story shows is byte-for-byte
+  // the string the canvas draws.
+  const defaultPolicy = defaultSlot ? designTimeSlotContent(defaultSlot.slot) : null;
+  if (hasDefaultSlot && !defaultSample && defaultPolicy?.kind === 'sample') {
     argTypes.push(`    children: { control: 'text' },`);
-    args.push(`    children: 'The quick brown fox jumps over the lazy dog.',`);
+    // Single-quoted, matching every other generated arg (byte-identical to
+    // the literal this replaced — the constant carries no quote to escape).
+    args.push(`    children: '${defaultPolicy.text.replace(/\\/g, '\\\\').replace(/'/g, "\\'")}',`);
   }
   if (defaultSample) {
     argTypes.push(`    children: { control: false },`);

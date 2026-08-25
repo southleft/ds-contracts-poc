@@ -43,7 +43,13 @@
 import vm from 'node:vm';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
-import { ContractSchema, type Contract } from '../../scripts/contract-schema.js';
+import {
+  ContractSchema,
+  DEFAULT_SLOT_SAMPLE,
+  SLOT_SAMPLE_LAYER,
+  type Contract,
+} from '../../scripts/contract-schema.js';
+import { generateStories } from '../../core/emit-react.js';
 import { emitFigmaScript } from '../../core/emit-figma-script.js';
 import { createFigmaMock } from '../../scripts/plugin-engine-mock-figma.mjs';
 import { proposeFromDump } from '../../core/propose-figma.js';
@@ -681,6 +687,273 @@ console.log('\n9. FC-OVERFLOW-CLIP-LOST — declared overflow hidden/clip draws 
     );
   }
   ok('red test: stripping clipsContent from the compiled spec leaves the node unclipped — the pin bites');
+}
+
+console.log("\n10. RC5 DESIGN-TIME SLOT SAMPLE — an empty default `children` slot is not an empty component");
+{
+  // THE ASYMMETRY THIS CLOSES. A Figma MAIN COMPONENT's slot content and a
+  // generated Storybook meta's canonical args are the same object: the
+  // design-time default an instance inherits and a fill replaces (resetSlot()
+  // returns to it). core/emit-react.ts always computed one; core/emit-figma-
+  // script.ts computed none, so the component a designer opens was CHILDLESS
+  // — and a childless auto-layout node has nothing to re-measure, so the
+  // correct birth-box repair (§7/§8) floors it at Figma's 1px. Measured on
+  // the committed corpus before this fix: ds.blockquote 33x17 with both slots
+  // 1x1, ds.toast 320x17, ds.card's Body slot 320x1.
+  //
+  // ONE policy (packages/schema designTimeSlotContent), read by both
+  // emitters, so the string a story shows is the string the canvas draws.
+  const twoSlotHost = (opts: { declared?: boolean } = {}): Contract =>
+    ContractSchema.parse({
+      id: 'ds.eval-slot-sample',
+      name: 'EvalSlotSample',
+      version: '0.1.0',
+      status: 'draft',
+      description: 'RC5 design-time slot sample fixture',
+      semantics: { element: 'div' },
+      props: [
+        {
+          name: 'size',
+          description: 'Density.',
+          type: { enum: ['sm', 'lg'] },
+          default: 'sm',
+          bindings: { figma: { kind: 'VARIANT', property: 'Size', values: { sm: 'Sm', lg: 'Lg' } }, code: { prop: 'size' } },
+        },
+      ],
+      states: [],
+      anatomy: {
+        root: {
+          layout: { display: 'flex', direction: 'column' },
+          literals: { width: '320px' },
+          parts: {
+            quote: {
+              description: 'The quoted content.',
+              slot: opts.declared
+                ? { name: 'children', accepts: ['ds.eval-slot-leaf'], acceptsMode: 'prefer', defaultContent: [{ id: 'ds.eval-slot-leaf' }] }
+                : { name: 'children', acceptsMode: 'open' },
+            },
+            citation: {
+              description: 'Attribution.',
+              slot: { name: 'cite', acceptsMode: 'open' },
+            },
+          },
+        },
+      },
+      bindings: { figma: { anchors: { fileKey: null, componentSetKey: null } }, code: { anchors: { importPath: 'x', export: 'EvalSlotSample' } } },
+    }) as Contract;
+
+  const emitSample = (c: Contract): string =>
+    emitFigmaScript(c, { tokens: TOKENS, icons: new Map(), contracts: new Map([[leaf().id, leaf()], [c.id, c]]) } as never);
+  const buildSample = async (c: Contract): Promise<Mock> => {
+    const m = createFigmaMock();
+    await runIn(m, emit(leaf()));
+    await runIn(m, emitSample(c));
+    return m;
+  };
+  const sampleSet = (m: Mock) => findAll(m, (n: any) => n.type === 'COMPONENT_SET' && n.name === 'EvalSlotSample')[0];
+  const slotNamed = (variant: any, property: string) =>
+    (variant.children ?? []).find((c: any) => c.type === 'SLOT' && c.name === property);
+
+  // (b) FIRST — the string is not a literal in this file. It is read back out
+  // of the OTHER emitter's output, so the two design-time surfaces cannot
+  // drift apart without this section going red.
+  const storySrc = generateStories(twoSlotHost(), new Map([[leaf().id, leaf()], [twoSlotHost().id, twoSlotHost()]]));
+  const argsLine = /children:\s*'((?:[^'\\]|\\.)*)'/.exec(storySrc);
+  if (!argsLine) {
+    fail(
+      'the generated Storybook meta carries no `args.children` for a default slot with no declared content — ' +
+        'the CODE surface lost its design-time sample, so there is nothing for the canvas to agree with (RC5)',
+    );
+  }
+  const storySample = argsLine![1].replace(/\\'/g, "'").replace(/\\\\/g, '\\');
+  if (storySample !== DEFAULT_SLOT_SAMPLE) {
+    fail(
+      `the two design-time surfaces have DRIFTED: the generated story puts ${JSON.stringify(storySample)} in ` +
+        `args.children while packages/schema DEFAULT_SLOT_SAMPLE is ${JSON.stringify(DEFAULT_SLOT_SAMPLE)}. ` +
+        'Both emitters must read designTimeSlotContent and nothing else (RC5)',
+    );
+  }
+  ok(`the generated story's args.children IS the shared constant (read back from generateStories, not asserted here)`);
+
+  // (a) the canvas carries the SAME sample, in the sampled default slot only.
+  const built = await buildSample(twoSlotHost());
+  const set = sampleSet(built);
+  if (!set) fail('the RC5 fixture built no EvalSlotSample set');
+  for (const variant of set.children) {
+    const children = slotNamed(variant, 'Children');
+    if (!children) fail(`variant ${variant.name} carries no Children slot`);
+    const kids = children.children ?? [];
+    if (kids.length !== 1 || kids[0].type !== 'TEXT' || kids[0].characters !== storySample) {
+      fail(
+        `variant ${variant.name}: the default \`children\` slot minted ${kids.length === 0 ? 'EMPTY (1x1)' : JSON.stringify(kids.map((k: any) => `${k.type} ${JSON.stringify(k.characters ?? k.name)}`))} ` +
+          '— no design-time sample, so the slot has nothing to measure and the component reads as blank. ' +
+          "The generated story's args.children carries one; the canvas must carry the SAME one (RC5).",
+      );
+    }
+    if (kids[0].name !== SLOT_SAMPLE_LAYER) {
+      fail(
+        `variant ${variant.name}: the sample layer is named ${JSON.stringify(kids[0].name)}, not ${JSON.stringify(SLOT_SAMPLE_LAYER)} — ` +
+          'the layer name is the CARRIER the inverse path recognises the emitter\'s own sample by; without it the ' +
+          'drop rule falls back to matching characters alone, which is what swallowed a designer\'s text (RC5)',
+      );
+    }
+    if (children.width <= 1 || children.height <= 1) {
+      fail(
+        `variant ${variant.name}: the sampled Children slot still measures ${children.width}x${children.height} — ` +
+          'the sample was minted but the slot did not re-measure around it (FC-SLOT-BIRTH-BOX)',
+      );
+    }
+    if (kids[0].width > children.width) {
+      fail(
+        `variant ${variant.name}: the ${kids[0].width}px sample runs past its ${children.width}px slot — ` +
+          'the sample must FILL its slot and WRAP (NodeSpec.slotSample → annotateFillW), never push the component wider',
+      );
+    }
+  }
+  ok(
+    `every variant's default \`children\` slot draws the shared sample and re-measures around it ` +
+      `(${set.children[0].width}x${set.children[0].height}, slot ${slotNamed(set.children[0], 'Children').width}x${slotNamed(set.children[0], 'Children').height})`,
+  );
+
+  // (e) the NAMED slot is a REFUSAL WITH A RECEIPT, not a silent sliver.
+  for (const variant of set.children) {
+    const cite = slotNamed(variant, 'Cite');
+    if (!cite) fail(`variant ${variant.name} carries no Cite slot`);
+    if ((cite.children ?? []).length !== 0) {
+      fail(
+        `variant ${variant.name}: the NAMED \`cite\` slot was given design-time content. No code surface has any ` +
+          '(emit-react only fills a named slot the contract declares `accepts` for, emit-html renders the wrapper ' +
+          'empty), so minting one would put content on the canvas that nothing else draws (RC5)',
+      );
+    }
+  }
+  const receipts = /"channel": "slot \\"(\w+)\\" design-time content"/g;
+  const named = new Set<string>();
+  for (let m2 = receipts.exec(emitSample(twoSlotHost())); m2; m2 = receipts.exec(emitSample(twoSlotHost()))) named.add(m2[1]);
+  if (!named.has('cite')) {
+    fail(
+      `the empty NAMED slot "cite" shipped with NO receipt — it draws an empty region that re-measures to Figma's ` +
+        '1px floor and says nothing about it. That silence is how ds.two-column shipped as a 640x1 sliver (RC5)',
+    );
+  }
+  if (named.has('children')) {
+    fail('the SAMPLED default slot must not also claim a missing-content receipt — it has content');
+  }
+  ok(`the empty named slot carries the code-only fact \`slot "cite" design-time content\` by name; the sampled slot does not`);
+
+  // (d) a DECLARED defaultContent still wins, and gets no sample.
+  const declaredBuilt = await buildSample(twoSlotHost({ declared: true }));
+  for (const variant of sampleSet(declaredBuilt).children) {
+    const kids = slotNamed(variant, 'Children').children ?? [];
+    if (kids.length !== 1 || kids[0].type !== 'INSTANCE') {
+      fail(
+        `variant ${variant.name}: a slot with declared defaultContent must instantiate it, got ` +
+          JSON.stringify(kids.map((k: any) => k.type)),
+      );
+    }
+  }
+  ok('a slot with declared defaultContent instantiates it and gets no sample — the declared fact always wins');
+
+  // ---- ROUND TRIP ---------------------------------------------------------
+  // The round trip is the whole reason the sample can exist at all: a
+  // design-time DEFAULT is not a canvas fact, so contract → Figma → dump →
+  // propose must return the same contract. The danger is the mirror image —
+  // dropping too much. THE FIRST ATTEMPT AT THIS FIX DID EXACTLY THAT: it
+  // dropped ANY TEXT child of ANY native slot whose characters matched the
+  // sample, so a designer's text, in a slot the emitter never samples,
+  // vanished with no receipt. Both halves are pinned below.
+  const dumpSource = (): string => {
+    const ui = readFileSync(path.join(process.cwd(), 'figma-sync/plugin/ui.html'), 'utf8');
+    const openTag = '<script type="text/plain" id="dump-source">';
+    const start = ui.indexOf(openTag);
+    if (start < 0) fail('figma-sync/plugin/ui.html carries no #dump-source block');
+    return ui
+      .slice(start + openTag.length, ui.indexOf('</script>', start))
+      .replace(/^\n/, '')
+      .replace(/^const TARGET_SETS = \[[^\n]*\];$/m, `const TARGET_SETS = ${JSON.stringify(['EvalSlotSample'])};`);
+  };
+  const proposeOf = async (m: Mock) => {
+    const dump = (await runFor(m, dumpSource())) as any;
+    const dumped = dump.EvalSlotSample;
+    if (!dumped) fail('the dump did not capture the RC5 fixture set');
+    return proposeFromDump(dumped, {
+      corpus: { tokens: [], byValue: new Map(), byPath: new Map() } as never,
+      contractIdByName: new Map([['EvalSlotLeaf', leaf().id]]),
+      contractIdByKey: new Map([[findAll(m, (n: any) => n.name === 'EvalSlotLeaf' && (n.type === 'COMPONENT' || n.type === 'COMPONENT_SET'))[0].key, leaf().id]]),
+    } as never) as { contract: Record<string, any>; notes?: string[] };
+  };
+
+  const proposal = await proposeOf(built);
+  const parts = proposal.contract.anatomy.root.parts ?? {};
+  const slotParts = Object.entries(parts).filter(([, p]: any) => p.slot);
+  if (slotParts.length !== 2) {
+    fail(
+      `the round trip returned ${slotParts.length} slot parts, not 2 — the design-time sample became a PART: ` +
+        JSON.stringify(Object.keys(parts)),
+    );
+  }
+  const childrenPart = slotParts.map(([, p]: any) => p).find((p: any) => p.slot.name === 'children');
+  if (!childrenPart) fail(`the round trip lost the default slot: ${JSON.stringify(slotParts.map(([, p]: any) => p.slot))}`);
+  if ((childrenPart.slot.defaultContent ?? []).length > 0) {
+    fail(
+      `the round trip turned the emitter's own design-time sample into declared defaultContent: ` +
+        `${JSON.stringify(childrenPart.slot.defaultContent)} — a DEFAULT is not a canvas fact, and re-emitting this ` +
+        'contract would bake the placeholder in permanently (RC5)',
+    );
+  }
+  const sampleNote = (proposal.notes ?? []).find((n) => n.includes(DEFAULT_SLOT_SAMPLE));
+  if (sampleNote) fail(`the round trip reported the emitter's own sample as drawn content: ${sampleNote}`);
+  ok('contract → Figma → dump → propose returns both slot parts unchanged: no extra part, no defaultContent, no note');
+
+  // THE REGRESSION GUARD. Three ways a real canvas fact must survive the drop
+  // rule — each one a conjunct of packages/schema isDesignTimeSlotSample.
+  const cases: Array<[string, (m: Mock) => void]> = [
+    [
+      "a designer's text in a NAMED slot the emitter never samples",
+      (m) => {
+        for (const variant of sampleSet(m).children) {
+          const cite = (variant.children ?? []).find((c: any) => c.type === 'SLOT' && c.name === 'Cite');
+          const t = m.figma.createText();
+          t.characters = DEFAULT_SLOT_SAMPLE;
+          cite.appendChild(t);
+        }
+      },
+    ],
+    [
+      "a designer's EDITED copy in the sampled slot",
+      (m) => {
+        for (const variant of sampleSet(m).children) {
+          const kids = (variant.children ?? []).find((c: any) => c.type === 'SLOT' && c.name === 'Children').children;
+          kids[0].characters = 'A real designer note.';
+        }
+      },
+    ],
+    [
+      "a designer's SIBLING beside the sample",
+      (m) => {
+        for (const variant of sampleSet(m).children) {
+          const slot = (variant.children ?? []).find((c: any) => c.type === 'SLOT' && c.name === 'Children');
+          const t = m.figma.createText();
+          t.characters = 'A real designer note.';
+          slot.appendChild(t);
+        }
+      },
+    ],
+  ];
+  for (const [what, mutate] of cases) {
+    const m = await buildSample(twoSlotHost());
+    mutate(m);
+    const after = await proposeOf(m);
+    const notes = (after.notes ?? []).join(' | ');
+    if (!notes.includes('drawn content includes')) {
+      fail(
+        `SILENT SWALLOW — ${what} disappeared through the design-time-sample drop with NO receipt. ` +
+          'The drop must be gated on ALL of: sole child, TEXT, the emitter\'s own layer name, and the exact ' +
+          `sample characters (packages/schema isDesignTimeSlotSample). Notes were: ${notes.slice(0, 400) || '(none)'}`,
+      );
+    }
+  }
+  ok(`all three designer edits come back NAMED through the \`undrawn\` path — the drop rule cannot swallow a real canvas fact`);
 }
 
 console.log('\n✔ native-slots ok: native SLOT emission, ONE unified set-level property, amend survival (red-tested), migration reported by name, every API refusal named, the slot reads back, and an empty slot hugs — as does a childless COMPONENT root reached only by the amend path (FC-SLOT-BIRTH-BOX, both red-tested).');

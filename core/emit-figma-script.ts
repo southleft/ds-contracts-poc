@@ -53,6 +53,8 @@ import {
   withStateSegment,
   baseTwinName,
   walkAnatomy,
+  designTimeSlotContent,
+  SLOT_SAMPLE_LAYER,
   type Contract,
   type Part,
   type Prop,
@@ -156,6 +158,19 @@ export interface NodeSpec {
    *  text keeps the Carbon Tabs HUG rule (FILL in a snug box truncates
    *  glyph overhang under font substitution). */
   fillText?: true;
+  /** RC5: this TEXT node is the canvas emitter's OWN design-time slot sample
+   *  (packages/schema DEFAULT_SLOT_SAMPLE, layer SLOT_SAMPLE_LAYER) — never a
+   *  contract fact. Two readers, and nothing else:
+   *    · annotateFillW grants it horizontal FILL when its slot's width is
+   *      already established, so a 44-character sentence WRAPS inside the slot
+   *      instead of running past the component's edge. Scoped to this flag on
+   *      purpose: FC-TEXT-FILL-ALIGNMENT's hug rule for ordinary non-truncating
+   *      text is untouched (it exists for Carbon's clipped tab labels).
+   *    · nothing at runtime — the emitted spec carries it only as evidence.
+   *  The INVERSE path does not read this flag (a compile-time flag has no
+   *  canvas spelling); it recognises the sample by layer name + characters +
+   *  sole-child, spelled once in packages/schema isDesignTimeSlotSample. */
+  slotSample?: true;
   /** FC-FIGMA-CLIP-DEFAULT: opt into Figma clipsContent. Default false —
    *  createFrame clips by default but CSS overflow is visible; clipping HUG
    *  text truncates Semi Bold overhang (Carbon Tabs "Settings"). */
@@ -4319,7 +4334,13 @@ function partToSpecInner(
     };
     const description = slotPropertyDescription(part.slot);
     if (description) spec.slotDescription = description;
-    if ((part.slot.defaultContent?.length ?? 0) > 0) {
+    const slotCtx = applyStyling(spec, part, subst, ctx);
+    // RC5 — DESIGN-TIME SLOT CONTENT. A Figma main component's slot content
+    // and a generated Storybook meta's canonical args are the same object;
+    // until now only emit-react computed one. ONE policy, read by both
+    // emitters (packages/schema designTimeSlotContent), three outcomes.
+    const designTime = designTimeSlotContent(part.slot);
+    if (designTime.kind === 'declared') {
       spec.slotDefault = part.slot.defaultContent!.map((item) => {
         const dep = byId.get(item.id)!;
         return {
@@ -4329,8 +4350,36 @@ function partToSpecInner(
           props: mapDepProps(dep, item.props ?? {}, subst, item.text),
         };
       });
+    } else if (designTime.kind === 'sample') {
+      // The SAME sentence the generated story puts in `args.children`, drawn
+      // in the slot part's own resolved text cascade — the colour/size the
+      // consumer's content will inherit, so the designer sees the real thing
+      // and not a grey placeholder. It is the slot's DEFAULT content:
+      // Figma's resetSlot() returns to it and any fill replaces it, exactly
+      // as a story's args are replaced by a control.
+      spec.children = [
+        {
+          type: 'text',
+          name: SLOT_SAMPLE_LAYER,
+          slotSample: true,
+          characters: designTime.text,
+          fontSize: slotCtx.fontSize ?? 16,
+          fontStyle: figmaFaceStyle(slotCtx),
+          ...(slotCtx.lineHeight !== undefined ? { lineHeight: slotCtx.lineHeight } : {}),
+          ...textExtras(slotCtx),
+          ...textIdentity(slotCtx),
+          textFill: slotCtx.textFill,
+        },
+      ];
+    } else {
+      // THE NAMED REFUSAL. Nothing to draw on EITHER surface, so the canvas
+      // draws the same nothing the code surfaces draw — and says so, by
+      // channel, in the component's code-only facts. Before RC5 this loss
+      // was silent: the slot minted childless and the birth-box repair
+      // floored it at Figma's 1px, which is how ds.two-column shipped as a
+      // 640x1 sliver with no receipt anywhere.
+      miss(spec, `slot "${part.slot.name}" design-time content`, designTime.reason);
     }
-    applyStyling(spec, part, subst, ctx);
     applyVisibleWhen(spec, part, contract);
     return spec;
   }
@@ -4715,14 +4764,24 @@ function annotateFillW(rootSpec: NodeSpec): void {
       // JUSTIFIED (and SPACE_BETWEEN packing) never proves equivalence.
       return glyphs !== undefined && packed === glyphs;
     };
+    // RC5: the emitter's OWN design-time slot sample is the one text node
+    // whose width is not a contract fact — it is a 44-character placeholder
+    // standing in for whatever a consumer drops in. Hugging it would push the
+    // component's width out to the sentence (370px inside a 288px slot under
+    // a 320px root cap, measured on ds.card), so it FILLs its slot and wraps,
+    // exactly as `args.children` wraps in the generated story. This is the
+    // ONLY text that overrides the alignment-safe hug rule below, and it is
+    // gated on a flag no contract can set.
+    const isSlotSample = (c: NodeSpec): boolean => c.slotSample === true;
     const isCandidate = (c: NodeSpec): boolean =>
       inFlow(c) &&
       !hasOwnWidth(c) &&
-      !(c.type === 'text' && !c.textTruncation && hugTextSafe(c)) &&
-      (c.grow === true ||
-        (s.layout?.stretchChildren === true &&
-          (s.layout?.mode ?? 'HORIZONTAL') === 'VERTICAL' &&
-          c.type !== 'instance'));
+      (isSlotSample(c) ||
+        (!(c.type === 'text' && !c.textTruncation && hugTextSafe(c)) &&
+          (c.grow === true ||
+            (s.layout?.stretchChildren === true &&
+              (s.layout?.mode ?? 'HORIZONTAL') === 'VERTICAL' &&
+              c.type !== 'instance'))));
     const intrinsic = kids.some((c) => inFlow(c) && !isCandidate(c) && canHug(c));
     // D7 hug-ceiling: a box MEASURED hugging beneath its maxWidth ceiling
     // never grants FILL — its width IS its content, so a FILL child would

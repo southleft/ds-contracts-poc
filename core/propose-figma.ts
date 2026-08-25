@@ -20,7 +20,7 @@
  * `mintedTokens` — styles survive at literal fidelity, names stay mechanical
  * and reviewable, semantics are never guessed.
  */
-import { arcMaskCss, ContractSchema, GRID_REFUSALS, pascal, STATE_PREVIEW_PROPERTY, statePreviewLabel, VOID_ELEMENTS } from '../scripts/contract-schema.js';
+import { arcMaskCss, ContractSchema, GRID_REFUSALS, isDesignTimeSlotSample, pascal, STATE_PREVIEW_PROPERTY, statePreviewLabel, VOID_ELEMENTS } from '../scripts/contract-schema.js';
 import { kebab } from '../extract/types.js';
 import { isDumpSet, type DumpEffect, type DumpNode, type DumpPaint, type DumpPreferredValue, type DumpPropertyDefinition, type DumpSet } from '../extract/figma/types.js';
 import type { TokenCorpus } from './token-corpus.js';
@@ -7244,7 +7244,27 @@ function buildPart(
     // Button Group]; only the bare Dek instance survived). defaultContent
     // holds component refs only, so a FRAME has no carrier: NAMED, with its
     // whole subtree spelled out, never silent.
-    const undrawn = m.children.filter((c) => c.type !== 'INSTANCE');
+    // RC5 — THE CANVAS EMITTER'S OWN DESIGN-TIME SAMPLE COMES BACK OUT.
+    // core/emit-figma-script.ts mints one TEXT child into an empty default
+    // `children` slot so the main component a designer opens is not a 1px
+    // sliver. It is the canvas twin of the generated story's `args.children`:
+    // a DEFAULT, not a drawn fact, so contract → Figma → dump → propose must
+    // return the slot part unchanged — no extra part, no defaultContent, no
+    // note. The predicate is spelled ONCE in packages/schema
+    // (isDesignTimeSlotSample) and is deliberately narrow: SOLE child, TEXT,
+    // the emitter's own layer name, AND the exact sample characters.
+    //
+    // NARROW BECAUSE THE WIDE VERSION WAS A SILENT SWALLOW. Dropping any TEXT
+    // child of any slot whose characters matched the sample also ate a
+    // DESIGNER's text — a real canvas fact, in a slot the emitter never
+    // samples, with no receipt anywhere. Anything this predicate rejects
+    // (renamed layer, edited copy, a sibling beside it, a named slot the
+    // emitter left empty) falls straight through to the `undrawn` naming
+    // path below and is reported BY NAME, which is the whole point.
+    const emitterSample = isDesignTimeSlotSample(
+      m.children.map((c) => ({ type: c.type, name: c.name, characters: c.occ[0]?.node.text?.characters ?? null })),
+    );
+    const undrawn = emitterSample ? [] : m.children.filter((c) => c.type !== 'INSTANCE');
     if (undrawn.length > 0) {
       const describe = (c: Merged): string => {
         const kids = c.children.map(describe);
