@@ -173,11 +173,14 @@ check(
   JSON.stringify(topNavReceipt.textProps) === JSON.stringify([{ property: 'Href', default: '#' }]),
   JSON.stringify(topNavReceipt.textProps),
 );
+const topNavFactsByChannel = new Map(topNavReceipt.codeOnlyFacts.map((f) => [f.channel, f]));
 check(
-  'TopNavItem code-only facts = 1 (the undrawn hover plane is NAMED — FC-STATE-PLANE-UNDRAWN; the attrs binding is not a canvas fact — docs/29 E3)',
-  topNavReceipt.codeOnlyFacts.length === 1 &&
-    topNavReceipt.codeOnlyFacts[0]?.channel === 'background-color [hover]' &&
-    /FC-STATE-PLANE-UNDRAWN/.test(topNavReceipt.codeOnlyFacts[0]?.reason ?? ''),
+  'TopNavItem code-only facts = 2, both NAMED by channel (the undrawn hover plane — FC-STATE-PLANE-UNDRAWN; the empty `icon` slot\'s design-time content — RC5; the attrs binding is not a canvas fact — docs/29 E3)',
+  topNavReceipt.codeOnlyFacts.length === 2 &&
+    /FC-STATE-PLANE-UNDRAWN/.test(topNavFactsByChannel.get('background-color [hover]')?.reason ?? '') &&
+    /no defaultContent and not the default `children` slot/.test(
+      topNavFactsByChannel.get('slot "icon" design-time content')?.reason ?? '',
+    ),
   JSON.stringify(topNavReceipt.codeOnlyFacts),
 );
 
