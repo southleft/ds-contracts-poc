@@ -5,6 +5,7 @@
   "version": "0.2.0",
   "status": "draft",
   "description": "SEED contract for the MUI molecule round — props/axes only; anatomy is promoted from captured DOM truth. Canonical composition: AccordionSummary + AccordionDetails children (childrenSpec). expanded is modeled as an enum axis (collapsed|expanded → boolean via axisValueMap — the Checkbox precedent), so both planes render as variants and gate honestly. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "archetype": "accordion",
   "semantics": {
     "element": "div"
   },

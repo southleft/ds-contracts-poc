@@ -43,6 +43,10 @@ import { existsSync, readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import {
   ContractSchema,
+  archetypeOf,
+  kebabName,
+  resolveArchetype,
+  type Archetype,
   type Contract,
 } from "../../../scripts/contract-schema.js";
 import {
@@ -73,75 +77,24 @@ const readJson = (p: string) =>
 // Archetype class — docs/23 §C.1.1 vocabulary, applied by contract name
 // ---------------------------------------------------------------------------
 
-/** The twenty §C.1.1 rows plus the doc's own residue class. The doc maps
- *  contracts to rows by NAME (its words: "every row maps to committed contract
- *  files"), so this is the same mapping written down as first-match keyword
- *  rules over the kebab-cased contract name. `unmapped` is the doc's stated
- *  residue ("typography, rules, glyphs and images rather than component
- *  archetypes"), listed, never hidden. */
-export type Archetype =
-  | "button"
-  | "badge / tag / chip"
-  | "checkbox / radio"
-  | "toggle / switch"
-  | "banner / alert / toast"
-  | "input / field"
-  | "card"
-  | "avatar"
-  | "tabs"
-  | "accordion"
-  | "progress / spinner"
-  | "slider"
-  | "select / combobox"
-  | "modal / dialog"
-  | "tooltip / popover"
-  | "menu / dropdown"
-  | "pagination"
-  | "table / data-grid"
-  | "breadcrumb"
-  | "nav (top / side)"
-  | "unmapped";
+/** The archetype class vocabulary and the NAME-MAP now live in the schema
+ *  package (`packages/schema/src/archetype.ts`) — the census, the schema's
+ *  declared `archetype` field and the required-facts referee must read ONE map,
+ *  so this is a re-export shim, not a second copy. `unmapped` is still the
+ *  doc's stated residue ("typography, rules, glyphs and images rather than
+ *  component archetypes"), listed, never hidden. Since schema 19 a contract may
+ *  DECLARE its row; `archetypeOfContract` below prefers the declaration and
+ *  falls back to the name-map, which is what every census row records. */
+export { archetypeOf, kebabName, resolveArchetype, type Archetype };
 
-const ARCHETYPE_RULES: Array<[RegExp, Archetype]> = [
-  [/breadcrumb/, "breadcrumb"],
-  [/(^|-)(top|side)-?nav|(^|-)nav($|-)/, "nav (top / side)"],
-  [/pagination/, "pagination"],
-  [/(^|-)table|data-?grid/, "table / data-grid"],
-  [/select|combobox|autocomplete|typeahead/, "select / combobox"],
-  [/modal|dialog|drawer/, "modal / dialog"],
-  [/tooltip|popover/, "tooltip / popover"],
-  [/menu|dropdown/, "menu / dropdown"],
-  [/(^|-)tabs?($|-)|tab-?list/, "tabs"],
-  [/accordion/, "accordion"],
-  [/progress|spinner|skeleton/, "progress / spinner"],
-  [/slider/, "slider"],
-  [/switch|toggle/, "toggle / switch"],
-  [/checkbox|radio/, "checkbox / radio"],
-  [/banner|alert|toast|notification|snackbar/, "banner / alert / toast"],
-  [/badge|(^|-)tag($|-)|chip/, "badge / tag / chip"],
-  [/input|field|text-?area/, "input / field"],
-  [/(^|-)card($|-)/, "card"],
-  [/avatar/, "avatar"],
-  [/button|(^|-)fab($|-)/, "button"],
-];
-
-export const kebabName = (name: string): string =>
-  name
-    .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
-    .replace(/[^A-Za-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "")
-    .toLowerCase();
-
-export function archetypeOf(
-  contract: Pick<Contract, "id" | "name">,
+/** The census row's archetype: the contract's own declaration when it carries
+ *  one (schema 19), else the name-map's first match, else `unmapped`. A
+ *  contract that DECLARES `"none"` is census residue by its own word. */
+export function archetypeOfContract(
+  contract: Pick<Contract, "id" | "name" | "archetype">,
 ): Archetype {
-  const keys = [
-    kebabName(contract.name),
-    kebabName(contract.id.split(".").slice(1).join(".")),
-  ];
-  for (const [re, a] of ARCHETYPE_RULES)
-    if (keys.some((k) => re.test(k))) return a;
-  return "unmapped";
+  const { archetype } = resolveArchetype(contract);
+  return archetype === "none" ? "unmapped" : archetype;
 }
 
 // ---------------------------------------------------------------------------
@@ -506,7 +459,7 @@ export function enumerateCorpus(): {
         contractPath,
         figmaScriptPath: script,
         bundlePath: library.bundlePath,
-        archetype: archetypeOf(contract),
+        archetype: archetypeOfContract(contract),
         variantAxes: axes.length,
         axes,
         variantCount,

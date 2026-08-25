@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "status": "draft",
   "description": "Astryx CheckboxInput \u2014 promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/CheckboxInput/CheckboxInput.tsx, extracted 2026-07-20 \u2014 see examples/astryx/PROVENANCE.md). label + size + the disabled/readonly/optional/required flags are verbatim; description, disabledMessage, htmlName and isLoading are dropped. STRUCTURAL: the control renders as a styled box (div), not a native <input> \u2014 a11y semantics are a Phase A-2 concern. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2).",
+  "archetype": "checkbox / radio",
   "semantics": {
     "element": "div"
   },

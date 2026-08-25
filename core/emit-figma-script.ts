@@ -61,6 +61,7 @@ import { flattenTokens, aliasTarget, px, pxOrNull, type TokenEntry, type TokenTr
 import { guardedValueUpsertRuntime, ownedCollectionPruneRuntime } from './token-set.js';
 import { FINGERPRINT_SRC, FINGERPRINT_VERSION } from './canvas-fingerprint.js';
 import { isMultiRoot, topRoots, validateContract } from './emit-react.js';
+import { checkRequiredFacts, type Posture } from './required-facts.js';
 
 
 /** A2 grid: a compiled track — the Plugin API's own structured spelling
@@ -724,6 +725,15 @@ export interface FigmaEngineInput {
   /** When set, duplicate variable names resolve from this Figma collection
    *  (FC-THEME-ISO: console-loop shares one file across DS bundles). */
   variableCollection?: string;
+  /** REQUIRED-FACTS posture. `'refuse'` makes the engine refuse to compile a
+   *  contract that is missing a load-bearing fact for its archetype — the
+   *  refusal rides HERE, in the compile, so a bundle built by an older CLI and
+   *  pasted into the plugin inherits it. `'warn'` (the default) compiles
+   *  unchanged and leaves the naming to the shell, so today's measured wave
+   *  (parity/receipts/v1/REQUIRED-FACTS.md) does not block anyone mid-
+   *  burn-down. The shells decide: `figma bundle --strict`,
+   *  `DS_REQUIRED_FACTS=refuse`, or a bundle that declares the posture. */
+  requiredFacts?: Posture;
 }
 
 /** Everything a single-contract emission needs (the playground surface). */
@@ -4738,8 +4748,30 @@ function annotateFillW(rootSpec: NodeSpec): void {
   walk(rootSpec, hasOwnWidth(rootSpec));
 }
 
+/** REQUIRED FACTS — the refuse-to-mint referee, applied at COMPILE time so it
+ *  rides every door into the canvas: `emitFigmaScript`, the batch script, and
+ *  the plugin engine compiling a bundle a designer pasted (entry.ts calls this
+ *  same `compileComponentData`). A contract missing a load-bearing fact for its
+ *  archetype is named and refused; an ugly mint is worse than an honest
+ *  refusal.
+ *
+ *  WARN is the default posture, so the measured wave is visible one full cycle
+ *  before anything blocks — see parity/receipts/v1/REQUIRED-FACTS.md and the
+ *  frozen baseline the `required-facts:check` gate holds. Under `'refuse'` the
+ *  compile throws with every missing fact listed by name. */
+function refuseMissingRequiredFacts(contract: Contract): void {
+  if (input.requiredFacts !== 'refuse') return;
+  const { missing } = checkRequiredFacts(contract);
+  if (missing.length === 0) return;
+  throw new Error(
+    `Refused — ${missing.length} required fact(s) missing; this set would mint but would not be recognisable:\n` +
+      missing.map((f) => `  - ${f.line}`).join('\n'),
+  );
+}
+
 function compileComponentData(contract: Contract, byId: Map<string, Contract>): ComponentData {
   refuseUnresolvableRefs(contract, byId);
+  refuseMissingRequiredFacts(contract);
   // Variant axes = enum props AND VARIANT-bound boolean props, in prop
   // declaration order (see isVariantBool). An enum-only contract's axis list
   // is exactly the old enum filter — byte-identical substitution space.
@@ -8143,7 +8175,16 @@ return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId),
 `;
 }
 
-  return { buildTokensScript, compileComponentData, buildComponentScript, buildBatchScript };
+  return {
+    buildTokensScript,
+    compileComponentData,
+    buildComponentScript,
+    buildBatchScript,
+    /** One token ref → its resolved literal, or a throw when the ref does not
+     *  resolve. Exposed so a SHELL can grade a contract against this engine's
+     *  own inventory instead of building a second, drifting resolver. */
+    resolveTokenLiteral: resolveLiteral,
+  };
 }
 
 /** The compiled engine type — the CLI shell and the barrel share it. */

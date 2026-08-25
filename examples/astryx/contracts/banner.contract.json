@@ -5,6 +5,7 @@
   "version": "0.2.0",
   "status": "draft",
   "description": "Astryx Banner — promoted from @astryxdesign/core@0.1.6 (src/Banner/Banner.tsx). Two-part structure: a status header (muted background, status icon, semibold title, supporting description) and an optional collapsible content area (out of scope for the default exhibit). Status backgrounds use accent/warning/error/success *-muted tokens; icons use the vendor defaultIconNames mapping at md (20px).",
+  "archetype": "banner / alert / toast",
   "semantics": {
     "element": "div"
   },

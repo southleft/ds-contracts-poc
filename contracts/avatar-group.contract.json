@@ -5,6 +5,7 @@
   "version": "1.0.0",
   "status": "draft",
   "description": "Stacked avatars with an overflow count. API mirrors industry convention (Astryx AvatarGroup): overlapping layout — expressed as a negative-margin child rule in CSS and negative item spacing on the canvas.",
+  "archetype": "avatar",
   "semantics": {
     "element": "div"
   },

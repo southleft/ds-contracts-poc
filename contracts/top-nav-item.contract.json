@@ -5,6 +5,7 @@
   "version": "1.0.0",
   "status": "draft",
   "description": "A navigation item in a TopNav or SideNav context. API mirrors industry convention (Astryx TopNavItem) with selection flattened to a state enum; the selected state applies aria-current.",
+  "archetype": "nav (top / side)",
   "semantics": {
     "element": "a"
   },

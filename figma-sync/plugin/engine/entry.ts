@@ -141,6 +141,13 @@ export type ParsedIncoming =
       /** Bundle-carried icon assets ({name: svgMarkup}) — null when the
        *  paste carries none; merged over the baked repo icons at plan time. */
       icons: Record<string, string> | null;
+      /** THE BUNDLE'S OWN REQUIRED-FACTS POSTURE (`ds-contracts figma bundle
+       *  --strict` writes "refuse"). A strict bundle refuses ON PASTE too: the
+       *  archetype required-facts referee runs inside the same
+       *  compileComponentData the plugin already calls, so a set missing a
+       *  load-bearing fact is named here rather than minted ugly. Absent (the
+       *  default) means WARN — the engine compiles unchanged. */
+      requiredFacts: "warn" | "refuse" | null;
     }
   | { ok: false; issue: PlainIssue };
 
@@ -587,7 +594,24 @@ export function createPluginEngine(data: PluginEngineData) {
         }
         icons = rawIcons as Record<string, string>;
       }
-      return { ok: true, kind: "bundle", contracts, tokenSet, icons };
+      // The bundle's own REQUIRED-FACTS posture, written by
+      // `ds-contracts figma bundle --strict`. Absent = warn (compile
+      // unchanged); anything but the two words refuses by name rather than
+      // being read as "not refuse".
+      const rawPosture = (raw as { requiredFacts?: unknown }).requiredFacts;
+      let requiredFacts: "warn" | "refuse" | null = null;
+      if (rawPosture !== undefined && rawPosture !== null) {
+        if (rawPosture !== "warn" && rawPosture !== "refuse") {
+          return {
+            ok: false,
+            issue: plain(
+              `This bundle's "requiredFacts" is ${JSON.stringify(rawPosture)} — it must be "warn" or "refuse" (the archetype required-facts posture written by \`ds-contracts figma bundle --strict\`).`,
+            ),
+          };
+        }
+        requiredFacts = rawPosture;
+      }
+      return { ok: true, kind: "bundle", contracts, tokenSet, icons, requiredFacts };
     }
     if (
       raw &&
@@ -600,6 +624,7 @@ export function createPluginEngine(data: PluginEngineData) {
         contracts: [raw],
         tokenSet: null,
         icons: null,
+        requiredFacts: null,
       };
     }
     return {
@@ -724,11 +749,22 @@ export function createPluginEngine(data: PluginEngineData) {
   const foreignEngineFor = (
     tokenSet: TokenSetPayload,
     bundleIcons?: Record<string, string> | null,
+    requiredFacts?: "warn" | "refuse" | null,
   ): typeof engine =>
     createFigmaEngine({
       tokens: tokenSetTokenTrees(tokenSet),
       icons: mergedIcons(bundleIcons),
+      ...(requiredFacts === "refuse" ? { requiredFacts: "refuse" as const } : {}),
     });
+
+  /** The BAKED engine, under the incoming bundle's posture. A strict bundle's
+   *  repo-token contracts owe the same required facts its foreign ones do, so
+   *  the posture cannot ride only the foreign engine. Identical to `engine`
+   *  when the posture is warn (the default) — no second build, no drift. */
+  const bakedEngineFor = (requiredFacts?: "warn" | "refuse" | null): typeof engine =>
+    requiredFacts === "refuse"
+      ? createFigmaEngine({ tokens: data.tokens, icons, requiredFacts: "refuse" })
+      : engine;
 
   // -------------------------------------------------------------------------
   // Generate from contract
@@ -750,6 +786,10 @@ export function createPluginEngine(data: PluginEngineData) {
     /** Bundle-carried icon assets (parseIncoming* surfaces them) — merged
      *  over the baked repo icons for the incoming contracts' compile. */
     icons?: Record<string, string> | null;
+    /** The bundle's REQUIRED-FACTS posture (parseIncoming* surfaces it).
+     *  "refuse" makes a contract missing a load-bearing fact for its
+     *  archetype refuse HERE, on paste, with the missing facts named. */
+    requiredFacts?: "warn" | "refuse" | null;
   }
 
   function planGenerate(
@@ -812,11 +852,12 @@ export function createPluginEngine(data: PluginEngineData) {
     let foreign: typeof engine | null;
     try {
       foreign = tokenSet
-        ? foreignEngineFor(tokenSet, bundleIcons)
+        ? foreignEngineFor(tokenSet, bundleIcons, opts.requiredFacts)
         : bundleIcons
           ? createFigmaEngine({
               tokens: data.tokens,
               icons: mergedIcons(bundleIcons),
+              ...(opts.requiredFacts === "refuse" ? { requiredFacts: "refuse" as const } : {}),
             })
           : null;
     } catch (e) {
@@ -881,8 +922,9 @@ export function createPluginEngine(data: PluginEngineData) {
     // refs surfaced ONE refusal per paste — fix it, paste again, meet the
     // next one. Compile them all, then refuse by name with the full list.
     const refusals: PlainIssue[] = [];
+    const baked = bakedEngineFor(opts.requiredFacts);
     for (const contract of ordered) {
-      const eng = foreign && incomingIds.has(contract.id) ? foreign : engine;
+      const eng = foreign && incomingIds.has(contract.id) ? foreign : baked;
       let code: string;
       let codeOnlyFacts: CodeOnlyFact[];
       try {

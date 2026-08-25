@@ -5,6 +5,7 @@
   "version": "1.0.0",
   "status": "draft",
   "description": "Multi-line text input for longer-form content — comments, descriptions, messages. API mirrors industry convention (Astryx TextArea); wrapping-label anatomy gives implicit association.",
+  "archetype": "input / field",
   "semantics": {
     "element": "label"
   },

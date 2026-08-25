@@ -5,6 +5,7 @@
   "version": "1.1.0",
   "status": "draft",
   "description": "A selectable row of table cells.",
+  "archetype": "table / data-grid",
   "semantics": {
     "element": "div",
     "role": "row"

@@ -255,6 +255,12 @@ jobs:
       - name: exam:screenshots:check (every phase-2 exam receipt carries a canvas + reference PNG per set, or names that it does not)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run exam:screenshots:check
+      - name: required-facts:check self-test (a card with no column axis must refuse BY NAME, and every required fact must be able to go red)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run required-facts:check -- --self-test
+      - name: required-facts:check (every committed contract carries the load-bearing facts its archetype owes, or is pinned by name in the frozen baseline)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run required-facts:check
 
       - name: test accuracy contract gate falsifications
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}

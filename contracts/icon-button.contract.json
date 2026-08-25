@@ -5,6 +5,7 @@
   "version": "1.0.0",
   "status": "draft",
   "description": "A button showing only an icon, for toolbars, table rows, and compact UI. API mirrors industry convention (Astryx IconButton): the required label is the accessible name and is never rendered visibly.",
+  "archetype": "button",
   "semantics": {
     "element": "button"
   },

@@ -1,7 +1,7 @@
 {
-  "passed": 228,
-  "total": 228,
-  "commit": "15b67110b8dce2ed09df8d86d663b59cc748e0ae",
+  "passed": 225,
+  "total": 225,
+  "commit": "d9afcb9fe5d94a8b63be7d31cc7763218d34877e",
   "dirty": false,
   "recordedAt": "2026-08-25",
   "results": [
@@ -913,21 +913,6 @@
     {
       "id": "checked-axis-projection",
       "claim": "C5-extraction",
-      "pass": true
-    },
-    {
-      "id": "grammar-compound-import",
-      "claim": "C2-refusal",
-      "pass": true
-    },
-    {
-      "id": "grammar-ordered-class-tokens",
-      "claim": "C2-refusal",
-      "pass": true
-    },
-    {
-      "id": "grammar-date-literal",
-      "claim": "C1-determinism",
       "pass": true
     },
     {

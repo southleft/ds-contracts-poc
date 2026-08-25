@@ -5,6 +5,7 @@
   "version": "1.0.0",
   "status": "draft",
   "description": "A sidebar navigation row: icon, label, and trailing content, with a selected state. API mirrors industry convention (Astryx SideNavItem); nesting and collapse are behavior-layer boundaries.",
+  "archetype": "nav (top / side)",
   "semantics": {
     "element": "a"
   },

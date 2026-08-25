@@ -61,6 +61,7 @@ import {
   validateContract,
   type ProvenancedContract,
 } from "@ds-contracts/core";
+import { seedArchetype } from "../../schema/src/index.js";
 import { promoteStaticArtifact } from "../../../extract/static-promotion.js";
 
 // ---------------------------------------------------------------------------
@@ -995,6 +996,17 @@ export function promote(
       `${path.basename(src)} — computed-capture truth; minted leaves source-aliased to ${cfg.possessive} ` +
       `own CSS-variable references where verified (source-bindings.json); extension sidecar ` +
       `carries the named overflow.`;
+    // v19 ARCHETYPE. The computed capture does not know what a component IS,
+    // so a freshly promoted contract would carry no `archetype` and a
+    // re-promotion over a seeded one would DELETE the field — silently undoing
+    // the codemod and leaving the required-facts referee with nothing to grade
+    // (caught by the promote-generalization eval, which re-promotes four
+    // libraries and byte-compares the committed artifacts). `seedArchetype` is
+    // the SAME function `ds-contracts migrate` runs: same name-map, same
+    // position (immediately after `description`), and it never touches a
+    // contract that already declares one — so a human's re-declaration
+    // survives every future re-promotion.
+    contract = seedArchetype(contract).doc as ProvenancedContract;
     // Authored set/unset rows land BEFORE the state-preview probe so the
     // referee judges the contract that will actually be written.
     for (const row of authoredRows) {

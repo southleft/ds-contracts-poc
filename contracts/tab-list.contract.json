@@ -5,6 +5,7 @@
   "version": "1.0.0",
   "status": "draft",
   "description": "Tab-style navigation container holding Tab items. API mirrors industry convention (Astryx TabList); roving-tabindex keyboard behavior and controlled selection are declared boundaries.",
+  "archetype": "tabs",
   "semantics": {
     "element": "div",
     "role": "tablist"
