@@ -366,7 +366,7 @@
     },
     "shippedMinted": {
       "path": "examples/polaris/tokens/polaris-minted.dtcg.json",
-      "leavesAdded": 818,
+      "leavesAdded": 866,
       "divergent": [
         {
           "token": "imported.button.root.color-state-active.primary.critical",

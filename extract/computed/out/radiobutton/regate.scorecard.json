@@ -427,7 +427,7 @@
     },
     "shippedMinted": {
       "path": "examples/polaris/tokens/polaris-minted.dtcg.json",
-      "leavesAdded": 1256,
+      "leavesAdded": 1294,
       "divergent": [
         {
           "token": "imported.radio-button.backdrop.background-color-state-active.checked",
@@ -439,6 +439,18 @@
           "token": "imported.radio-button.backdrop.background-color-state-hover.checked",
           "fresh": "#303030",
           "shipped": "{p.color-bg-fill-brand-selected}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.radio-button.backdrop.background-color.checked",
+          "fresh": "#303030",
+          "shipped": "{p.color-bg-fill-brand-selected}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.radio-button.backdrop.background-color.unchecked",
+          "fresh": "#fdfdfd",
+          "shipped": "{p.color-input-bg-surface}",
           "resolvedEqual": true
         }
       ]

@@ -476,7 +476,7 @@
     },
     "shippedMinted": {
       "path": "examples/polaris/tokens/polaris-minted.dtcg.json",
-      "leavesAdded": 1239,
+      "leavesAdded": 1249,
       "divergent": [
         {
           "token": "imported.checkbox.backdrop.background-color-state-active.checked",
@@ -512,6 +512,24 @@
           "token": "imported.checkbox.backdrop.background-color-state-hover.indeterminate",
           "fresh": "#303030",
           "shipped": "{p.color-bg-fill-brand-selected}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.checkbox.backdrop.background-color.checked",
+          "fresh": "#303030",
+          "shipped": "{p.color-bg-fill-brand-selected}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.checkbox.backdrop.background-color.indeterminate",
+          "fresh": "#303030",
+          "shipped": "{p.color-bg-fill-brand-selected}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.checkbox.backdrop.background-color.unchecked",
+          "fresh": "#ffffff",
+          "shipped": "{p.color-bg-surface}",
           "resolvedEqual": true
         },
         {

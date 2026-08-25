@@ -761,8 +761,8 @@
     {
       "library": "polaris",
       "component": "Banner",
-      "rerunPctEqual": 97.05310880829016,
-      "cellsCompared": 12352,
+      "rerunPctEqual": 97.19135802469135,
+      "cellsCompared": 12960,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 97.01443569553805,
       "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 160 more cell(s) than the engine the harness scorecard was captured with (12192 -> 12352) and every added cell is EQUAL (11828 -> 11988 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. The 2026-08-09 baseline pinned this row at 97.014/12192 cells, the pre-lift engine; the committed regate.scorecard.json beside it had already been overwritten by a later run and disagreed with that row until this re-record."
@@ -779,8 +779,8 @@
     {
       "library": "polaris",
       "component": "Checkbox",
-      "rerunPctEqual": 81.18971061093248,
-      "cellsCompared": 2488,
+      "rerunPctEqual": 84.34650455927051,
+      "cellsCompared": 2632,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 81.00649350649351,
       "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 24 more cell(s) than the engine the harness scorecard was captured with (2464 -> 2488) and every added cell is EQUAL (1996 -> 2020 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. The 2026-08-09 baseline pinned this row at 81.006/2464 cells, the pre-lift engine; the committed regate.scorecard.json beside it had already been overwritten by a later run and disagreed with that row until this re-record."
@@ -788,8 +788,8 @@
     {
       "library": "polaris",
       "component": "ProgressBar",
-      "rerunPctEqual": 91.17647058823529,
-      "cellsCompared": 1632,
+      "rerunPctEqual": 92.10526315789474,
+      "cellsCompared": 1824,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 92.10526315789474,
       "gapCause": "VOCABULARY NARROWED SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 192 FEWER cell(s) than the engine the harness scorecard was captured with (1824 -> 1632) and every dropped cell was EQUAL (1680 -> 1488 equal), so the percentage falls by exactly the dropped cells; no remaining cell changed verdict. The harness number is the capture-time engine and is NOT re-captured; the lift(s) responsible are not bisected. The 2026-08-09 baseline pinned this row at 92.105/1824 cells, the pre-lift engine; the committed regate.scorecard.json beside it had already been overwritten by a later run and disagreed with that row until this re-record."
@@ -797,8 +797,8 @@
     {
       "library": "polaris",
       "component": "RadioButton",
-      "rerunPctEqual": 81.5340909090909,
-      "cellsCompared": 1408,
+      "rerunPctEqual": 81.64893617021276,
+      "cellsCompared": 1504,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 81.32183908045977,
       "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 16 more cell(s) than the engine the harness scorecard was captured with (1392 -> 1408) and every added cell is EQUAL (1132 -> 1148 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. The 2026-08-09 baseline pinned this row at 81.322/1392 cells, the pre-lift engine; the committed regate.scorecard.json beside it had already been overwritten by a later run and disagreed with that row until this re-record."
@@ -815,8 +815,8 @@
     {
       "library": "polaris",
       "component": "Tag",
-      "rerunPctEqual": 81.55133483862399,
-      "cellsCompared": 7529,
+      "rerunPctEqual": 79.96224040276904,
+      "cellsCompared": 7945,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 81.01607890825564,
       "gapCause": "ENGINE MOVED SINCE CAPTURE (re-recorded 2026-08-23, r12 over 537022b0; docs/23 §D.33): cells compared 7401 -> 7529, cells equal 5996 -> 6140 — 128 added cell(s), 144 more equal, so 16 previously-compared cells changed verdict to EQUAL. repaired: this row was pinned REFUSED on 2026-08-23 (§B.29) — the offline re-fuse carried link.width as BOTH the G8 literal fit-content and a minted token because fuse.ts carriedChannels mapped width through CHANNEL_TO_COMPUTED with `?? []` and so never saw the stated literal; the literal is now the one carrier (the link hugs) and the not-minted px is receipted (carried-axis-not-reminted). Harness number untouched."
@@ -833,8 +833,8 @@
     {
       "library": "polaris",
       "component": "TextField",
-      "rerunPctEqual": 82.18916857360793,
-      "cellsCompared": 41952,
+      "rerunPctEqual": 80.69734004313443,
+      "cellsCompared": 44512,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 81.96911196911196,
       "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 512 more cell(s) than the engine the harness scorecard was captured with (41440 -> 41952) and every added cell is EQUAL (33968 -> 34480 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. The 2026-08-09 baseline pinned this row at 81.969/41440 cells, the pre-lift engine; the committed regate.scorecard.json beside it had already been overwritten by a later run and disagreed with that row until this re-record."
@@ -843,7 +843,7 @@
       "library": "polaris",
       "component": "Thumbnail",
       "rerunPctEqual": 100,
-      "cellsCompared": 592,
+      "cellsCompared": 608,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 100,
       "gapCause": ""

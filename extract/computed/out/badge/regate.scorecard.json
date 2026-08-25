@@ -106,12 +106,12 @@
       "boundConfirmed": 480,
       "boundCells": 480,
       "contradictions": 0,
-      "mintedLeaves": 278,
-      "mintedLeavesUnfolded": 1178,
+      "mintedLeaves": 308,
+      "mintedLeavesUnfolded": 1358,
       "baseBindings": 37,
       "stateBindings": 0,
       "codeOnlyChannels": 4,
-      "overflowBindings": 3,
+      "overflowBindings": 1,
       "folds": 80
     },
     "worstRows": [
@@ -192,8 +192,6 @@
     ],
     "namedLosses": [
       "overflow: root.width — pair ref over TWO unset axes — no carried spelling; named residue",
-      "overflow: label-2.color — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
-      "overflow: label-2.font-weight — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
       "code-only: label-2.clip-path — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-3.clip-path — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: icon-3.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
@@ -205,7 +203,7 @@
     },
     "shippedMinted": {
       "path": "examples/polaris/tokens/polaris-minted.dtcg.json",
-      "leavesAdded": 1020,
+      "leavesAdded": 1068,
       "divergent": [
         {
           "token": "imported.badge.icon-3.fill.attention",

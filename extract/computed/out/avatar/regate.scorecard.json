@@ -203,7 +203,7 @@
     ],
     "namedLosses": [
       "promotion: pseudo-decor-outside-grammar: root::after paints at position:static (40x40, opacity 1) — the bounded decor grammar reads position:absolute boxes only; an in-flow decor box is NOT promoted and NOT on the canvas",
-      "overflow: initials.color — presence-prop-driven styling (withInitials) — boolean tokensByProp has no spelling (round 4 residue)"
+      "overflow: initials.color — presence-prop-driven styling (withInitials) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (withInitials present) is not"
     ],
     "unresolvedTokenRefs": {
       "count": 0,
@@ -211,7 +211,7 @@
     },
     "shippedMinted": {
       "path": "examples/polaris/tokens/polaris-minted.dtcg.json",
-      "leavesAdded": 1260,
+      "leavesAdded": 1308,
       "divergent": []
     },
     "rows": [
