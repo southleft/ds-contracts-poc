@@ -1,0 +1,15 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "CaseHardGradientElementFill",
+  "varPrefix": "--cf-",
+  "facts": [],
+  "skips": [],
+  "shorthandCeiling": 1,
+  "shorthandSkips": [
+    "root.border-color: SHORTHAND carrying var(--cf-color-secondary) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 0,
+  "calcCeiling": 0,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

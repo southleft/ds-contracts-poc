@@ -1,0 +1,128 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "conformance.hard-placeholder-ink-vs-value",
+  "name": "CaseHardPlaceholderInkVsValue",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the CSS/DOM conformance fixture case \"hard-placeholder-ink-vs-value\" (forms). The fixture varies CSS CONSTRUCTS, not prop spaces, so the prop space is deliberately EMPTY: every axis the capture would enumerate is held at nothing, and the whole measurement is the computed truth of one mounted rendering. Construct: input whose VALUE ink and ::placeholder ink are different colours COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @ds-contracts/conformance@0.1.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [
+    "active",
+    "focus-visible"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex"
+      },
+      "parts": {
+        "a": {
+          "element": "input",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy input|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "appearance": "auto",
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "box-sizing": "border-box",
+            "cursor": "text",
+            "font-family": "monospace",
+            "overflow-x": "clip",
+            "overflow-y": "clip"
+          },
+          "layout": {
+            "grow": true
+          },
+          "declaredStates": {
+            "active": {
+              "outline-style": "auto"
+            },
+            "focus-visible": {
+              "outline-style": "auto"
+            }
+          },
+          "tokens": {
+            "background-color": "{imported.case-hard-placeholder-ink-vs-value.a.background-color}",
+            "border-bottom-color": "{imported.shared.color-cbd5e1}",
+            "border-bottom-left-radius": "{imported.shared.size-6}",
+            "border-bottom-right-radius": "{imported.shared.size-6}",
+            "border-bottom-width": "{imported.shared.size-1}",
+            "border-left-color": "{imported.shared.color-cbd5e1}",
+            "border-left-width": "{imported.shared.size-1}",
+            "border-right-color": "{imported.shared.color-cbd5e1}",
+            "border-right-width": "{imported.shared.size-1}",
+            "border-top-color": "{imported.shared.color-cbd5e1}",
+            "border-top-left-radius": "{imported.shared.size-6}",
+            "border-top-right-radius": "{imported.shared.size-6}",
+            "border-top-width": "{imported.shared.size-1}",
+            "color": "{imported.case-hard-placeholder-ink-vs-value.a.color}",
+            "font-size": "{imported.case-hard-placeholder-ink-vs-value.a.font-size}",
+            "outline-color": "{imported.case-hard-placeholder-ink-vs-value.a.outline-color}",
+            "padding-bottom": "{imported.shared.size-6}",
+            "padding-left": "{imported.case-hard-placeholder-ink-vs-value.a.padding-left}",
+            "padding-right": "{imported.case-hard-placeholder-ink-vs-value.a.padding-right}",
+            "padding-top": "{imported.shared.size-6}"
+          },
+          "codeOnly": [
+            {
+              "state": "active",
+              "channel": "outline-color",
+              "value": "#005fcc",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "active",
+              "channel": "outline-width",
+              "value": "1px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "outline-color",
+              "value": "#005fcc",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "outline-width",
+              "value": "1px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            }
+          ]
+        }
+      },
+      "declared": {
+        "box-sizing": "border-box",
+        "font-family": "monospace"
+      },
+      "tokens": {
+        "background-color": "{imported.case-hard-placeholder-ink-vs-value.root.background-color}",
+        "border-bottom-color": "{imported.shared.color-663399}",
+        "border-left-color": "{imported.shared.color-663399}",
+        "border-right-color": "{imported.shared.color-663399}",
+        "border-top-color": "{imported.shared.color-663399}",
+        "color": "{imported.case-hard-placeholder-ink-vs-value.root.color}",
+        "font-size": "{imported.case-hard-placeholder-ink-vs-value.root.font-size}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@ds-contracts/conformance",
+        "export": "CaseHardPlaceholderInkVsValue"
+      }
+    }
+  }
+}

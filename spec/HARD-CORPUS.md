@@ -123,7 +123,26 @@ INERT is deliberately outside the denominator: 54 channel-table rows are classed
 
 ## Expectation vs outcome
 
-No results recorded yet. `npm run hard-corpus:record` reads the measured baselines; it may not run in the commit that declares a case.
+Measured from `conformance/BASELINE.json + conformance/CANVAS-BASELINE.json (npm run conformance:capture, then npm run conformance -- --write)`.
+
+| case | declared | measured verdict | agrees |
+|---|---|---|---|
+| `hard-align-items-baseline` | CARRIED | WRONG-NAME | **NO** |
+| `hard-border-dashed` | LEDGERED | PASS | yes |
+| `hard-box-shadow-layered` | CARRIED | PASS | yes |
+| `hard-empty-region-min-size` | CARRIED | PASS | yes |
+| `hard-flex-direction-column-reverse` | CARRIED | WRONG-NAME | **NO** |
+| `hard-flex-wrap-wrap` | REFUSED | PASS | yes |
+| `hard-gradient-element-fill` | CARRIED | PASS | yes |
+| `hard-outline-ring-rest-plane` | CARRIED | PASS | yes |
+| `hard-placeholder-ink-vs-value` | CARRIED | PASS | yes |
+| `hard-pseudo-tick-rotated` | CARRIED | PASS | yes |
+| `hard-rem-scale-padding` | CARRIED | PASS | yes |
+| `hard-svg-glyph-stroke` | CARRIED | SILENT-LOSS | **NO** |
+| `hard-text-indent-eviction` | LEDGERED | PASS | yes |
+| `hard-text-part-pinned-size` | CARRIED | PASS | yes |
+
+**11 of 14** cases came out the way the closed table said they would.
 
 ## What this corpus does NOT cover
 
