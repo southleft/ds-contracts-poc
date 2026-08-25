@@ -230,6 +230,17 @@ is right; and `accordion/divider` accepts a full box border, because
 `ds.accordion-item` draws one and it separates stacked items just as well as a
 row rule does.
 
+**The fact table is TypeScript, not the design's `archetype-required-facts.json`.**
+The design put the table in `@ds-contracts/schema` beside `contract.schema.json`
+as data. It ships instead as a typed `const` in
+`packages/core/src/required-facts.ts`, beside the checker that reads it: the
+checker lives in `@ds-contracts/core` (which is browser-importable and imports
+no `node:*`), so a JSON file there would need import-attribute machinery or a
+second generated copy, and a second copy is a thing that drifts. A `const` IS
+data — and this one is type-checked against the archetype enum, so a row that
+names an archetype the schema does not have fails `tsc` rather than failing
+silently at read time.
+
 **38 contracts enforce nothing** — no `archetype` declared and the name-map does
 not reach their name (`ds.blockquote`, `ds.chat-message`, `ds.kbd`, …). They
 warn "declare archetype" and are graded against nothing. That is the design:
