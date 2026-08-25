@@ -1429,6 +1429,10 @@
         "$value": "#1010104d",
         "$type": "color"
       },
+      "color-161616": {
+        "$value": "#161616",
+        "$type": "color"
+      },
       "size-288": {
         "$value": "288px",
         "$type": "dimension"
@@ -1475,10 +1479,6 @@
       },
       "color-525252": {
         "$value": "#525252",
-        "$type": "color"
-      },
-      "color-161616": {
-        "$value": "#161616",
         "$type": "color"
       },
       "size-500-5": {
@@ -2294,9 +2294,17 @@
           "$value": "2px",
           "$type": "dimension"
         },
+        "placeholder-color": {
+          "$value": "#16161666",
+          "$type": "color"
+        },
         "outline-color-state-active": {
           "$value": "#0f62fe",
           "$type": "color"
+        },
+        "outline-width-state-active": {
+          "$value": "2px",
+          "$type": "dimension"
         },
         "border-bottom-color-state-disabled": {
           "$value": "#00000000",
@@ -2305,6 +2313,10 @@
         "outline-color-state-focus-visible": {
           "$value": "#0f62fe",
           "$type": "color"
+        },
+        "outline-width-state-focus-visible": {
+          "$value": "2px",
+          "$type": "dimension"
         }
       },
       "text-input-counter-alert": {

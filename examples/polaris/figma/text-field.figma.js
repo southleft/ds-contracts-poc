@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "polaris.text-field",
     "version": "0.4.0",
     "anchorKey": null,
-    "description": "TextField — generated from contract polaris.text-field v0.4.0 † (191 code-only facts — see plugin report)",
+    "description": "TextField — generated from contract polaris.text-field v0.4.0 † (194 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -3565,6 +3565,51 @@ const COMPONENTS = [
         "variants": {
           "count": 8,
           "of": 8
+        }
+      },
+      {
+        "part": "input",
+        "kind": "channel",
+        "channel": "placeholder",
+        "value": "",
+        "reason": "the placeholder STRING is an HTML attribute the browser renders through `::placeholder`, not DOM text — a computed-style capture reads its ink and never its characters, and this contract carries no default for the bound text prop and no literal `placeholder` attr. The TEXT node is kept so the Figma TEXT property can bind to it, and it is left EMPTY rather than filled with an invented string.",
+        "variants": {
+          "count": 8,
+          "of": 8
+        }
+      },
+      {
+        "part": "input",
+        "kind": "channel",
+        "channel": "placeholder-color",
+        "value": "p/color-text",
+        "reason": "this contract carries no `placeholder-color`, so the placeholder text is drawn in the control's OWN `color` — the VALUE ink. An empty field therefore reads as a filled one. The ink IS measurable (`::placeholder{color}` is read on every capture and folds to `placeholder-color`); re-derive this contract to carry it.",
+        "variants": {
+          "count": 7,
+          "of": 8,
+          "names": [
+            "Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium",
+            "Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Slim",
+            "Type=Text, Input Mode=Text, Align=Left, Variant=Borderless, Size=Medium",
+            "Type=Text, Input Mode=Text, Align=Left, Variant=Borderless, Size=Slim",
+            "Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium, State=Active",
+            "Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium, State=Focus Visible",
+            "Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "input",
+        "kind": "channel",
+        "channel": "placeholder-color",
+        "value": "p/color-text-disabled",
+        "reason": "this contract carries no `placeholder-color`, so the placeholder text is drawn in the control's OWN `color` — the VALUE ink. An empty field therefore reads as a filled one. The ink IS measurable (`::placeholder{color}` is read on every capture and folds to `placeholder-color`); re-derive this contract to carry it.",
+        "variants": {
+          "count": 1,
+          "of": 8,
+          "names": [
+            "Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium, State=Disabled"
+          ]
         }
       },
       {

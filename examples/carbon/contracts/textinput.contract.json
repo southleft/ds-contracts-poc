@@ -60,7 +60,8 @@
               "description": "Promoted from the computed floor (round 4): rendered anatomy label|label — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "block",
-                "cursor": "default"
+                "cursor": "default",
+                "font-family": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
               },
               "tokens": {
                 "color": "{imported.text-input.label.color}",
@@ -78,6 +79,7 @@
             }
           },
           "tokens": {
+            "color": "{imported.shared.color-161616}",
             "font-size": "{imported.shared.size-14}",
             "height": "{imported.text-input.text-input-label-wrapper.height}",
             "letter-spacing": "{imported.shared.size-0-16}",
@@ -132,9 +134,7 @@
                     "background-color": "{imported.text-input.text-input.background-color}",
                     "border-bottom-color": "{imported.text-input.text-input.border-bottom-color}",
                     "border-bottom-width": "{imported.shared.size-1}",
-                    "border-left-width": "{imported.shared.size-0}",
-                    "border-right-width": "{imported.shared.size-0}",
-                    "border-top-width": "{imported.shared.size-0}",
+                    "color": "{imported.shared.color-161616}",
                     "font-size": "{imported.shared.size-14}",
                     "height": "{imported.text-input.text-input.height.unset}",
                     "letter-spacing": "{imported.shared.size-0-16}",
@@ -144,6 +144,7 @@
                     "outline-width": "{imported.text-input.text-input.outline-width}",
                     "padding-left": "{imported.shared.size-16}",
                     "padding-right": "{imported.shared.size-16}",
+                    "placeholder-color": "{imported.text-input.text-input.placeholder-color}",
                     "width": "{imported.shared.size-288}"
                   },
                   "states": {
@@ -169,6 +170,86 @@
                         }
                       }
                     }
+                  ],
+                  "codeOnly": [
+                    {
+                      "state": "active",
+                      "channel": "outline-color",
+                      "value": "#0f62fe",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "active",
+                      "channel": "outline-width",
+                      "value": "2px",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "border-bottom-color",
+                      "value": "#00000000",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "border-left-color",
+                      "value": "#16161640",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "border-right-color",
+                      "value": "#16161640",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "border-top-color",
+                      "value": "#16161640",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "caret-color",
+                      "value": "#16161640",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "column-rule-color",
+                      "value": "#16161640",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "row-rule-color",
+                      "value": "#16161640",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "text-decoration-color",
+                      "value": "#16161640",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "text-emphasis-color",
+                      "value": "#16161640",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-color",
+                      "value": "#0f62fe",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-width",
+                      "value": "2px",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    }
                   ]
                 },
                 "text-input__counter-alert": {
@@ -182,6 +263,7 @@
                   },
                   "tokens": {
                     "bottom": "{imported.text-input.text-input-counter-alert.bottom.unset}",
+                    "color": "{imported.shared.color-161616}",
                     "font-size": "{imported.shared.size-14}",
                     "height": "{imported.shared.size-1}",
                     "left": "{imported.shared.size-0}",
@@ -223,6 +305,7 @@
               },
               "tokens": {
                 "bottom": "{imported.shared.size-0}",
+                "color": "{imported.shared.color-161616}",
                 "font-size": "{imported.shared.size-14}",
                 "height": "{imported.text-input.text-input-field-wrapper.height.unset}",
                 "left": "{imported.shared.size-0}",
@@ -254,6 +337,7 @@
             }
           },
           "tokens": {
+            "color": "{imported.shared.color-161616}",
             "flex-grow": "{imported.text-input.text-input-field-outer-wrapper.flex-grow}",
             "font-size": "{imported.shared.size-14}",
             "height": "{imported.text-input.text-input-field-outer-wrapper.height.unset}",
@@ -283,6 +367,7 @@
         }
       },
       "tokens": {
+        "color": "{imported.shared.color-161616}",
         "flex-grow": "{imported.text-input.root.flex-grow}",
         "font-size": "{imported.shared.size-14}",
         "height": "{imported.text-input.root.height.unset}",

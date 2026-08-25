@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "carbon.textinput",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "TextInput — generated from contract carbon.textinput v0.2.0 † (27 code-only facts — see plugin report)",
+    "description": "TextInput — generated from contract carbon.textinput v0.2.0 † (42 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -76,7 +76,8 @@ const COMPONENTS = [
                     "value": 16,
                     "unit": "PIXELS"
                   },
-                  "letterSpacing": 0.32
+                  "letterSpacing": 0.32,
+                  "fontFamily": "IBM Plex Sans"
                 }
               ]
             },
@@ -128,9 +129,6 @@ const COMPONENTS = [
                       "stroke": "imported/text-input/text-input/border-bottom-color",
                       "bindings": {
                         "strokeBottomWeight": "imported/shared/size-1",
-                        "strokeLeftWeight": "imported/shared/size-0",
-                        "strokeRightWeight": "imported/shared/size-0",
-                        "strokeTopWeight": "imported/shared/size-0",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/shared/size-16"
                       },
@@ -156,7 +154,8 @@ const COMPONENTS = [
                           },
                           "letterSpacing": 0.16,
                           "fontSizeVar": "imported/shared/size-14",
-                          "lineHeightVar": "imported/shared/size-18-0001"
+                          "lineHeightVar": "imported/shared/size-18-0001",
+                          "textFill": "imported/text-input/text-input/placeholder-color"
                         }
                       ]
                     }
@@ -226,7 +225,8 @@ const COMPONENTS = [
                     "value": 16,
                     "unit": "PIXELS"
                   },
-                  "letterSpacing": 0.32
+                  "letterSpacing": 0.32,
+                  "fontFamily": "IBM Plex Sans"
                 }
               ]
             },
@@ -278,9 +278,6 @@ const COMPONENTS = [
                       "stroke": "imported/text-input/text-input/border-bottom-color",
                       "bindings": {
                         "strokeBottomWeight": "imported/shared/size-1",
-                        "strokeLeftWeight": "imported/shared/size-0",
-                        "strokeRightWeight": "imported/shared/size-0",
-                        "strokeTopWeight": "imported/shared/size-0",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/shared/size-16"
                       },
@@ -306,7 +303,8 @@ const COMPONENTS = [
                           },
                           "letterSpacing": 0.16,
                           "fontSizeVar": "imported/shared/size-14",
-                          "lineHeightVar": "imported/shared/size-18-0001"
+                          "lineHeightVar": "imported/shared/size-18-0001",
+                          "textFill": "imported/text-input/text-input/placeholder-color"
                         }
                       ]
                     }
@@ -376,7 +374,8 @@ const COMPONENTS = [
                     "value": 16,
                     "unit": "PIXELS"
                   },
-                  "letterSpacing": 0.32
+                  "letterSpacing": 0.32,
+                  "fontFamily": "IBM Plex Sans"
                 }
               ]
             },
@@ -428,9 +427,6 @@ const COMPONENTS = [
                       "stroke": "imported/text-input/text-input/border-bottom-color",
                       "bindings": {
                         "strokeBottomWeight": "imported/shared/size-1",
-                        "strokeLeftWeight": "imported/shared/size-0",
-                        "strokeRightWeight": "imported/shared/size-0",
-                        "strokeTopWeight": "imported/shared/size-0",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/shared/size-16"
                       },
@@ -456,7 +452,8 @@ const COMPONENTS = [
                           },
                           "letterSpacing": 0.16,
                           "fontSizeVar": "imported/shared/size-14",
-                          "lineHeightVar": "imported/shared/size-18-0001"
+                          "lineHeightVar": "imported/shared/size-18-0001",
+                          "textFill": "imported/text-input/text-input/placeholder-color"
                         }
                       ]
                     }
@@ -526,7 +523,8 @@ const COMPONENTS = [
                     "value": 16,
                     "unit": "PIXELS"
                   },
-                  "letterSpacing": 0.32
+                  "letterSpacing": 0.32,
+                  "fontFamily": "IBM Plex Sans"
                 }
               ]
             },
@@ -578,9 +576,6 @@ const COMPONENTS = [
                       "stroke": "imported/text-input/text-input/border-bottom-color",
                       "bindings": {
                         "strokeBottomWeight": "imported/shared/size-1",
-                        "strokeLeftWeight": "imported/shared/size-0",
-                        "strokeRightWeight": "imported/shared/size-0",
-                        "strokeTopWeight": "imported/shared/size-0",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/shared/size-16"
                       },
@@ -606,7 +601,8 @@ const COMPONENTS = [
                           },
                           "letterSpacing": 0.16,
                           "fontSizeVar": "imported/shared/size-14",
-                          "lineHeightVar": "imported/shared/size-18-0001"
+                          "lineHeightVar": "imported/shared/size-18-0001",
+                          "textFill": "imported/text-input/text-input/placeholder-color"
                         }
                       ]
                     }
@@ -684,7 +680,8 @@ const COMPONENTS = [
                     "value": 16,
                     "unit": "PIXELS"
                   },
-                  "letterSpacing": 0.32
+                  "letterSpacing": 0.32,
+                  "fontFamily": "IBM Plex Sans"
                 }
               ]
             },
@@ -736,9 +733,6 @@ const COMPONENTS = [
                       "stroke": "imported/text-input/text-input/border-bottom-color",
                       "bindings": {
                         "strokeBottomWeight": "imported/shared/size-1",
-                        "strokeLeftWeight": "imported/shared/size-0",
-                        "strokeRightWeight": "imported/shared/size-0",
-                        "strokeTopWeight": "imported/shared/size-0",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/shared/size-16"
                       },
@@ -765,7 +759,7 @@ const COMPONENTS = [
                           "letterSpacing": 0.16,
                           "fontSizeVar": "imported/shared/size-14",
                           "lineHeightVar": "imported/shared/size-18-0001",
-                          "textFill": "imported/shared/color-16161640"
+                          "textFill": "imported/text-input/text-input/placeholder-color"
                         }
                       ]
                     }
@@ -835,7 +829,8 @@ const COMPONENTS = [
                     "value": 16,
                     "unit": "PIXELS"
                   },
-                  "letterSpacing": 0.32
+                  "letterSpacing": 0.32,
+                  "fontFamily": "IBM Plex Sans"
                 }
               ]
             },
@@ -887,9 +882,6 @@ const COMPONENTS = [
                       "stroke": "imported/text-input/text-input/border-bottom-color",
                       "bindings": {
                         "strokeBottomWeight": "imported/shared/size-1",
-                        "strokeLeftWeight": "imported/shared/size-0",
-                        "strokeRightWeight": "imported/shared/size-0",
-                        "strokeTopWeight": "imported/shared/size-0",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/shared/size-16"
                       },
@@ -916,7 +908,7 @@ const COMPONENTS = [
                           "letterSpacing": 0.16,
                           "fontSizeVar": "imported/shared/size-14",
                           "lineHeightVar": "imported/shared/size-18-0001",
-                          "textFill": "imported/shared/color-16161640"
+                          "textFill": "imported/text-input/text-input/placeholder-color"
                         }
                       ]
                     }
@@ -986,7 +978,8 @@ const COMPONENTS = [
                     "value": 16,
                     "unit": "PIXELS"
                   },
-                  "letterSpacing": 0.32
+                  "letterSpacing": 0.32,
+                  "fontFamily": "IBM Plex Sans"
                 }
               ]
             },
@@ -1038,9 +1031,6 @@ const COMPONENTS = [
                       "stroke": "imported/text-input/text-input/border-bottom-color",
                       "bindings": {
                         "strokeBottomWeight": "imported/shared/size-1",
-                        "strokeLeftWeight": "imported/shared/size-0",
-                        "strokeRightWeight": "imported/shared/size-0",
-                        "strokeTopWeight": "imported/shared/size-0",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/shared/size-16"
                       },
@@ -1067,7 +1057,7 @@ const COMPONENTS = [
                           "letterSpacing": 0.16,
                           "fontSizeVar": "imported/shared/size-14",
                           "lineHeightVar": "imported/shared/size-18-0001",
-                          "textFill": "imported/shared/color-16161640"
+                          "textFill": "imported/text-input/text-input/placeholder-color"
                         }
                       ]
                     }
@@ -1137,7 +1127,8 @@ const COMPONENTS = [
                     "value": 16,
                     "unit": "PIXELS"
                   },
-                  "letterSpacing": 0.32
+                  "letterSpacing": 0.32,
+                  "fontFamily": "IBM Plex Sans"
                 }
               ]
             },
@@ -1189,9 +1180,6 @@ const COMPONENTS = [
                       "stroke": "imported/text-input/text-input/border-bottom-color",
                       "bindings": {
                         "strokeBottomWeight": "imported/shared/size-1",
-                        "strokeLeftWeight": "imported/shared/size-0",
-                        "strokeRightWeight": "imported/shared/size-0",
-                        "strokeTopWeight": "imported/shared/size-0",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/shared/size-16"
                       },
@@ -1218,7 +1206,7 @@ const COMPONENTS = [
                           "letterSpacing": 0.16,
                           "fontSizeVar": "imported/shared/size-14",
                           "lineHeightVar": "imported/shared/size-18-0001",
-                          "textFill": "imported/shared/color-16161640"
+                          "textFill": "imported/text-input/text-input/placeholder-color"
                         }
                       ]
                     }
@@ -1282,6 +1270,183 @@ const COMPONENTS = [
         "variants": {
           "count": 8,
           "of": 8
+        }
+      },
+      {
+        "part": "text-input",
+        "kind": "capture",
+        "channel": "border-bottom-color [disabled]",
+        "value": "#00000000",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 8,
+          "of": 8
+        }
+      },
+      {
+        "part": "text-input",
+        "kind": "capture",
+        "channel": "border-left-color [disabled]",
+        "value": "#16161640",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 8,
+          "of": 8
+        }
+      },
+      {
+        "part": "text-input",
+        "kind": "capture",
+        "channel": "border-right-color [disabled]",
+        "value": "#16161640",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 8,
+          "of": 8
+        }
+      },
+      {
+        "part": "text-input",
+        "kind": "capture",
+        "channel": "border-top-color [disabled]",
+        "value": "#16161640",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 8,
+          "of": 8
+        }
+      },
+      {
+        "part": "text-input",
+        "kind": "capture",
+        "channel": "caret-color [disabled]",
+        "value": "#16161640",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 8,
+          "of": 8
+        }
+      },
+      {
+        "part": "text-input",
+        "kind": "capture",
+        "channel": "column-rule-color [disabled]",
+        "value": "#16161640",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 8,
+          "of": 8
+        }
+      },
+      {
+        "part": "text-input",
+        "kind": "capture",
+        "channel": "outline-color [active]",
+        "value": "#0f62fe",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 8,
+          "of": 8
+        }
+      },
+      {
+        "part": "text-input",
+        "kind": "capture",
+        "channel": "outline-color [focus-visible]",
+        "value": "#0f62fe",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 8,
+          "of": 8
+        }
+      },
+      {
+        "part": "text-input",
+        "kind": "capture",
+        "channel": "outline-width [active]",
+        "value": "2px",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 8,
+          "of": 8
+        }
+      },
+      {
+        "part": "text-input",
+        "kind": "capture",
+        "channel": "outline-width [focus-visible]",
+        "value": "2px",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 8,
+          "of": 8
+        }
+      },
+      {
+        "part": "text-input",
+        "kind": "capture",
+        "channel": "row-rule-color [disabled]",
+        "value": "#16161640",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 8,
+          "of": 8
+        }
+      },
+      {
+        "part": "text-input",
+        "kind": "capture",
+        "channel": "text-decoration-color [disabled]",
+        "value": "#16161640",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 8,
+          "of": 8
+        }
+      },
+      {
+        "part": "text-input",
+        "kind": "capture",
+        "channel": "text-emphasis-color [disabled]",
+        "value": "#16161640",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 8,
+          "of": 8
+        }
+      },
+      {
+        "part": "text-input",
+        "kind": "channel",
+        "channel": "color",
+        "value": "{imported.shared.color-16161640}",
+        "reason": "this control paints its placeholder in `placeholder-color`, so its own `color` — the ink the field would draw a TYPED VALUE in — is on no node. An EMPTY field has no value text, and Figma has no second text plane to hold the ink of text that is not there. Carried by the CSS surfaces (`color` on the control), NAMED here rather than painted over the placeholder (which is the RC7 defect this class exists to close).",
+        "variants": {
+          "count": 4,
+          "of": 8,
+          "names": [
+            "Size=Xs, State=Disabled",
+            "Size=Sm, State=Disabled",
+            "Size=Md, State=Disabled",
+            "Size=Lg, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "text-input",
+        "kind": "channel",
+        "channel": "color",
+        "value": "{imported.shared.color-161616}",
+        "reason": "this control paints its placeholder in `placeholder-color`, so its own `color` — the ink the field would draw a TYPED VALUE in — is on no node. An EMPTY field has no value text, and Figma has no second text plane to hold the ink of text that is not there. Carried by the CSS surfaces (`color` on the control), NAMED here rather than painted over the placeholder (which is the RC7 defect this class exists to close).",
+        "variants": {
+          "count": 4,
+          "of": 8,
+          "names": [
+            "Size=Xs",
+            "Size=Sm",
+            "Size=Md",
+            "Size=Lg"
+          ]
         }
       },
       {

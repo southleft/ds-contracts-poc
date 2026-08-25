@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "astryx.text-input",
     "version": "0.3.0",
     "anchorKey": null,
-    "description": "TextInput — generated from contract astryx.text-input v0.3.0 † (26 code-only facts — see plugin report)",
+    "description": "TextInput — generated from contract astryx.text-input v0.3.0 † (34 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -24,12 +24,7 @@ const COMPONENTS = [
         "default": false
       }
     ],
-    "textProps": [
-      {
-        "property": "Placeholder",
-        "default": "you@example.com"
-      }
-    ],
+    "textProps": [],
     "fontStyles": [
       "Medium"
     ],
@@ -52,6 +47,10 @@ const COMPONENTS = [
             "minWidth": "imported/shared/size-0",
             "itemSpacing": "imported/shared/size-4"
           },
+          "fixedWidth": {
+            "px": 320,
+            "varName": "imported/text-input/root/width"
+          },
           "children": [
             {
               "type": "text",
@@ -70,6 +69,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -116,6 +116,7 @@ const COMPONENTS = [
                         "primary": "MIN",
                         "counter": "CENTER"
                       },
+                      "grow": true,
                       "bindings": {
                         "minWidth": "imported/shared/size-0"
                       },
@@ -124,7 +125,7 @@ const COMPONENTS = [
                         {
                           "type": "text",
                           "name": "placeholder",
-                          "characters": "",
+                          "characters": "you@example.com",
                           "fontSize": 14,
                           "fontStyle": "Medium",
                           "lineHeight": {
@@ -132,9 +133,12 @@ const COMPONENTS = [
                             "unit": "PIXELS"
                           },
                           "fontSizeVar": "imported/text-input/part-1-0-0/font-size",
-                          "lineHeightVar": "imported/text-input/part-1-0-0/line-height"
+                          "lineHeightVar": "imported/text-input/part-1-0-0/line-height",
+                          "textFill": "imported/text-input/part-1-0-0/placeholder-color",
+                          "contentProp": "Placeholder"
                         }
-                      ]
+                      ],
+                      "fillW": true
                     }
                   ],
                   "fillW": true
@@ -163,6 +167,10 @@ const COMPONENTS = [
             "minWidth": "imported/shared/size-0",
             "itemSpacing": "imported/shared/size-4"
           },
+          "fixedWidth": {
+            "px": 320,
+            "varName": "imported/text-input/root/width"
+          },
           "children": [
             {
               "type": "text",
@@ -181,6 +189,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -227,6 +236,7 @@ const COMPONENTS = [
                         "primary": "MIN",
                         "counter": "CENTER"
                       },
+                      "grow": true,
                       "bindings": {
                         "minWidth": "imported/shared/size-0"
                       },
@@ -235,7 +245,7 @@ const COMPONENTS = [
                         {
                           "type": "text",
                           "name": "placeholder",
-                          "characters": "",
+                          "characters": "you@example.com",
                           "fontSize": 14,
                           "fontStyle": "Medium",
                           "lineHeight": {
@@ -243,9 +253,12 @@ const COMPONENTS = [
                             "unit": "PIXELS"
                           },
                           "fontSizeVar": "imported/text-input/part-1-0-0/font-size",
-                          "lineHeightVar": "imported/text-input/part-1-0-0/line-height"
+                          "lineHeightVar": "imported/text-input/part-1-0-0/line-height",
+                          "textFill": "imported/text-input/part-1-0-0/placeholder-color",
+                          "contentProp": "Placeholder"
                         }
-                      ]
+                      ],
+                      "fillW": true
                     }
                   ],
                   "fillW": true
@@ -274,6 +287,10 @@ const COMPONENTS = [
             "minWidth": "imported/shared/size-0",
             "itemSpacing": "imported/shared/size-4"
           },
+          "fixedWidth": {
+            "px": 320,
+            "varName": "imported/text-input/root/width"
+          },
           "children": [
             {
               "type": "text",
@@ -292,6 +309,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -338,6 +356,7 @@ const COMPONENTS = [
                         "primary": "MIN",
                         "counter": "CENTER"
                       },
+                      "grow": true,
                       "bindings": {
                         "minWidth": "imported/shared/size-0"
                       },
@@ -346,7 +365,7 @@ const COMPONENTS = [
                         {
                           "type": "text",
                           "name": "placeholder",
-                          "characters": "",
+                          "characters": "you@example.com",
                           "fontSize": 14,
                           "fontStyle": "Medium",
                           "lineHeight": {
@@ -354,9 +373,12 @@ const COMPONENTS = [
                             "unit": "PIXELS"
                           },
                           "fontSizeVar": "imported/text-input/part-1-0-0/font-size",
-                          "lineHeightVar": "imported/text-input/part-1-0-0/line-height"
+                          "lineHeightVar": "imported/text-input/part-1-0-0/line-height",
+                          "textFill": "imported/text-input/part-1-0-0/placeholder-color",
+                          "contentProp": "Placeholder"
                         }
-                      ]
+                      ],
+                      "fillW": true
                     }
                   ],
                   "fillW": true
@@ -385,6 +407,10 @@ const COMPONENTS = [
             "minWidth": "imported/shared/size-0",
             "itemSpacing": "imported/shared/size-4"
           },
+          "fixedWidth": {
+            "px": 320,
+            "varName": "imported/text-input/root/width"
+          },
           "children": [
             {
               "type": "text",
@@ -403,6 +429,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -449,6 +476,7 @@ const COMPONENTS = [
                         "primary": "MIN",
                         "counter": "CENTER"
                       },
+                      "grow": true,
                       "bindings": {
                         "minWidth": "imported/shared/size-0"
                       },
@@ -457,7 +485,7 @@ const COMPONENTS = [
                         {
                           "type": "text",
                           "name": "placeholder",
-                          "characters": "",
+                          "characters": "you@example.com",
                           "fontSize": 14,
                           "fontStyle": "Medium",
                           "lineHeight": {
@@ -465,9 +493,12 @@ const COMPONENTS = [
                             "unit": "PIXELS"
                           },
                           "fontSizeVar": "imported/text-input/part-1-0-0/font-size",
-                          "lineHeightVar": "imported/text-input/part-1-0-0/line-height"
+                          "lineHeightVar": "imported/text-input/part-1-0-0/line-height",
+                          "textFill": "imported/text-input/part-1-0-0/placeholder-color",
+                          "contentProp": "Placeholder"
                         }
-                      ]
+                      ],
+                      "fillW": true
                     }
                   ],
                   "fillW": true
@@ -496,6 +527,10 @@ const COMPONENTS = [
             "minWidth": "imported/shared/size-0",
             "itemSpacing": "imported/shared/size-4"
           },
+          "fixedWidth": {
+            "px": 320,
+            "varName": "imported/text-input/root/width"
+          },
           "children": [
             {
               "type": "text",
@@ -514,6 +549,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -560,6 +596,7 @@ const COMPONENTS = [
                         "primary": "MIN",
                         "counter": "CENTER"
                       },
+                      "grow": true,
                       "bindings": {
                         "minWidth": "imported/shared/size-0"
                       },
@@ -568,7 +605,7 @@ const COMPONENTS = [
                         {
                           "type": "text",
                           "name": "placeholder",
-                          "characters": "",
+                          "characters": "you@example.com",
                           "fontSize": 14,
                           "fontStyle": "Medium",
                           "lineHeight": {
@@ -576,9 +613,12 @@ const COMPONENTS = [
                             "unit": "PIXELS"
                           },
                           "fontSizeVar": "imported/text-input/part-1-0-0/font-size",
-                          "lineHeightVar": "imported/text-input/part-1-0-0/line-height"
+                          "lineHeightVar": "imported/text-input/part-1-0-0/line-height",
+                          "textFill": "imported/text-input/part-1-0-0/placeholder-color",
+                          "contentProp": "Placeholder"
                         }
-                      ]
+                      ],
+                      "fillW": true
                     }
                   ],
                   "fillW": true
@@ -607,6 +647,10 @@ const COMPONENTS = [
             "minWidth": "imported/shared/size-0",
             "itemSpacing": "imported/shared/size-4"
           },
+          "fixedWidth": {
+            "px": 320,
+            "varName": "imported/text-input/root/width"
+          },
           "children": [
             {
               "type": "text",
@@ -625,6 +669,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -671,6 +716,7 @@ const COMPONENTS = [
                         "primary": "MIN",
                         "counter": "CENTER"
                       },
+                      "grow": true,
                       "bindings": {
                         "minWidth": "imported/shared/size-0"
                       },
@@ -679,7 +725,7 @@ const COMPONENTS = [
                         {
                           "type": "text",
                           "name": "placeholder",
-                          "characters": "",
+                          "characters": "you@example.com",
                           "fontSize": 14,
                           "fontStyle": "Medium",
                           "lineHeight": {
@@ -687,9 +733,12 @@ const COMPONENTS = [
                             "unit": "PIXELS"
                           },
                           "fontSizeVar": "imported/text-input/part-1-0-0/font-size",
-                          "lineHeightVar": "imported/text-input/part-1-0-0/line-height"
+                          "lineHeightVar": "imported/text-input/part-1-0-0/line-height",
+                          "textFill": "imported/text-input/part-1-0-0/placeholder-color",
+                          "contentProp": "Placeholder"
                         }
-                      ]
+                      ],
+                      "fillW": true
                     }
                   ],
                   "fillW": true
@@ -718,6 +767,10 @@ const COMPONENTS = [
             "minWidth": "imported/shared/size-0",
             "itemSpacing": "imported/shared/size-4"
           },
+          "fixedWidth": {
+            "px": 320,
+            "varName": "imported/text-input/root/width"
+          },
           "children": [
             {
               "type": "text",
@@ -736,6 +789,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -782,6 +836,7 @@ const COMPONENTS = [
                         "primary": "MIN",
                         "counter": "CENTER"
                       },
+                      "grow": true,
                       "bindings": {
                         "minWidth": "imported/shared/size-0"
                       },
@@ -790,7 +845,7 @@ const COMPONENTS = [
                         {
                           "type": "text",
                           "name": "placeholder",
-                          "characters": "",
+                          "characters": "you@example.com",
                           "fontSize": 14,
                           "fontStyle": "Medium",
                           "lineHeight": {
@@ -798,9 +853,12 @@ const COMPONENTS = [
                             "unit": "PIXELS"
                           },
                           "fontSizeVar": "imported/text-input/part-1-0-0/font-size",
-                          "lineHeightVar": "imported/text-input/part-1-0-0/line-height"
+                          "lineHeightVar": "imported/text-input/part-1-0-0/line-height",
+                          "textFill": "imported/text-input/part-1-0-0/placeholder-color",
+                          "contentProp": "Placeholder"
                         }
-                      ]
+                      ],
+                      "fillW": true
                     }
                   ],
                   "fillW": true
@@ -829,6 +887,10 @@ const COMPONENTS = [
             "minWidth": "imported/shared/size-0",
             "itemSpacing": "imported/shared/size-4"
           },
+          "fixedWidth": {
+            "px": 320,
+            "varName": "imported/text-input/root/width"
+          },
           "children": [
             {
               "type": "text",
@@ -847,6 +909,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -893,6 +956,7 @@ const COMPONENTS = [
                         "primary": "MIN",
                         "counter": "CENTER"
                       },
+                      "grow": true,
                       "bindings": {
                         "minWidth": "imported/shared/size-0"
                       },
@@ -901,7 +965,7 @@ const COMPONENTS = [
                         {
                           "type": "text",
                           "name": "placeholder",
-                          "characters": "",
+                          "characters": "you@example.com",
                           "fontSize": 14,
                           "fontStyle": "Medium",
                           "lineHeight": {
@@ -909,9 +973,12 @@ const COMPONENTS = [
                             "unit": "PIXELS"
                           },
                           "fontSizeVar": "imported/text-input/part-1-0-0/font-size",
-                          "lineHeightVar": "imported/text-input/part-1-0-0/line-height"
+                          "lineHeightVar": "imported/text-input/part-1-0-0/line-height",
+                          "textFill": "imported/text-input/part-1-0-0/placeholder-color",
+                          "contentProp": "Placeholder"
                         }
-                      ]
+                      ],
+                      "fillW": true
                     }
                   ],
                   "fillW": true
@@ -940,6 +1007,10 @@ const COMPONENTS = [
             "minWidth": "imported/shared/size-0",
             "itemSpacing": "imported/shared/size-4"
           },
+          "fixedWidth": {
+            "px": 320,
+            "varName": "imported/text-input/root/width"
+          },
           "children": [
             {
               "type": "text",
@@ -958,6 +1029,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -1004,6 +1076,7 @@ const COMPONENTS = [
                         "primary": "MIN",
                         "counter": "CENTER"
                       },
+                      "grow": true,
                       "bindings": {
                         "minWidth": "imported/shared/size-0"
                       },
@@ -1012,7 +1085,7 @@ const COMPONENTS = [
                         {
                           "type": "text",
                           "name": "placeholder",
-                          "characters": "",
+                          "characters": "you@example.com",
                           "fontSize": 14,
                           "fontStyle": "Medium",
                           "lineHeight": {
@@ -1020,9 +1093,12 @@ const COMPONENTS = [
                             "unit": "PIXELS"
                           },
                           "fontSizeVar": "imported/text-input/part-1-0-0/font-size",
-                          "lineHeightVar": "imported/text-input/part-1-0-0/line-height"
+                          "lineHeightVar": "imported/text-input/part-1-0-0/line-height",
+                          "textFill": "imported/text-input/part-1-0-0/placeholder-color",
+                          "contentProp": "Placeholder"
                         }
-                      ]
+                      ],
+                      "fillW": true
                     }
                   ],
                   "fillW": true
@@ -1075,6 +1151,17 @@ const COMPONENTS = [
         "channel": "isolation",
         "value": "isolate",
         "reason": "Stacking-context isolation exists only in code.",
+        "variants": {
+          "count": 9,
+          "of": 9
+        }
+      },
+      {
+        "part": "part-1-0-0",
+        "kind": "channel",
+        "channel": "color",
+        "value": "{imported.shared.color-171717}",
+        "reason": "this control paints its placeholder in `placeholder-color`, so its own `color` — the ink the field would draw a TYPED VALUE in — is on no node. An EMPTY field has no value text, and Figma has no second text plane to hold the ink of text that is not there. Carried by the CSS surfaces (`color` on the control), NAMED here rather than painted over the placeholder (which is the RC7 defect this class exists to close).",
         "variants": {
           "count": 9,
           "of": 9
@@ -1174,6 +1261,83 @@ const COMPONENTS = [
         "channel": "column-gap",
         "value": "{imported.shared.size-4}",
         "reason": "the cross axis of a VERTICAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 9,
+          "of": 9
+        }
+      },
+      {
+        "part": "text-input",
+        "kind": "capture",
+        "channel": "border-bottom-color [focus-visible]",
+        "value": "#262626",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 9,
+          "of": 9
+        }
+      },
+      {
+        "part": "text-input",
+        "kind": "capture",
+        "channel": "border-left-color [focus-visible]",
+        "value": "#262626",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 9,
+          "of": 9
+        }
+      },
+      {
+        "part": "text-input",
+        "kind": "capture",
+        "channel": "border-right-color [focus-visible]",
+        "value": "#262626",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 9,
+          "of": 9
+        }
+      },
+      {
+        "part": "text-input",
+        "kind": "capture",
+        "channel": "border-top-color [focus-visible]",
+        "value": "#262626",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 9,
+          "of": 9
+        }
+      },
+      {
+        "part": "text-input",
+        "kind": "capture",
+        "channel": "box-shadow [active]",
+        "value": "color(srgb 0.831373 0.831373 0.831373 / 0.3) 0px 0px 0px 2px inset",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 9,
+          "of": 9
+        }
+      },
+      {
+        "part": "text-input",
+        "kind": "capture",
+        "channel": "box-shadow [focus-visible]",
+        "value": "rgba(241, 241, 241, 1) 0px 0px 0px 2px inset",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 9,
+          "of": 9
+        }
+      },
+      {
+        "part": "text-input",
+        "kind": "capture",
+        "channel": "box-shadow [hover]",
+        "value": "color(srgb 0.831373 0.831373 0.831373 / 0.3) 0px 0px 0px 2px inset",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
         "variants": {
           "count": 9,
           "of": 9
@@ -1817,6 +1981,55 @@ async function buildNode(spec, registry) {
     else if (spec.lineHeight && typeof spec.lineHeight === 'object' && typeof spec.lineHeight.value === 'number') {
       node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
     }
+    if (spec.fontFamily) {
+      // PER-FAMILY STYLE SPELLING. The compiled style name comes from
+      // FONT_STYLE_BY_WEIGHT, which is spelled Inter's way ("Semi Bold",
+      // "Extra Light"). Other families spell the same face WITHOUT the space
+      // — IBM Plex Sans ships "SemiBold", "ExtraLight" — so the Inter-spelled
+      // load THROWS and the node silently keeps the Inter fallback assigned
+      // above. That is a SUBSTITUTION, not a failure: nothing was logged,
+      // nothing was refused, and the canvas rendered a different typeface at
+      // different advance widths (altitude heading 194px of Inter Semi Bold
+      // where IBM Plex Sans SemiBold is 185px).
+      //
+      // A space-free retry was tried on 2026-08-08 and REVERTED because the
+      // then-pinned references were CONTRACT renders made by a harness that
+      // loaded no @font-face, so the truer canvas font scored WORSE. That
+      // premise is dead: the references are now the real library renders
+      // (extract/computed/out/<lane>/<comp>/orig-shots/, committed by
+      // run.ts --keep-originals) and the capture harness loads the library's
+      // own faces (cfg.fonts). Truer is now also closer.
+      //
+      // The fallback is kept — a family Figma does not have at all must still
+      // draw something — but it is no longer SILENT: an unresolved style is
+      // named on the console with a stable code.
+      const wantStyle = spec.fontStyle || 'Medium';
+      const styleCandidates = [wantStyle];
+      const tightStyle = wantStyle.split(' ').join('');
+      if (tightStyle !== wantStyle) styleCandidates.push(tightStyle);
+      let fontResolved = false;
+      for (let i = 0; i < styleCandidates.length; i++) {
+        try {
+          await figma.loadFontAsync({ family: spec.fontFamily, style: styleCandidates[i] });
+          node.fontName = { family: spec.fontFamily, style: styleCandidates[i] };
+          fontResolved = true;
+          break;
+        } catch (e) { /* a RETRY, not a swallow: the next candidate is this family's own spelling of the same face; the final outcome is named below */ }
+      }
+      if (!fontResolved) {
+        console.warn(
+          'FC-FONT-STYLE-UNRESOLVED: ' + spec.fontFamily + ' / ' + wantStyle +
+          ' is not available in this file (tried ' + styleCandidates.join(', ') +
+          ') — Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones',
+        );
+        degrade('FC-FONT-STYLE-UNRESOLVED', node, spec.fontFamily + ' / ' + wantStyle + ' is not available in this file (tried ' + styleCandidates.join(', ') + '); Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones');
+      }
+    }
+    if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
+    if (spec.textCase) node.textCase = spec.textCase;
+    if (spec.textDecoration) node.textDecoration = spec.textDecoration;
+    if (spec.textAlignH) node.textAlignHorizontal = spec.textAlignH;
+    if (spec.textTruncation) { try { node.textTruncation = 'ENDING'; } catch (e) { degrade('FC-RT-TRUNCATION-REFUSED', node, 'textTruncation ENDING refused (older Plugin API); the declared ellipsis does not draw', e); } }
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.

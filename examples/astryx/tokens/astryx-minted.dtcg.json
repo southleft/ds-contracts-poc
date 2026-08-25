@@ -288,6 +288,10 @@
       "size-2": {
         "$value": "2px",
         "$type": "dimension"
+      },
+      "color-171717": {
+        "$value": "#171717",
+        "$type": "color"
       }
     },
     "badge": {
@@ -2335,6 +2339,12 @@
       }
     },
     "text-input": {
+      "root": {
+        "width": {
+          "$value": "320px",
+          "$type": "dimension"
+        }
+      },
       "label": {
         "color": {
           "$value": "#737373",
@@ -2387,6 +2397,10 @@
         "line-height": {
           "$value": "20.0004px",
           "$type": "dimension"
+        },
+        "placeholder-color": {
+          "$value": "#737373",
+          "$type": "color"
         }
       }
     },
