@@ -37,8 +37,7 @@
     ],
     "contentSlots": [],
     "tokenRefs": [
-      "imported.circular-progress.root.color",
-      "imported.circular-progress.root.width"
+      "imported.circular-progress.root.color"
     ],
     "icons": [
       "circular-progress-root-determinate",

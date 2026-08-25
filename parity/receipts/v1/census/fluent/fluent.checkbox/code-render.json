@@ -49,14 +49,16 @@
       "root",
       "input",
       "indicator",
-      "icon",
-      "part-1-0-0",
+      "indicator-checked-medium",
+      "indicator-checked-large",
+      "indicator-mixed-medium-square",
+      "indicator-mixed-medium-circular",
+      "indicator-mixed-large-square",
+      "indicator-mixed-large-circular",
       "label"
     ],
     "contentSlots": [],
     "tokenRefs": [
-      "imported.checkbox.icon.font-size.large",
-      "imported.checkbox.icon.font-size.medium",
       "imported.checkbox.indicator.background-color.checked",
       "imported.checkbox.indicator.background-color.mixed",
       "imported.checkbox.indicator.background-color.unchecked",
@@ -114,8 +116,6 @@
       "imported.checkbox.label.margin-top.large",
       "imported.checkbox.label.margin-top.medium",
       "imported.checkbox.label.padding-left",
-      "imported.checkbox.part-1-0-0.font-size.large",
-      "imported.checkbox.part-1-0-0.font-size.medium",
       "imported.checkbox.root.border-bottom-color.checked",
       "imported.checkbox.root.border-bottom-color.mixed",
       "imported.checkbox.root.border-bottom-color.unchecked",
@@ -142,7 +142,13 @@
       "imported.shared.size-1",
       "imported.shared.size-8"
     ],
-    "icons": [],
+    "icons": [
+      "checkbox-indicator-checked-large",
+      "checkbox-indicator-checked-medium",
+      "checkbox-indicator-mixed-large-square",
+      "checkbox-indicator-mixed-medium-circular",
+      "checkbox-indicator-mixed-medium-square"
+    ],
     "events": []
   },
   "variants": [
