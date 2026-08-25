@@ -8,7 +8,7 @@
     "HARMFUL": 0,
     "SILENT": 0,
     "REFUSED-BY-NAME": 15,
-    "SEED-ABSENT": 0
+    "SEED-ABSENT": 1
   },
   "cases": {
     "antd-component-scoped-custom-property": {
@@ -585,6 +585,13 @@
       ],
       "refIdentical": true,
       "note": ""
+    },
+    "svg-glyph-two-axis": {
+      "classification": "SEED-ABSENT",
+      "channel": "d",
+      "seed": [],
+      "proposed": [],
+      "note": "the captured contract does not carry \"d\" = path(\"M 2 6 L 5 9 L 10 2\") — the CSS/DOM gate's finding, nothing to round-trip"
     },
     "text-overflow-ellipsis": {
       "classification": "NAMED",
