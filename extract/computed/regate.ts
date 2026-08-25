@@ -99,6 +99,7 @@ const SCORECARD_OUT = arg('scorecard-out') ? path.resolve(arg('scorecard-out')!)
  *  committed file carries that guarantee. What is checkable OFFLINE, and what
  *  this asserts, is the file's self-consistency and the reconstruction's
  *  determinism. Anything short of that REFUSES BY NAME and writes nothing. */
+// @door regate.replay-sufficiency-fence
 function assertReplaySufficient(truth: CapturedTruthFile, component: string): void {
   const refuse = (why: string): never => {
     throw new Error(
@@ -135,6 +136,7 @@ async function main() {
       if (f.endsWith('.svg')) iconAssets.set(f.slice(0, -4), readFileSync(path.join(REPO, cfg.icons, f), 'utf8').trim());
     }
   }
+  // @door regate.committed-truth-required
   const components = cfg.components.filter(
     (c) => (!ONLY || c.name === ONLY) && existsSync(path.join(OUT_ROOT, c.name.toLowerCase(), 'captured-truth.json')),
   );
@@ -154,6 +156,7 @@ async function main() {
   // Token-ref probe page: the wrapped library token stylesheet — the same
   // custom properties the gate page renders with (difference vs the harness
   // probe is NAMED in the header).
+  // @door regate.probe-against-token-stylesheet
   const tokensCss = readFileSync(path.join(REPO, cfg.tokens.css), 'utf8');
   const probePage = await context.newPage();
   if (SCORECARD_OUT) mkdirSync(SCORECARD_OUT, { recursive: true });
@@ -166,6 +169,7 @@ async function main() {
     const key = `${ref}|${computedProp}`;
     const hit = probeCache.get(key);
     if (hit !== undefined) return hit;
+    // @door regate.token-probe-solid-border
     const js = `(() => {
       const el = document.createElement('div');
       el.style.position = 'absolute'; el.style.visibility = 'hidden';
@@ -192,6 +196,7 @@ async function main() {
     // line the drift instrument parses (`REFUSED <Component>: <why>`), and the
     // sweep continues; the process still exits 1 at the end so a bare
     // `npm run extract:computed:regate` cannot read a refusal as green.
+    // @door regate.one-refusal-one-finding
     try {
     const outDir = path.join(OUT_ROOT, comp.name.toLowerCase());
     // Where this run's artifacts land: the tracked component dir, or the
@@ -217,6 +222,7 @@ async function main() {
       // no browser to ask which stylesheets were unreadable, so this is EMPTY,
       // never faked. It is a statement about this run's read boundary, and this
       // run did not read the page.
+      // @door regate.empty-read-boundary-receipts
       stylesheetSkips: [],
       browserVersion: String(truth._provenance.browser ?? 'committed'),
       fontChecks: {},
@@ -255,14 +261,17 @@ async function main() {
     const prep = prepareMint(aligned, comp, space, styled, folds, layout.handled, promotion.contract, svgConsumedParts, new Set(promotion.partIndex.keys()), promotion.gridMintRefusals);
     // mirror run.ts: re-mint + inheritance-refusal receipts ride the styled
     // channel receipts into the extension block (`?? []` — pre-v15 builds).
+    // @door regate.styled-receipt-merge
     styledReceipts.push(...(prep.remintReceipts ?? []), ...(prep.inheritanceReceipts ?? []), ...(prep.orphanRefusals ?? []));
     const mintBase = mintTokens(comp.name, prep.baseObs, prep.axes, { nestedPairs: true });
     const mintStates = mintTokens(comp.name, prep.stateObs, prep.axes, { nestedPairs: true });
     // `?? []` keeps the runner executable against pre-v15 fusion builds — the
     // instrument-fidelity check runs it at the pre-lift commit for the
     // baseline number.
+    // @door regate.prev15-nullish-defaults
     const declaredBase = prep.declared ?? [];
     const declaredState = prep.declaredStates ?? [];
+    // @door regate.base-codeonly-never-rides-contract
     const { enriched, overflowBindings, enrichmentNotes } = applyMintToContract(
       promotion.contract, space, mintBase, prep.baseObs, mintStates, prep.stateObs, layout.enriched,
       declaredBase, declaredState, prep.setPlaneLiterals ?? [],
@@ -319,6 +328,7 @@ async function main() {
        *  truth being replayed (the capture that produced them is the capture
        *  being re-fused), and their provenance is stated. With no committed
        *  extension there is nothing to carry and the absence is NAMED. */
+      // @door regate.frontier-receipt-carry-forward
       const priorExtPath = path.join(outDir, 'enriched.extension.json');
       const prior = existsSync(priorExtPath)
         ? (JSON.parse(readFileSync(priorExtPath, 'utf8')) as Record<string, unknown>)
@@ -397,6 +407,7 @@ async function main() {
      *  Mirrors run.ts: same file, same semantics, same referee, skips NAMED. */
     let gated = enriched as Contract;
     const decisionNotes: string[] = [];
+    // @door regate.decisions-reapplied
     const decisionsPath = path.join(outDir, 'decisions.json');
     if (existsSync(decisionsPath)) {
       const decisions = JSON.parse(readFileSync(decisionsPath, 'utf8')) as AckedDecision[];
@@ -404,6 +415,7 @@ async function main() {
       // Apply-time value check: the SAME inventory the gate renders with —
       // literally the same function (gate.ts gateInventory), mirroring
       // run.ts exactly. See the note there.
+      // @door regate.decision-inventory-referee
       const { inventory: decisionInventory } = gateInventory(REPO, cfg, mergedTree);
       const { applied, skipped } = applyDecisions(resolved, decisions, decisionInventory);
       decisionNotes.push(...applied.map((a) => `applied: ${a}`), ...skipped.map((sk) => `SKIPPED: ${sk}`));
@@ -416,6 +428,7 @@ async function main() {
       gated = resolved;
     }
 
+    // @door regate.named-losses-rollup
     const namedLosses = [
       ...promotion.refusals.map((r) => `promotion: ${r}`),
       ...overflowBindings.map((o) => `overflow: ${o.part}.${o.channel}${o.state ? ` [${o.state}]` : ''} — ${o.refusal}`),
@@ -435,6 +448,7 @@ async function main() {
       enriched: gated,
       mintedTree: mergedTree,
       styled,
+      // @door regate.pixel-not-scored-offline
       origShotsDir: path.join(outDir, '.no-orig-shots'), // absent by design — pixel not re-scored offline
       outDir: artifactDir,
       browserVersion: sweep.browserVersion,
@@ -452,6 +466,7 @@ async function main() {
       },
       namedLosses,
       iconAssets: iconAssetsMerged,
+      // @door regate.span-control-text-context
       contextStyles: truth.controls['span']?.style ?? {},
     });
     await gatePage.close();

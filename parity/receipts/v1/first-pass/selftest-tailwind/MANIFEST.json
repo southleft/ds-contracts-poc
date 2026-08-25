@@ -1,0 +1,36 @@
+{
+  "exam": "selftest-tailwind",
+  "direction": "code-to-canvas",
+  "describe": "SELF-TEST FIXTURE — flowbite-react@0.12.17 through the documented code→canvas chain (docs/21 §2). NOT held out: the engine has captured this library before, so its numbers measure the HARNESS, not the engine's reach. It exists so the machinery is exercised before an exam is pointed at a library nobody has captured.",
+  "heldOut": false,
+  "date": "2026-08-24",
+  "engineSha": "0ef93340ea915c7c12c6dd0a7ce6f08635721894",
+  "input": {
+    "library": "tailwind",
+    "manifest": "examples/tailwind/ds-library.json",
+    "captureConfig": "extract/computed/configs/tailwind.json",
+    "harness": "examples/tailwind/.tw-sandbox",
+    "tokens": [
+      "examples/tailwind/tokens/tailwind.dtcg.json",
+      "examples/tailwind/tokens/tailwind-minted.dtcg.json"
+    ]
+  },
+  "sets": [
+    "Button",
+    "Badge",
+    "Card",
+    "Alert",
+    "ToggleSwitch",
+    "HelperText",
+    "Label",
+    "Kbd"
+  ],
+  "mint": {
+    "requested": true,
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "status": "PENDING",
+    "message": "no figma-console COMMAND endpoint answered on 127.0.0.1:9223-9232 (probed /health: 9225:404, 9226:404, 9228:200, 9230:404). The local bridge serves MCP over stdio to its own client and WebSocket to plugin clients; a Node process cannot issue a canvas write through either. Bundle produced, mint pending — the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact."
+  },
+  "noRetry": true,
+  "cellCap": 8
+}

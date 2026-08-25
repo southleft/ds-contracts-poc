@@ -1,0 +1,101 @@
+{
+  "exam": "selftest-flowbite-live",
+  "direction": "canvas-to-code",
+  "set": "HelperText",
+  "id": "flowbite.helpertext",
+  "source": {
+    "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+    "nodeId": "120:2014",
+    "type": "COMPONENT_SET"
+  },
+  "stages": [
+    {
+      "stage": "dump",
+      "status": "ok",
+      "ms": 1588,
+      "command": "npm run extract:figma:rest -- \"<url>?node-id=120:2014\" --out <dump>",
+      "message": "helpertext.json",
+      "artifacts": [
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/dumps/helpertext.json",
+          "sha256": "9f46b33dd055caf06584f66610922cf5d1c9ec97a0d8f2d41f468f281e9d82f3",
+          "bytes": 13155,
+          "committed": false
+        }
+      ]
+    },
+    {
+      "stage": "propose",
+      "status": "ok",
+      "ms": 615,
+      "command": "npm run extract:figma -- <dump> --out <proposed> --tokens <kit dtcg>",
+      "message": "1 proposal file(s)",
+      "artifacts": [
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/proposed/helpertext/helper-text.contract.proposed.json",
+          "sha256": "e7aa8a4570dedd75f1d85b738c27c050825932c228a945774e58abaaa29e4c82",
+          "bytes": 2221,
+          "committed": false
+        }
+      ]
+    },
+    {
+      "stage": "validate",
+      "status": "ok",
+      "ms": 3,
+      "command": "core/emit-react.ts validateContract (the referee — no CLI verb; docs/07)",
+      "message": "no violations",
+      "artifacts": []
+    },
+    {
+      "stage": "generate-react",
+      "status": "REFUSED",
+      "ms": 1200,
+      "command": "npx ds-contracts generate <proposed>/*.contract.proposed.json --out <react> --tokens <kit>,<minted>",
+      "message": "✘ Refused — 1 token(s) defined twice with different values inside ONE slot; the merge would silently drop one layer:\n  - imported.helper-text.root.width: tailwind-minted.dtcg.json says \"71.2344px\", minted.dtcg.json says \"71.23px\"\nIf these are separate layers (light/dark, brand modes), name the slot: --tokens light=<file>,dark=<file>. Slots: primitives, semantic, light, dark, brand, brand.<name>",
+      "artifacts": []
+    },
+    {
+      "stage": "generate-wc",
+      "status": "SKIPPED",
+      "ms": 0,
+      "command": null,
+      "message": "an earlier stage stopped this chain (generate-react)",
+      "artifacts": []
+    },
+    {
+      "stage": "render",
+      "status": "SKIPPED",
+      "ms": 0,
+      "command": null,
+      "message": "an earlier stage stopped this chain (generate-react)",
+      "artifacts": []
+    },
+    {
+      "stage": "ref",
+      "status": "SKIPPED",
+      "ms": 0,
+      "command": null,
+      "message": "an earlier stage stopped this chain (generate-react)",
+      "artifacts": []
+    }
+  ],
+  "chainComplete": false,
+  "firstStop": {
+    "stage": "generate-react",
+    "status": "REFUSED",
+    "message": "✘ Refused — 1 token(s) defined twice with different values inside ONE slot; the merge would silently drop one layer:\n  - imported.helper-text.root.width: tailwind-minted.dtcg.json says \"71.2344px\", minted.dtcg.json says \"71.23px\"\nIf these are separate layers (light/dark, brand modes), name the slot: --tokens light=<file>,dark=<file>. Slots: primitives, semantic, light, dark, brand, brand.<name>"
+  },
+  "images": {
+    "ref": [],
+    "code": [],
+    "canvas": [],
+    "absent": [
+      {
+        "kind": "canvas",
+        "reason": "canvas→code writes nothing to any canvas — the canvas IS the source here, and Figma's own render of it is ref-*.png"
+      }
+    ]
+  },
+  "totalMs": 3406
+}
