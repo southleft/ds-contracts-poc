@@ -1,6 +1,6 @@
 {
   "_marker": "REGATE DRIFT BASELINE — what extract/computed/regate.ts (OFFLINE re-fuse of the committed captured truth through the CURRENT engine) produces, per component. NOT a copy of the harness scorecards: where the two differ, `gapCause` names why (docs/20-regate-drift.md). Re-record deliberately with `npm run extract:computed:drift -- --write` and say what moved. Every row is also the committed out/<lib>/<comp>/regate.scorecard.json — `npm run extract:computed:drift` (VERIFY, fast lane) holds the two together without a browser; `extract:computed:drift:remeasure` (full lane) re-fuses and compares.",
-  "recordedAt": "2026-08-23",
+  "recordedAt": "2026-08-25",
   "rows": [
     {
       "library": "altitude",
@@ -122,11 +122,11 @@
     {
       "library": "antd",
       "component": "Checkbox",
-      "rerunPctEqual": 85.04273504273505,
+      "rerunPctEqual": 85.8974358974359,
       "cellsCompared": 2808,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 85.04273504273505,
-      "gapCause": ""
+      "gapCause": "RC1 LAYOUT-AXIS DOOR (2026-08-25) — the OFFLINE engine now carries a fact the harness capture predates. extract/computed/fuse.ts LAYOUT_CHANNEL_TO_FIELD had no entry for the align-items keyword `baseline`, so the channel left through layout-value-outside-vocabulary and the cell was scored against the counter-axis default; it is now carried as layout.align. cellsCompared is UNCHANGED (2808 → 2808), so every point of this gap is a verdict flipping unequal → equal, never a widened denominator. The harness scorecard moves only on a re-capture (extract/computed/run.ts against the npm sandbox), which is not this class."
     },
     {
       "library": "antd",
@@ -149,11 +149,11 @@
     {
       "library": "antd",
       "component": "Radio",
-      "rerunPctEqual": 74.79508196721312,
+      "rerunPctEqual": 75.61475409836065,
       "cellsCompared": 1952,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 74.79508196721312,
-      "gapCause": ""
+      "gapCause": "RC1 LAYOUT-AXIS DOOR (2026-08-25) — the OFFLINE engine now carries a fact the harness capture predates. extract/computed/fuse.ts LAYOUT_CHANNEL_TO_FIELD had no entry for the align-items keyword `baseline`, so the channel left through layout-value-outside-vocabulary and the cell was scored against the counter-axis default; it is now carried as layout.align. cellsCompared is UNCHANGED (1952 → 1952), so every point of this gap is a verdict flipping unequal → equal, never a widened denominator. The harness scorecard moves only on a re-capture (extract/computed/run.ts against the npm sandbox), which is not this class."
     },
     {
       "library": "antd",
