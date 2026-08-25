@@ -482,11 +482,11 @@
     {
       "library": "mui",
       "component": "Autocomplete",
-      "rerunPctEqual": 95.11041009463722,
+      "rerunPctEqual": 95.42586750788644,
       "cellsCompared": 2536,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 95.11041009463722,
-      "gapCause": ""
+      "gapCause": "RC1 LAYOUT-AXIS DOOR (2026-08-25): 95.110 on the e884d672 engine, 95.426 on this one, cellsCompared UNCHANGED at 2536. flex-wrap had NO entry in LAYOUT_CHANNEL_TO_FIELD at all — the only reader that turns a captured flex keyword into a Part.layout fact — so layout.wrap could never arrive from a captured library and the wrapping container minted as a single non-wrapping row. It is now carried. Every point of the gap is a cell flipping unequal -> equal against an unmoved denominator; the harness scorecard predates the fix and moves only on a re-capture."
     },
     {
       "library": "mui",
@@ -500,20 +500,20 @@
     {
       "library": "mui",
       "component": "Badge",
-      "rerunPctEqual": 91.13924050632912,
+      "rerunPctEqual": 92.40506329113924,
       "cellsCompared": 4424,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 91.13924050632912,
-      "gapCause": ""
+      "gapCause": "RC1 LAYOUT-AXIS DOOR (2026-08-25): 91.139 on the e884d672 engine, 92.405 on this one, cellsCompared UNCHANGED at 4424. flex-wrap had NO entry in LAYOUT_CHANNEL_TO_FIELD at all — the only reader that turns a captured flex keyword into a Part.layout fact — so layout.wrap could never arrive from a captured library and the wrapping container minted as a single non-wrapping row. It is now carried. Every point of the gap is a cell flipping unequal -> equal against an unmoved denominator; the harness scorecard predates the fix and moves only on a re-capture."
     },
     {
       "library": "mui",
       "component": "Breadcrumbs",
-      "rerunPctEqual": 94.79695431472081,
+      "rerunPctEqual": 95.30456852791878,
       "cellsCompared": 788,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 94.79695431472081,
-      "gapCause": ""
+      "gapCause": "RC1 LAYOUT-AXIS DOOR (2026-08-25): 94.797 on the e884d672 engine, 95.305 on this one, cellsCompared UNCHANGED at 788. flex-wrap had NO entry in LAYOUT_CHANNEL_TO_FIELD at all — the only reader that turns a captured flex keyword into a Part.layout fact — so layout.wrap could never arrive from a captured library and the wrapping container minted as a single non-wrapping row. It is now carried. Every point of the gap is a cell flipping unequal -> equal against an unmoved denominator; the harness scorecard predates the fix and moves only on a re-capture."
     },
     {
       "library": "mui",
@@ -689,11 +689,11 @@
     {
       "library": "mui",
       "component": "Snackbar",
-      "rerunPctEqual": 94.91525423728814,
+      "rerunPctEqual": 96.61016949152543,
       "cellsCompared": 59,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 94.91525423728814,
-      "gapCause": ""
+      "gapCause": "RC1 LAYOUT-AXIS DOOR (2026-08-25): 94.915 on the e884d672 engine, 96.610 on this one, cellsCompared UNCHANGED at 59. flex-wrap had NO entry in LAYOUT_CHANNEL_TO_FIELD at all — the only reader that turns a captured flex keyword into a Part.layout fact — so layout.wrap could never arrive from a captured library and the wrapping container minted as a single non-wrapping row. It is now carried. Every point of the gap is a cell flipping unequal -> equal against an unmoved denominator; the harness scorecard predates the fix and moves only on a re-capture."
     },
     {
       "library": "mui",
