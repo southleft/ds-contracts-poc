@@ -12175,7 +12175,8 @@
       "anatomy": {
         "root": {
           "layout": {
-            "display": "flex"
+            "display": "flex",
+            "align": "baseline"
           },
           "parts": {
             "checkbox": {
@@ -13484,7 +13485,8 @@
       "anatomy": {
         "root": {
           "layout": {
-            "display": "flex"
+            "display": "flex",
+            "align": "baseline"
           },
           "parts": {
             "radio": {

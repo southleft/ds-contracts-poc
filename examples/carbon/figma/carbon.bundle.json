@@ -8193,8 +8193,17 @@
                   "description": "Promoted from the computed floor (round 4): rendered anatomy button|accordion__heading — this element exists in the real component's DOM; the static layer had no part for it.",
                   "layout": {
                     "display": "flex",
+                    "direction": "row-reverse",
                     "align": "center",
                     "justify": "start"
+                  },
+                  "layoutByProp": {
+                    "prop": "align",
+                    "map": {
+                      "start": {
+                        "direction": "row"
+                      }
+                    }
                   },
                   "parts": {
                     "icon": {
@@ -9601,7 +9610,8 @@
                 "inline-notification__text-wrapper": {
                   "description": "Promoted from the computed floor (round 4): rendered anatomy div|inline-notification__text-wrapper — this element exists in the real component's DOM; the static layer had no part for it.",
                   "layout": {
-                    "display": "flex"
+                    "display": "flex",
+                    "wrap": true
                   },
                   "parts": {
                     "label": {
@@ -10157,6 +10167,7 @@
                       "description": "Promoted from the computed floor (round 4): rendered anatomy button|btn — this element exists in the real component's DOM; the static layer had no part for it. Wave climb: flex-basis 50% was refused (FC-FLEX-BASIS); layout.grow shares the footer strip equally with Save.",
                       "layout": {
                         "display": "flex",
+                        "align": "baseline",
                         "justify": "space-between",
                         "grow": true
                       },
@@ -10205,6 +10216,7 @@
                       "description": "Promoted from the computed floor (round 4): rendered anatomy button|btn — this element exists in the real component's DOM; the static layer had no part for it. Wave climb: flex-basis 50% was refused (FC-FLEX-BASIS); layout.grow shares the footer strip equally with Cancel.",
                       "layout": {
                         "display": "flex",
+                        "align": "baseline",
                         "justify": "space-between",
                         "grow": true
                       },

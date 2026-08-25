@@ -9704,7 +9704,8 @@
                               "description": "Promoted from the computed floor (round 4): rendered anatomy div|ButtonGroup — this element exists in the real component's DOM; the static layer had no part for it.",
                               "layout": {
                                 "display": "flex",
-                                "align": "center"
+                                "align": "center",
+                                "wrap": true
                               },
                               "visibleWhen": {
                                 "prop": "withAction"
@@ -13898,7 +13899,9 @@
               "description": "Promoted from the computed floor (round 4): rendered anatomy div|Labelled__LabelWrapper — this element exists in the real component's DOM; the static layer had no part for it.",
               "layout": {
                 "display": "flex",
-                "justify": "space-between"
+                "align": "baseline",
+                "justify": "space-between",
+                "wrap": true
               },
               "parts": {
                 "label": {
