@@ -211,7 +211,6 @@
                 }
               },
               "tokens": {
-                "color": "{imported.shared.color-171717}",
                 "flex-shrink": "{imported.banner.banner-icon.flex-shrink}"
               }
             },
@@ -219,8 +218,7 @@
               "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
               "layout": {
                 "display": "flex",
-                "direction": "column",
-                "grow": true
+                "direction": "column"
               },
               "parts": {
                 "label": {
@@ -229,8 +227,7 @@
                   },
                   "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
-                    "display": "block",
-                    "font-family": "Figtree, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+                    "display": "block"
                   },
                   "tokens": {
                     "font-size": "{imported.banner.label.font-size}",
@@ -263,8 +260,7 @@
                   },
                   "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
-                    "display": "block",
-                    "font-family": "Figtree, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+                    "display": "block"
                   },
                   "tokens": {
                     "font-size": "{imported.shared.size-12}",
@@ -293,7 +289,6 @@
                 }
               },
               "tokens": {
-                "color": "{imported.shared.color-171717}",
                 "column-gap": "{imported.shared.size-0}",
                 "flex-grow": "{imported.banner.part-0-1.flex-grow}",
                 "min-width": "{imported.shared.size-0}",
@@ -302,7 +297,6 @@
             }
           },
           "tokens": {
-            "color": "{imported.shared.color-171717}",
             "column-gap": "{imported.banner.banner.column-gap}",
             "padding-bottom": "{imported.shared.size-12}",
             "padding-left": "{imported.banner.banner.padding-left}",
@@ -349,10 +343,8 @@
         }
       },
       "tokens": {
-        "color": "{imported.shared.color-171717}",
         "min-height": "{imported.shared.size-0}",
-        "min-width": "{imported.shared.size-0}",
-        "width": "{imported.banner.root.width}"
+        "min-width": "{imported.shared.size-0}"
       }
     }
   },

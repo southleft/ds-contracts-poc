@@ -157,8 +157,7 @@
             "align": "center"
           },
           "declared": {
-            "cursor": "pointer",
-            "font-family": "Figtree, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+            "cursor": "pointer"
           },
           "tokens": {
             "color": "{imported.text-input.label.color}",
@@ -197,11 +196,7 @@
                     "overflow-x": "clip",
                     "overflow-y": "clip"
                   },
-                  "layout": {
-                    "grow": true
-                  },
                   "tokens": {
-                    "color": "{imported.shared.color-171717}",
                     "flex-grow": "{imported.text-input.part-1-0-0.flex-grow}",
                     "font-size": "{imported.text-input.part-1-0-0.font-size}",
                     "line-height": "{imported.text-input.part-1-0-0.line-height}",
@@ -234,7 +229,6 @@
                 "border-top-right-radius": "{imported.shared.size-10}",
                 "border-top-width": "{imported.shared.size-1}",
                 "bottom": "{imported.shared.size-0}",
-                "color": "{imported.shared.color-171717}",
                 "column-gap": "{imported.shared.size-8}",
                 "left": "{imported.shared.size-0}",
                 "padding-bottom": "{imported.shared.size-4}",
@@ -245,68 +239,19 @@
                 "row-gap": "{imported.shared.size-8}",
                 "top": "{imported.shared.size-0}",
                 "z-index": "{imported.text-input.text-input.z-index}"
-              },
-              "codeOnly": [
-                {
-                  "state": "active",
-                  "channel": "box-shadow",
-                  "value": "color(srgb 0.831373 0.831373 0.831373 / 0.3) 0px 0px 0px 2px inset",
-                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
-                },
-                {
-                  "state": "focus-visible",
-                  "channel": "border-bottom-color",
-                  "value": "#262626",
-                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
-                },
-                {
-                  "state": "focus-visible",
-                  "channel": "border-left-color",
-                  "value": "#262626",
-                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
-                },
-                {
-                  "state": "focus-visible",
-                  "channel": "border-right-color",
-                  "value": "#262626",
-                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
-                },
-                {
-                  "state": "focus-visible",
-                  "channel": "border-top-color",
-                  "value": "#262626",
-                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
-                },
-                {
-                  "state": "focus-visible",
-                  "channel": "box-shadow",
-                  "value": "rgba(241, 241, 241, 1) 0px 0px 0px 2px inset",
-                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
-                },
-                {
-                  "state": "hover",
-                  "channel": "box-shadow",
-                  "value": "color(srgb 0.831373 0.831373 0.831373 / 0.3) 0px 0px 0px 2px inset",
-                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
-                }
-              ]
+              }
             }
           },
           "declared": {
             "isolation": "isolate"
-          },
-          "tokens": {
-            "color": "{imported.shared.color-171717}"
           }
         }
       },
       "tokens": {
-        "color": "{imported.shared.color-171717}",
         "column-gap": "{imported.shared.size-4}",
         "min-height": "{imported.shared.size-0}",
         "min-width": "{imported.shared.size-0}",
-        "row-gap": "{imported.shared.size-4}",
-        "width": "{imported.text-input.root.width}"
+        "row-gap": "{imported.shared.size-4}"
       }
     }
   },

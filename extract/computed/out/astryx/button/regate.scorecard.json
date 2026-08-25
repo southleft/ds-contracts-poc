@@ -327,12 +327,42 @@
     },
     "shippedMinted": {
       "path": "examples/astryx/tokens/astryx-minted.dtcg.json",
-      "leavesAdded": 510,
+      "leavesAdded": 269,
       "divergent": [
+        {
+          "token": "imported.button.label.color.destructive",
+          "fresh": "#a50c25",
+          "shipped": "{color-on-error}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.button.label.color.ghost",
+          "fresh": "#171717",
+          "shipped": "{color-text-primary}",
+          "resolvedEqual": true
+        },
         {
           "token": "imported.button.label.color.primary",
           "fresh": "#ffffff",
           "shipped": "{color-on-accent}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.button.label.color.secondary",
+          "fresh": "#171717",
+          "shipped": "{color-text-primary}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.button.part-0.color.destructive",
+          "fresh": "#a50c25",
+          "shipped": "{color-on-error}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.button.part-0.color.ghost",
+          "fresh": "#171717",
+          "shipped": "{color-text-primary}",
           "resolvedEqual": true
         },
         {
@@ -342,9 +372,81 @@
           "resolvedEqual": true
         },
         {
+          "token": "imported.button.part-0.color.secondary",
+          "fresh": "#171717",
+          "shipped": "{color-text-primary}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.button.part-1.color.destructive",
+          "fresh": "#a50c25",
+          "shipped": "{color-on-error}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.button.part-1.color.ghost",
+          "fresh": "#171717",
+          "shipped": "{color-text-primary}",
+          "resolvedEqual": true
+        },
+        {
           "token": "imported.button.part-1.color.primary",
           "fresh": "#ffffff",
           "shipped": "{color-on-accent}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.button.part-1.color.secondary",
+          "fresh": "#171717",
+          "shipped": "{color-text-primary}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.button.part-1.right",
+          "fresh": "68.0781px",
+          "shipped": "100.812px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.button.root.background-color.destructive",
+          "fresh": "#facecb",
+          "shipped": "{color-error}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.button.root.background-color.primary",
+          "fresh": "#262626",
+          "shipped": "{color-accent}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.button.root.background-color.secondary",
+          "fresh": "#0000000f",
+          "shipped": "#0536591a",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.button.root.background-image-state-active",
+          "fresh": "linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05))",
+          "shipped": "linear-gradient(rgba(5, 54, 89, 0.047), rgba(5, 54, 89, 0.047))",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.button.root.background-image-state-hover",
+          "fresh": "linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05))",
+          "shipped": "linear-gradient(rgba(5, 54, 89, 0.047), rgba(5, 54, 89, 0.047))",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.button.root.color.destructive",
+          "fresh": "#a50c25",
+          "shipped": "{color-on-error}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.button.root.color.ghost",
+          "fresh": "#171717",
+          "shipped": "{color-text-primary}",
           "resolvedEqual": true
         },
         {
@@ -354,10 +456,64 @@
           "resolvedEqual": true
         },
         {
+          "token": "imported.button.root.color.secondary",
+          "fresh": "#171717",
+          "shipped": "{color-text-primary}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.button.root.outline-color-state-focus-visible.destructive",
+          "fresh": "#a50c25",
+          "shipped": "{color-error}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.button.root.outline-color-state-focus-visible.ghost",
+          "fresh": "#262626",
+          "shipped": "{color-accent}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.button.root.outline-color-state-focus-visible.primary",
+          "fresh": "#262626",
+          "shipped": "{color-accent}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.button.root.outline-color-state-focus-visible.secondary",
+          "fresh": "#262626",
+          "shipped": "{color-accent}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.button.root.outline-color.destructive",
+          "fresh": "#a50c25",
+          "shipped": "{color-on-error}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.button.root.outline-color.ghost",
+          "fresh": "#171717",
+          "shipped": "{color-text-primary}",
+          "resolvedEqual": true
+        },
+        {
           "token": "imported.button.root.outline-color.primary",
           "fresh": "#ffffff",
           "shipped": "{color-on-accent}",
           "resolvedEqual": true
+        },
+        {
+          "token": "imported.button.root.outline-color.secondary",
+          "fresh": "#171717",
+          "shipped": "{color-text-primary}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.button.root.width",
+          "fresh": "67.0781px",
+          "shipped": "99.8125px",
+          "resolvedEqual": false
         }
       ]
     },

@@ -137,19 +137,14 @@
               },
               "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
-                "display": "block",
-                "font-family": "Figtree, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+                "display": "block"
               },
               "tokens": {
-                "color": "{imported.shared.color-171717}",
                 "font-size": "{imported.progress-bar.label.font-size}",
                 "font-weight": "{imported.progress-bar.label.font-weight}",
                 "line-height": "{imported.progress-bar.label.line-height}"
               }
             }
-          },
-          "tokens": {
-            "color": "{imported.shared.color-171717}"
           }
         },
         "progressbar-track": {
@@ -173,7 +168,6 @@
                 "border-bottom-right-radius": "{imported.shared.size-9999}",
                 "border-top-left-radius": "{imported.shared.size-9999}",
                 "border-top-right-radius": "{imported.shared.size-9999}",
-                "color": "{imported.shared.color-171717}",
                 "min-height": "{imported.shared.size-0}",
                 "min-width": "{imported.shared.size-0}"
               },
@@ -206,18 +200,15 @@
             "border-bottom-left-radius": "{imported.shared.size-9999}",
             "border-bottom-right-radius": "{imported.shared.size-9999}",
             "border-top-left-radius": "{imported.shared.size-9999}",
-            "border-top-right-radius": "{imported.shared.size-9999}",
-            "color": "{imported.shared.color-171717}"
+            "border-top-right-radius": "{imported.shared.size-9999}"
           }
         }
       },
       "tokens": {
-        "color": "{imported.shared.color-171717}",
         "column-gap": "{imported.progress-bar.root.column-gap}",
         "min-height": "{imported.shared.size-0}",
         "min-width": "{imported.progress-bar.root.min-width}",
-        "row-gap": "{imported.progress-bar.root.row-gap}",
-        "width": "{imported.progress-bar.root.width}"
+        "row-gap": "{imported.progress-bar.root.row-gap}"
       }
     }
   },

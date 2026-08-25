@@ -172,7 +172,7 @@
     },
     "shippedMinted": {
       "path": "examples/astryx/tokens/astryx-minted.dtcg.json",
-      "leavesAdded": 388,
+      "leavesAdded": 147,
       "divergent": [
         {
           "token": "imported.card.root.background-color.blue",
@@ -247,10 +247,94 @@
           "resolvedEqual": true
         },
         {
+          "token": "imported.card.root.border-bottom-color.blue",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-bottom-color.cyan",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
           "token": "imported.card.root.border-bottom-color.default",
           "fresh": "#d4d4d4",
           "shipped": "{color-border-emphasized}",
           "resolvedEqual": true
+        },
+        {
+          "token": "imported.card.root.border-bottom-color.gray",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-bottom-color.green",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-bottom-color.muted",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-bottom-color.orange",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-bottom-color.pink",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-bottom-color.purple",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-bottom-color.red",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-bottom-color.teal",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-bottom-color.transparent",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-bottom-color.yellow",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-left-color.blue",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-left-color.cyan",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
         },
         {
           "token": "imported.card.root.border-left-color.default",
@@ -259,16 +343,532 @@
           "resolvedEqual": true
         },
         {
+          "token": "imported.card.root.border-left-color.gray",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-left-color.green",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-left-color.muted",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-left-color.orange",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-left-color.pink",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-left-color.purple",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-left-color.red",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-left-color.teal",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-left-color.transparent",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-left-color.yellow",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-right-color.blue",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-right-color.cyan",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
           "token": "imported.card.root.border-right-color.default",
           "fresh": "#d4d4d4",
           "shipped": "{color-border-emphasized}",
           "resolvedEqual": true
         },
         {
+          "token": "imported.card.root.border-right-color.gray",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-right-color.green",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-right-color.muted",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-right-color.orange",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-right-color.pink",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-right-color.purple",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-right-color.red",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-right-color.teal",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-right-color.transparent",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-right-color.yellow",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-top-color.blue",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-top-color.cyan",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
           "token": "imported.card.root.border-top-color.default",
           "fresh": "#d4d4d4",
           "shipped": "{color-border-emphasized}",
           "resolvedEqual": true
+        },
+        {
+          "token": "imported.card.root.border-top-color.gray",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-top-color.green",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-top-color.muted",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-top-color.orange",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-top-color.pink",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-top-color.purple",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-top-color.red",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-top-color.teal",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-top-color.transparent",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-top-color.yellow",
+          "fresh": "#171717",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-bottom.blue",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-bottom.cyan",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-bottom.default",
+          "fresh": "11px",
+          "shipped": "15px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-bottom.gray",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-bottom.green",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-bottom.muted",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-bottom.orange",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-bottom.pink",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-bottom.purple",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-bottom.red",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-bottom.teal",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-bottom.transparent",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-bottom.yellow",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-left.blue",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-left.cyan",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-left.default",
+          "fresh": "11px",
+          "shipped": "15px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-left.gray",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-left.green",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-left.muted",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-left.orange",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-left.pink",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-left.purple",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-left.red",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-left.teal",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-left.transparent",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-left.yellow",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-right.blue",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-right.cyan",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-right.default",
+          "fresh": "11px",
+          "shipped": "15px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-right.gray",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-right.green",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-right.muted",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-right.orange",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-right.pink",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-right.purple",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-right.red",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-right.teal",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-right.transparent",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-right.yellow",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-top.blue",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-top.cyan",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-top.default",
+          "fresh": "11px",
+          "shipped": "15px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-top.gray",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-top.green",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-top.muted",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-top.orange",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-top.pink",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-top.purple",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-top.red",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-top.teal",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-top.transparent",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-top.yellow",
+          "fresh": "12px",
+          "shipped": "16px",
+          "resolvedEqual": false
         }
       ]
     },

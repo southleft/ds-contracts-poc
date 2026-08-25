@@ -6,46 +6,6 @@
   "declared": {
     "base": [
       {
-        "part": "part-0-0",
-        "channel": "isolation",
-        "value": "auto",
-        "when": {
-          "prop": "labelPosition",
-          "equals": "start"
-        },
-        "byPropField": "declaredByProp"
-      },
-      {
-        "part": "part-0-0",
-        "channel": "isolation",
-        "value": "isolate",
-        "when": {
-          "prop": "labelPosition",
-          "equals": "end"
-        },
-        "byPropField": "declaredByProp"
-      },
-      {
-        "part": "part-0-0",
-        "channel": "position",
-        "value": "static",
-        "when": {
-          "prop": "labelPosition",
-          "equals": "start"
-        },
-        "byPropField": "declaredByProp"
-      },
-      {
-        "part": "part-0-0",
-        "channel": "position",
-        "value": "relative",
-        "when": {
-          "prop": "labelPosition",
-          "equals": "end"
-        },
-        "byPropField": "declaredByProp"
-      },
-      {
         "part": "label-2",
         "channel": "cursor",
         "value": "pointer"
@@ -124,46 +84,6 @@
         "part": "switch-thumb",
         "channel": "transition-timing-function",
         "value": "cubic-bezier(0.24, 1, 0.4, 1)"
-      },
-      {
-        "part": "part-0-1",
-        "channel": "isolation",
-        "value": "isolate",
-        "when": {
-          "prop": "labelPosition",
-          "equals": "start"
-        },
-        "byPropField": "declaredByProp"
-      },
-      {
-        "part": "part-0-1",
-        "channel": "isolation",
-        "value": "auto",
-        "when": {
-          "prop": "labelPosition",
-          "equals": "end"
-        },
-        "byPropField": "declaredByProp"
-      },
-      {
-        "part": "part-0-1",
-        "channel": "position",
-        "value": "relative",
-        "when": {
-          "prop": "labelPosition",
-          "equals": "start"
-        },
-        "byPropField": "declaredByProp"
-      },
-      {
-        "part": "part-0-1",
-        "channel": "position",
-        "value": "static",
-        "when": {
-          "prop": "labelPosition",
-          "equals": "end"
-        },
-        "byPropField": "declaredByProp"
       },
       {
         "part": "part-0-1-0",
@@ -260,9 +180,9 @@
     "combos": 4,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 1680,
-      "cellsEqual": 1412,
-      "pctEqual": 84.04761904761905,
+      "cellsCompared": 1568,
+      "cellsEqual": 1188,
+      "pctEqual": 75.76530612244898,
       "rowsFullyEqual": 0,
       "rows": 16
     },
@@ -284,11 +204,11 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 34,
-      "mintedLeavesUnfolded": 33,
-      "baseBindings": 84,
+      "mintedLeaves": 33,
+      "mintedLeavesUnfolded": 32,
+      "baseBindings": 74,
       "stateBindings": 0,
-      "codeOnlyChannels": 54,
+      "codeOnlyChannels": 60,
       "overflowBindings": 0,
       "folds": 20
     },
@@ -297,62 +217,66 @@
         "key": "start.isDisabled__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 23,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
         "key": "start.isDisabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 23,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
         "key": "start.isDisabled__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 23,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
         "key": "start.isDisabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 23,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
         "key": "end.isDisabled__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 23,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
         "key": "end.isDisabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 23,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
         "key": "end.isDisabled__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 23,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
         "key": "end.isDisabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 23,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
       [
         "part-0-0.column-gap",
+        8
+      ],
+      [
+        "part-0-0.flex-direction",
         8
       ],
       [
@@ -380,35 +304,31 @@
         8
       ],
       [
+        "part-0-1.bottom",
+        8
+      ],
+      [
+        "part-0-1.isolation",
+        8
+      ],
+      [
+        "part-0-1.left",
+        8
+      ],
+      [
+        "part-0-1.position",
+        8
+      ],
+      [
+        "part-0-1.right",
+        8
+      ],
+      [
+        "part-0-1.top",
+        8
+      ],
+      [
         "part-0-1-0.anchor-name",
-        8
-      ],
-      [
-        "switch-2.--color-background-gray",
-        8
-      ],
-      [
-        "switch-thumb-2.--color-background-gray",
-        8
-      ],
-      [
-        "part-0-0.align-items",
-        8
-      ],
-      [
-        "part-0-0-0.anchor-name",
-        8
-      ],
-      [
-        "switch.--color-background-gray",
-        8
-      ],
-      [
-        "switch-thumb.--color-background-gray",
-        8
-      ],
-      [
-        "part-0-1.column-gap",
         8
       ]
     ],
@@ -416,9 +336,12 @@
       "code-only: part-0-0.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0-0.bottom — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0-0.column-gap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-0-0.flex-direction — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-0-0.isolation — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "code-only: part-0-0.justify-content — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0-0.left — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0-0.min-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-0-0.position — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "code-only: part-0-0.right — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0-0.row-gap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0-0.top — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -428,9 +351,12 @@
       "code-only: part-0-1.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0-1.bottom — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0-1.column-gap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-0-1.flex-direction — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-0-1.isolation — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "code-only: part-0-1.justify-content — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0-1.left — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0-1.min-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-0-1.position — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "code-only: part-0-1.right — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0-1.row-gap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0-1.top — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -474,7 +400,7 @@
     },
     "shippedMinted": {
       "path": "examples/astryx/tokens/astryx-minted.dtcg.json",
-      "leavesAdded": 529,
+      "leavesAdded": 287,
       "divergent": [
         {
           "token": "imported.switch.label-2.color",
@@ -489,6 +415,36 @@
           "resolvedEqual": true
         },
         {
+          "token": "imported.switch.part-0-0.width.start",
+          "fresh": "125.25px",
+          "shipped": "130.016px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.switch.part-0-1.width.end",
+          "fresh": "125.25px",
+          "shipped": "130.016px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.switch.part-0.width",
+          "fresh": "173.25px",
+          "shipped": "178.016px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.switch.root.width",
+          "fresh": "173.25px",
+          "shipped": "178.016px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.switch.switch-2.background-color",
+          "fresh": "#d4d4d4",
+          "shipped": "#0a131733",
+          "resolvedEqual": false
+        },
+        {
           "token": "imported.switch.switch-thumb-2.background-color",
           "fresh": "#ffffff",
           "shipped": "{color-background-surface}",
@@ -499,14 +455,20 @@
           "fresh": "#ffffff",
           "shipped": "{color-background-surface}",
           "resolvedEqual": true
+        },
+        {
+          "token": "imported.switch.switch.background-color",
+          "fresh": "#d4d4d4",
+          "shipped": "#0a131733",
+          "resolvedEqual": false
         }
       ]
     },
     "rows": [
       {
         "key": "start.no-isDisabled__default",
-        "channelsCompared": 105,
-        "channelsEqual": 95,
+        "channelsCompared": 98,
+        "channelsEqual": 81,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -516,6 +478,12 @@
             "channel": "column-gap",
             "ours": "normal",
             "theirs": "2px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "flex-direction",
+            "ours": "row",
+            "theirs": "column"
           },
           {
             "part": "part-0-0",
@@ -552,6 +520,42 @@
             "channel": "align-items",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "bottom",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "isolation",
+            "ours": "auto",
+            "theirs": "isolate"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "relative"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "right",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "top",
+            "ours": "auto",
+            "theirs": "0px"
           },
           {
             "part": "part-0-1-0",
@@ -576,8 +580,8 @@
       },
       {
         "key": "start.no-isDisabled__hover",
-        "channelsCompared": 105,
-        "channelsEqual": 94,
+        "channelsCompared": 98,
+        "channelsEqual": 80,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -587,6 +591,12 @@
             "channel": "column-gap",
             "ours": "normal",
             "theirs": "2px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "flex-direction",
+            "ours": "row",
+            "theirs": "column"
           },
           {
             "part": "part-0-0",
@@ -623,6 +633,42 @@
             "channel": "align-items",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "bottom",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "isolation",
+            "ours": "auto",
+            "theirs": "isolate"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "relative"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "right",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "top",
+            "ours": "auto",
+            "theirs": "0px"
           },
           {
             "part": "part-0-1-0",
@@ -653,8 +699,8 @@
       },
       {
         "key": "start.no-isDisabled__focus-visible",
-        "channelsCompared": 105,
-        "channelsEqual": 95,
+        "channelsCompared": 98,
+        "channelsEqual": 81,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -664,6 +710,12 @@
             "channel": "column-gap",
             "ours": "normal",
             "theirs": "2px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "flex-direction",
+            "ours": "row",
+            "theirs": "column"
           },
           {
             "part": "part-0-0",
@@ -700,6 +752,42 @@
             "channel": "align-items",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "bottom",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "isolation",
+            "ours": "auto",
+            "theirs": "isolate"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "relative"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "right",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "top",
+            "ours": "auto",
+            "theirs": "0px"
           },
           {
             "part": "part-0-1-0",
@@ -724,8 +812,8 @@
       },
       {
         "key": "start.no-isDisabled__active",
-        "channelsCompared": 105,
-        "channelsEqual": 94,
+        "channelsCompared": 98,
+        "channelsEqual": 80,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -735,6 +823,12 @@
             "channel": "column-gap",
             "ours": "normal",
             "theirs": "2px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "flex-direction",
+            "ours": "row",
+            "theirs": "column"
           },
           {
             "part": "part-0-0",
@@ -771,6 +865,42 @@
             "channel": "align-items",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "bottom",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "isolation",
+            "ours": "auto",
+            "theirs": "isolate"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "relative"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "right",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "top",
+            "ours": "auto",
+            "theirs": "0px"
           },
           {
             "part": "part-0-1-0",
@@ -801,8 +931,8 @@
       },
       {
         "key": "start.isDisabled__default",
-        "channelsCompared": 105,
-        "channelsEqual": 82,
+        "channelsCompared": 98,
+        "channelsEqual": 68,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -812,6 +942,12 @@
             "channel": "column-gap",
             "ours": "normal",
             "theirs": "2px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "flex-direction",
+            "ours": "row",
+            "theirs": "column"
           },
           {
             "part": "part-0-0",
@@ -920,6 +1056,42 @@
             "channel": "align-items",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "bottom",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "isolation",
+            "ours": "auto",
+            "theirs": "isolate"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "relative"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "right",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "top",
+            "ours": "auto",
+            "theirs": "0px"
           },
           {
             "part": "part-0-1-0",
@@ -950,8 +1122,8 @@
       },
       {
         "key": "start.isDisabled__hover",
-        "channelsCompared": 105,
-        "channelsEqual": 82,
+        "channelsCompared": 98,
+        "channelsEqual": 68,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -961,6 +1133,12 @@
             "channel": "column-gap",
             "ours": "normal",
             "theirs": "2px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "flex-direction",
+            "ours": "row",
+            "theirs": "column"
           },
           {
             "part": "part-0-0",
@@ -1069,6 +1247,42 @@
             "channel": "align-items",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "bottom",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "isolation",
+            "ours": "auto",
+            "theirs": "isolate"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "relative"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "right",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "top",
+            "ours": "auto",
+            "theirs": "0px"
           },
           {
             "part": "part-0-1-0",
@@ -1099,8 +1313,8 @@
       },
       {
         "key": "start.isDisabled__focus-visible",
-        "channelsCompared": 105,
-        "channelsEqual": 82,
+        "channelsCompared": 98,
+        "channelsEqual": 68,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1110,6 +1324,12 @@
             "channel": "column-gap",
             "ours": "normal",
             "theirs": "2px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "flex-direction",
+            "ours": "row",
+            "theirs": "column"
           },
           {
             "part": "part-0-0",
@@ -1218,6 +1438,42 @@
             "channel": "align-items",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "bottom",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "isolation",
+            "ours": "auto",
+            "theirs": "isolate"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "relative"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "right",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "top",
+            "ours": "auto",
+            "theirs": "0px"
           },
           {
             "part": "part-0-1-0",
@@ -1248,8 +1504,8 @@
       },
       {
         "key": "start.isDisabled__active",
-        "channelsCompared": 105,
-        "channelsEqual": 82,
+        "channelsCompared": 98,
+        "channelsEqual": 68,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1259,6 +1515,12 @@
             "channel": "column-gap",
             "ours": "normal",
             "theirs": "2px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "flex-direction",
+            "ours": "row",
+            "theirs": "column"
           },
           {
             "part": "part-0-0",
@@ -1369,6 +1631,42 @@
             "theirs": "center"
           },
           {
+            "part": "part-0-1",
+            "channel": "bottom",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "isolation",
+            "ours": "auto",
+            "theirs": "isolate"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "relative"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "right",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "top",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
             "part": "part-0-1-0",
             "channel": "anchor-name",
             "ours": "none",
@@ -1397,8 +1695,8 @@
       },
       {
         "key": "end.no-isDisabled__default",
-        "channelsCompared": 105,
-        "channelsEqual": 95,
+        "channelsCompared": 98,
+        "channelsEqual": 81,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1408,6 +1706,42 @@
             "channel": "align-items",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "bottom",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "isolation",
+            "ours": "auto",
+            "theirs": "isolate"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "relative"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "right",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "top",
+            "ours": "auto",
+            "theirs": "0px"
           },
           {
             "part": "part-0-0-0",
@@ -1432,6 +1766,12 @@
             "channel": "column-gap",
             "ours": "normal",
             "theirs": "2px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-direction",
+            "ours": "row",
+            "theirs": "column"
           },
           {
             "part": "part-0-1",
@@ -1468,8 +1808,8 @@
       },
       {
         "key": "end.no-isDisabled__hover",
-        "channelsCompared": 105,
-        "channelsEqual": 94,
+        "channelsCompared": 98,
+        "channelsEqual": 80,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1479,6 +1819,42 @@
             "channel": "align-items",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "bottom",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "isolation",
+            "ours": "auto",
+            "theirs": "isolate"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "relative"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "right",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "top",
+            "ours": "auto",
+            "theirs": "0px"
           },
           {
             "part": "part-0-0-0",
@@ -1509,6 +1885,12 @@
             "channel": "column-gap",
             "ours": "normal",
             "theirs": "2px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-direction",
+            "ours": "row",
+            "theirs": "column"
           },
           {
             "part": "part-0-1",
@@ -1545,8 +1927,8 @@
       },
       {
         "key": "end.no-isDisabled__focus-visible",
-        "channelsCompared": 105,
-        "channelsEqual": 95,
+        "channelsCompared": 98,
+        "channelsEqual": 81,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1556,6 +1938,42 @@
             "channel": "align-items",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "bottom",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "isolation",
+            "ours": "auto",
+            "theirs": "isolate"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "relative"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "right",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "top",
+            "ours": "auto",
+            "theirs": "0px"
           },
           {
             "part": "part-0-0-0",
@@ -1580,6 +1998,12 @@
             "channel": "column-gap",
             "ours": "normal",
             "theirs": "2px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-direction",
+            "ours": "row",
+            "theirs": "column"
           },
           {
             "part": "part-0-1",
@@ -1616,8 +2040,8 @@
       },
       {
         "key": "end.no-isDisabled__active",
-        "channelsCompared": 105,
-        "channelsEqual": 94,
+        "channelsCompared": 98,
+        "channelsEqual": 80,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1627,6 +2051,42 @@
             "channel": "align-items",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "bottom",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "isolation",
+            "ours": "auto",
+            "theirs": "isolate"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "relative"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "right",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "top",
+            "ours": "auto",
+            "theirs": "0px"
           },
           {
             "part": "part-0-0-0",
@@ -1657,6 +2117,12 @@
             "channel": "column-gap",
             "ours": "normal",
             "theirs": "2px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-direction",
+            "ours": "row",
+            "theirs": "column"
           },
           {
             "part": "part-0-1",
@@ -1693,8 +2159,8 @@
       },
       {
         "key": "end.isDisabled__default",
-        "channelsCompared": 105,
-        "channelsEqual": 82,
+        "channelsCompared": 98,
+        "channelsEqual": 68,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1704,6 +2170,42 @@
             "channel": "align-items",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "bottom",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "isolation",
+            "ours": "auto",
+            "theirs": "isolate"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "relative"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "right",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "top",
+            "ours": "auto",
+            "theirs": "0px"
           },
           {
             "part": "part-0-0-0",
@@ -1734,6 +2236,12 @@
             "channel": "column-gap",
             "ours": "normal",
             "theirs": "2px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-direction",
+            "ours": "row",
+            "theirs": "column"
           },
           {
             "part": "part-0-1",
@@ -1842,8 +2350,8 @@
       },
       {
         "key": "end.isDisabled__hover",
-        "channelsCompared": 105,
-        "channelsEqual": 82,
+        "channelsCompared": 98,
+        "channelsEqual": 68,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1853,6 +2361,42 @@
             "channel": "align-items",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "bottom",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "isolation",
+            "ours": "auto",
+            "theirs": "isolate"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "relative"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "right",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "top",
+            "ours": "auto",
+            "theirs": "0px"
           },
           {
             "part": "part-0-0-0",
@@ -1883,6 +2427,12 @@
             "channel": "column-gap",
             "ours": "normal",
             "theirs": "2px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-direction",
+            "ours": "row",
+            "theirs": "column"
           },
           {
             "part": "part-0-1",
@@ -1991,8 +2541,8 @@
       },
       {
         "key": "end.isDisabled__focus-visible",
-        "channelsCompared": 105,
-        "channelsEqual": 82,
+        "channelsCompared": 98,
+        "channelsEqual": 68,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2002,6 +2552,42 @@
             "channel": "align-items",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "bottom",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "isolation",
+            "ours": "auto",
+            "theirs": "isolate"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "relative"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "right",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "top",
+            "ours": "auto",
+            "theirs": "0px"
           },
           {
             "part": "part-0-0-0",
@@ -2032,6 +2618,12 @@
             "channel": "column-gap",
             "ours": "normal",
             "theirs": "2px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-direction",
+            "ours": "row",
+            "theirs": "column"
           },
           {
             "part": "part-0-1",
@@ -2140,8 +2732,8 @@
       },
       {
         "key": "end.isDisabled__active",
-        "channelsCompared": 105,
-        "channelsEqual": 82,
+        "channelsCompared": 98,
+        "channelsEqual": 68,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2151,6 +2743,42 @@
             "channel": "align-items",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "bottom",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "isolation",
+            "ours": "auto",
+            "theirs": "isolate"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "relative"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "right",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "top",
+            "ours": "auto",
+            "theirs": "0px"
           },
           {
             "part": "part-0-0-0",
@@ -2181,6 +2809,12 @@
             "channel": "column-gap",
             "ours": "normal",
             "theirs": "2px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-direction",
+            "ours": "row",
+            "theirs": "column"
           },
           {
             "part": "part-0-1",

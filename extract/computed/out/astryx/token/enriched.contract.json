@@ -124,7 +124,6 @@
           "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
           "declared": {
             "display": "block",
-            "font-family": "Figtree, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
             "overflow-x": "hidden",
             "overflow-y": "hidden",
             "text-overflow": "ellipsis",
