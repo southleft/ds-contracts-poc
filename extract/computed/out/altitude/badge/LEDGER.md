@@ -52,8 +52,9 @@ Zero contradictions.
 
 ## Declared facts (v15 — carried, first-class)
 
-- base declared facts: **1**
+- base declared facts: **2**
   - root.box-sizing = `border-box`
+  - root.font-family = `"IBM Plex Sans", sans-serif`
 - state declared facts: **0**
 
 ## Code-only / overflow (named, in the extension file)
@@ -66,6 +67,6 @@ Zero contradictions.
 
 ## Fidelity gate (scorecard.json)
 
-- computed-equality (styled channels, contract-mediated): **93.750%** (1200/1280 cells; 0/40 combo×state rows fully equal)
-- pixel: 0/40 pairs perfect at threshold 0 · 4/40 at the AA point (mean AA 5.050%, max 11.130%; 40/40 pairs MEASURED — 0 size-mismatched, 0 with no original screenshot, none averaged)
+- computed-equality (styled channels, contract-mediated): **93.939%** (1240/1320 cells; 0/40 combo×state rows fully equal)
+- pixel: 0/40 pairs perfect at threshold 0 · 4/40 at the AA point (mean AA 5.190%, max 11.165%; 40/40 pairs MEASURED — 0 size-mismatched, 0 with no original screenshot, none averaged)
 

@@ -69,10 +69,14 @@ Zero contradictions.
 
 - leaves: **111** · bindings: 34 base + 11 state
 - shape: 25 uniform · 20 per-axis · 0 per-axis-pair · 0 refused (uncorrelated — nothing minted, named)
+- border-style-by-axis-carried: root.border-bottom-style varies by "variant" (unset=none, secondary=none, tertiary=solid, bare=none, danger=none) — carried as per-value stylesWhen rules (code: `.variant-<value> { border-bottom-style: … }`; canvas: a dashPattern on that variant's stroke)
+- border-style-by-axis-carried: root.border-left-style varies by "variant" (unset=none, secondary=none, tertiary=solid, bare=none, danger=none) — carried as per-value stylesWhen rules (code: `.variant-<value> { border-left-style: … }`; canvas: a dashPattern on that variant's stroke)
+- border-style-by-axis-carried: root.border-right-style varies by "variant" (unset=none, secondary=none, tertiary=solid, bare=none, danger=none) — carried as per-value stylesWhen rules (code: `.variant-<value> { border-right-style: … }`; canvas: a dashPattern on that variant's stroke)
+- border-style-by-axis-carried: root.border-top-style varies by "variant" (unset=none, secondary=none, tertiary=solid, bare=none, danger=none) — carried as per-value stylesWhen rules (code: `.variant-<value> { border-top-style: … }`; canvas: a dashPattern on that variant's stroke)
 
 ## Declared facts (v15 — carried, first-class)
 
-- base declared facts: **8**
+- base declared facts: **9**
   - root.cursor = `pointer`
   - root.font-family = `"IBM Plex Sans", sans-serif`
   - root.position = `relative`
@@ -80,17 +84,14 @@ Zero contradictions.
   - root.transition-timing-function = `cubic-bezier(0.15, 0.99, 0.18, 0.99)`
   - label.box-sizing = `border-box`
   - label.cursor = `pointer`
+  - label.font-family = `"IBM Plex Sans", sans-serif`
   - label.text-align = `center`
 - state declared facts: **1**
   - [focus-visible] root.outline-style = `solid`
 
 ## Code-only / overflow (named, in the extension file)
 
-- base channels outside mintable kinds: **4**
-  - root.border-bottom-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue (sample: `none`, 2 distinct value(s))
-  - root.border-left-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue (sample: `none`, 2 distinct value(s))
-  - root.border-right-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue (sample: `none`, 2 distinct value(s))
-  - root.border-top-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue (sample: `none`, 2 distinct value(s))
+- base channels outside mintable kinds: **0**
 - state channels outside mintable kinds: **0**
 - refused/overflow bindings: **9**
   - {"part":"label","channel":"color","ref":"{imported.button.label.color.{variant}}","refusal":"inheritance-only channel with uncarried nested state deltas — the captured value equals this part's ancestor on EVERY plane, and its per-state deltas exceed the nested Part.states vocabulary (plain color-kind refs only); binding the base value would pin all state planes to the resting colour, so the channel stays UNCARRIED and CSS inheritance from the ancestor renders it (leaves exist in the minted tree)"}
@@ -105,6 +106,6 @@ Zero contradictions.
 
 ## Fidelity gate (scorecard.json)
 
-- computed-equality (styled channels, contract-mediated): **81.484%** (1043/1280 cells; 0/20 combo×state rows fully equal)
-- pixel: 9/20 pairs perfect at threshold 0 · 9/20 at the AA point (mean AA 4.564%, max 10.257%; 20/20 pairs MEASURED — 0 size-mismatched, 0 with no original screenshot, none averaged)
+- computed-equality (styled channels, contract-mediated): **81.769%** (1063/1300 cells; 0/20 combo×state rows fully equal)
+- pixel: 9/20 pairs perfect at threshold 0 · 9/20 at the AA point (mean AA 4.495%, max 10.081%; 20/20 pairs MEASURED — 0 size-mismatched, 0 with no original screenshot, none averaged)
 

@@ -43,6 +43,10 @@ Zero contradictions.
 
 - leaves: **88** · bindings: 26 base + 3 state
 - shape: 14 uniform · 15 per-axis · 0 per-axis-pair · 0 refused (uncorrelated — nothing minted, named)
+- border-style-by-axis-carried: root.border-bottom-style varies by "variant" (unset=none, secondary=solid, info=none, success=none, warning=none, danger=none) — carried as per-value stylesWhen rules (code: `.variant-<value> { border-bottom-style: … }`; canvas: a dashPattern on that variant's stroke)
+- border-style-by-axis-carried: root.border-left-style varies by "variant" (unset=none, secondary=solid, info=none, success=none, warning=none, danger=none) — carried as per-value stylesWhen rules (code: `.variant-<value> { border-left-style: … }`; canvas: a dashPattern on that variant's stroke)
+- border-style-by-axis-carried: root.border-right-style varies by "variant" (unset=none, secondary=solid, info=none, success=none, warning=none, danger=none) — carried as per-value stylesWhen rules (code: `.variant-<value> { border-right-style: … }`; canvas: a dashPattern on that variant's stroke)
+- border-style-by-axis-carried: root.border-top-style varies by "variant" (unset=none, secondary=solid, info=none, success=none, warning=none, danger=none) — carried as per-value stylesWhen rules (code: `.variant-<value> { border-top-style: … }`; canvas: a dashPattern on that variant's stroke)
 
 ## Declared facts (v15 — carried, first-class)
 
@@ -55,16 +59,12 @@ Zero contradictions.
 
 ## Code-only / overflow (named, in the extension file)
 
-- base channels outside mintable kinds: **4**
-  - root.border-bottom-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue (sample: `none`, 2 distinct value(s))
-  - root.border-left-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue (sample: `none`, 2 distinct value(s))
-  - root.border-right-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue (sample: `none`, 2 distinct value(s))
-  - root.border-top-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue (sample: `none`, 2 distinct value(s))
+- base channels outside mintable kinds: **0**
 - state channels outside mintable kinds: **0**
 - refused/overflow bindings: **0**
 
 ## Fidelity gate (scorecard.json)
 
 - computed-equality (styled channels, contract-mediated): **94.309%** (1856/1968 cells; 0/48 combo×state rows fully equal)
-- pixel: 40/48 pairs perfect at threshold 0 · 40/48 at the AA point (mean AA 0.178%, max 1.999%; 48/48 pairs MEASURED — 0 size-mismatched, 0 with no original screenshot, none averaged)
+- pixel: 40/48 pairs perfect at threshold 0 · 40/48 at the AA point (mean AA 0.159%, max 1.875%; 48/48 pairs MEASURED — 0 size-mismatched, 0 with no original screenshot, none averaged)
 

@@ -62,8 +62,10 @@ Zero contradictions.
 
 ## Declared facts (v15 — carried, first-class)
 
-- base declared facts: **5**
+- base declared facts: **7**
   - root.box-sizing = `border-box`
+  - root.font-family = `"IBM Plex Sans", sans-serif`
+  - root.text-decoration-line = `underline`
   - root.transition-delay = `0s, 0s`
   - root.transition-duration = `0.2s, 0.2s`
   - root.transition-property = `color, background-color`
@@ -80,6 +82,6 @@ Zero contradictions.
 
 ## Fidelity gate (scorecard.json)
 
-- computed-equality (styled channels, contract-mediated): **82.407%** (356/432 cells; 0/16 combo×state rows fully equal)
-- pixel: 0/16 pairs perfect at threshold 0 · 0/16 at the AA point (mean AA 0.447%, max 1.074%; 16/16 pairs MEASURED — 0 size-mismatched, 0 with no original screenshot, none averaged)
+- computed-equality (styled channels, contract-mediated): **83.621%** (388/464 cells; 0/16 combo×state rows fully equal)
+- pixel: 4/16 pairs perfect at threshold 0 · 4/16 at the AA point (mean AA 0.422%, max 1.126%; 16/16 pairs MEASURED — 0 size-mismatched, 0 with no original screenshot, none averaged)
 

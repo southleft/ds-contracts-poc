@@ -72,13 +72,22 @@
             "display": "block",
             "box-sizing": "border-box",
             "cursor": "pointer",
+            "font-family": "\"IBM Plex Sans\", sans-serif",
             "text-align": "center"
           },
           "tokens": {
             "font-size": "{imported.shared.size-16}",
             "font-weight": "{imported.button.label.font-weight}",
             "line-height": "{imported.button.label.line-height}"
-          }
+          },
+          "codeOnly": [
+            {
+              "state": "hover",
+              "channel": "color",
+              "value": "{imported.button.label.color-state-hover.{variant}}",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            }
+          ]
         }
       },
       "declared": {
@@ -198,6 +207,50 @@
               "outline-color": "{imported.button.root.outline-color.tertiary}"
             }
           }
+        }
+      ],
+      "codeOnly": [
+        {
+          "state": "hover",
+          "channel": "background-color",
+          "value": "{imported.button.root.background-color-state-hover.{variant}}",
+          "reason": "state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "hover",
+          "channel": "border-bottom-color",
+          "value": "{imported.button.root.border-bottom-color-state-hover.{variant}}",
+          "reason": "state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "hover",
+          "channel": "border-left-color",
+          "value": "{imported.button.root.border-left-color-state-hover.{variant}}",
+          "reason": "state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "hover",
+          "channel": "border-right-color",
+          "value": "{imported.button.root.border-right-color-state-hover.{variant}}",
+          "reason": "state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "hover",
+          "channel": "border-top-color",
+          "value": "{imported.button.root.border-top-color-state-hover.{variant}}",
+          "reason": "state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "hover",
+          "channel": "color",
+          "value": "{imported.button.root.color-state-hover.{variant}}",
+          "reason": "state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "hover",
+          "channel": "outline-color",
+          "value": "{imported.button.root.outline-color-state-hover.{variant}}",
+          "reason": "state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
         }
       ]
     }

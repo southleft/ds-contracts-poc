@@ -2,29 +2,30 @@
   "component": "Link",
   "generatedBy": "extract/computed/gate.ts",
   "browser": "149.0.7827.55",
+  "renderedBy": "149.0.7827.55",
   "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
   "combos": 4,
   "interactions": 4,
   "computed": {
-    "cellsCompared": 432,
-    "cellsEqual": 356,
-    "pctEqual": 82.4074074074074,
+    "cellsCompared": 464,
+    "cellsEqual": 388,
+    "pctEqual": 83.62068965517241,
     "rowsFullyEqual": 0,
     "rows": 16
   },
   "pixel": {
     "pairs": 16,
-    "perfectExact": 0,
-    "perfectAA": 0,
+    "perfectExact": 4,
+    "perfectAA": 4,
     "measured": 16,
     "unscored": {
       "sizeMismatch": 0,
       "noOriginal": 0,
       "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
     },
-    "meanExact": 0.6343587239583334,
-    "meanAA": 0.4467773437499999,
-    "maxAA": 1.07421875
+    "meanExact": 0.6306966145833333,
+    "meanAA": 0.4221598307291667,
+    "maxAA": 1.1263020833333333
   },
   "fusion": {
     "boundConfirmed": 0,
@@ -41,50 +42,50 @@
   "worstRows": [
     {
       "key": "sm__focus-visible",
-      "pctAA": 1.07421875,
-      "pctExact": 1.318359375,
-      "channelsMismatched": 2
-    },
-    {
-      "key": "lg__focus-visible",
-      "pctAA": 1.0579427083333333,
-      "pctExact": 1.0611979166666667,
+      "pctAA": 1.1263020833333333,
+      "pctExact": 1.4127604166666667,
       "channelsMismatched": 2
     },
     {
       "key": "xs__focus-visible",
-      "pctAA": 1.0188802083333333,
-      "pctExact": 1.2923177083333333,
+      "pctAA": 1.0709635416666667,
+      "pctExact": 1.3704427083333333,
+      "channelsMismatched": 2
+    },
+    {
+      "key": "lg__focus-visible",
+      "pctAA": 0.9505208333333334,
+      "pctExact": 0.9505208333333334,
       "channelsMismatched": 2
     },
     {
       "key": "unset__focus-visible",
-      "pctAA": 0.9440104166666666,
-      "pctExact": 0.9440104166666666,
+      "pctAA": 0.859375,
+      "pctExact": 0.859375,
       "channelsMismatched": 2
     },
     {
       "key": "sm__active",
-      "pctAA": 0.4036458333333333,
-      "pctExact": 0.7291666666666666,
+      "pctAA": 0.4069010416666667,
+      "pctExact": 0.7649739583333334,
       "channelsMismatched": 13
     },
     {
       "key": "xs__active",
-      "pctAA": 0.361328125,
-      "pctExact": 0.703125,
-      "channelsMismatched": 13
-    },
-    {
-      "key": "lg__active",
-      "pctAA": 0.3515625,
-      "pctExact": 0.7291666666666666,
+      "pctAA": 0.3971354166666667,
+      "pctExact": 0.7356770833333334,
       "channelsMismatched": 13
     },
     {
       "key": "sm__default",
-      "pctAA": 0.3190104166666667,
-      "pctExact": 0.5631510416666666,
+      "pctAA": 0.37109375,
+      "pctExact": 0.6575520833333334,
+      "channelsMismatched": 2
+    },
+    {
+      "key": "xs__default",
+      "pctAA": 0.3678385416666667,
+      "pctExact": 0.6673177083333334,
       "channelsMismatched": 2
     }
   ],
@@ -151,7 +152,7 @@
   },
   "shippedMinted": {
     "path": "examples/altitude/tokens/altitude-minted.dtcg.json",
-    "leavesAdded": 332,
+    "leavesAdded": 298,
     "divergent": [
       {
         "token": "imported.link.root.color",
@@ -164,10 +165,10 @@
   "rows": [
     {
       "key": "unset__default",
-      "channelsCompared": 27,
-      "channelsEqual": 25,
-      "pctExact": 0.09765625,
-      "pctAA": 0.09765625,
+      "channelsCompared": 29,
+      "channelsEqual": 27,
+      "pctExact": 0,
+      "pctAA": 0,
       "mismatches": [
         {
           "part": "root",
@@ -185,10 +186,10 @@
     },
     {
       "key": "unset__hover",
-      "channelsCompared": 27,
-      "channelsEqual": 25,
-      "pctExact": 0.09765625,
-      "pctAA": 0.09765625,
+      "channelsCompared": 29,
+      "channelsEqual": 27,
+      "pctExact": 0,
+      "pctAA": 0,
       "mismatches": [
         {
           "part": "root",
@@ -206,10 +207,10 @@
     },
     {
       "key": "unset__focus-visible",
-      "channelsCompared": 27,
-      "channelsEqual": 25,
-      "pctExact": 0.9440104166666666,
-      "pctAA": 0.9440104166666666,
+      "channelsCompared": 29,
+      "channelsEqual": 27,
+      "pctExact": 0.859375,
+      "pctAA": 0.859375,
       "mismatches": [
         {
           "part": "root",
@@ -227,10 +228,10 @@
     },
     {
       "key": "unset__active",
-      "channelsCompared": 27,
-      "channelsEqual": 14,
-      "pctExact": 0.654296875,
-      "pctAA": 0.2669270833333333,
+      "channelsCompared": 29,
+      "channelsEqual": 16,
+      "pctExact": 0.60546875,
+      "pctAA": 0.185546875,
       "mismatches": [
         {
           "part": "root",
@@ -314,10 +315,10 @@
     },
     {
       "key": "xs__default",
-      "channelsCompared": 27,
-      "channelsEqual": 25,
-      "pctExact": 0.5891927083333334,
-      "pctAA": 0.3157552083333333,
+      "channelsCompared": 29,
+      "channelsEqual": 27,
+      "pctExact": 0.6673177083333334,
+      "pctAA": 0.3678385416666667,
       "mismatches": [
         {
           "part": "root",
@@ -335,10 +336,10 @@
     },
     {
       "key": "xs__hover",
-      "channelsCompared": 27,
-      "channelsEqual": 25,
-      "pctExact": 0.5859375,
-      "pctAA": 0.3125,
+      "channelsCompared": 29,
+      "channelsEqual": 27,
+      "pctExact": 0.6705729166666666,
+      "pctAA": 0.3515625,
       "mismatches": [
         {
           "part": "root",
@@ -356,10 +357,10 @@
     },
     {
       "key": "xs__focus-visible",
-      "channelsCompared": 27,
-      "channelsEqual": 25,
-      "pctExact": 1.2923177083333333,
-      "pctAA": 1.0188802083333333,
+      "channelsCompared": 29,
+      "channelsEqual": 27,
+      "pctExact": 1.3704427083333333,
+      "pctAA": 1.0709635416666667,
       "mismatches": [
         {
           "part": "root",
@@ -377,10 +378,10 @@
     },
     {
       "key": "xs__active",
-      "channelsCompared": 27,
-      "channelsEqual": 14,
-      "pctExact": 0.703125,
-      "pctAA": 0.361328125,
+      "channelsCompared": 29,
+      "channelsEqual": 16,
+      "pctExact": 0.7356770833333334,
+      "pctAA": 0.3971354166666667,
       "mismatches": [
         {
           "part": "root",
@@ -464,10 +465,10 @@
     },
     {
       "key": "sm__default",
-      "channelsCompared": 27,
-      "channelsEqual": 25,
-      "pctExact": 0.5631510416666666,
-      "pctAA": 0.3190104166666667,
+      "channelsCompared": 29,
+      "channelsEqual": 27,
+      "pctExact": 0.6575520833333334,
+      "pctAA": 0.37109375,
       "mismatches": [
         {
           "part": "root",
@@ -485,10 +486,10 @@
     },
     {
       "key": "sm__hover",
-      "channelsCompared": 27,
-      "channelsEqual": 25,
-      "pctExact": 0.5631510416666666,
-      "pctAA": 0.3125,
+      "channelsCompared": 29,
+      "channelsEqual": 27,
+      "pctExact": 0.6575520833333334,
+      "pctAA": 0.3645833333333333,
       "mismatches": [
         {
           "part": "root",
@@ -506,10 +507,10 @@
     },
     {
       "key": "sm__focus-visible",
-      "channelsCompared": 27,
-      "channelsEqual": 25,
-      "pctExact": 1.318359375,
-      "pctAA": 1.07421875,
+      "channelsCompared": 29,
+      "channelsEqual": 27,
+      "pctExact": 1.4127604166666667,
+      "pctAA": 1.1263020833333333,
       "mismatches": [
         {
           "part": "root",
@@ -527,10 +528,10 @@
     },
     {
       "key": "sm__active",
-      "channelsCompared": 27,
-      "channelsEqual": 14,
-      "pctExact": 0.7291666666666666,
-      "pctAA": 0.4036458333333333,
+      "channelsCompared": 29,
+      "channelsEqual": 16,
+      "pctExact": 0.7649739583333334,
+      "pctAA": 0.4069010416666667,
       "mismatches": [
         {
           "part": "root",
@@ -614,10 +615,10 @@
     },
     {
       "key": "lg__default",
-      "channelsCompared": 27,
-      "channelsEqual": 25,
-      "pctExact": 0.11067708333333333,
-      "pctAA": 0.107421875,
+      "channelsCompared": 29,
+      "channelsEqual": 27,
+      "pctExact": 0,
+      "pctAA": 0,
       "mismatches": [
         {
           "part": "root",
@@ -635,10 +636,10 @@
     },
     {
       "key": "lg__hover",
-      "channelsCompared": 27,
-      "channelsEqual": 25,
-      "pctExact": 0.11067708333333333,
-      "pctAA": 0.107421875,
+      "channelsCompared": 29,
+      "channelsEqual": 27,
+      "pctExact": 0,
+      "pctAA": 0,
       "mismatches": [
         {
           "part": "root",
@@ -656,10 +657,10 @@
     },
     {
       "key": "lg__focus-visible",
-      "channelsCompared": 27,
-      "channelsEqual": 25,
-      "pctExact": 1.0611979166666667,
-      "pctAA": 1.0579427083333333,
+      "channelsCompared": 29,
+      "channelsEqual": 27,
+      "pctExact": 0.9505208333333334,
+      "pctAA": 0.9505208333333334,
       "mismatches": [
         {
           "part": "root",
@@ -677,10 +678,10 @@
     },
     {
       "key": "lg__active",
-      "channelsCompared": 27,
-      "channelsEqual": 14,
-      "pctExact": 0.7291666666666666,
-      "pctAA": 0.3515625,
+      "channelsCompared": 29,
+      "channelsEqual": 16,
+      "pctExact": 0.7389322916666666,
+      "pctAA": 0.302734375,
       "mismatches": [
         {
           "part": "root",
