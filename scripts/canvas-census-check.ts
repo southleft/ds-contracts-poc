@@ -456,6 +456,33 @@ function renderReceipt(
   return lines.join("\n");
 }
 
+/** THE PRESERVED LOG — the one hand-authored region of a generated receipt.
+ *
+ *  Everything above is regenerated from measurement on every run, which is
+ *  what makes the table trustworthy and what makes a hand edit pointless: the
+ *  next run erases it. But the census also accumulates a HISTORY that no
+ *  measurement can produce — which root-cause classes were burned down, which
+ *  were refused and on what finding, and (2026-08-25) the fact that a bar can
+ *  itself be defective and have to be corrected. That belongs beside the table
+ *  it is about, not only in a chat log or a branch description.
+ *
+ *  So: everything from MARKER to end of file is carried forward verbatim
+ *  across regenerations. It is byte-stable (copied, never re-rendered), it
+ *  cannot affect a single gate verdict (it is appended after the receipt is
+ *  composed), and it is the ONLY region of this file a human may edit. A file
+ *  with no marker is unaffected.
+ */
+const PRESERVED_LOG_MARKER =
+  "<!-- PRESERVED LOG — hand-authored below this line; carried across regenerations of this receipt. -->";
+
+function withPreservedLog(receipt: string, receiptPath: string): string {
+  if (!existsSync(receiptPath)) return receipt;
+  const prior = readFileSync(receiptPath, "utf8");
+  const at = prior.indexOf(PRESERVED_LOG_MARKER);
+  if (at === -1) return receipt;
+  return receipt.replace(/\n+$/, "\n") + "\n" + prior.slice(at);
+}
+
 // ---------------------------------------------------------------------------
 // Run
 // ---------------------------------------------------------------------------
@@ -475,7 +502,8 @@ export function runCensus(opts: RunOptions, fresh?: CensusManifest): RunResult {
   );
   for (const r of rows) failures.push(...r.failures);
   const receipt = renderReceipt(rowsSource, rows, opts.phase, failures);
-  if (opts.receiptPath) writeFileSync(opts.receiptPath, receipt);
+  if (opts.receiptPath)
+    writeFileSync(opts.receiptPath, withPreservedLog(receipt, opts.receiptPath));
   return { ok: failures.length === 0, failures, rows, receipt };
 }
 
