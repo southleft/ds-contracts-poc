@@ -241,6 +241,15 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run eval:registry:check
 
+      # Runs BEFORE docs:check, and deliberately: docs:check now permits a red
+      # eval suite when every red is NAMED, and an escape hatch nobody exercises
+      # is how a standard quietly stops existing. The self-test is decoupled
+      # from docs:check on purpose — that module exits at import time, so a
+      # coupled test would exit before running on exactly the red branches it
+      # exists to police.
+      - name: eval-reds:self-test (the named-red ledger refuses an UNNAMED red, and a stale row)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run eval-reds:self-test
       - name: docs:check (every number and link the docs quote, re-derived)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run docs:check

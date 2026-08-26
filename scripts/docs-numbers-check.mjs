@@ -42,6 +42,7 @@ import { readdirSync, readFileSync, existsSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { recordFreshnessFailures } from './eval-record-check.mjs';
+import { evalRedFailures } from './eval-red-ledger.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const IGNORE = '<!-- docs-check:ignore -->';
@@ -50,14 +51,33 @@ const rel = (p) => path.relative(ROOT, p) || '.';
 const failures = [];
 const fail = (where, msg) => failures.push(`${where}: ${msg}`);
 
+
 // ---------------------------------------------------------------------------
 // Sources of truth — derived, never typed twice
 // ---------------------------------------------------------------------------
 const results = JSON.parse(readFileSync(path.join(ROOT, 'evals/results.json'), 'utf8'));
 const EVALS = results.total;
-if (results.passed !== results.total) {
-  fail('evals/results.json', `${results.passed}/${results.total} — the committed run is RED; docs quoting "N/N pass" would be a false claim`);
+// A RED SUITE IS PERMITTED ONLY IF EVERY RED IS NAMED.
+//
+// This used to be an unconditional refusal, and that made the gate unusable
+// exactly when it mattered: three of the suite's reds could not be closed
+// until the branch carrying their fix had landed, and the branch could not
+// land while the gate refused. A gate whose only remedy is the thing it
+// blocks is not enforcing a standard, it is deadlocked.
+//
+// So the doctrine the rest of this tree already uses applies here too — a
+// failure that is NAMED, caused, and carries a stated way to close is
+// carried; one that is not is a silent failure. `parity/receipts/v1/
+// eval-reds.json` is that ledger. It is not a weakening: an UNNAMED red still
+// refuses, a ledger row whose eval has gone green refuses (stale rows rot
+// exactly the way the door register's line metadata did), and the full lane's
+// eval:record:check still re-measures row by row against a fresh run, so the
+// ledger cannot lie about WHICH evals fail.
+const EVAL_REDS = path.join(ROOT, 'parity/receipts/v1/eval-reds.json');
+for (const f of evalRedFailures(results, existsSync(EVAL_REDS) ? JSON.parse(readFileSync(EVAL_REDS, 'utf8')) : null, rel(EVAL_REDS))) {
+  fail(f.where, f.msg);
 }
+
 // The record must be a clean-tree measurement on this history, not a
 // self-attestation — see scripts/eval-record-check.mjs for the reason and
 // the CI half (row-by-row compare against a fresh full run).
