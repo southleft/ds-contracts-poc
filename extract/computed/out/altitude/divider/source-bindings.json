@@ -60,5 +60,7 @@
   "shorthandCeiling": 0,
   "shorthandSkips": [],
   "calcDeclarations": 0,
-  "calcCeiling": 0
+  "calcCeiling": 0,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
 }

@@ -3,6 +3,7 @@
   "component": "Avatar",
   "config": "extract/computed/configs/altitude.json",
   "capturedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "declared": {
     "base": [
       {
@@ -58,13 +59,14 @@
     "component": "Avatar",
     "generatedBy": "extract/computed/gate.ts",
     "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+    "renderedBy": "149.0.7827.55",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 4,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 984,
-      "cellsEqual": 880,
-      "pctEqual": 89.4308943089431,
+      "cellsCompared": 952,
+      "cellsEqual": 848,
+      "pctEqual": 89.07563025210084,
       "rowsFullyEqual": 0,
       "rows": 16
     },
@@ -90,7 +92,7 @@
       "mintedLeavesUnfolded": 36,
       "baseBindings": 42,
       "stateBindings": 0,
-      "codeOnlyChannels": 8,
+      "codeOnlyChannels": 5,
       "overflowBindings": 0,
       "folds": 30
     },
@@ -194,11 +196,8 @@
       "code-only: root.bottom — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: root.left — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: root.position — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "code-only: root.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: root.right — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: root.top — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: avatar__badge.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <al-badge>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <al-badge> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
-      "code-only: badge.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+      "code-only: root.top — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],
     "unresolvedTokenRefs": {
       "count": 0,
@@ -206,12 +205,24 @@
     },
     "shippedMinted": {
       "path": "examples/altitude/tokens/altitude-minted.dtcg.json",
-      "leavesAdded": 284,
+      "leavesAdded": 288,
       "divergent": [
         {
           "token": "imported.avatar.badge.z-index",
           "fresh": "400",
           "shipped": "{z-index-400}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.avatar.root.height.sm",
+          "fresh": "32px",
+          "shipped": "{theme-icon-xl}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.avatar.root.height.unset",
+          "fresh": "40px",
+          "shipped": "{theme-icon-xxxl}",
           "resolvedEqual": true
         },
         {
@@ -225,14 +236,26 @@
           "fresh": "40px",
           "shipped": "{theme-icon-xxxl}",
           "resolvedEqual": true
+        },
+        {
+          "token": "imported.avatar.root.width.sm",
+          "fresh": "32px",
+          "shipped": "{theme-icon-xl}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.avatar.root.width.unset",
+          "fresh": "40px",
+          "shipped": "{theme-icon-xxxl}",
+          "resolvedEqual": true
         }
       ]
     },
     "rows": [
       {
         "key": "unset.off__default",
-        "channelsCompared": 33,
-        "channelsEqual": 29,
+        "channelsCompared": 32,
+        "channelsEqual": 28,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -266,8 +289,8 @@
       },
       {
         "key": "unset.off__hover",
-        "channelsCompared": 33,
-        "channelsEqual": 29,
+        "channelsCompared": 32,
+        "channelsEqual": 28,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -301,8 +324,8 @@
       },
       {
         "key": "unset.off__focus-visible",
-        "channelsCompared": 33,
-        "channelsEqual": 29,
+        "channelsCompared": 32,
+        "channelsEqual": 28,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -336,8 +359,8 @@
       },
       {
         "key": "unset.off__active",
-        "channelsCompared": 33,
-        "channelsEqual": 29,
+        "channelsCompared": 32,
+        "channelsEqual": 28,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -371,8 +394,8 @@
       },
       {
         "key": "unset.on__default",
-        "channelsCompared": 90,
-        "channelsEqual": 81,
+        "channelsCompared": 87,
+        "channelsEqual": 78,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -436,8 +459,8 @@
       },
       {
         "key": "unset.on__hover",
-        "channelsCompared": 90,
-        "channelsEqual": 81,
+        "channelsCompared": 87,
+        "channelsEqual": 78,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -501,8 +524,8 @@
       },
       {
         "key": "unset.on__focus-visible",
-        "channelsCompared": 90,
-        "channelsEqual": 81,
+        "channelsCompared": 87,
+        "channelsEqual": 78,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -566,8 +589,8 @@
       },
       {
         "key": "unset.on__active",
-        "channelsCompared": 90,
-        "channelsEqual": 81,
+        "channelsCompared": 87,
+        "channelsEqual": 78,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -631,8 +654,8 @@
       },
       {
         "key": "sm.off__default",
-        "channelsCompared": 33,
-        "channelsEqual": 29,
+        "channelsCompared": 32,
+        "channelsEqual": 28,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -666,8 +689,8 @@
       },
       {
         "key": "sm.off__hover",
-        "channelsCompared": 33,
-        "channelsEqual": 29,
+        "channelsCompared": 32,
+        "channelsEqual": 28,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -701,8 +724,8 @@
       },
       {
         "key": "sm.off__focus-visible",
-        "channelsCompared": 33,
-        "channelsEqual": 29,
+        "channelsCompared": 32,
+        "channelsEqual": 28,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -736,8 +759,8 @@
       },
       {
         "key": "sm.off__active",
-        "channelsCompared": 33,
-        "channelsEqual": 29,
+        "channelsCompared": 32,
+        "channelsEqual": 28,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -771,8 +794,8 @@
       },
       {
         "key": "sm.on__default",
-        "channelsCompared": 90,
-        "channelsEqual": 81,
+        "channelsCompared": 87,
+        "channelsEqual": 78,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -836,8 +859,8 @@
       },
       {
         "key": "sm.on__hover",
-        "channelsCompared": 90,
-        "channelsEqual": 81,
+        "channelsCompared": 87,
+        "channelsEqual": 78,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -901,8 +924,8 @@
       },
       {
         "key": "sm.on__focus-visible",
-        "channelsCompared": 90,
-        "channelsEqual": 81,
+        "channelsCompared": 87,
+        "channelsEqual": 78,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -966,8 +989,8 @@
       },
       {
         "key": "sm.on__active",
-        "channelsCompared": 90,
-        "channelsEqual": 81,
+        "channelsCompared": 87,
+        "channelsEqual": 78,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",

@@ -348,5 +348,7 @@
     "root.font: SHORTHAND carrying var(--al-typography-preset-14) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
   ],
   "calcDeclarations": 0,
-  "calcCeiling": 0
+  "calcCeiling": 0,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
 }

@@ -2,13 +2,14 @@
   "component": "Avatar",
   "generatedBy": "extract/computed/gate.ts",
   "browser": "149.0.7827.55",
+  "renderedBy": "149.0.7827.55",
   "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
   "combos": 4,
   "interactions": 4,
   "computed": {
-    "cellsCompared": 568,
-    "cellsEqual": 464,
-    "pctEqual": 81.69014084507042,
+    "cellsCompared": 952,
+    "cellsEqual": 848,
+    "pctEqual": 89.07563025210084,
     "rowsFullyEqual": 0,
     "rows": 16
   },
@@ -22,70 +23,70 @@
       "noOriginal": 0,
       "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
     },
-    "meanExact": 3.670247395833333,
-    "meanAA": 0.27506510416666663,
-    "maxAA": 0.3287760416666667
+    "meanExact": 0.8455403645833336,
+    "meanAA": 0.2490234375,
+    "maxAA": 0.29296875
   },
   "fusion": {
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
-    "mintedLeaves": 31,
-    "mintedLeavesUnfolded": 31,
-    "baseBindings": 37,
+    "mintedLeaves": 36,
+    "mintedLeavesUnfolded": 36,
+    "baseBindings": 42,
     "stateBindings": 0,
     "codeOnlyChannels": 5,
     "overflowBindings": 0,
-    "folds": 0
+    "folds": 30
   },
   "worstRows": [
     {
-      "key": "unset.on__default",
-      "pctAA": 0.3287760416666667,
-      "pctExact": 4.547526041666667,
-      "channelsMismatched": 9
-    },
-    {
-      "key": "unset.on__hover",
-      "pctAA": 0.3287760416666667,
-      "pctExact": 4.547526041666667,
-      "channelsMismatched": 9
-    },
-    {
-      "key": "unset.on__focus-visible",
-      "pctAA": 0.3287760416666667,
-      "pctExact": 4.547526041666667,
-      "channelsMismatched": 9
-    },
-    {
-      "key": "unset.on__active",
-      "pctAA": 0.3287760416666667,
-      "pctExact": 4.547526041666667,
-      "channelsMismatched": 9
-    },
-    {
       "key": "unset.off__default",
-      "pctAA": 0.3287760416666667,
-      "pctExact": 4.375,
+      "pctAA": 0.29296875,
+      "pctExact": 1.2727864583333333,
       "channelsMismatched": 4
     },
     {
       "key": "unset.off__hover",
-      "pctAA": 0.3287760416666667,
-      "pctExact": 4.375,
+      "pctAA": 0.29296875,
+      "pctExact": 1.2727864583333333,
       "channelsMismatched": 4
     },
     {
       "key": "unset.off__focus-visible",
-      "pctAA": 0.3287760416666667,
-      "pctExact": 4.375,
+      "pctAA": 0.29296875,
+      "pctExact": 1.2727864583333333,
       "channelsMismatched": 4
     },
     {
       "key": "unset.off__active",
-      "pctAA": 0.3287760416666667,
-      "pctExact": 4.375,
+      "pctAA": 0.29296875,
+      "pctExact": 1.2727864583333333,
       "channelsMismatched": 4
+    },
+    {
+      "key": "unset.on__default",
+      "pctAA": 0.29296875,
+      "pctExact": 0.9895833333333334,
+      "channelsMismatched": 9
+    },
+    {
+      "key": "unset.on__hover",
+      "pctAA": 0.29296875,
+      "pctExact": 0.9895833333333334,
+      "channelsMismatched": 9
+    },
+    {
+      "key": "unset.on__focus-visible",
+      "pctAA": 0.29296875,
+      "pctExact": 0.9895833333333334,
+      "channelsMismatched": 9
+    },
+    {
+      "key": "unset.on__active",
+      "pctAA": 0.29296875,
+      "pctExact": 0.9895833333333334,
+      "channelsMismatched": 9
     }
   ],
   "topMismatchedChannels": [
@@ -139,7 +140,7 @@
   },
   "shippedMinted": {
     "path": "examples/altitude/tokens/altitude-minted.dtcg.json",
-    "leavesAdded": 318,
+    "leavesAdded": 284,
     "divergent": [
       {
         "token": "imported.avatar.badge.z-index",
@@ -164,10 +165,10 @@
   "rows": [
     {
       "key": "unset.off__default",
-      "channelsCompared": 20,
-      "channelsEqual": 16,
-      "pctExact": 4.375,
-      "pctAA": 0.3287760416666667,
+      "channelsCompared": 32,
+      "channelsEqual": 28,
+      "pctExact": 1.2727864583333333,
+      "pctAA": 0.29296875,
       "mismatches": [
         {
           "part": "root",
@@ -197,10 +198,10 @@
     },
     {
       "key": "unset.off__hover",
-      "channelsCompared": 20,
-      "channelsEqual": 16,
-      "pctExact": 4.375,
-      "pctAA": 0.3287760416666667,
+      "channelsCompared": 32,
+      "channelsEqual": 28,
+      "pctExact": 1.2727864583333333,
+      "pctAA": 0.29296875,
       "mismatches": [
         {
           "part": "root",
@@ -226,15 +227,14 @@
           "ours": "20px",
           "theirs": "50%"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "unset.off__focus-visible",
-      "channelsCompared": 20,
-      "channelsEqual": 16,
-      "pctExact": 4.375,
-      "pctAA": 0.3287760416666667,
+      "channelsCompared": 32,
+      "channelsEqual": 28,
+      "pctExact": 1.2727864583333333,
+      "pctAA": 0.29296875,
       "mismatches": [
         {
           "part": "root",
@@ -264,10 +264,10 @@
     },
     {
       "key": "unset.off__active",
-      "channelsCompared": 20,
-      "channelsEqual": 16,
-      "pctExact": 4.375,
-      "pctAA": 0.3287760416666667,
+      "channelsCompared": 32,
+      "channelsEqual": 28,
+      "pctExact": 1.2727864583333333,
+      "pctAA": 0.29296875,
       "mismatches": [
         {
           "part": "root",
@@ -293,15 +293,14 @@
           "ours": "20px",
           "theirs": "50%"
         }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "unset.on__default",
-      "channelsCompared": 51,
-      "channelsEqual": 42,
-      "pctExact": 4.547526041666667,
-      "pctAA": 0.3287760416666667,
+      "channelsCompared": 87,
+      "channelsEqual": 78,
+      "pctExact": 0.9895833333333334,
+      "pctAA": 0.29296875,
       "mismatches": [
         {
           "part": "root",
@@ -361,10 +360,10 @@
     },
     {
       "key": "unset.on__hover",
-      "channelsCompared": 51,
-      "channelsEqual": 42,
-      "pctExact": 4.547526041666667,
-      "pctAA": 0.3287760416666667,
+      "channelsCompared": 87,
+      "channelsEqual": 78,
+      "pctExact": 0.9895833333333334,
+      "pctAA": 0.29296875,
       "mismatches": [
         {
           "part": "root",
@@ -420,15 +419,14 @@
           "ours": "auto",
           "theirs": "0px"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "unset.on__focus-visible",
-      "channelsCompared": 51,
-      "channelsEqual": 42,
-      "pctExact": 4.547526041666667,
-      "pctAA": 0.3287760416666667,
+      "channelsCompared": 87,
+      "channelsEqual": 78,
+      "pctExact": 0.9895833333333334,
+      "pctAA": 0.29296875,
       "mismatches": [
         {
           "part": "root",
@@ -488,10 +486,10 @@
     },
     {
       "key": "unset.on__active",
-      "channelsCompared": 51,
-      "channelsEqual": 42,
-      "pctExact": 4.547526041666667,
-      "pctAA": 0.3287760416666667,
+      "channelsCompared": 87,
+      "channelsEqual": 78,
+      "pctExact": 0.9895833333333334,
+      "pctAA": 0.29296875,
       "mismatches": [
         {
           "part": "root",
@@ -547,15 +545,14 @@
           "ours": "auto",
           "theirs": "0px"
         }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "sm.off__default",
-      "channelsCompared": 20,
-      "channelsEqual": 16,
-      "pctExact": 2.7604166666666665,
-      "pctAA": 0.22135416666666666,
+      "channelsCompared": 32,
+      "channelsEqual": 28,
+      "pctExact": 0.3743489583333333,
+      "pctAA": 0.205078125,
       "mismatches": [
         {
           "part": "root",
@@ -585,10 +582,10 @@
     },
     {
       "key": "sm.off__hover",
-      "channelsCompared": 20,
-      "channelsEqual": 16,
-      "pctExact": 2.7604166666666665,
-      "pctAA": 0.22135416666666666,
+      "channelsCompared": 32,
+      "channelsEqual": 28,
+      "pctExact": 0.3743489583333333,
+      "pctAA": 0.205078125,
       "mismatches": [
         {
           "part": "root",
@@ -614,15 +611,14 @@
           "ours": "16px",
           "theirs": "50%"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "sm.off__focus-visible",
-      "channelsCompared": 20,
-      "channelsEqual": 16,
-      "pctExact": 2.7604166666666665,
-      "pctAA": 0.22135416666666666,
+      "channelsCompared": 32,
+      "channelsEqual": 28,
+      "pctExact": 0.3743489583333333,
+      "pctAA": 0.205078125,
       "mismatches": [
         {
           "part": "root",
@@ -652,10 +648,10 @@
     },
     {
       "key": "sm.off__active",
-      "channelsCompared": 20,
-      "channelsEqual": 16,
-      "pctExact": 2.7604166666666665,
-      "pctAA": 0.22135416666666666,
+      "channelsCompared": 32,
+      "channelsEqual": 28,
+      "pctExact": 0.3743489583333333,
+      "pctAA": 0.205078125,
       "mismatches": [
         {
           "part": "root",
@@ -681,15 +677,14 @@
           "ours": "16px",
           "theirs": "50%"
         }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "sm.on__default",
-      "channelsCompared": 51,
-      "channelsEqual": 42,
-      "pctExact": 2.998046875,
-      "pctAA": 0.22135416666666666,
+      "channelsCompared": 87,
+      "channelsEqual": 78,
+      "pctExact": 0.7454427083333334,
+      "pctAA": 0.205078125,
       "mismatches": [
         {
           "part": "root",
@@ -749,10 +744,10 @@
     },
     {
       "key": "sm.on__hover",
-      "channelsCompared": 51,
-      "channelsEqual": 42,
-      "pctExact": 2.998046875,
-      "pctAA": 0.22135416666666666,
+      "channelsCompared": 87,
+      "channelsEqual": 78,
+      "pctExact": 0.7454427083333334,
+      "pctAA": 0.205078125,
       "mismatches": [
         {
           "part": "root",
@@ -808,15 +803,14 @@
           "ours": "auto",
           "theirs": "0px"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "sm.on__focus-visible",
-      "channelsCompared": 51,
-      "channelsEqual": 42,
-      "pctExact": 2.998046875,
-      "pctAA": 0.22135416666666666,
+      "channelsCompared": 87,
+      "channelsEqual": 78,
+      "pctExact": 0.7454427083333334,
+      "pctAA": 0.205078125,
       "mismatches": [
         {
           "part": "root",
@@ -876,10 +870,10 @@
     },
     {
       "key": "sm.on__active",
-      "channelsCompared": 51,
-      "channelsEqual": 42,
-      "pctExact": 2.998046875,
-      "pctAA": 0.22135416666666666,
+      "channelsCompared": 87,
+      "channelsEqual": 78,
+      "pctExact": 0.7454427083333334,
+      "pctAA": 0.205078125,
       "mismatches": [
         {
           "part": "root",
@@ -935,8 +929,7 @@
           "ours": "auto",
           "theirs": "0px"
         }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+      ]
     }
   ]
 }

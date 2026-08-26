@@ -3,46 +3,6 @@
   "component": "badge",
   "anchors": [
     {
-      "leaf": "imported.badge.root.background-color.danger",
-      "token": "theme-color-background-danger-default",
-      "part": "root",
-      "cssProperty": "background-color",
-      "varName": "--al-theme-color-background-danger-default",
-      "selector": ".al-c-badge--danger"
-    },
-    {
-      "leaf": "imported.badge.root.background-color.info",
-      "token": "theme-color-background-info-default",
-      "part": "root",
-      "cssProperty": "background-color",
-      "varName": "--al-theme-color-background-info-default",
-      "selector": ".al-c-badge--info"
-    },
-    {
-      "leaf": "imported.badge.root.background-color.success",
-      "token": "theme-color-background-success-default",
-      "part": "root",
-      "cssProperty": "background-color",
-      "varName": "--al-theme-color-background-success-default",
-      "selector": ".al-c-badge--success"
-    },
-    {
-      "leaf": "imported.badge.root.background-color.unset",
-      "token": "theme-color-background-default-stronger",
-      "part": "root",
-      "cssProperty": "background-color",
-      "varName": "--al-theme-color-background-default-stronger",
-      "selector": ".al-c-badge"
-    },
-    {
-      "leaf": "imported.badge.root.background-color.warning",
-      "token": "theme-color-background-warning-default",
-      "part": "root",
-      "cssProperty": "background-color",
-      "varName": "--al-theme-color-background-warning-default",
-      "selector": ".al-c-badge--warning"
-    },
-    {
       "leaf": "imported.badge.root.color.danger",
       "token": "theme-color-content-danger-weak",
       "part": "root",

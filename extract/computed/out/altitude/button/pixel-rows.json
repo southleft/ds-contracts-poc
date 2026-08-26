@@ -1,102 +1,102 @@
 [
   {
     "key": "unset__default",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 1.4811197916666667,
+    "pctAA": 0.48828125
   },
   {
     "key": "unset__hover",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 1.4811197916666667,
+    "pctAA": 0.5208333333333334
   },
   {
     "key": "unset__focus-visible",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 1.4811197916666667,
+    "pctAA": 0.48828125
   },
   {
     "key": "unset__active",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 1.4811197916666667,
+    "pctAA": 0.48828125
   },
   {
     "key": "secondary__default",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 1.4811197916666667,
+    "pctAA": 0.5078125
   },
   {
     "key": "secondary__hover",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 1.4811197916666667,
+    "pctAA": 0.52734375
   },
   {
     "key": "secondary__focus-visible",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 1.4811197916666667,
+    "pctAA": 0.5078125
   },
   {
     "key": "secondary__active",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 1.4811197916666667,
+    "pctAA": 0.5078125
   },
   {
     "key": "tertiary__default",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 1.4811197916666667,
+    "pctAA": 0.5598958333333334
   },
   {
     "key": "tertiary__hover",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 1.4811197916666667,
+    "pctAA": 0.5436197916666666
   },
   {
     "key": "tertiary__focus-visible",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 1.4811197916666667,
+    "pctAA": 0.5598958333333334
   },
   {
     "key": "tertiary__active",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 1.4811197916666667,
+    "pctAA": 0.5598958333333334
   },
   {
     "key": "bare__default",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 1.4811197916666667,
+    "pctAA": 0.5598958333333334
   },
   {
     "key": "bare__hover",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 1.4811197916666667,
+    "pctAA": 0.5436197916666666
   },
   {
     "key": "bare__focus-visible",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 1.4811197916666667,
+    "pctAA": 0.5598958333333334
   },
   {
     "key": "bare__active",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 1.4811197916666667,
+    "pctAA": 0.5598958333333334
   },
   {
     "key": "danger__default",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 1.4811197916666667,
+    "pctAA": 0.5078125
   },
   {
     "key": "danger__hover",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 1.4811197916666667,
+    "pctAA": 0.5240885416666666
   },
   {
     "key": "danger__focus-visible",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 1.4811197916666667,
+    "pctAA": 0.5078125
   },
   {
     "key": "danger__active",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 1.4811197916666667,
+    "pctAA": 0.5078125
   }
 ]

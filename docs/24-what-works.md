@@ -20,8 +20,8 @@ the complete inventory of what this does not do, and it is longer than this one.
 
 Six third-party component libraries — Altitude, Ant Design, Astryx, Carbon, Flowbite / Tailwind, Fluent 2, MUI, Polaris, shadcn/ui — across five styling
 architectures were run through one pipeline. 116 components came out with a measured floor:
-**86.7% mean computed-style equality** against the original npm package rendering in the same pinned
-Chromium, exact string comparison with no tolerance, over 718,018 compared style cells
+**86.8% mean computed-style equality** against the original npm package rendering in the same pinned
+Chromium, exact string comparison with no tolerance, over 719,534 compared style cells
 (58 of 116 components at ≥90%, 90 of 116 at ≥80%).
 In the other direction, a 599-variant Figma kit converted to code scores
 **92.70% visual fidelity** over the 537 statically scorable variants, and the
@@ -103,7 +103,7 @@ pipeline never opened still counts against it.
 
 | library | components | mean %equal | median | ≥90% | ≥80% | cells compared | cell-weighted | source |
 |---|---|---|---|---|---|---|---|---|
-| Altitude | 8 | **91.7** | 94.0 | 5/8 | 8/8 | 6,224 | 90.2 | `extract/computed/out/altitude/<comp>/scorecard.json` |
+| Altitude | 8 | **92.8** | 94.1 | 5/8 | 8/8 | 7,740 | 92.1 | `extract/computed/out/altitude/<comp>/scorecard.json` |
 | Astryx | 10 | **86.0** | 93.6 | 7/10 | 7/10 | 34,096 | 91.1 | `extract/computed/out/astryx/<comp>/scorecard.json` |
 | Carbon | 10 | **87.5** | 86.7 | 4/10 | 8/10 | 54,297 | 82.8 | `extract/computed/out/carbon/<comp>/scorecard.json` |
 | MUI | 31 | **89.8** | 90.7 | 18/31 | 27/31 | 120,182 | 85.8 | `extract/computed/out/mui/<comp>/scorecard.json` |
@@ -112,13 +112,13 @@ pipeline never opened still counts against it.
 | Flowbite / Tailwind | 11 | **90.4** | 90.7 | 6/11 | 10/11 | 13,804 | 93.5 | `extract/computed/out/tailwind/<comp>/scorecard.json` |
 | Fluent 2 | 11 | **82.5** | 82.4 | 4/11 | 7/11 | 132,426 | 80.8 | `extract/computed/out/fluent/<comp>/scorecard.json` |
 | Ant Design | 12 | **88.9** | 91.6 | 7/12 | 10/12 | 134,068 | 85.3 | `extract/computed/out/antd/<comp>/scorecard.json` |
-| **all libraries** | **116** | **86.7** | 90.0 | **58/116** | **90/116** | **718,018** | **85.9** |  |
+| **all libraries** | **116** | **86.8** | 90.0 | **58/116** | **90/116** | **719,534** | **86.0** |  |
 
 **Read every percentage on this page as "on the easy 11.1%."** The 116 components measured here were chosen because they were **tractable**, not at random — they are Button, Badge, Chip, Card, Checkbox, Tag, Avatar, Divider and their siblings. Across the 9 libraries they are 113 of 1,015 components (11.1%). Data grid, tree, virtualized list, date picker, rich text and charts appear in **zero** committed contracts. A mean over this slice is a statement about this slice.
 
 **Two means, both printed, because they answer different questions.** The
-unweighted mean (86.7%) treats a 16-cell Spinner and an 83,520-cell Button as equals;
-the cell-weighted figure (85.9%) is what fraction of every style cell in the corpus
+unweighted mean (86.8%) treats a 16-cell Spinner and an 83,520-cell Button as equals;
+the cell-weighted figure (86.0%) is what fraction of every style cell in the corpus
 actually matched. Neither is quoted alone. Whole-row exactness is the harshest
 cut of the same data: **2,984 of 11,568** rendered rows
 (25.8%) match the original on *every* channel at once.
@@ -159,16 +159,15 @@ No component is omitted. The worst row in the corpus is at the top.
 | `Checkbox` | Polaris | 81.0 | 6 × 4 | 2,464 | `extract/computed/out/checkbox/scorecard.json` |
 | `Tag` | Polaris | 81.0 | 32 × 4 | 7,401 | `extract/computed/out/tag/scorecard.json` |
 | `RadioButton` | Polaris | 81.3 | 4 × 4 | 1,392 | `extract/computed/out/radiobutton/scorecard.json` |
-| `Button` | Altitude | 81.5 | 5 × 4 | 1,280 | `extract/computed/out/altitude/button/scorecard.json` |
 | `Switch` | Fluent 2 | 81.5 | 12 × 4 | 2,064 | `extract/computed/out/fluent/switch/scorecard.json` |
-| `Avatar` | Altitude | 81.7 | 4 × 4 | 568 | `extract/computed/out/altitude/avatar/scorecard.json` |
+| `Button` | Altitude | 81.8 | 5 × 4 | 1,300 | `extract/computed/out/altitude/button/scorecard.json` |
 | `TextField` | Polaris | 82.0 | 64 × 4 | 41,440 | `extract/computed/out/textfield/scorecard.json` |
 | `Tabs` | shadcn/ui | 82.1 | 1 × 4 | 632 | `extract/computed/out/shadcn/tabs/scorecard.json` |
 | `Badge` | shadcn/ui | 82.3 | 6 × 4 | 1,008 | `extract/computed/out/shadcn/badge/scorecard.json` |
 | `Dialog` | Fluent 2 | 82.4 | 3 × 4 | 442 | `extract/computed/out/fluent/dialog/scorecard.json` |
-| `Link` | Altitude | 82.4 | 4 × 4 | 432 | `extract/computed/out/altitude/link/scorecard.json` |
 | `LinearProgress` | MUI | 82.9 | 2 × 4 | 280 | `extract/computed/out/mui/linearprogress/scorecard.json` |
 | `Spinner` | Fluent 2 | 83.3 | 64 × 4 | 19,200 | `extract/computed/out/fluent/spinner/scorecard.json` |
+| `Link` | Altitude | 83.6 | 4 × 4 | 464 | `extract/computed/out/altitude/link/scorecard.json` |
 | `Button` | Ant Design | 83.9 | 240 × 4 | 79,680 | `extract/computed/out/antd/button/scorecard.json` |
 | `Checkbox` | Carbon | 84.3 | 6 × 4 | 1,776 | `extract/computed/out/carbon/checkbox/scorecard.json` |
 | `Toggle` | Carbon | 84.3 | 4 × 4 | 1,376 | `extract/computed/out/carbon/toggle/scorecard.json` |
@@ -184,6 +183,7 @@ No component is omitted. The worst row in the corpus is at the top.
 | `TextInput` | Carbon | 89.0 | 10 × 4 | 3,560 | `extract/computed/out/carbon/textinput/scorecard.json` |
 | `Fab` | MUI | 89.1 | 18 × 4 | 4,032 | `extract/computed/out/mui/fab/scorecard.json` |
 | `Link` | MUI | 89.1 | 21 × 4 | 1,344 | `extract/computed/out/mui/link/scorecard.json` |
+| `Avatar` | Altitude | 89.1 | 4 × 4 | 952 | `extract/computed/out/altitude/avatar/scorecard.json` |
 | `IconButton` | MUI | 89.3 | 18 × 4 | 3,456 | `extract/computed/out/mui/iconbutton/scorecard.json` |
 | `Slider` | MUI | 89.4 | 12 × 4 | 7,392 | `extract/computed/out/mui/slider/scorecard.json` |
 | `Modal` | Carbon | 90.0 | 5 × 4 | 1,305 | `extract/computed/out/carbon/modal/scorecard.json` |
@@ -206,9 +206,9 @@ No component is omitted. The worst row in the corpus is at the top.
 | `Tabs` | Carbon | 93.2 | 1 × 4 | 1,240 | `extract/computed/out/carbon/tabs/scorecard.json` |
 | `Badge` | Ant Design | 93.4 | 8 × 4 | 4,976 | `extract/computed/out/antd/badge/scorecard.json` |
 | `TextInput` | Astryx | 93.4 | 9 × 4 | 2,736 | `extract/computed/out/astryx/textinput/scorecard.json` |
-| `Badge` | Altitude | 93.8 | 10 × 4 | 1,280 | `extract/computed/out/altitude/badge/scorecard.json` |
 | `Tabs` | MUI | 93.8 | 6 × 4 | 4,320 | `extract/computed/out/mui/tabs/scorecard.json` |
 | `CheckboxInput` | Astryx | 93.9 | 2 × 4 | 976 | `extract/computed/out/astryx/checkboxinput/scorecard.json` |
+| `Badge` | Altitude | 93.9 | 10 × 4 | 1,320 | `extract/computed/out/altitude/badge/scorecard.json` |
 | `Pagination` | MUI | 94.0 | 1 × 4 | 796 | `extract/computed/out/mui/pagination/scorecard.json` |
 | `Blockquote` | Flowbite / Tailwind | 94.1 | 1 × 4 | 68 | `extract/computed/out/tailwind/blockquote/scorecard.json` |
 | `Menu` | MUI | 94.2 | 1 × 4 | 171 | `extract/computed/out/mui/menu/scorecard.json` |
@@ -232,9 +232,9 @@ No component is omitted. The worst row in the corpus is at the top.
 | `Badge` | Fluent 2 | 97.8 | 192 × 4 | 23,808 | `extract/computed/out/fluent/badge/scorecard.json` |
 | `Button` | Astryx | 98.8 | 24 × 4 | 11,520 | `extract/computed/out/astryx/button/scorecard.json` |
 | `Card` | Astryx | 98.8 | 13 × 4 | 1,352 | `extract/computed/out/astryx/card/scorecard.json` |
-| `Divider` | Altitude | 100.0 | 2 × 4 | 144 | `extract/computed/out/altitude/divider/scorecard.json` |
-| `Heading` | Altitude | 100.0 | 14 × 4 | 392 | `extract/computed/out/altitude/heading/scorecard.json` |
-| `IconClose` | Altitude | 100.0 | 8 × 4 | 160 | `extract/computed/out/altitude/iconclose/scorecard.json` |
+| `Divider` | Altitude | 100.0 | 2 × 4 | 160 | `extract/computed/out/altitude/divider/scorecard.json` |
+| `Heading` | Altitude | 100.0 | 14 × 4 | 1,064 | `extract/computed/out/altitude/heading/scorecard.json` |
+| `IconClose` | Altitude | 100.0 | 8 × 4 | 512 | `extract/computed/out/altitude/iconclose/scorecard.json` |
 | `Token` | Astryx | 100.0 | 33 × 4 | 6,864 | `extract/computed/out/astryx/token/scorecard.json` |
 | `IconButton` | Carbon | 100.0 | 40 × 4 | 1,120 | `extract/computed/out/carbon/iconbutton/scorecard.json` |
 | `Card` | MUI | 100.0 | 4 × 4 | 704 | `extract/computed/out/mui/card/scorecard.json` |
@@ -261,7 +261,7 @@ no scorecard escaped classification.
 | fixture | cases | mean %equal | counted in §3? | source |
 |---|---|---|---|---|
 | synthetic CSS/DOM constructs | 92 | 98.0 | **no** | `extract/computed/out/conformance/*/scorecard.json` |
-| real third-party components | 116 | 86.7 | yes | `extract/computed/out/**/scorecard.json` |
+| real third-party components | 116 | 86.8 | yes | `extract/computed/out/**/scorecard.json` |
 
 ---
 
@@ -555,8 +555,8 @@ npm run capability:fresh
 | `evals/golden.json` | `c3d39dc59798` | 32,256 | generated-source golden manifest |
 | `evals/results.json` | `ed20d3b959a4` | 7,150 | executable claim suite (registry ids + size; the pass column is the suite's own output) |
 | `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | Untitled UI scored fidelity table |
-| `extract/computed/out/**/numbers.json` | `bd009128800d` | 1,384,456 | capture counts + determinism receipts — 208 files |
-| `extract/computed/out/**/scorecard.json` | `342114e894e6` | 19,808,656 | computed-equality per component — 208 files |
+| `extract/computed/out/**/numbers.json` | `83830e234fdd` | 1,396,094 | capture counts + determinism receipts — 208 files |
+| `extract/computed/out/**/scorecard.json` | `a7920c443736` | 19,807,796 | computed-equality per component — 208 files |
 | `extract/figma/conformance/MANIFEST.json` | `8e9caedb5f10` | 113,594 | canvas construct vocabulary |
 | `extract/figma/dagger-census.json` | `95dc26ea1aae` | 6,733 | dropped-fact receipt census |
 | `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | canvas→code→canvas round trip |

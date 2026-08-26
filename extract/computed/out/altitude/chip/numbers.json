@@ -70,7 +70,7 @@
     "state": 1
   },
   "codeOnly": {
-    "base": 4,
+    "base": 0,
     "state": 0,
     "overflowBindings": 0
   },
@@ -84,8 +84,8 @@
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
     "cellsCompared": 38064,
-    "cellsMatched": 37968,
-    "pct": 99.74779319041615,
+    "cellsMatched": 37872,
+    "pct": 99.49558638083228,
     "namedExclusions": [
       "app-region",
       "text-decoration",
@@ -98,7 +98,15 @@
         48
       ],
       [
+        "inline-size",
+        48
+      ],
+      [
         "perspective-origin",
+        48
+      ],
+      [
+        "width",
         48
       ]
     ]
@@ -112,55 +120,55 @@
       "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
     },
     "exact": {
-      "mean": 0.0005425347222222222,
-      "max": 0.026041666666666668,
-      "perfect": 47
+      "mean": 0.6873914930555552,
+      "max": 0.712890625,
+      "perfect": 0
     },
     "aa": {
-      "mean": 0,
-      "max": 0,
-      "perfect": 48
+      "mean": 0.15950520833333323,
+      "max": 0.15950520833333334,
+      "perfect": 0
     },
     "worst": [
       {
         "key": "danger.unset__active",
-        "pctExact": 0.026041666666666668,
-        "pctAA": 0
+        "pctExact": 0.712890625,
+        "pctAA": 0.15950520833333334
       },
       {
         "key": "unset.unset__default",
-        "pctExact": 0,
-        "pctAA": 0
+        "pctExact": 0.6868489583333334,
+        "pctAA": 0.15950520833333334
       },
       {
         "key": "unset.unset__hover",
-        "pctExact": 0,
-        "pctAA": 0
+        "pctExact": 0.6868489583333334,
+        "pctAA": 0.15950520833333334
       },
       {
         "key": "unset.unset__focus-visible",
-        "pctExact": 0,
-        "pctAA": 0
+        "pctExact": 0.6868489583333334,
+        "pctAA": 0.15950520833333334
       },
       {
         "key": "unset.unset__active",
-        "pctExact": 0,
-        "pctAA": 0
+        "pctExact": 0.6868489583333334,
+        "pctAA": 0.15950520833333334
       },
       {
         "key": "unset.squared__default",
-        "pctExact": 0,
-        "pctAA": 0
+        "pctExact": 0.6868489583333334,
+        "pctAA": 0.15950520833333334
       },
       {
         "key": "unset.squared__hover",
-        "pctExact": 0,
-        "pctAA": 0
+        "pctExact": 0.6868489583333334,
+        "pctAA": 0.15950520833333334
       },
       {
         "key": "unset.squared__focus-visible",
-        "pctExact": 0,
-        "pctAA": 0
+        "pctExact": 0.6868489583333334,
+        "pctAA": 0.15950520833333334
       }
     ]
   },

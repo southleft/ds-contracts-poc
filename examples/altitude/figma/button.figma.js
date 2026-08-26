@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "altitude.button",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Button — generated from contract altitude.button v0.2.0 † (22 code-only facts — see plugin report)",
+    "description": "Button — generated from contract altitude.button v0.2.0 † (30 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -706,6 +706,17 @@ const COMPONENTS = [
     "codeOnlyFacts": [
       {
         "part": "label",
+        "kind": "capture",
+        "channel": "color [hover]",
+        "value": "{imported.button.label.color-state-hover.{variant}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 12,
+          "of": 12
+        }
+      },
+      {
+        "part": "label",
         "kind": "declared",
         "channel": "cursor",
         "value": "pointer",
@@ -721,6 +732,83 @@ const COMPONENTS = [
         "channel": "display",
         "value": "block",
         "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 12,
+          "of": 12
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "background-color [hover]",
+        "value": "{imported.button.root.background-color-state-hover.{variant}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
+        "variants": {
+          "count": 12,
+          "of": 12
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "border-bottom-color [hover]",
+        "value": "{imported.button.root.border-bottom-color-state-hover.{variant}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
+        "variants": {
+          "count": 12,
+          "of": 12
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "border-left-color [hover]",
+        "value": "{imported.button.root.border-left-color-state-hover.{variant}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
+        "variants": {
+          "count": 12,
+          "of": 12
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "border-right-color [hover]",
+        "value": "{imported.button.root.border-right-color-state-hover.{variant}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
+        "variants": {
+          "count": 12,
+          "of": 12
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "border-top-color [hover]",
+        "value": "{imported.button.root.border-top-color-state-hover.{variant}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
+        "variants": {
+          "count": 12,
+          "of": 12
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "color [hover]",
+        "value": "{imported.button.root.color-state-hover.{variant}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
+        "variants": {
+          "count": 12,
+          "of": 12
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "outline-color [hover]",
+        "value": "{imported.button.root.outline-color-state-hover.{variant}}",
+        "reason": "observed by the computed capture and refused by the contract grammar — state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
         "variants": {
           "count": 12,
           "of": 12

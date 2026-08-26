@@ -9,7 +9,7 @@
   "elementsPerCapture": 1,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 19
+    "root": 22
   },
   "folds": {
     "count": 10,
@@ -75,8 +75,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 6,
-    "mintedLeavesFolded": 6
+    "mintedLeavesUnfolded": 9,
+    "mintedLeavesFolded": 9
   },
   "bound": {
     "cellsChecked": 0,
@@ -85,18 +85,18 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 6,
-    "baseBindings": 5,
+    "leaves": 9,
+    "baseBindings": 7,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 4,
-      "perAxis": 1,
+      "uniform": 5,
+      "perAxis": 2,
       "perPair": 0,
       "refused": 0
     }
   },
   "declared": {
-    "base": 3,
+    "base": 4,
     "state": 0
   },
   "codeOnly": {
@@ -189,8 +189,8 @@
     "computedPctEqual": 100,
     "rowsFullyEqual": 8,
     "rows": 8,
-    "pixelPerfectExact": 0,
-    "pixelPerfectAA": 0,
+    "pixelPerfectExact": 8,
+    "pixelPerfectAA": 8,
     "pairs": 8
   },
   "focusVisibleDriverMatched": 0,

@@ -15,6 +15,20 @@
             "$value": "#808080",
             "$type": "color"
           },
+          "height": {
+            "unset": {
+              "$value": "1px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "64px",
+              "$type": "dimension"
+            }
+          },
+          "line-height": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
           "min-height": {
             "$value": "0px",
             "$type": "dimension"
@@ -116,6 +130,11 @@
       },
       {
         "part": "root",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", sans-serif"
+      },
+      {
+        "part": "root",
         "channel": "overflow-x",
         "value": "hidden"
       },
@@ -131,7 +150,7 @@
     {
       "part": "root",
       "channel": "unicode-bidi",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <hr>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <hr> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "sample": "isolate",
       "distinctValues": 1
     }
@@ -146,10 +165,18 @@
   },
   "bindingContradictions": [],
   "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [],
+  "interactionOnlyPlaneDropCount": 0,
   "structureReceipts": [],
   "styledChannelReceipts": [
     "block-root-width-admitted: root — display:block root fills its container in CSS; the captured stage width joins fusion (stage-dependent, receipted — the canvas card draws at the captured block width instead of hugging its text)",
+    "token-named-geometry-admitted: root.height — the library's own stylesheet binds it to --al-theme-border-width (1px) at `.al-c-divider`; a dimension named by a token is a design value, not an environment measurement, so it joins fusion with its name (the absolute-cluster / table / block-root doors are unchanged)",
     "control-fallback: no control for <hr> — span control used (part root)",
+    "ua-control-fallback: no UA baseline for <hr> — span UA control used (part root)",
+    "control-equal-drop: root — 695 of 717 admitted channels compared EQUAL to the <hr> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: root — 2 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: font-family=\"IBM Plex Sans\", sans-serif (in-page control also read \"IBM Plex Sans\", sans-serif; UA control reads Times); line-height=24px (in-page control also read 24px; UA control reads normal)",
+    "control-equal-drop: root — 372 channel(s) EQUAL to the <hr> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "geometry-excluded: root — block-size 1px, inline-size 288px, perspective-origin 144px 0.5px, transform-origin 144px 0.5px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (root); -webkit-text-stroke-color (root)",
     "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold."
   ],
@@ -180,7 +207,8 @@
   },
   "enrichmentNotes": [
     "declared fact carried: root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: root.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: root.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)"
+    "declared fact carried: root.font-family = \"IBM Plex Sans\", sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)"
   ]
 }

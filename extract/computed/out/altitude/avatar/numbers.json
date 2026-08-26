@@ -9,15 +9,196 @@
   "elementsPerCapture": 3,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 20,
-    "avatar__badge": 7,
-    "badge": 28
+    "root": 34,
+    "avatar__badge": 19,
+    "badge": 40
   },
   "folds": {
-    "count": 0,
-    "receipts": [],
-    "mintedLeavesUnfolded": 31,
-    "mintedLeavesFolded": 31
+    "count": 30,
+    "receipts": [
+      {
+        "part": "root",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "avatar__badge",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "avatar__badge",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "avatar__badge",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "avatar__badge",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "avatar__badge",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "avatar__badge",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "avatar__badge",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "avatar__badge",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "avatar__badge",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "avatar__badge",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "badge",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "badge",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "badge",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "badge",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "badge",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "badge",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "badge",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "badge",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "badge",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "badge",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      }
+    ],
+    "mintedLeavesUnfolded": 36,
+    "mintedLeavesFolded": 36
   },
   "bound": {
     "cellsChecked": 0,
@@ -26,18 +207,18 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 31,
-    "baseBindings": 37,
+    "leaves": 36,
+    "baseBindings": 42,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 27,
-      "perAxis": 10,
+      "uniform": 30,
+      "perAxis": 12,
       "perPair": 0,
       "refused": 0
     }
   },
   "declared": {
-    "base": 6,
+    "base": 9,
     "state": 0
   },
   "codeOnly": {
@@ -74,60 +255,60 @@
       "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
     },
     "exact": {
-      "mean": 0,
-      "max": 0,
-      "perfect": 16
+      "mean": 0.42480468750000017,
+      "max": 0.5501302083333334,
+      "perfect": 0
     },
     "aa": {
-      "mean": 0,
-      "max": 0,
-      "perfect": 16
+      "mean": 0.10253906249999996,
+      "max": 0.12369791666666667,
+      "perfect": 0
     },
     "worst": [
       {
         "key": "unset.off__default",
-        "pctExact": 0,
-        "pctAA": 0
+        "pctExact": 0.5501302083333334,
+        "pctAA": 0.12369791666666667
       },
       {
         "key": "unset.off__hover",
-        "pctExact": 0,
-        "pctAA": 0
+        "pctExact": 0.5501302083333334,
+        "pctAA": 0.12369791666666667
       },
       {
         "key": "unset.off__focus-visible",
-        "pctExact": 0,
-        "pctAA": 0
+        "pctExact": 0.5501302083333334,
+        "pctAA": 0.12369791666666667
       },
       {
         "key": "unset.off__active",
-        "pctExact": 0,
-        "pctAA": 0
+        "pctExact": 0.5501302083333334,
+        "pctAA": 0.12369791666666667
       },
       {
         "key": "unset.on__default",
-        "pctExact": 0,
-        "pctAA": 0
+        "pctExact": 0.5501302083333334,
+        "pctAA": 0.12369791666666667
       },
       {
         "key": "unset.on__hover",
-        "pctExact": 0,
-        "pctAA": 0
+        "pctExact": 0.5501302083333334,
+        "pctAA": 0.12369791666666667
       },
       {
         "key": "unset.on__focus-visible",
-        "pctExact": 0,
-        "pctAA": 0
+        "pctExact": 0.5501302083333334,
+        "pctAA": 0.12369791666666667
       },
       {
         "key": "unset.on__active",
-        "pctExact": 0,
-        "pctAA": 0
+        "pctExact": 0.5501302083333334,
+        "pctAA": 0.12369791666666667
       }
     ]
   },
   "gate": {
-    "computedPctEqual": 81.69014084507042,
+    "computedPctEqual": 89.07563025210084,
     "rowsFullyEqual": 0,
     "rows": 16,
     "pixelPerfectExact": 0,

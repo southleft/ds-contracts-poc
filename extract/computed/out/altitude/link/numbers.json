@@ -9,7 +9,7 @@
   "elementsPerCapture": 1,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 27
+    "root": 29
   },
   "folds": {
     "count": 10,
@@ -96,7 +96,7 @@
     }
   },
   "declared": {
-    "base": 5,
+    "base": 7,
     "state": 1
   },
   "codeOnly": {
@@ -114,8 +114,8 @@
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
     "cellsCompared": 12688,
-    "cellsMatched": 12652,
-    "pct": 99.71626733921816,
+    "cellsMatched": 12656,
+    "pct": 99.74779319041615,
     "namedExclusions": [
       "app-region",
       "text-decoration",
@@ -128,15 +128,15 @@
         16
       ],
       [
-        "inline-size",
+        "perspective-origin",
         8
+      ],
+      [
+        "inline-size",
+        4
       ],
       [
         "width",
-        8
-      ],
-      [
-        "perspective-origin",
         4
       ]
     ]
@@ -150,64 +150,64 @@
       "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
     },
     "exact": {
-      "mean": 0.38472493489583337,
-      "max": 1.38671875,
-      "perfect": 8
+      "mean": 0.8671061197916666,
+      "max": 1.6634114583333333,
+      "perfect": 0
     },
     "aa": {
-      "mean": 0.2587890625,
-      "max": 1.142578125,
-      "perfect": 8
+      "mean": 0.43212890625,
+      "max": 1.298828125,
+      "perfect": 0
     },
     "worst": [
       {
         "key": "sm__focus-visible",
-        "pctExact": 1.38671875,
-        "pctAA": 1.142578125
+        "pctExact": 1.6634114583333333,
+        "pctAA": 1.298828125
       },
       {
         "key": "xs__focus-visible",
-        "pctExact": 1.3444010416666667,
-        "pctAA": 1.0872395833333333
+        "pctExact": 1.5234375,
+        "pctAA": 1.19140625
       },
       {
-        "key": "xs__default",
-        "pctExact": 0.5891927083333334,
-        "pctAA": 0.33203125
+        "key": "unset__default",
+        "pctExact": 0.869140625,
+        "pctAA": 0.439453125
       },
       {
-        "key": "xs__active",
-        "pctExact": 0.5891927083333334,
-        "pctAA": 0.33203125
+        "key": "unset__focus-visible",
+        "pctExact": 0.869140625,
+        "pctAA": 0.439453125
       },
       {
-        "key": "xs__hover",
-        "pctExact": 0.5859375,
-        "pctAA": 0.3255208333333333
+        "key": "unset__active",
+        "pctExact": 0.869140625,
+        "pctAA": 0.439453125
       },
       {
         "key": "sm__default",
-        "pctExact": 0.5533854166666666,
-        "pctAA": 0.3092447916666667
+        "pctExact": 0.8040364583333334,
+        "pctAA": 0.439453125
       },
       {
         "key": "sm__active",
-        "pctExact": 0.5533854166666666,
-        "pctAA": 0.3092447916666667
+        "pctExact": 0.8040364583333334,
+        "pctAA": 0.439453125
       },
       {
         "key": "sm__hover",
-        "pctExact": 0.5533854166666666,
-        "pctAA": 0.302734375
+        "pctExact": 0.8040364583333334,
+        "pctAA": 0.4231770833333333
       }
     ]
   },
   "gate": {
-    "computedPctEqual": 82.4074074074074,
+    "computedPctEqual": 83.62068965517241,
     "rowsFullyEqual": 0,
     "rows": 16,
-    "pixelPerfectExact": 0,
-    "pixelPerfectAA": 0,
+    "pixelPerfectExact": 4,
+    "pixelPerfectAA": 4,
     "pairs": 16
   },
   "focusVisibleDriverMatched": 4,

@@ -230,9 +230,27 @@ const insideTemplate = (spans: Array<[number, number]>, line: number) => spans.s
  *      Four such channels exist in antd; they are a real, newly visible hole,
  *      and they are counted rather than absorbed.
  *  astryx and mui stay at 0 authored: neither corpus carries var() evidence on a
- *  dropped channel, so neither can contribute to this split. */
+ *  dropped channel, so neither can contribute to this split.
+ *
+ *  ALTITUDE RE-PINNED FOR ITS RE-CAPTURE (proof/altitude-badge). The badge proof
+ *  re-captured the whole altitude library through the current engine, so this
+ *  library's census moves and no other's does:
+ *    · altitude control-equal drops 4,734 -> 4,747 (+13); corpus total
+ *      246,318 -> 246,331. The other eight libraries are unmoved to the unit,
+ *      which is what says this is the re-capture and not an engine change.
+ *    · components 8, LIBRARY-AUTHORED 6 and span-fallback 5 do NOT move. The
+ *      "missing ink" surface this census exists to size is the same size; only
+ *      the door's own subtraction count grew.
+ *  WHY IT ROSE, measured rather than assumed: on `main` the altitude captures
+ *  carry `_provenance.browser` Chromium 149.0.7827.55 with `uaBaselineBrowser`
+ *  151.0.7922.34 — the component rendered on 149, the control it is subtracted
+ *  against BACKFILLED on 151. The re-capture mints both on the same pinned 149,
+ *  so 13 channels that differed from a 151-drawn control now equal a 149-drawn
+ *  one and are subtracted at the door. A RISE here is a rise in silent drops,
+ *  so it is recorded as a cost and not as progress: these 13 are now counted,
+ *  by name, in the surface this register exists to make visible. */
 export const PINNED_CENSUS: Record<string, { components: number; drops: number; authored: number; fallback: number }> = {
-  altitude: { components: 8, drops: 4734, authored: 6, fallback: 5 },
+  altitude: { components: 8, drops: 4747, authored: 6, fallback: 5 },
   antd: { components: 12, drops: 25048, authored: 23, fallback: 20 },
   astryx: { components: 10, drops: 23321, authored: 0, fallback: 16 },
   carbon: { components: 10, drops: 37271, authored: 12, fallback: 32 },

@@ -85,8 +85,7 @@ const COMPONENTS = [
             "minWidth": "imported/badge/root/min-width/dot",
             "paddingLeft": "imported/badge/root/padding-left/dot",
             "paddingRight": "imported/badge/root/padding-right/dot"
-          },
-          "children": []
+          }
         }
       },
       {
@@ -157,8 +156,7 @@ const COMPONENTS = [
             "minWidth": "imported/badge/root/min-width/dot",
             "paddingLeft": "imported/badge/root/padding-left/dot",
             "paddingRight": "imported/badge/root/padding-right/dot"
-          },
-          "children": []
+          }
         }
       },
       {
@@ -229,8 +227,7 @@ const COMPONENTS = [
             "minWidth": "imported/badge/root/min-width/dot",
             "paddingLeft": "imported/badge/root/padding-left/dot",
             "paddingRight": "imported/badge/root/padding-right/dot"
-          },
-          "children": []
+          }
         }
       },
       {
@@ -301,8 +298,7 @@ const COMPONENTS = [
             "minWidth": "imported/badge/root/min-width/dot",
             "paddingLeft": "imported/badge/root/padding-left/dot",
             "paddingRight": "imported/badge/root/padding-right/dot"
-          },
-          "children": []
+          }
         }
       }
     ],

@@ -90,6 +90,7 @@
         "prop": "children"
       },
       "tokens": {
+        "color": "{imported.heading.root.color}",
         "font-size": "{imported.heading.root.font-size.unset}",
         "line-height": "{imported.heading.root.line-height.unset}",
         "min-height": "{imported.heading.root.min-height}",
@@ -97,6 +98,17 @@
         "width": "{imported.heading.root.width}"
       },
       "tokensByProp": [
+        {
+          "prop": "weight",
+          "map": {
+            "bold": {
+              "font-weight": "{imported.heading.root.font-weight.bold}"
+            },
+            "regular": {
+              "font-weight": "{imported.heading.root.font-weight.regular}"
+            }
+          }
+        },
         {
           "prop": "variant",
           "map": {
@@ -123,17 +135,6 @@
             "sm": {
               "font-size": "{imported.heading.root.font-size.sm}",
               "line-height": "{imported.heading.root.line-height.sm}"
-            }
-          }
-        },
-        {
-          "prop": "weight",
-          "map": {
-            "bold": {
-              "font-weight": "{imported.heading.root.font-weight.bold}"
-            },
-            "regular": {
-              "font-weight": "{imported.heading.root.font-weight.regular}"
             }
           }
         }

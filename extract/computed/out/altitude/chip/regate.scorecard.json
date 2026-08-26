@@ -3,6 +3,7 @@
   "component": "Chip",
   "config": "extract/computed/configs/altitude.json",
   "capturedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "declared": {
     "base": [
       {
@@ -35,13 +36,14 @@
     "component": "Chip",
     "generatedBy": "extract/computed/gate.ts",
     "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+    "renderedBy": "149.0.7827.55",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 12,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 2016,
-      "cellsEqual": 1904,
-      "pctEqual": 94.44444444444444,
+      "cellsCompared": 1968,
+      "cellsEqual": 1856,
+      "pctEqual": 94.3089430894309,
       "rowsFullyEqual": 0,
       "rows": 48
     },
@@ -67,7 +69,7 @@
       "mintedLeavesUnfolded": 118,
       "baseBindings": 26,
       "stateBindings": 3,
-      "codeOnlyChannels": 1,
+      "codeOnlyChannels": 0,
       "overflowBindings": 0,
       "folds": 5
     },
@@ -167,16 +169,14 @@
         8
       ]
     ],
-    "namedLosses": [
-      "code-only: root.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
-    ],
+    "namedLosses": [],
     "unresolvedTokenRefs": {
       "count": 0,
       "refs": []
     },
     "shippedMinted": {
       "path": "examples/altitude/tokens/altitude-minted.dtcg.json",
-      "leavesAdded": 227,
+      "leavesAdded": 236,
       "divergent": [
         {
           "token": "imported.chip.root.background-color.danger",
@@ -255,8 +255,8 @@
     "rows": [
       {
         "key": "unset.unset__default",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -272,8 +272,8 @@
       },
       {
         "key": "unset.unset__hover",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -289,8 +289,8 @@
       },
       {
         "key": "unset.unset__focus-visible",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -306,8 +306,8 @@
       },
       {
         "key": "unset.unset__active",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -323,8 +323,8 @@
       },
       {
         "key": "unset.squared__default",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -340,8 +340,8 @@
       },
       {
         "key": "unset.squared__hover",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -357,8 +357,8 @@
       },
       {
         "key": "unset.squared__focus-visible",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -374,8 +374,8 @@
       },
       {
         "key": "unset.squared__active",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -391,8 +391,8 @@
       },
       {
         "key": "secondary.unset__default",
-        "channelsCompared": 42,
-        "channelsEqual": 33,
+        "channelsCompared": 41,
+        "channelsEqual": 32,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -456,8 +456,8 @@
       },
       {
         "key": "secondary.unset__hover",
-        "channelsCompared": 42,
-        "channelsEqual": 33,
+        "channelsCompared": 41,
+        "channelsEqual": 32,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -521,8 +521,8 @@
       },
       {
         "key": "secondary.unset__focus-visible",
-        "channelsCompared": 42,
-        "channelsEqual": 33,
+        "channelsCompared": 41,
+        "channelsEqual": 32,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -586,8 +586,8 @@
       },
       {
         "key": "secondary.unset__active",
-        "channelsCompared": 42,
-        "channelsEqual": 33,
+        "channelsCompared": 41,
+        "channelsEqual": 32,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -651,8 +651,8 @@
       },
       {
         "key": "secondary.squared__default",
-        "channelsCompared": 42,
-        "channelsEqual": 33,
+        "channelsCompared": 41,
+        "channelsEqual": 32,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -716,8 +716,8 @@
       },
       {
         "key": "secondary.squared__hover",
-        "channelsCompared": 42,
-        "channelsEqual": 33,
+        "channelsCompared": 41,
+        "channelsEqual": 32,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -781,8 +781,8 @@
       },
       {
         "key": "secondary.squared__focus-visible",
-        "channelsCompared": 42,
-        "channelsEqual": 33,
+        "channelsCompared": 41,
+        "channelsEqual": 32,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -846,8 +846,8 @@
       },
       {
         "key": "secondary.squared__active",
-        "channelsCompared": 42,
-        "channelsEqual": 33,
+        "channelsCompared": 41,
+        "channelsEqual": 32,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -911,8 +911,8 @@
       },
       {
         "key": "info.unset__default",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -928,8 +928,8 @@
       },
       {
         "key": "info.unset__hover",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -945,8 +945,8 @@
       },
       {
         "key": "info.unset__focus-visible",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -962,8 +962,8 @@
       },
       {
         "key": "info.unset__active",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -979,8 +979,8 @@
       },
       {
         "key": "info.squared__default",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -996,8 +996,8 @@
       },
       {
         "key": "info.squared__hover",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1013,8 +1013,8 @@
       },
       {
         "key": "info.squared__focus-visible",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1030,8 +1030,8 @@
       },
       {
         "key": "info.squared__active",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1047,8 +1047,8 @@
       },
       {
         "key": "success.unset__default",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1064,8 +1064,8 @@
       },
       {
         "key": "success.unset__hover",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1081,8 +1081,8 @@
       },
       {
         "key": "success.unset__focus-visible",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1098,8 +1098,8 @@
       },
       {
         "key": "success.unset__active",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1115,8 +1115,8 @@
       },
       {
         "key": "success.squared__default",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1132,8 +1132,8 @@
       },
       {
         "key": "success.squared__hover",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1149,8 +1149,8 @@
       },
       {
         "key": "success.squared__focus-visible",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1166,8 +1166,8 @@
       },
       {
         "key": "success.squared__active",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1183,8 +1183,8 @@
       },
       {
         "key": "warning.unset__default",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1200,8 +1200,8 @@
       },
       {
         "key": "warning.unset__hover",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1217,8 +1217,8 @@
       },
       {
         "key": "warning.unset__focus-visible",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1234,8 +1234,8 @@
       },
       {
         "key": "warning.unset__active",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1251,8 +1251,8 @@
       },
       {
         "key": "warning.squared__default",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1268,8 +1268,8 @@
       },
       {
         "key": "warning.squared__hover",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1285,8 +1285,8 @@
       },
       {
         "key": "warning.squared__focus-visible",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1302,8 +1302,8 @@
       },
       {
         "key": "warning.squared__active",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1319,8 +1319,8 @@
       },
       {
         "key": "danger.unset__default",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1336,8 +1336,8 @@
       },
       {
         "key": "danger.unset__hover",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1353,8 +1353,8 @@
       },
       {
         "key": "danger.unset__focus-visible",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1370,8 +1370,8 @@
       },
       {
         "key": "danger.unset__active",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1387,8 +1387,8 @@
       },
       {
         "key": "danger.squared__default",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1404,8 +1404,8 @@
       },
       {
         "key": "danger.squared__hover",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1421,8 +1421,8 @@
       },
       {
         "key": "danger.squared__focus-visible",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1438,8 +1438,8 @@
       },
       {
         "key": "danger.squared__active",
-        "channelsCompared": 42,
-        "channelsEqual": 41,
+        "channelsCompared": 41,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",

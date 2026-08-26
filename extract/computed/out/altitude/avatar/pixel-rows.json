@@ -1,82 +1,82 @@
 [
   {
     "key": "unset.off__default",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 0.5501302083333334,
+    "pctAA": 0.12369791666666667
   },
   {
     "key": "unset.off__hover",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 0.5501302083333334,
+    "pctAA": 0.12369791666666667
   },
   {
     "key": "unset.off__focus-visible",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 0.5501302083333334,
+    "pctAA": 0.12369791666666667
   },
   {
     "key": "unset.off__active",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 0.5501302083333334,
+    "pctAA": 0.12369791666666667
   },
   {
     "key": "unset.on__default",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 0.5501302083333334,
+    "pctAA": 0.12369791666666667
   },
   {
     "key": "unset.on__hover",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 0.5501302083333334,
+    "pctAA": 0.12369791666666667
   },
   {
     "key": "unset.on__focus-visible",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 0.5501302083333334,
+    "pctAA": 0.12369791666666667
   },
   {
     "key": "unset.on__active",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 0.5501302083333334,
+    "pctAA": 0.12369791666666667
   },
   {
     "key": "sm.off__default",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 0.2994791666666667,
+    "pctAA": 0.08138020833333333
   },
   {
     "key": "sm.off__hover",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 0.2994791666666667,
+    "pctAA": 0.08138020833333333
   },
   {
     "key": "sm.off__focus-visible",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 0.2994791666666667,
+    "pctAA": 0.08138020833333333
   },
   {
     "key": "sm.off__active",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 0.2994791666666667,
+    "pctAA": 0.08138020833333333
   },
   {
     "key": "sm.on__default",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 0.2994791666666667,
+    "pctAA": 0.08138020833333333
   },
   {
     "key": "sm.on__hover",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 0.2994791666666667,
+    "pctAA": 0.08138020833333333
   },
   {
     "key": "sm.on__focus-visible",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 0.2994791666666667,
+    "pctAA": 0.08138020833333333
   },
   {
     "key": "sm.on__active",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 0.2994791666666667,
+    "pctAA": 0.08138020833333333
   }
 ]

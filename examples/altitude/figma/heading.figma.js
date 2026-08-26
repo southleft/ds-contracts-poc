@@ -49,6 +49,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/heading/root/font-size/display-lg",
               "fontWeightVar": "imported/heading/root/font-weight/regular",
               "lineHeightVar": "imported/heading/root/line-height/display-lg",
+              "textFill": "imported/heading/root/color",
               "lineHeight": {
                 "value": 52,
                 "unit": "PIXELS"
@@ -90,6 +91,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/heading/root/font-size/display-lg",
               "fontWeightVar": "imported/heading/root/font-weight/bold",
               "lineHeightVar": "imported/heading/root/line-height/display-lg",
+              "textFill": "imported/heading/root/color",
               "lineHeight": {
                 "value": 52,
                 "unit": "PIXELS"
@@ -131,6 +133,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/heading/root/font-size/display-md",
               "fontWeightVar": "imported/heading/root/font-weight/regular",
               "lineHeightVar": "imported/heading/root/line-height/display-md",
+              "textFill": "imported/heading/root/color",
               "lineHeight": {
                 "value": 44,
                 "unit": "PIXELS"
@@ -172,6 +175,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/heading/root/font-size/display-md",
               "fontWeightVar": "imported/heading/root/font-weight/bold",
               "lineHeightVar": "imported/heading/root/line-height/display-md",
+              "textFill": "imported/heading/root/color",
               "lineHeight": {
                 "value": 44,
                 "unit": "PIXELS"
@@ -213,6 +217,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/heading/root/font-size/display-sm",
               "fontWeightVar": "imported/heading/root/font-weight/regular",
               "lineHeightVar": "imported/heading/root/line-height/display-sm",
+              "textFill": "imported/heading/root/color",
               "lineHeight": {
                 "value": 40,
                 "unit": "PIXELS"
@@ -254,6 +259,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/heading/root/font-size/display-sm",
               "fontWeightVar": "imported/heading/root/font-weight/bold",
               "lineHeightVar": "imported/heading/root/line-height/display-sm",
+              "textFill": "imported/heading/root/color",
               "lineHeight": {
                 "value": 40,
                 "unit": "PIXELS"
@@ -295,6 +301,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/heading/root/font-size/lg",
               "fontWeightVar": "imported/heading/root/font-weight/regular",
               "lineHeightVar": "imported/heading/root/line-height/lg",
+              "textFill": "imported/heading/root/color",
               "lineHeight": {
                 "value": 36,
                 "unit": "PIXELS"
@@ -336,6 +343,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/heading/root/font-size/lg",
               "fontWeightVar": "imported/heading/root/font-weight/bold",
               "lineHeightVar": "imported/heading/root/line-height/lg",
+              "textFill": "imported/heading/root/color",
               "lineHeight": {
                 "value": 36,
                 "unit": "PIXELS"
@@ -377,6 +385,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/heading/root/font-size/md",
               "fontWeightVar": "imported/heading/root/font-weight/regular",
               "lineHeightVar": "imported/heading/root/line-height/md",
+              "textFill": "imported/heading/root/color",
               "lineHeight": {
                 "value": 32,
                 "unit": "PIXELS"
@@ -418,6 +427,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/heading/root/font-size/md",
               "fontWeightVar": "imported/heading/root/font-weight/bold",
               "lineHeightVar": "imported/heading/root/line-height/md",
+              "textFill": "imported/heading/root/color",
               "lineHeight": {
                 "value": 32,
                 "unit": "PIXELS"
@@ -459,6 +469,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/heading/root/font-size/sm",
               "fontWeightVar": "imported/heading/root/font-weight/regular",
               "lineHeightVar": "imported/heading/root/line-height/sm",
+              "textFill": "imported/heading/root/color",
               "lineHeight": {
                 "value": 28,
                 "unit": "PIXELS"
@@ -500,6 +511,7 @@ const COMPONENTS = [
               "fontSizeVar": "imported/heading/root/font-size/sm",
               "fontWeightVar": "imported/heading/root/font-weight/bold",
               "lineHeightVar": "imported/heading/root/line-height/sm",
+              "textFill": "imported/heading/root/color",
               "lineHeight": {
                 "value": 28,
                 "unit": "PIXELS"

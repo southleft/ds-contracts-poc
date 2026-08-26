@@ -3,6 +3,7 @@
   "component": "Button",
   "config": "extract/computed/configs/altitude.json",
   "capturedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "declared": {
     "base": [
       {
@@ -65,13 +66,14 @@
     "component": "Button",
     "generatedBy": "extract/computed/gate.ts",
     "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+    "renderedBy": "149.0.7827.55",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 5,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 1340,
-      "cellsEqual": 1103,
-      "pctEqual": 82.31343283582089,
+      "cellsCompared": 1300,
+      "cellsEqual": 1063,
+      "pctEqual": 81.76923076923077,
       "rowsFullyEqual": 0,
       "rows": 20
     },
@@ -97,7 +99,7 @@
       "mintedLeavesUnfolded": 261,
       "baseBindings": 34,
       "stateBindings": 11,
-      "codeOnlyChannels": 2,
+      "codeOnlyChannels": 0,
       "overflowBindings": 9,
       "folds": 15
     },
@@ -230,9 +232,7 @@
       "overflow: root.border-right-color [hover] — state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
       "overflow: root.border-top-color [hover] — state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
       "overflow: root.color [hover] — state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
-      "overflow: root.outline-color [hover] — state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
-      "code-only: root.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: label.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+      "overflow: root.outline-color [hover] — state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
     ],
     "unresolvedTokenRefs": {
       "count": 0,
@@ -240,7 +240,7 @@
     },
     "shippedMinted": {
       "path": "examples/altitude/tokens/altitude-minted.dtcg.json",
-      "leavesAdded": 204,
+      "leavesAdded": 213,
       "divergent": [
         {
           "token": "imported.button.root.background-color-state-hover.bare",
@@ -343,8 +343,8 @@
     "rows": [
       {
         "key": "unset__default",
-        "channelsCompared": 67,
-        "channelsEqual": 66,
+        "channelsCompared": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -360,8 +360,8 @@
       },
       {
         "key": "unset__hover",
-        "channelsCompared": 67,
-        "channelsEqual": 66,
+        "channelsCompared": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -377,8 +377,8 @@
       },
       {
         "key": "unset__focus-visible",
-        "channelsCompared": 67,
-        "channelsEqual": 66,
+        "channelsCompared": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -394,8 +394,8 @@
       },
       {
         "key": "unset__active",
-        "channelsCompared": 67,
-        "channelsEqual": 65,
+        "channelsCompared": 65,
+        "channelsEqual": 63,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -417,8 +417,8 @@
       },
       {
         "key": "secondary__default",
-        "channelsCompared": 67,
-        "channelsEqual": 66,
+        "channelsCompared": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -434,8 +434,8 @@
       },
       {
         "key": "secondary__hover",
-        "channelsCompared": 67,
-        "channelsEqual": 43,
+        "channelsCompared": 65,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -589,8 +589,8 @@
       },
       {
         "key": "secondary__focus-visible",
-        "channelsCompared": 67,
-        "channelsEqual": 66,
+        "channelsCompared": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -606,8 +606,8 @@
       },
       {
         "key": "secondary__active",
-        "channelsCompared": 67,
-        "channelsEqual": 43,
+        "channelsCompared": 65,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -761,8 +761,8 @@
       },
       {
         "key": "tertiary__default",
-        "channelsCompared": 67,
-        "channelsEqual": 58,
+        "channelsCompared": 65,
+        "channelsEqual": 56,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -826,8 +826,8 @@
       },
       {
         "key": "tertiary__hover",
-        "channelsCompared": 67,
-        "channelsEqual": 35,
+        "channelsCompared": 65,
+        "channelsEqual": 33,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1029,8 +1029,8 @@
       },
       {
         "key": "tertiary__focus-visible",
-        "channelsCompared": 67,
-        "channelsEqual": 58,
+        "channelsCompared": 65,
+        "channelsEqual": 56,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1094,8 +1094,8 @@
       },
       {
         "key": "tertiary__active",
-        "channelsCompared": 67,
-        "channelsEqual": 35,
+        "channelsCompared": 65,
+        "channelsEqual": 33,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1297,8 +1297,8 @@
       },
       {
         "key": "bare__default",
-        "channelsCompared": 67,
-        "channelsEqual": 66,
+        "channelsCompared": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1314,8 +1314,8 @@
       },
       {
         "key": "bare__hover",
-        "channelsCompared": 67,
-        "channelsEqual": 43,
+        "channelsCompared": 65,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1469,8 +1469,8 @@
       },
       {
         "key": "bare__focus-visible",
-        "channelsCompared": 67,
-        "channelsEqual": 66,
+        "channelsCompared": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1486,8 +1486,8 @@
       },
       {
         "key": "bare__active",
-        "channelsCompared": 67,
-        "channelsEqual": 43,
+        "channelsCompared": 65,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1641,8 +1641,8 @@
       },
       {
         "key": "danger__default",
-        "channelsCompared": 67,
-        "channelsEqual": 66,
+        "channelsCompared": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1658,8 +1658,8 @@
       },
       {
         "key": "danger__hover",
-        "channelsCompared": 67,
-        "channelsEqual": 43,
+        "channelsCompared": 65,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1813,8 +1813,8 @@
       },
       {
         "key": "danger__focus-visible",
-        "channelsCompared": 67,
-        "channelsEqual": 66,
+        "channelsCompared": 65,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1830,8 +1830,8 @@
       },
       {
         "key": "danger__active",
-        "channelsCompared": 67,
-        "channelsEqual": 43,
+        "channelsCompared": 65,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",

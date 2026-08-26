@@ -11,6 +11,14 @@
       "selector": ".al-c-divider"
     },
     {
+      "leaf": "imported.divider.root.height.unset",
+      "token": "theme-border-width",
+      "part": "root",
+      "cssProperty": "height",
+      "varName": "--al-theme-border-width",
+      "selector": ".al-c-divider"
+    },
+    {
       "leaf": "imported.divider.root.width.vertical",
       "token": "theme-border-width",
       "part": "root",

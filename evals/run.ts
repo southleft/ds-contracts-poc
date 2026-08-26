@@ -8524,7 +8524,15 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       }
       const batch = run(process.execPath, ['examples/altitude/scripts/build-genesis-batch.mjs']);
       if (batch.status !== 0) throw new Error(`altitude genesis batch refused:\n${batch.out.slice(0, 1600)}`);
-      if (!/mock-proven \(7 sets: Badge\(8\), Button\(12\), Chip\(10\), Divider\(2\), Heading\(12\), IconClose\(7\), Link\(9\); standalone: Avatar; 638 variables\)/.test(batch.out)) {
+      // 638 -> 647 (proof/altitude-badge): the altitude re-capture through the
+      // current engine mints NINE more variables. The same +9 shows up in
+      // extract/computed/minted-orphan-baseline.json as altitude leaves
+      // 315 -> 324, which is what says this is one fact and not two. Every
+      // other term of the line — 7 sets, Badge(8), Button(12), Chip(10),
+      // Divider(2), Heading(12), IconClose(7), Link(9), standalone Avatar — is
+      // UNMOVED, so the set/variant shape the pin exists to guard is intact and
+      // only the variable inventory grew.
+      if (!/mock-proven \(7 sets: Badge\(8\), Button\(12\), Chip\(10\), Divider\(2\), Heading\(12\), IconClose\(7\), Link\(9\); standalone: Avatar; 647 variables\)/.test(batch.out)) {
         throw new Error(`altitude genesis batch missing the mock-proof line:\n${batch.out.slice(0, 800)}`);
       }
       // THE SHADOW-DOM ANATOMY PINS, read off the COMMITTED promoted contracts.
