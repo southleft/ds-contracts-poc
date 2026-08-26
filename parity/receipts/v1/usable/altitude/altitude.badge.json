@@ -1,0 +1,239 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / altitude",
+  "setNodeId": "39:6692",
+  "setName": "Badge (altitude.badge)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:6680",
+  "variantNodeName": "Variant=Info, Dot=Default",
+  "axes": [
+    {
+      "axis": "Variant",
+      "values": [
+        "Info",
+        "Success",
+        "Warning",
+        "Danger"
+      ]
+    },
+    {
+      "axis": "Dot",
+      "values": [
+        "Default",
+        "Dot"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 8,
+  "variantChildNames": [
+    "Variant=Info, Dot=Default",
+    "Variant=Info, Dot=Dot",
+    "Variant=Success, Dot=Default",
+    "Variant=Success, Dot=Dot",
+    "Variant=Warning, Dot=Default",
+    "Variant=Warning, Dot=Dot",
+    "Variant=Danger, Dot=Default",
+    "Variant=Danger, Dot=Dot"
+  ],
+  "reflow": {
+    "target": "39:6680",
+    "targetName": "Variant=Info, Dot=Default",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "CENTER",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 44,
+      "h": 20,
+      "children": [
+        {
+          "id": "65:212",
+          "name": "label",
+          "type": "TEXT",
+          "x": 4,
+          "y": 4,
+          "w": 36,
+          "h": 12,
+          "ax": 4,
+          "ay": 4,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 84,
+      "h": 60,
+      "children": [
+        {
+          "id": "65:212",
+          "name": "label",
+          "type": "TEXT",
+          "x": 24,
+          "y": 24,
+          "w": 36,
+          "h": 12,
+          "ax": 24,
+          "ay": 24,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "label",
+        "dx": 20,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 44,
+      "h": 20
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:221",
+    "baseline": {
+      "geometry": "7e8876efe9972964",
+      "fills": "b61eaa01eee3c100",
+      "text": "1068ebc29562c1c0"
+    },
+    "axes": [
+      {
+        "axis": "Variant",
+        "values": [
+          {
+            "value": "Info",
+            "geometry": "7e8876efe9972964",
+            "fills": "b61eaa01eee3c100",
+            "text": "1068ebc29562c1c0"
+          },
+          {
+            "value": "Success",
+            "geometry": "7e8876efe9972964",
+            "fills": "14df0dcd3610d9af",
+            "text": "1068ebc29562c1c0"
+          },
+          {
+            "value": "Warning",
+            "geometry": "7e8876efe9972964",
+            "fills": "dd7b59f4bb811e1c",
+            "text": "1068ebc29562c1c0"
+          },
+          {
+            "value": "Danger",
+            "geometry": "7e8876efe9972964",
+            "fills": "7d4646ebfff51444",
+            "text": "1068ebc29562c1c0"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Dot",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "7e8876efe9972964",
+            "fills": "b61eaa01eee3c100",
+            "text": "1068ebc29562c1c0"
+          },
+          {
+            "value": "Dot",
+            "geometry": "9e9b74241b16a7c2",
+            "fills": "575b9733e0a4d300",
+            "text": "00001505811c9dc5"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 11,
+    "bound": 11,
+    "inferred": 0,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 3,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Variant=Info, Dot=Default",
+      "name": "Variant=Info, Dot=Default",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 44,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 36,
+      "h": 12,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 151,
+    "sig": "a5bbd7223f0db150"
+  },
+  "canvasAfter": {
+    "nodes": 151,
+    "sig": "a5bbd7223f0db150"
+  },
+  "canvasRestored": true
+}

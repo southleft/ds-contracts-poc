@@ -5638,6 +5638,7 @@ function invertLayout(
     // The generator's root default is row/center/center — a root drawn
     // exactly there proposes no layout block.
     // @door propose.root-default-layout-elided
+    // @lower propose.display-root-layout-elided
     if (direction === 'row' && justify === 'center' && align === 'center' && !grow && !overlap && wrapping === 0) {
       return undefined;
     }

@@ -1,0 +1,56 @@
+{
+  "_marker": "CANVAS-USABLE BASELINE — every named failure of the four usability assertions (reflow, variant switching, token binding, no faked layout) that reproduces on the sets probed today, pinned by library/id/assertion/code/subject/detail. A failure this file does not pin is a NEW RED and fails the gate; a pinned failure that stops reproducing is FIXED and must be re-recorded with its cause named, so a burn-down can never be banked silently; a pin whose set has left the census or is no longer probed is STALE. `detail` carries the discriminating payload — which children froze, which axis values collapsed, which channels are literal — so a pinned defect that CHANGES SHAPE fails as a new red rather than hiding inside an old pin. NOT a list of acceptable defects: it is the burn-down queue, written up in parity/receipts/v1/CANVAS-USABLE.md. Re-record deliberately with `npm run canvas:usable:check -- --write-baseline` and say what moved. Verified in the fast lane by `npm run canvas:usable:check`.",
+  "recordedAt": "2026-08-26",
+  "totals": {
+    "probed": 8,
+    "clean": 3,
+    "pinned": 5
+  },
+  "rows": [
+    {
+      "library": "altitude",
+      "id": "altitude.avatar",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Avatar (altitude.avatar)",
+      "detail": "1/2 frozen; avatar__badge",
+      "why": "`avatar__badge` is minted as a 0x0 FRAME with visible:false, so it neither draws nor participates in the parent's HORIZONTAL auto-layout: growing the component 40x40 moves `label` and leaves the badge exactly where it was. Separately named as \"Avatar's avatar__badge child does not draw\". Fixing the draw fixes this pin — do not re-record it until the badge has a non-zero box."
+    },
+    {
+      "library": "altitude",
+      "id": "altitude.chip",
+      "assertion": "variants",
+      "code": "SET-ERRORS",
+      "subject": "Chip",
+      "detail": "in get_variantGroupProperties: Component set has existing errors (15 children)",
+      "why": "The minted set carries 15 children on TWO different variant schemas — ten rows of `Variant=*, Type=*` beside five of `Variant=*, Type=Squared, State=*` — so Figma marks the component set as having errors and `variantGroupProperties` throws. The set cannot be instantiated against an axis at all, which makes it unusable however it looks. The census manifest declares 2 axes x 10 variants; the emitter put 15 children on the canvas. Fix is in the forward emitter's state-plane placement, not in the canvas."
+    },
+    {
+      "library": "altitude",
+      "id": "altitude.heading",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Variant=Display Lg, Weight=Regular",
+      "detail": "0/1 responded; frozen label",
+      "why": "The variant is VERTICAL with counterAxisSizingMode FIXED and primaryAxisAlignItems MIN, and `label` is a 179-wide TEXT inside a 328-wide frame that is still 179 wide at 368. Nothing stretches, nothing re-aligns: the heading is a fixed box with a fixed word in it. Fixing this means the text part carries a fill/stretch sizing decision (the layout-family lowering rules, plan step 2), not a nudge to this baseline."
+    },
+    {
+      "library": "altitude",
+      "id": "altitude.iconclose",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Size=Xs",
+      "detail": "2/5; /root-xs[0]/Vector[0]·height=3, /root-xs[0]/Vector[0]·width=3",
+      "why": "The reified SVG's `Vector` child carries literal width=3 and height=3 rather than variable-bound sizing. Every other carrying channel on this set is bound or inferred (3/5). This is the exact number the re-promote wave should move: diff the SITES in the receipt's literal-site table, not the percentage, or a round that merely relocated the literals will read as an improvement."
+    },
+    {
+      "library": "altitude",
+      "id": "altitude.link",
+      "assertion": "variants",
+      "code": "DEAD-AXIS-VALUE",
+      "subject": "Link/State",
+      "detail": "Default≡Focus Visible",
+      "why": "`State=Focus Visible` fingerprints identically to `State=Default` on geometry, fills AND text — the focus ring is not drawn, so the axis value exists but renders nothing. A designer switching to Focus Visible sees no change, which is the definition of a dead axis value. Separately named as \"Link's Focus Visible column shows no focus ring\"."
+    }
+  ]
+}
