@@ -1,7 +1,7 @@
 {
-  "passed": 227,
+  "passed": 226,
   "total": 230,
-  "commit": "184be53d2750f68b1f05979a6854692b583e884a",
+  "commit": "dcd0ab8b2e211f49f7fe5026e0f7b1266c7f34b9",
   "dirty": false,
   "recordedAt": "2026-08-26",
   "results": [
@@ -258,7 +258,8 @@
     {
       "id": "golden-generated-output",
       "claim": "C1-determinism",
-      "pass": true
+      "pass": false,
+      "error": "Error: Generated output diverges from golden manifest (59 file[s]): figma-sync/02-accordionitem.js, figma-sync/03-avatar.js, figma-sync/04-avatargroup.js, figma-sync/05-badge.js, figma-sync/06-button.js — if intentional, npm run golden:update in a reviewed change"
     },
     {
       "id": "naxis-full-cartesian-product",
