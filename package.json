@@ -261,7 +261,8 @@
     "required-facts:record": "tsx scripts/required-facts-check.ts --write",
     "corpus:reproducible:check": "tsx scripts/corpus-reproducible-check.ts",
     "bundles:fresh": "node scripts/bundles-fresh.mjs",
-    "host-placement:check": "tsx core/host-placement-check.ts"
+    "host-placement:check": "tsx core/host-placement-check.ts",
+    "eval-reds:self-test": "node scripts/eval-red-ledger-self-test.mjs"
   },
   "engines": {
     "node": ">=20"

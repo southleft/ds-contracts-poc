@@ -1,0 +1,5 @@
+{
+  "$comment": "THE NAMED-RED LEDGER FOR THE EVAL SUITE. `docs:check` refuses a red committed run UNLESS every failing eval id appears here with a cause and a closing condition — and refuses a row here whose eval now passes. A red that is named, caused, and has a stated way to close is CARRIED; a red that is not is a silent failure, which is the one thing this project does not permit. This is the same doctrine as parity/receipts/v1/usable-baseline.json and corpus-reproducible.json, applied to the suite itself. It does NOT weaken the full lane: eval:record:check still re-measures row-by-row against a fresh run, so a lie about which evals fail is caught there.",
+  "rule": "reds[].id must equal an eval id whose committed row has pass:false. cause: why it fails, measured not guessed. closesWhen: the specific event that makes it pass — not 'when fixed'. A row is deleted the moment its eval goes green; the gate refuses a stale row rather than letting it rot.",
+  "reds": []
+}
