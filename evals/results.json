@@ -1,9 +1,9 @@
 {
-  "passed": 228,
-  "total": 228,
-  "commit": "4cc5d0a3482a58d72fa5c467bff3bc9bdf0f73b2",
+  "passed": 229,
+  "total": 230,
+  "commit": "641e29c7bcfa60fd819198cd95f966a8a4958db3",
   "dirty": false,
-  "recordedAt": "2026-08-25",
+  "recordedAt": "2026-08-26",
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -628,7 +628,8 @@
     {
       "id": "capability-report-is-fresh",
       "claim": "C3-detection",
-      "pass": true
+      "pass": false,
+      "error": "Error: docs/24-what-works.md reports a cross-check DISAGREEMENT — two artifacts that must agree do not. Reconcile the artifacts."
     },
     {
       "id": "generated-storybook-trees-are-fresh",
