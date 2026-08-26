@@ -35,6 +35,7 @@
  * what it wrote. That is the point.
  */
 import { execFileSync } from 'node:child_process';
+import { evalRedFailures } from './eval-red-ledger.mjs';
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -94,7 +95,7 @@ export function recordFreshnessFailures(rec = readRecord(RECORD)) {
 }
 
 /** CI compare: measured record vs committed record, row by row. */
-function compareFailures(measuredFile) {
+export function compareFailures(measuredFile) {
   const measured = readRecord(measuredFile);
   const committed = readRecord(RECORD);
   const failures = [];
@@ -105,8 +106,20 @@ function compareFailures(measuredFile) {
     else if (c.get(id) !== pass) failures.push(`${id}: CI measured ${pass ? 'PASS' : 'FAIL'}, committed record says ${c.get(id) ? 'PASS' : 'FAIL'}`);
   }
   for (const id of c.keys()) if (!m.has(id)) failures.push(`${id}: in the committed record but CI did not run it`);
-  if (measured.passed !== measured.total) {
-    failures.push(`CI measured ${measured.passed}/${measured.total} — the suite is red on this commit regardless of the record`);
+  // A RED SUITE IS PERMITTED ONLY IF EVERY RED IS NAMED — the same single rule
+  // docs:check consults, deliberately not a second copy of it. This used to be
+  // an unconditional refusal, which deadlocked the census stack: none of its
+  // three reds could close until the branch carrying their fix had landed.
+  //
+  // Note WHICH reds are checked: CI's own measurement, not the committed
+  // record. That is stricter than naming the committed reds — the row-by-row
+  // compare above already proves the two agree, and reading the measured set
+  // here means a ledger cannot name a comfortable red while CI fails a
+  // different one.
+  const ledgerPath = path.join(ROOT, 'parity/receipts/v1/eval-reds.json');
+  const ledger = existsSync(ledgerPath) ? JSON.parse(readFileSync(ledgerPath, 'utf8')) : null;
+  for (const f of evalRedFailures(measured, ledger, path.relative(ROOT, ledgerPath))) {
+    failures.push(`${f.where}: ${f.msg}`);
   }
   console.log(`  measured ${measured.passed}/${measured.total} at ${String(measured.commit ?? '?').slice(0, 8)} vs committed ${committed.passed}/${committed.total} at ${String(committed.commit ?? '?').slice(0, 8)}`);
   return failures;
