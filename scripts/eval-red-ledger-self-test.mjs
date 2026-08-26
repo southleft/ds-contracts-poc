@@ -52,7 +52,16 @@ for (const [name, results, ledger, expect] of cases) {
   const dir = mkdtempSync(path.join(tmpdir(), 'evalred-'));
   const measuredPath = path.join(dir, 'measured.json');
   try {
+    // HERMETIC, and it was not. This originally reddened results[0] of the
+    // repo's own record and set passed = total - 1 — which silently assumes
+    // the committed suite is GREEN. On a branch that already carries reds
+    // (the census stack carries three) the fixture then claims one failure
+    // while several rows say pass:false, the real reds come back correctly
+    // reported as unnamed, and the planted case fails for a reason that has
+    // nothing to do with what it is testing. A self-test whose verdict depends
+    // on the branch it runs in is not a self-test.
     const rec = JSON.parse(recBak);
+    for (const r of rec.results) r.pass = true;
     rec.results[0].pass = false;
     rec.passed = rec.total - 1;
     const redId = rec.results[0].id;
