@@ -10,7 +10,7 @@ This register names **57** lowering rules across 6 stages. Each states the CSS c
 
 ## Why this exists, and why it is not a second door register
 
-> **`core/emit-figma-script.ts` is 8,230 lines and carries ZERO `// @door` markers.**
+> **`core/emit-figma-script.ts` carries ZERO `// @door` markers** — 8,230 lines of forward lowering, and not one registered judgement call.
 
 The 429-door register covers the capture stages and the *inverse* (`core/propose-figma.ts`). Its stage map — `STAGE_FILES` in `scripts/door-register-check.ts` — has no `emit` entry at all. So every **forward** structure decision was unregistered and ungated: the margin box, auto-layout inference, the slot birth box, the state plane, set placement. Its refusals are spelled ad hoc as `miss()` / `channelMiss` / `facts.push`, and its silent drops are spelled as nothing.
 
@@ -35,24 +35,25 @@ if (px <= 0 || !gaps.every((g) => g.px === px)) return;
 
 ### Two conventions this register does NOT inherit from the door register
 
-**`markerOutsideRule` is verified, not trusted.** 29% of `core/emit-figma-script.ts` (2,385 of 8,231 lines) is the serialized in-page plugin runtime — a template literal emitted as the generated Figma script. A `//` line inside it becomes generated text, not a source marker, so those rules carry `markerOutsideRule` and are pinned by their rule text instead. The gate **checks that the claim is true**, in both directions.
+**`markerOutsideRule` is verified, not trusted.** 29% of `core/emit-figma-script.ts` (2,385 of 8,249 lines) is the serialized in-page plugin runtime — a template literal emitted as the generated Figma script. A `//` line inside it becomes generated text, not a source marker, so those rules carry `markerOutsideRule` and are pinned by their rule text instead. The gate **checks that the claim is true**, in both directions.
 
 It checks this because the shipped door register gets it wrong at scale. Measured with the scanner in `scripts/lowering-check.ts`:
 
 | | |
 |---|---|
 | doors carrying `markerOutsideRule` | **415 of 429**, all with one copy-pasted string claiming the rule "lives inside a serialized in-page function (a template literal)" |
-| of those, whose marker sits immediately above **ordinary code** | **377** — the marker *is* at the rule, so the claim is false on its face |
+| of those, whose `ruleLine` is genuinely inside a template literal | **15**. The other **400 claims are false.** |
+| of those, whose marker sits immediately above **ordinary code** | **374** — the marker *is* at the rule, so nothing sits outside anything |
 | lines of template text in `core/propose-figma.ts` | **0** (and 0 in `fuse.ts`, `anatomy.ts`, `contract-schema.ts`) |
-| lines of template text in `core/emit-figma-script.ts` | **2,385** — the file the door register does not cover |
+| lines of template text in `core/emit-figma-script.ts` | **2,385 of 8,249** (29%) — the one file the door register does not cover |
 
-**`ruleLine` is pinned by its own source text.** In the door register, `ruleLine` and the marker `line` drift apart by a median of **28 lines**, and **162 of 415** `ruleLine` values now point at a comment or a blank line. The cause is mechanical: the law
+**`ruleLine` is pinned by its own source text.** In the door register, `ruleLine` and the marker `line` drift apart by a median of **29 lines**, and **154 of 415** `ruleLine` values point at a comment or a blank line. The cause is mechanical: the law
 
 ```
 ruleLine == (line + 1) - (number of @door markers at or before line)
 ```
 
-holds for **301 of the 415** — `ruleLine` records where the rule sat *before the markers were inserted into the file*, and nothing ever re-derived it. `auditRegister()` reads **neither** `ruleLine` nor `markerOutsideRule`, which is how both drifted this far.
+holds for **293 of the 415** — `ruleLine` records where the rule sat *before the markers were inserted into the file*, and nothing ever re-derived it. `auditRegister()` reads **neither** `ruleLine` nor `markerOutsideRule`, which is how both drifted this far.
 
 This register makes that unrepresentable: a marker must sit **immediately** above its rule (`ruleLine === line + 1`, gated), and every cited line — `proposed` and `wall` rules included — records its own source text, which the gate compares against the file.
 
