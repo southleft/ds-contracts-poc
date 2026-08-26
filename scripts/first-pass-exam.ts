@@ -52,6 +52,17 @@
  * the stage is PENDING with the architecture named — recorded, never quietly
  * dropped, and never counted as minted. The no-retry rule binds the agent too:
  * one attempt, and its evidence records that attempt.
+ *
+ *   npm run exam:first-pass -- --exam <name> --record-mint
+ *
+ * folds that evidence into the committed packet AFTER the agent has driven the
+ * bridge — see docs/31 §6 for the operator procedure and
+ * extract/figma/census/first-pass-mint.ts for the asserts it must survive. It
+ * runs NO stage: it rewrites the `mint` record of each set, adds the canvas
+ * images the agent exported, and re-derives `chainComplete`, through the same
+ * writers the exam uses, so the receipt stays byte-stable. It refuses whole —
+ * a half-recorded mint is worse than a PENDING one — and it will not record
+ * onto a stage that is not PENDING, so `--record-mint` can never be a retry.
  */
 import { mkdtempSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -66,6 +77,7 @@ import {
   renderPreflight,
   type SetAttempt,
 } from "../extract/figma/census/first-pass.js";
+import { recordMint } from "../extract/figma/census/first-pass-mint.js";
 import {
   runCanvasToCode,
   runCodeToCanvas,
@@ -102,6 +114,31 @@ async function main(): Promise<void> {
     process.exitCode = 2;
     return;
   }
+  // RECORD THE MCP-DRIVEN MINT. Runs no stage and clears no image: it folds
+  // the agent's `mint-evidence.json` into the committed packet through the
+  // exam's own writers. Everything it asserts lives in first-pass-mint.ts.
+  if (argv.includes("--record-mint")) {
+    const r = recordMint(def.exam);
+    if (r.failures.length > 0) {
+      console.error(
+        `✖ ${def.exam}: the mint evidence was REFUSED — nothing was written.`,
+      );
+      for (const f of r.failures) console.error(`  · ${f}`);
+      process.exitCode = 1;
+      return;
+    }
+    console.log(
+      `▶ ${def.exam} — MCP-driven mint recorded from ${FIRST_PASS_DIR}/${def.exam}/mint-evidence.json`,
+    );
+    for (const p of r.perSet)
+      console.log(
+        `  ${p.set.padEnd(30)} mint ${p.from} → ${p.to.padEnd(8)} canvas ${p.canvas}`,
+      );
+    console.log(`  mint: ${r.manifest?.mint.status}`);
+    console.log(`  next: npm run first-pass:check -- --write-receipt`);
+    return;
+  }
+
   const work =
     flag("--work") ??
     mkdtempSync(path.join(tmpdir(), `first-pass-${def.exam}-`));

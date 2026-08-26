@@ -7,7 +7,7 @@
       "extract/computed/fuse.ts (styledChannels, buildBaseObs, enrichLayout)",
       "extract/computed/lib.ts (isFusable, GEOMETRY_CHANNELS, LOGICAL_ALIASES, SYNTHETIC_CHANNELS, kindOf)",
       "core/emit-figma-script.ts (applyTokens / applyLiterals / applyDeclared / layoutSpec)",
-      "conformance/MANIFEST.json (91 css-dom cases)",
+      "conformance/MANIFEST.json (92 css-dom cases)",
       "extract/figma/conformance/MANIFEST.json (157 canvas cases)",
       "extract/figma/channel-closure.json (draw-read closure)"
     ]
@@ -3691,8 +3691,8 @@
       "property": "text-indent",
       "class": "LEDGERED",
       "prior": "schema-token",
-      "receipt": "contract token binding, emitted verbatim in generated CSS; on canvas an annotation only (TOKEN_CHANNELS canvas:\"annotate\")",
-      "note": "Figma text nodes have no first-line indent."
+      "receipt": "contract token binding, emitted verbatim in generated CSS; on canvas an annotation only (TOKEN_CHANNELS canvas:\"annotate\") — plus, where MEASURED off-box, the withheld label (Part.textOutOfBox; extract/computed/fuse.ts textOutOfBoxEvidence, core/emit-figma-script.ts textOutOfBoxOn)",
+      "note": "Figma text nodes have no first-line indent. Annotating the lost offset is honest only while the canvas still draws what the browser draws: where the measured indent lays the first line entirely outside the content box (altitude Badge's 8px dot pip at text-indent: 9999px, and the -9999px visually-hidden idiom) the browser paints NO text in the box, so the canvas draws no text child there rather than a label at indent 0."
     },
     {
       "property": "text-justify",

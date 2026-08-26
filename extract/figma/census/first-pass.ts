@@ -146,6 +146,16 @@ export interface StageRecord {
   command: string | null;
   /** For REFUSED/ERROR: the engine's exact message. Never paraphrased. */
   message: string;
+  /** DID THIS ATTEMPT MOVE A BYTE (2026-08-25)? Only the MCP-driven `mint`
+   *  sets it. `ok` there can mean two different things: the run WROTE to the
+   *  canvas, or the engine compared its own specHash against the one stamped
+   *  on the canvas node, found them equal and wrote NOTHING because an
+   *  EARLIER mint had already put those exact bytes there. Both are a stage
+   *  that did its job, so both are `ok` and both complete the chain — but
+   *  only the first is a set whose bytes reached the canvas ON THIS ATTEMPT,
+   *  and the `minted` column counts only those. Absent = "not applicable /
+   *  this stage always writes". */
+  bytesWritten?: boolean;
   artifacts: Artifact[];
 }
 
@@ -1124,7 +1134,13 @@ export function tally(state: ExamState): ExamTally {
       erroredByStage.set(stop.stage, (erroredByStage.get(stop.stage) ?? 0) + 1);
     if (stop?.status === "PENDING")
       pendingByStage.set(stop.stage, (pendingByStage.get(stop.stage) ?? 0) + 1);
-    if (a.stages.some((s) => s.stage === "mint" && s.status === "ok")) minted++;
+    if (
+      a.stages.some(
+        (s) =>
+          s.stage === "mint" && s.status === "ok" && s.bytesWritten !== false,
+      )
+    )
+      minted++;
   }
   let graded = 0;
   let recognisable = 0;
@@ -1361,7 +1377,7 @@ export function renderReceipt(
   }
   out.push("");
   out.push(
-    '`chain complete #1` = **UNMEASURED** when every set of that exam stopped at ERROR — a stage that died without a named refusal. Such a run learned nothing about the engine, so it has no rate at all: `0/N` would read as "the engine failed N times" when the truth is "the harness never got to ask". The ratchet records nothing for an UNMEASURED exam and the gate refuses it by name. Otherwise `chain complete #1` = EVERY stage of the direction returned ok on the single attempt. `stopped: REFUSED` is the engine declining BY NAME — the honest outcome. `stopped: ERROR` is a stage that died without one. `stopped: PENDING` is a stage this harness does not execute at all: `mint` is MCP-DRIVEN (docs/31 §6 — the figma-console bridge speaks MCP over stdio to its own client and WebSocket to plugin clients, and a Node process is neither, so an agent holding the MCP tools performs the write and records its own evidence). It keeps its own column because a chain that ran clean to its last stage and stopped there is a different fact from one the engine refused. `minted` = sets whose bytes actually reached the canvas, evidenced. `recognisable #1` = graded blind against the owner\'s bar; `ungraded` means no `verdict.json` has been written yet, and is never rendered as a number.',
+    '`chain complete #1` = **UNMEASURED** when every set of that exam stopped at ERROR — a stage that died without a named refusal. Such a run learned nothing about the engine, so it has no rate at all: `0/N` would read as "the engine failed N times" when the truth is "the harness never got to ask". The ratchet records nothing for an UNMEASURED exam and the gate refuses it by name. Otherwise `chain complete #1` = EVERY stage of the direction returned ok on the single attempt. `stopped: REFUSED` is the engine declining BY NAME — the honest outcome. `stopped: ERROR` is a stage that died without one. `stopped: PENDING` is a stage this harness does not execute at all: `mint` is MCP-DRIVEN (docs/31 §6 — the figma-console bridge speaks MCP over stdio to its own client and WebSocket to plugin clients, and a Node process is neither, so an agent holding the MCP tools performs the write and records its own evidence). It keeps its own column because a chain that ran clean to its last stage and stopped there is a different fact from one the engine refused. `minted` = sets whose bytes reached the canvas ON THIS ATTEMPT, evidenced. It is deliberately NARROWER than `chain complete #1`: a `mint` that the engine SKIPPED as unchanged — its own specHash already equal to the one stamped on the canvas node, so it wrote nothing because an earlier mint had already put those exact bytes there — is a stage that did its job and completes the chain, but it is not a set this attempt minted, and it is not counted here. The per-exam `Mint:` line gives the split. `recognisable #1` = graded blind against the owner\'s bar; `ungraded` means no `verdict.json` has been written yet, and is never rendered as a number.',
   );
   out.push("");
 

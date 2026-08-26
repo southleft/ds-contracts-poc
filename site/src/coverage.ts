@@ -234,6 +234,13 @@ reg("anatomy", "text-by-prop", [
   "part.textByProp.prop",
   "part.textByProp.map",
 ]);
+// MEASURED text-indent eviction evidence (v18) — the canvas draws no text
+// child on the named combos because the browser paints none there.
+reg("anatomy", "text-out-of-box", [
+  "part.textOutOfBox",
+  "part.textOutOfBox.prop",
+  "part.textOutOfBox.values",
+]);
 reg("anatomy", "icon", ["part.icon", "part.icon.asset", "part.icon.size"]);
 reg("anatomy", "attrs", ["part.attrs"]);
 reg("anatomy", "meter", [

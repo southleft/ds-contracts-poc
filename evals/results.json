@@ -861,6 +861,16 @@
       "pass": true
     },
     {
+      "id": "text-indent-off-box-label-not-drawn",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "text-indent-off-box-evidence-refuses-when-inert",
+      "claim": "C2-refusal",
+      "pass": true
+    },
+    {
       "id": "portal-capture-modal",
       "claim": "C5-extraction",
       "pass": true

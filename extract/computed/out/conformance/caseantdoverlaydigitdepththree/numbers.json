@@ -1,11 +1,11 @@
 {
   "component": "CaseAntdOverlayDigitDepthThree",
-  "browser": "151.0.7922.34",
+  "browser": "149.0.7827.55",
   "captures": 4,
   "combos": 1,
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
-  "channelsEnumerated": 479,
+  "channelsEnumerated": 476,
   "elementsPerCapture": 6,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
@@ -274,9 +274,9 @@
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 11448,
-    "cellsMatched": 11424,
-    "pct": 99.79035639412997,
+    "cellsCompared": 11376,
+    "cellsMatched": 11352,
+    "pct": 99.78902953586498,
     "namedExclusions": [
       "app-region",
       "text-decoration",

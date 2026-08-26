@@ -3,6 +3,6 @@
   "component": "CaseGridTracksMixedFractional",
   "contract": "conformance/seeds/grid-tracks-mixed-fractional.contract.json",
   "generatedBy": "extract/computed/run.ts",
-  "browser": "151.0.7922.34",
+  "browser": "149.0.7827.55",
   "items": []
 }
