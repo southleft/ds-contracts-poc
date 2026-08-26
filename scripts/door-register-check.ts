@@ -11,7 +11,7 @@
  * library's global CSS violated the door's premise, and in both cases the
  * pipeline said nothing at all.
  *
- * This check holds the register to the code in four directions:
+ * This check holds the register to the code in five directions:
  *
  *   1. DISCOVERY — every `// @door <id>` marker in the source files the
  *      register covers must name a door the register carries. A new door added
@@ -27,6 +27,55 @@
  *   4. SHAPE — ids are lowercase-kebab and stage-prefixed, unique, sorted; the
  *      JSON is byte-stable (re-serializing produces the same bytes); the
  *      stage prefix agrees with the file; `kind` is one of the three values.
+ *   5. RULE LINES — `ruleLine` must be the line the marker actually annotates,
+ *      and `markerOutsideRule` must be true only where it really is.
+ *
+ * DIRECTION 5 EXISTS BECAUSE THOSE TWO FIELDS WERE 400 FALSE CLAIMS AND
+ * NOTHING READ THEM (2026-08-26). 415 of 429 doors asserted `markerOutsideRule`
+ * — "the rule lives inside a serialized in-page function" — when only 26 do.
+ * `ruleLine` drifted a median of 32 lines from the real rule and landed on a
+ * blank or comment-only line 176 times, because it recorded where each rule sat
+ * BEFORE the `@door` markers were inserted: computed once, never re-derived.
+ * `auditRegister()` read NEITHER field, which is the whole reason it survived —
+ * an artifact nothing reads is an artifact nothing checks. So the fields are
+ * now derived and enforced rather than asserted:
+ *
+ *   · THE LINE A MARKER ANNOTATES is the first line at or after it that is
+ *     neither blank nor comment-only (`annotatedLine`). For an ordinary marker
+ *     sitting directly above its rule that is exactly `line + 1`; prose between
+ *     the marker and the rule, and other `@door` markers stacked on the same
+ *     rule, are stepped over. `ruleLine` MUST equal it.
+ *   · UNLESS `markerOutsideRule` is set. A rule that lives inside a template
+ *     literal — a function serialized into the browser by `page.evaluate`, or
+ *     the generated React harness entry module — cannot carry a marker of its
+ *     own, so the marker sits on the nearest line outside the literal and
+ *     `ruleLine` points at the real line INSIDE it. That claim is checked: the
+ *     recorded line must lie strictly inside a multi-line template literal of
+ *     that file, parsed from the source, not asserted in prose.
+ *   · AND NO `ruleLine` MAY LAND ON A BLANK OR COMMENT-ONLY LINE, in either
+ *     case. A line number pointing at whitespace is not a citation.
+ *
+ * `markerOutsideRule` is a STRING, and its presence is the boolean: a door that
+ * carries it says why, and a door that does not carry it is an ordinary
+ * adjacent marker. There is no third state.
+ *
+ * THE REMEDY IS A COMMAND, NOT A PROCEDURE. `--rederive` is the same derivation
+ * run in write mode: it recomputes every line from the tree, rewrites the
+ * register byte-stably, and regenerates the doc table's cells. There is one
+ * derivation function, so the gate and the fix cannot drift apart — the check
+ * IS "run the fix and compare". This matters because the lines are displaced by
+ * ordinary work: PR #58 moved 167 `@door` markers and `--rederive` put all 168
+ * affected lines back in one command. The alternative — a human reconstructing
+ * the derivation by hand — is exactly how these numbers rotted the first time.
+ *
+ * The 26 `markerOutsideRule` doors are the one case the marker's position
+ * cannot predict, so they carry `ruleText`: the trimmed source of the line they
+ * cite. The gate checks the quote against the file (a citation that carries its
+ * quote cannot silently point at the wrong line), and `--rederive` follows the
+ * TEXT inside the door's literal rather than an offset. When that text is
+ * missing or ambiguous the re-derivation REFUSES by name instead of picking —
+ * `capture.slot-splice`'s anchor occurs twice inside its own literal, so this
+ * is a real case and not a hypothetical.
  *
  * It also RE-MEASURES the subtraction census over the committed corpus and
  * refuses when the pinned numbers move — the honest size of the "missing ink"
@@ -35,11 +84,13 @@
  *
  *   npx tsx scripts/door-register-check.ts
  *   npx tsx scripts/door-register-check.ts --self-test   # red cases
+ *   npx tsx scripts/door-register-check.ts --rederive    # the remedy (writes)
  *
  * WHAT THIS CHECK MUST NOT DO: change which facts are dropped. Naming, not
  * carrying — the same discipline as core/code-only-facts-check.ts.
  */
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import ts from 'typescript';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { runCensus, censusTable, type Census } from './door-census.js';
@@ -54,8 +105,20 @@ export interface Door {
   path: 'capture' | 'propose';
   file: string;
   line: number;
-  ruleLine?: number;
+  /** The line the marker annotates — see `annotatedLine`. Required on every
+   *  door: a door whose rule cannot be pointed at is not reviewable. */
+  ruleLine: number;
+  /** Present ONLY when the rule lives inside a template literal the marker
+   *  cannot sit inside; the string says which literal and why. Its presence is
+   *  the boolean — absence means "ordinary adjacent marker". */
   markerOutsideRule?: string;
+  /** The trimmed source of `ruleLine`, carried ONLY by `markerOutsideRule`
+   *  doors. Those are the only doors whose line cannot be re-derived from the
+   *  marker's own position, so they are the only ones that need an anchor: the
+   *  citation carries its quote, the gate checks the quote against the file,
+   *  and `--rederive` relocates the line by searching for it. Ordinary doors
+   *  need none — their line IS a function of the marker. */
+  ruleText?: string;
   kind: 'subtractive' | 'admitting' | 'both';
   premise: string;
   effect: string;
@@ -90,6 +153,53 @@ export const STAGE_FILES: Record<string, string> = {
 const MARKER_RE = /^\s*\/\/ @door ([^\s]+)\s*$/;
 const ID_RE = /^[a-z0-9]+\.[a-z0-9-]+$/;
 const KINDS = new Set(['subtractive', 'admitting', 'both']);
+
+const isBlankLine = (s: string) => s.trim() === '';
+/** A line that carries no code: a `//` comment, or a line inside (or opening,
+ *  or closing) a `/* … *​/` block. Deliberately textual — the same shape of
+ *  test the marker sweep uses, so the two cannot disagree. */
+const isCommentOnlyLine = (s: string) => /^\s*(\/\/|\/\*|\*)/.test(s);
+
+/** THE LINE A `@door` MARKER ANNOTATES: the first line at or after the marker
+ *  that is neither blank nor comment-only. For a marker sitting directly above
+ *  its rule this is `markerLine + 1`; prose between the marker and the rule, and
+ *  other `@door` markers stacked on the same rule, are stepped over. Returns
+ *  `null` when the marker is trailed by nothing but blanks and comments to the
+ *  end of the file — a marker that annotates nothing at all.
+ *  `lines` is the file split on '\n'; `markerLine` is 1-based. */
+export function annotatedLine(lines: string[], markerLine: number): number | null {
+  let i = markerLine; // 0-based index of markerLine + 1
+  while (i < lines.length && (isBlankLine(lines[i]) || isCommentOnlyLine(lines[i]))) i++;
+  return i < lines.length ? i + 1 : null;
+}
+
+/** Every MULTI-LINE template literal in a TS source, as inclusive 1-based
+ *  [firstLine, lastLine] spans — parsed, not regexed, because a backtick inside
+ *  a string, a comment or a nested `${}` is exactly the case a regex gets
+ *  wrong and this check exists to stop guesses. Memoized on the text, so the
+ *  self-test's dozen audits of the same tree parse each file once. */
+const TEMPLATE_SPANS = new Map<string, Array<[number, number]>>();
+export function templateSpans(file: string, text: string): Array<[number, number]> {
+  const key = `${file} ${text.length} ${text.slice(0, 256)}`;
+  const memo = TEMPLATE_SPANS.get(key);
+  if (memo) return memo;
+  const sf = ts.createSourceFile(file, text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
+  const spans: Array<[number, number]> = [];
+  const walk = (n: ts.Node): void => {
+    if (ts.isNoSubstitutionTemplateLiteral(n) || ts.isTemplateExpression(n)) {
+      const a = sf.getLineAndCharacterOfPosition(n.getStart(sf)).line + 1;
+      const b = sf.getLineAndCharacterOfPosition(n.getEnd()).line + 1;
+      if (b > a) spans.push([a, b]);
+    }
+    n.forEachChild(walk);
+  };
+  walk(sf);
+  TEMPLATE_SPANS.set(key, spans);
+  return spans;
+}
+/** Strictly inside the literal's BODY — the opening and closing lines carry the
+ *  declaration around it, not the serialized rule. */
+const insideTemplate = (spans: Array<[number, number]>, line: number) => spans.some(([a, b]) => line > a && line < b);
 
 /** THE PINNED CENSUS — re-measured 2026-08-25 by re-fusing all 116 committed
  *  components through this tree's engine (`npx tsx scripts/door-census.ts`).
@@ -210,6 +320,80 @@ export function auditRegister(reg: Register, read: (file: string) => string | nu
     bad(`${misplaced.length} door(s) record a line the marker is not on: ${misplaced.slice(0, 5).map((d) => `${d.id} (register says ${d.file}:${d.line}, marker at ${foundInCode.get(d.id)!.map((h) => h.line).join('/')})`).join('; ')}`);
   } else ok('every registered line matches where its marker actually sits');
 
+  // ---- 5. RULE LINES ----
+  // Read the two fields nothing read. Every red below names the door, the line
+  // it claims and the line the code actually puts there, because "some door is
+  // wrong" is not a finding a reviewer can act on.
+  const missingRule: string[] = [];
+  const wrongRule: string[] = [];
+  const notInTemplate: string[] = [];
+  const onNothing: string[] = [];
+  const noAnchor: string[] = [];
+  const wrongAnchor: string[] = [];
+  const strayAnchor: string[] = [];
+  let outsideClaims = 0;
+  let checkedRuleLines = 0;
+  for (const d of reg.doors) {
+    const text = read(d.file);
+    if (text === null) continue; // already red above — the sweep is not a denominator
+    const lines = text.split('\n');
+    if (typeof d.ruleLine !== 'number' || !Number.isInteger(d.ruleLine) || d.ruleLine < 1 || d.ruleLine > lines.length) {
+      missingRule.push(`${d.id} (${d.file}: ruleLine ${JSON.stringify(d.ruleLine)})`);
+      continue;
+    }
+    checkedRuleLines++;
+    const at = lines[d.ruleLine - 1];
+    if (isBlankLine(at) || isCommentOnlyLine(at)) {
+      onNothing.push(`${d.id} (${d.file}:${d.ruleLine} is ${isBlankLine(at) ? 'blank' : `a comment: ${at.trim().slice(0, 60)}`})`);
+    }
+    if (d.markerOutsideRule !== undefined) {
+      outsideClaims++;
+      if (!insideTemplate(templateSpans(d.file, text), d.ruleLine)) {
+        notInTemplate.push(`${d.id} (${d.file}:${d.ruleLine} is not inside any multi-line template literal)`);
+      }
+      if (d.ruleText === undefined) {
+        noAnchor.push(`${d.id} (${d.file}:${d.ruleLine})`);
+      } else if (d.ruleText !== at.trim()) {
+        wrongAnchor.push(`${d.id} (${d.file}:${d.ruleLine} reads \`${at.trim().slice(0, 60)}\`, the register quotes \`${d.ruleText.slice(0, 60)}\`)`);
+      }
+      continue;
+    }
+    if (d.ruleText !== undefined) {
+      strayAnchor.push(`${d.id} (${d.file}:${d.ruleLine})`);
+    }
+    const derived = annotatedLine(lines, d.line);
+    if (derived !== d.ruleLine) {
+      wrongRule.push(`${d.id} (register says ${d.file}:${d.ruleLine}, the marker at :${d.line} annotates ${derived === null ? 'NOTHING — only blanks and comments follow it' : `:${derived}`})`);
+    }
+  }
+  if (missingRule.length > 0) {
+    bad(`${missingRule.length} door(s) carry no usable ruleLine: ${missingRule.slice(0, 5).join('; ')} — a door whose rule cannot be pointed at is not reviewable`);
+  } else ok(`all ${reg.doors.length} doors carry a ruleLine inside their own file`);
+
+  if (wrongRule.length > 0) {
+    bad(`${wrongRule.length} door(s) record a ruleLine that is NOT the line their marker annotates: ${wrongRule.slice(0, 5).join('; ')} — this is the defect that put 400 false claims in this register: a line computed once and never re-derived. THE REMEDY IS ONE COMMAND: ${REDERIVE_HINT}`);
+  } else ok(`every ordinary marker's ruleLine is the line it actually annotates (${checkedRuleLines - outsideClaims} doors)`);
+
+  if (noAnchor.length > 0) {
+    bad(`${noAnchor.length} door(s) claim markerOutsideRule but quote no ruleText: ${noAnchor.slice(0, 5).join('; ')} — a line inside a template literal cannot be re-derived from the marker, so it must carry the source it points at or it is unverifiable again`);
+  } else if (wrongAnchor.length > 0) {
+    bad(`${wrongAnchor.length} door(s) quote a ruleText the file does not have at that line: ${wrongAnchor.slice(0, 3).join('; ')} — the rule moved inside its literal. ${REDERIVE_HINT}`);
+  } else if (outsideClaims > 0) ok(`every markerOutsideRule door quotes the source line it cites, and the file still reads exactly that`);
+
+  if (strayAnchor.length > 0) {
+    bad(`${strayAnchor.length} ordinary door(s) carry a ruleText: ${strayAnchor.slice(0, 5).join('; ')} — an ordinary marker's line is a FUNCTION of the marker, so a quote there is a second source of truth that can rot independently`);
+  }
+
+  if (notInTemplate.length > 0) {
+    bad(`${notInTemplate.length} door(s) claim markerOutsideRule but their ruleLine is NOT inside a template literal: ${notInTemplate.slice(0, 5).join('; ')} — the claim is that the rule could not carry a marker of its own, and that is checkable`);
+  } else if (outsideClaims === 0) {
+    bad('ZERO doors claim markerOutsideRule — every known template-literal rule in this pipeline lost its claim, or the field stopped being read again');
+  } else ok(`${outsideClaims} door(s) claim markerOutsideRule and every one lands strictly inside a real template literal`);
+
+  if (onNothing.length > 0) {
+    bad(`${onNothing.length} ruleLine(s) land on a blank or comment-only line: ${onNothing.slice(0, 5).join('; ')} — a line number pointing at whitespace is not a citation`);
+  } else ok('no ruleLine lands on a blank or comment-only line');
+
   // ---- 3. RECEIPT PATHS ----
   const claimsReceipt = reg.doors.filter((d) => d.receipt.channel !== 'none');
   const noMarker = claimsReceipt.filter((d) => !d.receipt.marker);
@@ -231,6 +415,157 @@ export function auditRegister(reg: Register, read: (file: string) => string | nu
   if (silent.length === 0) {
     bad('ZERO doors are recorded as silent — either every door now receipts (then say so deliberately) or the register stopped being honest about the ones that do not');
   } else ok(`${silent.length} of ${reg.doors.length} doors are recorded as still firing silently — named, not hidden`);
+
+  return out;
+}
+
+// ---------------------------------------------------------------------------
+// THE REMEDY. A gate that refuses without saying how to fix it leaves a human
+// to reconstruct the derivation by hand — which is how these lines rotted the
+// first time. `--rederive` IS the derivation the gate enforces, run in write
+// mode over the same inputs, so the two cannot drift apart: there is one
+// function, and the check is that function's output compared with the file.
+// ---------------------------------------------------------------------------
+
+export const REDERIVE_HINT = 'run `npm run door-register:rederive` (it re-derives every line from the tree and rewrites the doc table to match)';
+
+export interface Rederivation {
+  moves: Array<{ id: string; file: string; from: number; to: number }>;
+  /** Doors the derivation REFUSES to move rather than guess. */
+  refusals: string[];
+}
+
+/** Re-derive `ruleLine` (and, for the outside doors, `ruleText`) for every door
+ *  in place. Mutates `reg`. Two mechanisms, because the doors are two kinds:
+ *
+ *   · ORDINARY DOORS — the line is a pure function of the marker's position
+ *     (`annotatedLine`), so it is recomputed unconditionally. This is the case
+ *     that moves when an unrelated PR displaces marker lines, and it is total:
+ *     429 doors re-derive with no judgement and no input beyond the tree.
+ *   · markerOutsideRule DOORS — the line is inside a template literal, where
+ *     nothing about the marker's position predicts it. The register carries the
+ *     source line as `ruleText`, so the rule is followed by its TEXT: if the
+ *     quoted line still reads the same, nothing moves; if it does not, the same
+ *     text is searched for inside the template literal the marker sits above.
+ *     Exactly one hit relocates. Zero or several REFUSE, by name — a rule whose
+ *     anchor is ambiguous needs a human to re-read it, and a re-derivation that
+ *     silently picks one of two candidates is the defect this file exists to
+ *     stop. (`capture.slot-splice`'s anchor appears twice inside its own
+ *     literal, so this is not a hypothetical.) */
+export function rederive(reg: Register, read: (file: string) => string | null): Rederivation {
+  const moves: Rederivation['moves'] = [];
+  const refusals: string[] = [];
+  for (const d of reg.doors) {
+    const text = read(d.file);
+    if (text === null) {
+      refusals.push(`${d.id}: ${d.file} could not be read`);
+      continue;
+    }
+    const lines = text.split('\n');
+    const from = d.ruleLine;
+
+    if (d.markerOutsideRule === undefined) {
+      delete d.ruleText; // an ordinary door's line needs no anchor, and must not carry one
+      const to = annotatedLine(lines, d.line);
+      if (to === null) {
+        refusals.push(`${d.id}: the marker at ${d.file}:${d.line} is followed by nothing but blanks and comments to end of file`);
+        continue;
+      }
+      d.ruleLine = to;
+      if (to !== from) moves.push({ id: d.id, file: d.file, from, to });
+      continue;
+    }
+
+    // An outside door. Follow the quote, not the offset.
+    if (d.ruleText === undefined) {
+      refusals.push(`${d.id}: claims markerOutsideRule but quotes no ruleText, so its line inside the literal cannot be followed — re-read the rule and add the quote by hand`);
+      continue;
+    }
+    if (lines[d.ruleLine - 1]?.trim() === d.ruleText) continue; // still exactly where it was
+    const spans = templateSpans(d.file, text);
+    const span = spans.filter(([a]) => a >= d.line).sort((x, y) => x[0] - y[0])[0];
+    if (!span) {
+      refusals.push(`${d.id}: no template literal opens at or after the marker at ${d.file}:${d.line}, so the claim itself is stale — re-read the rule`);
+      continue;
+    }
+    const hits: number[] = [];
+    for (let i = span[0]; i < span[1] - 1; i++) if (lines[i].trim() === d.ruleText) hits.push(i + 1);
+    if (hits.length !== 1) {
+      refusals.push(
+        `${d.id}: the quoted rule \`${d.ruleText.slice(0, 60)}\` occurs ${hits.length} time(s) inside the literal at ${d.file}:${span[0]}-${span[1]} — ${hits.length === 0 ? 'the rule was edited or removed' : `ambiguous (${hits.join(', ')})`}; re-read it and set ruleLine by hand`,
+      );
+      continue;
+    }
+    d.ruleLine = hits[0];
+    if (hits[0] !== from) moves.push({ id: d.id, file: d.file, from, to: hits[0] });
+  }
+  return { moves, refusals };
+}
+
+/** Rewrite the doc table's `line` / `(rule N)` cells from the register. The
+ *  doc is a copy, and a copy regenerated by the same command that fixes the
+ *  original is a copy that cannot be forgotten. */
+export function rewriteDocLines(reg: Register, doc: string): { text: string; changed: number } {
+  const byId = new Map(reg.doors.map((d) => [d.id, d]));
+  let changed = 0;
+  const out = doc.split('\n').map((line) => {
+    const m = DOC_ROW_RE.exec(line);
+    if (!m) return line;
+    const d = byId.get(m[2]);
+    if (!d) return line;
+    const want = d.markerOutsideRule !== undefined ? `${d.line}<br/>*(rule ${d.ruleLine})*` : String(d.line);
+    const got = m[3] + (m[4] ? `<br/>*(rule ${m[4]})*` : '');
+    if (got === want) return line;
+    changed++;
+    return m[1] + want + m[5] + line.slice(m[0].length);
+  });
+  return { text: out.join('\n'), changed };
+}
+
+/** The prose half: spec/DOOR-REGISTER.md is the register's human face, and it
+ *  reprints every door's line numbers in a table. Those cells were as stale as
+ *  the register's own — 60 wrong `line`s and 415 `(rule N)`s copied from the
+ *  field that was never re-derived — so they are checked here rather than
+ *  trusted. Pure over (register, doc text) so the self-test can break it. */
+export const DOC_ROW_RE = /^(\| `([a-z0-9.-]+)` \| )(\d+)(?:<br\/>\*\(rule (\d+)\)\*)?( \|)/;
+export function auditDoc(reg: Register, doc: string): Finding[] {
+  const out: Finding[] = [];
+  const bad = (label: string) => out.push({ ok: false, label });
+  const ok = (label: string) => out.push({ ok: true, label });
+
+  const missing = reg.doors.filter((d) => !doc.includes(d.id));
+  if (missing.length > 0) {
+    bad(`${missing.length} registered door(s) are absent from spec/DOOR-REGISTER.md: ${missing.slice(0, 5).map((d) => d.id).join(', ')}`);
+  } else ok(`all ${reg.doors.length} doors appear in spec/DOOR-REGISTER.md`);
+
+  const claimed = /\*\*(\d+)\*\* doors/.exec(doc);
+  if (!claimed) bad('spec/DOOR-REGISTER.md does not state a door count in the pinned form (**N** doors)');
+  else if (Number(claimed[1]) !== reg.doors.length) bad(`spec/DOOR-REGISTER.md claims ${claimed[1]} doors; the register carries ${reg.doors.length}`);
+  else ok(`the doc's stated count (${claimed[1]}) matches the register`);
+
+  // A door may appear in more than one table (the stage tables, plus the
+  // findings table that names the doors whose prose does not match their rule),
+  // so DISTINCT doors covered is the denominator and every row is checked.
+  const byId = new Map(reg.doors.map((d) => [d.id, d]));
+  const drift: string[] = [];
+  const covered = new Set<string>();
+  let rows = 0;
+  for (const line of doc.split('\n')) {
+    const m = DOC_ROW_RE.exec(line);
+    if (!m) continue;
+    const d = byId.get(m[2]);
+    if (!d) continue;
+    rows++;
+    covered.add(d.id);
+    const want = d.markerOutsideRule !== undefined ? `${d.line}<br/>*(rule ${d.ruleLine})*` : String(d.line);
+    const got = m[3] + (m[4] ? `<br/>*(rule ${m[4]})*` : '');
+    if (got !== want) drift.push(`${d.id} (doc says ${got}, register says ${want})`);
+  }
+  if (covered.size !== reg.doors.length) {
+    bad(`spec/DOOR-REGISTER.md tabulates ${covered.size} of ${reg.doors.length} registered doors — the table is not the register`);
+  } else if (drift.length > 0) {
+    bad(`${drift.length} doc table row(s) print a line the register does not: ${drift.slice(0, 5).join('; ')} — the doc is the face the register is read through, so a stale cell there is the same defect one level up. ${REDERIVE_HINT}`);
+  } else ok(`all ${rows} doc table rows (over ${covered.size} doors) print the register's own line and ruleLine`);
 
   return out;
 }
@@ -386,6 +721,93 @@ function selfTest(): number {
       expect: /ZERO doors are recorded as silent/,
     },
     {
+      name: 'a ruleLine that is not the line its marker annotates is REFUSED',
+      build: () => {
+        const reg = clone();
+        reg.doors.find((x) => x.id === 'fuse.control-element-delta')!.ruleLine += 5;
+        return { reg, read };
+      },
+      expect: /record a ruleLine that is NOT the line their marker annotates/,
+    },
+    {
+      name: 'a door with no ruleLine at all is REFUSED',
+      build: () => {
+        const reg = clone();
+        delete (reg.doors.find((x) => x.id === 'fuse.control-element-delta') as Partial<Door>).ruleLine;
+        return { reg, read };
+      },
+      expect: /carry no usable ruleLine/,
+    },
+    {
+      name: 'a markerOutsideRule claim whose ruleLine is not in a template literal is REFUSED',
+      build: () => {
+        const reg = clone();
+        reg.doors.find((x) => x.id === 'fuse.control-element-delta')!.markerOutsideRule =
+          'a claim that the rule lives inside a serialized in-page function, which it does not';
+        return { reg, read };
+      },
+      expect: /claim markerOutsideRule but their ruleLine is NOT inside a template literal/,
+    },
+    {
+      name: 'a register in which NO door claims markerOutsideRule is REFUSED',
+      build: () => {
+        const reg = clone();
+        for (const d of reg.doors) delete d.markerOutsideRule;
+        return { reg, read };
+      },
+      expect: /ZERO doors claim markerOutsideRule/,
+    },
+    {
+      name: 'a markerOutsideRule door that quotes no ruleText is REFUSED',
+      build: () => {
+        const reg = clone();
+        delete reg.doors.find((x) => x.id === 'capture.slot-splice')!.ruleText;
+        return { reg, read };
+      },
+      expect: /claim markerOutsideRule but quote no ruleText/,
+    },
+    {
+      name: 'a markerOutsideRule door quoting a line the file does not have there is REFUSED',
+      build: () => {
+        const reg = clone();
+        reg.doors.find((x) => x.id === 'capture.slot-splice')!.ruleText = 'if (theRuleMovedInsideItsLiteral) return;';
+        return { reg, read };
+      },
+      expect: /quote a ruleText the file does not have at that line/,
+    },
+    {
+      name: 'an ORDINARY door carrying a ruleText is REFUSED (a second source of truth rots on its own)',
+      build: () => {
+        const reg = clone();
+        reg.doors.find((x) => x.id === 'fuse.control-element-delta')!.ruleText = 'anything at all';
+        return { reg, read };
+      },
+      expect: /ordinary door\(s\) carry a ruleText/,
+    },
+    {
+      name: 'a ruleLine landing on a COMMENT line is REFUSED',
+      build: () => {
+        // Inside SHADOW_HELPERS_JS, so the markerOutsideRule claim still holds
+        // and this red is the comment test alone rather than a side effect.
+        const reg = clone();
+        reg.doors.find((x) => x.id === 'capture.slot-splice')!.ruleLine = 1015;
+        return { reg, read };
+      },
+      expect: /land on a blank or comment-only line/,
+    },
+    {
+      name: 'a ruleLine landing on a BLANK line is REFUSED',
+      build: () => {
+        const reg = clone();
+        const d = reg.doors.find((x) => x.id === 'fuse.control-element-delta')!;
+        const lines = files.get(d.file)!.split('\n');
+        const blank = lines.findIndex((l, i) => i > d.line && l.trim() === '');
+        d.ruleLine = blank + 1;
+        return { reg, read };
+      },
+      expect: /land on a blank or comment-only line/,
+    },
+    {
       name: 'an unreadable door file is REFUSED (the sweep is not a denominator)',
       build: () => ({ reg: clone(), read: (f: string) => (f === 'extract/computed/fuse.ts' ? null : (files.get(f) ?? null)) }),
       expect: /could not be read/,
@@ -405,8 +827,71 @@ function selfTest(): number {
       console.log(`      expected a red matching ${c.expect}; got: ${reds.length === 0 ? '(all green — the gate did NOT refuse)' : reds.slice(0, 3).join(' | ')}`);
     }
   }
+  // THE REMEDY, PROVED. A gate that refuses and a command that repairs are only
+  // one thing if the command actually produces what the gate accepts — so the
+  // register is broken the way a landing PR breaks it (every line displaced),
+  // repaired by `rederive`, and compared BYTE-FOR-BYTE with the committed file.
+  {
+    const scrambled = clone();
+    for (const d of scrambled.doors) if (d.markerOutsideRule === undefined) d.ruleLine += 7;
+    const { moves, refusals } = rederive(scrambled, read);
+    const restored = JSON.stringify(scrambled) === JSON.stringify(real);
+    const expected = real.doors.filter((d) => d.markerOutsideRule === undefined).length;
+    const good = restored && refusals.length === 0 && moves.length === expected;
+    console.log(`  ${good ? '✔' : '✖'} --rederive REPAIRS exactly what the gate refuses (${expected} displaced lines restored byte-for-byte)`);
+    if (!good) {
+      failures++;
+      console.log(`      moved ${moves.length}/${expected}, refusals ${refusals.length}, byte-identical to the committed register: ${restored}`);
+    }
+  }
+  {
+    // …and REFUSES rather than guesses. `capture.slot-splice`'s anchor text
+    // occurs twice inside its own template literal, so pointing it at the wrong
+    // one must produce a named refusal, never a silent pick.
+    const ambiguous = clone();
+    const d = ambiguous.doors.find((x) => x.id === 'capture.slot-splice')!;
+    d.ruleLine = d.ruleLine - 2; // no longer the quoted line, forcing a search
+    const { refusals } = rederive(ambiguous, read);
+    const hit = refusals.some((r) => /capture\.slot-splice: the quoted rule .* occurs 2 time\(s\)/.test(r));
+    console.log(`  ${hit ? '✔' : '✖'} --rederive REFUSES an ambiguous anchor instead of picking one`);
+    if (!hit) {
+      failures++;
+      console.log(`      expected a named refusal for capture.slot-splice; got: ${refusals.length === 0 ? '(none — it silently picked)' : refusals.join(' | ')}`);
+    }
+  }
+
+  // The doc half, broken the same way: the table is a copy of the register and
+  // a copy that is never compared is exactly how 415 stale cells got printed.
+  const realDoc = readFileSync(DOC, 'utf8');
+  const docCases: Array<{ name: string; doc: string; expect: RegExp }> = [
+    {
+      name: 'a doc table row printing a line the register does not is REFUSED',
+      doc: realDoc.replace(/^(\| `fuse\.control-element-delta` \| )(\d+)/m, (_m, a: string, n: string) => a + (Number(n) + 7)),
+      expect: /print a line the register does not/,
+    },
+    {
+      name: 'a doc table row printing a stale *(rule N)* cell is REFUSED',
+      doc: realDoc.replace(/^(\| `capture\.slot-splice` \| \d+)<br\/>\*\(rule \d+\)\*/m, '$1'),
+      expect: /print a line the register does not/,
+    },
+    {
+      name: 'a doc that lost a door row entirely is REFUSED',
+      doc: realDoc.split('\n').filter((l) => !l.startsWith('| `fuse.control-element-delta` |')).join('\n'),
+      expect: /tabulates \d+ of \d+ registered doors|are absent from spec\/DOOR-REGISTER\.md/,
+    },
+  ];
+  for (const c of docCases) {
+    const reds = auditDoc(real, c.doc).filter((f) => !f.ok).map((f) => f.label);
+    const hit = reds.some((l) => c.expect.test(l));
+    console.log(`  ${hit ? '✔' : '✖'} ${c.name}`);
+    if (!hit) {
+      failures++;
+      console.log(`      expected a red matching ${c.expect}; got: ${reds.length === 0 ? '(all green — the gate did NOT refuse)' : reds.slice(0, 3).join(' | ')}`);
+    }
+  }
+
   // …and the honest register must be GREEN, or the red cases prove nothing.
-  const clean = auditRegister(real, read).filter((f) => !f.ok);
+  const clean = [...auditRegister(real, read), ...auditDoc(real, realDoc)].filter((f) => !f.ok);
   if (clean.length > 0) {
     failures++;
     console.log(`  ✖ the committed register itself is red, so the red cases above prove nothing:\n      ${clean.map((f) => f.label).join('\n      ')}`);
@@ -427,6 +912,39 @@ if (!existsSync(REGISTER)) {
 }
 const raw = readFileSync(REGISTER, 'utf8');
 const reg = JSON.parse(raw) as Register;
+const readSource = (file: string): string | null => {
+  const abs = path.join(REPO, file);
+  return existsSync(abs) ? readFileSync(abs, 'utf8') : null;
+};
+
+// --rederive: the write half of the same derivation the gate reads.
+if (process.argv.includes('--rederive')) {
+  console.log('\n--rederive — re-deriving every line from the tree\n');
+  const { moves, refusals } = rederive(reg, readSource);
+  const byFile = new Map<string, number>();
+  for (const m of moves) byFile.set(m.file, (byFile.get(m.file) ?? 0) + 1);
+  for (const [f, n] of [...byFile].sort()) console.log(`  ${String(n).padStart(4)} door(s) moved in ${f}`);
+  if (moves.length === 0) console.log('  (no ruleLine moved — the register already matches the tree)');
+  else {
+    const deltas = moves.map((m) => Math.abs(m.to - m.from)).sort((a, b) => a - b);
+    console.log(`  ${moves.length} ruleLine(s) moved; |delta| min ${deltas[0]}, median ${deltas[deltas.length >> 1]}, max ${deltas[deltas.length - 1]}`);
+  }
+  writeFileSync(REGISTER, JSON.stringify(reg, null, 2) + '\n');
+  console.log(`  ✔ ${path.relative(REPO, REGISTER)} rewritten (byte-stable, sorted)`);
+  if (existsSync(DOC)) {
+    const { text, changed } = rewriteDocLines(reg, readFileSync(DOC, 'utf8'));
+    writeFileSync(DOC, text);
+    console.log(`  ✔ ${path.relative(REPO, DOC)} table: ${changed} cell(s) rewritten from the register`);
+  }
+  if (refusals.length > 0) {
+    console.error(`\n  ✖ ${refusals.length} door(s) were NOT re-derived — a line this command cannot follow mechanically is a line a human has to re-read, not one it may guess:`);
+    for (const r of refusals) console.error(`      ${r}`);
+    console.error('\n✖ door register: re-derivation incomplete; run npm run door-register:check for the full picture');
+    process.exit(1);
+  }
+  console.log('\n✔ re-derived. Now run `npm run door-register:check` — it re-derives the same lines and compares.');
+  process.exit(0);
+}
 
 console.log('\n1. the register is byte-stable');
 {
@@ -452,20 +970,10 @@ console.log('\n3. the doc names the same doors as the register');
     console.log('  ✖ spec/DOOR-REGISTER.md does not exist');
     failures++;
   } else {
-    const doc = readFileSync(DOC, 'utf8');
-    const missing = reg.doors.filter((d) => !doc.includes(d.id));
-    if (missing.length > 0) {
-      console.log(`  ✖ ${missing.length} registered door(s) are absent from spec/DOOR-REGISTER.md: ${missing.slice(0, 5).map((d) => d.id).join(', ')}`);
-      failures++;
-    } else console.log(`  ✔ all ${reg.doors.length} doors appear in spec/DOOR-REGISTER.md`);
-    const claimed = /\*\*(\d+)\*\* doors/.exec(doc);
-    if (!claimed) {
-      console.log('  ✖ spec/DOOR-REGISTER.md does not state a door count in the pinned form (**N** doors)');
-      failures++;
-    } else if (Number(claimed[1]) !== reg.doors.length) {
-      console.log(`  ✖ spec/DOOR-REGISTER.md claims ${claimed[1]} doors; the register carries ${reg.doors.length}`);
-      failures++;
-    } else console.log(`  ✔ the doc's stated count (${claimed[1]}) matches the register`);
+    for (const f of auditDoc(reg, readFileSync(DOC, 'utf8'))) {
+      console.log(`  ${f.ok ? '✔' : '✖'} ${f.label}`);
+      if (!f.ok) failures++;
+    }
   }
 }
 

@@ -1,0 +1,180 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / altitude",
+  "setNodeId": "39:6746",
+  "setName": "Chip",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:6728",
+  "variantNodeName": "Variant=Secondary, Type=Squared, State=Default",
+  "axes": null,
+  "axesError": "in get_variantGroupProperties: Component set has existing errors",
+  "variantChildCount": 15,
+  "variantChildNames": [
+    "Variant=Secondary, Type=Squared, State=Default",
+    "Variant=Secondary, Type=Default",
+    "Variant=Info, Type=Default",
+    "Variant=Info, Type=Squared, State=Default",
+    "Variant=Success, Type=Default",
+    "Variant=Success, Type=Squared, State=Default",
+    "Variant=Warning, Type=Default",
+    "Variant=Warning, Type=Squared, State=Default",
+    "Variant=Danger, Type=Default",
+    "Variant=Danger, Type=Squared, State=Default",
+    "Variant=Secondary, Type=Squared, State=Focus Visible",
+    "Variant=Info, Type=Squared, State=Focus Visible",
+    "Variant=Success, Type=Squared, State=Focus Visible",
+    "Variant=Warning, Type=Squared, State=Focus Visible",
+    "Variant=Danger, Type=Squared, State=Focus Visible"
+  ],
+  "reflow": {
+    "target": "39:6728",
+    "targetName": "Variant=Secondary, Type=Squared, State=Default",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "CENTER",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 55,
+      "h": 30,
+      "children": [
+        {
+          "id": "56:179",
+          "name": "label",
+          "type": "TEXT",
+          "x": 13,
+          "y": 5,
+          "w": 29,
+          "h": 20,
+          "ax": 13,
+          "ay": 5,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 95,
+      "h": 70,
+      "children": [
+        {
+          "id": "56:179",
+          "name": "label",
+          "type": "TEXT",
+          "x": 33,
+          "y": 25,
+          "w": 29,
+          "h": 20,
+          "ax": 33,
+          "ay": 25,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "label",
+        "dx": 20,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 55,
+      "h": 30
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:237",
+    "baseline": {
+      "geometry": "1082f095e60a43ef",
+      "fills": "5bfb59088e740e70",
+      "text": "5d97345553095918"
+    },
+    "axes": [],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 13,
+    "bound": 12,
+    "inferred": 1,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 5,
+        "inferred": 0,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Variant=Secondary, Type=Squared, State=Default",
+      "name": "Variant=Secondary, Type=Squared, State=Default",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 55,
+      "h": 30,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 29,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 151,
+    "sig": "a5bbd7223f0db150"
+  },
+  "canvasAfter": {
+    "nodes": 151,
+    "sig": "a5bbd7223f0db150"
+  },
+  "canvasRestored": true
+}

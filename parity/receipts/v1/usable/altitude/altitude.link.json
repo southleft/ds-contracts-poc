@@ -1,0 +1,230 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / altitude",
+  "setNodeId": "39:6823",
+  "setName": "Link",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:6805",
+  "variantNodeName": "Variant=Xs, State=Default",
+  "axes": [
+    {
+      "axis": "Variant",
+      "values": [
+        "Xs",
+        "Sm",
+        "Lg"
+      ]
+    },
+    {
+      "axis": "State",
+      "values": [
+        "Default",
+        "Focus Visible",
+        "Hover"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 9,
+  "variantChildNames": [
+    "Variant=Xs, State=Default",
+    "Variant=Sm, State=Default",
+    "Variant=Lg, State=Default",
+    "Variant=Xs, State=Focus Visible",
+    "Variant=Sm, State=Focus Visible",
+    "Variant=Lg, State=Focus Visible",
+    "Variant=Xs, State=Hover",
+    "Variant=Sm, State=Hover",
+    "Variant=Lg, State=Hover"
+  ],
+  "reflow": {
+    "target": "39:6805",
+    "targetName": "Variant=Xs, State=Default",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "MIN",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 23,
+      "h": 20,
+      "children": [
+        {
+          "id": "39:6806",
+          "name": "label",
+          "type": "TEXT",
+          "x": 0,
+          "y": 0,
+          "w": 23,
+          "h": 20,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 63,
+      "h": 60,
+      "children": [
+        {
+          "id": "39:6806",
+          "name": "label",
+          "type": "TEXT",
+          "x": 0,
+          "y": 20,
+          "w": 23,
+          "h": 20,
+          "ax": 0,
+          "ay": 20,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "label",
+        "dx": 0,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 23,
+      "h": 20
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:267",
+    "baseline": {
+      "geometry": "ccf1bf1986d997f4",
+      "fills": "84016156557229f3",
+      "text": "5d979c47c9926685"
+    },
+    "axes": [
+      {
+        "axis": "Variant",
+        "values": [
+          {
+            "value": "Xs",
+            "geometry": "ccf1bf1986d997f4",
+            "fills": "84016156557229f3",
+            "text": "5d979c47c9926685"
+          },
+          {
+            "value": "Sm",
+            "geometry": "1141fd79127bb7da",
+            "fills": "84016156557229f3",
+            "text": "5d979c47c9926685"
+          },
+          {
+            "value": "Lg",
+            "geometry": "65a8c159e7c2b3c3",
+            "fills": "84016156557229f3",
+            "text": "5d979c47c9926685"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "State",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "ccf1bf1986d997f4",
+            "fills": "84016156557229f3",
+            "text": "5d979c47c9926685"
+          },
+          {
+            "value": "Focus Visible",
+            "geometry": "ccf1bf1986d997f4",
+            "fills": "84016156557229f3",
+            "text": "5d979c47c9926685"
+          },
+          {
+            "value": "Hover",
+            "geometry": "ccf1bf1986d997f4",
+            "fills": "cc6af104658bad77",
+            "text": "5d979c47c9926685"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 2,
+    "bound": 2,
+    "inferred": 0,
+    "literal": 0,
+    "byGroup": {
+      "spacing": {
+        "bound": 1,
+        "inferred": 0,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 1,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Variant=Xs, State=Default",
+      "name": "Variant=Xs, State=Default",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 23,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 23,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 151,
+    "sig": "a5bbd7223f0db150"
+  },
+  "canvasAfter": {
+    "nodes": 151,
+    "sig": "a5bbd7223f0db150"
+  },
+  "canvasRestored": true
+}
