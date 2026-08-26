@@ -503,7 +503,10 @@ export function runCensus(opts: RunOptions, fresh?: CensusManifest): RunResult {
   for (const r of rows) failures.push(...r.failures);
   const receipt = renderReceipt(rowsSource, rows, opts.phase, failures);
   if (opts.receiptPath)
-    writeFileSync(opts.receiptPath, withPreservedLog(receipt, opts.receiptPath));
+    writeFileSync(
+      opts.receiptPath,
+      withPreservedLog(receipt, opts.receiptPath),
+    );
   return { ok: failures.length === 0, failures, rows, receipt };
 }
 
