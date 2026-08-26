@@ -1,0 +1,18 @@
+{
+  "id": "hard-text-part-pinned-size",
+  "feature": "geometry",
+  "construct": "a TEXT-BEARING part pinned to its ancestor box by position:absolute + width/height",
+  "why": "RC8. width/height are excluded from fusion for every text-bearing part on the premise that text widths are font-metric-dependent — a premise that is false for a box the layout PINNED. spec/channel-table.json classes width and height CARRIED (a fixed frame size).",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.a.tokens.width",
+  "observable": {
+    "part": "a",
+    "channel": "width",
+    "capturedValue": "32px"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "a fixed 32x32 frame concentric with the root, not a font-metric hug"
+  }
+}

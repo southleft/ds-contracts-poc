@@ -1,0 +1,90 @@
+{
+  "_marker": "THE MEASURED OUTCOMES of the hard corpus. Recorded from the conformance baselines, NEVER hand-edited, and never in the commit that declares a case — spec/hard-corpus.json is the prediction and this file is the result. `agrees` is true only for PASS: the case came out the way the closed table said it would.",
+  "measuredFrom": "conformance/BASELINE.json + conformance/CANVAS-BASELINE.json (npm run conformance:capture, then npm run conformance -- --write)",
+  "results": [
+    {
+      "id": "hard-align-items-baseline",
+      "expect": "CARRIED",
+      "verdict": "WRONG-NAME",
+      "agrees": false
+    },
+    {
+      "id": "hard-border-dashed",
+      "expect": "LEDGERED",
+      "verdict": "PASS",
+      "agrees": true
+    },
+    {
+      "id": "hard-box-shadow-layered",
+      "expect": "CARRIED",
+      "verdict": "PASS",
+      "agrees": true
+    },
+    {
+      "id": "hard-empty-region-min-size",
+      "expect": "CARRIED",
+      "verdict": "PASS",
+      "agrees": true
+    },
+    {
+      "id": "hard-flex-direction-column-reverse",
+      "expect": "CARRIED",
+      "verdict": "WRONG-NAME",
+      "agrees": false
+    },
+    {
+      "id": "hard-flex-wrap-wrap",
+      "expect": "REFUSED",
+      "verdict": "PASS",
+      "agrees": true
+    },
+    {
+      "id": "hard-gradient-element-fill",
+      "expect": "CARRIED",
+      "verdict": "PASS",
+      "agrees": true
+    },
+    {
+      "id": "hard-outline-ring-rest-plane",
+      "expect": "CARRIED",
+      "verdict": "PASS",
+      "agrees": true
+    },
+    {
+      "id": "hard-placeholder-ink-vs-value",
+      "expect": "CARRIED",
+      "verdict": "PASS",
+      "agrees": true
+    },
+    {
+      "id": "hard-pseudo-tick-rotated",
+      "expect": "CARRIED",
+      "verdict": "PASS",
+      "agrees": true
+    },
+    {
+      "id": "hard-rem-scale-padding",
+      "expect": "CARRIED",
+      "verdict": "PASS",
+      "agrees": true
+    },
+    {
+      "id": "hard-svg-glyph-stroke",
+      "expect": "CARRIED",
+      "verdict": "SILENT-LOSS",
+      "agrees": false
+    },
+    {
+      "id": "hard-text-indent-eviction",
+      "expect": "LEDGERED",
+      "verdict": "PASS",
+      "agrees": true
+    },
+    {
+      "id": "hard-text-part-pinned-size",
+      "expect": "CARRIED",
+      "verdict": "PASS",
+      "agrees": true
+    }
+  ]
+}

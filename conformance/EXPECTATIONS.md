@@ -16,19 +16,37 @@ repo it is simply absent from the denominator and scores 100%.
 
 | | |
 |---|---|
-| cases | **94** |
-| 🟢 pass | **91** |
-| 🔴 red | **3** |
+| cases | **108** |
+| 🟢 pass | **102** |
+| 🔴 red | **6** |
 | 🟡 yellow (UNSUPPORTED, never read) | **0** |
 | **UNSUPPORTED declared — THE RATCHET** | **18** · may only DECREASE without an explicit manifest edit |
 
-Declared dispositions: CARRIED 52 · LOWERED 5 · REFUSED 19 · UNSUPPORTED 18.
+Declared dispositions: CARRIED 65 · LOWERED 5 · REFUSED 20 · UNSUPPORTED 18.
 
 **A green gate here would mean the cases are too easy.** The point of the
 fixture is a measured frontier, and every red below is an open, named defect —
 recorded in `conformance/BASELINE.json` so it cannot drift in either direction:
 a new red is a regression, and a red that becomes green must be re-recorded, so
 a fix can never be absorbed silently.
+
+## SILENT-LOSS 🔴 — 1
+
+The class the fixture exists to catch, and the only one that is **never waivable**.
+The construct is observable in `captured-truth.json`, absent from the contract, and
+named by no string in the union of `LEDGER.md`, the receipt/refusal arrays of
+`enriched.extension.json`, `review-queue.json`, `source-bindings.json.skips`,
+`scorecard.json` `namedLosses`, and the run's stdout. The pipeline read the fact,
+dropped it, and said nothing.
+
+### `hard-svg-glyph-stroke`
+
+- **construct** — `inline <svg><path> check glyph drawn with stroke, stroke-width and stroke-linecap`
+- **why it matters** — RC4. SVG reconstruction drops the channels that carry the glyph SHAPE: a check mark drawn as a stroked path is the single most common indicator in every checkbox in every design system. spec/channel-table.json classes stroke-width and stroke CARRIED (verbatim in the promoted glyph markup) and stroke-linecap REFUSED.
+- **declared** CARRIED
+- **measured** — channel `stroke-width`; observed on `part-0-0`; carried **not at all**
+- **canvas** — PRESENT: the promoted glyph asset is imported as vector markup; the stroke weight rides the markup
+- **verdict** — 🔴 **SILENT-LOSS**: declared CARRIED; observed but neither carried nor named anywhere
 
 ## UNDECLARED-CARRY (HARMFUL) 🔴 — 3
 
@@ -65,6 +83,32 @@ manifest.
 - **canvas** — ABSENT: a stage-sized box is a measurement artefact, not a component fact
 - **verdict** — 🔴 **UNDECLARED-CARRY**: declared REFUSED but the engine CARRIED it — update the manifest
 
+## WRONG-NAME 🔴 — 2
+
+The loss is named — by a message that does not distinguish this construct from any
+other. This is the condition that hid Carbon's hollow checkbox: two constructs
+collapsing into one indistinguishable receipt.
+
+### `hard-align-items-baseline`
+
+- **construct** — `align-items: baseline on the container`
+- **why it matters** — RC1. baseline is already in LayoutSchema.align and already lowered by both emitters; only the DETECTION map lacked it, so the fact could never arrive from a captured library. spec/channel-table.json classes align-items CARRIED (counterAxisAlignItems).
+- **declared** CARRIED
+- **measured** — channel `align-items`; observed on `root`; carried **not at all**
+- **canvas** — PRESENT: counterAxisAlignItems; BASELINE projects to MIN on the vertical axis (ALIGN_FIGMA)
+- **verdict** — 🔴 **WRONG-NAME**: declared CARRIED but NOT carried; the engine names "align-items" somewhere — the manifest and the engine disagree about the disposition
+- **what the engine actually said** — `: **0** ## Code-only / overflow (named, in the extension file) - base channels outside mintable kinds: **3** - root.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today (sample: `baseline`, 1 distinct value(s)) - lab`
+
+### `hard-flex-direction-column-reverse`
+
+- **construct** — `flex-direction: column-reverse on the container`
+- **why it matters** — RC1. LAYOUT_CHANNEL_TO_FIELD is the only reader that turns a captured flex keyword into a Part.layout fact, and the reversed spellings were absent from it: no map entry means the channel leaves through layout-value-outside-vocabulary and the composite mints as one row. spec/channel-table.json classes flex-direction CARRIED (auto-layout layoutMode).
+- **declared** CARRIED
+- **measured** — channel `flex-direction`; observed on `root`; carried **not at all**
+- **canvas** — PRESENT: auto-layout VERTICAL with the child order reversed (core/emit-figma-script.ts isReversed)
+- **verdict** — 🔴 **WRONG-NAME**: declared CARRIED but NOT carried; the engine names "flex-direction" somewhere — the manifest and the engine disagree about the disposition
+- **what the engine actually said** — `: **0** ## Code-only / overflow (named, in the extension file) - base channels outside mintable kinds: **3** - root.flex-direction — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today (sample: `column-reverse`, 1 distinct value(s)`
+
 ## The frontier — every case
 
 | | case | feature | construct | declared | measured | verdict |
@@ -95,10 +139,14 @@ manifest.
 | 🟢 | `mask-image` | effects | `mask-image: linear-gradient(...)` | UNSUPPORTED | refused, by name | PASS |
 | 🟢 | `mix-blend-mode` | effects | `mix-blend-mode: multiply` | UNSUPPORTED | refused, by name | PASS |
 | 🟢 | `accent-color` | forms | `accent-color: rebeccapurple on a native checkbox` | UNSUPPORTED | refused, by name | PASS |
+| 🟢 | `hard-placeholder-ink-vs-value` | forms | `input whose VALUE ink and ::placeholder ink are different colours` | CARRIED | carried | PASS |
 | 🟢 | `antd-empty-margin-only-parts` | geometry | `span.c > span.a(empty) + span.b(empty) — two EMPTY inline-block spans whose only facts are margin-inline-start/end (antd Switch inner-checked / inner-unchecked)` | CARRIED | carried | PASS |
 | 🟢 | `aspect-ratio` | geometry | `aspect-ratio: 2 / 1` | CARRIED | carried | PASS |
 | 🟢 | `border-radius-px` | geometry | `border-radius: 6px` | CARRIED | carried | PASS |
+| 🟢 | `hard-text-part-pinned-size` | geometry | `a TEXT-BEARING part pinned to its ancestor box by position:absolute + width/height` | CARRIED | carried | PASS |
 | 🟢 | `min-max-width` | geometry | `min-width / max-width in px` | CARRIED | carried | PASS |
+| 🟢 | `hard-pseudo-tick-rotated` | glyph | `::after tick built from border-right + border-bottom + transform: rotate(45deg)` | CARRIED | carried | PASS |
+| 🔴 | `hard-svg-glyph-stroke` | glyph | `inline <svg><path> check glyph drawn with stroke, stroke-width and stroke-linecap` | CARRIED | dropped, unnamed | SILENT-LOSS |
 | 🟢 | `grid-child-align` | grid-alignment | `justify-self: center; align-self: end on a fixed-size child` | CARRIED | carried | PASS |
 | 🟢 | `grid-area-empty-slot` | grid-areas | `a declared grid area with NO children (empty slot)` | CARRIED | carried | PASS |
 | 🟢 | `grid-area-nonrectangular` | grid-areas | `area occupancy that cannot tile grid-template-areas (gapped or non-rectangular per CSS rules)` | LOWERED | carried | PASS |
@@ -137,8 +185,15 @@ manifest.
 | 🔴 | `stage-box-equal` | invariant | `a captured box exactly equal to the STAGE box (100% × 100%)` | REFUSED | carried | UNDECLARED-CARRY |
 | 🟢 | `flex-gap` | layout | `column-gap / row-gap in px` | CARRIED | carried | PASS |
 | 🟢 | `grid-2d` | layout | `display: grid + grid-template-columns: 1fr 1fr (children AUTO-PLACED)` | CARRIED | carried | PASS |
+| 🔴 | `hard-align-items-baseline` | layout | `align-items: baseline on the container` | CARRIED | refused, other name | WRONG-NAME |
+| 🔴 | `hard-flex-direction-column-reverse` | layout | `flex-direction: column-reverse on the container` | CARRIED | refused, other name | WRONG-NAME |
+| 🟢 | `hard-flex-wrap-wrap` | layout | `flex-wrap: wrap on the container` | REFUSED | refused, by name | PASS |
 | 🟢 | `antd-part-transition-channel` | motion | `.cf-a { transition: background-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) } — a transition declared on a CHILD PART, not the root (antd's `motionDurationMid` on every interactive part)` | CARRIED | carried | PASS |
 | 🟢 | `transition-channel` | motion | `transition: background-color 200ms ease` | CARRIED | carried | PASS |
+| 🟢 | `hard-border-dashed` | non-stroke-ink | `border: 2px dashed` | CARRIED | carried | PASS |
+| 🟢 | `hard-box-shadow-layered` | non-stroke-ink | `box-shadow with three layers, one of them inset` | CARRIED | carried | PASS |
+| 🟢 | `hard-gradient-element-fill` | non-stroke-ink | `background-image: linear-gradient on the ELEMENT (not a pseudo)` | CARRIED | carried | PASS |
+| 🟢 | `hard-outline-ring-rest-plane` | non-stroke-ink | `outline: 2px solid + outline-offset on the REST plane (not a focus state)` | CARRIED | carried | PASS |
 | 🟢 | `position-absolute-insets` | position | `position: absolute + top/left insets` | CARRIED | carried | PASS |
 | 🟢 | `position-fixed` | position | `position: fixed` | REFUSED | refused, by name | PASS |
 | 🟢 | `position-sticky` | position | `position: sticky + top` | REFUSED | refused, by name | PASS |
@@ -151,13 +206,16 @@ manifest.
 | 🟢 | `content-visibility-auto` | rendering | `content-visibility: auto` | UNSUPPORTED | refused, by name | PASS |
 | 🟢 | `shadow-part` | shadow-dom | `::part(label) styling across an OPEN shadow boundary` | CARRIED | carried | PASS |
 | 🟢 | `shadow-root-closed` | shadow-dom | `a custom element with a CLOSED shadow root` | UNSUPPORTED | not read | PASS |
+| 🟢 | `hard-empty-region-min-size` | slot | `a CHILDLESS region whose only size facts are min-height / min-width` | CARRIED | carried | PASS |
 | 🟢 | `svg-outside-grammar` | svg | `<svg> whose children are <circle> and <rect>` | REFUSED | refused, by name | PASS |
+| 🟢 | `hard-text-indent-eviction` | text | `text-indent: -9999px — text evicted from its own box` | CARRIED | carried | PASS |
 | 🟢 | `text-indent-off-box` | text | `text-indent: 9999px on a box pinned to 8px (the status-pip idiom: the label is pushed out of the box and only the dot shows)` | LOWERED | carried | PASS |
 | 🟢 | `text-overflow-ellipsis` | text | `text-overflow: ellipsis + overflow hidden + nowrap` | CARRIED | carried | PASS |
 | 🟢 | `antd-component-scoped-custom-property` | tokens | `.cf-root { --cf-scoped-pad: 15px } .cf-root .cf-a { padding-inline: var(--cf-scoped-pad) } — a token DECLARED ON THE COMPONENT ROOT (not :root) and consumed by a descendant (antd cssVar component tokens on `.antd.ant-btn`)` | CARRIED | carried | PASS |
 | 🟢 | `rotate-independent-property` | transform | `rotate: 15deg (the INDEPENDENT transform property)` | UNSUPPORTED | refused, by name | PASS |
 | 🟢 | `transform-scale-rotate` | transform | `transform: rotate(15deg) scale(1.2)` | REFUSED | refused, by name | PASS |
 | 🟢 | `em-relative-padding` | units | `padding: 1.5em against a 12px font-size` | CARRIED | carried | PASS |
+| 🟢 | `hard-rem-scale-padding` | units | `padding-left: 1.5rem / padding-right: 0.75rem — the ROOT-relative scale` | CARRIED | carried | PASS |
 | 🟢 | `percentage-padding` | units | `padding-left: 10% (resolved against the PARENT width)` | CARRIED | carried | PASS |
 | 🟢 | `webkit-line-clamp` | vendor-prefixed | `-webkit-line-clamp: 2 + -webkit-box-orient: vertical` | UNSUPPORTED | refused, by name | PASS |
 | 🟢 | `webkit-text-fill-color` | vendor-prefixed | `-webkit-text-fill-color OVERRIDING color` | CARRIED | carried | PASS |

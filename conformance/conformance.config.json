@@ -577,6 +577,118 @@
       "blockStage": true
     },
     {
+      "__case": "layout: align-items: baseline on the container — declared CARRIED",
+      "name": "CaseHardAlignItemsBaseline",
+      "importName": "CaseHardAlignItemsBaseline",
+      "contract": "conformance/seeds/hard-align-items-baseline.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
+      "__case": "non-stroke-ink: border: 2px dashed — declared CARRIED",
+      "name": "CaseHardBorderDashed",
+      "importName": "CaseHardBorderDashed",
+      "contract": "conformance/seeds/hard-border-dashed.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
+      "__case": "non-stroke-ink: box-shadow with three layers, one of them inset — declared CARRIED",
+      "name": "CaseHardBoxShadowLayered",
+      "importName": "CaseHardBoxShadowLayered",
+      "contract": "conformance/seeds/hard-box-shadow-layered.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
+      "__case": "slot: a CHILDLESS region whose only size facts are min-height / min-width — declared CARRIED",
+      "name": "CaseHardEmptyRegionMinSize",
+      "importName": "CaseHardEmptyRegionMinSize",
+      "contract": "conformance/seeds/hard-empty-region-min-size.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
+      "__case": "layout: flex-direction: column-reverse on the container — declared CARRIED",
+      "name": "CaseHardFlexDirectionColumnReverse",
+      "importName": "CaseHardFlexDirectionColumnReverse",
+      "contract": "conformance/seeds/hard-flex-direction-column-reverse.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
+      "__case": "layout: flex-wrap: wrap on the container — declared REFUSED",
+      "name": "CaseHardFlexWrapWrap",
+      "importName": "CaseHardFlexWrapWrap",
+      "contract": "conformance/seeds/hard-flex-wrap-wrap.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
+      "__case": "non-stroke-ink: background-image: linear-gradient on the ELEMENT (not a pseudo) — declared CARRIED",
+      "name": "CaseHardGradientElementFill",
+      "importName": "CaseHardGradientElementFill",
+      "contract": "conformance/seeds/hard-gradient-element-fill.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
+      "__case": "non-stroke-ink: outline: 2px solid + outline-offset on the REST plane (not a focus state) — declared CARRIED",
+      "name": "CaseHardOutlineRingRestPlane",
+      "importName": "CaseHardOutlineRingRestPlane",
+      "contract": "conformance/seeds/hard-outline-ring-rest-plane.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
+      "__case": "forms: input whose VALUE ink and ::placeholder ink are different colours — declared CARRIED",
+      "name": "CaseHardPlaceholderInkVsValue",
+      "importName": "CaseHardPlaceholderInkVsValue",
+      "contract": "conformance/seeds/hard-placeholder-ink-vs-value.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
+      "__case": "glyph: ::after tick built from border-right + border-bottom + transform: rotate(45deg) — declared CARRIED",
+      "name": "CaseHardPseudoTickRotated",
+      "importName": "CaseHardPseudoTickRotated",
+      "contract": "conformance/seeds/hard-pseudo-tick-rotated.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
+      "__case": "units: padding-left: 1.5rem / padding-right: 0.75rem — the ROOT-relative scale — declared CARRIED",
+      "name": "CaseHardRemScalePadding",
+      "importName": "CaseHardRemScalePadding",
+      "contract": "conformance/seeds/hard-rem-scale-padding.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
+      "__case": "glyph: inline <svg><path> check glyph drawn with stroke, stroke-width and stroke-linecap — declared CARRIED",
+      "name": "CaseHardSvgGlyphStroke",
+      "importName": "CaseHardSvgGlyphStroke",
+      "contract": "conformance/seeds/hard-svg-glyph-stroke.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
+      "__case": "text: text-indent: -9999px — text evicted from its own box — declared CARRIED",
+      "name": "CaseHardTextIndentEviction",
+      "importName": "CaseHardTextIndentEviction",
+      "contract": "conformance/seeds/hard-text-indent-eviction.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
+      "__case": "geometry: a TEXT-BEARING part pinned to its ancestor box by position:absolute + width/height — declared CARRIED",
+      "name": "CaseHardTextPartPinnedSize",
+      "importName": "CaseHardTextPartPinnedSize",
+      "contract": "conformance/seeds/hard-text-part-pinned-size.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
       "__case": "effects: mask-image: linear-gradient(...) — declared UNSUPPORTED",
       "name": "CaseMaskImage",
       "importName": "CaseMaskImage",

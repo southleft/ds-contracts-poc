@@ -2,11 +2,11 @@
   "_marker": "THE DENOMINATOR. Hand-authored per case, generated into one index. Deliberately NOT derived from isFusable / styled / DECLARED_CHANNELS / CHANNEL_TO_COMPUTED / TOKEN_CHANNELS / carriedParts — every instrument in the pipeline derives its denominator from the same filter that decides carriage, which is why a channel the filter never opened scores 100%. This file is the independent one.",
   "generatedBy": "conformance/build.ts",
   "library": "@ds-contracts/conformance@0.1.0",
-  "count": 94,
+  "count": 108,
   "byExpectation": {
-    "CARRIED": 52,
+    "CARRIED": 65,
     "LOWERED": 5,
-    "REFUSED": 19,
+    "REFUSED": 20,
     "UNSUPPORTED": 18
   },
   "cases": [
@@ -1523,6 +1523,258 @@
       },
       "probe": "P1 (defaults are exactly this), P8 (readback exactness)",
       "dumpSnippet": "dump.snippet.json"
+    },
+    {
+      "id": "hard-align-items-baseline",
+      "feature": "layout",
+      "construct": "align-items: baseline on the container",
+      "why": "RC1. baseline is already in LayoutSchema.align and already lowered by both emitters; only the DETECTION map lacked it, so the fact could never arrive from a captured library. spec/channel-table.json classes align-items CARRIED (counterAxisAlignItems).",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.layout.align",
+      "observable": {
+        "part": "root",
+        "channel": "align-items",
+        "capturedValue": "baseline"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "counterAxisAlignItems; BASELINE projects to MIN on the vertical axis (ALIGN_FIGMA)"
+      }
+    },
+    {
+      "id": "hard-border-dashed",
+      "feature": "non-stroke-ink",
+      "construct": "border: 2px dashed",
+      "why": "RC3, ledger half. A dashed border is real ink with no Figma stroke-style spelling. spec/channel-table.json classes border-top-style LEDGERED: it rides Part.declared and surfaces as a code-only fact, so it must reach the CONTRACT and must NOT be drawn.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.declared.border-top-style",
+      "observable": {
+        "part": "root",
+        "channel": "border-top-style",
+        "capturedValue": "dashed"
+      },
+      "canvas": {
+        "expect": "ABSENT",
+        "note": "LEDGERED — carried as data, surfaced as a code-only fact; a Figma stroke has no dash-style channel"
+      }
+    },
+    {
+      "id": "hard-box-shadow-layered",
+      "feature": "non-stroke-ink",
+      "construct": "box-shadow with three layers, one of them inset",
+      "why": "RC3. The single-shadow case is covered; the ELEVATION shape real design systems ship is a stack, and the emitter carried a narrower literal-colour parser than the token set does. spec/channel-table.json classes box-shadow CARRIED (DROP_SHADOW single, or the full multi-layer/inset effect stack, v17).",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.tokens.box-shadow",
+      "observable": {
+        "part": "root",
+        "channel": "box-shadow",
+        "capturedValue": "rgba(0, 0, 0, 0.06) 0px 1px 2px 0px, rgba(0, 0, 0, 0.1) 0px 4px 8px 0px, rgba(0, 0, 0, 0.04) 0px 0px 0px 1px inset"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "the multi-layer effect stack, the inset layer as INNER_SHADOW"
+      }
+    },
+    {
+      "id": "hard-empty-region-min-size",
+      "feature": "slot",
+      "construct": "a CHILDLESS region whose only size facts are min-height / min-width",
+      "why": "RC5. A childless slot hugs to 1px, so every slot-bearing component mints as a sliver or an empty box. The CSS-side precondition is that a region with NO children and no fixed size still reaches the contract carrying its minimum box. spec/channel-table.json classes min-height and min-width CARRIED (minHeight / minWidth).",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.a.tokens.min-height",
+      "observable": {
+        "part": "a",
+        "channel": "min-height",
+        "capturedValue": "24px"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "minHeight on the childless region — the fact that stops an empty slot hugging to 1px"
+      }
+    },
+    {
+      "id": "hard-flex-direction-column-reverse",
+      "feature": "layout",
+      "construct": "flex-direction: column-reverse on the container",
+      "why": "RC1. LAYOUT_CHANNEL_TO_FIELD is the only reader that turns a captured flex keyword into a Part.layout fact, and the reversed spellings were absent from it: no map entry means the channel leaves through layout-value-outside-vocabulary and the composite mints as one row. spec/channel-table.json classes flex-direction CARRIED (auto-layout layoutMode).",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.layout.direction",
+      "observable": {
+        "part": "root",
+        "channel": "flex-direction",
+        "capturedValue": "column-reverse"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "auto-layout VERTICAL with the child order reversed (core/emit-figma-script.ts isReversed)"
+      }
+    },
+    {
+      "id": "hard-flex-wrap-wrap",
+      "feature": "layout",
+      "construct": "flex-wrap: wrap on the container",
+      "why": "RC1. LayoutSchema.wrap is a first-class contract fact with a lowering on both surfaces, but spec/channel-table.json classes flex-wrap REFUSED (code-only:no-schema-channel): wrapping flex containers are outside the single-line auto-layout lowering. The case measures whether the refusal is NAMED rather than silent.",
+      "expect": "REFUSED",
+      "expectName": "flex-wrap",
+      "expectWhere": "LEDGER.md / code-only facts",
+      "observable": {
+        "part": "root",
+        "channel": "flex-wrap",
+        "capturedValue": "wrap"
+      },
+      "canvas": {
+        "expect": "ABSENT",
+        "note": "no wrap projection in the single-line auto-layout lowering"
+      }
+    },
+    {
+      "id": "hard-gradient-element-fill",
+      "feature": "non-stroke-ink",
+      "construct": "background-image: linear-gradient on the ELEMENT (not a pseudo)",
+      "why": "RC3, third mechanism. The pseudo-gradient case is REFUSED; a gradient on the element itself is the surface every hero card and every gradient button paints with. spec/channel-table.json classes background-image CARRIED (gradient stacks mint as a whole-value gradient kind). FIXTURE REPAIR (2026-08-25, before any result was recorded): capturedValue first read the raw getComputedStyle spelling `linear-gradient(to right, rgb(255, 255, 255) 0%, rgb(203, 213, 225) 100%)`; the capture reader normalises every colour inside a gradient value to rgba(), so the gate could not match it and graded UNMEASURED for a reason about the fixture rather than the engine. The DECLARED DISPOSITION was not touched.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.tokens.background-image",
+      "observable": {
+        "part": "root",
+        "channel": "background-image",
+        "capturedValue": "linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(203, 213, 225, 1) 100%)"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "GRADIENT_LINEAR fill"
+      }
+    },
+    {
+      "id": "hard-outline-ring-rest-plane",
+      "feature": "non-stroke-ink",
+      "construct": "outline: 2px solid + outline-offset on the REST plane (not a focus state)",
+      "why": "RC3. Ink the CSS paints by a non-fill/non-stroke mechanism has no canvas lowering unless the outline PAIR (width + colour) both survive; the existing antd cases only exercise the focus-visible plane. spec/channel-table.json classes outline-width and outline-color CARRIED as an OUTSIDE-aligned stroke pair, outline-offset LEDGERED (annotate).",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.tokens.outline-width",
+      "observable": {
+        "part": "root",
+        "channel": "outline-width",
+        "capturedValue": "2px"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "strokeWeight of an OUTSIDE-aligned stroke; outline-offset is annotated only"
+      }
+    },
+    {
+      "id": "hard-placeholder-ink-vs-value",
+      "feature": "forms",
+      "construct": "input whose VALUE ink and ::placeholder ink are different colours",
+      "why": "RC7. The emitter mints an empty placeholder string in VALUE ink, so every empty field reads as filled. This case measures the INPUT to that defect: the control element carries its value ink and nothing else, because the ::placeholder plane is a separately named wall (see the pseudo-placeholder case). spec/channel-table.json classes color CARRIED (the text node fill).",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.a.tokens.color",
+      "observable": {
+        "part": "a",
+        "channel": "color",
+        "capturedValue": "rgb(17, 24, 39)"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "the text node fill of the control — the ink the emitter reaches for when no placeholder-color is carried"
+      }
+    },
+    {
+      "id": "hard-pseudo-tick-rotated",
+      "feature": "glyph",
+      "construct": "::after tick built from border-right + border-bottom + transform: rotate(45deg)",
+      "why": "RC4. The other half of glyph geometry: a check mark that is not SVG at all but a rotated two-border box. pseudo-decor v2 promotes a drawn pseudo into a part; spec/channel-table.json classes border-right-width CARRIED (strokeRightWeight) and transform CARRIED for the bounded rotate() grammar.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "the promoted pseudo-decor part, tokens.border-right-width",
+      "observable": {
+        "part": "root::after",
+        "channel": "border-right-width",
+        "capturedValue": "2px"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "a decor part with two strokes and a bounded rotation"
+      }
+    },
+    {
+      "id": "hard-rem-scale-padding",
+      "feature": "units",
+      "construct": "padding-left: 1.5rem / padding-right: 0.75rem — the ROOT-relative scale",
+      "why": "The em case is covered and rem is not: em resolves against the element, rem against the document root, and a capture harness owns the document root. spec/channel-table.json classes padding-left CARRIED (paddingLeft); the case measures that the resolved px reaches the contract rather than the authored rem.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.tokens.padding-left",
+      "observable": {
+        "part": "root",
+        "channel": "padding-left",
+        "capturedValue": "24px"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "paddingLeft — the resolved px, since a canvas frame has no rem base"
+      }
+    },
+    {
+      "id": "hard-svg-glyph-stroke",
+      "feature": "glyph",
+      "construct": "inline <svg><path> check glyph drawn with stroke, stroke-width and stroke-linecap",
+      "why": "RC4. SVG reconstruction drops the channels that carry the glyph SHAPE: a check mark drawn as a stroked path is the single most common indicator in every checkbox in every design system. spec/channel-table.json classes stroke-width and stroke CARRIED (verbatim in the promoted glyph markup) and stroke-linecap REFUSED.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.a — stroke-width carried verbatim in the promoted glyph markup",
+      "observable": {
+        "part": "a",
+        "channel": "stroke-width",
+        "capturedValue": "2px"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "the promoted glyph asset is imported as vector markup; the stroke weight rides the markup"
+      }
+    },
+    {
+      "id": "hard-text-indent-eviction",
+      "feature": "text",
+      "construct": "text-indent: -9999px — text evicted from its own box",
+      "why": "RC8, adjacent class. The accessible-name-only pattern: real text that paints nowhere near its box. spec/channel-table.json classes text-indent LEDGERED (a contract token binding emitted verbatim in generated CSS; on canvas an annotation only), so it must reach the CONTRACT and must NOT move the text on canvas.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.tokens.text-indent",
+      "observable": {
+        "part": "root",
+        "channel": "text-indent",
+        "capturedValue": "-9999px"
+      },
+      "canvas": {
+        "expect": "ABSENT",
+        "note": "LEDGERED — annotated, never drawn; a canvas TEXT node has no indent channel"
+      }
+    },
+    {
+      "id": "hard-text-part-pinned-size",
+      "feature": "geometry",
+      "construct": "a TEXT-BEARING part pinned to its ancestor box by position:absolute + width/height",
+      "why": "RC8. width/height are excluded from fusion for every text-bearing part on the premise that text widths are font-metric-dependent — a premise that is false for a box the layout PINNED. spec/channel-table.json classes width and height CARRIED (a fixed frame size).",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.a.tokens.width",
+      "observable": {
+        "part": "a",
+        "channel": "width",
+        "capturedValue": "32px"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "a fixed 32x32 frame concentric with the root, not a font-metric hug"
+      }
     },
     {
       "id": "mask-image",

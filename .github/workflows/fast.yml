@@ -679,6 +679,24 @@ jobs:
       - name: grammar-coverage self-test (ten planted reds - a dropped construct, an exerciser that does not exercise, a ghost file, an unimplemented marker, stale totals, an empty corpus)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run grammar-coverage:check -- --self-test
+      # THE HARD CORPUS — spec/HARD-CORPUS.md + hard-corpus.json.
+      # Cases this repo AUTHORS in order to be converted, each aimed at ONE
+      # mechanism a closed table already names. The corpus is a FUNCTION of the
+      # tables above (channel table, grammar coverage, required facts, the FC-*
+      # walls) and this gate re-derives every one of those denominators, so a
+      # mechanism cannot leave the matrix silently. Its real job is the
+      # DECLARE-FIRST rule: a case must declare CARRIED / LEDGERED / REFUSED
+      # before it runs, a result may not exist for an undeclared case, and the
+      # commit that declares a case must be a strict ANCESTOR of the commit that
+      # records its result — measured against git, not asserted. A result
+      # written beside its own expectation is exactly how a self-graded 168/170
+      # happens.
+      - name: hard-corpus:check (every case declares its outcome before it runs; the matrix names what it does not cover)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run hard-corpus:check
+      - name: hard-corpus self-test (eleven planted reds - an undeclared expectation, an unnamed refusal, an invented mechanism, a ghost home, a moved denominator, a result in its own declaration's commit)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run hard-corpus:self-test
       # CORPUS REPRODUCIBILITY — the twin of the gate above, and the reason the
       # first-pass exam went 0/8 the day it first ran: the committed contracts
       # claim to be the output of the documented chain, and nothing checked it.

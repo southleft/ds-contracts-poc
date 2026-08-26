@@ -1,0 +1,18 @@
+{
+  "id": "hard-svg-glyph-stroke",
+  "feature": "glyph",
+  "construct": "inline <svg><path> check glyph drawn with stroke, stroke-width and stroke-linecap",
+  "why": "RC4. SVG reconstruction drops the channels that carry the glyph SHAPE: a check mark drawn as a stroked path is the single most common indicator in every checkbox in every design system. spec/channel-table.json classes stroke-width and stroke CARRIED (verbatim in the promoted glyph markup) and stroke-linecap REFUSED.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.a — stroke-width carried verbatim in the promoted glyph markup",
+  "observable": {
+    "part": "a",
+    "channel": "stroke-width",
+    "capturedValue": "2px"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "the promoted glyph asset is imported as vector markup; the stroke weight rides the markup"
+  }
+}

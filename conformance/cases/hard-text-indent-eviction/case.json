@@ -1,0 +1,18 @@
+{
+  "id": "hard-text-indent-eviction",
+  "feature": "text",
+  "construct": "text-indent: -9999px — text evicted from its own box",
+  "why": "RC8, adjacent class. The accessible-name-only pattern: real text that paints nowhere near its box. spec/channel-table.json classes text-indent LEDGERED (a contract token binding emitted verbatim in generated CSS; on canvas an annotation only), so it must reach the CONTRACT and must NOT move the text on canvas.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.tokens.text-indent",
+  "observable": {
+    "part": "root",
+    "channel": "text-indent",
+    "capturedValue": "-9999px"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "LEDGERED — annotated, never drawn; a canvas TEXT node has no indent channel"
+  }
+}

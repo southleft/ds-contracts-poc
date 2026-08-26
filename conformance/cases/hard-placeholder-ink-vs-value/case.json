@@ -1,0 +1,18 @@
+{
+  "id": "hard-placeholder-ink-vs-value",
+  "feature": "forms",
+  "construct": "input whose VALUE ink and ::placeholder ink are different colours",
+  "why": "RC7. The emitter mints an empty placeholder string in VALUE ink, so every empty field reads as filled. This case measures the INPUT to that defect: the control element carries its value ink and nothing else, because the ::placeholder plane is a separately named wall (see the pseudo-placeholder case). spec/channel-table.json classes color CARRIED (the text node fill).",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.a.tokens.color",
+  "observable": {
+    "part": "a",
+    "channel": "color",
+    "capturedValue": "rgb(17, 24, 39)"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "the text node fill of the control — the ink the emitter reaches for when no placeholder-color is carried"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "hard-empty-region-min-size",
+  "feature": "slot",
+  "construct": "a CHILDLESS region whose only size facts are min-height / min-width",
+  "why": "RC5. A childless slot hugs to 1px, so every slot-bearing component mints as a sliver or an empty box. The CSS-side precondition is that a region with NO children and no fixed size still reaches the contract carrying its minimum box. spec/channel-table.json classes min-height and min-width CARRIED (minHeight / minWidth).",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.a.tokens.min-height",
+  "observable": {
+    "part": "a",
+    "channel": "min-height",
+    "capturedValue": "24px"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "minHeight on the childless region — the fact that stops an empty slot hugging to 1px"
+  }
+}

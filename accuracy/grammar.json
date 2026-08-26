@@ -34,11 +34,11 @@
     {
       "id": "css-dom",
       "path": "conformance/MANIFEST.json",
-      "count": 94,
+      "count": 108,
       "expectations": {
-        "CARRIED": 52,
+        "CARRIED": 65,
         "LOWERED": 5,
-        "REFUSED": 19,
+        "REFUSED": 20,
         "UNSUPPORTED": 18
       }
     },

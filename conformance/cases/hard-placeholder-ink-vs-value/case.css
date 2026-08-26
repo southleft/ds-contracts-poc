@@ -1,0 +1,3 @@
+[data-cf="hard-placeholder-ink-vs-value"] { display: flex; background: rgb(255, 255, 255); }
+[data-cf="hard-placeholder-ink-vs-value"] .cf-a { display: block; padding: 6px 10px; border: 1px solid rgb(203, 213, 225); border-radius: 6px; background: rgb(255, 255, 255); color: rgb(17, 24, 39); font-size: 14px; }
+[data-cf="hard-placeholder-ink-vs-value"] .cf-a::placeholder { color: rgb(148, 163, 184); }

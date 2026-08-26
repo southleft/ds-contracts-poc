@@ -1,0 +1,2 @@
+[data-cf="hard-empty-region-min-size"] { display: flex; flex-direction: column; padding: 8px; background: rgb(255, 255, 255); border: 1px solid rgb(225, 225, 225); }
+[data-cf="hard-empty-region-min-size"] .cf-a { display: block; min-height: 24px; min-width: 96px; background: rgb(245, 245, 245); }
