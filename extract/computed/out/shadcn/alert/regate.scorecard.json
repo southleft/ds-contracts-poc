@@ -3,6 +3,7 @@
   "component": "Alert",
   "config": "extract/computed/configs/shadcn.json",
   "capturedBrowser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "declared": {
     "base": [
       {
@@ -27,6 +28,16 @@
       },
       {
         "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "\"Inter Variable\", sans-serif"
+      },
+      {
+        "part": "root",
         "channel": "position",
         "value": "relative"
       },
@@ -37,6 +48,31 @@
       },
       {
         "part": "label",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "label",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "label",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "label",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "label",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label",
         "channel": "font-family",
         "value": "\"Inter Variable\", sans-serif"
       },
@@ -44,6 +80,31 @@
         "part": "label",
         "channel": "text-align",
         "value": "left"
+      },
+      {
+        "part": "label-2",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-2",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-2",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-2",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-2",
+        "channel": "box-sizing",
+        "value": "border-box"
       },
       {
         "part": "label-2",
@@ -63,13 +124,15 @@
     "component": "Alert",
     "generatedBy": "extract/computed/gate.ts",
     "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+    "renderedBy": "149.0.7827.55",
+    "browserMismatch": "RENDERED ON A DIFFERENT BROWSER THAN THE CAPTURE — these numbers were produced by Chromium 149.0.7827.55, but the captured truth they are scored against was recorded on Chromium 151.0.7922.34. Computed styles differ between Chromium versions, so cells can be UNEQUAL for that reason alone and this scorecard is not comparable to one recorded on the capture's own browser. Measured 2026-08-25: `position-anchor` computes `none` in 149 and `normal` in 151, and on a raw all-channel replay `flex-line-count`, `ruby-overhang` and `text-fit` move too. Re-run with PLAYWRIGHT_CHROMIUM_PATH set to the capture's browser, or re-capture.",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 2,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 504,
-      "cellsEqual": 312,
-      "pctEqual": 61.904761904761905,
+      "cellsCompared": 736,
+      "cellsEqual": 424,
+      "pctEqual": 57.608695652173914,
       "rowsFullyEqual": 0,
       "rows": 8
     },
@@ -91,11 +154,11 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 19,
-      "mintedLeavesUnfolded": 49,
-      "baseBindings": 32,
+      "mintedLeaves": 21,
+      "mintedLeavesUnfolded": 51,
+      "baseBindings": 46,
       "stateBindings": 0,
-      "codeOnlyChannels": 1,
+      "codeOnlyChannels": 4,
       "overflowBindings": 0,
       "folds": 15
     },
@@ -104,56 +167,56 @@
         "key": "default__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 24,
+        "channelsMismatched": 39,
         "unscorable": "no-original"
       },
       {
         "key": "default__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 24,
+        "channelsMismatched": 39,
         "unscorable": "no-original"
       },
       {
         "key": "default__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 24,
+        "channelsMismatched": 39,
         "unscorable": "no-original"
       },
       {
         "key": "default__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 24,
+        "channelsMismatched": 39,
         "unscorable": "no-original"
       },
       {
         "key": "destructive__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 24,
+        "channelsMismatched": 39,
         "unscorable": "no-original"
       },
       {
         "key": "destructive__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 24,
+        "channelsMismatched": 39,
         "unscorable": "no-original"
       },
       {
         "key": "destructive__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 24,
+        "channelsMismatched": 39,
         "unscorable": "no-original"
       },
       {
         "key": "destructive__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 24,
+        "channelsMismatched": 39,
         "unscorable": "no-original"
       }
     ],
@@ -191,6 +254,14 @@
         8
       ],
       [
+        "root.grid-template-rows",
+        8
+      ],
+      [
+        "root.outline-color",
+        8
+      ],
+      [
         "root.row-rule-color",
         8
       ],
@@ -203,23 +274,18 @@
         8
       ],
       [
-        "label.caret-color",
+        "root.text-size-adjust",
         8
       ],
       [
-        "label.color",
-        8
-      ],
-      [
-        "label.column-rule-color",
-        8
-      ],
-      [
-        "label.row-rule-color",
+        "label.border-bottom-color",
         8
       ]
     ],
     "namedLosses": [
+      "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label-2.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-2.text-wrap-style — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],
     "unresolvedTokenRefs": {
@@ -265,8 +331,8 @@
     "rows": [
       {
         "key": "default__default",
-        "channelsCompared": 63,
-        "channelsEqual": 39,
+        "channelsCompared": 92,
+        "channelsEqual": 53,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -321,6 +387,18 @@
           },
           {
             "part": "root",
+            "channel": "grid-template-rows",
+            "ours": "26px 46px",
+            "theirs": "20px 40px"
+          },
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(161, 161, 161, 0.5)",
+            "theirs": "oklab(0.708 0 0 / 0.5)"
+          },
+          {
+            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(10, 10, 10, 1)",
             "theirs": "oklch(0.145 0 0)"
@@ -336,6 +414,36 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(10, 10, 10, 1)",
             "theirs": "oklch(0.145 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
           },
           {
             "part": "label",
@@ -357,6 +465,12 @@
           },
           {
             "part": "label",
+            "channel": "outline-color",
+            "ours": "rgba(161, 161, 161, 0.5)",
+            "theirs": "oklab(0.708 0 0 / 0.5)"
+          },
+          {
+            "part": "label",
             "channel": "row-rule-color",
             "ours": "rgba(10, 10, 10, 1)",
             "theirs": "oklch(0.145 0 0)"
@@ -372,6 +486,36 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(10, 10, 10, 1)",
             "theirs": "oklch(0.145 0 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
           },
           {
             "part": "label-2",
@@ -393,6 +537,12 @@
           },
           {
             "part": "label-2",
+            "channel": "outline-color",
+            "ours": "rgba(161, 161, 161, 0.5)",
+            "theirs": "oklab(0.708 0 0 / 0.5)"
+          },
+          {
+            "part": "label-2",
             "channel": "row-rule-color",
             "ours": "rgba(115, 115, 115, 1)",
             "theirs": "oklch(0.556 0 0)"
@@ -408,6 +558,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(115, 115, 115, 1)",
             "theirs": "oklch(0.556 0 0)"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "label-2",
@@ -420,8 +576,8 @@
       },
       {
         "key": "default__hover",
-        "channelsCompared": 63,
-        "channelsEqual": 39,
+        "channelsCompared": 92,
+        "channelsEqual": 53,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -476,6 +632,18 @@
           },
           {
             "part": "root",
+            "channel": "grid-template-rows",
+            "ours": "26px 46px",
+            "theirs": "20px 40px"
+          },
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(161, 161, 161, 0.5)",
+            "theirs": "oklab(0.708 0 0 / 0.5)"
+          },
+          {
+            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(10, 10, 10, 1)",
             "theirs": "oklch(0.145 0 0)"
@@ -491,6 +659,36 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(10, 10, 10, 1)",
             "theirs": "oklch(0.145 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
           },
           {
             "part": "label",
@@ -512,6 +710,12 @@
           },
           {
             "part": "label",
+            "channel": "outline-color",
+            "ours": "rgba(161, 161, 161, 0.5)",
+            "theirs": "oklab(0.708 0 0 / 0.5)"
+          },
+          {
+            "part": "label",
             "channel": "row-rule-color",
             "ours": "rgba(10, 10, 10, 1)",
             "theirs": "oklch(0.145 0 0)"
@@ -527,6 +731,36 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(10, 10, 10, 1)",
             "theirs": "oklch(0.145 0 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
           },
           {
             "part": "label-2",
@@ -548,6 +782,12 @@
           },
           {
             "part": "label-2",
+            "channel": "outline-color",
+            "ours": "rgba(161, 161, 161, 0.5)",
+            "theirs": "oklab(0.708 0 0 / 0.5)"
+          },
+          {
+            "part": "label-2",
             "channel": "row-rule-color",
             "ours": "rgba(115, 115, 115, 1)",
             "theirs": "oklch(0.556 0 0)"
@@ -563,6 +803,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(115, 115, 115, 1)",
             "theirs": "oklch(0.556 0 0)"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "label-2",
@@ -575,8 +821,8 @@
       },
       {
         "key": "default__focus-visible",
-        "channelsCompared": 63,
-        "channelsEqual": 39,
+        "channelsCompared": 92,
+        "channelsEqual": 53,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -631,6 +877,18 @@
           },
           {
             "part": "root",
+            "channel": "grid-template-rows",
+            "ours": "26px 46px",
+            "theirs": "20px 40px"
+          },
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(161, 161, 161, 0.5)",
+            "theirs": "oklab(0.708 0 0 / 0.5)"
+          },
+          {
+            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(10, 10, 10, 1)",
             "theirs": "oklch(0.145 0 0)"
@@ -646,6 +904,36 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(10, 10, 10, 1)",
             "theirs": "oklch(0.145 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
           },
           {
             "part": "label",
@@ -667,6 +955,12 @@
           },
           {
             "part": "label",
+            "channel": "outline-color",
+            "ours": "rgba(161, 161, 161, 0.5)",
+            "theirs": "oklab(0.708 0 0 / 0.5)"
+          },
+          {
+            "part": "label",
             "channel": "row-rule-color",
             "ours": "rgba(10, 10, 10, 1)",
             "theirs": "oklch(0.145 0 0)"
@@ -682,6 +976,36 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(10, 10, 10, 1)",
             "theirs": "oklch(0.145 0 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
           },
           {
             "part": "label-2",
@@ -703,6 +1027,12 @@
           },
           {
             "part": "label-2",
+            "channel": "outline-color",
+            "ours": "rgba(161, 161, 161, 0.5)",
+            "theirs": "oklab(0.708 0 0 / 0.5)"
+          },
+          {
+            "part": "label-2",
             "channel": "row-rule-color",
             "ours": "rgba(115, 115, 115, 1)",
             "theirs": "oklch(0.556 0 0)"
@@ -718,6 +1048,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(115, 115, 115, 1)",
             "theirs": "oklch(0.556 0 0)"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "label-2",
@@ -730,8 +1066,8 @@
       },
       {
         "key": "default__active",
-        "channelsCompared": 63,
-        "channelsEqual": 39,
+        "channelsCompared": 92,
+        "channelsEqual": 53,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -786,6 +1122,18 @@
           },
           {
             "part": "root",
+            "channel": "grid-template-rows",
+            "ours": "26px 46px",
+            "theirs": "20px 40px"
+          },
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(161, 161, 161, 0.5)",
+            "theirs": "oklab(0.708 0 0 / 0.5)"
+          },
+          {
+            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(10, 10, 10, 1)",
             "theirs": "oklch(0.145 0 0)"
@@ -801,6 +1149,36 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(10, 10, 10, 1)",
             "theirs": "oklch(0.145 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
           },
           {
             "part": "label",
@@ -822,6 +1200,12 @@
           },
           {
             "part": "label",
+            "channel": "outline-color",
+            "ours": "rgba(161, 161, 161, 0.5)",
+            "theirs": "oklab(0.708 0 0 / 0.5)"
+          },
+          {
+            "part": "label",
             "channel": "row-rule-color",
             "ours": "rgba(10, 10, 10, 1)",
             "theirs": "oklch(0.145 0 0)"
@@ -837,6 +1221,36 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(10, 10, 10, 1)",
             "theirs": "oklch(0.145 0 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
           },
           {
             "part": "label-2",
@@ -858,6 +1272,12 @@
           },
           {
             "part": "label-2",
+            "channel": "outline-color",
+            "ours": "rgba(161, 161, 161, 0.5)",
+            "theirs": "oklab(0.708 0 0 / 0.5)"
+          },
+          {
+            "part": "label-2",
             "channel": "row-rule-color",
             "ours": "rgba(115, 115, 115, 1)",
             "theirs": "oklch(0.556 0 0)"
@@ -873,6 +1293,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(115, 115, 115, 1)",
             "theirs": "oklch(0.556 0 0)"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "label-2",
@@ -885,8 +1311,8 @@
       },
       {
         "key": "destructive__default",
-        "channelsCompared": 63,
-        "channelsEqual": 39,
+        "channelsCompared": 92,
+        "channelsEqual": 53,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -941,6 +1367,18 @@
           },
           {
             "part": "root",
+            "channel": "grid-template-rows",
+            "ours": "26px 46px",
+            "theirs": "20px 40px"
+          },
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(161, 161, 161, 0.5)",
+            "theirs": "oklab(0.708 0 0 / 0.5)"
+          },
+          {
+            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(231, 0, 11, 1)",
             "theirs": "oklch(0.577 0.245 27.325)"
@@ -956,6 +1394,36 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(231, 0, 11, 1)",
             "theirs": "oklch(0.577 0.245 27.325)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
           },
           {
             "part": "label",
@@ -977,6 +1445,12 @@
           },
           {
             "part": "label",
+            "channel": "outline-color",
+            "ours": "rgba(161, 161, 161, 0.5)",
+            "theirs": "oklab(0.708 0 0 / 0.5)"
+          },
+          {
+            "part": "label",
             "channel": "row-rule-color",
             "ours": "rgba(231, 0, 11, 1)",
             "theirs": "oklch(0.577 0.245 27.325)"
@@ -992,6 +1466,36 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(231, 0, 11, 1)",
             "theirs": "oklch(0.577 0.245 27.325)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
           },
           {
             "part": "label-2",
@@ -1013,6 +1517,12 @@
           },
           {
             "part": "label-2",
+            "channel": "outline-color",
+            "ours": "rgba(161, 161, 161, 0.5)",
+            "theirs": "oklab(0.708 0 0 / 0.5)"
+          },
+          {
+            "part": "label-2",
             "channel": "row-rule-color",
             "ours": "rgba(231, 0, 11, 0.9)",
             "theirs": "oklab(0.577 0.217662 0.112464 / 0.9)"
@@ -1028,6 +1538,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(231, 0, 11, 0.9)",
             "theirs": "oklab(0.577 0.217662 0.112464 / 0.9)"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "label-2",
@@ -1040,8 +1556,8 @@
       },
       {
         "key": "destructive__hover",
-        "channelsCompared": 63,
-        "channelsEqual": 39,
+        "channelsCompared": 92,
+        "channelsEqual": 53,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1096,6 +1612,18 @@
           },
           {
             "part": "root",
+            "channel": "grid-template-rows",
+            "ours": "26px 46px",
+            "theirs": "20px 40px"
+          },
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(161, 161, 161, 0.5)",
+            "theirs": "oklab(0.708 0 0 / 0.5)"
+          },
+          {
+            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(231, 0, 11, 1)",
             "theirs": "oklch(0.577 0.245 27.325)"
@@ -1111,6 +1639,36 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(231, 0, 11, 1)",
             "theirs": "oklch(0.577 0.245 27.325)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
           },
           {
             "part": "label",
@@ -1132,6 +1690,12 @@
           },
           {
             "part": "label",
+            "channel": "outline-color",
+            "ours": "rgba(161, 161, 161, 0.5)",
+            "theirs": "oklab(0.708 0 0 / 0.5)"
+          },
+          {
+            "part": "label",
             "channel": "row-rule-color",
             "ours": "rgba(231, 0, 11, 1)",
             "theirs": "oklch(0.577 0.245 27.325)"
@@ -1147,6 +1711,36 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(231, 0, 11, 1)",
             "theirs": "oklch(0.577 0.245 27.325)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
           },
           {
             "part": "label-2",
@@ -1168,6 +1762,12 @@
           },
           {
             "part": "label-2",
+            "channel": "outline-color",
+            "ours": "rgba(161, 161, 161, 0.5)",
+            "theirs": "oklab(0.708 0 0 / 0.5)"
+          },
+          {
+            "part": "label-2",
             "channel": "row-rule-color",
             "ours": "rgba(231, 0, 11, 0.9)",
             "theirs": "oklab(0.577 0.217662 0.112464 / 0.9)"
@@ -1183,6 +1783,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(231, 0, 11, 0.9)",
             "theirs": "oklab(0.577 0.217662 0.112464 / 0.9)"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "label-2",
@@ -1195,8 +1801,8 @@
       },
       {
         "key": "destructive__focus-visible",
-        "channelsCompared": 63,
-        "channelsEqual": 39,
+        "channelsCompared": 92,
+        "channelsEqual": 53,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1251,6 +1857,18 @@
           },
           {
             "part": "root",
+            "channel": "grid-template-rows",
+            "ours": "26px 46px",
+            "theirs": "20px 40px"
+          },
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(161, 161, 161, 0.5)",
+            "theirs": "oklab(0.708 0 0 / 0.5)"
+          },
+          {
+            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(231, 0, 11, 1)",
             "theirs": "oklch(0.577 0.245 27.325)"
@@ -1266,6 +1884,36 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(231, 0, 11, 1)",
             "theirs": "oklch(0.577 0.245 27.325)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
           },
           {
             "part": "label",
@@ -1287,6 +1935,12 @@
           },
           {
             "part": "label",
+            "channel": "outline-color",
+            "ours": "rgba(161, 161, 161, 0.5)",
+            "theirs": "oklab(0.708 0 0 / 0.5)"
+          },
+          {
+            "part": "label",
             "channel": "row-rule-color",
             "ours": "rgba(231, 0, 11, 1)",
             "theirs": "oklch(0.577 0.245 27.325)"
@@ -1302,6 +1956,36 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(231, 0, 11, 1)",
             "theirs": "oklch(0.577 0.245 27.325)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
           },
           {
             "part": "label-2",
@@ -1323,6 +2007,12 @@
           },
           {
             "part": "label-2",
+            "channel": "outline-color",
+            "ours": "rgba(161, 161, 161, 0.5)",
+            "theirs": "oklab(0.708 0 0 / 0.5)"
+          },
+          {
+            "part": "label-2",
             "channel": "row-rule-color",
             "ours": "rgba(231, 0, 11, 0.9)",
             "theirs": "oklab(0.577 0.217662 0.112464 / 0.9)"
@@ -1338,6 +2028,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(231, 0, 11, 0.9)",
             "theirs": "oklab(0.577 0.217662 0.112464 / 0.9)"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "label-2",
@@ -1350,8 +2046,8 @@
       },
       {
         "key": "destructive__active",
-        "channelsCompared": 63,
-        "channelsEqual": 39,
+        "channelsCompared": 92,
+        "channelsEqual": 53,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1406,6 +2102,18 @@
           },
           {
             "part": "root",
+            "channel": "grid-template-rows",
+            "ours": "26px 46px",
+            "theirs": "20px 40px"
+          },
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(161, 161, 161, 0.5)",
+            "theirs": "oklab(0.708 0 0 / 0.5)"
+          },
+          {
+            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(231, 0, 11, 1)",
             "theirs": "oklch(0.577 0.245 27.325)"
@@ -1421,6 +2129,36 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(231, 0, 11, 1)",
             "theirs": "oklch(0.577 0.245 27.325)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
           },
           {
             "part": "label",
@@ -1442,6 +2180,12 @@
           },
           {
             "part": "label",
+            "channel": "outline-color",
+            "ours": "rgba(161, 161, 161, 0.5)",
+            "theirs": "oklab(0.708 0 0 / 0.5)"
+          },
+          {
+            "part": "label",
             "channel": "row-rule-color",
             "ours": "rgba(231, 0, 11, 1)",
             "theirs": "oklch(0.577 0.245 27.325)"
@@ -1457,6 +2201,36 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(231, 0, 11, 1)",
             "theirs": "oklch(0.577 0.245 27.325)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
           },
           {
             "part": "label-2",
@@ -1478,6 +2252,12 @@
           },
           {
             "part": "label-2",
+            "channel": "outline-color",
+            "ours": "rgba(161, 161, 161, 0.5)",
+            "theirs": "oklab(0.708 0 0 / 0.5)"
+          },
+          {
+            "part": "label-2",
             "channel": "row-rule-color",
             "ours": "rgba(231, 0, 11, 0.9)",
             "theirs": "oklab(0.577 0.217662 0.112464 / 0.9)"
@@ -1493,6 +2273,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(231, 0, 11, 0.9)",
             "theirs": "oklab(0.577 0.217662 0.112464 / 0.9)"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "label-2",

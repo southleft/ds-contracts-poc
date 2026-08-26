@@ -3,8 +3,24 @@
   "component": "Avatar",
   "config": "extract/computed/configs/polaris.json",
   "capturedBrowser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "declared": {
     "base": [
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "Inter, -apple-system, \"system-ui\", \"San Francisco\", \"Segoe UI\", Roboto, \"Helvetica Neue\", sans-serif"
+      },
+      {
+        "part": "root",
+        "channel": "font-feature-settings",
+        "value": "\"calt\" 0"
+      },
       {
         "part": "root",
         "channel": "max-width",
@@ -27,8 +43,33 @@
       },
       {
         "part": "root",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
+      },
+      {
+        "part": "root",
         "channel": "user-select",
         "value": "none"
+      },
+      {
+        "part": "initials",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "initials",
+        "channel": "font-family",
+        "value": "Inter, -apple-system, \"system-ui\", \"San Francisco\", \"Segoe UI\", Roboto, \"Helvetica Neue\", sans-serif"
+      },
+      {
+        "part": "initials",
+        "channel": "font-feature-settings",
+        "value": "\"calt\" 0"
+      },
+      {
+        "part": "initials",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
       },
       {
         "part": "initials",
@@ -45,13 +86,15 @@
     "component": "Avatar",
     "generatedBy": "extract/computed/gate.ts",
     "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+    "renderedBy": "149.0.7827.55",
+    "browserMismatch": "RENDERED ON A DIFFERENT BROWSER THAN THE CAPTURE — these numbers were produced by Chromium 149.0.7827.55, but the captured truth they are scored against was recorded on Chromium 151.0.7922.34. Computed styles differ between Chromium versions, so cells can be UNEQUAL for that reason alone and this scorecard is not comparable to one recorded on the capture's own browser. Measured 2026-08-25: `position-anchor` computes `none` in 149 and `normal` in 151, and on a raw all-channel replay `flex-line-count`, `ruby-overhang` and `text-fit` move too. Re-run with PLAYWRIGHT_CHROMIUM_PATH set to the capture's browser, or re-capture.",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 10,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 1920,
-      "cellsEqual": 1340,
-      "pctEqual": 69.79166666666667,
+      "cellsCompared": 2640,
+      "cellsEqual": 1900,
+      "pctEqual": 71.96969696969697,
       "rowsFullyEqual": 0,
       "rows": 40
     },
@@ -73,11 +116,11 @@
       "boundConfirmed": 20,
       "boundCells": 40,
       "contradictions": 20,
-      "mintedLeaves": 38,
-      "mintedLeavesUnfolded": 78,
-      "baseBindings": 18,
+      "mintedLeaves": 42,
+      "mintedLeavesUnfolded": 82,
+      "baseBindings": 22,
       "stateBindings": 0,
-      "codeOnlyChannels": 0,
+      "codeOnlyChannels": 4,
       "overflowBindings": 1,
       "folds": 60
     },
@@ -86,60 +129,68 @@
         "key": "xs.on__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 26,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
         "key": "xs.on__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 26,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
         "key": "xs.on__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 26,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
         "key": "xs.on__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 26,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
         "key": "sm.on__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 26,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
         "key": "sm.on__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 26,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
         "key": "sm.on__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 26,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
         "key": "sm.on__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 26,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
+      [
+        "root.scrollbar-color",
+        40
+      ],
+      [
+        "root.text-size-adjust",
+        40
+      ],
       [
         "initials.align-items",
         40
@@ -150,6 +201,14 @@
       ],
       [
         "initials.justify-content",
+        40
+      ],
+      [
+        "initials.scrollbar-color",
+        40
+      ],
+      [
+        "initials.text-size-adjust",
         40
       ],
       [
@@ -183,27 +242,15 @@
       [
         "root.column-rule-color",
         20
-      ],
-      [
-        "root.outline-color",
-        20
-      ],
-      [
-        "root.row-rule-color",
-        20
-      ],
-      [
-        "root.text-decoration-color",
-        20
-      ],
-      [
-        "root.text-emphasis-color",
-        20
       ]
     ],
     "namedLosses": [
       "promotion: pseudo-decor-outside-grammar: root::after paints at position:static (40x40, opacity 1) — the bounded decor grammar reads position:absolute boxes only; an in-flow decor box is NOT promoted and NOT on the canvas",
-      "overflow: initials.color — presence-prop-driven styling (withInitials) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (withInitials present) is not"
+      "overflow: initials.color — presence-prop-driven styling (withInitials) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (withInitials present) is not",
+      "code-only: root.scrollbar-color — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: initials.scrollbar-color — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: initials.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],
     "unresolvedTokenRefs": {
       "count": 0,
@@ -217,12 +264,24 @@
     "rows": [
       {
         "key": "xs.off__default",
-        "channelsCompared": 48,
-        "channelsEqual": 45,
+        "channelsCompared": 66,
+        "channelsEqual": 59,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "initials",
             "channel": "align-items",
@@ -240,18 +299,42 @@
             "channel": "justify-content",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "xs.off__hover",
-        "channelsCompared": 48,
-        "channelsEqual": 45,
+        "channelsCompared": 66,
+        "channelsEqual": 59,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "initials",
             "channel": "align-items",
@@ -269,18 +352,42 @@
             "channel": "justify-content",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "xs.off__focus-visible",
-        "channelsCompared": 48,
-        "channelsEqual": 45,
+        "channelsCompared": 66,
+        "channelsEqual": 59,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "initials",
             "channel": "align-items",
@@ -298,18 +405,42 @@
             "channel": "justify-content",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "xs.off__active",
-        "channelsCompared": 48,
-        "channelsEqual": 45,
+        "channelsCompared": 66,
+        "channelsEqual": 59,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "initials",
             "channel": "align-items",
@@ -327,14 +458,26 @@
             "channel": "justify-content",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "xs.on__default",
-        "channelsCompared": 48,
-        "channelsEqual": 22,
+        "channelsCompared": 66,
+        "channelsEqual": 36,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -401,6 +544,12 @@
           },
           {
             "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -410,6 +559,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "initials",
@@ -485,6 +640,12 @@
           },
           {
             "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -494,14 +655,20 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "xs.on__hover",
-        "channelsCompared": 48,
-        "channelsEqual": 22,
+        "channelsCompared": 66,
+        "channelsEqual": 36,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -568,6 +735,12 @@
           },
           {
             "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -577,6 +750,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "initials",
@@ -652,6 +831,12 @@
           },
           {
             "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -661,14 +846,20 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "xs.on__focus-visible",
-        "channelsCompared": 48,
-        "channelsEqual": 22,
+        "channelsCompared": 66,
+        "channelsEqual": 36,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -735,6 +926,12 @@
           },
           {
             "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -744,6 +941,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "initials",
@@ -819,6 +1022,12 @@
           },
           {
             "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -828,14 +1037,20 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "xs.on__active",
-        "channelsCompared": 48,
-        "channelsEqual": 22,
+        "channelsCompared": 66,
+        "channelsEqual": 36,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -902,6 +1117,12 @@
           },
           {
             "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -911,6 +1132,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "initials",
@@ -986,6 +1213,12 @@
           },
           {
             "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -995,18 +1228,36 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "sm.off__default",
-        "channelsCompared": 48,
-        "channelsEqual": 45,
+        "channelsCompared": 66,
+        "channelsEqual": 59,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "initials",
             "channel": "align-items",
@@ -1024,18 +1275,42 @@
             "channel": "justify-content",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "sm.off__hover",
-        "channelsCompared": 48,
-        "channelsEqual": 45,
+        "channelsCompared": 66,
+        "channelsEqual": 59,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "initials",
             "channel": "align-items",
@@ -1053,18 +1328,42 @@
             "channel": "justify-content",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "sm.off__focus-visible",
-        "channelsCompared": 48,
-        "channelsEqual": 45,
+        "channelsCompared": 66,
+        "channelsEqual": 59,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "initials",
             "channel": "align-items",
@@ -1082,18 +1381,42 @@
             "channel": "justify-content",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "sm.off__active",
-        "channelsCompared": 48,
-        "channelsEqual": 45,
+        "channelsCompared": 66,
+        "channelsEqual": 59,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "initials",
             "channel": "align-items",
@@ -1111,14 +1434,26 @@
             "channel": "justify-content",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "sm.on__default",
-        "channelsCompared": 48,
-        "channelsEqual": 22,
+        "channelsCompared": 66,
+        "channelsEqual": 36,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1185,6 +1520,12 @@
           },
           {
             "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -1194,6 +1535,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "initials",
@@ -1269,6 +1616,12 @@
           },
           {
             "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -1278,14 +1631,20 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "sm.on__hover",
-        "channelsCompared": 48,
-        "channelsEqual": 22,
+        "channelsCompared": 66,
+        "channelsEqual": 36,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1352,6 +1711,12 @@
           },
           {
             "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -1361,6 +1726,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "initials",
@@ -1436,6 +1807,12 @@
           },
           {
             "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -1445,14 +1822,20 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "sm.on__focus-visible",
-        "channelsCompared": 48,
-        "channelsEqual": 22,
+        "channelsCompared": 66,
+        "channelsEqual": 36,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1519,6 +1902,12 @@
           },
           {
             "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -1528,6 +1917,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "initials",
@@ -1603,6 +1998,12 @@
           },
           {
             "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -1612,14 +2013,20 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "sm.on__active",
-        "channelsCompared": 48,
-        "channelsEqual": 22,
+        "channelsCompared": 66,
+        "channelsEqual": 36,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1686,6 +2093,12 @@
           },
           {
             "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -1695,6 +2108,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "initials",
@@ -1770,6 +2189,12 @@
           },
           {
             "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -1779,18 +2204,36 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "md.off__default",
-        "channelsCompared": 48,
-        "channelsEqual": 45,
+        "channelsCompared": 66,
+        "channelsEqual": 59,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "initials",
             "channel": "align-items",
@@ -1808,18 +2251,42 @@
             "channel": "justify-content",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "md.off__hover",
-        "channelsCompared": 48,
-        "channelsEqual": 45,
+        "channelsCompared": 66,
+        "channelsEqual": 59,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "initials",
             "channel": "align-items",
@@ -1837,18 +2304,42 @@
             "channel": "justify-content",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "md.off__focus-visible",
-        "channelsCompared": 48,
-        "channelsEqual": 45,
+        "channelsCompared": 66,
+        "channelsEqual": 59,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "initials",
             "channel": "align-items",
@@ -1866,18 +2357,42 @@
             "channel": "justify-content",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "md.off__active",
-        "channelsCompared": 48,
-        "channelsEqual": 45,
+        "channelsCompared": 66,
+        "channelsEqual": 59,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "initials",
             "channel": "align-items",
@@ -1895,14 +2410,26 @@
             "channel": "justify-content",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "md.on__default",
-        "channelsCompared": 48,
-        "channelsEqual": 22,
+        "channelsCompared": 66,
+        "channelsEqual": 36,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1969,6 +2496,12 @@
           },
           {
             "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -1978,6 +2511,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "initials",
@@ -2053,6 +2592,12 @@
           },
           {
             "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -2062,14 +2607,20 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "md.on__hover",
-        "channelsCompared": 48,
-        "channelsEqual": 22,
+        "channelsCompared": 66,
+        "channelsEqual": 36,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2136,6 +2687,12 @@
           },
           {
             "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -2145,6 +2702,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "initials",
@@ -2220,6 +2783,12 @@
           },
           {
             "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -2229,14 +2798,20 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "md.on__focus-visible",
-        "channelsCompared": 48,
-        "channelsEqual": 22,
+        "channelsCompared": 66,
+        "channelsEqual": 36,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2303,6 +2878,12 @@
           },
           {
             "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -2312,6 +2893,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "initials",
@@ -2387,6 +2974,12 @@
           },
           {
             "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -2396,14 +2989,20 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "md.on__active",
-        "channelsCompared": 48,
-        "channelsEqual": 22,
+        "channelsCompared": 66,
+        "channelsEqual": 36,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2470,6 +3069,12 @@
           },
           {
             "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -2479,6 +3084,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "initials",
@@ -2554,6 +3165,12 @@
           },
           {
             "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -2563,18 +3180,36 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "lg.off__default",
-        "channelsCompared": 48,
-        "channelsEqual": 45,
+        "channelsCompared": 66,
+        "channelsEqual": 59,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "initials",
             "channel": "align-items",
@@ -2592,18 +3227,42 @@
             "channel": "justify-content",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "lg.off__hover",
-        "channelsCompared": 48,
-        "channelsEqual": 45,
+        "channelsCompared": 66,
+        "channelsEqual": 59,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "initials",
             "channel": "align-items",
@@ -2621,18 +3280,42 @@
             "channel": "justify-content",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "lg.off__focus-visible",
-        "channelsCompared": 48,
-        "channelsEqual": 45,
+        "channelsCompared": 66,
+        "channelsEqual": 59,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "initials",
             "channel": "align-items",
@@ -2650,18 +3333,42 @@
             "channel": "justify-content",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "lg.off__active",
-        "channelsCompared": 48,
-        "channelsEqual": 45,
+        "channelsCompared": 66,
+        "channelsEqual": 59,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "initials",
             "channel": "align-items",
@@ -2679,14 +3386,26 @@
             "channel": "justify-content",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "lg.on__default",
-        "channelsCompared": 48,
-        "channelsEqual": 22,
+        "channelsCompared": 66,
+        "channelsEqual": 36,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2753,6 +3472,12 @@
           },
           {
             "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -2762,6 +3487,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "initials",
@@ -2837,6 +3568,12 @@
           },
           {
             "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -2846,14 +3583,20 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "lg.on__hover",
-        "channelsCompared": 48,
-        "channelsEqual": 22,
+        "channelsCompared": 66,
+        "channelsEqual": 36,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2920,6 +3663,12 @@
           },
           {
             "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -2929,6 +3678,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "initials",
@@ -3004,6 +3759,12 @@
           },
           {
             "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -3013,14 +3774,20 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "lg.on__focus-visible",
-        "channelsCompared": 48,
-        "channelsEqual": 22,
+        "channelsCompared": 66,
+        "channelsEqual": 36,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3087,6 +3854,12 @@
           },
           {
             "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -3096,6 +3869,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "initials",
@@ -3171,6 +3950,12 @@
           },
           {
             "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -3180,14 +3965,20 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "lg.on__active",
-        "channelsCompared": 48,
-        "channelsEqual": 22,
+        "channelsCompared": 66,
+        "channelsEqual": 36,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3254,6 +4045,12 @@
           },
           {
             "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -3263,6 +4060,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "initials",
@@ -3338,6 +4141,12 @@
           },
           {
             "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -3347,18 +4156,36 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "xl.off__default",
-        "channelsCompared": 48,
-        "channelsEqual": 45,
+        "channelsCompared": 66,
+        "channelsEqual": 59,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "initials",
             "channel": "align-items",
@@ -3376,18 +4203,42 @@
             "channel": "justify-content",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "xl.off__hover",
-        "channelsCompared": 48,
-        "channelsEqual": 45,
+        "channelsCompared": 66,
+        "channelsEqual": 59,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "initials",
             "channel": "align-items",
@@ -3405,18 +4256,42 @@
             "channel": "justify-content",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "xl.off__focus-visible",
-        "channelsCompared": 48,
-        "channelsEqual": 45,
+        "channelsCompared": 66,
+        "channelsEqual": 59,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "initials",
             "channel": "align-items",
@@ -3434,18 +4309,42 @@
             "channel": "justify-content",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "xl.off__active",
-        "channelsCompared": 48,
-        "channelsEqual": 45,
+        "channelsCompared": 66,
+        "channelsEqual": 59,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "initials",
             "channel": "align-items",
@@ -3463,14 +4362,26 @@
             "channel": "justify-content",
             "ours": "normal",
             "theirs": "center"
+          },
+          {
+            "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "xl.on__default",
-        "channelsCompared": 48,
-        "channelsEqual": 22,
+        "channelsCompared": 66,
+        "channelsEqual": 36,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3537,6 +4448,12 @@
           },
           {
             "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -3546,6 +4463,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "initials",
@@ -3621,6 +4544,12 @@
           },
           {
             "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -3630,14 +4559,20 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "xl.on__hover",
-        "channelsCompared": 48,
-        "channelsEqual": 22,
+        "channelsCompared": 66,
+        "channelsEqual": 36,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3704,6 +4639,12 @@
           },
           {
             "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -3713,6 +4654,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "initials",
@@ -3788,6 +4735,12 @@
           },
           {
             "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -3797,14 +4750,20 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "xl.on__focus-visible",
-        "channelsCompared": 48,
-        "channelsEqual": 22,
+        "channelsCompared": 66,
+        "channelsEqual": 36,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3871,6 +4830,12 @@
           },
           {
             "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -3880,6 +4845,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "initials",
@@ -3955,6 +4926,12 @@
           },
           {
             "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -3964,14 +4941,20 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "xl.on__active",
-        "channelsCompared": 48,
-        "channelsEqual": 22,
+        "channelsCompared": 66,
+        "channelsEqual": 36,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -4038,6 +5021,12 @@
           },
           {
             "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -4047,6 +5036,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "initials",
@@ -4122,6 +5117,12 @@
           },
           {
             "part": "initials",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "initials",
             "channel": "text-decoration-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
@@ -4131,6 +5132,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(253, 239, 253, 1)",
             "theirs": "rgba(255, 246, 248, 1)"
+          },
+          {
+            "part": "initials",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"

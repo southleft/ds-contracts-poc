@@ -3,8 +3,30 @@
   "component": "Spinner",
   "config": "extract/computed/configs/polaris.json",
   "capturedBrowser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "declared": {
-    "base": [],
+    "base": [
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "Inter, -apple-system, \"system-ui\", \"San Francisco\", \"Segoe UI\", Roboto, \"Helvetica Neue\", sans-serif"
+      },
+      {
+        "part": "root",
+        "channel": "font-feature-settings",
+        "value": "\"calt\" 0"
+      },
+      {
+        "part": "root",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
+      }
+    ],
     "state": []
   },
   "decisionsReapplied": [],
@@ -12,14 +34,16 @@
     "component": "Spinner",
     "generatedBy": "extract/computed/gate.ts",
     "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+    "renderedBy": "149.0.7827.55",
+    "browserMismatch": "RENDERED ON A DIFFERENT BROWSER THAN THE CAPTURE — these numbers were produced by Chromium 149.0.7827.55, but the captured truth they are scored against was recorded on Chromium 151.0.7922.34. Computed styles differ between Chromium versions, so cells can be UNEQUAL for that reason alone and this scorecard is not comparable to one recorded on the capture's own browser. Measured 2026-08-25: `position-anchor` computes `none` in 149 and `normal` in 151, and on a raw all-channel replay `flex-line-count`, `ruby-overhang` and `text-fit` move too. Re-run with PLAYWRIGHT_CHROMIUM_PATH set to the capture's browser, or re-capture.",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 2,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 8,
-      "cellsEqual": 8,
-      "pctEqual": 100,
-      "rowsFullyEqual": 8,
+      "cellsCompared": 160,
+      "cellsEqual": 144,
+      "pctEqual": 90,
+      "rowsFullyEqual": 0,
       "rows": 8
     },
     "pixel": {
@@ -40,76 +64,87 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 1,
-      "mintedLeavesUnfolded": 1,
-      "baseBindings": 1,
+      "mintedLeaves": 4,
+      "mintedLeavesUnfolded": 4,
+      "baseBindings": 4,
       "stateBindings": 0,
-      "codeOnlyChannels": 0,
+      "codeOnlyChannels": 2,
       "overflowBindings": 0,
-      "folds": 0
+      "folds": 30
     },
     "worstRows": [
       {
         "key": "small__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 0,
+        "channelsMismatched": 2,
         "unscorable": "no-original"
       },
       {
         "key": "small__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 0,
+        "channelsMismatched": 2,
         "unscorable": "no-original"
       },
       {
         "key": "small__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 0,
+        "channelsMismatched": 2,
         "unscorable": "no-original"
       },
       {
         "key": "small__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 0,
+        "channelsMismatched": 2,
         "unscorable": "no-original"
       },
       {
         "key": "large__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 0,
+        "channelsMismatched": 2,
         "unscorable": "no-original"
       },
       {
         "key": "large__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 0,
+        "channelsMismatched": 2,
         "unscorable": "no-original"
       },
       {
         "key": "large__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 0,
+        "channelsMismatched": 2,
         "unscorable": "no-original"
       },
       {
         "key": "large__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 0,
+        "channelsMismatched": 2,
         "unscorable": "no-original"
       }
     ],
-    "topMismatchedChannels": [],
+    "topMismatchedChannels": [
+      [
+        "root.scrollbar-color",
+        8
+      ],
+      [
+        "root.text-size-adjust",
+        8
+      ]
+    ],
     "namedLosses": [
       "promotion: static-part-unrendered: reviewed static part \"glyphLarge\" has no rendered counterpart in ANY captured combo — dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)",
-      "promotion: static-part-unrendered: reviewed static part \"glyphSmall\" has no rendered counterpart in ANY captured combo — dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)"
+      "promotion: static-part-unrendered: reviewed static part \"glyphSmall\" has no rendered counterpart in ANY captured combo — dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)",
+      "code-only: root.scrollbar-color — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],
     "unresolvedTokenRefs": {
       "count": 0,
@@ -123,82 +158,186 @@
     "rows": [
       {
         "key": "small__default",
-        "channelsCompared": 1,
-        "channelsEqual": 1,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small__hover",
-        "channelsCompared": 1,
-        "channelsEqual": 1,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small__focus-visible",
-        "channelsCompared": 1,
-        "channelsEqual": 1,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small__active",
-        "channelsCompared": 1,
-        "channelsEqual": 1,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large__default",
-        "channelsCompared": 1,
-        "channelsEqual": 1,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large__hover",
-        "channelsCompared": 1,
-        "channelsEqual": 1,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large__focus-visible",
-        "channelsCompared": 1,
-        "channelsEqual": 1,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large__active",
-        "channelsCompared": 1,
-        "channelsEqual": 1,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       }
     ]

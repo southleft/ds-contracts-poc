@@ -3,6 +3,7 @@
   "component": "Avatar",
   "config": "extract/computed/configs/altitude.json",
   "capturedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "declared": {
     "base": [
       {
@@ -27,6 +28,11 @@
       },
       {
         "part": "avatar__badge",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", sans-serif"
+      },
+      {
+        "part": "avatar__badge",
         "channel": "text-align",
         "value": "center"
       },
@@ -34,6 +40,11 @@
         "part": "badge",
         "channel": "box-sizing",
         "value": "border-box"
+      },
+      {
+        "part": "badge",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", sans-serif"
       },
       {
         "part": "badge",
@@ -48,13 +59,14 @@
     "component": "Avatar",
     "generatedBy": "extract/computed/gate.ts",
     "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+    "renderedBy": "149.0.7827.55",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 4,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 616,
-      "cellsEqual": 512,
-      "pctEqual": 83.11688311688312,
+      "cellsCompared": 984,
+      "cellsEqual": 880,
+      "pctEqual": 89.4308943089431,
       "rowsFullyEqual": 0,
       "rows": 16
     },
@@ -80,9 +92,9 @@
       "mintedLeavesUnfolded": 36,
       "baseBindings": 42,
       "stateBindings": 0,
-      "codeOnlyChannels": 5,
+      "codeOnlyChannels": 8,
       "overflowBindings": 0,
-      "folds": 0
+      "folds": 30
     },
     "worstRows": [
       {
@@ -184,8 +196,11 @@
       "code-only: root.bottom — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: root.left — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: root.position — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "code-only: root.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: root.right — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: root.top — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+      "code-only: root.top — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: avatar__badge.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <al-badge>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <al-badge> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: badge.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],
     "unresolvedTokenRefs": {
       "count": 0,
@@ -242,8 +257,8 @@
     "rows": [
       {
         "key": "unset.off__default",
-        "channelsCompared": 22,
-        "channelsEqual": 18,
+        "channelsCompared": 33,
+        "channelsEqual": 29,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -277,8 +292,8 @@
       },
       {
         "key": "unset.off__hover",
-        "channelsCompared": 22,
-        "channelsEqual": 18,
+        "channelsCompared": 33,
+        "channelsEqual": 29,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -312,8 +327,8 @@
       },
       {
         "key": "unset.off__focus-visible",
-        "channelsCompared": 22,
-        "channelsEqual": 18,
+        "channelsCompared": 33,
+        "channelsEqual": 29,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -347,8 +362,8 @@
       },
       {
         "key": "unset.off__active",
-        "channelsCompared": 22,
-        "channelsEqual": 18,
+        "channelsCompared": 33,
+        "channelsEqual": 29,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -382,8 +397,8 @@
       },
       {
         "key": "unset.on__default",
-        "channelsCompared": 55,
-        "channelsEqual": 46,
+        "channelsCompared": 90,
+        "channelsEqual": 81,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -447,8 +462,8 @@
       },
       {
         "key": "unset.on__hover",
-        "channelsCompared": 55,
-        "channelsEqual": 46,
+        "channelsCompared": 90,
+        "channelsEqual": 81,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -512,8 +527,8 @@
       },
       {
         "key": "unset.on__focus-visible",
-        "channelsCompared": 55,
-        "channelsEqual": 46,
+        "channelsCompared": 90,
+        "channelsEqual": 81,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -577,8 +592,8 @@
       },
       {
         "key": "unset.on__active",
-        "channelsCompared": 55,
-        "channelsEqual": 46,
+        "channelsCompared": 90,
+        "channelsEqual": 81,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -642,8 +657,8 @@
       },
       {
         "key": "sm.off__default",
-        "channelsCompared": 22,
-        "channelsEqual": 18,
+        "channelsCompared": 33,
+        "channelsEqual": 29,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -677,8 +692,8 @@
       },
       {
         "key": "sm.off__hover",
-        "channelsCompared": 22,
-        "channelsEqual": 18,
+        "channelsCompared": 33,
+        "channelsEqual": 29,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -712,8 +727,8 @@
       },
       {
         "key": "sm.off__focus-visible",
-        "channelsCompared": 22,
-        "channelsEqual": 18,
+        "channelsCompared": 33,
+        "channelsEqual": 29,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -747,8 +762,8 @@
       },
       {
         "key": "sm.off__active",
-        "channelsCompared": 22,
-        "channelsEqual": 18,
+        "channelsCompared": 33,
+        "channelsEqual": 29,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -782,8 +797,8 @@
       },
       {
         "key": "sm.on__default",
-        "channelsCompared": 55,
-        "channelsEqual": 46,
+        "channelsCompared": 90,
+        "channelsEqual": 81,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -847,8 +862,8 @@
       },
       {
         "key": "sm.on__hover",
-        "channelsCompared": 55,
-        "channelsEqual": 46,
+        "channelsCompared": 90,
+        "channelsEqual": 81,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -912,8 +927,8 @@
       },
       {
         "key": "sm.on__focus-visible",
-        "channelsCompared": 55,
-        "channelsEqual": 46,
+        "channelsCompared": 90,
+        "channelsEqual": 81,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -977,8 +992,8 @@
       },
       {
         "key": "sm.on__active",
-        "channelsCompared": 55,
-        "channelsEqual": 46,
+        "channelsCompared": 90,
+        "channelsEqual": 81,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",

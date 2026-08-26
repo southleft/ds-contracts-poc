@@ -3,6 +3,7 @@
   "component": "Kbd",
   "config": "extract/computed/configs/tailwind.json",
   "capturedBrowser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "declared": {
     "base": [
       {
@@ -27,6 +28,11 @@
       },
       {
         "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
         "channel": "font-family",
         "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, \"Helvetica Neue\", \"Noto Sans\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
       }
@@ -38,14 +44,16 @@
     "component": "Kbd",
     "generatedBy": "extract/computed/gate.ts",
     "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+    "renderedBy": "149.0.7827.55",
+    "browserMismatch": "RENDERED ON A DIFFERENT BROWSER THAN THE CAPTURE — these numbers were produced by Chromium 149.0.7827.55, but the captured truth they are scored against was recorded on Chromium 151.0.7922.34. Computed styles differ between Chromium versions, so cells can be UNEQUAL for that reason alone and this scorecard is not comparable to one recorded on the capture's own browser. Measured 2026-08-25: `position-anchor` computes `none` in 149 and `normal` in 151, and on a raw all-channel replay `flex-line-count`, `ruby-overhang` and `text-fit` move too. Re-run with PLAYWRIGHT_CHROMIUM_PATH set to the capture's browser, or re-capture.",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 1,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 128,
-      "cellsEqual": 128,
-      "pctEqual": 100,
-      "rowsFullyEqual": 4,
+      "cellsCompared": 140,
+      "cellsEqual": 136,
+      "pctEqual": 97.14285714285714,
+      "rowsFullyEqual": 0,
       "rows": 4
     },
     "pixel": {
@@ -66,11 +74,11 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 10,
-      "mintedLeavesUnfolded": 10,
-      "baseBindings": 21,
+      "mintedLeaves": 11,
+      "mintedLeavesUnfolded": 11,
+      "baseBindings": 22,
       "stateBindings": 0,
-      "codeOnlyChannels": 0,
+      "codeOnlyChannels": 1,
       "overflowBindings": 0,
       "folds": 6
     },
@@ -79,33 +87,40 @@
         "key": "__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 0,
+        "channelsMismatched": 1,
         "unscorable": "no-original"
       },
       {
         "key": "__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 0,
+        "channelsMismatched": 1,
         "unscorable": "no-original"
       },
       {
         "key": "__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 0,
+        "channelsMismatched": 1,
         "unscorable": "no-original"
       },
       {
         "key": "__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 0,
+        "channelsMismatched": 1,
         "unscorable": "no-original"
       }
     ],
-    "topMismatchedChannels": [],
-    "namedLosses": [],
+    "topMismatchedChannels": [
+      [
+        "root.text-size-adjust",
+        4
+      ]
+    ],
+    "namedLosses": [
+      "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+    ],
     "unresolvedTokenRefs": {
       "count": 0,
       "refs": []
@@ -125,42 +140,70 @@
     "rows": [
       {
         "key": "__default",
-        "channelsCompared": 32,
-        "channelsEqual": 32,
+        "channelsCompared": 35,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "__hover",
-        "channelsCompared": 32,
-        "channelsEqual": 32,
+        "channelsCompared": 35,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "__focus-visible",
-        "channelsCompared": 32,
-        "channelsEqual": 32,
+        "channelsCompared": 35,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "__active",
-        "channelsCompared": 32,
-        "channelsEqual": 32,
+        "channelsCompared": 35,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       }
     ]

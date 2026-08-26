@@ -3,12 +3,213 @@
   "component": "Banner",
   "config": "extract/computed/configs/astryx.json",
   "capturedBrowser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "declared": {
     "base": [
+      {
+        "part": "root",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "Figtree, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "banner",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "banner",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "banner",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "banner",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "banner",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "banner",
+        "channel": "font-family",
+        "value": "Figtree, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "banner-icon",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "banner-icon",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "banner-icon",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "banner-icon",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "banner-icon",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "banner-icon",
+        "channel": "font-family",
+        "value": "Figtree, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "icon",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "icon",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "icon",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "icon",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "icon",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "icon",
+        "channel": "font-family",
+        "value": "Figtree, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "part-0-1",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-0-1",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-0-1",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-0-1",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-0-1",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "part-0-1",
+        "channel": "font-family",
+        "value": "Figtree, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "label",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "label",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "label",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "label",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
       {
         "part": "label",
         "channel": "font-family",
         "value": "Figtree, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label-2",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-2",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-2",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-2",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-2",
+        "channel": "box-sizing",
+        "value": "border-box"
       },
       {
         "part": "label-2",
@@ -23,13 +224,15 @@
     "component": "Banner",
     "generatedBy": "extract/computed/gate.ts",
     "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+    "renderedBy": "149.0.7827.55",
+    "browserMismatch": "RENDERED ON A DIFFERENT BROWSER THAN THE CAPTURE — these numbers were produced by Chromium 149.0.7827.55, but the captured truth they are scored against was recorded on Chromium 151.0.7922.34. Computed styles differ between Chromium versions, so cells can be UNEQUAL for that reason alone and this scorecard is not comparable to one recorded on the capture's own browser. Measured 2026-08-25: `position-anchor` computes `none` in 149 and `normal` in 151, and on a raw all-channel replay `flex-line-count`, `ruby-overhang` and `text-fit` move too. Re-run with PLAYWRIGHT_CHROMIUM_PATH set to the capture's browser, or re-capture.",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 8,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 3840,
-      "cellsEqual": 2464,
-      "pctEqual": 64.16666666666667,
+      "cellsCompared": 7200,
+      "cellsEqual": 5376,
+      "pctEqual": 74.66666666666667,
       "rowsFullyEqual": 0,
       "rows": 32
     },
@@ -51,73 +254,81 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 42,
-      "mintedLeavesUnfolded": 162,
-      "baseBindings": 35,
+      "mintedLeaves": 44,
+      "mintedLeavesUnfolded": 164,
+      "baseBindings": 46,
       "stateBindings": 0,
-      "codeOnlyChannels": 43,
+      "codeOnlyChannels": 57,
       "overflowBindings": 0,
-      "folds": 80
+      "folds": 120
     },
     "worstRows": [
       {
         "key": "info.card__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 43,
+        "channelsMismatched": 57,
         "unscorable": "no-original"
       },
       {
         "key": "info.card__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 43,
+        "channelsMismatched": 57,
         "unscorable": "no-original"
       },
       {
         "key": "info.card__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 43,
+        "channelsMismatched": 57,
         "unscorable": "no-original"
       },
       {
         "key": "info.card__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 43,
+        "channelsMismatched": 57,
         "unscorable": "no-original"
       },
       {
         "key": "info.section__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 43,
+        "channelsMismatched": 57,
         "unscorable": "no-original"
       },
       {
         "key": "info.section__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 43,
+        "channelsMismatched": 57,
         "unscorable": "no-original"
       },
       {
         "key": "info.section__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 43,
+        "channelsMismatched": 57,
         "unscorable": "no-original"
       },
       {
         "key": "info.section__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 43,
+        "channelsMismatched": 57,
         "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
+      [
+        "root.color-scheme",
+        32
+      ],
+      [
+        "root.text-size-adjust",
+        32
+      ],
       [
         "banner.--color-accent",
         32
@@ -147,6 +358,14 @@
         32
       ],
       [
+        "banner.color-scheme",
+        32
+      ],
+      [
+        "banner.text-size-adjust",
+        32
+      ],
+      [
         "banner-icon.--color-accent",
         32
       ],
@@ -161,25 +380,11 @@
       [
         "banner-icon.--color-success",
         32
-      ],
-      [
-        "banner-icon.--color-text-primary",
-        32
-      ],
-      [
-        "banner-icon.--color-text-secondary",
-        32
-      ],
-      [
-        "banner-icon.--color-warning",
-        32
-      ],
-      [
-        "icon.--color-accent",
-        32
       ]
     ],
     "namedLosses": [
+      "code-only: root.color-scheme — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: banner.--color-accent — CSS custom property, not a styled channel — `--color-accent` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: banner.--color-accent-muted — CSS custom property, not a styled channel — `--color-accent-muted` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `transparent`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: banner.--color-error — CSS custom property, not a styled channel — `--color-error` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#a50c25, #ffc6c1)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
@@ -187,6 +392,8 @@
       "code-only: banner.--color-text-primary — CSS custom property, not a styled channel — `--color-text-primary` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: banner.--color-text-secondary — CSS custom property, not a styled channel — `--color-text-secondary` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: banner.--color-warning — CSS custom property, not a styled channel — `--color-warning` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#745b00, #fdcf4f)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "code-only: banner.color-scheme — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: banner.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: banner-icon.--color-accent — CSS custom property, not a styled channel — `--color-accent` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: banner-icon.--color-accent-muted — CSS custom property, not a styled channel — `--color-accent-muted` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `transparent`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: banner-icon.--color-error — CSS custom property, not a styled channel — `--color-error` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#a50c25, #ffc6c1)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
@@ -194,6 +401,8 @@
       "code-only: banner-icon.--color-text-primary — CSS custom property, not a styled channel — `--color-text-primary` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: banner-icon.--color-text-secondary — CSS custom property, not a styled channel — `--color-text-secondary` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: banner-icon.--color-warning — CSS custom property, not a styled channel — `--color-warning` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#745b00, #fdcf4f)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "code-only: banner-icon.color-scheme — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: banner-icon.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: icon.--color-accent — CSS custom property, not a styled channel — `--color-accent` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: icon.--color-accent-muted — CSS custom property, not a styled channel — `--color-accent-muted` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `transparent`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: icon.--color-error — CSS custom property, not a styled channel — `--color-error` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#a50c25, #ffc6c1)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
@@ -201,6 +410,8 @@
       "code-only: icon.--color-text-primary — CSS custom property, not a styled channel — `--color-text-primary` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: icon.--color-text-secondary — CSS custom property, not a styled channel — `--color-text-secondary` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: icon.--color-warning — CSS custom property, not a styled channel — `--color-warning` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#745b00, #fdcf4f)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "code-only: icon.color-scheme — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: icon.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0-1.--color-accent — CSS custom property, not a styled channel — `--color-accent` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: part-0-1.--color-accent-muted — CSS custom property, not a styled channel — `--color-accent-muted` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `transparent`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: part-0-1.--color-error — CSS custom property, not a styled channel — `--color-error` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#a50c25, #ffc6c1)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
@@ -208,7 +419,9 @@
       "code-only: part-0-1.--color-text-primary — CSS custom property, not a styled channel — `--color-text-primary` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: part-0-1.--color-text-secondary — CSS custom property, not a styled channel — `--color-text-secondary` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: part-0-1.--color-warning — CSS custom property, not a styled channel — `--color-warning` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#745b00, #fdcf4f)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "code-only: part-0-1.color-scheme — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0-1.flex-basis — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-0-1.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label.--color-accent — CSS custom property, not a styled channel — `--color-accent` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: label.--color-accent-muted — CSS custom property, not a styled channel — `--color-accent-muted` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `transparent`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: label.--color-error — CSS custom property, not a styled channel — `--color-error` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#a50c25, #ffc6c1)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
@@ -216,13 +429,17 @@
       "code-only: label.--color-text-primary — CSS custom property, not a styled channel — `--color-text-primary` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: label.--color-text-secondary — CSS custom property, not a styled channel — `--color-text-secondary` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: label.--color-warning — CSS custom property, not a styled channel — `--color-warning` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#745b00, #fdcf4f)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "code-only: label.color-scheme — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-2.--color-accent — CSS custom property, not a styled channel — `--color-accent` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: label-2.--color-accent-muted — CSS custom property, not a styled channel — `--color-accent-muted` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `transparent`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: label-2.--color-error — CSS custom property, not a styled channel — `--color-error` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#a50c25, #ffc6c1)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: label-2.--color-success — CSS custom property, not a styled channel — `--color-success` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#007004, #9fe59b)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: label-2.--color-text-primary — CSS custom property, not a styled channel — `--color-text-primary` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: label-2.--color-text-secondary — CSS custom property, not a styled channel — `--color-text-secondary` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
-      "code-only: label-2.--color-warning — CSS custom property, not a styled channel — `--color-warning` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#745b00, #fdcf4f)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one."
+      "code-only: label-2.--color-warning — CSS custom property, not a styled channel — `--color-warning` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#745b00, #fdcf4f)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "code-only: label-2.color-scheme — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label-2.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],
     "unresolvedTokenRefs": {
       "count": 0,
@@ -236,13 +453,25 @@
     "rows": [
       {
         "key": "info.card__default",
-        "channelsCompared": 120,
-        "channelsEqual": 77,
+        "channelsCompared": 225,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -285,6 +514,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner-icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -327,6 +568,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner-icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner-icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -369,6 +622,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "part-0-1",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -409,6 +674,12 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
           },
           {
             "part": "part-0-1",
@@ -417,6 +688,12 @@
             "theirs": "0%"
           },
           {
+            "part": "part-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -459,6 +736,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-2",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -499,19 +788,43 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "info.card__hover",
-        "channelsCompared": 120,
-        "channelsEqual": 77,
+        "channelsCompared": 225,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -554,6 +867,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner-icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -596,6 +921,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner-icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner-icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -638,6 +975,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "part-0-1",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -678,6 +1027,12 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
           },
           {
             "part": "part-0-1",
@@ -686,6 +1041,12 @@
             "theirs": "0%"
           },
           {
+            "part": "part-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -728,6 +1089,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-2",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -768,19 +1141,43 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "info.card__focus-visible",
-        "channelsCompared": 120,
-        "channelsEqual": 77,
+        "channelsCompared": 225,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -823,6 +1220,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner-icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -865,6 +1274,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner-icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner-icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -907,6 +1328,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "part-0-1",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -947,6 +1380,12 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
           },
           {
             "part": "part-0-1",
@@ -955,6 +1394,12 @@
             "theirs": "0%"
           },
           {
+            "part": "part-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -997,6 +1442,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-2",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1037,19 +1494,43 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "info.card__active",
-        "channelsCompared": 120,
-        "channelsEqual": 77,
+        "channelsCompared": 225,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1092,6 +1573,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner-icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1134,6 +1627,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner-icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner-icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1176,6 +1681,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "part-0-1",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1216,6 +1733,12 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
           },
           {
             "part": "part-0-1",
@@ -1224,6 +1747,12 @@
             "theirs": "0%"
           },
           {
+            "part": "part-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1266,6 +1795,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-2",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1306,19 +1847,43 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "info.section__default",
-        "channelsCompared": 120,
-        "channelsEqual": 77,
+        "channelsCompared": 225,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1361,6 +1926,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner-icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1403,6 +1980,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner-icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner-icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1445,6 +2034,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "part-0-1",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1485,6 +2086,12 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
           },
           {
             "part": "part-0-1",
@@ -1493,6 +2100,12 @@
             "theirs": "0%"
           },
           {
+            "part": "part-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1535,6 +2148,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-2",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1575,19 +2200,43 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "info.section__hover",
-        "channelsCompared": 120,
-        "channelsEqual": 77,
+        "channelsCompared": 225,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1630,6 +2279,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner-icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1672,6 +2333,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner-icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner-icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1714,6 +2387,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "part-0-1",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1754,6 +2439,12 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
           },
           {
             "part": "part-0-1",
@@ -1762,6 +2453,12 @@
             "theirs": "0%"
           },
           {
+            "part": "part-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1804,6 +2501,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-2",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1844,19 +2553,43 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "info.section__focus-visible",
-        "channelsCompared": 120,
-        "channelsEqual": 77,
+        "channelsCompared": 225,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1899,6 +2632,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner-icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1941,6 +2686,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner-icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner-icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -1983,6 +2740,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "part-0-1",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2023,6 +2792,12 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
           },
           {
             "part": "part-0-1",
@@ -2031,6 +2806,12 @@
             "theirs": "0%"
           },
           {
+            "part": "part-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2073,6 +2854,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-2",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2113,19 +2906,43 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "info.section__active",
-        "channelsCompared": 120,
-        "channelsEqual": 77,
+        "channelsCompared": 225,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2168,6 +2985,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner-icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2210,6 +3039,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner-icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner-icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2252,6 +3093,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "part-0-1",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2292,6 +3145,12 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
           },
           {
             "part": "part-0-1",
@@ -2300,6 +3159,12 @@
             "theirs": "0%"
           },
           {
+            "part": "part-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2342,6 +3207,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-2",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2382,19 +3259,43 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning.card__default",
-        "channelsCompared": 120,
-        "channelsEqual": 77,
+        "channelsCompared": 225,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2437,6 +3338,18 @@
             "theirs": "light-dark(#584400, #fdcf4f)"
           },
           {
+            "part": "banner",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner-icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2479,6 +3392,18 @@
             "theirs": "light-dark(#584400, #fdcf4f)"
           },
           {
+            "part": "banner-icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner-icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2521,6 +3446,18 @@
             "theirs": "light-dark(#584400, #fdcf4f)"
           },
           {
+            "part": "icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "part-0-1",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2561,6 +3498,12 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#584400, #fdcf4f)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
           },
           {
             "part": "part-0-1",
@@ -2569,6 +3512,12 @@
             "theirs": "0%"
           },
           {
+            "part": "part-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2611,6 +3560,18 @@
             "theirs": "light-dark(#584400, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-2",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2651,19 +3612,43 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#584400, #fdcf4f)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning.card__hover",
-        "channelsCompared": 120,
-        "channelsEqual": 77,
+        "channelsCompared": 225,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2706,6 +3691,18 @@
             "theirs": "light-dark(#584400, #fdcf4f)"
           },
           {
+            "part": "banner",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner-icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2748,6 +3745,18 @@
             "theirs": "light-dark(#584400, #fdcf4f)"
           },
           {
+            "part": "banner-icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner-icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2790,6 +3799,18 @@
             "theirs": "light-dark(#584400, #fdcf4f)"
           },
           {
+            "part": "icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "part-0-1",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2830,6 +3851,12 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#584400, #fdcf4f)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
           },
           {
             "part": "part-0-1",
@@ -2838,6 +3865,12 @@
             "theirs": "0%"
           },
           {
+            "part": "part-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2880,6 +3913,18 @@
             "theirs": "light-dark(#584400, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-2",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2920,19 +3965,43 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#584400, #fdcf4f)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning.card__focus-visible",
-        "channelsCompared": 120,
-        "channelsEqual": 77,
+        "channelsCompared": 225,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -2975,6 +4044,18 @@
             "theirs": "light-dark(#584400, #fdcf4f)"
           },
           {
+            "part": "banner",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner-icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3017,6 +4098,18 @@
             "theirs": "light-dark(#584400, #fdcf4f)"
           },
           {
+            "part": "banner-icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner-icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3059,6 +4152,18 @@
             "theirs": "light-dark(#584400, #fdcf4f)"
           },
           {
+            "part": "icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "part-0-1",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3099,6 +4204,12 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#584400, #fdcf4f)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
           },
           {
             "part": "part-0-1",
@@ -3107,6 +4218,12 @@
             "theirs": "0%"
           },
           {
+            "part": "part-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3149,6 +4266,18 @@
             "theirs": "light-dark(#584400, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-2",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3189,19 +4318,43 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#584400, #fdcf4f)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning.card__active",
-        "channelsCompared": 120,
-        "channelsEqual": 77,
+        "channelsCompared": 225,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3244,6 +4397,18 @@
             "theirs": "light-dark(#584400, #fdcf4f)"
           },
           {
+            "part": "banner",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner-icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3286,6 +4451,18 @@
             "theirs": "light-dark(#584400, #fdcf4f)"
           },
           {
+            "part": "banner-icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner-icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3328,6 +4505,18 @@
             "theirs": "light-dark(#584400, #fdcf4f)"
           },
           {
+            "part": "icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "part-0-1",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3368,6 +4557,12 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#584400, #fdcf4f)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
           },
           {
             "part": "part-0-1",
@@ -3376,6 +4571,12 @@
             "theirs": "0%"
           },
           {
+            "part": "part-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3418,6 +4619,18 @@
             "theirs": "light-dark(#584400, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-2",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3458,19 +4671,43 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#584400, #fdcf4f)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning.section__default",
-        "channelsCompared": 120,
-        "channelsEqual": 77,
+        "channelsCompared": 225,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3513,6 +4750,18 @@
             "theirs": "light-dark(#584400, #fdcf4f)"
           },
           {
+            "part": "banner",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner-icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3555,6 +4804,18 @@
             "theirs": "light-dark(#584400, #fdcf4f)"
           },
           {
+            "part": "banner-icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner-icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3597,6 +4858,18 @@
             "theirs": "light-dark(#584400, #fdcf4f)"
           },
           {
+            "part": "icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "part-0-1",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3637,6 +4910,12 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#584400, #fdcf4f)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
           },
           {
             "part": "part-0-1",
@@ -3645,6 +4924,12 @@
             "theirs": "0%"
           },
           {
+            "part": "part-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3687,6 +4972,18 @@
             "theirs": "light-dark(#584400, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-2",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3727,19 +5024,43 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#584400, #fdcf4f)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning.section__hover",
-        "channelsCompared": 120,
-        "channelsEqual": 77,
+        "channelsCompared": 225,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3782,6 +5103,18 @@
             "theirs": "light-dark(#584400, #fdcf4f)"
           },
           {
+            "part": "banner",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner-icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3824,6 +5157,18 @@
             "theirs": "light-dark(#584400, #fdcf4f)"
           },
           {
+            "part": "banner-icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner-icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3866,6 +5211,18 @@
             "theirs": "light-dark(#584400, #fdcf4f)"
           },
           {
+            "part": "icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "part-0-1",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3906,6 +5263,12 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#584400, #fdcf4f)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
           },
           {
             "part": "part-0-1",
@@ -3914,6 +5277,12 @@
             "theirs": "0%"
           },
           {
+            "part": "part-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3956,6 +5325,18 @@
             "theirs": "light-dark(#584400, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-2",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -3996,19 +5377,43 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#584400, #fdcf4f)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning.section__focus-visible",
-        "channelsCompared": 120,
-        "channelsEqual": 77,
+        "channelsCompared": 225,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -4051,6 +5456,18 @@
             "theirs": "light-dark(#584400, #fdcf4f)"
           },
           {
+            "part": "banner",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner-icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -4093,6 +5510,18 @@
             "theirs": "light-dark(#584400, #fdcf4f)"
           },
           {
+            "part": "banner-icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner-icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -4135,6 +5564,18 @@
             "theirs": "light-dark(#584400, #fdcf4f)"
           },
           {
+            "part": "icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "part-0-1",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -4175,6 +5616,12 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#584400, #fdcf4f)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
           },
           {
             "part": "part-0-1",
@@ -4183,6 +5630,12 @@
             "theirs": "0%"
           },
           {
+            "part": "part-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -4225,6 +5678,18 @@
             "theirs": "light-dark(#584400, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-2",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -4265,19 +5730,43 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#584400, #fdcf4f)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning.section__active",
-        "channelsCompared": 120,
-        "channelsEqual": 77,
+        "channelsCompared": 225,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -4320,6 +5809,18 @@
             "theirs": "light-dark(#584400, #fdcf4f)"
           },
           {
+            "part": "banner",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner-icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -4362,6 +5863,18 @@
             "theirs": "light-dark(#584400, #fdcf4f)"
           },
           {
+            "part": "banner-icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner-icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -4404,6 +5917,18 @@
             "theirs": "light-dark(#584400, #fdcf4f)"
           },
           {
+            "part": "icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "part-0-1",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -4444,6 +5969,12 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#584400, #fdcf4f)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
           },
           {
             "part": "part-0-1",
@@ -4452,6 +5983,12 @@
             "theirs": "0%"
           },
           {
+            "part": "part-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -4494,6 +6031,18 @@
             "theirs": "light-dark(#584400, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-2",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -4534,19 +6083,43 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#584400, #fdcf4f)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error.card__default",
-        "channelsCompared": 120,
-        "channelsEqual": 77,
+        "channelsCompared": 225,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -4589,6 +6162,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner-icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -4631,6 +6216,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner-icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner-icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -4673,6 +6270,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "part-0-1",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -4713,6 +6322,12 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
           },
           {
             "part": "part-0-1",
@@ -4721,6 +6336,12 @@
             "theirs": "0%"
           },
           {
+            "part": "part-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -4763,6 +6384,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-2",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -4803,19 +6436,43 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error.card__hover",
-        "channelsCompared": 120,
-        "channelsEqual": 77,
+        "channelsCompared": 225,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -4858,6 +6515,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner-icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -4900,6 +6569,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner-icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner-icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -4942,6 +6623,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "part-0-1",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -4982,6 +6675,12 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
           },
           {
             "part": "part-0-1",
@@ -4990,6 +6689,12 @@
             "theirs": "0%"
           },
           {
+            "part": "part-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -5032,6 +6737,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-2",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -5072,19 +6789,43 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error.card__focus-visible",
-        "channelsCompared": 120,
-        "channelsEqual": 77,
+        "channelsCompared": 225,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -5127,6 +6868,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner-icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -5169,6 +6922,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner-icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner-icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -5211,6 +6976,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "part-0-1",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -5251,6 +7028,12 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
           },
           {
             "part": "part-0-1",
@@ -5259,6 +7042,12 @@
             "theirs": "0%"
           },
           {
+            "part": "part-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -5301,6 +7090,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-2",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -5341,19 +7142,43 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error.card__active",
-        "channelsCompared": 120,
-        "channelsEqual": 77,
+        "channelsCompared": 225,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -5396,6 +7221,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner-icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -5438,6 +7275,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner-icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner-icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -5480,6 +7329,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "part-0-1",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -5520,6 +7381,12 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
           },
           {
             "part": "part-0-1",
@@ -5528,6 +7395,12 @@
             "theirs": "0%"
           },
           {
+            "part": "part-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -5570,6 +7443,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-2",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -5610,19 +7495,43 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error.section__default",
-        "channelsCompared": 120,
-        "channelsEqual": 77,
+        "channelsCompared": 225,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -5665,6 +7574,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner-icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -5707,6 +7628,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner-icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner-icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -5749,6 +7682,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "part-0-1",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -5789,6 +7734,12 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
           },
           {
             "part": "part-0-1",
@@ -5797,6 +7748,12 @@
             "theirs": "0%"
           },
           {
+            "part": "part-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -5839,6 +7796,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-2",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -5879,19 +7848,43 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error.section__hover",
-        "channelsCompared": 120,
-        "channelsEqual": 77,
+        "channelsCompared": 225,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -5934,6 +7927,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner-icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -5976,6 +7981,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner-icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner-icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -6018,6 +8035,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "part-0-1",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -6058,6 +8087,12 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
           },
           {
             "part": "part-0-1",
@@ -6066,6 +8101,12 @@
             "theirs": "0%"
           },
           {
+            "part": "part-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -6108,6 +8149,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-2",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -6148,19 +8201,43 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error.section__focus-visible",
-        "channelsCompared": 120,
-        "channelsEqual": 77,
+        "channelsCompared": 225,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -6203,6 +8280,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner-icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -6245,6 +8334,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner-icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner-icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -6287,6 +8388,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "part-0-1",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -6327,6 +8440,12 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
           },
           {
             "part": "part-0-1",
@@ -6335,6 +8454,12 @@
             "theirs": "0%"
           },
           {
+            "part": "part-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -6377,6 +8502,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-2",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -6417,19 +8554,43 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error.section__active",
-        "channelsCompared": 120,
-        "channelsEqual": 77,
+        "channelsCompared": 225,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -6472,6 +8633,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner-icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -6514,6 +8687,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner-icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner-icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -6556,6 +8741,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "part-0-1",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -6596,6 +8793,12 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
           },
           {
             "part": "part-0-1",
@@ -6604,6 +8807,12 @@
             "theirs": "0%"
           },
           {
+            "part": "part-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -6646,6 +8855,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-2",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -6686,19 +8907,43 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success.card__default",
-        "channelsCompared": 120,
-        "channelsEqual": 77,
+        "channelsCompared": 225,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -6741,6 +8986,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner-icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -6783,6 +9040,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner-icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner-icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -6825,6 +9094,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "part-0-1",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -6865,6 +9146,12 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
           },
           {
             "part": "part-0-1",
@@ -6873,6 +9160,12 @@
             "theirs": "0%"
           },
           {
+            "part": "part-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -6915,6 +9208,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-2",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -6955,19 +9260,43 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success.card__hover",
-        "channelsCompared": 120,
-        "channelsEqual": 77,
+        "channelsCompared": 225,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -7010,6 +9339,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner-icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -7052,6 +9393,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner-icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner-icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -7094,6 +9447,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "part-0-1",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -7134,6 +9499,12 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
           },
           {
             "part": "part-0-1",
@@ -7142,6 +9513,12 @@
             "theirs": "0%"
           },
           {
+            "part": "part-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -7184,6 +9561,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-2",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -7224,19 +9613,43 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success.card__focus-visible",
-        "channelsCompared": 120,
-        "channelsEqual": 77,
+        "channelsCompared": 225,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -7279,6 +9692,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner-icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -7321,6 +9746,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner-icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner-icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -7363,6 +9800,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "part-0-1",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -7403,6 +9852,12 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
           },
           {
             "part": "part-0-1",
@@ -7411,6 +9866,12 @@
             "theirs": "0%"
           },
           {
+            "part": "part-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -7453,6 +9914,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-2",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -7493,19 +9966,43 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success.card__active",
-        "channelsCompared": 120,
-        "channelsEqual": 77,
+        "channelsCompared": 225,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -7548,6 +10045,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner-icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -7590,6 +10099,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner-icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner-icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -7632,6 +10153,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "part-0-1",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -7672,6 +10205,12 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
           },
           {
             "part": "part-0-1",
@@ -7680,6 +10219,12 @@
             "theirs": "0%"
           },
           {
+            "part": "part-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -7722,6 +10267,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-2",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -7762,19 +10319,43 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success.section__default",
-        "channelsCompared": 120,
-        "channelsEqual": 77,
+        "channelsCompared": 225,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -7817,6 +10398,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner-icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -7859,6 +10452,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner-icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner-icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -7901,6 +10506,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "part-0-1",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -7941,6 +10558,12 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
           },
           {
             "part": "part-0-1",
@@ -7949,6 +10572,12 @@
             "theirs": "0%"
           },
           {
+            "part": "part-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -7991,6 +10620,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-2",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -8031,19 +10672,43 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success.section__hover",
-        "channelsCompared": 120,
-        "channelsEqual": 77,
+        "channelsCompared": 225,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -8086,6 +10751,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner-icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -8128,6 +10805,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner-icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner-icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -8170,6 +10859,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "part-0-1",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -8210,6 +10911,12 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
           },
           {
             "part": "part-0-1",
@@ -8218,6 +10925,12 @@
             "theirs": "0%"
           },
           {
+            "part": "part-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -8260,6 +10973,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-2",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -8300,19 +11025,43 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success.section__focus-visible",
-        "channelsCompared": 120,
-        "channelsEqual": 77,
+        "channelsCompared": 225,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -8355,6 +11104,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner-icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -8397,6 +11158,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner-icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner-icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -8439,6 +11212,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "part-0-1",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -8479,6 +11264,12 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
           },
           {
             "part": "part-0-1",
@@ -8487,6 +11278,12 @@
             "theirs": "0%"
           },
           {
+            "part": "part-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -8529,6 +11326,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-2",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -8569,19 +11378,43 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success.section__active",
-        "channelsCompared": 120,
-        "channelsEqual": 77,
+        "channelsCompared": 225,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -8624,6 +11457,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "banner-icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -8666,6 +11511,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "banner-icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "banner-icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "icon",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -8708,6 +11565,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "icon",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "icon",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "part-0-1",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -8748,6 +11617,12 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
           },
           {
             "part": "part-0-1",
@@ -8756,6 +11631,12 @@
             "theirs": "0%"
           },
           {
+            "part": "part-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -8798,6 +11679,18 @@
             "theirs": "light-dark(#745b00, #fdcf4f)"
           },
           {
+            "part": "label",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-2",
             "channel": "--color-accent",
             "ours": "#262626",
@@ -8838,6 +11731,18 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color-scheme",
+            "ours": "light",
+            "theirs": "light dark"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
