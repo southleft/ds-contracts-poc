@@ -2,7 +2,7 @@
   "type": "CONTRACTS-BUNDLE",
   "version": 1,
   "tokenSet": {
-    "name": "Tokens",
+    "name": "MUI",
     "base": {
       "palette-common-black": {
         "$type": "color",
