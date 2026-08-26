@@ -1,0 +1,787 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / polaris",
+  "setNodeId": "39:22467",
+  "setName": "Button (polaris.button)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:20227",
+  "variantNodeName": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Default",
+  "axes": [
+    {
+      "axis": "Size",
+      "values": [
+        "Medium",
+        "Micro",
+        "Slim",
+        "Large"
+      ]
+    },
+    {
+      "axis": "Text Align",
+      "values": [
+        "Center",
+        "Left",
+        "Right",
+        "Start",
+        "End"
+      ]
+    },
+    {
+      "axis": "Tone",
+      "values": [
+        "Default",
+        "Critical",
+        "Success"
+      ]
+    },
+    {
+      "axis": "Variant",
+      "values": [
+        "Secondary",
+        "Plain",
+        "Primary",
+        "Tertiary",
+        "Monochrome Plain"
+      ]
+    },
+    {
+      "axis": "State",
+      "values": [
+        "Default",
+        "Disabled",
+        "Focus Visible",
+        "Active",
+        "Hover"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 320,
+  "variantChildNames": [
+    "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Default",
+    "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain, State=Default",
+    "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Default",
+    "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary, State=Default",
+    "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain, State=Default",
+    "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Default",
+    "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain, State=Default",
+    "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary, State=Default",
+    "Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary, State=Default",
+    "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Default",
+    "Size=Medium, Text Align=Center, Tone=Success, Variant=Secondary, State=Default",
+    "Size=Medium, Text Align=Center, Tone=Success, Variant=Plain, State=Default",
+    "Size=Medium, Text Align=Center, Tone=Success, Variant=Primary, State=Default",
+    "Size=Medium, Text Align=Center, Tone=Success, Variant=Tertiary, State=Default",
+    "Size=Medium, Text Align=Center, Tone=Success, Variant=Monochrome Plain, State=Default",
+    "Size=Medium, Text Align=Left, Tone=Default, Variant=Secondary, State=Default",
+    "Size=Medium, Text Align=Left, Tone=Default, Variant=Plain, State=Default",
+    "Size=Medium, Text Align=Left, Tone=Default, Variant=Primary, State=Default",
+    "Size=Medium, Text Align=Left, Tone=Default, Variant=Tertiary, State=Default",
+    "Size=Medium, Text Align=Left, Tone=Default, Variant=Monochrome Plain, State=Default",
+    "Size=Medium, Text Align=Left, Tone=Critical, Variant=Secondary, State=Default",
+    "Size=Medium, Text Align=Left, Tone=Critical, Variant=Plain, State=Default",
+    "Size=Medium, Text Align=Left, Tone=Critical, Variant=Primary, State=Default",
+    "Size=Medium, Text Align=Left, Tone=Critical, Variant=Tertiary, State=Default",
+    "Size=Medium, Text Align=Left, Tone=Critical, Variant=Monochrome Plain, State=Default",
+    "Size=Medium, Text Align=Left, Tone=Success, Variant=Secondary, State=Default",
+    "Size=Medium, Text Align=Left, Tone=Success, Variant=Plain, State=Default",
+    "Size=Medium, Text Align=Left, Tone=Success, Variant=Primary, State=Default",
+    "Size=Medium, Text Align=Left, Tone=Success, Variant=Tertiary, State=Default",
+    "Size=Medium, Text Align=Left, Tone=Success, Variant=Monochrome Plain, State=Default",
+    "Size=Medium, Text Align=Right, Tone=Default, Variant=Secondary, State=Default",
+    "Size=Medium, Text Align=Right, Tone=Default, Variant=Plain, State=Default",
+    "Size=Medium, Text Align=Right, Tone=Default, Variant=Primary, State=Default",
+    "Size=Medium, Text Align=Right, Tone=Default, Variant=Tertiary, State=Default",
+    "Size=Medium, Text Align=Right, Tone=Default, Variant=Monochrome Plain, State=Default",
+    "Size=Medium, Text Align=Right, Tone=Critical, Variant=Secondary, State=Default",
+    "Size=Medium, Text Align=Right, Tone=Critical, Variant=Plain, State=Default",
+    "Size=Medium, Text Align=Right, Tone=Critical, Variant=Primary, State=Default",
+    "Size=Medium, Text Align=Right, Tone=Critical, Variant=Tertiary, State=Default",
+    "Size=Medium, Text Align=Right, Tone=Critical, Variant=Monochrome Plain, State=Default",
+    "Size=Medium, Text Align=Right, Tone=Success, Variant=Secondary, State=Default",
+    "Size=Medium, Text Align=Right, Tone=Success, Variant=Plain, State=Default",
+    "Size=Medium, Text Align=Right, Tone=Success, Variant=Primary, State=Default",
+    "Size=Medium, Text Align=Right, Tone=Success, Variant=Tertiary, State=Default",
+    "Size=Medium, Text Align=Right, Tone=Success, Variant=Monochrome Plain, State=Default",
+    "Size=Medium, Text Align=Start, Tone=Default, Variant=Secondary, State=Default",
+    "Size=Medium, Text Align=Start, Tone=Default, Variant=Plain, State=Default",
+    "Size=Medium, Text Align=Start, Tone=Default, Variant=Primary, State=Default",
+    "Size=Medium, Text Align=Start, Tone=Default, Variant=Tertiary, State=Default",
+    "Size=Medium, Text Align=Start, Tone=Default, Variant=Monochrome Plain, State=Default",
+    "Size=Medium, Text Align=Start, Tone=Critical, Variant=Secondary, State=Default",
+    "Size=Medium, Text Align=Start, Tone=Critical, Variant=Plain, State=Default",
+    "Size=Medium, Text Align=Start, Tone=Critical, Variant=Primary, State=Default",
+    "Size=Medium, Text Align=Start, Tone=Critical, Variant=Tertiary, State=Default",
+    "Size=Medium, Text Align=Start, Tone=Critical, Variant=Monochrome Plain, State=Default",
+    "Size=Medium, Text Align=Start, Tone=Success, Variant=Secondary, State=Default",
+    "Size=Medium, Text Align=Start, Tone=Success, Variant=Plain, State=Default",
+    "Size=Medium, Text Align=Start, Tone=Success, Variant=Primary, State=Default",
+    "Size=Medium, Text Align=Start, Tone=Success, Variant=Tertiary, State=Default",
+    "Size=Medium, Text Align=Start, Tone=Success, Variant=Monochrome Plain, State=Default",
+    "Size=Medium, Text Align=End, Tone=Default, Variant=Secondary, State=Default",
+    "Size=Medium, Text Align=End, Tone=Default, Variant=Plain, State=Default",
+    "Size=Medium, Text Align=End, Tone=Default, Variant=Primary, State=Default",
+    "Size=Medium, Text Align=End, Tone=Default, Variant=Tertiary, State=Default",
+    "Size=Medium, Text Align=End, Tone=Default, Variant=Monochrome Plain, State=Default",
+    "Size=Medium, Text Align=End, Tone=Critical, Variant=Secondary, State=Default",
+    "Size=Medium, Text Align=End, Tone=Critical, Variant=Plain, State=Default",
+    "Size=Medium, Text Align=End, Tone=Critical, Variant=Primary, State=Default",
+    "Size=Medium, Text Align=End, Tone=Critical, Variant=Tertiary, State=Default",
+    "Size=Medium, Text Align=End, Tone=Critical, Variant=Monochrome Plain, State=Default",
+    "Size=Medium, Text Align=End, Tone=Success, Variant=Secondary, State=Default",
+    "Size=Medium, Text Align=End, Tone=Success, Variant=Plain, State=Default",
+    "Size=Medium, Text Align=End, Tone=Success, Variant=Primary, State=Default",
+    "Size=Medium, Text Align=End, Tone=Success, Variant=Tertiary, State=Default",
+    "Size=Medium, Text Align=End, Tone=Success, Variant=Monochrome Plain, State=Default",
+    "Size=Micro, Text Align=Center, Tone=Default, Variant=Secondary, State=Default",
+    "Size=Micro, Text Align=Center, Tone=Default, Variant=Plain, State=Default",
+    "Size=Micro, Text Align=Center, Tone=Default, Variant=Primary, State=Default",
+    "Size=Micro, Text Align=Center, Tone=Default, Variant=Tertiary, State=Default",
+    "Size=Micro, Text Align=Center, Tone=Default, Variant=Monochrome Plain, State=Default",
+    "Size=Micro, Text Align=Center, Tone=Critical, Variant=Secondary, State=Default",
+    "Size=Micro, Text Align=Center, Tone=Critical, Variant=Plain, State=Default",
+    "Size=Micro, Text Align=Center, Tone=Critical, Variant=Primary, State=Default",
+    "Size=Micro, Text Align=Center, Tone=Critical, Variant=Tertiary, State=Default",
+    "Size=Micro, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Default",
+    "Size=Micro, Text Align=Center, Tone=Success, Variant=Secondary, State=Default",
+    "Size=Micro, Text Align=Center, Tone=Success, Variant=Plain, State=Default",
+    "Size=Micro, Text Align=Center, Tone=Success, Variant=Primary, State=Default",
+    "Size=Micro, Text Align=Center, Tone=Success, Variant=Tertiary, State=Default",
+    "Size=Micro, Text Align=Center, Tone=Success, Variant=Monochrome Plain, State=Default",
+    "Size=Micro, Text Align=Left, Tone=Default, Variant=Secondary, State=Default",
+    "Size=Micro, Text Align=Left, Tone=Default, Variant=Plain, State=Default",
+    "Size=Micro, Text Align=Left, Tone=Default, Variant=Primary, State=Default",
+    "Size=Micro, Text Align=Left, Tone=Default, Variant=Tertiary, State=Default",
+    "Size=Micro, Text Align=Left, Tone=Default, Variant=Monochrome Plain, State=Default",
+    "Size=Micro, Text Align=Left, Tone=Critical, Variant=Secondary, State=Default",
+    "Size=Micro, Text Align=Left, Tone=Critical, Variant=Plain, State=Default",
+    "Size=Micro, Text Align=Left, Tone=Critical, Variant=Primary, State=Default",
+    "Size=Micro, Text Align=Left, Tone=Critical, Variant=Tertiary, State=Default",
+    "Size=Micro, Text Align=Left, Tone=Critical, Variant=Monochrome Plain, State=Default",
+    "Size=Micro, Text Align=Left, Tone=Success, Variant=Secondary, State=Default",
+    "Size=Micro, Text Align=Left, Tone=Success, Variant=Plain, State=Default",
+    "Size=Micro, Text Align=Left, Tone=Success, Variant=Primary, State=Default",
+    "Size=Micro, Text Align=Left, Tone=Success, Variant=Tertiary, State=Default",
+    "Size=Micro, Text Align=Left, Tone=Success, Variant=Monochrome Plain, State=Default",
+    "Size=Micro, Text Align=Right, Tone=Default, Variant=Secondary, State=Default",
+    "Size=Micro, Text Align=Right, Tone=Default, Variant=Plain, State=Default",
+    "Size=Micro, Text Align=Right, Tone=Default, Variant=Primary, State=Default",
+    "Size=Micro, Text Align=Right, Tone=Default, Variant=Tertiary, State=Default",
+    "Size=Micro, Text Align=Right, Tone=Default, Variant=Monochrome Plain, State=Default",
+    "Size=Micro, Text Align=Right, Tone=Critical, Variant=Secondary, State=Default",
+    "Size=Micro, Text Align=Right, Tone=Critical, Variant=Plain, State=Default",
+    "Size=Micro, Text Align=Right, Tone=Critical, Variant=Primary, State=Default",
+    "Size=Micro, Text Align=Right, Tone=Critical, Variant=Tertiary, State=Default",
+    "Size=Micro, Text Align=Right, Tone=Critical, Variant=Monochrome Plain, State=Default",
+    "Size=Micro, Text Align=Right, Tone=Success, Variant=Secondary, State=Default",
+    "Size=Micro, Text Align=Right, Tone=Success, Variant=Plain, State=Default",
+    "Size=Micro, Text Align=Right, Tone=Success, Variant=Primary, State=Default",
+    "Size=Micro, Text Align=Right, Tone=Success, Variant=Tertiary, State=Default",
+    "Size=Micro, Text Align=Right, Tone=Success, Variant=Monochrome Plain, State=Default",
+    "Size=Micro, Text Align=Start, Tone=Default, Variant=Secondary, State=Default",
+    "Size=Micro, Text Align=Start, Tone=Default, Variant=Plain, State=Default",
+    "Size=Micro, Text Align=Start, Tone=Default, Variant=Primary, State=Default",
+    "Size=Micro, Text Align=Start, Tone=Default, Variant=Tertiary, State=Default",
+    "Size=Micro, Text Align=Start, Tone=Default, Variant=Monochrome Plain, State=Default",
+    "Size=Micro, Text Align=Start, Tone=Critical, Variant=Secondary, State=Default",
+    "Size=Micro, Text Align=Start, Tone=Critical, Variant=Plain, State=Default",
+    "Size=Micro, Text Align=Start, Tone=Critical, Variant=Primary, State=Default",
+    "Size=Micro, Text Align=Start, Tone=Critical, Variant=Tertiary, State=Default",
+    "Size=Micro, Text Align=Start, Tone=Critical, Variant=Monochrome Plain, State=Default",
+    "Size=Micro, Text Align=Start, Tone=Success, Variant=Secondary, State=Default",
+    "Size=Micro, Text Align=Start, Tone=Success, Variant=Plain, State=Default",
+    "Size=Micro, Text Align=Start, Tone=Success, Variant=Primary, State=Default",
+    "Size=Micro, Text Align=Start, Tone=Success, Variant=Tertiary, State=Default",
+    "Size=Micro, Text Align=Start, Tone=Success, Variant=Monochrome Plain, State=Default",
+    "Size=Micro, Text Align=End, Tone=Default, Variant=Secondary, State=Default",
+    "Size=Micro, Text Align=End, Tone=Default, Variant=Plain, State=Default",
+    "Size=Micro, Text Align=End, Tone=Default, Variant=Primary, State=Default",
+    "Size=Micro, Text Align=End, Tone=Default, Variant=Tertiary, State=Default",
+    "Size=Micro, Text Align=End, Tone=Default, Variant=Monochrome Plain, State=Default",
+    "Size=Micro, Text Align=End, Tone=Critical, Variant=Secondary, State=Default",
+    "Size=Micro, Text Align=End, Tone=Critical, Variant=Plain, State=Default",
+    "Size=Micro, Text Align=End, Tone=Critical, Variant=Primary, State=Default",
+    "Size=Micro, Text Align=End, Tone=Critical, Variant=Tertiary, State=Default",
+    "Size=Micro, Text Align=End, Tone=Critical, Variant=Monochrome Plain, State=Default",
+    "Size=Micro, Text Align=End, Tone=Success, Variant=Secondary, State=Default",
+    "Size=Micro, Text Align=End, Tone=Success, Variant=Plain, State=Default",
+    "Size=Micro, Text Align=End, Tone=Success, Variant=Primary, State=Default",
+    "Size=Micro, Text Align=End, Tone=Success, Variant=Tertiary, State=Default",
+    "Size=Micro, Text Align=End, Tone=Success, Variant=Monochrome Plain, State=Default",
+    "Size=Slim, Text Align=Center, Tone=Default, Variant=Secondary, State=Default",
+    "Size=Slim, Text Align=Center, Tone=Default, Variant=Plain, State=Default",
+    "Size=Slim, Text Align=Center, Tone=Default, Variant=Primary, State=Default",
+    "Size=Slim, Text Align=Center, Tone=Default, Variant=Tertiary, State=Default",
+    "Size=Slim, Text Align=Center, Tone=Default, Variant=Monochrome Plain, State=Default",
+    "Size=Slim, Text Align=Center, Tone=Critical, Variant=Secondary, State=Default",
+    "Size=Slim, Text Align=Center, Tone=Critical, Variant=Plain, State=Default",
+    "Size=Slim, Text Align=Center, Tone=Critical, Variant=Primary, State=Default",
+    "Size=Slim, Text Align=Center, Tone=Critical, Variant=Tertiary, State=Default",
+    "Size=Slim, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Default",
+    "Size=Slim, Text Align=Center, Tone=Success, Variant=Secondary, State=Default",
+    "Size=Slim, Text Align=Center, Tone=Success, Variant=Plain, State=Default",
+    "Size=Slim, Text Align=Center, Tone=Success, Variant=Primary, State=Default",
+    "Size=Slim, Text Align=Center, Tone=Success, Variant=Tertiary, State=Default",
+    "Size=Slim, Text Align=Center, Tone=Success, Variant=Monochrome Plain, State=Default",
+    "Size=Slim, Text Align=Left, Tone=Default, Variant=Secondary, State=Default",
+    "Size=Slim, Text Align=Left, Tone=Default, Variant=Plain, State=Default",
+    "Size=Slim, Text Align=Left, Tone=Default, Variant=Primary, State=Default",
+    "Size=Slim, Text Align=Left, Tone=Default, Variant=Tertiary, State=Default",
+    "Size=Slim, Text Align=Left, Tone=Default, Variant=Monochrome Plain, State=Default",
+    "Size=Slim, Text Align=Left, Tone=Critical, Variant=Secondary, State=Default",
+    "Size=Slim, Text Align=Left, Tone=Critical, Variant=Plain, State=Default",
+    "Size=Slim, Text Align=Left, Tone=Critical, Variant=Primary, State=Default",
+    "Size=Slim, Text Align=Left, Tone=Critical, Variant=Tertiary, State=Default",
+    "Size=Slim, Text Align=Left, Tone=Critical, Variant=Monochrome Plain, State=Default",
+    "Size=Slim, Text Align=Left, Tone=Success, Variant=Secondary, State=Default",
+    "Size=Slim, Text Align=Left, Tone=Success, Variant=Plain, State=Default",
+    "Size=Slim, Text Align=Left, Tone=Success, Variant=Primary, State=Default",
+    "Size=Slim, Text Align=Left, Tone=Success, Variant=Tertiary, State=Default",
+    "Size=Slim, Text Align=Left, Tone=Success, Variant=Monochrome Plain, State=Default",
+    "Size=Slim, Text Align=Right, Tone=Default, Variant=Secondary, State=Default",
+    "Size=Slim, Text Align=Right, Tone=Default, Variant=Plain, State=Default",
+    "Size=Slim, Text Align=Right, Tone=Default, Variant=Primary, State=Default",
+    "Size=Slim, Text Align=Right, Tone=Default, Variant=Tertiary, State=Default",
+    "Size=Slim, Text Align=Right, Tone=Default, Variant=Monochrome Plain, State=Default",
+    "Size=Slim, Text Align=Right, Tone=Critical, Variant=Secondary, State=Default",
+    "Size=Slim, Text Align=Right, Tone=Critical, Variant=Plain, State=Default",
+    "Size=Slim, Text Align=Right, Tone=Critical, Variant=Primary, State=Default",
+    "Size=Slim, Text Align=Right, Tone=Critical, Variant=Tertiary, State=Default",
+    "Size=Slim, Text Align=Right, Tone=Critical, Variant=Monochrome Plain, State=Default",
+    "Size=Slim, Text Align=Right, Tone=Success, Variant=Secondary, State=Default",
+    "Size=Slim, Text Align=Right, Tone=Success, Variant=Plain, State=Default",
+    "Size=Slim, Text Align=Right, Tone=Success, Variant=Primary, State=Default",
+    "Size=Slim, Text Align=Right, Tone=Success, Variant=Tertiary, State=Default",
+    "Size=Slim, Text Align=Right, Tone=Success, Variant=Monochrome Plain, State=Default",
+    "Size=Slim, Text Align=Start, Tone=Default, Variant=Secondary, State=Default",
+    "Size=Slim, Text Align=Start, Tone=Default, Variant=Plain, State=Default",
+    "Size=Slim, Text Align=Start, Tone=Default, Variant=Primary, State=Default",
+    "Size=Slim, Text Align=Start, Tone=Default, Variant=Tertiary, State=Default",
+    "Size=Slim, Text Align=Start, Tone=Default, Variant=Monochrome Plain, State=Default",
+    "Size=Slim, Text Align=Start, Tone=Critical, Variant=Secondary, State=Default",
+    "Size=Slim, Text Align=Start, Tone=Critical, Variant=Plain, State=Default",
+    "Size=Slim, Text Align=Start, Tone=Critical, Variant=Primary, State=Default",
+    "Size=Slim, Text Align=Start, Tone=Critical, Variant=Tertiary, State=Default",
+    "Size=Slim, Text Align=Start, Tone=Critical, Variant=Monochrome Plain, State=Default",
+    "Size=Slim, Text Align=Start, Tone=Success, Variant=Secondary, State=Default",
+    "Size=Slim, Text Align=Start, Tone=Success, Variant=Plain, State=Default",
+    "Size=Slim, Text Align=Start, Tone=Success, Variant=Primary, State=Default",
+    "Size=Slim, Text Align=Start, Tone=Success, Variant=Tertiary, State=Default",
+    "Size=Slim, Text Align=Start, Tone=Success, Variant=Monochrome Plain, State=Default",
+    "Size=Slim, Text Align=End, Tone=Default, Variant=Secondary, State=Default",
+    "Size=Slim, Text Align=End, Tone=Default, Variant=Plain, State=Default",
+    "Size=Slim, Text Align=End, Tone=Default, Variant=Primary, State=Default",
+    "Size=Slim, Text Align=End, Tone=Default, Variant=Tertiary, State=Default",
+    "Size=Slim, Text Align=End, Tone=Default, Variant=Monochrome Plain, State=Default",
+    "Size=Slim, Text Align=End, Tone=Critical, Variant=Secondary, State=Default",
+    "Size=Slim, Text Align=End, Tone=Critical, Variant=Plain, State=Default",
+    "Size=Slim, Text Align=End, Tone=Critical, Variant=Primary, State=Default",
+    "Size=Slim, Text Align=End, Tone=Critical, Variant=Tertiary, State=Default",
+    "Size=Slim, Text Align=End, Tone=Critical, Variant=Monochrome Plain, State=Default",
+    "Size=Slim, Text Align=End, Tone=Success, Variant=Secondary, State=Default",
+    "Size=Slim, Text Align=End, Tone=Success, Variant=Plain, State=Default",
+    "Size=Slim, Text Align=End, Tone=Success, Variant=Primary, State=Default",
+    "Size=Slim, Text Align=End, Tone=Success, Variant=Tertiary, State=Default",
+    "Size=Slim, Text Align=End, Tone=Success, Variant=Monochrome Plain, State=Default",
+    "Size=Large, Text Align=Center, Tone=Default, Variant=Secondary, State=Default",
+    "Size=Large, Text Align=Center, Tone=Default, Variant=Plain, State=Default",
+    "Size=Large, Text Align=Center, Tone=Default, Variant=Primary, State=Default",
+    "Size=Large, Text Align=Center, Tone=Default, Variant=Tertiary, State=Default",
+    "Size=Large, Text Align=Center, Tone=Default, Variant=Monochrome Plain, State=Default",
+    "Size=Large, Text Align=Center, Tone=Critical, Variant=Secondary, State=Default",
+    "Size=Large, Text Align=Center, Tone=Critical, Variant=Plain, State=Default",
+    "Size=Large, Text Align=Center, Tone=Critical, Variant=Primary, State=Default",
+    "Size=Large, Text Align=Center, Tone=Critical, Variant=Tertiary, State=Default",
+    "Size=Large, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Default",
+    "Size=Large, Text Align=Center, Tone=Success, Variant=Secondary, State=Default",
+    "Size=Large, Text Align=Center, Tone=Success, Variant=Plain, State=Default",
+    "Size=Large, Text Align=Center, Tone=Success, Variant=Primary, State=Default",
+    "Size=Large, Text Align=Center, Tone=Success, Variant=Tertiary, State=Default",
+    "Size=Large, Text Align=Center, Tone=Success, Variant=Monochrome Plain, State=Default",
+    "Size=Large, Text Align=Left, Tone=Default, Variant=Secondary, State=Default",
+    "Size=Large, Text Align=Left, Tone=Default, Variant=Plain, State=Default",
+    "Size=Large, Text Align=Left, Tone=Default, Variant=Primary, State=Default",
+    "Size=Large, Text Align=Left, Tone=Default, Variant=Tertiary, State=Default",
+    "Size=Large, Text Align=Left, Tone=Default, Variant=Monochrome Plain, State=Default",
+    "Size=Large, Text Align=Left, Tone=Critical, Variant=Secondary, State=Default",
+    "Size=Large, Text Align=Left, Tone=Critical, Variant=Plain, State=Default",
+    "Size=Large, Text Align=Left, Tone=Critical, Variant=Primary, State=Default",
+    "Size=Large, Text Align=Left, Tone=Critical, Variant=Tertiary, State=Default",
+    "Size=Large, Text Align=Left, Tone=Critical, Variant=Monochrome Plain, State=Default",
+    "Size=Large, Text Align=Left, Tone=Success, Variant=Secondary, State=Default",
+    "Size=Large, Text Align=Left, Tone=Success, Variant=Plain, State=Default",
+    "Size=Large, Text Align=Left, Tone=Success, Variant=Primary, State=Default",
+    "Size=Large, Text Align=Left, Tone=Success, Variant=Tertiary, State=Default",
+    "Size=Large, Text Align=Left, Tone=Success, Variant=Monochrome Plain, State=Default",
+    "Size=Large, Text Align=Right, Tone=Default, Variant=Secondary, State=Default",
+    "Size=Large, Text Align=Right, Tone=Default, Variant=Plain, State=Default",
+    "Size=Large, Text Align=Right, Tone=Default, Variant=Primary, State=Default",
+    "Size=Large, Text Align=Right, Tone=Default, Variant=Tertiary, State=Default",
+    "Size=Large, Text Align=Right, Tone=Default, Variant=Monochrome Plain, State=Default",
+    "Size=Large, Text Align=Right, Tone=Critical, Variant=Secondary, State=Default",
+    "Size=Large, Text Align=Right, Tone=Critical, Variant=Plain, State=Default",
+    "Size=Large, Text Align=Right, Tone=Critical, Variant=Primary, State=Default",
+    "Size=Large, Text Align=Right, Tone=Critical, Variant=Tertiary, State=Default",
+    "Size=Large, Text Align=Right, Tone=Critical, Variant=Monochrome Plain, State=Default",
+    "Size=Large, Text Align=Right, Tone=Success, Variant=Secondary, State=Default",
+    "Size=Large, Text Align=Right, Tone=Success, Variant=Plain, State=Default",
+    "Size=Large, Text Align=Right, Tone=Success, Variant=Primary, State=Default",
+    "Size=Large, Text Align=Right, Tone=Success, Variant=Tertiary, State=Default",
+    "Size=Large, Text Align=Right, Tone=Success, Variant=Monochrome Plain, State=Default",
+    "Size=Large, Text Align=Start, Tone=Default, Variant=Secondary, State=Default",
+    "Size=Large, Text Align=Start, Tone=Default, Variant=Plain, State=Default",
+    "Size=Large, Text Align=Start, Tone=Default, Variant=Primary, State=Default",
+    "Size=Large, Text Align=Start, Tone=Default, Variant=Tertiary, State=Default",
+    "Size=Large, Text Align=Start, Tone=Default, Variant=Monochrome Plain, State=Default",
+    "Size=Large, Text Align=Start, Tone=Critical, Variant=Secondary, State=Default",
+    "Size=Large, Text Align=Start, Tone=Critical, Variant=Plain, State=Default",
+    "Size=Large, Text Align=Start, Tone=Critical, Variant=Primary, State=Default",
+    "Size=Large, Text Align=Start, Tone=Critical, Variant=Tertiary, State=Default",
+    "Size=Large, Text Align=Start, Tone=Critical, Variant=Monochrome Plain, State=Default",
+    "Size=Large, Text Align=Start, Tone=Success, Variant=Secondary, State=Default",
+    "Size=Large, Text Align=Start, Tone=Success, Variant=Plain, State=Default",
+    "Size=Large, Text Align=Start, Tone=Success, Variant=Primary, State=Default",
+    "Size=Large, Text Align=Start, Tone=Success, Variant=Tertiary, State=Default",
+    "Size=Large, Text Align=Start, Tone=Success, Variant=Monochrome Plain, State=Default",
+    "Size=Large, Text Align=End, Tone=Default, Variant=Secondary, State=Default",
+    "Size=Large, Text Align=End, Tone=Default, Variant=Plain, State=Default",
+    "Size=Large, Text Align=End, Tone=Default, Variant=Primary, State=Default",
+    "Size=Large, Text Align=End, Tone=Default, Variant=Tertiary, State=Default",
+    "Size=Large, Text Align=End, Tone=Default, Variant=Monochrome Plain, State=Default",
+    "Size=Large, Text Align=End, Tone=Critical, Variant=Secondary, State=Default",
+    "Size=Large, Text Align=End, Tone=Critical, Variant=Plain, State=Default",
+    "Size=Large, Text Align=End, Tone=Critical, Variant=Primary, State=Default",
+    "Size=Large, Text Align=End, Tone=Critical, Variant=Tertiary, State=Default",
+    "Size=Large, Text Align=End, Tone=Critical, Variant=Monochrome Plain, State=Default",
+    "Size=Large, Text Align=End, Tone=Success, Variant=Secondary, State=Default",
+    "Size=Large, Text Align=End, Tone=Success, Variant=Plain, State=Default",
+    "Size=Large, Text Align=End, Tone=Success, Variant=Primary, State=Default",
+    "Size=Large, Text Align=End, Tone=Success, Variant=Tertiary, State=Default",
+    "Size=Large, Text Align=End, Tone=Success, Variant=Monochrome Plain, State=Default",
+    "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Disabled",
+    "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain, State=Disabled",
+    "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Disabled",
+    "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary, State=Disabled",
+    "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain, State=Disabled",
+    "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Focus Visible",
+    "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain, State=Focus Visible",
+    "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Focus Visible",
+    "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary, State=Focus Visible",
+    "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain, State=Focus Visible",
+    "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Active",
+    "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain, State=Active",
+    "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Active",
+    "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary, State=Active",
+    "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain, State=Active",
+    "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Hover",
+    "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain, State=Hover",
+    "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Hover",
+    "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary, State=Hover",
+    "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain, State=Hover"
+  ],
+  "reflow": {
+    "target": "39:20227",
+    "targetName": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Default",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "CENTER",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 63,
+      "h": 32,
+      "children": [
+        {
+          "id": "39:20232",
+          "name": "icon (margin box)",
+          "type": "FRAME",
+          "x": 12,
+          "y": 8,
+          "w": 20,
+          "h": 16,
+          "ax": 12,
+          "ay": 8,
+          "visible": false
+        },
+        {
+          "id": "39:20233",
+          "name": "label",
+          "type": "TEXT",
+          "x": 12,
+          "y": 8,
+          "w": 39,
+          "h": 16,
+          "ax": 12,
+          "ay": 8,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 103,
+      "h": 72,
+      "children": [
+        {
+          "id": "39:20232",
+          "name": "icon (margin box)",
+          "type": "FRAME",
+          "x": 12,
+          "y": 8,
+          "w": 20,
+          "h": 16,
+          "ax": 12,
+          "ay": 8,
+          "visible": false
+        },
+        {
+          "id": "39:20233",
+          "name": "label",
+          "type": "TEXT",
+          "x": 32,
+          "y": 28,
+          "w": 39,
+          "h": 16,
+          "ax": 32,
+          "ay": 28,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "label",
+        "dx": 20,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [
+      "icon (margin box)"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 63,
+      "h": 32
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:3407",
+    "baseline": {
+      "geometry": "f68c7028d0643e14",
+      "fills": "530e34176f521058",
+      "text": "2b25a770886b7eb1"
+    },
+    "axes": [
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Medium",
+            "geometry": "f68c7028d0643e14",
+            "fills": "530e34176f521058",
+            "text": "2b25a770886b7eb1"
+          },
+          {
+            "value": "Micro",
+            "geometry": "3046aee2f553d617",
+            "fills": "530e34176f521058",
+            "text": "2b25a770886b7eb1"
+          },
+          {
+            "value": "Slim",
+            "geometry": "f68c7028d0643e14",
+            "fills": "530e34176f521058",
+            "text": "2b25a770886b7eb1"
+          },
+          {
+            "value": "Large",
+            "geometry": "d40b67660f1e3766",
+            "fills": "530e34176f521058",
+            "text": "2b25a770886b7eb1"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Text Align",
+        "values": [
+          {
+            "value": "Center",
+            "geometry": "f68c7028d0643e14",
+            "fills": "530e34176f521058",
+            "text": "2b25a770886b7eb1"
+          },
+          {
+            "value": "Left",
+            "geometry": "f68c7028d0643e14",
+            "fills": "530e34176f521058",
+            "text": "2b25a770886b7eb1"
+          },
+          {
+            "value": "Right",
+            "geometry": "f68c7028d0643e14",
+            "fills": "530e34176f521058",
+            "text": "2b25a770886b7eb1"
+          },
+          {
+            "value": "Start",
+            "geometry": "f68c7028d0643e14",
+            "fills": "530e34176f521058",
+            "text": "2b25a770886b7eb1"
+          },
+          {
+            "value": "End",
+            "geometry": "f68c7028d0643e14",
+            "fills": "530e34176f521058",
+            "text": "2b25a770886b7eb1"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Tone",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "f68c7028d0643e14",
+            "fills": "530e34176f521058",
+            "text": "2b25a770886b7eb1"
+          },
+          {
+            "value": "Critical",
+            "geometry": "f68c7028d0643e14",
+            "fills": "9dc0f78c187216ff",
+            "text": "2b25a770886b7eb1"
+          },
+          {
+            "value": "Success",
+            "geometry": "f68c7028d0643e14",
+            "fills": "2a570eea9ec9e9f8",
+            "text": "2b25a770886b7eb1"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Variant",
+        "values": [
+          {
+            "value": "Secondary",
+            "geometry": "f68c7028d0643e14",
+            "fills": "530e34176f521058",
+            "text": "2b25a770886b7eb1"
+          },
+          {
+            "value": "Plain",
+            "geometry": "f68c7028d0643e14",
+            "fills": "3c102752cfb78f48",
+            "text": "2b25a770886b7eb1"
+          },
+          {
+            "value": "Primary",
+            "geometry": "f68c7028d0643e14",
+            "fills": "20b64cd74ed56994",
+            "text": "2b25a770886b7eb1"
+          },
+          {
+            "value": "Tertiary",
+            "geometry": "f68c7028d0643e14",
+            "fills": "9faa5154645e9348",
+            "text": "2b25a770886b7eb1"
+          },
+          {
+            "value": "Monochrome Plain",
+            "geometry": "f68c7028d0643e14",
+            "fills": "9faa5154645e9348",
+            "text": "2b25a770886b7eb1"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "State",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "f68c7028d0643e14",
+            "fills": "530e34176f521058",
+            "text": "2b25a770886b7eb1"
+          },
+          {
+            "value": "Disabled",
+            "geometry": "f68c7028d0643e14",
+            "fills": "34c0f12bd961af44",
+            "text": "2b25a770886b7eb1"
+          },
+          {
+            "value": "Focus Visible",
+            "geometry": "f68c7028d0643e14",
+            "fills": "24fa162c116f2844",
+            "text": "2b25a770886b7eb1"
+          },
+          {
+            "value": "Active",
+            "geometry": "f68c7028d0643e14",
+            "fills": "1eb0ef146d69da10",
+            "text": "2b25a770886b7eb1"
+          },
+          {
+            "value": "Hover",
+            "geometry": "f68c7028d0643e14",
+            "fills": "539a14b2b1f62048",
+            "text": "2b25a770886b7eb1"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 23,
+    "bound": 15,
+    "inferred": 8,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 5,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 2,
+        "inferred": 8,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Default",
+      "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Default",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 63,
+      "h": 32,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/icon (margin box)[0]",
+      "name": "icon (margin box)",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 20,
+      "h": 16,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/icon (margin box)[0]/icon[0]",
+      "name": "icon",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 20,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/icon (margin box)[0]/icon[0]/icon-2[0]",
+      "name": "icon-2",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 2,
+      "w": 20,
+      "h": 20,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/icon (margin box)[0]/icon[0]/icon-2[0]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 7.5,
+      "h": 7.5,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/icon (margin box)[0]/icon[0]/icon-2[0]/Vector[1]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 14,
+      "h": 14,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/label[1]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 39,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 3326,
+    "sig": "c09e90afe241d48c"
+  },
+  "canvasAfter": {
+    "nodes": 3326,
+    "sig": "c09e90afe241d48c"
+  },
+  "canvasRestored": true
+}

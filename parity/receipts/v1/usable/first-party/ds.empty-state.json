@@ -1,0 +1,282 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / first-party",
+  "setNodeId": "39:23659",
+  "setName": "EmptyState",
+  "setType": "COMPONENT",
+  "variantNodeId": "39:23659",
+  "variantNodeName": "EmptyState",
+  "axes": null,
+  "axesError": null,
+  "variantChildCount": 1,
+  "variantChildNames": [
+    "EmptyState"
+  ],
+  "reflow": {
+    "target": "39:23659",
+    "targetName": "EmptyState",
+    "layoutMode": "VERTICAL",
+    "childCount": 4,
+    "sizing": {
+      "h": "FIXED",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 320,
+      "h": 92,
+      "children": [
+        {
+          "id": "39:23660",
+          "name": "Icon",
+          "type": "SLOT",
+          "x": 159.5,
+          "y": 24,
+          "w": 1,
+          "h": 1,
+          "ax": 159.5,
+          "ay": 24,
+          "visible": false
+        },
+        {
+          "id": "39:23661",
+          "name": "title",
+          "type": "TEXT",
+          "x": 95.5,
+          "y": 24,
+          "w": 129,
+          "h": 19,
+          "ax": 95.5,
+          "ay": 24,
+          "visible": true
+        },
+        {
+          "id": "39:23662",
+          "name": "descriptionText",
+          "type": "TEXT",
+          "x": -10.5,
+          "y": 51,
+          "w": 341,
+          "h": 17,
+          "ax": -10.5,
+          "ay": 51,
+          "visible": true
+        },
+        {
+          "id": "39:23663",
+          "name": "Actions",
+          "type": "SLOT",
+          "x": 159.5,
+          "y": 76,
+          "w": 1,
+          "h": 8,
+          "ax": 159.5,
+          "ay": 76,
+          "visible": false
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 360,
+      "h": 132,
+      "children": [
+        {
+          "id": "39:23660",
+          "name": "Icon",
+          "type": "SLOT",
+          "x": 159.5,
+          "y": 24,
+          "w": 1,
+          "h": 1,
+          "ax": 159.5,
+          "ay": 24,
+          "visible": false
+        },
+        {
+          "id": "39:23661",
+          "name": "title",
+          "type": "TEXT",
+          "x": 115.5,
+          "y": 24,
+          "w": 129,
+          "h": 19,
+          "ax": 115.5,
+          "ay": 24,
+          "visible": true
+        },
+        {
+          "id": "39:23662",
+          "name": "descriptionText",
+          "type": "TEXT",
+          "x": 9.5,
+          "y": 51,
+          "w": 341,
+          "h": 17,
+          "ax": 9.5,
+          "ay": 51,
+          "visible": true
+        },
+        {
+          "id": "39:23663",
+          "name": "Actions",
+          "type": "SLOT",
+          "x": 159.5,
+          "y": 76,
+          "w": 1,
+          "h": 8,
+          "ax": 159.5,
+          "ay": 76,
+          "visible": false
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "title",
+        "dx": 20,
+        "dy": 0,
+        "dw": 0,
+        "dh": 0
+      },
+      {
+        "name": "descriptionText",
+        "dx": 20,
+        "dy": 0,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [
+      "Icon",
+      "Actions"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 320,
+      "h": 92
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:3832",
+    "baseline": {
+      "geometry": "318f34250755a68c",
+      "fills": "3543c0cd383de940",
+      "text": "77d3f289b5009469"
+    },
+    "axes": [],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 11,
+    "bound": 10,
+    "inferred": 1,
+    "literal": 0,
+    "byGroup": {
+      "spacing": {
+        "bound": 8,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 1,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/EmptyState",
+      "name": "EmptyState",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 4,
+      "w": 320,
+      "h": 92,
+      "visible": true,
+      "parentLayoutMode": null,
+      "parentType": "SECTION"
+    },
+    {
+      "path": "/Icon[0]",
+      "name": "Icon",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 1,
+      "h": 1,
+      "visible": false,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/title[1]",
+      "name": "title",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 129,
+      "h": 19,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/descriptionText[2]",
+      "name": "descriptionText",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 341,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/Actions[3]",
+      "name": "Actions",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 1,
+      "h": 8,
+      "visible": false,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasAfter": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasRestored": true
+}

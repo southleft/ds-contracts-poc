@@ -1,0 +1,199 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / first-party",
+  "setNodeId": "39:23929",
+  "setName": "Section",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:23925",
+  "variantNodeName": "Variant=Section",
+  "axes": [
+    {
+      "axis": "Variant",
+      "values": [
+        "Section",
+        "Muted"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 2,
+  "variantChildNames": [
+    "Variant=Section",
+    "Variant=Muted"
+  ],
+  "reflow": {
+    "target": "39:23925",
+    "targetName": "Variant=Section",
+    "layoutMode": "VERTICAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 320,
+      "h": 35,
+      "children": [
+        {
+          "id": "39:23926",
+          "name": "Children",
+          "type": "SLOT",
+          "x": 17,
+          "y": 17,
+          "w": 286,
+          "h": 1,
+          "ax": 17,
+          "ay": 17,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 360,
+      "h": 75,
+      "children": [
+        {
+          "id": "39:23926",
+          "name": "Children",
+          "type": "SLOT",
+          "x": 17,
+          "y": 17,
+          "w": 326,
+          "h": 1,
+          "ax": 17,
+          "ay": 17,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "Children",
+        "dx": 0,
+        "dy": 0,
+        "dw": 40,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 320,
+      "h": 35
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:4047",
+    "baseline": {
+      "geometry": "ca47407a54e850bb",
+      "fills": "c907594a4c289888",
+      "text": "00001505811c9dc5"
+    },
+    "axes": [
+      {
+        "axis": "Variant",
+        "values": [
+          {
+            "value": "Section",
+            "geometry": "ca47407a54e850bb",
+            "fills": "c907594a4c289888",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Muted",
+            "geometry": "ca47407a54e850bb",
+            "fills": "91b4928fa862a6ee",
+            "text": "00001505811c9dc5"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 14,
+    "bound": 12,
+    "inferred": 2,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 1,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 6,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 1,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Variant=Section",
+      "name": "Variant=Section",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 320,
+      "h": 35,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/Children[0]",
+      "name": "Children",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 0,
+      "w": 286,
+      "h": 1,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasAfter": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasRestored": true
+}

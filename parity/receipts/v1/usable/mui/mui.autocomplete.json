@@ -1,0 +1,512 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / mui",
+  "setNodeId": "39:16728",
+  "setName": "Autocomplete",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:16676",
+  "variantNodeName": "Size=Medium",
+  "axes": [
+    {
+      "axis": "Size",
+      "values": [
+        "Medium",
+        "Small"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 2,
+  "variantChildNames": [
+    "Size=Medium",
+    "Size=Small"
+  ],
+  "reflow": {
+    "target": "39:16676",
+    "targetName": "Size=Medium",
+    "layoutMode": "VERTICAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 288,
+      "h": 56,
+      "children": [
+        {
+          "id": "39:16677",
+          "name": "formcontrol-fullwidth",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 288,
+          "h": 56,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 328,
+      "h": 96,
+      "children": [
+        {
+          "id": "39:16677",
+          "name": "formcontrol-fullwidth",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 288,
+          "h": 56,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "formcontrol-fullwidth"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 288,
+      "h": 56
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:2022",
+    "baseline": {
+      "geometry": "bf94aeb1bf4fa62f",
+      "fills": "a886562dd87f2684",
+      "text": "258cf79b41d7e11b"
+    },
+    "axes": [
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Medium",
+            "geometry": "bf94aeb1bf4fa62f",
+            "fills": "a886562dd87f2684",
+            "text": "258cf79b41d7e11b"
+          },
+          {
+            "value": "Small",
+            "geometry": "0d1071b0fd0ead6b",
+            "fills": "a886562dd87f2684",
+            "text": "258cf79b41d7e11b"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 92,
+    "bound": 68,
+    "inferred": 18,
+    "literal": 6,
+    "byGroup": {
+      "sizing": {
+        "bound": 19,
+        "inferred": 14,
+        "literal": 6
+      },
+      "spacing": {
+        "bound": 18,
+        "inferred": 3,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 20,
+        "inferred": 0,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 10,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      }
+    },
+    "literalSites": [
+      "/formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-tag (margin box)[0]·width=83.3",
+      "/formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-tag (margin box)[0]/autocomplete-tag[0]/icon[1]/Vector[0]·width=14.55",
+      "/formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-tag (margin box)[0]/autocomplete-tag[0]/icon[1]/Vector[0]·height=14.55",
+      "/formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-tag-2 (margin box)[1]·width=76.97",
+      "/formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-tag-2 (margin box)[1]/autocomplete-tag-2[0]/icon-2[1]/Vector[0]·width=14.55",
+      "/formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-tag-2 (margin box)[1]/autocomplete-tag-2[0]/icon-2[1]/Vector[0]·height=14.55"
+    ],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Size=Medium",
+      "name": "Size=Medium",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 288,
+      "h": 56,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/formcontrol-fullwidth[0]",
+      "name": "formcontrol-fullwidth",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 288,
+      "h": 56,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/formcontrol-fullwidth[0]/autocomplete-inputroot[0]",
+      "name": "autocomplete-inputroot",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 5,
+      "w": 288,
+      "h": 56,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-tag (margin box)[0]",
+      "name": "autocomplete-tag (margin box)",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 83.3,
+      "h": 38,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-tag (margin box)[0]/autocomplete-tag[0]",
+      "name": "autocomplete-tag",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 77.3,
+      "h": 32,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-tag (margin box)[0]/autocomplete-tag[0]/label[0]",
+      "name": "label",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 58,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-tag (margin box)[0]/autocomplete-tag[0]/label[0]/label-text[0]",
+      "name": "label-text",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 34,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-tag (margin box)[0]/autocomplete-tag[0]/icon[1]",
+      "name": "icon",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 16,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-tag (margin box)[0]/autocomplete-tag[0]/icon[1]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 14.55,
+      "h": 14.55,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-tag-2 (margin box)[1]",
+      "name": "autocomplete-tag-2 (margin box)",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 76.97,
+      "h": 38,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-tag-2 (margin box)[1]/autocomplete-tag-2[0]",
+      "name": "autocomplete-tag-2",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 70.97,
+      "h": 32,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-tag-2 (margin box)[1]/autocomplete-tag-2[0]/label-2[0]",
+      "name": "label-2",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 51,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-tag-2 (margin box)[1]/autocomplete-tag-2[0]/label-2[0]/label-2-text[0]",
+      "name": "label-2-text",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 27,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-tag-2 (margin box)[1]/autocomplete-tag-2[0]/icon-2[1]",
+      "name": "icon-2",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 16,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-tag-2 (margin box)[1]/autocomplete-tag-2[0]/icon-2[1]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 14.55,
+      "h": 14.55,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-input[2]",
+      "name": "autocomplete-input",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 53.73,
+      "h": 38,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-input[2]/placeholder[0]",
+      "name": "placeholder",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 0,
+      "h": 23,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-endadornment[3]",
+      "name": "autocomplete-endadornment",
+      "type": "FRAME",
+      "layoutPositioning": "ABSOLUTE",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 52,
+      "h": 28,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-endadornment[3]/autocomplete-popupindicator (margin box)[0]",
+      "name": "autocomplete-popupindicator (margin box)",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 26,
+      "h": 28,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-endadornment[3]/autocomplete-popupindicator (margin box)[0]/autocomplete-popupindicator[0]",
+      "name": "autocomplete-popupindicator",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 28,
+      "h": 28,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-endadornment[3]/autocomplete-popupindicator (margin box)[0]/autocomplete-popupindicator[0]/autocomplete-popupindicator-icon[0]",
+      "name": "autocomplete-popupindicator-icon",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 24,
+      "h": 24,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-endadornment[3]/autocomplete-popupindicator (margin box)[0]/autocomplete-popupindicator[0]/autocomplete-popupindicator-icon[0]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 10,
+      "h": 5,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/formcontrol-fullwidth[0]/autocomplete-inputroot[0]/outlinedinput-notchedoutline[4]",
+      "name": "outlinedinput-notchedoutline",
+      "type": "FRAME",
+      "layoutPositioning": "ABSOLUTE",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 288,
+      "h": 61,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/formcontrol-fullwidth[0]/autocomplete-inputroot[0]/outlinedinput-notchedoutline[4]/part-0-0-4-0[0]",
+      "name": "part-0-0-4-0",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 0,
+      "h": 11,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/formcontrol-fullwidth[0]/autocomplete-inputroot[0]/outlinedinput-notchedoutline[4]/part-0-0-4-0[0]/label-3[0]",
+      "name": "label-3",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 0,
+      "h": 11,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/formcontrol-fullwidth[0]/autocomplete-inputroot[0]/outlinedinput-notchedoutline[4]/part-0-0-4-0[0]/label-3[0]/​[0]",
+      "name": "​",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 0,
+      "h": 11,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasAfter": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasRestored": true
+}

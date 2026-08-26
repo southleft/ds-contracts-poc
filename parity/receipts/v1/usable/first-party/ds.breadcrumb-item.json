@@ -1,0 +1,227 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / first-party",
+  "setNodeId": "39:23506",
+  "setName": "BreadcrumbItem",
+  "setType": "COMPONENT",
+  "variantNodeId": "39:23506",
+  "variantNodeName": "BreadcrumbItem",
+  "axes": null,
+  "axesError": null,
+  "variantChildCount": 1,
+  "variantChildNames": [
+    "BreadcrumbItem"
+  ],
+  "reflow": {
+    "target": "39:23506",
+    "targetName": "BreadcrumbItem",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "MIN",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 50,
+      "h": 17,
+      "children": [
+        {
+          "id": "39:23507",
+          "name": "separatorIcon",
+          "type": "FRAME",
+          "x": 0,
+          "y": 2.5,
+          "w": 12,
+          "h": 12,
+          "ax": 0,
+          "ay": 2.5,
+          "visible": true
+        },
+        {
+          "id": "39:23509",
+          "name": "link",
+          "type": "TEXT",
+          "x": 16,
+          "y": 0,
+          "w": 34,
+          "h": 17,
+          "ax": 16,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 90,
+      "h": 57,
+      "children": [
+        {
+          "id": "39:23507",
+          "name": "separatorIcon",
+          "type": "FRAME",
+          "x": 0,
+          "y": 22.5,
+          "w": 12,
+          "h": 12,
+          "ax": 0,
+          "ay": 22.5,
+          "visible": true
+        },
+        {
+          "id": "39:23509",
+          "name": "link",
+          "type": "TEXT",
+          "x": 16,
+          "y": 20,
+          "w": 34,
+          "h": 17,
+          "ax": 16,
+          "ay": 20,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "separatorIcon",
+        "dx": 0,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      },
+      {
+        "name": "link",
+        "dx": 0,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 50,
+      "h": 17
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:3711",
+    "baseline": {
+      "geometry": "8de28fe5428ffc3c",
+      "fills": "4a1c66218bf84bb4",
+      "text": "3931b21310b8b48c"
+    },
+    "axes": [],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 8,
+    "bound": 3,
+    "inferred": 2,
+    "literal": 3,
+    "byGroup": {
+      "spacing": {
+        "bound": 1,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 2,
+        "literal": 2
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 0,
+        "literal": 1
+      },
+      "fills": {
+        "bound": 1,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [
+      "/separatorIcon[0]/Vector[0]·strokeWeight=0.9000000357627869",
+      "/separatorIcon[0]/Vector[0]·width=2.7",
+      "/separatorIcon[0]/Vector[0]·height=5.4"
+    ],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/BreadcrumbItem",
+      "name": "BreadcrumbItem",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 50,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": null,
+      "parentType": "SECTION"
+    },
+    {
+      "path": "/separatorIcon[0]",
+      "name": "separatorIcon",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 12,
+      "h": 12,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/separatorIcon[0]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 2.7,
+      "h": 5.4,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/link[1]",
+      "name": "link",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 34,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasAfter": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasRestored": true
+}

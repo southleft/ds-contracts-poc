@@ -1,0 +1,165 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / tailwind",
+  "setNodeId": "39:5823",
+  "setName": "Kbd",
+  "setType": "COMPONENT",
+  "variantNodeId": "39:5823",
+  "variantNodeName": "Kbd",
+  "axes": null,
+  "axesError": null,
+  "variantChildCount": 1,
+  "variantChildNames": [
+    "Kbd"
+  ],
+  "reflow": {
+    "target": "39:5823",
+    "targetName": "Kbd",
+    "layoutMode": "VERTICAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 39.92,
+      "h": 30,
+      "children": [
+        {
+          "id": "39:5824",
+          "name": "label",
+          "type": "TEXT",
+          "x": 9,
+          "y": 7,
+          "w": 22,
+          "h": 16,
+          "ax": 9,
+          "ay": 7,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 79.92,
+      "h": 70,
+      "children": [
+        {
+          "id": "39:5824",
+          "name": "label",
+          "type": "TEXT",
+          "x": 9,
+          "y": 7,
+          "w": 22,
+          "h": 16,
+          "ax": 9,
+          "ay": 7,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "label"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 39.92,
+      "h": 30
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:275",
+    "baseline": {
+      "geometry": "9dbf6cd4a693195c",
+      "fills": "235dc2898dbc4edf",
+      "text": "5d97442e0cff5560"
+    },
+    "axes": [],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 13,
+    "bound": 11,
+    "inferred": 2,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 1,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Kbd",
+      "name": "Kbd",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 39.92,
+      "h": 30,
+      "visible": true,
+      "parentLayoutMode": null,
+      "parentType": "SECTION"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 22,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 243,
+    "sig": "e17d8ad6cd30fd1c"
+  },
+  "canvasAfter": {
+    "nodes": 243,
+    "sig": "e17d8ad6cd30fd1c"
+  },
+  "canvasRestored": true
+}

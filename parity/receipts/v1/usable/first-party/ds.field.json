@@ -1,0 +1,323 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / first-party",
+  "setNodeId": "39:23666",
+  "setName": "Field",
+  "setType": "COMPONENT",
+  "variantNodeId": "39:23666",
+  "variantNodeName": "Field",
+  "axes": null,
+  "axesError": null,
+  "variantChildCount": 1,
+  "variantChildNames": [
+    "Field"
+  ],
+  "reflow": {
+    "target": "39:23666",
+    "targetName": "Field",
+    "layoutMode": "VERTICAL",
+    "childCount": 3,
+    "sizing": {
+      "h": "FIXED",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 320,
+      "h": 43,
+      "children": [
+        {
+          "id": "39:23667",
+          "name": "labelRow",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 320,
+          "h": 17,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:23673",
+          "name": "descriptionText",
+          "type": "TEXT",
+          "x": 0,
+          "y": 21,
+          "w": 240,
+          "h": 17,
+          "ax": 0,
+          "ay": 21,
+          "visible": true
+        },
+        {
+          "id": "39:23674",
+          "name": "Children",
+          "type": "SLOT",
+          "x": 0,
+          "y": 42,
+          "w": 320,
+          "h": 1,
+          "ax": 0,
+          "ay": 42,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 360,
+      "h": 83,
+      "children": [
+        {
+          "id": "39:23667",
+          "name": "labelRow",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 360,
+          "h": 17,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:23673",
+          "name": "descriptionText",
+          "type": "TEXT",
+          "x": 0,
+          "y": 21,
+          "w": 240,
+          "h": 17,
+          "ax": 0,
+          "ay": 21,
+          "visible": true
+        },
+        {
+          "id": "39:23674",
+          "name": "Children",
+          "type": "SLOT",
+          "x": 0,
+          "y": 42,
+          "w": 360,
+          "h": 1,
+          "ax": 0,
+          "ay": 42,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "labelRow",
+        "dx": 0,
+        "dy": 0,
+        "dw": 40,
+        "dh": 0
+      },
+      {
+        "name": "Children",
+        "dx": 0,
+        "dy": 0,
+        "dw": 40,
+        "dh": 0
+      }
+    ],
+    "frozen": [
+      "descriptionText"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 320,
+      "h": 43
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:3837",
+    "baseline": {
+      "geometry": "f27bc9ea3220c510",
+      "fills": "15b59efede206397",
+      "text": "5c0d6b2a8262d15d"
+    },
+    "axes": [],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 19,
+    "bound": 7,
+    "inferred": 4,
+    "literal": 8,
+    "byGroup": {
+      "spacing": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 4,
+        "literal": 5
+      },
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 3,
+        "inferred": 0,
+        "literal": 3
+      }
+    },
+    "literalSites": [
+      "/labelRow[0]/requiredMark[1]/Vector[0]·strokeWeight=0.75",
+      "/labelRow[0]/requiredMark[1]/Vector[0]·height=5.5",
+      "/labelRow[0]/requiredMark[1]/Vector[1]·strokeWeight=0.75",
+      "/labelRow[0]/requiredMark[1]/Vector[1]·width=4.8",
+      "/labelRow[0]/requiredMark[1]/Vector[1]·height=2.8",
+      "/labelRow[0]/requiredMark[1]/Vector[2]·strokeWeight=0.75",
+      "/labelRow[0]/requiredMark[1]/Vector[2]·width=4.8",
+      "/labelRow[0]/requiredMark[1]/Vector[2]·height=2.8"
+    ],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Field",
+      "name": "Field",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 3,
+      "w": 320,
+      "h": 43,
+      "visible": true,
+      "parentLayoutMode": null,
+      "parentType": "SECTION"
+    },
+    {
+      "path": "/labelRow[0]",
+      "name": "labelRow",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 320,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/labelRow[0]/labelText[0]",
+      "name": "labelText",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 68,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/labelRow[0]/requiredMark[1]",
+      "name": "requiredMark",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 3,
+      "w": 10,
+      "h": 10,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/labelRow[0]/requiredMark[1]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 0,
+      "h": 5.5,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/labelRow[0]/requiredMark[1]/Vector[1]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 4.8,
+      "h": 2.8,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/labelRow[0]/requiredMark[1]/Vector[2]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 4.8,
+      "h": 2.8,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/descriptionText[1]",
+      "name": "descriptionText",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 240,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/Children[2]",
+      "name": "Children",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 0,
+      "w": 320,
+      "h": 1,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasAfter": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasRestored": true
+}

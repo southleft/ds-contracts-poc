@@ -1,0 +1,285 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / astryx",
+  "setNodeId": "39:13984",
+  "setName": "Badge (astryx.badge)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:13956",
+  "variantNodeName": "Variant=Neutral",
+  "axes": [
+    {
+      "axis": "Variant",
+      "values": [
+        "Neutral",
+        "Info",
+        "Success",
+        "Warning",
+        "Error",
+        "Blue",
+        "Cyan",
+        "Green",
+        "Orange",
+        "Pink",
+        "Purple",
+        "Red",
+        "Teal",
+        "Yellow"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 14,
+  "variantChildNames": [
+    "Variant=Neutral",
+    "Variant=Info",
+    "Variant=Success",
+    "Variant=Warning",
+    "Variant=Error",
+    "Variant=Blue",
+    "Variant=Cyan",
+    "Variant=Green",
+    "Variant=Orange",
+    "Variant=Pink",
+    "Variant=Purple",
+    "Variant=Red",
+    "Variant=Teal",
+    "Variant=Yellow"
+  ],
+  "reflow": {
+    "target": "39:13956",
+    "targetName": "Variant=Neutral",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "CENTER",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 42,
+      "h": 20,
+      "children": [
+        {
+          "id": "39:13957",
+          "name": "label",
+          "type": "TEXT",
+          "x": 8,
+          "y": 0,
+          "w": 26,
+          "h": 20,
+          "ax": 8,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 82,
+      "h": 60,
+      "children": [
+        {
+          "id": "39:13957",
+          "name": "label",
+          "type": "TEXT",
+          "x": 28,
+          "y": 20,
+          "w": 26,
+          "h": 20,
+          "ax": 28,
+          "ay": 20,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "label",
+        "dx": 20,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 42,
+      "h": 20
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:992",
+    "baseline": {
+      "geometry": "fbd1954353966b66",
+      "fills": "56694a9a09053fe8",
+      "text": "a5bed03b049f1cd8"
+    },
+    "axes": [
+      {
+        "axis": "Variant",
+        "values": [
+          {
+            "value": "Neutral",
+            "geometry": "fbd1954353966b66",
+            "fills": "56694a9a09053fe8",
+            "text": "a5bed03b049f1cd8"
+          },
+          {
+            "value": "Info",
+            "geometry": "fbd1954353966b66",
+            "fills": "22ab5569931f3028",
+            "text": "a5bed03b049f1cd8"
+          },
+          {
+            "value": "Success",
+            "geometry": "fbd1954353966b66",
+            "fills": "0e9d301489bcb478",
+            "text": "a5bed03b049f1cd8"
+          },
+          {
+            "value": "Warning",
+            "geometry": "fbd1954353966b66",
+            "fills": "70b85ebfdbaa6110",
+            "text": "a5bed03b049f1cd8"
+          },
+          {
+            "value": "Error",
+            "geometry": "fbd1954353966b66",
+            "fills": "6ec7815780b8fadc",
+            "text": "a5bed03b049f1cd8"
+          },
+          {
+            "value": "Blue",
+            "geometry": "fbd1954353966b66",
+            "fills": "4e930843e3bea5d0",
+            "text": "a5bed03b049f1cd8"
+          },
+          {
+            "value": "Cyan",
+            "geometry": "fbd1954353966b66",
+            "fills": "e413ae1c38f30290",
+            "text": "a5bed03b049f1cd8"
+          },
+          {
+            "value": "Green",
+            "geometry": "fbd1954353966b66",
+            "fills": "428b5e50369e9280",
+            "text": "a5bed03b049f1cd8"
+          },
+          {
+            "value": "Orange",
+            "geometry": "fbd1954353966b66",
+            "fills": "bc6106a375abce1b",
+            "text": "a5bed03b049f1cd8"
+          },
+          {
+            "value": "Pink",
+            "geometry": "fbd1954353966b66",
+            "fills": "911550640ff06678",
+            "text": "a5bed03b049f1cd8"
+          },
+          {
+            "value": "Purple",
+            "geometry": "fbd1954353966b66",
+            "fills": "89a34a346faf3920",
+            "text": "a5bed03b049f1cd8"
+          },
+          {
+            "value": "Red",
+            "geometry": "fbd1954353966b66",
+            "fills": "4447faa31d912568",
+            "text": "a5bed03b049f1cd8"
+          },
+          {
+            "value": "Teal",
+            "geometry": "fbd1954353966b66",
+            "fills": "c438643cea47ae3f",
+            "text": "a5bed03b049f1cd8"
+          },
+          {
+            "value": "Yellow",
+            "geometry": "fbd1954353966b66",
+            "fills": "5d1ac3d894c72400",
+            "text": "a5bed03b049f1cd8"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 9,
+    "bound": 9,
+    "inferred": 0,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 3,
+        "inferred": 0,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Variant=Neutral",
+      "name": "Variant=Neutral",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 42,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 26,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 440,
+    "sig": "8f17151526c142bc"
+  },
+  "canvasAfter": {
+    "nodes": 440,
+    "sig": "8f17151526c142bc"
+  },
+  "canvasRestored": true
+}

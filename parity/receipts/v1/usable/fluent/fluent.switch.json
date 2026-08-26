@@ -1,0 +1,355 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / fluent",
+  "setNodeId": "39:13265",
+  "setName": "Switch (fluent.switch)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:13195",
+  "variantNodeName": "Checked=Unchecked, Label Position=After, State=Default",
+  "axes": [
+    {
+      "axis": "Checked",
+      "values": [
+        "Unchecked",
+        "Checked"
+      ]
+    },
+    {
+      "axis": "Label Position",
+      "values": [
+        "After",
+        "Above",
+        "Before"
+      ]
+    },
+    {
+      "axis": "State",
+      "values": [
+        "Default",
+        "Disabled",
+        "Focus Visible"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 10,
+  "variantChildNames": [
+    "Checked=Unchecked, Label Position=After, State=Default",
+    "Checked=Unchecked, Label Position=Above, State=Default",
+    "Checked=Unchecked, Label Position=Before, State=Default",
+    "Checked=Checked, Label Position=After, State=Default",
+    "Checked=Checked, Label Position=Above, State=Default",
+    "Checked=Checked, Label Position=Before, State=Default",
+    "Checked=Unchecked, Label Position=After, State=Disabled",
+    "Checked=Checked, Label Position=After, State=Disabled",
+    "Checked=Unchecked, Label Position=After, State=Focus Visible",
+    "Checked=Checked, Label Position=After, State=Focus Visible"
+  ],
+  "reflow": {
+    "target": "39:13195",
+    "targetName": "Checked=Unchecked, Label Position=After, State=Default",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 111.38,
+      "h": 36,
+      "children": [
+        {
+          "id": "39:13199",
+          "name": "indicator (margin box)",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 48,
+          "h": 36,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:13200",
+          "name": "label",
+          "type": "FRAME",
+          "x": 56,
+          "y": 0,
+          "w": 57,
+          "h": 36,
+          "ax": 56,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 151.38,
+      "h": 76,
+      "children": [
+        {
+          "id": "39:13199",
+          "name": "indicator (margin box)",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 48,
+          "h": 36,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:13200",
+          "name": "label",
+          "type": "FRAME",
+          "x": 56,
+          "y": 0,
+          "w": 57,
+          "h": 36,
+          "ax": 56,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "indicator (margin box)",
+      "label"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 111.38,
+      "h": 36
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:1812",
+    "baseline": {
+      "geometry": "93235026ef909982",
+      "fills": "0ad077e39f0a5a98",
+      "text": "fe8833fb4f21ff50"
+    },
+    "axes": [
+      {
+        "axis": "Checked",
+        "values": [
+          {
+            "value": "Unchecked",
+            "geometry": "93235026ef909982",
+            "fills": "0ad077e39f0a5a98",
+            "text": "fe8833fb4f21ff50"
+          },
+          {
+            "value": "Checked",
+            "geometry": "93235026ef909982",
+            "fills": "7c5701dc22f06290",
+            "text": "fe8833fb4f21ff50"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Label Position",
+        "values": [
+          {
+            "value": "After",
+            "geometry": "93235026ef909982",
+            "fills": "0ad077e39f0a5a98",
+            "text": "fe8833fb4f21ff50"
+          },
+          {
+            "value": "Above",
+            "geometry": "ea8f16237d010598",
+            "fills": "0ad077e39f0a5a98",
+            "text": "fe8833fb4f21ff50"
+          },
+          {
+            "value": "Before",
+            "geometry": "9a2290227d1b3e00",
+            "fills": "0ad077e39f0a5a98",
+            "text": "fe8833fb4f21ff50"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "State",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "93235026ef909982",
+            "fills": "0ad077e39f0a5a98",
+            "text": "fe8833fb4f21ff50"
+          },
+          {
+            "value": "Disabled",
+            "geometry": "93235026ef909982",
+            "fills": "89a57ee3391f5fc0",
+            "text": "fe8833fb4f21ff50"
+          },
+          {
+            "value": "Focus Visible",
+            "geometry": "93235026ef909982",
+            "fills": "0ad077e39f0a5a98",
+            "text": "fe8833fb4f21ff50"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 23,
+    "bound": 13,
+    "inferred": 10,
+    "literal": 0,
+    "byGroup": {
+      "spacing": {
+        "bound": 5,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 1,
+        "inferred": 8,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 2,
+        "inferred": 1,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Checked=Unchecked, Label Position=After, State=Default",
+      "name": "Checked=Unchecked, Label Position=After, State=Default",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 111.38,
+      "h": 36,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/indicator (margin box)[0]",
+      "name": "indicator (margin box)",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 48,
+      "h": 36,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/indicator (margin box)[0]/indicator[0]",
+      "name": "indicator",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 40,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/indicator (margin box)[0]/indicator[0]/indicator-icon[0]",
+      "name": "indicator-icon",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 18,
+      "h": 18,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/indicator (margin box)[0]/indicator[0]/indicator-icon[0]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 16,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/label[1]",
+      "name": "label",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 57,
+      "h": 36,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/label[1]/label-text[0]",
+      "name": "label-text",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 45,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1663,
+    "sig": "0ac044e74ac6a8ac"
+  },
+  "canvasAfter": {
+    "nodes": 1663,
+    "sig": "0ac044e74ac6a8ac"
+  },
+  "canvasRestored": true
+}

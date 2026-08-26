@@ -1,0 +1,414 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / mui",
+  "setNodeId": "39:17636",
+  "setName": "TablePagination",
+  "setType": "COMPONENT",
+  "variantNodeId": "39:17636",
+  "variantNodeName": "TablePagination",
+  "axes": null,
+  "axesError": null,
+  "variantChildCount": 1,
+  "variantChildNames": [
+    "TablePagination"
+  ],
+  "reflow": {
+    "target": "39:17636",
+    "targetName": "TablePagination",
+    "layoutMode": "VERTICAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 428,
+      "h": 52,
+      "children": [
+        {
+          "id": "39:17637",
+          "name": "tablepagination-toolbar",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 428,
+          "h": 52,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 468,
+      "h": 92,
+      "children": [
+        {
+          "id": "39:17637",
+          "name": "tablepagination-toolbar",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 428,
+          "h": 52,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "tablepagination-toolbar"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 428,
+      "h": 52
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:2491",
+    "baseline": {
+      "geometry": "39713704457c0a1c",
+      "fills": "97f5e3412e22bc7c",
+      "text": "8b42a310b0372cf8"
+    },
+    "axes": [],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 73,
+    "bound": 44,
+    "inferred": 23,
+    "literal": 6,
+    "byGroup": {
+      "sizing": {
+        "bound": 14,
+        "inferred": 20,
+        "literal": 6
+      },
+      "spacing": {
+        "bound": 14,
+        "inferred": 3,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 8,
+        "inferred": 0,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 8,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [
+      "/tablepagination-toolbar[0]/label (margin box)[1]·width=98",
+      "/tablepagination-toolbar[0]/label (margin box)[1]/label[0]·width=98",
+      "/tablepagination-toolbar[0]/label-3 (margin box)[3]·width=54",
+      "/tablepagination-toolbar[0]/label-3 (margin box)[3]/label-3[0]·width=54",
+      "/tablepagination-toolbar[0]/tablepagination-actions (margin box)[4]/tablepagination-actions[0]/buttonbase-root[0]/buttonbase-root-icon[0]/Vector[0]·width=7.41",
+      "/tablepagination-toolbar[0]/tablepagination-actions (margin box)[4]/tablepagination-actions[0]/buttonbase-root-2[1]/buttonbase-root-2-icon[0]/Vector[0]·width=7.41"
+    ],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/TablePagination",
+      "name": "TablePagination",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 428,
+      "h": 52,
+      "visible": true,
+      "parentLayoutMode": null,
+      "parentType": "SECTION"
+    },
+    {
+      "path": "/tablepagination-toolbar[0]",
+      "name": "tablepagination-toolbar",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 5,
+      "w": 428,
+      "h": 52,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/tablepagination-toolbar[0]/tablepagination-spacer[0]",
+      "name": "tablepagination-spacer",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 67.03,
+      "h": 0,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/tablepagination-toolbar[0]/label (margin box)[1]",
+      "name": "label (margin box)",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 98,
+      "h": 49,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/tablepagination-toolbar[0]/label (margin box)[1]/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 98,
+      "h": 21,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/tablepagination-toolbar[0]/inputbase-root (margin box)[2]",
+      "name": "inputbase-root (margin box)",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 88,
+      "h": 29.13,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/tablepagination-toolbar[0]/inputbase-root (margin box)[2]/inputbase-root[0]",
+      "name": "inputbase-root",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 48,
+      "h": 29.13,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/tablepagination-toolbar[0]/inputbase-root (margin box)[2]/inputbase-root[0]/label-2[0]",
+      "name": "label-2",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 48,
+      "h": 30,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/tablepagination-toolbar[0]/inputbase-root (margin box)[2]/inputbase-root[0]/label-2[0]/label-2-text[0]",
+      "name": "label-2-text",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 16,
+      "h": 21,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/tablepagination-toolbar[0]/inputbase-root (margin box)[2]/inputbase-root[0]/icon[1]",
+      "name": "icon",
+      "type": "FRAME",
+      "layoutPositioning": "ABSOLUTE",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 24,
+      "h": 24,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/tablepagination-toolbar[0]/inputbase-root (margin box)[2]/inputbase-root[0]/icon[1]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 10,
+      "h": 5,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/tablepagination-toolbar[0]/label-3 (margin box)[3]",
+      "name": "label-3 (margin box)",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 54,
+      "h": 49,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/tablepagination-toolbar[0]/label-3 (margin box)[3]/label-3[0]",
+      "name": "label-3",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 54,
+      "h": 21,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/tablepagination-toolbar[0]/tablepagination-actions (margin box)[4]",
+      "name": "tablepagination-actions (margin box)",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 100,
+      "h": 40,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/tablepagination-toolbar[0]/tablepagination-actions (margin box)[4]/tablepagination-actions[0]",
+      "name": "tablepagination-actions",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 80,
+      "h": 40,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/tablepagination-toolbar[0]/tablepagination-actions (margin box)[4]/tablepagination-actions[0]/buttonbase-root[0]",
+      "name": "buttonbase-root",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 40,
+      "h": 40,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/tablepagination-toolbar[0]/tablepagination-actions (margin box)[4]/tablepagination-actions[0]/buttonbase-root[0]/buttonbase-root-icon[0]",
+      "name": "buttonbase-root-icon",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 24,
+      "h": 24,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/tablepagination-toolbar[0]/tablepagination-actions (margin box)[4]/tablepagination-actions[0]/buttonbase-root[0]/buttonbase-root-icon[0]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 7.41,
+      "h": 12,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/tablepagination-toolbar[0]/tablepagination-actions (margin box)[4]/tablepagination-actions[0]/buttonbase-root-2[1]",
+      "name": "buttonbase-root-2",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 40,
+      "h": 40,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/tablepagination-toolbar[0]/tablepagination-actions (margin box)[4]/tablepagination-actions[0]/buttonbase-root-2[1]/buttonbase-root-2-icon[0]",
+      "name": "buttonbase-root-2-icon",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 24,
+      "h": 24,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/tablepagination-toolbar[0]/tablepagination-actions (margin box)[4]/tablepagination-actions[0]/buttonbase-root-2[1]/buttonbase-root-2-icon[0]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 7.41,
+      "h": 12,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasAfter": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasRestored": true
+}

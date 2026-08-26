@@ -1,0 +1,354 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "antd exam 2026-08-23",
+  "setNodeId": "33:5197",
+  "setName": "Input",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "33:5117",
+  "variantNodeName": "Size=Middle, Status=Error, Variant=Outlined, State=Default",
+  "axes": [
+    {
+      "axis": "Size",
+      "values": [
+        "Middle",
+        "Small",
+        "Large"
+      ]
+    },
+    {
+      "axis": "Status",
+      "values": [
+        "Error",
+        "Warning"
+      ]
+    },
+    {
+      "axis": "Variant",
+      "values": [
+        "Outlined",
+        "Borderless",
+        "Filled",
+        "Underlined"
+      ]
+    },
+    {
+      "axis": "State",
+      "values": [
+        "Default",
+        "Disabled",
+        "Focus Visible",
+        "Hover",
+        "Active"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 40,
+  "variantChildNames": [
+    "Size=Middle, Status=Error, Variant=Outlined, State=Default",
+    "Size=Middle, Status=Error, Variant=Borderless, State=Default",
+    "Size=Middle, Status=Error, Variant=Filled, State=Default",
+    "Size=Middle, Status=Error, Variant=Underlined, State=Default",
+    "Size=Middle, Status=Warning, Variant=Outlined, State=Default",
+    "Size=Middle, Status=Warning, Variant=Borderless, State=Default",
+    "Size=Middle, Status=Warning, Variant=Filled, State=Default",
+    "Size=Middle, Status=Warning, Variant=Underlined, State=Default",
+    "Size=Small, Status=Error, Variant=Outlined, State=Default",
+    "Size=Small, Status=Error, Variant=Borderless, State=Default",
+    "Size=Small, Status=Error, Variant=Filled, State=Default",
+    "Size=Small, Status=Error, Variant=Underlined, State=Default",
+    "Size=Small, Status=Warning, Variant=Outlined, State=Default",
+    "Size=Small, Status=Warning, Variant=Borderless, State=Default",
+    "Size=Small, Status=Warning, Variant=Filled, State=Default",
+    "Size=Small, Status=Warning, Variant=Underlined, State=Default",
+    "Size=Large, Status=Error, Variant=Outlined, State=Default",
+    "Size=Large, Status=Error, Variant=Borderless, State=Default",
+    "Size=Large, Status=Error, Variant=Filled, State=Default",
+    "Size=Large, Status=Error, Variant=Underlined, State=Default",
+    "Size=Large, Status=Warning, Variant=Outlined, State=Default",
+    "Size=Large, Status=Warning, Variant=Borderless, State=Default",
+    "Size=Large, Status=Warning, Variant=Filled, State=Default",
+    "Size=Large, Status=Warning, Variant=Underlined, State=Default",
+    "Size=Middle, Status=Error, Variant=Outlined, State=Disabled",
+    "Size=Middle, Status=Error, Variant=Borderless, State=Disabled",
+    "Size=Middle, Status=Error, Variant=Filled, State=Disabled",
+    "Size=Middle, Status=Error, Variant=Underlined, State=Disabled",
+    "Size=Middle, Status=Error, Variant=Outlined, State=Focus Visible",
+    "Size=Middle, Status=Error, Variant=Borderless, State=Focus Visible",
+    "Size=Middle, Status=Error, Variant=Filled, State=Focus Visible",
+    "Size=Middle, Status=Error, Variant=Underlined, State=Focus Visible",
+    "Size=Middle, Status=Error, Variant=Outlined, State=Hover",
+    "Size=Middle, Status=Error, Variant=Borderless, State=Hover",
+    "Size=Middle, Status=Error, Variant=Filled, State=Hover",
+    "Size=Middle, Status=Error, Variant=Underlined, State=Hover",
+    "Size=Middle, Status=Error, Variant=Outlined, State=Active",
+    "Size=Middle, Status=Error, Variant=Borderless, State=Active",
+    "Size=Middle, Status=Error, Variant=Filled, State=Active",
+    "Size=Middle, Status=Error, Variant=Underlined, State=Active"
+  ],
+  "reflow": {
+    "target": "33:5117",
+    "targetName": "Size=Middle, Status=Error, Variant=Outlined, State=Default",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "HUG",
+      "primary": "FIXED",
+      "counter": "AUTO",
+      "primaryAlign": "MIN",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 288,
+      "h": 32,
+      "children": [
+        {
+          "id": "33:5118",
+          "name": "label",
+          "type": "TEXT",
+          "x": 12,
+          "y": 5,
+          "w": 33,
+          "h": 22,
+          "ax": 12,
+          "ay": 5,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 328,
+      "h": 72,
+      "children": [
+        {
+          "id": "33:5118",
+          "name": "label",
+          "type": "TEXT",
+          "x": 12,
+          "y": 25,
+          "w": 33,
+          "h": 22,
+          "ax": 12,
+          "ay": 25,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "label",
+        "dx": 0,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 288,
+      "h": 32
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:4632",
+    "baseline": {
+      "geometry": "1b3e5bda4d5ebd00",
+      "fills": "303417f520d0b867",
+      "text": "10e2e9b1acf431d9"
+    },
+    "axes": [
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Middle",
+            "geometry": "1b3e5bda4d5ebd00",
+            "fills": "303417f520d0b867",
+            "text": "10e2e9b1acf431d9"
+          },
+          {
+            "value": "Small",
+            "geometry": "c922d100fb6a6a47",
+            "fills": "303417f520d0b867",
+            "text": "10e2e9b1acf431d9"
+          },
+          {
+            "value": "Large",
+            "geometry": "cf93287ea3add744",
+            "fills": "303417f520d0b867",
+            "text": "10e2e9b1acf431d9"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Status",
+        "values": [
+          {
+            "value": "Error",
+            "geometry": "1b3e5bda4d5ebd00",
+            "fills": "303417f520d0b867",
+            "text": "10e2e9b1acf431d9"
+          },
+          {
+            "value": "Warning",
+            "geometry": "1b3e5bda4d5ebd00",
+            "fills": "8c52cfe9b9dfba08",
+            "text": "10e2e9b1acf431d9"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Variant",
+        "values": [
+          {
+            "value": "Outlined",
+            "geometry": "1b3e5bda4d5ebd00",
+            "fills": "303417f520d0b867",
+            "text": "10e2e9b1acf431d9"
+          },
+          {
+            "value": "Borderless",
+            "geometry": "75d4b75a9791ac4a",
+            "fills": "2e5ac5d57c25ddef",
+            "text": "10e2e9b1acf431d9"
+          },
+          {
+            "value": "Filled",
+            "geometry": "1b3e5bda4d5ebd00",
+            "fills": "4d92055916249c98",
+            "text": "10e2e9b1acf431d9"
+          },
+          {
+            "value": "Underlined",
+            "geometry": "948500dc73235ab8",
+            "fills": "ead97afdb05f1230",
+            "text": "10e2e9b1acf431d9"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "State",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "1b3e5bda4d5ebd00",
+            "fills": "303417f520d0b867",
+            "text": "10e2e9b1acf431d9"
+          },
+          {
+            "value": "Disabled",
+            "geometry": "f871aed65e70564f",
+            "fills": "4a17c57bf747af00",
+            "text": "10e2e9b1acf431d9"
+          },
+          {
+            "value": "Focus Visible",
+            "geometry": "f871aed65e70564f",
+            "fills": "303417f520d0b867",
+            "text": "10e2e9b1acf431d9"
+          },
+          {
+            "value": "Hover",
+            "geometry": "f871aed65e70564f",
+            "fills": "303417f520d0b867",
+            "text": "10e2e9b1acf431d9"
+          },
+          {
+            "value": "Active",
+            "geometry": "f871aed65e70564f",
+            "fills": "303417f520d0b867",
+            "text": "10e2e9b1acf431d9"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 13,
+    "bound": 11,
+    "inferred": 2,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 1,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Size=Middle, Status=Error, Variant=Outlined, State=Default",
+      "name": "Size=Middle, Status=Error, Variant=Outlined, State=Default",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 288,
+      "h": 32,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 33,
+      "h": 22,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 710,
+    "sig": "0be3843bf548afa0"
+  },
+  "canvasAfter": {
+    "nodes": 710,
+    "sig": "0be3843bf548afa0"
+  },
+  "canvasRestored": true
+}

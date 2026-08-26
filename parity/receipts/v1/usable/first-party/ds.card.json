@@ -1,0 +1,295 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / first-party",
+  "setNodeId": "39:23528",
+  "setName": "Card (ds.card)",
+  "setType": "COMPONENT",
+  "variantNodeId": "39:23528",
+  "variantNodeName": "Card (ds.card)",
+  "axes": null,
+  "axesError": null,
+  "variantChildCount": 1,
+  "variantChildNames": [
+    "Card (ds.card)"
+  ],
+  "reflow": {
+    "target": "39:23528",
+    "targetName": "Card (ds.card)",
+    "layoutMode": "VERTICAL",
+    "childCount": 3,
+    "sizing": {
+      "h": "FIXED",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 320,
+      "h": 58,
+      "children": [
+        {
+          "id": "39:23529",
+          "name": "header",
+          "type": "FRAME",
+          "x": 1,
+          "y": 1,
+          "w": 318,
+          "h": 40,
+          "ax": 1,
+          "ay": 1,
+          "visible": true
+        },
+        {
+          "id": "39:23533",
+          "name": "Body",
+          "type": "SLOT",
+          "x": 1,
+          "y": 41,
+          "w": 318,
+          "h": 16,
+          "ax": 1,
+          "ay": 41,
+          "visible": true
+        },
+        {
+          "id": "39:23534",
+          "name": "Actions",
+          "type": "SLOT",
+          "x": 1,
+          "y": 57,
+          "w": 318,
+          "h": 16,
+          "ax": 1,
+          "ay": 57,
+          "visible": false
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 360,
+      "h": 98,
+      "children": [
+        {
+          "id": "39:23529",
+          "name": "header",
+          "type": "FRAME",
+          "x": 1,
+          "y": 1,
+          "w": 358,
+          "h": 40,
+          "ax": 1,
+          "ay": 1,
+          "visible": true
+        },
+        {
+          "id": "39:23533",
+          "name": "Body",
+          "type": "SLOT",
+          "x": 1,
+          "y": 41,
+          "w": 358,
+          "h": 16,
+          "ax": 1,
+          "ay": 41,
+          "visible": true
+        },
+        {
+          "id": "39:23534",
+          "name": "Actions",
+          "type": "SLOT",
+          "x": 1,
+          "y": 57,
+          "w": 318,
+          "h": 16,
+          "ax": 1,
+          "ay": 57,
+          "visible": false
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "header",
+        "dx": 0,
+        "dy": 0,
+        "dw": 40,
+        "dh": 0
+      },
+      {
+        "name": "Body",
+        "dx": 0,
+        "dy": 0,
+        "dw": 40,
+        "dh": 0
+      }
+    ],
+    "frozen": [
+      "Actions"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 320,
+      "h": 58
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:3729",
+    "baseline": {
+      "geometry": "73603944b4f70ba3",
+      "fills": "c6fb1fa6efa23b24",
+      "text": "f48e2d17aeaa60d5"
+    },
+    "axes": [],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 34,
+    "bound": 28,
+    "inferred": 5,
+    "literal": 1,
+    "byGroup": {
+      "fills": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 15,
+        "inferred": 1,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 3,
+        "literal": 1
+      },
+      "radius": {
+        "bound": 8,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [
+      "/Actions[2]·width=318"
+    ],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Card (ds.card)",
+      "name": "Card (ds.card)",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 3,
+      "w": 320,
+      "h": 58,
+      "visible": true,
+      "parentLayoutMode": null,
+      "parentType": "SECTION"
+    },
+    {
+      "path": "/header[0]",
+      "name": "header",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 318,
+      "h": 40,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/header[0]/avatar[0]",
+      "name": "avatar",
+      "type": "INSTANCE",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 24,
+      "h": 24,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/header[0]/avatar[0]/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 17,
+      "h": 15,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "INSTANCE"
+    },
+    {
+      "path": "/header[0]/title[1]",
+      "name": "title",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 72,
+      "h": 19,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/Body[1]",
+      "name": "Body",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 0,
+      "w": 318,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/Actions[2]",
+      "name": "Actions",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 318,
+      "h": 16,
+      "visible": false,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasAfter": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasRestored": true
+}

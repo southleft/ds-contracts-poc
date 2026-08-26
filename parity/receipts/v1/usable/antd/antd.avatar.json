@@ -1,0 +1,230 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "antd exam 2026-08-23",
+  "setNodeId": "33:4784",
+  "setName": "Avatar",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "33:4772",
+  "variantNodeName": "Size=Default, Shape=Circle",
+  "axes": [
+    {
+      "axis": "Size",
+      "values": [
+        "Default",
+        "Small",
+        "Large"
+      ]
+    },
+    {
+      "axis": "Shape",
+      "values": [
+        "Circle",
+        "Square"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 6,
+  "variantChildNames": [
+    "Size=Default, Shape=Circle",
+    "Size=Default, Shape=Square",
+    "Size=Small, Shape=Circle",
+    "Size=Small, Shape=Square",
+    "Size=Large, Shape=Circle",
+    "Size=Large, Shape=Square"
+  ],
+  "reflow": {
+    "target": "33:4772",
+    "targetName": "Size=Default, Shape=Circle",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "CENTER",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 32,
+      "h": 32,
+      "children": [
+        {
+          "id": "33:4773",
+          "name": "label",
+          "type": "TEXT",
+          "x": 11,
+          "y": 5,
+          "w": 10,
+          "h": 22,
+          "ax": 11,
+          "ay": 5,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 72,
+      "h": 72,
+      "children": [
+        {
+          "id": "33:4773",
+          "name": "label",
+          "type": "TEXT",
+          "x": 31,
+          "y": 25,
+          "w": 10,
+          "h": 22,
+          "ax": 31,
+          "ay": 25,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "label",
+        "dx": 20,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 32,
+      "h": 32
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:4462",
+    "baseline": {
+      "geometry": "aa85b57a5291de6c",
+      "fills": "5dac07ffdd434b3c",
+      "text": "92d74586ea1b0f8c"
+    },
+    "axes": [
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "aa85b57a5291de6c",
+            "fills": "5dac07ffdd434b3c",
+            "text": "92d74586ea1b0f8c"
+          },
+          {
+            "value": "Small",
+            "geometry": "32f4f70db495bd80",
+            "fills": "5dac07ffdd434b3c",
+            "text": "92d74586ea1b0f8c"
+          },
+          {
+            "value": "Large",
+            "geometry": "aca81a772491306c",
+            "fills": "5dac07ffdd434b3c",
+            "text": "92d74586ea1b0f8c"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Shape",
+        "values": [
+          {
+            "value": "Circle",
+            "geometry": "aa85b57a5291de6c",
+            "fills": "5dac07ffdd434b3c",
+            "text": "92d74586ea1b0f8c"
+          },
+          {
+            "value": "Square",
+            "geometry": "1da4802bdb17338c",
+            "fills": "5dac07ffdd434b3c",
+            "text": "92d74586ea1b0f8c"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 10,
+    "bound": 7,
+    "inferred": 3,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 2,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Size=Default, Shape=Circle",
+      "name": "Size=Default, Shape=Circle",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 32,
+      "h": 32,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 10,
+      "h": 22,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 710,
+    "sig": "0be3843bf548afa0"
+  },
+  "canvasAfter": {
+    "nodes": 710,
+    "sig": "0be3843bf548afa0"
+  },
+  "canvasRestored": true
+}

@@ -1,0 +1,461 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / carbon",
+  "setNodeId": "39:8652",
+  "setName": "Modal",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:8568",
+  "variantNodeName": "Size=Xs",
+  "axes": [
+    {
+      "axis": "Size",
+      "values": [
+        "Xs",
+        "Sm",
+        "Md",
+        "Lg"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 4,
+  "variantChildNames": [
+    "Size=Xs",
+    "Size=Sm",
+    "Size=Md",
+    "Size=Lg"
+  ],
+  "reflow": {
+    "target": "39:8568",
+    "targetName": "Size=Xs",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "CENTER",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 432,
+      "h": 213.97,
+      "children": [
+        {
+          "id": "39:8569",
+          "name": "modal-container",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 432,
+          "h": 213.97,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 472,
+      "h": 253.97,
+      "children": [
+        {
+          "id": "39:8569",
+          "name": "modal-container",
+          "type": "FRAME",
+          "x": 20,
+          "y": 20,
+          "w": 432,
+          "h": 213.97,
+          "ax": 20,
+          "ay": 20,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "modal-container",
+        "dx": 20,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 432,
+      "h": 213.97
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:643",
+    "baseline": {
+      "geometry": "86ddaad7b84855cb",
+      "fills": "f95326ea31c8fb28",
+      "text": "8127c71f41f17424"
+    },
+    "axes": [
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Xs",
+            "geometry": "86ddaad7b84855cb",
+            "fills": "f95326ea31c8fb28",
+            "text": "8127c71f41f17424"
+          },
+          {
+            "value": "Sm",
+            "geometry": "562aa0fc39417184",
+            "fills": "f95326ea31c8fb28",
+            "text": "8127c71f41f17424"
+          },
+          {
+            "value": "Md",
+            "geometry": "63537e7aa85eec88",
+            "fills": "f95326ea31c8fb28",
+            "text": "8127c71f41f17424"
+          },
+          {
+            "value": "Lg",
+            "geometry": "801b5bd63a6a94a3",
+            "fills": "f95326ea31c8fb28",
+            "text": "8127c71f41f17424"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 62,
+    "bound": 49,
+    "inferred": 10,
+    "literal": 3,
+    "byGroup": {
+      "fills": {
+        "bound": 9,
+        "inferred": 2,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 3,
+        "inferred": 3,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 21,
+        "inferred": 2,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 16,
+        "inferred": 3,
+        "literal": 3
+      }
+    },
+    "literalSites": [
+      "/modal-container[0]/modal-header (margin box)[0]·height=71.98",
+      "/modal-container[0]/modal-header (margin box)[0]/modal-header[0]/modal-close-button[2]/icon-tooltip[0]/tooltip-trigger__wrapper[0]/btn[0]/btn-icon[0]/Vector[0]·width=13.33",
+      "/modal-container[0]/modal-header (margin box)[0]/modal-header[0]/modal-close-button[2]/icon-tooltip[0]/tooltip-trigger__wrapper[0]/btn[0]/btn-icon[0]/Vector[0]·height=13.33"
+    ],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Size=Xs",
+      "name": "Size=Xs",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 432,
+      "h": 213.97,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/modal-container[0]",
+      "name": "modal-container",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 3,
+      "w": 432,
+      "h": 213.97,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/modal-container[0]/modal-header (margin box)[0]",
+      "name": "modal-header (margin box)",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 430,
+      "h": 71.98,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/modal-container[0]/modal-header (margin box)[0]/modal-header[0]",
+      "name": "modal-header",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 3,
+      "w": 430,
+      "h": 63.98,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/modal-container[0]/modal-header (margin box)[0]/modal-header[0]/label-2[0]",
+      "name": "label-2",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 33,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/modal-container[0]/modal-header (margin box)[0]/modal-header[0]/label-2[0]/Label[0]",
+      "name": "Label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 33,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/modal-container[0]/modal-header (margin box)[0]/modal-header[0]/label-3[1]",
+      "name": "label-3",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 366,
+      "h": 28,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/modal-container[0]/modal-header (margin box)[0]/modal-header[0]/label-3[1]/label-3-text[0]",
+      "name": "label-3-text",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 140,
+      "h": 28,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/modal-container[0]/modal-header (margin box)[0]/modal-header[0]/modal-close-button[2]",
+      "name": "modal-close-button",
+      "type": "FRAME",
+      "layoutPositioning": "ABSOLUTE",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 48,
+      "h": 48,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/modal-container[0]/modal-header (margin box)[0]/modal-header[0]/modal-close-button[2]/icon-tooltip[0]",
+      "name": "icon-tooltip",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 48,
+      "h": 48,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/modal-container[0]/modal-header (margin box)[0]/modal-header[0]/modal-close-button[2]/icon-tooltip[0]/tooltip-trigger__wrapper[0]",
+      "name": "tooltip-trigger__wrapper",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 48,
+      "h": 48,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/modal-container[0]/modal-header (margin box)[0]/modal-header[0]/modal-close-button[2]/icon-tooltip[0]/tooltip-trigger__wrapper[0]/btn[0]",
+      "name": "btn",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 44,
+      "h": 48,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/modal-container[0]/modal-header (margin box)[0]/modal-header[0]/modal-close-button[2]/icon-tooltip[0]/tooltip-trigger__wrapper[0]/btn[0]/btn-icon[0]",
+      "name": "btn-icon",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 20,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/modal-container[0]/modal-header (margin box)[0]/modal-header[0]/modal-close-button[2]/icon-tooltip[0]/tooltip-trigger__wrapper[0]/btn[0]/btn-icon[0]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 13.33,
+      "h": 13.33,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/modal-container[0]/label-5[1]",
+      "name": "label-5",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 430,
+      "h": 76,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/modal-container[0]/label-5[1]/label-5-text[0]",
+      "name": "label-5-text",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 267,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/modal-container[0]/btn-set[2]",
+      "name": "btn-set",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 430,
+      "h": 64,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/modal-container[0]/btn-set[2]/label-6[0]",
+      "name": "label-6",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 215,
+      "h": 66,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/modal-container[0]/btn-set[2]/label-6[0]/label-6-text[0]",
+      "name": "label-6-text",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 47,
+      "h": 18,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/modal-container[0]/btn-set[2]/label-7[1]",
+      "name": "label-7",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 215,
+      "h": 66,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/modal-container[0]/btn-set[2]/label-7[1]/label-7-text[0]",
+      "name": "label-7-text",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 33,
+      "h": 18,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 793,
+    "sig": "7d6ced592fbfa72c"
+  },
+  "canvasAfter": {
+    "nodes": 793,
+    "sig": "7d6ced592fbfa72c"
+  },
+  "canvasRestored": true
+}

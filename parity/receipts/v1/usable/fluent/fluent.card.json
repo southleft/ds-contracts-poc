@@ -1,0 +1,420 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / fluent",
+  "setNodeId": "39:12565",
+  "setName": "Card (fluent.card)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:12325",
+  "variantNodeName": "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Default",
+  "axes": [
+    {
+      "axis": "Appearance",
+      "values": [
+        "Filled",
+        "Filled Alternative",
+        "Outline",
+        "Subtle"
+      ]
+    },
+    {
+      "axis": "Size",
+      "values": [
+        "Medium",
+        "Small",
+        "Large"
+      ]
+    },
+    {
+      "axis": "Orientation",
+      "values": [
+        "Vertical",
+        "Horizontal"
+      ]
+    },
+    {
+      "axis": "State",
+      "values": [
+        "Default",
+        "Disabled",
+        "Focus Visible",
+        "Active",
+        "Hover"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 40,
+  "variantChildNames": [
+    "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Default",
+    "Appearance=Filled, Size=Medium, Orientation=Horizontal, State=Default",
+    "Appearance=Filled, Size=Small, Orientation=Vertical, State=Default",
+    "Appearance=Filled, Size=Small, Orientation=Horizontal, State=Default",
+    "Appearance=Filled, Size=Large, Orientation=Vertical, State=Default",
+    "Appearance=Filled, Size=Large, Orientation=Horizontal, State=Default",
+    "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Default",
+    "Appearance=Filled Alternative, Size=Medium, Orientation=Horizontal, State=Default",
+    "Appearance=Filled Alternative, Size=Small, Orientation=Vertical, State=Default",
+    "Appearance=Filled Alternative, Size=Small, Orientation=Horizontal, State=Default",
+    "Appearance=Filled Alternative, Size=Large, Orientation=Vertical, State=Default",
+    "Appearance=Filled Alternative, Size=Large, Orientation=Horizontal, State=Default",
+    "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Default",
+    "Appearance=Outline, Size=Medium, Orientation=Horizontal, State=Default",
+    "Appearance=Outline, Size=Small, Orientation=Vertical, State=Default",
+    "Appearance=Outline, Size=Small, Orientation=Horizontal, State=Default",
+    "Appearance=Outline, Size=Large, Orientation=Vertical, State=Default",
+    "Appearance=Outline, Size=Large, Orientation=Horizontal, State=Default",
+    "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Default",
+    "Appearance=Subtle, Size=Medium, Orientation=Horizontal, State=Default",
+    "Appearance=Subtle, Size=Small, Orientation=Vertical, State=Default",
+    "Appearance=Subtle, Size=Small, Orientation=Horizontal, State=Default",
+    "Appearance=Subtle, Size=Large, Orientation=Vertical, State=Default",
+    "Appearance=Subtle, Size=Large, Orientation=Horizontal, State=Default",
+    "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Disabled",
+    "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Disabled",
+    "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Disabled",
+    "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Disabled",
+    "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Focus Visible",
+    "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Focus Visible",
+    "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Focus Visible",
+    "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Focus Visible",
+    "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Active",
+    "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Active",
+    "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Active",
+    "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Active",
+    "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Hover",
+    "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Hover",
+    "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Hover",
+    "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Hover"
+  ],
+  "reflow": {
+    "target": "39:12325",
+    "targetName": "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Default",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 428,
+      "h": 84,
+      "children": [
+        {
+          "id": "39:12327",
+          "name": "label (margin box)",
+          "type": "FRAME",
+          "x": 12,
+          "y": 12,
+          "w": 29,
+          "h": 8,
+          "ax": 12,
+          "ay": 12,
+          "visible": true
+        },
+        {
+          "id": "39:12328",
+          "name": "cardheader",
+          "type": "FRAME",
+          "x": 53,
+          "y": 12,
+          "w": 404,
+          "h": 40,
+          "ax": 53,
+          "ay": 12,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 468,
+      "h": 124,
+      "children": [
+        {
+          "id": "39:12327",
+          "name": "label (margin box)",
+          "type": "FRAME",
+          "x": 12,
+          "y": 12,
+          "w": 29,
+          "h": 8,
+          "ax": 12,
+          "ay": 12,
+          "visible": true
+        },
+        {
+          "id": "39:12328",
+          "name": "cardheader",
+          "type": "FRAME",
+          "x": 53,
+          "y": 12,
+          "w": 404,
+          "h": 40,
+          "ax": 53,
+          "ay": 12,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "label (margin box)",
+      "cardheader"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 428,
+      "h": 84
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:1344",
+    "baseline": {
+      "geometry": "316fa133ae45eef8",
+      "fills": "f56a7b41265b3a08",
+      "text": "9837bb617461abd0"
+    },
+    "axes": [
+      {
+        "axis": "Appearance",
+        "values": [
+          {
+            "value": "Filled",
+            "geometry": "316fa133ae45eef8",
+            "fills": "f56a7b41265b3a08",
+            "text": "9837bb617461abd0"
+          },
+          {
+            "value": "Filled Alternative",
+            "geometry": "316fa133ae45eef8",
+            "fills": "b2da4e84bd42d2a0",
+            "text": "9837bb617461abd0"
+          },
+          {
+            "value": "Outline",
+            "geometry": "316fa133ae45eef8",
+            "fills": "3f4c6862f8198620",
+            "text": "9837bb617461abd0"
+          },
+          {
+            "value": "Subtle",
+            "geometry": "316fa133ae45eef8",
+            "fills": "3f4c6862f8198620",
+            "text": "9837bb617461abd0"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Medium",
+            "geometry": "316fa133ae45eef8",
+            "fills": "f56a7b41265b3a08",
+            "text": "9837bb617461abd0"
+          },
+          {
+            "value": "Small",
+            "geometry": "352e6a70b5c65b4b",
+            "fills": "f56a7b41265b3a08",
+            "text": "9837bb617461abd0"
+          },
+          {
+            "value": "Large",
+            "geometry": "3e9d08da0e354dbc",
+            "fills": "f56a7b41265b3a08",
+            "text": "9837bb617461abd0"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Orientation",
+        "values": [
+          {
+            "value": "Vertical",
+            "geometry": "316fa133ae45eef8",
+            "fills": "f56a7b41265b3a08",
+            "text": "9837bb617461abd0"
+          },
+          {
+            "value": "Horizontal",
+            "geometry": "46a242bce6d54ca8",
+            "fills": "f56a7b41265b3a08",
+            "text": "9837bb617461abd0"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "State",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "316fa133ae45eef8",
+            "fills": "f56a7b41265b3a08",
+            "text": "9837bb617461abd0"
+          },
+          {
+            "value": "Disabled",
+            "geometry": "316fa133ae45eef8",
+            "fills": "7144a5e5c8224840",
+            "text": "9837bb617461abd0"
+          },
+          {
+            "value": "Focus Visible",
+            "geometry": "316fa133ae45eef8",
+            "fills": "f56a7b41265b3a08",
+            "text": "9837bb617461abd0"
+          },
+          {
+            "value": "Active",
+            "geometry": "316fa133ae45eef8",
+            "fills": "14f37627e26179dc",
+            "text": "9837bb617461abd0"
+          },
+          {
+            "value": "Hover",
+            "geometry": "316fa133ae45eef8",
+            "fills": "863d16e0ff284b34",
+            "text": "9837bb617461abd0"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 22,
+    "bound": 12,
+    "inferred": 10,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 1,
+        "inferred": 3,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 5,
+        "inferred": 1,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 2,
+        "inferred": 6,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Appearance=Filled, Size=Medium, Orientation=Vertical, State=Default",
+      "name": "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Default",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 428,
+      "h": 84,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label (margin box)[0]",
+      "name": "label (margin box)",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 29,
+      "h": 8,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/label (margin box)[0]/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 53,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/cardheader[1]",
+      "name": "cardheader",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 404,
+      "h": 40,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/cardheader[1]/label-2[0]",
+      "name": "label-2",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 83,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/cardheader[1]/label-3[1]",
+      "name": "label-3",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 110,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1663,
+    "sig": "0ac044e74ac6a8ac"
+  },
+  "canvasAfter": {
+    "nodes": 1663,
+    "sig": "0ac044e74ac6a8ac"
+  },
+  "canvasRestored": true
+}

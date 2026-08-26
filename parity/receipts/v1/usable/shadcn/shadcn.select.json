@@ -1,0 +1,244 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / shadcn",
+  "setNodeId": "39:9568",
+  "setName": "Select",
+  "setType": "COMPONENT",
+  "variantNodeId": "39:9568",
+  "variantNodeName": "Select",
+  "axes": null,
+  "axesError": null,
+  "variantChildCount": 1,
+  "variantChildNames": [
+    "Select"
+  ],
+  "reflow": {
+    "target": "39:9568",
+    "targetName": "Select",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "SPACE_BETWEEN",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 142,
+      "h": 36,
+      "children": [
+        {
+          "id": "39:9570",
+          "name": "label",
+          "type": "FRAME",
+          "x": 10,
+          "y": 8,
+          "w": 108,
+          "h": 20,
+          "ax": 10,
+          "ay": 8,
+          "visible": true
+        },
+        {
+          "id": "39:9571",
+          "name": "icon",
+          "type": "FRAME",
+          "x": 118,
+          "y": 10,
+          "w": 16,
+          "h": 16,
+          "ax": 118,
+          "ay": 10,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 182,
+      "h": 76,
+      "children": [
+        {
+          "id": "39:9570",
+          "name": "label",
+          "type": "FRAME",
+          "x": 10,
+          "y": 28,
+          "w": 108,
+          "h": 20,
+          "ax": 10,
+          "ay": 28,
+          "visible": true
+        },
+        {
+          "id": "39:9571",
+          "name": "icon",
+          "type": "FRAME",
+          "x": 158,
+          "y": 30,
+          "w": 16,
+          "h": 16,
+          "ax": 158,
+          "ay": 30,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "label",
+        "dx": 0,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      },
+      {
+        "name": "icon",
+        "dx": 40,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 142,
+      "h": 36
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:957",
+    "baseline": {
+      "geometry": "c36f750ed97439f4",
+      "fills": "418e73c9f6986354",
+      "text": "68c96afede01e114"
+    },
+    "axes": [],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 18,
+    "bound": 13,
+    "inferred": 3,
+    "literal": 2,
+    "byGroup": {
+      "spacing": {
+        "bound": 6,
+        "inferred": 0,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 2,
+        "literal": 2
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      }
+    },
+    "literalSites": [
+      "/icon[1]/Vector[0]·width=10.67",
+      "/icon[1]/Vector[0]·height=5.33"
+    ],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Select",
+      "name": "Select",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 142,
+      "h": 36,
+      "visible": true,
+      "parentLayoutMode": null,
+      "parentType": "SECTION"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 108,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/label[0]/Select an option[0]",
+      "name": "Select an option",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 108,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/icon[1]",
+      "name": "icon",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 16,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/icon[1]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 10.67,
+      "h": 5.33,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 291,
+    "sig": "2323b4b6ec9f2790"
+  },
+  "canvasAfter": {
+    "nodes": 291,
+    "sig": "2323b4b6ec9f2790"
+  },
+  "canvasRestored": true
+}

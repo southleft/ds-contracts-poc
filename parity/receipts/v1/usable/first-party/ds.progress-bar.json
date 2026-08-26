@@ -1,0 +1,222 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / first-party",
+  "setNodeId": "39:23922",
+  "setName": "ProgressBar (ds.progress-bar)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:23907",
+  "variantNodeName": "Variant=Accent",
+  "axes": [
+    {
+      "axis": "Variant",
+      "values": [
+        "Accent",
+        "Success",
+        "Warning",
+        "Error",
+        "Neutral"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 5,
+  "variantChildNames": [
+    "Variant=Accent",
+    "Variant=Success",
+    "Variant=Warning",
+    "Variant=Error",
+    "Variant=Neutral"
+  ],
+  "reflow": {
+    "target": "39:23907",
+    "targetName": "Variant=Accent",
+    "layoutMode": "VERTICAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 320,
+      "h": 8,
+      "children": [
+        {
+          "id": "39:23908",
+          "name": "track",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 320,
+          "h": 8,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 360,
+      "h": 48,
+      "children": [
+        {
+          "id": "39:23908",
+          "name": "track",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 320,
+          "h": 8,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "track"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 320,
+      "h": 8
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:4034",
+    "baseline": {
+      "geometry": "6f211a18967857a8",
+      "fills": "06cd172ec75e2bb8",
+      "text": "00001505811c9dc5"
+    },
+    "axes": [
+      {
+        "axis": "Variant",
+        "values": [
+          {
+            "value": "Accent",
+            "geometry": "6f211a18967857a8",
+            "fills": "06cd172ec75e2bb8",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Success",
+            "geometry": "6f211a18967857a8",
+            "fills": "a67a8fc94a271a3e",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Warning",
+            "geometry": "6f211a18967857a8",
+            "fills": "f7cb58f11543855b",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Error",
+            "geometry": "6f211a18967857a8",
+            "fills": "d7b51cee5874efaf",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Neutral",
+            "geometry": "6f211a18967857a8",
+            "fills": "a7d6e0c781c1d648",
+            "text": "00001505811c9dc5"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 15,
+    "bound": 13,
+    "inferred": 1,
+    "literal": 1,
+    "byGroup": {
+      "sizing": {
+        "bound": 3,
+        "inferred": 1,
+        "literal": 1
+      },
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 8,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [
+      "/track[0]/fill[0]·width=192"
+    ],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Variant=Accent",
+      "name": "Variant=Accent",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 320,
+      "h": 8,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/track[0]",
+      "name": "track",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 320,
+      "h": 8,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/track[0]/fill[0]",
+      "name": "fill",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 192,
+      "h": 8,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasAfter": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasRestored": true
+}

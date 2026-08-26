@@ -1,0 +1,374 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "antd exam 2026-08-23",
+  "setNodeId": "33:5345",
+  "setName": "Switch",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "33:5255",
+  "variantNodeName": "Size=Default, Checked=Unchecked, State=Default",
+  "axes": [
+    {
+      "axis": "Size",
+      "values": [
+        "Default",
+        "Small"
+      ]
+    },
+    {
+      "axis": "Checked",
+      "values": [
+        "Unchecked",
+        "Checked"
+      ]
+    },
+    {
+      "axis": "State",
+      "values": [
+        "Default",
+        "Disabled",
+        "Focus Visible",
+        "Active",
+        "Hover"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 12,
+  "variantChildNames": [
+    "Size=Default, Checked=Unchecked, State=Default",
+    "Size=Default, Checked=Checked, State=Default",
+    "Size=Small, Checked=Unchecked, State=Default",
+    "Size=Small, Checked=Checked, State=Default",
+    "Size=Default, Checked=Unchecked, State=Disabled",
+    "Size=Default, Checked=Checked, State=Disabled",
+    "Size=Default, Checked=Unchecked, State=Focus Visible",
+    "Size=Default, Checked=Checked, State=Focus Visible",
+    "Size=Default, Checked=Unchecked, State=Active",
+    "Size=Default, Checked=Checked, State=Active",
+    "Size=Default, Checked=Unchecked, State=Hover",
+    "Size=Default, Checked=Checked, State=Hover"
+  ],
+  "reflow": {
+    "target": "33:5255",
+    "targetName": "Size=Default, Checked=Unchecked, State=Default",
+    "layoutMode": "VERTICAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 44,
+      "h": 22,
+      "children": [
+        {
+          "id": "33:5256",
+          "name": "switch-inner",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 44,
+          "h": 22,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "33:5261",
+          "name": "switch-handle",
+          "type": "FRAME",
+          "x": 2,
+          "y": 2,
+          "w": 18,
+          "h": 18,
+          "ax": 2,
+          "ay": 2,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 84,
+      "h": 62,
+      "children": [
+        {
+          "id": "33:5256",
+          "name": "switch-inner",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 44,
+          "h": 22,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "33:5261",
+          "name": "switch-handle",
+          "type": "FRAME",
+          "x": 2,
+          "y": 2,
+          "w": 18,
+          "h": 18,
+          "ax": 2,
+          "ay": 2,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "switch-inner",
+      "switch-handle"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 44,
+      "h": 22
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:4694",
+    "baseline": {
+      "geometry": "effee751ead1b97c",
+      "fills": "8896b0be57a8545c",
+      "text": "00001505811c9dc5"
+    },
+    "axes": [
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "effee751ead1b97c",
+            "fills": "8896b0be57a8545c",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Small",
+            "geometry": "b8fbae0a57968ba8",
+            "fills": "8896b0be57a8545c",
+            "text": "00001505811c9dc5"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Checked",
+        "values": [
+          {
+            "value": "Unchecked",
+            "geometry": "effee751ead1b97c",
+            "fills": "8896b0be57a8545c",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Checked",
+            "geometry": "3bb48705bb6436c4",
+            "fills": "a05b915957986118",
+            "text": "00001505811c9dc5"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "State",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "effee751ead1b97c",
+            "fills": "8896b0be57a8545c",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Disabled",
+            "geometry": "effee751ead1b97c",
+            "fills": "8896b0be57a8545c",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Focus Visible",
+            "geometry": "effee751ead1b97c",
+            "fills": "66e20df8ec983b30",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Active",
+            "geometry": "effee751ead1b97c",
+            "fills": "9e203b38746c3b0c",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Hover",
+            "geometry": "effee751ead1b97c",
+            "fills": "9e203b38746c3b0c",
+            "text": "00001505811c9dc5"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 31,
+    "bound": 20,
+    "inferred": 10,
+    "literal": 1,
+    "byGroup": {
+      "fills": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 2,
+        "inferred": 2,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 9,
+        "inferred": 7,
+        "literal": 1
+      },
+      "radius": {
+        "bound": 8,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [
+      "/switch-inner[0]/switch-inner-unchecked (margin box)[1]·height=0.01"
+    ],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Size=Default, Checked=Unchecked, State=Default",
+      "name": "Size=Default, Checked=Unchecked, State=Default",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 2,
+      "w": 44,
+      "h": 22,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/switch-inner[0]",
+      "name": "switch-inner",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 2,
+      "w": 44,
+      "h": 22,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/switch-inner[0]/switch-inner-checked (margin box)[0]",
+      "name": "switch-inner-checked (margin box)",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 11,
+      "h": 22,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/switch-inner[0]/switch-inner-checked (margin box)[0]/switch-inner-checked[0]",
+      "name": "switch-inner-checked",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 11,
+      "h": 22,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/switch-inner[0]/switch-inner-unchecked (margin box)[1]",
+      "name": "switch-inner-unchecked (margin box)",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 11,
+      "h": 0.01,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/switch-inner[0]/switch-inner-unchecked (margin box)[1]/switch-inner-unchecked[0]",
+      "name": "switch-inner-unchecked",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 11,
+      "h": 22,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/switch-handle[1]",
+      "name": "switch-handle",
+      "type": "FRAME",
+      "layoutPositioning": "ABSOLUTE",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 18,
+      "h": 18,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/switch-handle[1]/switch-handle-before[0]",
+      "name": "switch-handle-before",
+      "type": "ELLIPSE",
+      "layoutPositioning": "ABSOLUTE",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 18,
+      "h": 18,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 710,
+    "sig": "0be3843bf548afa0"
+  },
+  "canvasAfter": {
+    "nodes": 710,
+    "sig": "0be3843bf548afa0"
+  },
+  "canvasRestored": true
+}

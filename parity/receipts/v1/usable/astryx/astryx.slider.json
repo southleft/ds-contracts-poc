@@ -1,0 +1,373 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / astryx",
+  "setNodeId": "39:14227",
+  "setName": "Slider",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:14171",
+  "variantNodeName": "Orientation=Horizontal, Value Display=Tooltip",
+  "axes": [
+    {
+      "axis": "Orientation",
+      "values": [
+        "Horizontal",
+        "Vertical"
+      ]
+    },
+    {
+      "axis": "Value Display",
+      "values": [
+        "Tooltip",
+        "Text",
+        "None"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 6,
+  "variantChildNames": [
+    "Orientation=Horizontal, Value Display=Tooltip",
+    "Orientation=Horizontal, Value Display=Text",
+    "Orientation=Horizontal, Value Display=None",
+    "Orientation=Vertical, Value Display=Tooltip",
+    "Orientation=Vertical, Value Display=Text",
+    "Orientation=Vertical, Value Display=None"
+  ],
+  "reflow": {
+    "target": "39:14171",
+    "targetName": "Orientation=Horizontal, Value Display=Tooltip",
+    "layoutMode": "VERTICAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "FIXED",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 240,
+      "h": 44,
+      "children": [
+        {
+          "id": "39:14173",
+          "name": "label",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 50,
+          "h": 20,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:14174",
+          "name": "slider",
+          "type": "FRAME",
+          "x": 0,
+          "y": 24,
+          "w": 240,
+          "h": 20,
+          "ax": 0,
+          "ay": 24,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 280,
+      "h": 84,
+      "children": [
+        {
+          "id": "39:14173",
+          "name": "label",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 50,
+          "h": 20,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:14174",
+          "name": "slider",
+          "type": "FRAME",
+          "x": 0,
+          "y": 24,
+          "w": 280,
+          "h": 20,
+          "ax": 0,
+          "ay": 24,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "slider",
+        "dx": 0,
+        "dy": 0,
+        "dw": 40,
+        "dh": 0
+      }
+    ],
+    "frozen": [
+      "label"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 240,
+      "h": 44
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:1129",
+    "baseline": {
+      "geometry": "0e0f825e7118f874",
+      "fills": "694394a3a8efb3fc",
+      "text": "95cc7ce0f4b1fe5c"
+    },
+    "axes": [
+      {
+        "axis": "Orientation",
+        "values": [
+          {
+            "value": "Horizontal",
+            "geometry": "0e0f825e7118f874",
+            "fills": "694394a3a8efb3fc",
+            "text": "95cc7ce0f4b1fe5c"
+          },
+          {
+            "value": "Vertical",
+            "geometry": "72da2987b873a3c0",
+            "fills": "694394a3a8efb3fc",
+            "text": "95cc7ce0f4b1fe5c"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Value Display",
+        "values": [
+          {
+            "value": "Tooltip",
+            "geometry": "0e0f825e7118f874",
+            "fills": "694394a3a8efb3fc",
+            "text": "95cc7ce0f4b1fe5c"
+          },
+          {
+            "value": "Text",
+            "geometry": "0a681bbecb5a8b0c",
+            "fills": "2334ffbc416d0358",
+            "text": "6456e4f00d894970"
+          },
+          {
+            "value": "None",
+            "geometry": "1e42919b1645257a",
+            "fills": "526958188a378af8",
+            "text": "d5ba77beb6765c4d"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 41,
+    "bound": 31,
+    "inferred": 10,
+    "literal": 0,
+    "byGroup": {
+      "spacing": {
+        "bound": 7,
+        "inferred": 1,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 2,
+        "inferred": 9,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 6,
+        "inferred": 0,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 16,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Orientation=Horizontal, Value Display=Tooltip",
+      "name": "Orientation=Horizontal, Value Display=Tooltip",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 2,
+      "w": 240,
+      "h": 44,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 50,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/label[0]/Volume[0]",
+      "name": "Volume",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 50,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/slider[1]",
+      "name": "slider",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 240,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/slider[1]/part-1-0[0]",
+      "name": "part-1-0",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 4,
+      "w": 240,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/slider[1]/part-1-0[0]/slider-track[0]",
+      "name": "slider-track",
+      "type": "FRAME",
+      "layoutPositioning": "ABSOLUTE",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 240,
+      "h": 4,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/slider[1]/part-1-0[0]/part-1-0-1[1]",
+      "name": "part-1-0-1",
+      "type": "FRAME",
+      "layoutPositioning": "ABSOLUTE",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 96,
+      "h": 4,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/slider[1]/part-1-0[0]/slider-thumb-2[2]",
+      "name": "slider-thumb-2",
+      "type": "FRAME",
+      "layoutPositioning": "ABSOLUTE",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 20,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/slider[1]/part-1-0[0]/tooltip[3]",
+      "name": "tooltip",
+      "type": "FRAME",
+      "layoutPositioning": "ABSOLUTE",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 34,
+      "h": 28,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/slider[1]/part-1-0[0]/tooltip[3]/label-2[0]",
+      "name": "label-2",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 34,
+      "h": 28,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/slider[1]/part-1-0[0]/tooltip[3]/label-2[0]/label-2-text[0]",
+      "name": "label-2-text",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 18,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 440,
+    "sig": "8f17151526c142bc"
+  },
+  "canvasAfter": {
+    "nodes": 440,
+    "sig": "8f17151526c142bc"
+  },
+  "canvasRestored": true
+}

@@ -1,0 +1,228 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / mui",
+  "setNodeId": "39:17007",
+  "setName": "Checkbox (mui.checkbox)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:16995",
+  "variantNodeName": "Checked=Unchecked",
+  "axes": [
+    {
+      "axis": "Checked",
+      "values": [
+        "Unchecked",
+        "Checked",
+        "Indeterminate"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 3,
+  "variantChildNames": [
+    "Checked=Unchecked",
+    "Checked=Checked",
+    "Checked=Indeterminate"
+  ],
+  "reflow": {
+    "target": "39:16995",
+    "targetName": "Checked=Unchecked",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "CENTER",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 42,
+      "h": 42,
+      "children": [
+        {
+          "id": "39:16996",
+          "name": "icon",
+          "type": "FRAME",
+          "x": 9,
+          "y": 9,
+          "w": 24,
+          "h": 24,
+          "ax": 9,
+          "ay": 9,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 82,
+      "h": 82,
+      "children": [
+        {
+          "id": "39:16996",
+          "name": "icon",
+          "type": "FRAME",
+          "x": 29,
+          "y": 29,
+          "w": 24,
+          "h": 24,
+          "ax": 29,
+          "ay": 29,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "icon",
+        "dx": 20,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 42,
+      "h": 42
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:2187",
+    "baseline": {
+      "geometry": "16f761bef8b62044",
+      "fills": "ed1946364be6d634",
+      "text": "00001505811c9dc5"
+    },
+    "axes": [
+      {
+        "axis": "Checked",
+        "values": [
+          {
+            "value": "Unchecked",
+            "geometry": "16f761bef8b62044",
+            "fills": "ed1946364be6d634",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Checked",
+            "geometry": "ee2af81eed852c28",
+            "fills": "dc3a2673fa2b0b32",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Indeterminate",
+            "geometry": "aae5335ef71bf283",
+            "fills": "68c91f332f18bf18",
+            "text": "00001505811c9dc5"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 16,
+    "bound": 11,
+    "inferred": 5,
+    "literal": 0,
+    "byGroup": {
+      "spacing": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 2,
+        "inferred": 5,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 1,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Checked=Unchecked",
+      "name": "Checked=Unchecked",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 42,
+      "h": 42,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/icon[0]",
+      "name": "icon",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 24,
+      "h": 24,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/icon[0]/icon-unchecked[0]",
+      "name": "icon-unchecked",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 24,
+      "h": 24,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/icon[0]/icon-unchecked[0]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 18,
+      "h": 18,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasAfter": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasRestored": true
+}

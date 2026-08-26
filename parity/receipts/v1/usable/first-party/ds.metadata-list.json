@@ -1,0 +1,395 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / first-party",
+  "setNodeId": "39:23834",
+  "setName": "MetadataList",
+  "setType": "COMPONENT",
+  "variantNodeId": "39:23834",
+  "variantNodeName": "MetadataList",
+  "axes": null,
+  "axesError": null,
+  "variantChildCount": 1,
+  "variantChildNames": [
+    "MetadataList"
+  ],
+  "reflow": {
+    "target": "39:23834",
+    "targetName": "MetadataList",
+    "layoutMode": "VERTICAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "FIXED",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 320,
+      "h": 92,
+      "children": [
+        {
+          "id": "39:23835",
+          "name": "titleText",
+          "type": "TEXT",
+          "x": 0,
+          "y": 0,
+          "w": 47,
+          "h": 17,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:23836",
+          "name": "Children",
+          "type": "SLOT",
+          "x": 0,
+          "y": 25,
+          "w": 320,
+          "h": 67,
+          "ax": 0,
+          "ay": 25,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 360,
+      "h": 132,
+      "children": [
+        {
+          "id": "39:23835",
+          "name": "titleText",
+          "type": "TEXT",
+          "x": 0,
+          "y": 0,
+          "w": 47,
+          "h": 17,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:23836",
+          "name": "Children",
+          "type": "SLOT",
+          "x": 0,
+          "y": 25,
+          "w": 360,
+          "h": 67,
+          "ax": 0,
+          "ay": 25,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "Children",
+        "dx": 0,
+        "dy": 0,
+        "dw": 40,
+        "dh": 0
+      }
+    ],
+    "frozen": [
+      "titleText"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 320,
+      "h": 92
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:3963",
+    "baseline": {
+      "geometry": "d16cb74b3867c5f4",
+      "fills": "63d69070fe9fc300",
+      "text": "69540adeff0d72ed"
+    },
+    "axes": [],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 16,
+    "bound": 15,
+    "inferred": 1,
+    "literal": 0,
+    "byGroup": {
+      "spacing": {
+        "bound": 5,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 3,
+        "inferred": 1,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 7,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/MetadataList",
+      "name": "MetadataList",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 2,
+      "w": 320,
+      "h": 92,
+      "visible": true,
+      "parentLayoutMode": null,
+      "parentType": "SECTION"
+    },
+    {
+      "path": "/titleText[0]",
+      "name": "titleText",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 47,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/Children[1]",
+      "name": "Children",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 3,
+      "w": 320,
+      "h": 67,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/Children[1]/MetadataListItem[0]",
+      "name": "MetadataListItem",
+      "type": "INSTANCE",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 3,
+      "w": 320,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "SLOT"
+    },
+    {
+      "path": "/Children[1]/MetadataListItem[0]/Icon[0]",
+      "name": "Icon",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 1,
+      "h": 1,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "INSTANCE"
+    },
+    {
+      "path": "/Children[1]/MetadataListItem[0]/labelText[1]",
+      "name": "labelText",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 120,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "INSTANCE"
+    },
+    {
+      "path": "/Children[1]/MetadataListItem[0]/labelText[1]/Label[0]",
+      "name": "Label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 45,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/Children[1]/MetadataListItem[0]/valueText[2]",
+      "name": "valueText",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 142,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "INSTANCE"
+    },
+    {
+      "path": "/Children[1]/MetadataListItem[1]",
+      "name": "MetadataListItem",
+      "type": "INSTANCE",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 3,
+      "w": 320,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "SLOT"
+    },
+    {
+      "path": "/Children[1]/MetadataListItem[1]/Icon[0]",
+      "name": "Icon",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 1,
+      "h": 1,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "INSTANCE"
+    },
+    {
+      "path": "/Children[1]/MetadataListItem[1]/labelText[1]",
+      "name": "labelText",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 120,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "INSTANCE"
+    },
+    {
+      "path": "/Children[1]/MetadataListItem[1]/labelText[1]/Label[0]",
+      "name": "Label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 44,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/Children[1]/MetadataListItem[1]/valueText[2]",
+      "name": "valueText",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 43,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "INSTANCE"
+    },
+    {
+      "path": "/Children[1]/MetadataListItem[2]",
+      "name": "MetadataListItem",
+      "type": "INSTANCE",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 3,
+      "w": 320,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "SLOT"
+    },
+    {
+      "path": "/Children[1]/MetadataListItem[2]/Icon[0]",
+      "name": "Icon",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 1,
+      "h": 1,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "INSTANCE"
+    },
+    {
+      "path": "/Children[1]/MetadataListItem[2]/labelText[1]",
+      "name": "labelText",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 120,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "INSTANCE"
+    },
+    {
+      "path": "/Children[1]/MetadataListItem[2]/labelText[1]/Label[0]",
+      "name": "Label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 58,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/Children[1]/MetadataListItem[2]/valueText[2]",
+      "name": "valueText",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 80,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "INSTANCE"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasAfter": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasRestored": true
+}

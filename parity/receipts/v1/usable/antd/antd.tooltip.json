@@ -1,0 +1,237 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "antd exam 2026-08-23",
+  "setNodeId": "33:5419",
+  "setName": "Tooltip",
+  "setType": "COMPONENT",
+  "variantNodeId": "33:5419",
+  "variantNodeName": "Tooltip",
+  "axes": null,
+  "axesError": null,
+  "variantChildCount": 1,
+  "variantChildNames": [
+    "Tooltip"
+  ],
+  "reflow": {
+    "target": "33:5419",
+    "targetName": "Tooltip",
+    "layoutMode": "VERTICAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "HUG",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "AUTO",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 85.91,
+      "h": 34,
+      "children": [
+        {
+          "id": "33:5420",
+          "name": "tooltip-content",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 85.91,
+          "h": 34,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "33:5423",
+          "name": "tooltip-arrow",
+          "type": "FRAME",
+          "x": 34.95,
+          "y": -16,
+          "w": 16,
+          "h": 16,
+          "ax": 34.95,
+          "ay": -16,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 125.91,
+      "h": 74,
+      "children": [
+        {
+          "id": "33:5420",
+          "name": "tooltip-content",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 85.91,
+          "h": 34,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "33:5423",
+          "name": "tooltip-arrow",
+          "type": "FRAME",
+          "x": 34.95,
+          "y": -16,
+          "w": 16,
+          "h": 16,
+          "ax": 34.95,
+          "ay": -16,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "tooltip-content",
+      "tooltip-arrow"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 85.91,
+      "h": 34
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:4795",
+    "baseline": {
+      "geometry": "aaca4ef7fb20873c",
+      "fills": "4c818d94702886a0",
+      "text": "3cf1f508fe688a4d"
+    },
+    "axes": [],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 22,
+    "bound": 17,
+    "inferred": 5,
+    "literal": 0,
+    "byGroup": {
+      "spacing": {
+        "bound": 4,
+        "inferred": 1,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 7,
+        "inferred": 3,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 2,
+        "inferred": 1,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Tooltip",
+      "name": "Tooltip",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 2,
+      "w": 85.91,
+      "h": 34,
+      "visible": true,
+      "parentLayoutMode": null,
+      "parentType": "SECTION"
+    },
+    {
+      "path": "/tooltip-content[0]",
+      "name": "tooltip-content",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 85.91,
+      "h": 34,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/tooltip-content[0]/label[0]",
+      "name": "label",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 86,
+      "h": 34,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/tooltip-content[0]/label[0]/label-text[0]",
+      "name": "label-text",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 70,
+      "h": 22,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/tooltip-arrow[1]",
+      "name": "tooltip-arrow",
+      "type": "FRAME",
+      "layoutPositioning": "ABSOLUTE",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 16,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/tooltip-arrow[1]/tooltip-arrow-before[0]",
+      "name": "tooltip-arrow-before",
+      "type": "RECTANGLE",
+      "layoutPositioning": "ABSOLUTE",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 16,
+      "h": 8,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 710,
+    "sig": "0be3843bf548afa0"
+  },
+  "canvasAfter": {
+    "nodes": 710,
+    "sig": "0be3843bf548afa0"
+  },
+  "canvasRestored": true
+}

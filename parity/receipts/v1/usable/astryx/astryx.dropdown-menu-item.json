@@ -1,0 +1,161 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / astryx",
+  "setNodeId": "39:14131",
+  "setName": "DropdownMenuItem",
+  "setType": "COMPONENT",
+  "variantNodeId": "39:14131",
+  "variantNodeName": "DropdownMenuItem",
+  "axes": null,
+  "axesError": null,
+  "variantChildCount": 1,
+  "variantChildNames": [
+    "DropdownMenuItem"
+  ],
+  "reflow": {
+    "target": "39:14131",
+    "targetName": "DropdownMenuItem",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "MIN",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 84,
+      "h": 33,
+      "children": [
+        {
+          "id": "39:14132",
+          "name": "label",
+          "type": "TEXT",
+          "x": 8,
+          "y": 8,
+          "w": 68,
+          "h": 17,
+          "ax": 8,
+          "ay": 8,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 124,
+      "h": 73,
+      "children": [
+        {
+          "id": "39:14132",
+          "name": "label",
+          "type": "TEXT",
+          "x": 8,
+          "y": 28,
+          "w": 68,
+          "h": 17,
+          "ax": 8,
+          "ay": 28,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "label",
+        "dx": 0,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 84,
+      "h": 33
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:1097",
+    "baseline": {
+      "geometry": "4a82b08c2694a34b",
+      "fills": "b411109317f402bc",
+      "text": "9687e44117c889c8"
+    },
+    "axes": [],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 9,
+    "bound": 9,
+    "inferred": 0,
+    "literal": 0,
+    "byGroup": {
+      "spacing": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 1,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/DropdownMenuItem",
+      "name": "DropdownMenuItem",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 84,
+      "h": 33,
+      "visible": true,
+      "parentLayoutMode": null,
+      "parentType": "SECTION"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 68,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 440,
+    "sig": "8f17151526c142bc"
+  },
+  "canvasAfter": {
+    "nodes": 440,
+    "sig": "8f17151526c142bc"
+  },
+  "canvasRestored": true
+}

@@ -1,0 +1,330 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / carbon",
+  "setNodeId": "39:8765",
+  "setName": "Tag (carbon.tag)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:8693",
+  "variantNodeName": "Type=Red, Size=Sm",
+  "axes": [
+    {
+      "axis": "Type",
+      "values": [
+        "Red",
+        "Magenta",
+        "Purple",
+        "Blue",
+        "Cyan",
+        "Teal",
+        "Green",
+        "Gray",
+        "Cool Gray",
+        "Warm Gray",
+        "High Contrast",
+        "Outline"
+      ]
+    },
+    {
+      "axis": "Size",
+      "values": [
+        "Sm",
+        "Md",
+        "Lg"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 36,
+  "variantChildNames": [
+    "Type=Red, Size=Sm",
+    "Type=Red, Size=Md",
+    "Type=Red, Size=Lg",
+    "Type=Magenta, Size=Sm",
+    "Type=Magenta, Size=Md",
+    "Type=Magenta, Size=Lg",
+    "Type=Purple, Size=Sm",
+    "Type=Purple, Size=Md",
+    "Type=Purple, Size=Lg",
+    "Type=Blue, Size=Sm",
+    "Type=Blue, Size=Md",
+    "Type=Blue, Size=Lg",
+    "Type=Cyan, Size=Sm",
+    "Type=Cyan, Size=Md",
+    "Type=Cyan, Size=Lg",
+    "Type=Teal, Size=Sm",
+    "Type=Teal, Size=Md",
+    "Type=Teal, Size=Lg",
+    "Type=Green, Size=Sm",
+    "Type=Green, Size=Md",
+    "Type=Green, Size=Lg",
+    "Type=Gray, Size=Sm",
+    "Type=Gray, Size=Md",
+    "Type=Gray, Size=Lg",
+    "Type=Cool Gray, Size=Sm",
+    "Type=Cool Gray, Size=Md",
+    "Type=Cool Gray, Size=Lg",
+    "Type=Warm Gray, Size=Sm",
+    "Type=Warm Gray, Size=Md",
+    "Type=Warm Gray, Size=Lg",
+    "Type=High Contrast, Size=Sm",
+    "Type=High Contrast, Size=Md",
+    "Type=High Contrast, Size=Lg",
+    "Type=Outline, Size=Sm",
+    "Type=Outline, Size=Md",
+    "Type=Outline, Size=Lg"
+  ],
+  "reflow": {
+    "target": "39:8693",
+    "targetName": "Type=Red, Size=Sm",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "CENTER",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 38,
+      "h": 18,
+      "children": [
+        {
+          "id": "39:8694",
+          "name": "label",
+          "type": "TEXT",
+          "x": 8,
+          "y": 1,
+          "w": 22,
+          "h": 16,
+          "ax": 8,
+          "ay": 1,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 78,
+      "h": 58,
+      "children": [
+        {
+          "id": "39:8694",
+          "name": "label",
+          "type": "TEXT",
+          "x": 28,
+          "y": 21,
+          "w": 22,
+          "h": 16,
+          "ax": 28,
+          "ay": 21,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "label",
+        "dx": 20,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 38,
+      "h": 18
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:785",
+    "baseline": {
+      "geometry": "cb554ec2d0908e28",
+      "fills": "e3def2702086323f",
+      "text": "a5bee9b5898a4134"
+    },
+    "axes": [
+      {
+        "axis": "Type",
+        "values": [
+          {
+            "value": "Red",
+            "geometry": "cb554ec2d0908e28",
+            "fills": "e3def2702086323f",
+            "text": "a5bee9b5898a4134"
+          },
+          {
+            "value": "Magenta",
+            "geometry": "cb554ec2d0908e28",
+            "fills": "d2cd325675e13537",
+            "text": "a5bee9b5898a4134"
+          },
+          {
+            "value": "Purple",
+            "geometry": "cb554ec2d0908e28",
+            "fills": "d82bbb057b7d4c78",
+            "text": "a5bee9b5898a4134"
+          },
+          {
+            "value": "Blue",
+            "geometry": "cb554ec2d0908e28",
+            "fills": "72b3dd6bb245028c",
+            "text": "a5bee9b5898a4134"
+          },
+          {
+            "value": "Cyan",
+            "geometry": "cb554ec2d0908e28",
+            "fills": "d258a86796e35e70",
+            "text": "a5bee9b5898a4134"
+          },
+          {
+            "value": "Teal",
+            "geometry": "cb554ec2d0908e28",
+            "fills": "f3c43d3cb071ab74",
+            "text": "a5bee9b5898a4134"
+          },
+          {
+            "value": "Green",
+            "geometry": "cb554ec2d0908e28",
+            "fills": "31cd12c9a697d6ff",
+            "text": "a5bee9b5898a4134"
+          },
+          {
+            "value": "Gray",
+            "geometry": "cb554ec2d0908e28",
+            "fills": "c72186a4f1fd1eef",
+            "text": "a5bee9b5898a4134"
+          },
+          {
+            "value": "Cool Gray",
+            "geometry": "cb554ec2d0908e28",
+            "fills": "d3fb658bc3f326bc",
+            "text": "a5bee9b5898a4134"
+          },
+          {
+            "value": "Warm Gray",
+            "geometry": "cb554ec2d0908e28",
+            "fills": "5fc26bcf83a9f153",
+            "text": "a5bee9b5898a4134"
+          },
+          {
+            "value": "High Contrast",
+            "geometry": "cb554ec2d0908e28",
+            "fills": "49c49d0084292940",
+            "text": "a5bee9b5898a4134"
+          },
+          {
+            "value": "Outline",
+            "geometry": "c279e48cf6835d50",
+            "fills": "3fc1817477942978",
+            "text": "a5bee9b5898a4134"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Sm",
+            "geometry": "cb554ec2d0908e28",
+            "fills": "e3def2702086323f",
+            "text": "a5bee9b5898a4134"
+          },
+          {
+            "value": "Md",
+            "geometry": "b1a7af683c948c1a",
+            "fills": "e3def2702086323f",
+            "text": "a5bee9b5898a4134"
+          },
+          {
+            "value": "Lg",
+            "geometry": "f4ddae310a4fce0c",
+            "fills": "e3def2702086323f",
+            "text": "a5bee9b5898a4134"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 11,
+    "bound": 11,
+    "inferred": 0,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 3,
+        "inferred": 0,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Type=Red, Size=Sm",
+      "name": "Type=Red, Size=Sm",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 38,
+      "h": 18,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 22,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 793,
+    "sig": "7d6ced592fbfa72c"
+  },
+  "canvasAfter": {
+    "nodes": 793,
+    "sig": "7d6ced592fbfa72c"
+  },
+  "canvasRestored": true
+}
