@@ -308,7 +308,10 @@
         "min-height": "{imported.shared.size-0}",
         "min-width": "{imported.shared.size-0}",
         "row-gap": "{imported.shared.size-4}",
-        "width": "{imported.text-input.root.width}"
+        "width": "{imported.text-input.root.width}",
+        "gap": "{spacing-1}",
+        "font-family": "{font-family-body}",
+        "font-size": "{font-size-sm}"
       }
     }
   },

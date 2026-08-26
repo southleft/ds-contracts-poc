@@ -630,7 +630,8 @@
         "align": "center"
       },
       "tokens": {
-        "color": "{p.color-text}"
+        "color": "{p.color-text}",
+        "width": "{imported.text-field.connected.width.off.off}"
       },
       "declared": {
         "display": "block"
@@ -1646,6 +1647,29 @@
                           "value": "#616161",
                           "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
                         }
+                      ],
+                      "literalsByProp": [
+                        {
+                          "prop": "variant",
+                          "map": {
+                            "inherit": {
+                              "border-top-width": "1px",
+                              "border-right-width": "1px",
+                              "border-bottom-width": "1px",
+                              "border-left-width": "1px",
+                              "border-top-color": "rgba(138, 138, 138, 1)",
+                              "border-right-color": "rgba(138, 138, 138, 1)",
+                              "border-bottom-color": "rgba(138, 138, 138, 1)",
+                              "border-left-color": "rgba(138, 138, 138, 1)"
+                            },
+                            "borderless": {
+                              "border-top-width": "0px",
+                              "border-right-width": "0px",
+                              "border-bottom-width": "0px",
+                              "border-left-width": "0px"
+                            }
+                          }
+                        }
                       ]
                     }
                   },
@@ -1797,7 +1821,8 @@
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}",
             "right": "{imported.shared.size-0}",
-            "top": "{imported.shared.size-0}"
+            "top": "{imported.shared.size-0}",
+            "width": "{imported.text-field.connected.width.off.off}"
           },
           "tokensByProp": [
             {

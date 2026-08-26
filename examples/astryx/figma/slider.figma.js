@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "astryx.slider",
     "version": "0.3.0",
     "anchorKey": null,
-    "description": "Slider — generated from contract astryx.slider v0.3.0 † (54 code-only facts — see plugin report)",
+    "description": "Slider — generated from contract astryx.slider v0.3.0 † (57 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -50,6 +50,9 @@ const COMPONENTS = [
           "fixedWidth": {
             "px": 240,
             "varName": "imported/slider/root/width"
+          },
+          "lits": {
+            "width": 240
           },
           "children": [
             {
@@ -106,6 +109,9 @@ const COMPONENTS = [
                   "fixedWidth": {
                     "px": 240,
                     "varName": "imported/slider/part-1-0/width/tooltip"
+                  },
+                  "lits": {
+                    "width": 240
                   },
                   "children": [
                     {
@@ -205,7 +211,66 @@ const COMPONENTS = [
                         "px": 96,
                         "varName": "imported/slider/part-1-0-1/width/horizontal/tooltip"
                       },
+                      "lits": {
+                        "width": 96
+                      },
                       "children": []
+                    },
+                    {
+                      "type": "frame",
+                      "name": "tooltip",
+                      "layout": {
+                        "mode": "HORIZONTAL",
+                        "primary": "CENTER",
+                        "counter": "CENTER"
+                      },
+                      "insetOverlay": true,
+                      "fill": "imported/slider/tooltip/background-color",
+                      "bindings": {
+                        "bottomLeftRadius": "imported/shared/size-12",
+                        "bottomRightRadius": "imported/shared/size-12",
+                        "topLeftRadius": "imported/shared/size-12",
+                        "topRightRadius": "imported/shared/size-12",
+                        "minHeight": "imported/shared/size-0",
+                        "minWidth": "imported/shared/size-0"
+                      },
+                      "children": [
+                        {
+                          "type": "frame",
+                          "name": "label-2",
+                          "layout": {
+                            "mode": "HORIZONTAL",
+                            "primary": "MIN",
+                            "counter": "MIN"
+                          },
+                          "children": [
+                            {
+                              "type": "text",
+                              "name": "label-2-text",
+                              "characters": "40",
+                              "fontSize": 14,
+                              "fontStyle": "Regular",
+                              "fontSizeVar": "imported/shared/size-14",
+                              "fontWeightVar": "imported/slider/label-2/font-weight",
+                              "lineHeightVar": "imported/shared/size-20-0004",
+                              "textFill": "imported/slider/label-2/color",
+                              "lineHeight": {
+                                "value": 20.0004,
+                                "unit": "PIXELS"
+                              }
+                            }
+                          ],
+                          "bindings": {
+                            "maxWidth": "imported/slider/label-2/max-width",
+                            "minHeight": "imported/shared/size-0",
+                            "minWidth": "imported/shared/size-0",
+                            "paddingBottom": "imported/shared/size-4",
+                            "paddingLeft": "imported/shared/size-8",
+                            "paddingRight": "imported/shared/size-8",
+                            "paddingTop": "imported/shared/size-4"
+                          }
+                        }
+                      ]
                     }
                   ]
                 }
@@ -238,6 +303,9 @@ const COMPONENTS = [
           "fixedWidth": {
             "px": 240,
             "varName": "imported/slider/root/width"
+          },
+          "lits": {
+            "width": 240
           },
           "children": [
             {
@@ -294,6 +362,9 @@ const COMPONENTS = [
                   "fixedWidth": {
                     "px": 214.328,
                     "varName": "imported/slider/part-1-0/width/text"
+                  },
+                  "lits": {
+                    "width": 240
                   },
                   "children": [
                     {
@@ -360,6 +431,9 @@ const COMPONENTS = [
                         "px": 85.7188,
                         "varName": "imported/slider/part-1-0-1/width/horizontal/text"
                       },
+                      "lits": {
+                        "width": 96
+                      },
                       "children": []
                     },
                     {
@@ -373,7 +447,7 @@ const COMPONENTS = [
                       "absolute": {
                         "h": "MIN",
                         "v": "STRETCH",
-                        "left": -10,
+                        "left": 76,
                         "top": 0,
                         "bottom": 0
                       },
@@ -442,6 +516,9 @@ const COMPONENTS = [
             "px": 240,
             "varName": "imported/slider/root/width"
           },
+          "lits": {
+            "width": 240
+          },
           "children": [
             {
               "type": "text",
@@ -497,6 +574,9 @@ const COMPONENTS = [
                   "fixedWidth": {
                     "px": 240,
                     "varName": "imported/slider/part-1-0/width/none"
+                  },
+                  "lits": {
+                    "width": 240
                   },
                   "children": [
                     {
@@ -563,6 +643,9 @@ const COMPONENTS = [
                         "px": 96,
                         "varName": "imported/slider/part-1-0-1/width/horizontal/none"
                       },
+                      "lits": {
+                        "width": 96
+                      },
                       "children": []
                     },
                     {
@@ -576,7 +659,7 @@ const COMPONENTS = [
                       "absolute": {
                         "h": "MIN",
                         "v": "STRETCH",
-                        "left": -10,
+                        "left": 76,
                         "top": 0,
                         "bottom": 0
                       },
@@ -629,6 +712,9 @@ const COMPONENTS = [
           "fixedWidth": {
             "px": 240,
             "varName": "imported/slider/root/width"
+          },
+          "lits": {
+            "width": 56
           },
           "children": [
             {
@@ -685,6 +771,9 @@ const COMPONENTS = [
                   "fixedWidth": {
                     "px": 240,
                     "varName": "imported/slider/part-1-0/width/tooltip"
+                  },
+                  "lits": {
+                    "width": 20
                   },
                   "children": [
                     {
@@ -751,6 +840,9 @@ const COMPONENTS = [
                         "px": 4,
                         "varName": "imported/slider/slider-track/width/vertical/tooltip"
                       },
+                      "lits": {
+                        "width": 4
+                      },
                       "children": []
                     },
                     {
@@ -784,7 +876,66 @@ const COMPONENTS = [
                         "px": 4,
                         "varName": "imported/slider/part-1-0-1/width/vertical/tooltip"
                       },
+                      "lits": {
+                        "width": 4
+                      },
                       "children": []
+                    },
+                    {
+                      "type": "frame",
+                      "name": "tooltip",
+                      "layout": {
+                        "mode": "HORIZONTAL",
+                        "primary": "CENTER",
+                        "counter": "CENTER"
+                      },
+                      "insetOverlay": true,
+                      "fill": "imported/slider/tooltip/background-color",
+                      "bindings": {
+                        "bottomLeftRadius": "imported/shared/size-12",
+                        "bottomRightRadius": "imported/shared/size-12",
+                        "topLeftRadius": "imported/shared/size-12",
+                        "topRightRadius": "imported/shared/size-12",
+                        "minHeight": "imported/shared/size-0",
+                        "minWidth": "imported/shared/size-0"
+                      },
+                      "children": [
+                        {
+                          "type": "frame",
+                          "name": "label-2",
+                          "layout": {
+                            "mode": "HORIZONTAL",
+                            "primary": "MIN",
+                            "counter": "MIN"
+                          },
+                          "children": [
+                            {
+                              "type": "text",
+                              "name": "label-2-text",
+                              "characters": "40",
+                              "fontSize": 14,
+                              "fontStyle": "Regular",
+                              "fontSizeVar": "imported/shared/size-14",
+                              "fontWeightVar": "imported/slider/label-2/font-weight",
+                              "lineHeightVar": "imported/shared/size-20-0004",
+                              "textFill": "imported/slider/label-2/color",
+                              "lineHeight": {
+                                "value": 20.0004,
+                                "unit": "PIXELS"
+                              }
+                            }
+                          ],
+                          "bindings": {
+                            "maxWidth": "imported/slider/label-2/max-width",
+                            "minHeight": "imported/shared/size-0",
+                            "minWidth": "imported/shared/size-0",
+                            "paddingBottom": "imported/shared/size-4",
+                            "paddingLeft": "imported/shared/size-8",
+                            "paddingRight": "imported/shared/size-8",
+                            "paddingTop": "imported/shared/size-4"
+                          }
+                        }
+                      ]
                     }
                   ]
                 }
@@ -817,6 +968,9 @@ const COMPONENTS = [
           "fixedWidth": {
             "px": 240,
             "varName": "imported/slider/root/width"
+          },
+          "lits": {
+            "width": 56
           },
           "children": [
             {
@@ -874,6 +1028,9 @@ const COMPONENTS = [
                     "px": 214.328,
                     "varName": "imported/slider/part-1-0/width/text"
                   },
+                  "lits": {
+                    "width": 20
+                  },
                   "children": [
                     {
                       "type": "frame",
@@ -905,6 +1062,9 @@ const COMPONENTS = [
                       "fixedWidth": {
                         "px": 4,
                         "varName": "imported/slider/slider-track/width/vertical/text"
+                      },
+                      "lits": {
+                        "width": 4
                       },
                       "children": []
                     },
@@ -938,6 +1098,9 @@ const COMPONENTS = [
                       "fixedWidth": {
                         "px": 4,
                         "varName": "imported/slider/part-1-0-1/width/vertical/text"
+                      },
+                      "lits": {
+                        "width": 4
                       },
                       "children": []
                     },
@@ -989,6 +1152,12 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 21,
                     "unit": "PIXELS"
+                  },
+                  "absolute": {
+                    "h": "MIN",
+                    "v": "MIN",
+                    "left": 28,
+                    "top": 86
                   }
                 }
               ]
@@ -1020,6 +1189,9 @@ const COMPONENTS = [
           "fixedWidth": {
             "px": 240,
             "varName": "imported/slider/root/width"
+          },
+          "lits": {
+            "width": 56
           },
           "children": [
             {
@@ -1077,6 +1249,9 @@ const COMPONENTS = [
                     "px": 240,
                     "varName": "imported/slider/part-1-0/width/none"
                   },
+                  "lits": {
+                    "width": 20
+                  },
                   "children": [
                     {
                       "type": "frame",
@@ -1108,6 +1283,9 @@ const COMPONENTS = [
                       "fixedWidth": {
                         "px": 4,
                         "varName": "imported/slider/slider-track/width/vertical/none"
+                      },
+                      "lits": {
+                        "width": 4
                       },
                       "children": []
                     },
@@ -1141,6 +1319,9 @@ const COMPONENTS = [
                       "fixedWidth": {
                         "px": 4,
                         "varName": "imported/slider/part-1-0-1/width/vertical/none"
+                      },
+                      "lits": {
+                        "width": 4
                       },
                       "children": []
                     },
@@ -1729,6 +1910,34 @@ const COMPONENTS = [
       },
       {
         "part": "tooltip",
+        "kind": "channel",
+        "channel": "margin-right/margin-left",
+        "value": "4px/4px",
+        "reason": "the margin-box wrapper is skipped — an out-of-flow child (overlay / inset / absolute) keeps its own placement lowering; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
+        "variants": {
+          "count": 1,
+          "of": 6,
+          "names": [
+            "Orientation=Vertical, Value Display=Tooltip"
+          ]
+        }
+      },
+      {
+        "part": "tooltip",
+        "kind": "channel",
+        "channel": "margin-top/margin-bottom",
+        "value": "4px/4px",
+        "reason": "the margin-box wrapper is skipped — an out-of-flow child (overlay / inset / absolute) keeps its own placement lowering; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
+        "variants": {
+          "count": 1,
+          "of": 6,
+          "names": [
+            "Orientation=Horizontal, Value Display=Tooltip"
+          ]
+        }
+      },
+      {
+        "part": "tooltip",
         "kind": "declared",
         "channel": "border-bottom-style",
         "value": "none",
@@ -1788,6 +1997,17 @@ const COMPONENTS = [
         "channel": "display",
         "value": "none",
         "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 6,
+          "of": 6
+        }
+      },
+      {
+        "part": "tooltip",
+        "kind": "declared",
+        "channel": "position",
+        "value": "absolute",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
         "variants": {
           "count": 6,
           "of": 6
@@ -2277,6 +2497,61 @@ function applyFrameSpec(node, spec) {
       if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED';
       else node.primaryAxisSizingMode = 'FIXED';
       if (spec.fixedHeight.varName) node.setBoundVariable('height', need(spec.fixedHeight.varName));
+    }
+  }
+  if (spec.lits) {
+    // v14 literals: no variable to bind — plain values, compile-parsed.
+    const li = spec.lits;
+    if (li.paddingTop !== undefined) node.paddingTop = li.paddingTop;
+    if (li.paddingBottom !== undefined) node.paddingBottom = li.paddingBottom;
+    if (li.paddingLeft !== undefined) node.paddingLeft = li.paddingLeft;
+    if (li.paddingRight !== undefined) node.paddingRight = li.paddingRight;
+    if (li.itemSpacing !== undefined) node.itemSpacing = li.itemSpacing;
+    if (li.radius !== undefined) node.cornerRadius = li.radius;
+    if (li.strokeWeight !== undefined) node.strokeWeight = li.strokeWeight;
+    if (li.minWidth !== undefined) { try { node.minWidth = li.minWidth; } catch (e) { degrade('FC-RT-MIN-SIZE-REFUSED', node, 'minWidth ' + li.minWidth + ' refused (needs auto-layout); the literal min-width does not draw', e); } }
+    if (li.minHeight !== undefined) { try { node.minHeight = li.minHeight; } catch (e) { degrade('FC-RT-MIN-SIZE-REFUSED', node, 'minHeight ' + li.minHeight + ' refused (needs auto-layout); the literal min-height does not draw', e); } }
+    // #60 fix 1 (fillClear precedence): a spec-carried fill is NEVER
+    // trampled — fillClear only clears when no fill was spec'd. The compile
+    // side already drops fillClear when a fill binding exists (applyLiterals);
+    // this runtime guard makes the emitted script safe even for hand-fed
+    // specs carrying both.
+    if (li.fillClear && !spec.fill) node.fills = [];
+    else if (li.fillColor) node.fills = [{ type: 'SOLID', color: { r: li.fillColor.r, g: li.fillColor.g, b: li.fillColor.b }, opacity: li.fillColor.a === undefined ? 1 : li.fillColor.a }];
+    if (li.radiusCorners) {
+      const rc = li.radiusCorners;
+      if (rc.tl !== undefined) node.topLeftRadius = rc.tl;
+      if (rc.tr !== undefined) node.topRightRadius = rc.tr;
+      if (rc.bl !== undefined) node.bottomLeftRadius = rc.bl;
+      if (rc.br !== undefined) node.bottomRightRadius = rc.br;
+    }
+    if (li.strokeSides) {
+      const sw = li.strokeSides;
+      // ELLIPSE/LINE expose strokeWeight only — per-side props throw
+      // "Cannot add property strokeTopWeight, object is not extensible"
+      // (Tailwind ToggleSwitch thumb live finding, Wave B.1).
+      if ('strokeTopWeight' in node) {
+        if (sw.top !== undefined) node.strokeTopWeight = sw.top;
+        if (sw.right !== undefined) node.strokeRightWeight = sw.right;
+        if (sw.bottom !== undefined) node.strokeBottomWeight = sw.bottom;
+        if (sw.left !== undefined) node.strokeLeftWeight = sw.left;
+      } else {
+        const w = sw.top !== undefined ? sw.top : (sw.right !== undefined ? sw.right : (sw.bottom !== undefined ? sw.bottom : sw.left));
+        if (w !== undefined) node.strokeWeight = w;
+      }
+    }
+    if (li.width !== undefined || li.height !== undefined) {
+      node.resize(li.width !== undefined ? li.width : node.width, li.height !== undefined ? li.height : node.height);
+      // GRID's primary axis is HORIZONTAL (GP1b: primaryAxisSizingMode='AUTO'
+      // reads back as layoutSizingHorizontal 'HUG'), like a HORIZONTAL frame.
+      const gm = (spec.layout || { mode: 'HORIZONTAL' }).mode;
+      const horizontalIsPrimary = gm === 'HORIZONTAL' || gm === 'GRID';
+      if (li.width !== undefined) {
+        if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED'; else node.counterAxisSizingMode = 'FIXED';
+      }
+      if (li.height !== undefined) {
+        if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED'; else node.primaryAxisSizingMode = 'FIXED';
+      }
     }
   }
 }

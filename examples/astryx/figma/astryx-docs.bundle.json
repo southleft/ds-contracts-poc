@@ -5669,7 +5669,13 @@
                 }
               }
             }
-          ]
+          ],
+          "tokens": {
+            "color": "{color-text-primary}",
+            "gap": "{spacing-2}",
+            "font-family": "{font-family-body}",
+            "font-size": "{font-size-sm}"
+          }
         }
       },
       "bindings": {
@@ -6099,7 +6105,14 @@
             "column-gap": "{imported.progress-bar.root.column-gap}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.progress-bar.root.min-width}",
-            "row-gap": "{imported.progress-bar.root.row-gap}"
+            "row-gap": "{imported.progress-bar.root.row-gap}",
+            "color": "{color-text-secondary}",
+            "gap": "{spacing-1}",
+            "font-family": "{font-family-body}",
+            "font-size": "{font-size-xs}"
+          },
+          "literals": {
+            "width": "240px"
           }
         }
       },
@@ -6246,7 +6259,8 @@
                 "align": "center"
               },
               "declared": {
-                "cursor": "pointer"
+                "cursor": "pointer",
+                "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
               },
               "tokens": {
                 "color": "{imported.slider.label.color}",
@@ -6328,6 +6342,21 @@
                             }
                           }
                         }
+                      ],
+                      "literalsByProp": [
+                        {
+                          "prop": "orientation",
+                          "map": {
+                            "horizontal": {
+                              "left": "0px",
+                              "right": "0px"
+                            },
+                            "vertical": {
+                              "width": "4px",
+                              "left": "8px"
+                            }
+                          }
+                        }
                       ]
                     },
                     "part-1-0-1": {
@@ -6387,6 +6416,21 @@
                             }
                           }
                         }
+                      ],
+                      "literalsByProp": [
+                        {
+                          "prop": "orientation",
+                          "map": {
+                            "horizontal": {
+                              "left": "0px",
+                              "width": "96px"
+                            },
+                            "vertical": {
+                              "width": "4px",
+                              "left": "8px"
+                            }
+                          }
+                        }
                       ]
                     },
                     "slider-thumb-2": {
@@ -6435,6 +6479,19 @@
                               "bottom": "{imported.slider.slider-thumb-2.bottom.vertical}",
                               "top": "{imported.slider.slider-thumb-2.top.vertical}",
                               "translate-y": "{imported.slider.slider-thumb-2.translate-y.vertical}"
+                            }
+                          }
+                        }
+                      ],
+                      "literalsByProp": [
+                        {
+                          "prop": "orientation",
+                          "map": {
+                            "horizontal": {
+                              "left": "86px"
+                            },
+                            "vertical": {
+                              "left": "0px"
                             }
                           }
                         }
@@ -6541,9 +6598,18 @@
                         "border-right-style": "none",
                         "border-top-style": "none",
                         "cursor": "pointer",
-                        "user-select": "none"
+                        "user-select": "none",
+                        "position": "absolute",
+                        "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
                       },
                       "stylesWhen": [
+                        {
+                          "prop": "valueDisplay",
+                          "equals": "tooltip",
+                          "styles": {
+                            "display": "flex"
+                          }
+                        },
                         {
                           "prop": "valueDisplay",
                           "equals": "text",
@@ -6566,7 +6632,8 @@
                           "declared": {
                             "display": "block",
                             "cursor": "pointer",
-                            "user-select": "none"
+                            "user-select": "none",
+                            "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
                           },
                           "stylesWhen": [
                             {
@@ -6633,6 +6700,21 @@
                             }
                           }
                         }
+                      ],
+                      "literalsByProp": [
+                        {
+                          "prop": "orientation",
+                          "map": {
+                            "horizontal": {
+                              "left": "79px",
+                              "top": "-36px"
+                            },
+                            "vertical": {
+                              "left": "-40px",
+                              "top": "78px"
+                            }
+                          }
+                        }
                       ]
                     }
                   },
@@ -6676,6 +6758,19 @@
                         }
                       }
                     }
+                  ],
+                  "literalsByProp": [
+                    {
+                      "prop": "orientation",
+                      "map": {
+                        "horizontal": {
+                          "width": "240px"
+                        },
+                        "vertical": {
+                          "width": "20px"
+                        }
+                      }
+                    }
                   ]
                 },
                 "label-3": {
@@ -6683,9 +6778,17 @@
                   "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
                     "display": "block",
-                    "text-wrap-mode": "nowrap"
+                    "text-wrap-mode": "nowrap",
+                    "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
                   },
                   "stylesWhen": [
+                    {
+                      "prop": "orientation",
+                      "equals": "vertical",
+                      "styles": {
+                        "position": "absolute"
+                      }
+                    },
                     {
                       "prop": "valueDisplay",
                       "equals": "tooltip",
@@ -6706,7 +6809,18 @@
                     "font-size": "{imported.shared.size-14}",
                     "font-weight": "{imported.slider.label-3.font-weight}",
                     "line-height": "{imported.slider.label-3.line-height}"
-                  }
+                  },
+                  "literalsByProp": [
+                    {
+                      "prop": "orientation",
+                      "map": {
+                        "vertical": {
+                          "left": "28px",
+                          "top": "86px"
+                        }
+                      }
+                    }
+                  ]
                 }
               },
               "tokens": {
@@ -6744,7 +6858,20 @@
           },
           "literals": {
             "font-size": "16px"
-          }
+          },
+          "literalsByProp": [
+            {
+              "prop": "orientation",
+              "map": {
+                "horizontal": {
+                  "width": "240px"
+                },
+                "vertical": {
+                  "width": "56px"
+                }
+              }
+            }
+          ]
         }
       },
       "bindings": {
@@ -7630,7 +7757,10 @@
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}",
             "row-gap": "{imported.shared.size-4}",
-            "width": "{imported.text-input.root.width}"
+            "width": "{imported.text-input.root.width}",
+            "gap": "{spacing-1}",
+            "font-family": "{font-family-body}",
+            "font-size": "{font-size-sm}"
           }
         }
       },
@@ -7968,7 +8098,12 @@
             "line-height": "{imported.token.root.line-height}",
             "padding-left": "{imported.token.root.padding-left}",
             "padding-right": "{imported.token.root.padding-right}",
-            "row-gap": "{imported.token.root.row-gap}"
+            "row-gap": "{imported.token.root.row-gap}",
+            "background-color": "{color-background-gray}",
+            "color": "{color-text-primary}",
+            "border-radius": "{radius-full}",
+            "gap": "{spacing-1}",
+            "font-family": "{font-family-body}"
           },
           "tokensByProp": [
             {
@@ -9766,6 +9901,34 @@
         },
         {
           "part": "tooltip",
+          "kind": "channel",
+          "channel": "margin-right/margin-left",
+          "value": "4px/4px",
+          "reason": "the margin-box wrapper is skipped — an out-of-flow child (overlay / inset / absolute) keeps its own placement lowering; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
+          "variants": {
+            "count": 1,
+            "of": 6,
+            "names": [
+              "Orientation=Vertical, Value Display=Tooltip"
+            ]
+          }
+        },
+        {
+          "part": "tooltip",
+          "kind": "channel",
+          "channel": "margin-top/margin-bottom",
+          "value": "4px/4px",
+          "reason": "the margin-box wrapper is skipped — an out-of-flow child (overlay / inset / absolute) keeps its own placement lowering; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
+          "variants": {
+            "count": 1,
+            "of": 6,
+            "names": [
+              "Orientation=Horizontal, Value Display=Tooltip"
+            ]
+          }
+        },
+        {
+          "part": "tooltip",
           "kind": "declared",
           "channel": "border-bottom-style",
           "value": "none",
@@ -9825,6 +9988,17 @@
           "channel": "display",
           "value": "none",
           "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+          "variants": {
+            "count": 6,
+            "of": 6
+          }
+        },
+        {
+          "part": "tooltip",
+          "kind": "declared",
+          "channel": "position",
+          "value": "absolute",
+          "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
           "variants": {
             "count": 6,
             "of": 6

@@ -30,6 +30,7 @@
 .spinner__root-small {
   display: inline-flex;
   flex-shrink: 0;
+  transform: rotate(90deg);
 }
 
 .spinner__root-large svg {
@@ -41,6 +42,7 @@
 .spinner__root-large {
   display: inline-flex;
   flex-shrink: 0;
+  transform: rotate(90deg);
 }
 
 /* showcase chrome */

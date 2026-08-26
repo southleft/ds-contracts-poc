@@ -158,7 +158,8 @@
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}",
             "right": "{imported.shared.size-0}",
-            "top": "{imported.shared.size-0}"
+            "top": "{imported.shared.size-0}",
+            "border-radius": "{p.border-radius-200}"
           },
           "tokensByProp": [
             {

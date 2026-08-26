@@ -9956,6 +9956,9 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
+          "bindings": {
+            "itemSpacing": "spacing-2"
+          },
           "fixedHeight": {
             "px": 24,
             "varName": "imported/checkbox-input/root/height/md"
@@ -10073,6 +10076,7 @@ const COMPONENTS = [
                         "value": 20.0004,
                         "unit": "PIXELS"
                       },
+                      "fontFamily": "Figtree",
                       "contentProp": "Label"
                     }
                   ]
@@ -10094,6 +10098,9 @@ const COMPONENTS = [
             "primary": "MIN",
             "counter": "MIN",
             "stretchChildren": true
+          },
+          "bindings": {
+            "itemSpacing": "spacing-2"
           },
           "fixedHeight": {
             "px": 20,
@@ -10212,6 +10219,7 @@ const COMPONENTS = [
                         "value": 20.0004,
                         "unit": "PIXELS"
                       },
+                      "fontFamily": "Figtree",
                       "contentProp": "Label"
                     }
                   ]
@@ -11109,6 +11117,55 @@ async function buildNode(spec, registry) {
     else if (spec.lineHeight && typeof spec.lineHeight === 'object' && typeof spec.lineHeight.value === 'number') {
       node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
     }
+    if (spec.fontFamily) {
+      // PER-FAMILY STYLE SPELLING. The compiled style name comes from
+      // FONT_STYLE_BY_WEIGHT, which is spelled Inter's way ("Semi Bold",
+      // "Extra Light"). Other families spell the same face WITHOUT the space
+      // — IBM Plex Sans ships "SemiBold", "ExtraLight" — so the Inter-spelled
+      // load THROWS and the node silently keeps the Inter fallback assigned
+      // above. That is a SUBSTITUTION, not a failure: nothing was logged,
+      // nothing was refused, and the canvas rendered a different typeface at
+      // different advance widths (altitude heading 194px of Inter Semi Bold
+      // where IBM Plex Sans SemiBold is 185px).
+      //
+      // A space-free retry was tried on 2026-08-08 and REVERTED because the
+      // then-pinned references were CONTRACT renders made by a harness that
+      // loaded no @font-face, so the truer canvas font scored WORSE. That
+      // premise is dead: the references are now the real library renders
+      // (extract/computed/out/<lane>/<comp>/orig-shots/, committed by
+      // run.ts --keep-originals) and the capture harness loads the library's
+      // own faces (cfg.fonts). Truer is now also closer.
+      //
+      // The fallback is kept — a family Figma does not have at all must still
+      // draw something — but it is no longer SILENT: an unresolved style is
+      // named on the console with a stable code.
+      const wantStyle = spec.fontStyle || 'Medium';
+      const styleCandidates = [wantStyle];
+      const tightStyle = wantStyle.split(' ').join('');
+      if (tightStyle !== wantStyle) styleCandidates.push(tightStyle);
+      let fontResolved = false;
+      for (let i = 0; i < styleCandidates.length; i++) {
+        try {
+          await figma.loadFontAsync({ family: spec.fontFamily, style: styleCandidates[i] });
+          node.fontName = { family: spec.fontFamily, style: styleCandidates[i] };
+          fontResolved = true;
+          break;
+        } catch (e) { /* a RETRY, not a swallow: the next candidate is this family's own spelling of the same face; the final outcome is named below */ }
+      }
+      if (!fontResolved) {
+        console.warn(
+          'FC-FONT-STYLE-UNRESOLVED: ' + spec.fontFamily + ' / ' + wantStyle +
+          ' is not available in this file (tried ' + styleCandidates.join(', ') +
+          ') — Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones',
+        );
+        degrade('FC-FONT-STYLE-UNRESOLVED', node, spec.fontFamily + ' / ' + wantStyle + ' is not available in this file (tried ' + styleCandidates.join(', ') + '); Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones');
+      }
+    }
+    if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
+    if (spec.textCase) node.textCase = spec.textCase;
+    if (spec.textDecoration) node.textDecoration = spec.textDecoration;
+    if (spec.textAlignH) node.textAlignHorizontal = spec.textAlignH;
+    if (spec.textTruncation) { try { node.textTruncation = 'ENDING'; } catch (e) { degrade('FC-RT-TRUNCATION-REFUSED', node, 'textTruncation ENDING refused (older Plugin API); the declared ellipsis does not draw', e); } }
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.
@@ -12225,7 +12282,10 @@ const COMPONENTS = [
           "bindings": {
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/progress-bar/root/min-width",
-            "itemSpacing": "imported/progress-bar/root/row-gap"
+            "itemSpacing": "spacing-1"
+          },
+          "lits": {
+            "width": 240
           },
           "children": [
             {
@@ -12246,13 +12306,16 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/progress-bar/label/font-size",
                   "fontWeightVar": "imported/progress-bar/label/font-weight",
                   "lineHeightVar": "imported/progress-bar/label/line-height",
+                  "textFill": "color-text-secondary",
                   "lineHeight": {
                     "value": 20.0004,
                     "unit": "PIXELS"
                   },
+                  "fontFamily": "Figtree",
                   "contentProp": "Label"
                 }
-              ]
+              ],
+              "fillW": true
             },
             {
               "type": "frame",
@@ -12290,7 +12353,8 @@ const COMPONENTS = [
                   "fill": "imported/progress-bar/progressbar-fill/background-color/accent",
                   "children": []
                 }
-              ]
+              ],
+              "fillW": true
             }
           ]
         }
@@ -12311,7 +12375,10 @@ const COMPONENTS = [
           "bindings": {
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/progress-bar/root/min-width",
-            "itemSpacing": "imported/progress-bar/root/row-gap"
+            "itemSpacing": "spacing-1"
+          },
+          "lits": {
+            "width": 240
           },
           "children": [
             {
@@ -12332,13 +12399,16 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/progress-bar/label/font-size",
                   "fontWeightVar": "imported/progress-bar/label/font-weight",
                   "lineHeightVar": "imported/progress-bar/label/line-height",
+                  "textFill": "color-text-secondary",
                   "lineHeight": {
                     "value": 20.0004,
                     "unit": "PIXELS"
                   },
+                  "fontFamily": "Figtree",
                   "contentProp": "Label"
                 }
-              ]
+              ],
+              "fillW": true
             },
             {
               "type": "frame",
@@ -12376,7 +12446,8 @@ const COMPONENTS = [
                   "fill": "imported/progress-bar/progressbar-fill/background-color/success",
                   "children": []
                 }
-              ]
+              ],
+              "fillW": true
             }
           ]
         }
@@ -12397,7 +12468,10 @@ const COMPONENTS = [
           "bindings": {
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/progress-bar/root/min-width",
-            "itemSpacing": "imported/progress-bar/root/row-gap"
+            "itemSpacing": "spacing-1"
+          },
+          "lits": {
+            "width": 240
           },
           "children": [
             {
@@ -12418,13 +12492,16 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/progress-bar/label/font-size",
                   "fontWeightVar": "imported/progress-bar/label/font-weight",
                   "lineHeightVar": "imported/progress-bar/label/line-height",
+                  "textFill": "color-text-secondary",
                   "lineHeight": {
                     "value": 20.0004,
                     "unit": "PIXELS"
                   },
+                  "fontFamily": "Figtree",
                   "contentProp": "Label"
                 }
-              ]
+              ],
+              "fillW": true
             },
             {
               "type": "frame",
@@ -12462,7 +12539,8 @@ const COMPONENTS = [
                   "fill": "imported/progress-bar/progressbar-fill/background-color/warning",
                   "children": []
                 }
-              ]
+              ],
+              "fillW": true
             }
           ]
         }
@@ -12483,7 +12561,10 @@ const COMPONENTS = [
           "bindings": {
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/progress-bar/root/min-width",
-            "itemSpacing": "imported/progress-bar/root/row-gap"
+            "itemSpacing": "spacing-1"
+          },
+          "lits": {
+            "width": 240
           },
           "children": [
             {
@@ -12504,13 +12585,16 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/progress-bar/label/font-size",
                   "fontWeightVar": "imported/progress-bar/label/font-weight",
                   "lineHeightVar": "imported/progress-bar/label/line-height",
+                  "textFill": "color-text-secondary",
                   "lineHeight": {
                     "value": 20.0004,
                     "unit": "PIXELS"
                   },
+                  "fontFamily": "Figtree",
                   "contentProp": "Label"
                 }
-              ]
+              ],
+              "fillW": true
             },
             {
               "type": "frame",
@@ -12548,7 +12632,8 @@ const COMPONENTS = [
                   "fill": "imported/progress-bar/progressbar-fill/background-color/neutral",
                   "children": []
                 }
-              ]
+              ],
+              "fillW": true
             }
           ]
         }
@@ -12569,7 +12654,10 @@ const COMPONENTS = [
           "bindings": {
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/progress-bar/root/min-width",
-            "itemSpacing": "imported/progress-bar/root/row-gap"
+            "itemSpacing": "spacing-1"
+          },
+          "lits": {
+            "width": 240
           },
           "children": [
             {
@@ -12590,13 +12678,16 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/progress-bar/label/font-size",
                   "fontWeightVar": "imported/progress-bar/label/font-weight",
                   "lineHeightVar": "imported/progress-bar/label/line-height",
+                  "textFill": "color-text-secondary",
                   "lineHeight": {
                     "value": 20.0004,
                     "unit": "PIXELS"
                   },
+                  "fontFamily": "Figtree",
                   "contentProp": "Label"
                 }
-              ]
+              ],
+              "fillW": true
             },
             {
               "type": "frame",
@@ -12634,7 +12725,8 @@ const COMPONENTS = [
                   "fill": "imported/progress-bar/progressbar-fill/background-color/error",
                   "children": []
                 }
-              ]
+              ],
+              "fillW": true
             }
           ]
         }
@@ -13204,6 +13296,61 @@ function applyFrameSpec(node, spec) {
       if (spec.fixedHeight.varName) node.setBoundVariable('height', need(spec.fixedHeight.varName));
     }
   }
+  if (spec.lits) {
+    // v14 literals: no variable to bind — plain values, compile-parsed.
+    const li = spec.lits;
+    if (li.paddingTop !== undefined) node.paddingTop = li.paddingTop;
+    if (li.paddingBottom !== undefined) node.paddingBottom = li.paddingBottom;
+    if (li.paddingLeft !== undefined) node.paddingLeft = li.paddingLeft;
+    if (li.paddingRight !== undefined) node.paddingRight = li.paddingRight;
+    if (li.itemSpacing !== undefined) node.itemSpacing = li.itemSpacing;
+    if (li.radius !== undefined) node.cornerRadius = li.radius;
+    if (li.strokeWeight !== undefined) node.strokeWeight = li.strokeWeight;
+    if (li.minWidth !== undefined) { try { node.minWidth = li.minWidth; } catch (e) { degrade('FC-RT-MIN-SIZE-REFUSED', node, 'minWidth ' + li.minWidth + ' refused (needs auto-layout); the literal min-width does not draw', e); } }
+    if (li.minHeight !== undefined) { try { node.minHeight = li.minHeight; } catch (e) { degrade('FC-RT-MIN-SIZE-REFUSED', node, 'minHeight ' + li.minHeight + ' refused (needs auto-layout); the literal min-height does not draw', e); } }
+    // #60 fix 1 (fillClear precedence): a spec-carried fill is NEVER
+    // trampled — fillClear only clears when no fill was spec'd. The compile
+    // side already drops fillClear when a fill binding exists (applyLiterals);
+    // this runtime guard makes the emitted script safe even for hand-fed
+    // specs carrying both.
+    if (li.fillClear && !spec.fill) node.fills = [];
+    else if (li.fillColor) node.fills = [{ type: 'SOLID', color: { r: li.fillColor.r, g: li.fillColor.g, b: li.fillColor.b }, opacity: li.fillColor.a === undefined ? 1 : li.fillColor.a }];
+    if (li.radiusCorners) {
+      const rc = li.radiusCorners;
+      if (rc.tl !== undefined) node.topLeftRadius = rc.tl;
+      if (rc.tr !== undefined) node.topRightRadius = rc.tr;
+      if (rc.bl !== undefined) node.bottomLeftRadius = rc.bl;
+      if (rc.br !== undefined) node.bottomRightRadius = rc.br;
+    }
+    if (li.strokeSides) {
+      const sw = li.strokeSides;
+      // ELLIPSE/LINE expose strokeWeight only — per-side props throw
+      // "Cannot add property strokeTopWeight, object is not extensible"
+      // (Tailwind ToggleSwitch thumb live finding, Wave B.1).
+      if ('strokeTopWeight' in node) {
+        if (sw.top !== undefined) node.strokeTopWeight = sw.top;
+        if (sw.right !== undefined) node.strokeRightWeight = sw.right;
+        if (sw.bottom !== undefined) node.strokeBottomWeight = sw.bottom;
+        if (sw.left !== undefined) node.strokeLeftWeight = sw.left;
+      } else {
+        const w = sw.top !== undefined ? sw.top : (sw.right !== undefined ? sw.right : (sw.bottom !== undefined ? sw.bottom : sw.left));
+        if (w !== undefined) node.strokeWeight = w;
+      }
+    }
+    if (li.width !== undefined || li.height !== undefined) {
+      node.resize(li.width !== undefined ? li.width : node.width, li.height !== undefined ? li.height : node.height);
+      // GRID's primary axis is HORIZONTAL (GP1b: primaryAxisSizingMode='AUTO'
+      // reads back as layoutSizingHorizontal 'HUG'), like a HORIZONTAL frame.
+      const gm = (spec.layout || { mode: 'HORIZONTAL' }).mode;
+      const horizontalIsPrimary = gm === 'HORIZONTAL' || gm === 'GRID';
+      if (li.width !== undefined) {
+        if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED'; else node.counterAxisSizingMode = 'FIXED';
+      }
+      if (li.height !== undefined) {
+        if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED'; else node.primaryAxisSizingMode = 'FIXED';
+      }
+    }
+  }
 }
 
 // v7 overlay: out-of-flow edge attachment. Must run AFTER appendChild —
@@ -13242,6 +13389,55 @@ async function buildNode(spec, registry) {
     else if (spec.lineHeight && typeof spec.lineHeight === 'object' && typeof spec.lineHeight.value === 'number') {
       node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
     }
+    if (spec.fontFamily) {
+      // PER-FAMILY STYLE SPELLING. The compiled style name comes from
+      // FONT_STYLE_BY_WEIGHT, which is spelled Inter's way ("Semi Bold",
+      // "Extra Light"). Other families spell the same face WITHOUT the space
+      // — IBM Plex Sans ships "SemiBold", "ExtraLight" — so the Inter-spelled
+      // load THROWS and the node silently keeps the Inter fallback assigned
+      // above. That is a SUBSTITUTION, not a failure: nothing was logged,
+      // nothing was refused, and the canvas rendered a different typeface at
+      // different advance widths (altitude heading 194px of Inter Semi Bold
+      // where IBM Plex Sans SemiBold is 185px).
+      //
+      // A space-free retry was tried on 2026-08-08 and REVERTED because the
+      // then-pinned references were CONTRACT renders made by a harness that
+      // loaded no @font-face, so the truer canvas font scored WORSE. That
+      // premise is dead: the references are now the real library renders
+      // (extract/computed/out/<lane>/<comp>/orig-shots/, committed by
+      // run.ts --keep-originals) and the capture harness loads the library's
+      // own faces (cfg.fonts). Truer is now also closer.
+      //
+      // The fallback is kept — a family Figma does not have at all must still
+      // draw something — but it is no longer SILENT: an unresolved style is
+      // named on the console with a stable code.
+      const wantStyle = spec.fontStyle || 'Medium';
+      const styleCandidates = [wantStyle];
+      const tightStyle = wantStyle.split(' ').join('');
+      if (tightStyle !== wantStyle) styleCandidates.push(tightStyle);
+      let fontResolved = false;
+      for (let i = 0; i < styleCandidates.length; i++) {
+        try {
+          await figma.loadFontAsync({ family: spec.fontFamily, style: styleCandidates[i] });
+          node.fontName = { family: spec.fontFamily, style: styleCandidates[i] };
+          fontResolved = true;
+          break;
+        } catch (e) { /* a RETRY, not a swallow: the next candidate is this family's own spelling of the same face; the final outcome is named below */ }
+      }
+      if (!fontResolved) {
+        console.warn(
+          'FC-FONT-STYLE-UNRESOLVED: ' + spec.fontFamily + ' / ' + wantStyle +
+          ' is not available in this file (tried ' + styleCandidates.join(', ') +
+          ') — Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones',
+        );
+        degrade('FC-FONT-STYLE-UNRESOLVED', node, spec.fontFamily + ' / ' + wantStyle + ' is not available in this file (tried ' + styleCandidates.join(', ') + '); Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones');
+      }
+    }
+    if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
+    if (spec.textCase) node.textCase = spec.textCase;
+    if (spec.textDecoration) node.textDecoration = spec.textDecoration;
+    if (spec.textAlignH) node.textAlignHorizontal = spec.textAlignH;
+    if (spec.textTruncation) { try { node.textTruncation = 'ENDING'; } catch (e) { degrade('FC-RT-TRUNCATION-REFUSED', node, 'textTruncation ENDING refused (older Plugin API); the declared ellipsis does not draw', e); } }
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.
@@ -14316,7 +14512,7 @@ const COMPONENTS = [
     "contractId": "astryx.slider",
     "version": "0.3.0",
     "anchorKey": null,
-    "description": "Slider — generated from contract astryx.slider v0.3.0 † (54 code-only facts — see plugin report)",
+    "description": "Slider — generated from contract astryx.slider v0.3.0 † (57 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -14358,6 +14554,9 @@ const COMPONENTS = [
           "fixedWidth": {
             "px": 240,
             "varName": "imported/slider/root/width"
+          },
+          "lits": {
+            "width": 240
           },
           "children": [
             {
@@ -14414,6 +14613,9 @@ const COMPONENTS = [
                   "fixedWidth": {
                     "px": 240,
                     "varName": "imported/slider/part-1-0/width/tooltip"
+                  },
+                  "lits": {
+                    "width": 240
                   },
                   "children": [
                     {
@@ -14513,7 +14715,66 @@ const COMPONENTS = [
                         "px": 96,
                         "varName": "imported/slider/part-1-0-1/width/horizontal/tooltip"
                       },
+                      "lits": {
+                        "width": 96
+                      },
                       "children": []
+                    },
+                    {
+                      "type": "frame",
+                      "name": "tooltip",
+                      "layout": {
+                        "mode": "HORIZONTAL",
+                        "primary": "CENTER",
+                        "counter": "CENTER"
+                      },
+                      "insetOverlay": true,
+                      "fill": "imported/slider/tooltip/background-color",
+                      "bindings": {
+                        "bottomLeftRadius": "imported/shared/size-12",
+                        "bottomRightRadius": "imported/shared/size-12",
+                        "topLeftRadius": "imported/shared/size-12",
+                        "topRightRadius": "imported/shared/size-12",
+                        "minHeight": "imported/shared/size-0",
+                        "minWidth": "imported/shared/size-0"
+                      },
+                      "children": [
+                        {
+                          "type": "frame",
+                          "name": "label-2",
+                          "layout": {
+                            "mode": "HORIZONTAL",
+                            "primary": "MIN",
+                            "counter": "MIN"
+                          },
+                          "children": [
+                            {
+                              "type": "text",
+                              "name": "label-2-text",
+                              "characters": "40",
+                              "fontSize": 14,
+                              "fontStyle": "Regular",
+                              "fontSizeVar": "imported/shared/size-14",
+                              "fontWeightVar": "imported/slider/label-2/font-weight",
+                              "lineHeightVar": "imported/shared/size-20-0004",
+                              "textFill": "imported/slider/label-2/color",
+                              "lineHeight": {
+                                "value": 20.0004,
+                                "unit": "PIXELS"
+                              }
+                            }
+                          ],
+                          "bindings": {
+                            "maxWidth": "imported/slider/label-2/max-width",
+                            "minHeight": "imported/shared/size-0",
+                            "minWidth": "imported/shared/size-0",
+                            "paddingBottom": "imported/shared/size-4",
+                            "paddingLeft": "imported/shared/size-8",
+                            "paddingRight": "imported/shared/size-8",
+                            "paddingTop": "imported/shared/size-4"
+                          }
+                        }
+                      ]
                     }
                   ]
                 }
@@ -14546,6 +14807,9 @@ const COMPONENTS = [
           "fixedWidth": {
             "px": 240,
             "varName": "imported/slider/root/width"
+          },
+          "lits": {
+            "width": 240
           },
           "children": [
             {
@@ -14602,6 +14866,9 @@ const COMPONENTS = [
                   "fixedWidth": {
                     "px": 214.328,
                     "varName": "imported/slider/part-1-0/width/text"
+                  },
+                  "lits": {
+                    "width": 240
                   },
                   "children": [
                     {
@@ -14668,6 +14935,9 @@ const COMPONENTS = [
                         "px": 85.7188,
                         "varName": "imported/slider/part-1-0-1/width/horizontal/text"
                       },
+                      "lits": {
+                        "width": 96
+                      },
                       "children": []
                     },
                     {
@@ -14681,7 +14951,7 @@ const COMPONENTS = [
                       "absolute": {
                         "h": "MIN",
                         "v": "STRETCH",
-                        "left": -10,
+                        "left": 76,
                         "top": 0,
                         "bottom": 0
                       },
@@ -14750,6 +15020,9 @@ const COMPONENTS = [
             "px": 240,
             "varName": "imported/slider/root/width"
           },
+          "lits": {
+            "width": 240
+          },
           "children": [
             {
               "type": "text",
@@ -14805,6 +15078,9 @@ const COMPONENTS = [
                   "fixedWidth": {
                     "px": 240,
                     "varName": "imported/slider/part-1-0/width/none"
+                  },
+                  "lits": {
+                    "width": 240
                   },
                   "children": [
                     {
@@ -14871,6 +15147,9 @@ const COMPONENTS = [
                         "px": 96,
                         "varName": "imported/slider/part-1-0-1/width/horizontal/none"
                       },
+                      "lits": {
+                        "width": 96
+                      },
                       "children": []
                     },
                     {
@@ -14884,7 +15163,7 @@ const COMPONENTS = [
                       "absolute": {
                         "h": "MIN",
                         "v": "STRETCH",
-                        "left": -10,
+                        "left": 76,
                         "top": 0,
                         "bottom": 0
                       },
@@ -14937,6 +15216,9 @@ const COMPONENTS = [
           "fixedWidth": {
             "px": 240,
             "varName": "imported/slider/root/width"
+          },
+          "lits": {
+            "width": 56
           },
           "children": [
             {
@@ -14993,6 +15275,9 @@ const COMPONENTS = [
                   "fixedWidth": {
                     "px": 240,
                     "varName": "imported/slider/part-1-0/width/tooltip"
+                  },
+                  "lits": {
+                    "width": 20
                   },
                   "children": [
                     {
@@ -15059,6 +15344,9 @@ const COMPONENTS = [
                         "px": 4,
                         "varName": "imported/slider/slider-track/width/vertical/tooltip"
                       },
+                      "lits": {
+                        "width": 4
+                      },
                       "children": []
                     },
                     {
@@ -15092,7 +15380,66 @@ const COMPONENTS = [
                         "px": 4,
                         "varName": "imported/slider/part-1-0-1/width/vertical/tooltip"
                       },
+                      "lits": {
+                        "width": 4
+                      },
                       "children": []
+                    },
+                    {
+                      "type": "frame",
+                      "name": "tooltip",
+                      "layout": {
+                        "mode": "HORIZONTAL",
+                        "primary": "CENTER",
+                        "counter": "CENTER"
+                      },
+                      "insetOverlay": true,
+                      "fill": "imported/slider/tooltip/background-color",
+                      "bindings": {
+                        "bottomLeftRadius": "imported/shared/size-12",
+                        "bottomRightRadius": "imported/shared/size-12",
+                        "topLeftRadius": "imported/shared/size-12",
+                        "topRightRadius": "imported/shared/size-12",
+                        "minHeight": "imported/shared/size-0",
+                        "minWidth": "imported/shared/size-0"
+                      },
+                      "children": [
+                        {
+                          "type": "frame",
+                          "name": "label-2",
+                          "layout": {
+                            "mode": "HORIZONTAL",
+                            "primary": "MIN",
+                            "counter": "MIN"
+                          },
+                          "children": [
+                            {
+                              "type": "text",
+                              "name": "label-2-text",
+                              "characters": "40",
+                              "fontSize": 14,
+                              "fontStyle": "Regular",
+                              "fontSizeVar": "imported/shared/size-14",
+                              "fontWeightVar": "imported/slider/label-2/font-weight",
+                              "lineHeightVar": "imported/shared/size-20-0004",
+                              "textFill": "imported/slider/label-2/color",
+                              "lineHeight": {
+                                "value": 20.0004,
+                                "unit": "PIXELS"
+                              }
+                            }
+                          ],
+                          "bindings": {
+                            "maxWidth": "imported/slider/label-2/max-width",
+                            "minHeight": "imported/shared/size-0",
+                            "minWidth": "imported/shared/size-0",
+                            "paddingBottom": "imported/shared/size-4",
+                            "paddingLeft": "imported/shared/size-8",
+                            "paddingRight": "imported/shared/size-8",
+                            "paddingTop": "imported/shared/size-4"
+                          }
+                        }
+                      ]
                     }
                   ]
                 }
@@ -15125,6 +15472,9 @@ const COMPONENTS = [
           "fixedWidth": {
             "px": 240,
             "varName": "imported/slider/root/width"
+          },
+          "lits": {
+            "width": 56
           },
           "children": [
             {
@@ -15182,6 +15532,9 @@ const COMPONENTS = [
                     "px": 214.328,
                     "varName": "imported/slider/part-1-0/width/text"
                   },
+                  "lits": {
+                    "width": 20
+                  },
                   "children": [
                     {
                       "type": "frame",
@@ -15213,6 +15566,9 @@ const COMPONENTS = [
                       "fixedWidth": {
                         "px": 4,
                         "varName": "imported/slider/slider-track/width/vertical/text"
+                      },
+                      "lits": {
+                        "width": 4
                       },
                       "children": []
                     },
@@ -15246,6 +15602,9 @@ const COMPONENTS = [
                       "fixedWidth": {
                         "px": 4,
                         "varName": "imported/slider/part-1-0-1/width/vertical/text"
+                      },
+                      "lits": {
+                        "width": 4
                       },
                       "children": []
                     },
@@ -15297,6 +15656,12 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 21,
                     "unit": "PIXELS"
+                  },
+                  "absolute": {
+                    "h": "MIN",
+                    "v": "MIN",
+                    "left": 28,
+                    "top": 86
                   }
                 }
               ]
@@ -15328,6 +15693,9 @@ const COMPONENTS = [
           "fixedWidth": {
             "px": 240,
             "varName": "imported/slider/root/width"
+          },
+          "lits": {
+            "width": 56
           },
           "children": [
             {
@@ -15385,6 +15753,9 @@ const COMPONENTS = [
                     "px": 240,
                     "varName": "imported/slider/part-1-0/width/none"
                   },
+                  "lits": {
+                    "width": 20
+                  },
                   "children": [
                     {
                       "type": "frame",
@@ -15416,6 +15787,9 @@ const COMPONENTS = [
                       "fixedWidth": {
                         "px": 4,
                         "varName": "imported/slider/slider-track/width/vertical/none"
+                      },
+                      "lits": {
+                        "width": 4
                       },
                       "children": []
                     },
@@ -15449,6 +15823,9 @@ const COMPONENTS = [
                       "fixedWidth": {
                         "px": 4,
                         "varName": "imported/slider/part-1-0-1/width/vertical/none"
+                      },
+                      "lits": {
+                        "width": 4
                       },
                       "children": []
                     },
@@ -16037,6 +16414,34 @@ const COMPONENTS = [
       },
       {
         "part": "tooltip",
+        "kind": "channel",
+        "channel": "margin-right/margin-left",
+        "value": "4px/4px",
+        "reason": "the margin-box wrapper is skipped — an out-of-flow child (overlay / inset / absolute) keeps its own placement lowering; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
+        "variants": {
+          "count": 1,
+          "of": 6,
+          "names": [
+            "Orientation=Vertical, Value Display=Tooltip"
+          ]
+        }
+      },
+      {
+        "part": "tooltip",
+        "kind": "channel",
+        "channel": "margin-top/margin-bottom",
+        "value": "4px/4px",
+        "reason": "the margin-box wrapper is skipped — an out-of-flow child (overlay / inset / absolute) keeps its own placement lowering; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
+        "variants": {
+          "count": 1,
+          "of": 6,
+          "names": [
+            "Orientation=Horizontal, Value Display=Tooltip"
+          ]
+        }
+      },
+      {
+        "part": "tooltip",
         "kind": "declared",
         "channel": "border-bottom-style",
         "value": "none",
@@ -16096,6 +16501,17 @@ const COMPONENTS = [
         "channel": "display",
         "value": "none",
         "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 6,
+          "of": 6
+        }
+      },
+      {
+        "part": "tooltip",
+        "kind": "declared",
+        "channel": "position",
+        "value": "absolute",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
         "variants": {
           "count": 6,
           "of": 6
@@ -16585,6 +17001,61 @@ function applyFrameSpec(node, spec) {
       if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED';
       else node.primaryAxisSizingMode = 'FIXED';
       if (spec.fixedHeight.varName) node.setBoundVariable('height', need(spec.fixedHeight.varName));
+    }
+  }
+  if (spec.lits) {
+    // v14 literals: no variable to bind — plain values, compile-parsed.
+    const li = spec.lits;
+    if (li.paddingTop !== undefined) node.paddingTop = li.paddingTop;
+    if (li.paddingBottom !== undefined) node.paddingBottom = li.paddingBottom;
+    if (li.paddingLeft !== undefined) node.paddingLeft = li.paddingLeft;
+    if (li.paddingRight !== undefined) node.paddingRight = li.paddingRight;
+    if (li.itemSpacing !== undefined) node.itemSpacing = li.itemSpacing;
+    if (li.radius !== undefined) node.cornerRadius = li.radius;
+    if (li.strokeWeight !== undefined) node.strokeWeight = li.strokeWeight;
+    if (li.minWidth !== undefined) { try { node.minWidth = li.minWidth; } catch (e) { degrade('FC-RT-MIN-SIZE-REFUSED', node, 'minWidth ' + li.minWidth + ' refused (needs auto-layout); the literal min-width does not draw', e); } }
+    if (li.minHeight !== undefined) { try { node.minHeight = li.minHeight; } catch (e) { degrade('FC-RT-MIN-SIZE-REFUSED', node, 'minHeight ' + li.minHeight + ' refused (needs auto-layout); the literal min-height does not draw', e); } }
+    // #60 fix 1 (fillClear precedence): a spec-carried fill is NEVER
+    // trampled — fillClear only clears when no fill was spec'd. The compile
+    // side already drops fillClear when a fill binding exists (applyLiterals);
+    // this runtime guard makes the emitted script safe even for hand-fed
+    // specs carrying both.
+    if (li.fillClear && !spec.fill) node.fills = [];
+    else if (li.fillColor) node.fills = [{ type: 'SOLID', color: { r: li.fillColor.r, g: li.fillColor.g, b: li.fillColor.b }, opacity: li.fillColor.a === undefined ? 1 : li.fillColor.a }];
+    if (li.radiusCorners) {
+      const rc = li.radiusCorners;
+      if (rc.tl !== undefined) node.topLeftRadius = rc.tl;
+      if (rc.tr !== undefined) node.topRightRadius = rc.tr;
+      if (rc.bl !== undefined) node.bottomLeftRadius = rc.bl;
+      if (rc.br !== undefined) node.bottomRightRadius = rc.br;
+    }
+    if (li.strokeSides) {
+      const sw = li.strokeSides;
+      // ELLIPSE/LINE expose strokeWeight only — per-side props throw
+      // "Cannot add property strokeTopWeight, object is not extensible"
+      // (Tailwind ToggleSwitch thumb live finding, Wave B.1).
+      if ('strokeTopWeight' in node) {
+        if (sw.top !== undefined) node.strokeTopWeight = sw.top;
+        if (sw.right !== undefined) node.strokeRightWeight = sw.right;
+        if (sw.bottom !== undefined) node.strokeBottomWeight = sw.bottom;
+        if (sw.left !== undefined) node.strokeLeftWeight = sw.left;
+      } else {
+        const w = sw.top !== undefined ? sw.top : (sw.right !== undefined ? sw.right : (sw.bottom !== undefined ? sw.bottom : sw.left));
+        if (w !== undefined) node.strokeWeight = w;
+      }
+    }
+    if (li.width !== undefined || li.height !== undefined) {
+      node.resize(li.width !== undefined ? li.width : node.width, li.height !== undefined ? li.height : node.height);
+      // GRID's primary axis is HORIZONTAL (GP1b: primaryAxisSizingMode='AUTO'
+      // reads back as layoutSizingHorizontal 'HUG'), like a HORIZONTAL frame.
+      const gm = (spec.layout || { mode: 'HORIZONTAL' }).mode;
+      const horizontalIsPrimary = gm === 'HORIZONTAL' || gm === 'GRID';
+      if (li.width !== undefined) {
+        if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED'; else node.counterAxisSizingMode = 'FIXED';
+      }
+      if (li.height !== undefined) {
+        if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED'; else node.primaryAxisSizingMode = 'FIXED';
+      }
     }
   }
 }
@@ -20785,7 +21256,7 @@ const COMPONENTS = [
           "bindings": {
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/shared/size-0",
-            "itemSpacing": "imported/shared/size-4"
+            "itemSpacing": "spacing-1"
           },
           "fixedWidth": {
             "px": 320,
@@ -20872,6 +21343,7 @@ const COMPONENTS = [
                             "value": 20.0004,
                             "unit": "PIXELS"
                           },
+                          "fontFamily": "Figtree",
                           "fontSizeVar": "imported/text-input/part-1-0-0/font-size",
                           "lineHeightVar": "imported/text-input/part-1-0-0/line-height",
                           "textFill": "imported/text-input/part-1-0-0/placeholder-color",
@@ -20905,7 +21377,7 @@ const COMPONENTS = [
           "bindings": {
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/shared/size-0",
-            "itemSpacing": "imported/shared/size-4"
+            "itemSpacing": "spacing-1"
           },
           "fixedWidth": {
             "px": 320,
@@ -20992,6 +21464,7 @@ const COMPONENTS = [
                             "value": 20.0004,
                             "unit": "PIXELS"
                           },
+                          "fontFamily": "Figtree",
                           "fontSizeVar": "imported/text-input/part-1-0-0/font-size",
                           "lineHeightVar": "imported/text-input/part-1-0-0/line-height",
                           "textFill": "imported/text-input/part-1-0-0/placeholder-color",
@@ -21025,7 +21498,7 @@ const COMPONENTS = [
           "bindings": {
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/shared/size-0",
-            "itemSpacing": "imported/shared/size-4"
+            "itemSpacing": "spacing-1"
           },
           "fixedWidth": {
             "px": 320,
@@ -21112,6 +21585,7 @@ const COMPONENTS = [
                             "value": 20.0004,
                             "unit": "PIXELS"
                           },
+                          "fontFamily": "Figtree",
                           "fontSizeVar": "imported/text-input/part-1-0-0/font-size",
                           "lineHeightVar": "imported/text-input/part-1-0-0/line-height",
                           "textFill": "imported/text-input/part-1-0-0/placeholder-color",
@@ -21145,7 +21619,7 @@ const COMPONENTS = [
           "bindings": {
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/shared/size-0",
-            "itemSpacing": "imported/shared/size-4"
+            "itemSpacing": "spacing-1"
           },
           "fixedWidth": {
             "px": 320,
@@ -21232,6 +21706,7 @@ const COMPONENTS = [
                             "value": 20.0004,
                             "unit": "PIXELS"
                           },
+                          "fontFamily": "Figtree",
                           "fontSizeVar": "imported/text-input/part-1-0-0/font-size",
                           "lineHeightVar": "imported/text-input/part-1-0-0/line-height",
                           "textFill": "imported/text-input/part-1-0-0/placeholder-color",
@@ -21265,7 +21740,7 @@ const COMPONENTS = [
           "bindings": {
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/shared/size-0",
-            "itemSpacing": "imported/shared/size-4"
+            "itemSpacing": "spacing-1"
           },
           "fixedWidth": {
             "px": 320,
@@ -21352,6 +21827,7 @@ const COMPONENTS = [
                             "value": 20.0004,
                             "unit": "PIXELS"
                           },
+                          "fontFamily": "Figtree",
                           "fontSizeVar": "imported/text-input/part-1-0-0/font-size",
                           "lineHeightVar": "imported/text-input/part-1-0-0/line-height",
                           "textFill": "imported/text-input/part-1-0-0/placeholder-color",
@@ -21385,7 +21861,7 @@ const COMPONENTS = [
           "bindings": {
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/shared/size-0",
-            "itemSpacing": "imported/shared/size-4"
+            "itemSpacing": "spacing-1"
           },
           "fixedWidth": {
             "px": 320,
@@ -21472,6 +21948,7 @@ const COMPONENTS = [
                             "value": 20.0004,
                             "unit": "PIXELS"
                           },
+                          "fontFamily": "Figtree",
                           "fontSizeVar": "imported/text-input/part-1-0-0/font-size",
                           "lineHeightVar": "imported/text-input/part-1-0-0/line-height",
                           "textFill": "imported/text-input/part-1-0-0/placeholder-color",
@@ -21505,7 +21982,7 @@ const COMPONENTS = [
           "bindings": {
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/shared/size-0",
-            "itemSpacing": "imported/shared/size-4"
+            "itemSpacing": "spacing-1"
           },
           "fixedWidth": {
             "px": 320,
@@ -21592,6 +22069,7 @@ const COMPONENTS = [
                             "value": 20.0004,
                             "unit": "PIXELS"
                           },
+                          "fontFamily": "Figtree",
                           "fontSizeVar": "imported/text-input/part-1-0-0/font-size",
                           "lineHeightVar": "imported/text-input/part-1-0-0/line-height",
                           "textFill": "imported/text-input/part-1-0-0/placeholder-color",
@@ -21625,7 +22103,7 @@ const COMPONENTS = [
           "bindings": {
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/shared/size-0",
-            "itemSpacing": "imported/shared/size-4"
+            "itemSpacing": "spacing-1"
           },
           "fixedWidth": {
             "px": 320,
@@ -21712,6 +22190,7 @@ const COMPONENTS = [
                             "value": 20.0004,
                             "unit": "PIXELS"
                           },
+                          "fontFamily": "Figtree",
                           "fontSizeVar": "imported/text-input/part-1-0-0/font-size",
                           "lineHeightVar": "imported/text-input/part-1-0-0/line-height",
                           "textFill": "imported/text-input/part-1-0-0/placeholder-color",
@@ -21745,7 +22224,7 @@ const COMPONENTS = [
           "bindings": {
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/shared/size-0",
-            "itemSpacing": "imported/shared/size-4"
+            "itemSpacing": "spacing-1"
           },
           "fixedWidth": {
             "px": 320,
@@ -21832,6 +22311,7 @@ const COMPONENTS = [
                             "value": 20.0004,
                             "unit": "PIXELS"
                           },
+                          "fontFamily": "Figtree",
                           "fontSizeVar": "imported/text-input/part-1-0-0/font-size",
                           "lineHeightVar": "imported/text-input/part-1-0-0/line-height",
                           "textFill": "imported/text-input/part-1-0-0/placeholder-color",
@@ -23798,11 +24278,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -23828,6 +24308,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -23847,11 +24328,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -23877,6 +24358,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -23896,11 +24378,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -23926,6 +24408,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -23945,11 +24428,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -23975,6 +24458,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -23994,11 +24478,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -24024,6 +24508,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -24043,11 +24528,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -24073,6 +24558,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -24092,11 +24578,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -24122,6 +24608,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -24141,11 +24628,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -24171,6 +24658,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -24190,11 +24678,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -24220,6 +24708,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -24239,11 +24728,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -24269,6 +24758,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -24288,11 +24778,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -24318,6 +24808,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -24337,11 +24828,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -24367,6 +24858,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -24386,11 +24878,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -24416,6 +24908,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -24435,11 +24928,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -24465,6 +24958,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -24484,11 +24978,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -24514,6 +25008,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -24533,11 +25028,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -24563,6 +25058,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -24582,11 +25078,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -24612,6 +25108,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -24631,11 +25128,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -24661,6 +25158,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -24680,11 +25178,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -24710,6 +25208,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -24729,11 +25228,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -24759,6 +25258,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -24778,11 +25278,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -24808,6 +25308,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -24827,11 +25328,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -24857,6 +25358,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -24876,11 +25378,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -24906,6 +25408,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -24925,11 +25428,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -24955,6 +25458,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -24974,11 +25478,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -25004,6 +25508,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -25023,11 +25528,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -25053,6 +25558,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -25072,11 +25578,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -25102,6 +25608,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -25121,11 +25628,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -25151,6 +25658,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -25170,11 +25678,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -25200,6 +25708,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -25219,11 +25728,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -25249,6 +25758,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -25268,11 +25778,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -25298,6 +25808,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -25317,11 +25828,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -25347,6 +25858,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -25366,11 +25878,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -25396,6 +25908,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }

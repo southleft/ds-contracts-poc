@@ -35,6 +35,7 @@
 .root-small {
   display: inline-flex;
   flex-shrink: 0;
+  transform: rotate(90deg);
 }
 
 .root-large svg {
@@ -45,4 +46,5 @@
 .root-large {
   display: inline-flex;
   flex-shrink: 0;
+  transform: rotate(90deg);
 }

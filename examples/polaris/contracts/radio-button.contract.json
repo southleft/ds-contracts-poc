@@ -420,6 +420,25 @@
                       "value": "{imported.radio-button.backdrop.border-top-color-state-hover.{checked}}",
                       "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
                     }
+                  ],
+                  "literalsByProp": [
+                    {
+                      "prop": "checked",
+                      "map": {
+                        "unchecked": {
+                          "border-top-width": "1px",
+                          "border-right-width": "1px",
+                          "border-bottom-width": "1px",
+                          "border-left-width": "1px"
+                        },
+                        "checked": {
+                          "border-top-width": "1px",
+                          "border-right-width": "1px",
+                          "border-bottom-width": "1px",
+                          "border-left-width": "1px"
+                        }
+                      }
+                    }
                   ]
                 },
                 "backdrop-before": {

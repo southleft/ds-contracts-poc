@@ -34,11 +34,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -64,6 +64,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -83,11 +84,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -113,6 +114,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -132,11 +134,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -162,6 +164,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -181,11 +184,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -211,6 +214,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -230,11 +234,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -260,6 +264,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -279,11 +284,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -309,6 +314,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -328,11 +334,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -358,6 +364,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -377,11 +384,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -407,6 +414,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -426,11 +434,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -456,6 +464,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -475,11 +484,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -505,6 +514,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -524,11 +534,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -554,6 +564,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -573,11 +584,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -603,6 +614,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -622,11 +634,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -652,6 +664,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -671,11 +684,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -701,6 +714,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -720,11 +734,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -750,6 +764,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -769,11 +784,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -799,6 +814,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -818,11 +834,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -848,6 +864,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -867,11 +884,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -897,6 +914,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -916,11 +934,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -946,6 +964,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -965,11 +984,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -995,6 +1014,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -1014,11 +1034,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -1044,6 +1064,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -1063,11 +1084,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -1093,6 +1114,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -1112,11 +1134,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -1142,6 +1164,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -1161,11 +1184,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -1191,6 +1214,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -1210,11 +1234,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -1240,6 +1264,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -1259,11 +1284,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -1289,6 +1314,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -1308,11 +1334,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -1338,6 +1364,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -1357,11 +1384,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -1387,6 +1414,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -1406,11 +1434,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -1436,6 +1464,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -1455,11 +1484,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -1485,6 +1514,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -1504,11 +1534,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -1534,6 +1564,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -1553,11 +1584,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -1583,6 +1614,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }
@@ -1602,11 +1634,11 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "bottomLeftRadius": "imported/shared/size-6",
-            "bottomRightRadius": "imported/shared/size-6",
-            "topLeftRadius": "imported/shared/size-6",
-            "topRightRadius": "imported/shared/size-6",
-            "itemSpacing": "imported/token/root/column-gap",
+            "bottomLeftRadius": "radius-full",
+            "bottomRightRadius": "radius-full",
+            "topLeftRadius": "radius-full",
+            "topRightRadius": "radius-full",
+            "itemSpacing": "spacing-1",
             "paddingLeft": "imported/token/root/padding-left",
             "paddingRight": "imported/token/root/padding-right"
           },
@@ -1632,6 +1664,7 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "textTruncation": true,
               "contentProp": "Label"
             }

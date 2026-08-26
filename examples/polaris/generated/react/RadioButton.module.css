@@ -183,6 +183,20 @@
   border-top-color: var(--imported-radio-button-backdrop-border-top-color-unchecked);
 }
 
+.checked-unchecked .backdrop {
+  border-top-width: 1px;
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+}
+
+.checked-checked .backdrop {
+  border-top-width: 1px;
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+}
+
 .root:disabled .backdrop {
   border-bottom-style: none;
   border-left-style: none;

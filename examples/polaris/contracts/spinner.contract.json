@@ -79,7 +79,10 @@
             "prop": "size",
             "equals": "small"
           },
-          "description": "Per-value svg content promoted from the computed floor: the glyph drawn when size=small."
+          "description": "Per-value svg content promoted from the computed floor: the glyph drawn when size=small.",
+          "declared": {
+            "transform": "rotate(90deg)"
+          }
         },
         "root-large": {
           "icon": {
@@ -90,7 +93,10 @@
             "prop": "size",
             "equals": "large"
           },
-          "description": "Per-value svg content promoted from the computed floor: the glyph drawn when size=large."
+          "description": "Per-value svg content promoted from the computed floor: the glyph drawn when size=large.",
+          "declared": {
+            "transform": "rotate(90deg)"
+          }
         }
       },
       "tokens": {

@@ -130,7 +130,10 @@ const COMPONENTS = [
                       "bindings": {
                         "strokeBottomWeight": "imported/shared/size-1",
                         "paddingLeft": "imported/shared/size-16",
-                        "paddingRight": "imported/shared/size-16"
+                        "paddingRight": "imported/shared/size-16",
+                        "strokeLeftWeight": "imported/shared/size-0",
+                        "strokeRightWeight": "imported/shared/size-0",
+                        "strokeTopWeight": "imported/shared/size-0"
                       },
                       "fixedHeight": {
                         "px": 24,
@@ -279,7 +282,10 @@ const COMPONENTS = [
                       "bindings": {
                         "strokeBottomWeight": "imported/shared/size-1",
                         "paddingLeft": "imported/shared/size-16",
-                        "paddingRight": "imported/shared/size-16"
+                        "paddingRight": "imported/shared/size-16",
+                        "strokeLeftWeight": "imported/shared/size-0",
+                        "strokeRightWeight": "imported/shared/size-0",
+                        "strokeTopWeight": "imported/shared/size-0"
                       },
                       "fixedHeight": {
                         "px": 32,
@@ -428,7 +434,10 @@ const COMPONENTS = [
                       "bindings": {
                         "strokeBottomWeight": "imported/shared/size-1",
                         "paddingLeft": "imported/shared/size-16",
-                        "paddingRight": "imported/shared/size-16"
+                        "paddingRight": "imported/shared/size-16",
+                        "strokeLeftWeight": "imported/shared/size-0",
+                        "strokeRightWeight": "imported/shared/size-0",
+                        "strokeTopWeight": "imported/shared/size-0"
                       },
                       "fixedHeight": {
                         "px": 40,
@@ -577,7 +586,10 @@ const COMPONENTS = [
                       "bindings": {
                         "strokeBottomWeight": "imported/shared/size-1",
                         "paddingLeft": "imported/shared/size-16",
-                        "paddingRight": "imported/shared/size-16"
+                        "paddingRight": "imported/shared/size-16",
+                        "strokeLeftWeight": "imported/shared/size-0",
+                        "strokeRightWeight": "imported/shared/size-0",
+                        "strokeTopWeight": "imported/shared/size-0"
                       },
                       "fixedHeight": {
                         "px": 48,
@@ -734,7 +746,10 @@ const COMPONENTS = [
                       "bindings": {
                         "strokeBottomWeight": "imported/shared/size-1",
                         "paddingLeft": "imported/shared/size-16",
-                        "paddingRight": "imported/shared/size-16"
+                        "paddingRight": "imported/shared/size-16",
+                        "strokeLeftWeight": "imported/shared/size-0",
+                        "strokeRightWeight": "imported/shared/size-0",
+                        "strokeTopWeight": "imported/shared/size-0"
                       },
                       "fixedHeight": {
                         "px": 24,
@@ -883,7 +898,10 @@ const COMPONENTS = [
                       "bindings": {
                         "strokeBottomWeight": "imported/shared/size-1",
                         "paddingLeft": "imported/shared/size-16",
-                        "paddingRight": "imported/shared/size-16"
+                        "paddingRight": "imported/shared/size-16",
+                        "strokeLeftWeight": "imported/shared/size-0",
+                        "strokeRightWeight": "imported/shared/size-0",
+                        "strokeTopWeight": "imported/shared/size-0"
                       },
                       "fixedHeight": {
                         "px": 32,
@@ -1032,7 +1050,10 @@ const COMPONENTS = [
                       "bindings": {
                         "strokeBottomWeight": "imported/shared/size-1",
                         "paddingLeft": "imported/shared/size-16",
-                        "paddingRight": "imported/shared/size-16"
+                        "paddingRight": "imported/shared/size-16",
+                        "strokeLeftWeight": "imported/shared/size-0",
+                        "strokeRightWeight": "imported/shared/size-0",
+                        "strokeTopWeight": "imported/shared/size-0"
                       },
                       "fixedHeight": {
                         "px": 40,
@@ -1181,7 +1202,10 @@ const COMPONENTS = [
                       "bindings": {
                         "strokeBottomWeight": "imported/shared/size-1",
                         "paddingLeft": "imported/shared/size-16",
-                        "paddingRight": "imported/shared/size-16"
+                        "paddingRight": "imported/shared/size-16",
+                        "strokeLeftWeight": "imported/shared/size-0",
+                        "strokeRightWeight": "imported/shared/size-0",
+                        "strokeTopWeight": "imported/shared/size-0"
                       },
                       "fixedHeight": {
                         "px": 48,

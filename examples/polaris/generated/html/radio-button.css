@@ -150,6 +150,20 @@
   outline-style: solid;
 }
 
+.radio-button--checked-unchecked .radio-button__backdrop {
+  border-top-width: 1px;
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+}
+
+.radio-button--checked-checked .radio-button__backdrop {
+  border-top-width: 1px;
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+}
+
 .radio-button--checked-checked .radio-button__backdrop {
   background-color: var(--imported-radio-button-backdrop-background-color-checked);
   border-bottom-color: var(--imported-radio-button-backdrop-border-bottom-color-checked);

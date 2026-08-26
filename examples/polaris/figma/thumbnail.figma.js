@@ -66,7 +66,11 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "bindings": {
-                "minWidth": "imported/shared/size-0"
+                "minWidth": "imported/shared/size-0",
+                "topLeftRadius": "p/border-radius-200",
+                "topRightRadius": "p/border-radius-200",
+                "bottomLeftRadius": "p/border-radius-200",
+                "bottomRightRadius": "p/border-radius-200"
               },
               "fixedHeight": {
                 "px": 60,
@@ -130,7 +134,11 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "bindings": {
-                "minWidth": "imported/shared/size-0"
+                "minWidth": "imported/shared/size-0",
+                "topLeftRadius": "p/border-radius-200",
+                "topRightRadius": "p/border-radius-200",
+                "bottomLeftRadius": "p/border-radius-200",
+                "bottomRightRadius": "p/border-radius-200"
               },
               "fixedHeight": {
                 "px": 24,
@@ -194,7 +202,11 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "bindings": {
-                "minWidth": "imported/shared/size-0"
+                "minWidth": "imported/shared/size-0",
+                "topLeftRadius": "p/border-radius-200",
+                "topRightRadius": "p/border-radius-200",
+                "bottomLeftRadius": "p/border-radius-200",
+                "bottomRightRadius": "p/border-radius-200"
               },
               "fixedHeight": {
                 "px": 40,
@@ -258,7 +270,11 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "bindings": {
-                "minWidth": "imported/shared/size-0"
+                "minWidth": "imported/shared/size-0",
+                "topLeftRadius": "p/border-radius-200",
+                "topRightRadius": "p/border-radius-200",
+                "bottomLeftRadius": "p/border-radius-200",
+                "bottomRightRadius": "p/border-radius-200"
               },
               "fixedHeight": {
                 "px": 80,

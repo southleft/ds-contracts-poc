@@ -9,6 +9,7 @@
   align-items: center;
   border: 0;
   color: var(--p-color-text);
+  width: var(--imported-text-field-connected-width-off-off);
   display: block;
 }
 
@@ -92,6 +93,7 @@
   min-width: var(--imported-shared-size-0);
   right: var(--imported-shared-size-0);
   top: var(--imported-shared-size-0);
+  width: var(--imported-text-field-connected-width-off-off);
   position: relative;
 }
 
@@ -370,6 +372,28 @@
 
 .text-field:focus-visible .text-field__backdrop {
   outline-style: solid;
+}
+
+.text-field--variant-inherit .text-field__backdrop {
+  border-top-width: 1px;
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  border-top-color: rgba(138, 138, 138, 1);
+  border-right-color: rgba(138, 138, 138, 1);
+  border-bottom-color: rgba(138, 138, 138, 1);
+  border-left-color: rgba(138, 138, 138, 1);
+  border-top-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
+}
+
+.text-field--variant-borderless .text-field__backdrop {
+  border-top-width: 0px;
+  border-right-width: 0px;
+  border-bottom-width: 0px;
+  border-left-width: 0px;
 }
 
 .text-field--variant-borderless .text-field__backdrop {

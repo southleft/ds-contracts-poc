@@ -45,7 +45,7 @@ const COMPONENTS = [
           "bindings": {
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/shared/size-0",
-            "itemSpacing": "imported/shared/size-4"
+            "itemSpacing": "spacing-1"
           },
           "fixedWidth": {
             "px": 320,
@@ -132,6 +132,7 @@ const COMPONENTS = [
                             "value": 20.0004,
                             "unit": "PIXELS"
                           },
+                          "fontFamily": "Figtree",
                           "fontSizeVar": "imported/text-input/part-1-0-0/font-size",
                           "lineHeightVar": "imported/text-input/part-1-0-0/line-height",
                           "textFill": "imported/text-input/part-1-0-0/placeholder-color",
@@ -165,7 +166,7 @@ const COMPONENTS = [
           "bindings": {
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/shared/size-0",
-            "itemSpacing": "imported/shared/size-4"
+            "itemSpacing": "spacing-1"
           },
           "fixedWidth": {
             "px": 320,
@@ -252,6 +253,7 @@ const COMPONENTS = [
                             "value": 20.0004,
                             "unit": "PIXELS"
                           },
+                          "fontFamily": "Figtree",
                           "fontSizeVar": "imported/text-input/part-1-0-0/font-size",
                           "lineHeightVar": "imported/text-input/part-1-0-0/line-height",
                           "textFill": "imported/text-input/part-1-0-0/placeholder-color",
@@ -285,7 +287,7 @@ const COMPONENTS = [
           "bindings": {
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/shared/size-0",
-            "itemSpacing": "imported/shared/size-4"
+            "itemSpacing": "spacing-1"
           },
           "fixedWidth": {
             "px": 320,
@@ -372,6 +374,7 @@ const COMPONENTS = [
                             "value": 20.0004,
                             "unit": "PIXELS"
                           },
+                          "fontFamily": "Figtree",
                           "fontSizeVar": "imported/text-input/part-1-0-0/font-size",
                           "lineHeightVar": "imported/text-input/part-1-0-0/line-height",
                           "textFill": "imported/text-input/part-1-0-0/placeholder-color",
@@ -405,7 +408,7 @@ const COMPONENTS = [
           "bindings": {
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/shared/size-0",
-            "itemSpacing": "imported/shared/size-4"
+            "itemSpacing": "spacing-1"
           },
           "fixedWidth": {
             "px": 320,
@@ -492,6 +495,7 @@ const COMPONENTS = [
                             "value": 20.0004,
                             "unit": "PIXELS"
                           },
+                          "fontFamily": "Figtree",
                           "fontSizeVar": "imported/text-input/part-1-0-0/font-size",
                           "lineHeightVar": "imported/text-input/part-1-0-0/line-height",
                           "textFill": "imported/text-input/part-1-0-0/placeholder-color",
@@ -525,7 +529,7 @@ const COMPONENTS = [
           "bindings": {
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/shared/size-0",
-            "itemSpacing": "imported/shared/size-4"
+            "itemSpacing": "spacing-1"
           },
           "fixedWidth": {
             "px": 320,
@@ -612,6 +616,7 @@ const COMPONENTS = [
                             "value": 20.0004,
                             "unit": "PIXELS"
                           },
+                          "fontFamily": "Figtree",
                           "fontSizeVar": "imported/text-input/part-1-0-0/font-size",
                           "lineHeightVar": "imported/text-input/part-1-0-0/line-height",
                           "textFill": "imported/text-input/part-1-0-0/placeholder-color",
@@ -645,7 +650,7 @@ const COMPONENTS = [
           "bindings": {
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/shared/size-0",
-            "itemSpacing": "imported/shared/size-4"
+            "itemSpacing": "spacing-1"
           },
           "fixedWidth": {
             "px": 320,
@@ -732,6 +737,7 @@ const COMPONENTS = [
                             "value": 20.0004,
                             "unit": "PIXELS"
                           },
+                          "fontFamily": "Figtree",
                           "fontSizeVar": "imported/text-input/part-1-0-0/font-size",
                           "lineHeightVar": "imported/text-input/part-1-0-0/line-height",
                           "textFill": "imported/text-input/part-1-0-0/placeholder-color",
@@ -765,7 +771,7 @@ const COMPONENTS = [
           "bindings": {
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/shared/size-0",
-            "itemSpacing": "imported/shared/size-4"
+            "itemSpacing": "spacing-1"
           },
           "fixedWidth": {
             "px": 320,
@@ -852,6 +858,7 @@ const COMPONENTS = [
                             "value": 20.0004,
                             "unit": "PIXELS"
                           },
+                          "fontFamily": "Figtree",
                           "fontSizeVar": "imported/text-input/part-1-0-0/font-size",
                           "lineHeightVar": "imported/text-input/part-1-0-0/line-height",
                           "textFill": "imported/text-input/part-1-0-0/placeholder-color",
@@ -885,7 +892,7 @@ const COMPONENTS = [
           "bindings": {
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/shared/size-0",
-            "itemSpacing": "imported/shared/size-4"
+            "itemSpacing": "spacing-1"
           },
           "fixedWidth": {
             "px": 320,
@@ -972,6 +979,7 @@ const COMPONENTS = [
                             "value": 20.0004,
                             "unit": "PIXELS"
                           },
+                          "fontFamily": "Figtree",
                           "fontSizeVar": "imported/text-input/part-1-0-0/font-size",
                           "lineHeightVar": "imported/text-input/part-1-0-0/line-height",
                           "textFill": "imported/text-input/part-1-0-0/placeholder-color",
@@ -1005,7 +1013,7 @@ const COMPONENTS = [
           "bindings": {
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/shared/size-0",
-            "itemSpacing": "imported/shared/size-4"
+            "itemSpacing": "spacing-1"
           },
           "fixedWidth": {
             "px": 320,
@@ -1092,6 +1100,7 @@ const COMPONENTS = [
                             "value": 20.0004,
                             "unit": "PIXELS"
                           },
+                          "fontFamily": "Figtree",
                           "fontSizeVar": "imported/text-input/part-1-0-0/font-size",
                           "lineHeightVar": "imported/text-input/part-1-0-0/line-height",
                           "textFill": "imported/text-input/part-1-0-0/placeholder-color",

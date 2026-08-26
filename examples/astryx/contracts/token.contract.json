@@ -201,7 +201,12 @@
         "line-height": "{imported.token.root.line-height}",
         "padding-left": "{imported.token.root.padding-left}",
         "padding-right": "{imported.token.root.padding-right}",
-        "row-gap": "{imported.token.root.row-gap}"
+        "row-gap": "{imported.token.root.row-gap}",
+        "background-color": "{color-background-gray}",
+        "color": "{color-text-primary}",
+        "border-radius": "{radius-full}",
+        "gap": "{spacing-1}",
+        "font-family": "{font-family-body}"
       },
       "tokensByProp": [
         {
