@@ -298,7 +298,9 @@
       "valueNotes": "flex-start | center | flex-end | stretch carry; baseline carries via the canvas layout-align-baseline path; other keywords fall to the code-only ledger",
       "evidence": "measured",
       "conformance": [
-        "flex-align-items-center"
+        "align-items-baseline",
+        "flex-align-items-center",
+        "layout-on-non-flex-container"
       ]
     },
     {

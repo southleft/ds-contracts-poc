@@ -92,7 +92,7 @@ You get eight token-bound components (Alert, Badge, Button, Card, HelperText,
 Kbd, Label, ToggleSwitch) and a `Tailwind` variable collection (the
 `--name`). The plugin's run report lists, under each set, every code-only
 fact the canvas could not carry — part, channel, value, reason
-(`codeOnlyFacts`, 56 on these eight) — the same list `figma bundle` prints
+(`codeOnlyFacts`, 57 on these eight) — the same list `figma bundle` prints
 on stdout.
 
 The eight contracts carry the live demo sets' identity under
