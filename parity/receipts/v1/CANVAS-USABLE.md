@@ -34,13 +34,27 @@ docs/31 §6: the figma-console bridge speaks MCP over stdio to its own client an
 
 **3/8 measured sets are usable on all four assertions** (162 of 170 census rows not yet probed).
 
-Gate: **RED — 5 failure(s)** at phase `probed`.
+Gate: **GREEN** at phase `probed`.
 
-- altitude/altitude.avatar: FROZEN-CHILDREN:Avatar (altitude.avatar) — 1/2 did not move or resize (avatar__badge)
-- altitude/altitude.chip: SET-ERRORS:Chip — variantGroupProperties refused: in get_variantGroupProperties: Component set has existing errors; the set carries 15 children whose variant property sets disagree (Variant=Secondary, Type=Squared, State=Default / Variant=Secondary, Type=Default / Variant=Info, Type=Default…), so no axis can be switched at all
-- altitude/altitude.heading: FROZEN-CHILDREN:Variant=Display Lg, Weight=Regular — 0/1 children moved or resized when the container grew 40×40 (label)
-- altitude/altitude.iconclose: LITERAL-CHANNELS:Size=Xs — 2/5 carrying channels are literals: /root-xs[0]/Vector[0]·width=3, /root-xs[0]/Vector[0]·height=3
-- altitude/altitude.link: DEAD-AXIS-VALUE:Link/State=Default≡Focus Visible — the instance renders identically (geometry, fills and text all equal)
+## The baseline — the burn-down queue, not a list of acceptable defects
+
+`parity/receipts/v1/usable-baseline.json` pins every named failure that reproduces on the sets probed today, keyed on library / id / assertion / code / subject / **detail**. The gate runs in the fast lane against that pin: a failure the file does not pin is a **NEW RED**; a pinned failure that stops reproducing is **FIXED** and refuses until it is re-recorded with its cause named (a fix nobody records silently un-freezes when the next one regresses); a pin whose set has left the census, or is no longer probed, is **STALE**. `detail` carries the discriminating payload — which children froze, which axis values collapsed, which channels are literal — so a pinned defect that **changes shape** fails as a new red rather than hiding inside an old pin. Re-record deliberately with `npm run canvas:usable:check -- --write-baseline` and say what moved.
+
+| library | id | assertion | code | subject | detail | reproduces | why it is pinned |
+|---|---|---|---|---|---|---|---|
+| altitude | `altitude.avatar` | reflow | `FROZEN-CHILDREN` | Avatar (altitude.avatar) | 1/2 frozen; avatar__badge | yes | `avatar__badge` is minted as a 0x0 FRAME with visible:false, so it neither draws nor participates in the parent's HORIZONTAL auto-layout: growing the component 40x40 moves `label` and leaves the badge exactly where it was. Separately named as "Avatar's avatar__badge child does not draw". Fixing the draw fixes this pin — do not re-record it until the badge has a non-zero box. |
+| altitude | `altitude.chip` | variants | `SET-ERRORS` | Chip | in get_variantGroupProperties: Component set has existing errors (15 children) | yes | The minted set carries 15 children on TWO different variant schemas — ten rows of `Variant=*, Type=*` beside five of `Variant=*, Type=Squared, State=*` — so Figma marks the component set as having errors and `variantGroupProperties` throws. The set cannot be instantiated against an axis at all, which makes it unusable however it looks. The census manifest declares 2 axes x 10 variants; the emitter put 15 children on the canvas. Fix is in the forward emitter's state-plane placement, not in the canvas. |
+| altitude | `altitude.heading` | reflow | `FROZEN-CHILDREN` | Variant=Display Lg, Weight=Regular | 0/1 responded; frozen label | yes | The variant is VERTICAL with counterAxisSizingMode FIXED and primaryAxisAlignItems MIN, and `label` is a 179-wide TEXT inside a 328-wide frame that is still 179 wide at 368. Nothing stretches, nothing re-aligns: the heading is a fixed box with a fixed word in it. Fixing this means the text part carries a fill/stretch sizing decision (the layout-family lowering rules, plan step 2), not a nudge to this baseline. |
+| altitude | `altitude.iconclose` | binding | `LITERAL-CHANNELS` | Size=Xs | 2/5; /root-xs[0]/Vector[0]·height=3, /root-xs[0]/Vector[0]·width=3 | yes | The reified SVG's `Vector` child carries literal width=3 and height=3 rather than variable-bound sizing. Every other carrying channel on this set is bound or inferred (3/5). This is the exact number the re-promote wave should move: diff the SITES in the receipt's literal-site table, not the percentage, or a round that merely relocated the literals will read as an improvement. |
+| altitude | `altitude.link` | variants | `DEAD-AXIS-VALUE` | Link/State | Default≡Focus Visible | yes | `State=Focus Visible` fingerprints identically to `State=Default` on geometry, fills AND text — the focus ring is not drawn, so the axis value exists but renders nothing. A designer switching to Focus Visible sees no change, which is the definition of a dead axis value. Separately named as "Link's Focus Visible column shows no focus ring". |
+
+## Literal channel sites — the number the re-promote wave must move
+
+The bound ratio alone cannot tell a round that IMPROVED the binding from one that merely changed which channels are literal. Every literal site is therefore named here, per set, path and channel and value — so the next round can diff sites, not just percentages. A set with no row here has every carrying channel bound or inferred.
+
+| library | id | bound / total | literal | sites |
+|---|---|---|---|---|
+| altitude | `altitude.iconclose` | 3/5 (60%) | 2 | `/root-xs[0]/Vector[0]·height=3`, `/root-xs[0]/Vector[0]·width=3` |
 
 ## Rows
 

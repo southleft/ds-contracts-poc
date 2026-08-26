@@ -82,20 +82,6 @@ const parseComposite = (body: string): string[] | null => {
  * deliberate act; the checks in this file make sure the entry stays true.
  */
 const EXCLUDED: Record<string, string> = {
-  "root:canvas:usable:check":
-    "The third census column — is the minted set USABLE (reflow, variant switching, token binding, no " +
-    "faked layout). It is RED on purpose right now: it has measured the eight `Census / altitude` sets " +
-    "and 5 of 8 fail on a named defect (avatar__badge is a 0×0 invisible frame that cannot re-lay; the " +
-    "Chip set carries 15 children whose variant property sets disagree so `variantGroupProperties` " +
-    "refuses; Heading's label neither moves nor fills when its container grows; IconClose's Vector " +
-    "geometry is literal; Link's `State=Focus Visible` renders identically to `Default`). Wiring a gate " +
-    "that is red by measurement into a PR lane would turn every unrelated PR red, so it is held here by " +
-    "name until those defects are fixed — the round that fixes them moves this entry into fast.yml. " +
-    "What IS in the lane meanwhile: `canvas:usable:self-test` (fast lane), which plants a red for each " +
-    "of the four assertions and proves each is caught, and `census:check --phase code`, which renders " +
-    "the usable cell for every row and refuses an unprobed row at `--phase full`. The measurement " +
-    "itself cannot run in CI at all: it needs the figma-console bridge against the scratch project, " +
-    "and a Node process cannot drive that bridge (docs/31 §6).",
   "root:sync:spine":
     "The live drift spine: needs the FIGMA_TOKEN secret + network (Figma REST) and, with --open-pr, an " +
     "authenticated gh — none of which belong in a PR gate, and its red means 'a drifted row has no " +

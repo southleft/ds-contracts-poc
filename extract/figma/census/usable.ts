@@ -59,6 +59,21 @@ import { REPO, type CensusManifest, type ManifestRow } from "./corpus.js";
 
 export const USABLE_DIR = "parity/receipts/v1/usable";
 export const USABLE_RECEIPT_PATH = "parity/receipts/v1/CANVAS-USABLE.md";
+export const USABLE_BASELINE_PATH = "parity/receipts/v1/usable-baseline.json";
+export const USABLE_BASELINE_MARKER =
+  "CANVAS-USABLE BASELINE — every named failure of the four usability assertions " +
+  "(reflow, variant switching, token binding, no faked layout) that reproduces on " +
+  "the sets probed today, pinned by library/id/assertion/code/subject/detail. A " +
+  "failure this file does not pin is a NEW RED and fails the gate; a pinned " +
+  "failure that stops reproducing is FIXED and must be re-recorded with its cause " +
+  "named, so a burn-down can never be banked silently; a pin whose set has left " +
+  "the census or is no longer probed is STALE. `detail` carries the discriminating " +
+  "payload — which children froze, which axis values collapsed, which channels are " +
+  "literal — so a pinned defect that CHANGES SHAPE fails as a new red rather than " +
+  "hiding inside an old pin. NOT a list of acceptable defects: it is the burn-down " +
+  "queue, written up in parity/receipts/v1/CANVAS-USABLE.md. Re-record deliberately " +
+  "with `npm run canvas:usable:check -- --write-baseline` and say what moved. " +
+  "Verified in the fast lane by `npm run canvas:usable:check`.";
 /** The ONLY writable Figma file. An observation from anywhere else is void. */
 export const SCRATCH_FILE_KEY = "byMp6lt0Ij9b2QbkDGFwBh";
 export const PROBE_VERSION = 1;
@@ -233,12 +248,48 @@ export function partNameOf(fact: LayoutFact): string {
 
 export type Verdict = "pass" | "fail" | "n/a" | "PENDING";
 
+export type Assertion = "reflow" | "variants" | "binding" | "fakeLayout";
+
+/**
+ * A named failure, in the shape the BASELINE pins it.
+ *
+ * `code` + `subject` + `detail` are the identity: `detail` carries the
+ * discriminating payload (which children froze, which axis values collapsed,
+ * which channels are literal), so a pinned failure that CHANGES SHAPE — a
+ * second child freezes, a third literal site appears — is a different key and
+ * fails as a NEW RED rather than hiding inside an old pin. `message` is the
+ * human line and is deliberately NOT part of the key: rewording a message must
+ * not silently re-key a defect.
+ */
+export interface UsableRed {
+  assertion: Assertion;
+  code: string;
+  subject: string;
+  detail: string;
+  message: string;
+}
+
+export const redKey = (
+  library: string,
+  id: string,
+  r: { assertion: string; code: string; subject: string; detail: string },
+): string =>
+  `${library}/${id}|${r.assertion}|${r.code}|${r.subject}|${r.detail}`;
+
+const mk = (
+  assertion: Assertion,
+  code: string,
+  subject: string,
+  detail: string,
+  message: string,
+): UsableRed => ({ assertion, code, subject, detail, message });
+
 export interface AssertionResult {
   verdict: Verdict;
   /** One line for the receipt cell. */
   summary: string;
-  /** Named failures — every one becomes a gate refusal. */
-  reds: string[];
+  /** Named failures — every one is baselineable and every one is a refusal. */
+  reds: UsableRed[];
 }
 
 export interface RowUsable {
@@ -249,8 +300,15 @@ export interface RowUsable {
   binding: AssertionResult;
   fakeLayout: AssertionResult;
   bindingRatio: string;
+  /** Named literal channel sites — the number the re-promote wave must move. */
+  literalSites: string[];
   restored: string;
-  failures: string[];
+  /** Named measurement failures that are NEVER baselineable: a void
+   *  observation, a wrong probe version, a canvas the probe did not restore.
+   *  These are the gate's own integrity and can only be fixed, never pinned. */
+  structural: string[];
+  /** Every assertion failure, flattened. Held against the baseline. */
+  reds: UsableRed[];
 }
 
 const PENDING = (why: string): AssertionResult => ({
@@ -262,14 +320,30 @@ const PENDING = (why: string): AssertionResult => ({
 /** 1 — REFLOW. */
 export function judgeReflow(o: UsableObservation): AssertionResult {
   const r = o.reflow;
-  const reds: string[] = [];
+  const reds: UsableRed[] = [];
   const who = o.variantNodeName ?? o.setName;
   if (r.error) {
-    reds.push(`REFLOW-UNMEASURED:${who} — ${r.error}`);
+    reds.push(
+      mk(
+        "reflow",
+        "REFLOW-UNMEASURED",
+        who,
+        r.error,
+        `REFLOW-UNMEASURED:${who} — ${r.error}`,
+      ),
+    );
     return { verdict: "fail", summary: `unmeasured (${r.error})`, reds };
   }
   if (r.resizeError) {
-    reds.push(`REFLOW-RESIZE-REFUSED:${who} — ${r.resizeError}`);
+    reds.push(
+      mk(
+        "reflow",
+        "REFLOW-RESIZE-REFUSED",
+        who,
+        r.resizeError,
+        `REFLOW-RESIZE-REFUSED:${who} — ${r.resizeError}`,
+      ),
+    );
     return {
       verdict: "fail",
       summary: `resize refused (${r.resizeError})`,
@@ -280,7 +354,13 @@ export function judgeReflow(o: UsableObservation): AssertionResult {
   const mode = r.layoutMode ?? "NONE";
   if (mode === "NONE" && childCount >= 2) {
     reds.push(
-      `NO-AUTOLAYOUT:${who} — layoutMode NONE with ${childCount} children; the set is a pile of frozen rectangles`,
+      mk(
+        "reflow",
+        "NO-AUTOLAYOUT",
+        who,
+        `${childCount} children`,
+        `NO-AUTOLAYOUT:${who} — layoutMode NONE with ${childCount} children; the set is a pile of frozen rectangles`,
+      ),
     );
     return {
       verdict: "fail",
@@ -289,8 +369,17 @@ export function judgeReflow(o: UsableObservation): AssertionResult {
     };
   }
   if (r.restoreError || r.restoredExact === false) {
+    const why =
+      r.restoreError ??
+      `restored to ${r.restoredTo?.w}×${r.restoredTo?.h}, wanted ${r.before?.w}×${r.before?.h}`;
     reds.push(
-      `REFLOW-NOT-RESTORED:${who} — ${r.restoreError ?? `restored to ${r.restoredTo?.w}×${r.restoredTo?.h}, wanted ${r.before?.w}×${r.before?.h}`}`,
+      mk(
+        "reflow",
+        "REFLOW-NOT-RESTORED",
+        who,
+        why,
+        `REFLOW-NOT-RESTORED:${who} — ${why}`,
+      ),
     );
   }
   if (childCount === 0) {
@@ -301,10 +390,16 @@ export function judgeReflow(o: UsableObservation): AssertionResult {
     };
   }
   const responded = r.responded ?? [];
-  const frozen = r.frozen ?? [];
+  const frozen = [...(r.frozen ?? [])].sort();
   if (responded.length === 0) {
     reds.push(
-      `FROZEN-CHILDREN:${who} — 0/${childCount} children moved or resized when the container grew 40×40 (${frozen.join(", ")})`,
+      mk(
+        "reflow",
+        "FROZEN-CHILDREN",
+        who,
+        `0/${childCount} responded; frozen ${frozen.join(", ")}`,
+        `FROZEN-CHILDREN:${who} — 0/${childCount} children moved or resized when the container grew 40×40 (${frozen.join(", ")})`,
+      ),
     );
     return {
       verdict: "fail",
@@ -324,7 +419,13 @@ export function judgeReflow(o: UsableObservation): AssertionResult {
       Math.abs(c.dh) > grew
     ) {
       reds.push(
-        `REFLOW-INCONSISTENT:${who}/${c.name} — moved (${c.dx},${c.dy}) resized (${c.dw},${c.dh}) for a +${r.resizedBy?.dw}×+${r.resizedBy?.dh} container growth`,
+        mk(
+          "reflow",
+          "REFLOW-INCONSISTENT",
+          `${who}/${c.name}`,
+          `moved (${c.dx},${c.dy}) resized (${c.dw},${c.dh})`,
+          `REFLOW-INCONSISTENT:${who}/${c.name} — moved (${c.dx},${c.dy}) resized (${c.dw},${c.dh}) for a +${r.resizedBy?.dw}×+${r.resizedBy?.dh} container growth`,
+        ),
       );
     }
   }
@@ -340,7 +441,13 @@ export function judgeReflow(o: UsableObservation): AssertionResult {
       : `${responded.length}/${childCount} re-laid (${detail})`;
   if (frozen.length > 0) {
     reds.push(
-      `FROZEN-CHILDREN:${who} — ${frozen.length}/${childCount} did not move or resize (${frozen.join(", ")})`,
+      mk(
+        "reflow",
+        "FROZEN-CHILDREN",
+        who,
+        `${frozen.length}/${childCount} frozen; ${frozen.join(", ")}`,
+        `FROZEN-CHILDREN:${who} — ${frozen.length}/${childCount} did not move or resize (${frozen.join(", ")})`,
+      ),
     );
     return { verdict: "fail", summary, reds };
   }
@@ -352,11 +459,17 @@ export function judgeVariants(
   o: UsableObservation,
   row: ManifestRow,
 ): AssertionResult {
-  const reds: string[] = [];
+  const reds: UsableRed[] = [];
   const who = o.setName;
   if (o.axesError) {
     reds.push(
-      `SET-ERRORS:${who} — variantGroupProperties refused: ${o.axesError}; the set carries ${o.variantChildCount} children whose variant property sets disagree (${o.variantChildNames.slice(0, 3).join(" / ")}…), so no axis can be switched at all`,
+      mk(
+        "variants",
+        "SET-ERRORS",
+        who,
+        `${o.axesError} (${o.variantChildCount} children)`,
+        `SET-ERRORS:${who} — variantGroupProperties refused: ${o.axesError}; the set carries ${o.variantChildCount} children whose variant property sets disagree (${o.variantChildNames.slice(0, 3).join(" / ")}…), so no axis can be switched at all`,
+      ),
     );
     return {
       verdict: "fail",
@@ -366,14 +479,27 @@ export function judgeVariants(
   }
   const v = o.variants;
   if (v.error || v.instantiable !== true) {
+    const why = v.error ?? "createInstance produced nothing";
     reds.push(
-      `NOT-INSTANTIABLE:${who} — ${v.error ?? "createInstance produced nothing"}`,
+      mk(
+        "variants",
+        "NOT-INSTANTIABLE",
+        who,
+        why,
+        `NOT-INSTANTIABLE:${who} — ${why}`,
+      ),
     );
     return { verdict: "fail", summary: `NOT INSTANTIABLE`, reds };
   }
   if (v.instanceRemoved !== true) {
     reds.push(
-      `PROBE-LEFT-INSTANCE:${who} — the throwaway instance ${v.instanceId} was not removed`,
+      mk(
+        "variants",
+        "PROBE-LEFT-INSTANCE",
+        who,
+        String(v.instanceId),
+        `PROBE-LEFT-INSTANCE:${who} — the throwaway instance ${v.instanceId} was not removed`,
+      ),
     );
   }
   const canvasAxes = new Map((o.axes ?? []).map((a) => [a.axis, a.values]));
@@ -389,7 +515,13 @@ export function judgeVariants(
         );
       } else {
         reds.push(
-          `AXIS-NOT-MINTED:${who}/${declared.figmaProperty} — the contract declares ${declared.values.length} values (${declared.values.join(", ")}) and the canvas set carries no such axis`,
+          mk(
+            "variants",
+            "AXIS-NOT-MINTED",
+            `${who}/${declared.figmaProperty}`,
+            declared.values.join(", "),
+            `AXIS-NOT-MINTED:${who}/${declared.figmaProperty} — the contract declares ${declared.values.length} values (${declared.values.join(", ")}) and the canvas set carries no such axis`,
+          ),
         );
       }
     }
@@ -397,7 +529,15 @@ export function judgeVariants(
   const axisSummaries: string[] = [];
   for (const a of v.axes ?? []) {
     for (const e of a.errors)
-      reds.push(`AXIS-SWITCH-REFUSED:${who}/${a.axis}=${e.value} — ${e.error}`);
+      reds.push(
+        mk(
+          "variants",
+          "AXIS-SWITCH-REFUSED",
+          `${who}/${a.axis}=${e.value}`,
+          e.error,
+          `AXIS-SWITCH-REFUSED:${who}/${a.axis}=${e.value} — ${e.error}`,
+        ),
+      );
     const seen = new Map<string, string>();
     const dead: string[] = [];
     for (const val of a.values) {
@@ -408,8 +548,15 @@ export function judgeVariants(
     }
     if (dead.length > 0) {
       const allDead = seen.size === 1 && a.values.length > 1;
+      const code = allDead ? "DEAD-AXIS" : "DEAD-AXIS-VALUE";
       reds.push(
-        `${allDead ? "DEAD-AXIS" : "DEAD-AXIS-VALUE"}:${who}/${a.axis}=${dead.join(", ")} — the instance renders identically (geometry, fills and text all equal)`,
+        mk(
+          "variants",
+          code,
+          `${who}/${a.axis}`,
+          dead.join(", "),
+          `${code}:${who}/${a.axis}=${dead.join(", ")} — the instance renders identically (geometry, fills and text all equal)`,
+        ),
       );
       axisSummaries.push(
         `${a.axis} ${seen.size}/${a.values.length} distinct — DEAD ${dead.join(", ")}`,
@@ -422,7 +569,7 @@ export function judgeVariants(
   }
   if ((v.axes ?? []).length === 0 && reds.length === 0) {
     return {
-      verdict: named.length > 0 ? "n/a" : "n/a",
+      verdict: "n/a",
       summary: `no axes on canvas${named.length > 0 ? ` — ${named.join("; ")}` : " (single-variant component)"}`,
       reds,
     };
@@ -436,14 +583,21 @@ export function judgeVariants(
 /** 3 — TOKEN BINDING. */
 export function judgeBinding(o: UsableObservation): AssertionResult {
   const b = o.binding;
-  const reds: string[] = [];
+  const reds: UsableRed[] = [];
   const who = o.variantNodeName ?? o.setName;
   if (b.total === 0)
     return { verdict: "n/a", summary: "no carrying channels", reds };
   const held = b.bound + b.inferred;
+  const sites = [...b.literalSites].sort().join(", ");
   if (held === 0) {
     reds.push(
-      `ALL-LITERAL:${who} — ${b.literal}/${b.total} carrying channels are literals, not one is bound to a variable`,
+      mk(
+        "binding",
+        "ALL-LITERAL",
+        who,
+        `${b.literal}/${b.total}; ${sites}`,
+        `ALL-LITERAL:${who} — ${b.literal}/${b.total} carrying channels are literals, not one is bound to a variable: ${sites}${b.literalSitesTruncated > 0 ? ` (+${b.literalSitesTruncated} more)` : ""}`,
+      ),
     );
     return {
       verdict: "fail",
@@ -453,7 +607,13 @@ export function judgeBinding(o: UsableObservation): AssertionResult {
   }
   if (b.literal > 0) {
     reds.push(
-      `LITERAL-CHANNELS:${who} — ${b.literal}/${b.total} carrying channels are literals: ${b.literalSites.join(", ")}${b.literalSitesTruncated > 0 ? ` (+${b.literalSitesTruncated} more)` : ""}`,
+      mk(
+        "binding",
+        "LITERAL-CHANNELS",
+        who,
+        `${b.literal}/${b.total}; ${sites}`,
+        `LITERAL-CHANNELS:${who} — ${b.literal}/${b.total} carrying channels are literals: ${sites}${b.literalSitesTruncated > 0 ? ` (+${b.literalSitesTruncated} more)` : ""}`,
+      ),
     );
     return {
       verdict: "fail",
@@ -473,11 +633,17 @@ export function judgeFakeLayout(
   o: UsableObservation,
   contract: Record<string, unknown> | null,
 ): AssertionResult {
-  const reds: string[] = [];
+  const reds: UsableRed[] = [];
   const who = o.variantNodeName ?? o.setName;
   if (!contract) {
     reds.push(
-      `CONTRACT-UNREADABLE:${who} — assertion 4 cannot tell a genuine position:absolute from a faked layout without the contract`,
+      mk(
+        "fakeLayout",
+        "CONTRACT-UNREADABLE",
+        who,
+        "no contract",
+        `CONTRACT-UNREADABLE:${who} — assertion 4 cannot tell a genuine position:absolute from a faked layout without the contract`,
+      ),
     );
     return { verdict: "fail", summary: "contract unreadable", reds };
   }
@@ -497,11 +663,23 @@ export function judgeFakeLayout(
     if (src === true) legit.push(`${f.path} (source position:absolute)`);
     else if (src === null)
       reds.push(
-        `UNRESOLVED-PART:${who}${f.path} — layoutPositioning ABSOLUTE and no part named \`${f.name}\` in the contract anatomy, so the gate cannot prove the source was out of flow`,
+        mk(
+          "fakeLayout",
+          "UNRESOLVED-PART",
+          `${who}${f.path}`,
+          `ABSOLUTE, no part \`${f.name}\``,
+          `UNRESOLVED-PART:${who}${f.path} — layoutPositioning ABSOLUTE and no part named \`${f.name}\` in the contract anatomy, so the gate cannot prove the source was out of flow`,
+        ),
       );
     else
       reds.push(
-        `FAKE-ABSOLUTE:${who}${f.path} — layoutPositioning ABSOLUTE but the source part \`${f.name}\` is in flow`,
+        mk(
+          "fakeLayout",
+          "FAKE-ABSOLUTE",
+          `${who}${f.path}`,
+          `source part \`${f.name}\` is in flow`,
+          `FAKE-ABSOLUTE:${who}${f.path} — layoutPositioning ABSOLUTE but the source part \`${f.name}\` is in flow`,
+        ),
       );
   }
   for (const f of stacks) {
@@ -518,11 +696,23 @@ export function judgeFakeLayout(
       legit.push(`${f.path} (${f.childCount} out-of-flow children)`);
     else if (src === null)
       reds.push(
-        `UNRESOLVED-PART:${who}${f.path} — layoutMode NONE over ${f.childCount} children and no part named \`${f.name}\` in the contract anatomy`,
+        mk(
+          "fakeLayout",
+          "UNRESOLVED-PART",
+          `${who}${f.path}`,
+          `layoutMode NONE over ${f.childCount}, no part \`${f.name}\``,
+          `UNRESOLVED-PART:${who}${f.path} — layoutMode NONE over ${f.childCount} children and no part named \`${f.name}\` in the contract anatomy`,
+        ),
       );
     else
       reds.push(
-        `FAKE-STACK:${who}${f.path} — layoutMode NONE over ${f.childCount} children whose source is in flow; the row is faked with coordinates`,
+        mk(
+          "fakeLayout",
+          "FAKE-STACK",
+          `${who}${f.path}`,
+          `layoutMode NONE over ${f.childCount} in-flow children`,
+          `FAKE-STACK:${who}${f.path} — layoutMode NONE over ${f.childCount} children whose source is in flow; the row is faked with coordinates`,
+        ),
       );
   }
   const summary =
@@ -552,8 +742,10 @@ export function judgeRow(row: ManifestRow, usableDir: string): RowUsable {
     binding: PENDING("PENDING"),
     fakeLayout: PENDING("PENDING"),
     bindingRatio: "—",
+    literalSites: [],
     restored: "—",
-    failures: [],
+    structural: [],
+    reds: [],
   };
   if (!existsSync(p)) return base;
 
@@ -561,7 +753,7 @@ export function judgeRow(row: ManifestRow, usableDir: string): RowUsable {
   try {
     o = JSON.parse(readFileSync(p, "utf8")) as UsableObservation;
   } catch (e) {
-    base.failures.push(
+    base.structural.push(
       `${row.library}/${row.id}: usable observation ${path.relative(REPO, p)} is not readable JSON — ${String(e)}`,
     );
     return base;
@@ -570,21 +762,22 @@ export function judgeRow(row: ManifestRow, usableDir: string): RowUsable {
   const who = `${row.library}/${row.id}`;
 
   // The observation must have been taken against the scratch file, at this
-  // probe version. Anything else is refused BY NAME, never quietly used.
+  // probe version, and must have left the canvas as it found it. These three
+  // are the gate's own integrity: they can never be pinned in a baseline.
   if (o.fileKey !== SCRATCH_FILE_KEY) {
-    base.failures.push(
+    base.structural.push(
       `${who}: usable observation was taken against file ${o.fileKey}, not the scratch project ${SCRATCH_FILE_KEY} — void`,
     );
     return base;
   }
   if (o.probeVersion !== PROBE_VERSION) {
-    base.failures.push(
+    base.structural.push(
       `${who}: usable observation carries probeVersion ${o.probeVersion}, the gate reads ${PROBE_VERSION} — re-probe`,
     );
     return base;
   }
   if (o.canvasRestored !== true) {
-    base.failures.push(
+    base.structural.push(
       `${who}: the probe did NOT leave the canvas byte-identical (before ${o.canvasBefore?.nodes} nodes / ${o.canvasBefore?.sig}, after ${o.canvasAfter?.nodes} / ${o.canvasAfter?.sig})`,
     );
   }
@@ -611,9 +804,104 @@ export function judgeRow(row: ManifestRow, usableDir: string): RowUsable {
     o.binding.total === 0
       ? "n/a"
       : `${held}/${o.binding.total} (${Math.round((held / o.binding.total) * 100)}%)`;
-  for (const a of [base.reflow, base.variants, base.binding, base.fakeLayout])
-    for (const r of a.reds) base.failures.push(`${who}: ${r}`);
+  base.literalSites = [...o.binding.literalSites].sort();
+  base.reds = [
+    ...base.reflow.reds,
+    ...base.variants.reds,
+    ...base.binding.reds,
+    ...base.fakeLayout.reds,
+  ];
   return base;
+}
+
+// ---------------------------------------------------------------------------
+// The baseline — the gate runs in the lane; only NEW failures go red
+// ---------------------------------------------------------------------------
+//
+// WHY A BASELINE AND NOT AN EXCLUSION. A gate nobody runs is a gate that rots:
+// it stops being evidence and nobody notices. So today's five measured
+// failures are FROZEN BY NAME and the gate runs in the fast lane, where a NEW
+// failure — or a pinned one that changes shape — goes red. The burn-down is a
+// queue, not a wall. And a fix cannot be banked silently either: a pin that
+// stops reproducing is FIXED and refuses until it is re-recorded, so the file
+// is forced to shrink deliberately rather than drift.
+
+export interface UsableBaselineRow {
+  library: string;
+  id: string;
+  assertion: string;
+  code: string;
+  subject: string;
+  detail: string;
+  /** Why it is pinned, and what would fix it. Not part of the key. */
+  why: string;
+}
+
+export interface UsableBaseline {
+  _marker: string;
+  recordedAt: string;
+  totals: { probed: number; clean: number; pinned: number };
+  rows: UsableBaselineRow[];
+}
+
+export interface BaselineJudgement {
+  /** Reds the baseline pins — reported, not failed. */
+  pinned: Set<string>;
+  /** NEW RED / FIXED / STALE — every one a gate failure. */
+  failures: string[];
+}
+
+export function compareBaseline(
+  rows: RowUsable[],
+  baseline: UsableBaselineRow[],
+): BaselineJudgement {
+  const failures: string[] = [];
+  const pinned = new Set<string>();
+  const actual = new Map<string, { row: RowUsable; red: UsableRed }>();
+  const probed = new Set<string>();
+  const known = new Set<string>();
+  for (const r of rows) {
+    known.add(`${r.row.library}/${r.row.id}`);
+    if (r.observation !== null) probed.add(`${r.row.library}/${r.row.id}`);
+    for (const red of r.reds)
+      actual.set(redKey(r.row.library, r.row.id, red), { row: r, red });
+  }
+  const pins = new Map<string, UsableBaselineRow>();
+  for (const b of baseline) {
+    const k = redKey(b.library, b.id, b);
+    if (pins.has(k))
+      failures.push(
+        `${b.library}/${b.id}: DUPLICATE PIN — ${b.code} on ${b.subject} is pinned twice (re-record with --write-baseline)`,
+      );
+    pins.set(k, b);
+  }
+  for (const [k, b] of pins) {
+    const who = `${b.library}/${b.id}`;
+    if (!known.has(who)) {
+      failures.push(
+        `${who}: STALE PIN — the baseline pins ${b.code} on a set that is no longer a census row (re-record with \`npm run canvas:usable:check -- --write-baseline\`)`,
+      );
+      continue;
+    }
+    if (!probed.has(who)) {
+      failures.push(
+        `${who}: STALE PIN — the baseline pins ${b.code} (${b.assertion}) but the set has no committed observation any more, so the pin cannot be checked (re-probe, or re-record with --write-baseline)`,
+      );
+      continue;
+    }
+    if (actual.has(k)) {
+      pinned.add(k);
+      continue;
+    }
+    failures.push(
+      `${who}: FIXED — the baseline pins ${b.code} on ${b.subject} (${b.assertion}: ${b.detail}) and it no longer reproduces. A fix nobody records silently un-freezes when the next one regresses: re-record with \`npm run canvas:usable:check -- --write-baseline\` and say what fixed it.`,
+    );
+  }
+  for (const [k, { row, red }] of actual) {
+    if (pins.has(k)) continue;
+    failures.push(`${row.row.library}/${row.row.id}: NEW RED — ${red.message}`);
+  }
+  return { pinned, failures };
 }
 
 // ---------------------------------------------------------------------------
@@ -636,6 +924,8 @@ export function renderUsableReceipt(
   rows: RowUsable[],
   phase: string,
   failures: string[],
+  baseline: UsableBaselineRow[],
+  pinned: Set<string>,
 ): string {
   const lines: string[] = [];
   const measured = rows.filter((r) => r.observation !== null);
@@ -711,7 +1001,7 @@ export function renderUsableReceipt(
   lines.push("");
   const clean = measured.filter(
     (r) =>
-      r.failures.length === 0 &&
+      r.structural.length === 0 &&
       [r.reflow, r.variants, r.binding, r.fakeLayout].every(
         (a) => a.verdict !== "fail",
       ),
@@ -727,6 +1017,50 @@ export function renderUsableReceipt(
     lines.push("");
     for (const f of failures) lines.push(`- ${esc(f)}`);
   }
+  lines.push("");
+  lines.push(
+    "## The baseline — the burn-down queue, not a list of acceptable defects",
+  );
+  lines.push("");
+  lines.push(
+    "`parity/receipts/v1/usable-baseline.json` pins every named failure that reproduces on the sets probed today, keyed on library / id / assertion / code / subject / **detail**. " +
+      "The gate runs in the fast lane against that pin: a failure the file does not pin is a **NEW RED**; a pinned failure that stops reproducing is **FIXED** and refuses until it is re-recorded with its cause named " +
+      "(a fix nobody records silently un-freezes when the next one regresses); a pin whose set has left the census, or is no longer probed, is **STALE**. " +
+      "`detail` carries the discriminating payload — which children froze, which axis values collapsed, which channels are literal — so a pinned defect that **changes shape** fails as a new red rather than hiding inside an old pin. " +
+      "Re-record deliberately with `npm run canvas:usable:check -- --write-baseline` and say what moved.",
+  );
+  lines.push("");
+  lines.push(
+    "| library | id | assertion | code | subject | detail | reproduces | why it is pinned |",
+  );
+  lines.push("|---|---|---|---|---|---|---|---|");
+  for (const b of baseline)
+    lines.push(
+      `| ${b.library} | \`${b.id}\` | ${b.assertion} | \`${b.code}\` | ${esc(b.subject)} | ${esc(b.detail)} | ${pinned.has(redKey(b.library, b.id, b)) ? "yes" : "**NO — re-record**"} | ${esc(b.why)} |`,
+    );
+  if (baseline.length === 0)
+    lines.push("| — | — | — | — | — | — | — | nothing pinned |");
+  lines.push("");
+  lines.push(
+    "## Literal channel sites — the number the re-promote wave must move",
+  );
+  lines.push("");
+  lines.push(
+    "The bound ratio alone cannot tell a round that IMPROVED the binding from one that merely changed which channels are literal. Every literal site is therefore named here, per set, " +
+      "path and channel and value — so the next round can diff sites, not just percentages. A set with no row here has every carrying channel bound or inferred.",
+  );
+  lines.push("");
+  lines.push("| library | id | bound / total | literal | sites |");
+  lines.push("|---|---|---|---|---|");
+  const withLiterals = measured.filter((r) => r.literalSites.length > 0);
+  for (const r of withLiterals)
+    lines.push(
+      `| ${r.row.library} | \`${r.row.id}\` | ${r.bindingRatio} | ${r.observation?.binding.literal ?? 0} | ${esc(r.literalSites.map((x) => `\`${x}\``).join(", "))}${(r.observation?.binding.literalSitesTruncated ?? 0) > 0 ? ` (+${r.observation?.binding.literalSitesTruncated} beyond the cap)` : ""} |`,
+    );
+  if (withLiterals.length === 0)
+    lines.push(
+      "| — | — | — | 0 | every carrying channel on every probed set is bound or inferred |",
+    );
   lines.push("");
   lines.push("## Rows");
   lines.push("");
