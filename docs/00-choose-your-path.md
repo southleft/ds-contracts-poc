@@ -213,12 +213,12 @@ their component-property overrides.
 
 **Honest expectations.**
 
-- **What it delivers, measured** ([24 §3](24-what-works.md)): **86.7% mean
+- **What it delivers, measured** ([24 §3](24-what-works.md)): **86.8% mean
   computed-style equality** for a captured component, against the original npm
   package rendering in the same pinned Chromium — an exact string match over
   the browser's full longhand set, no tolerance, no whitelist, so a channel the
   pipeline never opened still counts against it. 116 components across nine
-  libraries and six styling architectures: 85.9% cell-weighted over 718,018
+  libraries and six styling architectures: 86.0% cell-weighted over 719,534
   cells, 58 of 116 at ≥90%, 90 of 116 at ≥80%. Every one of the 116 is listed
   worst-first in [24 §3.1](24-what-works.md) — the worst is 50.0%.
 - **What it costs** ([23](23-known-limitations.md)): hours of expert
@@ -244,7 +244,7 @@ their component-property overrides.
   any fidelity average, for exactly this reason). Data grid, tree, virtualized
   list, date picker, rich text and charts appear in **zero** committed
   contracts. Fidelity per *captured* component is high; breadth is the honest
-  limit, and the 86.7% above describes only the tractable 11.1%.
+  limit, and the 86.8% above describes only the tractable 11.1%.
 - **What will look broken but is a named limit:** text wrapping is not
   implemented (a hugging text node inside a narrower fixed ancestor clips);
   webfonts load only where the library's capture config declares them
