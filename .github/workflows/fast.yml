@@ -250,6 +250,14 @@ jobs:
       - name: eval-reds:self-test (the named-red ledger refuses an UNNAMED red, and a stale row)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run eval-reds:self-test
+      # No gate consults the curated-fact guard yet — the re-promote wave will.
+      # Its self-test is therefore the ONLY thing keeping it honest, and the
+      # five cases that actually shipped (avatar initials, withInitials,
+      # progress 40->0, the placeholder, two radius bindings) are regression
+      # cases, not hypotheticals.
+      - name: curated-facts:self-test (a re-promotion may ADD or RESHAPE, never quietly DELETE)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run curated-facts:self-test
       - name: docs:check (every number and link the docs quote, re-derived)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run docs:check
