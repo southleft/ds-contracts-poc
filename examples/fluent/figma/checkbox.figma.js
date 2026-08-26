@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "fluent.checkbox",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Checkbox — generated from contract fluent.checkbox v0.2.0 † (61 code-only facts — see plugin report)",
+    "description": "Checkbox — generated from contract fluent.checkbox v0.2.0 † (62 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -3726,6 +3726,17 @@ const COMPONENTS = [
         "channel": "left",
         "value": "{imported.shared.size-0}",
         "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "margin",
+        "value": "8px",
+        "reason": "lowered to the parent's itemSpacing (8px, bound to imported/shared/size-8): CSS spells between-sibling space per CHILD and auto-layout spells it once per PARENT, so 1 sibling margin(s) become one gap — indicator.margin-right",
         "variants": {
           "count": 24,
           "of": 24

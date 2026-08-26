@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "flowbite.toggleswitch",
     "version": "0.2.0",
     "anchorKey": "08442ebe555baa908cd7ab07097bfcd58dd5fccc",
-    "description": "ToggleSwitch — generated from contract flowbite.toggleswitch v0.2.0 † (14 code-only facts — see plugin report)",
+    "description": "ToggleSwitch — generated from contract flowbite.toggleswitch v0.2.0 † (15 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -816,6 +816,17 @@ const COMPONENTS = [
         "channel": "position",
         "value": "absolute",
         "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 6,
+          "of": 6
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "margin",
+        "value": "12px",
+        "reason": "lowered to the parent's itemSpacing (12px, bound to imported/toggle-switch/label/margin-left): CSS spells between-sibling space per CHILD and auto-layout spells it once per PARENT, so 1 sibling margin(s) become one gap — label.margin-left",
         "variants": {
           "count": 6,
           "of": 6

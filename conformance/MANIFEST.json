@@ -2,9 +2,9 @@
   "_marker": "THE DENOMINATOR. Hand-authored per case, generated into one index. Deliberately NOT derived from isFusable / styled / DECLARED_CHANNELS / CHANNEL_TO_COMPUTED / TOKEN_CHANNELS / carriedParts — every instrument in the pipeline derives its denominator from the same filter that decides carriage, which is why a channel the filter never opened scores 100%. This file is the independent one.",
   "generatedBy": "conformance/build.ts",
   "library": "@ds-contracts/conformance@0.1.0",
-  "count": 110,
+  "count": 115,
   "byExpectation": {
-    "CARRIED": 65,
+    "CARRIED": 70,
     "LOWERED": 5,
     "REFUSED": 22,
     "UNSUPPORTED": 18
@@ -711,6 +711,44 @@
       }
     },
     {
+      "id": "flex-align-items-center",
+      "feature": "layout-flex",
+      "construct": "display: flex; align-items: center — cross-axis centring of two children of DIFFERENT heights",
+      "why": "align-items is the cross-axis half of the flex vocabulary and one of the four layout facts the whole CSS->Figma lowering reframe rests on. It was classified CARRIED on a code citation alone; until 2026-08-26 the fixture's reader could not observe it at all (carriage was recorded under the contract's field name `align`, a spelling no browser emits), so no case could ever have caught it. The children differ in height on purpose: with equal heights, `center` and `stretch` draw the same picture and the case would prove nothing.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.layout.align / counterAxisAlignItems",
+      "observable": {
+        "part": "root",
+        "channel": "align-items",
+        "capturedValue": "center"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "counterAxisAlignItems CENTER on the root auto-layout frame"
+      },
+      "blockStage": true
+    },
+    {
+      "id": "flex-direction-column",
+      "feature": "layout-flex",
+      "construct": "display: flex; flex-direction: column — the main axis turned vertical",
+      "why": "flex-direction decides which Figma axis every other layout fact means: itemSpacing, primaryAxisAlignItems and counterAxisAlignItems all swap meaning with it, so an error here mis-draws every sibling fact rather than one channel. It was CARRIED on a code citation alone, and the reader recorded it under the contract's field name `direction` — which is ALSO a real CSS property (ltr/rtl), so the wrong spelling was not merely invisible, it collided with a channel the table classifies separately.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.layout.direction / layoutMode VERTICAL",
+      "observable": {
+        "part": "root",
+        "channel": "flex-direction",
+        "capturedValue": "column"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "layoutMode VERTICAL on the root auto-layout frame"
+      },
+      "blockStage": true
+    },
+    {
       "id": "flex-gap",
       "feature": "layout",
       "construct": "column-gap / row-gap in px",
@@ -999,6 +1037,25 @@
       },
       "probe": "P3 (enum fence: STRETCH/BASELINE rejected), P4 align geometry",
       "dumpSnippet": "dump.snippet.json"
+    },
+    {
+      "id": "grid-child-align-self-start",
+      "feature": "grid-alignment",
+      "construct": "align-self: start on a fixed-size grid child, with no justify-self declared",
+      "why": "grid-child-align already measures justify-self, and the table's align-self row cites that case's SIBLING channel — its engine anchor literally names 'justify-self'. Measuring the cross-axis alone, with the main axis left at its default, is what distinguishes 'both anchors are carried' from 'one anchor is carried and the other rides along'.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.a.placement.alignY (4-value vocabulary only — AUTO|MIN|CENTER|MAX)",
+      "observable": {
+        "part": "a",
+        "channel": "align-self",
+        "capturedValue": "start"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "gridChildVerticalAlign MIN on the child, its horizontal anchor left AUTO"
+      },
+      "blockStage": true
     },
     {
       "id": "grid-child-fill-cell",
@@ -1735,6 +1792,25 @@
       "blockStage": true
     },
     {
+      "id": "margin-top-in-flow",
+      "feature": "box",
+      "construct": "margin-top: 12px on the SECOND child of a flex column whose parent declares no gap",
+      "why": "This is the exact construct the CSS->Figma lowering reframe is about: a sibling margin in a gapless stack is the fact a designer would draw as spacing, and the decision of whether it becomes itemSpacing, wrapper padding, or is carried as a margin token is one we claim to have authored. margin-top is CARRIED on a code citation alone; margin-left is the ONLY margin channel any case measures, and it is measured on an inline span where no stack spacing interpretation is available. This case puts the ambiguity in front of the gate on purpose.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.b.tokens.margin-top",
+      "observable": {
+        "part": "b",
+        "channel": "margin-top",
+        "capturedValue": "12px"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "the gap between the two children is real ink — however it is spelled, it must draw"
+      },
+      "blockStage": true
+    },
+    {
       "id": "mask-image",
       "feature": "effects",
       "construct": "mask-image: linear-gradient(...)",
@@ -1860,6 +1936,25 @@
         "expect": "PRESENT",
         "note": "SOLID fill via the deterministic oklch→sRGB conversion"
       }
+    },
+    {
+      "id": "padding-asymmetric-block",
+      "feature": "box",
+      "construct": "padding: 10px 4px 20px 4px — four sides, top and bottom DIFFERENT",
+      "why": "Four of the six padding rows were CARRIED on a code citation alone; the only measured one was padding-left, and every existing padding case is symmetric top-to-bottom, so a lowering that collapsed the block axis to a single value would have passed all of them. An unequal top and bottom is the cheapest construct that can tell paddingTop and paddingBottom apart on the canvas.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.tokens.padding-top",
+      "observable": {
+        "part": "root",
+        "channel": "padding-top",
+        "capturedValue": "10px"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "paddingTop 10 / paddingBottom 20 on the root auto-layout frame"
+      },
+      "blockStage": true
     },
     {
       "id": "page-global-star-rule",

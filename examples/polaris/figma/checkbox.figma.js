@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "polaris.checkbox",
     "version": "0.4.0",
     "anchorKey": null,
-    "description": "Checkbox — generated from contract polaris.checkbox v0.4.0 † (67 code-only facts — see plugin report)",
+    "description": "Checkbox — generated from contract polaris.checkbox v0.4.0 † (68 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -1262,6 +1262,17 @@ const COMPONENTS = [
         "channel": "display",
         "value": "inline",
         "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "margin",
+        "value": "8px",
+        "reason": "lowered to the parent's itemSpacing (8px, bound to imported/checkbox/choice-control/margin-right): CSS spells between-sibling space per CHILD and auto-layout spells it once per PARENT, so 1 sibling margin(s) become one gap — choice__control.margin-right",
         "variants": {
           "count": 3,
           "of": 3

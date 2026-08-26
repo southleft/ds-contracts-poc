@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "carbon.modal",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Modal — generated from contract carbon.modal v0.2.0 † (113 code-only facts — see plugin report)",
+    "description": "Modal — generated from contract carbon.modal v0.2.0 † (114 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -2656,6 +2656,17 @@ const COMPONENTS = [
         "channel": "grid-row-start",
         "value": "{imported.shared.num-1}",
         "reason": "Figma has no grid placement.",
+        "variants": {
+          "count": 4,
+          "of": 4
+        }
+      },
+      {
+        "part": "modal-header",
+        "kind": "channel",
+        "channel": "margin",
+        "value": "4px",
+        "reason": "lowered to the parent's itemSpacing (4px, bound to imported/modal/label-2/margin-bottom): CSS spells between-sibling space per CHILD and auto-layout spells it once per PARENT, so 1 sibling margin(s) become one gap — label-2.margin-bottom",
         "variants": {
           "count": 4,
           "of": 4

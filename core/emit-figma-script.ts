@@ -5398,12 +5398,21 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     delete spec.scrimBounded;
     (spec.children ?? []).forEach((child) => stripMisses(child, variant));
   };
-  for (const v of variants) stripMisses(v.spec, v.name, 'root');
-  for (const v of stateVariants) stripMisses(v.spec, v.name, 'root');
   // Round 5d: sibling-margin → itemSpacing lowering (then marginVars strip —
   // compile-side only, never serialized).
+  //
+  // ORDER IS LOAD-BEARING, and it was wrong. This pass ran AFTER stripMisses,
+  // so a `miss()` raised here was pushed onto a `channelMiss` the collector
+  // had already emptied — never collected into the code-only facts, and left
+  // on the spec to be SERIALIZED into the emitted script as a stray field.
+  // That is why the margin→gap lowering could not name itself, which is what
+  // `margin-top-in-flow` measured as a never-waivable SILENT: the lowering is
+  // correct, the token identity survives end to end, and nothing anywhere
+  // said the margin had become a gap. Lowering first, collecting second.
   for (const v of variants) lowerMarginGaps(v.spec);
   for (const v of stateVariants) lowerMarginGaps(v.spec);
+  for (const v of variants) stripMisses(v.spec, v.name, 'root');
+  for (const v of stateVariants) stripMisses(v.spec, v.name, 'root');
   const stripMarginVars = (s: NodeSpec) => {
     delete s.marginVars;
     (s.children ?? []).forEach(stripMarginVars);
@@ -5842,6 +5851,26 @@ function lowerMarginGaps(spec: NodeSpec): void {
   } else {
     // @lower emit.margin-gap-token-identity
     (spec.lits ??= {}).itemSpacing = px;
+  }
+  // NAME THE LOWERING. The margins are about to be DELETED from the children
+  // and re-expressed as one field on the parent — a correct lowering, and
+  // until now a completely silent one. `margin-top-in-flow` is the case that
+  // measured it: a 12px margin-top on the second child of a gapless flex
+  // column lowers to a BOUND itemSpacing carrying the same token, the inverse
+  // re-emits `gap` as it should, and the canvas round trip then reported
+  // SILENT — not because anything was lost, but because nothing anywhere said
+  // the margin had become a gap. A lowering that is right and unnamed is
+  // indistinguishable, from outside, from a lowering that dropped the fact.
+  const sides = kids
+    .map((k, i) => [i < kids.length - 1 ? trail : null, i > 0 ? lead : null].filter((sd): sd is typeof lead => sd !== null && k.margins?.[sd] !== undefined).map((sd) => `${k.name}.margin-${sd}`))
+    .flat();
+  if (sides.length > 0) {
+    miss(
+      spec,
+      'margin',
+      `lowered to the parent's itemSpacing (${px}px${spec.bindings?.itemSpacing ? `, bound to ${spec.bindings.itemSpacing}` : ', a literal'}): CSS spells between-sibling space per CHILD and auto-layout spells it once per PARENT, so ${sides.length} sibling margin(s) become one gap — ${sides.join(', ')}`,
+      `${px}px`,
+    );
   }
   for (let i = 0; i < kids.length; i++) {
     const m = kids[i].margins;

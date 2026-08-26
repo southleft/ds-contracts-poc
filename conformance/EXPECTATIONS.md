@@ -16,13 +16,13 @@ repo it is simply absent from the denominator and scores 100%.
 
 | | |
 |---|---|
-| cases | **110** |
-| 🟢 pass | **106** |
+| cases | **115** |
+| 🟢 pass | **111** |
 | 🔴 red | **4** |
 | 🟡 yellow (UNSUPPORTED, never read) | **0** |
 | **UNSUPPORTED declared — THE RATCHET** | **18** · may only DECREASE without an explicit manifest edit |
 
-Declared dispositions: CARRIED 65 · LOWERED 5 · REFUSED 22 · UNSUPPORTED 18.
+Declared dispositions: CARRIED 70 · LOWERED 5 · REFUSED 22 · UNSUPPORTED 18.
 
 **A green gate here would mean the cases are too easy.** The point of the
 fixture is a measured frontier, and every red below is an open, named defect —
@@ -83,6 +83,8 @@ manifest.
 | 🟢 | `antd-presence-times-axis-glyph` | anatomy | `a child part whose PRESENCE is one prop (showIcon) and whose paint is ANOTHER (type) — the base (default) combo mounts without it (antd Alert)` | CARRIED | carried | PASS |
 | 🔴 | `container-query` | at-rules | `@container (min-inline-size: 100px) { … }` | UNSUPPORTED | carried | UNDECLARED-CARRY |
 | 🔴 | `media-non-matching` | at-rules | `@media (min-width: 2000px) branch that does NOT match the pinned viewport` | UNSUPPORTED | carried | UNDECLARED-CARRY |
+| 🟢 | `margin-top-in-flow` | box | `margin-top: 12px on the SECOND child of a flex column whose parent declares no gap` | CARRIED | carried | PASS |
+| 🟢 | `padding-asymmetric-block` | box | `padding: 10px 4px 20px 4px — four sides, top and bottom DIFFERENT` | CARRIED | carried | PASS |
 | 🟢 | `page-global-star-rule` | cascade | `* { border-color: var(--cf-color-secondary) } — a PAGE-GLOBAL authored declaration, with the element's border-width and border-style declared locally and its colour reaching it only through the universal rule` | CARRIED | carried | PASS |
 | 🟢 | `page-inherited-ink` | cascade | `body { color: var(--cf-color-primary) } — the document's ink, inherited by a text-bearing part that declares no colour of its own` | CARRIED | carried | PASS |
 | 🟢 | `color-hex` | color | `color: #1976d2 (authored as hex)` | CARRIED | carried | PASS |
@@ -114,6 +116,7 @@ manifest.
 | 🟢 | `border-radius-px` | geometry | `border-radius: 6px` | CARRIED | carried | PASS |
 | 🟢 | `min-max-width` | geometry | `min-width / max-width in px` | CARRIED | carried | PASS |
 | 🟢 | `grid-child-align` | grid-alignment | `justify-self: center; align-self: end on a fixed-size child` | CARRIED | carried | PASS |
+| 🟢 | `grid-child-align-self-start` | grid-alignment | `align-self: start on a fixed-size grid child, with no justify-self declared` | CARRIED | carried | PASS |
 | 🟢 | `grid-area-empty-slot` | grid-areas | `a declared grid area with NO children (empty slot)` | CARRIED | carried | PASS |
 | 🟢 | `grid-area-nonrectangular` | grid-areas | `area occupancy that cannot tile grid-template-areas (gapped or non-rectangular per CSS rules)` | LOWERED | carried | PASS |
 | 🟢 | `grid-named-area-slots` | grid-areas | `grid-template-areas: 'header header' 'nav content' + grid-area: header on children` | CARRIED | carried | PASS |
@@ -149,6 +152,8 @@ manifest.
 | 🟢 | `nonpainting-text-display-none` | invariant | `a NON-PAINTING element carrying text (display: none)` | CARRIED | carried | PASS |
 | 🟢 | `nonpainting-text-visibility-hidden` | invariant | `a NON-PAINTING element carrying text (visibility: hidden)` | REFUSED | refused, by name | PASS |
 | 🔴 | `stage-box-equal` | invariant | `a captured box exactly equal to the STAGE box (100% × 100%)` | REFUSED | carried | UNDECLARED-CARRY |
+| 🟢 | `flex-align-items-center` | layout-flex | `display: flex; align-items: center — cross-axis centring of two children of DIFFERENT heights` | CARRIED | carried | PASS |
+| 🟢 | `flex-direction-column` | layout-flex | `display: flex; flex-direction: column — the main axis turned vertical` | CARRIED | carried | PASS |
 | 🟢 | `align-items-baseline` | layout | `align-items: baseline on a flex row` | CARRIED | carried | PASS |
 | 🟢 | `flex-gap` | layout | `column-gap / row-gap in px` | CARRIED | carried | PASS |
 | 🟢 | `flex-wrap-wrap` | layout | `flex-wrap: wrap on a flex container` | CARRIED | carried | PASS |

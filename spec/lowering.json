@@ -355,7 +355,7 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 7468,
+      "ruleLine": 7497,
       "ruleText": "const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };${hasGrid ? `",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {
@@ -547,7 +547,7 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 6417,
+      "ruleLine": 6446,
       "ruleText": "const trackWrite = (t) => (t.type === 'HUG' ? { type: 'HUG' } : { type: t.type, value: t.value });",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {
@@ -649,7 +649,7 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 8191,
+      "ruleLine": 8220,
       "ruleText": "}${insetOverlayCall(hasInsetOverlay, 'comp, childNode, childSpec')}${marginBoxCall(hasMargins, 'comp, childNode, childSpec, registry')}",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {
@@ -676,8 +676,8 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "line": 5452,
-      "ruleLine": 5453,
+      "line": 5461,
+      "ruleLine": 5462,
       "ruleText": "if (sides.length > 0 && why) {",
       "css": {
         "construct": "margin-* on a child the margin box provably cannot wrap",
@@ -708,7 +708,7 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 5939,
+      "ruleLine": 5968,
       "ruleText": "box.name = childSpec.name + ' (margin box)';",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {
@@ -748,7 +748,7 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 5825,
+      "ruleLine": 5834,
       "ruleText": "const collapses = !horiz && spec.layout.blockFlow === true;",
       "css": {
         "construct": "adjoining vertical margins between block-flow siblings (margin-bottom of one, margin-top of the next)",
@@ -776,7 +776,7 @@
       "cases": [],
       "doors": [],
       "why": "The register recorded this as \"the axis is the discriminator\". Measuring it said otherwise, and the correction matters: CSS margin collapsing is a property of BLOCK FLOW, not of the axis. A flex column does NOT collapse — `margin-bottom: 16` above `margin-top: 16` really is 32px of space there — and a block-flow column does. Both arrive at this function as mode VERTICAL and nothing could tell them apart, which is why the sum was applied to both. LayoutSpec.blockFlow is the discriminator, set by the three blockification branches in layoutSpec and emitted into the artifact so a reader can see which answer was taken. Load-bearing for the fixed point: the inverse re-emits `gap`, and `gap` never collapses, so only the collapsed value converges.",
-      "line": 5824
+      "line": 5833
     },
     {
       "id": "emit.margin-gap-token-identity",
@@ -784,8 +784,8 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "line": 5843,
-      "ruleLine": 5844,
+      "line": 5852,
+      "ruleLine": 5853,
       "ruleText": "(spec.lits ??= {}).itemSpacing = px;",
       "css": {
         "construct": "margin-* lowered to itemSpacing whose contributing margins name more than one token, or none",
@@ -819,7 +819,7 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 5797,
+      "ruleLine": 5806,
       "ruleText": "if (kids.length === 1) {",
       "css": {
         "construct": "margin-* on the ONLY in-flow child of a container",
@@ -846,7 +846,7 @@
       "cases": [],
       "doors": [],
       "why": "Space between a lone child and its container edge is indistinguishable, in the rendered box, from container padding — and Figma has padding and does not have margin. The alternative it replaces is strictly worse: a FIXED synthetic `(margin box)` frame that stops the child reflowing and that `grep -a` finds ZERO recognizers for in the 11,573-line inverse, so the structure grows on every pass. The guard is the one the register asked for: the parent must carry no competing padding on that side, because CSS sums margin and padding there and the canvas has one field. Measured: 29 child margin blocks across the committed corpus become parent padding, and Carbon's text-input label keeps its token — `imported/text-input/label/margin-bottom` is now the parent's bound paddingBottom rather than a wrapper's fixed height.",
-      "line": 5796
+      "line": 5805
     },
     {
       "id": "emit.margin-uniform-sibling-to-gap",
@@ -854,8 +854,8 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "line": 5837,
-      "ruleLine": 5838,
+      "line": 5846,
+      "ruleLine": 5847,
       "ruleText": "if (px <= 0 || !gaps.every((g) => g.px === px)) return;",
       "css": {
         "construct": "margin-* between in-flow siblings, on the parent’s MAIN axis",
@@ -873,19 +873,21 @@
         "note": "the inverse cannot know the canvas gap was authored as sibling margins; it emits `gap`, which is the CSS the author should have written"
       },
       "lost": [
-        "which of the two siblings owned the space (CSS margin is per-child; Figma itemSpacing is per-parent)",
+        "which of the two siblings owned the space (CSS margin is per-child; Figma itemSpacing is per-parent) — now NAMED, side by side, in the code-only facts",
         "the distinction between `gap: 16` and `margin-bottom: 16` on every child but the last"
       ],
       "canonical": "gap on the parent",
       "receipt": {
-        "channel": "none"
+        "channel": "channelMiss",
+        "marker": "lowered to the parent's itemSpacing"
       },
-      "roundTrip": "round-tripped",
+      "roundTrip": "named",
       "cases": [
-        "flex-gap"
+        "flex-gap",
+        "margin-top-in-flow"
       ],
       "doors": [],
-      "why": "This is the owner’s own rule, already the engine’s behaviour, never written down or defended. Figma’s itemSpacing IS between-sibling space — the only construct in the API with the same meaning. The asymmetry is admitted rather than hidden: the round trip converges on `gap`, and `gap` is the canonical form because it is the one spelling both surfaces can hold. The all-or-nothing uniformity guard is right: a non-uniform run has no single itemSpacing, and inventing one would change the render."
+      "why": "This is the owner's own rule, and it was already the engine's behaviour before anyone wrote it down. Figma's itemSpacing IS between-sibling space — the only construct in the API with the same meaning — and when one token explains every contributing margin the gap BINDS that token, so the design value survives the lowering intact. The asymmetry is admitted rather than hidden: the round trip converges on `gap`, which is the one spelling both surfaces can hold. What was missing until 2026-08-26 was the RECEIPT. `margin-top-in-flow` measured it: a 12px margin-top on the second child of a gapless flex column lowers to a bound itemSpacing carrying the same token, the inverse re-emits `gap` exactly as it should — and the canvas round trip still read SILENT, because nothing anywhere said the margin had become a gap. A lowering that is right and unnamed is indistinguishable, from outside, from one that dropped the fact. The cause was an ORDERING bug: this pass ran after stripMisses had already emptied the collector, so a miss() raised here was never collected and would have been serialized into the emitted script as a stray field. Lowering first, collecting second."
     },
     {
       "id": "emit.padding-longhand-bound",
@@ -960,7 +962,7 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 7428,
+      "ruleLine": 7457,
       "ruleText": "if (isNewSection) {",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {
@@ -989,7 +991,7 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 8076,
+      "ruleLine": 8105,
       "ruleText": "child.x = x; child.y = y;",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {
@@ -1209,7 +1211,7 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 7687,
+      "ruleLine": 7716,
       "ruleText": "if (!spec.fill) node.fills = [];",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {
@@ -1267,8 +1269,8 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "line": 5534,
-      "ruleLine": 5535,
+      "line": 5543,
+      "ruleLine": 5544,
       "ruleText": "if (!contract.bindings?.figma?.statePreviews && contract.states.length > 0) {",
       "css": {
         "construct": ":hover, :focus, :active and every other state’s channel values",
@@ -1297,8 +1299,8 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "line": 5523,
-      "ruleLine": 5524,
+      "line": 5532,
+      "ruleLine": 5533,
       "ruleText": "if (!isEnum(p) || p.default !== undefined || p.bindings.figma.kind !== 'VARIANT') continue;",
       "css": {
         "construct": "the library’s rendering when a defaultless enum prop is not supplied at all",
@@ -1355,7 +1357,7 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 7576,
+      "ruleLine": 7605,
       "ruleText": "if (typeof spec.rotation === 'number' && spec.rotation !== 0) node.rotation = -spec.rotation;",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {
@@ -1385,7 +1387,7 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 6156,
+      "ruleLine": 6185,
       "ruleText": "if (l.wrap && node.layoutMode === 'HORIZONTAL') node.layoutWrap = 'WRAP';`",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {

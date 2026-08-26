@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "polaris.text-field",
     "version": "0.4.0",
     "anchorKey": null,
-    "description": "TextField — generated from contract polaris.text-field v0.4.0 † (91 code-only facts — see plugin report)",
+    "description": "TextField — generated from contract polaris.text-field v0.4.0 † (92 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -3534,6 +3534,17 @@ const COMPONENTS = [
         "channel": "inputMode [unset]",
         "value": "text",
         "reason": "defaultless axis — the library's own rendering when \"inputMode\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 1 declared values only, and a proposal read back from the canvas will call \"text\" the default (FC-UNSET-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 8,
+          "of": 8
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "margin",
+        "value": "4px",
+        "reason": "lowered to the parent's itemSpacing (4px, bound to imported/shared/size-4): CSS spells between-sibling space per CHILD and auto-layout spells it once per PARENT, so 1 sibling margin(s) become one gap — labelled__labelwrapper.margin-bottom",
         "variants": {
           "count": 8,
           "of": 8

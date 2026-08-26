@@ -1,0 +1,149 @@
+{
+  "component": "CaseGridChildAlignSelfStart",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "149.0.7827.55",
+  "renderedBy": "149.0.7827.55",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 1,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 236,
+    "cellsEqual": 232,
+    "pctEqual": 98.30508474576271,
+    "rowsFullyEqual": 0,
+    "rows": 4
+  },
+  "pixel": {
+    "pairs": 4,
+    "perfectExact": 0,
+    "perfectAA": 0,
+    "measured": 4,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 30.201822916666668,
+    "meanAA": 17.005208333333332,
+    "maxAA": 17.005208333333332
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 10,
+    "mintedLeavesUnfolded": 10,
+    "baseBindings": 25,
+    "stateBindings": 0,
+    "codeOnlyChannels": 2,
+    "overflowBindings": 0,
+    "folds": 18
+  },
+  "worstRows": [
+    {
+      "key": "__default",
+      "pctAA": 17.005208333333332,
+      "pctExact": 30.201822916666668,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "__hover",
+      "pctAA": 17.005208333333332,
+      "pctExact": 30.201822916666668,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "__focus-visible",
+      "pctAA": 17.005208333333332,
+      "pctExact": 30.201822916666668,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "__active",
+      "pctAA": 17.005208333333332,
+      "pctExact": 30.201822916666668,
+      "channelsMismatched": 1
+    }
+  ],
+  "topMismatchedChannels": [
+    [
+      "root.grid-template-columns",
+      4
+    ]
+  ],
+  "namedLosses": [
+    "code-only: label.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-2.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+  ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "(none declared)",
+    "leavesAdded": 0,
+    "divergent": []
+  },
+  "rows": [
+    {
+      "key": "__default",
+      "channelsCompared": 59,
+      "channelsEqual": 58,
+      "pctExact": 30.201822916666668,
+      "pctAA": 17.005208333333332,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "grid-template-columns",
+          "ours": "7.20312px 7.20312px",
+          "theirs": "100px 100px"
+        }
+      ]
+    },
+    {
+      "key": "__hover",
+      "channelsCompared": 59,
+      "channelsEqual": 58,
+      "pctExact": 30.201822916666668,
+      "pctAA": 17.005208333333332,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "grid-template-columns",
+          "ours": "7.20312px 7.20312px",
+          "theirs": "100px 100px"
+        }
+      ]
+    },
+    {
+      "key": "__focus-visible",
+      "channelsCompared": 59,
+      "channelsEqual": 58,
+      "pctExact": 30.201822916666668,
+      "pctAA": 17.005208333333332,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "grid-template-columns",
+          "ours": "7.20312px 7.20312px",
+          "theirs": "100px 100px"
+        }
+      ]
+    },
+    {
+      "key": "__active",
+      "channelsCompared": 59,
+      "channelsEqual": 58,
+      "pctExact": 30.201822916666668,
+      "pctAA": 17.005208333333332,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "grid-template-columns",
+          "ours": "7.20312px 7.20312px",
+          "theirs": "100px 100px"
+        }
+      ]
+    }
+  ]
+}

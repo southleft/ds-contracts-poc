@@ -15,9 +15,9 @@ never waivable.
 
 | | |
 |---|---|
-| cases (CARRIED + LOWERED) | **70** |
-| 🟢 round-tripped | **53** |
-| 🟢 named (dropped, and a receipt says so) | **16** |
+| cases (CARRIED + LOWERED) | **75** |
+| 🟢 round-tripped | **57** |
+| 🟢 named (dropped, and a receipt says so) | **17** |
 | 🟡 refused by name (the canvas cannot host the seed, and says so) | **1** |
 | ⚪ seed-absent (nothing to round-trip) | **0** |
 | 🔴 red | **0** — SILENT 0 · DRIFTED 0 · HARMFUL 0 |
@@ -32,7 +32,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 **HARMFUL** the manifest says no canvas spelling exists and it came back anyway ·
 **SILENT** vanished, named by nothing — never waivable.
 
-## 🟢 NAMED — 16
+## 🟢 NAMED — 17
 
 | case | feature | construct | channel | expect | came back | ref | as | note |
 |---|---|---|---|---|---|---|---|---|
@@ -47,6 +47,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `grid-area-empty-slot` | grid-areas | a declared grid area with NO children (empty slot) | `grid-template-areas` | CARRIED | — |  |  | «self»:root: 2 grid child(ren) (a, b) carry EXPLICIT placement rects, not named areas — Figma has no native area names (G4: the CONTRACT owns them, the canvas carries only the rect), so an area name survives the round trip ONLY through a p… |
 | `grid-child-text-hug` | grid-sizing | a TEXT child hugging its content inside a grid cell | `__text` | CARRIED | — |  |  | code-only channel label.border-bottom-color = {imported.shared.color-663399} — per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides. |
 | `grid-named-area-slots` | grid-areas | grid-template-areas: 'header header' 'nav content' + grid-area: header on children | `grid-template-areas` | CARRIED | — |  |  | «self»:root: 3 grid child(ren) (a, b, c) carry EXPLICIT placement rects, not named areas — Figma has no native area names (G4: the CONTRACT owns them, the canvas carries only the rect), so an area name survives the round trip ONLY through… |
+| `margin-top-in-flow` | box | margin-top: 12px on the SECOND child of a flex column whose parent declares no gap | `margin-top` | CARRIED | — |  |  | code-only channel root.margin = 12px — lowered to the parent's itemSpacing (12px, bound to imported/shared/size-12): CSS spells between-sibling space per CHILD and auto-layout spells it once per PARENT, so 1 sibling margin(s) become one ga… |
 | `nonpainting-text-display-none` | invariant | a NON-PAINTING element carrying text (display: none) | `__text` | CARRIED | — |  |  | code-only declared label-2.display = none — CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack). |
 | `page-global-star-rule` | cascade | * { border-color: var(--cf-color-secondary) } — a PAGE-GLOBAL authored declaration, with the element's border-width and border-style declared locally and its colour reaching it only through the universal rule | `border-top-color` | CARRIED | — |  |  | code-only channel root.border-top-color = {imported.shared.color-663399} — per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides. |
 | `text-indent-off-box` | text | text-indent: 9999px on a box pinned to 8px (the status-pip idiom: the label is pushed out of the box and only the dot shows) | `text-indent` | LOWERED | — |  |  | code-only channel root.text-indent = {«self».root.text-indent} — Figma text nodes have no first-line indent. Where the MEASURED indent lays the first line entirely outside the content box (Part.textOutOfBox), the canvas draws NO text child… |
@@ -59,7 +60,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 |---|---|---|---|---|---|---|---|---|
 | `grid-instance-child` | grid-composition | a component INSTANCE placed in a cell with position + FILL | `grid-column-start` | CARRIED | — |  |  | mock figma (component step): Error: grid-placement-cycle-no-spare: the declared 1x2 grid has no free cell to break a placement cycle through — refusing rather than throwing P3 mid-script |
 
-## 🟢 ROUND-TRIPPED — 53
+## 🟢 ROUND-TRIPPED — 57
 
 | case | feature | construct | channel | expect | came back | ref | as | note |
 |---|---|---|---|---|---|---|---|---|
@@ -80,6 +81,8 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `display-flex` | display | display: flex | `display` | CARRIED | flex | same |  |  |
 | `display-inline-flex` | display | display: inline-flex | `display` | CARRIED | flex | same |  |  |
 | `em-relative-padding` | units | padding: 1.5em against a 12px font-size | `padding-left` | CARRIED | 18px | same | `padding-inline` | channel respelled: padding-left → padding-inline |
+| `flex-align-items-center` | layout-flex | display: flex; align-items: center — cross-axis centring of two children of DIFFERENT heights | `align-items` | CARRIED | center | same |  |  |
+| `flex-direction-column` | layout-flex | display: flex; flex-direction: column — the main axis turned vertical | `flex-direction` | CARRIED | column | same |  |  |
 | `flex-gap` | layout | column-gap / row-gap in px | `column-gap` | CARRIED | 12px | same | `gap` | channel respelled: column-gap → gap |
 | `flex-wrap-wrap` | layout | flex-wrap: wrap on a flex container | `flex-wrap` | CARRIED | wrap | same |  |  |
 | `grid-2d` | layout | display: grid + grid-template-columns: 1fr 1fr (children AUTO-PLACED) | `display` | CARRIED | grid | same |  |  |
@@ -88,6 +91,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `grid-auto-flow-row` | grid-flow | grid-auto-flow: row over declared columns AND declared row tracks, placement by child order | `grid-auto-flow` | CARRIED | row | same |  |  |
 | `grid-bento-span-matrix` | grid-placement | 3x4 grid, rows [80px,1fr,2fr], cols [160px,1fr,1fr,120px], gaps 12/16, header 1x4 + sidebar 2x1 + main 1x2 + rail 2x1 + footer 1x2, all cells FILL | `grid-template-columns` | CARRIED | 160px 1fr 1fr 120px | same |  |  |
 | `grid-child-align` | grid-alignment | justify-self: center; align-self: end on a fixed-size child | `justify-self` | CARRIED | center | same |  |  |
+| `grid-child-align-self-start` | grid-alignment | align-self: start on a fixed-size grid child, with no justify-self declared | `align-self` | CARRIED | start | same |  |  |
 | `grid-child-fill-cell` | grid-sizing | grid child stretching to its cell (CSS default; canvas FILL both axes) | `grid-row-start` | CARRIED | 1 | same |  |  |
 | `grid-col-span` | grid-placement | grid-column: 1 / span 2 (child spans 2 columns) | `grid-column-end` | CARRIED | 1, 3, span 2 | same |  |  |
 | `grid-explicit-anchor` | grid-placement | grid-row: 3; grid-column: 2 (explicit cell placement, 0-based contract / 1-based CSS) | `grid-row-start` | CARRIED | 1, 3 | same |  |  |
@@ -102,6 +106,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `grid-two-column` | grid-tracks | display: grid; grid-template-columns: 1fr 1fr | `grid-template-columns` | CARRIED | 1fr 1fr | same |  |  |
 | `min-max-width` | geometry | min-width / max-width in px | `min-width` | CARRIED | 96px | same |  |  |
 | `oklch-color` | color | background-color: oklch(0.6 0.15 250) | `background-color` | CARRIED | #2784d5 | same |  |  |
+| `padding-asymmetric-block` | box | padding: 10px 4px 20px 4px — four sides, top and bottom DIFFERENT | `padding-top` | CARRIED | 10px, 20px, 4px | same |  |  |
 | `page-inherited-ink` | cascade | body { color: var(--cf-color-primary) } — the document's ink, inherited by a text-bearing part that declares no colour of its own | `color` | CARRIED | #1976d2 | same |  |  |
 | `percentage-padding` | units | padding-left: 10% (resolved against the PARENT width) | `padding-left` | CARRIED | 28.7969px | same |  |  |
 | `position-absolute-insets` | position | position: absolute + top/left insets | `top` | CARRIED | 4px, 6px | same |  |  |

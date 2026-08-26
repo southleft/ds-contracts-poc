@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "antd.progress",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Progress — generated from contract antd.progress v0.2.0 † (28 code-only facts — see plugin report)",
+    "description": "Progress — generated from contract antd.progress v0.2.0 † (29 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [
@@ -805,6 +805,17 @@ const COMPONENTS = [
         "channel": "position",
         "value": "relative",
         "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 4,
+          "of": 4
+        }
+      },
+      {
+        "part": "progress-outer",
+        "kind": "channel",
+        "channel": "margin",
+        "value": "8px",
+        "reason": "lowered to the parent's itemSpacing (8px, bound to imported/progress/label/margin-left): CSS spells between-sibling space per CHILD and auto-layout spells it once per PARENT, so 1 sibling margin(s) become one gap — label.margin-left",
         "variants": {
           "count": 4,
           "of": 4

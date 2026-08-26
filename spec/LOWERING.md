@@ -77,14 +77,14 @@ This register makes that unrepresentable: a marker must sit **immediately** abov
 | `implemented` | 36 | **45** |
 | `proposed` | 18 | **10** |
 | `wall` | 3 | **3** |
-| firing with **no receipt at all** | 43 | **40** |
+| firing with **no receipt at all** | 43 | **39** |
 | **untested** by the conformance kit | 37 of 57 | **36 of 58** |
 | round-tripping on a committed case | 11 | **13** |
 | failing a committed case, by name | 9 | **9** |
 
 **Eight rules flipped `proposed` → `implemented` in the layout round and one is new.** The eight are `emit.axis-layoutless-root-centered-row`, `emit.axis-default-horizontal`, `emit.margin-collapse-summed-not-maxed`, `emit.margin-lone-child-to-padding`, `emit.margin-box-absent-on-amend`, `emit.gap-literal-cross-axis-silent`, `fuse.gap-literal-fallback-misspelled` and `schema.wrap-declared-and-detected` (renamed from `schema.wrap-declared-never-detected`, because it is now detected). The new one is `fuse.order-refused-before-mint`, the refusal that enforces `schema.order-unregistered-channel`'s wall. `emit.placement-host-section-origin-pinned` was flipped separately by the mint-placement round.
 
-**36 of 58 rules are still untested**, and that number is still the most important one in this document. `untested` is a first-class verdict here, not a gap to fill with optimism: `margin` — the family the layout round implemented — has exactly ONE case in the 110-case kit, and it still fails. The margin rules are proven on the committed corpus by re-emission, not by the kit, because the kit's observable is a carried channel and these rules fire on structure. That limit is stated rather than worked around.
+**36 of 58 rules are still untested**, and that number is still the most important one in this document. `untested` is a first-class verdict here, not a gap to fill with optimism: `margin` — the family the layout round implemented — has exactly ONE case in the 115-case kit, and it still fails. The margin rules are proven on the committed corpus by re-emission, not by the kit, because the kit's observable is a carried channel and these rules fire on structure. That limit is stated rather than worked around.
 
 ## The rules
 
@@ -94,16 +94,18 @@ The family the owner asked for by name, and the round that implemented it. All f
 
 **Margin is still the least-tested construct in the kit.** `antd-empty-margin-only-parts` is the ONLY margin case among 110 — the kit expects it CARRIED, and the canvas baseline measures it **NAMED**, quoting `FC-EMIT-MARGIN-BOX-SKIPPED`. Most of this family is therefore `implemented` and `untested`: the behaviour is proven on the committed corpus by re-emission (29 child margin blocks become parent padding; Carbon's text-input label keeps `imported/text-input/label/margin-bottom` as the parent's bound `paddingBottom`), and NOT by the conformance kit, because the kit's observable is a carried channel and these rules fire on structure. That is the finding, not a gap to paper over.
 
+**One margin rule was right and unnamed, which the kit could not tell from a drop.** `margin-top-in-flow` — a 12px `margin-top` on the second child of a gapless flex column — lowers to a BOUND `itemSpacing` carrying the same token, and the inverse re-emits `gap` exactly as it should; the canvas round trip still read **SILENT**, because nothing anywhere said the margin had become a gap. The cause was an ORDERING bug rather than a missing decision: `lowerMarginGaps` ran AFTER `stripMisses` had emptied the collector, so a `miss()` raised there was never collected and would have been serialized into the emitted script as a stray field. Lowering first, collecting second — and the case is NAMED.
+
 | rule | status | site | CSS construct → Figma | canonical | receipt | round trip |
 |---|---|---|---|---|---|---|
 | `emit.margin-auto-unparsed` | `wall` | `emit-figma-script.ts:2460` | margin: auto — the standard "push to the far edge" and "centre in the container" idiom → nothing — it is never lowered to SPACE_BETWEEN, to MAX counter-axis alignment, or to a spacer | a named refusal — `auto` margins must be REFUSED by name, never lowered to a used pixel value | **none** | `untested` |
-| `emit.margin-box-absent-on-amend` | `implemented` | `emit-figma-script.ts:8191` | margin-* on a direct child of a STANDALONE component’s root, amended rather than created → the same synthetic "(margin box)" frame the create path builds | the same lowering the create path performs — create and amend must agree | **none** | `untested` |
-| `emit.margin-box-skipped-refused` | `implemented` | `emit-figma-script.ts:5453` | margin-* on a child the margin box provably cannot wrap → nothing — the margins are stripped from the spec before the runtime sees them | a named refusal (FC-EMIT-MARGIN-BOX-SKIPPED) | `emit-facts` | `named` |
-| `emit.margin-box-wrapper` | `implemented` | `emit-figma-script.ts:5939` | residual margin-* on an in-flow child that no gap or padding lowering consumed → a synthetic FRAME named "<child> (margin box)", fills [], clipsContent false, sized w+l+r × h+t+b, child placed at (l, t) | gap or padding on the parent, with any residual REFUSED by name — never a synthetic node | **none** | `named` |
-| `emit.margin-collapse-summed-not-maxed` | `implemented` | `emit-figma-script.ts:5825` | adjoining vertical margins between block-flow siblings (margin-bottom of one, margin-top of the next) → itemSpacing = max(t, l) in block flow; itemSpacing = t + l in a flex column and on any row | gap on the parent, equal to the COLLAPSED value where CSS collapses and to the sum where it does not | `channelMiss` | `untested` |
-| `emit.margin-gap-token-identity` | `implemented` | `emit-figma-script.ts:5844` | margin-* lowered to itemSpacing whose contributing margins name more than one token, or none → a LITERAL itemSpacing (spec.lits.itemSpacing), not a bound variable | gap on the parent, bound to the token when one token explains every contributor | **none** | `untested` |
-| `emit.margin-lone-child-to-padding` | `implemented` | `emit-figma-script.ts:5797` | margin-* on the ONLY in-flow child of a container → paddingTop / paddingRight / paddingBottom / paddingLeft on the parent — BOUND to the margin's own variable when the margin named one, literal otherwise | padding-* on the parent, on the matching sides | **none** | `untested` |
-| `emit.margin-uniform-sibling-to-gap` | `implemented` | `emit-figma-script.ts:5838` | margin-* between in-flow siblings, on the parent’s MAIN axis → itemSpacing on the parent auto-layout frame | gap on the parent | **none** | `round-tripped` |
+| `emit.margin-box-absent-on-amend` | `implemented` | `emit-figma-script.ts:8220` | margin-* on a direct child of a STANDALONE component’s root, amended rather than created → the same synthetic "(margin box)" frame the create path builds | the same lowering the create path performs — create and amend must agree | **none** | `untested` |
+| `emit.margin-box-skipped-refused` | `implemented` | `emit-figma-script.ts:5462` | margin-* on a child the margin box provably cannot wrap → nothing — the margins are stripped from the spec before the runtime sees them | a named refusal (FC-EMIT-MARGIN-BOX-SKIPPED) | `emit-facts` | `named` |
+| `emit.margin-box-wrapper` | `implemented` | `emit-figma-script.ts:5968` | residual margin-* on an in-flow child that no gap or padding lowering consumed → a synthetic FRAME named "<child> (margin box)", fills [], clipsContent false, sized w+l+r × h+t+b, child placed at (l, t) | gap or padding on the parent, with any residual REFUSED by name — never a synthetic node | **none** | `named` |
+| `emit.margin-collapse-summed-not-maxed` | `implemented` | `emit-figma-script.ts:5834` | adjoining vertical margins between block-flow siblings (margin-bottom of one, margin-top of the next) → itemSpacing = max(t, l) in block flow; itemSpacing = t + l in a flex column and on any row | gap on the parent, equal to the COLLAPSED value where CSS collapses and to the sum where it does not | `channelMiss` | `untested` |
+| `emit.margin-gap-token-identity` | `implemented` | `emit-figma-script.ts:5853` | margin-* lowered to itemSpacing whose contributing margins name more than one token, or none → a LITERAL itemSpacing (spec.lits.itemSpacing), not a bound variable | gap on the parent, bound to the token when one token explains every contributor | **none** | `untested` |
+| `emit.margin-lone-child-to-padding` | `implemented` | `emit-figma-script.ts:5806` | margin-* on the ONLY in-flow child of a container → paddingTop / paddingRight / paddingBottom / paddingLeft on the parent — BOUND to the margin's own variable when the margin named one, literal otherwise | padding-* on the parent, on the matching sides | **none** | `untested` |
+| `emit.margin-uniform-sibling-to-gap` | `implemented` | `emit-figma-script.ts:5847` | margin-* between in-flow siblings, on the parent’s MAIN axis → itemSpacing on the parent auto-layout frame | gap on the parent | `channelMiss` | `named` |
 
 #### `emit.margin-auto-unparsed`
 
@@ -188,10 +190,10 @@ The family the owner asked for by name, and the round that implemented it. All f
 **Inverse** (`propose-figma.ts`, gap: <ref> from itemSpacing) emits `gap on the parent` — **asymmetric**. the inverse cannot know the canvas gap was authored as sibling margins; it emits `gap`, which is the CSS the author should have written.
 
 **Lost.**
-- which of the two siblings owned the space (CSS margin is per-child; Figma itemSpacing is per-parent)
+- which of the two siblings owned the space (CSS margin is per-child; Figma itemSpacing is per-parent) — now NAMED, side by side, in the code-only facts
 - the distinction between `gap: 16` and `margin-bottom: 16` on every child but the last
 
-**Why.** This is the owner’s own rule, already the engine’s behaviour, never written down or defended. Figma’s itemSpacing IS between-sibling space — the only construct in the API with the same meaning. The asymmetry is admitted rather than hidden: the round trip converges on `gap`, and `gap` is the canonical form because it is the one spelling both surfaces can hold. The all-or-nothing uniformity guard is right: a non-uniform run has no single itemSpacing, and inventing one would change the render.
+**Why.** This is the owner's own rule, and it was already the engine's behaviour before anyone wrote it down. Figma's itemSpacing IS between-sibling space — the only construct in the API with the same meaning — and when one token explains every contributing margin the gap BINDS that token, so the design value survives the lowering intact. The asymmetry is admitted rather than hidden: the round trip converges on `gap`, which is the one spelling both surfaces can hold. What was missing until 2026-08-26 was the RECEIPT. `margin-top-in-flow` measured it: a 12px margin-top on the second child of a gapless flex column lowers to a bound itemSpacing carrying the same token, the inverse re-emits `gap` exactly as it should — and the canvas round trip still read SILENT, because nothing anywhere said the margin had become a gap. A lowering that is right and unnamed is indistinguishable, from outside, from one that dropped the fact. The cause was an ORDERING bug: this pass ran after stripMisses had already emptied the collector, so a miss() raised here was never collected and would have been serialized into the emitted script as a stray field. Lowering first, collecting second.
 
 ### `gap` — 5 rules (4 implemented, 1 proposed, 0 wall)
 
@@ -272,7 +274,7 @@ The order of the rules is the fix. `layoutSpec` used to answer for a layout-less
 | `emit.axis-icon-host-bypass` | `proposed` | `emit-figma-script.ts:4286` | display:block (or any block-flow display) on an icon part that also carries box channels → layoutMode HORIZONTAL, CENTER/CENTER — layoutSpec is never consulted | one axis rule for every part — the host frame must go through layoutSpec like everything else | **none** | `untested` |
 | `emit.axis-layoutless-root-centered-row` | `implemented` | `emit-figma-script.ts:1856` | a ROOT that carries no layout fact at all → layoutMode HORIZONTAL, primaryAxisAlignItems CENTER, counterAxisAlignItems CENTER — now the answer for a line box, not the answer for everything unclaimed | a root's axis is READ — from its declared display first, then from its children's blockification — and a centred row is what remains only where the children genuinely form one line box | **none** | `named` |
 | `emit.axis-reverse-as-child-order` | `implemented` | `emit-figma-script.ts:4603` | flex-direction: row-reverse / column-reverse → the same children in reversed CHILD ORDER inside a forward auto-layout frame | reversed child order, with the reverse keyword refused by name | **none** | `untested` |
-| `emit.axis-runtime-default-row` | `implemented` | `emit-figma-script.ts:7468` | any node reaching the generated plugin runtime with no compiled layout → layoutMode HORIZONTAL, MIN/MIN | no layout invented at the backstop — a node that reaches the runtime unclaimed is a defect upstream and should be named, not defaulted | **none** | `untested` |
+| `emit.axis-runtime-default-row` | `implemented` | `emit-figma-script.ts:7497` | any node reaching the generated plugin runtime with no compiled layout → layoutMode HORIZONTAL, MIN/MIN | no layout invented at the backstop — a node that reaches the runtime unclaimed is a defect upstream and should be named, not defaulted | **none** | `untested` |
 | `emit.axis-textbox-bypass` | `proposed` | `emit-figma-script.ts:4457` | a text part carrying a padding channel, whose display is block-flow → layoutMode HORIZONTAL, MIN/MIN | one axis rule for every part | **none** | `untested` |
 | `fuse.axis-flex-only-enrichment` | `implemented` | `fuse.ts:1643` | flex-direction / align-items / justify-content / flex-wrap on any container → the layout fact for a uniformly-flex container; for every other container, a named receipt instead of silence | layout facts carried for any container that has them, keyed on the combos being measured rather than on the base display, with every decline named | `receipts` | `named` |
 | `fuse.axis-vocabulary-narrow` | `implemented` | `fuse.ts:1704` | any layout value outside the enrichment vocabulary → nothing — the value stays code-only | a vocabulary at least as wide as the schema enums it feeds | `receipts` | `round-tripped` |
@@ -605,7 +607,7 @@ Two thirds of the layout conformance kit — 30 of the 45 layout cases — and t
 | `anatomy.grid-align-fallback-stretch` | `proposed` | `anatomy.ts:154` | justify-items / align-items / justify-self / align-self on a grid, with any value the mapper does not recognise → stretch alignment, invented | stretch when CSS says stretch or normal; a named refusal otherwise | **none** | `round-tripped` |
 | `anatomy.grid-two-dimensional-refused` | `implemented` | `anatomy.ts:283` | a genuinely two-dimensional grid reaching the FLEX-LOWERING path → nothing — refused by name | a named refusal: a 2D grid has no single-axis spelling | `refusals` | `untested` |
 | `emit.grid-gap-pair-kept` | `implemented` | `emit-figma-script.ts:1751` | row-gap and column-gap on a grid container → rowGap and columnGap on the GRID frame, independently | the independent { row, column } pair | **none** | `round-tripped` |
-| `emit.grid-hug-track-written-bare` | `implemented` | `emit-figma-script.ts:6417` | a fit-content grid track → { type: 'HUG' }, never { type: 'HUG', value: n } | fit-content lowers to a bare HUG track | `emit-facts` | `round-tripped` |
+| `emit.grid-hug-track-written-bare` | `implemented` | `emit-figma-script.ts:6446` | a fit-content grid track → { type: 'HUG' }, never { type: 'HUG', value: n } | fit-content lowers to a bare HUG track | `emit-facts` | `round-tripped` |
 | `emit.grid-tracks-to-native-grid` | `implemented` | `emit-figma-script.ts:1726` | grid-template-columns / grid-template-rows → layoutMode 'GRID' with FIXED / FLEX / HUG tracks, plus gridRowCount and gridColumnCount | grid-template-columns / grid-template-rows in the declared spelling | **none** | `round-tripped` |
 
 #### `anatomy.grid-align-fallback-stretch`
@@ -669,8 +671,8 @@ Forward-only decisions with no CSS source at all. Two rules that look identical 
 
 | rule | status | site | CSS construct → Figma | canonical | receipt | round trip |
 |---|---|---|---|---|---|---|
-| `emit.placement-host-section-origin-pinned` | `implemented` | `emit-figma-script.ts:7428` | n/a — canvas placement has no CSS source; this is a pure forward-only structure decision → a NEW host section is placed at x = 0, y = (max bottom edge of the page’s existing children) + a 200px gutter; an EXISTING one is re-fitted in size and keeps the coordinates it already has | position on create; never move an existing section on amend | **none** | `untested` |
-| `emit.placement-variant-cells-gridded` | `implemented` | `emit-figma-script.ts:8076` | n/a — the arrangement of variant cells within a component set → each variant cell placed on a padded grid derived from accumulated column and row extents | variant cells laid out on a deterministic grid | **none** | `untested` |
+| `emit.placement-host-section-origin-pinned` | `implemented` | `emit-figma-script.ts:7457` | n/a — canvas placement has no CSS source; this is a pure forward-only structure decision → a NEW host section is placed at x = 0, y = (max bottom edge of the page’s existing children) + a 200px gutter; an EXISTING one is re-fitted in size and keeps the coordinates it already has | position on create; never move an existing section on amend | **none** | `untested` |
+| `emit.placement-variant-cells-gridded` | `implemented` | `emit-figma-script.ts:8105` | n/a — the arrangement of variant cells within a component set → each variant cell placed on a padded grid derived from accumulated column and row extents | variant cells laid out on a deterministic grid | **none** | `untested` |
 
 #### `emit.placement-host-section-origin-pinned`
 
@@ -701,7 +703,7 @@ Rules that exist purely to work around platform behaviour — the kind of knowle
 | rule | status | site | CSS construct → Figma | canonical | receipt | round trip |
 |---|---|---|---|---|---|---|
 | `emit.slot-birth-box-dissolved` | `implemented` | `emit-figma-script.ts:805` | an empty container that should size to its content → a FIXED → resize(1) → HUG round-trip, which forces the relayout a childless node never gets | an empty box measures its content, not its birth box | `emit-facts` | `untested` |
-| `emit.slot-empty-fill-cleared` | `implemented` | `emit-figma-script.ts:7687` | a slot with no declared background → fills cleared, so the slot renders as Figma’s own empty-slot affordance | an undeclared background is no background | **none** | `untested` |
+| `emit.slot-empty-fill-cleared` | `implemented` | `emit-figma-script.ts:7716` | a slot with no declared background → fills cleared, so the slot renders as Figma’s own empty-slot affordance | an undeclared background is no background | **none** | `untested` |
 | `emit.slot-grid-refused` | `implemented` | `emit-figma-script.ts:4714` | display:grid on a slot part → nothing — refused by name, quoting the platform’s own error | a named refusal | **none** | `untested` |
 
 #### `emit.slot-birth-box-dissolved`
@@ -743,8 +745,8 @@ The honest half of the story. When the state plane is not drawn, every part×sta
 
 | rule | status | site | CSS construct → Figma | canonical | receipt | round trip |
 |---|---|---|---|---|---|---|
-| `emit.state-plane-undrawn` | `implemented` | `emit-figma-script.ts:5535` | :hover, :focus, :active and every other state’s channel values → nothing — the state plane is not drawn | a named refusal per channel (FC-STATE-PLANE-UNDRAWN) | `emit-facts` | `untested` |
-| `emit.state-unset-plane-undrawn` | `implemented` | `emit-figma-script.ts:5524` | the library’s rendering when a defaultless enum prop is not supplied at all → nothing — there is no variant cell for the unset case | a named refusal (FC-UNSET-PLANE-UNDRAWN), one per defaultless axis | `emit-facts` | `untested` |
+| `emit.state-plane-undrawn` | `implemented` | `emit-figma-script.ts:5544` | :hover, :focus, :active and every other state’s channel values → nothing — the state plane is not drawn | a named refusal per channel (FC-STATE-PLANE-UNDRAWN) | `emit-facts` | `untested` |
+| `emit.state-unset-plane-undrawn` | `implemented` | `emit-figma-script.ts:5533` | the library’s rendering when a defaultless enum prop is not supplied at all → nothing — there is no variant cell for the unset case | a named refusal (FC-UNSET-PLANE-UNDRAWN), one per defaultless axis | `emit-facts` | `untested` |
 
 #### `emit.state-plane-undrawn`
 
@@ -776,7 +778,7 @@ A sign convention, a first-wins tie-break, and a token binding that stops at one
 |---|---|---|---|---|---|---|
 | `anatomy.svg-host-plan-first-wins` | `implemented` | `anatomy.ts:1894` | a second (or third) <svg> under a host element that already has an svg plan → nothing for the later svgs — only the first becomes an icon | one icon per host, chosen deliberately, with the others refused by name | **none** | `untested` |
 | `emit.svg-multipaint-token-identity-lost` | `proposed` | `emit-figma-script.ts:4189` | fill / stroke colour on an icon whose markup carries MORE THAN ONE paint → the imported SVG keeps baked hex paints, bound to nothing | each distinct paint bound to the token that produced it, or a named refusal | **none** | `untested` |
-| `emit.svg-rotation-negated` | `implemented` | `emit-figma-script.ts:7576` | transform: rotate(Ndeg) on an icon part → node.rotation = -N | rotate(N) lowers to rotation -N | `emit-facts` | `untested` |
+| `emit.svg-rotation-negated` | `implemented` | `emit-figma-script.ts:7605` | transform: rotate(Ndeg) on an icon part → node.rotation = -N | rotate(N) lowers to rotation -N | `emit-facts` | `untested` |
 
 #### `anatomy.svg-host-plan-first-wins`
 
@@ -817,7 +819,7 @@ A sign convention, a first-wins tie-break, and a token binding that stops at one
 
 | rule | status | site | CSS construct → Figma | canonical | receipt | round trip |
 |---|---|---|---|---|---|---|
-| `emit.wrap-horizontal-only` | `implemented` | `emit-figma-script.ts:6156` | flex-wrap: wrap → node.layoutWrap = 'WRAP' | layoutWrap on a horizontal stack; a named refusal on a column | **none** | `untested` |
+| `emit.wrap-horizontal-only` | `implemented` | `emit-figma-script.ts:6185` | flex-wrap: wrap → node.layoutWrap = 'WRAP' | layoutWrap on a horizontal stack; a named refusal on a column | **none** | `untested` |
 | `schema.wrap-declared-and-detected` | `implemented` | `contract-schema.ts:411` | flex-wrap: wrap on any captured flex container → layoutWrap 'WRAP' on the auto-layout frame | flex-wrap: wrap on the container, and the schema slot it came from | **none** | `round-tripped` |
 
 #### `emit.wrap-horizontal-only`

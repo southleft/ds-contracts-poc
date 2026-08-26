@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "polaris.radio-button",
     "version": "0.4.0",
     "anchorKey": null,
-    "description": "RadioButton — generated from contract polaris.radio-button v0.4.0 † (51 code-only facts — see plugin report)",
+    "description": "RadioButton — generated from contract polaris.radio-button v0.4.0 † (52 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -918,6 +918,17 @@ const COMPONENTS = [
         "channel": "position",
         "value": "relative",
         "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "margin",
+        "value": "8px",
+        "reason": "lowered to the parent's itemSpacing (8px, bound to imported/radio-button/choice-control/margin-right): CSS spells between-sibling space per CHILD and auto-layout spells it once per PARENT, so 1 sibling margin(s) become one gap — choice__control.margin-right",
         "variants": {
           "count": 2,
           "of": 2

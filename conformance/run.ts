@@ -203,6 +203,31 @@ export function readCarriage(outDir: string): Map<string, Array<{ part: string; 
   return carriageOfContract(contract, [ext?.mintedTokens ?? {}, dtcg]);
 }
 
+/** THE MIRROR VOCABULARY — every CSS channel `carriageOfContract` can spell
+ *  out of a STRUCTURED contract block (`Part.layout`, `Part.placement`), as
+ *  opposed to the flat maps (`tokens` / `declared` / `literals` / `states`)
+ *  whose keys are already CSS spellings and therefore need no mirror.
+ *
+ *  It is exported because it is half of a REACHABILITY question that lives
+ *  outside this file: a CSS property that is in neither the schema's channel
+ *  sets nor this set cannot appear in a contract at all, so NO conformance
+ *  case can ever observe it end to end, so no gate anywhere can notice it
+ *  breaking. `scripts/channel-table-check.ts` uses exactly that to refuse a
+ *  CARRIED row that claims to be measurable when nothing could measure it.
+ *  Keeping the list next to the two `eat*` functions that produce it is the
+ *  point — a mirror added there and not named here is the drift this set
+ *  exists to prevent. */
+export const MIRRORED_CHANNELS: readonly string[] = [
+  // eatFlex — Part.layout, the flex-only facts
+  'display', 'flex-direction', 'align-items', 'justify-content', 'flex-wrap', 'flex-grow',
+  // eatGrid — Part.layout, the declared-track grid facts
+  'grid-template-rows', 'grid-template-columns', 'row-gap', 'column-gap',
+  'grid-auto-flow', 'grid-template-areas',
+  // eatGrid — Part.placement, the child-side anchors
+  'grid-row-start', 'grid-column-start', 'grid-row-end', 'grid-column-end',
+  'justify-self', 'align-self',
+];
+
 export interface CarriageHit {
   part: string;
   where: string;
@@ -266,6 +291,41 @@ export function carriageOfContract(contract: Record<string, unknown>, trees: Rec
     }
     return String(t);
   };
+  // A2 LAYOUT PROMOTION, FLEX HALF — the same mirror as eatGrid, for the
+  // flex-only facts of LayoutSchema (`direction` / `align` / `justify` /
+  // `wrap` / `grow`). It did not exist until 2026-08-26, and its absence was
+  // a hole in the INSTRUMENT, not in the engine: `eatMap(…, 'layout', …)`
+  // pushed the CONTRACT's field names as if they were channels, so carriage
+  // was recorded under `align` / `justify` / `direction` — spellings no
+  // browser ever emits and no MANIFEST case can ever name. Across the first
+  // 107 cases nothing had observed `justify-content` or `align-items` at all,
+  // and `combobox-closed-trigger` reported SILENT-LOSS on a value the engine
+  // carried correctly. The fixture was blind, and being blind it read as
+  // green.
+  //
+  // The keyword mapping is MIRRORED here, never imported from the emitters —
+  // the same rule as the grid half. CSS resolves the flex `start`/`end`
+  // keywords to `flex-start`/`flex-end` in computed style, which is the
+  // spelling captured-truth.json holds; the contract spells them bare.
+  // `overlap` is deliberately NOT mirrored: it lowers to a negative child
+  // margin and to negative itemSpacing, so it has no CSS channel of its own,
+  // and inventing one would let the gate assert carriage of a spelling the
+  // browser cannot be asked about.
+  const FLEX_KEYWORD: Record<string, string> = { start: 'flex-start', end: 'flex-end' };
+  const eatFlex = (name: string, lay: unknown): void => {
+    if (!lay || typeof lay !== 'object') return;
+    const l = lay as Record<string, unknown>;
+    // `display` is already a true CSS spelling with true CSS values
+    // (flex / inline-flex / grid) — it passes through unmapped.
+    if (typeof l.display === 'string') push('display', name, 'layout.display', l.display);
+    if (typeof l.direction === 'string') push('flex-direction', name, 'layout.direction', l.direction);
+    if (typeof l.align === 'string') push('align-items', name, 'layout.align', FLEX_KEYWORD[l.align] ?? l.align);
+    if (typeof l.justify === 'string') push('justify-content', name, 'layout.justify', FLEX_KEYWORD[l.justify] ?? l.justify);
+    if (l.wrap === true) push('flex-wrap', name, 'layout.wrap', 'wrap');
+    // `layout.grow` is the contract's "take the remaining space" fact; code
+    // emits `flex: 1 1 auto`, whose computed flex-grow is 1.
+    if (l.grow === true) push('flex-grow', name, 'layout.grow', '1');
+  };
   const eatGrid = (name: string, part: Record<string, unknown>): void => {
     const lay = part.layout as Record<string, unknown> | null | undefined;
     if (lay && typeof lay === 'object') {
@@ -306,36 +366,17 @@ export function carriageOfContract(contract: Record<string, unknown>, trees: Rec
       if (typeof pl.alignY === 'string') push('align-self', name, 'placement.alignY', pl.alignY);
     }
   };
-  // THE FLEX HALF OF THE SAME MIRROR. `eatMap` pushes each layout key under
-  // its own name — `align`, `justify`, `direction`, `wrap` — none of which is
-  // a CSS channel, so the contract's flex layout facts were INVISIBLE to this
-  // gate: a case declaring `align-items` could only ever read as not carried.
-  // The pinned CSS spellings are mirrored here exactly as the grid ones above
-  // are, from the schema's own vocabulary (LayoutSchema) rather than from any
-  // emitter, so the denominator stays independent of the engine.
-  const FLEX_LAYOUT_CSS: Record<string, { channel: string; value: Record<string, string> }> = {
-    direction: { channel: 'flex-direction', value: { row: 'row', column: 'column', 'row-reverse': 'row-reverse', 'column-reverse': 'column-reverse' } },
-    align: { channel: 'align-items', value: { start: 'flex-start', center: 'center', end: 'flex-end', stretch: 'stretch', baseline: 'baseline' } },
-    justify: { channel: 'justify-content', value: { start: 'flex-start', center: 'center', end: 'flex-end', 'space-between': 'space-between' } },
-  };
-  const eatFlexLayout = (name: string, part: Record<string, unknown>): void => {
-    const lay = part.layout as Record<string, unknown> | null | undefined;
-    if (!lay || typeof lay !== 'object') return;
-    for (const [field, spec] of Object.entries(FLEX_LAYOUT_CSS)) {
-      const v = lay[field];
-      if (typeof v === 'string' && spec.value[v] !== undefined) push(spec.channel, name, `layout.${field}`, spec.value[v]);
-    }
-    if (lay.wrap === true) push('flex-wrap', name, 'layout.wrap', 'wrap');
-    if (lay.grow === true) push('flex-grow', name, 'layout.grow', '1');
-  };
   const walkPart = (name: string, part: Record<string, unknown>): void => {
     eatMap(name, 'tokens', part.tokens);
     eatMap(name, 'declared', part.declared);
     eatMap(name, 'declaredStates', part.declaredStates);
     eatMap(name, 'states', part.states);
     eatMap(name, 'literals', part.literals);
-    eatMap(name, 'layout', part.layout);
-    eatFlexLayout(name, part);
+    // NOT eatMap: `layout` is a STRUCTURED block, and eating it as a flat
+    // map spelled its fields as channels (`align`, `justify`, `direction`,
+    // and a `row`/`column` pair leaked out of the nested `layout.gap`). Both
+    // halves are mirrored explicitly instead.
+    eatFlex(name, part.layout);
     eatGrid(name, part);
     if (typeof part.text === 'string') push('__text', name, 'text', part.text);
     if (typeof part.element === 'string') push('__element', name, 'element', part.element);

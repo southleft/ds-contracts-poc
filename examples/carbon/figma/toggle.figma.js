@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "carbon.toggle",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Toggle — generated from contract carbon.toggle v0.2.0 † (37 code-only facts — see plugin report)",
+    "description": "Toggle — generated from contract carbon.toggle v0.2.0 † (38 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -872,6 +872,17 @@ const COMPONENTS = [
         "channel": "user-select",
         "value": "none",
         "reason": "Text-selection behavior (user-select) exists only in the coded component.",
+        "variants": {
+          "count": 4,
+          "of": 4
+        }
+      },
+      {
+        "part": "toggle__label",
+        "kind": "channel",
+        "channel": "margin",
+        "value": "16px",
+        "reason": "lowered to the parent's itemSpacing (16px, bound to imported/shared/size-16): CSS spells between-sibling space per CHILD and auto-layout spells it once per PARENT, so 1 sibling margin(s) become one gap — label.margin-bottom",
         "variants": {
           "count": 4,
           "of": 4

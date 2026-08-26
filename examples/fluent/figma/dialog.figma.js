@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "fluent.dialog",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Dialog — generated from contract fluent.dialog v0.2.0 † (53 code-only facts — see plugin report)",
+    "description": "Dialog — generated from contract fluent.dialog v0.2.0 † (54 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -1348,6 +1348,21 @@ const COMPONENTS = [
         "variants": {
           "count": 3,
           "of": 3
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "margin",
+        "value": "623px",
+        "reason": "lowered to the parent's itemSpacing (623px, bound to imported/dialog/dialogsurface/margin-top): CSS spells between-sibling space per CHILD and auto-layout spells it once per PARENT, so 1 sibling margin(s) become one gap — dialogsurface.margin-top",
+        "variants": {
+          "count": 2,
+          "of": 3,
+          "names": [
+            "Modal Type=Modal",
+            "Modal Type=Alert"
+          ]
         }
       },
       {

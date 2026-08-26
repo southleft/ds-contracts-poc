@@ -333,6 +333,24 @@
       "axes": []
     },
     {
+      "__case": "layout-flex: display: flex; align-items: center — cross-axis centring of two children of DIFFERENT heights — declared CARRIED",
+      "name": "CaseFlexAlignItemsCenter",
+      "importName": "CaseFlexAlignItemsCenter",
+      "contract": "conformance/seeds/flex-align-items-center.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "layout-flex: display: flex; flex-direction: column — the main axis turned vertical — declared CARRIED",
+      "name": "CaseFlexDirectionColumn",
+      "importName": "CaseFlexDirectionColumn",
+      "contract": "conformance/seeds/flex-direction-column.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
       "__case": "layout: column-gap / row-gap in px — declared CARRIED",
       "name": "CaseFlexGap",
       "importName": "CaseFlexGap",
@@ -421,6 +439,15 @@
       "name": "CaseGridChildAlign",
       "importName": "CaseGridChildAlign",
       "contract": "conformance/seeds/grid-child-align.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "grid-alignment: align-self: start on a fixed-size grid child, with no justify-self declared — declared CARRIED",
+      "name": "CaseGridChildAlignSelfStart",
+      "importName": "CaseGridChildAlignSelfStart",
+      "contract": "conformance/seeds/grid-child-align-self-start.contract.json",
       "sampleText": "",
       "axes": [],
       "blockStage": true
@@ -647,6 +674,15 @@
       "blockStage": true
     },
     {
+      "__case": "box: margin-top: 12px on the SECOND child of a flex column whose parent declares no gap — declared CARRIED",
+      "name": "CaseMarginTopInFlow",
+      "importName": "CaseMarginTopInFlow",
+      "contract": "conformance/seeds/margin-top-in-flow.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
       "__case": "effects: mask-image: linear-gradient(...) — declared UNSUPPORTED",
       "name": "CaseMaskImage",
       "importName": "CaseMaskImage",
@@ -701,6 +737,15 @@
       "contract": "conformance/seeds/oklch-color.contract.json",
       "sampleText": "",
       "axes": []
+    },
+    {
+      "__case": "box: padding: 10px 4px 20px 4px — four sides, top and bottom DIFFERENT — declared CARRIED",
+      "name": "CasePaddingAsymmetricBlock",
+      "importName": "CasePaddingAsymmetricBlock",
+      "contract": "conformance/seeds/padding-asymmetric-block.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
     },
     {
       "__case": "cascade: * { border-color: var(--cf-color-secondary) } — a PAGE-GLOBAL authored declaration, with the element's border-width and border-style declared locally and its colour reaching it only through the universal rule — declared CARRIED",

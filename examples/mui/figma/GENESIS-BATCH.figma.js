@@ -67124,7 +67124,7 @@ const COMPONENTS = [
     "contractId": "mui.alert",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Alert — generated from contract mui.alert v0.2.0 † (6 code-only facts — see plugin report)",
+    "description": "Alert — generated from contract mui.alert v0.2.0 † (7 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -68299,6 +68299,17 @@ const COMPONENTS = [
         "channel": "overflow-y",
         "value": "auto",
         "reason": "declared value outside the canvas grammar for this channel — hidden/clip clip natively (clipsContent). auto/scroll are scrolling, which exists only in code.",
+        "variants": {
+          "count": 12,
+          "of": 12
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "margin",
+        "value": "12px",
+        "reason": "lowered to the parent's itemSpacing (12px, bound to imported/alert/alert-icon/margin-right): CSS spells between-sibling space per CHILD and auto-layout spells it once per PARENT, so 1 sibling margin(s) become one gap — alert-icon.margin-right",
         "variants": {
           "count": 12,
           "of": 12
@@ -80658,7 +80669,7 @@ const COMPONENTS = [
     "contractId": "mui.breadcrumbs",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Breadcrumbs — generated from contract mui.breadcrumbs v0.2.0 † (11 code-only facts — see plugin report)",
+    "description": "Breadcrumbs — generated from contract mui.breadcrumbs v0.2.0 † (12 code-only facts — see plugin report)",
     "isSet": false,
     "boolProps": [],
     "textProps": [],
@@ -80875,6 +80886,17 @@ const COMPONENTS = [
         "channel": "display",
         "value": "list-item",
         "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 1,
+          "of": 1
+        }
+      },
+      {
+        "part": "breadcrumbs-ol",
+        "kind": "channel",
+        "channel": "margin",
+        "value": "8px",
+        "reason": "lowered to the parent's itemSpacing (8px, bound to imported/shared/size-8): CSS spells between-sibling space per CHILD and auto-layout spells it once per PARENT, so 4 sibling margin(s) become one gap — label-2.margin-right, label-2.margin-left, label-4.margin-right, label-4.margin-left",
         "variants": {
           "count": 1,
           "of": 1

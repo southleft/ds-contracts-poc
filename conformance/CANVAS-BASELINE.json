@@ -2,8 +2,8 @@
   "_marker": "THE MEASURED ROUND TRIP — contract → Figma (mock) → dump → propose ≡ contract, per conformance case, on the case's own channel. Every SILENT entry is an OPEN DEFECT the engine must name or carry; it is never waivable and leaves this file only by being fixed. The gate refuses drift in EITHER direction: a regression is red, and an improvement must be re-recorded here so a fix can never be absorbed silently.",
   "measuredAt": "extract/computed/out/conformance/<case>/enriched.contract.json through figma-sync/plugin/engine (mock figma) and core/propose-figma (npx tsx conformance/canvas.ts)",
   "counts": {
-    "ROUND-TRIPPED": 53,
-    "NAMED": 16,
+    "ROUND-TRIPPED": 57,
+    "NAMED": 17,
     "DRIFTED": 0,
     "HARMFUL": 0,
     "SILENT": 0,
@@ -293,6 +293,30 @@
       "channelAs": "padding-inline",
       "note": "channel respelled: padding-left → padding-inline"
     },
+    "flex-align-items-center": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "align-items",
+      "seed": [
+        "center"
+      ],
+      "proposed": [
+        "center"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "flex-direction-column": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "flex-direction",
+      "seed": [
+        "column"
+      ],
+      "proposed": [
+        "column"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
     "flex-gap": {
       "classification": "ROUND-TRIPPED",
       "channel": "column-gap",
@@ -397,6 +421,18 @@
       ],
       "proposed": [
         "center"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "grid-child-align-self-start": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "align-self",
+      "seed": [
+        "start"
+      ],
+      "proposed": [
+        "start"
       ],
       "refIdentical": true,
       "note": ""
@@ -580,6 +616,15 @@
       "refIdentical": true,
       "note": ""
     },
+    "margin-top-in-flow": {
+      "classification": "NAMED",
+      "channel": "margin-top",
+      "seed": [
+        "12px"
+      ],
+      "proposed": [],
+      "note": "code-only channel root.margin = 12px — lowered to the parent's itemSpacing (12px, bound to imported/shared/size-12): CSS spells between-sibling space per CHILD and auto-layout spells it once per PARENT, so 1 sibling margin(s) become one gap — b.margin-top"
+    },
     "min-max-width": {
       "classification": "ROUND-TRIPPED",
       "channel": "min-width",
@@ -609,6 +654,20 @@
       ],
       "proposed": [
         "#2784d5"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "padding-asymmetric-block": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "padding-top",
+      "seed": [
+        "10px"
+      ],
+      "proposed": [
+        "10px",
+        "20px",
+        "4px"
       ],
       "refIdentical": true,
       "note": ""

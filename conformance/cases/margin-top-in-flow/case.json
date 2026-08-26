@@ -1,0 +1,19 @@
+{
+  "id": "margin-top-in-flow",
+  "feature": "box",
+  "construct": "margin-top: 12px on the SECOND child of a flex column whose parent declares no gap",
+  "why": "This is the exact construct the CSS->Figma lowering reframe is about: a sibling margin in a gapless stack is the fact a designer would draw as spacing, and the decision of whether it becomes itemSpacing, wrapper padding, or is carried as a margin token is one we claim to have authored. margin-top is CARRIED on a code citation alone; margin-left is the ONLY margin channel any case measures, and it is measured on an inline span where no stack spacing interpretation is available. This case puts the ambiguity in front of the gate on purpose.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.b.tokens.margin-top",
+  "observable": {
+    "part": "b",
+    "channel": "margin-top",
+    "capturedValue": "12px"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "the gap between the two children is real ink — however it is spelled, it must draw"
+  },
+  "blockStage": true
+}
