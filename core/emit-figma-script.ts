@@ -1713,6 +1713,7 @@ function layoutSpec(part: Part, isRoot: boolean, subst: Record<string, string> =
   // gaps resolve to px at compile time (numbers or token refs). Zero tracks
   // can never reach here — the schema refuses them (P2b silent rewrite).
   if (l?.display === 'grid') {
+    // @lower emit.grid-tracks-to-native-grid
     const toTrack = (t: NonNullable<typeof l.rows>[number]): GridTrackSpec =>
       'px' in t ? { type: 'FIXED', value: t.px }
       : 'fr' in t ? { type: 'FLEX', value: t.fr }
@@ -1737,6 +1738,7 @@ function layoutSpec(part: Part, isRoot: boolean, subst: Record<string, string> =
         // stampGridCells (ceil of the ACTUAL child count — G5/P9).
         rows: (l.rows ?? []).map(toTrack),
         columns: (l.columns ?? []).map(toTrack),
+        // @lower emit.grid-gap-pair-kept
         rowGap: gapPx(l.gap?.row),
         columnGap: gapPx(l.gap?.column),
         ...(l.flow === 'row' ? { flow: 'ROW_AUTO_FLOW' as const } : {}),
@@ -1751,6 +1753,7 @@ function layoutSpec(part: Part, isRoot: boolean, subst: Record<string, string> =
   // `declared.display: block`. Presence of `l` used to short-circuit the
   // block-flow VERTICAL rule below, so label sat BESIDE the input (row).
   // CSS block roots still stack; align without direction must not force a row.
+  // @lower emit.axis-block-declared-vertical
   if (l && !l.direction && part.declared?.['display'] === 'block') {
     const counter = l.align ? ALIGN_FIGMA[l.align] : 'MIN';
     return {
@@ -1817,6 +1820,7 @@ function layoutSpec(part: Part, isRoot: boolean, subst: Record<string, string> =
       return d === 'flex' || d === 'block' || d === 'grid' || d === 'list-item' || d === 'table' || d === 'flow-root';
     };
     const adjacentInlines = kids.some((k, i) => i > 0 && !blockLevel(k) && !blockLevel(kids[i - 1]));
+    // @lower emit.axis-blockification
     if (kids.length >= 2 && (kids.every(blockLevel) || (kids.some(blockLevel) && !adjacentInlines))) {
       return { mode: 'VERTICAL', primary: 'MIN', counter: 'MIN', stretchChildren: true };
     }
@@ -2072,6 +2076,7 @@ function applyTokens(
       // switch and were silently dropped — the floor-promoted contracts bind
       // per-side paddings (Tag root 6px/0px), each independently bindable.
       case 'padding-left':
+        // @lower emit.padding-longhand-bound
         spec.bindings = { ...spec.bindings, paddingLeft: varName };
         break;
       case 'padding-right':
@@ -2092,12 +2097,14 @@ function applyTokens(
       // maps to itemSpacing; the cross-axis one only matters under wrap and
       // stays CSS-side.
       case 'column-gap':
+        // @lower emit.gap-token-main-axis
         if ((spec.layout?.mode ?? 'HORIZONTAL') === 'HORIZONTAL') {
           spec.bindings = { ...spec.bindings, itemSpacing: varName };
         } else {
           // fix 3: the CROSS axis of a vertical stack — only observable
           // under wrap, which Figma auto-layout expresses differently. It
           // used to no-op in silence.
+          // @lower emit.gap-token-cross-axis-refused
           miss(spec, cssProp, 'the cross axis of a VERTICAL stack — Figma has one itemSpacing and it is the main axis.', ref);
         }
         break;
@@ -2308,6 +2315,7 @@ function applyTokens(
         // contract in this repo), keeps the fixed-width lowering — which is
         // exactly what the golden design widths depend on.
         const value = px(resolveLiteral(tokenPath));
+        // @lower emit.size-maxwidth-ceiling-or-fixed
         const ceiling = spec.type !== 'text' && Number.isFinite(value) &&
           (spec.type !== 'root' || hugsBelowMaxWidth === true);
         if (ceiling) {
@@ -2336,6 +2344,7 @@ function applyTokens(
       // min-height 44 is a code-side a11y fact — the reviewed canvas-box
       // parity pin, evals design-canvas-box-parity).
       case 'min-height':
+        // @lower emit.size-minheight-dropped-under-height
         if (tokens['height'] === undefined) {
           spec.bindings = { ...spec.bindings, minHeight: varName };
         }
@@ -3996,6 +4005,7 @@ function insetOverlayOffsets(
   // Absolute-position round: carried SYNTHETIC translate channels shift the
   // box (MUI centers rails/thumbs via translate(-50%) idioms) — folded into
   // the offsets here. Contracts without the channels are byte-unchanged.
+  // @lower emit.position-inset-overlay-four-sides
   if (carried === 4 && numeric) {
     const tnum = (ch: string): number => {
       const ref = tokens[ch];
@@ -4776,6 +4786,7 @@ function partToSpecInner(
   spec.children = variantParts(part.parts ?? {}, subst).flatMap(([childName, child]) =>
     partToSpecs(childName, child, contract, byId, childCtx, subst),
   );
+  // @lower emit.axis-reverse-as-child-order
   if (isReversed(part, subst)) spec.children.reverse();
   centerStrokeGlyphsInHosts(spec.children);
   // A2 grid: cells stamp AFTER the child list is final (reversal is a flex
@@ -4886,6 +4897,7 @@ function refuseUnresolvableRefs(contract: Contract, byId: Map<string, Contract>)
     // them fine.
     if (part.slot && part.layout?.display === 'grid') {
       errors.push(
+        // @lower emit.slot-grid-refused
         `${contract.id}: slot "${part.slot.name}" declares display:grid — Figma refuses it verbatim ("GRID layoutMode cannot be applied to Slot frames"); a slot interior is NONE/HORIZONTAL/VERTICAL only`,
       );
     }
@@ -4993,6 +5005,7 @@ function annotateFillW(rootSpec: NodeSpec): void {
     const isCandidate = (c: NodeSpec): boolean =>
       inFlow(c) &&
       !hasOwnWidth(c) &&
+      // @lower emit.size-text-hug-vs-fill
       !(c.type === 'text' && !c.textTruncation && hugTextSafe(c)) &&
       (c.grow === true ||
         (s.layout?.stretchChildren === true &&
@@ -5658,6 +5671,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
               : emptyRuntimeSized
                 ? 'an EMPTY in-flow box takes the parent height (layoutSizingVertical FILL, the #60 runtime default) and a FILL-sized child cannot be wrapped'
                 : null;
+        // @lower emit.margin-box-skipped-refused
         if (sides.length > 0 && why) {
           facts.push({
             part: child.name,
@@ -5728,6 +5742,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   // Badge came back `Color: Blue|Green|Purple, default Blue` with the red
   // badge nowhere and nothing naming it. One fact per defaultless axis.
   for (const p of contract.props) {
+    // @lower emit.state-unset-plane-undrawn
     if (!isEnum(p) || p.default !== undefined || p.bindings.figma.kind !== 'VARIANT') continue;
     facts.push({
       part: 'root',
@@ -5738,6 +5753,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       reason: `defaultless axis — the library's own rendering when "${p.name}" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the ${p.type.enum.length} declared values only, and a proposal read back from the canvas will call "${p.type.enum[0]}" the default (FC-UNSET-PLANE-UNDRAWN)`,
     });
   }
+  // @lower emit.state-plane-undrawn
   if (!contract.bindings?.figma?.statePreviews && contract.states.length > 0) {
     for (const { name: partName, part } of walkAnatomy(contract)) {
       for (const [state, m] of Object.entries(part.states ?? {})) {
@@ -6013,11 +6029,13 @@ function lowerMarginGaps(spec: NodeSpec): void {
     gaps.push({ px: t + l, vars });
   }
   const px = gaps[0].px;
+  // @lower emit.margin-uniform-sibling-to-gap
   if (px <= 0 || !gaps.every((g) => g.px === px)) return;
   const sources = new Set(gaps.flatMap((g) => g.vars));
   if (sources.size === 1 && gaps.every((g) => g.vars.length === 1) && !sources.has(null)) {
     spec.bindings = { ...spec.bindings, itemSpacing: [...sources][0] as string };
   } else {
+    // @lower emit.margin-gap-token-identity
     (spec.lits ??= {}).itemSpacing = px;
   }
   for (let i = 0; i < kids.length; i++) {

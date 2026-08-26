@@ -279,6 +279,7 @@ export function lowerGridDisplay(
   if (cols === 0 && rows === 0) {
     return { refusal: `grid-implicit-tracks: ${display} declares no explicit grid-template-columns/rows (implicit tracks only) — the track counts that decide the lowered axis are not measurable; no layout carried (named refusal)` };
   }
+  // @lower anatomy.grid-two-dimensional-refused
   if (cols > 1 && rows > 1) {
     return { refusal: `grid-two-dimensional: ${display} resolves ${cols} columns × ${rows} rows — a two-dimensional grid has no auto-layout spelling (one axis would have to be invented); no layout carried (named refusal)` };
   }
@@ -1976,6 +1977,7 @@ export function promoteAnatomy(
     const hostIdx = idxOf.get(t.host.id)!;
     const svgIdx = idxOf.get(t.svg.id)!;
     // @door anatomy.svg-host-plan-first-wins
+    // @lower anatomy.svg-host-plan-first-wins
     if (svgPlans.has(hostIdx)) continue;
     svgHostOf.set(svgIdx, hostIdx);
     // per-combo markup over combos where the svg is present

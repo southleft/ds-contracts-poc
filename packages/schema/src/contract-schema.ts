@@ -924,6 +924,7 @@ export const DECLARED_CHANNELS: Record<string, DeclaredChannelSpec> = {
   //    part's inset channels ride minted tokens; the canvas lowers the
   //    inset-0 pattern to layoutPositioning ABSOLUTE (emit-figma-script
   //    isInsetOverlay). fixed/sticky still refuse. --------------------------
+  // @lower schema.position-fixed-sticky-unspellable
   position: {
     value: kw("relative", "static", "absolute"),
     canvas: "annotate",
@@ -970,6 +971,7 @@ export const DECLARED_CHANNELS: Record<string, DeclaredChannelSpec> = {
       "none",
     ),
     canvas: "annotate",
+    // @lower schema.display-block-to-vertical-stack
     note: "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
   },
   // -- wrapping & overflow --------------------------------------------------

@@ -1042,6 +1042,7 @@ export function styledChannels(
       !vpRefused?.has(p) &&
       // @door fuse.webkit-blanket-refusal
       (isFusable(p) ||
+        // @lower fuse.size-geometry-admit-disjunction
         (GEOM_ADMIT.has(p) && !inTableBox && (absAdmit.has(pi) || parentAdmit.has(pi))) ||
         ((p === 'width' || p === 'height') && table.cellAdmit.has(pi)) ||
         (p === 'width' && blockRootAdmit.has(pi)) ||
@@ -1686,6 +1687,7 @@ export function hugEvidence(a: AlignedSweep, space: PropSpace): HugEvidence {
       );
       continue;
     }
+    // @lower fuse.size-hug-evidence
     out.hugs.set(partName, [...verdicts][0]);
   }
   return out;
@@ -1944,6 +1946,7 @@ export function enrichLayout(
     // only flex containers speak the layout vocabulary
     // @door fuse.flex-container-only-speaks-layout
     const baseDisplay = a.baseFlat[pi].node.style['display'];
+    // @lower fuse.axis-flex-only-enrichment
     if (baseDisplay !== 'flex' && baseDisplay !== 'inline-flex') continue;
     for (const [channel, spec] of Object.entries(LAYOUT_CHANNEL_TO_FIELD)) {
       if (!channels.has(channel)) continue;
@@ -2057,6 +2060,7 @@ export function enrichLayout(
         continue;
       }
       // @door fuse.layout-value-outside-vocabulary
+      // @lower fuse.axis-vocabulary-narrow
       if (canonical === undefined) {
         out.receipts.push(`layout-value-outside-vocabulary: ${partName}.${channel} = "${observed}" — stays code-only`);
         continue;
