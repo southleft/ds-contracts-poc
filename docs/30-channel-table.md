@@ -58,7 +58,7 @@ surprise in a customer's library.
   layoutSpec). Every CARRIED row cites the symbol that draws it, and the gate
   refuses if a refactor turns a citation into a ghost.
 - **The empirical shadow** — the conformance kits pin behaviour per value
-  shape: 112 css-dom cases (`conformance/MANIFEST.json`) and 157 canvas cases
+  shape: 115 css-dom cases (`conformance/MANIFEST.json`) and 157 canvas cases
   (`extract/figma/conformance/MANIFEST.json`); rows cite their case ids, and
   every conformance channel must have a row.
 - **Evidence, per CARRIED row** — `CARRIED` used to mean two different

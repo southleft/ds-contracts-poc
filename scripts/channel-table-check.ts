@@ -45,7 +45,7 @@
  *      channel entirely.
  *
  * WHAT IT DOES NOT CLAIM. A row is a CLASSIFICATION, not a proof of
- * behaviour — the conformance kits (112 css-dom + 157 canvas cases) are the
+ * behaviour — the conformance kits (115 css-dom + 157 canvas cases) are the
  * executable half, and the `evidence` field is now the honest record of how
  * many rows the executable half actually reaches. The two FC codes the table
  * mints (FC-PSEUDO-PLANE-UNREAD, FC-STATE-PLANE-UNDRIVEN) name loss classes
