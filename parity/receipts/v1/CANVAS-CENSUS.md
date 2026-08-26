@@ -648,6 +648,24 @@ Regenerated on the MERGED engine, each through its own documented remedy:
 - **The census CODE half was re-rendered for all 23 rows the classes touch** and
   every PNG and `code-render.json` came back byte-identical: the shipped code
   half is reproducible, not hand-placed.
+- **Red→green re-proven on the MERGED tree, by the integrator, both directions.**
+  Reverting ONLY `extract/computed/fuse.ts` to the base (all three classes'
+  fusion doors live in it) and re-capturing the nine cases through Chromium
+  takes the gate from `105 · 102 · 3` to `105 · 94 · 11` with eight
+  REGRESSIONs — RC1's `align-items-baseline`, `flex-wrap-wrap` and
+  `flex-direction-reverse-by-axis` to WRONG-NAME and both `child-order-*` cases
+  to SILENT-LOSS; RC8's `overlay-text-fill-pinned-size` and
+  `overlay-text-fill-stage-derived` to WRONG-NAME; RC7's `pseudo-placeholder`
+  to SILENT-LOSS. RC8's WALL pin `overlay-text-hug-excluded` stayed PASS on BOTH
+  engines, which is what it exists to do. Restoring the file and re-capturing
+  the same nine returns `105 · 102 · 3 · ✔ no drift` and leaves `git status`
+  COMPLETELY CLEAN — the committed fixtures are byte-exactly this engine's
+  output.
+- **`extract:computed:drift` VERIFY is GREEN — 116 components, 0 findings.** It
+  was 19 at the classes' base and 7 after RC1's six-library re-records; the
+  full re-measure on the merged engine (2,621s) moved 14 rows, 7 of them this
+  branch's vocabulary growth and 7 pre-existing staleness in components this
+  branch does not touch, and three rows gained a hand-authored gapCause.
 - shadcn's token surface was rebuilt as the UNION of RC7 and RC8 rather than
   either branch's copy — the merge had left `00-tokens.figma.js` at RC8's 431
   variables, and the GENESIS batch (the artifact a designer pastes) then refused
