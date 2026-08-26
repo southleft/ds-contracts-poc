@@ -1,7 +1,7 @@
 {
-  "passed": 226,
+  "passed": 227,
   "total": 230,
-  "commit": "82b11f1e955fd51a3de008e0d60da3595f0f16d8",
+  "commit": "184be53d2750f68b1f05979a6854692b583e884a",
   "dirty": false,
   "recordedAt": "2026-08-26",
   "results": [
@@ -628,8 +628,7 @@
     {
       "id": "capability-report-is-fresh",
       "claim": "C3-detection",
-      "pass": false,
-      "error": "Error: docs/24-what-works.md is STALE vs a rebuild from its committed sources:\nSTALE: docs/24-what-works.md does not match a rebuild from its committed sources.\nEvery number in it is READ from an artifact; one of those artifacts moved.\nRebuild it and commit:  npm run capability:report\n"
+      "pass": true
     },
     {
       "id": "generated-storybook-trees-are-fresh",
