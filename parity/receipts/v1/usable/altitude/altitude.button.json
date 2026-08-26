@@ -1,0 +1,250 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / altitude",
+  "setNodeId": "39:6719",
+  "setName": "Button (altitude.button)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:6695",
+  "variantNodeName": "Variant=Secondary, State=Default",
+  "axes": [
+    {
+      "axis": "Variant",
+      "values": [
+        "Secondary",
+        "Tertiary",
+        "Bare",
+        "Danger"
+      ]
+    },
+    {
+      "axis": "State",
+      "values": [
+        "Default",
+        "Focus Visible",
+        "Hover"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 12,
+  "variantChildNames": [
+    "Variant=Secondary, State=Default",
+    "Variant=Tertiary, State=Default",
+    "Variant=Bare, State=Default",
+    "Variant=Danger, State=Default",
+    "Variant=Secondary, State=Focus Visible",
+    "Variant=Tertiary, State=Focus Visible",
+    "Variant=Bare, State=Focus Visible",
+    "Variant=Danger, State=Focus Visible",
+    "Variant=Secondary, State=Hover",
+    "Variant=Tertiary, State=Hover",
+    "Variant=Bare, State=Hover",
+    "Variant=Danger, State=Hover"
+  ],
+  "reflow": {
+    "target": "39:6695",
+    "targetName": "Variant=Secondary, State=Default",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "CENTER",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 83,
+      "h": 40,
+      "children": [
+        {
+          "id": "56:155",
+          "name": "label",
+          "type": "TEXT",
+          "x": 16,
+          "y": 8,
+          "w": 51,
+          "h": 24,
+          "ax": 16,
+          "ay": 8,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 123,
+      "h": 80,
+      "children": [
+        {
+          "id": "56:155",
+          "name": "label",
+          "type": "TEXT",
+          "x": 36,
+          "y": 28,
+          "w": 51,
+          "h": 24,
+          "ax": 36,
+          "ay": 28,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "label",
+        "dx": 20,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 83,
+      "h": 40
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:228",
+    "baseline": {
+      "geometry": "4c747f4fe5587794",
+      "fills": "22afea9a83c2c6c8",
+      "text": "1e5b36f18dc4cd44"
+    },
+    "axes": [
+      {
+        "axis": "Variant",
+        "values": [
+          {
+            "value": "Secondary",
+            "geometry": "4c747f4fe5587794",
+            "fills": "22afea9a83c2c6c8",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Tertiary",
+            "geometry": "633be78b2f949f7c",
+            "fills": "2ac8f80239165118",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Bare",
+            "geometry": "4c747f4fe5587794",
+            "fills": "c5504a75a6e9a690",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Danger",
+            "geometry": "4c747f4fe5587794",
+            "fills": "0413405bcace83c8",
+            "text": "1e5b36f18dc4cd44"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "State",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "4c747f4fe5587794",
+            "fills": "22afea9a83c2c6c8",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Focus Visible",
+            "geometry": "4c747f4fe5587794",
+            "fills": "1f2548c7ae233d50",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Hover",
+            "geometry": "4c747f4fe5587794",
+            "fills": "d0accc3e5b2525f0",
+            "text": "1e5b36f18dc4cd44"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 13,
+    "bound": 12,
+    "inferred": 1,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 5,
+        "inferred": 0,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Variant=Secondary, State=Default",
+      "name": "Variant=Secondary, State=Default",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 83,
+      "h": 40,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 51,
+      "h": 24,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 151,
+    "sig": "a5bbd7223f0db150"
+  },
+  "canvasAfter": {
+    "nodes": 151,
+    "sig": "a5bbd7223f0db150"
+  },
+  "canvasRestored": true
+}

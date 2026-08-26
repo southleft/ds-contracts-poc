@@ -616,6 +616,21 @@ jobs:
       - name: census self-test (the gate goes red on a deleted render, a contract outside the manifest, and a pending canvas half)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run census:check -- --self-test
+      # THE THIRD COLUMN. The census measures recognisability and round-trip;
+      # both can be green on a set a designer cannot work with, so `usable` is
+      # a third, independent claim: reflow, variant switching, token binding,
+      # no faked layout. Five failures reproduce on the eight altitude sets
+      # measured today; they are FROZEN BY NAME in
+      # parity/receipts/v1/usable-baseline.json so the gate can run here, where
+      # a NEW failure — or a pinned one that changes shape — goes red, and a
+      # pinned one that stops reproducing refuses until it is re-recorded. An
+      # excluded gate rots; a baselined gate burns down.
+      - name: canvas:usable:check (reflow, variant switching, token binding, no faked layout — held against the committed baseline)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run canvas:usable:check
+      - name: canvas:usable self-test (frozen children, a dead axis value, nothing bound, an in-flow child positioned ABSOLUTE, and a healed pin all go red by name)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run canvas:usable:self-test
       # The reverse direction on the two designer kits: committed REST
       # fixtures → propose → generate React+WC, twice, in memory. Holds
       # SILENT = 0 (every canvas fact carried or named), byte-idempotence,

@@ -127,6 +127,11 @@ import {
   type D2cKitRun,
 } from "../extract/figma/census/design-to-code.js";
 import type { D2cRenderReceipt } from "../extract/figma/census/d2c-render.js";
+import {
+  USABLE_DIR,
+  censusCell,
+  judgeRow as judgeUsable,
+} from "../extract/figma/census/usable.js";
 
 type Phase = "code" | "full" | "design-to-code";
 
@@ -146,6 +151,10 @@ interface RowState {
   verdictState: string;
   walls: string;
   rendered: string;
+  /** THE THIRD COLUMN — beside recognisability and round-trip. `npm run
+   *  canvas:usable:check` owns the four assertions and every named failure;
+   *  the census carries the cell and refuses a row that was never probed. */
+  usableState: string;
   failures: string[];
 }
 
@@ -240,8 +249,17 @@ function rowState(row: ManifestRow, phase: Phase, censusDir: string): RowState {
     verdictState: "PENDING",
     walls: "—",
     rendered: "—",
+    usableState: "PENDING",
     failures,
   };
+
+  const usable = judgeUsable(row, path.join(REPO, USABLE_DIR));
+  state.usableState = censusCell(usable);
+  if (phase === "full" && usable.observation === null) {
+    failures.push(
+      `${who}: no usable observation — the third column (reflow / variant switching / token binding / no faked layout) has never been measured for this set; run \`npm run canvas:usable:check\` for the recipe`,
+    );
+  }
 
   const receiptPath = path.join(dir, "code-render.json");
   if (!existsSync(receiptPath)) {
@@ -412,6 +430,15 @@ function renderReceipt(
       "`scripts/canvas-census-check.ts`. Then `npm run census:check -- --phase full` and flip the fast-lane step to `--phase full`.",
   );
   lines.push("");
+  lines.push("## The third column — is the minted set USABLE");
+  lines.push("");
+  lines.push(
+    'Owner, 2026-08-25, asked whether a minted set must be *usable* as a design-system component or merely *look right*, and chose usable: *"a screenshot-perfect set of frozen rectangles is useless to a DS team."* ' +
+      "Recognisability and round-trip can both be green on a set a designer cannot work with, so `usable` is a third, independent claim, measured through the Plugin API by " +
+      "`npm run canvas:usable:check` (`parity/receipts/v1/CANVAS-USABLE.md`) and read here. The cell is `R` reflow · `V` variant switching · `B` token binding with its bound ratio · `L` no faked layout; " +
+      "`✓` pass, `✘` fail, `·` not applicable (named in the usable receipt). `PENDING` means the set has never been probed, and at `--phase full` that is a refusal — never a blank cell.",
+  );
+  lines.push("");
   lines.push("## Tally");
   lines.push("");
   const tally = (pred: (r: RowState) => boolean) => rows.filter(pred).length;
@@ -443,9 +470,9 @@ function renderReceipt(
   lines.push("## Rows");
   lines.push("");
   lines.push(
-    "| library | id | archetype | axes × variants (compiled; script rows) | variants rendered | code-render | canvas | verdict | walls |",
+    "| library | id | archetype | axes × variants (compiled; script rows) | variants rendered | code-render | canvas | verdict | usable | walls |",
   );
-  lines.push("|---|---|---|---|---|---|---|---|---|");
+  lines.push("|---|---|---|---|---|---|---|---|---|---|");
   for (const r of rows) {
     const m = r.row;
     const compiled =
@@ -453,7 +480,7 @@ function renderReceipt(
         ? `compile refused`
         : `${m.variantAxes} × ${m.variantCount}${m.stateVariantCount ? ` + ${m.stateVariantCount} state` : ""}; ${m.scriptVariantRows}`;
     lines.push(
-      `| ${m.library} | \`${m.id}\` | ${m.archetype} | ${compiled} | ${r.rendered} | ${esc(r.codeState)} | ${esc(r.canvasState)} | ${esc(r.verdictState)} | ${esc(r.walls)} |`,
+      `| ${m.library} | \`${m.id}\` | ${m.archetype} | ${compiled} | ${r.rendered} | ${esc(r.codeState)} | ${esc(r.canvasState)} | ${esc(r.verdictState)} | ${esc(r.usableState)} | ${esc(r.walls)} |`,
     );
   }
   lines.push("");
