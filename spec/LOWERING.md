@@ -74,8 +74,8 @@ This register makes that unrepresentable: a marker must sit **immediately** abov
 | | count |
 |---|---:|
 | rules | **57** |
-| `implemented` | 35 |
-| `proposed` | 19 |
+| `implemented` | 36 |
+| `proposed` | 18 |
 | `wall` | 3 |
 | firing with **no receipt at all** | **43** |
 | **untested** by the 94-case conformance kit | **37** |
@@ -97,7 +97,7 @@ The family the owner asked for by name, and the excavation changed the shape of 
 | rule | status | site | CSS construct → Figma | canonical | receipt | round trip |
 |---|---|---|---|---|---|---|
 | `emit.margin-auto-unparsed` | `wall` | `emit-figma-script.ts:2412` | margin: auto — the standard "push to the far edge" and "centre in the container" idiom → nothing — it is never lowered to SPACE_BETWEEN, to MAX counter-axis alignment, or to a spacer | a named refusal — `auto` margins must be REFUSED by name, never lowered to a used pixel value | **none** | `untested` |
-| `emit.margin-box-absent-on-amend` | `proposed` | `emit-figma-script.ts:7983` | margin-* on a direct child of a STANDALONE component’s root, amended rather than created → nothing — no margin box is built on this path | the same lowering the create path performs — create and amend must agree | **none** | `untested` |
+| `emit.margin-box-absent-on-amend` | `proposed` | `emit-figma-script.ts:8077` | margin-* on a direct child of a STANDALONE component’s root, amended rather than created → nothing — no margin box is built on this path | the same lowering the create path performs — create and amend must agree | **none** | `untested` |
 | `emit.margin-box-skipped-refused` | `implemented` | `emit-figma-script.ts:5400` | margin-* on a child the margin box provably cannot wrap → nothing — the margins are stripped from the spec before the runtime sees them | a named refusal (FC-EMIT-MARGIN-BOX-SKIPPED) | `emit-facts` | `named` |
 | `emit.margin-box-wrapper` | `implemented` | `emit-figma-script.ts:5824` | residual margin-* on an in-flow child that no gap or padding lowering consumed → a synthetic FRAME named "<child> (margin box)", fills [], clipsContent false, sized w+l+r × h+t+b, child placed at (l, t) | gap or padding on the parent, with any residual REFUSED by name — never a synthetic node | **none** | `named` |
 | `emit.margin-collapse-summed-not-maxed` | `proposed` | `emit-figma-script.ts:5754` | adjoining vertical margins between block-flow siblings (margin-bottom of one, margin-top of the next) → itemSpacing = t + l | gap on the parent, equal to the COLLAPSED value | **none** | `untested` |
@@ -278,7 +278,7 @@ Where the owner's two visible failures live. **There is no `layoutMode: 'NONE'` 
 | `emit.axis-icon-host-bypass` | `proposed` | `emit-figma-script.ts:4233` | display:block (or any block-flow display) on an icon part that also carries box channels → layoutMode HORIZONTAL, CENTER/CENTER — layoutSpec is never consulted | one axis rule for every part — the host frame must go through layoutSpec like everything else | **none** | `untested` |
 | `emit.axis-layoutless-root-centered-row` | `proposed` | `emit-figma-script.ts:1764` | a ROOT that carries no layout fact at all → layoutMode HORIZONTAL, primaryAxisAlignItems CENTER, counterAxisAlignItems CENTER — an invented centered row | no layout invented: a root with no carried layout must lower to its declared display, and refuse rather than guess an axis | **none** | `named` |
 | `emit.axis-reverse-as-child-order` | `implemented` | `emit-figma-script.ts:4550` | flex-direction: row-reverse / column-reverse → the same children in reversed CHILD ORDER inside a forward auto-layout frame | reversed child order, with the reverse keyword refused by name | **none** | `untested` |
-| `emit.axis-runtime-default-row` | `implemented` | `emit-figma-script.ts:7285` | any node reaching the generated plugin runtime with no compiled layout → layoutMode HORIZONTAL, MIN/MIN | no layout invented at the backstop — a node that reaches the runtime unclaimed is a defect upstream and should be named, not defaulted | **none** | `untested` |
+| `emit.axis-runtime-default-row` | `implemented` | `emit-figma-script.ts:7353` | any node reaching the generated plugin runtime with no compiled layout → layoutMode HORIZONTAL, MIN/MIN | no layout invented at the backstop — a node that reaches the runtime unclaimed is a defect upstream and should be named, not defaulted | **none** | `untested` |
 | `emit.axis-textbox-bypass` | `proposed` | `emit-figma-script.ts:4404` | a text part carrying a padding channel, whose display is block-flow → layoutMode HORIZONTAL, MIN/MIN | one axis rule for every part | **none** | `untested` |
 | `fuse.axis-flex-only-enrichment` | `implemented` | `fuse.ts:1594` | flex-direction / align-items / justify-content on any container → nothing for a non-flex container: no direction, no align, no justify ever reaches the emitter | layout facts carried for any container that has them, keyed on the combo being measured rather than on the base display | **none** | `named` |
 | `fuse.axis-vocabulary-narrow` | `implemented` | `fuse.ts:1622` | any layout value outside a 4-property, 12-pair vocabulary → nothing — the value stays code-only | a vocabulary at least as wide as the schema enums it feeds | `receipts` | `untested` |
@@ -669,25 +669,25 @@ Two thirds of the layout conformance kit — 30 of the 45 layout cases — and t
 
 **Why.** Worth stating plainly: the schema comment says "Figma has no grid track sizing; the canvas lowers grids to nested auto-layout stacks", and that prose is now OUT OF DATE. Figma shipped a native GRID layout mode with FIXED/FLEX/HUG tracks, this emitter uses it, and four track cases round-trip. The register records the rule the engine actually implements, which is better than the one the schema still describes.
 
-### `placement` — 2 rules (1 implemented, 1 proposed, 0 wall)
+### `placement` — 2 rules (2 implemented, 0 proposed, 0 wall)
 
 Forward-only decisions with no CSS source at all. Two rules that look identical in shape — one is a deliberate, defensible layout of variant cells; the other silently reverts a designer's own repositioning on every amend. Telling them apart is the reason to write both down.
 
 | rule | status | site | CSS construct → Figma | canonical | receipt | round trip |
 |---|---|---|---|---|---|---|
-| `emit.placement-host-section-origin-pinned` | `proposed` | `emit-figma-script.ts:7247` | n/a — canvas placement has no CSS source; this is a pure forward-only structure decision → the host section is moved to (100, 100) on its page | position on create; never move an existing section on amend | **none** | `untested` |
-| `emit.placement-variant-cells-gridded` | `implemented` | `emit-figma-script.ts:7880` | n/a — the arrangement of variant cells within a component set → each variant cell placed on a padded grid derived from accumulated column and row extents | variant cells laid out on a deterministic grid | **none** | `untested` |
+| `emit.placement-host-section-origin-pinned` | `implemented` | `emit-figma-script.ts:7313` | n/a — canvas placement has no CSS source; this is a pure forward-only structure decision → a NEW host section is placed at x = 0, y = (max bottom edge of the page’s existing children) + a 200px gutter; an EXISTING one is re-fitted in size and keeps the coordinates it already has | position on create; never move an existing section on amend | **none** | `untested` |
+| `emit.placement-variant-cells-gridded` | `implemented` | `emit-figma-script.ts:7961` | n/a — the arrangement of variant cells within a component set → each variant cell placed on a padded grid derived from accumulated column and row extents | variant cells laid out on a deterministic grid | **none** | `untested` |
 
 #### `emit.placement-host-section-origin-pinned`
 
-**Context.** ensureHostSection, run unconditionally after the create block, from all three call sites: the create path, amendSet and amendComponent
+**Context.** ensureHostSection, guarding the two position writes; still reached from all three call sites (the create path, amendSet and amendComponent), but now only ACTS on a section this call created
 
 **Inverse.** None — this lowering has no return leg.
 
 **Lost.**
-- the designer’s own positioning of the host section — silently reverted on every amend
+- a host section that GROWS on amend can grow into the gutter below it and touch its neighbour (FC-HOST-SECTION-GROWTH) — preventing that would mean reflowing the neighbours, which is the one thing that cannot coexist with keeping a designer’s position
 
-**Why.** ensureHostSection runs this write UNCONDITIONALLY, after the create block, so it fires whether the section was just created or found by its existing marker — and it is reached from all three call sites: the create path and both amend paths. Every component this emitter touches is pinned to the same coordinate, which is also why several sets can end up stacked at one point. Registered as a decision because placement genuinely is one; registered as `proposed` because reverting a human’s deliberate edit, with no receipt, cannot be the intended one.
+**Why.** REGISTERED AS `proposed` BECAUSE THE BEHAVIOUR IT DESCRIBED WAS A DEFECT, AND IT IS NOW `implemented` BECAUSE THE CANONICAL FORM THIS RULE ALREADY NAMED IS WHAT THE EMITTER DOES. The old write was `section.x = 100; section.y = 100;` run UNCONDITIONALLY after the create block, from all three call sites — so every component this emitter touched was pinned to one coordinate, and an amend reverted a designer’s deliberate move with no receipt. Measured live on the scratch file 2026-08-26, page "Census / altitude": five of eight host sections at the identical (100, 100), drawn on top of each other, which is exactly the stacking this rule predicted. The guard cited here is what makes “position on create; never move an existing section on amend” true, and core/host-placement-check.ts pins both halves plus the fixed point (an unchanged set is still placed, so re-running the sync converges instead of leaving a bad coordinate untouched forever).
 
 #### `emit.placement-variant-cells-gridded`
 
@@ -707,7 +707,7 @@ Rules that exist purely to work around platform behaviour — the kind of knowle
 | rule | status | site | CSS construct → Figma | canonical | receipt | round trip |
 |---|---|---|---|---|---|---|
 | `emit.slot-birth-box-dissolved` | `implemented` | `emit-figma-script.ts:796` | an empty container that should size to its content → a FIXED → resize(1) → HUG round-trip, which forces the relayout a childless node never gets | an empty box measures its content, not its birth box | `emit-facts` | `untested` |
-| `emit.slot-empty-fill-cleared` | `implemented` | `emit-figma-script.ts:7504` | a slot with no declared background → fills cleared, so the slot renders as Figma’s own empty-slot affordance | an undeclared background is no background | **none** | `untested` |
+| `emit.slot-empty-fill-cleared` | `implemented` | `emit-figma-script.ts:7572` | a slot with no declared background → fills cleared, so the slot renders as Figma’s own empty-slot affordance | an undeclared background is no background | **none** | `untested` |
 | `emit.slot-grid-refused` | `implemented` | `emit-figma-script.ts:4661` | display:grid on a slot part → nothing — refused by name, quoting the platform’s own error | a named refusal | **none** | `untested` |
 
 #### `emit.slot-birth-box-dissolved`
@@ -782,7 +782,7 @@ A sign convention, a first-wins tie-break, and a token binding that stops at one
 |---|---|---|---|---|---|---|
 | `anatomy.svg-host-plan-first-wins` | `implemented` | `anatomy.ts:1894` | a second (or third) <svg> under a host element that already has an svg plan → nothing for the later svgs — only the first becomes an icon | one icon per host, chosen deliberately, with the others refused by name | **none** | `untested` |
 | `emit.svg-multipaint-token-identity-lost` | `proposed` | `emit-figma-script.ts:4136` | fill / stroke colour on an icon whose markup carries MORE THAN ONE paint → the imported SVG keeps baked hex paints, bound to nothing | each distinct paint bound to the token that produced it, or a named refusal | **none** | `untested` |
-| `emit.svg-rotation-negated` | `implemented` | `emit-figma-script.ts:7393` | transform: rotate(Ndeg) on an icon part → node.rotation = -N | rotate(N) lowers to rotation -N | `emit-facts` | `untested` |
+| `emit.svg-rotation-negated` | `implemented` | `emit-figma-script.ts:7461` | transform: rotate(Ndeg) on an icon part → node.rotation = -N | rotate(N) lowers to rotation -N | `emit-facts` | `untested` |
 
 #### `anatomy.svg-host-plan-first-wins`
 
@@ -893,7 +893,7 @@ It does not change what the engine lowers. Naming, not carrying — the same dis
 
 | bug | site | rule |
 |---|---|---|
-| `marginBoxCall` is missing from the standalone amend path — margins on a component root's direct children vanish on amend only, and `refuseSkippedMargins` does not cover that exit, so nothing names it | `emit-figma-script.ts:7983` | `emit.margin-box-absent-on-amend` |
+| `marginBoxCall` is missing from the standalone amend path — margins on a component root's direct children vanish on amend only, and `refuseSkippedMargins` does not cover that exit, so nothing names it | `emit-figma-script.ts:8077` | `emit.margin-box-absent-on-amend` |
 | adjoining vertical margins are **summed** where CSS block flow collapses to `max` — a doubled gap, no receipt (the sum is correct for a horizontal row; the axis is the discriminator) | `emit-figma-script.ts:5754` | `emit.margin-collapse-summed-not-maxed` |
 | literal `column-gap` on a column (and `row-gap` on a row) is dropped with **no receipt of any kind**, while the token path for the identical case calls `miss()` | `emit-figma-script.ts:2601` | `emit.gap-literal-cross-axis-silent` |
 | the literal fallback set spells `gap`, a shorthand computed style never reports — the guard can never fire for a real gap, while the padding longhands were added and gap was not | `fuse.ts:1925` | `fuse.gap-literal-fallback-misspelled` |

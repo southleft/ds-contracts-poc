@@ -550,6 +550,9 @@ jobs:
       - name: flowbite-dump-propose:check (maintain — the fixture Flowbite dumps still propose the recorded contracts)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run flowbite-dump-propose:check
+      - name: host-placement:check (maintain — a minted host section never collides with a sibling, a designer's hand-moved section survives an amend, and placement is a fixed point across two runs)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run host-placement:check
       - name: root-attrs:check (maintain — every anatomy.root.attrs entry is carried on react / react-inline / web-components / html)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run root-attrs:check
