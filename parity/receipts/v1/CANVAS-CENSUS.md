@@ -678,6 +678,25 @@ Regenerated on the MERGED engine, each through its own documented remedy:
 - `golden:update` (292 files), the plugin engine receipt, `capability:report`,
   and the regate drift baseline re-recorded on this engine.
 
+**The eval suite is measured on this stack for the first time, and that turns a
+green gate red.** `evals/results.json` at the classes' base said 225/225 —
+recorded at `6938ceb4`, fifteen commits before the base, on a tree that predates
+the whole census line. Nothing in the stack had ever re-measured it. Run on this
+branch's clean tree it is **220/225**, and all five reds were reproduced by me on
+a control worktree checked out at the base: `astryx-reanchor-minted`,
+`child-wider-ratchet-and-script-freshness`, `minted-leaves-bind-to-something`,
+`console-loop-canvas-drift-probe`, `code-to-canvas-wave-a-emit-pins`. One of the
+five is worse by this branch and is named rather than re-recorded:
+`minted-leaves-bind-to-something` adds carbon 92 → 94 unreferenced minted leaves
+(`imported.text-input.text-input.outline-width-state-{active,focus-visible}`),
+and re-fusing plus re-promoting carbon/TextInput on the BASE engine mints the
+same two (876 → 878), so RC7's re-derivation made them visible rather than
+creating them. `docs:check` consequently refuses — it fails whenever the
+committed run is red, because "N/N pass" in a doc would be a false claim. It was
+green at the base only because the record there was stale. An honest record that
+reddens a gate is the right trade; the five reds are the next round's list, not
+this one's.
+
 **Not done, and named rather than implied.** The canvas half was NOT re-minted:
 every `canvas-*.png` under `parity/receipts/v1/census` is still the pre-fix mint,
 and no `verdict.json` was touched. The verdicts that motivated these classes are
