@@ -22089,6 +22089,21 @@
         {
           "part": "dialogbody",
           "kind": "channel",
+          "channel": "column-gap",
+          "value": "{imported.shared.size-8}",
+          "reason": "the cross axis of a VERTICAL stack — Figma has one itemSpacing and it is the main axis.",
+          "variants": {
+            "count": 2,
+            "of": 3,
+            "names": [
+              "Modal Type=Modal",
+              "Modal Type=Alert"
+            ]
+          }
+        },
+        {
+          "part": "dialogbody",
+          "kind": "channel",
           "channel": "max-height",
           "value": "{imported.dialog.dialogbody.max-height}",
           "reason": "Figma has no maxHeight field (maxWidth exists; its height twin does not).",
@@ -22102,26 +22117,11 @@
           }
         },
         {
-          "part": "dialogbody",
-          "kind": "channel",
-          "channel": "row-gap",
-          "value": "{imported.shared.size-8}",
-          "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
-          "variants": {
-            "count": 2,
-            "of": 3,
-            "names": [
-              "Modal Type=Modal",
-              "Modal Type=Alert"
-            ]
-          }
-        },
-        {
           "part": "dialogbody-2",
           "kind": "channel",
-          "channel": "max-height",
-          "value": "{imported.dialog.dialogbody-2.max-height}",
-          "reason": "Figma has no maxHeight field (maxWidth exists; its height twin does not).",
+          "channel": "column-gap",
+          "value": "{imported.shared.size-8}",
+          "reason": "the cross axis of a VERTICAL stack — Figma has one itemSpacing and it is the main axis.",
           "variants": {
             "count": 1,
             "of": 3,
@@ -22133,9 +22133,9 @@
         {
           "part": "dialogbody-2",
           "kind": "channel",
-          "channel": "row-gap",
-          "value": "{imported.shared.size-8}",
-          "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
+          "channel": "max-height",
+          "value": "{imported.dialog.dialogbody-2.max-height}",
+          "reason": "Figma has no maxHeight field (maxWidth exists; its height twin does not).",
           "variants": {
             "count": 1,
             "of": 3,
@@ -22264,6 +22264,21 @@
         },
         {
           "part": "label-2",
+          "kind": "channel",
+          "channel": "margin-top/margin-right/margin-bottom/margin-left",
+          "value": "-2px/-2px/-2px/-2px",
+          "reason": "the margin-box wrapper is skipped — a FILL-sized child cannot be wrapped in a margin box without breaking the fill; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
+          "variants": {
+            "count": 2,
+            "of": 3,
+            "names": [
+              "Modal Type=Modal",
+              "Modal Type=Alert"
+            ]
+          }
+        },
+        {
+          "part": "label-2",
           "kind": "declared",
           "channel": "display",
           "value": "block",
@@ -22381,6 +22396,20 @@
           "variants": {
             "count": 3,
             "of": 3
+          }
+        },
+        {
+          "part": "label-5",
+          "kind": "channel",
+          "channel": "margin-top/margin-right/margin-bottom/margin-left",
+          "value": "-2px/-2px/-2px/-2px",
+          "reason": "the margin-box wrapper is skipped — a FILL-sized child cannot be wrapped in a margin box without breaking the fill; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
+          "variants": {
+            "count": 1,
+            "of": 3,
+            "names": [
+              "Modal Type=Non Modal"
+            ]
           }
         },
         {

@@ -12356,23 +12356,6 @@
         },
         {
           "part": "label-2",
-          "kind": "channel",
-          "channel": "margin-left",
-          "value": "32px",
-          "reason": "the margin-box wrapper is skipped — a FILL-sized child cannot be wrapped in a margin box without breaking the fill; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
-          "variants": {
-            "count": 4,
-            "of": 8,
-            "names": [
-              "Align=Start, Size=Sm",
-              "Align=Start, Size=Md",
-              "Align=Start, Size=Lg",
-              "Align=Start, Size=Sm, State=Disabled"
-            ]
-          }
-        },
-        {
-          "part": "label-2",
           "kind": "declared",
           "channel": "display",
           "value": "block",

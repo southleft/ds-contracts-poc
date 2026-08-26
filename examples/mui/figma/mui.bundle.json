@@ -29752,17 +29752,6 @@
       "facts": [
         {
           "part": "label",
-          "kind": "channel",
-          "channel": "margin-top/margin-right/margin-left",
-          "value": "14px/2px/2px",
-          "reason": "the margin-box wrapper is skipped — a FILL-sized child cannot be wrapped in a margin box without breaking the fill; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
-          "variants": {
-            "count": 1,
-            "of": 1
-          }
-        },
-        {
-          "part": "label",
           "kind": "declared",
           "channel": "display",
           "value": "block",
