@@ -2013,6 +2013,7 @@ export const BASE_FALLBACK_CHANNELS = new Set([
   // defect class as an allow-list written in a vocabulary the producer does
   // not speak. The shorthand stays: an authored `gap` reaching a non-computed
   // path still resolves here.
+  // @lower fuse.gap-literal-fallback-misspelled
   'gap', 'row-gap', 'column-gap',
   'height', 'width', 'min-width', 'min-height',
   'border-radius', 'border-width',
