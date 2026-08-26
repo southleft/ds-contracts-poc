@@ -15,9 +15,9 @@ never waivable.
 
 | | |
 |---|---|
-| cases (CARRIED + LOWERED) | **62** |
-| 🟢 round-tripped | **36** |
-| 🟢 named (dropped, and a receipt says so) | **11** |
+| cases (CARRIED + LOWERED) | **64** |
+| 🟢 round-tripped | **37** |
+| 🟢 named (dropped, and a receipt says so) | **12** |
 | 🟡 refused by name (the canvas cannot host the seed, and says so) | **15** |
 | ⚪ seed-absent (nothing to round-trip) | **0** |
 | 🔴 red | **0** — SILENT 0 · DRIFTED 0 · HARMFUL 0 |
@@ -32,7 +32,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 **HARMFUL** the manifest says no canvas spelling exists and it came back anyway ·
 **SILENT** vanished, named by nothing — never waivable.
 
-## 🟢 NAMED — 11
+## 🟢 NAMED — 12
 
 | case | feature | construct | channel | expect | came back | ref | as | note |
 |---|---|---|---|---|---|---|---|---|
@@ -44,6 +44,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `aspect-ratio` | geometry | aspect-ratio: 2 / 1 | `aspect-ratio` | CARRIED | — |  |  | code-only channel root.aspect-ratio = 2 / 1 — the canvas has no aspect-ratio field — LOWERED to a fixed height of 40px (bound width 80px ÷ 2); the ratio does not reach the canvas, a width change there will not follow it, and the dump reads… |
 | `display-block` | display | display: block | `display` | CARRIED | flex |  |  | value came back as flex (seed block) — code-only declared root.display = block — CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-lev… |
 | `nonpainting-text-display-none` | invariant | a NON-PAINTING element carrying text (display: none) | `__text` | CARRIED | — |  |  | code-only declared label-2.display = none — CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack). |
+| `overlay-text-fill-pinned-size` | geometry | a TEXT-bearing part that fills a PINNED ancestor box (width/height: 100% inside a sized root) in an overlay anatomy — the shadcn.Avatar fallback shape | `width` | CARRIED | 8px, {imported.case-overlay-text-fill-pinned-size.label.width.{size}} |  |  | value came back as 8px, {imported.case-overlay-text-fill-pinned-size.label.width.{size}} (seed 24px) — «self»:root: root width binding {«self».root.width.{size}} carries as **max-width**, not width — a component's outer size is fluid-up-to… |
 | `presence-hidden-axis-geometry` | tokens | an absolute part's inset that is a clean function of ONE enum axis, with the part NOT RENDERED at one axis value (polaris.checkbox icon: top/left 0px when checked, -2px when indeterminate, absent when unchecked) | `top` | CARRIED | {imported.case-presence-hidden-axis-geometry.a.left.{checked}}, {imported.case-presence-hidden-axis-geometry.a.top.{checked}} |  |  | value came back as {imported.case-presence-hidden-axis-geometry.a.left.{checked}}, {imported.case-presence-hidden-axis-geometry.a.top.{checked}} (seed 3px) — code-only channel root.top = {imported.shared.size-0} — bound on an in-flow box (… |
 | `text-overflow-ellipsis` | text | text-overflow: ellipsis + overflow hidden + nowrap | `text-overflow` | CARRIED | — |  |  | degradation text-channel-unsupported @ «self»:«self»/label: text channel(s) with no dump v1 projection: textTruncation ENDING (the canvas twin of CSS text-overflow: ellipsis — drawn, not read back) — typography carries (fontSize, fontStyle… |
 | `transition-channel` | motion | transition: background-color 200ms ease | `transition-duration` | CARRIED | — |  |  | code-only declared root.transition-duration = 0.2s — Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame. |
@@ -68,7 +69,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `grid-on-component-variant` | grid-composition | layoutMode GRID on a COMPONENT node (canvas variants are components) | `grid-template-rows` | CARRIED | — |  |  | plugin plan: conformance.grid-on-component-variant — anatomy.root.literals.width: grid-axis-indefinite: a grid part must make each axis DEFINITE — a px/token size, "fit-content" (G8), or layout.grow (width, flex parent). Absence is refused… |
 | `grid-row-span` | grid-placement | grid-row: 2 / span 2 (child spans 2 rows) | `grid-row-end` | CARRIED | — |  |  | plugin plan: conformance.grid-row-span — anatomy.root.literals.height: grid-axis-indefinite: a grid part must make each axis DEFINITE — a px/token size, "fit-content" (G8), or layout.grow (width, flex parent). Absence is refused because it… |
 
-## 🟢 ROUND-TRIPPED — 36
+## 🟢 ROUND-TRIPPED — 37
 
 | case | feature | construct | channel | expect | came back | ref | as | note |
 |---|---|---|---|---|---|---|---|---|
@@ -104,6 +105,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `oklch-color` | color | background-color: oklch(0.6 0.15 250) | `background-color` | CARRIED | #2784d5 | same |  |  |
 | `percentage-padding` | units | padding-left: 10% (resolved against the PARENT width) | `padding-left` | CARRIED | 28.7969px | same |  |  |
 | `position-absolute-insets` | position | position: absolute + top/left insets | `top` | CARRIED | 4px, 6px | same |  |  |
+| `pseudo-placeholder` | pseudo-elements | input::placeholder { color } | `placeholder-color` | CARRIED | #969696 | same |  |  |
 | `shadow-part` | shadow-dom | ::part(label) styling across an OPEN shadow boundary | `color` | CARRIED | #b4145a | same |  |  |
 | `var-fallback-chain` | custom-properties | color: var(--cf-missing, var(--cf-color-secondary, #333)) | `color` | CARRIED | #663399 | same |  |  |
 | `var-longhand` | custom-properties | background-color: var(--cf-color-primary) | `background-color` | CARRIED | #1976d2 | same |  |  |
