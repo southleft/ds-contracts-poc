@@ -11341,7 +11341,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedWidth": {
             "px": 71.2344,
@@ -11378,7 +11379,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedWidth": {
             "px": 71.2344,
@@ -11415,7 +11417,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedWidth": {
             "px": 71.2344,
@@ -11452,7 +11455,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedWidth": {
             "px": 71.2344,
@@ -11489,7 +11493,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedWidth": {
             "px": 71.2344,
@@ -13052,7 +13057,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/kbd/root/background-color",
           "stroke": "imported/shared/color-e5e7eb",
@@ -14662,7 +14668,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedWidth": {
             "px": 64.9531,
@@ -14699,7 +14706,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedWidth": {
             "px": 64.9531,
@@ -14736,7 +14744,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedWidth": {
             "px": 64.9531,
@@ -14773,7 +14782,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedWidth": {
             "px": 64.9531,
@@ -14810,7 +14820,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedWidth": {
             "px": 64.9531,
@@ -18702,6 +18713,7 @@ async function amendComponent(comp, C) {
     if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
+    applyMarginBox(comp, childNode, childSpec, registry);
   }
   resizeOutOfFlow(comp, built);
   for (const t of registry.texts) {

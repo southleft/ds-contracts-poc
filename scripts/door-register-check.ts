@@ -120,17 +120,27 @@ const KINDS = new Set(['subtractive', 'admitting', 'both']);
  *      Four such channels exist in antd; they are a real, newly visible hole,
  *      and they are counted rather than absorbed.
  *  astryx and mui stay at 0 authored: neither corpus carries var() evidence on a
- *  dropped channel, so neither can contribute to this split. */
+ *  dropped channel, so neither can contribute to this split.
+ *
+ *  RE-MEASURED FOR THE FLOW-ORDER REFUSAL (feat/layout-lowering). `order` is
+ *  now refused BY NAME before minting (`fuse.flow-order-refusal`), so it never
+ *  reaches the control-element delta. Control-equal drops fall 246,318 ->
+ *  245,645: the 673 fewer are one channel — `order`, whose computed value is
+ *  `0` on both the part and the control — moving out of the anonymous
+ *  control-equal bucket and into a refusal that says its own name. Nothing is
+ *  carried differently and nothing new is dropped; a fact that used to be one
+ *  of a quarter of a million silent subtractions is now one of 673 named ones.
+ *  No other column moves, which is the check that this is the only cause. */
 export const PINNED_CENSUS: Record<string, { components: number; drops: number; authored: number; fallback: number }> = {
-  altitude: { components: 8, drops: 4734, authored: 6, fallback: 5 },
-  antd: { components: 12, drops: 25048, authored: 23, fallback: 20 },
-  astryx: { components: 10, drops: 23321, authored: 0, fallback: 16 },
-  carbon: { components: 10, drops: 37271, authored: 12, fallback: 32 },
-  fluent: { components: 11, drops: 20892, authored: 13, fallback: 19 },
-  mui: { components: 31, drops: 70062, authored: 0, fallback: 93 },
-  polaris: { components: 12, drops: 44659, authored: 69, fallback: 43 },
-  shadcn: { components: 11, drops: 12244, authored: 1, fallback: 7 },
-  tailwind: { components: 11, drops: 8087, authored: 9, fallback: 7 },
+  altitude: { components: 8, drops: 4721, authored: 6, fallback: 5 },
+  antd: { components: 12, drops: 24980, authored: 23, fallback: 20 },
+  astryx: { components: 10, drops: 23257, authored: 0, fallback: 16 },
+  carbon: { components: 10, drops: 37169, authored: 12, fallback: 32 },
+  fluent: { components: 11, drops: 20835, authored: 13, fallback: 19 },
+  mui: { components: 31, drops: 69871, authored: 0, fallback: 93 },
+  polaris: { components: 12, drops: 44537, authored: 69, fallback: 43 },
+  shadcn: { components: 11, drops: 12210, authored: 1, fallback: 7 },
+  tailwind: { components: 11, drops: 8065, authored: 9, fallback: 7 },
 };
 
 export interface Finding {

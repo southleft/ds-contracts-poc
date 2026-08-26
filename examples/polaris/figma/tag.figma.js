@@ -3696,6 +3696,7 @@ async function amendComponent(comp, C) {
     if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
+    applyMarginBox(comp, childNode, childSpec, registry);
   }
   // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP

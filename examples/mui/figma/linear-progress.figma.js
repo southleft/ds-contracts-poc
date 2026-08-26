@@ -27,7 +27,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/linear-progress/root/background-color",
           "fixedHeight": {
@@ -115,7 +116,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/linear-progress/root/background-color",
           "fixedHeight": {

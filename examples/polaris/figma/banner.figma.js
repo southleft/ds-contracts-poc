@@ -79,7 +79,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "fixedWidth": {
@@ -422,10 +423,6 @@ const COMPONENTS = [
                                     "px": 32,
                                     "varName": "imported/shared/size-32"
                                   },
-                                  "margins": {
-                                    "left": 8,
-                                    "top": 8
-                                  },
                                   "fixedWidth": {
                                     "px": 82.0781,
                                     "varName": "imported/banner/buttongroup-item/width"
@@ -534,7 +531,11 @@ const COMPONENTS = [
                                 }
                               ],
                               "visibleProp": "Show WithAction",
-                              "visibleDefault": false
+                              "visibleDefault": false,
+                              "bindings": {
+                                "paddingTop": "imported/shared/size-8",
+                                "paddingLeft": "imported/shared/size-8"
+                              }
                             }
                           ]
                         }
@@ -593,7 +594,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "fixedWidth": {
@@ -936,10 +938,6 @@ const COMPONENTS = [
                                     "px": 32,
                                     "varName": "imported/shared/size-32"
                                   },
-                                  "margins": {
-                                    "left": 8,
-                                    "top": 8
-                                  },
                                   "fixedWidth": {
                                     "px": 82.0781,
                                     "varName": "imported/banner/buttongroup-item/width"
@@ -1048,7 +1046,11 @@ const COMPONENTS = [
                                 }
                               ],
                               "visibleProp": "Show WithAction",
-                              "visibleDefault": false
+                              "visibleDefault": false,
+                              "bindings": {
+                                "paddingTop": "imported/shared/size-8",
+                                "paddingLeft": "imported/shared/size-8"
+                              }
                             }
                           ]
                         }
@@ -1107,7 +1109,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "fixedWidth": {
@@ -1450,10 +1453,6 @@ const COMPONENTS = [
                                     "px": 32,
                                     "varName": "imported/shared/size-32"
                                   },
-                                  "margins": {
-                                    "left": 8,
-                                    "top": 8
-                                  },
                                   "fixedWidth": {
                                     "px": 82.0781,
                                     "varName": "imported/banner/buttongroup-item/width"
@@ -1562,7 +1561,11 @@ const COMPONENTS = [
                                 }
                               ],
                               "visibleProp": "Show WithAction",
-                              "visibleDefault": false
+                              "visibleDefault": false,
+                              "bindings": {
+                                "paddingTop": "imported/shared/size-8",
+                                "paddingLeft": "imported/shared/size-8"
+                              }
                             }
                           ]
                         }
@@ -1621,7 +1624,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "fixedWidth": {
@@ -1964,10 +1968,6 @@ const COMPONENTS = [
                                     "px": 32,
                                     "varName": "imported/shared/size-32"
                                   },
-                                  "margins": {
-                                    "left": 8,
-                                    "top": 8
-                                  },
                                   "fixedWidth": {
                                     "px": 82.0781,
                                     "varName": "imported/banner/buttongroup-item/width"
@@ -2076,7 +2076,11 @@ const COMPONENTS = [
                                 }
                               ],
                               "visibleProp": "Show WithAction",
-                              "visibleDefault": false
+                              "visibleDefault": false,
+                              "bindings": {
+                                "paddingTop": "imported/shared/size-8",
+                                "paddingLeft": "imported/shared/size-8"
+                              }
                             }
                           ]
                         }
@@ -2153,7 +2157,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "fixedWidth": {
@@ -2496,10 +2501,6 @@ const COMPONENTS = [
                                     "px": 32,
                                     "varName": "imported/shared/size-32"
                                   },
-                                  "margins": {
-                                    "left": 8,
-                                    "top": 8
-                                  },
                                   "fixedWidth": {
                                     "px": 82.0781,
                                     "varName": "imported/banner/buttongroup-item/width"
@@ -2608,7 +2609,11 @@ const COMPONENTS = [
                                 }
                               ],
                               "visibleProp": "Show WithAction",
-                              "visibleDefault": false
+                              "visibleDefault": false,
+                              "bindings": {
+                                "paddingTop": "imported/shared/size-8",
+                                "paddingLeft": "imported/shared/size-8"
+                              }
                             }
                           ]
                         }
@@ -2670,7 +2675,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "fixedWidth": {
@@ -3013,10 +3019,6 @@ const COMPONENTS = [
                                     "px": 32,
                                     "varName": "imported/shared/size-32"
                                   },
-                                  "margins": {
-                                    "left": 8,
-                                    "top": 8
-                                  },
                                   "fixedWidth": {
                                     "px": 82.0781,
                                     "varName": "imported/banner/buttongroup-item/width"
@@ -3125,7 +3127,11 @@ const COMPONENTS = [
                                 }
                               ],
                               "visibleProp": "Show WithAction",
-                              "visibleDefault": false
+                              "visibleDefault": false,
+                              "bindings": {
+                                "paddingTop": "imported/shared/size-8",
+                                "paddingLeft": "imported/shared/size-8"
+                              }
                             }
                           ]
                         }
@@ -3187,7 +3193,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "fixedWidth": {
@@ -3530,10 +3537,6 @@ const COMPONENTS = [
                                     "px": 32,
                                     "varName": "imported/shared/size-32"
                                   },
-                                  "margins": {
-                                    "left": 8,
-                                    "top": 8
-                                  },
                                   "fixedWidth": {
                                     "px": 82.0781,
                                     "varName": "imported/banner/buttongroup-item/width"
@@ -3642,7 +3645,11 @@ const COMPONENTS = [
                                 }
                               ],
                               "visibleProp": "Show WithAction",
-                              "visibleDefault": false
+                              "visibleDefault": false,
+                              "bindings": {
+                                "paddingTop": "imported/shared/size-8",
+                                "paddingLeft": "imported/shared/size-8"
+                              }
                             }
                           ]
                         }
@@ -3704,7 +3711,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "fixedWidth": {
@@ -4047,10 +4055,6 @@ const COMPONENTS = [
                                     "px": 32,
                                     "varName": "imported/shared/size-32"
                                   },
-                                  "margins": {
-                                    "left": 8,
-                                    "top": 8
-                                  },
                                   "fixedWidth": {
                                     "px": 82.0781,
                                     "varName": "imported/banner/buttongroup-item/width"
@@ -4159,7 +4163,11 @@ const COMPONENTS = [
                                 }
                               ],
                               "visibleProp": "Show WithAction",
-                              "visibleDefault": false
+                              "visibleDefault": false,
+                              "bindings": {
+                                "paddingTop": "imported/shared/size-8",
+                                "paddingLeft": "imported/shared/size-8"
+                              }
                             }
                           ]
                         }
@@ -6294,6 +6302,7 @@ async function amendComponent(comp, C) {
     if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
+    applyMarginBox(comp, childNode, childSpec, registry);
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);

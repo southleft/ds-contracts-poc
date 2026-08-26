@@ -28,7 +28,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "minHeight": "imported/shared/size-0",

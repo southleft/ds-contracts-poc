@@ -60,7 +60,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "CENTER",
                     "counter": "CENTER",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "clipsContent": true,
                   "children": [
@@ -204,7 +205,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "CENTER",
                     "counter": "CENTER",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "clipsContent": true,
                   "children": [
@@ -348,7 +350,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "CENTER",
                     "counter": "CENTER",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "clipsContent": true,
                   "children": [
@@ -491,7 +494,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "CENTER",
                     "counter": "CENTER",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "clipsContent": true,
                   "children": [
@@ -634,7 +638,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "CENTER",
                     "counter": "CENTER",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "clipsContent": true,
                   "children": [
@@ -777,7 +782,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "CENTER",
                     "counter": "CENTER",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "clipsContent": true,
                   "children": [
@@ -920,7 +926,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "CENTER",
                     "counter": "CENTER",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "clipsContent": true,
                   "children": [
@@ -1063,7 +1070,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "CENTER",
                     "counter": "CENTER",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "clipsContent": true,
                   "children": [
@@ -1206,7 +1214,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "CENTER",
                     "counter": "CENTER",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "clipsContent": true,
                   "children": [
@@ -1349,7 +1358,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "CENTER",
                     "counter": "CENTER",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "clipsContent": true,
                   "children": [
@@ -1492,7 +1502,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "CENTER",
                     "counter": "CENTER",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "clipsContent": true,
                   "children": [
@@ -1635,7 +1646,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "CENTER",
                     "counter": "CENTER",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "clipsContent": true,
                   "children": [

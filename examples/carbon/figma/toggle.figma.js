@@ -28,7 +28,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 57.9844,
@@ -46,7 +47,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "bindings": {
                 "minHeight": "imported/shared/size-0",
@@ -178,7 +180,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 57.9844,
@@ -196,7 +199,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "bindings": {
                 "minHeight": "imported/shared/size-0",
@@ -336,7 +340,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 57.9844,
@@ -354,7 +359,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "bindings": {
                 "minHeight": "imported/shared/size-0",
@@ -487,7 +493,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 57.9844,
@@ -505,7 +512,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "bindings": {
                 "minHeight": "imported/shared/size-0",

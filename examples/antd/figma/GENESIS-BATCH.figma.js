@@ -122,7 +122,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -276,7 +277,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -416,7 +418,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -570,7 +573,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -710,7 +714,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -864,7 +869,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -1004,7 +1010,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -1158,7 +1165,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -2924,6 +2932,7 @@ async function amendComponent(comp, C) {
     if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
+    applyMarginBox(comp, childNode, childSpec, registry);
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
@@ -5221,7 +5230,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 32,
@@ -5408,7 +5418,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 32,
@@ -5595,7 +5606,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 32,
@@ -5782,7 +5794,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 32,
@@ -5905,7 +5918,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 32,
@@ -6028,7 +6042,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 32,
@@ -14108,7 +14123,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/card/root/background-color",
           "bindings": {
@@ -14239,7 +14255,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/card/root/background-color",
           "bindings": {
@@ -14405,7 +14422,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/card/root/background-color",
           "bindings": {
@@ -14536,7 +14554,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/card/root/background-color",
           "bindings": {
@@ -19494,9 +19513,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Middle, Status=Error, Variant=Outlined",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "CENTER"
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/middle/outlined",
@@ -19537,7 +19558,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -19550,9 +19572,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Middle, Status=Error, Variant=Borderless",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "CENTER"
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/middle/borderless",
@@ -19593,7 +19617,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -19606,9 +19631,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Middle, Status=Error, Variant=Filled",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "CENTER"
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/middle/filled",
@@ -19649,7 +19676,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -19662,9 +19690,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Middle, Status=Error, Variant=Underlined",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "CENTER"
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/middle/underlined",
@@ -19704,7 +19734,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -19717,9 +19748,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Middle, Status=Warning, Variant=Outlined",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "CENTER"
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/middle/outlined",
@@ -19760,7 +19793,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -19773,9 +19807,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Middle, Status=Warning, Variant=Borderless",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "CENTER"
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/middle/borderless",
@@ -19816,7 +19852,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -19829,9 +19866,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Middle, Status=Warning, Variant=Filled",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "CENTER"
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/middle/filled",
@@ -19872,7 +19911,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -19885,9 +19925,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Middle, Status=Warning, Variant=Underlined",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "CENTER"
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/middle/underlined",
@@ -19927,7 +19969,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -19940,9 +19983,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Small, Status=Error, Variant=Outlined",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "CENTER"
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/small/outlined",
@@ -19983,7 +20028,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -19996,9 +20042,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Small, Status=Error, Variant=Borderless",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "CENTER"
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/small/borderless",
@@ -20039,7 +20087,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -20052,9 +20101,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Small, Status=Error, Variant=Filled",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "CENTER"
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/small/filled",
@@ -20095,7 +20146,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -20108,9 +20160,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Small, Status=Error, Variant=Underlined",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "CENTER"
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/small/underlined",
@@ -20150,7 +20204,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -20163,9 +20218,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Small, Status=Warning, Variant=Outlined",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "CENTER"
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/small/outlined",
@@ -20206,7 +20263,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -20219,9 +20277,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Small, Status=Warning, Variant=Borderless",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "CENTER"
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/small/borderless",
@@ -20262,7 +20322,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -20275,9 +20336,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Small, Status=Warning, Variant=Filled",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "CENTER"
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/small/filled",
@@ -20318,7 +20381,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -20331,9 +20395,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Small, Status=Warning, Variant=Underlined",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "CENTER"
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/small/underlined",
@@ -20373,7 +20439,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -20386,9 +20453,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Large, Status=Error, Variant=Outlined",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "CENTER"
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/large/outlined",
@@ -20429,7 +20498,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -20442,9 +20512,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Large, Status=Error, Variant=Borderless",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "CENTER"
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/large/borderless",
@@ -20485,7 +20557,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -20498,9 +20571,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Large, Status=Error, Variant=Filled",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "CENTER"
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/large/filled",
@@ -20541,7 +20616,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -20554,9 +20630,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Large, Status=Error, Variant=Underlined",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "CENTER"
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/large/underlined",
@@ -20596,7 +20674,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -20609,9 +20688,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Large, Status=Warning, Variant=Outlined",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "CENTER"
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/large/outlined",
@@ -20652,7 +20733,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -20665,9 +20747,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Large, Status=Warning, Variant=Borderless",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "CENTER"
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/large/borderless",
@@ -20708,7 +20792,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -20721,9 +20806,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Large, Status=Warning, Variant=Filled",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "CENTER"
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/large/filled",
@@ -20764,7 +20851,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -20777,9 +20865,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Large, Status=Warning, Variant=Underlined",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
-            "counter": "CENTER"
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/large/underlined",
@@ -20819,7 +20909,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -20844,9 +20935,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Middle, Status=Error, Variant=Outlined, State=Disabled",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/middle/outlined",
@@ -20887,7 +20980,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -20900,9 +20994,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Middle, Status=Error, Variant=Borderless, State=Disabled",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/middle/borderless",
@@ -20943,7 +21039,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -20956,9 +21053,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Middle, Status=Error, Variant=Filled, State=Disabled",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/middle/filled",
@@ -20999,7 +21098,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -21012,9 +21112,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Middle, Status=Error, Variant=Underlined, State=Disabled",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/middle/underlined",
@@ -21054,7 +21156,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -21067,9 +21170,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Middle, Status=Error, Variant=Outlined, State=Focus Visible",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/middle/outlined",
@@ -21124,7 +21229,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -21137,9 +21243,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Middle, Status=Error, Variant=Borderless, State=Focus Visible",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/middle/borderless",
@@ -21181,7 +21289,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -21194,9 +21303,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Middle, Status=Error, Variant=Filled, State=Focus Visible",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/middle/filled",
@@ -21238,7 +21349,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -21251,9 +21363,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Middle, Status=Error, Variant=Underlined, State=Focus Visible",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/middle/underlined",
@@ -21294,7 +21408,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -21307,9 +21422,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Middle, Status=Error, Variant=Outlined, State=Hover",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/middle/outlined",
@@ -21350,7 +21467,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -21363,9 +21481,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Middle, Status=Error, Variant=Borderless, State=Hover",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/middle/borderless",
@@ -21406,7 +21526,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -21419,9 +21540,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Middle, Status=Error, Variant=Filled, State=Hover",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/middle/filled",
@@ -21462,7 +21585,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -21475,9 +21599,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Middle, Status=Error, Variant=Underlined, State=Hover",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/middle/underlined",
@@ -21517,7 +21643,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -21530,9 +21657,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Middle, Status=Error, Variant=Outlined, State=Active",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/middle/outlined",
@@ -21587,7 +21716,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -21600,9 +21730,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Middle, Status=Error, Variant=Borderless, State=Active",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/middle/borderless",
@@ -21644,7 +21776,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -21657,9 +21790,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Middle, Status=Error, Variant=Filled, State=Active",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/middle/filled",
@@ -21701,7 +21836,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -21714,9 +21850,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Size=Middle, Status=Error, Variant=Underlined, State=Active",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/middle/underlined",
@@ -21757,7 +21895,8 @@ const COMPONENTS = [
               },
               "fontFamily": "Roboto",
               "textTruncation": true,
-              "contentProp": "Placeholder"
+              "contentProp": "Placeholder",
+              "fillW": true
             }
           ]
         }
@@ -24151,9 +24290,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Status=Unset",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "minHeight": "imported/shared/size-0",
@@ -24186,7 +24327,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "fill": "imported/progress/progress-inner/background-color",
@@ -24269,9 +24411,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Status=Exception",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "minHeight": "imported/shared/size-0",
@@ -24304,7 +24448,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "fill": "imported/progress/progress-inner/background-color",
@@ -24409,9 +24554,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Status=Active",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "minHeight": "imported/shared/size-0",
@@ -24444,7 +24591,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "fill": "imported/progress/progress-inner/background-color",
@@ -24527,9 +24675,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Status=Success",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "minHeight": "imported/shared/size-0",
@@ -24562,7 +24712,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "fill": "imported/progress/progress-inner/background-color",
@@ -29630,7 +29781,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-100",
@@ -29664,7 +29816,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-100",
@@ -29812,7 +29965,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-100",
@@ -29846,7 +30000,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-100",
@@ -29994,7 +30149,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-100",
@@ -30028,7 +30184,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-100",
@@ -30176,7 +30333,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-100",
@@ -30210,7 +30368,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-100",
@@ -30368,7 +30527,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-100",
@@ -30403,7 +30563,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-100",
@@ -30551,7 +30712,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-100",
@@ -30586,7 +30748,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-100",
@@ -30734,7 +30897,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-100",
@@ -30771,7 +30935,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-100",
@@ -30919,7 +31084,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-100",
@@ -30956,7 +31122,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-100",
@@ -31104,7 +31271,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-100",
@@ -31138,7 +31306,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-100",
@@ -31286,7 +31455,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-100",
@@ -31320,7 +31490,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-100",
@@ -31468,7 +31639,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-100",
@@ -31502,7 +31674,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-100",
@@ -31650,7 +31823,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-100",
@@ -31684,7 +31858,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-100",
@@ -34168,6 +34343,7 @@ async function amendComponent(comp, C) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
     applyInsetOverlay(comp, childNode, childSpec);
+    applyMarginBox(comp, childNode, childSpec, registry);
   }
   resizeOutOfFlow(comp, built);
   // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
@@ -34479,7 +34655,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/tag/root/background-color/blue",
           "bindings": {
@@ -34541,7 +34718,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/tag/root/background-color/blue",
           "bindings": {
@@ -34603,7 +34781,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/tag/root/background-color/green",
           "bindings": {
@@ -34665,7 +34844,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/tag/root/background-color/green",
           "bindings": {
@@ -34727,7 +34907,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/tag/root/background-color/red",
           "bindings": {
@@ -34789,7 +34970,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/tag/root/background-color/red",
           "bindings": {
@@ -34851,7 +35033,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/tag/root/background-color/gold",
           "bindings": {
@@ -34913,7 +35096,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/tag/root/background-color/gold",
           "bindings": {
@@ -34975,7 +35159,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/tag/root/background-color/success",
           "bindings": {
@@ -35037,7 +35222,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/tag/root/background-color/success",
           "bindings": {
@@ -35099,7 +35285,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/tag/root/background-color/processing",
           "bindings": {
@@ -35161,7 +35348,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/tag/root/background-color/processing",
           "bindings": {
@@ -35223,7 +35411,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/tag/root/background-color/error",
           "bindings": {
@@ -35285,7 +35474,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/tag/root/background-color/error",
           "bindings": {
@@ -37109,7 +37299,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 34,

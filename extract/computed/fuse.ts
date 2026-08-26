@@ -41,6 +41,7 @@ import { PRESENCE_OFF } from './capture.js';
 import type { ComponentConfig, PropSpace, SweepResult, Interaction } from './capture.js';
 import {
   CHANNEL_TO_COMPUTED,
+  FLOW_ORDER_CHANNELS,
   GEOMETRY_CHANNELS,
   DECOR_PSEUDOS,
   flatten,
@@ -748,6 +749,7 @@ export function styledChannels(
    *  so the next vendor-prefixed construct announces itself instead of
    *  evaporating. */
   const webkitStyled = new Map<string, Set<string>>(); // channel -> parts
+  const orderStyled = new Map<string, Set<string>>(); // channel -> parts
   // ANTD EXAM (2026-08-23) — THE GEOMETRY EXCLUSION STOPS BEING SILENT PER
   // PART. Option B (docs/BETA.md) keeps width/height out of fusion as
   // environment-dependent and carries the obligation to LEDGER each drop.
@@ -847,6 +849,11 @@ export function styledChannels(
       // uses (differs from the control), on the channels the door refuses.
       if (p.startsWith('-webkit-') && a.baseFlat[pi].node.style[p] !== baseline(p)) {
         (webkitStyled.get(p) ?? webkitStyled.set(p, new Set()).get(p)!).add(a.partNames[pi]);
+      }
+      // @door fuse.flow-order-refusal
+      // @lower fuse.order-refused-before-mint
+      if (FLOW_ORDER_CHANNELS.has(p) && a.baseFlat[pi].node.style[p] !== baseline(p)) {
+        (orderStyled.get(p) ?? orderStyled.set(p, new Set()).get(p)!).add(a.partNames[pi]);
       }
       // @door fuse.geometry-exclusion
       if (GEOMETRY_CHANNELS.has(p) && !admit(p) && a.baseFlat[pi].node.style[p] !== baseline(p)) {
@@ -1139,6 +1146,11 @@ export function styledChannels(
     const listed = [...chans].sort(([x], [y]) => (x < y ? -1 : x > y ? 1 : 0)).map(([c, v]) => `${c} ${v}`).join(', ');
     receipts.push(
       `geometry-excluded: ${part} — ${listed} — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.`,
+    );
+  }
+  for (const [ch, parts] of [...orderStyled].sort(([x], [y]) => x.localeCompare(y))) {
+    receipts.push(
+      `flow-order-refused: ${ch} is STYLED on ${[...parts].sort().join(', ')} and is REFUSED BY NAME before minting (FLOW_ORDER_CHANNELS). CSS \`${ch}\` reorders the visual flow WITHOUT moving the DOM; Figma has only child order, which IS the DOM order, so the two are not the same fact and there is no lowering — only a refusal. It is also in no channel registry (TOKEN_CHANNELS / DECLARED_CHANNELS / LITERAL_CHANNELS), so minting it would produce a channel validateContract refuses, taking the whole component down with it — the tab-size incident, again.`,
     );
   }
   const wk = [...webkitStyled].sort(([x], [y]) => x.localeCompare(y));
@@ -1992,7 +2004,16 @@ export interface MintPrep {
  *  SET-PLANE literal carriage shares it. */
 export const BASE_FALLBACK_CHANNELS = new Set([
   'padding-left', 'padding-right', 'padding-top', 'padding-bottom',
-  'padding-block', 'padding-inline', 'gap',
+  'padding-block', 'padding-inline',
+  // `gap` was the only spelling in this set and it is a SHORTHAND: computed
+  // style enumerates longhands only (shorthandVarSkip says so in this repo's
+  // own words), so the guard `BASE_FALLBACK_CHANNELS.has(channel) &&
+  // LITERAL_CHANNELS.has(channel)` could never be true for a real gap. The
+  // two spellings that actually arrive were absent from both sets — the same
+  // defect class as an allow-list written in a vocabulary the producer does
+  // not speak. The shorthand stays: an authored `gap` reaching a non-computed
+  // path still resolves here.
+  'gap', 'row-gap', 'column-gap',
   'height', 'width', 'min-width', 'min-height',
   'border-radius', 'border-width',
   'border-top-left-radius', 'border-top-right-radius',

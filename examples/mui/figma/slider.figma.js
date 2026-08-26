@@ -32,7 +32,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
@@ -205,7 +206,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
@@ -343,7 +345,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
@@ -516,7 +519,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
@@ -654,7 +658,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
@@ -827,7 +832,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
@@ -965,7 +971,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
@@ -1138,7 +1145,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
@@ -1276,7 +1284,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
@@ -1449,7 +1458,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
@@ -1587,7 +1597,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
@@ -1760,7 +1771,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",

@@ -406,8 +406,24 @@ export const LOGICAL_ALIASES = new Set([
   'contain-intrinsic-block-size', 'contain-intrinsic-inline-size',
 ]);
 
+/** FLOW-ORDER channels: captured, and REFUSED BY NAME before minting.
+ *
+ *  `order` is read NOWHERE in extract/ or core/. It survived isFusable,
+ *  matched the numeric mintable kind, and minted as a token literally named
+ *  `order` — a channel in neither TOKEN_CHANNELS, nor DECLARED_CHANNELS, nor
+ *  LITERAL_CHANNELS. That is the exact shape of the `tab-size` incident:
+ *  a page-global numeric property nobody registered reached the mint, became
+ *  a channel the registry did not know, and made validateContract refuse 32
+ *  whole components by name.
+ *
+ *  The refusal is not a carriage limit dressed up as one. CSS `order`
+ *  reorders the VISUAL flow without moving the DOM; Figma has only child
+ *  order, which IS the DOM order. The two are not the same fact, and the
+ *  honest lowering is refusal — never a token. */
+export const FLOW_ORDER_CHANNELS = new Set(['order']);
+
 export const isFusable = (prop: string): boolean =>
-  !prop.startsWith('-webkit-') && !GEOMETRY_CHANNELS.has(prop) && !LOGICAL_ALIASES.has(prop);
+  !prop.startsWith('-webkit-') && !GEOMETRY_CHANNELS.has(prop) && !LOGICAL_ALIASES.has(prop) && !FLOW_ORDER_CHANNELS.has(prop);
 
 /** Channels the production replay cannot apply/serialize faithfully via
  * inline styles — named and excluded from BOTH application and re-read

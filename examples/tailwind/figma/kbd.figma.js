@@ -28,7 +28,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/kbd/root/background-color",
           "stroke": "imported/shared/color-e5e7eb",

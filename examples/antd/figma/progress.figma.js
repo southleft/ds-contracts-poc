@@ -34,9 +34,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Status=Unset",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "minHeight": "imported/shared/size-0",
@@ -69,7 +71,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "fill": "imported/progress/progress-inner/background-color",
@@ -152,9 +155,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Status=Exception",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "minHeight": "imported/shared/size-0",
@@ -187,7 +192,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "fill": "imported/progress/progress-inner/background-color",
@@ -292,9 +298,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Status=Active",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "minHeight": "imported/shared/size-0",
@@ -327,7 +335,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "fill": "imported/progress/progress-inner/background-color",
@@ -410,9 +419,11 @@ const COMPONENTS = [
           "type": "root",
           "name": "Status=Success",
           "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "minHeight": "imported/shared/size-0",
@@ -445,7 +456,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "fill": "imported/progress/progress-inner/background-color",

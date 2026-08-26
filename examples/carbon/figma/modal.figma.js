@@ -67,7 +67,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "fixedHeight": {
                     "px": 63.9844,
@@ -455,7 +456,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "fixedHeight": {
                     "px": 63.9844,
@@ -843,7 +845,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "fixedHeight": {
                     "px": 63.9844,
@@ -1231,7 +1234,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "fixedHeight": {
                     "px": 63.9844,
@@ -4279,6 +4283,7 @@ async function amendComponent(comp, C) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
     applyInsetOverlay(comp, childNode, childSpec);
+    applyMarginBox(comp, childNode, childSpec, registry);
   }
   resizeOutOfFlow(comp, built);
   for (const t of registry.texts) {

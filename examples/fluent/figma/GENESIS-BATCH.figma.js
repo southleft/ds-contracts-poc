@@ -80,7 +80,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 24,
@@ -152,7 +153,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 48,
@@ -224,7 +226,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 96,
@@ -296,7 +299,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 24,
@@ -368,7 +372,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 48,
@@ -440,7 +445,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 96,
@@ -512,7 +518,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 24,
@@ -584,7 +591,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 48,
@@ -656,7 +664,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 96,
@@ -728,7 +737,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 24,
@@ -800,7 +810,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 48,
@@ -872,7 +883,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 96,
@@ -944,7 +956,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 24,
@@ -1016,7 +1029,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 48,
@@ -1088,7 +1102,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 96,
@@ -1160,7 +1175,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 24,
@@ -1232,7 +1248,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 48,
@@ -1304,7 +1321,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 96,
@@ -19922,9 +19940,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -20052,9 +20072,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -20182,9 +20204,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -20312,9 +20336,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -20442,9 +20468,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -20572,9 +20600,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -20702,9 +20732,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -20832,9 +20864,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -20962,9 +20996,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -21092,9 +21128,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -21222,9 +21260,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -21352,9 +21392,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -21459,9 +21501,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -21566,9 +21610,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -21673,9 +21719,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -21780,9 +21828,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -21887,9 +21937,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -21994,9 +22046,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -22101,9 +22155,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -22208,9 +22264,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -22315,9 +22373,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -22422,9 +22482,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -22529,9 +22591,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -22636,9 +22700,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -22777,9 +22843,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -22910,9 +22978,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -23020,9 +23090,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -23153,9 +23225,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -23285,9 +23359,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -23415,9 +23491,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -23522,9 +23600,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -23629,9 +23709,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -23759,9 +23841,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -23889,9 +23973,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -23996,9 +24082,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -24103,9 +24191,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -24233,9 +24323,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -24363,9 +24455,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -24470,9 +24564,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -24577,9 +24673,11 @@ const COMPONENTS = [
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -26695,6 +26793,7 @@ async function amendComponent(comp, C) {
     if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
+    applyMarginBox(comp, childNode, childSpec, registry);
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
@@ -32086,6 +32185,7 @@ async function amendComponent(comp, C) {
     if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
+    applyMarginBox(comp, childNode, childSpec, registry);
   }
   // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
@@ -32371,7 +32471,7 @@ const COMPONENTS = [
     "contractId": "fluent.dialog",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Dialog — generated from contract fluent.dialog v0.2.0 † (51 code-only facts — see plugin report)",
+    "description": "Dialog — generated from contract fluent.dialog v0.2.0 † (53 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -32392,7 +32492,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/shared/color-ffffff",
           "bindings": {
@@ -32498,14 +32599,16 @@ const COMPONENTS = [
                   "type": "frame",
                   "name": "dialogbody",
                   "layout": {
-                    "mode": "HORIZONTAL",
+                    "mode": "VERTICAL",
                     "primary": "MIN",
-                    "counter": "MIN"
+                    "counter": "MIN",
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "bindings": {
-                    "itemSpacing": "imported/shared/size-8",
                     "minHeight": "imported/shared/size-0",
-                    "minWidth": "imported/shared/size-0"
+                    "minWidth": "imported/shared/size-0",
+                    "itemSpacing": "imported/shared/size-8"
                   },
                   "children": [
                     {
@@ -32546,19 +32649,14 @@ const COMPONENTS = [
                           }
                         }
                       ],
-                      "margins": {
-                        "bottom": -2,
-                        "left": -2,
-                        "right": -2,
-                        "top": -2
-                      },
                       "bindings": {
                         "minHeight": "imported/dialog/label-2/min-height",
                         "paddingBottom": "imported/shared/size-2",
                         "paddingLeft": "imported/shared/size-2",
                         "paddingRight": "imported/shared/size-2",
                         "paddingTop": "imported/shared/size-2"
-                      }
+                      },
+                      "fillW": true
                     },
                     {
                       "type": "frame",
@@ -32617,9 +32715,11 @@ const COMPONENTS = [
                             "paddingRight": "imported/shared/size-12",
                             "paddingTop": "imported/shared/size-5"
                           },
-                          "clipsContent": true
+                          "clipsContent": true,
+                          "fillW": true
                         }
-                      ]
+                      ],
+                      "fillW": true
                     }
                   ]
                 }
@@ -32639,7 +32739,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/shared/color-ffffff",
           "bindings": {
@@ -32689,14 +32790,16 @@ const COMPONENTS = [
               "type": "frame",
               "name": "dialogbody-2",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "bindings": {
-                "itemSpacing": "imported/shared/size-8",
                 "minHeight": "imported/shared/size-0",
-                "minWidth": "imported/shared/size-0"
+                "minWidth": "imported/shared/size-0",
+                "itemSpacing": "imported/shared/size-8"
               },
               "children": [
                 {
@@ -32753,7 +32856,8 @@ const COMPONENTS = [
                         "paddingTop": "imported/shared/size-0"
                       }
                     }
-                  ]
+                  ],
+                  "fillW": true
                 },
                 {
                   "type": "frame",
@@ -32779,19 +32883,14 @@ const COMPONENTS = [
                       }
                     }
                   ],
-                  "margins": {
-                    "bottom": -2,
-                    "left": -2,
-                    "right": -2,
-                    "top": -2
-                  },
                   "bindings": {
                     "minHeight": "imported/dialog/label-5/min-height",
                     "paddingBottom": "imported/shared/size-2",
                     "paddingLeft": "imported/shared/size-2",
                     "paddingRight": "imported/shared/size-2",
                     "paddingTop": "imported/shared/size-2"
-                  }
+                  },
+                  "fillW": true
                 },
                 {
                   "type": "frame",
@@ -32850,9 +32949,11 @@ const COMPONENTS = [
                         "paddingRight": "imported/shared/size-12",
                         "paddingTop": "imported/shared/size-5"
                       },
-                      "clipsContent": true
+                      "clipsContent": true,
+                      "fillW": true
                     }
-                  ]
+                  ],
+                  "fillW": true
                 }
               ]
             }
@@ -32870,7 +32971,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/shared/color-ffffff",
           "bindings": {
@@ -32976,14 +33078,16 @@ const COMPONENTS = [
                   "type": "frame",
                   "name": "dialogbody",
                   "layout": {
-                    "mode": "HORIZONTAL",
+                    "mode": "VERTICAL",
                     "primary": "MIN",
-                    "counter": "MIN"
+                    "counter": "MIN",
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "bindings": {
-                    "itemSpacing": "imported/shared/size-8",
                     "minHeight": "imported/shared/size-0",
-                    "minWidth": "imported/shared/size-0"
+                    "minWidth": "imported/shared/size-0",
+                    "itemSpacing": "imported/shared/size-8"
                   },
                   "children": [
                     {
@@ -33024,19 +33128,14 @@ const COMPONENTS = [
                           }
                         }
                       ],
-                      "margins": {
-                        "bottom": -2,
-                        "left": -2,
-                        "right": -2,
-                        "top": -2
-                      },
                       "bindings": {
                         "minHeight": "imported/dialog/label-2/min-height",
                         "paddingBottom": "imported/shared/size-2",
                         "paddingLeft": "imported/shared/size-2",
                         "paddingRight": "imported/shared/size-2",
                         "paddingTop": "imported/shared/size-2"
-                      }
+                      },
+                      "fillW": true
                     },
                     {
                       "type": "frame",
@@ -33095,9 +33194,11 @@ const COMPONENTS = [
                             "paddingRight": "imported/shared/size-12",
                             "paddingTop": "imported/shared/size-5"
                           },
-                          "clipsContent": true
+                          "clipsContent": true,
+                          "fillW": true
                         }
-                      ]
+                      ],
+                      "fillW": true
                     }
                   ]
                 }
@@ -33146,6 +33247,21 @@ const COMPONENTS = [
       {
         "part": "dialogbody",
         "kind": "channel",
+        "channel": "column-gap",
+        "value": "{imported.shared.size-8}",
+        "reason": "the cross axis of a VERTICAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 2,
+          "of": 3,
+          "names": [
+            "Modal Type=Modal",
+            "Modal Type=Alert"
+          ]
+        }
+      },
+      {
+        "part": "dialogbody",
+        "kind": "channel",
         "channel": "max-height",
         "value": "{imported.dialog.dialogbody.max-height}",
         "reason": "Figma has no maxHeight field (maxWidth exists; its height twin does not).",
@@ -33159,26 +33275,11 @@ const COMPONENTS = [
         }
       },
       {
-        "part": "dialogbody",
-        "kind": "channel",
-        "channel": "row-gap",
-        "value": "{imported.shared.size-8}",
-        "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
-        "variants": {
-          "count": 2,
-          "of": 3,
-          "names": [
-            "Modal Type=Modal",
-            "Modal Type=Alert"
-          ]
-        }
-      },
-      {
         "part": "dialogbody-2",
         "kind": "channel",
-        "channel": "max-height",
-        "value": "{imported.dialog.dialogbody-2.max-height}",
-        "reason": "Figma has no maxHeight field (maxWidth exists; its height twin does not).",
+        "channel": "column-gap",
+        "value": "{imported.shared.size-8}",
+        "reason": "the cross axis of a VERTICAL stack — Figma has one itemSpacing and it is the main axis.",
         "variants": {
           "count": 1,
           "of": 3,
@@ -33190,9 +33291,9 @@ const COMPONENTS = [
       {
         "part": "dialogbody-2",
         "kind": "channel",
-        "channel": "row-gap",
-        "value": "{imported.shared.size-8}",
-        "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
+        "channel": "max-height",
+        "value": "{imported.dialog.dialogbody-2.max-height}",
+        "reason": "Figma has no maxHeight field (maxWidth exists; its height twin does not).",
         "variants": {
           "count": 1,
           "of": 3,
@@ -33321,6 +33422,21 @@ const COMPONENTS = [
       },
       {
         "part": "label-2",
+        "kind": "channel",
+        "channel": "margin-top/margin-right/margin-bottom/margin-left",
+        "value": "-2px/-2px/-2px/-2px",
+        "reason": "the margin-box wrapper is skipped — a FILL-sized child cannot be wrapped in a margin box without breaking the fill; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
+        "variants": {
+          "count": 2,
+          "of": 3,
+          "names": [
+            "Modal Type=Modal",
+            "Modal Type=Alert"
+          ]
+        }
+      },
+      {
+        "part": "label-2",
         "kind": "declared",
         "channel": "display",
         "value": "block",
@@ -33438,6 +33554,20 @@ const COMPONENTS = [
         "variants": {
           "count": 3,
           "of": 3
+        }
+      },
+      {
+        "part": "label-5",
+        "kind": "channel",
+        "channel": "margin-top/margin-right/margin-bottom/margin-left",
+        "value": "-2px/-2px/-2px/-2px",
+        "reason": "the margin-box wrapper is skipped — a FILL-sized child cannot be wrapped in a margin box without breaking the fill; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
+        "variants": {
+          "count": 1,
+          "of": 3,
+          "names": [
+            "Modal Type=Non Modal"
+          ]
         }
       },
       {
@@ -35130,6 +35260,7 @@ async function amendComponent(comp, C) {
     if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
+    applyMarginBox(comp, childNode, childSpec, registry);
   }
   // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
@@ -51286,6 +51417,7 @@ async function amendComponent(comp, C) {
     if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
+    applyMarginBox(comp, childNode, childSpec, registry);
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
@@ -57329,7 +57461,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "stroke": "imported/shared/color-00000000",
           "bindings": {
@@ -57417,7 +57550,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "stroke": "imported/shared/color-00000000",
           "bindings": {

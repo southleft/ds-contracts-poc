@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "carbon.accordion",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Accordion — generated from contract carbon.accordion v0.2.0 † (43 code-only facts — see plugin report)",
+    "description": "Accordion — generated from contract carbon.accordion v0.2.0 † (42 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -28,7 +28,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "minHeight": "imported/shared/size-0",
@@ -46,7 +47,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "stroke": "imported/accordion/accordion-item/border-top-color",
               "bindings": {
@@ -194,7 +196,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "minHeight": "imported/shared/size-0",
@@ -212,7 +215,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "stroke": "imported/accordion/accordion-item/border-top-color",
               "bindings": {
@@ -360,7 +364,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "minHeight": "imported/shared/size-0",
@@ -378,7 +383,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "stroke": "imported/accordion/accordion-item/border-top-color",
               "bindings": {
@@ -526,7 +532,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "minHeight": "imported/shared/size-0",
@@ -544,7 +551,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "stroke": "imported/accordion/accordion-item/border-top-color",
               "bindings": {
@@ -633,7 +641,8 @@ const COMPONENTS = [
                     "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0",
                     "paddingBottom": "imported/accordion/accordion-wrapper/padding-bottom",
-                    "paddingTop": "imported/accordion/accordion-wrapper/padding-top"
+                    "paddingTop": "imported/accordion/accordion-wrapper/padding-top",
+                    "paddingLeft": "imported/accordion/label-2/margin-left/start"
                   },
                   "children": [
                     {
@@ -689,7 +698,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "minHeight": "imported/shared/size-0",
@@ -707,7 +717,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "stroke": "imported/accordion/accordion-item/border-top-color",
               "bindings": {
@@ -796,7 +807,8 @@ const COMPONENTS = [
                     "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0",
                     "paddingBottom": "imported/accordion/accordion-wrapper/padding-bottom",
-                    "paddingTop": "imported/accordion/accordion-wrapper/padding-top"
+                    "paddingTop": "imported/accordion/accordion-wrapper/padding-top",
+                    "paddingLeft": "imported/accordion/label-2/margin-left/start"
                   },
                   "children": [
                     {
@@ -852,7 +864,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "minHeight": "imported/shared/size-0",
@@ -870,7 +883,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "stroke": "imported/accordion/accordion-item/border-top-color",
               "bindings": {
@@ -959,7 +973,8 @@ const COMPONENTS = [
                     "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0",
                     "paddingBottom": "imported/accordion/accordion-wrapper/padding-bottom",
-                    "paddingTop": "imported/accordion/accordion-wrapper/padding-top"
+                    "paddingTop": "imported/accordion/accordion-wrapper/padding-top",
+                    "paddingLeft": "imported/accordion/label-2/margin-left/start"
                   },
                   "children": [
                     {
@@ -1024,7 +1039,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "minHeight": "imported/shared/size-0",
@@ -1042,7 +1058,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "stroke": "imported/accordion/accordion-item/border-top-color",
               "bindings": {
@@ -1190,7 +1207,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "minHeight": "imported/shared/size-0",
@@ -1208,7 +1226,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "stroke": "imported/accordion/accordion-item/border-top-color",
               "bindings": {
@@ -1297,7 +1316,8 @@ const COMPONENTS = [
                     "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0",
                     "paddingBottom": "imported/accordion/accordion-wrapper/padding-bottom",
-                    "paddingTop": "imported/accordion/accordion-wrapper/padding-top"
+                    "paddingTop": "imported/accordion/accordion-wrapper/padding-top",
+                    "paddingLeft": "imported/accordion/label-2/margin-left/start"
                   },
                   "children": [
                     {
@@ -1782,23 +1802,6 @@ const COMPONENTS = [
         "variants": {
           "count": 8,
           "of": 8
-        }
-      },
-      {
-        "part": "label-2",
-        "kind": "channel",
-        "channel": "margin-left",
-        "value": "32px",
-        "reason": "the margin-box wrapper is skipped — a FILL-sized child cannot be wrapped in a margin box without breaking the fill; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
-        "variants": {
-          "count": 4,
-          "of": 8,
-          "names": [
-            "Align=Start, Size=Sm",
-            "Align=Start, Size=Md",
-            "Align=Start, Size=Lg",
-            "Align=Start, Size=Sm, State=Disabled"
-          ]
         }
       },
       {
@@ -3156,6 +3159,7 @@ async function amendComponent(comp, C) {
     if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
+    applyMarginBox(comp, childNode, childSpec, registry);
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);

@@ -688,7 +688,14 @@ export const LITERAL_CHANNELS = new Set([
   "min-height",
   "padding-block",
   "padding-inline",
+  // `gap` is a SHORTHAND and computed style never reports one
+  // (shorthandVarSkip), so the base-plane literal fallback's guard —
+  // BASE_FALLBACK_CHANNELS.has(ch) && LITERAL_CHANNELS.has(ch) — could never
+  // be true for a real gap: the two spellings that actually arrive were in
+  // neither set. The longhands join, exactly as the padding longhands did.
   "gap",
+  "row-gap",
+  "column-gap",
   "border-radius",
   "border-width",
   "font-size",

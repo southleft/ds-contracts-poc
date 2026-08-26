@@ -6313,7 +6313,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/card/root/background-color",
           "bindings": {
@@ -6411,7 +6412,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/card/root/background-color",
           "bindings": {
@@ -6474,7 +6476,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/card/root/background-color",
           "bindings": {
@@ -6572,7 +6575,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/card/root/background-color",
           "bindings": {
@@ -11633,7 +11637,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
@@ -11806,7 +11811,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
@@ -11944,7 +11950,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
@@ -12117,7 +12124,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
@@ -12255,7 +12263,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
@@ -12428,7 +12437,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
@@ -12566,7 +12576,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
@@ -12739,7 +12750,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
@@ -12877,7 +12889,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
@@ -13050,7 +13063,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
@@ -13188,7 +13202,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
@@ -13361,7 +13376,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-12",
@@ -15615,7 +15631,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -15678,7 +15695,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "stroke": "imported/shared/color-00000000",
@@ -15780,7 +15798,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -15843,7 +15862,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "stroke": "imported/shared/color-00000000",
@@ -15945,7 +15965,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -16008,7 +16029,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "stroke": "imported/shared/color-00000000",
@@ -16110,7 +16132,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -16173,7 +16196,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "stroke": "imported/shared/color-00000000",
@@ -16275,7 +16299,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -16338,7 +16363,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "stroke": "imported/shared/color-00000000",
@@ -16440,7 +16466,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -16503,7 +16530,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "stroke": "imported/shared/color-00000000",
@@ -16605,7 +16633,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -16668,7 +16697,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "stroke": "imported/shared/color-00000000",
@@ -16770,7 +16800,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -16833,7 +16864,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "stroke": "imported/shared/color-00000000",
@@ -16935,7 +16967,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -16998,7 +17031,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "stroke": "imported/shared/color-00000000",
@@ -17100,7 +17134,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -17163,7 +17198,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "stroke": "imported/shared/color-00000000",
@@ -17265,7 +17301,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -17328,7 +17365,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "stroke": "imported/shared/color-00000000",
@@ -17430,7 +17468,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -17493,7 +17532,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "stroke": "imported/shared/color-00000000",
@@ -17595,7 +17635,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -17658,7 +17699,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "stroke": "imported/shared/color-00000000",
@@ -17760,7 +17802,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -17823,7 +17866,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "stroke": "imported/shared/color-00000000",
@@ -17925,7 +17969,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -17988,7 +18033,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "stroke": "imported/shared/color-00000000",
@@ -18090,7 +18136,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -18153,7 +18200,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "stroke": "imported/shared/color-00000000",
@@ -18255,7 +18303,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -18318,7 +18367,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "stroke": "imported/shared/color-00000000",
@@ -18420,7 +18470,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -18483,7 +18534,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "stroke": "imported/shared/color-00000000",
@@ -18585,7 +18637,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -18648,7 +18701,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "stroke": "imported/shared/color-00000000",
@@ -18750,7 +18804,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -18813,7 +18868,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "stroke": "imported/shared/color-00000000",
@@ -18915,7 +18971,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -18978,7 +19035,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "stroke": "imported/shared/color-00000000",
@@ -19080,7 +19138,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -19143,7 +19202,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "stroke": "imported/shared/color-00000000",
@@ -19245,7 +19305,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -19308,7 +19369,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "stroke": "imported/shared/color-00000000",
@@ -19410,7 +19472,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -19473,7 +19536,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "stroke": "imported/shared/color-00000000",
@@ -19575,7 +19639,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -19638,7 +19703,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "stroke": "imported/shared/color-00000000",
@@ -19740,7 +19806,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -19803,7 +19870,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "stroke": "imported/shared/color-00000000",
@@ -19905,7 +19973,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -19968,7 +20037,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "stroke": "imported/shared/color-00000000",
@@ -20070,7 +20140,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "bindings": {
@@ -20133,7 +20204,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "stroke": "imported/shared/color-00000000",
@@ -22437,7 +22509,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "fixedHeight": {
@@ -22674,7 +22747,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "fixedHeight": {
@@ -22911,7 +22985,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "fixedHeight": {
@@ -23148,7 +23223,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "fixedHeight": {
@@ -23385,7 +23461,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "fixedHeight": {
@@ -23622,7 +23699,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "fixedHeight": {
@@ -26236,7 +26314,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/accordion/root/background-color",
           "bindings": {
@@ -26406,7 +26485,8 @@ const COMPONENTS = [
                         "mode": "VERTICAL",
                         "primary": "MIN",
                         "counter": "MIN",
-                        "stretchChildren": true
+                        "stretchChildren": true,
+                        "blockFlow": true
                       },
                       "grow": true,
                       "fixedHeight": {
@@ -26489,7 +26569,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/accordion/root/background-color",
           "bindings": {
@@ -26659,7 +26740,8 @@ const COMPONENTS = [
                         "mode": "VERTICAL",
                         "primary": "MIN",
                         "counter": "MIN",
-                        "stretchChildren": true
+                        "stretchChildren": true,
+                        "blockFlow": true
                       },
                       "grow": true,
                       "fixedHeight": {
@@ -26742,7 +26824,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/accordion/root/background-color",
           "bindings": {
@@ -26877,7 +26960,8 @@ const COMPONENTS = [
                         "mode": "VERTICAL",
                         "primary": "MIN",
                         "counter": "MIN",
-                        "stretchChildren": true
+                        "stretchChildren": true,
+                        "blockFlow": true
                       },
                       "grow": true,
                       "fixedHeight": {
@@ -26960,7 +27044,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/accordion/root/background-color",
           "bindings": {
@@ -27095,7 +27180,8 @@ const COMPONENTS = [
                         "mode": "VERTICAL",
                         "primary": "MIN",
                         "counter": "MIN",
-                        "stretchChildren": true
+                        "stretchChildren": true,
+                        "blockFlow": true
                       },
                       "grow": true,
                       "fixedHeight": {
@@ -29276,7 +29362,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "minWidth": "imported/shared/size-0"
@@ -29704,7 +29791,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "minWidth": "imported/shared/size-0"
@@ -32674,6 +32762,7 @@ async function amendComponent(comp, C) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
     applyInsetOverlay(comp, childNode, childSpec);
+    applyMarginBox(comp, childNode, childSpec, registry);
   }
   resizeOutOfFlow(comp, built);
   for (const t of registry.texts) {
@@ -32956,7 +33045,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "minHeight": "imported/shared/size-0",
@@ -32990,7 +33080,11 @@ const COMPONENTS = [
               },
               "bindings": {
                 "minHeight": "imported/shared/size-0",
-                "minWidth": "imported/shared/size-0"
+                "minWidth": "imported/shared/size-0",
+                "paddingTop": "imported/shared/size-32",
+                "paddingRight": "imported/shared/size-32",
+                "paddingBottom": "imported/shared/size-32",
+                "paddingLeft": "imported/shared/size-32"
               },
               "children": [
                 {
@@ -33048,12 +33142,6 @@ const COMPONENTS = [
                       "spread": 8
                     }
                   ],
-                  "margins": {
-                    "bottom": 32,
-                    "left": 32,
-                    "right": 32,
-                    "top": 32
-                  },
                   "children": [
                     {
                       "type": "frame",
@@ -33101,7 +33189,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "minHeight": "imported/shared/size-0",
@@ -33135,7 +33224,11 @@ const COMPONENTS = [
               },
               "bindings": {
                 "minHeight": "imported/shared/size-0",
-                "minWidth": "imported/shared/size-0"
+                "minWidth": "imported/shared/size-0",
+                "paddingTop": "imported/shared/size-32",
+                "paddingRight": "imported/shared/size-32",
+                "paddingBottom": "imported/shared/size-32",
+                "paddingLeft": "imported/shared/size-32"
               },
               "children": [
                 {
@@ -33193,12 +33286,6 @@ const COMPONENTS = [
                       "spread": 8
                     }
                   ],
-                  "margins": {
-                    "bottom": 32,
-                    "left": 32,
-                    "right": 32,
-                    "top": 32
-                  },
                   "children": [
                     {
                       "type": "frame",
@@ -33246,7 +33333,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "minHeight": "imported/shared/size-0",
@@ -33280,7 +33368,11 @@ const COMPONENTS = [
               },
               "bindings": {
                 "minHeight": "imported/shared/size-0",
-                "minWidth": "imported/shared/size-0"
+                "minWidth": "imported/shared/size-0",
+                "paddingTop": "imported/shared/size-32",
+                "paddingRight": "imported/shared/size-32",
+                "paddingBottom": "imported/shared/size-32",
+                "paddingLeft": "imported/shared/size-32"
               },
               "children": [
                 {
@@ -33338,12 +33430,6 @@ const COMPONENTS = [
                       "spread": 8
                     }
                   ],
-                  "margins": {
-                    "bottom": 32,
-                    "left": 32,
-                    "right": 32,
-                    "top": 32
-                  },
                   "children": [
                     {
                       "type": "frame",
@@ -33391,7 +33477,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "minHeight": "imported/shared/size-0",
@@ -33425,7 +33512,11 @@ const COMPONENTS = [
               },
               "bindings": {
                 "minHeight": "imported/shared/size-0",
-                "minWidth": "imported/shared/size-0"
+                "minWidth": "imported/shared/size-0",
+                "paddingTop": "imported/shared/size-32",
+                "paddingRight": "imported/shared/size-32",
+                "paddingBottom": "imported/shared/size-32",
+                "paddingLeft": "imported/shared/size-32"
               },
               "children": [
                 {
@@ -33483,12 +33574,6 @@ const COMPONENTS = [
                       "spread": 8
                     }
                   ],
-                  "margins": {
-                    "bottom": 32,
-                    "left": 32,
-                    "right": 32,
-                    "top": 32
-                  },
                   "children": [
                     {
                       "type": "frame",
@@ -33536,7 +33621,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "minHeight": "imported/shared/size-0",
@@ -33570,7 +33656,11 @@ const COMPONENTS = [
               },
               "bindings": {
                 "minHeight": "imported/shared/size-0",
-                "minWidth": "imported/shared/size-0"
+                "minWidth": "imported/shared/size-0",
+                "paddingTop": "imported/shared/size-32",
+                "paddingRight": "imported/shared/size-32",
+                "paddingBottom": "imported/shared/size-32",
+                "paddingLeft": "imported/shared/size-32"
               },
               "children": [
                 {
@@ -33628,12 +33718,6 @@ const COMPONENTS = [
                       "spread": 8
                     }
                   ],
-                  "margins": {
-                    "bottom": 32,
-                    "left": 32,
-                    "right": 32,
-                    "top": 32
-                  },
                   "children": [
                     {
                       "type": "frame",
@@ -34642,43 +34726,6 @@ function propagateOverflowVisible(childNode, parent) {
   }
 }
 
-// Round 5d: auto-layout has no per-child margin — a child carrying residual
-// margins gets its CSS MARGIN BOX as a fixed wrapper frame (clipsContent
-// false), the child placed at (left, top). Negative margins shrink the flow
-// box and let the glyph overhang — the exact CSS geometry (the Badge pip's
-// -2/-2/-8 is what keeps the real pill 20px tall). Out-of-flow children
-// (overlay / inset / absolute) and FILL-sized children keep their own
-// lowering.
-function applyMarginBox(parent, childNode, childSpec, registry) {
-  const m = childSpec.margins;
-  if (!m || childSpec.overlay || childSpec.insetOverlay || childSpec.absolute || childSpec.grow) return;
-  try {
-    if (childNode.layoutSizingHorizontal === 'FILL' || childNode.layoutSizingVertical === 'FILL') return;
-  } catch (e) { degrade('FC-RT-MARGIN-BOX-SIZING-UNREADABLE', childNode, 'layout sizing could not be read before the margin box was applied; applied as if the child were not FILL-sized', e); }
-  const t = m.top || 0, r = m.right || 0, b = m.bottom || 0, l = m.left || 0;
-  if (!t && !r && !b && !l) return;
-  const w = Math.max(childNode.width + l + r, 0.01);
-  const h = Math.max(childNode.height + t + b, 0.01);
-  const box = figma.createFrame();
-  box.name = childSpec.name + ' (margin box)';
-  box.fills = [];
-  box.clipsContent = false;
-  parent.insertChild(parent.children.indexOf(childNode), box);
-  box.resize(w, h);
-  box.appendChild(childNode);
-  childNode.x = l;
-  childNode.y = t;
-  // Wave B.4 / Polaris Button: a Show-bound child wrapped in a margin box
-  // must transfer the visible binding to the WRAPPER — hiding only the
-  // inner icon leaves the ~20px margin box in auto-layout (blank left gap).
-  if (childSpec.visibleProp && registry && registry.visibles) {
-    for (const vis of registry.visibles) {
-      if (vis.node === childNode) vis.node = box;
-    }
-    childNode.visible = true;
-  }
-}
-
 async function buildNode(spec, registry) {
   let node;
   if (spec.type === 'svg') {
@@ -34865,7 +34912,6 @@ async function buildNode(spec, registry) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
     applyInsetOverlay(node, childNode, child);
-    applyMarginBox(node, childNode, child, registry);
   }
   resizeOutOfFlow(node, built);
   // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
@@ -35279,7 +35325,6 @@ async function amendSet(set, C) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
         }
     applyInsetOverlay(comp, childNode, childSpec);
-    applyMarginBox(comp, childNode, childSpec, registry);
       }
   resizeOutOfFlow(comp, built);
   // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
@@ -35829,7 +35874,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "fixedHeight": {
@@ -35893,7 +35939,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "fixedHeight": {
@@ -35957,7 +36004,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "grow": true,
               "fixedHeight": {
@@ -42641,7 +42689,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 52,
@@ -45254,6 +45303,7 @@ async function amendComponent(comp, C) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
     applyInsetOverlay(comp, childNode, childSpec);
+    applyMarginBox(comp, childNode, childSpec, registry);
   }
   resizeOutOfFlow(comp, built);
   // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
@@ -45560,7 +45610,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/menu/root/background-color",
           "bindings": {
@@ -45625,7 +45676,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 124,
@@ -47771,7 +47823,7 @@ const COMPONENTS = [
     "contractId": "mui.tooltip",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Tooltip — generated from contract mui.tooltip v0.2.0 † (12 code-only facts — see plugin report)",
+    "description": "Tooltip — generated from contract mui.tooltip v0.2.0 † (11 code-only facts — see plugin report)",
     "isSet": false,
     "boolProps": [
       {
@@ -47795,11 +47847,15 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "minHeight": "imported/shared/size-0",
-            "minWidth": "imported/shared/size-0"
+            "minWidth": "imported/shared/size-0",
+            "paddingTop": "imported/tooltip/label/margin-top",
+            "paddingRight": "imported/tooltip/label/margin-right",
+            "paddingLeft": "imported/tooltip/label/margin-left"
           },
           "fixedWidth": {
             "px": 72.5781,
@@ -47886,17 +47942,6 @@ const COMPONENTS = [
       "element": "div"
     },
     "codeOnlyFacts": [
-      {
-        "part": "label",
-        "kind": "channel",
-        "channel": "margin-top/margin-right/margin-left",
-        "value": "14px/2px/2px",
-        "reason": "the margin-box wrapper is skipped — a FILL-sized child cannot be wrapped in a margin box without breaking the fill; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
-        "variants": {
-          "count": 1,
-          "of": 1
-        }
-      },
       {
         "part": "label",
         "kind": "declared",
@@ -54609,6 +54654,7 @@ async function amendComponent(comp, C) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
     applyInsetOverlay(comp, childNode, childSpec);
+    applyMarginBox(comp, childNode, childSpec, registry);
   }
   resizeOutOfFlow(comp, built);
   // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
@@ -61508,7 +61554,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedWidth": {
             "px": 40,
@@ -61537,7 +61584,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedWidth": {
             "px": 40,
@@ -63084,7 +63132,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/linear-progress/root/background-color",
           "fixedHeight": {
@@ -63172,7 +63221,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/linear-progress/root/background-color",
           "fixedHeight": {
@@ -71197,7 +71247,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "stroke": "imported/shared/color-0000001f",
           "bindings": {
@@ -71227,7 +71278,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "stroke": "imported/shared/color-0000001f",
           "bindings": {
@@ -71253,7 +71305,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "stroke": "imported/shared/color-0000001f",
           "bindings": {
@@ -72707,6 +72760,7 @@ async function amendComponent(comp, C) {
     if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
+    applyMarginBox(comp, childNode, childSpec, registry);
   }
   // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
@@ -73012,7 +73066,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -73041,7 +73096,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -73070,7 +73126,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -73099,7 +73156,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -73128,7 +73186,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -73157,7 +73216,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -73186,7 +73246,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -73215,7 +73276,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -73244,7 +73306,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -73273,7 +73336,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -73302,7 +73366,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -73331,7 +73396,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -73360,7 +73426,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -73389,7 +73456,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -73418,7 +73486,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -73447,7 +73516,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -73476,7 +73546,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -73505,7 +73576,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -73534,7 +73606,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -73563,7 +73636,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -73592,7 +73666,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -73631,7 +73706,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "stroke": "imported/link/root/outline-color-state-focus-visible",
           "strokeOutside": true,
@@ -73665,7 +73741,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "stroke": "imported/link/root/outline-color-state-focus-visible",
           "strokeOutside": true,
@@ -73699,7 +73776,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "stroke": "imported/link/root/outline-color-state-focus-visible",
           "strokeOutside": true,
@@ -73733,7 +73811,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "stroke": "imported/link/root/outline-color-state-focus-visible",
           "strokeOutside": true,
@@ -73767,7 +73846,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "stroke": "imported/link/root/outline-color-state-focus-visible",
           "strokeOutside": true,
@@ -73801,7 +73881,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "stroke": "imported/link/root/outline-color-state-focus-visible",
           "strokeOutside": true,
@@ -73835,7 +73916,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "stroke": "imported/link/root/outline-color-state-focus-visible",
           "strokeOutside": true,
@@ -73869,7 +73951,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -73898,7 +73981,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -73927,7 +74011,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -73956,7 +74041,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -73985,7 +74071,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -74014,7 +74101,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -74043,7 +74131,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -74072,7 +74161,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -74101,7 +74191,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -74130,7 +74221,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -74159,7 +74251,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -74188,7 +74281,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -74217,7 +74311,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -74246,7 +74341,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -76090,7 +76186,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/paper/root/background-color",
           "bindings": {
@@ -76172,7 +76269,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/paper/root/background-color",
           "bindings": {
@@ -76219,7 +76317,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/paper/root/background-color",
           "bindings": {
@@ -76266,7 +76365,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/paper/root/background-color",
           "bindings": {
@@ -76313,7 +76413,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/paper/root/background-color",
           "bindings": {
@@ -76395,7 +76496,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/paper/root/background-color",
           "bindings": {
@@ -76442,7 +76544,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/paper/root/background-color",
           "bindings": {
@@ -76526,7 +76629,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fill": "imported/paper/root/background-color",
           "bindings": {
@@ -78130,7 +78234,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "minHeight": "imported/shared/size-0",
@@ -79974,7 +80079,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
@@ -80064,7 +80170,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "blockRoot": true,
           "children": [
