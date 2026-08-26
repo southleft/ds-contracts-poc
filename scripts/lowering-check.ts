@@ -86,8 +86,14 @@ const MANIFEST = path.join(REPO, 'conformance/MANIFEST.json');
 const BASELINE = path.join(REPO, 'conformance/CANVAS-BASELINE.json');
 
 export interface Inverse {
+  /** the file the return leg lives in */
   file: string;
-  ruleLine: number;
+  /** a PROSE locator for the inverse rule — deliberately not a line number.
+   *  spec/door-register.json records 415 `ruleLine` numbers that were never
+   *  re-derived after the markers were inserted, and 162 of them now point at
+   *  a comment or a blank line. A number this register cannot verify is worse
+   *  than a sentence it can. */
+  site: string;
   emits: string;
   asymmetric?: boolean;
   note?: string;
@@ -434,17 +440,30 @@ export function auditRules(
     bad(`${undeclared.length} @lower marker(s) exist in code but NOT in spec/lowering.json: ${undeclared.slice(0, 6).join(', ')} — a lowering decision that is not written down is not reviewable`);
   } else ok(`every one of the ${foundInCode.size} @lower markers in code is registered`);
 
+  //  A rule can only carry a marker where a comment is a comment. 29% of
+  //  core/emit-figma-script.ts is the serialized in-page plugin runtime, and a
+  //  `//` line inside it would be EMITTED into the generated Figma script
+  //  rather than read as source. Those rules are pinned by `ruleText` instead
+  //  and must say so via `markerOutsideRule`. Everything else must be marked
+  //  IMMEDIATELY above its rule — see the drift note below.
+  const tmplPre = new Map<string, Set<number>>();
+  for (const [file, text] of texts) tmplPre.set(file, templateTextLines(text));
+  const inRuntime = (r: Rule) => tmplPre.get(r.file)?.has(r.ruleLine) === true;
+
   const impl = reg.rules.filter((r) => r.status === 'implemented');
-  const unmarked = impl.filter((r) => !foundInCode.has(r.id));
+  const markable = impl.filter((r) => !inRuntime(r));
+  const unmarkable = impl.filter((r) => inRuntime(r));
+
+  const unmarked = markable.filter((r) => !foundInCode.has(r.id));
   if (unmarked.length > 0) {
-    bad(`${unmarked.length} implemented rule(s) have NO @lower marker in code: ${unmarked.slice(0, 6).map((r) => r.id).join(', ')} — the register has drifted off the rule it describes`);
-  } else ok(`every one of the ${impl.length} implemented rules is marked at (or above) its rule`);
+    bad(`${unmarked.length} implemented rule(s) in ordinary code have NO @lower marker: ${unmarked.slice(0, 6).map((r) => r.id).join(', ')} — the register has drifted off the rule it describes`);
+  } else ok(`every one of the ${markable.length} implemented rules that CAN be marked is marked (${unmarkable.length} more live inside the serialized runtime and are pinned by their rule text instead)`);
 
-  const noLine = impl.filter((r) => typeof r.line !== 'number');
-  if (noLine.length > 0) bad(`${noLine.length} implemented rule(s) record no marker line: ${noLine.slice(0, 4).map((r) => r.id).join(', ')}`);
-  else ok('every implemented rule records the line its marker sits on');
+  const noLine = markable.filter((r) => typeof r.line !== 'number');
+  if (noLine.length > 0) bad(`${noLine.length} markable rule(s) record no marker line: ${noLine.slice(0, 4).map((r) => r.id).join(', ')}`);
+  else ok('every markable rule records the line its marker sits on');
 
-  const misplaced = impl.filter((r) => {
+  const misplaced = markable.filter((r) => {
     const hits = foundInCode.get(r.id);
     if (!hits) return false;
     return !hits.some((h) => h.file === r.file && h.line === r.line);
@@ -453,11 +472,29 @@ export function auditRules(
     bad(`${misplaced.length} rule(s) record a line the marker is not on: ${misplaced.slice(0, 5).map((r) => `${r.id} (register says ${r.file}:${r.line}, marker at ${foundInCode.get(r.id)!.map((h) => h.line).join('/')})`).join('; ')}`);
   } else ok('every recorded marker line matches where its marker actually sits');
 
+  //  THE ADJACENCY INVARIANT. In spec/door-register.json the marker line and
+  //  the recorded rule line drift apart by a median of 28 lines, and 162 of
+  //  415 `ruleLine` values land on a comment or a blank line — because
+  //  `ruleLine` was recorded BEFORE the markers were inserted and nothing ever
+  //  re-derived it (the law `ruleLine == (line + 1) - markersBefore(line)`
+  //  holds for 301 of the 415). Requiring the marker to sit IMMEDIATELY above
+  //  its rule makes that drift unrepresentable: `ruleLine` is always
+  //  `line + 1`, and both are checked against the file.
+  const notAdjacent = markable.filter((r) => typeof r.line === 'number' && r.ruleLine !== r.line + 1);
+  if (notAdjacent.length > 0) {
+    bad(`${notAdjacent.length} rule(s) do not sit immediately above their rule: ${notAdjacent.slice(0, 5).map((r) => `${r.id} (marker ${r.line}, rule ${r.ruleLine})`).join('; ')} — the marker MUST be the line directly above the deciding line, or marker and rule drift apart the way the door register's did`);
+  } else ok(`every marker sits immediately above its deciding line (ruleLine === line + 1) — the drift that put 162 of the door register's 415 ruleLines on a comment cannot happen here`);
+
   const unbuilt = reg.rules.filter((r) => r.status !== 'implemented');
   const ghostMarked = unbuilt.filter((r) => foundInCode.has(r.id) || typeof r.line === 'number');
   if (ghostMarked.length > 0) {
     bad(`${ghostMarked.length} proposed/wall rule(s) carry a marker or a marker line: ${ghostMarked.slice(0, 4).map((r) => r.id).join(', ')} — a rule nothing implements has nothing to mark, and marking it would let the register claim behaviour the engine does not have`);
   } else ok(`all ${unbuilt.length} proposed/wall rules are unmarked (nothing implemented, nothing claimed)`);
+
+  const runtimeLine = unmarkable.filter((r) => typeof r.line === 'number');
+  if (runtimeLine.length > 0) {
+    bad(`${runtimeLine.length} rule(s) inside the serialized runtime record a marker line: ${runtimeLine.slice(0, 4).map((r) => r.id).join(', ')} — a marker cannot live there, so recording one is a claim the file does not support`);
+  } else ok(`all ${unmarkable.length} runtime-side rules record no marker line`);
 
   // ---- 7. SITE PRESENT (implemented AND proposed AND wall) ----
   const movedSite: string[] = [];
@@ -638,11 +675,12 @@ function selfTest(): number {
       name: 'an implemented rule with no marker in code is REFUSED',
       build: () => {
         const reg = clone();
-        reg.rules.push({ ...anImpl(reg), id: 'emit.a-lowering-that-is-not-in-the-code' });
+        const donor = anImpl(reg);
+        reg.rules.push({ ...donor, id: `${donor.stage}.a-lowering-that-is-not-in-the-code` });
         reg.rules.sort((a, b) => (a.id < b.id ? -1 : 1));
         return { reg, read };
       },
-      expect: /have NO @lower marker in code/,
+      expect: /have NO @lower marker/,
     },
     {
       name: 'a register line that is not where the marker sits is REFUSED',
