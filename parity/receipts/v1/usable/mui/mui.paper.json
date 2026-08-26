@@ -1,0 +1,233 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / mui",
+  "setNodeId": "39:17344",
+  "setName": "Paper",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:17328",
+  "variantNodeName": "Elevation=1, Variant=Elevation",
+  "axes": [
+    {
+      "axis": "Elevation",
+      "values": [
+        "1",
+        "0",
+        "3",
+        "8"
+      ]
+    },
+    {
+      "axis": "Variant",
+      "values": [
+        "Elevation",
+        "Outlined"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 8,
+  "variantChildNames": [
+    "Elevation=1, Variant=Elevation",
+    "Elevation=1, Variant=Outlined",
+    "Elevation=0, Variant=Elevation",
+    "Elevation=0, Variant=Outlined",
+    "Elevation=3, Variant=Elevation",
+    "Elevation=3, Variant=Outlined",
+    "Elevation=8, Variant=Elevation",
+    "Elevation=8, Variant=Outlined"
+  ],
+  "reflow": {
+    "target": "39:17328",
+    "targetName": "Elevation=1, Variant=Elevation",
+    "layoutMode": "VERTICAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 288,
+      "h": 19,
+      "children": [
+        {
+          "id": "39:17329",
+          "name": "label",
+          "type": "TEXT",
+          "x": 0,
+          "y": 0,
+          "w": 107,
+          "h": 19,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 328,
+      "h": 59,
+      "children": [
+        {
+          "id": "39:17329",
+          "name": "label",
+          "type": "TEXT",
+          "x": 0,
+          "y": 0,
+          "w": 107,
+          "h": 19,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "label"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 288,
+      "h": 19
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:2329",
+    "baseline": {
+      "geometry": "0b64eab936a14f70",
+      "fills": "ea2b15163b51de30",
+      "text": "f20787380bc2cfe0"
+    },
+    "axes": [
+      {
+        "axis": "Elevation",
+        "values": [
+          {
+            "value": "1",
+            "geometry": "0b64eab936a14f70",
+            "fills": "ea2b15163b51de30",
+            "text": "f20787380bc2cfe0"
+          },
+          {
+            "value": "0",
+            "geometry": "0b64eab936a14f70",
+            "fills": "ea2b15163b51de30",
+            "text": "f20787380bc2cfe0"
+          },
+          {
+            "value": "3",
+            "geometry": "0b64eab936a14f70",
+            "fills": "ea2b15163b51de30",
+            "text": "f20787380bc2cfe0"
+          },
+          {
+            "value": "8",
+            "geometry": "0b64eab936a14f70",
+            "fills": "ea2b15163b51de30",
+            "text": "f20787380bc2cfe0"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Variant",
+        "values": [
+          {
+            "value": "Elevation",
+            "geometry": "0b64eab936a14f70",
+            "fills": "ea2b15163b51de30",
+            "text": "f20787380bc2cfe0"
+          },
+          {
+            "value": "Outlined",
+            "geometry": "17672592c2abe384",
+            "fills": "6c847bfa214040b0",
+            "text": "f20787380bc2cfe0"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 9,
+    "bound": 7,
+    "inferred": 2,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 1,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Elevation=1, Variant=Elevation",
+      "name": "Elevation=1, Variant=Elevation",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 288,
+      "h": 19,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 107,
+      "h": 19,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasAfter": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasRestored": true
+}

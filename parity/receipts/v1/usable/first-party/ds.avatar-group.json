@@ -1,0 +1,301 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / first-party",
+  "setNodeId": "39:23257",
+  "setName": "AvatarGroup",
+  "setType": "COMPONENT",
+  "variantNodeId": "39:23257",
+  "variantNodeName": "AvatarGroup",
+  "axes": null,
+  "axesError": null,
+  "variantChildCount": 1,
+  "variantChildNames": [
+    "AvatarGroup"
+  ],
+  "reflow": {
+    "target": "39:23257",
+    "targetName": "AvatarGroup",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "MIN",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 120,
+      "h": 32,
+      "children": [
+        {
+          "id": "39:23258",
+          "name": "Children",
+          "type": "SLOT",
+          "x": 0,
+          "y": 0,
+          "w": 80,
+          "h": 32,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:23269",
+          "name": "overflowText",
+          "type": "FRAME",
+          "x": 88,
+          "y": 0,
+          "w": 32,
+          "h": 32,
+          "ax": 88,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 160,
+      "h": 72,
+      "children": [
+        {
+          "id": "39:23258",
+          "name": "Children",
+          "type": "SLOT",
+          "x": 0,
+          "y": 20,
+          "w": 80,
+          "h": 32,
+          "ax": 0,
+          "ay": 20,
+          "visible": true
+        },
+        {
+          "id": "39:23269",
+          "name": "overflowText",
+          "type": "FRAME",
+          "x": 88,
+          "y": 20,
+          "w": 32,
+          "h": 32,
+          "ax": 88,
+          "ay": 20,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "Children",
+        "dx": 0,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      },
+      {
+        "name": "overflowText",
+        "dx": 0,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 120,
+      "h": 32
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:3564",
+    "baseline": {
+      "geometry": "cf1298b67b12b6f7",
+      "fills": "c0d7a912571e3424",
+      "text": "245adcdfbebec66a"
+    },
+    "axes": [],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 34,
+    "bound": 34,
+    "inferred": 0,
+    "literal": 0,
+    "byGroup": {
+      "spacing": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 8,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 8,
+        "inferred": 0,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 16,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/AvatarGroup",
+      "name": "AvatarGroup",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 120,
+      "h": 32,
+      "visible": true,
+      "parentLayoutMode": null,
+      "parentType": "SECTION"
+    },
+    {
+      "path": "/Children[0]",
+      "name": "Children",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 3,
+      "w": 80,
+      "h": 32,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/Children[0]/Avatar (ds.avatar)[0]",
+      "name": "Avatar (ds.avatar)",
+      "type": "INSTANCE",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 32,
+      "h": 32,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "SLOT"
+    },
+    {
+      "path": "/Children[0]/Avatar (ds.avatar)[0]/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 19,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "INSTANCE"
+    },
+    {
+      "path": "/Children[0]/Avatar (ds.avatar)[1]",
+      "name": "Avatar (ds.avatar)",
+      "type": "INSTANCE",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 32,
+      "h": 32,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "SLOT"
+    },
+    {
+      "path": "/Children[0]/Avatar (ds.avatar)[1]/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 21,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "INSTANCE"
+    },
+    {
+      "path": "/Children[0]/Avatar (ds.avatar)[2]",
+      "name": "Avatar (ds.avatar)",
+      "type": "INSTANCE",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 32,
+      "h": 32,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "SLOT"
+    },
+    {
+      "path": "/Children[0]/Avatar (ds.avatar)[2]/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 17,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "INSTANCE"
+    },
+    {
+      "path": "/overflowText[1]",
+      "name": "overflowText",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 32,
+      "h": 32,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/overflowText[1]/+3[0]",
+      "name": "+3",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 19,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasAfter": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasRestored": true
+}

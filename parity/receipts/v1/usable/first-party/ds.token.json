@@ -1,0 +1,392 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / first-party",
+  "setNodeId": "39:24352",
+  "setName": "Token (ds.token)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:24220",
+  "variantNodeName": "Color=Default, Size=Medium",
+  "axes": [
+    {
+      "axis": "Color",
+      "values": [
+        "Default",
+        "Red",
+        "Orange",
+        "Yellow",
+        "Green",
+        "Teal",
+        "Cyan",
+        "Blue",
+        "Purple",
+        "Pink",
+        "Gray"
+      ]
+    },
+    {
+      "axis": "Size",
+      "values": [
+        "Medium",
+        "Small",
+        "Large"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 33,
+  "variantChildNames": [
+    "Color=Default, Size=Medium",
+    "Color=Default, Size=Small",
+    "Color=Default, Size=Large",
+    "Color=Red, Size=Medium",
+    "Color=Red, Size=Small",
+    "Color=Red, Size=Large",
+    "Color=Orange, Size=Medium",
+    "Color=Orange, Size=Small",
+    "Color=Orange, Size=Large",
+    "Color=Yellow, Size=Medium",
+    "Color=Yellow, Size=Small",
+    "Color=Yellow, Size=Large",
+    "Color=Green, Size=Medium",
+    "Color=Green, Size=Small",
+    "Color=Green, Size=Large",
+    "Color=Teal, Size=Medium",
+    "Color=Teal, Size=Small",
+    "Color=Teal, Size=Large",
+    "Color=Cyan, Size=Medium",
+    "Color=Cyan, Size=Small",
+    "Color=Cyan, Size=Large",
+    "Color=Blue, Size=Medium",
+    "Color=Blue, Size=Small",
+    "Color=Blue, Size=Large",
+    "Color=Purple, Size=Medium",
+    "Color=Purple, Size=Small",
+    "Color=Purple, Size=Large",
+    "Color=Pink, Size=Medium",
+    "Color=Pink, Size=Small",
+    "Color=Pink, Size=Large",
+    "Color=Gray, Size=Medium",
+    "Color=Gray, Size=Small",
+    "Color=Gray, Size=Large"
+  ],
+  "reflow": {
+    "target": "39:24220",
+    "targetName": "Color=Default, Size=Medium",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 3,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "MIN",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 51,
+      "h": 19,
+      "children": [
+        {
+          "id": "39:24221",
+          "name": "Icon",
+          "type": "SLOT",
+          "x": 8,
+          "y": 9,
+          "w": 1,
+          "h": 1,
+          "ax": 8,
+          "ay": 9,
+          "visible": false
+        },
+        {
+          "id": "39:24222",
+          "name": "labelText",
+          "type": "TEXT",
+          "x": 8,
+          "y": 2,
+          "w": 35,
+          "h": 15,
+          "ax": 8,
+          "ay": 2,
+          "visible": true
+        },
+        {
+          "id": "39:24223",
+          "name": "EndContent",
+          "type": "SLOT",
+          "x": 47,
+          "y": 9,
+          "w": 1,
+          "h": 1,
+          "ax": 47,
+          "ay": 9,
+          "visible": false
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 91,
+      "h": 59,
+      "children": [
+        {
+          "id": "39:24221",
+          "name": "Icon",
+          "type": "SLOT",
+          "x": 8,
+          "y": 9,
+          "w": 1,
+          "h": 1,
+          "ax": 8,
+          "ay": 9,
+          "visible": false
+        },
+        {
+          "id": "39:24222",
+          "name": "labelText",
+          "type": "TEXT",
+          "x": 8,
+          "y": 22,
+          "w": 35,
+          "h": 15,
+          "ax": 8,
+          "ay": 22,
+          "visible": true
+        },
+        {
+          "id": "39:24223",
+          "name": "EndContent",
+          "type": "SLOT",
+          "x": 47,
+          "y": 9,
+          "w": 1,
+          "h": 1,
+          "ax": 47,
+          "ay": 9,
+          "visible": false
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "labelText",
+        "dx": 0,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [
+      "Icon",
+      "EndContent"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 51,
+      "h": 19
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:4327",
+    "baseline": {
+      "geometry": "8c5c4711ae775838",
+      "fills": "b9738a9e7e7a2ed0",
+      "text": "f18e5ce036f1bfec"
+    },
+    "axes": [
+      {
+        "axis": "Color",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "8c5c4711ae775838",
+            "fills": "b9738a9e7e7a2ed0",
+            "text": "f18e5ce036f1bfec"
+          },
+          {
+            "value": "Red",
+            "geometry": "8c5c4711ae775838",
+            "fills": "8ef8b66c10c73620",
+            "text": "f18e5ce036f1bfec"
+          },
+          {
+            "value": "Orange",
+            "geometry": "8c5c4711ae775838",
+            "fills": "75944f0b2dc26738",
+            "text": "f18e5ce036f1bfec"
+          },
+          {
+            "value": "Yellow",
+            "geometry": "8c5c4711ae775838",
+            "fills": "750b5f729edd1c70",
+            "text": "f18e5ce036f1bfec"
+          },
+          {
+            "value": "Green",
+            "geometry": "8c5c4711ae775838",
+            "fills": "c2b91bc9f36c67b4",
+            "text": "f18e5ce036f1bfec"
+          },
+          {
+            "value": "Teal",
+            "geometry": "8c5c4711ae775838",
+            "fills": "151064d8235ad3bc",
+            "text": "f18e5ce036f1bfec"
+          },
+          {
+            "value": "Cyan",
+            "geometry": "8c5c4711ae775838",
+            "fills": "b4b275d0cb02e150",
+            "text": "f18e5ce036f1bfec"
+          },
+          {
+            "value": "Blue",
+            "geometry": "8c5c4711ae775838",
+            "fills": "f347864e9cb08940",
+            "text": "f18e5ce036f1bfec"
+          },
+          {
+            "value": "Purple",
+            "geometry": "8c5c4711ae775838",
+            "fills": "8714a8b1d950edd8",
+            "text": "f18e5ce036f1bfec"
+          },
+          {
+            "value": "Pink",
+            "geometry": "8c5c4711ae775838",
+            "fills": "d0e04b476faaf400",
+            "text": "f18e5ce036f1bfec"
+          },
+          {
+            "value": "Gray",
+            "geometry": "8c5c4711ae775838",
+            "fills": "af08565451b376e0",
+            "text": "f18e5ce036f1bfec"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Medium",
+            "geometry": "8c5c4711ae775838",
+            "fills": "b9738a9e7e7a2ed0",
+            "text": "f18e5ce036f1bfec"
+          },
+          {
+            "value": "Small",
+            "geometry": "99795bd6dfb148ac",
+            "fills": "b9738a9e7e7a2ed0",
+            "text": "f18e5ce036f1bfec"
+          },
+          {
+            "value": "Large",
+            "geometry": "539aaadf8011cd5c",
+            "fills": "b9738a9e7e7a2ed0",
+            "text": "f18e5ce036f1bfec"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 11,
+    "bound": 11,
+    "inferred": 0,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 5,
+        "inferred": 0,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Color=Default, Size=Medium",
+      "name": "Color=Default, Size=Medium",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 3,
+      "w": 51,
+      "h": 19,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/Icon[0]",
+      "name": "Icon",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 1,
+      "h": 1,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/labelText[1]",
+      "name": "labelText",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 35,
+      "h": 15,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/EndContent[2]",
+      "name": "EndContent",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 1,
+      "h": 1,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasAfter": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasRestored": true
+}

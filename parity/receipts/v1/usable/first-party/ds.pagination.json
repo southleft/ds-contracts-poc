@@ -1,0 +1,445 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / first-party",
+  "setNodeId": "39:23904",
+  "setName": "Pagination",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:23871",
+  "variantNodeName": "Variant=Pages",
+  "axes": [
+    {
+      "axis": "Variant",
+      "values": [
+        "Pages",
+        "Compact",
+        "Dots"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 3,
+  "variantChildNames": [
+    "Variant=Pages",
+    "Variant=Compact",
+    "Variant=Dots"
+  ],
+  "reflow": {
+    "target": "39:23871",
+    "targetName": "Variant=Pages",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 3,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "MIN",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 170,
+      "h": 25,
+      "children": [
+        {
+          "id": "39:23872",
+          "name": "prevButton",
+          "type": "FRAME",
+          "x": 0,
+          "y": 5.5,
+          "w": 14,
+          "h": 14,
+          "ax": 0,
+          "ay": 5.5,
+          "visible": true
+        },
+        {
+          "id": "39:23874",
+          "name": "pagesGroup",
+          "type": "FRAME",
+          "x": 22,
+          "y": 0,
+          "w": 126,
+          "h": 25,
+          "ax": 22,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:23884",
+          "name": "nextButton",
+          "type": "FRAME",
+          "x": 156,
+          "y": 5.5,
+          "w": 14,
+          "h": 14,
+          "ax": 156,
+          "ay": 5.5,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 210,
+      "h": 65,
+      "children": [
+        {
+          "id": "39:23872",
+          "name": "prevButton",
+          "type": "FRAME",
+          "x": 0,
+          "y": 25.5,
+          "w": 14,
+          "h": 14,
+          "ax": 0,
+          "ay": 25.5,
+          "visible": true
+        },
+        {
+          "id": "39:23874",
+          "name": "pagesGroup",
+          "type": "FRAME",
+          "x": 22,
+          "y": 20,
+          "w": 126,
+          "h": 25,
+          "ax": 22,
+          "ay": 20,
+          "visible": true
+        },
+        {
+          "id": "39:23884",
+          "name": "nextButton",
+          "type": "FRAME",
+          "x": 156,
+          "y": 25.5,
+          "w": 14,
+          "h": 14,
+          "ax": 156,
+          "ay": 25.5,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "prevButton",
+        "dx": 0,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      },
+      {
+        "name": "pagesGroup",
+        "dx": 0,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      },
+      {
+        "name": "nextButton",
+        "dx": 0,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 170,
+      "h": 25
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:3992",
+    "baseline": {
+      "geometry": "0f0ef984207bf0b8",
+      "fills": "3a8ced5eae514f7b",
+      "text": "a17db5a07e4cbe24"
+    },
+    "axes": [
+      {
+        "axis": "Variant",
+        "values": [
+          {
+            "value": "Pages",
+            "geometry": "0f0ef984207bf0b8",
+            "fills": "3a8ced5eae514f7b",
+            "text": "a17db5a07e4cbe24"
+          },
+          {
+            "value": "Compact",
+            "geometry": "a3f7ef8521e33ee2",
+            "fills": "36ba36804b04ef84",
+            "text": "7755bd33122d6375"
+          },
+          {
+            "value": "Dots",
+            "geometry": "dbc7f73681fd4df8",
+            "fills": "e42c4a1ae0bd2080",
+            "text": "00001505811c9dc5"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 52,
+    "bound": 42,
+    "inferred": 4,
+    "literal": 6,
+    "byGroup": {
+      "spacing": {
+        "bound": 18,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 4,
+        "literal": 4
+      },
+      "strokes": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 2
+      },
+      "radius": {
+        "bound": 16,
+        "inferred": 0,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 6,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [
+      "/prevButton[0]/Vector[0]·strokeWeight=1.0499999523162842",
+      "/prevButton[0]/Vector[0]·width=3.15",
+      "/prevButton[0]/Vector[0]·height=6.3",
+      "/nextButton[2]/Vector[0]·strokeWeight=1.0499999523162842",
+      "/nextButton[2]/Vector[0]·width=3.15",
+      "/nextButton[2]/Vector[0]·height=6.3"
+    ],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Variant=Pages",
+      "name": "Variant=Pages",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 3,
+      "w": 170,
+      "h": 25,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/prevButton[0]",
+      "name": "prevButton",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 14,
+      "h": 14,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/prevButton[0]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 3.15,
+      "h": 6.3,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/pagesGroup[1]",
+      "name": "pagesGroup",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 5,
+      "w": 126,
+      "h": 25,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/pagesGroup[1]/pageOne[0]",
+      "name": "pageOne",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 23,
+      "h": 25,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/pagesGroup[1]/pageOne[0]/pageOne-text[0]",
+      "name": "pageOne-text",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 7,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/pagesGroup[1]/pageCurrent[1]",
+      "name": "pageCurrent",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 25,
+      "h": 25,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/pagesGroup[1]/pageCurrent[1]/pageCurrent-text[0]",
+      "name": "pageCurrent-text",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 9,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/pagesGroup[1]/pageThree[2]",
+      "name": "pageThree",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 26,
+      "h": 25,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/pagesGroup[1]/pageThree[2]/pageThree-text[0]",
+      "name": "pageThree-text",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 10,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/pagesGroup[1]/ellipsis[3]",
+      "name": "ellipsis",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 12,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/pagesGroup[1]/pageLast[4]",
+      "name": "pageLast",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 32,
+      "h": 25,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/pagesGroup[1]/pageLast[4]/pageLast-text[0]",
+      "name": "pageLast-text",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 16,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/nextButton[2]",
+      "name": "nextButton",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 14,
+      "h": 14,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/nextButton[2]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 3.15,
+      "h": 6.3,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasAfter": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasRestored": true
+}

@@ -1,0 +1,240 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / carbon",
+  "setNodeId": "39:8333",
+  "setName": "Checkbox (carbon.checkbox)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:8315",
+  "variantNodeName": "Checked=Unchecked",
+  "axes": [
+    {
+      "axis": "Checked",
+      "values": [
+        "Unchecked",
+        "Checked",
+        "Indeterminate"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 3,
+  "variantChildNames": [
+    "Checked=Unchecked",
+    "Checked=Checked",
+    "Checked=Indeterminate"
+  ],
+  "reflow": {
+    "target": "39:8315",
+    "targetName": "Checked=Unchecked",
+    "layoutMode": "VERTICAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 288,
+      "h": 20,
+      "children": [
+        {
+          "id": "39:8316",
+          "name": "checkbox-label",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 92.92,
+          "h": 20,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 328,
+      "h": 60,
+      "children": [
+        {
+          "id": "39:8316",
+          "name": "checkbox-label",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 92.92,
+          "h": 20,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "checkbox-label"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 288,
+      "h": 20
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:485",
+    "baseline": {
+      "geometry": "8c14608595761f14",
+      "fills": "79fab25eb9598b2c",
+      "text": "11c2cc1a52dbf569"
+    },
+    "axes": [
+      {
+        "axis": "Checked",
+        "values": [
+          {
+            "value": "Unchecked",
+            "geometry": "8c14608595761f14",
+            "fills": "79fab25eb9598b2c",
+            "text": "11c2cc1a52dbf569"
+          },
+          {
+            "value": "Checked",
+            "geometry": "bd1004218aa8b320",
+            "fills": "8ab020ec20e21de0",
+            "text": "11c2cc1a52dbf569"
+          },
+          {
+            "value": "Indeterminate",
+            "geometry": "e4f59ec2ec292da4",
+            "fills": "b503c9ed77c80188",
+            "text": "11c2cc1a52dbf569"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 17,
+    "bound": 5,
+    "inferred": 12,
+    "literal": 0,
+    "byGroup": {
+      "sizing": {
+        "bound": 2,
+        "inferred": 4,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 3,
+        "inferred": 1,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 0,
+        "inferred": 1,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 0,
+        "inferred": 2,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 0,
+        "inferred": 4,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Checked=Unchecked",
+      "name": "Checked=Unchecked",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 288,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/checkbox-label[0]",
+      "name": "checkbox-label",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 92.92,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/checkbox-label[0]/label[0]",
+      "name": "label",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 72.92,
+      "h": 18,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/checkbox-label[0]/label[0]/label-text[0]",
+      "name": "label-text",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 68,
+      "h": 18,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/checkbox-label[0]/checkbox-label-before[1]",
+      "name": "checkbox-label-before",
+      "type": "RECTANGLE",
+      "layoutPositioning": "ABSOLUTE",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 16,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 793,
+    "sig": "7d6ced592fbfa72c"
+  },
+  "canvasAfter": {
+    "nodes": 793,
+    "sig": "7d6ced592fbfa72c"
+  },
+  "canvasRestored": true
+}

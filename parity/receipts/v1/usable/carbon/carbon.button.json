@@ -1,0 +1,407 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / carbon",
+  "setNodeId": "39:8296",
+  "setName": "Button (carbon.button)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:8136",
+  "variantNodeName": "Kind=Primary, Size=Xs, State=Default",
+  "axes": [
+    {
+      "axis": "Kind",
+      "values": [
+        "Primary",
+        "Secondary",
+        "Tertiary",
+        "Ghost",
+        "Danger",
+        "Danger Primary",
+        "Danger Ghost",
+        "Danger Tertiary"
+      ]
+    },
+    {
+      "axis": "Size",
+      "values": [
+        "Xs",
+        "Sm",
+        "Md",
+        "Lg",
+        "Xl",
+        "2XL"
+      ]
+    },
+    {
+      "axis": "State",
+      "values": [
+        "Default",
+        "Disabled",
+        "Active",
+        "Focus Visible",
+        "Hover"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 80,
+  "variantChildNames": [
+    "Kind=Primary, Size=Xs, State=Default",
+    "Kind=Primary, Size=Sm, State=Default",
+    "Kind=Primary, Size=Md, State=Default",
+    "Kind=Primary, Size=Lg, State=Default",
+    "Kind=Primary, Size=Xl, State=Default",
+    "Kind=Primary, Size=2XL, State=Default",
+    "Kind=Secondary, Size=Xs, State=Default",
+    "Kind=Secondary, Size=Sm, State=Default",
+    "Kind=Secondary, Size=Md, State=Default",
+    "Kind=Secondary, Size=Lg, State=Default",
+    "Kind=Secondary, Size=Xl, State=Default",
+    "Kind=Secondary, Size=2XL, State=Default",
+    "Kind=Tertiary, Size=Xs, State=Default",
+    "Kind=Tertiary, Size=Sm, State=Default",
+    "Kind=Tertiary, Size=Md, State=Default",
+    "Kind=Tertiary, Size=Lg, State=Default",
+    "Kind=Tertiary, Size=Xl, State=Default",
+    "Kind=Tertiary, Size=2XL, State=Default",
+    "Kind=Ghost, Size=Xs, State=Default",
+    "Kind=Ghost, Size=Sm, State=Default",
+    "Kind=Ghost, Size=Md, State=Default",
+    "Kind=Ghost, Size=Lg, State=Default",
+    "Kind=Ghost, Size=Xl, State=Default",
+    "Kind=Ghost, Size=2XL, State=Default",
+    "Kind=Danger, Size=Xs, State=Default",
+    "Kind=Danger, Size=Sm, State=Default",
+    "Kind=Danger, Size=Md, State=Default",
+    "Kind=Danger, Size=Lg, State=Default",
+    "Kind=Danger, Size=Xl, State=Default",
+    "Kind=Danger, Size=2XL, State=Default",
+    "Kind=Danger Primary, Size=Xs, State=Default",
+    "Kind=Danger Primary, Size=Sm, State=Default",
+    "Kind=Danger Primary, Size=Md, State=Default",
+    "Kind=Danger Primary, Size=Lg, State=Default",
+    "Kind=Danger Primary, Size=Xl, State=Default",
+    "Kind=Danger Primary, Size=2XL, State=Default",
+    "Kind=Danger Ghost, Size=Xs, State=Default",
+    "Kind=Danger Ghost, Size=Sm, State=Default",
+    "Kind=Danger Ghost, Size=Md, State=Default",
+    "Kind=Danger Ghost, Size=Lg, State=Default",
+    "Kind=Danger Ghost, Size=Xl, State=Default",
+    "Kind=Danger Ghost, Size=2XL, State=Default",
+    "Kind=Danger Tertiary, Size=Xs, State=Default",
+    "Kind=Danger Tertiary, Size=Sm, State=Default",
+    "Kind=Danger Tertiary, Size=Md, State=Default",
+    "Kind=Danger Tertiary, Size=Lg, State=Default",
+    "Kind=Danger Tertiary, Size=Xl, State=Default",
+    "Kind=Danger Tertiary, Size=2XL, State=Default",
+    "Kind=Primary, Size=Xs, State=Disabled",
+    "Kind=Secondary, Size=Xs, State=Disabled",
+    "Kind=Tertiary, Size=Xs, State=Disabled",
+    "Kind=Ghost, Size=Xs, State=Disabled",
+    "Kind=Danger, Size=Xs, State=Disabled",
+    "Kind=Danger Primary, Size=Xs, State=Disabled",
+    "Kind=Danger Ghost, Size=Xs, State=Disabled",
+    "Kind=Danger Tertiary, Size=Xs, State=Disabled",
+    "Kind=Primary, Size=Xs, State=Active",
+    "Kind=Secondary, Size=Xs, State=Active",
+    "Kind=Tertiary, Size=Xs, State=Active",
+    "Kind=Ghost, Size=Xs, State=Active",
+    "Kind=Danger, Size=Xs, State=Active",
+    "Kind=Danger Primary, Size=Xs, State=Active",
+    "Kind=Danger Ghost, Size=Xs, State=Active",
+    "Kind=Danger Tertiary, Size=Xs, State=Active",
+    "Kind=Primary, Size=Xs, State=Focus Visible",
+    "Kind=Secondary, Size=Xs, State=Focus Visible",
+    "Kind=Tertiary, Size=Xs, State=Focus Visible",
+    "Kind=Ghost, Size=Xs, State=Focus Visible",
+    "Kind=Danger, Size=Xs, State=Focus Visible",
+    "Kind=Danger Primary, Size=Xs, State=Focus Visible",
+    "Kind=Danger Ghost, Size=Xs, State=Focus Visible",
+    "Kind=Danger Tertiary, Size=Xs, State=Focus Visible",
+    "Kind=Primary, Size=Xs, State=Hover",
+    "Kind=Secondary, Size=Xs, State=Hover",
+    "Kind=Tertiary, Size=Xs, State=Hover",
+    "Kind=Ghost, Size=Xs, State=Hover",
+    "Kind=Danger, Size=Xs, State=Hover",
+    "Kind=Danger Primary, Size=Xs, State=Hover",
+    "Kind=Danger Ghost, Size=Xs, State=Hover",
+    "Kind=Danger Tertiary, Size=Xs, State=Hover"
+  ],
+  "reflow": {
+    "target": "39:8136",
+    "targetName": "Kind=Primary, Size=Xs, State=Default",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "SPACE_BETWEEN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 125,
+      "h": 24,
+      "children": [
+        {
+          "id": "39:8137",
+          "name": "label",
+          "type": "TEXT",
+          "x": 16,
+          "y": 2.5,
+          "w": 45,
+          "h": 18,
+          "ax": 16,
+          "ay": 2.5,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 165,
+      "h": 64,
+      "children": [
+        {
+          "id": "39:8137",
+          "name": "label",
+          "type": "TEXT",
+          "x": 16,
+          "y": 2.5,
+          "w": 45,
+          "h": 18,
+          "ax": 16,
+          "ay": 2.5,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "label"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 125,
+      "h": 24
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:464",
+    "baseline": {
+      "geometry": "ad931acfaef51708",
+      "fills": "726ef3d1962b1b80",
+      "text": "1e5b36f18dc4cd44"
+    },
+    "axes": [
+      {
+        "axis": "Kind",
+        "values": [
+          {
+            "value": "Primary",
+            "geometry": "ad931acfaef51708",
+            "fills": "726ef3d1962b1b80",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Secondary",
+            "geometry": "ad931acfaef51708",
+            "fills": "03c8cfc5f338e908",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Tertiary",
+            "geometry": "ad931acfaef51708",
+            "fills": "2851f055ddd16da8",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Ghost",
+            "geometry": "9eeac3b9e0fc522c",
+            "fills": "1a0a051235ff9710",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Danger",
+            "geometry": "ad931acfaef51708",
+            "fills": "4fc0afdbd4e3d930",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Danger Primary",
+            "geometry": "f93280891c1d81e3",
+            "fills": "7c07bf5c22937ee0",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Danger Ghost",
+            "geometry": "9eeac3b9e0fc522c",
+            "fills": "3dfbe8988fed849f",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Danger Tertiary",
+            "geometry": "ad931acfaef51708",
+            "fills": "ed7ab7d5378bf3e4",
+            "text": "1e5b36f18dc4cd44"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Xs",
+            "geometry": "ad931acfaef51708",
+            "fills": "726ef3d1962b1b80",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Sm",
+            "geometry": "abeddcf6e1af016c",
+            "fills": "726ef3d1962b1b80",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Md",
+            "geometry": "db57454466dd7ec0",
+            "fills": "726ef3d1962b1b80",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Lg",
+            "geometry": "3195d648cdd2a08c",
+            "fills": "726ef3d1962b1b80",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Xl",
+            "geometry": "f72efec61d82d72c",
+            "fills": "726ef3d1962b1b80",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "2XL",
+            "geometry": "4368124cce39e734",
+            "fills": "726ef3d1962b1b80",
+            "text": "1e5b36f18dc4cd44"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "State",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "ad931acfaef51708",
+            "fills": "726ef3d1962b1b80",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Disabled",
+            "geometry": "ad931acfaef51708",
+            "fills": "b82c6ef1ad5f0678",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Active",
+            "geometry": "ad931acfaef51708",
+            "fills": "9c2e79e464cdb4df",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Focus Visible",
+            "geometry": "ad931acfaef51708",
+            "fills": "726ef3d1962b1b80",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Hover",
+            "geometry": "ad931acfaef51708",
+            "fills": "dc969ceed3a03d30",
+            "text": "1e5b36f18dc4cd44"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 10,
+    "bound": 9,
+    "inferred": 1,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Kind=Primary, Size=Xs, State=Default",
+      "name": "Kind=Primary, Size=Xs, State=Default",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 125,
+      "h": 24,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 45,
+      "h": 18,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 793,
+    "sig": "7d6ced592fbfa72c"
+  },
+  "canvasAfter": {
+    "nodes": 793,
+    "sig": "7d6ced592fbfa72c"
+  },
+  "canvasRestored": true
+}

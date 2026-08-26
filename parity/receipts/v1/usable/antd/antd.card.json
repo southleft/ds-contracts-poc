@@ -1,0 +1,309 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "antd exam 2026-08-23",
+  "setNodeId": "33:5093",
+  "setName": "Card",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "33:5069",
+  "variantNodeName": "Size=Default, Variant=Outlined",
+  "axes": [
+    {
+      "axis": "Size",
+      "values": [
+        "Default",
+        "Small"
+      ]
+    },
+    {
+      "axis": "Variant",
+      "values": [
+        "Outlined",
+        "Borderless"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 4,
+  "variantChildNames": [
+    "Size=Default, Variant=Outlined",
+    "Size=Default, Variant=Borderless",
+    "Size=Small, Variant=Outlined",
+    "Size=Small, Variant=Borderless"
+  ],
+  "reflow": {
+    "target": "33:5069",
+    "targetName": "Size=Default, Variant=Outlined",
+    "layoutMode": "VERTICAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "FIXED",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 288,
+      "h": 128,
+      "children": [
+        {
+          "id": "33:5070",
+          "name": "card-head",
+          "type": "FRAME",
+          "x": 1,
+          "y": 1,
+          "w": 286,
+          "h": 56,
+          "ax": 1,
+          "ay": 1,
+          "visible": true
+        },
+        {
+          "id": "33:5073",
+          "name": "label-2",
+          "type": "FRAME",
+          "x": 1,
+          "y": 57,
+          "w": 286,
+          "h": 70,
+          "ax": 1,
+          "ay": 57,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 328,
+      "h": 168,
+      "children": [
+        {
+          "id": "33:5070",
+          "name": "card-head",
+          "type": "FRAME",
+          "x": 1,
+          "y": 1,
+          "w": 326,
+          "h": 56,
+          "ax": 1,
+          "ay": 1,
+          "visible": true
+        },
+        {
+          "id": "33:5073",
+          "name": "label-2",
+          "type": "FRAME",
+          "x": 1,
+          "y": 57,
+          "w": 326,
+          "h": 70,
+          "ax": 1,
+          "ay": 57,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "card-head",
+        "dx": 0,
+        "dy": 0,
+        "dw": 40,
+        "dh": 0
+      },
+      {
+        "name": "label-2",
+        "dx": 0,
+        "dy": 0,
+        "dw": 40,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 288,
+      "h": 128
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:4586",
+    "baseline": {
+      "geometry": "db3544dfebd212d4",
+      "fills": "b077fb6e793755b8",
+      "text": "6f47ec173d4a75bc"
+    },
+    "axes": [
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "db3544dfebd212d4",
+            "fills": "b077fb6e793755b8",
+            "text": "6f47ec173d4a75bc"
+          },
+          {
+            "value": "Small",
+            "geometry": "0ced46c7f2dc95fc",
+            "fills": "b077fb6e793755b8",
+            "text": "6f47ec173d4a75bc"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Variant",
+        "values": [
+          {
+            "value": "Outlined",
+            "geometry": "db3544dfebd212d4",
+            "fills": "b077fb6e793755b8",
+            "text": "6f47ec173d4a75bc"
+          },
+          {
+            "value": "Borderless",
+            "geometry": "eabffb91409dd50c",
+            "fills": "ae585687ca960950",
+            "text": "6f47ec173d4a75bc"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 23,
+    "bound": 20,
+    "inferred": 3,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 3,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 2,
+        "inferred": 1,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 6,
+        "inferred": 1,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 8,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Size=Default, Variant=Outlined",
+      "name": "Size=Default, Variant=Outlined",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 2,
+      "w": 288,
+      "h": 128,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/card-head[0]",
+      "name": "card-head",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 286,
+      "h": 56,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/card-head[0]/card-head-wrapper[0]",
+      "name": "card-head-wrapper",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 238,
+      "h": 22,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/card-head[0]/card-head-wrapper[0]/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 238,
+      "h": 22,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/label-2[1]",
+      "name": "label-2",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 286,
+      "h": 70,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/label-2[1]/label-2-text[0]",
+      "name": "label-2-text",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 182,
+      "h": 22,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 710,
+    "sig": "0be3843bf548afa0"
+  },
+  "canvasAfter": {
+    "nodes": 710,
+    "sig": "0be3843bf548afa0"
+  },
+  "canvasRestored": true
+}

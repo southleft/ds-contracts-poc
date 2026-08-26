@@ -1,0 +1,425 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / mui",
+  "setNodeId": "39:17903",
+  "setName": "TextField",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:17819",
+  "variantNodeName": "Variant=Outlined, Size=Medium",
+  "axes": [
+    {
+      "axis": "Variant",
+      "values": [
+        "Outlined",
+        "Filled",
+        "Standard"
+      ]
+    },
+    {
+      "axis": "Size",
+      "values": [
+        "Medium",
+        "Small"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 6,
+  "variantChildNames": [
+    "Variant=Outlined, Size=Medium",
+    "Variant=Outlined, Size=Small",
+    "Variant=Filled, Size=Medium",
+    "Variant=Filled, Size=Small",
+    "Variant=Standard, Size=Medium",
+    "Variant=Standard, Size=Small"
+  ],
+  "reflow": {
+    "target": "39:17819",
+    "targetName": "Variant=Outlined, Size=Medium",
+    "layoutMode": "VERTICAL",
+    "childCount": 3,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 252.97,
+      "h": 78.91,
+      "children": [
+        {
+          "id": "39:17820",
+          "name": "inputbase-adornedend",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 252.97,
+          "h": 56,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:17830",
+          "name": "label-5 (margin box)",
+          "type": "FRAME",
+          "x": 0,
+          "y": 56,
+          "w": 138,
+          "h": 17,
+          "ax": 0,
+          "ay": 56,
+          "visible": true
+        },
+        {
+          "id": "39:17832",
+          "name": "label",
+          "type": "FRAME",
+          "x": 0,
+          "y": 73,
+          "w": 56.19,
+          "h": 23,
+          "ax": 0,
+          "ay": 73,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 292.97,
+      "h": 118.91,
+      "children": [
+        {
+          "id": "39:17820",
+          "name": "inputbase-adornedend",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 252.97,
+          "h": 56,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:17830",
+          "name": "label-5 (margin box)",
+          "type": "FRAME",
+          "x": 0,
+          "y": 56,
+          "w": 138,
+          "h": 17,
+          "ax": 0,
+          "ay": 56,
+          "visible": true
+        },
+        {
+          "id": "39:17832",
+          "name": "label",
+          "type": "FRAME",
+          "x": 0,
+          "y": 73,
+          "w": 56.19,
+          "h": 23,
+          "ax": 0,
+          "ay": 73,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "inputbase-adornedend",
+      "label-5 (margin box)",
+      "label"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 252.97,
+      "h": 78.91
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:2706",
+    "baseline": {
+      "geometry": "3e5b888e75b1287c",
+      "fills": "fc5be98586c6a6ac",
+      "text": "46e385ba4f12fae9"
+    },
+    "axes": [
+      {
+        "axis": "Variant",
+        "values": [
+          {
+            "value": "Outlined",
+            "geometry": "3e5b888e75b1287c",
+            "fills": "fc5be98586c6a6ac",
+            "text": "46e385ba4f12fae9"
+          },
+          {
+            "value": "Filled",
+            "geometry": "3e5b888e75b1287c",
+            "fills": "fc5be98586c6a6ac",
+            "text": "46e385ba4f12fae9"
+          },
+          {
+            "value": "Standard",
+            "geometry": "3e5b888e75b1287c",
+            "fills": "fc5be98586c6a6ac",
+            "text": "46e385ba4f12fae9"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Medium",
+            "geometry": "3e5b888e75b1287c",
+            "fills": "fc5be98586c6a6ac",
+            "text": "46e385ba4f12fae9"
+          },
+          {
+            "value": "Small",
+            "geometry": "3e5b888e75b1287c",
+            "fills": "fc5be98586c6a6ac",
+            "text": "46e385ba4f12fae9"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 37,
+    "bound": 28,
+    "inferred": 7,
+    "literal": 2,
+    "byGroup": {
+      "spacing": {
+        "bound": 6,
+        "inferred": 2,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 8,
+        "inferred": 4,
+        "literal": 2
+      },
+      "radius": {
+        "bound": 8,
+        "inferred": 0,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 5,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      }
+    },
+    "literalSites": [
+      "/label-5 (margin box)[1]·width=138",
+      "/label-5 (margin box)[1]/label-5[0]·width=110"
+    ],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Variant=Outlined, Size=Medium",
+      "name": "Variant=Outlined, Size=Medium",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 3,
+      "w": 252.97,
+      "h": 78.91,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/inputbase-adornedend[0]",
+      "name": "inputbase-adornedend",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 4,
+      "w": 252.97,
+      "h": 56,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/inputbase-adornedend[0]/inputadornment-positionstart[0]",
+      "name": "inputadornment-positionstart",
+      "type": "INSTANCE",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 9,
+      "h": 24,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/inputbase-adornedend[0]/inputadornment-positionstart[0]/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 9,
+      "h": 24,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "INSTANCE"
+    },
+    {
+      "path": "/inputbase-adornedend[0]/inputbase-input[1]",
+      "name": "inputbase-input",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 169,
+      "h": 56,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/inputbase-adornedend[0]/inputbase-input[1]/placeholder[0]",
+      "name": "placeholder",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 0,
+      "h": 23,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/inputbase-adornedend[0]/inputadornment-positionend[2]",
+      "name": "inputadornment-positionend",
+      "type": "INSTANCE",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 31,
+      "h": 24,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/inputbase-adornedend[0]/inputadornment-positionend[2]/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 31,
+      "h": 24,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "INSTANCE"
+    },
+    {
+      "path": "/inputbase-adornedend[0]/outlinedinput-notchedoutline[3]",
+      "name": "outlinedinput-notchedoutline",
+      "type": "FRAME",
+      "layoutPositioning": "ABSOLUTE",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 252.97,
+      "h": 61,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/label-5 (margin box)[1]",
+      "name": "label-5 (margin box)",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 138,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/label-5 (margin box)[1]/label-5[0]",
+      "name": "label-5",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 110,
+      "h": 14,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/label[2]",
+      "name": "label",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 56.19,
+      "h": 23,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/label[2]/Amount[0]",
+      "name": "Amount",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 57,
+      "h": 19,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasAfter": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasRestored": true
+}

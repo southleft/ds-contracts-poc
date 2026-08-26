@@ -1,0 +1,332 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / first-party",
+  "setNodeId": "39:23512",
+  "setName": "Breadcrumbs (ds.breadcrumbs)",
+  "setType": "COMPONENT",
+  "variantNodeId": "39:23512",
+  "variantNodeName": "Breadcrumbs (ds.breadcrumbs)",
+  "axes": null,
+  "axesError": null,
+  "variantChildCount": 1,
+  "variantChildNames": [
+    "Breadcrumbs (ds.breadcrumbs)"
+  ],
+  "reflow": {
+    "target": "39:23512",
+    "targetName": "Breadcrumbs (ds.breadcrumbs)",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "MIN",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 248,
+      "h": 17,
+      "children": [
+        {
+          "id": "39:23513",
+          "name": "Children",
+          "type": "SLOT",
+          "x": 0,
+          "y": 0,
+          "w": 248,
+          "h": 17,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 288,
+      "h": 57,
+      "children": [
+        {
+          "id": "39:23513",
+          "name": "Children",
+          "type": "SLOT",
+          "x": 0,
+          "y": 20,
+          "w": 248,
+          "h": 17,
+          "ax": 0,
+          "ay": 20,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "Children",
+        "dx": 0,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 248,
+      "h": 17
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:3715",
+    "baseline": {
+      "geometry": "9573ed0dd05f8c3c",
+      "fills": "7eb4f51da3b740d8",
+      "text": "be5537e1d85aa981"
+    },
+    "axes": [],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 26,
+    "bound": 11,
+    "inferred": 6,
+    "literal": 9,
+    "byGroup": {
+      "spacing": {
+        "bound": 5,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 6,
+        "literal": 6
+      },
+      "strokes": {
+        "bound": 3,
+        "inferred": 0,
+        "literal": 3
+      },
+      "fills": {
+        "bound": 3,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [
+      "/Children[0]/BreadcrumbItem[0]/separatorIcon[0]/Vector[0]·strokeWeight=0.9000000357627869",
+      "/Children[0]/BreadcrumbItem[0]/separatorIcon[0]/Vector[0]·width=2.7",
+      "/Children[0]/BreadcrumbItem[0]/separatorIcon[0]/Vector[0]·height=5.4",
+      "/Children[0]/BreadcrumbItem[1]/separatorIcon[0]/Vector[0]·strokeWeight=0.9000000357627869",
+      "/Children[0]/BreadcrumbItem[1]/separatorIcon[0]/Vector[0]·width=2.7",
+      "/Children[0]/BreadcrumbItem[1]/separatorIcon[0]/Vector[0]·height=5.4",
+      "/Children[0]/BreadcrumbItem[2]/separatorIcon[0]/Vector[0]·strokeWeight=0.9000000357627869",
+      "/Children[0]/BreadcrumbItem[2]/separatorIcon[0]/Vector[0]·width=2.7",
+      "/Children[0]/BreadcrumbItem[2]/separatorIcon[0]/Vector[0]·height=5.4"
+    ],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Breadcrumbs (ds.breadcrumbs)",
+      "name": "Breadcrumbs (ds.breadcrumbs)",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 248,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": null,
+      "parentType": "SECTION"
+    },
+    {
+      "path": "/Children[0]",
+      "name": "Children",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 3,
+      "w": 248,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/Children[0]/BreadcrumbItem[0]",
+      "name": "BreadcrumbItem",
+      "type": "INSTANCE",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 40,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "SLOT"
+    },
+    {
+      "path": "/Children[0]/BreadcrumbItem[0]/separatorIcon[0]",
+      "name": "separatorIcon",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 12,
+      "h": 12,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "INSTANCE"
+    },
+    {
+      "path": "/Children[0]/BreadcrumbItem[0]/separatorIcon[0]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 2.7,
+      "h": 5.4,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/Children[0]/BreadcrumbItem[0]/link[1]",
+      "name": "link",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 40,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "INSTANCE"
+    },
+    {
+      "path": "/Children[0]/BreadcrumbItem[1]",
+      "name": "BreadcrumbItem",
+      "type": "INSTANCE",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 102,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "SLOT"
+    },
+    {
+      "path": "/Children[0]/BreadcrumbItem[1]/separatorIcon[0]",
+      "name": "separatorIcon",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 12,
+      "h": 12,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "INSTANCE"
+    },
+    {
+      "path": "/Children[0]/BreadcrumbItem[1]/separatorIcon[0]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 2.7,
+      "h": 5.4,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/Children[0]/BreadcrumbItem[1]/link[1]",
+      "name": "link",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 86,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "INSTANCE"
+    },
+    {
+      "path": "/Children[0]/BreadcrumbItem[2]",
+      "name": "BreadcrumbItem",
+      "type": "INSTANCE",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 98,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "SLOT"
+    },
+    {
+      "path": "/Children[0]/BreadcrumbItem[2]/separatorIcon[0]",
+      "name": "separatorIcon",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 12,
+      "h": 12,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "INSTANCE"
+    },
+    {
+      "path": "/Children[0]/BreadcrumbItem[2]/separatorIcon[0]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 2.7,
+      "h": 5.4,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/Children[0]/BreadcrumbItem[2]/link[1]",
+      "name": "link",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 82,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "INSTANCE"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasAfter": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasRestored": true
+}

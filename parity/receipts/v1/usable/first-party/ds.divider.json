@@ -1,0 +1,137 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / first-party",
+  "setNodeId": "39:23656",
+  "setName": "Divider (ds.divider)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:23654",
+  "variantNodeName": "Variant=Subtle",
+  "axes": [
+    {
+      "axis": "Variant",
+      "values": [
+        "Subtle",
+        "Strong"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 2,
+  "variantChildNames": [
+    "Variant=Subtle",
+    "Variant=Strong"
+  ],
+  "reflow": {
+    "target": "39:23654",
+    "targetName": "Variant=Subtle",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 0,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "CENTER",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 320,
+      "h": 1,
+      "children": []
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 360,
+      "h": 41,
+      "children": []
+    },
+    "responded": [],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 320,
+      "h": 1
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:3831",
+    "baseline": {
+      "geometry": "f15fc8eca01f3ea7",
+      "fills": "1890248ade7893b4",
+      "text": "00001505811c9dc5"
+    },
+    "axes": [
+      {
+        "axis": "Variant",
+        "values": [
+          {
+            "value": "Subtle",
+            "geometry": "f15fc8eca01f3ea7",
+            "fills": "1890248ade7893b4",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Strong",
+            "geometry": "71a519af3a91c9f8",
+            "fills": "55b6a3c2e1c538b8",
+            "text": "00001505811c9dc5"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 3,
+    "bound": 1,
+    "inferred": 2,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 1,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 2,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Variant=Subtle",
+      "name": "Variant=Subtle",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 320,
+      "h": 1,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasAfter": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasRestored": true
+}

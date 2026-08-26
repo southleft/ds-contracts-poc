@@ -1,0 +1,338 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / astryx",
+  "setNodeId": "39:14328",
+  "setName": "TextInput (astryx.text-input)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:14265",
+  "variantNodeName": "Type=Text, Size=Md",
+  "axes": [
+    {
+      "axis": "Type",
+      "values": [
+        "Text",
+        "Password",
+        "Email"
+      ]
+    },
+    {
+      "axis": "Size",
+      "values": [
+        "Md",
+        "Sm",
+        "Lg"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 9,
+  "variantChildNames": [
+    "Type=Text, Size=Md",
+    "Type=Text, Size=Sm",
+    "Type=Text, Size=Lg",
+    "Type=Password, Size=Md",
+    "Type=Password, Size=Sm",
+    "Type=Password, Size=Lg",
+    "Type=Email, Size=Md",
+    "Type=Email, Size=Sm",
+    "Type=Email, Size=Lg"
+  ],
+  "reflow": {
+    "target": "39:14265",
+    "targetName": "Type=Text, Size=Md",
+    "layoutMode": "VERTICAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "FIXED",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 320,
+      "h": 50,
+      "children": [
+        {
+          "id": "39:14266",
+          "name": "label",
+          "type": "TEXT",
+          "x": 0,
+          "y": 0,
+          "w": 25,
+          "h": 12,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:14267",
+          "name": "field",
+          "type": "FRAME",
+          "x": 0,
+          "y": 16,
+          "w": 320,
+          "h": 34,
+          "ax": 0,
+          "ay": 16,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 360,
+      "h": 90,
+      "children": [
+        {
+          "id": "39:14266",
+          "name": "label",
+          "type": "TEXT",
+          "x": 0,
+          "y": 0,
+          "w": 25,
+          "h": 12,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:14267",
+          "name": "field",
+          "type": "FRAME",
+          "x": 0,
+          "y": 16,
+          "w": 360,
+          "h": 34,
+          "ax": 0,
+          "ay": 16,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "field",
+        "dx": 0,
+        "dy": 0,
+        "dw": 40,
+        "dh": 0
+      }
+    ],
+    "frozen": [
+      "label"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 320,
+      "h": 50
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:1221",
+    "baseline": {
+      "geometry": "cc5daa4bf5e00bbc",
+      "fills": "ccbac4261d34d40f",
+      "text": "45529149eaac9b54"
+    },
+    "axes": [
+      {
+        "axis": "Type",
+        "values": [
+          {
+            "value": "Text",
+            "geometry": "cc5daa4bf5e00bbc",
+            "fills": "ccbac4261d34d40f",
+            "text": "45529149eaac9b54"
+          },
+          {
+            "value": "Password",
+            "geometry": "4914432f2886800c",
+            "fills": "ae850b6667b05e60",
+            "text": "45529149eaac9b54"
+          },
+          {
+            "value": "Email",
+            "geometry": "21fe524c0f721118",
+            "fills": "f6e7d5465c1e71c8",
+            "text": "45529149eaac9b54"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Md",
+            "geometry": "cc5daa4bf5e00bbc",
+            "fills": "ccbac4261d34d40f",
+            "text": "45529149eaac9b54"
+          },
+          {
+            "value": "Sm",
+            "geometry": "34c2dbcb950aac84",
+            "fills": "ccbac4261d34d40f",
+            "text": "45529149eaac9b54"
+          },
+          {
+            "value": "Lg",
+            "geometry": "f7ed100fe3362fe0",
+            "fills": "ccbac4261d34d40f",
+            "text": "45529149eaac9b54"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 22,
+    "bound": 15,
+    "inferred": 6,
+    "literal": 1,
+    "byGroup": {
+      "spacing": {
+        "bound": 6,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 4,
+        "literal": 1
+      },
+      "fills": {
+        "bound": 3,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 2,
+        "inferred": 2,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [
+      "/field[1]/start-icon[0]/icon-text[0]/Vector[0]·width=10.67"
+    ],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Type=Text, Size=Md",
+      "name": "Type=Text, Size=Md",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 2,
+      "w": 320,
+      "h": 50,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 25,
+      "h": 12,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/field[1]",
+      "name": "field",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 320,
+      "h": 34,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/field[1]/start-icon[0]",
+      "name": "start-icon",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 16,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/field[1]/start-icon[0]/icon-text[0]",
+      "name": "icon-text",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 16,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/field[1]/start-icon[0]/icon-text[0]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 10.67,
+      "h": 12,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/field[1]/placeholder-text[1]",
+      "name": "placeholder-text",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 104,
+      "h": 14,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 440,
+    "sig": "8f17151526c142bc"
+  },
+  "canvasAfter": {
+    "nodes": 440,
+    "sig": "8f17151526c142bc"
+  },
+  "canvasRestored": true
+}

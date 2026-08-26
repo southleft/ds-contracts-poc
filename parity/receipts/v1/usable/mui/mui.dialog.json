@@ -1,0 +1,312 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / mui",
+  "setNodeId": "39:17141",
+  "setName": "Dialog (mui.dialog)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:17106",
+  "variantNodeName": "Max width=Sm",
+  "axes": [
+    {
+      "axis": "Max width",
+      "values": [
+        "Sm",
+        "Xs",
+        "Md",
+        "Lg",
+        "Xl"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 5,
+  "variantChildNames": [
+    "Max width=Sm",
+    "Max width=Xs",
+    "Max width=Md",
+    "Max width=Lg",
+    "Max width=Xl"
+  ],
+  "reflow": {
+    "target": "39:17106",
+    "targetName": "Max width=Sm",
+    "layoutMode": "VERTICAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 424,
+      "h": 123,
+      "children": [
+        {
+          "id": "39:17107",
+          "name": "backdrop-root",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 424,
+          "h": 123,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:17108",
+          "name": "dialog-container",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 424,
+          "h": 123,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 464,
+      "h": 163,
+      "children": [
+        {
+          "id": "39:17107",
+          "name": "backdrop-root",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 464,
+          "h": 163,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:17108",
+          "name": "dialog-container",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 424,
+          "h": 123,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "backdrop-root",
+        "dx": 0,
+        "dy": 0,
+        "dw": 40,
+        "dh": 40
+      }
+    ],
+    "frozen": [
+      "dialog-container"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 424,
+      "h": 123
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:2232",
+    "baseline": {
+      "geometry": "61464666df1c2610",
+      "fills": "81918d467db45e24",
+      "text": "8e4cbcbfb4d48b94"
+    },
+    "axes": [
+      {
+        "axis": "Max width",
+        "values": [
+          {
+            "value": "Sm",
+            "geometry": "61464666df1c2610",
+            "fills": "81918d467db45e24",
+            "text": "8e4cbcbfb4d48b94"
+          },
+          {
+            "value": "Xs",
+            "geometry": "61464666df1c2610",
+            "fills": "81918d467db45e24",
+            "text": "8e4cbcbfb4d48b94"
+          },
+          {
+            "value": "Md",
+            "geometry": "61464666df1c2610",
+            "fills": "81918d467db45e24",
+            "text": "8e4cbcbfb4d48b94"
+          },
+          {
+            "value": "Lg",
+            "geometry": "61464666df1c2610",
+            "fills": "81918d467db45e24",
+            "text": "8e4cbcbfb4d48b94"
+          },
+          {
+            "value": "Xl",
+            "geometry": "61464666df1c2610",
+            "fills": "81918d467db45e24",
+            "text": "8e4cbcbfb4d48b94"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 15,
+    "bound": 12,
+    "inferred": 1,
+    "literal": 2,
+    "byGroup": {
+      "spacing": {
+        "bound": 4,
+        "inferred": 1,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 3,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 1,
+        "inferred": 0,
+        "literal": 2
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [
+      "/dialog-container[1]/dialog-paper (margin box)[0]·width=424",
+      "/dialog-container[1]/dialog-paper (margin box)[0]·height=123"
+    ],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Max width=Sm",
+      "name": "Max width=Sm",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 2,
+      "w": 424,
+      "h": 123,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/backdrop-root[0]",
+      "name": "backdrop-root",
+      "type": "FRAME",
+      "layoutPositioning": "ABSOLUTE",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 424,
+      "h": 123,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/dialog-container[1]",
+      "name": "dialog-container",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 424,
+      "h": 123,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/dialog-container[1]/dialog-paper (margin box)[0]",
+      "name": "dialog-paper (margin box)",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 424,
+      "h": 123,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/dialog-container[1]/dialog-paper (margin box)[0]/dialog-paper[0]",
+      "name": "dialog-paper",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 360,
+      "h": 59,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/dialog-container[1]/dialog-paper (margin box)[0]/dialog-paper[0]/label[0]",
+      "name": "label",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 360,
+      "h": 59,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/dialog-container[1]/dialog-paper (margin box)[0]/dialog-paper[0]/label[0]/label-text[0]",
+      "name": "label-text",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 312,
+      "h": 19,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasAfter": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasRestored": true
+}

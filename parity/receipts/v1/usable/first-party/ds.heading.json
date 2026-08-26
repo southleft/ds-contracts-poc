@@ -1,0 +1,255 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / first-party",
+  "setNodeId": "39:23722",
+  "setName": "Heading (ds.heading)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:23686",
+  "variantNodeName": "Level=H2, Size=Large",
+  "axes": [
+    {
+      "axis": "Level",
+      "values": [
+        "H2",
+        "H1",
+        "H3",
+        "H4",
+        "H5",
+        "H6"
+      ]
+    },
+    {
+      "axis": "Size",
+      "values": [
+        "Large",
+        "Small",
+        "Medium"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 18,
+  "variantChildNames": [
+    "Level=H2, Size=Large",
+    "Level=H2, Size=Small",
+    "Level=H2, Size=Medium",
+    "Level=H1, Size=Large",
+    "Level=H1, Size=Small",
+    "Level=H1, Size=Medium",
+    "Level=H3, Size=Large",
+    "Level=H3, Size=Small",
+    "Level=H3, Size=Medium",
+    "Level=H4, Size=Large",
+    "Level=H4, Size=Small",
+    "Level=H4, Size=Medium",
+    "Level=H5, Size=Large",
+    "Level=H5, Size=Small",
+    "Level=H5, Size=Medium",
+    "Level=H6, Size=Large",
+    "Level=H6, Size=Small",
+    "Level=H6, Size=Medium"
+  ],
+  "reflow": {
+    "target": "39:23686",
+    "targetName": "Level=H2, Size=Large",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "MIN",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 73,
+      "h": 22,
+      "children": [
+        {
+          "id": "39:23687",
+          "name": "label",
+          "type": "TEXT",
+          "x": 0,
+          "y": 0,
+          "w": 73,
+          "h": 22,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 113,
+      "h": 62,
+      "children": [
+        {
+          "id": "39:23687",
+          "name": "label",
+          "type": "TEXT",
+          "x": 0,
+          "y": 20,
+          "w": 73,
+          "h": 22,
+          "ax": 0,
+          "ay": 20,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "label",
+        "dx": 0,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 73,
+      "h": 22
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:3853",
+    "baseline": {
+      "geometry": "d149d0794709491c",
+      "fills": "df8dc89869519f40",
+      "text": "9cab116f086cebe4"
+    },
+    "axes": [
+      {
+        "axis": "Level",
+        "values": [
+          {
+            "value": "H2",
+            "geometry": "d149d0794709491c",
+            "fills": "df8dc89869519f40",
+            "text": "9cab116f086cebe4"
+          },
+          {
+            "value": "H1",
+            "geometry": "d149d0794709491c",
+            "fills": "df8dc89869519f40",
+            "text": "9cab116f086cebe4"
+          },
+          {
+            "value": "H3",
+            "geometry": "d149d0794709491c",
+            "fills": "df8dc89869519f40",
+            "text": "9cab116f086cebe4"
+          },
+          {
+            "value": "H4",
+            "geometry": "d149d0794709491c",
+            "fills": "df8dc89869519f40",
+            "text": "9cab116f086cebe4"
+          },
+          {
+            "value": "H5",
+            "geometry": "d149d0794709491c",
+            "fills": "df8dc89869519f40",
+            "text": "9cab116f086cebe4"
+          },
+          {
+            "value": "H6",
+            "geometry": "d149d0794709491c",
+            "fills": "df8dc89869519f40",
+            "text": "9cab116f086cebe4"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Large",
+            "geometry": "d149d0794709491c",
+            "fills": "df8dc89869519f40",
+            "text": "9cab116f086cebe4"
+          },
+          {
+            "value": "Small",
+            "geometry": "beaeec394c3233b8",
+            "fills": "df8dc89869519f40",
+            "text": "9cab116f086cebe4"
+          },
+          {
+            "value": "Medium",
+            "geometry": "b183cf1944ff156c",
+            "fills": "df8dc89869519f40",
+            "text": "9cab116f086cebe4"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 1,
+    "bound": 1,
+    "inferred": 0,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 1,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Level=H2, Size=Large",
+      "name": "Level=H2, Size=Large",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 73,
+      "h": 22,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 73,
+      "h": 22,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasAfter": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasRestored": true
+}

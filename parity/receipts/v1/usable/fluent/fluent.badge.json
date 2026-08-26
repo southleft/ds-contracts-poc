@@ -1,0 +1,518 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / fluent",
+  "setNodeId": "39:12179",
+  "setName": "Badge (fluent.badge)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:11795",
+  "variantNodeName": "Appearance=Filled, Color=Brand, Size=Medium",
+  "axes": [
+    {
+      "axis": "Appearance",
+      "values": [
+        "Filled",
+        "Ghost",
+        "Outline",
+        "Tint"
+      ]
+    },
+    {
+      "axis": "Color",
+      "values": [
+        "Brand",
+        "Danger",
+        "Important",
+        "Informative",
+        "Severe",
+        "Subtle",
+        "Success",
+        "Warning"
+      ]
+    },
+    {
+      "axis": "Size",
+      "values": [
+        "Medium",
+        "Tiny",
+        "Extra Small",
+        "Small",
+        "Large",
+        "Extra Large"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 192,
+  "variantChildNames": [
+    "Appearance=Filled, Color=Brand, Size=Medium",
+    "Appearance=Filled, Color=Brand, Size=Tiny",
+    "Appearance=Filled, Color=Brand, Size=Extra Small",
+    "Appearance=Filled, Color=Brand, Size=Small",
+    "Appearance=Filled, Color=Brand, Size=Large",
+    "Appearance=Filled, Color=Brand, Size=Extra Large",
+    "Appearance=Filled, Color=Danger, Size=Medium",
+    "Appearance=Filled, Color=Danger, Size=Tiny",
+    "Appearance=Filled, Color=Danger, Size=Extra Small",
+    "Appearance=Filled, Color=Danger, Size=Small",
+    "Appearance=Filled, Color=Danger, Size=Large",
+    "Appearance=Filled, Color=Danger, Size=Extra Large",
+    "Appearance=Filled, Color=Important, Size=Medium",
+    "Appearance=Filled, Color=Important, Size=Tiny",
+    "Appearance=Filled, Color=Important, Size=Extra Small",
+    "Appearance=Filled, Color=Important, Size=Small",
+    "Appearance=Filled, Color=Important, Size=Large",
+    "Appearance=Filled, Color=Important, Size=Extra Large",
+    "Appearance=Filled, Color=Informative, Size=Medium",
+    "Appearance=Filled, Color=Informative, Size=Tiny",
+    "Appearance=Filled, Color=Informative, Size=Extra Small",
+    "Appearance=Filled, Color=Informative, Size=Small",
+    "Appearance=Filled, Color=Informative, Size=Large",
+    "Appearance=Filled, Color=Informative, Size=Extra Large",
+    "Appearance=Filled, Color=Severe, Size=Medium",
+    "Appearance=Filled, Color=Severe, Size=Tiny",
+    "Appearance=Filled, Color=Severe, Size=Extra Small",
+    "Appearance=Filled, Color=Severe, Size=Small",
+    "Appearance=Filled, Color=Severe, Size=Large",
+    "Appearance=Filled, Color=Severe, Size=Extra Large",
+    "Appearance=Filled, Color=Subtle, Size=Medium",
+    "Appearance=Filled, Color=Subtle, Size=Tiny",
+    "Appearance=Filled, Color=Subtle, Size=Extra Small",
+    "Appearance=Filled, Color=Subtle, Size=Small",
+    "Appearance=Filled, Color=Subtle, Size=Large",
+    "Appearance=Filled, Color=Subtle, Size=Extra Large",
+    "Appearance=Filled, Color=Success, Size=Medium",
+    "Appearance=Filled, Color=Success, Size=Tiny",
+    "Appearance=Filled, Color=Success, Size=Extra Small",
+    "Appearance=Filled, Color=Success, Size=Small",
+    "Appearance=Filled, Color=Success, Size=Large",
+    "Appearance=Filled, Color=Success, Size=Extra Large",
+    "Appearance=Filled, Color=Warning, Size=Medium",
+    "Appearance=Filled, Color=Warning, Size=Tiny",
+    "Appearance=Filled, Color=Warning, Size=Extra Small",
+    "Appearance=Filled, Color=Warning, Size=Small",
+    "Appearance=Filled, Color=Warning, Size=Large",
+    "Appearance=Filled, Color=Warning, Size=Extra Large",
+    "Appearance=Ghost, Color=Brand, Size=Medium",
+    "Appearance=Ghost, Color=Brand, Size=Tiny",
+    "Appearance=Ghost, Color=Brand, Size=Extra Small",
+    "Appearance=Ghost, Color=Brand, Size=Small",
+    "Appearance=Ghost, Color=Brand, Size=Large",
+    "Appearance=Ghost, Color=Brand, Size=Extra Large",
+    "Appearance=Ghost, Color=Danger, Size=Medium",
+    "Appearance=Ghost, Color=Danger, Size=Tiny",
+    "Appearance=Ghost, Color=Danger, Size=Extra Small",
+    "Appearance=Ghost, Color=Danger, Size=Small",
+    "Appearance=Ghost, Color=Danger, Size=Large",
+    "Appearance=Ghost, Color=Danger, Size=Extra Large",
+    "Appearance=Ghost, Color=Important, Size=Medium",
+    "Appearance=Ghost, Color=Important, Size=Tiny",
+    "Appearance=Ghost, Color=Important, Size=Extra Small",
+    "Appearance=Ghost, Color=Important, Size=Small",
+    "Appearance=Ghost, Color=Important, Size=Large",
+    "Appearance=Ghost, Color=Important, Size=Extra Large",
+    "Appearance=Ghost, Color=Informative, Size=Medium",
+    "Appearance=Ghost, Color=Informative, Size=Tiny",
+    "Appearance=Ghost, Color=Informative, Size=Extra Small",
+    "Appearance=Ghost, Color=Informative, Size=Small",
+    "Appearance=Ghost, Color=Informative, Size=Large",
+    "Appearance=Ghost, Color=Informative, Size=Extra Large",
+    "Appearance=Ghost, Color=Severe, Size=Medium",
+    "Appearance=Ghost, Color=Severe, Size=Tiny",
+    "Appearance=Ghost, Color=Severe, Size=Extra Small",
+    "Appearance=Ghost, Color=Severe, Size=Small",
+    "Appearance=Ghost, Color=Severe, Size=Large",
+    "Appearance=Ghost, Color=Severe, Size=Extra Large",
+    "Appearance=Ghost, Color=Subtle, Size=Medium",
+    "Appearance=Ghost, Color=Subtle, Size=Tiny",
+    "Appearance=Ghost, Color=Subtle, Size=Extra Small",
+    "Appearance=Ghost, Color=Subtle, Size=Small",
+    "Appearance=Ghost, Color=Subtle, Size=Large",
+    "Appearance=Ghost, Color=Subtle, Size=Extra Large",
+    "Appearance=Ghost, Color=Success, Size=Medium",
+    "Appearance=Ghost, Color=Success, Size=Tiny",
+    "Appearance=Ghost, Color=Success, Size=Extra Small",
+    "Appearance=Ghost, Color=Success, Size=Small",
+    "Appearance=Ghost, Color=Success, Size=Large",
+    "Appearance=Ghost, Color=Success, Size=Extra Large",
+    "Appearance=Ghost, Color=Warning, Size=Medium",
+    "Appearance=Ghost, Color=Warning, Size=Tiny",
+    "Appearance=Ghost, Color=Warning, Size=Extra Small",
+    "Appearance=Ghost, Color=Warning, Size=Small",
+    "Appearance=Ghost, Color=Warning, Size=Large",
+    "Appearance=Ghost, Color=Warning, Size=Extra Large",
+    "Appearance=Outline, Color=Brand, Size=Medium",
+    "Appearance=Outline, Color=Brand, Size=Tiny",
+    "Appearance=Outline, Color=Brand, Size=Extra Small",
+    "Appearance=Outline, Color=Brand, Size=Small",
+    "Appearance=Outline, Color=Brand, Size=Large",
+    "Appearance=Outline, Color=Brand, Size=Extra Large",
+    "Appearance=Outline, Color=Danger, Size=Medium",
+    "Appearance=Outline, Color=Danger, Size=Tiny",
+    "Appearance=Outline, Color=Danger, Size=Extra Small",
+    "Appearance=Outline, Color=Danger, Size=Small",
+    "Appearance=Outline, Color=Danger, Size=Large",
+    "Appearance=Outline, Color=Danger, Size=Extra Large",
+    "Appearance=Outline, Color=Important, Size=Medium",
+    "Appearance=Outline, Color=Important, Size=Tiny",
+    "Appearance=Outline, Color=Important, Size=Extra Small",
+    "Appearance=Outline, Color=Important, Size=Small",
+    "Appearance=Outline, Color=Important, Size=Large",
+    "Appearance=Outline, Color=Important, Size=Extra Large",
+    "Appearance=Outline, Color=Informative, Size=Medium",
+    "Appearance=Outline, Color=Informative, Size=Tiny",
+    "Appearance=Outline, Color=Informative, Size=Extra Small",
+    "Appearance=Outline, Color=Informative, Size=Small",
+    "Appearance=Outline, Color=Informative, Size=Large",
+    "Appearance=Outline, Color=Informative, Size=Extra Large",
+    "Appearance=Outline, Color=Severe, Size=Medium",
+    "Appearance=Outline, Color=Severe, Size=Tiny",
+    "Appearance=Outline, Color=Severe, Size=Extra Small",
+    "Appearance=Outline, Color=Severe, Size=Small",
+    "Appearance=Outline, Color=Severe, Size=Large",
+    "Appearance=Outline, Color=Severe, Size=Extra Large",
+    "Appearance=Outline, Color=Subtle, Size=Medium",
+    "Appearance=Outline, Color=Subtle, Size=Tiny",
+    "Appearance=Outline, Color=Subtle, Size=Extra Small",
+    "Appearance=Outline, Color=Subtle, Size=Small",
+    "Appearance=Outline, Color=Subtle, Size=Large",
+    "Appearance=Outline, Color=Subtle, Size=Extra Large",
+    "Appearance=Outline, Color=Success, Size=Medium",
+    "Appearance=Outline, Color=Success, Size=Tiny",
+    "Appearance=Outline, Color=Success, Size=Extra Small",
+    "Appearance=Outline, Color=Success, Size=Small",
+    "Appearance=Outline, Color=Success, Size=Large",
+    "Appearance=Outline, Color=Success, Size=Extra Large",
+    "Appearance=Outline, Color=Warning, Size=Medium",
+    "Appearance=Outline, Color=Warning, Size=Tiny",
+    "Appearance=Outline, Color=Warning, Size=Extra Small",
+    "Appearance=Outline, Color=Warning, Size=Small",
+    "Appearance=Outline, Color=Warning, Size=Large",
+    "Appearance=Outline, Color=Warning, Size=Extra Large",
+    "Appearance=Tint, Color=Brand, Size=Medium",
+    "Appearance=Tint, Color=Brand, Size=Tiny",
+    "Appearance=Tint, Color=Brand, Size=Extra Small",
+    "Appearance=Tint, Color=Brand, Size=Small",
+    "Appearance=Tint, Color=Brand, Size=Large",
+    "Appearance=Tint, Color=Brand, Size=Extra Large",
+    "Appearance=Tint, Color=Danger, Size=Medium",
+    "Appearance=Tint, Color=Danger, Size=Tiny",
+    "Appearance=Tint, Color=Danger, Size=Extra Small",
+    "Appearance=Tint, Color=Danger, Size=Small",
+    "Appearance=Tint, Color=Danger, Size=Large",
+    "Appearance=Tint, Color=Danger, Size=Extra Large",
+    "Appearance=Tint, Color=Important, Size=Medium",
+    "Appearance=Tint, Color=Important, Size=Tiny",
+    "Appearance=Tint, Color=Important, Size=Extra Small",
+    "Appearance=Tint, Color=Important, Size=Small",
+    "Appearance=Tint, Color=Important, Size=Large",
+    "Appearance=Tint, Color=Important, Size=Extra Large",
+    "Appearance=Tint, Color=Informative, Size=Medium",
+    "Appearance=Tint, Color=Informative, Size=Tiny",
+    "Appearance=Tint, Color=Informative, Size=Extra Small",
+    "Appearance=Tint, Color=Informative, Size=Small",
+    "Appearance=Tint, Color=Informative, Size=Large",
+    "Appearance=Tint, Color=Informative, Size=Extra Large",
+    "Appearance=Tint, Color=Severe, Size=Medium",
+    "Appearance=Tint, Color=Severe, Size=Tiny",
+    "Appearance=Tint, Color=Severe, Size=Extra Small",
+    "Appearance=Tint, Color=Severe, Size=Small",
+    "Appearance=Tint, Color=Severe, Size=Large",
+    "Appearance=Tint, Color=Severe, Size=Extra Large",
+    "Appearance=Tint, Color=Subtle, Size=Medium",
+    "Appearance=Tint, Color=Subtle, Size=Tiny",
+    "Appearance=Tint, Color=Subtle, Size=Extra Small",
+    "Appearance=Tint, Color=Subtle, Size=Small",
+    "Appearance=Tint, Color=Subtle, Size=Large",
+    "Appearance=Tint, Color=Subtle, Size=Extra Large",
+    "Appearance=Tint, Color=Success, Size=Medium",
+    "Appearance=Tint, Color=Success, Size=Tiny",
+    "Appearance=Tint, Color=Success, Size=Extra Small",
+    "Appearance=Tint, Color=Success, Size=Small",
+    "Appearance=Tint, Color=Success, Size=Large",
+    "Appearance=Tint, Color=Success, Size=Extra Large",
+    "Appearance=Tint, Color=Warning, Size=Medium",
+    "Appearance=Tint, Color=Warning, Size=Tiny",
+    "Appearance=Tint, Color=Warning, Size=Extra Small",
+    "Appearance=Tint, Color=Warning, Size=Small",
+    "Appearance=Tint, Color=Warning, Size=Large",
+    "Appearance=Tint, Color=Warning, Size=Extra Large"
+  ],
+  "reflow": {
+    "target": "39:11795",
+    "targetName": "Appearance=Filled, Color=Brand, Size=Medium",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "CENTER",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 20.02,
+      "h": 20,
+      "children": [
+        {
+          "id": "39:11796",
+          "name": "label",
+          "type": "TEXT",
+          "x": 6.01,
+          "y": 2,
+          "w": 8,
+          "h": 16,
+          "ax": 6.01,
+          "ay": 2,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 60.02,
+      "h": 60,
+      "children": [
+        {
+          "id": "39:11796",
+          "name": "label",
+          "type": "TEXT",
+          "x": 26.01,
+          "y": 22,
+          "w": 8,
+          "h": 16,
+          "ax": 26.01,
+          "ay": 22,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "label",
+        "dx": 20,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 20.02,
+      "h": 20
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:1306",
+    "baseline": {
+      "geometry": "fb5c5ac08d01097b",
+      "fills": "770c0ccfad9c7758",
+      "text": "92d745fe81c6e51d"
+    },
+    "axes": [
+      {
+        "axis": "Appearance",
+        "values": [
+          {
+            "value": "Filled",
+            "geometry": "fb5c5ac08d01097b",
+            "fills": "770c0ccfad9c7758",
+            "text": "92d745fe81c6e51d"
+          },
+          {
+            "value": "Ghost",
+            "geometry": "fb5c5ac08d01097b",
+            "fills": "cd95890ccecc96e6",
+            "text": "92d745fe81c6e51d"
+          },
+          {
+            "value": "Outline",
+            "geometry": "fb5c5ac08d01097b",
+            "fills": "cd95890ccecc96e6",
+            "text": "92d745fe81c6e51d"
+          },
+          {
+            "value": "Tint",
+            "geometry": "fb5c5ac08d01097b",
+            "fills": "b11a853b4785c894",
+            "text": "92d745fe81c6e51d"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Color",
+        "values": [
+          {
+            "value": "Brand",
+            "geometry": "fb5c5ac08d01097b",
+            "fills": "770c0ccfad9c7758",
+            "text": "92d745fe81c6e51d"
+          },
+          {
+            "value": "Danger",
+            "geometry": "fb5c5ac08d01097b",
+            "fills": "017e569d83b5a314",
+            "text": "92d745fe81c6e51d"
+          },
+          {
+            "value": "Important",
+            "geometry": "fb5c5ac08d01097b",
+            "fills": "00194c271be551f7",
+            "text": "92d745fe81c6e51d"
+          },
+          {
+            "value": "Informative",
+            "geometry": "fb5c5ac08d01097b",
+            "fills": "15d732aaa14d28f0",
+            "text": "92d745fe81c6e51d"
+          },
+          {
+            "value": "Severe",
+            "geometry": "fb5c5ac08d01097b",
+            "fills": "808e82c47c62a0a7",
+            "text": "92d745fe81c6e51d"
+          },
+          {
+            "value": "Subtle",
+            "geometry": "fb5c5ac08d01097b",
+            "fills": "18cce227aafb55bf",
+            "text": "92d745fe81c6e51d"
+          },
+          {
+            "value": "Success",
+            "geometry": "fb5c5ac08d01097b",
+            "fills": "072b2af58d2ac898",
+            "text": "92d745fe81c6e51d"
+          },
+          {
+            "value": "Warning",
+            "geometry": "fb5c5ac08d01097b",
+            "fills": "e22d3e86427c5bd8",
+            "text": "92d745fe81c6e51d"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Medium",
+            "geometry": "fb5c5ac08d01097b",
+            "fills": "770c0ccfad9c7758",
+            "text": "92d745fe81c6e51d"
+          },
+          {
+            "value": "Tiny",
+            "geometry": "a7370404f84fbe8c",
+            "fills": "770c0ccfad9c7758",
+            "text": "92d745fe81c6e51d"
+          },
+          {
+            "value": "Extra Small",
+            "geometry": "9abddf7bf23e8068",
+            "fills": "770c0ccfad9c7758",
+            "text": "92d745fe81c6e51d"
+          },
+          {
+            "value": "Small",
+            "geometry": "c74e8154323d688f",
+            "fills": "770c0ccfad9c7758",
+            "text": "92d745fe81c6e51d"
+          },
+          {
+            "value": "Large",
+            "geometry": "8f73ec0b0ca063ff",
+            "fills": "770c0ccfad9c7758",
+            "text": "92d745fe81c6e51d"
+          },
+          {
+            "value": "Extra Large",
+            "geometry": "4c3d7d9c81649a68",
+            "fills": "770c0ccfad9c7758",
+            "text": "92d745fe81c6e51d"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 10,
+    "bound": 8,
+    "inferred": 2,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 2,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Appearance=Filled, Color=Brand, Size=Medium",
+      "name": "Appearance=Filled, Color=Brand, Size=Medium",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 20.02,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 8,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1663,
+    "sig": "0ac044e74ac6a8ac"
+  },
+  "canvasAfter": {
+    "nodes": 1663,
+    "sig": "0ac044e74ac6a8ac"
+  },
+  "canvasRestored": true
+}

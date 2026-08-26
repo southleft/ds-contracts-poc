@@ -1,0 +1,189 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / first-party",
+  "setNodeId": "39:23647",
+  "setName": "Citation",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:23643",
+  "variantNodeName": "Variant=Label",
+  "axes": [
+    {
+      "axis": "Variant",
+      "values": [
+        "Label",
+        "Number"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 2,
+  "variantChildNames": [
+    "Variant=Label",
+    "Variant=Number"
+  ],
+  "reflow": {
+    "target": "39:23643",
+    "targetName": "Variant=Label",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "MIN",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 93,
+      "h": 19,
+      "children": [
+        {
+          "id": "39:23644",
+          "name": "labelText",
+          "type": "TEXT",
+          "x": 8,
+          "y": 2,
+          "w": 77,
+          "h": 15,
+          "ax": 8,
+          "ay": 2,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 133,
+      "h": 59,
+      "children": [
+        {
+          "id": "39:23644",
+          "name": "labelText",
+          "type": "TEXT",
+          "x": 8,
+          "y": 22,
+          "w": 77,
+          "h": 15,
+          "ax": 8,
+          "ay": 22,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "labelText",
+        "dx": 0,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 93,
+      "h": 19
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:3825",
+    "baseline": {
+      "geometry": "755aee0c3caee770",
+      "fills": "bf311d55d388c8c0",
+      "text": "9cae6d3d555fa9f8"
+    },
+    "axes": [
+      {
+        "axis": "Variant",
+        "values": [
+          {
+            "value": "Label",
+            "geometry": "755aee0c3caee770",
+            "fills": "bf311d55d388c8c0",
+            "text": "9cae6d3d555fa9f8"
+          },
+          {
+            "value": "Number",
+            "geometry": "732df4d50a18cbf8",
+            "fills": "63cba070a0962663",
+            "text": "7dc1a86e7fe7a795"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 10,
+    "bound": 10,
+    "inferred": 0,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Variant=Label",
+      "name": "Variant=Label",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 93,
+      "h": 19,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/labelText[0]",
+      "name": "labelText",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 77,
+      "h": 15,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasAfter": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasRestored": true
+}

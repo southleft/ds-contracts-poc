@@ -1,0 +1,318 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / mui",
+  "setNodeId": "39:17094",
+  "setName": "Chip (mui.chip)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:17010",
+  "variantNodeName": "Variant=Filled, Color=Default, Size=Medium",
+  "axes": [
+    {
+      "axis": "Variant",
+      "values": [
+        "Filled",
+        "Outlined"
+      ]
+    },
+    {
+      "axis": "Color",
+      "values": [
+        "Default",
+        "Primary",
+        "Secondary",
+        "Error",
+        "Success",
+        "Warning",
+        "Info"
+      ]
+    },
+    {
+      "axis": "Size",
+      "values": [
+        "Medium",
+        "Small"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 28,
+  "variantChildNames": [
+    "Variant=Filled, Color=Default, Size=Medium",
+    "Variant=Filled, Color=Default, Size=Small",
+    "Variant=Filled, Color=Primary, Size=Medium",
+    "Variant=Filled, Color=Primary, Size=Small",
+    "Variant=Filled, Color=Secondary, Size=Medium",
+    "Variant=Filled, Color=Secondary, Size=Small",
+    "Variant=Filled, Color=Error, Size=Medium",
+    "Variant=Filled, Color=Error, Size=Small",
+    "Variant=Filled, Color=Success, Size=Medium",
+    "Variant=Filled, Color=Success, Size=Small",
+    "Variant=Filled, Color=Warning, Size=Medium",
+    "Variant=Filled, Color=Warning, Size=Small",
+    "Variant=Filled, Color=Info, Size=Medium",
+    "Variant=Filled, Color=Info, Size=Small",
+    "Variant=Outlined, Color=Default, Size=Medium",
+    "Variant=Outlined, Color=Default, Size=Small",
+    "Variant=Outlined, Color=Primary, Size=Medium",
+    "Variant=Outlined, Color=Primary, Size=Small",
+    "Variant=Outlined, Color=Secondary, Size=Medium",
+    "Variant=Outlined, Color=Secondary, Size=Small",
+    "Variant=Outlined, Color=Error, Size=Medium",
+    "Variant=Outlined, Color=Error, Size=Small",
+    "Variant=Outlined, Color=Success, Size=Medium",
+    "Variant=Outlined, Color=Success, Size=Small",
+    "Variant=Outlined, Color=Warning, Size=Medium",
+    "Variant=Outlined, Color=Warning, Size=Small",
+    "Variant=Outlined, Color=Info, Size=Medium",
+    "Variant=Outlined, Color=Info, Size=Small"
+  ],
+  "reflow": {
+    "target": "39:17010",
+    "targetName": "Variant=Filled, Color=Default, Size=Medium",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "CENTER",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 51,
+      "h": 20,
+      "children": [
+        {
+          "id": "39:17011",
+          "name": "label",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 51,
+          "h": 20,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 91,
+      "h": 60,
+      "children": [
+        {
+          "id": "39:17011",
+          "name": "label",
+          "type": "FRAME",
+          "x": 20,
+          "y": 20,
+          "w": 51,
+          "h": 20,
+          "ax": 20,
+          "ay": 20,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "label",
+        "dx": 20,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 51,
+      "h": 20
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:2200",
+    "baseline": {
+      "geometry": "a75507bd628822a4",
+      "fills": "9c473f6f067786f2",
+      "text": "b62b465ae9428eed"
+    },
+    "axes": [
+      {
+        "axis": "Variant",
+        "values": [
+          {
+            "value": "Filled",
+            "geometry": "a75507bd628822a4",
+            "fills": "9c473f6f067786f2",
+            "text": "b62b465ae9428eed"
+          },
+          {
+            "value": "Outlined",
+            "geometry": "498923b72d711210",
+            "fills": "8ab390e9324f6407",
+            "text": "b62b465ae9428eed"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Color",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "a75507bd628822a4",
+            "fills": "9c473f6f067786f2",
+            "text": "b62b465ae9428eed"
+          },
+          {
+            "value": "Primary",
+            "geometry": "a75507bd628822a4",
+            "fills": "0df54154299d68a8",
+            "text": "b62b465ae9428eed"
+          },
+          {
+            "value": "Secondary",
+            "geometry": "a75507bd628822a4",
+            "fills": "4ee88db04f2da550",
+            "text": "b62b465ae9428eed"
+          },
+          {
+            "value": "Error",
+            "geometry": "a75507bd628822a4",
+            "fills": "c8c6ea4a414ff6f0",
+            "text": "b62b465ae9428eed"
+          },
+          {
+            "value": "Success",
+            "geometry": "a75507bd628822a4",
+            "fills": "263ff7496e1d57ac",
+            "text": "b62b465ae9428eed"
+          },
+          {
+            "value": "Warning",
+            "geometry": "a75507bd628822a4",
+            "fills": "eb8c1fc588b7f6e7",
+            "text": "b62b465ae9428eed"
+          },
+          {
+            "value": "Info",
+            "geometry": "a75507bd628822a4",
+            "fills": "aa388f8534bb5753",
+            "text": "b62b465ae9428eed"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Medium",
+            "geometry": "a75507bd628822a4",
+            "fills": "9c473f6f067786f2",
+            "text": "b62b465ae9428eed"
+          },
+          {
+            "value": "Small",
+            "geometry": "2563eba6a223dd20",
+            "fills": "9c473f6f067786f2",
+            "text": "b62b465ae9428eed"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 10,
+    "bound": 9,
+    "inferred": 1,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Variant=Filled, Color=Default, Size=Medium",
+      "name": "Variant=Filled, Color=Default, Size=Medium",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 51,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 51,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/label[0]/label-text[0]",
+      "name": "label-text",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 27,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasAfter": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasRestored": true
+}

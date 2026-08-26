@@ -1,0 +1,257 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "antd exam 2026-08-23",
+  "setNodeId": "33:5252",
+  "setName": "Radio",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "33:5241",
+  "variantNodeName": "Checked=Unchecked",
+  "axes": [
+    {
+      "axis": "Checked",
+      "values": [
+        "Unchecked",
+        "Checked"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 2,
+  "variantChildNames": [
+    "Checked=Unchecked",
+    "Checked=Checked"
+  ],
+  "reflow": {
+    "target": "33:5241",
+    "targetName": "Checked=Unchecked",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 67.53,
+      "h": 22,
+      "children": [
+        {
+          "id": "33:5242",
+          "name": "radio",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 16,
+          "h": 16,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "33:5244",
+          "name": "label",
+          "type": "FRAME",
+          "x": 16,
+          "y": 0,
+          "w": 52,
+          "h": 22,
+          "ax": 16,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 107.53,
+      "h": 62,
+      "children": [
+        {
+          "id": "33:5242",
+          "name": "radio",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 16,
+          "h": 16,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "33:5244",
+          "name": "label",
+          "type": "FRAME",
+          "x": 16,
+          "y": 0,
+          "w": 52,
+          "h": 22,
+          "ax": 16,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "radio",
+      "label"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 67.53,
+      "h": 22
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:4680",
+    "baseline": {
+      "geometry": "c0cf266f09b17047",
+      "fills": "8e9cdb2cfb2d1480",
+      "text": "07ac461882cf8ee4"
+    },
+    "axes": [
+      {
+        "axis": "Checked",
+        "values": [
+          {
+            "value": "Unchecked",
+            "geometry": "c0cf266f09b17047",
+            "fills": "8e9cdb2cfb2d1480",
+            "text": "07ac461882cf8ee4"
+          },
+          {
+            "value": "Checked",
+            "geometry": "fe165cee34af999c",
+            "fills": "9a186be145bcd680",
+            "text": "07ac461882cf8ee4"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 21,
+    "bound": 17,
+    "inferred": 4,
+    "literal": 0,
+    "byGroup": {
+      "spacing": {
+        "bound": 2,
+        "inferred": 1,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 4,
+        "inferred": 2,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 8,
+        "inferred": 0,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Checked=Unchecked",
+      "name": "Checked=Unchecked",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 67.53,
+      "h": 22,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/radio[0]",
+      "name": "radio",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 16,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/radio[0]/radio-inner[0]",
+      "name": "radio-inner",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 16,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/label[1]",
+      "name": "label",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 52,
+      "h": 22,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/label[1]/label-text[0]",
+      "name": "label-text",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 36,
+      "h": 22,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 710,
+    "sig": "0be3843bf548afa0"
+  },
+  "canvasAfter": {
+    "nodes": 710,
+    "sig": "0be3843bf548afa0"
+  },
+  "canvasRestored": true
+}

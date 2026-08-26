@@ -1,0 +1,204 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / shadcn",
+  "setNodeId": "39:9308",
+  "setName": "Avatar (shadcn.avatar)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:9299",
+  "variantNodeName": "Size=Default",
+  "axes": [
+    {
+      "axis": "Size",
+      "values": [
+        "Default",
+        "Sm",
+        "Lg"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 3,
+  "variantChildNames": [
+    "Size=Default",
+    "Size=Sm",
+    "Size=Lg"
+  ],
+  "reflow": {
+    "target": "39:9299",
+    "targetName": "Size=Default",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 32,
+      "h": 32,
+      "children": [
+        {
+          "id": "39:9301",
+          "name": "label",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 21,
+          "h": 20,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 72,
+      "h": 72,
+      "children": [
+        {
+          "id": "39:9301",
+          "name": "label",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 21,
+          "h": 20,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "label"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 32,
+      "h": 32
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:895",
+    "baseline": {
+      "geometry": "ef141405307f17d0",
+      "fills": "300d41470b29d853",
+      "text": "ed44de7e1415c4cc"
+    },
+    "axes": [
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "ef141405307f17d0",
+            "fills": "300d41470b29d853",
+            "text": "ed44de7e1415c4cc"
+          },
+          {
+            "value": "Sm",
+            "geometry": "3a0534a5cf2bba94",
+            "fills": "300d41470b29d853",
+            "text": "ed44de7e1415c4cc"
+          },
+          {
+            "value": "Lg",
+            "geometry": "6bb8762575cd5a88",
+            "fills": "300d41470b29d853",
+            "text": "ed44de7e1415c4cc"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 12,
+    "bound": 10,
+    "inferred": 2,
+    "literal": 0,
+    "byGroup": {
+      "sizing": {
+        "bound": 0,
+        "inferred": 2,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 8,
+        "inferred": 0,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Size=Default",
+      "name": "Size=Default",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 32,
+      "h": 32,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 21,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/label[0]/CN[0]",
+      "name": "CN",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 21,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 291,
+    "sig": "2323b4b6ec9f2790"
+  },
+  "canvasAfter": {
+    "nodes": 291,
+    "sig": "2323b4b6ec9f2790"
+  },
+  "canvasRestored": true
+}

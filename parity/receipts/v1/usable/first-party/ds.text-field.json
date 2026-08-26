@@ -1,0 +1,377 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / first-party",
+  "setNodeId": "39:24208",
+  "setName": "TextField (ds.text-field)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:24178",
+  "variantNodeName": "Size=Medium",
+  "axes": [
+    {
+      "axis": "Size",
+      "values": [
+        "Medium",
+        "Small",
+        "Large"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 3,
+  "variantChildNames": [
+    "Size=Medium",
+    "Size=Small",
+    "Size=Large"
+  ],
+  "reflow": {
+    "target": "39:24178",
+    "targetName": "Size=Medium",
+    "layoutMode": "VERTICAL",
+    "childCount": 3,
+    "sizing": {
+      "h": "FIXED",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 320,
+      "h": 79,
+      "children": [
+        {
+          "id": "39:24179",
+          "name": "labelRow",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 320,
+          "h": 17,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:24185",
+          "name": "descriptionText",
+          "type": "TEXT",
+          "x": 0,
+          "y": 21,
+          "w": 296,
+          "h": 17,
+          "ax": 0,
+          "ay": 21,
+          "visible": true
+        },
+        {
+          "id": "39:24186",
+          "name": "input",
+          "type": "FRAME",
+          "x": 0,
+          "y": 42,
+          "w": 320,
+          "h": 37,
+          "ax": 0,
+          "ay": 42,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 360,
+      "h": 119,
+      "children": [
+        {
+          "id": "39:24179",
+          "name": "labelRow",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 360,
+          "h": 17,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:24185",
+          "name": "descriptionText",
+          "type": "TEXT",
+          "x": 0,
+          "y": 21,
+          "w": 296,
+          "h": 17,
+          "ax": 0,
+          "ay": 21,
+          "visible": true
+        },
+        {
+          "id": "39:24186",
+          "name": "input",
+          "type": "FRAME",
+          "x": 0,
+          "y": 42,
+          "w": 360,
+          "h": 37,
+          "ax": 0,
+          "ay": 42,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "labelRow",
+        "dx": 0,
+        "dy": 0,
+        "dw": 40,
+        "dh": 0
+      },
+      {
+        "name": "input",
+        "dx": 0,
+        "dy": 0,
+        "dw": 40,
+        "dh": 0
+      }
+    ],
+    "frozen": [
+      "descriptionText"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 320,
+      "h": 79
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:4283",
+    "baseline": {
+      "geometry": "31f2e4e03783bd4c",
+      "fills": "49b9e4f1b34cc358",
+      "text": "d8ef3e9d153dc844"
+    },
+    "axes": [
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Medium",
+            "geometry": "31f2e4e03783bd4c",
+            "fills": "49b9e4f1b34cc358",
+            "text": "d8ef3e9d153dc844"
+          },
+          {
+            "value": "Small",
+            "geometry": "d619b4baf667e1f0",
+            "fills": "49b9e4f1b34cc358",
+            "text": "d8ef3e9d153dc844"
+          },
+          {
+            "value": "Large",
+            "geometry": "b0722f24ef608034",
+            "fills": "49b9e4f1b34cc358",
+            "text": "d8ef3e9d153dc844"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 31,
+    "bound": 18,
+    "inferred": 5,
+    "literal": 8,
+    "byGroup": {
+      "spacing": {
+        "bound": 6,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 4,
+        "literal": 5
+      },
+      "fills": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 4,
+        "inferred": 1,
+        "literal": 3
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [
+      "/labelRow[0]/requiredMark[1]/Vector[0]·strokeWeight=0.75",
+      "/labelRow[0]/requiredMark[1]/Vector[0]·height=5.5",
+      "/labelRow[0]/requiredMark[1]/Vector[1]·strokeWeight=0.75",
+      "/labelRow[0]/requiredMark[1]/Vector[1]·width=4.8",
+      "/labelRow[0]/requiredMark[1]/Vector[1]·height=2.8",
+      "/labelRow[0]/requiredMark[1]/Vector[2]·strokeWeight=0.75",
+      "/labelRow[0]/requiredMark[1]/Vector[2]·width=4.8",
+      "/labelRow[0]/requiredMark[1]/Vector[2]·height=2.8"
+    ],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Size=Medium",
+      "name": "Size=Medium",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 3,
+      "w": 320,
+      "h": 79,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/labelRow[0]",
+      "name": "labelRow",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 320,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/labelRow[0]/labelText[0]",
+      "name": "labelText",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 37,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/labelRow[0]/requiredMark[1]",
+      "name": "requiredMark",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 3,
+      "w": 10,
+      "h": 10,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/labelRow[0]/requiredMark[1]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 0,
+      "h": 5.5,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/labelRow[0]/requiredMark[1]/Vector[1]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 4.8,
+      "h": 2.8,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/labelRow[0]/requiredMark[1]/Vector[2]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 4.8,
+      "h": 2.8,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/descriptionText[1]",
+      "name": "descriptionText",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 296,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/input[2]",
+      "name": "input",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 320,
+      "h": 37,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/input[2]/placeholder[0]",
+      "name": "placeholder",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 112,
+      "h": 19,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasAfter": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasRestored": true
+}

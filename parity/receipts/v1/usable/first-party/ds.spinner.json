@@ -1,0 +1,169 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / first-party",
+  "setNodeId": "39:23964",
+  "setName": "Spinner (ds.spinner)",
+  "setType": "COMPONENT",
+  "variantNodeId": "39:23964",
+  "variantNodeName": "Spinner (ds.spinner)",
+  "axes": null,
+  "axesError": null,
+  "variantChildCount": 1,
+  "variantChildNames": [
+    "Spinner (ds.spinner)"
+  ],
+  "reflow": {
+    "target": "39:23964",
+    "targetName": "Spinner (ds.spinner)",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "MIN",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 20,
+      "h": 20,
+      "children": [
+        {
+          "id": "39:23965",
+          "name": "arc",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 20,
+          "h": 20,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 60,
+      "h": 60,
+      "children": [
+        {
+          "id": "39:23965",
+          "name": "arc",
+          "type": "FRAME",
+          "x": 0,
+          "y": 20,
+          "w": 20,
+          "h": 20,
+          "ax": 0,
+          "ay": 20,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "arc",
+        "dx": 0,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 20,
+      "h": 20
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:4072",
+    "baseline": {
+      "geometry": "1324660068626c93",
+      "fills": "93c999f1d2eb2fd4",
+      "text": "00001505811c9dc5"
+    },
+    "axes": [],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 6,
+    "bound": 1,
+    "inferred": 5,
+    "literal": 0,
+    "byGroup": {
+      "sizing": {
+        "bound": 0,
+        "inferred": 4,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Spinner (ds.spinner)",
+      "name": "Spinner (ds.spinner)",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 20,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": null,
+      "parentType": "SECTION"
+    },
+    {
+      "path": "/arc[0]",
+      "name": "arc",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 20,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/arc[0]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 7.5,
+      "h": 7.5,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasAfter": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasRestored": true
+}

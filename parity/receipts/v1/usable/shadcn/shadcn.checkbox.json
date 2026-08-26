@@ -1,0 +1,193 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / shadcn",
+  "setNodeId": "39:9557",
+  "setName": "Checkbox (shadcn.checkbox)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:9536",
+  "variantNodeName": "Checked=Unchecked, State=Default",
+  "axes": [
+    {
+      "axis": "Checked",
+      "values": [
+        "Unchecked",
+        "Checked",
+        "Indeterminate"
+      ]
+    },
+    {
+      "axis": "State",
+      "values": [
+        "Default",
+        "Disabled",
+        "Focus Visible"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 9,
+  "variantChildNames": [
+    "Checked=Unchecked, State=Default",
+    "Checked=Checked, State=Default",
+    "Checked=Indeterminate, State=Default",
+    "Checked=Unchecked, State=Disabled",
+    "Checked=Checked, State=Disabled",
+    "Checked=Indeterminate, State=Disabled",
+    "Checked=Unchecked, State=Focus Visible",
+    "Checked=Checked, State=Focus Visible",
+    "Checked=Indeterminate, State=Focus Visible"
+  ],
+  "reflow": {
+    "target": "39:9536",
+    "targetName": "Checked=Unchecked, State=Default",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 0,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "CENTER",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 16,
+      "h": 16,
+      "children": []
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 56,
+      "h": 56,
+      "children": []
+    },
+    "responded": [],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 16,
+      "h": 16
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:952",
+    "baseline": {
+      "geometry": "e5b10cc8599a0e80",
+      "fills": "c373758bcc63cf67",
+      "text": "00001505811c9dc5"
+    },
+    "axes": [
+      {
+        "axis": "Checked",
+        "values": [
+          {
+            "value": "Unchecked",
+            "geometry": "e5b10cc8599a0e80",
+            "fills": "c373758bcc63cf67",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Checked",
+            "geometry": "8f425052144d8f2f",
+            "fills": "510b382385c5f7f8",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Indeterminate",
+            "geometry": "8f425052144d8f2f",
+            "fills": "f8d27fab1f3a6220",
+            "text": "00001505811c9dc5"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "State",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "e5b10cc8599a0e80",
+            "fills": "c373758bcc63cf67",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Disabled",
+            "geometry": "e5b10cc8599a0e80",
+            "fills": "c373758bcc63cf67",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Focus Visible",
+            "geometry": "e5b10cc8599a0e80",
+            "fills": "c373758bcc63cf67",
+            "text": "00001505811c9dc5"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 9,
+    "bound": 6,
+    "inferred": 3,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 1,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 2,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Checked=Unchecked, State=Default",
+      "name": "Checked=Unchecked, State=Default",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 16,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 291,
+    "sig": "2323b4b6ec9f2790"
+  },
+  "canvasAfter": {
+    "nodes": 291,
+    "sig": "2323b4b6ec9f2790"
+  },
+  "canvasRestored": true
+}

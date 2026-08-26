@@ -1,0 +1,397 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / fluent",
+  "setNodeId": "39:12746",
+  "setName": "Checkbox (fluent.checkbox)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:12576",
+  "variantNodeName": "Checked=Unchecked, Size=Medium, Shape=Square, State=Default",
+  "axes": [
+    {
+      "axis": "Checked",
+      "values": [
+        "Unchecked",
+        "Checked",
+        "Mixed"
+      ]
+    },
+    {
+      "axis": "Size",
+      "values": [
+        "Medium",
+        "Large"
+      ]
+    },
+    {
+      "axis": "Shape",
+      "values": [
+        "Square",
+        "Circular"
+      ]
+    },
+    {
+      "axis": "State",
+      "values": [
+        "Default",
+        "Disabled",
+        "Focus Visible",
+        "Active",
+        "Hover"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 24,
+  "variantChildNames": [
+    "Checked=Unchecked, Size=Medium, Shape=Square, State=Default",
+    "Checked=Unchecked, Size=Medium, Shape=Circular, State=Default",
+    "Checked=Unchecked, Size=Large, Shape=Square, State=Default",
+    "Checked=Unchecked, Size=Large, Shape=Circular, State=Default",
+    "Checked=Checked, Size=Medium, Shape=Square, State=Default",
+    "Checked=Checked, Size=Medium, Shape=Circular, State=Default",
+    "Checked=Checked, Size=Large, Shape=Square, State=Default",
+    "Checked=Checked, Size=Large, Shape=Circular, State=Default",
+    "Checked=Mixed, Size=Medium, Shape=Square, State=Default",
+    "Checked=Mixed, Size=Medium, Shape=Circular, State=Default",
+    "Checked=Mixed, Size=Large, Shape=Square, State=Default",
+    "Checked=Mixed, Size=Large, Shape=Circular, State=Default",
+    "Checked=Unchecked, Size=Medium, Shape=Square, State=Disabled",
+    "Checked=Checked, Size=Medium, Shape=Square, State=Disabled",
+    "Checked=Mixed, Size=Medium, Shape=Square, State=Disabled",
+    "Checked=Unchecked, Size=Medium, Shape=Square, State=Focus Visible",
+    "Checked=Checked, Size=Medium, Shape=Square, State=Focus Visible",
+    "Checked=Mixed, Size=Medium, Shape=Square, State=Focus Visible",
+    "Checked=Unchecked, Size=Medium, Shape=Square, State=Active",
+    "Checked=Checked, Size=Medium, Shape=Square, State=Active",
+    "Checked=Mixed, Size=Medium, Shape=Square, State=Active",
+    "Checked=Unchecked, Size=Medium, Shape=Square, State=Hover",
+    "Checked=Checked, Size=Medium, Shape=Square, State=Hover",
+    "Checked=Mixed, Size=Medium, Shape=Square, State=Hover"
+  ],
+  "reflow": {
+    "target": "39:12576",
+    "targetName": "Checked=Unchecked, Size=Medium, Shape=Square, State=Default",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 108.38,
+      "h": 32,
+      "children": [
+        {
+          "id": "39:12578",
+          "name": "indicator (margin box)",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 24,
+          "h": 32,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:12581",
+          "name": "label (margin box)",
+          "type": "FRAME",
+          "x": 32,
+          "y": 0,
+          "w": 79,
+          "h": 32,
+          "ax": 32,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 148.38,
+      "h": 72,
+      "children": [
+        {
+          "id": "39:12578",
+          "name": "indicator (margin box)",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 24,
+          "h": 32,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:12581",
+          "name": "label (margin box)",
+          "type": "FRAME",
+          "x": 32,
+          "y": 0,
+          "w": 79,
+          "h": 32,
+          "ax": 32,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "indicator (margin box)",
+      "label (margin box)"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 108.38,
+      "h": 32
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:1420",
+    "baseline": {
+      "geometry": "e2443d26416103b4",
+      "fills": "bb2c10fff6cced44",
+      "text": "4006d20f50a6e591"
+    },
+    "axes": [
+      {
+        "axis": "Checked",
+        "values": [
+          {
+            "value": "Unchecked",
+            "geometry": "e2443d26416103b4",
+            "fills": "bb2c10fff6cced44",
+            "text": "4006d20f50a6e591"
+          },
+          {
+            "value": "Checked",
+            "geometry": "3a52701497b09d7c",
+            "fills": "dd089059baa8b2b0",
+            "text": "4006d20f50a6e591"
+          },
+          {
+            "value": "Mixed",
+            "geometry": "3a52701497b09d7c",
+            "fills": "3f2a746527676640",
+            "text": "4006d20f50a6e591"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Medium",
+            "geometry": "e2443d26416103b4",
+            "fills": "bb2c10fff6cced44",
+            "text": "4006d20f50a6e591"
+          },
+          {
+            "value": "Large",
+            "geometry": "d185a9b81ee6004c",
+            "fills": "eb14c447725980d7",
+            "text": "ffb5a39a7c9dce6c"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Shape",
+        "values": [
+          {
+            "value": "Square",
+            "geometry": "e2443d26416103b4",
+            "fills": "bb2c10fff6cced44",
+            "text": "4006d20f50a6e591"
+          },
+          {
+            "value": "Circular",
+            "geometry": "d7fb9225e32aa803",
+            "fills": "bb2c10fff6cced44",
+            "text": "4006d20f50a6e591"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "State",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "e2443d26416103b4",
+            "fills": "bb2c10fff6cced44",
+            "text": "4006d20f50a6e591"
+          },
+          {
+            "value": "Disabled",
+            "geometry": "e2443d26416103b4",
+            "fills": "bb2c10fff6cced44",
+            "text": "4006d20f50a6e591"
+          },
+          {
+            "value": "Focus Visible",
+            "geometry": "e2443d26416103b4",
+            "fills": "bb2c10fff6cced44",
+            "text": "4006d20f50a6e591"
+          },
+          {
+            "value": "Active",
+            "geometry": "e2443d26416103b4",
+            "fills": "bb2c10fff6cced44",
+            "text": "4006d20f50a6e591"
+          },
+          {
+            "value": "Hover",
+            "geometry": "e2443d26416103b4",
+            "fills": "bb2c10fff6cced44",
+            "text": "4006d20f50a6e591"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 21,
+    "bound": 14,
+    "inferred": 6,
+    "literal": 1,
+    "byGroup": {
+      "spacing": {
+        "bound": 5,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 2,
+        "inferred": 5,
+        "literal": 1
+      },
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [
+      "/label (margin box)[1]·width=79"
+    ],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Checked=Unchecked, Size=Medium, Shape=Square, State=Default",
+      "name": "Checked=Unchecked, Size=Medium, Shape=Square, State=Default",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 108.38,
+      "h": 32,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/indicator (margin box)[0]",
+      "name": "indicator (margin box)",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 24,
+      "h": 32,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/indicator (margin box)[0]/indicator[0]",
+      "name": "indicator",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 16,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/label (margin box)[1]",
+      "name": "label (margin box)",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 79,
+      "h": 32,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/label (margin box)[1]/label[0]",
+      "name": "label",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 79,
+      "h": 36,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/label (margin box)[1]/label[0]/label-text[0]",
+      "name": "label-text",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 67,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1663,
+    "sig": "0ac044e74ac6a8ac"
+  },
+  "canvasAfter": {
+    "nodes": 1663,
+    "sig": "0ac044e74ac6a8ac"
+  },
+  "canvasRestored": true
+}

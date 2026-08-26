@@ -1,0 +1,308 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / polaris",
+  "setNodeId": "39:22557",
+  "setName": "RadioButton",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:22540",
+  "variantNodeName": "Checked=unchecked",
+  "axes": [
+    {
+      "axis": "Checked",
+      "values": [
+        "unchecked",
+        "checked"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 2,
+  "variantChildNames": [
+    "Checked=unchecked",
+    "Checked=checked"
+  ],
+  "reflow": {
+    "target": "39:22540",
+    "targetName": "Checked=unchecked",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 166.33,
+      "h": 28,
+      "children": [
+        {
+          "id": "39:22541",
+          "name": "choice__control",
+          "type": "FRAME",
+          "x": 0,
+          "y": 4,
+          "w": 20,
+          "h": 20,
+          "ax": 0,
+          "ay": 4,
+          "visible": true
+        },
+        {
+          "id": "39:22545",
+          "name": "choice__label",
+          "type": "FRAME",
+          "x": 28,
+          "y": 4,
+          "w": 138.33,
+          "h": 20,
+          "ax": 28,
+          "ay": 4,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 206.33,
+      "h": 68,
+      "children": [
+        {
+          "id": "39:22541",
+          "name": "choice__control",
+          "type": "FRAME",
+          "x": 0,
+          "y": 24,
+          "w": 20,
+          "h": 20,
+          "ax": 0,
+          "ay": 24,
+          "visible": true
+        },
+        {
+          "id": "39:22545",
+          "name": "choice__label",
+          "type": "FRAME",
+          "x": 28,
+          "y": 24,
+          "w": 138.33,
+          "h": 20,
+          "ax": 28,
+          "ay": 24,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "choice__control",
+        "dx": 0,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      },
+      {
+        "name": "choice__label",
+        "dx": 0,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 166.33,
+      "h": 28
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:3087",
+    "baseline": {
+      "geometry": "dac566c022f2fed0",
+      "fills": "fe47a2a2890cb028",
+      "text": "b88cb7ab046be8b4"
+    },
+    "axes": [
+      {
+        "axis": "Checked",
+        "values": [
+          {
+            "value": "unchecked",
+            "geometry": "dac566c022f2fed0",
+            "fills": "fe47a2a2890cb028",
+            "text": "b88cb7ab046be8b4"
+          },
+          {
+            "value": "checked",
+            "geometry": "d168a2ddc9653bb0",
+            "fills": "76f76371c88d2aa0",
+            "text": "b88cb7ab046be8b4"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 21,
+    "bound": 11,
+    "inferred": 10,
+    "literal": 0,
+    "byGroup": {
+      "spacing": {
+        "bound": 3,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 4,
+        "inferred": 6,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 0,
+        "inferred": 2,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 0,
+        "inferred": 2,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Checked=unchecked",
+      "name": "Checked=unchecked",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 166.33,
+      "h": 28,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/choice__control[0]",
+      "name": "choice__control",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 20,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/choice__control[0]/radiobutton (margin box)[0]",
+      "name": "radiobutton (margin box)",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 20,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/choice__control[0]/radiobutton (margin box)[0]/radiobutton[0]",
+      "name": "radiobutton",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 18,
+      "h": 18,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/choice__control[0]/radiobutton (margin box)[0]/radiobutton[0]/backdrop[0]",
+      "name": "backdrop",
+      "type": "RECTANGLE",
+      "layoutPositioning": "ABSOLUTE",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 18,
+      "h": 18,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/choice__label[1]",
+      "name": "choice__label",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 138.33,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/choice__label[1]/label[0]",
+      "name": "label",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 139,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/choice__label[1]/label[0]/Accounts are disabled[0]",
+      "name": "Accounts are disabled",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 139,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 3326,
+    "sig": "c09e90afe241d48c"
+  },
+  "canvasAfter": {
+    "nodes": 3326,
+    "sig": "c09e90afe241d48c"
+  },
+  "canvasRestored": true
+}

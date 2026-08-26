@@ -1,0 +1,263 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / astryx",
+  "setNodeId": "39:14090",
+  "setName": "Button (astryx.button)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:14054",
+  "variantNodeName": "Variant=Secondary, Size=Md",
+  "axes": [
+    {
+      "axis": "Variant",
+      "values": [
+        "Secondary",
+        "Primary",
+        "Ghost",
+        "Destructive"
+      ]
+    },
+    {
+      "axis": "Size",
+      "values": [
+        "Md",
+        "Sm",
+        "Lg"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 12,
+  "variantChildNames": [
+    "Variant=Secondary, Size=Md",
+    "Variant=Secondary, Size=Sm",
+    "Variant=Secondary, Size=Lg",
+    "Variant=Primary, Size=Md",
+    "Variant=Primary, Size=Sm",
+    "Variant=Primary, Size=Lg",
+    "Variant=Ghost, Size=Md",
+    "Variant=Ghost, Size=Sm",
+    "Variant=Ghost, Size=Lg",
+    "Variant=Destructive, Size=Md",
+    "Variant=Destructive, Size=Sm",
+    "Variant=Destructive, Size=Lg"
+  ],
+  "reflow": {
+    "target": "39:14054",
+    "targetName": "Variant=Secondary, Size=Md",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "CENTER",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 99.81,
+      "h": 32,
+      "children": [
+        {
+          "id": "39:14056",
+          "name": "label",
+          "type": "FRAME",
+          "x": 27.41,
+          "y": 6,
+          "w": 45,
+          "h": 20,
+          "ax": 27.41,
+          "ay": 6,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 139.81,
+      "h": 72,
+      "children": [
+        {
+          "id": "39:14056",
+          "name": "label",
+          "type": "FRAME",
+          "x": 47.41,
+          "y": 26,
+          "w": 45,
+          "h": 20,
+          "ax": 47.41,
+          "ay": 26,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "label",
+        "dx": 20,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 99.81,
+      "h": 32
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:1058",
+    "baseline": {
+      "geometry": "35aa1dd090f00d1b",
+      "fills": "0fa5063462d9585c",
+      "text": "f6b3a23e16ad396c"
+    },
+    "axes": [
+      {
+        "axis": "Variant",
+        "values": [
+          {
+            "value": "Secondary",
+            "geometry": "35aa1dd090f00d1b",
+            "fills": "0fa5063462d9585c",
+            "text": "f6b3a23e16ad396c"
+          },
+          {
+            "value": "Primary",
+            "geometry": "35aa1dd090f00d1b",
+            "fills": "65a809d51b0ef490",
+            "text": "f6b3a23e16ad396c"
+          },
+          {
+            "value": "Ghost",
+            "geometry": "35aa1dd090f00d1b",
+            "fills": "11cd933c43f3e48b",
+            "text": "f6b3a23e16ad396c"
+          },
+          {
+            "value": "Destructive",
+            "geometry": "35aa1dd090f00d1b",
+            "fills": "b0e4caab41e75370",
+            "text": "f6b3a23e16ad396c"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Md",
+            "geometry": "35aa1dd090f00d1b",
+            "fills": "0fa5063462d9585c",
+            "text": "f6b3a23e16ad396c"
+          },
+          {
+            "value": "Sm",
+            "geometry": "16ba2e1bc54e4bba",
+            "fills": "0fa5063462d9585c",
+            "text": "f6b3a23e16ad396c"
+          },
+          {
+            "value": "Lg",
+            "geometry": "d0618514c7c8d6bb",
+            "fills": "0fa5063462d9585c",
+            "text": "f6b3a23e16ad396c"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 13,
+    "bound": 11,
+    "inferred": 2,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 5,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 2,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Variant=Secondary, Size=Md",
+      "name": "Variant=Secondary, Size=Md",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 99.81,
+      "h": 32,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 45,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/label[0]/Button[0]",
+      "name": "Button",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 45,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 440,
+    "sig": "8f17151526c142bc"
+  },
+  "canvasAfter": {
+    "nodes": 440,
+    "sig": "8f17151526c142bc"
+  },
+  "canvasRestored": true
+}

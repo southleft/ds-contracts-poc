@@ -1,0 +1,417 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / mui",
+  "setNodeId": "39:16971",
+  "setName": "Button (mui.button)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:16821",
+  "variantNodeName": "Variant=Text, Color=Primary, Size=Medium, State=Default",
+  "axes": [
+    {
+      "axis": "Variant",
+      "values": [
+        "Text",
+        "Contained",
+        "Outlined"
+      ]
+    },
+    {
+      "axis": "Color",
+      "values": [
+        "Primary",
+        "Secondary",
+        "Error",
+        "Success",
+        "Warning",
+        "Info",
+        "Inherit"
+      ]
+    },
+    {
+      "axis": "Size",
+      "values": [
+        "Medium",
+        "Small",
+        "Large"
+      ]
+    },
+    {
+      "axis": "State",
+      "values": [
+        "Default",
+        "Disabled",
+        "Active",
+        "Focus Visible",
+        "Hover"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 75,
+  "variantChildNames": [
+    "Variant=Text, Color=Primary, Size=Medium, State=Default",
+    "Variant=Text, Color=Primary, Size=Small, State=Default",
+    "Variant=Text, Color=Primary, Size=Large, State=Default",
+    "Variant=Text, Color=Secondary, Size=Medium, State=Default",
+    "Variant=Text, Color=Secondary, Size=Small, State=Default",
+    "Variant=Text, Color=Secondary, Size=Large, State=Default",
+    "Variant=Text, Color=Error, Size=Medium, State=Default",
+    "Variant=Text, Color=Error, Size=Small, State=Default",
+    "Variant=Text, Color=Error, Size=Large, State=Default",
+    "Variant=Text, Color=Success, Size=Medium, State=Default",
+    "Variant=Text, Color=Success, Size=Small, State=Default",
+    "Variant=Text, Color=Success, Size=Large, State=Default",
+    "Variant=Text, Color=Warning, Size=Medium, State=Default",
+    "Variant=Text, Color=Warning, Size=Small, State=Default",
+    "Variant=Text, Color=Warning, Size=Large, State=Default",
+    "Variant=Text, Color=Info, Size=Medium, State=Default",
+    "Variant=Text, Color=Info, Size=Small, State=Default",
+    "Variant=Text, Color=Info, Size=Large, State=Default",
+    "Variant=Text, Color=Inherit, Size=Medium, State=Default",
+    "Variant=Text, Color=Inherit, Size=Small, State=Default",
+    "Variant=Text, Color=Inherit, Size=Large, State=Default",
+    "Variant=Contained, Color=Primary, Size=Medium, State=Default",
+    "Variant=Contained, Color=Primary, Size=Small, State=Default",
+    "Variant=Contained, Color=Primary, Size=Large, State=Default",
+    "Variant=Contained, Color=Secondary, Size=Medium, State=Default",
+    "Variant=Contained, Color=Secondary, Size=Small, State=Default",
+    "Variant=Contained, Color=Secondary, Size=Large, State=Default",
+    "Variant=Contained, Color=Error, Size=Medium, State=Default",
+    "Variant=Contained, Color=Error, Size=Small, State=Default",
+    "Variant=Contained, Color=Error, Size=Large, State=Default",
+    "Variant=Contained, Color=Success, Size=Medium, State=Default",
+    "Variant=Contained, Color=Success, Size=Small, State=Default",
+    "Variant=Contained, Color=Success, Size=Large, State=Default",
+    "Variant=Contained, Color=Warning, Size=Medium, State=Default",
+    "Variant=Contained, Color=Warning, Size=Small, State=Default",
+    "Variant=Contained, Color=Warning, Size=Large, State=Default",
+    "Variant=Contained, Color=Info, Size=Medium, State=Default",
+    "Variant=Contained, Color=Info, Size=Small, State=Default",
+    "Variant=Contained, Color=Info, Size=Large, State=Default",
+    "Variant=Contained, Color=Inherit, Size=Medium, State=Default",
+    "Variant=Contained, Color=Inherit, Size=Small, State=Default",
+    "Variant=Contained, Color=Inherit, Size=Large, State=Default",
+    "Variant=Outlined, Color=Primary, Size=Medium, State=Default",
+    "Variant=Outlined, Color=Primary, Size=Small, State=Default",
+    "Variant=Outlined, Color=Primary, Size=Large, State=Default",
+    "Variant=Outlined, Color=Secondary, Size=Medium, State=Default",
+    "Variant=Outlined, Color=Secondary, Size=Small, State=Default",
+    "Variant=Outlined, Color=Secondary, Size=Large, State=Default",
+    "Variant=Outlined, Color=Error, Size=Medium, State=Default",
+    "Variant=Outlined, Color=Error, Size=Small, State=Default",
+    "Variant=Outlined, Color=Error, Size=Large, State=Default",
+    "Variant=Outlined, Color=Success, Size=Medium, State=Default",
+    "Variant=Outlined, Color=Success, Size=Small, State=Default",
+    "Variant=Outlined, Color=Success, Size=Large, State=Default",
+    "Variant=Outlined, Color=Warning, Size=Medium, State=Default",
+    "Variant=Outlined, Color=Warning, Size=Small, State=Default",
+    "Variant=Outlined, Color=Warning, Size=Large, State=Default",
+    "Variant=Outlined, Color=Info, Size=Medium, State=Default",
+    "Variant=Outlined, Color=Info, Size=Small, State=Default",
+    "Variant=Outlined, Color=Info, Size=Large, State=Default",
+    "Variant=Outlined, Color=Inherit, Size=Medium, State=Default",
+    "Variant=Outlined, Color=Inherit, Size=Small, State=Default",
+    "Variant=Outlined, Color=Inherit, Size=Large, State=Default",
+    "Variant=Text, Color=Primary, Size=Medium, State=Disabled",
+    "Variant=Contained, Color=Primary, Size=Medium, State=Disabled",
+    "Variant=Outlined, Color=Primary, Size=Medium, State=Disabled",
+    "Variant=Text, Color=Primary, Size=Medium, State=Active",
+    "Variant=Contained, Color=Primary, Size=Medium, State=Active",
+    "Variant=Outlined, Color=Primary, Size=Medium, State=Active",
+    "Variant=Text, Color=Primary, Size=Medium, State=Focus Visible",
+    "Variant=Contained, Color=Primary, Size=Medium, State=Focus Visible",
+    "Variant=Outlined, Color=Primary, Size=Medium, State=Focus Visible",
+    "Variant=Text, Color=Primary, Size=Medium, State=Hover",
+    "Variant=Contained, Color=Primary, Size=Medium, State=Hover",
+    "Variant=Outlined, Color=Primary, Size=Medium, State=Hover"
+  ],
+  "reflow": {
+    "target": "39:16821",
+    "targetName": "Variant=Text, Color=Primary, Size=Medium, State=Default",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "CENTER",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 71,
+      "h": 28,
+      "children": [
+        {
+          "id": "39:16822",
+          "name": "label",
+          "type": "TEXT",
+          "x": 8,
+          "y": 6,
+          "w": 55,
+          "h": 16,
+          "ax": 8,
+          "ay": 6,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 111,
+      "h": 68,
+      "children": [
+        {
+          "id": "39:16822",
+          "name": "label",
+          "type": "TEXT",
+          "x": 28,
+          "y": 26,
+          "w": 55,
+          "h": 16,
+          "ax": 28,
+          "ay": 26,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "label",
+        "dx": 20,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 71,
+      "h": 28
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:2156",
+    "baseline": {
+      "geometry": "bfceeb18b4475052",
+      "fills": "6e585a55ae9460d8",
+      "text": "1e5b36f18dc4cd44"
+    },
+    "axes": [
+      {
+        "axis": "Variant",
+        "values": [
+          {
+            "value": "Text",
+            "geometry": "bfceeb18b4475052",
+            "fills": "6e585a55ae9460d8",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Contained",
+            "geometry": "3cf4d72e5ae19e4b",
+            "fills": "997504a8d7a19a48",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Outlined",
+            "geometry": "3cf4d72e5ae19e4b",
+            "fills": "4974660f93c5cdd0",
+            "text": "1e5b36f18dc4cd44"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Color",
+        "values": [
+          {
+            "value": "Primary",
+            "geometry": "bfceeb18b4475052",
+            "fills": "6e585a55ae9460d8",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Secondary",
+            "geometry": "bfceeb18b4475052",
+            "fills": "86b47555d3e9a800",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Error",
+            "geometry": "bfceeb18b4475052",
+            "fills": "acadb495c18c90e8",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Success",
+            "geometry": "bfceeb18b4475052",
+            "fills": "b24e8115d90987e8",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Warning",
+            "geometry": "bfceeb18b4475052",
+            "fills": "47fc12155154d110",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Info",
+            "geometry": "bfceeb18b4475052",
+            "fills": "4b38c095f7e7e468",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Inherit",
+            "geometry": "bfceeb18b4475052",
+            "fills": "ecd2bc956ad802c7",
+            "text": "1e5b36f18dc4cd44"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Medium",
+            "geometry": "bfceeb18b4475052",
+            "fills": "6e585a55ae9460d8",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Small",
+            "geometry": "6b53f607435711bc",
+            "fills": "6e585a55ae9460d8",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Large",
+            "geometry": "bed4d04ee216085c",
+            "fills": "6e585a55ae9460d8",
+            "text": "1e5b36f18dc4cd44"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "State",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "bfceeb18b4475052",
+            "fills": "6e585a55ae9460d8",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Disabled",
+            "geometry": "bfceeb18b4475052",
+            "fills": "4c68a66205bc1d38",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Active",
+            "geometry": "bfceeb18b4475052",
+            "fills": "6e585a55ae9460d8",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Focus Visible",
+            "geometry": "bfceeb18b4475052",
+            "fills": "6e585a55ae9460d8",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Hover",
+            "geometry": "bfceeb18b4475052",
+            "fills": "6e585a55ae9460d8",
+            "text": "1e5b36f18dc4cd44"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 13,
+    "bound": 12,
+    "inferred": 1,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 1,
+        "inferred": 0,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Variant=Text, Color=Primary, Size=Medium, State=Default",
+      "name": "Variant=Text, Color=Primary, Size=Medium, State=Default",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 71,
+      "h": 28,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 55,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasAfter": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasRestored": true
+}

@@ -1,0 +1,288 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / astryx",
+  "setNodeId": "39:14331",
+  "setName": "Toast",
+  "setType": "COMPONENT",
+  "variantNodeId": "39:14331",
+  "variantNodeName": "Toast",
+  "axes": null,
+  "axesError": null,
+  "variantChildCount": 1,
+  "variantChildNames": [
+    "Toast"
+  ],
+  "reflow": {
+    "target": "39:14331",
+    "targetName": "Toast",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 3,
+    "sizing": {
+      "h": "FIXED",
+      "v": "HUG",
+      "primary": "FIXED",
+      "counter": "AUTO",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 360,
+      "h": 64,
+      "children": [
+        {
+          "id": "39:14332",
+          "name": "content",
+          "type": "FRAME",
+          "x": 16,
+          "y": 16,
+          "w": 216.19,
+          "h": 20,
+          "ax": 16,
+          "ay": 16,
+          "visible": true
+        },
+        {
+          "id": "39:14334",
+          "name": "EndContent",
+          "type": "SLOT",
+          "x": 231.19,
+          "y": 16,
+          "w": 1,
+          "h": 1,
+          "ax": 231.19,
+          "ay": 16,
+          "visible": false
+        },
+        {
+          "id": "39:14335",
+          "name": "dismiss",
+          "type": "INSTANCE",
+          "x": 244.19,
+          "y": 16,
+          "w": 99.81,
+          "h": 32,
+          "ax": 244.19,
+          "ay": 16,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 400,
+      "h": 104,
+      "children": [
+        {
+          "id": "39:14332",
+          "name": "content",
+          "type": "FRAME",
+          "x": 16,
+          "y": 16,
+          "w": 256.19,
+          "h": 20,
+          "ax": 16,
+          "ay": 16,
+          "visible": true
+        },
+        {
+          "id": "39:14334",
+          "name": "EndContent",
+          "type": "SLOT",
+          "x": 231.19,
+          "y": 16,
+          "w": 1,
+          "h": 1,
+          "ax": 231.19,
+          "ay": 16,
+          "visible": false
+        },
+        {
+          "id": "39:14335",
+          "name": "dismiss",
+          "type": "INSTANCE",
+          "x": 284.19,
+          "y": 16,
+          "w": 99.81,
+          "h": 32,
+          "ax": 284.19,
+          "ay": 16,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "content",
+        "dx": 0,
+        "dy": 0,
+        "dw": 40,
+        "dh": 0
+      },
+      {
+        "name": "dismiss",
+        "dx": 40,
+        "dy": 0,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [
+      "EndContent"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 360,
+      "h": 64
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:1264",
+    "baseline": {
+      "geometry": "8db944ca27710694",
+      "fills": "244af9f517943a28",
+      "text": "da90a84c6ececd78"
+    },
+    "axes": [],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 25,
+    "bound": 23,
+    "inferred": 2,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 3,
+        "inferred": 1,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 10,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 2,
+        "inferred": 1,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 8,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Toast",
+      "name": "Toast",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 3,
+      "w": 360,
+      "h": 64,
+      "visible": true,
+      "parentLayoutMode": null,
+      "parentType": "SECTION"
+    },
+    {
+      "path": "/content[0]",
+      "name": "content",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 216.19,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/content[0]/bodyText[0]",
+      "name": "bodyText",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 120,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/EndContent[1]",
+      "name": "EndContent",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 1,
+      "h": 1,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/dismiss[2]",
+      "name": "dismiss",
+      "type": "INSTANCE",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 99.81,
+      "h": 32,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/dismiss[2]/label[0]",
+      "name": "label",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 52,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "INSTANCE"
+    },
+    {
+      "path": "/dismiss[2]/label[0]/Button[0]",
+      "name": "Button",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 52,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 440,
+    "sig": "8f17151526c142bc"
+  },
+  "canvasAfter": {
+    "nodes": 440,
+    "sig": "8f17151526c142bc"
+  },
+  "canvasRestored": true
+}

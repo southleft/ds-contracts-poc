@@ -1,0 +1,414 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / fluent",
+  "setNodeId": "39:13192",
+  "setName": "Spinner",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:12936",
+  "variantNodeName": "Size=Medium, Appearance=Primary, Label Position=After",
+  "axes": [
+    {
+      "axis": "Size",
+      "values": [
+        "Medium",
+        "Extra Tiny",
+        "Tiny",
+        "Extra Small",
+        "Small",
+        "Large",
+        "Extra Large",
+        "Huge"
+      ]
+    },
+    {
+      "axis": "Appearance",
+      "values": [
+        "Primary",
+        "Inverted"
+      ]
+    },
+    {
+      "axis": "Label Position",
+      "values": [
+        "After",
+        "Above",
+        "Below",
+        "Before"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 64,
+  "variantChildNames": [
+    "Size=Medium, Appearance=Primary, Label Position=After",
+    "Size=Medium, Appearance=Primary, Label Position=Above",
+    "Size=Medium, Appearance=Primary, Label Position=Below",
+    "Size=Medium, Appearance=Primary, Label Position=Before",
+    "Size=Medium, Appearance=Inverted, Label Position=After",
+    "Size=Medium, Appearance=Inverted, Label Position=Above",
+    "Size=Medium, Appearance=Inverted, Label Position=Below",
+    "Size=Medium, Appearance=Inverted, Label Position=Before",
+    "Size=Extra Tiny, Appearance=Primary, Label Position=After",
+    "Size=Extra Tiny, Appearance=Primary, Label Position=Above",
+    "Size=Extra Tiny, Appearance=Primary, Label Position=Below",
+    "Size=Extra Tiny, Appearance=Primary, Label Position=Before",
+    "Size=Extra Tiny, Appearance=Inverted, Label Position=After",
+    "Size=Extra Tiny, Appearance=Inverted, Label Position=Above",
+    "Size=Extra Tiny, Appearance=Inverted, Label Position=Below",
+    "Size=Extra Tiny, Appearance=Inverted, Label Position=Before",
+    "Size=Tiny, Appearance=Primary, Label Position=After",
+    "Size=Tiny, Appearance=Primary, Label Position=Above",
+    "Size=Tiny, Appearance=Primary, Label Position=Below",
+    "Size=Tiny, Appearance=Primary, Label Position=Before",
+    "Size=Tiny, Appearance=Inverted, Label Position=After",
+    "Size=Tiny, Appearance=Inverted, Label Position=Above",
+    "Size=Tiny, Appearance=Inverted, Label Position=Below",
+    "Size=Tiny, Appearance=Inverted, Label Position=Before",
+    "Size=Extra Small, Appearance=Primary, Label Position=After",
+    "Size=Extra Small, Appearance=Primary, Label Position=Above",
+    "Size=Extra Small, Appearance=Primary, Label Position=Below",
+    "Size=Extra Small, Appearance=Primary, Label Position=Before",
+    "Size=Extra Small, Appearance=Inverted, Label Position=After",
+    "Size=Extra Small, Appearance=Inverted, Label Position=Above",
+    "Size=Extra Small, Appearance=Inverted, Label Position=Below",
+    "Size=Extra Small, Appearance=Inverted, Label Position=Before",
+    "Size=Small, Appearance=Primary, Label Position=After",
+    "Size=Small, Appearance=Primary, Label Position=Above",
+    "Size=Small, Appearance=Primary, Label Position=Below",
+    "Size=Small, Appearance=Primary, Label Position=Before",
+    "Size=Small, Appearance=Inverted, Label Position=After",
+    "Size=Small, Appearance=Inverted, Label Position=Above",
+    "Size=Small, Appearance=Inverted, Label Position=Below",
+    "Size=Small, Appearance=Inverted, Label Position=Before",
+    "Size=Large, Appearance=Primary, Label Position=After",
+    "Size=Large, Appearance=Primary, Label Position=Above",
+    "Size=Large, Appearance=Primary, Label Position=Below",
+    "Size=Large, Appearance=Primary, Label Position=Before",
+    "Size=Large, Appearance=Inverted, Label Position=After",
+    "Size=Large, Appearance=Inverted, Label Position=Above",
+    "Size=Large, Appearance=Inverted, Label Position=Below",
+    "Size=Large, Appearance=Inverted, Label Position=Before",
+    "Size=Extra Large, Appearance=Primary, Label Position=After",
+    "Size=Extra Large, Appearance=Primary, Label Position=Above",
+    "Size=Extra Large, Appearance=Primary, Label Position=Below",
+    "Size=Extra Large, Appearance=Primary, Label Position=Before",
+    "Size=Extra Large, Appearance=Inverted, Label Position=After",
+    "Size=Extra Large, Appearance=Inverted, Label Position=Above",
+    "Size=Extra Large, Appearance=Inverted, Label Position=Below",
+    "Size=Extra Large, Appearance=Inverted, Label Position=Before",
+    "Size=Huge, Appearance=Primary, Label Position=After",
+    "Size=Huge, Appearance=Primary, Label Position=Above",
+    "Size=Huge, Appearance=Primary, Label Position=Below",
+    "Size=Huge, Appearance=Primary, Label Position=Before",
+    "Size=Huge, Appearance=Inverted, Label Position=After",
+    "Size=Huge, Appearance=Inverted, Label Position=Above",
+    "Size=Huge, Appearance=Inverted, Label Position=Below",
+    "Size=Huge, Appearance=Inverted, Label Position=Before"
+  ],
+  "reflow": {
+    "target": "39:12936",
+    "targetName": "Size=Medium, Appearance=Primary, Label Position=After",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "CENTER",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 100.34,
+      "h": 32,
+      "children": [
+        {
+          "id": "39:12937",
+          "name": "spinner",
+          "type": "FRAME",
+          "x": -0.83,
+          "y": 0,
+          "w": 32,
+          "h": 32,
+          "ax": -0.83,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:12939",
+          "name": "label",
+          "type": "TEXT",
+          "x": 39.17,
+          "y": 5,
+          "w": 62,
+          "h": 22,
+          "ax": 39.17,
+          "ay": 5,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 140.34,
+      "h": 72,
+      "children": [
+        {
+          "id": "39:12937",
+          "name": "spinner",
+          "type": "FRAME",
+          "x": 19.17,
+          "y": 20,
+          "w": 32,
+          "h": 32,
+          "ax": 19.17,
+          "ay": 20,
+          "visible": true
+        },
+        {
+          "id": "39:12939",
+          "name": "label",
+          "type": "TEXT",
+          "x": 59.17,
+          "y": 25,
+          "w": 62,
+          "h": 22,
+          "ax": 59.17,
+          "ay": 25,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "spinner",
+        "dx": 20,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      },
+      {
+        "name": "label",
+        "dx": 20,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 100.34,
+      "h": 32
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:1735",
+    "baseline": {
+      "geometry": "0b8a1a2663d6b9d0",
+      "fills": "26b8652f49021530",
+      "text": "56688ec0da9720a8"
+    },
+    "axes": [
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Medium",
+            "geometry": "0b8a1a2663d6b9d0",
+            "fills": "26b8652f49021530",
+            "text": "56688ec0da9720a8"
+          },
+          {
+            "value": "Extra Tiny",
+            "geometry": "7267bf1cd6f59080",
+            "fills": "26b8652f49021530",
+            "text": "56688ec0da9720a8"
+          },
+          {
+            "value": "Tiny",
+            "geometry": "ad5c9854e4996e88",
+            "fills": "26b8652f49021530",
+            "text": "56688ec0da9720a8"
+          },
+          {
+            "value": "Extra Small",
+            "geometry": "b7b4a4b0d8442d7c",
+            "fills": "26b8652f49021530",
+            "text": "56688ec0da9720a8"
+          },
+          {
+            "value": "Small",
+            "geometry": "5a011e3af3a62404",
+            "fills": "26b8652f49021530",
+            "text": "56688ec0da9720a8"
+          },
+          {
+            "value": "Large",
+            "geometry": "e9beffa9b0a578a0",
+            "fills": "26b8652f49021530",
+            "text": "56688ec0da9720a8"
+          },
+          {
+            "value": "Extra Large",
+            "geometry": "c22c85ceee3192c4",
+            "fills": "26b8652f49021530",
+            "text": "56688ec0da9720a8"
+          },
+          {
+            "value": "Huge",
+            "geometry": "213ecfb7e2d793f0",
+            "fills": "26b8652f49021530",
+            "text": "56688ec0da9720a8"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Appearance",
+        "values": [
+          {
+            "value": "Primary",
+            "geometry": "0b8a1a2663d6b9d0",
+            "fills": "26b8652f49021530",
+            "text": "56688ec0da9720a8"
+          },
+          {
+            "value": "Inverted",
+            "geometry": "0b8a1a2663d6b9d0",
+            "fills": "874240eebbefb7b0",
+            "text": "56688ec0da9720a8"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Label Position",
+        "values": [
+          {
+            "value": "After",
+            "geometry": "0b8a1a2663d6b9d0",
+            "fills": "26b8652f49021530",
+            "text": "56688ec0da9720a8"
+          },
+          {
+            "value": "Above",
+            "geometry": "51610ac1d66ad698",
+            "fills": "26b8652f49021530",
+            "text": "56688ec0da9720a8"
+          },
+          {
+            "value": "Below",
+            "geometry": "51610ac1d66ad698",
+            "fills": "26b8652f49021530",
+            "text": "56688ec0da9720a8"
+          },
+          {
+            "value": "Before",
+            "geometry": "0b8a1a2663d6b9d0",
+            "fills": "26b8652f49021530",
+            "text": "56688ec0da9720a8"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 9,
+    "bound": 7,
+    "inferred": 2,
+    "literal": 0,
+    "byGroup": {
+      "spacing": {
+        "bound": 1,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 4,
+        "inferred": 2,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Size=Medium, Appearance=Primary, Label Position=After",
+      "name": "Size=Medium, Appearance=Primary, Label Position=After",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 100.34,
+      "h": 32,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/spinner[0]",
+      "name": "spinner",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 32,
+      "h": 32,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/spinner[0]/spinnertail[0]",
+      "name": "spinnertail",
+      "type": "FRAME",
+      "layoutPositioning": "ABSOLUTE",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 32,
+      "h": 32,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/label[1]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 62,
+      "h": 22,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1663,
+    "sig": "0ac044e74ac6a8ac"
+  },
+  "canvasAfter": {
+    "nodes": 1663,
+    "sig": "0ac044e74ac6a8ac"
+  },
+  "canvasRestored": true
+}

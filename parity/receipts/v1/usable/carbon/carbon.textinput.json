@@ -1,0 +1,336 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / carbon",
+  "setNodeId": "39:8832",
+  "setName": "TextInput",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:8768",
+  "variantNodeName": "Size=Xs, State=Default",
+  "axes": [
+    {
+      "axis": "Size",
+      "values": [
+        "Xs",
+        "Sm",
+        "Md",
+        "Lg"
+      ]
+    },
+    {
+      "axis": "State",
+      "values": [
+        "Default",
+        "Disabled"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 8,
+  "variantChildNames": [
+    "Size=Xs, State=Default",
+    "Size=Sm, State=Default",
+    "Size=Md, State=Default",
+    "Size=Lg, State=Default",
+    "Size=Xs, State=Disabled",
+    "Size=Sm, State=Disabled",
+    "Size=Md, State=Disabled",
+    "Size=Lg, State=Disabled"
+  ],
+  "reflow": {
+    "target": "39:8768",
+    "targetName": "Size=Xs, State=Default",
+    "layoutMode": "VERTICAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 288,
+      "h": 48,
+      "children": [
+        {
+          "id": "39:8769",
+          "name": "text-input__label-wrapper",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 288,
+          "h": 24,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:8772",
+          "name": "text-input__field-outer-wrapper",
+          "type": "FRAME",
+          "x": 0,
+          "y": 24,
+          "w": 288,
+          "h": 24,
+          "ax": 0,
+          "ay": 24,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 328,
+      "h": 88,
+      "children": [
+        {
+          "id": "39:8769",
+          "name": "text-input__label-wrapper",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 288,
+          "h": 24,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:8772",
+          "name": "text-input__field-outer-wrapper",
+          "type": "FRAME",
+          "x": 0,
+          "y": 24,
+          "w": 288,
+          "h": 24,
+          "ax": 0,
+          "ay": 24,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "text-input__label-wrapper",
+      "text-input__field-outer-wrapper"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 288,
+      "h": 48
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:802",
+    "baseline": {
+      "geometry": "fc7ee64bf6db0c13",
+      "fills": "6f78ba04e3c4d0d7",
+      "text": "95380af75edc26d8"
+    },
+    "axes": [
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Xs",
+            "geometry": "fc7ee64bf6db0c13",
+            "fills": "6f78ba04e3c4d0d7",
+            "text": "95380af75edc26d8"
+          },
+          {
+            "value": "Sm",
+            "geometry": "c1d04f64e39b71ea",
+            "fills": "6f78ba04e3c4d0d7",
+            "text": "95380af75edc26d8"
+          },
+          {
+            "value": "Md",
+            "geometry": "94b0aae440cd29d8",
+            "fills": "6f78ba04e3c4d0d7",
+            "text": "95380af75edc26d8"
+          },
+          {
+            "value": "Lg",
+            "geometry": "9c50d507297257ac",
+            "fills": "6f78ba04e3c4d0d7",
+            "text": "95380af75edc26d8"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "State",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "fc7ee64bf6db0c13",
+            "fills": "6f78ba04e3c4d0d7",
+            "text": "95380af75edc26d8"
+          },
+          {
+            "value": "Disabled",
+            "geometry": "fc7ee64bf6db0c13",
+            "fills": "132c305edb707794",
+            "text": "95380af75edc26d8"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 21,
+    "bound": 13,
+    "inferred": 8,
+    "literal": 0,
+    "byGroup": {
+      "spacing": {
+        "bound": 2,
+        "inferred": 1,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 8,
+        "inferred": 6,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 2,
+        "inferred": 1,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Size=Xs, State=Default",
+      "name": "Size=Xs, State=Default",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 2,
+      "w": 288,
+      "h": 48,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/text-input__label-wrapper[0]",
+      "name": "text-input__label-wrapper",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 288,
+      "h": 24,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/text-input__label-wrapper[0]/label (margin box)[0]",
+      "name": "label (margin box)",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 33,
+      "h": 24,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/text-input__label-wrapper[0]/label (margin box)[0]/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 33,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/text-input__field-outer-wrapper[1]",
+      "name": "text-input__field-outer-wrapper",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 288,
+      "h": 24,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/text-input__field-outer-wrapper[1]/text-input__field-wrapper[0]",
+      "name": "text-input__field-wrapper",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 288,
+      "h": 24,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/text-input__field-outer-wrapper[1]/text-input__field-wrapper[0]/text-input[0]",
+      "name": "text-input",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 288,
+      "h": 24,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/text-input__field-outer-wrapper[1]/text-input__field-wrapper[0]/text-input[0]/placeholder[0]",
+      "name": "placeholder",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 81,
+      "h": 18,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 793,
+    "sig": "7d6ced592fbfa72c"
+  },
+  "canvasAfter": {
+    "nodes": 793,
+    "sig": "7d6ced592fbfa72c"
+  },
+  "canvasRestored": true
+}

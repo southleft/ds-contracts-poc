@@ -1,0 +1,259 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / first-party",
+  "setNodeId": "39:23756",
+  "setName": "ListItem",
+  "setType": "COMPONENT",
+  "variantNodeId": "39:23756",
+  "variantNodeName": "ListItem",
+  "axes": null,
+  "axesError": null,
+  "variantChildCount": 1,
+  "variantChildNames": [
+    "ListItem"
+  ],
+  "reflow": {
+    "target": "39:23756",
+    "targetName": "ListItem",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 3,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "MIN",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 228,
+      "h": 52,
+      "children": [
+        {
+          "id": "39:23757",
+          "name": "StartContent",
+          "type": "SLOT",
+          "x": 12,
+          "y": 25.5,
+          "w": 1,
+          "h": 1,
+          "ax": 12,
+          "ay": 25.5,
+          "visible": false
+        },
+        {
+          "id": "39:23758",
+          "name": "textCol",
+          "type": "FRAME",
+          "x": 12,
+          "y": 8,
+          "w": 204,
+          "h": 36,
+          "ax": 12,
+          "ay": 8,
+          "visible": true
+        },
+        {
+          "id": "39:23761",
+          "name": "EndContent",
+          "type": "SLOT",
+          "x": 224,
+          "y": 25.5,
+          "w": 1,
+          "h": 1,
+          "ax": 224,
+          "ay": 25.5,
+          "visible": false
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 268,
+      "h": 92,
+      "children": [
+        {
+          "id": "39:23757",
+          "name": "StartContent",
+          "type": "SLOT",
+          "x": 12,
+          "y": 25.5,
+          "w": 1,
+          "h": 1,
+          "ax": 12,
+          "ay": 25.5,
+          "visible": false
+        },
+        {
+          "id": "39:23758",
+          "name": "textCol",
+          "type": "FRAME",
+          "x": 12,
+          "y": 28,
+          "w": 204,
+          "h": 36,
+          "ax": 12,
+          "ay": 28,
+          "visible": true
+        },
+        {
+          "id": "39:23761",
+          "name": "EndContent",
+          "type": "SLOT",
+          "x": 224,
+          "y": 25.5,
+          "w": 1,
+          "h": 1,
+          "ax": 224,
+          "ay": 25.5,
+          "visible": false
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "textCol",
+        "dx": 0,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [
+      "StartContent",
+      "EndContent"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 228,
+      "h": 52
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:3875",
+    "baseline": {
+      "geometry": "235534b42e2d4524",
+      "fills": "458031d5f5a877d4",
+      "text": "273f85c1a6ea141c"
+    },
+    "axes": [],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 8,
+    "bound": 8,
+    "inferred": 0,
+    "literal": 0,
+    "byGroup": {
+      "spacing": {
+        "bound": 6,
+        "inferred": 0,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/ListItem",
+      "name": "ListItem",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 3,
+      "w": 228,
+      "h": 52,
+      "visible": true,
+      "parentLayoutMode": null,
+      "parentType": "SECTION"
+    },
+    {
+      "path": "/StartContent[0]",
+      "name": "StartContent",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 1,
+      "h": 1,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/textCol[1]",
+      "name": "textCol",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 2,
+      "w": 204,
+      "h": 36,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/textCol[1]/labelText[0]",
+      "name": "labelText",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 58,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/textCol[1]/descriptionText[1]",
+      "name": "descriptionText",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 204,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/EndContent[2]",
+      "name": "EndContent",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 1,
+      "h": 1,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasAfter": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasRestored": true
+}

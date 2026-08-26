@@ -1,0 +1,389 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / polaris",
+  "setNodeId": "39:22933",
+  "setName": "Text",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:22823",
+  "variantNodeName": "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Heading Xs",
+  "axes": [
+    {
+      "axis": "Alignment",
+      "values": [
+        "Start"
+      ]
+    },
+    {
+      "axis": "As",
+      "values": [
+        "P"
+      ]
+    },
+    {
+      "axis": "Tone",
+      "values": [
+        "Base",
+        "Success",
+        "Critical",
+        "Caution",
+        "Subdued"
+      ]
+    },
+    {
+      "axis": "Font Weight",
+      "values": [
+        "Regular"
+      ]
+    },
+    {
+      "axis": "Variant",
+      "values": [
+        "Heading Xs",
+        "Heading Sm",
+        "Heading Md",
+        "Heading Lg",
+        "Heading Xl",
+        "Heading2xl",
+        "Heading3xl",
+        "Body Xs",
+        "Body Sm",
+        "Body Md",
+        "Body Lg"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 55,
+  "variantChildNames": [
+    "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Heading Xs",
+    "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Heading Sm",
+    "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Heading Md",
+    "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Heading Lg",
+    "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Heading Xl",
+    "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Heading2xl",
+    "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Heading3xl",
+    "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Body Xs",
+    "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Body Sm",
+    "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Body Md",
+    "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Body Lg",
+    "Alignment=Start, As=P, Tone=Success, Font Weight=Regular, Variant=Heading Xs",
+    "Alignment=Start, As=P, Tone=Success, Font Weight=Regular, Variant=Heading Sm",
+    "Alignment=Start, As=P, Tone=Success, Font Weight=Regular, Variant=Heading Md",
+    "Alignment=Start, As=P, Tone=Success, Font Weight=Regular, Variant=Heading Lg",
+    "Alignment=Start, As=P, Tone=Success, Font Weight=Regular, Variant=Heading Xl",
+    "Alignment=Start, As=P, Tone=Success, Font Weight=Regular, Variant=Heading2xl",
+    "Alignment=Start, As=P, Tone=Success, Font Weight=Regular, Variant=Heading3xl",
+    "Alignment=Start, As=P, Tone=Success, Font Weight=Regular, Variant=Body Xs",
+    "Alignment=Start, As=P, Tone=Success, Font Weight=Regular, Variant=Body Sm",
+    "Alignment=Start, As=P, Tone=Success, Font Weight=Regular, Variant=Body Md",
+    "Alignment=Start, As=P, Tone=Success, Font Weight=Regular, Variant=Body Lg",
+    "Alignment=Start, As=P, Tone=Critical, Font Weight=Regular, Variant=Heading Xs",
+    "Alignment=Start, As=P, Tone=Critical, Font Weight=Regular, Variant=Heading Sm",
+    "Alignment=Start, As=P, Tone=Critical, Font Weight=Regular, Variant=Heading Md",
+    "Alignment=Start, As=P, Tone=Critical, Font Weight=Regular, Variant=Heading Lg",
+    "Alignment=Start, As=P, Tone=Critical, Font Weight=Regular, Variant=Heading Xl",
+    "Alignment=Start, As=P, Tone=Critical, Font Weight=Regular, Variant=Heading2xl",
+    "Alignment=Start, As=P, Tone=Critical, Font Weight=Regular, Variant=Heading3xl",
+    "Alignment=Start, As=P, Tone=Critical, Font Weight=Regular, Variant=Body Xs",
+    "Alignment=Start, As=P, Tone=Critical, Font Weight=Regular, Variant=Body Sm",
+    "Alignment=Start, As=P, Tone=Critical, Font Weight=Regular, Variant=Body Md",
+    "Alignment=Start, As=P, Tone=Critical, Font Weight=Regular, Variant=Body Lg",
+    "Alignment=Start, As=P, Tone=Caution, Font Weight=Regular, Variant=Heading Xs",
+    "Alignment=Start, As=P, Tone=Caution, Font Weight=Regular, Variant=Heading Sm",
+    "Alignment=Start, As=P, Tone=Caution, Font Weight=Regular, Variant=Heading Md",
+    "Alignment=Start, As=P, Tone=Caution, Font Weight=Regular, Variant=Heading Lg",
+    "Alignment=Start, As=P, Tone=Caution, Font Weight=Regular, Variant=Heading Xl",
+    "Alignment=Start, As=P, Tone=Caution, Font Weight=Regular, Variant=Heading2xl",
+    "Alignment=Start, As=P, Tone=Caution, Font Weight=Regular, Variant=Heading3xl",
+    "Alignment=Start, As=P, Tone=Caution, Font Weight=Regular, Variant=Body Xs",
+    "Alignment=Start, As=P, Tone=Caution, Font Weight=Regular, Variant=Body Sm",
+    "Alignment=Start, As=P, Tone=Caution, Font Weight=Regular, Variant=Body Md",
+    "Alignment=Start, As=P, Tone=Caution, Font Weight=Regular, Variant=Body Lg",
+    "Alignment=Start, As=P, Tone=Subdued, Font Weight=Regular, Variant=Heading Xs",
+    "Alignment=Start, As=P, Tone=Subdued, Font Weight=Regular, Variant=Heading Sm",
+    "Alignment=Start, As=P, Tone=Subdued, Font Weight=Regular, Variant=Heading Md",
+    "Alignment=Start, As=P, Tone=Subdued, Font Weight=Regular, Variant=Heading Lg",
+    "Alignment=Start, As=P, Tone=Subdued, Font Weight=Regular, Variant=Heading Xl",
+    "Alignment=Start, As=P, Tone=Subdued, Font Weight=Regular, Variant=Heading2xl",
+    "Alignment=Start, As=P, Tone=Subdued, Font Weight=Regular, Variant=Heading3xl",
+    "Alignment=Start, As=P, Tone=Subdued, Font Weight=Regular, Variant=Body Xs",
+    "Alignment=Start, As=P, Tone=Subdued, Font Weight=Regular, Variant=Body Sm",
+    "Alignment=Start, As=P, Tone=Subdued, Font Weight=Regular, Variant=Body Md",
+    "Alignment=Start, As=P, Tone=Subdued, Font Weight=Regular, Variant=Body Lg"
+  ],
+  "reflow": {
+    "target": "39:22823",
+    "targetName": "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Heading Xs",
+    "layoutMode": "VERTICAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 134,
+      "h": 16,
+      "children": [
+        {
+          "id": "39:22824",
+          "name": "label",
+          "type": "TEXT",
+          "x": 0,
+          "y": 0,
+          "w": 134,
+          "h": 16,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 174,
+      "h": 56,
+      "children": [
+        {
+          "id": "39:22824",
+          "name": "label",
+          "type": "TEXT",
+          "x": 0,
+          "y": 0,
+          "w": 134,
+          "h": 16,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "label"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 134,
+      "h": 16
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:3383",
+    "baseline": {
+      "geometry": "345478b947a2aaab",
+      "fills": "a5f284defccf8adf",
+      "text": "2ac3a1b35e757aa8"
+    },
+    "axes": [
+      {
+        "axis": "Alignment",
+        "values": [
+          {
+            "value": "Start",
+            "geometry": "345478b947a2aaab",
+            "fills": "a5f284defccf8adf",
+            "text": "2ac3a1b35e757aa8"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "As",
+        "values": [
+          {
+            "value": "P",
+            "geometry": "345478b947a2aaab",
+            "fills": "a5f284defccf8adf",
+            "text": "2ac3a1b35e757aa8"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Tone",
+        "values": [
+          {
+            "value": "Base",
+            "geometry": "345478b947a2aaab",
+            "fills": "a5f284defccf8adf",
+            "text": "2ac3a1b35e757aa8"
+          },
+          {
+            "value": "Success",
+            "geometry": "345478b947a2aaab",
+            "fills": "d6d6f22369369b10",
+            "text": "2ac3a1b35e757aa8"
+          },
+          {
+            "value": "Critical",
+            "geometry": "345478b947a2aaab",
+            "fills": "d59d0b454b70fd00",
+            "text": "2ac3a1b35e757aa8"
+          },
+          {
+            "value": "Caution",
+            "geometry": "345478b947a2aaab",
+            "fills": "b796efea2e5c3420",
+            "text": "2ac3a1b35e757aa8"
+          },
+          {
+            "value": "Subdued",
+            "geometry": "345478b947a2aaab",
+            "fills": "b0e643fc4b1294e0",
+            "text": "2ac3a1b35e757aa8"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Font Weight",
+        "values": [
+          {
+            "value": "Regular",
+            "geometry": "345478b947a2aaab",
+            "fills": "a5f284defccf8adf",
+            "text": "2ac3a1b35e757aa8"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Variant",
+        "values": [
+          {
+            "value": "Heading Xs",
+            "geometry": "345478b947a2aaab",
+            "fills": "a5f284defccf8adf",
+            "text": "2ac3a1b35e757aa8"
+          },
+          {
+            "value": "Heading Sm",
+            "geometry": "37e35c79bde333bc",
+            "fills": "a5f284defccf8adf",
+            "text": "2ac3a1b35e757aa8"
+          },
+          {
+            "value": "Heading Md",
+            "geometry": "1182e5397c623374",
+            "fills": "a5f284defccf8adf",
+            "text": "2ac3a1b35e757aa8"
+          },
+          {
+            "value": "Heading Lg",
+            "geometry": "1c198db95d8cfe0c",
+            "fills": "a5f284defccf8adf",
+            "text": "2ac3a1b35e757aa8"
+          },
+          {
+            "value": "Heading Xl",
+            "geometry": "1c198db95d8cfe0c",
+            "fills": "a5f284defccf8adf",
+            "text": "2ac3a1b35e757aa8"
+          },
+          {
+            "value": "Heading2xl",
+            "geometry": "9ebd6c7964e1a590",
+            "fills": "a5f284defccf8adf",
+            "text": "2ac3a1b35e757aa8"
+          },
+          {
+            "value": "Heading3xl",
+            "geometry": "070f21b9eff8351c",
+            "fills": "a5f284defccf8adf",
+            "text": "2ac3a1b35e757aa8"
+          },
+          {
+            "value": "Body Xs",
+            "geometry": "cd17c8f9aca225cc",
+            "fills": "a5f284defccf8adf",
+            "text": "2ac3a1b35e757aa8"
+          },
+          {
+            "value": "Body Sm",
+            "geometry": "345478b947a2aaab",
+            "fills": "a5f284defccf8adf",
+            "text": "2ac3a1b35e757aa8"
+          },
+          {
+            "value": "Body Md",
+            "geometry": "37e35c79bde333bc",
+            "fills": "a5f284defccf8adf",
+            "text": "2ac3a1b35e757aa8"
+          },
+          {
+            "value": "Body Lg",
+            "geometry": "1182e5397c623374",
+            "fills": "a5f284defccf8adf",
+            "text": "2ac3a1b35e757aa8"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 1,
+    "bound": 1,
+    "inferred": 0,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 1,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Heading Xs",
+      "name": "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Heading Xs",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 134,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 134,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 3326,
+    "sig": "c09e90afe241d48c"
+  },
+  "canvasAfter": {
+    "nodes": 3326,
+    "sig": "c09e90afe241d48c"
+  },
+  "canvasRestored": true
+}

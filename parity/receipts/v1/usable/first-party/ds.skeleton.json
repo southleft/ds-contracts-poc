@@ -1,0 +1,191 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / first-party",
+  "setNodeId": "39:23952",
+  "setName": "Skeleton",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:23943",
+  "variantNodeName": "Variant=Text",
+  "axes": [
+    {
+      "axis": "Variant",
+      "values": [
+        "Text",
+        "Rect",
+        "Circle"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 3,
+  "variantChildNames": [
+    "Variant=Text",
+    "Variant=Rect",
+    "Variant=Circle"
+  ],
+  "reflow": {
+    "target": "39:23943",
+    "targetName": "Variant=Text",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 120,
+      "h": 12,
+      "children": [
+        {
+          "id": "39:23945",
+          "name": "block",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 120,
+          "h": 12,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 160,
+      "h": 52,
+      "children": [
+        {
+          "id": "39:23945",
+          "name": "block",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 120,
+          "h": 12,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "block"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 120,
+      "h": 12
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:4061",
+    "baseline": {
+      "geometry": "0753e62ff87d5338",
+      "fills": "515c0be05fefce10",
+      "text": "00001505811c9dc5"
+    },
+    "axes": [
+      {
+        "axis": "Variant",
+        "values": [
+          {
+            "value": "Text",
+            "geometry": "0753e62ff87d5338",
+            "fills": "515c0be05fefce10",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Rect",
+            "geometry": "e2f5b62329134277",
+            "fills": "515c0be05fefce10",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Circle",
+            "geometry": "1b1a32e298e94fcf",
+            "fills": "515c0be05fefce10",
+            "text": "00001505811c9dc5"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 7,
+    "bound": 7,
+    "inferred": 0,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 1,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Variant=Text",
+      "name": "Variant=Text",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 120,
+      "h": 12,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/block[0]",
+      "name": "block",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 120,
+      "h": 12,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasAfter": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasRestored": true
+}
