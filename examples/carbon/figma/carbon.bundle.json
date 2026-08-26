@@ -13910,45 +13910,20 @@
         {
           "part": "root",
           "kind": "channel",
-          "channel": "border-bottom-color",
-          "value": "{imported.inline-notification.root.border-bottom-color.{contrast}}",
-          "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-          "variants": {
-            "count": 12,
-            "of": 12
-          }
-        },
-        {
-          "part": "root",
-          "kind": "channel",
           "channel": "border-left-color",
           "value": "{imported.inline-notification.root.border-left-color.{kind}.{contrast}}",
-          "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+          "reason": "a Figma node carries ONE strokes paint and the majority of the DRAWN sides claims it — this side's colour disagrees and stays code-only (the one-paint limit, named per side).",
           "variants": {
-            "count": 12,
-            "of": 12
-          }
-        },
-        {
-          "part": "root",
-          "kind": "channel",
-          "channel": "border-right-color",
-          "value": "{imported.inline-notification.root.border-right-color.{contrast}}",
-          "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-          "variants": {
-            "count": 12,
-            "of": 12
-          }
-        },
-        {
-          "part": "root",
-          "kind": "channel",
-          "channel": "border-top-color",
-          "value": "{imported.inline-notification.root.border-top-color.{contrast}}",
-          "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-          "variants": {
-            "count": 12,
-            "of": 12
+            "count": 6,
+            "of": 12,
+            "names": [
+              "Kind=Error, Contrast=Low",
+              "Kind=Info, Contrast=Low",
+              "Kind=Info Square, Contrast=Low",
+              "Kind=Success, Contrast=Low",
+              "Kind=Warning, Contrast=Low",
+              "Kind=Warning Alt, Contrast=Low"
+            ]
           }
         },
         {

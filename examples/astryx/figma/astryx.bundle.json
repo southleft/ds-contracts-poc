@@ -3931,6 +3931,7 @@
       "version": "0.3.0",
       "status": "draft",
       "description": "Astryx Badge — a small status/category label. Promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Badge/Badge.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). API surface (variant) is verbatim; the label is materialized as a text content part (Astryx types it as a ReactNode child slot, dropped as a `node` prop in extraction — see DEV-JOURNEY.md). CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/astryx/scripts/promote-floor.ts): resolved.contract.json — computed-capture truth with the decisions ledger applied (extract/computed/out/astryx/badge/decisions.md); extension sidecar carries the named overflow.",
+      "archetype": "badge / tag / chip",
       "semantics": {
         "element": "span"
       },
@@ -4112,6 +4113,7 @@
       "version": "0.3.0",
       "status": "draft",
       "description": "Astryx Banner — a status surface with title, description and optional dismiss. Promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Banner/Banner.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). status/container/isDismissable are verbatim; title and description are materialized text slots (Astryx types both as ReactNode). CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/astryx/scripts/promote-floor.ts): enriched.contract.json — computed-capture truth with the decisions ledger applied (extract/computed/out/astryx/banner/decisions.md); extension sidecar carries the named overflow.",
+      "archetype": "banner / alert / toast",
       "semantics": {
         "element": "div"
       },
@@ -4477,6 +4479,7 @@
       "version": "0.3.0",
       "status": "draft",
       "description": "Astryx Button — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Button/Button.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). Visual/structural API is verbatim; HTML passthrough (type, name, form, target, rel), href link-mode, isInterruptible and tooltip are dropped (documented in DEV-JOURNEY.md). CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/astryx/scripts/promote-floor.ts): resolved.contract.json — computed-capture truth with the decisions ledger applied (extract/computed/out/astryx/button/decisions.md); extension sidecar carries the named overflow.",
+      "archetype": "button",
       "semantics": {
         "element": "button"
       },
@@ -4908,6 +4911,7 @@
       "version": "0.3.0",
       "status": "draft",
       "description": "Astryx Card — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Card/Card.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). The single extracted structural axis (variant, 13 values) is verbatim; children is a materialized content slot (Astryx types Card body as ReactNode, dropped as a node prop). CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/astryx/scripts/promote-floor.ts): resolved.contract.json — computed-capture truth with the decisions ledger applied (extract/computed/out/astryx/card/decisions.md); extension sidecar carries the named overflow.",
+      "archetype": "card",
       "semantics": {
         "element": "div"
       },
@@ -5239,6 +5243,7 @@
       "version": "0.3.0",
       "status": "draft",
       "description": "Astryx CheckboxInput — a labelled checkbox form control. Promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/CheckboxInput/CheckboxInput.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). label/size and the disabled/readOnly/required flags are verbatim; description, disabledMessage, htmlName, isLoading and isLabelHidden are dropped. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/astryx/scripts/promote-floor.ts): enriched.contract.json — computed-capture truth with the decisions ledger applied (extract/computed/out/astryx/checkboxinput/decisions.md); extension sidecar carries the named overflow.",
+      "archetype": "checkbox / radio",
       "semantics": {
         "element": "div"
       },
@@ -5665,6 +5670,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "PROMOTED from the Phase B composition-tier extraction (round 2, StyleX anatomy). One menu row — the repeated item of astryx.dropdown-menu. Curation receipts: the extracted anatomy leaned on the internal <Item> layout component (astryx.item); promotion FLATTENS it to the element row Item renders (a deep-internal contract is not part of the exhibit set), keeping the extracted StyleX token bindings verbatim. The extracted `description`/`endContent`/icon channels are deferred to a later round — this exhibit carries the label row, the composition proof's moving part.",
+      "archetype": "menu / dropdown",
       "semantics": {
         "element": "button",
         "role": "menuitem"
@@ -5749,6 +5755,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "PROMOTED from the Phase B composition-tier extraction (round 2) — the flagship composition exhibit: a MULTI-ROOT component (trigger + menu overlay) whose menu holds a REPEATED astryx.dropdown-menu-item collection over the `items` prop. The extraction recovered exactly this shape from Meta's source (fragment root → trigger Button ref + popover.render overlay carrying the items repeat AND the children slot). Curation receipts: (1) the DUAL MODE — items-array XOR compound children — is mutually exclusive in code; the contract carries the DATA mode (repeat), the canvas-projectable one; (2) the DropdownMenuContext provider ref was dropped (context is a code mechanism, not anatomy); (3) the popover overlay projects as a sibling root below the trigger — live placement/anchoring is a design-tool behavior outside the contract (same convention as the composite Modal's roots); (4) the repeat sample is authored (design-time values are not decidable from code — the extractor said so by name).",
+      "archetype": "menu / dropdown",
       "semantics": {
         "element": "div"
       },
@@ -5863,6 +5870,7 @@
       "version": "0.3.0",
       "status": "draft",
       "description": "Astryx ProgressBar — a determinate meter with a label row. Promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/ProgressBar/ProgressBar.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). value/max/label/variant and the indeterminate/disabled flags are verbatim; isLabelHidden, hasValueLabel and formatValueLabel are dropped. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/astryx/scripts/promote-floor.ts): enriched.contract.json — computed-capture truth with the decisions ledger applied (extract/computed/out/astryx/progressbar/decisions.md); extension sidecar carries the named overflow.",
+      "archetype": "progress / spinner",
       "semantics": {
         "element": "div"
       },
@@ -6093,6 +6101,7 @@
       "version": "0.3.0",
       "status": "draft",
       "description": "Astryx Slider — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Slider/Slider.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). label/min/max/step/orientation/valueDisplay and the optional/required/disabled flags are verbatim (82%; recovered from a union-of-refs named-skip via the keyof+union adapter fix). value, description, disabledMessage, labelTooltip, htmlName and minStepsBetweenThumbs are dropped. STRUCTURAL: track/thumb render as styled boxes, not a native range input. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/astryx/scripts/promote-floor.ts): resolved.contract.json — computed-capture truth with the decisions ledger applied (extract/computed/out/astryx/slider/decisions.md); extension sidecar carries the named overflow.",
+      "archetype": "slider",
       "semantics": {
         "element": "div"
       },
@@ -6736,6 +6745,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "Astryx Switch — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Switch/Switch.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). label + labelPosition + labelSpacing and the disabled/optional/required flags are verbatim; description, htmlName, labelTooltip, disabledMessage and isLoading are dropped. Wave B.3: `value` is a VARIANT AXIS (off/on) — FC-MISSING-AXIS. On thumb geometry from Switch.tsx source constants (20×20, travel 14px) — not harness-captured. STRUCTURAL: the track renders as a styled box, not a native role=switch input.",
+      "archetype": "toggle / switch",
       "semantics": {
         "element": "div"
       },
@@ -7293,6 +7303,7 @@
       "version": "0.3.0",
       "status": "draft",
       "description": "Astryx TextInput — a labelled single-line text field. Promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/TextInput/TextInput.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). type/label/size/placeholder and the required/disabled/clear flags are verbatim; description, disabledMessage, labelTooltip, htmlName and isLoading are dropped. value is materialized as a placeholder-backed text field. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/astryx/scripts/promote-floor.ts): enriched.contract.json — computed-capture truth with the decisions ledger applied (extract/computed/out/astryx/textinput/decisions.md); extension sidecar carries the named overflow.",
+      "archetype": "input / field",
       "semantics": {
         "element": "div"
       },
@@ -7621,6 +7632,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "PROMOTED from the Phase B composition-tier extraction (round 2, wrapper-ref descent) — the vendor-refereed exhibit: Astryx's own Toast.doc.mjs declares anatomy Body / End content / Dismiss button, and the extraction recovered exactly those three (body slot, endContent slot, ghost dismiss astryx.button with its real props) once the MediaTheme wrapper descended. Curation receipts: (1) the MediaTheme theme-provider ref was dropped and its interior lifted to the root (a theme boundary is a code mechanism, not anatomy); (2) the extracted behavioral props (isAutoHide/autoHideDuration/isExiting) are timing mechanics with no visual projection — dropped from the exhibit, receipted here; (3) root keeps the extracted StyleX token bindings verbatim (padding, radius, shadow, body typography).",
+      "archetype": "banner / alert / toast",
       "semantics": {
         "element": "div",
         "role": "status"

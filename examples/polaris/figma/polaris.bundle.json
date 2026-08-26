@@ -8039,6 +8039,7 @@
       "version": "0.4.0",
       "status": "draft",
       "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Avatar/Avatar.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/polaris/scripts/promote-floor.ts): resolved.contract.json — computed-capture truth; minted leaves source-aliased to Polaris's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "avatar",
       "semantics": {
         "element": "span"
       },
@@ -8381,6 +8382,7 @@
       "version": "0.4.0",
       "status": "draft",
       "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Badge/Badge.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. ROUND 4: single-tone static bindings on root (background-color/color/font-weight) and label typography REMOVED — the real tone/progress axes contest them per value; the computed floor rebuilds these channels from browser truth (S2 base + per-axis mint). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/polaris/scripts/promote-floor.ts): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Polaris's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "badge / tag / chip",
       "semantics": {
         "element": "span"
       },
@@ -9112,6 +9114,7 @@
       "version": "0.4.0",
       "status": "draft",
       "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Banner/Banner.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/polaris/scripts/promote-floor.ts): resolved.contract.json — computed-capture truth; minted leaves source-aliased to Polaris's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "banner / alert / toast",
       "semantics": {
         "element": "div",
         "role": "status",
@@ -9884,6 +9887,7 @@
       "version": "0.4.0",
       "status": "draft",
       "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Button/Button.tsx (react-tsx adapter) — API surface only; anatomy, tokens, and design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/polaris/scripts/promote-floor.ts): resolved.contract.json — computed-capture truth; minted leaves source-aliased to Polaris's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "button",
       "semantics": {
         "element": "button"
       },
@@ -10635,6 +10639,7 @@
       "version": "0.4.0",
       "status": "draft",
       "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Checkbox/Checkbox.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. ROUND 4: static backdrop bindings (border-color) removed — the checked axis contests them per value; the floor rebuilds from browser truth. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/polaris/scripts/promote-floor.ts): resolved.contract.json — computed-capture truth; minted leaves source-aliased to Polaris's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "checkbox / radio",
       "semantics": {
         "element": "span"
       },
@@ -11538,6 +11543,7 @@
       "version": "0.4.0",
       "status": "draft",
       "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/ProgressBar/ProgressBar.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/polaris/scripts/promote-floor.ts): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Polaris's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "progress / spinner",
       "semantics": {
         "element": "div"
       },
@@ -11821,6 +11827,7 @@
       "version": "0.4.0",
       "status": "draft",
       "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/RadioButton/RadioButton.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. ROUND 4: static backdrop bindings (border-color, background-color) removed — the checked axis contests them per value; the floor rebuilds from browser truth. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/polaris/scripts/promote-floor.ts): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Polaris's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "checkbox / radio",
       "semantics": {
         "element": "span"
       },
@@ -12521,6 +12528,7 @@
       "version": "0.4.0",
       "status": "draft",
       "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Spinner/Spinner.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/polaris/scripts/promote-floor.ts): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Polaris's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "progress / spinner",
       "semantics": {
         "element": "span"
       },
@@ -12648,6 +12656,7 @@
       "version": "0.4.0",
       "status": "draft",
       "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Tag/Tag.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/polaris/scripts/promote-floor.ts): resolved.contract.json — computed-capture truth; minted leaves source-aliased to Polaris's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "badge / tag / chip",
       "semantics": {
         "element": "span"
       },
@@ -13265,6 +13274,7 @@
       "version": "0.4.0",
       "status": "draft",
       "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/TextField/TextField.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/polaris/scripts/promote-floor.ts): resolved.contract.json — computed-capture truth; minted leaves source-aliased to Polaris's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "input / field",
       "semantics": {
         "element": "div"
       },
@@ -22002,6 +22012,82 @@
           "variants": {
             "count": 1400,
             "of": 1400
+          }
+        },
+        {
+          "part": "input",
+          "kind": "channel",
+          "channel": "placeholder",
+          "value": "",
+          "reason": "the placeholder STRING is an HTML attribute the browser renders through `::placeholder`, not DOM text — a computed-style capture reads its ink and never its characters, and this contract carries no default for the bound text prop and no literal `placeholder` attr. The TEXT node is kept so the Figma TEXT property can bind to it, and it is left EMPTY rather than filled with an invented string.",
+          "variants": {
+            "count": 1400,
+            "of": 1400
+          }
+        },
+        {
+          "part": "input",
+          "kind": "channel",
+          "channel": "placeholder-color",
+          "value": "p/color-text",
+          "reason": "this contract carries no `placeholder-color`, so the placeholder text is drawn in the control's OWN `color` — the VALUE ink. An empty field therefore reads as a filled one. The ink IS measurable (`::placeholder{color}` is read on every capture and folds to `placeholder-color`); re-derive this contract to carry it.",
+          "variants": {
+            "count": 1386,
+            "of": 1400,
+            "names": [
+              "Type=Text, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium",
+              "Type=Text, Input Mode=None, Align=Left, Variant=Inherit, Size=Slim",
+              "Type=Text, Input Mode=None, Align=Left, Variant=Borderless, Size=Medium",
+              "Type=Text, Input Mode=None, Align=Left, Variant=Borderless, Size=Slim",
+              "Type=Text, Input Mode=None, Align=Center, Variant=Inherit, Size=Medium",
+              "Type=Text, Input Mode=None, Align=Center, Variant=Inherit, Size=Slim",
+              "Type=Text, Input Mode=None, Align=Center, Variant=Borderless, Size=Medium",
+              "Type=Text, Input Mode=None, Align=Center, Variant=Borderless, Size=Slim",
+              "Type=Text, Input Mode=None, Align=Right, Variant=Inherit, Size=Medium",
+              "Type=Text, Input Mode=None, Align=Right, Variant=Inherit, Size=Slim",
+              "Type=Text, Input Mode=None, Align=Right, Variant=Borderless, Size=Medium",
+              "Type=Text, Input Mode=None, Align=Right, Variant=Borderless, Size=Slim",
+              "Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium",
+              "Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Slim",
+              "Type=Text, Input Mode=Text, Align=Left, Variant=Borderless, Size=Medium",
+              "Type=Text, Input Mode=Text, Align=Left, Variant=Borderless, Size=Slim",
+              "Type=Text, Input Mode=Text, Align=Center, Variant=Inherit, Size=Medium",
+              "Type=Text, Input Mode=Text, Align=Center, Variant=Inherit, Size=Slim",
+              "Type=Text, Input Mode=Text, Align=Center, Variant=Borderless, Size=Medium",
+              "Type=Text, Input Mode=Text, Align=Center, Variant=Borderless, Size=Slim",
+              "Type=Text, Input Mode=Text, Align=Right, Variant=Inherit, Size=Medium",
+              "Type=Text, Input Mode=Text, Align=Right, Variant=Inherit, Size=Slim",
+              "Type=Text, Input Mode=Text, Align=Right, Variant=Borderless, Size=Medium",
+              "Type=Text, Input Mode=Text, Align=Right, Variant=Borderless, Size=Slim"
+            ],
+            "more": 1362
+          }
+        },
+        {
+          "part": "input",
+          "kind": "channel",
+          "channel": "placeholder-color",
+          "value": "p/color-text-disabled",
+          "reason": "this contract carries no `placeholder-color`, so the placeholder text is drawn in the control's OWN `color` — the VALUE ink. An empty field therefore reads as a filled one. The ink IS measurable (`::placeholder{color}` is read on every capture and folds to `placeholder-color`); re-derive this contract to carry it.",
+          "variants": {
+            "count": 14,
+            "of": 1400,
+            "names": [
+              "Type=Text, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium, State=Disabled",
+              "Type=Email, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium, State=Disabled",
+              "Type=Number, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium, State=Disabled",
+              "Type=Integer, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium, State=Disabled",
+              "Type=Password, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium, State=Disabled",
+              "Type=Search, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium, State=Disabled",
+              "Type=Tel, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium, State=Disabled",
+              "Type=Url, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium, State=Disabled",
+              "Type=Date, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium, State=Disabled",
+              "Type=Datetime Local, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium, State=Disabled",
+              "Type=Month, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium, State=Disabled",
+              "Type=Time, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium, State=Disabled",
+              "Type=Week, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium, State=Disabled",
+              "Type=Currency, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium, State=Disabled"
+            ]
           }
         },
         {
