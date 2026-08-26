@@ -15,7 +15,7 @@
     "note": "AutoLayout has no table formatting context and no row-group concept"
   },
   "blockStage": true,
-  "predictedDifficulty": "expected-wall",
+  "predictedDifficulty": "hard",
   "mustHave": [
     "if the case is refused, the refusal names the table/row-group construct in LEDGER.md",
     "nothing is emitted that claims to be a table but has lost the header/body distinction",
@@ -23,9 +23,9 @@
   ],
   "id": "table-semantic-row-group",
   "predictedWall": {
-    "code": "FC-TABLE-ROW-GROUP-FLATTENED",
-    "status": "PROPOSED - the receipt NAME 'table-lowering' exists in LEDGER.md but carries no FC-* code",
+    "code": "table-lowering",
+    "status": "EXISTING receipt name (LEDGER string, not an FC-* code). I withdraw the FC-TABLE-ROW-GROUP-FLATTENED code I proposed in the sealing commit - see below.",
     "half": "capture (contract)",
-    "why": "display-out-of-vocab pins `display: table` as REFUSED by the name 'table-lowering'. That name is a LEDGER string, not a coded wall, and it was authored against a div root carrying `display: table` - not against the UA-generated `table-header-group` / `table-row-group` boxes that real <table> markup creates. I predict the row groups are flattened rather than refused, because they are ordinary boxes as far as the element walk is concerned and only their `display` value is out of vocabulary. If the refusal does fire under the name 'table-lowering' the case passes; if the groups are flattened silently, that is a SILENT-LOSS and this proposed code is what should name it. This matters beyond tables: examples/day-picker/README.md \u00a75.3 records that react-day-picker's own `rdp-month_grid` IS a <table>, so the calendar archetype inherits whatever answer this case gets."
+    "why": "AMENDED before any run. In the sealing commit I predicted the row groups would be flattened SILENTLY and proposed a new code for it. A vocabulary survey then found the mechanism I had missed: extract/computed/anatomy.ts has `lowerTableDisplay`, which handles 'table-header-group' and 'table-row-group' BY NAME and emits the receipt prefixes `table-lowering:`, `table-geometry-excluded:` and `control-fallback: no control for <thead> - span control used`. All four strings are visible verbatim in examples/mui/contracts/table.extension.json:4379-4418. So the honest prediction is now that this case PASSES - the groups are lowered to a flex stack and NAMED - and I have withdrawn the proposed code rather than leave a claim of 'no name exists' standing against a name that does. What remains genuinely un-named is narrower and I am not testing it here: `fuse.table-column-arity-disagreement` drops width AND height for EVERY cell of the whole table on any colspan, whose counter-example in the register reads 'Any colspan in the corpus disables column widths table-wide.'"
   }
 }

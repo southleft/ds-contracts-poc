@@ -15,7 +15,7 @@
     "note": "an individual-side stroke on the highlighted option's frame"
   },
   "blockStage": true,
-  "predictedDifficulty": "hard",
+  "predictedDifficulty": "expected-wall",
   "mustHave": [
     "the listbox shows exactly 5 options, stacked vertically",
     "exactly ONE option (the 2nd, 'Beta') carries a coloured bar on its LEFT edge only",
@@ -24,9 +24,9 @@
   ],
   "id": "combobox-option-highlighted",
   "predictedWall": {
-    "code": "FC-DUMP-PROPOSE-STROKE-WEIGHT-SIDES",
-    "status": "EXISTING - CLOSED 2026-08-20, cited as the reason I expect this to PASS",
+    "code": "FC-BORDER-STYLE-NOT-SYNTHESISED",
+    "status": "EXISTING (note the British -ISED spelling). FC-DUMP-PROPOSE-STROKE-WEIGHT-SIDES is the adjacent CLOSED finding and does NOT cover this.",
     "half": "canvas round trip",
-    "why": "parity/receipts/beta/KIT-CLIMB.md records this finding as closed: 'Propose treated four different side-weight variable names as not uniform and dropped them ... Those now recover as per-side channels.' A single-side accent border is the same shape, so the closed fix should cover it. I am naming it as the thing to check first if the accent bar comes back on all four sides or not at all. Note the fix was about stroke WEIGHT per side; this case varies stroke COLOUR per side, which the receipt does not explicitly claim."
+    "why": "AMENDED before any run - upgraded from `hard`. In the sealing commit I leaned on FC-DUMP-PROPOSE-STROKE-WEIGHT-SIDES being closed and flagged, correctly, that it was about stroke WEIGHT per side while this case varies stroke COLOUR per side. The survey settles it against me: spec/channel-table.json's border-{top,right,bottom,left}-color rows all read 'one strokes paint serves all four sides - lowered only when every carried side agrees.' This case's four quiet options carry a TRANSPARENT left border and the highlighted one carries an opaque blue left border, so the sides do NOT agree by construction, and a single strokes paint cannot hold the difference. The nearest precedent for the shape of the refusal is `propose.radii-not-uniform-refused` - 'border-radius is a single channel and four differing bindings are not representable', which drops all four corner bindings with no per-corner fallback. I predict the accent bar comes back on all four sides or not at all."
   }
 }

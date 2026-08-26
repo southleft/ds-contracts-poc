@@ -25,8 +25,8 @@
   "id": "table-column-numeric-alignment",
   "predictedWall": {
     "code": "FC-TEXT-FILL-ALIGNMENT",
-    "status": "EXISTING - cited as the governing lowering, NOT as a predicted failure",
+    "status": "EXISTING - cited as the rule that SHOULD fire, not as a predicted failure",
     "half": "canvas round trip",
-    "why": "spec/lowering.json registers this rule as 'text hugs unless hugging would move it' - it asks whether the packing agrees with the text alignment and keeps the glyphs where CSS put them. A right-aligned numeric cell at a FIXED column width is precisely the shape where hugging WOULD move the text, so this rule should fire and keep the alignment. I am naming it so that if the digits come back left-aligned, the first place to look is this rule failing to fire rather than text-align being unread. Predicted difficulty is `hard`, not `expected-wall`."
+    "why": "spec/lowering.json rule `emit.size-text-hug-vs-fill` carries this marker: 'alignment-safe non-truncating text HUGS; alignment-displaced text keeps FILL and carries fillText', and it is one of the few rules whose `lost` field reads 'nothing silently'. A right-aligned numeric cell at a FIXED column width is exactly the shape where hugging WOULD move the glyphs, so the rule should fire and keep the alignment. Two things to check first if the digits come back left-aligned: door `propose.text-align-left-is-default` ('LEFT is CSS's own default so it is not a fact') and the channel table's note that text-align CARRIES on the css->canvas write but its canvas->code READ-BACK is merely named (`text-channel-unsupported`). So a one-way pass here would still leave the round trip asymmetric."
   }
 }

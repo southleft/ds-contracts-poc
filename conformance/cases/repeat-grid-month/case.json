@@ -26,7 +26,7 @@
   "predictedWall": {
     "code": "FC-GRID-ROOT-VSIZE",
     "status": "EXISTING",
-    "half": "canvas round trip",
-    "why": "conformance/README.md records the first canvas measurement verbatim: 'The 15 refusals are one wall: every grid case's captured contract has no definite root height, and the emitter refuses it by name (grid-axis-indefinite, FC-GRID-ROOT-VSIZE). The capture writes grid roots the canvas will not host.' A month grid is a grid root with an intrinsic height, so I expect it to land in exactly that bucket. FC-REPEAT-FORWARD-ABSENT (proposed above) applies on the capture half as well."
+    "half": "canvas round trip (with FC-REPEAT-FORWARD-ABSENT proposed on the capture half)",
+    "why": "conformance/README.md records the first canvas measurement verbatim: 'The 15 refusals are one wall: every grid case's captured contract has no definite root height, and the emitter refuses it by name (grid-axis-indefinite, FC-GRID-ROOT-VSIZE).' A month grid is a grid root with an intrinsic height, so I expect it in exactly that bucket. Two further doors stand against it on the capture half: `anatomy.grid-g7-refusal-fence` (2-D grids have no auto-layout spelling; drops the whole layout for the part) and `anatomy.grid-declared-track-verify`. This case is auto-placed over a declared 7-track list, which is the one grid shape the G6/G7 grammar does admit, so the track list itself should survive - the prediction is that the ROOT SIZING is what refuses."
   }
 }

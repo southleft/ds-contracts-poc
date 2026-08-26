@@ -15,7 +15,7 @@
     "note": "alternating row fills; on the canvas the stripe is a literal fill per row, not a rule"
   },
   "blockStage": true,
-  "predictedDifficulty": "hard",
+  "predictedDifficulty": "expected-wall",
   "mustHave": [
     "the table shows 6 rows",
     "rows alternate between two background fills, starting with the un-tinted one",
@@ -23,5 +23,10 @@
     "the stripe is visible as a fill on the row, not as a border or a gap"
   ],
   "id": "table-zebra-nth-child",
-  "predictedWall": null
+  "predictedWall": {
+    "code": "FC-NTH-CHILD-STRIPE-UNREAD",
+    "status": "PROPOSED - no existing code covers this",
+    "half": "capture (contract)",
+    "why": "AMENDED before any run - upgraded from `hard`. A repo-wide search for nth-child/zebra finds no code, no door and no lowering rule; the only hits are internal showcase CSS and two RESEARCH mentions (docs/research/enterprise-components.md:227 proposes a `tokensWhen` 'nth-child token flip'; PATTERN-TAXONOMY.md:116 lists zebra as a Table variant axis). What DOES exist is generic and subtractive: the selector-grammar doors `libcss.pseudo-attribute-refusal` ('Any other pseudo or attribute selector is not promotable' - drops the rule) and `libcss.combinator-refusal`. A structural pseudo-class like :nth-child(even) falls to those, which means the stripe is dropped by a door whose receipt names the SELECTOR GRAMMAR rather than the stripe. Zebra striping is how every data table in every library separates its rows, and it has no name of its own."
+  }
 }

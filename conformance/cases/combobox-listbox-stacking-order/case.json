@@ -15,7 +15,7 @@
     "note": "the canvas spells paint order as child index; a numeric z-index has no direct channel"
   },
   "blockStage": true,
-  "predictedDifficulty": "expected-wall",
+  "predictedDifficulty": "hard",
   "mustHave": [
     "the white listbox is drawn IN FRONT OF the grey trigger where the two overlap",
     "the listbox's text is legible - not covered by the trigger's fill",
@@ -23,9 +23,9 @@
   ],
   "id": "combobox-listbox-stacking-order",
   "predictedWall": {
-    "code": "FC-STACKING-ORDER-UNREAD",
-    "status": "PROPOSED - no existing code covers this",
+    "code": "layout-item-reverse-z-index",
+    "status": "EXISTING ledger receipt name. I WITHDRAW the FC-STACKING-ORDER-UNREAD code I proposed in the sealing commit - it was wrong.",
     "half": "capture (contract)",
-    "why": "I searched all four spec registers and the whole FC-* vocabulary for a stacking/paint-order code and there is none. The nearest neighbours are about clipping (FC-OVERFLOW-CLIP-LOST, FC-FIGMA-CLIP-DEFAULT), not ordering. This is a real gap rather than a construct with nowhere to go: the canvas DOES spell paint order, as a child's index in the layer tree, so an engine could honour z-index by reordering children. I predict it is neither read nor named, which is the worst of the three outcomes because a popover that renders BEHIND its trigger is still a plausible-looking picture."
+    "why": "AMENDED before any run. In the sealing commit I wrote that I had searched all four spec registers and found no stacking/paint-order code, and proposed a new one. That claim was FALSE and I am recording the miss rather than quietly deleting it. spec/channel-table.json classes `z-index` as LEDGERED - not REFUSED - with the note 'canvas stacking is child order; reversed z ledgered on read (layout-item-reverse-z-index)'. So the construct is both modelled and named, and the honest prediction is that this case PASSES by name. `isolation` is LEDGERED on the same reasoning. What IS a genuine hard wall next door, and is NOT what this case tests, is `order`: REFUSED as `code-only:no-schema-channel`, and lowering rule `schema.order-unregistered-channel` is one of only three `status: wall` rules in the whole register - 'worse than a drop, a channel name no registry knows can make validateContract refuse the whole component.'"
   }
 }

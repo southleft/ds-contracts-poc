@@ -15,7 +15,7 @@
     "note": "the selected option is a frame with its own fill among four unfilled siblings"
   },
   "blockStage": true,
-  "predictedDifficulty": "hard",
+  "predictedDifficulty": "expected-wall",
   "mustHave": [
     "the listbox shows exactly 5 options, stacked vertically",
     "exactly ONE option (the 3rd, 'Gamma') carries a tinted fill",
@@ -23,5 +23,10 @@
     "the other 4 options have no fill of their own"
   ],
   "id": "combobox-option-selected",
-  "predictedWall": null
+  "predictedWall": {
+    "code": "P10 (pattern code) / FC-REPEAT-FORWARD-ABSENT",
+    "status": "P10 is an EXISTING pattern code in extract/figma/gauntlet/PATTERN-TAXONOMY.md, explicitly marked NOT EXPRESSIBLE. It is not an FC-* code; no FC-* code covers this.",
+    "half": "capture (contract)",
+    "why": "AMENDED before any run - upgraded from `hard`. PATTERN-TAXONOMY.md defines P10 as 'Selected-item state inside a collection' and marks it, in terms, NOT EXPRESSIBLE today - while its neighbour P9 'Repeated-children collection' IS inferred, but only on the canvas->contract leg. The DON'T rule D5 in the same file carries the refusal string 'collection with one deviating item - repeated-children pattern, no vocabulary (P9)', which is a description of this case's markup. Separately, spec/channel-table.json's state-plane inventory drives exactly six planes (default, hover, active, focus-visible, disabled, checked); `selected` appears in NEITHER the driven list NOR the FC-STATE-PLANE-UNDRIVEN list, so it falls to the generic door `fuse.state-outside-vocabulary` ('CONTRACT_STATES is the closed state vocabulary' - drops the binding). Note this case expresses selection as a STATIC fill on a sibling rather than as a state plane, which is the friendlier of the two spellings; if even that is folded away, the harder spelling has no chance."
+  }
 }

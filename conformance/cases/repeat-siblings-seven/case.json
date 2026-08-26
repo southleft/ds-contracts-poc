@@ -23,5 +23,10 @@
     "no box is missing and none is duplicated - a grader can count 7"
   ],
   "id": "repeat-siblings-seven",
-  "predictedWall": null
+  "predictedWall": {
+    "code": "FC-REPEAT-FORWARD-ABSENT",
+    "status": "PROPOSED - same code as the thirtyone case, cited here as the thing being ruled OUT",
+    "half": "capture (contract)",
+    "why": "Seven is where I expect the flat walk to still be doing the right thing, so this case exists to LOCATE the boundary rather than to predict a failure. If seven passes and thirty-one does not, the boundary is a count and the fixture has found it; if both fail, the wall is repetition as such and the count is irrelevant. Predicted difficulty `hard`, not `expected-wall`."
+  }
 }

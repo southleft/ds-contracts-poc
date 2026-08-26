@@ -397,7 +397,7 @@
         "note": "the canvas spells paint order as child index; a numeric z-index has no direct channel"
       },
       "blockStage": true,
-      "predictedDifficulty": "expected-wall",
+      "predictedDifficulty": "hard",
       "mustHave": [
         "the white listbox is drawn IN FRONT OF the grey trigger where the two overlap",
         "the listbox's text is legible - not covered by the trigger's fill",
@@ -405,10 +405,10 @@
       ],
       "id": "combobox-listbox-stacking-order",
       "predictedWall": {
-        "code": "FC-STACKING-ORDER-UNREAD",
-        "status": "PROPOSED - no existing code covers this",
+        "code": "layout-item-reverse-z-index",
+        "status": "EXISTING ledger receipt name. I WITHDRAW the FC-STACKING-ORDER-UNREAD code I proposed in the sealing commit - it was wrong.",
         "half": "capture (contract)",
-        "why": "I searched all four spec registers and the whole FC-* vocabulary for a stacking/paint-order code and there is none. The nearest neighbours are about clipping (FC-OVERFLOW-CLIP-LOST, FC-FIGMA-CLIP-DEFAULT), not ordering. This is a real gap rather than a construct with nowhere to go: the canvas DOES spell paint order, as a child's index in the layer tree, so an engine could honour z-index by reordering children. I predict it is neither read nor named, which is the worst of the three outcomes because a popover that renders BEHIND its trigger is still a plausible-looking picture."
+        "why": "AMENDED before any run. In the sealing commit I wrote that I had searched all four spec registers and found no stacking/paint-order code, and proposed a new one. That claim was FALSE and I am recording the miss rather than quietly deleting it. spec/channel-table.json classes `z-index` as LEDGERED - not REFUSED - with the note 'canvas stacking is child order; reversed z ledgered on read (layout-item-reverse-z-index)'. So the construct is both modelled and named, and the honest prediction is that this case PASSES by name. `isolation` is LEDGERED on the same reasoning. What IS a genuine hard wall next door, and is NOT what this case tests, is `order`: REFUSED as `code-only:no-schema-channel`, and lowering rule `schema.order-unregistered-channel` is one of only three `status: wall` rules in the whole register - 'worse than a drop, a channel name no registry knows can make validateContract refuse the whole component.'"
       }
     },
     {
@@ -428,7 +428,7 @@
         "note": "an individual-side stroke on the highlighted option's frame"
       },
       "blockStage": true,
-      "predictedDifficulty": "hard",
+      "predictedDifficulty": "expected-wall",
       "mustHave": [
         "the listbox shows exactly 5 options, stacked vertically",
         "exactly ONE option (the 2nd, 'Beta') carries a coloured bar on its LEFT edge only",
@@ -437,10 +437,10 @@
       ],
       "id": "combobox-option-highlighted",
       "predictedWall": {
-        "code": "FC-DUMP-PROPOSE-STROKE-WEIGHT-SIDES",
-        "status": "EXISTING - CLOSED 2026-08-20, cited as the reason I expect this to PASS",
+        "code": "FC-BORDER-STYLE-NOT-SYNTHESISED",
+        "status": "EXISTING (note the British -ISED spelling). FC-DUMP-PROPOSE-STROKE-WEIGHT-SIDES is the adjacent CLOSED finding and does NOT cover this.",
         "half": "canvas round trip",
-        "why": "parity/receipts/beta/KIT-CLIMB.md records this finding as closed: 'Propose treated four different side-weight variable names as not uniform and dropped them ... Those now recover as per-side channels.' A single-side accent border is the same shape, so the closed fix should cover it. I am naming it as the thing to check first if the accent bar comes back on all four sides or not at all. Note the fix was about stroke WEIGHT per side; this case varies stroke COLOUR per side, which the receipt does not explicitly claim."
+        "why": "AMENDED before any run - upgraded from `hard`. In the sealing commit I leaned on FC-DUMP-PROPOSE-STROKE-WEIGHT-SIDES being closed and flagged, correctly, that it was about stroke WEIGHT per side while this case varies stroke COLOUR per side. The survey settles it against me: spec/channel-table.json's border-{top,right,bottom,left}-color rows all read 'one strokes paint serves all four sides - lowered only when every carried side agrees.' This case's four quiet options carry a TRANSPARENT left border and the highlighted one carries an opaque blue left border, so the sides do NOT agree by construction, and a single strokes paint cannot hold the difference. The nearest precedent for the shape of the refusal is `propose.radii-not-uniform-refused` - 'border-radius is a single channel and four differing bindings are not representable', which drops all four corner bindings with no per-corner fallback. I predict the accent bar comes back on all four sides or not at all."
       }
     },
     {
@@ -460,7 +460,7 @@
         "note": "the selected option is a frame with its own fill among four unfilled siblings"
       },
       "blockStage": true,
-      "predictedDifficulty": "hard",
+      "predictedDifficulty": "expected-wall",
       "mustHave": [
         "the listbox shows exactly 5 options, stacked vertically",
         "exactly ONE option (the 3rd, 'Gamma') carries a tinted fill",
@@ -468,7 +468,12 @@
         "the other 4 options have no fill of their own"
       ],
       "id": "combobox-option-selected",
-      "predictedWall": null
+      "predictedWall": {
+        "code": "P10 (pattern code) / FC-REPEAT-FORWARD-ABSENT",
+        "status": "P10 is an EXISTING pattern code in extract/figma/gauntlet/PATTERN-TAXONOMY.md, explicitly marked NOT EXPRESSIBLE. It is not an FC-* code; no FC-* code covers this.",
+        "half": "capture (contract)",
+        "why": "AMENDED before any run - upgraded from `hard`. PATTERN-TAXONOMY.md defines P10 as 'Selected-item state inside a collection' and marks it, in terms, NOT EXPRESSIBLE today - while its neighbour P9 'Repeated-children collection' IS inferred, but only on the canvas->contract leg. The DON'T rule D5 in the same file carries the refusal string 'collection with one deviating item - repeated-children pattern, no vocabulary (P9)', which is a description of this case's markup. Separately, spec/channel-table.json's state-plane inventory drives exactly six planes (default, hover, active, focus-visible, disabled, checked); `selected` appears in NEITHER the driven list NOR the FC-STATE-PLANE-UNDRIVEN list, so it falls to the generic door `fuse.state-outside-vocabulary` ('CONTRACT_STATES is the closed state vocabulary' - drops the binding). Note this case expresses selection as a STATIC fill on a sibling rather than as a state plane, which is the friendlier of the two spellings; if even that is folded away, the harder spelling has no chance."
+      }
     },
     {
       "feature": "combobox",
@@ -487,7 +492,7 @@
         "note": "layoutPositioning ABSOLUTE with a y offset under the trigger"
       },
       "blockStage": true,
-      "predictedDifficulty": "hard",
+      "predictedDifficulty": "expected-wall",
       "mustHave": [
         "the popover appears BELOW the trigger, not on top of it and not inside it",
         "the trigger's own height is unchanged by the popover's presence - the trigger is one text line tall",
@@ -496,10 +501,10 @@
       ],
       "id": "combobox-popover-overlay-inset",
       "predictedWall": {
-        "code": "FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED",
-        "status": "EXISTING",
+        "code": "emit.position-inset-overlay-four-sides / emit.position-no-inset-falls-in-flow",
+        "status": "EXISTING lowering-register ids (lowercase dotted, not FC-*). FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED is the emit-side code for the same failure.",
         "half": "canvas round trip",
-        "why": "core/emit-figma-script.ts:6536 (and :6609, :7382) degrades with exactly this code and the message 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow'. 'The child stayed in flow' IS the combobox failure mode this case exists to catch: a popover that reflows the trigger instead of overlaying it. The trigger here is a flex row, so the parent SHOULD be auto-layout and the refusal should not fire - which is why this is `hard` rather than `expected-wall`. If it fires anyway, the message names the cause precisely."
+        "why": "AMENDED before any run - upgraded from `hard`, and this is the single most precisely grounded prediction in the set. spec/lowering.json `emit.position-inset-overlay-four-sides` fires ONLY when ALL FOUR insets are present as px. This case declares TWO (top and left), which lands it in that rule's own stated loss: 'for a part with one to three insets, the overlay lowering entirely, with nothing said', `receipt: {channel: \"none\"}`. The sibling rule `emit.position-no-inset-falls-in-flow` spells out the consequence: 'the part now occupies space in the auto-layout it should have been lifted out of' - again `receipt: {channel: \"none\"}`. That is verbatim the combobox failure this case exists to catch: the popover REFLOWS the trigger instead of overlaying it. FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED (core/emit-figma-script.ts:6536, :6609, :7382) is the loud version of the same outcome - 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow'. I predict the QUIET version, because two insets is the un-receipted branch. I chose two insets deliberately: a popover anchored under a trigger is a two-inset shape in every real library, and the four-inset rule does not describe it."
       }
     },
     {
@@ -2050,8 +2055,8 @@
       "predictedWall": {
         "code": "FC-GRID-ROOT-VSIZE",
         "status": "EXISTING",
-        "half": "canvas round trip",
-        "why": "conformance/README.md records the first canvas measurement verbatim: 'The 15 refusals are one wall: every grid case's captured contract has no definite root height, and the emitter refuses it by name (grid-axis-indefinite, FC-GRID-ROOT-VSIZE). The capture writes grid roots the canvas will not host.' A month grid is a grid root with an intrinsic height, so I expect it to land in exactly that bucket. FC-REPEAT-FORWARD-ABSENT (proposed above) applies on the capture half as well."
+        "half": "canvas round trip (with FC-REPEAT-FORWARD-ABSENT proposed on the capture half)",
+        "why": "conformance/README.md records the first canvas measurement verbatim: 'The 15 refusals are one wall: every grid case's captured contract has no definite root height, and the emitter refuses it by name (grid-axis-indefinite, FC-GRID-ROOT-VSIZE).' A month grid is a grid root with an intrinsic height, so I expect it in exactly that bucket. Two further doors stand against it on the capture half: `anatomy.grid-g7-refusal-fence` (2-D grids have no auto-layout spelling; drops the whole layout for the part) and `anatomy.grid-declared-track-verify`. This case is auto-placed over a declared 7-track list, which is the one grid shape the G6/G7 grammar does admit, so the track list itself should survive - the prediction is that the ROOT SIZING is what refuses."
       }
     },
     {
@@ -2079,7 +2084,12 @@
         "no box is missing and none is duplicated - a grader can count 7"
       ],
       "id": "repeat-siblings-seven",
-      "predictedWall": null
+      "predictedWall": {
+        "code": "FC-REPEAT-FORWARD-ABSENT",
+        "status": "PROPOSED - same code as the thirtyone case, cited here as the thing being ruled OUT",
+        "half": "capture (contract)",
+        "why": "Seven is where I expect the flat walk to still be doing the right thing, so this case exists to LOCATE the boundary rather than to predict a failure. If seven passes and thirty-one does not, the boundary is a count and the fixture has found it; if both fail, the wall is repetition as such and the count is irrelevant. Predicted difficulty `hard`, not `expected-wall`."
+      }
     },
     {
       "feature": "repetition",
@@ -2108,9 +2118,9 @@
       "id": "repeat-siblings-thirtyone",
       "predictedWall": {
         "code": "FC-REPEAT-FORWARD-ABSENT",
-        "status": "PROPOSED - no existing code covers this",
+        "status": "PROPOSED - confirmed by survey that no existing code covers this",
         "half": "capture (contract)",
-        "why": "There is NO forward repetition rule. The inverse exists (core/propose-figma.ts, >=3 adjacent same-component instances -> part.repeat) but nothing in the capture direction turns N repeated siblings into a component plus instances, so a month is emitted flat. The flat emission is not itself the failure I predict; what I predict is that at 31 siblings the union naming in extract/computed/anatomy.ts nameUnion() - which suffixes duplicates a, a-2 ... a-31 - plus the per-part folding downstream will treat the 31 near-identical siblings as one repeated shape and fold the ODD sibling's distinct fill away with them. I searched spec/channel-table.json, spec/door-register.json, spec/lowering.json and spec/grammar-coverage.json for a repetition code and there is none; FC-CELL-FRAMING / FC-CELL-INK-LOST are composition-corpus slot fills, not this."
+        "why": "A full survey of spec/{channel-table,door-register,lowering,grammar-coverage}.json plus the whole 196-string FC-* vocabulary finds NO code for repetition-not-componentised. The nearest NAMED things are not FC codes: (a) grammar-coverage `axis-arity-depends-on-another-axis`, whose own instances field says 'a month grid's row count is a function of the date'; (b) pattern code P9 'Repeated-children collection' in extract/figma/gauntlet/PATTERN-TAXONOMY.md, which exists ONLY on the canvas->contract leg (core/propose-figma.ts repeatRunAt / buildRepeatPart); and (c) the DON'T rule D5 in the same file, whose refusal string is verbatim 'collection with one deviating item - repeated-children pattern, no vocabulary (P9)'. D5 describes THIS CASE exactly - a collection with one deviating item - and says there is no vocabulary for it. On the capture leg the only repeat collapse that exists anywhere is the UNWIRED spike extract/depth-spike/run.ts. So: flat emission on the capture half, and the deviating 31st cell has a named DON'T standing against it."
       }
     },
     {
@@ -2258,9 +2268,9 @@
       "id": "table-column-numeric-alignment",
       "predictedWall": {
         "code": "FC-TEXT-FILL-ALIGNMENT",
-        "status": "EXISTING - cited as the governing lowering, NOT as a predicted failure",
+        "status": "EXISTING - cited as the rule that SHOULD fire, not as a predicted failure",
         "half": "canvas round trip",
-        "why": "spec/lowering.json registers this rule as 'text hugs unless hugging would move it' - it asks whether the packing agrees with the text alignment and keeps the glyphs where CSS put them. A right-aligned numeric cell at a FIXED column width is precisely the shape where hugging WOULD move the text, so this rule should fire and keep the alignment. I am naming it so that if the digits come back left-aligned, the first place to look is this rule failing to fire rather than text-align being unread. Predicted difficulty is `hard`, not `expected-wall`."
+        "why": "spec/lowering.json rule `emit.size-text-hug-vs-fill` carries this marker: 'alignment-safe non-truncating text HUGS; alignment-displaced text keeps FILL and carries fillText', and it is one of the few rules whose `lost` field reads 'nothing silently'. A right-aligned numeric cell at a FIXED column width is exactly the shape where hugging WOULD move the glyphs, so the rule should fire and keep the alignment. Two things to check first if the digits come back left-aligned: door `propose.text-align-left-is-default` ('LEFT is CSS's own default so it is not a fact') and the channel table's note that text-align CARRIES on the css->canvas write but its canvas->code READ-BACK is merely named (`text-channel-unsupported`). So a one-way pass here would still leave the round trip asymmetric."
       }
     },
     {
@@ -2307,7 +2317,7 @@
         "note": "AutoLayout has no table formatting context and no row-group concept"
       },
       "blockStage": true,
-      "predictedDifficulty": "expected-wall",
+      "predictedDifficulty": "hard",
       "mustHave": [
         "if the case is refused, the refusal names the table/row-group construct in LEDGER.md",
         "nothing is emitted that claims to be a table but has lost the header/body distinction",
@@ -2315,10 +2325,10 @@
       ],
       "id": "table-semantic-row-group",
       "predictedWall": {
-        "code": "FC-TABLE-ROW-GROUP-FLATTENED",
-        "status": "PROPOSED - the receipt NAME 'table-lowering' exists in LEDGER.md but carries no FC-* code",
+        "code": "table-lowering",
+        "status": "EXISTING receipt name (LEDGER string, not an FC-* code). I withdraw the FC-TABLE-ROW-GROUP-FLATTENED code I proposed in the sealing commit - see below.",
         "half": "capture (contract)",
-        "why": "display-out-of-vocab pins `display: table` as REFUSED by the name 'table-lowering'. That name is a LEDGER string, not a coded wall, and it was authored against a div root carrying `display: table` - not against the UA-generated `table-header-group` / `table-row-group` boxes that real <table> markup creates. I predict the row groups are flattened rather than refused, because they are ordinary boxes as far as the element walk is concerned and only their `display` value is out of vocabulary. If the refusal does fire under the name 'table-lowering' the case passes; if the groups are flattened silently, that is a SILENT-LOSS and this proposed code is what should name it. This matters beyond tables: examples/day-picker/README.md §5.3 records that react-day-picker's own `rdp-month_grid` IS a <table>, so the calendar archetype inherits whatever answer this case gets."
+        "why": "AMENDED before any run. In the sealing commit I predicted the row groups would be flattened SILENTLY and proposed a new code for it. A vocabulary survey then found the mechanism I had missed: extract/computed/anatomy.ts has `lowerTableDisplay`, which handles 'table-header-group' and 'table-row-group' BY NAME and emits the receipt prefixes `table-lowering:`, `table-geometry-excluded:` and `control-fallback: no control for <thead> - span control used`. All four strings are visible verbatim in examples/mui/contracts/table.extension.json:4379-4418. So the honest prediction is now that this case PASSES - the groups are lowered to a flex stack and NAMED - and I have withdrawn the proposed code rather than leave a claim of 'no name exists' standing against a name that does. What remains genuinely un-named is narrower and I am not testing it here: `fuse.table-column-arity-disagreement` drops width AND height for EVERY cell of the whole table on any colspan, whose counter-example in the register reads 'Any colspan in the corpus disables column widths table-wide.'"
       }
     },
     {
@@ -2338,7 +2348,7 @@
         "note": "alternating row fills; on the canvas the stripe is a literal fill per row, not a rule"
       },
       "blockStage": true,
-      "predictedDifficulty": "hard",
+      "predictedDifficulty": "expected-wall",
       "mustHave": [
         "the table shows 6 rows",
         "rows alternate between two background fills, starting with the un-tinted one",
@@ -2346,7 +2356,12 @@
         "the stripe is visible as a fill on the row, not as a border or a gap"
       ],
       "id": "table-zebra-nth-child",
-      "predictedWall": null
+      "predictedWall": {
+        "code": "FC-NTH-CHILD-STRIPE-UNREAD",
+        "status": "PROPOSED - no existing code covers this",
+        "half": "capture (contract)",
+        "why": "AMENDED before any run - upgraded from `hard`. A repo-wide search for nth-child/zebra finds no code, no door and no lowering rule; the only hits are internal showcase CSS and two RESEARCH mentions (docs/research/enterprise-components.md:227 proposes a `tokensWhen` 'nth-child token flip'; PATTERN-TAXONOMY.md:116 lists zebra as a Table variant axis). What DOES exist is generic and subtractive: the selector-grammar doors `libcss.pseudo-attribute-refusal` ('Any other pseudo or attribute selector is not promotable' - drops the rule) and `libcss.combinator-refusal`. A structural pseudo-class like :nth-child(even) falls to those, which means the stripe is dropped by a door whose receipt names the SELECTOR GRAMMAR rather than the stripe. Zebra striping is how every data table in every library separates its rows, and it has no name of its own."
+      }
     },
     {
       "id": "text-indent-off-box",
