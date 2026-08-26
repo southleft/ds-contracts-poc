@@ -16,13 +16,13 @@ repo it is simply absent from the denominator and scores 100%.
 
 | | |
 |---|---|
-| cases | **102** |
-| 🟢 pass | **99** |
+| cases | **105** |
+| 🟢 pass | **102** |
 | 🔴 red | **3** |
 | 🟡 yellow (UNSUPPORTED, never read) | **0** |
-| **UNSUPPORTED declared — THE RATCHET** | **18** · may only DECREASE without an explicit manifest edit |
+| **UNSUPPORTED declared — THE RATCHET** | **17** · may only DECREASE without an explicit manifest edit |
 
-Declared dispositions: CARRIED 58 · LOWERED 4 · REFUSED 22 · UNSUPPORTED 18.
+Declared dispositions: CARRIED 60 · LOWERED 4 · REFUSED 24 · UNSUPPORTED 17.
 
 **A green gate here would mean the cases are too easy.** The point of the
 fixture is a measured frontier, and every red below is an open, named defect —
@@ -98,6 +98,9 @@ manifest.
 | 🟢 | `aspect-ratio` | geometry | `aspect-ratio: 2 / 1` | CARRIED | carried | PASS |
 | 🟢 | `border-radius-px` | geometry | `border-radius: 6px` | CARRIED | carried | PASS |
 | 🟢 | `min-max-width` | geometry | `min-width / max-width in px` | CARRIED | carried | PASS |
+| 🟢 | `overlay-text-fill-pinned-size` | geometry | `a TEXT-bearing part that fills a PINNED ancestor box (width/height: 100% inside a sized root) in an overlay anatomy — the shadcn.Avatar fallback shape` | CARRIED | carried | PASS |
+| 🟢 | `overlay-text-fill-stage-derived` | geometry | `a TEXT-bearing part that genuinely FILLS its pinned ancestor — where the ancestor's own box is the CAPTURE STAGE's content box (288px = stage 320 − 2×16), and its content box moves 32px only because the ancestor's own gutters do` | REFUSED | refused, by name | PASS |
+| 🟢 | `overlay-text-hug-excluded` | geometry | `a TEXT-bearing part in an overlay anatomy whose box IS its own shrink-to-fit measurement — an inline-block beside a PINNED ancestor that moves (160px → 200px) without it` | REFUSED | not read | PASS |
 | 🟢 | `grid-child-align` | grid-alignment | `justify-self: center; align-self: end on a fixed-size child` | CARRIED | carried | PASS |
 | 🟢 | `grid-area-empty-slot` | grid-areas | `a declared grid area with NO children (empty slot)` | CARRIED | carried | PASS |
 | 🟢 | `grid-area-nonrectangular` | grid-areas | `area occupancy that cannot tile grid-template-areas (gapped or non-rectangular per CSS rules)` | LOWERED | carried | PASS |
@@ -154,7 +157,7 @@ manifest.
 | 🟢 | `pseudo-content-glyph` | pseudo-elements | `::before { content: "\2715"; font-family: icons }` | REFUSED | refused, by name | PASS |
 | 🟢 | `pseudo-gradient-only` | pseudo-elements | `::after painted ONLY by a linear-gradient` | REFUSED | refused, by name | PASS |
 | 🟢 | `pseudo-marker` | pseudo-elements | `li::marker { color; font-size }` | UNSUPPORTED | refused, by name | PASS |
-| 🟢 | `pseudo-placeholder` | pseudo-elements | `input::placeholder { color }` | UNSUPPORTED | refused, by name | PASS |
+| 🟢 | `pseudo-placeholder` | pseudo-elements | `input::placeholder { color }` | CARRIED | carried | PASS |
 | 🟢 | `pseudo-selection` | pseudo-elements | `::selection { background-color }` | UNSUPPORTED | not read | PASS |
 | 🟢 | `content-visibility-auto` | rendering | `content-visibility: auto` | UNSUPPORTED | refused, by name | PASS |
 | 🟢 | `shadow-part` | shadow-dom | `::part(label) styling across an OPEN shadow boundary` | CARRIED | carried | PASS |
