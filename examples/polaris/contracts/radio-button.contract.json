@@ -248,27 +248,6 @@
                       "background-color": "{imported.radio-button.backdrop.background-color-state-disabled}"
                     }
                   },
-                  "tokensByProp": [
-                    {
-                      "prop": "checked",
-                      "map": {
-                        "checked": {
-                          "background-color": "{imported.radio-button.backdrop.background-color.checked}",
-                          "border-bottom-color": "{imported.radio-button.backdrop.border-bottom-color.checked}",
-                          "border-left-color": "{imported.radio-button.backdrop.border-left-color.checked}",
-                          "border-right-color": "{imported.radio-button.backdrop.border-right-color.checked}",
-                          "border-top-color": "{imported.radio-button.backdrop.border-top-color.checked}"
-                        },
-                        "unchecked": {
-                          "background-color": "{imported.radio-button.backdrop.background-color.unchecked}",
-                          "border-bottom-color": "{imported.radio-button.backdrop.border-bottom-color.unchecked}",
-                          "border-left-color": "{imported.radio-button.backdrop.border-left-color.unchecked}",
-                          "border-right-color": "{imported.radio-button.backdrop.border-right-color.unchecked}",
-                          "border-top-color": "{imported.radio-button.backdrop.border-top-color.unchecked}"
-                        }
-                      }
-                    }
-                  ],
                   "codeOnly": [
                     {
                       "state": "active",
@@ -419,6 +398,35 @@
                       "channel": "border-top-color",
                       "value": "{imported.radio-button.backdrop.border-top-color-state-hover.{checked}}",
                       "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    }
+                  ],
+                  "literalsByProp": [
+                    {
+                      "prop": "checked",
+                      "map": {
+                        "unchecked": {
+                          "background-color": "rgba(255, 255, 255, 1)",
+                          "border-top-width": "1px",
+                          "border-right-width": "1px",
+                          "border-bottom-width": "1px",
+                          "border-left-width": "1px",
+                          "border-top-color": "rgba(138, 138, 138, 1)",
+                          "border-right-color": "rgba(138, 138, 138, 1)",
+                          "border-bottom-color": "rgba(138, 138, 138, 1)",
+                          "border-left-color": "rgba(138, 138, 138, 1)"
+                        },
+                        "checked": {
+                          "background-color": "rgba(48, 48, 48, 1)",
+                          "border-top-width": "1px",
+                          "border-right-width": "1px",
+                          "border-bottom-width": "1px",
+                          "border-left-width": "1px",
+                          "border-top-color": "rgba(48, 48, 48, 1)",
+                          "border-right-color": "rgba(48, 48, 48, 1)",
+                          "border-bottom-color": "rgba(48, 48, 48, 1)",
+                          "border-left-color": "rgba(48, 48, 48, 1)"
+                        }
+                      }
                     }
                   ]
                 },

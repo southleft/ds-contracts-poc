@@ -8100,7 +8100,8 @@
             "code": {
               "prop": "initials"
             }
-          }
+          },
+          "default": "TP"
         },
         {
           "name": "customer",
@@ -8148,7 +8149,7 @@
           "name": "withInitials",
           "description": "Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library's `initials` (\"TP\"); the created subtree is carried as parts gated on this prop.",
           "type": "boolean",
-          "default": false,
+          "default": true,
           "bindings": {
             "figma": {
               "kind": "BOOLEAN",
@@ -9707,8 +9708,7 @@
                               "description": "Promoted from the computed floor (round 4): rendered anatomy div|ButtonGroup — this element exists in the real component's DOM; the static layer had no part for it.",
                               "layout": {
                                 "display": "flex",
-                                "align": "center",
-                                "wrap": true
+                                "align": "center"
                               },
                               "visibleWhen": {
                                 "prop": "withAction"
@@ -10915,25 +10915,6 @@
                           "outline-style": "solid"
                         }
                       },
-                      "tokensByProp": [
-                        {
-                          "prop": "checked",
-                          "map": {
-                            "checked": {
-                              "background-color": "{imported.checkbox.backdrop.background-color.checked}",
-                              "box-shadow": "{imported.checkbox.backdrop.box-shadow.checked}"
-                            },
-                            "indeterminate": {
-                              "background-color": "{imported.checkbox.backdrop.background-color.indeterminate}",
-                              "box-shadow": "{imported.checkbox.backdrop.box-shadow.indeterminate}"
-                            },
-                            "unchecked": {
-                              "background-color": "{imported.checkbox.backdrop.background-color.unchecked}",
-                              "box-shadow": "{imported.checkbox.backdrop.box-shadow.unchecked}"
-                            }
-                          }
-                        }
-                      ],
                       "codeOnly": [
                         {
                           "state": "active",
@@ -11060,6 +11041,38 @@
                           "channel": "box-shadow",
                           "value": "{imported.checkbox.backdrop.box-shadow-state-hover.{checked}}",
                           "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        }
+                      ],
+                      "literalsByProp": [
+                        {
+                          "prop": "checked",
+                          "map": {
+                            "unchecked": {
+                              "background-color": "rgba(255, 255, 255, 1)",
+                              "border-top-width": "1px",
+                              "border-right-width": "1px",
+                              "border-bottom-width": "1px",
+                              "border-left-width": "1px",
+                              "border-top-color": "rgba(138, 138, 138, 1)",
+                              "border-right-color": "rgba(138, 138, 138, 1)",
+                              "border-bottom-color": "rgba(138, 138, 138, 1)",
+                              "border-left-color": "rgba(138, 138, 138, 1)"
+                            },
+                            "checked": {
+                              "background-color": "rgba(48, 48, 48, 1)",
+                              "border-top-width": "0px",
+                              "border-right-width": "0px",
+                              "border-bottom-width": "0px",
+                              "border-left-width": "0px"
+                            },
+                            "indeterminate": {
+                              "background-color": "rgba(48, 48, 48, 1)",
+                              "border-top-width": "0px",
+                              "border-right-width": "0px",
+                              "border-bottom-width": "0px",
+                              "border-left-width": "0px"
+                            }
+                          }
                         }
                       ]
                     },
@@ -11552,7 +11565,7 @@
           "name": "progress",
           "description": "The progression of certain tasks",
           "type": "number",
-          "default": 0,
+          "default": 40,
           "bindings": {
             "figma": {
               "kind": "TEXT",
@@ -12070,27 +12083,6 @@
                           "background-color": "{imported.radio-button.backdrop.background-color-state-disabled}"
                         }
                       },
-                      "tokensByProp": [
-                        {
-                          "prop": "checked",
-                          "map": {
-                            "checked": {
-                              "background-color": "{imported.radio-button.backdrop.background-color.checked}",
-                              "border-bottom-color": "{imported.radio-button.backdrop.border-bottom-color.checked}",
-                              "border-left-color": "{imported.radio-button.backdrop.border-left-color.checked}",
-                              "border-right-color": "{imported.radio-button.backdrop.border-right-color.checked}",
-                              "border-top-color": "{imported.radio-button.backdrop.border-top-color.checked}"
-                            },
-                            "unchecked": {
-                              "background-color": "{imported.radio-button.backdrop.background-color.unchecked}",
-                              "border-bottom-color": "{imported.radio-button.backdrop.border-bottom-color.unchecked}",
-                              "border-left-color": "{imported.radio-button.backdrop.border-left-color.unchecked}",
-                              "border-right-color": "{imported.radio-button.backdrop.border-right-color.unchecked}",
-                              "border-top-color": "{imported.radio-button.backdrop.border-top-color.unchecked}"
-                            }
-                          }
-                        }
-                      ],
                       "codeOnly": [
                         {
                           "state": "active",
@@ -12241,6 +12233,35 @@
                           "channel": "border-top-color",
                           "value": "{imported.radio-button.backdrop.border-top-color-state-hover.{checked}}",
                           "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        }
+                      ],
+                      "literalsByProp": [
+                        {
+                          "prop": "checked",
+                          "map": {
+                            "unchecked": {
+                              "background-color": "rgba(255, 255, 255, 1)",
+                              "border-top-width": "1px",
+                              "border-right-width": "1px",
+                              "border-bottom-width": "1px",
+                              "border-left-width": "1px",
+                              "border-top-color": "rgba(138, 138, 138, 1)",
+                              "border-right-color": "rgba(138, 138, 138, 1)",
+                              "border-bottom-color": "rgba(138, 138, 138, 1)",
+                              "border-left-color": "rgba(138, 138, 138, 1)"
+                            },
+                            "checked": {
+                              "background-color": "rgba(48, 48, 48, 1)",
+                              "border-top-width": "1px",
+                              "border-right-width": "1px",
+                              "border-bottom-width": "1px",
+                              "border-left-width": "1px",
+                              "border-top-color": "rgba(48, 48, 48, 1)",
+                              "border-right-color": "rgba(48, 48, 48, 1)",
+                              "border-bottom-color": "rgba(48, 48, 48, 1)",
+                              "border-left-color": "rgba(48, 48, 48, 1)"
+                            }
+                          }
                         }
                       ]
                     },
@@ -13297,7 +13318,8 @@
             "code": {
               "prop": "placeholder"
             }
-          }
+          },
+          "default": "Example"
         },
         {
           "name": "value",
@@ -15699,7 +15721,8 @@
                 "min-height": "{imported.shared.size-0}",
                 "min-width": "{imported.shared.size-0}",
                 "right": "{imported.shared.size-0}",
-                "top": "{imported.shared.size-0}"
+                "top": "{imported.shared.size-0}",
+                "border-radius": "{p.border-radius-200}"
               },
               "tokensByProp": [
                 {
@@ -22016,17 +22039,6 @@
           "channel": "left",
           "value": "{imported.shared.size-0}",
           "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
-          "variants": {
-            "count": 1400,
-            "of": 1400
-          }
-        },
-        {
-          "part": "input",
-          "kind": "channel",
-          "channel": "placeholder",
-          "value": "",
-          "reason": "the placeholder STRING is an HTML attribute the browser renders through `::placeholder`, not DOM text — a computed-style capture reads its ink and never its characters, and this contract carries no default for the bound text prop and no literal `placeholder` attr. The TEXT node is kept so the Figma TEXT property can bind to it, and it is left EMPTY rather than filled with an invented string.",
           "variants": {
             "count": 1400,
             "of": 1400

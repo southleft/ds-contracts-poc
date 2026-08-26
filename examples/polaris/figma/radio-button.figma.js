@@ -125,8 +125,26 @@ const COMPONENTS = [
                         "px": 18,
                         "varName": "imported/shared/size-18"
                       },
-                      "fill": "imported/radio-button/backdrop/background-color/unchecked",
-                      "stroke": "imported/radio-button/backdrop/border-top-color/unchecked",
+                      "lits": {
+                        "fillColor": {
+                          "r": 1,
+                          "g": 1,
+                          "b": 1,
+                          "a": 1
+                        },
+                        "strokeSides": {
+                          "top": 1,
+                          "right": 1,
+                          "bottom": 1,
+                          "left": 1
+                        },
+                        "strokeColor": {
+                          "r": 0.5411764705882353,
+                          "g": 0.5411764705882353,
+                          "b": 0.5411764705882353,
+                          "a": 1
+                        }
+                      },
                       "absolute": {
                         "h": "STRETCH",
                         "v": "STRETCH",
@@ -265,8 +283,26 @@ const COMPONENTS = [
                         "px": 18,
                         "varName": "imported/shared/size-18"
                       },
-                      "fill": "imported/radio-button/backdrop/background-color/checked",
-                      "stroke": "imported/radio-button/backdrop/border-top-color/checked",
+                      "lits": {
+                        "fillColor": {
+                          "r": 0.18823529411764706,
+                          "g": 0.18823529411764706,
+                          "b": 0.18823529411764706,
+                          "a": 1
+                        },
+                        "strokeSides": {
+                          "top": 1,
+                          "right": 1,
+                          "bottom": 1,
+                          "left": 1
+                        },
+                        "strokeColor": {
+                          "r": 0.18823529411764706,
+                          "g": 0.18823529411764706,
+                          "b": 0.18823529411764706,
+                          "a": 1
+                        }
+                      },
                       "absolute": {
                         "h": "STRETCH",
                         "v": "STRETCH",
@@ -2051,6 +2087,7 @@ function applyFrameSpec(node, spec) {
       if (rc.bl !== undefined) node.bottomLeftRadius = rc.bl;
       if (rc.br !== undefined) node.bottomRightRadius = rc.br;
     }
+    if (li.strokeColor) node.strokes = [{ type: 'SOLID', color: { r: li.strokeColor.r, g: li.strokeColor.g, b: li.strokeColor.b }, opacity: li.strokeColor.a === undefined ? 1 : li.strokeColor.a }];
     if (li.strokeSides) {
       const sw = li.strokeSides;
       // ELLIPSE/LINE expose strokeWeight only — per-side props throw

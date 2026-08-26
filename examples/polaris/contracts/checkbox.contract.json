@@ -281,25 +281,6 @@
                       "outline-style": "solid"
                     }
                   },
-                  "tokensByProp": [
-                    {
-                      "prop": "checked",
-                      "map": {
-                        "checked": {
-                          "background-color": "{imported.checkbox.backdrop.background-color.checked}",
-                          "box-shadow": "{imported.checkbox.backdrop.box-shadow.checked}"
-                        },
-                        "indeterminate": {
-                          "background-color": "{imported.checkbox.backdrop.background-color.indeterminate}",
-                          "box-shadow": "{imported.checkbox.backdrop.box-shadow.indeterminate}"
-                        },
-                        "unchecked": {
-                          "background-color": "{imported.checkbox.backdrop.background-color.unchecked}",
-                          "box-shadow": "{imported.checkbox.backdrop.box-shadow.unchecked}"
-                        }
-                      }
-                    }
-                  ],
                   "codeOnly": [
                     {
                       "state": "active",
@@ -426,6 +407,38 @@
                       "channel": "box-shadow",
                       "value": "{imported.checkbox.backdrop.box-shadow-state-hover.{checked}}",
                       "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    }
+                  ],
+                  "literalsByProp": [
+                    {
+                      "prop": "checked",
+                      "map": {
+                        "unchecked": {
+                          "background-color": "rgba(255, 255, 255, 1)",
+                          "border-top-width": "1px",
+                          "border-right-width": "1px",
+                          "border-bottom-width": "1px",
+                          "border-left-width": "1px",
+                          "border-top-color": "rgba(138, 138, 138, 1)",
+                          "border-right-color": "rgba(138, 138, 138, 1)",
+                          "border-bottom-color": "rgba(138, 138, 138, 1)",
+                          "border-left-color": "rgba(138, 138, 138, 1)"
+                        },
+                        "checked": {
+                          "background-color": "rgba(48, 48, 48, 1)",
+                          "border-top-width": "0px",
+                          "border-right-width": "0px",
+                          "border-bottom-width": "0px",
+                          "border-left-width": "0px"
+                        },
+                        "indeterminate": {
+                          "background-color": "rgba(48, 48, 48, 1)",
+                          "border-top-width": "0px",
+                          "border-right-width": "0px",
+                          "border-bottom-width": "0px",
+                          "border-left-width": "0px"
+                        }
+                      }
                     }
                   ]
                 },

@@ -150,20 +150,28 @@
   outline-style: solid;
 }
 
-.radio-button--checked-checked .radio-button__backdrop {
-  background-color: var(--imported-radio-button-backdrop-background-color-checked);
-  border-bottom-color: var(--imported-radio-button-backdrop-border-bottom-color-checked);
-  border-left-color: var(--imported-radio-button-backdrop-border-left-color-checked);
-  border-right-color: var(--imported-radio-button-backdrop-border-right-color-checked);
-  border-top-color: var(--imported-radio-button-backdrop-border-top-color-checked);
+.radio-button--checked-unchecked .radio-button__backdrop {
+  background-color: rgba(255, 255, 255, 1);
+  border-top-width: 1px;
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  border-top-color: rgba(138, 138, 138, 1);
+  border-right-color: rgba(138, 138, 138, 1);
+  border-bottom-color: rgba(138, 138, 138, 1);
+  border-left-color: rgba(138, 138, 138, 1);
 }
 
-.radio-button--checked-unchecked .radio-button__backdrop {
-  background-color: var(--imported-radio-button-backdrop-background-color-unchecked);
-  border-bottom-color: var(--imported-radio-button-backdrop-border-bottom-color-unchecked);
-  border-left-color: var(--imported-radio-button-backdrop-border-left-color-unchecked);
-  border-right-color: var(--imported-radio-button-backdrop-border-right-color-unchecked);
-  border-top-color: var(--imported-radio-button-backdrop-border-top-color-unchecked);
+.radio-button--checked-checked .radio-button__backdrop {
+  background-color: rgba(48, 48, 48, 1);
+  border-top-width: 1px;
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  border-top-color: rgba(48, 48, 48, 1);
+  border-right-color: rgba(48, 48, 48, 1);
+  border-bottom-color: rgba(48, 48, 48, 1);
+  border-left-color: rgba(48, 48, 48, 1);
 }
 
 .radio-button:disabled .radio-button__backdrop {

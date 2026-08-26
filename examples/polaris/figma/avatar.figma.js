@@ -17,16 +17,12 @@ const COMPONENTS = [
       },
       {
         "property": "Show WithInitials",
-        "default": false
+        "default": true
       }
     ],
     "textProps": [
       {
         "property": "Name",
-        "default": ""
-      },
-      {
-        "property": "Initials",
         "default": ""
       },
       {
@@ -73,14 +69,8 @@ const COMPONENTS = [
           "clipsContent": true,
           "children": [
             {
-              "type": "frame",
+              "type": "text",
               "name": "initials",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "CENTER",
-                "counter": "CENTER"
-              },
-              "insetOverlay": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
@@ -92,15 +82,13 @@ const COMPONENTS = [
                 "px": 28,
                 "varName": "imported/avatar/initials/width/md"
               },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "initials-md",
-                  "svg": "<svg viewBox=\"0 0 40 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 25.5 13.5 C 25.5 16.5376 23.0376 19 20 19 C 16.9624 19 14.5 16.5376 14.5 13.5 C 14.5 10.4624 16.9624 8 20 8 C 23.0376 8 25.5 10.4624 25.5 13.5 Z\" fill=\"none\" stroke=\"rgba(253, 239, 253, 1)\" stroke-width=\"2.5\"/><path d=\"M 10.3433 29.682 L 9.47 31.254 C 9.03481 32.0373 9.60125 33 10.4974 33 H 29.5026 C 30.3988 33 30.9652 32.0373 30.53 31.254 L 29.6567 29.682 C 27.7084 26.175 24.0119 24 20 24 C 15.9882 24 12.2916 26.175 10.3433 29.682 Z\" fill=\"none\" stroke=\"rgba(253, 239, 253, 1)\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
-                  "svgPaintVar": "p/color-avatar-one-text-on-bg-fill",
-                  "iconSize": 28
-                }
-              ]
+              "characters": "TP",
+              "fontSize": 13,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/font-size-325",
+              "fontWeightVar": "p/font-weight-regular",
+              "textFill": "p/color-avatar-one-text-on-bg-fill",
+              "contentProp": "Initials"
             }
           ]
         }
@@ -136,14 +124,8 @@ const COMPONENTS = [
           "clipsContent": true,
           "children": [
             {
-              "type": "frame",
+              "type": "text",
               "name": "initials",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "CENTER",
-                "counter": "CENTER"
-              },
-              "insetOverlay": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
@@ -155,15 +137,13 @@ const COMPONENTS = [
                 "px": 20,
                 "varName": "imported/avatar/initials/width/xs"
               },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "initials-xs",
-                  "svg": "<svg viewBox=\"0 0 40 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 25.5 13.5 C 25.5 16.5376 23.0376 19 20 19 C 16.9624 19 14.5 16.5376 14.5 13.5 C 14.5 10.4624 16.9624 8 20 8 C 23.0376 8 25.5 10.4624 25.5 13.5 Z\" fill=\"none\" stroke=\"rgba(253, 239, 253, 1)\" stroke-width=\"3\"/><path d=\"M 10.3433 29.682 L 9.47 31.254 C 9.03481 32.0373 9.60125 33 10.4974 33 H 29.5026 C 30.3988 33 30.9652 32.0373 30.53 31.254 L 29.6567 29.682 C 27.7084 26.175 24.0119 24 20 24 C 15.9882 24 12.2916 26.175 10.3433 29.682 Z\" fill=\"none\" stroke=\"rgba(253, 239, 253, 1)\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
-                  "svgPaintVar": "p/color-avatar-one-text-on-bg-fill",
-                  "iconSize": 20
-                }
-              ]
+              "characters": "TP",
+              "fontSize": 13,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/font-size-325",
+              "fontWeightVar": "p/font-weight-regular",
+              "textFill": "p/color-avatar-one-text-on-bg-fill",
+              "contentProp": "Initials"
             }
           ]
         }
@@ -199,14 +179,8 @@ const COMPONENTS = [
           "clipsContent": true,
           "children": [
             {
-              "type": "frame",
+              "type": "text",
               "name": "initials",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "CENTER",
-                "counter": "CENTER"
-              },
-              "insetOverlay": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
@@ -218,15 +192,13 @@ const COMPONENTS = [
                 "px": 24,
                 "varName": "imported/avatar/initials/width/sm"
               },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "initials-sm",
-                  "svg": "<svg viewBox=\"0 0 40 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 25.5 13.5 C 25.5 16.5376 23.0376 19 20 19 C 16.9624 19 14.5 16.5376 14.5 13.5 C 14.5 10.4624 16.9624 8 20 8 C 23.0376 8 25.5 10.4624 25.5 13.5 Z\" fill=\"none\" stroke=\"rgba(253, 239, 253, 1)\" stroke-width=\"2.5\"/><path d=\"M 10.3433 29.682 L 9.47 31.254 C 9.03481 32.0373 9.60125 33 10.4974 33 H 29.5026 C 30.3988 33 30.9652 32.0373 30.53 31.254 L 29.6567 29.682 C 27.7084 26.175 24.0119 24 20 24 C 15.9882 24 12.2916 26.175 10.3433 29.682 Z\" fill=\"none\" stroke=\"rgba(253, 239, 253, 1)\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
-                  "svgPaintVar": "p/color-avatar-one-text-on-bg-fill",
-                  "iconSize": 24
-                }
-              ]
+              "characters": "TP",
+              "fontSize": 13,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/font-size-325",
+              "fontWeightVar": "p/font-weight-regular",
+              "textFill": "p/color-avatar-one-text-on-bg-fill",
+              "contentProp": "Initials"
             }
           ]
         }
@@ -262,14 +234,8 @@ const COMPONENTS = [
           "clipsContent": true,
           "children": [
             {
-              "type": "frame",
+              "type": "text",
               "name": "initials",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "CENTER",
-                "counter": "CENTER"
-              },
-              "insetOverlay": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
@@ -281,15 +247,13 @@ const COMPONENTS = [
                 "px": 32,
                 "varName": "imported/avatar/initials/width/lg"
               },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "initials-lg",
-                  "svg": "<svg viewBox=\"0 0 40 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 25.5 13.5 C 25.5 16.5376 23.0376 19 20 19 C 16.9624 19 14.5 16.5376 14.5 13.5 C 14.5 10.4624 16.9624 8 20 8 C 23.0376 8 25.5 10.4624 25.5 13.5 Z\" fill=\"none\" stroke=\"rgba(253, 239, 253, 1)\" stroke-width=\"2.5\"/><path d=\"M 10.3433 29.682 L 9.47 31.254 C 9.03481 32.0373 9.60125 33 10.4974 33 H 29.5026 C 30.3988 33 30.9652 32.0373 30.53 31.254 L 29.6567 29.682 C 27.7084 26.175 24.0119 24 20 24 C 15.9882 24 12.2916 26.175 10.3433 29.682 Z\" fill=\"none\" stroke=\"rgba(253, 239, 253, 1)\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
-                  "svgPaintVar": "p/color-avatar-one-text-on-bg-fill",
-                  "iconSize": 32
-                }
-              ]
+              "characters": "TP",
+              "fontSize": 13,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/font-size-325",
+              "fontWeightVar": "p/font-weight-regular",
+              "textFill": "p/color-avatar-one-text-on-bg-fill",
+              "contentProp": "Initials"
             }
           ]
         }
@@ -325,14 +289,8 @@ const COMPONENTS = [
           "clipsContent": true,
           "children": [
             {
-              "type": "frame",
+              "type": "text",
               "name": "initials",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "CENTER",
-                "counter": "CENTER"
-              },
-              "insetOverlay": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
@@ -344,15 +302,13 @@ const COMPONENTS = [
                 "px": 40,
                 "varName": "imported/avatar/initials/width/xl"
               },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "initials-xl",
-                  "svg": "<svg viewBox=\"0 0 40 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 25.5 13.5 C 25.5 16.5376 23.0376 19 20 19 C 16.9624 19 14.5 16.5376 14.5 13.5 C 14.5 10.4624 16.9624 8 20 8 C 23.0376 8 25.5 10.4624 25.5 13.5 Z\" fill=\"none\" stroke=\"rgba(253, 239, 253, 1)\" stroke-width=\"2\"/><path d=\"M 10.3433 29.682 L 9.47 31.254 C 9.03481 32.0373 9.60125 33 10.4974 33 H 29.5026 C 30.3988 33 30.9652 32.0373 30.53 31.254 L 29.6567 29.682 C 27.7084 26.175 24.0119 24 20 24 C 15.9882 24 12.2916 26.175 10.3433 29.682 Z\" fill=\"none\" stroke=\"rgba(253, 239, 253, 1)\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
-                  "svgPaintVar": "p/color-avatar-one-text-on-bg-fill",
-                  "iconSize": 40
-                }
-              ]
+              "characters": "TP",
+              "fontSize": 13,
+              "fontStyle": "Medium",
+              "fontSizeVar": "p/font-size-325",
+              "fontWeightVar": "p/font-weight-regular",
+              "textFill": "p/color-avatar-one-text-on-bg-fill",
+              "contentProp": "Initials"
             }
           ]
         }
@@ -1132,110 +1088,6 @@ function applyOverlay(parent, childNode, childSpec) {
   } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
 }
 
-// B-3 finding 5: an inset-0 overlay part (top/right/bottom/left all 0) is
-// lowered out of flow — ABSOLUTE, stretched to the parent, BEHIND the
-// in-flow siblings — matching the declared anatomy and the HTML render.
-function applyInsetOverlay(parent, childNode, childSpec) {
-  if (!childSpec.insetOverlay) return;
-  try {
-    // CSS overflow:visible — unclip parent AND FRAME/COMPONENT ancestors so
-    // overhanging thumbs/rails aren't clipped by a grandparent track
-    // (Astryx Slider semi-circle residual under default clipsContent:true).
-    for (let n = parent; n && 'clipsContent' in n; n = n.parent) {
-      if (n.type === 'COMPONENT_SET' || n.type === 'PAGE' || n.type === 'SECTION') break;
-      if (dsDeclaredClipStops(n)) break;
-      n.clipsContent = false;
-      dsOverhangUnclip.add(n.id);
-    }
-    // Round 5f (B5E finding 3): only a childless BACKDROP overlay (an
-    // inset:0 fill layer — TextField's backdrop) lowers BEHIND the in-flow
-    // siblings (index 0). A CONTENT overlay that carries glyphs (the Checkbox
-    // check, the RadioButton dot, a remove button) must stay ON TOP at its
-    // natural post-backdrop index — else the opaque backdrop sibling paints
-    // over the glyph (the checkbox backdrop-over-glyph z-order the owner saw,
-    // previously hand-corrected on canvas each re-amend).
-    // Absolute-position round: the backdrop shove applies ONLY to true
-    // inset-0 backdrops (no offsets). An OFFSET overlay (Slider's rail/track
-    // at their y positions) keeps its compile-time paint order — the shove
-    // was inverting rail/track stacking.
-    if ((!childNode.children || childNode.children.length === 0) && !childSpec.insetOffsets) {
-      parent.insertChild(0, childNode);
-    }
-    childNode.layoutPositioning = 'ABSOLUTE';
-    const o = childSpec.insetOffsets || { top: 0, right: 0, bottom: 0, left: 0 };
-    // Astryx Slider thumb finding: inset overlays with fixedWidth/fixedHeight
-    // (20×20 disk) must NOT STRETCH into a hug-zero display:contents parent —
-    // that collapsed thumbs into 1px lines / semi-circles. Keep intrinsic size.
-    const fw = childSpec.fixedWidth && typeof childSpec.fixedWidth.px === 'number' ? childSpec.fixedWidth.px : null;
-    const fh = childSpec.fixedHeight && typeof childSpec.fixedHeight.px === 'number' ? childSpec.fixedHeight.px : null;
-    if (fw != null || fh != null) {
-      childNode.constraints = {
-        horizontal: fw != null ? 'MIN' : 'STRETCH',
-        vertical: fh != null ? 'MIN' : 'STRETCH',
-      };
-      childNode.x = o.left;
-      childNode.y = o.top;
-      childNode.resize(
-        Math.max(1, fw != null ? fw : (parent.width - o.left - o.right)),
-        Math.max(1, fh != null ? fh : (parent.height - o.top - o.bottom)),
-      );
-    } else {
-      childNode.constraints = { horizontal: 'STRETCH', vertical: 'STRETCH' };
-      childNode.x = o.left;
-      childNode.y = o.top;
-      childNode.resize(
-        Math.max(1, parent.width - o.left - o.right),
-        Math.max(1, parent.height - o.top - o.bottom),
-      );
-    }
-  } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
-}
-
-function resizeOutOfFlow(parent, built) {
-  for (const pair of built) {
-    const childSpec = pair[0], childNode = pair[1];
-    try {
-      if (childSpec.insetOverlay) {
-        const o = childSpec.insetOffsets || { top: 0, right: 0, bottom: 0, left: 0 };
-        childNode.x = o.left || 0;
-        childNode.y = o.top || 0;
-        const fw = childSpec.fixedWidth && typeof childSpec.fixedWidth.px === 'number' ? childSpec.fixedWidth.px : null;
-        const fh = childSpec.fixedHeight && typeof childSpec.fixedHeight.px === 'number' ? childSpec.fixedHeight.px : null;
-        if (fw != null || fh != null) {
-          childNode.resize(
-            Math.max(1, fw != null ? fw : (parent.width - (o.left || 0) - (o.right || 0))),
-            Math.max(1, fh != null ? fh : (parent.height - (o.top || 0) - (o.bottom || 0))),
-          );
-        } else {
-          childNode.resize(
-            Math.max(1, parent.width - (o.left || 0) - (o.right || 0)),
-            Math.max(1, parent.height - (o.top || 0) - (o.bottom || 0)),
-          );
-        }
-      } else if (childSpec.absolute && (childSpec.absolute.h === 'STRETCH' || childSpec.absolute.v === 'STRETCH')) {
-        const a = childSpec.absolute;
-        childNode.resize(
-          a.h === 'STRETCH' ? Math.max(parent.width - (a.left || 0) - (a.right || 0), 0.01) : childNode.width,
-          a.v === 'STRETCH' ? Math.max(parent.height - (a.top || 0) - (a.bottom || 0), 0.01) : childNode.height,
-        );
-        if (a.h === 'STRETCH') childNode.x = a.left || 0;
-        if (a.v === 'STRETCH') childNode.y = a.top || 0;
-      }
-    } catch (e) { degrade('FC-RT-ABSOLUTE-PLACEMENT-REFUSED', childNode, 'absolute placement was refused (parent not auto-layout); the child stayed in flow', e); }
-  }
-}
-
-function propagateOverflowVisible(childNode, parent) {
-  if (!childNode || !('clipsContent' in childNode) || childNode.clipsContent !== false) return;
-  if (!dsOverhangUnclip.has(childNode.id)) return;
-  for (let n = parent; n && 'clipsContent' in n; n = n.parent) {
-    if (n.type === 'COMPONENT_SET' || n.type === 'PAGE' || n.type === 'SECTION') break;
-    if (dsDeclaredClipStops(n)) break;
-    n.clipsContent = false;
-    dsOverhangUnclip.add(n.id);
-  }
-}
-
 async function buildNode(spec, registry) {
   let node;
   if (spec.type === 'svg') {
@@ -1243,15 +1095,6 @@ async function buildNode(spec, registry) {
     node.fills = [];
     node.clipsContent = false;
     if (spec.iconSize) node.resize(spec.iconSize, spec.iconSize);
-    if (spec.svgPaintVar) {
-      const glyphPaint = boundPaint(spec.svgPaintVar, node);
-      const rebind = (n) => {
-        if (Array.isArray(n.fills) && n.fills.length > 0) n.fills = [glyphPaint];
-        if (Array.isArray(n.strokes) && n.strokes.length > 0) n.strokes = [glyphPaint];
-        if (n.children) for (const c of n.children) rebind(c);
-      };
-      for (const c of node.children) rebind(c);
-    }
     // FC-SVG-ROTATION: CSS-clockwise → Plugin API counterclockwise
     if (typeof spec.rotation === 'number' && spec.rotation !== 0) node.rotation = -spec.rotation;
   } else if (spec.type === 'text') {
@@ -1392,7 +1235,6 @@ async function buildNode(spec, registry) {
   for (const child of spec.children || []) {
     const childNode = await buildNode(child, registry);
     node.appendChild(childNode);
-    propagateOverflowVisible(childNode, node);
     built.push([child, childNode]);
     applyOverlay(node, childNode, child);
     if (child.pct != null) {
@@ -1430,9 +1272,7 @@ async function buildNode(spec, registry) {
     if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
-    applyInsetOverlay(node, childNode, child);
   }
-  resizeOutOfFlow(node, built);
   if (spec.type === 'root') {
     // meters: re-apply each stamped fraction against its track's LAID-OUT width
     for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
@@ -1815,7 +1655,6 @@ async function amendSet(set, C) {
       for (const childSpec of v.spec.children || []) {
         const childNode = await buildNode(childSpec, registry);
         comp.appendChild(childNode);
-    propagateOverflowVisible(childNode, comp);
         built.push([childSpec, childNode]);
         applyOverlay(comp, childNode, childSpec);
         if (childSpec.pct != null) {
@@ -1832,9 +1671,7 @@ async function amendSet(set, C) {
         if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
         }
-    applyInsetOverlay(comp, childNode, childSpec);
       }
-  resizeOutOfFlow(comp, built);
       report.rebuiltVariants++;
     }
     for (const t of registry.texts) {
@@ -2016,7 +1853,6 @@ async function amendComponent(comp, C) {
   for (const childSpec of v.spec.children || []) {
     const childNode = await buildNode(childSpec, registry);
     comp.appendChild(childNode);
-    propagateOverflowVisible(childNode, comp);
     built.push([childSpec, childNode]);
     applyOverlay(comp, childNode, childSpec);
     if (childSpec.pct != null) {
@@ -2033,9 +1869,7 @@ async function amendComponent(comp, C) {
     if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
-    applyInsetOverlay(comp, childNode, childSpec);
   }
-  resizeOutOfFlow(comp, built);
   for (const t of registry.texts) {
     let k = defKey(t.prop);
     if (!k) { k = comp.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }

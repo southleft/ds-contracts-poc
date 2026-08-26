@@ -19,7 +19,7 @@ const COMPONENTS = [
     "textProps": [
       {
         "property": "Progress",
-        "default": "0"
+        "default": "40"
       },
       {
         "property": "Aria Labelled By",

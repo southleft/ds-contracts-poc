@@ -14,7 +14,7 @@
       "name": "progress",
       "description": "The progression of certain tasks",
       "type": "number",
-      "default": 0,
+      "default": 40,
       "bindings": {
         "figma": {
           "kind": "TEXT",

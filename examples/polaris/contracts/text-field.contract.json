@@ -22,7 +22,8 @@
         "code": {
           "prop": "placeholder"
         }
-      }
+      },
+      "default": "Example"
     },
     {
       "name": "value",

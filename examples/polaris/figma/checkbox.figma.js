@@ -133,22 +133,26 @@ const COMPONENTS = [
                         "px": 18,
                         "varName": "imported/shared/size-18"
                       },
-                      "fill": "imported/checkbox/backdrop/background-color/unchecked",
-                      "effectStack": [
-                        {
-                          "inner": true,
-                          "x": 0,
-                          "y": 0,
-                          "radius": 0,
-                          "color": {
-                            "r": 0.5411764705882353,
-                            "g": 0.5411764705882353,
-                            "b": 0.5411764705882353,
-                            "a": 1
-                          },
-                          "spread": 0.66
+                      "lits": {
+                        "fillColor": {
+                          "r": 1,
+                          "g": 1,
+                          "b": 1,
+                          "a": 1
+                        },
+                        "strokeSides": {
+                          "top": 1,
+                          "right": 1,
+                          "bottom": 1,
+                          "left": 1
+                        },
+                        "strokeColor": {
+                          "r": 0.5411764705882353,
+                          "g": 0.5411764705882353,
+                          "b": 0.5411764705882353,
+                          "a": 1
                         }
-                      ],
+                      },
                       "absolute": {
                         "h": "STRETCH",
                         "v": "STRETCH",
@@ -287,22 +291,20 @@ const COMPONENTS = [
                         "px": 18,
                         "varName": "imported/shared/size-18"
                       },
-                      "fill": "imported/checkbox/backdrop/background-color/checked",
-                      "effectStack": [
-                        {
-                          "inner": true,
-                          "x": 0,
-                          "y": 0,
-                          "radius": 0,
-                          "color": {
-                            "r": 0.18823529411764706,
-                            "g": 0.18823529411764706,
-                            "b": 0.18823529411764706,
-                            "a": 1
-                          },
-                          "spread": 32
+                      "lits": {
+                        "fillColor": {
+                          "r": 0.18823529411764706,
+                          "g": 0.18823529411764706,
+                          "b": 0.18823529411764706,
+                          "a": 1
+                        },
+                        "strokeSides": {
+                          "top": 0,
+                          "right": 0,
+                          "bottom": 0,
+                          "left": 0
                         }
-                      ],
+                      },
                       "absolute": {
                         "h": "STRETCH",
                         "v": "STRETCH",
@@ -477,22 +479,20 @@ const COMPONENTS = [
                         "px": 18,
                         "varName": "imported/shared/size-18"
                       },
-                      "fill": "imported/checkbox/backdrop/background-color/indeterminate",
-                      "effectStack": [
-                        {
-                          "inner": true,
-                          "x": 0,
-                          "y": 0,
-                          "radius": 0,
-                          "color": {
-                            "r": 0.18823529411764706,
-                            "g": 0.18823529411764706,
-                            "b": 0.18823529411764706,
-                            "a": 1
-                          },
-                          "spread": 32
+                      "lits": {
+                        "fillColor": {
+                          "r": 0.18823529411764706,
+                          "g": 0.18823529411764706,
+                          "b": 0.18823529411764706,
+                          "a": 1
+                        },
+                        "strokeSides": {
+                          "top": 0,
+                          "right": 0,
+                          "bottom": 0,
+                          "left": 0
                         }
-                      ],
+                      },
                       "absolute": {
                         "h": "STRETCH",
                         "v": "STRETCH",
@@ -2449,18 +2449,6 @@ function applyFrameSpec(node, spec) {
     // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
     if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
   }
-  if (spec.effectStack) {
-    // v15: full box-shadow stack — multi-layer + inset as native effects.
-    node.effects = spec.effectStack.map((e) => ({
-      type: e.inner ? 'INNER_SHADOW' : 'DROP_SHADOW',
-      color: { r: e.color.r, g: e.color.g, b: e.color.b, a: e.color.a === undefined ? 1 : e.color.a },
-      offset: { x: e.x, y: e.y },
-      radius: e.radius,
-      spread: e.spread || 0,
-      visible: true,
-      blendMode: 'NORMAL',
-    }));
-  }
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
     const h = spec.fixedHeight ? spec.fixedHeight.px : node.height;
@@ -2476,6 +2464,62 @@ function applyFrameSpec(node, spec) {
       if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED';
       else node.primaryAxisSizingMode = 'FIXED';
       if (spec.fixedHeight.varName) node.setBoundVariable('height', need(spec.fixedHeight.varName));
+    }
+  }
+  if (spec.lits) {
+    // v14 literals: no variable to bind — plain values, compile-parsed.
+    const li = spec.lits;
+    if (li.paddingTop !== undefined) node.paddingTop = li.paddingTop;
+    if (li.paddingBottom !== undefined) node.paddingBottom = li.paddingBottom;
+    if (li.paddingLeft !== undefined) node.paddingLeft = li.paddingLeft;
+    if (li.paddingRight !== undefined) node.paddingRight = li.paddingRight;
+    if (li.itemSpacing !== undefined) node.itemSpacing = li.itemSpacing;
+    if (li.radius !== undefined) node.cornerRadius = li.radius;
+    if (li.strokeWeight !== undefined) node.strokeWeight = li.strokeWeight;
+    if (li.minWidth !== undefined) { try { node.minWidth = li.minWidth; } catch (e) { degrade('FC-RT-MIN-SIZE-REFUSED', node, 'minWidth ' + li.minWidth + ' refused (needs auto-layout); the literal min-width does not draw', e); } }
+    if (li.minHeight !== undefined) { try { node.minHeight = li.minHeight; } catch (e) { degrade('FC-RT-MIN-SIZE-REFUSED', node, 'minHeight ' + li.minHeight + ' refused (needs auto-layout); the literal min-height does not draw', e); } }
+    // #60 fix 1 (fillClear precedence): a spec-carried fill is NEVER
+    // trampled — fillClear only clears when no fill was spec'd. The compile
+    // side already drops fillClear when a fill binding exists (applyLiterals);
+    // this runtime guard makes the emitted script safe even for hand-fed
+    // specs carrying both.
+    if (li.fillClear && !spec.fill) node.fills = [];
+    else if (li.fillColor) node.fills = [{ type: 'SOLID', color: { r: li.fillColor.r, g: li.fillColor.g, b: li.fillColor.b }, opacity: li.fillColor.a === undefined ? 1 : li.fillColor.a }];
+    if (li.radiusCorners) {
+      const rc = li.radiusCorners;
+      if (rc.tl !== undefined) node.topLeftRadius = rc.tl;
+      if (rc.tr !== undefined) node.topRightRadius = rc.tr;
+      if (rc.bl !== undefined) node.bottomLeftRadius = rc.bl;
+      if (rc.br !== undefined) node.bottomRightRadius = rc.br;
+    }
+    if (li.strokeColor) node.strokes = [{ type: 'SOLID', color: { r: li.strokeColor.r, g: li.strokeColor.g, b: li.strokeColor.b }, opacity: li.strokeColor.a === undefined ? 1 : li.strokeColor.a }];
+    if (li.strokeSides) {
+      const sw = li.strokeSides;
+      // ELLIPSE/LINE expose strokeWeight only — per-side props throw
+      // "Cannot add property strokeTopWeight, object is not extensible"
+      // (Tailwind ToggleSwitch thumb live finding, Wave B.1).
+      if ('strokeTopWeight' in node) {
+        if (sw.top !== undefined) node.strokeTopWeight = sw.top;
+        if (sw.right !== undefined) node.strokeRightWeight = sw.right;
+        if (sw.bottom !== undefined) node.strokeBottomWeight = sw.bottom;
+        if (sw.left !== undefined) node.strokeLeftWeight = sw.left;
+      } else {
+        const w = sw.top !== undefined ? sw.top : (sw.right !== undefined ? sw.right : (sw.bottom !== undefined ? sw.bottom : sw.left));
+        if (w !== undefined) node.strokeWeight = w;
+      }
+    }
+    if (li.width !== undefined || li.height !== undefined) {
+      node.resize(li.width !== undefined ? li.width : node.width, li.height !== undefined ? li.height : node.height);
+      // GRID's primary axis is HORIZONTAL (GP1b: primaryAxisSizingMode='AUTO'
+      // reads back as layoutSizingHorizontal 'HUG'), like a HORIZONTAL frame.
+      const gm = (spec.layout || { mode: 'HORIZONTAL' }).mode;
+      const horizontalIsPrimary = gm === 'HORIZONTAL' || gm === 'GRID';
+      if (li.width !== undefined) {
+        if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED'; else node.counterAxisSizingMode = 'FIXED';
+      }
+      if (li.height !== undefined) {
+        if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED'; else node.primaryAxisSizingMode = 'FIXED';
+      }
     }
   }
 }
@@ -2900,18 +2944,6 @@ async function buildNode(spec, registry) {
       node.clipsContent = false;
       try { node.resize(spec.shape.width, spec.shape.height); } catch (e) { degrade('FC-RT-SVG-RESIZE-REFUSED', node, 'the glyph kept its intrinsic size (resize to ' + spec.shape.width + 'x' + spec.shape.height + ' refused)', e); }
       if (typeof spec.shape.rotation === 'number' && spec.shape.rotation !== 0) node.rotation = -spec.shape.rotation;
-  if (spec.effectStack) {
-    // v15: full box-shadow stack — multi-layer + inset as native effects.
-    node.effects = spec.effectStack.map((e) => ({
-      type: e.inner ? 'INNER_SHADOW' : 'DROP_SHADOW',
-      color: { r: e.color.r, g: e.color.g, b: e.color.b, a: e.color.a === undefined ? 1 : e.color.a },
-      offset: { x: e.x, y: e.y },
-      radius: e.radius,
-      spread: e.spread || 0,
-      visible: true,
-      blendMode: 'NORMAL',
-    }));
-  }
     } else {
     // v9 shape (#42): a REAL parametric node with native rotation.
     node = spec.shape.kind === 'ellipse' ? figma.createEllipse()
@@ -2939,22 +2971,33 @@ async function buildNode(spec, registry) {
       node.strokes = [boundPaint(spec.stroke, node)];
       node.strokeAlign = 'INSIDE';
     }
+    // CARBON LIVE-DEFECT ROUND (D2): a shape's LITERAL RING. An unchecked
+    // Carbon checkbox box is a transparent square with a 1px border — a ring
+    // with no paint, no weight and no radius is not a box.
+    else if (spec.lits && spec.lits.strokeColor) {
+      node.strokes = [{ type: 'SOLID', color: { r: spec.lits.strokeColor.r, g: spec.lits.strokeColor.g, b: spec.lits.strokeColor.b }, opacity: spec.lits.strokeColor.a === undefined ? 1 : spec.lits.strokeColor.a }];
+      node.strokeAlign = 'INSIDE';
+    }
+    if (spec.lits && spec.lits.strokeWeight !== undefined) node.strokeWeight = spec.lits.strokeWeight;
+    if (spec.lits && spec.lits.strokeSides) {
+      const sw = spec.lits.strokeSides;
+      // ELLIPSE/LINE/etc. expose strokeWeight only — per-side props throw
+      // "Cannot add property strokeTopWeight, object is not extensible".
+      if ('strokeTopWeight' in node) {
+        if (sw.top !== undefined) node.strokeTopWeight = sw.top;
+        if (sw.right !== undefined) node.strokeRightWeight = sw.right;
+        if (sw.bottom !== undefined) node.strokeBottomWeight = sw.bottom;
+        if (sw.left !== undefined) node.strokeLeftWeight = sw.left;
+      } else {
+        const w = sw.top !== undefined ? sw.top : (sw.right !== undefined ? sw.right : (sw.bottom !== undefined ? sw.bottom : sw.left));
+        if (w !== undefined) node.strokeWeight = w;
+      }
+    }
+    if (spec.lits && spec.lits.radius !== undefined) node.cornerRadius = spec.lits.radius;
     for (const [field, varName] of Object.entries(spec.bindings || {})) {
       node.setBoundVariable(field, need(varName));
     }
     if (typeof spec.shape.rotation === 'number' && spec.shape.rotation !== 0) node.rotation = -spec.shape.rotation;
-  if (spec.effectStack) {
-    // v15: full box-shadow stack — multi-layer + inset as native effects.
-    node.effects = spec.effectStack.map((e) => ({
-      type: e.inner ? 'INNER_SHADOW' : 'DROP_SHADOW',
-      color: { r: e.color.r, g: e.color.g, b: e.color.b, a: e.color.a === undefined ? 1 : e.color.a },
-      offset: { x: e.x, y: e.y },
-      radius: e.radius,
-      spread: e.spread || 0,
-      visible: true,
-      blendMode: 'NORMAL',
-    }));
-  }
     }
   } else {
     node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();

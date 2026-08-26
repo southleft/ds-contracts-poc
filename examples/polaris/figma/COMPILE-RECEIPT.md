@@ -12,7 +12,7 @@ Every committed `figma/*.figma.js` passed BOTH gates at generation time:
 
 | contract | variants compiled | variant axes | distinct bound variable names | script committed |
 |---|---|---|---|---|
-| `polaris.avatar` | 5 | 1 | 48 | yes |
+| `polaris.avatar` | 5 | 1 | 49 | yes |
 | `polaris.badge` | 56 | 2 | 49 | yes |
 | `polaris.banner` | 4 | 1 | 49 | yes |
 | `polaris.button` | 300 | 4 | 62 | yes |

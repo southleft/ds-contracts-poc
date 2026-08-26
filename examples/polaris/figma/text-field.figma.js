@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "polaris.text-field",
     "version": "0.4.0",
     "anchorKey": null,
-    "description": "TextField — generated from contract polaris.text-field v0.4.0 † (194 code-only facts — see plugin report)",
+    "description": "TextField — generated from contract polaris.text-field v0.4.0 † (193 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -347,7 +347,7 @@ const COMPONENTS = [
                             {
                               "type": "text",
                               "name": "placeholder",
-                              "characters": "",
+                              "characters": "Example",
                               "fontSize": 16,
                               "fontStyle": "Medium",
                               "lineHeight": {
@@ -656,7 +656,7 @@ const COMPONENTS = [
                             {
                               "type": "text",
                               "name": "placeholder",
-                              "characters": "",
+                              "characters": "Example",
                               "fontSize": 16,
                               "fontStyle": "Medium",
                               "lineHeight": {
@@ -967,7 +967,7 @@ const COMPONENTS = [
                             {
                               "type": "text",
                               "name": "placeholder",
-                              "characters": "",
+                              "characters": "Example",
                               "fontSize": 16,
                               "fontStyle": "Medium",
                               "lineHeight": {
@@ -1276,7 +1276,7 @@ const COMPONENTS = [
                             {
                               "type": "text",
                               "name": "placeholder",
-                              "characters": "",
+                              "characters": "Example",
                               "fontSize": 16,
                               "fontStyle": "Medium",
                               "lineHeight": {
@@ -1630,7 +1630,7 @@ const COMPONENTS = [
                             {
                               "type": "text",
                               "name": "placeholder",
-                              "characters": "",
+                              "characters": "Example",
                               "fontSize": 16,
                               "fontStyle": "Medium",
                               "lineHeight": {
@@ -1939,7 +1939,7 @@ const COMPONENTS = [
                             {
                               "type": "text",
                               "name": "placeholder",
-                              "characters": "",
+                              "characters": "Example",
                               "fontSize": 16,
                               "fontStyle": "Medium",
                               "lineHeight": {
@@ -2248,7 +2248,7 @@ const COMPONENTS = [
                             {
                               "type": "text",
                               "name": "placeholder",
-                              "characters": "",
+                              "characters": "Example",
                               "fontSize": 16,
                               "fontStyle": "Medium",
                               "lineHeight": {
@@ -2557,7 +2557,7 @@ const COMPONENTS = [
                             {
                               "type": "text",
                               "name": "placeholder",
-                              "characters": "",
+                              "characters": "Example",
                               "fontSize": 16,
                               "fontStyle": "Medium",
                               "lineHeight": {
@@ -3618,17 +3618,6 @@ const COMPONENTS = [
         "channel": "left",
         "value": "{imported.shared.size-0}",
         "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
-        "variants": {
-          "count": 8,
-          "of": 8
-        }
-      },
-      {
-        "part": "input",
-        "kind": "channel",
-        "channel": "placeholder",
-        "value": "",
-        "reason": "the placeholder STRING is an HTML attribute the browser renders through `::placeholder`, not DOM text — a computed-style capture reads its ink and never its characters, and this contract carries no default for the bound text prop and no literal `placeholder` attr. The TEXT node is kept so the Figma TEXT property can bind to it, and it is left EMPTY rather than filled with an invented string.",
         "variants": {
           "count": 8,
           "of": 8
