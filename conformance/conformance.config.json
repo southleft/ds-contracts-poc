@@ -196,6 +196,51 @@
       "axes": []
     },
     {
+      "__case": "combobox: the CLOSED combobox trigger - `justify-content: space-between` pushing a value label and a two-border chevron box to opposite ends of a bordered row — declared CARRIED",
+      "name": "CaseComboboxClosedTrigger",
+      "importName": "CaseComboboxClosedTrigger",
+      "contract": "conformance/seeds/combobox-closed-trigger.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "combobox: `z-index: 10` on an absolutely positioned listbox that OVERLAPS its trigger - explicit paint order, not document order — declared REFUSED",
+      "name": "CaseComboboxListboxStackingOrder",
+      "importName": "CaseComboboxListboxStackingOrder",
+      "contract": "conformance/seeds/combobox-listbox-stacking-order.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "combobox: 5 sibling options where ONE is HIGHLIGHTED (active descendant) by a single-SIDE border - `border-left: 3px solid rgb(37, 99, 235)` against a transparent left border on the other four — declared CARRIED",
+      "name": "CaseComboboxOptionHighlighted",
+      "importName": "CaseComboboxOptionHighlighted",
+      "contract": "conformance/seeds/combobox-option-highlighted.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "combobox: 5 sibling options where ONE is SELECTED - a distinct fill (rgb(219, 234, 254)) and weight among four identical siblings — declared CARRIED",
+      "name": "CaseComboboxOptionSelected",
+      "importName": "CaseComboboxOptionSelected",
+      "contract": "conformance/seeds/combobox-option-selected.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "combobox: the OPEN listbox as an out-of-flow overlay - `position: absolute; top: 34px` under a `position: relative` trigger, so the popover does not participate in the trigger's flow — declared CARRIED",
+      "name": "CaseComboboxPopoverOverlayInset",
+      "importName": "CaseComboboxPopoverOverlayInset",
+      "contract": "conformance/seeds/combobox-popover-overlay-inset.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
       "__case": "at-rules: @container (min-inline-size: 100px) { … } — declared UNSUPPORTED",
       "name": "CaseContainerQuery",
       "importName": "CaseContainerQuery",
@@ -847,6 +892,42 @@
       "axes": []
     },
     {
+      "__case": "repetition: a 7-column CSS grid of 35 auto-placed cells (5 weeks), the LAST carrying a distinct paint (rgb(160, 32, 160)) — declared CARRIED",
+      "name": "CaseRepeatGridMonth",
+      "importName": "CaseRepeatGridMonth",
+      "contract": "conformance/seeds/repeat-grid-month.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "repetition: 7 adjacent same-shape siblings, the LAST carrying a distinct paint (rgb(64, 128, 191)) — declared CARRIED",
+      "name": "CaseRepeatSiblingsSeven",
+      "importName": "CaseRepeatSiblingsSeven",
+      "contract": "conformance/seeds/repeat-siblings-seven.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "repetition: 31 adjacent same-shape siblings (a wrapping flex run), the LAST carrying a distinct paint (rgb(32, 160, 96)) — declared CARRIED",
+      "name": "CaseRepeatSiblingsThirtyone",
+      "importName": "CaseRepeatSiblingsThirtyone",
+      "contract": "conformance/seeds/repeat-siblings-thirtyone.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "repetition: 3 adjacent same-shape siblings, the LAST carrying a distinct paint (rgb(191, 64, 32)) — declared CARRIED",
+      "name": "CaseRepeatSiblingsThree",
+      "importName": "CaseRepeatSiblingsThree",
+      "contract": "conformance/seeds/repeat-siblings-three.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
       "__case": "transform: rotate: 15deg (the INDEPENDENT transform property) — declared UNSUPPORTED",
       "name": "CaseRotateIndependentProperty",
       "importName": "CaseRotateIndependentProperty",
@@ -886,6 +967,42 @@
       "contract": "conformance/seeds/svg-outside-grammar.contract.json",
       "sampleText": "",
       "axes": []
+    },
+    {
+      "__case": "table: per-COLUMN text alignment - the label cell `text-align: left`, the numeric cell `text-align: right`, at fixed column widths — declared CARRIED",
+      "name": "CaseTableColumnNumericAlignment",
+      "importName": "CaseTableColumnNumericAlignment",
+      "contract": "conformance/seeds/table-column-numeric-alignment.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "table: a div-built table whose HEADER row differs from the body rows by weight (700) and fill - no table formatting context involved — declared CARRIED",
+      "name": "CaseTableHeaderRowDistinct",
+      "importName": "CaseTableHeaderRowDistinct",
+      "contract": "conformance/seeds/table-header-row-distinct.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "table: real <table> markup: thead/tbody row GROUPS, whose UA display is `table-header-group` / `table-row-group` - a formatting context with no box of its own — declared REFUSED",
+      "name": "CaseTableSemanticRowGroup",
+      "importName": "CaseTableSemanticRowGroup",
+      "contract": "conformance/seeds/table-semantic-row-group.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "table: zebra striping by STRUCTURAL SELECTOR - `.cf-a:nth-child(even) { background-color }` over 6 otherwise identical rows — declared CARRIED",
+      "name": "CaseTableZebraNthChild",
+      "importName": "CaseTableZebraNthChild",
+      "contract": "conformance/seeds/table-zebra-nth-child.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
     },
     {
       "__case": "text: text-indent: 9999px on a box pinned to 8px (the status-pip idiom: the label is pushed out of the box and only the dot shows) — declared LOWERED",

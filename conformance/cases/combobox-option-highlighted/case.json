@@ -1,0 +1,32 @@
+{
+  "feature": "combobox",
+  "construct": "5 sibling options where ONE is HIGHLIGHTED (active descendant) by a single-SIDE border - `border-left: 3px solid rgb(37, 99, 235)` against a transparent left border on the other four",
+  "why": "Highlighted and selected are different states of the same list and a combobox needs both at once, so they are two cases rather than one. This one is carried by a PER-SIDE border, the accent bar every listbox uses for keyboard focus: the four quiet siblings reserve the same 3px so nothing shifts when the highlight moves, which means the construct is entirely a border COLOUR difference on one edge. A per-side border that collapses to a uniform stroke takes the direction of the highlight with it.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.c.tokens.border-left-color",
+  "observable": {
+    "part": "c",
+    "channel": "border-left-color",
+    "capturedValue": "rgb(37, 99, 235)"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "an individual-side stroke on the highlighted option's frame"
+  },
+  "blockStage": true,
+  "predictedDifficulty": "expected-wall",
+  "mustHave": [
+    "the listbox shows exactly 5 options, stacked vertically",
+    "exactly ONE option (the 2nd, 'Beta') carries a coloured bar on its LEFT edge only",
+    "the accent bar is on the left edge - not the right, not all four sides",
+    "the other 4 options' text left edges line up with the highlighted option's text left edge (nothing shifts)"
+  ],
+  "id": "combobox-option-highlighted",
+  "predictedWall": {
+    "code": "FC-BORDER-STYLE-NOT-SYNTHESISED",
+    "status": "EXISTING (note the British -ISED spelling). FC-DUMP-PROPOSE-STROKE-WEIGHT-SIDES is the adjacent CLOSED finding and does NOT cover this.",
+    "half": "canvas round trip",
+    "why": "AMENDED before any run - upgraded from `hard`. In the sealing commit I leaned on FC-DUMP-PROPOSE-STROKE-WEIGHT-SIDES being closed and flagged, correctly, that it was about stroke WEIGHT per side while this case varies stroke COLOUR per side. The survey settles it against me: spec/channel-table.json's border-{top,right,bottom,left}-color rows all read 'one strokes paint serves all four sides - lowered only when every carried side agrees.' This case's four quiet options carry a TRANSPARENT left border and the highlighted one carries an opaque blue left border, so the sides do NOT agree by construction, and a single strokes paint cannot hold the difference. The nearest precedent for the shape of the refusal is `propose.radii-not-uniform-refused` - 'border-radius is a single channel and four differing bindings are not representable', which drops all four corner bindings with no per-corner fallback. I predict the accent bar comes back on all four sides or not at all."
+  }
+}

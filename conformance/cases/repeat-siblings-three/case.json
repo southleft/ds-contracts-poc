@@ -1,0 +1,27 @@
+{
+  "feature": "repetition",
+  "construct": "3 adjacent same-shape siblings, the LAST carrying a distinct paint (rgb(191, 64, 32))",
+  "why": "3 is the eligibility threshold the INVERSE rule uses (core/propose-figma.ts, >=3 adjacent same-component instances -> part.repeat). The forward direction has no such rule at all, so this is the smallest repetition an engine could be expected to notice. At three siblings the ordinary anatomy walk should carry every one of them as its own part; the odd sibling's paint is the probe, because a collapse that keeps 'a cell' and loses the one that DIFFERS is the failure that makes a calendar wrong rather than merely large.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.b.tokens.background-color",
+  "observable": {
+    "part": "b",
+    "channel": "background-color",
+    "capturedValue": "rgb(191, 64, 32)"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "three sibling frames in an auto-layout row; the third is a different fill"
+  },
+  "blockStage": true,
+  "predictedDifficulty": "easy",
+  "mustHave": [
+    "the canvas shows exactly 3 sibling boxes in one horizontal row",
+    "the 3rd box is a visibly different colour (red-brown) from the first 2 (pale blue-grey)",
+    "the 3 boxes are the same size as each other (16x16)",
+    "the row reads left-to-right with a visible gap between boxes"
+  ],
+  "id": "repeat-siblings-three",
+  "predictedWall": null
+}

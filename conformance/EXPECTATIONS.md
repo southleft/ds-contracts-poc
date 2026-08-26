@@ -16,13 +16,13 @@ repo it is simply absent from the denominator and scores 100%.
 
 | | |
 |---|---|
-| cases | **108** |
-| 🟢 pass | **102** |
-| 🔴 red | **6** |
+| cases | **121** |
+| 🟢 pass | **113** |
+| 🔴 red | **8** |
 | 🟡 yellow (UNSUPPORTED, never read) | **0** |
 | **UNSUPPORTED declared — THE RATCHET** | **18** · may only DECREASE without an explicit manifest edit |
 
-Declared dispositions: CARRIED 65 · LOWERED 5 · REFUSED 20 · UNSUPPORTED 18.
+Declared dispositions: CARRIED 76 · LOWERED 5 · REFUSED 22 · UNSUPPORTED 18.
 
 **A green gate here would mean the cases are too easy.** The point of the
 fixture is a measured frontier, and every red below is an open, named defect —
@@ -30,7 +30,7 @@ recorded in `conformance/BASELINE.json` so it cannot drift in either direction:
 a new red is a regression, and a red that becomes green must be re-recorded, so
 a fix can never be absorbed silently.
 
-## SILENT-LOSS 🔴 — 1
+## SILENT-LOSS 🔴 — 2
 
 The class the fixture exists to catch, and the only one that is **never waivable**.
 The construct is observable in `captured-truth.json`, absent from the contract, and
@@ -38,6 +38,15 @@ named by no string in the union of `LEDGER.md`, the receipt/refusal arrays of
 `enriched.extension.json`, `review-queue.json`, `source-bindings.json.skips`,
 `scorecard.json` `namedLosses`, and the run's stdout. The pipeline read the fact,
 dropped it, and said nothing.
+
+### `combobox-closed-trigger`
+
+- **construct** — `the CLOSED combobox trigger - `justify-content: space-between` pushing a value label and a two-border chevron box to opposite ends of a bordered row`
+- **why it matters** — The closed state is the combobox a designer actually sees 99% of the time, and `space-between` is the whole reason the chevron is at the far right rather than next to the text. The chevron is drawn from two real borders rather than a pseudo-element glyph on purpose: `::before { content }` is already pinned REFUSED (pseudo-content-glyph), and this case is about the trigger's LAYOUT, not about re-measuring that wall.
+- **declared** CARRIED
+- **measured** — channel `justify-content`; observed on `root`; carried **not at all**
+- **canvas** — PRESENT: primaryAxisAlignItems SPACE_BETWEEN on the trigger frame
+- **verdict** — 🔴 **SILENT-LOSS**: declared CARRIED; observed but neither carried nor named anywhere
 
 ### `hard-svg-glyph-stroke`
 
@@ -48,13 +57,22 @@ dropped it, and said nothing.
 - **canvas** — PRESENT: the promoted glyph asset is imported as vector markup; the stroke weight rides the markup
 - **verdict** — 🔴 **SILENT-LOSS**: declared CARRIED; observed but neither carried nor named anywhere
 
-## UNDECLARED-CARRY (HARMFUL) 🔴 — 3
+## UNDECLARED-CARRY (HARMFUL) 🔴 — 4
 
 The engine carried a construct the manifest says has **no canvas spelling**. The
 doctrine calls UNDECLARED-CARRY "good news, wrong manifest" — and usually it is.
 It is not, when the thing carried cannot be drawn: then the carriage is the defect
 and the manifest was right. Fixing these means changing the engine, not the
 manifest.
+
+### `combobox-listbox-stacking-order`
+
+- **construct** — ``z-index: 10` on an absolutely positioned listbox that OVERLAPS its trigger - explicit paint order, not document order`
+- **why it matters** — Separated from the inset case deliberately. That one asks where the popover goes; this one asks what happens when it lands ON something and the author has said, in CSS, which one wins. The canvas HAS a spelling for paint order - a child's index in the layer tree - so this is not a construct with nowhere to go; the question is whether an explicit z-index is read, translated, or dropped. Declared REFUSED rather than CARRIED because no ordering channel is in the carried vocabulary today, and a silent drop here means a popover that renders behind the thing it is supposed to cover.
+- **declared** REFUSED by the name `z-index` in LEDGER.md
+- **measured** — channel `z-index`; observed on `b`; carried as `b.tokens = 10`
+- **canvas** — ABSENT: the canvas spells paint order as child index; a numeric z-index has no direct channel
+- **verdict** — 🔴 **UNDECLARED-CARRY**: declared REFUSED but the engine CARRIED it — update the manifest
 
 ### `container-query`
 
@@ -124,6 +142,11 @@ collapsing into one indistinguishable receipt.
 | 🟢 | `color-rgb-solid` | color | `background-color: rgb(25, 118, 210)` | CARRIED | carried | PASS |
 | 🟢 | `color-rgba-alpha` | color | `background-color: rgba(25, 118, 210, 0.5)` | CARRIED | carried | PASS |
 | 🟢 | `oklch-color` | color | `background-color: oklch(0.6 0.15 250)` | CARRIED | carried | PASS |
+| 🔴 | `combobox-closed-trigger` | combobox | `the CLOSED combobox trigger - `justify-content: space-between` pushing a value label and a two-border chevron box to opposite ends of a bordered row` | CARRIED | dropped, unnamed | SILENT-LOSS |
+| 🔴 | `combobox-listbox-stacking-order` | combobox | ``z-index: 10` on an absolutely positioned listbox that OVERLAPS its trigger - explicit paint order, not document order` | REFUSED | carried | UNDECLARED-CARRY |
+| 🟢 | `combobox-option-highlighted` | combobox | `5 sibling options where ONE is HIGHLIGHTED (active descendant) by a single-SIDE border - `border-left: 3px solid rgb(37, 99, 235)` against a transparent left border on the other four` | CARRIED | carried | PASS |
+| 🟢 | `combobox-option-selected` | combobox | `5 sibling options where ONE is SELECTED - a distinct fill (rgb(219, 234, 254)) and weight among four identical siblings` | CARRIED | carried | PASS |
+| 🟢 | `combobox-popover-overlay-inset` | combobox | `the OPEN listbox as an out-of-flow overlay - `position: absolute; top: 34px` under a `position: relative` trigger, so the popover does not participate in the trigger's flow` | CARRIED | carried | PASS |
 | 🟢 | `calc-var` | custom-properties | `padding-left: calc(var(--cf-space-2) * 2)` | LOWERED | carried | PASS |
 | 🟢 | `custom-prop-two-hop` | custom-properties | `--a: #123456; --b: var(--a); color: var(--b)` | LOWERED | carried | PASS |
 | 🟢 | `var-fallback-chain` | custom-properties | `color: var(--cf-missing, var(--cf-color-secondary, #333))` | CARRIED | carried | PASS |
@@ -204,10 +227,18 @@ collapsing into one indistinguishable receipt.
 | 🟢 | `pseudo-placeholder` | pseudo-elements | `input::placeholder { color }` | UNSUPPORTED | refused, by name | PASS |
 | 🟢 | `pseudo-selection` | pseudo-elements | `::selection { background-color }` | UNSUPPORTED | not read | PASS |
 | 🟢 | `content-visibility-auto` | rendering | `content-visibility: auto` | UNSUPPORTED | refused, by name | PASS |
+| 🟢 | `repeat-grid-month` | repetition | `a 7-column CSS grid of 35 auto-placed cells (5 weeks), the LAST carrying a distinct paint (rgb(160, 32, 160))` | CARRIED | carried | PASS |
+| 🟢 | `repeat-siblings-seven` | repetition | `7 adjacent same-shape siblings, the LAST carrying a distinct paint (rgb(64, 128, 191))` | CARRIED | carried | PASS |
+| 🟢 | `repeat-siblings-thirtyone` | repetition | `31 adjacent same-shape siblings (a wrapping flex run), the LAST carrying a distinct paint (rgb(32, 160, 96))` | CARRIED | carried | PASS |
+| 🟢 | `repeat-siblings-three` | repetition | `3 adjacent same-shape siblings, the LAST carrying a distinct paint (rgb(191, 64, 32))` | CARRIED | carried | PASS |
 | 🟢 | `shadow-part` | shadow-dom | `::part(label) styling across an OPEN shadow boundary` | CARRIED | carried | PASS |
 | 🟢 | `shadow-root-closed` | shadow-dom | `a custom element with a CLOSED shadow root` | UNSUPPORTED | not read | PASS |
 | 🟢 | `hard-empty-region-min-size` | slot | `a CHILDLESS region whose only size facts are min-height / min-width` | CARRIED | carried | PASS |
 | 🟢 | `svg-outside-grammar` | svg | `<svg> whose children are <circle> and <rect>` | REFUSED | refused, by name | PASS |
+| 🟢 | `table-column-numeric-alignment` | table | `per-COLUMN text alignment - the label cell `text-align: left`, the numeric cell `text-align: right`, at fixed column widths` | CARRIED | carried | PASS |
+| 🟢 | `table-header-row-distinct` | table | `a div-built table whose HEADER row differs from the body rows by weight (700) and fill - no table formatting context involved` | CARRIED | carried | PASS |
+| 🟢 | `table-semantic-row-group` | table | `real <table> markup: thead/tbody row GROUPS, whose UA display is `table-header-group` / `table-row-group` - a formatting context with no box of its own` | REFUSED | refused, by name | PASS |
+| 🟢 | `table-zebra-nth-child` | table | `zebra striping by STRUCTURAL SELECTOR - `.cf-a:nth-child(even) { background-color }` over 6 otherwise identical rows` | CARRIED | carried | PASS |
 | 🟢 | `hard-text-indent-eviction` | text | `text-indent: -9999px — text evicted from its own box` | CARRIED | carried | PASS |
 | 🟢 | `text-indent-off-box` | text | `text-indent: 9999px on a box pinned to 8px (the status-pip idiom: the label is pushed out of the box and only the dot shows)` | LOWERED | carried | PASS |
 | 🟢 | `text-overflow-ellipsis` | text | `text-overflow: ellipsis + overflow hidden + nowrap` | CARRIED | carried | PASS |

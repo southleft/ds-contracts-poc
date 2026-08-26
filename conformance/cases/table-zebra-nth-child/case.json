@@ -1,0 +1,32 @@
+{
+  "feature": "table",
+  "construct": "zebra striping by STRUCTURAL SELECTOR - `.cf-a:nth-child(even) { background-color }` over 6 otherwise identical rows",
+  "why": "Zebra rules are how every data table in every library separates its rows, and they are the one paint in a table that no element ASKS for - it arrives from the element's position among its siblings. A reader that matches rules to elements has to evaluate `:nth-child` to see it at all. This is also the sharpest form of the repetition question: six identical rows where three of them are a different colour for a reason found nowhere in their own markup.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.a-2.tokens.background-color",
+  "observable": {
+    "part": "a-2",
+    "channel": "background-color",
+    "capturedValue": "rgb(244, 246, 248)"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "alternating row fills; on the canvas the stripe is a literal fill per row, not a rule"
+  },
+  "blockStage": true,
+  "predictedDifficulty": "expected-wall",
+  "mustHave": [
+    "the table shows 6 rows",
+    "rows alternate between two background fills, starting with the un-tinted one",
+    "exactly 3 rows carry the tinted fill (rows 2, 4 and 6)",
+    "the stripe is visible as a fill on the row, not as a border or a gap"
+  ],
+  "id": "table-zebra-nth-child",
+  "predictedWall": {
+    "code": "FC-NTH-CHILD-STRIPE-UNREAD",
+    "status": "PROPOSED - no existing code covers this",
+    "half": "capture (contract)",
+    "why": "AMENDED before any run - upgraded from `hard`. A repo-wide search for nth-child/zebra finds no code, no door and no lowering rule; the only hits are internal showcase CSS and two RESEARCH mentions (docs/research/enterprise-components.md:227 proposes a `tokensWhen` 'nth-child token flip'; PATTERN-TAXONOMY.md:116 lists zebra as a Table variant axis). What DOES exist is generic and subtractive: the selector-grammar doors `libcss.pseudo-attribute-refusal` ('Any other pseudo or attribute selector is not promotable' - drops the rule) and `libcss.combinator-refusal`. A structural pseudo-class like :nth-child(even) falls to those, which means the stripe is dropped by a door whose receipt names the SELECTOR GRAMMAR rather than the stripe. Zebra striping is how every data table in every library separates its rows, and it has no name of its own."
+  }
+}

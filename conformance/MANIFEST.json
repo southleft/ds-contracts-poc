@@ -2,11 +2,11 @@
   "_marker": "THE DENOMINATOR. Hand-authored per case, generated into one index. Deliberately NOT derived from isFusable / styled / DECLARED_CHANNELS / CHANNEL_TO_COMPUTED / TOKEN_CHANNELS / carriedParts — every instrument in the pipeline derives its denominator from the same filter that decides carriage, which is why a channel the filter never opened scores 100%. This file is the independent one.",
   "generatedBy": "conformance/build.ts",
   "library": "@ds-contracts/conformance@0.1.0",
-  "count": 108,
+  "count": 121,
   "byExpectation": {
-    "CARRIED": 65,
+    "CARRIED": 76,
     "LOWERED": 5,
-    "REFUSED": 20,
+    "REFUSED": 22,
     "UNSUPPORTED": 18
   },
   "cases": [
@@ -351,6 +351,160 @@
       "canvas": {
         "expect": "PRESENT",
         "note": "SOLID fill with opacity"
+      }
+    },
+    {
+      "feature": "combobox",
+      "construct": "the CLOSED combobox trigger - `justify-content: space-between` pushing a value label and a two-border chevron box to opposite ends of a bordered row",
+      "why": "The closed state is the combobox a designer actually sees 99% of the time, and `space-between` is the whole reason the chevron is at the far right rather than next to the text. The chevron is drawn from two real borders rather than a pseudo-element glyph on purpose: `::before { content }` is already pinned REFUSED (pseudo-content-glyph), and this case is about the trigger's LAYOUT, not about re-measuring that wall.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.layout.justify / primaryAxisAlignItems",
+      "observable": {
+        "part": "root",
+        "channel": "justify-content",
+        "capturedValue": "space-between"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "primaryAxisAlignItems SPACE_BETWEEN on the trigger frame"
+      },
+      "blockStage": true,
+      "predictedDifficulty": "easy",
+      "mustHave": [
+        "the trigger is a single bordered row with a rounded outline",
+        "the value text sits at the left end and the chevron at the right end, with empty space between them",
+        "the chevron is a small mark near the right inner edge, not adjacent to the text",
+        "the trigger shows no list of options"
+      ],
+      "id": "combobox-closed-trigger",
+      "predictedWall": null
+    },
+    {
+      "feature": "combobox",
+      "construct": "`z-index: 10` on an absolutely positioned listbox that OVERLAPS its trigger - explicit paint order, not document order",
+      "why": "Separated from the inset case deliberately. That one asks where the popover goes; this one asks what happens when it lands ON something and the author has said, in CSS, which one wins. The canvas HAS a spelling for paint order - a child's index in the layer tree - so this is not a construct with nowhere to go; the question is whether an explicit z-index is read, translated, or dropped. Declared REFUSED rather than CARRIED because no ordering channel is in the carried vocabulary today, and a silent drop here means a popover that renders behind the thing it is supposed to cover.",
+      "expect": "REFUSED",
+      "expectName": "z-index",
+      "expectWhere": "LEDGER.md",
+      "observable": {
+        "part": "b",
+        "channel": "z-index",
+        "capturedValue": "10"
+      },
+      "canvas": {
+        "expect": "ABSENT",
+        "note": "the canvas spells paint order as child index; a numeric z-index has no direct channel"
+      },
+      "blockStage": true,
+      "predictedDifficulty": "hard",
+      "mustHave": [
+        "the white listbox is drawn IN FRONT OF the grey trigger where the two overlap",
+        "the listbox's text is legible - not covered by the trigger's fill",
+        "if the ordering cannot be carried, an artifact names z-index as the reason"
+      ],
+      "id": "combobox-listbox-stacking-order",
+      "predictedWall": {
+        "code": "layout-item-reverse-z-index",
+        "status": "EXISTING ledger receipt name. I WITHDRAW the FC-STACKING-ORDER-UNREAD code I proposed in the sealing commit - it was wrong.",
+        "half": "capture (contract)",
+        "why": "AMENDED before any run. In the sealing commit I wrote that I had searched all four spec registers and found no stacking/paint-order code, and proposed a new one. That claim was FALSE and I am recording the miss rather than quietly deleting it. spec/channel-table.json classes `z-index` as LEDGERED - not REFUSED - with the note 'canvas stacking is child order; reversed z ledgered on read (layout-item-reverse-z-index)'. So the construct is both modelled and named, and the honest prediction is that this case PASSES by name. `isolation` is LEDGERED on the same reasoning. What IS a genuine hard wall next door, and is NOT what this case tests, is `order`: REFUSED as `code-only:no-schema-channel`, and lowering rule `schema.order-unregistered-channel` is one of only three `status: wall` rules in the whole register - 'worse than a drop, a channel name no registry knows can make validateContract refuse the whole component.'"
+      }
+    },
+    {
+      "feature": "combobox",
+      "construct": "5 sibling options where ONE is HIGHLIGHTED (active descendant) by a single-SIDE border - `border-left: 3px solid rgb(37, 99, 235)` against a transparent left border on the other four",
+      "why": "Highlighted and selected are different states of the same list and a combobox needs both at once, so they are two cases rather than one. This one is carried by a PER-SIDE border, the accent bar every listbox uses for keyboard focus: the four quiet siblings reserve the same 3px so nothing shifts when the highlight moves, which means the construct is entirely a border COLOUR difference on one edge. A per-side border that collapses to a uniform stroke takes the direction of the highlight with it.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.c.tokens.border-left-color",
+      "observable": {
+        "part": "c",
+        "channel": "border-left-color",
+        "capturedValue": "rgb(37, 99, 235)"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "an individual-side stroke on the highlighted option's frame"
+      },
+      "blockStage": true,
+      "predictedDifficulty": "expected-wall",
+      "mustHave": [
+        "the listbox shows exactly 5 options, stacked vertically",
+        "exactly ONE option (the 2nd, 'Beta') carries a coloured bar on its LEFT edge only",
+        "the accent bar is on the left edge - not the right, not all four sides",
+        "the other 4 options' text left edges line up with the highlighted option's text left edge (nothing shifts)"
+      ],
+      "id": "combobox-option-highlighted",
+      "predictedWall": {
+        "code": "FC-BORDER-STYLE-NOT-SYNTHESISED",
+        "status": "EXISTING (note the British -ISED spelling). FC-DUMP-PROPOSE-STROKE-WEIGHT-SIDES is the adjacent CLOSED finding and does NOT cover this.",
+        "half": "canvas round trip",
+        "why": "AMENDED before any run - upgraded from `hard`. In the sealing commit I leaned on FC-DUMP-PROPOSE-STROKE-WEIGHT-SIDES being closed and flagged, correctly, that it was about stroke WEIGHT per side while this case varies stroke COLOUR per side. The survey settles it against me: spec/channel-table.json's border-{top,right,bottom,left}-color rows all read 'one strokes paint serves all four sides - lowered only when every carried side agrees.' This case's four quiet options carry a TRANSPARENT left border and the highlighted one carries an opaque blue left border, so the sides do NOT agree by construction, and a single strokes paint cannot hold the difference. The nearest precedent for the shape of the refusal is `propose.radii-not-uniform-refused` - 'border-radius is a single channel and four differing bindings are not representable', which drops all four corner bindings with no per-corner fallback. I predict the accent bar comes back on all four sides or not at all."
+      }
+    },
+    {
+      "feature": "combobox",
+      "construct": "5 sibling options where ONE is SELECTED - a distinct fill (rgb(219, 234, 254)) and weight among four identical siblings",
+      "why": "The selected option is the repetition problem wearing its most consequential face: five near-identical children where the one that DIFFERS is the only one carrying the component's actual value. Five siblings is above the inverse rule's >=3 threshold, so a repetition collapse is eligible here; if it happens, the list still looks like a list and the selection is simply gone.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.b.tokens.background-color",
+      "observable": {
+        "part": "b",
+        "channel": "background-color",
+        "capturedValue": "rgb(219, 234, 254)"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "the selected option is a frame with its own fill among four unfilled siblings"
+      },
+      "blockStage": true,
+      "predictedDifficulty": "expected-wall",
+      "mustHave": [
+        "the listbox shows exactly 5 options, stacked vertically",
+        "exactly ONE option (the 3rd, 'Gamma') carries a tinted fill",
+        "the selected option's text is bolder than the other four",
+        "the other 4 options have no fill of their own"
+      ],
+      "id": "combobox-option-selected",
+      "predictedWall": {
+        "code": "P10 (pattern code) / FC-REPEAT-FORWARD-ABSENT",
+        "status": "P10 is an EXISTING pattern code in extract/figma/gauntlet/PATTERN-TAXONOMY.md, explicitly marked NOT EXPRESSIBLE. It is not an FC-* code; no FC-* code covers this.",
+        "half": "capture (contract)",
+        "why": "AMENDED before any run - upgraded from `hard`. PATTERN-TAXONOMY.md defines P10 as 'Selected-item state inside a collection' and marks it, in terms, NOT EXPRESSIBLE today - while its neighbour P9 'Repeated-children collection' IS inferred, but only on the canvas->contract leg. The DON'T rule D5 in the same file carries the refusal string 'collection with one deviating item - repeated-children pattern, no vocabulary (P9)', which is a description of this case's markup. Separately, spec/channel-table.json's state-plane inventory drives exactly six planes (default, hover, active, focus-visible, disabled, checked); `selected` appears in NEITHER the driven list NOR the FC-STATE-PLANE-UNDRIVEN list, so it falls to the generic door `fuse.state-outside-vocabulary` ('CONTRACT_STATES is the closed state vocabulary' - drops the binding). Note this case expresses selection as a STATIC fill on a sibling rather than as a state plane, which is the friendlier of the two spellings; if even that is folded away, the harder spelling has no chance."
+      }
+    },
+    {
+      "feature": "combobox",
+      "construct": "the OPEN listbox as an out-of-flow overlay - `position: absolute; top: 34px` under a `position: relative` trigger, so the popover does not participate in the trigger's flow",
+      "why": "'Overlays rather than reflows' is the one structural fact that separates a combobox from an accordion, and it is carried entirely by the popover being out of flow. The `top: 34px` inset is what places it just under the trigger; if the inset is lost the list lands ON the trigger, and if the out-of-flow-ness is lost the trigger grows to contain the list. Both failures are recognisable at a glance and neither is a colour.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.b.layout.position / insets.top",
+      "observable": {
+        "part": "b",
+        "channel": "top",
+        "capturedValue": "34px"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "layoutPositioning ABSOLUTE with a y offset under the trigger"
+      },
+      "blockStage": true,
+      "predictedDifficulty": "expected-wall",
+      "mustHave": [
+        "the popover appears BELOW the trigger, not on top of it and not inside it",
+        "the trigger's own height is unchanged by the popover's presence - the trigger is one text line tall",
+        "the popover's left edge lines up with the trigger's left edge",
+        "the popover lists both options, stacked vertically"
+      ],
+      "id": "combobox-popover-overlay-inset",
+      "predictedWall": {
+        "code": "emit.position-inset-overlay-four-sides / emit.position-no-inset-falls-in-flow",
+        "status": "EXISTING lowering-register ids (lowercase dotted, not FC-*). FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED is the emit-side code for the same failure.",
+        "half": "canvas round trip",
+        "why": "AMENDED before any run - upgraded from `hard`, and this is the single most precisely grounded prediction in the set. spec/lowering.json `emit.position-inset-overlay-four-sides` fires ONLY when ALL FOUR insets are present as px. This case declares TWO (top and left), which lands it in that rule's own stated loss: 'for a part with one to three insets, the overlay lowering entirely, with nothing said', `receipt: {channel: \"none\"}`. The sibling rule `emit.position-no-inset-falls-in-flow` spells out the consequence: 'the part now occupies space in the auto-layout it should have been lifted out of' - again `receipt: {channel: \"none\"}`. That is verbatim the combobox failure this case exists to catch: the popover REFLOWS the trigger instead of overlaying it. FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED (core/emit-figma-script.ts:6536, :6609, :7382) is the loud version of the same outcome - 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow'. I predict the QUIET version, because two insets is the un-receipted branch. I chose two insets deliberately: a popover anchored under a trigger is a two-inset shape in every real library, and the four-inset rule does not describe it."
       }
     },
     {
@@ -2126,6 +2280,129 @@
       }
     },
     {
+      "feature": "repetition",
+      "construct": "a 7-column CSS grid of 35 auto-placed cells (5 weeks), the LAST carrying a distinct paint (rgb(160, 32, 160))",
+      "why": "The month grid as a real library draws it: `grid-template-columns: repeat(7, ...)` with auto-placed day cells, which is what makes the 7-wide shape a STRUCTURAL fact rather than a consequence of wrapping. Separated from repeat-siblings-thirtyone on purpose - that case asks whether 31 siblings survive, this one asks whether they survive when the parent is a grid, where the committed frontier already shows every grid case refused on the canvas half.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.b.tokens.background-color",
+      "observable": {
+        "part": "b",
+        "channel": "background-color",
+        "capturedValue": "rgb(160, 32, 160)"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "a 7-column grid frame with 35 cell children"
+      },
+      "blockStage": true,
+      "predictedDifficulty": "expected-wall",
+      "mustHave": [
+        "the month grid is exactly 7 columns wide",
+        "there are exactly 35 cells, laid out as 5 rows of 7",
+        "the 35th (last) cell is a visibly different colour (magenta) from the other 34",
+        "columns line up vertically - cell N and cell N+7 share a left edge"
+      ],
+      "id": "repeat-grid-month",
+      "predictedWall": {
+        "code": "FC-GRID-ROOT-VSIZE",
+        "status": "EXISTING",
+        "half": "canvas round trip (with FC-REPEAT-FORWARD-ABSENT proposed on the capture half)",
+        "why": "conformance/README.md records the first canvas measurement verbatim: 'The 15 refusals are one wall: every grid case's captured contract has no definite root height, and the emitter refuses it by name (grid-axis-indefinite, FC-GRID-ROOT-VSIZE).' A month grid is a grid root with an intrinsic height, so I expect it in exactly that bucket. Two further doors stand against it on the capture half: `anatomy.grid-g7-refusal-fence` (2-D grids have no auto-layout spelling; drops the whole layout for the part) and `anatomy.grid-declared-track-verify`. This case is auto-placed over a declared 7-track list, which is the one grid shape the G6/G7 grammar does admit, so the track list itself should survive - the prediction is that the ROOT SIZING is what refuses."
+      }
+    },
+    {
+      "feature": "repetition",
+      "construct": "7 adjacent same-shape siblings, the LAST carrying a distinct paint (rgb(64, 128, 191))",
+      "why": "One calendar WEEK. Seven is the width of every month grid ever drawn, and it is the first sibling count where writing every cell out as its own part stops being obviously right. Same distinct-last-sibling probe as the three case, so the two are comparable: if three passes and seven does not, the boundary is a count and this fixture has found it.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.b.tokens.background-color",
+      "observable": {
+        "part": "b",
+        "channel": "background-color",
+        "capturedValue": "rgb(64, 128, 191)"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "a week row: seven sibling frames, the seventh a different fill"
+      },
+      "blockStage": true,
+      "predictedDifficulty": "hard",
+      "mustHave": [
+        "the canvas shows exactly 7 sibling boxes in one horizontal row",
+        "the 7th box is a visibly different colour (mid blue) from the first 6 (pale blue-grey)",
+        "all 7 boxes are the same size (16x16)",
+        "no box is missing and none is duplicated - a grader can count 7"
+      ],
+      "id": "repeat-siblings-seven",
+      "predictedWall": {
+        "code": "FC-REPEAT-FORWARD-ABSENT",
+        "status": "PROPOSED - same code as the thirtyone case, cited here as the thing being ruled OUT",
+        "half": "capture (contract)",
+        "why": "Seven is where I expect the flat walk to still be doing the right thing, so this case exists to LOCATE the boundary rather than to predict a failure. If seven passes and thirty-one does not, the boundary is a count and the fixture has found it; if both fail, the wall is repetition as such and the count is irrelevant. Predicted difficulty `hard`, not `expected-wall`."
+      }
+    },
+    {
+      "feature": "repetition",
+      "construct": "31 adjacent same-shape siblings (a wrapping flex run), the LAST carrying a distinct paint (rgb(32, 160, 96))",
+      "why": "A MONTH. This is the case the owner named: with no forward repetition rule, a month is ~200 flat nodes rather than a cell component with 31 instances. The flat emission is not, by itself, a wrong picture - so this case does NOT measure node count, it measures whether the 31st cell (the odd one, e.g. 'today') survives the walk at all. A month that draws 31 identical cells and loses the one that differs is the recognisability failure, and it is invisible to any instrument that counts nodes.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.b.tokens.background-color",
+      "observable": {
+        "part": "b",
+        "channel": "background-color",
+        "capturedValue": "rgb(32, 160, 96)"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "31 sibling frames wrapping into rows; the 31st is a different fill"
+      },
+      "blockStage": true,
+      "predictedDifficulty": "expected-wall",
+      "mustHave": [
+        "the canvas shows exactly 31 boxes",
+        "the 31st box is a visibly different colour (green) from the other 30 (pale blue-grey)",
+        "the boxes wrap into multiple rows rather than one long line",
+        "all 31 boxes are the same size (16x16)"
+      ],
+      "id": "repeat-siblings-thirtyone",
+      "predictedWall": {
+        "code": "FC-REPEAT-FORWARD-ABSENT",
+        "status": "PROPOSED - confirmed by survey that no existing code covers this",
+        "half": "capture (contract)",
+        "why": "A full survey of spec/{channel-table,door-register,lowering,grammar-coverage}.json plus the whole 196-string FC-* vocabulary finds NO code for repetition-not-componentised. The nearest NAMED things are not FC codes: (a) grammar-coverage `axis-arity-depends-on-another-axis`, whose own instances field says 'a month grid's row count is a function of the date'; (b) pattern code P9 'Repeated-children collection' in extract/figma/gauntlet/PATTERN-TAXONOMY.md, which exists ONLY on the canvas->contract leg (core/propose-figma.ts repeatRunAt / buildRepeatPart); and (c) the DON'T rule D5 in the same file, whose refusal string is verbatim 'collection with one deviating item - repeated-children pattern, no vocabulary (P9)'. D5 describes THIS CASE exactly - a collection with one deviating item - and says there is no vocabulary for it. On the capture leg the only repeat collapse that exists anywhere is the UNWIRED spike extract/depth-spike/run.ts. So: flat emission on the capture half, and the deviating 31st cell has a named DON'T standing against it."
+      }
+    },
+    {
+      "feature": "repetition",
+      "construct": "3 adjacent same-shape siblings, the LAST carrying a distinct paint (rgb(191, 64, 32))",
+      "why": "3 is the eligibility threshold the INVERSE rule uses (core/propose-figma.ts, >=3 adjacent same-component instances -> part.repeat). The forward direction has no such rule at all, so this is the smallest repetition an engine could be expected to notice. At three siblings the ordinary anatomy walk should carry every one of them as its own part; the odd sibling's paint is the probe, because a collapse that keeps 'a cell' and loses the one that DIFFERS is the failure that makes a calendar wrong rather than merely large.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.b.tokens.background-color",
+      "observable": {
+        "part": "b",
+        "channel": "background-color",
+        "capturedValue": "rgb(191, 64, 32)"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "three sibling frames in an auto-layout row; the third is a different fill"
+      },
+      "blockStage": true,
+      "predictedDifficulty": "easy",
+      "mustHave": [
+        "the canvas shows exactly 3 sibling boxes in one horizontal row",
+        "the 3rd box is a visibly different colour (red-brown) from the first 2 (pale blue-grey)",
+        "the 3 boxes are the same size as each other (16x16)",
+        "the row reads left-to-right with a visible gap between boxes"
+      ],
+      "id": "repeat-siblings-three",
+      "predictedWall": null
+    },
+    {
       "id": "rotate-independent-property",
       "feature": "transform",
       "construct": "rotate: 15deg (the INDEPENDENT transform property)",
@@ -2214,6 +2491,128 @@
       "canvas": {
         "expect": "ABSENT",
         "note": "the asset grammar admits path/g only"
+      }
+    },
+    {
+      "feature": "table",
+      "construct": "per-COLUMN text alignment - the label cell `text-align: left`, the numeric cell `text-align: right`, at fixed column widths",
+      "why": "Right-aligned numerics are the difference between a table and a list of words. The alignment lives on the CELL, is different per column, and is the only thing that makes the two rows' digits line up on their last character - a fact a grader can check with a ruler and no knowledge of the source.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.c.parts.b.tokens.text-align",
+      "observable": {
+        "part": "b",
+        "channel": "text-align",
+        "capturedValue": "right"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "textAlignHorizontal RIGHT on the numeric cell's text node"
+      },
+      "blockStage": true,
+      "predictedDifficulty": "hard",
+      "mustHave": [
+        "the two rows' numeric values ('7' and '128') are right-aligned with each other - their right edges match",
+        "the two label values ('Widget', 'Gadget') are left-aligned with each other",
+        "the numeric column and the label column do not overlap",
+        "the numeric column sits to the right of the label column in both rows"
+      ],
+      "id": "table-column-numeric-alignment",
+      "predictedWall": {
+        "code": "FC-TEXT-FILL-ALIGNMENT",
+        "status": "EXISTING - cited as the rule that SHOULD fire, not as a predicted failure",
+        "half": "canvas round trip",
+        "why": "spec/lowering.json rule `emit.size-text-hug-vs-fill` carries this marker: 'alignment-safe non-truncating text HUGS; alignment-displaced text keeps FILL and carries fillText', and it is one of the few rules whose `lost` field reads 'nothing silently'. A right-aligned numeric cell at a FIXED column width is exactly the shape where hugging WOULD move the glyphs, so the rule should fire and keep the alignment. Two things to check first if the digits come back left-aligned: door `propose.text-align-left-is-default` ('LEFT is CSS's own default so it is not a fact') and the channel table's note that text-align CARRIES on the css->canvas write but its canvas->code READ-BACK is merely named (`text-channel-unsupported`). So a one-way pass here would still leave the round trip asymmetric."
+      }
+    },
+    {
+      "feature": "table",
+      "construct": "a div-built table whose HEADER row differs from the body rows by weight (700) and fill - no table formatting context involved",
+      "why": "The one property that makes a table read as a table. Built out of flex rows on purpose, so it measures the header/body DISTINCTION rather than dying on the `display: table` wall the semantic case pins. If this fails, no data table is drawable by any route; if it passes, the div-table is a viable shape and the semantic-markup refusal is a spelling problem rather than an archetype problem.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.c.tokens.font-weight",
+      "observable": {
+        "part": "c",
+        "channel": "font-weight",
+        "capturedValue": "700"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "the header row is a frame with its own fill and a bolder text style"
+      },
+      "blockStage": true,
+      "predictedDifficulty": "easy",
+      "mustHave": [
+        "the table header row is visually distinct from the body rows",
+        "the header row's text is bolder than the body rows' text",
+        "the header row has a different background fill from the body rows",
+        "the header row sits above both body rows"
+      ],
+      "id": "table-header-row-distinct",
+      "predictedWall": null
+    },
+    {
+      "feature": "table",
+      "construct": "real <table> markup: thead/tbody row GROUPS, whose UA display is `table-header-group` / `table-row-group` - a formatting context with no box of its own",
+      "why": "`display: table` on a div is already pinned REFUSED (display-out-of-vocab). This case is the OTHER half of the same archetype and the one every real data table actually ships: the row-group wrappers the UA stylesheet creates, which are neither `table` nor any display value in the carried vocabulary. A data table cannot be proven without knowing what happens to thead/tbody, and the answer must be a NAME, because a row group that is silently flattened takes the header/body distinction with it.",
+      "expect": "REFUSED",
+      "expectName": "table-lowering",
+      "expectWhere": "LEDGER.md (DOM-anatomy promotion)",
+      "observable": {
+        "part": "c",
+        "channel": "display",
+        "capturedValue": "table-header-group"
+      },
+      "canvas": {
+        "expect": "ABSENT",
+        "note": "AutoLayout has no table formatting context and no row-group concept"
+      },
+      "blockStage": true,
+      "predictedDifficulty": "hard",
+      "mustHave": [
+        "if the case is refused, the refusal names the table/row-group construct in LEDGER.md",
+        "nothing is emitted that claims to be a table but has lost the header/body distinction",
+        "a grader reading the receipt can tell WHICH construct was refused, not merely that something was"
+      ],
+      "id": "table-semantic-row-group",
+      "predictedWall": {
+        "code": "table-lowering",
+        "status": "EXISTING receipt name (LEDGER string, not an FC-* code). I withdraw the FC-TABLE-ROW-GROUP-FLATTENED code I proposed in the sealing commit - see below.",
+        "half": "capture (contract)",
+        "why": "AMENDED before any run. In the sealing commit I predicted the row groups would be flattened SILENTLY and proposed a new code for it. A vocabulary survey then found the mechanism I had missed: extract/computed/anatomy.ts has `lowerTableDisplay`, which handles 'table-header-group' and 'table-row-group' BY NAME and emits the receipt prefixes `table-lowering:`, `table-geometry-excluded:` and `control-fallback: no control for <thead> - span control used`. All four strings are visible verbatim in examples/mui/contracts/table.extension.json:4379-4418. So the honest prediction is now that this case PASSES - the groups are lowered to a flex stack and NAMED - and I have withdrawn the proposed code rather than leave a claim of 'no name exists' standing against a name that does. What remains genuinely un-named is narrower and I am not testing it here: `fuse.table-column-arity-disagreement` drops width AND height for EVERY cell of the whole table on any colspan, whose counter-example in the register reads 'Any colspan in the corpus disables column widths table-wide.'"
+      }
+    },
+    {
+      "feature": "table",
+      "construct": "zebra striping by STRUCTURAL SELECTOR - `.cf-a:nth-child(even) { background-color }` over 6 otherwise identical rows",
+      "why": "Zebra rules are how every data table in every library separates its rows, and they are the one paint in a table that no element ASKS for - it arrives from the element's position among its siblings. A reader that matches rules to elements has to evaluate `:nth-child` to see it at all. This is also the sharpest form of the repetition question: six identical rows where three of them are a different colour for a reason found nowhere in their own markup.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.a-2.tokens.background-color",
+      "observable": {
+        "part": "a-2",
+        "channel": "background-color",
+        "capturedValue": "rgb(244, 246, 248)"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "alternating row fills; on the canvas the stripe is a literal fill per row, not a rule"
+      },
+      "blockStage": true,
+      "predictedDifficulty": "expected-wall",
+      "mustHave": [
+        "the table shows 6 rows",
+        "rows alternate between two background fills, starting with the un-tinted one",
+        "exactly 3 rows carry the tinted fill (rows 2, 4 and 6)",
+        "the stripe is visible as a fill on the row, not as a border or a gap"
+      ],
+      "id": "table-zebra-nth-child",
+      "predictedWall": {
+        "code": "FC-NTH-CHILD-STRIPE-UNREAD",
+        "status": "PROPOSED - no existing code covers this",
+        "half": "capture (contract)",
+        "why": "AMENDED before any run - upgraded from `hard`. A repo-wide search for nth-child/zebra finds no code, no door and no lowering rule; the only hits are internal showcase CSS and two RESEARCH mentions (docs/research/enterprise-components.md:227 proposes a `tokensWhen` 'nth-child token flip'; PATTERN-TAXONOMY.md:116 lists zebra as a Table variant axis). What DOES exist is generic and subtractive: the selector-grammar doors `libcss.pseudo-attribute-refusal` ('Any other pseudo or attribute selector is not promotable' - drops the rule) and `libcss.combinator-refusal`. A structural pseudo-class like :nth-child(even) falls to those, which means the stripe is dropped by a door whose receipt names the SELECTOR GRAMMAR rather than the stripe. Zebra striping is how every data table in every library separates its rows, and it has no name of its own."
       }
     },
     {

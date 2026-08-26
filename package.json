@@ -249,6 +249,7 @@
     "render-browser:check": "tsx scripts/render-browser-pin-check.ts",
     "mixed-browser:check": "tsx scripts/mixed-browser-capture-check.ts",
     "door-register:self-test": "tsx scripts/door-register-check.ts --self-test",
+    "door-register:rederive": "tsx scripts/door-register-check.ts --rederive",
     "door-census": "tsx scripts/door-census.ts",
     "census:render": "tsx extract/figma/census/render.ts",
     "census:d2c:record": "tsx extract/figma/census/design-to-code.ts --write",

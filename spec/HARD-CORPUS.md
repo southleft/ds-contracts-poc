@@ -91,14 +91,14 @@ Re-derived by `npm run hard-corpus:check`; a source table that moves fails this 
 
 | source | mechanisms | covered | code to canvas | canvas to code | both | NOT covered |
 |---|---:|---:|---:|---:|---:|---:|
-| channel-table CARRIED | 82 | 33 | 25 | 0 | 12 | 49 |
-| channel-table LEDGERED | 80 | 4 | 3 | 0 | 1 | 76 |
+| channel-table CARRIED | 82 | 37 | 29 | 0 | 12 | 45 |
+| channel-table LEDGERED | 80 | 5 | 4 | 0 | 1 | 75 |
 | channel-table REFUSED | 271 | 14 | 14 | 0 | 0 | 257 |
 | grammar-coverage unsupported | 10 | 0 | 0 | 0 | 0 | 10 |
 | required-facts required | 61 | 0 | 0 | 0 | 0 | 61 |
 | root causes | 8 | 6 | 6 | 0 | 0 | 2 |
 | named walls (FC-*) | 8 | 0 | 0 | 0 | 0 | 8 |
-| **all** | **520** | **57** | | | | **463** |
+| **all** | **520** | **62** | | | | **458** |
 
 INERT is deliberately outside the denominator: 54 channel-table rows are classed INERT — provably no independent visual effect at computed level — so there is no outcome for a case to expect.
 
@@ -146,8 +146,8 @@ Measured from `conformance/BASELINE.json + conformance/CANVAS-BASELINE.json (npm
 
 ## What this corpus does NOT cover
 
-- **channel-table CARRIED** — 49 with no case: `-webkit-text-fill-color`, `align-self`, `background`, `border-bottom-color`, `border-bottom-left-radius`, `border-bottom-right-radius`, `border-bottom-width`, `border-color`, `border-left-color`, `border-left-width`, `border-radius`, `border-right-color`, and 37 more.
-- **channel-table LEDGERED** — 76 with no case: `-webkit-border-horizontal-spacing`, `-webkit-border-image`, `-webkit-border-vertical-spacing`, `-webkit-box-align`, `-webkit-box-decoration-break`, `-webkit-box-direction`, `-webkit-box-flex`, `-webkit-box-ordinal-group`, `-webkit-box-orient`, `-webkit-box-pack`, `-webkit-box-reflect`, `-webkit-font-smoothing`, and 64 more.
+- **channel-table CARRIED** — 45 with no case: `-webkit-text-fill-color`, `align-self`, `background`, `border-bottom-color`, `border-bottom-left-radius`, `border-bottom-right-radius`, `border-bottom-width`, `border-color`, `border-left-width`, `border-radius`, `border-right-color`, `border-top-right-radius`, and 33 more.
+- **channel-table LEDGERED** — 75 with no case: `-webkit-border-horizontal-spacing`, `-webkit-border-image`, `-webkit-border-vertical-spacing`, `-webkit-box-align`, `-webkit-box-decoration-break`, `-webkit-box-direction`, `-webkit-box-flex`, `-webkit-box-ordinal-group`, `-webkit-box-orient`, `-webkit-box-pack`, `-webkit-box-reflect`, `-webkit-font-smoothing`, and 63 more.
 - **channel-table REFUSED** — 257 with no case: `align-content`, `alignment-baseline`, `anchor-name`, `anchor-scope`, `animation-composition`, `animation-delay`, `animation-direction`, `animation-duration`, `animation-fill-mode`, `animation-iteration-count`, `animation-name`, `animation-play-state`, and 245 more.
 - **grammar-coverage unsupported** — 10 with no case: `axis-arity-depends-on-another-axis`, `boolean-variant-axis`, `child-part-axes`, `class-token-prop-is-fixed`, `container-self-reference`, `drafter-cannot-draft-compound`, `multi-package-mount`, `no-steady-state`, `richer-function-props`, `theme-provider-is-a-box`.
 - **required-facts required** — 61 with no case: `accordion/divider`, `accordion/header-layout`, `accordion/open-axis`, `alert/interior-layout`, `alert/padding`, `alert/surface-ink`, `avatar/fill-or-content`, `avatar/geometry`, `avatar/shape`, `badge/padding`, `badge/surface-ink`, `badge/text-fact`, and 49 more.

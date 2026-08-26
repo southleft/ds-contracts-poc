@@ -1,0 +1,27 @@
+{
+  "feature": "combobox",
+  "construct": "the CLOSED combobox trigger - `justify-content: space-between` pushing a value label and a two-border chevron box to opposite ends of a bordered row",
+  "why": "The closed state is the combobox a designer actually sees 99% of the time, and `space-between` is the whole reason the chevron is at the far right rather than next to the text. The chevron is drawn from two real borders rather than a pseudo-element glyph on purpose: `::before { content }` is already pinned REFUSED (pseudo-content-glyph), and this case is about the trigger's LAYOUT, not about re-measuring that wall.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.layout.justify / primaryAxisAlignItems",
+  "observable": {
+    "part": "root",
+    "channel": "justify-content",
+    "capturedValue": "space-between"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "primaryAxisAlignItems SPACE_BETWEEN on the trigger frame"
+  },
+  "blockStage": true,
+  "predictedDifficulty": "easy",
+  "mustHave": [
+    "the trigger is a single bordered row with a rounded outline",
+    "the value text sits at the left end and the chevron at the right end, with empty space between them",
+    "the chevron is a small mark near the right inner edge, not adjacent to the text",
+    "the trigger shows no list of options"
+  ],
+  "id": "combobox-closed-trigger",
+  "predictedWall": null
+}
