@@ -403,7 +403,7 @@
     },
     "shippedMinted": {
       "path": "examples/antd/tokens/antd-minted.dtcg.json",
-      "leavesAdded": 1241,
+      "leavesAdded": 1242,
       "divergent": [
         {
           "token": "imported.radio.radio-inner.background-color.checked",

@@ -265,7 +265,7 @@
     },
     "shippedMinted": {
       "path": "examples/antd/tokens/antd-minted.dtcg.json",
-      "leavesAdded": 1226,
+      "leavesAdded": 1227,
       "divergent": [
         {
           "token": "imported.card.card-head.font-size.default",

@@ -398,7 +398,7 @@
     },
     "shippedMinted": {
       "path": "examples/carbon/tokens/carbon-minted.dtcg.json",
-      "leavesAdded": 839,
+      "leavesAdded": 842,
       "divergent": []
     },
     "rows": [

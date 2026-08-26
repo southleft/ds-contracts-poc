@@ -66,9 +66,9 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 11,
-      "mintedLeavesUnfolded": 11,
-      "baseBindings": 22,
+      "mintedLeaves": 10,
+      "mintedLeavesUnfolded": 10,
+      "baseBindings": 21,
       "stateBindings": 0,
       "codeOnlyChannels": 0,
       "overflowBindings": 0,
@@ -112,7 +112,7 @@
     },
     "shippedMinted": {
       "path": "examples/tailwind/tokens/tailwind-minted.dtcg.json",
-      "leavesAdded": 252,
+      "leavesAdded": 253,
       "divergent": [
         {
           "token": "imported.kbd.root.font-weight",

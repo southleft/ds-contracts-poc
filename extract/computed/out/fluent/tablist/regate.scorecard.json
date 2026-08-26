@@ -380,7 +380,7 @@
     },
     "shippedMinted": {
       "path": "examples/fluent/tokens/fluent-minted.dtcg.json",
-      "leavesAdded": 1394,
+      "leavesAdded": 1397,
       "divergent": [
         {
           "token": "imported.tab-list.label-2.color",

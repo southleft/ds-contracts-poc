@@ -97,7 +97,7 @@
       "mintedLeavesUnfolded": 261,
       "baseBindings": 34,
       "stateBindings": 11,
-      "codeOnlyChannels": 4,
+      "codeOnlyChannels": 0,
       "overflowBindings": 9,
       "folds": 15
     },
@@ -230,11 +230,7 @@
       "overflow: root.border-right-color [hover] — state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
       "overflow: root.border-top-color [hover] — state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
       "overflow: root.color [hover] — state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
-      "overflow: root.outline-color [hover] — state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
-      "code-only: root.border-bottom-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "code-only: root.border-left-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "code-only: root.border-right-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "code-only: root.border-top-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue"
+      "overflow: root.outline-color [hover] — state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
     ],
     "unresolvedTokenRefs": {
       "count": 0,
@@ -242,7 +238,7 @@
     },
     "shippedMinted": {
       "path": "examples/altitude/tokens/altitude-minted.dtcg.json",
-      "leavesAdded": 204,
+      "leavesAdded": 209,
       "divergent": [
         {
           "token": "imported.button.root.background-color-state-hover.bare",

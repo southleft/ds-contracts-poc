@@ -46,9 +46,9 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 10,
-      "mintedLeavesUnfolded": 60,
-      "baseBindings": 6,
+      "mintedLeaves": 9,
+      "mintedLeavesUnfolded": 59,
+      "baseBindings": 5,
       "stateBindings": 0,
       "codeOnlyChannels": 1,
       "overflowBindings": 0,
@@ -167,7 +167,7 @@
     },
     "shippedMinted": {
       "path": "examples/tailwind/tokens/tailwind-minted.dtcg.json",
-      "leavesAdded": 253,
+      "leavesAdded": 254,
       "divergent": [
         {
           "token": "imported.helper-text.root.color.info",

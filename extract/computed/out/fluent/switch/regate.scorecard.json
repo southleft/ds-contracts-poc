@@ -326,7 +326,7 @@
     },
     "shippedMinted": {
       "path": "examples/fluent/tokens/fluent-minted.dtcg.json",
-      "leavesAdded": 1548,
+      "leavesAdded": 1551,
       "divergent": [
         {
           "token": "imported.switch.indicator.background-color-state-disabled.checked",

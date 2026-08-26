@@ -138,7 +138,7 @@
     },
     "shippedMinted": {
       "path": "examples/fluent/tokens/fluent-minted.dtcg.json",
-      "leavesAdded": 1426,
+      "leavesAdded": 1429,
       "divergent": [
         {
           "token": "imported.badge.root.background-color.filled.brand",

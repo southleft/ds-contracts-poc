@@ -210,7 +210,7 @@
     },
     "shippedMinted": {
       "path": "examples/carbon/tokens/carbon-minted.dtcg.json",
-      "leavesAdded": 800,
+      "leavesAdded": 803,
       "divergent": [
         {
           "token": "imported.inline-notification.icon.fill.error.high",

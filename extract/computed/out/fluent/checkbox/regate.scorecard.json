@@ -389,7 +389,7 @@
     },
     "shippedMinted": {
       "path": "examples/fluent/tokens/fluent-minted.dtcg.json",
-      "leavesAdded": 1506,
+      "leavesAdded": 1509,
       "divergent": [
         {
           "token": "imported.checkbox.label.font-size",

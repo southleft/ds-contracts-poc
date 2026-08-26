@@ -244,7 +244,7 @@
     },
     "shippedMinted": {
       "path": "examples/shadcn/tokens/shadcn-minted.dtcg.json",
-      "leavesAdded": 335,
+      "leavesAdded": 346,
       "divergent": [
         {
           "token": "imported.checkbox.root.background-color.checked",

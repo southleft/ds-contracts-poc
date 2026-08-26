@@ -432,7 +432,7 @@
     },
     "shippedMinted": {
       "path": "examples/antd/tokens/antd-minted.dtcg.json",
-      "leavesAdded": 1210,
+      "leavesAdded": 1211,
       "divergent": [
         {
           "token": "imported.checkbox.checkbox-inner.background-color-state-active.indeterminate",

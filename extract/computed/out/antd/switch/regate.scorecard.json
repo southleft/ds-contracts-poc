@@ -480,7 +480,7 @@
     },
     "shippedMinted": {
       "path": "examples/antd/tokens/antd-minted.dtcg.json",
-      "leavesAdded": 1173,
+      "leavesAdded": 1174,
       "divergent": [
         {
           "token": "imported.switch.root.height.default",

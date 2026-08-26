@@ -327,7 +327,7 @@
     },
     "shippedMinted": {
       "path": "examples/astryx/tokens/astryx-minted.dtcg.json",
-      "leavesAdded": 510,
+      "leavesAdded": 513,
       "divergent": [
         {
           "token": "imported.button.label.color.primary",

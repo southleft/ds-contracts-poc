@@ -228,7 +228,7 @@
     },
     "shippedMinted": {
       "path": "examples/shadcn/tokens/shadcn-minted.dtcg.json",
-      "leavesAdded": 347,
+      "leavesAdded": 360,
       "divergent": [
         {
           "token": "imported.alert.label-2.color.default",

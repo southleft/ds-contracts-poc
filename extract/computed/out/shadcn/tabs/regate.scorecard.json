@@ -164,9 +164,9 @@
     "combos": 1,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 648,
+      "cellsCompared": 660,
       "cellsEqual": 535,
-      "pctEqual": 82.56172839506173,
+      "pctEqual": 81.06060606060606,
       "rowsFullyEqual": 0,
       "rows": 4
     },
@@ -188,9 +188,9 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 32,
+      "mintedLeaves": 33,
       "mintedLeavesUnfolded": 29,
-      "baseBindings": 108,
+      "baseBindings": 111,
       "stateBindings": 9,
       "codeOnlyChannels": 7,
       "overflowBindings": 7,
@@ -201,32 +201,36 @@
         "key": "__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 32,
+        "channelsMismatched": 35,
         "unscorable": "no-original"
       },
       {
         "key": "__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 27,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
         "key": "__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 27,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
         "key": "__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 27,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
+      [
+        "root.color",
+        4
+      ],
       [
         "part-0.background-color",
         4
@@ -268,6 +272,10 @@
         4
       ],
       [
+        "label.color",
+        4
+      ],
+      [
         "label.flex-basis",
         4
       ],
@@ -277,14 +285,6 @@
       ],
       [
         "label-2.color",
-        4
-      ],
-      [
-        "label-2.column-rule-color",
-        4
-      ],
-      [
-        "label-2.flex-basis",
         4
       ]
     ],
@@ -313,7 +313,7 @@
     },
     "shippedMinted": {
       "path": "examples/shadcn/tokens/shadcn-minted.dtcg.json",
-      "leavesAdded": 333,
+      "leavesAdded": 346,
       "divergent": [
         {
           "token": "imported.tabs.label.background-color",
@@ -338,12 +338,18 @@
     "rows": [
       {
         "key": "__default",
-        "channelsCompared": 162,
+        "channelsCompared": 165,
         "channelsEqual": 135,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "color",
+            "ours": "rgba(10, 10, 10, 1)",
+            "theirs": "oklch(0.145 0 0)"
+          },
           {
             "part": "part-0",
             "channel": "background-color",
@@ -403,6 +409,12 @@
             "channel": "background-color",
             "ours": "rgba(255, 255, 255, 1)",
             "theirs": "oklch(1 0 0)"
+          },
+          {
+            "part": "label",
+            "channel": "color",
+            "ours": "rgba(10, 10, 10, 1)",
+            "theirs": "oklch(0.145 0 0)"
           },
           {
             "part": "label",
@@ -499,6 +511,12 @@
             "channel": "--tw-outline-style",
             "ours": "",
             "theirs": "none"
+          },
+          {
+            "part": "label-4",
+            "channel": "color",
+            "ours": "rgba(10, 10, 10, 1)",
+            "theirs": "oklch(0.145 0 0)"
           },
           {
             "part": "label-4",
@@ -511,12 +529,18 @@
       },
       {
         "key": "__hover",
-        "channelsCompared": 162,
+        "channelsCompared": 165,
         "channelsEqual": 135,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "color",
+            "ours": "rgba(10, 10, 10, 1)",
+            "theirs": "oklch(0.145 0 0)"
+          },
           {
             "part": "part-0",
             "channel": "background-color",
@@ -576,6 +600,12 @@
             "channel": "background-color",
             "ours": "rgba(255, 255, 255, 1)",
             "theirs": "oklch(1 0 0)"
+          },
+          {
+            "part": "label",
+            "channel": "color",
+            "ours": "rgba(10, 10, 10, 1)",
+            "theirs": "oklch(0.145 0 0)"
           },
           {
             "part": "label",
@@ -675,6 +705,12 @@
           },
           {
             "part": "label-4",
+            "channel": "color",
+            "ours": "rgba(10, 10, 10, 1)",
+            "theirs": "oklch(0.145 0 0)"
+          },
+          {
+            "part": "label-4",
             "channel": "flex-basis",
             "ours": "auto",
             "theirs": "0%"
@@ -684,12 +720,18 @@
       },
       {
         "key": "__focus-visible",
-        "channelsCompared": 162,
+        "channelsCompared": 165,
         "channelsEqual": 130,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "color",
+            "ours": "rgba(10, 10, 10, 1)",
+            "theirs": "oklch(0.145 0 0)"
+          },
           {
             "part": "part-0",
             "channel": "background-color",
@@ -782,6 +824,12 @@
           },
           {
             "part": "label",
+            "channel": "color",
+            "ours": "rgba(10, 10, 10, 1)",
+            "theirs": "oklch(0.145 0 0)"
+          },
+          {
+            "part": "label",
             "channel": "flex-basis",
             "ours": "auto",
             "theirs": "0%"
@@ -878,6 +926,12 @@
           },
           {
             "part": "label-4",
+            "channel": "color",
+            "ours": "rgba(10, 10, 10, 1)",
+            "theirs": "oklch(0.145 0 0)"
+          },
+          {
+            "part": "label-4",
             "channel": "flex-basis",
             "ours": "auto",
             "theirs": "0%"
@@ -887,12 +941,18 @@
       },
       {
         "key": "__active",
-        "channelsCompared": 162,
+        "channelsCompared": 165,
         "channelsEqual": 135,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "color",
+            "ours": "rgba(10, 10, 10, 1)",
+            "theirs": "oklch(0.145 0 0)"
+          },
           {
             "part": "part-0",
             "channel": "background-color",
@@ -955,6 +1015,12 @@
           },
           {
             "part": "label",
+            "channel": "color",
+            "ours": "rgba(10, 10, 10, 1)",
+            "theirs": "oklch(0.145 0 0)"
+          },
+          {
+            "part": "label",
             "channel": "flex-basis",
             "ours": "auto",
             "theirs": "0%"
@@ -1048,6 +1114,12 @@
             "channel": "--tw-outline-style",
             "ours": "",
             "theirs": "none"
+          },
+          {
+            "part": "label-4",
+            "channel": "color",
+            "ours": "rgba(10, 10, 10, 1)",
+            "theirs": "oklch(0.145 0 0)"
           },
           {
             "part": "label-4",

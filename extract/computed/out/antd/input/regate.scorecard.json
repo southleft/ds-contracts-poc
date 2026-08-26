@@ -69,9 +69,9 @@
     "combos": 72,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 13536,
-      "cellsEqual": 10812,
-      "pctEqual": 79.87588652482269,
+      "cellsCompared": 13824,
+      "cellsEqual": 10956,
+      "pctEqual": 79.25347222222223,
       "rowsFullyEqual": 0,
       "rows": 288
     },
@@ -93,9 +93,9 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 416,
-      "mintedLeavesUnfolded": 560,
-      "baseBindings": 27,
+      "mintedLeaves": 417,
+      "mintedLeavesUnfolded": 561,
+      "baseBindings": 28,
       "stateBindings": 25,
       "codeOnlyChannels": 1,
       "overflowBindings": 20,
@@ -106,56 +106,56 @@
         "key": "small.unset.filled.enabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 16,
+        "channelsMismatched": 17,
         "unscorable": "no-original"
       },
       {
         "key": "small.error.filled.enabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 16,
+        "channelsMismatched": 17,
         "unscorable": "no-original"
       },
       {
         "key": "small.warning.filled.enabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 16,
+        "channelsMismatched": 17,
         "unscorable": "no-original"
       },
       {
         "key": "middle.unset.filled.enabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 16,
+        "channelsMismatched": 17,
         "unscorable": "no-original"
       },
       {
         "key": "middle.error.filled.enabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 16,
+        "channelsMismatched": 17,
         "unscorable": "no-original"
       },
       {
         "key": "middle.warning.filled.enabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 16,
+        "channelsMismatched": 17,
         "unscorable": "no-original"
       },
       {
         "key": "large.unset.filled.enabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 16,
+        "channelsMismatched": 17,
         "unscorable": "no-original"
       },
       {
         "key": "large.error.filled.enabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 16,
+        "channelsMismatched": 17,
         "unscorable": "no-original"
       }
     ],
@@ -205,6 +205,10 @@
         144
       ],
       [
+        "root.placeholder-color",
+        144
+      ],
+      [
         "root.border-left-color",
         102
       ],
@@ -215,10 +219,6 @@
       [
         "root.border-top-color",
         102
-      ],
-      [
-        "root.outline-color",
-        96
       ]
     ],
     "namedLosses": [
@@ -311,7 +311,7 @@
     "rows": [
       {
         "key": "small.unset.outlined.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -376,13 +376,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.unset.outlined.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -447,13 +453,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.unset.outlined.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 36,
         "pctExact": null,
         "pctAA": null,
@@ -524,13 +536,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.unset.outlined.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 32,
         "pctExact": null,
         "pctAA": null,
@@ -625,14 +643,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.unset.outlined.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -702,8 +726,8 @@
       },
       {
         "key": "small.unset.outlined.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -773,8 +797,8 @@
       },
       {
         "key": "small.unset.outlined.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -844,8 +868,8 @@
       },
       {
         "key": "small.unset.outlined.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -915,7 +939,7 @@
       },
       {
         "key": "small.unset.borderless.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 45,
         "pctExact": null,
         "pctAA": null,
@@ -932,13 +956,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.unset.borderless.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 45,
         "pctExact": null,
         "pctAA": null,
@@ -955,13 +985,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.unset.borderless.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 44,
         "pctExact": null,
         "pctAA": null,
@@ -984,13 +1020,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.unset.borderless.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 44,
         "pctExact": null,
         "pctAA": null,
@@ -1013,14 +1055,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.unset.borderless.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 45,
+        "channelsCompared": 48,
+        "channelsEqual": 46,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1042,8 +1090,8 @@
       },
       {
         "key": "small.unset.borderless.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 45,
+        "channelsCompared": 48,
+        "channelsEqual": 46,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1065,8 +1113,8 @@
       },
       {
         "key": "small.unset.borderless.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 45,
+        "channelsCompared": 48,
+        "channelsEqual": 46,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1088,8 +1136,8 @@
       },
       {
         "key": "small.unset.borderless.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 45,
+        "channelsCompared": 48,
+        "channelsEqual": 46,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1111,7 +1159,7 @@
       },
       {
         "key": "small.unset.filled.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -1176,13 +1224,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.unset.filled.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -1247,13 +1301,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.unset.filled.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 36,
         "pctExact": null,
         "pctAA": null,
@@ -1324,13 +1384,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.unset.filled.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 31,
         "pctExact": null,
         "pctAA": null,
@@ -1431,14 +1497,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.unset.filled.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1508,8 +1580,8 @@
       },
       {
         "key": "small.unset.filled.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1579,8 +1651,8 @@
       },
       {
         "key": "small.unset.filled.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1650,8 +1722,8 @@
       },
       {
         "key": "small.unset.filled.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1721,7 +1793,7 @@
       },
       {
         "key": "small.unset.underlined.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
@@ -1762,13 +1834,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.unset.underlined.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
@@ -1809,13 +1887,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.unset.underlined.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
@@ -1862,13 +1946,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.unset.underlined.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 39,
         "pctExact": null,
         "pctAA": null,
@@ -1921,14 +2011,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.unset.underlined.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 41,
+        "channelsCompared": 48,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1974,8 +2070,8 @@
       },
       {
         "key": "small.unset.underlined.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 41,
+        "channelsCompared": 48,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2021,8 +2117,8 @@
       },
       {
         "key": "small.unset.underlined.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 41,
+        "channelsCompared": 48,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2068,8 +2164,8 @@
       },
       {
         "key": "small.unset.underlined.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 41,
+        "channelsCompared": 48,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2115,7 +2211,7 @@
       },
       {
         "key": "small.error.outlined.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -2180,13 +2276,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.error.outlined.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 33,
         "pctExact": null,
         "pctAA": null,
@@ -2275,13 +2377,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.error.outlined.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 32,
         "pctExact": null,
         "pctAA": null,
@@ -2376,13 +2484,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.error.outlined.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 32,
         "pctExact": null,
         "pctAA": null,
@@ -2477,14 +2591,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.error.outlined.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 33,
+        "channelsCompared": 48,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2578,8 +2698,8 @@
       },
       {
         "key": "small.error.outlined.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 33,
+        "channelsCompared": 48,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2673,8 +2793,8 @@
       },
       {
         "key": "small.error.outlined.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 33,
+        "channelsCompared": 48,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2768,8 +2888,8 @@
       },
       {
         "key": "small.error.outlined.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 33,
+        "channelsCompared": 48,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2863,7 +2983,7 @@
       },
       {
         "key": "small.error.borderless.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 45,
         "pctExact": null,
         "pctAA": null,
@@ -2880,13 +3000,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(255, 77, 79, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.error.borderless.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
@@ -2927,13 +3053,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(255, 77, 79, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.error.borderless.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
@@ -2980,13 +3112,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(255, 77, 79, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(255, 77, 79, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.error.borderless.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
@@ -3033,14 +3171,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(255, 77, 79, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(255, 77, 79, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.error.borderless.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 34,
+        "channelsCompared": 48,
+        "channelsEqual": 35,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3128,8 +3272,8 @@
       },
       {
         "key": "small.error.borderless.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 34,
+        "channelsCompared": 48,
+        "channelsEqual": 35,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3217,8 +3361,8 @@
       },
       {
         "key": "small.error.borderless.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 34,
+        "channelsCompared": 48,
+        "channelsEqual": 35,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3306,8 +3450,8 @@
       },
       {
         "key": "small.error.borderless.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 34,
+        "channelsCompared": 48,
+        "channelsEqual": 35,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3395,7 +3539,7 @@
       },
       {
         "key": "small.error.filled.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -3460,13 +3604,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(255, 77, 79, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.error.filled.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 36,
         "pctExact": null,
         "pctAA": null,
@@ -3537,13 +3687,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(255, 77, 79, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.error.filled.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 32,
         "pctExact": null,
         "pctAA": null,
@@ -3638,13 +3794,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(255, 77, 79, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(255, 77, 79, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.error.filled.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 31,
         "pctExact": null,
         "pctAA": null,
@@ -3745,14 +3907,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(255, 77, 79, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(255, 77, 79, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.error.filled.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3822,8 +3990,8 @@
       },
       {
         "key": "small.error.filled.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3893,8 +4061,8 @@
       },
       {
         "key": "small.error.filled.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3964,8 +4132,8 @@
       },
       {
         "key": "small.error.filled.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -4035,7 +4203,7 @@
       },
       {
         "key": "small.error.underlined.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
@@ -4076,13 +4244,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.error.underlined.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
@@ -4129,13 +4303,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.error.underlined.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 39,
         "pctExact": null,
         "pctAA": null,
@@ -4188,13 +4368,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.error.underlined.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 39,
         "pctExact": null,
         "pctAA": null,
@@ -4247,14 +4433,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.error.underlined.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 40,
+        "channelsCompared": 48,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -4306,8 +4498,8 @@
       },
       {
         "key": "small.error.underlined.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 40,
+        "channelsCompared": 48,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -4359,8 +4551,8 @@
       },
       {
         "key": "small.error.underlined.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 40,
+        "channelsCompared": 48,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -4412,8 +4604,8 @@
       },
       {
         "key": "small.error.underlined.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 40,
+        "channelsCompared": 48,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -4465,7 +4657,7 @@
       },
       {
         "key": "small.warning.outlined.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -4530,13 +4722,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.warning.outlined.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 33,
         "pctExact": null,
         "pctAA": null,
@@ -4625,13 +4823,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.warning.outlined.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 32,
         "pctExact": null,
         "pctAA": null,
@@ -4726,13 +4930,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.warning.outlined.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 32,
         "pctExact": null,
         "pctAA": null,
@@ -4827,14 +5037,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.warning.outlined.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 33,
+        "channelsCompared": 48,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -4928,8 +5144,8 @@
       },
       {
         "key": "small.warning.outlined.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 33,
+        "channelsCompared": 48,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -5023,8 +5239,8 @@
       },
       {
         "key": "small.warning.outlined.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 33,
+        "channelsCompared": 48,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -5118,8 +5334,8 @@
       },
       {
         "key": "small.warning.outlined.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 33,
+        "channelsCompared": 48,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -5213,7 +5429,7 @@
       },
       {
         "key": "small.warning.borderless.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 45,
         "pctExact": null,
         "pctAA": null,
@@ -5230,13 +5446,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(250, 173, 20, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.warning.borderless.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
@@ -5277,13 +5499,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(250, 173, 20, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.warning.borderless.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
@@ -5330,13 +5558,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(250, 173, 20, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(250, 173, 20, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.warning.borderless.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
@@ -5383,14 +5617,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(250, 173, 20, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(250, 173, 20, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.warning.borderless.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 34,
+        "channelsCompared": 48,
+        "channelsEqual": 35,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -5478,8 +5718,8 @@
       },
       {
         "key": "small.warning.borderless.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 34,
+        "channelsCompared": 48,
+        "channelsEqual": 35,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -5567,8 +5807,8 @@
       },
       {
         "key": "small.warning.borderless.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 34,
+        "channelsCompared": 48,
+        "channelsEqual": 35,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -5656,8 +5896,8 @@
       },
       {
         "key": "small.warning.borderless.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 34,
+        "channelsCompared": 48,
+        "channelsEqual": 35,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -5745,7 +5985,7 @@
       },
       {
         "key": "small.warning.filled.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -5810,13 +6050,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(250, 173, 20, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.warning.filled.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 36,
         "pctExact": null,
         "pctAA": null,
@@ -5887,13 +6133,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(250, 173, 20, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.warning.filled.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 32,
         "pctExact": null,
         "pctAA": null,
@@ -5988,13 +6240,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(250, 173, 20, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(250, 173, 20, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.warning.filled.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 31,
         "pctExact": null,
         "pctAA": null,
@@ -6095,14 +6353,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(250, 173, 20, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(250, 173, 20, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.warning.filled.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -6172,8 +6436,8 @@
       },
       {
         "key": "small.warning.filled.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -6243,8 +6507,8 @@
       },
       {
         "key": "small.warning.filled.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -6314,8 +6578,8 @@
       },
       {
         "key": "small.warning.filled.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -6385,7 +6649,7 @@
       },
       {
         "key": "small.warning.underlined.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
@@ -6426,13 +6690,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.warning.underlined.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
@@ -6479,13 +6749,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.warning.underlined.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 39,
         "pctExact": null,
         "pctAA": null,
@@ -6538,13 +6814,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.warning.underlined.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 39,
         "pctExact": null,
         "pctAA": null,
@@ -6597,14 +6879,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.warning.underlined.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 40,
+        "channelsCompared": 48,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -6656,8 +6944,8 @@
       },
       {
         "key": "small.warning.underlined.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 40,
+        "channelsCompared": 48,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -6709,8 +6997,8 @@
       },
       {
         "key": "small.warning.underlined.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 40,
+        "channelsCompared": 48,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -6762,8 +7050,8 @@
       },
       {
         "key": "small.warning.underlined.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 40,
+        "channelsCompared": 48,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -6815,7 +7103,7 @@
       },
       {
         "key": "middle.unset.outlined.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -6880,13 +7168,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.unset.outlined.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -6951,13 +7245,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.unset.outlined.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 36,
         "pctExact": null,
         "pctAA": null,
@@ -7028,13 +7328,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.unset.outlined.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 32,
         "pctExact": null,
         "pctAA": null,
@@ -7129,14 +7435,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.unset.outlined.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -7206,8 +7518,8 @@
       },
       {
         "key": "middle.unset.outlined.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -7277,8 +7589,8 @@
       },
       {
         "key": "middle.unset.outlined.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -7348,8 +7660,8 @@
       },
       {
         "key": "middle.unset.outlined.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -7419,7 +7731,7 @@
       },
       {
         "key": "middle.unset.borderless.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 45,
         "pctExact": null,
         "pctAA": null,
@@ -7436,13 +7748,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.unset.borderless.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 45,
         "pctExact": null,
         "pctAA": null,
@@ -7459,13 +7777,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.unset.borderless.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 44,
         "pctExact": null,
         "pctAA": null,
@@ -7488,13 +7812,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.unset.borderless.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 44,
         "pctExact": null,
         "pctAA": null,
@@ -7517,14 +7847,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.unset.borderless.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 45,
+        "channelsCompared": 48,
+        "channelsEqual": 46,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -7546,8 +7882,8 @@
       },
       {
         "key": "middle.unset.borderless.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 45,
+        "channelsCompared": 48,
+        "channelsEqual": 46,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -7569,8 +7905,8 @@
       },
       {
         "key": "middle.unset.borderless.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 45,
+        "channelsCompared": 48,
+        "channelsEqual": 46,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -7592,8 +7928,8 @@
       },
       {
         "key": "middle.unset.borderless.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 45,
+        "channelsCompared": 48,
+        "channelsEqual": 46,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -7615,7 +7951,7 @@
       },
       {
         "key": "middle.unset.filled.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -7680,13 +8016,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.unset.filled.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -7751,13 +8093,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.unset.filled.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 36,
         "pctExact": null,
         "pctAA": null,
@@ -7828,13 +8176,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.unset.filled.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 31,
         "pctExact": null,
         "pctAA": null,
@@ -7935,14 +8289,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.unset.filled.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -8012,8 +8372,8 @@
       },
       {
         "key": "middle.unset.filled.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -8083,8 +8443,8 @@
       },
       {
         "key": "middle.unset.filled.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -8154,8 +8514,8 @@
       },
       {
         "key": "middle.unset.filled.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -8225,7 +8585,7 @@
       },
       {
         "key": "middle.unset.underlined.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
@@ -8266,13 +8626,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.unset.underlined.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
@@ -8313,13 +8679,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.unset.underlined.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
@@ -8366,13 +8738,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.unset.underlined.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 39,
         "pctExact": null,
         "pctAA": null,
@@ -8425,14 +8803,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.unset.underlined.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 41,
+        "channelsCompared": 48,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -8478,8 +8862,8 @@
       },
       {
         "key": "middle.unset.underlined.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 41,
+        "channelsCompared": 48,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -8525,8 +8909,8 @@
       },
       {
         "key": "middle.unset.underlined.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 41,
+        "channelsCompared": 48,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -8572,8 +8956,8 @@
       },
       {
         "key": "middle.unset.underlined.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 41,
+        "channelsCompared": 48,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -8619,7 +9003,7 @@
       },
       {
         "key": "middle.error.outlined.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -8684,13 +9068,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.error.outlined.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 33,
         "pctExact": null,
         "pctAA": null,
@@ -8779,13 +9169,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.error.outlined.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 32,
         "pctExact": null,
         "pctAA": null,
@@ -8880,13 +9276,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.error.outlined.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 32,
         "pctExact": null,
         "pctAA": null,
@@ -8981,14 +9383,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.error.outlined.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 33,
+        "channelsCompared": 48,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -9082,8 +9490,8 @@
       },
       {
         "key": "middle.error.outlined.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 33,
+        "channelsCompared": 48,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -9177,8 +9585,8 @@
       },
       {
         "key": "middle.error.outlined.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 33,
+        "channelsCompared": 48,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -9272,8 +9680,8 @@
       },
       {
         "key": "middle.error.outlined.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 33,
+        "channelsCompared": 48,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -9367,7 +9775,7 @@
       },
       {
         "key": "middle.error.borderless.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 45,
         "pctExact": null,
         "pctAA": null,
@@ -9384,13 +9792,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(255, 77, 79, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.error.borderless.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
@@ -9431,13 +9845,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(255, 77, 79, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.error.borderless.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
@@ -9484,13 +9904,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(255, 77, 79, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(255, 77, 79, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.error.borderless.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
@@ -9537,14 +9963,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(255, 77, 79, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(255, 77, 79, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.error.borderless.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 34,
+        "channelsCompared": 48,
+        "channelsEqual": 35,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -9632,8 +10064,8 @@
       },
       {
         "key": "middle.error.borderless.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 34,
+        "channelsCompared": 48,
+        "channelsEqual": 35,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -9721,8 +10153,8 @@
       },
       {
         "key": "middle.error.borderless.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 34,
+        "channelsCompared": 48,
+        "channelsEqual": 35,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -9810,8 +10242,8 @@
       },
       {
         "key": "middle.error.borderless.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 34,
+        "channelsCompared": 48,
+        "channelsEqual": 35,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -9899,7 +10331,7 @@
       },
       {
         "key": "middle.error.filled.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -9964,13 +10396,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(255, 77, 79, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.error.filled.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 36,
         "pctExact": null,
         "pctAA": null,
@@ -10041,13 +10479,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(255, 77, 79, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.error.filled.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 32,
         "pctExact": null,
         "pctAA": null,
@@ -10142,13 +10586,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(255, 77, 79, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(255, 77, 79, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.error.filled.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 31,
         "pctExact": null,
         "pctAA": null,
@@ -10249,14 +10699,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(255, 77, 79, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(255, 77, 79, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.error.filled.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -10326,8 +10782,8 @@
       },
       {
         "key": "middle.error.filled.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -10397,8 +10853,8 @@
       },
       {
         "key": "middle.error.filled.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -10468,8 +10924,8 @@
       },
       {
         "key": "middle.error.filled.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -10539,7 +10995,7 @@
       },
       {
         "key": "middle.error.underlined.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
@@ -10580,13 +11036,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.error.underlined.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
@@ -10633,13 +11095,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.error.underlined.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 39,
         "pctExact": null,
         "pctAA": null,
@@ -10692,13 +11160,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.error.underlined.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 39,
         "pctExact": null,
         "pctAA": null,
@@ -10751,14 +11225,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.error.underlined.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 40,
+        "channelsCompared": 48,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -10810,8 +11290,8 @@
       },
       {
         "key": "middle.error.underlined.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 40,
+        "channelsCompared": 48,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -10863,8 +11343,8 @@
       },
       {
         "key": "middle.error.underlined.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 40,
+        "channelsCompared": 48,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -10916,8 +11396,8 @@
       },
       {
         "key": "middle.error.underlined.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 40,
+        "channelsCompared": 48,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -10969,7 +11449,7 @@
       },
       {
         "key": "middle.warning.outlined.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -11034,13 +11514,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.warning.outlined.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 33,
         "pctExact": null,
         "pctAA": null,
@@ -11129,13 +11615,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.warning.outlined.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 32,
         "pctExact": null,
         "pctAA": null,
@@ -11230,13 +11722,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.warning.outlined.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 32,
         "pctExact": null,
         "pctAA": null,
@@ -11331,14 +11829,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.warning.outlined.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 33,
+        "channelsCompared": 48,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -11432,8 +11936,8 @@
       },
       {
         "key": "middle.warning.outlined.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 33,
+        "channelsCompared": 48,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -11527,8 +12031,8 @@
       },
       {
         "key": "middle.warning.outlined.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 33,
+        "channelsCompared": 48,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -11622,8 +12126,8 @@
       },
       {
         "key": "middle.warning.outlined.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 33,
+        "channelsCompared": 48,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -11717,7 +12221,7 @@
       },
       {
         "key": "middle.warning.borderless.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 45,
         "pctExact": null,
         "pctAA": null,
@@ -11734,13 +12238,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(250, 173, 20, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.warning.borderless.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
@@ -11781,13 +12291,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(250, 173, 20, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.warning.borderless.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
@@ -11834,13 +12350,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(250, 173, 20, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(250, 173, 20, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.warning.borderless.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
@@ -11887,14 +12409,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(250, 173, 20, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(250, 173, 20, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.warning.borderless.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 34,
+        "channelsCompared": 48,
+        "channelsEqual": 35,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -11982,8 +12510,8 @@
       },
       {
         "key": "middle.warning.borderless.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 34,
+        "channelsCompared": 48,
+        "channelsEqual": 35,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -12071,8 +12599,8 @@
       },
       {
         "key": "middle.warning.borderless.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 34,
+        "channelsCompared": 48,
+        "channelsEqual": 35,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -12160,8 +12688,8 @@
       },
       {
         "key": "middle.warning.borderless.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 34,
+        "channelsCompared": 48,
+        "channelsEqual": 35,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -12249,7 +12777,7 @@
       },
       {
         "key": "middle.warning.filled.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -12314,13 +12842,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(250, 173, 20, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.warning.filled.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 36,
         "pctExact": null,
         "pctAA": null,
@@ -12391,13 +12925,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(250, 173, 20, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.warning.filled.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 32,
         "pctExact": null,
         "pctAA": null,
@@ -12492,13 +13032,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(250, 173, 20, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(250, 173, 20, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.warning.filled.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 31,
         "pctExact": null,
         "pctAA": null,
@@ -12599,14 +13145,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(250, 173, 20, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(250, 173, 20, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.warning.filled.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -12676,8 +13228,8 @@
       },
       {
         "key": "middle.warning.filled.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -12747,8 +13299,8 @@
       },
       {
         "key": "middle.warning.filled.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -12818,8 +13370,8 @@
       },
       {
         "key": "middle.warning.filled.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -12889,7 +13441,7 @@
       },
       {
         "key": "middle.warning.underlined.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
@@ -12930,13 +13482,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.warning.underlined.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
@@ -12983,13 +13541,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.warning.underlined.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 39,
         "pctExact": null,
         "pctAA": null,
@@ -13042,13 +13606,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.warning.underlined.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 39,
         "pctExact": null,
         "pctAA": null,
@@ -13101,14 +13671,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "middle.warning.underlined.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 40,
+        "channelsCompared": 48,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -13160,8 +13736,8 @@
       },
       {
         "key": "middle.warning.underlined.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 40,
+        "channelsCompared": 48,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -13213,8 +13789,8 @@
       },
       {
         "key": "middle.warning.underlined.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 40,
+        "channelsCompared": 48,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -13266,8 +13842,8 @@
       },
       {
         "key": "middle.warning.underlined.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 40,
+        "channelsCompared": 48,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -13319,7 +13895,7 @@
       },
       {
         "key": "large.unset.outlined.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -13384,13 +13960,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.unset.outlined.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -13455,13 +14037,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.unset.outlined.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 36,
         "pctExact": null,
         "pctAA": null,
@@ -13532,13 +14120,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.unset.outlined.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 32,
         "pctExact": null,
         "pctAA": null,
@@ -13633,14 +14227,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.unset.outlined.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -13710,8 +14310,8 @@
       },
       {
         "key": "large.unset.outlined.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -13781,8 +14381,8 @@
       },
       {
         "key": "large.unset.outlined.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -13852,8 +14452,8 @@
       },
       {
         "key": "large.unset.outlined.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -13923,7 +14523,7 @@
       },
       {
         "key": "large.unset.borderless.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 45,
         "pctExact": null,
         "pctAA": null,
@@ -13940,13 +14540,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.unset.borderless.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 45,
         "pctExact": null,
         "pctAA": null,
@@ -13963,13 +14569,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.unset.borderless.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 44,
         "pctExact": null,
         "pctAA": null,
@@ -13992,13 +14604,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.unset.borderless.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 44,
         "pctExact": null,
         "pctAA": null,
@@ -14021,14 +14639,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.unset.borderless.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 45,
+        "channelsCompared": 48,
+        "channelsEqual": 46,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -14050,8 +14674,8 @@
       },
       {
         "key": "large.unset.borderless.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 45,
+        "channelsCompared": 48,
+        "channelsEqual": 46,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -14073,8 +14697,8 @@
       },
       {
         "key": "large.unset.borderless.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 45,
+        "channelsCompared": 48,
+        "channelsEqual": 46,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -14096,8 +14720,8 @@
       },
       {
         "key": "large.unset.borderless.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 45,
+        "channelsCompared": 48,
+        "channelsEqual": 46,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -14119,7 +14743,7 @@
       },
       {
         "key": "large.unset.filled.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -14184,13 +14808,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.unset.filled.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -14255,13 +14885,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.unset.filled.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 36,
         "pctExact": null,
         "pctAA": null,
@@ -14332,13 +14968,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.unset.filled.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 31,
         "pctExact": null,
         "pctAA": null,
@@ -14439,14 +15081,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.unset.filled.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -14516,8 +15164,8 @@
       },
       {
         "key": "large.unset.filled.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -14587,8 +15235,8 @@
       },
       {
         "key": "large.unset.filled.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -14658,8 +15306,8 @@
       },
       {
         "key": "large.unset.filled.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -14729,7 +15377,7 @@
       },
       {
         "key": "large.unset.underlined.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
@@ -14770,13 +15418,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.unset.underlined.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
@@ -14817,13 +15471,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.unset.underlined.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
@@ -14870,13 +15530,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.unset.underlined.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 39,
         "pctExact": null,
         "pctAA": null,
@@ -14929,14 +15595,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.unset.underlined.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 41,
+        "channelsCompared": 48,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -14982,8 +15654,8 @@
       },
       {
         "key": "large.unset.underlined.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 41,
+        "channelsCompared": 48,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -15029,8 +15701,8 @@
       },
       {
         "key": "large.unset.underlined.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 41,
+        "channelsCompared": 48,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -15076,8 +15748,8 @@
       },
       {
         "key": "large.unset.underlined.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 41,
+        "channelsCompared": 48,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -15123,7 +15795,7 @@
       },
       {
         "key": "large.error.outlined.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -15188,13 +15860,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.error.outlined.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 33,
         "pctExact": null,
         "pctAA": null,
@@ -15283,13 +15961,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.error.outlined.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 32,
         "pctExact": null,
         "pctAA": null,
@@ -15384,13 +16068,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.error.outlined.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 32,
         "pctExact": null,
         "pctAA": null,
@@ -15485,14 +16175,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.error.outlined.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 33,
+        "channelsCompared": 48,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -15586,8 +16282,8 @@
       },
       {
         "key": "large.error.outlined.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 33,
+        "channelsCompared": 48,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -15681,8 +16377,8 @@
       },
       {
         "key": "large.error.outlined.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 33,
+        "channelsCompared": 48,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -15776,8 +16472,8 @@
       },
       {
         "key": "large.error.outlined.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 33,
+        "channelsCompared": 48,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -15871,7 +16567,7 @@
       },
       {
         "key": "large.error.borderless.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 45,
         "pctExact": null,
         "pctAA": null,
@@ -15888,13 +16584,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(255, 77, 79, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.error.borderless.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
@@ -15935,13 +16637,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(255, 77, 79, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.error.borderless.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
@@ -15988,13 +16696,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(255, 77, 79, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(255, 77, 79, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.error.borderless.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
@@ -16041,14 +16755,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(255, 77, 79, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(255, 77, 79, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.error.borderless.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 34,
+        "channelsCompared": 48,
+        "channelsEqual": 35,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -16136,8 +16856,8 @@
       },
       {
         "key": "large.error.borderless.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 34,
+        "channelsCompared": 48,
+        "channelsEqual": 35,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -16225,8 +16945,8 @@
       },
       {
         "key": "large.error.borderless.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 34,
+        "channelsCompared": 48,
+        "channelsEqual": 35,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -16314,8 +17034,8 @@
       },
       {
         "key": "large.error.borderless.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 34,
+        "channelsCompared": 48,
+        "channelsEqual": 35,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -16403,7 +17123,7 @@
       },
       {
         "key": "large.error.filled.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -16468,13 +17188,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(255, 77, 79, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.error.filled.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 36,
         "pctExact": null,
         "pctAA": null,
@@ -16545,13 +17271,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(255, 77, 79, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.error.filled.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 32,
         "pctExact": null,
         "pctAA": null,
@@ -16646,13 +17378,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(255, 77, 79, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(255, 77, 79, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.error.filled.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 31,
         "pctExact": null,
         "pctAA": null,
@@ -16753,14 +17491,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(255, 77, 79, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(255, 77, 79, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.error.filled.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -16830,8 +17574,8 @@
       },
       {
         "key": "large.error.filled.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -16901,8 +17645,8 @@
       },
       {
         "key": "large.error.filled.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -16972,8 +17716,8 @@
       },
       {
         "key": "large.error.filled.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -17043,7 +17787,7 @@
       },
       {
         "key": "large.error.underlined.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
@@ -17084,13 +17828,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.error.underlined.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
@@ -17137,13 +17887,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.error.underlined.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 39,
         "pctExact": null,
         "pctAA": null,
@@ -17196,13 +17952,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.error.underlined.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 39,
         "pctExact": null,
         "pctAA": null,
@@ -17255,14 +18017,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.error.underlined.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 40,
+        "channelsCompared": 48,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -17314,8 +18082,8 @@
       },
       {
         "key": "large.error.underlined.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 40,
+        "channelsCompared": 48,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -17367,8 +18135,8 @@
       },
       {
         "key": "large.error.underlined.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 40,
+        "channelsCompared": 48,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -17420,8 +18188,8 @@
       },
       {
         "key": "large.error.underlined.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 40,
+        "channelsCompared": 48,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -17473,7 +18241,7 @@
       },
       {
         "key": "large.warning.outlined.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -17538,13 +18306,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.warning.outlined.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 33,
         "pctExact": null,
         "pctAA": null,
@@ -17633,13 +18407,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.warning.outlined.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 32,
         "pctExact": null,
         "pctAA": null,
@@ -17734,13 +18514,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.warning.outlined.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 32,
         "pctExact": null,
         "pctAA": null,
@@ -17835,14 +18621,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.warning.outlined.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 33,
+        "channelsCompared": 48,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -17936,8 +18728,8 @@
       },
       {
         "key": "large.warning.outlined.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 33,
+        "channelsCompared": 48,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -18031,8 +18823,8 @@
       },
       {
         "key": "large.warning.outlined.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 33,
+        "channelsCompared": 48,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -18126,8 +18918,8 @@
       },
       {
         "key": "large.warning.outlined.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 33,
+        "channelsCompared": 48,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -18221,7 +19013,7 @@
       },
       {
         "key": "large.warning.borderless.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 45,
         "pctExact": null,
         "pctAA": null,
@@ -18238,13 +19030,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(250, 173, 20, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.warning.borderless.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
@@ -18285,13 +19083,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(250, 173, 20, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.warning.borderless.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
@@ -18338,13 +19142,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(250, 173, 20, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(250, 173, 20, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.warning.borderless.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
@@ -18391,14 +19201,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(250, 173, 20, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(250, 173, 20, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.warning.borderless.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 34,
+        "channelsCompared": 48,
+        "channelsEqual": 35,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -18486,8 +19302,8 @@
       },
       {
         "key": "large.warning.borderless.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 34,
+        "channelsCompared": 48,
+        "channelsEqual": 35,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -18575,8 +19391,8 @@
       },
       {
         "key": "large.warning.borderless.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 34,
+        "channelsCompared": 48,
+        "channelsEqual": 35,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -18664,8 +19480,8 @@
       },
       {
         "key": "large.warning.borderless.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 34,
+        "channelsCompared": 48,
+        "channelsEqual": 35,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -18753,7 +19569,7 @@
       },
       {
         "key": "large.warning.filled.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
@@ -18818,13 +19634,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(250, 173, 20, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.warning.filled.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 36,
         "pctExact": null,
         "pctAA": null,
@@ -18895,13 +19717,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(250, 173, 20, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.warning.filled.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 32,
         "pctExact": null,
         "pctAA": null,
@@ -18996,13 +19824,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(250, 173, 20, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(250, 173, 20, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.warning.filled.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 31,
         "pctExact": null,
         "pctAA": null,
@@ -19103,14 +19937,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(250, 173, 20, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(250, 173, 20, 1)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.warning.filled.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -19180,8 +20020,8 @@
       },
       {
         "key": "large.warning.filled.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -19251,8 +20091,8 @@
       },
       {
         "key": "large.warning.filled.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -19322,8 +20162,8 @@
       },
       {
         "key": "large.warning.filled.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 37,
+        "channelsCompared": 48,
+        "channelsEqual": 38,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -19393,7 +20233,7 @@
       },
       {
         "key": "large.warning.underlined.enabled__default",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
@@ -19434,13 +20274,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.warning.underlined.enabled__hover",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
@@ -19487,13 +20333,19 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.warning.underlined.enabled__focus-visible",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 39,
         "pctExact": null,
         "pctAA": null,
@@ -19546,13 +20398,19 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.warning.underlined.enabled__active",
-        "channelsCompared": 47,
+        "channelsCompared": 48,
         "channelsEqual": 39,
         "pctExact": null,
         "pctAA": null,
@@ -19605,14 +20463,20 @@
             "channel": "outline-color",
             "ours": "rgba(0, 95, 204, 1)",
             "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.warning.underlined.disabled__default",
-        "channelsCompared": 47,
-        "channelsEqual": 40,
+        "channelsCompared": 48,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -19664,8 +20528,8 @@
       },
       {
         "key": "large.warning.underlined.disabled__hover",
-        "channelsCompared": 47,
-        "channelsEqual": 40,
+        "channelsCompared": 48,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -19717,8 +20581,8 @@
       },
       {
         "key": "large.warning.underlined.disabled__focus-visible",
-        "channelsCompared": 47,
-        "channelsEqual": 40,
+        "channelsCompared": 48,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -19770,8 +20634,8 @@
       },
       {
         "key": "large.warning.underlined.disabled__active",
-        "channelsCompared": 47,
-        "channelsEqual": 40,
+        "channelsCompared": 48,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",

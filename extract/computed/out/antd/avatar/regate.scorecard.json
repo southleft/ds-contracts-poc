@@ -228,7 +228,7 @@
     },
     "shippedMinted": {
       "path": "examples/antd/tokens/antd-minted.dtcg.json",
-      "leavesAdded": 1238,
+      "leavesAdded": 1239,
       "divergent": [
         {
           "token": "imported.avatar.root.color",
