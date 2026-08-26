@@ -1,0 +1,27 @@
+{
+  "feature": "repetition",
+  "construct": "7 adjacent same-shape siblings, the LAST carrying a distinct paint (rgb(64, 128, 191))",
+  "why": "One calendar WEEK. Seven is the width of every month grid ever drawn, and it is the first sibling count where writing every cell out as its own part stops being obviously right. Same distinct-last-sibling probe as the three case, so the two are comparable: if three passes and seven does not, the boundary is a count and this fixture has found it.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.b.tokens.background-color",
+  "observable": {
+    "part": "b",
+    "channel": "background-color",
+    "capturedValue": "rgb(64, 128, 191)"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "a week row: seven sibling frames, the seventh a different fill"
+  },
+  "blockStage": true,
+  "predictedDifficulty": "hard",
+  "mustHave": [
+    "the canvas shows exactly 7 sibling boxes in one horizontal row",
+    "the 7th box is a visibly different colour (mid blue) from the first 6 (pale blue-grey)",
+    "all 7 boxes are the same size (16x16)",
+    "no box is missing and none is duplicated - a grader can count 7"
+  ],
+  "id": "repeat-siblings-seven",
+  "predictedWall": null
+}

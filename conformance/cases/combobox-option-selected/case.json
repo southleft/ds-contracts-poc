@@ -1,0 +1,27 @@
+{
+  "feature": "combobox",
+  "construct": "5 sibling options where ONE is SELECTED - a distinct fill (rgb(219, 234, 254)) and weight among four identical siblings",
+  "why": "The selected option is the repetition problem wearing its most consequential face: five near-identical children where the one that DIFFERS is the only one carrying the component's actual value. Five siblings is above the inverse rule's >=3 threshold, so a repetition collapse is eligible here; if it happens, the list still looks like a list and the selection is simply gone.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.b.tokens.background-color",
+  "observable": {
+    "part": "b",
+    "channel": "background-color",
+    "capturedValue": "rgb(219, 234, 254)"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "the selected option is a frame with its own fill among four unfilled siblings"
+  },
+  "blockStage": true,
+  "predictedDifficulty": "hard",
+  "mustHave": [
+    "the listbox shows exactly 5 options, stacked vertically",
+    "exactly ONE option (the 3rd, 'Gamma') carries a tinted fill",
+    "the selected option's text is bolder than the other four",
+    "the other 4 options have no fill of their own"
+  ],
+  "id": "combobox-option-selected",
+  "predictedWall": null
+}

@@ -1,0 +1,3 @@
+[data-cf="repeat-siblings-three"] { display: flex; gap: 4px; padding: 4px; background: rgb(238, 238, 238); }
+[data-cf="repeat-siblings-three"] .cf-a { width: 16px; height: 16px; background: rgb(210, 220, 230); }
+[data-cf="repeat-siblings-three"] .cf-b { width: 16px; height: 16px; background: rgb(191, 64, 32); }

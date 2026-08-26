@@ -1,0 +1,32 @@
+{
+  "feature": "combobox",
+  "construct": "the OPEN listbox as an out-of-flow overlay - `position: absolute; top: 34px` under a `position: relative` trigger, so the popover does not participate in the trigger's flow",
+  "why": "'Overlays rather than reflows' is the one structural fact that separates a combobox from an accordion, and it is carried entirely by the popover being out of flow. The `top: 34px` inset is what places it just under the trigger; if the inset is lost the list lands ON the trigger, and if the out-of-flow-ness is lost the trigger grows to contain the list. Both failures are recognisable at a glance and neither is a colour.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.b.layout.position / insets.top",
+  "observable": {
+    "part": "b",
+    "channel": "top",
+    "capturedValue": "34px"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "layoutPositioning ABSOLUTE with a y offset under the trigger"
+  },
+  "blockStage": true,
+  "predictedDifficulty": "hard",
+  "mustHave": [
+    "the popover appears BELOW the trigger, not on top of it and not inside it",
+    "the trigger's own height is unchanged by the popover's presence - the trigger is one text line tall",
+    "the popover's left edge lines up with the trigger's left edge",
+    "the popover lists both options, stacked vertically"
+  ],
+  "id": "combobox-popover-overlay-inset",
+  "predictedWall": {
+    "code": "FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED",
+    "status": "EXISTING",
+    "half": "canvas round trip",
+    "why": "core/emit-figma-script.ts:6536 (and :6609, :7382) degrades with exactly this code and the message 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow'. 'The child stayed in flow' IS the combobox failure mode this case exists to catch: a popover that reflows the trigger instead of overlaying it. The trigger here is a flex row, so the parent SHOULD be auto-layout and the refusal should not fire - which is why this is `hard` rather than `expected-wall`. If it fires anyway, the message names the cause precisely."
+  }
+}

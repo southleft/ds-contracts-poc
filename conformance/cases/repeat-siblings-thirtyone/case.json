@@ -1,0 +1,32 @@
+{
+  "feature": "repetition",
+  "construct": "31 adjacent same-shape siblings (a wrapping flex run), the LAST carrying a distinct paint (rgb(32, 160, 96))",
+  "why": "A MONTH. This is the case the owner named: with no forward repetition rule, a month is ~200 flat nodes rather than a cell component with 31 instances. The flat emission is not, by itself, a wrong picture - so this case does NOT measure node count, it measures whether the 31st cell (the odd one, e.g. 'today') survives the walk at all. A month that draws 31 identical cells and loses the one that differs is the recognisability failure, and it is invisible to any instrument that counts nodes.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.b.tokens.background-color",
+  "observable": {
+    "part": "b",
+    "channel": "background-color",
+    "capturedValue": "rgb(32, 160, 96)"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "31 sibling frames wrapping into rows; the 31st is a different fill"
+  },
+  "blockStage": true,
+  "predictedDifficulty": "expected-wall",
+  "mustHave": [
+    "the canvas shows exactly 31 boxes",
+    "the 31st box is a visibly different colour (green) from the other 30 (pale blue-grey)",
+    "the boxes wrap into multiple rows rather than one long line",
+    "all 31 boxes are the same size (16x16)"
+  ],
+  "id": "repeat-siblings-thirtyone",
+  "predictedWall": {
+    "code": "FC-REPEAT-FORWARD-ABSENT",
+    "status": "PROPOSED - no existing code covers this",
+    "half": "capture (contract)",
+    "why": "There is NO forward repetition rule. The inverse exists (core/propose-figma.ts, >=3 adjacent same-component instances -> part.repeat) but nothing in the capture direction turns N repeated siblings into a component plus instances, so a month is emitted flat. The flat emission is not itself the failure I predict; what I predict is that at 31 siblings the union naming in extract/computed/anatomy.ts nameUnion() - which suffixes duplicates a, a-2 ... a-31 - plus the per-part folding downstream will treat the 31 near-identical siblings as one repeated shape and fold the ODD sibling's distinct fill away with them. I searched spec/channel-table.json, spec/door-register.json, spec/lowering.json and spec/grammar-coverage.json for a repetition code and there is none; FC-CELL-FRAMING / FC-CELL-INK-LOST are composition-corpus slot fills, not this."
+  }
+}

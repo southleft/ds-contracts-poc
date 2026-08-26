@@ -1,0 +1,32 @@
+{
+  "feature": "table",
+  "construct": "per-COLUMN text alignment - the label cell `text-align: left`, the numeric cell `text-align: right`, at fixed column widths",
+  "why": "Right-aligned numerics are the difference between a table and a list of words. The alignment lives on the CELL, is different per column, and is the only thing that makes the two rows' digits line up on their last character - a fact a grader can check with a ruler and no knowledge of the source.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.c.parts.b.tokens.text-align",
+  "observable": {
+    "part": "b",
+    "channel": "text-align",
+    "capturedValue": "right"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "textAlignHorizontal RIGHT on the numeric cell's text node"
+  },
+  "blockStage": true,
+  "predictedDifficulty": "hard",
+  "mustHave": [
+    "the two rows' numeric values ('7' and '128') are right-aligned with each other - their right edges match",
+    "the two label values ('Widget', 'Gadget') are left-aligned with each other",
+    "the numeric column and the label column do not overlap",
+    "the numeric column sits to the right of the label column in both rows"
+  ],
+  "id": "table-column-numeric-alignment",
+  "predictedWall": {
+    "code": "FC-TEXT-FILL-ALIGNMENT",
+    "status": "EXISTING - cited as the governing lowering, NOT as a predicted failure",
+    "half": "canvas round trip",
+    "why": "spec/lowering.json registers this rule as 'text hugs unless hugging would move it' - it asks whether the packing agrees with the text alignment and keeps the glyphs where CSS put them. A right-aligned numeric cell at a FIXED column width is precisely the shape where hugging WOULD move the text, so this rule should fire and keep the alignment. I am naming it so that if the digits come back left-aligned, the first place to look is this rule failing to fire rather than text-align being unread. Predicted difficulty is `hard`, not `expected-wall`."
+  }
+}

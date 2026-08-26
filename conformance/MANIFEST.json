@@ -2,11 +2,11 @@
   "_marker": "THE DENOMINATOR. Hand-authored per case, generated into one index. Deliberately NOT derived from isFusable / styled / DECLARED_CHANNELS / CHANNEL_TO_COMPUTED / TOKEN_CHANNELS / carriedParts — every instrument in the pipeline derives its denominator from the same filter that decides carriage, which is why a channel the filter never opened scores 100%. This file is the independent one.",
   "generatedBy": "conformance/build.ts",
   "library": "@ds-contracts/conformance@0.1.0",
-  "count": 94,
+  "count": 107,
   "byExpectation": {
-    "CARRIED": 52,
+    "CARRIED": 63,
     "LOWERED": 5,
-    "REFUSED": 19,
+    "REFUSED": 21,
     "UNSUPPORTED": 18
   },
   "cases": [
@@ -351,6 +351,155 @@
       "canvas": {
         "expect": "PRESENT",
         "note": "SOLID fill with opacity"
+      }
+    },
+    {
+      "feature": "combobox",
+      "construct": "the CLOSED combobox trigger - `justify-content: space-between` pushing a value label and a two-border chevron box to opposite ends of a bordered row",
+      "why": "The closed state is the combobox a designer actually sees 99% of the time, and `space-between` is the whole reason the chevron is at the far right rather than next to the text. The chevron is drawn from two real borders rather than a pseudo-element glyph on purpose: `::before { content }` is already pinned REFUSED (pseudo-content-glyph), and this case is about the trigger's LAYOUT, not about re-measuring that wall.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.layout.justify / primaryAxisAlignItems",
+      "observable": {
+        "part": "root",
+        "channel": "justify-content",
+        "capturedValue": "space-between"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "primaryAxisAlignItems SPACE_BETWEEN on the trigger frame"
+      },
+      "blockStage": true,
+      "predictedDifficulty": "easy",
+      "mustHave": [
+        "the trigger is a single bordered row with a rounded outline",
+        "the value text sits at the left end and the chevron at the right end, with empty space between them",
+        "the chevron is a small mark near the right inner edge, not adjacent to the text",
+        "the trigger shows no list of options"
+      ],
+      "id": "combobox-closed-trigger",
+      "predictedWall": null
+    },
+    {
+      "feature": "combobox",
+      "construct": "`z-index: 10` on an absolutely positioned listbox that OVERLAPS its trigger - explicit paint order, not document order",
+      "why": "Separated from the inset case deliberately. That one asks where the popover goes; this one asks what happens when it lands ON something and the author has said, in CSS, which one wins. The canvas HAS a spelling for paint order - a child's index in the layer tree - so this is not a construct with nowhere to go; the question is whether an explicit z-index is read, translated, or dropped. Declared REFUSED rather than CARRIED because no ordering channel is in the carried vocabulary today, and a silent drop here means a popover that renders behind the thing it is supposed to cover.",
+      "expect": "REFUSED",
+      "expectName": "z-index",
+      "expectWhere": "LEDGER.md",
+      "observable": {
+        "part": "b",
+        "channel": "z-index",
+        "capturedValue": "10"
+      },
+      "canvas": {
+        "expect": "ABSENT",
+        "note": "the canvas spells paint order as child index; a numeric z-index has no direct channel"
+      },
+      "blockStage": true,
+      "predictedDifficulty": "expected-wall",
+      "mustHave": [
+        "the white listbox is drawn IN FRONT OF the grey trigger where the two overlap",
+        "the listbox's text is legible - not covered by the trigger's fill",
+        "if the ordering cannot be carried, an artifact names z-index as the reason"
+      ],
+      "id": "combobox-listbox-stacking-order",
+      "predictedWall": {
+        "code": "FC-STACKING-ORDER-UNREAD",
+        "status": "PROPOSED - no existing code covers this",
+        "half": "capture (contract)",
+        "why": "I searched all four spec registers and the whole FC-* vocabulary for a stacking/paint-order code and there is none. The nearest neighbours are about clipping (FC-OVERFLOW-CLIP-LOST, FC-FIGMA-CLIP-DEFAULT), not ordering. This is a real gap rather than a construct with nowhere to go: the canvas DOES spell paint order, as a child's index in the layer tree, so an engine could honour z-index by reordering children. I predict it is neither read nor named, which is the worst of the three outcomes because a popover that renders BEHIND its trigger is still a plausible-looking picture."
+      }
+    },
+    {
+      "feature": "combobox",
+      "construct": "5 sibling options where ONE is HIGHLIGHTED (active descendant) by a single-SIDE border - `border-left: 3px solid rgb(37, 99, 235)` against a transparent left border on the other four",
+      "why": "Highlighted and selected are different states of the same list and a combobox needs both at once, so they are two cases rather than one. This one is carried by a PER-SIDE border, the accent bar every listbox uses for keyboard focus: the four quiet siblings reserve the same 3px so nothing shifts when the highlight moves, which means the construct is entirely a border COLOUR difference on one edge. A per-side border that collapses to a uniform stroke takes the direction of the highlight with it.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.c.tokens.border-left-color",
+      "observable": {
+        "part": "c",
+        "channel": "border-left-color",
+        "capturedValue": "rgb(37, 99, 235)"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "an individual-side stroke on the highlighted option's frame"
+      },
+      "blockStage": true,
+      "predictedDifficulty": "hard",
+      "mustHave": [
+        "the listbox shows exactly 5 options, stacked vertically",
+        "exactly ONE option (the 2nd, 'Beta') carries a coloured bar on its LEFT edge only",
+        "the accent bar is on the left edge - not the right, not all four sides",
+        "the other 4 options' text left edges line up with the highlighted option's text left edge (nothing shifts)"
+      ],
+      "id": "combobox-option-highlighted",
+      "predictedWall": {
+        "code": "FC-DUMP-PROPOSE-STROKE-WEIGHT-SIDES",
+        "status": "EXISTING - CLOSED 2026-08-20, cited as the reason I expect this to PASS",
+        "half": "canvas round trip",
+        "why": "parity/receipts/beta/KIT-CLIMB.md records this finding as closed: 'Propose treated four different side-weight variable names as not uniform and dropped them ... Those now recover as per-side channels.' A single-side accent border is the same shape, so the closed fix should cover it. I am naming it as the thing to check first if the accent bar comes back on all four sides or not at all. Note the fix was about stroke WEIGHT per side; this case varies stroke COLOUR per side, which the receipt does not explicitly claim."
+      }
+    },
+    {
+      "feature": "combobox",
+      "construct": "5 sibling options where ONE is SELECTED - a distinct fill (rgb(219, 234, 254)) and weight among four identical siblings",
+      "why": "The selected option is the repetition problem wearing its most consequential face: five near-identical children where the one that DIFFERS is the only one carrying the component's actual value. Five siblings is above the inverse rule's >=3 threshold, so a repetition collapse is eligible here; if it happens, the list still looks like a list and the selection is simply gone.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.b.tokens.background-color",
+      "observable": {
+        "part": "b",
+        "channel": "background-color",
+        "capturedValue": "rgb(219, 234, 254)"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "the selected option is a frame with its own fill among four unfilled siblings"
+      },
+      "blockStage": true,
+      "predictedDifficulty": "hard",
+      "mustHave": [
+        "the listbox shows exactly 5 options, stacked vertically",
+        "exactly ONE option (the 3rd, 'Gamma') carries a tinted fill",
+        "the selected option's text is bolder than the other four",
+        "the other 4 options have no fill of their own"
+      ],
+      "id": "combobox-option-selected",
+      "predictedWall": null
+    },
+    {
+      "feature": "combobox",
+      "construct": "the OPEN listbox as an out-of-flow overlay - `position: absolute; top: 34px` under a `position: relative` trigger, so the popover does not participate in the trigger's flow",
+      "why": "'Overlays rather than reflows' is the one structural fact that separates a combobox from an accordion, and it is carried entirely by the popover being out of flow. The `top: 34px` inset is what places it just under the trigger; if the inset is lost the list lands ON the trigger, and if the out-of-flow-ness is lost the trigger grows to contain the list. Both failures are recognisable at a glance and neither is a colour.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.b.layout.position / insets.top",
+      "observable": {
+        "part": "b",
+        "channel": "top",
+        "capturedValue": "34px"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "layoutPositioning ABSOLUTE with a y offset under the trigger"
+      },
+      "blockStage": true,
+      "predictedDifficulty": "hard",
+      "mustHave": [
+        "the popover appears BELOW the trigger, not on top of it and not inside it",
+        "the trigger's own height is unchanged by the popover's presence - the trigger is one text line tall",
+        "the popover's left edge lines up with the trigger's left edge",
+        "the popover lists both options, stacked vertically"
+      ],
+      "id": "combobox-popover-overlay-inset",
+      "predictedWall": {
+        "code": "FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED",
+        "status": "EXISTING",
+        "half": "canvas round trip",
+        "why": "core/emit-figma-script.ts:6536 (and :6609, :7382) degrades with exactly this code and the message 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow'. 'The child stayed in flow' IS the combobox failure mode this case exists to catch: a popover that reflows the trigger instead of overlaying it. The trigger here is a flex row, so the parent SHOULD be auto-layout and the refusal should not fire - which is why this is `hard` rather than `expected-wall`. If it fires anyway, the message names the cause precisely."
       }
     },
     {
@@ -1874,6 +2023,124 @@
       }
     },
     {
+      "feature": "repetition",
+      "construct": "a 7-column CSS grid of 35 auto-placed cells (5 weeks), the LAST carrying a distinct paint (rgb(160, 32, 160))",
+      "why": "The month grid as a real library draws it: `grid-template-columns: repeat(7, ...)` with auto-placed day cells, which is what makes the 7-wide shape a STRUCTURAL fact rather than a consequence of wrapping. Separated from repeat-siblings-thirtyone on purpose - that case asks whether 31 siblings survive, this one asks whether they survive when the parent is a grid, where the committed frontier already shows every grid case refused on the canvas half.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.b.tokens.background-color",
+      "observable": {
+        "part": "b",
+        "channel": "background-color",
+        "capturedValue": "rgb(160, 32, 160)"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "a 7-column grid frame with 35 cell children"
+      },
+      "blockStage": true,
+      "predictedDifficulty": "expected-wall",
+      "mustHave": [
+        "the month grid is exactly 7 columns wide",
+        "there are exactly 35 cells, laid out as 5 rows of 7",
+        "the 35th (last) cell is a visibly different colour (magenta) from the other 34",
+        "columns line up vertically - cell N and cell N+7 share a left edge"
+      ],
+      "id": "repeat-grid-month",
+      "predictedWall": {
+        "code": "FC-GRID-ROOT-VSIZE",
+        "status": "EXISTING",
+        "half": "canvas round trip",
+        "why": "conformance/README.md records the first canvas measurement verbatim: 'The 15 refusals are one wall: every grid case's captured contract has no definite root height, and the emitter refuses it by name (grid-axis-indefinite, FC-GRID-ROOT-VSIZE). The capture writes grid roots the canvas will not host.' A month grid is a grid root with an intrinsic height, so I expect it to land in exactly that bucket. FC-REPEAT-FORWARD-ABSENT (proposed above) applies on the capture half as well."
+      }
+    },
+    {
+      "feature": "repetition",
+      "construct": "7 adjacent same-shape siblings, the LAST carrying a distinct paint (rgb(64, 128, 191))",
+      "why": "One calendar WEEK. Seven is the width of every month grid ever drawn, and it is the first sibling count where writing every cell out as its own part stops being obviously right. Same distinct-last-sibling probe as the three case, so the two are comparable: if three passes and seven does not, the boundary is a count and this fixture has found it.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.b.tokens.background-color",
+      "observable": {
+        "part": "b",
+        "channel": "background-color",
+        "capturedValue": "rgb(64, 128, 191)"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "a week row: seven sibling frames, the seventh a different fill"
+      },
+      "blockStage": true,
+      "predictedDifficulty": "hard",
+      "mustHave": [
+        "the canvas shows exactly 7 sibling boxes in one horizontal row",
+        "the 7th box is a visibly different colour (mid blue) from the first 6 (pale blue-grey)",
+        "all 7 boxes are the same size (16x16)",
+        "no box is missing and none is duplicated - a grader can count 7"
+      ],
+      "id": "repeat-siblings-seven",
+      "predictedWall": null
+    },
+    {
+      "feature": "repetition",
+      "construct": "31 adjacent same-shape siblings (a wrapping flex run), the LAST carrying a distinct paint (rgb(32, 160, 96))",
+      "why": "A MONTH. This is the case the owner named: with no forward repetition rule, a month is ~200 flat nodes rather than a cell component with 31 instances. The flat emission is not, by itself, a wrong picture - so this case does NOT measure node count, it measures whether the 31st cell (the odd one, e.g. 'today') survives the walk at all. A month that draws 31 identical cells and loses the one that differs is the recognisability failure, and it is invisible to any instrument that counts nodes.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.b.tokens.background-color",
+      "observable": {
+        "part": "b",
+        "channel": "background-color",
+        "capturedValue": "rgb(32, 160, 96)"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "31 sibling frames wrapping into rows; the 31st is a different fill"
+      },
+      "blockStage": true,
+      "predictedDifficulty": "expected-wall",
+      "mustHave": [
+        "the canvas shows exactly 31 boxes",
+        "the 31st box is a visibly different colour (green) from the other 30 (pale blue-grey)",
+        "the boxes wrap into multiple rows rather than one long line",
+        "all 31 boxes are the same size (16x16)"
+      ],
+      "id": "repeat-siblings-thirtyone",
+      "predictedWall": {
+        "code": "FC-REPEAT-FORWARD-ABSENT",
+        "status": "PROPOSED - no existing code covers this",
+        "half": "capture (contract)",
+        "why": "There is NO forward repetition rule. The inverse exists (core/propose-figma.ts, >=3 adjacent same-component instances -> part.repeat) but nothing in the capture direction turns N repeated siblings into a component plus instances, so a month is emitted flat. The flat emission is not itself the failure I predict; what I predict is that at 31 siblings the union naming in extract/computed/anatomy.ts nameUnion() - which suffixes duplicates a, a-2 ... a-31 - plus the per-part folding downstream will treat the 31 near-identical siblings as one repeated shape and fold the ODD sibling's distinct fill away with them. I searched spec/channel-table.json, spec/door-register.json, spec/lowering.json and spec/grammar-coverage.json for a repetition code and there is none; FC-CELL-FRAMING / FC-CELL-INK-LOST are composition-corpus slot fills, not this."
+      }
+    },
+    {
+      "feature": "repetition",
+      "construct": "3 adjacent same-shape siblings, the LAST carrying a distinct paint (rgb(191, 64, 32))",
+      "why": "3 is the eligibility threshold the INVERSE rule uses (core/propose-figma.ts, >=3 adjacent same-component instances -> part.repeat). The forward direction has no such rule at all, so this is the smallest repetition an engine could be expected to notice. At three siblings the ordinary anatomy walk should carry every one of them as its own part; the odd sibling's paint is the probe, because a collapse that keeps 'a cell' and loses the one that DIFFERS is the failure that makes a calendar wrong rather than merely large.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.b.tokens.background-color",
+      "observable": {
+        "part": "b",
+        "channel": "background-color",
+        "capturedValue": "rgb(191, 64, 32)"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "three sibling frames in an auto-layout row; the third is a different fill"
+      },
+      "blockStage": true,
+      "predictedDifficulty": "easy",
+      "mustHave": [
+        "the canvas shows exactly 3 sibling boxes in one horizontal row",
+        "the 3rd box is a visibly different colour (red-brown) from the first 2 (pale blue-grey)",
+        "the 3 boxes are the same size as each other (16x16)",
+        "the row reads left-to-right with a visible gap between boxes"
+      ],
+      "id": "repeat-siblings-three",
+      "predictedWall": null
+    },
+    {
       "id": "rotate-independent-property",
       "feature": "transform",
       "construct": "rotate: 15deg (the INDEPENDENT transform property)",
@@ -1963,6 +2230,123 @@
         "expect": "ABSENT",
         "note": "the asset grammar admits path/g only"
       }
+    },
+    {
+      "feature": "table",
+      "construct": "per-COLUMN text alignment - the label cell `text-align: left`, the numeric cell `text-align: right`, at fixed column widths",
+      "why": "Right-aligned numerics are the difference between a table and a list of words. The alignment lives on the CELL, is different per column, and is the only thing that makes the two rows' digits line up on their last character - a fact a grader can check with a ruler and no knowledge of the source.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.c.parts.b.tokens.text-align",
+      "observable": {
+        "part": "b",
+        "channel": "text-align",
+        "capturedValue": "right"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "textAlignHorizontal RIGHT on the numeric cell's text node"
+      },
+      "blockStage": true,
+      "predictedDifficulty": "hard",
+      "mustHave": [
+        "the two rows' numeric values ('7' and '128') are right-aligned with each other - their right edges match",
+        "the two label values ('Widget', 'Gadget') are left-aligned with each other",
+        "the numeric column and the label column do not overlap",
+        "the numeric column sits to the right of the label column in both rows"
+      ],
+      "id": "table-column-numeric-alignment",
+      "predictedWall": {
+        "code": "FC-TEXT-FILL-ALIGNMENT",
+        "status": "EXISTING - cited as the governing lowering, NOT as a predicted failure",
+        "half": "canvas round trip",
+        "why": "spec/lowering.json registers this rule as 'text hugs unless hugging would move it' - it asks whether the packing agrees with the text alignment and keeps the glyphs where CSS put them. A right-aligned numeric cell at a FIXED column width is precisely the shape where hugging WOULD move the text, so this rule should fire and keep the alignment. I am naming it so that if the digits come back left-aligned, the first place to look is this rule failing to fire rather than text-align being unread. Predicted difficulty is `hard`, not `expected-wall`."
+      }
+    },
+    {
+      "feature": "table",
+      "construct": "a div-built table whose HEADER row differs from the body rows by weight (700) and fill - no table formatting context involved",
+      "why": "The one property that makes a table read as a table. Built out of flex rows on purpose, so it measures the header/body DISTINCTION rather than dying on the `display: table` wall the semantic case pins. If this fails, no data table is drawable by any route; if it passes, the div-table is a viable shape and the semantic-markup refusal is a spelling problem rather than an archetype problem.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.c.tokens.font-weight",
+      "observable": {
+        "part": "c",
+        "channel": "font-weight",
+        "capturedValue": "700"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "the header row is a frame with its own fill and a bolder text style"
+      },
+      "blockStage": true,
+      "predictedDifficulty": "easy",
+      "mustHave": [
+        "the table header row is visually distinct from the body rows",
+        "the header row's text is bolder than the body rows' text",
+        "the header row has a different background fill from the body rows",
+        "the header row sits above both body rows"
+      ],
+      "id": "table-header-row-distinct",
+      "predictedWall": null
+    },
+    {
+      "feature": "table",
+      "construct": "real <table> markup: thead/tbody row GROUPS, whose UA display is `table-header-group` / `table-row-group` - a formatting context with no box of its own",
+      "why": "`display: table` on a div is already pinned REFUSED (display-out-of-vocab). This case is the OTHER half of the same archetype and the one every real data table actually ships: the row-group wrappers the UA stylesheet creates, which are neither `table` nor any display value in the carried vocabulary. A data table cannot be proven without knowing what happens to thead/tbody, and the answer must be a NAME, because a row group that is silently flattened takes the header/body distinction with it.",
+      "expect": "REFUSED",
+      "expectName": "table-lowering",
+      "expectWhere": "LEDGER.md (DOM-anatomy promotion)",
+      "observable": {
+        "part": "c",
+        "channel": "display",
+        "capturedValue": "table-header-group"
+      },
+      "canvas": {
+        "expect": "ABSENT",
+        "note": "AutoLayout has no table formatting context and no row-group concept"
+      },
+      "blockStage": true,
+      "predictedDifficulty": "expected-wall",
+      "mustHave": [
+        "if the case is refused, the refusal names the table/row-group construct in LEDGER.md",
+        "nothing is emitted that claims to be a table but has lost the header/body distinction",
+        "a grader reading the receipt can tell WHICH construct was refused, not merely that something was"
+      ],
+      "id": "table-semantic-row-group",
+      "predictedWall": {
+        "code": "FC-TABLE-ROW-GROUP-FLATTENED",
+        "status": "PROPOSED - the receipt NAME 'table-lowering' exists in LEDGER.md but carries no FC-* code",
+        "half": "capture (contract)",
+        "why": "display-out-of-vocab pins `display: table` as REFUSED by the name 'table-lowering'. That name is a LEDGER string, not a coded wall, and it was authored against a div root carrying `display: table` - not against the UA-generated `table-header-group` / `table-row-group` boxes that real <table> markup creates. I predict the row groups are flattened rather than refused, because they are ordinary boxes as far as the element walk is concerned and only their `display` value is out of vocabulary. If the refusal does fire under the name 'table-lowering' the case passes; if the groups are flattened silently, that is a SILENT-LOSS and this proposed code is what should name it. This matters beyond tables: examples/day-picker/README.md §5.3 records that react-day-picker's own `rdp-month_grid` IS a <table>, so the calendar archetype inherits whatever answer this case gets."
+      }
+    },
+    {
+      "feature": "table",
+      "construct": "zebra striping by STRUCTURAL SELECTOR - `.cf-a:nth-child(even) { background-color }` over 6 otherwise identical rows",
+      "why": "Zebra rules are how every data table in every library separates its rows, and they are the one paint in a table that no element ASKS for - it arrives from the element's position among its siblings. A reader that matches rules to elements has to evaluate `:nth-child` to see it at all. This is also the sharpest form of the repetition question: six identical rows where three of them are a different colour for a reason found nowhere in their own markup.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.a-2.tokens.background-color",
+      "observable": {
+        "part": "a-2",
+        "channel": "background-color",
+        "capturedValue": "rgb(244, 246, 248)"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "alternating row fills; on the canvas the stripe is a literal fill per row, not a rule"
+      },
+      "blockStage": true,
+      "predictedDifficulty": "hard",
+      "mustHave": [
+        "the table shows 6 rows",
+        "rows alternate between two background fills, starting with the un-tinted one",
+        "exactly 3 rows carry the tinted fill (rows 2, 4 and 6)",
+        "the stripe is visible as a fill on the row, not as a border or a gap"
+      ],
+      "id": "table-zebra-nth-child",
+      "predictedWall": null
     },
     {
       "id": "text-indent-off-box",

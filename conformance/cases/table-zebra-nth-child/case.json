@@ -1,0 +1,27 @@
+{
+  "feature": "table",
+  "construct": "zebra striping by STRUCTURAL SELECTOR - `.cf-a:nth-child(even) { background-color }` over 6 otherwise identical rows",
+  "why": "Zebra rules are how every data table in every library separates its rows, and they are the one paint in a table that no element ASKS for - it arrives from the element's position among its siblings. A reader that matches rules to elements has to evaluate `:nth-child` to see it at all. This is also the sharpest form of the repetition question: six identical rows where three of them are a different colour for a reason found nowhere in their own markup.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.a-2.tokens.background-color",
+  "observable": {
+    "part": "a-2",
+    "channel": "background-color",
+    "capturedValue": "rgb(244, 246, 248)"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "alternating row fills; on the canvas the stripe is a literal fill per row, not a rule"
+  },
+  "blockStage": true,
+  "predictedDifficulty": "hard",
+  "mustHave": [
+    "the table shows 6 rows",
+    "rows alternate between two background fills, starting with the un-tinted one",
+    "exactly 3 rows carry the tinted fill (rows 2, 4 and 6)",
+    "the stripe is visible as a fill on the row, not as a border or a gap"
+  ],
+  "id": "table-zebra-nth-child",
+  "predictedWall": null
+}

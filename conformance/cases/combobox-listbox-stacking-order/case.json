@@ -1,0 +1,31 @@
+{
+  "feature": "combobox",
+  "construct": "`z-index: 10` on an absolutely positioned listbox that OVERLAPS its trigger - explicit paint order, not document order",
+  "why": "Separated from the inset case deliberately. That one asks where the popover goes; this one asks what happens when it lands ON something and the author has said, in CSS, which one wins. The canvas HAS a spelling for paint order - a child's index in the layer tree - so this is not a construct with nowhere to go; the question is whether an explicit z-index is read, translated, or dropped. Declared REFUSED rather than CARRIED because no ordering channel is in the carried vocabulary today, and a silent drop here means a popover that renders behind the thing it is supposed to cover.",
+  "expect": "REFUSED",
+  "expectName": "z-index",
+  "expectWhere": "LEDGER.md",
+  "observable": {
+    "part": "b",
+    "channel": "z-index",
+    "capturedValue": "10"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "the canvas spells paint order as child index; a numeric z-index has no direct channel"
+  },
+  "blockStage": true,
+  "predictedDifficulty": "expected-wall",
+  "mustHave": [
+    "the white listbox is drawn IN FRONT OF the grey trigger where the two overlap",
+    "the listbox's text is legible - not covered by the trigger's fill",
+    "if the ordering cannot be carried, an artifact names z-index as the reason"
+  ],
+  "id": "combobox-listbox-stacking-order",
+  "predictedWall": {
+    "code": "FC-STACKING-ORDER-UNREAD",
+    "status": "PROPOSED - no existing code covers this",
+    "half": "capture (contract)",
+    "why": "I searched all four spec registers and the whole FC-* vocabulary for a stacking/paint-order code and there is none. The nearest neighbours are about clipping (FC-OVERFLOW-CLIP-LOST, FC-FIGMA-CLIP-DEFAULT), not ordering. This is a real gap rather than a construct with nowhere to go: the canvas DOES spell paint order, as a child's index in the layer tree, so an engine could honour z-index by reordering children. I predict it is neither read nor named, which is the worst of the three outcomes because a popover that renders BEHIND its trigger is still a plausible-looking picture."
+  }
+}

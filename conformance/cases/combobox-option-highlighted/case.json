@@ -1,0 +1,32 @@
+{
+  "feature": "combobox",
+  "construct": "5 sibling options where ONE is HIGHLIGHTED (active descendant) by a single-SIDE border - `border-left: 3px solid rgb(37, 99, 235)` against a transparent left border on the other four",
+  "why": "Highlighted and selected are different states of the same list and a combobox needs both at once, so they are two cases rather than one. This one is carried by a PER-SIDE border, the accent bar every listbox uses for keyboard focus: the four quiet siblings reserve the same 3px so nothing shifts when the highlight moves, which means the construct is entirely a border COLOUR difference on one edge. A per-side border that collapses to a uniform stroke takes the direction of the highlight with it.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.c.tokens.border-left-color",
+  "observable": {
+    "part": "c",
+    "channel": "border-left-color",
+    "capturedValue": "rgb(37, 99, 235)"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "an individual-side stroke on the highlighted option's frame"
+  },
+  "blockStage": true,
+  "predictedDifficulty": "hard",
+  "mustHave": [
+    "the listbox shows exactly 5 options, stacked vertically",
+    "exactly ONE option (the 2nd, 'Beta') carries a coloured bar on its LEFT edge only",
+    "the accent bar is on the left edge - not the right, not all four sides",
+    "the other 4 options' text left edges line up with the highlighted option's text left edge (nothing shifts)"
+  ],
+  "id": "combobox-option-highlighted",
+  "predictedWall": {
+    "code": "FC-DUMP-PROPOSE-STROKE-WEIGHT-SIDES",
+    "status": "EXISTING - CLOSED 2026-08-20, cited as the reason I expect this to PASS",
+    "half": "canvas round trip",
+    "why": "parity/receipts/beta/KIT-CLIMB.md records this finding as closed: 'Propose treated four different side-weight variable names as not uniform and dropped them ... Those now recover as per-side channels.' A single-side accent border is the same shape, so the closed fix should cover it. I am naming it as the thing to check first if the accent bar comes back on all four sides or not at all. Note the fix was about stroke WEIGHT per side; this case varies stroke COLOUR per side, which the receipt does not explicitly claim."
+  }
+}

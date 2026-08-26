@@ -1,0 +1,3 @@
+[data-cf="table-header-row-distinct"] { display: flex; flex-direction: column; width: 180px; background: rgb(252, 252, 252); }
+[data-cf="table-header-row-distinct"] .cf-c { display: flex; gap: 8px; padding: 4px; background: rgb(226, 232, 240); font-weight: 700; }
+[data-cf="table-header-row-distinct"] .cf-a { display: flex; gap: 8px; padding: 4px; }

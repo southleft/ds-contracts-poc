@@ -1,0 +1,4 @@
+[data-cf="table-column-numeric-alignment"] { display: flex; flex-direction: column; width: 180px; background: rgb(252, 252, 252); }
+[data-cf="table-column-numeric-alignment"] .cf-c { display: flex; padding: 4px; }
+[data-cf="table-column-numeric-alignment"] .cf-a { width: 100px; text-align: left; }
+[data-cf="table-column-numeric-alignment"] .cf-b { width: 60px; text-align: right; }

@@ -1,0 +1,32 @@
+{
+  "feature": "repetition",
+  "construct": "a 7-column CSS grid of 35 auto-placed cells (5 weeks), the LAST carrying a distinct paint (rgb(160, 32, 160))",
+  "why": "The month grid as a real library draws it: `grid-template-columns: repeat(7, ...)` with auto-placed day cells, which is what makes the 7-wide shape a STRUCTURAL fact rather than a consequence of wrapping. Separated from repeat-siblings-thirtyone on purpose - that case asks whether 31 siblings survive, this one asks whether they survive when the parent is a grid, where the committed frontier already shows every grid case refused on the canvas half.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.b.tokens.background-color",
+  "observable": {
+    "part": "b",
+    "channel": "background-color",
+    "capturedValue": "rgb(160, 32, 160)"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "a 7-column grid frame with 35 cell children"
+  },
+  "blockStage": true,
+  "predictedDifficulty": "expected-wall",
+  "mustHave": [
+    "the month grid is exactly 7 columns wide",
+    "there are exactly 35 cells, laid out as 5 rows of 7",
+    "the 35th (last) cell is a visibly different colour (magenta) from the other 34",
+    "columns line up vertically - cell N and cell N+7 share a left edge"
+  ],
+  "id": "repeat-grid-month",
+  "predictedWall": {
+    "code": "FC-GRID-ROOT-VSIZE",
+    "status": "EXISTING",
+    "half": "canvas round trip",
+    "why": "conformance/README.md records the first canvas measurement verbatim: 'The 15 refusals are one wall: every grid case's captured contract has no definite root height, and the emitter refuses it by name (grid-axis-indefinite, FC-GRID-ROOT-VSIZE). The capture writes grid roots the canvas will not host.' A month grid is a grid root with an intrinsic height, so I expect it to land in exactly that bucket. FC-REPEAT-FORWARD-ABSENT (proposed above) applies on the capture half as well."
+  }
+}
