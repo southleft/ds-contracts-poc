@@ -1114,12 +1114,16 @@ export function styledChannels(
         receipts.push(
           `reset-supplied-border-style-admitted: ${a.partNames[pi]}.${p} = ${a.baseFlat[pi].node.style[p]} — EQUAL to the <${tag}> control, so the styled-channel door would normally drop it as "not a fact of this component". Admitted anyway because this part draws a real border (${p.replace('-style', '-width')} = ${a.baseFlat[pi].node.style[p.replace('-style', '-width')]}) and the style comes from the library's GLOBAL CSS (Tailwind preflight's \`* { border-style: solid }\` and its equivalents). The control correctly subtracts the reset; the emitted CSS does not REPRODUCE it, so without this the width and colour ship and the border paints nothing.`,
         );
-      } else if (pageInheritedInk(p, a.baseFlat[pi].node.style, ctrl)) {
+      }
+      // @door fuse.page-inherited-ink-admitted
+      else if (pageInheritedInk(p, a.baseFlat[pi].node.style, ctrl)) {
         set.add(p);
         receipts.push(
           `page-inherited-ink-admitted: ${a.partNames[pi]}.color = ${a.baseFlat[pi].node.style['color']} — EQUAL to the <${tag}> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).`,
         );
-      } else if (resetSuppliedBorderColor(p, a.baseFlat[pi].node.style, ctrl)) {
+      }
+      // @door fuse.reset-supplied-border-color-admitted
+      else if (resetSuppliedBorderColor(p, a.baseFlat[pi].node.style, ctrl)) {
         set.add(p);
         receipts.push(
           `reset-supplied-border-color-admitted: ${a.partNames[pi]}.${p} = ${a.baseFlat[pi].node.style[p]} — EQUAL to the <${tag}> control, so the styled-channel door would normally drop it as "not a fact of this component". Admitted anyway because this part draws a real border (${p.replace('-color', '-width')} = ${a.baseFlat[pi].node.style[p.replace('-color', '-width')]}, ${p.replace('-color', '-style')} = ${a.baseFlat[pi].node.style[p.replace('-color', '-style')]}) and the control's own ${p} (${ctrl[p]}) differs from its \`color\` (${ctrl['color']}) — the UA's border colour is currentcolor, so the control was coloured by the library's GLOBAL CSS (shadcn's \`* { border-color: var(--border) }\`, Tailwind preflight's equivalents). The control correctly subtracts the reset; the emitted CSS does not REPRODUCE it, so without this the width and style ship and the border paints currentcolor on the code surface and NOTHING on the canvas.`,

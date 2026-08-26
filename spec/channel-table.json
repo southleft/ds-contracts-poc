@@ -18,14 +18,14 @@
     "REFUSED": "a named wall — the row names the code (conformance expectName, FC-*, or the code-only fallback receipt)",
     "INERT": "provably no independent visual effect at computed level — the row carries the justification"
   },
-  "propertyCount": 487,
+  "propertyCount": 488,
   "totals": {
-    "CARRIED": 82,
+    "CARRIED": 83,
     "LEDGERED": 80,
     "REFUSED": 271,
     "INERT": 54
   },
-  "unclassifiedBeforeThisTable": 272,
+  "unclassifiedBeforeThisTable": 273,
   "properties": [
     {
       "property": "-webkit-border-horizontal-spacing",
@@ -2961,6 +2961,31 @@
       "class": "LEDGERED",
       "prior": "geometry exclusion",
       "receipt": "the geometry-excluded ledger (extract/computed/fuse.ts `geometryExcluded`, surfaced as FC-GEOMETRY-EXCLUDED receipts) — recorded when styled, never minted"
+    },
+    {
+      "property": "placeholder-color",
+      "class": "CARRIED",
+      "prior": "none",
+      "synthetic": true,
+      "projection": "the placeholder TEXT node's own fill on canvas; on every stylesheet surface it is LOWERED back to a real `::placeholder { color: … }` rule, never emitted as a `placeholder-color:` declaration (no UA has such a property, so a verbatim declaration would be dropped in silence).",
+      "engine": [
+        {
+          "file": "extract/computed/lib.ts",
+          "symbol": "foldPlaceholderInk"
+        },
+        {
+          "file": "extract/computed/lib.ts",
+          "symbol": "PSEUDO_PLANE_OWN_INK"
+        },
+        {
+          "file": "core/emit-figma-script.ts",
+          "symbol": "function placeholderInkCtx("
+        }
+      ],
+      "conformance": [
+        "pseudo-placeholder"
+      ],
+      "valueNotes": "SYNTHETIC (RC7): the ::placeholder plane's `color`, folded onto the HOST at both read boundaries (capture + replay). ABSENT is not 'unobserved' — foldPlaceholderInk writes the key ONLY where the placeholder ink DIFFERS from the element's own `color`, so an absent key is the positive statement 'the hint ink IS the element's own' (extract/computed/lib.ts planeChannelValue states that identity once, for the gate and the mint alike)."
     },
     {
       "property": "pointer-events",

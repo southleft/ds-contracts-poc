@@ -25,7 +25,7 @@ artifact records — plus the two synthetic channels the capture mints
 (`translate-x`/`translate-y`) and the contract-channel shorthand spellings the
 schema carries (background, border-color/-width/-radius/-style,
 padding-inline/-block, gap, transition, white-space).
-The table classifies all 487 properties, each into exactly one class:
+The table classifies all 488 properties, each into exactly one class:
 
 | class | meaning | the row must name |
 |---|---|---|
@@ -36,9 +36,9 @@ The table classifies all 487 properties, each into exactly one class:
 
 ## The result
 
-487 properties: **82 CARRIED**, **80 LEDGERED**, **271 REFUSED**, **54 INERT**.
+488 properties: **83 CARRIED**, **80 LEDGERED**, **271 REFUSED**, **54 INERT**.
 
-**The bottom-up debt, measured:** 272 of the 487 had no prior classification
+**The bottom-up debt, measured:** 273 of the 488 had no prior classification
 anywhere — no schema channel, no layout vocabulary, no conformance case, no
 named exclusion. Each of them was decided fresh by this table. Until now they
 fell to the generic per-channel refusal in `extract/computed/fuse.ts` at
