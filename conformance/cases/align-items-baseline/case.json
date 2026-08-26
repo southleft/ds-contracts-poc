@@ -1,0 +1,19 @@
+{
+  "id": "align-items-baseline",
+  "feature": "layout",
+  "construct": "align-items: baseline on a flex row",
+  "why": "Mixed type sizes on one row (a price beside a currency mark, a label beside a hint) sit on the shared baseline, and counterAxisAlignItems: 'BASELINE' is native on a HORIZONTAL auto-layout frame. `baseline` has been in LayoutSchema.align and in the emitter's ALIGN_FIGMA table all along; the enrichment vocabulary's align-items map simply did not list it, so the value fell to layout-value-outside-vocabulary and stayed code-only. The register named that boundary arbitrary rather than a carriage limit, and this case is the proof.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.layout.align",
+  "observable": {
+    "part": "root",
+    "channel": "align-items",
+    "capturedValue": "baseline",
+    "carriedValue": "baseline"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "counterAxisAlignItems 'BASELINE'"
+  }
+}

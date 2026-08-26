@@ -2,11 +2,11 @@
   "_marker": "THE DENOMINATOR. Hand-authored per case, generated into one index. Deliberately NOT derived from isFusable / styled / DECLARED_CHANNELS / CHANNEL_TO_COMPUTED / TOKEN_CHANNELS / carriedParts — every instrument in the pipeline derives its denominator from the same filter that decides carriage, which is why a channel the filter never opened scores 100%. This file is the independent one.",
   "generatedBy": "conformance/build.ts",
   "library": "@ds-contracts/conformance@0.1.0",
-  "count": 94,
+  "count": 97,
   "byExpectation": {
-    "CARRIED": 52,
+    "CARRIED": 54,
     "LOWERED": 5,
-    "REFUSED": 19,
+    "REFUSED": 20,
     "UNSUPPORTED": 18
   },
   "cases": [
@@ -26,6 +26,25 @@
       "canvas": {
         "expect": "PRESENT",
         "note": "the checked box fill is real ink"
+      }
+    },
+    {
+      "id": "align-items-baseline",
+      "feature": "layout",
+      "construct": "align-items: baseline on a flex row",
+      "why": "Mixed type sizes on one row (a price beside a currency mark, a label beside a hint) sit on the shared baseline, and counterAxisAlignItems: 'BASELINE' is native on a HORIZONTAL auto-layout frame. `baseline` has been in LayoutSchema.align and in the emitter's ALIGN_FIGMA table all along; the enrichment vocabulary's align-items map simply did not list it, so the value fell to layout-value-outside-vocabulary and stayed code-only. The register named that boundary arbitrary rather than a carriage limit, and this case is the proof.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.layout.align",
+      "observable": {
+        "part": "root",
+        "channel": "align-items",
+        "capturedValue": "baseline",
+        "carriedValue": "baseline"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "counterAxisAlignItems 'BASELINE'"
       }
     },
     {
@@ -553,6 +572,24 @@
       "canvas": {
         "expect": "PRESENT",
         "note": "itemSpacing"
+      }
+    },
+    {
+      "id": "flex-wrap-wrap",
+      "feature": "layout",
+      "construct": "flex-wrap: wrap on a flex container",
+      "why": "Chip rows and tag groups wrap in every target system, and the canvas has the native twin (layoutWrap: 'WRAP'). LayoutSchema.wrap has declared the fact since v15 and the emitter has lowered it since v15 — but the four-property enrichment vocabulary never contained flex-wrap, so nothing in the pipeline ever DETECTED it. A schema slot with no producer is the shape schema.wrap-declared-never-detected named.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.layout.wrap (mirrored to the CSS spelling `flex-wrap: wrap`)",
+      "observable": {
+        "part": "root",
+        "channel": "flex-wrap",
+        "capturedValue": "wrap"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "layoutWrap 'WRAP'"
       }
     },
     {
@@ -1523,6 +1560,25 @@
       },
       "probe": "P1 (defaults are exactly this), P8 (readback exactness)",
       "dumpSnippet": "dump.snippet.json"
+    },
+    {
+      "id": "layout-on-non-flex-container",
+      "feature": "layout",
+      "construct": "align-items / justify-content authored on a container whose display is NOT flex (here display: table)",
+      "why": "enrichLayout is the only producer of a Part.layout axis in the whole pipeline, and it declined every non-flex container with a bare `continue` — no receipt of any kind, on the base combo's display alone. That silence is why a forward layout failure could never be cited: the fact arrived, nothing carried it, and nothing said so. The decline is correct (a table box has no flex axis and the contract has no spelling for one); being silent about it was not.",
+      "expect": "REFUSED",
+      "expectName": "layout-container-not-flex",
+      "expectWhere": "enriched.extension.json layout.receipts",
+      "observable": {
+        "part": "root",
+        "channel": "align-items",
+        "capturedValue": "center"
+      },
+      "canvas": {
+        "expect": "ABSENT",
+        "note": "auto-layout has no table formatting context; the axis is code-only and named"
+      },
+      "blockStage": true
     },
     {
       "id": "mask-image",

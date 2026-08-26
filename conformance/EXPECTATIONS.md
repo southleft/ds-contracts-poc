@@ -16,13 +16,13 @@ repo it is simply absent from the denominator and scores 100%.
 
 | | |
 |---|---|
-| cases | **94** |
-| 🟢 pass | **91** |
+| cases | **97** |
+| 🟢 pass | **94** |
 | 🔴 red | **3** |
 | 🟡 yellow (UNSUPPORTED, never read) | **0** |
 | **UNSUPPORTED declared — THE RATCHET** | **18** · may only DECREASE without an explicit manifest edit |
 
-Declared dispositions: CARRIED 52 · LOWERED 5 · REFUSED 19 · UNSUPPORTED 18.
+Declared dispositions: CARRIED 54 · LOWERED 5 · REFUSED 20 · UNSUPPORTED 18.
 
 **A green gate here would mean the cases are too easy.** The point of the
 fixture is a measured frontier, and every red below is an open, named defect —
@@ -135,8 +135,11 @@ manifest.
 | 🟢 | `nonpainting-text-display-none` | invariant | `a NON-PAINTING element carrying text (display: none)` | CARRIED | carried | PASS |
 | 🟢 | `nonpainting-text-visibility-hidden` | invariant | `a NON-PAINTING element carrying text (visibility: hidden)` | REFUSED | refused, by name | PASS |
 | 🔴 | `stage-box-equal` | invariant | `a captured box exactly equal to the STAGE box (100% × 100%)` | REFUSED | carried | UNDECLARED-CARRY |
+| 🟢 | `align-items-baseline` | layout | `align-items: baseline on a flex row` | CARRIED | carried | PASS |
 | 🟢 | `flex-gap` | layout | `column-gap / row-gap in px` | CARRIED | carried | PASS |
+| 🟢 | `flex-wrap-wrap` | layout | `flex-wrap: wrap on a flex container` | CARRIED | carried | PASS |
 | 🟢 | `grid-2d` | layout | `display: grid + grid-template-columns: 1fr 1fr (children AUTO-PLACED)` | CARRIED | carried | PASS |
+| 🟢 | `layout-on-non-flex-container` | layout | `align-items / justify-content authored on a container whose display is NOT flex (here display: table)` | REFUSED | refused, by name | PASS |
 | 🟢 | `antd-part-transition-channel` | motion | `.cf-a { transition: background-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) } — a transition declared on a CHILD PART, not the root (antd's `motionDurationMid` on every interactive part)` | CARRIED | carried | PASS |
 | 🟢 | `transition-channel` | motion | `transition: background-color 200ms ease` | CARRIED | carried | PASS |
 | 🟢 | `position-absolute-insets` | position | `position: absolute + top/left insets` | CARRIED | carried | PASS |

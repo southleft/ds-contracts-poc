@@ -51,6 +51,14 @@
       "axes": []
     },
     {
+      "__case": "layout: align-items: baseline on a flex row — declared CARRIED",
+      "name": "CaseAlignItemsBaseline",
+      "importName": "CaseAlignItemsBaseline",
+      "contract": "conformance/seeds/align-items-baseline.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
       "__case": "tokens: .cf-root { --cf-scoped-pad: 15px } .cf-root .cf-a { padding-inline: var(--cf-scoped-pad) } — a token DECLARED ON THE COMPONENT ROOT (not :root) and consumed by a descendant (antd cssVar component tokens on `.antd.ant-btn`) — declared CARRIED",
       "name": "CaseAntdComponentScopedCustomProperty",
       "importName": "CaseAntdComponentScopedCustomProperty",
@@ -284,6 +292,14 @@
       "name": "CaseFlexGap",
       "importName": "CaseFlexGap",
       "contract": "conformance/seeds/flex-gap.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
+      "__case": "layout: flex-wrap: wrap on a flex container — declared CARRIED",
+      "name": "CaseFlexWrapWrap",
+      "importName": "CaseFlexWrapWrap",
+      "contract": "conformance/seeds/flex-wrap-wrap.contract.json",
       "sampleText": "",
       "axes": []
     },
@@ -572,6 +588,15 @@
       "name": "CaseGridTwoColumn",
       "importName": "CaseGridTwoColumn",
       "contract": "conformance/seeds/grid-two-column.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "layout: align-items / justify-content authored on a container whose display is NOT flex (here display: table) — declared REFUSED",
+      "name": "CaseLayoutOnNonFlexContainer",
+      "importName": "CaseLayoutOnNonFlexContainer",
+      "contract": "conformance/seeds/layout-on-non-flex-container.contract.json",
       "sampleText": "",
       "axes": [],
       "blockStage": true

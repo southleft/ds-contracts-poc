@@ -1,0 +1,19 @@
+{
+  "id": "layout-on-non-flex-container",
+  "feature": "layout",
+  "construct": "align-items / justify-content authored on a container whose display is NOT flex (here display: table)",
+  "why": "enrichLayout is the only producer of a Part.layout axis in the whole pipeline, and it declined every non-flex container with a bare `continue` — no receipt of any kind, on the base combo's display alone. That silence is why a forward layout failure could never be cited: the fact arrived, nothing carried it, and nothing said so. The decline is correct (a table box has no flex axis and the contract has no spelling for one); being silent about it was not.",
+  "expect": "REFUSED",
+  "expectName": "layout-container-not-flex",
+  "expectWhere": "enriched.extension.json layout.receipts",
+  "observable": {
+    "part": "root",
+    "channel": "align-items",
+    "capturedValue": "center"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "auto-layout has no table formatting context; the axis is code-only and named"
+  },
+  "blockStage": true
+}

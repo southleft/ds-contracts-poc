@@ -1,0 +1,18 @@
+{
+  "id": "flex-wrap-wrap",
+  "feature": "layout",
+  "construct": "flex-wrap: wrap on a flex container",
+  "why": "Chip rows and tag groups wrap in every target system, and the canvas has the native twin (layoutWrap: 'WRAP'). LayoutSchema.wrap has declared the fact since v15 and the emitter has lowered it since v15 \u2014 but the four-property enrichment vocabulary never contained flex-wrap, so nothing in the pipeline ever DETECTED it. A schema slot with no producer is the shape schema.wrap-declared-never-detected named.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.layout.wrap (mirrored to the CSS spelling `flex-wrap: wrap`)",
+  "observable": {
+    "part": "root",
+    "channel": "flex-wrap",
+    "capturedValue": "wrap"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "layoutWrap 'WRAP'"
+  }
+}

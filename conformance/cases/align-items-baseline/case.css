@@ -1,0 +1,3 @@
+[data-cf="align-items-baseline"] { display: flex; align-items: baseline; column-gap: 8px; row-gap: 8px; background: rgb(240, 240, 240); }
+[data-cf="align-items-baseline"] .cf-a { font-size: 20px; }
+[data-cf="align-items-baseline"] .cf-b { font-size: 12px; }

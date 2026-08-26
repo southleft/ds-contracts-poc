@@ -1555,11 +1555,25 @@ export function textOutOfBoxEvidence(a: AlignedSweep, space: PropSpace): TextOut
 // truth becomes a named receipt (never silently overridden — the reviewed
 // static layer wins values, the floor wins truth).
 // ---------------------------------------------------------------------------
-const LAYOUT_CHANNEL_TO_FIELD: Record<string, { field: 'display' | 'direction' | 'align' | 'justify'; map: Record<string, string> }> = {
+const LAYOUT_CHANNEL_TO_FIELD: Record<
+  string,
+  { field: 'display' | 'direction' | 'align' | 'justify' | 'wrap'; map: Record<string, string | boolean>; initial?: string }
+> = {
   display: { field: 'display', map: { flex: 'flex', 'inline-flex': 'inline-flex' } },
   'flex-direction': { field: 'direction', map: { row: 'row', column: 'column' } },
-  'align-items': { field: 'align', map: { 'flex-start': 'start', center: 'center', 'flex-end': 'end', stretch: 'stretch' } },
+  // LAYOUT ROUND (2026-08-26) — `baseline` was the register's own example of a
+  // value the schema already spells (LayoutSchema.align) and this vocabulary
+  // did not: it fell to `layout-value-outside-vocabulary` and stayed code-only
+  // while ALIGN_FIGMA in the emitter has carried BASELINE all along.
+  'align-items': { field: 'align', map: { 'flex-start': 'start', center: 'center', 'flex-end': 'end', stretch: 'stretch', baseline: 'baseline' } },
   'justify-content': { field: 'justify', map: { 'flex-start': 'start', center: 'center', 'flex-end': 'end', 'space-between': 'space-between' } },
+  // `flex-wrap: wrap` is natively CARRY-BOTH (LayoutSchema.wrap ->
+  // layoutWrap 'WRAP'), and the schema has declared it since v15 — but nothing
+  // ever DETECTED it, which is what schema.wrap-declared-never-detected named.
+  // `nowrap` is the CSS initial value: there is nothing to carry and nothing
+  // is lost, so it is skipped WITHOUT a receipt rather than reported as a
+  // vocabulary miss on every flex container in the corpus.
+  'flex-wrap': { field: 'wrap', map: { wrap: true }, initial: 'nowrap' },
 };
 
 export interface LayoutEnrichment {
@@ -1587,11 +1601,59 @@ export function enrichLayout(
     const channels = styled.get(partName);
     // @door fuse.static-part-required-for-enrichment
     if (!target || !channels) continue;
-    // only flex containers speak the layout vocabulary
+    // WHICH CONTAINERS SPEAK THE LAYOUT VOCABULARY.
+    //
+    // Until the layout round this read the BASE combo alone — `baseDisplay
+    // !== 'flex' && !== 'inline-flex'` — and `continue`d with NO receipt of
+    // any kind. Two subtractions rode on that one line:
+    //
+    //  (a) a part that is `block` at base and flex in every OTHER combo was
+    //      skipped on the base reading, though the uniformity check below
+    //      re-reads every combo and would have caught the disagreement; and
+    //  (b) every GRID container in the corpus lost its axis in silence.
+    //      `display: grid` is not in the DECLARED_CHANNELS display vocabulary
+    //      either, so nothing downstream knew the container had an axis at
+    //      all and the emitter's terminal ternary handed it a row. Fluent's
+    //      `fui-DialogBody` (grid, three block children) is exactly that: the
+    //      dialog drawn on one row, cited to this line.
+    //
+    // The display is now read per enabled combo, and every decline is named.
     // @door fuse.flex-container-only-speaks-layout
-    const baseDisplay = a.baseFlat[pi].node.style['display'];
+    const displays = new Set<string>();
+    for (const combo of enabled) {
+      const el = a.getAligned(`${combo.key}__default`)[pi];
+      if (el) displays.add(el.node.style['display']);
+    }
+    if (displays.size === 0) displays.add(a.baseFlat[pi].node.style['display']);
+    const isFlexDisplay = (d: string): boolean => d === 'flex' || d === 'inline-flex';
+    const isGridDisplay = (d: string): boolean => d === 'grid' || d === 'inline-grid';
     // @lower fuse.axis-flex-only-enrichment
-    if (baseDisplay !== 'flex' && baseDisplay !== 'inline-flex') continue;
+    if (![...displays].every(isFlexDisplay)) {
+      if ([...displays].some(isFlexDisplay)) {
+        out.receipts.push(
+          `layout-container-display-not-uniform: ${partName} is a flex container in some combos and ${[...displays].filter((d) => !isFlexDisplay(d)).join('/')} in others — no layout fact carried`,
+        );
+        continue;
+      }
+      // A grid's axis is decided UPSTREAM, in anatomy.ts: lowerGridDisplay
+      // lowers a one-track grid to a flex column and refuses the
+      // two-dimensional case by name (anatomy.grid-two-dimensional-refused),
+      // and promoteGridLayout carries a structured grid whole. Re-deciding it
+      // here would either duplicate that answer or CONTRADICT a named
+      // refusal, so this stage only says what it declined to look at.
+      if ([...displays].every(isGridDisplay)) {
+        if (target.layout?.display === undefined) {
+          out.receipts.push(
+            `layout-grid-axis-decided-upstream: ${partName} is display:${[...displays].join('/')} and carries no layout — the grid lowering in anatomy.ts already decided (and, where it refused, NAMED) this container's axis; enrichment adds nothing and invents nothing`,
+          );
+        }
+        continue;
+      }
+      out.receipts.push(
+        `layout-container-not-flex: ${partName} is display:${[...displays].join('/')} — the layout vocabulary spells flex containers only, so its axis, alignment and wrap stay code-only`,
+      );
+      continue;
+    }
     for (const [channel, spec] of Object.entries(LAYOUT_CHANNEL_TO_FIELD)) {
       if (!channels.has(channel)) continue;
       const values = new Set<string>();
@@ -1605,6 +1667,14 @@ export function enrichLayout(
         continue;
       }
       const observed = [...values][0];
+      // The CSS INITIAL value is not a lost fact: there is nothing to carry
+      // and nothing to name. Reporting `flex-wrap: nowrap` as a vocabulary
+      // miss on every flex container in the corpus would bury the misses that
+      // are real.
+      if (spec.initial !== undefined && observed === spec.initial) {
+        (out.handled.get(partName) ?? out.handled.set(partName, new Set<string>()).get(partName)!).add(channel);
+        continue;
+      }
       const canonical = spec.map[observed];
       const handledSet = out.handled.get(partName) ?? new Set<string>();
       out.handled.set(partName, handledSet);

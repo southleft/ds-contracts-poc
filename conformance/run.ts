@@ -306,6 +306,28 @@ export function carriageOfContract(contract: Record<string, unknown>, trees: Rec
       if (typeof pl.alignY === 'string') push('align-self', name, 'placement.alignY', pl.alignY);
     }
   };
+  // THE FLEX HALF OF THE SAME MIRROR. `eatMap` pushes each layout key under
+  // its own name — `align`, `justify`, `direction`, `wrap` — none of which is
+  // a CSS channel, so the contract's flex layout facts were INVISIBLE to this
+  // gate: a case declaring `align-items` could only ever read as not carried.
+  // The pinned CSS spellings are mirrored here exactly as the grid ones above
+  // are, from the schema's own vocabulary (LayoutSchema) rather than from any
+  // emitter, so the denominator stays independent of the engine.
+  const FLEX_LAYOUT_CSS: Record<string, { channel: string; value: Record<string, string> }> = {
+    direction: { channel: 'flex-direction', value: { row: 'row', column: 'column', 'row-reverse': 'row-reverse', 'column-reverse': 'column-reverse' } },
+    align: { channel: 'align-items', value: { start: 'flex-start', center: 'center', end: 'flex-end', stretch: 'stretch', baseline: 'baseline' } },
+    justify: { channel: 'justify-content', value: { start: 'flex-start', center: 'center', end: 'flex-end', 'space-between': 'space-between' } },
+  };
+  const eatFlexLayout = (name: string, part: Record<string, unknown>): void => {
+    const lay = part.layout as Record<string, unknown> | null | undefined;
+    if (!lay || typeof lay !== 'object') return;
+    for (const [field, spec] of Object.entries(FLEX_LAYOUT_CSS)) {
+      const v = lay[field];
+      if (typeof v === 'string' && spec.value[v] !== undefined) push(spec.channel, name, `layout.${field}`, spec.value[v]);
+    }
+    if (lay.wrap === true) push('flex-wrap', name, 'layout.wrap', 'wrap');
+    if (lay.grow === true) push('flex-grow', name, 'layout.grow', '1');
+  };
   const walkPart = (name: string, part: Record<string, unknown>): void => {
     eatMap(name, 'tokens', part.tokens);
     eatMap(name, 'declared', part.declared);
@@ -313,6 +335,7 @@ export function carriageOfContract(contract: Record<string, unknown>, trees: Rec
     eatMap(name, 'states', part.states);
     eatMap(name, 'literals', part.literals);
     eatMap(name, 'layout', part.layout);
+    eatFlexLayout(name, part);
     eatGrid(name, part);
     if (typeof part.text === 'string') push('__text', name, 'text', part.text);
     if (typeof part.element === 'string') push('__element', name, 'element', part.element);

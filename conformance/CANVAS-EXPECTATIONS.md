@@ -15,8 +15,8 @@ never waivable.
 
 | | |
 |---|---|
-| cases (CARRIED + LOWERED) | **57** |
-| 🟢 round-tripped | **41** |
+| cases (CARRIED + LOWERED) | **59** |
+| 🟢 round-tripped | **43** |
 | 🟢 named (dropped, and a receipt says so) | **15** |
 | 🟡 refused by name (the canvas cannot host the seed, and says so) | **1** |
 | ⚪ seed-absent (nothing to round-trip) | **0** |
@@ -58,10 +58,11 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 |---|---|---|---|---|---|---|---|---|
 | `grid-instance-child` | grid-composition | a component INSTANCE placed in a cell with position + FILL | `grid-column-start` | CARRIED | — |  |  | mock figma (component step): Error: grid-placement-cycle-no-spare: the declared 1x2 grid has no free cell to break a placement cycle through — refusing rather than throwing P3 mid-script |
 
-## 🟢 ROUND-TRIPPED — 41
+## 🟢 ROUND-TRIPPED — 43
 
 | case | feature | construct | channel | expect | came back | ref | as | note |
 |---|---|---|---|---|---|---|---|---|
+| `align-items-baseline` | layout | align-items: baseline on a flex row | `align-items` | CARRIED | baseline | same |  |  |
 | `antd-component-scoped-custom-property` | tokens | .cf-root { --cf-scoped-pad: 15px } .cf-root .cf-a { padding-inline: var(--cf-scoped-pad) } — a token DECLARED ON THE COMPONENT ROOT (not :root) and consumed by a descendant (antd cssVar component tokens on `.antd.ant-btn`) | `padding-left` | CARRIED | 15px | same |  |  |
 | `antd-forwarded-root-attrs` | anatomy | label > [input.sr-only + span.box] + span.text — the component forwards className/data-* to the HIDDEN input, not the visible label root (antd Checkbox/Radio) | `background-color` | CARRIED | #1677ff | same |  |  |
 | `antd-presence-times-axis-glyph` | anatomy | a child part whose PRESENCE is one prop (showIcon) and whose paint is ANOTHER (type) — the base (default) combo mounts without it (antd Alert) | `color` | CARRIED | #000000e0 | same |  |  |
@@ -76,6 +77,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `display-inline-flex` | display | display: inline-flex | `display` | CARRIED | flex | same |  |  |
 | `em-relative-padding` | units | padding: 1.5em against a 12px font-size | `padding-left` | CARRIED | 18px | same | `padding-inline` | channel respelled: padding-left → padding-inline |
 | `flex-gap` | layout | column-gap / row-gap in px | `column-gap` | CARRIED | 12px | same | `gap` | channel respelled: column-gap → gap |
+| `flex-wrap-wrap` | layout | flex-wrap: wrap on a flex container | `flex-wrap` | CARRIED | wrap | same |  |  |
 | `grid-2d` | layout | display: grid + grid-template-columns: 1fr 1fr (children AUTO-PLACED) | `display` | CARRIED | grid | same |  |  |
 | `grid-absolute-overlay` | grid-composition | Part.overlay (layoutPositioning ABSOLUTE) inside a grid parent | `position` | CARRIED | absolute, relative | same |  |  |
 | `grid-area-nonrectangular` | grid-areas | area occupancy that cannot tile grid-template-areas (gapped or non-rectangular per CSS rules) | `grid-column-end` | LOWERED | 1, span 2 | same |  |  |
