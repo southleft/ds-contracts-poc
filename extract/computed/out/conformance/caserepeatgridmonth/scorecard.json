@@ -1,0 +1,146 @@
+{
+  "component": "CaseRepeatGridMonth",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "149.0.7827.55",
+  "renderedBy": "149.0.7827.55",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 1,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 2204,
+    "cellsEqual": 2200,
+    "pctEqual": 99.81851179673322,
+    "rowsFullyEqual": 0,
+    "rows": 4
+  },
+  "pixel": {
+    "pairs": 4,
+    "perfectExact": 0,
+    "perfectAA": 0,
+    "measured": 4,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 77.40234374999999,
+    "meanAA": 30.533854166666668,
+    "maxAA": 31.901041666666668
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 9,
+    "mintedLeavesUnfolded": 9,
+    "baseBindings": 258,
+    "stateBindings": 0,
+    "codeOnlyChannels": 0,
+    "overflowBindings": 0,
+    "folds": 216
+  },
+  "worstRows": [
+    {
+      "key": "__hover",
+      "pctAA": 31.901041666666668,
+      "pctExact": 81.38020833333333,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "__focus-visible",
+      "pctAA": 31.901041666666668,
+      "pctExact": 81.38020833333333,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "__active",
+      "pctAA": 31.901041666666668,
+      "pctExact": 81.38020833333333,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "__default",
+      "pctAA": 26.432291666666668,
+      "pctExact": 65.46875,
+      "channelsMismatched": 1
+    }
+  ],
+  "topMismatchedChannels": [
+    [
+      "root.grid-template-rows",
+      4
+    ]
+  ],
+  "namedLosses": [],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "(none declared)",
+    "leavesAdded": 0,
+    "divergent": []
+  },
+  "rows": [
+    {
+      "key": "__default",
+      "channelsCompared": 551,
+      "channelsEqual": 550,
+      "pctExact": 65.46875,
+      "pctAA": 26.432291666666668,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "grid-template-rows",
+          "ours": "0px 0px 0px 0px 0px",
+          "theirs": "20px 20px 20px 20px 20px"
+        }
+      ]
+    },
+    {
+      "key": "__hover",
+      "channelsCompared": 551,
+      "channelsEqual": 550,
+      "pctExact": 81.38020833333333,
+      "pctAA": 31.901041666666668,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "grid-template-rows",
+          "ours": "0px 0px 0px 0px 0px",
+          "theirs": "20px 20px 20px 20px 20px"
+        }
+      ]
+    },
+    {
+      "key": "__focus-visible",
+      "channelsCompared": 551,
+      "channelsEqual": 550,
+      "pctExact": 81.38020833333333,
+      "pctAA": 31.901041666666668,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "grid-template-rows",
+          "ours": "0px 0px 0px 0px 0px",
+          "theirs": "20px 20px 20px 20px 20px"
+        }
+      ]
+    },
+    {
+      "key": "__active",
+      "channelsCompared": 551,
+      "channelsEqual": 550,
+      "pctExact": 81.38020833333333,
+      "pctAA": 31.901041666666668,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "grid-template-rows",
+          "ours": "0px 0px 0px 0px 0px",
+          "theirs": "20px 20px 20px 20px 20px"
+        }
+      ]
+    }
+  ]
+}
