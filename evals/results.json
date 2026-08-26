@@ -1,7 +1,7 @@
 {
-  "passed": 224,
+  "passed": 226,
   "total": 230,
-  "commit": "b7f0680473b05421d824ca9bd9570a9d6faf6016",
+  "commit": "82b11f1e955fd51a3de008e0d60da3595f0f16d8",
   "dirty": false,
   "recordedAt": "2026-08-26",
   "results": [
@@ -628,13 +628,13 @@
     {
       "id": "capability-report-is-fresh",
       "claim": "C3-detection",
-      "pass": true
+      "pass": false,
+      "error": "Error: docs/24-what-works.md is STALE vs a rebuild from its committed sources:\nSTALE: docs/24-what-works.md does not match a rebuild from its committed sources.\nEvery number in it is READ from an artifact; one of those artifacts moved.\nRebuild it and commit:  npm run capability:report\n"
     },
     {
       "id": "generated-storybook-trees-are-fresh",
       "claim": "C3-detection",
-      "pass": false,
-      "error": "Error: a committed storybook/src/generated tree is STALE vs its own generator:\n  astryx       5 STALE          54 files\n  eventz-vars  fresh            70 files\n  untitled-ui  fresh            122 files\n\n✖ generated-surfaces-fresh: 1 failure(s)\n\n  astryx: 5 committed file(s) are STALE vs a fresh generation (CheckboxInput/CheckboxInput.module.css, ProgressBar/ProgressBar.module.css, Slider/Slider.module.css, TextInput/TextInput.module.css, Token/Token.module.css) — re-generate and commit them. This is the exact class the MUI regen round opened on: the engine moved, the artifacts did not, and every other gate stayed green.\n\n"
+      "pass": true
     },
     {
       "id": "visual-truth-report-is-fresh",
@@ -789,8 +789,7 @@
     {
       "id": "promote-generalization",
       "claim": "C1-determinism",
-      "pass": false,
-      "error": "Error: carbon: contracts/textinput.contract.json — the shared promote module did NOT reproduce the committed bytes (/private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/cc45b987-8d09-4532-8495-2986c74f81fb/scratchpad/stack/contracts/textinput.contract.json)"
+      "pass": true
     },
     {
       "id": "paste-door-open",
@@ -1006,8 +1005,7 @@
     {
       "id": "child-wider-ratchet-and-script-freshness",
       "claim": "C3-detection",
-      "pass": false,
-      "error": "Error: child-wider ratchet RED:\nlibrary      scripts  overflows  text-caused  margin-box  cause\naltitude           8          0            0           0  \nantd              12          0            0           0  \nastryx            13          3            6           0  textCaused(6): 33 -> 6 on the census/stack-to-main merge — an IMPROVEMENT, re-recorded so the number cannot regrow into the slack. The old 33 was the exact-conversion wave's Banner title/description rows, TextInput label/helper runs and the source-geometry Slider labels. MEASURED per script into one shared mock (scripts are identity-dependent, so per-script isolation is not a valid instrument here): checkbox-input +2, switch +4, and EVERY OTHER astryx script is now zero — banner, text-input, slider and progress-bar all closed. The merged engine is the cause: RC1's layout-axis door plus the stack's re-derived corpus (cb13a56f) give those runs a real direction and width instead of the harness-floor geometry that made them hug. overflows stays a HARD ZERO.\ncarbon            10          0            8           0  textCaused(8): all eight are the corpus-wide text-wrapping gap in Accordion (docs/22). Carbon's NON-text overflows were closed by the live-defect round (9c30204, D3) and its own compile receipt keeps a HARD zero on them — this row is the exempted class only.\nfluent            11          2           34          41  overflows(2) unchanged — Switch's `label` at 66px inside a 59px parent on the two `Label Position=Above` cells, where the stacked layout gives the label a narrower column than its own hug width. The Checkbox glyph is STIL"
+      "pass": true
     },
     {
       "id": "css-dom-conformance-frontier",
