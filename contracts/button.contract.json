@@ -5,6 +5,7 @@
   "version": "1.5.0",
   "status": "draft",
   "description": "Triggers an action or event. Use one primary button per context.",
+  "archetype": "button",
   "semantics": {
     "element": "button",
     "role": "button"

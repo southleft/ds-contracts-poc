@@ -1,0 +1,81 @@
+{
+  "__note": "HELD-OUT SUBJECT #3 — THE COMPLEX-ARCHETYPE PROBE. react-day-picker@10.0.1. BLINDNESS RULE (non-negotiable): this file was authored from the library's own documentation and shipped source ONLY. No capture/promote/emit stage of this repo was run against this library, no output of ours for it was read, and nothing here was tuned in response to our pipeline's behaviour. See parity/receipts/v1/HELD-OUT-MANIFEST.md. AUTHORED FROM: daypicker.dev and the shipped src/style.css + dist/esm typings. ONE component, chosen because the owner named \"a calendar or a date/time picker\" as the archetype he fears. What is beyond the proven archetype list is spelled out in examples/day-picker/README.md §5 — month grids, roving focus, a live \"today\", dropdown navigation and multi-month layouts. DETERMINISM: every date-valued prop is PINNED as a {\"$date\": \"<ISO>\"} literal in this file; a calendar whose month is \"now\" cannot be captured twice with the same bytes.",
+  "library": {
+    "__note": "classPrefix \"rdp-\" is the library's own class namespace; classAllow keeps the whole rdp-* vocabulary because in this library the class IS the part name (rdp-month_grid, rdp-day_button, rdp-weekday) and there are no per-combo value classes on the ROOT — the per-day state classes (rdp-selected, rdp-today, rdp-outside) live on day cells, which is itself one of the archetype questions this probe asks. varPrefix \"--rdp-\" is the library's documented custom-property prefix (16 names, declared on .rdp-root).",
+    "package": "react-day-picker",
+    "version": "10.0.1",
+    "framework": "react",
+    "classPrefix": "rdp-",
+    "classAllow": "^rdp-[a-z_]+$",
+    "varPrefix": "--rdp-"
+  },
+  "mount": {
+    "__note": "style.css is the library's shipped stylesheet (exports[\"./style.css\"]); zero url() references, so the harness stays network-free. No provider is needed — DayPicker carries its own context. THE THREE PINNED DATES NOW RIDE THE CONFIG ITSELF: the marker grammar gained {\"$date\": \"<ISO>\"}, so the sandbox fixtures module that existed only to hold three `new Date(...)` literals is gone and nothing hand-written sits between this config and the subject. A date is a LITERAL here by design — no \"now\", no offset, no local-time spelling — because a calendar whose month is the clock re-renders at midnight and no two captures can be byte-compared.",
+    "imports": [
+      "import 'react-day-picker/style.css';"
+    ],
+    "wrapperOpen": "<>",
+    "wrapperClose": "</>"
+  },
+  "tokens": {
+    "dtcg": [
+      "examples/day-picker/tokens/day-picker.dtcg.json"
+    ],
+    "css": "examples/day-picker/tokens/day-picker.vars.css",
+    "minted": "examples/day-picker/tokens/day-picker-minted.dtcg.json",
+    "mintedBootstrap": true,
+    "__note:mintedBootstrap": "GENUINE FIRST-EVER PASS. The minted tree is a committed ZERO-LEAF stub and the bootstrap allowance (extract/computed/capture.ts loadConfig, task #28) is the only legal way to gate against it. The exam's first pass is what fills it; the flag must be deleted the moment it carries leaves — loadConfig refuses a stale allowance by name."
+  },
+  "browser": {
+    "viewport": {
+      "width": 900,
+      "height": 900
+    },
+    "deviceScaleFactor": 1,
+    "colorScheme": "light"
+  },
+  "stage": {
+    "width": 704,
+    "height": 400,
+    "padding": 16
+  },
+  "enumeration": {
+    "cartesianLimit": 512,
+    "unsetLabel": "unset"
+  },
+  "components": [
+    {
+      "__note": "NO blockStage: .rdp-root is a plain block div, so a block stage would make the calendar FILL the stage and mint the harness window as the component width (the viewport-geometry hazard). A month grid is intrinsically sized — 44px day cells — so the default flex stage lets it shrink-to-fit to its own content width, which is the honest geometry.",
+      "name": "Calendar",
+      "importName": "DayPicker",
+      "contract": "examples/day-picker/contracts-seed/calendar.contract.json",
+      "sampleText": "",
+      "axes": [
+        "captionLayout",
+        "numberOfMonths",
+        "showOutsideDays",
+        "showWeekNumber"
+      ],
+      "axisValueMap": {
+        "numberOfMonths": {
+          "1": 1,
+          "2": 2
+        }
+      },
+      "fixedProps": {
+        "mode": "single",
+        "month": {
+          "$date": "2026-01-01T00:00:00.000Z"
+        },
+        "today": {
+          "$date": "2026-01-15T00:00:00.000Z"
+        },
+        "selected": {
+          "$date": "2026-01-20T00:00:00.000Z"
+        },
+        "timeZone": "UTC",
+        "animate": false
+      }
+    }
+  ]
+}

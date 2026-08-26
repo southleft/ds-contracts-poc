@@ -80,6 +80,8 @@
 @import '../cases/overlay-text-fill-pinned-size/case.css';
 @import '../cases/overlay-text-fill-stage-derived/case.css';
 @import '../cases/overlay-text-hug-excluded/case.css';
+@import '../cases/page-global-star-rule/case.css';
+@import '../cases/page-inherited-ink/case.css';
 @import '../cases/percentage-padding/case.css';
 @import '../cases/position-absolute-insets/case.css';
 @import '../cases/position-fixed/case.css';
@@ -97,6 +99,7 @@
 @import '../cases/stage-box-equal/case.css';
 @import '../cases/svg-outside-grammar/case.css';
 @import '../cases/svg-stroke-glyph-fill-none/case.css';
+@import '../cases/text-indent-off-box/case.css';
 @import '../cases/text-overflow-ellipsis/case.css';
 @import '../cases/transform-scale-rotate/case.css';
 @import '../cases/transition-channel/case.css';

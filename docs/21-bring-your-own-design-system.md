@@ -402,9 +402,12 @@ name** rather than folded into an average.
 
 Source of truth: the `CaptureConfig` / `ComponentConfig` interfaces in
 [`extract/computed/capture.ts`](../extract/computed/capture.ts). Worked
-examples: the 10 committed capture configs in `extract/computed/configs/`
+examples: the 13 committed capture configs in `extract/computed/configs/`
 (`carbon`, `mui`, `tailwind`, `astryx`, `polaris`, `polaris-depth`, `altitude`,
-`shadcn`, `fluent`)
+`shadcn`, `fluent`, `antd`, plus the three HELD-OUT exam subjects
+`radix-themes`, `bootstrap5`, `day-picker`, which are prepared but deliberately
+never captured — see
+[`parity/receipts/v1/HELD-OUT-MANIFEST.md`](../parity/receipts/v1/HELD-OUT-MANIFEST.md))
 — read the one whose styling method is closest to yours before writing a line
 of your own.
 
@@ -452,11 +455,11 @@ statement that would set them up.
 | Field | What it's for | Real example |
 |---|---|---|
 | `name` | display name; also the capture output dir (lowercased) | `"InlineNotification"` |
-| `importName` | the named export mounted from `library.package` | `"InlineNotification"` |
+| `importName` | the named export mounted from `library.package`. May be a **compound (dotted)** export name — the root binding is imported and the member path referenced, so a namespace-object library needs no barrel | `"InlineNotification"`, `"TextField.Root"` |
 | `contract` | repo-relative seed contract — **the prop space**, never re-derived from the library | `"examples/carbon/contracts-seed/tag.contract.json"` |
 | `sampleText` | deterministic `children`. `""` means **no children** (not the empty string — that distinction is the Carbon engine fix) | `"Button"`, `""` |
 | `axes[]` | enum props that ENUMERATE as variant axes. Every other prop is held at its default and receipted | `["kind", "size"]` |
-| `axisValueMap` | contract-side axis value → the library value mounted for it. `{"$props": {…}}` mounts *several* library props for one axis value | `{"contrast": {"high": {"$props": {"lowContrast": false}}, "low": {"$props": {"lowContrast": true}}}}` |
+| `axisValueMap` | contract-side axis value → the library value mounted for it. `{"$props": {…}}` mounts *several* library props for one axis value; `{"$classTokens": […]}` **appends** class tokens in declared axis order, so two class-token axes compose instead of one silently overwriting the other | `{"contrast": {"high": {"$props": {"lowContrast": false}}, "low": {"$props": {"lowContrast": true}}}}`, `{"size": {"lg": {"$classTokens": ["btn-lg"]}}}` |
 | `stateProps[]` | boolean props driven as **pseudo-class planes**. `state` is a closed vocabulary (`hover`, `active`, `focus-visible`, `disabled`) — out-of-vocabulary is refused by name. **See §4.3** | `[{"prop": "disabled", "state": "disabled"}]` |
 | `presenceProps[]` | structure-creating optional props (a prop whose *presence* creates DOM: `onDismiss` → a dismiss button). Enumerated as a 2-value `off`/`on` axis and promoted as a boolean prop with `visibleWhen`-gated parts | `[{"prop":"dismissible","libraryProp":"onDismiss","value":{"$callback":true}}]` |
 | `fixedProps` | props pinned to fixed values on **every** mount. Scalars, arrays, objects, and markers | `{"id":"carbon-toggle","labelText":"Toggle","size":"md"}` |
@@ -472,16 +475,39 @@ statement that would set them up.
 
 ### 3.3 The marker grammar
 
-Config is pure JSON, but three mounts need values JSON cannot spell. The
+Config is pure JSON, but some mounts need values JSON cannot spell. The
 grammar is resolved in the harness entry, at every depth of `childrenSpec`,
 and every referenced export is imported automatically.
 
 | Marker | Mounts | Use it for |
 |---|---|---|
 | `{"$callback": true}` | `() => {}` | required handlers, presence props |
+| `{"$date": "<ISO>"}` | `new Date("<ISO>")` | date-valued props (a calendar's `month`/`today`/`selected`). **A literal, by design**: `YYYY-MM-DD` or a UTC instant, and nothing else — no `now`, no offset, no local-time spelling, because a component whose rendering is a function of the clock re-renders at midnight and no two captures can be byte-compared. A month-length typo that JavaScript would silently roll over (`2026-02-31` → March) is refused by name |
 | `{"$import": "pkg#Export"}` | the named import itself | icon components (`{"$import":"@carbon/icons-react#Add"}`) |
 | `{"$render": "pkg#Export"}` | `(params) => <Export {...params} />` | render props — **the only function shape the vocabulary admits** (MUI Autocomplete's `renderInput`). Anything richer is a named refusal, never config |
+| `{"$element": "pkg#Export", "props": {…}, "text": "…"}` | a bounded React element | element-valued component props (MUI input adornments) |
+
+Two more markers are `axisValueMap`-scoped rather than general values — they
+describe how ONE axis value reaches the library, so they are only legal there:
+
+| Marker | Mounts | Use it for |
+|---|---|---|
 | `{"$props": {…}}` | several library props for one axis value | tri-state spelled as two booleans (`checked` + `indeterminate`) |
+| `{"$classTokens": […]}` | class tokens **appended** to `className` in declared axis order | class-based libraries where a component IS a class string (`class="btn btn-primary btn-lg"`). `[]` is the honest spelling of a value that adds no class |
+
+> **Why `$classTokens` exists rather than a second `$props`.** `comboProps`
+> folds every axis into one flat prop bag *by assignment*, so two axes writing
+> `className` were last-writer-wins: Bootstrap's `variant × size` mounted
+> `className: "btn btn-lg"` and **silently dropped the variant** — no error, no
+> receipt, and a capture that looked perfectly plausible with an axis missing.
+> The append form composes; the collisions it cannot express (two axes
+> assigning one prop, or `$classTokens` and `$props` mixed on `className`) are
+> refused by name at load.
+
+The full inventory of what this grammar can and cannot express — including the
+constructs still missing, each with the library that proves the need — is
+[`spec/GRAMMAR-COVERAGE.md`](../spec/GRAMMAR-COVERAGE.md), gated by
+`npm run grammar-coverage:check`.
 
 ---
 
@@ -741,8 +767,12 @@ Defect-first, because a smooth guide that hides these costs you a week:
    are caught only by a human checking a fact count.
 3. **The axis grammar drives the ROOT mount only.** If the prop you want to
    enumerate lives on a *child* (Carbon's `contained` on `TabList`, `open` on
-   `AccordionItem`), you cannot make it an axis today. Pin the child and defer
-   the axis **by name** — that is what the committed configs do.
+   `AccordionItem`; Bootstrap's `checked` on `.form-check-input`, the
+   `.progress-bar` modifiers and `.nav-link` active/disabled; Radix's
+   `Tabs.List` size and `TextField.Slot` side), you cannot make it an axis
+   today. Pin the child and defer the axis **by name** — that is what the
+   committed configs do. Tracked as `child-part-axes` in
+   [`spec/GRAMMAR-COVERAGE.md`](../spec/GRAMMAR-COVERAGE.md).
 4. **Two-axis products cannot be spelled.** `stylesWhen` conditions are
    single-prop and `literals`/`shape` are scalars, so a value that is a function
    of *two* axes (Flowbite's toggle knob offset = `Sizing × Checked`) has no

@@ -1,0 +1,239 @@
+{
+  "exam": "selftest-tailwind",
+  "direction": "code-to-canvas",
+  "set": "HelperText",
+  "id": "flowbite.helpertext",
+  "source": {
+    "library": "tailwind",
+    "config": "extract/computed/configs/tailwind.json"
+  },
+  "stages": [
+    {
+      "stage": "capture",
+      "status": "ok",
+      "ms": 25091,
+      "driver": "harness",
+      "command": "npx tsx extract/computed/run.ts --harness examples/tailwind/.tw-sandbox --config extract/computed/configs/tailwind.json --component HelperText --out extract/computed/out/tailwind --keep-originals",
+      "message": "3 artifact(s)",
+      "artifacts": [
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-Kg69oO/root/extract/computed/out/tailwind/helpertext/enriched.contract.json",
+          "sha256": "cf31a27cbb4acce1252ff2f56d4cfd5e23ce01aa8b6e547218410647016f5ecd",
+          "bytes": 3553,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-Kg69oO/root/extract/computed/out/tailwind/helpertext/scorecard.json",
+          "sha256": "53db85fdfab13401a3282562b2c734ae7757c78a932651b58d68534014a16ff6",
+          "bytes": 15331,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-Kg69oO/root/extract/computed/out/tailwind/helpertext/captured-truth.json",
+          "sha256": "533b55342094702d1e30d07d5709ce14ec5e8275acf607c16628a755c7592151",
+          "bytes": 112311,
+          "committed": false
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-tailwind/helpertext/ref-info.png",
+          "sha256": "9d18b0aaaab44aa4ac1f6b90a3d6bf7e56579229de7107de64b6f0c96b501b4a",
+          "bytes": 1783,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-tailwind/helpertext/ref-failure.png",
+          "sha256": "5a200f04158e782eb1bc14cf238b70d4a4e78090f900977520c0bc5abd1fdaae",
+          "bytes": 1696,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-tailwind/helpertext/ref-success.png",
+          "sha256": "c04afd743fc2ce5c5ffe0a1bc76f1b497b279664de5c4da079a23ba044636045",
+          "bytes": 1786,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-tailwind/helpertext/ref-warning.png",
+          "sha256": "16c5dd8a9f9282a5781f5f7aad78e3ee20cb2195a4dec3b63ddbf0178b8cfffa",
+          "bytes": 1748,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-tailwind/helpertext/ref-gray.png",
+          "sha256": "25fd1027b3e0959fdd850b39de20932b789422dd329ff31d59037dac7ae8ff89",
+          "bytes": 1791,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-tailwind/helpertext/code-info.png",
+          "sha256": "7c0e33600c6d5d57d45660c9a790655c6f7d360e40e31d1b0f0cbfb19db03a1b",
+          "bytes": 1782,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-tailwind/helpertext/code-failure.png",
+          "sha256": "5a200f04158e782eb1bc14cf238b70d4a4e78090f900977520c0bc5abd1fdaae",
+          "bytes": 1696,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-tailwind/helpertext/code-success.png",
+          "sha256": "c04afd743fc2ce5c5ffe0a1bc76f1b497b279664de5c4da079a23ba044636045",
+          "bytes": 1786,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-tailwind/helpertext/code-warning.png",
+          "sha256": "16c5dd8a9f9282a5781f5f7aad78e3ee20cb2195a4dec3b63ddbf0178b8cfffa",
+          "bytes": 1748,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-tailwind/helpertext/code-gray.png",
+          "sha256": "25fd1027b3e0959fdd850b39de20932b789422dd329ff31d59037dac7ae8ff89",
+          "bytes": 1791,
+          "committed": true
+        }
+      ]
+    },
+    {
+      "stage": "promote",
+      "status": "ok",
+      "ms": 2924,
+      "driver": "harness",
+      "command": "npx tsx packages/cli/src/cli.ts promote --config examples/tailwind/ds-library.json",
+      "message": "examples/tailwind/contracts/helpertext.contract.json",
+      "artifacts": [
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-Kg69oO/root/examples/tailwind/contracts/helpertext.contract.json",
+          "sha256": "fe9a322394b41744dbfc27dfd1027f683ccb3adf446a31aad28116e33feb77de",
+          "bytes": 3913,
+          "committed": false
+        }
+      ]
+    },
+    {
+      "stage": "validate",
+      "status": "ok",
+      "ms": 6,
+      "driver": "harness",
+      "command": "core/emit-react.ts validateContract (the referee — no CLI verb; docs/07)",
+      "message": "no violations",
+      "artifacts": []
+    },
+    {
+      "stage": "generate",
+      "status": "ok",
+      "ms": 3244,
+      "driver": "harness",
+      "command": "npx ds-contracts generate examples/tailwind/contracts/helpertext.contract.json --out <out> --tokens <dtcg>,<minted> --icons examples/tailwind/assets/icons --stories",
+      "message": "6 file(s)",
+      "artifacts": [
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-Kg69oO/generated/helpertext/index.ts",
+          "sha256": "bb0b7348eeb2153ebb7f98ca152ca5aa3055834bfaafc642899e7912773b5b6d",
+          "bytes": 53,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-Kg69oO/generated/helpertext/tokens.css",
+          "sha256": "a97700e6a399dc529572e713c6282992c0b37517268cde0b34b28a558f8da47e",
+          "bytes": 20439,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-Kg69oO/generated/helpertext/HelperText/HelperText.module.css",
+          "sha256": "4435d1bef6baf6681d0bfba7170d62beddebf1eb1fa04bdf7c4fd8c4392a6b47",
+          "bytes": 1214,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-Kg69oO/generated/helpertext/HelperText/HelperText.stories.tsx",
+          "sha256": "0c9662609030ab4b17cf65b83a29797a26d2abfdbd4152b80c33415f9eb8cfb6",
+          "bytes": 2989,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-Kg69oO/generated/helpertext/HelperText/HelperText.tsx",
+          "sha256": "fe3727fae05a48d3509461cbe57c80dcdefc440ec1deda59a2b0df9ef93328b6",
+          "bytes": 2033,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-Kg69oO/generated/helpertext/HelperText/index.ts",
+          "sha256": "c949cf590de9e714e934e0642092371897431d25cffa13392e21d50939602162",
+          "bytes": 96,
+          "committed": false
+        }
+      ]
+    },
+    {
+      "stage": "bundle",
+      "status": "ok",
+      "ms": 6798,
+      "driver": "harness",
+      "command": "npx ds-contracts figma examples/tailwind/contracts --out examples/tailwind/figma --tokens <dtcg>,<minted> && npx ds-contracts figma bundle examples/tailwind/contracts --name Tailwind --out examples/tailwind/figma/tailwind.bundle.json",
+      "message": "helper-text.figma.js + tailwind.bundle.json",
+      "artifacts": [
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-Kg69oO/root/examples/tailwind/figma/helper-text.figma.js",
+          "sha256": "52980cb16df37db55c3a33d411aad5a64202cf7b05892d2e180969fd9636f420",
+          "bytes": 83489,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-Kg69oO/root/examples/tailwind/figma/tailwind.bundle.json",
+          "sha256": "384cd1f8aabab16683b482070d2d6ff0b46d5b992532e3c8c920189a5ee74d19",
+          "bytes": 152750,
+          "committed": false
+        }
+      ]
+    },
+    {
+      "stage": "mint",
+      "status": "PENDING",
+      "ms": 5658,
+      "driver": "mcp",
+      "command": "npx ds-contracts figma … --file-key byMp6lt0Ij9b2QbkDGFwBh  →  an MCP-holding agent runs it through the figma-console bridge",
+      "message": "runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over stdio to its own client and WebSocket to plugin clients, and this harness is neither — no port, flag or configuration lets a Node process issue the write, so it is performed by an agent holding the figma-console MCP tools and records its own evidence at parity/receipts/v1/first-pass/selftest-tailwind/mint-evidence.json. Bundle produced, mint pending: the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact.",
+      "artifacts": [
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-Kg69oO/mint/helper-text.figma.js",
+          "sha256": "567cff6cf2cdf348825f2f6fe654f8f2320de414f2eb6ab238ea30a99aab206b",
+          "bytes": 83489,
+          "committed": false
+        }
+      ]
+    }
+  ],
+  "chainComplete": false,
+  "firstStop": {
+    "stage": "mint",
+    "status": "PENDING",
+    "message": "runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over stdio to its own client and WebSocket to plugin clients, and this harness is neither — no port, flag or configuration lets a Node process issue the write, so it is performed by an agent holding the figma-console MCP tools and records its own evidence at parity/receipts/v1/first-pass/selftest-tailwind/mint-evidence.json. Bundle produced, mint pending: the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact."
+  },
+  "images": {
+    "ref": [
+      "parity/receipts/v1/first-pass/selftest-tailwind/helpertext/ref-info.png",
+      "parity/receipts/v1/first-pass/selftest-tailwind/helpertext/ref-failure.png",
+      "parity/receipts/v1/first-pass/selftest-tailwind/helpertext/ref-success.png",
+      "parity/receipts/v1/first-pass/selftest-tailwind/helpertext/ref-warning.png",
+      "parity/receipts/v1/first-pass/selftest-tailwind/helpertext/ref-gray.png"
+    ],
+    "code": [
+      "parity/receipts/v1/first-pass/selftest-tailwind/helpertext/code-info.png",
+      "parity/receipts/v1/first-pass/selftest-tailwind/helpertext/code-failure.png",
+      "parity/receipts/v1/first-pass/selftest-tailwind/helpertext/code-success.png",
+      "parity/receipts/v1/first-pass/selftest-tailwind/helpertext/code-warning.png",
+      "parity/receipts/v1/first-pass/selftest-tailwind/helpertext/code-gray.png"
+    ],
+    "canvas": [],
+    "absent": [
+      {
+        "kind": "canvas",
+        "reason": "mint PENDING — no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over stdio to its own client and WebSocket to plugin clients, and this harness is neither — no port, flag or configuration lets a Node process issue the write, so it is performed by an agent holding the figma-console MCP tools and records its own evidence at parity/receipts/v1/first-pass/selftest-tailwind/mint-evidence.json. Bundle produced, mint pending: the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact."
+      }
+    ]
+  },
+  "totalMs": 43721
+}

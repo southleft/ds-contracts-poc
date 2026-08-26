@@ -5,6 +5,7 @@
   "version": "1.0.0",
   "status": "draft",
   "description": "Animated loading indicator for processes of unknown duration. API mirrors industry convention (Astryx Spinner); the size scale needs per-variant icon sizing and the rotation itself is CSS-only — the canvas shows the static arc.",
+  "archetype": "progress / spinner",
   "semantics": {
     "element": "span",
     "role": "status"

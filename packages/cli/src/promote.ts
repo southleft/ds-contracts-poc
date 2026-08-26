@@ -61,6 +61,7 @@ import {
   validateContract,
   type ProvenancedContract,
 } from "@ds-contracts/core";
+import { seedArchetype } from "../../schema/src/index.js";
 import { promoteStaticArtifact } from "../../../extract/static-promotion.js";
 
 // ---------------------------------------------------------------------------
@@ -447,6 +448,29 @@ export interface AuthoredRow {
    *  `from` exactly, so a capture that moves under the row refuses by name
    *  instead of being overwritten. */
   edit?: Record<string, { from: unknown; to: unknown }>;
+  /** THE CANVAS-DEVELOPED DOOR (2026-08-24). Whole PROPS and whole ANATOMY
+   *  PARTS that no capture plane can carry because the library never renders
+   *  them in the captured mount — Flowbite's Alert draws its status icon only
+   *  when `icon` is passed and its dismiss button only when `onDismiss` is,
+   *  so the captured DOM has neither, and both were DEVELOPED ON THE CANVAS.
+   *
+   *  Before this door those facts were hand-written into the committed
+   *  CAPTURE RECORD (extract/computed/out/**), which made the record claim a
+   *  provenance no run could reproduce — the defect the first-pass exam
+   *  measured (parity/receipts/v1/FIRST-PASS.md, FINDING 1). They are inputs
+   *  now, named and refused-by-name like every other authored fact.
+   *
+   *  `props` appends to `props[]`; `parts` inserts into the anatomy under
+   *  `part` (the contract root when `part` is omitted). `before`/`after` name
+   *  an existing sibling and are exclusive; omit both to append. A name the
+   *  capture ALREADY carries refuses — the day the capture learns the fact,
+   *  the row dies. */
+  add?: {
+    props?: Array<Record<string, unknown>>;
+    parts?: Record<string, unknown>;
+    before?: string;
+    after?: string;
+  };
   /** Dotted `imported.<component>.<part>…` leaf → DTCG leaf. */
   mint?: Record<string, Leaf>;
   /** Dotted leaf paths to REMOVE from the merged minted tree. */
@@ -468,8 +492,35 @@ export function parseAuthoredLedger(raw: unknown, from: string): AuthoredRow[] {
     if (!row || typeof row !== "object") throw new Error(`${at}: must be an object`);
     if (typeof row.component !== "string" || !row.component) throw new Error(`${at}: "component" must name a capture out-dir`);
     if (typeof row.cause !== "string" || !row.cause.trim()) throw new Error(`${at}: "cause" must say why this fact is authored by hand`);
-    const ops = ["set", "unset", "edit", "mint", "prune"].filter((k) => row[k] !== undefined);
-    if (ops.length === 0) throw new Error(`${at}: names no operation (set / unset / edit / mint / prune)`);
+    const ops = ["set", "unset", "edit", "add", "mint", "prune"].filter((k) => row[k] !== undefined);
+    if (ops.length === 0) throw new Error(`${at}: names no operation (set / unset / edit / add / mint / prune)`);
+    if (row.add !== undefined) {
+      const add = row.add as Record<string, unknown>;
+      if (!add || typeof add !== "object" || Array.isArray(add)) throw new Error(`${at}: "add" must be an object`);
+      const kinds = ["props", "parts"].filter((k) => add[k] !== undefined);
+      if (kinds.length !== 1) throw new Error(`${at}: "add" carries exactly one of "props" / "parts" (found ${kinds.length === 0 ? "neither" : kinds.join(" + ")})`);
+      if (add.props !== undefined) {
+        if (!Array.isArray(add.props) || add.props.length === 0) throw new Error(`${at}: add.props must be a non-empty array of prop objects`);
+        for (const pr of add.props) {
+          if (!pr || typeof pr !== "object" || typeof (pr as Record<string, unknown>).name !== "string") {
+            throw new Error(`${at}: every add.props entry must be an object with a string "name"`);
+          }
+        }
+        if (row.prop !== undefined) throw new Error(`${at}: add.props appends to props[] — it takes no "prop" target`);
+      }
+      if (add.parts !== undefined) {
+        const parts = add.parts as Record<string, unknown>;
+        if (!parts || typeof parts !== "object" || Array.isArray(parts) || Object.keys(parts).length === 0) {
+          throw new Error(`${at}: add.parts must be a non-empty object of partName → part`);
+        }
+        if (row.prop !== undefined) throw new Error(`${at}: add.parts inserts into the anatomy — it takes no "prop" target`);
+      }
+      if (add.before !== undefined && add.after !== undefined) throw new Error(`${at}: add "before" and "after" are exclusive`);
+      for (const k of ["before", "after"]) {
+        if (add[k] !== undefined && (typeof add[k] !== "string" || !add[k])) throw new Error(`${at}: add "${k}" must name an existing sibling`);
+      }
+      if (row.path !== undefined) throw new Error(`${at}: add acts on props[] or the anatomy — "path" is for fields/edit`);
+    }
     if (row.part !== undefined && row.prop !== undefined) throw new Error(`${at}: "part" and "prop" are exclusive targets`);
     const set = (row.set ?? {}) as Record<string, unknown>;
     const partOnly = ["declared", "tokens", "tokensByProp"].filter((k) => set[k] !== undefined);
@@ -521,10 +572,63 @@ export function applyAuthoredContractRow(
   row: AuthoredRow,
 ): string[] {
   const done: string[] = [];
-  if (!row.set && !row.unset && !row.edit) return done;
+  if (!row.set && !row.unset && !row.edit && !row.add) return done;
   const label = `authored ${row.component}${row.part ? `.${row.part}` : row.prop ? ` prop ${row.prop}` : ""}${row.path ? ` @${row.path}` : ""}`;
   const isObj = (v: unknown): v is Record<string, unknown> =>
     !!v && typeof v === "object" && !Array.isArray(v);
+
+  // --- THE CANVAS-DEVELOPED DOOR: whole props / whole parts ---------------
+  if (row.add?.props) {
+    const props = contract.props as Array<Record<string, unknown>> | undefined;
+    if (!Array.isArray(props)) throw new Error(`${label}: add.props — the promoted contract carries no props[] — NAMED refusal`);
+    for (const pr of row.add.props) {
+      const name = pr.name as string;
+      if (props.some((p) => p.name === name)) {
+        throw new Error(`${label}: add.props "${name}" is ALREADY carried by the capture — the authored row is stale; delete it rather than let two sources disagree`);
+      }
+    }
+    const anchor = row.add.before ?? row.add.after;
+    let at = props.length;
+    if (anchor !== undefined) {
+      const i = props.findIndex((p) => p.name === anchor);
+      if (i < 0) throw new Error(`${label}: add.props ${row.add.before ? "before" : "after"} "${anchor}", which props[] does not carry — NAMED refusal`);
+      at = row.add.before !== undefined ? i : i + 1;
+    }
+    props.splice(at, 0, ...row.add.props.map((pr) => JSON.parse(JSON.stringify(pr)) as Record<string, unknown>));
+    done.push(`add props ${row.add.props.map((pr) => pr.name).join(", ")}${anchor !== undefined ? ` (${row.add.before ? "before" : "after"} ${anchor})` : ""}`);
+  }
+  if (row.add?.parts) {
+    let host: Record<string, unknown>;
+    if (row.part !== undefined) {
+      const p = findPart(contract, row.part);
+      if (!p) throw new Error(`${label}: add.parts — part "${row.part}" is not exactly one part of the promoted anatomy — NAMED refusal`);
+      host = p as Record<string, unknown>;
+    } else {
+      host = contract;
+      if (!isObj(contract.anatomy)) throw new Error(`${label}: add.parts — the promoted contract carries no anatomy — NAMED refusal`);
+    }
+    const key = row.part !== undefined ? "parts" : "anatomy";
+    const siblings = (host[key] as Record<string, unknown> | undefined) ?? {};
+    for (const name of Object.keys(row.add.parts)) {
+      if (name in siblings) {
+        throw new Error(`${label}: add.parts "${name}" is ALREADY carried by the capture — the authored row is stale; delete it rather than let two sources disagree`);
+      }
+      if (findPart(contract, name)) {
+        throw new Error(`${label}: add.parts "${name}" already names a part elsewhere in the promoted anatomy — NAMED refusal (a part name is an identity)`);
+      }
+    }
+    const anchor = row.add.before ?? row.add.after;
+    const entries = Object.entries(siblings);
+    let at = entries.length;
+    if (anchor !== undefined) {
+      const i = entries.findIndex(([k]) => k === anchor);
+      if (i < 0) throw new Error(`${label}: add.parts ${row.add.before ? "before" : "after"} "${anchor}", which is not a sibling here — NAMED refusal`);
+      at = row.add.before !== undefined ? i : i + 1;
+    }
+    entries.splice(at, 0, ...Object.entries(JSON.parse(JSON.stringify(row.add.parts)) as Record<string, unknown>));
+    host[key] = Object.fromEntries(entries);
+    done.push(`add parts ${Object.keys(row.add.parts).join(", ")}${row.part !== undefined ? ` under ${row.part}` : ""}${anchor !== undefined ? ` (${row.add.before ? "before" : "after"} ${anchor})` : ""}`);
+  }
   // The target: the part, the prop, or the contract root — then `path`.
   let part: AnatomyPart | null = null;
   let target: Record<string, unknown> = contract;
@@ -995,6 +1099,17 @@ export function promote(
       `${path.basename(src)} — computed-capture truth; minted leaves source-aliased to ${cfg.possessive} ` +
       `own CSS-variable references where verified (source-bindings.json); extension sidecar ` +
       `carries the named overflow.`;
+    // v19 ARCHETYPE. The computed capture does not know what a component IS,
+    // so a freshly promoted contract would carry no `archetype` and a
+    // re-promotion over a seeded one would DELETE the field — silently undoing
+    // the codemod and leaving the required-facts referee with nothing to grade
+    // (caught by the promote-generalization eval, which re-promotes four
+    // libraries and byte-compares the committed artifacts). `seedArchetype` is
+    // the SAME function `ds-contracts migrate` runs: same name-map, same
+    // position (immediately after `description`), and it never touches a
+    // contract that already declares one — so a human's re-declaration
+    // survives every future re-promotion.
+    contract = seedArchetype(contract).doc as ProvenancedContract;
     // Authored set/unset rows land BEFORE the state-preview probe so the
     // referee judges the contract that will actually be written.
     for (const row of authoredRows) {

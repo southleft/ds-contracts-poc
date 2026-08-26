@@ -90,6 +90,7 @@ export function alignSweep(
   classPrefix: string,
 ): AlignedSweep {
   const prefix = `${comp.name}:`;
+  // @door fuse.component-prefix-filter
   const captures = sweepResult.captures
     .filter((c) => c.combo.startsWith(prefix))
     .map((c) => ({ ...c, combo: c.combo.slice(prefix.length) }));
@@ -122,7 +123,9 @@ export function alignSweep(
   // receipted only for parts the BASE capture has)
   for (const [key, els] of union.alignedByKey) {
     els.forEach((el, i) => {
+      // @door fuse.part-missing-in-combo
       if (!el && inBase[i]) structureReceipts.push(`part-missing: ${key} ${partNames[i]}`);
+      // @door fuse.signature-drift-named
       if (el && el.sig !== baseFlat[i].sig) structureReceipts.push(`signature-drift: ${key} ${partNames[i]}: ${baseFlat[i].sig} → ${el.sig}`);
     });
   }
@@ -135,6 +138,7 @@ export function alignSweep(
 
   // Join vs the static anatomy: the static side wins NAMES and semantics;
   // the computed tree wins EXISTENCE (§4.5).
+  // @door fuse.static-only-part-not-admitted
   const staticParts = new Set(walkAnatomy(space.contract).map((w) => w.name));
   const anatomyJoin = partNames.map((p) => ({
     part: p,
@@ -166,7 +170,9 @@ export function absClusterParts(
   for (let pi = 0; pi < a.baseFlat.length; pi++) {
     let seen = 0;
     let abs = true;
+    // @door fuse.uniform-or-nothing-absolute
     for (const combo of space.enumeration.combos) {
+      // @door fuse.enabled-combos-only
       if (!isEnabled(combo)) continue;
       const el = a.getAligned(`${combo.key}__default`)[pi];
       if (!el) continue;
@@ -181,9 +187,11 @@ export function absClusterParts(
   }
   const clusterAdmit = new Set<number>();
   const textExcluded = new Set<number>();
+  // @door fuse.cluster-only-if-any-absolute
   if (absAdmit.size > 0) {
     for (let pi = 0; pi < a.baseFlat.length; pi++) {
       if (absAdmit.has(pi)) continue;
+      // @door fuse.text-part-geometry-exclusion
       const hasText = a.baseFlat[pi].node.nodes.some((n) => n.t === 'text' && n.v.trim().length > 0);
       if (hasText) textExcluded.add(pi);
       else clusterAdmit.add(pi);
@@ -270,11 +278,13 @@ export function tableGeometry(a: AlignedSweep, space: PropSpace): TableGeometry 
       const el = a.getAligned(`${combo.key}__default`)[pi];
       if (el) displays.add(el.node.style['display']);
     }
+    // @door fuse.uniform-table-display-lowering
     if (displays.size === 1) {
       const d = [...displays][0];
       if (d === 'table' || d === 'inline-table' || d.startsWith('table-')) out.lowered.set(pi, d);
     }
   }
+  // @door fuse.no-table-no-door
   if (out.lowered.size === 0) return out;
 
   // 2. rows → their cells, in union-child order (the DOM order the union
@@ -290,6 +300,7 @@ export function tableGeometry(a: AlignedSweep, space: PropSpace): TableGeometry 
       .map((c) => idxOf.get(c.id)!)
       .filter((ci) => out.lowered.get(ci) === 'table-cell');
     if (cells.length === 0) continue;
+    // @door fuse.table-column-arity-disagreement
     if (cellCount === null) cellCount = cells.length;
     else if (cells.length !== cellCount) {
       out.refusals.push(
@@ -314,6 +325,7 @@ export function tableGeometry(a: AlignedSweep, space: PropSpace): TableGeometry 
         const el = els[ci];
         if (!el) continue;
         const w = outerPx(el.node.style, 'width');
+        // @door fuse.table-column-width-unreadable
         if (w === null) {
           out.refusals.push(`table-column-width-unreadable: column ${col} cell "${a.partNames[ci]}" width "${el.node.style['width']}" is not a px length in combo ${combo.key} — column NOT admitted`);
           agreed = false;
@@ -322,8 +334,10 @@ export function tableGeometry(a: AlignedSweep, space: PropSpace): TableGeometry 
         seen.push({ part: a.partNames[ci], w });
       }
       if (!agreed) break;
+      // @door fuse.single-row-column-proves-nothing
       if (seen.length < 2) continue; // a one-row column proves nothing across rows
       const first = seen[0].w;
+      // @door fuse.table-column-width-disagreement
       const bad = seen.find((s) => Math.abs(s.w - first) > 0.5);
       if (bad) {
         out.refusals.push(
@@ -334,12 +348,14 @@ export function tableGeometry(a: AlignedSweep, space: PropSpace): TableGeometry 
       }
       widths.push(`${combo.key}=${first}px`);
     }
+    // @door fuse.table-column-width-admitted
     if (!agreed) continue;
     for (const ci of cells) out.cellAdmit.add(ci);
     out.receipts.push(
       `table-column-width-admitted: column ${col} (${cells.map((ci) => a.partNames[ci]).join(', ')}) — every row measures the same OUTER width in every enabled combo (${widths.join(', ') || 'single-row column'}); width joins fusion for these parts (deterministic at the PINNED stage width — table-layout:auto reflows with available width, named)`,
     );
   }
+  // @door fuse.table-cell-height-from-row
   if (out.cellAdmit.size > 0) {
     out.receipts.push(
       `table-cell-height-from-row: the admitted cells take their HEIGHT from their ROW element — a cell's own computed height is its CONTENT height (Chromium reports e.g. 30px inside a 63px row), and the table box model gives every cell in a row the row's height; without it the per-cell border-bottom dividers land at different y positions (named)`,
@@ -479,12 +495,15 @@ export function viewportResolvedParts(
       seen++;
       const st = el.node.style;
       const pos = st['position'];
+      // @door fuse.out-of-flow-required
       if (pos !== 'absolute' && pos !== 'fixed') { x = false; y = false; break; }
+      // @door fuse.ancestor-establishes-containing-block
       const contained = anc.some((ai) => {
         const ae = els[ai];
         return ae ? establishesContainingBlock(ae.node.style, pos === 'fixed') : false;
       });
       if (contained) { x = false; y = false; break; }
+      // @door fuse.axis-identity-closes-on-viewport
       const sx = axisSpan(st, 'x');
       const sy = axisSpan(st, 'y');
       if (sx === null || Math.abs(sx - env.viewport.width) > 0.5) x = false;
@@ -718,6 +737,7 @@ export function viewportDerivedRefusals(
   const refused = new Map<number, Set<string>>();
   const receipts: string[] = [];
   const res = viewportResolvedParts(a, space, env);
+  // @door fuse.viewport-derived-geometry-refused
   for (const [pi, r] of [...res].sort((p, q) => p[0] - q[0])) {
     const st = a.baseFlat[pi].node.style;
     const set = new Set<string>();
@@ -739,6 +759,7 @@ export function viewportDerivedRefusals(
     receipts.push(
       `viewport-derived-geometry-refused: ${a.partNames[pi]} (position:${st['position']}) — ${[...set].sort().join(', ')} NOT minted. The part is out of flow and no ancestor in the captured tree establishes its containing block, so its box was laid out against the INITIAL CONTAINING BLOCK — the capture window: ${why.join('; ')}. These numbers are a function of the harness viewport, not of the library; a canvas frame has no window, and Chromium reports a resolved \`auto\` inset with the same syntax as an authored one, so the pair is refused together rather than half-guessed.`,
     );
+    // @door fuse.viewport-anchored-translate-carried
     if (st['translate-x'] !== undefined || st['translate-y'] !== undefined) {
       receipts.push(
         `viewport-anchored-translate-carried: ${a.partNames[pi]} — translate-x/${st['translate-x'] ?? '—'} translate-y/${st['translate-y'] ?? '—'} is a POSITIONING offset written by the library's own positioner (floating-ui/popper) against where the anchor happened to sit in the capture stage. It is harness-coupled by the same argument as the refused insets, but no arithmetic in one capture proves it, so it is CARRIED and named here rather than refused on a hunch.`,
@@ -748,6 +769,16 @@ export function viewportDerivedRefusals(
   return { refused, receipts };
 }
 
+/** Read the UA baseline out of a committed `captured-truth.json` as flat style
+ *  maps, or `undefined` when the capture predates the baseline fix. One
+ *  spelling, so no instrument can silently read the in-page probe while the
+ *  next one reads the UA baseline. */
+export function uaStyles(truth: unknown): Record<string, StyleMap> | undefined {
+  const ua = (truth as { uaControls?: Record<string, { style: StyleMap }> } | null)?.uaControls;
+  if (!ua) return undefined;
+  return Object.fromEntries(Object.entries(ua).map(([t, n]) => [t, n.style]));
+}
+
 export function styledChannels(
   a: AlignedSweep,
   space: PropSpace,
@@ -755,6 +786,7 @@ export function styledChannels(
   allProps: string[],
   receipts: string[],
   env: FusionEnv,
+  uaControls?: Record<string, StyleMap>,
 ): Map<string, Set<string>> {
   const out = new Map<string, Set<string>>();
   // ABSOLUTE-POSITION ROUND (MUI Slider/Switch live finding): geometry
@@ -822,7 +854,9 @@ export function styledChannels(
       receipts.push(`text-fill-pinned-geometry-refused: ${a.partNames[pi]}.${axis} — the part's box IS its pinned ancestor's content box in every enabled combo, and the fill is refused anyway: ${reason}`);
     }
   }
+  // @door fuse.absolute-geometry-admitted
   for (const pi of [...absAdmit, ...parentAdmit].sort((x, y) => x - y)) {
+    // @door fuse.table-geometry-excluded
     if (table.lowered.has(pi)) {
       receipts.push(`table-geometry-excluded: ${a.partNames[pi]} (display:${table.lowered.get(pi)}) — table-box parts keep the geometry exclusion even inside an overlay-anatomy component; the lowered flex stack sizes them (organism round)`);
       continue;
@@ -857,6 +891,7 @@ export function styledChannels(
   // through the other door.
   const rootPi = a.baseFlat.findIndex((e) => e.path === '');
   const blockRootAdmit = new Set<number>();
+  // @door fuse.block-root-door-closed-for-cluster-roots
   if (rootPi >= 0 && !absAdmit.has(rootPi) && !parentAdmit.has(rootPi)) {
     let block = true;
     let seen = 0;
@@ -875,6 +910,7 @@ export function styledChannels(
     // a 24px-wide, 10px-tall box nobody could read as an input. Same
     // stage-dependent receipt as the block root; the viewport door above
     // still refuses a body-wide box.
+    // @door fuse.stage-fill-root-admitted
     if (seen > 0 && !block) {
       const stageContent = env.stage.width - 2 * env.stage.padding;
       let fills = true;
@@ -889,12 +925,14 @@ export function styledChannels(
         receipts.push(`stage-fill-root-admitted: ${a.partNames[rootPi]} — display:${a.baseFlat[rootPi].node.style['display']} root measures exactly the stage content box (${stageContent}px) in every enabled combo: it fills its container like a block root (antd Input \`width: 100%\`), so the captured stage width joins fusion under the block-root receipt below`);
       }
     }
+    // @door fuse.block-root-width-admitted
     if (seen > 0 && block) {
       const rootStyle = a.baseFlat[rootPi].node.style;
       const rootW = pxNum(rootStyle['width']);
       const stageContent = env.stage.width - 2 * env.stage.padding;
       // (1) out-of-flow root stretched by the window (`inset: 0`) — proven by
       // the axis identity in viewportResolvedParts, already refused above.
+      // @door fuse.block-root-width-refused
       const stretched = vpDerived.refused.get(rootPi)?.has('width') === true;
       // (2) in-flow block root whose containing block is the BODY, not the
       // stage: it measures the window exactly while the stage measures
@@ -932,6 +970,12 @@ export function styledChannels(
       } else {
         blockRootAdmit.add(rootPi);
         receipts.push(`block-root-width-admitted: ${a.partNames[rootPi]} — display:block root fills its container in CSS; the captured stage width joins fusion (stage-dependent, receipted — the canvas card draws at the captured block width instead of hugging its text)`);
+        // @door fuse.block-root-width-source
+        if (rootW !== null && rootW !== stageContent) {
+          receipts.push(
+            `block-root-width-source: ${a.partNames[rootPi]} — the admitted width ${rootStyle['width']} is NOT the stage content box (${stageContent}px) and NOT the viewport (${env.viewport.width}px); this block root did not fill anything, it took its own intrinsic/shrink-to-fit size (a flex stage makes a block child a flex item). The admission stands — the number is the library's — but the sentence above names a container this measurement did not come from.`,
+          );
+        }
       }
     }
   }
@@ -985,6 +1029,7 @@ export function styledChannels(
     // avatars. A dimension the library's own stylesheet names with a token
     // is not a measurement of the harness; it joins fusion with its name.
     // Percent/viewport-derived boxes keep the exclusion (vpRefused wins).
+    // @door fuse.token-named-geometry-admitted
     const tokenNamed = (p: string): boolean =>
       (p === 'width' || p === 'height') && !inTableBox && (a.baseFlat[pi].node.vrefs?.[p]?.length ?? 0) > 0;
     for (const p of ['width', 'height'] as const) {
@@ -995,26 +1040,75 @@ export function styledChannels(
     }
     const admit = (p: string): boolean =>
       !vpRefused?.has(p) &&
+      // @door fuse.webkit-blanket-refusal
       (isFusable(p) ||
         (GEOM_ADMIT.has(p) && !inTableBox && (absAdmit.has(pi) || parentAdmit.has(pi))) ||
         ((p === 'width' || p === 'height') && table.cellAdmit.has(pi)) ||
         (p === 'width' && blockRootAdmit.has(pi)) ||
         textFill.admit.get(pi)?.has(p) === true ||
         tokenNamed(p));
+    // @door fuse.control-fallback
     const tag = a.baseFlat[pi].node.tag;
-    const ctrl = controls[tag] ?? controls['span'];
+    const pageCtrl = controls[tag] ?? controls['span'];
     if (!controls[tag]) receipts.push(`control-fallback: no control for <${tag}> — span control used (part ${a.partNames[pi]})`);
+    // ═══ THE BASELINE THIS DOOR SUBTRACTS (door `fuse.control-element-delta`).
+    //
+    // `controls` is the IN-PAGE probe: four bare elements the harness mounts
+    // inside `mount.wrapperOpen`, in the SAME document as the component. Every
+    // page-global rule the library ships lands on them too — shadcn's
+    // `* { border-color: var(--border) }`, Polaris's provider ink, Tailwind
+    // preflight's `border-style: solid`, every library's `body` font-family.
+    // Subtracting that baseline cancels facts the LIBRARY authored, and the
+    // generated surfaces (emit-html / emit-react / the Figma mint) carry no
+    // page chrome at all, so a cancelled fact is a fact that never ships. That
+    // is the shadcn invisible Input and the inkless Polaris/Fluent text.
+    //
+    // `uaControls` is the same four elements measured on a page carrying the
+    // browser, the colour-scheme and the stage box and NOTHING the library
+    // ships (capture.captureUaControls). It is the baseline this door is
+    // ABOUT: the user agent is the only thing a generated surface inherits.
+    //
+    // TWO DELIBERATE NARROWINGS:
+    //  · CUSTOM PROPERTIES (`--*`) keep the IN-PAGE baseline. A `:root` token
+    //    block inherits onto every element in the page; against a UA baseline
+    //    every one of a library's ~90 tokens would "differ" on every part and
+    //    be carried, only to be refused downstream as "a CSS custom property,
+    //    not a styled channel". That is page noise by any definition, and a
+    //    custom property paints nothing on its own — the channels it FEEDS are
+    //    the ones this door now measures honestly.
+    //  · NO uaControls (a capture taken before this door was fixed) falls back
+    //    to the in-page probe and says so, once per part. Silence here would
+    //    make a stale capture look like a clean one.
+    const uaCtrl = uaControls ? (uaControls[tag] ?? uaControls['span']) : undefined;
+    if (uaControls && !uaControls[tag]) receipts.push(`ua-control-fallback: no UA baseline for <${tag}> — span UA control used (part ${a.partNames[pi]})`);
+    const ctrl = uaCtrl ?? pageCtrl;
+    const baseline = (q: string): string | undefined => (uaCtrl && !q.startsWith('--') ? uaCtrl[q] : pageCtrl[q]);
+    // The channels where the two baselines DISAGREE are exactly the channels
+    // the library declared page-globally: measured here, receipted below.
+    const pageGlobal: string[] = [];
+    const droppedAuthored: string[] = [];
+    let dropped = 0;
+    let considered = 0;
     for (const p of allProps) {
       // R4: the -webkit census runs over the SAME comparison the fusion door
       // uses (differs from the control), on the channels the door refuses.
-      if (p.startsWith('-webkit-') && a.baseFlat[pi].node.style[p] !== ctrl[p]) {
+      if (p.startsWith('-webkit-') && a.baseFlat[pi].node.style[p] !== baseline(p)) {
         (webkitStyled.get(p) ?? webkitStyled.set(p, new Set()).get(p)!).add(a.partNames[pi]);
       }
-      if (GEOMETRY_CHANNELS.has(p) && !admit(p) && a.baseFlat[pi].node.style[p] !== ctrl[p]) {
+      // @door fuse.geometry-exclusion
+      if (GEOMETRY_CHANNELS.has(p) && !admit(p) && a.baseFlat[pi].node.style[p] !== baseline(p)) {
         (geometryExcluded.get(a.partNames[pi]) ?? geometryExcluded.set(a.partNames[pi], new Map()).get(a.partNames[pi])!).set(p, a.baseFlat[pi].node.style[p] ?? '');
       }
+      // @door fuse.is-fusable-blanket
       if (!admit(p)) continue;
-      if (a.baseFlat[pi].node.style[p] !== ctrl[p]) set.add(p);
+      considered++;
+      const v = a.baseFlat[pi].node.style[p];
+      if (uaCtrl && !p.startsWith('--') && v !== undefined && v === pageCtrl[p] && v !== uaCtrl[p]) {
+        pageGlobal.push(`${p}=${v} (in-page control also read ${v}; UA control reads ${uaCtrl[p] ?? '—'})`);
+      }
+      // @door fuse.control-element-delta
+      if (v !== baseline(p)) set.add(p);
+      // @door fuse.reset-supplied-border-style-admitted
       else if (resetSuppliedBorderStyle(p, a.baseFlat[pi].node.style, ctrl)) {
         set.add(p);
         receipts.push(
@@ -1028,16 +1122,38 @@ export function styledChannels(
       } else if (resetSuppliedBorderColor(p, a.baseFlat[pi].node.style, ctrl)) {
         set.add(p);
         receipts.push(
-          `reset-supplied-border-color-admitted: ${a.partNames[pi]}.${p} = ${a.baseFlat[pi].node.style[p]} — EQUAL to the <${tag}> control, so the styled-channel door would normally drop it as "not a fact of this component". Admitted anyway because this part draws a real border (${p.replace('-color', '-style')} = ${a.baseFlat[pi].node.style[p.replace('-color', '-style')]}, ${p.replace('-color', '-width')} = ${a.baseFlat[pi].node.style[p.replace('-color', '-width')]}) and the colour comes from the library's GLOBAL CSS (shadcn's \`* { border-color: var(--border) }\` and its equivalents) — the control is polluted by the same rule, so equality proves library authorship, not absence. Without this the style and width ship, the CSS surface paints the border via currentColor's initial-value rule, and the canvas draws NO stroke (rejected-sets round, shadcn.select).`,
-        );
-      }
-      else if (resetSuppliedBorderColor(p, a.baseFlat[pi].node.style, ctrl)) {
-        set.add(p);
-        receipts.push(
           `reset-supplied-border-color-admitted: ${a.partNames[pi]}.${p} = ${a.baseFlat[pi].node.style[p]} — EQUAL to the <${tag}> control, so the styled-channel door would normally drop it as "not a fact of this component". Admitted anyway because this part draws a real border (${p.replace('-color', '-width')} = ${a.baseFlat[pi].node.style[p.replace('-color', '-width')]}, ${p.replace('-color', '-style')} = ${a.baseFlat[pi].node.style[p.replace('-color', '-style')]}) and the control's own ${p} (${ctrl[p]}) differs from its \`color\` (${ctrl['color']}) — the UA's border colour is currentcolor, so the control was coloured by the library's GLOBAL CSS (shadcn's \`* { border-color: var(--border) }\`, Tailwind preflight's equivalents). The control correctly subtracts the reset; the emitted CSS does not REPRODUCE it, so without this the width and style ship and the border paints currentcolor on the code surface and NOTHING on the canvas.`,
         );
+      } else {
+        dropped++;
+        // A channel the library's own stylesheet DECLARES on this element and
+        // this door still drops: the residual honest surface. `vrefs` is the
+        // CSS-vars reader's VERIFIED binding — the rule text named a token and
+        // the computed value matched it — so this is not a guess.
+        if ((a.baseFlat[pi].node.vrefs?.[p]?.length ?? 0) > 0 && !p.startsWith('--')) droppedAuthored.push(p);
       }
 
+    }
+    // ═══ THE DOOR LEAVES A RECEIPT WHEN IT SUBTRACTS (door register rule).
+    if (dropped > 0) {
+      receipts.push(
+        `control-equal-drop: ${a.partNames[pi]} — ${dropped} of ${considered} admitted channels compared EQUAL to the <${tag}> ${uaCtrl ? 'UA baseline control (a page carrying no library CSS)' : 'IN-PAGE control (NO UA baseline in this capture — see the fallback line below)'} and were dropped as user-agent defaults, not facts of this component`,
+      );
+    }
+    if (!uaCtrl) {
+      receipts.push(
+        `ua-baseline-missing: ${a.partNames[pi]} — this capture carries no \`uaControls\`, so the subtraction above used the IN-PAGE control, which inherits every page-global rule the library ships (\`* { border-color }\`, provider ink, preflight resets, the body font). Facts the library authored may have been cancelled; re-capture to measure honestly (door capture.control-baseline-mint)`,
+      );
+    }
+    if (pageGlobal.length > 0) {
+      receipts.push(
+        `page-global-baseline-corrected: ${a.partNames[pi]} — ${pageGlobal.length} channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: ${pageGlobal.slice(0, 24).join('; ')}${pageGlobal.length > 24 ? `; …and ${pageGlobal.length - 24} more` : ''}`,
+      );
+    }
+    if (droppedAuthored.length > 0) {
+      receipts.push(
+        `control-equal-drop-authored: ${a.partNames[pi]} — ${droppedAuthored.length} dropped channel(s) are DECLARED by the library's own stylesheet with a verified token binding, yet compute to the user-agent default: ${droppedAuthored.slice(0, 24).sort().join(', ')}${droppedAuthored.length > 24 ? `, …and ${droppedAuthored.length - 24} more` : ''}. Declaring a value the UA already produces changes nothing on the generated surface either, so the drop is sound — it is named because "equal to the UA" and "the library said nothing" are different facts`,
+      );
     }
     for (const combo of space.enumeration.combos) {
       if (!isEnabled(combo)) continue;
@@ -1048,6 +1164,7 @@ export function styledChannels(
           (webkitStyled.get(p) ?? webkitStyled.set(p, new Set()).get(p)!).add(a.partNames[pi]);
         }
         if (!admit(p)) continue;
+        // @door fuse.cross-combo-variance-admission
         if (el.node.style[p] !== a.baseFlat[pi].node.style[p]) set.add(p);
       }
     }
@@ -1077,6 +1194,7 @@ export function styledChannels(
       }
       let anyMotion = false;
       let outside: string | null = null;
+      // @door fuse.translate-door-refused
       for (const st of styles) {
         const tf = st['transform'] ?? 'none';
         const tr = st['translate'] ?? 'none';
@@ -1093,6 +1211,7 @@ export function styledChannels(
         receipts.push(
           `translate-door-refused: ${a.partNames[pi]} — ${outside}; the synthetic translate-x/y channels are NOT admitted for this part (the bounded grammar carries identity-translate transforms and the independent translate longhand, one spelling at a time) — named refusal, pseudo-decor v2 round`,
         );
+      // @door fuse.translate-door-generalized
       } else if (anyMotion) {
         set.add('translate-x');
         set.add('translate-y');
@@ -1137,6 +1256,7 @@ export function styledChannels(
     // ORGANISM round: an admitted table cell ALWAYS carries width+height —
     // the column width and the row height are facts of the table box model,
     // not deltas from a <span> control baseline.
+    // @door fuse.table-cell-always-carries-size
     if (table.cellAdmit.has(pi)) { set.add('width'); set.add('height'); }
     // Round 5c — TEXT-PART TYPOGRAPHY IS ALWAYS A FACT: a text-bearing
     // part whose typography equals the mount context (the provider's 13px/
@@ -1152,11 +1272,14 @@ export function styledChannels(
     // arc) draws BLACK on the generated surfaces when the color chain is
     // context-inherited and therefore looked unstyled. Carry `color` on
     // svg hosts unconditionally (same rationale as text-part typography).
+    // @door fuse.svg-host-color-carried
     if (a.baseFlat[pi].node.nodes.some((n) => n.t === 'el' && n.el.tag === 'svg') && !set.has('color')) {
       set.add('color');
       receipts.push(`svg-host-color-carried: ${a.partNames[pi]} — color carried even though equal to the control baseline (the hosted glyph rides the color chain; generated surfaces have no Polaris body context — round 5c)`);
     }
+    // @door fuse.text-part-typography-carried
     const hasText = a.baseFlat[pi].node.nodes.some((n) => n.t === 'text' && n.v.trim().length > 0);
+    // @door fuse.sr-only-typography-excluded
     const srOnly = (a.baseFlat[pi].node.style['clip-path'] ?? '').startsWith('inset(50%');
     if (hasText && !srOnly) {
       const added: string[] = [];
@@ -1233,6 +1356,7 @@ export function styledChannels(
     // a non-default decoration style or thickness already DIFFERS from the
     // control and walks through the ordinary door. Only `-line` collides,
     // and only against the `<a>` control.
+    // @door fuse.painted-text-decoration-carried
     {
       const ch = 'text-decoration-line';
       const v = a.baseFlat[pi].node.style[ch];
@@ -1240,6 +1364,58 @@ export function styledChannels(
         set.add(ch);
         receipts.push(
           `painted-text-decoration-carried: ${a.partNames[pi]}.${ch} = ${v} — carried even though EQUAL to the <${tag}> control. Control-equality is a DOM-INHERITANCE argument ("the emitted element gets this for free") and it cannot justify dropping a decoration that must be PAINTED: the <a> control is rendered \`<a href="#c">\` (\`:any-link\`, so it carries the UA underline) while core/emit-html writes the root \`<a>\` with NO href, and the Figma canvas has no user agent at all. Equality with the control is therefore not evidence of UA provenance — the founding case (altitude Link) is a LIBRARY declaration, \`.al-c-link { text-decoration: var(--al-link-text-decoration, underline) }\`, whose fallback merely coincides with the UA default. \`none\` is still dropped by value: nothing paints a decoration by default, so the draws-nothing value costs nothing on any target.`,
+        );
+      }
+    }
+    // THE DOOR REGISTER — THE CONTROL-ELEMENT DELTA STOPS BEING SILENT.
+    //
+    // Every door above this line leaves a receipt when it fires. The LARGEST
+    // subtraction in the whole pipeline did not: a channel whose value equals
+    // the control for this part's tag is dropped by a bare `if` with no array,
+    // no counter and no line anywhere. Measured on the committed corpus that is
+    // ~82,000 (part, channel) drops — most of them genuine initial values, and
+    // a named handful of them the two worst defects the owner has found.
+    //
+    // Enumerating all ~82,000 would bury the register in initial values, so the
+    // census is split by the reader's OWN evidence (see librarySuppliedChannel):
+    //
+    //   * one COUNT line per part — the drop is never a silent zero again, and
+    //     the size of the surface is greppable per part;
+    //   * one NAMED line per channel the LIBRARY'S OWN STYLESHEET declares on
+    //     this element. Those are the facts the premise is provably wrong
+    //     about: the component authored them, the control only shares them
+    //     because it is rendered inside the same page with the same global CSS,
+    //     and the emitted CSS does not reproduce global CSS. This is the
+    //     "missing ink" surface, named channel by channel.
+    //
+    // NOTHING IS CARRIED DIFFERENTLY. `set` is complete at this point — every
+    // re-admission door (reset-supplied border style, cross-combo variance,
+    // svg-host colour, text-part typography, painted text-decoration, the
+    // geometry family) has already run, so a channel still absent here is one
+    // the door really did subtract.
+    // (The receipt for `fuse.control-element-delta`; the door itself is marked
+    //  at its deciding `if` above.)
+    {
+      const dropped: string[] = [];
+      const authored: string[] = [];
+      for (const p of allProps) {
+        if (p.startsWith('--')) continue; // the custom-property door owns these, and it receipts
+        if (!admit(p)) continue; // the geometry / webkit / fusability doors own these, and they receipt
+        if (set.has(p)) continue; // carried after every door
+        const v = a.baseFlat[pi].node.style[p];
+        if (v === undefined || v !== ctrl[p]) continue; // absent, or a different door's drop
+        dropped.push(p);
+        const supplied = librarySuppliedChannel(a.baseFlat[pi].node, p);
+        if (supplied !== null) authored.push(`${p} = ${v} (declared by ${supplied})`);
+      }
+      if (dropped.length > 0) {
+        receipts.push(
+          `control-equal-drop: ${a.partNames[pi]} — ${dropped.length} channel(s) EQUAL to the <${tag}> control${controls[tag] ? '' : ' (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element)'} and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. ${authored.length} of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.`,
+        );
+      }
+      for (const line of authored.sort()) {
+        receipts.push(
+          `control-equal-drop-authored: ${a.partNames[pi]}.${line} — dropped by the control-element delta because the <${tag}> control resolves to the SAME value, but the library's own stylesheet declares this channel on this element: the control shares the value only because it is rendered inside the same page with the same global CSS, and the emitted CSS reproduces the component's rules and NOT the page's. This is the shape of shadcn's invisible Input border (\`* { border-color: var(--border) }\`) and Polaris' inkless text (provider \`color\` reaching the control by inheritance).`,
         );
       }
     }
@@ -1364,6 +1540,7 @@ export function detectFolds(
     const channels = styled.get(part);
     if (!channels) continue;
     for (const ch of [...channels].sort()) {
+      // @door fuse.currentcolor-fold
       if (CURRENTCOLOR_FOLD_CANDIDATES.has(ch)) {
         let holds = true;
         for (const c of a.captures) {
@@ -1372,6 +1549,7 @@ export function detectFolds(
           if (el.node.style[ch] !== el.node.style['color']) { holds = false; break; }
         }
         if (holds) { folds.push({ part, channel: ch, foldedInto: 'color', class: 'currentColor' }); continue; }
+      // @door fuse.currentcolor-fold-candidate-missing
       } else if (/-color$/.test(ch) && receipts) {
         // TASK #35 census: a non-candidate `*-color` channel that equals the
         // part's own `color` on EVERY captured plane is a currentcolor mirror
@@ -1389,6 +1567,8 @@ export function detectFolds(
           (missingCandidates.get(ch) ?? missingCandidates.set(ch, new Set()).get(ch)!).add(part);
         }
       }
+      // @door fuse.em-tracking-fold
+      // @door fuse.font-size-never-folds
       if (ch === 'font-size') continue;
       // em-tracking: constant ratio to font-size across ALL captures, with
       // font-size actually varying (otherwise indistinguishable from a
@@ -1407,6 +1587,7 @@ export function detectFolds(
         if (ratio === null) ratio = r;
         else if (r !== ratio) { holds = false; break; }
       }
+      // @door fuse.uniform-ratio-not-a-fold
       if (holds && ratio !== null && ratio !== 0 && fontSizes.size >= 2) {
         folds.push({ part, channel: ch, foldedInto: 'font-size', ratio, class: 'em-tracking' });
       }
@@ -1475,10 +1656,12 @@ export function hugEvidence(a: AlignedSweep, space: PropSpace): HugEvidence {
       const el = a.getAligned(`${combo.key}__default`)[pi];
       if (!el) continue;
       const maxRaw = el.node.style['max-width'];
+      // @door fuse.no-max-width-no-question
       if (maxRaw === undefined || maxRaw === 'none') continue;
       seen++;
       const max = pxValue(maxRaw);
       const width = pxValue(el.node.style['width']);
+      // @door fuse.hug-evidence-unmeasurable
       if (max === null || width === null) {
         unmeasurable.add(maxRaw);
         continue;
@@ -1492,6 +1675,7 @@ export function hugEvidence(a: AlignedSweep, space: PropSpace): HugEvidence {
       );
       continue;
     }
+    // @door fuse.hug-evidence-not-uniform
     if (verdicts.size !== 1) {
       out.receipts.push(
         `hug-evidence-not-uniform: ${partName} hugs beneath its max-width in some combos and sits at the cap in others — no sizing evidence carried (the max-width lowering is unchanged).`,
@@ -1499,6 +1683,156 @@ export function hugEvidence(a: AlignedSweep, space: PropSpace): HugEvidence {
       continue;
     }
     out.hugs.set(partName, [...verdicts][0]);
+  }
+  return out;
+}
+
+// ---------------------------------------------------------------------------
+// TEXT-INDENT OFF-BOX EVIDENCE (mint round, 2026-08-25): does a carried
+// `text-indent` still leave the element's text INSIDE its own box? The
+// answer is a MEASUREMENT, not a list — the same discipline as hugEvidence
+// above.
+//
+// The live-canvas defect: altitude's Badge hides the slotted label of its
+// `.al-is-dot` plane with `text-indent: 9999px` on an 8px pip
+// (min/max-width: 8px). `text-indent` is an `annotate` channel on canvas —
+// Figma text nodes have no first-line indent — so the emitter dropped the
+// offset, kept the label, and drew "Badge" across the pip and over the
+// neighbouring cells of the minted set. Annotating is the honest answer
+// only while the canvas still draws WHAT THE BROWSER DRAWS; here the
+// browser paints no text in the box at all, so drawing the label at indent
+// 0 does not lose a fact, it INVENTS one.
+//
+// The discriminator, from the captured facts: CSS indents the first line
+// box by `text-indent` from the content-box's start edge, so an indent at
+// least as large as the used CONTENT width puts every glyph of that line
+// past the end edge — no part of it can be inside the box, whatever the
+// text is.
+//
+// Deliberately conservative, and evidence is emitted ONLY when:
+//   · the indent, the used width and the horizontal padding/border are all
+//     real pixels (a percentage or calc() indent produces a NAMED receipt
+//     and no field);
+//   · the indent is POSITIVE (a negative indent leaves the box only if it
+//     exceeds the text's own advance, which the capture does not measure —
+//     named, never guessed);
+//   · the off-box combos are either ALL of them or exactly the combos of
+//     one enum axis's value subset, and every one of those values is a
+//     DECLARED value of that contract prop (the capture's `unset`
+//     pseudo-value is not a value the canvas can condition on).
+// Anything else is a named receipt and no field, which leaves the previous
+// behaviour — draw the label, annotate the indent — exactly as it was.
+// ---------------------------------------------------------------------------
+export interface TextOutOfBoxEvidence {
+  /** part → the axis condition under which the first line lands entirely
+   *  outside the content box. An EMPTY object means every enumerated combo.
+   *  Absent from the map = no evidence (see `receipts`), and the consumer
+   *  must keep drawing the text. */
+  outOfBox: Map<string, { prop?: string; values?: string[] }>;
+  receipts: string[];
+}
+
+/** DETECTION ONLY (pure). Reads the captured computed `text-indent`,
+ *  `width`, `box-sizing`, horizontal padding and horizontal border widths of
+ *  every union part across the enabled combos. */
+export function textOutOfBoxEvidence(a: AlignedSweep, space: PropSpace): TextOutOfBoxEvidence {
+  const out: TextOutOfBoxEvidence = { outOfBox: new Map(), receipts: [] };
+  const enabled = space.enumeration.combos.filter(isEnabled);
+  const declaredValuesOf = (prop: string): Set<string> | null => {
+    const p = space.contract.props?.find((q) => q.name === prop);
+    const t = p?.type as { enum?: string[] } | string | undefined;
+    return typeof t === 'object' && Array.isArray(t?.enum) ? new Set(t.enum) : null;
+  };
+  for (let pi = 0; pi < a.baseFlat.length; pi++) {
+    const partName = a.partNames[pi];
+    const offBox: Combo[] = [];
+    const unmeasurable = new Set<string>();
+    const negative = new Set<string>();
+    let seen = 0;
+    for (const combo of enabled) {
+      const el = a.getAligned(`${combo.key}__default`)[pi];
+      if (!el) continue;
+      const indentRaw = el.node.style['text-indent'];
+      // @door fuse.no-text-indent-no-question
+      if (indentRaw === undefined) continue;
+      seen++;
+      const indent = pxValue(indentRaw);
+      if (indent === null) {
+        unmeasurable.add(indentRaw);
+        continue;
+      }
+      if (indent === 0) continue;
+      // @door fuse.negative-indent-advance-unmeasured
+      if (indent < 0) {
+        negative.add(indentRaw);
+        continue;
+      }
+      const width = pxValue(el.node.style['width']);
+      if (width === null) {
+        unmeasurable.add(el.node.style['width'] ?? '(absent)');
+        continue;
+      }
+      // Chromium resolves `width` in the box the element's own `box-sizing`
+      // names; the first line box is indented from the CONTENT edge, so a
+      // border-box width has to give its padding and borders back first.
+      const edge =
+        el.node.style['box-sizing'] === 'border-box'
+          ? (pxValue(el.node.style['padding-left']) ?? 0) +
+            (pxValue(el.node.style['padding-right']) ?? 0) +
+            (pxValue(el.node.style['border-left-width']) ?? 0) +
+            (pxValue(el.node.style['border-right-width']) ?? 0)
+          : 0;
+      if (indent >= width - edge) offBox.push(combo);
+    }
+    if (seen === 0) continue;
+    if (unmeasurable.size > 0) {
+      out.receipts.push(
+        `text-indent-off-box-unmeasurable: ${partName}.text-indent / width = ${[...unmeasurable].sort().join(' / ')} — not a pixel value, so "does the first line still start inside the box" cannot be asked. No text evidence carried; the label is drawn and the indent stays a named annotation.`,
+      );
+      continue;
+    }
+    if (negative.size > 0) {
+      out.receipts.push(
+        `text-indent-off-box-negative: ${partName}.text-indent = ${[...negative].sort().join(' / ')} — a negative indent leaves the box only if it exceeds the text's own advance, which the capture does not measure. No text evidence carried; the label is drawn and the indent stays a named annotation.`,
+      );
+      continue;
+    }
+    if (offBox.length === 0) continue;
+    if (offBox.length === enabled.length) {
+      out.outOfBox.set(partName, {});
+      continue;
+    }
+    // Exactly one enum axis's value subset, or nothing.
+    const offKeys = new Set(offBox.map((c) => c.key));
+    let matched: { prop: string; values: string[] } | null = null;
+    for (const axis of space.axes) {
+      const values = [...new Set(offBox.map((c) => c.axisValues[axis.prop]))];
+      const fits = enabled.every(
+        (c) => values.includes(c.axisValues[axis.prop]) === offKeys.has(c.key),
+      );
+      if (!fits) continue;
+      const declared = declaredValuesOf(axis.prop);
+      // @door fuse.off-box-axis-value-not-declared
+      if (!declared || values.some((v) => !declared.has(v))) {
+        out.receipts.push(
+          `text-indent-off-box-undeclared-value: ${partName}'s first line lands outside the box exactly on ${axis.prop} = ${values.sort().join(', ')}, but ${declared ? 'that is not a DECLARED value of the contract prop' : `"${axis.prop}" is not an enum contract prop`} — the canvas cannot condition on a value it never draws. No text evidence carried; the label is drawn and the indent stays a named annotation.`,
+        );
+        matched = null;
+        break;
+      }
+      matched = { prop: axis.prop, values: values.sort() };
+      break;
+    }
+    // @door fuse.off-box-uncorrelated-kept
+    if (!matched) {
+      if (out.receipts.length === 0 || !out.receipts[out.receipts.length - 1].startsWith('text-indent-off-box-undeclared-value')) {
+        out.receipts.push(
+          `text-indent-off-box-uncorrelated: ${partName}'s first line lands outside the box in ${offBox.length}/${enabled.length} combos without correlating to any single enum axis — no text evidence carried; the label is drawn and the indent stays a named annotation.`,
+        );
+      }
+      continue;
+    }
+    out.outOfBox.set(partName, matched);
   }
   return out;
 }
@@ -1601,8 +1935,10 @@ export function enrichLayout(
     const partName = a.partNames[pi];
     const target = staticParts.get(partName);
     const channels = styled.get(partName);
+    // @door fuse.static-part-required-for-enrichment
     if (!target || !channels) continue;
     // only flex containers speak the layout vocabulary
+    // @door fuse.flex-container-only-speaks-layout
     const baseDisplay = a.baseFlat[pi].node.style['display'];
     if (baseDisplay !== 'flex' && baseDisplay !== 'inline-flex') continue;
     for (const [channel, spec] of Object.entries(LAYOUT_CHANNEL_TO_FIELD)) {
@@ -1612,6 +1948,7 @@ export function enrichLayout(
         const el = a.getAligned(`${combo.key}__default`)[pi];
         if (el) values.add(el.node.style[channel]);
       }
+      // @door fuse.layout-not-uniform
       // A channel observed at its CSS-INITIAL value everywhere is observing
       // nothing: consume it (so it is not re-minted as a token) and write no
       // layout fact. `flex-wrap: nowrap` is the whole vocabulary of this rule
@@ -1706,6 +2043,7 @@ export function enrichLayout(
       const canonical = spec.map[observed];
       const handledSet = out.handled.get(partName) ?? new Set<string>();
       out.handled.set(partName, handledSet);
+      // @door fuse.reviewed-layout-wins-contradiction
       const carried = target.layout?.[spec.field];
       if (carried !== undefined) {
         handledSet.add(channel);
@@ -1714,6 +2052,7 @@ export function enrichLayout(
         }
         continue;
       }
+      // @door fuse.layout-value-outside-vocabulary
       if (canonical === undefined) {
         out.receipts.push(`layout-value-outside-vocabulary: ${partName}.${channel} = "${observed}" — stays code-only`);
         continue;
@@ -1912,9 +2251,11 @@ export function enrichLayout(
     return a.baseFlat.findIndex((e) => e.path === pp);
   };
   const num = (v: string | undefined): number => (v === undefined ? 0 : (parseFloat(v) || 0));
+  // @door fuse.layout-grow-carried
   for (let pi = 0; pi < a.baseFlat.length; pi++) {
     const partName = a.partNames[pi];
     const target = staticParts.get(partName);
+    // @door fuse.grow-door-skips
     if (!target || target.layout?.grow !== undefined) continue;
     const ppi = parentOf(pi);
     if (ppi < 0) continue;
@@ -1999,14 +2340,17 @@ export async function boundCheck(
     const subst = substFor(space, combo);
     const alignedEls = a.getAligned(`${combo.key}__default`);
     for (let pi = 0; pi < a.baseFlat.length; pi++) {
+      // @door fuse.static-part-not-in-union
       const cPart = partByName.get(a.partNames[pi]);
       if (!cPart) continue;
       const carried = resolveTokens(cPart, subst);
       const el = alignedEls[pi];
       for (const [channel, ref] of Object.entries(carried)) {
+        // @door fuse.channel-not-in-computed-registry
         const computedProps = CHANNEL_TO_COMPUTED[channel];
         if (!computedProps) continue;
         for (const cp of computedProps) {
+          // @door fuse.part-absent-not-contradiction
           if (!el) {
             // Round 4: a presence-gated part legitimately absent in this
             // combo — the binding is untestable there, NOT contradicted.
@@ -2026,6 +2370,7 @@ export async function boundCheck(
   }
   // Named-cause triage from config (the verify.ts curation discipline).
   // part-absent rows are informational (presence-gated parts).
+  // @door fuse.triage-named-cause
   const contradicted = rows.filter((r) => r.verdict === 'contradiction');
   for (const r of contradicted) {
     const axisValues: Record<string, string> = {};
@@ -2238,6 +2583,7 @@ export function setPlaneCandidates(
   space: PropSpace,
 ): Array<{ prop: string; value: string; lit: string }> {
   const out: Array<{ prop: string; value: string; lit: string }> = [];
+  // @door fuse.set-plane-candidate-skips
   const presenceOff = (r: { axisValues: Record<string, string> }) =>
     [...space.presence.keys()].every((pp) => (r.axisValues[pp] ?? PRESENCE_OFF) === PRESENCE_OFF);
   for (const ax of space.axes.filter((a) => a.unset !== undefined)) {
@@ -2347,6 +2693,24 @@ export const pageInheritedInk = (
   return v !== 'rgb(0,0,0)' && v !== 'rgba(0,0,0,1)' && v !== '#000000' && v !== 'oklch(000)';
 };
 
+/*  MERGE (census/stack-to-main): #38 and #39 each grew this door
+ *  independently and git took BOTH additions without a conflict — two
+ *  `export const resetSuppliedBorderColor` in one module, which is a
+ *  redeclaration, and at runtime the second silently won for BOTH call sites.
+ *  Deduped to one definition carrying the UNION of the two premises, because
+ *  each side's extra clause is a guard the other side simply had not thought
+ *  of and neither narrows the case the other was fixing:
+ *
+ *    #39  `transparent` is not a rendered colour — admitting it re-mints an
+ *         invisible stroke as if it were a fact.
+ *    #38  the control's own border colour must DIFFER from the control's
+ *         `color`: the UA's border-color is `currentcolor`, so a control that
+ *         still reads its own text ink here was never re-coloured by the page,
+ *         and equality with it proves nothing about library authorship.
+ *
+ *  Measured on both originating rows: shadcn Input / shadcn.select keep the
+ *  admission under the union (border-color oklch(0.922 0 0), not transparent;
+ *  the control's border-color differs from its `color`). */
 export const resetSuppliedBorderColor = (
   channel: string,
   style: Record<string, string | undefined>,
@@ -2355,12 +2719,13 @@ export const resetSuppliedBorderColor = (
   const m = /^border-(top|right|bottom|left)-color$/.exec(channel);
   if (!m) return false;
   const value = style[channel];
-  if (!value || value === 'transparent') return false;
+  if (!value || value === 'transparent') return false; // #39: an invisible colour is not a rendered fact
   if (ctrl[channel] !== value) return false; // it differs — the ordinary door already admits it
   const sideStyle = style[`border-${m[1]}-style`];
   if (!sideStyle || sideStyle === 'none') return false;
   const width = style[`border-${m[1]}-width`];
-  return width !== undefined && width !== '0px' && width !== '0';
+  if (width === undefined || width === '0px' || width === '0') return false;
+  return ctrl[channel] !== ctrl['color']; // #38: an un-reset control reads its text ink here
 };
 
 export const resetSuppliedBorderStyle = (
@@ -2377,45 +2742,72 @@ export const resetSuppliedBorderStyle = (
   return width !== undefined && width !== '0px' && width !== '0';
 };
 
-/** A BORDER COLOUR THAT READS AS UNSTYLED ONLY BECAUSE THE LIBRARY'S GLOBAL
- *  CSS RE-COLOURS EVERY ELEMENT — the -color sibling of the -style door above.
+/** THE DOOR REGISTER (spec/DOOR-REGISTER.md) — evidence that the LIBRARY'S OWN
+ *  stylesheet declares `channel` on this element, used to split the
+ *  control-element delta door's silent subtraction into a risky half and a
+ *  benign one.
  *
- *  shadcn's global layer is `* { border-color: var(--border) }` (Tailwind v3
- *  preflight's gray-200 rule is the same shape), so the in-page CONTROL reads
- *  the reset's colour too and the styled-channel door drops the component's
- *  border colour as "not a fact of this component". The component's width and
- *  style DO carry (they differ from the control), so the emitted CSS paints
- *  the border in `currentColor` (the UA completion — black text ink) and the
- *  canvas paints NO stroke at all: the round trip loses the one channel that
- *  decides whether the border is visible. Measured: shadcn Input — root
- *  border 1px solid oklch(0.922 0 0), span control 0px solid oklch(0.922 0 0),
- *  contract shipped with border widths and NO base border colour
- *  (census wall CODE-CANVAS-DISAGREE:root.border-color-unspecified).
+ *  The control-element delta (`fuse.control-element-delta`) drops every channel
+ *  whose value EQUALS the bare control for that tag, on the premise that the
+ *  value is the user agent's or the library's reset and the emitted DOM will
+ *  inherit it for free. The premise fails whenever the library's GLOBAL CSS
+ *  supplies the value — because the control is rendered inside the same page,
+ *  with the same global CSS, so it carries the value too, while the emitted CSS
+ *  reproduces the component's rules ONLY. That is exactly the shape of the two
+ *  worst defects found on the corpus:
  *
- *  All four clauses are load-bearing, mirroring the -style door:
- *  the channel is a border-*-colour; it EQUALS the control (else the ordinary
- *  door admits it); the SAME side actually draws (non-zero width and a
- *  non-none style — an invisible border's colour is not a rendered fact); and
- *  the control's own value for the channel differs from the control's `color`
- *  — the UA's border-colour is `currentcolor`, so an un-reset control reads
- *  its text ink here, and a control that reads anything else was coloured by
- *  the page's reset, which is exactly what disqualifies it as the baseline
- *  for this channel. */
-export const resetSuppliedBorderColor = (
+ *    shadcn Input   `* { border-color: var(--border) }` puts oklch(0.922 0 0)
+ *                   on the <span> fallback control as well as on the <input>,
+ *                   so `border-top-color` compares EQUAL and is dropped while
+ *                   `border-top-width: 1px` (0px on the control) ships — a 1px
+ *                   border with no colour, i.e. an invisible input.
+ *    polaris        the provider's `color` reaches the control by page
+ *                   inheritance, so the component's ink compares EQUAL and is
+ *                   dropped — inkless text on a surface with no provider.
+ *
+ *  The discriminator is the READER's own evidence, not a guess: `vrefs` records
+ *  the (name, value, rule) of every longhand the library's stylesheet binds to
+ *  a custom property on this element, and `vshorthands` records the same for a
+ *  shorthand carrying `var()` that the longhand loop cannot see (capture.ts's
+ *  shorthand ceiling — `border-color: var(--input)` is ONLY ever visible there).
+ *  A channel with either is DECLARED BY THIS LIBRARY on this element; equality
+ *  with the control is then a coincidence of resolved values, not evidence of
+ *  UA provenance.
+ *
+ *  This function does NOT change what is carried. It classifies the drop so the
+ *  receipt can say which half of the census a given loss is in. */
+export const librarySuppliedChannel = (
+  node: { vrefs?: Record<string, ReadonlyArray<readonly [string, string, string] | readonly [string, string, string, 1]>>; vshorthands?: Record<string, string[]> },
   channel: string,
-  style: Record<string, string | undefined>,
-  ctrl: Record<string, string | undefined>,
-): boolean => {
-  const m = /^border-(top|right|bottom|left)-color$/.exec(channel);
-  if (!m) return false;
-  const value = style[channel];
-  if (!value) return false;
-  if (ctrl[channel] !== value) return false; // it differs — the ordinary door already admits it
-  const width = style[`border-${m[1]}-width`];
-  if (width === undefined || width === '0px' || width === '0') return false;
-  const sideStyle = style[`border-${m[1]}-style`];
-  if (!sideStyle || sideStyle === 'none') return false;
-  return ctrl[channel] !== ctrl['color'];
+): string | null => {
+  const ref = node.vrefs?.[channel];
+  if (ref && ref.length > 0) return `${ref[0][0]} at \`${ref[0][2]}\``;
+  const sh = node.vshorthands;
+  if (!sh) return null;
+  for (const cand of [channel, ...shorthandsOf(channel)]) {
+    const names = sh[cand];
+    if (names && names.length > 0) return `${names.join('/')} via the \`${cand}\` shorthand`;
+  }
+  return null;
+};
+
+/** The shorthands a stylesheet could have used to set `longhand`. Bounded and
+ *  mechanical — a shorthand this list omits reads as "not declared", which is
+ *  the conservative direction for a census that measures a LOSS. */
+export const shorthandsOf = (longhand: string): string[] => {
+  const side = /^border-(top|right|bottom|left)-(color|width|style)$/.exec(longhand);
+  if (side) return [`border-${side[2]}`, `border-${side[1]}`, 'border'];
+  if (/^border-(top|bottom)-(left|right)-radius$/.test(longhand)) return ['border-radius'];
+  if (/^(margin|padding)-(top|right|bottom|left)$/.test(longhand)) return [longhand.split('-')[0]];
+  if (/^outline-(color|width|style)$/.test(longhand)) return ['outline'];
+  if (/^font-(size|family|weight|style|variant)$/.test(longhand)) return ['font'];
+  if (/^background-/.test(longhand)) return ['background'];
+  if (/^flex-(grow|shrink|basis)$/.test(longhand)) return ['flex'];
+  if (/^text-decoration-/.test(longhand)) return ['text-decoration'];
+  if (/^(row|column)-gap$/.test(longhand)) return ['gap'];
+  if (/^transition-/.test(longhand)) return ['transition'];
+  if (/^animation-/.test(longhand)) return ['animation'];
+  return [];
 };
 
 export function prepareMint(
@@ -2446,6 +2838,7 @@ export function prepareMint(
   const foldedSet = new Set(folds.map((f) => `${f.part}|${f.channel}`));
   const enabledCombos = space.enumeration.combos.filter(isEnabled);
 
+  // @door fuse.declarable-part-gate
   const declarablePart = (partName: string): Part | undefined => {
     const p = partByName.get(partName);
     if (!p || p.component || p.slot) return undefined; // ref/slot parts never carry declared facts
@@ -2471,6 +2864,7 @@ export function prepareMint(
   // SAME decision, rather than swept up afterwards. Refusing here (instead of
   // post-mint) also means the refusal is a fact of fusion the receipts can
   // name per part+channel, not an anonymous count of deleted rows.
+  // @door fuse.orphan-mint-refused
   const refusedByPromotion = new Set<string>();
   const orphanRefusals: string[] = [];
   {
@@ -2479,6 +2873,7 @@ export function prepareMint(
     for (let pi = 0; pi < a.baseFlat.length; pi++) {
       const partName = a.partNames[pi];
       if (carried.has(partName)) continue;
+      // @door fuse.svg-consumed-part-skip
       if (svgConsumedParts?.has(partName)) continue; // already named by the svg-asset door
       refusedByPromotion.add(partName);
       counts.set(partName, (styled.get(partName) ?? new Set()).size);
@@ -2574,6 +2969,7 @@ export function prepareMint(
             // base plane's text width, and validateContract refuses the
             // double spelling by name. The literal wins; the not-minted px
             // is receipted here so the drop is greppable.
+            // @door fuse.carried-axis-not-reminted
             const lit = partByName.get(partName)?.literals?.[channel];
             if (skipFolds && lit !== undefined && (channel === 'width' || channel === 'height')) {
               const base = a.getAligned(`${space.baseComboKey}__default`)[pi]?.node.style[channel];
@@ -2581,15 +2977,19 @@ export function prepareMint(
                 `carried-axis-not-reminted: ${partName}.${channel} — the promotion states it as literals.${channel} ${JSON.stringify(lit)} (grid-axis-definite, G8); the computed ${base ?? '<unobserved>'} is that literal's base-plane used box, not a second fact, and is NOT minted beside it (one carrier per channel — validateContract refuses two)`,
               );
             }
+            // @door fuse.bound-territory-never-reminted
             continue;
           }
+          // @door fuse.carried-channel-reminted
           if (skipFolds) {
             remintReceipts.push(
               `carried-channel-reminted: ${partName}.${channel} — observed values vary along the defaultless axis "${contestingAxis}" while the reviewed carriage has no ${contestingAxis} plane; re-minted so the set planes carry (round 5c — S2 ${contestingAxis} maps with the unset base; reviewed bindings win every collision)`,
             );
           }
         }
+        // @door fuse.layout-handled-skip
         if (layoutHandled?.get(partName)?.has(channel)) continue; // carried by Part.layout (enrichLayout)
+        // @door fuse.folded-channel-skip
         if (skipFolds && foldedSet.has(`${partName}|${channel}`)) continue;
         const occurrences: MintObservation['occurrences'] = [];
         const rows: Array<{ axisValues: Record<string, string>; value: string }> = [];
@@ -2608,6 +3008,7 @@ export function prepareMint(
           // overlay-cluster geometry, bake padding+border into the minted
           // value so the variable carries the true canvas size (the slider
           // root: 4px content + 13px×2 padding = 30px frame).
+          // @door fuse.outer-size-baking
           if ((channel === 'width' || channel === 'height') && geomOuterParts.has(pi) && el.node.style['box-sizing'] !== 'border-box') {
             // border-box parts already capture the outer size (Chromium's
             // computed geometry follows box-sizing — the Switch root read
@@ -2641,12 +3042,14 @@ export function prepareMint(
           // the px grammar). Any absurd radius IS the pill idiom — carried
           // as the 9999px pill sentinel (Figma clamps to half-box exactly
           // like the browser).
+          // @door fuse.pill-radius-sentinel
           if (/^border-.*-radius$/.test(channel) && isAbsurdRadius(v)) {
             v = PILL_RADIUS_SENTINEL;
           }
           // Absolute-position round: %-radii on cluster parts resolve
           // against the part's own captured box (CSS: 50% of a 20px square
           // is the circle idiom) — baked to px so the mint carries them.
+          // @door fuse.percent-radius-baked
           if (/^border-.*-radius$/.test(channel) && geomOuterParts.has(pi) && /^[\d.]+%$/.test(v ?? '')) {
             const pct = parseFloat(v);
             const w = pxOf(el.node.style['width']);
@@ -2665,6 +3068,8 @@ export function prepareMint(
           // would bail to unmintable — exactly what kept MUI Switch's checked
           // thumb from moving. The identity is only ever applied to channels
           // the door already admitted (SYNTHETIC_CHANNELS).
+          // @door fuse.absent-synthetic-is-zero
+          // @door fuse.channel-absent-in-combo
           // RC7: and ABSENT ≡ the element's own `color` on a pseudo plane
           // (planeChannelValue states both identities once).
           const planeV = v === undefined ? planeChannelValue(el.node.style, channel) : v;
@@ -2682,6 +3087,7 @@ export function prepareMint(
         // grid the contract does not carry are P9's rewritten-declaration
         // facts (grid-implicit-tracks). The named reason lands in codeOnly
         // (ledger + extension), so the loss is greppable by its G7 name.
+        // @door fuse.grid-mint-refusal
         {
           const gridReason = gridMintRefusals?.get(`${partName}|${channel}`);
           if (gridReason) {
@@ -2695,6 +3101,7 @@ export function prepareMint(
             continue;
           }
         }
+        // @door fuse.zero-observation-part
         if (values.size === 0) {
           // MUI round: interaction-only union parts (-active, -focusVisible
           // thumbs) have NO element in any __default alignment — zero
@@ -2713,6 +3120,7 @@ export function prepareMint(
         if (unk !== null) {
           // Round 5c — set-plane literals for unmintable-kind geometry
           // channels (min-height 'auto' at base, '24px' on the set plane).
+          // @door fuse.set-plane-literal-carried
           if (skipFolds && BASE_FALLBACK_CHANNELS.has(channel) && LITERAL_CHANNELS.has(channel)) {
             const cands = setPlaneCandidates(rows, space);
             if (cands.length > 0) {
@@ -2726,6 +3134,7 @@ export function prepareMint(
           // UNIFORM across combos and inside the channel's bounded grammar is
           // carried (Part.declared), not extension residue. Everything else
           // stays code-only with the refusal spelled out.
+          // @door fuse.declared-uniform-admission
           const spec = DECLARED_CHANNELS[channel];
           const uniform = values.size === 1 ? [...values][0] : null;
           if (spec && uniform !== null && spec.value.test(uniform)) {
@@ -2734,8 +3143,10 @@ export function prepareMint(
             } else {
               codeOnly.push({ part: partName, channel, reason: 'declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision', sample: uniform, distinctValues: values.size });
             }
+          // @door fuse.declared-value-outside-grammar
           } else if (spec && uniform !== null) {
             codeOnly.push({ part: partName, channel, reason: 'declared-channel value outside the bounded grammar — named residue (v15)', sample: uniform, distinctValues: values.size });
+          // @door fuse.border-style-by-axis-carried
           } else if (spec && /^border-(top|right|bottom|left)-style$/.test(channel) && declarablePart(partName) && (() => {
             // ANTD EXAM (heal loop): factor the varying border style by ONE enum axis
             for (const ax of space.axes) {
@@ -2746,6 +3157,7 @@ export function prepareMint(
               if ([...byVal.values()].some((s) => !spec.value.test([...s][0]))) continue;
               for (const [av, s] of byVal) {
                 const v = [...s][0];
+                // @door fuse.border-style-solid-none-skip
                 // 'none' still carries nothing: the zero-width side already
                 // draws nothing (computed width reads 0 when the style is
                 // none, and the per-appearance width tokens carry that 0).
@@ -2768,8 +3180,10 @@ export function prepareMint(
             return false;
           })()) {
             /* carried above as stylesWhen */
+          // @door fuse.declared-varies-across-combos
           } else if (spec) {
             codeOnly.push({ part: partName, channel, reason: 'declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue', sample: unk, distinctValues: values.size });
+          // @door fuse.custom-property-not-a-channel-base
           } else if (channel.startsWith('--')) {
             // A CSS CUSTOM PROPERTY IS NOT A STYLED CHANNEL, and the generic
             // receipt was factually wrong about these. Measured over the
@@ -2785,6 +3199,7 @@ export function prepareMint(
             // component. Counting them as losses says a fact was dropped when
             // nothing was, and blames a value shape that is perfectly mintable.
             codeOnly.push({ part: partName, channel, reason: `CSS custom property, not a styled channel — \`${channel}\` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is \`${unk}\`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for "declares a custom property" and should not invent one.`, sample: unk, distinctValues: values.size });
+          // @door fuse.unmintable-kind-residue
           } else {
             // CONTROL-FALLBACK QUALIFIER. The styled-channel door admits a
             // channel when it DIFFERS FROM THE CONTROL for this part's tag —
@@ -2821,6 +3236,7 @@ export function prepareMint(
           }
           continue;
         }
+        // @door fuse.pairwise-certificate-refusal
         if (space.enumeration.policy === 'per-axis+pairwise') {
           const refusals = pairwiseCertificate(rows, space.axes);
           if (refusals.length > 0) {
@@ -2873,16 +3289,19 @@ export function prepareMint(
       const ancestorCarries = carriedChannels(partByName.get(ancestorName));
       const ancestorStyled = styled.get(ancestorName) ?? new Set<string>();
       for (const channel of [...(styled.get(partName) ?? [])].sort()) {
+        // @door fuse.inherited-channels-only
         if (!INHERITED_CHANNELS.has(channel)) continue;
         // The ancestor must itself CARRY the channel — reviewed or mintable.
         // Without that, dropping the child's binding would leave the channel
         // bound nowhere and the "never worse" argument would not hold.
+        // @door fuse.inheritance-check-rejected
         if (!ancestorCarries.has(channel) && !ancestorStyled.has(channel)) {
           inheritanceReceipts.push(
             `inheritance-check-rejected: ${partName}.${channel} — values track ancestor "${ancestorName}" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)`,
           );
           continue;
         }
+        // @door fuse.inheritance-only
         // Equality on EVERY captured plane, not just the default one — a
         // channel that agrees at rest and diverges on :hover is a real fact.
         let planes = 0;
@@ -2895,6 +3314,7 @@ export function prepareMint(
           const av = anc.node.style[channel];
           if (cv === undefined || av === undefined) continue;
           planes++;
+          // @door fuse.plane-disagreement-closes-door
           if (cv !== av) { equalEverywhere = false; break; }
         }
         if (!equalEverywhere || planes === 0) continue;
@@ -2948,12 +3368,14 @@ export function prepareMint(
       // MOLECULE round: portal-swept components capture DEFAULT only —
       // interaction planes simply do not exist for them (named in
       // provenance); absence is not an error here.
+      // @door fuse.interaction-plane-absent
       if (!a.byKey.has(`${combo.key}__${interaction}`)) continue;
       const els = a.getAligned(`${combo.key}__${interaction}`);
       for (let pi = 0; pi < a.baseFlat.length; pi++) {
         if (!mintablePart(a.partNames[pi])) continue;
         const d0 = defaults[pi];
         const d1 = els[pi];
+        // @door fuse.plane-absent-drop
         if (!d0 || !d1) {
           // SILENT-LOSS ROUND — THE RECEIPT POINTED AT THIS DOOR.
           //
@@ -2990,8 +3412,11 @@ export function prepareMint(
           if (!isFusable(p)) continue;
           const pv0 = planeValue(d0.node.style, p);
           const pv1 = planeValue(d1.node.style, p);
+          // @door fuse.no-delta-no-fact
           if (pv0 === pv1) continue;
+          // @door fuse.state-value-unobserved
           if (pv1 === undefined) continue; // channel unobserved on this interaction plane
+          // @door fuse.inert-on-disabled
           if (!isEnabled(combo)) {
             const flagged = Object.entries(combo.stateFlags).filter(([, f]) => f).map(([n]) => n).join('+');
             inertOnDisabled.push(`interaction-on-${flagged}-changed: ${combo.key} ${interaction} ${a.partNames[pi]}.${p}`);
@@ -3013,6 +3438,7 @@ export function prepareMint(
         // that width IS the ring's width on this plane and rides the state
         // as a value, UA-default or not. (A zero or absent width stays
         // absent — nothing would be drawn.)
+        // @door fuse.outline-width-pair-carried
         if (isEnabled(combo)) {
           // Interaction planes are reconstructed from DELTAS against the
           // default plane, so a channel that did not change reads undefined
@@ -3036,6 +3462,7 @@ export function prepareMint(
     for (const combo of space.enumeration.combos) {
       if (!combo.stateFlags[s.prop]) continue;
       // twin = same axis values + same other flags, this flag false
+      // @door fuse.state-twin-required
       const twin = space.enumeration.combos.find(
         (c) =>
           space.axes.every((ax) => c.axisValues[ax.prop] === combo.axisValues[ax.prop]) &&
@@ -3046,6 +3473,7 @@ export function prepareMint(
       const d1 = a.getAligned(`${combo.key}__default`);
       for (let pi = 0; pi < a.baseFlat.length; pi++) {
         if (!mintablePart(a.partNames[pi])) continue;
+        // @door fuse.state-prop-part-absent
         if (!d0[pi] || !d1[pi]) continue;
         for (const p of allProps) {
           if (!isFusable(p)) continue;
@@ -3068,6 +3496,7 @@ export function prepareMint(
   const stateObsAll: Array<{ obs: MintObservation; folded: boolean }> = [];
   const expectedEnabled = enabledCombos.length;
   for (const d of [...stateDeltaChannels.values()].sort((x, y) => `${x.state}|${x.part}|${x.channel}`.localeCompare(`${y.state}|${y.part}|${y.channel}`))) {
+    // @door fuse.fold-carries-state-delta
     const foldedChannel = foldedSet.has(`${d.part}|${d.channel}`);
     if (foldedChannel) foldedStateSkips.push(`fold-carries-state-delta: [${d.state}] ${d.part}.${d.channel} rides its source fact`);
     // SHADCN ROUND — the BASE plane's custom-property door, mirrored to the
@@ -3081,6 +3510,7 @@ export function prepareMint(
     // rendered motion itself is carried by the `translate` channel alongside.
     // Corpus-neutral by measurement: no committed contract carries a
     // custom-property channel anywhere (base door held everywhere else).
+    // @door fuse.custom-property-not-a-channel-state
     if (d.channel.startsWith('--')) {
       if (!foldedChannel) {
         stateCodeOnly.push({
@@ -3094,6 +3524,7 @@ export function prepareMint(
       }
       continue;
     }
+    // @door fuse.declared-state-full-coverage
     if (d.kinds.has('unmintable') || d.kinds.size !== 1) {
       if (!foldedChannel) {
         // v15 declared state facts: a registry channel whose delta is
@@ -3112,6 +3543,7 @@ export function prepareMint(
       }
       continue;
     }
+    // @door fuse.state-delta-padding-incompatible
     if (d.occurrences.length < expectedEnabled) {
       const have = new Set(d.occurrences.map((o) => o.variant));
       let padded = true;
@@ -3223,6 +3655,7 @@ export function applyMintToContract(
   const enrichmentNotes: string[] = [];
   const partByName = new Map(walkAnatomy(enriched).map((w) => [w.name, w.part] as const));
   for (const le of layoutEnrichments) {
+    // @door fuse.enrichment-target-missing
     const target = partByName.get(le.part);
     if (!target) continue;
     target.layout ??= {};
@@ -3260,6 +3693,7 @@ export function applyMintToContract(
     if (de.when) {
       target.stylesWhen ??= [];
       const existing = target.stylesWhen.find((sw) => sw.prop === de.when!.prop && sw.equals === de.when!.equals);
+      // @door fuse.reviewed-wins-collision
       if (existing) { if (!(de.channel in existing.styles)) existing.styles[de.channel] = de.value; }
       else target.stylesWhen.push({ prop: de.when.prop, equals: de.when.equals, styles: { [de.channel]: de.value } });
       enrichmentNotes.push(`declared fact carried per axis value: ${de.part}.${de.channel} = ${de.value} when ${de.when.prop}=${de.when.equals} (stylesWhen)`);
@@ -3364,6 +3798,7 @@ export function applyMintToContract(
         // still has one exact truth at the BASE combo — carried as a literal
         // (bounded LITERAL_CHANNELS grammar) so the default plane renders
         // right on every surface; the set planes stay NAMED residue.
+        // @door fuse.base-plane-literal-fallback
         if (!state) {
           // NON-INHERITED box geometry only: inherited channels (color,
           // typography) are usually RIGHT via CSS inheritance when absent —
@@ -3394,10 +3829,12 @@ export function applyMintToContract(
             if (cands.length > 0) refusedSetPlaneLits.push({ part: partName, channel, cands });
           }
         }
+        // @door fuse.uncorrelated-overflow
         overflowBindings.push({ part: partName, channel, ...(state ? { state } : {}), refusal: b.reason ?? 'uncorrelated' });
         return;
       }
       const target = partByName.get(partName);
+      // @door fuse.computed-only-part-not-in-anatomy
       if (!target) {
         overflowBindings.push({ part: partName, channel, ...(state ? { state } : {}), ref: b.ref, refusal: 'computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision' });
         return;
@@ -3406,6 +3843,7 @@ export function applyMintToContract(
       const phs = placeholdersOf(inner);
 
       if (state) {
+        // @door fuse.state-outside-vocabulary
         if (!STATE_SUFFIXES.includes(state as (typeof STATE_SUFFIXES)[number])) {
           overflowBindings.push({ part: partName, channel, state, ref: b.ref, refusal: 'state outside the schema state vocabulary' });
           return;
@@ -3413,10 +3851,12 @@ export function applyMintToContract(
         const declareState = () => {
           if (!(enriched.states as string[]).includes(state)) (enriched.states as string[]).push(state as never);
         };
+        // @door fuse.presence-prop-state-ref
         if (phs.some((p) => space.presence.has(p))) {
           overflowBindings.push({ part: partName, channel, state, ref: b.ref, refusal: 'presence-prop state ref — boolean substitution has no spelling (round 4 residue)' });
           return;
         }
+        // @door fuse.nested-state-vocabulary
         if (partName !== 'root') {
           // v13 Part.states: color-kind channels, plain refs only
           if (!nestedStateCarriable(channel, phs)) {
@@ -3429,6 +3869,7 @@ export function applyMintToContract(
           return;
         }
         // root states: the emitters expand ≤1 placeholder (S3)
+        // @door fuse.root-state-one-placeholder
         if (phs.length === 0) {
           target.states ??= {};
           target.states[state] ??= {};
@@ -3471,6 +3912,7 @@ export function applyMintToContract(
       // part's channel is provably its ancestor's on every captured plane AND
       // its own state deltas cannot be carried. Binding the base value here
       // would sever the inheritance that renders those planes correctly.
+      // @door fuse.inheritance-refused-base-binding
       if (inheritanceRefused.has(`${partName}|${channel}`)) {
         overflowBindings.push({
           part: partName,
@@ -3489,10 +3931,12 @@ export function applyMintToContract(
       if (phs.length === 1) {
         const axisProp = phs[0];
         const axis = space.axes.find((ax) => ax.prop === axisProp);
+        // @door fuse.substituted-axis-not-enumerated
         if (!axis) {
           overflowBindings.push({ part: partName, channel, ref: b.ref, refusal: `substituted axis "${axisProp}" not an enumerated axis` });
           return;
         }
+        // @door fuse.presence-off-plane-carried
         if (space.presence.has(axisProp)) {
           // Round 4: presence axes are BOOLEAN contract props — tokensByProp
           // has no boolean spelling; presence-driven styling is named residue
@@ -3530,16 +3974,19 @@ export function applyMintToContract(
       }
       if (phs.length === 2) {
         const [pa, pb] = phs; // leaf-path order (mint axis discovery order)
+        // @door fuse.presence-prop-pair-ref
         if (space.presence.has(pa) || space.presence.has(pb)) {
           overflowBindings.push({ part: partName, channel, ref: b.ref, refusal: 'presence-prop pair ref — boolean tokensByProp has no spelling (round 4 residue)' });
           return;
         }
         const ua = unsetAxes.get(pa);
         const ub = unsetAxes.get(pb);
+        // @door fuse.pair-over-two-unset-axes
         if (ua !== undefined && ub !== undefined) {
           overflowBindings.push({ part: partName, channel, ref: b.ref, refusal: 'pair ref over TWO unset axes — no carried spelling; named residue' });
           return;
         }
+        // @door fuse.nested-pair-map
         if (ua === undefined && ub === undefined) {
           if (partName === 'root') {
             // both axes defaulted → their enum classes are always present;
@@ -3576,6 +4023,7 @@ export function applyMintToContract(
           );
           return;
         }
+        // @door fuse.pair-with-unset-carried
         // ONE unset axis (S2 pair carriage): base plane = per-OTHER-axis map
         // of fully resolved refs (unset slot pinned); set planes = per-UNSET-
         // value map whose refs keep the other placeholder — the reviewed
@@ -3597,6 +4045,7 @@ export function applyMintToContract(
         enrichmentNotes.push(`pair-with-unset carried: ${partName}.${channel} = base plane per ${otherProp} + placeholder maps per ${unsetProp} (emitter capability lift)`);
         return;
       }
+      // @door fuse.beyond-two-axis-vocabulary
       overflowBindings.push({ part: partName, channel, ref: b.ref, refusal: `${phs.length} placeholders — beyond the two-axis vocabulary` });
     });
   };
@@ -3613,6 +4062,7 @@ export function applyMintToContract(
     for (const spl of [...refusedSetPlaneLits, ...setPlaneLiterals]) {
       const target = partByName.get(spl.part);
       if (!target) continue;
+      // @door fuse.set-plane-literal-channel-gate
       if (BASE_FALLBACK_CHANNELS.has(spl.channel) === false) continue;
       const byProp = byPart.get(spl.part) ?? new Map<string, Record<string, Record<string, string>>>();
       byPart.set(spl.part, byProp);
@@ -3626,6 +4076,7 @@ export function applyMintToContract(
       const target = partByName.get(partName)!;
       const existing = (target.literalsByProp ?? []).map((e) => structuredClone(e));
       for (const [prop, map] of [...byProp.entries()].sort((x, y) => x[0].localeCompare(y[0]))) {
+        // @door fuse.literals-by-prop-conflict-avoided
         for (const e of existing) {
           if (e.prop !== prop) continue;
           const reviewedChannels = new Set(Object.values(e.map).flatMap((m) => Object.keys(m)));
@@ -3680,6 +4131,7 @@ export function applyMintToContract(
       reviewedLiteralChannels.set(e.prop, set);
     }
     for (const [prop, map] of [...byProp.entries()].sort((x, y) => x[0].localeCompare(y[0]))) {
+      // @door fuse.tokens-by-prop-conflict-cross-field
       const literalChannels = reviewedLiteralChannels.get(prop);
       if (literalChannels) {
         for (const val of Object.keys(map)) {
@@ -3692,6 +4144,7 @@ export function applyMintToContract(
           if (Object.keys(map[val]).length === 0) delete map[val];
         }
       }
+      // @door fuse.tokens-by-prop-conflict-same-field
       for (const e of existing) {
         if (e.prop !== prop) continue;
         const reviewedChannels = new Set(Object.values(e.map).flatMap((m) => Object.keys(m)));
@@ -3739,11 +4192,13 @@ export function applyMintToContract(
     const add = (partName: string, entry: { state?: string; channel: string; value: string; reason: string }) => {
       const target = partByName.get(partName);
       if (!target) return; // a computed-only part absent from the anatomy is already its own named refusal
+      // @door fuse.code-only-dedup-by-reason
       const key = `${partName}|${entry.state ?? ''}|${entry.channel}|${entry.reason}`;
       if (seen.has(key)) return;
       seen.add(key);
       (target.codeOnly ??= []).push(entry);
     };
+    // @door fuse.state-plane-residue-only-on-contract
     for (const o of overflowBindings) {
       if (!o.state) continue;
       add(o.part, { state: o.state, channel: o.channel, value: literalOf(o.ref) ?? o.ref ?? '', reason: o.refusal });
@@ -3769,6 +4224,7 @@ export function applyMintToContract(
   // out-specifies `.variant-outlined`), the canvas did. Defaultless-axis
   // entries now sort AFTER defaulted-axis entries — stable, so nothing else
   // moves — and the named plane wins over its own fallback.
+  // @door fuse.tokens-by-prop-reorder
   for (const target of partByName.values()) {
     const tbp = target.tokensByProp;
     if (!Array.isArray(tbp) || tbp.length < 2) continue;
@@ -3800,7 +4256,9 @@ export function pseudoFindings(a: AlignedSweep, classPrefix: string): PseudoFind
     const def = a.byKey.get(`${c.combo}__default`);
     if (!def) continue;
     const flatD = flatten(def.root, classPrefix);
+    // @door fuse.positional-index-alignment
     for (let i = 0; i < flatC.length; i++) {
+      // @door fuse.decor-pseudos-only
       for (const pe of DECOR_PSEUDOS) {
         const now = flatC[i]?.node.pseudo[pe];
         if (!now) continue;
@@ -3809,6 +4267,8 @@ export function pseudoFindings(a: AlignedSweep, classPrefix: string): PseudoFind
         for (const [k, v] of Object.entries(now)) {
           if (!before || before[k] !== v) delta[k] = v;
         }
+        // @door fuse.empty-delta-dropped
+        // @door fuse.pseudo-default-content-only
         if (c.interaction === 'default' || Object.keys(delta).length > 0) {
           findings.push({
             combo: c.combo,

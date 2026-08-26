@@ -165,3 +165,24 @@ export {
 
 // Shared Figma name spellings.
 export { camel, canonicalPropName } from './figma-names.js';
+
+// REQUIRED FACTS PER ARCHETYPE — the refuse-to-mint referee. Per archetype,
+// the load-bearing facts a set must carry before it may be minted; a contract
+// missing one is named, never silently composed.
+export {
+  ARCHETYPE_REQUIRED_FACTS,
+  UNDECLARED_ARCHETYPE_WARNING,
+  channelsOf,
+  checkRequiredFacts,
+  expectedWarnLine,
+  generateWarnLine,
+  posture,
+  refusalLine,
+  type ArchetypeFacts,
+  type CheckOptions,
+  type FactFinding,
+  type FactPredicate,
+  type Posture,
+  type RequiredFact,
+  type RequiredFactsResult,
+} from './required-facts.js';

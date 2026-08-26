@@ -4,6 +4,7 @@
  *   npx tsx scripts/canvas-census-check.ts --phase code        # this PR's phase
  *   npx tsx scripts/canvas-census-check.ts --phase full        # once the canvas half lands
  *   npx tsx scripts/canvas-census-check.ts --write-manifest    # regenerate the denominator
+ *   npx tsx scripts/canvas-census-check.ts --write-receipt     # record the receipt (with --phase; check mode never writes)
  *   npx tsx scripts/canvas-census-check.ts --self-test         # the gate must go red on a planted red
  *
  * THE BAR (owner, 2026-08-23): "generate canvas Figma designs from contracts;
@@ -214,8 +215,11 @@ interface RunOptions {
   phase: Phase;
   manifestPath: string;
   censusDir: string;
-  /** null = do not write the receipt (self-test). */
+  /** null = no receipt surface at all (self-test). */
   receiptPath: string | null;
+  /** true only under --write-receipt: record the rendering. Check mode is a
+   *  PURE READER — it compares and refuses on mismatch, never writes. */
+  writeReceipt?: boolean;
   quiet?: boolean;
 }
 
@@ -737,11 +741,28 @@ export function runCensus(opts: RunOptions, fresh?: CensusManifest): RunResult {
   const redVerdicts =
     opts.phase === "full" ? rows.flatMap((r) => r.redVerdicts) : [];
   const receipt = renderReceipt(rowsSource, rows, opts.phase, failures);
-  if (opts.receiptPath)
-    writeFileSync(
-      opts.receiptPath,
-      withPreservedLog(receipt, opts.receiptPath),
-    );
+  if (opts.receiptPath) {
+    // The receipt as it is written to disk: the recomputed rendering plus the
+    // hand-authored PRESERVED LOG region carried forward from the committed
+    // copy. The READER must compare against exactly that — comparing the bare
+    // rendering would report every receipt carrying a log as STALE forever.
+    const onDisk = withPreservedLog(receipt, opts.receiptPath);
+    if (opts.writeReceipt) {
+      writeFileSync(opts.receiptPath, onDisk);
+    } else if (failures.length === 0) {
+      // Pure reader: the committed receipt must equal the recomputed
+      // rendering byte-for-byte. (Compared only when otherwise green — a red
+      // run's rendering embeds the failures and can never match a committed
+      // green receipt; the run is already refusing by name.)
+      const committed = existsSync(opts.receiptPath)
+        ? readFileSync(opts.receiptPath, "utf8")
+        : null;
+      if (committed !== onDisk)
+        failures.push(
+          `${path.relative(REPO, opts.receiptPath)} is ${committed === null ? "MISSING" : "STALE"} vs the recomputed rendering — run \`npm run census:check -- --phase ${opts.phase} --write-receipt\` and commit the diff`,
+        );
+    }
+  }
   return { ok: failures.length === 0, failures, redVerdicts, rows, receipt };
 }
 
@@ -927,7 +948,8 @@ async function main(): Promise<number> {
     return 2;
   }
   if (argv.includes("--self-test")) return selfTest();
-  if (phase === "design-to-code") return runDesignToCode();
+  if (phase === "design-to-code")
+    return runDesignToCode(argv.includes("--write-receipt"));
   const manifestPath = path.join(REPO, MANIFEST_PATH);
   const { manifest } = enumerateCorpus();
   if (argv.includes("--write-manifest")) {
@@ -942,6 +964,12 @@ async function main(): Promise<number> {
       manifestPath,
       censusDir: path.join(REPO, CENSUS_DIR),
       receiptPath: path.join(REPO, RECEIPT_PATH),
+      // `--write-receipt` was wired for --phase design-to-code only, so on
+      // --phase code the flag did nothing and the gate's own remedy message
+      // ("run `npm run census:check -- --phase code --write-receipt` and
+      // commit the diff") could never be followed. Check mode still never
+      // writes: writeReceipt is false unless the flag is present.
+      writeReceipt: argv.includes("--write-receipt"),
     },
     manifest,
   );
@@ -994,8 +1022,9 @@ async function main(): Promise<number> {
 //     named refusal, the remedy `npx tsx extract/figma/census/design-to-code.ts --write`);
 //   · every sampled render pair exists (canvas-<slug>.png beside
 //     code-<slug>.png per d2c-render.ts render.json) with a scored verdict;
-//   · the receipt parity/receipts/v1/DESIGN-TO-CODE-CENSUS.md is re-rendered
-//     byte-stable.
+//   · the receipt parity/receipts/v1/DESIGN-TO-CODE-CENSUS.md equals the
+//     in-memory re-rendering byte-for-byte (check mode never writes it;
+//     record with --write-receipt).
 // ---------------------------------------------------------------------------
 
 interface D2cVerdict {
@@ -1004,7 +1033,7 @@ interface D2cVerdict {
   notes?: string;
 }
 
-async function runDesignToCode(): Promise<number> {
+async function runDesignToCode(writeReceipt: boolean): Promise<number> {
   const failures: string[] = [];
   const { manifest } = enumerateCorpus();
   const manifestPath = path.join(REPO, MANIFEST_PATH);
@@ -1093,7 +1122,20 @@ async function runDesignToCode(): Promise<number> {
   }
 
   const receipt = renderD2cReceipt(manifest, runs, failures);
-  writeFileSync(path.join(REPO, D2C_RECEIPT_PATH), receipt);
+  const receiptAbs = path.join(REPO, D2C_RECEIPT_PATH);
+  if (writeReceipt) {
+    writeFileSync(receiptAbs, receipt);
+  } else if (failures.length === 0) {
+    // Pure reader — same contract as runCensus: compare bytes, refuse on
+    // mismatch, never write during check mode.
+    const committed = existsSync(receiptAbs)
+      ? readFileSync(receiptAbs, "utf8")
+      : null;
+    if (committed !== receipt)
+      failures.push(
+        `${D2C_RECEIPT_PATH} is ${committed === null ? "MISSING" : "STALE"} vs the recomputed rendering — run \`npm run census:check -- --phase design-to-code --write-receipt\` and commit the diff`,
+      );
+  }
   const sets = runs.reduce((n, r) => n + r.sets.length, 0);
   const carried = runs.reduce(
     (n, r) => n + r.sets.reduce((m, s) => m + s.account.carried, 0),

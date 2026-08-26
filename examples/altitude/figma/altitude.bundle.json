@@ -6154,6 +6154,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the ALTITUDE round — props/axes only; anatomy is promoted from captured DOM truth. Subject: altitude-web-components@1.0.2 (published npm, Lit 3, SHADOW DOM), pinned in examples/altitude/.altitude-sandbox (examples/altitude/PROVENANCE.md). EVERY enum in this library is DEFAULTLESS — the default rendering is the ABSENCE of the attribute (there is no `variant=\"primary\"`; primary IS unset), so every axis leads with the `unset` pseudo-value. No `disabled` state plane: Altitude never reaches the `:disabled` pseudo-class from a prop on these components (al-button's isDisabled emits aria-disabled ONLY — measured identical background, cursor and opacity — and the other seven spell it as an `al-is-disabled` class, which is a prop-selected RENDERING, i.e. a variant axis, not a pseudo-class plane). al-avatar. `hasBadge` rides the PRESENCE-PROP vocabulary (it creates a DOM subtree — a nested <al-badge> custom element with its OWN shadow root, which is the depth-2 case this round exercises). `badgeVariant` held at its default. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of altitude-web-components@1.0.2 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/altitude/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Altitude's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "avatar",
       "semantics": {
         "element": "div"
       },
@@ -6394,6 +6395,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the ALTITUDE round — props/axes only; anatomy is promoted from captured DOM truth. Subject: altitude-web-components@1.0.2 (published npm, Lit 3, SHADOW DOM), pinned in examples/altitude/.altitude-sandbox (examples/altitude/PROVENANCE.md). EVERY enum in this library is DEFAULTLESS — the default rendering is the ABSENCE of the attribute (there is no `variant=\"primary\"`; primary IS unset), so every axis leads with the `unset` pseudo-value. No `disabled` state plane: Altitude never reaches the `:disabled` pseudo-class from a prop on these components (al-button's isDisabled emits aria-disabled ONLY — measured identical background, cursor and opacity — and the other seven spell it as an `al-is-disabled` class, which is a prop-selected RENDERING, i.e. a variant axis, not a pseudo-class plane). al-badge. `position` EXCLUDED BY NAME: `handlePosition()` mutates `this.parentElement.style.position` — a component that writes to the DOM OUTSIDE itself has no anatomy the contract can carry, and the mutation would make the captured stage a function of the combo. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of altitude-web-components@1.0.2 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/altitude/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Altitude's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "badge / tag / chip",
       "semantics": {
         "element": "div"
       },
@@ -6571,6 +6573,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the ALTITUDE round — props/axes only; anatomy is promoted from captured DOM truth. Subject: altitude-web-components@1.0.2 (published npm, Lit 3, SHADOW DOM), pinned in examples/altitude/.altitude-sandbox (examples/altitude/PROVENANCE.md). EVERY enum in this library is DEFAULTLESS — the default rendering is the ABSENCE of the attribute (there is no `variant=\"primary\"`; primary IS unset), so every axis leads with the `unset` pseudo-value. No `disabled` state plane: Altitude never reaches the `:disabled` pseudo-class from a prop on these components (al-button's isDisabled emits aria-disabled ONLY — measured identical background, cursor and opacity — and the other seven spell it as an `al-is-disabled` class, which is a prop-selected RENDERING, i.e. a variant axis, not a pseudo-class plane). al-button. `isDisabled` DROPPED BY NAME: it sets aria-disabled only and the shipped CSS keys the disabled look on `:disabled`, so the disabled STYLE is unreachable from the prop (measured: bg rgb(67,117,255), cursor pointer, opacity 1 — identical to the enabled button). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of altitude-web-components@1.0.2 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/altitude/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Altitude's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "button",
       "semantics": {
         "element": "button"
       },
@@ -6791,6 +6794,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the ALTITUDE round — props/axes only; anatomy is promoted from captured DOM truth. Subject: altitude-web-components@1.0.2 (published npm, Lit 3, SHADOW DOM), pinned in examples/altitude/.altitude-sandbox (examples/altitude/PROVENANCE.md). EVERY enum in this library is DEFAULTLESS — the default rendering is the ABSENCE of the attribute (there is no `variant=\"primary\"`; primary IS unset), so every axis leads with the `unset` pseudo-value. No `disabled` state plane: Altitude never reaches the `:disabled` pseudo-class from a prop on these components (al-button's isDisabled emits aria-disabled ONLY — measured identical background, cursor and opacity — and the other seven spell it as an `al-is-disabled` class, which is a prop-selected RENDERING, i.e. a variant axis, not a pseudo-class plane). al-chip. `isDismissible` DEFERRED BY NAME: it mounts a nested <al-icon-close> (a second shadow root inside this one) and `close()` mutates the HOST's classList — a depth-2 presence subtree with a self-mutating driver, out of round 1. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of altitude-web-components@1.0.2 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/altitude/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Altitude's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "badge / tag / chip",
       "semantics": {
         "element": "button"
       },
@@ -7692,7 +7696,7 @@
           "kind": "channel",
           "channel": "text-indent",
           "value": "{imported.avatar.badge.text-indent}",
-          "reason": "Figma text nodes have no first-line indent.",
+          "reason": "Figma text nodes have no first-line indent. Where the MEASURED indent lays the first line entirely outside the content box (Part.textOutOfBox), the canvas draws NO text child on those combos: the browser paints no text in the box there, so drawing the label at indent 0 would invent ink the library never shows.",
           "variants": {
             "count": 1,
             "of": 1
@@ -7764,7 +7768,7 @@
           "kind": "channel",
           "channel": "text-indent",
           "value": "{imported.badge.root.text-indent.default}",
-          "reason": "Figma text nodes have no first-line indent.",
+          "reason": "Figma text nodes have no first-line indent. Where the MEASURED indent lays the first line entirely outside the content box (Part.textOutOfBox), the canvas draws NO text child on those combos: the browser paints no text in the box there, so drawing the label at indent 0 would invent ink the library never shows.",
           "variants": {
             "count": 4,
             "of": 8,
@@ -7781,7 +7785,7 @@
           "kind": "channel",
           "channel": "text-indent",
           "value": "{imported.badge.root.text-indent.dot}",
-          "reason": "Figma text nodes have no first-line indent.",
+          "reason": "Figma text nodes have no first-line indent. Where the MEASURED indent lays the first line entirely outside the content box (Part.textOutOfBox), the canvas draws NO text child on those combos: the browser paints no text in the box there, so drawing the label at indent 0 would invent ink the library never shows.",
           "variants": {
             "count": 4,
             "of": 8,

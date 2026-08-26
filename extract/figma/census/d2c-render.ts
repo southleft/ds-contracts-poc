@@ -217,25 +217,39 @@ async function renderKit(def: D2cKitDef, token: string): Promise<void> {
     }
     if (p.mintedTokens) Object.assign(minted, mergeTokenTrees([minted, p.mintedTokens.tree]));
   }
-  // Same prune rule as the pipeline half: the kit corpus wins.
+  // Same de-dup rule as the pipeline half — and, since 2026-08-24, the same
+  // REFUSAL: a path collision whose values disagree is not the census's to
+  // heal (see design-to-code.ts pruneMinted).
   const corpusTrees = def.corpusFiles.map(
     (f) => JSON.parse(readFileSync(path.join(REPO, f), "utf8")) as Record<string, unknown>,
   );
   const { default: prune } = { default: (tree: Record<string, unknown>): void => {
-    const has = (t: Record<string, unknown>, segs: string[]): boolean => {
+    const disagree: string[] = [];
+    const leafAt = (t: Record<string, unknown>, segs: string[]): Record<string, unknown> | null => {
       let cur: unknown = t;
       for (const s of segs) {
-        if (!cur || typeof cur !== "object") return false;
+        if (!cur || typeof cur !== "object") return null;
         cur = (cur as Record<string, unknown>)[s];
       }
-      return !!cur && typeof cur === "object" && "$value" in (cur as object);
+      return !!cur && typeof cur === "object" && "$value" in (cur as object)
+        ? (cur as Record<string, unknown>)
+        : null;
     };
     const walk = (node: Record<string, unknown>, segs: string[]): void => {
       for (const [k, v] of Object.entries(node)) {
         if (k.startsWith("$") || !v || typeof v !== "object") continue;
         const next = [...segs, k];
         if ("$value" in (v as object)) {
-          if (corpusTrees.some((t) => has(t, next))) delete node[k];
+          const twin = corpusTrees.map((t) => leafAt(t, next)).find((x) => x !== null);
+          if (twin) {
+            const mine = JSON.stringify((v as Record<string, unknown>).$value);
+            const theirs = JSON.stringify(twin.$value);
+            if (mine !== theirs) {
+              disagree.push(`${next.join(".")}: corpus says ${theirs}, the fresh mint says ${mine}`);
+              continue;
+            }
+            delete node[k];
+          }
         } else {
           walk(v as Record<string, unknown>, next);
           if (Object.keys(v as object).filter((x) => !x.startsWith("$")).length === 0) delete node[k];
@@ -243,6 +257,12 @@ async function renderKit(def: D2cKitDef, token: string): Promise<void> {
       }
     };
     walk(tree, []);
+    if (disagree.length > 0) {
+      throw new Error(
+        `REFUSED — ${disagree.length} minted leaf/leaves land on a corpus path with a DIFFERENT value; ` +
+          `dropping them would be a repair the documented CLI does not perform:\n  - ${disagree.sort().join("\n  - ")}`,
+      );
+    }
   } };
   prune(minted);
   const mintedFile = path.join(work, "minted.dtcg.json");
@@ -338,10 +358,20 @@ async function renderKit(def: D2cKitDef, token: string): Promise<void> {
   for (const [id, { receipt }] of cellsBySet) {
     const dir = path.join(REPO, D2C_DIR, def.kit, id);
     mkdirSync(dir, { recursive: true });
-    for (const f of readdirSync(dir)) if (/^(code|canvas)-.*\.png$/.test(f)) rmSync(path.join(dir, f));
+    // CLEARED ONLY AT THE POINT OF REPLACEMENT (2026-08-25, same class as the
+    // first-pass packet defect). This clear used to run HERE, before the loop
+    // — and the very next statement can `throw` on a cell that did not mount,
+    // which left the committed pair directory wiped and nothing written back.
+    // A set that produces no raster now destroys nothing.
+    let cleared = false;
     for (const cell of receipt.cells) {
       const h = await page.$(`[data-cell="${id}__${cell.slug}"]`);
       if (!h) throw new Error(`${def.kit}/${id}: cell ${cell.slug} not on the page`);
+      if (!cleared) {
+        cleared = true;
+        for (const f of readdirSync(dir))
+          if (/^(code|canvas)-.*\.png$/.test(f)) rmSync(path.join(dir, f));
+      }
       await h.screenshot({ path: path.join(dir, `code-${cell.slug}.png`) });
       shot++;
       canvasWanted.push({ nodeId: cell.nodeId, outPath: path.join(dir, `canvas-${cell.slug}.png`) });

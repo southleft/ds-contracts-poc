@@ -58,6 +58,7 @@
 import { readdirSync, readFileSync, statSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import path from 'node:path';
 import { validateContract } from '@ds-contracts/schema';
+import { importRoot } from './capture.js';
 
 const ROOT = process.cwd();
 const VERIFY = process.argv.includes('--verify');
@@ -523,7 +524,7 @@ function resolve(typeExpr: string, seen: Set<string> = new Set()): string[] | nu
  *  basename match elsewhere in the package. Carbon (`Button/Button.d.ts`)
  *  and MUI (`Button/Button.d.ts`) resolve through the same first branch
  *  they always did; `npm run seed:verify` is the corpus-neutrality proof. */
-const declFor = (name: string): string | undefined => {
+const declForPlain = (name: string): string | undefined => {
   const lower = name.toLowerCase();
   const dirIs = (f: string): boolean => path.basename(path.dirname(f)).toLowerCase() === lower;
   const base = (f: string): string => path.basename(f).toLowerCase();
@@ -536,9 +537,27 @@ const declFor = (name: string): string | undefined => {
   // Carbon declares InlineNotification's props inside Notification.d.ts, so a
   // same-name lookup misses an entire component. Fall back to whichever file
   // declares its props interface.
-  const re = new RegExp(`interface\\s+${name}(Base)?Props\\b`);
+  const re = new RegExp(`interface\\s+${name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(Base)?Props\\b`);
   return dts.find((f) => re.test(readFileSync(f, 'utf8')));
 };
+
+/** COMPOUND EXPORT NAMES (held-out finding 1). `importName` may now be dotted
+ *  (`TextField.Root`), and a dotted string resolves NOTHING through the plain
+ *  lookup: no directory is called "textfield.root", no basename matches, and
+ *  the props-interface regex would read the dot as a WILDCARD. `propsOf`
+ *  returns [] on a miss, so a compound component would silently propose ZERO
+ *  axes and the receipt would blame judgment rather than the resolver — the
+ *  exact "measure the instrument" failure this repo keeps re-learning.
+ *
+ *  Two spellings are tried, in the order real libraries use them: the
+ *  FLATTENED member name (`TextFieldRoot` — what compound packages call the
+ *  props interface, `TextFieldRootProps`), then the NAMESPACE ROOT
+ *  (`TextField`), whose declaration file usually carries every member. An
+ *  undotted name takes neither branch and behaves exactly as before. */
+const declFor = (name: string): string | undefined =>
+  name.includes('.')
+    ? (declForPlain(name.split('.').join('')) ?? declForPlain(importRoot(name)))
+    : declForPlain(name);
 
 /** Title Case for a Figma VARIANT display name ('cool-gray' → 'Cool Gray'). */
 const display = (v: string): string =>

@@ -1,5 +1,5 @@
 /**
- * `ds-contracts migrate <paths..> [--check]` — the schema 17 codemod.
+ * `ds-contracts migrate <paths..> [--check]` — the schema codemod.
  *
  * Rewrites every JSON document under the given files/directories from the
  * v16 contract spellings to v17 (`@ds-contracts/schema` migrateDocumentToV17
@@ -10,6 +10,12 @@
  *   anchors.figma              → bindings.figma.anchors
  *   anchors.code               → bindings.code.anchors
  *   <part>.slot.figmaProperty  → <part>.slot.bindings.figma.property
+ *
+ * …and SEEDS the v19 `archetype` field into every `*.contract.json` from the
+ * name-map (`archetypeOf`), so the docs/23 §C.1.1 class the REQUIRED-FACTS
+ * referee enforces against is a reviewed declaration in the committed bytes
+ * rather than a regex applied at read time. An explicit field is never
+ * touched; a name the map does not reach is left alone, never guessed.
  *
  * Scope: EVERY *.json file reached (node_modules, .git, dist skipped) — a
  * contract, a bundle or receipt that embeds contracts, a proposal. Files
@@ -24,7 +30,7 @@
 import { execFileSync } from 'node:child_process';
 import { readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
-import { mayCarryV16Spelling, migrateDocumentToV17 } from '../../../schema/src/index.js';
+import { mayCarryV16Spelling, migrateDocumentToV17, seedArchetype } from '../../../schema/src/index.js';
 import { CliUsageError, parseFlags } from '../lib.js';
 
 const SKIP_DIRS = new Set(['node_modules', '.git', 'dist', 'coverage']);
@@ -56,6 +62,49 @@ function gitVisibleJson(target: string): string[] | null {
   } catch {
     return null;
   }
+}
+
+/** The repo root a file belongs to, memoised per directory. The archetype
+ *  seed's scope is a REPO-RELATIVE shape (`contracts/` or
+ *  `examples/<lib>/contracts/`), so it needs the root; outside a git work tree
+ *  there is no corpus to speak of and the seed is skipped. */
+const rootCache = new Map<string, string | null>();
+function repoRootOf(file: string): string | null {
+  const dir = path.dirname(file);
+  const hit = rootCache.get(dir);
+  if (hit !== undefined) return hit;
+  let root: string | null = null;
+  try {
+    root = execFileSync('git', ['rev-parse', '--show-toplevel'], {
+      cwd: dir,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    }).trim();
+  } catch {
+    root = null;
+  }
+  rootCache.set(dir, root);
+  return root;
+}
+
+/** Does this file sit in a CENSUS LIBRARY contract directory? That is the
+ *  archetype seed's scope: `contracts/*.contract.json` at the repo root and
+ *  `examples/<lib>/contracts/*.contract.json` — exactly the corpus the
+ *  required-facts referee grades.
+ *
+ *  Deliberately NOT every `*.contract.json` in the tree. `extract/out/…`,
+ *  `extract/pilots/<kit>/out/…`, `examples/<lib>/proposed/…` and
+ *  `examples/mui/contracts-seed/…` are tool OUTPUTS: nothing writes the field
+ *  when it regenerates them, so seeding them would make a byte-fresh gate
+ *  compare a seeded fixture against an unseeded regeneration and go red for a
+ *  reason that has nothing to do with the contract. Those documents still
+ *  resolve their archetype through the name-map at read time — they simply do
+ *  not carry the declaration. */
+export function isLibraryContractFile(file: string): boolean {
+  const root = repoRootOf(file);
+  if (!root) return false;
+  const rel = path.relative(root, file).split(path.sep).join('/');
+  return /^(?:examples\/[^/]+\/)?contracts\/[^/]+\.contract\.json$/.test(rel);
 }
 
 function collectJson(target: string, out: string[]): void {
@@ -101,14 +150,24 @@ export interface MigrateFileResult {
 
 export function migrateFile(file: string, write: boolean): MigrateFileResult {
   const text = readFileSync(file, 'utf8');
-  if (!mayCarryV16Spelling(text)) return { file, status: 'clean', rewrites: 0 };
+  // A LIBRARY CONTRACT FILE is always parsed: the v19 archetype seed is an
+  // ADDITION, so there is no legacy spelling for a text pre-check to find.
+  // Every other JSON is skipped unless it can carry a v16 rename.
+  //
+  // Scope: see isLibraryContractFile — the census corpus, not every
+  // *.contract.json in the tree.
+  const isContractFile = isLibraryContractFile(file);
+  if (!isContractFile && !mayCarryV16Spelling(text)) return { file, status: 'clean', rewrites: 0 };
   let parsed: unknown;
   try {
     parsed = JSON.parse(text);
   } catch {
     return { file, status: 'clean', rewrites: 0 };
   }
-  const { doc, rewrites } = migrateDocumentToV17(parsed);
+  const renamed = migrateDocumentToV17(parsed);
+  const seeded = isContractFile ? seedArchetype(renamed.doc) : { doc: renamed.doc, rewrites: [] as string[] };
+  const doc = seeded.doc;
+  const rewrites = [...renamed.rewrites, ...seeded.rewrites];
   if (rewrites.length === 0) return { file, status: 'clean', rewrites: 0 };
   const { indent, eol, escapeUnicode } = conventionOf(text);
   const serialise = (v: unknown) => {
@@ -120,7 +179,7 @@ export function migrateFile(file: string, write: boolean): MigrateFileResult {
       file,
       status: 'refused',
       rewrites: rewrites.length,
-      reason: 'the committed bytes do not round-trip through JSON.parse/stringify with the file\'s own indentation — migrate it by hand so the rename is the only diff',
+      reason: 'the committed bytes do not round-trip through JSON.parse/stringify with the file\'s own indentation — migrate it by hand so the migration is the only diff',
     };
   }
   if (!write) return { file, status: 'stale', rewrites: rewrites.length };
@@ -149,7 +208,7 @@ export async function migrateCommand(argv: string[]): Promise<number> {
     if (r.status === 'clean') continue;
     const rel = path.relative(process.cwd(), r.file);
     if (r.status === 'refused') console.error(`  ✖ ${rel}: ${r.reason}`);
-    else if (!quiet) console.log(`  ${check ? '✖ v16 spelling' : '✎'} ${rel} (${r.rewrites} rename${r.rewrites === 1 ? '' : 's'})`);
+    else if (!quiet) console.log(`  ${check ? '✖ pending migration' : '✎'} ${rel} (${r.rewrites} rewrite${r.rewrites === 1 ? '' : 's'})`);
   }
   const rewritten = by('rewritten').length;
   const stale = by('stale').length;
@@ -157,12 +216,12 @@ export async function migrateCommand(argv: string[]): Promise<number> {
   const renames = results.reduce((n, r) => n + (r.status === 'clean' ? 0 : r.rewrites), 0);
   if (check) {
     if (stale + refused > 0) {
-      console.error(`✘ migrate --check: ${stale + refused} of ${files.length} JSON file(s) still carry a v16 spelling (${renames} rename(s) pending) — run: ds-contracts migrate <paths..>`);
+      console.error(`✘ migrate --check: ${stale + refused} of ${files.length} JSON file(s) carry a pending schema migration (${renames} rewrite(s): v16 → v17 renames and/or the v19 archetype seed) — run: ds-contracts migrate <paths..>`);
       return 1;
     }
-    console.log(`✔ migrate --check: ${files.length} JSON file(s), none carry a v16 spelling`);
+    console.log(`✔ migrate --check: ${files.length} JSON file(s), none carry a v16 spelling and every contract file carries its archetype (or a name the map does not reach — declare it)`);
     return 0;
   }
-  console.log(`✔ migrate: ${rewritten} of ${files.length} JSON file(s) rewritten to schema 17 (${renames} rename(s))${refused ? `, ${refused} REFUSED by name` : ''}`);
+  console.log(`✔ migrate: ${rewritten} of ${files.length} JSON file(s) rewritten to schema 19 (${renames} rewrite(s))${refused ? `, ${refused} REFUSED by name` : ''}`);
   return refused > 0 ? 1 : 0;
 }

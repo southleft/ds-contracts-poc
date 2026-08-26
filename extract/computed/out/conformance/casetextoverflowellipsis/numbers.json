@@ -1,21 +1,58 @@
 {
   "component": "CaseTextOverflowEllipsis",
-  "browser": "151.0.7922.34",
+  "browser": "149.0.7827.55",
   "captures": 4,
   "combos": 1,
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
-  "channelsEnumerated": 479,
+  "channelsEnumerated": 476,
   "elementsPerCapture": 1,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 13
+    "root": 24
   },
   "folds": {
-    "count": 0,
-    "receipts": [],
-    "mintedLeavesUnfolded": 6,
-    "mintedLeavesFolded": 6
+    "count": 6,
+    "receipts": [
+      {
+        "part": "root",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      }
+    ],
+    "mintedLeavesUnfolded": 8,
+    "mintedLeavesFolded": 8
   },
   "bound": {
     "cellsChecked": 0,
@@ -24,11 +61,11 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 6,
-    "baseBindings": 6,
+    "leaves": 8,
+    "baseBindings": 11,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 6,
+      "uniform": 11,
       "perAxis": 0,
       "perPair": 0,
       "refused": 0
@@ -52,8 +89,8 @@
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 1908,
-    "cellsMatched": 1908,
+    "cellsCompared": 1896,
+    "cellsMatched": 1896,
     "pct": 100,
     "namedExclusions": [
       "app-region",
@@ -72,16 +109,21 @@
       "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
     },
     "exact": {
-      "mean": 0,
-      "max": 0,
-      "perfect": 4
+      "mean": 0.042317708333333336,
+      "max": 0.16927083333333334,
+      "perfect": 3
     },
     "aa": {
-      "mean": 0,
-      "max": 0,
-      "perfect": 4
+      "mean": 0.020345052083333332,
+      "max": 0.08138020833333333,
+      "perfect": 3
     },
     "worst": [
+      {
+        "key": "__active",
+        "pctExact": 0.16927083333333334,
+        "pctAA": 0.08138020833333333
+      },
       {
         "key": "__default",
         "pctExact": 0,
@@ -94,11 +136,6 @@
       },
       {
         "key": "__focus-visible",
-        "pctExact": 0,
-        "pctAA": 0
-      },
-      {
-        "key": "__active",
         "pctExact": 0,
         "pctAA": 0
       }

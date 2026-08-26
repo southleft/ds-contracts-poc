@@ -1,13 +1,14 @@
 {
   "component": "CaseAntdEmptyMarginOnlyParts",
   "generatedBy": "extract/computed/gate.ts",
-  "browser": "151.0.7922.34",
+  "browser": "149.0.7827.55",
+  "renderedBy": "149.0.7827.55",
   "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
   "combos": 1,
   "interactions": 4,
   "computed": {
-    "cellsCompared": 204,
-    "cellsEqual": 204,
+    "cellsCompared": 292,
+    "cellsEqual": 292,
     "pctEqual": 100,
     "rowsFullyEqual": 4,
     "rows": 4
@@ -30,13 +31,13 @@
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
-    "mintedLeaves": 11,
-    "mintedLeavesUnfolded": 10,
-    "baseBindings": 20,
+    "mintedLeaves": 14,
+    "mintedLeavesUnfolded": 12,
+    "baseBindings": 38,
     "stateBindings": 0,
     "codeOnlyChannels": 0,
     "overflowBindings": 0,
-    "folds": 20
+    "folds": 24
   },
   "worstRows": [
     {
@@ -78,16 +79,16 @@
   "rows": [
     {
       "key": "__default",
-      "channelsCompared": 51,
-      "channelsEqual": 51,
+      "channelsCompared": 73,
+      "channelsEqual": 73,
       "pctExact": 2.9036458333333335,
       "pctAA": 2.7083333333333335,
       "mismatches": []
     },
     {
       "key": "__hover",
-      "channelsCompared": 51,
-      "channelsEqual": 51,
+      "channelsCompared": 73,
+      "channelsEqual": 73,
       "pctExact": 2.9036458333333335,
       "pctAA": 2.7083333333333335,
       "mismatches": [],
@@ -95,16 +96,16 @@
     },
     {
       "key": "__focus-visible",
-      "channelsCompared": 51,
-      "channelsEqual": 51,
+      "channelsCompared": 73,
+      "channelsEqual": 73,
       "pctExact": 2.9036458333333335,
       "pctAA": 2.7083333333333335,
       "mismatches": []
     },
     {
       "key": "__active",
-      "channelsCompared": 51,
-      "channelsEqual": 51,
+      "channelsCompared": 73,
+      "channelsEqual": 73,
       "pctExact": 2.9036458333333335,
       "pctAA": 2.7083333333333335,
       "mismatches": [],

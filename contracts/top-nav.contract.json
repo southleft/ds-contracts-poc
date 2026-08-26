@@ -5,6 +5,7 @@
   "version": "1.0.0",
   "status": "draft",
   "description": "Horizontal main navigation bar with heading, start, center, and end areas. API mirrors industry convention (Astryx TopNav); hover menus and mega-menus are behavior-layer boundaries.",
+  "archetype": "nav (top / side)",
   "semantics": {
     "element": "nav"
   },

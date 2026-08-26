@@ -1,7 +1,8 @@
 {
   "component": "CaseAntdFocusOutlineRing",
   "generatedBy": "extract/computed/gate.ts",
-  "browser": "151.0.7922.34",
+  "browser": "149.0.7827.55",
+  "renderedBy": "149.0.7827.55",
   "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
   "combos": 1,
   "interactions": 4,
@@ -23,8 +24,8 @@
       "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
     },
     "meanExact": 5.362955729166667,
-    "meanAA": 4.685872395833333,
-    "maxAA": 6.116536458333333
+    "meanAA": 4.679361979166667,
+    "maxAA": 6.090494791666667
   },
   "fusion": {
     "boundConfirmed": 0,
@@ -41,7 +42,7 @@
   "worstRows": [
     {
       "key": "__focus-visible",
-      "pctAA": 6.116536458333333,
+      "pctAA": 6.090494791666667,
       "pctExact": 6.930338541666667,
       "channelsMismatched": 2
     },
@@ -108,7 +109,7 @@
       "channelsCompared": 36,
       "channelsEqual": 34,
       "pctExact": 6.930338541666667,
-      "pctAA": 6.116536458333333,
+      "pctAA": 6.090494791666667,
       "mismatches": [
         {
           "part": "root",

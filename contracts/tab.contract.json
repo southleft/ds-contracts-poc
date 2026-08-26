@@ -5,6 +5,7 @@
   "version": "1.0.0",
   "status": "draft",
   "description": "A single tab in a TabList. API mirrors industry convention (Astryx Tab) with selection flattened to a state enum so both surfaces render it truthfully; selection behavior itself is a declared boundary.",
+  "archetype": "tabs",
   "semantics": {
     "element": "button",
     "role": "tab"

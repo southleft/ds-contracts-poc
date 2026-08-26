@@ -1,0 +1,5376 @@
+{
+  "accent-1": {
+    "$type": "color",
+    "$value": "#fdfdfe",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--indigo-1)"
+      }
+    }
+  },
+  "accent-10": {
+    "$type": "color",
+    "$value": "#3358d4",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--indigo-10)"
+      }
+    }
+  },
+  "accent-11": {
+    "$type": "color",
+    "$value": "#3a5bc7",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--indigo-11)"
+      }
+    }
+  },
+  "accent-12": {
+    "$type": "color",
+    "$value": "#1f2d5c",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--indigo-12)"
+      }
+    }
+  },
+  "accent-2": {
+    "$type": "color",
+    "$value": "#f7f9ff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--indigo-2)"
+      }
+    }
+  },
+  "accent-3": {
+    "$type": "color",
+    "$value": "#edf2fe",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--indigo-3)"
+      }
+    }
+  },
+  "accent-4": {
+    "$type": "color",
+    "$value": "#e1e9ff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--indigo-4)"
+      }
+    }
+  },
+  "accent-5": {
+    "$type": "color",
+    "$value": "#d2deff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--indigo-5)"
+      }
+    }
+  },
+  "accent-6": {
+    "$type": "color",
+    "$value": "#c1d0ff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--indigo-6)"
+      }
+    }
+  },
+  "accent-7": {
+    "$type": "color",
+    "$value": "#abbdf9",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--indigo-7)"
+      }
+    }
+  },
+  "accent-8": {
+    "$type": "color",
+    "$value": "#8da4ef",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--indigo-8)"
+      }
+    }
+  },
+  "accent-9": {
+    "$type": "color",
+    "$value": "#3e63dd",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--indigo-9)"
+      }
+    }
+  },
+  "accent-a1": {
+    "$type": "color",
+    "$value": "#00008002",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--indigo-a1)"
+      }
+    }
+  },
+  "accent-a10": {
+    "$type": "color",
+    "$value": "#002ec9cc",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--indigo-a10)"
+      }
+    }
+  },
+  "accent-a11": {
+    "$type": "color",
+    "$value": "#002bb7c5",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--indigo-a11)"
+      }
+    }
+  },
+  "accent-a12": {
+    "$type": "color",
+    "$value": "#001046e0",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--indigo-a12)"
+      }
+    }
+  },
+  "accent-a2": {
+    "$type": "color",
+    "$value": "#0040ff08",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--indigo-a2)"
+      }
+    }
+  },
+  "accent-a3": {
+    "$type": "color",
+    "$value": "#0047f112",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--indigo-a3)"
+      }
+    }
+  },
+  "accent-a4": {
+    "$type": "color",
+    "$value": "#0044ff1e",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--indigo-a4)"
+      }
+    }
+  },
+  "accent-a5": {
+    "$type": "color",
+    "$value": "#0044ff2d",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--indigo-a5)"
+      }
+    }
+  },
+  "accent-a6": {
+    "$type": "color",
+    "$value": "#003eff3e",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--indigo-a6)"
+      }
+    }
+  },
+  "accent-a7": {
+    "$type": "color",
+    "$value": "#0037ed54",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--indigo-a7)"
+      }
+    }
+  },
+  "accent-a8": {
+    "$type": "color",
+    "$value": "#0034dc72",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--indigo-a8)"
+      }
+    }
+  },
+  "accent-a9": {
+    "$type": "color",
+    "$value": "#0031d2c1",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--indigo-a9)"
+      }
+    }
+  },
+  "accent-contrast": {
+    "$type": "color",
+    "$value": "white",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--indigo-contrast)"
+      }
+    }
+  },
+  "accent-indicator": {
+    "$type": "color",
+    "$value": "#3e63dd",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--indigo-indicator)"
+      }
+    }
+  },
+  "accent-surface": {
+    "$type": "color",
+    "$value": "#f5f8ffcc",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--indigo-surface)"
+      }
+    }
+  },
+  "accent-track": {
+    "$type": "color",
+    "$value": "#3e63dd",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--indigo-track)"
+      }
+    }
+  },
+  "amber-1": {
+    "$type": "color",
+    "$value": "#fefdfb"
+  },
+  "amber-10": {
+    "$type": "color",
+    "$value": "#ffba18"
+  },
+  "amber-11": {
+    "$type": "color",
+    "$value": "#ab6400"
+  },
+  "amber-12": {
+    "$type": "color",
+    "$value": "#4f3422"
+  },
+  "amber-2": {
+    "$type": "color",
+    "$value": "#fefbe9"
+  },
+  "amber-3": {
+    "$type": "color",
+    "$value": "#fff7c2"
+  },
+  "amber-4": {
+    "$type": "color",
+    "$value": "#ffee9c"
+  },
+  "amber-5": {
+    "$type": "color",
+    "$value": "#fbe577"
+  },
+  "amber-6": {
+    "$type": "color",
+    "$value": "#f3d673"
+  },
+  "amber-7": {
+    "$type": "color",
+    "$value": "#e9c162"
+  },
+  "amber-8": {
+    "$type": "color",
+    "$value": "#e2a336"
+  },
+  "amber-9": {
+    "$type": "color",
+    "$value": "#ffc53d"
+  },
+  "amber-a1": {
+    "$type": "color",
+    "$value": "#c0800004"
+  },
+  "amber-a10": {
+    "$type": "color",
+    "$value": "#ffb300e7"
+  },
+  "amber-a11": {
+    "$type": "color",
+    "$value": "#ab6400"
+  },
+  "amber-a12": {
+    "$type": "color",
+    "$value": "#341500dd"
+  },
+  "amber-a2": {
+    "$type": "color",
+    "$value": "#f4d10016"
+  },
+  "amber-a3": {
+    "$type": "color",
+    "$value": "#ffde003d"
+  },
+  "amber-a4": {
+    "$type": "color",
+    "$value": "#ffd40063"
+  },
+  "amber-a5": {
+    "$type": "color",
+    "$value": "#f8cf0088"
+  },
+  "amber-a6": {
+    "$type": "color",
+    "$value": "#eab5008c"
+  },
+  "amber-a7": {
+    "$type": "color",
+    "$value": "#dc9b009d"
+  },
+  "amber-a8": {
+    "$type": "color",
+    "$value": "#da8a00c9"
+  },
+  "amber-a9": {
+    "$type": "color",
+    "$value": "#ffb300c2"
+  },
+  "amber-contrast": {
+    "$type": "color",
+    "$value": "#21201c"
+  },
+  "amber-indicator": {
+    "$type": "color",
+    "$value": "#ffc53d",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--amber-9)"
+      }
+    }
+  },
+  "amber-surface": {
+    "$type": "color",
+    "$value": "#fefae4cc"
+  },
+  "amber-track": {
+    "$type": "color",
+    "$value": "#ffc53d",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--amber-9)"
+      }
+    }
+  },
+  "backdrop-filter-panel": {
+    "$type": "string",
+    "$value": "blur(64px)"
+  },
+  "base-button-classic-active-filter": {
+    "$type": "string",
+    "$value": "brightness(0.92) saturate(1.1)"
+  },
+  "base-button-classic-after-inset": {
+    "$type": "dimension",
+    "$value": "2px"
+  },
+  "base-button-classic-box-shadow-bottom": {
+    "$type": "string",
+    "$value": "inset 0 4px 2px -2px rgba(255, 255, 255, 0.7), inset 0 2px 1px -1px rgba(255, 255, 255, 0.7)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "inset 0 4px 2px -2px var(--white-a9), inset 0 2px 1px -1px var(--white-a9)"
+      }
+    }
+  },
+  "base-button-classic-box-shadow-top": {
+    "$type": "string",
+    "$value": "inset 0 0 0 1px #00002d17, inset 0 -2px 1px #0000330f",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "inset 0 0 0 1px var(--gray-a4), inset 0 -2px 1px var(--gray-a3)"
+      }
+    }
+  },
+  "base-button-classic-disabled-box-shadow": {
+    "$type": "string",
+    "$value": "inset 0 0 0 1px #00002d17, inset 0 -2px 1px #0000330f, inset 0 4px 2px -2px rgba(255, 255, 255, 0.7), inset 0 2px 1px -1px rgba(255, 255, 255, 0.7)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--base-button-classic-box-shadow-top), var(--base-button-classic-box-shadow-bottom)"
+      }
+    }
+  },
+  "base-button-classic-high-contrast-active-filter": {
+    "$type": "string",
+    "$value": "contrast(0.82) saturate(1.2) brightness(1.16)"
+  },
+  "base-button-classic-high-contrast-hover-filter": {
+    "$type": "string",
+    "$value": "contrast(0.88) saturate(1.1) brightness(1.1)"
+  },
+  "base-button-solid-active-filter": {
+    "$type": "string",
+    "$value": "brightness(0.92) saturate(1.1)"
+  },
+  "base-button-solid-high-contrast-active-filter": {
+    "$type": "string",
+    "$value": "contrast(0.82) saturate(1.2) brightness(1.16)"
+  },
+  "base-button-solid-high-contrast-hover-filter": {
+    "$type": "string",
+    "$value": "contrast(0.88) saturate(1.1) brightness(1.1)"
+  },
+  "base-card-classic-active-border-color": {
+    "$type": "color",
+    "$value": "color-mix(in oklab, #0000330f, #f0f0f3 25%)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "color-mix(in oklab, var(--gray-a3), var(--gray-3) 25%)"
+      }
+    }
+  },
+  "base-card-classic-active-box-shadow-inner": {
+    "$type": "string",
+    "$value": "0 0 0 1px color-mix(in oklab, #0000330f, #f0f0f3 25%), 0 0 0 1px rgb(0 0 0 / 0), 0 0 0 0.5px rgba(0, 0, 0, 0.05), 0 1px 1px 0 #00002d17, 0 2px 1px -1px rgba(0, 0, 0, 0.05), 0 1px 3px 0 rgba(0, 0, 0, 0.05)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "0 0 0 1px var(--base-card-classic-active-border-color), 0 0 0 1px var(--color-transparent), 0 0 0 0.5px var(--black-a1), 0 1px 1px 0 var(--gray-a4), 0 2px 1px -1px var(--black-a1), 0 1px 3px 0 var(--black-a1)"
+      }
+    }
+  },
+  "base-card-classic-active-box-shadow-outer": {
+    "$type": "string",
+    "$value": "0 0 0 0 color-mix(in oklab, #0000330f, #f0f0f3 25%), 0 0 0 0 rgb(0 0 0 / 0), 0 0 0 0 rgba(0, 0, 0, 0.05), 0 1px 1px -1px #00002d17, 0 2px 1px -2px rgba(0, 0, 0, 0.05), 0 1px 3px -1px rgba(0, 0, 0, 0.05)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "0 0 0 0 var(--base-card-classic-active-border-color), 0 0 0 0 var(--color-transparent), 0 0 0 0 var(--black-a1), 0 1px 1px -1px var(--gray-a4), 0 2px 1px -2px var(--black-a1), 0 1px 3px -1px var(--black-a1)"
+      }
+    }
+  },
+  "base-card-classic-border-color": {
+    "$type": "color",
+    "$value": "color-mix(in oklab, #0000330f, #f0f0f3 25%)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "color-mix(in oklab, var(--gray-a3), var(--gray-3) 25%)"
+      }
+    }
+  },
+  "base-card-classic-box-shadow-inner": {
+    "$type": "string",
+    "$value": "0 0 0 1px color-mix(in oklab, #0000330f, #f0f0f3 25%), 0 0 0 1px rgb(0 0 0 / 0), 0 0 0 0.5px rgba(0, 0, 0, 0.05), 0 1px 1px 0 #00005506, 0 2px 1px -1px rgba(0, 0, 0, 0.05), 0 1px 3px 0 rgba(0, 0, 0, 0.05)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "0 0 0 1px var(--base-card-classic-border-color), 0 0 0 1px var(--color-transparent), 0 0 0 0.5px var(--black-a1), 0 1px 1px 0 var(--gray-a2), 0 2px 1px -1px var(--black-a1), 0 1px 3px 0 var(--black-a1)"
+      }
+    }
+  },
+  "base-card-classic-box-shadow-outer": {
+    "$type": "string",
+    "$value": "0 0 0 0 color-mix(in oklab, #0000330f, #f0f0f3 25%), 0 0 0 0 rgb(0 0 0 / 0), 0 0 0 0 rgba(0, 0, 0, 0.05), 0 1px 1px -1px #00005506, 0 2px 1px -2px rgba(0, 0, 0, 0.05), 0 1px 3px -1px rgba(0, 0, 0, 0.05)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "0 0 0 0 var(--base-card-classic-border-color), 0 0 0 0 var(--color-transparent), 0 0 0 0 var(--black-a1), 0 1px 1px -1px var(--gray-a2), 0 2px 1px -2px var(--black-a1), 0 1px 3px -1px var(--black-a1)"
+      }
+    }
+  },
+  "base-card-classic-hover-border-color": {
+    "$type": "color",
+    "$value": "color-mix(in oklab, #00002d17, #e8e8ec 25%)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "color-mix(in oklab, var(--gray-a4), var(--gray-4) 25%)"
+      }
+    }
+  },
+  "base-card-classic-hover-box-shadow-inner": {
+    "$type": "string",
+    "$value": "0 0 0 1px color-mix(in oklab, #00002d17, #e8e8ec 25%), 0 1px 1px 1px rgba(0, 0, 0, 0.05), 0 2px 1px -1px #0000330f, 0 2px 3px -2px rgba(0, 0, 0, 0.05), 0 3px 12px -4px #0000330f, 0 4px 16px -8px rgba(0, 0, 0, 0.05)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "0 0 0 1px var(--base-card-classic-hover-border-color), 0 1px 1px 1px var(--black-a1), 0 2px 1px -1px var(--gray-a3), 0 2px 3px -2px var(--black-a1), 0 3px 12px -4px var(--gray-a3), 0 4px 16px -8px var(--black-a1)"
+      }
+    }
+  },
+  "base-card-classic-hover-box-shadow-outer": {
+    "$type": "string",
+    "$value": "0 0 0 0 color-mix(in oklab, #00002d17, #e8e8ec 25%), 0 1px 1px 0 rgba(0, 0, 0, 0.05), 0 2px 1px -2px #0000330f, 0 2px 3px -3px rgba(0, 0, 0, 0.05), 0 3px 12px -5px #0000330f, 0 4px 16px -9px rgba(0, 0, 0, 0.05)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "0 0 0 0 var(--base-card-classic-hover-border-color), 0 1px 1px 0 var(--black-a1), 0 2px 1px -2px var(--gray-a3), 0 2px 3px -3px var(--black-a1), 0 3px 12px -5px var(--gray-a3), 0 4px 16px -9px var(--black-a1)"
+      }
+    }
+  },
+  "base-card-surface-active-box-shadow": {
+    "$type": "string",
+    "$value": "0 0 0 1px color-mix(in oklab, #00002f26, #d9d9e0 25%)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "0 0 0 1px color-mix(in oklab, var(--gray-a6), var(--gray-6) 25%)"
+      }
+    }
+  },
+  "base-card-surface-box-shadow": {
+    "$type": "string",
+    "$value": "0 0 0 1px color-mix(in oklab, #0009321f, #e0e1e6 25%)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "0 0 0 1px color-mix(in oklab, var(--gray-a5), var(--gray-5) 25%)"
+      }
+    }
+  },
+  "base-card-surface-hover-box-shadow": {
+    "$type": "string",
+    "$value": "0 0 0 1px color-mix(in oklab, #00062e32, #cdced6 25%)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "0 0 0 1px color-mix(in oklab, var(--gray-a7), var(--gray-7) 25%)"
+      }
+    }
+  },
+  "black-a1": {
+    "$type": "color",
+    "$value": "rgba(0, 0, 0, 0.05)"
+  },
+  "black-a10": {
+    "$type": "color",
+    "$value": "rgba(0, 0, 0, 0.8)"
+  },
+  "black-a11": {
+    "$type": "color",
+    "$value": "rgba(0, 0, 0, 0.9)"
+  },
+  "black-a12": {
+    "$type": "color",
+    "$value": "rgba(0, 0, 0, 0.95)"
+  },
+  "black-a2": {
+    "$type": "color",
+    "$value": "rgba(0, 0, 0, 0.1)"
+  },
+  "black-a3": {
+    "$type": "color",
+    "$value": "rgba(0, 0, 0, 0.15)"
+  },
+  "black-a4": {
+    "$type": "color",
+    "$value": "rgba(0, 0, 0, 0.2)"
+  },
+  "black-a5": {
+    "$type": "color",
+    "$value": "rgba(0, 0, 0, 0.3)"
+  },
+  "black-a6": {
+    "$type": "color",
+    "$value": "rgba(0, 0, 0, 0.4)"
+  },
+  "black-a7": {
+    "$type": "color",
+    "$value": "rgba(0, 0, 0, 0.5)"
+  },
+  "black-a8": {
+    "$type": "color",
+    "$value": "rgba(0, 0, 0, 0.6)"
+  },
+  "black-a9": {
+    "$type": "color",
+    "$value": "rgba(0, 0, 0, 0.7)"
+  },
+  "blue-1": {
+    "$type": "color",
+    "$value": "#fbfdff"
+  },
+  "blue-10": {
+    "$type": "color",
+    "$value": "#0588f0"
+  },
+  "blue-11": {
+    "$type": "color",
+    "$value": "#0d74ce"
+  },
+  "blue-12": {
+    "$type": "color",
+    "$value": "#113264"
+  },
+  "blue-2": {
+    "$type": "color",
+    "$value": "#f4faff"
+  },
+  "blue-3": {
+    "$type": "color",
+    "$value": "#e6f4fe"
+  },
+  "blue-4": {
+    "$type": "color",
+    "$value": "#d5efff"
+  },
+  "blue-5": {
+    "$type": "color",
+    "$value": "#c2e5ff"
+  },
+  "blue-6": {
+    "$type": "color",
+    "$value": "#acd8fc"
+  },
+  "blue-7": {
+    "$type": "color",
+    "$value": "#8ec8f6"
+  },
+  "blue-8": {
+    "$type": "color",
+    "$value": "#5eb1ef"
+  },
+  "blue-9": {
+    "$type": "color",
+    "$value": "#0090ff"
+  },
+  "blue-a1": {
+    "$type": "color",
+    "$value": "#0080ff04"
+  },
+  "blue-a10": {
+    "$type": "color",
+    "$value": "#0086f0fa"
+  },
+  "blue-a11": {
+    "$type": "color",
+    "$value": "#006dcbf2"
+  },
+  "blue-a12": {
+    "$type": "color",
+    "$value": "#002359ee"
+  },
+  "blue-a2": {
+    "$type": "color",
+    "$value": "#008cff0b"
+  },
+  "blue-a3": {
+    "$type": "color",
+    "$value": "#008ff519"
+  },
+  "blue-a4": {
+    "$type": "color",
+    "$value": "#009eff2a"
+  },
+  "blue-a5": {
+    "$type": "color",
+    "$value": "#0093ff3d"
+  },
+  "blue-a6": {
+    "$type": "color",
+    "$value": "#0088f653"
+  },
+  "blue-a7": {
+    "$type": "color",
+    "$value": "#0083eb71"
+  },
+  "blue-a8": {
+    "$type": "color",
+    "$value": "#0084e6a1"
+  },
+  "blue-a9": {
+    "$type": "color",
+    "$value": "#0090ff"
+  },
+  "blue-contrast": {
+    "$type": "color",
+    "$value": "white"
+  },
+  "blue-indicator": {
+    "$type": "color",
+    "$value": "#0090ff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--blue-9)"
+      }
+    }
+  },
+  "blue-surface": {
+    "$type": "color",
+    "$value": "#f1f9ffcc"
+  },
+  "blue-track": {
+    "$type": "color",
+    "$value": "#0090ff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--blue-9)"
+      }
+    }
+  },
+  "bronze-1": {
+    "$type": "color",
+    "$value": "#fdfcfc"
+  },
+  "bronze-10": {
+    "$type": "color",
+    "$value": "#957468"
+  },
+  "bronze-11": {
+    "$type": "color",
+    "$value": "#7d5e54"
+  },
+  "bronze-12": {
+    "$type": "color",
+    "$value": "#43302b"
+  },
+  "bronze-2": {
+    "$type": "color",
+    "$value": "#fdf7f5"
+  },
+  "bronze-3": {
+    "$type": "color",
+    "$value": "#f6edea"
+  },
+  "bronze-4": {
+    "$type": "color",
+    "$value": "#efe4df"
+  },
+  "bronze-5": {
+    "$type": "color",
+    "$value": "#e7d9d3"
+  },
+  "bronze-6": {
+    "$type": "color",
+    "$value": "#dfcdc5"
+  },
+  "bronze-7": {
+    "$type": "color",
+    "$value": "#d3bcb3"
+  },
+  "bronze-8": {
+    "$type": "color",
+    "$value": "#c2a499"
+  },
+  "bronze-9": {
+    "$type": "color",
+    "$value": "#a18072"
+  },
+  "bronze-a1": {
+    "$type": "color",
+    "$value": "#55000003"
+  },
+  "bronze-a10": {
+    "$type": "color",
+    "$value": "#4c150097"
+  },
+  "bronze-a11": {
+    "$type": "color",
+    "$value": "#3d0f00ab"
+  },
+  "bronze-a12": {
+    "$type": "color",
+    "$value": "#1d0600d4"
+  },
+  "bronze-a2": {
+    "$type": "color",
+    "$value": "#cc33000a"
+  },
+  "bronze-a3": {
+    "$type": "color",
+    "$value": "#92250015"
+  },
+  "bronze-a4": {
+    "$type": "color",
+    "$value": "#80280020"
+  },
+  "bronze-a5": {
+    "$type": "color",
+    "$value": "#7423002c"
+  },
+  "bronze-a6": {
+    "$type": "color",
+    "$value": "#7324003a"
+  },
+  "bronze-a7": {
+    "$type": "color",
+    "$value": "#6c1f004c"
+  },
+  "bronze-a8": {
+    "$type": "color",
+    "$value": "#671c0066"
+  },
+  "bronze-a9": {
+    "$type": "color",
+    "$value": "#551a008d"
+  },
+  "bronze-contrast": {
+    "$type": "color",
+    "$value": "white"
+  },
+  "bronze-indicator": {
+    "$type": "color",
+    "$value": "#a18072",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--bronze-9)"
+      }
+    }
+  },
+  "bronze-surface": {
+    "$type": "color",
+    "$value": "#fdf5f3cc"
+  },
+  "bronze-track": {
+    "$type": "color",
+    "$value": "#a18072",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--bronze-9)"
+      }
+    }
+  },
+  "brown-1": {
+    "$type": "color",
+    "$value": "#fefdfc"
+  },
+  "brown-10": {
+    "$type": "color",
+    "$value": "#a07553"
+  },
+  "brown-11": {
+    "$type": "color",
+    "$value": "#815e46"
+  },
+  "brown-12": {
+    "$type": "color",
+    "$value": "#3e332e"
+  },
+  "brown-2": {
+    "$type": "color",
+    "$value": "#fcf9f6"
+  },
+  "brown-3": {
+    "$type": "color",
+    "$value": "#f6eee7"
+  },
+  "brown-4": {
+    "$type": "color",
+    "$value": "#f0e4d9"
+  },
+  "brown-5": {
+    "$type": "color",
+    "$value": "#ebdaca"
+  },
+  "brown-6": {
+    "$type": "color",
+    "$value": "#e4cdb7"
+  },
+  "brown-7": {
+    "$type": "color",
+    "$value": "#dcbc9f"
+  },
+  "brown-8": {
+    "$type": "color",
+    "$value": "#cea37e"
+  },
+  "brown-9": {
+    "$type": "color",
+    "$value": "#ad7f58"
+  },
+  "brown-a1": {
+    "$type": "color",
+    "$value": "#aa550003"
+  },
+  "brown-a10": {
+    "$type": "color",
+    "$value": "#723300ac"
+  },
+  "brown-a11": {
+    "$type": "color",
+    "$value": "#522100b9"
+  },
+  "brown-a12": {
+    "$type": "color",
+    "$value": "#140600d1"
+  },
+  "brown-a2": {
+    "$type": "color",
+    "$value": "#aa550009"
+  },
+  "brown-a3": {
+    "$type": "color",
+    "$value": "#a04b0018"
+  },
+  "brown-a4": {
+    "$type": "color",
+    "$value": "#9b4a0026"
+  },
+  "brown-a5": {
+    "$type": "color",
+    "$value": "#9f4d0035"
+  },
+  "brown-a6": {
+    "$type": "color",
+    "$value": "#a04e0048"
+  },
+  "brown-a7": {
+    "$type": "color",
+    "$value": "#a34e0060"
+  },
+  "brown-a8": {
+    "$type": "color",
+    "$value": "#9f4a0081"
+  },
+  "brown-a9": {
+    "$type": "color",
+    "$value": "#823c00a7"
+  },
+  "brown-contrast": {
+    "$type": "color",
+    "$value": "white"
+  },
+  "brown-indicator": {
+    "$type": "color",
+    "$value": "#ad7f58",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--brown-9)"
+      }
+    }
+  },
+  "brown-surface": {
+    "$type": "color",
+    "$value": "#fbf8f4cc"
+  },
+  "brown-track": {
+    "$type": "color",
+    "$value": "#ad7f58",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--brown-9)"
+      }
+    }
+  },
+  "code-font-family": {
+    "$type": "string",
+    "$value": "'Menlo', 'Consolas (Custom)', 'Bitstream Vera Sans Mono', monospace, 'Apple Color Emoji', 'Segoe UI Emoji'"
+  },
+  "code-font-size-adjust": {
+    "$type": "number",
+    "$value": "0.95"
+  },
+  "code-font-style": {
+    "$type": "string",
+    "$value": "normal"
+  },
+  "code-font-weight": {
+    "$type": "string",
+    "$value": "inherit"
+  },
+  "code-letter-spacing": {
+    "$type": "dimension",
+    "$value": "-0.007em"
+  },
+  "code-padding-bottom": {
+    "$type": "dimension",
+    "$value": "0.1em"
+  },
+  "code-padding-left": {
+    "$type": "dimension",
+    "$value": "0.25em"
+  },
+  "code-padding-right": {
+    "$type": "dimension",
+    "$value": "0.25em"
+  },
+  "code-padding-top": {
+    "$type": "dimension",
+    "$value": "0.1em"
+  },
+  "color-background": {
+    "$type": "color",
+    "$value": "white"
+  },
+  "color-overlay": {
+    "$type": "color",
+    "$value": "rgba(0, 0, 0, 0.4)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--black-a6)"
+      }
+    }
+  },
+  "color-panel": {
+    "$type": "color",
+    "$value": "rgba(255, 255, 255, 0.7)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--color-panel-translucent)"
+      }
+    }
+  },
+  "color-panel-solid": {
+    "$type": "color",
+    "$value": "white"
+  },
+  "color-panel-translucent": {
+    "$type": "color",
+    "$value": "rgba(255, 255, 255, 0.7)"
+  },
+  "color-surface": {
+    "$type": "color",
+    "$value": "rgba(255, 255, 255, 0.85)"
+  },
+  "color-transparent": {
+    "$type": "color",
+    "$value": "rgb(0 0 0 / 0)"
+  },
+  "container-1": {
+    "$type": "dimension",
+    "$value": "448px"
+  },
+  "container-2": {
+    "$type": "dimension",
+    "$value": "688px"
+  },
+  "container-3": {
+    "$type": "dimension",
+    "$value": "880px"
+  },
+  "container-4": {
+    "$type": "dimension",
+    "$value": "1136px"
+  },
+  "crimson-1": {
+    "$type": "color",
+    "$value": "#fffcfd"
+  },
+  "crimson-10": {
+    "$type": "color",
+    "$value": "#df3478"
+  },
+  "crimson-11": {
+    "$type": "color",
+    "$value": "#cb1d63"
+  },
+  "crimson-12": {
+    "$type": "color",
+    "$value": "#621639"
+  },
+  "crimson-2": {
+    "$type": "color",
+    "$value": "#fef7f9"
+  },
+  "crimson-3": {
+    "$type": "color",
+    "$value": "#ffe9f0"
+  },
+  "crimson-4": {
+    "$type": "color",
+    "$value": "#fedce7"
+  },
+  "crimson-5": {
+    "$type": "color",
+    "$value": "#facedd"
+  },
+  "crimson-6": {
+    "$type": "color",
+    "$value": "#f3bed1"
+  },
+  "crimson-7": {
+    "$type": "color",
+    "$value": "#eaacc3"
+  },
+  "crimson-8": {
+    "$type": "color",
+    "$value": "#e093b2"
+  },
+  "crimson-9": {
+    "$type": "color",
+    "$value": "#e93d82"
+  },
+  "crimson-a1": {
+    "$type": "color",
+    "$value": "#ff005503"
+  },
+  "crimson-a10": {
+    "$type": "color",
+    "$value": "#d70056cb"
+  },
+  "crimson-a11": {
+    "$type": "color",
+    "$value": "#c4004fe2"
+  },
+  "crimson-a12": {
+    "$type": "color",
+    "$value": "#530026e9"
+  },
+  "crimson-a2": {
+    "$type": "color",
+    "$value": "#e0004008"
+  },
+  "crimson-a3": {
+    "$type": "color",
+    "$value": "#ff005216"
+  },
+  "crimson-a4": {
+    "$type": "color",
+    "$value": "#f8005123"
+  },
+  "crimson-a5": {
+    "$type": "color",
+    "$value": "#e5004f31"
+  },
+  "crimson-a6": {
+    "$type": "color",
+    "$value": "#d0004b41"
+  },
+  "crimson-a7": {
+    "$type": "color",
+    "$value": "#bf004753"
+  },
+  "crimson-a8": {
+    "$type": "color",
+    "$value": "#b6004a6c"
+  },
+  "crimson-a9": {
+    "$type": "color",
+    "$value": "#e2005bc2"
+  },
+  "crimson-contrast": {
+    "$type": "color",
+    "$value": "white"
+  },
+  "crimson-indicator": {
+    "$type": "color",
+    "$value": "#e93d82",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--crimson-9)"
+      }
+    }
+  },
+  "crimson-surface": {
+    "$type": "color",
+    "$value": "#fef5f8cc"
+  },
+  "crimson-track": {
+    "$type": "color",
+    "$value": "#e93d82",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--crimson-9)"
+      }
+    }
+  },
+  "cursor-button": {
+    "$type": "string",
+    "$value": "default"
+  },
+  "cursor-checkbox": {
+    "$type": "string",
+    "$value": "default"
+  },
+  "cursor-disabled": {
+    "$type": "string",
+    "$value": "not-allowed"
+  },
+  "cursor-link": {
+    "$type": "string",
+    "$value": "pointer"
+  },
+  "cursor-menu-item": {
+    "$type": "string",
+    "$value": "default"
+  },
+  "cursor-radio": {
+    "$type": "string",
+    "$value": "default"
+  },
+  "cursor-slider-thumb": {
+    "$type": "string",
+    "$value": "default"
+  },
+  "cursor-slider-thumb-active": {
+    "$type": "string",
+    "$value": "default"
+  },
+  "cursor-switch": {
+    "$type": "string",
+    "$value": "default"
+  },
+  "cyan-1": {
+    "$type": "color",
+    "$value": "#fafdfe"
+  },
+  "cyan-10": {
+    "$type": "color",
+    "$value": "#0797b9"
+  },
+  "cyan-11": {
+    "$type": "color",
+    "$value": "#107d98"
+  },
+  "cyan-12": {
+    "$type": "color",
+    "$value": "#0d3c48"
+  },
+  "cyan-2": {
+    "$type": "color",
+    "$value": "#f2fafb"
+  },
+  "cyan-3": {
+    "$type": "color",
+    "$value": "#def7f9"
+  },
+  "cyan-4": {
+    "$type": "color",
+    "$value": "#caf1f6"
+  },
+  "cyan-5": {
+    "$type": "color",
+    "$value": "#b5e9f0"
+  },
+  "cyan-6": {
+    "$type": "color",
+    "$value": "#9ddde7"
+  },
+  "cyan-7": {
+    "$type": "color",
+    "$value": "#7dcedc"
+  },
+  "cyan-8": {
+    "$type": "color",
+    "$value": "#3db9cf"
+  },
+  "cyan-9": {
+    "$type": "color",
+    "$value": "#00a2c7"
+  },
+  "cyan-a1": {
+    "$type": "color",
+    "$value": "#0099cc05"
+  },
+  "cyan-a10": {
+    "$type": "color",
+    "$value": "#0094b7f8"
+  },
+  "cyan-a11": {
+    "$type": "color",
+    "$value": "#007491ef"
+  },
+  "cyan-a12": {
+    "$type": "color",
+    "$value": "#00323ef2"
+  },
+  "cyan-a2": {
+    "$type": "color",
+    "$value": "#009db10d"
+  },
+  "cyan-a3": {
+    "$type": "color",
+    "$value": "#00c2d121"
+  },
+  "cyan-a4": {
+    "$type": "color",
+    "$value": "#00bcd435"
+  },
+  "cyan-a5": {
+    "$type": "color",
+    "$value": "#01b4cc4a"
+  },
+  "cyan-a6": {
+    "$type": "color",
+    "$value": "#00a7c162"
+  },
+  "cyan-a7": {
+    "$type": "color",
+    "$value": "#009fbb82"
+  },
+  "cyan-a8": {
+    "$type": "color",
+    "$value": "#00a3c0c2"
+  },
+  "cyan-a9": {
+    "$type": "color",
+    "$value": "#00a2c7"
+  },
+  "cyan-contrast": {
+    "$type": "color",
+    "$value": "white"
+  },
+  "cyan-indicator": {
+    "$type": "color",
+    "$value": "#00a2c7",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--cyan-9)"
+      }
+    }
+  },
+  "cyan-surface": {
+    "$type": "color",
+    "$value": "#eff9facc"
+  },
+  "cyan-track": {
+    "$type": "color",
+    "$value": "#00a2c7",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--cyan-9)"
+      }
+    }
+  },
+  "default-font-family": {
+    "$type": "string",
+    "$value": "-apple-system, BlinkMacSystemFont, 'Segoe UI (Custom)', Roboto, 'Helvetica Neue', 'Open Sans (Custom)', system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
+  },
+  "default-font-size": {
+    "$type": "string",
+    "$value": "calc(16px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--font-size-3)"
+      }
+    }
+  },
+  "default-font-style": {
+    "$type": "string",
+    "$value": "normal"
+  },
+  "default-font-weight": {
+    "$type": "number",
+    "$value": "400",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--font-weight-regular)"
+      }
+    }
+  },
+  "default-leading-trim-end": {
+    "$type": "dimension",
+    "$value": "0.36em"
+  },
+  "default-leading-trim-start": {
+    "$type": "dimension",
+    "$value": "0.42em"
+  },
+  "default-letter-spacing": {
+    "$type": "dimension",
+    "$value": "0em"
+  },
+  "default-line-height": {
+    "$type": "number",
+    "$value": "1.5"
+  },
+  "em-font-family": {
+    "$type": "string",
+    "$value": "'Times New Roman', 'Times', serif"
+  },
+  "em-font-size-adjust": {
+    "$type": "number",
+    "$value": "1.18"
+  },
+  "em-font-style": {
+    "$type": "string",
+    "$value": "italic"
+  },
+  "em-font-weight": {
+    "$type": "string",
+    "$value": "inherit"
+  },
+  "em-letter-spacing": {
+    "$type": "dimension",
+    "$value": "-0.025em"
+  },
+  "font-size-1": {
+    "$type": "string",
+    "$value": "calc(12px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(12px * var(--scaling))"
+      }
+    }
+  },
+  "font-size-2": {
+    "$type": "string",
+    "$value": "calc(14px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(14px * var(--scaling))"
+      }
+    }
+  },
+  "font-size-3": {
+    "$type": "string",
+    "$value": "calc(16px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(16px * var(--scaling))"
+      }
+    }
+  },
+  "font-size-4": {
+    "$type": "string",
+    "$value": "calc(18px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(18px * var(--scaling))"
+      }
+    }
+  },
+  "font-size-5": {
+    "$type": "string",
+    "$value": "calc(20px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(20px * var(--scaling))"
+      }
+    }
+  },
+  "font-size-6": {
+    "$type": "string",
+    "$value": "calc(24px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(24px * var(--scaling))"
+      }
+    }
+  },
+  "font-size-7": {
+    "$type": "string",
+    "$value": "calc(28px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(28px * var(--scaling))"
+      }
+    }
+  },
+  "font-size-8": {
+    "$type": "string",
+    "$value": "calc(35px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(35px * var(--scaling))"
+      }
+    }
+  },
+  "font-size-9": {
+    "$type": "string",
+    "$value": "calc(60px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(60px * var(--scaling))"
+      }
+    }
+  },
+  "font-weight-bold": {
+    "$type": "number",
+    "$value": "700"
+  },
+  "font-weight-light": {
+    "$type": "number",
+    "$value": "300"
+  },
+  "font-weight-medium": {
+    "$type": "number",
+    "$value": "500"
+  },
+  "font-weight-regular": {
+    "$type": "number",
+    "$value": "400"
+  },
+  "gold-1": {
+    "$type": "color",
+    "$value": "#fdfdfc"
+  },
+  "gold-10": {
+    "$type": "color",
+    "$value": "#8c7a5e"
+  },
+  "gold-11": {
+    "$type": "color",
+    "$value": "#71624b"
+  },
+  "gold-12": {
+    "$type": "color",
+    "$value": "#3b352b"
+  },
+  "gold-2": {
+    "$type": "color",
+    "$value": "#faf9f2"
+  },
+  "gold-3": {
+    "$type": "color",
+    "$value": "#f2f0e7"
+  },
+  "gold-4": {
+    "$type": "color",
+    "$value": "#eae6db"
+  },
+  "gold-5": {
+    "$type": "color",
+    "$value": "#e1dccf"
+  },
+  "gold-6": {
+    "$type": "color",
+    "$value": "#d8d0bf"
+  },
+  "gold-7": {
+    "$type": "color",
+    "$value": "#cbc0aa"
+  },
+  "gold-8": {
+    "$type": "color",
+    "$value": "#b9a88d"
+  },
+  "gold-9": {
+    "$type": "color",
+    "$value": "#978365"
+  },
+  "gold-a1": {
+    "$type": "color",
+    "$value": "#55550003"
+  },
+  "gold-a10": {
+    "$type": "color",
+    "$value": "#492d00a1"
+  },
+  "gold-a11": {
+    "$type": "color",
+    "$value": "#362100b4"
+  },
+  "gold-a12": {
+    "$type": "color",
+    "$value": "#130c00d4"
+  },
+  "gold-a2": {
+    "$type": "color",
+    "$value": "#9d8a000d"
+  },
+  "gold-a3": {
+    "$type": "color",
+    "$value": "#75600018"
+  },
+  "gold-a4": {
+    "$type": "color",
+    "$value": "#6b4e0024"
+  },
+  "gold-a5": {
+    "$type": "color",
+    "$value": "#60460030"
+  },
+  "gold-a6": {
+    "$type": "color",
+    "$value": "#64440040"
+  },
+  "gold-a7": {
+    "$type": "color",
+    "$value": "#63420055"
+  },
+  "gold-a8": {
+    "$type": "color",
+    "$value": "#633d0072"
+  },
+  "gold-a9": {
+    "$type": "color",
+    "$value": "#5332009a"
+  },
+  "gold-contrast": {
+    "$type": "color",
+    "$value": "white"
+  },
+  "gold-indicator": {
+    "$type": "color",
+    "$value": "#978365",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--gold-9)"
+      }
+    }
+  },
+  "gold-surface": {
+    "$type": "color",
+    "$value": "#f9f8efcc"
+  },
+  "gold-track": {
+    "$type": "color",
+    "$value": "#978365",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--gold-9)"
+      }
+    }
+  },
+  "grass-1": {
+    "$type": "color",
+    "$value": "#fbfefb"
+  },
+  "grass-10": {
+    "$type": "color",
+    "$value": "#3e9b4f"
+  },
+  "grass-11": {
+    "$type": "color",
+    "$value": "#2a7e3b"
+  },
+  "grass-12": {
+    "$type": "color",
+    "$value": "#203c25"
+  },
+  "grass-2": {
+    "$type": "color",
+    "$value": "#f5fbf5"
+  },
+  "grass-3": {
+    "$type": "color",
+    "$value": "#e9f6e9"
+  },
+  "grass-4": {
+    "$type": "color",
+    "$value": "#daf1db"
+  },
+  "grass-5": {
+    "$type": "color",
+    "$value": "#c9e8ca"
+  },
+  "grass-6": {
+    "$type": "color",
+    "$value": "#b2ddb5"
+  },
+  "grass-7": {
+    "$type": "color",
+    "$value": "#94ce9a"
+  },
+  "grass-8": {
+    "$type": "color",
+    "$value": "#65ba74"
+  },
+  "grass-9": {
+    "$type": "color",
+    "$value": "#46a758"
+  },
+  "grass-a1": {
+    "$type": "color",
+    "$value": "#00c00004"
+  },
+  "grass-a10": {
+    "$type": "color",
+    "$value": "#007b17c1"
+  },
+  "grass-a11": {
+    "$type": "color",
+    "$value": "#006514d5"
+  },
+  "grass-a12": {
+    "$type": "color",
+    "$value": "#002006df"
+  },
+  "grass-a2": {
+    "$type": "color",
+    "$value": "#0099000a"
+  },
+  "grass-a3": {
+    "$type": "color",
+    "$value": "#00970016"
+  },
+  "grass-a4": {
+    "$type": "color",
+    "$value": "#009f0725"
+  },
+  "grass-a5": {
+    "$type": "color",
+    "$value": "#00930536"
+  },
+  "grass-a6": {
+    "$type": "color",
+    "$value": "#008f0a4d"
+  },
+  "grass-a7": {
+    "$type": "color",
+    "$value": "#018b0f6b"
+  },
+  "grass-a8": {
+    "$type": "color",
+    "$value": "#008d199a"
+  },
+  "grass-a9": {
+    "$type": "color",
+    "$value": "#008619b9"
+  },
+  "grass-contrast": {
+    "$type": "color",
+    "$value": "white"
+  },
+  "grass-indicator": {
+    "$type": "color",
+    "$value": "#46a758",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--grass-9)"
+      }
+    }
+  },
+  "grass-surface": {
+    "$type": "color",
+    "$value": "#f3faf3cc"
+  },
+  "grass-track": {
+    "$type": "color",
+    "$value": "#46a758",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--grass-9)"
+      }
+    }
+  },
+  "gray-1": {
+    "$type": "color",
+    "$value": "#fcfcfd",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--slate-1)"
+      }
+    }
+  },
+  "gray-10": {
+    "$type": "color",
+    "$value": "#80838d",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--slate-10)"
+      }
+    }
+  },
+  "gray-11": {
+    "$type": "color",
+    "$value": "#60646c",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--slate-11)"
+      }
+    }
+  },
+  "gray-12": {
+    "$type": "color",
+    "$value": "#1c2024",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--slate-12)"
+      }
+    }
+  },
+  "gray-2": {
+    "$type": "color",
+    "$value": "#f9f9fb",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--slate-2)"
+      }
+    }
+  },
+  "gray-3": {
+    "$type": "color",
+    "$value": "#f0f0f3",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--slate-3)"
+      }
+    }
+  },
+  "gray-4": {
+    "$type": "color",
+    "$value": "#e8e8ec",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--slate-4)"
+      }
+    }
+  },
+  "gray-5": {
+    "$type": "color",
+    "$value": "#e0e1e6",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--slate-5)"
+      }
+    }
+  },
+  "gray-6": {
+    "$type": "color",
+    "$value": "#d9d9e0",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--slate-6)"
+      }
+    }
+  },
+  "gray-7": {
+    "$type": "color",
+    "$value": "#cdced6",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--slate-7)"
+      }
+    }
+  },
+  "gray-8": {
+    "$type": "color",
+    "$value": "#b9bbc6",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--slate-8)"
+      }
+    }
+  },
+  "gray-9": {
+    "$type": "color",
+    "$value": "#8b8d98",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--slate-9)"
+      }
+    }
+  },
+  "gray-a1": {
+    "$type": "color",
+    "$value": "#00005503",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--slate-a1)"
+      }
+    }
+  },
+  "gray-a10": {
+    "$type": "color",
+    "$value": "#00071b7f",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--slate-a10)"
+      }
+    }
+  },
+  "gray-a11": {
+    "$type": "color",
+    "$value": "#0007149f",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--slate-a11)"
+      }
+    }
+  },
+  "gray-a12": {
+    "$type": "color",
+    "$value": "#000509e3",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--slate-a12)"
+      }
+    }
+  },
+  "gray-a2": {
+    "$type": "color",
+    "$value": "#00005506",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--slate-a2)"
+      }
+    }
+  },
+  "gray-a3": {
+    "$type": "color",
+    "$value": "#0000330f",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--slate-a3)"
+      }
+    }
+  },
+  "gray-a4": {
+    "$type": "color",
+    "$value": "#00002d17",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--slate-a4)"
+      }
+    }
+  },
+  "gray-a5": {
+    "$type": "color",
+    "$value": "#0009321f",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--slate-a5)"
+      }
+    }
+  },
+  "gray-a6": {
+    "$type": "color",
+    "$value": "#00002f26",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--slate-a6)"
+      }
+    }
+  },
+  "gray-a7": {
+    "$type": "color",
+    "$value": "#00062e32",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--slate-a7)"
+      }
+    }
+  },
+  "gray-a8": {
+    "$type": "color",
+    "$value": "#00083046",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--slate-a8)"
+      }
+    }
+  },
+  "gray-a9": {
+    "$type": "color",
+    "$value": "#00051d74",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--slate-a9)"
+      }
+    }
+  },
+  "gray-contrast": {
+    "$type": "color",
+    "$value": "white",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--slate-contrast)"
+      }
+    }
+  },
+  "gray-indicator": {
+    "$type": "color",
+    "$value": "#8b8d98",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--slate-indicator)"
+      }
+    }
+  },
+  "gray-surface": {
+    "$type": "color",
+    "$value": "#ffffffcc",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--slate-surface)"
+      }
+    }
+  },
+  "gray-track": {
+    "$type": "color",
+    "$value": "#8b8d98",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--slate-track)"
+      }
+    }
+  },
+  "green-1": {
+    "$type": "color",
+    "$value": "#fbfefc"
+  },
+  "green-10": {
+    "$type": "color",
+    "$value": "#2b9a66"
+  },
+  "green-11": {
+    "$type": "color",
+    "$value": "#218358"
+  },
+  "green-12": {
+    "$type": "color",
+    "$value": "#193b2d"
+  },
+  "green-2": {
+    "$type": "color",
+    "$value": "#f4fbf6"
+  },
+  "green-3": {
+    "$type": "color",
+    "$value": "#e6f6eb"
+  },
+  "green-4": {
+    "$type": "color",
+    "$value": "#d6f1df"
+  },
+  "green-5": {
+    "$type": "color",
+    "$value": "#c4e8d1"
+  },
+  "green-6": {
+    "$type": "color",
+    "$value": "#adddc0"
+  },
+  "green-7": {
+    "$type": "color",
+    "$value": "#8eceaa"
+  },
+  "green-8": {
+    "$type": "color",
+    "$value": "#5bb98b"
+  },
+  "green-9": {
+    "$type": "color",
+    "$value": "#30a46c"
+  },
+  "green-a1": {
+    "$type": "color",
+    "$value": "#00c04004"
+  },
+  "green-a10": {
+    "$type": "color",
+    "$value": "#008647d4"
+  },
+  "green-a11": {
+    "$type": "color",
+    "$value": "#00713fde"
+  },
+  "green-a12": {
+    "$type": "color",
+    "$value": "#002616e6"
+  },
+  "green-a2": {
+    "$type": "color",
+    "$value": "#00a32f0b"
+  },
+  "green-a3": {
+    "$type": "color",
+    "$value": "#00a43319"
+  },
+  "green-a4": {
+    "$type": "color",
+    "$value": "#00a83829"
+  },
+  "green-a5": {
+    "$type": "color",
+    "$value": "#019c393b"
+  },
+  "green-a6": {
+    "$type": "color",
+    "$value": "#00963c52"
+  },
+  "green-a7": {
+    "$type": "color",
+    "$value": "#00914071"
+  },
+  "green-a8": {
+    "$type": "color",
+    "$value": "#00924ba4"
+  },
+  "green-a9": {
+    "$type": "color",
+    "$value": "#008f4acf"
+  },
+  "green-contrast": {
+    "$type": "color",
+    "$value": "white"
+  },
+  "green-indicator": {
+    "$type": "color",
+    "$value": "#30a46c",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--green-9)"
+      }
+    }
+  },
+  "green-surface": {
+    "$type": "color",
+    "$value": "#f1faf4cc"
+  },
+  "green-track": {
+    "$type": "color",
+    "$value": "#30a46c",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--green-9)"
+      }
+    }
+  },
+  "heading-font-family": {
+    "$type": "string",
+    "$value": "-apple-system, BlinkMacSystemFont, 'Segoe UI (Custom)', Roboto, 'Helvetica Neue', 'Open Sans (Custom)', system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--default-font-family)"
+      }
+    }
+  },
+  "heading-font-size-adjust": {
+    "$type": "number",
+    "$value": "1"
+  },
+  "heading-font-style": {
+    "$type": "string",
+    "$value": "normal"
+  },
+  "heading-leading-trim-end": {
+    "$type": "dimension",
+    "$value": "0.36em",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--default-leading-trim-end)"
+      }
+    }
+  },
+  "heading-leading-trim-start": {
+    "$type": "dimension",
+    "$value": "0.42em",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--default-leading-trim-start)"
+      }
+    }
+  },
+  "heading-letter-spacing": {
+    "$type": "dimension",
+    "$value": "0em"
+  },
+  "heading-line-height-1": {
+    "$type": "string",
+    "$value": "calc(16px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(16px * var(--scaling))"
+      }
+    }
+  },
+  "heading-line-height-2": {
+    "$type": "string",
+    "$value": "calc(18px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(18px * var(--scaling))"
+      }
+    }
+  },
+  "heading-line-height-3": {
+    "$type": "string",
+    "$value": "calc(22px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(22px * var(--scaling))"
+      }
+    }
+  },
+  "heading-line-height-4": {
+    "$type": "string",
+    "$value": "calc(24px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(24px * var(--scaling))"
+      }
+    }
+  },
+  "heading-line-height-5": {
+    "$type": "string",
+    "$value": "calc(26px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(26px * var(--scaling))"
+      }
+    }
+  },
+  "heading-line-height-6": {
+    "$type": "string",
+    "$value": "calc(30px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(30px * var(--scaling))"
+      }
+    }
+  },
+  "heading-line-height-7": {
+    "$type": "string",
+    "$value": "calc(36px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(36px * var(--scaling))"
+      }
+    }
+  },
+  "heading-line-height-8": {
+    "$type": "string",
+    "$value": "calc(40px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(40px * var(--scaling))"
+      }
+    }
+  },
+  "heading-line-height-9": {
+    "$type": "string",
+    "$value": "calc(60px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(60px * var(--scaling))"
+      }
+    }
+  },
+  "indigo-1": {
+    "$type": "color",
+    "$value": "#fdfdfe"
+  },
+  "indigo-10": {
+    "$type": "color",
+    "$value": "#3358d4"
+  },
+  "indigo-11": {
+    "$type": "color",
+    "$value": "#3a5bc7"
+  },
+  "indigo-12": {
+    "$type": "color",
+    "$value": "#1f2d5c"
+  },
+  "indigo-2": {
+    "$type": "color",
+    "$value": "#f7f9ff"
+  },
+  "indigo-3": {
+    "$type": "color",
+    "$value": "#edf2fe"
+  },
+  "indigo-4": {
+    "$type": "color",
+    "$value": "#e1e9ff"
+  },
+  "indigo-5": {
+    "$type": "color",
+    "$value": "#d2deff"
+  },
+  "indigo-6": {
+    "$type": "color",
+    "$value": "#c1d0ff"
+  },
+  "indigo-7": {
+    "$type": "color",
+    "$value": "#abbdf9"
+  },
+  "indigo-8": {
+    "$type": "color",
+    "$value": "#8da4ef"
+  },
+  "indigo-9": {
+    "$type": "color",
+    "$value": "#3e63dd"
+  },
+  "indigo-a1": {
+    "$type": "color",
+    "$value": "#00008002"
+  },
+  "indigo-a10": {
+    "$type": "color",
+    "$value": "#002ec9cc"
+  },
+  "indigo-a11": {
+    "$type": "color",
+    "$value": "#002bb7c5"
+  },
+  "indigo-a12": {
+    "$type": "color",
+    "$value": "#001046e0"
+  },
+  "indigo-a2": {
+    "$type": "color",
+    "$value": "#0040ff08"
+  },
+  "indigo-a3": {
+    "$type": "color",
+    "$value": "#0047f112"
+  },
+  "indigo-a4": {
+    "$type": "color",
+    "$value": "#0044ff1e"
+  },
+  "indigo-a5": {
+    "$type": "color",
+    "$value": "#0044ff2d"
+  },
+  "indigo-a6": {
+    "$type": "color",
+    "$value": "#003eff3e"
+  },
+  "indigo-a7": {
+    "$type": "color",
+    "$value": "#0037ed54"
+  },
+  "indigo-a8": {
+    "$type": "color",
+    "$value": "#0034dc72"
+  },
+  "indigo-a9": {
+    "$type": "color",
+    "$value": "#0031d2c1"
+  },
+  "indigo-contrast": {
+    "$type": "color",
+    "$value": "white"
+  },
+  "indigo-indicator": {
+    "$type": "color",
+    "$value": "#3e63dd",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--indigo-9)"
+      }
+    }
+  },
+  "indigo-surface": {
+    "$type": "color",
+    "$value": "#f5f8ffcc"
+  },
+  "indigo-track": {
+    "$type": "color",
+    "$value": "#3e63dd",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--indigo-9)"
+      }
+    }
+  },
+  "iris-1": {
+    "$type": "color",
+    "$value": "#fdfdff"
+  },
+  "iris-10": {
+    "$type": "color",
+    "$value": "#5151cd"
+  },
+  "iris-11": {
+    "$type": "color",
+    "$value": "#5753c6"
+  },
+  "iris-12": {
+    "$type": "color",
+    "$value": "#272962"
+  },
+  "iris-2": {
+    "$type": "color",
+    "$value": "#f8f8ff"
+  },
+  "iris-3": {
+    "$type": "color",
+    "$value": "#f0f1fe"
+  },
+  "iris-4": {
+    "$type": "color",
+    "$value": "#e6e7ff"
+  },
+  "iris-5": {
+    "$type": "color",
+    "$value": "#dadcff"
+  },
+  "iris-6": {
+    "$type": "color",
+    "$value": "#cbcdff"
+  },
+  "iris-7": {
+    "$type": "color",
+    "$value": "#b8baf8"
+  },
+  "iris-8": {
+    "$type": "color",
+    "$value": "#9b9ef0"
+  },
+  "iris-9": {
+    "$type": "color",
+    "$value": "#5b5bd6"
+  },
+  "iris-a1": {
+    "$type": "color",
+    "$value": "#0000ff02"
+  },
+  "iris-a10": {
+    "$type": "color",
+    "$value": "#0000b6ae"
+  },
+  "iris-a11": {
+    "$type": "color",
+    "$value": "#0600abac"
+  },
+  "iris-a12": {
+    "$type": "color",
+    "$value": "#000246d8"
+  },
+  "iris-a2": {
+    "$type": "color",
+    "$value": "#0000ff07"
+  },
+  "iris-a3": {
+    "$type": "color",
+    "$value": "#0011ee0f"
+  },
+  "iris-a4": {
+    "$type": "color",
+    "$value": "#000bff19"
+  },
+  "iris-a5": {
+    "$type": "color",
+    "$value": "#000eff25"
+  },
+  "iris-a6": {
+    "$type": "color",
+    "$value": "#000aff34"
+  },
+  "iris-a7": {
+    "$type": "color",
+    "$value": "#0008e647"
+  },
+  "iris-a8": {
+    "$type": "color",
+    "$value": "#0008d964"
+  },
+  "iris-a9": {
+    "$type": "color",
+    "$value": "#0000c0a4"
+  },
+  "iris-contrast": {
+    "$type": "color",
+    "$value": "white"
+  },
+  "iris-indicator": {
+    "$type": "color",
+    "$value": "#5b5bd6",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--iris-9)"
+      }
+    }
+  },
+  "iris-surface": {
+    "$type": "color",
+    "$value": "#f6f6ffcc"
+  },
+  "iris-track": {
+    "$type": "color",
+    "$value": "#5b5bd6",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--iris-9)"
+      }
+    }
+  },
+  "jade-1": {
+    "$type": "color",
+    "$value": "#fbfefd"
+  },
+  "jade-10": {
+    "$type": "color",
+    "$value": "#26997b"
+  },
+  "jade-11": {
+    "$type": "color",
+    "$value": "#208368"
+  },
+  "jade-12": {
+    "$type": "color",
+    "$value": "#1d3b31"
+  },
+  "jade-2": {
+    "$type": "color",
+    "$value": "#f4fbf7"
+  },
+  "jade-3": {
+    "$type": "color",
+    "$value": "#e6f7ed"
+  },
+  "jade-4": {
+    "$type": "color",
+    "$value": "#d6f1e3"
+  },
+  "jade-5": {
+    "$type": "color",
+    "$value": "#c3e9d7"
+  },
+  "jade-6": {
+    "$type": "color",
+    "$value": "#acdec8"
+  },
+  "jade-7": {
+    "$type": "color",
+    "$value": "#8bceb6"
+  },
+  "jade-8": {
+    "$type": "color",
+    "$value": "#56ba9f"
+  },
+  "jade-9": {
+    "$type": "color",
+    "$value": "#29a383"
+  },
+  "jade-a1": {
+    "$type": "color",
+    "$value": "#00c08004"
+  },
+  "jade-a10": {
+    "$type": "color",
+    "$value": "#008764d9"
+  },
+  "jade-a11": {
+    "$type": "color",
+    "$value": "#007152df"
+  },
+  "jade-a12": {
+    "$type": "color",
+    "$value": "#002217e2"
+  },
+  "jade-a2": {
+    "$type": "color",
+    "$value": "#00a3460b"
+  },
+  "jade-a3": {
+    "$type": "color",
+    "$value": "#00ae4819"
+  },
+  "jade-a4": {
+    "$type": "color",
+    "$value": "#00a85129"
+  },
+  "jade-a5": {
+    "$type": "color",
+    "$value": "#00a2553c"
+  },
+  "jade-a6": {
+    "$type": "color",
+    "$value": "#009a5753"
+  },
+  "jade-a7": {
+    "$type": "color",
+    "$value": "#00945f74"
+  },
+  "jade-a8": {
+    "$type": "color",
+    "$value": "#00976ea9"
+  },
+  "jade-a9": {
+    "$type": "color",
+    "$value": "#00916bd6"
+  },
+  "jade-contrast": {
+    "$type": "color",
+    "$value": "white"
+  },
+  "jade-indicator": {
+    "$type": "color",
+    "$value": "#29a383",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--jade-9)"
+      }
+    }
+  },
+  "jade-surface": {
+    "$type": "color",
+    "$value": "#f1faf5cc"
+  },
+  "jade-track": {
+    "$type": "color",
+    "$value": "#29a383",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--jade-9)"
+      }
+    }
+  },
+  "kbd-box-shadow": {
+    "$type": "string",
+    "$value": "inset 0 -0.05em 0.5em #00005506, inset 0 0.05em rgba(255, 255, 255, 0.95), inset 0 0.25em 0.5em #00005506, inset 0 -0.05em #00002f26, 0 0 0 0.05em #0009321f, 0 0.08em 0.17em #00062e32",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "inset 0 -0.05em 0.5em var(--gray-a2), inset 0 0.05em var(--white-a12), inset 0 0.25em 0.5em var(--gray-a2), inset 0 -0.05em var(--gray-a6), 0 0 0 0.05em var(--gray-a5), 0 0.08em 0.17em var(--gray-a7)"
+      }
+    }
+  },
+  "letter-spacing-1": {
+    "$type": "dimension",
+    "$value": "0.0025em"
+  },
+  "letter-spacing-2": {
+    "$type": "dimension",
+    "$value": "0em"
+  },
+  "letter-spacing-3": {
+    "$type": "dimension",
+    "$value": "0em"
+  },
+  "letter-spacing-4": {
+    "$type": "dimension",
+    "$value": "-0.0025em"
+  },
+  "letter-spacing-5": {
+    "$type": "dimension",
+    "$value": "-0.005em"
+  },
+  "letter-spacing-6": {
+    "$type": "dimension",
+    "$value": "-0.00625em"
+  },
+  "letter-spacing-7": {
+    "$type": "dimension",
+    "$value": "-0.0075em"
+  },
+  "letter-spacing-8": {
+    "$type": "dimension",
+    "$value": "-0.01em"
+  },
+  "letter-spacing-9": {
+    "$type": "dimension",
+    "$value": "-0.025em"
+  },
+  "lime-1": {
+    "$type": "color",
+    "$value": "#fcfdfa"
+  },
+  "lime-10": {
+    "$type": "color",
+    "$value": "#b0e64c"
+  },
+  "lime-11": {
+    "$type": "color",
+    "$value": "#5c7c2f"
+  },
+  "lime-12": {
+    "$type": "color",
+    "$value": "#37401c"
+  },
+  "lime-2": {
+    "$type": "color",
+    "$value": "#f8faf3"
+  },
+  "lime-3": {
+    "$type": "color",
+    "$value": "#eef6d6"
+  },
+  "lime-4": {
+    "$type": "color",
+    "$value": "#e2f0bd"
+  },
+  "lime-5": {
+    "$type": "color",
+    "$value": "#d3e7a6"
+  },
+  "lime-6": {
+    "$type": "color",
+    "$value": "#c2da91"
+  },
+  "lime-7": {
+    "$type": "color",
+    "$value": "#abc978"
+  },
+  "lime-8": {
+    "$type": "color",
+    "$value": "#8db654"
+  },
+  "lime-9": {
+    "$type": "color",
+    "$value": "#bdee63"
+  },
+  "lime-a1": {
+    "$type": "color",
+    "$value": "#66990005"
+  },
+  "lime-a10": {
+    "$type": "color",
+    "$value": "#8fdc00b3"
+  },
+  "lime-a11": {
+    "$type": "color",
+    "$value": "#375f00d0"
+  },
+  "lime-a12": {
+    "$type": "color",
+    "$value": "#1e2900e3"
+  },
+  "lime-a2": {
+    "$type": "color",
+    "$value": "#6b95000c"
+  },
+  "lime-a3": {
+    "$type": "color",
+    "$value": "#96c80029"
+  },
+  "lime-a4": {
+    "$type": "color",
+    "$value": "#8fc60042"
+  },
+  "lime-a5": {
+    "$type": "color",
+    "$value": "#81bb0059"
+  },
+  "lime-a6": {
+    "$type": "color",
+    "$value": "#72aa006e"
+  },
+  "lime-a7": {
+    "$type": "color",
+    "$value": "#61990087"
+  },
+  "lime-a8": {
+    "$type": "color",
+    "$value": "#559200ab"
+  },
+  "lime-a9": {
+    "$type": "color",
+    "$value": "#93e4009c"
+  },
+  "lime-contrast": {
+    "$type": "color",
+    "$value": "#1d211c"
+  },
+  "lime-indicator": {
+    "$type": "color",
+    "$value": "#bdee63",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--lime-9)"
+      }
+    }
+  },
+  "lime-surface": {
+    "$type": "color",
+    "$value": "#f6f9f0cc"
+  },
+  "lime-track": {
+    "$type": "color",
+    "$value": "#bdee63",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--lime-9)"
+      }
+    }
+  },
+  "line-height-1": {
+    "$type": "string",
+    "$value": "calc(16px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(16px * var(--scaling))"
+      }
+    }
+  },
+  "line-height-2": {
+    "$type": "string",
+    "$value": "calc(20px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(20px * var(--scaling))"
+      }
+    }
+  },
+  "line-height-3": {
+    "$type": "string",
+    "$value": "calc(24px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(24px * var(--scaling))"
+      }
+    }
+  },
+  "line-height-4": {
+    "$type": "string",
+    "$value": "calc(26px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(26px * var(--scaling))"
+      }
+    }
+  },
+  "line-height-5": {
+    "$type": "string",
+    "$value": "calc(28px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(28px * var(--scaling))"
+      }
+    }
+  },
+  "line-height-6": {
+    "$type": "string",
+    "$value": "calc(30px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(30px * var(--scaling))"
+      }
+    }
+  },
+  "line-height-7": {
+    "$type": "string",
+    "$value": "calc(36px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(36px * var(--scaling))"
+      }
+    }
+  },
+  "line-height-8": {
+    "$type": "string",
+    "$value": "calc(40px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(40px * var(--scaling))"
+      }
+    }
+  },
+  "line-height-9": {
+    "$type": "string",
+    "$value": "calc(60px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(60px * var(--scaling))"
+      }
+    }
+  },
+  "mauve-1": {
+    "$type": "color",
+    "$value": "#fdfcfd"
+  },
+  "mauve-10": {
+    "$type": "color",
+    "$value": "#84828e"
+  },
+  "mauve-11": {
+    "$type": "color",
+    "$value": "#65636d"
+  },
+  "mauve-12": {
+    "$type": "color",
+    "$value": "#211f26"
+  },
+  "mauve-2": {
+    "$type": "color",
+    "$value": "#faf9fb"
+  },
+  "mauve-3": {
+    "$type": "color",
+    "$value": "#f2eff3"
+  },
+  "mauve-4": {
+    "$type": "color",
+    "$value": "#eae7ec"
+  },
+  "mauve-5": {
+    "$type": "color",
+    "$value": "#e3dfe6"
+  },
+  "mauve-6": {
+    "$type": "color",
+    "$value": "#dbd8e0"
+  },
+  "mauve-7": {
+    "$type": "color",
+    "$value": "#d0cdd7"
+  },
+  "mauve-8": {
+    "$type": "color",
+    "$value": "#bcbac7"
+  },
+  "mauve-9": {
+    "$type": "color",
+    "$value": "#8e8c99"
+  },
+  "mauve-a1": {
+    "$type": "color",
+    "$value": "#55005503"
+  },
+  "mauve-a10": {
+    "$type": "color",
+    "$value": "#0500197d"
+  },
+  "mauve-a11": {
+    "$type": "color",
+    "$value": "#0400119c"
+  },
+  "mauve-a12": {
+    "$type": "color",
+    "$value": "#020008e0"
+  },
+  "mauve-a2": {
+    "$type": "color",
+    "$value": "#2b005506"
+  },
+  "mauve-a3": {
+    "$type": "color",
+    "$value": "#30004010"
+  },
+  "mauve-a4": {
+    "$type": "color",
+    "$value": "#20003618"
+  },
+  "mauve-a5": {
+    "$type": "color",
+    "$value": "#20003820"
+  },
+  "mauve-a6": {
+    "$type": "color",
+    "$value": "#14003527"
+  },
+  "mauve-a7": {
+    "$type": "color",
+    "$value": "#10003332"
+  },
+  "mauve-a8": {
+    "$type": "color",
+    "$value": "#08003145"
+  },
+  "mauve-a9": {
+    "$type": "color",
+    "$value": "#05001d73"
+  },
+  "mauve-contrast": {
+    "$type": "color",
+    "$value": "white"
+  },
+  "mauve-indicator": {
+    "$type": "color",
+    "$value": "#8e8c99",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--mauve-9)"
+      }
+    }
+  },
+  "mauve-surface": {
+    "$type": "color",
+    "$value": "#ffffffcc"
+  },
+  "mauve-track": {
+    "$type": "color",
+    "$value": "#8e8c99",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--mauve-9)"
+      }
+    }
+  },
+  "mint-1": {
+    "$type": "color",
+    "$value": "#f9fefd"
+  },
+  "mint-10": {
+    "$type": "color",
+    "$value": "#7de0cb"
+  },
+  "mint-11": {
+    "$type": "color",
+    "$value": "#027864"
+  },
+  "mint-12": {
+    "$type": "color",
+    "$value": "#16433c"
+  },
+  "mint-2": {
+    "$type": "color",
+    "$value": "#f2fbf9"
+  },
+  "mint-3": {
+    "$type": "color",
+    "$value": "#ddf9f2"
+  },
+  "mint-4": {
+    "$type": "color",
+    "$value": "#c8f4e9"
+  },
+  "mint-5": {
+    "$type": "color",
+    "$value": "#b3ecde"
+  },
+  "mint-6": {
+    "$type": "color",
+    "$value": "#9ce0d0"
+  },
+  "mint-7": {
+    "$type": "color",
+    "$value": "#7ecfbd"
+  },
+  "mint-8": {
+    "$type": "color",
+    "$value": "#4cbba5"
+  },
+  "mint-9": {
+    "$type": "color",
+    "$value": "#86ead4"
+  },
+  "mint-a1": {
+    "$type": "color",
+    "$value": "#00d5aa06"
+  },
+  "mint-a10": {
+    "$type": "color",
+    "$value": "#00c39982"
+  },
+  "mint-a11": {
+    "$type": "color",
+    "$value": "#007763fd"
+  },
+  "mint-a12": {
+    "$type": "color",
+    "$value": "#00312ae9"
+  },
+  "mint-a2": {
+    "$type": "color",
+    "$value": "#00b18a0d"
+  },
+  "mint-a3": {
+    "$type": "color",
+    "$value": "#00d29e22"
+  },
+  "mint-a4": {
+    "$type": "color",
+    "$value": "#00cc9937"
+  },
+  "mint-a5": {
+    "$type": "color",
+    "$value": "#00c0914c"
+  },
+  "mint-a6": {
+    "$type": "color",
+    "$value": "#00b08663"
+  },
+  "mint-a7": {
+    "$type": "color",
+    "$value": "#00a17d81"
+  },
+  "mint-a8": {
+    "$type": "color",
+    "$value": "#009e7fb3"
+  },
+  "mint-a9": {
+    "$type": "color",
+    "$value": "#00d3a579"
+  },
+  "mint-contrast": {
+    "$type": "color",
+    "$value": "#1a211e"
+  },
+  "mint-indicator": {
+    "$type": "color",
+    "$value": "#86ead4",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--mint-9)"
+      }
+    }
+  },
+  "mint-surface": {
+    "$type": "color",
+    "$value": "#effaf8cc"
+  },
+  "mint-track": {
+    "$type": "color",
+    "$value": "#86ead4",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--mint-9)"
+      }
+    }
+  },
+  "olive-1": {
+    "$type": "color",
+    "$value": "#fcfdfc"
+  },
+  "olive-10": {
+    "$type": "color",
+    "$value": "#7f847d"
+  },
+  "olive-11": {
+    "$type": "color",
+    "$value": "#60655f"
+  },
+  "olive-12": {
+    "$type": "color",
+    "$value": "#1d211c"
+  },
+  "olive-2": {
+    "$type": "color",
+    "$value": "#f8faf8"
+  },
+  "olive-3": {
+    "$type": "color",
+    "$value": "#eff1ef"
+  },
+  "olive-4": {
+    "$type": "color",
+    "$value": "#e7e9e7"
+  },
+  "olive-5": {
+    "$type": "color",
+    "$value": "#dfe2df"
+  },
+  "olive-6": {
+    "$type": "color",
+    "$value": "#d7dad7"
+  },
+  "olive-7": {
+    "$type": "color",
+    "$value": "#cccfcc"
+  },
+  "olive-8": {
+    "$type": "color",
+    "$value": "#b9bcb8"
+  },
+  "olive-9": {
+    "$type": "color",
+    "$value": "#898e87"
+  },
+  "olive-a1": {
+    "$type": "color",
+    "$value": "#00550003"
+  },
+  "olive-a10": {
+    "$type": "color",
+    "$value": "#040e0082"
+  },
+  "olive-a11": {
+    "$type": "color",
+    "$value": "#020a00a0"
+  },
+  "olive-a12": {
+    "$type": "color",
+    "$value": "#010600e3"
+  },
+  "olive-a2": {
+    "$type": "color",
+    "$value": "#00490007"
+  },
+  "olive-a3": {
+    "$type": "color",
+    "$value": "#00200010"
+  },
+  "olive-a4": {
+    "$type": "color",
+    "$value": "#00160018"
+  },
+  "olive-a5": {
+    "$type": "color",
+    "$value": "#00180020"
+  },
+  "olive-a6": {
+    "$type": "color",
+    "$value": "#00140028"
+  },
+  "olive-a7": {
+    "$type": "color",
+    "$value": "#000f0033"
+  },
+  "olive-a8": {
+    "$type": "color",
+    "$value": "#040f0047"
+  },
+  "olive-a9": {
+    "$type": "color",
+    "$value": "#050f0078"
+  },
+  "olive-contrast": {
+    "$type": "color",
+    "$value": "white"
+  },
+  "olive-indicator": {
+    "$type": "color",
+    "$value": "#898e87",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--olive-9)"
+      }
+    }
+  },
+  "olive-surface": {
+    "$type": "color",
+    "$value": "#ffffffcc"
+  },
+  "olive-track": {
+    "$type": "color",
+    "$value": "#898e87",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--olive-9)"
+      }
+    }
+  },
+  "orange-1": {
+    "$type": "color",
+    "$value": "#fefcfb"
+  },
+  "orange-10": {
+    "$type": "color",
+    "$value": "#ef5f00"
+  },
+  "orange-11": {
+    "$type": "color",
+    "$value": "#cc4e00"
+  },
+  "orange-12": {
+    "$type": "color",
+    "$value": "#582d1d"
+  },
+  "orange-2": {
+    "$type": "color",
+    "$value": "#fff7ed"
+  },
+  "orange-3": {
+    "$type": "color",
+    "$value": "#ffefd6"
+  },
+  "orange-4": {
+    "$type": "color",
+    "$value": "#ffdfb5"
+  },
+  "orange-5": {
+    "$type": "color",
+    "$value": "#ffd19a"
+  },
+  "orange-6": {
+    "$type": "color",
+    "$value": "#ffc182"
+  },
+  "orange-7": {
+    "$type": "color",
+    "$value": "#f5ae73"
+  },
+  "orange-8": {
+    "$type": "color",
+    "$value": "#ec9455"
+  },
+  "orange-9": {
+    "$type": "color",
+    "$value": "#f76b15"
+  },
+  "orange-a1": {
+    "$type": "color",
+    "$value": "#c0400004"
+  },
+  "orange-a10": {
+    "$type": "color",
+    "$value": "#ef5f00"
+  },
+  "orange-a11": {
+    "$type": "color",
+    "$value": "#cc4e00"
+  },
+  "orange-a12": {
+    "$type": "color",
+    "$value": "#431200e2"
+  },
+  "orange-a2": {
+    "$type": "color",
+    "$value": "#ff8e0012"
+  },
+  "orange-a3": {
+    "$type": "color",
+    "$value": "#ff9c0029"
+  },
+  "orange-a4": {
+    "$type": "color",
+    "$value": "#ff91014a"
+  },
+  "orange-a5": {
+    "$type": "color",
+    "$value": "#ff8b0065"
+  },
+  "orange-a6": {
+    "$type": "color",
+    "$value": "#ff81007d"
+  },
+  "orange-a7": {
+    "$type": "color",
+    "$value": "#ed6c008c"
+  },
+  "orange-a8": {
+    "$type": "color",
+    "$value": "#e35f00aa"
+  },
+  "orange-a9": {
+    "$type": "color",
+    "$value": "#f65e00ea"
+  },
+  "orange-contrast": {
+    "$type": "color",
+    "$value": "white"
+  },
+  "orange-indicator": {
+    "$type": "color",
+    "$value": "#f76b15",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--orange-9)"
+      }
+    }
+  },
+  "orange-surface": {
+    "$type": "color",
+    "$value": "#fff5e9cc"
+  },
+  "orange-track": {
+    "$type": "color",
+    "$value": "#f76b15",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--orange-9)"
+      }
+    }
+  },
+  "pink-1": {
+    "$type": "color",
+    "$value": "#fffcfe"
+  },
+  "pink-10": {
+    "$type": "color",
+    "$value": "#cf3897"
+  },
+  "pink-11": {
+    "$type": "color",
+    "$value": "#c2298a"
+  },
+  "pink-12": {
+    "$type": "color",
+    "$value": "#651249"
+  },
+  "pink-2": {
+    "$type": "color",
+    "$value": "#fef7fb"
+  },
+  "pink-3": {
+    "$type": "color",
+    "$value": "#fee9f5"
+  },
+  "pink-4": {
+    "$type": "color",
+    "$value": "#fbdcef"
+  },
+  "pink-5": {
+    "$type": "color",
+    "$value": "#f6cee7"
+  },
+  "pink-6": {
+    "$type": "color",
+    "$value": "#efbfdd"
+  },
+  "pink-7": {
+    "$type": "color",
+    "$value": "#e7acd0"
+  },
+  "pink-8": {
+    "$type": "color",
+    "$value": "#dd93c2"
+  },
+  "pink-9": {
+    "$type": "color",
+    "$value": "#d6409f"
+  },
+  "pink-a1": {
+    "$type": "color",
+    "$value": "#ff00aa03"
+  },
+  "pink-a10": {
+    "$type": "color",
+    "$value": "#c2007ac7"
+  },
+  "pink-a11": {
+    "$type": "color",
+    "$value": "#b60074d6"
+  },
+  "pink-a12": {
+    "$type": "color",
+    "$value": "#59003bed"
+  },
+  "pink-a2": {
+    "$type": "color",
+    "$value": "#e0008008"
+  },
+  "pink-a3": {
+    "$type": "color",
+    "$value": "#f4008c16"
+  },
+  "pink-a4": {
+    "$type": "color",
+    "$value": "#e2008b23"
+  },
+  "pink-a5": {
+    "$type": "color",
+    "$value": "#d1008331"
+  },
+  "pink-a6": {
+    "$type": "color",
+    "$value": "#c0007840"
+  },
+  "pink-a7": {
+    "$type": "color",
+    "$value": "#b6006f53"
+  },
+  "pink-a8": {
+    "$type": "color",
+    "$value": "#af006f6c"
+  },
+  "pink-a9": {
+    "$type": "color",
+    "$value": "#c8007fbf"
+  },
+  "pink-contrast": {
+    "$type": "color",
+    "$value": "white"
+  },
+  "pink-indicator": {
+    "$type": "color",
+    "$value": "#d6409f",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--pink-9)"
+      }
+    }
+  },
+  "pink-surface": {
+    "$type": "color",
+    "$value": "#fef5facc"
+  },
+  "pink-track": {
+    "$type": "color",
+    "$value": "#d6409f",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--pink-9)"
+      }
+    }
+  },
+  "plum-1": {
+    "$type": "color",
+    "$value": "#fefcff"
+  },
+  "plum-10": {
+    "$type": "color",
+    "$value": "#a144af"
+  },
+  "plum-11": {
+    "$type": "color",
+    "$value": "#953ea3"
+  },
+  "plum-12": {
+    "$type": "color",
+    "$value": "#53195d"
+  },
+  "plum-2": {
+    "$type": "color",
+    "$value": "#fdf7fd"
+  },
+  "plum-3": {
+    "$type": "color",
+    "$value": "#fbebfb"
+  },
+  "plum-4": {
+    "$type": "color",
+    "$value": "#f7def8"
+  },
+  "plum-5": {
+    "$type": "color",
+    "$value": "#f2d1f3"
+  },
+  "plum-6": {
+    "$type": "color",
+    "$value": "#e9c2ec"
+  },
+  "plum-7": {
+    "$type": "color",
+    "$value": "#deade3"
+  },
+  "plum-8": {
+    "$type": "color",
+    "$value": "#cf91d8"
+  },
+  "plum-9": {
+    "$type": "color",
+    "$value": "#ab4aba"
+  },
+  "plum-a1": {
+    "$type": "color",
+    "$value": "#aa00ff03"
+  },
+  "plum-a10": {
+    "$type": "color",
+    "$value": "#7f0092bb"
+  },
+  "plum-a11": {
+    "$type": "color",
+    "$value": "#730086c1"
+  },
+  "plum-a12": {
+    "$type": "color",
+    "$value": "#40004be6"
+  },
+  "plum-a2": {
+    "$type": "color",
+    "$value": "#c000c008"
+  },
+  "plum-a3": {
+    "$type": "color",
+    "$value": "#cc00cc14"
+  },
+  "plum-a4": {
+    "$type": "color",
+    "$value": "#c200c921"
+  },
+  "plum-a5": {
+    "$type": "color",
+    "$value": "#b700bd2e"
+  },
+  "plum-a6": {
+    "$type": "color",
+    "$value": "#a400b03d"
+  },
+  "plum-a7": {
+    "$type": "color",
+    "$value": "#9900a852"
+  },
+  "plum-a8": {
+    "$type": "color",
+    "$value": "#9000a56e"
+  },
+  "plum-a9": {
+    "$type": "color",
+    "$value": "#89009eb5"
+  },
+  "plum-contrast": {
+    "$type": "color",
+    "$value": "white"
+  },
+  "plum-indicator": {
+    "$type": "color",
+    "$value": "#ab4aba",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--plum-9)"
+      }
+    }
+  },
+  "plum-surface": {
+    "$type": "color",
+    "$value": "#fdf5fdcc"
+  },
+  "plum-track": {
+    "$type": "color",
+    "$value": "#ab4aba",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--plum-9)"
+      }
+    }
+  },
+  "progress-indicator-after-linear-gradient": {
+    "$type": "color",
+    "$value": "rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--white-a5), var(--white-a9), var(--white-a5)"
+      }
+    }
+  },
+  "purple-1": {
+    "$type": "color",
+    "$value": "#fefcfe"
+  },
+  "purple-10": {
+    "$type": "color",
+    "$value": "#8347b9"
+  },
+  "purple-11": {
+    "$type": "color",
+    "$value": "#8145b5"
+  },
+  "purple-12": {
+    "$type": "color",
+    "$value": "#402060"
+  },
+  "purple-2": {
+    "$type": "color",
+    "$value": "#fbf7fe"
+  },
+  "purple-3": {
+    "$type": "color",
+    "$value": "#f7edfe"
+  },
+  "purple-4": {
+    "$type": "color",
+    "$value": "#f2e2fc"
+  },
+  "purple-5": {
+    "$type": "color",
+    "$value": "#ead5f9"
+  },
+  "purple-6": {
+    "$type": "color",
+    "$value": "#e0c4f4"
+  },
+  "purple-7": {
+    "$type": "color",
+    "$value": "#d1afec"
+  },
+  "purple-8": {
+    "$type": "color",
+    "$value": "#be93e4"
+  },
+  "purple-9": {
+    "$type": "color",
+    "$value": "#8e4ec6"
+  },
+  "purple-a1": {
+    "$type": "color",
+    "$value": "#aa00aa03"
+  },
+  "purple-a10": {
+    "$type": "color",
+    "$value": "#53009eb8"
+  },
+  "purple-a11": {
+    "$type": "color",
+    "$value": "#52009aba"
+  },
+  "purple-a12": {
+    "$type": "color",
+    "$value": "#250049df"
+  },
+  "purple-a2": {
+    "$type": "color",
+    "$value": "#8000e008"
+  },
+  "purple-a3": {
+    "$type": "color",
+    "$value": "#8e00f112"
+  },
+  "purple-a4": {
+    "$type": "color",
+    "$value": "#8d00e51d"
+  },
+  "purple-a5": {
+    "$type": "color",
+    "$value": "#8000db2a"
+  },
+  "purple-a6": {
+    "$type": "color",
+    "$value": "#7a01d03b"
+  },
+  "purple-a7": {
+    "$type": "color",
+    "$value": "#6d00c350"
+  },
+  "purple-a8": {
+    "$type": "color",
+    "$value": "#6600c06c"
+  },
+  "purple-a9": {
+    "$type": "color",
+    "$value": "#5c00adb1"
+  },
+  "purple-contrast": {
+    "$type": "color",
+    "$value": "white"
+  },
+  "purple-indicator": {
+    "$type": "color",
+    "$value": "#8e4ec6",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--purple-9)"
+      }
+    }
+  },
+  "purple-surface": {
+    "$type": "color",
+    "$value": "#faf5fecc"
+  },
+  "purple-track": {
+    "$type": "color",
+    "$value": "#8e4ec6",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--purple-9)"
+      }
+    }
+  },
+  "quote-font-family": {
+    "$type": "string",
+    "$value": "'Times New Roman', 'Times', serif"
+  },
+  "quote-font-size-adjust": {
+    "$type": "number",
+    "$value": "1.18"
+  },
+  "quote-font-style": {
+    "$type": "string",
+    "$value": "italic"
+  },
+  "quote-font-weight": {
+    "$type": "string",
+    "$value": "inherit"
+  },
+  "quote-letter-spacing": {
+    "$type": "dimension",
+    "$value": "-0.025em"
+  },
+  "radius-1": {
+    "$type": "string",
+    "$value": "calc(3px * 1 * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(3px * var(--scaling) * var(--radius-factor))"
+      }
+    }
+  },
+  "radius-2": {
+    "$type": "string",
+    "$value": "calc(4px * 1 * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(4px * var(--scaling) * var(--radius-factor))"
+      }
+    }
+  },
+  "radius-3": {
+    "$type": "string",
+    "$value": "calc(6px * 1 * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(6px * var(--scaling) * var(--radius-factor))"
+      }
+    }
+  },
+  "radius-4": {
+    "$type": "string",
+    "$value": "calc(8px * 1 * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(8px * var(--scaling) * var(--radius-factor))"
+      }
+    }
+  },
+  "radius-5": {
+    "$type": "string",
+    "$value": "calc(12px * 1 * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(12px * var(--scaling) * var(--radius-factor))"
+      }
+    }
+  },
+  "radius-6": {
+    "$type": "string",
+    "$value": "calc(16px * 1 * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(16px * var(--scaling) * var(--radius-factor))"
+      }
+    }
+  },
+  "radius-factor": {
+    "$type": "number",
+    "$value": "1"
+  },
+  "radius-full": {
+    "$type": "dimension",
+    "$value": "0px"
+  },
+  "radius-thumb": {
+    "$type": "dimension",
+    "$value": "9999px"
+  },
+  "red-1": {
+    "$type": "color",
+    "$value": "#fffcfc"
+  },
+  "red-10": {
+    "$type": "color",
+    "$value": "#dc3e42"
+  },
+  "red-11": {
+    "$type": "color",
+    "$value": "#ce2c31"
+  },
+  "red-12": {
+    "$type": "color",
+    "$value": "#641723"
+  },
+  "red-2": {
+    "$type": "color",
+    "$value": "#fff7f7"
+  },
+  "red-3": {
+    "$type": "color",
+    "$value": "#feebec"
+  },
+  "red-4": {
+    "$type": "color",
+    "$value": "#ffdbdc"
+  },
+  "red-5": {
+    "$type": "color",
+    "$value": "#ffcdce"
+  },
+  "red-6": {
+    "$type": "color",
+    "$value": "#fdbdbe"
+  },
+  "red-7": {
+    "$type": "color",
+    "$value": "#f4a9aa"
+  },
+  "red-8": {
+    "$type": "color",
+    "$value": "#eb8e90"
+  },
+  "red-9": {
+    "$type": "color",
+    "$value": "#e5484d"
+  },
+  "red-a1": {
+    "$type": "color",
+    "$value": "#ff000003"
+  },
+  "red-a10": {
+    "$type": "color",
+    "$value": "#d10005c1"
+  },
+  "red-a11": {
+    "$type": "color",
+    "$value": "#c40006d3"
+  },
+  "red-a12": {
+    "$type": "color",
+    "$value": "#55000de8"
+  },
+  "red-a2": {
+    "$type": "color",
+    "$value": "#ff000008"
+  },
+  "red-a3": {
+    "$type": "color",
+    "$value": "#f3000d14"
+  },
+  "red-a4": {
+    "$type": "color",
+    "$value": "#ff000824"
+  },
+  "red-a5": {
+    "$type": "color",
+    "$value": "#ff000632"
+  },
+  "red-a6": {
+    "$type": "color",
+    "$value": "#f8000442"
+  },
+  "red-a7": {
+    "$type": "color",
+    "$value": "#df000356"
+  },
+  "red-a8": {
+    "$type": "color",
+    "$value": "#d2000571"
+  },
+  "red-a9": {
+    "$type": "color",
+    "$value": "#db0007b7"
+  },
+  "red-contrast": {
+    "$type": "color",
+    "$value": "white"
+  },
+  "red-indicator": {
+    "$type": "color",
+    "$value": "#e5484d",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--red-9)"
+      }
+    }
+  },
+  "red-surface": {
+    "$type": "color",
+    "$value": "#fff5f5cc"
+  },
+  "red-track": {
+    "$type": "color",
+    "$value": "#e5484d",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--red-9)"
+      }
+    }
+  },
+  "ruby-1": {
+    "$type": "color",
+    "$value": "#fffcfd"
+  },
+  "ruby-10": {
+    "$type": "color",
+    "$value": "#dc3b5d"
+  },
+  "ruby-11": {
+    "$type": "color",
+    "$value": "#ca244d"
+  },
+  "ruby-12": {
+    "$type": "color",
+    "$value": "#64172b"
+  },
+  "ruby-2": {
+    "$type": "color",
+    "$value": "#fff7f8"
+  },
+  "ruby-3": {
+    "$type": "color",
+    "$value": "#feeaed"
+  },
+  "ruby-4": {
+    "$type": "color",
+    "$value": "#ffdce1"
+  },
+  "ruby-5": {
+    "$type": "color",
+    "$value": "#ffced6"
+  },
+  "ruby-6": {
+    "$type": "color",
+    "$value": "#f8bfc8"
+  },
+  "ruby-7": {
+    "$type": "color",
+    "$value": "#efacb8"
+  },
+  "ruby-8": {
+    "$type": "color",
+    "$value": "#e592a3"
+  },
+  "ruby-9": {
+    "$type": "color",
+    "$value": "#e54666"
+  },
+  "ruby-a1": {
+    "$type": "color",
+    "$value": "#ff005503"
+  },
+  "ruby-a10": {
+    "$type": "color",
+    "$value": "#d2002cc4"
+  },
+  "ruby-a11": {
+    "$type": "color",
+    "$value": "#c10030db"
+  },
+  "ruby-a12": {
+    "$type": "color",
+    "$value": "#550016e8"
+  },
+  "ruby-a2": {
+    "$type": "color",
+    "$value": "#ff002008"
+  },
+  "ruby-a3": {
+    "$type": "color",
+    "$value": "#f3002515"
+  },
+  "ruby-a4": {
+    "$type": "color",
+    "$value": "#ff002523"
+  },
+  "ruby-a5": {
+    "$type": "color",
+    "$value": "#ff002a31"
+  },
+  "ruby-a6": {
+    "$type": "color",
+    "$value": "#e4002440"
+  },
+  "ruby-a7": {
+    "$type": "color",
+    "$value": "#ce002553"
+  },
+  "ruby-a8": {
+    "$type": "color",
+    "$value": "#c300286d"
+  },
+  "ruby-a9": {
+    "$type": "color",
+    "$value": "#db002cb9"
+  },
+  "ruby-contrast": {
+    "$type": "color",
+    "$value": "white"
+  },
+  "ruby-indicator": {
+    "$type": "color",
+    "$value": "#e54666",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--ruby-9)"
+      }
+    }
+  },
+  "ruby-surface": {
+    "$type": "color",
+    "$value": "#fff5f6cc"
+  },
+  "ruby-track": {
+    "$type": "color",
+    "$value": "#e54666",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--ruby-9)"
+      }
+    }
+  },
+  "sage-1": {
+    "$type": "color",
+    "$value": "#fbfdfc"
+  },
+  "sage-10": {
+    "$type": "color",
+    "$value": "#7c8481"
+  },
+  "sage-11": {
+    "$type": "color",
+    "$value": "#5f6563"
+  },
+  "sage-12": {
+    "$type": "color",
+    "$value": "#1a211e"
+  },
+  "sage-2": {
+    "$type": "color",
+    "$value": "#f7f9f8"
+  },
+  "sage-3": {
+    "$type": "color",
+    "$value": "#eef1f0"
+  },
+  "sage-4": {
+    "$type": "color",
+    "$value": "#e6e9e8"
+  },
+  "sage-5": {
+    "$type": "color",
+    "$value": "#dfe2e0"
+  },
+  "sage-6": {
+    "$type": "color",
+    "$value": "#d7dad9"
+  },
+  "sage-7": {
+    "$type": "color",
+    "$value": "#cbcfcd"
+  },
+  "sage-8": {
+    "$type": "color",
+    "$value": "#b8bcba"
+  },
+  "sage-9": {
+    "$type": "color",
+    "$value": "#868e8b"
+  },
+  "sage-a1": {
+    "$type": "color",
+    "$value": "#00804004"
+  },
+  "sage-a10": {
+    "$type": "color",
+    "$value": "#00100a83"
+  },
+  "sage-a11": {
+    "$type": "color",
+    "$value": "#000a07a0"
+  },
+  "sage-a12": {
+    "$type": "color",
+    "$value": "#000805e5"
+  },
+  "sage-a2": {
+    "$type": "color",
+    "$value": "#00402008"
+  },
+  "sage-a3": {
+    "$type": "color",
+    "$value": "#002d1e11"
+  },
+  "sage-a4": {
+    "$type": "color",
+    "$value": "#001f1519"
+  },
+  "sage-a5": {
+    "$type": "color",
+    "$value": "#00180820"
+  },
+  "sage-a6": {
+    "$type": "color",
+    "$value": "#00140d28"
+  },
+  "sage-a7": {
+    "$type": "color",
+    "$value": "#00140a34"
+  },
+  "sage-a8": {
+    "$type": "color",
+    "$value": "#000f0847"
+  },
+  "sage-a9": {
+    "$type": "color",
+    "$value": "#00110b79"
+  },
+  "sage-contrast": {
+    "$type": "color",
+    "$value": "white"
+  },
+  "sage-indicator": {
+    "$type": "color",
+    "$value": "#868e8b",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--sage-9)"
+      }
+    }
+  },
+  "sage-surface": {
+    "$type": "color",
+    "$value": "#ffffffcc"
+  },
+  "sage-track": {
+    "$type": "color",
+    "$value": "#868e8b",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--sage-9)"
+      }
+    }
+  },
+  "sand-1": {
+    "$type": "color",
+    "$value": "#fdfdfc"
+  },
+  "sand-10": {
+    "$type": "color",
+    "$value": "#82827c"
+  },
+  "sand-11": {
+    "$type": "color",
+    "$value": "#63635e"
+  },
+  "sand-12": {
+    "$type": "color",
+    "$value": "#21201c"
+  },
+  "sand-2": {
+    "$type": "color",
+    "$value": "#f9f9f8"
+  },
+  "sand-3": {
+    "$type": "color",
+    "$value": "#f1f0ef"
+  },
+  "sand-4": {
+    "$type": "color",
+    "$value": "#e9e8e6"
+  },
+  "sand-5": {
+    "$type": "color",
+    "$value": "#e2e1de"
+  },
+  "sand-6": {
+    "$type": "color",
+    "$value": "#dad9d6"
+  },
+  "sand-7": {
+    "$type": "color",
+    "$value": "#cfceca"
+  },
+  "sand-8": {
+    "$type": "color",
+    "$value": "#bcbbb5"
+  },
+  "sand-9": {
+    "$type": "color",
+    "$value": "#8d8d86"
+  },
+  "sand-a1": {
+    "$type": "color",
+    "$value": "#55550003"
+  },
+  "sand-a10": {
+    "$type": "color",
+    "$value": "#0c0c0083"
+  },
+  "sand-a11": {
+    "$type": "color",
+    "$value": "#080800a1"
+  },
+  "sand-a12": {
+    "$type": "color",
+    "$value": "#060500e3"
+  },
+  "sand-a2": {
+    "$type": "color",
+    "$value": "#25250007"
+  },
+  "sand-a3": {
+    "$type": "color",
+    "$value": "#20100010"
+  },
+  "sand-a4": {
+    "$type": "color",
+    "$value": "#1f150019"
+  },
+  "sand-a5": {
+    "$type": "color",
+    "$value": "#1f180021"
+  },
+  "sand-a6": {
+    "$type": "color",
+    "$value": "#19130029"
+  },
+  "sand-a7": {
+    "$type": "color",
+    "$value": "#19140035"
+  },
+  "sand-a8": {
+    "$type": "color",
+    "$value": "#1915014a"
+  },
+  "sand-a9": {
+    "$type": "color",
+    "$value": "#0f0f0079"
+  },
+  "sand-contrast": {
+    "$type": "color",
+    "$value": "white"
+  },
+  "sand-indicator": {
+    "$type": "color",
+    "$value": "#8d8d86",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--sand-9)"
+      }
+    }
+  },
+  "sand-surface": {
+    "$type": "color",
+    "$value": "#ffffffcc"
+  },
+  "sand-track": {
+    "$type": "color",
+    "$value": "#8d8d86",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--sand-9)"
+      }
+    }
+  },
+  "scaling": {
+    "$type": "number",
+    "$value": "1"
+  },
+  "scrollarea-scrollbar-horizontal-margin-bottom": {
+    "$type": "string",
+    "$value": "calc(4px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--space-1)"
+      }
+    }
+  },
+  "scrollarea-scrollbar-horizontal-margin-left": {
+    "$type": "string",
+    "$value": "calc(4px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--space-1)"
+      }
+    }
+  },
+  "scrollarea-scrollbar-horizontal-margin-right": {
+    "$type": "string",
+    "$value": "calc(4px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--space-1)"
+      }
+    }
+  },
+  "scrollarea-scrollbar-horizontal-margin-top": {
+    "$type": "string",
+    "$value": "calc(4px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--space-1)"
+      }
+    }
+  },
+  "scrollarea-scrollbar-vertical-margin-bottom": {
+    "$type": "string",
+    "$value": "calc(4px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--space-1)"
+      }
+    }
+  },
+  "scrollarea-scrollbar-vertical-margin-left": {
+    "$type": "string",
+    "$value": "calc(4px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--space-1)"
+      }
+    }
+  },
+  "scrollarea-scrollbar-vertical-margin-right": {
+    "$type": "string",
+    "$value": "calc(4px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--space-1)"
+      }
+    }
+  },
+  "scrollarea-scrollbar-vertical-margin-top": {
+    "$type": "string",
+    "$value": "calc(4px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--space-1)"
+      }
+    }
+  },
+  "segmented-control-indicator-background-color": {
+    "$type": "color",
+    "$value": "white",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--color-background)"
+      }
+    }
+  },
+  "segmented-control-transition-duration": {
+    "$type": "string",
+    "$value": "100ms"
+  },
+  "select-trigger-classic-box-shadow": {
+    "$type": "string",
+    "$value": "inset 0 0 0 1px #0009321f, inset 0 2px 1px rgba(255, 255, 255, 0.9), inset 0 -2px 1px #00002d17",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "inset 0 0 0 1px var(--gray-a5), inset 0 2px 1px var(--white-a11), inset 0 -2px 1px var(--gray-a4)"
+      }
+    }
+  },
+  "shadow-1": {
+    "$type": "string",
+    "$value": "inset 0 0 0 1px #0009321f, inset 0 1.5px 2px 0 #00005506, inset 0 1.5px 2px 0 rgba(0, 0, 0, 0.1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "inset 0 0 0 1px var(--gray-a5), inset 0 1.5px 2px 0 var(--gray-a2), inset 0 1.5px 2px 0 var(--black-a2)"
+      }
+    }
+  },
+  "shadow-2": {
+    "$type": "string",
+    "$value": "0 0 0 1px color-mix(in oklab, #0000330f, #f0f0f3 25%), 0 0 0 0.5px rgba(0, 0, 0, 0.05), 0 1px 1px 0 #00005506, 0 2px 1px -1px rgba(0, 0, 0, 0.05), 0 1px 3px 0 rgba(0, 0, 0, 0.05)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "0 0 0 1px color-mix(in oklab, var(--gray-a3), var(--gray-3) 25%), 0 0 0 0.5px var(--black-a1), 0 1px 1px 0 var(--gray-a2), 0 2px 1px -1px var(--black-a1), 0 1px 3px 0 var(--black-a1)"
+      }
+    }
+  },
+  "shadow-3": {
+    "$type": "string",
+    "$value": "0 0 0 1px color-mix(in oklab, #0000330f, #f0f0f3 25%), 0 2px 3px -2px #0000330f, 0 3px 12px -4px rgba(0, 0, 0, 0.1), 0 4px 16px -8px rgba(0, 0, 0, 0.1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "0 0 0 1px color-mix(in oklab, var(--gray-a3), var(--gray-3) 25%), 0 2px 3px -2px var(--gray-a3), 0 3px 12px -4px var(--black-a2), 0 4px 16px -8px var(--black-a2)"
+      }
+    }
+  },
+  "shadow-4": {
+    "$type": "string",
+    "$value": "0 0 0 1px color-mix(in oklab, #0000330f, #f0f0f3 25%), 0 8px 40px rgba(0, 0, 0, 0.05), 0 12px 32px -16px #0000330f",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "0 0 0 1px color-mix(in oklab, var(--gray-a3), var(--gray-3) 25%), 0 8px 40px var(--black-a1), 0 12px 32px -16px var(--gray-a3)"
+      }
+    }
+  },
+  "shadow-5": {
+    "$type": "string",
+    "$value": "0 0 0 1px color-mix(in oklab, #0000330f, #f0f0f3 25%), 0 12px 60px rgba(0, 0, 0, 0.15), 0 12px 32px -16px #0009321f",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "0 0 0 1px color-mix(in oklab, var(--gray-a3), var(--gray-3) 25%), 0 12px 60px var(--black-a3), 0 12px 32px -16px var(--gray-a5)"
+      }
+    }
+  },
+  "shadow-6": {
+    "$type": "string",
+    "$value": "0 0 0 1px color-mix(in oklab, #0000330f, #f0f0f3 25%), 0 12px 60px rgba(0, 0, 0, 0.15), 0 16px 64px #00005506, 0 16px 36px -20px #00062e32",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "0 0 0 1px color-mix(in oklab, var(--gray-a3), var(--gray-3) 25%), 0 12px 60px var(--black-a3), 0 16px 64px var(--gray-a2), 0 16px 36px -20px var(--gray-a7)"
+      }
+    }
+  },
+  "sky-1": {
+    "$type": "color",
+    "$value": "#f9feff"
+  },
+  "sky-10": {
+    "$type": "color",
+    "$value": "#74daf8"
+  },
+  "sky-11": {
+    "$type": "color",
+    "$value": "#00749e"
+  },
+  "sky-12": {
+    "$type": "color",
+    "$value": "#1d3e56"
+  },
+  "sky-2": {
+    "$type": "color",
+    "$value": "#f1fafd"
+  },
+  "sky-3": {
+    "$type": "color",
+    "$value": "#e1f6fd"
+  },
+  "sky-4": {
+    "$type": "color",
+    "$value": "#d1f0fa"
+  },
+  "sky-5": {
+    "$type": "color",
+    "$value": "#bee7f5"
+  },
+  "sky-6": {
+    "$type": "color",
+    "$value": "#a9daed"
+  },
+  "sky-7": {
+    "$type": "color",
+    "$value": "#8dcae3"
+  },
+  "sky-8": {
+    "$type": "color",
+    "$value": "#60b3d7"
+  },
+  "sky-9": {
+    "$type": "color",
+    "$value": "#7ce2fe"
+  },
+  "sky-a1": {
+    "$type": "color",
+    "$value": "#00d5ff06"
+  },
+  "sky-a10": {
+    "$type": "color",
+    "$value": "#00bcf38b"
+  },
+  "sky-a11": {
+    "$type": "color",
+    "$value": "#00749e"
+  },
+  "sky-a12": {
+    "$type": "color",
+    "$value": "#002540e2"
+  },
+  "sky-a2": {
+    "$type": "color",
+    "$value": "#00a4db0e"
+  },
+  "sky-a3": {
+    "$type": "color",
+    "$value": "#00b3ee1e"
+  },
+  "sky-a4": {
+    "$type": "color",
+    "$value": "#00ace42e"
+  },
+  "sky-a5": {
+    "$type": "color",
+    "$value": "#00a1d841"
+  },
+  "sky-a6": {
+    "$type": "color",
+    "$value": "#0092ca56"
+  },
+  "sky-a7": {
+    "$type": "color",
+    "$value": "#0089c172"
+  },
+  "sky-a8": {
+    "$type": "color",
+    "$value": "#0085bf9f"
+  },
+  "sky-a9": {
+    "$type": "color",
+    "$value": "#00c7fe83"
+  },
+  "sky-contrast": {
+    "$type": "color",
+    "$value": "#1c2024"
+  },
+  "sky-indicator": {
+    "$type": "color",
+    "$value": "#7ce2fe",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--sky-9)"
+      }
+    }
+  },
+  "sky-surface": {
+    "$type": "color",
+    "$value": "#eef9fdcc"
+  },
+  "sky-track": {
+    "$type": "color",
+    "$value": "#7ce2fe",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--sky-9)"
+      }
+    }
+  },
+  "slate-1": {
+    "$type": "color",
+    "$value": "#fcfcfd"
+  },
+  "slate-10": {
+    "$type": "color",
+    "$value": "#80838d"
+  },
+  "slate-11": {
+    "$type": "color",
+    "$value": "#60646c"
+  },
+  "slate-12": {
+    "$type": "color",
+    "$value": "#1c2024"
+  },
+  "slate-2": {
+    "$type": "color",
+    "$value": "#f9f9fb"
+  },
+  "slate-3": {
+    "$type": "color",
+    "$value": "#f0f0f3"
+  },
+  "slate-4": {
+    "$type": "color",
+    "$value": "#e8e8ec"
+  },
+  "slate-5": {
+    "$type": "color",
+    "$value": "#e0e1e6"
+  },
+  "slate-6": {
+    "$type": "color",
+    "$value": "#d9d9e0"
+  },
+  "slate-7": {
+    "$type": "color",
+    "$value": "#cdced6"
+  },
+  "slate-8": {
+    "$type": "color",
+    "$value": "#b9bbc6"
+  },
+  "slate-9": {
+    "$type": "color",
+    "$value": "#8b8d98"
+  },
+  "slate-a1": {
+    "$type": "color",
+    "$value": "#00005503"
+  },
+  "slate-a10": {
+    "$type": "color",
+    "$value": "#00071b7f"
+  },
+  "slate-a11": {
+    "$type": "color",
+    "$value": "#0007149f"
+  },
+  "slate-a12": {
+    "$type": "color",
+    "$value": "#000509e3"
+  },
+  "slate-a2": {
+    "$type": "color",
+    "$value": "#00005506"
+  },
+  "slate-a3": {
+    "$type": "color",
+    "$value": "#0000330f"
+  },
+  "slate-a4": {
+    "$type": "color",
+    "$value": "#00002d17"
+  },
+  "slate-a5": {
+    "$type": "color",
+    "$value": "#0009321f"
+  },
+  "slate-a6": {
+    "$type": "color",
+    "$value": "#00002f26"
+  },
+  "slate-a7": {
+    "$type": "color",
+    "$value": "#00062e32"
+  },
+  "slate-a8": {
+    "$type": "color",
+    "$value": "#00083046"
+  },
+  "slate-a9": {
+    "$type": "color",
+    "$value": "#00051d74"
+  },
+  "slate-contrast": {
+    "$type": "color",
+    "$value": "white"
+  },
+  "slate-indicator": {
+    "$type": "color",
+    "$value": "#8b8d98",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--slate-9)"
+      }
+    }
+  },
+  "slate-surface": {
+    "$type": "color",
+    "$value": "#ffffffcc"
+  },
+  "slate-track": {
+    "$type": "color",
+    "$value": "#8b8d98",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--slate-9)"
+      }
+    }
+  },
+  "slider-disabled-blend-mode": {
+    "$type": "string",
+    "$value": "multiply"
+  },
+  "slider-range-high-contrast-background-image": {
+    "$type": "string",
+    "$value": "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6))",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "linear-gradient(var(--black-a8), var(--black-a8))"
+      }
+    }
+  },
+  "space-1": {
+    "$type": "string",
+    "$value": "calc(4px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(4px * var(--scaling))"
+      }
+    }
+  },
+  "space-2": {
+    "$type": "string",
+    "$value": "calc(8px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(8px * var(--scaling))"
+      }
+    }
+  },
+  "space-3": {
+    "$type": "string",
+    "$value": "calc(12px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(12px * var(--scaling))"
+      }
+    }
+  },
+  "space-4": {
+    "$type": "string",
+    "$value": "calc(16px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(16px * var(--scaling))"
+      }
+    }
+  },
+  "space-5": {
+    "$type": "string",
+    "$value": "calc(24px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(24px * var(--scaling))"
+      }
+    }
+  },
+  "space-6": {
+    "$type": "string",
+    "$value": "calc(32px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(32px * var(--scaling))"
+      }
+    }
+  },
+  "space-7": {
+    "$type": "string",
+    "$value": "calc(40px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(40px * var(--scaling))"
+      }
+    }
+  },
+  "space-8": {
+    "$type": "string",
+    "$value": "calc(48px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(48px * var(--scaling))"
+      }
+    }
+  },
+  "space-9": {
+    "$type": "string",
+    "$value": "calc(64px * 1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "calc(64px * var(--scaling))"
+      }
+    }
+  },
+  "spinner-animation-duration": {
+    "$type": "string",
+    "$value": "800ms"
+  },
+  "spinner-opacity": {
+    "$type": "number",
+    "$value": "0.65"
+  },
+  "strong-font-family": {
+    "$type": "string",
+    "$value": "-apple-system, BlinkMacSystemFont, 'Segoe UI (Custom)', Roboto, 'Helvetica Neue', 'Open Sans (Custom)', system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--default-font-family)"
+      }
+    }
+  },
+  "strong-font-size-adjust": {
+    "$type": "number",
+    "$value": "1"
+  },
+  "strong-font-style": {
+    "$type": "string",
+    "$value": "inherit"
+  },
+  "strong-font-weight": {
+    "$type": "number",
+    "$value": "700",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--font-weight-bold)"
+      }
+    }
+  },
+  "strong-letter-spacing": {
+    "$type": "dimension",
+    "$value": "0em"
+  },
+  "switch-disabled-blend-mode": {
+    "$type": "string",
+    "$value": "multiply"
+  },
+  "switch-high-contrast-checked-active-before-filter": {
+    "$type": "string",
+    "$value": "contrast(0.82) saturate(1.2) brightness(1.16)"
+  },
+  "switch-high-contrast-checked-color-overlay": {
+    "$type": "color",
+    "$value": "rgba(0, 0, 0, 0.6)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--black-a8)"
+      }
+    }
+  },
+  "switch-surface-checked-active-filter": {
+    "$type": "string",
+    "$value": "brightness(0.92) saturate(1.1)"
+  },
+  "tab-active-letter-spacing": {
+    "$type": "dimension",
+    "$value": "-0.01em"
+  },
+  "tab-active-word-spacing": {
+    "$type": "dimension",
+    "$value": "0em"
+  },
+  "tab-inactive-letter-spacing": {
+    "$type": "dimension",
+    "$value": "0em"
+  },
+  "tab-inactive-word-spacing": {
+    "$type": "dimension",
+    "$value": "0em"
+  },
+  "teal-1": {
+    "$type": "color",
+    "$value": "#fafefd"
+  },
+  "teal-10": {
+    "$type": "color",
+    "$value": "#0d9b8a"
+  },
+  "teal-11": {
+    "$type": "color",
+    "$value": "#008573"
+  },
+  "teal-12": {
+    "$type": "color",
+    "$value": "#0d3d38"
+  },
+  "teal-2": {
+    "$type": "color",
+    "$value": "#f3fbf9"
+  },
+  "teal-3": {
+    "$type": "color",
+    "$value": "#e0f8f3"
+  },
+  "teal-4": {
+    "$type": "color",
+    "$value": "#ccf3ea"
+  },
+  "teal-5": {
+    "$type": "color",
+    "$value": "#b8eae0"
+  },
+  "teal-6": {
+    "$type": "color",
+    "$value": "#a1ded2"
+  },
+  "teal-7": {
+    "$type": "color",
+    "$value": "#83cdc1"
+  },
+  "teal-8": {
+    "$type": "color",
+    "$value": "#53b9ab"
+  },
+  "teal-9": {
+    "$type": "color",
+    "$value": "#12a594"
+  },
+  "teal-a1": {
+    "$type": "color",
+    "$value": "#00cc9905"
+  },
+  "teal-a10": {
+    "$type": "color",
+    "$value": "#009684f2"
+  },
+  "teal-a11": {
+    "$type": "color",
+    "$value": "#008573"
+  },
+  "teal-a12": {
+    "$type": "color",
+    "$value": "#00332df2"
+  },
+  "teal-a2": {
+    "$type": "color",
+    "$value": "#00aa800c"
+  },
+  "teal-a3": {
+    "$type": "color",
+    "$value": "#00c69d1f"
+  },
+  "teal-a4": {
+    "$type": "color",
+    "$value": "#00c39633"
+  },
+  "teal-a5": {
+    "$type": "color",
+    "$value": "#00b49047"
+  },
+  "teal-a6": {
+    "$type": "color",
+    "$value": "#00a6855e"
+  },
+  "teal-a7": {
+    "$type": "color",
+    "$value": "#0099807c"
+  },
+  "teal-a8": {
+    "$type": "color",
+    "$value": "#009783ac"
+  },
+  "teal-a9": {
+    "$type": "color",
+    "$value": "#009e8ced"
+  },
+  "teal-contrast": {
+    "$type": "color",
+    "$value": "white"
+  },
+  "teal-indicator": {
+    "$type": "color",
+    "$value": "#12a594",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--teal-9)"
+      }
+    }
+  },
+  "teal-surface": {
+    "$type": "color",
+    "$value": "#f0faf8cc"
+  },
+  "teal-track": {
+    "$type": "color",
+    "$value": "#12a594",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--teal-9)"
+      }
+    }
+  },
+  "tomato-1": {
+    "$type": "color",
+    "$value": "#fffcfc"
+  },
+  "tomato-10": {
+    "$type": "color",
+    "$value": "#dd4425"
+  },
+  "tomato-11": {
+    "$type": "color",
+    "$value": "#d13415"
+  },
+  "tomato-12": {
+    "$type": "color",
+    "$value": "#5c271f"
+  },
+  "tomato-2": {
+    "$type": "color",
+    "$value": "#fff8f7"
+  },
+  "tomato-3": {
+    "$type": "color",
+    "$value": "#feebe7"
+  },
+  "tomato-4": {
+    "$type": "color",
+    "$value": "#ffdcd3"
+  },
+  "tomato-5": {
+    "$type": "color",
+    "$value": "#ffcdc2"
+  },
+  "tomato-6": {
+    "$type": "color",
+    "$value": "#fdbdaf"
+  },
+  "tomato-7": {
+    "$type": "color",
+    "$value": "#f5a898"
+  },
+  "tomato-8": {
+    "$type": "color",
+    "$value": "#ec8e7b"
+  },
+  "tomato-9": {
+    "$type": "color",
+    "$value": "#e54d2e"
+  },
+  "tomato-a1": {
+    "$type": "color",
+    "$value": "#ff000003"
+  },
+  "tomato-a10": {
+    "$type": "color",
+    "$value": "#d72400da"
+  },
+  "tomato-a11": {
+    "$type": "color",
+    "$value": "#cd2200ea"
+  },
+  "tomato-a12": {
+    "$type": "color",
+    "$value": "#460900e0"
+  },
+  "tomato-a2": {
+    "$type": "color",
+    "$value": "#ff200008"
+  },
+  "tomato-a3": {
+    "$type": "color",
+    "$value": "#f52b0018"
+  },
+  "tomato-a4": {
+    "$type": "color",
+    "$value": "#ff35002c"
+  },
+  "tomato-a5": {
+    "$type": "color",
+    "$value": "#ff2e003d"
+  },
+  "tomato-a6": {
+    "$type": "color",
+    "$value": "#f92d0050"
+  },
+  "tomato-a7": {
+    "$type": "color",
+    "$value": "#e7280067"
+  },
+  "tomato-a8": {
+    "$type": "color",
+    "$value": "#db250084"
+  },
+  "tomato-a9": {
+    "$type": "color",
+    "$value": "#df2600d1"
+  },
+  "tomato-contrast": {
+    "$type": "color",
+    "$value": "white"
+  },
+  "tomato-indicator": {
+    "$type": "color",
+    "$value": "#e54d2e",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--tomato-9)"
+      }
+    }
+  },
+  "tomato-surface": {
+    "$type": "color",
+    "$value": "#fff6f5cc"
+  },
+  "tomato-track": {
+    "$type": "color",
+    "$value": "#e54d2e",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--tomato-9)"
+      }
+    }
+  },
+  "violet-1": {
+    "$type": "color",
+    "$value": "#fdfcfe"
+  },
+  "violet-10": {
+    "$type": "color",
+    "$value": "#654dc4"
+  },
+  "violet-11": {
+    "$type": "color",
+    "$value": "#6550b9"
+  },
+  "violet-12": {
+    "$type": "color",
+    "$value": "#2f265f"
+  },
+  "violet-2": {
+    "$type": "color",
+    "$value": "#faf8ff"
+  },
+  "violet-3": {
+    "$type": "color",
+    "$value": "#f4f0fe"
+  },
+  "violet-4": {
+    "$type": "color",
+    "$value": "#ebe4ff"
+  },
+  "violet-5": {
+    "$type": "color",
+    "$value": "#e1d9ff"
+  },
+  "violet-6": {
+    "$type": "color",
+    "$value": "#d4cafe"
+  },
+  "violet-7": {
+    "$type": "color",
+    "$value": "#c2b5f5"
+  },
+  "violet-8": {
+    "$type": "color",
+    "$value": "#aa99ec"
+  },
+  "violet-9": {
+    "$type": "color",
+    "$value": "#6e56cf"
+  },
+  "violet-a1": {
+    "$type": "color",
+    "$value": "#5500aa03"
+  },
+  "violet-a10": {
+    "$type": "color",
+    "$value": "#2300abb2"
+  },
+  "violet-a11": {
+    "$type": "color",
+    "$value": "#1f0099af"
+  },
+  "violet-a12": {
+    "$type": "color",
+    "$value": "#0b0043d9"
+  },
+  "violet-a2": {
+    "$type": "color",
+    "$value": "#4900ff07"
+  },
+  "violet-a3": {
+    "$type": "color",
+    "$value": "#4400ee0f"
+  },
+  "violet-a4": {
+    "$type": "color",
+    "$value": "#4300ff1b"
+  },
+  "violet-a5": {
+    "$type": "color",
+    "$value": "#3600ff26"
+  },
+  "violet-a6": {
+    "$type": "color",
+    "$value": "#3100fb35"
+  },
+  "violet-a7": {
+    "$type": "color",
+    "$value": "#2d01dd4a"
+  },
+  "violet-a8": {
+    "$type": "color",
+    "$value": "#2b00d066"
+  },
+  "violet-a9": {
+    "$type": "color",
+    "$value": "#2400b7a9"
+  },
+  "violet-contrast": {
+    "$type": "color",
+    "$value": "white"
+  },
+  "violet-indicator": {
+    "$type": "color",
+    "$value": "#6e56cf",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--violet-9)"
+      }
+    }
+  },
+  "violet-surface": {
+    "$type": "color",
+    "$value": "#f9f6ffcc"
+  },
+  "violet-track": {
+    "$type": "color",
+    "$value": "#6e56cf",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--violet-9)"
+      }
+    }
+  },
+  "white-a1": {
+    "$type": "color",
+    "$value": "rgba(255, 255, 255, 0.05)"
+  },
+  "white-a10": {
+    "$type": "color",
+    "$value": "rgba(255, 255, 255, 0.8)"
+  },
+  "white-a11": {
+    "$type": "color",
+    "$value": "rgba(255, 255, 255, 0.9)"
+  },
+  "white-a12": {
+    "$type": "color",
+    "$value": "rgba(255, 255, 255, 0.95)"
+  },
+  "white-a2": {
+    "$type": "color",
+    "$value": "rgba(255, 255, 255, 0.1)"
+  },
+  "white-a3": {
+    "$type": "color",
+    "$value": "rgba(255, 255, 255, 0.15)"
+  },
+  "white-a4": {
+    "$type": "color",
+    "$value": "rgba(255, 255, 255, 0.2)"
+  },
+  "white-a5": {
+    "$type": "color",
+    "$value": "rgba(255, 255, 255, 0.3)"
+  },
+  "white-a6": {
+    "$type": "color",
+    "$value": "rgba(255, 255, 255, 0.4)"
+  },
+  "white-a7": {
+    "$type": "color",
+    "$value": "rgba(255, 255, 255, 0.5)"
+  },
+  "white-a8": {
+    "$type": "color",
+    "$value": "rgba(255, 255, 255, 0.6)"
+  },
+  "white-a9": {
+    "$type": "color",
+    "$value": "rgba(255, 255, 255, 0.7)"
+  },
+  "yellow-1": {
+    "$type": "color",
+    "$value": "#fdfdf9"
+  },
+  "yellow-10": {
+    "$type": "color",
+    "$value": "#ffdc00"
+  },
+  "yellow-11": {
+    "$type": "color",
+    "$value": "#9e6c00"
+  },
+  "yellow-12": {
+    "$type": "color",
+    "$value": "#473b1f"
+  },
+  "yellow-2": {
+    "$type": "color",
+    "$value": "#fefce9"
+  },
+  "yellow-3": {
+    "$type": "color",
+    "$value": "#fffab8"
+  },
+  "yellow-4": {
+    "$type": "color",
+    "$value": "#fff394"
+  },
+  "yellow-5": {
+    "$type": "color",
+    "$value": "#ffe770"
+  },
+  "yellow-6": {
+    "$type": "color",
+    "$value": "#f3d768"
+  },
+  "yellow-7": {
+    "$type": "color",
+    "$value": "#e4c767"
+  },
+  "yellow-8": {
+    "$type": "color",
+    "$value": "#d5ae39"
+  },
+  "yellow-9": {
+    "$type": "color",
+    "$value": "#ffe629"
+  },
+  "yellow-a1": {
+    "$type": "color",
+    "$value": "#aaaa0006"
+  },
+  "yellow-a10": {
+    "$type": "color",
+    "$value": "#ffdc00"
+  },
+  "yellow-a11": {
+    "$type": "color",
+    "$value": "#9e6c00"
+  },
+  "yellow-a12": {
+    "$type": "color",
+    "$value": "#2e2000e0"
+  },
+  "yellow-a2": {
+    "$type": "color",
+    "$value": "#f4dd0016"
+  },
+  "yellow-a3": {
+    "$type": "color",
+    "$value": "#ffee0047"
+  },
+  "yellow-a4": {
+    "$type": "color",
+    "$value": "#ffe3016b"
+  },
+  "yellow-a5": {
+    "$type": "color",
+    "$value": "#ffd5008f"
+  },
+  "yellow-a6": {
+    "$type": "color",
+    "$value": "#ebbc0097"
+  },
+  "yellow-a7": {
+    "$type": "color",
+    "$value": "#d2a10098"
+  },
+  "yellow-a8": {
+    "$type": "color",
+    "$value": "#c99700c6"
+  },
+  "yellow-a9": {
+    "$type": "color",
+    "$value": "#ffe100d6"
+  },
+  "yellow-contrast": {
+    "$type": "color",
+    "$value": "#21201c"
+  },
+  "yellow-indicator": {
+    "$type": "color",
+    "$value": "#ffdc00",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--yellow-10)"
+      }
+    }
+  },
+  "yellow-surface": {
+    "$type": "color",
+    "$value": "#fefbe4cc"
+  },
+  "yellow-track": {
+    "$type": "color",
+    "$value": "#ffdc00",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--yellow-10)"
+      }
+    }
+  }
+}

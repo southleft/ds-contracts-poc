@@ -1,13 +1,14 @@
 {
   "component": "CaseAntdComponentScopedCustomProperty",
   "generatedBy": "extract/computed/gate.ts",
-  "browser": "151.0.7922.34",
+  "browser": "149.0.7827.55",
+  "renderedBy": "149.0.7827.55",
   "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
   "combos": 1,
   "interactions": 4,
   "computed": {
-    "cellsCompared": 48,
-    "cellsEqual": 48,
+    "cellsCompared": 136,
+    "cellsEqual": 136,
     "pctEqual": 100,
     "rowsFullyEqual": 4,
     "rows": 4
@@ -30,13 +31,13 @@
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
-    "mintedLeaves": 6,
-    "mintedLeavesUnfolded": 6,
-    "baseBindings": 6,
+    "mintedLeaves": 9,
+    "mintedLeavesUnfolded": 8,
+    "baseBindings": 16,
     "stateBindings": 0,
     "codeOnlyChannels": 1,
     "overflowBindings": 0,
-    "folds": 0
+    "folds": 12
   },
   "worstRows": [
     {
@@ -80,32 +81,32 @@
   "rows": [
     {
       "key": "__default",
-      "channelsCompared": 12,
-      "channelsEqual": 12,
+      "channelsCompared": 34,
+      "channelsEqual": 34,
       "pctExact": 0,
       "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "__hover",
-      "channelsCompared": 12,
-      "channelsEqual": 12,
+      "channelsCompared": 34,
+      "channelsEqual": 34,
       "pctExact": 0,
       "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "__focus-visible",
-      "channelsCompared": 12,
-      "channelsEqual": 12,
+      "channelsCompared": 34,
+      "channelsEqual": 34,
       "pctExact": 0,
       "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "__active",
-      "channelsCompared": 12,
-      "channelsEqual": 12,
+      "channelsCompared": 34,
+      "channelsEqual": 34,
       "pctExact": 0,
       "pctAA": 0,
       "mismatches": []

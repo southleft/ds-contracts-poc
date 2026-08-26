@@ -4,7 +4,7 @@
   "name": "CaseGridGapShorthand",
   "version": "0.1.0",
   "status": "draft",
-  "description": "SEED contract for the CSS/DOM conformance fixture case \"grid-gap-shorthand\" (grid-gaps). The fixture varies CSS CONSTRUCTS, not prop spaces, so the prop space is deliberately EMPTY: every axis the capture would enumerate is held at nothing, and the whole measurement is the computed truth of one mounted rendering. Construct: gap: 12px 16px (and one-value gap: 12px) COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @ds-contracts/conformance@0.1.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "description": "SEED contract for the CSS/DOM conformance fixture case \"grid-gap-shorthand\" (grid-gaps). The fixture varies CSS CONSTRUCTS, not prop spaces, so the prop space is deliberately EMPTY: every axis the capture would enumerate is held at nothing, and the whole measurement is the computed truth of one mounted rendering. Construct: gap: 12px 16px (and one-value gap: 12px) COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @ds-contracts/conformance@0.1.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "div"
   },
@@ -27,6 +27,11 @@
           },
           "tokens": {
             "background-color": "{imported.case-grid-gap-shorthand.label.background-color}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
             "font-size": "{imported.shared.size-12}",
             "font-weight": "{imported.case-grid-gap-shorthand.label.font-weight}"
           }
@@ -45,6 +50,11 @@
           },
           "tokens": {
             "background-color": "{imported.case-grid-gap-shorthand.label-2.background-color}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
             "font-size": "{imported.shared.size-12}",
             "font-weight": "{imported.case-grid-gap-shorthand.label-2.font-weight}"
           }
@@ -73,12 +83,20 @@
           "column": 16
         }
       },
+      "literals": {
+        "height": "fit-content"
+      },
       "declared": {
         "box-sizing": "border-box",
         "font-family": "monospace"
       },
       "tokens": {
         "background-color": "{imported.case-grid-gap-shorthand.root.background-color}",
+        "border-bottom-color": "{imported.shared.color-663399}",
+        "border-left-color": "{imported.shared.color-663399}",
+        "border-right-color": "{imported.shared.color-663399}",
+        "border-top-color": "{imported.shared.color-663399}",
+        "color": "{imported.shared.color-1976d2}",
         "font-size": "{imported.shared.size-12}",
         "min-height": "{imported.case-grid-gap-shorthand.root.min-height}",
         "min-width": "{imported.case-grid-gap-shorthand.root.min-width}"

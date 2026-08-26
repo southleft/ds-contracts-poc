@@ -1,0 +1,48 @@
+:root {
+  --rdp-accent-background-color: #f0f0ff;
+  --rdp-accent-color: blue;
+  --rdp-animation_duration: 0.3s;
+  --rdp-animation_timing: cubic-bezier(0.4, 0, 0.2, 1);
+  --rdp-day-height: 44px;
+  --rdp-day-width: 44px;
+  --rdp-day_button-border: 2px solid transparent;
+  --rdp-day_button-border-radius: 100%;
+  --rdp-day_button-height: 42px;
+  --rdp-day_button-width: 42px;
+  --rdp-disabled-opacity: 0.5;
+  --rdp-dropdown-gap: 0.5rem;
+  --rdp-gradient-direction: 90deg;
+  --rdp-months-gap: 2rem;
+  --rdp-nav-height: 2.75rem;
+  --rdp-nav_button-disabled-opacity: 0.5;
+  --rdp-nav_button-height: 2.25rem;
+  --rdp-nav_button-width: 2.25rem;
+  --rdp-outside-opacity: 0.75;
+  --rdp-range_end-background: linear-gradient(
+    90deg,
+    #f0f0ff 50%,
+    transparent 50%
+  );
+  --rdp-range_end-color: white;
+  --rdp-range_end-date-background-color: blue;
+  --rdp-range_middle-background-color: #f0f0ff;
+  --rdp-range_middle-color: inherit;
+  --rdp-range_start-background: linear-gradient(
+    90deg,
+    transparent 50%,
+    #f0f0ff 50%
+  );
+  --rdp-range_start-color: white;
+  --rdp-range_start-date-background-color: blue;
+  --rdp-selected-border: 2px solid blue;
+  --rdp-today-color: blue;
+  --rdp-week_number-border: 2px solid transparent;
+  --rdp-week_number-border-radius: 100%;
+  --rdp-week_number-height: 44px;
+  --rdp-week_number-opacity: 0.75;
+  --rdp-week_number-width: 44px;
+  --rdp-weekday-opacity: 0.75;
+  --rdp-weekday-padding: 0.5rem 0rem;
+  --rdp-weekday-text-align: center;
+  --rdp-weeknumber-text-align: center;
+}

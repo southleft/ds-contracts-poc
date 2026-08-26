@@ -745,6 +745,22 @@
       ]
     },
     {
+      "__case": "cascade: * { border-color: var(--cf-color-secondary) } — a PAGE-GLOBAL authored declaration, with the element's border-width and border-style declared locally and its colour reaching it only through the universal rule — declared CARRIED",
+      "name": "CasePageGlobalStarRule",
+      "importName": "CasePageGlobalStarRule",
+      "contract": "conformance/seeds/page-global-star-rule.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
+      "__case": "cascade: body { color: var(--cf-color-primary) } — the document's ink, inherited by a text-bearing part that declares no colour of its own — declared CARRIED",
+      "name": "CasePageInheritedInk",
+      "importName": "CasePageInheritedInk",
+      "contract": "conformance/seeds/page-inherited-ink.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
       "__case": "units: padding-left: 10% (resolved against the PARENT width) — declared CARRIED",
       "name": "CasePercentagePadding",
       "importName": "CasePercentagePadding",
@@ -886,6 +902,14 @@
       "name": "CaseSvgStrokeGlyphFillNone",
       "importName": "CaseSvgStrokeGlyphFillNone",
       "contract": "conformance/seeds/svg-stroke-glyph-fill-none.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
+      "__case": "text: text-indent: 9999px on a box pinned to 8px (the status-pip idiom: the label is pushed out of the box and only the dot shows) — declared LOWERED",
+      "name": "CaseTextIndentOffBox",
+      "importName": "CaseTextIndentOffBox",
+      "contract": "conformance/seeds/text-indent-off-box.contract.json",
       "sampleText": "",
       "axes": []
     },

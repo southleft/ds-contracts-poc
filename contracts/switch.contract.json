@@ -5,6 +5,7 @@
   "version": "2.0.1",
   "status": "draft",
   "description": "Toggle for on/off settings that take effect immediately. API mirrors industry convention (Astryx Switch) with the boolean value flattened to an off/on enum so both surfaces render both states truthfully; toggle behavior is a declared boundary. v2.0.0 (breaking, DOM shape): the control is a NATIVE input[type=checkbox] with role=switch (the modern switch pattern) inside the wrapping label \u2014 checked is DOM state, not ARIA on a button; track and thumb are presentational.",
+  "archetype": "toggle / switch",
   "semantics": {
     "element": "label"
   },

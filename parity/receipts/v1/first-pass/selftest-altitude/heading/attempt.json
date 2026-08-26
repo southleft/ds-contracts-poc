@@ -1,0 +1,325 @@
+{
+  "exam": "selftest-altitude",
+  "direction": "code-to-canvas",
+  "set": "Heading",
+  "id": "altitude.heading",
+  "source": {
+    "library": "altitude",
+    "config": "extract/computed/configs/altitude.json"
+  },
+  "stages": [
+    {
+      "stage": "capture",
+      "status": "ok",
+      "ms": 46344,
+      "driver": "harness",
+      "command": "npx tsx extract/computed/run.ts --harness examples/altitude/.altitude-sandbox --config extract/computed/configs/altitude.json --component Heading --out extract/computed/out/altitude --keep-originals",
+      "message": "3 artifact(s)",
+      "artifacts": [
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-VX09uf/root/extract/computed/out/altitude/heading/enriched.contract.json",
+          "sha256": "f2f4d752d80566d467efc096fbdf535ffe363b865b9b68022a69249b44233eae",
+          "bytes": 5324,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-VX09uf/root/extract/computed/out/altitude/heading/scorecard.json",
+          "sha256": "b60c486071bb053b7dc241aa075daea2a79cf3f52b540dc1bdb3caa4bf8cb94a",
+          "bytes": 13053,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-VX09uf/root/extract/computed/out/altitude/heading/captured-truth.json",
+          "sha256": "07d4b7b30e286d7a5edf9f5b09cb9457cd127be93d657099208ad212c8d2e5e7",
+          "bytes": 176915,
+          "committed": false
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-altitude/heading/ref-unset-regular.png",
+          "sha256": "08ec272aeae0113d5aa5ac1f8f26852a17876db604f1f6f19cf8281a33209f4c",
+          "bytes": 2048,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-altitude/heading/ref-unset-bold.png",
+          "sha256": "9f71d1a565f4b8c8ac83972efaf73e0bb0e017b81f4f7c83636ffa8cc733a34e",
+          "bytes": 2067,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-altitude/heading/ref-display-lg-regular.png",
+          "sha256": "25cfe8ee9590fc481b6226aedbad75b73a62b6dd35f0a2364cf1306bedb4c2bf",
+          "bytes": 3915,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-altitude/heading/ref-display-lg-bold.png",
+          "sha256": "0bd0a6f0a30cc85703f1de6b124ac07bc26ea8f60aebb76910c72111989eb51b",
+          "bytes": 3893,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-altitude/heading/ref-display-md-regular.png",
+          "sha256": "985542a775525f0d013ee51d26f0a1c5073a7000cba0bf78bc26dcb91825d755",
+          "bytes": 3272,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-altitude/heading/ref-display-md-bold.png",
+          "sha256": "90fce935083c42f33135f3b682b7e9654e3be1bc9f352f7ebdc16ed0742cc776",
+          "bytes": 3086,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-altitude/heading/ref-display-sm-regular.png",
+          "sha256": "2fb1720fface22a32c388fa4e1258ff070cc3f8641b382ae60840e7cd6aeacdd",
+          "bytes": 2915,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-altitude/heading/ref-display-sm-bold.png",
+          "sha256": "79761de2fe420c8650a653c74605ddd08d566d460bac3498503d387141a2f7ce",
+          "bytes": 2856,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-altitude/heading/code-unset-regular.png",
+          "sha256": "08ec272aeae0113d5aa5ac1f8f26852a17876db604f1f6f19cf8281a33209f4c",
+          "bytes": 2048,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-altitude/heading/code-unset-bold.png",
+          "sha256": "9f71d1a565f4b8c8ac83972efaf73e0bb0e017b81f4f7c83636ffa8cc733a34e",
+          "bytes": 2067,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-altitude/heading/code-display-lg-regular.png",
+          "sha256": "25cfe8ee9590fc481b6226aedbad75b73a62b6dd35f0a2364cf1306bedb4c2bf",
+          "bytes": 3915,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-altitude/heading/code-display-lg-bold.png",
+          "sha256": "0bd0a6f0a30cc85703f1de6b124ac07bc26ea8f60aebb76910c72111989eb51b",
+          "bytes": 3893,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-altitude/heading/code-display-md-regular.png",
+          "sha256": "985542a775525f0d013ee51d26f0a1c5073a7000cba0bf78bc26dcb91825d755",
+          "bytes": 3272,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-altitude/heading/code-display-md-bold.png",
+          "sha256": "90fce935083c42f33135f3b682b7e9654e3be1bc9f352f7ebdc16ed0742cc776",
+          "bytes": 3086,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-altitude/heading/code-display-sm-regular.png",
+          "sha256": "2fb1720fface22a32c388fa4e1258ff070cc3f8641b382ae60840e7cd6aeacdd",
+          "bytes": 2915,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-altitude/heading/code-display-sm-bold.png",
+          "sha256": "79761de2fe420c8650a653c74605ddd08d566d460bac3498503d387141a2f7ce",
+          "bytes": 2856,
+          "committed": true
+        }
+      ]
+    },
+    {
+      "stage": "promote",
+      "status": "ok",
+      "ms": 1160,
+      "driver": "harness",
+      "command": "npx tsx packages/cli/src/cli.ts promote --config examples/altitude/ds-library.json",
+      "message": "examples/altitude/contracts/heading.contract.json",
+      "artifacts": [
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-VX09uf/root/examples/altitude/contracts/heading.contract.json",
+          "sha256": "8a720212b7ea5b32914cf47d217062a6e4b2d7da2b977d9ba37bcfe7ed1235be",
+          "bytes": 5593,
+          "committed": false
+        }
+      ]
+    },
+    {
+      "stage": "validate",
+      "status": "ok",
+      "ms": 2,
+      "driver": "harness",
+      "command": "core/emit-react.ts validateContract (the referee — no CLI verb; docs/07)",
+      "message": "no violations",
+      "artifacts": []
+    },
+    {
+      "stage": "generate",
+      "status": "ok",
+      "ms": 788,
+      "driver": "harness",
+      "command": "npx ds-contracts generate examples/altitude/contracts/heading.contract.json --out <out> --tokens <dtcg>,<minted> --icons examples/altitude/assets/icons --stories",
+      "message": "6 file(s)",
+      "artifacts": [
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-VX09uf/generated/heading/index.ts",
+          "sha256": "e28926a44c32a6c155f3878948022dcf864b1e42b4652a4d8f4b241cfce591f5",
+          "bytes": 50,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-VX09uf/generated/heading/tokens.css",
+          "sha256": "51b55b29fdf343effa3f11152668dcb8aeb90014badd50bdd00fba00f2c01ed9",
+          "bytes": 34635,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-VX09uf/generated/heading/Heading/Heading.module.css",
+          "sha256": "56c988b121d59ff182ae3b95b209b161a908a93a285b092870246da479b86ea4",
+          "bytes": 1743,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-VX09uf/generated/heading/Heading/Heading.stories.tsx",
+          "sha256": "024b80cf751d7da82f2c525cd3fe54b6f0688e2b5c90ad26634e0ef93ce7f6d6",
+          "bytes": 4407,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-VX09uf/generated/heading/Heading/Heading.tsx",
+          "sha256": "b0a1edd8e5689969a8ce954948e20017e515916693c435c8e668d7b59477cc23",
+          "bytes": 2482,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-VX09uf/generated/heading/Heading/index.ts",
+          "sha256": "a96aced14233168f26fa7b4ea2e644ea72828c4f56e12596f418c8b206f87fca",
+          "bytes": 84,
+          "committed": false
+        }
+      ]
+    },
+    {
+      "stage": "bundle",
+      "status": "ok",
+      "ms": 1403,
+      "driver": "harness",
+      "command": "npx ds-contracts figma examples/altitude/contracts --out examples/altitude/figma --tokens <dtcg>,<minted> && npx ds-contracts figma bundle examples/altitude/contracts --name Altitude --out examples/altitude/figma/altitude.bundle.json",
+      "message": "heading.figma.js + altitude.bundle.json",
+      "artifacts": [
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-VX09uf/root/examples/altitude/figma/heading.figma.js",
+          "sha256": "ada14c11f06a920451a6d15f5cf356a01f0a1fc45c6535ff3bd613e9952348bf",
+          "bytes": 96729,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-VX09uf/root/examples/altitude/figma/altitude.bundle.json",
+          "sha256": "38785f75bec2a15e36c13b3823c7643f55e320380fe0911c453b15ac4b87e430",
+          "bytes": 282363,
+          "committed": false
+        }
+      ]
+    },
+    {
+      "stage": "mint",
+      "status": "ok",
+      "ms": 408,
+      "driver": "mcp",
+      "command": "npx ds-contracts figma … --file-key byMp6lt0Ij9b2QbkDGFwBh  →  an MCP-holding agent runs it through the figma-console bridge",
+      "message": "SKIPPED as unchanged: skipped=true, reason=\"unchanged\", nodeId 39:6778. The engine's specHash of the emitted component equalled ds_contracts/specHash on the canvas node (3759093838) and it wrote NOTHING. The canvas already carries these exact bytes — from an EARLIER mint, not from this attempt. newPages=[] — the exam page was current and was ignored. [MCP-driven mint, one attempt, evidence parity/receipts/v1/first-pass/selftest-altitude/mint-evidence.json; operator agent holding the figma-console MCP tools (figma_execute / exportAsync), Figma Desktop Bridge plugin 1.39.0 on ws port 9225; file byMp6lt0Ij9b2QbkDGFwBh, page \"Census / altitude\"]",
+      "artifacts": [
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-VX09uf/mint/heading.figma.js",
+          "sha256": "fadb8d8fd14482d396a64b990028e7fb4694979d7888975946766c450f8c5af7",
+          "bytes": 96749,
+          "committed": false
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-altitude/heading/canvas-display-lg-regular.png",
+          "sha256": "c9d4091ff77e47a686064386db0f1f34858a528b8641896a5f4ad6f2ac33b34c",
+          "bytes": 4156,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-altitude/heading/canvas-display-lg-bold.png",
+          "sha256": "a7c0b7257146c60c141102e84aaad43ee4bc604a6b56c41f0c28496b4fb706d4",
+          "bytes": 4190,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-altitude/heading/canvas-display-md-regular.png",
+          "sha256": "707f38a5fd46e4c31d8dcf14becceb9759af9b682b4bc9c6146943112d3ed124",
+          "bytes": 3095,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-altitude/heading/canvas-display-md-bold.png",
+          "sha256": "9b058df079a2a429b2d1f04f099204f15ff9f9946c7ba6ec6b53c67a0f38926a",
+          "bytes": 3282,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-altitude/heading/canvas-display-sm-regular.png",
+          "sha256": "8e27bc1adf4d7a3d60a6c7dacd0627d0eeb95b62d407bb7c8ab35b4230d9a33d",
+          "bytes": 2782,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-altitude/heading/canvas-display-sm-bold.png",
+          "sha256": "f745cbc7aee954bc5d8b85a72d9baf17a70b68c3b786fbacbaab80c771f1b089",
+          "bytes": 2941,
+          "committed": true
+        }
+      ],
+      "bytesWritten": false
+    }
+  ],
+  "chainComplete": true,
+  "firstStop": null,
+  "images": {
+    "ref": [
+      "parity/receipts/v1/first-pass/selftest-altitude/heading/ref-unset-regular.png",
+      "parity/receipts/v1/first-pass/selftest-altitude/heading/ref-unset-bold.png",
+      "parity/receipts/v1/first-pass/selftest-altitude/heading/ref-display-lg-regular.png",
+      "parity/receipts/v1/first-pass/selftest-altitude/heading/ref-display-lg-bold.png",
+      "parity/receipts/v1/first-pass/selftest-altitude/heading/ref-display-md-regular.png",
+      "parity/receipts/v1/first-pass/selftest-altitude/heading/ref-display-md-bold.png",
+      "parity/receipts/v1/first-pass/selftest-altitude/heading/ref-display-sm-regular.png",
+      "parity/receipts/v1/first-pass/selftest-altitude/heading/ref-display-sm-bold.png"
+    ],
+    "code": [
+      "parity/receipts/v1/first-pass/selftest-altitude/heading/code-unset-regular.png",
+      "parity/receipts/v1/first-pass/selftest-altitude/heading/code-unset-bold.png",
+      "parity/receipts/v1/first-pass/selftest-altitude/heading/code-display-lg-regular.png",
+      "parity/receipts/v1/first-pass/selftest-altitude/heading/code-display-lg-bold.png",
+      "parity/receipts/v1/first-pass/selftest-altitude/heading/code-display-md-regular.png",
+      "parity/receipts/v1/first-pass/selftest-altitude/heading/code-display-md-bold.png",
+      "parity/receipts/v1/first-pass/selftest-altitude/heading/code-display-sm-regular.png",
+      "parity/receipts/v1/first-pass/selftest-altitude/heading/code-display-sm-bold.png"
+    ],
+    "canvas": [
+      "parity/receipts/v1/first-pass/selftest-altitude/heading/canvas-display-lg-regular.png",
+      "parity/receipts/v1/first-pass/selftest-altitude/heading/canvas-display-lg-bold.png",
+      "parity/receipts/v1/first-pass/selftest-altitude/heading/canvas-display-md-regular.png",
+      "parity/receipts/v1/first-pass/selftest-altitude/heading/canvas-display-md-bold.png",
+      "parity/receipts/v1/first-pass/selftest-altitude/heading/canvas-display-sm-regular.png",
+      "parity/receipts/v1/first-pass/selftest-altitude/heading/canvas-display-sm-bold.png"
+    ],
+    "absent": [
+      {
+        "kind": "canvas",
+        "reason": "unset-regular: the minted set enumerates the 6 declared Variant values (Display Lg/Md/Sm, Lg, Md, Sm) and has no cell for the capture's unset Variant plane (FC-UNSET-PLANE-UNDRAWN)"
+      },
+      {
+        "kind": "canvas",
+        "reason": "unset-bold: the minted set enumerates the 6 declared Variant values (Display Lg/Md/Sm, Lg, Md, Sm) and has no cell for the capture's unset Variant plane (FC-UNSET-PLANE-UNDRAWN)"
+      }
+    ]
+  },
+  "totalMs": 50105
+}

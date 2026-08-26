@@ -46,6 +46,7 @@ import {
   enrichLayout,
   prepareMint,
   styledChannels,
+  uaStyles,
 } from './fuse.js';
 import { reconstructCaptures, type CapturedTruthFile } from './replay.js';
 import { promoteAnatomy } from './anatomy.js';
@@ -97,7 +98,7 @@ function fuseFromTruth(configRel: string, outRel: string, componentName: string)
     viewport: cfg.browser.viewport,
     stage: stageFor(cfg, comp),
     portaled: comp.portalCapture === true,
-  });
+  }, uaStyles(truth));
   const folds = detectFolds(aligned, styled, []);
   const layout = enrichLayout(aligned, space, styled, promotion.contract);
   const prep = prepareMint(

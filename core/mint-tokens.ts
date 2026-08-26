@@ -59,9 +59,11 @@ import { aliasTarget, flattenTokens } from './tokens.js';
 
 /** Every minted path lives under this namespace — the receipt's invariant
  *  that no minted name can be mistaken for a semantic token. */
+// @door mint.namespace-fence
 export const MINT_NAMESPACE = 'imported';
 
 /** A literal repeated at this many usage sites dedupes into a shared leaf. */
+// @door mint.share-threshold
 export const MINT_SHARE_THRESHOLD = 3;
 
 export interface MintOccurrence {
@@ -103,6 +105,7 @@ export interface MintObservation {
   kind: 'color' | 'px' | 'number' | 'shadow' | 'gradient' | 'size';
   /** v17 — the Figma TEXT STYLE this observation's node rides, when the style
    *  is NOT token-derived (the designer named a style but bound no variable to
+   // @door mint.text-style-namespacing
    *  its typography). A text style is a design-system vocabulary word exactly
    *  like a variable name, and it is SHARED ACROSS COMPONENTS: Eventz draws
    *  `body/sm` on 52 nodes in five different sets. Minted under the usual
@@ -190,6 +193,12 @@ export interface MintResult {
   entries: MintedEntry[];
   /** Aligned by index with the observations passed in. */
   bindings: MintedBinding[];
+  /** THE DUMP-ROUNDING RECONCILIATION (docs/23 §D.33). Leaves whose path the
+   *  caller's corpus already defines and whose observed value is that corpus
+   *  value re-spelled at the dump's 2-decimal geometry rounding: the same
+   *  measurement, two spellings. The corpus spelling is carried and the row
+   *  is named here — never a silent second value on one path. */
+  reconciled: string[];
 }
 
 // ---------------------------------------------------------------------------
@@ -216,6 +225,7 @@ const partSegment = (rawPath: string): string => {
 
 type MintKind = MintObservation['kind'];
 
+// @door mint.value-scale-snapping
 const formatValue = (kind: MintKind, value: string | number): string =>
   kind === 'color'
     ? `#${String(value).replace(/^#/, '').toLowerCase()}`
@@ -231,6 +241,35 @@ const formatValue = (kind: MintKind, value: string | number): string =>
         ? `${value}px`
         : String(value);
 
+/** THE DUMP'S GEOMETRY ROUNDING. Both dump producers spell canvas geometry
+ *  through `round2` — `Math.round(n * 100) / 100` (extract/figma/dump.plugin.js
+ *  and extract/figma/rest/map.ts). Kept here as the ONE definition the
+ *  reconciliation below compares against, so the two never drift apart. */
+const DUMP_GEOMETRY_DECIMALS = 2;
+const roundToDump = (n: number): number => {
+  const f = 10 ** DUMP_GEOMETRY_DECIMALS;
+  return Math.round(n * f) / f;
+};
+
+/** SAME MEASUREMENT, TWO SPELLINGS? True only when `corpus` is a px dimension
+ *  that the dump's rounding turns into exactly `observed`. Pure, total, and
+ *  deliberately narrow: 39.9219px vs 39.92px is one value; 39.92px vs
+ *  39.95px is two, and stays two. */
+export const sameUnderDumpRounding = (corpus: string, observed: string): boolean => {
+  const px = /^(-?\d+(?:\.\d+)?)px$/;
+  const c = px.exec(corpus.trim());
+  const o = px.exec(observed.trim());
+  if (!c || !o) return false;
+  const cn = Number(c[1]);
+  const on = Number(o[1]);
+  if (!Number.isFinite(cn) || !Number.isFinite(on)) return false;
+  // The observation must ALREADY be at the dump's precision — otherwise the
+  // two spellings did not come from the rounding this reconciles.
+  if (roundToDump(on) !== on) return false;
+  return roundToDump(cn) === on;
+};
+
+// @door mint.dtcg-type-omission
 /** DTCG $type for a claimed leaf — a FUNCTION of the value, not only the
  *  kind: a 'size' leaf holding a number is a dimension, one holding a sizing
  *  keyword (`fit-content`) is not a DTCG type at all, and the repo's
@@ -247,6 +286,7 @@ const DTCG_TYPE: Record<Exclude<MintKind, 'size'>, string> = {
   gradient: 'gradient',
 };
 
+// @door mint.shared-name-spelling
 /** Shared-leaf name for a deduped literal: color-1f2937 / size-4 / size-0-5 /
  *  num-0-4. */
 const sharedName = (kind: MintKind, value: string | number): string =>
@@ -297,12 +337,15 @@ function classify(
    *  coverage is required, exactly as before. */
   realizedCombos?: Array<Record<string, string>>,
 ): Classified {
+  // @door mint.no-occurrences
   if (obs.occurrences.length === 0) return { kind: 'none', reason: 'no occurrences observed — nothing minted' };
   const values = obs.occurrences.map((o) => o.value);
+  // @door mint.uniform-or-nothing
   if (values.every((v) => v === values[0])) return { kind: 'uniform', value: values[0] };
   // Bool conditioning is ROOT-ONLY (data-attribute selectors live on the
   // root element; nested parts and state-plane observations keep the
   // enum-only vocabulary — their refusals stay named).
+  // @door mint.bool-axis-root-only
   const axes = obs.part === '' ? allAxes : allAxes.filter((a) => !a.bool);
   for (const axis of axes) {
     const byValue = new Map<string, string | number>();
@@ -319,9 +362,11 @@ function classify(
     // fabricate a dangling reference. `sparse` observations (presence-shaped
     // channels) fill unobserved values with their declared vacuous value
     // instead — never inventing ink, only closing the dangling-ref hole.
+    // @door mint.single-axis-full-coverage
     if (fits) {
       const missing = axis.values.filter((v) => !byValue.has(v));
       if (missing.length === 0) return { kind: 'variant', axis, byValue };
+      // @door mint.sparse-vacuous-fill
       if (obs.sparse !== undefined && missing.length < axis.values.length) {
         for (const v of missing) byValue.set(v, obs.sparse);
         return { kind: 'variant', axis, byValue };
@@ -386,6 +431,7 @@ function classify(
   // same expansion the root's own pair already took. The flag stays, and
   // stays honest — a caller that still cannot spell a pair must not ask for
   // one — but it is no longer a statement about the DESIGN path.
+  // @door mint.nested-pairs-opt-in
   const pairsAllowed = obs.part === '' || nestedPairs;
   if (!pairsAllowed) {
     return {
@@ -421,6 +467,7 @@ function classify(
   // MEASURED. Trading a measured binding for a supplied one on nothing but
   // axis order is a straight loss, and it silently dropped the saturation
   // caveat with it.
+  // @door mint.pair-full-coverage-first-pass
   for (let i = 0; i < axes.length; i++) {
     for (let j = i + 1; j < axes.length; j++) {
       const [a, b] = [axes[i], axes[j]];
@@ -442,6 +489,7 @@ function classify(
         // the note says the pair is unwitnessed and may be drift rather than
         // intent. Refusing loses facts; carrying silently overclaims; naming
         // does neither.
+        // @door mint.saturation-caveat
         const cells = a.values.length * b.values.length;
         const unwitnessed = obs.occurrences.length <= cells;
         if (missing.length === 0) return { kind: 'variant2', axes: [a, b], byValue, unwitnessed };
@@ -487,6 +535,7 @@ function classify(
   // Strict by default: without `realizedCombos` the caller keeps the old
   // full-coverage rule, and a single combination missing an axis value abandons
   // the pair rather than guessing the matrix.
+  // @door mint.ragged-matrix-admission
   if (realizedCombos !== undefined) {
     for (let i = 0; i < axes.length; i++) {
       for (let j = i + 1; j < axes.length; j++) {
@@ -497,6 +546,7 @@ function classify(
         if (missing.length === 0) continue; // pass 1 already returned it
         const realized = new Set<string>();
         let judgeable = true;
+        // @door mint.ragged-judgeability-fence
         for (const c of realizedCombos) {
           const va = c[a.propName];
           const vb = c[b.propName];
@@ -518,6 +568,7 @@ function classify(
         // nothing else. (The all-first combination may itself be undrawn — a
         // ragged matrix is exactly where that happens — so this takes the
         // smallest combination actually OBSERVED, never a fabricated one.)
+        // @door mint.ragged-fill-value-rank
         const rank = (o: MintOccurrence): string =>
           allAxes
             .map((ax) => {
@@ -527,6 +578,7 @@ function classify(
             .join('.');
         const base = [...obs.occurrences].sort((x, y) => (rank(x) < rank(y) ? -1 : rank(x) > rank(y) ? 1 : 0))[0].value;
         for (const key of missing) byValue.set(key, base);
+        // @door mint.saturation-denominator-excludes-supplied
         const cells = a.values.length * b.values.length;
         // Saturation is judged against the cells that can actually HOLD an
         // observation. Counting the supplied cells in the denominator
@@ -548,6 +600,7 @@ function classify(
   // root-only: a nested part's per-value map pins exactly ONE axis, leaving
   // TWO placeholders in the ref — past the one-placeholder map rule. A
   // nested triple is a named refusal.
+  // @door mint.nested-triple-refusal
   if (obs.part !== '') {
     return {
       kind: 'none',
@@ -562,6 +615,7 @@ function classify(
   // must be OBSERVED), so no cap is invented. A contradiction on any third
   // axis fails the fit — an irrelevant axis can never ride along, because
   // its combinations would carry contradicting values.
+  // @door mint.triple-root-only-full-coverage
   for (let i = 0; i < axes.length; i++) {
     for (let j = i + 1; j < axes.length; j++) {
       for (let k = j + 1; k < axes.length; k++) {
@@ -592,6 +646,7 @@ function classify(
       }
     }
   }
+  // @door mint.uncorrelated-refusal
   return {
     kind: 'none',
     reason: 'resolved values differ across variants without correlating to any variant axis (or axis pair/triple) — nothing minted; bind manually',
@@ -617,6 +672,25 @@ export interface MintOptions {
    *  observation and are named on the binding. Omit it and full cartesian
    *  coverage is required, exactly as before. */
   realizedCombos?: Array<Record<string, string>>;
+  /** THE DUMP-ROUNDING RECONCILIATION (docs/23 §D.33). Resolves a minted
+   *  dot-path against the caller's token corpus (`ctx.corpus`) — undefined
+   *  when the corpus does not define it.
+   *
+   *  WHY. Both dump producers round canvas geometry to two decimals
+   *  (`round2` in extract/figma/dump.plugin.js and extract/figma/rest/map.ts),
+   *  so a box the code→canvas mint spelled `39.9219px` from the browser's
+   *  computed style comes back from the canvas as `39.92px`. That is ONE
+   *  measurement in two spellings, and minting the rounded spelling onto the
+   *  path the corpus already holds makes `generate` refuse a two-valued slot
+   *  — the wall that stopped four of the eight Flowbite sets on the
+   *  documented canvas→code path (parity/receipts/v1/FIRST-PASS.md).
+   *
+   *  With this lookup, a claim whose corpus twin ROUNDS TO the observed value
+   *  adopts the corpus's (more precise) spelling and is named in
+   *  {@link MintResult.reconciled}. A corpus value that does NOT round to the
+   *  observation is a real disagreement and is left alone — the collision
+   *  still surfaces, by name, downstream. */
+  corpusValueAt?: (path: string) => string | undefined;
 }
 
 export function mintTokens(
@@ -646,7 +720,12 @@ export function mintTokens(
   const leaves = new Map<string, MintedEntry & { type?: string }>();
   /** A leaf may not sit on another leaf's path (a group under a leaf, or a
    *  leaf on a group's prefix, would corrupt the DTCG tree). */
+  // @door mint.leaf-under-leaf-fence
   const hasDescendants = (path: string) => [...leaves.keys()].some((k) => k.startsWith(`${path}.`));
+  /** Paths whose value was taken from the corpus because the observation was
+   *  that same value at the dump's rounding (see MintOptions.corpusValueAt). */
+  const reconciled: string[] = [];
+  // @door mint.path-claim-value-never-overwritten
   const claim = (
     wantedPath: string,
     kind: MintKind,
@@ -654,9 +733,21 @@ export function mintTokens(
     usageSite: string,
     textStyle?: { name: string; key?: string },
   ): string => {
-    const formatted = formatValue(kind, value);
+    const observed = formatValue(kind, value);
     for (let n = 1; ; n++) {
       const path = n === 1 ? wantedPath : `${wantedPath}-${n}`;
+      // THE DUMP-ROUNDING RECONCILIATION. Ask the corpus what it already
+      // spells at THIS path; when the observation is that value re-rounded by
+      // the dump, carry the corpus's spelling so one measurement never lands
+      // on one path under two names.
+      const corpusValue = opts?.corpusValueAt?.(path);
+      const formatted =
+        corpusValue !== undefined && sameUnderDumpRounding(corpusValue, observed)
+          ? corpusValue
+          : observed;
+      if (formatted !== observed && !reconciled.includes(path)) {
+        reconciled.push(`${path}: observed ${observed} is ${corpusValue} at the dump's ${DUMP_GEOMETRY_DECIMALS}-decimal geometry rounding — the corpus spelling is carried`);
+      }
       const existing = leaves.get(path);
       if (!existing) {
         if (hasDescendants(path)) continue;
@@ -669,6 +760,7 @@ export function mintTokens(
         });
         return path;
       }
+      // @door mint.textstyle-identity-required-for-merge
       if (
         existing.value === formatted &&
         JSON.stringify(existing.textStyle ?? null) ===
@@ -694,6 +786,7 @@ export function mintTokens(
     const site = `${obs.nodePath} ${obs.cssProperty}`;
     if (c.kind === 'uniform') {
       const key = `${obs.kind}|${formatValue(obs.kind, c.value)}`;
+      // @door mint.stylename-blocks-shared-dedupe
       const wanted =
         obs.styleName === undefined &&
         (siteCount.get(key) ?? 0) >= MINT_SHARE_THRESHOLD
@@ -720,6 +813,7 @@ export function mintTokens(
     const axisProps = c.kind === 'variant' ? [c.axis.propName] : c.axes.map((a) => a.propName);
     const siteSuffix = (key: string) =>
       key.split('.').map((v, i) => `${axisProps[i]}=${v}`).join(', ');
+    // @door mint.group-prefix-compatibility
     for (let n = 1; ; n++) {
       const groupBase = n === 1 ? base : `${base}-${n}`;
       const compatible =
@@ -735,6 +829,7 @@ export function mintTokens(
       // system can see which cells the design never drew.
       const undrawnKeys = new Set(c.kind === 'variant2' || c.kind === 'variant' ? (c.undrawn ?? []) : []);
       const textStyleForKey = (
+        // @door mint.per-key-textstyle-fallback
         key: string,
       ): { name: string; key?: string } | undefined => {
         const axisVals = key.split('.');
@@ -813,6 +908,7 @@ export function mintTokens(
             `, but the pair "${axisProps[0]}" x "${axisProps[1]}" is SATURATED ` +
             `(${obs.occurrences.length} observation(s) over ${denom} drawn cell(s) — at most one per cell, so ANY values would fit): ` +
             'the per-cell values reproduce the drawing exactly, but the CORRELATION is unwitnessed and may be drift rather than intent — review before treating it as a rule. ' +
+            // @door mint.distinct-value-hint
             // The distinct-value count is the reviewer's shortcut. An
             // arbitrary assignment over N cells tends toward N distinct
             // values; heavy repetition is structure the fit did not have
@@ -862,6 +958,7 @@ export function mintTokens(
       }),
     ),
     bindings,
+    reconciled: reconciled.sort(),
   };
 }
 
@@ -872,6 +969,7 @@ export function mintTokens(
 /** The minted tree as a `:root { --imported-…: value; }` block — the same
  *  custom-property spelling the emitters reference (var(--a-b-c)), so a page
  *  that includes this block renders the minted bindings at literal fidelity. */
+// @door mint.alias-emitted-as-var
 export function mintedTokenCss(tree: Record<string, unknown>): string {
   const dashed = (p: string) => p.split('.').join('-');
   const lines = [':root {'];

@@ -1,0 +1,111 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "day-picker.calendar",
+  "name": "Calendar",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the HELD-OUT FIRST-PASS EXAM — props/axes only; anatomy is promoted from captured DOM truth. Subject: react-day-picker@10.0.1 (self-contained calendar; ships its own style.css). BLINDNESS RULE (non-negotiable): this file was authored from the library's own documentation and shipped source ONLY. No capture/promote/emit stage of this repo was run against this library, no output of ours for it was read, and nothing here was tuned in response to our pipeline's behaviour. See parity/receipts/v1/HELD-OUT-MANIFEST.md.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "captionLayout",
+      "type": {
+        "enum": [
+          "label",
+          "dropdown",
+          "dropdown-months",
+          "dropdown-years"
+        ]
+      },
+      "default": "label",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "CaptionLayout",
+          "values": {
+            "label": "Label",
+            "dropdown": "Dropdown",
+            "dropdown-months": "Dropdown Months",
+            "dropdown-years": "Dropdown Years"
+          }
+        },
+        "code": {
+          "prop": "captionLayout"
+        }
+      }
+    },
+    {
+      "name": "numberOfMonths",
+      "type": {
+        "enum": [
+          "1",
+          "2"
+        ]
+      },
+      "default": "1",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "NumberOfMonths",
+          "values": {
+            "1": "1",
+            "2": "2"
+          }
+        },
+        "code": {
+          "prop": "numberOfMonths"
+        }
+      }
+    },
+    {
+      "name": "showOutsideDays",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "ShowOutsideDays"
+        },
+        "code": {
+          "prop": "showOutsideDays"
+        }
+      }
+    },
+    {
+      "name": "showWeekNumber",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "ShowWeekNumber"
+        },
+        "code": {
+          "prop": "showWeekNumber"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled"
+  ],
+  "anatomy": {
+    "root": {}
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "react-day-picker",
+        "export": "DayPicker"
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "exam": "selftest-flowbite-live",
+  "direction": "canvas-to-code",
+  "describe": "SELF-TEST FIXTURE — the eight Flowbite pages of file 59mLQlOMiD5w5za6SUcoO5 through the documented canvas→code chain, LIVE over READ-ONLY REST rather than from the committed fixture the design→code census replays. NOT held out: these are pipeline-drawn, stamped sets the engine has proposed from before. It exists to exercise the live half — the network dump, the image export, the browser — that a fixture replay never touches.",
+  "heldOut": false,
+  "date": "2026-08-25",
+  "engineSha": "4c43433f80493d205c11638b450a1a3bb7d18eaa",
+  "input": {
+    "kit": "flowbite",
+    "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+    "pages": [
+      "120:1942",
+      "120:1981",
+      "120:1985",
+      "120:1998",
+      "120:2003",
+      "120:2016",
+      "120:2049",
+      "120:2112"
+    ],
+    "mode": "exact",
+    "corpus": [
+      "examples/tailwind/tokens/tailwind.dtcg.json",
+      "examples/tailwind/tokens/tailwind-minted.dtcg.json"
+    ]
+  },
+  "sets": [
+    "Alert (flowbite.alert)",
+    "Kbd",
+    "Label",
+    "Card (flowbite.card)",
+    "HelperText",
+    "ToggleSwitch",
+    "Badge (flowbite.badge)",
+    "Button (flowbite.button)"
+  ],
+  "mint": {
+    "requested": false,
+    "fileKey": "(none)",
+    "status": "SKIPPED",
+    "message": "canvas→code is READ-ONLY; no exam in this direction writes to any Figma file",
+    "evidence": null
+  },
+  "noRetry": true,
+  "cellCap": 8
+}

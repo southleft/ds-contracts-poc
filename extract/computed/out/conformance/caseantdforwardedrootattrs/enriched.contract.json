@@ -4,7 +4,7 @@
   "name": "CaseAntdForwardedRootAttrs",
   "version": "0.1.0",
   "status": "draft",
-  "description": "SEED contract for the CSS/DOM conformance fixture case \"antd-forwarded-root-attrs\" (anatomy). The fixture varies CSS CONSTRUCTS, not prop spaces, so the prop space is deliberately EMPTY: every axis the capture would enumerate is held at nothing, and the whole measurement is the computed truth of one mounted rendering. Construct: label > [input.sr-only + span.box] + span.text — the component forwards className/data-* to the HIDDEN input, not the visible label root (antd Checkbox/Radio) COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @ds-contracts/conformance@0.1.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "description": "SEED contract for the CSS/DOM conformance fixture case \"antd-forwarded-root-attrs\" (anatomy). The fixture varies CSS CONSTRUCTS, not prop spaces, so the prop space is deliberately EMPTY: every axis the capture would enumerate is held at nothing, and the whole measurement is the computed truth of one mounted rendering. Construct: label > [input.sr-only + span.box] + span.text — the component forwards className/data-* to the HIDDEN input, not the visible label root (antd Checkbox/Radio) COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @ds-contracts/conformance@0.1.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "div"
   },
@@ -57,7 +57,27 @@
                 "right": "{imported.shared.size-0}",
                 "top": "{imported.shared.size-0}",
                 "width": "{imported.shared.size-16}"
-              }
+              },
+              "codeOnly": [
+                {
+                  "state": "focus-visible",
+                  "channel": "outline-color",
+                  "value": "#005fcc",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "outline-offset",
+                  "value": "2px",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "outline-width",
+                  "value": "1px",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                }
+              ]
             },
             "a": {
               "element": "span",
@@ -88,6 +108,7 @@
                 "border-top-right-radius": "{imported.shared.size-4}",
                 "border-top-width": "{imported.shared.size-1}",
                 "bottom": "{imported.shared.size-0}",
+                "color": "{imported.shared.color-1976d2}",
                 "font-size": "{imported.shared.size-12}",
                 "height": "{imported.shared.size-16}",
                 "left": "{imported.shared.size-0}",
@@ -100,7 +121,12 @@
             }
           },
           "tokens": {
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
             "bottom": "{imported.shared.size-0}",
+            "color": "{imported.shared.color-1976d2}",
             "font-size": "{imported.shared.size-12}",
             "height": "{imported.shared.size-16}",
             "left": "{imported.shared.size-0}",
@@ -118,6 +144,11 @@
             "font-family": "monospace"
           },
           "tokens": {
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
             "font-size": "{imported.shared.size-12}",
             "font-weight": "{imported.case-antd-forwarded-root-attrs.label.font-weight}"
           }
@@ -129,6 +160,11 @@
         "font-family": "monospace"
       },
       "tokens": {
+        "border-bottom-color": "{imported.shared.color-663399}",
+        "border-left-color": "{imported.shared.color-663399}",
+        "border-right-color": "{imported.shared.color-663399}",
+        "border-top-color": "{imported.shared.color-663399}",
+        "color": "{imported.shared.color-1976d2}",
         "column-gap": "{imported.case-antd-forwarded-root-attrs.root.column-gap}",
         "font-size": "{imported.shared.size-12}",
         "height": "{imported.shared.size-16}",

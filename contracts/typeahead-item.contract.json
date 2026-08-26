@@ -5,6 +5,7 @@
   "version": "1.0.0",
   "status": "draft",
   "description": "Default dropdown item for search results: label with optional icon and description. API mirrors industry convention (Astryx TypeaheadItem) with the item object flattened to explicit props.",
+  "archetype": "select / combobox",
   "semantics": {
     "element": "div",
     "role": "option"

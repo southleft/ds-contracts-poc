@@ -5,6 +5,7 @@
   "version": "1.0.1",
   "status": "draft",
   "description": "Persistent inline notification for page- or section-level feedback. API mirrors industry convention (Astryx Banner): status drives color, icon, and ARIA role; dismissable banners expose a close affordance; endContent carries actions.",
+  "archetype": "banner / alert / toast",
   "semantics": {
     "element": "div",
     "roleByProp": {

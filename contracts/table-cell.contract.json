@@ -5,6 +5,7 @@
   "version": "1.1.0",
   "status": "draft",
   "description": "A single data cell in a table row.",
+  "archetype": "table / data-grid",
   "semantics": {
     "element": "div",
     "role": "cell"

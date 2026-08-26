@@ -76,6 +76,11 @@ export interface CapturedTruthFile {
   anatomy: TruthAnatomyEntry[];
   base: { key: string; root: CapturedNode };
   controls: Record<string, CapturedNode>;
+  /** THE UA BASELINE (door `capture.control-baseline-mint`). Optional: a
+   *  capture taken before the baseline fix has none, and every offline
+   *  instrument falls back to `controls` and SAYS SO rather than pretending
+   *  the subtraction was sound. */
+  uaControls?: Record<string, CapturedNode>;
   captures: TruthCaptureEntry[];
 }
 

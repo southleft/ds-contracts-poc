@@ -162,14 +162,15 @@ One TypeScript interface (`CaptureConfig`, `extract/computed/capture.ts`)
 declares everything a library may say about itself:
 
 ```
-library:     package, version, framework, classPrefix, classAllow?, varPrefix?
-mount:       imports[], wrapperOpen, wrapperClose
-tokens:      dtcg[], css, minted?
-icons?, browser, stage, enumeration{cartesianLimit, unsetLabel}
+library:     package, version, framework, classPrefix, classAllow?, varPrefix?,
+             tokenGroup?, customElements?
+mount:       imports[], wrapperOpen, wrapperClose, headStyles?, preScript?
+tokens:      dtcg[], css, minted?, mintedBootstrap?
+icons?, fonts?, browser, stage, enumeration{cartesianLimit, unsetLabel}
 components[]: name, importName, contract, sampleText, axes, axisValueMap,
               fixedProps, stateProps, presenceProps, callbackProps,
               childWrap | childrenSpec, openDriver, portalCapture,
-              blockStage, stage, triage, __note
+              blockStage, stage, baseCombo, triage, __note
 ```
 
 Three keys carry *grammar*, and they are where the per-library craft actually
@@ -456,7 +457,7 @@ What makes a library-specific hack expensive rather than merely discouraged:
 
 | instrument | what it pins | how to run |
 |---|---|---|
-| **Eval suite** | 225/225 evals as of `evals/results.json` — by claim family: 36 refusal, 35 determinism, 67 detection, 64 extraction, 4 convergence, 5 CLI, 13 journey, 1 theming (derive it: `python3 -c "import json,collections; print(collections.Counter(x['claim'] for x in json.load(open('evals/results.json'))['results']))"`) | `npm run eval` |
+| **Eval suite** | 230/230 evals as of `evals/results.json` — by claim family: 39 refusal, 36 determinism, 68 detection, 64 extraction, 4 convergence, 5 CLI, 13 journey, 1 theming (derive it: `python3 -c "import json,collections; print(collections.Counter(x['claim'] for x in json.load(open('evals/results.json'))['results']))"`) | `npm run eval` |
 | **Golden byte-identity** | recorded generated output, byte-compared — determinism against a *record*, not just against itself | `golden-generated-output` eval, `evals/golden.json` |
 | **Per-library genesis pins** | one eval each: `astryx-figma-genesis`, `mui-figma-genesis`, `tailwind-figma-genesis`, `carbon-figma-genesis`, `altitude-shadow-dom-genesis`, `polaris-showcase-reproducible` | `npm run eval` |
 | **Sibling-bundle flows** | each library's `*.bundle.json` runs through the **real engine path** and must build its full component count with its full variable inventory — MUI 14, Astryx 13, Polaris 12, Carbon 10, plus the Astryx docs-theme re-skin proving the same inventory re-themes | `npm run plugin:check` (`scripts/plugin-engine-check.mjs`, ~1,150 lines) |
@@ -609,7 +610,8 @@ captured at all*, and it is the largest qualifier in this document.
   path forward is synthesizing the pseudo-element into the sweep as a real
   aligned part — exactly how MUI Switch's thumb offset is now carried.
 - **The Accordion chevron is refused, not drawn.** `expandIcon` takes a React
-  element; the marker grammar resolves package *exports* only, and the pinned
+  element; the marker grammar resolves package *exports* and pinned literals
+  (`$date`, `$classTokens`) only, and the pinned
   sandbox has no `@mui/icons-material`. A hand-drawn chevron would be a
   fabricated canvas fact, so there is none.
 - **Fonts were not loaded in this harness run.** Carbon's `styles.css` carries

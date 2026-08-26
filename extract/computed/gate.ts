@@ -57,14 +57,31 @@ export interface GateRow {
 export interface Scorecard {
   component: string;
   generatedBy: string;
+  /** The browser the CAPTURED TRUTH was recorded on. */
   browser: string;
+  /**
+   * The browser that ACTUALLY RENDERED this scorecard's gate page.
+   *
+   * For a harness run these are the same instrument in the same process. For an
+   * OFFLINE re-fuse they need not be, and until 2026-08-25 this file had no way
+   * to say so: the scorecard printed the CAPTURE's browser whatever binary did
+   * the rendering, which is why a stray Chromium went unnoticed across the whole
+   * corpus (see chromiumExecutable() in extract/figma/visual-parity/render.ts).
+   */
+  renderedBy: string;
+  /** Present ONLY when the two above disagree — a receipt may not hide that. */
+  browserMismatch?: string;
   method: string;
   combos: number;
   interactions: number;
   computed: {
     cellsCompared: number;
     cellsEqual: number;
-    pctEqual: number;
+    /**
+     * NULL when `cellsCompared === 0` — nothing was compared, so there is no
+     * percentage to report. Never 100: see the door note at the assignment.
+     */
+    pctEqual: number | null;
     /** combo×state pairs with every compared channel equal. */
     rowsFullyEqual: number;
     rows: number;
@@ -156,6 +173,7 @@ function withComboAsDefaults(contract: Contract, space: PropSpace, combo: Combo,
   // Round 4: the gate renders the CAPTURE-MOUNTED text samples (fixedProps /
   // sampleText) — comparing against the real render with different strings
   // would score the strings, not the styling.
+  // @door gate.capture-mounted-text
   if (comp) {
     for (const prop of clone.props) {
       if (prop.type !== 'text') continue;
@@ -171,8 +189,10 @@ function withComboAsDefaults(contract: Contract, space: PropSpace, combo: Combo,
     // Round 4 presence axes: the enriched contract carries a BOOLEAN prop —
     // 'on'/'off' axis values become boolean defaults (the emitted static
     // HTML renders visibleWhen/stylesWhen off the boolean).
+    // @door gate.presence-axis-boolean
     if (prop.type === 'boolean') { prop.default = v === 'on'; continue; }
     if (a.unset !== undefined && v === a.unset) delete prop.default;
+    // @door gate.unset-axis-deletes-default
     else prop.default = v;
   }
   return clone;
@@ -190,6 +210,7 @@ function withComboAsDefaults(contract: Contract, space: PropSpace, combo: Combo,
  * was in both files as a comment and was true only by coincidence; it is now
  * true by construction — one function, three callers.
  */
+// @door gate.inventory-fresh-over-shipped
 export function gateInventory(
   repoRoot: string,
   cfg: CaptureConfig,
@@ -201,6 +222,32 @@ export function gateInventory(
   const merged = mergeShippedMinted(mintedTree, shipped);
   const baseTrees = cfg.tokens.dtcg.map((p) => JSON.parse(readFileSync(path.join(repoRoot, p), 'utf8')) as Record<string, unknown>);
   return { inventory: tokenInventoryFromJson([...baseTrees, merged.tree]), merged, baseTrees };
+}
+
+/**
+ * The sentence a scorecard must carry when the browser that RENDERED it is not
+ * the browser its captured truth was recorded on — and `undefined` when they
+ * agree. Pure, so the guard can falsify it without launching anything.
+ *
+ * Accepts either spelling on either side: the bare `149.0.7827.55` that
+ * `browser.version()` returns, or the decorated
+ * `Chromium 149.0.7827.55 (playwright-core, headless)` a capture's provenance
+ * carries. Comparing the decorated form to the bare one as strings would report
+ * a mismatch on every offline re-fuse and the warning would be worthless.
+ */
+export function browserMismatchNote(capturedVersion: string, renderVersion: string): string | undefined {
+  const bare = (v: string) => /(\d+(?:\.\d+)+)/.exec(v)?.[1] ?? v;
+  const captured = bare(capturedVersion);
+  const rendered = bare(renderVersion);
+  if (captured === rendered) return undefined;
+  return (
+    `RENDERED ON A DIFFERENT BROWSER THAN THE CAPTURE — these numbers were produced by Chromium ${rendered}, ` +
+    `but the captured truth they are scored against was recorded on Chromium ${captured}. Computed styles differ ` +
+    'between Chromium versions, so cells can be UNEQUAL for that reason alone and this scorecard is not comparable ' +
+    "to one recorded on the capture's own browser. Measured 2026-08-25: `position-anchor` computes `none` in 149 " +
+    'and `normal` in 151, and on a raw all-channel replay `flex-line-count`, `ruby-overhang` and `text-fit` move ' +
+    "too. Re-run with PLAYWRIGHT_CHROMIUM_PATH set to the capture's browser, or re-capture."
+  );
 }
 
 export async function runGate(opts: {
@@ -215,7 +262,10 @@ export async function runGate(opts: {
   styled: Map<string, Set<string>>;
   origShotsDir: string;
   outDir: string;
+  /** The browser the CAPTURED TRUTH was recorded on. */
   browserVersion: string;
+  /** The browser ACTUALLY rendering this gate run — `browser.version()`, live. */
+  renderBrowserVersion: string;
   fusionCounts: Scorecard['fusion'];
   namedLosses: string[];
   /** Committed icon assets (config `icons` dir) — empty map when none. */
@@ -232,6 +282,7 @@ export async function runGate(opts: {
   // NAMED refusal, not a bare EISDIR: an empty tokens.css joins to the
   // repo-root DIRECTORY and used to die mid-run after ~30s of real browser
   // time with an error blaming readFileSync. Refuse before spending anything.
+  // @door gate.tokens-css-required
   if (!cfg.tokens.css || cfg.tokens.css.trim() === '') {
     throw new Error(
       'gate REFUSED: capture config tokens.css is empty — the gate page renders against the library token stylesheet, so name the built CSS file (see any committed config under extract/computed/configs/) or run without the gate.',
@@ -262,6 +313,7 @@ export async function runGate(opts: {
   const all = new Map<string, TokenEntry>();
   for (const t of [...baseTrees, merged.tree]) for (const [p, e] of flattenTokens(t)) all.set(p, e);
   const resolve = makeResolveLiteral(all);
+  // @door gate.colour-canonicalization
   const canonColor = (s: string): string | null => {
     const hex = /^#([0-9a-f]{3,8})$/i.exec(s);
     if (hex) {
@@ -278,6 +330,7 @@ export async function runGate(opts: {
   const literal = (v: string): string => {
     const ref = /^\{([^}]+)\}$/.exec(v);
     let raw: string;
+    // @door gate.unresolvable-literal-marker
     try {
       raw = String(ref ? resolve(ref[1]) : v).trim();
     } catch {
@@ -285,6 +338,7 @@ export async function runGate(opts: {
     }
     return canonColor(raw) ?? raw.toLowerCase();
   };
+  // @door gate.divergence-resolved-equal
   const divergent = merged.divergent.map((d) => ({ ...d, resolvedEqual: literal(d.fresh) === literal(d.shipped) }));
   const realDivergences = divergent.filter((d) => !d.resolvedEqual);
   if (realDivergences.length > 0) {
@@ -293,6 +347,7 @@ export async function runGate(opts: {
     );
   }
 
+  // @door gate.unresolved-ref-census
   // UNRESOLVED-REF CENSUS — see Scorecard.unresolvedTokenRefs. generateCss is
   // the emitters' existing referee for "{path} does not exist in tokens/"; it
   // collects into `errors` rather than throwing, so the census borrows the
@@ -363,6 +418,7 @@ ${stages.join('\n')}
   // state-prop planes (disabled): set the DOM state on the emitted root so
   // the contract's :disabled CSS renders (states are CSS-driven; the emitted
   // static HTML has no prop surface for them).
+  // @door gate.state-prop-disabled-only
   for (const combo of space.enumeration.combos) {
     for (const s of space.stateProps) {
       if (!combo.stateFlags[s.prop]) continue;
@@ -377,7 +433,9 @@ ${stages.join('\n')}
   // Round 4: EVERY part the enriched contract carries (matched AND promoted)
   // scores — selectors on our side, aligned union index on theirs. Parts the
   // contract does not carry (promotion refusals, svg internals) stay out.
+  // @door gate.carried-parts-only
   const carriedParts = new Set(walkAnatomy(enriched).map((w) => w.name));
+  // @door gate.icon-part-exclusion
   const iconParts = new Set(walkAnatomy(enriched).filter((w) => w.part.icon).map((w) => w.name));
   const partSel = new Map<string, string>();
   const partIndex = new Map<string, number>();
@@ -416,6 +474,7 @@ ${stages.join('\n')}
           await page.mouse.down();
           mouseDown = true;
         }
+      // @door gate.interaction-driver-failure
       } catch (e) {
         // e.g. a zero-area emitted root (width is a geometry channel the
         // vocabulary never carries — ProgressBar) cannot be hovered; the row
@@ -433,12 +492,14 @@ ${stages.join('\n')}
       // steady state since the MUI round; there was never a principled reason
       // for the two sampling points to differ, and now they share ONE
       // implementation (capture.ts `settleStage`).
+      // @door gate.settle-before-sample
       await settleStage(page, stageSel);
 
       const key = `${combo.key}__${interaction}`;
       const truthCap = aligned.byKey.get(key);
       const row: GateRow = { key, channelsCompared: 0, channelsEqual: 0, pctExact: null, pctAA: null, unscorable: 'no-original', mismatches: [] };
       if (interactionNote) row.note = interactionNote;
+      // @door gate.no-captured-truth-row
       if (!truthCap) {
         row.note = [row.note, 'no captured truth for this combo×state'].filter(Boolean).join('; ');
         rows.push(row);
@@ -447,9 +508,12 @@ ${stages.join('\n')}
       const truthEls = aligned.getAligned(key);
       for (const [part, sel] of partSel) {
         const idx = partIndex.get(part)!;
+        // @door gate.unaligned-truth-el-skip
         const truthEl: FlatEl | null = truthEls[idx];
         if (!truthEl) continue;
+        // @door gate.styled-channel-scoring-set
         const channels = [...(styled.get(part) ?? [])].filter((c) => isFusable(c) && !SYNTHETIC_CHANNELS.has(c)).sort();
+        // @door gate.zero-channel-part-skip
         if (channels.length === 0) continue;
         // RC7 — A PSEUDO-PLANE CHANNEL IS READ OFF ITS OWN PSEUDO-ELEMENT.
         //
@@ -469,6 +533,7 @@ ${stages.join('\n')}
         const ours = (await page.evaluate(
           `(() => { const el = document.querySelector('${stageSel} ${sel}'); if (!el) return null; const cs = getComputedStyle(el); const o = {}; for (const p of ${JSON.stringify(channels)}) o[p] = cs.getPropertyValue(p); for (const [ch, pe] of ${JSON.stringify([...pseudoPlane].map(([c, v]) => [c, v]))}) { const pcs = getComputedStyle(el, pe.selector); o[ch] = pcs ? pcs.getPropertyValue(pe.property) : ''; } return o; })()`,
         )) as Record<string, string> | null;
+        // @door gate.missing-our-selector-mismatch
         if (!ours) {
           row.mismatches.push({ part, channel: '(selector)', ours: `MISSING ${sel}`, theirs: '' });
           row.channelsCompared += channels.length;
@@ -476,6 +541,7 @@ ${stages.join('\n')}
         }
         for (const ch of channels) {
           row.channelsCompared++;
+          // @door gate.rgb-rgba-normalization
           const ourV = ours[ch].replace(/\brgb\((\d+), (\d+), (\d+)\)/g, 'rgba($1, $2, $3, 1)');
           // RC7 — ABSENT ≡ THE ELEMENT'S OWN INK, on the pseudo plane.
           //
@@ -492,6 +558,7 @@ ${stages.join('\n')}
           const theirV = pe !== undefined
             ? (truthEl.node.pseudo[pe.selector as keyof typeof truthEl.node.pseudo]?.[pe.property] ?? truthEl.node.style[ch] ?? truthEl.node.style[pe.property])
             : truthEl.node.style[ch];
+          // @door gate.exact-string-equality
           if (ourV === theirV) row.channelsEqual++;
           else {
             row.mismatches.push({ part, channel: ch, ours: ourV, theirs: theirV });
@@ -513,6 +580,7 @@ ${stages.join('\n')}
       if (existsSync(origPng)) {
         const a = PNG.sync.read(readFileSync(origPng));
         const b = PNG.sync.read(shot);
+        // @door gate.size-mismatch-unscorable
         if (a.width !== b.width || a.height !== b.height) {
           // fix 5: this used to write the NUMBER 100 into pctExact/pctAA and
           // let it into the mean. pixelmatch never ran — there is no
@@ -533,6 +601,7 @@ ${stages.join('\n')}
           row.pctAA = (100 * diffAA) / total;
           delete row.unscorable;
         }
+      // @door gate.no-original-unscorable
       } else {
         row.note = [row.note, 'original screenshot unavailable — pixel not scored'].filter(Boolean).join('; ');
       }
@@ -555,10 +624,14 @@ ${stages.join('\n')}
   const measured = comparable.filter((r) => r.pctExact !== null && r.pctAA !== null) as Array<GateRow & { pctExact: number; pctAA: number }>;
   const sizeMismatched = comparable.filter((r) => r.unscorable === 'size-mismatch');
   const noOriginal = rows.filter((r) => r.unscorable === 'no-original');
+  const browserMismatch = browserMismatchNote(opts.browserVersion, opts.renderBrowserVersion);
+  if (browserMismatch !== undefined) console.warn(`  ! ${comp.name}: ${browserMismatch}`);
   const scorecard: Scorecard = {
     component: comp.name,
     generatedBy: 'extract/computed/gate.ts',
     browser: opts.browserVersion,
+    renderedBy: opts.renderBrowserVersion,
+    ...(browserMismatch !== undefined ? { browserMismatch } : {}),
     method:
       'enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened',
     combos: space.enumeration.combos.length,
@@ -566,7 +639,15 @@ ${stages.join('\n')}
     computed: {
       cellsCompared,
       cellsEqual,
-      pctEqual: cellsCompared === 0 ? 100 : (100 * cellsEqual) / cellsCompared,
+      // @door gate.empty-comparison-is-100
+      // NULL, not 100. 0/0 is not a perfect score; it is the ABSENCE of a
+      // measurement, and the pixel side twenty lines below has always refused to
+      // fabricate its own zero for exactly this reason
+      // (@door gate.null-not-zero-means). Until 2026-08-25 this answered 100 and
+      // a component whose every part had been excluded upstream was
+      // indistinguishable from one that matched on every cell — it also sat in
+      // the corpus mean and in the ">= 90%" counts as a perfect score.
+      pctEqual: cellsCompared === 0 ? null : (100 * cellsEqual) / cellsCompared,
       rowsFullyEqual: rows.filter((r) => r.channelsCompared > 0 && r.channelsEqual === r.channelsCompared).length,
       rows: rows.length,
     },
@@ -583,6 +664,7 @@ ${stages.join('\n')}
         noOriginal: noOriginal.length,
         note: 'sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely.',
       },
+      // @door gate.null-not-zero-means
       meanExact: measured.length === 0 ? null : measured.reduce((n, r) => n + r.pctExact, 0) / measured.length,
       meanAA: measured.length === 0 ? null : measured.reduce((n, r) => n + r.pctAA, 0) / measured.length,
       maxAA: measured.length === 0 ? null : Math.max(...measured.map((r) => r.pctAA)),
@@ -591,17 +673,41 @@ ${stages.join('\n')}
     worstRows: [...rows]
       // fix 5: an UNSCORED row sorts to the top — it is the worst kind of
       // row (nothing could be measured), not a missing number to skip past.
+      // @door gate.unscored-sorts-worst
       .sort((x, y) => (y.pctAA ?? 101) - (x.pctAA ?? 101) || (y.pctExact ?? 101) - (x.pctExact ?? 101) || y.mismatches.length - x.mismatches.length)
+      // @door gate.worstrows-truncation
       .slice(0, 8)
       .map((r) => ({ key: r.key, pctAA: r.pctAA, pctExact: r.pctExact, channelsMismatched: r.mismatches.length, ...(r.unscorable ? { unscorable: r.unscorable } : {}) })),
     topMismatchedChannels: [...mismatchByChannel.entries()].sort((a, b) => b[1] - a[1]).slice(0, 15),
-    namedLosses: opts.namedLosses,
+    // THE DOOR REGISTER — `gate.empty-comparison-is-100` STOPS BEING SILENT.
+    //
+    // `pctEqual` above answers 100 when NOTHING could be compared, which is the
+    // exact inverse of the pixel side's own rule thirty lines below: there, an
+    // empty mean is `null` because "0 means PERFECT in this metric and a
+    // fabricated 0 is indistinguishable from a measured one". The same argument
+    // applies here in the other direction — a fabricated 100 is
+    // indistinguishable from a component that matched on every cell.
+    //
+    // 2026-08-25: the NUMBER is now NULL as well (fix/pin-render-browser). The
+    // visibility round above named the fabrication; naming it was not enough,
+    // because every consumer that averaged the corpus still read the 100 as a
+    // score. `pctEqual` is null when nothing was compared, the loss below still
+    // names it, and the report scripts skip zero-cell cards from their means and
+    // thresholds BY NAME rather than silently.
+    namedLosses:
+      cellsCompared === 0
+        ? [
+            ...opts.namedLosses,
+            'gate.empty-comparison-is-100: computed pctEqual is NULL because cellsCompared === 0 — NOTHING was compared. Every part was excluded by an upstream door (carried-parts-only, icon-part-exclusion, unaligned-truth-el-skip, zero-channel-part-skip) or the enriched contract carries no part at all. A percentage here would be a fabrication, not a measurement — it used to report 100, which read as a perfect score and was averaged into the corpus mean; the pixel side refuses to fabricate its own zero for the same reason (see gate.null-not-zero-means).',
+          ]
+        : opts.namedLosses,
     unresolvedTokenRefs: { count: unresolvedRefs.length, refs: unresolvedRefs.slice(0, 40) },
     shippedMinted: {
       path: cfg.tokens.minted ?? '(none declared)',
       leavesAdded: merged.added.length,
       // ORDERING GUARD (task #28): the only run that may legitimately measure
       // against an empty shipped tree says so on the receipt.
+      // @door gate.minted-bootstrap-allowlist
       ...(cfg.tokens.mintedBootstrap === true
         ? {
             bootstrap: true as const,

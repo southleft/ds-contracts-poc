@@ -4,7 +4,7 @@
   "name": "CaseAntdOverlayDigitDepthThree",
   "version": "0.1.0",
   "status": "draft",
-  "description": "SEED contract for the CSS/DOM conformance fixture case \"antd-overlay-digit-depth-three\" (anatomy). The fixture varies CSS CONSTRUCTS, not prop spaces, so the prop space is deliberately EMPTY: every axis the capture would enumerate is held at nothing, and the whole measurement is the computed truth of one mounted rendering. Construct: sup(absolute, translate(50%,-50%)) > bdi > span > span — a count digit THREE levels deep in an absolutely positioned overlay, the deepest span carrying NO identity class (antd's rc-scroll-number `current` is transient and dropped by classAllow; the fixture spells the same absence with a bare span — the frontier eval refuses any non-neutral class in a case) COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @ds-contracts/conformance@0.1.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "description": "SEED contract for the CSS/DOM conformance fixture case \"antd-overlay-digit-depth-three\" (anatomy). The fixture varies CSS CONSTRUCTS, not prop spaces, so the prop space is deliberately EMPTY: every axis the capture would enumerate is held at nothing, and the whole measurement is the computed truth of one mounted rendering. Construct: sup(absolute, translate(50%,-50%)) > bdi > span > span — a count digit THREE levels deep in an absolutely positioned overlay, the deepest span carrying NO identity class (antd's rc-scroll-number `current` is transient and dropped by classAllow; the fixture spells the same absence with a bare span — the frontier eval refuses any non-neutral class in a case) COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @ds-contracts/conformance@0.1.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "div"
   },
@@ -33,8 +33,12 @@
           },
           "tokens": {
             "background-color": "{imported.case-antd-overlay-digit-depth-three.label.background-color}",
+            "border-bottom-color": "{imported.shared.color-663399}",
             "border-bottom-left-radius": "{imported.shared.size-4}",
             "border-bottom-right-radius": "{imported.shared.size-4}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
             "border-top-left-radius": "{imported.shared.size-4}",
             "border-top-right-radius": "{imported.shared.size-4}",
             "color": "{imported.shared.color-ffffff}",
@@ -91,6 +95,10 @@
                         "text-wrap-mode": "nowrap"
                       },
                       "tokens": {
+                        "border-bottom-color": "{imported.shared.color-663399}",
+                        "border-left-color": "{imported.shared.color-663399}",
+                        "border-right-color": "{imported.shared.color-663399}",
+                        "border-top-color": "{imported.shared.color-663399}",
                         "color": "{imported.shared.color-ffffff}",
                         "font-size": "{imported.shared.size-12}",
                         "font-weight": "{imported.case-antd-overlay-digit-depth-three.label-2.font-weight}",
@@ -101,6 +109,10 @@
                     }
                   },
                   "tokens": {
+                    "border-bottom-color": "{imported.shared.color-663399}",
+                    "border-left-color": "{imported.shared.color-663399}",
+                    "border-right-color": "{imported.shared.color-663399}",
+                    "border-top-color": "{imported.shared.color-663399}",
                     "color": "{imported.shared.color-ffffff}",
                     "font-size": "{imported.shared.size-12}",
                     "height": "{imported.shared.size-20}",
@@ -112,6 +124,10 @@
                 }
               },
               "tokens": {
+                "border-bottom-color": "{imported.shared.color-663399}",
+                "border-left-color": "{imported.shared.color-663399}",
+                "border-right-color": "{imported.shared.color-663399}",
+                "border-top-color": "{imported.shared.color-663399}",
                 "color": "{imported.shared.color-ffffff}",
                 "font-size": "{imported.shared.size-12}",
                 "line-height": "{imported.shared.size-20}",
@@ -122,8 +138,12 @@
           },
           "tokens": {
             "background-color": "{imported.case-antd-overlay-digit-depth-three.b.background-color}",
+            "border-bottom-color": "{imported.shared.color-663399}",
             "border-bottom-left-radius": "{imported.shared.size-10}",
             "border-bottom-right-radius": "{imported.shared.size-10}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
             "border-top-left-radius": "{imported.shared.size-10}",
             "border-top-right-radius": "{imported.shared.size-10}",
             "bottom": "{imported.shared.size-12}",
@@ -147,7 +167,12 @@
         }
       },
       "tokens": {
+        "border-bottom-color": "{imported.shared.color-663399}",
+        "border-left-color": "{imported.shared.color-663399}",
+        "border-right-color": "{imported.shared.color-663399}",
+        "border-top-color": "{imported.shared.color-663399}",
         "bottom": "{imported.shared.size-0}",
+        "color": "{imported.case-antd-overlay-digit-depth-three.root.color}",
         "font-size": "{imported.shared.size-12}",
         "height": "{imported.case-antd-overlay-digit-depth-three.root.height}",
         "left": "{imported.shared.size-0}",

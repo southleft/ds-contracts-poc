@@ -311,6 +311,17 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run closure:check
 
+      # BUNDLES:FRESH — the same discipline as figma:fresh, one artifact class
+      # over. `examples/<lib>/figma/*.bundle.json` is the ONE JSON a designer
+      # pastes, and until 2026-08-24 only four of the eleven were rebuilt and
+      # byte-compared anywhere. Two were provably stale — polaris and
+      # astryx-docs were missing ~4.2 KB of codeOnlyFacts receipts the engine
+      # had learned to write — and nothing noticed, because EXECUTING a stale
+      # bundle succeeds. ~27s.
+      - name: bundles:fresh (every committed example bundle byte-identical to a rebuild)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run bundles:fresh
+
       - name: figma:fresh (committed *.figma.js byte-identical to a re-emission)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run figma:fresh
@@ -409,6 +420,19 @@ jobs:
       - name: ua-baseline:check (a refusal may only claim what its baseline supports)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run ua-baseline:check
+
+      # THE BASELINE THE CONTROL DELTA SUBTRACTS (door capture.control-baseline-mint).
+      # The harness mounts its control elements INSIDE mount.wrapperOpen, in the
+      # same document as the component, so every page-global rule a library
+      # ships styles the control too and fuse.control-element-delta cancelled
+      # library-authored facts as if they were user-agent defaults (the
+      # invisible shadcn Input, the inkless Polaris/Fluent text). A capture
+      # taken before the fix carries no `uaControls`; fusion falls back and
+      # SAYS SO per part, but the honest state is a re-measured baseline.
+      # No browser: it reads the committed captures.
+      - name: ua-baseline:present:check (every committed capture carries a library-free baseline)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run ua-baseline:present:check
 
       # Pure functions over CapturedNode, no browser. A portaled overlay root
       # is not the component's box: capture the modal LAYER and every

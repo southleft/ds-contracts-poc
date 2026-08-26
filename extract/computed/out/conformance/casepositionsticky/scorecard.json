@@ -1,14 +1,15 @@
 {
   "component": "CasePositionSticky",
   "generatedBy": "extract/computed/gate.ts",
-  "browser": "151.0.7922.34",
+  "browser": "149.0.7827.55",
+  "renderedBy": "149.0.7827.55",
   "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
   "combos": 1,
   "interactions": 4,
   "computed": {
-    "cellsCompared": 100,
-    "cellsEqual": 96,
-    "pctEqual": 96,
+    "cellsCompared": 232,
+    "cellsEqual": 227,
+    "pctEqual": 97.84482758620689,
     "rowsFullyEqual": 0,
     "rows": 4
   },
@@ -22,45 +23,45 @@
       "noOriginal": 0,
       "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
     },
-    "meanExact": 2.454427083333333,
-    "meanAA": 0.771484375,
-    "maxAA": 3.0859375
+    "meanExact": 4.427083333333333,
+    "meanAA": 0.7706705729166666,
+    "maxAA": 3.0826822916666665
   },
   "fusion": {
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
-    "mintedLeaves": 9,
-    "mintedLeavesUnfolded": 9,
-    "baseBindings": 15,
+    "mintedLeaves": 11,
+    "mintedLeavesUnfolded": 11,
+    "baseBindings": 31,
     "stateBindings": 2,
     "codeOnlyChannels": 3,
     "overflowBindings": 0,
-    "folds": 0
+    "folds": 17
   },
   "worstRows": [
     {
       "key": "__focus-visible",
-      "pctAA": 3.0859375,
-      "pctExact": 4.192708333333333,
-      "channelsMismatched": 1
+      "pctAA": 3.0826822916666665,
+      "pctExact": 6.145833333333333,
+      "channelsMismatched": 2
     },
     {
       "key": "__default",
       "pctAA": 0,
-      "pctExact": 1.875,
+      "pctExact": 3.8541666666666665,
       "channelsMismatched": 1
     },
     {
       "key": "__hover",
       "pctAA": 0,
-      "pctExact": 1.875,
+      "pctExact": 3.8541666666666665,
       "channelsMismatched": 1
     },
     {
       "key": "__active",
       "pctAA": 0,
-      "pctExact": 1.875,
+      "pctExact": 3.8541666666666665,
       "channelsMismatched": 1
     }
   ],
@@ -68,6 +69,10 @@
     [
       "label.position",
       4
+    ],
+    [
+      "root.outline-color",
+      1
     ]
   ],
   "namedLosses": [
@@ -87,9 +92,9 @@
   "rows": [
     {
       "key": "__default",
-      "channelsCompared": 25,
-      "channelsEqual": 24,
-      "pctExact": 1.875,
+      "channelsCompared": 58,
+      "channelsEqual": 57,
+      "pctExact": 3.8541666666666665,
       "pctAA": 0,
       "mismatches": [
         {
@@ -102,9 +107,9 @@
     },
     {
       "key": "__hover",
-      "channelsCompared": 25,
-      "channelsEqual": 24,
-      "pctExact": 1.875,
+      "channelsCompared": 58,
+      "channelsEqual": 57,
+      "pctExact": 3.8541666666666665,
       "pctAA": 0,
       "mismatches": [
         {
@@ -117,11 +122,17 @@
     },
     {
       "key": "__focus-visible",
-      "channelsCompared": 25,
-      "channelsEqual": 24,
-      "pctExact": 4.192708333333333,
-      "pctAA": 3.0859375,
+      "channelsCompared": 58,
+      "channelsEqual": 56,
+      "pctExact": 6.145833333333333,
+      "pctAA": 3.0826822916666665,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "outline-color",
+          "ours": "rgba(25, 118, 210, 1)",
+          "theirs": "rgba(0, 95, 204, 1)"
+        },
         {
           "part": "label",
           "channel": "position",
@@ -132,9 +143,9 @@
     },
     {
       "key": "__active",
-      "channelsCompared": 25,
-      "channelsEqual": 24,
-      "pctExact": 1.875,
+      "channelsCompared": 58,
+      "channelsEqual": 57,
+      "pctExact": 3.8541666666666665,
       "pctAA": 0,
       "mismatches": [
         {

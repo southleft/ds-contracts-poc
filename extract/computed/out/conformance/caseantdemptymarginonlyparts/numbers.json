@@ -1,43 +1,91 @@
 {
   "component": "CaseAntdEmptyMarginOnlyParts",
-  "browser": "151.0.7922.34",
+  "browser": "149.0.7827.55",
   "captures": 4,
   "combos": 1,
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
-  "channelsEnumerated": 479,
+  "channelsEnumerated": 476,
   "elementsPerCapture": 4,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 10,
-    "c": 7,
+    "root": 21,
+    "c": 18,
     "a": 17,
     "b": 17
   },
   "folds": {
-    "count": 20,
+    "count": 24,
     "receipts": [
       {
-        "part": "a",
-        "channel": "border-bottom-color",
+        "part": "root",
+        "channel": "caret-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "a",
-        "channel": "border-left-color",
+        "part": "root",
+        "channel": "column-rule-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "a",
-        "channel": "border-right-color",
+        "part": "root",
+        "channel": "outline-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "a",
-        "channel": "border-top-color",
+        "part": "root",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "c",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "c",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "c",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "c",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "c",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "c",
+        "channel": "text-emphasis-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
@@ -74,30 +122,6 @@
       {
         "part": "a",
         "channel": "text-emphasis-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "b",
-        "channel": "border-bottom-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "b",
-        "channel": "border-left-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "b",
-        "channel": "border-right-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "b",
-        "channel": "border-top-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
@@ -138,8 +162,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 10,
-    "mintedLeavesFolded": 11
+    "mintedLeavesUnfolded": 12,
+    "mintedLeavesFolded": 14
   },
   "bound": {
     "cellsChecked": 0,
@@ -148,11 +172,11 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 11,
-    "baseBindings": 20,
+    "leaves": 14,
+    "baseBindings": 38,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 20,
+      "uniform": 38,
       "perAxis": 0,
       "perPair": 0,
       "refused": 0
@@ -176,8 +200,8 @@
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 7632,
-    "cellsMatched": 7632,
+    "cellsCompared": 7584,
+    "cellsMatched": 7584,
     "pct": 100,
     "namedExclusions": [
       "app-region",
@@ -196,9 +220,9 @@
       "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
     },
     "exact": {
-      "mean": 0,
-      "max": 0,
-      "perfect": 4
+      "mean": 0.006510416666666667,
+      "max": 0.006510416666666667,
+      "perfect": 0
     },
     "aa": {
       "mean": 0,
@@ -208,22 +232,22 @@
     "worst": [
       {
         "key": "__default",
-        "pctExact": 0,
+        "pctExact": 0.006510416666666667,
         "pctAA": 0
       },
       {
         "key": "__hover",
-        "pctExact": 0,
+        "pctExact": 0.006510416666666667,
         "pctAA": 0
       },
       {
         "key": "__focus-visible",
-        "pctExact": 0,
+        "pctExact": 0.006510416666666667,
         "pctAA": 0
       },
       {
         "key": "__active",
-        "pctExact": 0,
+        "pctExact": 0.006510416666666667,
         "pctAA": 0
       }
     ]

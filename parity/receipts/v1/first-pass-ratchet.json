@@ -1,0 +1,61 @@
+{
+  "_header": "FIRST-PASS RATCHET — the BEST first-pass rate each exam has ever recorded. `npm run first-pass:check` recomputes the current rate from the committed packets and REFUSES when it is lower, unless a `reasons` row names the decrease with matching from/to. Raised automatically by `--write-receipt`; lowered ONLY through a reasons row. A metric that can quietly fall is not a metric — and one that quietly RISES is not evidence, so `reasons` also carries rows naming a rise, and rows naming a rate that stayed flat while the stage it stops at moved.",
+  "exams": {
+    "selftest-tailwind": {
+      "chain": {
+        "numerator": 0,
+        "denominator": 8
+      },
+      "recognisable": {
+        "numerator": 0,
+        "denominator": 0
+      }
+    },
+    "selftest-altitude": {
+      "chain": {
+        "numerator": 7,
+        "denominator": 8
+      },
+      "recognisable": {
+        "numerator": 0,
+        "denominator": 0
+      }
+    },
+    "selftest-flowbite-live": {
+      "chain": {
+        "numerator": 8,
+        "denominator": 8
+      },
+      "recognisable": {
+        "numerator": 0,
+        "denominator": 0
+      }
+    }
+  },
+  "reasons": [
+    {
+      "exam": "selftest-flowbite-live",
+      "date": "2026-08-25",
+      "metric": "chain",
+      "from": "4/8",
+      "to": "8/8",
+      "reason": "ROSE. The four sets that stopped at generate-react did so because the fresh mint re-derived geometry from DUMP-ROUNDED boxes — imported.kbd.root.width came back \"39.92px\" where the corpus spells the same measurement \"39.9219px\" — and generate rightly refuses a slot holding two values. The census healed it with a token prune the documented CLI has no flag for; the exam, which performs no repair, took the refusal. Fixed at the cause instead: core/mint-tokens.ts now asks the corpus what it already spells at each claimed path and carries THAT when the observation is it re-rounded (MintOptions.corpusValueAt / sameUnderDumpRounding), naming every reconciled row in the proposal report. Six leaves reconciled across helper-text/kbd/label/toggle-switch; zero conflicts remain; the census prune is now a CHECKED de-dup that REFUSES a value disagreement instead of resolving it. No exam input, packet or rule changed."
+    },
+    {
+      "exam": "selftest-tailwind",
+      "date": "2026-08-25",
+      "metric": "chain",
+      "from": "0/8 — stopped: promote (8 REFUSED)",
+      "to": "0/8 — stopped: mint (8 PENDING)",
+      "reason": "FLAT, SHAPE MOVED, and this is the finding the exam existed to produce. Every set used to die at promote on “authored alert prop dismissable: prop “dismissable” is not exactly one entry of props[]” — the committed capture record carried an `icon` prop, a `dismissable` prop and six anatomy parts that NO committed input produces (hand-written into the record by ac5e6181, back-porting c924c9c2). Those four facts now ride the authored-facts door as explicit, refusable INPUTS (the door’s new `add` operation), and the record carries only what the capture produces. All eight sets now run capture → promote → validate → generate → bundle clean and stop at mint, which is MCP-DRIVEN and not a capability this harness has (docs/31 §6). The rate is still 0/8 because a PENDING mint is not a completed chain, and it will not move until an agent drives the write and records its evidence."
+    },
+    {
+      "exam": "selftest-altitude",
+      "date": "2026-08-25",
+      "metric": "chain",
+      "from": "0/8 — stopped: mint (8 PENDING)",
+      "to": "7/8 — stopped: mint (1 REFUSED)",
+      "reason": "ROSE, because the mint stage was DRIVEN for the first time. Nothing in the engine changed: the same chain, capture → promote → validate → generate → bundle, ran green on all 8 sets exactly as before. What changed is that `mint` stopped being a permanently-PENDING architectural note and became a stage with an operator, a procedure and evidence (docs/31 §6). An agent holding the figma-console MCP tools fetched each emitted mint/<component>.figma.js INSIDE the plugin sandbox, verified its sha256 against the hash the harness recorded for those same bytes, and evaluated it EXACTLY ONCE — no retry, no repair, no hand-edited script. `--record-mint` folds that evidence in through the exam's own writers and refuses whole on any of the ways it could lie (a forbidden file key, a dropped or added set, a script sha that is not the one the chain emitted, a minted set with no picture of it, a cell with neither an image nor a named reason, or a stage that is not PENDING — so recording can never be a retry). 5 sets WROTE to the canvas, 2 the engine SKIPPED as unchanged (its own specHash already equal to the one stamped on the canvas node, so no byte moved — they complete the chain and are deliberately NOT counted in `minted`), and 1, Divider, REFUSED BY NAME: \"set/standalone shape mismatch (COMPONENT_SET vs isSet=false) — a human retires the old node\". THE FINDING THIS RUN EXISTS TO REPORT, and it is not in the numerator: not one of the 8 took the CREATE path. The operator created an empty page `first-pass altitude 2026-08-25`, cleared it and made it current before every run; all 8 scripts ignored it and `newPages` was [] every time. The emitted script owns file layout — it resolves its target by ds_contracts/contractId across EVERY page and amends in place — and there is no --page flag, no file-scoping and no documented way to confine a mint to one page. In the only writable file, which already carried all 8 altitude stems, a first-pass mint can therefore only ever measure the AMEND path. 7/8 is a true statement about the documented chain and a WEAKER statement than it looks: read it beside that fact, not instead of it."
+    }
+  ]
+}

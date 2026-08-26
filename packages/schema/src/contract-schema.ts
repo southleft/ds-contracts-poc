@@ -28,6 +28,21 @@
  *      child's definition.
  */
 import * as z from "zod";
+import { DECLARABLE_ARCHETYPES } from "./archetype.js";
+
+/** The archetype vocabulary is part of the live document (v19 `archetype`),
+ *  so it re-exports from here and the repo's scripts/contract-schema.ts shim
+ *  carries it too — one map, reachable by every existing import path. */
+export {
+  ARCHETYPES,
+  DECLARABLE_ARCHETYPES,
+  archetypeOf,
+  kebabName,
+  resolveArchetype,
+  type Archetype,
+  type DeclaredArchetype,
+  type ResolvedArchetype,
+} from "./archetype.js";
 
 /** SCHEMA 17 — the v16 → v17 renames, as the refusal messages the schema
  *  prints. One table: the tombstone fields (`figmaRepresentation`,
@@ -1396,7 +1411,21 @@ export const TOKEN_CHANNELS: Record<string, TokenChannelSpec> = {
   "max-height": annotated(
     "Figma has no maxHeight field (maxWidth exists; its height twin does not).",
   ),
-  "text-indent": annotated("Figma text nodes have no first-line indent."),
+  "text-indent": annotated(
+    "Figma text nodes have no first-line indent. Where the MEASURED indent lays the first line entirely outside the content box (Part.textOutOfBox), the canvas draws NO text child on those combos: the browser paints no text in the box there, so drawing the label at indent 0 would invent ink the library never shows.",
+  ),
+  // BASELINE ISOLATION ROUND (docs/23 D.36) — `html { tab-size: 4 }` is the
+  // first line of every Tailwind-preflight-shaped reset (shadcn, tailwind,
+  // astryx). It is PAGE-GLOBAL and inherited, so before the control baseline
+  // was isolated it landed on the harness's own control elements too and was
+  // cancelled as a user-agent default (the UA default is `8`). It reaches the
+  // mint as a plain number, which is a mintable kind — so with the baseline
+  // fixed, 32 components' contracts carried a channel the registry did not
+  // know and `validateContract` refused the whole component by name. It is a
+  // real CSS property the library authored; the canvas has no field for it.
+  "tab-size": annotated(
+    "Figma text nodes have no tab stop size; a tab character renders as the font's own advance.",
+  ),
   "vertical-align": annotated(
     "Figma has no inline baseline alignment; auto-layout counterAxisAlignItems is the nearest, coarser, fact.",
   ),
@@ -1957,6 +1986,36 @@ export interface Part {
    *  Emitted by extract/computed (fuse.ts `hugEvidence`); a part with no
    *  `max-width` channel must not carry it (validateContract refuses). */
   hugsBelowMaxWidth?: boolean;
+  /** v18 (text-indent off-box round) — MEASURED sizing evidence, never
+   *  hand-authored. The enum-axis values on which this element's own
+   *  `text-indent` lays its first line ENTIRELY OUTSIDE its content box
+   *  (indent ≥ the used content width, in every enumerated combo that value
+   *  covers): the browser paints NO text inside the box there.
+   *
+   *  WHY IT IS NOT ENOUGH TO ANNOTATE. `text-indent` is an `annotate`
+   *  channel (TOKEN_CHANNELS below — Figma text nodes have no first-line
+   *  indent), and an annotation is the honest answer only while the canvas
+   *  still draws WHAT THE BROWSER DRAWS. When the indent evicts the text
+   *  from the box the browser draws nothing there, so dropping the offset
+   *  and drawing the label at indent 0 does not lose a fact — it INVENTS
+   *  one. Field case: altitude's Badge `.al-is-dot` is an 8px status pip
+   *  (`min/max-width: 8px`) whose slotted label is pushed away by
+   *  `text-indent: 9999px`; the first fresh mint painted "Badge" across the
+   *  pip and over its neighbouring cells.
+   *
+   *  `prop` absent = every enumerated combo (the sr-only spelling:
+   *  `text-indent: -9999px` on a label that is never shown).
+   *
+   *  ONLY the canvas emitter reads it — it compiles no text child on those
+   *  combos, and the `text-indent` code-only fact (which already lists the
+   *  exact variant names) carries the reason. The code emitters ignore it:
+   *  they write the real declaration, which hides the text exactly as the
+   *  library does.
+   *
+   *  Emitted by extract/computed (fuse.ts `textOutOfBoxEvidence`); a part
+   *  with no `text-indent` channel, or with no text of its own, must not
+   *  carry it (validateContract refuses). */
+  textOutOfBox?: { prop?: string; values?: string[] };
   /** interaction state → (CSS property → token reference). On the ROOT:
    *  the full state vocabulary (background-color, outline-*, opacity, …).
    *  v13 (P18 second half): on a NON-ref part (text/icon/box — never a
@@ -2311,6 +2370,13 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
       .optional(),
     /** v16 (task #37): MEASURED sizing evidence — see the Part interface. */
     hugsBelowMaxWidth: z.boolean().optional(),
+    /** v18: MEASURED text-indent evidence — see the Part interface. */
+    textOutOfBox: z
+      .strictObject({
+        prop: z.string().optional(),
+        values: z.array(z.string()).min(1).optional(),
+      })
+      .optional(),
     /** Root: full state vocabulary. v13: non-ref parts, color-kind channels
      *  only — see the Part interface doc + emit-react validateContract. */
     states: z
@@ -2461,6 +2527,25 @@ export const ContractSchema = z.strictObject({
     .regex(/^\d+\.\d+\.\d+$/, "version must be semver (MAJOR.MINOR.PATCH)"),
   status: z.enum(["draft", "stable", "deprecated"]).default("draft"),
   description: z.string(),
+  /** v19 (REQUIRED FACTS) — the docs/23 §C.1.1 component class this contract
+   *  belongs to, DECLARED. It is what the required-facts referee reads: per
+   *  archetype, the load-bearing facts a set must carry before `figma bundle`
+   *  or the plugin engine will mint it (`@ds-contracts/core` required-facts.ts
+   *  — a card with no part carrying `direction: "column"` minted as a pill, a
+   *  dialog with no column axis minted as ONE ROW; both refuse now, by name).
+   *
+   *  Optional, and three-way by design:
+   *    · declared here  — wins, always. `"none"` is the honest opt-out for a
+   *      contract that is not a component archetype (divider, heading, code).
+   *    · absent, name recognised — the seeding name-map (archetypeOf) applies,
+   *      and `ds-contracts migrate` writes the field so the guess becomes a
+   *      reviewed declaration exactly once.
+   *    · absent, name unrecognised — NOTHING is enforced and the tool warns
+   *      "declare archetype". It never guesses: a wrong archetype would refuse
+   *      facts the component does not owe, or mint one that lies.
+   *
+   *  Carried, never derived at read time; no emitter reads it to draw. */
+  archetype: z.enum(DECLARABLE_ARCHETYPES).optional(),
   /** Figma-parity documentation pointers (schema 18, additive/optional):
    *  the component's own documentation links, carried BOTH ways — the
    *  Figma emitter writes them as the set's documentationLinks, and the

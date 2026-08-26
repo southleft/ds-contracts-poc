@@ -1,0 +1,908 @@
+{
+  "$comment": "THE GRAMMAR COVERAGE SPEC — every construct the CAPTURE CONFIG GRAMMAR supports, and every construct a real library needs that it does NOT. The supported half is checked against the CONFIGS ON DISK, never against the TypeScript type: a field the type declares and nothing exercises is an unexercised claim, and a construct a config uses and this file omits is a construct nobody wrote down. Byte-stable and sorted by id; edit by hand and run `npm run grammar-coverage:check`. See spec/GRAMMAR-COVERAGE.md.",
+  "version": 1,
+  "grammar": {
+    "file": "extract/computed/capture.ts",
+    "loader": "loadConfig",
+    "configs": "extract/computed/configs"
+  },
+  "totals": {
+    "supported": 44,
+    "unsupported": 10,
+    "constructs": 54,
+    "observedPaths": 89,
+    "libraries": 13
+  },
+  "constructs": [
+    {
+      "id": "axis-arity-depends-on-another-axis",
+      "status": "unsupported",
+      "kind": "axis",
+      "spelling": "(none — the cartesian product is rectangular)",
+      "summary": "An axis whose meaning or value count is a function of another axis, or of data.",
+      "instances": "day-picker `numberOfMonths: 2` DUPLICATES the whole month grid, so the anatomy's part count is a function of an axis value; a month grid's row count is a function of the date.",
+      "provenBy": "day-picker",
+      "consequence": "The anatomy promoted from one combo does not describe the others, and parts appear to vanish between combos rather than being structurally absent.",
+      "filedAs": "examples/day-picker/README.md §5"
+    },
+    {
+      "id": "boolean-variant-axis",
+      "status": "unsupported",
+      "kind": "axis",
+      "spelling": "(none — booleans may only be pseudo-class states)",
+      "summary": "A BOOLEAN prop that selects a rendering rather than a pseudo-class plane cannot be enumerated. `axes` refuses a non-enum prop; `stateProps` refuses a state outside the closed vocabulary. A boolean variant falls between them.",
+      "instances": "day-picker `showOutsideDays` and `showWeekNumber` are `boolean` in the seed contract and listed in `axes`; `propSpaceFor` refuses them by name (`is not an enum prop`), and there is no state named `showOutsideDays` to move them to.",
+      "provenBy": "day-picker",
+      "consequence": "The config as committed cannot build a prop space at all — the subject is unmountable until the boolean is respelled as a two-value enum. The refusal is honest and named, but the grammar offers no other spelling.",
+      "workaround": "Respell the contract prop as an enum of two values (`\"off\"`/`\"on\"`) with an `axisValueMap` to real booleans.",
+      "filedAs": "held-out finding, this round"
+    },
+    {
+      "id": "browser",
+      "status": "supported",
+      "kind": "environment",
+      "spelling": "\"browser\": {\"viewport\",\"deviceScaleFactor\",\"colorScheme\"}",
+      "summary": "The pinned rendering environment.",
+      "provenBy": "every library",
+      "consequence": "Two runs on two machines disagree and nothing says why.",
+      "paths": [
+        "browser",
+        "browser.colorScheme",
+        "browser.deviceScaleFactor",
+        "browser.viewport",
+        "browser.viewport.height",
+        "browser.viewport.width"
+      ],
+      "exercisedBy": [
+        "config:altitude",
+        "config:antd",
+        "config:astryx"
+      ]
+    },
+    {
+      "id": "child-part-axes",
+      "status": "unsupported",
+      "kind": "axis",
+      "spelling": "(none — there is no spelling)",
+      "summary": "The axis grammar drives the ROOT mount only. A prop that lives on a CHILD part cannot be enumerated.",
+      "instances": "Bootstrap `checked` on `.form-check-input`, the `.progress-bar` modifiers, `.nav-link` active/disabled; Radix `Tabs.List` size and `TextField.Slot` side; Carbon `contained` on `TabList`, `open` on `AccordionItem`.",
+      "provenBy": "bootstrap5, radix-themes, carbon",
+      "consequence": "The child is PINNED at one value and the axis is deferred BY NAME. Every rendering the child's own prop selects is absent from the contract — not wrong, but missing, and the contract cannot say how many.",
+      "workaround": "Pin the child in `childrenSpec` and defer the axis by name in the config `__note`. That is what every committed config does.",
+      "filedAs": "docs/21 §7 item 3"
+    },
+    {
+      "id": "class-token-prop-is-fixed",
+      "status": "unsupported",
+      "kind": "marker",
+      "spelling": "(none — `$classTokens` always targets `className`)",
+      "summary": "`$classTokens` appends to `className` and only `className`. A library that takes its class tokens on a different prop, or on a per-part `classNames` object, cannot use the ordered form.",
+      "provenBy": "none yet",
+      "consequence": "Such a library falls back to `$props`, which is last-writer-wins — the silent drop the ordered form exists to prevent, reintroduced on a different prop name.",
+      "workaround": "One class-token axis only, and defer the rest by name.",
+      "filedAs": "named on landing, this round"
+    },
+    {
+      "id": "component.axes",
+      "status": "supported",
+      "kind": "axis",
+      "spelling": "\"axes\": [\"variant\", \"size\"]",
+      "summary": "The contract enum props that ENUMERATE. Every other prop is held at its default and receipted.",
+      "provenBy": "every library",
+      "consequence": "Nothing varies and one mount is reported as a whole component.",
+      "paths": [
+        "components[].axes"
+      ],
+      "exercisedBy": [
+        "config:altitude",
+        "config:antd",
+        "config:astryx"
+      ]
+    },
+    {
+      "id": "component.axisValueMap",
+      "status": "supported",
+      "kind": "axis",
+      "spelling": "\"axisValueMap\": {\"checked\": {\"unchecked\": false}}",
+      "summary": "Contract axis value → the library value mounted for it. Unlisted values mount verbatim.",
+      "provenBy": "carbon, mui, tailwind, …",
+      "consequence": "The contract's vocabulary must equal the library's, which no two libraries agree on.",
+      "paths": [
+        "components[].axisValueMap",
+        "components[].axisValueMap.*"
+      ],
+      "exercisedBy": [
+        "config:altitude",
+        "config:antd",
+        "config:bootstrap5"
+      ]
+    },
+    {
+      "id": "component.baseCombo",
+      "status": "supported",
+      "kind": "axis",
+      "spelling": "\"baseCombo\": {\"variant\": \"primary\"}",
+      "summary": "An explicit base combo when the contract's own defaults are not the rendering to compare against.",
+      "provenBy": "no committed library",
+      "consequence": "The base plane is chosen by contract default alone.",
+      "paths": [],
+      "probe": "baseComboKey",
+      "exercisedBy": [
+        "evals/run.ts#baseCombo"
+      ],
+      "note": "SUPPORTED BUT UNUSED BY EVERY COMMITTED LIBRARY — a field the type declares and no real subject has needed. Named here so the claim is visible rather than implied."
+    },
+    {
+      "id": "component.blockStage",
+      "status": "supported",
+      "kind": "stage",
+      "spelling": "\"blockStage\": true",
+      "summary": "Mount the stage as a BLOCK context instead of the default flex row.",
+      "provenBy": "mui",
+      "consequence": "A display:block component is measured as a flex item and its width is wrong.",
+      "paths": [
+        "components[].blockStage"
+      ],
+      "exercisedBy": [
+        "config:altitude",
+        "config:antd",
+        "config:astryx"
+      ]
+    },
+    {
+      "id": "component.callbackProps",
+      "status": "supported",
+      "kind": "composition",
+      "spelling": "\"callbackProps\": [\"onChange\"]",
+      "summary": "Props mounted as no-op callbacks on every combo, for controlled components that warn or throw without them.",
+      "provenBy": "mui, carbon, polaris, …",
+      "consequence": "React logs a controlled/uncontrolled warning and some libraries refuse to render.",
+      "paths": [
+        "components[].callbackProps"
+      ],
+      "exercisedBy": [
+        "config:antd",
+        "config:astryx",
+        "config:carbon"
+      ]
+    },
+    {
+      "id": "component.childWrap",
+      "status": "supported",
+      "kind": "composition",
+      "spelling": "\"childWrap\": {\"importName\": \"CardContent\"}",
+      "summary": "The library's CANONICAL single-child composition.",
+      "provenBy": "mui",
+      "consequence": "A bare mount nobody writes captures a truth nobody ships — MUI's flush, padding-less Card.",
+      "paths": [
+        "components[].childWrap",
+        "components[].childWrap.importName"
+      ],
+      "exercisedBy": [
+        "config:antd",
+        "config:fluent",
+        "config:mui"
+      ]
+    },
+    {
+      "id": "component.childrenSpec",
+      "status": "supported",
+      "kind": "composition",
+      "spelling": "\"childrenSpec\": [{\"importName\",\"props\",\"text\",\"children\"}]",
+      "summary": "The canonical MULTI-child composition, a RECURSIVE TREE. `text` and `children` are mutually exclusive on one node, refused by name. Markers resolve at every depth.",
+      "provenBy": "mui, carbon, bootstrap5, radix-themes, shadcn, fluent, antd",
+      "consequence": "A composed organism (Table, Modal, Nav) can only be mounted as its bare root, and every part below the first level is invisible.",
+      "paths": [
+        "components[].childrenSpec",
+        "components[].childrenSpec[].children",
+        "components[].childrenSpec[].importName",
+        "components[].childrenSpec[].props",
+        "components[].childrenSpec[].props.*",
+        "components[].childrenSpec[].text"
+      ],
+      "exercisedBy": [
+        "config:antd",
+        "config:bootstrap5",
+        "config:carbon"
+      ]
+    },
+    {
+      "id": "component.fixedProps",
+      "status": "supported",
+      "kind": "composition",
+      "spelling": "\"fixedProps\": {\"type\": \"button\"}",
+      "summary": "Props pinned to fixed values on every mount, recorded in provenance. Arrays and objects mount verbatim; markers resolve at any depth.",
+      "provenBy": "every library",
+      "consequence": "A required prop is missing and the component throws, or the mount is not the one real consumers write.",
+      "paths": [
+        "components[].fixedProps",
+        "components[].fixedProps.*"
+      ],
+      "exercisedBy": [
+        "config:altitude",
+        "config:antd",
+        "config:astryx"
+      ]
+    },
+    {
+      "id": "component.identity",
+      "status": "supported",
+      "kind": "component",
+      "spelling": "\"components\": [{\"name\",\"contract\"}]",
+      "summary": "The component's display name and the contract that supplies its prop space. The prop space is NEVER re-derived from the library.",
+      "provenBy": "every library",
+      "consequence": "The capture invents its own denominator and every coverage number becomes self-attested.",
+      "paths": [
+        "components[]",
+        "components[].contract",
+        "components[].name"
+      ],
+      "exercisedBy": [
+        "config:altitude",
+        "config:antd",
+        "config:astryx"
+      ]
+    },
+    {
+      "id": "component.importName",
+      "status": "supported",
+      "kind": "component",
+      "spelling": "\"importName\": \"InlineNotification\"",
+      "summary": "The named export mounted from `library.package` (or, with `library.customElements`, a tag name).",
+      "provenBy": "every library",
+      "consequence": "Nothing to mount.",
+      "paths": [
+        "components[].importName"
+      ],
+      "exercisedBy": [
+        "config:altitude",
+        "config:antd",
+        "config:astryx"
+      ]
+    },
+    {
+      "id": "component.importName.compound",
+      "status": "supported",
+      "kind": "component",
+      "spelling": "\"importName\": \"TextField.Root\"",
+      "since": "held-out round",
+      "summary": "A COMPOUND (dotted) export name: the root binding is imported, the member path is referenced, and the full dotted string stays the component's key. Modern React libraries are overwhelmingly compound.",
+      "provenBy": "radix-themes",
+      "consequence": "Three of Radix Themes' ten components are unmountable without a sandbox barrel, and the barrel makes `library.package`/`version` describe the barrel rather than the subject.",
+      "paths": [],
+      "probe": "dottedImportName",
+      "exercisedBy": [
+        "evals/run.ts#grammar-compound-import"
+      ]
+    },
+    {
+      "id": "component.openDriver",
+      "status": "supported",
+      "kind": "stage",
+      "spelling": "\"openDriver\": {\"open\": true}",
+      "summary": "Props forced on every mount of a portalled component to hold it open.",
+      "provenBy": "mui, carbon, fluent, antd, shadcn, polaris-depth",
+      "consequence": "The overlay is never open and there is nothing to capture.",
+      "paths": [
+        "components[].openDriver",
+        "components[].openDriver.*"
+      ],
+      "exercisedBy": [
+        "config:antd",
+        "config:carbon",
+        "config:fluent"
+      ]
+    },
+    {
+      "id": "component.portalCapture",
+      "status": "supported",
+      "kind": "stage",
+      "spelling": "\"portalCapture\": true",
+      "summary": "Two-phase driver page for components that portal to `document.body` instead of rendering in the stage.",
+      "provenBy": "mui, carbon, fluent, antd, shadcn, polaris-depth",
+      "consequence": "An overlay (Dialog, Tooltip, Menu, Drawer) captures an empty stage and reports a zero box.",
+      "paths": [
+        "components[].portalCapture"
+      ],
+      "exercisedBy": [
+        "config:antd",
+        "config:carbon",
+        "config:fluent"
+      ]
+    },
+    {
+      "id": "component.presenceProps",
+      "status": "supported",
+      "kind": "axis",
+      "spelling": "\"presenceProps\": [{\"prop\":\"dismissible\",\"libraryProp\":\"onDismiss\",\"value\":{\"$callback\":true}}]",
+      "summary": "A STRUCTURE-CREATING optional prop whose PRESENCE creates DOM subtrees, enumerated as an off/on axis. `off` mounts the prop ABSENT, never `false`.",
+      "provenBy": "polaris, mui, antd, fluent, altitude",
+      "consequence": "The dismiss button, the tag ×, the input adornment are never captured and the anatomy is missing whole parts.",
+      "paths": [
+        "components[].presenceProps",
+        "components[].presenceProps[].libraryProp",
+        "components[].presenceProps[].prop",
+        "components[].presenceProps[].value"
+      ],
+      "exercisedBy": [
+        "config:altitude",
+        "config:antd",
+        "config:fluent"
+      ]
+    },
+    {
+      "id": "component.sampleText",
+      "status": "supported",
+      "kind": "component",
+      "spelling": "\"sampleText\": \"Button\"",
+      "summary": "The deterministic children text. `\"\"` means the component takes NO children — not an empty-string child.",
+      "provenBy": "every library",
+      "consequence": "Carbon's Checkbox forwards children onto a void `<input>`, React throws, and the whole harness page renders nothing.",
+      "paths": [
+        "components[].sampleText"
+      ],
+      "exercisedBy": [
+        "config:altitude",
+        "config:antd",
+        "config:astryx"
+      ]
+    },
+    {
+      "id": "component.stage",
+      "status": "supported",
+      "kind": "stage",
+      "spelling": "\"stage\": {\"width\": 560, \"height\": 440, \"padding\": 16}",
+      "summary": "A per-component stage override.",
+      "provenBy": "mui, carbon, bootstrap5, …",
+      "consequence": "A large organism is clipped by the global stage and its geometry is the clip, not the component.",
+      "paths": [
+        "components[].stage",
+        "components[].stage.height",
+        "components[].stage.padding",
+        "components[].stage.width"
+      ],
+      "exercisedBy": [
+        "config:altitude",
+        "config:antd",
+        "config:astryx"
+      ]
+    },
+    {
+      "id": "component.stateProps",
+      "status": "supported",
+      "kind": "axis",
+      "spelling": "\"stateProps\": [{\"prop\":\"disabled\",\"state\":\"disabled\"}]",
+      "summary": "Boolean props driven as PSEUDO-CLASS planes. `state` is a closed vocabulary, refused by name outside it.",
+      "provenBy": "every library with states",
+      "consequence": "An out-of-vocabulary state mints channel names no emitter renders — captured, minted, and dropped on the floor silently.",
+      "paths": [
+        "components[].stateProps",
+        "components[].stateProps[].prop",
+        "components[].stateProps[].state"
+      ],
+      "exercisedBy": [
+        "config:antd",
+        "config:astryx",
+        "config:bootstrap5"
+      ]
+    },
+    {
+      "id": "component.triage",
+      "status": "supported",
+      "kind": "composition",
+      "spelling": "\"triage\": [{\"part\",\"channels\",\"when\",\"cause\"}]",
+      "summary": "Named, condition-scoped acknowledgements of channels a library genuinely does not carry on a part.",
+      "provenBy": "polaris",
+      "consequence": "A known-absent channel is reported as a fresh loss on every run and the ledger never converges.",
+      "paths": [
+        "components[].triage",
+        "components[].triage[].cause",
+        "components[].triage[].channels",
+        "components[].triage[].part",
+        "components[].triage[].when",
+        "components[].triage[].when.*"
+      ],
+      "exercisedBy": [
+        "config:polaris"
+      ]
+    },
+    {
+      "id": "container-self-reference",
+      "status": "unsupported",
+      "kind": "marker",
+      "spelling": "(named, not built: {\"$self\": true} / {\"$parent\": true})",
+      "summary": "A prop whose value must be a reference to the mounted element or its container.",
+      "instances": "antd's `getPopupContainer` wants the trigger's parent node so an overlay renders in the stage rather than at `document.body`.",
+      "provenBy": "antd",
+      "consequence": "The overlay portals to body and needs the whole `portalCapture` two-phase machinery for what a one-line container reference would solve.",
+      "workaround": "`portalCapture` + `openDriver`.",
+      "filedAs": "antd RECON W9 — deliberately not built before the exam measures it"
+    },
+    {
+      "id": "drafter-cannot-draft-compound",
+      "status": "unsupported",
+      "kind": "component",
+      "spelling": "(none — the drafter writes `importName: c.name`)",
+      "summary": "`extract/draft-capture-config.ts` has no notion of a namespace member, so the assisted path drafts a bare name for a compound component.",
+      "provenBy": "radix-themes",
+      "consequence": "The grammar now ACCEPTS `TextField.Root`, but the drafter can never produce it — a compound library's drafted config is silently unmountable and the human must know to fix it by hand.",
+      "workaround": "Author the compound names by hand after drafting.",
+      "filedAs": "named on landing, this round"
+    },
+    {
+      "id": "enumeration.cartesianLimit",
+      "status": "supported",
+      "kind": "environment",
+      "spelling": "\"enumeration.cartesianLimit\": 512",
+      "summary": "The refusal threshold on the combo product.",
+      "provenBy": "every library",
+      "consequence": "A four-axis component silently explodes the run instead of refusing by name.",
+      "paths": [
+        "enumeration",
+        "enumeration.cartesianLimit"
+      ],
+      "exercisedBy": [
+        "config:altitude",
+        "config:antd",
+        "config:astryx"
+      ]
+    },
+    {
+      "id": "enumeration.unsetLabel",
+      "status": "supported",
+      "kind": "environment",
+      "spelling": "\"enumeration.unsetLabel\": \"unset\"",
+      "summary": "The pseudo-value prepended to a DEFAULTLESS enum axis, mounted as the prop ABSENT.",
+      "provenBy": "every library",
+      "consequence": "`absent` is conflated with a chosen value, and the React surface's own default is never captured.",
+      "paths": [
+        "enumeration.unsetLabel"
+      ],
+      "exercisedBy": [
+        "config:altitude",
+        "config:antd",
+        "config:astryx"
+      ]
+    },
+    {
+      "id": "fonts.faces",
+      "status": "supported",
+      "kind": "assets",
+      "spelling": "\"fonts.faces\": [{\"family\",\"weight\",\"style\",\"file\"}]",
+      "summary": "`@font-face` blocks whose `src` is a base64 data: URI of a committed font file — hermetic by construction.",
+      "provenBy": "altitude, antd, astryx, mui, shadcn",
+      "consequence": "The capture silently re-pins fallback glyphs while claiming the library's real font (FC-FONT-SUBSTRATE).",
+      "paths": [
+        "fonts",
+        "fonts.faces",
+        "fonts.faces[].family",
+        "fonts.faces[].file",
+        "fonts.faces[].style",
+        "fonts.faces[].weight"
+      ],
+      "exercisedBy": [
+        "config:altitude",
+        "config:antd",
+        "config:astryx"
+      ]
+    },
+    {
+      "id": "icons",
+      "status": "supported",
+      "kind": "assets",
+      "spelling": "\"icons\": \"@shopify/polaris-icons\"",
+      "summary": "The package `$import` icon markers resolve against.",
+      "provenBy": "polaris",
+      "consequence": "Structure-creating icon props cannot be mounted.",
+      "paths": [
+        "icons"
+      ],
+      "exercisedBy": [
+        "config:antd",
+        "config:fluent",
+        "config:polaris"
+      ]
+    },
+    {
+      "id": "library.classAllow",
+      "status": "supported",
+      "kind": "library",
+      "spelling": "\"library.classAllow\": \"^rdp-[a-z_]+$\"",
+      "summary": "A regexp choosing which classes are STRUCTURAL (part signatures) rather than axis values.",
+      "provenBy": "day-picker",
+      "consequence": "A part signature moves when an axis moves, and every variant looks like a different component.",
+      "paths": [
+        "library.classAllow"
+      ],
+      "exercisedBy": [
+        "config:altitude",
+        "config:antd",
+        "config:astryx"
+      ]
+    },
+    {
+      "id": "library.classPrefix",
+      "status": "supported",
+      "kind": "library",
+      "spelling": "\"library.classPrefix\": \"cds--\"",
+      "summary": "The library's own class namespace, stripped when a captured class becomes a part name.",
+      "provenBy": "carbon",
+      "consequence": "Part names carry the vendor prefix into the contract and no two libraries' anatomies can be compared.",
+      "paths": [
+        "library.classPrefix"
+      ],
+      "exercisedBy": [
+        "config:altitude",
+        "config:antd",
+        "config:astryx"
+      ]
+    },
+    {
+      "id": "library.customElements",
+      "status": "supported",
+      "kind": "library",
+      "spelling": "\"library.customElements\": true",
+      "summary": "`importName` becomes a TAG NAME mounted via React.createElement(tag). The one door for a library that exports no React components at all — including a pure-CSS library where a component IS a class string.",
+      "provenBy": "altitude, bootstrap5",
+      "consequence": "Bootstrap, and every framework-free CSS library, is unmountable.",
+      "paths": [
+        "library.customElements"
+      ],
+      "exercisedBy": [
+        "config:altitude",
+        "config:bootstrap5"
+      ]
+    },
+    {
+      "id": "library.identity",
+      "status": "supported",
+      "kind": "library",
+      "spelling": "\"library\": {\"package\",\"version\",\"framework\"}",
+      "summary": "The package the harness imports from, the exact pinned version, and the framework (only `react` today).",
+      "provenBy": "every library",
+      "consequence": "Without it there is nothing to mount and no pin to reproduce; `version` is what makes a capture re-runnable a year later.",
+      "paths": [
+        "library",
+        "library.framework",
+        "library.package",
+        "library.version"
+      ],
+      "exercisedBy": [
+        "config:altitude",
+        "config:antd",
+        "config:astryx"
+      ]
+    },
+    {
+      "id": "library.tokenGroup",
+      "status": "supported",
+      "kind": "library",
+      "spelling": "\"library.tokenGroup\": \"p\"",
+      "summary": "The DTCG group a library's own token tree hangs under when it is not the package name.",
+      "provenBy": "polaris",
+      "consequence": "Minted names collide with the shipped tree.",
+      "paths": [
+        "library.tokenGroup"
+      ],
+      "exercisedBy": [
+        "config:polaris"
+      ]
+    },
+    {
+      "id": "library.varPrefix",
+      "status": "supported",
+      "kind": "library",
+      "spelling": "\"library.varPrefix\": \"--bs-\"",
+      "summary": "The custom-property prefix the CSS-vars reader binds against (docs/21 §4.2).",
+      "provenBy": "bootstrap5",
+      "consequence": "Zero source bindings, in complete silence — every computed value is minted as a fresh literal instead of resolving to the library's own token.",
+      "paths": [
+        "library.varPrefix"
+      ],
+      "exercisedBy": [
+        "config:altitude",
+        "config:antd",
+        "config:bootstrap5"
+      ]
+    },
+    {
+      "id": "marker.callback",
+      "status": "supported",
+      "kind": "marker",
+      "spelling": "{\"$callback\": true}",
+      "summary": "A no-op function — the presence value for structure-creating handler props.",
+      "provenBy": "polaris",
+      "consequence": "A handler prop cannot be spelled in JSON and the subtree it creates is never captured.",
+      "paths": [
+        "marker:$callback"
+      ],
+      "exercisedBy": [
+        "config:polaris",
+        "config:polaris-depth"
+      ]
+    },
+    {
+      "id": "marker.classTokens",
+      "status": "supported",
+      "kind": "marker",
+      "spelling": "{\"$classTokens\": [\"btn-primary\"]}",
+      "since": "held-out round",
+      "summary": "An ORDERED APPEND to `className`: each axis contributes its tokens in declared axis order, after the base tokens in `fixedProps.className`. `[]` is the honest spelling of a value that adds no class.",
+      "provenBy": "bootstrap5",
+      "consequence": "`comboProps` folds axes into one bag by assignment, so `variant × size` mounted `\"btn btn-lg\"` and SILENTLY DROPPED THE VARIANT — a silent loss in the mounting layer. Bootstrap's `btn-sm`/`btn-lg` was deferred by name rather than ship it.",
+      "paths": [
+        "marker:$classTokens"
+      ],
+      "exercisedBy": [
+        "config:bootstrap5"
+      ]
+    },
+    {
+      "id": "marker.date",
+      "status": "supported",
+      "kind": "marker",
+      "spelling": "{\"$date\": \"2026-01-15T00:00:00.000Z\"}",
+      "since": "held-out round",
+      "summary": "A PINNED `Date`. Accepts `YYYY-MM-DD` or a UTC instant, and nothing else: no `now`, no offset, no local-time spelling. Silent V8 rollover (Feb 31 → Mar 3) is refused by name.",
+      "provenBy": "day-picker",
+      "consequence": "A calendar — the archetype the owner named as the one he fears — can only be mounted through a hand-written sandbox fixtures module holding three `new Date(...)` literals, which puts a JS file between the config and the subject. Unpinned, the DOM changes at midnight and no two captures can be byte-compared.",
+      "paths": [
+        "marker:$date"
+      ],
+      "exercisedBy": [
+        "config:day-picker"
+      ]
+    },
+    {
+      "id": "marker.element",
+      "status": "supported",
+      "kind": "marker",
+      "spelling": "{\"$element\": \"pkg#Export\", \"props\": {}, \"text\": \"…\"}",
+      "summary": "A bounded React element for element-valued component props, such as input adornments.",
+      "provenBy": "mui, antd",
+      "consequence": "An element-valued prop can only be a string.",
+      "paths": [
+        "marker:$element"
+      ],
+      "exercisedBy": [
+        "config:antd",
+        "config:mui"
+      ]
+    },
+    {
+      "id": "marker.import",
+      "status": "supported",
+      "kind": "marker",
+      "spelling": "{\"$import\": \"pkg#Export\"}",
+      "summary": "The named import from a package — icon sources and other export-valued props.",
+      "provenBy": "polaris, carbon",
+      "consequence": "Element- and component-valued props cannot be mounted.",
+      "paths": [
+        "marker:$import"
+      ],
+      "exercisedBy": [
+        "config:carbon",
+        "config:polaris"
+      ]
+    },
+    {
+      "id": "marker.props",
+      "status": "supported",
+      "kind": "marker",
+      "spelling": "{\"$props\": {\"checked\": true, \"indeterminate\": true}}",
+      "summary": "One contract axis value mounting SEVERAL library props — MUI spells a tri-state checkbox as two independent booleans.",
+      "provenBy": "mui",
+      "consequence": "A two-axis spelling would silently lose all three checkbox glyphs (the svg-content promotion carries per-value assets only when the markup is a function of exactly one axis).",
+      "paths": [
+        "marker:$props"
+      ],
+      "exercisedBy": [
+        "config:altitude",
+        "config:antd",
+        "config:bootstrap5"
+      ]
+    },
+    {
+      "id": "marker.render",
+      "status": "supported",
+      "kind": "marker",
+      "spelling": "{\"$render\": \"pkg#Export\"}",
+      "summary": "The identity render-prop `(params) => <Export {...params} />` — the ONLY function shape the vocabulary admits.",
+      "provenBy": "mui",
+      "consequence": "MUI's Autocomplete cannot be mounted at all (renderInput is required). Any richer function body is a named refusal, never config.",
+      "paths": [
+        "marker:$render"
+      ],
+      "exercisedBy": [
+        "config:mui"
+      ]
+    },
+    {
+      "id": "mount.headStyles",
+      "status": "supported",
+      "kind": "mount",
+      "spelling": "\"mount.headStyles\": [{\"id\":\"al-theme\",\"files\":[\"…\"]}]",
+      "summary": "Global stylesheets inlined into `<head>` as `<style id>` tags, `@import` stripped for hermeticity.",
+      "provenBy": "altitude",
+      "consequence": "A shadow-DOM library's global theme sheet is missing and every component renders unstyled while the page throws nothing.",
+      "paths": [
+        "mount.headStyles",
+        "mount.headStyles[].files",
+        "mount.headStyles[].id"
+      ],
+      "exercisedBy": [
+        "config:altitude"
+      ]
+    },
+    {
+      "id": "mount.imports",
+      "status": "supported",
+      "kind": "mount",
+      "spelling": "\"mount.imports\": [\"import 'bootstrap/dist/css/bootstrap.css';\"]",
+      "summary": "Verbatim import statements placed at the top of the harness entry — stylesheets, polyfills, custom-element registration side effects.",
+      "provenBy": "every library",
+      "consequence": "The library renders unstyled and the capture records the user-agent defaults as the library's truth.",
+      "paths": [
+        "mount",
+        "mount.imports"
+      ],
+      "exercisedBy": [
+        "config:altitude",
+        "config:antd",
+        "config:astryx"
+      ]
+    },
+    {
+      "id": "mount.preScript",
+      "status": "supported",
+      "kind": "mount",
+      "spelling": "\"mount.preScript\": [\"…\"]",
+      "summary": "Script executed before the bundle, for registration that must precede React.",
+      "provenBy": "altitude",
+      "consequence": "Custom elements upgrade after first paint and the first captured frame is the un-upgraded DOM.",
+      "paths": [
+        "mount.preScript"
+      ],
+      "exercisedBy": [
+        "config:altitude"
+      ]
+    },
+    {
+      "id": "mount.wrapper",
+      "status": "supported",
+      "kind": "mount",
+      "spelling": "\"mount.wrapperOpen\": \"<Theme>\", \"mount.wrapperClose\": \"</Theme>\"",
+      "summary": "A provider/theme element wrapped around every mounted combo.",
+      "provenBy": "radix-themes",
+      "consequence": "A library whose token scope is a DOM box (not `:root`) captures no tokens at all — see the unsupported row `theme-provider-is-a-box`.",
+      "paths": [
+        "mount.wrapperClose",
+        "mount.wrapperOpen"
+      ],
+      "exercisedBy": [
+        "config:altitude",
+        "config:antd",
+        "config:astryx"
+      ]
+    },
+    {
+      "id": "multi-package-mount",
+      "status": "unsupported",
+      "kind": "library",
+      "spelling": "(none — one `library.package` per config)",
+      "summary": "Components that live in more than one package cannot be mounted from one config.",
+      "provenBy": "radix-themes, shadcn",
+      "consequence": "A sandbox barrel re-exporting everything under one name, which makes `library.package`/`version` describe the barrel rather than the subject. `$import` reaches other packages for VALUES but not for mounted components.",
+      "workaround": "A local `file:` barrel package (`@shadcn-sandbox/ui`, `@radix-themes-sandbox/ui`).",
+      "filedAs": "held-out finding 1, partially closed by compound `importName`"
+    },
+    {
+      "id": "no-steady-state",
+      "status": "unsupported",
+      "kind": "stage",
+      "spelling": "(none — there is no spelling)",
+      "summary": "A component whose rendering is an infinite animation has no steady state to measure, and the two-stable-samples probe cannot converge.",
+      "instances": "Bootstrap's `.spinner-border` / `.spinner-grow` are infinite keyframe animations; measured across separate mounts the grow spinner reads 43×43, then 10×10, then 4×4.",
+      "provenBy": "bootstrap5",
+      "consequence": "Whatever frame the sampler happened to catch is minted as the component's geometry, and it is different on every run. There is no way to say 'this component has no honest size' — so a number is recorded that is not a fact.",
+      "workaround": "None in the grammar. `animate: false` where the library offers it (day-picker does; Bootstrap does not).",
+      "filedAs": "held-out finding 5"
+    },
+    {
+      "id": "richer-function-props",
+      "status": "unsupported",
+      "kind": "marker",
+      "spelling": "(none — `$render` is the identity render-prop and nothing else)",
+      "summary": "Any function-valued prop whose body is not `(params) => <Export {...params} />`.",
+      "provenBy": "mui",
+      "consequence": "A named refusal, never config — deliberately. A config that could carry arbitrary function bodies would stop being data, and the determinism argument would go with it.",
+      "workaround": "None, by design. This row is a BOUNDARY, not a gap.",
+      "filedAs": "MOLECULE round, by design"
+    },
+    {
+      "id": "stage.global",
+      "status": "supported",
+      "kind": "environment",
+      "spelling": "\"stage\": {\"width\",\"height\",\"padding\"}",
+      "summary": "The box each combo is mounted inside.",
+      "provenBy": "every library",
+      "consequence": "A component that fills its parent mints the CAPTURE WINDOW as its own width (the viewport-geometry defect).",
+      "paths": [
+        "stage",
+        "stage.height",
+        "stage.padding",
+        "stage.width"
+      ],
+      "exercisedBy": [
+        "config:altitude",
+        "config:antd",
+        "config:astryx"
+      ]
+    },
+    {
+      "id": "theme-provider-is-a-box",
+      "status": "unsupported",
+      "kind": "mount",
+      "spelling": "(partial — `mount.wrapperOpen` mounts it, but nothing declares the SCOPE)",
+      "summary": "A library whose entire token scope is declared on a DOM element, with nothing at `:root`.",
+      "instances": "Radix Themes declares all 1,091 custom properties on `.radix-themes` and nothing at `:root` — the docs/21 §4.2 trap in its purest form.",
+      "provenBy": "radix-themes",
+      "consequence": "`mount.wrapperOpen` is load-bearing rather than cosmetic, and nothing in the config SAYS so. Omit it and `getComputedStyle(:root)` returns the empty string for all 1,091 names — zero source bindings, every value minted as a literal, in complete silence.",
+      "workaround": "`mount.wrapperOpen`/`wrapperClose` plus the §4.2 bind proof, run by hand.",
+      "filedAs": "held-out finding 6"
+    },
+    {
+      "id": "tokens.minted",
+      "status": "supported",
+      "kind": "tokens",
+      "spelling": "\"tokens.minted\": \"examples/…-minted.dtcg.json\"",
+      "summary": "The shipped minted tree the fidelity gate scores against. A declared-but-absent path is refused at load.",
+      "provenBy": "every library",
+      "consequence": "The gate falls back to the fresh mint only and scores the shipped contract's reviewed refs as unresolved.",
+      "paths": [
+        "tokens.minted"
+      ],
+      "exercisedBy": [
+        "config:altitude",
+        "config:antd",
+        "config:astryx"
+      ]
+    },
+    {
+      "id": "tokens.mintedBootstrap",
+      "status": "supported",
+      "kind": "tokens",
+      "spelling": "\"tokens.mintedBootstrap\": true",
+      "summary": "A named allowance for a library's genuine FIRST-EVER pass, where the minted tree is still a zero-leaf stub. Refused once the tree carries leaves.",
+      "provenBy": "bootstrap5, day-picker, radix-themes",
+      "consequence": "Either a first pass is impossible, or the ordering guard is suppressed forever.",
+      "paths": [
+        "tokens.mintedBootstrap"
+      ],
+      "exercisedBy": [
+        "config:bootstrap5",
+        "config:day-picker",
+        "config:radix-themes"
+      ]
+    },
+    {
+      "id": "tokens.sources",
+      "status": "supported",
+      "kind": "tokens",
+      "spelling": "\"tokens\": {\"dtcg\": [...], \"css\": \"…\"}",
+      "summary": "The library's own token tree (DTCG) and the CSS custom-property file the reader resolves against.",
+      "provenBy": "every library",
+      "consequence": "Nothing to bind to; every captured value is minted.",
+      "paths": [
+        "tokens",
+        "tokens.css",
+        "tokens.dtcg"
+      ],
+      "exercisedBy": [
+        "config:altitude",
+        "config:antd",
+        "config:astryx"
+      ]
+    }
+  ]
+}

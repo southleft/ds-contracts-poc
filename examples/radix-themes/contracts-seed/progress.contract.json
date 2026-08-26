@@ -1,0 +1,81 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "radix-themes.progress",
+  "name": "Progress",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the HELD-OUT FIRST-PASS EXAM — props/axes only; anatomy is promoted from captured DOM truth. Subject: @radix-themes-sandbox/ui@0.0.1 (flattened mount barrel over @radix-ui/themes@3.3.0). BLINDNESS RULE (non-negotiable): this file was authored from the library's own documentation and shipped source ONLY. No capture/promote/emit stage of this repo was run against this library, no output of ours for it was read, and nothing here was tuned in response to our pipeline's behaviour. See parity/receipts/v1/HELD-OUT-MANIFEST.md.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "classic",
+          "surface",
+          "soft"
+        ]
+      },
+      "default": "surface",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "classic": "Classic",
+            "surface": "Surface",
+            "soft": "Soft"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "1",
+          "2",
+          "3"
+        ]
+      },
+      "default": "2",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "1": "1",
+            "2": "2",
+            "3": "3"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@radix-themes-sandbox/ui",
+        "export": "Progress"
+      }
+    }
+  }
+}

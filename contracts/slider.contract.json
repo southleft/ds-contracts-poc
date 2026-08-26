@@ -5,6 +5,7 @@
   "version": "1.0.0",
   "status": "draft",
   "description": "Numeric selection within bounds — the static surface of a slider: label, filled track to the current value, and thumb. API mirrors industry convention (Astryx Slider); drag behavior and range mode are declared boundaries.",
+  "archetype": "slider",
   "semantics": {
     "element": "div"
   },

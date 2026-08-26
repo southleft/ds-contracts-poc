@@ -1,14 +1,15 @@
 {
   "component": "CaseGridInstanceChild",
   "generatedBy": "extract/computed/gate.ts",
-  "browser": "151.0.7922.34",
+  "browser": "149.0.7827.55",
+  "renderedBy": "149.0.7827.55",
   "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
   "combos": 1,
   "interactions": 4,
   "computed": {
-    "cellsCompared": 100,
-    "cellsEqual": 96,
-    "pctEqual": 96,
+    "cellsCompared": 232,
+    "cellsEqual": 228,
+    "pctEqual": 98.27586206896552,
     "rowsFullyEqual": 0,
     "rows": 4
   },
@@ -30,13 +31,13 @@
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
-    "mintedLeaves": 8,
-    "mintedLeavesUnfolded": 8,
-    "baseBindings": 10,
+    "mintedLeaves": 10,
+    "mintedLeavesUnfolded": 10,
+    "baseBindings": 25,
     "stateBindings": 0,
     "codeOnlyChannels": 2,
     "overflowBindings": 0,
-    "folds": 0
+    "folds": 18
   },
   "worstRows": [
     {
@@ -86,8 +87,8 @@
   "rows": [
     {
       "key": "__default",
-      "channelsCompared": 25,
-      "channelsEqual": 24,
+      "channelsCompared": 58,
+      "channelsEqual": 57,
       "pctExact": 10.390625,
       "pctAA": 10.387369791666666,
       "mismatches": [
@@ -101,8 +102,8 @@
     },
     {
       "key": "__hover",
-      "channelsCompared": 25,
-      "channelsEqual": 24,
+      "channelsCompared": 58,
+      "channelsEqual": 57,
       "pctExact": 10.390625,
       "pctAA": 10.387369791666666,
       "mismatches": [
@@ -116,8 +117,8 @@
     },
     {
       "key": "__focus-visible",
-      "channelsCompared": 25,
-      "channelsEqual": 24,
+      "channelsCompared": 58,
+      "channelsEqual": 57,
       "pctExact": 10.390625,
       "pctAA": 10.387369791666666,
       "mismatches": [
@@ -131,8 +132,8 @@
     },
     {
       "key": "__active",
-      "channelsCompared": 25,
-      "channelsEqual": 24,
+      "channelsCompared": 58,
+      "channelsEqual": 57,
       "pctExact": 10.390625,
       "pctAA": 10.387369791666666,
       "mismatches": [

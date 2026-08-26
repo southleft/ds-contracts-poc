@@ -94,6 +94,29 @@ jobs:
         id: setup
         run: echo "Every step below runs even if an earlier one fails; the job fails at the end."
 
+      # BROWSER. `css-vars:check` drives a real Chromium through
+      # chromiumExecutable() (extract/figma/visual-parity/render.ts). It used to
+      # resolve the runner's preinstalled system Chrome by silent fallback — a
+      # DIFFERENT browser from the one the full lane and every committed capture
+      # use, which is the whole defect fix/pin-render-browser exists to remove.
+      # The resolver now refuses rather than substitute, so this lane installs
+      # the revision playwright-core pins, exactly as full.yml does.
+      # Cache first, install second: the install is a no-op on a cache hit, and
+      # `restore-keys` can restore a cache that predates a lockfile bump and
+      # therefore lacks the pinned revision — the install repairs that instead of
+      # the resolver quietly using whatever else the cache happens to hold.
+      - name: cache playwright browsers
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-ms-playwright-${{ hashFiles('package-lock.json') }}
+          restore-keys: ${{ runner.os }}-ms-playwright-
+      - name: install chromium (playwright-core ships no browser)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        env: { CI_LANE_STEP: prep }
+        run: npx playwright-core install --with-deps chromium
+
       # Root consumers import @ds-contracts/schema through its package exports,
       # which point at gitignored dist/. A clean checkout therefore must build
       # the workspace before any root typecheck/test can resolve it. The local
@@ -255,6 +278,12 @@ jobs:
       - name: exam:screenshots:check (every phase-2 exam receipt carries a canvas + reference PNG per set, or names that it does not)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run exam:screenshots:check
+      - name: required-facts:check self-test (a card with no column axis must refuse BY NAME, and every required fact must be able to go red)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run required-facts:check -- --self-test
+      - name: required-facts:check (every committed contract carries the load-bearing facts its archetype owes, or is pinned by name in the frozen baseline)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run required-facts:check
 
       - name: test accuracy contract gate falsifications
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
@@ -498,6 +527,17 @@ jobs:
       - name: exact-proposal:check (strict proposal refuses legacy and semantic ambiguity)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run exact-proposal:check
+      # THE CHANNEL TABLE (docs/30). Every CSS computed property the capture
+      # can observe is classified exactly once (spec/channel-table.json); this
+      # refuses on an unclassified observed property, a ghost CARRIED anchor,
+      # a missing schema/conformance row, or drifted totals — then proves it
+      # can go red at all.
+      - name: channel-table:check (no unclassified channel; every CARRIED anchor exists)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run channel-table:check
+      - name: channel-table self-test (a dropped row, a ghost anchor and a stray byte each go red)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run channel-table:check -- --self-test
       - name: string-boolean-coercion:check (maintain — a string "true" never becomes a boolean property)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run string-boolean-coercion:check
@@ -596,6 +636,78 @@ jobs:
       - name: census:check --phase design-to-code (canvas → contract → code; 0 silent, byte-deterministic)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run census:check -- --phase design-to-code
+
+      # FIRST-PASS EXAM (docs/31 — the owner's criticism, 2026-08-24: "I don't
+      # think I've seen one successful pass on the first try"). Every other
+      # gate in this file measures END-STATE quality, after a heal loop. This
+      # one holds the committed evidence of the OTHER metric: the documented
+      # chain run end to end with zero intervention and NO RETRY. The gate is a
+      # pure reader — it never runs an exam (an exam needs a library sandbox, a
+      # Figma token and a browser); it holds the packets, the MANIFEST
+      # denominator, the artifact hashes, the ratchet and the byte-stable
+      # receipt against each other.
+      - name: first-pass:check (every exam's packets, ratchet and receipt agree)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run first-pass:check
+      - name: first-pass self-test (the gate goes red on a dropped packet, a smuggled packet, a corrupted image, a ratchet raised above the truth, and an edited receipt)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run first-pass:check -- --self-test
+      # THE DOOR REGISTER (spec/DOOR-REGISTER.md). A door is any rule that
+      # decides a computed fact is NOT a fact of this component, or that a fact
+      # IS admitted — the pipeline's only judgement calls. The gate holds the
+      # register to the code in four directions (an @door marker with no entry,
+      # an entry with no marker, an entry whose line is not where the marker
+      # sits, and a door CLAIMING a receipt whose receipt path does not exist)
+      # and re-measures the subtraction census by re-fusing all 116 committed
+      # captures offline, refusing when the pinned per-library numbers move.
+      - name: render-browser:check (the render browser is the PINNED revision, and a receipt names what rendered it)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run render-browser:check
+      - name: mixed-browser:check (no capture staples two browsers into one evidence file — docs/23 D.37)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run mixed-browser:check
+      - name: door-register:check (every subtractive heuristic named, premised, and its receipt path proved)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run door-register:check
+      - name: door-register self-test (the gate goes red on an unregistered door, an unmarked entry, and a claimed receipt with no path)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run door-register:self-test
+
+      # THE GRAMMAR COVERAGE SPEC — spec/GRAMMAR-COVERAGE.md + grammar-coverage.json.
+      # The CAPTURE CONFIG GRAMMAR is the language a user mounts their library
+      # in, and three holes in it were found by AUTHORING three held-out exam
+      # subjects rather than by running anything: a compound export name was a
+      # syntax error, two class-token axes SILENTLY dropped one of the two, and
+      # a Date could not be spelled at all. A first-pass failure caused by a
+      # known grammar gap measures the grammar rather than the engine, so the
+      # remaining gaps are named here with the library that proves each one.
+      # The supported half is measured from the CONFIGS ON DISK, never from the
+      # TypeScript type that declares the surface — a coverage number computed
+      # from its own denominator is the self-attestation this tree keeps
+      # re-learning. Refuses when a config uses a construct the spec omits, and
+      # when a spec row claims support that nothing exercises.
+      - name: grammar-coverage:check (every config construct claimed; every supported claim exercised)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run grammar-coverage:check
+      - name: grammar-coverage self-test (ten planted reds - a dropped construct, an exerciser that does not exercise, a ghost file, an unimplemented marker, stale totals, an empty corpus)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run grammar-coverage:check -- --self-test
+      # CORPUS REPRODUCIBILITY — the twin of the gate above, and the reason the
+      # first-pass exam went 0/8 the day it first ran: the committed contracts
+      # claim to be the output of the documented chain, and nothing checked it.
+      # The PROMOTE half runs here — pure, no browser, ~2s: every library's
+      # committed capture record plus its authored facts must re-promote to the
+      # committed contracts byte for byte. The CAPTURE half needs Chromium and
+      # the git-ignored sandboxes, so it runs OUT OF BAND
+      # (`-- --capture`) and RECORDS what it measured; this step judges that
+      # committed measurement against the committed ledger, which is why its
+      # verdict is the same on every machine.
+      - name: corpus:reproducible:check (the documented chain re-derives its own corpus; every divergence named)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run corpus:reproducible:check
+      - name: corpus:reproducible self-test (the gate goes red on an unnamed divergence, a stale ledger row, and an unnamed capture divergence)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run corpus:reproducible:check -- --self-test
 
       # Not one of the 33 named gates, but CONTRIBUTING.md § "The gates" tells
       # contributors to run it and it costs under a second with no extra build.

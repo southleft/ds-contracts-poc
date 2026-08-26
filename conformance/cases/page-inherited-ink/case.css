@@ -1,0 +1,12 @@
+/* PAGE-GLOBAL BY CONSTRUCTION — a provider that sets the document's ink.
+ *
+ * Polaris's AppProvider sets `color` on an ancestor of everything it wraps;
+ * Fluent's FluentProvider does the same. The capture harness renders its
+ * control elements inside that same wrapper, so the bare control inherits the
+ * identical ink and the component's own rendered ink compares EQUAL to it. The
+ * generated surfaces have no provider at all, so a dropped ink draws the
+ * user agent's black — or, over a dark fill, nothing. */
+body { color: var(--cf-color-primary); }
+
+[data-cf="page-inherited-ink"] { display: flex; }
+/* The case declares NOTHING about colour. The ink below is inherited. */

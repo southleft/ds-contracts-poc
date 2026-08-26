@@ -53,6 +53,7 @@ import {
 } from '../core/emit-tokens-css.js';
 import { formatCss, formatTsx } from '../core/format.js';
 import { tokenInventoryFromJson } from '../core/tokens.js';
+import { checkRequiredFacts } from '../core/required-facts.js';
 // Token ROUTING (which file is the dark slot, which the brand) is the CLI's
 // rule — one rule for every target, so the react shell cannot call a tree
 // "dark" that `--target html` calls "primitives". lib.ts imports only core/
@@ -332,7 +333,18 @@ function loadIconAssets(iconsDir: string): Map<string, string> {
 
 export async function generateComponents(
   options: GenerateComponentsOptions = {},
-): Promise<{ generated: string[]; refused: RefusedContract[]; outDir: string; tokensCss: TokensCssSummary }> {
+): Promise<{
+  generated: string[];
+  refused: RefusedContract[];
+  outDir: string;
+  tokensCss: TokensCssSummary;
+  /** REQUIRED-FACTS warnings — one line per load-bearing fact a contract does
+   *  not carry for its archetype. `generate` WARNS and never refuses: code
+   *  renders through CSS inheritance and survives an absence the canvas
+   *  cannot, so the same fact that stops `figma bundle --strict` is only named
+   *  here. Both shells print them (describeRequiredFacts). */
+  requiredFacts: string[];
+}> {
   const root = process.cwd();
   const contractsDir = options.contractsDir ?? path.join(root, 'contracts');
   const outDir = options.outDir ?? path.join(root, 'src', 'components');
@@ -480,7 +492,27 @@ export async function generateComponents(
     writeFileSync(file.path, file.contents);
   }
 
-  return { generated, refused: ledger.refused, outDir, tokensCss };
+  // REQUIRED FACTS PER ARCHETYPE — named on the code surface too, in the
+  // generate voice: the fact is missing, the code still renders, and the
+  // CANVAS is where it will show. One place, both shells.
+  const requiredFacts: string[] = [];
+  for (const contract of ordered) {
+    const result = checkRequiredFacts(contract, { voice: 'generate' });
+    requiredFacts.push(...result.missing.map((m) => m.line));
+  }
+
+  return { generated, refused: ledger.refused, outDir, tokensCss, requiredFacts };
+}
+
+/** The required-facts warnings, one header + one `  - <line>` each — the same
+ *  wording in `npm run generate` and every CLI target. */
+export function describeRequiredFacts(requiredFacts: string[]): string[] {
+  if (requiredFacts.length === 0) return [];
+  return [
+    `⚠ ${requiredFacts.length} required fact(s) missing for the contract's archetype — generated anyway (code carries them through CSS defaults; the canvas cannot). ` +
+      `\`ds-contracts figma bundle --strict\` refuses these instead:`,
+    ...requiredFacts.map((line) => `  - ${line}`),
+  ];
 }
 
 /** The refused list, one header + one `  - id: violation` line each — the
@@ -498,9 +530,10 @@ export function describeRefused(refused: RefusedContract[]): string[] {
  *  anything was refused. */
 export async function runGenerateComponents(options: GenerateComponentsOptions = {}): Promise<void> {
   try {
-    const { generated, refused, tokensCss } = await generateComponents(options);
+    const { generated, refused, tokensCss, requiredFacts } = await generateComponents(options);
     console.log(`✔ Generated ${generated.length} component(s) from contracts: ${generated.sort().join(', ')}`);
     if (generated.length > 0) for (const line of describeTokensCss(tokensCss)) console.log(line);
+    for (const line of describeRequiredFacts(requiredFacts)) console.log(line);
     if (refused.length > 0) {
       for (const line of describeRefused(refused)) console.error(line);
       process.exit(1);

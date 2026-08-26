@@ -411,7 +411,8 @@ PROVENANCE-sourced and no commit since has touched those paths. Flagged as
 such rather than presented as freshly verified.*
 
 - **MUI's Accordion has no expand chevron** — `expandIcon` takes a React
-  element, the marker grammar resolves package *exports* only, and the pinned
+  element, the marker grammar resolves package *exports* and pinned literals
+  (`$date`, `$classTokens`) only, and the pinned
   sandbox has no `@mui/icons-material`. A hand-drawn chevron would be a
   fabricated canvas fact, so there is none.
 - **Polaris RadioButton's selected dot** (`::before` decor) — not carried.
@@ -1680,7 +1681,7 @@ on your canvas. The counts are the honest way to see both halves at once.
 |---|---|---|---|
 | CSS / DOM frontier | 82 | CARRIED 42 · LOWERED 4 · REFUSED 18 · UNSUPPORTED 18 (79 pass · 3 red) | `conformance/MANIFEST.json` (`npm run conformance`, 2026-08-23) |
 | canvas round trip of the CARRIED/LOWERED cases | 46 | ROUND-TRIPPED 26 · NAMED 5 · REFUSED-BY-NAME 15 · **SILENT 0** | `conformance/CANVAS-EXPECTATIONS.md` (`npm run conformance:roundtrip`) |
-| canvas constructs | 154 | CARRIED 107 · LEDGERED 38 · REFUSED 9 (154 PASS · 0 RED-EXPECTED — the last two exam silences closed 2026-08-23, §D.29; the slot's interior layout the same day, §D.31) | `extract/figma/conformance/MANIFEST.json` (`npm run conformance:canvas`) |
+| canvas constructs | 157 | CARRIED 110 · LEDGERED 38 · REFUSED 9 (157 PASS · 0 RED-EXPECTED — the last two exam silences closed 2026-08-23, §D.29; the slot's interior layout the same day, §D.31) | `extract/figma/conformance/MANIFEST.json` (`npm run conformance:canvas`) |
 | dropped-fact receipts (`†`) and the facts they name | 104 receipts · 2,321 named facts | pinned exactly, in both directions; since 2026-08-22 every `†` carries its facts by part, channel, value and reason (`codeOnlyFacts`) | `extract/figma/dagger-census.json` (`npm run dagger:census`, `code-only-facts:check`) |
 
 **REFUSED and UNSUPPORTED are different facts** and the fixture counts them
@@ -2784,7 +2785,7 @@ npm run conformance
 npm run conformance:roundtrip     # → 46 cases · 26 round-tripped · 5 named · 15 refused by name · 0 SILENT
 
 # the canvas-construct fixture, incl. the held-out kit's cases (§D.24, §D.29, §D.31)
-npm run conformance:canvas        # → 154 cases · 154 PASS · 0 RED-EXPECTED · 0 FAIL
+npm run conformance:canvas        # → 157 cases · 157 PASS · 0 RED-EXPECTED · 0 FAIL
 
 # every dropped-fact receipt and the facts it names (§C.3)
 npm run dagger:census             # → 104 receipts · 2,321 named facts, no drift
@@ -2897,12 +2898,14 @@ and the 152 prior cases did not move.
 **Gates:** conformance cases `slot-interior-auto-layout` +
 `rest-slot-interior-auto-layout` (authored RED-EXPECTED with the silence
 pinned in `observedCheck`, proven red, then re-recorded CARRIED); `npm run
-conformance:canvas` (154 cases · CARRIED 107 · LEDGERED 38 · REFUSED 9 ·
-154 PASS · 0 RED-EXPECTED); `npm run exact-proposal:check` §49 (now pins
+conformance:canvas` (157 cases · CARRIED 110 · LEDGERED 38 · REFUSED 9 ·
+157 PASS · 0 RED-EXPECTED — the census merge added the three REST identity
+rows `rest-set-description-carried`, `rest-documentation-links-carried`,
+`rest-stamped-identity-carried`, all CARRIED); `npm run exact-proposal:check` §49 (now pins
 the FULL layout object `{direction, justify, align, grow}` on every shape)
 and §50 (the interior facts on their own: the layout block, the three
 minted channels, the layoutByProp split); `npm run accuracy:check`
-(`accuracy/grammar.json` pins 154 = 107 / 38 / 9); `npm run
+(`accuracy/grammar.json` pins 157 = 110 / 38 / 9); `npm run
 emitters:check`; `npx tsx conformance/canvas.ts` (46 cases, 0 SILENT);
 `npm run flowbite-dump-propose:check` (8 stems). The Flowbite eight draw no
 native SLOT and the first-party `figma/*.figma.js` are emitted from
@@ -3113,10 +3116,14 @@ defaultless axis, the existing `carried-channel-reminted` door still re-mints
 the set planes; variation along a defaulted axis stays with the literal, the
 same as every other reviewed carriage — named, not hidden.
 
-**Numbers.** polaris Tag re-fuses: offline 81.551 % (6140/7529 cells, 0
+**Numbers.** polaris Tag re-fuses: offline 81.618 % (6145/7529 cells, 0
 unresolved refs) against the committed harness 81.016 % (5996/7401); 128
-cells added and 144 more equal, so 16 previously-compared cells changed
-verdict to EQUAL — the hugging link. The baseline row drops `refused` and
+cells added and 149 more equal, so 21 previously-compared cells changed
+verdict to EQUAL — the hugging link, plus five `large.on` remove-button
+`background-color` cells the integrated engine resolves to the library's own
+fill, `rgba(227, 227, 227, 1)` (this section's 2026-08-23 re-record measured
+81.551 %, 6140 equal; the INTEGRATED ENGINE ROUND re-record of 2026-08-24 on
+v1-integration is the current pin). The baseline row drops `refused` and
 names the gap; the tracked `out/tag/regate.scorecard.json` is the re-record.
 The committed capture artifacts and the promoted Tag contract are
 UNTOUCHED: the hugging link reaches the canvas at Tag's next recapture (or
@@ -3221,3 +3228,183 @@ one is still absent; `playground:flow-check` (a `maintain` step) pins that
 `core/emitter.ts` in `sideEffects` was tried and rejected: esbuild honours the
 same field, and the plugin engine bundle grew past its committed 811,089
 bytes (`figma-sync/plugin/engine.receipt.json` refused the grown bundle).
+
+## D.36 The control baseline was POLLUTED — the harness mounted its controls inside the library's own page, so real facts were subtracted as user-agent defaults — CLOSED
+
+Found 2026-08-24 by the door register (`spec/DOOR-REGISTER.md`, door
+`capture.control-baseline-mint`). One `if` in `extract/computed/fuse.ts`
+decides whether a computed value is a fact of the component:
+
+```ts
+if (a.baseFlat[pi].node.style[p] !== ctrl[p]) set.add(p);
+```
+
+`ctrl` is supposed to be the **user agent** — the only thing a generated
+surface inherits, because `emit-html`, `emit-react` and the Figma mint ship
+the component's own CSS and no page chrome at all. It was not. The harness
+rendered its four control elements (`button` / `span` / `a` / `div`) **inside
+`mount.wrapperOpen`, in the same document as the component**, so every
+page-global rule a library ships styled the control too:
+
+| library | the page-global rule | what the bare `<span>` control read |
+|---|---|---|
+| shadcn | `* { border-color: var(--border) }` | `border-*-color: oklch(0.922 0 0)` |
+| shadcn / tailwind / astryx | preflight `* { border-style: solid; border-width: 0 }`, `html { tab-size: 4; -webkit-text-size-adjust: 100% }` | `border-style: solid`, `box-sizing: border-box` |
+| polaris / fluent | the provider's body ink and family | `color`, `font-family`, `line-height` |
+
+The component's real value then compared EQUAL to the control and was dropped
+as "not a fact of this component" — while the channels the control did NOT
+carry shipped. The shadcn Input shipped `border-top-width: 1px` with **no
+colour** (a border that paints nothing) and Polaris/Fluent text shipped with
+**no ink**. Both are the owner-rejected sets, and neither loss produced a line
+anywhere.
+
+Five patches in `styledChannels` had already been written against symptoms of
+this one cause, each admitting one channel family by hand:
+`reset-supplied-border-style-admitted`, round 5c's text-part
+`font-size`/`line-height`/`font-weight`, the altitude round's `font-family`,
+and `svg-host-color-carried`. They are now special cases of the rule rather
+than the rule.
+
+**What changed.** `extract/computed/capture.ts` gains `captureUaControls`: the
+same four elements, in the same stage box, on a page carrying the browser and
+`color-scheme` and **nothing the library ships** — no stylesheet, no
+`@font-face`, no provider, no preScript. That page is a function of (browser,
+colour-scheme, stage) only, so the baseline is **library-independent by
+construction** — which is why it can be measured for an already-committed
+capture without the library's harness existing
+(`extract/computed/ua-baseline-backfill.ts`, gated by
+`npm run ua-baseline:present:check`). `fuse.control-element-delta` subtracts
+that baseline, and leaves a receipt when it does: `control-equal-drop` (how
+many channels were subtracted, and against which baseline),
+`page-global-baseline-corrected` (each channel the in-page control would have
+cancelled, with both baselines quoted), `control-equal-drop-authored` (a
+dropped channel the library's own stylesheet declares) and
+`ua-baseline-missing` (a capture taken before the fix — the fallback names
+itself rather than passing for a clean subtraction).
+
+**Two narrowings, both deliberate.** Custom properties (`--*`) keep the
+in-page baseline: a `:root` token block inherits onto every element, and
+against a UA baseline all ~90 of a library's tokens would "differ" on every
+part only to be refused downstream as "not a styled channel". And the in-page
+probe is still recorded, because the DIFFERENCE between the two baselines is
+the evidence that a value came from the library's page-global CSS.
+
+**Measured, offline re-fuse of all 116 committed captures.**
+
+| library | comps | parts | carried before | carried after | newly carried | of those, token-bound | dropped (proved equal to the UA default) |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| altitude | 8 | 13 | 278 | 374 | +96 | 3 | 0 |
+| antd | 12 | 68 | 1,866 | 1,866 | +0 | 0 | 0 |
+| astryx | 10 | 64 | 1,182 | 2,133 | +979 | 0 | 28 |
+| carbon | 10 | 102 | 2,108 | 2,846 | +946 | 3 | 208 |
+| fluent | 11 | 57 | 1,261 | 1,651 | +431 | 5 | 41 |
+| mui | 31 | 191 | 5,117 | 5,242 | +125 | 0 | 0 |
+| polaris | 12 | 122 | 2,246 | 3,721 | +1,563 | 11 | 88 |
+| shadcn | 11 | 34 | 787 | 1,243 | +456 | 27 | 0 |
+| tailwind | 11 | 22 | 396 | 583 | +187 | 0 | 0 |
+| **total** | **116** | **673** | **15,241** | **19,659** | **+4,783** | **49** | **365** |
+
+antd moves by **zero** cells: it injects component CSS through cssinjs with
+scoped class names and ships no page-global rule, so its in-page control and
+its UA control already agreed. That is the no-noise half of the measurement —
+the change carries what a library declared page-globally and nothing else.
+The 365 drops are the mirror: a value that compared EQUAL to the polluted
+control's `solid` while the component itself computed the UA's `none` was
+being carried as a "fact"; it is dropped now because a generated surface
+renders it identically without it.
+
+**What that does to the offline re-fuse baseline** (`extract:computed:drift
+-- --write`, the full 116-component re-measure). The scores fall, and they
+fall for the right reason: the denominator stopped coming from the filter
+that decides carriage. 193,716 (part, channel, combo) cells that the polluted
+baseline had removed from comparison are now compared, and the ones the
+emitters do not reproduce are counted as unequal instead of being absent.
+
+| library | rows | rows moved | cells compared before | after | mean pctEqual delta |
+|---|---:|---:|---:|---:|---:|
+| altitude | 8 | 8 | 6,388 | 8,012 | −2.74 |
+| antd | 12 | **0** | 134,068 | 134,068 | 0.00 |
+| astryx | 10 | 10 | 34,616 | 54,768 | +1.33 |
+| carbon | 10 | 10 | 55,204 | 77,108 | −0.86 |
+| fluent | 11 | 10 | 134,660 | 158,226 | +1.74 |
+| mui | 31 | 14 | 120,389 | 123,444 | −1.55 |
+| polaris | 12 | 12 | 202,841 | 314,581 | −5.12 |
+| shadcn | 11 | 11 | 23,001 | 28,836 | −9.06 |
+| tailwind | 11 | 10 | 14,112 | 19,952 | −2.68 |
+| **total** | **116** | **85** | **725,279** | **918,995** | **−2.04** |
+
+18 rows rose, 67 fell, 31 did not move. Every moved row carries a named
+`gapCause` in `extract/computed/regate-baseline.json`. The committed HARNESS
+scorecards are unchanged and now sit above the offline numbers: they predate
+this door, and only a re-capture closes that gap — a later wave owns the
+library lanes.
+
+**One channel the fix had to register.** `html { tab-size: 4 }` is the first
+line of every Tailwind-preflight-shaped reset (shadcn, tailwind, astryx). Its
+UA default is `8`, so the isolated baseline carries it — and it reaches the
+mint as a plain NUMBER, which is a mintable kind, so it landed in `tokens` on
+32 components' contracts and `validateContract` refused every one of them by
+name (the mint decides by value SHAPE, the schema decides by channel
+REGISTRY, and a channel that passes one and fails the other quarantines the
+whole component). It is registered in `TOKEN_CHANNELS` as `annotate` /
+`verbatim` — a real CSS property the library authored, with no Figma field.
+Nothing else in the corpus needed registering: the other page-global channels
+the isolated baseline carries (`color-scheme`, `text-size-adjust`,
+`text-rendering`, `font-feature-settings`, `appearance`, `cursor`,
+`scrollbar-color`, `position-anchor`) are keyword-valued, so they land in
+`declared` or in `codeOnly` as NAMED facts. Two of those — `color-scheme` and
+`text-size-adjust` — are now in the fidelity denominator and score UNEQUAL,
+because the component has them and the generated surface does not. That is
+the point: a channel the filter never opened used to score 100% by absence.
+
+**The two cases the fixture never had.** `conformance/cases/page-global-star-rule`
+ships `* { border-color: … }` with the width and style declared locally, and
+`conformance/cases/page-inherited-ink` ships `body { color: … }` with a
+text-bearing part that declares no colour. Before the fix they measure
+**SILENT-LOSS** and **WRONG-NAME**; after it both are CARRIED. The fixture had
+no page-global rule of any kind, which is why the whole defect class sat
+outside its denominator.
+## D.37 Thirty-seven captures with two browsers stapled into one evidence file — OPEN, counted, and gated
+
+`extract/computed/capture.ts` stamps two browser facts into every
+`captured-truth.json`, each asked of the live instance and each correct:
+`_provenance.browser` (the browser the component was captured on) and
+`_provenance.uaBaselineBrowser` (the browser the UA CONTROL was measured on).
+**37 files disagree**: `altitude` 8, `carbon` 10, `mui` 14, `tailwind` 5 —
+captured on Chromium 149.0.7827.55, UA control measured on 151.0.7922.34. The
+class arrives with #45's UA-baseline backfill, which ran later, on the stray
+browser; it landed on `main` with PR #49 (measured first on the branch that
+became it, where `main` still carried zero).
+
+The capture receipts are not lying — that honesty is what made the defect
+findable. What is wrong is the COMBINATION. The styled-channel door
+(`fuse.control-element-delta`) subtracts a control measured on browser B from a
+component captured on browser A, so any channel whose computed value merely
+CHANGED between the two is carried as though the library authored it.
+`position-anchor` is the measured instance: `none` in 149, `normal` in 151, so
+base and control disagree and the channel is carried on exactly these 37
+components — which is why the pinned re-record moved exactly 37 rows and not one
+more (PR #49).
+
+**The numbers derived from them are correct.** #49 re-recorded the drift
+baseline under the pinned browser, and all 51 rows CI had an opinion about
+reproduce CI exactly. What remains suspect is the underlying EVIDENCE: those 37
+captures still mix two browsers, so the set of channels they carry is slightly
+wider than a single-browser capture would produce.
+
+**Why it is still open.** Repairing it means re-running
+`extract/computed/ua-baseline-backfill.ts` under the pinned resolver AND
+re-recording the drift baseline in the SAME round — the two must move together,
+because the backfill changes what the door subtracts and therefore every
+`cellsCompared` on those rows. Doing either alone leaves the tree
+self-contradictory. That round was deliberately not folded into the browser-pin
+fix.
+
+**It cannot grow silently while it waits.** `npm run mixed-browser:check`
+(`scripts/mixed-browser-capture-check.ts`, fast lane) scans every committed
+`captured-truth.json`, prints the per-library breakdown every run, and FAILS if
+the count exceeds a committed allowance of 37. It deliberately does not fail
+when the class shrinks — it prints that the allowance is stale, because the
+honest end state is 0 and tightening it is a reviewed act. Raising the allowance
+is not the fix and must never be the whole change.

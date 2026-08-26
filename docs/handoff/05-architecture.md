@@ -13,7 +13,7 @@ related: [06-tooling, 09-testing-and-gates, 12-reference]
 
 All facts below were verified against the codebase on 2026-07-21.
 
-> **Currency (2026-08-17):** the live first-party corpus is now **56 component contracts**, 282 DTCG tokens, and 225/225 evals. Counts in this file (51 contracts, 146 evals) are the July 21 snapshot.
+> **Currency (2026-08-17):** the live first-party corpus is now **56 component contracts**, 282 DTCG tokens, and 230/230 evals. Counts in this file (51 contracts, 146 evals) are the July 21 snapshot.
 
 ## Repository shape (npm workspaces)
 

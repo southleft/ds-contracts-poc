@@ -597,6 +597,7 @@ function detectModeAxis(axes: Axis[], variants: DumpNode[], setName: string, not
     // actually RIDE variable modes. A kit with no bound variables anywhere
     // along the diff (carriers === 0) whose counterparts differ in raw
     // color literals (rawDeltas > 0) has nothing for the mode to switch —
+    // @door propose.mode-axis-not-promoted-raw-deltas
     // promoting would drop the axis's styling entirely. The axis stays a
     // REAL enum prop and the standard mint machinery carries the per-axis-
     // value styles.
@@ -1901,6 +1902,7 @@ function unifyPaint(
    *  absence is a capture gap. */
   const absentFor = (p: { node: DumpNode }): string | undefined =>
     typeof mint?.absentAs === 'function' ? mint.absentAs(p.node) : mint?.absentAs;
+  // @door propose.paint-all-absent
   if (paints.every((p) => p.paint === undefined)) return undefined;
   const raw = paints.find((p) => p.paint?.hex !== undefined);
   if (raw) {
@@ -1932,6 +1934,7 @@ function unifyPaint(
           );
         }
       } else {
+        // @door propose.paint-partial-raw-hex-refused
         ctx.mint.partialSources.add(`${where}|${paintName}`);
       }
     }
@@ -1963,6 +1966,7 @@ function unifyPaint(
     ctx.notes.push(
       `${where} ${paintName}: bound in ${paints.filter((p) => p.paint !== undefined).length}/${paints.length} variant(s) and ABSENT in the rest — the bound refs do not resolve through a captured-variable layer (no \`_variables\` in this dump), so the channel cannot mint at literal fidelity; NAMED, not proposed (review)`,
     );
+    // @door propose.bound-paint-drift-unresolvable
     return undefined;
   }
   const u = unifyRefs(
@@ -1970,6 +1974,7 @@ function unifyPaint(
     ctx.axes,
   );
   if (u.kind === 'ref' || u.kind === 'per-value') {
+    // @door propose.paint-alpha-not-representable
     // A BOUND paint whose alpha < 1: the token ref carries the color, not
     // the paint's opacity — no place in the contract vocabulary for it, so
     // the loss is NAMED (dump v1.1 captures it; the ref stays proposed).
@@ -1983,6 +1988,7 @@ function unifyPaint(
   }
   if (u.kind === 'drift') {
     // Live-gauntlet class ① (fill-matrix-depth-drop): a BOUND paint whose
+    // @door propose.bound-paint-drift-to-mint
     // refs refuse unification (mixed segment depth, or a function of more
     // than one axis) used to drop entirely — honest in prose, catastrophic
     // in pixels (Badge/Chip rendered as bare text). When every variant's
@@ -2042,7 +2048,9 @@ function strokeVocabulary(m: Merged, ctx: Ctx, where: string): 'border' | 'outli
   const aligns = new Set(
     drawn.map((o) => o.node.strokeAlign).filter((a): a is NonNullable<typeof a> => a !== undefined),
   );
+  // @door propose.stroke-align-absent-is-border
   if (aligns.size === 0) return 'border'; // not captured, or nothing drawn
+  // @door propose.stroke-align-mixed-refused
   if (aligns.size > 1) {
     ctx.notes.push(
       `${where}: stroke alignment differs across variants [${[...aligns].sort().join(', ')}] — one node lowers to ONE border/outline vocabulary, so the mixed case is REFUSED BY NAME and the stroke carries as an INSIDE border (review)`,
@@ -2051,6 +2059,7 @@ function strokeVocabulary(m: Merged, ctx: Ctx, where: string): 'border' | 'outli
   }
   const [align] = aligns;
   if (align === 'OUTSIDE') return 'outline';
+  // @door propose.stroke-align-center-unsupported
   if (align === 'CENTER') {
     ctx.notes.push(
       `${where}: strokeAlign CENTER — half the weight is drawn inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. REFUSED BY NAME (capture receipt stroke-align-unsupported); the stroke carries as an INSIDE border, off by half its weight per side (review)`,
@@ -2161,6 +2170,7 @@ function gradientCss(g: NonNullable<DumpNode['gradient']>): { css: string } | { 
 function mintGradientBackground(m: Merged, ctx: Ctx, where: string, tokens: Record<string, string>): void {
   const withGradient = m.occ.filter((o) => o.node.gradient !== undefined);
   if (withGradient.length === 0) return;
+  // @door propose.gradient-loses-to-image
   if (m.occ.some((o) => o.node.imageFill !== undefined)) {
     ctx.notes.push(
       `${where}: fill stack carries BOTH a GRADIENT_LINEAR and an IMAGE marker across the variants — background-image is claimed by the image channel; gradient NAMED, not carried (review)`,
@@ -2170,6 +2180,7 @@ function mintGradientBackground(m: Merged, ctx: Ctx, where: string, tokens: Reco
   const boundStops = [
     ...new Set(withGradient.flatMap((o) => o.node.gradient!.stops.map((s) => s.var).filter((v) => v !== undefined))),
   ] as string[];
+  // @door propose.gradient-requires-mint
   if (!ctx.mint) {
     ctx.notes.push(
       `${where}: GRADIENT_LINEAR fill captured (dump v1.16) in ${withGradient.length}/${m.occ.length} variant(s) — background-image not proposed without minting (a gradient value has no token-ref spelling)`,
@@ -2183,6 +2194,7 @@ function mintGradientBackground(m: Merged, ctx: Ctx, where: string, tokens: Reco
       continue;
     }
     const spelled = gradientCss(o.node.gradient);
+    // @door propose.gradient-oblique-refused
     if ('refuse' in spelled) {
       ctx.notes.push(
         `${where} fill (${o.variant}): ${spelled.refuse} — background-image REFUSED BY NAME for the whole node (carrying the other variants would mint 'none' here, an absence the canvas contradicts); the captured handles/stops stay in the dump for a later carriage, review`,
@@ -2190,6 +2202,7 @@ function mintGradientBackground(m: Merged, ctx: Ctx, where: string, tokens: Reco
       return;
     }
     values.push({ variant: o.variant, value: spelled.css });
+  // @door propose.gradient-stop-vars-resolved
   }
   if (boundStops.length > 0) {
     ctx.notes.push(
@@ -2255,6 +2268,7 @@ function invertNodeTokens(
       // has none) and the Badge (Size=sm is a bare dot) rendered with no
       // background at all. The variants that draw a fill mint their colour;
       // the variants that draw none mint transparent; nothing is invented.
+      // @door propose.fill-absent-is-transparent
       absentAs: '#00000000',
       sparse: '#00000000',
     }),
@@ -2269,6 +2283,7 @@ function invertNodeTokens(
       target: tokens,
       // A strokeless variant is a ZERO-WIDTH stroke, not an uncaptured one —
       // the width channel below already mints 0 for exactly these nodes.
+      // @door propose.stroke-absent-is-zero-width
       absentAs: '#00000000',
     }),
   );
@@ -2303,6 +2318,7 @@ function invertNodeTokens(
   if (radii.some((r) => fields.has(r))) {
     const rs = radii.map((r) => f(r));
     if (rs[0] !== undefined && rs.every((r) => refKey(r) === refKey(rs[0]))) carry('border-radius', rs[0]);
+    // @door propose.radii-not-uniform-refused
     else ctx.notes.push(`${where}: corner radii bindings are not uniform — border-radius not representable, review`);
   }
   const WEIGHT_SIDES = [
@@ -2329,6 +2345,7 @@ function invertNodeTokens(
         `${where}: stroke weight bindings differ per side — ${strokeWidthProp} is not representable; carried as separate ${WEIGHT_SIDES.map(([p]) => p).join('/')} channels`,
       );
     } else {
+      // @door propose.stroke-weight-not-uniform-refused
       ctx.notes.push(`${where}: stroke weight bindings are not uniform — ${strokeWidthProp} not representable, review`);
     }
   }
@@ -2358,6 +2375,7 @@ function invertNodeTokens(
 
   // Bound variables on fields OUTSIDE the contract vocabulary
   // (counterAxisSpacing, …) are NAMED per field — a captured binding must
+  // @door propose.bound-field-outside-vocabulary
   // never vanish without a receipt (STYLE-FIDELITY audit A19). min/max
   // sizing joined the vocabulary in dump v1.4.
   const CONSUMED_BOUND_FIELDS = new Set([
@@ -2411,6 +2429,7 @@ function invertNodeTokens(
       // CSS fact (`gap: -8px` parses to nothing and the overlap silently
       // vanishes — the pre-P21 bug). NAMED, never minted; the unbound report
       // survives for review.
+      // @door propose.negative-gap-not-minted
       ctx.mint?.partialSources.add(`${where}|itemSpacing`);
       ctx.notes.push(
         `${where}: itemSpacing is NEGATIVE in ${negatives}/${spacings.length} variant(s) (${[...new Set(spacings)].join('/')}) — children overlap only there, but layout.overlap is a per-part invariant with no per-variant form (P21); gap NOT minted (a mixed-sign spacing cannot carry, and a plain negative-px gap token is an invalid CSS fact), NAMED for review`,
@@ -2469,6 +2488,7 @@ function invertNodeTokens(
     if (withVal.length === 0) continue;
     // dump v1.30 / FC-DUMP-MINMAX-ZERO-INVENTED: Figma's default 0 is not a
     // tap-target fact. A pre-v1.30 dump that wrote 0 must not mint it.
+    // @door propose.minmax-zero-not-a-fact
     if (withVal.every((o) => pick(o.node) === 0)) continue;
     if (tokens[cssProp] !== undefined) {
       ctx.notes.push(
@@ -2476,6 +2496,7 @@ function invertNodeTokens(
       );
       continue;
     }
+    // @door propose.minmax-partial-refused
     reportUnbound(ctx, where, field, pick(withVal[0].node)!);
     if (withVal.length !== m.occ.length) {
       ctx.mint?.partialSources.add(`${where}|${field}`);
@@ -2565,6 +2586,7 @@ function invertNodeOpacity(
     return;
   }
   const occ = m.occ.map((o) => ({ variant: o.variant, value: o.node.opacity ?? 1 }));
+  // @door propose.opacity-opaque-is-default
   if (occ.every((o) => o.value === 1)) return;
   const distinct = [...new Set(occ.map((o) => o.value))];
   if (distinct.length > 1) {
@@ -2587,6 +2609,7 @@ function invertNodeOpacity(
         ctx.notes.push(
           `${where}: node opacity ${value} rides boolean axis "${axis.property}" (opaque when false) — proposed as stylesWhen { prop: ${axis.propName}, styles: { opacity } } (dump v1.2)`,
         );
+        // @door propose.opacity-false-side-negation
         return;
       }
       if (whenTrue.size === 1 && whenTrue.has(1) && whenFalse.size === 1 && !whenFalse.has(1)) {
@@ -2790,6 +2813,7 @@ function nameEffectProvenance(m: Merged, ctx: Ctx, where: string): void {
     styles.set(name, rec);
   }
   for (const [name, rec] of styles) {
+    // @door propose.effect-style-identity-unbindable
     ctx.notes.push(
       `${where}: effects ride the EFFECT STYLE "${name}"${rec.key ? ` (key ${rec.key})` : ''} in ${rec.variants.length}/${m.occ.length} variant(s) (dump v1.31 effectStyle) — the style's resolved layers carry as box-shadow; the style IDENTITY has no token class in the contract grammar (text styles mint under imported.text.<style>, effect styles do not yet), so it is carried here as provenance — the rename target for the minted shadow`,
     );
@@ -2802,6 +2826,7 @@ function nameEffectProvenance(m: Merged, ctx: Ctx, where: string): void {
         bindings.set(key, [...(bindings.get(key) ?? []), o.variant]);
       }
     }
+  // @door propose.effect-channel-bindings-unbindable
   }
   if (bindings.size > 0) {
     ctx.notes.push(
@@ -2841,7 +2866,9 @@ function invertNodeEffects(m: Merged, tokens: Record<string, string>, ctx: Ctx, 
       withFx.every((o) => !isDefaultState(o.variant)) &&
       withoutFx.every((o) => isDefaultState(o.variant))
     ) {
+      // @door propose.effect-state-preview-shadow
       return;
+    // @door propose.effect-non-dropshadow-refused
     }
     ctx.notes.push(
       `${where}: visible effect(s) [${kinds.join(', ')}] — only DROP_SHADOW layers present in every variant map to box-shadow (dump v1.2; a multi-layer stack carries comma-separated); channel NAMED, not proposed`,
@@ -2941,6 +2968,7 @@ function liftUnboundShapePaintsToLiterals(
         axisFit = { propName: axis.propName, map };
         break;
       }
+      // @door propose.shape-paint-lift-no-axis-fit
       if (!axisFit) return;
       const lbp =
         (part.literalsByProp as Array<{ prop: string; map: Record<string, Record<string, string>> }> | undefined) ?? [];
@@ -2996,6 +3024,7 @@ function liftUnboundTextPaintsToLiterals(
   // Stamped-set door only — a foreign dump's unbound text fill is MINTED by
   // usage site (Path A: zero UNBOUND leftovers, `text color minted by usage
   // site`); see liftUnboundShapePaintsToLiterals.
+  // @door propose.text-fill-literal-lift-stamped-only
   if (!ctx.drawnByThisPipeline) return;
   const pick = (n: DumpNode): string | undefined => {
     const paint = n.text?.fillVar ? { var: n.text.fillVar } : n.fill;
@@ -3009,6 +3038,7 @@ function liftUnboundTextPaintsToLiterals(
   if (tokens.color === undefined && !queued) return;
   const values = m.occ.map((o) => pick(o.node)!);
   const distinct = [...new Set(values)];
+  // @door propose.text-fill-lift-requires-uniform
   if (distinct.length !== 1) return;
   const literals = (part.literals as Record<string, string> | undefined) ?? {};
   literals.color = distinct[0]!;
@@ -3033,6 +3063,7 @@ function liftUnboundTextPaintsToLiterals(
 function invertHiddenVisibility(m: Merged, part: Record<string, unknown>, ctx: Ctx, where: string) {
   if (part.visibleWhen !== undefined) return;
   if (m.occ.every((o) => o.node.hidden !== true)) return;
+  // @door propose.hidden-everywhere-proposed-anyway
   if (m.occ.every((o) => o.node.hidden === true)) {
     ctx.notes.push(`${where}: hidden in every variant — drawn as a design-time helper; proposed anyway, review`);
     return;
@@ -3066,6 +3097,7 @@ function invertHiddenVisibility(m: Merged, part: Record<string, unknown>, ctx: C
         return;
       }
     }
+  // @door propose.hidden-uncorrelated-kept
   }
   ctx.notes.push(
     `${where}: hidden in ${m.occ.filter((o) => o.node.hidden === true).length}/${m.occ.length} variants without correlating to any axis — kept unconditional, review`,
@@ -3515,6 +3547,7 @@ function nameFixedChildGeometry(m: Merged, ctx: Ctx, where: string): void {
           o.node.bbox !== undefined,
       )
     ) {
+      // @door propose.fixed-size-carrier-exists
       continue; // a carrier exists — the size channels speak for it
     }
     const drawn = [...new Set(fixedIn.map((o) => o.node.fixedSize?.[dim]).filter((v): v is number => typeof v === 'number'))];
@@ -3527,6 +3560,7 @@ function nameFixedChildGeometry(m: Merged, ctx: Ctx, where: string): void {
         : '';
     dims.push(`${dim} (FIXED in ${fixedIn.length}/${m.occ.length} variant occurrence(s)${byVariant}${drawn.length > 0 ? `; drawn ${drawn.join('/')}px` : ''})`);
   }
+  // @door propose.fixed-child-geometry-excluded
   if (dims.length === 0) return;
   ctx.notes.push(
     `${where}: auto-layout ${m.type} child drawn FIXED on ${dims.join(' and ')} with no bound size variable — FC-GEOMETRY-EXCLUDED (Option B): a child's drawn px is environment-dependent geometry this pipeline does not read back or mint, so the part sizes to its content and the drawn size is NOT carried; NAMED (bind the size to a variable, or declare width/height on this part in the contract, to carry it)`,
@@ -3544,9 +3578,11 @@ function mintFixedSize(m: Merged, part: Record<string, unknown>, tokens: Record<
   const sparse = m.occ.length < ctx.totalVariants.length ? '0' : undefined;
   const carried: string[] = [];
   for (const dim of ['width', 'height'] as const) {
+    // @door propose.fixed-size-on-autolayout-node
     const vals = m.occ.map((o) => o.node.fixedSize?.[dim]);
     if (vals.every((v) => v === undefined)) continue;
     if (tokens[dim] !== undefined || m.occ.some((o) => o.node.bound?.[dim])) continue;
+    // @door propose.fixed-size-mixed-modes
     if (vals.some((v) => v === undefined)) {
       ctx.notes.push(
         `${where}: fixed in-flow ${dim} captured in ${vals.filter((v) => v !== undefined).length}/${m.occ.length} variant occurrence(s) only (mixed sizing modes across variants) — not carried; review`,
@@ -3628,6 +3664,7 @@ function carryAbsPlacement(
 ): boolean {
   const boxes = m.occ.map((o) => ({ variant: o.variant, box: absBoxOf(o.node) }));
   if (boxes.every((b) => b.box === undefined)) return false;
+  // @door propose.abs-placement-ledger
   const ledger = (why: string): false => {
     ctx.notes.push(
       `${where}: absolute placement captured (dump v1.7 \`abs\`) but NOT carried — ${why}; the part renders in flow (ledgered by name)`,
@@ -3716,6 +3753,7 @@ function carryAbsPlacement(
   const vStretchRaw = vs[0] === 'STRETCH';
   const hStretch = hStretchRaw && !sizeBound('width');
   const vStretch = vStretchRaw && !sizeBound('height');
+  // @door propose.stretch-vs-bound-size-conflict
   if ((hStretchRaw && !hStretch) || (vStretchRaw && !vStretch)) {
     ctx.notes.push(
       `${where}: constraint ${hs[0]}×${vs[0]} STRETCHes an axis whose size is ALREADY BOUND (${[hStretchRaw && !hStretch ? 'width' : null, vStretchRaw && !vStretch ? 'height' : null].filter(Boolean).join(', ')}) — the two contradict (a stretch sizes from the parent, a bound size does not), so the design's own binding is kept and the stretch is NOT carried on that axis; the part pins ONE edge and holds its bound size`,
@@ -3813,6 +3851,7 @@ function carryAbsPlacement(
   // The old note described only what WAS carried. A reader diffing the
   // proposal against the contract then found `margin-left`, `margin-top` and
   // `bottom` simply missing with no receipt anywhere — silent loss, and
+  // @door propose.margin-vs-inset-unrecoverable
   // exactly the rows TJ-TEST.md §A7 had to list by hand.
   ctx.notes.push(
     `${where}: the CSS that PRODUCED this box is not recoverable from it — a child's \`margin-*\` (which the emitter lowers into a "(margin box)" wrapper) and a bound inset quartet (\`left\`/\`right\`/\`top\`/\`bottom\`) both draw as the same absolute rectangle. Those channels are NAMED here and NOT carried; the offsets above are the drawn geometry, not the authored spacing (Option B — geometry is not read back, \`FC-GEOMETRY-EXCLUDED\`); review`,
@@ -3837,6 +3876,7 @@ function wrapPositionedRefPart(
 ): Record<string, unknown> {
   if (!built.component && !built.slot) return built;
   if (m.occ.every((o) => absBoxOf(o.node) === undefined)) return built;
+  // @door propose.abs-on-slot-part
   if (built.slot) {
     ctx.notes.push(
       `${where}: absolute placement captured (dump v1.7 \`abs\`) on a SLOT part — slot parts refuse styling (the consumer owns the content box) and a positioned slot wrapper is not carried this round; ledgered by name, the slot renders in flow`,
@@ -4292,6 +4332,7 @@ function mintTextChannels(
       fontStyle: o.node.text!.fontStyle ?? 'Medium',
       ...fontStyleWeight(o.node.text!.fontStyle ?? 'Medium'),
     }));
+    // @door propose.font-weight-unknown-face-name
     const unknown = [...new Set(parsed.filter((p) => p.weight === undefined).map((p) => p.fontStyle))];
     if (unknown.length > 0) {
       ctx.notes.push(
@@ -4325,6 +4366,7 @@ function mintTextChannels(
     tokens['line-height'] = stampedLh;
     return;
   }
+  // @door propose.line-height-multi-stamp-falls-through
   // MORE THAN ONE distinct stamp is the NORMAL case for a size-varying
   // channel (Button carries five, one per size), not a contradiction: the
   // contract binds a SUBSTITUTED ref and the canvas resolves it per variant.
@@ -4333,8 +4375,10 @@ function mintTextChannels(
   // the reminted rows. No note: a receipt that fires on the healthy path is
   // noise, and noise is how a report stops being read.
   const withLh = textOcc.filter((o) => typeof o.node.text!.lineHeight === 'number');
+  // @door propose.line-height-none-captured
   if (withLh.length === 0) return;
   if (withLh.length !== textOcc.length) {
+    // @door propose.line-height-partial-refused
     ctx.notes.push(
       `${where}: line-height captured in ${withLh.length}/${textOcc.length} variants (absent means AUTO or an older dump) — inconsistent, NAMED, not proposed; review`,
     );
@@ -4372,8 +4416,10 @@ function carryTextCase(m: Merged, holder: Record<string, unknown>, ctx: Ctx, whe
   if (textOcc.length === 0) return;
   const cases = [...new Set(textOcc.map((o) => o.node.text!.textCase))];
   const drawn = cases.filter((c): c is 'UPPER' | 'LOWER' | 'TITLE' => c !== undefined);
+  // @door propose.text-case-original-not-a-fact
   if (drawn.length === 0) return; // as-typed, or a pre-v1.16 dump (receipted at capture)
   if (cases.length > 1) {
+    // @door propose.text-transform-mixed-refused
     ctx.notes.push(
       `${where}: textCase differs across variants (${cases.map((c) => c ?? 'ORIGINAL/not captured').join(', ')}) — text-transform is a declared literal with no per-variant vocabulary; NAMED, not proposed (review)`,
     );
@@ -4402,14 +4448,17 @@ function carryFontFamily(m: Merged, holder: Record<string, unknown>, ctx: Ctx, w
   if (textOcc.length === 0) return;
   const families = [...new Set(textOcc.map((o) => o.node.text!.fontFamily))];
   const captured = families.filter((f): f is string => typeof f === 'string' && f.trim() !== '');
+  // @door propose.font-family-not-captured
   if (captured.length === 0) return; // not captured (pre-v1.31) — nothing to say
   if (families.length > 1) {
+    // @door propose.font-family-mixed-refused
     ctx.notes.push(
       `${where}: font family differs across variants (${families.map((f) => f ?? 'not captured').join(', ')}) — font-family is a declared literal with no per-variant vocabulary; NAMED, not proposed (the emitter renders ${DEFAULT_FONT_FAMILY}; review)`,
     );
     return;
   }
   const family = captured[0];
+  // @door propose.font-family-inter-is-default
   if (family === DEFAULT_FONT_FAMILY) return; // the pipeline's own default — absence already renders it
   const declared = (holder.declared as Record<string, string> | undefined) ?? {};
   if (declared['font-family'] === undefined) declared['font-family'] = family;
@@ -4435,8 +4484,10 @@ function carryTextAlign(m: Merged, holder: Record<string, unknown>, ctx: Ctx, wh
   if (textOcc.length === 0) return;
   const aligns = [...new Set(textOcc.map((o) => o.node.text!.textAlign))];
   const drawn = aligns.filter((a): a is 'CENTER' | 'RIGHT' | 'JUSTIFIED' => a !== undefined && a in TEXT_ALIGN_BY_CANVAS);
+  // @door propose.text-align-left-is-default
   if (drawn.length === 0) return; // LEFT / not captured — CSS's own default
   if (aligns.length > 1) {
+    // @door propose.text-align-mixed-refused
     ctx.notes.push(
       `${where}: textAlignHorizontal differs across variants (${aligns.map((a) => a ?? 'LEFT/not captured').join(', ')}) — text-align is a declared literal with no per-variant vocabulary; NAMED, not proposed (review)`,
     );
@@ -4464,8 +4515,10 @@ function carryFontSlant(m: Merged, holder: Record<string, unknown>, ctx: Ctx, wh
   if (textOcc.length === 0) return;
   const faces = textOcc.map((o) => o.node.text!.fontStyle ?? 'Medium');
   const italic = faces.map((f) => fontStyleWeight(f).italic);
+  // @door propose.font-slant-upright-is-default
   if (!italic.some(Boolean)) return; // upright everywhere: CSS's own default, not a fact
   if (!italic.every(Boolean)) {
+    // @door propose.font-slant-mixed-refused
     ctx.notes.push(
       `${where}: italic face differs across variants (${[...new Set(faces)].map((f) => `"${f}"`).join(', ')}) — font-style is a declared literal with no per-variant vocabulary; italic NAMED, not proposed (review)`,
     );
@@ -4502,10 +4555,12 @@ function carryClip(
   opts: { carry: boolean; owner?: string },
 ): void {
   const clipping = m.occ.filter((o) => o.node.clipsContent === true);
+  // @door propose.clip-absent-is-visible
   if (clipping.length === 0) return; // absence is CSS's own default (visible)
   const span = `${clipping.length}/${m.occ.length} variant(s)`;
   if (!opts.carry) {
     ctx.notes.push(
+      // @door propose.clip-on-slot-or-ref-part
       `${where}: clipsContent is true in ${span} (dump v1.20) on a ${opts.owner ?? 'part'} that owns no declared block — ${opts.owner === 'component-ref part' ? 'the child contract owns its overflow' : 'the slot content owns its overflow'}; NAMED, not inverted (review)`,
     );
     return;
@@ -4513,6 +4568,7 @@ function carryClip(
   if (!ctx.drawnByThisPipeline) {
     ctx.notes.push(
       `${where}: clipsContent is true in ${span} (dump v1.20) on a set this pipeline did not draw — Figma's own frame default is ALSO true, so an authored clip and an untouched default are byte-identical here; overflow NOT inverted (a blanket carry would mint a fact nobody wrote) — NAMED; declare overflow: hidden on this part if the clip is intended (review)`,
+    // @door propose.clip-foreign-set-ambiguous
     );
     return;
   }
@@ -4520,6 +4576,7 @@ function carryClip(
     ctx.notes.push(
       `${where}: clipsContent differs across variants (true in ${span}, dump v1.20) — overflow is a declared literal with no per-variant vocabulary; NAMED, not proposed (review)`,
     );
+    // @door propose.clip-mixed-refused
     return;
   }
   const declared = (holder.declared as Record<string, string> | undefined) ?? {};
@@ -4609,6 +4666,7 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
         `${where}: typography varies across variants (fontSize ${distinctSizes.join('/')}, weight ${distinctWeights.join('/')}) — ${varyingStyle ? `shared text style "${varyingStyle}" kept as identity; ` : ''}font-size ${ctx.mint ? 'minted per variant where axis-correlated' : 'not proposed without minting'}${distinctWeights.length > 1 ? '; font-weight minted per variant through the weight-name table where every name maps (unknown names stay NAMED)' : ''} (review)`,
       );
     }
+    // @door propose.text-style-identity-mint-off
     if (!ctx.mint && varyingStyleNames.length > 0) {
       refuseTextStyleIdentity(
         ctx,
@@ -4672,6 +4730,7 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
     // used to. A non-default weight is a real canvas fact and carries as the
     // corpus token that spells it, or mints when the corpus cannot name it.
     const observed = t.fontStyle ?? 'Medium';
+    // @door propose.weight-stamp-differs-refused
     let weightRef: string | undefined;
     // The STAMPED weight token (dump v1.22) is read before any inference, for
     // the same reason the size variable is: it names WHICH token was drawn,
@@ -4679,9 +4738,11 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
     // branch used to drop in silence — 'Medium' is drawn both by a contract
     // declaring 500 and by one declaring nothing, and only the stamp tells
     // them apart. Recovering the original ref (not a fresh mint) is the whole
+    // @door propose.font-weight-medium-is-default
     // point: the value survived either way, the IDENTITY only survives here.
     const stampedWeight = [...new Set(textOccWeightVars(m))];
     if (stampedWeight.length === 1 && stampedWeight[0] !== undefined) {
+      // @door propose.weight-not-corpus-nameable
       tokens['font-weight'] = ref(stampedWeight[0]);
       mintTextChannels(m, tokens, ctx, where, { weight: false });
       return tokens;
@@ -4716,6 +4777,7 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
   // Uniform size/weight with DIFFERENT named styles is contradictory identity
   // for one binding — never pick styleNames[0]. Exact fails closed; reviewable
   // notes and continues without inventing a winner.
+  // @door propose.text-style-names-differ
   if (styleNames.length > 1) {
     refuseTextStyleIdentity(
       ctx,
@@ -4749,6 +4811,7 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
     );
     if (hits.length === 1) style = hits[0];
     else if (styleNames.length === 0) {
+      // @door propose.text-style-ambiguous-definition-match
       ctx.notes.push(
         `${where}: typography (${t.fontSize}px ${t.fontStyle}) matches ${hits.length} derived text styles — font tokens not proposed, review`,
       );
@@ -4857,6 +4920,7 @@ function carryCrossAxisFill(
   ctx: Ctx,
   where: string,
 ): void {
+  // @door propose.parent-mode-owns-stretch
   if (!parentModes || parentModes.stretchCross) return; // the parent's align: stretch owns it
   const base = parentModes.base;
   if (base !== 'HORIZONTAL' && base !== 'VERTICAL') return;
@@ -4873,6 +4937,7 @@ function carryCrossAxisFill(
     return;
   }
   if (m.occ.some((o) => o.node.bound?.[dim] !== undefined) || (part.tokens as Record<string, string> | undefined)?.[dim] !== undefined) return;
+  // @door propose.cross-axis-fill-partial-refused
   if (filling !== m.occ.length) {
     ctx.notes.push(
       `${where}: drawn FILL-${dim} under a ${base === 'HORIZONTAL' ? 'ROW' : 'COLUMN'} parent in ${filling}/${m.occ.length} variant occurrence(s) only — the cross-axis stretch has no per-variant spelling; NAMED, not carried (review)`,
@@ -4880,12 +4945,14 @@ function carryCrossAxisFill(
     return;
   }
   if (dim === 'width') {
+    // @door propose.cross-axis-fill-sibling-conflict
     // The horizontal twin keeps its bytes (no existing fixture changes): named.
     ctx.notes.push(
       `${where}: drawn FILL-width under a COLUMN parent whose other children do not all fill — the parent cannot carry \`align: stretch\` for this part alone and the contract has no per-part align-self; the cross-axis stretch is NAMED, not carried (review)`,
     );
     return;
   }
+  // @door propose.cross-axis-fill-hugging-parent
   if (!parentModes.crossDefinite) {
     ctx.notes.push(
       `${where}: drawn FILL-height under a ROW parent that HUGS its height (dump v1.31 fillHeight) — the parent cannot carry \`align: stretch\` for this part alone (its other children hug) and \`height: 100%\` of an auto height is auto, so no grammar spelling is exact; the cross-axis stretch is NAMED, not carried (review)`,
@@ -5150,6 +5217,7 @@ function gridCarriageOf(m: Merged, mint: boolean): GridCarriage | undefined {
       return {
         carried: false,
         flow,
+        // @door propose.grid-overlay-edge-inversion-refused
         reason:
           `child "${c.name}" is an ABSOLUTE overlay inside the grid (dump \`abs\` present, no \`cell\` — P13's gate ` +
           `working as designed) and the out-of-flow door is shut: ${shut}. It would therefore render IN FLOW, in a grid ` +
@@ -5166,6 +5234,7 @@ function gridCarriageOf(m: Merged, mint: boolean): GridCarriage | undefined {
       return { name: c.name, r: cell.row, c: cell.column, rs: cell.rowSpan ?? 1, cs: cell.columnSpan ?? 1 };
     });
   for (const x of rects) {
+    // @door propose.grid-implicit-tracks-refused
     if (x.r + x.rs > g.rows.length || x.c + x.cs > g.columns.length) {
       return {
         carried: false,
@@ -5212,6 +5281,7 @@ function invertGridLayout(
   // variant's grid stands, and the collapse is named (the invertLayout
   // uncorrelated-spread precedent).
   const spellings = new Set(
+    // @door propose.grid-per-variant-variance-default-wins
     m.occ
       .filter((o) => o.node.layout !== undefined)
       .map((o) => JSON.stringify([o.node.layout!.mode, o.node.layout!.grid ?? null])),
@@ -5316,6 +5386,7 @@ function carryGridAxisSizing(
       axis === 'width' ? hasFr(layout.columns) : rowsDerived || hasFr(layout.rows);
     if (axisHasFr) continue;
     if (lits[axis] !== undefined || tokens[axis] !== undefined) continue;
+    // @door propose.grid-hug-is-fit-content
     if (axis === 'width' && layout.grow === true) continue;
     // GRID: primary = horizontal (GP1b).
     const mode = axis === 'width' ? l.primarySizing : l.counterSizing;
@@ -5382,6 +5453,7 @@ function attachGridPlacement(
     }
     return;
   }
+  // @door propose.grid-cell-per-variant-default-wins
   const cells = m.occ.map((o) => o.node.cell).filter((cell) => cell !== undefined);
   const cell = cells[0];
   if (!cell) return; // carriage refused grids with un-celled children — unreachable, kept safe
@@ -5674,6 +5746,7 @@ function invertLayout(
   if (isRoot) {
     // The generator's root default is row/center/center — a root drawn
     // exactly there proposes no layout block.
+    // @door propose.root-default-layout-elided
     if (direction === 'row' && justify === 'center' && align === 'center' && !grow && !overlap && wrapping === 0) {
       return undefined;
     }
@@ -5696,6 +5769,7 @@ function invertLayout(
     if (wrapsEverywhere) {
       out.wrap = true;
       // A DISTINCT row gap has no layout spelling — `gap` is one value on both
+      // @door propose.row-gap-distinct-not-carried
       // axes in the schema, as it is in Figma when counterAxisSpacing follows.
       const rowSpacings = new Set(m.occ.map((o) => o.node.layout?.rowSpacing).filter((v) => v !== undefined));
       if (rowSpacings.size > 0) {
@@ -5703,6 +5777,7 @@ function invertLayout(
           `${where}: wrapping stack whose ROW gap (${[...rowSpacings].join(', ')}px) differs from its column gap — carried as layout.wrap with the single \`gap\` channel holding the COLUMN spacing; the distinct row spacing is not carried (the schema's gap is one value on both axes, and CSS row-gap would need its own channel). The wrapped LINES sit at the column gap`,
         );
       }
+    // @door propose.wrap-mixed-refused
     } else {
       ctx.notes.push(
         `${where}: auto-layout WRAPS in ${wrapping} of ${m.occ.filter((o) => o.node.layout !== undefined).length} auto-layout variant(s) — wrap is a per-part invariant here (layoutByProp carries direction/justify/align only), so it is NOT carried and every variant renders as a single line; split the part or make the wrap uniform`,
@@ -5999,6 +6074,7 @@ function visibilityFromPresence(m: Merged, ctx: Ctx, where: string): Record<stri
     ctx.notes.push(
       `${where}: present exactly where "${boolFalseSide.property}" is false — the visibleWhen vocabulary has no negated form, so the condition is inexpressible; kept unconditional (declared fidelity limit), review`,
     );
+    // @door propose.visible-when-no-negated-form
     return undefined;
   }
   // Absences fully explained by base-instance-flattened variants are a
@@ -6017,6 +6093,7 @@ function visibilityFromPresence(m: Merged, ctx: Ctx, where: string): Record<stri
   // unconditional — omission would be wrong in more variants than emission.
   // MINORITY presence (the audit's "everything-at-once" blocker: ProgressBar
   // floating tooltips in 20/55) OMITS the part as a NAMED degradation —
+  // @door propose.part-kept-majority-presence
   // unconditional emission would draw it in variants that never carried it.
   if (m.occ.length * 2 > ctx.totalVariants.length) {
     ctx.notes.push(
@@ -6025,6 +6102,7 @@ function visibilityFromPresence(m: Merged, ctx: Ctx, where: string): Record<stri
     return undefined;
   }
   ctx.notes.push(
+    // @door propose.part-omitted-minority-presence
     `${where}: DEGRADATION part omitted — present in only ${m.occ.length}/${ctx.totalVariants.length} variants and no single axis (value, subset, or boolean) predicts presence; emitting it unconditionally would render it in the majority of variants that never carried it. Review the set's variant structure or gate it manually.`,
   );
   return OMIT_PART;
@@ -6468,6 +6546,7 @@ function applySlotAccepts(
     //   · (retired) "REST returns componentPropertyDefinitions EMPTY for SLOT
     //     properties" — the live response contradicts it (2026-08-22 probe).
     const definedType = definition && (definition.type === 'INSTANCE_SWAP' || definition.type === 'SLOT') ? definition.type : undefined;
+    // @door propose.slot-accepts-empty-is-unconstrained
     if (definedType !== undefined || carried !== undefined) {
       const kind = definedType ?? (native ? 'SLOT' : 'INSTANCE_SWAP');
       const via = definedType !== undefined ? 'dump v1.5 propertyDefinitions' : 'set-level swapPreferredValues, carried as the reader returned it';
@@ -6478,6 +6557,7 @@ function applySlotAccepts(
     }
     ctx.notes.push(
       native
+        // @door propose.slot-accepts-not-captured
         ? `${where}: slot "${property}" accepts (SLOT preferredValues) is not in this dump — no propertyDefinitions entry for ${spelled} and no set-level list: the producer did not carry the SLOT definition (a plugin dump before v1.18, or a REST dump mapped before the Phase 2 fix round — the mapper now keeps SLOT definitions with a {guid} default and their preferredValues as returned); never "this slot accepts anything" — author \`accepts\` manually or re-dump`
         : `${where}: slot "${property}" accepts (INSTANCE_SWAP preferredValues) is not in this dump — no propertyDefinitions entry for ${spelled} and no set-level list (a pre-v1.5 dump, or the reader dropped the definition); author \`accepts\` manually`,
     );
@@ -6540,6 +6620,7 @@ function applySlotDefaultContent(
     const hasBbox = contentInstance.occ.some((o) => o.node.bbox !== undefined);
     if (!hasBbox) {
       // Pre-v1.5 dump: neither a contract nor observed geometry — the classic
+      // @door propose.slot-default-content-no-geometry
       // named limit stands.
       ctx.notes.push(
         `${where}: slot "${property}" holds a "${instanceOf}" instance as design-time content — defaultContent not proposed (${
@@ -7082,6 +7163,7 @@ function nameReactions(m: Merged, ctx: Ctx, where: string): void {
   for (const o of m.occ) {
     for (const r of o.node.reactions ?? []) {
       const target = r.destinationName !== undefined ? `"${r.destinationName}"${r.destination ? ` (${r.destination})` : ''}` : r.destination ?? '(no destination)';
+      // @door propose.prototype-reactions-unsupported
       const key = `${r.trigger} → ${r.action ?? 'ACTION'} ${target}${r.transition ? `; ${r.transition}${typeof r.duration === 'number' ? ` ${r.duration}ms` : ''}` : ''}`;
       rows.set(key, [...(rows.get(key) ?? []), o.variant]);
     }
@@ -7170,6 +7252,7 @@ function nameItemReverseZIndex(m: Merged, ctx: Ctx, where: string): void {
 function carryAspectRatio(m: Merged, holder: Record<string, unknown> | null, ctx: Ctx, where: string): void {
   const ratios = [...new Set(m.occ.map((o) => (o.node.targetAspectRatio ? `${o.node.targetAspectRatio.x} / ${o.node.targetAspectRatio.y}` : undefined)))];
   const drawn = ratios.filter((r): r is string => r !== undefined);
+  // @door propose.aspect-ratio-no-declared-block
   if (drawn.length === 0) return;
   if (holder === null) {
     ctx.notes.push(
@@ -7177,6 +7260,7 @@ function carryAspectRatio(m: Merged, holder: Record<string, unknown> | null, ctx
     );
     return;
   }
+  // @door propose.aspect-ratio-mixed-refused
   if (ratios.length > 1) {
     ctx.notes.push(
       `${where}: aspect-ratio lock differs across variants (${ratios.map((r) => r ?? 'none').join(', ')}; dump v1.31) — aspect-ratio is a declared literal with no per-variant vocabulary; NAMED, not proposed (review)`,
@@ -7852,6 +7936,7 @@ function buildPart(
     parentMode?.grid?.carried === true &&
     !parentMode.grid.flow &&
     m.occ.some((o) => o.node.abs !== undefined);
+  // @door propose.is-spacer-elides-styling
   if (isSpacer(m) && !absUnderGrid) {
     const layout = invertLayout(m, false, parentMode, ctx, where);
     if (layout) part.layout = layout;
@@ -7860,6 +7945,7 @@ function buildPart(
     if (m.occ.some((o) => absBoxOf(o.node) !== undefined)) {
       ctx.notes.push(
         `${where}: absolute placement captured (dump v1.7 \`abs\`) on a SPACER part — a spacer's job is in-flow growth; placement not carried (ledgered by name)`,
+      // @door propose.abs-on-spacer-part
       );
     }
     if (visibleWhen) part.visibleWhen = visibleWhen;
@@ -7946,6 +8032,7 @@ function buildPart(
     return part;
   }
 
+  // @door propose.is-wrap-artifact-elides-layout
   if (isWrapArtifact(m)) {
     invertNodeOpacity(m, part, tokens, ctx, where);
     carryClip(m, part, ctx, where, { carry: true }); // FC-DUMP-PROPOSE-CLIP-UNREAD
@@ -8394,6 +8481,7 @@ function stubGeometry(
   const strokesCarriable =
     !glyphCarried &&
     geo.every((o) => o.stroke?.hex !== undefined && typeof o.strokeWeight === 'number') &&
+    // @door propose.stub-stroke-not-carried
     new Set(geo.map((o) => o.strokeWeight)).size === 1;
   if (!glyphCarried && !strokesCarriable && geo.some((o) => o.stroke !== undefined)) {
     ctx.notes.push(
@@ -10332,6 +10420,7 @@ export function proposeFromDump(
     // Their captures do NOT promote (the base group owns promotion) and
     // their names must not pollute ctx.flattenedVariants (same stripped
     // names as base variants), so a scratch context absorbs both.
+    // @door propose.state-group-flatten-notes-discarded
     const scratch: Ctx = { ...ctx, notes: [], flattenedVariants: new Set() };
     for (const group of [...stateGroups.values(), disabledGroup]) {
       stateGroupCaptures.push(...flattenBaseInstances(group, scratch));
@@ -10959,7 +11048,26 @@ export function proposeFromDump(
     const minted = mintTokens(componentIdSlug(set.setName), observations, ctx.mint.axes, {
       nestedPairs: true,
       realizedCombos,
+      // THE DUMP-ROUNDING RECONCILIATION (docs/23 §D.33). Both dump producers
+      // round canvas geometry to two decimals, so a width the code→canvas
+      // mint spelled 39.9219px from computed style comes back 39.92px — one
+      // measurement, two spellings, and `generate` rightly refused the slot
+      // that then held both. The minter asks the corpus what it already
+      // spells at each claimed path and carries THAT when the observation is
+      // it re-rounded; a real disagreement is untouched and still surfaces.
+      corpusValueAt: (tokenPath) => {
+        if (tokenPath.includes('{') || !ctx.corpus.has(tokenPath)) return undefined;
+        try {
+          const resolved = ctx.corpus.resolveLiteral(tokenPath);
+          return typeof resolved === 'string' ? resolved : undefined;
+        } catch {
+          return undefined;
+        }
+      },
     });
+    for (const row of minted.reconciled) {
+      ctx.notes.push(`${set.setName}: minted ${row}`);
+    }
     const bySource = new Map<string, { total: number; bound: number }>();
     minted.bindings.forEach((binding, i) => {
       const obs = observations[i];

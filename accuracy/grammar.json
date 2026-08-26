@@ -34,14 +34,14 @@
     {
       "id": "css-dom",
       "path": "conformance/MANIFEST.json",
-      "count": 105,
+      "count": 108,
       "expectations": {
-        "CARRIED": 60,
-        "LOWERED": 4,
+        "CARRIED": 62,
+        "LOWERED": 5,
         "REFUSED": 24,
         "UNSUPPORTED": 17
       },
-      "pinnedBecause": "RE-PINNED 2026-08-25, burn-down: 91 -> 105. The pin was 6 behind before this branch existed (the rejected-sets round's own six cases took conformance/MANIFEST.json to 97 and did not re-pin), and this branch adds 8 more: RC1's five layout cases (align-items-baseline, flex-wrap-wrap, flex-direction-reverse-by-axis, child-order-reversed-by-axis, child-order-permuted-by-axis) and RC8's three overlay-text-geometry cases (overlay-text-fill-pinned-size, overlay-text-fill-stage-derived, overlay-text-hug-excluded). UNSUPPORTED falls 18 -> 17 and CARRIED rises by one more than the new cases because RC7 reclassified pseudo-placeholder UNSUPPORTED -> CARRIED, which is a strictly stronger declaration: the base engine refuses the channel outright."
+      "pinnedBecause": "RE-PINNED 2026-08-25, census/stack-to-main: 94 -> 108, and every unit of movement is attributable to one side of the merge. The two sides re-pinned this independent denominator against DIFFERENT case sets (main: 94 / LOWERED 5; the stack: 105 / LOWERED 4), so neither number could be picked — the union of the two conformance case lists is 108 and the pin is re-derived from it. From the common base (91 cases: CARRIED 50 / LOWERED 4 / REFUSED 19 / UNSUPPORTED 18): the STACK adds 14 cases — the rejected-sets round's six, RC1's five layout cases (align-items-baseline, flex-wrap-wrap, flex-direction-reverse-by-axis, child-order-reversed-by-axis, child-order-permuted-by-axis) and RC8's three overlay-text-geometry cases (overlay-text-fill-pinned-size, overlay-text-fill-stage-derived, overlay-text-hug-excluded) — of which 10 CARRIED and 5 REFUSED, and separately reclassifies pseudo-placeholder UNSUPPORTED -> CARRIED (RC7 made the base engine carry the channel it used to refuse outright, a strictly stronger declaration), so UNSUPPORTED falls 18 -> 17. MAIN adds 3: page-global-star-rule (CARRIED) and page-inherited-ink (CARRIED) from the cascade round, and text-indent-off-box (LOWERED, the Part.textOutOfBox round), so LOWERED rises 4 -> 5. 50+10+2 = 62 CARRIED; 4+0+1 = 5 LOWERED; 19+5+0 = 24 REFUSED; 18-1+0 = 17 UNSUPPORTED; 62+5+24+17 = 108."
     },
     {
       "id": "canvas",

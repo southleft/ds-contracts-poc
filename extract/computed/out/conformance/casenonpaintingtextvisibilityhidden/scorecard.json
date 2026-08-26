@@ -1,13 +1,14 @@
 {
   "component": "CaseNonpaintingTextVisibilityHidden",
   "generatedBy": "extract/computed/gate.ts",
-  "browser": "151.0.7922.34",
+  "browser": "149.0.7827.55",
+  "renderedBy": "149.0.7827.55",
   "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
   "combos": 1,
   "interactions": 4,
   "computed": {
-    "cellsCompared": 40,
-    "cellsEqual": 40,
+    "cellsCompared": 128,
+    "cellsEqual": 128,
     "pctEqual": 100,
     "rowsFullyEqual": 4,
     "rows": 4
@@ -30,13 +31,13 @@
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
-    "mintedLeaves": 4,
-    "mintedLeavesUnfolded": 4,
-    "baseBindings": 4,
+    "mintedLeaves": 7,
+    "mintedLeavesUnfolded": 6,
+    "baseBindings": 14,
     "stateBindings": 0,
     "codeOnlyChannels": 1,
     "overflowBindings": 0,
-    "folds": 0
+    "folds": 18
   },
   "worstRows": [
     {
@@ -81,32 +82,32 @@
   "rows": [
     {
       "key": "__default",
-      "channelsCompared": 10,
-      "channelsEqual": 10,
+      "channelsCompared": 32,
+      "channelsEqual": 32,
       "pctExact": 7.565104166666667,
       "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "__hover",
-      "channelsCompared": 10,
-      "channelsEqual": 10,
+      "channelsCompared": 32,
+      "channelsEqual": 32,
       "pctExact": 7.565104166666667,
       "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "__focus-visible",
-      "channelsCompared": 10,
-      "channelsEqual": 10,
+      "channelsCompared": 32,
+      "channelsEqual": 32,
       "pctExact": 7.565104166666667,
       "pctAA": 0,
       "mismatches": []
     },
     {
       "key": "__active",
-      "channelsCompared": 10,
-      "channelsEqual": 10,
+      "channelsCompared": 32,
+      "channelsEqual": 32,
       "pctExact": 7.565104166666667,
       "pctAA": 0,
       "mismatches": []

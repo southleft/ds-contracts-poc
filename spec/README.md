@@ -12,9 +12,14 @@ This directory separates the **format** from the **implementation** enough that 
 |---|---|
 | [README.md](./README.md) | This index + graduation path |
 | [normative.md](./normative.md) | MUST/SHOULD rules for contracts, dispositions, and compatibility |
+| [CHANNEL-TABLE.md](./CHANNEL-TABLE.md) + [channel-table.json](./channel-table.json) | Every CSS computed property classified once (CARRIED/LEDGERED/REFUSED/INERT); held by `npm run channel-table:check` |
 | [conformance/README.md](./conformance/README.md) | How to run the conformance kit against *any* implementation |
 | [conformance/subset-v0.1.json](./conformance/subset-v0.1.json) | **Frozen** minimal rule + fixture subset (Wave 11-A) |
 | [conformance/harness.md](./conformance/harness.md) | Foreign-runner report shape (Wave 11-B) |
+| [GRAMMAR-COVERAGE.md](./GRAMMAR-COVERAGE.md) | Every construct the **capture-config grammar** supports, and every construct a real library needs that it does not — with the library that proves each gap |
+| [grammar-coverage.json](./grammar-coverage.json) | Machine-readable companion, held to the committed configs by `npm run grammar-coverage:check` |
+| [DOOR-REGISTER.md](./DOOR-REGISTER.md) | Every subtractive/admitting capture heuristic — its premise, what it drops, and whether it leaves a receipt |
+| [door-register.json](./door-register.json) | The same register, machine-readable and gated by `npm run door-register:check` |
 
 ## How a claim graduates (draft → normative)
 

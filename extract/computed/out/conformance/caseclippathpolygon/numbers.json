@@ -1,21 +1,58 @@
 {
   "component": "CaseClipPathPolygon",
-  "browser": "151.0.7922.34",
+  "browser": "149.0.7827.55",
   "captures": 4,
   "combos": 1,
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
-  "channelsEnumerated": 479,
+  "channelsEnumerated": 476,
   "elementsPerCapture": 1,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 8
+    "root": 19
   },
   "folds": {
-    "count": 0,
-    "receipts": [],
-    "mintedLeavesUnfolded": 3,
-    "mintedLeavesFolded": 3
+    "count": 6,
+    "receipts": [
+      {
+        "part": "root",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      }
+    ],
+    "mintedLeavesUnfolded": 5,
+    "mintedLeavesFolded": 5
   },
   "bound": {
     "cellsChecked": 0,
@@ -24,11 +61,11 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 3,
-    "baseBindings": 3,
+    "leaves": 5,
+    "baseBindings": 8,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 3,
+      "uniform": 8,
       "perAxis": 0,
       "perPair": 0,
       "refused": 0
@@ -52,8 +89,8 @@
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 1908,
-    "cellsMatched": 1908,
+    "cellsCompared": 1896,
+    "cellsMatched": 1896,
     "pct": 100,
     "namedExclusions": [
       "app-region",
@@ -105,7 +142,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 87.5,
+    "computedPctEqual": 94.73684210526316,
     "rowsFullyEqual": 0,
     "rows": 4,
     "pixelPerfectExact": 0,

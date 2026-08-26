@@ -507,6 +507,56 @@ export function validateContract(
         `${contract.id}: part "${name}" carries hugsBelowMaxWidth but no "max-width" channel — the flag qualifies that channel and qualifies nothing here`,
       );
     }
+    // v18 (mint round): text evidence describes ONE channel and withholds
+    // ONE thing — the part's own text. A stray flag is a contract error, not
+    // a no-op, on either count.
+    if (part.textOutOfBox !== undefined) {
+      const carriesIndent =
+        (part.tokens && 'text-indent' in part.tokens) ||
+        (Array.isArray(part.tokensByProp)
+          ? part.tokensByProp
+          : part.tokensByProp
+            ? [part.tokensByProp]
+            : []
+        ).some((t) => Object.values(t.map).some((m) => 'text-indent' in m)) ||
+        (part.declared && 'text-indent' in part.declared) ||
+        (part.literals && 'text-indent' in part.literals);
+      if (!carriesIndent) {
+        errors.push(
+          `${contract.id}: part "${name}" carries textOutOfBox but no "text-indent" channel — the evidence qualifies that channel and qualifies nothing here`,
+        );
+      }
+      if (part.text === undefined && part.content === undefined) {
+        errors.push(
+          `${contract.id}: part "${name}" carries textOutOfBox but no text of its own — there is no label for the canvas to withhold`,
+        );
+      }
+      const { prop, values } = part.textOutOfBox;
+      if ((prop === undefined) !== (values === undefined)) {
+        errors.push(
+          `${contract.id}: part "${name}" textOutOfBox carries ${prop === undefined ? '"values" without "prop"' : '"prop" without "values"'} — an axis condition needs both, and an empty object means every combo`,
+        );
+      } else if (prop !== undefined && values !== undefined) {
+        const p = contract.props.find((q) => q.name === prop);
+        if (!p) {
+          errors.push(
+            `${contract.id}: part "${name}" textOutOfBox references unknown prop "${prop}"`,
+          );
+        } else {
+          const enumValues =
+            typeof p.type === 'object' && Array.isArray((p.type as { enum?: string[] }).enum)
+              ? (p.type as { enum: string[] }).enum
+              : null;
+          for (const v of values) {
+            if (!enumValues || !enumValues.includes(v)) {
+              errors.push(
+                `${contract.id}: part "${name}" textOutOfBox.values contains "${v}", which is not a value of prop "${prop}"`,
+              );
+            }
+          }
+        }
+      }
+    }
     for (const [cssProp, value] of Object.entries(part.declared ?? {})) {
       checkDeclaredEntry(cssProp, value, 'declared');
       if (part.tokens && cssProp in part.tokens) {

@@ -61,6 +61,7 @@ import { flattenTokens, aliasTarget, px, pxOrNull, type TokenEntry, type TokenTr
 import { guardedValueUpsertRuntime, ownedCollectionPruneRuntime } from './token-set.js';
 import { FINGERPRINT_SRC, FINGERPRINT_VERSION } from './canvas-fingerprint.js';
 import { isMultiRoot, topRoots, validateContract } from './emit-react.js';
+import { checkRequiredFacts, type Posture } from './required-facts.js';
 
 
 /** A2 grid: a compiled track — the Plugin API's own structured spelling
@@ -724,6 +725,15 @@ export interface FigmaEngineInput {
   /** When set, duplicate variable names resolve from this Figma collection
    *  (FC-THEME-ISO: console-loop shares one file across DS bundles). */
   variableCollection?: string;
+  /** REQUIRED-FACTS posture. `'refuse'` makes the engine refuse to compile a
+   *  contract that is missing a load-bearing fact for its archetype — the
+   *  refusal rides HERE, in the compile, so a bundle built by an older CLI and
+   *  pasted into the plugin inherits it. `'warn'` (the default) compiles
+   *  unchanged and leaves the naming to the shell, so today's measured wave
+   *  (parity/receipts/v1/REQUIRED-FACTS.md) does not block anyone mid-
+   *  burn-down. The shells decide: `figma bundle --strict`,
+   *  `DS_REQUIRED_FACTS=refuse`, or a bundle that declares the posture. */
+  requiredFacts?: Posture;
 }
 
 /** Everything a single-contract emission needs (the playground surface). */
@@ -4278,6 +4288,12 @@ function rootTextSpecs(
   // same way a child `content` part is (a TEXT child named `label` linked to
   // the text property). A root with NO parts keeps the `children` branch.
   if (root.text === undefined && root.content === undefined) return [];
+  // MINT ROUND (2026-08-25): the root's own `text-indent` was MEASURED
+  // laying its first line entirely outside its content box on this combo
+  // (Part.textOutOfBox) — the browser paints no text in the box there, so
+  // the canvas hosts none. The `text-indent` code-only fact names the drop
+  // and already lists these exact variants.
+  if (textOutOfBoxOn(root as Part, subst)) return [];
   const hosted: Part = root.text !== undefined
     ? ({ text: root.text, ...(root.textByProp ? { textByProp: root.textByProp } : {}) } as Part)
     : ({ content: root.content } as Part);
@@ -4301,6 +4317,23 @@ function partToSpec(
   return spec;
 }
 
+/** MINT ROUND (2026-08-25) — MEASURED text-indent evidence
+ *  (Part.textOutOfBox, extract/computed fuse.ts `textOutOfBoxEvidence`): on
+ *  these combos CSS lays the element's first line entirely outside its own
+ *  content box, so the browser paints no text in the box. `text-indent` is
+ *  an `annotate` channel (Figma text nodes have no first-line indent) — but
+ *  annotating an offset and then drawing the label at indent 0 does not
+ *  lose a fact, it INVENTS one (altitude's Badge dot pip, whose 8px cell
+ *  came back from the first fresh mint with "Badge" painted across it). An
+ *  EMPTY condition means every combo. */
+function textOutOfBoxOn(part: Part, subst: Record<string, string>): boolean {
+  const ev = part.textOutOfBox;
+  if (!ev) return false;
+  if (ev.prop === undefined) return true;
+  const value = subst[ev.prop];
+  return value !== undefined && (ev.values ?? []).includes(value);
+}
+
 function partToSpecInner(
   name: string,
   part: Part,
@@ -4309,6 +4342,19 @@ function partToSpecInner(
   ctx: TextCtx,
   subst: Record<string, string>,
 ): NodeSpec {
+  // The box still paints (background, border, size) — only its own text is
+  // withheld, exactly as the browser withholds it. A part that carried
+  // nothing but that text compiles to the empty box CSS draws.
+  if (
+    textOutOfBoxOn(part, subst) &&
+    (part.text !== undefined || part.content !== undefined)
+  ) {
+    const stripped = { ...part };
+    delete stripped.text;
+    delete stripped.content;
+    delete stripped.textByProp;
+    part = stripped;
+  }
   if (part.icon) {
     // The part's own tokens (e.g. a color override) apply to the glyph.
     const iconCtx = applyTokens({ type: 'frame', name: '_' }, resolveTokens(part, subst), subst, ctx);
@@ -4982,8 +5028,30 @@ function annotateFillW(rootSpec: NodeSpec): void {
   walk(rootSpec, hasOwnWidth(rootSpec));
 }
 
+/** REQUIRED FACTS — the refuse-to-mint referee, applied at COMPILE time so it
+ *  rides every door into the canvas: `emitFigmaScript`, the batch script, and
+ *  the plugin engine compiling a bundle a designer pasted (entry.ts calls this
+ *  same `compileComponentData`). A contract missing a load-bearing fact for its
+ *  archetype is named and refused; an ugly mint is worse than an honest
+ *  refusal.
+ *
+ *  WARN is the default posture, so the measured wave is visible one full cycle
+ *  before anything blocks — see parity/receipts/v1/REQUIRED-FACTS.md and the
+ *  frozen baseline the `required-facts:check` gate holds. Under `'refuse'` the
+ *  compile throws with every missing fact listed by name. */
+function refuseMissingRequiredFacts(contract: Contract): void {
+  if (input.requiredFacts !== 'refuse') return;
+  const { missing } = checkRequiredFacts(contract);
+  if (missing.length === 0) return;
+  throw new Error(
+    `Refused — ${missing.length} required fact(s) missing; this set would mint but would not be recognisable:\n` +
+      missing.map((f) => `  - ${f.line}`).join('\n'),
+  );
+}
+
 function compileComponentData(contract: Contract, byId: Map<string, Contract>): ComponentData {
   refuseUnresolvableRefs(contract, byId);
+  refuseMissingRequiredFacts(contract);
   // Variant axes = enum props AND VARIANT-bound boolean props, in prop
   // declaration order (see isVariantBool). An enum-only contract's axis list
   // is exactly the old enum filter — byte-identical substitution space.
@@ -5169,7 +5237,10 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       if (isReversed(root, subst)) rootSpec.children.reverse();
       centerStrokeGlyphsInHosts(rootSpec.children);
       stampGridCells(rootSpec, root, subst); // A2 grid — see stampGridCells
-    } else if (textProp) {
+    } else if (textProp && !textOutOfBoxOn(root as Part, subst)) {
+      // MINT ROUND (2026-08-25): a bound root label is withheld on the
+      // combos where the MEASURED text-indent laid the first line outside
+      // the box — the same discipline as rootTextSpecs (Part.textOutOfBox).
       // ANTD EXAM (heal loop): a root whose label is a NON-children text prop
       // is an <input> drawing its placeholder — text starts at the padding
       // edge (antd `text-align: start`), it is never centred like a Button.
@@ -5317,7 +5388,10 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
           if (isReversed(root, subst)) rootSpec.children.reverse();
           centerStrokeGlyphsInHosts(rootSpec.children);
           stampGridCells(rootSpec, root, subst); // A2 grid — see stampGridCells
-        } else if (textProp) {
+        } else if (textProp && !textOutOfBoxOn(root as Part, subst)) {
+          // MINT ROUND (2026-08-25): the state-preview twin of the withheld
+          // out-of-box label — same Part.textOutOfBox discipline as the base
+          // loop above.
           // RC7: the state-preview twin of the base branch — a preview cell
           // whose disabled plane repaints the placeholder must repaint the
           // PLACEHOLDER ink, not the value ink.
@@ -8432,7 +8506,16 @@ return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId),
 `;
 }
 
-  return { buildTokensScript, compileComponentData, buildComponentScript, buildBatchScript };
+  return {
+    buildTokensScript,
+    compileComponentData,
+    buildComponentScript,
+    buildBatchScript,
+    /** One token ref → its resolved literal, or a throw when the ref does not
+     *  resolve. Exposed so a SHELL can grade a contract against this engine's
+     *  own inventory instead of building a second, drifting resolver. */
+    resolveTokenLiteral: resolveLiteral,
+  };
 }
 
 /** The compiled engine type — the CLI shell and the barrel share it. */

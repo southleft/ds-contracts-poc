@@ -79,6 +79,8 @@ export { default as CaseOklchColor } from '../cases/oklch-color/Case.tsx';
 export { default as CaseOverlayTextFillPinnedSize } from '../cases/overlay-text-fill-pinned-size/Case.tsx';
 export { default as CaseOverlayTextFillStageDerived } from '../cases/overlay-text-fill-stage-derived/Case.tsx';
 export { default as CaseOverlayTextHugExcluded } from '../cases/overlay-text-hug-excluded/Case.tsx';
+export { default as CasePageGlobalStarRule } from '../cases/page-global-star-rule/Case.tsx';
+export { default as CasePageInheritedInk } from '../cases/page-inherited-ink/Case.tsx';
 export { default as CasePercentagePadding } from '../cases/percentage-padding/Case.tsx';
 export { default as CasePositionAbsoluteInsets } from '../cases/position-absolute-insets/Case.tsx';
 export { default as CasePositionFixed } from '../cases/position-fixed/Case.tsx';
@@ -96,6 +98,7 @@ export { default as CaseShadowRootClosed } from '../cases/shadow-root-closed/Cas
 export { default as CaseStageBoxEqual } from '../cases/stage-box-equal/Case.tsx';
 export { default as CaseSvgOutsideGrammar } from '../cases/svg-outside-grammar/Case.tsx';
 export { default as CaseSvgStrokeGlyphFillNone } from '../cases/svg-stroke-glyph-fill-none/Case.tsx';
+export { default as CaseTextIndentOffBox } from '../cases/text-indent-off-box/Case.tsx';
 export { default as CaseTextOverflowEllipsis } from '../cases/text-overflow-ellipsis/Case.tsx';
 export { default as CaseTransformScaleRotate } from '../cases/transform-scale-rotate/Case.tsx';
 export { default as CaseTransitionChannel } from '../cases/transition-channel/Case.tsx';
