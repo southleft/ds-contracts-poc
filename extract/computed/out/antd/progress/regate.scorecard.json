@@ -161,12 +161,12 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 19,
-      "mintedLeavesUnfolded": 59,
+      "mintedLeaves": 23,
+      "mintedLeavesUnfolded": 103,
       "baseBindings": 53,
       "stateBindings": 0,
       "codeOnlyChannels": 9,
-      "overflowBindings": 1,
+      "overflowBindings": 0,
       "folds": 80
     },
     "worstRows": [
@@ -272,7 +272,6 @@
     "namedLosses": [
       "promotion: pseudo-decor-outside-grammar: progress-bg::before drawn with a non-carryable transform (matrix(0, 0, 0, 1, -101.594, 0)) — the bounded decor grammar carries translate + orthonormal rotate only; named refusal",
       "promotion: pseudo-decor-outside-grammar: progress-bg::after paints at position:static (265.969x8, opacity 1) — the bounded decor grammar reads position:absolute boxes only; an in-flow decor box is NOT promoted and NOT on the canvas",
-      "overflow: anticon.color — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
       "code-only: root.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: progress-outer.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: progress-inner.flex-basis — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",

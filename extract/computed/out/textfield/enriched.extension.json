@@ -1210,11 +1210,20 @@
         "part": "input",
         "field": "grow",
         "value": true
+      },
+      {
+        "part": "labelled__labelwrapper",
+        "field": "align",
+        "value": "baseline"
+      },
+      {
+        "part": "labelled__labelwrapper",
+        "field": "wrap",
+        "value": true
       }
     ],
     "contradictions": [],
     "receipts": [
-      "layout-value-outside-vocabulary: labelled__labelwrapper.align-items = \"baseline\" — stays code-only",
       "layout-grow-carried: input — flex-grow 1 in a flex row parent (textfield); carried as layout.grow (the canvas FILL / layoutGrow twin)"
     ],
     "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
@@ -5089,6 +5098,8 @@
     ]
   },
   "enrichmentNotes": [
+    "layout enriched: labelled__labelwrapper.layout.align = baseline (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: labelled__labelwrapper.layout.wrap = true (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: labelled__labelwrapper.layout.justify = space-between (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: connected.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: textfield.layout.align = center (uniform computed keyword — the schema's own vocabulary)",

@@ -11158,7 +11158,8 @@
                   "description": "Promoted from the computed floor (round 4): rendered anatomy div|Autocomplete-inputRoot.InputBase-adornedEnd.InputBase-adornedStart.InputBase-formControl.InputBase-fullWidth.InputBase-root.OutlinedInput-root — this element exists in the real component's DOM; the static layer had no part for it.",
                   "layout": {
                     "display": "flex",
-                    "align": "center"
+                    "align": "center",
+                    "wrap": true
                   },
                   "parts": {
                     "autocomplete-tag": {
@@ -12031,7 +12032,8 @@
               "layout": {
                 "display": "flex",
                 "align": "center",
-                "justify": "center"
+                "justify": "center",
+                "wrap": true
               },
               "stylesWhen": [
                 {
@@ -12113,7 +12115,8 @@
               "layout": {
                 "display": "flex",
                 "align": "center",
-                "justify": "center"
+                "justify": "center",
+                "wrap": true
               },
               "stylesWhen": [
                 {
@@ -12238,7 +12241,8 @@
               "description": "Promoted from the computed floor (round 4): rendered anatomy ol|Breadcrumbs-ol — this element exists in the real component's DOM; the static layer had no part for it.",
               "layout": {
                 "display": "flex",
-                "align": "center"
+                "align": "center",
+                "wrap": true
               },
               "parts": {
                 "breadcrumbs-li": {
@@ -16287,7 +16291,8 @@
               "description": "Promoted from the computed floor (round 4): rendered anatomy div|Paper-root.SnackbarContent-root — this element exists in the real component's DOM; the static layer had no part for it.",
               "layout": {
                 "display": "flex",
-                "align": "center"
+                "align": "center",
+                "wrap": true
               },
               "parts": {
                 "label": {

@@ -1,6 +1,6 @@
 {
   "_marker": "REGATE DRIFT BASELINE — what extract/computed/regate.ts (OFFLINE re-fuse of the committed captured truth through the CURRENT engine) produces, per component. NOT a copy of the harness scorecards: where the two differ, `gapCause` names why (docs/20-regate-drift.md). Re-record deliberately with `npm run extract:computed:drift -- --write` and say what moved. Every row is also the committed out/<lib>/<comp>/regate.scorecard.json — `npm run extract:computed:drift` (VERIFY, fast lane) holds the two together without a browser; `extract:computed:drift:remeasure` (full lane) re-fuses and compares.",
-  "recordedAt": "2026-08-23",
+  "recordedAt": "2026-08-25",
   "rows": [
     {
       "library": "altitude",
@@ -122,11 +122,11 @@
     {
       "library": "antd",
       "component": "Checkbox",
-      "rerunPctEqual": 85.04273504273505,
+      "rerunPctEqual": 85.8974358974359,
       "cellsCompared": 2808,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 85.04273504273505,
-      "gapCause": ""
+      "gapCause": "RC1 LAYOUT-AXIS DOOR (2026-08-25) — the OFFLINE engine now carries a fact the harness capture predates. extract/computed/fuse.ts LAYOUT_CHANNEL_TO_FIELD had no entry for the align-items keyword `baseline`, so the channel left through layout-value-outside-vocabulary and the cell was scored against the counter-axis default; it is now carried as layout.align. cellsCompared is UNCHANGED (2808 → 2808), so every point of this gap is a verdict flipping unequal → equal, never a widened denominator. The harness scorecard moves only on a re-capture (extract/computed/run.ts against the npm sandbox), which is not this class."
     },
     {
       "library": "antd",
@@ -149,11 +149,11 @@
     {
       "library": "antd",
       "component": "Radio",
-      "rerunPctEqual": 74.79508196721312,
+      "rerunPctEqual": 75.61475409836065,
       "cellsCompared": 1952,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 74.79508196721312,
-      "gapCause": ""
+      "gapCause": "RC1 LAYOUT-AXIS DOOR (2026-08-25) — the OFFLINE engine now carries a fact the harness capture predates. extract/computed/fuse.ts LAYOUT_CHANNEL_TO_FIELD had no entry for the align-items keyword `baseline`, so the channel left through layout-value-outside-vocabulary and the cell was scored against the counter-axis default; it is now carried as layout.align. cellsCompared is UNCHANGED (1952 → 1952), so every point of this gap is a verdict flipping unequal → equal, never a widened denominator. The harness scorecard moves only on a re-capture (extract/computed/run.ts against the npm sandbox), which is not this class."
     },
     {
       "library": "antd",
@@ -194,8 +194,8 @@
     {
       "library": "astryx",
       "component": "Banner",
-      "rerunPctEqual": 62.93103448275862,
-      "cellsCompared": 3712,
+      "rerunPctEqual": 64.16666666666667,
+      "cellsCompared": 3840,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 62.280701754385966,
       "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 64 more cell(s) than the engine the harness scorecard was captured with (3648 -> 3712) and every added cell is EQUAL (2272 -> 2336 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. First pinned 2026-08-23 — this component had a harness scorecard and no baseline row, which the pre-2026-08-23 check skipped in silence."
@@ -212,8 +212,8 @@
     {
       "library": "astryx",
       "component": "Card",
-      "rerunPctEqual": 98.86039886039886,
-      "cellsCompared": 1404,
+      "rerunPctEqual": 98.9010989010989,
+      "cellsCompared": 1456,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 98.81656804733728,
       "gapCause": "repaired: gate now measures shipped inventory (task #21) — 54 unresolved refs -> 0 with pctEqual UNCHANGED at 98.252. This is the counterfactual that keeps unresolvedTokenRefs pinned SEPARATELY from pctEqual: the affected channels are already mismatched or uncompared, so the empty custom properties cost nothing here and closing them gains nothing. NOT re-run through the harness (outside the named scope of task #21, and its number is proven unmoved by the offline instrument) — so its committed scorecard.json still records the PRE-FIX count of 54 unresolved refs. That number in that file is stale; it is named here rather than quietly left to be rediscovered. Re-recorded task-#26 round (2026-07-29): the #43 astryx rebuild (d563be6) moved this floor (fresh capture + re-promote); the 2026-07-28 baseline predated it. Committed and rerun agree."
@@ -221,8 +221,8 @@
     {
       "library": "astryx",
       "component": "CheckboxInput",
-      "rerunPctEqual": 93.90243902439025,
-      "cellsCompared": 984,
+      "rerunPctEqual": 94.140625,
+      "cellsCompared": 1024,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 93.85245901639344,
       "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 8 more cell(s) than the engine the harness scorecard was captured with (976 -> 984) and every added cell is EQUAL (916 -> 924 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. First pinned 2026-08-23 — this component had a harness scorecard and no baseline row, which the pre-2026-08-23 check skipped in silence."
@@ -230,17 +230,17 @@
     {
       "library": "astryx",
       "component": "ProgressBar",
-      "rerunPctEqual": 52.72727272727273,
-      "cellsCompared": 1100,
+      "rerunPctEqual": 58.333333333333336,
+      "cellsCompared": 1200,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 51.851851851851855,
-      "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 20 more cell(s) than the engine the harness scorecard was captured with (1080 -> 1100) and every added cell is EQUAL (560 -> 580 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. First pinned 2026-08-23 — this component had a harness scorecard and no baseline row, which the pre-2026-08-23 check skipped in silence."
+      "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 20 more cell(s) than the engine the harness scorecard was captured with (1080 -> 1100) and every added cell is EQUAL (560 -> 580 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. First pinned 2026-08-23 — this component had a harness scorecard and no baseline row, which the pre-2026-08-23 check skipped in silence. RC1 LAYOUT-AXIS DOOR (2026-08-25): a SECOND, separately measured contribution of 1.667 points on top of the lift above — 56.667 on the e884d672 engine, 58.333 on this one, cellsCompared UNCHANGED at 1200 both times. extract/computed/fuse.ts LAYOUT_CHANNEL_TO_FIELD had no entry for align-items: baseline, so the label row was scored against the counter-axis default; it is now carried as layout.align and 20 cells flip unequal -> equal. The harness number moves only on a re-capture."
     },
     {
       "library": "astryx",
       "component": "Slider",
-      "rerunPctEqual": 90.22790055248619,
-      "cellsCompared": 2896,
+      "rerunPctEqual": 91.13219895287958,
+      "cellsCompared": 3056,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 90.09103641456582,
       "gapCause": "repaired: gate now measures shipped inventory (task #21). The 44 unresolved ref(s) were REVIEWED-LAYER bindings present in examples/astryx/tokens/astryx-minted.dtcg.json — the SHIPPED minted tree, which the gate's inventory AND its rendered custom properties omitted, so they rendered as EMPTY custom properties and depressed the score in silence. gate.ts now merges the shipped tree UNDER the fresh mint (fresh-first, shipped-fallback; value divergences named in scorecard.shippedMinted): 44 -> 0 unresolved, 55.333 -> 90.387 pctEqual, cellsCompared UNCHANGED. The committed receipt was RE-RUN through the real harness (pinned @astryxdesign/core@0.1.6 sandbox, scorecard.json + numbers.json double-run byte-identical), so committed and offline agree to three decimals; captured-truth.json, enriched.contract.json and resolved.contract.json came back BYTE-IDENTICAL — the recapture changed the measurement, not the artifact."
@@ -248,8 +248,8 @@
     {
       "library": "astryx",
       "component": "Switch",
-      "rerunPctEqual": 75.76530612244898,
-      "cellsCompared": 1568,
+      "rerunPctEqual": 78.33333333333333,
+      "cellsCompared": 1680,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 75.51546391752578,
       "gapCause": "re-recorded FONT-SUBSTRATE round 2026-08-08: astryx Button+Switch RECAPTURED under the library's documented Theme mount (<Theme theme={neutralTheme}> — the missing data-astryx-theme scope root that had left every theme.css token unresolved and Button's captured font-family at literal 'Times') + cfg.fonts Figtree faces. Committed and offline rerun agree exactly. Switch: 77.344 -> 75.515 and cellsCompared 1536 -> 1552 (the themed capture adds ::placeholder-era channels and 8 named fresh-vs-shipped leaf divergences, e.g. label-2.color #737373 vs {color-text-secondary}); the compared vocabulary moved WITH the recapture, stated here deliberately."
@@ -257,8 +257,8 @@
     {
       "library": "astryx",
       "component": "TextInput",
-      "rerunPctEqual": 93.50649350649351,
-      "cellsCompared": 2772,
+      "rerunPctEqual": 93.82716049382717,
+      "cellsCompared": 2916,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 93.42105263157895,
       "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 36 more cell(s) than the engine the harness scorecard was captured with (2736 -> 2772) and every added cell is EQUAL (2556 -> 2592 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. First pinned 2026-08-23 — this component had a harness scorecard and no baseline row, which the pre-2026-08-23 check skipped in silence."
@@ -275,11 +275,11 @@
     {
       "library": "carbon",
       "component": "Accordion",
-      "rerunPctEqual": 78.01724137931035,
-      "cellsCompared": 5568,
+      "rerunPctEqual": 79.09836065573771,
+      "cellsCompared": 5856,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 77.63157894736842,
-      "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Accordion +1.170 (76.462 → 77.632), cellsCompared UNCHANGED: `display: list-item` is now carried in the declared registry (it is a BLOCK-LEVEL box in CSS block flow). It previously fell into the `display-outside-vocabulary` receipt, so Carbon's `<li class=\"cds--accordion__item\">` reached the emitter with no display fact at all and took the HORIZONTAL default — the 472px panel drew BESIDE the 174px heading inside a 328px item."
+      "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Accordion +1.170 (76.462 → 77.632), cellsCompared UNCHANGED: `display: list-item` is now carried in the declared registry (it is a BLOCK-LEVEL box in CSS block flow). It previously fell into the `display-outside-vocabulary` receipt, so Carbon's `<li class=\"cds--accordion__item\">` reached the emitter with no display fact at all and took the HORIZONTAL default — the 472px panel drew BESIDE the 174px heading inside a 328px item. RC1 LAYOUT-AXIS DOOR (2026-08-25): a separately measured 0.546 on top — 78.552 on the e884d672 engine, 79.098 on this one, cellsCompared UNCHANGED at 5856. accordion__heading base flex-direction is row-reverse (Carbon's align prop DEFAULTS to end) and LayoutSchema.direction had no slot for the reversed spellings, so the keyword left through layout-not-uniform; it is now carried with layoutByProp {align:{start:{direction:row}}}. Every point is a cell flipping unequal -> equal against an unmoved denominator; the harness number moves only on a re-capture."
     },
     {
       "library": "carbon",
@@ -293,8 +293,8 @@
     {
       "library": "carbon",
       "component": "Checkbox",
-      "rerunPctEqual": 84.5,
-      "cellsCompared": 1800,
+      "rerunPctEqual": 84.01898734177215,
+      "cellsCompared": 1896,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 84.29054054054055,
       "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Unmoved by the round: offline pctEqual and cellsCompared are identical to the class-stem-prefix baseline. repaired: CLASS-STEM PREFIX round (task #25) — Carbon was RE-CAPTURED after `stems()` stopped reading its own `cds--` prefix as a BEM modifier (every Carbon class was previously discarded, so parts aligned and named POSITIONALLY). Part names moved from `part-<path>` to class-stem identity; the FLOOR DID NOT: cellsCompared, part counts and pctEqual are unchanged on all ten (Carbon's DOM shape is stable across every combo, so positional and class-identity alignment built the same tree). Kept so the re-capture is not invisible in the history. See examples/carbon/PROVENANCE.md."
@@ -303,7 +303,7 @@
       "library": "carbon",
       "component": "IconButton",
       "rerunPctEqual": 100,
-      "cellsCompared": 1120,
+      "cellsCompared": 1440,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 100,
       "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. IconButton +8.190 (91.810 → 100.000) and cellsCompared 9280 → 1120 — the largest VOCABULARY CHANGE of the round, and the reason the number is not a victory lap: in Carbon an icon button IS a tooltip trigger, so its captured anatomy carried `span.cds--popover` and its whole invisible subtree (label + caret, both display:none in every combo). Promoted, that was a 24x24 ABSOLUTE frame over the entire component that draws NOTHING — the census sibling of the portal round's stripInertPortalChildren. Refusing it takes 3 of 6 parts and 8160 of 9280 compared cells out of the denominator; the surviving three parts happen to be exact. A 100% on 1120 cells is a SMALLER claim than 91.810% on 9280, not a bigger one."
@@ -311,26 +311,26 @@
     {
       "library": "carbon",
       "component": "InlineNotification",
-      "rerunPctEqual": 97.14285714285714,
+      "rerunPctEqual": 98.0952380952381,
       "cellsCompared": 5040,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 97.0873786407767,
-      "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. InlineNotification +0.506 (96.581 → 97.087) and cellsCompared 7488 → 4944 — a VOCABULARY CHANGE, named: Carbon's notification icons ship `<title>error icon</title>` inside the svg, and `<title>` is NON-PAINTING metadata (SVG 1.1 §5.4). It was captured as a real element with real text, so (a) the words 'error icon' reached the canvas as visible ink and (b) the svg failed the path/g asset grammar, exploding one glyph into five per-path parts. The capture now drops SVG title/desc/metadata at the source; the six per-kind glyphs promote as REAL icon assets, so 5 path parts + 1 title part per icon leave the compared tree."
+      "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. InlineNotification +0.506 (96.581 → 97.087) and cellsCompared 7488 → 4944 — a VOCABULARY CHANGE, named: Carbon's notification icons ship `<title>error icon</title>` inside the svg, and `<title>` is NON-PAINTING metadata (SVG 1.1 §5.4). It was captured as a real element with real text, so (a) the words 'error icon' reached the canvas as visible ink and (b) the svg failed the path/g asset grammar, exploding one glyph into five per-path parts. The capture now drops SVG title/desc/metadata at the source; the six per-kind glyphs promote as REAL icon assets, so 5 path parts + 1 title part per icon leave the compared tree. RC1 LAYOUT-AXIS DOOR (2026-08-25): a separately measured 0.952 on top — 97.143 on the e884d672 engine, 98.095 on this one, cellsCompared UNCHANGED at 5040. flex-wrap had NO entry in LAYOUT_CHANNEL_TO_FIELD at all, so the text-wrapper's wrap:true could never arrive from a captured library; it is now carried as layout.wrap. Cell flips only, no widened denominator."
     },
     {
       "library": "carbon",
       "component": "Modal",
-      "rerunPctEqual": 87.87878787878788,
-      "cellsCompared": 1320,
+      "rerunPctEqual": 89.0909090909091,
+      "cellsCompared": 1375,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 90.03831417624521,
-      "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Modal +0.294 (89.744 → 90.038) and cellsCompared 1560 → 1305 — a VOCABULARY CHANGE, named: `display: grid` and `inline-grid` now lower to the flex vocabulary from the MEASURED grid-template track counts (modal-container is 1 column x 4 rows -> flex column). The dropped rows are the inert `popover` tooltip wrapper on the close button, refused by the new inert-overlay-wrapper rule (it draws no box in any combo and every one of its children is display:none)."
+      "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Modal +0.294 (89.744 → 90.038) and cellsCompared 1560 → 1305 — a VOCABULARY CHANGE, named: `display: grid` and `inline-grid` now lower to the flex vocabulary from the MEASURED grid-template track counts (modal-container is 1 column x 4 rows -> flex column). The dropped rows are the inert `popover` tooltip wrapper on the close button, refused by the new inert-overlay-wrapper rule (it draws no box in any combo and every one of its children is display:none). RC1 LAYOUT-AXIS DOOR (2026-08-25): a separately measured 0.727 on top — 88.364 on the e884d672 engine, 89.091 on this one, cellsCompared UNCHANGED at 1375. align-items: baseline on the two footer buttons, a keyword LAYOUT_CHANNEL_TO_FIELD had no entry for. Cell flips only."
     },
     {
       "library": "carbon",
       "component": "Tabs",
-      "rerunPctEqual": 93.29073482428115,
-      "cellsCompared": 1252,
+      "rerunPctEqual": 93.4375,
+      "cellsCompared": 1280,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 93.2258064516129,
       "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Unmoved by the round: offline pctEqual and cellsCompared are identical to the class-stem-prefix baseline. repaired: CLASS-STEM PREFIX round (task #25) — Carbon was RE-CAPTURED after `stems()` stopped reading its own `cds--` prefix as a BEM modifier (every Carbon class was previously discarded, so parts aligned and named POSITIONALLY). Part names moved from `part-<path>` to class-stem identity; the FLOOR DID NOT: cellsCompared, part counts and pctEqual are unchanged on all ten (Carbon's DOM shape is stable across every combo, so positional and class-identity alignment built the same tree). Kept so the re-capture is not invisible in the history. See examples/carbon/PROVENANCE.md."
@@ -347,8 +347,8 @@
     {
       "library": "carbon",
       "component": "TextInput",
-      "rerunPctEqual": 89.16666666666667,
-      "cellsCompared": 3600,
+      "rerunPctEqual": 89.32291666666667,
+      "cellsCompared": 3840,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 89.04494382022472,
       "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Unmoved by the round: offline pctEqual and cellsCompared are identical to the class-stem-prefix baseline. repaired: CLASS-STEM PREFIX round (task #25) — Carbon was RE-CAPTURED after `stems()` stopped reading its own `cds--` prefix as a BEM modifier (every Carbon class was previously discarded, so parts aligned and named POSITIONALLY). Part names moved from `part-<path>` to class-stem identity; the FLOOR DID NOT: cellsCompared, part counts and pctEqual are unchanged on all ten (Carbon's DOM shape is stable across every combo, so positional and class-identity alignment built the same tree). Kept so the re-capture is not invisible in the history. See examples/carbon/PROVENANCE.md."
@@ -356,8 +356,8 @@
     {
       "library": "carbon",
       "component": "Toggle",
-      "rerunPctEqual": 85.11904761904762,
-      "cellsCompared": 1344,
+      "rerunPctEqual": 85.3932584269663,
+      "cellsCompared": 1424,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 84.30232558139535,
       "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Toggle +1.162 (83.140 → 84.302), cellsCompared UNCHANGED: pseudo-decor v2 promotes the ::before KNOB (18x18 ellipse, per-`toggled` left 3px/27px) that the v1 grammar refused twice over ('unconditional placement' — it is drawn in every combo so it has no enum gate to hang a stylesWhen on; 'nonuniform' — its geometry is a function of one enum axis). Same vocabulary, one more drawn part."
@@ -365,8 +365,8 @@
     {
       "library": "fluent",
       "component": "Avatar",
-      "rerunPctEqual": 92.51412429378531,
-      "cellsCompared": 5664,
+      "rerunPctEqual": 92.63888888888889,
+      "cellsCompared": 5760,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 92.38505747126437,
       "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 96 more cell(s) than the engine the harness scorecard was captured with (5568 -> 5664) and every added cell is EQUAL (5144 -> 5240 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. First pinned 2026-08-23 — this component had a harness scorecard and no baseline row, which the pre-2026-08-23 check skipped in silence."
@@ -392,8 +392,8 @@
     {
       "library": "fluent",
       "component": "Card",
-      "rerunPctEqual": 75.60586734693878,
-      "cellsCompared": 18816,
+      "rerunPctEqual": 78.73179611650485,
+      "cellsCompared": 19776,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 74.83552631578948,
       "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 576 more cell(s) than the engine the harness scorecard was captured with (18240 -> 18816) and every added cell is EQUAL (13650 -> 14226 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. First pinned 2026-08-23 — this component had a harness scorecard and no baseline row, which the pre-2026-08-23 check skipped in silence."
@@ -410,8 +410,8 @@
     {
       "library": "fluent",
       "component": "Dialog",
-      "rerunPctEqual": 82.58928571428571,
-      "cellsCompared": 448,
+      "rerunPctEqual": 90.17094017094017,
+      "cellsCompared": 468,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 82.3529411764706,
       "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 6 more cell(s) than the engine the harness scorecard was captured with (442 -> 448) and every added cell is EQUAL (364 -> 370 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. First pinned 2026-08-23 — this component had a harness scorecard and no baseline row, which the pre-2026-08-23 check skipped in silence."
@@ -419,35 +419,35 @@
     {
       "library": "fluent",
       "component": "Input",
-      "rerunPctEqual": 75.25510204081633,
-      "cellsCompared": 7056,
+      "rerunPctEqual": 75.24509803921569,
+      "cellsCompared": 7344,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 75.25510204081633,
-      "gapCause": ""
+      "gapCause": "VOCABULARY LIFT SINCE CAPTURE, measured on the UNCHANGED e884d672 engine (re-record 2026-08-25): the current engine compares 288 more cell(s) than the engine the harness scorecard was captured with (7056 -> 7344) and 216 of the 288 added cells are EQUAL (5310 -> 5526 equal), so the percentage falls by 0.010 while the equal COUNT rises. Nothing previously compared changed verdict. The harness number is the capture-time engine and is NOT re-captured; which lift added the channels is not bisected. Carries zero layout vocabulary — measured identical with this branch's fuse.ts reverted, so it is trunk drift, not the RC1 layout-axis door."
     },
     {
       "library": "fluent",
       "component": "Spinner",
-      "rerunPctEqual": 83.55263157894737,
-      "cellsCompared": 19456,
+      "rerunPctEqual": 83.76623376623377,
+      "cellsCompared": 19712,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 83.33333333333333,
-      "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 256 more cell(s) than the engine the harness scorecard was captured with (19200 -> 19456) and every added cell is EQUAL (16000 -> 16256 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. First pinned 2026-08-23 — this component had a harness scorecard and no baseline row, which the pre-2026-08-23 check skipped in silence."
+      "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 256 more cell(s) than the engine the harness scorecard was captured with (19200 -> 19456) and every added cell is EQUAL (16000 -> 16256 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. First pinned 2026-08-23 — this component had a harness scorecard and no baseline row, which the pre-2026-08-23 check skipped in silence. RC1 LAYOUT-AXIS DOOR (2026-08-25): 84.416 on the e884d672 engine -> 83.766 on this one, cellsCompared UNCHANGED at 19712. The score FALLS and that is the honest half of the trade, stated rather than absorbed: regate compares COMPUTED CSS STRINGS cell by cell. Fluent expresses labelPosition by reordering its DOM and keeps flex-direction at row/column; the canvas has no reverse, so the only spelling that carries the child ORDER onto a Figma frame is the reversed keyword (VariantLayoutSchema documents exactly this: \"the canvas … reverses the compiled child order per variant instead\", and core/emit-figma-script.ts isReversed -> spec.children.reverse()). We therefore now write column-reverse/row-reverse where the library computes column/row, and root.flex-direction goes from 0 mismatched cells to 128 (Spinner) / 32 (Switch). cellsCompared is UNCHANGED, so the drop is exactly those cells and nothing else. The RENDER is what moved the other way and it is receipted: parity/receipts/v1/census/fluent/fluent.spinner/code-size-medium__appearance-primary__label-position-{above,below}.png were byte-identical before (md5 27c7ba047fd1513811d9e5036b297d1b) and now differ and match the captured truth (above = label first, below = spinner first)."
     },
     {
       "library": "fluent",
       "component": "Switch",
-      "rerunPctEqual": 81.91287878787878,
-      "cellsCompared": 2112,
+      "rerunPctEqual": 80.8876811594203,
+      "cellsCompared": 2208,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 81.4922480620155,
-      "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 48 more cell(s) than the engine the harness scorecard was captured with (2064 -> 2112) and every added cell is EQUAL (1682 -> 1730 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. First pinned 2026-08-23 — this component had a harness scorecard and no baseline row, which the pre-2026-08-23 check skipped in silence."
+      "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 48 more cell(s) than the engine the harness scorecard was captured with (2064 -> 2112) and every added cell is EQUAL (1682 -> 1730 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. First pinned 2026-08-23 — this component had a harness scorecard and no baseline row, which the pre-2026-08-23 check skipped in silence. RC1 LAYOUT-AXIS DOOR (2026-08-25): 82.337 on the e884d672 engine -> 80.888 on this one, cellsCompared UNCHANGED at 2208. The score FALLS and that is the honest half of the trade, stated rather than absorbed: regate compares COMPUTED CSS STRINGS cell by cell. Fluent expresses labelPosition by reordering its DOM and keeps flex-direction at row/column; the canvas has no reverse, so the only spelling that carries the child ORDER onto a Figma frame is the reversed keyword (VariantLayoutSchema documents exactly this: \"the canvas … reverses the compiled child order per variant instead\", and core/emit-figma-script.ts isReversed -> spec.children.reverse()). We therefore now write column-reverse/row-reverse where the library computes column/row, and root.flex-direction goes from 0 mismatched cells to 128 (Spinner) / 32 (Switch). cellsCompared is UNCHANGED, so the drop is exactly those cells and nothing else. The RENDER is what moved the other way and it is receipted: parity/receipts/v1/census/fluent/fluent.spinner/code-size-medium__appearance-primary__label-position-{above,below}.png were byte-identical before (md5 27c7ba047fd1513811d9e5036b297d1b) and now differ and match the captured truth (above = label first, below = spinner first)."
     },
     {
       "library": "fluent",
       "component": "TabList",
-      "rerunPctEqual": 65.45493197278911,
-      "cellsCompared": 28224,
+      "rerunPctEqual": 66.02618243243244,
+      "cellsCompared": 28416,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 64.97844827586206,
       "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 384 more cell(s) than the engine the harness scorecard was captured with (27840 -> 28224) and every added cell is EQUAL (18090 -> 18474 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. First pinned 2026-08-23 — this component had a harness scorecard and no baseline row, which the pre-2026-08-23 check skipped in silence."
@@ -482,11 +482,11 @@
     {
       "library": "mui",
       "component": "Autocomplete",
-      "rerunPctEqual": 95.11041009463722,
+      "rerunPctEqual": 95.42586750788644,
       "cellsCompared": 2536,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 95.11041009463722,
-      "gapCause": ""
+      "gapCause": "RC1 LAYOUT-AXIS DOOR (2026-08-25): 95.110 on the e884d672 engine, 95.426 on this one, cellsCompared UNCHANGED at 2536. flex-wrap had NO entry in LAYOUT_CHANNEL_TO_FIELD at all — the only reader that turns a captured flex keyword into a Part.layout fact — so layout.wrap could never arrive from a captured library and the wrapping container minted as a single non-wrapping row. It is now carried. Every point of the gap is a cell flipping unequal -> equal against an unmoved denominator; the harness scorecard predates the fix and moves only on a re-capture."
     },
     {
       "library": "mui",
@@ -500,20 +500,20 @@
     {
       "library": "mui",
       "component": "Badge",
-      "rerunPctEqual": 91.13924050632912,
+      "rerunPctEqual": 92.40506329113924,
       "cellsCompared": 4424,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 91.13924050632912,
-      "gapCause": ""
+      "gapCause": "RC1 LAYOUT-AXIS DOOR (2026-08-25): 91.139 on the e884d672 engine, 92.405 on this one, cellsCompared UNCHANGED at 4424. flex-wrap had NO entry in LAYOUT_CHANNEL_TO_FIELD at all — the only reader that turns a captured flex keyword into a Part.layout fact — so layout.wrap could never arrive from a captured library and the wrapping container minted as a single non-wrapping row. It is now carried. Every point of the gap is a cell flipping unequal -> equal against an unmoved denominator; the harness scorecard predates the fix and moves only on a re-capture."
     },
     {
       "library": "mui",
       "component": "Breadcrumbs",
-      "rerunPctEqual": 94.79695431472081,
+      "rerunPctEqual": 95.30456852791878,
       "cellsCompared": 788,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 94.79695431472081,
-      "gapCause": ""
+      "gapCause": "RC1 LAYOUT-AXIS DOOR (2026-08-25): 94.797 on the e884d672 engine, 95.305 on this one, cellsCompared UNCHANGED at 788. flex-wrap had NO entry in LAYOUT_CHANNEL_TO_FIELD at all — the only reader that turns a captured flex keyword into a Part.layout fact — so layout.wrap could never arrive from a captured library and the wrapping container minted as a single non-wrapping row. It is now carried. Every point of the gap is a cell flipping unequal -> equal against an unmoved denominator; the harness scorecard predates the fix and moves only on a re-capture."
     },
     {
       "library": "mui",
@@ -689,11 +689,11 @@
     {
       "library": "mui",
       "component": "Snackbar",
-      "rerunPctEqual": 94.91525423728814,
+      "rerunPctEqual": 96.61016949152543,
       "cellsCompared": 59,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 94.91525423728814,
-      "gapCause": ""
+      "gapCause": "RC1 LAYOUT-AXIS DOOR (2026-08-25): 94.915 on the e884d672 engine, 96.610 on this one, cellsCompared UNCHANGED at 59. flex-wrap had NO entry in LAYOUT_CHANNEL_TO_FIELD at all — the only reader that turns a captured flex keyword into a Part.layout fact — so layout.wrap could never arrive from a captured library and the wrapping container minted as a single non-wrapping row. It is now carried. Every point of the gap is a cell flipping unequal -> equal against an unmoved denominator; the harness scorecard predates the fix and moves only on a re-capture."
     },
     {
       "library": "mui",
@@ -761,11 +761,11 @@
     {
       "library": "polaris",
       "component": "Banner",
-      "rerunPctEqual": 97.05310880829016,
-      "cellsCompared": 12352,
+      "rerunPctEqual": 97.43827160493827,
+      "cellsCompared": 12960,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 97.01443569553805,
-      "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 160 more cell(s) than the engine the harness scorecard was captured with (12192 -> 12352) and every added cell is EQUAL (11828 -> 11988 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. The 2026-08-09 baseline pinned this row at 97.014/12192 cells, the pre-lift engine; the committed regate.scorecard.json beside it had already been overwritten by a later run and disagreed with that row until this re-record."
+      "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 160 more cell(s) than the engine the harness scorecard was captured with (12192 -> 12352) and every added cell is EQUAL (11828 -> 11988 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. The 2026-08-09 baseline pinned this row at 97.014/12192 cells, the pre-lift engine; the committed regate.scorecard.json beside it had already been overwritten by a later run and disagreed with that row until this re-record. RC1 LAYOUT-AXIS DOOR (2026-08-25): a separately measured 0.247 on top — 97.191 on the e884d672 engine, 97.438 on this one, cellsCompared UNCHANGED at 12960. flex-wrap had NO entry in LAYOUT_CHANNEL_TO_FIELD at all, so a captured library could never deliver layout.wrap; it is now carried. Cell flips only, no widened denominator; the harness number moves only on a re-capture."
     },
     {
       "library": "polaris",
@@ -779,8 +779,8 @@
     {
       "library": "polaris",
       "component": "Checkbox",
-      "rerunPctEqual": 81.18971061093248,
-      "cellsCompared": 2488,
+      "rerunPctEqual": 84.34650455927051,
+      "cellsCompared": 2632,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 81.00649350649351,
       "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 24 more cell(s) than the engine the harness scorecard was captured with (2464 -> 2488) and every added cell is EQUAL (1996 -> 2020 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. The 2026-08-09 baseline pinned this row at 81.006/2464 cells, the pre-lift engine; the committed regate.scorecard.json beside it had already been overwritten by a later run and disagreed with that row until this re-record."
@@ -788,8 +788,8 @@
     {
       "library": "polaris",
       "component": "ProgressBar",
-      "rerunPctEqual": 91.17647058823529,
-      "cellsCompared": 1632,
+      "rerunPctEqual": 92.10526315789474,
+      "cellsCompared": 1824,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 92.10526315789474,
       "gapCause": "VOCABULARY NARROWED SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 192 FEWER cell(s) than the engine the harness scorecard was captured with (1824 -> 1632) and every dropped cell was EQUAL (1680 -> 1488 equal), so the percentage falls by exactly the dropped cells; no remaining cell changed verdict. The harness number is the capture-time engine and is NOT re-captured; the lift(s) responsible are not bisected. The 2026-08-09 baseline pinned this row at 92.105/1824 cells, the pre-lift engine; the committed regate.scorecard.json beside it had already been overwritten by a later run and disagreed with that row until this re-record."
@@ -797,8 +797,8 @@
     {
       "library": "polaris",
       "component": "RadioButton",
-      "rerunPctEqual": 81.5340909090909,
-      "cellsCompared": 1408,
+      "rerunPctEqual": 81.64893617021276,
+      "cellsCompared": 1504,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 81.32183908045977,
       "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 16 more cell(s) than the engine the harness scorecard was captured with (1392 -> 1408) and every added cell is EQUAL (1132 -> 1148 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. The 2026-08-09 baseline pinned this row at 81.322/1392 cells, the pre-lift engine; the committed regate.scorecard.json beside it had already been overwritten by a later run and disagreed with that row until this re-record."
@@ -815,8 +815,8 @@
     {
       "library": "polaris",
       "component": "Tag",
-      "rerunPctEqual": 81.55133483862399,
-      "cellsCompared": 7529,
+      "rerunPctEqual": 79.96224040276904,
+      "cellsCompared": 7945,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 81.01607890825564,
       "gapCause": "ENGINE MOVED SINCE CAPTURE (re-recorded 2026-08-23, r12 over 537022b0; docs/23 §D.33): cells compared 7401 -> 7529, cells equal 5996 -> 6140 — 128 added cell(s), 144 more equal, so 16 previously-compared cells changed verdict to EQUAL. repaired: this row was pinned REFUSED on 2026-08-23 (§B.29) — the offline re-fuse carried link.width as BOTH the G8 literal fit-content and a minted token because fuse.ts carriedChannels mapped width through CHANNEL_TO_COMPUTED with `?? []` and so never saw the stated literal; the literal is now the one carrier (the link hugs) and the not-minted px is receipted (carried-axis-not-reminted). Harness number untouched."
@@ -833,17 +833,17 @@
     {
       "library": "polaris",
       "component": "TextField",
-      "rerunPctEqual": 82.18916857360793,
-      "cellsCompared": 41952,
+      "rerunPctEqual": 81.84759166067577,
+      "cellsCompared": 44512,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 81.96911196911196,
-      "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 512 more cell(s) than the engine the harness scorecard was captured with (41440 -> 41952) and every added cell is EQUAL (33968 -> 34480 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. The 2026-08-09 baseline pinned this row at 81.969/41440 cells, the pre-lift engine; the committed regate.scorecard.json beside it had already been overwritten by a later run and disagreed with that row until this re-record."
+      "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 512 more cell(s) than the engine the harness scorecard was captured with (41440 -> 41952) and every added cell is EQUAL (33968 -> 34480 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. The 2026-08-09 baseline pinned this row at 81.969/41440 cells, the pre-lift engine; the committed regate.scorecard.json beside it had already been overwritten by a later run and disagreed with that row until this re-record. RC1 LAYOUT-AXIS DOOR (2026-08-25): a separately measured 1.150 on top — 80.697 on the e884d672 engine, 81.848 on this one, cellsCompared UNCHANGED at 44512. flex-wrap (no map entry at all) plus align-items: baseline (no map entry for the keyword). Cell flips only."
     },
     {
       "library": "polaris",
       "component": "Thumbnail",
       "rerunPctEqual": 100,
-      "cellsCompared": 592,
+      "cellsCompared": 608,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 100,
       "gapCause": ""

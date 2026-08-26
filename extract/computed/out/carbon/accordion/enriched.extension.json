@@ -272,11 +272,22 @@
         "part": "accordion__heading",
         "field": "justify",
         "value": "start"
+      },
+      {
+        "part": "accordion__heading",
+        "field": "direction",
+        "value": "row-reverse",
+        "byProp": {
+          "prop": "align",
+          "overrides": {
+            "start": "row"
+          }
+        }
       }
     ],
     "contradictions": [],
     "receipts": [
-      "layout-not-uniform: accordion__heading.flex-direction varies across combos — stays code-only"
+      "layout-factored-on-axis: accordion__heading.flex-direction varies across combos but factors on enum axis \"align\" — base (align=end) carries layout.direction = row-reverse; deviating value(s) align=start → row ride layoutByProp (schema v7; resolveLayout merges per compiled variant)"
     ],
     "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
   },
@@ -1054,6 +1065,7 @@
     "refusals": []
   },
   "enrichmentNotes": [
+    "layout enriched per axis: accordion__heading.layout.direction = row-reverse at base; align=start → row via layoutByProp (schema v7 — resolveLayout merges per compiled variant)",
     "layout enriched: accordion__heading.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: accordion__heading.layout.justify = start (uniform computed keyword — the schema's own vocabulary)",
     "declared fact carried: accordion__item.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",

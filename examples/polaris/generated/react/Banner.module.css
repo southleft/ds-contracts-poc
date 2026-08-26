@@ -401,6 +401,7 @@
 
 .buttongroup {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   height: var(--imported-banner-buttongroup-height);
   margin-left: var(--imported-banner-buttongroup-margin-left);

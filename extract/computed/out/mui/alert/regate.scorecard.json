@@ -85,7 +85,7 @@
       "mintedLeavesUnfolded": 448,
       "baseBindings": 41,
       "stateBindings": 0,
-      "codeOnlyChannels": 4,
+      "codeOnlyChannels": 0,
       "overflowBindings": 0,
       "folds": 46
     },
@@ -181,12 +181,7 @@
         16
       ]
     ],
-    "namedLosses": [
-      "code-only: root.border-bottom-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "code-only: root.border-left-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "code-only: root.border-right-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "code-only: root.border-top-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue"
-    ],
+    "namedLosses": [],
     "unresolvedTokenRefs": {
       "count": 0,
       "refs": []

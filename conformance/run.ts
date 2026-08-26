@@ -156,9 +156,18 @@ interface CapturedNodeLike {
  *  (full styles), per-capture deltas, and the ::before/::after pseudo maps. */
 export function readObservations(outDir: string): Map<string, Map<string, Set<string>>> {
   const truth = readJson<{
-    anatomy?: Array<{ part: string; path: string }>;
+    anatomy?: Array<{ part: string; path: string; signature?: string; tag?: string; classes?: string[] }>;
     base?: { key: string; root: CapturedNodeLike } | Array<{ key: string; root: CapturedNodeLike }>;
-    captures?: Array<{ elements?: Array<{ part: string; delta: Record<string, string> }>; pseudo?: Record<string, Record<string, string>> }>;
+    captures?: Array<{
+      key?: string;
+      /** A capture whose STRUCTURE differs from the base is recorded as a whole
+       *  tree, not a style delta. The reader never walked it, so every fact
+       *  that only exists in a structure-varying combo — child ORDER first
+       *  among them — was invisible to this gate. */
+      fullRoot?: CapturedNodeLike;
+      elements?: Array<{ part: string; delta: Record<string, string> }>;
+      pseudo?: Record<string, Record<string, string>>;
+    }>;
   }>(path.join(outDir, 'captured-truth.json'));
   const out = new Map<string, Map<string, Set<string>>>();
   if (!truth) return out;
@@ -167,8 +176,23 @@ export function readObservations(outDir: string): Map<string, Map<string, Set<st
     (byCh.get(part) ?? byCh.set(part, new Set()).get(part)!).add(v);
   };
   const partByPath = new Map((truth.anatomy ?? []).map((a) => [a.path, a.part]));
+  // `__child-order` identifies a child by its captured-truth SIGNATURE, never
+  // by its part NAME or its DOM path: a combo that re-orders its children has
+  // neither the base's paths nor (before this round) any per-combo part
+  // identity at all. The shape key is the element's own tag + class list,
+  // which the fixture owns (`cf-a` / `cf-b`) and the engine does not.
+  const shapeOf = (n: { tag?: string; classes?: string[] }): string =>
+    `${n.tag ?? ''}|${[...(n.classes ?? [])].sort().join(',')}`;
+  const sigByShape = new Map<string, string>();
+  const partByShape = new Map<string, string>();
+  for (const a of truth.anatomy ?? []) {
+    if (!a.tag) continue;
+    const k = shapeOf(a);
+    if (a.signature) sigByShape.set(k, a.signature);
+    partByShape.set(k, a.part);
+  }
   const walk = (n: CapturedNodeLike, p: string): void => {
-    const part = partByPath.get(p) ?? `@path:${p || 'root'}`;
+    const part = partByPath.get(p) ?? partByShape.get(shapeOf(n)) ?? `@path:${p || 'root'}`;
     for (const [ch, v] of Object.entries(n.style ?? {})) add(part, ch, v);
     for (const [pe, map] of Object.entries(n.pseudo ?? {})) {
       for (const [ch, v] of Object.entries(map)) add(`${part}${pe}`, ch, v);
@@ -178,6 +202,17 @@ export function readObservations(outDir: string): Map<string, Map<string, Set<st
     // CSS channel at all — it is "did non-painting text survive into the
     // capture, and from there into the contract as canvas ink".
     for (const c of n.nodes ?? []) if (c.t === 'text' && c.v.trim()) add(part, '__text', c.v.trim());
+    // `__child-order`: a synthetic channel for the DOCUMENT ORDER of a
+    // container's element children. It is not a CSS channel and never will be
+    // — CSS expresses the same rendered fact through `flex-direction:
+    // *-reverse` and `order`, and a captured library expresses it through the
+    // DOM. Without it the gate cannot see the fluent.switch class of loss at
+    // all: two enum values that differ ONLY in child order compile to
+    // byte-identical variants and every CSS channel still agrees.
+    {
+      const kids = (n.nodes ?? []).flatMap((c) => (c.t === 'el' ? [c.el] : []));
+      if (kids.length > 1) add(part, '__child-order', kids.map((k) => sigByShape.get(shapeOf(k)) ?? shapeOf(k)).join('>'));
+    }
     n.nodes?.forEach((c, i) => { if (c.t === 'el') walk(c.el, p === '' ? String(i) : `${p}.${i}`); });
   };
   // `base` is a single {key, root} for a one-combo component and an array for
@@ -186,6 +221,9 @@ export function readObservations(outDir: string): Map<string, Map<string, Set<st
   const bases = Array.isArray(truth.base) ? truth.base : truth.base ? [truth.base] : [];
   for (const b of bases) walk(b.root, '');
   for (const c of truth.captures ?? []) {
+    // A structure-varying combo is recorded whole; walking it is the only way
+    // the reader ever sees a fact that exists in no delta.
+    if (c.fullRoot) walk(c.fullRoot, '');
     for (const e of c.elements ?? []) for (const [ch, v] of Object.entries(e.delta ?? {})) add(e.part, ch, v);
     for (const [pk, map] of Object.entries(c.pseudo ?? {})) for (const [ch, v] of Object.entries(map)) add(pk, ch, v);
   }
@@ -195,12 +233,54 @@ export function readObservations(outDir: string): Map<string, Map<string, Set<st
 /** Every (part, channel, value) the CONTRACT carries — tokens, declared,
  *  declaredStates, states, literals and layout, at every anatomy depth. Token
  *  refs are resolved against the run's own minted tree + the fixture DTCG. */
+/** `__child-order` MIRROR — the per-variant child order a CONTRACT carries.
+ *
+ *  Both emitters express a per-variant child order the same way and only that
+ *  way: CSS writes `flex-direction: *-reverse` (packages/core/src/css.ts) and
+ *  the canvas reverses the compiled children (core/emit-figma-script.ts
+ *  `isReversed`). So the order a contract CARRIES for a variant is the
+ *  anatomy's own part order, reversed exactly when that variant's resolved
+ *  direction is a reversed spelling. Mirrored here from the two lowerings,
+ *  never imported from them.
+ *
+ *  EXPORTED because the CANVAS round-trip gate (conformance/canvas.ts) reads a
+ *  seed's carriage through `carriageOfContract`, which knows only real CSS
+ *  channels. Without this the child-order fact was invisible to that gate and
+ *  every such case reported SEED-ABSENT — "nothing to round-trip" — while the
+ *  fact was in the contract the whole time. One mirror, both gates. */
+export function childOrderCarriage(contract: Record<string, unknown>, outDir: string): CarriageHit[] {
+  const truth = readJson<{ anatomy?: Array<{ part: string; signature?: string }> }>(path.join(outDir, 'captured-truth.json'));
+  const sigByPart = new Map((truth?.anatomy ?? []).flatMap((a) => (a.signature ? [[a.part, a.signature] as const] : [])));
+  const rows: CarriageHit[] = [];
+  const isRev = (d: unknown): boolean => typeof d === 'string' && d.endsWith('-reverse');
+  const walkOrder = (name: string, part: Record<string, unknown>): void => {
+    const kids = Object.keys((part.parts ?? {}) as Record<string, unknown>);
+    if (kids.length > 1) {
+      const sigs = kids.map((k) => sigByPart.get(k) ?? k);
+      const order = (rev: boolean): string => (rev ? [...sigs].reverse() : sigs).join('>');
+      const lay = part.layout as Record<string, unknown> | null | undefined;
+      rows.push({ part: name, where: 'layout(child order)', value: order(isRev(lay?.direction)), raw: order(isRev(lay?.direction)) });
+      const lbp = part.layoutByProp as { prop?: string; map?: Record<string, Record<string, unknown>> } | null | undefined;
+      for (const [av, over] of Object.entries(lbp?.map ?? {})) {
+        const d = over && over.direction !== undefined ? over.direction : lay?.direction;
+        rows.push({ part: name, where: `layoutByProp.${String(lbp?.prop)}=${av}(child order)`, value: order(isRev(d)), raw: order(isRev(d)) });
+      }
+    }
+    for (const [n, p] of Object.entries((part.parts ?? {}) as Record<string, Record<string, unknown>>)) walkOrder(n, p);
+  };
+  for (const [n, p] of Object.entries((contract.anatomy ?? {}) as Record<string, Record<string, unknown>>)) walkOrder(n, p);
+  return rows;
+}
+
 export function readCarriage(outDir: string): Map<string, Array<{ part: string; where: string; value: string }>> {
   const contract = readJson<Record<string, unknown>>(path.join(outDir, 'enriched.contract.json'));
   const ext = readJson<{ mintedTokens?: Record<string, unknown> }>(path.join(outDir, 'enriched.extension.json'));
   const dtcg = readJson<Record<string, unknown>>(path.join(REPO, 'conformance', 'tokens', 'conformance.dtcg.json')) ?? {};
   if (!contract) return new Map();
-  return carriageOfContract(contract, [ext?.mintedTokens ?? {}, dtcg]);
+  const carriage = carriageOfContract(contract, [ext?.mintedTokens ?? {}, dtcg]);
+  const rows = childOrderCarriage(contract, outDir);
+  if (rows.length) carriage.set('__child-order', [...(carriage.get('__child-order') ?? []), ...rows]);
+  return carriage;
 }
 
 export interface CarriageHit {
@@ -365,6 +445,9 @@ export function carriageOfContract(contract: Record<string, unknown>, trees: Rec
           const v = (m as Record<string, unknown>)[f];
           if (typeof v === 'string') push(ch, name, where, v);
         }
+        // `wrap` is a BOOLEAN field whose browser spelling is a keyword; the
+        // walk above only mirrors string fields, so carried wrap was invisible.
+        if ((m as Record<string, unknown>).wrap === true) push('flex-wrap', name, where, 'wrap');
       };
       pushLayoutFields(lay, 'layout');
       const lbp = part.layoutByProp as { prop?: string; map?: Record<string, unknown> } | null | undefined;

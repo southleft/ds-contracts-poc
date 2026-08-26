@@ -100,8 +100,23 @@
     "root": {
       "layout": {
         "display": "flex",
+        "direction": "row",
         "align": "center",
         "justify": "center"
+      },
+      "layoutByProp": {
+        "prop": "labelPosition",
+        "map": {
+          "above": {
+            "direction": "column-reverse"
+          },
+          "below": {
+            "direction": "column"
+          },
+          "before": {
+            "direction": "row-reverse"
+          }
+        }
       },
       "parts": {
         "spinner": {

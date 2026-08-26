@@ -101,7 +101,7 @@ import { createPluginEngine } from '../figma-sync/plugin/engine/entry.js';
 import { createFigmaMock } from '../scripts/plugin-engine-mock-figma.mjs';
 import { mergeTokenTrees } from '../extract/figma/tokens.js';
 import { exportNameFor, HERE, loadCases, outDirFor, REPO, type CaseEntry } from './build.js';
-import { carriageOfContract, identityTokens, normValue, OUT_ROOT, valueAgrees, type CarriageHit } from './run.js';
+import { carriageOfContract, childOrderCarriage, identityTokens, normValue, OUT_ROOT, valueAgrees, type CarriageHit } from './run.js';
 
 export const CANVAS_BASELINE = path.join(HERE, 'CANVAS-BASELINE.json');
 export const CANVAS_EXPECTATIONS = path.join(HERE, 'CANVAS-EXPECTATIONS.md');
@@ -257,7 +257,19 @@ export async function roundTrip(c: CaseEntry, verbose = false): Promise<CanvasMe
 
   // --- the seed's own carriage on the channel --------------------------------
   const target = c.observable.carriedValue ?? c.observable.capturedValue ?? '';
-  const seedAll = carriageOfContract(contract, [minted, dtcgNested]).get(ch) ?? [];
+  // `__child-order` is synthetic: `carriageOfContract` knows real CSS channels
+  // only, so without the CSS/DOM gate's own mirror this gate could never see a
+  // per-variant child order in a seed and reported SEED-ABSENT — "nothing to
+  // round-trip" — for a fact the contract was carrying. One mirror, both gates.
+  const carriageOf = (c: Record<string, unknown>, trees: Record<string, unknown>[]): Map<string, CarriageHit[]> => {
+    const m = carriageOfContract(c, trees);
+    if (ch === '__child-order') {
+      const rows = childOrderCarriage(c, outDir);
+      if (rows.length) m.set('__child-order', [...(m.get('__child-order') ?? []), ...rows]);
+    }
+    return m;
+  };
+  const seedAll = carriageOf(contract, [minted, dtcgNested]).get(ch) ?? [];
   // Which seed hits ARE the construct: strict first; the CSS/DOM gate's looser
   // containment only when strict finds nothing (browser serialization vs
   // contract spelling — box-shadow layers, matrix() transforms).
@@ -410,7 +422,7 @@ export async function roundTrip(c: CaseEntry, verbose = false): Promise<CanvasMe
   const trees = [proposal.mintedTokens?.tree ?? {}, minted, dtcgNested];
   const pieces: Record<string, unknown>[] = [proposal.contract, ...((proposal.childStubs ?? []) as Record<string, unknown>[])];
   const proposedAll: Array<CarriageHit & { channel: string }> = pieces.flatMap((p) => {
-    const carriage = carriageOfContract(p, trees);
+    const carriage = carriageOf(p, trees);
     return channelFamily(ch).flatMap((fam) => (carriage.get(fam) ?? []).map((h) => ({ ...h, channel: fam })));
   });
   // For `__text` only a hit on the SAME part is a comparable value — a

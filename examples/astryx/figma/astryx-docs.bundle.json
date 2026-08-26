@@ -5996,6 +5996,7 @@
               "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
               "layout": {
                 "display": "flex",
+                "align": "baseline",
                 "justify": "space-between"
               },
               "parts": {

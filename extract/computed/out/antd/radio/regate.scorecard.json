@@ -205,8 +205,8 @@
     "interactions": 4,
     "computed": {
       "cellsCompared": 1952,
-      "cellsEqual": 1460,
-      "pctEqual": 74.79508196721312,
+      "cellsEqual": 1476,
+      "pctEqual": 75.61475409836065,
       "rowsFullyEqual": 0,
       "rows": 16
     },
@@ -232,7 +232,7 @@
       "mintedLeavesUnfolded": 33,
       "baseBindings": 63,
       "stateBindings": 32,
-      "codeOnlyChannels": 8,
+      "codeOnlyChannels": 7,
       "overflowBindings": 28,
       "folds": 35
     },
@@ -241,64 +241,60 @@
         "key": "checked.disabled__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 47,
+        "channelsMismatched": 46,
         "unscorable": "no-original"
       },
       {
         "key": "checked.disabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 47,
+        "channelsMismatched": 46,
         "unscorable": "no-original"
       },
       {
         "key": "checked.disabled__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 47,
+        "channelsMismatched": 46,
         "unscorable": "no-original"
       },
       {
         "key": "checked.disabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 47,
+        "channelsMismatched": 46,
         "unscorable": "no-original"
       },
       {
         "key": "unchecked.disabled__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 43,
+        "channelsMismatched": 42,
         "unscorable": "no-original"
       },
       {
         "key": "unchecked.disabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 43,
+        "channelsMismatched": 42,
         "unscorable": "no-original"
       },
       {
         "key": "unchecked.disabled__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 43,
+        "channelsMismatched": 42,
         "unscorable": "no-original"
       },
       {
         "key": "unchecked.disabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 43,
+        "channelsMismatched": 42,
         "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
-      [
-        "root.align-items",
-        16
-      ],
       [
         "root.list-style-type",
         16
@@ -354,6 +350,10 @@
       [
         "label.list-style-type",
         16
+      ],
+      [
+        "root.border-bottom-color",
+        8
       ]
     ],
     "namedLosses": [
@@ -389,7 +389,6 @@
       "overflow: radio-inner.border-left-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: radio-inner.border-right-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: radio-inner.border-top-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
-      "code-only: root.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <label>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <label> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: root.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <label>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <label> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: radio.align-self — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: radio.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -424,17 +423,11 @@
       {
         "key": "unchecked.enabled__default",
         "channelsCompared": 122,
-        "channelsEqual": 107,
+        "channelsEqual": 108,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
-          },
           {
             "part": "root",
             "channel": "list-style-type",
@@ -525,17 +518,11 @@
       {
         "key": "unchecked.enabled__hover",
         "channelsCompared": 122,
-        "channelsEqual": 103,
+        "channelsEqual": 104,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
-          },
           {
             "part": "root",
             "channel": "list-style-type",
@@ -650,17 +637,11 @@
       {
         "key": "unchecked.enabled__focus-visible",
         "channelsCompared": 122,
-        "channelsEqual": 105,
+        "channelsEqual": 106,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
-          },
           {
             "part": "root",
             "channel": "list-style-type",
@@ -763,17 +744,11 @@
       {
         "key": "unchecked.enabled__active",
         "channelsCompared": 122,
-        "channelsEqual": 103,
+        "channelsEqual": 104,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
-          },
           {
             "part": "root",
             "channel": "list-style-type",
@@ -888,17 +863,11 @@
       {
         "key": "unchecked.disabled__default",
         "channelsCompared": 122,
-        "channelsEqual": 79,
+        "channelsEqual": 80,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
-          },
           {
             "part": "root",
             "channel": "border-bottom-color",
@@ -1157,17 +1126,11 @@
       {
         "key": "unchecked.disabled__hover",
         "channelsCompared": 122,
-        "channelsEqual": 79,
+        "channelsEqual": 80,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
-          },
           {
             "part": "root",
             "channel": "border-bottom-color",
@@ -1426,17 +1389,11 @@
       {
         "key": "unchecked.disabled__focus-visible",
         "channelsCompared": 122,
-        "channelsEqual": 79,
+        "channelsEqual": 80,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
-          },
           {
             "part": "root",
             "channel": "border-bottom-color",
@@ -1695,17 +1652,11 @@
       {
         "key": "unchecked.disabled__active",
         "channelsCompared": 122,
-        "channelsEqual": 79,
+        "channelsEqual": 80,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
-          },
           {
             "part": "root",
             "channel": "border-bottom-color",
@@ -1964,17 +1915,11 @@
       {
         "key": "checked.enabled__default",
         "channelsCompared": 122,
-        "channelsEqual": 107,
+        "channelsEqual": 108,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
-          },
           {
             "part": "root",
             "channel": "list-style-type",
@@ -2065,17 +2010,11 @@
       {
         "key": "checked.enabled__hover",
         "channelsCompared": 122,
-        "channelsEqual": 107,
+        "channelsEqual": 108,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
-          },
           {
             "part": "root",
             "channel": "list-style-type",
@@ -2166,17 +2105,11 @@
       {
         "key": "checked.enabled__focus-visible",
         "channelsCompared": 122,
-        "channelsEqual": 105,
+        "channelsEqual": 106,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
-          },
           {
             "part": "root",
             "channel": "list-style-type",
@@ -2279,17 +2212,11 @@
       {
         "key": "checked.enabled__active",
         "channelsCompared": 122,
-        "channelsEqual": 107,
+        "channelsEqual": 108,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
-          },
           {
             "part": "root",
             "channel": "list-style-type",
@@ -2380,17 +2307,11 @@
       {
         "key": "checked.disabled__default",
         "channelsCompared": 122,
-        "channelsEqual": 75,
+        "channelsEqual": 76,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
-          },
           {
             "part": "root",
             "channel": "border-bottom-color",
@@ -2673,17 +2594,11 @@
       {
         "key": "checked.disabled__hover",
         "channelsCompared": 122,
-        "channelsEqual": 75,
+        "channelsEqual": 76,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
-          },
           {
             "part": "root",
             "channel": "border-bottom-color",
@@ -2966,17 +2881,11 @@
       {
         "key": "checked.disabled__focus-visible",
         "channelsCompared": 122,
-        "channelsEqual": 75,
+        "channelsEqual": 76,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
-          },
           {
             "part": "root",
             "channel": "border-bottom-color",
@@ -3259,17 +3168,11 @@
       {
         "key": "checked.disabled__active",
         "channelsCompared": 122,
-        "channelsEqual": 75,
+        "channelsEqual": 76,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
-          },
           {
             "part": "root",
             "channel": "border-bottom-color",

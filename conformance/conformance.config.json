@@ -51,6 +51,14 @@
       "axes": []
     },
     {
+      "__case": "layout: uniform align-items: baseline on a flex row of two differing font sizes — declared CARRIED",
+      "name": "CaseAlignItemsBaseline",
+      "importName": "CaseAlignItemsBaseline",
+      "contract": "conformance/seeds/align-items-baseline.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
       "__case": "tokens: .cf-root { --cf-scoped-pad: 15px } .cf-root .cf-a { padding-inline: var(--cf-scoped-pad) } — a token DECLARED ON THE COMPONENT ROOT (not :root) and consumed by a descendant (antd cssVar component tokens on `.antd.ant-btn`) — declared CARRIED",
       "name": "CaseAntdComponentScopedCustomProperty",
       "importName": "CaseAntdComponentScopedCustomProperty",
@@ -180,6 +188,26 @@
       "axes": []
     },
     {
+      "__case": "layout: CHILD ORDER that varies on one enum axis by a ROTATION (A,B,C -> B,C,A) — a permutation that is neither the identity nor a reversal — declared REFUSED",
+      "name": "CaseChildOrderPermutedByAxis",
+      "importName": "CaseChildOrderPermutedByAxis",
+      "contract": "conformance/seeds/child-order-permuted-by-axis.contract.json",
+      "sampleText": "",
+      "axes": [
+        "rotation"
+      ]
+    },
+    {
+      "__case": "layout: CHILD ORDER that varies on one enum axis — the container's flex-direction keyword is `row` for BOTH values and the DOM order of the two children is reversed instead (the fluent.switch / fluent.spinner labelPosition shape) — declared CARRIED",
+      "name": "CaseChildOrderReversedByAxis",
+      "importName": "CaseChildOrderReversedByAxis",
+      "contract": "conformance/seeds/child-order-reversed-by-axis.contract.json",
+      "sampleText": "",
+      "axes": [
+        "labelPosition"
+      ]
+    },
+    {
       "__case": "effects: clip-path: polygon(...) — declared UNSUPPORTED",
       "name": "CaseClipPathPolygon",
       "importName": "CaseClipPathPolygon",
@@ -306,10 +334,28 @@
       ]
     },
     {
+      "__case": "layout: flex-direction: row-reverse at the DEFAULT axis value and row at the other (the carbon.accordion `align` shape, whose default IS the reversed one) — declared CARRIED",
+      "name": "CaseFlexDirectionReverseByAxis",
+      "importName": "CaseFlexDirectionReverseByAxis",
+      "contract": "conformance/seeds/flex-direction-reverse-by-axis.contract.json",
+      "sampleText": "",
+      "axes": [
+        "align"
+      ]
+    },
+    {
       "__case": "layout: column-gap / row-gap in px — declared CARRIED",
       "name": "CaseFlexGap",
       "importName": "CaseFlexGap",
       "contract": "conformance/seeds/flex-gap.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
+      "__case": "layout: uniform flex-wrap: wrap on a flex row narrow enough to wrap — declared CARRIED",
+      "name": "CaseFlexWrapWrap",
+      "importName": "CaseFlexWrapWrap",
+      "contract": "conformance/seeds/flex-wrap-wrap.contract.json",
       "sampleText": "",
       "axes": []
     },

@@ -131,9 +131,9 @@
     "combos": 12,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 2112,
-      "cellsEqual": 1730,
-      "pctEqual": 81.91287878787878,
+      "cellsCompared": 2208,
+      "cellsEqual": 1786,
+      "pctEqual": 80.8876811594203,
       "rowsFullyEqual": 0,
       "rows": 48
     },
@@ -155,11 +155,11 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 109,
-      "mintedLeavesUnfolded": 142,
-      "baseBindings": 48,
+      "mintedLeaves": 111,
+      "mintedLeavesUnfolded": 144,
+      "baseBindings": 50,
       "stateBindings": 41,
-      "codeOnlyChannels": 2,
+      "codeOnlyChannels": 1,
       "overflowBindings": 34,
       "folds": 35
     },
@@ -168,56 +168,56 @@
         "key": "unchecked.above.disabled__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 15,
+        "channelsMismatched": 16,
         "unscorable": "no-original"
       },
       {
         "key": "unchecked.above.disabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 15,
+        "channelsMismatched": 16,
         "unscorable": "no-original"
       },
       {
         "key": "unchecked.above.disabled__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 15,
+        "channelsMismatched": 16,
         "unscorable": "no-original"
       },
       {
         "key": "unchecked.above.disabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 15,
+        "channelsMismatched": 16,
         "unscorable": "no-original"
       },
       {
-        "key": "checked.above.disabled__default",
+        "key": "unchecked.before.disabled__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 15,
+        "channelsMismatched": 16,
         "unscorable": "no-original"
       },
       {
-        "key": "checked.above.disabled__hover",
+        "key": "unchecked.before.disabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 15,
+        "channelsMismatched": 16,
         "unscorable": "no-original"
       },
       {
-        "key": "checked.above.disabled__focus-visible",
+        "key": "unchecked.before.disabled__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 15,
+        "channelsMismatched": 16,
         "unscorable": "no-original"
       },
       {
-        "key": "checked.above.disabled__active",
+        "key": "unchecked.before.disabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 15,
+        "channelsMismatched": 16,
         "unscorable": "no-original"
       }
     ],
@@ -225,6 +225,10 @@
       [
         "input.line-height",
         48
+      ],
+      [
+        "root.flex-direction",
+        32
       ],
       [
         "input.outline-color",
@@ -275,12 +279,8 @@
         24
       ],
       [
-        "label.cursor",
+        "label.color",
         24
-      ],
-      [
-        "root.flex-direction",
-        16
       ]
     ],
     "namedLosses": [
@@ -318,7 +318,6 @@
       "overflow: indicator.border-top-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: indicator.color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: indicator.fill [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
-      "code-only: root.flex-direction — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: input.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it."
     ],
     "unresolvedTokenRefs": {
@@ -327,7 +326,7 @@
     },
     "shippedMinted": {
       "path": "examples/fluent/tokens/fluent-minted.dtcg.json",
-      "leavesAdded": 1555,
+      "leavesAdded": 1548,
       "divergent": [
         {
           "token": "imported.switch.indicator.background-color-state-disabled.checked",
@@ -406,8 +405,8 @@
     "rows": [
       {
         "key": "unchecked.above.enabled__default",
-        "channelsCompared": 44,
-        "channelsEqual": 42,
+        "channelsCompared": 46,
+        "channelsEqual": 44,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -415,7 +414,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -429,8 +428,8 @@
       },
       {
         "key": "unchecked.above.enabled__hover",
-        "channelsCompared": 44,
-        "channelsEqual": 42,
+        "channelsCompared": 46,
+        "channelsEqual": 44,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -438,7 +437,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -452,8 +451,8 @@
       },
       {
         "key": "unchecked.above.enabled__focus-visible",
-        "channelsCompared": 44,
-        "channelsEqual": 41,
+        "channelsCompared": 46,
+        "channelsEqual": 43,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -461,7 +460,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -481,8 +480,8 @@
       },
       {
         "key": "unchecked.above.enabled__active",
-        "channelsCompared": 44,
-        "channelsEqual": 42,
+        "channelsCompared": 46,
+        "channelsEqual": 44,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -490,7 +489,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -504,8 +503,8 @@
       },
       {
         "key": "unchecked.above.disabled__default",
-        "channelsCompared": 44,
-        "channelsEqual": 29,
+        "channelsCompared": 46,
+        "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -513,7 +512,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -593,6 +592,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(84, 84, 84, 1)"
+          },
+          {
+            "part": "label",
+            "channel": "color",
+            "ours": "rgba(36, 36, 36, 1)",
+            "theirs": "rgba(189, 189, 189, 1)"
           },
           {
             "part": "label",
@@ -605,8 +610,8 @@
       },
       {
         "key": "unchecked.above.disabled__hover",
-        "channelsCompared": 44,
-        "channelsEqual": 29,
+        "channelsCompared": 46,
+        "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -614,7 +619,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -694,6 +699,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(84, 84, 84, 1)"
+          },
+          {
+            "part": "label",
+            "channel": "color",
+            "ours": "rgba(36, 36, 36, 1)",
+            "theirs": "rgba(189, 189, 189, 1)"
           },
           {
             "part": "label",
@@ -706,8 +717,8 @@
       },
       {
         "key": "unchecked.above.disabled__focus-visible",
-        "channelsCompared": 44,
-        "channelsEqual": 29,
+        "channelsCompared": 46,
+        "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -715,7 +726,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -795,6 +806,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(84, 84, 84, 1)"
+          },
+          {
+            "part": "label",
+            "channel": "color",
+            "ours": "rgba(36, 36, 36, 1)",
+            "theirs": "rgba(189, 189, 189, 1)"
           },
           {
             "part": "label",
@@ -807,8 +824,8 @@
       },
       {
         "key": "unchecked.above.disabled__active",
-        "channelsCompared": 44,
-        "channelsEqual": 29,
+        "channelsCompared": 46,
+        "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -816,7 +833,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -899,6 +916,12 @@
           },
           {
             "part": "label",
+            "channel": "color",
+            "ours": "rgba(36, 36, 36, 1)",
+            "theirs": "rgba(189, 189, 189, 1)"
+          },
+          {
+            "part": "label",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
@@ -908,8 +931,8 @@
       },
       {
         "key": "unchecked.after.enabled__default",
-        "channelsCompared": 44,
-        "channelsEqual": 43,
+        "channelsCompared": 46,
+        "channelsEqual": 45,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -925,8 +948,8 @@
       },
       {
         "key": "unchecked.after.enabled__hover",
-        "channelsCompared": 44,
-        "channelsEqual": 43,
+        "channelsCompared": 46,
+        "channelsEqual": 45,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -942,8 +965,8 @@
       },
       {
         "key": "unchecked.after.enabled__focus-visible",
-        "channelsCompared": 44,
-        "channelsEqual": 42,
+        "channelsCompared": 46,
+        "channelsEqual": 44,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -965,8 +988,8 @@
       },
       {
         "key": "unchecked.after.enabled__active",
-        "channelsCompared": 44,
-        "channelsEqual": 43,
+        "channelsCompared": 46,
+        "channelsEqual": 45,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -982,8 +1005,8 @@
       },
       {
         "key": "unchecked.after.disabled__default",
-        "channelsCompared": 44,
-        "channelsEqual": 30,
+        "channelsCompared": 46,
+        "channelsEqual": 31,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1065,6 +1088,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(84, 84, 84, 1)"
+          },
+          {
+            "part": "label",
+            "channel": "color",
+            "ours": "rgba(36, 36, 36, 1)",
+            "theirs": "rgba(189, 189, 189, 1)"
           },
           {
             "part": "label",
@@ -1077,8 +1106,8 @@
       },
       {
         "key": "unchecked.after.disabled__hover",
-        "channelsCompared": 44,
-        "channelsEqual": 30,
+        "channelsCompared": 46,
+        "channelsEqual": 31,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1160,6 +1189,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(84, 84, 84, 1)"
+          },
+          {
+            "part": "label",
+            "channel": "color",
+            "ours": "rgba(36, 36, 36, 1)",
+            "theirs": "rgba(189, 189, 189, 1)"
           },
           {
             "part": "label",
@@ -1172,8 +1207,8 @@
       },
       {
         "key": "unchecked.after.disabled__focus-visible",
-        "channelsCompared": 44,
-        "channelsEqual": 30,
+        "channelsCompared": 46,
+        "channelsEqual": 31,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1255,6 +1290,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(84, 84, 84, 1)"
+          },
+          {
+            "part": "label",
+            "channel": "color",
+            "ours": "rgba(36, 36, 36, 1)",
+            "theirs": "rgba(189, 189, 189, 1)"
           },
           {
             "part": "label",
@@ -1267,8 +1308,8 @@
       },
       {
         "key": "unchecked.after.disabled__active",
-        "channelsCompared": 44,
-        "channelsEqual": 30,
+        "channelsCompared": 46,
+        "channelsEqual": 31,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1353,6 +1394,12 @@
           },
           {
             "part": "label",
+            "channel": "color",
+            "ours": "rgba(36, 36, 36, 1)",
+            "theirs": "rgba(189, 189, 189, 1)"
+          },
+          {
+            "part": "label",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
@@ -1362,12 +1409,18 @@
       },
       {
         "key": "unchecked.before.enabled__default",
-        "channelsCompared": 44,
-        "channelsEqual": 43,
+        "channelsCompared": 46,
+        "channelsEqual": 44,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "input",
             "channel": "line-height",
@@ -1379,12 +1432,18 @@
       },
       {
         "key": "unchecked.before.enabled__hover",
-        "channelsCompared": 44,
-        "channelsEqual": 43,
+        "channelsCompared": 46,
+        "channelsEqual": 44,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "input",
             "channel": "line-height",
@@ -1396,12 +1455,18 @@
       },
       {
         "key": "unchecked.before.enabled__focus-visible",
-        "channelsCompared": 44,
-        "channelsEqual": 42,
+        "channelsCompared": 46,
+        "channelsEqual": 43,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "input",
             "channel": "line-height",
@@ -1419,12 +1484,18 @@
       },
       {
         "key": "unchecked.before.enabled__active",
-        "channelsCompared": 44,
-        "channelsEqual": 43,
+        "channelsCompared": 46,
+        "channelsEqual": 44,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "input",
             "channel": "line-height",
@@ -1436,12 +1507,18 @@
       },
       {
         "key": "unchecked.before.disabled__default",
-        "channelsCompared": 44,
+        "channelsCompared": 46,
         "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "input",
             "channel": "border-bottom-color",
@@ -1519,6 +1596,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(84, 84, 84, 1)"
+          },
+          {
+            "part": "label",
+            "channel": "color",
+            "ours": "rgba(36, 36, 36, 1)",
+            "theirs": "rgba(189, 189, 189, 1)"
           },
           {
             "part": "label",
@@ -1531,12 +1614,18 @@
       },
       {
         "key": "unchecked.before.disabled__hover",
-        "channelsCompared": 44,
+        "channelsCompared": 46,
         "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "input",
             "channel": "border-bottom-color",
@@ -1614,6 +1703,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(84, 84, 84, 1)"
+          },
+          {
+            "part": "label",
+            "channel": "color",
+            "ours": "rgba(36, 36, 36, 1)",
+            "theirs": "rgba(189, 189, 189, 1)"
           },
           {
             "part": "label",
@@ -1626,12 +1721,18 @@
       },
       {
         "key": "unchecked.before.disabled__focus-visible",
-        "channelsCompared": 44,
+        "channelsCompared": 46,
         "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "input",
             "channel": "border-bottom-color",
@@ -1709,6 +1810,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(84, 84, 84, 1)"
+          },
+          {
+            "part": "label",
+            "channel": "color",
+            "ours": "rgba(36, 36, 36, 1)",
+            "theirs": "rgba(189, 189, 189, 1)"
           },
           {
             "part": "label",
@@ -1721,12 +1828,18 @@
       },
       {
         "key": "unchecked.before.disabled__active",
-        "channelsCompared": 44,
+        "channelsCompared": 46,
         "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "input",
             "channel": "border-bottom-color",
@@ -1807,6 +1920,12 @@
           },
           {
             "part": "label",
+            "channel": "color",
+            "ours": "rgba(36, 36, 36, 1)",
+            "theirs": "rgba(189, 189, 189, 1)"
+          },
+          {
+            "part": "label",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
@@ -1816,8 +1935,8 @@
       },
       {
         "key": "checked.above.enabled__default",
-        "channelsCompared": 44,
-        "channelsEqual": 42,
+        "channelsCompared": 46,
+        "channelsEqual": 44,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1825,7 +1944,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -1839,8 +1958,8 @@
       },
       {
         "key": "checked.above.enabled__hover",
-        "channelsCompared": 44,
-        "channelsEqual": 42,
+        "channelsCompared": 46,
+        "channelsEqual": 44,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1848,7 +1967,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -1862,8 +1981,8 @@
       },
       {
         "key": "checked.above.enabled__focus-visible",
-        "channelsCompared": 44,
-        "channelsEqual": 41,
+        "channelsCompared": 46,
+        "channelsEqual": 43,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1871,7 +1990,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -1891,8 +2010,8 @@
       },
       {
         "key": "checked.above.enabled__active",
-        "channelsCompared": 44,
-        "channelsEqual": 42,
+        "channelsCompared": 46,
+        "channelsEqual": 44,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1900,7 +2019,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -1914,8 +2033,8 @@
       },
       {
         "key": "checked.above.disabled__default",
-        "channelsCompared": 44,
-        "channelsEqual": 29,
+        "channelsCompared": 46,
+        "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1923,7 +2042,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -2003,6 +2122,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(84, 84, 84, 1)"
+          },
+          {
+            "part": "label",
+            "channel": "color",
+            "ours": "rgba(36, 36, 36, 1)",
+            "theirs": "rgba(189, 189, 189, 1)"
           },
           {
             "part": "label",
@@ -2015,8 +2140,8 @@
       },
       {
         "key": "checked.above.disabled__hover",
-        "channelsCompared": 44,
-        "channelsEqual": 29,
+        "channelsCompared": 46,
+        "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2024,7 +2149,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -2104,6 +2229,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(84, 84, 84, 1)"
+          },
+          {
+            "part": "label",
+            "channel": "color",
+            "ours": "rgba(36, 36, 36, 1)",
+            "theirs": "rgba(189, 189, 189, 1)"
           },
           {
             "part": "label",
@@ -2116,8 +2247,8 @@
       },
       {
         "key": "checked.above.disabled__focus-visible",
-        "channelsCompared": 44,
-        "channelsEqual": 29,
+        "channelsCompared": 46,
+        "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2125,7 +2256,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -2205,6 +2336,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(84, 84, 84, 1)"
+          },
+          {
+            "part": "label",
+            "channel": "color",
+            "ours": "rgba(36, 36, 36, 1)",
+            "theirs": "rgba(189, 189, 189, 1)"
           },
           {
             "part": "label",
@@ -2217,8 +2354,8 @@
       },
       {
         "key": "checked.above.disabled__active",
-        "channelsCompared": 44,
-        "channelsEqual": 29,
+        "channelsCompared": 46,
+        "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2226,7 +2363,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -2309,6 +2446,12 @@
           },
           {
             "part": "label",
+            "channel": "color",
+            "ours": "rgba(36, 36, 36, 1)",
+            "theirs": "rgba(189, 189, 189, 1)"
+          },
+          {
+            "part": "label",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
@@ -2318,8 +2461,8 @@
       },
       {
         "key": "checked.after.enabled__default",
-        "channelsCompared": 44,
-        "channelsEqual": 43,
+        "channelsCompared": 46,
+        "channelsEqual": 45,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2335,8 +2478,8 @@
       },
       {
         "key": "checked.after.enabled__hover",
-        "channelsCompared": 44,
-        "channelsEqual": 43,
+        "channelsCompared": 46,
+        "channelsEqual": 45,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2352,8 +2495,8 @@
       },
       {
         "key": "checked.after.enabled__focus-visible",
-        "channelsCompared": 44,
-        "channelsEqual": 42,
+        "channelsCompared": 46,
+        "channelsEqual": 44,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2375,8 +2518,8 @@
       },
       {
         "key": "checked.after.enabled__active",
-        "channelsCompared": 44,
-        "channelsEqual": 43,
+        "channelsCompared": 46,
+        "channelsEqual": 45,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2392,8 +2535,8 @@
       },
       {
         "key": "checked.after.disabled__default",
-        "channelsCompared": 44,
-        "channelsEqual": 30,
+        "channelsCompared": 46,
+        "channelsEqual": 31,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2475,6 +2618,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(84, 84, 84, 1)"
+          },
+          {
+            "part": "label",
+            "channel": "color",
+            "ours": "rgba(36, 36, 36, 1)",
+            "theirs": "rgba(189, 189, 189, 1)"
           },
           {
             "part": "label",
@@ -2487,8 +2636,8 @@
       },
       {
         "key": "checked.after.disabled__hover",
-        "channelsCompared": 44,
-        "channelsEqual": 30,
+        "channelsCompared": 46,
+        "channelsEqual": 31,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2570,6 +2719,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(84, 84, 84, 1)"
+          },
+          {
+            "part": "label",
+            "channel": "color",
+            "ours": "rgba(36, 36, 36, 1)",
+            "theirs": "rgba(189, 189, 189, 1)"
           },
           {
             "part": "label",
@@ -2582,8 +2737,8 @@
       },
       {
         "key": "checked.after.disabled__focus-visible",
-        "channelsCompared": 44,
-        "channelsEqual": 30,
+        "channelsCompared": 46,
+        "channelsEqual": 31,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2665,6 +2820,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(84, 84, 84, 1)"
+          },
+          {
+            "part": "label",
+            "channel": "color",
+            "ours": "rgba(36, 36, 36, 1)",
+            "theirs": "rgba(189, 189, 189, 1)"
           },
           {
             "part": "label",
@@ -2677,8 +2838,8 @@
       },
       {
         "key": "checked.after.disabled__active",
-        "channelsCompared": 44,
-        "channelsEqual": 30,
+        "channelsCompared": 46,
+        "channelsEqual": 31,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2763,6 +2924,12 @@
           },
           {
             "part": "label",
+            "channel": "color",
+            "ours": "rgba(36, 36, 36, 1)",
+            "theirs": "rgba(189, 189, 189, 1)"
+          },
+          {
+            "part": "label",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
@@ -2772,12 +2939,18 @@
       },
       {
         "key": "checked.before.enabled__default",
-        "channelsCompared": 44,
-        "channelsEqual": 43,
+        "channelsCompared": 46,
+        "channelsEqual": 44,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "input",
             "channel": "line-height",
@@ -2789,12 +2962,18 @@
       },
       {
         "key": "checked.before.enabled__hover",
-        "channelsCompared": 44,
-        "channelsEqual": 43,
+        "channelsCompared": 46,
+        "channelsEqual": 44,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "input",
             "channel": "line-height",
@@ -2806,12 +2985,18 @@
       },
       {
         "key": "checked.before.enabled__focus-visible",
-        "channelsCompared": 44,
-        "channelsEqual": 42,
+        "channelsCompared": 46,
+        "channelsEqual": 43,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "input",
             "channel": "line-height",
@@ -2829,12 +3014,18 @@
       },
       {
         "key": "checked.before.enabled__active",
-        "channelsCompared": 44,
-        "channelsEqual": 43,
+        "channelsCompared": 46,
+        "channelsEqual": 44,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "input",
             "channel": "line-height",
@@ -2846,12 +3037,18 @@
       },
       {
         "key": "checked.before.disabled__default",
-        "channelsCompared": 44,
+        "channelsCompared": 46,
         "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "input",
             "channel": "border-bottom-color",
@@ -2929,6 +3126,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(84, 84, 84, 1)"
+          },
+          {
+            "part": "label",
+            "channel": "color",
+            "ours": "rgba(36, 36, 36, 1)",
+            "theirs": "rgba(189, 189, 189, 1)"
           },
           {
             "part": "label",
@@ -2941,12 +3144,18 @@
       },
       {
         "key": "checked.before.disabled__hover",
-        "channelsCompared": 44,
+        "channelsCompared": 46,
         "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "input",
             "channel": "border-bottom-color",
@@ -3024,6 +3233,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(84, 84, 84, 1)"
+          },
+          {
+            "part": "label",
+            "channel": "color",
+            "ours": "rgba(36, 36, 36, 1)",
+            "theirs": "rgba(189, 189, 189, 1)"
           },
           {
             "part": "label",
@@ -3036,12 +3251,18 @@
       },
       {
         "key": "checked.before.disabled__focus-visible",
-        "channelsCompared": 44,
+        "channelsCompared": 46,
         "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "input",
             "channel": "border-bottom-color",
@@ -3122,6 +3343,12 @@
           },
           {
             "part": "label",
+            "channel": "color",
+            "ours": "rgba(36, 36, 36, 1)",
+            "theirs": "rgba(189, 189, 189, 1)"
+          },
+          {
+            "part": "label",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
@@ -3131,12 +3358,18 @@
       },
       {
         "key": "checked.before.disabled__active",
-        "channelsCompared": 44,
+        "channelsCompared": 46,
         "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "input",
             "channel": "border-bottom-color",
@@ -3214,6 +3447,12 @@
             "channel": "text-emphasis-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(84, 84, 84, 1)"
+          },
+          {
+            "part": "label",
+            "channel": "color",
+            "ours": "rgba(36, 36, 36, 1)",
+            "theirs": "rgba(189, 189, 189, 1)"
           },
           {
             "part": "label",

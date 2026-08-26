@@ -18972,8 +18972,23 @@
         "root": {
           "layout": {
             "display": "flex",
+            "direction": "row",
             "align": "center",
             "justify": "center"
+          },
+          "layoutByProp": {
+            "prop": "labelPosition",
+            "map": {
+              "above": {
+                "direction": "column-reverse"
+              },
+              "below": {
+                "direction": "column"
+              },
+              "before": {
+                "direction": "row-reverse"
+              }
+            }
           },
           "parts": {
             "spinner": {
@@ -19280,7 +19295,19 @@
         "root": {
           "layout": {
             "display": "flex",
+            "direction": "row",
             "align": "start"
+          },
+          "layoutByProp": {
+            "prop": "labelPosition",
+            "map": {
+              "above": {
+                "direction": "column-reverse"
+              },
+              "before": {
+                "direction": "row-reverse"
+              }
+            }
           },
           "parts": {
             "input": {
@@ -24971,12 +24998,77 @@
         {
           "part": "root",
           "kind": "channel",
+          "channel": "column-gap",
+          "value": "{imported.spinner.root.column-gap}",
+          "reason": "the cross axis of a VERTICAL stack — Figma has one itemSpacing and it is the main axis.",
+          "variants": {
+            "count": 32,
+            "of": 64,
+            "names": [
+              "Size=Medium, Appearance=Primary, Label Position=Above",
+              "Size=Medium, Appearance=Primary, Label Position=Below",
+              "Size=Medium, Appearance=Inverted, Label Position=Above",
+              "Size=Medium, Appearance=Inverted, Label Position=Below",
+              "Size=Extra Tiny, Appearance=Primary, Label Position=Above",
+              "Size=Extra Tiny, Appearance=Primary, Label Position=Below",
+              "Size=Extra Tiny, Appearance=Inverted, Label Position=Above",
+              "Size=Extra Tiny, Appearance=Inverted, Label Position=Below",
+              "Size=Tiny, Appearance=Primary, Label Position=Above",
+              "Size=Tiny, Appearance=Primary, Label Position=Below",
+              "Size=Tiny, Appearance=Inverted, Label Position=Above",
+              "Size=Tiny, Appearance=Inverted, Label Position=Below",
+              "Size=Extra Small, Appearance=Primary, Label Position=Above",
+              "Size=Extra Small, Appearance=Primary, Label Position=Below",
+              "Size=Extra Small, Appearance=Inverted, Label Position=Above",
+              "Size=Extra Small, Appearance=Inverted, Label Position=Below",
+              "Size=Small, Appearance=Primary, Label Position=Above",
+              "Size=Small, Appearance=Primary, Label Position=Below",
+              "Size=Small, Appearance=Inverted, Label Position=Above",
+              "Size=Small, Appearance=Inverted, Label Position=Below",
+              "Size=Large, Appearance=Primary, Label Position=Above",
+              "Size=Large, Appearance=Primary, Label Position=Below",
+              "Size=Large, Appearance=Inverted, Label Position=Above",
+              "Size=Large, Appearance=Inverted, Label Position=Below"
+            ],
+            "more": 8
+          }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
           "channel": "row-gap",
           "value": "{imported.spinner.root.row-gap}",
           "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
           "variants": {
-            "count": 64,
-            "of": 64
+            "count": 32,
+            "of": 64,
+            "names": [
+              "Size=Medium, Appearance=Primary, Label Position=After",
+              "Size=Medium, Appearance=Primary, Label Position=Before",
+              "Size=Medium, Appearance=Inverted, Label Position=After",
+              "Size=Medium, Appearance=Inverted, Label Position=Before",
+              "Size=Extra Tiny, Appearance=Primary, Label Position=After",
+              "Size=Extra Tiny, Appearance=Primary, Label Position=Before",
+              "Size=Extra Tiny, Appearance=Inverted, Label Position=After",
+              "Size=Extra Tiny, Appearance=Inverted, Label Position=Before",
+              "Size=Tiny, Appearance=Primary, Label Position=After",
+              "Size=Tiny, Appearance=Primary, Label Position=Before",
+              "Size=Tiny, Appearance=Inverted, Label Position=After",
+              "Size=Tiny, Appearance=Inverted, Label Position=Before",
+              "Size=Extra Small, Appearance=Primary, Label Position=After",
+              "Size=Extra Small, Appearance=Primary, Label Position=Before",
+              "Size=Extra Small, Appearance=Inverted, Label Position=After",
+              "Size=Extra Small, Appearance=Inverted, Label Position=Before",
+              "Size=Small, Appearance=Primary, Label Position=After",
+              "Size=Small, Appearance=Primary, Label Position=Before",
+              "Size=Small, Appearance=Inverted, Label Position=After",
+              "Size=Small, Appearance=Inverted, Label Position=Before",
+              "Size=Large, Appearance=Primary, Label Position=After",
+              "Size=Large, Appearance=Primary, Label Position=Before",
+              "Size=Large, Appearance=Inverted, Label Position=After",
+              "Size=Large, Appearance=Inverted, Label Position=Before"
+            ],
+            "more": 8
           }
         },
         {

@@ -131,13 +131,6 @@ const COMPONENTS = [
                   },
                   "children": [
                     {
-                      "type": "svg",
-                      "name": "icon",
-                      "svg": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"#161616\"/></svg>",
-                      "svgPaintVar": "imported/accordion/icon/fill",
-                      "iconSize": 16
-                    },
-                    {
                       "type": "frame",
                       "name": "label",
                       "layout": {
@@ -170,6 +163,13 @@ const COMPONENTS = [
                       "margins": {
                         "right": 0
                       }
+                    },
+                    {
+                      "type": "svg",
+                      "name": "icon",
+                      "svg": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"#161616\"/></svg>",
+                      "svgPaintVar": "imported/accordion/icon/fill",
+                      "iconSize": 16
                     }
                   ],
                   "fillW": true
@@ -297,13 +297,6 @@ const COMPONENTS = [
                   },
                   "children": [
                     {
-                      "type": "svg",
-                      "name": "icon",
-                      "svg": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"#161616\"/></svg>",
-                      "svgPaintVar": "imported/accordion/icon/fill",
-                      "iconSize": 16
-                    },
-                    {
                       "type": "frame",
                       "name": "label",
                       "layout": {
@@ -336,6 +329,13 @@ const COMPONENTS = [
                       "margins": {
                         "right": 0
                       }
+                    },
+                    {
+                      "type": "svg",
+                      "name": "icon",
+                      "svg": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"#161616\"/></svg>",
+                      "svgPaintVar": "imported/accordion/icon/fill",
+                      "iconSize": 16
                     }
                   ],
                   "fillW": true
@@ -463,13 +463,6 @@ const COMPONENTS = [
                   },
                   "children": [
                     {
-                      "type": "svg",
-                      "name": "icon",
-                      "svg": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"#161616\"/></svg>",
-                      "svgPaintVar": "imported/accordion/icon/fill",
-                      "iconSize": 16
-                    },
-                    {
                       "type": "frame",
                       "name": "label",
                       "layout": {
@@ -502,6 +495,13 @@ const COMPONENTS = [
                       "margins": {
                         "right": 0
                       }
+                    },
+                    {
+                      "type": "svg",
+                      "name": "icon",
+                      "svg": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"#161616\"/></svg>",
+                      "svgPaintVar": "imported/accordion/icon/fill",
+                      "iconSize": 16
                     }
                   ],
                   "fillW": true
@@ -1127,13 +1127,6 @@ const COMPONENTS = [
                   },
                   "children": [
                     {
-                      "type": "svg",
-                      "name": "icon",
-                      "svg": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"#161616\"/></svg>",
-                      "svgPaintVar": "imported/accordion/icon/fill",
-                      "iconSize": 16
-                    },
-                    {
                       "type": "frame",
                       "name": "label",
                       "layout": {
@@ -1166,6 +1159,13 @@ const COMPONENTS = [
                       "margins": {
                         "right": 0
                       }
+                    },
+                    {
+                      "type": "svg",
+                      "name": "icon",
+                      "svg": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"#161616\"/></svg>",
+                      "svgPaintVar": "imported/accordion/icon/fill",
+                      "iconSize": 16
                     }
                   ],
                   "fillW": true
@@ -15805,7 +15805,8 @@ const COMPONENTS = [
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "wrap": true
                   },
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
@@ -15949,7 +15950,8 @@ const COMPONENTS = [
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "wrap": true
                   },
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
@@ -16092,7 +16094,8 @@ const COMPONENTS = [
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "wrap": true
                   },
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
@@ -16235,7 +16238,8 @@ const COMPONENTS = [
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "wrap": true
                   },
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
@@ -16378,7 +16382,8 @@ const COMPONENTS = [
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "wrap": true
                   },
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
@@ -16521,7 +16526,8 @@ const COMPONENTS = [
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "wrap": true
                   },
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
@@ -16664,7 +16670,8 @@ const COMPONENTS = [
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "wrap": true
                   },
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
@@ -16807,7 +16814,8 @@ const COMPONENTS = [
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "wrap": true
                   },
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
@@ -16950,7 +16958,8 @@ const COMPONENTS = [
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "wrap": true
                   },
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
@@ -17093,7 +17102,8 @@ const COMPONENTS = [
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "wrap": true
                   },
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
@@ -17236,7 +17246,8 @@ const COMPONENTS = [
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "wrap": true
                   },
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
@@ -17379,7 +17390,8 @@ const COMPONENTS = [
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "wrap": true
                   },
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
@@ -18218,6 +18230,7 @@ function applyFrameSpec(node, spec) {
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
+  if (l.wrap && node.layoutMode === 'HORIZONTAL') node.layoutWrap = 'WRAP';
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
@@ -19683,8 +19696,7 @@ const COMPONENTS = [
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "SPACE_BETWEEN",
-                        "counter": "MIN",
-                        "stretchChildren": true
+                        "counter": "BASELINE"
                       },
                       "grow": true,
                       "children": [
@@ -19727,8 +19739,7 @@ const COMPONENTS = [
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "SPACE_BETWEEN",
-                        "counter": "MIN",
-                        "stretchChildren": true
+                        "counter": "BASELINE"
                       },
                       "grow": true,
                       "children": [
@@ -20071,8 +20082,7 @@ const COMPONENTS = [
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "SPACE_BETWEEN",
-                        "counter": "MIN",
-                        "stretchChildren": true
+                        "counter": "BASELINE"
                       },
                       "grow": true,
                       "children": [
@@ -20115,8 +20125,7 @@ const COMPONENTS = [
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "SPACE_BETWEEN",
-                        "counter": "MIN",
-                        "stretchChildren": true
+                        "counter": "BASELINE"
                       },
                       "grow": true,
                       "children": [
@@ -20459,8 +20468,7 @@ const COMPONENTS = [
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "SPACE_BETWEEN",
-                        "counter": "MIN",
-                        "stretchChildren": true
+                        "counter": "BASELINE"
                       },
                       "grow": true,
                       "children": [
@@ -20503,8 +20511,7 @@ const COMPONENTS = [
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "SPACE_BETWEEN",
-                        "counter": "MIN",
-                        "stretchChildren": true
+                        "counter": "BASELINE"
                       },
                       "grow": true,
                       "children": [
@@ -20847,8 +20854,7 @@ const COMPONENTS = [
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "SPACE_BETWEEN",
-                        "counter": "MIN",
-                        "stretchChildren": true
+                        "counter": "BASELINE"
                       },
                       "grow": true,
                       "children": [
@@ -20891,8 +20897,7 @@ const COMPONENTS = [
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "SPACE_BETWEEN",
-                        "counter": "MIN",
-                        "stretchChildren": true
+                        "counter": "BASELINE"
                       },
                       "grow": true,
                       "children": [
