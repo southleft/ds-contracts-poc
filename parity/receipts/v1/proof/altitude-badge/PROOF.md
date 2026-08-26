@@ -136,3 +136,27 @@ npx tsx packages/cli/src/cli.ts figma bundle examples/altitude/contracts \
 
 - **The mint used one workaround that is not part of the product.** The Figma plugin sandbox blocks the AsyncFunction constructor, so the emitted script was fetched over `http://localhost` (a domain the bridge plugin's manifest already allows) and run through `new Function`. That is a harness detail of driving the plugin from an agent; the bytes executed are the emitted script, unmodified. A human does this by pasting the bundle into the plugin's Build tab.
 - **`ds-contracts extract --computed` mis-resolves its own repo root.** Run through the CLI shell it computes `REPO` from the compiled chunk's location (`packages/cli/dist/../..` = `packages/`), so `tokens.minted` and the bundled font directory are looked for under `<repo>/packages/…` and the run dies by name before a browser starts. `--root` fixes the first path and not the second. The repo-native `npm run extract:computed` (which is what `PROVENANCE.md` documents) is unaffected, and that is what this proof used. Filed here as a finding, not fixed in this branch.
+
+---
+
+## The finding this run turned up on the way — the corpus was hand-patched
+
+Re-running the chain over the whole library exposed something worth naming: **two of the eight committed altitude contracts on `main` carry facts that `promote-floor.mjs` cannot reproduce from the committed seeds.**
+
+- `chip.contract.json` — prop `type`, enum member `"default"`, described in the contract itself as
+  *"FC-ENUM-HOLE: capture seed only listed squared; the absent-attribute (pill) rendering is the developed default…"*
+- `divider.contract.json` — prop `variant`, enum member `"default"` (the horizontal rule), plus its `literalsByProp` `height: 1px`, described the same way.
+
+Neither `examples/altitude/contracts-seed/chip.contract.json` nor `…/divider.contract.json` carries them. The capture cannot see them either — that is precisely what "enum hole" means: the library renders the absent-attribute case, and there is no attribute value to sweep. So a clean re-run of the documented pipeline **silently drops two canvas cells** (Chip `Type=Default`, Divider `Variant=Default`), and the census manifest drifts to match.
+
+I did not paper over it and I did not hand-patch it again: this branch **restores those two contracts to their `main` bytes** so the proof introduces no canvas regression, and the hole is reported here. The fix belongs in the seeds (a human-authored fact belongs where humans author), and it is not this branch's job.
+
+Everything else the fresh capture changed was **additive** — avatar, button, heading and iconclose all gained facts (`font-family`, `color`, per-size `height`/`width`), and chip gained a `focus-visible` state preview the old contract did not have.
+
+### One more, smaller
+
+`examples/altitude/contracts/badge.anchors.json` lost all 40 provenance anchors in the fresh promotion, while the library-wide source-alias count went **up** (41 → 47). Badge's `background-color` channels moved into `tokensByProp` and the anchor writer did not follow them there. Not visible on the canvas; worth a look before anyone relies on badge write-back.
+
+### And the doc numbers moved
+
+The re-capture changed the capture-floor totals, so five docs were re-derived: **719,534** style cells (was 718,018), **86.8%** mean computed-style equality (was 86.7%), **86.0%** cell-weighted (was 85.9%). `npm run docs:check` is the gate that caught it.
