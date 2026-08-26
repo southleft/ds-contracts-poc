@@ -11,6 +11,22 @@
       "selector": ".al-c-badge--top-left, .al-c-badge--top-right, .al-c-badge--bottom-left, .al-c-badge--bottom-right"
     },
     {
+      "leaf": "imported.avatar.root.height.sm",
+      "token": "theme-icon-xl",
+      "part": "root",
+      "cssProperty": "height",
+      "varName": "--al-theme-icon-xl",
+      "selector": ".al-c-avatar--sm"
+    },
+    {
+      "leaf": "imported.avatar.root.height.unset",
+      "token": "theme-icon-xxxl",
+      "part": "root",
+      "cssProperty": "height",
+      "varName": "--al-theme-icon-xxxl",
+      "selector": ".al-c-avatar"
+    },
+    {
       "leaf": "imported.avatar.root.line-height.sm",
       "token": "theme-icon-xl",
       "part": "root",
@@ -23,6 +39,22 @@
       "token": "theme-icon-xxxl",
       "part": "root",
       "cssProperty": "line-height",
+      "varName": "--al-theme-icon-xxxl",
+      "selector": ".al-c-avatar"
+    },
+    {
+      "leaf": "imported.avatar.root.width.sm",
+      "token": "theme-icon-xl",
+      "part": "root",
+      "cssProperty": "width",
+      "varName": "--al-theme-icon-xl",
+      "selector": ".al-c-avatar--sm"
+    },
+    {
+      "leaf": "imported.avatar.root.width.unset",
+      "token": "theme-icon-xxxl",
+      "part": "root",
+      "cssProperty": "width",
       "varName": "--al-theme-icon-xxxl",
       "selector": ".al-c-avatar"
     }

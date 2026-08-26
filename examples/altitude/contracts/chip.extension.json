@@ -471,36 +471,7 @@
       }
     ]
   },
-  "codeOnlyChannels": [
-    {
-      "part": "root",
-      "channel": "border-bottom-style",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "none",
-      "distinctValues": 2
-    },
-    {
-      "part": "root",
-      "channel": "border-left-style",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "none",
-      "distinctValues": 2
-    },
-    {
-      "part": "root",
-      "channel": "border-right-style",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "none",
-      "distinctValues": 2
-    },
-    {
-      "part": "root",
-      "channel": "border-top-style",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "none",
-      "distinctValues": 2
-    }
-  ],
+  "codeOnlyChannels": [],
   "stateOverflow": [],
   "overflowBindings": [],
   "pairwiseRefusals": [],
@@ -511,11 +482,22 @@
   },
   "bindingContradictions": [],
   "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [],
+  "interactionOnlyPlaneDropCount": 0,
   "structureReceipts": [],
   "styledChannelReceipts": [
-    "text-part-typography-carried: root — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "control-equal-drop: root — 675 of 715 admitted channels compared EQUAL to the <button> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "text-part-typography-carried: root — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "control-equal-drop: root — 351 channel(s) EQUAL to the <button> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 2 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop-authored: root.font-style = normal (declared by --al-typography-preset-14 via the `font` shorthand) — dropped by the control-element delta because the <button> control resolves to the SAME value, but the library's own stylesheet declares this channel on this element: the control shares the value only because it is rendered inside the same page with the same global CSS, and the emitted CSS reproduces the component's rules and NOT the page's. This is the shape of shadcn's invisible Input border (`* { border-color: var(--border) }`) and Polaris' inkless text (provider `color` reaching the control by inheritance).",
+    "control-equal-drop-authored: root.font-variant = normal (declared by --al-typography-preset-14 via the `font` shorthand) — dropped by the control-element delta because the <button> control resolves to the SAME value, but the library's own stylesheet declares this channel on this element: the control shares the value only because it is rendered inside the same page with the same global CSS, and the emitted CSS reproduces the component's rules and NOT the page's. This is the shape of shadcn's invisible Input border (`* { border-color: var(--border) }`) and Polaris' inkless text (provider `color` reaching the control by inheritance).",
+    "geometry-excluded: root — block-size 28px, height 28px, inline-size 52.2812px, perspective-origin 26.1406px 14px, transform-origin 26.1406px 14px, width 52.2812px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (root); -webkit-text-stroke-color (root)",
-    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold."
+    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
+    "border-style-by-axis-carried: root.border-bottom-style varies by \"variant\" (unset=none, secondary=solid, info=none, success=none, warning=none, danger=none) — carried as per-value stylesWhen rules (code: `.variant-<value> { border-bottom-style: … }`; canvas: a dashPattern on that variant's stroke)",
+    "border-style-by-axis-carried: root.border-left-style varies by \"variant\" (unset=none, secondary=solid, info=none, success=none, warning=none, danger=none) — carried as per-value stylesWhen rules (code: `.variant-<value> { border-left-style: … }`; canvas: a dashPattern on that variant's stroke)",
+    "border-style-by-axis-carried: root.border-right-style varies by \"variant\" (unset=none, secondary=solid, info=none, success=none, warning=none, danger=none) — carried as per-value stylesWhen rules (code: `.variant-<value> { border-right-style: … }`; canvas: a dashPattern on that variant's stroke)",
+    "border-style-by-axis-carried: root.border-top-style varies by \"variant\" (unset=none, secondary=solid, info=none, success=none, warning=none, danger=none) — carried as per-value stylesWhen rules (code: `.variant-<value> { border-top-style: … }`; canvas: a dashPattern on that variant's stroke)"
   ],
   "frontierReceipts": [
     "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",

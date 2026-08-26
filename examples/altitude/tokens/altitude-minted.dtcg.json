@@ -491,6 +491,10 @@
         "$value": "16px",
         "$type": "dimension"
       },
+      "color-101010": {
+        "$value": "#101010",
+        "$type": "color"
+      },
       "num-600": {
         "$value": "600",
         "$type": "number"
@@ -500,23 +504,23 @@
       "root": {
         "background-color": {
           "unset": {
-            "$value": "{theme-color-background-default-stronger}",
+            "$value": "#f4f3f1",
             "$type": "color"
           },
           "info": {
-            "$value": "{theme-color-background-info-default}",
+            "$value": "#4375ff",
             "$type": "color"
           },
           "success": {
-            "$value": "{theme-color-background-success-default}",
+            "$value": "#3ee48c",
             "$type": "color"
           },
           "warning": {
-            "$value": "{theme-color-background-warning-default}",
+            "$value": "#ffab00",
             "$type": "color"
           },
           "danger": {
-            "$value": "{theme-color-background-danger-default}",
+            "$value": "#f05735",
             "$type": "color"
           }
         },
@@ -1172,7 +1176,27 @@
             "$type": "dimension"
           }
         },
+        "height": {
+          "unset": {
+            "$value": "{theme-icon-xxxl}",
+            "$type": "dimension"
+          },
+          "sm": {
+            "$value": "{theme-icon-xl}",
+            "$type": "dimension"
+          }
+        },
         "line-height": {
+          "unset": {
+            "$value": "{theme-icon-xxxl}",
+            "$type": "dimension"
+          },
+          "sm": {
+            "$value": "{theme-icon-xl}",
+            "$type": "dimension"
+          }
+        },
+        "width": {
           "unset": {
             "$value": "{theme-icon-xxxl}",
             "$type": "dimension"
@@ -1258,6 +1282,10 @@
     },
     "heading": {
       "root": {
+        "color": {
+          "$value": "{theme-color-content-default}",
+          "$type": "color"
+        },
         "font-size": {
           "unset": {
             "$value": "20px",
@@ -1351,6 +1379,20 @@
         "color": {
           "$value": "#808080",
           "$type": "color"
+        },
+        "height": {
+          "unset": {
+            "$value": "{theme-border-width}",
+            "$type": "dimension"
+          },
+          "vertical": {
+            "$value": "64px",
+            "$type": "dimension"
+          }
+        },
+        "line-height": {
+          "$value": "24px",
+          "$type": "dimension"
         },
         "min-height": {
           "$value": "0px",

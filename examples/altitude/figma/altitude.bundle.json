@@ -5174,6 +5174,10 @@
             "$value": "16px",
             "$type": "dimension"
           },
+          "color-101010": {
+            "$value": "#101010",
+            "$type": "color"
+          },
           "num-600": {
             "$value": "600",
             "$type": "number"
@@ -5183,23 +5187,23 @@
           "root": {
             "background-color": {
               "unset": {
-                "$value": "{theme-color-background-default-stronger}",
+                "$value": "#f4f3f1",
                 "$type": "color"
               },
               "info": {
-                "$value": "{theme-color-background-info-default}",
+                "$value": "#4375ff",
                 "$type": "color"
               },
               "success": {
-                "$value": "{theme-color-background-success-default}",
+                "$value": "#3ee48c",
                 "$type": "color"
               },
               "warning": {
-                "$value": "{theme-color-background-warning-default}",
+                "$value": "#ffab00",
                 "$type": "color"
               },
               "danger": {
-                "$value": "{theme-color-background-danger-default}",
+                "$value": "#f05735",
                 "$type": "color"
               }
             },
@@ -5855,7 +5859,27 @@
                 "$type": "dimension"
               }
             },
+            "height": {
+              "unset": {
+                "$value": "{theme-icon-xxxl}",
+                "$type": "dimension"
+              },
+              "sm": {
+                "$value": "{theme-icon-xl}",
+                "$type": "dimension"
+              }
+            },
             "line-height": {
+              "unset": {
+                "$value": "{theme-icon-xxxl}",
+                "$type": "dimension"
+              },
+              "sm": {
+                "$value": "{theme-icon-xl}",
+                "$type": "dimension"
+              }
+            },
+            "width": {
               "unset": {
                 "$value": "{theme-icon-xxxl}",
                 "$type": "dimension"
@@ -5941,6 +5965,10 @@
         },
         "heading": {
           "root": {
+            "color": {
+              "$value": "{theme-color-content-default}",
+              "$type": "color"
+            },
             "font-size": {
               "unset": {
                 "$value": "20px",
@@ -6035,6 +6063,20 @@
               "$value": "#808080",
               "$type": "color"
             },
+            "height": {
+              "unset": {
+                "$value": "{theme-border-width}",
+                "$type": "dimension"
+              },
+              "vertical": {
+                "$value": "64px",
+                "$type": "dimension"
+              }
+            },
+            "line-height": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
             "min-height": {
               "$value": "0px",
               "$type": "dimension"
@@ -6113,14 +6155,14 @@
     }
   },
   "icons": {
-    "icon-close-root-lg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.2 4.1 C 17.6 3.7 17.6 3.1 17.2 2.8 C 16.8 2.4 16.2 2.4 15.9 2.8 L 10 8.7 L 4.1 2.8 C 3.7 2.4 3.1 2.4 2.8 2.8 C 2.4 3.2 2.4 3.8 2.8 4.1 L 8.7 10 L 2.8 15.9 C 2.4 16.3 2.4 16.9 2.8 17.2 C 3.2 17.6 3.8 17.6 4.1 17.2 L 10 11.3 L 15.9 17.2 C 16.3 17.6 16.9 17.6 17.2 17.2 C 17.6 16.8 17.6 16.2 17.2 15.9 L 11.3 10 L 17.2 4.1 Z\" fill=\"currentColor\"/></svg>",
+    "icon-close-root-lg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.2 4.1 C 17.6 3.7 17.6 3.1 17.2 2.8 C 16.8 2.4 16.2 2.4 15.9 2.8 L 10 8.7 L 4.1 2.8 C 3.7 2.4 3.1 2.4 2.8 2.8 C 2.4 3.2 2.4 3.8 2.8 4.1 L 8.7 10 L 2.8 15.9 C 2.4 16.3 2.4 16.9 2.8 17.2 C 3.2 17.6 3.8 17.6 4.1 17.2 L 10 11.3 L 15.9 17.2 C 16.3 17.6 16.9 17.6 17.2 17.2 C 17.6 16.8 17.6 16.2 17.2 15.9 L 11.3 10 L 17.2 4.1 Z\" fill=\"currentColor\"/></svg>",
     "icon-close-root-md": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.2 4.1 C 17.6 3.7 17.6 3.1 17.2 2.8 C 16.8 2.4 16.2 2.4 15.9 2.8 L 10 8.7 L 4.1 2.8 C 3.7 2.4 3.1 2.4 2.8 2.8 C 2.4 3.2 2.4 3.8 2.8 4.1 L 8.7 10 L 2.8 15.9 C 2.4 16.3 2.4 16.9 2.8 17.2 C 3.2 17.6 3.8 17.6 4.1 17.2 L 10 11.3 L 15.9 17.2 C 16.3 17.6 16.9 17.6 17.2 17.2 C 17.6 16.8 17.6 16.2 17.2 15.9 L 11.3 10 L 17.2 4.1 Z\" fill=\"currentColor\"/></svg>",
-    "icon-close-root-sm": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.2 4.1 C 17.6 3.7 17.6 3.1 17.2 2.8 C 16.8 2.4 16.2 2.4 15.9 2.8 L 10 8.7 L 4.1 2.8 C 3.7 2.4 3.1 2.4 2.8 2.8 C 2.4 3.2 2.4 3.8 2.8 4.1 L 8.7 10 L 2.8 15.9 C 2.4 16.3 2.4 16.9 2.8 17.2 C 3.2 17.6 3.8 17.6 4.1 17.2 L 10 11.3 L 15.9 17.2 C 16.3 17.6 16.9 17.6 17.2 17.2 C 17.6 16.8 17.6 16.2 17.2 15.9 L 11.3 10 L 17.2 4.1 Z\" fill=\"currentColor\"/></svg>",
-    "icon-close-root-unset": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.2 4.1 C 17.6 3.7 17.6 3.1 17.2 2.8 C 16.8 2.4 16.2 2.4 15.9 2.8 L 10 8.7 L 4.1 2.8 C 3.7 2.4 3.1 2.4 2.8 2.8 C 2.4 3.2 2.4 3.8 2.8 4.1 L 8.7 10 L 2.8 15.9 C 2.4 16.3 2.4 16.9 2.8 17.2 C 3.2 17.6 3.8 17.6 4.1 17.2 L 10 11.3 L 15.9 17.2 C 16.3 17.6 16.9 17.6 17.2 17.2 C 17.6 16.8 17.6 16.2 17.2 15.9 L 11.3 10 L 17.2 4.1 Z\" fill=\"currentColor\"/></svg>",
-    "icon-close-root-xl": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.2 4.1 C 17.6 3.7 17.6 3.1 17.2 2.8 C 16.8 2.4 16.2 2.4 15.9 2.8 L 10 8.7 L 4.1 2.8 C 3.7 2.4 3.1 2.4 2.8 2.8 C 2.4 3.2 2.4 3.8 2.8 4.1 L 8.7 10 L 2.8 15.9 C 2.4 16.3 2.4 16.9 2.8 17.2 C 3.2 17.6 3.8 17.6 4.1 17.2 L 10 11.3 L 15.9 17.2 C 16.3 17.6 16.9 17.6 17.2 17.2 C 17.6 16.8 17.6 16.2 17.2 15.9 L 11.3 10 L 17.2 4.1 Z\" fill=\"currentColor\"/></svg>",
-    "icon-close-root-xs": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.2 4.1 C 17.6 3.7 17.6 3.1 17.2 2.8 C 16.8 2.4 16.2 2.4 15.9 2.8 L 10 8.7 L 4.1 2.8 C 3.7 2.4 3.1 2.4 2.8 2.8 C 2.4 3.2 2.4 3.8 2.8 4.1 L 8.7 10 L 2.8 15.9 C 2.4 16.3 2.4 16.9 2.8 17.2 C 3.2 17.6 3.8 17.6 4.1 17.2 L 10 11.3 L 15.9 17.2 C 16.3 17.6 16.9 17.6 17.2 17.2 C 17.6 16.8 17.6 16.2 17.2 15.9 L 11.3 10 L 17.2 4.1 Z\" fill=\"currentColor\"/></svg>",
-    "icon-close-root-xxl": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.2 4.1 C 17.6 3.7 17.6 3.1 17.2 2.8 C 16.8 2.4 16.2 2.4 15.9 2.8 L 10 8.7 L 4.1 2.8 C 3.7 2.4 3.1 2.4 2.8 2.8 C 2.4 3.2 2.4 3.8 2.8 4.1 L 8.7 10 L 2.8 15.9 C 2.4 16.3 2.4 16.9 2.8 17.2 C 3.2 17.6 3.8 17.6 4.1 17.2 L 10 11.3 L 15.9 17.2 C 16.3 17.6 16.9 17.6 17.2 17.2 C 17.6 16.8 17.6 16.2 17.2 15.9 L 11.3 10 L 17.2 4.1 Z\" fill=\"currentColor\"/></svg>",
-    "icon-close-root-xxxl": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.2 4.1 C 17.6 3.7 17.6 3.1 17.2 2.8 C 16.8 2.4 16.2 2.4 15.9 2.8 L 10 8.7 L 4.1 2.8 C 3.7 2.4 3.1 2.4 2.8 2.8 C 2.4 3.2 2.4 3.8 2.8 4.1 L 8.7 10 L 2.8 15.9 C 2.4 16.3 2.4 16.9 2.8 17.2 C 3.2 17.6 3.8 17.6 4.1 17.2 L 10 11.3 L 15.9 17.2 C 16.3 17.6 16.9 17.6 17.2 17.2 C 17.6 16.8 17.6 16.2 17.2 15.9 L 11.3 10 L 17.2 4.1 Z\" fill=\"currentColor\"/></svg>"
+    "icon-close-root-sm": "<svg viewBox=\"0 0 40 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.2 4.1 C 17.6 3.7 17.6 3.1 17.2 2.8 C 16.8 2.4 16.2 2.4 15.9 2.8 L 10 8.7 L 4.1 2.8 C 3.7 2.4 3.1 2.4 2.8 2.8 C 2.4 3.2 2.4 3.8 2.8 4.1 L 8.7 10 L 2.8 15.9 C 2.4 16.3 2.4 16.9 2.8 17.2 C 3.2 17.6 3.8 17.6 4.1 17.2 L 10 11.3 L 15.9 17.2 C 16.3 17.6 16.9 17.6 17.2 17.2 C 17.6 16.8 17.6 16.2 17.2 15.9 L 11.3 10 L 17.2 4.1 Z\" fill=\"currentColor\"/></svg>",
+    "icon-close-root-unset": "<svg viewBox=\"0 0 40 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.2 4.1 C 17.6 3.7 17.6 3.1 17.2 2.8 C 16.8 2.4 16.2 2.4 15.9 2.8 L 10 8.7 L 4.1 2.8 C 3.7 2.4 3.1 2.4 2.8 2.8 C 2.4 3.2 2.4 3.8 2.8 4.1 L 8.7 10 L 2.8 15.9 C 2.4 16.3 2.4 16.9 2.8 17.2 C 3.2 17.6 3.8 17.6 4.1 17.2 L 10 11.3 L 15.9 17.2 C 16.3 17.6 16.9 17.6 17.2 17.2 C 17.6 16.8 17.6 16.2 17.2 15.9 L 11.3 10 L 17.2 4.1 Z\" fill=\"currentColor\"/></svg>",
+    "icon-close-root-xl": "<svg viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.2 4.1 C 17.6 3.7 17.6 3.1 17.2 2.8 C 16.8 2.4 16.2 2.4 15.9 2.8 L 10 8.7 L 4.1 2.8 C 3.7 2.4 3.1 2.4 2.8 2.8 C 2.4 3.2 2.4 3.8 2.8 4.1 L 8.7 10 L 2.8 15.9 C 2.4 16.3 2.4 16.9 2.8 17.2 C 3.2 17.6 3.8 17.6 4.1 17.2 L 10 11.3 L 15.9 17.2 C 16.3 17.6 16.9 17.6 17.2 17.2 C 17.6 16.8 17.6 16.2 17.2 15.9 L 11.3 10 L 17.2 4.1 Z\" fill=\"currentColor\"/></svg>",
+    "icon-close-root-xs": "<svg viewBox=\"0 0 40 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.2 4.1 C 17.6 3.7 17.6 3.1 17.2 2.8 C 16.8 2.4 16.2 2.4 15.9 2.8 L 10 8.7 L 4.1 2.8 C 3.7 2.4 3.1 2.4 2.8 2.8 C 2.4 3.2 2.4 3.8 2.8 4.1 L 8.7 10 L 2.8 15.9 C 2.4 16.3 2.4 16.9 2.8 17.2 C 3.2 17.6 3.8 17.6 4.1 17.2 L 10 11.3 L 15.9 17.2 C 16.3 17.6 16.9 17.6 17.2 17.2 C 17.6 16.8 17.6 16.2 17.2 15.9 L 11.3 10 L 17.2 4.1 Z\" fill=\"currentColor\"/></svg>",
+    "icon-close-root-xxl": "<svg viewBox=\"0 0 36 36\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.2 4.1 C 17.6 3.7 17.6 3.1 17.2 2.8 C 16.8 2.4 16.2 2.4 15.9 2.8 L 10 8.7 L 4.1 2.8 C 3.7 2.4 3.1 2.4 2.8 2.8 C 2.4 3.2 2.4 3.8 2.8 4.1 L 8.7 10 L 2.8 15.9 C 2.4 16.3 2.4 16.9 2.8 17.2 C 3.2 17.6 3.8 17.6 4.1 17.2 L 10 11.3 L 15.9 17.2 C 16.3 17.6 16.9 17.6 17.2 17.2 C 17.6 16.8 17.6 16.2 17.2 15.9 L 11.3 10 L 17.2 4.1 Z\" fill=\"currentColor\"/></svg>",
+    "icon-close-root-xxxl": "<svg viewBox=\"0 0 40 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.2 4.1 C 17.6 3.7 17.6 3.1 17.2 2.8 C 16.8 2.4 16.2 2.4 15.9 2.8 L 10 8.7 L 4.1 2.8 C 3.7 2.4 3.1 2.4 2.8 2.8 C 2.4 3.2 2.4 3.8 2.8 4.1 L 8.7 10 L 2.8 15.9 C 2.4 16.3 2.4 16.9 2.8 17.2 C 3.2 17.6 3.8 17.6 4.1 17.2 L 10 11.3 L 15.9 17.2 C 16.3 17.6 16.9 17.6 17.2 17.2 C 17.6 16.8 17.6 16.2 17.2 15.9 L 11.3 10 L 17.2 4.1 Z\" fill=\"currentColor\"/></svg>"
   },
   "contracts": [
     {
@@ -6201,6 +6243,7 @@
               "declared": {
                 "display": "block",
                 "box-sizing": "border-box",
+                "font-family": "\"IBM Plex Sans\", sans-serif",
                 "text-align": "center"
               },
               "visibleWhen": {
@@ -6212,6 +6255,7 @@
                   "declared": {
                     "position": "absolute",
                     "box-sizing": "border-box",
+                    "font-family": "\"IBM Plex Sans\", sans-serif",
                     "text-align": "center"
                   },
                   "layout": {
@@ -6245,7 +6289,7 @@
                         "top": "-2px",
                         "left": "-2px"
                       },
-                      "description": "Drawn ::after pseudo-element decor promoted from the computed floor (pseudo-decor v2, Carbon live-defect round): an UNCONDITIONAL 12×12 ellipse at -2,-2 inside badge — position:absolute with literal offsets; background+border+box+radius only, no content text; translate folded into top/left (receipted)."
+                      "description": "Drawn ::after pseudo-element decor promoted from the computed floor (pseudo-decor v2, Carbon live-defect round + Wave B.2): an UNCONDITIONAL 12×12 ellipse at -2,-2 inside badge — position:absolute with literal offsets; rotation 0; background+border+box+radius only, no content text; translate folded into top/left (receipted)."
                     }
                   },
                   "tokens": {
@@ -6255,6 +6299,7 @@
                     "border-top-left-radius": "{imported.shared.size-8}",
                     "border-top-right-radius": "{imported.shared.size-8}",
                     "bottom": "{imported.shared.size-0}",
+                    "color": "{imported.shared.color-101010}",
                     "column-gap": "{imported.avatar.badge.column-gap}",
                     "font-size": "{imported.avatar.badge.font-size}",
                     "font-weight": "{imported.shared.num-600}",
@@ -6286,6 +6331,7 @@
                 }
               },
               "tokens": {
+                "color": "{imported.shared.color-101010}",
                 "font-size": "{imported.avatar.avatar-badge.font-size.unset}",
                 "font-weight": "{imported.shared.num-600}",
                 "height": "{imported.shared.size-0}",
@@ -6310,6 +6356,7 @@
           },
           "declared": {
             "box-sizing": "border-box",
+            "font-family": "\"IBM Plex Sans\", sans-serif",
             "text-align": "center"
           },
           "tokens": {
@@ -6318,11 +6365,14 @@
             "border-bottom-right-radius": "{imported.avatar.root.border-bottom-right-radius.unset}",
             "border-top-left-radius": "{imported.avatar.root.border-top-left-radius.unset}",
             "border-top-right-radius": "{imported.avatar.root.border-top-right-radius.unset}",
+            "color": "{imported.shared.color-101010}",
             "font-size": "{imported.avatar.root.font-size.unset}",
             "font-weight": "{imported.shared.num-600}",
+            "height": "{imported.avatar.root.height.unset}",
             "line-height": "{imported.avatar.root.line-height.unset}",
             "min-height": "{imported.shared.size-0}",
-            "min-width": "{imported.shared.size-0}"
+            "min-width": "{imported.shared.size-0}",
+            "width": "{imported.avatar.root.width.unset}"
           },
           "tokensByProp": [
             {
@@ -6334,7 +6384,9 @@
                   "border-top-left-radius": "{imported.avatar.root.border-top-left-radius.sm}",
                   "border-top-right-radius": "{imported.avatar.root.border-top-right-radius.sm}",
                   "font-size": "{imported.avatar.root.font-size.sm}",
-                  "line-height": "{imported.avatar.root.line-height.sm}"
+                  "height": "{imported.avatar.root.height.sm}",
+                  "line-height": "{imported.avatar.root.line-height.sm}",
+                  "width": "{imported.avatar.root.width.sm}"
                 }
               }
             }
@@ -6441,6 +6493,9 @@
             "align": "center",
             "justify": "center"
           },
+          "content": {
+            "prop": "children"
+          },
           "declared": {
             "box-sizing": "border-box",
             "font-family": "\"IBM Plex Sans\", sans-serif"
@@ -6453,19 +6508,6 @@
             "font-weight": "{imported.badge.root.font-weight}",
             "line-height": "{imported.badge.root.line-height}",
             "row-gap": "{imported.badge.root.row-gap}"
-          },
-          "parts": {
-            "label": {
-              "description": "Label text for default badges. Dot mode is an 8px status pip — CSS hides the label via text-indent; Figma has no text-indent twin, so the label is compile-dropped when Dot=Dot (visibleWhen).",
-              "element": "span",
-              "content": {
-                "prop": "children"
-              },
-              "visibleWhen": {
-                "prop": "dot",
-                "equals": "default"
-              }
-            }
           },
           "tokensByProp": [
             {
@@ -6516,7 +6558,13 @@
                 }
               }
             }
-          ]
+          ],
+          "textOutOfBox": {
+            "prop": "dot",
+            "values": [
+              "dot"
+            ]
+          }
         }
       },
       "bindings": {
@@ -6609,13 +6657,22 @@
                 "display": "block",
                 "box-sizing": "border-box",
                 "cursor": "pointer",
+                "font-family": "\"IBM Plex Sans\", sans-serif",
                 "text-align": "center"
               },
               "tokens": {
                 "font-size": "{imported.shared.size-16}",
                 "font-weight": "{imported.button.label.font-weight}",
                 "line-height": "{imported.button.label.line-height}"
-              }
+              },
+              "codeOnly": [
+                {
+                  "state": "hover",
+                  "channel": "color",
+                  "value": "{imported.button.label.color-state-hover.{variant}}",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                }
+              ]
             }
           },
           "declared": {
@@ -6736,6 +6793,50 @@
                 }
               }
             }
+          ],
+          "codeOnly": [
+            {
+              "state": "hover",
+              "channel": "background-color",
+              "value": "{imported.button.root.background-color-state-hover.{variant}}",
+              "reason": "state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+            },
+            {
+              "state": "hover",
+              "channel": "border-bottom-color",
+              "value": "{imported.button.root.border-bottom-color-state-hover.{variant}}",
+              "reason": "state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+            },
+            {
+              "state": "hover",
+              "channel": "border-left-color",
+              "value": "{imported.button.root.border-left-color-state-hover.{variant}}",
+              "reason": "state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+            },
+            {
+              "state": "hover",
+              "channel": "border-right-color",
+              "value": "{imported.button.root.border-right-color-state-hover.{variant}}",
+              "reason": "state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+            },
+            {
+              "state": "hover",
+              "channel": "border-top-color",
+              "value": "{imported.button.root.border-top-color-state-hover.{variant}}",
+              "reason": "state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+            },
+            {
+              "state": "hover",
+              "channel": "color",
+              "value": "{imported.button.root.color-state-hover.{variant}}",
+              "reason": "state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+            },
+            {
+              "state": "hover",
+              "channel": "outline-color",
+              "value": "{imported.button.root.outline-color-state-hover.{variant}}",
+              "reason": "state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+            }
           ]
         }
       },
@@ -6797,10 +6898,8 @@
         },
         {
           "name": "type",
-          "description": "FC-ENUM-HOLE: capture seed only listed squared; the absent-attribute (pill) rendering is the developed default — spelled `default` here because altitude forbids the capture-side `unset` pseudo-value as a real enum member.",
           "type": {
             "enum": [
-              "default",
               "squared"
             ]
           },
@@ -6809,7 +6908,6 @@
               "kind": "VARIANT",
               "property": "Type",
               "values": {
-                "default": "Default",
                 "squared": "Squared"
               }
             },
@@ -6979,7 +7077,7 @@
       },
       "bindings": {
         "figma": {
-          "statePreviews": false,
+          "statePreviews": true,
           "anchors": {
             "fileKey": null,
             "componentSetKey": null
@@ -7006,20 +7104,16 @@
       "props": [
         {
           "name": "variant",
-          "description": "FC-ENUM-HOLE: capture seed only listed vertical; the absent-attribute (horizontal rule) rendering is the developed default — spelled `default` because altitude forbids the capture-side `unset` pseudo-value as a real enum member.",
           "type": {
             "enum": [
-              "default",
               "vertical"
             ]
           },
-          "default": "default",
           "bindings": {
             "figma": {
               "kind": "VARIANT",
               "property": "Variant",
               "values": {
-                "default": "Default",
                 "vertical": "Vertical"
               }
             },
@@ -7035,38 +7129,26 @@
           "declared": {
             "display": "block",
             "box-sizing": "border-box",
+            "font-family": "\"IBM Plex Sans\", sans-serif",
             "overflow-x": "hidden",
             "overflow-y": "hidden"
           },
           "tokens": {
             "background-color": "{imported.divider.root.background-color}",
             "color": "{imported.divider.root.color}",
+            "height": "{imported.divider.root.height.unset}",
+            "line-height": "{imported.divider.root.line-height}",
             "min-height": "{imported.divider.root.min-height}",
             "min-width": "{imported.divider.root.min-width}",
             "width": "{imported.divider.root.width.unset}"
           },
-          "literalsByProp": [
-            {
-              "prop": "variant",
-              "map": {
-                "default": {
-                  "height": "1px"
-                },
-                "vertical": {
-                  "height": "100px"
-                }
-              }
-            }
-          ],
           "tokensByProp": [
             {
               "prop": "variant",
               "map": {
                 "vertical": {
+                  "height": "{imported.divider.root.height.vertical}",
                   "width": "{imported.divider.root.width.vertical}"
-                },
-                "default": {
-                  "width": "{imported.divider.root.width.unset}"
                 }
               }
             }
@@ -7180,6 +7262,7 @@
             "prop": "children"
           },
           "tokens": {
+            "color": "{imported.heading.root.color}",
             "font-size": "{imported.heading.root.font-size.unset}",
             "line-height": "{imported.heading.root.line-height.unset}",
             "min-height": "{imported.heading.root.min-height}",
@@ -7187,6 +7270,17 @@
             "width": "{imported.heading.root.width}"
           },
           "tokensByProp": [
+            {
+              "prop": "weight",
+              "map": {
+                "bold": {
+                  "font-weight": "{imported.heading.root.font-weight.bold}"
+                },
+                "regular": {
+                  "font-weight": "{imported.heading.root.font-weight.regular}"
+                }
+              }
+            },
             {
               "prop": "variant",
               "map": {
@@ -7213,17 +7307,6 @@
                 "sm": {
                   "font-size": "{imported.heading.root.font-size.sm}",
                   "line-height": "{imported.heading.root.line-height.sm}"
-                }
-              }
-            },
-            {
-              "prop": "weight",
-              "map": {
-                "bold": {
-                  "font-weight": "{imported.heading.root.font-weight.bold}"
-                },
-                "regular": {
-                  "font-weight": "{imported.heading.root.font-weight.regular}"
                 }
               }
             }
@@ -7294,7 +7377,8 @@
         "root": {
           "declared": {
             "display": "block",
-            "box-sizing": "border-box"
+            "box-sizing": "border-box",
+            "font-family": "\"IBM Plex Sans\", sans-serif"
           },
           "parts": {
             "root-unset": {
@@ -7784,6 +7868,17 @@
       "facts": [
         {
           "part": "label",
+          "kind": "capture",
+          "channel": "color [hover]",
+          "value": "{imported.button.label.color-state-hover.{variant}}",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 12,
+            "of": 12
+          }
+        },
+        {
+          "part": "label",
           "kind": "declared",
           "channel": "cursor",
           "value": "pointer",
@@ -7799,6 +7894,83 @@
           "channel": "display",
           "value": "block",
           "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+          "variants": {
+            "count": 12,
+            "of": 12
+          }
+        },
+        {
+          "part": "root",
+          "kind": "capture",
+          "channel": "background-color [hover]",
+          "value": "{imported.button.root.background-color-state-hover.{variant}}",
+          "reason": "observed by the computed capture and refused by the contract grammar — state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
+          "variants": {
+            "count": 12,
+            "of": 12
+          }
+        },
+        {
+          "part": "root",
+          "kind": "capture",
+          "channel": "border-bottom-color [hover]",
+          "value": "{imported.button.root.border-bottom-color-state-hover.{variant}}",
+          "reason": "observed by the computed capture and refused by the contract grammar — state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
+          "variants": {
+            "count": 12,
+            "of": 12
+          }
+        },
+        {
+          "part": "root",
+          "kind": "capture",
+          "channel": "border-left-color [hover]",
+          "value": "{imported.button.root.border-left-color-state-hover.{variant}}",
+          "reason": "observed by the computed capture and refused by the contract grammar — state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
+          "variants": {
+            "count": 12,
+            "of": 12
+          }
+        },
+        {
+          "part": "root",
+          "kind": "capture",
+          "channel": "border-right-color [hover]",
+          "value": "{imported.button.root.border-right-color-state-hover.{variant}}",
+          "reason": "observed by the computed capture and refused by the contract grammar — state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
+          "variants": {
+            "count": 12,
+            "of": 12
+          }
+        },
+        {
+          "part": "root",
+          "kind": "capture",
+          "channel": "border-top-color [hover]",
+          "value": "{imported.button.root.border-top-color-state-hover.{variant}}",
+          "reason": "observed by the computed capture and refused by the contract grammar — state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
+          "variants": {
+            "count": 12,
+            "of": 12
+          }
+        },
+        {
+          "part": "root",
+          "kind": "capture",
+          "channel": "color [hover]",
+          "value": "{imported.button.root.color-state-hover.{variant}}",
+          "reason": "observed by the computed capture and refused by the contract grammar — state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
+          "variants": {
+            "count": 12,
+            "of": 12
+          }
+        },
+        {
+          "part": "root",
+          "kind": "capture",
+          "channel": "outline-color [hover]",
+          "value": "{imported.button.root.outline-color-state-hover.{variant}}",
+          "reason": "observed by the computed capture and refused by the contract grammar — state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
           "variants": {
             "count": 12,
             "of": 12
@@ -8083,17 +8255,6 @@
         {
           "part": "root",
           "kind": "channel",
-          "channel": "outline-color [focus-visible]",
-          "value": "{imported.chip.root.outline-color-state-focus-visible}",
-          "reason": "the focus-visible plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
-          "variants": {
-            "count": 10,
-            "of": 10
-          }
-        },
-        {
-          "part": "root",
-          "kind": "channel",
           "channel": "outline-color",
           "value": "{imported.chip.root.outline-color.danger}",
           "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
@@ -8101,8 +8262,8 @@
             "count": 2,
             "of": 10,
             "names": [
-              "Variant=Danger, Type=Default",
-              "Variant=Danger, Type=Squared"
+              "Variant=Danger, Type=Squared",
+              "Variant=Danger, Type=Squared, State=Focus Visible"
             ]
           }
         },
@@ -8116,8 +8277,8 @@
             "count": 2,
             "of": 10,
             "names": [
-              "Variant=Info, Type=Default",
-              "Variant=Info, Type=Squared"
+              "Variant=Info, Type=Squared",
+              "Variant=Info, Type=Squared, State=Focus Visible"
             ]
           }
         },
@@ -8131,8 +8292,8 @@
             "count": 2,
             "of": 10,
             "names": [
-              "Variant=Secondary, Type=Default",
-              "Variant=Secondary, Type=Squared"
+              "Variant=Secondary, Type=Squared",
+              "Variant=Secondary, Type=Squared, State=Focus Visible"
             ]
           }
         },
@@ -8146,8 +8307,8 @@
             "count": 2,
             "of": 10,
             "names": [
-              "Variant=Success, Type=Default",
-              "Variant=Success, Type=Squared"
+              "Variant=Success, Type=Squared",
+              "Variant=Success, Type=Squared, State=Focus Visible"
             ]
           }
         },
@@ -8161,31 +8322,27 @@
             "count": 2,
             "of": 10,
             "names": [
-              "Variant=Warning, Type=Default",
-              "Variant=Warning, Type=Squared"
+              "Variant=Warning, Type=Squared",
+              "Variant=Warning, Type=Squared, State=Focus Visible"
             ]
           }
         },
         {
           "part": "root",
           "kind": "channel",
-          "channel": "outline-offset [focus-visible]",
+          "channel": "outline-offset",
           "value": "{imported.chip.root.outline-offset-state-focus-visible}",
-          "reason": "the focus-visible plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+          "reason": "Figma strokes have no offset field — an outside-aligned stroke sits flush against the box.",
           "variants": {
-            "count": 10,
-            "of": 10
-          }
-        },
-        {
-          "part": "root",
-          "kind": "channel",
-          "channel": "outline-width [focus-visible]",
-          "value": "{imported.chip.root.outline-width-state-focus-visible}",
-          "reason": "the focus-visible plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
-          "variants": {
-            "count": 10,
-            "of": 10
+            "count": 5,
+            "of": 10,
+            "names": [
+              "Variant=Secondary, Type=Squared, State=Focus Visible",
+              "Variant=Info, Type=Squared, State=Focus Visible",
+              "Variant=Success, Type=Squared, State=Focus Visible",
+              "Variant=Warning, Type=Squared, State=Focus Visible",
+              "Variant=Danger, Type=Squared, State=Focus Visible"
+            ]
           }
         },
         {
@@ -8203,8 +8360,8 @@
           "part": "root",
           "kind": "channel",
           "channel": "type [unset]",
-          "value": "default|squared",
-          "reason": "defaultless axis — the library's own rendering when \"type\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 2 declared values only, and a proposal read back from the canvas will call \"default\" the default (FC-UNSET-PLANE-UNDRAWN)",
+          "value": "squared",
+          "reason": "defaultless axis — the library's own rendering when \"type\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 1 declared values only, and a proposal read back from the canvas will call \"squared\" the default (FC-UNSET-PLANE-UNDRAWN)",
           "variants": {
             "count": 10,
             "of": 10
@@ -8262,13 +8419,24 @@
       "facts": [
         {
           "part": "root",
+          "kind": "channel",
+          "channel": "variant [unset]",
+          "value": "vertical",
+          "reason": "defaultless axis — the library's own rendering when \"variant\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 1 declared values only, and a proposal read back from the canvas will call \"vertical\" the default (FC-UNSET-PLANE-UNDRAWN)",
+          "variants": {
+            "count": 1,
+            "of": 1
+          }
+        },
+        {
+          "part": "root",
           "kind": "declared",
           "channel": "display",
           "value": "block",
           "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
           "variants": {
-            "count": 2,
-            "of": 2
+            "count": 1,
+            "of": 1
           }
         }
       ]

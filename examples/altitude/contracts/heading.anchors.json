@@ -3,6 +3,14 @@
   "component": "heading",
   "anchors": [
     {
+      "leaf": "imported.heading.root.color",
+      "token": "theme-color-content-default",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--al-theme-color-content-default",
+      "selector": ".al-c-heading"
+    },
+    {
       "leaf": "imported.heading.root.font-weight.bold",
       "token": "font-weight-bold",
       "part": "root",

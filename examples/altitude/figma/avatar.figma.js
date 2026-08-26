@@ -40,8 +40,15 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/avatar/root/border-bottom-right-radius/sm",
             "topLeftRadius": "imported/avatar/root/border-top-left-radius/sm",
             "topRightRadius": "imported/avatar/root/border-top-right-radius/sm",
-            "minHeight": "imported/shared/size-0",
             "minWidth": "imported/shared/size-0"
+          },
+          "fixedHeight": {
+            "px": 32,
+            "varName": "imported/avatar/root/height/sm"
+          },
+          "fixedWidth": {
+            "px": 32,
+            "varName": "imported/avatar/root/width/sm"
           },
           "children": [
             {
@@ -53,11 +60,13 @@ const COMPONENTS = [
               "fontSizeVar": "imported/avatar/root/font-size/sm",
               "fontWeightVar": "imported/shared/num-600",
               "lineHeightVar": "imported/avatar/root/line-height/sm",
+              "textFill": "imported/shared/color-101010",
               "lineHeight": {
                 "value": 32,
                 "unit": "PIXELS"
               },
               "textAlignH": "CENTER",
+              "fontFamily": "IBM Plex Sans",
               "contentProp": "Content"
             },
             {
@@ -304,15 +313,6 @@ for (const v of allVars) varByName[v.name] = v;
       for (const v of allVars) {
         if (v.variableCollectionId === _best && _wanted.has(v.name)) varByName[v.name] = v;
       }
-    }
-  }
-}
-{
-  const _cols = await figma.variables.getLocalVariableCollectionsAsync();
-  const _prefCol = _cols.find((c) => c.name === "Altitude");
-  if (_prefCol) {
-    for (const v of allVars) {
-      if (v.variableCollectionId === _prefCol.id) varByName[v.name] = v;
     }
   }
 }

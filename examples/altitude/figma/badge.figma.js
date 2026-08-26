@@ -85,8 +85,7 @@ const COMPONENTS = [
             "minWidth": "imported/badge/root/min-width/dot",
             "paddingLeft": "imported/badge/root/padding-left/dot",
             "paddingRight": "imported/badge/root/padding-right/dot"
-          },
-          "children": []
+          }
         }
       },
       {
@@ -157,8 +156,7 @@ const COMPONENTS = [
             "minWidth": "imported/badge/root/min-width/dot",
             "paddingLeft": "imported/badge/root/padding-left/dot",
             "paddingRight": "imported/badge/root/padding-right/dot"
-          },
-          "children": []
+          }
         }
       },
       {
@@ -229,8 +227,7 @@ const COMPONENTS = [
             "minWidth": "imported/badge/root/min-width/dot",
             "paddingLeft": "imported/badge/root/padding-left/dot",
             "paddingRight": "imported/badge/root/padding-right/dot"
-          },
-          "children": []
+          }
         }
       },
       {
@@ -301,8 +298,7 @@ const COMPONENTS = [
             "minWidth": "imported/badge/root/min-width/dot",
             "paddingLeft": "imported/badge/root/padding-left/dot",
             "paddingRight": "imported/badge/root/padding-right/dot"
-          },
-          "children": []
+          }
         }
       }
     ],
@@ -425,15 +421,6 @@ for (const v of allVars) varByName[v.name] = v;
       for (const v of allVars) {
         if (v.variableCollectionId === _best && _wanted.has(v.name)) varByName[v.name] = v;
       }
-    }
-  }
-}
-{
-  const _cols = await figma.variables.getLocalVariableCollectionsAsync();
-  const _prefCol = _cols.find((c) => c.name === "Altitude");
-  if (_prefCol) {
-    for (const v of allVars) {
-      if (v.variableCollectionId === _prefCol.id) varByName[v.name] = v;
     }
   }
 }

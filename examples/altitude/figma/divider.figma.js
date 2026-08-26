@@ -8,8 +8,8 @@ const COMPONENTS = [
     "contractId": "altitude.divider",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Divider — generated from contract altitude.divider v0.2.0 † (1 code-only facts — see plugin report)",
-    "isSet": true,
+    "description": "Divider — generated from contract altitude.divider v0.2.0 † (2 code-only facts — see plugin report)",
+    "isSet": false,
     "boolProps": [],
     "textProps": [],
     "fontStyles": [
@@ -17,36 +17,8 @@ const COMPONENTS = [
     ],
     "variants": [
       {
-        "name": "Variant=Default",
-        "row": 0,
-        "col": 0,
-        "spec": {
-          "type": "root",
-          "name": "Variant=Default",
-          "layout": {
-            "mode": "VERTICAL",
-            "primary": "MIN",
-            "counter": "MIN",
-            "stretchChildren": true
-          },
-          "fill": "imported/divider/root/background-color",
-          "bindings": {
-            "minHeight": "imported/divider/root/min-height",
-            "minWidth": "imported/divider/root/min-width"
-          },
-          "fixedWidth": {
-            "px": 288,
-            "varName": "imported/divider/root/width/unset"
-          },
-          "lits": {
-            "height": 1
-          },
-          "clipsContent": true
-        }
-      },
-      {
         "name": "Variant=Vertical",
-        "row": 1,
+        "row": 0,
         "col": 0,
         "spec": {
           "type": "root",
@@ -58,16 +30,16 @@ const COMPONENTS = [
             "stretchChildren": true
           },
           "fill": "imported/divider/root/background-color",
+          "fixedHeight": {
+            "px": 64,
+            "varName": "imported/divider/root/height/vertical"
+          },
           "bindings": {
-            "minHeight": "imported/divider/root/min-height",
             "minWidth": "imported/divider/root/min-width"
           },
           "fixedWidth": {
             "px": 1,
             "varName": "imported/divider/root/width/vertical"
-          },
-          "lits": {
-            "height": 100
           },
           "clipsContent": true
         }
@@ -82,13 +54,24 @@ const COMPONENTS = [
     "codeOnlyFacts": [
       {
         "part": "root",
+        "kind": "channel",
+        "channel": "variant [unset]",
+        "value": "vertical",
+        "reason": "defaultless axis — the library's own rendering when \"variant\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 1 declared values only, and a proposal read back from the canvas will call \"vertical\" the default (FC-UNSET-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 1,
+          "of": 1
+        }
+      },
+      {
+        "part": "root",
         "kind": "declared",
         "channel": "display",
         "value": "block",
         "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
         "variants": {
-          "count": 2,
-          "of": 2
+          "count": 1,
+          "of": 1
         }
       }
     ],
@@ -145,15 +128,6 @@ for (const v of allVars) varByName[v.name] = v;
       for (const v of allVars) {
         if (v.variableCollectionId === _best && _wanted.has(v.name)) varByName[v.name] = v;
       }
-    }
-  }
-}
-{
-  const _cols = await figma.variables.getLocalVariableCollectionsAsync();
-  const _prefCol = _cols.find((c) => c.name === "Altitude");
-  if (_prefCol) {
-    for (const v of allVars) {
-      if (v.variableCollectionId === _prefCol.id) varByName[v.name] = v;
     }
   }
 }
@@ -573,61 +547,6 @@ function applyFrameSpec(node, spec) {
       if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED';
       else node.primaryAxisSizingMode = 'FIXED';
       if (spec.fixedHeight.varName) node.setBoundVariable('height', need(spec.fixedHeight.varName));
-    }
-  }
-  if (spec.lits) {
-    // v14 literals: no variable to bind — plain values, compile-parsed.
-    const li = spec.lits;
-    if (li.paddingTop !== undefined) node.paddingTop = li.paddingTop;
-    if (li.paddingBottom !== undefined) node.paddingBottom = li.paddingBottom;
-    if (li.paddingLeft !== undefined) node.paddingLeft = li.paddingLeft;
-    if (li.paddingRight !== undefined) node.paddingRight = li.paddingRight;
-    if (li.itemSpacing !== undefined) node.itemSpacing = li.itemSpacing;
-    if (li.radius !== undefined) node.cornerRadius = li.radius;
-    if (li.strokeWeight !== undefined) node.strokeWeight = li.strokeWeight;
-    if (li.minWidth !== undefined) { try { node.minWidth = li.minWidth; } catch (e) { degrade('FC-RT-MIN-SIZE-REFUSED', node, 'minWidth ' + li.minWidth + ' refused (needs auto-layout); the literal min-width does not draw', e); } }
-    if (li.minHeight !== undefined) { try { node.minHeight = li.minHeight; } catch (e) { degrade('FC-RT-MIN-SIZE-REFUSED', node, 'minHeight ' + li.minHeight + ' refused (needs auto-layout); the literal min-height does not draw', e); } }
-    // #60 fix 1 (fillClear precedence): a spec-carried fill is NEVER
-    // trampled — fillClear only clears when no fill was spec'd. The compile
-    // side already drops fillClear when a fill binding exists (applyLiterals);
-    // this runtime guard makes the emitted script safe even for hand-fed
-    // specs carrying both.
-    if (li.fillClear && !spec.fill) node.fills = [];
-    else if (li.fillColor) node.fills = [{ type: 'SOLID', color: { r: li.fillColor.r, g: li.fillColor.g, b: li.fillColor.b }, opacity: li.fillColor.a === undefined ? 1 : li.fillColor.a }];
-    if (li.radiusCorners) {
-      const rc = li.radiusCorners;
-      if (rc.tl !== undefined) node.topLeftRadius = rc.tl;
-      if (rc.tr !== undefined) node.topRightRadius = rc.tr;
-      if (rc.bl !== undefined) node.bottomLeftRadius = rc.bl;
-      if (rc.br !== undefined) node.bottomRightRadius = rc.br;
-    }
-    if (li.strokeSides) {
-      const sw = li.strokeSides;
-      // ELLIPSE/LINE expose strokeWeight only — per-side props throw
-      // "Cannot add property strokeTopWeight, object is not extensible"
-      // (Tailwind ToggleSwitch thumb live finding, Wave B.1).
-      if ('strokeTopWeight' in node) {
-        if (sw.top !== undefined) node.strokeTopWeight = sw.top;
-        if (sw.right !== undefined) node.strokeRightWeight = sw.right;
-        if (sw.bottom !== undefined) node.strokeBottomWeight = sw.bottom;
-        if (sw.left !== undefined) node.strokeLeftWeight = sw.left;
-      } else {
-        const w = sw.top !== undefined ? sw.top : (sw.right !== undefined ? sw.right : (sw.bottom !== undefined ? sw.bottom : sw.left));
-        if (w !== undefined) node.strokeWeight = w;
-      }
-    }
-    if (li.width !== undefined || li.height !== undefined) {
-      node.resize(li.width !== undefined ? li.width : node.width, li.height !== undefined ? li.height : node.height);
-      // GRID's primary axis is HORIZONTAL (GP1b: primaryAxisSizingMode='AUTO'
-      // reads back as layoutSizingHorizontal 'HUG'), like a HORIZONTAL frame.
-      const gm = (spec.layout || { mode: 'HORIZONTAL' }).mode;
-      const horizontalIsPrimary = gm === 'HORIZONTAL' || gm === 'GRID';
-      if (li.width !== undefined) {
-        if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED'; else node.counterAxisSizingMode = 'FIXED';
-      }
-      if (li.height !== undefined) {
-        if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED'; else node.primaryAxisSizingMode = 'FIXED';
-      }
     }
   }
 }
