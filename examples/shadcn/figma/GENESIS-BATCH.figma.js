@@ -661,8 +661,59 @@ function setInstanceProps(inst, props, owner) {
 // section is identity-marked (ds_contracts/hostFor) so create and amend both
 // re-fit the SAME section instead of stacking new ones; a component already
 // hosted keeps its section.
+//
+// FC-HOST-SECTION-COLLISION (measured live 2026-08-26 on the scratch file,
+// page "Census / altitude"). This function used to end with a hardcoded
+// "section.x = 100; section.y = 100;" — UNCONDITIONALLY, on create AND on
+// amend. Two separate defects rode on that one pair of lines:
+//
+//   1. NO SIBLING AWARENESS. Every set minted into one page landed on the
+//      SAME coordinate. Eight altitude sets sat at 100,100 stacked on top of
+//      each other; the owner opened the file, saw three set titles
+//      superimposed and a jumble of dots and slivers, and concluded the
+//      output was garbage. Most of those sets rendered CORRECTLY — they were
+//      simply buried. One coordinate did more damage to the project's
+//      credibility than any real conversion defect.
+//   2. AMEND SNAPPED THE DESIGNER BACK. A section a person had dragged
+//      somewhere was teleported to 100,100 by the next re-mint. That is what
+//      the live evidence showed: five of the eight altitude sections were at
+//      100,100 while Divider/Heading/Link still sat in the column a previous
+//      pass had laid out — the five were the ones the last run re-amended.
+//
+// THE RULE NOW, and why it is exactly this rule:
+//
+//   · An EXISTING host section is never repositioned. Its x/y are the
+//     designer's, not ours. A re-mint refits the section's SIZE around the
+//     rebuilt target and leaves the origin alone, so a manual reposition
+//     survives every subsequent amend.
+//   · A NEW host section is appended BELOW everything already on the page:
+//     x = 0, y = (max bottom edge of the page's existing children) + gutter.
+//     Collision-free by construction, regardless of how wide or tall the
+//     neighbours are.
+//
+// DETERMINISM, stated precisely, because the census screenshots depend on it:
+// minting a corpus into an EMPTY page twice produces byte-identical
+// coordinates — placement is a pure function of (mint order, sibling extents)
+// and mint order is the plan's contract order. Re-minting into a page that
+// already holds the sets moves NOTHING, because every section is found by
+// hostFor. What is NOT guaranteed: a section that GROWS on amend can grow
+// into the gutter below it and touch its neighbour. Reflowing the neighbours
+// would be the only way to prevent that, and reflowing is precisely the
+// behaviour that destroys a designer's manual position — so growth-overlap is
+// a NAMED residual (FC-HOST-SECTION-GROWTH), not a silent one.
+//
+// A single column, not a wrapped grid: host sections on the real corpus range
+// from 144px to 12,500px wide (polaris.text, polaris.button). Any row-packing
+// rule has to reflow a shelf when one member grows, and reflow is the thing
+// that cannot coexist with "the designer's position survives". The column is
+// the layout that keeps both promises at once.
 function ensureHostSection(page, target, displayName) {
   const HOST_PAD = 60;
+  // The gutter between stacked host sections. Wide enough that a section can
+  // grow on amend without immediately touching its neighbour (see
+  // FC-HOST-SECTION-GROWTH above), and it matches the spacing the census
+  // pages were already hand-laid to.
+  const HOST_GUTTER = 200;
   const contractId = target.getSharedPluginData('ds_contracts', 'contractId');
   let section = null;
   for (const child of page.children) {
@@ -671,7 +722,20 @@ function ensureHostSection(page, target, displayName) {
       break;
     }
   }
-  if (!section) {
+  const isNewSection = !section;
+  // Measured BEFORE the new section joins the page, so it can never measure
+  // itself, and skipping "target" — a freshly built set is parked on the page
+  // until the line below adopts it, and counting it would push the section
+  // below its own contents.
+  let nextY = 0;
+  if (isNewSection) {
+    for (const child of page.children) {
+      if (child === target) continue;
+      let bottom;
+      try { bottom = child.y + child.height; } catch (e) { continue; }
+      if (typeof bottom !== 'number' || !isFinite(bottom)) continue;
+      if (bottom + HOST_GUTTER > nextY) nextY = bottom + HOST_GUTTER;
+    }
     section = figma.createSection();
     page.appendChild(section);
     section.setSharedPluginData('ds_contracts', 'hostFor', contractId);
@@ -682,8 +746,12 @@ function ensureHostSection(page, target, displayName) {
   target.x = HOST_PAD;
   target.y = HOST_PAD;
   section.resizeWithoutConstraints(target.width + HOST_PAD * 2, target.height + HOST_PAD * 2);
-  section.x = 100;
-  section.y = 100;
+  // ONLY a section this call created gets a position. An existing one keeps
+  // wherever the designer left it — that is the whole of defect (2).
+  if (isNewSection) {
+    section.x = 0;
+    section.y = nextY;
+  }
   return section;
 }
 
@@ -1264,7 +1332,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
+const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -1333,6 +1401,19 @@ async function amendSet(set, C) {
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
+  // FIXED POINT — the host section is adopted and re-fitted BEFORE the
+  // specHash early return, exactly like the identity markers above.
+  // Without this, a NODE whose content is unchanged keeps whatever coordinate
+  // it already carries forever: re-running the sync could never repair a page,
+  // only a human dragging things could. The altitude collision was in that
+  // state. Placement has to be a FIXED POINT — run the sync twice and get the
+  // same page — so the skip path is not allowed to be a dead end for it.
+  // The call AFTER the rebuild still exists and is still the one that re-fits
+  // the section to the FINAL size; this one only guarantees convergence.
+  {
+    const hostPage = set.parent && set.parent.type === 'SECTION' ? set.parent.parent : set.parent;
+    if (hostPage && hostPage.type === 'PAGE') ensureHostSection(hostPage, set, set.name);
+  }
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -1576,6 +1657,19 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
+  // FIXED POINT — the host section is adopted and re-fitted BEFORE the
+  // specHash early return, exactly like the identity markers above.
+  // Without this, a NODE whose content is unchanged keeps whatever coordinate
+  // it already carries forever: re-running the sync could never repair a page,
+  // only a human dragging things could. The altitude collision was in that
+  // state. Placement has to be a FIXED POINT — run the sync twice and get the
+  // same page — so the skip path is not allowed to be a dead end for it.
+  // The call AFTER the rebuild still exists and is still the one that re-fits
+  // the section to the FINAL size; this one only guarantees convergence.
+  {
+    const hostPageC = comp.parent && comp.parent.type === 'SECTION' ? comp.parent.parent : comp.parent;
+    if (hostPageC && hostPageC.type === 'PAGE') ensureHostSection(hostPageC, comp, comp.name);
+  }
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -2474,8 +2568,59 @@ function setInstanceProps(inst, props, owner) {
 // section is identity-marked (ds_contracts/hostFor) so create and amend both
 // re-fit the SAME section instead of stacking new ones; a component already
 // hosted keeps its section.
+//
+// FC-HOST-SECTION-COLLISION (measured live 2026-08-26 on the scratch file,
+// page "Census / altitude"). This function used to end with a hardcoded
+// "section.x = 100; section.y = 100;" — UNCONDITIONALLY, on create AND on
+// amend. Two separate defects rode on that one pair of lines:
+//
+//   1. NO SIBLING AWARENESS. Every set minted into one page landed on the
+//      SAME coordinate. Eight altitude sets sat at 100,100 stacked on top of
+//      each other; the owner opened the file, saw three set titles
+//      superimposed and a jumble of dots and slivers, and concluded the
+//      output was garbage. Most of those sets rendered CORRECTLY — they were
+//      simply buried. One coordinate did more damage to the project's
+//      credibility than any real conversion defect.
+//   2. AMEND SNAPPED THE DESIGNER BACK. A section a person had dragged
+//      somewhere was teleported to 100,100 by the next re-mint. That is what
+//      the live evidence showed: five of the eight altitude sections were at
+//      100,100 while Divider/Heading/Link still sat in the column a previous
+//      pass had laid out — the five were the ones the last run re-amended.
+//
+// THE RULE NOW, and why it is exactly this rule:
+//
+//   · An EXISTING host section is never repositioned. Its x/y are the
+//     designer's, not ours. A re-mint refits the section's SIZE around the
+//     rebuilt target and leaves the origin alone, so a manual reposition
+//     survives every subsequent amend.
+//   · A NEW host section is appended BELOW everything already on the page:
+//     x = 0, y = (max bottom edge of the page's existing children) + gutter.
+//     Collision-free by construction, regardless of how wide or tall the
+//     neighbours are.
+//
+// DETERMINISM, stated precisely, because the census screenshots depend on it:
+// minting a corpus into an EMPTY page twice produces byte-identical
+// coordinates — placement is a pure function of (mint order, sibling extents)
+// and mint order is the plan's contract order. Re-minting into a page that
+// already holds the sets moves NOTHING, because every section is found by
+// hostFor. What is NOT guaranteed: a section that GROWS on amend can grow
+// into the gutter below it and touch its neighbour. Reflowing the neighbours
+// would be the only way to prevent that, and reflowing is precisely the
+// behaviour that destroys a designer's manual position — so growth-overlap is
+// a NAMED residual (FC-HOST-SECTION-GROWTH), not a silent one.
+//
+// A single column, not a wrapped grid: host sections on the real corpus range
+// from 144px to 12,500px wide (polaris.text, polaris.button). Any row-packing
+// rule has to reflow a shelf when one member grows, and reflow is the thing
+// that cannot coexist with "the designer's position survives". The column is
+// the layout that keeps both promises at once.
 function ensureHostSection(page, target, displayName) {
   const HOST_PAD = 60;
+  // The gutter between stacked host sections. Wide enough that a section can
+  // grow on amend without immediately touching its neighbour (see
+  // FC-HOST-SECTION-GROWTH above), and it matches the spacing the census
+  // pages were already hand-laid to.
+  const HOST_GUTTER = 200;
   const contractId = target.getSharedPluginData('ds_contracts', 'contractId');
   let section = null;
   for (const child of page.children) {
@@ -2484,7 +2629,20 @@ function ensureHostSection(page, target, displayName) {
       break;
     }
   }
-  if (!section) {
+  const isNewSection = !section;
+  // Measured BEFORE the new section joins the page, so it can never measure
+  // itself, and skipping "target" — a freshly built set is parked on the page
+  // until the line below adopts it, and counting it would push the section
+  // below its own contents.
+  let nextY = 0;
+  if (isNewSection) {
+    for (const child of page.children) {
+      if (child === target) continue;
+      let bottom;
+      try { bottom = child.y + child.height; } catch (e) { continue; }
+      if (typeof bottom !== 'number' || !isFinite(bottom)) continue;
+      if (bottom + HOST_GUTTER > nextY) nextY = bottom + HOST_GUTTER;
+    }
     section = figma.createSection();
     page.appendChild(section);
     section.setSharedPluginData('ds_contracts', 'hostFor', contractId);
@@ -2495,8 +2653,12 @@ function ensureHostSection(page, target, displayName) {
   target.x = HOST_PAD;
   target.y = HOST_PAD;
   section.resizeWithoutConstraints(target.width + HOST_PAD * 2, target.height + HOST_PAD * 2);
-  section.x = 100;
-  section.y = 100;
+  // ONLY a section this call created gets a position. An existing one keeps
+  // wherever the designer left it — that is the whole of defect (2).
+  if (isNewSection) {
+    section.x = 0;
+    section.y = nextY;
+  }
   return section;
 }
 
@@ -3028,7 +3190,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
+const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -3097,6 +3259,19 @@ async function amendSet(set, C) {
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
+  // FIXED POINT — the host section is adopted and re-fitted BEFORE the
+  // specHash early return, exactly like the identity markers above.
+  // Without this, a NODE whose content is unchanged keeps whatever coordinate
+  // it already carries forever: re-running the sync could never repair a page,
+  // only a human dragging things could. The altitude collision was in that
+  // state. Placement has to be a FIXED POINT — run the sync twice and get the
+  // same page — so the skip path is not allowed to be a dead end for it.
+  // The call AFTER the rebuild still exists and is still the one that re-fits
+  // the section to the FINAL size; this one only guarantees convergence.
+  {
+    const hostPage = set.parent && set.parent.type === 'SECTION' ? set.parent.parent : set.parent;
+    if (hostPage && hostPage.type === 'PAGE') ensureHostSection(hostPage, set, set.name);
+  }
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -3340,6 +3515,19 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
+  // FIXED POINT — the host section is adopted and re-fitted BEFORE the
+  // specHash early return, exactly like the identity markers above.
+  // Without this, a NODE whose content is unchanged keeps whatever coordinate
+  // it already carries forever: re-running the sync could never repair a page,
+  // only a human dragging things could. The altitude collision was in that
+  // state. Placement has to be a FIXED POINT — run the sync twice and get the
+  // same page — so the skip path is not allowed to be a dead end for it.
+  // The call AFTER the rebuild still exists and is still the one that re-fits
+  // the section to the FINAL size; this one only guarantees convergence.
+  {
+    const hostPageC = comp.parent && comp.parent.type === 'SECTION' ? comp.parent.parent : comp.parent;
+    if (hostPageC && hostPageC.type === 'PAGE') ensureHostSection(hostPageC, comp, comp.name);
+  }
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -5056,8 +5244,59 @@ function setInstanceProps(inst, props, owner) {
 // section is identity-marked (ds_contracts/hostFor) so create and amend both
 // re-fit the SAME section instead of stacking new ones; a component already
 // hosted keeps its section.
+//
+// FC-HOST-SECTION-COLLISION (measured live 2026-08-26 on the scratch file,
+// page "Census / altitude"). This function used to end with a hardcoded
+// "section.x = 100; section.y = 100;" — UNCONDITIONALLY, on create AND on
+// amend. Two separate defects rode on that one pair of lines:
+//
+//   1. NO SIBLING AWARENESS. Every set minted into one page landed on the
+//      SAME coordinate. Eight altitude sets sat at 100,100 stacked on top of
+//      each other; the owner opened the file, saw three set titles
+//      superimposed and a jumble of dots and slivers, and concluded the
+//      output was garbage. Most of those sets rendered CORRECTLY — they were
+//      simply buried. One coordinate did more damage to the project's
+//      credibility than any real conversion defect.
+//   2. AMEND SNAPPED THE DESIGNER BACK. A section a person had dragged
+//      somewhere was teleported to 100,100 by the next re-mint. That is what
+//      the live evidence showed: five of the eight altitude sections were at
+//      100,100 while Divider/Heading/Link still sat in the column a previous
+//      pass had laid out — the five were the ones the last run re-amended.
+//
+// THE RULE NOW, and why it is exactly this rule:
+//
+//   · An EXISTING host section is never repositioned. Its x/y are the
+//     designer's, not ours. A re-mint refits the section's SIZE around the
+//     rebuilt target and leaves the origin alone, so a manual reposition
+//     survives every subsequent amend.
+//   · A NEW host section is appended BELOW everything already on the page:
+//     x = 0, y = (max bottom edge of the page's existing children) + gutter.
+//     Collision-free by construction, regardless of how wide or tall the
+//     neighbours are.
+//
+// DETERMINISM, stated precisely, because the census screenshots depend on it:
+// minting a corpus into an EMPTY page twice produces byte-identical
+// coordinates — placement is a pure function of (mint order, sibling extents)
+// and mint order is the plan's contract order. Re-minting into a page that
+// already holds the sets moves NOTHING, because every section is found by
+// hostFor. What is NOT guaranteed: a section that GROWS on amend can grow
+// into the gutter below it and touch its neighbour. Reflowing the neighbours
+// would be the only way to prevent that, and reflowing is precisely the
+// behaviour that destroys a designer's manual position — so growth-overlap is
+// a NAMED residual (FC-HOST-SECTION-GROWTH), not a silent one.
+//
+// A single column, not a wrapped grid: host sections on the real corpus range
+// from 144px to 12,500px wide (polaris.text, polaris.button). Any row-packing
+// rule has to reflow a shelf when one member grows, and reflow is the thing
+// that cannot coexist with "the designer's position survives". The column is
+// the layout that keeps both promises at once.
 function ensureHostSection(page, target, displayName) {
   const HOST_PAD = 60;
+  // The gutter between stacked host sections. Wide enough that a section can
+  // grow on amend without immediately touching its neighbour (see
+  // FC-HOST-SECTION-GROWTH above), and it matches the spacing the census
+  // pages were already hand-laid to.
+  const HOST_GUTTER = 200;
   const contractId = target.getSharedPluginData('ds_contracts', 'contractId');
   let section = null;
   for (const child of page.children) {
@@ -5066,7 +5305,20 @@ function ensureHostSection(page, target, displayName) {
       break;
     }
   }
-  if (!section) {
+  const isNewSection = !section;
+  // Measured BEFORE the new section joins the page, so it can never measure
+  // itself, and skipping "target" — a freshly built set is parked on the page
+  // until the line below adopts it, and counting it would push the section
+  // below its own contents.
+  let nextY = 0;
+  if (isNewSection) {
+    for (const child of page.children) {
+      if (child === target) continue;
+      let bottom;
+      try { bottom = child.y + child.height; } catch (e) { continue; }
+      if (typeof bottom !== 'number' || !isFinite(bottom)) continue;
+      if (bottom + HOST_GUTTER > nextY) nextY = bottom + HOST_GUTTER;
+    }
     section = figma.createSection();
     page.appendChild(section);
     section.setSharedPluginData('ds_contracts', 'hostFor', contractId);
@@ -5077,8 +5329,12 @@ function ensureHostSection(page, target, displayName) {
   target.x = HOST_PAD;
   target.y = HOST_PAD;
   section.resizeWithoutConstraints(target.width + HOST_PAD * 2, target.height + HOST_PAD * 2);
-  section.x = 100;
-  section.y = 100;
+  // ONLY a section this call created gets a position. An existing one keeps
+  // wherever the designer left it — that is the whole of defect (2).
+  if (isNewSection) {
+    section.x = 0;
+    section.y = nextY;
+  }
   return section;
 }
 
@@ -5610,7 +5866,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
+const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -5679,6 +5935,19 @@ async function amendSet(set, C) {
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
+  // FIXED POINT — the host section is adopted and re-fitted BEFORE the
+  // specHash early return, exactly like the identity markers above.
+  // Without this, a NODE whose content is unchanged keeps whatever coordinate
+  // it already carries forever: re-running the sync could never repair a page,
+  // only a human dragging things could. The altitude collision was in that
+  // state. Placement has to be a FIXED POINT — run the sync twice and get the
+  // same page — so the skip path is not allowed to be a dead end for it.
+  // The call AFTER the rebuild still exists and is still the one that re-fits
+  // the section to the FINAL size; this one only guarantees convergence.
+  {
+    const hostPage = set.parent && set.parent.type === 'SECTION' ? set.parent.parent : set.parent;
+    if (hostPage && hostPage.type === 'PAGE') ensureHostSection(hostPage, set, set.name);
+  }
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -5922,6 +6191,19 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
+  // FIXED POINT — the host section is adopted and re-fitted BEFORE the
+  // specHash early return, exactly like the identity markers above.
+  // Without this, a NODE whose content is unchanged keeps whatever coordinate
+  // it already carries forever: re-running the sync could never repair a page,
+  // only a human dragging things could. The altitude collision was in that
+  // state. Placement has to be a FIXED POINT — run the sync twice and get the
+  // same page — so the skip path is not allowed to be a dead end for it.
+  // The call AFTER the rebuild still exists and is still the one that re-fits
+  // the section to the FINAL size; this one only guarantees convergence.
+  {
+    const hostPageC = comp.parent && comp.parent.type === 'SECTION' ? comp.parent.parent : comp.parent;
+    if (hostPageC && hostPageC.type === 'PAGE') ensureHostSection(hostPageC, comp, comp.name);
+  }
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -10933,8 +11215,59 @@ function setInstanceProps(inst, props, owner) {
 // section is identity-marked (ds_contracts/hostFor) so create and amend both
 // re-fit the SAME section instead of stacking new ones; a component already
 // hosted keeps its section.
+//
+// FC-HOST-SECTION-COLLISION (measured live 2026-08-26 on the scratch file,
+// page "Census / altitude"). This function used to end with a hardcoded
+// "section.x = 100; section.y = 100;" — UNCONDITIONALLY, on create AND on
+// amend. Two separate defects rode on that one pair of lines:
+//
+//   1. NO SIBLING AWARENESS. Every set minted into one page landed on the
+//      SAME coordinate. Eight altitude sets sat at 100,100 stacked on top of
+//      each other; the owner opened the file, saw three set titles
+//      superimposed and a jumble of dots and slivers, and concluded the
+//      output was garbage. Most of those sets rendered CORRECTLY — they were
+//      simply buried. One coordinate did more damage to the project's
+//      credibility than any real conversion defect.
+//   2. AMEND SNAPPED THE DESIGNER BACK. A section a person had dragged
+//      somewhere was teleported to 100,100 by the next re-mint. That is what
+//      the live evidence showed: five of the eight altitude sections were at
+//      100,100 while Divider/Heading/Link still sat in the column a previous
+//      pass had laid out — the five were the ones the last run re-amended.
+//
+// THE RULE NOW, and why it is exactly this rule:
+//
+//   · An EXISTING host section is never repositioned. Its x/y are the
+//     designer's, not ours. A re-mint refits the section's SIZE around the
+//     rebuilt target and leaves the origin alone, so a manual reposition
+//     survives every subsequent amend.
+//   · A NEW host section is appended BELOW everything already on the page:
+//     x = 0, y = (max bottom edge of the page's existing children) + gutter.
+//     Collision-free by construction, regardless of how wide or tall the
+//     neighbours are.
+//
+// DETERMINISM, stated precisely, because the census screenshots depend on it:
+// minting a corpus into an EMPTY page twice produces byte-identical
+// coordinates — placement is a pure function of (mint order, sibling extents)
+// and mint order is the plan's contract order. Re-minting into a page that
+// already holds the sets moves NOTHING, because every section is found by
+// hostFor. What is NOT guaranteed: a section that GROWS on amend can grow
+// into the gutter below it and touch its neighbour. Reflowing the neighbours
+// would be the only way to prevent that, and reflowing is precisely the
+// behaviour that destroys a designer's manual position — so growth-overlap is
+// a NAMED residual (FC-HOST-SECTION-GROWTH), not a silent one.
+//
+// A single column, not a wrapped grid: host sections on the real corpus range
+// from 144px to 12,500px wide (polaris.text, polaris.button). Any row-packing
+// rule has to reflow a shelf when one member grows, and reflow is the thing
+// that cannot coexist with "the designer's position survives". The column is
+// the layout that keeps both promises at once.
 function ensureHostSection(page, target, displayName) {
   const HOST_PAD = 60;
+  // The gutter between stacked host sections. Wide enough that a section can
+  // grow on amend without immediately touching its neighbour (see
+  // FC-HOST-SECTION-GROWTH above), and it matches the spacing the census
+  // pages were already hand-laid to.
+  const HOST_GUTTER = 200;
   const contractId = target.getSharedPluginData('ds_contracts', 'contractId');
   let section = null;
   for (const child of page.children) {
@@ -10943,7 +11276,20 @@ function ensureHostSection(page, target, displayName) {
       break;
     }
   }
-  if (!section) {
+  const isNewSection = !section;
+  // Measured BEFORE the new section joins the page, so it can never measure
+  // itself, and skipping "target" — a freshly built set is parked on the page
+  // until the line below adopts it, and counting it would push the section
+  // below its own contents.
+  let nextY = 0;
+  if (isNewSection) {
+    for (const child of page.children) {
+      if (child === target) continue;
+      let bottom;
+      try { bottom = child.y + child.height; } catch (e) { continue; }
+      if (typeof bottom !== 'number' || !isFinite(bottom)) continue;
+      if (bottom + HOST_GUTTER > nextY) nextY = bottom + HOST_GUTTER;
+    }
     section = figma.createSection();
     page.appendChild(section);
     section.setSharedPluginData('ds_contracts', 'hostFor', contractId);
@@ -10954,8 +11300,12 @@ function ensureHostSection(page, target, displayName) {
   target.x = HOST_PAD;
   target.y = HOST_PAD;
   section.resizeWithoutConstraints(target.width + HOST_PAD * 2, target.height + HOST_PAD * 2);
-  section.x = 100;
-  section.y = 100;
+  // ONLY a section this call created gets a position. An existing one keeps
+  // wherever the designer left it — that is the whole of defect (2).
+  if (isNewSection) {
+    section.x = 0;
+    section.y = nextY;
+  }
   return section;
 }
 
@@ -11507,7 +11857,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
+const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -11576,6 +11926,19 @@ async function amendSet(set, C) {
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
+  // FIXED POINT — the host section is adopted and re-fitted BEFORE the
+  // specHash early return, exactly like the identity markers above.
+  // Without this, a NODE whose content is unchanged keeps whatever coordinate
+  // it already carries forever: re-running the sync could never repair a page,
+  // only a human dragging things could. The altitude collision was in that
+  // state. Placement has to be a FIXED POINT — run the sync twice and get the
+  // same page — so the skip path is not allowed to be a dead end for it.
+  // The call AFTER the rebuild still exists and is still the one that re-fits
+  // the section to the FINAL size; this one only guarantees convergence.
+  {
+    const hostPage = set.parent && set.parent.type === 'SECTION' ? set.parent.parent : set.parent;
+    if (hostPage && hostPage.type === 'PAGE') ensureHostSection(hostPage, set, set.name);
+  }
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -11819,6 +12182,19 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
+  // FIXED POINT — the host section is adopted and re-fitted BEFORE the
+  // specHash early return, exactly like the identity markers above.
+  // Without this, a NODE whose content is unchanged keeps whatever coordinate
+  // it already carries forever: re-running the sync could never repair a page,
+  // only a human dragging things could. The altitude collision was in that
+  // state. Placement has to be a FIXED POINT — run the sync twice and get the
+  // same page — so the skip path is not allowed to be a dead end for it.
+  // The call AFTER the rebuild still exists and is still the one that re-fits
+  // the section to the FINAL size; this one only guarantees convergence.
+  {
+    const hostPageC = comp.parent && comp.parent.type === 'SECTION' ? comp.parent.parent : comp.parent;
+    if (hostPageC && hostPageC.type === 'PAGE') ensureHostSection(hostPageC, comp, comp.name);
+  }
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -12781,8 +13157,59 @@ function setInstanceProps(inst, props, owner) {
 // section is identity-marked (ds_contracts/hostFor) so create and amend both
 // re-fit the SAME section instead of stacking new ones; a component already
 // hosted keeps its section.
+//
+// FC-HOST-SECTION-COLLISION (measured live 2026-08-26 on the scratch file,
+// page "Census / altitude"). This function used to end with a hardcoded
+// "section.x = 100; section.y = 100;" — UNCONDITIONALLY, on create AND on
+// amend. Two separate defects rode on that one pair of lines:
+//
+//   1. NO SIBLING AWARENESS. Every set minted into one page landed on the
+//      SAME coordinate. Eight altitude sets sat at 100,100 stacked on top of
+//      each other; the owner opened the file, saw three set titles
+//      superimposed and a jumble of dots and slivers, and concluded the
+//      output was garbage. Most of those sets rendered CORRECTLY — they were
+//      simply buried. One coordinate did more damage to the project's
+//      credibility than any real conversion defect.
+//   2. AMEND SNAPPED THE DESIGNER BACK. A section a person had dragged
+//      somewhere was teleported to 100,100 by the next re-mint. That is what
+//      the live evidence showed: five of the eight altitude sections were at
+//      100,100 while Divider/Heading/Link still sat in the column a previous
+//      pass had laid out — the five were the ones the last run re-amended.
+//
+// THE RULE NOW, and why it is exactly this rule:
+//
+//   · An EXISTING host section is never repositioned. Its x/y are the
+//     designer's, not ours. A re-mint refits the section's SIZE around the
+//     rebuilt target and leaves the origin alone, so a manual reposition
+//     survives every subsequent amend.
+//   · A NEW host section is appended BELOW everything already on the page:
+//     x = 0, y = (max bottom edge of the page's existing children) + gutter.
+//     Collision-free by construction, regardless of how wide or tall the
+//     neighbours are.
+//
+// DETERMINISM, stated precisely, because the census screenshots depend on it:
+// minting a corpus into an EMPTY page twice produces byte-identical
+// coordinates — placement is a pure function of (mint order, sibling extents)
+// and mint order is the plan's contract order. Re-minting into a page that
+// already holds the sets moves NOTHING, because every section is found by
+// hostFor. What is NOT guaranteed: a section that GROWS on amend can grow
+// into the gutter below it and touch its neighbour. Reflowing the neighbours
+// would be the only way to prevent that, and reflowing is precisely the
+// behaviour that destroys a designer's manual position — so growth-overlap is
+// a NAMED residual (FC-HOST-SECTION-GROWTH), not a silent one.
+//
+// A single column, not a wrapped grid: host sections on the real corpus range
+// from 144px to 12,500px wide (polaris.text, polaris.button). Any row-packing
+// rule has to reflow a shelf when one member grows, and reflow is the thing
+// that cannot coexist with "the designer's position survives". The column is
+// the layout that keeps both promises at once.
 function ensureHostSection(page, target, displayName) {
   const HOST_PAD = 60;
+  // The gutter between stacked host sections. Wide enough that a section can
+  // grow on amend without immediately touching its neighbour (see
+  // FC-HOST-SECTION-GROWTH above), and it matches the spacing the census
+  // pages were already hand-laid to.
+  const HOST_GUTTER = 200;
   const contractId = target.getSharedPluginData('ds_contracts', 'contractId');
   let section = null;
   for (const child of page.children) {
@@ -12791,7 +13218,20 @@ function ensureHostSection(page, target, displayName) {
       break;
     }
   }
-  if (!section) {
+  const isNewSection = !section;
+  // Measured BEFORE the new section joins the page, so it can never measure
+  // itself, and skipping "target" — a freshly built set is parked on the page
+  // until the line below adopts it, and counting it would push the section
+  // below its own contents.
+  let nextY = 0;
+  if (isNewSection) {
+    for (const child of page.children) {
+      if (child === target) continue;
+      let bottom;
+      try { bottom = child.y + child.height; } catch (e) { continue; }
+      if (typeof bottom !== 'number' || !isFinite(bottom)) continue;
+      if (bottom + HOST_GUTTER > nextY) nextY = bottom + HOST_GUTTER;
+    }
     section = figma.createSection();
     page.appendChild(section);
     section.setSharedPluginData('ds_contracts', 'hostFor', contractId);
@@ -12802,8 +13242,12 @@ function ensureHostSection(page, target, displayName) {
   target.x = HOST_PAD;
   target.y = HOST_PAD;
   section.resizeWithoutConstraints(target.width + HOST_PAD * 2, target.height + HOST_PAD * 2);
-  section.x = 100;
-  section.y = 100;
+  // ONLY a section this call created gets a position. An existing one keeps
+  // wherever the designer left it — that is the whole of defect (2).
+  if (isNewSection) {
+    section.x = 0;
+    section.y = nextY;
+  }
   return section;
 }
 
@@ -13335,7 +13779,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
+const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -13404,6 +13848,19 @@ async function amendSet(set, C) {
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
+  // FIXED POINT — the host section is adopted and re-fitted BEFORE the
+  // specHash early return, exactly like the identity markers above.
+  // Without this, a NODE whose content is unchanged keeps whatever coordinate
+  // it already carries forever: re-running the sync could never repair a page,
+  // only a human dragging things could. The altitude collision was in that
+  // state. Placement has to be a FIXED POINT — run the sync twice and get the
+  // same page — so the skip path is not allowed to be a dead end for it.
+  // The call AFTER the rebuild still exists and is still the one that re-fits
+  // the section to the FINAL size; this one only guarantees convergence.
+  {
+    const hostPage = set.parent && set.parent.type === 'SECTION' ? set.parent.parent : set.parent;
+    if (hostPage && hostPage.type === 'PAGE') ensureHostSection(hostPage, set, set.name);
+  }
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -13647,6 +14104,19 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
+  // FIXED POINT — the host section is adopted and re-fitted BEFORE the
+  // specHash early return, exactly like the identity markers above.
+  // Without this, a NODE whose content is unchanged keeps whatever coordinate
+  // it already carries forever: re-running the sync could never repair a page,
+  // only a human dragging things could. The altitude collision was in that
+  // state. Placement has to be a FIXED POINT — run the sync twice and get the
+  // same page — so the skip path is not allowed to be a dead end for it.
+  // The call AFTER the rebuild still exists and is still the one that re-fits
+  // the section to the FINAL size; this one only guarantees convergence.
+  {
+    const hostPageC = comp.parent && comp.parent.type === 'SECTION' ? comp.parent.parent : comp.parent;
+    if (hostPageC && hostPageC.type === 'PAGE') ensureHostSection(hostPageC, comp, comp.name);
+  }
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -15441,8 +15911,59 @@ function setInstanceProps(inst, props, owner) {
 // section is identity-marked (ds_contracts/hostFor) so create and amend both
 // re-fit the SAME section instead of stacking new ones; a component already
 // hosted keeps its section.
+//
+// FC-HOST-SECTION-COLLISION (measured live 2026-08-26 on the scratch file,
+// page "Census / altitude"). This function used to end with a hardcoded
+// "section.x = 100; section.y = 100;" — UNCONDITIONALLY, on create AND on
+// amend. Two separate defects rode on that one pair of lines:
+//
+//   1. NO SIBLING AWARENESS. Every set minted into one page landed on the
+//      SAME coordinate. Eight altitude sets sat at 100,100 stacked on top of
+//      each other; the owner opened the file, saw three set titles
+//      superimposed and a jumble of dots and slivers, and concluded the
+//      output was garbage. Most of those sets rendered CORRECTLY — they were
+//      simply buried. One coordinate did more damage to the project's
+//      credibility than any real conversion defect.
+//   2. AMEND SNAPPED THE DESIGNER BACK. A section a person had dragged
+//      somewhere was teleported to 100,100 by the next re-mint. That is what
+//      the live evidence showed: five of the eight altitude sections were at
+//      100,100 while Divider/Heading/Link still sat in the column a previous
+//      pass had laid out — the five were the ones the last run re-amended.
+//
+// THE RULE NOW, and why it is exactly this rule:
+//
+//   · An EXISTING host section is never repositioned. Its x/y are the
+//     designer's, not ours. A re-mint refits the section's SIZE around the
+//     rebuilt target and leaves the origin alone, so a manual reposition
+//     survives every subsequent amend.
+//   · A NEW host section is appended BELOW everything already on the page:
+//     x = 0, y = (max bottom edge of the page's existing children) + gutter.
+//     Collision-free by construction, regardless of how wide or tall the
+//     neighbours are.
+//
+// DETERMINISM, stated precisely, because the census screenshots depend on it:
+// minting a corpus into an EMPTY page twice produces byte-identical
+// coordinates — placement is a pure function of (mint order, sibling extents)
+// and mint order is the plan's contract order. Re-minting into a page that
+// already holds the sets moves NOTHING, because every section is found by
+// hostFor. What is NOT guaranteed: a section that GROWS on amend can grow
+// into the gutter below it and touch its neighbour. Reflowing the neighbours
+// would be the only way to prevent that, and reflowing is precisely the
+// behaviour that destroys a designer's manual position — so growth-overlap is
+// a NAMED residual (FC-HOST-SECTION-GROWTH), not a silent one.
+//
+// A single column, not a wrapped grid: host sections on the real corpus range
+// from 144px to 12,500px wide (polaris.text, polaris.button). Any row-packing
+// rule has to reflow a shelf when one member grows, and reflow is the thing
+// that cannot coexist with "the designer's position survives". The column is
+// the layout that keeps both promises at once.
 function ensureHostSection(page, target, displayName) {
   const HOST_PAD = 60;
+  // The gutter between stacked host sections. Wide enough that a section can
+  // grow on amend without immediately touching its neighbour (see
+  // FC-HOST-SECTION-GROWTH above), and it matches the spacing the census
+  // pages were already hand-laid to.
+  const HOST_GUTTER = 200;
   const contractId = target.getSharedPluginData('ds_contracts', 'contractId');
   let section = null;
   for (const child of page.children) {
@@ -15451,7 +15972,20 @@ function ensureHostSection(page, target, displayName) {
       break;
     }
   }
-  if (!section) {
+  const isNewSection = !section;
+  // Measured BEFORE the new section joins the page, so it can never measure
+  // itself, and skipping "target" — a freshly built set is parked on the page
+  // until the line below adopts it, and counting it would push the section
+  // below its own contents.
+  let nextY = 0;
+  if (isNewSection) {
+    for (const child of page.children) {
+      if (child === target) continue;
+      let bottom;
+      try { bottom = child.y + child.height; } catch (e) { continue; }
+      if (typeof bottom !== 'number' || !isFinite(bottom)) continue;
+      if (bottom + HOST_GUTTER > nextY) nextY = bottom + HOST_GUTTER;
+    }
     section = figma.createSection();
     page.appendChild(section);
     section.setSharedPluginData('ds_contracts', 'hostFor', contractId);
@@ -15462,8 +15996,12 @@ function ensureHostSection(page, target, displayName) {
   target.x = HOST_PAD;
   target.y = HOST_PAD;
   section.resizeWithoutConstraints(target.width + HOST_PAD * 2, target.height + HOST_PAD * 2);
-  section.x = 100;
-  section.y = 100;
+  // ONLY a section this call created gets a position. An existing one keeps
+  // wherever the designer left it — that is the whole of defect (2).
+  if (isNewSection) {
+    section.x = 0;
+    section.y = nextY;
+  }
   return section;
 }
 
@@ -16073,7 +16611,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
+const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -16142,6 +16680,19 @@ async function amendSet(set, C) {
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
+  // FIXED POINT — the host section is adopted and re-fitted BEFORE the
+  // specHash early return, exactly like the identity markers above.
+  // Without this, a NODE whose content is unchanged keeps whatever coordinate
+  // it already carries forever: re-running the sync could never repair a page,
+  // only a human dragging things could. The altitude collision was in that
+  // state. Placement has to be a FIXED POINT — run the sync twice and get the
+  // same page — so the skip path is not allowed to be a dead end for it.
+  // The call AFTER the rebuild still exists and is still the one that re-fits
+  // the section to the FINAL size; this one only guarantees convergence.
+  {
+    const hostPage = set.parent && set.parent.type === 'SECTION' ? set.parent.parent : set.parent;
+    if (hostPage && hostPage.type === 'PAGE') ensureHostSection(hostPage, set, set.name);
+  }
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -16409,6 +16960,19 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
+  // FIXED POINT — the host section is adopted and re-fitted BEFORE the
+  // specHash early return, exactly like the identity markers above.
+  // Without this, a NODE whose content is unchanged keeps whatever coordinate
+  // it already carries forever: re-running the sync could never repair a page,
+  // only a human dragging things could. The altitude collision was in that
+  // state. Placement has to be a FIXED POINT — run the sync twice and get the
+  // same page — so the skip path is not allowed to be a dead end for it.
+  // The call AFTER the rebuild still exists and is still the one that re-fits
+  // the section to the FINAL size; this one only guarantees convergence.
+  {
+    const hostPageC = comp.parent && comp.parent.type === 'SECTION' ? comp.parent.parent : comp.parent;
+    if (hostPageC && hostPageC.type === 'PAGE') ensureHostSection(hostPageC, comp, comp.name);
+  }
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -17662,8 +18226,59 @@ function setInstanceProps(inst, props, owner) {
 // section is identity-marked (ds_contracts/hostFor) so create and amend both
 // re-fit the SAME section instead of stacking new ones; a component already
 // hosted keeps its section.
+//
+// FC-HOST-SECTION-COLLISION (measured live 2026-08-26 on the scratch file,
+// page "Census / altitude"). This function used to end with a hardcoded
+// "section.x = 100; section.y = 100;" — UNCONDITIONALLY, on create AND on
+// amend. Two separate defects rode on that one pair of lines:
+//
+//   1. NO SIBLING AWARENESS. Every set minted into one page landed on the
+//      SAME coordinate. Eight altitude sets sat at 100,100 stacked on top of
+//      each other; the owner opened the file, saw three set titles
+//      superimposed and a jumble of dots and slivers, and concluded the
+//      output was garbage. Most of those sets rendered CORRECTLY — they were
+//      simply buried. One coordinate did more damage to the project's
+//      credibility than any real conversion defect.
+//   2. AMEND SNAPPED THE DESIGNER BACK. A section a person had dragged
+//      somewhere was teleported to 100,100 by the next re-mint. That is what
+//      the live evidence showed: five of the eight altitude sections were at
+//      100,100 while Divider/Heading/Link still sat in the column a previous
+//      pass had laid out — the five were the ones the last run re-amended.
+//
+// THE RULE NOW, and why it is exactly this rule:
+//
+//   · An EXISTING host section is never repositioned. Its x/y are the
+//     designer's, not ours. A re-mint refits the section's SIZE around the
+//     rebuilt target and leaves the origin alone, so a manual reposition
+//     survives every subsequent amend.
+//   · A NEW host section is appended BELOW everything already on the page:
+//     x = 0, y = (max bottom edge of the page's existing children) + gutter.
+//     Collision-free by construction, regardless of how wide or tall the
+//     neighbours are.
+//
+// DETERMINISM, stated precisely, because the census screenshots depend on it:
+// minting a corpus into an EMPTY page twice produces byte-identical
+// coordinates — placement is a pure function of (mint order, sibling extents)
+// and mint order is the plan's contract order. Re-minting into a page that
+// already holds the sets moves NOTHING, because every section is found by
+// hostFor. What is NOT guaranteed: a section that GROWS on amend can grow
+// into the gutter below it and touch its neighbour. Reflowing the neighbours
+// would be the only way to prevent that, and reflowing is precisely the
+// behaviour that destroys a designer's manual position — so growth-overlap is
+// a NAMED residual (FC-HOST-SECTION-GROWTH), not a silent one.
+//
+// A single column, not a wrapped grid: host sections on the real corpus range
+// from 144px to 12,500px wide (polaris.text, polaris.button). Any row-packing
+// rule has to reflow a shelf when one member grows, and reflow is the thing
+// that cannot coexist with "the designer's position survives". The column is
+// the layout that keeps both promises at once.
 function ensureHostSection(page, target, displayName) {
   const HOST_PAD = 60;
+  // The gutter between stacked host sections. Wide enough that a section can
+  // grow on amend without immediately touching its neighbour (see
+  // FC-HOST-SECTION-GROWTH above), and it matches the spacing the census
+  // pages were already hand-laid to.
+  const HOST_GUTTER = 200;
   const contractId = target.getSharedPluginData('ds_contracts', 'contractId');
   let section = null;
   for (const child of page.children) {
@@ -17672,7 +18287,20 @@ function ensureHostSection(page, target, displayName) {
       break;
     }
   }
-  if (!section) {
+  const isNewSection = !section;
+  // Measured BEFORE the new section joins the page, so it can never measure
+  // itself, and skipping "target" — a freshly built set is parked on the page
+  // until the line below adopts it, and counting it would push the section
+  // below its own contents.
+  let nextY = 0;
+  if (isNewSection) {
+    for (const child of page.children) {
+      if (child === target) continue;
+      let bottom;
+      try { bottom = child.y + child.height; } catch (e) { continue; }
+      if (typeof bottom !== 'number' || !isFinite(bottom)) continue;
+      if (bottom + HOST_GUTTER > nextY) nextY = bottom + HOST_GUTTER;
+    }
     section = figma.createSection();
     page.appendChild(section);
     section.setSharedPluginData('ds_contracts', 'hostFor', contractId);
@@ -17683,8 +18311,12 @@ function ensureHostSection(page, target, displayName) {
   target.x = HOST_PAD;
   target.y = HOST_PAD;
   section.resizeWithoutConstraints(target.width + HOST_PAD * 2, target.height + HOST_PAD * 2);
-  section.x = 100;
-  section.y = 100;
+  // ONLY a section this call created gets a position. An existing one keeps
+  // wherever the designer left it — that is the whole of defect (2).
+  if (isNewSection) {
+    section.x = 0;
+    section.y = nextY;
+  }
   return section;
 }
 
@@ -18285,7 +18917,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
+const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -18354,6 +18986,19 @@ async function amendSet(set, C) {
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
+  // FIXED POINT — the host section is adopted and re-fitted BEFORE the
+  // specHash early return, exactly like the identity markers above.
+  // Without this, a NODE whose content is unchanged keeps whatever coordinate
+  // it already carries forever: re-running the sync could never repair a page,
+  // only a human dragging things could. The altitude collision was in that
+  // state. Placement has to be a FIXED POINT — run the sync twice and get the
+  // same page — so the skip path is not allowed to be a dead end for it.
+  // The call AFTER the rebuild still exists and is still the one that re-fits
+  // the section to the FINAL size; this one only guarantees convergence.
+  {
+    const hostPage = set.parent && set.parent.type === 'SECTION' ? set.parent.parent : set.parent;
+    if (hostPage && hostPage.type === 'PAGE') ensureHostSection(hostPage, set, set.name);
+  }
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -18621,6 +19266,19 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
+  // FIXED POINT — the host section is adopted and re-fitted BEFORE the
+  // specHash early return, exactly like the identity markers above.
+  // Without this, a NODE whose content is unchanged keeps whatever coordinate
+  // it already carries forever: re-running the sync could never repair a page,
+  // only a human dragging things could. The altitude collision was in that
+  // state. Placement has to be a FIXED POINT — run the sync twice and get the
+  // same page — so the skip path is not allowed to be a dead end for it.
+  // The call AFTER the rebuild still exists and is still the one that re-fits
+  // the section to the FINAL size; this one only guarantees convergence.
+  {
+    const hostPageC = comp.parent && comp.parent.type === 'SECTION' ? comp.parent.parent : comp.parent;
+    if (hostPageC && hostPageC.type === 'PAGE') ensureHostSection(hostPageC, comp, comp.name);
+  }
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -19713,8 +20371,59 @@ function setInstanceProps(inst, props, owner) {
 // section is identity-marked (ds_contracts/hostFor) so create and amend both
 // re-fit the SAME section instead of stacking new ones; a component already
 // hosted keeps its section.
+//
+// FC-HOST-SECTION-COLLISION (measured live 2026-08-26 on the scratch file,
+// page "Census / altitude"). This function used to end with a hardcoded
+// "section.x = 100; section.y = 100;" — UNCONDITIONALLY, on create AND on
+// amend. Two separate defects rode on that one pair of lines:
+//
+//   1. NO SIBLING AWARENESS. Every set minted into one page landed on the
+//      SAME coordinate. Eight altitude sets sat at 100,100 stacked on top of
+//      each other; the owner opened the file, saw three set titles
+//      superimposed and a jumble of dots and slivers, and concluded the
+//      output was garbage. Most of those sets rendered CORRECTLY — they were
+//      simply buried. One coordinate did more damage to the project's
+//      credibility than any real conversion defect.
+//   2. AMEND SNAPPED THE DESIGNER BACK. A section a person had dragged
+//      somewhere was teleported to 100,100 by the next re-mint. That is what
+//      the live evidence showed: five of the eight altitude sections were at
+//      100,100 while Divider/Heading/Link still sat in the column a previous
+//      pass had laid out — the five were the ones the last run re-amended.
+//
+// THE RULE NOW, and why it is exactly this rule:
+//
+//   · An EXISTING host section is never repositioned. Its x/y are the
+//     designer's, not ours. A re-mint refits the section's SIZE around the
+//     rebuilt target and leaves the origin alone, so a manual reposition
+//     survives every subsequent amend.
+//   · A NEW host section is appended BELOW everything already on the page:
+//     x = 0, y = (max bottom edge of the page's existing children) + gutter.
+//     Collision-free by construction, regardless of how wide or tall the
+//     neighbours are.
+//
+// DETERMINISM, stated precisely, because the census screenshots depend on it:
+// minting a corpus into an EMPTY page twice produces byte-identical
+// coordinates — placement is a pure function of (mint order, sibling extents)
+// and mint order is the plan's contract order. Re-minting into a page that
+// already holds the sets moves NOTHING, because every section is found by
+// hostFor. What is NOT guaranteed: a section that GROWS on amend can grow
+// into the gutter below it and touch its neighbour. Reflowing the neighbours
+// would be the only way to prevent that, and reflowing is precisely the
+// behaviour that destroys a designer's manual position — so growth-overlap is
+// a NAMED residual (FC-HOST-SECTION-GROWTH), not a silent one.
+//
+// A single column, not a wrapped grid: host sections on the real corpus range
+// from 144px to 12,500px wide (polaris.text, polaris.button). Any row-packing
+// rule has to reflow a shelf when one member grows, and reflow is the thing
+// that cannot coexist with "the designer's position survives". The column is
+// the layout that keeps both promises at once.
 function ensureHostSection(page, target, displayName) {
   const HOST_PAD = 60;
+  // The gutter between stacked host sections. Wide enough that a section can
+  // grow on amend without immediately touching its neighbour (see
+  // FC-HOST-SECTION-GROWTH above), and it matches the spacing the census
+  // pages were already hand-laid to.
+  const HOST_GUTTER = 200;
   const contractId = target.getSharedPluginData('ds_contracts', 'contractId');
   let section = null;
   for (const child of page.children) {
@@ -19723,7 +20432,20 @@ function ensureHostSection(page, target, displayName) {
       break;
     }
   }
-  if (!section) {
+  const isNewSection = !section;
+  // Measured BEFORE the new section joins the page, so it can never measure
+  // itself, and skipping "target" — a freshly built set is parked on the page
+  // until the line below adopts it, and counting it would push the section
+  // below its own contents.
+  let nextY = 0;
+  if (isNewSection) {
+    for (const child of page.children) {
+      if (child === target) continue;
+      let bottom;
+      try { bottom = child.y + child.height; } catch (e) { continue; }
+      if (typeof bottom !== 'number' || !isFinite(bottom)) continue;
+      if (bottom + HOST_GUTTER > nextY) nextY = bottom + HOST_GUTTER;
+    }
     section = figma.createSection();
     page.appendChild(section);
     section.setSharedPluginData('ds_contracts', 'hostFor', contractId);
@@ -19734,8 +20456,12 @@ function ensureHostSection(page, target, displayName) {
   target.x = HOST_PAD;
   target.y = HOST_PAD;
   section.resizeWithoutConstraints(target.width + HOST_PAD * 2, target.height + HOST_PAD * 2);
-  section.x = 100;
-  section.y = 100;
+  // ONLY a section this call created gets a position. An existing one keeps
+  // wherever the designer left it — that is the whole of defect (2).
+  if (isNewSection) {
+    section.x = 0;
+    section.y = nextY;
+  }
   return section;
 }
 
@@ -20337,7 +21063,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
+const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -20406,6 +21132,19 @@ async function amendSet(set, C) {
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
+  // FIXED POINT — the host section is adopted and re-fitted BEFORE the
+  // specHash early return, exactly like the identity markers above.
+  // Without this, a NODE whose content is unchanged keeps whatever coordinate
+  // it already carries forever: re-running the sync could never repair a page,
+  // only a human dragging things could. The altitude collision was in that
+  // state. Placement has to be a FIXED POINT — run the sync twice and get the
+  // same page — so the skip path is not allowed to be a dead end for it.
+  // The call AFTER the rebuild still exists and is still the one that re-fits
+  // the section to the FINAL size; this one only guarantees convergence.
+  {
+    const hostPage = set.parent && set.parent.type === 'SECTION' ? set.parent.parent : set.parent;
+    if (hostPage && hostPage.type === 'PAGE') ensureHostSection(hostPage, set, set.name);
+  }
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -20649,6 +21388,19 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
+  // FIXED POINT — the host section is adopted and re-fitted BEFORE the
+  // specHash early return, exactly like the identity markers above.
+  // Without this, a NODE whose content is unchanged keeps whatever coordinate
+  // it already carries forever: re-running the sync could never repair a page,
+  // only a human dragging things could. The altitude collision was in that
+  // state. Placement has to be a FIXED POINT — run the sync twice and get the
+  // same page — so the skip path is not allowed to be a dead end for it.
+  // The call AFTER the rebuild still exists and is still the one that re-fits
+  // the section to the FINAL size; this one only guarantees convergence.
+  {
+    const hostPageC = comp.parent && comp.parent.type === 'SECTION' ? comp.parent.parent : comp.parent;
+    if (hostPageC && hostPageC.type === 'PAGE') ensureHostSection(hostPageC, comp, comp.name);
+  }
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -22563,8 +23315,59 @@ function setInstanceProps(inst, props, owner) {
 // section is identity-marked (ds_contracts/hostFor) so create and amend both
 // re-fit the SAME section instead of stacking new ones; a component already
 // hosted keeps its section.
+//
+// FC-HOST-SECTION-COLLISION (measured live 2026-08-26 on the scratch file,
+// page "Census / altitude"). This function used to end with a hardcoded
+// "section.x = 100; section.y = 100;" — UNCONDITIONALLY, on create AND on
+// amend. Two separate defects rode on that one pair of lines:
+//
+//   1. NO SIBLING AWARENESS. Every set minted into one page landed on the
+//      SAME coordinate. Eight altitude sets sat at 100,100 stacked on top of
+//      each other; the owner opened the file, saw three set titles
+//      superimposed and a jumble of dots and slivers, and concluded the
+//      output was garbage. Most of those sets rendered CORRECTLY — they were
+//      simply buried. One coordinate did more damage to the project's
+//      credibility than any real conversion defect.
+//   2. AMEND SNAPPED THE DESIGNER BACK. A section a person had dragged
+//      somewhere was teleported to 100,100 by the next re-mint. That is what
+//      the live evidence showed: five of the eight altitude sections were at
+//      100,100 while Divider/Heading/Link still sat in the column a previous
+//      pass had laid out — the five were the ones the last run re-amended.
+//
+// THE RULE NOW, and why it is exactly this rule:
+//
+//   · An EXISTING host section is never repositioned. Its x/y are the
+//     designer's, not ours. A re-mint refits the section's SIZE around the
+//     rebuilt target and leaves the origin alone, so a manual reposition
+//     survives every subsequent amend.
+//   · A NEW host section is appended BELOW everything already on the page:
+//     x = 0, y = (max bottom edge of the page's existing children) + gutter.
+//     Collision-free by construction, regardless of how wide or tall the
+//     neighbours are.
+//
+// DETERMINISM, stated precisely, because the census screenshots depend on it:
+// minting a corpus into an EMPTY page twice produces byte-identical
+// coordinates — placement is a pure function of (mint order, sibling extents)
+// and mint order is the plan's contract order. Re-minting into a page that
+// already holds the sets moves NOTHING, because every section is found by
+// hostFor. What is NOT guaranteed: a section that GROWS on amend can grow
+// into the gutter below it and touch its neighbour. Reflowing the neighbours
+// would be the only way to prevent that, and reflowing is precisely the
+// behaviour that destroys a designer's manual position — so growth-overlap is
+// a NAMED residual (FC-HOST-SECTION-GROWTH), not a silent one.
+//
+// A single column, not a wrapped grid: host sections on the real corpus range
+// from 144px to 12,500px wide (polaris.text, polaris.button). Any row-packing
+// rule has to reflow a shelf when one member grows, and reflow is the thing
+// that cannot coexist with "the designer's position survives". The column is
+// the layout that keeps both promises at once.
 function ensureHostSection(page, target, displayName) {
   const HOST_PAD = 60;
+  // The gutter between stacked host sections. Wide enough that a section can
+  // grow on amend without immediately touching its neighbour (see
+  // FC-HOST-SECTION-GROWTH above), and it matches the spacing the census
+  // pages were already hand-laid to.
+  const HOST_GUTTER = 200;
   const contractId = target.getSharedPluginData('ds_contracts', 'contractId');
   let section = null;
   for (const child of page.children) {
@@ -22573,7 +23376,20 @@ function ensureHostSection(page, target, displayName) {
       break;
     }
   }
-  if (!section) {
+  const isNewSection = !section;
+  // Measured BEFORE the new section joins the page, so it can never measure
+  // itself, and skipping "target" — a freshly built set is parked on the page
+  // until the line below adopts it, and counting it would push the section
+  // below its own contents.
+  let nextY = 0;
+  if (isNewSection) {
+    for (const child of page.children) {
+      if (child === target) continue;
+      let bottom;
+      try { bottom = child.y + child.height; } catch (e) { continue; }
+      if (typeof bottom !== 'number' || !isFinite(bottom)) continue;
+      if (bottom + HOST_GUTTER > nextY) nextY = bottom + HOST_GUTTER;
+    }
     section = figma.createSection();
     page.appendChild(section);
     section.setSharedPluginData('ds_contracts', 'hostFor', contractId);
@@ -22584,8 +23400,12 @@ function ensureHostSection(page, target, displayName) {
   target.x = HOST_PAD;
   target.y = HOST_PAD;
   section.resizeWithoutConstraints(target.width + HOST_PAD * 2, target.height + HOST_PAD * 2);
-  section.x = 100;
-  section.y = 100;
+  // ONLY a section this call created gets a position. An existing one keeps
+  // wherever the designer left it — that is the whole of defect (2).
+  if (isNewSection) {
+    section.x = 0;
+    section.y = nextY;
+  }
   return section;
 }
 
@@ -23186,7 +24006,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
+const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -23255,6 +24075,19 @@ async function amendSet(set, C) {
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
+  // FIXED POINT — the host section is adopted and re-fitted BEFORE the
+  // specHash early return, exactly like the identity markers above.
+  // Without this, a NODE whose content is unchanged keeps whatever coordinate
+  // it already carries forever: re-running the sync could never repair a page,
+  // only a human dragging things could. The altitude collision was in that
+  // state. Placement has to be a FIXED POINT — run the sync twice and get the
+  // same page — so the skip path is not allowed to be a dead end for it.
+  // The call AFTER the rebuild still exists and is still the one that re-fits
+  // the section to the FINAL size; this one only guarantees convergence.
+  {
+    const hostPage = set.parent && set.parent.type === 'SECTION' ? set.parent.parent : set.parent;
+    if (hostPage && hostPage.type === 'PAGE') ensureHostSection(hostPage, set, set.name);
+  }
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -23522,6 +24355,19 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
+  // FIXED POINT — the host section is adopted and re-fitted BEFORE the
+  // specHash early return, exactly like the identity markers above.
+  // Without this, a NODE whose content is unchanged keeps whatever coordinate
+  // it already carries forever: re-running the sync could never repair a page,
+  // only a human dragging things could. The altitude collision was in that
+  // state. Placement has to be a FIXED POINT — run the sync twice and get the
+  // same page — so the skip path is not allowed to be a dead end for it.
+  // The call AFTER the rebuild still exists and is still the one that re-fits
+  // the section to the FINAL size; this one only guarantees convergence.
+  {
+    const hostPageC = comp.parent && comp.parent.type === 'SECTION' ? comp.parent.parent : comp.parent;
+    if (hostPageC && hostPageC.type === 'PAGE') ensureHostSection(hostPageC, comp, comp.name);
+  }
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -25000,8 +25846,59 @@ function setInstanceProps(inst, props, owner) {
 // section is identity-marked (ds_contracts/hostFor) so create and amend both
 // re-fit the SAME section instead of stacking new ones; a component already
 // hosted keeps its section.
+//
+// FC-HOST-SECTION-COLLISION (measured live 2026-08-26 on the scratch file,
+// page "Census / altitude"). This function used to end with a hardcoded
+// "section.x = 100; section.y = 100;" — UNCONDITIONALLY, on create AND on
+// amend. Two separate defects rode on that one pair of lines:
+//
+//   1. NO SIBLING AWARENESS. Every set minted into one page landed on the
+//      SAME coordinate. Eight altitude sets sat at 100,100 stacked on top of
+//      each other; the owner opened the file, saw three set titles
+//      superimposed and a jumble of dots and slivers, and concluded the
+//      output was garbage. Most of those sets rendered CORRECTLY — they were
+//      simply buried. One coordinate did more damage to the project's
+//      credibility than any real conversion defect.
+//   2. AMEND SNAPPED THE DESIGNER BACK. A section a person had dragged
+//      somewhere was teleported to 100,100 by the next re-mint. That is what
+//      the live evidence showed: five of the eight altitude sections were at
+//      100,100 while Divider/Heading/Link still sat in the column a previous
+//      pass had laid out — the five were the ones the last run re-amended.
+//
+// THE RULE NOW, and why it is exactly this rule:
+//
+//   · An EXISTING host section is never repositioned. Its x/y are the
+//     designer's, not ours. A re-mint refits the section's SIZE around the
+//     rebuilt target and leaves the origin alone, so a manual reposition
+//     survives every subsequent amend.
+//   · A NEW host section is appended BELOW everything already on the page:
+//     x = 0, y = (max bottom edge of the page's existing children) + gutter.
+//     Collision-free by construction, regardless of how wide or tall the
+//     neighbours are.
+//
+// DETERMINISM, stated precisely, because the census screenshots depend on it:
+// minting a corpus into an EMPTY page twice produces byte-identical
+// coordinates — placement is a pure function of (mint order, sibling extents)
+// and mint order is the plan's contract order. Re-minting into a page that
+// already holds the sets moves NOTHING, because every section is found by
+// hostFor. What is NOT guaranteed: a section that GROWS on amend can grow
+// into the gutter below it and touch its neighbour. Reflowing the neighbours
+// would be the only way to prevent that, and reflowing is precisely the
+// behaviour that destroys a designer's manual position — so growth-overlap is
+// a NAMED residual (FC-HOST-SECTION-GROWTH), not a silent one.
+//
+// A single column, not a wrapped grid: host sections on the real corpus range
+// from 144px to 12,500px wide (polaris.text, polaris.button). Any row-packing
+// rule has to reflow a shelf when one member grows, and reflow is the thing
+// that cannot coexist with "the designer's position survives". The column is
+// the layout that keeps both promises at once.
 function ensureHostSection(page, target, displayName) {
   const HOST_PAD = 60;
+  // The gutter between stacked host sections. Wide enough that a section can
+  // grow on amend without immediately touching its neighbour (see
+  // FC-HOST-SECTION-GROWTH above), and it matches the spacing the census
+  // pages were already hand-laid to.
+  const HOST_GUTTER = 200;
   const contractId = target.getSharedPluginData('ds_contracts', 'contractId');
   let section = null;
   for (const child of page.children) {
@@ -25010,7 +25907,20 @@ function ensureHostSection(page, target, displayName) {
       break;
     }
   }
-  if (!section) {
+  const isNewSection = !section;
+  // Measured BEFORE the new section joins the page, so it can never measure
+  // itself, and skipping "target" — a freshly built set is parked on the page
+  // until the line below adopts it, and counting it would push the section
+  // below its own contents.
+  let nextY = 0;
+  if (isNewSection) {
+    for (const child of page.children) {
+      if (child === target) continue;
+      let bottom;
+      try { bottom = child.y + child.height; } catch (e) { continue; }
+      if (typeof bottom !== 'number' || !isFinite(bottom)) continue;
+      if (bottom + HOST_GUTTER > nextY) nextY = bottom + HOST_GUTTER;
+    }
     section = figma.createSection();
     page.appendChild(section);
     section.setSharedPluginData('ds_contracts', 'hostFor', contractId);
@@ -25021,8 +25931,12 @@ function ensureHostSection(page, target, displayName) {
   target.x = HOST_PAD;
   target.y = HOST_PAD;
   section.resizeWithoutConstraints(target.width + HOST_PAD * 2, target.height + HOST_PAD * 2);
-  section.x = 100;
-  section.y = 100;
+  // ONLY a section this call created gets a position. An existing one keeps
+  // wherever the designer left it — that is the whole of defect (2).
+  if (isNewSection) {
+    section.x = 0;
+    section.y = nextY;
+  }
   return section;
 }
 
@@ -25566,7 +26480,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
+const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -25635,6 +26549,19 @@ async function amendSet(set, C) {
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
+  // FIXED POINT — the host section is adopted and re-fitted BEFORE the
+  // specHash early return, exactly like the identity markers above.
+  // Without this, a NODE whose content is unchanged keeps whatever coordinate
+  // it already carries forever: re-running the sync could never repair a page,
+  // only a human dragging things could. The altitude collision was in that
+  // state. Placement has to be a FIXED POINT — run the sync twice and get the
+  // same page — so the skip path is not allowed to be a dead end for it.
+  // The call AFTER the rebuild still exists and is still the one that re-fits
+  // the section to the FINAL size; this one only guarantees convergence.
+  {
+    const hostPage = set.parent && set.parent.type === 'SECTION' ? set.parent.parent : set.parent;
+    if (hostPage && hostPage.type === 'PAGE') ensureHostSection(hostPage, set, set.name);
+  }
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -25878,6 +26805,19 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
+  // FIXED POINT — the host section is adopted and re-fitted BEFORE the
+  // specHash early return, exactly like the identity markers above.
+  // Without this, a NODE whose content is unchanged keeps whatever coordinate
+  // it already carries forever: re-running the sync could never repair a page,
+  // only a human dragging things could. The altitude collision was in that
+  // state. Placement has to be a FIXED POINT — run the sync twice and get the
+  // same page — so the skip path is not allowed to be a dead end for it.
+  // The call AFTER the rebuild still exists and is still the one that re-fits
+  // the section to the FINAL size; this one only guarantees convergence.
+  {
+    const hostPageC = comp.parent && comp.parent.type === 'SECTION' ? comp.parent.parent : comp.parent;
+    if (hostPageC && hostPageC.type === 'PAGE') ensureHostSection(hostPageC, comp, comp.name);
+  }
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -26750,8 +27690,59 @@ function setInstanceProps(inst, props, owner) {
 // section is identity-marked (ds_contracts/hostFor) so create and amend both
 // re-fit the SAME section instead of stacking new ones; a component already
 // hosted keeps its section.
+//
+// FC-HOST-SECTION-COLLISION (measured live 2026-08-26 on the scratch file,
+// page "Census / altitude"). This function used to end with a hardcoded
+// "section.x = 100; section.y = 100;" — UNCONDITIONALLY, on create AND on
+// amend. Two separate defects rode on that one pair of lines:
+//
+//   1. NO SIBLING AWARENESS. Every set minted into one page landed on the
+//      SAME coordinate. Eight altitude sets sat at 100,100 stacked on top of
+//      each other; the owner opened the file, saw three set titles
+//      superimposed and a jumble of dots and slivers, and concluded the
+//      output was garbage. Most of those sets rendered CORRECTLY — they were
+//      simply buried. One coordinate did more damage to the project's
+//      credibility than any real conversion defect.
+//   2. AMEND SNAPPED THE DESIGNER BACK. A section a person had dragged
+//      somewhere was teleported to 100,100 by the next re-mint. That is what
+//      the live evidence showed: five of the eight altitude sections were at
+//      100,100 while Divider/Heading/Link still sat in the column a previous
+//      pass had laid out — the five were the ones the last run re-amended.
+//
+// THE RULE NOW, and why it is exactly this rule:
+//
+//   · An EXISTING host section is never repositioned. Its x/y are the
+//     designer's, not ours. A re-mint refits the section's SIZE around the
+//     rebuilt target and leaves the origin alone, so a manual reposition
+//     survives every subsequent amend.
+//   · A NEW host section is appended BELOW everything already on the page:
+//     x = 0, y = (max bottom edge of the page's existing children) + gutter.
+//     Collision-free by construction, regardless of how wide or tall the
+//     neighbours are.
+//
+// DETERMINISM, stated precisely, because the census screenshots depend on it:
+// minting a corpus into an EMPTY page twice produces byte-identical
+// coordinates — placement is a pure function of (mint order, sibling extents)
+// and mint order is the plan's contract order. Re-minting into a page that
+// already holds the sets moves NOTHING, because every section is found by
+// hostFor. What is NOT guaranteed: a section that GROWS on amend can grow
+// into the gutter below it and touch its neighbour. Reflowing the neighbours
+// would be the only way to prevent that, and reflowing is precisely the
+// behaviour that destroys a designer's manual position — so growth-overlap is
+// a NAMED residual (FC-HOST-SECTION-GROWTH), not a silent one.
+//
+// A single column, not a wrapped grid: host sections on the real corpus range
+// from 144px to 12,500px wide (polaris.text, polaris.button). Any row-packing
+// rule has to reflow a shelf when one member grows, and reflow is the thing
+// that cannot coexist with "the designer's position survives". The column is
+// the layout that keeps both promises at once.
 function ensureHostSection(page, target, displayName) {
   const HOST_PAD = 60;
+  // The gutter between stacked host sections. Wide enough that a section can
+  // grow on amend without immediately touching its neighbour (see
+  // FC-HOST-SECTION-GROWTH above), and it matches the spacing the census
+  // pages were already hand-laid to.
+  const HOST_GUTTER = 200;
   const contractId = target.getSharedPluginData('ds_contracts', 'contractId');
   let section = null;
   for (const child of page.children) {
@@ -26760,7 +27751,20 @@ function ensureHostSection(page, target, displayName) {
       break;
     }
   }
-  if (!section) {
+  const isNewSection = !section;
+  // Measured BEFORE the new section joins the page, so it can never measure
+  // itself, and skipping "target" — a freshly built set is parked on the page
+  // until the line below adopts it, and counting it would push the section
+  // below its own contents.
+  let nextY = 0;
+  if (isNewSection) {
+    for (const child of page.children) {
+      if (child === target) continue;
+      let bottom;
+      try { bottom = child.y + child.height; } catch (e) { continue; }
+      if (typeof bottom !== 'number' || !isFinite(bottom)) continue;
+      if (bottom + HOST_GUTTER > nextY) nextY = bottom + HOST_GUTTER;
+    }
     section = figma.createSection();
     page.appendChild(section);
     section.setSharedPluginData('ds_contracts', 'hostFor', contractId);
@@ -26771,8 +27775,12 @@ function ensureHostSection(page, target, displayName) {
   target.x = HOST_PAD;
   target.y = HOST_PAD;
   section.resizeWithoutConstraints(target.width + HOST_PAD * 2, target.height + HOST_PAD * 2);
-  section.x = 100;
-  section.y = 100;
+  // ONLY a section this call created gets a position. An existing one keeps
+  // wherever the designer left it — that is the whole of defect (2).
+  if (isNewSection) {
+    section.x = 0;
+    section.y = nextY;
+  }
   return section;
 }
 
@@ -27464,7 +28472,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
+const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -27533,6 +28541,19 @@ async function amendSet(set, C) {
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
+  // FIXED POINT — the host section is adopted and re-fitted BEFORE the
+  // specHash early return, exactly like the identity markers above.
+  // Without this, a NODE whose content is unchanged keeps whatever coordinate
+  // it already carries forever: re-running the sync could never repair a page,
+  // only a human dragging things could. The altitude collision was in that
+  // state. Placement has to be a FIXED POINT — run the sync twice and get the
+  // same page — so the skip path is not allowed to be a dead end for it.
+  // The call AFTER the rebuild still exists and is still the one that re-fits
+  // the section to the FINAL size; this one only guarantees convergence.
+  {
+    const hostPage = set.parent && set.parent.type === 'SECTION' ? set.parent.parent : set.parent;
+    if (hostPage && hostPage.type === 'PAGE') ensureHostSection(hostPage, set, set.name);
+  }
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -27803,6 +28824,19 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
+  // FIXED POINT — the host section is adopted and re-fitted BEFORE the
+  // specHash early return, exactly like the identity markers above.
+  // Without this, a NODE whose content is unchanged keeps whatever coordinate
+  // it already carries forever: re-running the sync could never repair a page,
+  // only a human dragging things could. The altitude collision was in that
+  // state. Placement has to be a FIXED POINT — run the sync twice and get the
+  // same page — so the skip path is not allowed to be a dead end for it.
+  // The call AFTER the rebuild still exists and is still the one that re-fits
+  // the section to the FINAL size; this one only guarantees convergence.
+  {
+    const hostPageC = comp.parent && comp.parent.type === 'SECTION' ? comp.parent.parent : comp.parent;
+    if (hostPageC && hostPageC.type === 'PAGE') ensureHostSection(hostPageC, comp, comp.name);
+  }
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');

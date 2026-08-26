@@ -1,0 +1,221 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / mui",
+  "setNodeId": "39:17214",
+  "setName": "LinearProgress",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:17209",
+  "variantNodeName": "Variant=Indeterminate",
+  "axes": [
+    {
+      "axis": "Variant",
+      "values": [
+        "Indeterminate",
+        "Determinate"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 2,
+  "variantChildNames": [
+    "Variant=Indeterminate",
+    "Variant=Determinate"
+  ],
+  "reflow": {
+    "target": "39:17209",
+    "targetName": "Variant=Indeterminate",
+    "layoutMode": "VERTICAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 288,
+      "h": 4,
+      "children": [
+        {
+          "id": "39:17210",
+          "name": "linearprogress-bar",
+          "type": "FRAME",
+          "x": -100.8,
+          "y": 0,
+          "w": 100.8,
+          "h": 4,
+          "ax": -100.8,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:17211",
+          "name": "linearprogress-bar-2",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 1,
+          "h": 4,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 328,
+      "h": 44,
+      "children": [
+        {
+          "id": "39:17210",
+          "name": "linearprogress-bar",
+          "type": "FRAME",
+          "x": -100.8,
+          "y": 0,
+          "w": 100.8,
+          "h": 4,
+          "ax": -100.8,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:17211",
+          "name": "linearprogress-bar-2",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 1,
+          "h": 4,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "linearprogress-bar",
+      "linearprogress-bar-2"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 288,
+      "h": 4
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:2299",
+    "baseline": {
+      "geometry": "c46465989790f21c",
+      "fills": "e8dc565fbea96b90",
+      "text": "00001505811c9dc5"
+    },
+    "axes": [
+      {
+        "axis": "Variant",
+        "values": [
+          {
+            "value": "Indeterminate",
+            "geometry": "c46465989790f21c",
+            "fills": "e8dc565fbea96b90",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Determinate",
+            "geometry": "3c658e21c911375b",
+            "fills": "7e2fd15089c6e7a7",
+            "text": "00001505811c9dc5"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 10,
+    "bound": 6,
+    "inferred": 4,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 3,
+        "inferred": 0,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 0,
+        "inferred": 1,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 3,
+        "inferred": 3,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Variant=Indeterminate",
+      "name": "Variant=Indeterminate",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 2,
+      "w": 288,
+      "h": 4,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/linearprogress-bar[0]",
+      "name": "linearprogress-bar",
+      "type": "FRAME",
+      "layoutPositioning": "ABSOLUTE",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 100.8,
+      "h": 4,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/linearprogress-bar-2[1]",
+      "name": "linearprogress-bar-2",
+      "type": "FRAME",
+      "layoutPositioning": "ABSOLUTE",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 1,
+      "h": 4,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasAfter": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasRestored": true
+}

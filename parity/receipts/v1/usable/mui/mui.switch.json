@@ -1,0 +1,355 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / mui",
+  "setNodeId": "39:17633",
+  "setName": "Switch (mui.switch)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:17521",
+  "variantNodeName": "Color=Primary, Size=Medium, Checked=Unchecked",
+  "axes": [
+    {
+      "axis": "Color",
+      "values": [
+        "Primary",
+        "Secondary",
+        "Error",
+        "Warning",
+        "Info",
+        "Success",
+        "Default"
+      ]
+    },
+    {
+      "axis": "Size",
+      "values": [
+        "Medium",
+        "Small"
+      ]
+    },
+    {
+      "axis": "Checked",
+      "values": [
+        "Unchecked",
+        "Checked"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 28,
+  "variantChildNames": [
+    "Color=Primary, Size=Medium, Checked=Unchecked",
+    "Color=Primary, Size=Medium, Checked=Checked",
+    "Color=Primary, Size=Small, Checked=Unchecked",
+    "Color=Primary, Size=Small, Checked=Checked",
+    "Color=Secondary, Size=Medium, Checked=Unchecked",
+    "Color=Secondary, Size=Medium, Checked=Checked",
+    "Color=Secondary, Size=Small, Checked=Unchecked",
+    "Color=Secondary, Size=Small, Checked=Checked",
+    "Color=Error, Size=Medium, Checked=Unchecked",
+    "Color=Error, Size=Medium, Checked=Checked",
+    "Color=Error, Size=Small, Checked=Unchecked",
+    "Color=Error, Size=Small, Checked=Checked",
+    "Color=Warning, Size=Medium, Checked=Unchecked",
+    "Color=Warning, Size=Medium, Checked=Checked",
+    "Color=Warning, Size=Small, Checked=Unchecked",
+    "Color=Warning, Size=Small, Checked=Checked",
+    "Color=Info, Size=Medium, Checked=Unchecked",
+    "Color=Info, Size=Medium, Checked=Checked",
+    "Color=Info, Size=Small, Checked=Unchecked",
+    "Color=Info, Size=Small, Checked=Checked",
+    "Color=Success, Size=Medium, Checked=Unchecked",
+    "Color=Success, Size=Medium, Checked=Checked",
+    "Color=Success, Size=Small, Checked=Unchecked",
+    "Color=Success, Size=Small, Checked=Checked",
+    "Color=Default, Size=Medium, Checked=Unchecked",
+    "Color=Default, Size=Medium, Checked=Checked",
+    "Color=Default, Size=Small, Checked=Unchecked",
+    "Color=Default, Size=Small, Checked=Checked"
+  ],
+  "reflow": {
+    "target": "39:17521",
+    "targetName": "Color=Primary, Size=Medium, Checked=Unchecked",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 58,
+      "h": 38,
+      "children": [
+        {
+          "id": "39:17522",
+          "name": "switch-track",
+          "type": "FRAME",
+          "x": 12,
+          "y": 12,
+          "w": 34,
+          "h": 14,
+          "ax": 12,
+          "ay": 12,
+          "visible": true
+        },
+        {
+          "id": "39:17523",
+          "name": "buttonbase-root",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 38,
+          "h": 38,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 98,
+      "h": 78,
+      "children": [
+        {
+          "id": "39:17522",
+          "name": "switch-track",
+          "type": "FRAME",
+          "x": 12,
+          "y": 12,
+          "w": 34,
+          "h": 14,
+          "ax": 12,
+          "ay": 12,
+          "visible": true
+        },
+        {
+          "id": "39:17523",
+          "name": "buttonbase-root",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 38,
+          "h": 38,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "switch-track",
+      "buttonbase-root"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 58,
+      "h": 38
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:2454",
+    "baseline": {
+      "geometry": "3fc30ff8c1c851c4",
+      "fills": "b9ca2f978c0c79ac",
+      "text": "00001505811c9dc5"
+    },
+    "axes": [
+      {
+        "axis": "Color",
+        "values": [
+          {
+            "value": "Primary",
+            "geometry": "3fc30ff8c1c851c4",
+            "fills": "b9ca2f978c0c79ac",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Secondary",
+            "geometry": "3fc30ff8c1c851c4",
+            "fills": "b9ca2f978c0c79ac",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Error",
+            "geometry": "3fc30ff8c1c851c4",
+            "fills": "b9ca2f978c0c79ac",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Warning",
+            "geometry": "3fc30ff8c1c851c4",
+            "fills": "b9ca2f978c0c79ac",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Info",
+            "geometry": "3fc30ff8c1c851c4",
+            "fills": "b9ca2f978c0c79ac",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Success",
+            "geometry": "3fc30ff8c1c851c4",
+            "fills": "b9ca2f978c0c79ac",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Default",
+            "geometry": "3fc30ff8c1c851c4",
+            "fills": "b9ca2f978c0c79ac",
+            "text": "00001505811c9dc5"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Medium",
+            "geometry": "3fc30ff8c1c851c4",
+            "fills": "b9ca2f978c0c79ac",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Small",
+            "geometry": "047aa8e97690ec2b",
+            "fills": "b9ca2f978c0c79ac",
+            "text": "00001505811c9dc5"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Checked",
+        "values": [
+          {
+            "value": "Unchecked",
+            "geometry": "3fc30ff8c1c851c4",
+            "fills": "b9ca2f978c0c79ac",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Checked",
+            "geometry": "005d2518cc5e3577",
+            "fills": "f3244ab572812b50",
+            "text": "00001505811c9dc5"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 33,
+    "bound": 29,
+    "inferred": 4,
+    "literal": 0,
+    "byGroup": {
+      "spacing": {
+        "bound": 8,
+        "inferred": 1,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 6,
+        "inferred": 2,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 12,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Color=Primary, Size=Medium, Checked=Unchecked",
+      "name": "Color=Primary, Size=Medium, Checked=Unchecked",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 58,
+      "h": 38,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/switch-track[0]",
+      "name": "switch-track",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 0,
+      "w": 34,
+      "h": 14,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/buttonbase-root[1]",
+      "name": "buttonbase-root",
+      "type": "FRAME",
+      "layoutPositioning": "ABSOLUTE",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 38,
+      "h": 38,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/buttonbase-root[1]/switch-thumb[0]",
+      "name": "switch-thumb",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 0,
+      "w": 20,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasAfter": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasRestored": true
+}

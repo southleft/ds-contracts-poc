@@ -133,8 +133,23 @@ export function enumerateLibraries(): {
     },
   ];
   const excluded: ExcludedEntry[] = [];
-  for (const lib of readdirSync(path.join(REPO, "examples")).sort()) {
+  for (const entry of readdirSync(path.join(REPO, "examples"), {
+    withFileTypes: true,
+  }).sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0))) {
+    const lib = entry.name;
     const dir = path.join(REPO, "examples", lib);
+    // examples/ is a directory of libraries. A plain file here (.DS_Store is
+    // the one that actually happened) is not one, and readdirSync on it threw
+    // ENOTDIR two lines down — a corpus gate that crashes on desktop lint is
+    // a gate nobody can trust. Named rather than skipped: the excluded list is
+    // this file's contract that nothing leaves the denominator silently.
+    if (!entry.isDirectory()) {
+      excluded.push({
+        what: `examples/${lib}`,
+        reason: `not a directory — a stray file in examples/, not a contract library`,
+      });
+      continue;
+    }
     if (!existsSync(path.join(dir, "contracts"))) {
       const stray = readdirSync(dir).filter((f) =>
         f.endsWith(".contract.json"),

@@ -1,0 +1,363 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / carbon",
+  "setNodeId": "39:8133",
+  "setName": "Accordion",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:8049",
+  "variantNodeName": "Align=End, Size=Sm, State=Default",
+  "axes": [
+    {
+      "axis": "Align",
+      "values": [
+        "End",
+        "Start"
+      ]
+    },
+    {
+      "axis": "Size",
+      "values": [
+        "Sm",
+        "Md",
+        "Lg"
+      ]
+    },
+    {
+      "axis": "State",
+      "values": [
+        "Default",
+        "Disabled"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 8,
+  "variantChildNames": [
+    "Align=End, Size=Sm, State=Default",
+    "Align=End, Size=Md, State=Default",
+    "Align=End, Size=Lg, State=Default",
+    "Align=Start, Size=Sm, State=Default",
+    "Align=Start, Size=Md, State=Default",
+    "Align=Start, Size=Lg, State=Default",
+    "Align=End, Size=Sm, State=Disabled",
+    "Align=Start, Size=Sm, State=Disabled"
+  ],
+  "reflow": {
+    "target": "39:8049",
+    "targetName": "Align=End, Size=Sm, State=Default",
+    "layoutMode": "VERTICAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 328,
+      "h": 82,
+      "children": [
+        {
+          "id": "39:8050",
+          "name": "accordion__item",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 328,
+          "h": 82,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 368,
+      "h": 122,
+      "children": [
+        {
+          "id": "39:8050",
+          "name": "accordion__item",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 368,
+          "h": 82,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "accordion__item",
+        "dx": 0,
+        "dy": 0,
+        "dw": 40,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 328,
+      "h": 82
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:390",
+    "baseline": {
+      "geometry": "6c49a67fb073f9f4",
+      "fills": "24924711bf9e4f10",
+      "text": "cefc1eee9b9e8578"
+    },
+    "axes": [
+      {
+        "axis": "Align",
+        "values": [
+          {
+            "value": "End",
+            "geometry": "6c49a67fb073f9f4",
+            "fills": "24924711bf9e4f10",
+            "text": "cefc1eee9b9e8578"
+          },
+          {
+            "value": "Start",
+            "geometry": "6db29060cd58bc34",
+            "fills": "64b78f54a66048df",
+            "text": "385d5b3bab43f774"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Sm",
+            "geometry": "6c49a67fb073f9f4",
+            "fills": "24924711bf9e4f10",
+            "text": "cefc1eee9b9e8578"
+          },
+          {
+            "value": "Md",
+            "geometry": "e9d76400a3a7225c",
+            "fills": "24924711bf9e4f10",
+            "text": "cefc1eee9b9e8578"
+          },
+          {
+            "value": "Lg",
+            "geometry": "6f96aae164539d38",
+            "fills": "24924711bf9e4f10",
+            "text": "cefc1eee9b9e8578"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "State",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "6c49a67fb073f9f4",
+            "fills": "24924711bf9e4f10",
+            "text": "cefc1eee9b9e8578"
+          },
+          {
+            "value": "Disabled",
+            "geometry": "6c49a67fb073f9f4",
+            "fills": "a9d8e3b98d02f84c",
+            "text": "cefc1eee9b9e8578"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 19,
+    "bound": 12,
+    "inferred": 6,
+    "literal": 1,
+    "byGroup": {
+      "sizing": {
+        "bound": 1,
+        "inferred": 4,
+        "literal": 1
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 0,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 6,
+        "inferred": 2,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [
+      "/accordion__item[0]/accordion__heading[0]/icon[0]/Vector[0]·width=5.7"
+    ],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Align=End, Size=Sm, State=Default",
+      "name": "Align=End, Size=Sm, State=Default",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 328,
+      "h": 82,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/accordion__item[0]",
+      "name": "accordion__item",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 2,
+      "w": 328,
+      "h": 82,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/accordion__item[0]/accordion__heading[0]",
+      "name": "accordion__heading",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 328,
+      "h": 32,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/accordion__item[0]/accordion__heading[0]/icon[0]",
+      "name": "icon",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 16,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/accordion__item[0]/accordion__heading[0]/icon[0]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 5.7,
+      "h": 10,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/accordion__item[0]/accordion__heading[0]/label[1]",
+      "name": "label",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 115,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/accordion__item[0]/accordion__heading[0]/label[1]/label-text[0]",
+      "name": "label-text",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 99,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/accordion__item[0]/accordion__wrapper[1]",
+      "name": "accordion__wrapper",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 328,
+      "h": 48,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/accordion__item[0]/accordion__wrapper[1]/label-2[0]",
+      "name": "label-2",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 328,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/accordion__item[0]/accordion__wrapper[1]/label-2[0]/label-2-text[0]",
+      "name": "label-2-text",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 304,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 793,
+    "sig": "7d6ced592fbfa72c"
+  },
+  "canvasAfter": {
+    "nodes": 793,
+    "sig": "7d6ced592fbfa72c"
+  },
+  "canvasRestored": true
+}

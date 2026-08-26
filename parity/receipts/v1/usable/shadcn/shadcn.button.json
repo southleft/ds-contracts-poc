@@ -1,0 +1,405 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / shadcn",
+  "setNodeId": "39:9506",
+  "setName": "Button (shadcn.button)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:9362",
+  "variantNodeName": "Variant=Default, Size=Default, State=Default",
+  "axes": [
+    {
+      "axis": "Variant",
+      "values": [
+        "Default",
+        "Outline",
+        "Secondary",
+        "Ghost",
+        "Destructive",
+        "Link"
+      ]
+    },
+    {
+      "axis": "Size",
+      "values": [
+        "Default",
+        "Xs",
+        "Sm",
+        "Lg",
+        "Icon",
+        "Icon Xs",
+        "Icon Sm",
+        "Icon Lg"
+      ]
+    },
+    {
+      "axis": "State",
+      "values": [
+        "Default",
+        "Active",
+        "Disabled",
+        "Focus Visible",
+        "Hover"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 72,
+  "variantChildNames": [
+    "Variant=Default, Size=Default, State=Default",
+    "Variant=Default, Size=Xs, State=Default",
+    "Variant=Default, Size=Sm, State=Default",
+    "Variant=Default, Size=Lg, State=Default",
+    "Variant=Default, Size=Icon, State=Default",
+    "Variant=Default, Size=Icon Xs, State=Default",
+    "Variant=Default, Size=Icon Sm, State=Default",
+    "Variant=Default, Size=Icon Lg, State=Default",
+    "Variant=Outline, Size=Default, State=Default",
+    "Variant=Outline, Size=Xs, State=Default",
+    "Variant=Outline, Size=Sm, State=Default",
+    "Variant=Outline, Size=Lg, State=Default",
+    "Variant=Outline, Size=Icon, State=Default",
+    "Variant=Outline, Size=Icon Xs, State=Default",
+    "Variant=Outline, Size=Icon Sm, State=Default",
+    "Variant=Outline, Size=Icon Lg, State=Default",
+    "Variant=Secondary, Size=Default, State=Default",
+    "Variant=Secondary, Size=Xs, State=Default",
+    "Variant=Secondary, Size=Sm, State=Default",
+    "Variant=Secondary, Size=Lg, State=Default",
+    "Variant=Secondary, Size=Icon, State=Default",
+    "Variant=Secondary, Size=Icon Xs, State=Default",
+    "Variant=Secondary, Size=Icon Sm, State=Default",
+    "Variant=Secondary, Size=Icon Lg, State=Default",
+    "Variant=Ghost, Size=Default, State=Default",
+    "Variant=Ghost, Size=Xs, State=Default",
+    "Variant=Ghost, Size=Sm, State=Default",
+    "Variant=Ghost, Size=Lg, State=Default",
+    "Variant=Ghost, Size=Icon, State=Default",
+    "Variant=Ghost, Size=Icon Xs, State=Default",
+    "Variant=Ghost, Size=Icon Sm, State=Default",
+    "Variant=Ghost, Size=Icon Lg, State=Default",
+    "Variant=Destructive, Size=Default, State=Default",
+    "Variant=Destructive, Size=Xs, State=Default",
+    "Variant=Destructive, Size=Sm, State=Default",
+    "Variant=Destructive, Size=Lg, State=Default",
+    "Variant=Destructive, Size=Icon, State=Default",
+    "Variant=Destructive, Size=Icon Xs, State=Default",
+    "Variant=Destructive, Size=Icon Sm, State=Default",
+    "Variant=Destructive, Size=Icon Lg, State=Default",
+    "Variant=Link, Size=Default, State=Default",
+    "Variant=Link, Size=Xs, State=Default",
+    "Variant=Link, Size=Sm, State=Default",
+    "Variant=Link, Size=Lg, State=Default",
+    "Variant=Link, Size=Icon, State=Default",
+    "Variant=Link, Size=Icon Xs, State=Default",
+    "Variant=Link, Size=Icon Sm, State=Default",
+    "Variant=Link, Size=Icon Lg, State=Default",
+    "Variant=Default, Size=Default, State=Active",
+    "Variant=Outline, Size=Default, State=Active",
+    "Variant=Secondary, Size=Default, State=Active",
+    "Variant=Ghost, Size=Default, State=Active",
+    "Variant=Destructive, Size=Default, State=Active",
+    "Variant=Link, Size=Default, State=Active",
+    "Variant=Default, Size=Default, State=Disabled",
+    "Variant=Outline, Size=Default, State=Disabled",
+    "Variant=Secondary, Size=Default, State=Disabled",
+    "Variant=Ghost, Size=Default, State=Disabled",
+    "Variant=Destructive, Size=Default, State=Disabled",
+    "Variant=Link, Size=Default, State=Disabled",
+    "Variant=Default, Size=Default, State=Focus Visible",
+    "Variant=Outline, Size=Default, State=Focus Visible",
+    "Variant=Secondary, Size=Default, State=Focus Visible",
+    "Variant=Ghost, Size=Default, State=Focus Visible",
+    "Variant=Destructive, Size=Default, State=Focus Visible",
+    "Variant=Link, Size=Default, State=Focus Visible",
+    "Variant=Default, Size=Default, State=Hover",
+    "Variant=Outline, Size=Default, State=Hover",
+    "Variant=Secondary, Size=Default, State=Hover",
+    "Variant=Ghost, Size=Default, State=Hover",
+    "Variant=Destructive, Size=Default, State=Hover",
+    "Variant=Link, Size=Default, State=Hover"
+  ],
+  "reflow": {
+    "target": "39:9362",
+    "targetName": "Variant=Default, Size=Default, State=Default",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "CENTER",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 67,
+      "h": 22,
+      "children": [
+        {
+          "id": "39:9363",
+          "name": "label",
+          "type": "TEXT",
+          "x": 11,
+          "y": 1,
+          "w": 45,
+          "h": 20,
+          "ax": 11,
+          "ay": 1,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 107,
+      "h": 62,
+      "children": [
+        {
+          "id": "39:9363",
+          "name": "label",
+          "type": "TEXT",
+          "x": 31,
+          "y": 21,
+          "w": 45,
+          "h": 20,
+          "ax": 31,
+          "ay": 21,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "label",
+        "dx": 20,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 67,
+      "h": 22
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:915",
+    "baseline": {
+      "geometry": "0c026c82efd47e30",
+      "fills": "22503f03da61e81c",
+      "text": "1e5b36f18dc4cd44"
+    },
+    "axes": [
+      {
+        "axis": "Variant",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "0c026c82efd47e30",
+            "fills": "22503f03da61e81c",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Outline",
+            "geometry": "0c026c82efd47e30",
+            "fills": "c3bb41cec4ed9da0",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Secondary",
+            "geometry": "0c026c82efd47e30",
+            "fills": "756a5387c6636073",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Ghost",
+            "geometry": "0c026c82efd47e30",
+            "fills": "c1c9e125337db4a8",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Destructive",
+            "geometry": "0c026c82efd47e30",
+            "fills": "c75ed50b80b8df30",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Link",
+            "geometry": "0c026c82efd47e30",
+            "fills": "6c45a8056ac84fe0",
+            "text": "1e5b36f18dc4cd44"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "0c026c82efd47e30",
+            "fills": "22503f03da61e81c",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Xs",
+            "geometry": "4f31d4dfee1da030",
+            "fills": "22503f03da61e81c",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Sm",
+            "geometry": "0c026c82efd47e30",
+            "fills": "22503f03da61e81c",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Lg",
+            "geometry": "0c026c82efd47e30",
+            "fills": "22503f03da61e81c",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Icon",
+            "geometry": "1819ebd15ae53474",
+            "fills": "22503f03da61e81c",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Icon Xs",
+            "geometry": "1819ebd15ae53474",
+            "fills": "22503f03da61e81c",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Icon Sm",
+            "geometry": "1819ebd15ae53474",
+            "fills": "22503f03da61e81c",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Icon Lg",
+            "geometry": "1819ebd15ae53474",
+            "fills": "22503f03da61e81c",
+            "text": "1e5b36f18dc4cd44"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "State",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "0c026c82efd47e30",
+            "fills": "22503f03da61e81c",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Active",
+            "geometry": "0c026c82efd47e30",
+            "fills": "5baa87746c197c18",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Disabled",
+            "geometry": "0c026c82efd47e30",
+            "fills": "22503f03da61e81c",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Focus Visible",
+            "geometry": "0c026c82efd47e30",
+            "fills": "22503f03da61e81c",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Hover",
+            "geometry": "0c026c82efd47e30",
+            "fills": "5baa87746c197c18",
+            "text": "1e5b36f18dc4cd44"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 10,
+    "bound": 9,
+    "inferred": 1,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Variant=Default, Size=Default, State=Default",
+      "name": "Variant=Default, Size=Default, State=Default",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 67,
+      "h": 22,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 45,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 291,
+    "sig": "2323b4b6ec9f2790"
+  },
+  "canvasAfter": {
+    "nodes": 291,
+    "sig": "2323b4b6ec9f2790"
+  },
+  "canvasRestored": true
+}

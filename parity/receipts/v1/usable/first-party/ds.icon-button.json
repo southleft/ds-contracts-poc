@@ -1,0 +1,245 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / first-party",
+  "setNodeId": "39:23749",
+  "setName": "IconButton (ds.icon-button)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:23725",
+  "variantNodeName": "Variant=Secondary, Size=Medium",
+  "axes": [
+    {
+      "axis": "Variant",
+      "values": [
+        "Secondary",
+        "Primary",
+        "Ghost",
+        "Destructive"
+      ]
+    },
+    {
+      "axis": "Size",
+      "values": [
+        "Medium",
+        "Small",
+        "Large"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 12,
+  "variantChildNames": [
+    "Variant=Secondary, Size=Medium",
+    "Variant=Secondary, Size=Small",
+    "Variant=Secondary, Size=Large",
+    "Variant=Primary, Size=Medium",
+    "Variant=Primary, Size=Small",
+    "Variant=Primary, Size=Large",
+    "Variant=Ghost, Size=Medium",
+    "Variant=Ghost, Size=Small",
+    "Variant=Ghost, Size=Large",
+    "Variant=Destructive, Size=Medium",
+    "Variant=Destructive, Size=Small",
+    "Variant=Destructive, Size=Large"
+  ],
+  "reflow": {
+    "target": "39:23725",
+    "targetName": "Variant=Secondary, Size=Medium",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "CENTER",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 36,
+      "h": 36,
+      "children": [
+        {
+          "id": "39:23726",
+          "name": "Icon",
+          "type": "SLOT",
+          "x": 17.5,
+          "y": 17.5,
+          "w": 1,
+          "h": 1,
+          "ax": 17.5,
+          "ay": 17.5,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 76,
+      "h": 76,
+      "children": [
+        {
+          "id": "39:23726",
+          "name": "Icon",
+          "type": "SLOT",
+          "x": 37.5,
+          "y": 37.5,
+          "w": 1,
+          "h": 1,
+          "ax": 37.5,
+          "ay": 37.5,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "Icon",
+        "dx": 20,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 36,
+      "h": 36
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:3864",
+    "baseline": {
+      "geometry": "7aed61187a6fd994",
+      "fills": "113ba394944e09f3",
+      "text": "00001505811c9dc5"
+    },
+    "axes": [
+      {
+        "axis": "Variant",
+        "values": [
+          {
+            "value": "Secondary",
+            "geometry": "7aed61187a6fd994",
+            "fills": "113ba394944e09f3",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Primary",
+            "geometry": "7aed61187a6fd994",
+            "fills": "d0c291b9f34a9e8c",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Ghost",
+            "geometry": "7aed61187a6fd994",
+            "fills": "e3a9eb17d325c74c",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Destructive",
+            "geometry": "7aed61187a6fd994",
+            "fills": "f9b5cc792f2c40ac",
+            "text": "00001505811c9dc5"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Medium",
+            "geometry": "7aed61187a6fd994",
+            "fills": "113ba394944e09f3",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Small",
+            "geometry": "b9b0d2780a558b9f",
+            "fills": "113ba394944e09f3",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Large",
+            "geometry": "495c9a58695154a4",
+            "fills": "113ba394944e09f3",
+            "text": "00001505811c9dc5"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 7,
+    "bound": 5,
+    "inferred": 2,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 1,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 2,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Variant=Secondary, Size=Medium",
+      "name": "Variant=Secondary, Size=Medium",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 36,
+      "h": 36,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/Icon[0]",
+      "name": "Icon",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 1,
+      "h": 1,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasAfter": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasRestored": true
+}

@@ -1,0 +1,366 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / polaris",
+  "setNodeId": "39:19977",
+  "setName": "Badge (polaris.badge)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:19613",
+  "variantNodeName": "Tone=info, Progress=none",
+  "axes": [
+    {
+      "axis": "Tone",
+      "values": [
+        "info",
+        "success",
+        "warning",
+        "critical",
+        "attention",
+        "new",
+        "magic",
+        "info-strong",
+        "success-strong",
+        "warning-strong",
+        "critical-strong",
+        "attention-strong",
+        "read-only",
+        "enabled"
+      ]
+    },
+    {
+      "axis": "Progress",
+      "values": [
+        "none",
+        "incomplete",
+        "partiallyComplete",
+        "complete"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 56,
+  "variantChildNames": [
+    "Tone=info, Progress=none",
+    "Tone=info, Progress=incomplete",
+    "Tone=info, Progress=partiallyComplete",
+    "Tone=info, Progress=complete",
+    "Tone=success, Progress=none",
+    "Tone=success, Progress=incomplete",
+    "Tone=success, Progress=partiallyComplete",
+    "Tone=success, Progress=complete",
+    "Tone=warning, Progress=none",
+    "Tone=warning, Progress=incomplete",
+    "Tone=warning, Progress=partiallyComplete",
+    "Tone=warning, Progress=complete",
+    "Tone=critical, Progress=none",
+    "Tone=critical, Progress=incomplete",
+    "Tone=critical, Progress=partiallyComplete",
+    "Tone=critical, Progress=complete",
+    "Tone=attention, Progress=none",
+    "Tone=attention, Progress=incomplete",
+    "Tone=attention, Progress=partiallyComplete",
+    "Tone=attention, Progress=complete",
+    "Tone=new, Progress=none",
+    "Tone=new, Progress=incomplete",
+    "Tone=new, Progress=partiallyComplete",
+    "Tone=new, Progress=complete",
+    "Tone=magic, Progress=none",
+    "Tone=magic, Progress=incomplete",
+    "Tone=magic, Progress=partiallyComplete",
+    "Tone=magic, Progress=complete",
+    "Tone=info-strong, Progress=none",
+    "Tone=info-strong, Progress=incomplete",
+    "Tone=info-strong, Progress=partiallyComplete",
+    "Tone=info-strong, Progress=complete",
+    "Tone=success-strong, Progress=none",
+    "Tone=success-strong, Progress=incomplete",
+    "Tone=success-strong, Progress=partiallyComplete",
+    "Tone=success-strong, Progress=complete",
+    "Tone=warning-strong, Progress=none",
+    "Tone=warning-strong, Progress=incomplete",
+    "Tone=warning-strong, Progress=partiallyComplete",
+    "Tone=warning-strong, Progress=complete",
+    "Tone=critical-strong, Progress=none",
+    "Tone=critical-strong, Progress=incomplete",
+    "Tone=critical-strong, Progress=partiallyComplete",
+    "Tone=critical-strong, Progress=complete",
+    "Tone=attention-strong, Progress=none",
+    "Tone=attention-strong, Progress=incomplete",
+    "Tone=attention-strong, Progress=partiallyComplete",
+    "Tone=attention-strong, Progress=complete",
+    "Tone=read-only, Progress=none",
+    "Tone=read-only, Progress=incomplete",
+    "Tone=read-only, Progress=partiallyComplete",
+    "Tone=read-only, Progress=complete",
+    "Tone=enabled, Progress=none",
+    "Tone=enabled, Progress=incomplete",
+    "Tone=enabled, Progress=partiallyComplete",
+    "Tone=enabled, Progress=complete"
+  ],
+  "reflow": {
+    "target": "39:19613",
+    "targetName": "Tone=info, Progress=none",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "MIN",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 61,
+      "h": 20,
+      "children": [
+        {
+          "id": "39:19614",
+          "name": "label",
+          "type": "TEXT",
+          "x": 8,
+          "y": 2,
+          "w": 45,
+          "h": 16,
+          "ax": 8,
+          "ay": 2,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 101,
+      "h": 60,
+      "children": [
+        {
+          "id": "39:19614",
+          "name": "label",
+          "type": "TEXT",
+          "x": 8,
+          "y": 22,
+          "w": 45,
+          "h": 16,
+          "ax": 8,
+          "ay": 22,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "label",
+        "dx": 0,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 61,
+      "h": 20
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:2796",
+    "baseline": {
+      "geometry": "12bfdef82d2bc494",
+      "fills": "4a593a1234bfca0f",
+      "text": "bba0ae969c8803cc"
+    },
+    "axes": [
+      {
+        "axis": "Tone",
+        "values": [
+          {
+            "value": "info",
+            "geometry": "12bfdef82d2bc494",
+            "fills": "4a593a1234bfca0f",
+            "text": "bba0ae969c8803cc"
+          },
+          {
+            "value": "success",
+            "geometry": "12bfdef82d2bc494",
+            "fills": "9cf959b824ffe1dc",
+            "text": "bba0ae969c8803cc"
+          },
+          {
+            "value": "warning",
+            "geometry": "12bfdef82d2bc494",
+            "fills": "f036d4fb22c5513f",
+            "text": "bba0ae969c8803cc"
+          },
+          {
+            "value": "critical",
+            "geometry": "12bfdef82d2bc494",
+            "fills": "c0109d79a14c356c",
+            "text": "bba0ae969c8803cc"
+          },
+          {
+            "value": "attention",
+            "geometry": "12bfdef82d2bc494",
+            "fills": "318af1dd201767a0",
+            "text": "bba0ae969c8803cc"
+          },
+          {
+            "value": "new",
+            "geometry": "12bfdef82d2bc494",
+            "fills": "1db2daa75875e68f",
+            "text": "bba0ae969c8803cc"
+          },
+          {
+            "value": "magic",
+            "geometry": "12bfdef82d2bc494",
+            "fills": "d4bfc34dba437ede",
+            "text": "bba0ae969c8803cc"
+          },
+          {
+            "value": "info-strong",
+            "geometry": "12bfdef82d2bc494",
+            "fills": "ed9b80fc15116b04",
+            "text": "bba0ae969c8803cc"
+          },
+          {
+            "value": "success-strong",
+            "geometry": "12bfdef82d2bc494",
+            "fills": "6dce782d35b450d0",
+            "text": "bba0ae969c8803cc"
+          },
+          {
+            "value": "warning-strong",
+            "geometry": "12bfdef82d2bc494",
+            "fills": "188b559f4b0cd2c8",
+            "text": "bba0ae969c8803cc"
+          },
+          {
+            "value": "critical-strong",
+            "geometry": "12bfdef82d2bc494",
+            "fills": "ec81aa962e2a2428",
+            "text": "bba0ae969c8803cc"
+          },
+          {
+            "value": "attention-strong",
+            "geometry": "12bfdef82d2bc494",
+            "fills": "d59466358b788e7c",
+            "text": "bba0ae969c8803cc"
+          },
+          {
+            "value": "read-only",
+            "geometry": "12bfdef82d2bc494",
+            "fills": "f30b03af833545f4",
+            "text": "bba0ae969c8803cc"
+          },
+          {
+            "value": "enabled",
+            "geometry": "12bfdef82d2bc494",
+            "fills": "6186f745d15182d8",
+            "text": "bba0ae969c8803cc"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Progress",
+        "values": [
+          {
+            "value": "none",
+            "geometry": "12bfdef82d2bc494",
+            "fills": "4a593a1234bfca0f",
+            "text": "bba0ae969c8803cc"
+          },
+          {
+            "value": "incomplete",
+            "geometry": "b984a694a897f413",
+            "fills": "dd8b4364bcbe99a0",
+            "text": "37bf11f79714c4d5"
+          },
+          {
+            "value": "partiallyComplete",
+            "geometry": "5178a4b9e5f7e46c",
+            "fills": "fbfa5ee4090c1af8",
+            "text": "37bf11f79714c4d5"
+          },
+          {
+            "value": "complete",
+            "geometry": "e68482f4c74111df",
+            "fills": "3cae0a843443da07",
+            "text": "37bf11f79714c4d5"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 10,
+    "bound": 10,
+    "inferred": 0,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Tone=info, Progress=none",
+      "name": "Tone=info, Progress=none",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 61,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 45,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 3326,
+    "sig": "c09e90afe241d48c"
+  },
+  "canvasAfter": {
+    "nodes": 3326,
+    "sig": "c09e90afe241d48c"
+  },
+  "canvasRestored": true
+}

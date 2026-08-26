@@ -1,0 +1,316 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / polaris",
+  "setNodeId": "39:22510",
+  "setName": "Checkbox (polaris.checkbox)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:22480",
+  "variantNodeName": "Checked=unchecked",
+  "axes": [
+    {
+      "axis": "Checked",
+      "values": [
+        "unchecked",
+        "checked",
+        "indeterminate"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 3,
+  "variantChildNames": [
+    "Checked=unchecked",
+    "Checked=checked",
+    "Checked=indeterminate"
+  ],
+  "reflow": {
+    "target": "39:22480",
+    "targetName": "Checked=unchecked",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "HUG",
+      "v": "FIXED",
+      "primary": "AUTO",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 160,
+      "h": 28,
+      "children": [
+        {
+          "id": "39:22481",
+          "name": "choice__control",
+          "type": "FRAME",
+          "x": 0,
+          "y": 4,
+          "w": 20,
+          "h": 20,
+          "ax": 0,
+          "ay": 4,
+          "visible": true
+        },
+        {
+          "id": "39:22485",
+          "name": "choice__label",
+          "type": "FRAME",
+          "x": 28,
+          "y": 4,
+          "w": 132,
+          "h": 20,
+          "ax": 28,
+          "ay": 4,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 200,
+      "h": 68,
+      "children": [
+        {
+          "id": "39:22481",
+          "name": "choice__control",
+          "type": "FRAME",
+          "x": 0,
+          "y": 24,
+          "w": 20,
+          "h": 20,
+          "ax": 0,
+          "ay": 24,
+          "visible": true
+        },
+        {
+          "id": "39:22485",
+          "name": "choice__label",
+          "type": "FRAME",
+          "x": 28,
+          "y": 24,
+          "w": 132,
+          "h": 20,
+          "ax": 28,
+          "ay": 24,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "choice__control",
+        "dx": 0,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      },
+      {
+        "name": "choice__label",
+        "dx": 0,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 160,
+      "h": 28
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:3043",
+    "baseline": {
+      "geometry": "2cad79f3a05760f4",
+      "fills": "b4bdd48977d34038",
+      "text": "9f70abcbd0393508"
+    },
+    "axes": [
+      {
+        "axis": "Checked",
+        "values": [
+          {
+            "value": "unchecked",
+            "geometry": "2cad79f3a05760f4",
+            "fills": "b4bdd48977d34038",
+            "text": "9f70abcbd0393508"
+          },
+          {
+            "value": "checked",
+            "geometry": "737404ba5c6712c7",
+            "fills": "0f54d921fd82eeab",
+            "text": "9f70abcbd0393508"
+          },
+          {
+            "value": "indeterminate",
+            "geometry": "d25a9fccc251fb94",
+            "fills": "9a46d7011f6fbd04",
+            "text": "9f70abcbd0393508"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 19,
+    "bound": 10,
+    "inferred": 9,
+    "literal": 0,
+    "byGroup": {
+      "spacing": {
+        "bound": 3,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 3,
+        "inferred": 5,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 0,
+        "inferred": 2,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 0,
+        "inferred": 2,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Checked=unchecked",
+      "name": "Checked=unchecked",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 160,
+      "h": 28,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/choice__control[0]",
+      "name": "choice__control",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 20,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/choice__control[0]/checkbox (margin box)[0]",
+      "name": "checkbox (margin box)",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 20,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/choice__control[0]/checkbox (margin box)[0]/checkbox[0]",
+      "name": "checkbox",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 18,
+      "h": 18,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/choice__control[0]/checkbox (margin box)[0]/checkbox[0]/backdrop[0]",
+      "name": "backdrop",
+      "type": "RECTANGLE",
+      "layoutPositioning": "ABSOLUTE",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 18,
+      "h": 18,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/choice__label[1]",
+      "name": "choice__label",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 132,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/choice__label[1]/label[0]",
+      "name": "label",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 132,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/choice__label[1]/label[0]/Save this information[0]",
+      "name": "Save this information",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 132,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 3326,
+    "sig": "c09e90afe241d48c"
+  },
+  "canvasAfter": {
+    "nodes": 3326,
+    "sig": "c09e90afe241d48c"
+  },
+  "canvasRestored": true
+}

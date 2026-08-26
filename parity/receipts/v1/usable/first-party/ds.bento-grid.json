@@ -1,0 +1,334 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / first-party",
+  "setNodeId": "39:23493",
+  "setName": "BentoGrid",
+  "setType": "COMPONENT",
+  "variantNodeId": "39:23493",
+  "variantNodeName": "BentoGrid",
+  "axes": null,
+  "axesError": null,
+  "variantChildCount": 1,
+  "variantChildNames": [
+    "BentoGrid"
+  ],
+  "reflow": {
+    "target": "39:23493",
+    "targetName": "BentoGrid",
+    "layoutMode": "GRID",
+    "childCount": 5,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 640,
+      "h": 480,
+      "children": [
+        {
+          "id": "39:23494",
+          "name": "Header",
+          "type": "SLOT",
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 80,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:23495",
+          "name": "Sidebar",
+          "type": "SLOT",
+          "x": 0,
+          "y": 88,
+          "w": 160,
+          "h": 392,
+          "ax": 0,
+          "ay": 88,
+          "visible": true
+        },
+        {
+          "id": "39:23496",
+          "name": "Main",
+          "type": "SLOT",
+          "x": 176,
+          "y": 88,
+          "w": 328,
+          "h": 128,
+          "ax": 176,
+          "ay": 88,
+          "visible": true
+        },
+        {
+          "id": "39:23497",
+          "name": "Rail",
+          "type": "SLOT",
+          "x": 520,
+          "y": 88,
+          "w": 120,
+          "h": 392,
+          "ax": 520,
+          "ay": 88,
+          "visible": true
+        },
+        {
+          "id": "39:23498",
+          "name": "Footer",
+          "type": "SLOT",
+          "x": 176,
+          "y": 224,
+          "w": 328,
+          "h": 256,
+          "ax": 176,
+          "ay": 224,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 680,
+      "h": 520,
+      "children": [
+        {
+          "id": "39:23494",
+          "name": "Header",
+          "type": "SLOT",
+          "x": 0,
+          "y": 0,
+          "w": 680,
+          "h": 80,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:23495",
+          "name": "Sidebar",
+          "type": "SLOT",
+          "x": 0,
+          "y": 88,
+          "w": 160,
+          "h": 432,
+          "ax": 0,
+          "ay": 88,
+          "visible": true
+        },
+        {
+          "id": "39:23496",
+          "name": "Main",
+          "type": "SLOT",
+          "x": 176,
+          "y": 88,
+          "w": 368,
+          "h": 141.33,
+          "ax": 176,
+          "ay": 88,
+          "visible": true
+        },
+        {
+          "id": "39:23497",
+          "name": "Rail",
+          "type": "SLOT",
+          "x": 560,
+          "y": 88,
+          "w": 120,
+          "h": 432,
+          "ax": 560,
+          "ay": 88,
+          "visible": true
+        },
+        {
+          "id": "39:23498",
+          "name": "Footer",
+          "type": "SLOT",
+          "x": 176,
+          "y": 237.33,
+          "w": 368,
+          "h": 282.67,
+          "ax": 176,
+          "ay": 237.33,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "Header",
+        "dx": 0,
+        "dy": 0,
+        "dw": 40,
+        "dh": 0
+      },
+      {
+        "name": "Sidebar",
+        "dx": 0,
+        "dy": 0,
+        "dw": 0,
+        "dh": 40
+      },
+      {
+        "name": "Main",
+        "dx": 0,
+        "dy": 0,
+        "dw": 40,
+        "dh": 13.33
+      },
+      {
+        "name": "Rail",
+        "dx": 40,
+        "dy": 0,
+        "dw": 0,
+        "dh": 40
+      },
+      {
+        "name": "Footer",
+        "dx": 0,
+        "dy": 13.33,
+        "dw": 40,
+        "dh": 26.67
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 640,
+      "h": 480
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:3702",
+    "baseline": {
+      "geometry": "bf522f1b564aa6e8",
+      "fills": "f41352493adc658c",
+      "text": "00001505811c9dc5"
+    },
+    "axes": [],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 3,
+    "bound": 0,
+    "inferred": 2,
+    "literal": 1,
+    "byGroup": {
+      "spacing": {
+        "bound": 0,
+        "inferred": 0,
+        "literal": 1
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 2,
+        "literal": 0
+      }
+    },
+    "literalSites": [
+      "/BentoGrid·itemSpacing=0"
+    ],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/BentoGrid",
+      "name": "BentoGrid",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "GRID",
+      "childCount": 5,
+      "w": 640,
+      "h": 480,
+      "visible": true,
+      "parentLayoutMode": null,
+      "parentType": "SECTION"
+    },
+    {
+      "path": "/Header[0]",
+      "name": "Header",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 640,
+      "h": 80,
+      "visible": true,
+      "parentLayoutMode": "GRID",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/Sidebar[1]",
+      "name": "Sidebar",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 160,
+      "h": 392,
+      "visible": true,
+      "parentLayoutMode": "GRID",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/Main[2]",
+      "name": "Main",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 328,
+      "h": 128,
+      "visible": true,
+      "parentLayoutMode": "GRID",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/Rail[3]",
+      "name": "Rail",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 120,
+      "h": 392,
+      "visible": true,
+      "parentLayoutMode": "GRID",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/Footer[4]",
+      "name": "Footer",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 328,
+      "h": 256,
+      "visible": true,
+      "parentLayoutMode": "GRID",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasAfter": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasRestored": true
+}

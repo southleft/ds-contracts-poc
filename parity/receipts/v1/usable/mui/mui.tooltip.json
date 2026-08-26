@@ -1,0 +1,192 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / mui",
+  "setNodeId": "39:17906",
+  "setName": "Tooltip (mui.tooltip)",
+  "setType": "COMPONENT",
+  "variantNodeId": "39:17906",
+  "variantNodeName": "Tooltip (mui.tooltip)",
+  "axes": null,
+  "axesError": null,
+  "variantChildCount": 1,
+  "variantChildNames": [
+    "Tooltip (mui.tooltip)"
+  ],
+  "reflow": {
+    "target": "39:17906",
+    "targetName": "Tooltip (mui.tooltip)",
+    "layoutMode": "VERTICAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 72.58,
+      "h": 21,
+      "children": [
+        {
+          "id": "39:17907",
+          "name": "label",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 72.58,
+          "h": 21,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 112.58,
+      "h": 61,
+      "children": [
+        {
+          "id": "39:17907",
+          "name": "label",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 112.58,
+          "h": 21,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "label",
+        "dx": 0,
+        "dy": 0,
+        "dw": 40,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 72.58,
+      "h": 21
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:2779",
+    "baseline": {
+      "geometry": "3f4944dbe5fb8e8c",
+      "fills": "bac4b94893730374",
+      "text": "5f5d54a030957634"
+    },
+    "axes": [],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 15,
+    "bound": 13,
+    "inferred": 2,
+    "literal": 0,
+    "byGroup": {
+      "sizing": {
+        "bound": 3,
+        "inferred": 1,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 4,
+        "inferred": 1,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Tooltip (mui.tooltip)",
+      "name": "Tooltip (mui.tooltip)",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 72.58,
+      "h": 21,
+      "visible": true,
+      "parentLayoutMode": null,
+      "parentType": "SECTION"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 72.58,
+      "h": 21,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/label[0]/label-text[0]",
+      "name": "label-text",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 56,
+      "h": 13,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/label[0]/tooltip-arrow[1]",
+      "name": "tooltip-arrow",
+      "type": "FRAME",
+      "layoutPositioning": "ABSOLUTE",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 11,
+      "h": 7.8,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasAfter": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasRestored": true
+}

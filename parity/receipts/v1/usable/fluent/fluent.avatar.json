@@ -1,0 +1,287 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / fluent",
+  "setNodeId": "39:11792",
+  "setName": "Avatar (fluent.avatar)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:11738",
+  "variantNodeName": "Shape=Circular, Active=None, Size=24",
+  "axes": [
+    {
+      "axis": "Shape",
+      "values": [
+        "Circular",
+        "Square"
+      ]
+    },
+    {
+      "axis": "Active",
+      "values": [
+        "None",
+        "Active",
+        "Inactive"
+      ]
+    },
+    {
+      "axis": "Size",
+      "values": [
+        "24",
+        "48",
+        "96"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 18,
+  "variantChildNames": [
+    "Shape=Circular, Active=None, Size=24",
+    "Shape=Circular, Active=None, Size=48",
+    "Shape=Circular, Active=None, Size=96",
+    "Shape=Circular, Active=Active, Size=24",
+    "Shape=Circular, Active=Active, Size=48",
+    "Shape=Circular, Active=Active, Size=96",
+    "Shape=Circular, Active=Inactive, Size=24",
+    "Shape=Circular, Active=Inactive, Size=48",
+    "Shape=Circular, Active=Inactive, Size=96",
+    "Shape=Square, Active=None, Size=24",
+    "Shape=Square, Active=None, Size=48",
+    "Shape=Square, Active=None, Size=96",
+    "Shape=Square, Active=Active, Size=24",
+    "Shape=Square, Active=Active, Size=48",
+    "Shape=Square, Active=Active, Size=96",
+    "Shape=Square, Active=Inactive, Size=24",
+    "Shape=Square, Active=Inactive, Size=48",
+    "Shape=Square, Active=Inactive, Size=96"
+  ],
+  "reflow": {
+    "target": "39:11738",
+    "targetName": "Shape=Circular, Active=None, Size=24",
+    "layoutMode": "VERTICAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 24,
+      "h": 24,
+      "children": [
+        {
+          "id": "39:11740",
+          "name": "label",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 24,
+          "h": 24,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 64,
+      "h": 64,
+      "children": [
+        {
+          "id": "39:11740",
+          "name": "label",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 64,
+          "h": 64,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "label",
+        "dx": 0,
+        "dy": 0,
+        "dw": 40,
+        "dh": 40
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 24,
+      "h": 24
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:1287",
+    "baseline": {
+      "geometry": "71b80383d11a50a8",
+      "fills": "f6e07a84f0c049c7",
+      "text": "571239fe8754dc9c"
+    },
+    "axes": [
+      {
+        "axis": "Shape",
+        "values": [
+          {
+            "value": "Circular",
+            "geometry": "71b80383d11a50a8",
+            "fills": "f6e07a84f0c049c7",
+            "text": "571239fe8754dc9c"
+          },
+          {
+            "value": "Square",
+            "geometry": "2ef8a983238247f4",
+            "fills": "f6e07a84f0c049c7",
+            "text": "571239fe8754dc9c"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Active",
+        "values": [
+          {
+            "value": "None",
+            "geometry": "71b80383d11a50a8",
+            "fills": "f6e07a84f0c049c7",
+            "text": "571239fe8754dc9c"
+          },
+          {
+            "value": "Active",
+            "geometry": "71b80383d11a50a8",
+            "fills": "f6e07a84f0c049c7",
+            "text": "571239fe8754dc9c"
+          },
+          {
+            "value": "Inactive",
+            "geometry": "71b80383d11a50a8",
+            "fills": "f6e07a84f0c049c7",
+            "text": "571239fe8754dc9c"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "24",
+            "geometry": "71b80383d11a50a8",
+            "fills": "f6e07a84f0c049c7",
+            "text": "571239fe8754dc9c"
+          },
+          {
+            "value": "48",
+            "geometry": "9bdbad8baeb0e520",
+            "fills": "f6e07a84f0c049c7",
+            "text": "571239fe8754dc9c"
+          },
+          {
+            "value": "96",
+            "geometry": "7b08d18335cd4216",
+            "fills": "f6e07a84f0c049c7",
+            "text": "571239fe8754dc9c"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 16,
+    "bound": 11,
+    "inferred": 5,
+    "literal": 0,
+    "byGroup": {
+      "sizing": {
+        "bound": 0,
+        "inferred": 4,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 8,
+        "inferred": 0,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Shape=Circular, Active=None, Size=24",
+      "name": "Shape=Circular, Active=None, Size=24",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 24,
+      "h": 24,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "FRAME",
+      "layoutPositioning": "ABSOLUTE",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 24,
+      "h": 24,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/label[0]/FT[0]",
+      "name": "FT",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 13,
+      "h": 12,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1663,
+    "sig": "0ac044e74ac6a8ac"
+  },
+  "canvasAfter": {
+    "nodes": 1663,
+    "sig": "0ac044e74ac6a8ac"
+  },
+  "canvasRestored": true
+}

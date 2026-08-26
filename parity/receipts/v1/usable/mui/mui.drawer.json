@@ -1,0 +1,246 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / mui",
+  "setNodeId": "39:17157",
+  "setName": "Drawer",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:17150",
+  "variantNodeName": "Variant=Temporary",
+  "axes": [
+    {
+      "axis": "Variant",
+      "values": [
+        "Temporary",
+        "Permanent"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 2,
+  "variantChildNames": [
+    "Variant=Temporary",
+    "Variant=Permanent"
+  ],
+  "reflow": {
+    "target": "39:17150",
+    "targetName": "Variant=Temporary",
+    "layoutMode": "VERTICAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 117,
+      "h": 1,
+      "children": [
+        {
+          "id": "39:17151",
+          "name": "backdrop-root",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 117,
+          "h": 1,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:17153",
+          "name": "label",
+          "type": "FRAME",
+          "x": 0,
+          "y": 1,
+          "w": 117,
+          "h": 19,
+          "ax": 0,
+          "ay": 1,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 157,
+      "h": 41,
+      "children": [
+        {
+          "id": "39:17151",
+          "name": "backdrop-root",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 157,
+          "h": 22,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:17153",
+          "name": "label",
+          "type": "FRAME",
+          "x": 0,
+          "y": 22,
+          "w": 117,
+          "h": 19,
+          "ax": 0,
+          "ay": 22,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "backdrop-root",
+        "dx": 0,
+        "dy": 0,
+        "dw": 40,
+        "dh": 21
+      },
+      {
+        "name": "label",
+        "dx": 0,
+        "dy": 21,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 117,
+      "h": 1
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:2270",
+    "baseline": {
+      "geometry": "57f92b51e935938a",
+      "fills": "6369b6567898d310",
+      "text": "bead10bf0a488fb4"
+    },
+    "axes": [
+      {
+        "axis": "Variant",
+        "values": [
+          {
+            "value": "Temporary",
+            "geometry": "57f92b51e935938a",
+            "fills": "6369b6567898d310",
+            "text": "bead10bf0a488fb4"
+          },
+          {
+            "value": "Permanent",
+            "geometry": "953d91892fa99d1f",
+            "fills": "df252a185aceba33",
+            "text": "3bee043e75af7388"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 6,
+    "bound": 4,
+    "inferred": 2,
+    "literal": 0,
+    "byGroup": {
+      "spacing": {
+        "bound": 0,
+        "inferred": 1,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 3,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Variant=Temporary",
+      "name": "Variant=Temporary",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 2,
+      "w": 117,
+      "h": 1,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/backdrop-root[0]",
+      "name": "backdrop-root",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 117,
+      "h": 1,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/label[1]",
+      "name": "label",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 117,
+      "h": 19,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/label[1]/Drawer content[0]",
+      "name": "Drawer content",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 117,
+      "h": 19,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasAfter": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasRestored": true
+}

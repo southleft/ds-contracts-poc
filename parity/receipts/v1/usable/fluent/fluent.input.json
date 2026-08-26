@@ -1,0 +1,358 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / fluent",
+  "setNodeId": "39:24533",
+  "setName": "Input (fluent.input)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:24407",
+  "variantNodeName": "Appearance=Outline, Size=Medium, State=Default",
+  "axes": [
+    {
+      "axis": "Appearance",
+      "values": [
+        "Outline",
+        "Underline",
+        "Filled Darker",
+        "Filled Lighter",
+        "Filled Darker Shadow",
+        "Filled Lighter Shadow"
+      ]
+    },
+    {
+      "axis": "Size",
+      "values": [
+        "Medium",
+        "Small",
+        "Large"
+      ]
+    },
+    {
+      "axis": "State",
+      "values": [
+        "Default",
+        "Active",
+        "Disabled",
+        "Focus Visible",
+        "Hover"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 42,
+  "variantChildNames": [
+    "Appearance=Outline, Size=Medium, State=Default",
+    "Appearance=Outline, Size=Small, State=Default",
+    "Appearance=Outline, Size=Large, State=Default",
+    "Appearance=Underline, Size=Medium, State=Default",
+    "Appearance=Underline, Size=Small, State=Default",
+    "Appearance=Underline, Size=Large, State=Default",
+    "Appearance=Filled Darker, Size=Medium, State=Default",
+    "Appearance=Filled Darker, Size=Small, State=Default",
+    "Appearance=Filled Darker, Size=Large, State=Default",
+    "Appearance=Filled Lighter, Size=Medium, State=Default",
+    "Appearance=Filled Lighter, Size=Small, State=Default",
+    "Appearance=Filled Lighter, Size=Large, State=Default",
+    "Appearance=Filled Darker Shadow, Size=Medium, State=Default",
+    "Appearance=Filled Darker Shadow, Size=Small, State=Default",
+    "Appearance=Filled Darker Shadow, Size=Large, State=Default",
+    "Appearance=Filled Lighter Shadow, Size=Medium, State=Default",
+    "Appearance=Filled Lighter Shadow, Size=Small, State=Default",
+    "Appearance=Filled Lighter Shadow, Size=Large, State=Default",
+    "Appearance=Outline, Size=Medium, State=Active",
+    "Appearance=Underline, Size=Medium, State=Active",
+    "Appearance=Filled Darker, Size=Medium, State=Active",
+    "Appearance=Filled Lighter, Size=Medium, State=Active",
+    "Appearance=Filled Darker Shadow, Size=Medium, State=Active",
+    "Appearance=Filled Lighter Shadow, Size=Medium, State=Active",
+    "Appearance=Outline, Size=Medium, State=Disabled",
+    "Appearance=Underline, Size=Medium, State=Disabled",
+    "Appearance=Filled Darker, Size=Medium, State=Disabled",
+    "Appearance=Filled Lighter, Size=Medium, State=Disabled",
+    "Appearance=Filled Darker Shadow, Size=Medium, State=Disabled",
+    "Appearance=Filled Lighter Shadow, Size=Medium, State=Disabled",
+    "Appearance=Outline, Size=Medium, State=Focus Visible",
+    "Appearance=Underline, Size=Medium, State=Focus Visible",
+    "Appearance=Filled Darker, Size=Medium, State=Focus Visible",
+    "Appearance=Filled Lighter, Size=Medium, State=Focus Visible",
+    "Appearance=Filled Darker Shadow, Size=Medium, State=Focus Visible",
+    "Appearance=Filled Lighter Shadow, Size=Medium, State=Focus Visible",
+    "Appearance=Outline, Size=Medium, State=Hover",
+    "Appearance=Underline, Size=Medium, State=Hover",
+    "Appearance=Filled Darker, Size=Medium, State=Hover",
+    "Appearance=Filled Lighter, Size=Medium, State=Hover",
+    "Appearance=Filled Darker Shadow, Size=Medium, State=Hover",
+    "Appearance=Filled Lighter Shadow, Size=Medium, State=Hover"
+  ],
+  "reflow": {
+    "target": "39:24407",
+    "targetName": "Appearance=Outline, Size=Medium, State=Default",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 180,
+      "h": 32,
+      "children": [
+        {
+          "id": "39:24408",
+          "name": "input",
+          "type": "FRAME",
+          "x": 1,
+          "y": 1,
+          "w": 178,
+          "h": 30,
+          "ax": 1,
+          "ay": 1,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 220,
+      "h": 72,
+      "children": [
+        {
+          "id": "39:24408",
+          "name": "input",
+          "type": "FRAME",
+          "x": 1,
+          "y": 21,
+          "w": 178,
+          "h": 30,
+          "ax": 1,
+          "ay": 21,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "input",
+        "dx": 0,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 180,
+      "h": 32
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:1781",
+    "baseline": {
+      "geometry": "d662a98c525b0018",
+      "fills": "b4a9ab94c1d1d594",
+      "text": "1a5b7a8d70a2c520"
+    },
+    "axes": [
+      {
+        "axis": "Appearance",
+        "values": [
+          {
+            "value": "Outline",
+            "geometry": "d662a98c525b0018",
+            "fills": "b4a9ab94c1d1d594",
+            "text": "1a5b7a8d70a2c520"
+          },
+          {
+            "value": "Underline",
+            "geometry": "dac50f97a6514d54",
+            "fills": "9e4d2f427ef059ec",
+            "text": "1a5b7a8d70a2c520"
+          },
+          {
+            "value": "Filled Darker",
+            "geometry": "d662a98c525b0018",
+            "fills": "532acdbf13a2c8fc",
+            "text": "1a5b7a8d70a2c520"
+          },
+          {
+            "value": "Filled Lighter",
+            "geometry": "d662a98c525b0018",
+            "fills": "00e6001e2b93c888",
+            "text": "1a5b7a8d70a2c520"
+          },
+          {
+            "value": "Filled Darker Shadow",
+            "geometry": "d662a98c525b0018",
+            "fills": "532acdbf13a2c8fc",
+            "text": "1a5b7a8d70a2c520"
+          },
+          {
+            "value": "Filled Lighter Shadow",
+            "geometry": "d662a98c525b0018",
+            "fills": "00e6001e2b93c888",
+            "text": "1a5b7a8d70a2c520"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Medium",
+            "geometry": "d662a98c525b0018",
+            "fills": "b4a9ab94c1d1d594",
+            "text": "1a5b7a8d70a2c520"
+          },
+          {
+            "value": "Small",
+            "geometry": "f033cb5a6cba6c40",
+            "fills": "b4a9ab94c1d1d594",
+            "text": "1a5b7a8d70a2c520"
+          },
+          {
+            "value": "Large",
+            "geometry": "20c052c3a3f39484",
+            "fills": "b4a9ab94c1d1d594",
+            "text": "1a5b7a8d70a2c520"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "State",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "d662a98c525b0018",
+            "fills": "b4a9ab94c1d1d594",
+            "text": "1a5b7a8d70a2c520"
+          },
+          {
+            "value": "Active",
+            "geometry": "da85e4cc42c3db06",
+            "fills": "00e6001e2b93c888",
+            "text": "1a5b7a8d70a2c520"
+          },
+          {
+            "value": "Disabled",
+            "geometry": "d662a98c525b0018",
+            "fills": "b4ae9d37b677fcc0",
+            "text": "1a5b7a8d70a2c520"
+          },
+          {
+            "value": "Focus Visible",
+            "geometry": "da85e4cc42c3db06",
+            "fills": "00e6001e2b93c888",
+            "text": "1a5b7a8d70a2c520"
+          },
+          {
+            "value": "Hover",
+            "geometry": "d662a98c525b0018",
+            "fills": "b4a9ab94c1d1d594",
+            "text": "1a5b7a8d70a2c520"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 15,
+    "bound": 11,
+    "inferred": 4,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 3,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 2,
+        "inferred": 2,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Appearance=Outline, Size=Medium, State=Default",
+      "name": "Appearance=Outline, Size=Medium, State=Default",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 180,
+      "h": 32,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/input[0]",
+      "name": "input",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 178,
+      "h": 30,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/input[0]/placeholder[0]",
+      "name": "placeholder",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 0,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1663,
+    "sig": "0ac044e74ac6a8ac"
+  },
+  "canvasAfter": {
+    "nodes": 1663,
+    "sig": "0ac044e74ac6a8ac"
+  },
+  "canvasRestored": true
+}

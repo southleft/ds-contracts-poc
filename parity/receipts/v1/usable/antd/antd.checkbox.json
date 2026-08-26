@@ -1,0 +1,265 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "antd exam 2026-08-23",
+  "setNodeId": "33:5114",
+  "setName": "Checkbox",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "33:5096",
+  "variantNodeName": "Checked=Unchecked",
+  "axes": [
+    {
+      "axis": "Checked",
+      "values": [
+        "Unchecked",
+        "Checked",
+        "Indeterminate"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 3,
+  "variantChildNames": [
+    "Checked=Unchecked",
+    "Checked=Checked",
+    "Checked=Indeterminate"
+  ],
+  "reflow": {
+    "target": "33:5096",
+    "targetName": "Checked=Unchecked",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 93.33,
+      "h": 22,
+      "children": [
+        {
+          "id": "33:5097",
+          "name": "checkbox",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 16,
+          "h": 16,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "33:5099",
+          "name": "label",
+          "type": "FRAME",
+          "x": 16,
+          "y": 0,
+          "w": 78,
+          "h": 22,
+          "ax": 16,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 133.33,
+      "h": 62,
+      "children": [
+        {
+          "id": "33:5097",
+          "name": "checkbox",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 16,
+          "h": 16,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "33:5099",
+          "name": "label",
+          "type": "FRAME",
+          "x": 16,
+          "y": 0,
+          "w": 78,
+          "h": 22,
+          "ax": 16,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "checkbox",
+      "label"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 93.33,
+      "h": 22
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:4612",
+    "baseline": {
+      "geometry": "8ac6e389637ed538",
+      "fills": "4976f4cea869bb88",
+      "text": "ffb5a39a7c9dce6c"
+    },
+    "axes": [
+      {
+        "axis": "Checked",
+        "values": [
+          {
+            "value": "Unchecked",
+            "geometry": "8ac6e389637ed538",
+            "fills": "4976f4cea869bb88",
+            "text": "ffb5a39a7c9dce6c"
+          },
+          {
+            "value": "Checked",
+            "geometry": "6f284cc2c8251f70",
+            "fills": "b8202eee4b6f4094",
+            "text": "ffb5a39a7c9dce6c"
+          },
+          {
+            "value": "Indeterminate",
+            "geometry": "c7d988c1cd2d9d10",
+            "fills": "2c7ef118c280a984",
+            "text": "ffb5a39a7c9dce6c"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 21,
+    "bound": 17,
+    "inferred": 4,
+    "literal": 0,
+    "byGroup": {
+      "spacing": {
+        "bound": 2,
+        "inferred": 1,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 4,
+        "inferred": 2,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 8,
+        "inferred": 0,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Checked=Unchecked",
+      "name": "Checked=Unchecked",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 93.33,
+      "h": 22,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/checkbox[0]",
+      "name": "checkbox",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 16,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/checkbox[0]/checkbox-inner[0]",
+      "name": "checkbox-inner",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 16,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/label[1]",
+      "name": "label",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 78,
+      "h": 22,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/label[1]/label-text[0]",
+      "name": "label-text",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 62,
+      "h": 22,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 710,
+    "sig": "0be3843bf548afa0"
+  },
+  "canvasAfter": {
+    "nodes": 710,
+    "sig": "0be3843bf548afa0"
+  },
+  "canvasRestored": true
+}

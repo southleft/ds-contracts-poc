@@ -1,0 +1,293 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / astryx",
+  "setNodeId": "39:14262",
+  "setName": "Switch (astryx.switch)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:14230",
+  "variantNodeName": "Value=Off, Label Position=End",
+  "axes": [
+    {
+      "axis": "Value",
+      "values": [
+        "Off",
+        "On"
+      ]
+    },
+    {
+      "axis": "Label Position",
+      "values": [
+        "End",
+        "Start"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 4,
+  "variantChildNames": [
+    "Value=Off, Label Position=End",
+    "Value=Off, Label Position=Start",
+    "Value=On, Label Position=End",
+    "Value=On, Label Position=Start"
+  ],
+  "reflow": {
+    "target": "39:14230",
+    "targetName": "Value=Off, Label Position=End",
+    "layoutMode": "VERTICAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 178.02,
+      "h": 24,
+      "children": [
+        {
+          "id": "39:14231",
+          "name": "part-0",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 178.02,
+          "h": 24,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 218.02,
+      "h": 64,
+      "children": [
+        {
+          "id": "39:14231",
+          "name": "part-0",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 178.02,
+          "h": 24,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "part-0"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 178.02,
+      "h": 24
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:1185",
+    "baseline": {
+      "geometry": "f684ac1106e150e8",
+      "fills": "437de02a785d6490",
+      "text": "a22191e339835460"
+    },
+    "axes": [
+      {
+        "axis": "Value",
+        "values": [
+          {
+            "value": "Off",
+            "geometry": "f684ac1106e150e8",
+            "fills": "437de02a785d6490",
+            "text": "a22191e339835460"
+          },
+          {
+            "value": "On",
+            "geometry": "7edff9ca58a8ea68",
+            "fills": "371925d9d5030740",
+            "text": "a22191e339835460"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Label Position",
+        "values": [
+          {
+            "value": "End",
+            "geometry": "f684ac1106e150e8",
+            "fills": "437de02a785d6490",
+            "text": "a22191e339835460"
+          },
+          {
+            "value": "Start",
+            "geometry": "635618fd761e3be0",
+            "fills": "970613f5b55e3ee7",
+            "text": "5e1ac11c3b320491"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 25,
+    "bound": 20,
+    "inferred": 5,
+    "literal": 0,
+    "byGroup": {
+      "sizing": {
+        "bound": 4,
+        "inferred": 4,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 6,
+        "inferred": 0,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 2,
+        "inferred": 1,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 8,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Value=Off, Label Position=End",
+      "name": "Value=Off, Label Position=End",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 178.02,
+      "h": 24,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/part-0[0]",
+      "name": "part-0",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 178.02,
+      "h": 24,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/part-0[0]/part-0-0[0]",
+      "name": "part-0-0",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 40,
+      "h": 24,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/part-0[0]/part-0-0[0]/switch[0]",
+      "name": "switch",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 40,
+      "h": 24,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/part-0[0]/part-0-0[0]/switch[0]/switch-thumb[0]",
+      "name": "switch-thumb",
+      "type": "FRAME",
+      "layoutPositioning": "ABSOLUTE",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 16,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/part-0[0]/part-0-1[1]",
+      "name": "part-0-1",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 130.02,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/part-0[0]/part-0-1[1]/label[0]",
+      "name": "label",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 133,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/part-0[0]/part-0-1[1]/label[0]/Enable notifications[0]",
+      "name": "Enable notifications",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 133,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 440,
+    "sig": "8f17151526c142bc"
+  },
+  "canvasAfter": {
+    "nodes": 440,
+    "sig": "8f17151526c142bc"
+  },
+  "canvasRestored": true
+}

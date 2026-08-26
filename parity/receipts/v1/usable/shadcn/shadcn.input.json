@@ -1,0 +1,209 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / shadcn",
+  "setNodeId": "39:24403",
+  "setName": "Input (shadcn.input)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:24395",
+  "variantNodeName": "State=Default",
+  "axes": [
+    {
+      "axis": "State",
+      "values": [
+        "Default",
+        "Disabled",
+        "Active",
+        "Focus Visible"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 4,
+  "variantChildNames": [
+    "State=Default",
+    "State=Disabled",
+    "State=Active",
+    "State=Focus Visible"
+  ],
+  "reflow": {
+    "target": "39:24395",
+    "targetName": "State=Default",
+    "layoutMode": "VERTICAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 288,
+      "h": 36,
+      "children": [
+        {
+          "id": "39:24396",
+          "name": "placeholder",
+          "type": "TEXT",
+          "x": 11,
+          "y": 5,
+          "w": 0,
+          "h": 20,
+          "ax": 11,
+          "ay": 5,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 328,
+      "h": 76,
+      "children": [
+        {
+          "id": "39:24396",
+          "name": "placeholder",
+          "type": "TEXT",
+          "x": 11,
+          "y": 5,
+          "w": 0,
+          "h": 20,
+          "ax": 11,
+          "ay": 5,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "placeholder"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 288,
+      "h": 36
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:986",
+    "baseline": {
+      "geometry": "f235956496d00c1c",
+      "fills": "16d5ef6ae53eefb4",
+      "text": "7c1cdb221eb99b14"
+    },
+    "axes": [
+      {
+        "axis": "State",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "f235956496d00c1c",
+            "fills": "16d5ef6ae53eefb4",
+            "text": "7c1cdb221eb99b14"
+          },
+          {
+            "value": "Disabled",
+            "geometry": "f235956496d00c1c",
+            "fills": "16d5ef6ae53eefb4",
+            "text": "7c1cdb221eb99b14"
+          },
+          {
+            "value": "Active",
+            "geometry": "f235956496d00c1c",
+            "fills": "16d5ef6ae53eefb4",
+            "text": "7c1cdb221eb99b14"
+          },
+          {
+            "value": "Focus Visible",
+            "geometry": "f235956496d00c1c",
+            "fills": "16d5ef6ae53eefb4",
+            "text": "7c1cdb221eb99b14"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 13,
+    "bound": 9,
+    "inferred": 4,
+    "literal": 0,
+    "byGroup": {
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 2,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 0,
+        "inferred": 1,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/State=Default",
+      "name": "State=Default",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 288,
+      "h": 36,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/placeholder[0]",
+      "name": "placeholder",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 0,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 291,
+    "sig": "2323b4b6ec9f2790"
+  },
+  "canvasAfter": {
+    "nodes": 291,
+    "sig": "2323b4b6ec9f2790"
+  },
+  "canvasRestored": true
+}

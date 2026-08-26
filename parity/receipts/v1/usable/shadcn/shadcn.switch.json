@@ -1,0 +1,257 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / shadcn",
+  "setNodeId": "39:9591",
+  "setName": "Switch (shadcn.switch)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:9575",
+  "variantNodeName": "Size=Default, Checked=Unchecked, State=Default",
+  "axes": [
+    {
+      "axis": "Size",
+      "values": [
+        "Default",
+        "Sm"
+      ]
+    },
+    {
+      "axis": "Checked",
+      "values": [
+        "Unchecked",
+        "Checked"
+      ]
+    },
+    {
+      "axis": "State",
+      "values": [
+        "Default",
+        "Disabled",
+        "Focus Visible"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 8,
+  "variantChildNames": [
+    "Size=Default, Checked=Unchecked, State=Default",
+    "Size=Default, Checked=Checked, State=Default",
+    "Size=Sm, Checked=Unchecked, State=Default",
+    "Size=Sm, Checked=Checked, State=Default",
+    "Size=Default, Checked=Unchecked, State=Disabled",
+    "Size=Sm, Checked=Unchecked, State=Disabled",
+    "Size=Default, Checked=Unchecked, State=Focus Visible",
+    "Size=Sm, Checked=Unchecked, State=Focus Visible"
+  ],
+  "reflow": {
+    "target": "39:9575",
+    "targetName": "Size=Default, Checked=Unchecked, State=Default",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 32,
+      "h": 18.39,
+      "children": [
+        {
+          "id": "39:9576",
+          "name": "part-0",
+          "type": "FRAME",
+          "x": 1,
+          "y": 1.2,
+          "w": 16,
+          "h": 16,
+          "ax": 1,
+          "ay": 1.2,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 72,
+      "h": 58.39,
+      "children": [
+        {
+          "id": "39:9576",
+          "name": "part-0",
+          "type": "FRAME",
+          "x": 1,
+          "y": 21.2,
+          "w": 16,
+          "h": 16,
+          "ax": 1,
+          "ay": 21.2,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "part-0",
+        "dx": 0,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 32,
+      "h": 18.39
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:962",
+    "baseline": {
+      "geometry": "7e3ff89837a5a43b",
+      "fills": "c6db88523ada05a4",
+      "text": "00001505811c9dc5"
+    },
+    "axes": [
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "7e3ff89837a5a43b",
+            "fills": "c6db88523ada05a4",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Sm",
+            "geometry": "d8381b4b221e07ef",
+            "fills": "c6db88523ada05a4",
+            "text": "00001505811c9dc5"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Checked",
+        "values": [
+          {
+            "value": "Unchecked",
+            "geometry": "7e3ff89837a5a43b",
+            "fills": "c6db88523ada05a4",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Checked",
+            "geometry": "7e3ff89837a5a43b",
+            "fills": "8bed65eaf9cabb70",
+            "text": "00001505811c9dc5"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "State",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "7e3ff89837a5a43b",
+            "fills": "c6db88523ada05a4",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Disabled",
+            "geometry": "7e3ff89837a5a43b",
+            "fills": "c6db88523ada05a4",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Focus Visible",
+            "geometry": "7e3ff89837a5a43b",
+            "fills": "c6db88523ada05a4",
+            "text": "00001505811c9dc5"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 16,
+    "bound": 13,
+    "inferred": 3,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 2,
+        "inferred": 2,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 8,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Size=Default, Checked=Unchecked, State=Default",
+      "name": "Size=Default, Checked=Unchecked, State=Default",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 32,
+      "h": 18.39,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/part-0[0]",
+      "name": "part-0",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 16,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 291,
+    "sig": "2323b4b6ec9f2790"
+  },
+  "canvasAfter": {
+    "nodes": 291,
+    "sig": "2323b4b6ec9f2790"
+  },
+  "canvasRestored": true
+}

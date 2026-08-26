@@ -1,0 +1,416 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / carbon",
+  "setNodeId": "39:8565",
+  "setName": "InlineNotification",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:8419",
+  "variantNodeName": "Kind=Error, Contrast=High",
+  "axes": [
+    {
+      "axis": "Kind",
+      "values": [
+        "Error",
+        "Info",
+        "Info Square",
+        "Success",
+        "Warning",
+        "Warning Alt"
+      ]
+    },
+    {
+      "axis": "Contrast",
+      "values": [
+        "High",
+        "Low"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 12,
+  "variantChildNames": [
+    "Kind=Error, Contrast=High",
+    "Kind=Error, Contrast=Low",
+    "Kind=Info, Contrast=High",
+    "Kind=Info, Contrast=Low",
+    "Kind=Info Square, Contrast=High",
+    "Kind=Info Square, Contrast=Low",
+    "Kind=Success, Contrast=High",
+    "Kind=Success, Contrast=Low",
+    "Kind=Warning, Contrast=High",
+    "Kind=Warning, Contrast=Low",
+    "Kind=Warning Alt, Contrast=High",
+    "Kind=Warning Alt, Contrast=Low"
+  ],
+  "reflow": {
+    "target": "39:8419",
+    "targetName": "Kind=Error, Contrast=High",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "MIN",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 346,
+      "h": 48,
+      "children": [
+        {
+          "id": "39:8420",
+          "name": "inline-notification__details",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 285,
+          "h": 48,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:8428",
+          "name": "inline-notification__close-button",
+          "type": "FRAME",
+          "x": 298,
+          "y": 0,
+          "w": 48,
+          "h": 48,
+          "ax": 298,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 386,
+      "h": 88,
+      "children": [
+        {
+          "id": "39:8420",
+          "name": "inline-notification__details",
+          "type": "FRAME",
+          "x": 0,
+          "y": 20,
+          "w": 285,
+          "h": 48,
+          "ax": 0,
+          "ay": 20,
+          "visible": true
+        },
+        {
+          "id": "39:8428",
+          "name": "inline-notification__close-button",
+          "type": "FRAME",
+          "x": 298,
+          "y": 20,
+          "w": 48,
+          "h": 48,
+          "ax": 298,
+          "ay": 20,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "inline-notification__details",
+        "dx": 0,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      },
+      {
+        "name": "inline-notification__close-button",
+        "dx": 0,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 346,
+      "h": 48
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:542",
+    "baseline": {
+      "geometry": "df057dd37abff23c",
+      "fills": "4a9736ccada519bc",
+      "text": "ee7e70b5e5318a6c"
+    },
+    "axes": [
+      {
+        "axis": "Kind",
+        "values": [
+          {
+            "value": "Error",
+            "geometry": "df057dd37abff23c",
+            "fills": "4a9736ccada519bc",
+            "text": "ee7e70b5e5318a6c"
+          },
+          {
+            "value": "Info",
+            "geometry": "7b5a7297d427bedc",
+            "fills": "79c21a5e94e2c99c",
+            "text": "ee7e70b5e5318a6c"
+          },
+          {
+            "value": "Info Square",
+            "geometry": "3d297c542f2f8b3f",
+            "fills": "410603d26dda2100",
+            "text": "ee7e70b5e5318a6c"
+          },
+          {
+            "value": "Success",
+            "geometry": "3378d6192d311ec8",
+            "fills": "006fb3133f2dad3f",
+            "text": "ee7e70b5e5318a6c"
+          },
+          {
+            "value": "Warning",
+            "geometry": "c53d5dbff270940c",
+            "fills": "3500ccde92871750",
+            "text": "ee7e70b5e5318a6c"
+          },
+          {
+            "value": "Warning Alt",
+            "geometry": "86ef2083c87adc04",
+            "fills": "d182eee17448ca68",
+            "text": "ee7e70b5e5318a6c"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Contrast",
+        "values": [
+          {
+            "value": "High",
+            "geometry": "df057dd37abff23c",
+            "fills": "4a9736ccada519bc",
+            "text": "ee7e70b5e5318a6c"
+          },
+          {
+            "value": "Low",
+            "geometry": "df057dd37abff23c",
+            "fills": "ef99ec1e1584f28b",
+            "text": "ee7e70b5e5318a6c"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 28,
+    "bound": 18,
+    "inferred": 8,
+    "literal": 2,
+    "byGroup": {
+      "fills": {
+        "bound": 7,
+        "inferred": 0,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 5,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 6,
+        "inferred": 8,
+        "literal": 2
+      }
+    },
+    "literalSites": [
+      "/inline-notification__close-button[1]/inline-notification__close-button-icon[0]/Vector[0]·width=10.67",
+      "/inline-notification__close-button[1]/inline-notification__close-button-icon[0]/Vector[0]·height=10.67"
+    ],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Kind=Error, Contrast=High",
+      "name": "Kind=Error, Contrast=High",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 346,
+      "h": 48,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/inline-notification__details[0]",
+      "name": "inline-notification__details",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 285,
+      "h": 48,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/inline-notification__details[0]/icon[0]",
+      "name": "icon",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 20,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/inline-notification__details[0]/icon[0]/icon-error[0]",
+      "name": "icon-error",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 2,
+      "w": 20,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/inline-notification__details[0]/icon[0]/icon-error[0]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 18,
+      "h": 18,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/inline-notification__details[0]/icon[0]/icon-error[0]/Vector[1]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 9,
+      "h": 9,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/inline-notification__details[0]/inline-notification__text-wrapper[1]",
+      "name": "inline-notification__text-wrapper",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 249,
+      "h": 48,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/inline-notification__details[0]/inline-notification__text-wrapper[1]/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 112,
+      "h": 18,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/inline-notification__details[0]/inline-notification__text-wrapper[1]/label-2[1]",
+      "name": "label-2",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 133,
+      "h": 18,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/inline-notification__close-button[1]",
+      "name": "inline-notification__close-button",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 48,
+      "h": 48,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/inline-notification__close-button[1]/inline-notification__close-button-icon[0]",
+      "name": "inline-notification__close-button-icon",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 16,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/inline-notification__close-button[1]/inline-notification__close-button-icon[0]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 10.67,
+      "h": 10.67,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 793,
+    "sig": "7d6ced592fbfa72c"
+  },
+  "canvasAfter": {
+    "nodes": 793,
+    "sig": "7d6ced592fbfa72c"
+  },
+  "canvasRestored": true
+}

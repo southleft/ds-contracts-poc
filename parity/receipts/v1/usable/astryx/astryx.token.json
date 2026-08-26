@@ -1,0 +1,315 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / astryx",
+  "setNodeId": "39:14408",
+  "setName": "Token",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:14342",
+  "variantNodeName": "Size=Md, Color=Default",
+  "axes": [
+    {
+      "axis": "Size",
+      "values": [
+        "Md",
+        "Sm",
+        "Lg"
+      ]
+    },
+    {
+      "axis": "Color",
+      "values": [
+        "Default",
+        "Red",
+        "Orange",
+        "Yellow",
+        "Green",
+        "Teal",
+        "Cyan",
+        "Blue",
+        "Purple",
+        "Pink",
+        "Gray"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 33,
+  "variantChildNames": [
+    "Size=Md, Color=Default",
+    "Size=Md, Color=Red",
+    "Size=Md, Color=Orange",
+    "Size=Md, Color=Yellow",
+    "Size=Md, Color=Green",
+    "Size=Md, Color=Teal",
+    "Size=Md, Color=Cyan",
+    "Size=Md, Color=Blue",
+    "Size=Md, Color=Purple",
+    "Size=Md, Color=Pink",
+    "Size=Md, Color=Gray",
+    "Size=Sm, Color=Default",
+    "Size=Sm, Color=Red",
+    "Size=Sm, Color=Orange",
+    "Size=Sm, Color=Yellow",
+    "Size=Sm, Color=Green",
+    "Size=Sm, Color=Teal",
+    "Size=Sm, Color=Cyan",
+    "Size=Sm, Color=Blue",
+    "Size=Sm, Color=Purple",
+    "Size=Sm, Color=Pink",
+    "Size=Sm, Color=Gray",
+    "Size=Lg, Color=Default",
+    "Size=Lg, Color=Red",
+    "Size=Lg, Color=Orange",
+    "Size=Lg, Color=Yellow",
+    "Size=Lg, Color=Green",
+    "Size=Lg, Color=Teal",
+    "Size=Lg, Color=Cyan",
+    "Size=Lg, Color=Blue",
+    "Size=Lg, Color=Purple",
+    "Size=Lg, Color=Pink",
+    "Size=Lg, Color=Gray"
+  ],
+  "reflow": {
+    "target": "39:14342",
+    "targetName": "Size=Md, Color=Default",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "CENTER",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 33,
+      "h": 16,
+      "children": [
+        {
+          "id": "39:14343",
+          "name": "label",
+          "type": "TEXT",
+          "x": 8,
+          "y": 2,
+          "w": 17,
+          "h": 12,
+          "ax": 8,
+          "ay": 2,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 73,
+      "h": 56,
+      "children": [
+        {
+          "id": "39:14343",
+          "name": "label",
+          "type": "TEXT",
+          "x": 28,
+          "y": 22,
+          "w": 17,
+          "h": 12,
+          "ax": 28,
+          "ay": 22,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "label",
+        "dx": 20,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 33,
+      "h": 16
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:1271",
+    "baseline": {
+      "geometry": "4e0499410b538dc8",
+      "fills": "688812c638bc9bef",
+      "text": "a5bee9b5898a4134"
+    },
+    "axes": [
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Md",
+            "geometry": "4e0499410b538dc8",
+            "fills": "688812c638bc9bef",
+            "text": "a5bee9b5898a4134"
+          },
+          {
+            "value": "Sm",
+            "geometry": "9f6c23cc090423a3",
+            "fills": "688812c638bc9bef",
+            "text": "a5bee9b5898a4134"
+          },
+          {
+            "value": "Lg",
+            "geometry": "b2754ad940c2ce98",
+            "fills": "688812c638bc9bef",
+            "text": "a5bee9b5898a4134"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Color",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "4e0499410b538dc8",
+            "fills": "688812c638bc9bef",
+            "text": "a5bee9b5898a4134"
+          },
+          {
+            "value": "Red",
+            "geometry": "4e0499410b538dc8",
+            "fills": "4447faa31d912568",
+            "text": "a5bee9b5898a4134"
+          },
+          {
+            "value": "Orange",
+            "geometry": "4e0499410b538dc8",
+            "fills": "bc6106a375abce1b",
+            "text": "a5bee9b5898a4134"
+          },
+          {
+            "value": "Yellow",
+            "geometry": "4e0499410b538dc8",
+            "fills": "5d1ac3d894c72400",
+            "text": "a5bee9b5898a4134"
+          },
+          {
+            "value": "Green",
+            "geometry": "4e0499410b538dc8",
+            "fills": "428b5e50369e9280",
+            "text": "a5bee9b5898a4134"
+          },
+          {
+            "value": "Teal",
+            "geometry": "4e0499410b538dc8",
+            "fills": "c438643cea47ae3f",
+            "text": "a5bee9b5898a4134"
+          },
+          {
+            "value": "Cyan",
+            "geometry": "4e0499410b538dc8",
+            "fills": "e413ae1c38f30290",
+            "text": "a5bee9b5898a4134"
+          },
+          {
+            "value": "Blue",
+            "geometry": "4e0499410b538dc8",
+            "fills": "4e930843e3bea5d0",
+            "text": "a5bee9b5898a4134"
+          },
+          {
+            "value": "Purple",
+            "geometry": "4e0499410b538dc8",
+            "fills": "89a34a346faf3920",
+            "text": "a5bee9b5898a4134"
+          },
+          {
+            "value": "Pink",
+            "geometry": "4e0499410b538dc8",
+            "fills": "911550640ff06678",
+            "text": "a5bee9b5898a4134"
+          },
+          {
+            "value": "Gray",
+            "geometry": "4e0499410b538dc8",
+            "fills": "4fbe19e288700de8",
+            "text": "a5bee9b5898a4134"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 11,
+    "bound": 11,
+    "inferred": 0,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 5,
+        "inferred": 0,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Size=Md, Color=Default",
+      "name": "Size=Md, Color=Default",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 33,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 17,
+      "h": 12,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 440,
+    "sig": "8f17151526c142bc"
+  },
+  "canvasAfter": {
+    "nodes": 440,
+    "sig": "8f17151526c142bc"
+  },
+  "canvasRestored": true
+}

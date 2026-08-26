@@ -1,0 +1,267 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / first-party",
+  "setNodeId": "39:24056",
+  "setName": "TableRow",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:24040",
+  "variantNodeName": "State=Default",
+  "axes": [
+    {
+      "axis": "State",
+      "values": [
+        "Default",
+        "Selected"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 2,
+  "variantChildNames": [
+    "State=Default",
+    "State=Selected"
+  ],
+  "reflow": {
+    "target": "39:24040",
+    "targetName": "State=Default",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "MIN",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 360,
+      "h": 41,
+      "children": [
+        {
+          "id": "39:24041",
+          "name": "Cells",
+          "type": "SLOT",
+          "x": 0,
+          "y": 0,
+          "w": 360,
+          "h": 41,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 400,
+      "h": 81,
+      "children": [
+        {
+          "id": "39:24041",
+          "name": "Cells",
+          "type": "SLOT",
+          "x": 0,
+          "y": 20,
+          "w": 360,
+          "h": 41,
+          "ax": 0,
+          "ay": 20,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "Cells",
+        "dx": 0,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 360,
+      "h": 41
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:4127",
+    "baseline": {
+      "geometry": "c996932ec71047b4",
+      "fills": "fd8e46f210c11b20",
+      "text": "412c45c3fff425c8"
+    },
+    "axes": [
+      {
+        "axis": "State",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "c996932ec71047b4",
+            "fills": "fd8e46f210c11b20",
+            "text": "412c45c3fff425c8"
+          },
+          {
+            "value": "Selected",
+            "geometry": "c996932ec71047b4",
+            "fills": "98e9fc7c8fc5be97",
+            "text": "412c45c3fff425c8"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 20,
+    "bound": 19,
+    "inferred": 1,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 12,
+        "inferred": 1,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 3,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/State=Default",
+      "name": "State=Default",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 360,
+      "h": 41,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/Cells[0]",
+      "name": "Cells",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 3,
+      "w": 360,
+      "h": 41,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/Cells[0]/TableCell[0]",
+      "name": "TableCell",
+      "type": "INSTANCE",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 120,
+      "h": 41,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "SLOT"
+    },
+    {
+      "path": "/Cells[0]/TableCell[0]/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 90,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "INSTANCE"
+    },
+    {
+      "path": "/Cells[0]/TableCell[1]",
+      "name": "TableCell",
+      "type": "INSTANCE",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 120,
+      "h": 41,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "SLOT"
+    },
+    {
+      "path": "/Cells[0]/TableCell[1]/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 80,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "INSTANCE"
+    },
+    {
+      "path": "/Cells[0]/TableCell[2]",
+      "name": "TableCell",
+      "type": "INSTANCE",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 120,
+      "h": 41,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "SLOT"
+    },
+    {
+      "path": "/Cells[0]/TableCell[2]/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 43,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "INSTANCE"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasAfter": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasRestored": true
+}
