@@ -1,9 +1,9 @@
 {
-  "passed": 225,
+  "passed": 220,
   "total": 225,
-  "commit": "6938ceb4dca465eda3d5ac0e53171b9ab0596933",
+  "commit": "78a94cf10c8aa70d98d3203db044cae9b2768790",
   "dirty": false,
-  "recordedAt": "2026-08-24",
+  "recordedAt": "2026-08-26",
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -908,7 +908,8 @@
     {
       "id": "astryx-reanchor-minted",
       "claim": "C1-determinism",
-      "pass": true
+      "pass": false,
+      "error": "Error: --propose failed:\nREFUSED: STALE LITERAL RECEIPT — RA-nomatch-0536591a: leaf imported.badge.root.background-color.neutral is #e5e5e5, but the refusal was acked against #0536591a. Re-run --propose and re-review.\n"
     },
     {
       "id": "checked-axis-projection",
@@ -978,7 +979,8 @@
     {
       "id": "child-wider-ratchet-and-script-freshness",
       "claim": "C3-detection",
-      "pass": true
+      "pass": false,
+      "error": "Error: child-wider ratchet RED:\nlibrary      scripts  overflows  text-caused  margin-box  cause\naltitude           8          0            0           0  \nantd              12          0            0           0  \nastryx            13          0            6           0  textCaused(33): the corpus-wide text-wrapping gap (docs/22 §\"Text wrapping is not implemented\") — grew 6→33 at the exact-conversion wave (feat/exact-conversion-wave0): Banner's promoted title/description rows, TextInput's label/helper runs and the source-geometry Slider labels are real hugging text runs the earlier harness-floor geometry hid. The five ProgressBar percent-width overflows the previous baseline named are FIXED — the wave carries the fill as a source-derived literal inside the track — so the non-text class is ZERO.\ncarbon            10          0            8           0  textCaused(8): all eight are the corpus-wide text-wrapping gap in Accordion (docs/22). Carbon's NON-text overflows were closed by the live-defect round (9c30204, D3) and its own compile receipt keeps a HARD zero on them — this row is the exempted class only.\nfluent            11          2           34          41  overflows(2): 18 -> 2 on 2026-08-16, and the DEFECT DID NOT GET FIXED — it stopped MANIFESTING. 16 of the old 18 were one class: Checkbox's `indicator > icon` is an element:\"svg\" promoted from the computed floor with NO asset (examples/fluent/assets/icons ships only dialog-part-0-1-0.svg and switch-indicator.svg — there is still no checkbox glyph), so the mock handed it Figma's 100px birth box inside a 16px indicator, +84 per variant. c27e3fe0 (20"
     },
     {
       "id": "css-dom-conformance-frontier",
@@ -1008,7 +1010,8 @@
     {
       "id": "minted-leaves-bind-to-something",
       "claim": "C2-refusal",
-      "pass": true
+      "pass": false,
+      "error": "Error: the shipped token sets grew variables nothing binds (task #42):\n  astryx: 8 → 21 unreferenced minted leaves (GREW)\n  carbon: 92 → 94 unreferenced minted leaves (GREW)"
     },
     {
       "id": "live-figma-evidence-receipt",
@@ -1053,7 +1056,8 @@
     {
       "id": "console-loop-canvas-drift-probe",
       "claim": "C3-detection",
-      "pass": true
+      "pass": false,
+      "error": "Error: astryx: expected 12 in-sync / 0 cell-pending, got 3 / 0"
     },
     {
       "id": "console-loop-mui-evidence-receipt",
@@ -1088,7 +1092,8 @@
     {
       "id": "code-to-canvas-wave-a-emit-pins",
       "claim": "C3-detection",
-      "pass": true
+      "pass": false,
+      "error": "Error: FC-ASTRYX-SLIDER-TOOLTIP: tooltip part missing on Tooltip variant — need stylesWhen display restore"
     },
     {
       "id": "trap-corpus-check",
