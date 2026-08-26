@@ -1,0 +1,755 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@ds-contracts/conformance@0.1.0",
+  "browser": "149.0.7827.55",
+  "mintedTokens": {
+    "imported": {
+      "case-table-header-row-distinct": {
+        "root": {
+          "background-color": {
+            "$value": "#fcfcfc",
+            "$type": "color"
+          },
+          "min-height": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "min-width": {
+            "$value": "0px",
+            "$type": "dimension"
+          }
+        },
+        "c": {
+          "background-color": {
+            "$value": "#e2e8f0",
+            "$type": "color"
+          }
+        }
+      },
+      "shared": {
+        "color-663399": {
+          "$value": "#663399",
+          "$type": "color"
+        },
+        "color-1976d2": {
+          "$value": "#1976d2",
+          "$type": "color"
+        },
+        "size-12": {
+          "$value": "12px",
+          "$type": "dimension"
+        },
+        "size-8": {
+          "$value": "8px",
+          "$type": "dimension"
+        },
+        "num-700": {
+          "$value": "700",
+          "$type": "number"
+        },
+        "size-4": {
+          "$value": "4px",
+          "$type": "dimension"
+        },
+        "num-400": {
+          "$value": "400",
+          "$type": "number"
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "root",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "c",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "c",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "c",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "c",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "c",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "c",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "a",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "a",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "a",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "a",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "a",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "a",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-4",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-4",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-4",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-4",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-4",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-4",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "a-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "a-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "a-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "a-2",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "a-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "a-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-5",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-5",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-5",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-5",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-5",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-5",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-6",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-6",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-6",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-6",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-6",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-6",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [
+      {
+        "part": "root",
+        "field": "direction",
+        "value": "column"
+      }
+    ],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "monospace"
+      },
+      {
+        "part": "c",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "c",
+        "channel": "font-family",
+        "value": "monospace"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "monospace"
+      },
+      {
+        "part": "label-2",
+        "channel": "font-family",
+        "value": "monospace"
+      },
+      {
+        "part": "a",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "a",
+        "channel": "font-family",
+        "value": "monospace"
+      },
+      {
+        "part": "label-3",
+        "channel": "font-family",
+        "value": "monospace"
+      },
+      {
+        "part": "label-4",
+        "channel": "font-family",
+        "value": "monospace"
+      },
+      {
+        "part": "a-2",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "a-2",
+        "channel": "font-family",
+        "value": "monospace"
+      },
+      {
+        "part": "label-5",
+        "channel": "font-family",
+        "value": "monospace"
+      },
+      {
+        "part": "label-6",
+        "channel": "font-family",
+        "value": "monospace"
+      }
+    ],
+    "state": []
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "label",
+      "channel": "line-height",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-2",
+      "channel": "line-height",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-3",
+      "channel": "line-height",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-4",
+      "channel": "line-height",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-5",
+      "channel": "line-height",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-6",
+      "channel": "line-height",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal",
+      "distinctValues": 1
+    }
+  ],
+  "stateOverflow": [],
+  "overflowBindings": [],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [],
+  "interactionOnlyPlaneDropCount": 0,
+  "structureReceipts": [],
+  "styledChannelReceipts": [
+    "control-equal-drop: root — 377 of 396 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: root — 11 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); caret-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); outline-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1))",
+    "control-equal-drop: root — 373 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: c — 373 of 396 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: c — 11 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); caret-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); outline-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1))",
+    "control-equal-drop: c — 369 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: label — 382 of 396 admitted channels compared EQUAL to the <span> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: label — 11 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); caret-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); outline-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1))",
+    "text-part-typography-carried: label — line-height carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "control-equal-drop: label — 377 channel(s) EQUAL to the <span> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: label-2 — 382 of 396 admitted channels compared EQUAL to the <span> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: label-2 — 11 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); caret-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); outline-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1))",
+    "text-part-typography-carried: label-2 — line-height carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "control-equal-drop: label-2 — 377 channel(s) EQUAL to the <span> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: a — 375 of 396 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: a — 11 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); caret-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); outline-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1))",
+    "control-equal-drop: a — 371 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: label-3 — 383 of 396 admitted channels compared EQUAL to the <span> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: label-3 — 11 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); caret-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); outline-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1))",
+    "text-part-typography-carried: label-3 — line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "control-equal-drop: label-3 — 377 channel(s) EQUAL to the <span> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: label-4 — 383 of 396 admitted channels compared EQUAL to the <span> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: label-4 — 11 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); caret-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); outline-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1))",
+    "text-part-typography-carried: label-4 — line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "control-equal-drop: label-4 — 377 channel(s) EQUAL to the <span> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: a-2 — 375 of 396 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: a-2 — 11 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); caret-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); outline-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1))",
+    "control-equal-drop: a-2 — 371 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: label-5 — 383 of 396 admitted channels compared EQUAL to the <span> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: label-5 — 11 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); caret-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); outline-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1))",
+    "text-part-typography-carried: label-5 — line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "control-equal-drop: label-5 — 377 channel(s) EQUAL to the <span> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: label-6 — 383 of 396 admitted channels compared EQUAL to the <span> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: label-6 — 11 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); caret-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); outline-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1))",
+    "text-part-typography-carried: label-6 — line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "control-equal-drop: label-6 — 377 channel(s) EQUAL to the <span> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "geometry-excluded: a — block-size 22px, height 22px, inline-size 180px, perspective-origin 90px 11px, transform-origin 90px 11px, width 180px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: a-2 — block-size 22px, height 22px, inline-size 180px, perspective-origin 90px 11px, transform-origin 90px 11px, width 180px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: c — block-size 22px, height 22px, inline-size 180px, perspective-origin 90px 11px, transform-origin 90px 11px, width 180px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label — block-size 14px, height 14px, inline-size 28.8125px, perspective-origin 14.4062px 7px, transform-origin 14.4062px 7px, width 28.8125px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label-2 — block-size 14px, height 14px, inline-size 21.6094px, perspective-origin 10.7969px 7px, transform-origin 10.8047px 7px, width 21.6094px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label-3 — block-size 14px, height 14px, inline-size 43.2188px, perspective-origin 21.6094px 7px, transform-origin 21.6094px 7px, width 43.2188px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label-4 — block-size 14px, height 14px, inline-size 7.20312px, perspective-origin 3.59375px 7px, transform-origin 3.60156px 7px, width 7.20312px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label-5 — block-size 14px, height 14px, inline-size 43.2188px, perspective-origin 21.6094px 7px, transform-origin 21.6094px 7px, width 43.2188px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label-6 — block-size 14px, height 14px, inline-size 7.20312px, perspective-origin 3.59375px 7px, transform-origin 3.60156px 7px, width 7.20312px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: root — block-size 66px, height 66px, inline-size 180px, perspective-origin 90px 33px, transform-origin 90px 33px, width 180px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (a, a-2, c, label, label-2, label-3, label-4, label-5, label-6, root); -webkit-text-stroke-color (a, a-2, c, label, label-2, label-3, label-4, label-5, label-6, root)",
+    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
+    "inheritance-check-rejected: c.font-weight — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.line-height — values track ancestor \"c\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.font-weight — values track ancestor \"a\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.line-height — values track ancestor \"a\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-4.font-weight — values track ancestor \"a\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-4.line-height — values track ancestor \"a\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-5.font-weight — values track ancestor \"a-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-5.line-height — values track ancestor \"a-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-6.font-weight — values track ancestor \"a-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-6.line-height — values track ancestor \"a-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.line-height — values track ancestor \"c\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-only: a-2.caret-color equals ancestor \"root\" on all 4 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: a-2.color equals ancestor \"root\" on all 4 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: a-2.font-size equals ancestor \"root\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: a.caret-color equals ancestor \"root\" on all 4 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: a.color equals ancestor \"root\" on all 4 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: a.font-size equals ancestor \"root\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: c.caret-color equals ancestor \"root\" on all 4 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: c.color equals ancestor \"root\" on all 4 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: c.font-size equals ancestor \"root\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.caret-color equals ancestor \"c\" on all 4 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.color equals ancestor \"c\" on all 4 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.font-size equals ancestor \"c\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.font-weight equals ancestor \"c\" on all 4 captured planes — the part carries no independent font-weight fact (CSS inheritance, observed)",
+    "inheritance-only: label-3.caret-color equals ancestor \"a\" on all 4 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: label-3.color equals ancestor \"a\" on all 4 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label-3.font-size equals ancestor \"a\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: label-4.caret-color equals ancestor \"a\" on all 4 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: label-4.color equals ancestor \"a\" on all 4 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label-4.font-size equals ancestor \"a\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: label-5.caret-color equals ancestor \"a-2\" on all 4 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: label-5.color equals ancestor \"a-2\" on all 4 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label-5.font-size equals ancestor \"a-2\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: label-6.caret-color equals ancestor \"a-2\" on all 4 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: label-6.color equals ancestor \"a-2\" on all 4 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label-6.font-size equals ancestor \"a-2\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: label.caret-color equals ancestor \"c\" on all 4 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: label.color equals ancestor \"c\" on all 4 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label.font-size equals ancestor \"c\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: label.font-weight equals ancestor \"c\" on all 4 captured planes — the part carries no independent font-weight fact (CSS inheritance, observed)"
+  ],
+  "frontierReceipts": [
+    "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
+    "pseudo-elements-read: the reader looks at ::before, ::after, ::marker, ::placeholder — measured here on no part. Reading is not carrying: the bounded decor grammar promotes ::before/::after only, so every other pseudo the reader records is a MEASUREMENT with no carriage — named, never silently dropped.",
+    "pseudo-element-not-read: ::selection — REFUSED BY NAME, not measured: transient user state — it paints only while a selection exists, and the capture drives prop combos and pseudo-class states, never a pointer drag; there is also no canvas spelling for a selection highlight",
+    "pseudo-element-not-read: ::backdrop — REFUSED BY NAME, not measured: paints only for an element promoted to the TOP LAYER (dialog.showModal() / popover), which the sweep never calls — measured: getComputedStyle(dialog, \"::backdrop\") reads the authored scrim ONLY after showModal(). The canvas DOES have a spelling (a scrim rectangle), so this is a reader gap worth closing, not a canvas limit",
+    "pseudo-elements-refused: 2 (::selection, ::backdrop)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "c",
+        "join": "computed-only"
+      },
+      {
+        "part": "label",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "a",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-3",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-4",
+        "join": "computed-only"
+      },
+      {
+        "part": "a-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-5",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-6",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "c",
+      "label",
+      "label-2",
+      "a",
+      "label-3",
+      "label-4",
+      "a-2",
+      "label-5",
+      "label-6"
+    ],
+    "svgAssets": [],
+    "receipts": [
+      "root-display-carried: flex",
+      "literal-text-carried: label = \"Name\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "literal-text-carried: label-2 = \"Qty\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "literal-text-carried: label-3 = \"Widget\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "literal-text-carried: label-4 = \"7\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "literal-text-carried: label-5 = \"Gadget\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "literal-text-carried: label-6 = \"3\" (no text prop sample matches — the mounted value is carried verbatim)"
+    ],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "layout enriched: root.layout.direction = column (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.font-family = monospace (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: c.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: c.font-family = monospace (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.font-family = monospace (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-2.font-family = monospace (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: a.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: a.font-family = monospace (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-3.font-family = monospace (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-4.font-family = monospace (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: a-2.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: a-2.font-family = monospace (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-5.font-family = monospace (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-6.font-family = monospace (v15 declared vocabulary — canvas-drawable)"
+  ]
+}

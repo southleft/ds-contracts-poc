@@ -1,0 +1,304 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "conformance.table-semantic-row-group",
+  "name": "CaseTableSemanticRowGroup",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the CSS/DOM conformance fixture case \"table-semantic-row-group\" (table). The fixture varies CSS CONSTRUCTS, not prop spaces, so the prop space is deliberately EMPTY: every axis the capture would enumerate is held at nothing, and the whole measurement is the computed truth of one mounted rendering. Construct: real <table> markup: thead/tbody row GROUPS, whose UA display is `table-header-group` / `table-row-group` - a formatting context with no box of its own COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @ds-contracts/conformance@0.1.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div",
+    "role": "table"
+  },
+  "props": [],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column",
+        "align": "stretch"
+      },
+      "parts": {
+        "c": {
+          "element": "div",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy thead|c — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "direction": "column",
+            "align": "stretch"
+          },
+          "attrs": {
+            "role": "rowgroup"
+          },
+          "parts": {
+            "part-0-0": {
+              "element": "div",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy tr| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "direction": "row",
+                "align": "stretch"
+              },
+              "attrs": {
+                "role": "row"
+              },
+              "parts": {
+                "label": {
+                  "element": "div",
+                  "text": "Name",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy th| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "direction": "row",
+                    "align": "center",
+                    "justify": "center"
+                  },
+                  "attrs": {
+                    "role": "columnheader"
+                  },
+                  "declared": {
+                    "font-family": "monospace",
+                    "text-align": "center"
+                  },
+                  "tokens": {
+                    "border-bottom-color": "{imported.shared.color-663399}",
+                    "border-left-color": "{imported.shared.color-663399}",
+                    "border-right-color": "{imported.shared.color-663399}",
+                    "border-top-color": "{imported.shared.color-663399}",
+                    "color": "{imported.shared.color-1976d2}",
+                    "font-size": "{imported.shared.size-12}",
+                    "font-weight": "{imported.case-table-semantic-row-group.label.font-weight}",
+                    "height": "{imported.shared.size-16}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "padding-bottom": "{imported.shared.size-1}",
+                    "padding-left": "{imported.shared.size-1}",
+                    "padding-right": "{imported.shared.size-1}",
+                    "padding-top": "{imported.shared.size-1}",
+                    "width": "{imported.case-table-semantic-row-group.label.width}"
+                  }
+                },
+                "label-2": {
+                  "element": "div",
+                  "text": "Qty",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy th| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "direction": "row",
+                    "align": "center",
+                    "justify": "center"
+                  },
+                  "attrs": {
+                    "role": "columnheader"
+                  },
+                  "declared": {
+                    "font-family": "monospace",
+                    "text-align": "center"
+                  },
+                  "tokens": {
+                    "border-bottom-color": "{imported.shared.color-663399}",
+                    "border-left-color": "{imported.shared.color-663399}",
+                    "border-right-color": "{imported.shared.color-663399}",
+                    "border-top-color": "{imported.shared.color-663399}",
+                    "color": "{imported.shared.color-1976d2}",
+                    "font-size": "{imported.shared.size-12}",
+                    "font-weight": "{imported.case-table-semantic-row-group.label-2.font-weight}",
+                    "height": "{imported.shared.size-16}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "padding-bottom": "{imported.shared.size-1}",
+                    "padding-left": "{imported.shared.size-1}",
+                    "padding-right": "{imported.shared.size-1}",
+                    "padding-top": "{imported.shared.size-1}",
+                    "width": "{imported.case-table-semantic-row-group.label-2.width}"
+                  }
+                }
+              },
+              "declared": {
+                "font-family": "monospace"
+              },
+              "tokens": {
+                "border-bottom-color": "{imported.shared.color-663399}",
+                "border-left-color": "{imported.shared.color-663399}",
+                "border-right-color": "{imported.shared.color-663399}",
+                "border-top-color": "{imported.shared.color-663399}",
+                "color": "{imported.shared.color-1976d2}",
+                "font-size": "{imported.shared.size-12}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}"
+              }
+            }
+          },
+          "declared": {
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.case-table-semantic-row-group.c.background-color}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}"
+          }
+        },
+        "a": {
+          "element": "div",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy tbody|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "direction": "column",
+            "align": "stretch"
+          },
+          "attrs": {
+            "role": "rowgroup"
+          },
+          "parts": {
+            "part-1-0": {
+              "element": "div",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy tr| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "direction": "row",
+                "align": "stretch"
+              },
+              "attrs": {
+                "role": "row"
+              },
+              "parts": {
+                "label-3": {
+                  "element": "div",
+                  "text": "Widget",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy td| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "direction": "row",
+                    "align": "center",
+                    "justify": "start"
+                  },
+                  "attrs": {
+                    "role": "cell"
+                  },
+                  "declared": {
+                    "font-family": "monospace"
+                  },
+                  "tokens": {
+                    "border-bottom-color": "{imported.shared.color-663399}",
+                    "border-left-color": "{imported.shared.color-663399}",
+                    "border-right-color": "{imported.shared.color-663399}",
+                    "border-top-color": "{imported.shared.color-663399}",
+                    "color": "{imported.shared.color-1976d2}",
+                    "font-size": "{imported.shared.size-12}",
+                    "font-weight": "{imported.case-table-semantic-row-group.label-3.font-weight}",
+                    "height": "{imported.shared.size-16}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "padding-bottom": "{imported.shared.size-1}",
+                    "padding-left": "{imported.shared.size-1}",
+                    "padding-right": "{imported.shared.size-1}",
+                    "padding-top": "{imported.shared.size-1}",
+                    "width": "{imported.case-table-semantic-row-group.label-3.width}"
+                  }
+                },
+                "label-4": {
+                  "element": "div",
+                  "text": "7",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy td| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "direction": "row",
+                    "align": "center",
+                    "justify": "start"
+                  },
+                  "attrs": {
+                    "role": "cell"
+                  },
+                  "declared": {
+                    "font-family": "monospace"
+                  },
+                  "tokens": {
+                    "border-bottom-color": "{imported.shared.color-663399}",
+                    "border-left-color": "{imported.shared.color-663399}",
+                    "border-right-color": "{imported.shared.color-663399}",
+                    "border-top-color": "{imported.shared.color-663399}",
+                    "color": "{imported.shared.color-1976d2}",
+                    "font-size": "{imported.shared.size-12}",
+                    "font-weight": "{imported.case-table-semantic-row-group.label-4.font-weight}",
+                    "height": "{imported.shared.size-16}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "padding-bottom": "{imported.shared.size-1}",
+                    "padding-left": "{imported.shared.size-1}",
+                    "padding-right": "{imported.shared.size-1}",
+                    "padding-top": "{imported.shared.size-1}",
+                    "width": "{imported.case-table-semantic-row-group.label-4.width}"
+                  }
+                }
+              },
+              "declared": {
+                "font-family": "monospace"
+              },
+              "tokens": {
+                "border-bottom-color": "{imported.shared.color-663399}",
+                "border-left-color": "{imported.shared.color-663399}",
+                "border-right-color": "{imported.shared.color-663399}",
+                "border-top-color": "{imported.shared.color-663399}",
+                "color": "{imported.shared.color-1976d2}",
+                "font-size": "{imported.shared.size-12}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}"
+              }
+            }
+          },
+          "declared": {
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.case-table-semantic-row-group.a.background-color}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}"
+          }
+        }
+      },
+      "declared": {
+        "box-sizing": "border-box",
+        "font-family": "monospace"
+      },
+      "tokens": {
+        "background-color": "{imported.case-table-semantic-row-group.root.background-color}",
+        "border-bottom-color": "{imported.shared.color-663399}",
+        "border-left-color": "{imported.shared.color-663399}",
+        "border-right-color": "{imported.shared.color-663399}",
+        "border-top-color": "{imported.shared.color-663399}",
+        "color": "{imported.shared.color-1976d2}",
+        "font-size": "{imported.shared.size-12}",
+        "min-height": "{imported.shared.size-0}",
+        "min-width": "{imported.shared.size-0}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@ds-contracts/conformance",
+        "export": "CaseTableSemanticRowGroup"
+      }
+    }
+  }
+}
