@@ -92,7 +92,7 @@ This register makes that unrepresentable: a marker must sit **immediately** abov
 
 The family the owner asked for by name, and the excavation changed the shape of the answer: **one of his four cases is already built, one is actively wrong, and two do not exist.** Uniform margin between stacked siblings has been lowering to parent `itemSpacing` since `lowerMarginGaps` was written — his insight is already the engine's behaviour, it was simply never written down or defended. Collapsing margins are **summed** where CSS block flow collapses to `max`, so a 16/16 vertical pair becomes `itemSpacing: 32` with no receipt. A lone child's margin has no lowering to parent padding at all. And asymmetric margins fall to the `(margin box)` wrapper — which is option (a), the spacer node, with the inverse half never written.
 
-**Margin is also the least-tested construct in the kit.** `antd-empty-margin-only-parts` is the ONLY margin case among 94, and it is already classified NAMED, not carried. So most of this family is `proposed` against a corpus that cannot yet test it. That is the finding, not a gap to paper over.
+**Margin is also the least-tested construct in the kit.** `antd-empty-margin-only-parts` is the ONLY margin case among 94 — the kit expects it CARRIED, and the canvas baseline measures it **NAMED**, quoting `FC-EMIT-MARGIN-BOX-SKIPPED`. So most of this family is `proposed` against a corpus that cannot yet test it. That is the finding, not a gap to paper over.
 
 | rule | status | site | CSS construct → Figma | canonical | receipt | round trip |
 |---|---|---|---|---|---|---|
@@ -604,7 +604,7 @@ Strict where strictness is right (a partial inset set genuinely does not determi
 
 ### `grid` — 5 rules (4 implemented, 1 proposed, 0 wall)
 
-Half the layout conformance kit — 27 of the 45 layout cases — and the **healthiest family in the register**. Nothing in it drops silently: every impossibility is a `throw` or a named refusal. It is also where the schema is now out of date: the prose still says grids lower to nested auto-layout stacks, and the emitter has used Figma's native GRID layout mode for some time.
+Two thirds of the layout conformance kit — 30 of the 45 layout cases — and the **healthiest family in the register**. Nothing in it drops silently: every impossibility is a `throw` or a named refusal. It is also where the schema is now out of date: the prose still says grids lower to nested auto-layout stacks, and the emitter has used Figma's native GRID layout mode for some time.
 
 | rule | status | site | CSS construct → Figma | canonical | receipt | round trip |
 |---|---|---|---|---|---|---|
