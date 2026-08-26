@@ -35,6 +35,13 @@
  *      ordered by the mint order with the declared gutter, so a person can
  *      predict where the next one lands. (P1 alone would pass a random
  *      scatter; P4 is the over-application guard.)
+ *   P5 THE FIXED POINT — a set whose CONTENT is unchanged (its stored
+ *      specHash still matches, so amendSet takes the "unchanged" early
+ *      return) is STILL placed. Without this, re-running the sync can never
+ *      repair a page: a set keeps whatever coordinate it already carries
+ *      forever and only a human dragging things could fix it. That is the
+ *      state the altitude page was in. RED before the ensureHostSection call
+ *      was hoisted above the early return: zero host sections appear.
  *
  * NOT PINNED, and named rather than hidden: a host section that GROWS on
  * amend can grow into the gutter below it and touch its neighbour
@@ -79,7 +86,7 @@ const overlaps = (a: Section, b: Section): boolean => {
 
 /** One isolated mock file with the engine loaded into it. */
 const newFile = async () => {
-  const { figma, root } = createFigmaMock();
+  const { figma, root } = createFigmaMock() as { figma: any; root: any };
   const sandbox: Record<string, unknown> = {
     window: {},
     TextEncoder,
@@ -143,8 +150,8 @@ await f1.mint();
 
 const shared = f1.figma.createPage();
 shared.name = 'Census / harness';
-for (const set of f1.sets()) {
-  const host = set.parent;
+for (const set of f1.sets() as any[]) {
+  const host = set.parent as any;
   shared.appendChild(set);
   if (host && host.type === 'SECTION') host.remove();
   set.setSharedPluginData('ds_contracts', 'specHash', '');
@@ -173,7 +180,7 @@ const MOVED_X = 4321;
 const MOVED_Y = 8765;
 moved.node.x = MOVED_X;
 moved.node.y = MOVED_Y;
-for (const set of f1.sets()) set.setSharedPluginData('ds_contracts', 'specHash', '');
+for (const set of f1.sets() as any[]) set.setSharedPluginData('ds_contracts', 'specHash', '');
 await f1.mint();
 
 const after = f1.sectionsOn(shared);
@@ -198,8 +205,8 @@ const coordsOf = async () => {
   await f.mint();
   const page = f.figma.createPage();
   page.name = 'Census / harness';
-  for (const set of f.sets()) {
-    const host = set.parent;
+  for (const set of f.sets() as any[]) {
+    const host = set.parent as any;
     page.appendChild(set);
     if (host && host.type === 'SECTION') host.remove();
     set.setSharedPluginData('ds_contracts', 'specHash', '');
@@ -229,7 +236,37 @@ for (let i = 1; i < column.length; i++) {
   );
 }
 
+// ---------------------------------------------------------------------------
+// P5 — THE FIXED POINT: an UNCHANGED set is still placed
+//
+// specHash is deliberately left INTACT here, so every set takes amendSet's
+// "unchanged" early return. Placement must happen anyway, or re-running the
+// sync is powerless to repair a page that is already wrong.
+// ---------------------------------------------------------------------------
+const f5 = await newFile();
+await f5.mint();
+const unchangedPage = f5.figma.createPage();
+unchangedPage.name = 'Census / unchanged';
+for (const set of f5.sets() as any[]) {
+  const host = set.parent as any;
+  unchangedPage.appendChild(set);
+  if (host && host.type === 'SECTION') host.remove();
+}
+await f5.mint();
+const converged = f5.sectionsOn(unchangedPage);
+report('P5 host sections after re-minting sets whose specHash is UNCHANGED:', converged);
+assert(
+  converged.length === CONTRACTS.length,
+  `P5 an unchanged set must still be placed — expected ${CONTRACTS.length} host sections on the shared page, found ${converged.length}`,
+);
+for (let i = 0; i < converged.length; i++)
+  for (let j = i + 1; j < converged.length; j++)
+    assert(
+      !overlaps(converged[i], converged[j]),
+      `P5 "${converged[i].name}" collides with "${converged[j].name}" on the unchanged path`,
+    );
+
 console.log(
   `\n✔ host-placement-check: P1 ${CONTRACTS.length} sets on one page, no overlap · P2 a hand-moved section survives a re-mint · ` +
-    `P3 two mints land identically · P4 the column steps by ${GUTTER}px\n`,
+    `P3 two mints land identically · P4 the column steps by ${GUTTER}px · P5 an unchanged set is still placed\n`,
 );

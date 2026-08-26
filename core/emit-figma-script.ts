@@ -7737,6 +7737,19 @@ async function amendSet(set, C) {
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
+  // FIXED POINT — the host section is adopted and re-fitted BEFORE the
+  // specHash early return, exactly like the identity markers above.
+  // Without this, a NODE whose content is unchanged keeps whatever coordinate
+  // it already carries forever: re-running the sync could never repair a page,
+  // only a human dragging things could. The altitude collision was in that
+  // state. Placement has to be a FIXED POINT — run the sync twice and get the
+  // same page — so the skip path is not allowed to be a dead end for it.
+  // The call AFTER the rebuild still exists and is still the one that re-fits
+  // the section to the FINAL size; this one only guarantees convergence.
+  {
+    const hostPage = set.parent && set.parent.type === 'SECTION' ? set.parent.parent : set.parent;
+    if (hostPage && hostPage.type === 'PAGE') ensureHostSection(hostPage, set, set.name);
+  }
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -7981,6 +7994,19 @@ async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
+  // FIXED POINT — the host section is adopted and re-fitted BEFORE the
+  // specHash early return, exactly like the identity markers above.
+  // Without this, a NODE whose content is unchanged keeps whatever coordinate
+  // it already carries forever: re-running the sync could never repair a page,
+  // only a human dragging things could. The altitude collision was in that
+  // state. Placement has to be a FIXED POINT — run the sync twice and get the
+  // same page — so the skip path is not allowed to be a dead end for it.
+  // The call AFTER the rebuild still exists and is still the one that re-fits
+  // the section to the FINAL size; this one only guarantees convergence.
+  {
+    const hostPageC = comp.parent && comp.parent.type === 'SECTION' ? comp.parent.parent : comp.parent;
+    if (hostPageC && hostPageC.type === 'PAGE') ensureHostSection(hostPageC, comp, comp.name);
+  }
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
