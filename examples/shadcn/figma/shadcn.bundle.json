@@ -1280,6 +1280,10 @@
         },
         "avatar": {
           "root": {
+            "color": {
+              "$value": "#0a0a0a",
+              "$type": "color"
+            },
             "flex-shrink": {
               "$value": "0",
               "$type": "number"
@@ -1340,6 +1344,20 @@
               "$value": "400",
               "$type": "number"
             },
+            "height": {
+              "default": {
+                "$value": "32px",
+                "$type": "dimension"
+              },
+              "sm": {
+                "$value": "24px",
+                "$type": "dimension"
+              },
+              "lg": {
+                "$value": "40px",
+                "$type": "dimension"
+              }
+            },
             "line-height": {
               "default": {
                 "$value": "20px",
@@ -1351,6 +1369,20 @@
               },
               "lg": {
                 "$value": "20px",
+                "$type": "dimension"
+              }
+            },
+            "width": {
+              "default": {
+                "$value": "32px",
+                "$type": "dimension"
+              },
+              "sm": {
+                "$value": "24px",
+                "$type": "dimension"
+              },
+              "lg": {
+                "$value": "40px",
                 "$type": "dimension"
               }
             }
@@ -3030,6 +3062,7 @@
               },
               "declared": {
                 "aspect-ratio": "1 / 1",
+                "font-family": "\"Inter Variable\", sans-serif",
                 "user-select": "none"
               },
               "tokens": {
@@ -3047,15 +3080,21 @@
                   "map": {
                     "default": {
                       "font-size": "{imported.avatar.label.font-size.default}",
-                      "line-height": "{imported.avatar.label.line-height.default}"
+                      "height": "{imported.avatar.label.height.default}",
+                      "line-height": "{imported.avatar.label.line-height.default}",
+                      "width": "{imported.avatar.label.width.default}"
                     },
                     "lg": {
                       "font-size": "{imported.avatar.label.font-size.lg}",
-                      "line-height": "{imported.avatar.label.line-height.lg}"
+                      "height": "{imported.avatar.label.height.lg}",
+                      "line-height": "{imported.avatar.label.line-height.lg}",
+                      "width": "{imported.avatar.label.width.lg}"
                     },
                     "sm": {
                       "font-size": "{imported.avatar.label.font-size.sm}",
-                      "line-height": "{imported.avatar.label.line-height.sm}"
+                      "height": "{imported.avatar.label.height.sm}",
+                      "line-height": "{imported.avatar.label.line-height.sm}",
+                      "width": "{imported.avatar.label.width.sm}"
                     }
                   }
                 }
@@ -3072,6 +3111,7 @@
             "border-top-left-radius": "{imported.shared.size-9999}",
             "border-top-right-radius": "{imported.shared.size-9999}",
             "bottom": "{imported.shared.size-0}",
+            "color": "{imported.avatar.root.color}",
             "flex-shrink": "{imported.avatar.root.flex-shrink}",
             "left": "{imported.shared.size-0}",
             "right": "{imported.shared.size-0}",
@@ -5037,7 +5077,7 @@
           "kind": "channel",
           "channel": "aspect-ratio",
           "value": "1 / 1",
-          "reason": "the canvas has no aspect-ratio field — this part carries no bound or literal width to derive a height from, so nothing was drawn from the ratio (a parent that takes its height from this part's ratio names that lowering on itself)",
+          "reason": "the canvas has no aspect-ratio field — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
           "variants": {
             "count": 3,
             "of": 3

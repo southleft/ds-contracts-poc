@@ -315,6 +315,19 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run figma:fresh
 
+      # THE ONE JSON A TEAM PASTES, and the token layer the census code half
+      # renders every example-library row through
+      # (extract/figma/census/corpus.ts:290). figma:fresh holds the *.figma.js
+      # scripts still and generated:fresh holds the storybook trees still;
+      # neither touches <lib>.bundle.json, so a round that re-derived two
+      # contracts left both bundles stale with every lane green and was only
+      # caught because the census render then refused BY NAME on an
+      # unresolvable token. Eight libraries rebuild from a conventional
+      # recipe; polaris is reported as a NAMED ungated hole.
+      - name: bundle:fresh (committed <lib>.bundle.json byte-identical to a rebuild)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run bundle:fresh
+
       - name: site:build (the spec site + schema-coverage + journey commands)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run site:build
@@ -353,6 +366,17 @@ jobs:
       - name: extract:computed:viewport:check (the capture window is not a design token)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:computed:viewport:check
+
+      # THE FUSION SURFACE'S OWN FRESHNESS GATE. figma:fresh re-emits from
+      # committed CONTRACTS and conformance/run.ts reads committed ARTIFACTS,
+      # so neither can see an engine edit that changed what FUSION carries —
+      # an adversarial review found a door change that moved 18 components
+      # with every lane green. This re-fuses all 104 committed captured-truth
+      # corpora offline (~7s, no browser) and names every component whose
+      # carried geometry or geometry receipts moved.
+      - name: extract:computed:geometry:census (a changed fusion door cannot go unseen)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:computed:geometry:census
 
       # Full lane for the same reason as viewport above: both re-check the
       # committed pseudo-decor promotions (Carbon Toggle rotate receipts, the

@@ -3,7 +3,7 @@
   "measuredAt": "extract/computed/out/conformance/<case>/enriched.contract.json through figma-sync/plugin/engine (mock figma) and core/propose-figma (npx tsx conformance/canvas.ts)",
   "counts": {
     "ROUND-TRIPPED": 36,
-    "NAMED": 11,
+    "NAMED": 12,
     "DRIFTED": 0,
     "HARMFUL": 0,
     "SILENT": 0,
@@ -586,6 +586,18 @@
       ],
       "refIdentical": true,
       "note": ""
+    },
+    "overlay-text-fill-pinned-size": {
+      "classification": "NAMED",
+      "channel": "width",
+      "seed": [
+        "24px"
+      ],
+      "proposed": [
+        "8px",
+        "{imported.case-overlay-text-fill-pinned-size.label.width.{size}}"
+      ],
+      "note": "value came back as 8px, {imported.case-overlay-text-fill-pinned-size.label.width.{size}} (seed 24px) — «self»:root: root width binding {«self».root.width.{size}} carries as **max-width**, not width — a component's outer size is fluid-up-to in code and the canvas draws the max. Same token, translated channel; nothing dropped"
     },
     "percentage-padding": {
       "classification": "ROUND-TRIPPED",

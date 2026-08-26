@@ -2,11 +2,11 @@
   "_marker": "THE DENOMINATOR. Hand-authored per case, generated into one index. Deliberately NOT derived from isFusable / styled / DECLARED_CHANNELS / CHANNEL_TO_COMPUTED / TOKEN_CHANNELS / carriedParts — every instrument in the pipeline derives its denominator from the same filter that decides carriage, which is why a channel the filter never opened scores 100%. This file is the independent one.",
   "generatedBy": "conformance/build.ts",
   "library": "@ds-contracts/conformance@0.1.0",
-  "count": 102,
+  "count": 105,
   "byExpectation": {
-    "CARRIED": 58,
+    "CARRIED": 59,
     "LOWERED": 4,
-    "REFUSED": 22,
+    "REFUSED": 24,
     "UNSUPPORTED": 18
   },
   "cases": [
@@ -1854,6 +1854,91 @@
         "expect": "PRESENT",
         "note": "SOLID fill via the deterministic oklch→sRGB conversion"
       }
+    },
+    {
+      "id": "overlay-text-fill-pinned-size",
+      "feature": "geometry",
+      "construct": "a TEXT-bearing part that fills a PINNED ancestor box (width/height: 100% inside a sized root) in an overlay anatomy — the shadcn.Avatar fallback shape",
+      "why": "The overlay-cluster geometry admission drops every text-bearing part with one sentence, 'font-metric-dependent widths'. That is true of a shrink-to-fit box and FALSE of a box the layout pinned: shadcn's `size-full` fallback inside a `size-8` root IS the root's 32x32 box, and losing it minted a 17x20 hug pinned to the top-left corner of a 32x32 transparent frame — the census verdict's 'circle offset, large empty area, glyphs overflow the circle'. The part's own reported box equals the ancestor's CONTENT box in every combo, and that content box MOVES with the size axis, so the number is the library's.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.b.tokens.width / .height",
+      "observable": {
+        "part": "b",
+        "channel": "width",
+        "capturedValue": "24px"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "the filled child draws concentric and full-size inside the root instead of hugging its sample string in a corner"
+      },
+      "axes": [
+        {
+          "prop": "size",
+          "values": [
+            "default",
+            "lg"
+          ],
+          "default": "default"
+        }
+      ]
+    },
+    {
+      "id": "overlay-text-fill-stage-derived",
+      "feature": "geometry",
+      "construct": "a TEXT-bearing part that genuinely FILLS its pinned ancestor — where the ancestor's own box is the CAPTURE STAGE's content box (288px = stage 320 − 2×16), and its content box moves 32px only because the ancestor's own gutters do",
+      "why": "THE HARNESS PIN. This is the fluent.Card / mui.Accordion / carbon.Modal shape reduced to a fixture, and it is the exact defect the previous attempt at the fill door shipped: it admitted label widths of 412/404/396px (fluent, root 428 = stage 460 − 2×16), 256px (mui, root 288 = stage 320 − 2×16) and 366/474/690/798px (carbon, 48%/60%/84%/96% of a root width ALREADY refused as browser.viewport.width) and asserted in the receipt that the number was evidence-backed. Every counter-evidence test the fill door has passes here — the box IS the ancestor's content box in every combo, and the ancestor moves 32px — and the fill must be refused anyway, because the box a fill copies is the harness's mount stage. A canvas frame has no stage.",
+      "expect": "REFUSED",
+      "expectName": "text-fill-pinned-geometry-refused",
+      "expectWhere": "enriched.extension.json receipts",
+      "observable": {
+        "part": "b",
+        "channel": "width",
+        "capturedValue": "256px"
+      },
+      "canvas": {
+        "expect": "ABSENT",
+        "note": "the canvas hugs; minting the stage width would draw the harness window on the design surface (task #20)"
+      },
+      "blockStage": true,
+      "axes": [
+        {
+          "prop": "gutters",
+          "values": [
+            "wide",
+            "none"
+          ],
+          "default": "wide"
+        }
+      ]
+    },
+    {
+      "id": "overlay-text-hug-excluded",
+      "feature": "geometry",
+      "construct": "a TEXT-bearing part in an overlay anatomy whose box IS its own shrink-to-fit measurement — an inline-block beside a PINNED ancestor that moves (160px → 200px) without it",
+      "why": "THE WALL PIN for the fill door. Its width is a function of the harness's sample text and font (the astryx.card 114.203px / 119.016px measurement of the SAME library version across a font swap), and its 20px height is its own line box, not the root's 24px content box. The ancestor MOVES here, so the case cannot pass by accident of a single observation: the fill test itself must fail. If a future widening of the text-fill door ever turns this case CARRIED, the gate goes red — the door can never become a blanket.",
+      "expect": "REFUSED",
+      "expectName": "absolute-geometry-excluded",
+      "expectWhere": "enriched.extension.json receipts",
+      "observable": {
+        "part": "b",
+        "channel": "height",
+        "capturedValue": "20px"
+      },
+      "canvas": {
+        "expect": "ABSENT",
+        "note": "the canvas hugs, which is the honest outcome of an honest refusal"
+      },
+      "axes": [
+        {
+          "prop": "size",
+          "values": [
+            "default",
+            "lg"
+          ],
+          "default": "default"
+        }
+      ]
     },
     {
       "id": "percentage-padding",

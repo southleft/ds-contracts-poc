@@ -1432,7 +1432,9 @@
   "styledChannelReceipts": [
     "absolute-geometry-excluded: label — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
     "absolute-geometry-excluded: label-2 — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "text-fill-pinned-geometry-refused: label-2.width — the part's box IS its pinned ancestor's content box in every enabled combo, and the fill is refused anyway: a box on its ancestor chain is a measurement of the harness, not of the library — root.width = 428px = the capture stage's content box (stage 460px − 2×16px) in combo filled.small.horizontal.enabled; admitting the fill would mint that same number one generation down",
     "absolute-geometry-excluded: label-3 — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "text-fill-pinned-geometry-refused: label-3.width — the part's box IS its pinned ancestor's content box in every enabled combo, and the fill is refused anyway: a box on its ancestor chain is a measurement of the harness, not of the library — root.width = 428px = the capture stage's content box (stage 460px − 2×16px) in combo filled.small.horizontal.enabled; admitting the fill would mint that same number one generation down",
     "absolute-geometry-admitted: root — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: checkbox — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: cardheader — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",

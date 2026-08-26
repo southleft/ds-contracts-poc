@@ -714,6 +714,37 @@
       "axes": []
     },
     {
+      "__case": "geometry: a TEXT-bearing part that fills a PINNED ancestor box (width/height: 100% inside a sized root) in an overlay anatomy — the shadcn.Avatar fallback shape — declared CARRIED",
+      "name": "CaseOverlayTextFillPinnedSize",
+      "importName": "CaseOverlayTextFillPinnedSize",
+      "contract": "conformance/seeds/overlay-text-fill-pinned-size.contract.json",
+      "sampleText": "",
+      "axes": [
+        "size"
+      ]
+    },
+    {
+      "__case": "geometry: a TEXT-bearing part that genuinely FILLS its pinned ancestor — where the ancestor's own box is the CAPTURE STAGE's content box (288px = stage 320 − 2×16), and its content box moves 32px only because the ancestor's own gutters do — declared REFUSED",
+      "name": "CaseOverlayTextFillStageDerived",
+      "importName": "CaseOverlayTextFillStageDerived",
+      "contract": "conformance/seeds/overlay-text-fill-stage-derived.contract.json",
+      "sampleText": "",
+      "axes": [
+        "gutters"
+      ],
+      "blockStage": true
+    },
+    {
+      "__case": "geometry: a TEXT-bearing part in an overlay anatomy whose box IS its own shrink-to-fit measurement — an inline-block beside a PINNED ancestor that moves (160px → 200px) without it — declared REFUSED",
+      "name": "CaseOverlayTextHugExcluded",
+      "importName": "CaseOverlayTextHugExcluded",
+      "contract": "conformance/seeds/overlay-text-hug-excluded.contract.json",
+      "sampleText": "",
+      "axes": [
+        "size"
+      ]
+    },
+    {
       "__case": "units: padding-left: 10% (resolved against the PARENT width) — declared CARRIED",
       "name": "CasePercentagePadding",
       "importName": "CasePercentagePadding",

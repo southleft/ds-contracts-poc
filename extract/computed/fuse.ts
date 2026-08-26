@@ -497,6 +497,209 @@ export function viewportResolvedParts(
   return out;
 }
 
+// ---------------------------------------------------------------------------
+// RC8 — A TEXT PART THAT FILLS A PINNED BOX IS NOT MEASURING ITS GLYPHS
+// ---------------------------------------------------------------------------
+/** THE EXCLUSION'S PREMISE, AND WHERE IT IS FALSE.
+ *
+ *  `absClusterParts` drops EVERY text-bearing part from the overlay-cluster
+ *  geometry admission with one sentence — "font-metric-dependent widths".
+ *  That sentence is true of a shrink-to-fit box (its size IS the sample
+ *  string the harness mounted, and a font swap moves it: the astryx.card
+ *  114.203px/119.016px measurement) and FALSE of a box the layout PINNED.
+ *
+ *  MEASURED, shadcn Avatar: the fallback `<span class="size-full">` inside a
+ *  `size-8` root is 32x32 in every combo — the root's own box, not a
+ *  measurement of "CN". Losing it minted a 17x20 hug pinned to the top-left
+ *  corner of a 32x32 transparent frame (label carries the fill and the
+ *  radius), which is the census verdict's "circle offset … large empty area
+ *  … glyphs overflow the circle".
+ *
+ *  WHAT THE PREVIOUS ATTEMPT AT THIS DOOR GOT WRONG, and what this one
+ *  refuses because of it (adversarial findings, both BLOCKING):
+ *
+ *   (1) A WINDOW MEASUREMENT LAUNDERED THROUGH ONE IN-FLOW GENERATION WALKED
+ *       STRAIGHT THROUGH. It checked `windowRefused` for the part and its
+ *       IMMEDIATE ancestor only. carbon Modal's root is `position: fixed`
+ *       with width 900px = browser.viewport.width and is refused BY NAME —
+ *       and its label-2/-3/-5 then took 366/474/690/798px, which are exactly
+ *       48%/60%/84%/96% of that same refused 900px, through modal-container
+ *       and modal-header. The refusal is now TRANSITIVE: every ancestor up to
+ *       the root is tested, not one.
+ *   (2) THE FILL WAS ADMITTED EVEN WHEN THE PINNED BOX WAS THE CAPTURE STAGE.
+ *       mui Accordion root = 288px = stage 320 − 2×16; fluent Card root =
+ *       428px = stage 460 − 2×16. A box that fills the harness's mount stage
+ *       is a fact about the harness (task #20, defect B) whichever door
+ *       carried it, so the whole ancestor chain is now tested against the
+ *       stage content box AND the viewport, arithmetically, in every combo.
+ *   (3) THE "ANCESTOR MOVED" COUNTER-EVIDENCE HAD NO MAGNITUDE FLOOR — mui
+ *       Accordion's witness read "2 DISTINCT ancestor sizes (254px / 256px)",
+ *       i.e. a 1px border pair. A shrink-to-fit box changes size in units of
+ *       glyph advances; below one em of the part's own font-size, "the box
+ *       tracked its parent" and "the text happened to measure that" are not
+ *       distinguishable, so one em is the floor. Deliberately conservative:
+ *       it refuses more than strictly necessary, because an ugly mint is
+ *       worse than an honest refusal.
+ *   (4) THE MATCH WAS ALLOWED TO ALTERNATE BASIS (the part's own reported box
+ *       OR its border box). Two alternatives make an equality cheap to hit by
+ *       accident, and the accident is not hypothetical: mui Select's label
+ *       reports a 23px content height whose border box (23 + 8.5 + 8.5) is
+ *       the root's 40px — but that 40px comes FROM the label's own
+ *       `min-height: 1.4375em` + padding, so the label DRIVES the root and
+ *       carrying its height would double-count the padding on canvas. One
+ *       basis only: the part's own reported box against the ancestor's
+ *       CONTENT box, in every combo.
+ *
+ *  Admission therefore needs FIVE pieces of counter-evidence, all measured:
+ *    (a) the nearest ancestor part is itself geometry-admitted by the overlay
+ *        cluster, and is not a lowered table box;
+ *    (b) in EVERY enabled default-plane combo the part's own reported box on
+ *        that axis EQUALS that ancestor's content box (one basis, no
+ *        alternatives);
+ *    (c) the ancestor's content box takes at least TWO DISTINCT values across
+ *        those combos, spanning at least one em of the part's font-size;
+ *    (d) NO ancestor on the chain from the part to the root — nor the part
+ *        itself — has that axis in `viewportDerivedRefusals`;
+ *    (e) NO ancestor on that chain, in any combo, measures the browser
+ *        viewport or the capture stage's content box on that axis.
+ *  Anything short of that keeps the exclusion, named per axis. */
+export function textFillPinnedAxes(
+  a: AlignedSweep,
+  space: PropSpace,
+  env: FusionEnv,
+  vpRefused: Map<number, Set<string>>,
+  table: TableGeometry,
+): { admit: Map<number, Set<string>>; receipts: string[]; refusals: Map<number, Map<string, string>> } {
+  const admit = new Map<number, Set<string>>();
+  const receipts: string[] = [];
+  const refusals = new Map<number, Map<string, string>>();
+  const { absAdmit, clusterAdmit, textExcluded } = absClusterParts(a, space);
+  if (textExcluded.size === 0) return { admit, receipts, refusals };
+  const enabled = space.enumeration.combos.filter(isEnabled);
+  const idxByPath = new Map<string, number>(a.baseFlat.map((e, i) => [e.path, i]));
+  /** Strict ancestors, nearest first. */
+  const chainOf = (pi: number): number[] => {
+    const p = a.baseFlat[pi].path;
+    if (p === '') return [];
+    const segs = p.split('.');
+    const out: number[] = [];
+    for (let k = segs.length - 1; k >= 0; k--) {
+      const j = idxByPath.get(segs.slice(0, k).join('.'));
+      if (j !== undefined) out.push(j);
+    }
+    return out;
+  };
+  /** The element's CONTENT box on one axis — the exact inverse of `outerPx`:
+   *  Chromium reports the BORDER box for a `box-sizing: border-box` element
+   *  and the content box for a content-box one. */
+  const contentPx = (style: StyleMap, axis: 'width' | 'height'): number | null => {
+    const base = pxNum(style[axis]);
+    if (base === null) return null;
+    if (style['box-sizing'] !== 'border-box') return base;
+    const sides = axis === 'width' ? ['left', 'right'] : ['top', 'bottom'];
+    let inner = base;
+    for (const side of sides) {
+      inner -= pxNum(style[`padding-${side}`]) ?? 0;
+      inner -= pxNum(style[`border-${side}-width`]) ?? 0;
+    }
+    return Math.round(inner * 1000) / 1000;
+  };
+  const stageContent = {
+    width: env.stage.width - 2 * env.stage.padding,
+    height: env.stage.height - 2 * env.stage.padding,
+  };
+  /** (d)+(e) — the harness test, applied to ONE part on ONE axis. Returns the
+   *  quoted arithmetic when the box is a fact about the harness, else null. */
+  const harnessSized = (qi: number, axis: 'width' | 'height'): string | null => {
+    if (vpRefused.get(qi)?.has(axis)) {
+      return `${a.partNames[qi]}.${axis} is already REFUSED by name as viewport-derived (see viewport-derived-geometry-refused: ${a.partNames[qi]})`;
+    }
+    for (const combo of enabled) {
+      const el = a.getAligned(`${combo.key}__default`)[qi];
+      if (!el) continue;
+      const outer = outerPx(el.node.style, axis);
+      if (outer === null) continue;
+      if (outer === env.viewport[axis]) {
+        return `${a.partNames[qi]}.${axis} = ${outer}px = browser.viewport.${axis} (${env.viewport[axis]}px) in combo ${combo.key}`;
+      }
+      if (outer === stageContent[axis]) {
+        return `${a.partNames[qi]}.${axis} = ${outer}px = the capture stage's content box (stage ${env.stage[axis]}px − 2×${env.stage.padding}px) in combo ${combo.key}`;
+      }
+    }
+    return null;
+  };
+  for (const pi of [...textExcluded].sort((x, y) => x - y)) {
+    if (table.lowered.has(pi)) continue; // the table door owns cell geometry
+    const part = a.partNames[pi];
+    const chain = chainOf(pi);
+    const anc = chain[0];
+    const why = new Map<string, string>();
+    for (const axis of ['width', 'height'] as const) {
+      // (a) — no pinned ancestor box to fill: not a near miss, and the
+      // legacy exclusion line already names the drop.
+      if (anc === undefined) continue;
+      if (!(absAdmit.has(anc) || clusterAdmit.has(anc)) || table.lowered.has(anc)) continue;
+      // (b) one basis: the part's own reported box vs the ancestor's content box
+      const ancSizes = new Set<number>();
+      let fills = true;
+      let seen = 0;
+      let witness = '';
+      for (const combo of enabled) {
+        const els = a.getAligned(`${combo.key}__default`);
+        const el = els[pi];
+        const ae = els[anc];
+        if (!el || !ae) continue;
+        seen++;
+        const mine = pxNum(el.node.style[axis]);
+        const theirs = contentPx(ae.node.style, axis);
+        if (mine === null || theirs === null || mine !== theirs) { fills = false; break; }
+        ancSizes.add(theirs);
+        if (!witness) witness = `${combo.key}: ${part} ${mine}px == ${a.partNames[anc]} content box ${theirs}px`;
+      }
+      if (seen === 0 || !fills) {
+        // NOT a near miss: the box is its own shrink-to-fit measurement of
+        // the mounted sample string, which is exactly what the exclusion is
+        // for. The legacy `absolute-geometry-excluded` line already names it;
+        // adding a second sentence here would churn every committed
+        // extension in the corpus for no new fact.
+        continue;
+      }
+      // (d)+(e), transitively, on the part and EVERY ancestor to the root.
+      // Evaluated AFTER the fill test so that a refusal recorded here is
+      // always a NEAR MISS — a box that really does fill its pinned ancestor
+      // and is refused anyway because the pinned box is the harness's.
+      const laundered = [pi, ...chain].map((qi) => harnessSized(qi, axis)).find((r) => r !== null);
+      if (laundered) {
+        why.set(axis, `a box on its ancestor chain is a measurement of the harness, not of the library — ${laundered}; admitting the fill would mint that same number one generation down`);
+        continue;
+      }
+      // (c) the ancestor MOVED, by at least one em of this part's own text
+      const em = pxNum(a.baseFlat[pi].node.style['font-size']) ?? 16;
+      const spread = Math.max(...ancSizes) - Math.min(...ancSizes);
+      if (ancSizes.size < 2) {
+        // NOT a near miss, and deliberately not receipted per part: with ONE
+        // observation "this box fills its parent" and "this text happened to
+        // measure the parent" are the SAME observation, so the engine has no
+        // evidence either way and the legacy exclusion line stands unchanged.
+        // (This is the majority case corpus-wide — 12 components — and
+        // restating the door's own policy on each of them would churn every
+        // committed extension for a decision nothing measured.)
+        continue;
+      }
+      if (spread < em) {
+        why.set(axis, `its ancestor ${a.partNames[anc]} moved by only ${Math.round(spread * 1000) / 1000}px across ${ancSizes.size} sizes (${[...ancSizes].sort((m, n) => m - n).join('px / ')}px), less than one em of this part's own ${em}px font — below a glyph advance the "it tracked its parent" evidence is indistinguishable from text metrics`);
+        continue;
+      }
+      (admit.get(pi) ?? admit.set(pi, new Set()).get(pi)!).add(axis);
+      receipts.push(
+        `text-fill-pinned-geometry-admitted: ${part}.${axis} — the overlay-cluster geometry exclusion is LIFTED for this one axis. The part's own reported box equals its ancestor ${a.partNames[anc]}'s CONTENT box in every enabled default-plane combo (${witness}), and that content box takes ${ancSizes.size} distinct values spanning ${Math.round(spread * 1000) / 1000}px (≥ one em of this part's ${em}px font): a box that moved WITH a parent that moved is filling it, not measuring its own glyphs. No box on the chain ${[part, ...chain.map((q) => a.partNames[q])].join(' → ')} measures the browser viewport (${env.viewport[axis]}px) or the capture stage content box (${stageContent[axis]}px) on this axis, and none of them is viewport-refused — the number is the library's, not the harness's.`,
+      );
+    }
+    if (why.size > 0) refusals.set(pi, why);
+  }
+  return { admit, receipts, refusals };
+}
+
 /** The geometry channels a viewport-resolved part must NOT mint, per part.
  *
  *  Both ends of a resolved axis go together. Chromium reports the USED value
@@ -580,10 +783,6 @@ export function styledChannels(
   // column rule below.
   const table = tableGeometry(a, space);
   receipts.push(...table.receipts, ...table.refusals);
-  for (const pi of textExcluded) {
-    if (table.lowered.has(pi)) continue;
-    receipts.push(`absolute-geometry-excluded: ${a.partNames[pi]} — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)`);
-  }
   // VIEWPORT-DERIVED GEOMETRY (task #20): the parts whose boxes were laid out
   // against the capture WINDOW, and the geometry channels they must not mint.
   // Computed once and applied at EVERY door below — Carbon's Modal reaches
@@ -593,6 +792,35 @@ export function styledChannels(
   // window.
   const vpDerived = viewportDerivedRefusals(a, space, env);
   receipts.push(...vpDerived.receipts);
+  // RC8 — the text exclusion becomes PER AXIS, and it is the door's job to
+  // say which axes it kept and WHY it kept them. Computed here, after the
+  // viewport refusals, because condition (d) reads them: a fill whose pinned
+  // ancestor took its box from the window mints the window one generation
+  // down, which is exactly how task #20 re-entered by a new road.
+  const textFill = textFillPinnedAxes(a, space, env, vpDerived.refused, table);
+  receipts.push(...textFill.receipts);
+  for (const pi of [...textExcluded].sort((x, y) => x - y)) {
+    if (table.lowered.has(pi)) continue;
+    // The legacy line stays VERBATIM for every part that still keeps the
+    // exclusion on both axes — the drop ledger's wording is not a fact about
+    // the fix, and rewording it would restate 30-odd committed extensions
+    // that did not change their minds about anything.
+    const admitted = textFill.admit.get(pi);
+    if (!admitted || admitted.size === 0) {
+      receipts.push(`absolute-geometry-excluded: ${a.partNames[pi]} — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)`);
+    } else {
+      const kept = (['width', 'height'] as const).filter((ax) => !admitted.has(ax));
+      if (kept.length > 0) {
+        receipts.push(`absolute-geometry-excluded: ${a.partNames[pi]} — text-bearing part in an overlay-anatomy component keeps the geometry exclusion on ${kept.join(' + ')} (font-metric-dependent widths); see text-fill-pinned-geometry-admitted for the ${[...admitted].sort().join(' + ')} axis it does not`);
+      }
+    }
+    // A NEAR MISS is worth its own line: the box really does fill a pinned
+    // ancestor, and the fill is refused anyway. Every one of these is a
+    // number the previous attempt at this door SHIPPED.
+    for (const [axis, reason] of [...(textFill.refusals.get(pi) ?? new Map())].sort((m, n) => m[0].localeCompare(n[0]))) {
+      receipts.push(`text-fill-pinned-geometry-refused: ${a.partNames[pi]}.${axis} — the part's box IS its pinned ancestor's content box in every enabled combo, and the fill is refused anyway: ${reason}`);
+    }
+  }
   for (const pi of [...absAdmit, ...parentAdmit].sort((x, y) => x - y)) {
     if (table.lowered.has(pi)) {
       receipts.push(`table-geometry-excluded: ${a.partNames[pi]} (display:${table.lowered.get(pi)}) — table-box parts keep the geometry exclusion even inside an overlay-anatomy component; the lowered flex stack sizes them (organism round)`);
@@ -770,6 +998,7 @@ export function styledChannels(
         (GEOM_ADMIT.has(p) && !inTableBox && (absAdmit.has(pi) || parentAdmit.has(pi))) ||
         ((p === 'width' || p === 'height') && table.cellAdmit.has(pi)) ||
         (p === 'width' && blockRootAdmit.has(pi)) ||
+        textFill.admit.get(pi)?.has(p) === true ||
         tokenNamed(p));
     const tag = a.baseFlat[pi].node.tag;
     const ctrl = controls[tag] ?? controls['span'];
@@ -2221,6 +2450,18 @@ export function prepareMint(
     const rootPi = a.baseFlat.findIndex((e) => e.path === '');
     if (rootPi >= 0) out.add(rootPi);
     for (const pi of tableGeo.cellAdmit) out.add(pi);
+    // RC8: a text part whose fill of a pinned ancestor was ADMITTED
+    // (textFillPinnedAxes) rides the same box-sizing-aware outer baking as
+    // every other geometry-carrying part — a content-box fill would
+    // otherwise mint a canvas frame short by its own padding. Derived from
+    // `styled` rather than re-running the door, so this stays the one place
+    // that decides admission: a text-excluded part only reaches fusion with
+    // width/height through that door.
+    const { textExcluded } = absClusterParts(a, space);
+    for (const pi of textExcluded) {
+      const chans = styled.get(a.partNames[pi]);
+      if (chans?.has('width') || chans?.has('height')) out.add(pi);
+    }
     return out;
   })();
   const buildBaseObs = (skipFolds: boolean): { obs: MintObservation[]; codeOnly: CodeOnlyEntry[]; declared: DeclaredEnrichment[]; pairwiseRefusals: string[] } => {
