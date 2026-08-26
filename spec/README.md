@@ -20,6 +20,8 @@ This directory separates the **format** from the **implementation** enough that 
 | [grammar-coverage.json](./grammar-coverage.json) | Machine-readable companion, held to the committed configs by `npm run grammar-coverage:check` |
 | [DOOR-REGISTER.md](./DOOR-REGISTER.md) | Every subtractive/admitting capture heuristic — its premise, what it drops, and whether it leaves a receipt |
 | [door-register.json](./door-register.json) | The same register, machine-readable and gated by `npm run door-register:check` |
+| [LOWERING.md](./LOWERING.md) | Every CSS→Figma **lowering**: what shape a carried fact takes on the canvas, in what context, what the inverse returns, and the canonical form the two directions must agree on — including the `emit` stage the door register does not cover |
+| [lowering.json](./lowering.json) | The same register, machine-readable and gated by `npm run lowering:check` |
 
 ## How a claim graduates (draft → normative)
 

@@ -660,6 +660,26 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run door-register:self-test
 
+      # THE LOWERING REGISTER — spec/LOWERING.md + spec/lowering.json. A DOOR
+      # decides whether a fact is admitted; a LOWERING decides what SHAPE a
+      # carried fact takes on the other surface. `core/emit-figma-script.ts` is
+      # 8,230 lines, carries ZERO `@door` markers, and the door register has no
+      # `emit` stage at all — so every FORWARD structure decision (the margin
+      # box, auto-layout inference, the slot birth box, the state plane, set
+      # placement) was unregistered and ungated, which is why a forward failure
+      # could never be cited to a line. This gate adds that stage. It refuses a
+      # `@lower` marker with no entry, an entry whose cited line moved, a rule
+      # with no canonical form, and an implemented rule whose inverse does not
+      # return that canonical form. It also VERIFIES `markerOutsideRule` rather
+      # than trusting it: spec/door-register.json stamps that claim on all 27
+      # `propose.*` layout doors, where it is false.
+      - name: lowering:check (every layout lowering named, contexted, given a canonical form, and held to its inverse)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run lowering:check
+      - name: lowering self-test (planted reds - an unregistered marker, a moved rule line, a missing canonical, an inverse that does not return it, a false markerOutsideRule)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run lowering:check -- --self-test
+
       # THE GRAMMAR COVERAGE SPEC — spec/GRAMMAR-COVERAGE.md + grammar-coverage.json.
       # The CAPTURE CONFIG GRAMMAR is the language a user mounts their library
       # in, and three holes in it were found by AUTHORING three held-out exam

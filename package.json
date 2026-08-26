@@ -238,6 +238,7 @@
     "exam:first-pass": "tsx scripts/first-pass-exam.ts",
     "first-pass:check": "tsx scripts/first-pass-check.ts",
     "door-register:check": "tsx scripts/door-register-check.ts",
+    "lowering:check": "tsx scripts/lowering-check.ts",
     "grammar-coverage:check": "tsx scripts/grammar-coverage-check.ts",
     "render-browser:check": "tsx scripts/render-browser-pin-check.ts",
     "mixed-browser:check": "tsx scripts/mixed-browser-capture-check.ts",
