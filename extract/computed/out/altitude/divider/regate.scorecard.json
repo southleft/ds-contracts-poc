@@ -3,6 +3,7 @@
   "component": "Divider",
   "config": "extract/computed/configs/altitude.json",
   "capturedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "declared": {
     "base": [
       {
@@ -33,12 +34,13 @@
     "component": "Divider",
     "generatedBy": "extract/computed/gate.ts",
     "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+    "renderedBy": "149.0.7827.55",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 2,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 168,
-      "cellsEqual": 168,
+      "cellsCompared": 160,
+      "cellsEqual": 160,
       "pctEqual": 100,
       "rowsFullyEqual": 8,
       "rows": 8
@@ -65,7 +67,7 @@
       "mintedLeavesUnfolded": 9,
       "baseBindings": 7,
       "stateBindings": 0,
-      "codeOnlyChannels": 2,
+      "codeOnlyChannels": 1,
       "overflowBindings": 0,
       "folds": 10
     },
@@ -129,7 +131,6 @@
     ],
     "topMismatchedChannels": [],
     "namedLosses": [
-      "code-only: root.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <hr>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <hr> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: root.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <hr>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <hr> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it."
     ],
     "unresolvedTokenRefs": {
@@ -138,12 +139,18 @@
     },
     "shippedMinted": {
       "path": "examples/altitude/tokens/altitude-minted.dtcg.json",
-      "leavesAdded": 309,
+      "leavesAdded": 315,
       "divergent": [
         {
           "token": "imported.divider.root.background-color",
           "fresh": "#b0b0b0",
           "shipped": "{theme-color-border-default}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.divider.root.height.unset",
+          "fresh": "1px",
+          "shipped": "{theme-border-width}",
           "resolvedEqual": true
         },
         {
@@ -157,8 +164,8 @@
     "rows": [
       {
         "key": "unset__default",
-        "channelsCompared": 21,
-        "channelsEqual": 21,
+        "channelsCompared": 20,
+        "channelsEqual": 20,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -167,8 +174,8 @@
       },
       {
         "key": "unset__hover",
-        "channelsCompared": 21,
-        "channelsEqual": 21,
+        "channelsCompared": 20,
+        "channelsEqual": 20,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -177,8 +184,8 @@
       },
       {
         "key": "unset__focus-visible",
-        "channelsCompared": 21,
-        "channelsEqual": 21,
+        "channelsCompared": 20,
+        "channelsEqual": 20,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -187,8 +194,8 @@
       },
       {
         "key": "unset__active",
-        "channelsCompared": 21,
-        "channelsEqual": 21,
+        "channelsCompared": 20,
+        "channelsEqual": 20,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -197,8 +204,8 @@
       },
       {
         "key": "vertical__default",
-        "channelsCompared": 21,
-        "channelsEqual": 21,
+        "channelsCompared": 20,
+        "channelsEqual": 20,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -207,8 +214,8 @@
       },
       {
         "key": "vertical__hover",
-        "channelsCompared": 21,
-        "channelsEqual": 21,
+        "channelsCompared": 20,
+        "channelsEqual": 20,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -217,8 +224,8 @@
       },
       {
         "key": "vertical__focus-visible",
-        "channelsCompared": 21,
-        "channelsEqual": 21,
+        "channelsCompared": 20,
+        "channelsEqual": 20,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -227,8 +234,8 @@
       },
       {
         "key": "vertical__active",
-        "channelsCompared": 21,
-        "channelsEqual": 21,
+        "channelsCompared": 20,
+        "channelsEqual": 20,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",

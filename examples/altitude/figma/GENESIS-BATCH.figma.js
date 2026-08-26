@@ -368,6 +368,15 @@ for (const v of allVars) varByName[v.name] = v;
     }
   }
 }
+{
+  const _cols = await figma.variables.getLocalVariableCollectionsAsync();
+  const _prefCol = _cols.find((c) => c.name === "Altitude");
+  if (_prefCol) {
+    for (const v of allVars) {
+      if (v.variableCollectionId === _prefCol.id) varByName[v.name] = v;
+    }
+  }
+}
 // NAMED RUNTIME DEGRADATIONS (R7, 2026-08-22). The emitted script used to
 // carry ~30 bare try/catch swallows (a comment where the handler should be) — every one a
 // canvas fact the spec asked for and the API refused (FILL sizing, out-of-
@@ -2550,6 +2559,15 @@ for (const v of allVars) varByName[v.name] = v;
       for (const v of allVars) {
         if (v.variableCollectionId === _best && _wanted.has(v.name)) varByName[v.name] = v;
       }
+    }
+  }
+}
+{
+  const _cols = await figma.variables.getLocalVariableCollectionsAsync();
+  const _prefCol = _cols.find((c) => c.name === "Altitude");
+  if (_prefCol) {
+    for (const v of allVars) {
+      if (v.variableCollectionId === _prefCol.id) varByName[v.name] = v;
     }
   }
 }
@@ -5265,6 +5283,15 @@ for (const v of allVars) varByName[v.name] = v;
     }
   }
 }
+{
+  const _cols = await figma.variables.getLocalVariableCollectionsAsync();
+  const _prefCol = _cols.find((c) => c.name === "Altitude");
+  if (_prefCol) {
+    for (const v of allVars) {
+      if (v.variableCollectionId === _prefCol.id) varByName[v.name] = v;
+    }
+  }
+}
 // NAMED RUNTIME DEGRADATIONS (R7, 2026-08-22). The emitted script used to
 // carry ~30 bare try/catch swallows (a comment where the handler should be) — every one a
 // canvas fact the spec asked for and the API refused (FILL sizing, out-of-
@@ -7513,6 +7540,15 @@ for (const v of allVars) varByName[v.name] = v;
     }
   }
 }
+{
+  const _cols = await figma.variables.getLocalVariableCollectionsAsync();
+  const _prefCol = _cols.find((c) => c.name === "Altitude");
+  if (_prefCol) {
+    for (const v of allVars) {
+      if (v.variableCollectionId === _prefCol.id) varByName[v.name] = v;
+    }
+  }
+}
 // NAMED RUNTIME DEGRADATIONS (R7, 2026-08-22). The emitted script used to
 // carry ~30 bare try/catch swallows (a comment where the handler should be) — every one a
 // canvas fact the spec asked for and the API refused (FILL sizing, out-of-
@@ -9128,6 +9164,15 @@ for (const v of allVars) varByName[v.name] = v;
       for (const v of allVars) {
         if (v.variableCollectionId === _best && _wanted.has(v.name)) varByName[v.name] = v;
       }
+    }
+  }
+}
+{
+  const _cols = await figma.variables.getLocalVariableCollectionsAsync();
+  const _prefCol = _cols.find((c) => c.name === "Altitude");
+  if (_prefCol) {
+    for (const v of allVars) {
+      if (v.variableCollectionId === _prefCol.id) varByName[v.name] = v;
     }
   }
 }
@@ -11315,6 +11360,15 @@ for (const v of allVars) varByName[v.name] = v;
     }
   }
 }
+{
+  const _cols = await figma.variables.getLocalVariableCollectionsAsync();
+  const _prefCol = _cols.find((c) => c.name === "Altitude");
+  if (_prefCol) {
+    for (const v of allVars) {
+      if (v.variableCollectionId === _prefCol.id) varByName[v.name] = v;
+    }
+  }
+}
 // NAMED RUNTIME DEGRADATIONS (R7, 2026-08-22). The emitted script used to
 // carry ~30 bare try/catch swallows (a comment where the handler should be) — every one a
 // canvas fact the spec asked for and the API refused (FILL sizing, out-of-
@@ -13116,6 +13170,15 @@ for (const v of allVars) varByName[v.name] = v;
       for (const v of allVars) {
         if (v.variableCollectionId === _best && _wanted.has(v.name)) varByName[v.name] = v;
       }
+    }
+  }
+}
+{
+  const _cols = await figma.variables.getLocalVariableCollectionsAsync();
+  const _prefCol = _cols.find((c) => c.name === "Altitude");
+  if (_prefCol) {
+    for (const v of allVars) {
+      if (v.variableCollectionId === _prefCol.id) varByName[v.name] = v;
     }
   }
 }
@@ -15098,6 +15161,15 @@ for (const v of allVars) varByName[v.name] = v;
       for (const v of allVars) {
         if (v.variableCollectionId === _best && _wanted.has(v.name)) varByName[v.name] = v;
       }
+    }
+  }
+}
+{
+  const _cols = await figma.variables.getLocalVariableCollectionsAsync();
+  const _prefCol = _cols.find((c) => c.name === "Altitude");
+  if (_prefCol) {
+    for (const v of allVars) {
+      if (v.variableCollectionId === _prefCol.id) varByName[v.name] = v;
     }
   }
 }
