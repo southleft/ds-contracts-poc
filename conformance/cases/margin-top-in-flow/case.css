@@ -1,0 +1,3 @@
+[data-cf="margin-top-in-flow"] { display: flex; flex-direction: column; width: 140px; padding: 6px; background: rgb(240, 246, 244); }
+[data-cf="margin-top-in-flow"] .cf-a { height: 18px; background: rgb(0, 137, 123); }
+[data-cf="margin-top-in-flow"] .cf-b { margin-top: 12px; height: 18px; background: rgb(128, 203, 196); }

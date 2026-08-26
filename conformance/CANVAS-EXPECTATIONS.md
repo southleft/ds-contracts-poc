@@ -15,12 +15,12 @@ never waivable.
 
 | | |
 |---|---|
-| cases (CARRIED + LOWERED) | **68** |
-| 🟢 round-tripped | **50** |
+| cases (CARRIED + LOWERED) | **73** |
+| 🟢 round-tripped | **55** |
 | 🟢 named (dropped, and a receipt says so) | **16** |
 | 🟡 refused by name (the canvas cannot host the seed, and says so) | **1** |
-| ⚪ seed-absent (nothing to round-trip) | **1** |
-| 🔴 red | **0** — SILENT 0 · DRIFTED 0 · HARMFUL 0 |
+| ⚪ seed-absent (nothing to round-trip) | **0** |
+| 🔴 red | **1** — SILENT 1 · DRIFTED 0 · HARMFUL 0 |
 
 Verdicts: **ROUND-TRIPPED** the channel came back with the seed's value (refs
 resolved; "ref" says whether the token spelling survived, "as" names a
@@ -31,6 +31,12 @@ step results, dump `_degradations`, proposal notes/unbound, batch notes/skips ·
 name · **DRIFTED** a different value came back and nothing named the lowering ·
 **HARMFUL** the manifest says no canvas spelling exists and it came back anyway ·
 **SILENT** vanished, named by nothing — never waivable.
+
+## 🔴 SILENT — 1
+
+| case | feature | construct | channel | expect | came back | ref | as | note |
+|---|---|---|---|---|---|---|---|---|
+| `margin-top-in-flow` | box | margin-top: 12px on the SECOND child of a flex column whose parent declares no gap | `margin-top` | CARRIED | — |  |  |  |
 
 ## 🟢 NAMED — 16
 
@@ -59,13 +65,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 |---|---|---|---|---|---|---|---|---|
 | `grid-instance-child` | grid-composition | a component INSTANCE placed in a cell with position + FILL | `grid-column-start` | CARRIED | — |  |  | mock figma (component step): Error: grid-placement-cycle-no-spare: the declared 1x2 grid has no free cell to break a placement cycle through — refusing rather than throwing P3 mid-script |
 
-## ⚪ SEED-ABSENT — 1
-
-| case | feature | construct | channel | expect | came back | ref | as | note |
-|---|---|---|---|---|---|---|---|---|
-| `combobox-closed-trigger` | combobox | the CLOSED combobox trigger - `justify-content: space-between` pushing a value label and a two-border chevron box to opposite ends of a bordered row | `justify-content` | CARRIED | — |  |  | the captured contract does not carry "justify-content" = space-between — the CSS/DOM gate's finding, nothing to round-trip |
-
-## 🟢 ROUND-TRIPPED — 50
+## 🟢 ROUND-TRIPPED — 55
 
 | case | feature | construct | channel | expect | came back | ref | as | note |
 |---|---|---|---|---|---|---|---|---|
@@ -78,12 +78,15 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `color-hex` | color | color: #1976d2 (authored as hex) | `color` | CARRIED | #1976d2 | same |  |  |
 | `color-rgb-solid` | color | background-color: rgb(25, 118, 210) | `background-color` | CARRIED | #1976d2 | same |  |  |
 | `color-rgba-alpha` | color | background-color: rgba(25, 118, 210, 0.5) | `background-color` | CARRIED | #1976d280 | same |  |  |
+| `combobox-closed-trigger` | combobox | the CLOSED combobox trigger - `justify-content: space-between` pushing a value label and a two-border chevron box to opposite ends of a bordered row | `justify-content` | CARRIED | space-between | same |  |  |
 | `combobox-option-selected` | combobox | 5 sibling options where ONE is SELECTED - a distinct fill (rgb(219, 234, 254)) and weight among four identical siblings | `background-color` | CARRIED | #dbeafe, #ffffff | same |  |  |
 | `combobox-popover-overlay-inset` | combobox | the OPEN listbox as an out-of-flow overlay - `position: absolute; top: 34px` under a `position: relative` trigger, so the popover does not participate in the trigger's flow | `top` | CARRIED | 0px, 34px | same |  |  |
 | `custom-prop-two-hop` | custom-properties | --a: #123456; --b: var(--a); color: var(--b) | `color` | LOWERED | #123456 | same |  |  |
 | `display-flex` | display | display: flex | `display` | CARRIED | flex | same |  |  |
 | `display-inline-flex` | display | display: inline-flex | `display` | CARRIED | flex | same |  |  |
 | `em-relative-padding` | units | padding: 1.5em against a 12px font-size | `padding-left` | CARRIED | 18px | same | `padding-inline` | channel respelled: padding-left → padding-inline |
+| `flex-align-items-center` | layout-flex | display: flex; align-items: center — cross-axis centring of two children of DIFFERENT heights | `align-items` | CARRIED | center | same |  |  |
+| `flex-direction-column` | layout-flex | display: flex; flex-direction: column — the main axis turned vertical | `flex-direction` | CARRIED | column | same |  |  |
 | `flex-gap` | layout | column-gap / row-gap in px | `column-gap` | CARRIED | 12px | same | `gap` | channel respelled: column-gap → gap |
 | `grid-2d` | layout | display: grid + grid-template-columns: 1fr 1fr (children AUTO-PLACED) | `display` | CARRIED | grid | same |  |  |
 | `grid-absolute-overlay` | grid-composition | Part.overlay (layoutPositioning ABSOLUTE) inside a grid parent | `position` | CARRIED | absolute, relative | same |  |  |
@@ -91,6 +94,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `grid-auto-flow-row` | grid-flow | grid-auto-flow: row over declared columns AND declared row tracks, placement by child order | `grid-auto-flow` | CARRIED | row | same |  |  |
 | `grid-bento-span-matrix` | grid-placement | 3x4 grid, rows [80px,1fr,2fr], cols [160px,1fr,1fr,120px], gaps 12/16, header 1x4 + sidebar 2x1 + main 1x2 + rail 2x1 + footer 1x2, all cells FILL | `grid-template-columns` | CARRIED | 160px 1fr 1fr 120px | same |  |  |
 | `grid-child-align` | grid-alignment | justify-self: center; align-self: end on a fixed-size child | `justify-self` | CARRIED | center | same |  |  |
+| `grid-child-align-self-start` | grid-alignment | align-self: start on a fixed-size grid child, with no justify-self declared | `align-self` | CARRIED | start | same |  |  |
 | `grid-child-fill-cell` | grid-sizing | grid child stretching to its cell (CSS default; canvas FILL both axes) | `grid-row-start` | CARRIED | 1 | same |  |  |
 | `grid-col-span` | grid-placement | grid-column: 1 / span 2 (child spans 2 columns) | `grid-column-end` | CARRIED | 1, 3, span 2 | same |  |  |
 | `grid-explicit-anchor` | grid-placement | grid-row: 3; grid-column: 2 (explicit cell placement, 0-based contract / 1-based CSS) | `grid-row-start` | CARRIED | 1, 3 | same |  |  |
@@ -105,6 +109,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `grid-two-column` | grid-tracks | display: grid; grid-template-columns: 1fr 1fr | `grid-template-columns` | CARRIED | 1fr 1fr | same |  |  |
 | `min-max-width` | geometry | min-width / max-width in px | `min-width` | CARRIED | 96px | same |  |  |
 | `oklch-color` | color | background-color: oklch(0.6 0.15 250) | `background-color` | CARRIED | #2784d5 | same |  |  |
+| `padding-asymmetric-block` | box | padding: 10px 4px 20px 4px — four sides, top and bottom DIFFERENT | `padding-top` | CARRIED | 10px, 20px, 4px | same |  |  |
 | `page-inherited-ink` | cascade | body { color: var(--cf-color-primary) } — the document's ink, inherited by a text-bearing part that declares no colour of its own | `color` | CARRIED | #1976d2 | same |  |  |
 | `percentage-padding` | units | padding-left: 10% (resolved against the PARENT width) | `padding-left` | CARRIED | 28.7969px | same |  |  |
 | `position-absolute-insets` | position | position: absolute + top/left insets | `top` | CARRIED | 4px, 6px | same |  |  |

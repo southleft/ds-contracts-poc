@@ -1,0 +1,19 @@
+{
+  "id": "flex-direction-column",
+  "feature": "layout-flex",
+  "construct": "display: flex; flex-direction: column — the main axis turned vertical",
+  "why": "flex-direction decides which Figma axis every other layout fact means: itemSpacing, primaryAxisAlignItems and counterAxisAlignItems all swap meaning with it, so an error here mis-draws every sibling fact rather than one channel. It was CARRIED on a code citation alone, and the reader recorded it under the contract's field name `direction` — which is ALSO a real CSS property (ltr/rtl), so the wrong spelling was not merely invisible, it collided with a channel the table classifies separately.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.layout.direction / layoutMode VERTICAL",
+  "observable": {
+    "part": "root",
+    "channel": "flex-direction",
+    "capturedValue": "column"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "layoutMode VERTICAL on the root auto-layout frame"
+  },
+  "blockStage": true
+}

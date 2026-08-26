@@ -1,0 +1,19 @@
+{
+  "id": "flex-align-items-center",
+  "feature": "layout-flex",
+  "construct": "display: flex; align-items: center — cross-axis centring of two children of DIFFERENT heights",
+  "why": "align-items is the cross-axis half of the flex vocabulary and one of the four layout facts the whole CSS->Figma lowering reframe rests on. It was classified CARRIED on a code citation alone; until 2026-08-26 the fixture's reader could not observe it at all (carriage was recorded under the contract's field name `align`, a spelling no browser emits), so no case could ever have caught it. The children differ in height on purpose: with equal heights, `center` and `stretch` draw the same picture and the case would prove nothing.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.layout.align / counterAxisAlignItems",
+  "observable": {
+    "part": "root",
+    "channel": "align-items",
+    "capturedValue": "center"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "counterAxisAlignItems CENTER on the root auto-layout frame"
+  },
+  "blockStage": true
+}

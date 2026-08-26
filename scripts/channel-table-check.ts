@@ -3,6 +3,7 @@
  *
  *   npx tsx scripts/channel-table-check.ts               # verify
  *   npx tsx scripts/channel-table-check.ts --self-test   # the gate must go red on planted reds
+ *   npx tsx scripts/channel-table-check.ts --rederive    # rewrite the DERIVED fields from the manifests
  *
  * WHAT IT HOLDS. spec/channel-table.json is the TOP-DOWN closure of the
  * channel vocabulary: every CSS computed property the capture layer can
@@ -31,17 +32,31 @@
  *      quoted in spec/CHANNEL-TABLE.md and docs/30-channel-table.md are the
  *      recomputed ones, never a stale copy.
  *
+ *   5. EVIDENCE — every CARRIED row declares WHICH claim it is making:
+ *      `measured` (a named case observes it end to end), `code-cited` (an
+ *      engine citation and nothing more — a declared gap), or `unobservable`
+ *      (no contract can even spell the channel, so no case could ever
+ *      observe it). The state is RE-DERIVED from the two manifests and the
+ *      schema's channel sets, never trusted from the file, so a row can
+ *      neither over-claim nor under-claim; `--rederive` writes what the
+ *      derivation says. Cites are checked in BOTH directions — until
+ *      2026-08-26 only manifest→table was verified, so the table could cite
+ *      a case that had been deleted, renamed, or that measures some other
+ *      channel entirely.
+ *
  * WHAT IT DOES NOT CLAIM. A row is a CLASSIFICATION, not a proof of
- * behaviour — the conformance kits (91 css-dom + 157 canvas cases) are the
- * executable half; rows cite their case ids. The two FC codes the table
+ * behaviour — the conformance kits (112 css-dom + 157 canvas cases) are the
+ * executable half, and the `evidence` field is now the honest record of how
+ * many rows the executable half actually reaches. The two FC codes the table
  * mints (FC-PSEUDO-PLANE-UNREAD, FC-STATE-PLANE-UNDRIVEN) name loss classes
  * that are still silent in the engine; the table is where they stop being
  * unnamed, and wiring live receipts is follow-up work by design.
  */
-import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { DECLARED_CHANNELS, TOKEN_CHANNELS, LITERAL_CHANNELS } from '@ds-contracts/schema';
 import { LOGICAL_ALIASES, SYNTHETIC_CHANNELS } from '../extract/computed/lib.js';
+import { MIRRORED_CHANNELS } from '../conformance/run.js';
 
 const ROOT = process.cwd();
 const TABLE_PATH = path.join(ROOT, 'spec/channel-table.json');
@@ -66,6 +81,14 @@ interface Row {
   valueNotes?: string;
   conformance?: string[];
   synthetic?: boolean;
+  /** CARRIED only — see EVIDENCE_STATES. */
+  evidence?: string;
+  /** CARRIED only — the channel this property is OBSERVED under when it is
+   *  folded at the read boundary and therefore has no spelling of its own in
+   *  a contract (`-webkit-text-fill-color` folds into `color`). Legal ONLY on
+   *  a row whose own property is unreachable; otherwise it would let a row
+   *  borrow a neighbour's case and call itself measured. */
+  observedAs?: string;
 }
 interface Table {
   propertyCount: number;
@@ -78,6 +101,122 @@ interface Table {
     states: { driven: string[]; drivenAnchor: Anchor; undriven: { items: string[] } };
   };
   foundSilent: Array<{ surface: string; items: string[] }>;
+}
+
+// ---------------------------------------------------------------------------
+// EVIDENCE — what backs a CARRIED verdict
+// ---------------------------------------------------------------------------
+/**
+ * A CARRIED row used to mean two different things wearing one word:
+ *
+ *   "there is a code path that carries this"   (an `engine` citation)
+ *   "we measured that it carries"              (a conformance case)
+ *
+ * Only 27 of the first 82 CARRIED rows had the second. The gate could not
+ * tell the difference, so neither could a reader — and on 2026-08-26 two of
+ * the rows resting on a citation alone turned out to be things the css-dom
+ * fixture's reader could not observe AT ALL: no case could ever have caught
+ * them, and nothing in the tree could have noticed. `evidence` is the field
+ * that stops the two claims sharing a word.
+ *
+ *   measured      a named case observes this property end to end (capture →
+ *                 contract). A change that broke the property turns something
+ *                 red. `conformance` names the case(s), and this gate checks
+ *                 they exist and that a css-dom case really observes THIS
+ *                 channel.
+ *   code-cited    an engine citation and nothing more. The property is
+ *                 REACHABLE — a case could be written — but none has been.
+ *                 A declared gap, and the honest state for most of the table.
+ *   unobservable  no reader path exists: the property is in none of the
+ *                 schema's channel sets and no structured mirror spells it,
+ *                 so it cannot appear in a contract, so no conformance case
+ *                 could ever observe it. The strongest possible statement
+ *                 that a claim is unfalsifiable as things stand.
+ *
+ * The state is DERIVED (deriveEvidence), never trusted from the file, and
+ * `--rederive` writes what the derivation says. One function, so the check
+ * and the fix cannot drift apart.
+ */
+const EVIDENCE_STATES = new Set(['measured', 'code-cited', 'unobservable']);
+
+export const REDERIVE_HINT =
+  'run `npm run channel-table:rederive` (it re-derives evidence and the css-dom half of `conformance` from the manifests, and leaves every hand-written field alone)';
+
+/** Every channel a CONTRACT can spell, and therefore the only channels a
+ *  conformance case can ever observe end to end: the schema's three channel
+ *  sets (whose keys ARE CSS spellings) plus the structured mirrors that
+ *  conformance/run.ts writes out of `Part.layout` / `Part.placement`. The
+ *  mirror list is imported rather than restated so a mirror added there and
+ *  not here cannot silently widen this set. */
+function reachableChannels(): Set<string> {
+  return new Set<string>([
+    ...Object.keys(DECLARED_CHANNELS),
+    ...Object.keys(TOKEN_CHANNELS),
+    ...LITERAL_CHANNELS,
+    ...MIRRORED_CHANNELS,
+  ]);
+}
+
+interface Manifests {
+  /** css-dom: observable channel → the case ids that observe it. */
+  cssByChannel: Map<string, string[]>;
+  /** css-dom: case id → the channel it observes. */
+  cssChannelOf: Map<string, string>;
+  /** canvas: the case ids that exist (their checks are regexes, not channels,
+   *  so a canvas cite is HAND-declared and only its existence is derivable). */
+  canvasIds: Set<string>;
+}
+
+export function loadManifests(readFile: (rel: string) => string | null): Manifests {
+  const cssByChannel = new Map<string, string[]>();
+  const cssChannelOf = new Map<string, string>();
+  const canvasIds = new Set<string>();
+  const css = readFile('conformance/MANIFEST.json');
+  if (css !== null) {
+    for (const c of (JSON.parse(css) as { cases: Array<{ id: string; observable?: { channel?: string } }> }).cases) {
+      const ch = c.observable?.channel;
+      if (!ch || ch.startsWith('__')) continue;
+      cssChannelOf.set(c.id, ch);
+      (cssByChannel.get(ch) ?? cssByChannel.set(ch, []).get(ch)!).push(c.id);
+    }
+  }
+  const canvas = readFile('extract/figma/conformance/MANIFEST.json');
+  if (canvas !== null) {
+    for (const c of (JSON.parse(canvas) as { cases: Array<{ id: string }> }).cases) canvasIds.add(c.id);
+  }
+  return { cssByChannel, cssChannelOf, canvasIds };
+}
+
+/** THE DERIVATION. Returns what a CARRIED row's `evidence` and `conformance`
+ *  MUST be, given the manifests and the reachability of its channel. Called
+ *  by `verify` (to refuse a row that disagrees) and by `--rederive` (to write
+ *  the agreement) — the door-register discipline. */
+export function deriveEvidence(
+  r: Row,
+  m: Manifests,
+  reachable: Set<string>,
+): { evidence: string; conformance: string[] } {
+  const target = r.observedAs ?? r.property;
+  // css-dom cites are DERIVED: a case that observes this channel is evidence
+  // for this row whether or not a human remembered to write it down.
+  //
+  // EXCEPT under a fold. When `observedAs` redirects the row to a neighbour's
+  // channel, "every case on that channel" is far too generous — of the nine
+  // cases that observe `color`, exactly one sets `-webkit-text-fill-color`
+  // and so exercises the fold. Which case exercises a fold is a human
+  // judgement, so a folded row's cites are preserved and merely validated,
+  // never invented.
+  const fromCss = r.observedAs === undefined
+    ? (m.cssByChannel.get(target) ?? [])
+    : (r.conformance ?? []).filter((id) => m.cssChannelOf.get(id) === target);
+  // canvas cites are PRESERVED for the same reason: canvas cases assert on
+  // regexes, not on a CSS channel, so which row a canvas case supports is a
+  // human judgement. The gate keeps it and checks only that the case exists.
+  const fromCanvas = (r.conformance ?? []).filter((id) => m.canvasIds.has(id));
+  const conformance = [...new Set([...fromCss, ...fromCanvas])].sort();
+  if (conformance.length > 0) return { evidence: 'measured', conformance };
+  if (!reachable.has(target)) return { evidence: 'unobservable', conformance: [] };
+  return { evidence: 'code-cited', conformance: [] };
 }
 
 /** The union of standard (non-custom) properties the committed capture
@@ -136,6 +275,77 @@ function verify(raw: string, readFile: (rel: string) => string | null): string[]
     if (r.class === 'LEDGERED' && !r.receipt) problems.push(`${r.property}: LEDGERED without a named receipt channel`);
     if (r.class === 'REFUSED' && !r.code) problems.push(`${r.property}: REFUSED without a named wall code`);
     if (r.class === 'INERT' && !r.note) problems.push(`${r.property}: INERT without a justification`);
+    if (r.class !== 'CARRIED') {
+      if (r.evidence !== undefined) problems.push(`${r.property}: ${r.class} carries an "evidence" field — evidence states are a CARRIED-only claim`);
+      if (r.observedAs !== undefined) problems.push(`${r.property}: ${r.class} carries an "observedAs" field — the read-boundary fold is a CARRIED-only claim`);
+    }
+  }
+
+  // 5 — EVIDENCE. Every CARRIED row must say WHICH of the two claims it is
+  // making, and the state is recomputed from the manifests rather than
+  // trusted, so a row can neither over-claim ("measured" with no case) nor
+  // under-claim ("code-cited" while a case that measures it already exists).
+  const reachable = reachableChannels();
+  const m = loadManifests(readFile);
+  if (m.cssByChannel.size === 0) {
+    problems.push('conformance/MANIFEST.json yielded ZERO observable channels — the evidence half of this gate cannot run, and a gate that cannot observe must refuse');
+  }
+  if (m.canvasIds.size === 0) {
+    problems.push('extract/figma/conformance/MANIFEST.json yielded ZERO canvas case ids — the evidence half of this gate cannot run, and a gate that cannot observe must refuse');
+  }
+  const evidenceCounts: Record<string, number> = { measured: 0, 'code-cited': 0, unobservable: 0 };
+  for (const r of table.properties) {
+    if (r.class !== 'CARRIED') continue;
+
+    // A cite must name a case that EXISTS, in one of the two manifests. The
+    // manifest→table direction was already checked; this is the reverse one,
+    // and without it the table could cite a case that was deleted or renamed.
+    for (const id of r.conformance ?? []) {
+      if (!m.cssChannelOf.has(id) && !m.canvasIds.has(id)) {
+        problems.push(`${r.property}: cites conformance case "${id}", which exists in NEITHER conformance/MANIFEST.json NOR extract/figma/conformance/MANIFEST.json — the table cites a ghost case`);
+      } else if (m.cssChannelOf.has(id) && m.cssChannelOf.get(id) !== (r.observedAs ?? r.property)) {
+        problems.push(`${r.property}: cites css-dom case "${id}", but that case observes channel "${m.cssChannelOf.get(id)}" — a case measures the channel it names, and citing it here claims a measurement nobody made`);
+      }
+    }
+
+    if (r.observedAs !== undefined) {
+      if (!rows.has(r.observedAs)) problems.push(`${r.property}: observedAs "${r.observedAs}" has no table row`);
+      if (reachable.has(r.property)) {
+        problems.push(`${r.property}: declares observedAs "${r.observedAs}" but "${r.property}" is itself a reachable channel — the fold is not needed, and borrowing another channel's case would launder a direct measurement nobody took`);
+      }
+    }
+
+    if (r.evidence === undefined) {
+      problems.push(`${r.property}: CARRIED without an "evidence" state — CARRIED must say whether it is MEASURED or merely code-cited (${[...EVIDENCE_STATES].join(' / ')}). ${REDERIVE_HINT}`);
+      continue;
+    }
+    if (!EVIDENCE_STATES.has(r.evidence)) {
+      problems.push(`${r.property}: evidence "${r.evidence}" is not one of ${[...EVIDENCE_STATES].join(' / ')}`);
+      continue;
+    }
+    evidenceCounts[r.evidence]++;
+
+    const want = deriveEvidence(r, m, reachable);
+    if (r.evidence !== want.evidence) {
+      problems.push(
+        `${r.property}: evidence says "${r.evidence}" but the manifests derive "${want.evidence}"` +
+          (want.evidence === 'measured' ? ` (case(s) ${want.conformance.join(', ')} already observe it)` : '') +
+          (want.evidence === 'unobservable' ? ` ("${r.observedAs ?? r.property}" is in no schema channel set and no structured mirror, so no contract can spell it and no case can observe it)` : '') +
+          `. ${REDERIVE_HINT}`,
+      );
+    }
+    const have = [...(r.conformance ?? [])].sort();
+    if (JSON.stringify(have) !== JSON.stringify(want.conformance)) {
+      problems.push(`${r.property}: conformance cites [${have.join(', ')}] but the derivation gives [${want.conformance.join(', ')}]. ${REDERIVE_HINT}`);
+    }
+    if (r.evidence === 'measured' && want.conformance.length === 0) {
+      problems.push(`${r.property}: evidence "measured" names no case — measured means a case measures it`);
+    }
+  }
+  // Anti-zero: a field that nothing populates checks nothing. `code-cited`
+  // reaching zero is the GOAL and is deliberately not guarded.
+  if (totals.CARRIED > 0 && evidenceCounts.measured === 0) {
+    problems.push('ZERO CARRIED rows are evidenced as "measured" — the evidence field has stopped being populated, and a vacuous field is not a check');
   }
 
   // totals + debt are recomputed, never trusted from the file.
@@ -232,6 +442,44 @@ const realRead = (rel: string): string | null => {
 
 const raw = readFileSync(TABLE_PATH, 'utf8');
 
+/** `--rederive`: recompute the two DERIVED fields on every CARRIED row and
+ *  write them back. It touches `evidence` and the css-dom half of
+ *  `conformance` and NOTHING else — `projection`, `engine`, `valueNotes`,
+ *  `prior`, `note`, hand-declared canvas cites and `observedAs` are all
+ *  hand-written and survive verbatim through the parse/serialize round trip.
+ *  (#60's lesson: metadata with no remedy command rots. #62's lesson: never
+ *  resolve a generated artifact by picking a side — re-derive it.) */
+export function rederive(table: Table, m: Manifests, reachable: Set<string>): { moves: string[] } {
+  const moves: string[] = [];
+  for (const r of table.properties) {
+    if (r.class !== 'CARRIED') continue;
+    const want = deriveEvidence(r, m, reachable);
+    const had = r.evidence;
+    const hadCites = JSON.stringify([...(r.conformance ?? [])].sort());
+    r.evidence = want.evidence;
+    if (want.conformance.length > 0) r.conformance = want.conformance;
+    else delete r.conformance;
+    if (had !== want.evidence) moves.push(`${r.property}: evidence ${had ?? '(none)'} → ${want.evidence}`);
+    if (hadCites !== JSON.stringify(want.conformance)) moves.push(`${r.property}: conformance ${hadCites} → ${JSON.stringify(want.conformance)}`);
+  }
+  return { moves };
+}
+
+if (process.argv.includes('--rederive')) {
+  const t = JSON.parse(raw) as Table;
+  const { moves } = rederive(t, loadManifests(realRead), reachableChannels());
+  writeFileSync(TABLE_PATH, JSON.stringify(t, null, 2) + '\n');
+  console.log(`channel-table:rederive — ${moves.length} field(s) re-derived`);
+  for (const l of moves) console.log(`  · ${l}`);
+  const left = verify(readFileSync(TABLE_PATH, 'utf8'), realRead);
+  if (left.length > 0) {
+    console.error(`\n✖ still RED after rederive — these are NOT derivable and need a human:\n  ${left.join('\n  ')}`);
+    process.exit(1);
+  }
+  console.log('✔ spec/channel-table.json re-derived and green');
+  process.exit(0);
+}
+
 if (process.argv.includes('--self-test')) {
   // A gate that cannot go red is not a gate. Three planted reds:
   const clean = verify(raw, realRead);
@@ -262,7 +510,79 @@ if (process.argv.includes('--self-test')) {
     console.error(`self-test (c) FAILED: a non-canonical byte did not refuse. Got:\n  ${c.join('\n  ')}`);
     process.exit(1);
   }
-  console.log('✔ channel-table self-test: a dropped observed row, a ghost CARRIED anchor and a non-canonical byte each go red by name');
+  // (d) strip a CARRIED row's evidence state — CARRIED must declare one.
+  const stripped = JSON.parse(raw) as Table;
+  const anyCarried = stripped.properties.find((r) => r.class === 'CARRIED')!;
+  delete anyCarried.evidence;
+  const d = verify(JSON.stringify(stripped, null, 2) + '\n', realRead);
+  if (!d.some((p) => p.includes(anyCarried.property) && p.includes('without an "evidence" state'))) {
+    console.error(`self-test (d) FAILED: a CARRIED row with no evidence state did not refuse. Got:\n  ${d.join('\n  ')}`);
+    process.exit(1);
+  }
+  // (e) claim "measured" on a row the manifests say is only code-cited — the
+  //     over-claim this whole field exists to stop.
+  const overclaim = JSON.parse(raw) as Table;
+  const cited = overclaim.properties.find((r) => r.class === 'CARRIED' && r.evidence === 'code-cited');
+  if (!cited) {
+    console.error('self-test (e) FAILED: no code-cited CARRIED row to over-claim with — the planted red cannot be built');
+    process.exit(1);
+  }
+  cited.evidence = 'measured';
+  const e = verify(JSON.stringify(overclaim, null, 2) + '\n', realRead);
+  if (!e.some((p) => p.includes(cited.property) && p.includes('derive "code-cited"'))) {
+    console.error(`self-test (e) FAILED: claiming "measured" with no case did not refuse. Got:\n  ${e.join('\n  ')}`);
+    process.exit(1);
+  }
+  // (f) cite a case that does not exist — the reverse-direction check that was
+  //     missing entirely until now (only manifest→table was ever verified).
+  const ghostCase = JSON.parse(raw) as Table;
+  const measured = ghostCase.properties.find((r) => r.class === 'CARRIED' && r.evidence === 'measured')!;
+  measured.conformance = ['no_such_case_planted_by_self_test'];
+  const f = verify(JSON.stringify(ghostCase, null, 2) + '\n', realRead);
+  if (!f.some((p) => p.includes('no_such_case_planted_by_self_test') && p.includes('ghost case'))) {
+    console.error(`self-test (f) FAILED: a cite naming a nonexistent case did not refuse. Got:\n  ${f.join('\n  ')}`);
+    process.exit(1);
+  }
+  // (g) cite a REAL css-dom case that observes a DIFFERENT channel — the
+  //     subtler half of (f): the case exists, so existence alone is no proof.
+  const wrongCase = JSON.parse(raw) as Table;
+  const wrongRow = wrongCase.properties.find((r) => r.class === 'CARRIED' && r.property === 'opacity')!;
+  wrongRow.evidence = 'measured';
+  wrongRow.conformance = ['color-hex'];
+  const g = verify(JSON.stringify(wrongCase, null, 2) + '\n', realRead);
+  if (!g.some((p) => p.includes('opacity') && p.includes('observes channel "color"'))) {
+    console.error(`self-test (g) FAILED: citing a case that measures another channel did not refuse. Got:\n  ${g.join('\n  ')}`);
+    process.exit(1);
+  }
+  // (h) --rederive must REPAIR exactly what the gate refuses, byte-for-byte.
+  //     Only `evidence` is scrambled: it is the fully derived field, the
+  //     analogue of the door register scrambling every ordinary `ruleLine`.
+  //     `conformance` is deliberately left alone because its canvas half is
+  //     HAND-declared and a derivation that could reinvent it would be
+  //     claiming to know something it cannot.
+  const scrambled = JSON.parse(raw) as Table;
+  let scrambledCount = 0;
+  for (const r of scrambled.properties) {
+    if (r.class !== 'CARRIED') continue;
+    r.evidence = r.evidence === 'unobservable' ? 'measured' : 'unobservable';
+    scrambledCount++;
+  }
+  if (scrambledCount === 0) {
+    console.error('self-test (h) FAILED: no CARRIED row to scramble — the planted red cannot be built');
+    process.exit(1);
+  }
+  const { moves } = rederive(scrambled, loadManifests(realRead), reachableChannels());
+  if (JSON.stringify(scrambled, null, 2) + '\n' !== raw) {
+    console.error(`self-test (h) FAILED: --rederive did not restore ${scrambledCount} scrambled evidence field(s) to the committed bytes`);
+    process.exit(1);
+  }
+  if (moves.length !== scrambledCount) {
+    console.error(`self-test (h) FAILED: --rederive reported ${moves.length} move(s) for ${scrambledCount} scrambled field(s) — it must name every repair it makes`);
+    process.exit(1);
+  }
+  console.log(
+    '✔ channel-table self-test: a dropped observed row, a ghost CARRIED anchor, a non-canonical byte, a CARRIED row with no evidence state, a "measured" over-claim, a ghost case cite and a cite that measures another channel each go red by name — and --rederive restores the scrambled evidence fields byte-for-byte',
+  );
   process.exit(0);
 }
 
@@ -274,6 +594,11 @@ if (problems.length > 0) {
 }
 const t = JSON.parse(raw) as Table;
 const { observed, artifacts } = observedProperties();
+const ev: Record<string, number> = { measured: 0, 'code-cited': 0, unobservable: 0 };
+for (const r of t.properties) if (r.class === 'CARRIED' && r.evidence) ev[r.evidence]++;
 console.log(
   `✔ channel table closed: ${t.properties.length} properties (${t.totals.CARRIED} carried · ${t.totals.LEDGERED} ledgered · ${t.totals.REFUSED} refused · ${t.totals.INERT} inert) cover the ${observed.size} observed by ${artifacts} committed capture artifact(s); every schema/conformance channel has a row; every CARRIED anchor exists; bytes canonical`,
+);
+console.log(
+  `  CARRIED evidence: ${ev.measured} MEASURED by a named case · ${ev['code-cited']} code-cited only (a declared gap) · ${ev.unobservable} unobservable (no contract can spell the channel, so no case could ever catch it)`,
 );
