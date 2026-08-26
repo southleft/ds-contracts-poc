@@ -10,13 +10,13 @@ examples/altitude/tokens/altitude.dtcg.json,examples/altitude/tokens/altitude-mi
 | avatar.figma.js | altitude.avatar | variant(1) | 1 | tokens 647 (47 aliased) · 0 set(s) built |
 | badge.figma.js | altitude.badge | variant(4)×dot(2) | 8 | tokens 647 (47 aliased) · 1 set(s) built |
 | button.figma.js | altitude.button | variant(4) | 4 | tokens 647 (47 aliased) · 1 set(s) built |
-| chip.figma.js | altitude.chip | variant(5)×type(1) | 5 | tokens 647 (47 aliased) · 1 set(s) built |
-| divider.figma.js | altitude.divider | variant(1) | 1 | tokens 647 (47 aliased) · 0 set(s) built |
+| chip.figma.js | altitude.chip | variant(5)×type(2) | 10 | tokens 647 (47 aliased) · 1 set(s) built |
+| divider.figma.js | altitude.divider | variant(2) | 2 | tokens 647 (47 aliased) · 1 set(s) built |
 | heading.figma.js | altitude.heading | variant(6)×weight(2) | 12 | tokens 647 (47 aliased) · 1 set(s) built |
 | icon-close.figma.js | altitude.iconclose | size(7) | 7 | tokens 647 (47 aliased) · 1 set(s) built |
 | link.figma.js | altitude.link | variant(3) | 3 | tokens 647 (47 aliased) · 1 set(s) built |
 
-**8 scripts · 41 variants total.** Each script ran to completion
+**8 scripts · 47 variants total.** Each script ran to completion
 against the mocked Figma (00-tokens.figma.js first — 647 variables
 including the Figma-native ALIAS pass for source-aliased minted leaves).
 

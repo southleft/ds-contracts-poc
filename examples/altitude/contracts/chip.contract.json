@@ -40,8 +40,10 @@
     },
     {
       "name": "type",
+      "description": "FC-ENUM-HOLE: capture seed only listed squared; the absent-attribute (pill) rendering is the developed default — spelled `default` here because altitude forbids the capture-side `unset` pseudo-value as a real enum member.",
       "type": {
         "enum": [
+          "default",
           "squared"
         ]
       },
@@ -50,6 +52,7 @@
           "kind": "VARIANT",
           "property": "Type",
           "values": {
+            "default": "Default",
             "squared": "Squared"
           }
         },
@@ -219,7 +222,7 @@
   },
   "bindings": {
     "figma": {
-      "statePreviews": true,
+      "statePreviews": false,
       "anchors": {
         "fileKey": null,
         "componentSetKey": null
