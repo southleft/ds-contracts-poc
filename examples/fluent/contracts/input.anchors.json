@@ -3,6 +3,14 @@
   "component": "input",
   "anchors": [
     {
+      "leaf": "imported.input.input.color",
+      "token": "color-neutral-foreground1",
+      "part": "input",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForeground1",
+      "selector": ".r12stul0"
+    },
+    {
       "leaf": "imported.input.input.padding-left.small",
       "token": "spacing-horizontal-s",
       "part": "input",

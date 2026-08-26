@@ -471,6 +471,7 @@
   --imported-progress-bar-root-column-gap: 4px;
   --imported-progress-bar-root-min-width: 48px;
   --imported-progress-bar-root-row-gap: 4px;
+  --imported-shared-color-171717: #171717;
   --imported-shared-color-262626: #262626;
   --imported-shared-color-d4d4d4: #d4d4d4;
   --imported-shared-color-ffffff: #ffffff;
@@ -638,6 +639,8 @@
   --imported-text-input-part-1-0-0-flex-grow: 1;
   --imported-text-input-part-1-0-0-font-size: 14px;
   --imported-text-input-part-1-0-0-line-height: 20.0004px;
+  --imported-text-input-part-1-0-0-placeholder-color: #737373;
+  --imported-text-input-root-width: 320px;
   --imported-text-input-text-input-background-color: #ffffff;
   --imported-text-input-text-input-box-shadow-state-active: color(srgb 0.831373 0.831373 0.831373 / 0.3) 0px 0px 0px 2px inset;
   --imported-text-input-text-input-box-shadow-state-focus-visible: rgba(241, 241, 241, 1) 0px 0px 0px 2px inset;

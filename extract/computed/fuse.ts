@@ -49,6 +49,7 @@ import {
   kindOf,
   pairwiseCertificate,
   PILL_RADIUS_SENTINEL,
+  planeChannelValue,
   SYNTHETIC_CHANNELS,
   type Capture,
   type Combo,
@@ -1090,6 +1091,39 @@ export function styledChannels(
         set.add('translate-y');
         receipts.push(
           `translate-door-generalized: ${a.partNames[pi]} — translate motion observed on a non-base combo (base at rest); translate-x/y admitted across the whole enabled default plane with ABSENT ≡ 0px (the v1 door required the BASE combo to carry the key and dropped state-plane motion into code-only) — pseudo-decor v2 round`,
+        );
+      }
+    }
+    // RC7 — THE PLACEHOLDER-INK DOOR. `placeholder-color` is synthetic
+    // (foldPlaceholderInk hoists `::placeholder{color}` onto the host at the
+    // read boundary) so it lives OUTSIDE `allProps`, the browser property
+    // enumeration, exactly like translate-x/y — the loop above can never see
+    // it and it needs its own admission.
+    //
+    // The STYLED-NESS TEST IS THE FOLD ITSELF: the fold only writes the key
+    // when the placeholder plane paints an ink DIFFERENT from the ink the
+    // element already carries. A control-equality comparison would be
+    // meaningless here (no <span> control has a placeholder plane), and the
+    // difference IS the fact — where the two agree the existing `color`
+    // channel already paints the right pixel and nothing is minted.
+    //
+    // Admitted across the whole enabled default plane the moment ANY combo
+    // carries it, so a per-combo hint ink (Fluent's 112 → 189 on disabled)
+    // fuses as a varying channel instead of vanishing on the combos that
+    // happen to agree with their own value ink.
+    {
+      const phStyles: StyleMap[] = [a.baseFlat[pi].node.style];
+      for (const combo of space.enumeration.combos) {
+        if (!isEnabled(combo)) continue;
+        const el = a.getAligned(`${combo.key}__default`)[pi];
+        if (el) phStyles.push(el.node.style);
+      }
+      if (phStyles.some((st) => st['placeholder-color'] !== undefined)) {
+        set.add('placeholder-color');
+        receipts.push(
+          `placeholder-ink-admitted: ${a.partNames[pi]} — the element's ::placeholder plane paints an ink DIFFERENT from its own color (${
+            phStyles.find((st) => st['placeholder-color'] !== undefined)!['placeholder-color']
+          } vs ${a.baseFlat[pi].node.style['color'] ?? 'unset'}); the synthetic placeholder-color channel joins fusion so an EMPTY field stops minting in VALUE ink (RC7). Where the two inks AGREE the fold does not fire and the existing color channel already paints the right pixel.`,
         );
       }
     }
@@ -2171,7 +2205,13 @@ export const INHERITED_CHANNELS = new Set([
  *  rule is how the base door and the state door drifted apart in the first
  *  place (the regression this comment's round repairs). */
 export const nestedStateCarriable = (channel: string, placeholders: string[]): boolean =>
-  ['color', 'background-color', 'border-color'].includes(channel) && placeholders.length === 0;
+  // RC7: `placeholder-color` joins the list by the door's OWN stated rule —
+  // it is a PLAIN COLOR-KIND ref, the ink of the control's placeholder text
+  // plane, on exactly the same footing as `color` two entries left. Its
+  // absence was an omission, not a decision: without it a control whose
+  // placeholder repaints on :disabled (Fluent 112 → 189, Carbon alpha .4 →
+  // .25) carries the RESTING ink into every disabled cell.
+  ['color', 'background-color', 'border-color', 'placeholder-color'].includes(channel) && placeholders.length === 0;
 
 /** Round 5c — SET-PLANE LITERALS: a geometry channel the mint refuses (or
  *  cannot kind — min-height auto→24px) still has EXACT per-plane truth on a
@@ -2577,8 +2617,11 @@ export function prepareMint(
           // would bail to unmintable — exactly what kept MUI Switch's checked
           // thumb from moving. The identity is only ever applied to channels
           // the door already admitted (SYNTHETIC_CHANNELS).
-          if (v === undefined && SYNTHETIC_CHANNELS.has(channel)) v = '0px';
-          if (v === undefined) { unk ??= '<channel absent in this combo>'; continue; }
+          // RC7: and ABSENT ≡ the element's own `color` on a pseudo plane
+          // (planeChannelValue states both identities once).
+          const planeV = v === undefined ? planeChannelValue(el.node.style, channel) : v;
+          if (planeV === undefined) { unk ??= '<channel absent in this combo>'; continue; }
+          v = planeV;
           values.add(v);
           rows.push({ axisValues: combo.axisValues, value: v });
           const k = kindOf(channel, v);
@@ -2822,8 +2865,7 @@ export function prepareMint(
    *  A synthetic channel absent on a plane is AT REST; any OTHER channel
    *  absent on a plane is genuinely unobserved there and is skipped rather
    *  than crashed (that guard is a pre-existing latent hole, now closed). */
-  const planeValue = (st: StyleMap, p: string): string | undefined =>
-    st[p] !== undefined ? st[p] : SYNTHETIC_CHANNELS.has(p) ? '0px' : undefined;
+  const planeValue = planeChannelValue;
 
   const pushStateValue = (state: string, part: string, channel: string, combo: Combo, v: string) => {
     const key = `${state}|${part}|${channel}`;

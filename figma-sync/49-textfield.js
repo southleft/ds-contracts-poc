@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "ds.text-field",
     "version": "1.1.1",
     "anchorKey": "83b5ead2b038477a13c0647de71ee55bf458e0b3",
-    "description": "TextField — generated from contract ds.text-field v1.1.1",
+    "description": "TextField — generated from contract ds.text-field v1.1.1 † (1 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -125,7 +125,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontFamily": "Inter",
                   "textStyle": "control/md",
-                  "textFill": "color/surface/foreground",
+                  "textFill": "color/input/placeholder",
                   "contentProp": "Placeholder"
                 }
               ],
@@ -233,7 +233,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontFamily": "Inter",
                   "textStyle": "control/sm",
-                  "textFill": "color/surface/foreground",
+                  "textFill": "color/input/placeholder",
                   "contentProp": "Placeholder"
                 }
               ],
@@ -341,7 +341,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontFamily": "Inter",
                   "textStyle": "control/lg",
-                  "textFill": "color/surface/foreground",
+                  "textFill": "color/input/placeholder",
                   "contentProp": "Placeholder"
                 }
               ],
@@ -362,6 +362,19 @@ const COMPONENTS = [
     "semantics": {
       "element": "label"
     },
+    "codeOnlyFacts": [
+      {
+        "part": "input",
+        "kind": "channel",
+        "channel": "color",
+        "value": "{color.surface.foreground}",
+        "reason": "this control paints its placeholder in `placeholder-color`, so its own `color` — the ink the field would draw a TYPED VALUE in — is on no node. An EMPTY field has no value text, and Figma has no second text plane to hold the ink of text that is not there. Carried by the CSS surfaces (`color` on the control), NAMED here rather than painted over the placeholder (which is the RC7 defect this class exists to close).",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      }
+    ],
     "colW": 380
   }
 ];

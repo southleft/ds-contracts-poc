@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "fluent.input",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Input — generated from contract fluent.input v0.2.0 † (45 code-only facts — see plugin report)",
+    "description": "Input — generated from contract fluent.input v0.2.0 † (61 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -58,6 +58,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -76,7 +77,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -85,7 +86,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
-                  "lineHeightVar": "imported/input/input/line-height/medium"
+                  "lineHeightVar": "imported/input/input/line-height/medium",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -134,6 +136,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/small",
@@ -152,7 +155,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 12,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -161,7 +164,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/small",
-                  "lineHeightVar": "imported/input/input/line-height/small"
+                  "lineHeightVar": "imported/input/input/line-height/small",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -210,6 +214,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/large",
@@ -228,7 +233,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 16,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -237,7 +242,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/large",
-                  "lineHeightVar": "imported/input/input/line-height/large"
+                  "lineHeightVar": "imported/input/input/line-height/large",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -286,6 +292,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -304,7 +311,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -313,7 +320,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
-                  "lineHeightVar": "imported/input/input/line-height/medium"
+                  "lineHeightVar": "imported/input/input/line-height/medium",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -362,6 +370,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/small",
@@ -380,7 +389,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 12,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -389,7 +398,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/small",
-                  "lineHeightVar": "imported/input/input/line-height/small"
+                  "lineHeightVar": "imported/input/input/line-height/small",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -438,6 +448,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/large",
@@ -456,7 +467,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 16,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -465,7 +476,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/large",
-                  "lineHeightVar": "imported/input/input/line-height/large"
+                  "lineHeightVar": "imported/input/input/line-height/large",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -515,6 +527,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -533,7 +546,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -542,7 +555,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
-                  "lineHeightVar": "imported/input/input/line-height/medium"
+                  "lineHeightVar": "imported/input/input/line-height/medium",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -592,6 +606,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/small",
@@ -610,7 +625,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 12,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -619,7 +634,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/small",
-                  "lineHeightVar": "imported/input/input/line-height/small"
+                  "lineHeightVar": "imported/input/input/line-height/small",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -669,6 +685,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/large",
@@ -687,7 +704,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 16,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -696,7 +713,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/large",
-                  "lineHeightVar": "imported/input/input/line-height/large"
+                  "lineHeightVar": "imported/input/input/line-height/large",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -746,6 +764,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -764,7 +783,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -773,7 +792,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
-                  "lineHeightVar": "imported/input/input/line-height/medium"
+                  "lineHeightVar": "imported/input/input/line-height/medium",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -823,6 +843,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/small",
@@ -841,7 +862,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 12,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -850,7 +871,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/small",
-                  "lineHeightVar": "imported/input/input/line-height/small"
+                  "lineHeightVar": "imported/input/input/line-height/small",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -900,6 +922,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/large",
@@ -918,7 +941,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 16,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -927,7 +950,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/large",
-                  "lineHeightVar": "imported/input/input/line-height/large"
+                  "lineHeightVar": "imported/input/input/line-height/large",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -1000,6 +1024,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -1018,7 +1043,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -1027,7 +1052,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
-                  "lineHeightVar": "imported/input/input/line-height/medium"
+                  "lineHeightVar": "imported/input/input/line-height/medium",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -1100,6 +1126,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/small",
@@ -1118,7 +1145,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 12,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -1127,7 +1154,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/small",
-                  "lineHeightVar": "imported/input/input/line-height/small"
+                  "lineHeightVar": "imported/input/input/line-height/small",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -1200,6 +1228,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/large",
@@ -1218,7 +1247,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 16,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -1227,7 +1256,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/large",
-                  "lineHeightVar": "imported/input/input/line-height/large"
+                  "lineHeightVar": "imported/input/input/line-height/large",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -1300,6 +1330,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -1318,7 +1349,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -1327,7 +1358,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
-                  "lineHeightVar": "imported/input/input/line-height/medium"
+                  "lineHeightVar": "imported/input/input/line-height/medium",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -1400,6 +1432,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/small",
@@ -1418,7 +1451,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 12,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -1427,7 +1460,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/small",
-                  "lineHeightVar": "imported/input/input/line-height/small"
+                  "lineHeightVar": "imported/input/input/line-height/small",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -1500,6 +1534,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/large",
@@ -1518,7 +1553,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 16,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -1527,7 +1562,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/large",
-                  "lineHeightVar": "imported/input/input/line-height/large"
+                  "lineHeightVar": "imported/input/input/line-height/large",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -1588,6 +1624,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -1606,7 +1643,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -1615,7 +1652,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
-                  "lineHeightVar": "imported/input/input/line-height/medium"
+                  "lineHeightVar": "imported/input/input/line-height/medium",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -1667,6 +1705,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -1685,7 +1724,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -1694,7 +1733,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
-                  "lineHeightVar": "imported/input/input/line-height/medium"
+                  "lineHeightVar": "imported/input/input/line-height/medium",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -1746,6 +1786,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -1764,7 +1805,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -1773,7 +1814,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
-                  "lineHeightVar": "imported/input/input/line-height/medium"
+                  "lineHeightVar": "imported/input/input/line-height/medium",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -1825,6 +1867,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -1843,7 +1886,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -1852,7 +1895,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
-                  "lineHeightVar": "imported/input/input/line-height/medium"
+                  "lineHeightVar": "imported/input/input/line-height/medium",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -1927,6 +1971,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -1945,7 +1990,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -1954,7 +1999,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
-                  "lineHeightVar": "imported/input/input/line-height/medium"
+                  "lineHeightVar": "imported/input/input/line-height/medium",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -2029,6 +2075,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -2047,7 +2094,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -2056,7 +2103,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
-                  "lineHeightVar": "imported/input/input/line-height/medium"
+                  "lineHeightVar": "imported/input/input/line-height/medium",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -2105,6 +2153,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -2123,7 +2172,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -2133,7 +2182,7 @@ const COMPONENTS = [
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
                   "lineHeightVar": "imported/input/input/line-height/medium",
-                  "textFill": "imported/shared/color-bdbdbd"
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -2182,6 +2231,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -2200,7 +2250,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -2210,7 +2260,7 @@ const COMPONENTS = [
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
                   "lineHeightVar": "imported/input/input/line-height/medium",
-                  "textFill": "imported/shared/color-bdbdbd"
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -2260,6 +2310,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -2278,7 +2329,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -2288,7 +2339,7 @@ const COMPONENTS = [
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
                   "lineHeightVar": "imported/input/input/line-height/medium",
-                  "textFill": "imported/shared/color-bdbdbd"
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -2338,6 +2389,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -2356,7 +2408,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -2366,7 +2418,7 @@ const COMPONENTS = [
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
                   "lineHeightVar": "imported/input/input/line-height/medium",
-                  "textFill": "imported/shared/color-bdbdbd"
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -2439,6 +2491,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -2457,7 +2510,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -2467,7 +2520,7 @@ const COMPONENTS = [
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
                   "lineHeightVar": "imported/input/input/line-height/medium",
-                  "textFill": "imported/shared/color-bdbdbd"
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -2540,6 +2593,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -2558,7 +2612,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -2568,7 +2622,7 @@ const COMPONENTS = [
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
                   "lineHeightVar": "imported/input/input/line-height/medium",
-                  "textFill": "imported/shared/color-bdbdbd"
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -2620,6 +2674,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -2638,7 +2693,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -2647,7 +2702,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
-                  "lineHeightVar": "imported/input/input/line-height/medium"
+                  "lineHeightVar": "imported/input/input/line-height/medium",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -2699,6 +2755,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -2717,7 +2774,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -2726,7 +2783,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
-                  "lineHeightVar": "imported/input/input/line-height/medium"
+                  "lineHeightVar": "imported/input/input/line-height/medium",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -2778,6 +2836,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -2796,7 +2855,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -2805,7 +2864,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
-                  "lineHeightVar": "imported/input/input/line-height/medium"
+                  "lineHeightVar": "imported/input/input/line-height/medium",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -2857,6 +2917,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -2875,7 +2936,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -2884,7 +2945,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
-                  "lineHeightVar": "imported/input/input/line-height/medium"
+                  "lineHeightVar": "imported/input/input/line-height/medium",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -2959,6 +3021,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -2977,7 +3040,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -2986,7 +3049,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
-                  "lineHeightVar": "imported/input/input/line-height/medium"
+                  "lineHeightVar": "imported/input/input/line-height/medium",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -3061,6 +3125,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -3079,7 +3144,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -3088,7 +3153,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
-                  "lineHeightVar": "imported/input/input/line-height/medium"
+                  "lineHeightVar": "imported/input/input/line-height/medium",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -3137,6 +3203,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -3155,7 +3222,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -3164,7 +3231,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
-                  "lineHeightVar": "imported/input/input/line-height/medium"
+                  "lineHeightVar": "imported/input/input/line-height/medium",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -3213,6 +3281,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -3231,7 +3300,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -3240,7 +3309,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
-                  "lineHeightVar": "imported/input/input/line-height/medium"
+                  "lineHeightVar": "imported/input/input/line-height/medium",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -3290,6 +3360,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -3308,7 +3379,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -3317,7 +3388,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
-                  "lineHeightVar": "imported/input/input/line-height/medium"
+                  "lineHeightVar": "imported/input/input/line-height/medium",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -3367,6 +3439,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -3385,7 +3458,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -3394,7 +3467,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
-                  "lineHeightVar": "imported/input/input/line-height/medium"
+                  "lineHeightVar": "imported/input/input/line-height/medium",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -3467,6 +3541,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -3485,7 +3560,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -3494,7 +3569,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
-                  "lineHeightVar": "imported/input/input/line-height/medium"
+                  "lineHeightVar": "imported/input/input/line-height/medium",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -3567,6 +3643,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -3585,7 +3662,7 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "placeholder",
-                  "characters": "",
+                  "characters": "Value",
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "lineHeight": {
@@ -3594,7 +3671,8 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
-                  "lineHeightVar": "imported/input/input/line-height/medium"
+                  "lineHeightVar": "imported/input/input/line-height/medium",
+                  "textFill": "imported/input/input/placeholder-color"
                 }
               ]
             }
@@ -3681,6 +3759,160 @@ const COMPONENTS = [
     "codeOnlyFacts": [
       {
         "part": "input",
+        "kind": "capture",
+        "channel": "border-bottom-color [disabled]",
+        "value": "#7676764d",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "capture",
+        "channel": "border-left-color [disabled]",
+        "value": "#7676764d",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "capture",
+        "channel": "border-right-color [disabled]",
+        "value": "#7676764d",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "capture",
+        "channel": "border-top-color [disabled]",
+        "value": "#7676764d",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "capture",
+        "channel": "caret-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "capture",
+        "channel": "column-rule-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "capture",
+        "channel": "outline-color [active]",
+        "value": "#005fcc",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "capture",
+        "channel": "outline-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "capture",
+        "channel": "outline-color [focus-visible]",
+        "value": "#005fcc",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "capture",
+        "channel": "outline-width [active]",
+        "value": "1px",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "capture",
+        "channel": "outline-width [focus-visible]",
+        "value": "1px",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "capture",
+        "channel": "row-rule-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "capture",
+        "channel": "text-decoration-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "capture",
+        "channel": "text-emphasis-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
         "kind": "channel",
         "channel": "border-bottom-color",
         "value": "{imported.shared.color-767676}",
@@ -3721,6 +3953,63 @@ const COMPONENTS = [
         "variants": {
           "count": 42,
           "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "channel",
+        "channel": "color",
+        "value": "{imported.input.input.color}",
+        "reason": "this control paints its placeholder in `placeholder-color`, so its own `color` — the ink the field would draw a TYPED VALUE in — is on no node. An EMPTY field has no value text, and Figma has no second text plane to hold the ink of text that is not there. Carried by the CSS surfaces (`color` on the control), NAMED here rather than painted over the placeholder (which is the RC7 defect this class exists to close).",
+        "variants": {
+          "count": 36,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium",
+            "Appearance=Outline, Size=Small",
+            "Appearance=Outline, Size=Large",
+            "Appearance=Underline, Size=Medium",
+            "Appearance=Underline, Size=Small",
+            "Appearance=Underline, Size=Large",
+            "Appearance=Filled Darker, Size=Medium",
+            "Appearance=Filled Darker, Size=Small",
+            "Appearance=Filled Darker, Size=Large",
+            "Appearance=Filled Lighter, Size=Medium",
+            "Appearance=Filled Lighter, Size=Small",
+            "Appearance=Filled Lighter, Size=Large",
+            "Appearance=Filled Darker Shadow, Size=Medium",
+            "Appearance=Filled Darker Shadow, Size=Small",
+            "Appearance=Filled Darker Shadow, Size=Large",
+            "Appearance=Filled Lighter Shadow, Size=Medium",
+            "Appearance=Filled Lighter Shadow, Size=Small",
+            "Appearance=Filled Lighter Shadow, Size=Large",
+            "Appearance=Outline, Size=Medium, State=Active",
+            "Appearance=Underline, Size=Medium, State=Active",
+            "Appearance=Filled Darker, Size=Medium, State=Active",
+            "Appearance=Filled Lighter, Size=Medium, State=Active",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Active",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Active"
+          ],
+          "more": 12
+        }
+      },
+      {
+        "part": "input",
+        "kind": "channel",
+        "channel": "color",
+        "value": "{imported.shared.color-bdbdbd}",
+        "reason": "this control paints its placeholder in `placeholder-color`, so its own `color` — the ink the field would draw a TYPED VALUE in — is on no node. An EMPTY field has no value text, and Figma has no second text plane to hold the ink of text that is not there. Carried by the CSS surfaces (`color` on the control), NAMED here rather than painted over the placeholder (which is the RC7 defect this class exists to close).",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Disabled",
+            "Appearance=Underline, Size=Medium, State=Disabled",
+            "Appearance=Filled Darker, Size=Medium, State=Disabled",
+            "Appearance=Filled Lighter, Size=Medium, State=Disabled",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Disabled",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Disabled"
+          ]
         }
       },
       {

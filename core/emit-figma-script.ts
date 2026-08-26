@@ -1409,6 +1409,16 @@ interface TextCtx {
   /** The same literal as CSS text — what an icon child bakes into its glyph
    *  markup in place of the token path's resolved literal (iconSvg). */
   textFillLitCss?: string;
+  /** RC7 — THE PLACEHOLDER PLANE'S INK. `placeholder-color` is a SYNTHETIC
+   *  channel (extract/computed/lib.ts foldPlaceholderInk hoists
+   *  `::placeholder{color}` onto its host when it DIFFERS from the host's
+   *  own `color`). It rides the text context exactly as `color` does so a
+   *  child control inherits nothing it was not given, and it is consumed
+   *  ONLY by the placeholder text node — the control's own `color` keeps
+   *  painting the VALUE ink everywhere else. */
+  placeholderFill?: string;
+  placeholderFillLit?: { r: number; g: number; b: number; a?: number };
+  placeholderFillLitCss?: string;
   /** Round 4: token dot-path behind a part's CSS `fill` channel — promoted
    *  svg hosts' glyph paint (attribute-less paths inherit it). */
   glyphFillPath?: string;
@@ -1957,6 +1967,13 @@ function applyTokens(
         // R7: a bound ink on THIS part replaces an inherited literal one.
         next.textFillLit = undefined;
         next.textFillLitCss = undefined;
+        break;
+      // RC7: the placeholder plane's ink. Stored, never applied to this
+      // node — the host frame paints no text; its placeholder CHILD does.
+      case 'placeholder-color':
+        next.placeholderFill = varName;
+        next.placeholderFillLit = undefined;
+        next.placeholderFillLitCss = undefined;
         break;
       // Round 4 (canvas-gate finding): the CSS `fill` channel — promoted svg
       // hosts carry per-axis glyph paint as `fill` (attribute-less paths
@@ -2522,6 +2539,25 @@ function applyLiterals(
         next.textFillLitCss = v;
         next.textFill = undefined;
         next.textFillPath = undefined;
+        break;
+      }
+      // RC7: the LITERAL twin of the token case — the same parse, the same
+      // refusals, stored on the placeholder plane instead of the text plane.
+      case 'placeholder-color': {
+        const v = value.trim();
+        if (tokens?.['placeholder-color'] !== undefined) {
+          literalMiss(spec, cssProp, value, 'a token binds the same channel on this part — the bound variable is the canvas placeholder fill, the literal is not drawn');
+          break;
+        }
+        if (v === 'inherit' || v === 'currentColor') break;
+        const c = v === 'transparent' ? { r: 0, g: 0, b: 0, a: 0 } : parseLitColor(v);
+        if (!c) {
+          literalMiss(spec, cssProp, value, `"${v}" is not a hex / rgb() / rgba() colour the canvas can paint`);
+          break;
+        }
+        next.placeholderFillLit = c;
+        next.placeholderFillLitCss = v;
+        next.placeholderFill = undefined;
         break;
       }
       case 'background':
@@ -3389,6 +3425,73 @@ function iconSvg(part: Part, subst: Record<string, string>, ctx: TextCtx): strin
 
 const PLACEHOLDER_ATTR_REF = /^\{([a-z][\w-]*)\}$/;
 
+/** RC7 — THE PLACEHOLDER CONCEPT, DECIDED IN ONE PLACE.
+ *
+ *  A form control has a placeholder if, and only if, one of two CONTRACT
+ *  facts says so:
+ *   · it carries `attrs.placeholder` — the contract spells the HTML attribute
+ *     outright, either as a literal string or as a `{prop}` reference; or
+ *   · the contract exposes a TEXT prop whose CODE binding IS the `placeholder`
+ *     attribute (`bindings.code.prop === 'placeholder'`). That is the name the
+ *     DOM gives the attribute and the name emit-html/emit-react actually write
+ *     it under for a non-`children` text prop — it is the element grammar, not
+ *     a component name and not a layer name. (antd's Input is this shape: no
+ *     `attrs`, one `placeholder` text prop defaulting to "Input".)
+ *
+ *  WHY IT MATTERS THAT THIS BE NARROW. 28 of the 33 input/textarea parts in
+ *  contracts/ and examples/ have NO placeholder: every checkbox, radio,
+ *  switch, slider thumb and native select input. A guard that keys on "the
+ *  drawn placeholder string came out empty" is TRUE for all of them, and it
+ *  would seed the loss ledger, the "(N code-only facts)" set description and
+ *  the plugin report with facts that do not exist about contracts that never
+ *  had the concept. Those are the instruments this project measures itself
+ *  with; poisoning them is its own defect. Returns null for "no placeholder". */
+function placeholderConcept(
+  attrs: Record<string, string> | undefined,
+  contract: Contract,
+): { prop?: Prop; literal?: string } | null {
+  const attr = attrs?.placeholder;
+  if (typeof attr === 'string') {
+    const ref = attr.match(PLACEHOLDER_ATTR_REF);
+    if (ref) {
+      const prop = contract.props.find((p) => p.type === 'text' && p.name === ref[1]);
+      return prop ? { prop } : { literal: '' };
+    }
+    return { literal: attr };
+  }
+  const prop = contract.props.find((p) => p.type === 'text' && p.bindings.code.prop === 'placeholder');
+  return prop ? { prop } : null;
+}
+
+/** RC7 — the text context the PLACEHOLDER node draws in. The control's own
+ *  `color` (the VALUE ink) keeps painting everywhere else; only this node
+ *  swaps to the placeholder plane's ink, and only when the contract carries
+ *  it. `carried: false` is the honest fallback — the value ink is then the
+ *  only ink there is, it IS drawn, and the caller NAMES the substitution. */
+function placeholderInkCtx(ctx: TextCtx): { ctx: TextCtx; carried: boolean } {
+  if (ctx.placeholderFill !== undefined) {
+    return {
+      ctx: { ...ctx, textFill: ctx.placeholderFill, textFillPath: undefined, textFillLit: undefined, textFillLitCss: undefined },
+      carried: true,
+    };
+  }
+  if (ctx.placeholderFillLit !== undefined) {
+    return {
+      ctx: { ...ctx, textFill: undefined, textFillPath: undefined, textFillLit: ctx.placeholderFillLit, textFillLitCss: ctx.placeholderFillLitCss },
+      carried: true,
+    };
+  }
+  return { ctx, carried: false };
+}
+
+/** The two NAMED walls of this class, worded once. */
+const PLACEHOLDER_INK_FALLBACK_REASON =
+  'this contract carries no `placeholder-color`, so the placeholder text is drawn in the control\'s OWN `color` — the VALUE ink. An empty field therefore reads as a filled one. The ink IS measurable (`::placeholder{color}` is read on every capture and folds to `placeholder-color`); re-derive this contract to carry it.';
+const PLACEHOLDER_VALUE_INK_REASON =
+  'this control paints its placeholder in `placeholder-color`, so its own `color` — the ink the field would draw a TYPED VALUE in — is on no node. An EMPTY field has no value text, and Figma has no second text plane to hold the ink of text that is not there. Carried by the CSS surfaces (`color` on the control), NAMED here rather than painted over the placeholder (which is the RC7 defect this class exists to close).';
+const PLACEHOLDER_STRING_REASON =
+  'the placeholder STRING is an HTML attribute the browser renders through `::placeholder`, not DOM text — a computed-style capture reads its ink and never its characters, and this contract carries no default for the bound text prop and no literal `placeholder` attr. The TEXT node is kept so the Figma TEXT property can bind to it, and it is left EMPTY rather than filled with an invented string.';
+
 /** Form-control parts (input/textarea) render as a real element in code via
  *  attrs; on the canvas the same part becomes a framed box whose placeholder
  *  text binds to the referenced TEXT property. */
@@ -3407,10 +3510,12 @@ function formControlSpec(
     grow: part.layout?.grow || undefined,
   };
   const childCtx = applyStyling(spec, part, subst, ctx);
-  const ref = (part.attrs?.placeholder ?? '').match(PLACEHOLDER_ATTR_REF);
-  const prop = ref
-    ? contract.props.find((p) => p.type === 'text' && p.name === ref[1])
-    : undefined;
+  // RC7: the placeholder CONCEPT decides everything below — whether there is
+  // a string to draw, whether an empty one is a LOSS, and whether the ink
+  // fallback is worth naming. A control with no placeholder (every checkbox,
+  // radio, switch and slider thumb in the corpus) reaches none of it.
+  const concept = placeholderConcept(part.attrs, contract);
+  const prop = concept?.prop;
   // Never paint an unresolved `{placeholder}` brace form on canvas (Polaris
   // TextField live finding). Prefer the prop default; otherwise a short
   // showcase string when the attr is a prop-ref; only use a literal attr
@@ -3421,8 +3526,17 @@ function formControlSpec(
   } else if (prop) {
     placeholderCharacters = '';
   } else {
-    const attr = part.attrs?.placeholder ?? '';
-    placeholderCharacters = PLACEHOLDER_ATTR_REF.test(attr) ? '' : attr;
+    placeholderCharacters = concept?.literal ?? '';
+  }
+  const ink = placeholderInkCtx(childCtx);
+  if (concept !== null && !ink.carried && (childCtx.textFill !== undefined || childCtx.textFillLit !== undefined)) {
+    miss(spec, 'placeholder-color', PLACEHOLDER_INK_FALLBACK_REASON, childCtx.textFill ?? childCtx.textFillLitCss ?? '');
+  }
+  if (ink.carried && (part.tokens?.['color'] !== undefined || part.literals?.['color'] !== undefined)) {
+    miss(spec, 'color', PLACEHOLDER_VALUE_INK_REASON, part.tokens?.['color'] ?? part.literals?.['color'] ?? '');
+  }
+  if (concept !== null && placeholderCharacters === '') {
+    miss(spec, 'placeholder', PLACEHOLDER_STRING_REASON, '');
   }
   spec.children = [
     {
@@ -3432,7 +3546,7 @@ function formControlSpec(
       fontSize: childCtx.fontSize ?? 16,
       fontStyle: figmaFaceStyle(childCtx),
       ...(childCtx.lineHeight !== undefined ? { lineHeight: childCtx.lineHeight } : {}),
-      ...textExtras(childCtx),
+      ...textExtras(ink.ctx),
       ...textIdentity(childCtx),
       // B-3 finding 1: the placeholder paint comes from the CONTRACT — the
       // control part's own carried `color` channel (childCtx.textFill), the
@@ -3441,11 +3555,75 @@ function formControlSpec(
       // foreign token set mints: Polaris text-field.figma.js threw `Missing
       // variable` at run time. When the contract carries no color channel,
       // NO placeholder-specific variable reference is emitted at all.
-      textFill: childCtx.textFill,
+      //
+      // RC7: when the contract DOES carry the placeholder plane's own ink
+      // (`placeholder-color`, folded from `::placeholder{color}` at the read
+      // boundary) that ink wins here — it is the pixel the library draws, and
+      // painting the value ink instead is what made every empty field read as
+      // a filled one. The variable is the contract's, never a repo name.
+      textFill: ink.ctx.textFill,
       contentProp: prop?.bindings.figma.property,
     },
   ];
   return spec;
+}
+
+/** RC7 — THE ROOT THAT *IS* THE CONTROL.
+ *
+ *  Two of the five graded rows have no control PART at all: the component is
+ *  one <input> (shadcn's Input, semantics.element = input, `parts: {}`,
+ *  `props: []`; antd's is the same shape with a `placeholder` TEXT prop).
+ *  formControlSpec never runs for them, so:
+ *   · antd drew its placeholder through the generic root textProp label — in
+ *     the ROOT's own `color`, the VALUE ink, exactly the RC7 defect; and
+ *   · shadcn, having no text prop either, drew NOTHING — the blank sliver
+ *     the census graded.
+ *
+ *  This returns the label spec for both, in PLACEHOLDER ink, and names the
+ *  value-ink fallback on the root when the contract does not carry the ink.
+ *  It draws a literal `attrs.placeholder` only when there is no bound text
+ *  prop to own the string — the prop stays the per-usage API wherever one
+ *  exists. */
+function rootPlaceholderLabel(
+  root: Part,
+  contract: Contract,
+  ctx: TextCtx,
+  rootSpec: NodeSpec,
+  textProp: Prop | undefined,
+  label: string,
+): NodeSpec[] {
+  const concept = placeholderConcept(root.attrs, contract);
+  if (concept === null) return [];
+  // The label the ROOT draws is the placeholder only when the text prop IS
+  // the placeholder (or there is no prop and the attr is literal).
+  const isPlaceholderLabel = textProp === undefined || concept.prop?.name === textProp.name;
+  if (!isPlaceholderLabel) return [];
+  const characters = textProp ? label : (concept.literal ?? '');
+  const ink = placeholderInkCtx(ctx);
+  if (!ink.carried && (ctx.textFill !== undefined || ctx.textFillLit !== undefined)) {
+    miss(rootSpec, 'placeholder-color', PLACEHOLDER_INK_FALLBACK_REASON, ctx.textFill ?? ctx.textFillLitCss ?? '');
+  }
+  if (ink.carried && (root.tokens?.['color'] !== undefined || root.literals?.['color'] !== undefined)) {
+    miss(rootSpec, 'color', PLACEHOLDER_VALUE_INK_REASON, root.tokens?.['color'] ?? root.literals?.['color'] ?? '');
+  }
+  if (characters === '') {
+    miss(rootSpec, 'placeholder', PLACEHOLDER_STRING_REASON, '');
+    if (textProp === undefined) return []; // nothing to draw and no property to bind
+  }
+  return [
+    {
+      type: 'text',
+      name: textProp ? 'label' : 'placeholder',
+      characters,
+      fontSize: ctx.fontSize ?? 16,
+      fontStyle: figmaFaceStyle(ctx),
+      ...textIdentity(ctx),
+      textFill: ink.ctx.textFill,
+      ...(ctx.lineHeight !== undefined ? { lineHeight: ctx.lineHeight } : {}),
+      ...textExtras(ink.ctx),
+      ...(textProp ? { contentProp: textProp.bindings.figma.property } : {}),
+    },
+  ];
 }
 
 const PARENT_PROP_REF = /^\{([a-z][\w-]*)\}$/;
@@ -4945,7 +5123,9 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       // is an <input> drawing its placeholder — text starts at the padding
       // edge (antd `text-align: start`), it is never centred like a Button.
       if (textProp.bindings.code.prop !== 'children' && rootSpec.layout && rootSpec.layout.primary === 'CENTER') rootSpec.layout = { ...rootSpec.layout, primary: 'MIN' };
-      rootSpec.children = [
+      // RC7: when that label IS the placeholder it takes PLACEHOLDER ink.
+      const ph = rootPlaceholderLabel(root, contract, ctx, rootSpec, textProp, label);
+      rootSpec.children = ph.length > 0 ? ph : [
         {
           type: 'text',
           name: 'label',
@@ -4959,6 +5139,12 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
           contentProp: textProp.bindings.figma.property,
         },
       ];
+    } else if (rootIsTextControl && !root.parts) {
+      // RC7: a root that IS the control with NO text prop (shadcn's Input)
+      // drew nothing at all — no branch above claims it. It draws its
+      // MOUNTED placeholder string, in placeholder ink; where the contract
+      // carries no string the gap is NAMED and nothing is invented.
+      rootSpec.children = rootPlaceholderLabel(root, contract, ctx, rootSpec, undefined, label);
     }
     const collectStyles = (s: NodeSpec) => {
       if (s.fontStyle) fontStyles.add(s.fontStyle);
@@ -5071,7 +5257,11 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
           centerStrokeGlyphsInHosts(rootSpec.children);
           stampGridCells(rootSpec, root, subst); // A2 grid — see stampGridCells
         } else if (textProp) {
-          rootSpec.children = [
+          // RC7: the state-preview twin of the base branch — a preview cell
+          // whose disabled plane repaints the placeholder must repaint the
+          // PLACEHOLDER ink, not the value ink.
+          const ph = rootPlaceholderLabel(root, contract, ctx, rootSpec, textProp, label);
+          rootSpec.children = ph.length > 0 ? ph : [
             {
               type: 'text',
               name: 'label',
@@ -5085,6 +5275,8 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
               contentProp: textProp.bindings.figma.property,
             },
           ];
+        } else if (rootIsTextControl && !root.parts) {
+          rootSpec.children = rootPlaceholderLabel(root, contract, ctx, rootSpec, undefined, label);
         }
         const collectStyles = (s: NodeSpec) => {
           if (s.fontStyle) fontStyles.add(s.fontStyle);

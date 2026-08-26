@@ -1424,6 +1424,10 @@
           "$value": "4px",
           "$type": "dimension"
         },
+        "placeholder-color": {
+          "$value": "#737373",
+          "$type": "color"
+        },
         "width": {
           "$value": "288px",
           "$type": "dimension"

@@ -525,6 +525,9 @@ jobs:
       - name: root-text:check (maintain — a root that IS the text node draws its characters, colour, size and weight; literal ink carried or named)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run root-text:check
+      - name: "placeholder-ink:check (maintain — an EMPTY form control reads as empty: the ::placeholder ink is carried to the canvas, the missing STRING is named, and no stylesheet surface ships an invalid `placeholder-color:` declaration)"
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run placeholder-ink:check
       - name: first-party-bundle:check (maintain — the 56 first-party contracts ride `figma bundle` with the layered token set; refusals arrive as one named list)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run first-party-bundle:check

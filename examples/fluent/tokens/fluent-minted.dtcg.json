@@ -4504,6 +4504,10 @@
             "$type": "shadow"
           }
         },
+        "color": {
+          "$value": "#242424",
+          "$type": "color"
+        },
         "column-gap": {
           "small": {
             "$value": "2px",
@@ -4996,6 +5000,10 @@
         }
       },
       "input": {
+        "color": {
+          "$value": "{color-neutral-foreground1}",
+          "$type": "color"
+        },
         "flex-grow": {
           "$value": "1",
           "$type": "number"
@@ -5141,6 +5149,10 @@
             "$value": "18px",
             "$type": "dimension"
           }
+        },
+        "placeholder-color": {
+          "$value": "#707070",
+          "$type": "color"
         },
         "width": {
           "small": {

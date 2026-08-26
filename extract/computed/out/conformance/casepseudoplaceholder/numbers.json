@@ -10,13 +10,13 @@
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
     "root": 4,
-    "a": 24
+    "a": 25
   },
   "folds": {
     "count": 0,
     "receipts": [],
-    "mintedLeavesUnfolded": 9,
-    "mintedLeavesFolded": 11
+    "mintedLeavesUnfolded": 10,
+    "mintedLeavesFolded": 12
   },
   "bound": {
     "cellsChecked": 0,
@@ -25,11 +25,11 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 11,
-    "baseBindings": 15,
+    "leaves": 12,
+    "baseBindings": 16,
     "stateBindings": 4,
     "byShape": {
-      "uniform": 19,
+      "uniform": 20,
       "perAxis": 0,
       "perPair": 0,
       "refused": 0
@@ -106,8 +106,8 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 100,
-    "rowsFullyEqual": 4,
+    "computedPctEqual": 96.55172413793103,
+    "rowsFullyEqual": 0,
     "rows": 4,
     "pixelPerfectExact": 0,
     "pixelPerfectAA": 0,
