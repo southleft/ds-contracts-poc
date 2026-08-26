@@ -16,13 +16,13 @@ repo it is simply absent from the denominator and scores 100%.
 
 | | |
 |---|---|
-| cases | **105** |
-| 🟢 pass | **102** |
+| cases | **108** |
+| 🟢 pass | **105** |
 | 🔴 red | **3** |
 | 🟡 yellow (UNSUPPORTED, never read) | **0** |
 | **UNSUPPORTED declared — THE RATCHET** | **17** · may only DECREASE without an explicit manifest edit |
 
-Declared dispositions: CARRIED 60 · LOWERED 4 · REFUSED 24 · UNSUPPORTED 17.
+Declared dispositions: CARRIED 62 · LOWERED 5 · REFUSED 24 · UNSUPPORTED 17.
 
 **A green gate here would mean the cases are too easy.** The point of the
 fixture is a measured frontier, and every red below is an open, named defect —
@@ -75,6 +75,8 @@ manifest.
 | 🟢 | `svg-stroke-glyph-fill-none` | anatomy | `a STROKE-drawn svg glyph whose computed fill is none (the lucide check: an open path, stroke=currentColor, fill="none" on the svg)` | REFUSED | refused, by name | PASS |
 | 🔴 | `container-query` | at-rules | `@container (min-inline-size: 100px) { … }` | UNSUPPORTED | carried | UNDECLARED-CARRY |
 | 🔴 | `media-non-matching` | at-rules | `@media (min-width: 2000px) branch that does NOT match the pinned viewport` | UNSUPPORTED | carried | UNDECLARED-CARRY |
+| 🟢 | `page-global-star-rule` | cascade | `* { border-color: var(--cf-color-secondary) } — a PAGE-GLOBAL authored declaration, with the element's border-width and border-style declared locally and its colour reaching it only through the universal rule` | CARRIED | carried | PASS |
+| 🟢 | `page-inherited-ink` | cascade | `body { color: var(--cf-color-primary) } — the document's ink, inherited by a text-bearing part that declares no colour of its own` | CARRIED | carried | PASS |
 | 🟢 | `color-hex` | color | `color: #1976d2 (authored as hex)` | CARRIED | carried | PASS |
 | 🟢 | `color-rgb-solid` | color | `background-color: rgb(25, 118, 210)` | CARRIED | carried | PASS |
 | 🟢 | `color-rgba-alpha` | color | `background-color: rgba(25, 118, 210, 0.5)` | CARRIED | carried | PASS |
@@ -163,6 +165,7 @@ manifest.
 | 🟢 | `shadow-part` | shadow-dom | `::part(label) styling across an OPEN shadow boundary` | CARRIED | carried | PASS |
 | 🟢 | `shadow-root-closed` | shadow-dom | `a custom element with a CLOSED shadow root` | UNSUPPORTED | not read | PASS |
 | 🟢 | `svg-outside-grammar` | svg | `<svg> whose children are <circle> and <rect>` | REFUSED | refused, by name | PASS |
+| 🟢 | `text-indent-off-box` | text | `text-indent: 9999px on a box pinned to 8px (the status-pip idiom: the label is pushed out of the box and only the dot shows)` | LOWERED | carried | PASS |
 | 🟢 | `text-overflow-ellipsis` | text | `text-overflow: ellipsis + overflow hidden + nowrap` | CARRIED | carried | PASS |
 | 🟢 | `antd-component-scoped-custom-property` | tokens | `.cf-root { --cf-scoped-pad: 15px } .cf-root .cf-a { padding-inline: var(--cf-scoped-pad) } — a token DECLARED ON THE COMPONENT ROOT (not :root) and consumed by a descendant (antd cssVar component tokens on `.antd.ant-btn`)` | CARRIED | carried | PASS |
 | 🟢 | `presence-hidden-axis-geometry` | tokens | `an absolute part's inset that is a clean function of ONE enum axis, with the part NOT RENDERED at one axis value (polaris.checkbox icon: top/left 0px when checked, -2px when indeterminate, absent when unchecked)` | CARRIED | carried | PASS |

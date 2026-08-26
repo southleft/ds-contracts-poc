@@ -2,7 +2,7 @@
   "_marker": "THE MEASURED FRONTIER — the committed result of the CSS/DOM conformance fixture. Every non-PASS entry is an OPEN DEFECT that has been measured and named, not an accepted one. The gate refuses any drift in EITHER direction: a new red is a regression, and a red that becomes PASS must be re-recorded here, so a fix can never be absorbed silently.",
   "measuredAt": "extract/computed/out/conformance (npm run conformance:capture)",
   "counts": {
-    "PASS": 102,
+    "PASS": 105,
     "SILENT-LOSS": 0,
     "UNDECLARED-CARRY": 3,
     "WRONG-NAME": 0,
@@ -10,7 +10,7 @@
     "RUN-ABORTED": 0,
     "UNMEASURED-YELLOW": 0
   },
-  "unsupportedDeclared": 18,
+  "unsupportedDeclared": 17,
   "verdicts": {
     "accent-color": "PASS",
     "align-items-baseline": "PASS",
@@ -92,6 +92,8 @@
     "overlay-text-fill-pinned-size": "PASS",
     "overlay-text-fill-stage-derived": "PASS",
     "overlay-text-hug-excluded": "PASS",
+    "page-global-star-rule": "PASS",
+    "page-inherited-ink": "PASS",
     "percentage-padding": "PASS",
     "position-absolute-insets": "PASS",
     "position-fixed": "PASS",
@@ -109,6 +111,7 @@
     "stage-box-equal": "UNDECLARED-CARRY",
     "svg-outside-grammar": "PASS",
     "svg-stroke-glyph-fill-none": "PASS",
+    "text-indent-off-box": "PASS",
     "text-overflow-ellipsis": "PASS",
     "transform-scale-rotate": "PASS",
     "transition-channel": "PASS",

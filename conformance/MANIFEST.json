@@ -2,10 +2,10 @@
   "_marker": "THE DENOMINATOR. Hand-authored per case, generated into one index. Deliberately NOT derived from isFusable / styled / DECLARED_CHANNELS / CHANNEL_TO_COMPUTED / TOKEN_CHANNELS / carriedParts — every instrument in the pipeline derives its denominator from the same filter that decides carriage, which is why a channel the filter never opened scores 100%. This file is the independent one.",
   "generatedBy": "conformance/build.ts",
   "library": "@ds-contracts/conformance@0.1.0",
-  "count": 105,
+  "count": 108,
   "byExpectation": {
-    "CARRIED": 60,
-    "LOWERED": 4,
+    "CARRIED": 62,
+    "LOWERED": 5,
     "REFUSED": 24,
     "UNSUPPORTED": 17
   },
@@ -1941,6 +1941,42 @@
       ]
     },
     {
+      "id": "page-global-star-rule",
+      "feature": "cascade",
+      "construct": "* { border-color: var(--cf-color-secondary) } — a PAGE-GLOBAL authored declaration, with the element's border-width and border-style declared locally and its colour reaching it only through the universal rule",
+      "why": "The shadcn Input, verbatim. shadcn ships `* { border-color: var(--border) }`, and the capture harness renders its control elements INSIDE the same document, so the bare control carries the same colour. The control-element delta then compared the Input's real border-top-color EQUAL to the control and dropped it as 'not a fact of this component', while border-top-width: 1px (0px on the control) shipped — a 1px border with no colour, which paints nothing. Nothing named the loss. The fixture had no page-global rule of any kind, so the whole defect class was outside its denominator.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.a.tokens.border-top-color",
+      "observable": {
+        "part": "a",
+        "channel": "border-top-color",
+        "capturedValue": "rgb(102, 51, 153)"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "the 1px stroke is drawn in the authored colour; without it the canvas draws a stroke with no paint"
+      }
+    },
+    {
+      "id": "page-inherited-ink",
+      "feature": "cascade",
+      "construct": "body { color: var(--cf-color-primary) } — the document's ink, inherited by a text-bearing part that declares no colour of its own",
+      "why": "The Polaris and Fluent text defect, verbatim. The provider sets `color` on an ancestor; the harness renders its control elements inside the same document, so the control inherits the same ink and the component's rendered ink compares EQUAL to the control and is dropped. The generated surfaces have no provider, so the text draws the user agent's black. Round 5c carried a text part's font-size/line-height/font-weight for this reason and left `color` — the channel the defect is actually about — behind, because the fixture had no page-inherited ink to measure.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.a.tokens.color",
+      "observable": {
+        "part": "a",
+        "channel": "color",
+        "capturedValue": "rgb(25, 118, 210)"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "the glyph fill is the inherited ink; without it the canvas draws black"
+      }
+    },
+    {
       "id": "percentage-padding",
       "feature": "units",
       "construct": "padding-left: 10% (resolved against the PARENT width)",
@@ -2262,6 +2298,24 @@
       "canvas": {
         "expect": "PRESENT",
         "note": "the check draws as a 2px STROKE; nothing fills the open path on either surface"
+      }
+    },
+    {
+      "id": "text-indent-off-box",
+      "feature": "text",
+      "construct": "text-indent: 9999px on a box pinned to 8px (the status-pip idiom: the label is pushed out of the box and only the dot shows)",
+      "why": "The idiom that hides a label without removing it — altitude's Badge dot plane, and the -9999px half of it is the classic visually-hidden rule. `text-indent` is an ANNOTATE channel: Figma text nodes have no first-line indent. Annotating is honest only while the canvas still draws what the browser draws, and here the browser paints NO text in the box, so drawing the label at indent 0 does not lose a fact — it invents one. The first fresh mint of altitude's Badge came back with 'Badge' painted across an 8px pip and over its neighbouring cells. This case pins the measurement (Part.textOutOfBox, fuse.ts textOutOfBoxEvidence) that lets the canvas withhold exactly the ink CSS withholds.",
+      "expect": "LOWERED",
+      "expectName": "text-indent",
+      "expectWhere": "anatomy.root.tokens.text-indent + the text-indent code-only fact (Part.textOutOfBox withholds the label)",
+      "observable": {
+        "part": "root",
+        "channel": "text-indent",
+        "capturedValue": "9999px"
+      },
+      "canvas": {
+        "expect": "ABSENT",
+        "note": "Figma text nodes have no first-line indent; the measured off-box evidence draws no text child at all rather than a label at indent 0"
       }
     },
     {
