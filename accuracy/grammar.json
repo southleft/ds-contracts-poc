@@ -34,23 +34,25 @@
     {
       "id": "css-dom",
       "path": "conformance/MANIFEST.json",
-      "count": 91,
+      "count": 105,
       "expectations": {
-        "CARRIED": 50,
+        "CARRIED": 60,
         "LOWERED": 4,
-        "REFUSED": 19,
-        "UNSUPPORTED": 18
-      }
+        "REFUSED": 24,
+        "UNSUPPORTED": 17
+      },
+      "pinnedBecause": "RE-PINNED 2026-08-25, burn-down: 91 -> 105. The pin was 6 behind before this branch existed (the rejected-sets round's own six cases took conformance/MANIFEST.json to 97 and did not re-pin), and this branch adds 8 more: RC1's five layout cases (align-items-baseline, flex-wrap-wrap, flex-direction-reverse-by-axis, child-order-reversed-by-axis, child-order-permuted-by-axis) and RC8's three overlay-text-geometry cases (overlay-text-fill-pinned-size, overlay-text-fill-stage-derived, overlay-text-hug-excluded). UNSUPPORTED falls 18 -> 17 and CARRIED rises by one more than the new cases because RC7 reclassified pseudo-placeholder UNSUPPORTED -> CARRIED, which is a strictly stronger declaration: the base engine refuses the channel outright."
     },
     {
       "id": "canvas",
       "path": "extract/figma/conformance/MANIFEST.json",
-      "count": 154,
+      "count": 157,
       "expectations": {
-        "CARRIED": 107,
+        "CARRIED": 110,
         "LEDGERED": 38,
         "REFUSED": 9
-      }
+      },
+      "pinnedBecause": "RE-PINNED 2026-08-25, burn-down: 154 -> 157. NOT this branch's movement \u2014 extract/figma/conformance/MANIFEST.json already carried 157 cases (CARRIED 110) at this branch's base e884d672 and is byte-identical at HEAD; the pin had simply not been re-recorded when those three cases landed."
     },
     {
       "id": "draw-read-closure",
@@ -121,7 +123,7 @@
       "disposition": "NORMALIZATION",
       "appliesTo": ["diverged"],
       "channels": ["layout.mode"],
-      "valuePattern": "^NONE → (HORIZONTAL|VERTICAL)$"
+      "valuePattern": "^NONE \u2192 (HORIZONTAL|VERTICAL)$"
     },
     "cartesian-fill": {
       "disposition": "INTENTIONAL_PROJECTION",
@@ -278,7 +280,7 @@
   },
   "fidelity": {
     "source": "examples/untitled-ui/renders/fidelity.json",
-    "metric": "per-set mean of v2.1 canvas→code fidelity scores over scored variants",
+    "metric": "per-set mean of v2.1 canvas\u2192code fidelity scores over scored variants",
     "tolerance": 0.3,
     "policy": "decrease-only floors: each set's current mean must stay at or above its baseline meanScore minus tolerance, and its scored-variant count must not shrink; floors are re-seeded only upward, by committing a higher meanScore after a real fidelity gain"
   },
