@@ -1463,6 +1463,47 @@ and re-mint the snapshot — a live-file operation with a PAT, not something a
 branch can do. The probe is doing its job: it is the only instrument that asks
 whether the live cell is the product of this lane's own committed script.
 
+All three are now carried in `parity/receipts/v1/eval-reds.json` with a cause
+and a **closing condition stated as a checkable event** — the ledger #68 added,
+which lets a red suite ship only when every red is named. An unnamed red still
+refuses, and a row whose eval has gone green refuses as stale.
+
+---
+
+## B.39 antd's STRUCTURAL re-derivation has never been verified, on any machine
+
+`corpus:reproducible:check` has two halves. The **promote** half re-derives each
+library's committed artifacts from its committed capture record; the
+**structural** half re-derives the capture record itself from the library's seed
++ config + sandbox. For antd the second half has never run:
+
+```
+· antd: capture PENDING — the measuring run captured nothing for antd —
+  examples/antd/.antd-sandbox is git-ignored and this machine does not carry it
+  (examples/antd/PROVENANCE.md has the recreate block).
+  NOT measured, never counted as reproducing.
+```
+
+**It is PENDING in CI and PENDING locally, for the same reason** — the sandbox
+is git-ignored, so neither the runner nor a developer checkout has it. This is
+not a red and not a pass: the gate refuses to count it either way, which is the
+right behaviour and also why it is easy to stop seeing. Every other captured
+library reports a real fraction (`altitude 5/8`, `carbon 8/10`, `mui 28/31`,
+`fluent|polaris|shadcn|tailwind` all n/n).
+
+**What is and is not known.** antd's promote half IS measured and green — its 37
+committed artifacts re-derive from the committed capture record. What has never
+been checked is whether that *capture record* can be regenerated from the
+library at all. So antd's contracts are reproducible from a record whose own
+provenance is unverified.
+
+**What it would take.** Recreate the sandbox from
+`examples/antd/PROVENANCE.md`'s block on a machine that then runs
+`corpus:reproducible:check`, and either record the fraction or name what stops
+it. Making it a CI-visible number means either committing the sandbox (large,
+and the reason it is ignored) or a lane step that installs the pinned package
+before the check — neither has been scheduled.
+
 ## C.1 Coverage — how much of a library is actually captured
 
 Seven distinct libraries across eight rounds, five styling architectures, one
