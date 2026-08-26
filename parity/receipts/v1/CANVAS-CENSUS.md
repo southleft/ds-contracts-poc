@@ -237,3 +237,438 @@ Gate: **GREEN** at phase `code`.
 | tailwind | `flowbite.kbd` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | recognisable | — |
 | tailwind | `flowbite.label` | unmapped | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | recognisable | — |
 | tailwind | `flowbite.toggleswitch` | toggle / switch | 2 × 6; 6 | 4/4 of 6 | rendered | 4/4 | recognisable | — |
+
+<!-- PRESERVED LOG — hand-authored below this line; carried across regenerations of this receipt. -->
+
+## Burn-down — 2026-08-25
+
+Eight root-cause classes were opened against the census's rejected sets. This is
+what happened to them, and — first, because it explains the two rounds that
+produced nothing — what happened to the bar they were judged against.
+
+### The first two rounds' zero-survivor result was partly an artifact of an unfalsifiable bar
+
+Rounds 1 and 2 produced fifteen fixes and **zero** survivors. The landing rule
+required an adversarial CORRECTNESS verifier and an adversarial VISUAL verifier
+to both pass. But the same brief forbade re-minting to Figma and forbade
+touching the census `verdict.json` — so the census **canvas** PNGs *could not
+change*, and the visual verifier then refused fixes for exactly that. RC8's
+blocking finding, verbatim:
+
+> "THE CANVAS HALF, WHERE BOTH ADDRESSED ROWS' GRADED DEFECTS LIVE, WAS NEVER
+> RE-RENDERED … the census canvas PNGs are BYTE-IDENTICAL to the pre-fix ones."
+
+That was the instruction's defect, not the fixer's. A bar that cannot be passed
+by any correct work is a broken instrument, and it hid real fixes behind a
+verdict that read like a refusal. It has been corrected, and the corrected rule
+is what this round applied, per class:
+
+- **The correctness lens is the gate.** Is the root cause addressed? Is there a
+  conformance case red-before / green-after, *proven by the verifier itself*,
+  not asserted? No loosened assertion, no component-name special case, no silent
+  swallow, no unnamed regression in another library.
+- **A visual objection blocks ONLY** if it is (a) a genuine NEW visual defect the
+  change introduces, or (b) an addressed row that still fails **on the code
+  half** — the surface a fixer is allowed to regenerate. It may **not** block on
+  "canvas PNG unchanged", which was mandated, nor on canvas-only defects, which
+  are marked **not assessable until re-mint**.
+- **A mis-stated row claim** ("declared fixed, no bytes moved") is a claim to
+  CORRECT in this receipt, not a defect that sinks a class.
+
+Under that rule three classes land and five stay open. Nothing in the corrected
+rule lowers the engineering bar: every landed class was re-proven red→green by a
+verifier who ran both directions in its own worktree, and every refusal below
+quotes the finding that refuses it.
+
+### Adjudication
+
+| class | correctness | visual | verdict |
+|---|---|---|---|
+| RC1 — layout-axis-door | TRUE (red→green both ways, drift 19→7) | objected: `fluent.tab-list` declared fixed, no bytes moved | **LANDED** — the objection is a mis-stated claim, corrected below |
+| RC8 — geometry-excluded-for-text-parts | TRUE (red→green + the fusion-surface falsification) | objected: canvas never re-rendered; altitude.avatar's glyphs blank | **LANDED** — first objection mandated; second is a different, newly-named cause and pre-existing (the row drew ZERO ink before) |
+| RC7 — placeholder-empty-and-value-ink | split | split | **LANDED** with three corrections recorded below |
+| RC2 — declared-uniform-only | FALSE | FALSE | **OPEN** |
+| RC3 — nonstroke-ink-no-lowering | FALSE | FALSE | **OPEN** |
+| RC4 — glyph-reconstruction | FALSE | FALSE | **OPEN** |
+| RC5 — empty-slot-hugs-to-1px | FALSE | FALSE | **OPEN** |
+| RC6 — stale-token-alias | FALSE | TRUE | **OPEN** — correctness is the gate |
+
+### LANDED — RC1, the layout-axis door
+
+**Root cause.** `LAYOUT_CHANNEL_TO_FIELD` (`extract/computed/fuse.ts`) — the only
+reader that turns a captured flex keyword into a `Part.layout` fact — was
+narrower than the schema it writes into and narrower than BOTH emitters, and
+nothing anywhere read child ORDER. Four absences with the same silent shape (no
+map entry → the channel leaves through `layout-not-uniform` /
+`layout-value-outside-vocabulary` → both emitters draw their own default, which
+is not a refusal a reader can see, it is a different component):
+`row-reverse`/`column-reverse` had no slot in `LayoutSchema.direction` although
+`VariantLayoutSchema` already accepted them and the Figma emitter already
+reverses children; `baseline` was missing from the DETECTION map though both
+lowerings carry it; `flex-wrap` had no entry at all, so `layout.wrap` could only
+ever arrive from a hand-authored contract; and child ORDER was DETECTED
+(`union-order-drift`) and then discarded. Plus a validator abort: the factoring
+loop iterated boolean presence axes while `validate.ts` requires an enum driving
+prop, so antd.alert minted a contract its own validator refused and killed the
+whole round with no artifact written.
+
+**Conformance.** Five new cases, red-before / green-after re-proven by the
+verifier in its own worktree, both directions: engine reverted + all five
+re-captured through Chromium → `102 cases · 94 pass · 8 red` with all five
+printed as REGRESSION (`child-order-reversed-by-axis` and
+`child-order-permuted-by-axis` as SILENT-LOSS, the other three as WRONG-NAME);
+engine restored + re-captured → `git status` completely clean and
+`102 · 99 · 3 · ✔ no drift`. `child-order-permuted-by-axis` is the refusal pin —
+a rotation is REFUSED by name (`child-order-varies-unreversible`) so the
+reversal door cannot be widened into a guess.
+
+**Rows.** fluent.switch and fluent.spinner FIXED and confirmed on the code half
+against the real library render (above/below/before/after now four distinct
+renders where two were byte-identical); carbon.accordion FIXED on the align axis
+(the chevron moves to the correct side); carbon.inline-notification's carriable
+half (`wrap`); carbon.modal, antd.checkbox, antd.radio, astryx.progress-bar,
+mui.autocomplete/badge/breadcrumbs/snackbar, polaris.banner/text-field carried;
+fluent.card verified already carried; antd.alert no longer aborts.
+
+**Siblings.** 14 contracts, the same 14 `*.figma.js`, five GENESIS batches, all
+seven `*.bundle.json` (a hole in the inherited round: 14 contracts had moved and
+no bundle had, so the fix reached neither the paste path nor the census code
+half), the plugin engine receipt, and the drift baselines for six libraries.
+
+**Residual walls, including two the class did not name.**
+- The regate score FALLS on fluent.Spinner (84.416 → 83.766) and fluent.Switch
+  (82.337 → 80.888) with `cellsCompared` unchanged: the contract now spells a
+  reversed main axis where the library computes `row`/`column`, because that is
+  the schema's only spelling for child order. The render moved the right way;
+  the string moved the wrong way. Named in the baseline's own `gapCause`.
+- **Reversing a main axis flips the meaning of `justify-content` and neither
+  surface compensates.** `emit-figma-script` reverses `spec.children` but still
+  sets `primary: JUSTIFY_FIGMA[l.justify]` unreversed, and `css.ts` writes the
+  keyword verbatim. Bounded today (carbon.accordion's heading has ~16px of
+  slack; the two fictional flips carry `center` or no justify), and it becomes a
+  visible defect the first time a captured library ships a reversed
+  non-hugging container with `justify: start|end`.
+- **The child-order carriage moves the generated DOM/reading order away from the
+  library's, and only the CSS-string half of that cost was named.** Real fluent
+  spinner `above` is DOM [label, spinner] under `column`; the contract is part
+  order [spinner, label] under `column-reverse`. Pixels agree; the generated
+  React/WC now ship a screen-reader and tab order that is the reverse of the
+  package's for fluent.switch and fluent.spinner.
+- Refused BY NAME, with no corpus instance today: `layout.wrap` that varies on
+  an enum axis (`VariantLayoutSchema` has no per-variant wrap spelling); a
+  boolean axis driving `layoutByProp` (antd.alert is the live case); and an
+  arbitrary per-variant child permutation.
+- mui.table's `row-reverse` is correctly not carried (it sits on
+  `display: table-cell` parts where flex-direction is inert) but its receipt's
+  REASON is now stale — it says there is "no schema channel today" and after
+  this round there is one.
+
+**CORRECTION — `fluent.tab-list` was reported as needing no work, and that is
+false.** The class's report says: *"already carried at trunk via 321b1b3d's
+single-axis layoutByProp (orientation=vertical → direction column); no bytes
+moved this round and none were needed."* It is not carried anywhere.
+`examples/fluent/contracts/tab-list.contract.json` root layout is
+`{display:flex, align:stretch}` with no `direction` and `layoutByProp: null`;
+`extract/computed/out/fluent/tablist/enriched.extension.json` still carries the
+live pre-fix receipt `layout-not-uniform: root.flex-direction varies across
+combos — stays code-only`; the emitted canvas script compiles
+`Orientation=Vertical` as `mode=HORIZONTAL`; and the census code half draws
+"Overview  Activity" side by side against a reference that stacks them. The
+captured truth is a clean single-axis factorisation (horizontal → row 23/23,
+vertical → column 24/24). **fluent.tab-list remains an OPEN row of this class.**
+The remedy is measured and one command long: re-fusing the committed truth with
+this engine yields root `{display:flex, direction:row, align:stretch}` +
+`layoutByProp {prop:orientation, map:{vertical:{direction:column}}}` and raises
+the offline gate 64.978% → 66.026%. It was not taken here: the re-derivation
+moves a contract, a canvas script, a bundle, a census row and a drift row for a
+row whose graded defect is on the canvas half, which cannot be re-graded until a
+re-mint wave. It is the first thing the next round should do.
+
+### LANDED — RC8, geometry excluded for text parts
+
+**Root cause.** `extract/computed/fuse.ts absClusterParts` blanket-dropped EVERY
+text-bearing part from overlay-cluster geometry admission with one sentence —
+"font-metric-dependent widths". That premise is true of a shrink-to-fit box (its
+size IS the sample string the harness mounted) and FALSE of a box the layout
+PINNED. shadcn Avatar's fallback `<span class="size-full">` inside a `size-8`
+root is 32×32 in every combo — the root's own box, not a measurement of "CN" —
+and losing it minted a 17×20 hug pinned to the top-left of a 32×32 transparent
+frame: the census verdict's "circle offset … large empty area … glyphs overflow
+the circle".
+
+**The fix is a per-axis door with five pieces of measured counter-evidence**
+(`textFillPinnedAxes`): the nearest ancestor part must itself be
+geometry-admitted; the part's box must equal that ancestor's CONTENT box on ONE
+basis in EVERY enabled combo; that content box must take ≥2 distinct values
+spanning ≥ one em of the part's own font-size; no ancestor on the chain to the
+root may have that axis in `viewportDerivedRefusals`; and no box on that chain,
+in any combo, may measure the viewport or the capture stage's content box.
+Corpus-wide it admits exactly TWO (part, axis) facts on ONE component and
+refuses ten by name quoting the harness arithmetic — `fluent/Card label-2/-3
+width = 428px = the capture stage's content box (stage 460px − 2×16px)`,
+`mui/Accordion label 288 = 320 − 2×16`, `carbon/Modal root.width is already
+REFUSED by name as viewport-derived`. Round 1's blocker — a window measurement
+laundered through one in-flow generation — is dead by construction and was
+re-measured dead corpus-wide by the verifier's own probe.
+
+**Conformance.** Three cases: the door (`overlay-text-fill-pinned-size`), the
+HARNESS pin (`overlay-text-fill-stage-derived` — every counter-evidence test
+passes and the fill is refused anyway, because the pinned box is the stage), and
+the WALL pin (`overlay-text-hug-excluded`, deliberately green on BOTH engines, so
+the door cannot be widened into a blanket without turning it red). Verified both
+ways with a full Chromium re-capture; the fixed engine reproduces every
+committed artifact byte-identically.
+
+**New instruments this class also lands.** `extract:computed:geometry:census` —
+the fusion surface's own freshness gate, 104 components re-fused offline in ~7s
+with no browser, falsified on the engine and on a real committed artifact — and
+`bundle:fresh`, which byte-compares all nine committed paste bundles against a
+conventional rebuild (8/9, polaris reported as a NAMED ungated hole rather than
+silently skipped). Both close classes of invisible staleness that killed round 1.
+
+**Rows.** shadcn.avatar FIXED at the cause: label 17×20 / 14×17 / 17×20 hugs
+become 32×32 / 24×24 / 40×40 FIXED and concentric, minted at the library's own
+size-8/6/10. altitude.avatar improved by re-derivation — root gains width/height
+as ALIASES to the library's own tokens (`{theme-icon-xxxl}` / `{theme-icon-xl}`)
+and its code half went from `contentBox 0×0` and a 96×96 PNG with zero ink to a
+real 32×32 circle — but **NOT closed**: see the wall below. mui.drawer measured
+OUT of this class and left alone (`absClusterParts` tests `position === 'absolute'`,
+its paper is `position: fixed`, so the door never engages; its 1000px height is
+already refused by name as viewport-derived).
+
+**Residual walls.**
+- **altitude.avatar's code half is improved but not correct, and the cause is
+  now named for the first time.** The "AB" initials carry ZERO ink. The class
+  attributed that to the census harness; the verifier disproved it by calling
+  `emitHtml(contract, …)` directly, with no harness, and getting
+  `<div class="avatar"></div>`. The contract's `children` prop is
+  `type: "text", default: "AB"`, and altitude/button's identically-typed prop
+  DOES render because that contract has a label PART bound to it. So this is a
+  contract/emitter gap — emit-html renders nothing for a root-level text prop
+  with no bound text part — not a census-harness gap, and not this class. The
+  row is NOT claimed green.
+- That row's committed `verdict.json` still names the wall `CODE-RENDER-BLANK:avatar`
+  with the note "the committed code render PNG carries ZERO ink pixels (blank
+  96×96)", which is no longer true of its own artifact (160×160 with a painted
+  circle). No gate ties a verdict to a render hash. Left as measured: verdicts
+  are re-graded blind, never by the builder.
+- 83 of 104 components ship a `enriched.extension.json` that is stale on the
+  geometry axis. Measured both ways: the base engine reproduces the same 83 and
+  the fixed engine strictly reduces it by two. Pinned per row as data
+  (`extensionFresh`), so a change in either direction is red; not claimed closed.
+- `position: fixed` overlay parts never enter the overlay cluster at all
+  (drawers, modals, popovers, tooltips). Named, unchanged, a different class.
+- The door refuses more than strictly necessary, deliberately: a single-size
+  overlay component whose text part genuinely fills its parent keeps the
+  exclusion, because with one observation "this box fills its parent" and "this
+  text measured the parent" are the same observation. The verifier measured the
+  cost — **27 (part, axis) near misses across 15 components are dropped with the
+  legacy receipt text**, whose stated reason ("font-metric-dependent widths")
+  the engine has just measured to be false for that axis. Named here as a wall:
+  the door names 10 refusals and silences 27.
+
+### LANDED — RC7, the empty placeholder in value ink
+
+**Root cause.** `::placeholder{color}` has been READ since R7 —
+`extract/computed/lib.ts` READ_PSEUDOS calls it "real ink a designer notices" —
+and `run.ts` states the policy outright: *"Reading is not carrying: the bounded
+decor grammar promotes ::before/::after only, so every other pseudo the reader
+records is a MEASUREMENT with no carriage."* The ink was measured on every
+capture run and thrown away before the mint. Six components in the corpus have a
+`::placeholder` colour that differs from the element's own. And there are THREE
+emitter paths, not one: `formControlSpec` minted `textFill: childCtx.textFill`
+(the VALUE ink) with `characters: ''`; a root that IS the control went through
+the generic root-label fallback (also value ink); and shadcn.input, whose root is
+the input with no parts and no props, drew NOTHING AT ALL.
+
+**The fix.** `placeholder-color` registered in TOKEN_CHANNELS with a third CSS
+disposition, `pseudo-element`, carrying the selector and property it lowers to
+(the registry THROWS at load if an entry declares the disposition without its
+rule); `foldPlaceholderInk` at BOTH read boundaries, conditional on the two inks
+DIFFERING; the channel consumed on all three emitter paths; lowered to a real
+`::placeholder` RULE on every stylesheet surface and REFUSED BY NAME on the
+inline-style surface (a pseudo-element is a rule and an inline style object has
+no selector; writing `color` there would repaint the VALUE ink); and inverted on
+the return leg, ELEMENT-guarded — `<input>`/`<textarea>` cannot hold element
+children in any DOM, so a child in the dump is emitter-synthesised by
+construction, and under any other element the layer is real content.
+
+**Pins.** `core/placeholder-ink-check.ts` — 36 pins across 7 cases, wired into
+`maintain` and the fast lane — plus `pseudo-placeholder` reclassified
+UNSUPPORTED → CARRIED (strictly stronger: the base engine refuses the channel
+outright) and one new canvas round-trip row. Both verifiers reproduced the red
+by reverting ONE file at a time: `emit-figma-script.ts` → 12 canvas pins red;
+`propose-figma.ts` → the return-leg pin red and the SILENT ratchet fires;
+`emit-wc.ts` → the web-components assertions red; deleting the element guard
+reproduces round 1's blocker exactly (a decoy `<div>`'s child part eaten, its
+characters gone, `placeholder-color` fabricated on a div).
+
+**Rows, graded on the code half beside the real library.** shadcn.input went
+from a near-empty 1709-byte PNG to a bordered 288×36 field with gray "Value";
+carbon.textinput's glyph mass moved from rgb(117,117,117) to rgb(155,155,155),
+which is the reference's own glyph mass; fluent.input went from a blank cell to
+"Value" in gray on all sampled cells; ds.text-area and ds.text-field moved from
+rgb(17,24,39) to the muted ink. antd.input's code PNGs are byte-identical and
+that is correct — antd binds its placeholder through a prop with no default, so
+the CSS surface renders an empty attribute either way and the fix lands on the
+canvas half (40 cells move off the per-status VALUE ink onto `placeholder-color`).
+astryx.text-input was not on the row list, carries the identical defect, and is
+fixed with them.
+
+**CORRECTIONS — three claims of this class are wrong or incomplete, and are
+corrected here rather than shipped.**
+1. **The `:disabled` plane is NOT carried.** The class says fluent's disabled
+   placeholder ink "is now carried on the state plane because nestedStateCarriable
+   admits the channel". No contract in `examples/` or `contracts/` carries a
+   state-plane `placeholder-color`, and `examples/fluent/figma/input.figma.js`
+   binds the RESTING `#707070` on all 42 placeholder nodes including the six
+   `State=Disabled` cells, where the library paints `rgba(189,189,189)`. It is
+   named per cell as a code-only fact, so it is a NAMED wall and not a silent
+   loss, and it is not a visible regression — the base engine drew an EMPTY
+   string there, so its ink was invisible, and no fluent census cell samples a
+   disabled state. But the branch's own residual walls did not mention the state
+   plane at all. **Named here as a wall.**
+2. **Two malformed-output shapes in the new lowering, demonstrated and latent.**
+   `packages/core/src/css.ts lowerPseudoElementChannels` is a line-oriented pass
+   over finished CSS. (a) A grouped multi-line selector whose ONLY declaration
+   is the channel leaves a dangling selector line, so the ELEMENT itself takes
+   the hint ink — precisely the harm the design's own comment says the door
+   exists to prevent. (b) A nested at-rule attributes the declaration to the
+   at-rule line and loses the inner selector. Both are unreachable in today's
+   emitters (no emitter produces either shape) and neither is guarded or pinned.
+   **Named here as a wall.**
+3. **carbon.textinput loses three zero-width border sides with no receipt — and
+   that loss is NOT this class's.** The re-derived contract drops
+   `border-left-width`, `border-right-width` and `border-top-width`
+   (`{imported.shared.size-0}`) and nothing names it. I measured the attribution
+   myself rather than inheriting it: an offline re-fuse of carbon/TextInput on
+   **`main`'s** engine — which carries none of these three classes — drops the
+   same three keys. It is pre-existing trunk staleness that any re-derivation
+   surfaces, not an RC7 regression. No pixel moves (bottom-only per-side binding
+   is an established, correctly-rendering pattern in the corpus). **Named here as
+   a wall; the fix is a receipt, and it belongs to whoever re-captures carbon.**
+
+**Residual walls the class did name and that stand.** The placeholder STRING is
+an HTML attribute a computed-style capture can never read — where no source
+exists the emitter draws an EMPTY text node and NAMES the gap, and the only
+honest sources (a `placeholder` text prop, or the string the capture MOUNTED)
+are both wired. A BOUND placeholder does not round-trip at its own spelling and
+the divergence is named. The offline gate's computed-equality number compares
+`oklch` against `rgba` on shadcn and reports colour cells unequal for a spelling
+difference; 56 of shadcn/Input's 64 mismatches predate this class and 8 are the
+cells it added.
+
+### OPEN — the five classes that did not pass the corrected rule
+
+Each of these stays open because of a CORRECTNESS finding, not because a canvas
+PNG did not move.
+
+**RC2 — declared-uniform-only.** The declared/keyword door was opened; the plane
+gate that was supposed to name what still collapses cannot see a PARTIALLY flat
+axis. Blocking finding, verbatim: *"A PARTIAL collapse — some values of an axis
+identical, one different — says nothing at all … `examples/mui/figma/link.figma.js`
+— 21 cells, 14 distinct, SEVEN identical pairs … plane facts: 0.
+`examples/fluent/figma/avatar.figma.js` — 18 cells, 12 distinct, SIX identical
+pairs … plane facts: 0."* Two of the six rows still fail their graded defect on
+the code half (fluent.avatar's activity ring is still dropped and now UNNAMED;
+mui.text-field still mints six byte-identical cells), and the verifier proved a
+latent break: `pruneMaps` prunes `tokensByProp`/`literalsByProp`/`layoutByProp`
+after narrowing an enum and does NOT prune `declaredByProp`, so the referee-gated
+polaris emit will throw the first time polaris fuses one. mui.radio and mui.link's
+`Underline=Always` cell are genuinely fixed and should be re-used.
+
+**RC3 — nonstroke-ink-no-lowering.** The verifier BUILT the harm and ran it.
+Blocking finding, verbatim: *"THE MANUFACTURED RING IS BACK, THROUGH THE STATE
+PLANE. The fold's presence guard is domain-complete over the DEFAULT interaction
+plane only … so a ring that is absent in an INTERACTION plane is neither guarded
+nor named."* Second face of the same root: the fold writes the ring width as
+`literals`, which do not ride into state-preview specs while the border COLOUR
+does — so Figma's default 1px strokeWeight paints a ring the CSS never draws.
+Not live in today's corpus (fluent.badge has no state previews), which is the
+only reason it is not already a census red. fluent.tooltip also still fails the
+recognisability bar for this class's own reason.
+
+**RC4 — glyph-reconstruction.** Three of four rows are genuinely fixed at the
+cause with pixel-exact evidence, and the round-1 P0 is closed. It stays open on
+two correctness findings: antd.tooltip still mints its arrow as an UNCLIPPED
+rectangular tab on the wrong side of the bubble **on the code half** (the shape
+channel is still dropped in reconstruction — the class's own definition), and
+fluent.checkbox mixed×circular now ships NEW ink the library does not draw — a
+mis-scaled, off-centre dot (+11.1% diameter, centre displaced 0.53px) from a
+viewBox reconstructed as `0 0 18 18` where the library authors `0 0 20 20`.
+Also: `LEDGER.md`, `scorecard.json` and `PROVENANCE.md` still say the flagship
+row's glyph was thrown away while the shipped contract carries it, and the new
+clip-path wall fires on two carbon rows that were not re-derived, so there it is
+still silent.
+
+**RC5 — empty-slot-hugs-to-1px.** Blocking finding, verbatim: *"THE SILENT
+SWALLOW IS NARROWED, NOT CLOSED: it is now variant-index-dependent … A designer
+who edits the design-time slot content on any variant other than the first has
+it dropped with ZERO receipt."* Reproduced through the shipped chain on the
+branch's own ds.toast: the same edit on `Type=Info` is NAMED and on `Type=Error`
+disappears. The conformance case that exists to catch it is blind to it by
+construction (all three cases mutate EVERY variant). Seven rows are genuinely
+repaired; the five rows this class is NAMED after (the 1px slivers) are
+pixel-unchanged, and the new `slot design-time content` receipt fires on all 177
+empty slots, taking first-party code-only facts from 24 to 118.
+
+**RC6 — stale-token-alias.** This is the one class whose VISUAL lens passed:
+astryx.badge is pixel-exact to the reference on all 14 cells and the fix is a
+token-to-token swap with no hex literal written into a contract. Correctness is
+the gate, and it refuses: the guard has a FOURTH outcome the report does not
+count — *"a literal row, applied with no referee and no name … 4 of 31 rows were
+never looked at and 2 of them are provably stale"* — while the summary reads
+`0 applied UNVERIFIED`, i.e. full coverage. The mechanism to name them
+(`unverified`) exists in this very patch and was not used. Second finding: the
+`canonColorValue` lift is not behaviour-preserving as claimed — it widens
+`runGate`'s `resolvedEqual` and suppresses a divergence line that used to print,
+an undeclared loosening of an existing assertion. Also measured and worth
+carrying forward: `examples/astryx/storybook/src/tokens.css` still defines two
+badge variables against the drifted DS tokens and is saved only by cascade
+order; it is trunk staleness that no gate covers.
+
+### What the merged engine was re-derived against, and what this round did NOT do
+
+The three classes were merged onto their own base — `fix/rejected-sets`
+(e884d672), the head of the open stack `fix/rejected-sets` → `census/canvas-full`
+→ `main`. That is where every red→green proof in this section was measured, and
+it is the only base on which they transfer: `main` carries a divergent engine
+line (its `extract/computed/fuse.ts` has no `layoutByProp` minting at all), so
+merging these classes there would import two open PRs' content and invalidate
+the proofs.
+
+Regenerated on the MERGED engine, each through its own documented remedy:
+
+- **All nine new conformance cases were RE-CAPTURED through Chromium** and every
+  committed artifact came back byte-identical — the three doors do not disturb
+  each other's fixtures. `conformance: 105 cases · 102 pass · 3 red · ✔ no drift`
+  (CARRIED 60 · LOWERED 4 · REFUSED 24 · UNSUPPORTED 17, from 97/54/4/21/18 at the
+  base). Canvas round-trip: `64 cases · 37 round-tripped · 12 named · 15 refused
+  by name · 0 red`.
+- **The census CODE half was re-rendered for all 23 rows the classes touch** and
+  every PNG and `code-render.json` came back byte-identical: the shipped code
+  half is reproducible, not hand-placed.
+- shadcn's token surface was rebuilt as the UNION of RC7 and RC8 rather than
+  either branch's copy — the merge had left `00-tokens.figma.js` at RC8's 431
+  variables, and the GENESIS batch (the artifact a designer pastes) then refused
+  to build at all: `Missing variable: imported/input/root/placeholder-color`.
+  Rebuilt to 432; `figma:fresh` 9/9, `generated:fresh` 3/3, `bundle:fresh` 8/9
+  (polaris the named hole).
+- The fusion-geometry census re-recorded: 3 rows EXTENSION-REPAIRED
+  (astryx/TextInput, carbon/TextInput, fluent/Input — RC7's re-derivation caught
+  their committed drop-ledgers up to the engine).
+- `golden:update` (292 files), the plugin engine receipt, `capability:report`,
+  and the regate drift baseline re-recorded on this engine.
+
+**Not done, and named rather than implied.** The canvas half was NOT re-minted:
+every `canvas-*.png` under `parity/receipts/v1/census` is still the pre-fix mint,
+and no `verdict.json` was touched. The verdicts that motivated these classes are
+the BLIND re-grade on `origin/census/canvas-full` (117/170 recognisable, 53 named
+reds), not the self-grades committed here — and a verdict is re-graded blind,
+never by the builder. So for shadcn.avatar, altitude.avatar, shadcn.input,
+fluent.input, carbon.textinput, antd.input, fluent.switch, fluent.spinner and
+carbon.accordion the fix is verified at the emitted-script and code-render level
+and is **not assessable on the canvas half until a re-mint wave runs**. That wave
+— re-mint, re-shoot, blind re-grade — is the next round's first job, together
+with fluent.tab-list's one-command re-derivation.
+
