@@ -1,0 +1,2 @@
+[data-cf="combobox-listbox-stacking-order"] { position: relative; display: flex; width: 180px; padding: 6px 8px; background: rgb(226, 232, 240); }
+[data-cf="combobox-listbox-stacking-order"] .cf-b { position: absolute; top: 12px; left: 12px; z-index: 10; padding: 4px; background: rgb(255, 255, 255); border: 1px solid rgb(203, 213, 225); }

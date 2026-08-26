@@ -1,0 +1,716 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "conformance.repeat-grid-month",
+  "name": "CaseRepeatGridMonth",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the CSS/DOM conformance fixture case \"repeat-grid-month\" (repetition). The fixture varies CSS CONSTRUCTS, not prop spaces, so the prop space is deliberately EMPTY: every axis the capture would enumerate is held at nothing, and the whole measurement is the computed truth of one mounted rendering. Construct: a 7-column CSS grid of 35 auto-placed cells (5 weeks), the LAST carrying a distinct paint (rgb(160, 32, 160)) COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @ds-contracts/conformance@0.1.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {
+        "a": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-d2dce6}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "a-2": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-d2dce6}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "a-3": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-d2dce6}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "a-4": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-d2dce6}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "a-5": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-d2dce6}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "a-6": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-d2dce6}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "a-7": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-d2dce6}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "a-8": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-d2dce6}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "a-9": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-d2dce6}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "a-10": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-d2dce6}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "a-11": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-d2dce6}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "a-12": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-d2dce6}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "a-13": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-d2dce6}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "a-14": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-d2dce6}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "a-15": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-d2dce6}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "a-16": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-d2dce6}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "a-17": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-d2dce6}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "a-18": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-d2dce6}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "a-19": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-d2dce6}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "a-20": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-d2dce6}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "a-21": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-d2dce6}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "a-22": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-d2dce6}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "a-23": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-d2dce6}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "a-24": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-d2dce6}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "a-25": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-d2dce6}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "a-26": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-d2dce6}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "a-27": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-d2dce6}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "a-28": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-d2dce6}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "a-29": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-d2dce6}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "a-30": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-d2dce6}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "a-31": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-d2dce6}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "a-32": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-d2dce6}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "a-33": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-d2dce6}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "a-34": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-d2dce6}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        },
+        "b": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|b — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.case-repeat-grid-month.b.background-color}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        }
+      },
+      "layout": {
+        "display": "grid",
+        "columns": [
+          {
+            "px": 20
+          },
+          {
+            "px": 20
+          },
+          {
+            "px": 20
+          },
+          {
+            "px": 20
+          },
+          {
+            "px": 20
+          },
+          {
+            "px": 20
+          },
+          {
+            "px": 20
+          }
+        ],
+        "gap": {
+          "row": 2,
+          "column": 2
+        },
+        "flow": "row"
+      },
+      "literals": {
+        "width": "288px"
+      },
+      "declared": {
+        "box-sizing": "border-box",
+        "font-family": "monospace"
+      },
+      "tokens": {
+        "background-color": "{imported.case-repeat-grid-month.root.background-color}",
+        "border-bottom-color": "{imported.shared.color-663399}",
+        "border-left-color": "{imported.shared.color-663399}",
+        "border-right-color": "{imported.shared.color-663399}",
+        "border-top-color": "{imported.shared.color-663399}",
+        "color": "{imported.shared.color-1976d2}",
+        "font-size": "{imported.shared.size-12}",
+        "min-height": "{imported.case-repeat-grid-month.root.min-height}",
+        "min-width": "{imported.case-repeat-grid-month.root.min-width}",
+        "padding-bottom": "{imported.shared.size-4}",
+        "padding-left": "{imported.shared.size-4}",
+        "padding-right": "{imported.shared.size-4}",
+        "padding-top": "{imported.shared.size-4}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@ds-contracts/conformance",
+        "export": "CaseRepeatGridMonth"
+      }
+    }
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "conformance.combobox-closed-trigger",
+  "name": "CaseComboboxClosedTrigger",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the CSS/DOM conformance fixture case \"combobox-closed-trigger\" (combobox). The fixture varies CSS CONSTRUCTS, not prop spaces, so the prop space is deliberately EMPTY: every axis the capture would enumerate is held at nothing, and the whole measurement is the computed truth of one mounted rendering. Construct: the CLOSED combobox trigger - `justify-content: space-between` pushing a value label and a two-border chevron box to opposite ends of a bordered row COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @ds-contracts/conformance@0.1.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "center",
+        "justify": "space-between"
+      },
+      "parts": {
+        "label": {
+          "text": "Choose one",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.case-combobox-closed-trigger.label.color}",
+            "font-size": "{imported.shared.size-12}",
+            "font-weight": "{imported.case-combobox-closed-trigger.label.font-weight}"
+          }
+        },
+        "b": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|b — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "border-bottom-style": "solid",
+            "border-right-style": "solid",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "border-bottom-color": "{imported.case-combobox-closed-trigger.b.border-bottom-color}",
+            "border-bottom-width": "{imported.case-combobox-closed-trigger.b.border-bottom-width}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.case-combobox-closed-trigger.b.border-right-color}",
+            "border-right-width": "{imported.case-combobox-closed-trigger.b.border-right-width}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.case-combobox-closed-trigger.b.color}",
+            "font-size": "{imported.shared.size-12}"
+          }
+        }
+      },
+      "declared": {
+        "border-bottom-style": "solid",
+        "border-left-style": "solid",
+        "border-right-style": "solid",
+        "border-top-style": "solid",
+        "box-sizing": "border-box",
+        "font-family": "monospace"
+      },
+      "tokens": {
+        "background-color": "{imported.case-combobox-closed-trigger.root.background-color}",
+        "border-bottom-color": "{imported.shared.color-cbd5e1}",
+        "border-bottom-left-radius": "{imported.shared.size-6}",
+        "border-bottom-right-radius": "{imported.shared.size-6}",
+        "border-bottom-width": "{imported.shared.size-1}",
+        "border-left-color": "{imported.shared.color-cbd5e1}",
+        "border-left-width": "{imported.shared.size-1}",
+        "border-right-color": "{imported.shared.color-cbd5e1}",
+        "border-right-width": "{imported.shared.size-1}",
+        "border-top-color": "{imported.shared.color-cbd5e1}",
+        "border-top-left-radius": "{imported.shared.size-6}",
+        "border-top-right-radius": "{imported.shared.size-6}",
+        "border-top-width": "{imported.shared.size-1}",
+        "color": "{imported.case-combobox-closed-trigger.root.color}",
+        "font-size": "{imported.shared.size-12}",
+        "min-height": "{imported.case-combobox-closed-trigger.root.min-height}",
+        "min-width": "{imported.case-combobox-closed-trigger.root.min-width}",
+        "padding-bottom": "{imported.shared.size-6}",
+        "padding-left": "{imported.case-combobox-closed-trigger.root.padding-left}",
+        "padding-right": "{imported.case-combobox-closed-trigger.root.padding-right}",
+        "padding-top": "{imported.shared.size-6}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@ds-contracts/conformance",
+        "export": "CaseComboboxClosedTrigger"
+      }
+    }
+  }
+}

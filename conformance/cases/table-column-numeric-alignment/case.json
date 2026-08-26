@@ -1,0 +1,32 @@
+{
+  "feature": "table",
+  "construct": "per-COLUMN text alignment - the label cell `text-align: left`, the numeric cell `text-align: right`, at fixed column widths",
+  "why": "Right-aligned numerics are the difference between a table and a list of words. The alignment lives on the CELL, is different per column, and is the only thing that makes the two rows' digits line up on their last character - a fact a grader can check with a ruler and no knowledge of the source.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.c.parts.b.tokens.text-align",
+  "observable": {
+    "part": "b",
+    "channel": "text-align",
+    "capturedValue": "right"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "textAlignHorizontal RIGHT on the numeric cell's text node"
+  },
+  "blockStage": true,
+  "predictedDifficulty": "hard",
+  "mustHave": [
+    "the two rows' numeric values ('7' and '128') are right-aligned with each other - their right edges match",
+    "the two label values ('Widget', 'Gadget') are left-aligned with each other",
+    "the numeric column and the label column do not overlap",
+    "the numeric column sits to the right of the label column in both rows"
+  ],
+  "id": "table-column-numeric-alignment",
+  "predictedWall": {
+    "code": "FC-TEXT-FILL-ALIGNMENT",
+    "status": "EXISTING - cited as the rule that SHOULD fire, not as a predicted failure",
+    "half": "canvas round trip",
+    "why": "spec/lowering.json rule `emit.size-text-hug-vs-fill` carries this marker: 'alignment-safe non-truncating text HUGS; alignment-displaced text keeps FILL and carries fillText', and it is one of the few rules whose `lost` field reads 'nothing silently'. A right-aligned numeric cell at a FIXED column width is exactly the shape where hugging WOULD move the glyphs, so the rule should fire and keep the alignment. Two things to check first if the digits come back left-aligned: door `propose.text-align-left-is-default` ('LEFT is CSS's own default so it is not a fact') and the channel table's note that text-align CARRIES on the css->canvas write but its canvas->code READ-BACK is merely named (`text-channel-unsupported`). So a one-way pass here would still leave the round trip asymmetric."
+  }
+}

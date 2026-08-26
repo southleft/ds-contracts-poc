@@ -1,0 +1,32 @@
+{
+  "feature": "combobox",
+  "construct": "the OPEN listbox as an out-of-flow overlay - `position: absolute; top: 34px` under a `position: relative` trigger, so the popover does not participate in the trigger's flow",
+  "why": "'Overlays rather than reflows' is the one structural fact that separates a combobox from an accordion, and it is carried entirely by the popover being out of flow. The `top: 34px` inset is what places it just under the trigger; if the inset is lost the list lands ON the trigger, and if the out-of-flow-ness is lost the trigger grows to contain the list. Both failures are recognisable at a glance and neither is a colour.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.b.layout.position / insets.top",
+  "observable": {
+    "part": "b",
+    "channel": "top",
+    "capturedValue": "34px"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "layoutPositioning ABSOLUTE with a y offset under the trigger"
+  },
+  "blockStage": true,
+  "predictedDifficulty": "expected-wall",
+  "mustHave": [
+    "the popover appears BELOW the trigger, not on top of it and not inside it",
+    "the trigger's own height is unchanged by the popover's presence - the trigger is one text line tall",
+    "the popover's left edge lines up with the trigger's left edge",
+    "the popover lists both options, stacked vertically"
+  ],
+  "id": "combobox-popover-overlay-inset",
+  "predictedWall": {
+    "code": "emit.position-inset-overlay-four-sides / emit.position-no-inset-falls-in-flow",
+    "status": "EXISTING lowering-register ids (lowercase dotted, not FC-*). FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED is the emit-side code for the same failure.",
+    "half": "canvas round trip",
+    "why": "AMENDED before any run - upgraded from `hard`, and this is the single most precisely grounded prediction in the set. spec/lowering.json `emit.position-inset-overlay-four-sides` fires ONLY when ALL FOUR insets are present as px. This case declares TWO (top and left), which lands it in that rule's own stated loss: 'for a part with one to three insets, the overlay lowering entirely, with nothing said', `receipt: {channel: \"none\"}`. The sibling rule `emit.position-no-inset-falls-in-flow` spells out the consequence: 'the part now occupies space in the auto-layout it should have been lifted out of' - again `receipt: {channel: \"none\"}`. That is verbatim the combobox failure this case exists to catch: the popover REFLOWS the trigger instead of overlaying it. FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED (core/emit-figma-script.ts:6536, :6609, :7382) is the loud version of the same outcome - 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow'. I predict the QUIET version, because two insets is the un-receipted branch. I chose two insets deliberately: a popover anchored under a trigger is a two-inset shape in every real library, and the four-inset rule does not describe it."
+  }
+}
