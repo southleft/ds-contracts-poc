@@ -825,7 +825,7 @@
       "blockStage": true
     },
     {
-      "__case": "pseudo-elements: input::placeholder { color } — declared UNSUPPORTED",
+      "__case": "pseudo-elements: input::placeholder { color } — declared CARRIED",
       "name": "CasePseudoPlaceholder",
       "importName": "CasePseudoPlaceholder",
       "contract": "conformance/seeds/pseudo-placeholder.contract.json",

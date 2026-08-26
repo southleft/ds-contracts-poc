@@ -4,10 +4,10 @@
   "library": "@ds-contracts/conformance@0.1.0",
   "count": 105,
   "byExpectation": {
-    "CARRIED": 59,
+    "CARRIED": 60,
     "LOWERED": 4,
     "REFUSED": 24,
-    "UNSUPPORTED": 18
+    "UNSUPPORTED": 17
   },
   "cases": [
     {
