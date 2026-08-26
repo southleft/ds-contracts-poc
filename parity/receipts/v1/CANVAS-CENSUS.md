@@ -48,6 +48,10 @@ Code half: `parity/receipts/v1/census/<lib>/<id>/code-<slug>.png` + `code-render
 
 Scratch file `byMp6lt0Ij9b2QbkDGFwBh` (the only writable file). Page per library (`Census / <library>`); tokens script first, then the row's `figmaScriptPath` re-emitted with `FIGMA_FILE_KEY=byMp6lt0Ij9b2QbkDGFwBh` through the console bridge; for every `variants[]` entry in the row's `code-render.json` with status `rendered`, `figma_take_screenshot` of the COMPONENT child named `variant` at scale 2 → `canvas-<slug>.png` beside `code-<slug>.png`; a variant the drawn set does not carry is a `CANVAS-PROJECTION:<variant>` wall, not a missing file; dump → propose → diff for the adjudication column; then `verdict.json` `{ recognisable: true|false|"unscored", walls: [codes], notes, reviewedAt: <commit>, setNodeId, roundTrip }`. The full recipe with every step is the header of `scripts/canvas-census-check.ts`. Then `npm run census:check -- --phase full` and flip the fast-lane step to `--phase full`.
 
+## The third column — is the minted set USABLE
+
+Owner, 2026-08-25, asked whether a minted set must be *usable* as a design-system component or merely *look right*, and chose usable: *"a screenshot-perfect set of frozen rectangles is useless to a DS team."* Recognisability and round-trip can both be green on a set a designer cannot work with, so `usable` is a third, independent claim, measured through the Plugin API by `npm run canvas:usable:check` (`parity/receipts/v1/CANVAS-USABLE.md`) and read here. The cell is `R` reflow · `V` variant switching · `B` token binding with its bound ratio · `L` no faked layout; `✓` pass, `✘` fail, `·` not applicable (named in the usable receipt). `PENDING` means the set has never been probed, and at `--phase full` that is a refusal — never a blank cell.
+
 ## Tally
 
 | library | sets | code rendered | code UNAVAILABLE / MISSING | canvas complete | verdict recognisable | verdict NOT recognisable | verdict pending/unscored |
@@ -68,175 +72,175 @@ Gate: **GREEN** at phase `code`.
 
 ## Rows
 
-| library | id | archetype | axes × variants (compiled; script rows) | variants rendered | code-render | canvas | verdict | walls |
-|---|---|---|---|---|---|---|---|---|
-| first-party | `ds.accordion-item` | accordion | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | — |
-| first-party | `ds.avatar-group` | avatar | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| first-party | `ds.avatar` | avatar | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | — |
-| first-party | `ds.badge` | badge / tag / chip | 1 × 5; 5 | 5/5 of 5 | rendered | PENDING | PENDING | — |
-| first-party | `ds.banner` | banner / alert / toast | 2 × 8; 8 | 5/5 of 8 | rendered | PENDING | PENDING | — |
-| first-party | `ds.bento-grid` | unmapped | 0 × 1; 6 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| first-party | `ds.blockquote` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| first-party | `ds.breadcrumb-item` | breadcrumb | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| first-party | `ds.breadcrumbs` | breadcrumb | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| first-party | `ds.button` | button | 2 × 12 + 12 state; 24 | 9/9 of 24 | rendered | PENDING | PENDING | — |
-| first-party | `ds.card` | card | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| first-party | `ds.chat-message-metadata` | unmapped | 1 × 5; 5 | 5/5 of 5 | rendered | PENDING | PENDING | — |
-| first-party | `ds.chat-message` | unmapped | 1 × 3; 3 | 3/3 of 3 | rendered | PENDING | PENDING | — |
-| first-party | `ds.chat-system-message` | unmapped | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | — |
-| first-party | `ds.checkbox` | checkbox / radio | 2 × 6; 6 | 4/4 of 6 | rendered | PENDING | PENDING | — |
-| first-party | `ds.citation` | unmapped | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | — |
-| first-party | `ds.code` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| first-party | `ds.divider` | unmapped | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | — |
-| first-party | `ds.empty-state` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| first-party | `ds.field` | input / field | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| first-party | `ds.grid-gallery` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| first-party | `ds.heading` | unmapped | 2 × 18; 18 | 8/8 of 18 | rendered | PENDING | PENDING | — |
-| first-party | `ds.icon-button` | button | 2 × 12; 12 | 6/6 of 12 | rendered | PENDING | PENDING | — |
-| first-party | `ds.kbd` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| first-party | `ds.list-item` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| first-party | `ds.list` | unmapped | 1 × 3; 3 | 3/3 of 3 | rendered | PENDING | PENDING | — |
-| first-party | `ds.metadata-list-item` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| first-party | `ds.metadata-list` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| first-party | `ds.page-shell` | unmapped | 0 × 1; 5 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| first-party | `ds.pagination` | pagination | 1 × 3; 3 | 3/3 of 3 | rendered | PENDING | PENDING | — |
-| first-party | `ds.progress-bar` | progress / spinner | 1 × 5; 5 | 5/5 of 5 | rendered | PENDING | PENDING | — |
-| first-party | `ds.section` | unmapped | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | — |
-| first-party | `ds.side-nav-item` | nav (top / side) | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | — |
-| first-party | `ds.sidebar-layout` | unmapped | 0 × 1; 3 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| first-party | `ds.skeleton` | progress / spinner | 1 × 3; 3 | 3/3 of 3 | rendered | PENDING | PENDING | — |
-| first-party | `ds.slider` | slider | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| first-party | `ds.spinner` | progress / spinner | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| first-party | `ds.status-dot` | unmapped | 1 × 5; 5 | 5/5 of 5 | rendered | PENDING | PENDING | — |
-| first-party | `ds.switch` | toggle / switch | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | — |
-| first-party | `ds.tab-list` | tabs | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| first-party | `ds.tab` | tabs | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | — |
-| first-party | `ds.table-cell` | table / data-grid | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | — |
-| first-party | `ds.table-header-cell` | table / data-grid | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | — |
-| first-party | `ds.table-row` | table / data-grid | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | — |
-| first-party | `ds.table` | table / data-grid | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | — |
-| first-party | `ds.text-area` | input / field | 1 × 3; 3 | 3/3 of 3 | rendered | PENDING | PENDING | — |
-| first-party | `ds.text-field` | input / field | 1 × 3; 3 | 3/3 of 3 | rendered | PENDING | PENDING | — |
-| first-party | `ds.toast` | banner / alert / toast | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | — |
-| first-party | `ds.token` | unmapped | 2 × 33; 33 | 13/13 of 33 | rendered | PENDING | PENDING | — |
-| first-party | `ds.toolbar` | unmapped | 1 × 3; 3 | 3/3 of 3 | rendered | PENDING | PENDING | — |
-| first-party | `ds.top-nav-item` | nav (top / side) | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | — |
-| first-party | `ds.top-nav` | nav (top / side) | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| first-party | `ds.two-column` | unmapped | 0 × 1; 3 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| first-party | `ds.typeahead-item` | select / combobox | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| altitude | `altitude.avatar` | avatar | 1 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| altitude | `altitude.badge` | badge / tag / chip | 2 × 8; 8 | 5/5 of 8 | rendered | PENDING | PENDING | — |
-| altitude | `altitude.button` | button | 1 × 4 + 8 state; 12 | 6/6 of 12 | rendered | PENDING | PENDING | — |
-| altitude | `altitude.chip` | badge / tag / chip | 2 × 10; 10 | 6/6 of 10 | rendered | PENDING | PENDING | — |
-| altitude | `altitude.divider` | unmapped | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | — |
-| altitude | `altitude.heading` | unmapped | 2 × 12; 12 | 7/7 of 12 | rendered | PENDING | PENDING | — |
-| altitude | `altitude.iconclose` | unmapped | 1 × 7; 7 | 7/7 of 7 | rendered | PENDING | PENDING | — |
-| altitude | `altitude.link` | unmapped | 1 × 3 + 6 state; 9 | 5/5 of 9 | rendered | PENDING | PENDING | — |
-| antd | `antd.alert` | banner / alert / toast | 2 × 8; 8 | 5/5 of 8 | rendered | PENDING | PENDING | — |
-| antd | `antd.avatar` | avatar | 2 × 6; 6 | 4/4 of 6 | rendered | PENDING | PENDING | — |
-| antd | `antd.badge` | badge / tag / chip | 2 × 6; 6 | 4/4 of 6 | rendered | PENDING | PENDING | — |
-| antd | `antd.button` | button | 3 × 30; 30 | 8/8 of 30 | rendered | PENDING | PENDING | — |
-| antd | `antd.card` | card | 2 × 4; 4 | 3/3 of 4 | rendered | PENDING | PENDING | — |
-| antd | `antd.checkbox` | checkbox / radio | 1 × 3; 3 | 3/3 of 3 | rendered | PENDING | PENDING | — |
-| antd | `antd.input` | input / field | 3 × 24 + 16 state; 40 | 11/11 of 40 | rendered | PENDING | PENDING | — |
-| antd | `antd.progress` | progress / spinner | 1 × 4; 4 | 4/4 of 4 | rendered | PENDING | PENDING | — |
-| antd | `antd.radio` | checkbox / radio | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | — |
-| antd | `antd.switch` | toggle / switch | 2 × 4 + 8 state; 12 | 7/7 of 12 | rendered | PENDING | PENDING | — |
-| antd | `antd.tag` | badge / tag / chip | 2 × 14; 14 | 8/8 of 14 | rendered | PENDING | PENDING | — |
-| antd | `antd.tooltip` | tooltip / popover | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| astryx | `astryx.badge` | badge / tag / chip | 1 × 14; 14 | 14/14 of 14 | rendered | PENDING | PENDING | — |
-| astryx | `astryx.banner` | banner / alert / toast | 2 × 8; 8 | 5/5 of 8 | rendered | PENDING | PENDING | — |
-| astryx | `astryx.button` | button | 2 × 12; 12 | 6/6 of 12 | rendered | PENDING | PENDING | — |
-| astryx | `astryx.card` | card | 1 × 13; 13 | 13/13 of 13 | rendered | PENDING | PENDING | — |
-| astryx | `astryx.checkbox-input` | checkbox / radio | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | — |
-| astryx | `astryx.dropdown-menu-item` | menu / dropdown | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| astryx | `astryx.dropdown-menu` | menu / dropdown | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| astryx | `astryx.progress-bar` | progress / spinner | 1 × 5; 5 | 5/5 of 5 | rendered | PENDING | PENDING | — |
-| astryx | `astryx.slider` | slider | 2 × 6; 6 | 4/4 of 6 | rendered | PENDING | PENDING | — |
-| astryx | `astryx.switch` | toggle / switch | 1 × 4; 4 | 3/3 of 4 | rendered | PENDING | PENDING | — |
-| astryx | `astryx.text-input` | input / field | 2 × 9; 9 | 5/5 of 9 | rendered | PENDING | PENDING | — |
-| astryx | `astryx.toast` | banner / alert / toast | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| astryx | `astryx.token` | unmapped | 2 × 33; 33 | 13/13 of 33 | rendered | PENDING | PENDING | — |
-| carbon | `carbon.accordion` | accordion | 2 × 6 + 2 state; 8 | 4/5 of 8 | rendered, 1 refused | PENDING | PENDING | — |
-| carbon | `carbon.button` | button | 2 × 48 + 32 state; 80 | 16/17 of 80 | rendered, 1 refused | PENDING | PENDING | — |
-| carbon | `carbon.checkbox` | checkbox / radio | 1 × 3; 3 | 3/3 of 3 | rendered | PENDING | PENDING | — |
-| carbon | `carbon.iconbutton` | button | 2 × 16; 16 | 7/7 of 16 | rendered | PENDING | PENDING | — |
-| carbon | `carbon.inlinenotification` | banner / alert / toast | 2 × 12; 12 | 7/7 of 12 | rendered | PENDING | PENDING | — |
-| carbon | `carbon.modal` | modal / dialog | 1 × 4; 4 | 4/4 of 4 | rendered | PENDING | PENDING | — |
-| carbon | `carbon.tabs` | tabs | 0 × 1 + 2 state; 3 | 3/3 of 3 | rendered | PENDING | PENDING | — |
-| carbon | `carbon.tag` | badge / tag / chip | 2 × 36; 36 | 14/14 of 36 | rendered | PENDING | PENDING | — |
-| carbon | `carbon.textinput` | input / field | 1 × 4 + 4 state; 8 | 4/5 of 8 | rendered, 1 refused | PENDING | PENDING | — |
-| carbon | `carbon.toggle` | toggle / switch | 1 × 2 + 2 state; 4 | 2/3 of 4 | rendered, 1 refused | PENDING | PENDING | — |
-| fluent | `fluent.avatar` | avatar | 3 × 18; 18 | 6/6 of 18 | rendered | PENDING | PENDING | — |
-| fluent | `fluent.badge` | badge / tag / chip | 3 × 192; 192 | 16/16 of 192 | rendered | PENDING | PENDING | — |
-| fluent | `fluent.button` | button | 3 × 45 + 20 state; 65 | 12/13 of 65 | rendered, 1 refused | PENDING | PENDING | — |
-| fluent | `fluent.card` | card | 3 × 24 + 16 state; 40 | 10/11 of 40 | rendered, 1 refused | PENDING | PENDING | — |
-| fluent | `fluent.checkbox` | checkbox / radio | 3 × 12 + 12 state; 24 | 8/9 of 24 | rendered, 1 refused | PENDING | PENDING | — |
-| fluent | `fluent.dialog` | modal / dialog | 1 × 3; 3 | 3/3 of 3 | rendered | PENDING | PENDING | — |
-| fluent | `fluent.input` | input / field | 2 × 18 + 24 state; 42 | 11/12 of 42 | rendered, 1 refused | PENDING | PENDING | — |
-| fluent | `fluent.spinner` | progress / spinner | 3 × 64; 64 | 12/12 of 64 | rendered | PENDING | PENDING | — |
-| fluent | `fluent.switch` | toggle / switch | 2 × 6 + 4 state; 10 | 5/6 of 10 | rendered, 1 refused | PENDING | PENDING | — |
-| fluent | `fluent.tab-list` | tabs | 3 × 24; 24 | 7/7 of 24 | rendered | PENDING | PENDING | — |
-| fluent | `fluent.tooltip` | tooltip / popover | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | — |
-| mui | `mui.accordion` | accordion | 2 × 4; 4 | 3/3 of 4 | rendered | PENDING | PENDING | — |
-| mui | `mui.alert` | banner / alert / toast | 2 × 12; 12 | 6/6 of 12 | rendered | PENDING | PENDING | — |
-| mui | `mui.autocomplete` | select / combobox | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | — |
-| mui | `mui.avatar` | avatar | 1 × 3; 3 | 3/3 of 3 | rendered | PENDING | PENDING | — |
-| mui | `mui.badge` | badge / tag / chip | 2 × 14; 14 | 8/8 of 14 | rendered | PENDING | PENDING | — |
-| mui | `mui.breadcrumbs` | breadcrumb | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| mui | `mui.button` | button | 3 × 63 + 12 state; 75 | 15/15 of 75 | rendered | PENDING | PENDING | — |
-| mui | `mui.card` | card | 1 × 4; 4 | 4/4 of 4 | rendered | PENDING | PENDING | — |
-| mui | `mui.checkbox` | checkbox / radio | 1 × 3; 3 | 3/3 of 3 | rendered | PENDING | PENDING | — |
-| mui | `mui.chip` | badge / tag / chip | 3 × 28; 28 | 9/9 of 28 | rendered | PENDING | PENDING | — |
-| mui | `mui.circular-progress` | progress / spinner | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | — |
-| mui | `mui.dialog` | modal / dialog | 1 × 5; 5 | 5/5 of 5 | rendered | PENDING | PENDING | — |
-| mui | `mui.divider` | unmapped | 1 × 3; 3 | 3/3 of 3 | rendered | PENDING | PENDING | — |
-| mui | `mui.drawer` | modal / dialog | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | — |
-| mui | `mui.fab` | button | 2 × 9; 9 | 5/5 of 9 | rendered | PENDING | PENDING | — |
-| mui | `mui.icon-button` | button | 2 × 9; 9 | 5/5 of 9 | rendered | PENDING | PENDING | — |
-| mui | `mui.input-adornment` | input / field | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | — |
-| mui | `mui.linear-progress` | progress / spinner | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | — |
-| mui | `mui.link` | unmapped | 2 × 21 + 21 state; 42 | 12/12 of 42 | rendered | PENDING | PENDING | — |
-| mui | `mui.menu` | menu / dropdown | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| mui | `mui.paper` | unmapped | 2 × 8; 8 | 5/5 of 8 | rendered | PENDING | PENDING | — |
-| mui | `mui.radio` | checkbox / radio | 2 × 14; 14 | 8/8 of 14 | rendered | PENDING | PENDING | — |
-| mui | `mui.select` | select / combobox | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | — |
-| mui | `mui.slider` | slider | 2 × 12; 12 | 7/7 of 12 | rendered | PENDING | PENDING | — |
-| mui | `mui.snackbar` | banner / alert / toast | 1 × 3; 3 | 3/3 of 3 | rendered | PENDING | PENDING | — |
-| mui | `mui.switch` | toggle / switch | 3 × 28; 28 | 9/9 of 28 | rendered | PENDING | PENDING | — |
-| mui | `mui.table-pagination` | pagination | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| mui | `mui.table` | table / data-grid | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | — |
-| mui | `mui.tabs` | tabs | 2 × 6; 6 | 4/4 of 6 | rendered | PENDING | PENDING | — |
-| mui | `mui.text-field` | input / field | 2 × 6; 6 | 4/4 of 6 | rendered | PENDING | PENDING | — |
-| mui | `mui.tooltip` | tooltip / popover | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| polaris | `polaris.avatar` | avatar | 1 × 5; 5 | 5/5 of 5 | rendered | PENDING | PENDING | — |
-| polaris | `polaris.badge` | badge / tag / chip | 2 × 56; 56 | 17/17 of 56 | rendered | PENDING | PENDING | — |
-| polaris | `polaris.banner` | banner / alert / toast | 1 × 4 + 4 state; 8 | 5/5 of 8 | rendered | PENDING | PENDING | — |
-| polaris | `polaris.button` | button | 4 × 300 + 20 state; 320 | 17/18 of 320 | rendered, 1 refused | PENDING | PENDING | — |
-| polaris | `polaris.checkbox` | checkbox / radio | 1 × 3; 3 | 3/3 of 3 | rendered | PENDING | PENDING | — |
-| polaris | `polaris.progress-bar` | progress / spinner | 2 × 12; 12 | 6/6 of 12 | rendered | PENDING | PENDING | — |
-| polaris | `polaris.radio-button` | checkbox / radio | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | — |
-| polaris | `polaris.spinner` | progress / spinner | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | — |
-| polaris | `polaris.tag` | badge / tag / chip | 1 × 2 + 6 state; 8 | 5/5 of 8 | rendered | PENDING | PENDING | — |
-| polaris | `polaris.text-field` | input / field | 5 × 1344 + 56 state; 8 | 24/24 of 1400, cap 24 dropped 5, axis coverage INCOMPLETE | rendered | PENDING | PENDING | — |
-| polaris | `polaris.text` | unmapped | 5 × 23232; 55 | 24/24 of 23232, cap 24 dropped 14, axis coverage INCOMPLETE | rendered | PENDING | PENDING | — |
-| polaris | `polaris.thumbnail` | unmapped | 1 × 4; 4 | 4/4 of 4 | rendered | PENDING | PENDING | — |
-| shadcn | `shadcn.alert` | banner / alert / toast | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | — |
-| shadcn | `shadcn.avatar` | avatar | 1 × 3; 3 | 3/3 of 3 | rendered | PENDING | PENDING | — |
-| shadcn | `shadcn.badge` | badge / tag / chip | 1 × 6 + 12 state; 18 | 8/8 of 18 | rendered | PENDING | PENDING | — |
-| shadcn | `shadcn.button` | button | 2 × 48 + 24 state; 72 | 16/17 of 72 | rendered, 1 refused | PENDING | PENDING | — |
-| shadcn | `shadcn.card` | card | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | — |
-| shadcn | `shadcn.checkbox` | checkbox / radio | 1 × 3 + 6 state; 9 | 4/5 of 9 | rendered, 1 refused | PENDING | PENDING | — |
-| shadcn | `shadcn.input` | input / field | 0 × 1 + 3 state; 4 | 3/4 of 4 | rendered, 1 refused | PENDING | PENDING | — |
-| shadcn | `shadcn.select` | select / combobox | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| shadcn | `shadcn.switch` | toggle / switch | 2 × 4 + 4 state; 8 | 4/5 of 8 | rendered, 1 refused | PENDING | PENDING | — |
-| shadcn | `shadcn.tabs` | tabs | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| shadcn | `shadcn.tooltip` | tooltip / popover | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| tailwind | `flowbite.alert` | banner / alert / toast | 1 × 4; 4 | 4/4 of 4 | rendered | PENDING | PENDING | — |
-| tailwind | `flowbite.badge` | badge / tag / chip | 2 × 12 + 12 state; 24 | 9/9 of 24 | rendered | PENDING | PENDING | — |
-| tailwind | `flowbite.button` | button | 2 × 25 + 20 state; 45 | 12/13 of 45 | rendered, 1 refused | PENDING | PENDING | — |
-| tailwind | `flowbite.card` | card | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| tailwind | `flowbite.helpertext` | unmapped | 1 × 5; 5 | 5/5 of 5 | rendered | PENDING | PENDING | — |
-| tailwind | `flowbite.kbd` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | — |
-| tailwind | `flowbite.label` | unmapped | 1 × 5; 5 | 5/5 of 5 | rendered | PENDING | PENDING | — |
-| tailwind | `flowbite.toggleswitch` | toggle / switch | 2 × 6; 6 | 4/4 of 6 | rendered | PENDING | PENDING | — |
+| library | id | archetype | axes × variants (compiled; script rows) | variants rendered | code-render | canvas | verdict | usable | walls |
+|---|---|---|---|---|---|---|---|---|---|
+| first-party | `ds.accordion-item` | accordion | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.avatar-group` | avatar | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.avatar` | avatar | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.badge` | badge / tag / chip | 1 × 5; 5 | 5/5 of 5 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.banner` | banner / alert / toast | 2 × 8; 8 | 5/5 of 8 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.bento-grid` | unmapped | 0 × 1; 6 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.blockquote` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.breadcrumb-item` | breadcrumb | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.breadcrumbs` | breadcrumb | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.button` | button | 2 × 12 + 12 state; 24 | 9/9 of 24 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.card` | card | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.chat-message-metadata` | unmapped | 1 × 5; 5 | 5/5 of 5 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.chat-message` | unmapped | 1 × 3; 3 | 3/3 of 3 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.chat-system-message` | unmapped | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.checkbox` | checkbox / radio | 2 × 6; 6 | 4/4 of 6 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.citation` | unmapped | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.code` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.divider` | unmapped | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.empty-state` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.field` | input / field | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.grid-gallery` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.heading` | unmapped | 2 × 18; 18 | 8/8 of 18 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.icon-button` | button | 2 × 12; 12 | 6/6 of 12 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.kbd` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.list-item` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.list` | unmapped | 1 × 3; 3 | 3/3 of 3 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.metadata-list-item` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.metadata-list` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.page-shell` | unmapped | 0 × 1; 5 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.pagination` | pagination | 1 × 3; 3 | 3/3 of 3 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.progress-bar` | progress / spinner | 1 × 5; 5 | 5/5 of 5 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.section` | unmapped | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.side-nav-item` | nav (top / side) | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.sidebar-layout` | unmapped | 0 × 1; 3 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.skeleton` | progress / spinner | 1 × 3; 3 | 3/3 of 3 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.slider` | slider | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.spinner` | progress / spinner | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.status-dot` | unmapped | 1 × 5; 5 | 5/5 of 5 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.switch` | toggle / switch | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.tab-list` | tabs | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.tab` | tabs | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.table-cell` | table / data-grid | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.table-header-cell` | table / data-grid | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.table-row` | table / data-grid | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.table` | table / data-grid | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.text-area` | input / field | 1 × 3; 3 | 3/3 of 3 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.text-field` | input / field | 1 × 3; 3 | 3/3 of 3 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.toast` | banner / alert / toast | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.token` | unmapped | 2 × 33; 33 | 13/13 of 33 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.toolbar` | unmapped | 1 × 3; 3 | 3/3 of 3 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.top-nav-item` | nav (top / side) | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.top-nav` | nav (top / side) | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.two-column` | unmapped | 0 × 1; 3 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| first-party | `ds.typeahead-item` | select / combobox | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| altitude | `altitude.avatar` | avatar | 1 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | R✘ V· B✓ 25/25 (100%) L✓ | — |
+| altitude | `altitude.badge` | badge / tag / chip | 2 × 8; 8 | 5/5 of 8 | rendered | PENDING | PENDING | R✓ V✓ B✓ 11/11 (100%) L✓ | — |
+| altitude | `altitude.button` | button | 1 × 4 + 8 state; 12 | 6/6 of 12 | rendered | PENDING | PENDING | R✓ V✓ B✓ 13/13 (100%) L✓ | — |
+| altitude | `altitude.chip` | badge / tag / chip | 2 × 10; 10 | 6/6 of 10 | rendered | PENDING | PENDING | R✓ V✘ B✓ 13/13 (100%) L✓ | — |
+| altitude | `altitude.divider` | unmapped | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | R· V✓ B✓ 3/3 (100%) L✓ | — |
+| altitude | `altitude.heading` | unmapped | 2 × 12; 12 | 7/7 of 12 | rendered | PENDING | PENDING | R✘ V✓ B✓ 2/2 (100%) L✓ | — |
+| altitude | `altitude.iconclose` | unmapped | 1 × 7; 7 | 7/7 of 7 | rendered | PENDING | PENDING | R✓ V✓ B✘ 3/5 (60%) L✓ | — |
+| altitude | `altitude.link` | unmapped | 1 × 3 + 6 state; 9 | 5/5 of 9 | rendered | PENDING | PENDING | R✓ V✘ B✓ 2/2 (100%) L✓ | — |
+| antd | `antd.alert` | banner / alert / toast | 2 × 8; 8 | 5/5 of 8 | rendered | PENDING | PENDING | PENDING | — |
+| antd | `antd.avatar` | avatar | 2 × 6; 6 | 4/4 of 6 | rendered | PENDING | PENDING | PENDING | — |
+| antd | `antd.badge` | badge / tag / chip | 2 × 6; 6 | 4/4 of 6 | rendered | PENDING | PENDING | PENDING | — |
+| antd | `antd.button` | button | 3 × 30; 30 | 8/8 of 30 | rendered | PENDING | PENDING | PENDING | — |
+| antd | `antd.card` | card | 2 × 4; 4 | 3/3 of 4 | rendered | PENDING | PENDING | PENDING | — |
+| antd | `antd.checkbox` | checkbox / radio | 1 × 3; 3 | 3/3 of 3 | rendered | PENDING | PENDING | PENDING | — |
+| antd | `antd.input` | input / field | 3 × 24 + 16 state; 40 | 11/11 of 40 | rendered | PENDING | PENDING | PENDING | — |
+| antd | `antd.progress` | progress / spinner | 1 × 4; 4 | 4/4 of 4 | rendered | PENDING | PENDING | PENDING | — |
+| antd | `antd.radio` | checkbox / radio | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | PENDING | — |
+| antd | `antd.switch` | toggle / switch | 2 × 4 + 8 state; 12 | 7/7 of 12 | rendered | PENDING | PENDING | PENDING | — |
+| antd | `antd.tag` | badge / tag / chip | 2 × 14; 14 | 8/8 of 14 | rendered | PENDING | PENDING | PENDING | — |
+| antd | `antd.tooltip` | tooltip / popover | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| astryx | `astryx.badge` | badge / tag / chip | 1 × 14; 14 | 14/14 of 14 | rendered | PENDING | PENDING | PENDING | — |
+| astryx | `astryx.banner` | banner / alert / toast | 2 × 8; 8 | 5/5 of 8 | rendered | PENDING | PENDING | PENDING | — |
+| astryx | `astryx.button` | button | 2 × 12; 12 | 6/6 of 12 | rendered | PENDING | PENDING | PENDING | — |
+| astryx | `astryx.card` | card | 1 × 13; 13 | 13/13 of 13 | rendered | PENDING | PENDING | PENDING | — |
+| astryx | `astryx.checkbox-input` | checkbox / radio | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | PENDING | — |
+| astryx | `astryx.dropdown-menu-item` | menu / dropdown | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| astryx | `astryx.dropdown-menu` | menu / dropdown | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| astryx | `astryx.progress-bar` | progress / spinner | 1 × 5; 5 | 5/5 of 5 | rendered | PENDING | PENDING | PENDING | — |
+| astryx | `astryx.slider` | slider | 2 × 6; 6 | 4/4 of 6 | rendered | PENDING | PENDING | PENDING | — |
+| astryx | `astryx.switch` | toggle / switch | 1 × 4; 4 | 3/3 of 4 | rendered | PENDING | PENDING | PENDING | — |
+| astryx | `astryx.text-input` | input / field | 2 × 9; 9 | 5/5 of 9 | rendered | PENDING | PENDING | PENDING | — |
+| astryx | `astryx.toast` | banner / alert / toast | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| astryx | `astryx.token` | unmapped | 2 × 33; 33 | 13/13 of 33 | rendered | PENDING | PENDING | PENDING | — |
+| carbon | `carbon.accordion` | accordion | 2 × 6 + 2 state; 8 | 4/5 of 8 | rendered, 1 refused | PENDING | PENDING | PENDING | — |
+| carbon | `carbon.button` | button | 2 × 48 + 32 state; 80 | 16/17 of 80 | rendered, 1 refused | PENDING | PENDING | PENDING | — |
+| carbon | `carbon.checkbox` | checkbox / radio | 1 × 3; 3 | 3/3 of 3 | rendered | PENDING | PENDING | PENDING | — |
+| carbon | `carbon.iconbutton` | button | 2 × 16; 16 | 7/7 of 16 | rendered | PENDING | PENDING | PENDING | — |
+| carbon | `carbon.inlinenotification` | banner / alert / toast | 2 × 12; 12 | 7/7 of 12 | rendered | PENDING | PENDING | PENDING | — |
+| carbon | `carbon.modal` | modal / dialog | 1 × 4; 4 | 4/4 of 4 | rendered | PENDING | PENDING | PENDING | — |
+| carbon | `carbon.tabs` | tabs | 0 × 1 + 2 state; 3 | 3/3 of 3 | rendered | PENDING | PENDING | PENDING | — |
+| carbon | `carbon.tag` | badge / tag / chip | 2 × 36; 36 | 14/14 of 36 | rendered | PENDING | PENDING | PENDING | — |
+| carbon | `carbon.textinput` | input / field | 1 × 4 + 4 state; 8 | 4/5 of 8 | rendered, 1 refused | PENDING | PENDING | PENDING | — |
+| carbon | `carbon.toggle` | toggle / switch | 1 × 2 + 2 state; 4 | 2/3 of 4 | rendered, 1 refused | PENDING | PENDING | PENDING | — |
+| fluent | `fluent.avatar` | avatar | 3 × 18; 18 | 6/6 of 18 | rendered | PENDING | PENDING | PENDING | — |
+| fluent | `fluent.badge` | badge / tag / chip | 3 × 192; 192 | 16/16 of 192 | rendered | PENDING | PENDING | PENDING | — |
+| fluent | `fluent.button` | button | 3 × 45 + 20 state; 65 | 12/13 of 65 | rendered, 1 refused | PENDING | PENDING | PENDING | — |
+| fluent | `fluent.card` | card | 3 × 24 + 16 state; 40 | 10/11 of 40 | rendered, 1 refused | PENDING | PENDING | PENDING | — |
+| fluent | `fluent.checkbox` | checkbox / radio | 3 × 12 + 12 state; 24 | 8/9 of 24 | rendered, 1 refused | PENDING | PENDING | PENDING | — |
+| fluent | `fluent.dialog` | modal / dialog | 1 × 3; 3 | 3/3 of 3 | rendered | PENDING | PENDING | PENDING | — |
+| fluent | `fluent.input` | input / field | 2 × 18 + 24 state; 42 | 11/12 of 42 | rendered, 1 refused | PENDING | PENDING | PENDING | — |
+| fluent | `fluent.spinner` | progress / spinner | 3 × 64; 64 | 12/12 of 64 | rendered | PENDING | PENDING | PENDING | — |
+| fluent | `fluent.switch` | toggle / switch | 2 × 6 + 4 state; 10 | 5/6 of 10 | rendered, 1 refused | PENDING | PENDING | PENDING | — |
+| fluent | `fluent.tab-list` | tabs | 3 × 24; 24 | 7/7 of 24 | rendered | PENDING | PENDING | PENDING | — |
+| fluent | `fluent.tooltip` | tooltip / popover | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | PENDING | — |
+| mui | `mui.accordion` | accordion | 2 × 4; 4 | 3/3 of 4 | rendered | PENDING | PENDING | PENDING | — |
+| mui | `mui.alert` | banner / alert / toast | 2 × 12; 12 | 6/6 of 12 | rendered | PENDING | PENDING | PENDING | — |
+| mui | `mui.autocomplete` | select / combobox | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | PENDING | — |
+| mui | `mui.avatar` | avatar | 1 × 3; 3 | 3/3 of 3 | rendered | PENDING | PENDING | PENDING | — |
+| mui | `mui.badge` | badge / tag / chip | 2 × 14; 14 | 8/8 of 14 | rendered | PENDING | PENDING | PENDING | — |
+| mui | `mui.breadcrumbs` | breadcrumb | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| mui | `mui.button` | button | 3 × 63 + 12 state; 75 | 15/15 of 75 | rendered | PENDING | PENDING | PENDING | — |
+| mui | `mui.card` | card | 1 × 4; 4 | 4/4 of 4 | rendered | PENDING | PENDING | PENDING | — |
+| mui | `mui.checkbox` | checkbox / radio | 1 × 3; 3 | 3/3 of 3 | rendered | PENDING | PENDING | PENDING | — |
+| mui | `mui.chip` | badge / tag / chip | 3 × 28; 28 | 9/9 of 28 | rendered | PENDING | PENDING | PENDING | — |
+| mui | `mui.circular-progress` | progress / spinner | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | PENDING | — |
+| mui | `mui.dialog` | modal / dialog | 1 × 5; 5 | 5/5 of 5 | rendered | PENDING | PENDING | PENDING | — |
+| mui | `mui.divider` | unmapped | 1 × 3; 3 | 3/3 of 3 | rendered | PENDING | PENDING | PENDING | — |
+| mui | `mui.drawer` | modal / dialog | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | PENDING | — |
+| mui | `mui.fab` | button | 2 × 9; 9 | 5/5 of 9 | rendered | PENDING | PENDING | PENDING | — |
+| mui | `mui.icon-button` | button | 2 × 9; 9 | 5/5 of 9 | rendered | PENDING | PENDING | PENDING | — |
+| mui | `mui.input-adornment` | input / field | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | PENDING | — |
+| mui | `mui.linear-progress` | progress / spinner | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | PENDING | — |
+| mui | `mui.link` | unmapped | 2 × 21 + 21 state; 42 | 12/12 of 42 | rendered | PENDING | PENDING | PENDING | — |
+| mui | `mui.menu` | menu / dropdown | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| mui | `mui.paper` | unmapped | 2 × 8; 8 | 5/5 of 8 | rendered | PENDING | PENDING | PENDING | — |
+| mui | `mui.radio` | checkbox / radio | 2 × 14; 14 | 8/8 of 14 | rendered | PENDING | PENDING | PENDING | — |
+| mui | `mui.select` | select / combobox | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | PENDING | — |
+| mui | `mui.slider` | slider | 2 × 12; 12 | 7/7 of 12 | rendered | PENDING | PENDING | PENDING | — |
+| mui | `mui.snackbar` | banner / alert / toast | 1 × 3; 3 | 3/3 of 3 | rendered | PENDING | PENDING | PENDING | — |
+| mui | `mui.switch` | toggle / switch | 3 × 28; 28 | 9/9 of 28 | rendered | PENDING | PENDING | PENDING | — |
+| mui | `mui.table-pagination` | pagination | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| mui | `mui.table` | table / data-grid | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | PENDING | — |
+| mui | `mui.tabs` | tabs | 2 × 6; 6 | 4/4 of 6 | rendered | PENDING | PENDING | PENDING | — |
+| mui | `mui.text-field` | input / field | 2 × 6; 6 | 4/4 of 6 | rendered | PENDING | PENDING | PENDING | — |
+| mui | `mui.tooltip` | tooltip / popover | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| polaris | `polaris.avatar` | avatar | 1 × 5; 5 | 5/5 of 5 | rendered | PENDING | PENDING | PENDING | — |
+| polaris | `polaris.badge` | badge / tag / chip | 2 × 56; 56 | 17/17 of 56 | rendered | PENDING | PENDING | PENDING | — |
+| polaris | `polaris.banner` | banner / alert / toast | 1 × 4 + 4 state; 8 | 5/5 of 8 | rendered | PENDING | PENDING | PENDING | — |
+| polaris | `polaris.button` | button | 4 × 300 + 20 state; 320 | 17/18 of 320 | rendered, 1 refused | PENDING | PENDING | PENDING | — |
+| polaris | `polaris.checkbox` | checkbox / radio | 1 × 3; 3 | 3/3 of 3 | rendered | PENDING | PENDING | PENDING | — |
+| polaris | `polaris.progress-bar` | progress / spinner | 2 × 12; 12 | 6/6 of 12 | rendered | PENDING | PENDING | PENDING | — |
+| polaris | `polaris.radio-button` | checkbox / radio | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | PENDING | — |
+| polaris | `polaris.spinner` | progress / spinner | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | PENDING | — |
+| polaris | `polaris.tag` | badge / tag / chip | 1 × 2 + 6 state; 8 | 5/5 of 8 | rendered | PENDING | PENDING | PENDING | — |
+| polaris | `polaris.text-field` | input / field | 5 × 1344 + 56 state; 8 | 24/24 of 1400, cap 24 dropped 5, axis coverage INCOMPLETE | rendered | PENDING | PENDING | PENDING | — |
+| polaris | `polaris.text` | unmapped | 5 × 23232; 55 | 24/24 of 23232, cap 24 dropped 14, axis coverage INCOMPLETE | rendered | PENDING | PENDING | PENDING | — |
+| polaris | `polaris.thumbnail` | unmapped | 1 × 4; 4 | 4/4 of 4 | rendered | PENDING | PENDING | PENDING | — |
+| shadcn | `shadcn.alert` | banner / alert / toast | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | PENDING | — |
+| shadcn | `shadcn.avatar` | avatar | 1 × 3; 3 | 3/3 of 3 | rendered | PENDING | PENDING | PENDING | — |
+| shadcn | `shadcn.badge` | badge / tag / chip | 1 × 6 + 12 state; 18 | 8/8 of 18 | rendered | PENDING | PENDING | PENDING | — |
+| shadcn | `shadcn.button` | button | 2 × 48 + 24 state; 72 | 16/17 of 72 | rendered, 1 refused | PENDING | PENDING | PENDING | — |
+| shadcn | `shadcn.card` | card | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | PENDING | — |
+| shadcn | `shadcn.checkbox` | checkbox / radio | 1 × 3 + 6 state; 9 | 4/5 of 9 | rendered, 1 refused | PENDING | PENDING | PENDING | — |
+| shadcn | `shadcn.input` | input / field | 0 × 1 + 3 state; 4 | 3/4 of 4 | rendered, 1 refused | PENDING | PENDING | PENDING | — |
+| shadcn | `shadcn.select` | select / combobox | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| shadcn | `shadcn.switch` | toggle / switch | 2 × 4 + 4 state; 8 | 4/5 of 8 | rendered, 1 refused | PENDING | PENDING | PENDING | — |
+| shadcn | `shadcn.tabs` | tabs | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| shadcn | `shadcn.tooltip` | tooltip / popover | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| tailwind | `flowbite.alert` | banner / alert / toast | 1 × 4; 4 | 4/4 of 4 | rendered | PENDING | PENDING | PENDING | — |
+| tailwind | `flowbite.badge` | badge / tag / chip | 2 × 12 + 12 state; 24 | 9/9 of 24 | rendered | PENDING | PENDING | PENDING | — |
+| tailwind | `flowbite.button` | button | 2 × 25 + 20 state; 45 | 12/13 of 45 | rendered, 1 refused | PENDING | PENDING | PENDING | — |
+| tailwind | `flowbite.card` | card | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| tailwind | `flowbite.helpertext` | unmapped | 1 × 5; 5 | 5/5 of 5 | rendered | PENDING | PENDING | PENDING | — |
+| tailwind | `flowbite.kbd` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | PENDING | — |
+| tailwind | `flowbite.label` | unmapped | 1 × 5; 5 | 5/5 of 5 | rendered | PENDING | PENDING | PENDING | — |
+| tailwind | `flowbite.toggleswitch` | toggle / switch | 2 × 6; 6 | 4/4 of 6 | rendered | PENDING | PENDING | PENDING | — |

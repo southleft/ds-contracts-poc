@@ -1,0 +1,236 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / altitude",
+  "setNodeId": "39:6673",
+  "setName": "Avatar (altitude.avatar)",
+  "setType": "COMPONENT",
+  "variantNodeId": "39:6673",
+  "variantNodeName": "Avatar (altitude.avatar)",
+  "axes": null,
+  "axesError": null,
+  "variantChildCount": 1,
+  "variantChildNames": [
+    "Avatar (altitude.avatar)"
+  ],
+  "reflow": {
+    "target": "39:6673",
+    "targetName": "Avatar (altitude.avatar)",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "CENTER",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 24,
+      "h": 24,
+      "children": [
+        {
+          "id": "56:194",
+          "name": "label",
+          "type": "TEXT",
+          "x": 3.5,
+          "y": -4,
+          "w": 17,
+          "h": 32,
+          "ax": 3.5,
+          "ay": -4,
+          "visible": true
+        },
+        {
+          "id": "56:195",
+          "name": "avatar__badge",
+          "type": "FRAME",
+          "x": 20.5,
+          "y": 12,
+          "w": 0,
+          "h": 0,
+          "ax": 20.5,
+          "ay": 12,
+          "visible": false
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 64,
+      "h": 64,
+      "children": [
+        {
+          "id": "56:194",
+          "name": "label",
+          "type": "TEXT",
+          "x": 23.5,
+          "y": 16,
+          "w": 17,
+          "h": 32,
+          "ax": 23.5,
+          "ay": 16,
+          "visible": true
+        },
+        {
+          "id": "56:195",
+          "name": "avatar__badge",
+          "type": "FRAME",
+          "x": 20.5,
+          "y": 12,
+          "w": 0,
+          "h": 0,
+          "ax": 20.5,
+          "ay": 12,
+          "visible": false
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "label",
+        "dx": 20,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [
+      "avatar__badge"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 24,
+      "h": 24
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:216",
+    "baseline": {
+      "geometry": "8f9bcf9784a234a7",
+      "fills": "d90675e1de51cdf4",
+      "text": "edbff604b02b7b86"
+    },
+    "axes": [],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 25,
+    "bound": 17,
+    "inferred": 8,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 2,
+        "inferred": 1,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 6,
+        "inferred": 4,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 8,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 0,
+        "inferred": 2,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Avatar (altitude.avatar)",
+      "name": "Avatar (altitude.avatar)",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 24,
+      "h": 24,
+      "visible": true,
+      "parentLayoutMode": null,
+      "parentType": "SECTION"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 17,
+      "h": 32,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/avatar__badge[1]",
+      "name": "avatar__badge",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 0,
+      "h": 0,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/avatar__badge[1]/badge[0]",
+      "name": "badge",
+      "type": "FRAME",
+      "layoutPositioning": "ABSOLUTE",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 8,
+      "h": 8,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/avatar__badge[1]/badge[0]/badge-after[0]",
+      "name": "badge-after",
+      "type": "ELLIPSE",
+      "layoutPositioning": "ABSOLUTE",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 12,
+      "h": 12,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 151,
+    "sig": "a5bbd7223f0db150"
+  },
+  "canvasAfter": {
+    "nodes": 151,
+    "sig": "a5bbd7223f0db150"
+  },
+  "canvasRestored": true
+}

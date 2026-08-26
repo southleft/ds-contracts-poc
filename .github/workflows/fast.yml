@@ -616,6 +616,21 @@ jobs:
       - name: census self-test (the gate goes red on a deleted render, a contract outside the manifest, and a pending canvas half)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run census:check -- --self-test
+      # THE THIRD COLUMN. The census measures recognisability and round-trip;
+      # both can be green on a set a designer cannot work with, so `usable` is
+      # a third, independent claim: reflow, variant switching, token binding,
+      # no faked layout. Five failures reproduce on the eight altitude sets
+      # measured today; they are FROZEN BY NAME in
+      # parity/receipts/v1/usable-baseline.json so the gate can run here, where
+      # a NEW failure — or a pinned one that changes shape — goes red, and a
+      # pinned one that stops reproducing refuses until it is re-recorded. An
+      # excluded gate rots; a baselined gate burns down.
+      - name: canvas:usable:check (reflow, variant switching, token binding, no faked layout — held against the committed baseline)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run canvas:usable:check
+      - name: canvas:usable self-test (frozen children, a dead axis value, nothing bound, an in-flow child positioned ABSOLUTE, and a healed pin all go red by name)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run canvas:usable:self-test
       # The reverse direction on the two designer kits: committed REST
       # fixtures → propose → generate React+WC, twice, in memory. Holds
       # SILENT = 0 (every canvas fact carried or named), byte-idempotence,
@@ -659,6 +674,26 @@ jobs:
       - name: door-register self-test (the gate goes red on an unregistered door, an unmarked entry, and a claimed receipt with no path)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run door-register:self-test
+
+      # THE LOWERING REGISTER — spec/LOWERING.md + spec/lowering.json. A DOOR
+      # decides whether a fact is admitted; a LOWERING decides what SHAPE a
+      # carried fact takes on the other surface. `core/emit-figma-script.ts` is
+      # 8,230 lines, carries ZERO `@door` markers, and the door register has no
+      # `emit` stage at all — so every FORWARD structure decision (the margin
+      # box, auto-layout inference, the slot birth box, the state plane, set
+      # placement) was unregistered and ungated, which is why a forward failure
+      # could never be cited to a line. This gate adds that stage. It refuses a
+      # `@lower` marker with no entry, an entry whose cited line moved, a rule
+      # with no canonical form, and an implemented rule whose inverse does not
+      # return that canonical form. It also VERIFIES `markerOutsideRule` rather
+      # than trusting it: spec/door-register.json stamps that claim on all 27
+      # `propose.*` layout doors, where it is false.
+      - name: lowering:check (every layout lowering named, contexted, given a canonical form, and held to its inverse)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run lowering:check
+      - name: lowering self-test (planted reds - an unregistered marker, a moved rule line, a missing canonical, an inverse that does not return it, a false markerOutsideRule)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run lowering:check -- --self-test
 
       # THE GRAMMAR COVERAGE SPEC — spec/GRAMMAR-COVERAGE.md + grammar-coverage.json.
       # The CAPTURE CONFIG GRAMMAR is the language a user mounts their library
