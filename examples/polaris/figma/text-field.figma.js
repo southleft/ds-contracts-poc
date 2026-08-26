@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "polaris.text-field",
     "version": "0.4.0",
     "anchorKey": null,
-    "description": "TextField — generated from contract polaris.text-field v0.4.0 † (193 code-only facts — see plugin report)",
+    "description": "TextField — generated from contract polaris.text-field v0.4.0 † (194 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -151,14 +151,11 @@ const COMPONENTS = [
             "counter": "CENTER",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 211,
-            "varName": "imported/text-field/connected/width/off/off"
-          },
           "fixedHeight": {
             "px": 60,
             "varName": "imported/text-field/root/height/medium"
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -433,14 +430,6 @@ const COMPONENTS = [
                           "fixedHeight": {
                             "px": 36,
                             "varName": "imported/text-field/backdrop/height/medium"
-                          },
-                          "lits": {
-                            "strokeSides": {
-                              "top": 1,
-                              "right": 1,
-                              "bottom": 1,
-                              "left": 1
-                            }
                           },
                           "children": []
                         }
@@ -471,14 +460,11 @@ const COMPONENTS = [
             "counter": "CENTER",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 211,
-            "varName": "imported/text-field/connected/width/off/off"
-          },
           "fixedHeight": {
             "px": 52,
             "varName": "imported/text-field/root/height/slim"
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -756,14 +742,6 @@ const COMPONENTS = [
                             "px": 28,
                             "varName": "imported/text-field/backdrop/height/slim"
                           },
-                          "lits": {
-                            "strokeSides": {
-                              "top": 1,
-                              "right": 1,
-                              "bottom": 1,
-                              "left": 1
-                            }
-                          },
                           "children": []
                         }
                       ],
@@ -793,14 +771,11 @@ const COMPONENTS = [
             "counter": "CENTER",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 211,
-            "varName": "imported/text-field/connected/width/off/off"
-          },
           "fixedHeight": {
             "px": 60,
             "varName": "imported/text-field/root/height/medium"
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -1076,14 +1051,6 @@ const COMPONENTS = [
                             "px": 36,
                             "varName": "imported/text-field/backdrop/height/medium"
                           },
-                          "lits": {
-                            "strokeSides": {
-                              "top": 0,
-                              "right": 0,
-                              "bottom": 0,
-                              "left": 0
-                            }
-                          },
                           "children": []
                         }
                       ],
@@ -1113,14 +1080,11 @@ const COMPONENTS = [
             "counter": "CENTER",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 211,
-            "varName": "imported/text-field/connected/width/off/off"
-          },
           "fixedHeight": {
             "px": 52,
             "varName": "imported/text-field/root/height/slim"
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -1397,14 +1361,6 @@ const COMPONENTS = [
                           "fixedHeight": {
                             "px": 28,
                             "varName": "imported/text-field/backdrop/height/slim"
-                          },
-                          "lits": {
-                            "strokeSides": {
-                              "top": 0,
-                              "right": 0,
-                              "bottom": 0,
-                              "left": 0
-                            }
                           },
                           "children": []
                         }
@@ -1478,14 +1434,11 @@ const COMPONENTS = [
             "counter": "CENTER",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 211,
-            "varName": "imported/text-field/connected/width/off/off"
-          },
           "fixedHeight": {
             "px": 60,
             "varName": "imported/text-field/root/height/medium"
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -1761,14 +1714,6 @@ const COMPONENTS = [
                             "px": 36,
                             "varName": "imported/text-field/backdrop/height/medium"
                           },
-                          "lits": {
-                            "strokeSides": {
-                              "top": 1,
-                              "right": 1,
-                              "bottom": 1,
-                              "left": 1
-                            }
-                          },
                           "children": []
                         }
                       ],
@@ -1798,14 +1743,11 @@ const COMPONENTS = [
             "counter": "CENTER",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 211,
-            "varName": "imported/text-field/connected/width/off/off"
-          },
           "fixedHeight": {
             "px": 60,
             "varName": "imported/text-field/root/height/medium"
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -2081,14 +2023,6 @@ const COMPONENTS = [
                             "px": 36,
                             "varName": "imported/text-field/backdrop/height/medium"
                           },
-                          "lits": {
-                            "strokeSides": {
-                              "top": 1,
-                              "right": 1,
-                              "bottom": 1,
-                              "left": 1
-                            }
-                          },
                           "children": []
                         }
                       ],
@@ -2118,14 +2052,11 @@ const COMPONENTS = [
             "counter": "CENTER",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 211,
-            "varName": "imported/text-field/connected/width/off/off"
-          },
           "fixedHeight": {
             "px": 60,
             "varName": "imported/text-field/root/height/medium"
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -2401,14 +2332,6 @@ const COMPONENTS = [
                             "px": 36,
                             "varName": "imported/text-field/backdrop/height/medium"
                           },
-                          "lits": {
-                            "strokeSides": {
-                              "top": 1,
-                              "right": 1,
-                              "bottom": 1,
-                              "left": 1
-                            }
-                          },
                           "children": []
                         }
                       ],
@@ -2438,14 +2361,11 @@ const COMPONENTS = [
             "counter": "CENTER",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 211,
-            "varName": "imported/text-field/connected/width/off/off"
-          },
           "fixedHeight": {
             "px": 60,
             "varName": "imported/text-field/root/height/medium"
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -2720,14 +2640,6 @@ const COMPONENTS = [
                           "fixedHeight": {
                             "px": 36,
                             "varName": "imported/text-field/backdrop/height/medium"
-                          },
-                          "lits": {
-                            "strokeSides": {
-                              "top": 1,
-                              "right": 1,
-                              "bottom": 1,
-                              "left": 1
-                            }
                           },
                           "children": []
                         }
@@ -4604,6 +4516,17 @@ const COMPONENTS = [
         }
       },
       {
+        "part": "root",
+        "kind": "preview",
+        "channel": "display",
+        "value": "block",
+        "reason": "a block root has no intrinsic width — the canvas draws a preview width, the code surface fills its container",
+        "variants": {
+          "count": 8,
+          "of": 8
+        }
+      },
+      {
         "part": "suffix",
         "kind": "capture",
         "channel": "cursor [disabled]",
@@ -5436,61 +5359,6 @@ function applyFrameSpec(node, spec) {
       if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED';
       else node.primaryAxisSizingMode = 'FIXED';
       if (spec.fixedHeight.varName) node.setBoundVariable('height', need(spec.fixedHeight.varName));
-    }
-  }
-  if (spec.lits) {
-    // v14 literals: no variable to bind — plain values, compile-parsed.
-    const li = spec.lits;
-    if (li.paddingTop !== undefined) node.paddingTop = li.paddingTop;
-    if (li.paddingBottom !== undefined) node.paddingBottom = li.paddingBottom;
-    if (li.paddingLeft !== undefined) node.paddingLeft = li.paddingLeft;
-    if (li.paddingRight !== undefined) node.paddingRight = li.paddingRight;
-    if (li.itemSpacing !== undefined) node.itemSpacing = li.itemSpacing;
-    if (li.radius !== undefined) node.cornerRadius = li.radius;
-    if (li.strokeWeight !== undefined) node.strokeWeight = li.strokeWeight;
-    if (li.minWidth !== undefined) { try { node.minWidth = li.minWidth; } catch (e) { degrade('FC-RT-MIN-SIZE-REFUSED', node, 'minWidth ' + li.minWidth + ' refused (needs auto-layout); the literal min-width does not draw', e); } }
-    if (li.minHeight !== undefined) { try { node.minHeight = li.minHeight; } catch (e) { degrade('FC-RT-MIN-SIZE-REFUSED', node, 'minHeight ' + li.minHeight + ' refused (needs auto-layout); the literal min-height does not draw', e); } }
-    // #60 fix 1 (fillClear precedence): a spec-carried fill is NEVER
-    // trampled — fillClear only clears when no fill was spec'd. The compile
-    // side already drops fillClear when a fill binding exists (applyLiterals);
-    // this runtime guard makes the emitted script safe even for hand-fed
-    // specs carrying both.
-    if (li.fillClear && !spec.fill) node.fills = [];
-    else if (li.fillColor) node.fills = [{ type: 'SOLID', color: { r: li.fillColor.r, g: li.fillColor.g, b: li.fillColor.b }, opacity: li.fillColor.a === undefined ? 1 : li.fillColor.a }];
-    if (li.radiusCorners) {
-      const rc = li.radiusCorners;
-      if (rc.tl !== undefined) node.topLeftRadius = rc.tl;
-      if (rc.tr !== undefined) node.topRightRadius = rc.tr;
-      if (rc.bl !== undefined) node.bottomLeftRadius = rc.bl;
-      if (rc.br !== undefined) node.bottomRightRadius = rc.br;
-    }
-    if (li.strokeSides) {
-      const sw = li.strokeSides;
-      // ELLIPSE/LINE expose strokeWeight only — per-side props throw
-      // "Cannot add property strokeTopWeight, object is not extensible"
-      // (Tailwind ToggleSwitch thumb live finding, Wave B.1).
-      if ('strokeTopWeight' in node) {
-        if (sw.top !== undefined) node.strokeTopWeight = sw.top;
-        if (sw.right !== undefined) node.strokeRightWeight = sw.right;
-        if (sw.bottom !== undefined) node.strokeBottomWeight = sw.bottom;
-        if (sw.left !== undefined) node.strokeLeftWeight = sw.left;
-      } else {
-        const w = sw.top !== undefined ? sw.top : (sw.right !== undefined ? sw.right : (sw.bottom !== undefined ? sw.bottom : sw.left));
-        if (w !== undefined) node.strokeWeight = w;
-      }
-    }
-    if (li.width !== undefined || li.height !== undefined) {
-      node.resize(li.width !== undefined ? li.width : node.width, li.height !== undefined ? li.height : node.height);
-      // GRID's primary axis is HORIZONTAL (GP1b: primaryAxisSizingMode='AUTO'
-      // reads back as layoutSizingHorizontal 'HUG'), like a HORIZONTAL frame.
-      const gm = (spec.layout || { mode: 'HORIZONTAL' }).mode;
-      const horizontalIsPrimary = gm === 'HORIZONTAL' || gm === 'GRID';
-      if (li.width !== undefined) {
-        if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED'; else node.counterAxisSizingMode = 'FIXED';
-      }
-      if (li.height !== undefined) {
-        if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED'; else node.primaryAxisSizingMode = 'FIXED';
-      }
     }
   }
 }

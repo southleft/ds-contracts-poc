@@ -146,10 +146,7 @@
                     "padding-left": "{imported.shared.size-16}",
                     "padding-right": "{imported.shared.size-16}",
                     "placeholder-color": "{imported.text-input.text-input.placeholder-color}",
-                    "width": "{imported.shared.size-288}",
-                    "border-left-width": "{imported.shared.size-0}",
-                    "border-right-width": "{imported.shared.size-0}",
-                    "border-top-width": "{imported.shared.size-0}"
+                    "width": "{imported.shared.size-288}"
                   },
                   "states": {
                     "disabled": {

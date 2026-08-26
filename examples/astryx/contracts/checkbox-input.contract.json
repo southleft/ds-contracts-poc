@@ -407,13 +407,7 @@
             }
           }
         }
-      ],
-      "tokens": {
-        "color": "{color-text-primary}",
-        "gap": "{spacing-2}",
-        "font-family": "{font-family-body}",
-        "font-size": "{font-size-sm}"
-      }
+      ]
     }
   },
   "bindings": {

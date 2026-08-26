@@ -58,7 +58,6 @@
   min-width: var(--imported-shared-size-0);
   right: var(--imported-shared-size-0);
   top: var(--imported-shared-size-0);
-  border-radius: var(--p-border-radius-200);
   display: block;
   position: absolute;
   aspect-ratio: 1 / 1;

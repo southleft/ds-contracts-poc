@@ -376,9 +376,7 @@
             "color": "{imported.shared.color-242424}",
             "max-height": "{imported.dialog.dialogbody-2.max-height}",
             "min-height": "{imported.shared.size-0}",
-            "min-width": "{imported.shared.size-0}",
-            "column-gap": "{imported.shared.size-8}",
-            "row-gap": "{imported.shared.size-8}"
+            "min-width": "{imported.shared.size-0}"
           }
         },
         "dialogsurface__backdrop": {
@@ -627,9 +625,7 @@
                 "color": "{imported.shared.color-242424}",
                 "max-height": "{imported.dialog.dialogbody.max-height}",
                 "min-height": "{imported.shared.size-0}",
-                "min-width": "{imported.shared.size-0}",
-                "column-gap": "{imported.shared.size-8}",
-                "row-gap": "{imported.shared.size-8}"
+                "min-width": "{imported.shared.size-0}"
               }
             }
           },

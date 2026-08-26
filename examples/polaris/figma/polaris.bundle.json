@@ -11061,35 +11061,6 @@
                           "value": "{imported.checkbox.backdrop.box-shadow-state-hover.{checked}}",
                           "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
                         }
-                      ],
-                      "literalsByProp": [
-                        {
-                          "prop": "checked",
-                          "map": {
-                            "unchecked": {
-                              "border-top-width": "1px",
-                              "border-right-width": "1px",
-                              "border-bottom-width": "1px",
-                              "border-left-width": "1px",
-                              "border-top-color": "rgba(138, 138, 138, 1)",
-                              "border-right-color": "rgba(138, 138, 138, 1)",
-                              "border-bottom-color": "rgba(138, 138, 138, 1)",
-                              "border-left-color": "rgba(138, 138, 138, 1)"
-                            },
-                            "checked": {
-                              "border-top-width": "0px",
-                              "border-right-width": "0px",
-                              "border-bottom-width": "0px",
-                              "border-left-width": "0px"
-                            },
-                            "indeterminate": {
-                              "border-top-width": "0px",
-                              "border-right-width": "0px",
-                              "border-bottom-width": "0px",
-                              "border-left-width": "0px"
-                            }
-                          }
-                        }
                       ]
                     },
                     "icon-3": {
@@ -11160,8 +11131,7 @@
                             "margin-right": "{imported.shared.size-1}",
                             "min-height": "{imported.shared.size-0}",
                             "min-width": "{imported.shared.size-0}",
-                            "width": "{imported.shared.size-20}",
-                            "fill": "{imported.checkbox.icon-6.color}"
+                            "width": "{imported.shared.size-20}"
                           },
                           "codeOnly": [
                             {
@@ -12271,25 +12241,6 @@
                           "channel": "border-top-color",
                           "value": "{imported.radio-button.backdrop.border-top-color-state-hover.{checked}}",
                           "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
-                        }
-                      ],
-                      "literalsByProp": [
-                        {
-                          "prop": "checked",
-                          "map": {
-                            "unchecked": {
-                              "border-top-width": "1px",
-                              "border-right-width": "1px",
-                              "border-bottom-width": "1px",
-                              "border-left-width": "1px"
-                            },
-                            "checked": {
-                              "border-top-width": "1px",
-                              "border-right-width": "1px",
-                              "border-bottom-width": "1px",
-                              "border-left-width": "1px"
-                            }
-                          }
                         }
                       ]
                     },
@@ -13954,8 +13905,7 @@
             "align": "center"
           },
           "tokens": {
-            "color": "{p.color-text}",
-            "width": "{imported.text-field.connected.width.off.off}"
+            "color": "{p.color-text}"
           },
           "declared": {
             "display": "block"
@@ -14971,29 +14921,6 @@
                               "value": "#616161",
                               "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
                             }
-                          ],
-                          "literalsByProp": [
-                            {
-                              "prop": "variant",
-                              "map": {
-                                "inherit": {
-                                  "border-top-width": "1px",
-                                  "border-right-width": "1px",
-                                  "border-bottom-width": "1px",
-                                  "border-left-width": "1px",
-                                  "border-top-color": "rgba(138, 138, 138, 1)",
-                                  "border-right-color": "rgba(138, 138, 138, 1)",
-                                  "border-bottom-color": "rgba(138, 138, 138, 1)",
-                                  "border-left-color": "rgba(138, 138, 138, 1)"
-                                },
-                                "borderless": {
-                                  "border-top-width": "0px",
-                                  "border-right-width": "0px",
-                                  "border-bottom-width": "0px",
-                                  "border-left-width": "0px"
-                                }
-                              }
-                            }
                           ]
                         }
                       },
@@ -15772,8 +15699,7 @@
                 "min-height": "{imported.shared.size-0}",
                 "min-width": "{imported.shared.size-0}",
                 "right": "{imported.shared.size-0}",
-                "top": "{imported.shared.size-0}",
-                "border-radius": "{p.border-radius-200}"
+                "top": "{imported.shared.size-0}"
               },
               "tokensByProp": [
                 {
@@ -23013,6 +22939,17 @@
           "channel": "focus",
           "value": "onFocus",
           "reason": "fires when the root part is activated — the canvas cannot run behaviour, so the event stays a code-side callback",
+          "variants": {
+            "count": 1400,
+            "of": 1400
+          }
+        },
+        {
+          "part": "root",
+          "kind": "preview",
+          "channel": "display",
+          "value": "block",
+          "reason": "a block root has no intrinsic width — the canvas draws a preview width, the code surface fills its container",
           "variants": {
             "count": 1400,
             "of": 1400

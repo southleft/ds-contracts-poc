@@ -20,6 +20,7 @@
   display: flex;
   flex-direction: column;
   border: 0;
+  position: relative;
   column-gap: var(--imported-shared-size-4);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
@@ -525,6 +526,10 @@
   margin-top: var(--imported-slider-tooltip-margin-top-vertical);
 }
 
+.valueDisplay-tooltip .tooltip {
+  display: flex;
+}
+
 .valueDisplay-text .tooltip {
   display: none;
 }
@@ -567,10 +572,19 @@
   text-wrap-mode: nowrap;
 }
 
+.orientation-vertical .label-3 {
+  left: 28px;
+  top: 86px;
+}
+
 .valueDisplay-tooltip .label-3 {
   display: none;
 }
 
 .valueDisplay-none .label-3 {
   display: none;
+}
+
+.orientation-vertical .label-3 {
+  position: absolute;
 }

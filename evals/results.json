@@ -1,7 +1,7 @@
 {
-  "passed": 220,
-  "total": 225,
-  "commit": "78a94cf10c8aa70d98d3203db044cae9b2768790",
+  "passed": 224,
+  "total": 230,
+  "commit": "b7f0680473b05421d824ca9bd9570a9d6faf6016",
   "dirty": false,
   "recordedAt": "2026-08-26",
   "results": [
@@ -633,7 +633,8 @@
     {
       "id": "generated-storybook-trees-are-fresh",
       "claim": "C3-detection",
-      "pass": true
+      "pass": false,
+      "error": "Error: a committed storybook/src/generated tree is STALE vs its own generator:\n  astryx       5 STALE          54 files\n  eventz-vars  fresh            70 files\n  untitled-ui  fresh            122 files\n\n✖ generated-surfaces-fresh: 1 failure(s)\n\n  astryx: 5 committed file(s) are STALE vs a fresh generation (CheckboxInput/CheckboxInput.module.css, ProgressBar/ProgressBar.module.css, Slider/Slider.module.css, TextInput/TextInput.module.css, Token/Token.module.css) — re-generate and commit them. This is the exact class the MUI regen round opened on: the engine moved, the artifacts did not, and every other gate stayed green.\n\n"
     },
     {
       "id": "visual-truth-report-is-fresh",
@@ -788,7 +789,8 @@
     {
       "id": "promote-generalization",
       "claim": "C1-determinism",
-      "pass": true
+      "pass": false,
+      "error": "Error: carbon: contracts/textinput.contract.json — the shared promote module did NOT reproduce the committed bytes (/private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/cc45b987-8d09-4532-8495-2986c74f81fb/scratchpad/stack/contracts/textinput.contract.json)"
     },
     {
       "id": "paste-door-open",
@@ -861,6 +863,16 @@
       "pass": true
     },
     {
+      "id": "text-indent-off-box-label-not-drawn",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "text-indent-off-box-evidence-refuses-when-inert",
+      "claim": "C2-refusal",
+      "pass": true
+    },
+    {
       "id": "portal-capture-modal",
       "claim": "C5-extraction",
       "pass": true
@@ -914,6 +926,21 @@
     {
       "id": "checked-axis-projection",
       "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "grammar-compound-import",
+      "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "grammar-ordered-class-tokens",
+      "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "grammar-date-literal",
+      "claim": "C1-determinism",
       "pass": true
     },
     {
@@ -980,7 +1007,7 @@
       "id": "child-wider-ratchet-and-script-freshness",
       "claim": "C3-detection",
       "pass": false,
-      "error": "Error: child-wider ratchet RED:\nlibrary      scripts  overflows  text-caused  margin-box  cause\naltitude           8          0            0           0  \nantd              12          0            0           0  \nastryx            13          0            6           0  textCaused(33): the corpus-wide text-wrapping gap (docs/22 §\"Text wrapping is not implemented\") — grew 6→33 at the exact-conversion wave (feat/exact-conversion-wave0): Banner's promoted title/description rows, TextInput's label/helper runs and the source-geometry Slider labels are real hugging text runs the earlier harness-floor geometry hid. The five ProgressBar percent-width overflows the previous baseline named are FIXED — the wave carries the fill as a source-derived literal inside the track — so the non-text class is ZERO.\ncarbon            10          0            8           0  textCaused(8): all eight are the corpus-wide text-wrapping gap in Accordion (docs/22). Carbon's NON-text overflows were closed by the live-defect round (9c30204, D3) and its own compile receipt keeps a HARD zero on them — this row is the exempted class only.\nfluent            11          2           34          41  overflows(2): 18 -> 2 on 2026-08-16, and the DEFECT DID NOT GET FIXED — it stopped MANIFESTING. 16 of the old 18 were one class: Checkbox's `indicator > icon` is an element:\"svg\" promoted from the computed floor with NO asset (examples/fluent/assets/icons ships only dialog-part-0-1-0.svg and switch-indicator.svg — there is still no checkbox glyph), so the mock handed it Figma's 100px birth box inside a 16px indicator, +84 per variant. c27e3fe0 (20"
+      "error": "Error: child-wider ratchet RED:\nlibrary      scripts  overflows  text-caused  margin-box  cause\naltitude           8          0            0           0  \nantd              12          0            0           0  \nastryx            13          3            6           0  textCaused(6): 33 -> 6 on the census/stack-to-main merge — an IMPROVEMENT, re-recorded so the number cannot regrow into the slack. The old 33 was the exact-conversion wave's Banner title/description rows, TextInput label/helper runs and the source-geometry Slider labels. MEASURED per script into one shared mock (scripts are identity-dependent, so per-script isolation is not a valid instrument here): checkbox-input +2, switch +4, and EVERY OTHER astryx script is now zero — banner, text-input, slider and progress-bar all closed. The merged engine is the cause: RC1's layout-axis door plus the stack's re-derived corpus (cb13a56f) give those runs a real direction and width instead of the harness-floor geometry that made them hug. overflows stays a HARD ZERO.\ncarbon            10          0            8           0  textCaused(8): all eight are the corpus-wide text-wrapping gap in Accordion (docs/22). Carbon's NON-text overflows were closed by the live-defect round (9c30204, D3) and its own compile receipt keeps a HARD zero on them — this row is the exempted class only.\nfluent            11          2           34          41  overflows(2) unchanged — Switch's `label` at 66px inside a 59px parent on the two `Label Position=Above` cells, where the stacked layout gives the label a narrower column than its own hug width. The Checkbox glyph is STIL"
     },
     {
       "id": "css-dom-conformance-frontier",
@@ -1092,8 +1119,7 @@
     {
       "id": "code-to-canvas-wave-a-emit-pins",
       "claim": "C3-detection",
-      "pass": false,
-      "error": "Error: FC-ASTRYX-SLIDER-TOOLTIP: tooltip part missing on Tooltip variant — need stylesWhen display restore"
+      "pass": true
     },
     {
       "id": "trap-corpus-check",

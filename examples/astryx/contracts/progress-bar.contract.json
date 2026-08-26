@@ -210,14 +210,7 @@
         "column-gap": "{imported.progress-bar.root.column-gap}",
         "min-height": "{imported.shared.size-0}",
         "min-width": "{imported.progress-bar.root.min-width}",
-        "row-gap": "{imported.progress-bar.root.row-gap}",
-        "color": "{color-text-secondary}",
-        "gap": "{spacing-1}",
-        "font-family": "{font-family-body}",
-        "font-size": "{font-size-xs}"
-      },
-      "literals": {
-        "width": "240px"
+        "row-gap": "{imported.progress-bar.root.row-gap}"
       }
     }
   },

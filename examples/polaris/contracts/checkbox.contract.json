@@ -427,35 +427,6 @@
                       "value": "{imported.checkbox.backdrop.box-shadow-state-hover.{checked}}",
                       "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
                     }
-                  ],
-                  "literalsByProp": [
-                    {
-                      "prop": "checked",
-                      "map": {
-                        "unchecked": {
-                          "border-top-width": "1px",
-                          "border-right-width": "1px",
-                          "border-bottom-width": "1px",
-                          "border-left-width": "1px",
-                          "border-top-color": "rgba(138, 138, 138, 1)",
-                          "border-right-color": "rgba(138, 138, 138, 1)",
-                          "border-bottom-color": "rgba(138, 138, 138, 1)",
-                          "border-left-color": "rgba(138, 138, 138, 1)"
-                        },
-                        "checked": {
-                          "border-top-width": "0px",
-                          "border-right-width": "0px",
-                          "border-bottom-width": "0px",
-                          "border-left-width": "0px"
-                        },
-                        "indeterminate": {
-                          "border-top-width": "0px",
-                          "border-right-width": "0px",
-                          "border-bottom-width": "0px",
-                          "border-left-width": "0px"
-                        }
-                      }
-                    }
                   ]
                 },
                 "icon-3": {
@@ -526,8 +497,7 @@
                         "margin-right": "{imported.shared.size-1}",
                         "min-height": "{imported.shared.size-0}",
                         "min-width": "{imported.shared.size-0}",
-                        "width": "{imported.shared.size-20}",
-                        "fill": "{imported.checkbox.icon-6.color}"
+                        "width": "{imported.shared.size-20}"
                       },
                       "codeOnly": [
                         {

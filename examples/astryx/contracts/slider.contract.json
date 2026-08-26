@@ -126,8 +126,7 @@
             "align": "center"
           },
           "declared": {
-            "cursor": "pointer",
-            "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+            "cursor": "pointer"
           },
           "tokens": {
             "color": "{imported.slider.label.color}",
@@ -209,21 +208,6 @@
                         }
                       }
                     }
-                  ],
-                  "literalsByProp": [
-                    {
-                      "prop": "orientation",
-                      "map": {
-                        "horizontal": {
-                          "left": "0px",
-                          "right": "0px"
-                        },
-                        "vertical": {
-                          "width": "4px",
-                          "left": "8px"
-                        }
-                      }
-                    }
                   ]
                 },
                 "part-1-0-1": {
@@ -283,21 +267,6 @@
                         }
                       }
                     }
-                  ],
-                  "literalsByProp": [
-                    {
-                      "prop": "orientation",
-                      "map": {
-                        "horizontal": {
-                          "left": "0px",
-                          "width": "96px"
-                        },
-                        "vertical": {
-                          "width": "4px",
-                          "left": "8px"
-                        }
-                      }
-                    }
                   ]
                 },
                 "slider-thumb-2": {
@@ -346,19 +315,6 @@
                           "bottom": "{imported.slider.slider-thumb-2.bottom.vertical}",
                           "top": "{imported.slider.slider-thumb-2.top.vertical}",
                           "translate-y": "{imported.slider.slider-thumb-2.translate-y.vertical}"
-                        }
-                      }
-                    }
-                  ],
-                  "literalsByProp": [
-                    {
-                      "prop": "orientation",
-                      "map": {
-                        "horizontal": {
-                          "left": "86px"
-                        },
-                        "vertical": {
-                          "left": "0px"
                         }
                       }
                     }
@@ -465,9 +421,7 @@
                     "border-right-style": "none",
                     "border-top-style": "none",
                     "cursor": "pointer",
-                    "user-select": "none",
-                    "position": "absolute",
-                    "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+                    "user-select": "none"
                   },
                   "stylesWhen": [
                     {
@@ -499,8 +453,7 @@
                       "declared": {
                         "display": "block",
                         "cursor": "pointer",
-                        "user-select": "none",
-                        "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+                        "user-select": "none"
                       },
                       "stylesWhen": [
                         {
@@ -567,21 +520,6 @@
                         }
                       }
                     }
-                  ],
-                  "literalsByProp": [
-                    {
-                      "prop": "orientation",
-                      "map": {
-                        "horizontal": {
-                          "left": "79px",
-                          "top": "-36px"
-                        },
-                        "vertical": {
-                          "left": "-40px",
-                          "top": "78px"
-                        }
-                      }
-                    }
                   ]
                 }
               },
@@ -625,19 +563,6 @@
                     }
                   }
                 }
-              ],
-              "literalsByProp": [
-                {
-                  "prop": "orientation",
-                  "map": {
-                    "horizontal": {
-                      "width": "240px"
-                    },
-                    "vertical": {
-                      "width": "20px"
-                    }
-                  }
-                }
               ]
             },
             "label-3": {
@@ -645,17 +570,9 @@
               "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "block",
-                "text-wrap-mode": "nowrap",
-                "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+                "text-wrap-mode": "nowrap"
               },
               "stylesWhen": [
-                {
-                  "prop": "orientation",
-                  "equals": "vertical",
-                  "styles": {
-                    "position": "absolute"
-                  }
-                },
                 {
                   "prop": "valueDisplay",
                   "equals": "tooltip",
@@ -668,6 +585,13 @@
                   "equals": "none",
                   "styles": {
                     "display": "none"
+                  }
+                },
+                {
+                  "prop": "orientation",
+                  "equals": "vertical",
+                  "styles": {
+                    "position": "absolute"
                   }
                 }
               ],
@@ -725,20 +649,7 @@
       },
       "literals": {
         "font-size": "16px"
-      },
-      "literalsByProp": [
-        {
-          "prop": "orientation",
-          "map": {
-            "horizontal": {
-              "width": "240px"
-            },
-            "vertical": {
-              "width": "56px"
-            }
-          }
-        }
-      ]
+      }
     }
   },
   "bindings": {

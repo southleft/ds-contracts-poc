@@ -127,14 +127,6 @@ const COMPONENTS = [
                       },
                       "fill": "imported/radio-button/backdrop/background-color/unchecked",
                       "stroke": "imported/radio-button/backdrop/border-top-color/unchecked",
-                      "lits": {
-                        "strokeSides": {
-                          "top": 1,
-                          "right": 1,
-                          "bottom": 1,
-                          "left": 1
-                        }
-                      },
                       "absolute": {
                         "h": "STRETCH",
                         "v": "STRETCH",
@@ -275,14 +267,6 @@ const COMPONENTS = [
                       },
                       "fill": "imported/radio-button/backdrop/background-color/checked",
                       "stroke": "imported/radio-button/backdrop/border-top-color/checked",
-                      "lits": {
-                        "strokeSides": {
-                          "top": 1,
-                          "right": 1,
-                          "bottom": 1,
-                          "left": 1
-                        }
-                      },
                       "absolute": {
                         "h": "STRETCH",
                         "v": "STRETCH",
