@@ -262,6 +262,10 @@
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}",
             "width": "{imported.progress-bar.indicator.width}"
+          },
+          "meter": {
+            "valueProp": "progress",
+            "maxProp": "max"
           }
         }
       }

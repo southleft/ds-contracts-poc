@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "polaris.progress-bar",
     "version": "0.4.0",
     "anchorKey": null,
-    "description": "ProgressBar — generated from contract polaris.progress-bar v0.4.0 † (12 code-only facts — see plugin report)",
+    "description": "ProgressBar — generated from contract polaris.progress-bar v0.4.0 † (13 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -67,6 +67,8 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "pct": 0.4,
+              "children": [],
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
@@ -78,8 +80,7 @@ const COMPONENTS = [
               "fixedHeight": {
                 "px": 16,
                 "varName": "imported/progress-bar/indicator/height/medium"
-              },
-              "children": []
+              }
             }
           ]
         }
@@ -121,6 +122,8 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "pct": 0.4,
+              "children": [],
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
@@ -132,8 +135,7 @@ const COMPONENTS = [
               "fixedHeight": {
                 "px": 16,
                 "varName": "imported/progress-bar/indicator/height/medium"
-              },
-              "children": []
+              }
             }
           ]
         }
@@ -175,6 +177,8 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "pct": 0.4,
+              "children": [],
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
@@ -186,8 +190,7 @@ const COMPONENTS = [
               "fixedHeight": {
                 "px": 16,
                 "varName": "imported/progress-bar/indicator/height/medium"
-              },
-              "children": []
+              }
             }
           ]
         }
@@ -229,6 +232,8 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "pct": 0.4,
+              "children": [],
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
@@ -240,8 +245,7 @@ const COMPONENTS = [
               "fixedHeight": {
                 "px": 16,
                 "varName": "imported/progress-bar/indicator/height/medium"
-              },
-              "children": []
+              }
             }
           ]
         }
@@ -283,6 +287,8 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "pct": 0.4,
+              "children": [],
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
@@ -294,8 +300,7 @@ const COMPONENTS = [
               "fixedHeight": {
                 "px": 8,
                 "varName": "imported/progress-bar/indicator/height/small"
-              },
-              "children": []
+              }
             }
           ]
         }
@@ -337,6 +342,8 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "pct": 0.4,
+              "children": [],
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
@@ -348,8 +355,7 @@ const COMPONENTS = [
               "fixedHeight": {
                 "px": 8,
                 "varName": "imported/progress-bar/indicator/height/small"
-              },
-              "children": []
+              }
             }
           ]
         }
@@ -391,6 +397,8 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "pct": 0.4,
+              "children": [],
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
@@ -402,8 +410,7 @@ const COMPONENTS = [
               "fixedHeight": {
                 "px": 8,
                 "varName": "imported/progress-bar/indicator/height/small"
-              },
-              "children": []
+              }
             }
           ]
         }
@@ -445,6 +452,8 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "pct": 0.4,
+              "children": [],
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
@@ -456,8 +465,7 @@ const COMPONENTS = [
               "fixedHeight": {
                 "px": 8,
                 "varName": "imported/progress-bar/indicator/height/small"
-              },
-              "children": []
+              }
             }
           ]
         }
@@ -499,6 +507,8 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "pct": 0.4,
+              "children": [],
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
@@ -510,8 +520,7 @@ const COMPONENTS = [
               "fixedHeight": {
                 "px": 32,
                 "varName": "imported/progress-bar/indicator/height/large"
-              },
-              "children": []
+              }
             }
           ]
         }
@@ -553,6 +562,8 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "pct": 0.4,
+              "children": [],
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
@@ -564,8 +575,7 @@ const COMPONENTS = [
               "fixedHeight": {
                 "px": 32,
                 "varName": "imported/progress-bar/indicator/height/large"
-              },
-              "children": []
+              }
             }
           ]
         }
@@ -607,6 +617,8 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "pct": 0.4,
+              "children": [],
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
@@ -618,8 +630,7 @@ const COMPONENTS = [
               "fixedHeight": {
                 "px": 32,
                 "varName": "imported/progress-bar/indicator/height/large"
-              },
-              "children": []
+              }
             }
           ]
         }
@@ -661,6 +672,8 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "MIN"
               },
+              "pct": 0.4,
+              "children": [],
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
@@ -672,8 +685,7 @@ const COMPONENTS = [
               "fixedHeight": {
                 "px": 32,
                 "varName": "imported/progress-bar/indicator/height/large"
-              },
-              "children": []
+              }
             }
           ]
         }
@@ -729,6 +741,17 @@ const COMPONENTS = [
         "channel": "transition-timing-function",
         "value": "cubic-bezier(0.25, 0.1, 0.25, 1)",
         "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 12,
+          "of": 12
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "meter",
+        "channel": "meter",
+        "value": "",
+        "reason": "runtime-sized — the canvas shows the defaults' fraction and the height follows the track",
         "variants": {
           "count": 12,
           "of": 12

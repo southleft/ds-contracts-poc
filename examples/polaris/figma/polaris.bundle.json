@@ -11813,6 +11813,10 @@
                 "min-height": "{imported.shared.size-0}",
                 "min-width": "{imported.shared.size-0}",
                 "width": "{imported.progress-bar.indicator.width}"
+              },
+              "meter": {
+                "valueProp": "progress",
+                "maxProp": "max"
               }
             }
           }
@@ -19144,6 +19148,17 @@
           "channel": "transition-timing-function",
           "value": "cubic-bezier(0.25, 0.1, 0.25, 1)",
           "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+          "variants": {
+            "count": 12,
+            "of": 12
+          }
+        },
+        {
+          "part": "indicator",
+          "kind": "meter",
+          "channel": "meter",
+          "value": "",
+          "reason": "runtime-sized — the canvas shows the defaults' fraction and the height follows the track",
           "variants": {
             "count": 12,
             "of": 12
