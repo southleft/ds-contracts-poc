@@ -1,15 +1,14 @@
 {
-  "passed": 225,
+  "passed": 230,
   "total": 230,
-  "commit": "9ca53b4b45a1afea5d638e20ab2a4afb60a41239",
+  "commit": "d78bf4cd1e67d6ba1f8030bcf8278e5f3f8053c1",
   "dirty": false,
   "recordedAt": "2026-08-26",
   "results": [
     {
       "id": "refuse-unknown-token-reference",
       "claim": "C2-refusal",
-      "pass": false,
-      "error": "Error: Missing token not named in error"
+      "pass": true
     },
     {
       "id": "refuse-schema-invalid-contract",
@@ -629,8 +628,7 @@
     {
       "id": "capability-report-is-fresh",
       "claim": "C3-detection",
-      "pass": false,
-      "error": "Error: docs/24-what-works.md is STALE vs a rebuild from its committed sources:\nSTALE: docs/24-what-works.md does not match a rebuild from its committed sources.\nEvery number in it is READ from an artifact; one of those artifacts moved.\nRebuild it and commit:  npm run capability:report\n"
+      "pass": true
     },
     {
       "id": "generated-storybook-trees-are-fresh",
@@ -945,8 +943,7 @@
     {
       "id": "mui-figma-genesis",
       "claim": "C8-journey",
-      "pass": false,
-      "error": "Error: committed examples/mui/figma/mui.bundle.json is STALE — a fresh `figma bundle` build differs; regenerate and commit it"
+      "pass": true
     },
     {
       "id": "tailwind-figma-genesis",
@@ -956,8 +953,7 @@
     {
       "id": "carbon-figma-genesis",
       "claim": "C8-journey",
-      "pass": false,
-      "error": "Error: committed examples/carbon/figma/carbon.bundle.json is STALE — a fresh `figma bundle` build differs; regenerate and commit it"
+      "pass": true
     },
     {
       "id": "altitude-shadow-dom-genesis",
@@ -1007,8 +1003,7 @@
     {
       "id": "child-wider-ratchet-and-script-freshness",
       "claim": "C3-detection",
-      "pass": false,
-      "error": "Error: child-wider ratchet RED:\nlibrary      scripts  overflows  text-caused  margin-box  cause\naltitude           8          0            0           0  \nantd              12          0            0           0  \nastryx            13          0           33           0  textCaused(33): the corpus-wide text-wrapping gap (docs/22 §\"Text wrapping is not implemented\") — grew 6→33 at the exact-conversion wave (feat/exact-conversion-wave0): Banner's promoted title/description rows, TextInput's label/helper runs and the source-geometry Slider labels are real hugging text runs the earlier harness-floor geometry hid. The five ProgressBar percent-width overflows the previous baseline named are FIXED — the wave carries the fill as a source-derived literal inside the track — so the non-text class is ZERO.\ncarbon            10          0            8           0  textCaused(8): all eight are the corpus-wide text-wrapping gap in Accordion (docs/22). Carbon's NON-text overflows were closed by the live-defect round (9c30204, D3) and its own compile receipt keeps a HARD zero on them — this row is the exempted class only.\nfluent            11          2           37          40  overflows(2): 18 -> 2 on 2026-08-16, and the DEFECT DID NOT GET FIXED — it stopped MANIFESTING. 16 of the old 18 were one class: Checkbox's `indicator > icon` is an element:\"svg\" promoted from the computed floor with NO asset (examples/fluent/assets/icons ships only dialog-part-0-1-0.svg and switch-indicator.svg — there is still no checkbox glyph), so the mock handed it Figma's 100px birth box inside a 16px indicator, +84 per variant. c27e3fe0 (20"
+      "pass": true
     },
     {
       "id": "css-dom-conformance-frontier",
