@@ -1,7 +1,7 @@
 {
-  "passed": 229,
+  "passed": 230,
   "total": 230,
-  "commit": "641e29c7bcfa60fd819198cd95f966a8a4958db3",
+  "commit": "ec4c5d486e866f87a219acc9370479f64fad06c6",
   "dirty": false,
   "recordedAt": "2026-08-26",
   "results": [
@@ -628,8 +628,7 @@
     {
       "id": "capability-report-is-fresh",
       "claim": "C3-detection",
-      "pass": false,
-      "error": "Error: docs/24-what-works.md reports a cross-check DISAGREEMENT — two artifacts that must agree do not. Reconcile the artifacts."
+      "pass": true
     },
     {
       "id": "generated-storybook-trees-are-fresh",
