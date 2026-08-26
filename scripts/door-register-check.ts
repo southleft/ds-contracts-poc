@@ -441,6 +441,8 @@ export const REDERIVE_HINT = 'run `npm run door-register:rederive` (it re-derive
 
 export interface Rederivation {
   moves: Array<{ id: string; file: string; from: number; to: number }>;
+  /** `line` corrections — the @door MARKER itself moved, not just its rule. */
+  markerMoves: Array<{ id: string; file: string; from: number; to: number }>;
   /** Doors the derivation REFUSES to move rather than guess. */
   refusals: string[];
 }
@@ -461,11 +463,68 @@ export interface Rederivation {
  *     anchor is ambiguous needs a human to re-read it, and a re-derivation that
  *     silently picks one of two candidates is the defect this file exists to
  *     stop. (`capture.slot-splice`'s anchor appears twice inside its own
- *     literal, so this is not a hypothetical.) */
+ *     literal, so this is not a hypothetical.)
+ *
+ *  BEFORE EITHER, `line` ITSELF IS RE-DERIVED, and it has to be. Both
+ *  mechanisms above read `d.line` as their origin — `annotatedLine(lines,
+ *  d.line)` for an ordinary door, and "the template literal at or after
+ *  `d.line`" for an outside one. So a merge that displaces the `// @door`
+ *  markers themselves leaves every derivation computing the right answer to
+ *  the wrong question: it lands a plausible `ruleLine`, writes it, and reports
+ *  the move as a success. The gate catches the stale `line` separately, so
+ *  nothing is silently green — but the remedy told you it had fixed the thing
+ *  it had not fixed, which is the loop this command was written to end. The
+ *  marker sweep is the gate's own (`MARKER_RE` over `STAGE_FILES`); exactly one
+ *  hit in the door's own file relocates, and zero, several, or a hit in a
+ *  DIFFERENT file all REFUSE — a door that changed file is a judgement call
+ *  about what the door now means, not an offset. */
 export function rederive(reg: Register, read: (file: string) => string | null): Rederivation {
   const moves: Rederivation['moves'] = [];
+  const markerMoves: Rederivation['markerMoves'] = [];
   const refusals: string[] = [];
+
+  // Where every @door marker ACTUALLY sits, by the gate's own regex over the
+  // gate's own file list. `line` is re-derived from this before anything is
+  // derived from `line`.
+  const markers = new Map<string, Array<{ file: string; line: number }>>();
+  for (const file of new Set(Object.values(STAGE_FILES))) {
+    const text = read(file);
+    if (text === null) continue;
+    const lines = text.split('\n');
+    for (let i = 0; i < lines.length; i++) {
+      const m = MARKER_RE.exec(lines[i]);
+      if (!m) continue;
+      if (!markers.has(m[1])) markers.set(m[1], []);
+      markers.get(m[1])!.push({ file, line: i + 1 });
+    }
+  }
+
+  const markerRefused = new Set<string>();
   for (const d of reg.doors) {
+    const hits = markers.get(d.id) ?? [];
+    if (hits.length === 0) {
+      refusals.push(`${d.id}: no \`// @door ${d.id}\` marker exists anywhere in the registered files — the door was deleted or renamed, which is a decision, not a line number`);
+      markerRefused.add(d.id);
+      continue;
+    }
+    if (hits.length > 1) {
+      refusals.push(`${d.id}: the marker occurs ${hits.length} times (${hits.map((h) => `${h.file}:${h.line}`).join(', ')}) — ambiguous; one id must mark one rule`);
+      markerRefused.add(d.id);
+      continue;
+    }
+    if (hits[0].file !== d.file) {
+      refusals.push(`${d.id}: the marker has moved from ${d.file} to ${hits[0].file} — a door that changed file is a judgement call about what it now describes, not an offset to follow`);
+      markerRefused.add(d.id);
+      continue;
+    }
+    if (hits[0].line !== d.line) {
+      markerMoves.push({ id: d.id, file: d.file, from: d.line, to: hits[0].line });
+      d.line = hits[0].line;
+    }
+  }
+
+  for (const d of reg.doors) {
+    if (markerRefused.has(d.id)) continue; // its origin is unknown; deriving from it would be a guess
     const text = read(d.file);
     if (text === null) {
       refusals.push(`${d.id}: ${d.file} could not be read`);
@@ -509,7 +568,7 @@ export function rederive(reg: Register, read: (file: string) => string | null): 
     d.ruleLine = hits[0];
     if (hits[0] !== from) moves.push({ id: d.id, file: d.file, from, to: hits[0] });
   }
-  return { moves, refusals };
+  return { moves, markerMoves, refusals };
 }
 
 /** Rewrite the doc table's `line` / `(rule N)` cells from the register. The
@@ -855,6 +914,36 @@ function selfTest(): number {
     }
   }
   {
+    // THE HALF THAT WAS MISSING. Displace the @door MARKERS themselves — what a
+    // merge does — and the remedy must correct `line` FIRST and still land the
+    // register byte-for-byte. Before this, `line` was never re-derived: every
+    // rule line was computed from a stale origin, written, and reported as a
+    // successful move.
+    const markersMoved = clone();
+    for (const d of markersMoved.doors) d.line += 5;
+    const { markerMoves, refusals } = rederive(markersMoved, read);
+    const restored = JSON.stringify(markersMoved) === JSON.stringify(real);
+    const good = restored && refusals.length === 0 && markerMoves.length === real.doors.length;
+    console.log(`  ${good ? '\u2714' : '\u2716'} --rederive corrects a displaced @door MARKER line, not just the rule (${real.doors.length} markers restored byte-for-byte)`);
+    if (!good) {
+      failures++;
+      console.log(`      markerMoves ${markerMoves.length}/${real.doors.length}, refusals ${refusals.length}, byte-identical: ${restored}`);
+    }
+  }
+  {
+    // …and REFUSES a marker it cannot find rather than deriving from a stale
+    // origin. A deleted or renamed door is a decision, not an offset.
+    const gone = clone();
+    gone.doors.find((x) => x.id === 'fuse.control-element-delta')!.id = 'fuse.no-such-door-at-all';
+    const { refusals } = rederive(gone, read);
+    const hit = refusals.some((r) => /fuse\.no-such-door-at-all: no `\/\/ @door/.test(r));
+    console.log(`  ${hit ? '\u2714' : '\u2716'} --rederive REFUSES a door whose marker is gone instead of deriving from a stale line`);
+    if (!hit) {
+      failures++;
+      console.log(`      expected a named refusal; got: ${refusals.length === 0 ? '(none — it derived anyway)' : refusals.slice(0, 2).join(' | ')}`);
+    }
+  }
+  {
     // …and REFUSES rather than guesses. `capture.slot-splice`'s anchor text
     // occurs twice inside its own template literal, so pointing it at the wrong
     // one must produce a named refusal, never a silent pick.
@@ -930,7 +1019,18 @@ const readSource = (file: string): string | null => {
 // --rederive: the write half of the same derivation the gate reads.
 if (process.argv.includes('--rederive')) {
   console.log('\n--rederive — re-deriving every line from the tree\n');
-  const { moves, refusals } = rederive(reg, readSource);
+  const { moves, markerMoves, refusals } = rederive(reg, readSource);
+  // The marker half FIRST, because everything below is derived from it. A run
+  // that silently corrected 300 marker lines and reported only rule moves is
+  // the report that hid the problem.
+  if (markerMoves.length === 0) console.log('  (no @door marker moved — `line` already matches the tree)');
+  else {
+    const mByFile = new Map<string, number>();
+    for (const m of markerMoves) mByFile.set(m.file, (mByFile.get(m.file) ?? 0) + 1);
+    for (const [f, n] of [...mByFile].sort()) console.log(`  ${String(n).padStart(4)} @door MARKER line(s) corrected in ${f}`);
+    const md = markerMoves.map((m) => Math.abs(m.to - m.from)).sort((a, b) => a - b);
+    console.log(`  ${markerMoves.length} marker line(s) corrected; |delta| min ${md[0]}, median ${md[md.length >> 1]}, max ${md[md.length - 1]}`);
+  }
   const byFile = new Map<string, number>();
   for (const m of moves) byFile.set(m.file, (byFile.get(m.file) ?? 0) + 1);
   for (const [f, n] of [...byFile].sort()) console.log(`  ${String(n).padStart(4)} door(s) moved in ${f}`);
