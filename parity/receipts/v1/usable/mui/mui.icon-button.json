@@ -1,0 +1,235 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / mui",
+  "setNodeId": "39:17199",
+  "setName": "IconButton (mui.icon-button)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:17181",
+  "variantNodeName": "Size=Medium, Color=Default",
+  "axes": [
+    {
+      "axis": "Size",
+      "values": [
+        "Medium",
+        "Small",
+        "Large"
+      ]
+    },
+    {
+      "axis": "Color",
+      "values": [
+        "Default",
+        "Primary",
+        "Secondary"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 9,
+  "variantChildNames": [
+    "Size=Medium, Color=Default",
+    "Size=Medium, Color=Primary",
+    "Size=Medium, Color=Secondary",
+    "Size=Small, Color=Default",
+    "Size=Small, Color=Primary",
+    "Size=Small, Color=Secondary",
+    "Size=Large, Color=Default",
+    "Size=Large, Color=Primary",
+    "Size=Large, Color=Secondary"
+  ],
+  "reflow": {
+    "target": "39:17181",
+    "targetName": "Size=Medium, Color=Default",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "CENTER",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 42,
+      "h": 45,
+      "children": [
+        {
+          "id": "39:17182",
+          "name": "label",
+          "type": "TEXT",
+          "x": 8,
+          "y": 8,
+          "w": 26,
+          "h": 29,
+          "ax": 8,
+          "ay": 8,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 82,
+      "h": 85,
+      "children": [
+        {
+          "id": "39:17182",
+          "name": "label",
+          "type": "TEXT",
+          "x": 28,
+          "y": 28,
+          "w": 26,
+          "h": 29,
+          "ax": 28,
+          "ay": 28,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "label",
+        "dx": 20,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 42,
+      "h": 45
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:2287",
+    "baseline": {
+      "geometry": "99d15fc35e0d7068",
+      "fills": "804f38ff18dc849c",
+      "text": "92d763c20daf55f5"
+    },
+    "axes": [
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Medium",
+            "geometry": "99d15fc35e0d7068",
+            "fills": "804f38ff18dc849c",
+            "text": "92d763c20daf55f5"
+          },
+          {
+            "value": "Small",
+            "geometry": "f605ed2e7ff53ab4",
+            "fills": "804f38ff18dc849c",
+            "text": "92d763c20daf55f5"
+          },
+          {
+            "value": "Large",
+            "geometry": "8606c325fae5abd0",
+            "fills": "804f38ff18dc849c",
+            "text": "92d763c20daf55f5"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Color",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "99d15fc35e0d7068",
+            "fills": "804f38ff18dc849c",
+            "text": "92d763c20daf55f5"
+          },
+          {
+            "value": "Primary",
+            "geometry": "99d15fc35e0d7068",
+            "fills": "f701858d82444a98",
+            "text": "92d763c20daf55f5"
+          },
+          {
+            "value": "Secondary",
+            "geometry": "99d15fc35e0d7068",
+            "fills": "0c0b11e956e19254",
+            "text": "92d763c20daf55f5"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 10,
+    "bound": 10,
+    "inferred": 0,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Size=Medium, Color=Default",
+      "name": "Size=Medium, Color=Default",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 42,
+      "h": 45,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 26,
+      "h": 29,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasAfter": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasRestored": true
+}

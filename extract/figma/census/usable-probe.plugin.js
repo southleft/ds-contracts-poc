@@ -14,10 +14,13 @@
  *   assertion 4 against the contract, and refuses BY NAME for any row that
  *   has no observation.
  *
- * HOW TO RUN IT
+ * HOW TO RUN IT — `replaceAll`, NEVER `replace`. The FIRST `__USABLE_TARGETS__`
+ * in this file is the one on the next line, inside this very comment: a single
+ * `.replace()` substitutes the documentation, leaves the real placeholder below
+ * intact, and the body dies with `__USABLE_TARGETS__ is not defined`.
  *   const body = readFileSync('extract/figma/census/usable-probe.plugin.js','utf8')
- *     .replace('__USABLE_TARGETS__', JSON.stringify(setNodeIds))
- *     .replace('__USABLE_PAGE__',    JSON.stringify(pageName));
+ *     .replaceAll('__USABLE_TARGETS__', JSON.stringify(setNodeIds))
+ *     .replaceAll('__USABLE_PAGE__',    JSON.stringify(pageName));
  *   figma_execute({ code: body, timeout: 30000 })
  *   → { canvasBefore, canvasAfter, canvasRestored, observations: [...] }
  *   Split `observations` into one file per row with

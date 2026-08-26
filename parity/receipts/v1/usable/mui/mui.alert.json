@@ -1,0 +1,326 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / mui",
+  "setNodeId": "39:16673",
+  "setName": "Alert (mui.alert)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:16601",
+  "variantNodeName": "Severity=Info, Variant=Standard",
+  "axes": [
+    {
+      "axis": "Severity",
+      "values": [
+        "Info",
+        "Error",
+        "Warning",
+        "Success"
+      ]
+    },
+    {
+      "axis": "Variant",
+      "values": [
+        "Standard",
+        "Filled",
+        "Outlined"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 12,
+  "variantChildNames": [
+    "Severity=Info, Variant=Standard",
+    "Severity=Info, Variant=Filled",
+    "Severity=Info, Variant=Outlined",
+    "Severity=Error, Variant=Standard",
+    "Severity=Error, Variant=Filled",
+    "Severity=Error, Variant=Outlined",
+    "Severity=Warning, Variant=Standard",
+    "Severity=Warning, Variant=Filled",
+    "Severity=Warning, Variant=Outlined",
+    "Severity=Success, Variant=Standard",
+    "Severity=Success, Variant=Filled",
+    "Severity=Success, Variant=Outlined"
+  ],
+  "reflow": {
+    "target": "39:16601",
+    "targetName": "Severity=Info, Variant=Standard",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 256,
+      "h": 49,
+      "children": [
+        {
+          "id": "39:16602",
+          "name": "alert-icon",
+          "type": "FRAME",
+          "x": 16,
+          "y": 6,
+          "w": 22,
+          "h": 36,
+          "ax": 16,
+          "ay": 6,
+          "visible": true
+        },
+        {
+          "id": "39:16605",
+          "name": "label",
+          "type": "FRAME",
+          "x": 50,
+          "y": 6,
+          "w": 190,
+          "h": 37,
+          "ax": 50,
+          "ay": 6,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 296,
+      "h": 89,
+      "children": [
+        {
+          "id": "39:16602",
+          "name": "alert-icon",
+          "type": "FRAME",
+          "x": 16,
+          "y": 6,
+          "w": 22,
+          "h": 36,
+          "ax": 16,
+          "ay": 6,
+          "visible": true
+        },
+        {
+          "id": "39:16605",
+          "name": "label",
+          "type": "FRAME",
+          "x": 50,
+          "y": 6,
+          "w": 190,
+          "h": 37,
+          "ax": 50,
+          "ay": 6,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "alert-icon",
+      "label"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 256,
+      "h": 49
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:1981",
+    "baseline": {
+      "geometry": "5adc942ce7ba4c22",
+      "fills": "cbbf1ff1aec702c0",
+      "text": "a53c21948716cf44"
+    },
+    "axes": [
+      {
+        "axis": "Severity",
+        "values": [
+          {
+            "value": "Info",
+            "geometry": "5adc942ce7ba4c22",
+            "fills": "cbbf1ff1aec702c0",
+            "text": "a53c21948716cf44"
+          },
+          {
+            "value": "Error",
+            "geometry": "bbe4344c3628f28f",
+            "fills": "bc5b4197dccaf2bf",
+            "text": "a53c21948716cf44"
+          },
+          {
+            "value": "Warning",
+            "geometry": "288b586fa59fb3d3",
+            "fills": "7b1fb2356ca81267",
+            "text": "a53c21948716cf44"
+          },
+          {
+            "value": "Success",
+            "geometry": "cda9716c8b3f489c",
+            "fills": "3f572c319f3b986c",
+            "text": "a53c21948716cf44"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Variant",
+        "values": [
+          {
+            "value": "Standard",
+            "geometry": "5adc942ce7ba4c22",
+            "fills": "cbbf1ff1aec702c0",
+            "text": "a53c21948716cf44"
+          },
+          {
+            "value": "Filled",
+            "geometry": "c4a132a2162bea90",
+            "fills": "b443fcfe601527dc",
+            "text": "a53c21948716cf44"
+          },
+          {
+            "value": "Outlined",
+            "geometry": "469ee6cf830d755c",
+            "fills": "fd8dfc3c7ac00930",
+            "text": "a53c21948716cf44"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 22,
+    "bound": 17,
+    "inferred": 5,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 3,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 9,
+        "inferred": 0,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 4,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Severity=Info, Variant=Standard",
+      "name": "Severity=Info, Variant=Standard",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 256,
+      "h": 49,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/alert-icon[0]",
+      "name": "alert-icon",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 22,
+      "h": 36,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/alert-icon[0]/alert-icon-info[0]",
+      "name": "alert-icon-info",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 22,
+      "h": 22,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/alert-icon[0]/alert-icon-info[0]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 20,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/label[1]",
+      "name": "label",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 190,
+      "h": 37,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/label[1]/label-text[0]",
+      "name": "label-text",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 190,
+      "h": 21,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasAfter": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasRestored": true
+}

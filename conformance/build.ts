@@ -102,6 +102,39 @@ export interface CaseEntry {
    *  cannot hold the construct — absence is the declaration, not an
    *  omission). Absent entirely on pre-A2 cases. */
   dumpSnippet?: string | null;
+  /** THE SEALED EXPECTATION (archetype round, 2026-08-26). `expect` above is
+   *  NORMATIVE — what a correct engine does with the construct. These three
+   *  fields are PREDICTIVE — what I think THIS engine will actually do, written
+   *  before the case was ever run. The two are deliberately separate: a case
+   *  can be `expect: CARRIED` (it ought to be carried) and
+   *  `predictedDifficulty: expected-wall` (I think it will not be), and that
+   *  combination is the most informative row in the fixture, because the
+   *  measurement then adjudicates a stated disagreement rather than confirming
+   *  a single hedged guess.
+   *
+   *  A wrong prediction is a RESULT, not a defect: it is the fixture telling
+   *  its author their model of the engine is wrong, which is the only way that
+   *  model ever gets corrected. Never edit a prediction after reading an
+   *  outcome — record the miss instead (conformance/ARCHETYPE-EXPECTATIONS.md
+   *  carries the sealed-vs-measured table). */
+  /** `easy` | `hard` | `expected-wall`. */
+  predictedDifficulty?: 'easy' | 'hard' | 'expected-wall';
+  /** Concrete, screenshot-checkable facts, phrased so two graders agree.
+   *  Deliberately about the PICTURE, not the contract: the owner's bar is
+   *  "I can tell what this is", and a channel that round-trips into an
+   *  unrecognisable canvas has not passed anything worth counting. */
+  mustHave?: string[];
+  /** The named wall predicted for this case, or null when none is.
+   *  `status` says whether `code` is an EXISTING FC-* code from
+   *  spec/{channel-table,door-register,lowering,grammar-coverage}.json (reuse
+   *  is required where one fits) or a PROPOSED new one (allowed only with the
+   *  search that found nothing spelled out in `why`). */
+  predictedWall?: {
+    code: string;
+    status: string;
+    half: string;
+    why: string;
+  } | null;
 }
 
 /** PascalCase export name for a case id. PascalCase is not cosmetic: the

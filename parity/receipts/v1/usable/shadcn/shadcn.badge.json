@@ -1,0 +1,270 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / shadcn",
+  "setNodeId": "39:9347",
+  "setName": "Badge (shadcn.badge)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:9311",
+  "variantNodeName": "Variant=Default, State=Default",
+  "axes": [
+    {
+      "axis": "Variant",
+      "values": [
+        "Default",
+        "Secondary",
+        "Destructive",
+        "Outline",
+        "Ghost",
+        "Link"
+      ]
+    },
+    {
+      "axis": "State",
+      "values": [
+        "Default",
+        "Active",
+        "Hover"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 18,
+  "variantChildNames": [
+    "Variant=Default, State=Default",
+    "Variant=Secondary, State=Default",
+    "Variant=Destructive, State=Default",
+    "Variant=Outline, State=Default",
+    "Variant=Ghost, State=Default",
+    "Variant=Link, State=Default",
+    "Variant=Default, State=Active",
+    "Variant=Secondary, State=Active",
+    "Variant=Destructive, State=Active",
+    "Variant=Outline, State=Active",
+    "Variant=Ghost, State=Active",
+    "Variant=Link, State=Active",
+    "Variant=Default, State=Hover",
+    "Variant=Secondary, State=Hover",
+    "Variant=Destructive, State=Hover",
+    "Variant=Outline, State=Hover",
+    "Variant=Ghost, State=Hover",
+    "Variant=Link, State=Hover"
+  ],
+  "reflow": {
+    "target": "39:9311",
+    "targetName": "Variant=Default, State=Default",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "CENTER",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 55,
+      "h": 22,
+      "children": [
+        {
+          "id": "39:9312",
+          "name": "label",
+          "type": "TEXT",
+          "x": 9,
+          "y": 3,
+          "w": 37,
+          "h": 16,
+          "ax": 9,
+          "ay": 3,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 95,
+      "h": 62,
+      "children": [
+        {
+          "id": "39:9312",
+          "name": "label",
+          "type": "TEXT",
+          "x": 29,
+          "y": 23,
+          "w": 37,
+          "h": 16,
+          "ax": 29,
+          "ay": 23,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "label",
+        "dx": 20,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 55,
+      "h": 22
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:904",
+    "baseline": {
+      "geometry": "0e4818a4cdddba70",
+      "fills": "22503f03da61e81c",
+      "text": "1068ebc29562c1c0"
+    },
+    "axes": [
+      {
+        "axis": "Variant",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "0e4818a4cdddba70",
+            "fills": "22503f03da61e81c",
+            "text": "1068ebc29562c1c0"
+          },
+          {
+            "value": "Secondary",
+            "geometry": "0e4818a4cdddba70",
+            "fills": "756a5387c6636073",
+            "text": "1068ebc29562c1c0"
+          },
+          {
+            "value": "Destructive",
+            "geometry": "0e4818a4cdddba70",
+            "fills": "c75ed50b80b8df30",
+            "text": "1068ebc29562c1c0"
+          },
+          {
+            "value": "Outline",
+            "geometry": "0e4818a4cdddba70",
+            "fills": "30ba67ed180b7e8c",
+            "text": "1068ebc29562c1c0"
+          },
+          {
+            "value": "Ghost",
+            "geometry": "0e4818a4cdddba70",
+            "fills": "c1c9e125337db4a8",
+            "text": "1068ebc29562c1c0"
+          },
+          {
+            "value": "Link",
+            "geometry": "0e4818a4cdddba70",
+            "fills": "6c45a8056ac84fe0",
+            "text": "1068ebc29562c1c0"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "State",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "0e4818a4cdddba70",
+            "fills": "22503f03da61e81c",
+            "text": "1068ebc29562c1c0"
+          },
+          {
+            "value": "Active",
+            "geometry": "0e4818a4cdddba70",
+            "fills": "22503f03da61e81c",
+            "text": "1068ebc29562c1c0"
+          },
+          {
+            "value": "Hover",
+            "geometry": "0e4818a4cdddba70",
+            "fills": "22503f03da61e81c",
+            "text": "1068ebc29562c1c0"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 13,
+    "bound": 12,
+    "inferred": 1,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 5,
+        "inferred": 0,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Variant=Default, State=Default",
+      "name": "Variant=Default, State=Default",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 55,
+      "h": 22,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 37,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 291,
+    "sig": "2323b4b6ec9f2790"
+  },
+  "canvasAfter": {
+    "nodes": 291,
+    "sig": "2323b4b6ec9f2790"
+  },
+  "canvasRestored": true
+}

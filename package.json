@@ -75,7 +75,7 @@
     "parity:flowbite": "tsx scripts/flowbite-contract-parity.ts",
     "extract:figma:visual:catalog": "tsx extract/figma/visual-parity/run.ts --summary button badge checkbox switch heading",
     "extract:figma:visual:anchors": "tsx extract/figma/visual-parity/anchor-check.ts",
-    "maintain": "npm run required-facts:check && npm run string-boolean-coercion:check && npm run token-set-prune:check && npm run exact-proposal:check && npm run flowbite-bundle-fresh:check && npm run plugin:check && npm run flowbite-dump-propose:check && npm run extract:figma:visual:anchors && npm run functional:flowbite && npm run parity:flowbite && npm run root-attrs:check && npm run css-vars:check && npm run code-only-facts:check && npm run root-text:check && npm run placeholder-ink:check && npm run first-party-bundle:check && npm run prop-collision:check && npm run code-connect:check && npm run playground:flow-check",
+    "maintain": "npm run required-facts:check && npm run string-boolean-coercion:check && npm run token-set-prune:check && npm run exact-proposal:check && npm run flowbite-bundle-fresh:check && npm run plugin:check && npm run flowbite-dump-propose:check && npm run extract:figma:visual:anchors && npm run functional:flowbite && npm run parity:flowbite && npm run host-placement:check && npm run root-attrs:check && npm run css-vars:check && npm run code-only-facts:check && npm run root-text:check && npm run placeholder-ink:check && npm run first-party-bundle:check && npm run prop-collision:check && npm run code-connect:check && npm run playground:flow-check",
     "maintain:visual": "npm run extract:figma:visual:catalog",
     "maintain:all": "npm run maintain && npm run maintain:visual",
     "eval:record:check": "node scripts/eval-record-check.mjs",
@@ -224,6 +224,8 @@
     "gauntlet:intake": "tsx extract/figma/gauntlet/intake.ts",
     "closure:check": "tsx extract/figma/channel-closure-check.ts",
     "channel-table:check": "tsx scripts/channel-table-check.ts",
+    "channel-table:self-test": "tsx scripts/channel-table-check.ts --self-test",
+    "channel-table:rederive": "tsx scripts/channel-table-check.ts --rederive",
     "dagger:census": "tsx extract/figma/dagger-census.ts",
     "seed:gen": "tsx extract/computed/seed-gen.ts",
     "seed:verify": "for L in carbon mui tailwind; do echo \"== $L ==\"; tsx extract/computed/seed-gen.ts extract/computed/configs/$L.json --verify || FAIL=1; done; exit ${FAIL:-0}",
@@ -258,7 +260,8 @@
     "required-facts:check": "tsx scripts/required-facts-check.ts",
     "required-facts:record": "tsx scripts/required-facts-check.ts --write",
     "corpus:reproducible:check": "tsx scripts/corpus-reproducible-check.ts",
-    "bundles:fresh": "node scripts/bundles-fresh.mjs"
+    "bundles:fresh": "node scripts/bundles-fresh.mjs",
+    "host-placement:check": "tsx core/host-placement-check.ts"
   },
   "engines": {
     "node": ">=20"

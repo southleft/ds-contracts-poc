@@ -1,0 +1,439 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "antd exam 2026-08-23",
+  "setNodeId": "33:5066",
+  "setName": "Button",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "33:4826",
+  "variantNodeName": "Type=Default, Size=Middle, Danger=Safe",
+  "axes": [
+    {
+      "axis": "Type",
+      "values": [
+        "Default",
+        "Primary",
+        "Dashed",
+        "Link",
+        "Text"
+      ]
+    },
+    {
+      "axis": "Size",
+      "values": [
+        "Middle",
+        "Small",
+        "Large"
+      ]
+    },
+    {
+      "axis": "Danger",
+      "values": [
+        "Safe",
+        "Danger"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 30,
+  "variantChildNames": [
+    "Type=Default, Size=Middle, Danger=Safe",
+    "Type=Default, Size=Middle, Danger=Danger",
+    "Type=Default, Size=Small, Danger=Safe",
+    "Type=Default, Size=Small, Danger=Danger",
+    "Type=Default, Size=Large, Danger=Safe",
+    "Type=Default, Size=Large, Danger=Danger",
+    "Type=Primary, Size=Middle, Danger=Safe",
+    "Type=Primary, Size=Middle, Danger=Danger",
+    "Type=Primary, Size=Small, Danger=Safe",
+    "Type=Primary, Size=Small, Danger=Danger",
+    "Type=Primary, Size=Large, Danger=Safe",
+    "Type=Primary, Size=Large, Danger=Danger",
+    "Type=Dashed, Size=Middle, Danger=Safe",
+    "Type=Dashed, Size=Middle, Danger=Danger",
+    "Type=Dashed, Size=Small, Danger=Safe",
+    "Type=Dashed, Size=Small, Danger=Danger",
+    "Type=Dashed, Size=Large, Danger=Safe",
+    "Type=Dashed, Size=Large, Danger=Danger",
+    "Type=Link, Size=Middle, Danger=Safe",
+    "Type=Link, Size=Middle, Danger=Danger",
+    "Type=Link, Size=Small, Danger=Safe",
+    "Type=Link, Size=Small, Danger=Danger",
+    "Type=Link, Size=Large, Danger=Safe",
+    "Type=Link, Size=Large, Danger=Danger",
+    "Type=Text, Size=Middle, Danger=Safe",
+    "Type=Text, Size=Middle, Danger=Danger",
+    "Type=Text, Size=Small, Danger=Safe",
+    "Type=Text, Size=Small, Danger=Danger",
+    "Type=Text, Size=Large, Danger=Safe",
+    "Type=Text, Size=Large, Danger=Danger"
+  ],
+  "reflow": {
+    "target": "33:4826",
+    "targetName": "Type=Default, Size=Middle, Danger=Safe",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 3,
+    "sizing": {
+      "h": "HUG",
+      "v": "FIXED",
+      "primary": "AUTO",
+      "counter": "FIXED",
+      "primaryAlign": "CENTER",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 74,
+      "h": 32,
+      "children": [
+        {
+          "id": "33:4827",
+          "name": "btn-icon",
+          "type": "FRAME",
+          "x": 16,
+          "y": 9,
+          "w": 14,
+          "h": 14,
+          "ax": 16,
+          "ay": 9,
+          "visible": false
+        },
+        {
+          "id": "33:4830",
+          "name": "btn-icon-2",
+          "type": "FRAME",
+          "x": 16,
+          "y": 9,
+          "w": 14,
+          "h": 14,
+          "ax": 16,
+          "ay": 9,
+          "visible": false
+        },
+        {
+          "id": "33:4833",
+          "name": "label",
+          "type": "TEXT",
+          "x": 16,
+          "y": 8,
+          "w": 42,
+          "h": 16,
+          "ax": 16,
+          "ay": 8,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 114,
+      "h": 72,
+      "children": [
+        {
+          "id": "33:4827",
+          "name": "btn-icon",
+          "type": "FRAME",
+          "x": 16,
+          "y": 9,
+          "w": 14,
+          "h": 14,
+          "ax": 16,
+          "ay": 9,
+          "visible": false
+        },
+        {
+          "id": "33:4830",
+          "name": "btn-icon-2",
+          "type": "FRAME",
+          "x": 16,
+          "y": 9,
+          "w": 14,
+          "h": 14,
+          "ax": 16,
+          "ay": 9,
+          "visible": false
+        },
+        {
+          "id": "33:4833",
+          "name": "label",
+          "type": "TEXT",
+          "x": 36,
+          "y": 28,
+          "w": 42,
+          "h": 16,
+          "ax": 36,
+          "ay": 28,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "label",
+        "dx": 20,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [
+      "btn-icon",
+      "btn-icon-2"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 74,
+      "h": 32
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:4508",
+    "baseline": {
+      "geometry": "fee43aeb8c1a800f",
+      "fills": "a9f896c149b35cb8",
+      "text": "8a7bf8f3022343ac"
+    },
+    "axes": [
+      {
+        "axis": "Type",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "fee43aeb8c1a800f",
+            "fills": "a9f896c149b35cb8",
+            "text": "8a7bf8f3022343ac"
+          },
+          {
+            "value": "Primary",
+            "geometry": "fee43aeb8c1a800f",
+            "fills": "ab5b2d30f1b16217",
+            "text": "8a7bf8f3022343ac"
+          },
+          {
+            "value": "Dashed",
+            "geometry": "fee43aeb8c1a800f",
+            "fills": "a9f896c149b35cb8",
+            "text": "8a7bf8f3022343ac"
+          },
+          {
+            "value": "Link",
+            "geometry": "fee43aeb8c1a800f",
+            "fills": "1fd29853277f581a",
+            "text": "8a7bf8f3022343ac"
+          },
+          {
+            "value": "Text",
+            "geometry": "fee43aeb8c1a800f",
+            "fills": "8bbff9c765470bac",
+            "text": "8a7bf8f3022343ac"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Middle",
+            "geometry": "fee43aeb8c1a800f",
+            "fills": "a9f896c149b35cb8",
+            "text": "8a7bf8f3022343ac"
+          },
+          {
+            "value": "Small",
+            "geometry": "2531f2b28173ad64",
+            "fills": "a9f896c149b35cb8",
+            "text": "8a7bf8f3022343ac"
+          },
+          {
+            "value": "Large",
+            "geometry": "484098933e80385f",
+            "fills": "a9f896c149b35cb8",
+            "text": "8a7bf8f3022343ac"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Danger",
+        "values": [
+          {
+            "value": "Safe",
+            "geometry": "fee43aeb8c1a800f",
+            "fills": "a9f896c149b35cb8",
+            "text": "8a7bf8f3022343ac"
+          },
+          {
+            "value": "Danger",
+            "geometry": "fee43aeb8c1a800f",
+            "fills": "6d2d3cea2d72a878",
+            "text": "8a7bf8f3022343ac"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 22,
+    "bound": 12,
+    "inferred": 6,
+    "literal": 4,
+    "byGroup": {
+      "fills": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 3,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 5,
+        "literal": 4
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [
+      "/btn-icon[0]/anticon[0]/Vector[0]·width=12.31",
+      "/btn-icon[0]/anticon[0]/Vector[0]·height=12.31",
+      "/btn-icon-2[1]/anticon-2[0]/Vector[0]·width=7.49",
+      "/btn-icon-2[1]/anticon-2[0]/Vector[0]·height=7.49"
+    ],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Type=Default, Size=Middle, Danger=Safe",
+      "name": "Type=Default, Size=Middle, Danger=Safe",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 3,
+      "w": 74,
+      "h": 32,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/btn-icon[0]",
+      "name": "btn-icon",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 14,
+      "h": 14,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/btn-icon[0]/anticon[0]",
+      "name": "anticon",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 14,
+      "h": 14,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/btn-icon[0]/anticon[0]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 12.31,
+      "h": 12.31,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/btn-icon-2[1]",
+      "name": "btn-icon-2",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 14,
+      "h": 14,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/btn-icon-2[1]/anticon-2[0]",
+      "name": "anticon-2",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 14,
+      "h": 14,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/btn-icon-2[1]/anticon-2[0]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 7.49,
+      "h": 7.49,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/label[2]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 42,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 710,
+    "sig": "0be3843bf548afa0"
+  },
+  "canvasAfter": {
+    "nodes": 710,
+    "sig": "0be3843bf548afa0"
+  },
+  "canvasRestored": true
+}

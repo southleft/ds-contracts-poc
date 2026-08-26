@@ -1,0 +1,364 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "antd exam 2026-08-23",
+  "setNodeId": "33:4769",
+  "setName": "Alert",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "33:4685",
+  "variantNodeName": "Type=Info, Show Icon=NoIcon",
+  "axes": [
+    {
+      "axis": "Type",
+      "values": [
+        "Info",
+        "Success",
+        "Warning",
+        "Error"
+      ]
+    },
+    {
+      "axis": "Show Icon",
+      "values": [
+        "NoIcon",
+        "Icon"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 8,
+  "variantChildNames": [
+    "Type=Info, Show Icon=NoIcon",
+    "Type=Info, Show Icon=Icon",
+    "Type=Success, Show Icon=NoIcon",
+    "Type=Success, Show Icon=Icon",
+    "Type=Warning, Show Icon=NoIcon",
+    "Type=Warning, Show Icon=Icon",
+    "Type=Error, Show Icon=NoIcon",
+    "Type=Error, Show Icon=Icon"
+  ],
+  "reflow": {
+    "target": "33:4685",
+    "targetName": "Type=Info, Show Icon=NoIcon",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "FIXED",
+      "v": "HUG",
+      "primary": "FIXED",
+      "counter": "AUTO",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 288,
+      "h": 40,
+      "children": [
+        {
+          "id": "33:4686",
+          "name": "alert-content",
+          "type": "FRAME",
+          "x": 13,
+          "y": 9,
+          "w": 262,
+          "h": 22,
+          "ax": 13,
+          "ay": 9,
+          "visible": true
+        },
+        {
+          "id": "33:4691",
+          "name": "alert-close-icon",
+          "type": "FRAME",
+          "x": 263,
+          "y": 9,
+          "w": 12,
+          "h": 12,
+          "ax": 263,
+          "ay": 9,
+          "visible": false
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 328,
+      "h": 80,
+      "children": [
+        {
+          "id": "33:4686",
+          "name": "alert-content",
+          "type": "FRAME",
+          "x": 13,
+          "y": 9,
+          "w": 302,
+          "h": 22,
+          "ax": 13,
+          "ay": 9,
+          "visible": true
+        },
+        {
+          "id": "33:4691",
+          "name": "alert-close-icon",
+          "type": "FRAME",
+          "x": 263,
+          "y": 9,
+          "w": 12,
+          "h": 12,
+          "ax": 263,
+          "ay": 9,
+          "visible": false
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "alert-content",
+        "dx": 0,
+        "dy": 0,
+        "dw": 40,
+        "dh": 0
+      }
+    ],
+    "frozen": [
+      "alert-close-icon"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 288,
+      "h": 40
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:4402",
+    "baseline": {
+      "geometry": "283833f3ac2db784",
+      "fills": "3dfb2d91ade5ce84",
+      "text": "b478cbd12e844cd9"
+    },
+    "axes": [
+      {
+        "axis": "Type",
+        "values": [
+          {
+            "value": "Info",
+            "geometry": "283833f3ac2db784",
+            "fills": "3dfb2d91ade5ce84",
+            "text": "b478cbd12e844cd9"
+          },
+          {
+            "value": "Success",
+            "geometry": "283833f3ac2db784",
+            "fills": "907a075e2850dfc8",
+            "text": "b478cbd12e844cd9"
+          },
+          {
+            "value": "Warning",
+            "geometry": "283833f3ac2db784",
+            "fills": "917b5f7ad1bd30e3",
+            "text": "b478cbd12e844cd9"
+          },
+          {
+            "value": "Error",
+            "geometry": "283833f3ac2db784",
+            "fills": "304a3b57bf8e7dbf",
+            "text": "b478cbd12e844cd9"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Show Icon",
+        "values": [
+          {
+            "value": "NoIcon",
+            "geometry": "283833f3ac2db784",
+            "fills": "3dfb2d91ade5ce84",
+            "text": "b478cbd12e844cd9"
+          },
+          {
+            "value": "Icon",
+            "geometry": "4ebfdc6c9be4d774",
+            "fills": "bdc13ef1e733d634",
+            "text": "557ac751f28f832c"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 22,
+    "bound": 15,
+    "inferred": 5,
+    "literal": 2,
+    "byGroup": {
+      "fills": {
+        "bound": 5,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 5,
+        "inferred": 1,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 3,
+        "literal": 2
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [
+      "/alert-close-icon[1]/anticon[0]/Vector[0]·width=9.67",
+      "/alert-close-icon[1]/anticon[0]/Vector[0]·height=9.67"
+    ],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Type=Info, Show Icon=NoIcon",
+      "name": "Type=Info, Show Icon=NoIcon",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 288,
+      "h": 40,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/alert-content[0]",
+      "name": "alert-content",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 2,
+      "w": 262,
+      "h": 22,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/alert-content[0]/label[0]",
+      "name": "label",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 91,
+      "h": 22,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/alert-content[0]/label[0]/Alert message[0]",
+      "name": "Alert message",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 91,
+      "h": 22,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/alert-content[0]/label-2[1]",
+      "name": "label-2",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 139,
+      "h": 22,
+      "visible": false,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/alert-content[0]/label-2[1]/Alert description copy.[0]",
+      "name": "Alert description copy.",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 139,
+      "h": 22,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/alert-close-icon[1]",
+      "name": "alert-close-icon",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 12,
+      "h": 12,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/alert-close-icon[1]/anticon[0]",
+      "name": "anticon",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 12,
+      "h": 12,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/alert-close-icon[1]/anticon[0]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 9.67,
+      "h": 9.67,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 710,
+    "sig": "0be3843bf548afa0"
+  },
+  "canvasAfter": {
+    "nodes": 710,
+    "sig": "0be3843bf548afa0"
+  },
+  "canvasRestored": true
+}

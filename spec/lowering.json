@@ -353,7 +353,7 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 7577,
+      "ruleLine": 7645,
       "ruleText": "const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };${hasGrid ? `",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {
@@ -645,7 +645,7 @@
       "stage": "emit",
       "status": "proposed",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 8275,
+      "ruleLine": 8369,
       "ruleText": "}${gridChildrenCall(hasGrid, 'comp, v.spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}${birthBoxCall(hasChildlessBox, 'comp', 'v.spec')}",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {
@@ -949,21 +949,21 @@
       "id": "emit.placement-host-section-origin-pinned",
       "family": "placement",
       "stage": "emit",
-      "status": "proposed",
+      "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 7539,
-      "ruleText": "section.x = 100;",
+      "ruleLine": 7605,
+      "ruleText": "if (isNewSection) {",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {
         "construct": "n/a — canvas placement has no CSS source; this is a pure forward-only structure decision",
-        "context": "ensureHostSection, run unconditionally after the create block, from all three call sites: the create path, amendSet and amendComponent"
+        "context": "ensureHostSection, guarding the two position writes; still reached from all three call sites (the create path, amendSet and amendComponent), but now only ACTS on a section this call created"
       },
       "figma": {
-        "construct": "the host section is moved to (100, 100) on its page"
+        "construct": "a NEW host section is placed at x = 0, y = (max bottom edge of the page’s existing children) + a 200px gutter; an EXISTING one is re-fitted in size and keeps the coordinates it already has"
       },
       "inverse": "none",
       "lost": [
-        "the designer’s own positioning of the host section — silently reverted on every amend"
+        "a host section that GROWS on amend can grow into the gutter below it and touch its neighbour (FC-HOST-SECTION-GROWTH) — preventing that would mean reflowing the neighbours, which is the one thing that cannot coexist with keeping a designer’s position"
       ],
       "canonical": "position on create; never move an existing section on amend",
       "receipt": {
@@ -972,7 +972,7 @@
       "roundTrip": "untested",
       "cases": [],
       "doors": [],
-      "why": "ensureHostSection runs this write UNCONDITIONALLY, after the create block, so it fires whether the section was just created or found by its existing marker — and it is reached from all three call sites: the create path and both amend paths. Every component this emitter touches is pinned to the same coordinate, which is also why several sets can end up stacked at one point. Registered as a decision because placement genuinely is one; registered as `proposed` because reverting a human’s deliberate edit, with no receipt, cannot be the intended one."
+      "why": "REGISTERED AS `proposed` BECAUSE THE BEHAVIOUR IT DESCRIBED WAS A DEFECT, AND IT IS NOW `implemented` BECAUSE THE CANONICAL FORM THIS RULE ALREADY NAMED IS WHAT THE EMITTER DOES. The old write was `section.x = 100; section.y = 100;` run UNCONDITIONALLY after the create block, from all three call sites — so every component this emitter touched was pinned to one coordinate, and an amend reverted a designer’s deliberate move with no receipt. Measured live on the scratch file 2026-08-26, page \"Census / altitude\": five of eight host sections at the identical (100, 100), drawn on top of each other, which is exactly the stacking this rule predicted. The guard cited here is what makes “position on create; never move an existing section on amend” true, and core/host-placement-check.ts pins both halves plus the fixed point (an unchanged set is still placed, so re-running the sync converges instead of leaving a bad coordinate untouched forever)."
     },
     {
       "id": "emit.placement-variant-cells-gridded",
@@ -980,7 +980,7 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 8172,
+      "ruleLine": 8253,
       "ruleText": "child.x = x; child.y = y;",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {
@@ -1200,7 +1200,7 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 7796,
+      "ruleLine": 7864,
       "ruleText": "if (!spec.fill) node.fills = [];",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {
@@ -1346,7 +1346,7 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 7685,
+      "ruleLine": 7753,
       "ruleText": "if (typeof spec.rotation === 'number' && spec.rotation !== 0) node.rotation = -spec.rotation;",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {

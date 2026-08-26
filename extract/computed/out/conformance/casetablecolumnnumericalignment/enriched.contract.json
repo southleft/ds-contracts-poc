@@ -1,0 +1,176 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "conformance.table-column-numeric-alignment",
+  "name": "CaseTableColumnNumericAlignment",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the CSS/DOM conformance fixture case \"table-column-numeric-alignment\" (table). The fixture varies CSS CONSTRUCTS, not prop spaces, so the prop space is deliberately EMPTY: every axis the capture would enumerate is held at nothing, and the whole measurement is the computed truth of one mounted rendering. Construct: per-COLUMN text alignment - the label cell `text-align: left`, the numeric cell `text-align: right`, at fixed column widths COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @ds-contracts/conformance@0.1.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column"
+      },
+      "parts": {
+        "c": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|c — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex"
+          },
+          "parts": {
+            "label": {
+              "text": "Widget",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "box-sizing": "border-box",
+                "font-family": "monospace",
+                "text-align": "left"
+              },
+              "tokens": {
+                "border-bottom-color": "{imported.shared.color-663399}",
+                "border-left-color": "{imported.shared.color-663399}",
+                "border-right-color": "{imported.shared.color-663399}",
+                "border-top-color": "{imported.shared.color-663399}",
+                "color": "{imported.shared.color-1976d2}",
+                "font-size": "{imported.shared.size-12}",
+                "font-weight": "{imported.shared.num-400}"
+              }
+            },
+            "label-2": {
+              "text": "7",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|b — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "box-sizing": "border-box",
+                "font-family": "monospace",
+                "text-align": "right"
+              },
+              "tokens": {
+                "border-bottom-color": "{imported.shared.color-663399}",
+                "border-left-color": "{imported.shared.color-663399}",
+                "border-right-color": "{imported.shared.color-663399}",
+                "border-top-color": "{imported.shared.color-663399}",
+                "color": "{imported.shared.color-1976d2}",
+                "font-size": "{imported.shared.size-12}",
+                "font-weight": "{imported.shared.num-400}"
+              }
+            }
+          },
+          "declared": {
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}",
+            "padding-bottom": "{imported.shared.size-4}",
+            "padding-left": "{imported.shared.size-4}",
+            "padding-right": "{imported.shared.size-4}",
+            "padding-top": "{imported.shared.size-4}"
+          }
+        },
+        "c-2": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|c — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex"
+          },
+          "parts": {
+            "label-3": {
+              "text": "Gadget",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "box-sizing": "border-box",
+                "font-family": "monospace",
+                "text-align": "left"
+              },
+              "tokens": {
+                "border-bottom-color": "{imported.shared.color-663399}",
+                "border-left-color": "{imported.shared.color-663399}",
+                "border-right-color": "{imported.shared.color-663399}",
+                "border-top-color": "{imported.shared.color-663399}",
+                "color": "{imported.shared.color-1976d2}",
+                "font-size": "{imported.shared.size-12}",
+                "font-weight": "{imported.shared.num-400}"
+              }
+            },
+            "label-4": {
+              "text": "128",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|b — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "box-sizing": "border-box",
+                "font-family": "monospace",
+                "text-align": "right"
+              },
+              "tokens": {
+                "border-bottom-color": "{imported.shared.color-663399}",
+                "border-left-color": "{imported.shared.color-663399}",
+                "border-right-color": "{imported.shared.color-663399}",
+                "border-top-color": "{imported.shared.color-663399}",
+                "color": "{imported.shared.color-1976d2}",
+                "font-size": "{imported.shared.size-12}",
+                "font-weight": "{imported.shared.num-400}"
+              }
+            }
+          },
+          "declared": {
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
+            "font-size": "{imported.shared.size-12}",
+            "padding-bottom": "{imported.shared.size-4}",
+            "padding-left": "{imported.shared.size-4}",
+            "padding-right": "{imported.shared.size-4}",
+            "padding-top": "{imported.shared.size-4}"
+          }
+        }
+      },
+      "declared": {
+        "box-sizing": "border-box",
+        "font-family": "monospace"
+      },
+      "tokens": {
+        "background-color": "{imported.case-table-column-numeric-alignment.root.background-color}",
+        "border-bottom-color": "{imported.shared.color-663399}",
+        "border-left-color": "{imported.shared.color-663399}",
+        "border-right-color": "{imported.shared.color-663399}",
+        "border-top-color": "{imported.shared.color-663399}",
+        "color": "{imported.shared.color-1976d2}",
+        "font-size": "{imported.shared.size-12}",
+        "min-height": "{imported.case-table-column-numeric-alignment.root.min-height}",
+        "min-width": "{imported.case-table-column-numeric-alignment.root.min-width}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@ds-contracts/conformance",
+        "export": "CaseTableColumnNumericAlignment"
+      }
+    }
+  }
+}

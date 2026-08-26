@@ -322,25 +322,19 @@ function rowState(row: ManifestRow, phase: Phase, censusDir: string): RowState {
 
   const usable = judgeUsable(row, path.join(REPO, USABLE_DIR));
   state.usableState = censusCell(usable);
-  // MERGE (census/stack-to-main): this demand had never EXECUTED before this
-  // branch. #59 wrote it for `--phase full`, while main's lane runs the census
-  // at `--phase code` (.github/workflows/fast.yml) — so the condition was
-  // latent, and #38 pinning the receipt at `full` (the only phase that can
-  // express the real-library ref column) is what first fires it: 162 of 170
-  // sets, because the usable observation is recorded by a LIVE Figma probe
-  // (extract/figma/census/usable-probe.plugin.js) and only altitude's 8 have
-  // ever been run.
-  //
-  // An unmeasured cell is now REPORTED, not red — the same rule #38 already
-  // applies to an ungraded verdict, and for the same reason: a gate that
-  // reds on "nobody has run the live probe yet" is measuring the operator,
-  // not the tree. What is NOT relaxed: an observation that EXISTS and is bad
-  // still reds here, and `canvas:usable:check` (main's own gate, held against
-  // parity/receipts/v1/usable-baseline.json) remains the instrument that owns
-  // the measured set. The count is printed on every run so the hole cannot go
-  // quiet — see the `usable unmeasured` line in the summary.
-  if (phase === "full" && usable.observation === null)
-    state.usableState = "UNMEASURED";
+  // #59's demand, RESTORED. This branch relaxed it to UNMEASURED because the
+  // usable observation is recorded by a LIVE Figma probe and only altitude's 8
+  // had ever been run — 162 of 170 rows had no measurement any branch could
+  // produce, and a gate that reds on "nobody has run the live probe yet" is
+  // measuring the operator, not the tree. #64 has since probed all 170, so the
+  // hole the relaxation existed for is GONE and the strict demand is
+  // satisfiable again. A gate weakened for a hole that no longer exists goes
+  // back: `usable unmeasured` now reads 0/170.
+  if (phase === "full" && usable.observation === null) {
+    failures.push(
+      `${who}: no usable observation — the third column (reflow / variant switching / token binding / no faked layout) has never been measured for this set; run \`npm run canvas:usable:check\` for the recipe`,
+    );
+  }
 
   const receiptPath = path.join(dir, "code-render.json");
   if (!existsSync(receiptPath)) {
@@ -1028,7 +1022,7 @@ async function main(): Promise<number> {
       r.verdictState === "NOT recognisable",
   ).length;
   console.log(
-    `  code rendered ${rendered}/${result.rows.length}; canvas ${canvas}/${result.rows.length}; verdict scored ${scored}/${result.rows.length}; usable unmeasured ${result.rows.filter((r) => r.usableState === "UNMEASURED").length}/${result.rows.length} (live probe not run — canvas:usable:check owns the measured set); receipt ${RECEIPT_PATH}`,
+    `  code rendered ${rendered}/${result.rows.length}; canvas ${canvas}/${result.rows.length}; verdict scored ${scored}/${result.rows.length}; receipt ${RECEIPT_PATH}`,
   );
   if (!result.ok) {
     console.error(

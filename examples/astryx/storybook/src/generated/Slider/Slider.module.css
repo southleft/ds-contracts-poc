@@ -492,6 +492,7 @@
   border-top-style: none;
   cursor: pointer;
   user-select: none;
+  position: absolute;
 }
 
 .orientation-horizontal .tooltip {

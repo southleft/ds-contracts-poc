@@ -1,0 +1,318 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / first-party",
+  "setNodeId": "39:23567",
+  "setName": "ChatMessageMetadata",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:23537",
+  "variantNodeName": "Status=Sent",
+  "axes": [
+    {
+      "axis": "Status",
+      "values": [
+        "Sent",
+        "Sending",
+        "Delivered",
+        "Read",
+        "Error"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 5,
+  "variantChildNames": [
+    "Status=Sent",
+    "Status=Sending",
+    "Status=Delivered",
+    "Status=Read",
+    "Status=Error"
+  ],
+  "reflow": {
+    "target": "39:23537",
+    "targetName": "Status=Sent",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 3,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "MIN",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 62,
+      "h": 15,
+      "children": [
+        {
+          "id": "39:23538",
+          "name": "statusIcon",
+          "type": "FRAME",
+          "x": 0,
+          "y": 1.5,
+          "w": 12,
+          "h": 12,
+          "ax": 0,
+          "ay": 1.5,
+          "visible": true
+        },
+        {
+          "id": "39:23540",
+          "name": "timestampText",
+          "type": "TEXT",
+          "x": 16,
+          "y": 0,
+          "w": 46,
+          "h": 15,
+          "ax": 16,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:23541",
+          "name": "Footer",
+          "type": "SLOT",
+          "x": 66,
+          "y": 7,
+          "w": 1,
+          "h": 1,
+          "ax": 66,
+          "ay": 7,
+          "visible": false
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 102,
+      "h": 55,
+      "children": [
+        {
+          "id": "39:23538",
+          "name": "statusIcon",
+          "type": "FRAME",
+          "x": 0,
+          "y": 21.5,
+          "w": 12,
+          "h": 12,
+          "ax": 0,
+          "ay": 21.5,
+          "visible": true
+        },
+        {
+          "id": "39:23540",
+          "name": "timestampText",
+          "type": "TEXT",
+          "x": 16,
+          "y": 20,
+          "w": 46,
+          "h": 15,
+          "ax": 16,
+          "ay": 20,
+          "visible": true
+        },
+        {
+          "id": "39:23541",
+          "name": "Footer",
+          "type": "SLOT",
+          "x": 66,
+          "y": 7,
+          "w": 1,
+          "h": 1,
+          "ax": 66,
+          "ay": 7,
+          "visible": false
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "statusIcon",
+        "dx": 0,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      },
+      {
+        "name": "timestampText",
+        "dx": 0,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [
+      "Footer"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 62,
+      "h": 15
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:3736",
+    "baseline": {
+      "geometry": "05c1662ee09a2a24",
+      "fills": "d366d400e4d0fa48",
+      "text": "8c1ca823a5d3cca4"
+    },
+    "axes": [
+      {
+        "axis": "Status",
+        "values": [
+          {
+            "value": "Sent",
+            "geometry": "05c1662ee09a2a24",
+            "fills": "d366d400e4d0fa48",
+            "text": "8c1ca823a5d3cca4"
+          },
+          {
+            "value": "Sending",
+            "geometry": "aac9b91d3ba70054",
+            "fills": "e46473d0bf54e1f4",
+            "text": "8c1ca823a5d3cca4"
+          },
+          {
+            "value": "Delivered",
+            "geometry": "af6591880079a930",
+            "fills": "e46473d0bf54e1f4",
+            "text": "8c1ca823a5d3cca4"
+          },
+          {
+            "value": "Read",
+            "geometry": "af6591880079a930",
+            "fills": "e46473d0bf54e1f4",
+            "text": "8c1ca823a5d3cca4"
+          },
+          {
+            "value": "Error",
+            "geometry": "ab9ff41875530774",
+            "fills": "fa8f300311c4af87",
+            "text": "8c1ca823a5d3cca4"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 9,
+    "bound": 4,
+    "inferred": 2,
+    "literal": 3,
+    "byGroup": {
+      "spacing": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 2,
+        "literal": 2
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 0,
+        "literal": 1
+      },
+      "fills": {
+        "bound": 1,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [
+      "/statusIcon[0]/Vector[0]·strokeWeight=0.9000000357627869",
+      "/statusIcon[0]/Vector[0]·width=6.48",
+      "/statusIcon[0]/Vector[0]·height=4.56"
+    ],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Status=Sent",
+      "name": "Status=Sent",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 3,
+      "w": 62,
+      "h": 15,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/statusIcon[0]",
+      "name": "statusIcon",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 12,
+      "h": 12,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/statusIcon[0]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 6.48,
+      "h": 4.56,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/timestampText[1]",
+      "name": "timestampText",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 46,
+      "h": 15,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/Footer[2]",
+      "name": "Footer",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 1,
+      "h": 1,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasAfter": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasRestored": true
+}

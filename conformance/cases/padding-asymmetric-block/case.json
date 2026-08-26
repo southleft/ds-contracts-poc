@@ -1,0 +1,19 @@
+{
+  "id": "padding-asymmetric-block",
+  "feature": "box",
+  "construct": "padding: 10px 4px 20px 4px — four sides, top and bottom DIFFERENT",
+  "why": "Four of the six padding rows were CARRIED on a code citation alone; the only measured one was padding-left, and every existing padding case is symmetric top-to-bottom, so a lowering that collapsed the block axis to a single value would have passed all of them. An unequal top and bottom is the cheapest construct that can tell paddingTop and paddingBottom apart on the canvas.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.tokens.padding-top",
+  "observable": {
+    "part": "root",
+    "channel": "padding-top",
+    "capturedValue": "10px"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "paddingTop 10 / paddingBottom 20 on the root auto-layout frame"
+  },
+  "blockStage": true
+}

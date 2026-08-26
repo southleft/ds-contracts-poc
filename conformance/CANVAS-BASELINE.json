@@ -2,11 +2,11 @@
   "_marker": "THE MEASURED ROUND TRIP — contract → Figma (mock) → dump → propose ≡ contract, per conformance case, on the case's own channel. Every SILENT entry is an OPEN DEFECT the engine must name or carry; it is never waivable and leaves this file only by being fixed. The gate refuses drift in EITHER direction: a regression is red, and an improvement must be re-recorded here so a fix can never be absorbed silently.",
   "measuredAt": "extract/computed/out/conformance/<case>/enriched.contract.json through figma-sync/plugin/engine (mock figma) and core/propose-figma (npx tsx conformance/canvas.ts)",
   "counts": {
-    "ROUND-TRIPPED": 50,
-    "NAMED": 16,
+    "ROUND-TRIPPED": 64,
+    "NAMED": 17,
     "DRIFTED": 0,
     "HARMFUL": 0,
-    "SILENT": 0,
+    "SILENT": 1,
     "REFUSED-BY-NAME": 1,
     "SEED-ABSENT": 0
   },
@@ -211,6 +211,56 @@
       "refIdentical": true,
       "note": ""
     },
+    "combobox-closed-trigger": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "justify-content",
+      "seed": [
+        "space-between"
+      ],
+      "proposed": [
+        "space-between"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "combobox-option-highlighted": {
+      "classification": "NAMED",
+      "channel": "border-left-color",
+      "seed": [
+        "#2563eb"
+      ],
+      "proposed": [
+        "#663399",
+        "#cbd5e1"
+      ],
+      "note": "value came back as #663399, #cbd5e1 (seed #2563eb) — code-only channel label.border-left-color = {imported.shared.color-00000000} — a Figma node carries ONE strokes paint and the majority of the DRAWN sides claims it — this side's colour disagrees and stays code-only (the one-paint limit, named per side)."
+    },
+    "combobox-option-selected": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "background-color",
+      "seed": [
+        "#dbeafe"
+      ],
+      "proposed": [
+        "#dbeafe",
+        "#ffffff"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "combobox-popover-overlay-inset": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "top",
+      "seed": [
+        "34px"
+      ],
+      "proposed": [
+        "0px",
+        "34px"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
     "custom-prop-two-hop": {
       "classification": "ROUND-TRIPPED",
       "channel": "color",
@@ -271,6 +321,18 @@
       "channelAs": "padding-inline",
       "note": "channel respelled: padding-left → padding-inline"
     },
+    "flex-align-items-center": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "align-items",
+      "seed": [
+        "center"
+      ],
+      "proposed": [
+        "center"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
     "flex-direction-by-axis": {
       "classification": "ROUND-TRIPPED",
       "channel": "flex-direction",
@@ -280,6 +342,18 @@
       "proposed": [
         "column",
         "row"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "flex-direction-column": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "flex-direction",
+      "seed": [
+        "column"
+      ],
+      "proposed": [
+        "column"
       ],
       "refIdentical": true,
       "note": ""
@@ -401,6 +475,18 @@
       ],
       "proposed": [
         "center"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "grid-child-align-self-start": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "align-self",
+      "seed": [
+        "start"
+      ],
+      "proposed": [
+        "start"
       ],
       "refIdentical": true,
       "note": ""
@@ -596,6 +682,15 @@
       "refIdentical": true,
       "note": ""
     },
+    "margin-top-in-flow": {
+      "classification": "SILENT",
+      "channel": "margin-top",
+      "seed": [
+        "12px"
+      ],
+      "proposed": [],
+      "note": ""
+    },
     "min-max-width": {
       "classification": "ROUND-TRIPPED",
       "channel": "min-width",
@@ -640,6 +735,20 @@
         "{imported.case-overlay-text-fill-pinned-size.label.width.{size}}"
       ],
       "note": "value came back as 8px, {imported.case-overlay-text-fill-pinned-size.label.width.{size}} (seed 24px) — «self»:root: root width binding {«self».root.width.{size}} carries as **max-width**, not width — a component's outer size is fluid-up-to in code and the canvas draws the max. Same token, translated channel; nothing dropped"
+    },
+    "padding-asymmetric-block": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "padding-top",
+      "seed": [
+        "10px"
+      ],
+      "proposed": [
+        "10px",
+        "20px",
+        "4px"
+      ],
+      "refIdentical": true,
+      "note": ""
     },
     "page-global-star-rule": {
       "classification": "ROUND-TRIPPED",
@@ -714,6 +823,62 @@
       "refIdentical": true,
       "note": ""
     },
+    "repeat-grid-month": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "background-color",
+      "seed": [
+        "#a020a0"
+      ],
+      "proposed": [
+        "#a020a0",
+        "#d2dce6",
+        "#eeeeee"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "repeat-siblings-seven": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "background-color",
+      "seed": [
+        "#4080bf"
+      ],
+      "proposed": [
+        "#4080bf",
+        "#d2dce6",
+        "#eeeeee"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "repeat-siblings-thirtyone": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "background-color",
+      "seed": [
+        "#20a060"
+      ],
+      "proposed": [
+        "#20a060",
+        "#d2dce6",
+        "#eeeeee"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "repeat-siblings-three": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "background-color",
+      "seed": [
+        "#bf4020"
+      ],
+      "proposed": [
+        "#bf4020",
+        "#d2dce6",
+        "#eeeeee"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
     "shadow-part": {
       "classification": "ROUND-TRIPPED",
       "channel": "color",
@@ -722,6 +887,44 @@
       ],
       "proposed": [
         "#b4145a"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "table-column-numeric-alignment": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "text-align",
+      "seed": [
+        "right"
+      ],
+      "proposed": [
+        "right"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "table-header-row-distinct": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "font-weight",
+      "seed": [
+        "700"
+      ],
+      "proposed": [
+        "400",
+        "700"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "table-zebra-nth-child": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "background-color",
+      "seed": [
+        "#f4f6f8"
+      ],
+      "proposed": [
+        "#f4f6f8",
+        "#fcfcfc"
       ],
       "refIdentical": true,
       "note": ""

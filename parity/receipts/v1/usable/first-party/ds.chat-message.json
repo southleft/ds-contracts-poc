@@ -1,0 +1,280 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / first-party",
+  "setNodeId": "39:23588",
+  "setName": "ChatMessage",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:23570",
+  "variantNodeName": "Sender=Assistant",
+  "axes": [
+    {
+      "axis": "Sender",
+      "values": [
+        "Assistant",
+        "User",
+        "System"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 3,
+  "variantChildNames": [
+    "Sender=Assistant",
+    "Sender=User",
+    "Sender=System"
+  ],
+  "reflow": {
+    "target": "39:23570",
+    "targetName": "Sender=Assistant",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "FIXED",
+      "v": "HUG",
+      "primary": "FIXED",
+      "counter": "AUTO",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 640,
+      "h": 35,
+      "children": [
+        {
+          "id": "39:23571",
+          "name": "Avatar",
+          "type": "SLOT",
+          "x": 0,
+          "y": 0,
+          "w": 1,
+          "h": 1,
+          "ax": 0,
+          "ay": 0,
+          "visible": false
+        },
+        {
+          "id": "39:23572",
+          "name": "body",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 35,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 680,
+      "h": 75,
+      "children": [
+        {
+          "id": "39:23571",
+          "name": "Avatar",
+          "type": "SLOT",
+          "x": 0,
+          "y": 0,
+          "w": 1,
+          "h": 1,
+          "ax": 0,
+          "ay": 0,
+          "visible": false
+        },
+        {
+          "id": "39:23572",
+          "name": "body",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 680,
+          "h": 35,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "body",
+        "dx": 0,
+        "dy": 0,
+        "dw": 40,
+        "dh": 0
+      }
+    ],
+    "frozen": [
+      "Avatar"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 640,
+      "h": 35
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:3766",
+    "baseline": {
+      "geometry": "d7c18e515652620c",
+      "fills": "9c6937d73383d660",
+      "text": "b1e6eea76d9178d0"
+    },
+    "axes": [
+      {
+        "axis": "Sender",
+        "values": [
+          {
+            "value": "Assistant",
+            "geometry": "d7c18e515652620c",
+            "fills": "9c6937d73383d660",
+            "text": "b1e6eea76d9178d0"
+          },
+          {
+            "value": "User",
+            "geometry": "3f1e09e71390cc6c",
+            "fills": "252629ddd51db157",
+            "text": "6036a186c0f64924"
+          },
+          {
+            "value": "System",
+            "geometry": "d7c18e515652620c",
+            "fills": "2ee7ad1eff746120",
+            "text": "b1e6eea76d9178d0"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 15,
+    "bound": 13,
+    "inferred": 2,
+    "literal": 0,
+    "byGroup": {
+      "spacing": {
+        "bound": 7,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 2,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Sender=Assistant",
+      "name": "Sender=Assistant",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 640,
+      "h": 35,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/Avatar[0]",
+      "name": "Avatar",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 1,
+      "h": 1,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/body[1]",
+      "name": "body",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 3,
+      "w": 640,
+      "h": 35,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/body[1]/nameText[0]",
+      "name": "nameText",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 55,
+      "h": 15,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/body[1]/Children[1]",
+      "name": "Children",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 0,
+      "w": 640,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/body[1]/Metadata[2]",
+      "name": "Metadata",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 640,
+      "h": 1,
+      "visible": false,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasAfter": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasRestored": true
+}

@@ -1,0 +1,281 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / shadcn",
+  "setNodeId": "39:9594",
+  "setName": "Tabs (shadcn.tabs)",
+  "setType": "COMPONENT",
+  "variantNodeId": "39:9594",
+  "variantNodeName": "Tabs (shadcn.tabs)",
+  "axes": null,
+  "axesError": null,
+  "variantChildCount": 1,
+  "variantChildNames": [
+    "Tabs (shadcn.tabs)"
+  ],
+  "reflow": {
+    "target": "39:9594",
+    "targetName": "Tabs (shadcn.tabs)",
+    "layoutMode": "VERTICAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 285.58,
+      "h": 64,
+      "children": [
+        {
+          "id": "39:9595",
+          "name": "part-0",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 229.3,
+          "h": 36,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:9602",
+          "name": "label-4",
+          "type": "TEXT",
+          "x": 0,
+          "y": 44,
+          "w": 285,
+          "h": 20,
+          "ax": 0,
+          "ay": 44,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 325.58,
+      "h": 104,
+      "children": [
+        {
+          "id": "39:9595",
+          "name": "part-0",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 229.3,
+          "h": 36,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:9602",
+          "name": "label-4",
+          "type": "TEXT",
+          "x": 0,
+          "y": 44,
+          "w": 285,
+          "h": 20,
+          "ax": 0,
+          "ay": 44,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "part-0",
+      "label-4"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 285.58,
+      "h": 64
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:971",
+    "baseline": {
+      "geometry": "047ff355580af3ab",
+      "fills": "1b0a688e55c5d504",
+      "text": "6f388f6ef80be49c"
+    },
+    "axes": [],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 59,
+    "bound": 52,
+    "inferred": 7,
+    "literal": 0,
+    "byGroup": {
+      "spacing": {
+        "bound": 20,
+        "inferred": 1,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 8,
+        "inferred": 2,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 5,
+        "inferred": 1,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 16,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 3,
+        "inferred": 3,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Tabs (shadcn.tabs)",
+      "name": "Tabs (shadcn.tabs)",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 2,
+      "w": 285.58,
+      "h": 64,
+      "visible": true,
+      "parentLayoutMode": null,
+      "parentType": "SECTION"
+    },
+    {
+      "path": "/part-0[0]",
+      "name": "part-0",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 3,
+      "w": 229.3,
+      "h": 36,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/part-0[0]/label[0]",
+      "name": "label",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 81.53,
+      "h": 29,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/part-0[0]/label[0]/label-text[0]",
+      "name": "label-text",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 64,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/part-0[0]/label-2[1]",
+      "name": "label-2",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 68.86,
+      "h": 29,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/part-0[0]/label-2[1]/label-2-text[0]",
+      "name": "label-2-text",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 51,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/part-0[0]/label-3[2]",
+      "name": "label-3",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 72.91,
+      "h": 29,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/part-0[0]/label-3[2]/label-3-text[0]",
+      "name": "label-3-text",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 56,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/label-4[1]",
+      "name": "label-4",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 285,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 291,
+    "sig": "2323b4b6ec9f2790"
+  },
+  "canvasAfter": {
+    "nodes": 291,
+    "sig": "2323b4b6ec9f2790"
+  },
+  "canvasRestored": true
+}

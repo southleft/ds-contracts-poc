@@ -15,12 +15,12 @@ never waivable.
 
 | | |
 |---|---|
-| cases (CARRIED + LOWERED) | **67** |
-| 🟢 round-tripped | **50** |
-| 🟢 named (dropped, and a receipt says so) | **16** |
+| cases (CARRIED + LOWERED) | **83** |
+| 🟢 round-tripped | **64** |
+| 🟢 named (dropped, and a receipt says so) | **17** |
 | 🟡 refused by name (the canvas cannot host the seed, and says so) | **1** |
 | ⚪ seed-absent (nothing to round-trip) | **0** |
-| 🔴 red | **0** — SILENT 0 · DRIFTED 0 · HARMFUL 0 |
+| 🔴 red | **1** — SILENT 1 · DRIFTED 0 · HARMFUL 0 |
 
 Verdicts: **ROUND-TRIPPED** the channel came back with the seed's value (refs
 resolved; "ref" says whether the token spelling survived, "as" names a
@@ -32,7 +32,13 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 **HARMFUL** the manifest says no canvas spelling exists and it came back anyway ·
 **SILENT** vanished, named by nothing — never waivable.
 
-## 🟢 NAMED — 16
+## 🔴 SILENT — 1
+
+| case | feature | construct | channel | expect | came back | ref | as | note |
+|---|---|---|---|---|---|---|---|---|
+| `margin-top-in-flow` | box | margin-top: 12px on the SECOND child of a flex column whose parent declares no gap | `margin-top` | CARRIED | — |  |  |  |
+
+## 🟢 NAMED — 17
 
 | case | feature | construct | channel | expect | came back | ref | as | note |
 |---|---|---|---|---|---|---|---|---|
@@ -42,6 +48,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `antd-overlay-digit-depth-three` | anatomy | sup(absolute, translate(50%,-50%)) > bdi > span > span — a count digit THREE levels deep in an absolutely positioned overlay, the deepest span carrying NO identity class (antd's rc-scroll-number `current` is transient and dropped by classAllow; the fixture spells the same absence with a bare span — the frontier eval refuses any non-neutral class in a case) | `__text` | CARRIED | — |  |  | code-only channel label-2.border-bottom-color = {imported.shared.color-663399} — per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides. |
 | `antd-part-transition-channel` | motion | .cf-a { transition: background-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) } — a transition declared on a CHILD PART, not the root (antd's `motionDurationMid` on every interactive part) | `transition-duration` | CARRIED | — |  |  | code-only declared label.transition-duration = 0.2s — Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame. |
 | `aspect-ratio` | geometry | aspect-ratio: 2 / 1 | `aspect-ratio` | CARRIED | — |  |  | code-only channel root.aspect-ratio = 2 / 1 — the canvas has no aspect-ratio field — LOWERED to a fixed height of 40px (bound width 80px ÷ 2); the ratio does not reach the canvas, a width change there will not follow it, and the dump reads… |
+| `combobox-option-highlighted` | combobox | 5 sibling options where ONE is HIGHLIGHTED (active descendant) by a single-SIDE border - `border-left: 3px solid rgb(37, 99, 235)` against a transparent left border on the other four | `border-left-color` | CARRIED | #663399, #cbd5e1 |  |  | value came back as #663399, #cbd5e1 (seed #2563eb) — code-only channel label.border-left-color = {imported.shared.color-00000000} — a Figma node carries ONE strokes paint and the majority of the DRAWN sides claims it — this side's colour d… |
 | `display-block` | display | display: block | `display` | CARRIED | flex |  |  | value came back as flex (seed block) — code-only declared root.display = block — CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-lev… |
 | `grid-area-empty-slot` | grid-areas | a declared grid area with NO children (empty slot) | `grid-template-areas` | CARRIED | — |  |  | «self»:root: 2 grid child(ren) (a, b) carry EXPLICIT placement rects, not named areas — Figma has no native area names (G4: the CONTRACT owns them, the canvas carries only the rect), so an area name survives the round trip ONLY through a p… |
 | `grid-child-text-hug` | grid-sizing | a TEXT child hugging its content inside a grid cell | `__text` | CARRIED | — |  |  | code-only channel label.border-bottom-color = {imported.shared.color-663399} — per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides. |
@@ -59,7 +66,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 |---|---|---|---|---|---|---|---|---|
 | `grid-instance-child` | grid-composition | a component INSTANCE placed in a cell with position + FILL | `grid-column-start` | CARRIED | — |  |  | mock figma (component step): Error: grid-placement-cycle-no-spare: the declared 1x2 grid has no free cell to break a placement cycle through — refusing rather than throwing P3 mid-script |
 
-## 🟢 ROUND-TRIPPED — 50
+## 🟢 ROUND-TRIPPED — 64
 
 | case | feature | construct | channel | expect | came back | ref | as | note |
 |---|---|---|---|---|---|---|---|---|
@@ -75,11 +82,16 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `color-hex` | color | color: #1976d2 (authored as hex) | `color` | CARRIED | #1976d2 | same |  |  |
 | `color-rgb-solid` | color | background-color: rgb(25, 118, 210) | `background-color` | CARRIED | #1976d2 | same |  |  |
 | `color-rgba-alpha` | color | background-color: rgba(25, 118, 210, 0.5) | `background-color` | CARRIED | #1976d280 | same |  |  |
+| `combobox-closed-trigger` | combobox | the CLOSED combobox trigger - `justify-content: space-between` pushing a value label and a two-border chevron box to opposite ends of a bordered row | `justify-content` | CARRIED | space-between | same |  |  |
+| `combobox-option-selected` | combobox | 5 sibling options where ONE is SELECTED - a distinct fill (rgb(219, 234, 254)) and weight among four identical siblings | `background-color` | CARRIED | #dbeafe, #ffffff | same |  |  |
+| `combobox-popover-overlay-inset` | combobox | the OPEN listbox as an out-of-flow overlay - `position: absolute; top: 34px` under a `position: relative` trigger, so the popover does not participate in the trigger's flow | `top` | CARRIED | 0px, 34px | same |  |  |
 | `custom-prop-two-hop` | custom-properties | --a: #123456; --b: var(--a); color: var(--b) | `color` | LOWERED | #123456 | same |  |  |
 | `display-flex` | display | display: flex | `display` | CARRIED | flex | same |  |  |
 | `display-inline-flex` | display | display: inline-flex | `display` | CARRIED | flex | same |  |  |
 | `em-relative-padding` | units | padding: 1.5em against a 12px font-size | `padding-left` | CARRIED | 18px | same | `padding-inline` | channel respelled: padding-left → padding-inline |
+| `flex-align-items-center` | layout-flex | display: flex; align-items: center — cross-axis centring of two children of DIFFERENT heights | `align-items` | CARRIED | center | same |  |  |
 | `flex-direction-by-axis` | layout | flex-direction that VARIES on one enum axis (column at the default value, row on the other) — the fluent.card orientation shape | `flex-direction` | CARRIED | column, row | same |  |  |
+| `flex-direction-column` | layout-flex | display: flex; flex-direction: column — the main axis turned vertical | `flex-direction` | CARRIED | column | same |  |  |
 | `flex-direction-reverse-by-axis` | layout | flex-direction: row-reverse at the DEFAULT axis value and row at the other (the carbon.accordion `align` shape, whose default IS the reversed one) | `flex-direction` | CARRIED | row, row-reverse | same |  |  |
 | `flex-gap` | layout | column-gap / row-gap in px | `column-gap` | CARRIED | 12px | same | `gap` | channel respelled: column-gap → gap |
 | `flex-wrap-wrap` | layout | uniform flex-wrap: wrap on a flex row narrow enough to wrap | `flex-wrap` | CARRIED | wrap | same |  |  |
@@ -89,6 +101,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `grid-auto-flow-row` | grid-flow | grid-auto-flow: row over declared columns AND declared row tracks, placement by child order | `grid-auto-flow` | CARRIED | row | same |  |  |
 | `grid-bento-span-matrix` | grid-placement | 3x4 grid, rows [80px,1fr,2fr], cols [160px,1fr,1fr,120px], gaps 12/16, header 1x4 + sidebar 2x1 + main 1x2 + rail 2x1 + footer 1x2, all cells FILL | `grid-template-columns` | CARRIED | 160px 1fr 1fr 120px | same |  |  |
 | `grid-child-align` | grid-alignment | justify-self: center; align-self: end on a fixed-size child | `justify-self` | CARRIED | center | same |  |  |
+| `grid-child-align-self-start` | grid-alignment | align-self: start on a fixed-size grid child, with no justify-self declared | `align-self` | CARRIED | start | same |  |  |
 | `grid-child-fill-cell` | grid-sizing | grid child stretching to its cell (CSS default; canvas FILL both axes) | `grid-row-start` | CARRIED | 1 | same |  |  |
 | `grid-col-span` | grid-placement | grid-column: 1 / span 2 (child spans 2 columns) | `grid-column-end` | CARRIED | 1, 3, span 2 | same |  |  |
 | `grid-explicit-anchor` | grid-placement | grid-row: 3; grid-column: 2 (explicit cell placement, 0-based contract / 1-based CSS) | `grid-row-start` | CARRIED | 1, 3 | same |  |  |
@@ -104,12 +117,20 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `grid-zero-track-collapse` | grid-tracks | a computed grid track list containing a 0px track — the resolved width of an EMPTY slot column (min-content with no occupant) | `grid-template-columns` | CARRIED | 288px | same |  |  |
 | `min-max-width` | geometry | min-width / max-width in px | `min-width` | CARRIED | 96px | same |  |  |
 | `oklch-color` | color | background-color: oklch(0.6 0.15 250) | `background-color` | CARRIED | #2784d5 | same |  |  |
+| `padding-asymmetric-block` | box | padding: 10px 4px 20px 4px — four sides, top and bottom DIFFERENT | `padding-top` | CARRIED | 10px, 20px, 4px | same |  |  |
 | `page-global-star-rule` | cascade | * { border-color: var(--cf-color-secondary) } — a PAGE-GLOBAL authored declaration, with the element's border-width and border-style declared locally and its colour reaching it only through the universal rule | `border-top-color` | CARRIED | #663399 | same |  |  |
 | `page-inherited-ink` | cascade | body { color: var(--cf-color-primary) } — the document's ink, inherited by a text-bearing part that declares no colour of its own | `color` | CARRIED | #1976d2 | same |  |  |
 | `percentage-padding` | units | padding-left: 10% (resolved against the PARENT width) | `padding-left` | CARRIED | 28.7969px | same |  |  |
 | `position-absolute-insets` | position | position: absolute + top/left insets | `top` | CARRIED | 4px, 6px | same |  |  |
 | `pseudo-placeholder` | pseudo-elements | input::placeholder { color } | `placeholder-color` | CARRIED | #969696 | same |  |  |
+| `repeat-grid-month` | repetition | a 7-column CSS grid of 35 auto-placed cells (5 weeks), the LAST carrying a distinct paint (rgb(160, 32, 160)) | `background-color` | CARRIED | #a020a0, #d2dce6, #eeeeee | same |  |  |
+| `repeat-siblings-seven` | repetition | 7 adjacent same-shape siblings, the LAST carrying a distinct paint (rgb(64, 128, 191)) | `background-color` | CARRIED | #4080bf, #d2dce6, #eeeeee | same |  |  |
+| `repeat-siblings-thirtyone` | repetition | 31 adjacent same-shape siblings (a wrapping flex run), the LAST carrying a distinct paint (rgb(32, 160, 96)) | `background-color` | CARRIED | #20a060, #d2dce6, #eeeeee | same |  |  |
+| `repeat-siblings-three` | repetition | 3 adjacent same-shape siblings, the LAST carrying a distinct paint (rgb(191, 64, 32)) | `background-color` | CARRIED | #bf4020, #d2dce6, #eeeeee | same |  |  |
 | `shadow-part` | shadow-dom | ::part(label) styling across an OPEN shadow boundary | `color` | CARRIED | #b4145a | same |  |  |
+| `table-column-numeric-alignment` | table | per-COLUMN text alignment - the label cell `text-align: left`, the numeric cell `text-align: right`, at fixed column widths | `text-align` | CARRIED | right | same |  |  |
+| `table-header-row-distinct` | table | a div-built table whose HEADER row differs from the body rows by weight (700) and fill - no table formatting context involved | `font-weight` | CARRIED | 400, 700 | same |  |  |
+| `table-zebra-nth-child` | table | zebra striping by STRUCTURAL SELECTOR - `.cf-a:nth-child(even) { background-color }` over 6 otherwise identical rows | `background-color` | CARRIED | #f4f6f8, #fcfcfc | same |  |  |
 | `var-fallback-chain` | custom-properties | color: var(--cf-missing, var(--cf-color-secondary, #333)) | `color` | CARRIED | #663399 | same |  |  |
 | `var-longhand` | custom-properties | background-color: var(--cf-color-primary) | `background-color` | CARRIED | #1976d2 | same |  |  |
 | `webkit-text-fill-color` | vendor-prefixed | -webkit-text-fill-color OVERRIDING color | `color` | CARRIED | #999999 | same |  |  |

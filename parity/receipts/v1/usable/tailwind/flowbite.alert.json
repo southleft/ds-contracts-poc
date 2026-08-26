@@ -1,0 +1,297 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / tailwind",
+  "setNodeId": "39:5876",
+  "setName": "Alert (flowbite.alert)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:5840",
+  "variantNodeName": "Color=Info",
+  "axes": [
+    {
+      "axis": "Color",
+      "values": [
+        "Info",
+        "Failure",
+        "Success",
+        "Warning"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 4,
+  "variantChildNames": [
+    "Color=Info",
+    "Color=Failure",
+    "Color=Success",
+    "Color=Warning"
+  ],
+  "reflow": {
+    "target": "39:5840",
+    "targetName": "Color=Info",
+    "layoutMode": "VERTICAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 128,
+      "h": 52,
+      "children": [
+        {
+          "id": "39:5841",
+          "name": "part-0",
+          "type": "FRAME",
+          "x": 16,
+          "y": 16,
+          "w": 96,
+          "h": 20,
+          "ax": 16,
+          "ay": 16,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 168,
+      "h": 92,
+      "children": [
+        {
+          "id": "39:5841",
+          "name": "part-0",
+          "type": "FRAME",
+          "x": 16,
+          "y": 16,
+          "w": 96,
+          "h": 20,
+          "ax": 16,
+          "ay": 16,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "part-0"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 128,
+      "h": 52
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:329",
+    "baseline": {
+      "geometry": "fd7508f4e5dd2d24",
+      "fills": "499dcc224e42c104",
+      "text": "cef30ef06a9caa79"
+    },
+    "axes": [
+      {
+        "axis": "Color",
+        "values": [
+          {
+            "value": "Info",
+            "geometry": "fd7508f4e5dd2d24",
+            "fills": "499dcc224e42c104",
+            "text": "cef30ef06a9caa79"
+          },
+          {
+            "value": "Failure",
+            "geometry": "667bc634c2ecac28",
+            "fills": "61171dabd508cac4",
+            "text": "cef30ef06a9caa79"
+          },
+          {
+            "value": "Success",
+            "geometry": "2c050554795f26bc",
+            "fills": "70f0189baed5f92e",
+            "text": "cef30ef06a9caa79"
+          },
+          {
+            "value": "Warning",
+            "geometry": "2e7a8cd28cc7942c",
+            "fills": "1eb4918b9c76a754",
+            "text": "cef30ef06a9caa79"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 34,
+    "bound": 18,
+    "inferred": 15,
+    "literal": 1,
+    "byGroup": {
+      "fills": {
+        "bound": 5,
+        "inferred": 0,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 5,
+        "inferred": 6,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 8,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 9,
+        "literal": 1
+      }
+    },
+    "literalSites": [
+      "/part-0[0]/dismiss[2]/dismiss-icon[0]/Vector[0]·width=12.01"
+    ],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Color=Info",
+      "name": "Color=Info",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 128,
+      "h": 52,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/part-0[0]",
+      "name": "part-0",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 3,
+      "w": 96,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/part-0[0]/alert-icon[0]",
+      "name": "alert-icon",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 32,
+      "h": 20,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/part-0[0]/alert-icon[0]/alert-icon-info[0]",
+      "name": "alert-icon-info",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 20,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/part-0[0]/alert-icon[0]/alert-icon-info[0]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 16,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/part-0[0]/label[1]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 96,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/part-0[0]/dismiss[2]",
+      "name": "dismiss",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 32,
+      "h": 32,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/part-0[0]/dismiss[2]/dismiss-icon[0]",
+      "name": "dismiss-icon",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 20,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/part-0[0]/dismiss[2]/dismiss-icon[0]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 12.01,
+      "h": 12,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 243,
+    "sig": "e17d8ad6cd30fd1c"
+  },
+  "canvasAfter": {
+    "nodes": 243,
+    "sig": "e17d8ad6cd30fd1c"
+  },
+  "canvasRestored": true
+}

@@ -1,0 +1,355 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / tailwind",
+  "setNodeId": "39:5969",
+  "setName": "Button (flowbite.button)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:5879",
+  "variantNodeName": "Color=Default, Size=Md, State=Default",
+  "axes": [
+    {
+      "axis": "Color",
+      "values": [
+        "Default",
+        "Alternative",
+        "Dark",
+        "Green",
+        "Red"
+      ]
+    },
+    {
+      "axis": "Size",
+      "values": [
+        "Md",
+        "Xs",
+        "Sm",
+        "Lg",
+        "Xl"
+      ]
+    },
+    {
+      "axis": "State",
+      "values": [
+        "Default",
+        "Disabled",
+        "Active",
+        "Focus Visible",
+        "Hover"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 45,
+  "variantChildNames": [
+    "Color=Default, Size=Md, State=Default",
+    "Color=Default, Size=Xs, State=Default",
+    "Color=Default, Size=Sm, State=Default",
+    "Color=Default, Size=Lg, State=Default",
+    "Color=Default, Size=Xl, State=Default",
+    "Color=Alternative, Size=Md, State=Default",
+    "Color=Alternative, Size=Xs, State=Default",
+    "Color=Alternative, Size=Sm, State=Default",
+    "Color=Alternative, Size=Lg, State=Default",
+    "Color=Alternative, Size=Xl, State=Default",
+    "Color=Dark, Size=Md, State=Default",
+    "Color=Dark, Size=Xs, State=Default",
+    "Color=Dark, Size=Sm, State=Default",
+    "Color=Dark, Size=Lg, State=Default",
+    "Color=Dark, Size=Xl, State=Default",
+    "Color=Green, Size=Md, State=Default",
+    "Color=Green, Size=Xs, State=Default",
+    "Color=Green, Size=Sm, State=Default",
+    "Color=Green, Size=Lg, State=Default",
+    "Color=Green, Size=Xl, State=Default",
+    "Color=Red, Size=Md, State=Default",
+    "Color=Red, Size=Xs, State=Default",
+    "Color=Red, Size=Sm, State=Default",
+    "Color=Red, Size=Lg, State=Default",
+    "Color=Red, Size=Xl, State=Default",
+    "Color=Default, Size=Md, State=Disabled",
+    "Color=Alternative, Size=Md, State=Disabled",
+    "Color=Dark, Size=Md, State=Disabled",
+    "Color=Green, Size=Md, State=Disabled",
+    "Color=Red, Size=Md, State=Disabled",
+    "Color=Default, Size=Md, State=Active",
+    "Color=Alternative, Size=Md, State=Active",
+    "Color=Dark, Size=Md, State=Active",
+    "Color=Green, Size=Md, State=Active",
+    "Color=Red, Size=Md, State=Active",
+    "Color=Default, Size=Md, State=Focus Visible",
+    "Color=Alternative, Size=Md, State=Focus Visible",
+    "Color=Dark, Size=Md, State=Focus Visible",
+    "Color=Green, Size=Md, State=Focus Visible",
+    "Color=Red, Size=Md, State=Focus Visible",
+    "Color=Default, Size=Md, State=Hover",
+    "Color=Alternative, Size=Md, State=Hover",
+    "Color=Dark, Size=Md, State=Hover",
+    "Color=Green, Size=Md, State=Hover",
+    "Color=Red, Size=Md, State=Hover"
+  ],
+  "reflow": {
+    "target": "39:5879",
+    "targetName": "Color=Default, Size=Md, State=Default",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "HUG",
+      "v": "FIXED",
+      "primary": "AUTO",
+      "counter": "FIXED",
+      "primaryAlign": "CENTER",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 85,
+      "h": 40,
+      "children": [
+        {
+          "id": "39:5880",
+          "name": "label",
+          "type": "TEXT",
+          "x": 20,
+          "y": 10,
+          "w": 45,
+          "h": 20,
+          "ax": 20,
+          "ay": 10,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 125,
+      "h": 80,
+      "children": [
+        {
+          "id": "39:5880",
+          "name": "label",
+          "type": "TEXT",
+          "x": 40,
+          "y": 30,
+          "w": 45,
+          "h": 20,
+          "ax": 40,
+          "ay": 30,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "label",
+        "dx": 20,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 85,
+      "h": 40
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:370",
+    "baseline": {
+      "geometry": "d998fa78a3de2c0c",
+      "fills": "503b17d419a932b8",
+      "text": "1e5b36f18dc4cd44"
+    },
+    "axes": [
+      {
+        "axis": "Color",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "d998fa78a3de2c0c",
+            "fills": "503b17d419a932b8",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Alternative",
+            "geometry": "b86d131b08c0ca98",
+            "fills": "aee93d21ab70f44f",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Dark",
+            "geometry": "d998fa78a3de2c0c",
+            "fills": "4b830e6309358524",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Green",
+            "geometry": "d998fa78a3de2c0c",
+            "fills": "325ee966245419b0",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Red",
+            "geometry": "d998fa78a3de2c0c",
+            "fills": "fa1a755615ff85f7",
+            "text": "1e5b36f18dc4cd44"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Md",
+            "geometry": "d998fa78a3de2c0c",
+            "fills": "503b17d419a932b8",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Xs",
+            "geometry": "85f555c3d8fe1d20",
+            "fills": "503b17d419a932b8",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Sm",
+            "geometry": "8b1b9623325c173c",
+            "fills": "503b17d419a932b8",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Lg",
+            "geometry": "4cc740d68619ea04",
+            "fills": "503b17d419a932b8",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Xl",
+            "geometry": "c927a41788c46c24",
+            "fills": "503b17d419a932b8",
+            "text": "1e5b36f18dc4cd44"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "State",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "d998fa78a3de2c0c",
+            "fills": "503b17d419a932b8",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Disabled",
+            "geometry": "d998fa78a3de2c0c",
+            "fills": "503b17d419a932b8",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Active",
+            "geometry": "d998fa78a3de2c0c",
+            "fills": "0e90829ae66b8ef4",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Focus Visible",
+            "geometry": "d998fa78a3de2c0c",
+            "fills": "9c690c6c108093a8",
+            "text": "1e5b36f18dc4cd44"
+          },
+          {
+            "value": "Hover",
+            "geometry": "d998fa78a3de2c0c",
+            "fills": "0e90829ae66b8ef4",
+            "text": "1e5b36f18dc4cd44"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 11,
+    "bound": 9,
+    "inferred": 2,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 1,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Color=Default, Size=Md, State=Default",
+      "name": "Color=Default, Size=Md, State=Default",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 85,
+      "h": 40,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 45,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 243,
+    "sig": "e17d8ad6cd30fd1c"
+  },
+  "canvasAfter": {
+    "nodes": 243,
+    "sig": "e17d8ad6cd30fd1c"
+  },
+  "canvasRestored": true
+}

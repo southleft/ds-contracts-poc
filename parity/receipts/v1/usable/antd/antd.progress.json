@@ -1,0 +1,264 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "antd exam 2026-08-23",
+  "setNodeId": "33:5238",
+  "setName": "Progress",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "33:5208",
+  "variantNodeName": "Status=Unset",
+  "axes": [
+    {
+      "axis": "Status",
+      "values": [
+        "Unset",
+        "Exception",
+        "Active",
+        "Success"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 4,
+  "variantChildNames": [
+    "Status=Unset",
+    "Status=Exception",
+    "Status=Active",
+    "Status=Success"
+  ],
+  "reflow": {
+    "target": "33:5208",
+    "targetName": "Status=Unset",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "HUG",
+      "primary": "FIXED",
+      "counter": "AUTO",
+      "primaryAlign": "CENTER",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 288,
+      "h": 14,
+      "children": [
+        {
+          "id": "33:5209",
+          "name": "progress-outer",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 288,
+          "h": 14,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 328,
+      "h": 54,
+      "children": [
+        {
+          "id": "33:5209",
+          "name": "progress-outer",
+          "type": "FRAME",
+          "x": 0,
+          "y": 20,
+          "w": 328,
+          "h": 14,
+          "ax": 0,
+          "ay": 20,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "progress-outer",
+        "dx": 0,
+        "dy": 20,
+        "dw": 40,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 288,
+      "h": 14
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:4648",
+    "baseline": {
+      "geometry": "a769769109dae84c",
+      "fills": "6ae6a513ec792374",
+      "text": "72d2edd864d01568"
+    },
+    "axes": [
+      {
+        "axis": "Status",
+        "values": [
+          {
+            "value": "Unset",
+            "geometry": "a769769109dae84c",
+            "fills": "6ae6a513ec792374",
+            "text": "72d2edd864d01568"
+          },
+          {
+            "value": "Exception",
+            "geometry": "43bc2f3603e98770",
+            "fills": "c59ec8459f395e68",
+            "text": "72d2edd864d01568"
+          },
+          {
+            "value": "Active",
+            "geometry": "a769769109dae84c",
+            "fills": "6ae6a513ec792374",
+            "text": "72d2edd864d01568"
+          },
+          {
+            "value": "Success",
+            "geometry": "01855cb60795b568",
+            "fills": "adc0fe49b1a14968",
+            "text": "72d2edd864d01568"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 16,
+    "bound": 12,
+    "inferred": 3,
+    "literal": 1,
+    "byGroup": {
+      "sizing": {
+        "bound": 0,
+        "inferred": 3,
+        "literal": 1
+      },
+      "spacing": {
+        "bound": 1,
+        "inferred": 0,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 3,
+        "inferred": 0,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 8,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [
+      "/progress-outer[0]/progress-inner[0]/progress-bg[0]·width=101"
+    ],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Status=Unset",
+      "name": "Status=Unset",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 288,
+      "h": 14,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/progress-outer[0]",
+      "name": "progress-outer",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 288,
+      "h": 14,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/progress-outer[0]/progress-inner[0]",
+      "name": "progress-inner",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 253,
+      "h": 8,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/progress-outer[0]/progress-inner[0]/progress-bg[0]",
+      "name": "progress-bg",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 101,
+      "h": 8,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/progress-outer[0]/label[1]",
+      "name": "label",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 27,
+      "h": 14,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/progress-outer[0]/label[1]/label-text[0]",
+      "name": "label-text",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 27,
+      "h": 14,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 710,
+    "sig": "0be3843bf548afa0"
+  },
+  "canvasAfter": {
+    "nodes": 710,
+    "sig": "0be3843bf548afa0"
+  },
+  "canvasRestored": true
+}

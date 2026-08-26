@@ -34,14 +34,14 @@
     {
       "id": "css-dom",
       "path": "conformance/MANIFEST.json",
-      "count": 108,
+      "count": 126,
       "expectations": {
-        "CARRIED": 62,
+        "CARRIED": 78,
         "LOWERED": 5,
-        "REFUSED": 24,
+        "REFUSED": 26,
         "UNSUPPORTED": 17
       },
-      "pinnedBecause": "RE-PINNED 2026-08-25, census/stack-to-main: 94 -> 108, and every unit of movement is attributable to one side of the merge. The two sides re-pinned this independent denominator against DIFFERENT case sets (main: 94 / LOWERED 5; the stack: 105 / LOWERED 4), so neither number could be picked — the union of the two conformance case lists is 108 and the pin is re-derived from it. From the common base (91 cases: CARRIED 50 / LOWERED 4 / REFUSED 19 / UNSUPPORTED 18): the STACK adds 14 cases — the rejected-sets round's six, RC1's five layout cases (align-items-baseline, flex-wrap-wrap, flex-direction-reverse-by-axis, child-order-reversed-by-axis, child-order-permuted-by-axis) and RC8's three overlay-text-geometry cases (overlay-text-fill-pinned-size, overlay-text-fill-stage-derived, overlay-text-hug-excluded) — of which 10 CARRIED and 5 REFUSED, and separately reclassifies pseudo-placeholder UNSUPPORTED -> CARRIED (RC7 made the base engine carry the channel it used to refuse outright, a strictly stronger declaration), so UNSUPPORTED falls 18 -> 17. MAIN adds 3: page-global-star-rule (CARRIED) and page-inherited-ink (CARRIED) from the cascade round, and text-indent-off-box (LOWERED, the Part.textOutOfBox round), so LOWERED rises 4 -> 5. 50+10+2 = 62 CARRIED; 4+0+1 = 5 LOWERED; 19+5+0 = 24 REFUSED; 18-1+0 = 17 UNSUPPORTED; 62+5+24+17 = 108."
+      "pinnedBecause": "RE-PINNED 2026-08-26, census/stack-to-main merging origin/main@34299be5: 108 (this branch) and 112 (main) become 126, DERIVED by `npm run conformance:build` from the case directories rather than reconciled by hand. Neither number could be picked: the two sides grew the SAME base by different case sets. From the merge base (94: CARRIED 52 / LOWERED 5 / REFUSED 19 / UNSUPPORTED 18) — THIS BRANCH adds 14 cases (9 CARRIED, 5 REFUSED) and separately reclassifies pseudo-placeholder UNSUPPORTED -> CARRIED, because RC7 made the engine carry `placeholder-color` outright; MAIN adds 18 cases (16 CARRIED, 2 REFUSED) from #63's archetype round and #66's five layout cases. The arithmetic closes on every class: CARRIED 52+9+16+1(reclass) = 78; LOWERED 5+0+0 = 5; REFUSED 19+5+2 = 26; UNSUPPORTED 18-1 = 17; 78+5+26+17 = 126, and the builder independently emits exactly that."
     },
     {
       "id": "canvas",
@@ -52,7 +52,7 @@
         "LEDGERED": 38,
         "REFUSED": 9
       },
-      "pinnedBecause": "RE-PINNED 2026-08-25, burn-down: 154 -> 157. NOT this branch's movement \u2014 extract/figma/conformance/MANIFEST.json already carried 157 cases (CARRIED 110) at this branch's base e884d672 and is byte-identical at HEAD; the pin had simply not been re-recorded when those three cases landed."
+      "pinnedBecause": "RE-PINNED 2026-08-25, burn-down: 154 -> 157. NOT this branch's movement — extract/figma/conformance/MANIFEST.json already carried 157 cases (CARRIED 110) at this branch's base e884d672 and is byte-identical at HEAD; the pin had simply not been re-recorded when those three cases landed."
     },
     {
       "id": "draw-read-closure",
@@ -123,7 +123,7 @@
       "disposition": "NORMALIZATION",
       "appliesTo": ["diverged"],
       "channels": ["layout.mode"],
-      "valuePattern": "^NONE \u2192 (HORIZONTAL|VERTICAL)$"
+      "valuePattern": "^NONE → (HORIZONTAL|VERTICAL)$"
     },
     "cartesian-fill": {
       "disposition": "INTENTIONAL_PROJECTION",
@@ -280,7 +280,7 @@
   },
   "fidelity": {
     "source": "examples/untitled-ui/renders/fidelity.json",
-    "metric": "per-set mean of v2.1 canvas\u2192code fidelity scores over scored variants",
+    "metric": "per-set mean of v2.1 canvas→code fidelity scores over scored variants",
     "tolerance": 0.3,
     "policy": "decrease-only floors: each set's current mean must stay at or above its baseline meanScore minus tolerance, and its scored-variant count must not shrink; floors are re-seeded only upward, by committing a higher meanScore after a real fidelity gain"
   },

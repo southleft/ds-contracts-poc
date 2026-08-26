@@ -1,0 +1,614 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / polaris",
+  "setNodeId": "39:20224",
+  "setName": "Banner (polaris.banner)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:19980",
+  "variantNodeName": "Tone=Info, State=Default",
+  "axes": [
+    {
+      "axis": "Tone",
+      "values": [
+        "Info",
+        "Success",
+        "Warning",
+        "Critical"
+      ]
+    },
+    {
+      "axis": "State",
+      "values": [
+        "Default",
+        "Focus Visible"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 8,
+  "variantChildNames": [
+    "Tone=Info, State=Default",
+    "Tone=Success, State=Default",
+    "Tone=Warning, State=Default",
+    "Tone=Critical, State=Default",
+    "Tone=Info, State=Focus Visible",
+    "Tone=Success, State=Focus Visible",
+    "Tone=Warning, State=Focus Visible",
+    "Tone=Critical, State=Focus Visible"
+  ],
+  "reflow": {
+    "target": "39:19980",
+    "targetName": "Tone=Info, State=Default",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "HUG",
+      "primary": "FIXED",
+      "counter": "AUTO",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 319.33,
+      "h": 88,
+      "children": [
+        {
+          "id": "39:19981",
+          "name": "box",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 319.33,
+          "h": 88,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 359.33,
+      "h": 128,
+      "children": [
+        {
+          "id": "39:19981",
+          "name": "box",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 319.33,
+          "h": 88,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "box"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 319.33,
+      "h": 88
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:2834",
+    "baseline": {
+      "geometry": "d5c0eb9aebb50e6c",
+      "fills": "62367970bd7a81c8",
+      "text": "9740ec26afb18870"
+    },
+    "axes": [
+      {
+        "axis": "Tone",
+        "values": [
+          {
+            "value": "Info",
+            "geometry": "d5c0eb9aebb50e6c",
+            "fills": "62367970bd7a81c8",
+            "text": "9740ec26afb18870"
+          },
+          {
+            "value": "Success",
+            "geometry": "d5fcd3512e855758",
+            "fills": "fd032f656829e9d4",
+            "text": "9740ec26afb18870"
+          },
+          {
+            "value": "Warning",
+            "geometry": "002cd228a092354b",
+            "fills": "efec57b76e9ea750",
+            "text": "9740ec26afb18870"
+          },
+          {
+            "value": "Critical",
+            "geometry": "d0d4653f90b7765a",
+            "fills": "d442aedd206d80dc",
+            "text": "9740ec26afb18870"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "State",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "d5c0eb9aebb50e6c",
+            "fills": "62367970bd7a81c8",
+            "text": "9740ec26afb18870"
+          },
+          {
+            "value": "Focus Visible",
+            "geometry": "d5c0eb9aebb50e6c",
+            "fills": "6cceb02e4c866984",
+            "text": "9740ec26afb18870"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 91,
+    "bound": 67,
+    "inferred": 21,
+    "literal": 3,
+    "byGroup": {
+      "fills": {
+        "bound": 11,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 21,
+        "inferred": 20,
+        "literal": 3
+      },
+      "radius": {
+        "bound": 14,
+        "inferred": 0,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 21,
+        "inferred": 1,
+        "literal": 0
+      }
+    },
+    "literalSites": [
+      "/box[0]/blockstack[0]/box-2[0]/inlinestack[0]/button (margin box)[1]/button[0]/button__icon (margin box)[0]/button__icon[0]/part-0-0-0-0-1-0-0[0]/icon-3[0]/Vector[0]·width=10.54",
+      "/box[0]/blockstack[0]/box-2[0]/inlinestack[0]/button (margin box)[1]/button[0]/button__icon (margin box)[0]/button__icon[0]/part-0-0-0-0-1-0-0[0]/icon-3[0]/Vector[0]·height=10.5",
+      "/box[0]/blockstack[0]/box-3[1]/blockstack-2[0]/buttongroup (margin box)[1]/buttongroup[0]/buttongroup__item (margin box)[0]·width=90.08"
+    ],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Tone=Info, State=Default",
+      "name": "Tone=Info, State=Default",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 319.33,
+      "h": 88,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/box[0]",
+      "name": "box",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 319.33,
+      "h": 88,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/box[0]/blockstack[0]",
+      "name": "blockstack",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 2,
+      "w": 319.33,
+      "h": 88,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/box[0]/blockstack[0]/box-2[0]",
+      "name": "box-2",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 319.33,
+      "h": 44,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/box[0]/blockstack[0]/box-2[0]/inlinestack[0]",
+      "name": "inlinestack",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 295.33,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/box[0]/blockstack[0]/box-2[0]/inlinestack[0]/inlinestack-2[0]",
+      "name": "inlinestack-2",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 118.61,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/box[0]/blockstack[0]/box-2[0]/inlinestack[0]/inlinestack-2[0]/part-0-0-0-0-0-0[0]",
+      "name": "part-0-0-0-0-0-0",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 20,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/box[0]/blockstack[0]/box-2[0]/inlinestack[0]/inlinestack-2[0]/part-0-0-0-0-0-0[0]/icon[0]",
+      "name": "icon",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 20,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/box[0]/blockstack[0]/box-2[0]/inlinestack[0]/inlinestack-2[0]/part-0-0-0-0-0-0[0]/icon[0]/icon-info[0]",
+      "name": "icon-info",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 3,
+      "w": 20,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/box[0]/blockstack[0]/box-2[0]/inlinestack[0]/inlinestack-2[0]/part-0-0-0-0-0-0[0]/icon[0]/icon-info[0]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 1.5,
+      "h": 5,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/box[0]/blockstack[0]/box-2[0]/inlinestack[0]/inlinestack-2[0]/part-0-0-0-0-0-0[0]/icon[0]/icon-info[0]/Vector[1]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 2,
+      "h": 2,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/box[0]/blockstack[0]/box-2[0]/inlinestack[0]/inlinestack-2[0]/part-0-0-0-0-0-0[0]/icon[0]/icon-info[0]/Vector[2]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 14,
+      "h": 14,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/box[0]/blockstack[0]/box-2[0]/inlinestack[0]/inlinestack-2[0]/title[1]",
+      "name": "title",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 45,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/box[0]/blockstack[0]/box-2[0]/inlinestack[0]/button (margin box)[1]",
+      "name": "button (margin box)",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 24,
+      "h": 24,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/box[0]/blockstack[0]/box-2[0]/inlinestack[0]/button (margin box)[1]/button[0]",
+      "name": "button",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 32,
+      "h": 32,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/box[0]/blockstack[0]/box-2[0]/inlinestack[0]/button (margin box)[1]/button[0]/button__icon (margin box)[0]",
+      "name": "button__icon (margin box)",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 20,
+      "h": 16,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/box[0]/blockstack[0]/box-2[0]/inlinestack[0]/button (margin box)[1]/button[0]/button__icon (margin box)[0]/button__icon[0]",
+      "name": "button__icon",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 20,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/box[0]/blockstack[0]/box-2[0]/inlinestack[0]/button (margin box)[1]/button[0]/button__icon (margin box)[0]/button__icon[0]/part-0-0-0-0-1-0-0[0]",
+      "name": "part-0-0-0-0-1-0-0",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 20,
+      "h": 20,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/box[0]/blockstack[0]/box-2[0]/inlinestack[0]/button (margin box)[1]/button[0]/button__icon (margin box)[0]/button__icon[0]/part-0-0-0-0-1-0-0[0]/icon-3[0]",
+      "name": "icon-3",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 20,
+      "h": 20,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/box[0]/blockstack[0]/box-2[0]/inlinestack[0]/button (margin box)[1]/button[0]/button__icon (margin box)[0]/button__icon[0]/part-0-0-0-0-1-0-0[0]/icon-3[0]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 10.54,
+      "h": 10.5,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/box[0]/blockstack[0]/box-3[1]",
+      "name": "box-3",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 319.33,
+      "h": 44,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/box[0]/blockstack[0]/box-3[1]/blockstack-2[0]",
+      "name": "blockstack-2",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 2,
+      "w": 295.33,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/box[0]/blockstack[0]/box-3[1]/blockstack-2[0]/part-0-0-1-0-0[0]",
+      "name": "part-0-0-1-0-0",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 295.33,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/box[0]/blockstack[0]/box-3[1]/blockstack-2[0]/part-0-0-1-0-0[0]/label-2[0]",
+      "name": "label-2",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 297,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/box[0]/blockstack[0]/box-3[1]/blockstack-2[0]/part-0-0-1-0-0[0]/label-2[0]/Use your finance report to get detailed insights.[0]",
+      "name": "Use your finance report to get detailed insights.",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 297,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/box[0]/blockstack[0]/box-3[1]/blockstack-2[0]/buttongroup (margin box)[1]",
+      "name": "buttongroup (margin box)",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 295.33,
+      "h": 32,
+      "visible": false,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/box[0]/blockstack[0]/box-3[1]/blockstack-2[0]/buttongroup (margin box)[1]/buttongroup[0]",
+      "name": "buttongroup",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 303.33,
+      "h": 40,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/box[0]/blockstack[0]/box-3[1]/blockstack-2[0]/buttongroup (margin box)[1]/buttongroup[0]/buttongroup__item (margin box)[0]",
+      "name": "buttongroup__item (margin box)",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 90.08,
+      "h": 40,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/box[0]/blockstack[0]/box-3[1]/blockstack-2[0]/buttongroup (margin box)[1]/buttongroup[0]/buttongroup__item (margin box)[0]/buttongroup__item[0]",
+      "name": "buttongroup__item",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 82.08,
+      "h": 32,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/box[0]/blockstack[0]/box-3[1]/blockstack-2[0]/buttongroup (margin box)[1]/buttongroup[0]/buttongroup__item (margin box)[0]/buttongroup__item[0]/button-2[0]",
+      "name": "button-2",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 82.08,
+      "h": 32,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/box[0]/blockstack[0]/box-3[1]/blockstack-2[0]/buttongroup (margin box)[1]/buttongroup[0]/buttongroup__item (margin box)[0]/buttongroup__item[0]/button-2[0]/label-3[0]",
+      "name": "label-3",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 58,
+      "h": 16,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 3326,
+    "sig": "c09e90afe241d48c"
+  },
+  "canvasAfter": {
+    "nodes": 3326,
+    "sig": "c09e90afe241d48c"
+  },
+  "canvasRestored": true
+}

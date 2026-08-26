@@ -1,0 +1,320 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "antd exam 2026-08-23",
+  "setNodeId": "33:5408",
+  "setName": "Tag",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "33:5352",
+  "variantNodeName": "Color=Blue, Bordered=Bordered",
+  "axes": [
+    {
+      "axis": "Color",
+      "values": [
+        "Blue",
+        "Green",
+        "Red",
+        "Gold",
+        "Success",
+        "Processing",
+        "Error"
+      ]
+    },
+    {
+      "axis": "Bordered",
+      "values": [
+        "Bordered",
+        "Borderless"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 14,
+  "variantChildNames": [
+    "Color=Blue, Bordered=Bordered",
+    "Color=Blue, Bordered=Borderless",
+    "Color=Green, Bordered=Bordered",
+    "Color=Green, Bordered=Borderless",
+    "Color=Red, Bordered=Bordered",
+    "Color=Red, Bordered=Borderless",
+    "Color=Gold, Bordered=Bordered",
+    "Color=Gold, Bordered=Borderless",
+    "Color=Success, Bordered=Bordered",
+    "Color=Success, Bordered=Borderless",
+    "Color=Processing, Bordered=Bordered",
+    "Color=Processing, Bordered=Borderless",
+    "Color=Error, Bordered=Bordered",
+    "Color=Error, Bordered=Borderless"
+  ],
+  "reflow": {
+    "target": "33:5352",
+    "targetName": "Color=Blue, Bordered=Bordered",
+    "layoutMode": "VERTICAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "FIXED",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 35.77,
+      "h": 22,
+      "children": [
+        {
+          "id": "33:5353",
+          "name": "label",
+          "type": "TEXT",
+          "x": 8,
+          "y": 1,
+          "w": 20,
+          "h": 20,
+          "ax": 8,
+          "ay": 1,
+          "visible": true
+        },
+        {
+          "id": "33:5354",
+          "name": "anticon",
+          "type": "FRAME",
+          "x": 8,
+          "y": 21,
+          "w": 19.77,
+          "h": 10,
+          "ax": 8,
+          "ay": 21,
+          "visible": false
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 75.77,
+      "h": 62,
+      "children": [
+        {
+          "id": "33:5353",
+          "name": "label",
+          "type": "TEXT",
+          "x": 8,
+          "y": 1,
+          "w": 20,
+          "h": 20,
+          "ax": 8,
+          "ay": 1,
+          "visible": true
+        },
+        {
+          "id": "33:5354",
+          "name": "anticon",
+          "type": "FRAME",
+          "x": 8,
+          "y": 21,
+          "w": 19.77,
+          "h": 10,
+          "ax": 8,
+          "ay": 21,
+          "visible": false
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "label",
+      "anticon"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 35.77,
+      "h": 22
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:4764",
+    "baseline": {
+      "geometry": "4ad4779581ee60f4",
+      "fills": "641213607cac5c97",
+      "text": "a5bee9b5898a4134"
+    },
+    "axes": [
+      {
+        "axis": "Color",
+        "values": [
+          {
+            "value": "Blue",
+            "geometry": "4ad4779581ee60f4",
+            "fills": "641213607cac5c97",
+            "text": "a5bee9b5898a4134"
+          },
+          {
+            "value": "Green",
+            "geometry": "4ad4779581ee60f4",
+            "fills": "16cd1f1f4d57987c",
+            "text": "a5bee9b5898a4134"
+          },
+          {
+            "value": "Red",
+            "geometry": "4ad4779581ee60f4",
+            "fills": "924106dd44d07e38",
+            "text": "a5bee9b5898a4134"
+          },
+          {
+            "value": "Gold",
+            "geometry": "4ad4779581ee60f4",
+            "fills": "7e94ac751052db90",
+            "text": "a5bee9b5898a4134"
+          },
+          {
+            "value": "Success",
+            "geometry": "4ad4779581ee60f4",
+            "fills": "afc9f2129ba8d637",
+            "text": "a5bee9b5898a4134"
+          },
+          {
+            "value": "Processing",
+            "geometry": "4ad4779581ee60f4",
+            "fills": "4f663ba6cb8aa2cc",
+            "text": "a5bee9b5898a4134"
+          },
+          {
+            "value": "Error",
+            "geometry": "4ad4779581ee60f4",
+            "fills": "5016afb7a390b6df",
+            "text": "a5bee9b5898a4134"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Bordered",
+        "values": [
+          {
+            "value": "Bordered",
+            "geometry": "4ad4779581ee60f4",
+            "fills": "641213607cac5c97",
+            "text": "a5bee9b5898a4134"
+          },
+          {
+            "value": "Borderless",
+            "geometry": "4ad4779581ee60f4",
+            "fills": "4133928359f4fd9f",
+            "text": "a5bee9b5898a4134"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 17,
+    "bound": 10,
+    "inferred": 4,
+    "literal": 3,
+    "byGroup": {
+      "fills": {
+        "bound": 3,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 2,
+        "inferred": 1,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 2,
+        "literal": 3
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [
+      "/anticon[1]·width=19.77",
+      "/anticon[1]/Vector[0]·width=15.93",
+      "/anticon[1]/Vector[0]·height=8.06"
+    ],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Color=Blue, Bordered=Bordered",
+      "name": "Color=Blue, Bordered=Bordered",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 2,
+      "w": 35.77,
+      "h": 22,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 20,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/anticon[1]",
+      "name": "anticon",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 19.77,
+      "h": 10,
+      "visible": false,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/anticon[1]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 15.93,
+      "h": 8.06,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 710,
+    "sig": "0be3843bf548afa0"
+  },
+  "canvasAfter": {
+    "nodes": 710,
+    "sig": "0be3843bf548afa0"
+  },
+  "canvasRestored": true
+}

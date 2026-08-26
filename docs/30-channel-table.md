@@ -58,9 +58,36 @@ surprise in a customer's library.
   layoutSpec). Every CARRIED row cites the symbol that draws it, and the gate
   refuses if a refactor turns a citation into a ghost.
 - **The empirical shadow** — the conformance kits pin behaviour per value
-  shape: 92 css-dom cases (`conformance/MANIFEST.json`) and 157 canvas cases
+  shape: 126 css-dom cases (`conformance/MANIFEST.json`) and 157 canvas cases
   (`extract/figma/conformance/MANIFEST.json`); rows cite their case ids, and
   every conformance channel must have a row.
+- **Evidence, per CARRIED row** — `CARRIED` used to mean two different
+  things wearing one word: *there is a code path that carries this* (an
+  `engine` citation) and *we measured that it carries* (a conformance case).
+  Only 27 of the first 82 rows had the second. Every CARRIED row now declares
+  an `evidence` state:
+
+  | state | means |
+  | --- | --- |
+  | `measured` | a named case observes the property end to end (capture → contract). Break the property and something goes red. `conformance` names the case(s). |
+  | `code-cited` | an engine citation and nothing more. The channel is reachable — a case *could* be written — but none has been. A declared gap. |
+  | `unobservable` | the property is in none of the schema's channel sets and no structured mirror spells it, so no contract can hold it and **no conformance case could ever observe it**. The claim is unfalsifiable as things stand. |
+
+  The state is **re-derived**, never trusted: `channel-table-check.ts`
+  recomputes it from both conformance manifests plus the reachability of the
+  channel, and refuses a row that disagrees — so a row can neither over-claim
+  (`measured` with no case) nor under-claim (`code-cited` while a case that
+  measures it already exists). Cites are checked in **both** directions; until
+  2026-08-26 only manifest→table was verified, so the table could cite a case
+  that had been deleted, renamed, or that measures a different channel.
+  `npm run channel-table:rederive` rewrites the derived fields and leaves
+  every hand-written one alone.
+
+  A row whose property is folded at the read boundary — `-webkit-text-fill-color`
+  into `color` — declares `observedAs`, and may only do so when its own
+  property is genuinely unreachable, so a fold can never launder a
+  measurement nobody took.
+
 - **Value-space notes** — one property can carry one value and refuse
   another. `border-style: solid|dashed|dotted|none` rides the declared
   grammar while the stroke draws; anything else is named residue.

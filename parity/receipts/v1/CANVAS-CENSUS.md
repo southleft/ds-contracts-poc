@@ -173,60 +173,60 @@ Gate: **GREEN** at phase `full`.
 
 | library | id | archetype | axes × variants (compiled; script rows) | variants rendered | code-render | canvas | ref | verdict | usable | walls |
 |---|---|---|---|---|---|---|---|---|---|
-| first-party | `ds.accordion-item` | accordion | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | NOT recognisable | UNMEASURED | — |
-| first-party | `ds.avatar-group` | avatar | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | UNMEASURED | — |
-| first-party | `ds.avatar` | avatar | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | UNMEASURED | — |
-| first-party | `ds.badge` | badge / tag / chip | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | 5/5 | recognisable | UNMEASURED | — |
-| first-party | `ds.banner` | banner / alert / toast | 2 × 8; 8 | 5/5 of 8 | rendered | 5/5 | 5/5 | recognisable | UNMEASURED | — |
-| first-party | `ds.bento-grid` | unmapped | 0 × 1; 6 | 1/1 of 1 | rendered | 1/1 | 1/1 | NOT recognisable | UNMEASURED | — |
-| first-party | `ds.blockquote` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | NOT recognisable | UNMEASURED | — |
-| first-party | `ds.breadcrumb-item` | breadcrumb | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | UNMEASURED | — |
-| first-party | `ds.breadcrumbs` | breadcrumb | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | UNMEASURED | — |
-| first-party | `ds.button` | button | 2 × 12 + 12 state; 24 | 9/9 of 24 | rendered | 9/9 | 9/9 | recognisable | UNMEASURED | — |
-| first-party | `ds.card` | card | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | NOT recognisable | UNMEASURED | — |
-| first-party | `ds.chat-message-metadata` | unmapped | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | 5/5 | recognisable | UNMEASURED | — |
-| first-party | `ds.chat-message` | unmapped | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | NOT recognisable | UNMEASURED | — |
-| first-party | `ds.chat-system-message` | unmapped | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | UNMEASURED | — |
-| first-party | `ds.checkbox` | checkbox / radio | 2 × 6; 6 | 4/4 of 6 | rendered | 4/4 | 4/4 | recognisable | UNMEASURED | — |
-| first-party | `ds.citation` | unmapped | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | UNMEASURED | — |
-| first-party | `ds.code` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | UNMEASURED | — |
-| first-party | `ds.divider` | unmapped | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | UNMEASURED | — |
-| first-party | `ds.empty-state` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | UNMEASURED | — |
-| first-party | `ds.field` | input / field | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | NOT recognisable | UNMEASURED | — |
-| first-party | `ds.grid-gallery` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | NOT recognisable | UNMEASURED | — |
-| first-party | `ds.heading` | unmapped | 2 × 18; 18 | 8/8 of 18 | rendered | 8/8 | 8/8 | recognisable | UNMEASURED | — |
-| first-party | `ds.icon-button` | button | 2 × 12; 12 | 6/6 of 12 | rendered | 6/6 | 6/6 | recognisable | UNMEASURED | — |
-| first-party | `ds.kbd` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | UNMEASURED | — |
-| first-party | `ds.list-item` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | UNMEASURED | — |
-| first-party | `ds.list` | unmapped | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | recognisable | UNMEASURED | — |
-| first-party | `ds.metadata-list-item` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | UNMEASURED | — |
-| first-party | `ds.metadata-list` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | UNMEASURED | — |
-| first-party | `ds.page-shell` | unmapped | 0 × 1; 5 | 1/1 of 1 | rendered | 1/1 | 1/1 | NOT recognisable | UNMEASURED | — |
-| first-party | `ds.pagination` | pagination | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | recognisable | UNMEASURED | — |
-| first-party | `ds.progress-bar` | progress / spinner | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | 5/5 | recognisable | UNMEASURED | — |
-| first-party | `ds.section` | unmapped | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | NOT recognisable | UNMEASURED | — |
-| first-party | `ds.side-nav-item` | nav (top / side) | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | UNMEASURED | — |
-| first-party | `ds.sidebar-layout` | unmapped | 0 × 1; 3 | 1/1 of 1 | rendered | 1/1 | 1/1 | NOT recognisable | UNMEASURED | — |
-| first-party | `ds.skeleton` | progress / spinner | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | recognisable | UNMEASURED | — |
-| first-party | `ds.slider` | slider | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | UNMEASURED | — |
-| first-party | `ds.spinner` | progress / spinner | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | UNMEASURED | — |
-| first-party | `ds.status-dot` | unmapped | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | 5/5 | recognisable | UNMEASURED | — |
-| first-party | `ds.switch` | toggle / switch | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | UNMEASURED | — |
-| first-party | `ds.tab-list` | tabs | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | UNMEASURED | — |
-| first-party | `ds.tab` | tabs | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | UNMEASURED | — |
-| first-party | `ds.table-cell` | table / data-grid | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | UNMEASURED | — |
-| first-party | `ds.table-header-cell` | table / data-grid | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | UNMEASURED | — |
-| first-party | `ds.table-row` | table / data-grid | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | UNMEASURED | — |
-| first-party | `ds.table` | table / data-grid | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | UNMEASURED | — |
-| first-party | `ds.text-area` | input / field | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | NOT recognisable | UNMEASURED | — |
-| first-party | `ds.text-field` | input / field | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | recognisable | UNMEASURED | — |
-| first-party | `ds.toast` | banner / alert / toast | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | NOT recognisable | UNMEASURED | — |
-| first-party | `ds.token` | unmapped | 2 × 33; 33 | 13/13 of 33 | rendered | 13/13 | 13/13 | recognisable | UNMEASURED | — |
-| first-party | `ds.toolbar` | unmapped | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | NOT recognisable | UNMEASURED | — |
-| first-party | `ds.top-nav-item` | nav (top / side) | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | UNMEASURED | — |
-| first-party | `ds.top-nav` | nav (top / side) | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | NOT recognisable | UNMEASURED | — |
-| first-party | `ds.two-column` | unmapped | 0 × 1; 3 | 1/1 of 1 | rendered | 1/1 | 1/1 | NOT recognisable | UNMEASURED | — |
-| first-party | `ds.typeahead-item` | select / combobox | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | UNMEASURED | — |
+| first-party | `ds.accordion-item` | accordion | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | NOT recognisable | R✓ V✓ B✘ 17/20 (85%) L✓ | — |
+| first-party | `ds.avatar-group` | avatar | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | R✓ V· B✓ 34/34 (100%) L✓ | — |
+| first-party | `ds.avatar` | avatar | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | R✓ V✓ B✓ 8/8 (100%) L✓ | — |
+| first-party | `ds.badge` | badge / tag / chip | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | 5/5 | recognisable | R✓ V✘ B✓ 10/10 (100%) L✓ | — |
+| first-party | `ds.banner` | banner / alert / toast | 2 × 8; 8 | 5/5 of 8 | rendered | 5/5 | 5/5 | recognisable | R✘ V✓ B✘ 35/38 (92%) L✘ | — |
+| first-party | `ds.bento-grid` | unmapped | 0 × 1; 6 | 1/1 of 1 | rendered | 1/1 | 1/1 | NOT recognisable | R✓ V· B✘ 2/3 (67%) L✓ | — |
+| first-party | `ds.blockquote` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | NOT recognisable | R✘ V· B✓ 6/6 (100%) L✓ | — |
+| first-party | `ds.breadcrumb-item` | breadcrumb | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | R✓ V· B✘ 5/8 (63%) L✓ | — |
+| first-party | `ds.breadcrumbs` | breadcrumb | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | R✓ V· B✘ 17/26 (65%) L✓ | — |
+| first-party | `ds.button` | button | 2 × 12 + 12 state; 24 | 9/9 of 24 | rendered | 9/9 | 9/9 | recognisable | R✘ V✘ B✘ 15/17 (88%) L✓ | — |
+| first-party | `ds.card` | card | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | NOT recognisable | R✘ V· B✘ 33/34 (97%) L✓ | — |
+| first-party | `ds.chat-message-metadata` | unmapped | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | 5/5 | recognisable | R✘ V✘ B✘ 6/9 (67%) L✓ | — |
+| first-party | `ds.chat-message` | unmapped | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | NOT recognisable | R✘ V✓ B✓ 15/15 (100%) L✓ | — |
+| first-party | `ds.chat-system-message` | unmapped | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | R✘ V✓ B✓ 3/3 (100%) L✓ | — |
+| first-party | `ds.checkbox` | checkbox / radio | 2 × 6; 6 | 4/4 of 6 | rendered | 4/4 | 4/4 | recognisable | R✘ V✓ B✓ 13/13 (100%) L✓ | — |
+| first-party | `ds.citation` | unmapped | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | R✓ V✓ B✓ 10/10 (100%) L✓ | — |
+| first-party | `ds.code` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | R✓ V· B✓ 10/10 (100%) L✓ | — |
+| first-party | `ds.divider` | unmapped | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | R· V✓ B✓ 3/3 (100%) L✓ | — |
+| first-party | `ds.empty-state` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | R✘ V· B✓ 11/11 (100%) L✓ | — |
+| first-party | `ds.field` | input / field | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | NOT recognisable | R✘ V· B✘ 11/19 (58%) L✘ | — |
+| first-party | `ds.grid-gallery` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | NOT recognisable | R✓ V· B✘ 1/2 (50%) L✓ | — |
+| first-party | `ds.heading` | unmapped | 2 × 18; 18 | 8/8 of 18 | rendered | 8/8 | 8/8 | recognisable | R✓ V✘ B✓ 1/1 (100%) L✓ | — |
+| first-party | `ds.icon-button` | button | 2 × 12; 12 | 6/6 of 12 | rendered | 6/6 | 6/6 | recognisable | R✓ V✓ B✓ 7/7 (100%) L✓ | — |
+| first-party | `ds.kbd` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | R✓ V· B✓ 12/12 (100%) L✓ | — |
+| first-party | `ds.list-item` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | R✘ V· B✓ 8/8 (100%) L✓ | — |
+| first-party | `ds.list` | unmapped | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | recognisable | R✓ V✓ B✓ 38/38 (100%) L✓ | — |
+| first-party | `ds.metadata-list-item` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | R✘ V· B✓ 4/4 (100%) L✓ | — |
+| first-party | `ds.metadata-list` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | R✘ V· B✓ 16/16 (100%) L✓ | — |
+| first-party | `ds.page-shell` | unmapped | 0 × 1; 5 | 1/1 of 1 | rendered | 1/1 | 1/1 | NOT recognisable | R✓ V· B✘ 2/3 (67%) L✓ | — |
+| first-party | `ds.pagination` | pagination | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | recognisable | R✓ V✓ B✘ 46/52 (88%) L✓ | — |
+| first-party | `ds.progress-bar` | progress / spinner | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | 5/5 | recognisable | R✘ V✓ B✘ 14/15 (93%) L✓ | — |
+| first-party | `ds.section` | unmapped | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | NOT recognisable | R✓ V✓ B✓ 14/14 (100%) L✓ | — |
+| first-party | `ds.side-nav-item` | nav (top / side) | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | R✘ V✓ B✓ 12/12 (100%) L✓ | — |
+| first-party | `ds.sidebar-layout` | unmapped | 0 × 1; 3 | 1/1 of 1 | rendered | 1/1 | 1/1 | NOT recognisable | R✘ V· B✘ 1/2 (50%) L✓ | — |
+| first-party | `ds.skeleton` | progress / spinner | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | recognisable | R✘ V✓ B✓ 7/7 (100%) L✓ | — |
+| first-party | `ds.slider` | slider | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | R✘ V· B✓ 27/27 (100%) L✓ | — |
+| first-party | `ds.spinner` | progress / spinner | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | R✓ V· B✓ 6/6 (100%) L✓ | — |
+| first-party | `ds.status-dot` | unmapped | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | 5/5 | recognisable | R· V✓ B✓ 7/7 (100%) L✓ | — |
+| first-party | `ds.switch` | toggle / switch | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | R✘ V✓ B✓ 23/23 (100%) L✓ | — |
+| first-party | `ds.tab-list` | tabs | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | R✓ V· B✓ 39/39 (100%) L✓ | — |
+| first-party | `ds.tab` | tabs | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | R✘ V✓ B✓ 11/11 (100%) L✓ | — |
+| first-party | `ds.table-cell` | table / data-grid | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | R✓ V✓ B✓ 6/6 (100%) L✓ | — |
+| first-party | `ds.table-header-cell` | table / data-grid | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | R✓ V✓ B✓ 6/6 (100%) L✓ | — |
+| first-party | `ds.table-row` | table / data-grid | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | R✓ V✓ B✓ 20/20 (100%) L✓ | — |
+| first-party | `ds.table` | table / data-grid | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | R✓ V✓ B✓ 90/90 (100%) L✓ | — |
+| first-party | `ds.text-area` | input / field | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | NOT recognisable | R✘ V✓ B✘ 23/31 (74%) L✘ | — |
+| first-party | `ds.text-field` | input / field | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | recognisable | R✘ V✓ B✘ 23/31 (74%) L✘ | — |
+| first-party | `ds.toast` | banner / alert / toast | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | NOT recognisable | R✘ V✓ B✓ 11/11 (100%) L✓ | — |
+| first-party | `ds.token` | unmapped | 2 × 33; 33 | 13/13 of 33 | rendered | 13/13 | 13/13 | recognisable | R✘ V✓ B✓ 11/11 (100%) L✓ | — |
+| first-party | `ds.toolbar` | unmapped | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | NOT recognisable | R✘ V✓ B✓ 17/17 (100%) L✓ | — |
+| first-party | `ds.top-nav-item` | nav (top / side) | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | R✘ V✓ B✓ 11/11 (100%) L✓ | — |
+| first-party | `ds.top-nav` | nav (top / side) | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | NOT recognisable | R✘ V· B✘ 12/13 (92%) L✓ | — |
+| first-party | `ds.two-column` | unmapped | 0 × 1; 3 | 1/1 of 1 | rendered | 1/1 | 1/1 | NOT recognisable | R✓ V· B✘ 1/2 (50%) L✓ | — |
+| first-party | `ds.typeahead-item` | select / combobox | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | R✘ V· B✓ 14/14 (100%) L✓ | — |
 | altitude | `altitude.avatar` | avatar | 1 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | NOT recognisable | R✘ V· B✓ 25/25 (100%) L✓ | CODE-RENDER-BLANK:avatar |
 | altitude | `altitude.badge` | badge / tag / chip | 2 × 8; 8 | 5/5 of 8 | rendered | 5/5 | 5/5 | recognisable | R✓ V✓ B✓ 11/11 (100%) L✓ | — |
 | altitude | `altitude.button` | button | 1 × 4 + 8 state; 12 | 6/6 of 12 | rendered | 6/6 | 6/6 | NOT recognisable | R✓ V✓ B✓ 13/13 (100%) L✓ | CODE-CANVAS-DISAGREE:button.tertiary/border |
@@ -235,114 +235,114 @@ Gate: **GREEN** at phase `full`.
 | altitude | `altitude.heading` | unmapped | 2 × 12; 12 | 7/7 of 12 | rendered | 7/7 | 7/7 | recognisable | R✘ V✓ B✓ 2/2 (100%) L✓ | — |
 | altitude | `altitude.iconclose` | unmapped | 1 × 7; 7 | 7/7 of 7 | rendered | 7/7 | 7/7 | recognisable | R✓ V✓ B✘ 3/5 (60%) L✓ | — |
 | altitude | `altitude.link` | unmapped | 1 × 3 + 6 state; 9 | 5/5 of 9 | rendered | 5/5 | 5/5 | NOT recognisable | R✓ V✘ B✓ 2/2 (100%) L✓ | — |
-| antd | `antd.alert` | banner / alert / toast | 2 × 8; 8 | 5/5 of 8 | rendered | 5/5 | 5/5 | recognisable | UNMEASURED | — |
-| antd | `antd.avatar` | avatar | 2 × 6; 6 | 4/4 of 6 | rendered | 4/4 | 4/4 | recognisable | UNMEASURED | — |
-| antd | `antd.badge` | badge / tag / chip | 2 × 6; 6 | 4/4 of 6 | rendered | 4/4 | 4/4 | recognisable | UNMEASURED | — |
-| antd | `antd.button` | button | 3 × 30; 30 | 8/8 of 30 | rendered | 8/8 | 8/8 | recognisable | UNMEASURED | — |
-| antd | `antd.card` | card | 2 × 4; 4 | 3/3 of 4 | rendered | 3/3 | 3/3 | recognisable | UNMEASURED | — |
-| antd | `antd.checkbox` | checkbox / radio | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | recognisable | UNMEASURED | — |
-| antd | `antd.input` | input / field | 3 × 24 + 16 state; 40 | 11/11 of 40 | rendered | 11/11 | 11/11 | NOT recognisable | UNMEASURED | CODE-RENDER-BLANK:input |
-| antd | `antd.progress` | progress / spinner | 1 × 4; 4 | 4/4 of 4 | rendered | 4/4 | 4/4 | recognisable | UNMEASURED | CODE-RENDER-PARTIAL:progress |
-| antd | `antd.radio` | checkbox / radio | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | UNMEASURED | — |
-| antd | `antd.switch` | toggle / switch | 2 × 4 + 8 state; 12 | 7/7 of 12 | rendered | 7/7 | 7/7 | recognisable | UNMEASURED | — |
-| antd | `antd.tag` | badge / tag / chip | 2 × 14; 14 | 8/8 of 14 | rendered | 8/8 | 8/8 | recognisable | UNMEASURED | CODE-RENDER-PARTIAL:tag |
-| antd | `antd.tooltip` | tooltip / popover | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | NOT recognisable | UNMEASURED | — |
-| astryx | `astryx.badge` | badge / tag / chip | 1 × 14; 14 | 14/14 of 14 | rendered | 14/14 | 14/14 | NOT recognisable | UNMEASURED | — |
-| astryx | `astryx.banner` | banner / alert / toast | 2 × 8; 8 | 5/5 of 8 | rendered | 5/5 | 5/5 | recognisable | UNMEASURED | — |
-| astryx | `astryx.button` | button | 2 × 12; 12 | 6/6 of 12 | rendered | 6/6 | 6/6 | NOT recognisable | UNMEASURED | — |
-| astryx | `astryx.card` | card | 1 × 13; 13 | 13/13 of 13 | rendered | 13/13 | 13/13 | recognisable | UNMEASURED | — |
-| astryx | `astryx.checkbox-input` | checkbox / radio | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | NOT recognisable | UNMEASURED | — |
-| astryx | `astryx.dropdown-menu-item` | menu / dropdown | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | UNMEASURED | — |
-| astryx | `astryx.dropdown-menu` | menu / dropdown | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | NOT recognisable | UNMEASURED | — |
-| astryx | `astryx.progress-bar` | progress / spinner | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | 5/5 | NOT recognisable | UNMEASURED | — |
-| astryx | `astryx.slider` | slider | 2 × 6; 6 | 4/4 of 6 | rendered | 4/4 | 4/4 | NOT recognisable | UNMEASURED | — |
-| astryx | `astryx.switch` | toggle / switch | 1 × 4; 4 | 3/3 of 4 | rendered | 3/3 | 3/3 | recognisable | UNMEASURED | — |
-| astryx | `astryx.text-input` | input / field | 2 × 9; 9 | 5/5 of 9 | rendered | 5/5 | 5/5 | NOT recognisable | UNMEASURED | — |
-| astryx | `astryx.toast` | banner / alert / toast | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | NOT recognisable | UNMEASURED | CANVAS-SURFACE-WHITE-ON-WHITE:toast |
-| astryx | `astryx.token` | unmapped | 2 × 33; 33 | 13/13 of 33 | rendered | 13/13 | 13/13 | recognisable | UNMEASURED | — |
-| carbon | `carbon.accordion` | accordion | 2 × 6 + 2 state; 8 | 4/5 of 8 | rendered, 1 refused | 4/4 | 4/4 | NOT recognisable | UNMEASURED | — |
-| carbon | `carbon.button` | button | 2 × 48 + 32 state; 80 | 16/17 of 80 | rendered, 1 refused | 16/16 | 16/16 | recognisable | UNMEASURED | FC-EXPORT-RING-UNPAINTED; CODE-CANVAS-DISAGREE:button.tertiary/border |
-| carbon | `carbon.checkbox` | checkbox / radio | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | recognisable | UNMEASURED | — |
-| carbon | `carbon.iconbutton` | button | 2 × 16; 16 | 7/7 of 16 | rendered | 7/7 | 7/7 | recognisable | UNMEASURED | CODE-RENDER-UNSTYLED:iconbutton |
-| carbon | `carbon.inlinenotification` | banner / alert / toast | 2 × 12; 12 | 7/7 of 12 | rendered | 7/7 | 7/7 | NOT recognisable | UNMEASURED | CODE-CANVAS-DISAGREE:inlinenotification.warning-glyph/fill |
-| carbon | `carbon.modal` | modal / dialog | 1 × 4; 4 | 4/4 of 4 | rendered | 4/4 | 4/4 | recognisable | UNMEASURED | — |
-| carbon | `carbon.tabs` | tabs | 0 × 1 + 2 state; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | recognisable | UNMEASURED | — |
-| carbon | `carbon.tag` | badge / tag / chip | 2 × 36; 36 | 14/14 of 36 | rendered | 14/14 | 14/14 | recognisable | UNMEASURED | — |
-| carbon | `carbon.textinput` | input / field | 1 × 4 + 4 state; 8 | 4/5 of 8 | rendered, 1 refused | 4/4 | 4/4 | NOT recognisable | UNMEASURED | — |
-| carbon | `carbon.toggle` | toggle / switch | 1 × 2 + 2 state; 4 | 2/3 of 4 | rendered, 1 refused | 2/2 | 2/2 | NOT recognisable | UNMEASURED | — |
-| fluent | `fluent.avatar` | avatar | 3 × 18; 18 | 6/6 of 18 | rendered | 6/6 | 6/6 | NOT recognisable | UNMEASURED | — |
-| fluent | `fluent.badge` | badge / tag / chip | 3 × 192; 192 | 16/16 of 192 | rendered | 16/16 | 16/16 | NOT recognisable | UNMEASURED | — |
-| fluent | `fluent.button` | button | 3 × 45 + 20 state; 65 | 12/13 of 65 | rendered, 1 refused | 12/12 | 12/12 | recognisable | UNMEASURED | — |
-| fluent | `fluent.card` | card | 3 × 24 + 16 state; 120 | 10/11 of 40 | rendered, 1 refused | 10/10 | 10/10 | NOT recognisable | UNMEASURED | — |
-| fluent | `fluent.checkbox` | checkbox / radio | 3 × 12 + 12 state; 24 | 8/9 of 24 | rendered, 1 refused | 8/8 | 8/8 | NOT recognisable | UNMEASURED | — |
-| fluent | `fluent.dialog` | modal / dialog | 1 × 3; 13 | 3/3 of 3 | rendered | 3/3 | 3/3 | NOT recognisable | UNMEASURED | — |
-| fluent | `fluent.input` | input / field | 2 × 18 + 24 state; 42 | 11/12 of 42 | rendered, 1 refused | 11/11 | 11/11 | NOT recognisable | UNMEASURED | CODE-ONLY-FACT:root/border-bottom-color (outline/underline) — Fluent’s accessible bottom stroke ({color-neutral-stroke-accessible}) is darker than the other three sides; a Figma node carries ONE strokes paint, so the majority ({imported.input.root.border-top-color.<appearance>} #d1d1d1) draws and the bottom’s own colour stays code-only by name (underline, whose only drawn side IS the bottom, now paints it exactly); CODE-ONLY-FACT:root/border-color (state previews) — State=Active/Focus Visible recolor the bottom to the brand stroke in code; on the preview cells the drawn sides’ majority is the transparent state colour, so those two cells render no stroke ink |
-| fluent | `fluent.spinner` | progress / spinner | 3 × 64; 64 | 12/12 of 64 | rendered | 12/12 | 12/12 | NOT recognisable | UNMEASURED | CODE-CANVAS-CONSISTENT-GLYPH-SUBSTITUTE:spinner-arc |
-| fluent | `fluent.switch` | toggle / switch | 2 × 6 + 4 state; 10 | 5/6 of 10 | rendered, 1 refused | 5/5 | 5/5 | NOT recognisable | UNMEASURED | — |
-| fluent | `fluent.tab-list` | tabs | 3 × 24; 24 | 7/7 of 24 | rendered | 7/7 | 7/7 | NOT recognisable | UNMEASURED | — |
-| fluent | `fluent.tooltip` | tooltip / popover | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | NOT recognisable | UNMEASURED | CODE-RENDER-PARTIAL:tooltip.normal |
-| mui | `mui.accordion` | accordion | 2 × 4; 4 | 3/3 of 4 | rendered | 3/3 | 3/3 | recognisable | UNMEASURED | — |
-| mui | `mui.alert` | banner / alert / toast | 2 × 12; 12 | 6/6 of 12 | rendered | 6/6 | 6/6 | recognisable | UNMEASURED | — |
-| mui | `mui.autocomplete` | select / combobox | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | UNMEASURED | — |
-| mui | `mui.avatar` | avatar | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | recognisable | UNMEASURED | — |
-| mui | `mui.badge` | badge / tag / chip | 2 × 14; 14 | 8/8 of 14 | rendered | 8/8 | 8/8 | recognisable | UNMEASURED | — |
-| mui | `mui.breadcrumbs` | breadcrumb | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | UNMEASURED | — |
-| mui | `mui.button` | button | 3 × 63 + 12 state; 75 | 15/15 of 75 | rendered | 15/15 | 15/15 | recognisable | UNMEASURED | — |
-| mui | `mui.card` | card | 1 × 4; 4 | 4/4 of 4 | rendered | 4/4 | 4/4 | recognisable | UNMEASURED | — |
-| mui | `mui.checkbox` | checkbox / radio | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | recognisable | UNMEASURED | — |
-| mui | `mui.chip` | badge / tag / chip | 3 × 28; 28 | 9/9 of 28 | rendered | 9/9 | 9/9 | recognisable | UNMEASURED | — |
-| mui | `mui.circular-progress` | progress / spinner | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | NOT recognisable | UNMEASURED | — |
-| mui | `mui.dialog` | modal / dialog | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | 5/5 | recognisable | UNMEASURED | — |
-| mui | `mui.divider` | unmapped | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | recognisable | UNMEASURED | — |
-| mui | `mui.drawer` | modal / dialog | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | NOT recognisable | UNMEASURED | — |
-| mui | `mui.fab` | button | 2 × 9; 9 | 5/5 of 9 | rendered | 5/5 | 5/5 | recognisable | UNMEASURED | — |
-| mui | `mui.icon-button` | button | 2 × 9; 9 | 5/5 of 9 | rendered | 5/5 | 5/5 | recognisable | UNMEASURED | — |
-| mui | `mui.input-adornment` | input / field | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | UNMEASURED | — |
-| mui | `mui.linear-progress` | progress / spinner | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | UNMEASURED | — |
-| mui | `mui.link` | unmapped | 2 × 21 + 21 state; 42 | 12/12 of 42 | rendered | 12/12 | 12/12 | NOT recognisable | UNMEASURED | — |
-| mui | `mui.menu` | menu / dropdown | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | UNMEASURED | — |
-| mui | `mui.paper` | unmapped | 2 × 8; 8 | 5/5 of 8 | rendered | 5/5 | 5/5 | recognisable | UNMEASURED | — |
-| mui | `mui.radio` | checkbox / radio | 2 × 14; 14 | 8/8 of 14 | rendered | 8/8 | 8/8 | NOT recognisable | UNMEASURED | — |
-| mui | `mui.select` | select / combobox | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | UNMEASURED | — |
-| mui | `mui.slider` | slider | 2 × 12; 12 | 7/7 of 12 | rendered | 7/7 | 7/7 | recognisable | UNMEASURED | — |
-| mui | `mui.snackbar` | banner / alert / toast | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | recognisable | UNMEASURED | — |
-| mui | `mui.switch` | toggle / switch | 3 × 28; 28 | 9/9 of 28 | rendered | 9/9 | 9/9 | recognisable | UNMEASURED | — |
-| mui | `mui.table-pagination` | pagination | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | UNMEASURED | — |
-| mui | `mui.table` | table / data-grid | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | UNMEASURED | — |
-| mui | `mui.tabs` | tabs | 2 × 6; 6 | 4/4 of 6 | rendered | 4/4 | 4/4 | recognisable | UNMEASURED | — |
-| mui | `mui.text-field` | input / field | 2 × 6; 6 | 4/4 of 6 | rendered | 4/4 | 4/4 | NOT recognisable | UNMEASURED | CODE-CANVAS-DISAGREE:text-field.label/order |
-| mui | `mui.tooltip` | tooltip / popover | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | UNMEASURED | — |
-| polaris | `polaris.avatar` | avatar | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | 5/5 | recognisable | UNMEASURED | — |
-| polaris | `polaris.badge` | badge / tag / chip | 2 × 56; 56 | 17/17 of 56 | rendered | 17/17 | 17/17 | recognisable | UNMEASURED | — |
-| polaris | `polaris.banner` | banner / alert / toast | 1 × 4 + 4 state; 8 | 5/5 of 8 | rendered | 5/5 | 5/5 | recognisable | UNMEASURED | — |
-| polaris | `polaris.button` | button | 4 × 300 + 20 state; 320 | 17/18 of 320 | rendered, 1 refused | 17/17 | 17/17 | recognisable | UNMEASURED | — |
-| polaris | `polaris.checkbox` | checkbox / radio | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | recognisable | UNMEASURED | — |
-| polaris | `polaris.progress-bar` | progress / spinner | 2 × 12; 12 | 6/6 of 12 | rendered | 6/6 | 6/6 | recognisable | UNMEASURED | — |
-| polaris | `polaris.radio-button` | checkbox / radio | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | UNMEASURED | — |
-| polaris | `polaris.spinner` | progress / spinner | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | UNMEASURED | — |
-| polaris | `polaris.tag` | badge / tag / chip | 1 × 2 + 6 state; 8 | 5/5 of 8 | rendered | 5/5 | 5/5 | recognisable | UNMEASURED | — |
-| polaris | `polaris.text-field` | input / field | 5 × 1344 + 56 state; 8 | 24/24 of 1400, cap 24 dropped 5, axis coverage INCOMPLETE | rendered | 1/24 (+23 projected out) | 24/24 | recognisable | UNMEASURED | CANVAS-PROJECTION:Type=Text, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=None, Align=Left, Variant=Inherit, Size=Slim; CANVAS-PROJECTION:Type=Text, Input Mode=None, Align=Left, Variant=Borderless, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=None, Align=Center, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=None, Align=Right, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=Decimal, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=Numeric, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=Tel, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=Search, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=Email, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=Url, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Email, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Number, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Integer, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Password, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Search, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Tel, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Url, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Date, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Datetime Local, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Month, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Time, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Week, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium |
-| polaris | `polaris.text` | unmapped | 5 × 23232; 55 | 24/24 of 23232, cap 24 dropped 14, axis coverage INCOMPLETE | rendered | 0/24 (+24 projected out) | 24/24 | NOT recognisable | UNMEASURED | CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading Sm; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading Md; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading Lg; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading Xl; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading2xl; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading3xl; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Body Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Body Sm; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Body Md; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Body Lg; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Medium, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Semibold, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Bold, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Disabled, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Inherit, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Success, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Critical, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Caution, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Subdued, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Text Inverse, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Text Inverse Secondary, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Magic, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Magic Subdued, Font Weight=Regular, Variant=Heading Xs |
-| polaris | `polaris.thumbnail` | unmapped | 1 × 4; 4 | 4/4 of 4 | rendered | 4/4 | 4/4 | recognisable | UNMEASURED | — |
-| shadcn | `shadcn.alert` | banner / alert / toast | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | UNMEASURED | CODE-CANVAS-DISAGREE:root.border-color-unspecified |
-| shadcn | `shadcn.avatar` | avatar | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | NOT recognisable | UNMEASURED | — |
-| shadcn | `shadcn.badge` | badge / tag / chip | 1 × 6 + 12 state; 18 | 8/8 of 18 | rendered | 8/8 | 8/8 | recognisable | UNMEASURED | — |
-| shadcn | `shadcn.button` | button | 2 × 48 + 24 state; 72 | 16/17 of 72 | rendered, 1 refused | 16/16 | 16/16 | recognisable | UNMEASURED | FC-EXPORT-RING-UNPAINTED |
-| shadcn | `shadcn.card` | card | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | UNMEASURED | CODE-CANVAS-DISAGREE:root.border-color-unspecified |
-| shadcn | `shadcn.checkbox` | checkbox / radio | 1 × 3 + 6 state; 9 | 4/5 of 9 | rendered, 1 refused | 4/4 | 4/4 | NOT recognisable | UNMEASURED | — |
-| shadcn | `shadcn.input` | input / field | 0 × 1 + 3 state; 4 | 3/4 of 4 | rendered, 1 refused | 3/3 | 3/3 | NOT recognisable | UNMEASURED | CODE-ONLY-FACT:root/border-color (state previews) — State=Active/Focus Visible recolor all four sides to {imported.shared.color-a1a1a1} in code; the preview cells keep the base {imported.shared.color-e5e5e5} stroke (the state pass carries no width source, so the one-paint recolor is refused by name); CODE-ONLY-FACT:root/box-shadow (state previews) — the active/focus ring stack (5 layers incl. the 3px ring) parses to no Figma effect stack; preview cells draw the base 0/1px/2px shadow only |
-| shadcn | `shadcn.select` | select / combobox | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | UNMEASURED | CODE-CANVAS-DISAGREE:root.border-color-unspecified |
-| shadcn | `shadcn.switch` | toggle / switch | 2 × 4 + 4 state; 8 | 4/5 of 8 | rendered, 1 refused | 4/4 | 4/4 | NOT recognisable | UNMEASURED | — |
-| shadcn | `shadcn.tabs` | tabs | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | UNMEASURED | — |
-| shadcn | `shadcn.tooltip` | tooltip / popover | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | UNMEASURED | — |
-| tailwind | `flowbite.alert` | banner / alert / toast | 1 × 4; 4 | 4/4 of 4 | rendered | 4/4 | 4/4 | recognisable | UNMEASURED | — |
-| tailwind | `flowbite.badge` | badge / tag / chip | 2 × 12 + 12 state; 24 | 9/9 of 24 | rendered | 9/9 | 9/9 | recognisable | UNMEASURED | — |
-| tailwind | `flowbite.button` | button | 2 × 25 + 20 state; 45 | 12/13 of 45 | rendered, 1 refused | 12/12 | 12/12 | recognisable | UNMEASURED | FC-EXPORT-RING-UNPAINTED |
-| tailwind | `flowbite.card` | card | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | UNMEASURED | — |
-| tailwind | `flowbite.helpertext` | unmapped | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | 5/5 | recognisable | UNMEASURED | — |
-| tailwind | `flowbite.kbd` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | UNMEASURED | — |
-| tailwind | `flowbite.label` | unmapped | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | 5/5 | recognisable | UNMEASURED | — |
-| tailwind | `flowbite.toggleswitch` | toggle / switch | 2 × 6; 6 | 4/4 of 6 | rendered | 4/4 | 4/4 | recognisable | UNMEASURED | — |
+| antd | `antd.alert` | banner / alert / toast | 2 × 8; 8 | 5/5 of 8 | rendered | 5/5 | 5/5 | recognisable | R✘ V✓ B✘ 20/22 (91%) L✓ | — |
+| antd | `antd.avatar` | avatar | 2 × 6; 6 | 4/4 of 6 | rendered | 4/4 | 4/4 | recognisable | R✓ V✓ B✓ 10/10 (100%) L✓ | — |
+| antd | `antd.badge` | badge / tag / chip | 2 × 6; 6 | 4/4 of 6 | rendered | 4/4 | 4/4 | recognisable | R✘ V✓ B✓ 26/26 (100%) L✓ | — |
+| antd | `antd.button` | button | 3 × 30; 30 | 8/8 of 30 | rendered | 8/8 | 8/8 | recognisable | R✘ V✘ B✘ 18/22 (82%) L✓ | — |
+| antd | `antd.card` | card | 2 × 4; 4 | 3/3 of 4 | rendered | 3/3 | 3/3 | recognisable | R✓ V✓ B✓ 23/23 (100%) L✓ | — |
+| antd | `antd.checkbox` | checkbox / radio | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | recognisable | R✘ V✓ B✓ 21/21 (100%) L✓ | — |
+| antd | `antd.input` | input / field | 3 × 24 + 16 state; 40 | 11/11 of 40 | rendered | 11/11 | 11/11 | NOT recognisable | R✓ V✘ B✓ 13/13 (100%) L✓ | CODE-RENDER-BLANK:input |
+| antd | `antd.progress` | progress / spinner | 1 × 4; 4 | 4/4 of 4 | rendered | 4/4 | 4/4 | recognisable | R✓ V✘ B✘ 15/16 (94%) L✓ | CODE-RENDER-PARTIAL:progress |
+| antd | `antd.radio` | checkbox / radio | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | R✘ V✓ B✓ 21/21 (100%) L✓ | — |
+| antd | `antd.switch` | toggle / switch | 2 × 4 + 8 state; 12 | 7/7 of 12 | rendered | 7/7 | 7/7 | recognisable | R✘ V✘ B✘ 30/31 (97%) L✓ | — |
+| antd | `antd.tag` | badge / tag / chip | 2 × 14; 14 | 8/8 of 14 | rendered | 8/8 | 8/8 | recognisable | R✘ V✓ B✘ 14/17 (82%) L✓ | CODE-RENDER-PARTIAL:tag |
+| antd | `antd.tooltip` | tooltip / popover | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | NOT recognisable | R✘ V· B✓ 22/22 (100%) L✓ | — |
+| astryx | `astryx.badge` | badge / tag / chip | 1 × 14; 14 | 14/14 of 14 | rendered | 14/14 | 14/14 | NOT recognisable | R✓ V✓ B✓ 9/9 (100%) L✓ | — |
+| astryx | `astryx.banner` | banner / alert / toast | 2 × 8; 8 | 5/5 of 8 | rendered | 5/5 | 5/5 | recognisable | R✘ V✓ B✓ 18/18 (100%) L✓ | — |
+| astryx | `astryx.button` | button | 2 × 12; 12 | 6/6 of 12 | rendered | 6/6 | 6/6 | NOT recognisable | R✓ V✓ B✓ 13/13 (100%) L✓ | — |
+| astryx | `astryx.card` | card | 1 × 13; 13 | 13/13 of 13 | rendered | 13/13 | 13/13 | recognisable | R✘ V✓ B✓ 13/13 (100%) L✓ | — |
+| astryx | `astryx.checkbox-input` | checkbox / radio | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | NOT recognisable | R✓ V✘ B✓ 11/11 (100%) L✓ | — |
+| astryx | `astryx.dropdown-menu-item` | menu / dropdown | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | R✓ V· B✓ 9/9 (100%) L✓ | — |
+| astryx | `astryx.dropdown-menu` | menu / dropdown | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | NOT recognisable | R✘ V· B✓ 52/52 (100%) L✓ | — |
+| astryx | `astryx.progress-bar` | progress / spinner | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | 5/5 | NOT recognisable | R✘ V✓ B✓ 17/17 (100%) L✓ | — |
+| astryx | `astryx.slider` | slider | 2 × 6; 6 | 4/4 of 6 | rendered | 4/4 | 4/4 | NOT recognisable | R✘ V✓ B✓ 41/41 (100%) L✓ | — |
+| astryx | `astryx.switch` | toggle / switch | 1 × 4; 4 | 3/3 of 4 | rendered | 3/3 | 3/3 | recognisable | R✘ V✓ B✓ 25/25 (100%) L✓ | — |
+| astryx | `astryx.text-input` | input / field | 2 × 9; 9 | 5/5 of 9 | rendered | 5/5 | 5/5 | NOT recognisable | R✘ V✓ B✘ 21/22 (95%) L✓ | — |
+| astryx | `astryx.toast` | banner / alert / toast | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | NOT recognisable | R✘ V· B✓ 25/25 (100%) L✓ | CANVAS-SURFACE-WHITE-ON-WHITE:toast |
+| astryx | `astryx.token` | unmapped | 2 × 33; 33 | 13/13 of 33 | rendered | 13/13 | 13/13 | recognisable | R✓ V✓ B✓ 11/11 (100%) L✓ | — |
+| carbon | `carbon.accordion` | accordion | 2 × 6 + 2 state; 8 | 4/5 of 8 | rendered, 1 refused | 4/4 | 4/4 | NOT recognisable | R✓ V✓ B✘ 18/19 (95%) L✓ | — |
+| carbon | `carbon.button` | button | 2 × 48 + 32 state; 80 | 16/17 of 80 | rendered, 1 refused | 16/16 | 16/16 | recognisable | R✘ V✘ B✓ 10/10 (100%) L✓ | FC-EXPORT-RING-UNPAINTED; CODE-CANVAS-DISAGREE:button.tertiary/border |
+| carbon | `carbon.checkbox` | checkbox / radio | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | recognisable | R✘ V✓ B✓ 17/17 (100%) L✓ | — |
+| carbon | `carbon.iconbutton` | button | 2 × 16; 16 | 7/7 of 16 | rendered | 7/7 | 7/7 | recognisable | R✘ V✓ B✘ 12/14 (86%) L✓ | CODE-RENDER-UNSTYLED:iconbutton |
+| carbon | `carbon.inlinenotification` | banner / alert / toast | 2 × 12; 12 | 7/7 of 12 | rendered | 7/7 | 7/7 | NOT recognisable | R✓ V✓ B✘ 26/28 (93%) L✘ | CODE-CANVAS-DISAGREE:inlinenotification.warning-glyph/fill |
+| carbon | `carbon.modal` | modal / dialog | 1 × 4; 4 | 4/4 of 4 | rendered | 4/4 | 4/4 | recognisable | R✓ V✓ B✘ 59/62 (95%) L✓ | — |
+| carbon | `carbon.tabs` | tabs | 0 × 1 + 2 state; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | recognisable | R✘ V✘ B✓ 26/26 (100%) L✓ | — |
+| carbon | `carbon.tag` | badge / tag / chip | 2 × 36; 36 | 14/14 of 36 | rendered | 14/14 | 14/14 | recognisable | R✓ V✓ B✓ 11/11 (100%) L✓ | — |
+| carbon | `carbon.textinput` | input / field | 1 × 4 + 4 state; 8 | 4/5 of 8 | rendered, 1 refused | 4/4 | 4/4 | NOT recognisable | R✘ V✓ B✓ 21/21 (100%) L✓ | — |
+| carbon | `carbon.toggle` | toggle / switch | 1 × 2 + 2 state; 4 | 2/3 of 4 | rendered, 1 refused | 2/2 | 2/2 | NOT recognisable | R✓ V✓ B✓ 18/18 (100%) L✓ | — |
+| fluent | `fluent.avatar` | avatar | 3 × 18; 18 | 6/6 of 18 | rendered | 6/6 | 6/6 | NOT recognisable | R✓ V✘ B✓ 16/16 (100%) L✓ | — |
+| fluent | `fluent.badge` | badge / tag / chip | 3 × 192; 192 | 16/16 of 192 | rendered | 16/16 | 16/16 | NOT recognisable | R✓ V✘ B✓ 10/10 (100%) L✓ | — |
+| fluent | `fluent.button` | button | 3 × 45 + 20 state; 65 | 12/13 of 65 | rendered, 1 refused | 12/12 | 12/12 | recognisable | R✓ V✘ B✓ 13/13 (100%) L✓ | — |
+| fluent | `fluent.card` | card | 3 × 24 + 16 state; 120 | 10/11 of 40 | rendered, 1 refused | 10/10 | 10/10 | NOT recognisable | R✘ V✘ B✓ 22/22 (100%) L✓ | — |
+| fluent | `fluent.checkbox` | checkbox / radio | 3 × 12 + 12 state; 24 | 8/9 of 24 | rendered, 1 refused | 8/8 | 8/8 | NOT recognisable | R✘ V✘ B✘ 20/21 (95%) L✓ | — |
+| fluent | `fluent.dialog` | modal / dialog | 1 × 3; 13 | 3/3 of 3 | rendered | 3/3 | 3/3 | NOT recognisable | R✘ V✘ B✘ 40/43 (93%) L✓ | — |
+| fluent | `fluent.input` | input / field | 2 × 18 + 24 state; 42 | 11/12 of 42 | rendered, 1 refused | 11/11 | 11/11 | NOT recognisable | R✓ V✘ B✓ 15/15 (100%) L✓ | CODE-ONLY-FACT:root/border-bottom-color (outline/underline) — Fluent’s accessible bottom stroke ({color-neutral-stroke-accessible}) is darker than the other three sides; a Figma node carries ONE strokes paint, so the majority ({imported.input.root.border-top-color.<appearance>} #d1d1d1) draws and the bottom’s own colour stays code-only by name (underline, whose only drawn side IS the bottom, now paints it exactly); CODE-ONLY-FACT:root/border-color (state previews) — State=Active/Focus Visible recolor the bottom to the brand stroke in code; on the preview cells the drawn sides’ majority is the transparent state colour, so those two cells render no stroke ink |
+| fluent | `fluent.spinner` | progress / spinner | 3 × 64; 64 | 12/12 of 64 | rendered | 12/12 | 12/12 | NOT recognisable | R✓ V✘ B✓ 9/9 (100%) L✓ | CODE-CANVAS-CONSISTENT-GLYPH-SUBSTITUTE:spinner-arc |
+| fluent | `fluent.switch` | toggle / switch | 2 × 6 + 4 state; 10 | 5/6 of 10 | rendered, 1 refused | 5/5 | 5/5 | NOT recognisable | R✘ V✘ B✓ 23/23 (100%) L✓ | — |
+| fluent | `fluent.tab-list` | tabs | 3 × 24; 24 | 7/7 of 24 | rendered | 7/7 | 7/7 | NOT recognisable | R✘ V✘ B✓ 31/31 (100%) L✓ | — |
+| fluent | `fluent.tooltip` | tooltip / popover | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | NOT recognisable | R✘ V✓ B✓ 19/19 (100%) L✓ | CODE-RENDER-PARTIAL:tooltip.normal |
+| mui | `mui.accordion` | accordion | 2 × 4; 4 | 3/3 of 4 | rendered | 3/3 | 3/3 | recognisable | R✘ V✓ B✓ 29/29 (100%) L✓ | — |
+| mui | `mui.alert` | banner / alert / toast | 2 × 12; 12 | 6/6 of 12 | rendered | 6/6 | 6/6 | recognisable | R✘ V✓ B✓ 22/22 (100%) L✓ | — |
+| mui | `mui.autocomplete` | select / combobox | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | R✘ V✓ B✘ 86/92 (93%) L✓ | — |
+| mui | `mui.avatar` | avatar | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | recognisable | R✓ V✓ B✓ 8/8 (100%) L✓ | — |
+| mui | `mui.badge` | badge / tag / chip | 2 × 14; 14 | 8/8 of 14 | rendered | 8/8 | 8/8 | recognisable | R✘ V✓ B✓ 16/16 (100%) L✓ | — |
+| mui | `mui.breadcrumbs` | breadcrumb | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | R✓ V· B✓ 7/7 (100%) L✓ | — |
+| mui | `mui.button` | button | 3 × 63 + 12 state; 75 | 15/15 of 75 | rendered | 15/15 | 15/15 | recognisable | R✓ V✘ B✓ 13/13 (100%) L✓ | — |
+| mui | `mui.card` | card | 1 × 4; 4 | 4/4 of 4 | rendered | 4/4 | 4/4 | recognisable | R✓ V✘ B✓ 11/11 (100%) L✓ | — |
+| mui | `mui.checkbox` | checkbox / radio | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | recognisable | R✓ V✓ B✓ 16/16 (100%) L✓ | — |
+| mui | `mui.chip` | badge / tag / chip | 3 × 28; 28 | 9/9 of 28 | rendered | 9/9 | 9/9 | recognisable | R✓ V✓ B✓ 10/10 (100%) L✓ | — |
+| mui | `mui.circular-progress` | progress / spinner | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | NOT recognisable | R✓ V✓ B✘ 3/6 (50%) L✓ | — |
+| mui | `mui.dialog` | modal / dialog | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | 5/5 | recognisable | R✘ V✘ B✘ 13/15 (87%) L✘ | — |
+| mui | `mui.divider` | unmapped | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | recognisable | R· V✓ B✓ 2/2 (100%) L✓ | — |
+| mui | `mui.drawer` | modal / dialog | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | NOT recognisable | R✓ V✓ B✓ 6/6 (100%) L✓ | — |
+| mui | `mui.fab` | button | 2 × 9; 9 | 5/5 of 9 | rendered | 5/5 | 5/5 | recognisable | R✓ V✓ B✓ 8/8 (100%) L✓ | — |
+| mui | `mui.icon-button` | button | 2 × 9; 9 | 5/5 of 9 | rendered | 5/5 | 5/5 | recognisable | R✓ V✓ B✓ 10/10 (100%) L✓ | — |
+| mui | `mui.input-adornment` | input / field | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | R✓ V✘ B✓ 1/1 (100%) L✓ | — |
+| mui | `mui.linear-progress` | progress / spinner | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | R✘ V✓ B✓ 10/10 (100%) L✓ | — |
+| mui | `mui.link` | unmapped | 2 × 21 + 21 state; 42 | 12/12 of 42 | rendered | 12/12 | 12/12 | NOT recognisable | R✘ V✘ B✓ 1/1 (100%) L✓ | — |
+| mui | `mui.menu` | menu / dropdown | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | R✘ V· B✓ 28/28 (100%) L✓ | — |
+| mui | `mui.paper` | unmapped | 2 × 8; 8 | 5/5 of 8 | rendered | 5/5 | 5/5 | recognisable | R✘ V✘ B✓ 9/9 (100%) L✓ | — |
+| mui | `mui.radio` | checkbox / radio | 2 × 14; 14 | 8/8 of 14 | rendered | 8/8 | 8/8 | NOT recognisable | R✓ V✘ B✓ 22/22 (100%) L✓ | — |
+| mui | `mui.select` | select / combobox | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | R✘ V✓ B✓ 35/35 (100%) L✓ | — |
+| mui | `mui.slider` | slider | 2 × 12; 12 | 7/7 of 12 | rendered | 7/7 | 7/7 | recognisable | R✘ V✓ B✓ 30/30 (100%) L✓ | — |
+| mui | `mui.snackbar` | banner / alert / toast | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | recognisable | R✓ V✘ B✓ 13/13 (100%) L✓ | — |
+| mui | `mui.switch` | toggle / switch | 3 × 28; 28 | 9/9 of 28 | rendered | 9/9 | 9/9 | recognisable | R✘ V✘ B✓ 33/33 (100%) L✓ | — |
+| mui | `mui.table-pagination` | pagination | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | R✘ V· B✘ 67/73 (92%) L✓ | — |
+| mui | `mui.table` | table / data-grid | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | R✘ V✓ B✘ 170/172 (99%) L✓ | — |
+| mui | `mui.tabs` | tabs | 2 × 6; 6 | 4/4 of 6 | rendered | 4/4 | 4/4 | recognisable | R✘ V✓ B✓ 38/38 (100%) L✓ | — |
+| mui | `mui.text-field` | input / field | 2 × 6; 6 | 4/4 of 6 | rendered | 4/4 | 4/4 | NOT recognisable | R✘ V✘ B✘ 35/37 (95%) L✓ | CODE-CANVAS-DISAGREE:text-field.label/order |
+| mui | `mui.tooltip` | tooltip / popover | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | R✓ V· B✓ 15/15 (100%) L✓ | — |
+| polaris | `polaris.avatar` | avatar | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | 5/5 | recognisable | R✘ V✓ B✓ 11/11 (100%) L✓ | — |
+| polaris | `polaris.badge` | badge / tag / chip | 2 × 56; 56 | 17/17 of 56 | rendered | 17/17 | 17/17 | recognisable | R✓ V✓ B✓ 10/10 (100%) L✓ | — |
+| polaris | `polaris.banner` | banner / alert / toast | 1 × 4 + 4 state; 8 | 5/5 of 8 | rendered | 5/5 | 5/5 | recognisable | R✘ V✓ B✘ 88/91 (97%) L✘ | — |
+| polaris | `polaris.button` | button | 4 × 300 + 20 state; 320 | 17/18 of 320 | rendered, 1 refused | 17/17 | 17/17 | recognisable | R✘ V✘ B✓ 23/23 (100%) L✘ | — |
+| polaris | `polaris.checkbox` | checkbox / radio | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | recognisable | R✓ V✓ B✓ 19/19 (100%) L✘ | — |
+| polaris | `polaris.progress-bar` | progress / spinner | 2 × 12; 12 | 6/6 of 12 | rendered | 6/6 | 6/6 | recognisable | R✘ V✓ B✘ 9/10 (90%) L✓ | — |
+| polaris | `polaris.radio-button` | checkbox / radio | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | R✓ V✓ B✓ 21/21 (100%) L✘ | — |
+| polaris | `polaris.spinner` | progress / spinner | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | R✓ V✓ B✘ 4/6 (67%) L✓ | — |
+| polaris | `polaris.tag` | badge / tag / chip | 1 × 2 + 6 state; 8 | 5/5 of 8 | rendered | 5/5 | 5/5 | recognisable | R✘ V✘ B✘ 31/33 (94%) L✓ | — |
+| polaris | `polaris.text-field` | input / field | 5 × 1344 + 56 state; 8 | 24/24 of 1400, cap 24 dropped 5, axis coverage INCOMPLETE | rendered | 1/24 (+23 projected out) | 24/24 | recognisable | R✘ V✘ B✘ 31/34 (91%) L✓ | CANVAS-PROJECTION:Type=Text, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=None, Align=Left, Variant=Inherit, Size=Slim; CANVAS-PROJECTION:Type=Text, Input Mode=None, Align=Left, Variant=Borderless, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=None, Align=Center, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=None, Align=Right, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=Decimal, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=Numeric, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=Tel, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=Search, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=Email, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Text, Input Mode=Url, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Email, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Number, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Integer, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Password, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Search, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Tel, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Url, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Date, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Datetime Local, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Month, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Time, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium; CANVAS-PROJECTION:Type=Week, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium |
+| polaris | `polaris.text` | unmapped | 5 × 23232; 55 | 24/24 of 23232, cap 24 dropped 14, axis coverage INCOMPLETE | rendered | 0/24 (+24 projected out) | 24/24 | NOT recognisable | R✘ V✘ B✓ 1/1 (100%) L✓ | CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading Sm; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading Md; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading Lg; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading Xl; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading2xl; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading3xl; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Body Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Body Sm; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Body Md; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Body Lg; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Medium, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Semibold, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Bold, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Disabled, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Inherit, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Success, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Critical, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Caution, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Subdued, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Text Inverse, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Text Inverse Secondary, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Magic, Font Weight=Regular, Variant=Heading Xs; CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Magic Subdued, Font Weight=Regular, Variant=Heading Xs |
+| polaris | `polaris.thumbnail` | unmapped | 1 × 4; 4 | 4/4 of 4 | rendered | 4/4 | 4/4 | recognisable | R✘ V✓ B✓ 15/15 (100%) L✓ | — |
+| shadcn | `shadcn.alert` | banner / alert / toast | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | R✘ V✓ B✓ 12/12 (100%) L✓ | CODE-CANVAS-DISAGREE:root.border-color-unspecified |
+| shadcn | `shadcn.avatar` | avatar | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | NOT recognisable | R✘ V✓ B✓ 12/12 (100%) L✓ | — |
+| shadcn | `shadcn.badge` | badge / tag / chip | 1 × 6 + 12 state; 18 | 8/8 of 18 | rendered | 8/8 | 8/8 | recognisable | R✓ V✘ B✓ 13/13 (100%) L✓ | — |
+| shadcn | `shadcn.button` | button | 2 × 48 + 24 state; 72 | 16/17 of 72 | rendered, 1 refused | 16/16 | 16/16 | recognisable | R✓ V✘ B✓ 10/10 (100%) L✓ | FC-EXPORT-RING-UNPAINTED |
+| shadcn | `shadcn.card` | card | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | recognisable | R✘ V✓ B✓ 19/19 (100%) L✓ | CODE-CANVAS-DISAGREE:root.border-color-unspecified |
+| shadcn | `shadcn.checkbox` | checkbox / radio | 1 × 3 + 6 state; 9 | 4/5 of 9 | rendered, 1 refused | 4/4 | 4/4 | NOT recognisable | R· V✘ B✓ 9/9 (100%) L✓ | — |
+| shadcn | `shadcn.input` | input / field | 0 × 1 + 3 state; 4 | 3/4 of 4 | rendered, 1 refused | 3/3 | 3/3 | NOT recognisable | R✘ V✘ B✓ 13/13 (100%) L✓ | CODE-ONLY-FACT:root/border-color (state previews) — State=Active/Focus Visible recolor all four sides to {imported.shared.color-a1a1a1} in code; the preview cells keep the base {imported.shared.color-e5e5e5} stroke (the state pass carries no width source, so the one-paint recolor is refused by name); CODE-ONLY-FACT:root/box-shadow (state previews) — the active/focus ring stack (5 layers incl. the 3px ring) parses to no Figma effect stack; preview cells draw the base 0/1px/2px shadow only |
+| shadcn | `shadcn.select` | select / combobox | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | R✓ V· B✘ 16/18 (89%) L✓ | CODE-CANVAS-DISAGREE:root.border-color-unspecified |
+| shadcn | `shadcn.switch` | toggle / switch | 2 × 4 + 4 state; 8 | 4/5 of 8 | rendered, 1 refused | 4/4 | 4/4 | NOT recognisable | R✓ V✘ B✓ 16/16 (100%) L✓ | — |
+| shadcn | `shadcn.tabs` | tabs | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | R✘ V· B✓ 59/59 (100%) L✓ | — |
+| shadcn | `shadcn.tooltip` | tooltip / popover | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | R✓ V· B✓ 23/23 (100%) L✓ | — |
+| tailwind | `flowbite.alert` | banner / alert / toast | 1 × 4; 4 | 4/4 of 4 | rendered | 4/4 | 4/4 | recognisable | R✘ V✓ B✘ 33/34 (97%) L✓ | — |
+| tailwind | `flowbite.badge` | badge / tag / chip | 2 × 12 + 12 state; 24 | 9/9 of 24 | rendered | 9/9 | 9/9 | recognisable | R✓ V✘ B✓ 11/11 (100%) L✓ | — |
+| tailwind | `flowbite.button` | button | 2 × 25 + 20 state; 45 | 12/13 of 45 | rendered, 1 refused | 12/12 | 12/12 | recognisable | R✓ V✘ B✓ 11/11 (100%) L✓ | FC-EXPORT-RING-UNPAINTED |
+| tailwind | `flowbite.card` | card | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | R✘ V· B✓ 13/13 (100%) L✓ | — |
+| tailwind | `flowbite.helpertext` | unmapped | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | 5/5 | recognisable | R✘ V✓ B✓ 2/2 (100%) L✓ | — |
+| tailwind | `flowbite.kbd` | unmapped | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | recognisable | R✘ V· B✓ 13/13 (100%) L✓ | — |
+| tailwind | `flowbite.label` | unmapped | 1 × 5; 5 | 5/5 of 5 | rendered | 5/5 | 5/5 | recognisable | R✘ V✓ B✓ 2/2 (100%) L✓ | — |
+| tailwind | `flowbite.toggleswitch` | toggle / switch | 2 × 6; 6 | 4/4 of 6 | rendered | 4/4 | 4/4 | recognisable | R✓ V✓ B✓ 25/25 (100%) L✓ | — |
 
 <!-- PRESERVED LOG — hand-authored below this line; carried across regenerations of this receipt. -->
 

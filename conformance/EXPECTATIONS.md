@@ -16,13 +16,13 @@ repo it is simply absent from the denominator and scores 100%.
 
 | | |
 |---|---|
-| cases | **108** |
-| 🟢 pass | **105** |
-| 🔴 red | **3** |
+| cases | **126** |
+| 🟢 pass | **122** |
+| 🔴 red | **4** |
 | 🟡 yellow (UNSUPPORTED, never read) | **0** |
 | **UNSUPPORTED declared — THE RATCHET** | **17** · may only DECREASE without an explicit manifest edit |
 
-Declared dispositions: CARRIED 62 · LOWERED 5 · REFUSED 24 · UNSUPPORTED 17.
+Declared dispositions: CARRIED 78 · LOWERED 5 · REFUSED 26 · UNSUPPORTED 17.
 
 **A green gate here would mean the cases are too easy.** The point of the
 fixture is a measured frontier, and every red below is an open, named defect —
@@ -30,13 +30,22 @@ recorded in `conformance/BASELINE.json` so it cannot drift in either direction:
 a new red is a regression, and a red that becomes green must be re-recorded, so
 a fix can never be absorbed silently.
 
-## UNDECLARED-CARRY (HARMFUL) 🔴 — 3
+## UNDECLARED-CARRY (HARMFUL) 🔴 — 4
 
 The engine carried a construct the manifest says has **no canvas spelling**. The
 doctrine calls UNDECLARED-CARRY "good news, wrong manifest" — and usually it is.
 It is not, when the thing carried cannot be drawn: then the carriage is the defect
 and the manifest was right. Fixing these means changing the engine, not the
 manifest.
+
+### `combobox-listbox-stacking-order`
+
+- **construct** — ``z-index: 10` on an absolutely positioned listbox that OVERLAPS its trigger - explicit paint order, not document order`
+- **why it matters** — Separated from the inset case deliberately. That one asks where the popover goes; this one asks what happens when it lands ON something and the author has said, in CSS, which one wins. The canvas HAS a spelling for paint order - a child's index in the layer tree - so this is not a construct with nowhere to go; the question is whether an explicit z-index is read, translated, or dropped. Declared REFUSED rather than CARRIED because no ordering channel is in the carried vocabulary today, and a silent drop here means a popover that renders behind the thing it is supposed to cover.
+- **declared** REFUSED by the name `z-index` in LEDGER.md
+- **measured** — channel `z-index`; observed on `b`; carried as `b.tokens = 10`
+- **canvas** — ABSENT: the canvas spells paint order as child index; a numeric z-index has no direct channel
+- **verdict** — 🔴 **UNDECLARED-CARRY**: declared REFUSED but the engine CARRIED it — update the manifest
 
 ### `container-query`
 
@@ -75,12 +84,19 @@ manifest.
 | 🟢 | `svg-stroke-glyph-fill-none` | anatomy | `a STROKE-drawn svg glyph whose computed fill is none (the lucide check: an open path, stroke=currentColor, fill="none" on the svg)` | REFUSED | refused, by name | PASS |
 | 🔴 | `container-query` | at-rules | `@container (min-inline-size: 100px) { … }` | UNSUPPORTED | carried | UNDECLARED-CARRY |
 | 🔴 | `media-non-matching` | at-rules | `@media (min-width: 2000px) branch that does NOT match the pinned viewport` | UNSUPPORTED | carried | UNDECLARED-CARRY |
+| 🟢 | `margin-top-in-flow` | box | `margin-top: 12px on the SECOND child of a flex column whose parent declares no gap` | CARRIED | carried | PASS |
+| 🟢 | `padding-asymmetric-block` | box | `padding: 10px 4px 20px 4px — four sides, top and bottom DIFFERENT` | CARRIED | carried | PASS |
 | 🟢 | `page-global-star-rule` | cascade | `* { border-color: var(--cf-color-secondary) } — a PAGE-GLOBAL authored declaration, with the element's border-width and border-style declared locally and its colour reaching it only through the universal rule` | CARRIED | carried | PASS |
 | 🟢 | `page-inherited-ink` | cascade | `body { color: var(--cf-color-primary) } — the document's ink, inherited by a text-bearing part that declares no colour of its own` | CARRIED | carried | PASS |
 | 🟢 | `color-hex` | color | `color: #1976d2 (authored as hex)` | CARRIED | carried | PASS |
 | 🟢 | `color-rgb-solid` | color | `background-color: rgb(25, 118, 210)` | CARRIED | carried | PASS |
 | 🟢 | `color-rgba-alpha` | color | `background-color: rgba(25, 118, 210, 0.5)` | CARRIED | carried | PASS |
 | 🟢 | `oklch-color` | color | `background-color: oklch(0.6 0.15 250)` | CARRIED | carried | PASS |
+| 🟢 | `combobox-closed-trigger` | combobox | `the CLOSED combobox trigger - `justify-content: space-between` pushing a value label and a two-border chevron box to opposite ends of a bordered row` | CARRIED | carried | PASS |
+| 🔴 | `combobox-listbox-stacking-order` | combobox | ``z-index: 10` on an absolutely positioned listbox that OVERLAPS its trigger - explicit paint order, not document order` | REFUSED | carried | UNDECLARED-CARRY |
+| 🟢 | `combobox-option-highlighted` | combobox | `5 sibling options where ONE is HIGHLIGHTED (active descendant) by a single-SIDE border - `border-left: 3px solid rgb(37, 99, 235)` against a transparent left border on the other four` | CARRIED | carried | PASS |
+| 🟢 | `combobox-option-selected` | combobox | `5 sibling options where ONE is SELECTED - a distinct fill (rgb(219, 234, 254)) and weight among four identical siblings` | CARRIED | carried | PASS |
+| 🟢 | `combobox-popover-overlay-inset` | combobox | `the OPEN listbox as an out-of-flow overlay - `position: absolute; top: 34px` under a `position: relative` trigger, so the popover does not participate in the trigger's flow` | CARRIED | carried | PASS |
 | 🟢 | `calc-var` | custom-properties | `padding-left: calc(var(--cf-space-2) * 2)` | LOWERED | carried | PASS |
 | 🟢 | `custom-prop-two-hop` | custom-properties | `--a: #123456; --b: var(--a); color: var(--b)` | LOWERED | carried | PASS |
 | 🟢 | `var-fallback-chain` | custom-properties | `color: var(--cf-missing, var(--cf-color-secondary, #333))` | CARRIED | carried | PASS |
@@ -104,6 +120,7 @@ manifest.
 | 🟢 | `overlay-text-fill-stage-derived` | geometry | `a TEXT-bearing part that genuinely FILLS its pinned ancestor — where the ancestor's own box is the CAPTURE STAGE's content box (288px = stage 320 − 2×16), and its content box moves 32px only because the ancestor's own gutters do` | REFUSED | refused, by name | PASS |
 | 🟢 | `overlay-text-hug-excluded` | geometry | `a TEXT-bearing part in an overlay anatomy whose box IS its own shrink-to-fit measurement — an inline-block beside a PINNED ancestor that moves (160px → 200px) without it` | REFUSED | not read | PASS |
 | 🟢 | `grid-child-align` | grid-alignment | `justify-self: center; align-self: end on a fixed-size child` | CARRIED | carried | PASS |
+| 🟢 | `grid-child-align-self-start` | grid-alignment | `align-self: start on a fixed-size grid child, with no justify-self declared` | CARRIED | carried | PASS |
 | 🟢 | `grid-area-empty-slot` | grid-areas | `a declared grid area with NO children (empty slot)` | CARRIED | carried | PASS |
 | 🟢 | `grid-area-nonrectangular` | grid-areas | `area occupancy that cannot tile grid-template-areas (gapped or non-rectangular per CSS rules)` | LOWERED | carried | PASS |
 | 🟢 | `grid-named-area-slots` | grid-areas | `grid-template-areas: 'header header' 'nav content' + grid-area: header on children` | CARRIED | carried | PASS |
@@ -141,6 +158,8 @@ manifest.
 | 🟢 | `nonpainting-text-display-none` | invariant | `a NON-PAINTING element carrying text (display: none)` | CARRIED | carried | PASS |
 | 🟢 | `nonpainting-text-visibility-hidden` | invariant | `a NON-PAINTING element carrying text (visibility: hidden)` | REFUSED | refused, by name | PASS |
 | 🔴 | `stage-box-equal` | invariant | `a captured box exactly equal to the STAGE box (100% × 100%)` | REFUSED | carried | UNDECLARED-CARRY |
+| 🟢 | `flex-align-items-center` | layout-flex | `display: flex; align-items: center — cross-axis centring of two children of DIFFERENT heights` | CARRIED | carried | PASS |
+| 🟢 | `flex-direction-column` | layout-flex | `display: flex; flex-direction: column — the main axis turned vertical` | CARRIED | carried | PASS |
 | 🟢 | `align-items-baseline` | layout | `uniform align-items: baseline on a flex row of two differing font sizes` | CARRIED | carried | PASS |
 | 🟢 | `child-order-permuted-by-axis` | layout | `CHILD ORDER that varies on one enum axis by a ROTATION (A,B,C -> B,C,A) — a permutation that is neither the identity nor a reversal` | REFUSED | refused, by name | PASS |
 | 🟢 | `child-order-reversed-by-axis` | layout | `CHILD ORDER that varies on one enum axis — the container's flex-direction keyword is `row` for BOTH values and the DOM order of the two children is reversed instead (the fluent.switch / fluent.spinner labelPosition shape)` | CARRIED | carried | PASS |
@@ -162,9 +181,17 @@ manifest.
 | 🟢 | `pseudo-placeholder` | pseudo-elements | `input::placeholder { color }` | CARRIED | carried | PASS |
 | 🟢 | `pseudo-selection` | pseudo-elements | `::selection { background-color }` | UNSUPPORTED | not read | PASS |
 | 🟢 | `content-visibility-auto` | rendering | `content-visibility: auto` | UNSUPPORTED | refused, by name | PASS |
+| 🟢 | `repeat-grid-month` | repetition | `a 7-column CSS grid of 35 auto-placed cells (5 weeks), the LAST carrying a distinct paint (rgb(160, 32, 160))` | CARRIED | carried | PASS |
+| 🟢 | `repeat-siblings-seven` | repetition | `7 adjacent same-shape siblings, the LAST carrying a distinct paint (rgb(64, 128, 191))` | CARRIED | carried | PASS |
+| 🟢 | `repeat-siblings-thirtyone` | repetition | `31 adjacent same-shape siblings (a wrapping flex run), the LAST carrying a distinct paint (rgb(32, 160, 96))` | CARRIED | carried | PASS |
+| 🟢 | `repeat-siblings-three` | repetition | `3 adjacent same-shape siblings, the LAST carrying a distinct paint (rgb(191, 64, 32))` | CARRIED | carried | PASS |
 | 🟢 | `shadow-part` | shadow-dom | `::part(label) styling across an OPEN shadow boundary` | CARRIED | carried | PASS |
 | 🟢 | `shadow-root-closed` | shadow-dom | `a custom element with a CLOSED shadow root` | UNSUPPORTED | not read | PASS |
 | 🟢 | `svg-outside-grammar` | svg | `<svg> whose children are <circle> and <rect>` | REFUSED | refused, by name | PASS |
+| 🟢 | `table-column-numeric-alignment` | table | `per-COLUMN text alignment - the label cell `text-align: left`, the numeric cell `text-align: right`, at fixed column widths` | CARRIED | carried | PASS |
+| 🟢 | `table-header-row-distinct` | table | `a div-built table whose HEADER row differs from the body rows by weight (700) and fill - no table formatting context involved` | CARRIED | carried | PASS |
+| 🟢 | `table-semantic-row-group` | table | `real <table> markup: thead/tbody row GROUPS, whose UA display is `table-header-group` / `table-row-group` - a formatting context with no box of its own` | REFUSED | refused, by name | PASS |
+| 🟢 | `table-zebra-nth-child` | table | `zebra striping by STRUCTURAL SELECTOR - `.cf-a:nth-child(even) { background-color }` over 6 otherwise identical rows` | CARRIED | carried | PASS |
 | 🟢 | `text-indent-off-box` | text | `text-indent: 9999px on a box pinned to 8px (the status-pip idiom: the label is pushed out of the box and only the dot shows)` | LOWERED | carried | PASS |
 | 🟢 | `text-overflow-ellipsis` | text | `text-overflow: ellipsis + overflow hidden + nowrap` | CARRIED | carried | PASS |
 | 🟢 | `antd-component-scoped-custom-property` | tokens | `.cf-root { --cf-scoped-pad: 15px } .cf-root .cf-a { padding-inline: var(--cf-scoped-pad) } — a token DECLARED ON THE COMPONENT ROOT (not :root) and consumed by a descendant (antd cssVar component tokens on `.antd.ant-btn`)` | CARRIED | carried | PASS |

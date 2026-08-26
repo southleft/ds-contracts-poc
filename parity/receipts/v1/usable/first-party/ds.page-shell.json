@@ -1,0 +1,290 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / first-party",
+  "setNodeId": "39:23864",
+  "setName": "PageShell",
+  "setType": "COMPONENT",
+  "variantNodeId": "39:23864",
+  "variantNodeName": "PageShell",
+  "axes": null,
+  "axesError": null,
+  "variantChildCount": 1,
+  "variantChildNames": [
+    "PageShell"
+  ],
+  "reflow": {
+    "target": "39:23864",
+    "targetName": "PageShell",
+    "layoutMode": "GRID",
+    "childCount": 4,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 640,
+      "h": 480,
+      "children": [
+        {
+          "id": "39:23865",
+          "name": "Header",
+          "type": "SLOT",
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 64,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:23866",
+          "name": "Aside",
+          "type": "SLOT",
+          "x": 0,
+          "y": 72,
+          "w": 240,
+          "h": 344,
+          "ax": 0,
+          "ay": 72,
+          "visible": true
+        },
+        {
+          "id": "39:23867",
+          "name": "Main",
+          "type": "SLOT",
+          "x": 256,
+          "y": 72,
+          "w": 384,
+          "h": 344,
+          "ax": 256,
+          "ay": 72,
+          "visible": true
+        },
+        {
+          "id": "39:23868",
+          "name": "Footer",
+          "type": "SLOT",
+          "x": 0,
+          "y": 424,
+          "w": 640,
+          "h": 56,
+          "ax": 0,
+          "ay": 424,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 680,
+      "h": 520,
+      "children": [
+        {
+          "id": "39:23865",
+          "name": "Header",
+          "type": "SLOT",
+          "x": 0,
+          "y": 0,
+          "w": 680,
+          "h": 64,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:23866",
+          "name": "Aside",
+          "type": "SLOT",
+          "x": 0,
+          "y": 72,
+          "w": 240,
+          "h": 384,
+          "ax": 0,
+          "ay": 72,
+          "visible": true
+        },
+        {
+          "id": "39:23867",
+          "name": "Main",
+          "type": "SLOT",
+          "x": 256,
+          "y": 72,
+          "w": 424,
+          "h": 384,
+          "ax": 256,
+          "ay": 72,
+          "visible": true
+        },
+        {
+          "id": "39:23868",
+          "name": "Footer",
+          "type": "SLOT",
+          "x": 0,
+          "y": 464,
+          "w": 680,
+          "h": 56,
+          "ax": 0,
+          "ay": 464,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "Header",
+        "dx": 0,
+        "dy": 0,
+        "dw": 40,
+        "dh": 0
+      },
+      {
+        "name": "Aside",
+        "dx": 0,
+        "dy": 0,
+        "dw": 0,
+        "dh": 40
+      },
+      {
+        "name": "Main",
+        "dx": 0,
+        "dy": 0,
+        "dw": 40,
+        "dh": 40
+      },
+      {
+        "name": "Footer",
+        "dx": 0,
+        "dy": 40,
+        "dw": 40,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 640,
+      "h": 480
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:3987",
+    "baseline": {
+      "geometry": "4be7d642e7d1daac",
+      "fills": "3b1945be4c0cc638",
+      "text": "00001505811c9dc5"
+    },
+    "axes": [],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 3,
+    "bound": 0,
+    "inferred": 2,
+    "literal": 1,
+    "byGroup": {
+      "spacing": {
+        "bound": 0,
+        "inferred": 0,
+        "literal": 1
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 2,
+        "literal": 0
+      }
+    },
+    "literalSites": [
+      "/PageShell·itemSpacing=0"
+    ],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/PageShell",
+      "name": "PageShell",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "GRID",
+      "childCount": 4,
+      "w": 640,
+      "h": 480,
+      "visible": true,
+      "parentLayoutMode": null,
+      "parentType": "SECTION"
+    },
+    {
+      "path": "/Header[0]",
+      "name": "Header",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 640,
+      "h": 64,
+      "visible": true,
+      "parentLayoutMode": "GRID",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/Aside[1]",
+      "name": "Aside",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 240,
+      "h": 344,
+      "visible": true,
+      "parentLayoutMode": "GRID",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/Main[2]",
+      "name": "Main",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 384,
+      "h": 344,
+      "visible": true,
+      "parentLayoutMode": "GRID",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/Footer[3]",
+      "name": "Footer",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 640,
+      "h": 56,
+      "visible": true,
+      "parentLayoutMode": "GRID",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasAfter": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasRestored": true
+}
