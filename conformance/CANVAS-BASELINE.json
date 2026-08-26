@@ -2,13 +2,13 @@
   "_marker": "THE MEASURED ROUND TRIP — contract → Figma (mock) → dump → propose ≡ contract, per conformance case, on the case's own channel. Every SILENT entry is an OPEN DEFECT the engine must name or carry; it is never waivable and leaves this file only by being fixed. The gate refuses drift in EITHER direction: a regression is red, and an improvement must be re-recorded here so a fix can never be absorbed silently.",
   "measuredAt": "extract/computed/out/conformance/<case>/enriched.contract.json through figma-sync/plugin/engine (mock figma) and core/propose-figma (npx tsx conformance/canvas.ts)",
   "counts": {
-    "ROUND-TRIPPED": 41,
-    "NAMED": 15,
+    "ROUND-TRIPPED": 46,
+    "NAMED": 19,
     "DRIFTED": 0,
     "HARMFUL": 0,
-    "SILENT": 0,
+    "SILENT": 1,
     "REFUSED-BY-NAME": 1,
-    "SEED-ABSENT": 0
+    "SEED-ABSENT": 3
   },
   "cases": {
     "antd-component-scoped-custom-property": {
@@ -505,6 +505,135 @@
       ],
       "proposed": [
         "1fr 1fr"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "hard-align-items-baseline": {
+      "classification": "SEED-ABSENT",
+      "channel": "align-items",
+      "seed": [],
+      "proposed": [],
+      "note": "the captured contract does not carry \"align-items\" = baseline — the CSS/DOM gate's finding, nothing to round-trip"
+    },
+    "hard-border-dashed": {
+      "classification": "NAMED",
+      "channel": "border-top-style",
+      "seed": [
+        "dashed"
+      ],
+      "proposed": [],
+      "note": "code-only declared root.border-top-style = dashed — This part's borders use different styles per side in code; Figma strokes share one style."
+    },
+    "hard-box-shadow-layered": {
+      "classification": "NAMED",
+      "channel": "box-shadow",
+      "seed": [
+        "rgba(0, 0, 0, 0.06) 0px 1px 2px 0px, rgba(0, 0, 0, 0.1) 0px 4px 8px 0px, rgba(0, 0, 0, 0.04) 0px 0px 0px 1px inset"
+      ],
+      "proposed": [],
+      "note": "«self»:root: visible effect(s) [DROP_SHADOW, INNER_SHADOW] — only DROP_SHADOW layers present in every variant map to box-shadow (dump v1.2; a multi-layer stack carries comma-separated); channel NAMED, not proposed"
+    },
+    "hard-empty-region-min-size": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "min-height",
+      "seed": [
+        "24px"
+      ],
+      "proposed": [
+        "24px"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "hard-flex-direction-column-reverse": {
+      "classification": "SEED-ABSENT",
+      "channel": "flex-direction",
+      "seed": [],
+      "proposed": [],
+      "note": "the captured contract does not carry \"flex-direction\" = column-reverse — the CSS/DOM gate's finding, nothing to round-trip"
+    },
+    "hard-gradient-element-fill": {
+      "classification": "NAMED",
+      "channel": "background-image",
+      "seed": [
+        "linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(203, 213, 225, 1) 100%)"
+      ],
+      "proposed": [
+        "linear-gradient(90deg, #ffffff 0%, #cbd5e1 100%)"
+      ],
+      "note": "value came back as linear-gradient(90deg, #ffffff 0%, #cbd5e1 100%) (seed linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(203, 213, 225, 1) 100%)) — «self»:root: GRADIENT_LINEAR fill (dump v1.16) carried as background-image — axis-aligned ramp normalized to the box's visible segment (pixel-exact inside the drawn box; stops respell against the box edges), 'none' minted where a variant draws no gradient (its ground rides background-color)"
+    },
+    "hard-outline-ring-rest-plane": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "outline-width",
+      "seed": [
+        "2px"
+      ],
+      "proposed": [
+        "2px"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "hard-placeholder-ink-vs-value": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "color",
+      "seed": [
+        "#111827"
+      ],
+      "proposed": [
+        "#111827"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "hard-pseudo-tick-rotated": {
+      "classification": "SILENT",
+      "channel": "border-right-width",
+      "seed": [
+        "2px"
+      ],
+      "proposed": [],
+      "note": ""
+    },
+    "hard-rem-scale-padding": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "padding-left",
+      "seed": [
+        "24px"
+      ],
+      "proposed": [
+        "12px",
+        "24px"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "hard-svg-glyph-stroke": {
+      "classification": "SEED-ABSENT",
+      "channel": "stroke-width",
+      "seed": [],
+      "proposed": [],
+      "note": "the captured contract does not carry \"stroke-width\" = 2px — the CSS/DOM gate's finding, nothing to round-trip"
+    },
+    "hard-text-indent-eviction": {
+      "classification": "NAMED",
+      "channel": "text-indent",
+      "seed": [
+        "-9999px"
+      ],
+      "proposed": [],
+      "note": "code-only channel root.text-indent = {«self».root.text-indent} — Figma text nodes have no first-line indent. Where the MEASURED indent lays the first line entirely outside the content box (Part.textOutOfBox), the canvas draws NO text child on those combos: the browser paints no text in the box there, so drawing the label at indent 0 would invent ink the library never shows."
+    },
+    "hard-text-part-pinned-size": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "width",
+      "seed": [
+        "32px"
+      ],
+      "proposed": [
+        "32px"
       ],
       "refIdentical": true,
       "note": ""

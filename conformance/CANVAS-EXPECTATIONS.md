@@ -15,12 +15,12 @@ never waivable.
 
 | | |
 |---|---|
-| cases (CARRIED + LOWERED) | **57** |
-| 🟢 round-tripped | **41** |
-| 🟢 named (dropped, and a receipt says so) | **15** |
+| cases (CARRIED + LOWERED) | **70** |
+| 🟢 round-tripped | **46** |
+| 🟢 named (dropped, and a receipt says so) | **19** |
 | 🟡 refused by name (the canvas cannot host the seed, and says so) | **1** |
-| ⚪ seed-absent (nothing to round-trip) | **0** |
-| 🔴 red | **0** — SILENT 0 · DRIFTED 0 · HARMFUL 0 |
+| ⚪ seed-absent (nothing to round-trip) | **3** |
+| 🔴 red | **1** — SILENT 1 · DRIFTED 0 · HARMFUL 0 |
 
 Verdicts: **ROUND-TRIPPED** the channel came back with the seed's value (refs
 resolved; "ref" says whether the token spelling survived, "as" names a
@@ -32,7 +32,13 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 **HARMFUL** the manifest says no canvas spelling exists and it came back anyway ·
 **SILENT** vanished, named by nothing — never waivable.
 
-## 🟢 NAMED — 15
+## 🔴 SILENT — 1
+
+| case | feature | construct | channel | expect | came back | ref | as | note |
+|---|---|---|---|---|---|---|---|---|
+| `hard-pseudo-tick-rotated` | glyph | ::after tick built from border-right + border-bottom + transform: rotate(45deg) | `border-right-width` | CARRIED | — |  |  |  |
+
+## 🟢 NAMED — 19
 
 | case | feature | construct | channel | expect | came back | ref | as | note |
 |---|---|---|---|---|---|---|---|---|
@@ -46,6 +52,10 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `grid-area-empty-slot` | grid-areas | a declared grid area with NO children (empty slot) | `grid-template-areas` | CARRIED | — |  |  | «self»:root: 2 grid child(ren) (a, b) carry EXPLICIT placement rects, not named areas — Figma has no native area names (G4: the CONTRACT owns them, the canvas carries only the rect), so an area name survives the round trip ONLY through a p… |
 | `grid-child-text-hug` | grid-sizing | a TEXT child hugging its content inside a grid cell | `__text` | CARRIED | — |  |  | code-only channel label.border-bottom-color = {imported.shared.color-663399} — per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides. |
 | `grid-named-area-slots` | grid-areas | grid-template-areas: 'header header' 'nav content' + grid-area: header on children | `grid-template-areas` | CARRIED | — |  |  | «self»:root: 3 grid child(ren) (a, b, c) carry EXPLICIT placement rects, not named areas — Figma has no native area names (G4: the CONTRACT owns them, the canvas carries only the rect), so an area name survives the round trip ONLY through… |
+| `hard-border-dashed` | non-stroke-ink | border: 2px dashed | `border-top-style` | CARRIED | — |  |  | code-only declared root.border-top-style = dashed — This part's borders use different styles per side in code; Figma strokes share one style. |
+| `hard-box-shadow-layered` | non-stroke-ink | box-shadow with three layers, one of them inset | `box-shadow` | CARRIED | — |  |  | «self»:root: visible effect(s) [DROP_SHADOW, INNER_SHADOW] — only DROP_SHADOW layers present in every variant map to box-shadow (dump v1.2; a multi-layer stack carries comma-separated); channel NAMED, not proposed |
+| `hard-gradient-element-fill` | non-stroke-ink | background-image: linear-gradient on the ELEMENT (not a pseudo) | `background-image` | CARRIED | linear-gradient(90deg, #ffffff 0%, #cbd5e1 100%) |  |  | value came back as linear-gradient(90deg, #ffffff 0%, #cbd5e1 100%) (seed linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(203, 213, 225, 1) 100%)) — «self»:root: GRADIENT_LINEAR fill (dump v1.16) carried as background-image — axi… |
+| `hard-text-indent-eviction` | text | text-indent: -9999px — text evicted from its own box | `text-indent` | CARRIED | — |  |  | code-only channel root.text-indent = {«self».root.text-indent} — Figma text nodes have no first-line indent. Where the MEASURED indent lays the first line entirely outside the content box (Part.textOutOfBox), the canvas draws NO text child… |
 | `nonpainting-text-display-none` | invariant | a NON-PAINTING element carrying text (display: none) | `__text` | CARRIED | — |  |  | code-only declared label-2.display = none — CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack). |
 | `page-global-star-rule` | cascade | * { border-color: var(--cf-color-secondary) } — a PAGE-GLOBAL authored declaration, with the element's border-width and border-style declared locally and its colour reaching it only through the universal rule | `border-top-color` | CARRIED | — |  |  | code-only channel root.border-top-color = {imported.shared.color-663399} — per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides. |
 | `text-indent-off-box` | text | text-indent: 9999px on a box pinned to 8px (the status-pip idiom: the label is pushed out of the box and only the dot shows) | `text-indent` | LOWERED | — |  |  | code-only channel root.text-indent = {«self».root.text-indent} — Figma text nodes have no first-line indent. Where the MEASURED indent lays the first line entirely outside the content box (Part.textOutOfBox), the canvas draws NO text child… |
@@ -58,7 +68,15 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 |---|---|---|---|---|---|---|---|---|
 | `grid-instance-child` | grid-composition | a component INSTANCE placed in a cell with position + FILL | `grid-column-start` | CARRIED | — |  |  | mock figma (component step): Error: grid-placement-cycle-no-spare: the declared 1x2 grid has no free cell to break a placement cycle through — refusing rather than throwing P3 mid-script |
 
-## 🟢 ROUND-TRIPPED — 41
+## ⚪ SEED-ABSENT — 3
+
+| case | feature | construct | channel | expect | came back | ref | as | note |
+|---|---|---|---|---|---|---|---|---|
+| `hard-align-items-baseline` | layout | align-items: baseline on the container | `align-items` | CARRIED | — |  |  | the captured contract does not carry "align-items" = baseline — the CSS/DOM gate's finding, nothing to round-trip |
+| `hard-flex-direction-column-reverse` | layout | flex-direction: column-reverse on the container | `flex-direction` | CARRIED | — |  |  | the captured contract does not carry "flex-direction" = column-reverse — the CSS/DOM gate's finding, nothing to round-trip |
+| `hard-svg-glyph-stroke` | glyph | inline <svg><path> check glyph drawn with stroke, stroke-width and stroke-linecap | `stroke-width` | CARRIED | — |  |  | the captured contract does not carry "stroke-width" = 2px — the CSS/DOM gate's finding, nothing to round-trip |
+
+## 🟢 ROUND-TRIPPED — 46
 
 | case | feature | construct | channel | expect | came back | ref | as | note |
 |---|---|---|---|---|---|---|---|---|
@@ -94,6 +112,11 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `grid-track-fit-content` | grid-tracks | grid-template-columns: fit-content(100%) 1fr | `grid-template-columns` | CARRIED | fit-content(100%) 1fr | same |  |  |
 | `grid-tracks-mixed-fractional` | grid-tracks | grid-template-columns: 33.5px 2.5fr 1fr (mixed list, fractional values) | `grid-template-columns` | CARRIED | 33.5px 2.5fr 1fr | same |  |  |
 | `grid-two-column` | grid-tracks | display: grid; grid-template-columns: 1fr 1fr | `grid-template-columns` | CARRIED | 1fr 1fr | same |  |  |
+| `hard-empty-region-min-size` | slot | a CHILDLESS region whose only size facts are min-height / min-width | `min-height` | CARRIED | 24px | same |  |  |
+| `hard-outline-ring-rest-plane` | non-stroke-ink | outline: 2px solid + outline-offset on the REST plane (not a focus state) | `outline-width` | CARRIED | 2px | same |  |  |
+| `hard-placeholder-ink-vs-value` | forms | input whose VALUE ink and ::placeholder ink are different colours | `color` | CARRIED | #111827 | same |  |  |
+| `hard-rem-scale-padding` | units | padding-left: 1.5rem / padding-right: 0.75rem — the ROOT-relative scale | `padding-left` | CARRIED | 12px, 24px | same |  |  |
+| `hard-text-part-pinned-size` | geometry | a TEXT-BEARING part pinned to its ancestor box by position:absolute + width/height | `width` | CARRIED | 32px | same |  |  |
 | `min-max-width` | geometry | min-width / max-width in px | `min-width` | CARRIED | 96px | same |  |  |
 | `oklch-color` | color | background-color: oklch(0.6 0.15 250) | `background-color` | CARRIED | #2784d5 | same |  |  |
 | `page-inherited-ink` | cascade | body { color: var(--cf-color-primary) } — the document's ink, inherited by a text-bearing part that declares no colour of its own | `color` | CARRIED | #1976d2 | same |  |  |
