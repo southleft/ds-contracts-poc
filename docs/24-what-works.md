@@ -552,7 +552,7 @@ npm run capability:fresh
 |---|---|---|---|
 | `conformance/MANIFEST.json` | `9fd345507b92` | 91,114 | CSS/DOM frontier vocabulary |
 | `docs/22-generality.md` | `cbf206ff7759` | 73,424 | coverage denominators (docs/22 §8.3 table) |
-| `evals/golden.json` | `c3d39dc59798` | 32,256 | generated-source golden manifest |
+| `evals/golden.json` | `aded5d756b97` | 32,256 | generated-source golden manifest |
 | `evals/results.json` | `ed20d3b959a4` | 7,150 | executable claim suite (registry ids + size; the pass column is the suite's own output) |
 | `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | Untitled UI scored fidelity table |
 | `extract/computed/out/**/numbers.json` | `bd009128800d` | 1,384,456 | capture counts + determinism receipts — 208 files |
