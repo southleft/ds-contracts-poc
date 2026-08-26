@@ -1,8 +1,13 @@
 {
  "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
  "walls": [
   "CODE-RENDER-PARTIAL:tag"
  ],
+ "defects": [],
+ "defectClasses": [],
  "notes": "canvas draws the blue bordered Tag; the code render shows a collapsed sliver",
  "reviewedAt": "ef10d9b1",
  "setNodeId": "33:5408",

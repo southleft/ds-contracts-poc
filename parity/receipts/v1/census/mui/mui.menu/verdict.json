@@ -1,6 +1,15 @@
 {
  "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
+ "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "menu: canvas first item 'Profile' has no background; ref shows the gray selected/focused row background on 'Profile'"
+ ],
+ "defectClasses": [
+  "missing ink"
+ ],
  "notes": "canvas menu complete; code render clips the second item (code-half artifact)",
  "reviewedAt": "16fac1ee",
  "setNodeId": "39:17318",

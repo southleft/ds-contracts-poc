@@ -1,0 +1,67 @@
+{
+  "id": "mui.paper",
+  "library": "mui",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@mui/material",
+    "version": "9.2.0",
+    "recipe": "examples/mui sandbox (.mui-sandbox; examples/mui/README) mounted per extract/computed/configs/mui.json"
+  },
+  "configPath": "extract/computed/configs/mui.json",
+  "component": "Paper",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "elevation-1__variant-elevation",
+      "status": "rendered",
+      "png": "ref-elevation-1__variant-elevation.png",
+      "props": {
+        "elevation": 1,
+        "variant": "elevation"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "elevation-1__variant-outlined",
+      "status": "rendered",
+      "png": "ref-elevation-1__variant-outlined.png",
+      "props": {
+        "elevation": 1,
+        "variant": "outlined"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "elevation-0__variant-elevation",
+      "status": "rendered",
+      "png": "ref-elevation-0__variant-elevation.png",
+      "props": {
+        "elevation": 0,
+        "variant": "elevation"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "elevation-3__variant-elevation",
+      "status": "rendered",
+      "png": "ref-elevation-3__variant-elevation.png",
+      "props": {
+        "elevation": 3,
+        "variant": "elevation"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "elevation-8__variant-elevation",
+      "status": "rendered",
+      "png": "ref-elevation-8__variant-elevation.png",
+      "props": {
+        "elevation": 8,
+        "variant": "elevation"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 5,
+  "unmappable": 0
+}

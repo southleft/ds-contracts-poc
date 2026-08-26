@@ -1,8 +1,13 @@
 {
  "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
+ "priorSelfGrade": true,
  "walls": [
   "CODE-CANVAS-DISAGREE:root.border-color-unspecified"
  ],
+ "defects": [],
+ "defectClasses": [],
  "notes": "title + description colors match incl. destructive red; the contract carries border width/style/radius but NO base border-color, so the canvas draws no stroke while the code render falls back to CSS currentColor and shows the box",
  "reviewedAt": "60793cc0",
  "setNodeId": "39:9296",

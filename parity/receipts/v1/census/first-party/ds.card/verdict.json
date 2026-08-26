@@ -1,6 +1,15 @@
 {
- "recognisable": true,
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
+ "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "card body slot is empty on canvas \u2014 only the avatar + 'Card title' header row renders (640x116); ref (718x246) shows the body line 'The quick brown fox jumps over the lazy dog.' below the header. Child/slot content not minted."
+ ],
+ "defectClasses": [
+  "missing ink"
+ ],
  "notes": "default cell and sampled variants match",
  "reviewedAt": "66580a14",
  "setNodeId": "39:23528",

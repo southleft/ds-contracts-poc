@@ -1,7 +1,24 @@
 {
- "recognisable": true,
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
  "walls": [
   "CODE-CANVAS-CONSISTENT-GLYPH-SUBSTITUTE:spinner-arc"
+ ],
+ "defects": [
+  "label-position=before: canvas renders square-left/label-right \u2014 identical arrangement to 'after' \u2014 while ref puts 'Loading' BEFORE (left of) the spinner; order axis uncarried",
+  "label-position=above: canvas renders square and label side-by-side on one row (ink bbox confirms single band) instead of ref's label-above-spinner stack, AND the label is clipped mid-glyph to 'Loadi' (19 dark pixel rows on the right image edge)",
+  "label-position=below: same side-by-side layout instead of ref's spinner-above-label stack, label clipped to 'Loadi'",
+  "the walled square substitute means no cell reads as a spinner: a flat light-blue square beside 'Loading' does not read as 'spinner' even before the axis defects (wall covers the glyph difference but the component fails the that-is-this-component bar)",
+  "appearance=inverted white-on-white blank in both halves is consistent with the row's notes (harness), not separately counted"
+ ],
+ "defectClasses": [
+  "layout axis",
+  "layout axis",
+  "layout axis",
+  "glyph geometry",
+  "match-note"
  ],
  "notes": "both halves draw the spinner glyph as the same light-blue square substitute beside the Loading label across all 8 sizes; inverted cell is white-on-white in both",
  "reviewedAt": "60793cc0",

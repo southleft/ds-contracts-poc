@@ -1,6 +1,15 @@
 {
- "recognisable": true,
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "all three sender cells: message text missing \u2014 the bubble collapses to a thin empty strip (assistant/system: pale full-width sliver under the 'Assistant' label; user: tiny empty blue pill). Ref shows a full bubble containing 'The quick brown fox jumps over the lazy dog.' in every cell. An empty sliver does not read as a chat message."
+ ],
+ "defectClasses": [
+  "missing ink"
+ ],
  "notes": "author + skeleton body pair agrees",
  "reviewedAt": "66580a14",
  "setNodeId": "39:23588",

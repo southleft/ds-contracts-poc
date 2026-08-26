@@ -1,0 +1,153 @@
+{
+  "id": "mui.radio",
+  "library": "mui",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@mui/material",
+    "version": "9.2.0",
+    "recipe": "examples/mui sandbox (.mui-sandbox; examples/mui/README) mounted per extract/computed/configs/mui.json"
+  },
+  "configPath": "extract/computed/configs/mui.json",
+  "component": "Radio",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "color-primary__checked-unchecked",
+      "status": "rendered",
+      "png": "ref-color-primary__checked-unchecked.png",
+      "props": {
+        "disableRipple": true,
+        "slotProps": {
+          "root": {
+            "disableRipple": true,
+            "disableFocusRipple": true
+          }
+        },
+        "color": "primary",
+        "checked": false
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-primary__checked-checked",
+      "status": "rendered",
+      "png": "ref-color-primary__checked-checked.png",
+      "props": {
+        "disableRipple": true,
+        "slotProps": {
+          "root": {
+            "disableRipple": true,
+            "disableFocusRipple": true
+          }
+        },
+        "color": "primary",
+        "checked": true
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-secondary__checked-unchecked",
+      "status": "rendered",
+      "png": "ref-color-secondary__checked-unchecked.png",
+      "props": {
+        "disableRipple": true,
+        "slotProps": {
+          "root": {
+            "disableRipple": true,
+            "disableFocusRipple": true
+          }
+        },
+        "color": "secondary",
+        "checked": false
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-error__checked-unchecked",
+      "status": "rendered",
+      "png": "ref-color-error__checked-unchecked.png",
+      "props": {
+        "disableRipple": true,
+        "slotProps": {
+          "root": {
+            "disableRipple": true,
+            "disableFocusRipple": true
+          }
+        },
+        "color": "error",
+        "checked": false
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-info__checked-unchecked",
+      "status": "rendered",
+      "png": "ref-color-info__checked-unchecked.png",
+      "props": {
+        "disableRipple": true,
+        "slotProps": {
+          "root": {
+            "disableRipple": true,
+            "disableFocusRipple": true
+          }
+        },
+        "color": "info",
+        "checked": false
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-success__checked-unchecked",
+      "status": "rendered",
+      "png": "ref-color-success__checked-unchecked.png",
+      "props": {
+        "disableRipple": true,
+        "slotProps": {
+          "root": {
+            "disableRipple": true,
+            "disableFocusRipple": true
+          }
+        },
+        "color": "success",
+        "checked": false
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-warning__checked-unchecked",
+      "status": "rendered",
+      "png": "ref-color-warning__checked-unchecked.png",
+      "props": {
+        "disableRipple": true,
+        "slotProps": {
+          "root": {
+            "disableRipple": true,
+            "disableFocusRipple": true
+          }
+        },
+        "color": "warning",
+        "checked": false
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-default__checked-unchecked",
+      "status": "rendered",
+      "png": "ref-color-default__checked-unchecked.png",
+      "props": {
+        "disableRipple": true,
+        "slotProps": {
+          "root": {
+            "disableRipple": true,
+            "disableFocusRipple": true
+          }
+        },
+        "color": "default",
+        "checked": false
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 8,
+  "unmappable": 0
+}

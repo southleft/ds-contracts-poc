@@ -1,0 +1,44 @@
+{
+  "id": "mui.avatar",
+  "library": "mui",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@mui/material",
+    "version": "9.2.0",
+    "recipe": "examples/mui sandbox (.mui-sandbox; examples/mui/README) mounted per extract/computed/configs/mui.json"
+  },
+  "configPath": "extract/computed/configs/mui.json",
+  "component": "Avatar",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "variant-circular",
+      "status": "rendered",
+      "png": "ref-variant-circular.png",
+      "props": {
+        "variant": "circular"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-rounded",
+      "status": "rendered",
+      "png": "ref-variant-rounded.png",
+      "props": {
+        "variant": "rounded"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-square",
+      "status": "rendered",
+      "png": "ref-variant-square.png",
+      "props": {
+        "variant": "square"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 3,
+  "unmappable": 0
+}

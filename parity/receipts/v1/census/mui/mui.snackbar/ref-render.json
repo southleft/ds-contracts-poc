@@ -1,0 +1,65 @@
+{
+  "id": "mui.snackbar",
+  "library": "mui",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@mui/material",
+    "version": "9.2.0",
+    "recipe": "examples/mui sandbox (.mui-sandbox; examples/mui/README) mounted per extract/computed/configs/mui.json"
+  },
+  "configPath": "extract/computed/configs/mui.json",
+  "component": "Snackbar",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "position-bottomleft",
+      "status": "rendered",
+      "png": "ref-position-bottomleft.png",
+      "props": {
+        "position": "bottom-left",
+        "onClose": {
+          "$callback": true
+        },
+        "open": true,
+        "message": "Snackbar message",
+        "autoHideDuration": null,
+        "transitionDuration": 0
+      },
+      "capture": "portal"
+    },
+    {
+      "slug": "position-bottomcenter",
+      "status": "rendered",
+      "png": "ref-position-bottomcenter.png",
+      "props": {
+        "position": "bottom-center",
+        "onClose": {
+          "$callback": true
+        },
+        "open": true,
+        "message": "Snackbar message",
+        "autoHideDuration": null,
+        "transitionDuration": 0
+      },
+      "capture": "portal"
+    },
+    {
+      "slug": "position-topright",
+      "status": "rendered",
+      "png": "ref-position-topright.png",
+      "props": {
+        "position": "top-right",
+        "onClose": {
+          "$callback": true
+        },
+        "open": true,
+        "message": "Snackbar message",
+        "autoHideDuration": null,
+        "transitionDuration": 0
+      },
+      "capture": "portal"
+    }
+  ],
+  "rendered": 3,
+  "unmappable": 0
+}

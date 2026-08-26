@@ -1,0 +1,125 @@
+{
+  "id": "mui.switch",
+  "library": "mui",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@mui/material",
+    "version": "9.2.0",
+    "recipe": "examples/mui sandbox (.mui-sandbox; examples/mui/README) mounted per extract/computed/configs/mui.json"
+  },
+  "configPath": "extract/computed/configs/mui.json",
+  "component": "Switch",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "color-primary__size-medium__checked-unchecked",
+      "status": "rendered",
+      "png": "ref-color-primary__size-medium__checked-unchecked.png",
+      "props": {
+        "disableRipple": true,
+        "color": "primary",
+        "size": "medium",
+        "checked": false
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-primary__size-medium__checked-checked",
+      "status": "rendered",
+      "png": "ref-color-primary__size-medium__checked-checked.png",
+      "props": {
+        "disableRipple": true,
+        "color": "primary",
+        "size": "medium",
+        "checked": true
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-primary__size-small__checked-unchecked",
+      "status": "rendered",
+      "png": "ref-color-primary__size-small__checked-unchecked.png",
+      "props": {
+        "disableRipple": true,
+        "color": "primary",
+        "size": "small",
+        "checked": false
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-secondary__size-medium__checked-unchecked",
+      "status": "rendered",
+      "png": "ref-color-secondary__size-medium__checked-unchecked.png",
+      "props": {
+        "disableRipple": true,
+        "color": "secondary",
+        "size": "medium",
+        "checked": false
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-error__size-medium__checked-unchecked",
+      "status": "rendered",
+      "png": "ref-color-error__size-medium__checked-unchecked.png",
+      "props": {
+        "disableRipple": true,
+        "color": "error",
+        "size": "medium",
+        "checked": false
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-warning__size-medium__checked-unchecked",
+      "status": "rendered",
+      "png": "ref-color-warning__size-medium__checked-unchecked.png",
+      "props": {
+        "disableRipple": true,
+        "color": "warning",
+        "size": "medium",
+        "checked": false
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-info__size-medium__checked-unchecked",
+      "status": "rendered",
+      "png": "ref-color-info__size-medium__checked-unchecked.png",
+      "props": {
+        "disableRipple": true,
+        "color": "info",
+        "size": "medium",
+        "checked": false
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-success__size-medium__checked-unchecked",
+      "status": "rendered",
+      "png": "ref-color-success__size-medium__checked-unchecked.png",
+      "props": {
+        "disableRipple": true,
+        "color": "success",
+        "size": "medium",
+        "checked": false
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-default__size-medium__checked-unchecked",
+      "status": "rendered",
+      "png": "ref-color-default__size-medium__checked-unchecked.png",
+      "props": {
+        "disableRipple": true,
+        "color": "default",
+        "size": "medium",
+        "checked": false
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 9,
+  "unmappable": 0
+}

@@ -1,6 +1,19 @@
 {
- "recognisable": true,
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "all 3 sizes (sm/default/lg): canvas 'CN' fallback glyphs are grossly oversized and overflow the circle \u2014 letters extend past the circle's left edge and below it; ref shows small initials centered inside the circle with clear margin",
+  "all 3 sizes: canvas circle is offset to the top-right of the exported frame with a large empty area at bottom-left (text/circle not concentric); ref is a single centered circle",
+  "canvas circle appears clipped at the frame's top/right edge at default and lg sizes"
+ ],
+ "defectClasses": [
+  "type scale",
+  "interior layout",
+  "interior layout"
+ ],
  "notes": "CN circle across 3 sizes matches",
  "reviewedAt": "60793cc0",
  "setNodeId": "39:9308",

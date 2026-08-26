@@ -1,0 +1,193 @@
+{
+  "id": "shadcn.button",
+  "library": "shadcn",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@shadcn-sandbox/ui",
+    "version": "0.0.1",
+    "recipe": "examples/shadcn sandbox (.shadcn-sandbox; examples/shadcn/README) mounted per extract/computed/configs/shadcn.json"
+  },
+  "configPath": "extract/computed/configs/shadcn.json",
+  "component": "Button",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "variant-default__size-default",
+      "status": "rendered",
+      "png": "ref-variant-default__size-default.png",
+      "props": {
+        "asChild": false,
+        "variant": "default",
+        "size": "default"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-default__size-xs",
+      "status": "rendered",
+      "png": "ref-variant-default__size-xs.png",
+      "props": {
+        "asChild": false,
+        "variant": "default",
+        "size": "xs"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-default__size-sm",
+      "status": "rendered",
+      "png": "ref-variant-default__size-sm.png",
+      "props": {
+        "asChild": false,
+        "variant": "default",
+        "size": "sm"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-default__size-lg",
+      "status": "rendered",
+      "png": "ref-variant-default__size-lg.png",
+      "props": {
+        "asChild": false,
+        "variant": "default",
+        "size": "lg"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-default__size-icon",
+      "status": "rendered",
+      "png": "ref-variant-default__size-icon.png",
+      "props": {
+        "asChild": false,
+        "variant": "default",
+        "size": "icon"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-default__size-icon-xs",
+      "status": "rendered",
+      "png": "ref-variant-default__size-icon-xs.png",
+      "props": {
+        "asChild": false,
+        "variant": "default",
+        "size": "icon-xs"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-default__size-icon-sm",
+      "status": "rendered",
+      "png": "ref-variant-default__size-icon-sm.png",
+      "props": {
+        "asChild": false,
+        "variant": "default",
+        "size": "icon-sm"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-default__size-icon-lg",
+      "status": "rendered",
+      "png": "ref-variant-default__size-icon-lg.png",
+      "props": {
+        "asChild": false,
+        "variant": "default",
+        "size": "icon-lg"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-outline__size-default",
+      "status": "rendered",
+      "png": "ref-variant-outline__size-default.png",
+      "props": {
+        "asChild": false,
+        "variant": "outline",
+        "size": "default"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-secondary__size-default",
+      "status": "rendered",
+      "png": "ref-variant-secondary__size-default.png",
+      "props": {
+        "asChild": false,
+        "variant": "secondary",
+        "size": "default"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-ghost__size-default",
+      "status": "rendered",
+      "png": "ref-variant-ghost__size-default.png",
+      "props": {
+        "asChild": false,
+        "variant": "ghost",
+        "size": "default"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-destructive__size-default",
+      "status": "rendered",
+      "png": "ref-variant-destructive__size-default.png",
+      "props": {
+        "asChild": false,
+        "variant": "destructive",
+        "size": "default"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-link__size-default",
+      "status": "rendered",
+      "png": "ref-variant-link__size-default.png",
+      "props": {
+        "asChild": false,
+        "variant": "link",
+        "size": "default"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-default__size-default__state-active",
+      "status": "rendered",
+      "png": "ref-variant-default__size-default__state-active.png",
+      "props": {
+        "asChild": false,
+        "variant": "default",
+        "size": "default"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-default__size-default__state-focus-visible",
+      "status": "rendered",
+      "png": "ref-variant-default__size-default__state-focus-visible.png",
+      "props": {
+        "asChild": false,
+        "variant": "default",
+        "size": "default"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-default__size-default__state-hover",
+      "status": "rendered",
+      "png": "ref-variant-default__size-default__state-hover.png",
+      "props": {
+        "asChild": false,
+        "variant": "default",
+        "size": "default"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 16,
+  "unmappable": 0
+}

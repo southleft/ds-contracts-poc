@@ -1,7 +1,18 @@
 {
  "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
  "walls": [
   "CODE-RENDER-PARTIAL:progress"
+ ],
+ "defects": [
+  "status-exception: canvas shows BOTH the red '40%' percent label AND the red X status icon at the right end \u2014 ref replaces the label with the icon only (no '40%' text)",
+  "status-success: canvas shows BOTH the green '40%' percent label AND the green check icon \u2014 ref shows the check icon only (no '40%' text)"
+ ],
+ "defectClasses": [
+  "other",
+  "other"
  ],
  "notes": "canvas draws track + 40% fill + label; the code render shows the label only",
  "reviewedAt": "ef10d9b1",

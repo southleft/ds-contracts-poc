@@ -1,6 +1,15 @@
 {
  "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
+ "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "all 7 variants: ref PNGs are 116x156 and contain ONLY the detached round thumb \u2014 no track or rail was captured, so the pair cannot corroborate the canvas track; ref capture is defective, not the canvas. Canvas renders a complete plausible MUI slider (filled track ~40%, thumb, lighter rail; small size thinner) but track proportions are unverifiable against this ref"
+ ],
+ "defectClasses": [
+  "other"
+ ],
  "notes": "default cell and sampled variants match",
  "reviewedAt": "16fac1ee",
  "setNodeId": "39:17503",

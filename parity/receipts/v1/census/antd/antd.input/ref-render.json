@@ -1,0 +1,150 @@
+{
+  "id": "antd.input",
+  "library": "antd",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "antd",
+    "version": "5.29.3",
+    "recipe": "examples/antd sandbox (.antd-sandbox; examples/antd/README) mounted per extract/computed/configs/antd.json"
+  },
+  "configPath": "extract/computed/configs/antd.json",
+  "component": "Input",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "size-middle__status-error__variant-outlined",
+      "status": "rendered",
+      "png": "ref-size-middle__status-error__variant-outlined.png",
+      "props": {
+        "placeholder": "Input",
+        "size": "middle",
+        "status": "error",
+        "variant": "outlined"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-middle__status-error__variant-borderless",
+      "status": "rendered",
+      "png": "ref-size-middle__status-error__variant-borderless.png",
+      "props": {
+        "placeholder": "Input",
+        "size": "middle",
+        "status": "error",
+        "variant": "borderless"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-middle__status-error__variant-filled",
+      "status": "rendered",
+      "png": "ref-size-middle__status-error__variant-filled.png",
+      "props": {
+        "placeholder": "Input",
+        "size": "middle",
+        "status": "error",
+        "variant": "filled"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-middle__status-error__variant-underlined",
+      "status": "rendered",
+      "png": "ref-size-middle__status-error__variant-underlined.png",
+      "props": {
+        "placeholder": "Input",
+        "size": "middle",
+        "status": "error",
+        "variant": "underlined"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-middle__status-warning__variant-outlined",
+      "status": "rendered",
+      "png": "ref-size-middle__status-warning__variant-outlined.png",
+      "props": {
+        "placeholder": "Input",
+        "size": "middle",
+        "status": "warning",
+        "variant": "outlined"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-small__status-error__variant-outlined",
+      "status": "rendered",
+      "png": "ref-size-small__status-error__variant-outlined.png",
+      "props": {
+        "placeholder": "Input",
+        "size": "small",
+        "status": "error",
+        "variant": "outlined"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-large__status-error__variant-outlined",
+      "status": "rendered",
+      "png": "ref-size-large__status-error__variant-outlined.png",
+      "props": {
+        "placeholder": "Input",
+        "size": "large",
+        "status": "error",
+        "variant": "outlined"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-middle__status-error__variant-outlined__state-disabled",
+      "status": "rendered",
+      "png": "ref-size-middle__status-error__variant-outlined__state-disabled.png",
+      "props": {
+        "placeholder": "Input",
+        "size": "middle",
+        "status": "error",
+        "variant": "outlined",
+        "disabled": true
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-middle__status-error__variant-outlined__state-focus-visible",
+      "status": "rendered",
+      "png": "ref-size-middle__status-error__variant-outlined__state-focus-visible.png",
+      "props": {
+        "placeholder": "Input",
+        "size": "middle",
+        "status": "error",
+        "variant": "outlined"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-middle__status-error__variant-outlined__state-hover",
+      "status": "rendered",
+      "png": "ref-size-middle__status-error__variant-outlined__state-hover.png",
+      "props": {
+        "placeholder": "Input",
+        "size": "middle",
+        "status": "error",
+        "variant": "outlined"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-middle__status-error__variant-outlined__state-active",
+      "status": "rendered",
+      "png": "ref-size-middle__status-error__variant-outlined__state-active.png",
+      "props": {
+        "placeholder": "Input",
+        "size": "middle",
+        "status": "error",
+        "variant": "outlined"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 11,
+  "unmappable": 0
+}

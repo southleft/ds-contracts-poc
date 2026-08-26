@@ -1,6 +1,15 @@
 {
  "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "sizing-md unchecked (and visible across cells): gap between switch track and the 'Toggle' label is slightly wider on canvas than ref; admitted in verdict notes but walls array is empty so not excused; track/thumb geometry, checked blue fill, and size steps otherwise match \u2014 non-material"
+ ],
+ "defectClasses": [
+  "interior layout"
+ ],
  "notes": "track/thumb geometry + checked fill match; label gap slightly wider on canvas",
  "reviewedAt": "ad1e0fbb",
  "setNodeId": "39:6030",

@@ -1,6 +1,23 @@
 {
- "recognisable": true,
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "thumb never travels: measured thumb disc spans cols 42-73 (center 57.5) in unchecked and the white thumb spans 43-72 (center 57.5) in checked, both dead-center of the 80px-wide track; ref shows thumb at LEFT when unchecked and RIGHT when checked \u2014 on/off now reads only from track color and the unchecked state is ambiguous",
+  "label-position=before: canvas still renders switch-left/label-right (diff vs 'after' confined to minor label-area pixels); ref shows 'Switch' before (left of) the track \u2014 order uncarried",
+  "label-position=above: canvas renders switch and label side-by-side in one top band (left blob y0-39, text y17-37 in a 112px-tall frame) instead of ref's label-above-track stack",
+  "state=focus-visible: canvas byte-identical to base (diff bbox None); ref shows the thick black rounded focus ring around track+label \u2014 focus preview uncarried",
+  "canvas thumb is oversized relative to the track (~16px in a 20px track vs ref ~14px with clear inset), thumb nearly touches track edges"
+ ],
+ "defectClasses": [
+  "interior layout",
+  "layout axis",
+  "layout axis",
+  "missing ink",
+  "glyph geometry"
+ ],
  "notes": "track/thumb both states + label positions match",
  "reviewedAt": "60793cc0",
  "setNodeId": "39:13265",

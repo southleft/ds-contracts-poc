@@ -1,8 +1,13 @@
 {
  "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
  "walls": [
   "FC-EXPORT-RING-UNPAINTED"
  ],
+ "defects": [],
+ "defectClasses": [],
  "notes": "variants, icon sizes and states match; focus-visible ring carried as effect data, unpainted in COMPONENT export",
  "reviewedAt": "60793cc0",
  "setNodeId": "39:9506",

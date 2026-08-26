@@ -1,6 +1,15 @@
 {
  "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
+ "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "canvas renders 'npm run build' in a proportional Inter-like face; ref is clearly monospace (wide fixed-pitch glyphs). The monospace substrate \u2014 the identity trait of the Code component \u2014 is lost. verdict.json documents this as a known font-substrate loss but names no wall for it (walls: [])."
+ ],
+ "defectClasses": [
+  "other"
+ ],
  "notes": "default cell and sampled variants match",
  "reviewedAt": "66580a14",
  "setNodeId": "39:23650",

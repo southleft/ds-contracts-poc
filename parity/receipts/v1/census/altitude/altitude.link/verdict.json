@@ -1,6 +1,17 @@
 {
- "recognisable": true,
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "xs state-focus-visible: canvas shows a plain underlined blue link with NO focus ring \u2014 its blue pixel coverage (210 px of #4375ff) is essentially identical to the default cell \u2014 while ref shows the link enclosed in a prominent rectangular blue focus outline (1089 px of #4375ff). The state preview is missing its defining affordance and is indistinguishable from the default cell; material, and not a named wall (walls array is empty).",
+  "xs state-hover: canvas hover blue is #6b93ff (the same blue the canvas uses for button hover) vs ref hover #5683ff \u2014 canvas lightens further than the library does; minor but visible side by side, not a named wall."
+ ],
+ "defectClasses": [
+  "missing ink",
+  "other"
+ ],
  "notes": "underlined link across sizes + focus/hover previews match",
  "reviewedAt": "6804cb8f",
  "setNodeId": "39:6823",

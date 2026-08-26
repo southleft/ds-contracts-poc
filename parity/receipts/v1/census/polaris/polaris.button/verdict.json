@@ -1,6 +1,21 @@
 {
  "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "all 17 cells: canvas label is 'Button' where ref label is 'Save changes' \u2014 unwalled copy mismatch",
+  "variant-primary: canvas is a flat dark charcoal fill; ref has Polaris's primary gradient/bevel (lighter top edge highlight and inner-shadow rim). Unwalled",
+  "state-focus-visible: canvas blue focus ring hugs the button edge directly; ref ring sits offset outside the button with a visible light gap between button border and ring",
+  "state-active: ref shows the pressed inset (darker top inner shading); canvas is a plain light-gray fill without the inset"
+ ],
+ "defectClasses": [
+  "other",
+  "missing ink",
+  "other",
+  "missing ink"
+ ],
  "notes": "bordered button matches across variants/sizes",
  "reviewedAt": "ef10d9b1",
  "setNodeId": "39:22467",

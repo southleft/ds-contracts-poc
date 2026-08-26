@@ -1,6 +1,15 @@
 {
- "recognisable": true,
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "size-default unchecked focus-visible: canvas PNG is byte-identical to the plain unchecked canvas \u2014 no focus ring painted, so the sampled state cell reads as an ordinary unchecked switch; ref shows a gray ring surrounding the track. No wall is named for this row (button's FC-EXPORT-RING-UNPAINTED wall was not claimed here). The other 3 cells (unchecked, checked, sm) match the ref well"
+ ],
+ "defectClasses": [
+  "missing ink"
+ ],
  "notes": "track/thumb both states + focus preview match",
  "reviewedAt": "60793cc0",
  "setNodeId": "39:9591",

@@ -1,0 +1,105 @@
+{
+  "id": "antd.button",
+  "library": "antd",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "antd",
+    "version": "5.29.3",
+    "recipe": "examples/antd sandbox (.antd-sandbox; examples/antd/README) mounted per extract/computed/configs/antd.json"
+  },
+  "configPath": "extract/computed/configs/antd.json",
+  "component": "Button",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "type-default__size-middle__danger-safe",
+      "status": "rendered",
+      "png": "ref-type-default__size-middle__danger-safe.png",
+      "props": {
+        "type": "default",
+        "size": "middle",
+        "danger": false
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-default__size-middle__danger-danger",
+      "status": "rendered",
+      "png": "ref-type-default__size-middle__danger-danger.png",
+      "props": {
+        "type": "default",
+        "size": "middle",
+        "danger": true
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-default__size-small__danger-safe",
+      "status": "rendered",
+      "png": "ref-type-default__size-small__danger-safe.png",
+      "props": {
+        "type": "default",
+        "size": "small",
+        "danger": false
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-default__size-large__danger-safe",
+      "status": "rendered",
+      "png": "ref-type-default__size-large__danger-safe.png",
+      "props": {
+        "type": "default",
+        "size": "large",
+        "danger": false
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-primary__size-middle__danger-safe",
+      "status": "rendered",
+      "png": "ref-type-primary__size-middle__danger-safe.png",
+      "props": {
+        "type": "primary",
+        "size": "middle",
+        "danger": false
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-dashed__size-middle__danger-safe",
+      "status": "rendered",
+      "png": "ref-type-dashed__size-middle__danger-safe.png",
+      "props": {
+        "type": "dashed",
+        "size": "middle",
+        "danger": false
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-link__size-middle__danger-safe",
+      "status": "rendered",
+      "png": "ref-type-link__size-middle__danger-safe.png",
+      "props": {
+        "type": "link",
+        "size": "middle",
+        "danger": false
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-text__size-middle__danger-safe",
+      "status": "rendered",
+      "png": "ref-type-text__size-middle__danger-safe.png",
+      "props": {
+        "type": "text",
+        "size": "middle",
+        "danger": false
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 8,
+  "unmappable": 0
+}

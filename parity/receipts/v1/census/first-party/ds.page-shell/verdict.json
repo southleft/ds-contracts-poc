@@ -1,6 +1,15 @@
 {
- "recognisable": true,
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
+ "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "(pair agrees) both canvas (1280x960) and ref (1200x1056) are blank white rectangles \u2014 no header/sidebar/content regions visible on either side. Slot-only scaffold; unrecognisable as a page shell."
+ ],
+ "defectClasses": [
+  "other"
+ ],
  "notes": "slot-only shell renders empty in both halves \u2014 the pair agrees",
  "reviewedAt": "66580a14",
  "setNodeId": "39:23864",

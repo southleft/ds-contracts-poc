@@ -1,6 +1,15 @@
 {
  "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "variant-pages: canvas renders page numbers as flat borderless text with the selected '2' as a plain light-blue filled square; ref renders every page number as a bordered rounded keycap button with light-gray fill, and the selected '2' with a blue outline. Per-page button chrome and selected-state border are lost."
+ ],
+ "defectClasses": [
+  "missing ink"
+ ],
  "notes": "default cell and sampled variants match",
  "reviewedAt": "66580a14",
  "setNodeId": "39:23904",

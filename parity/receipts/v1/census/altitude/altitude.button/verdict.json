@@ -1,7 +1,18 @@
 {
- "recognisable": true,
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
  "walls": [
   "CODE-CANVAS-DISAGREE:button.tertiary/border"
+ ],
+ "defects": [
+  "secondary state-hover: canvas fills the button with blue #6b93ff (dark-navy text #000b29) \u2014 it reads as a blue/primary button \u2014 while ref hover is khaki #b2a589 (a step off the default #a49981) with dark-brown text #191306. Hover appears to be wired to the wrong (link-hover blue) token. Not covered by the row's only named wall, which is about tertiary/border code-vs-canvas.",
+  "secondary state-focus-visible: canvas focus ring is bright #4375ff drawn flush against the button fill with no offset; ref ring is darker indigo #3554ab separated from the fill by a white outline-offset gap. Ring color and offset both differ; not a named wall."
+ ],
+ "defectClasses": [
+  "other",
+  "other"
  ],
  "notes": "secondary/danger/bare/state cells match; tertiary draws its 1px border on canvas while the code render shows text only",
  "reviewedAt": "6804cb8f",

@@ -1031,6 +1031,13 @@ export function styledChannels(
           `reset-supplied-border-color-admitted: ${a.partNames[pi]}.${p} = ${a.baseFlat[pi].node.style[p]} — EQUAL to the <${tag}> control, so the styled-channel door would normally drop it as "not a fact of this component". Admitted anyway because this part draws a real border (${p.replace('-color', '-style')} = ${a.baseFlat[pi].node.style[p.replace('-color', '-style')]}, ${p.replace('-color', '-width')} = ${a.baseFlat[pi].node.style[p.replace('-color', '-width')]}) and the colour comes from the library's GLOBAL CSS (shadcn's \`* { border-color: var(--border) }\` and its equivalents) — the control is polluted by the same rule, so equality proves library authorship, not absence. Without this the style and width ship, the CSS surface paints the border via currentColor's initial-value rule, and the canvas draws NO stroke (rejected-sets round, shadcn.select).`,
         );
       }
+      else if (resetSuppliedBorderColor(p, a.baseFlat[pi].node.style, ctrl)) {
+        set.add(p);
+        receipts.push(
+          `reset-supplied-border-color-admitted: ${a.partNames[pi]}.${p} = ${a.baseFlat[pi].node.style[p]} — EQUAL to the <${tag}> control, so the styled-channel door would normally drop it as "not a fact of this component". Admitted anyway because this part draws a real border (${p.replace('-color', '-width')} = ${a.baseFlat[pi].node.style[p.replace('-color', '-width')]}, ${p.replace('-color', '-style')} = ${a.baseFlat[pi].node.style[p.replace('-color', '-style')]}) and the control's own ${p} (${ctrl[p]}) differs from its \`color\` (${ctrl['color']}) — the UA's border colour is currentcolor, so the control was coloured by the library's GLOBAL CSS (shadcn's \`* { border-color: var(--border) }\`, Tailwind preflight's equivalents). The control correctly subtracts the reset; the emitted CSS does not REPRODUCE it, so without this the width and style ship and the border paints currentcolor on the code surface and NOTHING on the canvas.`,
+        );
+      }
+
     }
     for (const combo of space.enumeration.combos) {
       if (!isEnabled(combo)) continue;
@@ -2370,6 +2377,47 @@ export const resetSuppliedBorderStyle = (
   return width !== undefined && width !== '0px' && width !== '0';
 };
 
+/** A BORDER COLOUR THAT READS AS UNSTYLED ONLY BECAUSE THE LIBRARY'S GLOBAL
+ *  CSS RE-COLOURS EVERY ELEMENT — the -color sibling of the -style door above.
+ *
+ *  shadcn's global layer is `* { border-color: var(--border) }` (Tailwind v3
+ *  preflight's gray-200 rule is the same shape), so the in-page CONTROL reads
+ *  the reset's colour too and the styled-channel door drops the component's
+ *  border colour as "not a fact of this component". The component's width and
+ *  style DO carry (they differ from the control), so the emitted CSS paints
+ *  the border in `currentColor` (the UA completion — black text ink) and the
+ *  canvas paints NO stroke at all: the round trip loses the one channel that
+ *  decides whether the border is visible. Measured: shadcn Input — root
+ *  border 1px solid oklch(0.922 0 0), span control 0px solid oklch(0.922 0 0),
+ *  contract shipped with border widths and NO base border colour
+ *  (census wall CODE-CANVAS-DISAGREE:root.border-color-unspecified).
+ *
+ *  All four clauses are load-bearing, mirroring the -style door:
+ *  the channel is a border-*-colour; it EQUALS the control (else the ordinary
+ *  door admits it); the SAME side actually draws (non-zero width and a
+ *  non-none style — an invisible border's colour is not a rendered fact); and
+ *  the control's own value for the channel differs from the control's `color`
+ *  — the UA's border-colour is `currentcolor`, so an un-reset control reads
+ *  its text ink here, and a control that reads anything else was coloured by
+ *  the page's reset, which is exactly what disqualifies it as the baseline
+ *  for this channel. */
+export const resetSuppliedBorderColor = (
+  channel: string,
+  style: Record<string, string | undefined>,
+  ctrl: Record<string, string | undefined>,
+): boolean => {
+  const m = /^border-(top|right|bottom|left)-color$/.exec(channel);
+  if (!m) return false;
+  const value = style[channel];
+  if (!value) return false;
+  if (ctrl[channel] !== value) return false; // it differs — the ordinary door already admits it
+  const width = style[`border-${m[1]}-width`];
+  if (width === undefined || width === '0px' || width === '0') return false;
+  const sideStyle = style[`border-${m[1]}-style`];
+  if (!sideStyle || sideStyle === 'none') return false;
+  return ctrl[channel] !== ctrl['color'];
+};
+
 export function prepareMint(
   a: AlignedSweep,
   comp: ComponentConfig,
@@ -2698,7 +2746,20 @@ export function prepareMint(
               if ([...byVal.values()].some((s) => !spec.value.test([...s][0]))) continue;
               for (const [av, s] of byVal) {
                 const v = [...s][0];
-                if (v === 'solid' || v === 'none') continue; // the emitters' standing stroke style; the zero-width side already draws nothing
+                // 'none' still carries nothing: the zero-width side already
+                // draws nothing (computed width reads 0 when the style is
+                // none, and the per-appearance width tokens carry that 0).
+                // OBSERVED 'solid' now CARRIES (census, fluent.input): the
+                // old skip claimed solid is "the emitters' standing stroke
+                // style", which is true of the canvas (stroke drawn iff
+                // width > 0) and FALSE of the CSS surfaces for TOKEN widths —
+                // borderStyleDecls refuses to synthesise from a width whose
+                // value it cannot see (the altitude scar), so fluent's
+                // outline Input carried border-top-width.outline = 1px and
+                // painted no top border at all. A per-value observed style
+                // is a fact, not a synthesis; it rides the same stylesWhen
+                // rule the dashed/dotted values already ride.
+                if (v === 'none') continue;
                 declared.push({ part: partName, channel, value: v, when: { prop: ax.prop, equals: av } });
               }
               remintReceipts.push(`border-style-by-axis-carried: ${partName}.${channel} varies by "${ax.prop}" (${[...byVal].map(([k, s]) => `${k}=${[...s][0]}`).join(', ')}) — carried as per-value stylesWhen rules (code: \`.${ax.prop}-<value> { ${channel}: … }\`; canvas: a dashPattern on that variant's stroke)`);

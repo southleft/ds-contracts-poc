@@ -1,6 +1,15 @@
 {
- "recognisable": true,
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
+ "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "toggled-toggled: canvas shows the green/on track with thumb right but the action label reads 'Off'; ref reads 'On' \u2014 the state text contradicts the visual state of the sampled On variant (untoggled variant matches ref correctly)"
+ ],
+ "defectClasses": [
+  "other"
+ ],
  "notes": "gray/green track + knob position match both states",
  "reviewedAt": "3f3b23b4",
  "setNodeId": "39:8867",

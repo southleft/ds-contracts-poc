@@ -1,6 +1,11 @@
 {
  "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
  "walls": [],
+ "defects": [],
+ "defectClasses": [],
  "notes": "canvas carries both pager chevrons; code render clips the second",
  "reviewedAt": "16fac1ee",
  "setNodeId": "39:17636",

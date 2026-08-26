@@ -1,0 +1,57 @@
+{
+  "id": "carbon.accordion",
+  "library": "carbon",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@carbon/react",
+    "version": "1.112.0",
+    "recipe": "examples/carbon sandbox (.carbon-sandbox; examples/carbon/README) mounted per extract/computed/configs/carbon.json"
+  },
+  "configPath": "extract/computed/configs/carbon.json",
+  "component": "Accordion",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "align-end__size-sm",
+      "status": "rendered",
+      "png": "ref-align-end__size-sm.png",
+      "props": {
+        "align": "end",
+        "size": "sm"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "align-end__size-md",
+      "status": "rendered",
+      "png": "ref-align-end__size-md.png",
+      "props": {
+        "align": "end",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "align-end__size-lg",
+      "status": "rendered",
+      "png": "ref-align-end__size-lg.png",
+      "props": {
+        "align": "end",
+        "size": "lg"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "align-start__size-sm",
+      "status": "rendered",
+      "png": "ref-align-start__size-sm.png",
+      "props": {
+        "align": "start",
+        "size": "sm"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 4,
+  "unmappable": 0
+}

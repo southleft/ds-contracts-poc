@@ -241,6 +241,53 @@
         "box-sizing": "border-box",
         "position": "relative"
       },
+      "stylesWhen": [
+        {
+          "prop": "appearance",
+          "equals": "outline",
+          "styles": {
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "prop": "appearance",
+          "equals": "filled-darker",
+          "styles": {
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "prop": "appearance",
+          "equals": "filled-lighter",
+          "styles": {
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "prop": "appearance",
+          "equals": "filled-darker-shadow",
+          "styles": {
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "prop": "appearance",
+          "equals": "filled-lighter-shadow",
+          "styles": {
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid"
+          }
+        }
+      ],
       "declaredStates": {
         "active": {
           "outline-style": "solid"

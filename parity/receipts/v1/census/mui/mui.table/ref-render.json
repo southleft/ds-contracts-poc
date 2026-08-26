@@ -1,0 +1,35 @@
+{
+  "id": "mui.table",
+  "library": "mui",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@mui/material",
+    "version": "9.2.0",
+    "recipe": "examples/mui sandbox (.mui-sandbox; examples/mui/README) mounted per extract/computed/configs/mui.json"
+  },
+  "configPath": "extract/computed/configs/mui.json",
+  "component": "Table",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "size-medium",
+      "status": "rendered",
+      "png": "ref-size-medium.png",
+      "props": {
+        "size": "medium"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-small",
+      "status": "rendered",
+      "png": "ref-size-small.png",
+      "props": {
+        "size": "small"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 2,
+  "unmappable": 0
+}

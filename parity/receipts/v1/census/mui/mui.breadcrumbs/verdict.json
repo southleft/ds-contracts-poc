@@ -1,6 +1,11 @@
 {
  "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
  "walls": [],
+ "defects": [],
+ "defectClasses": [],
  "notes": "canvas draws clean Home / Catalog crumbs; the code render leaks ordered-list numbering (code-half artifact)",
  "reviewedAt": "16fac1ee",
  "setNodeId": "39:16806",

@@ -1,6 +1,19 @@
 {
- "recognisable": true,
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "appearance=transparent (small/medium/large) and appearance=subtle: the blue selected-tab underline indicator is missing on canvas \u2014 canvas shows only 'Overview' (bold) and 'Activity' text; ref shows the blue bar under Overview in every one of these 5 cells. Without it the component reads as two text labels, not tabs",
+  "orientation=vertical: canvas renders the tabs HORIZONTALLY ('Overview Activity' side by side) with no indicator; ref stacks them vertically with the blue left-edge selection bar \u2014 orientation axis uncarried",
+  "appearance=filled-circular and subtle-circular match ref (selected pill fill/border carried)"
+ ],
+ "defectClasses": [
+  "missing ink",
+  "layout axis",
+  "match-note"
+ ],
  "notes": "transparent/subtle/circular appearances, sizes, orientations match incl. selected pill",
  "reviewedAt": "60793cc0",
  "setNodeId": "39:13436",

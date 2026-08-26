@@ -1,6 +1,17 @@
 {
- "recognisable": true,
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "variant-destructive size-md: canvas is a solid dark red #A50C25 button with white label; ref is a subtle pink #FACECB button with dark red label \u2014 reads as a different (solid) destructive treatment",
+  "(primary, secondary, ghost, and secondary sm/md/lg all match \u2014 heights 56/64/72 verified, radii equivalent, secondary's 6% alpha fill composites to ref's #EFEFEF)"
+ ],
+ "defectClasses": [
+  "other",
+  "match-note"
+ ],
  "notes": "secondary/primary/ghost/destructive across sizes match",
  "reviewedAt": "796581f0",
  "setNodeId": "39:14090",

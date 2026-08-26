@@ -1,6 +1,17 @@
 {
  "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
+ "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "all 8 variants: canvas anchor avatar is a SQUARE gray box; ref anchor is a circular avatar",
+  "standard variants: canvas badge bubble floats detached to the upper-right of the anchor with a clear gap; ref bubble overlaps the anchor's top-right corner"
+ ],
+ "defectClasses": [
+  "glyph geometry",
+  "interior layout"
+ ],
  "notes": "default cell and sampled variants match",
  "reviewedAt": "16fac1ee",
  "setNodeId": "39:16803",

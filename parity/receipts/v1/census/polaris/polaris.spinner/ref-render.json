@@ -1,0 +1,35 @@
+{
+  "id": "polaris.spinner",
+  "library": "polaris",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@shopify/polaris",
+    "version": "13.9.5",
+    "recipe": "examples/polaris sandbox (.polaris-sandbox; examples/polaris/README) mounted per extract/computed/configs/polaris.json"
+  },
+  "configPath": "extract/computed/configs/polaris.json",
+  "component": "Spinner",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "size-large",
+      "status": "rendered",
+      "png": "ref-size-large.png",
+      "props": {
+        "size": "large"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-small",
+      "status": "rendered",
+      "png": "ref-size-small.png",
+      "props": {
+        "size": "small"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 2,
+  "unmappable": 0
+}

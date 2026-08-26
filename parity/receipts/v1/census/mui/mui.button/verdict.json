@@ -1,6 +1,17 @@
 {
  "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "state-hover: canvas is byte-identical (md5 b76d7d7e) to the enabled default \u2014 no hover overlay; ref shows a pale primary-tinted rounded background behind the label",
+  "state-active: canvas identical to default \u2014 no pressed overlay; ref shows the tinted rounded background"
+ ],
+ "defectClasses": [
+  "missing ink",
+  "missing ink"
+ ],
  "notes": "default cell and sampled variants match",
  "reviewedAt": "16fac1ee",
  "setNodeId": "39:16971",

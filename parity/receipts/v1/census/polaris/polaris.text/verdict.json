@@ -1,5 +1,8 @@
 {
- "recognisable": true,
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
+ "priorSelfGrade": true,
  "walls": [
   "CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading Xs",
   "CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading Sm",
@@ -25,6 +28,12 @@
   "CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Text Inverse Secondary, Font Weight=Regular, Variant=Heading Xs",
   "CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Magic, Font Weight=Regular, Variant=Heading Xs",
   "CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Magic Subdued, Font Weight=Regular, Variant=Heading Xs"
+ ],
+ "defects": [
+  "ZERO canvas-*.png files exist in the row \u2014 not one of the 24 sampled variants has a canvas render to grade; every sampled cell is excused by a blanket CANVAS-PROJECTION wall, so the sample and the drawn projection have empty intersection and no canvas-vs-ref pair was ever compared. The 'verified by set export' claim in notes is not backed by any artifact in the receipt. With no visual evidence a designer cannot say 'that is this component in this state'; defaulting to FAIL"
+ ],
+ "defectClasses": [
+  "other"
  ],
  "notes": "the canvas draws 55 of 23,232 cells (As=P planes, verified by set export: every variant/tone/weight renders Online store dashboard); the 24 sampled As=Dt cells are outside the projection and named CANVAS-PROJECTION walls",
  "reviewedAt": "ef10d9b1",

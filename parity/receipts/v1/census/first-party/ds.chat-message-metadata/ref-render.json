@@ -1,0 +1,62 @@
+{
+  "id": "ds.chat-message-metadata",
+  "library": "first-party",
+  "renderer": "REAL IMPLEMENTATION render — generated React catalog (src/components) via its Storybook meta, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "harness": {
+    "package": "src/components (generated catalog — npm run generate)",
+    "version": "committed tree",
+    "recipe": "the repo's own generated React components ARE the real first-party implementation; mounted through each component's generated Storybook meta (canonical args/render), esbuild-bundled with src/components/tokens.css"
+  },
+  "configPath": null,
+  "component": null,
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "status-sent",
+      "status": "rendered",
+      "png": "ref-status-sent.png",
+      "props": {
+        "status": "sent"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "status-sending",
+      "status": "rendered",
+      "png": "ref-status-sending.png",
+      "props": {
+        "status": "sending"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "status-delivered",
+      "status": "rendered",
+      "png": "ref-status-delivered.png",
+      "props": {
+        "status": "delivered"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "status-read",
+      "status": "rendered",
+      "png": "ref-status-read.png",
+      "props": {
+        "status": "read"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "status-error",
+      "status": "rendered",
+      "png": "ref-status-error.png",
+      "props": {
+        "status": "error"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 5,
+  "unmappable": 0
+}

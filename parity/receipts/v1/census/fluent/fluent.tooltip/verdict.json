@@ -1,7 +1,18 @@
 {
- "recognisable": true,
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
+ "priorSelfGrade": true,
  "walls": [
   "CODE-RENDER-PARTIAL:tooltip.normal"
+ ],
+ "defects": [
+  "appearance=normal: canvas bubble has no shadow and no border \u2014 on a white ground the bubble boundary is invisible so the cell reads as a bare line of text, while ref shows a white rounded bubble with Fluent's elevation shadow; the named wall covers the code render only, not the canvas surface loss",
+  "appearance=inverted matches ref (dark bubble, white text, correct radius); normal's text content is carried, which is why this is borderline rather than certain"
+ ],
+ "defectClasses": [
+  "missing ink",
+  "match-note"
  ],
  "notes": "inverted dark bubble matches; normal appearance is a white bubble on white on canvas (text carried) while the code render shows a textless gray box",
  "reviewedAt": "60793cc0",

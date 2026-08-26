@@ -1,6 +1,11 @@
 {
  "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
  "walls": [],
+ "defects": [],
+ "defectClasses": [],
  "notes": "all variant fills incl. transparent/muted match; default border box present",
  "reviewedAt": "796581f0",
  "setNodeId": "39:14119",

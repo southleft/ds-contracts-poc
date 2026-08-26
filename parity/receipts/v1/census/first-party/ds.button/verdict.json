@@ -1,6 +1,15 @@
 {
  "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "state-focus-visible: canvas draws the focus ring as a tight darker-blue border directly on the button edge; ref shows a white offset gap plus a separate outer blue ring. The two-part offset focus ring is lost. All other 8 sampled cells match."
+ ],
+ "defectClasses": [
+  "other"
+ ],
  "notes": "default cell and sampled variants match",
  "reviewedAt": "66580a14",
  "setNodeId": "39:23381",

@@ -1,7 +1,16 @@
 {
  "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
+ "priorSelfGrade": true,
  "walls": [
   "CODE-CANVAS-DISAGREE:root.border-color-unspecified"
+ ],
+ "defects": [
+  "trigger chevron: canvas renders a SOLID FILLED downward triangle; ref renders the lucide thin stroked chevron (open V, ~2px stroke) \u2014 different glyph, not covered by the border-color wall"
+ ],
+ "defectClasses": [
+  "glyph geometry"
  ],
  "notes": "placeholder + chevron match; trigger box stroke missing on canvas (same border-color gap)",
  "reviewedAt": "60793cc0",

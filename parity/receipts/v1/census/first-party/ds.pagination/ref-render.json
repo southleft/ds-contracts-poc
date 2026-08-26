@@ -1,0 +1,44 @@
+{
+  "id": "ds.pagination",
+  "library": "first-party",
+  "renderer": "REAL IMPLEMENTATION render — generated React catalog (src/components) via its Storybook meta, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "harness": {
+    "package": "src/components (generated catalog — npm run generate)",
+    "version": "committed tree",
+    "recipe": "the repo's own generated React components ARE the real first-party implementation; mounted through each component's generated Storybook meta (canonical args/render), esbuild-bundled with src/components/tokens.css"
+  },
+  "configPath": null,
+  "component": null,
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "variant-pages",
+      "status": "rendered",
+      "png": "ref-variant-pages.png",
+      "props": {
+        "variant": "pages"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-compact",
+      "status": "rendered",
+      "png": "ref-variant-compact.png",
+      "props": {
+        "variant": "compact"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-dots",
+      "status": "rendered",
+      "png": "ref-variant-dots.png",
+      "props": {
+        "variant": "dots"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 3,
+  "unmappable": 0
+}

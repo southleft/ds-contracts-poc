@@ -1,6 +1,17 @@
 {
- "recognisable": true,
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "size-sm: canvas-size-sm.png is byte-identical (same md5 4055b86f) to canvas-size-md.png \u2014 the size axis has no effect on canvas, while ref sm has a smaller box (36px vs 44px) and smaller label; the sm variant is just the md rendering",
+  "both sizes: canvas label 'Accept terms' ink is near-black #171717 vs ref gray #737373"
+ ],
+ "defectClasses": [
+  "layout axis",
+  "other"
+ ],
  "notes": "box + label both sizes match",
  "reviewedAt": "796581f0",
  "setNodeId": "39:14128",

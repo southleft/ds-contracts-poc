@@ -1,6 +1,11 @@
 {
  "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
  "walls": [],
+ "defects": [],
+ "defectClasses": [],
  "notes": "pill chips match across variants and squared type",
  "reviewedAt": "6804cb8f",
  "setNodeId": "39:6746",

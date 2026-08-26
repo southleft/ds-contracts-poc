@@ -1,6 +1,15 @@
 {
- "recognisable": true,
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
+ "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "wrapped-control slot is empty on canvas \u2014 only 'Field label' + 'Helper text for the wrapped control.' render (640x86); ref (730x220) shows a third line of control content ('The quick brown fox jumps over the lazy dog.') below the helper. The control the Field exists to wrap is missing."
+ ],
+ "defectClasses": [
+  "missing ink"
+ ],
  "notes": "default cell and sampled variants match",
  "reviewedAt": "66580a14",
  "setNodeId": "39:23666",

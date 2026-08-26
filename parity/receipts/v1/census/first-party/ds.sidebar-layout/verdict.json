@@ -1,6 +1,15 @@
 {
- "recognisable": true,
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "canvas collapsed to a 1280x2 sliver \u2014 essentially a horizontal line; ref renders a 1200x62 empty band. The component has zero visible body on canvas; nothing renders at all."
+ ],
+ "defectClasses": [
+  "min-size collapse"
+ ],
  "notes": "slot-only layout renders empty in both halves \u2014 the pair agrees",
  "reviewedAt": "66580a14",
  "setNodeId": "39:23854",

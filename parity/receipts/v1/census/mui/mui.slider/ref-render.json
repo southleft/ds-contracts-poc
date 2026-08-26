@@ -1,0 +1,115 @@
+{
+  "id": "mui.slider",
+  "library": "mui",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@mui/material",
+    "version": "9.2.0",
+    "recipe": "examples/mui sandbox (.mui-sandbox; examples/mui/README) mounted per extract/computed/configs/mui.json"
+  },
+  "configPath": "extract/computed/configs/mui.json",
+  "component": "Slider",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "color-primary__size-medium",
+      "status": "rendered",
+      "png": "ref-color-primary__size-medium.png",
+      "props": {
+        "value": 40,
+        "color": "primary",
+        "size": "medium",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-primary__size-small",
+      "status": "rendered",
+      "png": "ref-color-primary__size-small.png",
+      "props": {
+        "value": 40,
+        "color": "primary",
+        "size": "small",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-secondary__size-medium",
+      "status": "rendered",
+      "png": "ref-color-secondary__size-medium.png",
+      "props": {
+        "value": 40,
+        "color": "secondary",
+        "size": "medium",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-error__size-medium",
+      "status": "rendered",
+      "png": "ref-color-error__size-medium.png",
+      "props": {
+        "value": 40,
+        "color": "error",
+        "size": "medium",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-warning__size-medium",
+      "status": "rendered",
+      "png": "ref-color-warning__size-medium.png",
+      "props": {
+        "value": 40,
+        "color": "warning",
+        "size": "medium",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-info__size-medium",
+      "status": "rendered",
+      "png": "ref-color-info__size-medium.png",
+      "props": {
+        "value": 40,
+        "color": "info",
+        "size": "medium",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-success__size-medium",
+      "status": "rendered",
+      "png": "ref-color-success__size-medium.png",
+      "props": {
+        "value": 40,
+        "color": "success",
+        "size": "medium",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 7,
+  "unmappable": 0
+}

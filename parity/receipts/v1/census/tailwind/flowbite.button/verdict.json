@@ -1,8 +1,13 @@
 {
  "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
  "walls": [
   "FC-EXPORT-RING-UNPAINTED"
  ],
+ "defects": [],
+ "defectClasses": [],
  "notes": "9 color/size cells match; Active/Focus Visible spread-4 ring is carried as effect data (round-trips) and reserves export bounds, but the raster leaves it unpainted on COMPONENT exports \u2014 paints on a bare node with identical effect",
  "reviewedAt": "ad1e0fbb",
  "setNodeId": "39:5969",

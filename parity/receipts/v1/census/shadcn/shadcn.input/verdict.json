@@ -1,38 +1,54 @@
 {
  "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": false,
  "walls": [
-  "CANVAS-LEAF-INPUT-COLLAPSED",
-  "CODE-CANVAS-DISAGREE:root.border-color-unspecified"
+  "CODE-ONLY-FACT:root/border-color (state previews) \u2014 State=Active/Focus Visible recolor all four sides to {imported.shared.color-a1a1a1} in code; the preview cells keep the base {imported.shared.color-e5e5e5} stroke (the state pass carries no width source, so the one-paint recolor is refused by name)",
+  "CODE-ONLY-FACT:root/box-shadow (state previews) \u2014 the active/focus ring stack (5 layers incl. the 3px ring) parses to no Figma effect stack; preview cells draw the base 0/1px/2px shadow only"
  ],
- "notes": "the input is a leaf with no text prop and no admitted height: the canvas hugs to its padding (288x8) and draws no stroke, an empty sliver beside the code render's bordered box",
- "reviewedAt": "60793cc0",
- "setNodeId": "39:9564",
+ "defects": [
+  "all 3 cells (default/active/focus-visible): canvas is a blank white 576x16 sliver \u2014 no box, no 'Value' placeholder text, no height; ref shows a full-height bordered rounded input with placeholder. Both walls are named, but the render fails the designer-recognition test outright: nothing on canvas reads as an input",
+  "active and focus-visible states are indistinguishable from default on canvas (all three slivers are visually empty); ref active shows a thickened border and ref focus-visible shows a ring \u2014 subsumed by the collapse but means every sampled state is missing"
+ ],
+ "defectClasses": [
+  "min-size collapse",
+  "missing ink"
+ ],
+ "notes": "the base cell now draws the code half exactly: 288\u00d736, 1px {imported.shared.color-e5e5e5} stroke, 8px radius, white fill, an empty placeholder line box carrying font-size/line-height \u2014 the border-color capture loss (shadcn\u2019s global `* { border-color: var(--border) }` styled the control too, so the styled-channel door subtracted a real fact) and the missing height/line-box are closed; the two state-preview walls are named, the cells still read as the same input",
+ "reviewedAt": "07e437c8",
+ "setNodeId": "39:24403",
  "roundTrip": {
   "dumpPath": "extract/figma/fixtures/census-shadcn-shadcn.input.dump.json",
-  "matched": 8,
+  "matched": 7,
   "diverged": [
-   "part root layout \u2014 {\"mode\":\"HORIZONTAL\",\"primary\":\"CENTER\",\"counter\":\"CENTER\",\"grow\":false,\"stretch\":false} vs {\"mode\":\"VERTICAL\",\"primary\":\"MIN\",\"counter\":\"MIN\",\"grow\":false,\"stretch\":false}",
+   "part root border-bottom-color \u2014 {imported.shared.color-e5e5e5} missing from proposal",
    "part root border-bottom-left-radius \u2014 {imported.shared.size-8} missing from proposal",
    "part root border-bottom-right-radius \u2014 {imported.shared.size-8} missing from proposal",
    "part root border-bottom-width \u2014 {imported.shared.size-1} missing from proposal",
+   "part root border-color \u2014 proposal has {imported.shared.color-e5e5e5}, contract has nothing",
+   "part root border-left-color \u2014 {imported.shared.color-e5e5e5} missing from proposal",
    "part root border-left-width \u2014 {imported.shared.size-1} missing from proposal",
+   "part root border-radius \u2014 proposal has {imported.shared.size-8}, contract has nothing",
+   "part root border-right-color \u2014 {imported.shared.color-e5e5e5} missing from proposal",
    "part root border-right-width \u2014 {imported.shared.size-1} missing from proposal",
+   "part root border-top-color \u2014 {imported.shared.color-e5e5e5} missing from proposal",
    "part root border-top-left-radius \u2014 {imported.shared.size-8} missing from proposal",
    "part root border-top-right-radius \u2014 {imported.shared.size-8} missing from proposal",
    "part root border-top-width \u2014 {imported.shared.size-1} missing from proposal",
-   "part root box-shadow \u2014 {imported.input.root.box-shadow} missing from proposal",
-   "part root line-height \u2014 {imported.input.root.line-height} missing from proposal",
-   "part root width \u2014 {imported.input.root.width} missing from proposal",
-   "part root border-radius \u2014 proposal has {imported.shared.size-8}, contract has nothing",
    "part root border-width \u2014 proposal has {imported.shared.size-1}, contract has nothing",
-   "part root max-width \u2014 proposal has {imported.input.root.width}, contract has nothing"
+   "part root font-size \u2014 {imported.input.root.font-size} missing from proposal",
+   "part root line-height \u2014 {imported.input.root.line-height} missing from proposal",
+   "part root max-width \u2014 proposal has {imported.input.root.width}, contract has nothing",
+   "part root width \u2014 {imported.input.root.width} missing from proposal",
+   "part root layout \u2014 {\"display\": \"flex\", \"direction\": \"column\"} vs null",
+   "part root/placeholder \u2014 proposal has a part the contract does not"
   ],
   "lost": [
-   "`states` \u2014 interaction states are code-side (CSS pseudo-classes)",
-   "`part root states` \u2014 interaction-state token overrides are code-side (CSS)",
-   "`part root font-size` \u2014 {imported.input.root.font-size} \u2014 text-cascade token with no bound text node beneath it on the canvas",
-   "`Input:root` effects = `0px 0px 0px #00000000, 0px 0px 0px #00000000, 0px 0px 0px #00000000, 0px 0px 0px #00000000, 0px 1px 2px #0000000d` \u2014 nearest tokens: `{radius.banner.section}`, `{radius.none}`",
-   "`Input:root (state disabled)` opacity = `0.5` \u2014 nearest tokens: `{opacity.disabled}`"
+   "`states` \u2014 interaction states are code-side (CSS pseudo-classes); the exact lane refuses the dump (EXACT_ROWS_MISSING State=Active/Focus Visible \u2014 no recoverable override distinguishes those preview cells), the reviewable inversion records them as named notes",
+   "`Input:root (state active/focus-visible)` border-color = {imported.shared.color-a1a1a1} \u2014 the preview cells keep the base stroke (one strokes paint, no width source in the state pass)",
+   "`Input:root` effects = `0px 0px 0px #00000000 \u00d74, 0px 1px 2px #0000000d` \u2014 UNBOUND: no token invented; nearest tokens by value: {imported.shared.size-0}",
+   "`Input:root (state disabled)` opacity = `0.5` \u2014 recovered as {imported.input.root.opacity-state-disabled} in the disabled state block; the preview cell itself draws at full opacity"
   ]
  }
 }

@@ -1,6 +1,19 @@
 {
  "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
+ "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "all 5 cells: canvas header title reads 'Banner' (generic placeholder) where ref reads 'Order archived' \u2014 unwalled copy mismatch",
+  "all 5 cells: canvas title is horizontally CENTERED in the colored header strip, leaving a large empty gap after the far-left icon; ref shows icon and bold title left-aligned and adjacent. Layout-axis/alignment defect, not a named wall",
+  "canvas title appears regular weight; ref title is bold"
+ ],
+ "defectClasses": [
+  "other",
+  "interior layout",
+  "type scale"
+ ],
  "notes": "info banner with icon, title and body matches",
  "reviewedAt": "ef10d9b1",
  "setNodeId": "39:20224",

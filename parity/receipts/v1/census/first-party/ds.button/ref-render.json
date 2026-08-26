@@ -1,0 +1,108 @@
+{
+  "id": "ds.button",
+  "library": "first-party",
+  "renderer": "REAL IMPLEMENTATION render — generated React catalog (src/components) via its Storybook meta, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "harness": {
+    "package": "src/components (generated catalog — npm run generate)",
+    "version": "committed tree",
+    "recipe": "the repo's own generated React components ARE the real first-party implementation; mounted through each component's generated Storybook meta (canonical args/render), esbuild-bundled with src/components/tokens.css"
+  },
+  "configPath": null,
+  "component": null,
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "variant-primary__size-medium",
+      "status": "rendered",
+      "png": "ref-variant-primary__size-medium.png",
+      "props": {
+        "variant": "primary",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-primary__size-small",
+      "status": "rendered",
+      "png": "ref-variant-primary__size-small.png",
+      "props": {
+        "variant": "primary",
+        "size": "sm"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-primary__size-large",
+      "status": "rendered",
+      "png": "ref-variant-primary__size-large.png",
+      "props": {
+        "variant": "primary",
+        "size": "lg"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-secondary__size-medium",
+      "status": "rendered",
+      "png": "ref-variant-secondary__size-medium.png",
+      "props": {
+        "variant": "secondary",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-danger__size-medium",
+      "status": "rendered",
+      "png": "ref-variant-danger__size-medium.png",
+      "props": {
+        "variant": "danger",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-ghost__size-medium",
+      "status": "rendered",
+      "png": "ref-variant-ghost__size-medium.png",
+      "props": {
+        "variant": "ghost",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-primary__size-medium__state-hover",
+      "status": "rendered",
+      "png": "ref-variant-primary__size-medium__state-hover.png",
+      "props": {
+        "variant": "primary",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-primary__size-medium__state-focus-visible",
+      "status": "rendered",
+      "png": "ref-variant-primary__size-medium__state-focus-visible.png",
+      "props": {
+        "variant": "primary",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-primary__size-medium__state-disabled",
+      "status": "rendered",
+      "png": "ref-variant-primary__size-medium__state-disabled.png",
+      "props": {
+        "variant": "primary",
+        "size": "md",
+        "disabled": true
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 9,
+  "unmappable": 0
+}

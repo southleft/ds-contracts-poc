@@ -1,6 +1,15 @@
 {
  "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
+ "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "variant-divider: canvas draws full-width horizontal rules flanking 'Today' (640px fill cell); the ref render (148px hug-width crop) shows no rules at all \u2014 most likely a ref-harness hug artifact rather than an engine loss, but it is an unverifiable visible difference."
+ ],
+ "defectClasses": [
+  "other"
+ ],
  "notes": "default cell and sampled variants match",
  "reviewedAt": "66580a14",
  "setNodeId": "39:23599",

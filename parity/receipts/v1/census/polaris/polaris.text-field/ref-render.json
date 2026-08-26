@@ -1,0 +1,473 @@
+{
+  "id": "polaris.text-field",
+  "library": "polaris",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@shopify/polaris",
+    "version": "13.9.5",
+    "recipe": "examples/polaris sandbox (.polaris-sandbox; examples/polaris/README) mounted per extract/computed/configs/polaris.json"
+  },
+  "configPath": "extract/computed/configs/polaris.json",
+  "component": "TextField",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "type-text__input-mode-none__align-left__variant-inherit__size-medium",
+      "status": "rendered",
+      "png": "ref-type-text__input-mode-none__align-left__variant-inherit__size-medium.png",
+      "props": {
+        "label": "Store name",
+        "autoComplete": "off",
+        "value": "Jaded Pixel",
+        "type": "text",
+        "inputMode": "none",
+        "align": "left",
+        "variant": "inherit",
+        "size": "medium",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-text__input-mode-none__align-left__variant-inherit__size-slim",
+      "status": "rendered",
+      "png": "ref-type-text__input-mode-none__align-left__variant-inherit__size-slim.png",
+      "props": {
+        "label": "Store name",
+        "autoComplete": "off",
+        "value": "Jaded Pixel",
+        "type": "text",
+        "inputMode": "none",
+        "align": "left",
+        "variant": "inherit",
+        "size": "slim",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-text__input-mode-none__align-left__variant-borderless__size-medium",
+      "status": "rendered",
+      "png": "ref-type-text__input-mode-none__align-left__variant-borderless__size-medium.png",
+      "props": {
+        "label": "Store name",
+        "autoComplete": "off",
+        "value": "Jaded Pixel",
+        "type": "text",
+        "inputMode": "none",
+        "align": "left",
+        "variant": "borderless",
+        "size": "medium",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-text__input-mode-none__align-center__variant-inherit__size-medium",
+      "status": "rendered",
+      "png": "ref-type-text__input-mode-none__align-center__variant-inherit__size-medium.png",
+      "props": {
+        "label": "Store name",
+        "autoComplete": "off",
+        "value": "Jaded Pixel",
+        "type": "text",
+        "inputMode": "none",
+        "align": "center",
+        "variant": "inherit",
+        "size": "medium",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-text__input-mode-none__align-right__variant-inherit__size-medium",
+      "status": "rendered",
+      "png": "ref-type-text__input-mode-none__align-right__variant-inherit__size-medium.png",
+      "props": {
+        "label": "Store name",
+        "autoComplete": "off",
+        "value": "Jaded Pixel",
+        "type": "text",
+        "inputMode": "none",
+        "align": "right",
+        "variant": "inherit",
+        "size": "medium",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-text__input-mode-text__align-left__variant-inherit__size-medium",
+      "status": "rendered",
+      "png": "ref-type-text__input-mode-text__align-left__variant-inherit__size-medium.png",
+      "props": {
+        "label": "Store name",
+        "autoComplete": "off",
+        "value": "Jaded Pixel",
+        "type": "text",
+        "inputMode": "text",
+        "align": "left",
+        "variant": "inherit",
+        "size": "medium",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-text__input-mode-decimal__align-left__variant-inherit__size-medium",
+      "status": "rendered",
+      "png": "ref-type-text__input-mode-decimal__align-left__variant-inherit__size-medium.png",
+      "props": {
+        "label": "Store name",
+        "autoComplete": "off",
+        "value": "Jaded Pixel",
+        "type": "text",
+        "inputMode": "decimal",
+        "align": "left",
+        "variant": "inherit",
+        "size": "medium",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-text__input-mode-numeric__align-left__variant-inherit__size-medium",
+      "status": "rendered",
+      "png": "ref-type-text__input-mode-numeric__align-left__variant-inherit__size-medium.png",
+      "props": {
+        "label": "Store name",
+        "autoComplete": "off",
+        "value": "Jaded Pixel",
+        "type": "text",
+        "inputMode": "numeric",
+        "align": "left",
+        "variant": "inherit",
+        "size": "medium",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-text__input-mode-tel__align-left__variant-inherit__size-medium",
+      "status": "rendered",
+      "png": "ref-type-text__input-mode-tel__align-left__variant-inherit__size-medium.png",
+      "props": {
+        "label": "Store name",
+        "autoComplete": "off",
+        "value": "Jaded Pixel",
+        "type": "text",
+        "inputMode": "tel",
+        "align": "left",
+        "variant": "inherit",
+        "size": "medium",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-text__input-mode-search__align-left__variant-inherit__size-medium",
+      "status": "rendered",
+      "png": "ref-type-text__input-mode-search__align-left__variant-inherit__size-medium.png",
+      "props": {
+        "label": "Store name",
+        "autoComplete": "off",
+        "value": "Jaded Pixel",
+        "type": "text",
+        "inputMode": "search",
+        "align": "left",
+        "variant": "inherit",
+        "size": "medium",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-text__input-mode-email__align-left__variant-inherit__size-medium",
+      "status": "rendered",
+      "png": "ref-type-text__input-mode-email__align-left__variant-inherit__size-medium.png",
+      "props": {
+        "label": "Store name",
+        "autoComplete": "off",
+        "value": "Jaded Pixel",
+        "type": "text",
+        "inputMode": "email",
+        "align": "left",
+        "variant": "inherit",
+        "size": "medium",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-text__input-mode-url__align-left__variant-inherit__size-medium",
+      "status": "rendered",
+      "png": "ref-type-text__input-mode-url__align-left__variant-inherit__size-medium.png",
+      "props": {
+        "label": "Store name",
+        "autoComplete": "off",
+        "value": "Jaded Pixel",
+        "type": "text",
+        "inputMode": "url",
+        "align": "left",
+        "variant": "inherit",
+        "size": "medium",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-email__input-mode-none__align-left__variant-inherit__size-medium",
+      "status": "rendered",
+      "png": "ref-type-email__input-mode-none__align-left__variant-inherit__size-medium.png",
+      "props": {
+        "label": "Store name",
+        "autoComplete": "off",
+        "value": "Jaded Pixel",
+        "type": "email",
+        "inputMode": "none",
+        "align": "left",
+        "variant": "inherit",
+        "size": "medium",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-number__input-mode-none__align-left__variant-inherit__size-medium",
+      "status": "rendered",
+      "png": "ref-type-number__input-mode-none__align-left__variant-inherit__size-medium.png",
+      "props": {
+        "label": "Store name",
+        "autoComplete": "off",
+        "value": "Jaded Pixel",
+        "type": "number",
+        "inputMode": "none",
+        "align": "left",
+        "variant": "inherit",
+        "size": "medium",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-integer__input-mode-none__align-left__variant-inherit__size-medium",
+      "status": "rendered",
+      "png": "ref-type-integer__input-mode-none__align-left__variant-inherit__size-medium.png",
+      "props": {
+        "label": "Store name",
+        "autoComplete": "off",
+        "value": "Jaded Pixel",
+        "type": "integer",
+        "inputMode": "none",
+        "align": "left",
+        "variant": "inherit",
+        "size": "medium",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-password__input-mode-none__align-left__variant-inherit__size-medium",
+      "status": "rendered",
+      "png": "ref-type-password__input-mode-none__align-left__variant-inherit__size-medium.png",
+      "props": {
+        "label": "Store name",
+        "autoComplete": "off",
+        "value": "Jaded Pixel",
+        "type": "password",
+        "inputMode": "none",
+        "align": "left",
+        "variant": "inherit",
+        "size": "medium",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-search__input-mode-none__align-left__variant-inherit__size-medium",
+      "status": "rendered",
+      "png": "ref-type-search__input-mode-none__align-left__variant-inherit__size-medium.png",
+      "props": {
+        "label": "Store name",
+        "autoComplete": "off",
+        "value": "Jaded Pixel",
+        "type": "search",
+        "inputMode": "none",
+        "align": "left",
+        "variant": "inherit",
+        "size": "medium",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-tel__input-mode-none__align-left__variant-inherit__size-medium",
+      "status": "rendered",
+      "png": "ref-type-tel__input-mode-none__align-left__variant-inherit__size-medium.png",
+      "props": {
+        "label": "Store name",
+        "autoComplete": "off",
+        "value": "Jaded Pixel",
+        "type": "tel",
+        "inputMode": "none",
+        "align": "left",
+        "variant": "inherit",
+        "size": "medium",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-url__input-mode-none__align-left__variant-inherit__size-medium",
+      "status": "rendered",
+      "png": "ref-type-url__input-mode-none__align-left__variant-inherit__size-medium.png",
+      "props": {
+        "label": "Store name",
+        "autoComplete": "off",
+        "value": "Jaded Pixel",
+        "type": "url",
+        "inputMode": "none",
+        "align": "left",
+        "variant": "inherit",
+        "size": "medium",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-date__input-mode-none__align-left__variant-inherit__size-medium",
+      "status": "rendered",
+      "png": "ref-type-date__input-mode-none__align-left__variant-inherit__size-medium.png",
+      "props": {
+        "label": "Store name",
+        "autoComplete": "off",
+        "value": "Jaded Pixel",
+        "type": "date",
+        "inputMode": "none",
+        "align": "left",
+        "variant": "inherit",
+        "size": "medium",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-datetime-local__input-mode-none__align-left__variant-inherit__size-medium",
+      "status": "rendered",
+      "png": "ref-type-datetime-local__input-mode-none__align-left__variant-inherit__size-medium.png",
+      "props": {
+        "label": "Store name",
+        "autoComplete": "off",
+        "value": "Jaded Pixel",
+        "type": "datetime-local",
+        "inputMode": "none",
+        "align": "left",
+        "variant": "inherit",
+        "size": "medium",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-month__input-mode-none__align-left__variant-inherit__size-medium",
+      "status": "rendered",
+      "png": "ref-type-month__input-mode-none__align-left__variant-inherit__size-medium.png",
+      "props": {
+        "label": "Store name",
+        "autoComplete": "off",
+        "value": "Jaded Pixel",
+        "type": "month",
+        "inputMode": "none",
+        "align": "left",
+        "variant": "inherit",
+        "size": "medium",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-time__input-mode-none__align-left__variant-inherit__size-medium",
+      "status": "rendered",
+      "png": "ref-type-time__input-mode-none__align-left__variant-inherit__size-medium.png",
+      "props": {
+        "label": "Store name",
+        "autoComplete": "off",
+        "value": "Jaded Pixel",
+        "type": "time",
+        "inputMode": "none",
+        "align": "left",
+        "variant": "inherit",
+        "size": "medium",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-week__input-mode-none__align-left__variant-inherit__size-medium",
+      "status": "rendered",
+      "png": "ref-type-week__input-mode-none__align-left__variant-inherit__size-medium.png",
+      "props": {
+        "label": "Store name",
+        "autoComplete": "off",
+        "value": "Jaded Pixel",
+        "type": "week",
+        "inputMode": "none",
+        "align": "left",
+        "variant": "inherit",
+        "size": "medium",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 24,
+  "unmappable": 0
+}

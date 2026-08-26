@@ -17,6 +17,15 @@
       },
       {
         "part": "label",
+        "channel": "border-right-style",
+        "value": "solid",
+        "when": {
+          "prop": "variant",
+          "equals": "permanent"
+        }
+      },
+      {
+        "part": "label",
         "channel": "font-family",
         "value": "Times"
       },
@@ -58,8 +67,8 @@
     "interactions": 4,
     "computed": {
       "cellsCompared": 94,
-      "cellsEqual": 76,
-      "pctEqual": 80.85106382978724,
+      "cellsEqual": 78,
+      "pctEqual": 82.97872340425532,
       "rowsFullyEqual": 0,
       "rows": 8
     },
@@ -101,7 +110,7 @@
         "key": "permanent__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 5,
+        "channelsMismatched": 3,
         "unscorable": "no-original"
       },
       {
@@ -198,14 +207,6 @@
       ],
       [
         "backdrop-root.z-index",
-        1
-      ],
-      [
-        "label.border-right-style",
-        1
-      ],
-      [
-        "label.border-right-width",
         1
       ]
     ],
@@ -355,23 +356,11 @@
       {
         "key": "permanent__default",
         "channelsCompared": 42,
-        "channelsEqual": 37,
+        "channelsEqual": 39,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "label",
-            "channel": "border-right-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "label",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
           {
             "part": "label",
             "channel": "display",

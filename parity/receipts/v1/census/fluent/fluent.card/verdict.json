@@ -1,6 +1,21 @@
 {
- "recognisable": true,
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "every variant: 'Card header' and 'Card description' run together on ONE horizontal line ('Card headerCard description', no gap) while ref stacks header above description vertically \u2014 header block axis is horizontal instead of vertical in all 10 sampled variants",
+  "state=focus-visible: canvas is byte-identical to the base filled card (diff bbox None); ref shows a thick black focus ring around the card \u2014 focus indicator missing",
+  "appearance=outline: canvas card has NO surface and NO border \u2014 139,985 of ~143,808 px fully transparent, zero opaque pixels outside the text block, so only the text floats; ref shows a white card with a gray border",
+  "orientation=horizontal: canvas renders the same broken one-line layout as vertical (Preview above the text run) instead of ref's Preview-left-of-header-stack arrangement"
+ ],
+ "defectClasses": [
+  "layout axis",
+  "missing ink",
+  "missing ink",
+  "layout axis"
+ ],
  "notes": "preview + header/description across appearances, sizes, orientations and states match",
  "reviewedAt": "60793cc0",
  "setNodeId": "39:12565",

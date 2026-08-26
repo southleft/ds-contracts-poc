@@ -1,6 +1,17 @@
 {
  "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
+ "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "variant-elevation__expanded-expanded: canvas details text 'Details body copy for the molecule r' overflows the card and is clipped mid-word at the right edge; ref wraps the full sentence inside the card padding",
+  "variant-elevation__expanded-expanded: canvas details text renders sans-serif and visibly larger than the title; ref renders it in the serif fallback at body size (font substrate, but walls[] is empty so unnamed)"
+ ],
+ "defectClasses": [
+  "interior layout",
+  "type scale"
+ ],
  "notes": "default cell and sampled variants match",
  "reviewedAt": "16fac1ee",
  "setNodeId": "39:16598",

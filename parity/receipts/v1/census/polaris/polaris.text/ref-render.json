@@ -1,0 +1,329 @@
+{
+  "id": "polaris.text",
+  "library": "polaris",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@shopify/polaris",
+    "version": "13.9.5",
+    "recipe": "examples/polaris sandbox (.polaris-sandbox; examples/polaris/README) mounted per extract/computed/configs/polaris.json"
+  },
+  "configPath": "extract/computed/configs/polaris.json",
+  "component": "Text",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "alignment-start__as-dt__tone-base__font-weight-regular__variant-heading-xs",
+      "status": "rendered",
+      "png": "ref-alignment-start__as-dt__tone-base__font-weight-regular__variant-heading-xs.png",
+      "props": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "base",
+        "fontWeight": "regular",
+        "variant": "headingXs"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-base__font-weight-regular__variant-heading-sm",
+      "status": "rendered",
+      "png": "ref-alignment-start__as-dt__tone-base__font-weight-regular__variant-heading-sm.png",
+      "props": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "base",
+        "fontWeight": "regular",
+        "variant": "headingSm"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-base__font-weight-regular__variant-heading-md",
+      "status": "rendered",
+      "png": "ref-alignment-start__as-dt__tone-base__font-weight-regular__variant-heading-md.png",
+      "props": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "base",
+        "fontWeight": "regular",
+        "variant": "headingMd"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-base__font-weight-regular__variant-heading-lg",
+      "status": "rendered",
+      "png": "ref-alignment-start__as-dt__tone-base__font-weight-regular__variant-heading-lg.png",
+      "props": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "base",
+        "fontWeight": "regular",
+        "variant": "headingLg"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-base__font-weight-regular__variant-heading-xl",
+      "status": "rendered",
+      "png": "ref-alignment-start__as-dt__tone-base__font-weight-regular__variant-heading-xl.png",
+      "props": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "base",
+        "fontWeight": "regular",
+        "variant": "headingXl"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-base__font-weight-regular__variant-heading2xl",
+      "status": "rendered",
+      "png": "ref-alignment-start__as-dt__tone-base__font-weight-regular__variant-heading2xl.png",
+      "props": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "base",
+        "fontWeight": "regular",
+        "variant": "heading2xl"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-base__font-weight-regular__variant-heading3xl",
+      "status": "rendered",
+      "png": "ref-alignment-start__as-dt__tone-base__font-weight-regular__variant-heading3xl.png",
+      "props": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "base",
+        "fontWeight": "regular",
+        "variant": "heading3xl"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-base__font-weight-regular__variant-body-xs",
+      "status": "rendered",
+      "png": "ref-alignment-start__as-dt__tone-base__font-weight-regular__variant-body-xs.png",
+      "props": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "base",
+        "fontWeight": "regular",
+        "variant": "bodyXs"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-base__font-weight-regular__variant-body-sm",
+      "status": "rendered",
+      "png": "ref-alignment-start__as-dt__tone-base__font-weight-regular__variant-body-sm.png",
+      "props": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "base",
+        "fontWeight": "regular",
+        "variant": "bodySm"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-base__font-weight-regular__variant-body-md",
+      "status": "rendered",
+      "png": "ref-alignment-start__as-dt__tone-base__font-weight-regular__variant-body-md.png",
+      "props": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "base",
+        "fontWeight": "regular",
+        "variant": "bodyMd"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-base__font-weight-regular__variant-body-lg",
+      "status": "rendered",
+      "png": "ref-alignment-start__as-dt__tone-base__font-weight-regular__variant-body-lg.png",
+      "props": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "base",
+        "fontWeight": "regular",
+        "variant": "bodyLg"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-base__font-weight-medium__variant-heading-xs",
+      "status": "rendered",
+      "png": "ref-alignment-start__as-dt__tone-base__font-weight-medium__variant-heading-xs.png",
+      "props": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "base",
+        "fontWeight": "medium",
+        "variant": "headingXs"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-base__font-weight-semibold__variant-heading-xs",
+      "status": "rendered",
+      "png": "ref-alignment-start__as-dt__tone-base__font-weight-semibold__variant-heading-xs.png",
+      "props": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "base",
+        "fontWeight": "semibold",
+        "variant": "headingXs"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-base__font-weight-bold__variant-heading-xs",
+      "status": "rendered",
+      "png": "ref-alignment-start__as-dt__tone-base__font-weight-bold__variant-heading-xs.png",
+      "props": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "base",
+        "fontWeight": "bold",
+        "variant": "headingXs"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-disabled__font-weight-regular__variant-heading-xs",
+      "status": "rendered",
+      "png": "ref-alignment-start__as-dt__tone-disabled__font-weight-regular__variant-heading-xs.png",
+      "props": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "disabled",
+        "fontWeight": "regular",
+        "variant": "headingXs"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-inherit__font-weight-regular__variant-heading-xs",
+      "status": "rendered",
+      "png": "ref-alignment-start__as-dt__tone-inherit__font-weight-regular__variant-heading-xs.png",
+      "props": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "inherit",
+        "fontWeight": "regular",
+        "variant": "headingXs"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-success__font-weight-regular__variant-heading-xs",
+      "status": "rendered",
+      "png": "ref-alignment-start__as-dt__tone-success__font-weight-regular__variant-heading-xs.png",
+      "props": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "success",
+        "fontWeight": "regular",
+        "variant": "headingXs"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-critical__font-weight-regular__variant-heading-xs",
+      "status": "rendered",
+      "png": "ref-alignment-start__as-dt__tone-critical__font-weight-regular__variant-heading-xs.png",
+      "props": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "critical",
+        "fontWeight": "regular",
+        "variant": "headingXs"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-caution__font-weight-regular__variant-heading-xs",
+      "status": "rendered",
+      "png": "ref-alignment-start__as-dt__tone-caution__font-weight-regular__variant-heading-xs.png",
+      "props": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "caution",
+        "fontWeight": "regular",
+        "variant": "headingXs"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-subdued__font-weight-regular__variant-heading-xs",
+      "status": "rendered",
+      "png": "ref-alignment-start__as-dt__tone-subdued__font-weight-regular__variant-heading-xs.png",
+      "props": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "subdued",
+        "fontWeight": "regular",
+        "variant": "headingXs"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-text-inverse__font-weight-regular__variant-heading-xs",
+      "status": "rendered",
+      "png": "ref-alignment-start__as-dt__tone-text-inverse__font-weight-regular__variant-heading-xs.png",
+      "props": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "text-inverse",
+        "fontWeight": "regular",
+        "variant": "headingXs"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-text-inverse-secondary__font-weight-regular__variant-heading-xs",
+      "status": "rendered",
+      "png": "ref-alignment-start__as-dt__tone-text-inverse-secondary__font-weight-regular__variant-heading-xs.png",
+      "props": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "text-inverse-secondary",
+        "fontWeight": "regular",
+        "variant": "headingXs"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-magic__font-weight-regular__variant-heading-xs",
+      "status": "rendered",
+      "png": "ref-alignment-start__as-dt__tone-magic__font-weight-regular__variant-heading-xs.png",
+      "props": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "magic",
+        "fontWeight": "regular",
+        "variant": "headingXs"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-magic-subdued__font-weight-regular__variant-heading-xs",
+      "status": "rendered",
+      "png": "ref-alignment-start__as-dt__tone-magic-subdued__font-weight-regular__variant-heading-xs.png",
+      "props": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "magic-subdued",
+        "fontWeight": "regular",
+        "variant": "headingXs"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 24,
+  "unmappable": 0
+}

@@ -1,6 +1,15 @@
 {
  "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
+ "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "card (only cell): ref shows a soft drop shadow below/around the box; the tightly-cropped canvas export shows the border and radius but the shadow is barely perceptible \u2014 either unpainted or clipped by the export bounds; walls array is empty so not excused; the box still reads unambiguously as the Card"
+ ],
+ "defectClasses": [
+  "missing ink"
+ ],
  "notes": "box, radius, shadow match; label column top-aligned on canvas vs centered block in code render",
  "reviewedAt": "ad1e0fbb",
  "setNodeId": "39:5982",

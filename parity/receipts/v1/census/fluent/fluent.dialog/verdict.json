@@ -1,6 +1,21 @@
 {
- "recognisable": true,
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "modal-type=modal: canvas export is effectively blank \u2014 842,856 of 847,008 px fully transparent (alpha 0), only a 4,152px opaque white strip; ref shows gray scrim + dialog surface with 'Dialog title', body copy, and Close button. Dialog surface, text, and button all invisible on canvas",
+  "modal-type=alert: same failure \u2014 166,080 of 170,232 px alpha 0, thin blank white strip only, vs ref's full dialog over scrim",
+  "modal-type=non-modal: content IS carried but laid out on ONE horizontal row (title, X close glyph, body copy, Close button left-to-right) while ref stacks title / body / footer vertically with X in the top-right corner \u2014 layout axis wrong",
+  "no scrim on any canvas variant (ref modal/alert show gray overlay)"
+ ],
+ "defectClasses": [
+  "missing ink",
+  "missing ink",
+  "layout axis",
+  "missing ink"
+ ],
  "notes": "dialog surface with title, close, body and Close button matches across modal types",
  "reviewedAt": "60793cc0",
  "setNodeId": "39:12792",

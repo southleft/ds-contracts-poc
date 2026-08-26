@@ -1,6 +1,19 @@
 {
- "recognisable": true,
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
+ "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "trigger label: canvas reads 'Options' vs ref 'Menu' \u2014 content mismatch",
+  "trigger chevron: ref trigger has a down-chevron glyph after the label; canvas trigger has none \u2014 without it the canvas trigger reads as a plain button",
+  "canvas exports the open state with Edit/Duplicate/Delete items floating directly on white with no visible menu card surface (white-on-white surface is mentioned in the row's notes but NOT promoted to the walls array), while ref shows only the closed trigger"
+ ],
+ "defectClasses": [
+  "other",
+  "missing ink",
+  "missing ink"
+ ],
  "notes": "trigger + Edit/Duplicate/Delete list matches; canvas menu card is white-on-white (shadow not visible in export)",
  "reviewedAt": "796581f0",
  "setNodeId": "39:14135",

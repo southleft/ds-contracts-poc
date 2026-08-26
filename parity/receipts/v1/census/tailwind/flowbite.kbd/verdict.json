@@ -1,6 +1,11 @@
 {
  "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
  "walls": [],
+ "defects": [],
+ "defectClasses": [],
  "notes": "key cap with border + radius matches",
  "reviewedAt": "ad1e0fbb",
  "setNodeId": "39:5823",

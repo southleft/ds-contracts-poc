@@ -1,7 +1,24 @@
 {
- "recognisable": true,
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
  "walls": [
   "CODE-CANVAS-DISAGREE:inlinenotification.warning-glyph/fill"
+ ],
+ "defects": [
+  "kind-info__contrast-high, kind-info-square__contrast-high, kind-success__contrast-high: canvas status glyphs are drawn all-black (pixel-verified: zero colored pixels) vs ref blue (48,120,240), blue square, and green (48,168,96) \u2014 on the dark high-contrast panel the glyph is nearly invisible and the kind axis is unreadable; the named wall covers ONLY the warning glyphs",
+  "ALL 7 variants: ref draws the 3px colored left accent border (red/blue/green/yellow per kind); canvas has no left accent at all \u2014 the second kind signal is missing everywhere",
+  "kind-error__contrast-low: ref has a 1px red outline border around the whole notification; canvas shows only the pink fill with no border",
+  "ALL 7 variants: canvas runs 'Notification title Notification subtitle' on ONE line; ref stacks the bold title above the subtitle on two lines",
+  "ALL 7 variants: canvas is stretched to the full showcase width with the close X pushed mid-panel, visibly wider/flatter proportions than ref"
+ ],
+ "defectClasses": [
+  "other",
+  "missing ink",
+  "missing ink",
+  "layout axis",
+  "interior layout"
  ],
  "notes": "error/info/success kinds + low contrast match incl. status glyphs; the warning and warning-alt glyphs lose their yellow fill on canvas (drawn black)",
  "reviewedAt": "3f3b23b4",
