@@ -372,6 +372,49 @@ export function auditRegister(reg: Register, read: (file: string) => string | nu
   return out;
 }
 
+/** The prose half: spec/DOOR-REGISTER.md is the register's human face, and it
+ *  reprints every door's line numbers in a table. Those cells were as stale as
+ *  the register's own — 60 wrong `line`s and 415 `(rule N)`s copied from the
+ *  field that was never re-derived — so they are checked here rather than
+ *  trusted. Pure over (register, doc text) so the self-test can break it. */
+export const DOC_ROW_RE = /^(\| `([a-z0-9.-]+)` \| )(\d+)(?:<br\/>\*\(rule (\d+)\)\*)?( \|)/;
+export function auditDoc(reg: Register, doc: string): Finding[] {
+  const out: Finding[] = [];
+  const bad = (label: string) => out.push({ ok: false, label });
+  const ok = (label: string) => out.push({ ok: true, label });
+
+  const missing = reg.doors.filter((d) => !doc.includes(d.id));
+  if (missing.length > 0) {
+    bad(`${missing.length} registered door(s) are absent from spec/DOOR-REGISTER.md: ${missing.slice(0, 5).map((d) => d.id).join(', ')}`);
+  } else ok(`all ${reg.doors.length} doors appear in spec/DOOR-REGISTER.md`);
+
+  const claimed = /\*\*(\d+)\*\* doors/.exec(doc);
+  if (!claimed) bad('spec/DOOR-REGISTER.md does not state a door count in the pinned form (**N** doors)');
+  else if (Number(claimed[1]) !== reg.doors.length) bad(`spec/DOOR-REGISTER.md claims ${claimed[1]} doors; the register carries ${reg.doors.length}`);
+  else ok(`the doc's stated count (${claimed[1]}) matches the register`);
+
+  const byId = new Map(reg.doors.map((d) => [d.id, d]));
+  const drift: string[] = [];
+  let rows = 0;
+  for (const line of doc.split('\n')) {
+    const m = DOC_ROW_RE.exec(line);
+    if (!m) continue;
+    const d = byId.get(m[2]);
+    if (!d) continue;
+    rows++;
+    const want = d.markerOutsideRule !== undefined ? `${d.line}<br/>*(rule ${d.ruleLine})*` : String(d.line);
+    const got = m[3] + (m[4] ? `<br/>*(rule ${m[4]})*` : '');
+    if (got !== want) drift.push(`${d.id} (doc says ${got}, register says ${want})`);
+  }
+  if (rows !== reg.doors.length) {
+    bad(`spec/DOOR-REGISTER.md has ${rows} door table row(s) for ${reg.doors.length} registered doors — the table is not the register`);
+  } else if (drift.length > 0) {
+    bad(`${drift.length} doc table row(s) print a line the register does not: ${drift.slice(0, 5).join('; ')} — the doc is the face the register is read through, so a stale cell there is the same defect one level up`);
+  } else ok(`all ${rows} doc table rows print the register's own line and ruleLine`);
+
+  return out;
+}
+
 /** The census half — refuses when the measured subtraction table moves. */
 export function auditCensus(c: Census): Finding[] {
   const out: Finding[] = [];
@@ -602,8 +645,38 @@ function selfTest(): number {
       console.log(`      expected a red matching ${c.expect}; got: ${reds.length === 0 ? '(all green — the gate did NOT refuse)' : reds.slice(0, 3).join(' | ')}`);
     }
   }
+  // The doc half, broken the same way: the table is a copy of the register and
+  // a copy that is never compared is exactly how 415 stale cells got printed.
+  const realDoc = readFileSync(DOC, 'utf8');
+  const docCases: Array<{ name: string; doc: string; expect: RegExp }> = [
+    {
+      name: 'a doc table row printing a line the register does not is REFUSED',
+      doc: realDoc.replace(/^(\| `fuse\.control-element-delta` \| )(\d+)/m, (_m, a: string, n: string) => a + (Number(n) + 7)),
+      expect: /print a line the register does not/,
+    },
+    {
+      name: 'a doc table row printing a stale *(rule N)* cell is REFUSED',
+      doc: realDoc.replace(/^(\| `capture\.slot-splice` \| \d+)<br\/>\*\(rule \d+\)\*/m, '$1'),
+      expect: /print a line the register does not/,
+    },
+    {
+      name: 'a doc that lost a door row entirely is REFUSED',
+      doc: realDoc.split('\n').filter((l) => !l.startsWith('| `fuse.control-element-delta` |')).join('\n'),
+      expect: /door table row\(s\) for|are absent from spec\/DOOR-REGISTER\.md/,
+    },
+  ];
+  for (const c of docCases) {
+    const reds = auditDoc(real, c.doc).filter((f) => !f.ok).map((f) => f.label);
+    const hit = reds.some((l) => c.expect.test(l));
+    console.log(`  ${hit ? '✔' : '✖'} ${c.name}`);
+    if (!hit) {
+      failures++;
+      console.log(`      expected a red matching ${c.expect}; got: ${reds.length === 0 ? '(all green — the gate did NOT refuse)' : reds.slice(0, 3).join(' | ')}`);
+    }
+  }
+
   // …and the honest register must be GREEN, or the red cases prove nothing.
-  const clean = auditRegister(real, read).filter((f) => !f.ok);
+  const clean = [...auditRegister(real, read), ...auditDoc(real, realDoc)].filter((f) => !f.ok);
   if (clean.length > 0) {
     failures++;
     console.log(`  ✖ the committed register itself is red, so the red cases above prove nothing:\n      ${clean.map((f) => f.label).join('\n      ')}`);
@@ -649,20 +722,10 @@ console.log('\n3. the doc names the same doors as the register');
     console.log('  ✖ spec/DOOR-REGISTER.md does not exist');
     failures++;
   } else {
-    const doc = readFileSync(DOC, 'utf8');
-    const missing = reg.doors.filter((d) => !doc.includes(d.id));
-    if (missing.length > 0) {
-      console.log(`  ✖ ${missing.length} registered door(s) are absent from spec/DOOR-REGISTER.md: ${missing.slice(0, 5).map((d) => d.id).join(', ')}`);
-      failures++;
-    } else console.log(`  ✔ all ${reg.doors.length} doors appear in spec/DOOR-REGISTER.md`);
-    const claimed = /\*\*(\d+)\*\* doors/.exec(doc);
-    if (!claimed) {
-      console.log('  ✖ spec/DOOR-REGISTER.md does not state a door count in the pinned form (**N** doors)');
-      failures++;
-    } else if (Number(claimed[1]) !== reg.doors.length) {
-      console.log(`  ✖ spec/DOOR-REGISTER.md claims ${claimed[1]} doors; the register carries ${reg.doors.length}`);
-      failures++;
-    } else console.log(`  ✔ the doc's stated count (${claimed[1]}) matches the register`);
+    for (const f of auditDoc(reg, readFileSync(DOC, 'utf8'))) {
+      console.log(`  ${f.ok ? '✔' : '✖'} ${f.label}`);
+      if (!f.ok) failures++;
+    }
   }
 }
 
