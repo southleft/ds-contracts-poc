@@ -1,0 +1,19 @@
+{
+  "id": "grid-child-align-self-start",
+  "feature": "grid-alignment",
+  "construct": "align-self: start on a fixed-size grid child, with no justify-self declared",
+  "why": "grid-child-align already measures justify-self, and the table's align-self row cites that case's SIBLING channel — its engine anchor literally names 'justify-self'. Measuring the cross-axis alone, with the main axis left at its default, is what distinguishes 'both anchors are carried' from 'one anchor is carried and the other rides along'.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.a.placement.alignY (4-value vocabulary only — AUTO|MIN|CENTER|MAX)",
+  "observable": {
+    "part": "a",
+    "channel": "align-self",
+    "capturedValue": "start"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "gridChildVerticalAlign MIN on the child, its horizontal anchor left AUTO"
+  },
+  "blockStage": true
+}

@@ -532,12 +532,22 @@ jobs:
       # refuses on an unclassified observed property, a ghost CARRIED anchor,
       # a missing schema/conformance row, or drifted totals — then proves it
       # can go red at all.
-      - name: channel-table:check (no unclassified channel; every CARRIED anchor exists)
+      #
+      # Since 2026-08-26 it also holds EVIDENCE: every CARRIED row must declare
+      # whether it is `measured` (a named conformance case observes it end to
+      # end), `code-cited` (an engine citation and nothing more — a declared
+      # gap) or `unobservable` (no contract can spell the channel, so no case
+      # could ever catch it). The state is re-derived from both conformance
+      # manifests rather than trusted, so a row can neither over-claim nor
+      # under-claim, and cites are checked in BOTH directions — a row citing a
+      # deleted case, or one that measures some other channel, now goes red.
+      # `npm run channel-table:rederive` is the remedy command.
+      - name: channel-table:check (no unclassified channel; every CARRIED anchor exists; CARRIED evidence declared and re-derived)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run channel-table:check
-      - name: channel-table self-test (a dropped row, a ghost anchor and a stray byte each go red)
+      - name: channel-table self-test (a dropped row, a ghost anchor, a stray byte, a missing evidence state, a "measured" over-claim and a ghost case cite each go red)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run channel-table:check -- --self-test
+        run: npm run channel-table:self-test
       - name: string-boolean-coercion:check (maintain — a string "true" never becomes a boolean property)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run string-boolean-coercion:check

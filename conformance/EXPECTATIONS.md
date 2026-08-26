@@ -16,37 +16,19 @@ repo it is simply absent from the denominator and scores 100%.
 
 | | |
 |---|---|
-| cases | **107** |
-| 🟢 pass | **102** |
-| 🔴 red | **5** |
+| cases | **112** |
+| 🟢 pass | **108** |
+| 🔴 red | **4** |
 | 🟡 yellow (UNSUPPORTED, never read) | **0** |
 | **UNSUPPORTED declared — THE RATCHET** | **18** · may only DECREASE without an explicit manifest edit |
 
-Declared dispositions: CARRIED 63 · LOWERED 5 · REFUSED 21 · UNSUPPORTED 18.
+Declared dispositions: CARRIED 68 · LOWERED 5 · REFUSED 21 · UNSUPPORTED 18.
 
 **A green gate here would mean the cases are too easy.** The point of the
 fixture is a measured frontier, and every red below is an open, named defect —
 recorded in `conformance/BASELINE.json` so it cannot drift in either direction:
 a new red is a regression, and a red that becomes green must be re-recorded, so
 a fix can never be absorbed silently.
-
-## SILENT-LOSS 🔴 — 1
-
-The class the fixture exists to catch, and the only one that is **never waivable**.
-The construct is observable in `captured-truth.json`, absent from the contract, and
-named by no string in the union of `LEDGER.md`, the receipt/refusal arrays of
-`enriched.extension.json`, `review-queue.json`, `source-bindings.json.skips`,
-`scorecard.json` `namedLosses`, and the run's stdout. The pipeline read the fact,
-dropped it, and said nothing.
-
-### `combobox-closed-trigger`
-
-- **construct** — `the CLOSED combobox trigger - `justify-content: space-between` pushing a value label and a two-border chevron box to opposite ends of a bordered row`
-- **why it matters** — The closed state is the combobox a designer actually sees 99% of the time, and `space-between` is the whole reason the chevron is at the far right rather than next to the text. The chevron is drawn from two real borders rather than a pseudo-element glyph on purpose: `::before { content }` is already pinned REFUSED (pseudo-content-glyph), and this case is about the trigger's LAYOUT, not about re-measuring that wall.
-- **declared** CARRIED
-- **measured** — channel `justify-content`; observed on `root`; carried **not at all**
-- **canvas** — PRESENT: primaryAxisAlignItems SPACE_BETWEEN on the trigger frame
-- **verdict** — 🔴 **SILENT-LOSS**: declared CARRIED; observed but neither carried nor named anywhere
 
 ## UNDECLARED-CARRY (HARMFUL) 🔴 — 4
 
@@ -101,13 +83,15 @@ manifest.
 | 🟢 | `antd-presence-times-axis-glyph` | anatomy | `a child part whose PRESENCE is one prop (showIcon) and whose paint is ANOTHER (type) — the base (default) combo mounts without it (antd Alert)` | CARRIED | carried | PASS |
 | 🔴 | `container-query` | at-rules | `@container (min-inline-size: 100px) { … }` | UNSUPPORTED | carried | UNDECLARED-CARRY |
 | 🔴 | `media-non-matching` | at-rules | `@media (min-width: 2000px) branch that does NOT match the pinned viewport` | UNSUPPORTED | carried | UNDECLARED-CARRY |
+| 🟢 | `margin-top-in-flow` | box | `margin-top: 12px on the SECOND child of a flex column whose parent declares no gap` | CARRIED | carried | PASS |
+| 🟢 | `padding-asymmetric-block` | box | `padding: 10px 4px 20px 4px — four sides, top and bottom DIFFERENT` | CARRIED | carried | PASS |
 | 🟢 | `page-global-star-rule` | cascade | `* { border-color: var(--cf-color-secondary) } — a PAGE-GLOBAL authored declaration, with the element's border-width and border-style declared locally and its colour reaching it only through the universal rule` | CARRIED | carried | PASS |
 | 🟢 | `page-inherited-ink` | cascade | `body { color: var(--cf-color-primary) } — the document's ink, inherited by a text-bearing part that declares no colour of its own` | CARRIED | carried | PASS |
 | 🟢 | `color-hex` | color | `color: #1976d2 (authored as hex)` | CARRIED | carried | PASS |
 | 🟢 | `color-rgb-solid` | color | `background-color: rgb(25, 118, 210)` | CARRIED | carried | PASS |
 | 🟢 | `color-rgba-alpha` | color | `background-color: rgba(25, 118, 210, 0.5)` | CARRIED | carried | PASS |
 | 🟢 | `oklch-color` | color | `background-color: oklch(0.6 0.15 250)` | CARRIED | carried | PASS |
-| 🔴 | `combobox-closed-trigger` | combobox | `the CLOSED combobox trigger - `justify-content: space-between` pushing a value label and a two-border chevron box to opposite ends of a bordered row` | CARRIED | dropped, unnamed | SILENT-LOSS |
+| 🟢 | `combobox-closed-trigger` | combobox | `the CLOSED combobox trigger - `justify-content: space-between` pushing a value label and a two-border chevron box to opposite ends of a bordered row` | CARRIED | carried | PASS |
 | 🔴 | `combobox-listbox-stacking-order` | combobox | ``z-index: 10` on an absolutely positioned listbox that OVERLAPS its trigger - explicit paint order, not document order` | REFUSED | carried | UNDECLARED-CARRY |
 | 🟢 | `combobox-option-highlighted` | combobox | `5 sibling options where ONE is HIGHLIGHTED (active descendant) by a single-SIDE border - `border-left: 3px solid rgb(37, 99, 235)` against a transparent left border on the other four` | CARRIED | carried | PASS |
 | 🟢 | `combobox-option-selected` | combobox | `5 sibling options where ONE is SELECTED - a distinct fill (rgb(219, 234, 254)) and weight among four identical siblings` | CARRIED | carried | PASS |
@@ -132,6 +116,7 @@ manifest.
 | 🟢 | `border-radius-px` | geometry | `border-radius: 6px` | CARRIED | carried | PASS |
 | 🟢 | `min-max-width` | geometry | `min-width / max-width in px` | CARRIED | carried | PASS |
 | 🟢 | `grid-child-align` | grid-alignment | `justify-self: center; align-self: end on a fixed-size child` | CARRIED | carried | PASS |
+| 🟢 | `grid-child-align-self-start` | grid-alignment | `align-self: start on a fixed-size grid child, with no justify-self declared` | CARRIED | carried | PASS |
 | 🟢 | `grid-area-empty-slot` | grid-areas | `a declared grid area with NO children (empty slot)` | CARRIED | carried | PASS |
 | 🟢 | `grid-area-nonrectangular` | grid-areas | `area occupancy that cannot tile grid-template-areas (gapped or non-rectangular per CSS rules)` | LOWERED | carried | PASS |
 | 🟢 | `grid-named-area-slots` | grid-areas | `grid-template-areas: 'header header' 'nav content' + grid-area: header on children` | CARRIED | carried | PASS |
@@ -167,6 +152,8 @@ manifest.
 | 🟢 | `nonpainting-text-display-none` | invariant | `a NON-PAINTING element carrying text (display: none)` | CARRIED | carried | PASS |
 | 🟢 | `nonpainting-text-visibility-hidden` | invariant | `a NON-PAINTING element carrying text (visibility: hidden)` | REFUSED | refused, by name | PASS |
 | 🔴 | `stage-box-equal` | invariant | `a captured box exactly equal to the STAGE box (100% × 100%)` | REFUSED | carried | UNDECLARED-CARRY |
+| 🟢 | `flex-align-items-center` | layout-flex | `display: flex; align-items: center — cross-axis centring of two children of DIFFERENT heights` | CARRIED | carried | PASS |
+| 🟢 | `flex-direction-column` | layout-flex | `display: flex; flex-direction: column — the main axis turned vertical` | CARRIED | carried | PASS |
 | 🟢 | `flex-gap` | layout | `column-gap / row-gap in px` | CARRIED | carried | PASS |
 | 🟢 | `grid-2d` | layout | `display: grid + grid-template-columns: 1fr 1fr (children AUTO-PLACED)` | CARRIED | carried | PASS |
 | 🟢 | `antd-part-transition-channel` | motion | `.cf-a { transition: background-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) } — a transition declared on a CHILD PART, not the root (antd's `motionDurationMid` on every interactive part)` | CARRIED | carried | PASS |

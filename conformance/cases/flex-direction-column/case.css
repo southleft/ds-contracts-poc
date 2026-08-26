@@ -1,0 +1,3 @@
+[data-cf="flex-direction-column"] { display: flex; flex-direction: column; width: 120px; padding: 8px; background: rgb(246, 244, 248); }
+[data-cf="flex-direction-column"] .cf-a { height: 18px; background: rgb(126, 87, 194); }
+[data-cf="flex-direction-column"] .cf-b { height: 26px; background: rgb(179, 157, 219); }

@@ -34,6 +34,8 @@
 @import '../cases/display-out-of-vocab/case.css';
 @import '../cases/em-relative-padding/case.css';
 @import '../cases/filter-blur/case.css';
+@import '../cases/flex-align-items-center/case.css';
+@import '../cases/flex-direction-column/case.css';
 @import '../cases/flex-gap/case.css';
 @import '../cases/grid-2d/case.css';
 @import '../cases/grid-absolute-overlay/case.css';
@@ -43,6 +45,7 @@
 @import '../cases/grid-auto-flow-row/case.css';
 @import '../cases/grid-bento-span-matrix/case.css';
 @import '../cases/grid-child-align/case.css';
+@import '../cases/grid-child-align-self-start/case.css';
 @import '../cases/grid-child-fill-cell/case.css';
 @import '../cases/grid-child-grow-invalid/case.css';
 @import '../cases/grid-child-text-hug/case.css';
@@ -66,6 +69,7 @@
 @import '../cases/grid-track-zero-value/case.css';
 @import '../cases/grid-tracks-mixed-fractional/case.css';
 @import '../cases/grid-two-column/case.css';
+@import '../cases/margin-top-in-flow/case.css';
 @import '../cases/mask-image/case.css';
 @import '../cases/media-non-matching/case.css';
 @import '../cases/min-max-width/case.css';
@@ -73,6 +77,7 @@
 @import '../cases/nonpainting-text-display-none/case.css';
 @import '../cases/nonpainting-text-visibility-hidden/case.css';
 @import '../cases/oklch-color/case.css';
+@import '../cases/padding-asymmetric-block/case.css';
 @import '../cases/page-global-star-rule/case.css';
 @import '../cases/page-inherited-ink/case.css';
 @import '../cases/percentage-padding/case.css';

@@ -222,6 +222,8 @@
     "gauntlet:intake": "tsx extract/figma/gauntlet/intake.ts",
     "closure:check": "tsx extract/figma/channel-closure-check.ts",
     "channel-table:check": "tsx scripts/channel-table-check.ts",
+    "channel-table:self-test": "tsx scripts/channel-table-check.ts --self-test",
+    "channel-table:rederive": "tsx scripts/channel-table-check.ts --rederive",
     "dagger:census": "tsx extract/figma/dagger-census.ts",
     "seed:gen": "tsx extract/computed/seed-gen.ts",
     "seed:verify": "for L in carbon mui tailwind; do echo \"== $L ==\"; tsx extract/computed/seed-gen.ts extract/computed/configs/$L.json --verify || FAIL=1; done; exit ${FAIL:-0}",
