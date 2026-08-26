@@ -1,0 +1,27 @@
+{
+  "feature": "table",
+  "construct": "a div-built table whose HEADER row differs from the body rows by weight (700) and fill - no table formatting context involved",
+  "why": "The one property that makes a table read as a table. Built out of flex rows on purpose, so it measures the header/body DISTINCTION rather than dying on the `display: table` wall the semantic case pins. If this fails, no data table is drawable by any route; if it passes, the div-table is a viable shape and the semantic-markup refusal is a spelling problem rather than an archetype problem.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.c.tokens.font-weight",
+  "observable": {
+    "part": "c",
+    "channel": "font-weight",
+    "capturedValue": "700"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "the header row is a frame with its own fill and a bolder text style"
+  },
+  "blockStage": true,
+  "predictedDifficulty": "easy",
+  "mustHave": [
+    "the table header row is visually distinct from the body rows",
+    "the header row's text is bolder than the body rows' text",
+    "the header row has a different background fill from the body rows",
+    "the header row sits above both body rows"
+  ],
+  "id": "table-header-row-distinct",
+  "predictedWall": null
+}

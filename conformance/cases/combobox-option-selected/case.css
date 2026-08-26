@@ -1,0 +1,3 @@
+[data-cf="combobox-option-selected"] { display: flex; flex-direction: column; width: 160px; padding: 4px; border: 1px solid rgb(203, 213, 225); background: rgb(255, 255, 255); }
+[data-cf="combobox-option-selected"] .cf-a { padding: 4px 8px; }
+[data-cf="combobox-option-selected"] .cf-b { padding: 4px 8px; background-color: rgb(219, 234, 254); font-weight: 600; }

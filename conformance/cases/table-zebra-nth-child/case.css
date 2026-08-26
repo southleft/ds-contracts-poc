@@ -1,0 +1,3 @@
+[data-cf="table-zebra-nth-child"] { display: flex; flex-direction: column; width: 160px; background: rgb(252, 252, 252); }
+[data-cf="table-zebra-nth-child"] .cf-a { padding: 4px; }
+[data-cf="table-zebra-nth-child"] .cf-a:nth-child(even) { background-color: rgb(244, 246, 248); }

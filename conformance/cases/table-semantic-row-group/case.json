@@ -1,0 +1,31 @@
+{
+  "feature": "table",
+  "construct": "real <table> markup: thead/tbody row GROUPS, whose UA display is `table-header-group` / `table-row-group` - a formatting context with no box of its own",
+  "why": "`display: table` on a div is already pinned REFUSED (display-out-of-vocab). This case is the OTHER half of the same archetype and the one every real data table actually ships: the row-group wrappers the UA stylesheet creates, which are neither `table` nor any display value in the carried vocabulary. A data table cannot be proven without knowing what happens to thead/tbody, and the answer must be a NAME, because a row group that is silently flattened takes the header/body distinction with it.",
+  "expect": "REFUSED",
+  "expectName": "table-lowering",
+  "expectWhere": "LEDGER.md (DOM-anatomy promotion)",
+  "observable": {
+    "part": "c",
+    "channel": "display",
+    "capturedValue": "table-header-group"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "AutoLayout has no table formatting context and no row-group concept"
+  },
+  "blockStage": true,
+  "predictedDifficulty": "hard",
+  "mustHave": [
+    "if the case is refused, the refusal names the table/row-group construct in LEDGER.md",
+    "nothing is emitted that claims to be a table but has lost the header/body distinction",
+    "a grader reading the receipt can tell WHICH construct was refused, not merely that something was"
+  ],
+  "id": "table-semantic-row-group",
+  "predictedWall": {
+    "code": "table-lowering",
+    "status": "EXISTING receipt name (LEDGER string, not an FC-* code). I withdraw the FC-TABLE-ROW-GROUP-FLATTENED code I proposed in the sealing commit - see below.",
+    "half": "capture (contract)",
+    "why": "AMENDED before any run. In the sealing commit I predicted the row groups would be flattened SILENTLY and proposed a new code for it. A vocabulary survey then found the mechanism I had missed: extract/computed/anatomy.ts has `lowerTableDisplay`, which handles 'table-header-group' and 'table-row-group' BY NAME and emits the receipt prefixes `table-lowering:`, `table-geometry-excluded:` and `control-fallback: no control for <thead> - span control used`. All four strings are visible verbatim in examples/mui/contracts/table.extension.json:4379-4418. So the honest prediction is now that this case PASSES - the groups are lowered to a flex stack and NAMED - and I have withdrawn the proposed code rather than leave a claim of 'no name exists' standing against a name that does. What remains genuinely un-named is narrower and I am not testing it here: `fuse.table-column-arity-disagreement` drops width AND height for EVERY cell of the whole table on any colspan, whose counter-example in the register reads 'Any colspan in the corpus disables column widths table-wide.'"
+  }
+}
