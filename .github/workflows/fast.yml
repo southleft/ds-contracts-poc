@@ -616,6 +616,16 @@ jobs:
       - name: census self-test (the gate goes red on a deleted render, a contract outside the manifest, and a pending canvas half)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run census:check -- --self-test
+      # THE THIRD COLUMN. The census measures recognisability and round-trip;
+      # both can be green on a set a designer cannot work with. The owner's
+      # bar is that a minted set must be USABLE. The gate itself
+      # (`npm run canvas:usable:check`) is RED on the eight altitude sets it
+      # has measured and is EXCLUDED by name in lane-coverage.ts until those
+      # named defects are fixed — but its FALSIFICATION is held here, so the
+      # four assertions can never quietly stop being able to fail.
+      - name: canvas:usable self-test (frozen children, a dead axis value, nothing bound, and an in-flow child positioned ABSOLUTE all go red by name)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run canvas:usable:self-test
       # The reverse direction on the two designer kits: committed REST
       # fixtures → propose → generate React+WC, twice, in memory. Holds
       # SILENT = 0 (every canvas fact carried or named), byte-idempotence,

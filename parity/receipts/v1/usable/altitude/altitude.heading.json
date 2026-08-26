@@ -1,0 +1,241 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / altitude",
+  "setNodeId": "39:6778",
+  "setName": "Heading",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:6754",
+  "variantNodeName": "Variant=Display Lg, Weight=Regular",
+  "axes": [
+    {
+      "axis": "Variant",
+      "values": [
+        "Display Lg",
+        "Display Md",
+        "Display Sm",
+        "Lg",
+        "Md",
+        "Sm"
+      ]
+    },
+    {
+      "axis": "Weight",
+      "values": [
+        "Regular",
+        "Bold"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 12,
+  "variantChildNames": [
+    "Variant=Display Lg, Weight=Regular",
+    "Variant=Display Lg, Weight=Bold",
+    "Variant=Display Md, Weight=Regular",
+    "Variant=Display Md, Weight=Bold",
+    "Variant=Display Sm, Weight=Regular",
+    "Variant=Display Sm, Weight=Bold",
+    "Variant=Lg, Weight=Regular",
+    "Variant=Lg, Weight=Bold",
+    "Variant=Md, Weight=Regular",
+    "Variant=Md, Weight=Bold",
+    "Variant=Sm, Weight=Regular",
+    "Variant=Sm, Weight=Bold"
+  ],
+  "reflow": {
+    "target": "39:6754",
+    "targetName": "Variant=Display Lg, Weight=Regular",
+    "layoutMode": "VERTICAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 328,
+      "h": 52,
+      "children": [
+        {
+          "id": "39:6755",
+          "name": "label",
+          "type": "TEXT",
+          "x": 0,
+          "y": 0,
+          "w": 179,
+          "h": 52,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 368,
+      "h": 92,
+      "children": [
+        {
+          "id": "39:6755",
+          "name": "label",
+          "type": "TEXT",
+          "x": 0,
+          "y": 0,
+          "w": 179,
+          "h": 52,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "label"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 328,
+      "h": 52
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:240",
+    "baseline": {
+      "geometry": "c693a11fba756bf4",
+      "fills": "c17c63a207d17660",
+      "text": "9cab116f086cebe4"
+    },
+    "axes": [
+      {
+        "axis": "Variant",
+        "values": [
+          {
+            "value": "Display Lg",
+            "geometry": "c693a11fba756bf4",
+            "fills": "c17c63a207d17660",
+            "text": "9cab116f086cebe4"
+          },
+          {
+            "value": "Display Md",
+            "geometry": "26a44d7609ab97c4",
+            "fills": "c17c63a207d17660",
+            "text": "9cab116f086cebe4"
+          },
+          {
+            "value": "Display Sm",
+            "geometry": "7e66e11920e438f0",
+            "fills": "c17c63a207d17660",
+            "text": "9cab116f086cebe4"
+          },
+          {
+            "value": "Lg",
+            "geometry": "5aa553d41a65a8b8",
+            "fills": "c17c63a207d17660",
+            "text": "9cab116f086cebe4"
+          },
+          {
+            "value": "Md",
+            "geometry": "167aa649e8ec9a78",
+            "fills": "c17c63a207d17660",
+            "text": "9cab116f086cebe4"
+          },
+          {
+            "value": "Sm",
+            "geometry": "a18568c2caa389bc",
+            "fills": "c17c63a207d17660",
+            "text": "9cab116f086cebe4"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Weight",
+        "values": [
+          {
+            "value": "Regular",
+            "geometry": "c693a11fba756bf4",
+            "fills": "c17c63a207d17660",
+            "text": "9cab116f086cebe4"
+          },
+          {
+            "value": "Bold",
+            "geometry": "4372cfdc920ca042",
+            "fills": "c17c63a207d17660",
+            "text": "9cab116f086cebe4"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 2,
+    "bound": 0,
+    "inferred": 2,
+    "literal": 0,
+    "byGroup": {
+      "sizing": {
+        "bound": 0,
+        "inferred": 1,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 0,
+        "inferred": 1,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Variant=Display Lg, Weight=Regular",
+      "name": "Variant=Display Lg, Weight=Regular",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 328,
+      "h": 52,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 179,
+      "h": 52,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 151,
+    "sig": "a5bbd7223f0db150"
+  },
+  "canvasAfter": {
+    "nodes": 151,
+    "sig": "a5bbd7223f0db150"
+  },
+  "canvasRestored": true
+}
