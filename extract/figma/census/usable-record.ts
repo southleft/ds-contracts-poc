@@ -1,5 +1,5 @@
 /**
- * RECORD A USABLE PROBE BATCH — `npx tsx extract/figma/census/usable-record.ts <batch.json>`
+ * RECORD A USABLE PROBE BATCH — `npx tsx extract/figma/census/usable-record.ts [--library <name>] <batch.json> [<batch.json> …]`
  *
  * The agent runs `usable-probe.plugin.js` through `figma_execute` (one call
  * per `Census / <library>` page, every set on that page in one batch) and
@@ -11,6 +11,28 @@
  * manifest row by set name (`<Name>` or `<Name> (<id>)`). A set that matches
  * no row, and a row that no set matched, are both REPORTED — a probe result
  * cannot go into the census under the wrong id, and one cannot vanish.
+ *
+ * TWO THINGS THE CANVAS FORCED (2026-08-26, the 162-row sweep):
+ *
+ * 1. `--library <name>`. The library is derived from the page name by stripping
+ *    `Census / `, which works for every page except the one holding the antd
+ *    sets — it is called `antd exam 2026-08-23`. Renaming a page on the owner's
+ *    canvas to satisfy a script is the wrong direction, so a page that is NOT
+ *    named `Census / <library>` must be given its library EXPLICITLY and is
+ *    refused by name otherwise. The flag cannot file a batch under the wrong
+ *    library: every set still has to match a row of that library and every row
+ *    of that library still has to be matched, so a mis-aimed `--library` fails
+ *    with 30-odd unmatched sets rather than writing a single wrong file.
+ *
+ * 2. SEVERAL BATCHES FOR ONE PAGE. `figma_execute` has a 30s ceiling and a
+ *    bounded result, and `Census / first-party` is 54 sets — so a page may have
+ *    to be probed in chunks. Splicing the observations together by hand would
+ *    destroy the restoration proof, which is per batch, so this script does it
+ *    and CHECKS it: the batches must be for the same page and file, each must
+ *    carry `canvasRestored`, and each batch's `canvasAfter` signature must be
+ *    the next one's `canvasBefore` — an unbroken chain from the first hash to
+ *    the last, with the same signature at both ends. If the chain breaks, the
+ *    canvas moved between chunks, nothing is written, and the break is named.
  */
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
@@ -27,16 +49,101 @@ interface Batch {
   observations: UsableObservation[];
 }
 
+const USAGE =
+  "usage: npx tsx extract/figma/census/usable-record.ts [--library <name>] <batch.json> [<batch.json> …]";
+
 function main(): number {
-  const file = process.argv[2];
-  if (!file) {
+  const argv = process.argv.slice(2);
+  let libraryFlag: string | null = null;
+  const files: string[] = [];
+  for (let i = 0; i < argv.length; i++) {
+    if (argv[i] === "--library") {
+      libraryFlag = argv[++i] ?? null;
+      if (!libraryFlag) {
+        console.error(`✘ --library needs a value\n${USAGE}`);
+        return 2;
+      }
+      continue;
+    }
+    files.push(argv[i]);
+  }
+  if (files.length === 0) {
+    console.error(USAGE);
+    return 2;
+  }
+  const batches = files.map(
+    (f) => JSON.parse(readFileSync(f, "utf8")) as Batch,
+  );
+  // Every batch must be the same page of the same file at the same probe
+  // version — chunking a page is allowed, mixing two pages is not.
+  const chainProblems: string[] = [];
+  const head = batches[0];
+  for (let i = 1; i < batches.length; i++) {
+    const b = batches[i];
+    if (b.page !== head.page)
+      chainProblems.push(
+        `${files[i]} is page ${JSON.stringify(b.page)}, ${files[0]} is ${JSON.stringify(head.page)} — one page per recording`,
+      );
+    if (b.fileKey !== head.fileKey)
+      chainProblems.push(
+        `${files[i]} was taken against file ${b.fileKey}, ${files[0]} against ${head.fileKey}`,
+      );
+    if (b.probeVersion !== head.probeVersion)
+      chainProblems.push(
+        `${files[i]} is probeVersion ${b.probeVersion}, ${files[0]} is ${head.probeVersion}`,
+      );
+  }
+  // The restoration proof has to CHAIN across the chunks, or the composite
+  // `canvasRestored` this script writes would be a claim nobody measured.
+  for (let i = 0; i < batches.length; i++) {
+    if (batches[i].canvasRestored !== true)
+      chainProblems.push(
+        `${files[i]} reports canvasRestored=${String(batches[i].canvasRestored)} (before ${batches[i].canvasBefore?.nodes}/${batches[i].canvasBefore?.sig}, after ${batches[i].canvasAfter?.nodes}/${batches[i].canvasAfter?.sig}) — the probe left the canvas altered; nothing from this batch may be committed`,
+      );
+    if (i > 0) {
+      const prev = batches[i - 1];
+      const cur = batches[i];
+      if (
+        prev.canvasAfter?.sig !== cur.canvasBefore?.sig ||
+        prev.canvasAfter?.nodes !== cur.canvasBefore?.nodes
+      )
+        chainProblems.push(
+          `the canvas changed between ${files[i - 1]} (after ${prev.canvasAfter?.nodes}/${prev.canvasAfter?.sig}) and ${files[i]} (before ${cur.canvasBefore?.nodes}/${cur.canvasBefore?.sig}) — the restoration proof does not chain, so these chunks are not one measurement of one page`,
+        );
+    }
+  }
+  const last = batches[batches.length - 1];
+  const chained =
+    head.canvasBefore?.sig === last.canvasAfter?.sig &&
+    head.canvasBefore?.nodes === last.canvasAfter?.nodes;
+  if (!chained)
+    chainProblems.push(
+      `the page is not as it was found: first batch before ${head.canvasBefore?.nodes}/${head.canvasBefore?.sig}, last batch after ${last.canvasAfter?.nodes}/${last.canvasAfter?.sig}`,
+    );
+  if (chainProblems.length > 0) {
     console.error(
-      "usage: npx tsx extract/figma/census/usable-record.ts <batch.json>",
+      `✘ ${chainProblems.length} restoration/chain problem(s) — nothing written:\n${chainProblems.map((p) => `  - ${p}`).join("\n")}`,
+    );
+    return 1;
+  }
+  const batch: Batch = {
+    page: head.page,
+    fileKey: head.fileKey,
+    probeVersion: head.probeVersion,
+    canvasBefore: head.canvasBefore,
+    canvasAfter: last.canvasAfter,
+    canvasRestored: true,
+    observations: batches.flatMap((b) => b.observations),
+  };
+  // The page names the library — unless it is not named `Census / <library>`,
+  // in which case the caller must say which library it is, by name.
+  if (libraryFlag === null && !batch.page.startsWith("Census / ")) {
+    console.error(
+      `✘ page ${JSON.stringify(batch.page)} is not named \`Census / <library>\`, so it cannot name its library — pass --library <name> (the sets and rows are cross-checked against it either way)\n${USAGE}`,
     );
     return 2;
   }
-  const batch = JSON.parse(readFileSync(file, "utf8")) as Batch;
-  const library = batch.page.replace(/^Census \/ /, "");
+  const library = libraryFlag ?? batch.page.replace(/^Census \/ /, "");
   const manifest = JSON.parse(
     readFileSync(path.join(REPO, MANIFEST_PATH), "utf8"),
   ) as CensusManifest;

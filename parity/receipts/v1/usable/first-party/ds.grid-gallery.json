@@ -1,0 +1,378 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / first-party",
+  "setNodeId": "39:23677",
+  "setName": "GridGallery",
+  "setType": "COMPONENT",
+  "variantNodeId": "39:23677",
+  "variantNodeName": "GridGallery",
+  "axes": null,
+  "axesError": null,
+  "variantChildCount": 1,
+  "variantChildNames": [
+    "GridGallery"
+  ],
+  "reflow": {
+    "target": "39:23677",
+    "targetName": "GridGallery",
+    "layoutMode": "GRID",
+    "childCount": 6,
+    "sizing": {
+      "h": "FIXED",
+      "v": "HUG",
+      "primary": "FIXED",
+      "counter": "AUTO",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 640,
+      "h": 18,
+      "children": [
+        {
+          "id": "39:23678",
+          "name": "Item 1",
+          "type": "SLOT",
+          "x": 0,
+          "y": 0,
+          "w": 202.67,
+          "h": 1,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:23679",
+          "name": "Item 2",
+          "type": "SLOT",
+          "x": 218.67,
+          "y": 0,
+          "w": 202.67,
+          "h": 1,
+          "ax": 218.67,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:23680",
+          "name": "Item 3",
+          "type": "SLOT",
+          "x": 437.33,
+          "y": 0,
+          "w": 202.67,
+          "h": 1,
+          "ax": 437.33,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:23681",
+          "name": "Item 4",
+          "type": "SLOT",
+          "x": 0,
+          "y": 17,
+          "w": 202.67,
+          "h": 1,
+          "ax": 0,
+          "ay": 17,
+          "visible": true
+        },
+        {
+          "id": "39:23682",
+          "name": "Item 5",
+          "type": "SLOT",
+          "x": 218.67,
+          "y": 17,
+          "w": 202.67,
+          "h": 1,
+          "ax": 218.67,
+          "ay": 17,
+          "visible": true
+        },
+        {
+          "id": "39:23683",
+          "name": "Item 6",
+          "type": "SLOT",
+          "x": 437.33,
+          "y": 17,
+          "w": 202.67,
+          "h": 1,
+          "ax": 437.33,
+          "ay": 17,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 680,
+      "h": 58,
+      "children": [
+        {
+          "id": "39:23678",
+          "name": "Item 1",
+          "type": "SLOT",
+          "x": 0,
+          "y": 0,
+          "w": 216,
+          "h": 1,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:23679",
+          "name": "Item 2",
+          "type": "SLOT",
+          "x": 232,
+          "y": 0,
+          "w": 216,
+          "h": 1,
+          "ax": 232,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:23680",
+          "name": "Item 3",
+          "type": "SLOT",
+          "x": 464,
+          "y": 0,
+          "w": 216,
+          "h": 1,
+          "ax": 464,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:23681",
+          "name": "Item 4",
+          "type": "SLOT",
+          "x": 0,
+          "y": 37,
+          "w": 216,
+          "h": 1,
+          "ax": 0,
+          "ay": 37,
+          "visible": true
+        },
+        {
+          "id": "39:23682",
+          "name": "Item 5",
+          "type": "SLOT",
+          "x": 232,
+          "y": 37,
+          "w": 216,
+          "h": 1,
+          "ax": 232,
+          "ay": 37,
+          "visible": true
+        },
+        {
+          "id": "39:23683",
+          "name": "Item 6",
+          "type": "SLOT",
+          "x": 464,
+          "y": 37,
+          "w": 216,
+          "h": 1,
+          "ax": 464,
+          "ay": 37,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "Item 1",
+        "dx": 0,
+        "dy": 0,
+        "dw": 13.33,
+        "dh": 0
+      },
+      {
+        "name": "Item 2",
+        "dx": 13.33,
+        "dy": 0,
+        "dw": 13.33,
+        "dh": 0
+      },
+      {
+        "name": "Item 3",
+        "dx": 26.67,
+        "dy": 0,
+        "dw": 13.33,
+        "dh": 0
+      },
+      {
+        "name": "Item 4",
+        "dx": 0,
+        "dy": 20,
+        "dw": 13.33,
+        "dh": 0
+      },
+      {
+        "name": "Item 5",
+        "dx": 13.33,
+        "dy": 20,
+        "dw": 13.33,
+        "dh": 0
+      },
+      {
+        "name": "Item 6",
+        "dx": 26.67,
+        "dy": 20,
+        "dw": 13.33,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 640,
+      "h": 18
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:3846",
+    "baseline": {
+      "geometry": "2df2ad27a47106f0",
+      "fills": "9bd61cf3f01d6e74",
+      "text": "00001505811c9dc5"
+    },
+    "axes": [],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 2,
+    "bound": 0,
+    "inferred": 1,
+    "literal": 1,
+    "byGroup": {
+      "spacing": {
+        "bound": 0,
+        "inferred": 0,
+        "literal": 1
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 1,
+        "literal": 0
+      }
+    },
+    "literalSites": [
+      "/GridGallery·itemSpacing=0"
+    ],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/GridGallery",
+      "name": "GridGallery",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "GRID",
+      "childCount": 6,
+      "w": 640,
+      "h": 18,
+      "visible": true,
+      "parentLayoutMode": null,
+      "parentType": "SECTION"
+    },
+    {
+      "path": "/Item 1[0]",
+      "name": "Item 1",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 202.67,
+      "h": 1,
+      "visible": true,
+      "parentLayoutMode": "GRID",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/Item 2[1]",
+      "name": "Item 2",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 202.67,
+      "h": 1,
+      "visible": true,
+      "parentLayoutMode": "GRID",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/Item 3[2]",
+      "name": "Item 3",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 202.67,
+      "h": 1,
+      "visible": true,
+      "parentLayoutMode": "GRID",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/Item 4[3]",
+      "name": "Item 4",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 202.67,
+      "h": 1,
+      "visible": true,
+      "parentLayoutMode": "GRID",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/Item 5[4]",
+      "name": "Item 5",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 202.67,
+      "h": 1,
+      "visible": true,
+      "parentLayoutMode": "GRID",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/Item 6[5]",
+      "name": "Item 6",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 202.67,
+      "h": 1,
+      "visible": true,
+      "parentLayoutMode": "GRID",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasAfter": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasRestored": true
+}

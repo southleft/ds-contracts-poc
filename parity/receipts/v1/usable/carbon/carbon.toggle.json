@@ -1,0 +1,299 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / carbon",
+  "setNodeId": "39:8867",
+  "setName": "Toggle",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:8835",
+  "variantNodeName": "Toggled=Untoggled, State=Default",
+  "axes": [
+    {
+      "axis": "Toggled",
+      "values": [
+        "Untoggled",
+        "Toggled"
+      ]
+    },
+    {
+      "axis": "State",
+      "values": [
+        "Default",
+        "Disabled"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 4,
+  "variantChildNames": [
+    "Toggled=Untoggled, State=Default",
+    "Toggled=Toggled, State=Default",
+    "Toggled=Untoggled, State=Disabled",
+    "Toggled=Toggled, State=Disabled"
+  ],
+  "reflow": {
+    "target": "39:8835",
+    "targetName": "Toggled=Untoggled, State=Default",
+    "layoutMode": "VERTICAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 75.47,
+      "h": 57.98,
+      "children": [
+        {
+          "id": "39:8836",
+          "name": "toggle__label",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 75.47,
+          "h": 56,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 115.47,
+      "h": 97.98,
+      "children": [
+        {
+          "id": "39:8836",
+          "name": "toggle__label",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 115.47,
+          "h": 56,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "toggle__label",
+        "dx": 0,
+        "dy": 0,
+        "dw": 40,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 75.47,
+      "h": 57.98
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:852",
+    "baseline": {
+      "geometry": "d15d88abcf8a06c0",
+      "fills": "26a6fd2f11b11064",
+      "text": "993859534b445808"
+    },
+    "axes": [
+      {
+        "axis": "Toggled",
+        "values": [
+          {
+            "value": "Untoggled",
+            "geometry": "d15d88abcf8a06c0",
+            "fills": "26a6fd2f11b11064",
+            "text": "993859534b445808"
+          },
+          {
+            "value": "Toggled",
+            "geometry": "c0e55ff70bc9ab84",
+            "fills": "e941e3cd92e6ee20",
+            "text": "993859534b445808"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "State",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "d15d88abcf8a06c0",
+            "fills": "26a6fd2f11b11064",
+            "text": "993859534b445808"
+          },
+          {
+            "value": "Disabled",
+            "geometry": "d15d88abcf8a06c0",
+            "fills": "dacb657579be780c",
+            "text": "993859534b445808"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 18,
+    "bound": 12,
+    "inferred": 6,
+    "literal": 0,
+    "byGroup": {
+      "sizing": {
+        "bound": 4,
+        "inferred": 4,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 2,
+        "inferred": 2,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Toggled=Untoggled, State=Default",
+      "name": "Toggled=Untoggled, State=Default",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 75.47,
+      "h": 57.98,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/toggle__label[0]",
+      "name": "toggle__label",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 2,
+      "w": 75.47,
+      "h": 56,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/toggle__label[0]/label[0]",
+      "name": "label",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 40,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/toggle__label[0]/label[0]/Toggle[0]",
+      "name": "Toggle",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 40,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/toggle__label[0]/toggle__appearance[1]",
+      "name": "toggle__appearance",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 75.47,
+      "h": 24,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/toggle__label[0]/toggle__appearance[1]/toggle__switch[0]",
+      "name": "toggle__switch",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 48,
+      "h": 24,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/toggle__label[0]/toggle__appearance[1]/toggle__switch[0]/toggle__switch-before[0]",
+      "name": "toggle__switch-before",
+      "type": "ELLIPSE",
+      "layoutPositioning": "ABSOLUTE",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 18,
+      "h": 18,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/toggle__label[0]/toggle__appearance[1]/label-2[1]",
+      "name": "label-2",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 22,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 793,
+    "sig": "7d6ced592fbfa72c"
+  },
+  "canvasAfter": {
+    "nodes": 793,
+    "sig": "7d6ced592fbfa72c"
+  },
+  "canvasRestored": true
+}

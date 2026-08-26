@@ -1,0 +1,189 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / first-party",
+  "setNodeId": "39:23254",
+  "setName": "Avatar (ds.avatar)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:23250",
+  "variantNodeName": "Size=Small",
+  "axes": [
+    {
+      "axis": "Size",
+      "values": [
+        "Small",
+        "Medium"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 2,
+  "variantChildNames": [
+    "Size=Small",
+    "Size=Medium"
+  ],
+  "reflow": {
+    "target": "39:23250",
+    "targetName": "Size=Small",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "CENTER",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 24,
+      "h": 24,
+      "children": [
+        {
+          "id": "39:23251",
+          "name": "label",
+          "type": "TEXT",
+          "x": 3.5,
+          "y": 4.5,
+          "w": 17,
+          "h": 15,
+          "ax": 3.5,
+          "ay": 4.5,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 64,
+      "h": 64,
+      "children": [
+        {
+          "id": "39:23251",
+          "name": "label",
+          "type": "TEXT",
+          "x": 23.5,
+          "y": 24.5,
+          "w": 17,
+          "h": 15,
+          "ax": 23.5,
+          "ay": 24.5,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "label",
+        "dx": 20,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 24,
+      "h": 24
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:3560",
+    "baseline": {
+      "geometry": "cb7102359919e440",
+      "fills": "493e0c7d461c7957",
+      "text": "edbff604b02b7b86"
+    },
+    "axes": [
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Small",
+            "geometry": "cb7102359919e440",
+            "fills": "493e0c7d461c7957",
+            "text": "edbff604b02b7b86"
+          },
+          {
+            "value": "Medium",
+            "geometry": "ac1ded1ff775bf48",
+            "fills": "493e0c7d461c7957",
+            "text": "edbff604b02b7b86"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 8,
+    "bound": 6,
+    "inferred": 2,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 2,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Size=Small",
+      "name": "Size=Small",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 24,
+      "h": 24,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 17,
+      "h": 15,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasAfter": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasRestored": true
+}

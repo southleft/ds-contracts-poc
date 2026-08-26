@@ -1,0 +1,311 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / astryx",
+  "setNodeId": "39:14051",
+  "setName": "Banner",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:13987",
+  "variantNodeName": "Status=Info, Container=Card",
+  "axes": [
+    {
+      "axis": "Status",
+      "values": [
+        "Info",
+        "Warning",
+        "Error",
+        "Success"
+      ]
+    },
+    {
+      "axis": "Container",
+      "values": [
+        "Card",
+        "Section"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 8,
+  "variantChildNames": [
+    "Status=Info, Container=Card",
+    "Status=Info, Container=Section",
+    "Status=Warning, Container=Card",
+    "Status=Warning, Container=Section",
+    "Status=Error, Container=Card",
+    "Status=Error, Container=Section",
+    "Status=Success, Container=Card",
+    "Status=Success, Container=Section"
+  ],
+  "reflow": {
+    "target": "39:13987",
+    "targetName": "Status=Info, Container=Card",
+    "layoutMode": "VERTICAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 299,
+      "h": 64,
+      "children": [
+        {
+          "id": "39:13988",
+          "name": "header",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 299,
+          "h": 64,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 339,
+      "h": 104,
+      "children": [
+        {
+          "id": "39:13988",
+          "name": "header",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 299,
+          "h": 64,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "header"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 299,
+      "h": 64
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:1008",
+    "baseline": {
+      "geometry": "ef2225321b76b148",
+      "fills": "4ea03cc4734c44e7",
+      "text": "fdf5d428f29de93c"
+    },
+    "axes": [
+      {
+        "axis": "Status",
+        "values": [
+          {
+            "value": "Info",
+            "geometry": "ef2225321b76b148",
+            "fills": "4ea03cc4734c44e7",
+            "text": "fdf5d428f29de93c"
+          },
+          {
+            "value": "Warning",
+            "geometry": "d20a277bb710e130",
+            "fills": "5859f2ff39e1dc40",
+            "text": "fdf5d428f29de93c"
+          },
+          {
+            "value": "Error",
+            "geometry": "204d4a32321084ba",
+            "fills": "7c1685a45f7c56e4",
+            "text": "fdf5d428f29de93c"
+          },
+          {
+            "value": "Success",
+            "geometry": "0108cf12be5c4ef0",
+            "fills": "b048bf57788fbaf0",
+            "text": "fdf5d428f29de93c"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Container",
+        "values": [
+          {
+            "value": "Card",
+            "geometry": "ef2225321b76b148",
+            "fills": "4ea03cc4734c44e7",
+            "text": "fdf5d428f29de93c"
+          },
+          {
+            "value": "Section",
+            "geometry": "84a1b701007bf264",
+            "fills": "4ea03cc4734c44e7",
+            "text": "fdf5d428f29de93c"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 18,
+    "bound": 9,
+    "inferred": 9,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 5,
+        "inferred": 1,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 0,
+        "inferred": 4,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 4,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Status=Info, Container=Card",
+      "name": "Status=Info, Container=Card",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 299,
+      "h": 64,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/header[0]",
+      "name": "header",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 299,
+      "h": 64,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/header[0]/iconWrapper[0]",
+      "name": "iconWrapper",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 20,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/header[0]/iconWrapper[0]/iconInfo[0]",
+      "name": "iconInfo",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 20,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/header[0]/iconWrapper[0]/iconInfo[0]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 15,
+      "h": 15,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/header[0]/headerContent[1]",
+      "name": "headerContent",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 2,
+      "w": 239,
+      "h": 40,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/header[0]/headerContent[1]/title[0]",
+      "name": "title",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 239,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/header[0]/headerContent[1]/description[1]",
+      "name": "description",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 191,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 440,
+    "sig": "8f17151526c142bc"
+  },
+  "canvasAfter": {
+    "nodes": 440,
+    "sig": "8f17151526c142bc"
+  },
+  "canvasRestored": true
+}

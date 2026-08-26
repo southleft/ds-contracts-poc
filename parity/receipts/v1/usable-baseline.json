@@ -2,11 +2,506 @@
   "_marker": "CANVAS-USABLE BASELINE — every named failure of the four usability assertions (reflow, variant switching, token binding, no faked layout) that reproduces on the sets probed today, pinned by library/id/assertion/code/subject/detail. A failure this file does not pin is a NEW RED and fails the gate; a pinned failure that stops reproducing is FIXED and must be re-recorded with its cause named, so a burn-down can never be banked silently; a pin whose set has left the census or is no longer probed is STALE. `detail` carries the discriminating payload — which children froze, which axis values collapsed, which channels are literal — so a pinned defect that CHANGES SHAPE fails as a new red rather than hiding inside an old pin. NOT a list of acceptable defects: it is the burn-down queue, written up in parity/receipts/v1/CANVAS-USABLE.md. Re-record deliberately with `npm run canvas:usable:check -- --write-baseline` and say what moved. Verified in the fast lane by `npm run canvas:usable:check`.",
   "recordedAt": "2026-08-26",
   "totals": {
-    "probed": 8,
-    "clean": 3,
-    "pinned": 5
+    "probed": 170,
+    "clean": 39,
+    "pinned": 199
   },
   "rows": [
+    {
+      "library": "first-party",
+      "id": "ds.accordion-item",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "State=Closed",
+      "detail": "3/20; /trigger[0]/chevron[0]/Vector[0]·height=6.3, /trigger[0]/chevron[0]/Vector[0]·strokeWeight=1.0499999523162842, /trigger[0]/chevron[0]/Vector[0]·width=3.15",
+      "why": "3 of 20 carrying channels on this set are raw numbers with no variable behind them (13 bound + 4 inferred hold the rest). 3 are on a reified SVG `Vector` (/trigger[0]/chevron[0]/Vector[0]·strokeWeight=1.0499999523162842, /trigger[0]/chevron[0]/Vector[0]·width=3.15, /trigger[0]/chevron[0]/Vector[0]·height=6.3): the icon path's own box and stroke weight are emitted as measured pixels, so the icon cannot follow an icon-size or stroke token. Fix is in the SVG reification path of the forward emitter — the same class as the pinned `altitude.iconclose`. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.badge",
+      "assertion": "variants",
+      "code": "DEAD-AXIS-VALUE",
+      "subject": "Badge (ds.badge)/Variant",
+      "detail": "Danger≡Error",
+      "why": "Switching `Variant` renders Danger≡Error identically — geometry, fills and text all hash equal — leaving 4 of 5 values (Info, Success, Warning, Danger) that actually draw differently. The axis exists on the canvas but the declarations that distinguish these values never became a drawn difference — the emitter minted the cells from the same resolved style. Fix belongs in the forward emitter's per-cell style resolution for this axis."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.banner",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Status=Info, Container=Card",
+      "detail": "1/3 frozen; statusIcon",
+      "why": "Growing the variant +40×+40 re-laid 2/3 (body, endArea) and left 1 behind. The container is HORIZONTAL FIXED×HUG, primaryAxisAlignItems MIN. `statusIcon` (FRAME 20×20) keeps its intrinsic box in a MIN stack: the container simply gains slack and nothing stretches or re-aligns. Fix is the layout-family lowering rule (fill/stretch sizing and alignment from the source CSS), not a nudge to this baseline."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.banner",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Status=Info, Container=Card",
+      "detail": "3/38; /statusIcon[0]/Vector[1]·height=4.5, /statusIcon[0]/Vector[2]·height=1.8, /statusIcon[0]/Vector[2]·width=1.8",
+      "why": "3 of 38 carrying channels on this set are raw numbers with no variable behind them (19 bound + 16 inferred hold the rest). 3 are on a reified SVG `Vector` (/statusIcon[0]/Vector[1]·height=4.5, /statusIcon[0]/Vector[2]·width=1.8, /statusIcon[0]/Vector[2]·height=1.8): the icon path's own box and stroke weight are emitted as measured pixels, so the icon cannot follow an icon-size or stroke token. Fix is in the SVG reification path of the forward emitter — the same class as the pinned `altitude.iconclose`. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.banner",
+      "assertion": "fakeLayout",
+      "code": "FAKE-STACK",
+      "subject": "Status=Info, Container=Card/statusIcon[0]",
+      "detail": "layoutMode NONE over 3 in-flow children",
+      "why": "`/statusIcon[0]` (FRAME) is minted `layoutMode: NONE` over 3 children whose contract parts are in flow; the row is held together by x/y coordinates, so nothing inside it re-lays when anything changes. Fix is in the forward emitter: this container's source display (flex/block) has to become an auto-layout mode."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.banner",
+      "assertion": "fakeLayout",
+      "code": "FAKE-STACK",
+      "subject": "Status=Info, Container=Card/endArea[2]/close[1]",
+      "detail": "layoutMode NONE over 2 in-flow children",
+      "why": "`/endArea[2]/close[1]` (FRAME) is minted `layoutMode: NONE` over 2 children whose contract parts are in flow; the row is held together by x/y coordinates, so nothing inside it re-lays when anything changes. Fix is in the forward emitter: this container's source display (flex/block) has to become an auto-layout mode."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.bento-grid",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "BentoGrid",
+      "detail": "1/3; /BentoGrid·itemSpacing=0",
+      "why": "1 of 3 carrying channels on this set is a raw number with no variable behind it (0 bound + 2 inferred hold the rest). 1 is the grid gap (/BentoGrid·itemSpacing=0) — a GRID root whose `itemSpacing` is an unbound 0 while the real gutters sit in the track geometry. Fix is the grid lowering: `gap` has to be bound on the grid container. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.blockquote",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Blockquote",
+      "detail": "0/2 responded; frozen Children, Cite",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: all 2 children kept their exact boxes. The container is VERTICAL HUG×HUG, primaryAxisAlignItems MIN. `Children` (SLOT 1×1), `Cite` (SLOT 1×1) are empty SLOTs minted at 1×1: a slot with no content has no box to stretch, so it can never respond to a resize. Fix is in the forward emitter's slot minting — an empty slot should either fill its axis or not be minted into the flow at all."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.breadcrumb-item",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "BreadcrumbItem",
+      "detail": "3/8; /separatorIcon[0]/Vector[0]·height=5.4, /separatorIcon[0]/Vector[0]·strokeWeight=0.9000000357627869, /separatorIcon[0]/Vector[0]·width=2.7",
+      "why": "3 of 8 carrying channels on this set are raw numbers with no variable behind them (3 bound + 2 inferred hold the rest). 3 are on a reified SVG `Vector` (/separatorIcon[0]/Vector[0]·strokeWeight=0.9000000357627869, /separatorIcon[0]/Vector[0]·width=2.7, /separatorIcon[0]/Vector[0]·height=5.4): the icon path's own box and stroke weight are emitted as measured pixels, so the icon cannot follow an icon-size or stroke token. Fix is in the SVG reification path of the forward emitter — the same class as the pinned `altitude.iconclose`. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.breadcrumbs",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Breadcrumbs (ds.breadcrumbs)",
+      "detail": "9/26; /Children[0]/BreadcrumbItem[0]/separatorIcon[0]/Vector[0]·height=5.4, /Children[0]/BreadcrumbItem[0]/separatorIcon[0]/Vector[0]·strokeWeight=0.9000000357627869, /Children[0]/BreadcrumbItem[0]/separatorIcon[0]/Vector[0]·width=2.7, /Children[0]/BreadcrumbItem[1]/separatorIcon[0]/Vector[0]·height=5.4, /Children[0]/BreadcrumbItem[1]/separatorIcon[0]/Vector[0]·strokeWeight=0.9000000357627869, /Children[0]/BreadcrumbItem[1]/separatorIcon[0]/Vector[0]·width=2.7, /Children[0]/BreadcrumbItem[2]/separatorIcon[0]/Vector[0]·height=5.4, /Children[0]/BreadcrumbItem[2]/separatorIcon[0]/Vector[0]·strokeWeight=0.9000000357627869, /Children[0]/BreadcrumbItem[2]/separatorIcon[0]/Vector[0]·width=2.7",
+      "why": "9 of 26 carrying channels on this set are raw numbers with no variable behind them (11 bound + 6 inferred hold the rest). 9 are on a reified SVG `Vector` (/Children[0]/BreadcrumbItem[0]/separatorIcon[0]/Vector[0]·strokeWeight=0.9000000357627869, /Children[0]/BreadcrumbItem[0]/separatorIcon[0]/Vector[0]·width=2.7, /Children[0]/BreadcrumbItem[0]/separatorIcon[0]/Vector[0]·height=5.4, …): the icon path's own box and stroke weight are emitted as measured pixels, so the icon cannot follow an icon-size or stroke token. Fix is in the SVG reification path of the forward emitter — the same class as the pinned `altitude.iconclose`. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.button",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Variant=Primary, Size=Medium, State=Default",
+      "detail": "1/2 frozen; loadingSpinner",
+      "why": "Growing the variant +40×+40 re-laid 1/2 (label) and left 1 behind. The container is HORIZONTAL HUG×HUG, primaryAxisAlignItems CENTER. `loadingSpinner` (FRAME 14×14) is minted visible:false; Figma keeps an invisible child out of auto-layout, so it neither draws nor re-lays. Fix is in the forward emitter: an optional part that is off in this cell should be a component property (or omitted), not an invisible node parked in the stack."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.button",
+      "assertion": "variants",
+      "code": "DEAD-AXIS-VALUE",
+      "subject": "Button (ds.button)/State",
+      "detail": "Default≡Disabled",
+      "why": "Switching `State` renders Default≡Disabled identically — geometry, fills and text all hash equal — leaving 3 of 4 values (Default, Hover, Focus Visible) that actually draw differently. The collapsed values are interaction states, and the state plane carries no drawn difference here: whatever the source expresses on `:hover`/`:focus-visible`/`:active`/`[disabled]` (a ring, a shadow, an opacity) is not reaching the canvas. Fix belongs in the state-preview emitter — the state cell is minted from the same declarations as the default cell."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.button",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Variant=Primary, Size=Medium, State=Default",
+      "detail": "2/17; /loadingSpinner[0]/Vector[0]·height=5.25, /loadingSpinner[0]/Vector[0]·width=5.25",
+      "why": "2 of 17 carrying channels on this set are raw numbers with no variable behind them (12 bound + 3 inferred hold the rest). 2 are on a reified SVG `Vector` (/loadingSpinner[0]/Vector[0]·width=5.25, /loadingSpinner[0]/Vector[0]·height=5.25): the icon path's own box and stroke weight are emitted as measured pixels, so the icon cannot follow an icon-size or stroke token. Fix is in the SVG reification path of the forward emitter — the same class as the pinned `altitude.iconclose`. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.card",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Card (ds.card)",
+      "detail": "1/3 frozen; Actions",
+      "why": "Growing the variant +40×+40 re-laid 2/3 (header, Body) and left 1 behind. The container is VERTICAL FIXED×HUG, primaryAxisAlignItems MIN. `Actions` (SLOT 318×16) is an empty SLOT minted at 1×1: a slot with no content has no box to stretch, so it can never respond to a resize. Fix is in the forward emitter's slot minting — an empty slot should either fill its axis or not be minted into the flow at all."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.card",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Card (ds.card)",
+      "detail": "1/34; /Actions[2]·width=318",
+      "why": "1 of 34 carrying channels on this set is a raw number with no variable behind it (28 bound + 5 inferred hold the rest). 1 is a fixed box dimension (/Actions[2]·width=318) minted from the captured geometry rather than from a sizing token. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.chat-message-metadata",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Status=Sent",
+      "detail": "1/3 frozen; Footer",
+      "why": "Growing the variant +40×+40 re-laid 2/3 (statusIcon, timestampText) and left 1 behind. The container is HORIZONTAL HUG×HUG, primaryAxisAlignItems MIN. `Footer` (SLOT 1×1) is an empty SLOT minted at 1×1: a slot with no content has no box to stretch, so it can never respond to a resize. Fix is in the forward emitter's slot minting — an empty slot should either fill its axis or not be minted into the flow at all."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.chat-message-metadata",
+      "assertion": "variants",
+      "code": "DEAD-AXIS-VALUE",
+      "subject": "ChatMessageMetadata/Status",
+      "detail": "Delivered≡Read",
+      "why": "Switching `Status` renders Delivered≡Read identically — geometry, fills and text all hash equal — leaving 4 of 5 values (Sent, Sending, Delivered, Error) that actually draw differently. The axis exists on the canvas but the declarations that distinguish these values never became a drawn difference — the emitter minted the cells from the same resolved style. Fix belongs in the forward emitter's per-cell style resolution for this axis."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.chat-message-metadata",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Status=Sent",
+      "detail": "3/9; /statusIcon[0]/Vector[0]·height=4.56, /statusIcon[0]/Vector[0]·strokeWeight=0.9000000357627869, /statusIcon[0]/Vector[0]·width=6.48",
+      "why": "3 of 9 carrying channels on this set are raw numbers with no variable behind them (4 bound + 2 inferred hold the rest). 3 are on a reified SVG `Vector` (/statusIcon[0]/Vector[0]·strokeWeight=0.9000000357627869, /statusIcon[0]/Vector[0]·width=6.48, /statusIcon[0]/Vector[0]·height=4.56): the icon path's own box and stroke weight are emitted as measured pixels, so the icon cannot follow an icon-size or stroke token. Fix is in the SVG reification path of the forward emitter — the same class as the pinned `altitude.iconclose`. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.chat-message",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Sender=Assistant",
+      "detail": "1/2 frozen; Avatar",
+      "why": "Growing the variant +40×+40 re-laid 1/2 (body) and left 1 behind. The container is HORIZONTAL FIXED×HUG, primaryAxisAlignItems MIN. `Avatar` (SLOT 1×1) is an empty SLOT minted at 1×1: a slot with no content has no box to stretch, so it can never respond to a resize. Fix is in the forward emitter's slot minting — an empty slot should either fill its axis or not be minted into the flow at all."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.chat-system-message",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Variant=Default",
+      "detail": "1/2 frozen; Icon",
+      "why": "Growing the variant +40×+40 re-laid 1/2 (messageText) and left 1 behind. The container is HORIZONTAL FIXED×HUG, primaryAxisAlignItems CENTER. `Icon` (SLOT 1×1) is an empty SLOT minted at 1×1: a slot with no content has no box to stretch, so it can never respond to a resize. Fix is in the forward emitter's slot minting — an empty slot should either fill its axis or not be minted into the flow at all."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.checkbox",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Value=Unchecked, Size=Medium",
+      "detail": "1/2 frozen; box",
+      "why": "Growing the variant +40×+40 re-laid 1/2 (textCol) and left 1 behind. The container is HORIZONTAL HUG×HUG, primaryAxisAlignItems MIN. `box` (FRAME 20×20) keeps its intrinsic box in a MIN stack: the container simply gains slack and nothing stretches or re-aligns. Fix is the layout-family lowering rule (fill/stretch sizing and alignment from the source CSS), not a nudge to this baseline."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.empty-state",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "EmptyState",
+      "detail": "2/4 frozen; Actions, Icon",
+      "why": "Growing the variant +40×+40 re-laid 2/4 (title, descriptionText) and left 2 behind. The container is VERTICAL FIXED×HUG, primaryAxisAlignItems MIN. `Icon` (SLOT 1×1), `Actions` (SLOT 1×8) are empty SLOTs minted at 1×1: a slot with no content has no box to stretch, so it can never respond to a resize. Fix is in the forward emitter's slot minting — an empty slot should either fill its axis or not be minted into the flow at all."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.field",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Field",
+      "detail": "1/3 frozen; descriptionText",
+      "why": "Growing the variant +40×+40 re-laid 2/3 (labelRow, Children) and left 1 behind. The container is VERTICAL FIXED×HUG, primaryAxisAlignItems MIN. `descriptionText` (TEXT 240×17) keeps its intrinsic box in a MIN stack: the container simply gains slack and nothing stretches or re-aligns. Fix is the layout-family lowering rule (fill/stretch sizing and alignment from the source CSS), not a nudge to this baseline."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.field",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Field",
+      "detail": "8/19; /labelRow[0]/requiredMark[1]/Vector[0]·height=5.5, /labelRow[0]/requiredMark[1]/Vector[0]·strokeWeight=0.75, /labelRow[0]/requiredMark[1]/Vector[1]·height=2.8, /labelRow[0]/requiredMark[1]/Vector[1]·strokeWeight=0.75, /labelRow[0]/requiredMark[1]/Vector[1]·width=4.8, /labelRow[0]/requiredMark[1]/Vector[2]·height=2.8, /labelRow[0]/requiredMark[1]/Vector[2]·strokeWeight=0.75, /labelRow[0]/requiredMark[1]/Vector[2]·width=4.8",
+      "why": "8 of 19 carrying channels on this set are raw numbers with no variable behind them (7 bound + 4 inferred hold the rest). 8 are on a reified SVG `Vector` (/labelRow[0]/requiredMark[1]/Vector[0]·strokeWeight=0.75, /labelRow[0]/requiredMark[1]/Vector[0]·height=5.5, /labelRow[0]/requiredMark[1]/Vector[1]·strokeWeight=0.75, …): the icon path's own box and stroke weight are emitted as measured pixels, so the icon cannot follow an icon-size or stroke token. Fix is in the SVG reification path of the forward emitter — the same class as the pinned `altitude.iconclose`. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.field",
+      "assertion": "fakeLayout",
+      "code": "FAKE-STACK",
+      "subject": "Field/labelRow[0]/requiredMark[1]",
+      "detail": "layoutMode NONE over 3 in-flow children",
+      "why": "`/labelRow[0]/requiredMark[1]` (FRAME) is minted `layoutMode: NONE` over 3 children whose contract parts are in flow; the row is held together by x/y coordinates, so nothing inside it re-lays when anything changes. Fix is in the forward emitter: this container's source display (flex/block) has to become an auto-layout mode."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.grid-gallery",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "GridGallery",
+      "detail": "1/2; /GridGallery·itemSpacing=0",
+      "why": "1 of 2 carrying channels on this set is a raw number with no variable behind it (0 bound + 1 inferred hold the rest). 1 is the grid gap (/GridGallery·itemSpacing=0) — a GRID root whose `itemSpacing` is an unbound 0 while the real gutters sit in the track geometry. Fix is the grid lowering: `gap` has to be bound on the grid container. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.heading",
+      "assertion": "variants",
+      "code": "DEAD-AXIS",
+      "subject": "Heading (ds.heading)/Level",
+      "detail": "H2≡H1, H2≡H3, H2≡H4, H2≡H5, H2≡H6",
+      "why": "Every value of `Level` (H2, H1, H3, H4, H5, H6) renders the same instance — geometry, fills AND text all hash equal — so the axis is a row of identical children a designer can switch between and see nothing. The axis exists on the canvas but the declarations that distinguish these values never became a drawn difference — the emitter minted the cells from the same resolved style. Fix belongs in the forward emitter's per-cell style resolution for this axis."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.list-item",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "ListItem",
+      "detail": "2/3 frozen; EndContent, StartContent",
+      "why": "Growing the variant +40×+40 re-laid 1/3 (textCol) and left 2 behind. The container is HORIZONTAL HUG×HUG, primaryAxisAlignItems MIN. `StartContent` (SLOT 1×1), `EndContent` (SLOT 1×1) are empty SLOTs minted at 1×1: a slot with no content has no box to stretch, so it can never respond to a resize. Fix is in the forward emitter's slot minting — an empty slot should either fill its axis or not be minted into the flow at all."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.metadata-list-item",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "MetadataListItem",
+      "detail": "0/3 responded; frozen Icon, labelText, valueText",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: all 3 children kept their exact boxes. The container is HORIZONTAL HUG×HUG, primaryAxisAlignItems MIN. `Icon` (SLOT 1×1) is an empty SLOT minted at 1×1: a slot with no content has no box to stretch, so it can never respond to a resize. Fix is in the forward emitter's slot minting — an empty slot should either fill its axis or not be minted into the flow at all. `labelText` (FRAME 120×17), `valueText` (TEXT 38×17) are exactly as wide/tall as the container was and were fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside them — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.metadata-list",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "MetadataList",
+      "detail": "1/2 frozen; titleText",
+      "why": "Growing the variant +40×+40 re-laid 1/2 (Children) and left 1 behind. The container is VERTICAL FIXED×HUG, primaryAxisAlignItems MIN. `titleText` (TEXT 47×17) keeps its intrinsic box in a MIN stack: the container simply gains slack and nothing stretches or re-aligns. Fix is the layout-family lowering rule (fill/stretch sizing and alignment from the source CSS), not a nudge to this baseline."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.page-shell",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "PageShell",
+      "detail": "1/3; /PageShell·itemSpacing=0",
+      "why": "1 of 3 carrying channels on this set is a raw number with no variable behind it (0 bound + 2 inferred hold the rest). 1 is the grid gap (/PageShell·itemSpacing=0) — a GRID root whose `itemSpacing` is an unbound 0 while the real gutters sit in the track geometry. Fix is the grid lowering: `gap` has to be bound on the grid container. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.pagination",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Variant=Pages",
+      "detail": "6/52; /nextButton[2]/Vector[0]·height=6.3, /nextButton[2]/Vector[0]·strokeWeight=1.0499999523162842, /nextButton[2]/Vector[0]·width=3.15, /prevButton[0]/Vector[0]·height=6.3, /prevButton[0]/Vector[0]·strokeWeight=1.0499999523162842, /prevButton[0]/Vector[0]·width=3.15",
+      "why": "6 of 52 carrying channels on this set are raw numbers with no variable behind them (42 bound + 4 inferred hold the rest). 6 are on a reified SVG `Vector` (/prevButton[0]/Vector[0]·strokeWeight=1.0499999523162842, /prevButton[0]/Vector[0]·width=3.15, /prevButton[0]/Vector[0]·height=6.3, …): the icon path's own box and stroke weight are emitted as measured pixels, so the icon cannot follow an icon-size or stroke token. Fix is in the SVG reification path of the forward emitter — the same class as the pinned `altitude.iconclose`. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.progress-bar",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Variant=Accent",
+      "detail": "0/1 responded; frozen track",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: the single child kept its exact box. The container is VERTICAL FIXED×HUG, primaryAxisAlignItems MIN. `track` (FRAME 320×8) is exactly as wide/tall as the container was and was fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside it — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.progress-bar",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Variant=Accent",
+      "detail": "1/15; /track[0]/fill[0]·width=192",
+      "why": "1 of 15 carrying channels on this set is a raw number with no variable behind it (13 bound + 1 inferred hold the rest). 1 is a value-carrying bar width (/track[0]/fill[0]·width=192): the component's current value is baked in as a pixel width, so whatever the source expressed it with (a percentage of the track, a transform) did not survive lowering and no variable can move it. Fix is the percentage/value lowering rule. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.side-nav-item",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "State=Default",
+      "detail": "2/3 frozen; EndContent, Icon",
+      "why": "Growing the variant +40×+40 re-laid 1/3 (labelText) and left 2 behind. The container is HORIZONTAL FIXED×HUG, primaryAxisAlignItems MIN. `Icon` (SLOT 1×1), `EndContent` (SLOT 1×1) are empty SLOTs minted at 1×1: a slot with no content has no box to stretch, so it can never respond to a resize. Fix is in the forward emitter's slot minting — an empty slot should either fill its axis or not be minted into the flow at all."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.sidebar-layout",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "SidebarLayout",
+      "detail": "1/2 frozen; Sidebar",
+      "why": "Growing the variant +40×+40 re-laid 1/2 (Main) and left 1 behind. The container is GRID FIXED×HUG, primaryAxisAlignItems MIN. `Sidebar` (SLOT 240×1) is an empty SLOT minted at 1×1: a slot with no content has no box to stretch, so it can never respond to a resize. Fix is in the forward emitter's slot minting — an empty slot should either fill its axis or not be minted into the flow at all."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.sidebar-layout",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "SidebarLayout",
+      "detail": "1/2; /SidebarLayout·itemSpacing=0",
+      "why": "1 of 2 carrying channels on this set is a raw number with no variable behind it (0 bound + 1 inferred hold the rest). 1 is the grid gap (/SidebarLayout·itemSpacing=0) — a GRID root whose `itemSpacing` is an unbound 0 while the real gutters sit in the track geometry. Fix is the grid lowering: `gap` has to be bound on the grid container. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.skeleton",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Variant=Text",
+      "detail": "0/1 responded; frozen block",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: the single child kept its exact box. The container is HORIZONTAL HUG×HUG, primaryAxisAlignItems MIN. `block` (FRAME 120×12) is exactly as wide/tall as the container was and was fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside it — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.slider",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Slider (ds.slider)",
+      "detail": "0/2 responded; frozen labelText, trackRow",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: all 2 children kept their exact boxes. The container is VERTICAL FIXED×HUG, primaryAxisAlignItems MIN. `trackRow` (FRAME 320×16) is exactly as wide/tall as the container was and was fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside it — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision. `labelText` (TEXT 50×17) keeps its intrinsic box in a MIN stack: the container simply gains slack and nothing stretches or re-aligns. Fix is the layout-family lowering rule (fill/stretch sizing and alignment from the source CSS), not a nudge to this baseline."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.switch",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Value=Off",
+      "detail": "1/2 frozen; track",
+      "why": "Growing the variant +40×+40 re-laid 1/2 (textCol) and left 1 behind. The container is HORIZONTAL HUG×HUG, primaryAxisAlignItems MIN. `track` (FRAME 32×20) keeps its intrinsic box in a MIN stack: the container simply gains slack and nothing stretches or re-aligns. Fix is the layout-family lowering rule (fill/stretch sizing and alignment from the source CSS), not a nudge to this baseline."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.tab",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "State=Default",
+      "detail": "2/3 frozen; EndContent, Icon",
+      "why": "Growing the variant +40×+40 re-laid 1/3 (labelText) and left 2 behind. The container is HORIZONTAL HUG×HUG, primaryAxisAlignItems MIN. `Icon` (SLOT 1×1), `EndContent` (SLOT 1×1) are empty SLOTs minted at 1×1: a slot with no content has no box to stretch, so it can never respond to a resize. Fix is in the forward emitter's slot minting — an empty slot should either fill its axis or not be minted into the flow at all."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.text-area",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Size=Medium",
+      "detail": "1/3 frozen; descriptionText",
+      "why": "Growing the variant +40×+40 re-laid 2/3 (labelRow, input) and left 1 behind. The container is VERTICAL FIXED×HUG, primaryAxisAlignItems MIN. `descriptionText` (TEXT 316×17) keeps its intrinsic box in a MIN stack: the container simply gains slack and nothing stretches or re-aligns. Fix is the layout-family lowering rule (fill/stretch sizing and alignment from the source CSS), not a nudge to this baseline."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.text-area",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Size=Medium",
+      "detail": "8/31; /labelRow[0]/requiredMark[1]/Vector[0]·height=5.5, /labelRow[0]/requiredMark[1]/Vector[0]·strokeWeight=0.75, /labelRow[0]/requiredMark[1]/Vector[1]·height=2.8, /labelRow[0]/requiredMark[1]/Vector[1]·strokeWeight=0.75, /labelRow[0]/requiredMark[1]/Vector[1]·width=4.8, /labelRow[0]/requiredMark[1]/Vector[2]·height=2.8, /labelRow[0]/requiredMark[1]/Vector[2]·strokeWeight=0.75, /labelRow[0]/requiredMark[1]/Vector[2]·width=4.8",
+      "why": "8 of 31 carrying channels on this set are raw numbers with no variable behind them (18 bound + 5 inferred hold the rest). 8 are on a reified SVG `Vector` (/labelRow[0]/requiredMark[1]/Vector[0]·strokeWeight=0.75, /labelRow[0]/requiredMark[1]/Vector[0]·height=5.5, /labelRow[0]/requiredMark[1]/Vector[1]·strokeWeight=0.75, …): the icon path's own box and stroke weight are emitted as measured pixels, so the icon cannot follow an icon-size or stroke token. Fix is in the SVG reification path of the forward emitter — the same class as the pinned `altitude.iconclose`. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.text-area",
+      "assertion": "fakeLayout",
+      "code": "FAKE-STACK",
+      "subject": "Size=Medium/labelRow[0]/requiredMark[1]",
+      "detail": "layoutMode NONE over 3 in-flow children",
+      "why": "`/labelRow[0]/requiredMark[1]` (FRAME) is minted `layoutMode: NONE` over 3 children whose contract parts are in flow; the row is held together by x/y coordinates, so nothing inside it re-lays when anything changes. Fix is in the forward emitter: this container's source display (flex/block) has to become an auto-layout mode."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.text-field",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Size=Medium",
+      "detail": "1/3 frozen; descriptionText",
+      "why": "Growing the variant +40×+40 re-laid 2/3 (labelRow, input) and left 1 behind. The container is VERTICAL FIXED×HUG, primaryAxisAlignItems MIN. `descriptionText` (TEXT 296×17) keeps its intrinsic box in a MIN stack: the container simply gains slack and nothing stretches or re-aligns. Fix is the layout-family lowering rule (fill/stretch sizing and alignment from the source CSS), not a nudge to this baseline."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.text-field",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Size=Medium",
+      "detail": "8/31; /labelRow[0]/requiredMark[1]/Vector[0]·height=5.5, /labelRow[0]/requiredMark[1]/Vector[0]·strokeWeight=0.75, /labelRow[0]/requiredMark[1]/Vector[1]·height=2.8, /labelRow[0]/requiredMark[1]/Vector[1]·strokeWeight=0.75, /labelRow[0]/requiredMark[1]/Vector[1]·width=4.8, /labelRow[0]/requiredMark[1]/Vector[2]·height=2.8, /labelRow[0]/requiredMark[1]/Vector[2]·strokeWeight=0.75, /labelRow[0]/requiredMark[1]/Vector[2]·width=4.8",
+      "why": "8 of 31 carrying channels on this set are raw numbers with no variable behind them (18 bound + 5 inferred hold the rest). 8 are on a reified SVG `Vector` (/labelRow[0]/requiredMark[1]/Vector[0]·strokeWeight=0.75, /labelRow[0]/requiredMark[1]/Vector[0]·height=5.5, /labelRow[0]/requiredMark[1]/Vector[1]·strokeWeight=0.75, …): the icon path's own box and stroke weight are emitted as measured pixels, so the icon cannot follow an icon-size or stroke token. Fix is in the SVG reification path of the forward emitter — the same class as the pinned `altitude.iconclose`. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.text-field",
+      "assertion": "fakeLayout",
+      "code": "FAKE-STACK",
+      "subject": "Size=Medium/labelRow[0]/requiredMark[1]",
+      "detail": "layoutMode NONE over 3 in-flow children",
+      "why": "`/labelRow[0]/requiredMark[1]` (FRAME) is minted `layoutMode: NONE` over 3 children whose contract parts are in flow; the row is held together by x/y coordinates, so nothing inside it re-lays when anything changes. Fix is in the forward emitter: this container's source display (flex/block) has to become an auto-layout mode."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.toast",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Type=Info",
+      "detail": "1/2 frozen; EndContent",
+      "why": "Growing the variant +40×+40 re-laid 1/2 (Children) and left 1 behind. The container is HORIZONTAL FIXED×HUG, primaryAxisAlignItems MIN. `EndContent` (SLOT 1×1) is an empty SLOT minted at 1×1: a slot with no content has no box to stretch, so it can never respond to a resize. Fix is in the forward emitter's slot minting — an empty slot should either fill its axis or not be minted into the flow at all."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.token",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Color=Default, Size=Medium",
+      "detail": "2/3 frozen; EndContent, Icon",
+      "why": "Growing the variant +40×+40 re-laid 1/3 (labelText) and left 2 behind. The container is HORIZONTAL HUG×HUG, primaryAxisAlignItems MIN. `Icon` (SLOT 1×1), `EndContent` (SLOT 1×1) are empty SLOTs minted at 1×1: a slot with no content has no box to stretch, so it can never respond to a resize. Fix is in the forward emitter's slot minting — an empty slot should either fill its axis or not be minted into the flow at all."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.toolbar",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Size=Medium",
+      "detail": "0/3 responded; frozen CenterContent, EndContent, StartContent",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: all 3 children kept their exact boxes. The container is HORIZONTAL FIXED×HUG, primaryAxisAlignItems SPACE_BETWEEN. `StartContent` (SLOT 1×1), `CenterContent` (SLOT 1×1), `EndContent` (SLOT 1×1) are empty SLOTs minted at 1×1: a slot with no content has no box to stretch, so it can never respond to a resize. Fix is in the forward emitter's slot minting — an empty slot should either fill its axis or not be minted into the flow at all."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.top-nav-item",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "State=Default",
+      "detail": "1/2 frozen; Icon",
+      "why": "Growing the variant +40×+40 re-laid 1/2 (labelText) and left 1 behind. The container is HORIZONTAL HUG×HUG, primaryAxisAlignItems MIN. `Icon` (SLOT 1×1) is an empty SLOT minted at 1×1: a slot with no content has no box to stretch, so it can never respond to a resize. Fix is in the forward emitter's slot minting — an empty slot should either fill its axis or not be minted into the flow at all."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.top-nav",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "TopNav",
+      "detail": "0/3 responded; frozen EndContent, Heading, StartContent",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: all 3 children kept their exact boxes. The container is HORIZONTAL FIXED×HUG, primaryAxisAlignItems SPACE_BETWEEN. `Heading` (SLOT 1×1), `StartContent` (SLOT 605×1), `EndContent` (SLOT 1×1) are empty SLOTs minted at 1×1: a slot with no content has no box to stretch, so it can never respond to a resize. Fix is in the forward emitter's slot minting — an empty slot should either fill its axis or not be minted into the flow at all."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.top-nav",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "TopNav",
+      "detail": "1/13; /StartContent[1]·width=605",
+      "why": "1 of 13 carrying channels on this set is a raw number with no variable behind it (10 bound + 2 inferred hold the rest). 1 is a fixed box dimension (/StartContent[1]·width=605) minted from the captured geometry rather than from a sizing token. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.two-column",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "TwoColumn",
+      "detail": "1/2; /TwoColumn·itemSpacing=0",
+      "why": "1 of 2 carrying channels on this set is a raw number with no variable behind it (0 bound + 1 inferred hold the rest). 1 is the grid gap (/TwoColumn·itemSpacing=0) — a GRID root whose `itemSpacing` is an unbound 0 while the real gutters sit in the track geometry. Fix is the grid lowering: `gap` has to be bound on the grid container. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "first-party",
+      "id": "ds.typeahead-item",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "TypeaheadItem",
+      "detail": "1/2 frozen; Icon",
+      "why": "Growing the variant +40×+40 re-laid 1/2 (textCol) and left 1 behind. The container is HORIZONTAL FIXED×HUG, primaryAxisAlignItems MIN. `Icon` (SLOT 1×1) is an empty SLOT minted at 1×1: a slot with no content has no box to stretch, so it can never respond to a resize. Fix is in the forward emitter's slot minting — an empty slot should either fill its axis or not be minted into the flow at all."
+    },
     {
       "library": "altitude",
       "id": "altitude.avatar",
@@ -51,6 +546,1257 @@
       "subject": "Link/State",
       "detail": "Default≡Focus Visible",
       "why": "`State=Focus Visible` fingerprints identically to `State=Default` on geometry, fills AND text — the focus ring is not drawn, so the axis value exists but renders nothing. A designer switching to Focus Visible sees no change, which is the definition of a dead axis value. Separately named as \"Link's Focus Visible column shows no focus ring\"."
+    },
+    {
+      "library": "antd",
+      "id": "antd.alert",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Type=Info, Show Icon=NoIcon",
+      "detail": "1/2 frozen; alert-close-icon",
+      "why": "Growing the variant +40×+40 re-laid 1/2 (alert-content) and left 1 behind. The container is HORIZONTAL FIXED×HUG, primaryAxisAlignItems MIN. `alert-close-icon` (FRAME 12×12) is minted visible:false; Figma keeps an invisible child out of auto-layout, so it neither draws nor re-lays. Fix is in the forward emitter: an optional part that is off in this cell should be a component property (or omitted), not an invisible node parked in the stack."
+    },
+    {
+      "library": "antd",
+      "id": "antd.alert",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Type=Info, Show Icon=NoIcon",
+      "detail": "2/22; /alert-close-icon[1]/anticon[0]/Vector[0]·height=9.67, /alert-close-icon[1]/anticon[0]/Vector[0]·width=9.67",
+      "why": "2 of 22 carrying channels on this set are raw numbers with no variable behind them (15 bound + 5 inferred hold the rest). 2 are on a reified SVG `Vector` (/alert-close-icon[1]/anticon[0]/Vector[0]·width=9.67, /alert-close-icon[1]/anticon[0]/Vector[0]·height=9.67): the icon path's own box and stroke weight are emitted as measured pixels, so the icon cannot follow an icon-size or stroke token. Fix is in the SVG reification path of the forward emitter — the same class as the pinned `altitude.iconclose`. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "antd",
+      "id": "antd.badge",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Mode=Count, Color=Blue",
+      "detail": "0/2 responded; frozen avatar, badge-count",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: all 2 children kept their exact boxes. The container is VERTICAL FIXED×FIXED, primaryAxisAlignItems MIN. `badge-count` (FRAME 20×20) is layoutPositioning ABSOLUTE and keeps its offset when the parent grows, because the minted node carries no constraint that follows the parent. Fix is in the lowering rule for out-of-flow parts: a source `inset`/`right`/`bottom` has to become a Figma constraint (STRETCH/MAX), not a frozen x/y. `avatar` (FRAME 32×32) is exactly as wide/tall as the container was and was fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside it — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision."
+    },
+    {
+      "library": "antd",
+      "id": "antd.button",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Type=Default, Size=Middle, Danger=Safe",
+      "detail": "2/3 frozen; btn-icon, btn-icon-2",
+      "why": "Growing the variant +40×+40 re-laid 1/3 (label) and left 2 behind. The container is HORIZONTAL HUG×FIXED, primaryAxisAlignItems CENTER. `btn-icon` (FRAME 14×14), `btn-icon-2` (FRAME 14×14) are minted visible:false; Figma keeps an invisible child out of auto-layout, so it neither draws nor re-lays. Fix is in the forward emitter: an optional part that is off in this cell should be a component property (or omitted), not an invisible node parked in the stack."
+    },
+    {
+      "library": "antd",
+      "id": "antd.button",
+      "assertion": "variants",
+      "code": "DEAD-AXIS-VALUE",
+      "subject": "Button/Type",
+      "detail": "Default≡Dashed",
+      "why": "Switching `Type` renders Default≡Dashed identically — geometry, fills and text all hash equal — leaving 4 of 5 values (Default, Primary, Link, Text) that actually draw differently. The axis exists on the canvas but the declarations that distinguish these values never became a drawn difference — the emitter minted the cells from the same resolved style. Fix belongs in the forward emitter's per-cell style resolution for this axis."
+    },
+    {
+      "library": "antd",
+      "id": "antd.button",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Type=Default, Size=Middle, Danger=Safe",
+      "detail": "4/22; /btn-icon-2[1]/anticon-2[0]/Vector[0]·height=7.49, /btn-icon-2[1]/anticon-2[0]/Vector[0]·width=7.49, /btn-icon[0]/anticon[0]/Vector[0]·height=12.31, /btn-icon[0]/anticon[0]/Vector[0]·width=12.31",
+      "why": "4 of 22 carrying channels on this set are raw numbers with no variable behind them (12 bound + 6 inferred hold the rest). 4 are on a reified SVG `Vector` (/btn-icon[0]/anticon[0]/Vector[0]·width=12.31, /btn-icon[0]/anticon[0]/Vector[0]·height=12.31, /btn-icon-2[1]/anticon-2[0]/Vector[0]·width=7.49, …): the icon path's own box and stroke weight are emitted as measured pixels, so the icon cannot follow an icon-size or stroke token. Fix is in the SVG reification path of the forward emitter — the same class as the pinned `altitude.iconclose`. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "antd",
+      "id": "antd.checkbox",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Checked=Unchecked",
+      "detail": "0/2 responded; frozen checkbox, label",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: all 2 children kept their exact boxes. The container is HORIZONTAL FIXED×FIXED, primaryAxisAlignItems MIN. `label` (FRAME 78×22) is exactly as wide/tall as the container was and was fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside it — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision. `checkbox` (FRAME 16×16) keeps its intrinsic box in a MIN stack: the container simply gains slack and nothing stretches or re-aligns. Fix is the layout-family lowering rule (fill/stretch sizing and alignment from the source CSS), not a nudge to this baseline."
+    },
+    {
+      "library": "antd",
+      "id": "antd.input",
+      "assertion": "variants",
+      "code": "DEAD-AXIS-VALUE",
+      "subject": "Input/State",
+      "detail": "Focus Visible≡Hover, Focus Visible≡Active",
+      "why": "Switching `State` renders Focus Visible≡Hover, Focus Visible≡Active identically — geometry, fills and text all hash equal — leaving 3 of 5 values (Default, Disabled, Focus Visible) that actually draw differently. The collapsed values are interaction states, and the state plane carries no drawn difference here: whatever the source expresses on `:hover`/`:focus-visible`/`:active`/`[disabled]` (a ring, a shadow, an opacity) is not reaching the canvas. Fix belongs in the state-preview emitter — the state cell is minted from the same declarations as the default cell."
+    },
+    {
+      "library": "antd",
+      "id": "antd.progress",
+      "assertion": "variants",
+      "code": "DEAD-AXIS-VALUE",
+      "subject": "Progress/Status",
+      "detail": "Unset≡Active",
+      "why": "Switching `Status` renders Unset≡Active identically — geometry, fills and text all hash equal — leaving 3 of 4 values (Unset, Exception, Success) that actually draw differently. The axis exists on the canvas but the declarations that distinguish these values never became a drawn difference — the emitter minted the cells from the same resolved style. Fix belongs in the forward emitter's per-cell style resolution for this axis."
+    },
+    {
+      "library": "antd",
+      "id": "antd.progress",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Status=Unset",
+      "detail": "1/16; /progress-outer[0]/progress-inner[0]/progress-bg[0]·width=101",
+      "why": "1 of 16 carrying channels on this set is a raw number with no variable behind it (12 bound + 3 inferred hold the rest). 1 is a value-carrying bar width (/progress-outer[0]/progress-inner[0]/progress-bg[0]·width=101): the component's current value is baked in as a pixel width, so whatever the source expressed it with (a percentage of the track, a transform) did not survive lowering and no variable can move it. Fix is the percentage/value lowering rule. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "antd",
+      "id": "antd.radio",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Checked=Unchecked",
+      "detail": "0/2 responded; frozen label, radio",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: all 2 children kept their exact boxes. The container is HORIZONTAL FIXED×FIXED, primaryAxisAlignItems MIN. `label` (FRAME 52×22) is exactly as wide/tall as the container was and was fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside it — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision. `radio` (FRAME 16×16) keeps its intrinsic box in a MIN stack: the container simply gains slack and nothing stretches or re-aligns. Fix is the layout-family lowering rule (fill/stretch sizing and alignment from the source CSS), not a nudge to this baseline."
+    },
+    {
+      "library": "antd",
+      "id": "antd.switch",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Size=Default, Checked=Unchecked, State=Default",
+      "detail": "0/2 responded; frozen switch-handle, switch-inner",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: all 2 children kept their exact boxes. The container is VERTICAL FIXED×FIXED, primaryAxisAlignItems MIN. `switch-handle` (FRAME 18×18) is layoutPositioning ABSOLUTE and keeps its offset when the parent grows, because the minted node carries no constraint that follows the parent. Fix is in the lowering rule for out-of-flow parts: a source `inset`/`right`/`bottom` has to become a Figma constraint (STRETCH/MAX), not a frozen x/y. `switch-inner` (FRAME 44×22) is exactly as wide/tall as the container was and was fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside it — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision."
+    },
+    {
+      "library": "antd",
+      "id": "antd.switch",
+      "assertion": "variants",
+      "code": "DEAD-AXIS-VALUE",
+      "subject": "Switch/State",
+      "detail": "Default≡Disabled, Active≡Hover",
+      "why": "Switching `State` renders Default≡Disabled, Active≡Hover identically — geometry, fills and text all hash equal — leaving 3 of 5 values (Default, Focus Visible, Active) that actually draw differently. The collapsed values are interaction states, and the state plane carries no drawn difference here: whatever the source expresses on `:hover`/`:focus-visible`/`:active`/`[disabled]` (a ring, a shadow, an opacity) is not reaching the canvas. Fix belongs in the state-preview emitter — the state cell is minted from the same declarations as the default cell."
+    },
+    {
+      "library": "antd",
+      "id": "antd.switch",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Size=Default, Checked=Unchecked, State=Default",
+      "detail": "1/31; /switch-inner[0]/switch-inner-unchecked (margin box)[1]·height=0.01",
+      "why": "1 of 31 carrying channels on this set is a raw number with no variable behind it (20 bound + 10 inferred hold the rest). 1 is on a synthetic `(margin box)` wrapper (/switch-inner[0]/switch-inner-unchecked (margin box)[1]·height=0.01), which is sized to the child's captured box. Fix is in the margin-box lowering: the wrapper carries no token and does not round-trip, so its size can only ever be a literal. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "antd",
+      "id": "antd.tag",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Color=Blue, Bordered=Bordered",
+      "detail": "0/2 responded; frozen anticon, label",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: all 2 children kept their exact boxes. The container is VERTICAL FIXED×HUG, primaryAxisAlignItems MIN. `anticon` (FRAME 19.77×10) is minted visible:false; Figma keeps an invisible child out of auto-layout, so it neither draws nor re-lays. Fix is in the forward emitter: an optional part that is off in this cell should be a component property (or omitted), not an invisible node parked in the stack. `label` (TEXT 20×20) keeps its intrinsic box in a MIN stack: the container simply gains slack and nothing stretches or re-aligns. Fix is the layout-family lowering rule (fill/stretch sizing and alignment from the source CSS), not a nudge to this baseline."
+    },
+    {
+      "library": "antd",
+      "id": "antd.tag",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Color=Blue, Bordered=Bordered",
+      "detail": "3/17; /anticon[1]/Vector[0]·height=8.06, /anticon[1]/Vector[0]·width=15.93, /anticon[1]·width=19.77",
+      "why": "3 of 17 carrying channels on this set are raw numbers with no variable behind them (10 bound + 4 inferred hold the rest). 2 are on a reified SVG `Vector` (/anticon[1]/Vector[0]·width=15.93, /anticon[1]/Vector[0]·height=8.06): the icon path's own box and stroke weight are emitted as measured pixels, so the icon cannot follow an icon-size or stroke token. Fix is in the SVG reification path of the forward emitter — the same class as the pinned `altitude.iconclose`. 1 is a fixed box dimension (/anticon[1]·width=19.77) minted from the captured geometry rather than from a sizing token. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "antd",
+      "id": "antd.tooltip",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Tooltip",
+      "detail": "0/2 responded; frozen tooltip-arrow, tooltip-content",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: all 2 children kept their exact boxes. The container is VERTICAL HUG×FIXED, primaryAxisAlignItems MIN. `tooltip-arrow` (FRAME 16×16) is layoutPositioning ABSOLUTE and keeps its offset when the parent grows, because the minted node carries no constraint that follows the parent. Fix is in the lowering rule for out-of-flow parts: a source `inset`/`right`/`bottom` has to become a Figma constraint (STRETCH/MAX), not a frozen x/y. `tooltip-content` (FRAME 85.91×34) is exactly as wide/tall as the container was and was fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside it — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision."
+    },
+    {
+      "library": "astryx",
+      "id": "astryx.banner",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Status=Info, Container=Card",
+      "detail": "0/1 responded; frozen header",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: the single child kept its exact box. The container is VERTICAL HUG×HUG, primaryAxisAlignItems MIN. `header` (FRAME 299×64) is exactly as wide/tall as the container was and was fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside it — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision."
+    },
+    {
+      "library": "astryx",
+      "id": "astryx.card",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Variant=Default",
+      "detail": "0/1 responded; frozen label",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: the single child kept its exact box. The container is VERTICAL FIXED×HUG, primaryAxisAlignItems MIN. `label` (TEXT 99×24) keeps its intrinsic box in a MIN stack: the container simply gains slack and nothing stretches or re-aligns. Fix is the layout-family lowering rule (fill/stretch sizing and alignment from the source CSS), not a nudge to this baseline."
+    },
+    {
+      "library": "astryx",
+      "id": "astryx.checkbox-input",
+      "assertion": "variants",
+      "code": "DEAD-AXIS",
+      "subject": "CheckboxInput/Size",
+      "detail": "Md≡Sm",
+      "why": "Every value of `Size` (Md, Sm) renders the same instance — geometry, fills AND text all hash equal — so the axis is a row of identical children a designer can switch between and see nothing. The collapsed values are size steps, so the size token they resolve to is the same number by the time it is minted (or the size only changes a channel the fingerprint cannot see, such as a font metric that did not re-measure). Fix belongs in the size-axis lowering: the axis is minted, its effect is not."
+    },
+    {
+      "library": "astryx",
+      "id": "astryx.dropdown-menu",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "DropdownMenu",
+      "detail": "0/2 responded; frozen menu, trigger",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: all 2 children kept their exact boxes. The container is VERTICAL HUG×HUG, primaryAxisAlignItems MIN. `menu` (FRAME 240×111) is exactly as wide/tall as the container was and was fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside it — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision. `trigger` (INSTANCE 99.81×32) keeps its intrinsic box in a MIN stack: the container simply gains slack and nothing stretches or re-aligns. Fix is the layout-family lowering rule (fill/stretch sizing and alignment from the source CSS), not a nudge to this baseline."
+    },
+    {
+      "library": "astryx",
+      "id": "astryx.progress-bar",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Variant=Accent",
+      "detail": "0/2 responded; frozen label, track",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: all 2 children kept their exact boxes. The container is VERTICAL FIXED×HUG, primaryAxisAlignItems MIN. `track` (FRAME 240×4) is exactly as wide/tall as the container was and was fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside it — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision. `label` (TEXT 47×12) keeps its intrinsic box in a MIN stack: the container simply gains slack and nothing stretches or re-aligns. Fix is the layout-family lowering rule (fill/stretch sizing and alignment from the source CSS), not a nudge to this baseline."
+    },
+    {
+      "library": "astryx",
+      "id": "astryx.slider",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Orientation=Horizontal, Value Display=Tooltip",
+      "detail": "1/2 frozen; label",
+      "why": "Growing the variant +40×+40 re-laid 1/2 (slider) and left 1 behind. The container is VERTICAL FIXED×HUG, primaryAxisAlignItems MIN. `label` (FRAME 50×20) keeps its intrinsic box in a MIN stack: the container simply gains slack and nothing stretches or re-aligns. Fix is the layout-family lowering rule (fill/stretch sizing and alignment from the source CSS), not a nudge to this baseline."
+    },
+    {
+      "library": "astryx",
+      "id": "astryx.switch",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Value=Off, Label Position=End",
+      "detail": "0/1 responded; frozen part-0",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: the single child kept its exact box. The container is VERTICAL FIXED×HUG, primaryAxisAlignItems MIN. `part-0` (FRAME 178.02×24) is exactly as wide/tall as the container was and was fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside it — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision."
+    },
+    {
+      "library": "astryx",
+      "id": "astryx.text-input",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Type=Text, Size=Md",
+      "detail": "1/2 frozen; label",
+      "why": "Growing the variant +40×+40 re-laid 1/2 (field) and left 1 behind. The container is VERTICAL FIXED×HUG, primaryAxisAlignItems MIN. `label` (TEXT 25×12) keeps its intrinsic box in a MIN stack: the container simply gains slack and nothing stretches or re-aligns. Fix is the layout-family lowering rule (fill/stretch sizing and alignment from the source CSS), not a nudge to this baseline."
+    },
+    {
+      "library": "astryx",
+      "id": "astryx.text-input",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Type=Text, Size=Md",
+      "detail": "1/22; /field[1]/start-icon[0]/icon-text[0]/Vector[0]·width=10.67",
+      "why": "1 of 22 carrying channels on this set is a raw number with no variable behind it (15 bound + 6 inferred hold the rest). 1 is on a reified SVG `Vector` (/field[1]/start-icon[0]/icon-text[0]/Vector[0]·width=10.67): the icon path's own box and stroke weight are emitted as measured pixels, so the icon cannot follow an icon-size or stroke token. Fix is in the SVG reification path of the forward emitter — the same class as the pinned `altitude.iconclose`. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "astryx",
+      "id": "astryx.toast",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Toast",
+      "detail": "1/3 frozen; EndContent",
+      "why": "Growing the variant +40×+40 re-laid 2/3 (content, dismiss) and left 1 behind. The container is HORIZONTAL FIXED×HUG, primaryAxisAlignItems MIN. `EndContent` (SLOT 1×1) is an empty SLOT minted at 1×1: a slot with no content has no box to stretch, so it can never respond to a resize. Fix is in the forward emitter's slot minting — an empty slot should either fill its axis or not be minted into the flow at all."
+    },
+    {
+      "library": "carbon",
+      "id": "carbon.accordion",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Align=End, Size=Sm, State=Default",
+      "detail": "1/19; /accordion__item[0]/accordion__heading[0]/icon[0]/Vector[0]·width=5.7",
+      "why": "1 of 19 carrying channels on this set is a raw number with no variable behind it (12 bound + 6 inferred hold the rest). 1 is on a reified SVG `Vector` (/accordion__item[0]/accordion__heading[0]/icon[0]/Vector[0]·width=5.7): the icon path's own box and stroke weight are emitted as measured pixels, so the icon cannot follow an icon-size or stroke token. Fix is in the SVG reification path of the forward emitter — the same class as the pinned `altitude.iconclose`. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "carbon",
+      "id": "carbon.button",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Kind=Primary, Size=Xs, State=Default",
+      "detail": "0/1 responded; frozen label",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: the single child kept its exact box. The container is HORIZONTAL HUG×HUG, primaryAxisAlignItems SPACE_BETWEEN. `label` (TEXT 45×18) keeps its intrinsic box in a SPACE_BETWEEN stack: the container simply gains slack and nothing stretches or re-aligns. Fix is the layout-family lowering rule (fill/stretch sizing and alignment from the source CSS), not a nudge to this baseline."
+    },
+    {
+      "library": "carbon",
+      "id": "carbon.button",
+      "assertion": "variants",
+      "code": "DEAD-AXIS-VALUE",
+      "subject": "Button (carbon.button)/State",
+      "detail": "Default≡Focus Visible",
+      "why": "Switching `State` renders Default≡Focus Visible identically — geometry, fills and text all hash equal — leaving 4 of 5 values (Default, Disabled, Active, Hover) that actually draw differently. The collapsed values are interaction states, and the state plane carries no drawn difference here: whatever the source expresses on `:hover`/`:focus-visible`/`:active`/`[disabled]` (a ring, a shadow, an opacity) is not reaching the canvas. Fix belongs in the state-preview emitter — the state cell is minted from the same declarations as the default cell."
+    },
+    {
+      "library": "carbon",
+      "id": "carbon.checkbox",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Checked=Unchecked",
+      "detail": "0/1 responded; frozen checkbox-label",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: the single child kept its exact box. The container is VERTICAL FIXED×FIXED, primaryAxisAlignItems MIN. `checkbox-label` (FRAME 92.92×20) is exactly as wide/tall as the container was and was fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside it — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision."
+    },
+    {
+      "library": "carbon",
+      "id": "carbon.iconbutton",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Kind=Primary, Size=Xs",
+      "detail": "0/1 responded; frozen tooltip-trigger__wrapper",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: the single child kept its exact box. The container is VERTICAL FIXED×FIXED, primaryAxisAlignItems MIN. `tooltip-trigger__wrapper` (FRAME 24×24) is exactly as wide/tall as the container was and was fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside it — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision."
+    },
+    {
+      "library": "carbon",
+      "id": "carbon.iconbutton",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Kind=Primary, Size=Xs",
+      "detail": "2/14; /tooltip-trigger__wrapper[0]/btn[0]/btn-icon[0]/Vector[0]·height=10.67, /tooltip-trigger__wrapper[0]/btn[0]/btn-icon[0]/Vector[0]·width=10.67",
+      "why": "2 of 14 carrying channels on this set are raw numbers with no variable behind them (7 bound + 5 inferred hold the rest). 2 are on a reified SVG `Vector` (/tooltip-trigger__wrapper[0]/btn[0]/btn-icon[0]/Vector[0]·width=10.67, /tooltip-trigger__wrapper[0]/btn[0]/btn-icon[0]/Vector[0]·height=10.67): the icon path's own box and stroke weight are emitted as measured pixels, so the icon cannot follow an icon-size or stroke token. Fix is in the SVG reification path of the forward emitter — the same class as the pinned `altitude.iconclose`. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "carbon",
+      "id": "carbon.inlinenotification",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Kind=Error, Contrast=High",
+      "detail": "2/28; /inline-notification__close-button[1]/inline-notification__close-button-icon[0]/Vector[0]·height=10.67, /inline-notification__close-button[1]/inline-notification__close-button-icon[0]/Vector[0]·width=10.67",
+      "why": "2 of 28 carrying channels on this set are raw numbers with no variable behind them (18 bound + 8 inferred hold the rest). 2 are on a reified SVG `Vector` (/inline-notification__close-button[1]/inline-notification__close-button-icon[0]/Vector[0]·width=10.67, /inline-notification__close-button[1]/inline-notification__close-button-icon[0]/Vector[0]·height=10.67): the icon path's own box and stroke weight are emitted as measured pixels, so the icon cannot follow an icon-size or stroke token. Fix is in the SVG reification path of the forward emitter — the same class as the pinned `altitude.iconclose`. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "carbon",
+      "id": "carbon.inlinenotification",
+      "assertion": "fakeLayout",
+      "code": "FAKE-STACK",
+      "subject": "Kind=Error, Contrast=High/inline-notification__details[0]/icon[0]/icon-error[0]",
+      "detail": "layoutMode NONE over 2 in-flow children",
+      "why": "`/inline-notification__details[0]/icon[0]/icon-error[0]` (FRAME) is minted `layoutMode: NONE` over 2 children whose contract parts are in flow; the row is held together by x/y coordinates, so nothing inside it re-lays when anything changes. Fix is in the forward emitter: this container's source display (flex/block) has to become an auto-layout mode."
+    },
+    {
+      "library": "carbon",
+      "id": "carbon.modal",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Size=Xs",
+      "detail": "3/62; /modal-container[0]/modal-header (margin box)[0]/modal-header[0]/modal-close-button[2]/icon-tooltip[0]/tooltip-trigger__wrapper[0]/btn[0]/btn-icon[0]/Vector[0]·height=13.33, /modal-container[0]/modal-header (margin box)[0]/modal-header[0]/modal-close-button[2]/icon-tooltip[0]/tooltip-trigger__wrapper[0]/btn[0]/btn-icon[0]/Vector[0]·width=13.33, /modal-container[0]/modal-header (margin box)[0]·height=71.98",
+      "why": "3 of 62 carrying channels on this set are raw numbers with no variable behind them (49 bound + 10 inferred hold the rest). 2 are on a reified SVG `Vector` (/modal-container[0]/modal-header (margin box)[0]/modal-header[0]/modal-close-button[2]/icon-tooltip[0]/tooltip-trigger__wrapper[0]/btn[0]/btn-icon[0]/Vector[0]·width=13.33, /modal-container[0]/modal-header (margin box)[0]/modal-header[0]/modal-close-button[2]/icon-tooltip[0]/tooltip-trigger__wrapper[0]/btn[0]/btn-icon[0]/Vector[0]·height=13.33): the icon path's own box and stroke weight are emitted as measured pixels, so the icon cannot follow an icon-size or stroke token. Fix is in the SVG reification path of the forward emitter — the same class as the pinned `altitude.iconclose`. 1 is on a synthetic `(margin box)` wrapper (/modal-container[0]/modal-header (margin box)[0]·height=71.98), which is sized to the child's captured box. Fix is in the margin-box lowering: the wrapper carries no token and does not round-trip, so its size can only ever be a literal. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "carbon",
+      "id": "carbon.tabs",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "State=Default",
+      "detail": "0/1 responded; frozen part-1",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: the single child kept its exact box. The container is HORIZONTAL FIXED×FIXED, primaryAxisAlignItems MIN. `part-1` (FRAME 261.78×40) is exactly as wide/tall as the container was and was fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside it — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision."
+    },
+    {
+      "library": "carbon",
+      "id": "carbon.tabs",
+      "assertion": "variants",
+      "code": "DEAD-AXIS-VALUE",
+      "subject": "Tabs/State",
+      "detail": "Active≡Hover",
+      "why": "Switching `State` renders Active≡Hover identically — geometry, fills and text all hash equal — leaving 2 of 3 values (Default, Active) that actually draw differently. The collapsed values are interaction states, and the state plane carries no drawn difference here: whatever the source expresses on `:hover`/`:focus-visible`/`:active`/`[disabled]` (a ring, a shadow, an opacity) is not reaching the canvas. Fix belongs in the state-preview emitter — the state cell is minted from the same declarations as the default cell."
+    },
+    {
+      "library": "carbon",
+      "id": "carbon.textinput",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Size=Xs, State=Default",
+      "detail": "0/2 responded; frozen text-input__field-outer-wrapper, text-input__label-wrapper",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: all 2 children kept their exact boxes. The container is VERTICAL FIXED×FIXED, primaryAxisAlignItems MIN. `text-input__label-wrapper` (FRAME 288×24), `text-input__field-outer-wrapper` (FRAME 288×24) are exactly as wide/tall as the container was and were fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside them — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision."
+    },
+    {
+      "library": "fluent",
+      "id": "fluent.avatar",
+      "assertion": "variants",
+      "code": "DEAD-AXIS",
+      "subject": "Avatar (fluent.avatar)/Active",
+      "detail": "None≡Active, None≡Inactive",
+      "why": "Every value of `Active` (None, Active, Inactive) renders the same instance — geometry, fills AND text all hash equal — so the axis is a row of identical children a designer can switch between and see nothing. The axis exists on the canvas but the declarations that distinguish these values never became a drawn difference — the emitter minted the cells from the same resolved style. Fix belongs in the forward emitter's per-cell style resolution for this axis."
+    },
+    {
+      "library": "fluent",
+      "id": "fluent.badge",
+      "assertion": "variants",
+      "code": "DEAD-AXIS-VALUE",
+      "subject": "Badge (fluent.badge)/Appearance",
+      "detail": "Ghost≡Outline",
+      "why": "Switching `Appearance` renders Ghost≡Outline identically — geometry, fills and text all hash equal — leaving 3 of 4 values (Filled, Ghost, Tint) that actually draw differently. The axis exists on the canvas but the declarations that distinguish these values never became a drawn difference — the emitter minted the cells from the same resolved style. Fix belongs in the forward emitter's per-cell style resolution for this axis."
+    },
+    {
+      "library": "fluent",
+      "id": "fluent.button",
+      "assertion": "variants",
+      "code": "DEAD-AXIS-VALUE",
+      "subject": "Button (fluent.button)/Appearance",
+      "detail": "Subtle≡Transparent",
+      "why": "Switching `Appearance` renders Subtle≡Transparent identically — geometry, fills and text all hash equal — leaving 4 of 5 values (Secondary, Primary, Outline, Subtle) that actually draw differently. The axis exists on the canvas but the declarations that distinguish these values never became a drawn difference — the emitter minted the cells from the same resolved style. Fix belongs in the forward emitter's per-cell style resolution for this axis."
+    },
+    {
+      "library": "fluent",
+      "id": "fluent.card",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Default",
+      "detail": "0/2 responded; frozen cardheader, label (margin box)",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: all 2 children kept their exact boxes. The container is HORIZONTAL FIXED×FIXED, primaryAxisAlignItems MIN. `label (margin box)` (FRAME 29×8), `cardheader` (FRAME 404×40) keep their intrinsic boxes in a MIN stack: the container simply gains slack and nothing stretches or re-aligns. Fix is the layout-family lowering rule (fill/stretch sizing and alignment from the source CSS), not a nudge to this baseline."
+    },
+    {
+      "library": "fluent",
+      "id": "fluent.card",
+      "assertion": "variants",
+      "code": "DEAD-AXIS-VALUE",
+      "subject": "Card (fluent.card)/Appearance",
+      "detail": "Outline≡Subtle",
+      "why": "Switching `Appearance` renders Outline≡Subtle identically — geometry, fills and text all hash equal — leaving 3 of 4 values (Filled, Filled Alternative, Outline) that actually draw differently. The axis exists on the canvas but the declarations that distinguish these values never became a drawn difference — the emitter minted the cells from the same resolved style. Fix belongs in the forward emitter's per-cell style resolution for this axis."
+    },
+    {
+      "library": "fluent",
+      "id": "fluent.card",
+      "assertion": "variants",
+      "code": "DEAD-AXIS-VALUE",
+      "subject": "Card (fluent.card)/State",
+      "detail": "Default≡Focus Visible",
+      "why": "Switching `State` renders Default≡Focus Visible identically — geometry, fills and text all hash equal — leaving 4 of 5 values (Default, Disabled, Active, Hover) that actually draw differently. The collapsed values are interaction states, and the state plane carries no drawn difference here: whatever the source expresses on `:hover`/`:focus-visible`/`:active`/`[disabled]` (a ring, a shadow, an opacity) is not reaching the canvas. Fix belongs in the state-preview emitter — the state cell is minted from the same declarations as the default cell."
+    },
+    {
+      "library": "fluent",
+      "id": "fluent.checkbox",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Checked=Unchecked, Size=Medium, Shape=Square, State=Default",
+      "detail": "0/2 responded; frozen indicator (margin box), label (margin box)",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: all 2 children kept their exact boxes. The container is HORIZONTAL FIXED×FIXED, primaryAxisAlignItems MIN. `indicator (margin box)` (FRAME 24×32), `label (margin box)` (FRAME 79×32) are exactly as wide/tall as the container was and were fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside them — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision."
+    },
+    {
+      "library": "fluent",
+      "id": "fluent.checkbox",
+      "assertion": "variants",
+      "code": "DEAD-AXIS",
+      "subject": "Checkbox (fluent.checkbox)/State",
+      "detail": "Default≡Disabled, Default≡Focus Visible, Default≡Active, Default≡Hover",
+      "why": "Every value of `State` (Default, Disabled, Focus Visible, Active, Hover) renders the same instance — geometry, fills AND text all hash equal — so the axis is a row of identical children a designer can switch between and see nothing. The collapsed values are interaction states, and the state plane carries no drawn difference here: whatever the source expresses on `:hover`/`:focus-visible`/`:active`/`[disabled]` (a ring, a shadow, an opacity) is not reaching the canvas. Fix belongs in the state-preview emitter — the state cell is minted from the same declarations as the default cell."
+    },
+    {
+      "library": "fluent",
+      "id": "fluent.checkbox",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Checked=Unchecked, Size=Medium, Shape=Square, State=Default",
+      "detail": "1/21; /label (margin box)[1]·width=79",
+      "why": "1 of 21 carrying channels on this set is a raw number with no variable behind it (14 bound + 6 inferred hold the rest). 1 is on a synthetic `(margin box)` wrapper (/label (margin box)[1]·width=79), which is sized to the child's captured box. Fix is in the margin-box lowering: the wrapper carries no token and does not round-trip, so its size can only ever be a literal. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "fluent",
+      "id": "fluent.dialog",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Modal Type=Modal",
+      "detail": "0/2 responded; frozen dialogsurface (margin box), dialogsurface__backdrop",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: all 2 children kept their exact boxes. The container is VERTICAL HUG×HUG, primaryAxisAlignItems MIN. `dialogsurface__backdrop` (FRAME 1×1) is minted with a degenerate dimension (≤1px), so there is nothing for auto-layout to move. Fix is in the forward emitter: the part's box came out of the capture with a collapsed axis and is minted as measured. `dialogsurface (margin box)` (FRAME 1038×705) is exactly as wide/tall as the container was and was fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside it — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision."
+    },
+    {
+      "library": "fluent",
+      "id": "fluent.dialog",
+      "assertion": "variants",
+      "code": "DEAD-AXIS-VALUE",
+      "subject": "Dialog/Modal Type",
+      "detail": "Modal≡Alert",
+      "why": "Switching `Modal Type` renders Modal≡Alert identically — geometry, fills and text all hash equal — leaving 2 of 3 values (Modal, Non Modal) that actually draw differently. The axis exists on the canvas but the declarations that distinguish these values never became a drawn difference — the emitter minted the cells from the same resolved style. Fix belongs in the forward emitter's per-cell style resolution for this axis."
+    },
+    {
+      "library": "fluent",
+      "id": "fluent.dialog",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Modal Type=Modal",
+      "detail": "3/43; /dialogsurface (margin box)[1]/dialogsurface[0]/dialogbody[0]/label-2 (margin box)[1]·width=272, /dialogsurface (margin box)[1]·height=705, /dialogsurface (margin box)[1]·width=1038",
+      "why": "3 of 43 carrying channels on this set are raw numbers with no variable behind them (34 bound + 6 inferred hold the rest). 3 are on a synthetic `(margin box)` wrapper (/dialogsurface (margin box)[1]·width=1038, /dialogsurface (margin box)[1]·height=705, /dialogsurface (margin box)[1]/dialogsurface[0]/dialogbody[0]/label-2 (margin box)[1]·width=272), which is sized to the child's captured box. Fix is in the margin-box lowering: the wrapper carries no token and does not round-trip, so its size can only ever be a literal. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "fluent",
+      "id": "fluent.input",
+      "assertion": "variants",
+      "code": "DEAD-AXIS-VALUE",
+      "subject": "Input (fluent.input)/Appearance",
+      "detail": "Filled Darker≡Filled Darker Shadow, Filled Lighter≡Filled Lighter Shadow",
+      "why": "Switching `Appearance` renders Filled Darker≡Filled Darker Shadow, Filled Lighter≡Filled Lighter Shadow identically — geometry, fills and text all hash equal — leaving 4 of 6 values (Outline, Underline, Filled Darker, Filled Lighter) that actually draw differently. The axis exists on the canvas but the declarations that distinguish these values never became a drawn difference — the emitter minted the cells from the same resolved style. Fix belongs in the forward emitter's per-cell style resolution for this axis."
+    },
+    {
+      "library": "fluent",
+      "id": "fluent.input",
+      "assertion": "variants",
+      "code": "DEAD-AXIS-VALUE",
+      "subject": "Input (fluent.input)/State",
+      "detail": "Active≡Focus Visible, Default≡Hover",
+      "why": "Switching `State` renders Active≡Focus Visible, Default≡Hover identically — geometry, fills and text all hash equal — leaving 3 of 5 values (Default, Active, Disabled) that actually draw differently. The collapsed values are interaction states, and the state plane carries no drawn difference here: whatever the source expresses on `:hover`/`:focus-visible`/`:active`/`[disabled]` (a ring, a shadow, an opacity) is not reaching the canvas. Fix belongs in the state-preview emitter — the state cell is minted from the same declarations as the default cell."
+    },
+    {
+      "library": "fluent",
+      "id": "fluent.spinner",
+      "assertion": "variants",
+      "code": "DEAD-AXIS-VALUE",
+      "subject": "Spinner/Label Position",
+      "detail": "Above≡Below, After≡Before",
+      "why": "Switching `Label Position` renders Above≡Below, After≡Before identically — geometry, fills and text all hash equal — leaving 2 of 4 values (After, Above) that actually draw differently. The axis exists on the canvas but the declarations that distinguish these values never became a drawn difference — the emitter minted the cells from the same resolved style. Fix belongs in the forward emitter's per-cell style resolution for this axis."
+    },
+    {
+      "library": "fluent",
+      "id": "fluent.switch",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Checked=Unchecked, Label Position=After, State=Default",
+      "detail": "0/2 responded; frozen indicator (margin box), label",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: all 2 children kept their exact boxes. The container is HORIZONTAL FIXED×FIXED, primaryAxisAlignItems MIN. `indicator (margin box)` (FRAME 48×36), `label` (FRAME 57×36) are exactly as wide/tall as the container was and were fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside them — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision."
+    },
+    {
+      "library": "fluent",
+      "id": "fluent.switch",
+      "assertion": "variants",
+      "code": "DEAD-AXIS-VALUE",
+      "subject": "Switch (fluent.switch)/State",
+      "detail": "Default≡Focus Visible",
+      "why": "Switching `State` renders Default≡Focus Visible identically — geometry, fills and text all hash equal — leaving 2 of 3 values (Default, Disabled) that actually draw differently. The collapsed values are interaction states, and the state plane carries no drawn difference here: whatever the source expresses on `:hover`/`:focus-visible`/`:active`/`[disabled]` (a ring, a shadow, an opacity) is not reaching the canvas. Fix belongs in the state-preview emitter — the state cell is minted from the same declarations as the default cell."
+    },
+    {
+      "library": "fluent",
+      "id": "fluent.tab-list",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Appearance=Transparent, Size=Medium, Orientation=Horizontal",
+      "detail": "0/2 responded; frozen tab, tab-2",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: all 2 children kept their exact boxes. The container is HORIZONTAL HUG×HUG, primaryAxisAlignItems MIN. `tab` (FRAME 89×44), `tab-2` (FRAME 74×44) are exactly as wide/tall as the container was and were fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside them — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision."
+    },
+    {
+      "library": "fluent",
+      "id": "fluent.tab-list",
+      "assertion": "variants",
+      "code": "DEAD-AXIS-VALUE",
+      "subject": "TabList/Appearance",
+      "detail": "Transparent≡Subtle",
+      "why": "Switching `Appearance` renders Transparent≡Subtle identically — geometry, fills and text all hash equal — leaving 3 of 4 values (Transparent, Subtle Circular, Filled Circular) that actually draw differently. The axis exists on the canvas but the declarations that distinguish these values never became a drawn difference — the emitter minted the cells from the same resolved style. Fix belongs in the forward emitter's per-cell style resolution for this axis."
+    },
+    {
+      "library": "fluent",
+      "id": "fluent.tab-list",
+      "assertion": "variants",
+      "code": "DEAD-AXIS",
+      "subject": "TabList/Orientation",
+      "detail": "Horizontal≡Vertical",
+      "why": "Every value of `Orientation` (Horizontal, Vertical) renders the same instance — geometry, fills AND text all hash equal — so the axis is a row of identical children a designer can switch between and see nothing. The axis exists on the canvas but the declarations that distinguish these values never became a drawn difference — the emitter minted the cells from the same resolved style. Fix belongs in the forward emitter's per-cell style resolution for this axis."
+    },
+    {
+      "library": "fluent",
+      "id": "fluent.tooltip",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Appearance=Normal",
+      "detail": "0/2 responded; frozen label, part-0",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: all 2 children kept their exact boxes. The container is VERTICAL HUG×FIXED, primaryAxisAlignItems MIN. `part-0` (FRAME 8.47×8.47) is minted visible:false; Figma keeps an invisible child out of auto-layout, so it neither draws nor re-lays. Fix is in the forward emitter: an optional part that is off in this cell should be a component property (or omitted), not an invisible node parked in the stack. `label` (TEXT 189×16) keeps its intrinsic box in a MIN stack: the container simply gains slack and nothing stretches or re-aligns. Fix is the layout-family lowering rule (fill/stretch sizing and alignment from the source CSS), not a nudge to this baseline."
+    },
+    {
+      "library": "mui",
+      "id": "mui.accordion",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Variant=Elevation, Expanded=Collapsed",
+      "detail": "1/2 frozen; collapse-root",
+      "why": "Growing the variant +40×+40 re-laid 1/2 (accordion-heading) and left 1 behind. The container is VERTICAL FIXED×FIXED, primaryAxisAlignItems MIN. `collapse-root` (FRAME 288×0) is minted with a degenerate dimension (≤1px), so there is nothing for auto-layout to move. Fix is in the forward emitter: the part's box came out of the capture with a collapsed axis and is minted as measured."
+    },
+    {
+      "library": "mui",
+      "id": "mui.alert",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Severity=Info, Variant=Standard",
+      "detail": "0/2 responded; frozen alert-icon, label",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: all 2 children kept their exact boxes. The container is HORIZONTAL HUG×HUG, primaryAxisAlignItems MIN. `alert-icon` (FRAME 22×36), `label` (FRAME 190×37) keep their intrinsic boxes in a MIN stack: the container simply gains slack and nothing stretches or re-aligns. Fix is the layout-family lowering rule (fill/stretch sizing and alignment from the source CSS), not a nudge to this baseline."
+    },
+    {
+      "library": "mui",
+      "id": "mui.autocomplete",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Size=Medium",
+      "detail": "0/1 responded; frozen formcontrol-fullwidth",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: the single child kept its exact box. The container is VERTICAL FIXED×FIXED, primaryAxisAlignItems MIN. `formcontrol-fullwidth` (FRAME 288×56) is exactly as wide/tall as the container was and was fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside it — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision."
+    },
+    {
+      "library": "mui",
+      "id": "mui.autocomplete",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Size=Medium",
+      "detail": "6/92; /formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-tag (margin box)[0]/autocomplete-tag[0]/icon[1]/Vector[0]·height=14.55, /formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-tag (margin box)[0]/autocomplete-tag[0]/icon[1]/Vector[0]·width=14.55, /formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-tag (margin box)[0]·width=83.3, /formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-tag-2 (margin box)[1]/autocomplete-tag-2[0]/icon-2[1]/Vector[0]·height=14.55, /formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-tag-2 (margin box)[1]/autocomplete-tag-2[0]/icon-2[1]/Vector[0]·width=14.55, /formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-tag-2 (margin box)[1]·width=76.97",
+      "why": "6 of 92 carrying channels on this set are raw numbers with no variable behind them (68 bound + 18 inferred hold the rest). 4 are on a reified SVG `Vector` (/formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-tag (margin box)[0]/autocomplete-tag[0]/icon[1]/Vector[0]·width=14.55, /formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-tag (margin box)[0]/autocomplete-tag[0]/icon[1]/Vector[0]·height=14.55, /formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-tag-2 (margin box)[1]/autocomplete-tag-2[0]/icon-2[1]/Vector[0]·width=14.55, …): the icon path's own box and stroke weight are emitted as measured pixels, so the icon cannot follow an icon-size or stroke token. Fix is in the SVG reification path of the forward emitter — the same class as the pinned `altitude.iconclose`. 2 are on a synthetic `(margin box)` wrapper (/formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-tag (margin box)[0]·width=83.3, /formcontrol-fullwidth[0]/autocomplete-inputroot[0]/autocomplete-tag-2 (margin box)[1]·width=76.97), which is sized to the child's captured box. Fix is in the margin-box lowering: the wrapper carries no token and does not round-trip, so its size can only ever be a literal. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "mui",
+      "id": "mui.badge",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Color=Default, Variant=Standard",
+      "detail": "1/2 frozen; label",
+      "why": "Growing the variant +40×+40 re-laid 1/2 (label-2) and left 1 behind. The container is HORIZONTAL FIXED×FIXED, primaryAxisAlignItems MIN. `label` (FRAME 14×20) keeps its intrinsic box in a MIN stack: the container simply gains slack and nothing stretches or re-aligns. Fix is the layout-family lowering rule (fill/stretch sizing and alignment from the source CSS), not a nudge to this baseline."
+    },
+    {
+      "library": "mui",
+      "id": "mui.button",
+      "assertion": "variants",
+      "code": "DEAD-AXIS-VALUE",
+      "subject": "Button (mui.button)/State",
+      "detail": "Default≡Active, Default≡Focus Visible, Default≡Hover",
+      "why": "Switching `State` renders Default≡Active, Default≡Focus Visible, Default≡Hover identically — geometry, fills and text all hash equal — leaving 2 of 5 values (Default, Disabled) that actually draw differently. The collapsed values are interaction states, and the state plane carries no drawn difference here: whatever the source expresses on `:hover`/`:focus-visible`/`:active`/`[disabled]` (a ring, a shadow, an opacity) is not reaching the canvas. Fix belongs in the state-preview emitter — the state cell is minted from the same declarations as the default cell."
+    },
+    {
+      "library": "mui",
+      "id": "mui.card",
+      "assertion": "variants",
+      "code": "DEAD-AXIS",
+      "subject": "Card (mui.card)/Elevation",
+      "detail": "1≡0, 1≡3, 1≡8",
+      "why": "Every value of `Elevation` (1, 0, 3, 8) renders the same instance — geometry, fills AND text all hash equal — so the axis is a row of identical children a designer can switch between and see nothing. The collapsed values are size steps, so the size token they resolve to is the same number by the time it is minted (or the size only changes a channel the fingerprint cannot see, such as a font metric that did not re-measure). Fix belongs in the size-axis lowering: the axis is minted, its effect is not."
+    },
+    {
+      "library": "mui",
+      "id": "mui.circular-progress",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Variant=Indeterminate",
+      "detail": "3/6; /root-indeterminate[0]/Vector[0]·height=36.73, /root-indeterminate[0]/Vector[0]·strokeWeight=3.5999999046325684, /root-indeterminate[0]/Vector[0]·width=36.73",
+      "why": "3 of 6 carrying channels on this set are raw numbers with no variable behind them (1 bound + 2 inferred hold the rest). 3 are on a reified SVG `Vector` (/root-indeterminate[0]/Vector[0]·strokeWeight=3.5999999046325684, /root-indeterminate[0]/Vector[0]·width=36.73, /root-indeterminate[0]/Vector[0]·height=36.73): the icon path's own box and stroke weight are emitted as measured pixels, so the icon cannot follow an icon-size or stroke token. Fix is in the SVG reification path of the forward emitter — the same class as the pinned `altitude.iconclose`. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "mui",
+      "id": "mui.dialog",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Max width=Sm",
+      "detail": "1/2 frozen; dialog-container",
+      "why": "Growing the variant +40×+40 re-laid 1/2 (backdrop-root) and left 1 behind. The container is VERTICAL HUG×HUG, primaryAxisAlignItems MIN. `dialog-container` (FRAME 424×123) is exactly as wide/tall as the container was and was fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside it — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision."
+    },
+    {
+      "library": "mui",
+      "id": "mui.dialog",
+      "assertion": "variants",
+      "code": "DEAD-AXIS",
+      "subject": "Dialog (mui.dialog)/Max width",
+      "detail": "Sm≡Xs, Sm≡Md, Sm≡Lg, Sm≡Xl",
+      "why": "Every value of `Max width` (Sm, Xs, Md, Lg, Xl) renders the same instance — geometry, fills AND text all hash equal — so the axis is a row of identical children a designer can switch between and see nothing. The collapsed values are size steps, so the size token they resolve to is the same number by the time it is minted (or the size only changes a channel the fingerprint cannot see, such as a font metric that did not re-measure). Fix belongs in the size-axis lowering: the axis is minted, its effect is not."
+    },
+    {
+      "library": "mui",
+      "id": "mui.dialog",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Max width=Sm",
+      "detail": "2/15; /dialog-container[1]/dialog-paper (margin box)[0]·height=123, /dialog-container[1]/dialog-paper (margin box)[0]·width=424",
+      "why": "2 of 15 carrying channels on this set are raw numbers with no variable behind them (12 bound + 1 inferred hold the rest). 2 are on a synthetic `(margin box)` wrapper (/dialog-container[1]/dialog-paper (margin box)[0]·width=424, /dialog-container[1]/dialog-paper (margin box)[0]·height=123), which is sized to the child's captured box. Fix is in the margin-box lowering: the wrapper carries no token and does not round-trip, so its size can only ever be a literal. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "mui",
+      "id": "mui.dialog",
+      "assertion": "fakeLayout",
+      "code": "FAKE-ABSOLUTE",
+      "subject": "Max width=Sm/backdrop-root[0]",
+      "detail": "source part `backdrop-root` is in flow",
+      "why": "`/backdrop-root[0]` (FRAME 424×123) is minted `layoutPositioning: ABSOLUTE`, but the contract's anatomy part `backdrop-root` is in flow (no out-of-flow position declared). The canvas is holding this child in place with coordinates that the source never asked for, which is exactly the frozen-rectangle failure this assertion exists to catch. Fix is in the forward emitter's placement of this part: it should sit in its parent's auto-layout."
+    },
+    {
+      "library": "mui",
+      "id": "mui.input-adornment",
+      "assertion": "variants",
+      "code": "DEAD-AXIS",
+      "subject": "InputAdornment/Position",
+      "detail": "Start≡End",
+      "why": "Every value of `Position` (Start, End) renders the same instance — geometry, fills AND text all hash equal — so the axis is a row of identical children a designer can switch between and see nothing. The axis exists on the canvas but the declarations that distinguish these values never became a drawn difference — the emitter minted the cells from the same resolved style. Fix belongs in the forward emitter's per-cell style resolution for this axis."
+    },
+    {
+      "library": "mui",
+      "id": "mui.linear-progress",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Variant=Indeterminate",
+      "detail": "0/2 responded; frozen linearprogress-bar, linearprogress-bar-2",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: all 2 children kept their exact boxes. The container is VERTICAL FIXED×FIXED, primaryAxisAlignItems MIN. `linearprogress-bar` (FRAME 100.8×4), `linearprogress-bar-2` (FRAME 1×4) are layoutPositioning ABSOLUTE and keep their offsets when the parent grows, because the minted nodes carry no constraint that follows the parent. Fix is in the lowering rule for out-of-flow parts: a source `inset`/`right`/`bottom` has to become a Figma constraint (STRETCH/MAX), not a frozen x/y."
+    },
+    {
+      "library": "mui",
+      "id": "mui.link",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Color=Primary, Underline=Hover, State=Default",
+      "detail": "0/1 responded; frozen label",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: the single child kept its exact box. The container is VERTICAL HUG×HUG, primaryAxisAlignItems MIN. `label` (TEXT 31×19) is exactly as wide/tall as the container was and was fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside it — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision."
+    },
+    {
+      "library": "mui",
+      "id": "mui.link",
+      "assertion": "variants",
+      "code": "DEAD-AXIS",
+      "subject": "Link (mui.link)/Underline",
+      "detail": "Hover≡None, Hover≡Always",
+      "why": "Every value of `Underline` (Hover, None, Always) renders the same instance — geometry, fills AND text all hash equal — so the axis is a row of identical children a designer can switch between and see nothing. The axis exists on the canvas but the declarations that distinguish these values never became a drawn difference — the emitter minted the cells from the same resolved style. Fix belongs in the forward emitter's per-cell style resolution for this axis."
+    },
+    {
+      "library": "mui",
+      "id": "mui.link",
+      "assertion": "variants",
+      "code": "DEAD-AXIS-VALUE",
+      "subject": "Link (mui.link)/State",
+      "detail": "Default≡Active, Default≡Hover",
+      "why": "Switching `State` renders Default≡Active, Default≡Hover identically — geometry, fills and text all hash equal — leaving 2 of 4 values (Default, Focus Visible) that actually draw differently. The collapsed values are interaction states, and the state plane carries no drawn difference here: whatever the source expresses on `:hover`/`:focus-visible`/`:active`/`[disabled]` (a ring, a shadow, an opacity) is not reaching the canvas. Fix belongs in the state-preview emitter — the state cell is minted from the same declarations as the default cell."
+    },
+    {
+      "library": "mui",
+      "id": "mui.menu",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Menu",
+      "detail": "0/1 responded; frozen list-padding",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: the single child kept its exact box. The container is VERTICAL FIXED×FIXED, primaryAxisAlignItems MIN. `list-padding` (FRAME 114.77×124) is exactly as wide/tall as the container was and was fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside it — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision."
+    },
+    {
+      "library": "mui",
+      "id": "mui.paper",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Elevation=1, Variant=Elevation",
+      "detail": "0/1 responded; frozen label",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: the single child kept its exact box. The container is VERTICAL FIXED×HUG, primaryAxisAlignItems MIN. `label` (TEXT 107×19) is exactly as wide/tall as the container was and was fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside it — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision."
+    },
+    {
+      "library": "mui",
+      "id": "mui.paper",
+      "assertion": "variants",
+      "code": "DEAD-AXIS",
+      "subject": "Paper/Elevation",
+      "detail": "1≡0, 1≡3, 1≡8",
+      "why": "Every value of `Elevation` (1, 0, 3, 8) renders the same instance — geometry, fills AND text all hash equal — so the axis is a row of identical children a designer can switch between and see nothing. The collapsed values are size steps, so the size token they resolve to is the same number by the time it is minted (or the size only changes a channel the fingerprint cannot see, such as a font metric that did not re-measure). Fix belongs in the size-axis lowering: the axis is minted, its effect is not."
+    },
+    {
+      "library": "mui",
+      "id": "mui.radio",
+      "assertion": "variants",
+      "code": "DEAD-AXIS",
+      "subject": "Radio (mui.radio)/Color",
+      "detail": "Primary≡Secondary, Primary≡Error, Primary≡Info, Primary≡Success, Primary≡Warning, Primary≡Default",
+      "why": "Every value of `Color` (Primary, Secondary, Error, Info, Success, Warning, Default) renders the same instance — geometry, fills AND text all hash equal — so the axis is a row of identical children a designer can switch between and see nothing. The axis exists on the canvas but the declarations that distinguish these values never became a drawn difference — the emitter minted the cells from the same resolved style. Fix belongs in the forward emitter's per-cell style resolution for this axis."
+    },
+    {
+      "library": "mui",
+      "id": "mui.select",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Size=Medium",
+      "detail": "1/3 frozen; outlinedinput-notchedoutline",
+      "why": "Growing the variant +40×+40 re-laid 2/3 (label, icon) and left 1 behind. The container is HORIZONTAL FIXED×FIXED, primaryAxisAlignItems MIN. `outlinedinput-notchedoutline` (FRAME 73.94×61) is layoutPositioning ABSOLUTE and keeps its offset when the parent grows, because the minted node carries no constraint that follows the parent. Fix is in the lowering rule for out-of-flow parts: a source `inset`/`right`/`bottom` has to become a Figma constraint (STRETCH/MAX), not a frozen x/y."
+    },
+    {
+      "library": "mui",
+      "id": "mui.slider",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Color=Primary, Size=Medium",
+      "detail": "0/3 responded; frozen slider-rail, slider-thumb, slider-track",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: all 3 children kept their exact boxes. The container is VERTICAL FIXED×FIXED, primaryAxisAlignItems MIN. `slider-rail` (FRAME 288×4), `slider-track` (FRAME 117.19×6), `slider-thumb` (FRAME 20×20) are layoutPositioning ABSOLUTE and keep their offsets when the parent grows, because the minted nodes carry no constraint that follows the parent. Fix is in the lowering rule for out-of-flow parts: a source `inset`/`right`/`bottom` has to become a Figma constraint (STRETCH/MAX), not a frozen x/y."
+    },
+    {
+      "library": "mui",
+      "id": "mui.snackbar",
+      "assertion": "variants",
+      "code": "DEAD-AXIS",
+      "subject": "Snackbar/Position",
+      "detail": "BottomLeft≡BottomCenter, BottomLeft≡TopRight",
+      "why": "Every value of `Position` (BottomLeft, BottomCenter, TopRight) renders the same instance — geometry, fills AND text all hash equal — so the axis is a row of identical children a designer can switch between and see nothing. The axis exists on the canvas but the declarations that distinguish these values never became a drawn difference — the emitter minted the cells from the same resolved style. Fix belongs in the forward emitter's per-cell style resolution for this axis."
+    },
+    {
+      "library": "mui",
+      "id": "mui.switch",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Color=Primary, Size=Medium, Checked=Unchecked",
+      "detail": "0/2 responded; frozen buttonbase-root, switch-track",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: all 2 children kept their exact boxes. The container is HORIZONTAL FIXED×FIXED, primaryAxisAlignItems MIN. `buttonbase-root` (FRAME 38×38) is layoutPositioning ABSOLUTE and keeps its offset when the parent grows, because the minted node carries no constraint that follows the parent. Fix is in the lowering rule for out-of-flow parts: a source `inset`/`right`/`bottom` has to become a Figma constraint (STRETCH/MAX), not a frozen x/y. `switch-track` (FRAME 34×14) keeps its intrinsic box in a MIN stack: the container simply gains slack and nothing stretches or re-aligns. Fix is the layout-family lowering rule (fill/stretch sizing and alignment from the source CSS), not a nudge to this baseline."
+    },
+    {
+      "library": "mui",
+      "id": "mui.switch",
+      "assertion": "variants",
+      "code": "DEAD-AXIS",
+      "subject": "Switch (mui.switch)/Color",
+      "detail": "Primary≡Secondary, Primary≡Error, Primary≡Warning, Primary≡Info, Primary≡Success, Primary≡Default",
+      "why": "Every value of `Color` (Primary, Secondary, Error, Warning, Info, Success, Default) renders the same instance — geometry, fills AND text all hash equal — so the axis is a row of identical children a designer can switch between and see nothing. The axis exists on the canvas but the declarations that distinguish these values never became a drawn difference — the emitter minted the cells from the same resolved style. Fix belongs in the forward emitter's per-cell style resolution for this axis."
+    },
+    {
+      "library": "mui",
+      "id": "mui.table-pagination",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "TablePagination",
+      "detail": "0/1 responded; frozen tablepagination-toolbar",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: the single child kept its exact box. The container is VERTICAL FIXED×FIXED, primaryAxisAlignItems MIN. `tablepagination-toolbar` (FRAME 428×52) is exactly as wide/tall as the container was and was fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside it — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision."
+    },
+    {
+      "library": "mui",
+      "id": "mui.table-pagination",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "TablePagination",
+      "detail": "6/73; /tablepagination-toolbar[0]/label (margin box)[1]/label[0]·width=98, /tablepagination-toolbar[0]/label (margin box)[1]·width=98, /tablepagination-toolbar[0]/label-3 (margin box)[3]/label-3[0]·width=54, /tablepagination-toolbar[0]/label-3 (margin box)[3]·width=54, /tablepagination-toolbar[0]/tablepagination-actions (margin box)[4]/tablepagination-actions[0]/buttonbase-root-2[1]/buttonbase-root-2-icon[0]/Vector[0]·width=7.41, /tablepagination-toolbar[0]/tablepagination-actions (margin box)[4]/tablepagination-actions[0]/buttonbase-root[0]/buttonbase-root-icon[0]/Vector[0]·width=7.41",
+      "why": "6 of 73 carrying channels on this set are raw numbers with no variable behind them (44 bound + 23 inferred hold the rest). 2 are on a reified SVG `Vector` (/tablepagination-toolbar[0]/tablepagination-actions (margin box)[4]/tablepagination-actions[0]/buttonbase-root[0]/buttonbase-root-icon[0]/Vector[0]·width=7.41, /tablepagination-toolbar[0]/tablepagination-actions (margin box)[4]/tablepagination-actions[0]/buttonbase-root-2[1]/buttonbase-root-2-icon[0]/Vector[0]·width=7.41): the icon path's own box and stroke weight are emitted as measured pixels, so the icon cannot follow an icon-size or stroke token. Fix is in the SVG reification path of the forward emitter — the same class as the pinned `altitude.iconclose`. 4 are on a synthetic `(margin box)` wrapper (/tablepagination-toolbar[0]/label (margin box)[1]·width=98, /tablepagination-toolbar[0]/label (margin box)[1]/label[0]·width=98, /tablepagination-toolbar[0]/label-3 (margin box)[3]·width=54, …), which is sized to the child's captured box. Fix is in the margin-box lowering: the wrapper carries no token and does not round-trip, so its size can only ever be a literal. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "mui",
+      "id": "mui.table",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Size=Medium",
+      "detail": "0/2 responded; frozen tablebody-root, tablehead-root",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: all 2 children kept their exact boxes. The container is VERTICAL HUG×HUG, primaryAxisAlignItems MIN. `tablehead-root` (FRAME 688×57.8), `tablebody-root` (FRAME 688×130) are exactly as wide/tall as the container was and were fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside them — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision."
+    },
+    {
+      "library": "mui",
+      "id": "mui.table",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Size=Medium",
+      "detail": "2/172; /tablehead-root[0]/tablerow-head[0]/tablecell-head-2[1]/label[0]/icon-2[1]/Vector[0]·height=14.4, /tablehead-root[0]/tablerow-head[0]/tablecell-head-2[1]/label[0]/icon-2[1]/Vector[0]·width=14.4",
+      "why": "2 of 172 carrying channels on this set are raw numbers with no variable behind them (153 bound + 17 inferred hold the rest). 2 are on a reified SVG `Vector` (/tablehead-root[0]/tablerow-head[0]/tablecell-head-2[1]/label[0]/icon-2[1]/Vector[0]·width=14.4, /tablehead-root[0]/tablerow-head[0]/tablecell-head-2[1]/label[0]/icon-2[1]/Vector[0]·height=14.4): the icon path's own box and stroke weight are emitted as measured pixels, so the icon cannot follow an icon-size or stroke token. Fix is in the SVG reification path of the forward emitter — the same class as the pinned `altitude.iconclose`. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "mui",
+      "id": "mui.tabs",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Text color=Primary, Indicator color=Primary",
+      "detail": "0/1 responded; frozen tabs-fixed",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: the single child kept its exact box. The container is HORIZONTAL FIXED×FIXED, primaryAxisAlignItems MIN. `tabs-fixed` (FRAME 288×48) is exactly as wide/tall as the container was and was fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside it — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision."
+    },
+    {
+      "library": "mui",
+      "id": "mui.text-field",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Variant=Outlined, Size=Medium",
+      "detail": "0/3 responded; frozen inputbase-adornedend, label, label-5 (margin box)",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: all 3 children kept their exact boxes. The container is VERTICAL FIXED×FIXED, primaryAxisAlignItems MIN. `inputbase-adornedend` (FRAME 252.97×56) is exactly as wide/tall as the container was and was fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside it — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision. `label-5 (margin box)` (FRAME 138×17), `label` (FRAME 56.19×23) keep their intrinsic boxes in a MIN stack: the container simply gains slack and nothing stretches or re-aligns. Fix is the layout-family lowering rule (fill/stretch sizing and alignment from the source CSS), not a nudge to this baseline."
+    },
+    {
+      "library": "mui",
+      "id": "mui.text-field",
+      "assertion": "variants",
+      "code": "DEAD-AXIS",
+      "subject": "TextField/Variant",
+      "detail": "Outlined≡Filled, Outlined≡Standard",
+      "why": "Every value of `Variant` (Outlined, Filled, Standard) renders the same instance — geometry, fills AND text all hash equal — so the axis is a row of identical children a designer can switch between and see nothing. The axis exists on the canvas but the declarations that distinguish these values never became a drawn difference — the emitter minted the cells from the same resolved style. Fix belongs in the forward emitter's per-cell style resolution for this axis."
+    },
+    {
+      "library": "mui",
+      "id": "mui.text-field",
+      "assertion": "variants",
+      "code": "DEAD-AXIS",
+      "subject": "TextField/Size",
+      "detail": "Medium≡Small",
+      "why": "Every value of `Size` (Medium, Small) renders the same instance — geometry, fills AND text all hash equal — so the axis is a row of identical children a designer can switch between and see nothing. The collapsed values are size steps, so the size token they resolve to is the same number by the time it is minted (or the size only changes a channel the fingerprint cannot see, such as a font metric that did not re-measure). Fix belongs in the size-axis lowering: the axis is minted, its effect is not."
+    },
+    {
+      "library": "mui",
+      "id": "mui.text-field",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Variant=Outlined, Size=Medium",
+      "detail": "2/37; /label-5 (margin box)[1]/label-5[0]·width=110, /label-5 (margin box)[1]·width=138",
+      "why": "2 of 37 carrying channels on this set are raw numbers with no variable behind them (28 bound + 7 inferred hold the rest). 2 are on a synthetic `(margin box)` wrapper (/label-5 (margin box)[1]·width=138, /label-5 (margin box)[1]/label-5[0]·width=110), which is sized to the child's captured box. Fix is in the margin-box lowering: the wrapper carries no token and does not round-trip, so its size can only ever be a literal. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.avatar",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Size=Md",
+      "detail": "0/1 responded; frozen initials",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: the single child kept its exact box. The container is VERTICAL FIXED×FIXED, primaryAxisAlignItems MIN. `initials` (FRAME 28×28) is exactly as wide/tall as the container was and was fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside it — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision."
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.banner",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Tone=Info, State=Default",
+      "detail": "0/1 responded; frozen box",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: the single child kept its exact box. The container is HORIZONTAL FIXED×HUG, primaryAxisAlignItems MIN. `box` (FRAME 319.33×88) is exactly as wide/tall as the container was and was fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside it — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision."
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.banner",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Tone=Info, State=Default",
+      "detail": "3/91; /box[0]/blockstack[0]/box-2[0]/inlinestack[0]/button (margin box)[1]/button[0]/button__icon (margin box)[0]/button__icon[0]/part-0-0-0-0-1-0-0[0]/icon-3[0]/Vector[0]·height=10.5, /box[0]/blockstack[0]/box-2[0]/inlinestack[0]/button (margin box)[1]/button[0]/button__icon (margin box)[0]/button__icon[0]/part-0-0-0-0-1-0-0[0]/icon-3[0]/Vector[0]·width=10.54, /box[0]/blockstack[0]/box-3[1]/blockstack-2[0]/buttongroup (margin box)[1]/buttongroup[0]/buttongroup__item (margin box)[0]·width=90.08",
+      "why": "3 of 91 carrying channels on this set are raw numbers with no variable behind them (67 bound + 21 inferred hold the rest). 2 are on a reified SVG `Vector` (/box[0]/blockstack[0]/box-2[0]/inlinestack[0]/button (margin box)[1]/button[0]/button__icon (margin box)[0]/button__icon[0]/part-0-0-0-0-1-0-0[0]/icon-3[0]/Vector[0]·width=10.54, /box[0]/blockstack[0]/box-2[0]/inlinestack[0]/button (margin box)[1]/button[0]/button__icon (margin box)[0]/button__icon[0]/part-0-0-0-0-1-0-0[0]/icon-3[0]/Vector[0]·height=10.5): the icon path's own box and stroke weight are emitted as measured pixels, so the icon cannot follow an icon-size or stroke token. Fix is in the SVG reification path of the forward emitter — the same class as the pinned `altitude.iconclose`. 1 is on a synthetic `(margin box)` wrapper (/box[0]/blockstack[0]/box-3[1]/blockstack-2[0]/buttongroup (margin box)[1]/buttongroup[0]/buttongroup__item (margin box)[0]·width=90.08), which is sized to the child's captured box. Fix is in the margin-box lowering: the wrapper carries no token and does not round-trip, so its size can only ever be a literal. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.banner",
+      "assertion": "fakeLayout",
+      "code": "FAKE-STACK",
+      "subject": "Tone=Info, State=Default/box[0]/blockstack[0]/box-2[0]/inlinestack[0]/inlinestack-2[0]/part-0-0-0-0-0-0[0]/icon[0]/icon-info[0]",
+      "detail": "layoutMode NONE over 3 in-flow children",
+      "why": "`/box[0]/blockstack[0]/box-2[0]/inlinestack[0]/inlinestack-2[0]/part-0-0-0-0-0-0[0]/icon[0]/icon-info[0]` (FRAME) is minted `layoutMode: NONE` over 3 children whose contract parts are in flow; the row is held together by x/y coordinates, so nothing inside it re-lays when anything changes. Fix is in the forward emitter: this container's source display (flex/block) has to become an auto-layout mode."
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.button",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Default",
+      "detail": "1/2 frozen; icon (margin box)",
+      "why": "Growing the variant +40×+40 re-laid 1/2 (label) and left 1 behind. The container is HORIZONTAL HUG×HUG, primaryAxisAlignItems CENTER. `icon (margin box)` (FRAME 20×16) is minted visible:false; Figma keeps an invisible child out of auto-layout, so it neither draws nor re-lays. Fix is in the forward emitter: an optional part that is off in this cell should be a component property (or omitted), not an invisible node parked in the stack."
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.button",
+      "assertion": "variants",
+      "code": "DEAD-AXIS-VALUE",
+      "subject": "Button (polaris.button)/Size",
+      "detail": "Medium≡Slim",
+      "why": "Switching `Size` renders Medium≡Slim identically — geometry, fills and text all hash equal — leaving 3 of 4 values (Medium, Micro, Large) that actually draw differently. The collapsed values are size steps, so the size token they resolve to is the same number by the time it is minted (or the size only changes a channel the fingerprint cannot see, such as a font metric that did not re-measure). Fix belongs in the size-axis lowering: the axis is minted, its effect is not."
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.button",
+      "assertion": "variants",
+      "code": "DEAD-AXIS",
+      "subject": "Button (polaris.button)/Text Align",
+      "detail": "Center≡Left, Center≡Right, Center≡Start, Center≡End",
+      "why": "Every value of `Text Align` (Center, Left, Right, Start, End) renders the same instance — geometry, fills AND text all hash equal — so the axis is a row of identical children a designer can switch between and see nothing. The axis exists on the canvas but the declarations that distinguish these values never became a drawn difference — the emitter minted the cells from the same resolved style. Fix belongs in the forward emitter's per-cell style resolution for this axis."
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.button",
+      "assertion": "variants",
+      "code": "DEAD-AXIS-VALUE",
+      "subject": "Button (polaris.button)/Variant",
+      "detail": "Tertiary≡Monochrome Plain",
+      "why": "Switching `Variant` renders Tertiary≡Monochrome Plain identically — geometry, fills and text all hash equal — leaving 4 of 5 values (Secondary, Plain, Primary, Tertiary) that actually draw differently. The axis exists on the canvas but the declarations that distinguish these values never became a drawn difference — the emitter minted the cells from the same resolved style. Fix belongs in the forward emitter's per-cell style resolution for this axis."
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.button",
+      "assertion": "fakeLayout",
+      "code": "FAKE-STACK",
+      "subject": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Default/icon (margin box)[0]/icon[0]/icon-2[0]",
+      "detail": "layoutMode NONE over 2 in-flow children",
+      "why": "`/icon (margin box)[0]/icon[0]/icon-2[0]` (FRAME) is minted `layoutMode: NONE` over 2 children whose contract parts are in flow; the row is held together by x/y coordinates, so nothing inside it re-lays when anything changes. Fix is in the forward emitter: this container's source display (flex/block) has to become an auto-layout mode."
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.checkbox",
+      "assertion": "fakeLayout",
+      "code": "FAKE-ABSOLUTE",
+      "subject": "Checked=unchecked/choice__control[0]/checkbox (margin box)[0]/checkbox[0]/backdrop[0]",
+      "detail": "source part `backdrop` is in flow",
+      "why": "`/choice__control[0]/checkbox (margin box)[0]/checkbox[0]/backdrop[0]` (RECTANGLE 18×18) is minted `layoutPositioning: ABSOLUTE`, but the contract's anatomy part `backdrop` is in flow (`position: relative`). The canvas is holding this child in place with coordinates that the source never asked for, which is exactly the frozen-rectangle failure this assertion exists to catch. Fix is in the forward emitter's placement of this part: it should sit in its parent's auto-layout."
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.progress-bar",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Size=Medium, Tone=Highlight",
+      "detail": "0/1 responded; frozen indicator",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: the single child kept its exact box. The container is VERTICAL FIXED×FIXED, primaryAxisAlignItems MIN. `indicator` (FRAME 115×16) is exactly as wide/tall as the container was and was fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside it — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision."
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.progress-bar",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Size=Medium, Tone=Highlight",
+      "detail": "1/10; /indicator[0]·width=115",
+      "why": "1 of 10 carrying channels on this set is a raw number with no variable behind it (7 bound + 2 inferred hold the rest). 1 is a value-carrying bar width (/indicator[0]·width=115): the component's current value is baked in as a pixel width, so whatever the source expressed it with (a percentage of the track, a transform) did not survive lowering and no variable can move it. Fix is the percentage/value lowering rule. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.radio-button",
+      "assertion": "fakeLayout",
+      "code": "FAKE-ABSOLUTE",
+      "subject": "Checked=unchecked/choice__control[0]/radiobutton (margin box)[0]/radiobutton[0]/backdrop[0]",
+      "detail": "source part `backdrop` is in flow",
+      "why": "`/choice__control[0]/radiobutton (margin box)[0]/radiobutton[0]/backdrop[0]` (RECTANGLE 18×18) is minted `layoutPositioning: ABSOLUTE`, but the contract's anatomy part `backdrop` is in flow (`position: relative`). The canvas is holding this child in place with coordinates that the source never asked for, which is exactly the frozen-rectangle failure this assertion exists to catch. Fix is in the forward emitter's placement of this part: it should sit in its parent's auto-layout."
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.spinner",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Size=Large",
+      "detail": "2/6; /root-large[0]/Vector[0]·height=42.08, /root-large[0]/Vector[0]·width=42.36",
+      "why": "2 of 6 carrying channels on this set are raw numbers with no variable behind them (1 bound + 3 inferred hold the rest). 2 are on a reified SVG `Vector` (/root-large[0]/Vector[0]·width=42.36, /root-large[0]/Vector[0]·height=42.08): the icon path's own box and stroke weight are emitted as measured pixels, so the icon cannot follow an icon-size or stroke token. Fix is in the SVG reification path of the forward emitter — the same class as the pinned `altitude.iconclose`. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.tag",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Size=none, State=Default",
+      "detail": "2/3 frozen; button-2 (margin box), link",
+      "why": "Growing the variant +40×+40 re-laid 1/3 (text) and left 2 behind. The container is HORIZONTAL FIXED×FIXED, primaryAxisAlignItems MIN. `link` (FRAME 59.92×20), `button-2 (margin box)` (FRAME 21×20) are minted visible:false; Figma keeps an invisible child out of auto-layout, so it neither draws nor re-lays. Fix is in the forward emitter: an optional part that is off in this cell should be a component property (or omitted), not an invisible node parked in the stack."
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.tag",
+      "assertion": "variants",
+      "code": "DEAD-AXIS-VALUE",
+      "subject": "Tag (polaris.tag)/State",
+      "detail": "Active≡Focus Visible",
+      "why": "Switching `State` renders Active≡Focus Visible identically — geometry, fills and text all hash equal — leaving 3 of 4 values (Default, Disabled, Active) that actually draw differently. The collapsed values are interaction states, and the state plane carries no drawn difference here: whatever the source expresses on `:hover`/`:focus-visible`/`:active`/`[disabled]` (a ring, a shadow, an opacity) is not reaching the canvas. Fix belongs in the state-preview emitter — the state cell is minted from the same declarations as the default cell."
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.tag",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Size=none, State=Default",
+      "detail": "2/33; /Size=none, State=Default·width=71.92, /button-2 (margin box)[2]/button-2[0]/icon-3[0]/Vector[0]·width=8.04",
+      "why": "2 of 33 carrying channels on this set are raw numbers with no variable behind them (22 bound + 9 inferred hold the rest). 1 is on a reified SVG `Vector` (/button-2 (margin box)[2]/button-2[0]/icon-3[0]/Vector[0]·width=8.04): the icon path's own box and stroke weight are emitted as measured pixels, so the icon cannot follow an icon-size or stroke token. Fix is in the SVG reification path of the forward emitter — the same class as the pinned `altitude.iconclose`. 1 is a fixed box dimension (/Size=none, State=Default·width=71.92) minted from the captured geometry rather than from a sizing token. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.text-field",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium, State=Default",
+      "detail": "1/2 frozen; connected",
+      "why": "Growing the variant +40×+40 re-laid 1/2 (labelled__labelwrapper) and left 1 behind. The container is VERTICAL FIXED×FIXED, primaryAxisAlignItems MIN. `connected` (FRAME 211×36) is exactly as wide/tall as the container was and was fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside it — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision."
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.text-field",
+      "assertion": "variants",
+      "code": "DEAD-AXIS",
+      "subject": "TextField (polaris.text-field)/Variant",
+      "detail": "Inherit≡Borderless",
+      "why": "Every value of `Variant` (Inherit, Borderless) renders the same instance — geometry, fills AND text all hash equal — so the axis is a row of identical children a designer can switch between and see nothing. The axis exists on the canvas but the declarations that distinguish these values never became a drawn difference — the emitter minted the cells from the same resolved style. Fix belongs in the forward emitter's per-cell style resolution for this axis."
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.text-field",
+      "assertion": "variants",
+      "code": "DEAD-AXIS-VALUE",
+      "subject": "TextField (polaris.text-field)/State",
+      "detail": "Active≡Focus Visible",
+      "why": "Switching `State` renders Active≡Focus Visible identically — geometry, fills and text all hash equal — leaving 4 of 5 values (Default, Disabled, Active, Hover) that actually draw differently. The collapsed values are interaction states, and the state plane carries no drawn difference here: whatever the source expresses on `:hover`/`:focus-visible`/`:active`/`[disabled]` (a ring, a shadow, an opacity) is not reaching the canvas. Fix belongs in the state-preview emitter — the state cell is minted from the same declarations as the default cell."
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.text-field",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium, State=Default",
+      "detail": "3/34; /connected[1]/connected__item[0]/textfield[0]/backdrop[0]·width=210.81, /connected[1]/connected__item[0]/textfield[0]/prefix (margin box)[1]·width=26.41, /connected[1]/connected__item[0]/textfield[0]/suffix (margin box)[3]·width=43.41",
+      "why": "3 of 34 carrying channels on this set are raw numbers with no variable behind them (24 bound + 7 inferred hold the rest). 2 are on a synthetic `(margin box)` wrapper (/connected[1]/connected__item[0]/textfield[0]/prefix (margin box)[1]·width=26.41, /connected[1]/connected__item[0]/textfield[0]/suffix (margin box)[3]·width=43.41), which is sized to the child's captured box. Fix is in the margin-box lowering: the wrapper carries no token and does not round-trip, so its size can only ever be a literal. 1 is a value-carrying bar width (/connected[1]/connected__item[0]/textfield[0]/backdrop[0]·width=210.81): the component's current value is baked in as a pixel width, so whatever the source expressed it with (a percentage of the track, a transform) did not survive lowering and no variable can move it. Fix is the percentage/value lowering rule. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.text",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Heading Xs",
+      "detail": "0/1 responded; frozen label",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: the single child kept its exact box. The container is VERTICAL HUG×HUG, primaryAxisAlignItems MIN. `label` (TEXT 134×16) is exactly as wide/tall as the container was and was fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside it — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision."
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.text",
+      "assertion": "variants",
+      "code": "DEAD-AXIS-VALUE",
+      "subject": "Text/Variant",
+      "detail": "Heading Lg≡Heading Xl, Heading Xs≡Body Sm, Heading Sm≡Body Md, Heading Md≡Body Lg",
+      "why": "Switching `Variant` renders Heading Lg≡Heading Xl, Heading Xs≡Body Sm, Heading Sm≡Body Md, Heading Md≡Body Lg identically — geometry, fills and text all hash equal — leaving 7 of 11 values (Heading Xs, Heading Sm, Heading Md, Heading Lg, Heading2xl, Heading3xl, Body Xs) that actually draw differently. The axis exists on the canvas but the declarations that distinguish these values never became a drawn difference — the emitter minted the cells from the same resolved style. Fix belongs in the forward emitter's per-cell style resolution for this axis."
+    },
+    {
+      "library": "polaris",
+      "id": "polaris.thumbnail",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Size=Medium",
+      "detail": "0/1 responded; frozen part-0",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: the single child kept its exact box. The container is VERTICAL FIXED×FIXED, primaryAxisAlignItems MIN. `part-0` (FRAME 60×60) is layoutPositioning ABSOLUTE and keeps its offset when the parent grows, because the minted node carries no constraint that follows the parent. Fix is in the lowering rule for out-of-flow parts: a source `inset`/`right`/`bottom` has to become a Figma constraint (STRETCH/MAX), not a frozen x/y."
+    },
+    {
+      "library": "shadcn",
+      "id": "shadcn.alert",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Variant=Default",
+      "detail": "0/2 responded; frozen label, label-2",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: all 2 children kept their exact boxes. The container is VERTICAL HUG×HUG, primaryAxisAlignItems MIN. `label` (TEXT 63×20), `label-2` (TEXT 292×20) keep their intrinsic boxes in a MIN stack: the container simply gains slack and nothing stretches or re-aligns. Fix is the layout-family lowering rule (fill/stretch sizing and alignment from the source CSS), not a nudge to this baseline."
+    },
+    {
+      "library": "shadcn",
+      "id": "shadcn.avatar",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Size=Default",
+      "detail": "0/1 responded; frozen label",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: the single child kept its exact box. The container is HORIZONTAL FIXED×FIXED, primaryAxisAlignItems MIN. `label` (FRAME 21×20) keeps its intrinsic box in a MIN stack: the container simply gains slack and nothing stretches or re-aligns. Fix is the layout-family lowering rule (fill/stretch sizing and alignment from the source CSS), not a nudge to this baseline."
+    },
+    {
+      "library": "shadcn",
+      "id": "shadcn.badge",
+      "assertion": "variants",
+      "code": "DEAD-AXIS",
+      "subject": "Badge (shadcn.badge)/State",
+      "detail": "Default≡Active, Default≡Hover",
+      "why": "Every value of `State` (Default, Active, Hover) renders the same instance — geometry, fills AND text all hash equal — so the axis is a row of identical children a designer can switch between and see nothing. The collapsed values are interaction states, and the state plane carries no drawn difference here: whatever the source expresses on `:hover`/`:focus-visible`/`:active`/`[disabled]` (a ring, a shadow, an opacity) is not reaching the canvas. Fix belongs in the state-preview emitter — the state cell is minted from the same declarations as the default cell."
+    },
+    {
+      "library": "shadcn",
+      "id": "shadcn.button",
+      "assertion": "variants",
+      "code": "DEAD-AXIS-VALUE",
+      "subject": "Button (shadcn.button)/Size",
+      "detail": "Default≡Sm, Default≡Lg, Icon≡Icon Xs, Icon≡Icon Sm, Icon≡Icon Lg",
+      "why": "Switching `Size` renders Default≡Sm, Default≡Lg, Icon≡Icon Xs, Icon≡Icon Sm, Icon≡Icon Lg identically — geometry, fills and text all hash equal — leaving 3 of 8 values (Default, Xs, Icon) that actually draw differently. The collapsed values are size steps, so the size token they resolve to is the same number by the time it is minted (or the size only changes a channel the fingerprint cannot see, such as a font metric that did not re-measure). Fix belongs in the size-axis lowering: the axis is minted, its effect is not."
+    },
+    {
+      "library": "shadcn",
+      "id": "shadcn.button",
+      "assertion": "variants",
+      "code": "DEAD-AXIS-VALUE",
+      "subject": "Button (shadcn.button)/State",
+      "detail": "Default≡Disabled, Default≡Focus Visible, Active≡Hover",
+      "why": "Switching `State` renders Default≡Disabled, Default≡Focus Visible, Active≡Hover identically — geometry, fills and text all hash equal — leaving 2 of 5 values (Default, Active) that actually draw differently. The collapsed values are interaction states, and the state plane carries no drawn difference here: whatever the source expresses on `:hover`/`:focus-visible`/`:active`/`[disabled]` (a ring, a shadow, an opacity) is not reaching the canvas. Fix belongs in the state-preview emitter — the state cell is minted from the same declarations as the default cell."
+    },
+    {
+      "library": "shadcn",
+      "id": "shadcn.card",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Size=Default",
+      "detail": "0/2 responded; frozen label-3, part-0",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: all 2 children kept their exact boxes. The container is VERTICAL HUG×HUG, primaryAxisAlignItems MIN. `label-3` (FRAME 317×20) is exactly as wide/tall as the container was and was fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside it — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision. `part-0` (FRAME 158×44) keeps its intrinsic box in a MIN stack: the container simply gains slack and nothing stretches or re-aligns. Fix is the layout-family lowering rule (fill/stretch sizing and alignment from the source CSS), not a nudge to this baseline."
+    },
+    {
+      "library": "shadcn",
+      "id": "shadcn.checkbox",
+      "assertion": "variants",
+      "code": "DEAD-AXIS",
+      "subject": "Checkbox (shadcn.checkbox)/State",
+      "detail": "Default≡Disabled, Default≡Focus Visible",
+      "why": "Every value of `State` (Default, Disabled, Focus Visible) renders the same instance — geometry, fills AND text all hash equal — so the axis is a row of identical children a designer can switch between and see nothing. The collapsed values are interaction states, and the state plane carries no drawn difference here: whatever the source expresses on `:hover`/`:focus-visible`/`:active`/`[disabled]` (a ring, a shadow, an opacity) is not reaching the canvas. Fix belongs in the state-preview emitter — the state cell is minted from the same declarations as the default cell."
+    },
+    {
+      "library": "shadcn",
+      "id": "shadcn.input",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "State=Default",
+      "detail": "0/1 responded; frozen placeholder",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: the single child kept its exact box. The container is VERTICAL FIXED×FIXED, primaryAxisAlignItems MIN. `placeholder` (TEXT 0×20) is minted with a degenerate dimension (≤1px), so there is nothing for auto-layout to move. Fix is in the forward emitter: the part's box came out of the capture with a collapsed axis and is minted as measured."
+    },
+    {
+      "library": "shadcn",
+      "id": "shadcn.input",
+      "assertion": "variants",
+      "code": "DEAD-AXIS",
+      "subject": "Input (shadcn.input)/State",
+      "detail": "Default≡Disabled, Default≡Active, Default≡Focus Visible",
+      "why": "Every value of `State` (Default, Disabled, Active, Focus Visible) renders the same instance — geometry, fills AND text all hash equal — so the axis is a row of identical children a designer can switch between and see nothing. The collapsed values are interaction states, and the state plane carries no drawn difference here: whatever the source expresses on `:hover`/`:focus-visible`/`:active`/`[disabled]` (a ring, a shadow, an opacity) is not reaching the canvas. Fix belongs in the state-preview emitter — the state cell is minted from the same declarations as the default cell."
+    },
+    {
+      "library": "shadcn",
+      "id": "shadcn.select",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Select",
+      "detail": "2/18; /icon[1]/Vector[0]·height=5.33, /icon[1]/Vector[0]·width=10.67",
+      "why": "2 of 18 carrying channels on this set are raw numbers with no variable behind them (13 bound + 3 inferred hold the rest). 2 are on a reified SVG `Vector` (/icon[1]/Vector[0]·width=10.67, /icon[1]/Vector[0]·height=5.33): the icon path's own box and stroke weight are emitted as measured pixels, so the icon cannot follow an icon-size or stroke token. Fix is in the SVG reification path of the forward emitter — the same class as the pinned `altitude.iconclose`. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "shadcn",
+      "id": "shadcn.switch",
+      "assertion": "variants",
+      "code": "DEAD-AXIS",
+      "subject": "Switch (shadcn.switch)/State",
+      "detail": "Default≡Disabled, Default≡Focus Visible",
+      "why": "Every value of `State` (Default, Disabled, Focus Visible) renders the same instance — geometry, fills AND text all hash equal — so the axis is a row of identical children a designer can switch between and see nothing. The collapsed values are interaction states, and the state plane carries no drawn difference here: whatever the source expresses on `:hover`/`:focus-visible`/`:active`/`[disabled]` (a ring, a shadow, an opacity) is not reaching the canvas. Fix belongs in the state-preview emitter — the state cell is minted from the same declarations as the default cell."
+    },
+    {
+      "library": "shadcn",
+      "id": "shadcn.tabs",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Tabs (shadcn.tabs)",
+      "detail": "0/2 responded; frozen label-4, part-0",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: all 2 children kept their exact boxes. The container is VERTICAL FIXED×FIXED, primaryAxisAlignItems MIN. `label-4` (TEXT 285×20) is exactly as wide/tall as the container was and was fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside it — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision. `part-0` (FRAME 229.3×36) keeps its intrinsic box in a MIN stack: the container simply gains slack and nothing stretches or re-aligns. Fix is the layout-family lowering rule (fill/stretch sizing and alignment from the source CSS), not a nudge to this baseline."
+    },
+    {
+      "library": "tailwind",
+      "id": "flowbite.alert",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Color=Info",
+      "detail": "0/1 responded; frozen part-0",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: the single child kept its exact box. The container is VERTICAL HUG×HUG, primaryAxisAlignItems MIN. `part-0` (FRAME 96×20) keeps its intrinsic box in a MIN stack: the container simply gains slack and nothing stretches or re-aligns. Fix is the layout-family lowering rule (fill/stretch sizing and alignment from the source CSS), not a nudge to this baseline."
+    },
+    {
+      "library": "tailwind",
+      "id": "flowbite.alert",
+      "assertion": "binding",
+      "code": "LITERAL-CHANNELS",
+      "subject": "Color=Info",
+      "detail": "1/34; /part-0[0]/dismiss[2]/dismiss-icon[0]/Vector[0]·width=12.01",
+      "why": "1 of 34 carrying channels on this set is a raw number with no variable behind it (18 bound + 15 inferred hold the rest). 1 is on a reified SVG `Vector` (/part-0[0]/dismiss[2]/dismiss-icon[0]/Vector[0]·width=12.01): the icon path's own box and stroke weight are emitted as measured pixels, so the icon cannot follow an icon-size or stroke token. Fix is in the SVG reification path of the forward emitter — the same class as the pinned `altitude.iconclose`. Diff the SITES, not the percentage: a round that only relocated the literals must not read as an improvement."
+    },
+    {
+      "library": "tailwind",
+      "id": "flowbite.badge",
+      "assertion": "variants",
+      "code": "DEAD-AXIS-VALUE",
+      "subject": "Badge (flowbite.badge)/State",
+      "detail": "Active≡Hover",
+      "why": "Switching `State` renders Active≡Hover identically — geometry, fills and text all hash equal — leaving 2 of 3 values (Default, Active) that actually draw differently. The collapsed values are interaction states, and the state plane carries no drawn difference here: whatever the source expresses on `:hover`/`:focus-visible`/`:active`/`[disabled]` (a ring, a shadow, an opacity) is not reaching the canvas. Fix belongs in the state-preview emitter — the state cell is minted from the same declarations as the default cell."
+    },
+    {
+      "library": "tailwind",
+      "id": "flowbite.button",
+      "assertion": "variants",
+      "code": "DEAD-AXIS-VALUE",
+      "subject": "Button (flowbite.button)/State",
+      "detail": "Default≡Disabled, Active≡Hover",
+      "why": "Switching `State` renders Default≡Disabled, Active≡Hover identically — geometry, fills and text all hash equal — leaving 3 of 5 values (Default, Active, Focus Visible) that actually draw differently. The collapsed values are interaction states, and the state plane carries no drawn difference here: whatever the source expresses on `:hover`/`:focus-visible`/`:active`/`[disabled]` (a ring, a shadow, an opacity) is not reaching the canvas. Fix belongs in the state-preview emitter — the state cell is minted from the same declarations as the default cell."
+    },
+    {
+      "library": "tailwind",
+      "id": "flowbite.card",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Card (flowbite.card)",
+      "detail": "0/1 responded; frozen label",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: the single child kept its exact box. The container is VERTICAL HUG×HUG, primaryAxisAlignItems MIN. `label` (FRAME 147×72) keeps its intrinsic box in a MIN stack: the container simply gains slack and nothing stretches or re-aligns. Fix is the layout-family lowering rule (fill/stretch sizing and alignment from the source CSS), not a nudge to this baseline."
+    },
+    {
+      "library": "tailwind",
+      "id": "flowbite.helpertext",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Color=Gray",
+      "detail": "0/1 responded; frozen label",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: the single child kept its exact box. The container is VERTICAL FIXED×HUG, primaryAxisAlignItems MIN. `label` (TEXT 74×20) is exactly as wide/tall as the container was and was fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside it — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision."
+    },
+    {
+      "library": "tailwind",
+      "id": "flowbite.kbd",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Kbd",
+      "detail": "0/1 responded; frozen label",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: the single child kept its exact box. The container is VERTICAL FIXED×HUG, primaryAxisAlignItems MIN. `label` (TEXT 22×16) keeps its intrinsic box in a MIN stack: the container simply gains slack and nothing stretches or re-aligns. Fix is the layout-family lowering rule (fill/stretch sizing and alignment from the source CSS), not a nudge to this baseline."
+    },
+    {
+      "library": "tailwind",
+      "id": "flowbite.label",
+      "assertion": "reflow",
+      "code": "FROZEN-CHILDREN",
+      "subject": "Color=Default",
+      "detail": "0/1 responded; frozen label",
+      "why": "Growing the variant +40×+40 moved and resized NOTHING: the single child kept its exact box. The container is VERTICAL FIXED×HUG, primaryAxisAlignItems MIN. `label` (TEXT 67×20) is exactly as wide/tall as the container was and was fixed at that measured size rather than filling the axis, so the extra 40px becomes slack beside it — the part was lowered to the pixel size it happened to have when captured. Fix is the layout-family lowering rule: a part the source stretches (`width:100%`, `flex:1`, a block child) has to carry a fill/grow sizing decision."
     }
   ]
 }

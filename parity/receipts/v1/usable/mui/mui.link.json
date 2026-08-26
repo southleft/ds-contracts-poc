@@ -1,0 +1,319 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / mui",
+  "setNodeId": "39:17301",
+  "setName": "Link (mui.link)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:17217",
+  "variantNodeName": "Color=Primary, Underline=Hover, State=Default",
+  "axes": [
+    {
+      "axis": "Color",
+      "values": [
+        "Primary",
+        "Secondary",
+        "Error",
+        "Info",
+        "Success",
+        "Warning",
+        "Inherit"
+      ]
+    },
+    {
+      "axis": "Underline",
+      "values": [
+        "Hover",
+        "None",
+        "Always"
+      ]
+    },
+    {
+      "axis": "State",
+      "values": [
+        "Default",
+        "Focus Visible",
+        "Active",
+        "Hover"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 42,
+  "variantChildNames": [
+    "Color=Primary, Underline=Hover, State=Default",
+    "Color=Primary, Underline=None, State=Default",
+    "Color=Primary, Underline=Always, State=Default",
+    "Color=Secondary, Underline=Hover, State=Default",
+    "Color=Secondary, Underline=None, State=Default",
+    "Color=Secondary, Underline=Always, State=Default",
+    "Color=Error, Underline=Hover, State=Default",
+    "Color=Error, Underline=None, State=Default",
+    "Color=Error, Underline=Always, State=Default",
+    "Color=Info, Underline=Hover, State=Default",
+    "Color=Info, Underline=None, State=Default",
+    "Color=Info, Underline=Always, State=Default",
+    "Color=Success, Underline=Hover, State=Default",
+    "Color=Success, Underline=None, State=Default",
+    "Color=Success, Underline=Always, State=Default",
+    "Color=Warning, Underline=Hover, State=Default",
+    "Color=Warning, Underline=None, State=Default",
+    "Color=Warning, Underline=Always, State=Default",
+    "Color=Inherit, Underline=Hover, State=Default",
+    "Color=Inherit, Underline=None, State=Default",
+    "Color=Inherit, Underline=Always, State=Default",
+    "Color=Primary, Underline=Hover, State=Focus Visible",
+    "Color=Secondary, Underline=Hover, State=Focus Visible",
+    "Color=Error, Underline=Hover, State=Focus Visible",
+    "Color=Info, Underline=Hover, State=Focus Visible",
+    "Color=Success, Underline=Hover, State=Focus Visible",
+    "Color=Warning, Underline=Hover, State=Focus Visible",
+    "Color=Inherit, Underline=Hover, State=Focus Visible",
+    "Color=Primary, Underline=Hover, State=Active",
+    "Color=Secondary, Underline=Hover, State=Active",
+    "Color=Error, Underline=Hover, State=Active",
+    "Color=Info, Underline=Hover, State=Active",
+    "Color=Success, Underline=Hover, State=Active",
+    "Color=Warning, Underline=Hover, State=Active",
+    "Color=Inherit, Underline=Hover, State=Active",
+    "Color=Primary, Underline=Hover, State=Hover",
+    "Color=Secondary, Underline=Hover, State=Hover",
+    "Color=Error, Underline=Hover, State=Hover",
+    "Color=Info, Underline=Hover, State=Hover",
+    "Color=Success, Underline=Hover, State=Hover",
+    "Color=Warning, Underline=Hover, State=Hover",
+    "Color=Inherit, Underline=Hover, State=Hover"
+  ],
+  "reflow": {
+    "target": "39:17217",
+    "targetName": "Color=Primary, Underline=Hover, State=Default",
+    "layoutMode": "VERTICAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 31,
+      "h": 19,
+      "children": [
+        {
+          "id": "39:17218",
+          "name": "label",
+          "type": "TEXT",
+          "x": 0,
+          "y": 0,
+          "w": 31,
+          "h": 19,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 71,
+      "h": 59,
+      "children": [
+        {
+          "id": "39:17218",
+          "name": "label",
+          "type": "TEXT",
+          "x": 0,
+          "y": 0,
+          "w": 31,
+          "h": 19,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "label"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 31,
+      "h": 19
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:2305",
+    "baseline": {
+      "geometry": "acee7df94155326f",
+      "fills": "d9a6351e2cecee80",
+      "text": "5d979c47c9926685"
+    },
+    "axes": [
+      {
+        "axis": "Color",
+        "values": [
+          {
+            "value": "Primary",
+            "geometry": "acee7df94155326f",
+            "fills": "d9a6351e2cecee80",
+            "text": "5d979c47c9926685"
+          },
+          {
+            "value": "Secondary",
+            "geometry": "acee7df94155326f",
+            "fills": "16f623babf303bac",
+            "text": "5d979c47c9926685"
+          },
+          {
+            "value": "Error",
+            "geometry": "acee7df94155326f",
+            "fills": "41782ee00a96a11f",
+            "text": "5d979c47c9926685"
+          },
+          {
+            "value": "Info",
+            "geometry": "acee7df94155326f",
+            "fills": "68251e6fde7af828",
+            "text": "5d979c47c9926685"
+          },
+          {
+            "value": "Success",
+            "geometry": "acee7df94155326f",
+            "fills": "d2c266a36f15422f",
+            "text": "5d979c47c9926685"
+          },
+          {
+            "value": "Warning",
+            "geometry": "acee7df94155326f",
+            "fills": "d1916caf86023f70",
+            "text": "5d979c47c9926685"
+          },
+          {
+            "value": "Inherit",
+            "geometry": "acee7df94155326f",
+            "fills": "c17c63a207d17660",
+            "text": "5d979c47c9926685"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Underline",
+        "values": [
+          {
+            "value": "Hover",
+            "geometry": "acee7df94155326f",
+            "fills": "d9a6351e2cecee80",
+            "text": "5d979c47c9926685"
+          },
+          {
+            "value": "None",
+            "geometry": "acee7df94155326f",
+            "fills": "d9a6351e2cecee80",
+            "text": "5d979c47c9926685"
+          },
+          {
+            "value": "Always",
+            "geometry": "acee7df94155326f",
+            "fills": "d9a6351e2cecee80",
+            "text": "5d979c47c9926685"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "State",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "acee7df94155326f",
+            "fills": "d9a6351e2cecee80",
+            "text": "5d979c47c9926685"
+          },
+          {
+            "value": "Focus Visible",
+            "geometry": "acee7df94155326f",
+            "fills": "4839cf6014bd2c70",
+            "text": "5d979c47c9926685"
+          },
+          {
+            "value": "Active",
+            "geometry": "acee7df94155326f",
+            "fills": "d9a6351e2cecee80",
+            "text": "5d979c47c9926685"
+          },
+          {
+            "value": "Hover",
+            "geometry": "acee7df94155326f",
+            "fills": "d9a6351e2cecee80",
+            "text": "5d979c47c9926685"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 1,
+    "bound": 1,
+    "inferred": 0,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 1,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Color=Primary, Underline=Hover, State=Default",
+      "name": "Color=Primary, Underline=Hover, State=Default",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 31,
+      "h": 19,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 31,
+      "h": 19,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasAfter": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasRestored": true
+}

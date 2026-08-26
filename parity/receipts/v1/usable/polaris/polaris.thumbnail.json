@@ -1,0 +1,199 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / polaris",
+  "setNodeId": "39:22944",
+  "setName": "Thumbnail",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:22936",
+  "variantNodeName": "Size=Medium",
+  "axes": [
+    {
+      "axis": "Size",
+      "values": [
+        "Medium",
+        "Extra Small",
+        "Small",
+        "Large"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 4,
+  "variantChildNames": [
+    "Size=Medium",
+    "Size=Extra Small",
+    "Size=Small",
+    "Size=Large"
+  ],
+  "reflow": {
+    "target": "39:22936",
+    "targetName": "Size=Medium",
+    "layoutMode": "VERTICAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 60,
+      "h": 60,
+      "children": [
+        {
+          "id": "39:22937",
+          "name": "part-0",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 60,
+          "h": 60,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 100,
+      "h": 100,
+      "children": [
+        {
+          "id": "39:22937",
+          "name": "part-0",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 60,
+          "h": 60,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "part-0"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 60,
+      "h": 60
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:3401",
+    "baseline": {
+      "geometry": "8a93c668e72eb20f",
+      "fills": "5aea589a201a24a4",
+      "text": "00001505811c9dc5"
+    },
+    "axes": [
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Medium",
+            "geometry": "8a93c668e72eb20f",
+            "fills": "5aea589a201a24a4",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Extra Small",
+            "geometry": "b981eda83ce8dea4",
+            "fills": "5aea589a201a24a4",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Small",
+            "geometry": "ad83ece803d5d9b8",
+            "fills": "5aea589a201a24a4",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Large",
+            "geometry": "a053bce87cd3f8ea",
+            "fills": "5aea589a201a24a4",
+            "text": "00001505811c9dc5"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 15,
+    "bound": 11,
+    "inferred": 4,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 2,
+        "inferred": 3,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 8,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Size=Medium",
+      "name": "Size=Medium",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 60,
+      "h": 60,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/part-0[0]",
+      "name": "part-0",
+      "type": "FRAME",
+      "layoutPositioning": "ABSOLUTE",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 60,
+      "h": 60,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 3326,
+    "sig": "c09e90afe241d48c"
+  },
+  "canvasAfter": {
+    "nodes": 3326,
+    "sig": "c09e90afe241d48c"
+  },
+  "canvasRestored": true
+}

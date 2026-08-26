@@ -1,0 +1,241 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / polaris",
+  "setNodeId": "39:22537",
+  "setName": "ProgressBar (polaris.progress-bar)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:22513",
+  "variantNodeName": "Size=Medium, Tone=Highlight",
+  "axes": [
+    {
+      "axis": "Size",
+      "values": [
+        "Medium",
+        "Small",
+        "Large"
+      ]
+    },
+    {
+      "axis": "Tone",
+      "values": [
+        "Highlight",
+        "Primary",
+        "Success",
+        "Critical"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 12,
+  "variantChildNames": [
+    "Size=Medium, Tone=Highlight",
+    "Size=Medium, Tone=Primary",
+    "Size=Medium, Tone=Success",
+    "Size=Medium, Tone=Critical",
+    "Size=Small, Tone=Highlight",
+    "Size=Small, Tone=Primary",
+    "Size=Small, Tone=Success",
+    "Size=Small, Tone=Critical",
+    "Size=Large, Tone=Highlight",
+    "Size=Large, Tone=Primary",
+    "Size=Large, Tone=Success",
+    "Size=Large, Tone=Critical"
+  ],
+  "reflow": {
+    "target": "39:22513",
+    "targetName": "Size=Medium, Tone=Highlight",
+    "layoutMode": "VERTICAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 288,
+      "h": 16,
+      "children": [
+        {
+          "id": "39:22514",
+          "name": "indicator",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 115,
+          "h": 16,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 328,
+      "h": 56,
+      "children": [
+        {
+          "id": "39:22514",
+          "name": "indicator",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 115,
+          "h": 16,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "indicator"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 288,
+      "h": 16
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:3078",
+    "baseline": {
+      "geometry": "e32b9bc0a0b1248a",
+      "fills": "58dbb198501f7bb4",
+      "text": "00001505811c9dc5"
+    },
+    "axes": [
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Medium",
+            "geometry": "e32b9bc0a0b1248a",
+            "fills": "58dbb198501f7bb4",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Small",
+            "geometry": "018ddba08f39642b",
+            "fills": "58dbb198501f7bb4",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Large",
+            "geometry": "d6cb48807c57aef4",
+            "fills": "58dbb198501f7bb4",
+            "text": "00001505811c9dc5"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Tone",
+        "values": [
+          {
+            "value": "Highlight",
+            "geometry": "e32b9bc0a0b1248a",
+            "fills": "58dbb198501f7bb4",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Primary",
+            "geometry": "e32b9bc0a0b1248a",
+            "fills": "866a06cc98258a54",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Success",
+            "geometry": "e32b9bc0a0b1248a",
+            "fills": "9263bcee9fa49bc8",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Critical",
+            "geometry": "e32b9bc0a0b1248a",
+            "fills": "d4e58a55ba690337",
+            "text": "00001505811c9dc5"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 10,
+    "bound": 7,
+    "inferred": 2,
+    "literal": 1,
+    "byGroup": {
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 1,
+        "inferred": 2,
+        "literal": 1
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [
+      "/indicator[0]·width=115"
+    ],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Size=Medium, Tone=Highlight",
+      "name": "Size=Medium, Tone=Highlight",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 288,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/indicator[0]",
+      "name": "indicator",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 115,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 3326,
+    "sig": "c09e90afe241d48c"
+  },
+  "canvasAfter": {
+    "nodes": 3326,
+    "sig": "c09e90afe241d48c"
+  },
+  "canvasRestored": true
+}

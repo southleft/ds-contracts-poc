@@ -1,0 +1,200 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / polaris",
+  "setNodeId": "39:22566",
+  "setName": "Spinner (polaris.spinner)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:22560",
+  "variantNodeName": "Size=Large",
+  "axes": [
+    {
+      "axis": "Size",
+      "values": [
+        "Large",
+        "Small"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 2,
+  "variantChildNames": [
+    "Size=Large",
+    "Size=Small"
+  ],
+  "reflow": {
+    "target": "39:22560",
+    "targetName": "Size=Large",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "HUG",
+      "primary": "FIXED",
+      "counter": "AUTO",
+      "primaryAlign": "CENTER",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 44,
+      "h": 44,
+      "children": [
+        {
+          "id": "39:22561",
+          "name": "root-large",
+          "type": "FRAME",
+          "x": 44,
+          "y": 0,
+          "w": 44,
+          "h": 44,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 84,
+      "h": 84,
+      "children": [
+        {
+          "id": "39:22561",
+          "name": "root-large",
+          "type": "FRAME",
+          "x": 64,
+          "y": 20,
+          "w": 44,
+          "h": 44,
+          "ax": 20,
+          "ay": 20,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "root-large",
+        "dx": 20,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 44,
+      "h": 44
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:3110",
+    "baseline": {
+      "geometry": "baac5905db689ab8",
+      "fills": "1c78cccdc29409e4",
+      "text": "00001505811c9dc5"
+    },
+    "axes": [
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Large",
+            "geometry": "baac5905db689ab8",
+            "fills": "1c78cccdc29409e4",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Small",
+            "geometry": "294c67a2db135870",
+            "fills": "7fb15a8dc96122d0",
+            "text": "00001505811c9dc5"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 6,
+    "bound": 1,
+    "inferred": 3,
+    "literal": 2,
+    "byGroup": {
+      "sizing": {
+        "bound": 0,
+        "inferred": 3,
+        "literal": 2
+      },
+      "fills": {
+        "bound": 1,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [
+      "/root-large[0]/Vector[0]·width=42.36",
+      "/root-large[0]/Vector[0]·height=42.08"
+    ],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Size=Large",
+      "name": "Size=Large",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 44,
+      "h": 44,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/root-large[0]",
+      "name": "root-large",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 44,
+      "h": 44,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/root-large[0]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 42.36,
+      "h": 42.08,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 3326,
+    "sig": "c09e90afe241d48c"
+  },
+  "canvasAfter": {
+    "nodes": 3326,
+    "sig": "c09e90afe241d48c"
+  },
+  "canvasRestored": true
+}

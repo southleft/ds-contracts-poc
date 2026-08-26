@@ -1,0 +1,263 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / astryx",
+  "setNodeId": "39:14168",
+  "setName": "ProgressBar",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:14148",
+  "variantNodeName": "Variant=Accent",
+  "axes": [
+    {
+      "axis": "Variant",
+      "values": [
+        "Accent",
+        "Success",
+        "Warning",
+        "Neutral",
+        "Error"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 5,
+  "variantChildNames": [
+    "Variant=Accent",
+    "Variant=Success",
+    "Variant=Warning",
+    "Variant=Neutral",
+    "Variant=Error"
+  ],
+  "reflow": {
+    "target": "39:14148",
+    "targetName": "Variant=Accent",
+    "layoutMode": "VERTICAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "FIXED",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 240,
+      "h": 20,
+      "children": [
+        {
+          "id": "39:14149",
+          "name": "label",
+          "type": "TEXT",
+          "x": 0,
+          "y": 0,
+          "w": 47,
+          "h": 12,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:14150",
+          "name": "track",
+          "type": "FRAME",
+          "x": 0,
+          "y": 16,
+          "w": 240,
+          "h": 4,
+          "ax": 0,
+          "ay": 16,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 280,
+      "h": 60,
+      "children": [
+        {
+          "id": "39:14149",
+          "name": "label",
+          "type": "TEXT",
+          "x": 0,
+          "y": 0,
+          "w": 47,
+          "h": 12,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:14150",
+          "name": "track",
+          "type": "FRAME",
+          "x": 0,
+          "y": 16,
+          "w": 240,
+          "h": 4,
+          "ax": 0,
+          "ay": 16,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "label",
+      "track"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 240,
+      "h": 20
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:1110",
+    "baseline": {
+      "geometry": "1f0a5cc27afa2fe0",
+      "fills": "7bff03a46ea4db0c",
+      "text": "7996e7e4b913e0ad"
+    },
+    "axes": [
+      {
+        "axis": "Variant",
+        "values": [
+          {
+            "value": "Accent",
+            "geometry": "1f0a5cc27afa2fe0",
+            "fills": "7bff03a46ea4db0c",
+            "text": "7996e7e4b913e0ad"
+          },
+          {
+            "value": "Success",
+            "geometry": "1f0a5cc27afa2fe0",
+            "fills": "54ebc57986e8e618",
+            "text": "7996e7e4b913e0ad"
+          },
+          {
+            "value": "Warning",
+            "geometry": "1f0a5cc27afa2fe0",
+            "fills": "51c99f81d1aa3810",
+            "text": "7996e7e4b913e0ad"
+          },
+          {
+            "value": "Neutral",
+            "geometry": "1f0a5cc27afa2fe0",
+            "fills": "40aabdb62f68392f",
+            "text": "7996e7e4b913e0ad"
+          },
+          {
+            "value": "Error",
+            "geometry": "1f0a5cc27afa2fe0",
+            "fills": "5e37c05aecea3a18",
+            "text": "7996e7e4b913e0ad"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 17,
+    "bound": 14,
+    "inferred": 3,
+    "literal": 0,
+    "byGroup": {
+      "spacing": {
+        "bound": 1,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 2,
+        "inferred": 3,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 3,
+        "inferred": 0,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 8,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Variant=Accent",
+      "name": "Variant=Accent",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 2,
+      "w": 240,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 47,
+      "h": 12,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/track[1]",
+      "name": "track",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 240,
+      "h": 4,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/track[1]/fill[0]",
+      "name": "fill",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 96,
+      "h": 4,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 440,
+    "sig": "8f17151526c142bc"
+  },
+  "canvasAfter": {
+    "nodes": 440,
+    "sig": "8f17151526c142bc"
+  },
+  "canvasRestored": true
+}

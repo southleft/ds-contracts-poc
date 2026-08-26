@@ -1,0 +1,242 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / first-party",
+  "setNodeId": "39:23955",
+  "setName": "Slider (ds.slider)",
+  "setType": "COMPONENT",
+  "variantNodeId": "39:23955",
+  "variantNodeName": "Slider (ds.slider)",
+  "axes": null,
+  "axesError": null,
+  "variantChildCount": 1,
+  "variantChildNames": [
+    "Slider (ds.slider)"
+  ],
+  "reflow": {
+    "target": "39:23955",
+    "targetName": "Slider (ds.slider)",
+    "layoutMode": "VERTICAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "FIXED",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 320,
+      "h": 37,
+      "children": [
+        {
+          "id": "39:23956",
+          "name": "labelText",
+          "type": "TEXT",
+          "x": 0,
+          "y": 0,
+          "w": 50,
+          "h": 17,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:23957",
+          "name": "trackRow",
+          "type": "FRAME",
+          "x": 0,
+          "y": 21,
+          "w": 320,
+          "h": 16,
+          "ax": 0,
+          "ay": 21,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 360,
+      "h": 77,
+      "children": [
+        {
+          "id": "39:23956",
+          "name": "labelText",
+          "type": "TEXT",
+          "x": 0,
+          "y": 0,
+          "w": 50,
+          "h": 17,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:23957",
+          "name": "trackRow",
+          "type": "FRAME",
+          "x": 0,
+          "y": 21,
+          "w": 320,
+          "h": 16,
+          "ax": 0,
+          "ay": 21,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "labelText",
+      "trackRow"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 320,
+      "h": 37
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:4066",
+    "baseline": {
+      "geometry": "d0943d51e107c59c",
+      "fills": "4553b897dbae0ec0",
+      "text": "e9519892e7d4b9fc"
+    },
+    "axes": [],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 27,
+    "bound": 23,
+    "inferred": 4,
+    "literal": 0,
+    "byGroup": {
+      "spacing": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 5,
+        "inferred": 2,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 12,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Slider (ds.slider)",
+      "name": "Slider (ds.slider)",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 2,
+      "w": 320,
+      "h": 37,
+      "visible": true,
+      "parentLayoutMode": null,
+      "parentType": "SECTION"
+    },
+    {
+      "path": "/labelText[0]",
+      "name": "labelText",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 50,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/trackRow[1]",
+      "name": "trackRow",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 3,
+      "w": 320,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/trackRow[1]/filled[0]",
+      "name": "filled",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 128,
+      "h": 4,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/trackRow[1]/thumb[1]",
+      "name": "thumb",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 16,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/trackRow[1]/remainder[2]",
+      "name": "remainder",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 176,
+      "h": 4,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasAfter": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasRestored": true
+}

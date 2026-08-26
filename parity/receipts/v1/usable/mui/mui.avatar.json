@@ -1,0 +1,197 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / mui",
+  "setNodeId": "39:16737",
+  "setName": "Avatar (mui.avatar)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:16731",
+  "variantNodeName": "Variant=Circular",
+  "axes": [
+    {
+      "axis": "Variant",
+      "values": [
+        "Circular",
+        "Rounded",
+        "Square"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 3,
+  "variantChildNames": [
+    "Variant=Circular",
+    "Variant=Rounded",
+    "Variant=Square"
+  ],
+  "reflow": {
+    "target": "39:16731",
+    "targetName": "Variant=Circular",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "CENTER",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 40,
+      "h": 40,
+      "children": [
+        {
+          "id": "39:16732",
+          "name": "label",
+          "type": "TEXT",
+          "x": 13,
+          "y": 10,
+          "w": 14,
+          "h": 20,
+          "ax": 13,
+          "ay": 10,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 80,
+      "h": 80,
+      "children": [
+        {
+          "id": "39:16732",
+          "name": "label",
+          "type": "TEXT",
+          "x": 33,
+          "y": 30,
+          "w": 14,
+          "h": 20,
+          "ax": 33,
+          "ay": 30,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "label",
+        "dx": 20,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 40,
+      "h": 40
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:2098",
+    "baseline": {
+      "geometry": "8fd9b40f4b57e230",
+      "fills": "1fafd5b29681b0e8",
+      "text": "92d74586ea1b0f8c"
+    },
+    "axes": [
+      {
+        "axis": "Variant",
+        "values": [
+          {
+            "value": "Circular",
+            "geometry": "8fd9b40f4b57e230",
+            "fills": "1fafd5b29681b0e8",
+            "text": "92d74586ea1b0f8c"
+          },
+          {
+            "value": "Rounded",
+            "geometry": "a4ab47b97a0d53d0",
+            "fills": "1fafd5b29681b0e8",
+            "text": "92d74586ea1b0f8c"
+          },
+          {
+            "value": "Square",
+            "geometry": "761e3b3de39a7ff0",
+            "fills": "1fafd5b29681b0e8",
+            "text": "92d74586ea1b0f8c"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 8,
+    "bound": 6,
+    "inferred": 2,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 2,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Variant=Circular",
+      "name": "Variant=Circular",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 40,
+      "h": 40,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 14,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasAfter": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasRestored": true
+}

@@ -1,0 +1,201 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / mui",
+  "setNodeId": "39:17103",
+  "setName": "CircularProgress",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:17097",
+  "variantNodeName": "Variant=Indeterminate",
+  "axes": [
+    {
+      "axis": "Variant",
+      "values": [
+        "Indeterminate",
+        "Determinate"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 2,
+  "variantChildNames": [
+    "Variant=Indeterminate",
+    "Variant=Determinate"
+  ],
+  "reflow": {
+    "target": "39:17097",
+    "targetName": "Variant=Indeterminate",
+    "layoutMode": "VERTICAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 40,
+      "h": 40,
+      "children": [
+        {
+          "id": "39:17098",
+          "name": "root-indeterminate",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 40,
+          "h": 40,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 80,
+      "h": 80,
+      "children": [
+        {
+          "id": "39:17098",
+          "name": "root-indeterminate",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 80,
+          "h": 40,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "root-indeterminate",
+        "dx": 0,
+        "dy": 0,
+        "dw": 40,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 40,
+      "h": 40
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:2225",
+    "baseline": {
+      "geometry": "72f881e8a20d7eb0",
+      "fills": "a8f7fe8d88d75550",
+      "text": "00001505811c9dc5"
+    },
+    "axes": [
+      {
+        "axis": "Variant",
+        "values": [
+          {
+            "value": "Indeterminate",
+            "geometry": "72f881e8a20d7eb0",
+            "fills": "a8f7fe8d88d75550",
+            "text": "00001505811c9dc5"
+          },
+          {
+            "value": "Determinate",
+            "geometry": "00e1e9489c8c6397",
+            "fills": "080a6b6d4f6bb0d0",
+            "text": "00001505811c9dc5"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 6,
+    "bound": 1,
+    "inferred": 2,
+    "literal": 3,
+    "byGroup": {
+      "sizing": {
+        "bound": 0,
+        "inferred": 2,
+        "literal": 2
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 0,
+        "literal": 1
+      }
+    },
+    "literalSites": [
+      "/root-indeterminate[0]/Vector[0]·strokeWeight=3.5999999046325684",
+      "/root-indeterminate[0]/Vector[0]·width=36.73",
+      "/root-indeterminate[0]/Vector[0]·height=36.73"
+    ],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Variant=Indeterminate",
+      "name": "Variant=Indeterminate",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 40,
+      "h": 40,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/root-indeterminate[0]",
+      "name": "root-indeterminate",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 40,
+      "h": 40,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/root-indeterminate[0]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 36.73,
+      "h": 36.73,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasAfter": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasRestored": true
+}

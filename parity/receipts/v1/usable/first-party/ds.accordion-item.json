@@ -1,0 +1,242 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / first-party",
+  "setNodeId": "39:23247",
+  "setName": "AccordionItem",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:23236",
+  "variantNodeName": "State=Closed",
+  "axes": [
+    {
+      "axis": "State",
+      "values": [
+        "Closed",
+        "Open"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 2,
+  "variantChildNames": [
+    "State=Closed",
+    "State=Open"
+  ],
+  "reflow": {
+    "target": "39:23236",
+    "targetName": "State=Closed",
+    "layoutMode": "VERTICAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 320,
+      "h": 35,
+      "children": [
+        {
+          "id": "39:23237",
+          "name": "trigger",
+          "type": "FRAME",
+          "x": 1,
+          "y": 1,
+          "w": 318,
+          "h": 33,
+          "ax": 1,
+          "ay": 1,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 360,
+      "h": 75,
+      "children": [
+        {
+          "id": "39:23237",
+          "name": "trigger",
+          "type": "FRAME",
+          "x": 1,
+          "y": 1,
+          "w": 358,
+          "h": 33,
+          "ax": 1,
+          "ay": 1,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "trigger",
+        "dx": 0,
+        "dy": 0,
+        "dw": 40,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 320,
+      "h": 35
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:3546",
+    "baseline": {
+      "geometry": "575066676332216b",
+      "fills": "e6216f0c43fcd3a3",
+      "text": "fad642150f7c36e9"
+    },
+    "axes": [
+      {
+        "axis": "State",
+        "values": [
+          {
+            "value": "Closed",
+            "geometry": "575066676332216b",
+            "fills": "e6216f0c43fcd3a3",
+            "text": "fad642150f7c36e9"
+          },
+          {
+            "value": "Open",
+            "geometry": "589065623c405d78",
+            "fills": "df24520b205cf64c",
+            "text": "fad642150f7c36e9"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 20,
+    "bound": 13,
+    "inferred": 4,
+    "literal": 3,
+    "byGroup": {
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 2,
+        "inferred": 1,
+        "literal": 1
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 3,
+        "literal": 2
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 5,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [
+      "/trigger[0]/chevron[0]/Vector[0]·strokeWeight=1.0499999523162842",
+      "/trigger[0]/chevron[0]/Vector[0]·width=3.15",
+      "/trigger[0]/chevron[0]/Vector[0]·height=6.3"
+    ],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/State=Closed",
+      "name": "State=Closed",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 320,
+      "h": 35,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/trigger[0]",
+      "name": "trigger",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 318,
+      "h": 33,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/trigger[0]/chevron[0]",
+      "name": "chevron",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 14,
+      "h": 14,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/trigger[0]/chevron[0]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 3.15,
+      "h": 6.3,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/trigger[0]/titleText[1]",
+      "name": "titleText",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 81,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasAfter": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasRestored": true
+}

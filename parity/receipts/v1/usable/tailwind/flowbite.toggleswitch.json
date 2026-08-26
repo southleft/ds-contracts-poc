@@ -1,0 +1,305 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / tailwind",
+  "setNodeId": "39:6030",
+  "setName": "ToggleSwitch",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:6000",
+  "variantNodeName": "Sizing=Md, Checked=Unchecked",
+  "axes": [
+    {
+      "axis": "Sizing",
+      "values": [
+        "Md",
+        "Sm",
+        "Lg"
+      ]
+    },
+    {
+      "axis": "Checked",
+      "values": [
+        "Unchecked",
+        "Checked"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 6,
+  "variantChildNames": [
+    "Sizing=Md, Checked=Unchecked",
+    "Sizing=Md, Checked=Checked",
+    "Sizing=Sm, Checked=Unchecked",
+    "Sizing=Sm, Checked=Checked",
+    "Sizing=Lg, Checked=Unchecked",
+    "Sizing=Lg, Checked=Checked"
+  ],
+  "reflow": {
+    "target": "39:6000",
+    "targetName": "Sizing=Md, Checked=Unchecked",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "CENTER"
+    },
+    "before": {
+      "w": 100.44,
+      "h": 24,
+      "children": [
+        {
+          "id": "39:6001",
+          "name": "part-0",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 44,
+          "h": 24,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:6004",
+          "name": "label (margin box)",
+          "type": "FRAME",
+          "x": 56,
+          "y": 1,
+          "w": 46,
+          "h": 22,
+          "ax": 56,
+          "ay": 1,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 140.44,
+      "h": 64,
+      "children": [
+        {
+          "id": "39:6001",
+          "name": "part-0",
+          "type": "FRAME",
+          "x": 0,
+          "y": 20,
+          "w": 44,
+          "h": 24,
+          "ax": 0,
+          "ay": 20,
+          "visible": true
+        },
+        {
+          "id": "39:6004",
+          "name": "label (margin box)",
+          "type": "FRAME",
+          "x": 56,
+          "y": 21,
+          "w": 46,
+          "h": 22,
+          "ax": 56,
+          "ay": 21,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "part-0",
+        "dx": 0,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      },
+      {
+        "name": "label (margin box)",
+        "dx": 0,
+        "dy": 20,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 100.44,
+      "h": 24
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:291",
+    "baseline": {
+      "geometry": "b58694848fe38693",
+      "fills": "f3d58de4476d3a7c",
+      "text": "292d06e16a80748c"
+    },
+    "axes": [
+      {
+        "axis": "Sizing",
+        "values": [
+          {
+            "value": "Md",
+            "geometry": "b58694848fe38693",
+            "fills": "f3d58de4476d3a7c",
+            "text": "292d06e16a80748c"
+          },
+          {
+            "value": "Sm",
+            "geometry": "93c6ae595edb92dc",
+            "fills": "f3d58de4476d3a7c",
+            "text": "292d06e16a80748c"
+          },
+          {
+            "value": "Lg",
+            "geometry": "943fc64f81201acf",
+            "fills": "f3d58de4476d3a7c",
+            "text": "292d06e16a80748c"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Checked",
+        "values": [
+          {
+            "value": "Unchecked",
+            "geometry": "b58694848fe38693",
+            "fills": "f3d58de4476d3a7c",
+            "text": "292d06e16a80748c"
+          },
+          {
+            "value": "Checked",
+            "geometry": "e46dd716cda7885b",
+            "fills": "1175cf290064db90",
+            "text": "292d06e16a80748c"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 25,
+    "bound": 14,
+    "inferred": 11,
+    "literal": 0,
+    "byGroup": {
+      "spacing": {
+        "bound": 1,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 3,
+        "inferred": 8,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 8,
+        "inferred": 0,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 2,
+        "inferred": 1,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 0,
+        "inferred": 2,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Sizing=Md, Checked=Unchecked",
+      "name": "Sizing=Md, Checked=Unchecked",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 100.44,
+      "h": 24,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/part-0[0]",
+      "name": "part-0",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 44,
+      "h": 24,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/part-0[0]/part-0-after[0]",
+      "name": "part-0-after",
+      "type": "ELLIPSE",
+      "layoutPositioning": "ABSOLUTE",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 20,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/label (margin box)[1]",
+      "name": "label (margin box)",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 1,
+      "w": 46,
+      "h": 22,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/label (margin box)[1]/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 46,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 243,
+    "sig": "e17d8ad6cd30fd1c"
+  },
+  "canvasAfter": {
+    "nodes": 243,
+    "sig": "e17d8ad6cd30fd1c"
+  },
+  "canvasRestored": true
+}

@@ -1,0 +1,356 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / mui",
+  "setNodeId": "39:16598",
+  "setName": "Accordion (mui.accordion)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:16558",
+  "variantNodeName": "Variant=Elevation, Expanded=Collapsed",
+  "axes": [
+    {
+      "axis": "Variant",
+      "values": [
+        "Elevation",
+        "Outlined"
+      ]
+    },
+    {
+      "axis": "Expanded",
+      "values": [
+        "Collapsed",
+        "Expanded"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 4,
+  "variantChildNames": [
+    "Variant=Elevation, Expanded=Collapsed",
+    "Variant=Elevation, Expanded=Expanded",
+    "Variant=Outlined, Expanded=Collapsed",
+    "Variant=Outlined, Expanded=Expanded"
+  ],
+  "reflow": {
+    "target": "39:16558",
+    "targetName": "Variant=Elevation, Expanded=Collapsed",
+    "layoutMode": "VERTICAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 288,
+      "h": 48,
+      "children": [
+        {
+          "id": "39:16559",
+          "name": "accordion-heading",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 288,
+          "h": 48,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:16562",
+          "name": "collapse-root",
+          "type": "FRAME",
+          "x": 0,
+          "y": 48,
+          "w": 288,
+          "h": 0,
+          "ax": 0,
+          "ay": 48,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 328,
+      "h": 88,
+      "children": [
+        {
+          "id": "39:16559",
+          "name": "accordion-heading",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 328,
+          "h": 48,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:16562",
+          "name": "collapse-root",
+          "type": "FRAME",
+          "x": 0,
+          "y": 48,
+          "w": 288,
+          "h": 0,
+          "ax": 0,
+          "ay": 48,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "accordion-heading",
+        "dx": 0,
+        "dy": 0,
+        "dw": 40,
+        "dh": 0
+      }
+    ],
+    "frozen": [
+      "collapse-root"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 288,
+      "h": 48
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:1935",
+    "baseline": {
+      "geometry": "2e273ff70018a92c",
+      "fills": "61e86d9a7f85cb28",
+      "text": "cd8e2d541ce01ffc"
+    },
+    "axes": [
+      {
+        "axis": "Variant",
+        "values": [
+          {
+            "value": "Elevation",
+            "geometry": "2e273ff70018a92c",
+            "fills": "61e86d9a7f85cb28",
+            "text": "cd8e2d541ce01ffc"
+          },
+          {
+            "value": "Outlined",
+            "geometry": "217d6f9c95a9da48",
+            "fills": "e8d703b68fdbdf44",
+            "text": "cd8e2d541ce01ffc"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Expanded",
+        "values": [
+          {
+            "value": "Collapsed",
+            "geometry": "2e273ff70018a92c",
+            "fills": "61e86d9a7f85cb28",
+            "text": "cd8e2d541ce01ffc"
+          },
+          {
+            "value": "Expanded",
+            "geometry": "969a76d3242539d0",
+            "fills": "61e86d9a7f85cb28",
+            "text": "cd8e2d541ce01ffc"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 29,
+    "bound": 25,
+    "inferred": 4,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 6,
+        "inferred": 1,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 10,
+        "inferred": 2,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Variant=Elevation, Expanded=Collapsed",
+      "name": "Variant=Elevation, Expanded=Collapsed",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 2,
+      "w": 288,
+      "h": 48,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/accordion-heading[0]",
+      "name": "accordion-heading",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 288,
+      "h": 48,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/accordion-heading[0]/accordionsummary-gutters[0]",
+      "name": "accordionsummary-gutters",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 288,
+      "h": 48,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/accordion-heading[0]/accordionsummary-gutters[0]/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 256,
+      "h": 15,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/collapse-root[1]",
+      "name": "collapse-root",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 288,
+      "h": 0,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/collapse-root[1]/collapse-vertical[0]",
+      "name": "collapse-vertical",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 288,
+      "h": 60,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/collapse-root[1]/collapse-vertical[0]/collapse-vertical-2[0]",
+      "name": "collapse-vertical-2",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 288,
+      "h": 60,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/collapse-root[1]/collapse-vertical[0]/collapse-vertical-2[0]/accordion-region[0]",
+      "name": "accordion-region",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 288,
+      "h": 60,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/collapse-root[1]/collapse-vertical[0]/collapse-vertical-2[0]/accordion-region[0]/label-2[0]",
+      "name": "label-2",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 348,
+      "h": 43,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/collapse-root[1]/collapse-vertical[0]/collapse-vertical-2[0]/accordion-region[0]/label-2[0]/label-2-text[0]",
+      "name": "label-2-text",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 316,
+      "h": 19,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasAfter": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasRestored": true
+}

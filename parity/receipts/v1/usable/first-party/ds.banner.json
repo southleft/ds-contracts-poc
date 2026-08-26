@@ -1,0 +1,448 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / first-party",
+  "setNodeId": "39:23490",
+  "setName": "Banner (ds.banner)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:23388",
+  "variantNodeName": "Status=Info, Container=Card",
+  "axes": [
+    {
+      "axis": "Status",
+      "values": [
+        "Info",
+        "Success",
+        "Warning",
+        "Error"
+      ]
+    },
+    {
+      "axis": "Container",
+      "values": [
+        "Card",
+        "Section"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 8,
+  "variantChildNames": [
+    "Status=Info, Container=Card",
+    "Status=Info, Container=Section",
+    "Status=Success, Container=Card",
+    "Status=Success, Container=Section",
+    "Status=Warning, Container=Card",
+    "Status=Warning, Container=Section",
+    "Status=Error, Container=Card",
+    "Status=Error, Container=Section"
+  ],
+  "reflow": {
+    "target": "39:23388",
+    "targetName": "Status=Info, Container=Card",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 3,
+    "sizing": {
+      "h": "FIXED",
+      "v": "HUG",
+      "primary": "FIXED",
+      "counter": "AUTO",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 640,
+      "h": 64,
+      "children": [
+        {
+          "id": "39:23389",
+          "name": "statusIcon",
+          "type": "FRAME",
+          "x": 16,
+          "y": 12,
+          "w": 20,
+          "h": 20,
+          "ax": 16,
+          "ay": 12,
+          "visible": true
+        },
+        {
+          "id": "39:23393",
+          "name": "body",
+          "type": "FRAME",
+          "x": 44,
+          "y": 12,
+          "w": 552,
+          "h": 40,
+          "ax": 44,
+          "ay": 12,
+          "visible": true
+        },
+        {
+          "id": "39:23396",
+          "name": "endArea",
+          "type": "FRAME",
+          "x": 604,
+          "y": 12,
+          "w": 20,
+          "h": 20,
+          "ax": 604,
+          "ay": 12,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 680,
+      "h": 104,
+      "children": [
+        {
+          "id": "39:23389",
+          "name": "statusIcon",
+          "type": "FRAME",
+          "x": 16,
+          "y": 12,
+          "w": 20,
+          "h": 20,
+          "ax": 16,
+          "ay": 12,
+          "visible": true
+        },
+        {
+          "id": "39:23393",
+          "name": "body",
+          "type": "FRAME",
+          "x": 44,
+          "y": 12,
+          "w": 592,
+          "h": 40,
+          "ax": 44,
+          "ay": 12,
+          "visible": true
+        },
+        {
+          "id": "39:23396",
+          "name": "endArea",
+          "type": "FRAME",
+          "x": 644,
+          "y": 12,
+          "w": 20,
+          "h": 20,
+          "ax": 644,
+          "ay": 12,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "body",
+        "dx": 0,
+        "dy": 0,
+        "dw": 40,
+        "dh": 0
+      },
+      {
+        "name": "endArea",
+        "dx": 40,
+        "dy": 0,
+        "dw": 0,
+        "dh": 0
+      }
+    ],
+    "frozen": [
+      "statusIcon"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 640,
+      "h": 64
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:3618",
+    "baseline": {
+      "geometry": "1c0fbb526053ba70",
+      "fills": "507f25ac3b480fe8",
+      "text": "77697693dcddfb4c"
+    },
+    "axes": [
+      {
+        "axis": "Status",
+        "values": [
+          {
+            "value": "Info",
+            "geometry": "1c0fbb526053ba70",
+            "fills": "507f25ac3b480fe8",
+            "text": "77697693dcddfb4c"
+          },
+          {
+            "value": "Success",
+            "geometry": "fe23f23c7ddeb2c4",
+            "fills": "e66512e8c8d2274c",
+            "text": "77697693dcddfb4c"
+          },
+          {
+            "value": "Warning",
+            "geometry": "52b25872a7402e18",
+            "fills": "0d3a67bd907b9246",
+            "text": "77697693dcddfb4c"
+          },
+          {
+            "value": "Error",
+            "geometry": "1b9b932fa0871527",
+            "fills": "24459f2e9274da14",
+            "text": "77697693dcddfb4c"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Container",
+        "values": [
+          {
+            "value": "Card",
+            "geometry": "1c0fbb526053ba70",
+            "fills": "507f25ac3b480fe8",
+            "text": "77697693dcddfb4c"
+          },
+          {
+            "value": "Section",
+            "geometry": "7881945a57b0c400",
+            "fills": "507f25ac3b480fe8",
+            "text": "77697693dcddfb4c"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 38,
+    "bound": 19,
+    "inferred": 16,
+    "literal": 3,
+    "byGroup": {
+      "fills": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 7,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 12,
+        "literal": 3
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 4,
+        "inferred": 4,
+        "literal": 0
+      }
+    },
+    "literalSites": [
+      "/statusIcon[0]/Vector[1]·height=4.5",
+      "/statusIcon[0]/Vector[2]·width=1.8",
+      "/statusIcon[0]/Vector[2]·height=1.8"
+    ],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Status=Info, Container=Card",
+      "name": "Status=Info, Container=Card",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 3,
+      "w": 640,
+      "h": 64,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/statusIcon[0]",
+      "name": "statusIcon",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 3,
+      "w": 20,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/statusIcon[0]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 15,
+      "h": 15,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/statusIcon[0]/Vector[1]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 0,
+      "h": 4.5,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/statusIcon[0]/Vector[2]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 1.8,
+      "h": 1.8,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/body[1]",
+      "name": "body",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 2,
+      "w": 552,
+      "h": 40,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/body[1]/title[0]",
+      "name": "title",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 90,
+      "h": 19,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/body[1]/descriptionText[1]",
+      "name": "descriptionText",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 450,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/endArea[2]",
+      "name": "endArea",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 20,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/endArea[2]/EndContent[0]",
+      "name": "EndContent",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 1,
+      "h": 1,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/endArea[2]/close[1]",
+      "name": "close",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "NONE",
+      "childCount": 2,
+      "w": 20,
+      "h": 20,
+      "visible": false,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/endArea[2]/close[1]/Vector[0]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 10,
+      "h": 10,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/endArea[2]/close[1]/Vector[1]",
+      "name": "Vector",
+      "type": "VECTOR",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 10,
+      "h": 10,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasAfter": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasRestored": true
+}

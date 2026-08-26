@@ -1,0 +1,371 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / fluent",
+  "setNodeId": "39:13436",
+  "setName": "TabList",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:13268",
+  "variantNodeName": "Appearance=Transparent, Size=Medium, Orientation=Horizontal",
+  "axes": [
+    {
+      "axis": "Appearance",
+      "values": [
+        "Transparent",
+        "Subtle",
+        "Subtle Circular",
+        "Filled Circular"
+      ]
+    },
+    {
+      "axis": "Size",
+      "values": [
+        "Medium",
+        "Small",
+        "Large"
+      ]
+    },
+    {
+      "axis": "Orientation",
+      "values": [
+        "Horizontal",
+        "Vertical"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 24,
+  "variantChildNames": [
+    "Appearance=Transparent, Size=Medium, Orientation=Horizontal",
+    "Appearance=Transparent, Size=Medium, Orientation=Vertical",
+    "Appearance=Transparent, Size=Small, Orientation=Horizontal",
+    "Appearance=Transparent, Size=Small, Orientation=Vertical",
+    "Appearance=Transparent, Size=Large, Orientation=Horizontal",
+    "Appearance=Transparent, Size=Large, Orientation=Vertical",
+    "Appearance=Subtle, Size=Medium, Orientation=Horizontal",
+    "Appearance=Subtle, Size=Medium, Orientation=Vertical",
+    "Appearance=Subtle, Size=Small, Orientation=Horizontal",
+    "Appearance=Subtle, Size=Small, Orientation=Vertical",
+    "Appearance=Subtle, Size=Large, Orientation=Horizontal",
+    "Appearance=Subtle, Size=Large, Orientation=Vertical",
+    "Appearance=Subtle Circular, Size=Medium, Orientation=Horizontal",
+    "Appearance=Subtle Circular, Size=Medium, Orientation=Vertical",
+    "Appearance=Subtle Circular, Size=Small, Orientation=Horizontal",
+    "Appearance=Subtle Circular, Size=Small, Orientation=Vertical",
+    "Appearance=Subtle Circular, Size=Large, Orientation=Horizontal",
+    "Appearance=Subtle Circular, Size=Large, Orientation=Vertical",
+    "Appearance=Filled Circular, Size=Medium, Orientation=Horizontal",
+    "Appearance=Filled Circular, Size=Medium, Orientation=Vertical",
+    "Appearance=Filled Circular, Size=Small, Orientation=Horizontal",
+    "Appearance=Filled Circular, Size=Small, Orientation=Vertical",
+    "Appearance=Filled Circular, Size=Large, Orientation=Horizontal",
+    "Appearance=Filled Circular, Size=Large, Orientation=Vertical"
+  ],
+  "reflow": {
+    "target": "39:13268",
+    "targetName": "Appearance=Transparent, Size=Medium, Orientation=Horizontal",
+    "layoutMode": "HORIZONTAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 163,
+      "h": 44,
+      "children": [
+        {
+          "id": "39:13269",
+          "name": "tab",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 89,
+          "h": 44,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:13272",
+          "name": "tab-2",
+          "type": "FRAME",
+          "x": 89,
+          "y": 0,
+          "w": 74,
+          "h": 44,
+          "ax": 89,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 203,
+      "h": 84,
+      "children": [
+        {
+          "id": "39:13269",
+          "name": "tab",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 89,
+          "h": 44,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:13272",
+          "name": "tab-2",
+          "type": "FRAME",
+          "x": 89,
+          "y": 0,
+          "w": 74,
+          "h": 44,
+          "ax": 89,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "tab",
+      "tab-2"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 163,
+      "h": 44
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:1867",
+    "baseline": {
+      "geometry": "863efb500e6dcddc",
+      "fills": "9199c6111ed0510c",
+      "text": "24863e7f06d310a0"
+    },
+    "axes": [
+      {
+        "axis": "Appearance",
+        "values": [
+          {
+            "value": "Transparent",
+            "geometry": "863efb500e6dcddc",
+            "fills": "9199c6111ed0510c",
+            "text": "24863e7f06d310a0"
+          },
+          {
+            "value": "Subtle",
+            "geometry": "863efb500e6dcddc",
+            "fills": "9199c6111ed0510c",
+            "text": "24863e7f06d310a0"
+          },
+          {
+            "value": "Subtle Circular",
+            "geometry": "6dbf7e029f391030",
+            "fills": "1c3d9912a6f11928",
+            "text": "24863e7f06d310a0"
+          },
+          {
+            "value": "Filled Circular",
+            "geometry": "6dbf7e029f391030",
+            "fills": "bb087f58f9d9923c",
+            "text": "24863e7f06d310a0"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Medium",
+            "geometry": "863efb500e6dcddc",
+            "fills": "9199c6111ed0510c",
+            "text": "24863e7f06d310a0"
+          },
+          {
+            "value": "Small",
+            "geometry": "57952b87388ebf94",
+            "fills": "9199c6111ed0510c",
+            "text": "24863e7f06d310a0"
+          },
+          {
+            "value": "Large",
+            "geometry": "2859fc4b499e71c8",
+            "fills": "9199c6111ed0510c",
+            "text": "24863e7f06d310a0"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "axis": "Orientation",
+        "values": [
+          {
+            "value": "Horizontal",
+            "geometry": "863efb500e6dcddc",
+            "fills": "9199c6111ed0510c",
+            "text": "24863e7f06d310a0"
+          },
+          {
+            "value": "Vertical",
+            "geometry": "863efb500e6dcddc",
+            "fills": "9199c6111ed0510c",
+            "text": "24863e7f06d310a0"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 31,
+    "bound": 24,
+    "inferred": 7,
+    "literal": 0,
+    "byGroup": {
+      "spacing": {
+        "bound": 10,
+        "inferred": 5,
+        "literal": 0
+      },
+      "fills": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 2,
+        "inferred": 2,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 8,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Appearance=Transparent, Size=Medium, Orientation=Horizontal",
+      "name": "Appearance=Transparent, Size=Medium, Orientation=Horizontal",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 2,
+      "w": 163,
+      "h": 44,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/tab[0]",
+      "name": "tab",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 89,
+      "h": 44,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/tab[0]/label[0]",
+      "name": "label",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 69,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/tab[0]/label[0]/label-text[0]",
+      "name": "label-text",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 65,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/tab-2[1]",
+      "name": "tab-2",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 74,
+      "h": 44,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/tab-2[1]/label-2[0]",
+      "name": "label-2",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 54,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    },
+    {
+      "path": "/tab-2[1]/label-2[0]/label-2-text[0]",
+      "name": "label-2-text",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 50,
+      "h": 20,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1663,
+    "sig": "0ac044e74ac6a8ac"
+  },
+  "canvasAfter": {
+    "nodes": 1663,
+    "sig": "0ac044e74ac6a8ac"
+  },
+  "canvasRestored": true
+}

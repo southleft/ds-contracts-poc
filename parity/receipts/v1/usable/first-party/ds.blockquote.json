@@ -1,0 +1,188 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / first-party",
+  "setNodeId": "39:23501",
+  "setName": "Blockquote",
+  "setType": "COMPONENT",
+  "variantNodeId": "39:23501",
+  "variantNodeName": "Blockquote",
+  "axes": null,
+  "axesError": null,
+  "variantChildCount": 1,
+  "variantChildNames": [
+    "Blockquote"
+  ],
+  "reflow": {
+    "target": "39:23501",
+    "targetName": "Blockquote",
+    "layoutMode": "VERTICAL",
+    "childCount": 2,
+    "sizing": {
+      "h": "HUG",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "AUTO",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 35,
+      "h": 17,
+      "children": [
+        {
+          "id": "39:23502",
+          "name": "Children",
+          "type": "SLOT",
+          "x": 18,
+          "y": 8,
+          "w": 1,
+          "h": 1,
+          "ax": 18,
+          "ay": 8,
+          "visible": true
+        },
+        {
+          "id": "39:23503",
+          "name": "Cite",
+          "type": "SLOT",
+          "x": 18,
+          "y": 17,
+          "w": 1,
+          "h": 1,
+          "ax": 18,
+          "ay": 17,
+          "visible": false
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 75,
+      "h": 57,
+      "children": [
+        {
+          "id": "39:23502",
+          "name": "Children",
+          "type": "SLOT",
+          "x": 18,
+          "y": 8,
+          "w": 1,
+          "h": 1,
+          "ax": 18,
+          "ay": 8,
+          "visible": true
+        },
+        {
+          "id": "39:23503",
+          "name": "Cite",
+          "type": "SLOT",
+          "x": 18,
+          "y": 17,
+          "w": 1,
+          "h": 1,
+          "ax": 18,
+          "ay": 17,
+          "visible": false
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "Children",
+      "Cite"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 35,
+      "h": 17
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:3708",
+    "baseline": {
+      "geometry": "bcff6d1c0ec4127c",
+      "fills": "76e7759d48983367",
+      "text": "00001505811c9dc5"
+    },
+    "axes": [],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 6,
+    "bound": 6,
+    "inferred": 0,
+    "literal": 0,
+    "byGroup": {
+      "strokes": {
+        "bound": 1,
+        "inferred": 0,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 5,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Blockquote",
+      "name": "Blockquote",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 2,
+      "w": 35,
+      "h": 17,
+      "visible": true,
+      "parentLayoutMode": null,
+      "parentType": "SECTION"
+    },
+    {
+      "path": "/Children[0]",
+      "name": "Children",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 0,
+      "w": 1,
+      "h": 1,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/Cite[1]",
+      "name": "Cite",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 1,
+      "h": 1,
+      "visible": false,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasAfter": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasRestored": true
+}

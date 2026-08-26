@@ -1,0 +1,197 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / first-party",
+  "setNodeId": "39:23854",
+  "setName": "SidebarLayout",
+  "setType": "COMPONENT",
+  "variantNodeId": "39:23854",
+  "variantNodeName": "SidebarLayout",
+  "axes": null,
+  "axesError": null,
+  "variantChildCount": 1,
+  "variantChildNames": [
+    "SidebarLayout"
+  ],
+  "reflow": {
+    "target": "39:23854",
+    "targetName": "SidebarLayout",
+    "layoutMode": "GRID",
+    "childCount": 2,
+    "sizing": {
+      "h": "FIXED",
+      "v": "HUG",
+      "primary": "FIXED",
+      "counter": "AUTO",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 640,
+      "h": 1,
+      "children": [
+        {
+          "id": "39:23855",
+          "name": "Sidebar",
+          "type": "SLOT",
+          "x": 0,
+          "y": 0,
+          "w": 240,
+          "h": 1,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:23856",
+          "name": "Main",
+          "type": "SLOT",
+          "x": 264,
+          "y": 0,
+          "w": 376,
+          "h": 1,
+          "ax": 264,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 680,
+      "h": 41,
+      "children": [
+        {
+          "id": "39:23855",
+          "name": "Sidebar",
+          "type": "SLOT",
+          "x": 0,
+          "y": 0,
+          "w": 240,
+          "h": 1,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        },
+        {
+          "id": "39:23856",
+          "name": "Main",
+          "type": "SLOT",
+          "x": 264,
+          "y": 0,
+          "w": 416,
+          "h": 1,
+          "ax": 264,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "Main",
+        "dx": 0,
+        "dy": 0,
+        "dw": 40,
+        "dh": 0
+      }
+    ],
+    "frozen": [
+      "Sidebar"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 640,
+      "h": 1
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:3981",
+    "baseline": {
+      "geometry": "115d1fcbc18afee8",
+      "fills": "e92bc9f573b8cf84",
+      "text": "00001505811c9dc5"
+    },
+    "axes": [],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 2,
+    "bound": 0,
+    "inferred": 1,
+    "literal": 1,
+    "byGroup": {
+      "spacing": {
+        "bound": 0,
+        "inferred": 0,
+        "literal": 1
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 1,
+        "literal": 0
+      }
+    },
+    "literalSites": [
+      "/SidebarLayout·itemSpacing=0"
+    ],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/SidebarLayout",
+      "name": "SidebarLayout",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "GRID",
+      "childCount": 2,
+      "w": 640,
+      "h": 1,
+      "visible": true,
+      "parentLayoutMode": null,
+      "parentType": "SECTION"
+    },
+    {
+      "path": "/Sidebar[0]",
+      "name": "Sidebar",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 240,
+      "h": 1,
+      "visible": true,
+      "parentLayoutMode": "GRID",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/Main[1]",
+      "name": "Main",
+      "type": "SLOT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 0,
+      "w": 376,
+      "h": 1,
+      "visible": true,
+      "parentLayoutMode": "GRID",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasAfter": {
+    "nodes": 1066,
+    "sig": "061165feb6984ac4"
+  },
+  "canvasRestored": true
+}

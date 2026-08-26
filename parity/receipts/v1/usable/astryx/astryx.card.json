@@ -1,0 +1,281 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / astryx",
+  "setNodeId": "39:14119",
+  "setName": "Card (astryx.card)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:14093",
+  "variantNodeName": "Variant=Default",
+  "axes": [
+    {
+      "axis": "Variant",
+      "values": [
+        "Default",
+        "Transparent",
+        "Muted",
+        "Blue",
+        "Cyan",
+        "Gray",
+        "Green",
+        "Orange",
+        "Pink",
+        "Purple",
+        "Red",
+        "Teal",
+        "Yellow"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 13,
+  "variantChildNames": [
+    "Variant=Default",
+    "Variant=Transparent",
+    "Variant=Muted",
+    "Variant=Blue",
+    "Variant=Cyan",
+    "Variant=Gray",
+    "Variant=Green",
+    "Variant=Orange",
+    "Variant=Pink",
+    "Variant=Purple",
+    "Variant=Red",
+    "Variant=Teal",
+    "Variant=Yellow"
+  ],
+  "reflow": {
+    "target": "39:14093",
+    "targetName": "Variant=Default",
+    "layoutMode": "VERTICAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 114.2,
+      "h": 56,
+      "children": [
+        {
+          "id": "39:14094",
+          "name": "label",
+          "type": "TEXT",
+          "x": 16,
+          "y": 16,
+          "w": 99,
+          "h": 24,
+          "ax": 16,
+          "ay": 16,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 154.2,
+      "h": 96,
+      "children": [
+        {
+          "id": "39:14094",
+          "name": "label",
+          "type": "TEXT",
+          "x": 16,
+          "y": 16,
+          "w": 99,
+          "h": 24,
+          "ax": 16,
+          "ay": 16,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "label"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 114.2,
+      "h": 56
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:1075",
+    "baseline": {
+      "geometry": "55370bc7521ff164",
+      "fills": "aca38486c3598ee4",
+      "text": "41e7595a71fcc83c"
+    },
+    "axes": [
+      {
+        "axis": "Variant",
+        "values": [
+          {
+            "value": "Default",
+            "geometry": "55370bc7521ff164",
+            "fills": "aca38486c3598ee4",
+            "text": "41e7595a71fcc83c"
+          },
+          {
+            "value": "Transparent",
+            "geometry": "55370bc7521ff164",
+            "fills": "59c568c4a8dc85a3",
+            "text": "41e7595a71fcc83c"
+          },
+          {
+            "value": "Muted",
+            "geometry": "55370bc7521ff164",
+            "fills": "a7eeb642c4616cd4",
+            "text": "41e7595a71fcc83c"
+          },
+          {
+            "value": "Blue",
+            "geometry": "55370bc7521ff164",
+            "fills": "8eeb80cceb38c128",
+            "text": "41e7595a71fcc83c"
+          },
+          {
+            "value": "Cyan",
+            "geometry": "55370bc7521ff164",
+            "fills": "85f42ded67c935ac",
+            "text": "41e7595a71fcc83c"
+          },
+          {
+            "value": "Gray",
+            "geometry": "55370bc7521ff164",
+            "fills": "b27e310c7113d0f0",
+            "text": "41e7595a71fcc83c"
+          },
+          {
+            "value": "Green",
+            "geometry": "55370bc7521ff164",
+            "fills": "0f4d3e493bc7782c",
+            "text": "41e7595a71fcc83c"
+          },
+          {
+            "value": "Orange",
+            "geometry": "55370bc7521ff164",
+            "fills": "092b2120cb8758e8",
+            "text": "41e7595a71fcc83c"
+          },
+          {
+            "value": "Pink",
+            "geometry": "55370bc7521ff164",
+            "fills": "636e8a6060606894",
+            "text": "41e7595a71fcc83c"
+          },
+          {
+            "value": "Purple",
+            "geometry": "55370bc7521ff164",
+            "fills": "5876d6e386b63688",
+            "text": "41e7595a71fcc83c"
+          },
+          {
+            "value": "Red",
+            "geometry": "55370bc7521ff164",
+            "fills": "164743a7d00078db",
+            "text": "41e7595a71fcc83c"
+          },
+          {
+            "value": "Teal",
+            "geometry": "55370bc7521ff164",
+            "fills": "e1576b67a3a8299c",
+            "text": "41e7595a71fcc83c"
+          },
+          {
+            "value": "Yellow",
+            "geometry": "55370bc7521ff164",
+            "fills": "ce7c67039c77484b",
+            "text": "41e7595a71fcc83c"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 13,
+    "bound": 11,
+    "inferred": 2,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "strokes": {
+        "bound": 1,
+        "inferred": 1,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 1,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Variant=Default",
+      "name": "Variant=Default",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 114.2,
+      "h": 56,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 99,
+      "h": 24,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 440,
+    "sig": "8f17151526c142bc"
+  },
+  "canvasAfter": {
+    "nodes": 440,
+    "sig": "8f17151526c142bc"
+  },
+  "canvasRestored": true
+}

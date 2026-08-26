@@ -1,0 +1,220 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / polaris",
+  "setNodeId": "39:19610",
+  "setName": "Avatar (polaris.avatar)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:19595",
+  "variantNodeName": "Size=Md",
+  "axes": [
+    {
+      "axis": "Size",
+      "values": [
+        "Md",
+        "Xs",
+        "Sm",
+        "Lg",
+        "Xl"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 5,
+  "variantChildNames": [
+    "Size=Md",
+    "Size=Xs",
+    "Size=Sm",
+    "Size=Lg",
+    "Size=Xl"
+  ],
+  "reflow": {
+    "target": "39:19595",
+    "targetName": "Size=Md",
+    "layoutMode": "VERTICAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "FIXED",
+      "primary": "FIXED",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 28,
+      "h": 28,
+      "children": [
+        {
+          "id": "39:19597",
+          "name": "initials",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 28,
+          "h": 28,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 68,
+      "h": 68,
+      "children": [
+        {
+          "id": "39:19597",
+          "name": "initials",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 28,
+          "h": 28,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [],
+    "frozen": [
+      "initials"
+    ],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 28,
+      "h": 28
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:2783",
+    "baseline": {
+      "geometry": "5c360b736efa63bf",
+      "fills": "9e701d6a7ce9d18c",
+      "text": "caaca3b52cee3709"
+    },
+    "axes": [
+      {
+        "axis": "Size",
+        "values": [
+          {
+            "value": "Md",
+            "geometry": "5c360b736efa63bf",
+            "fills": "9e701d6a7ce9d18c",
+            "text": "caaca3b52cee3709"
+          },
+          {
+            "value": "Xs",
+            "geometry": "1ea93931b265702a",
+            "fills": "9e701d6a7ce9d18c",
+            "text": "caaca3b52cee3709"
+          },
+          {
+            "value": "Sm",
+            "geometry": "0c7087f7b8efe2af",
+            "fills": "9e701d6a7ce9d18c",
+            "text": "caaca3b52cee3709"
+          },
+          {
+            "value": "Lg",
+            "geometry": "59aa8b71157ac3c4",
+            "fills": "9e701d6a7ce9d18c",
+            "text": "caaca3b52cee3709"
+          },
+          {
+            "value": "Xl",
+            "geometry": "2bed881dc2b71f0c",
+            "fills": "9e701d6a7ce9d18c",
+            "text": "caaca3b52cee3709"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 11,
+    "bound": 8,
+    "inferred": 3,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 2,
+        "inferred": 3,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Size=Md",
+      "name": "Size=Md",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 28,
+      "h": 28,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/initials[0]",
+      "name": "initials",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 28,
+      "h": 28,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/initials[0]/TP[0]",
+      "name": "TP",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 17,
+      "h": 16,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 3326,
+    "sig": "c09e90afe241d48c"
+  },
+  "canvasAfter": {
+    "nodes": 3326,
+    "sig": "c09e90afe241d48c"
+  },
+  "canvasRestored": true
+}

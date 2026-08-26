@@ -1,0 +1,223 @@
+{
+  "probeVersion": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "page": "Census / mui",
+  "setNodeId": "39:16992",
+  "setName": "Card (mui.card)",
+  "setType": "COMPONENT_SET",
+  "variantNodeId": "39:16980",
+  "variantNodeName": "Elevation=1",
+  "axes": [
+    {
+      "axis": "Elevation",
+      "values": [
+        "1",
+        "0",
+        "3",
+        "8"
+      ]
+    }
+  ],
+  "axesError": null,
+  "variantChildCount": 4,
+  "variantChildNames": [
+    "Elevation=1",
+    "Elevation=0",
+    "Elevation=3",
+    "Elevation=8"
+  ],
+  "reflow": {
+    "target": "39:16980",
+    "targetName": "Elevation=1",
+    "layoutMode": "VERTICAL",
+    "childCount": 1,
+    "sizing": {
+      "h": "FIXED",
+      "v": "HUG",
+      "primary": "AUTO",
+      "counter": "FIXED",
+      "primaryAlign": "MIN",
+      "counterAlign": "MIN"
+    },
+    "before": {
+      "w": 288,
+      "h": 59,
+      "children": [
+        {
+          "id": "39:16981",
+          "name": "label",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 288,
+          "h": 59,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "resizedBy": {
+      "dw": 40,
+      "dh": 40
+    },
+    "resizeError": null,
+    "after": {
+      "w": 328,
+      "h": 99,
+      "children": [
+        {
+          "id": "39:16981",
+          "name": "label",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "w": 328,
+          "h": 59,
+          "ax": 0,
+          "ay": 0,
+          "visible": true
+        }
+      ]
+    },
+    "responded": [
+      {
+        "name": "label",
+        "dx": 0,
+        "dy": 0,
+        "dw": 40,
+        "dh": 0
+      }
+    ],
+    "frozen": [],
+    "restoreError": null,
+    "restoredTo": {
+      "w": 288,
+      "h": 59
+    },
+    "restoredExact": true
+  },
+  "variants": {
+    "attempted": true,
+    "instantiable": true,
+    "instanceId": "69:2176",
+    "baseline": {
+      "geometry": "93dbc972bbe38e38",
+      "fills": "892bc5aef0e51dc0",
+      "text": "8572775505d979b5"
+    },
+    "axes": [
+      {
+        "axis": "Elevation",
+        "values": [
+          {
+            "value": "1",
+            "geometry": "93dbc972bbe38e38",
+            "fills": "892bc5aef0e51dc0",
+            "text": "8572775505d979b5"
+          },
+          {
+            "value": "0",
+            "geometry": "93dbc972bbe38e38",
+            "fills": "892bc5aef0e51dc0",
+            "text": "8572775505d979b5"
+          },
+          {
+            "value": "3",
+            "geometry": "93dbc972bbe38e38",
+            "fills": "892bc5aef0e51dc0",
+            "text": "8572775505d979b5"
+          },
+          {
+            "value": "8",
+            "geometry": "93dbc972bbe38e38",
+            "fills": "892bc5aef0e51dc0",
+            "text": "8572775505d979b5"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "instanceRemoved": true
+  },
+  "binding": {
+    "total": 11,
+    "bound": 10,
+    "inferred": 1,
+    "literal": 0,
+    "byGroup": {
+      "fills": {
+        "bound": 2,
+        "inferred": 0,
+        "literal": 0
+      },
+      "sizing": {
+        "bound": 0,
+        "inferred": 1,
+        "literal": 0
+      },
+      "radius": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      },
+      "spacing": {
+        "bound": 4,
+        "inferred": 0,
+        "literal": 0
+      }
+    },
+    "literalSites": [],
+    "literalSitesTruncated": 0
+  },
+  "layoutFacts": [
+    {
+      "path": "/Elevation=1",
+      "name": "Elevation=1",
+      "type": "COMPONENT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "VERTICAL",
+      "childCount": 1,
+      "w": 288,
+      "h": 59,
+      "visible": true,
+      "parentLayoutMode": "NONE",
+      "parentType": "COMPONENT_SET"
+    },
+    {
+      "path": "/label[0]",
+      "name": "label",
+      "type": "FRAME",
+      "layoutPositioning": "AUTO",
+      "layoutMode": "HORIZONTAL",
+      "childCount": 1,
+      "w": 288,
+      "h": 59,
+      "visible": true,
+      "parentLayoutMode": "VERTICAL",
+      "parentType": "COMPONENT"
+    },
+    {
+      "path": "/label[0]/label-text[0]",
+      "name": "label-text",
+      "type": "TEXT",
+      "layoutPositioning": "AUTO",
+      "layoutMode": null,
+      "childCount": 0,
+      "w": 99,
+      "h": 19,
+      "visible": true,
+      "parentLayoutMode": "HORIZONTAL",
+      "parentType": "FRAME"
+    }
+  ],
+  "canvasBefore": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasAfter": {
+    "nodes": 1297,
+    "sig": "f8c74bd2594ab098"
+  },
+  "canvasRestored": true
+}
