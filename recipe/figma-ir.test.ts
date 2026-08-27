@@ -162,6 +162,29 @@ test("the paint vocabulary is closed", () => {
     true,
   );
   assert.equal(
+    PaintSchema.safeParse({
+      kind: "variable-alias",
+      variable: "VariableID:1:2",
+      resolvedType: "COLOR",
+    }).success,
+    true,
+    "live VARIABLE_ALIAS fills are a Figma primitive and must be carried",
+  );
+  assert.equal(
+    PaintSchema.safeParse({
+      kind: "bound-variable",
+      fields: ["color"],
+    }).success,
+    true,
+    "bound-variable-only fills are a live Figma paint shape and must be carried",
+  );
+  assert.equal(
+    PaintSchema.safeParse({ kind: "VARIABLE_ALIAS", id: "VariableID:1:2" })
+      .success,
+    false,
+    "live discriminator spelling is mapped by scene-readback, not stored as an IR kind",
+  );
+  assert.equal(
     PaintSchema.safeParse({ kind: "conic-gradient", stops: [] }).success,
     false,
     "a paint kind with no Figma primitive must be refused, not carried",

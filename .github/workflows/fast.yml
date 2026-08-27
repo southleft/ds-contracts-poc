@@ -279,6 +279,9 @@ jobs:
       - name: recipe:input-field:live:v8:check (per-side stroke weights, named transport facts, phase-stable antecedent)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:live:v8:check
+      - name: recipe:input-field:live:v9:check (carried scene-readback for VARIABLE_ALIAS and bound-variable fills)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:live:v9:check
       - name: recipe:input-field:comparison:check (128 matched source cells, independent references, 256 opaque specimens, false and ungraded)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:comparison:check

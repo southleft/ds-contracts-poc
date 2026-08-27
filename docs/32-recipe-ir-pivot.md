@@ -25,7 +25,11 @@
 > and bound-variable-only paints (1514). `scene-readback.ts` is in the v8
 > antecedent hash set and must not be patched in place. Cleanup accepted;
 > owned Input pages are gone; no captures; no live success. Do not restart v8
-> attempt 3 as-is. Button overall success is false/pending.
+> attempt 3 as-is. V9 is the replacement lineage: it copies the v8 stack and
+> teaches `VARIABLE_ALIAS` and bound-variable-only fills in a carried
+> `scene-readback-v9.ts` / `scene-readback-runtime-v9.ts` without restamping
+> v8 antecedent bytes. V9 prepare is a draft antecedent; live execution is
+> forbidden until a later authorization commit. Button overall success is false/pending.
 > Its technical mint, usability, restoration, and 12/12 adjudication bytes are
 > retained, but the human grade is not attributable and the historical live
 > inversion/accounting was self-referential. Input overall success is false and
@@ -154,7 +158,9 @@
 > `--expect-authorized`. V8 attempt 1 failed closed on IR FLOAT compatibility
 > for per-side stroke weights; attempt 2 cleared that and failed closed on
 > VARIABLE_ALIAS / bound-variable-only fills in hashed scene-readback.
-> Cleanup completed both times. V7 authorization is not reusable.**
+> Cleanup completed both times. V7 authorization is not reusable. V9 prepare
+> carries a taught scene-readback for those live fill kinds; authorization is
+> still pending and live execution is forbidden.**
 >
 > Historical implementation record: **Input/Field has an offline
 > `input-field@1` recipe and a complete 128-cell matched source/legacy/React/WC
@@ -1601,13 +1607,13 @@ references and re-derives a legacy comparator over the frozen 24-cell matrix.
 
 #### Pivot progress
 
-| archetype   | progress                                                                                                             | next evidence boundary                                                       |
-| ----------- | -------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| Button      | **technical mint retained; overall false/pending**                                                                   | attributable human signoff plus fresh scene-derived inversion/accounting     |
-| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1 and v8 attempts 1-2 failed closed; false** | open v9 to teach VARIABLE_ALIAS / bound-variable fills without restamping v8 |
-| Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                           | matched 24-cell source/legacy benchmark, then independent human grade        |
-| Data Table  | not claimed                                                                                                          | row/column templates and matched matrix                                      |
-| Calendar    | not claimed                                                                                                          | new archetype plus absolute acceptance                                       |
+| archetype   | progress                                                                                                                                                        | next evidence boundary                                                                           |
+| ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| Button      | **technical mint retained; overall false/pending**                                                                                                              | attributable human signoff plus fresh scene-derived inversion/accounting                         |
+| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1 and v8 attempts 1-2 failed closed; v9 draft antecedent pending authorization; false** | authorize v9, then Scratch-only live with carried VARIABLE_ALIAS / bound-variable scene-readback |
+| Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                                                                      | matched 24-cell source/legacy benchmark, then independent human grade                            |
+| Data Table  | not claimed                                                                                                                                                     | row/column templates and matched matrix                                                          |
+| Calendar    | not claimed                                                                                                                                                     | new archetype plus absolute acceptance                                                           |
 
 ### First page-scoped live writer run — blocked, 2026-08-26
 

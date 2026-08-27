@@ -16,11 +16,14 @@
  * stop (docs/32 §11.1): the moment one archetype forces a passthrough, the
  * premise is dead and the finding is worth more than the workaround.
  *
- * WHY THE VOCABULARY IS THIS SMALL. Seven node kinds and four paint kinds are
+ * WHY THE VOCABULARY IS THIS SMALL. Seven node kinds and six paint kinds are
  * not a simplification of Figma — they are the primitives the recipe path
  * currently needs, gathered into one place where they can be counted. The
  * engine's per-property classification (spec/channel-table.json) says which
  * CSS channels are CARRIED; this file says what they are carried AS.
+ * `variable-alias` and `bound-variable` exist because live fills can be a
+ * Figma `VARIABLE_ALIAS` or a bound-variable-only paint with no resolved
+ * literal; inventing a solid color for those would be a silent loss.
  */
 import * as z from "zod";
 
@@ -85,11 +88,37 @@ export const ImagePaintSchema = z.strictObject({
   scaleMode: z.enum(["fill", "fit", "tile", "stretch"]),
 });
 
+/**
+ * A fill that is a Figma `VARIABLE_ALIAS` (live `type: "VARIABLE_ALIAS"`),
+ * not a resolved solid/gradient/image literal.
+ */
+export const VariableAliasPaintSchema = z.strictObject({
+  kind: z.literal("variable-alias"),
+  /** Variable id or reversible token name from the live alias. */
+  variable: z.string().min(1),
+  resolvedType: z.literal("COLOR"),
+  /** Present only when Figma also resolved a display color. */
+  color: ColorSchema.optional(),
+});
+
+/**
+ * A fill that has bound variables but no literal paint kind the host can
+ * treat as solid/gradient/image. Live extract labels this `boundVariablesOnly`.
+ */
+export const BoundVariablePaintSchema = z.strictObject({
+  kind: z.literal("bound-variable"),
+  /** Bound paint fields present on the live fill, e.g. `color`. */
+  fields: z.array(z.string().min(1)).min(1),
+  color: ColorSchema.optional(),
+});
+
 export const PaintSchema = z.discriminatedUnion("kind", [
   SolidPaintSchema,
   LinearGradientPaintSchema,
   RadialGradientPaintSchema,
   ImagePaintSchema,
+  VariableAliasPaintSchema,
+  BoundVariablePaintSchema,
 ]);
 export type Paint = z.infer<typeof PaintSchema>;
 

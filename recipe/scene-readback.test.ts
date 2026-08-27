@@ -38,11 +38,15 @@ const scenePaint = (paint: Paint): ScenePaint => {
     };
   if (paint.kind === "radial-gradient")
     return { type: "GRADIENT_RADIAL", gradientStops: paint.stops };
-  return {
-    type: "IMAGE",
-    assetRef: paint.assetRef,
-    scaleMode: paint.scaleMode.toUpperCase() as ScenePaint["scaleMode"],
-  };
+  if (paint.kind === "image")
+    return {
+      type: "IMAGE",
+      assetRef: paint.assetRef,
+      scaleMode: paint.scaleMode.toUpperCase() as ScenePaint["scaleMode"],
+    };
+  throw new TypeError(
+    `shared scene-readback fixtures cannot carry ${paint.kind}`,
+  );
 };
 
 const sceneEffect = (effect: Effect): SceneEffect =>
@@ -248,8 +252,7 @@ const mockScene = (
       node.type.letterSpacing === undefined
         ? undefined
         : {
-            unit:
-              node.type.letterSpacing.unit === "px" ? "PIXELS" : "PERCENT",
+            unit: node.type.letterSpacing.unit === "px" ? "PIXELS" : "PERCENT",
             value: node.type.letterSpacing.value,
           };
     scene.textCase = node.type.textCase?.toUpperCase() as
