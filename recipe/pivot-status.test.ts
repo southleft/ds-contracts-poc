@@ -203,7 +203,7 @@ test("status gate rejects chronology, success, capture, hash, and criterion lies
       value.status.input.liveV13.restartAsV13Attempt2WithoutHashedRestoreChangeForbidden = false;
     },
     (value) => {
-      value.status.input.liveV14.authorizationPresent = true;
+      value.status.input.liveV14.authorizationPresent = false;
     },
     (value) => {
       value.status.input.liveV14.overallInputSuccess = true;

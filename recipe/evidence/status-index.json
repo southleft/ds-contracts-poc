@@ -1,6 +1,6 @@
 {
   "artifactVersion": "recipe-pivot-current-status-v1",
-  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 draft antecedent pending separate authorization; Button/Input false; human signoff pending",
+  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 authorization declared; live forbidden; Button/Input false; human signoff pending",
   "supersedesStatusClaimsOnly": true,
   "historicalEvidenceRewritten": false,
   "chronology": {
@@ -904,8 +904,9 @@
       "overallInputSuccess": false
     },
     "liveV14": {
-      "status": "draft antecedent; pending separate authorization; live execution forbidden",
+      "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
       "baseCommit": "75f3de450d1a9db1828edb0fb606cd86aaf208f8",
+      "antecedentCommit": "961d08f94853d2b90cd3b68963f5bc113e5ae066",
       "protocolPath": "recipe/evidence/input-field-live-pivot-v14/protocol.json",
       "protocolSha256": "6fa68416b714d3b2e36cbe57be5fb2f05e9271a9e7f3ef955ed73071e3115a42",
       "proofPlanPath": "recipe/evidence/input-field-live-pivot-v14/proof-plan.json",
@@ -919,9 +920,13 @@
       "antecedentHashSetSha256": "591d3f6dff2f631969467db6a4d45ccf81db7d2e8f80af5b073d6035f17cce16",
       "authorizationTemplatePath": "recipe/evidence/input-field-live-pivot-v14/authorization-template.json",
       "authorizationTemplateSha256": "16ad9316a9996feef844850a8d7001949f6f25984a0b5f37402bb88b09cb95b0",
-      "authorizationPresent": false,
-      "authorizationCommitted": false,
+      "authorizationPresent": true,
+      "authorizationCommitStateDerivedByHistory": true,
       "authorizationEffective": false,
+      "authorizationPath": "recipe/evidence/input-field-live-pivot-v14/capture-authorization.json",
+      "authorizationSha256": "0a608d7aab9c788be5af5f06df594b567c4997f6a7dfd32ecec560082b8ae57d",
+      "signingPublicKeySpkiSha256": "6e8061a22d1464e44ecc8469ea0a5e46b0b7c26169f194c15edec85ed8bb4415",
+      "historyExpectedModeAfterAuthorizationCommit": "--expect-authorized",
       "authorizationLifecycleExcludedFromAntecedentHash": true,
       "authorizationCanBeAddedWithoutAntecedentRebuild": true,
       "v7AuthorizationReusable": false,

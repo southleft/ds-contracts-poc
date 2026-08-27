@@ -109,7 +109,10 @@
 > two-pass restore that fills parent surface/content-row first, then
 > re-asserts content HEIGHT+FILL, revealing hidden texts only for that
 > assignment. V13 writer and restore bytes stay frozen. Do not teach FIXED.
-> Live execution remains forbidden until a separate AUTHORIZE commit.
+> Authorization pins antecedent
+> `961d08f94853d2b90cd3b68963f5bc113e5ae066`. Live execution remains
+> forbidden until runtime security prerequisites pass. Do not restart v13
+> attempt 2 as-is.
 > Button overall success is false/pending.
 > Its technical mint, usability, restoration, and 12/12 adjudication bytes are
 > retained, but the human grade is not attributable and the historical live
@@ -388,8 +391,8 @@ lineage; do not patch hashed bytes in place.
 | A5k | PREPARE INPUT V13. Copy the v12 stack. Add a signed post-writer restore request that re-asserts content FILL on the minted Scratch page **after** the writer plugin returns and **before** extract. Keep v12 hashed bytes frozen. This is a protocol denominator change (remote request count). | **Done** at `4c0710109f4e8a2eba701afe96ba4af9f4924dad`. Antecedent index SHA-256 `b4bbe16ddc5ed81b19a53bbb28b31051f1390c5c92172333456a56d5f08c202e`. |
 | A5l | AUTHORIZE INPUT V13 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `4c0710109f4e8a2eba701afe96ba4af9f4924dad`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `c000714eb070e41df760fd789458c650a7a941f4c17293f80bb4f742bb1bd372`; SPKI SHA-256 `fdde0b7a293e7f6fc4e8b28e9bbffefb49aaf538ba6649b4c943d27ba22483fa`. Do not patch hashed v12 or v13 bytes. | **Done** at `e21a67cac447e90a38b344ee34af8528b2dd205c`. |
 | A5m | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; active request was restore. Hashed restore threw `INPUT-V13-RESTORE-NOT-FILL`. Extract not issued. Do **not** teach FIXED. Do **not** restart v13 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
-| A5n | PREPARE INPUT V14. Copy the v13 stack. Do not patch hashed v13 restore or writer bytes. Teach a two-pass restore: parent FILL first, then content HEIGHT+FILL, revealing hidden texts only while assigning. Do not teach FIXED. | **Draft prepared** on top of `75f3de45`. Antecedent index SHA-256 `5846c279ec903b48d2cbdcf3b4626f037409c6a0bd1d276e7c15edfc12c389dc`. Live forbidden until a separate AUTHORIZE commit. If a hashed v14 file later fails closed, open v15. |
-| A5o | AUTHORIZE INPUT V14 as a **separate** commit. New prepare-era Ed25519 signer. Auth lifecycle stays out of the hash set. Do not patch hashed v13 or v14 bytes. | Open only after PREPARE INPUT V14 is published. Then attest, preflight, and Scratch-only live. Max 3 attempts. |
+| A5n | PREPARE INPUT V14. Copy the v13 stack. Do not patch hashed v13 restore or writer bytes. Teach a two-pass restore: parent FILL first, then content HEIGHT+FILL, revealing hidden texts only while assigning. Do not teach FIXED. | **Done** at `961d08f94853d2b90cd3b68963f5bc113e5ae066`. Antecedent index SHA-256 `5846c279ec903b48d2cbdcf3b4626f037409c6a0bd1d276e7c15edfc12c389dc`. |
+| A5o | AUTHORIZE INPUT V14 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `961d08f94853d2b90cd3b68963f5bc113e5ae066`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `0a608d7aab9c788be5af5f06df594b567c4997f6a7dfd32ecec560082b8ae57d`; SPKI SHA-256 `6e8061a22d1464e44ecc8469ea0a5e46b0b7c26169f194c15edec85ed8bb4415`. Do not patch hashed v13 or v14 bytes. | `--expect-authorized` after publish. Then attestation + Scratch-only live. Max 3. If a hashed v14 file fails closed, open v15. |
 | A6 | Attributable human signoff on Input. | **Human gate.** Record pending and continue other work. Do not invent a grade. Overall Input stays **false** until signed. |
 
 ### B · Button closeout
@@ -1812,7 +1815,7 @@ references and re-derives a legacy comparator over the frozen 24-cell matrix.
 | archetype   | progress                                                                                                                                                        | next evidence boundary                                                                           |
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | Button      | **technical mint retained; overall false/pending**                                                                                                              | scene-derived inversion/accounting, then attributable human signoff (human gate)                 |
-| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, and v13 attempt 1 failed closed; v14 draft antecedent pending authorization; false** | AUTHORIZE INPUT V14, then Scratch-only live (see Remaining work §A) |
+| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, and v13 attempt 1 failed closed; v14 authorization declared; false** | attestation + Scratch-only live v14 (see Remaining work §A) |
 | Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                                                                      | matched 24-cell benchmark, Scratch-only live, then human grade (see Remaining work §C)           |
 | Data Table  | not claimed                                                                                                                                                     | human-reviewed adapters, offline cross-library proof, then Scratch-only live                     |
 | Calendar    | not claimed                                                                                                                                                     | reviewed archetype addition, then the same offline-then-live sequence                            |

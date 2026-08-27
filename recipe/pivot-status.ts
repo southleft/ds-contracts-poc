@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 draft antecedent pending separate authorization; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 authorization declared; live forbidden; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -350,8 +350,14 @@ const V14_AUTHORIZATION_TEMPLATE_SHA256 =
 const V14_STATUS_PATH =
   "recipe/evidence/input-field-live-pivot-v14-status.json";
 const V14_STATUS =
-  "draft antecedent; pending separate authorization; live execution forbidden";
+  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
 const V14_BASE_COMMIT = "75f3de450d1a9db1828edb0fb606cd86aaf208f8";
+const V14_ANTECEDENT_COMMIT = "961d08f94853d2b90cd3b68963f5bc113e5ae066";
+const V14_AUTHORIZATION_PATH = `${V14_ROOT}/capture-authorization.json`;
+const V14_AUTHORIZATION_SHA256 =
+  "0a608d7aab9c788be5af5f06df594b567c4997f6a7dfd32ecec560082b8ae57d";
+const V14_SIGNING_PUBLIC_KEY_SPKI_SHA256 =
+  "6e8061a22d1464e44ecc8469ea0a5e46b0b7c26169f194c15edec85ed8bb4415";
 const V13_RESTORE_SOURCE_SHA256 =
   "4c140645423313cf0a45b181d39eefafaed8c7bf535c9ac5a12eef060196cd0a";
 const V13_RESTORE_BLUEPRINT_SHA256 =
@@ -1108,9 +1114,16 @@ export function validatePivotStatus(
     status.input?.liveV14?.antecedentHashSetSha256 !== V14_HASH_SET_SHA256 ||
     status.input?.liveV14?.authorizationTemplateSha256 !==
       V14_AUTHORIZATION_TEMPLATE_SHA256 ||
-    status.input?.liveV14?.authorizationPresent !== false ||
-    status.input?.liveV14?.authorizationCommitted !== false ||
+    status.input?.liveV14?.antecedentCommit !== V14_ANTECEDENT_COMMIT ||
+    status.input?.liveV14?.authorizationPresent !== true ||
+    status.input?.liveV14?.authorizationCommitStateDerivedByHistory !== true ||
     status.input?.liveV14?.authorizationEffective !== false ||
+    status.input?.liveV14?.authorizationPath !== V14_AUTHORIZATION_PATH ||
+    status.input?.liveV14?.authorizationSha256 !== V14_AUTHORIZATION_SHA256 ||
+    status.input?.liveV14?.signingPublicKeySpkiSha256 !==
+      V14_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    status.input?.liveV14?.historyExpectedModeAfterAuthorizationCommit !==
+      "--expect-authorized" ||
     status.input?.liveV14?.authorizationLifecycleExcludedFromAntecedentHash !==
       true ||
     status.input?.liveV14?.authorizationCanBeAddedWithoutAntecedentRebuild !==
@@ -2222,9 +2235,16 @@ export function verifyPivotStatus(): void {
     v14Status.artifactVersion !== "input-live-v14-status-v1" ||
     v14Status.status !== V14_STATUS ||
     v14Status.baseCommit !== V14_BASE_COMMIT ||
-    v14Status.authorization?.present !== false ||
-    v14Status.authorization?.committed !== false ||
+    v14Status.antecedent?.commit !== V14_ANTECEDENT_COMMIT ||
+    v14Status.authorization?.present !== true ||
+    v14Status.authorization?.commitStateDerivedByHistory !== true ||
     v14Status.authorization?.effective !== false ||
+    v14Status.authorization?.path !== V14_AUTHORIZATION_PATH ||
+    v14Status.authorization?.sha256 !== V14_AUTHORIZATION_SHA256 ||
+    v14Status.authorization?.signingPublicKeySpkiSha256 !==
+      V14_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    sha256(readRepositoryEvidence(V14_AUTHORIZATION_PATH)) !==
+      V14_AUTHORIZATION_SHA256 ||
     v14Status.authorization?.v13AuthorizationReusable !== false ||
     v14Status.smallestHonestDelta?.taughtTwoPassParentThenContentFillRestore !==
       true ||
