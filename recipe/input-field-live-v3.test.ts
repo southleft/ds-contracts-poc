@@ -4,7 +4,9 @@ import test from "node:test";
 
 import {
   readInputLiveV3Attempt1HardFailure,
+  readInputLiveV3Attempt2HardFailure,
   validateInputLiveV3Attempt1HardFailure,
+  validateInputLiveV3Attempt2HardFailure,
   validateInputLiveV3Evidence,
 } from "./input-field-live-v3-evidence.js";
 import {
@@ -151,13 +153,20 @@ const preflight = (): InputLiveV3PreflightState => ({
     connectedExactTargetCount: 1,
     requestedFileKey: "byMp6lt0Ij9b2QbkDGFwBh",
   },
+  attempts: {
+    maximum: 3,
+    requested: 3,
+    recorded: [1, 2],
+  },
   requiredGateIds: [...INPUT_LIVE_V3_REQUIRED_GATE_IDS],
   plan: {
     sourceCount: 2,
     plannedVariants: [128, 128],
     plannedVariables: [5, 5],
     plannedSceneFacts: [10, 10],
+    plannedGeneratedDescendants: [2, 2],
     expectedScenePlansValid: [true, true],
+    runtimeApiAuditValid: true,
     writerBytes: 100,
     writerSha256: "b".repeat(64),
     actualWriterBytes: 100,
@@ -275,6 +284,24 @@ test("preflight rejects dirty/old commits, wrong key, bridge mismatch, and zero 
       (value) => (value.plan.plannedSceneFacts[0] = 0),
     ],
     [/result fields present/, (value) => value.resultFields.push("result")],
+    [
+      /exact prior attempt history/,
+      (value) => {
+        value.attempts.recorded = [1];
+      },
+    ],
+    [
+      /refuses attempt 4/,
+      (value) => {
+        value.attempts.requested = 4;
+      },
+    ],
+    [
+      /runtime API\/portability audit/,
+      (value) => {
+        value.plan.runtimeApiAuditValid = false;
+      },
+    ],
   ];
   assert.deepEqual(validateInputLiveV3Preflight(preflight()), []);
   for (const [pattern, plant] of plants) {
@@ -542,6 +569,77 @@ test("attempt 1 missing result fields, success claims, and fingerprint tampering
     plant.mutate(attempt, cleanup);
     assert.match(
       validateInputLiveV3Attempt1HardFailure(attempt, cleanup).join("\n"),
+      plant.pattern,
+    );
+  }
+});
+
+test("attempt 2 exact artifacts validate only as a hard failure", () => {
+  const evidence = readInputLiveV3Attempt2HardFailure();
+  assert.equal(
+    evidence.attemptArtifact.sha256,
+    "f1de7c8bcb8785522a022c5c6354add31214b40653c27ee27721156bed238256",
+  );
+  assert.equal(
+    evidence.cleanupArtifact.sha256,
+    "c0f52d8fb45bdcc048f570384898e2f6d0465a2da88c2551f3d75f428f34d19d",
+  );
+  assert.equal(evidence.attempt.verification.measuredSceneFacts, 0);
+  assert.equal(evidence.attempt.verification.measuredObjectiveRows, 0);
+  assert.equal(evidence.attempt.writerResult.sources[0].variantCount, 128);
+  assert.equal(evidence.attempt.writerResult.sources[1].variantCount, 128);
+  assert.equal(evidence.cleanup.runnerCleanup.complete, false);
+  assert.equal(evidence.cleanup.manualCleanup.complete, true);
+  assert.equal(
+    evidence.cleanup.manualCleanup.unrelatedScratchFingerprint.before,
+    evidence.cleanup.manualCleanup.unrelatedScratchFingerprint.after,
+  );
+  assert.equal(
+    existsSync("recipe/evidence/input-field-live-pivot-v3/receipt.json"),
+    false,
+  );
+});
+
+test("attempt 2 tamper and success claims refuse", () => {
+  const evidence = readInputLiveV3Attempt2HardFailure();
+  const plants: Array<{
+    pattern: RegExp;
+    mutate: (
+      attempt: Record<string, any>,
+      cleanup: Record<string, any>,
+    ) => void;
+  }> = [
+    {
+      pattern: /verifier hard failure\/zero measurements/,
+      mutate: (attempt) => {
+        attempt.verification.measuredSceneFacts = 1;
+      },
+    },
+    {
+      pattern: /absent success\/result artifacts/,
+      mutate: (attempt) => {
+        attempt.artifacts.successReceipt = { path: "forged" };
+      },
+    },
+    {
+      pattern: /manual cleanup fingerprint/,
+      mutate: (_attempt, cleanup) => {
+        cleanup.manualCleanup.unrelatedScratchFingerprint.after = "forged";
+      },
+    },
+    {
+      pattern: /separate runner cleanup/,
+      mutate: (_attempt, cleanup) => {
+        cleanup.runnerFailureEvidence.exactError = "invented";
+      },
+    },
+  ];
+  for (const plant of plants) {
+    const attempt = structuredClone(evidence.attempt);
+    const cleanup = structuredClone(evidence.cleanup);
+    plant.mutate(attempt, cleanup);
+    assert.match(
+      validateInputLiveV3Attempt2HardFailure(attempt, cleanup).join("\n"),
       plant.pattern,
     );
   }

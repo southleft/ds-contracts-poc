@@ -13,8 +13,12 @@ import type {
 import {
   compareSceneToExpectedPlan,
   compileExpectedScenePlan,
+  createSceneGeneratedDescendantIdentity,
+  resolveSceneOwnershipIdentities,
   sceneToNormalizedIr,
   verifySceneDerivedFixedPoint,
+  type SceneGeneratedIdentitySegment,
+  type SceneIdentityNode,
   type SceneEffect,
   type SceneNodeSnapshot,
   type ScenePaint,
@@ -22,6 +26,7 @@ import {
 } from "./scene-readback.js";
 import { canonicalButtonRecipeInstance } from "./fixtures/button.js";
 import { collapseButtonRecipe, compileButtonRecipe } from "./recipes/button.js";
+import { buildFigmaSceneReadbackRuntime } from "./scene-readback-runtime.js";
 
 const scenePaint = (paint: Paint): ScenePaint => {
   if (paint.kind === "solid") return { type: "SOLID", color: paint.color };
@@ -535,5 +540,201 @@ test("fixed point starts from scene-derived IR and stabilizes on cycle two", () 
         compileButtonRecipe,
       ),
     /canonicalHash|structure|fixed|parameter|variant|integrity/i,
+  );
+});
+
+const identityOwner = () => ({
+  ownershipKey: "root/children/7",
+  runIdentity: "run",
+  adapterIdentity: "adapter",
+  recipeHash: "recipe",
+  envelopeHash: "envelope",
+});
+
+const identityTree = (): SceneIdentityNode => ({
+  type: "INSTANCE",
+  ...identityOwner(),
+  mainComponentRef: "source/adornment",
+  children: [
+    { type: "TEXT", children: [] },
+    { type: "TEXT", children: [] },
+    {
+      type: "INSTANCE",
+      mainComponentRef: "source/nested",
+      children: [{ type: "TEXT", children: [] }],
+    },
+  ],
+});
+
+const identityPlan = () => {
+  const lineages: SceneGeneratedIdentitySegment[][] = [
+    [{ type: "TEXT", childIndex: 0, occurrence: 0 }],
+    [{ type: "TEXT", childIndex: 1, occurrence: 1 }],
+    [
+      {
+        type: "INSTANCE",
+        childIndex: 2,
+        occurrence: 0,
+        mainComponentRef: "source/nested",
+      },
+    ],
+    [
+      {
+        type: "INSTANCE",
+        childIndex: 2,
+        occurrence: 0,
+        mainComponentRef: "source/nested",
+      },
+      { type: "TEXT", childIndex: 0, occurrence: 0 },
+    ],
+  ];
+  return lineages.map((lineage) =>
+    createSceneGeneratedDescendantIdentity(
+      identityOwner().ownershipKey,
+      "source/adornment",
+      lineage,
+    ),
+  );
+};
+
+test("generated descendant identity preserves nested and repeated occurrences", () => {
+  const tree = identityTree();
+  const resolved = resolveSceneOwnershipIdentities(
+    tree,
+    identityPlan(),
+    identityOwner(),
+  );
+  assert.equal(resolved.size, 5);
+  assert.notEqual(
+    resolved.get(tree.children[0]!),
+    resolved.get(tree.children[1]!),
+  );
+  assert.match(
+    resolved.get(tree.children[2]!.children[0]!)!,
+    /source~2Fnested/,
+  );
+});
+
+test("host and Figma runtime derive the same source-neutral key", async () => {
+  const lineage: SceneGeneratedIdentitySegment[] = [
+    {
+      type: "INSTANCE",
+      childIndex: 2,
+      occurrence: 0,
+      mainComponentRef: "source/nested",
+    },
+    { type: "TEXT", childIndex: 0, occurrence: 0 },
+  ];
+  const execute = new (
+    Object.getPrototypeOf(async function () {}).constructor as new (
+      ...arguments_: string[]
+    ) => (...values: unknown[]) => Promise<string>
+  )(
+    "figma",
+    `${buildFigmaSceneReadbackRuntime("test.scene")}
+return sceneDerivedOwnershipKey("root/children/7","source/adornment",${JSON.stringify(lineage)});`,
+  );
+  assert.equal(
+    await execute({}),
+    createSceneGeneratedDescendantIdentity(
+      "root/children/7",
+      "source/adornment",
+      lineage,
+    ).ownershipKey,
+  );
+});
+
+test("generated descendant identity refuses structural and ownership attacks", () => {
+  const plants: Array<{
+    name: string;
+    pattern: RegExp;
+    mutate: (
+      tree: SceneIdentityNode,
+      plan: ReturnType<typeof identityPlan>,
+      owner: ReturnType<typeof identityOwner>,
+    ) => void;
+  }> = [
+    {
+      name: "swapped order",
+      pattern: /DERIVED-IDENTITY-UNEXPECTED/,
+      mutate: (tree) => {
+        [tree.children[1], tree.children[2]] = [
+          tree.children[2]!,
+          tree.children[1]!,
+        ];
+      },
+    },
+    {
+      name: "unexpected extra descendant",
+      pattern: /DERIVED-IDENTITY-UNEXPECTED/,
+      mutate: (tree) => {
+        tree.children.push({ type: "FRAME", children: [] });
+      },
+    },
+    {
+      name: "missing main component",
+      pattern: /INSTANCE-MAIN-COMPONENT-ABSENT/,
+      mutate: (tree) => {
+        tree.children[2]!.mainComponentRef = null;
+      },
+    },
+    {
+      name: "detached foreign instance",
+      pattern: /DERIVED-IDENTITY-UNEXPECTED/,
+      mutate: (tree) => {
+        tree.children[2]!.mainComponentRef = "foreign/component";
+      },
+    },
+    {
+      name: "unexpected component descendant",
+      pattern: /GENERATED-COMPONENT-DESCENDANT/,
+      mutate: (tree) => {
+        tree.children.push({ type: "COMPONENT", children: [] });
+      },
+    },
+    {
+      name: "duplicate expected identity",
+      pattern: /PLAN-DUPLICATE/,
+      mutate: (_tree, plan) => {
+        plan.push(structuredClone(plan[0]!));
+      },
+    },
+    {
+      name: "forged ancestor plugin data",
+      pattern: /OWNED-INSTANCE-IDENTITY-MISMATCH/,
+      mutate: (tree) => {
+        tree.runIdentity = "forged";
+      },
+    },
+    {
+      name: "direct key on read-only child",
+      pattern: /GENERATED-DESCENDANT-DIRECT-KEY/,
+      mutate: (tree) => {
+        tree.children[0]!.ownershipKey = "forged";
+      },
+    },
+  ];
+  for (const plant of plants) {
+    const tree = identityTree();
+    const plan = identityPlan();
+    const owner = identityOwner();
+    plant.mutate(tree, plan, owner);
+    assert.throws(
+      () => resolveSceneOwnershipIdentities(tree, plan, owner),
+      plant.pattern,
+      plant.name,
+    );
+  }
+});
+
+test("ordinary unowned nodes cannot enter generated identity derivation", () => {
+  assert.throws(
+    () =>
+      resolveSceneOwnershipIdentities(
+        { type: "FRAME", children: [] },
+        [],
+        identityOwner(),
+      ),
+    /OWNED-INSTANCE-IDENTITY-MISMATCH/,
   );
 });

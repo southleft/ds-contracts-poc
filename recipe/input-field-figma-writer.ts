@@ -375,6 +375,12 @@ const planSource = (
     contentDefaults,
     comparedIrFacts: countComparedFacts(root),
     expectedScenePlan: compileExpectedScenePlan(root, {
+      // The writer's helper component has exactly one text child. Instances
+      // materialize that child as a read-only descendant, so its identity is
+      // planned separately without copying any text, font, paint, or geometry.
+      generatedDescendantLineages: () => [
+        [{ type: "TEXT", childIndex: 0, occurrence: 0 }],
+      ],
       typedReceipts: [
         ...codeOnlyPositionReceipts(root),
         ...input.envelope.extensions.flatMap((extension) =>
@@ -653,7 +659,7 @@ for(const source of PLAN.sources){
     "input-field/message/helper":set.addComponentProperty("Helper text","TEXT",source.contentDefaults["input-field/message/helper"]),
     "input-field/message/error":set.addComponentProperty("Error text","TEXT",source.contentDefaults["input-field/message/error"]),
   };
-  const leadingHelper=[...helperByRef.values()][0],trailingHelper=[...helperByRef.values()].at(-1);
+  const helperValues=[...helperByRef.values()],leadingHelper=helperValues[0],trailingHelper=helperValues[helperValues.length-1];
   const leadingProperty=set.addComponentProperty("Leading adornment","INSTANCE_SWAP",leadingHelper.id);
   const trailingProperty=set.addComponentProperty("Trailing adornment","INSTANCE_SWAP",trailingHelper.id);
   for(const component of set.children){

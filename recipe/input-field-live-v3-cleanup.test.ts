@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import test from "node:test";
 
 import {
@@ -24,7 +25,14 @@ const pluginData = (values: Record<string, string>) => ({
   },
 });
 
-const fixture = (collision = false) => {
+const fixture = (
+  options: {
+    unrelatedSameName?: boolean;
+    omitOwnedPage?: boolean;
+    omitOwnedCollection?: boolean;
+    removeThenThrowCollection?: boolean;
+  } = {},
+) => {
   const root: { name: string; children: any[] } = {
     name: "Scratch Project",
     children: [],
@@ -45,7 +53,7 @@ const fixture = (collision = false) => {
       root.children = root.children.filter((page) => page !== ownedPage);
     },
   };
-  root.children = [safePage, ownedPage];
+  root.children = options.omitOwnedPage ? [safePage] : [safePage, ownedPage];
   const collections: any[] = ADAPTERS.map((adapterIdentity, index) => {
     const collection = {
       id: `owned-collection-${index}`,
@@ -57,13 +65,18 @@ const fixture = (collision = false) => {
       }),
       remove() {
         collections.splice(collections.indexOf(collection), 1);
+        if (options.removeThenThrowCollection && index === 0)
+          throw new Error("removed before bridge acknowledgement");
       },
     };
     return collection;
   });
+  if (options.omitOwnedCollection) collections.pop();
   const unrelated = {
     id: "unrelated-collection",
-    name: collision ? `Recipe Input / ${RUN} / material` : "Unrelated",
+    name: options.unrelatedSameName
+      ? `Recipe Input / ${RUN} / material`
+      : "Unrelated",
     ...pluginData({}),
     remove() {
       collections.splice(collections.indexOf(unrelated), 1);
@@ -127,14 +140,26 @@ test("cleanup switches pages, removes exact ownership, and is idempotent", async
   assert.deepEqual(value.collections, [value.unrelated]);
 });
 
-test("cleanup refuses matching names without exact ownership", async () => {
-  const value = fixture(true);
-  await assert.rejects(
-    executeCleanup(value.figma),
-    /INPUT-V3-CLEANUP-OWNERSHIP-COLLISION/,
-  );
-  assert.equal(value.root.children.length, 2);
-  assert.equal(value.collections.length, 3);
+test("cleanup leaves unrelated same-name artifacts untouched", async () => {
+  const value = fixture({ unrelatedSameName: true });
+  const result = await executeCleanup(value.figma);
+  assert.equal(result.complete, true);
+  assert.deepEqual(value.root.children, [value.safePage]);
+  assert.deepEqual(value.collections, [value.unrelated]);
+});
+
+test("cleanup tolerates already-removed owned artifacts and remove-then-throw collections", async () => {
+  for (const options of [
+    { omitOwnedPage: true },
+    { omitOwnedCollection: true },
+    { removeThenThrowCollection: true },
+  ]) {
+    const value = fixture(options);
+    const result = await executeCleanup(value.figma);
+    assert.equal(result.complete, true);
+    assert.deepEqual(value.root.children, [value.safePage]);
+    assert.deepEqual(value.collections, [value.unrelated]);
+  }
 });
 
 test("every post-writer failure phase reaches the same cleanup finally path", async () => {
@@ -170,4 +195,46 @@ test("every post-writer failure phase reaches the same cleanup finally path", as
     assert.equal(result.cleanup.complete, true);
     assert.equal(cleanups, 1);
   }
+});
+
+test("both recorded attempt failure classes reach cleanup", async () => {
+  for (const error of [
+    new TypeError("TextDecoder is not a constructor"),
+    new Error("SCENE-OWNERSHIP-KEY-ABSENT:I86:38597;86:38583"),
+  ]) {
+    let cleaned = false;
+    const result = await runInputLiveV3PhasesWithCleanup(
+      [
+        {
+          name: "verification",
+          async run() {
+            throw error;
+          },
+        },
+      ],
+      async () => {
+        cleaned = true;
+        return {
+          requestedNodeIds: ["owned"],
+          removedNodeIds: ["owned"],
+          requestedCollectionIds: ["one", "two"],
+          removedCollectionIds: ["one", "two"],
+          remainingOwnedNodes: 0,
+          remainingOwnedCollections: 0,
+          complete: true,
+        };
+      },
+    );
+    assert.equal(cleaned, true);
+    assert.equal(result.failure, error);
+    assert.equal(result.cleanup.complete, true);
+  }
+});
+
+test("runner preserves cleanup errors and allows the large owned page to finish", () => {
+  const runner = readFileSync("recipe/run-input-field-live-v3.ts", "utf8");
+  assert.match(runner, /120_000,\s*plan\.target\.fileKey/);
+  assert.match(runner, /cleanupResponse\?\.error/);
+  assert.match(runner, /INPUT-V3-CLEANUP-BRIDGE-DISCONNECTED/);
+  assert.doesNotMatch(runner, /catch\s*\{\s*\/\/ The persisted attempt/);
 });

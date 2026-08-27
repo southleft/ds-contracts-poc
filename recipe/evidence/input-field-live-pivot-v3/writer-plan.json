@@ -22,8 +22,8 @@
   },
   "writer": {
     "path": "recipe/evidence/input-field-live-pivot-v3/writer.js",
-    "bytes": 2449180,
-    "sha256": "92da8f8c5ae78a870b392f9dfb3e239e82e8dc018d9abebfbcdd8118bf542811",
+    "bytes": 2453320,
+    "sha256": "c88ffc740fb91448fa37685b0a832fc7420e0e34f5838352af75c8f617abc2bc",
     "deterministicGenerations": 2,
     "writerProgramVersion": 2,
     "executionProtocolVersion": 3
@@ -31,12 +31,12 @@
   "transport": {
     "protocol": "ds-contracts/figma-writer-utf8-base64/v1",
     "envelopePath": "recipe/evidence/input-field-live-pivot-v3/transport-envelope.json",
-    "envelopeSha256": "962a8585064d844d023a1ccdc25955e387442712497826cb733b36c460b856a0",
-    "payloadBytes": 2449180,
-    "payloadSha256": "92da8f8c5ae78a870b392f9dfb3e239e82e8dc018d9abebfbcdd8118bf542811",
+    "envelopeSha256": "3af956a1cb9207f2a831114462bacebaeb4fdb2732ef4e6ae1acc2cf3a1dc843",
+    "payloadBytes": 2453320,
+    "payloadSha256": "c88ffc740fb91448fa37685b0a832fc7420e0e34f5838352af75c8f617abc2bc",
     "wrapperPath": "recipe/evidence/input-field-live-pivot-v3/writer-wrapper.txt",
-    "wrapperBytes": 3275714,
-    "wrapperSha256": "ad2ea3b369c86880f59897442cf006268ec6a98badebb1a40de74fad19330ec0"
+    "wrapperBytes": 3281234,
+    "wrapperSha256": "f378d76d33e3e59a44cf09430f1b0a2dc02078ad1c1531b01bc236b9642501be"
   },
   "conformance": {
     "path": "recipe/evidence/input-field-live-pivot-v3/conformance-report.json",
@@ -65,6 +65,20 @@
         "Uint8Array",
         "Uint32Array",
         "eval"
+      ],
+      "pluginApis": [
+        "figma.loadAllPagesAsync",
+        "figma.setCurrentPageAsync",
+        "figma.variables.getLocalVariableCollectionsAsync",
+        "InstanceNode.getMainComponentAsync",
+        "BaseNode.getSharedPluginData",
+        "BaseNode.setSharedPluginData"
+      ],
+      "refusedAssumptions": [
+        "shared plugin data on read-only instance descendants",
+        "removing the current page before switching pages",
+        "Array.prototype.at in emitted runtime code",
+        "cleanup completion inferred from a swallowed exception"
       ],
       "webApis": {
         "TextDecoder": "optional; selected only after fatal-mode conformance probes and exact fallback equality",
@@ -125,13 +139,15 @@
       "plannedVariants": 128,
       "plannedVariables": 75,
       "plannedSceneFacts": 22811,
+      "plannedGeneratedDescendants": 128,
       "expectedScenePlanArtifact": {
         "path": "recipe/evidence/input-field-live-pivot-v3/expected-scene-plan-mui.json.gz",
-        "bytes": 397989,
-        "sha256": "49c8d94b4db4b23343dc2e9ec049161efd976bfbf6e1d7b18ed6a3a09e56c091",
-        "uncompressedBytes": 7402446,
-        "uncompressedSha256": "cd4b0c801bb7ec894cc5e2cb94c6fc8ea8a666a912602fad255829bf3dac9cb7",
-        "facts": 22811
+        "bytes": 399132,
+        "sha256": "96e8d543b259066268af2d871f1a0258bdd3173b5c4402ed3f4d57296cfddfa3",
+        "uncompressedBytes": 7442573,
+        "uncompressedSha256": "975d7c4e9c571c8273f3bbf96c8195f8e5a8e2536bd54ab6bcd3bf8b9baff31b",
+        "facts": 22811,
+        "generatedDescendants": 128
       }
     },
     {
@@ -161,13 +177,15 @@
       "plannedVariants": 128,
       "plannedVariables": 77,
       "plannedSceneFacts": 20915,
+      "plannedGeneratedDescendants": 128,
       "expectedScenePlanArtifact": {
         "path": "recipe/evidence/input-field-live-pivot-v3/expected-scene-plan-polaris.json.gz",
-        "bytes": 390206,
-        "sha256": "db468f50bcdf7b47ecf6bc3c2a43fcef7e5faa47381cdabdd10bf762f78836a2",
-        "uncompressedBytes": 6594498,
-        "uncompressedSha256": "9c0d93b9fd85278fbac066077758b31f18f98163988da3fd1f662132144dd86b",
-        "facts": 20915
+        "bytes": 391345,
+        "sha256": "6e6517f9a819ce6cffff9e6bda913f3c9c8bdd6d0da95bcebffcdb972bbcd41d",
+        "uncompressedBytes": 6631041,
+        "uncompressedSha256": "96253e40e5909b68e8ebaec78d924d18daf12548d39ecf9ed64b81c1e962d99f",
+        "facts": 20915,
+        "generatedDescendants": 128
       }
     }
   ],
@@ -3633,15 +3651,15 @@
     "deterministicOrderSha256": "84bde61f9d04efaf7d02fe2527e5f48dd10f59372a10a387fbbfca25998cee8e"
   },
   "moduleHashes": {
-    "recipe/build-input-field-live-proof-v3.ts": "f5338484ea2272bd2b6ea0e3434ccb4ec38acc836e843ee0df52f997164f2215",
-    "recipe/input-field-live-v3-preflight.ts": "c27323fbd6d025b26c1a1baac1d6f8e1666615e132d5c56279008fcdb6943efd",
+    "recipe/build-input-field-live-proof-v3.ts": "7c84cc9f94cae723ca0ddf1136839a783953869728337596ed61b938b0003a25",
+    "recipe/input-field-live-v3-preflight.ts": "a7c19ddf2ff8715c1539551f43ad84a25240bab54aaa4c0c0e8c415c7e5d21f2",
     "recipe/input-field-live-v3-verifier.ts": "edee6b8c3ab8c3932c41ad966b07402a43ed951bca5de2a9f6749b3376744580",
-    "recipe/input-field-live-v3-evidence.ts": "ef9d12980ace5713962b1784aa9072fd9fb35df0c5f598ac6b00b3ef28769a07",
-    "recipe/input-field-live-v3-cleanup.ts": "ac9d76dd92250be8eefe13c4a32bd660105140e936ae0ba04b01c29254372ffc",
-    "recipe/figma-runtime-portability.ts": "f92690e582535dc414c1e030271f39e46ef6f8be6cf3b5c4a3267d50060b50f2",
-    "recipe/scene-readback-runtime.ts": "b93550ee6454afa710cdfdd98139593b5a62d135162f1cdb77833e411691a937",
+    "recipe/input-field-live-v3-evidence.ts": "36a6630fc06d69a1059d3235095b9e9f1cf8b372eb9a8ec6b70b1f36598ac327",
+    "recipe/input-field-live-v3-cleanup.ts": "e28c7b8500720899a01fbbb9bdb47e498c7abf1b5798ee14ca4e8cbebd6c7950",
+    "recipe/figma-runtime-portability.ts": "df0ada6caea5cf05c9f46552cbf675b76e029438f75a9805802b1446ab3a034f",
+    "recipe/scene-readback-runtime.ts": "d60fec6b83b304c8c4357e789b629f75c45e264220d654a0062e0e9def22a7f1",
     "recipe/writer-transport.ts": "e6762b86d9e4d4a1e0369405cb299cf411d952cf35de09ca31f83449d8d4e9e3",
-    "recipe/run-input-field-live-v3.ts": "19f34c87a09d1e0a891f4d29f6105c910c06ef218a17c1426d4b81d4814d9a91"
+    "recipe/run-input-field-live-v3.ts": "e887d18574706479a2a23d839c39f77bb1b8156c24b99978a31ce59c886f3839"
   },
   "attempts": {
     "maximum": 3

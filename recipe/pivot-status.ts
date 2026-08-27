@@ -6,6 +6,7 @@ import path from "node:path";
 import {
   INPUT_LIVE_V3_ATTEMPT_1_CODE_COMMIT,
   readInputLiveV3Attempt1HardFailure,
+  readInputLiveV3Attempt2HardFailure,
 } from "./input-field-live-v3-evidence.js";
 import {
   readRepositoryEvidence,
@@ -22,17 +23,19 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "attempt 1 hard failure; committed runtime correction pending";
+  "attempt 2 hard failure; committed descendant-ownership and cleanup correction pending";
 const V3_INDEX_STATUS =
-  "attempt 1 hard failure; committed runtime correction pending";
+  "attempt 2 hard failure; committed descendant-ownership and cleanup correction pending";
 const V3_PREPARED_FILES = [
   "capture-authorization.json",
   "conformance-report.json",
   "cleanup-attempt-1.json",
+  "cleanup-attempt-2.json",
   "expected-scene-plan-mui.json.gz",
   "expected-scene-plan-polaris.json.gz",
   "index.json",
   "live-attempt-1.json",
+  "live-attempt-2.json",
   "protocol.json",
   "transport-envelope.json",
   "writer-plan.json",
@@ -104,7 +107,7 @@ export function validatePivotStatus(
     fail("protocol hash");
   if (
     index.result?.status !== "hard-failure" ||
-    index.result?.attempt !== 1 ||
+    index.result?.attempt !== 2 ||
     index.result?.writerExecutionSucceeded !== true ||
     index.result?.mintedVariants !== 256 ||
     index.result?.verifierCompleted !== false ||
@@ -115,9 +118,12 @@ export function validatePivotStatus(
     index.result?.successReceiptWritten !== false ||
     index.overallInputSuccess !== false ||
     !Array.isArray(index.captureArtifacts) ||
-    index.captureArtifacts.length !== 2
+    index.captureArtifacts.length !== 4 ||
+    status.input?.liveV3?.attemptsExecuted !== 2 ||
+    status.input?.liveV3?.attempt2?.sceneFactsMeasured !== 0 ||
+    status.input?.liveV3?.attempt2?.successReceiptWritten !== false
   )
-    fail("v3 attempt 1 hard-failure result");
+    fail("v3 attempt 2 hard-failure result");
   const unexpected = v3Files.filter(
     (file) =>
       !V3_PREPARED_FILES.includes(file as (typeof V3_PREPARED_FILES)[number]),
@@ -180,7 +186,7 @@ export function verifyPivotStatus(): void {
   }
   if (
     Object.keys(index.runtimeCorrection?.dependencies ?? {}).length === 0 ||
-    index.runtimeCorrection?.nextAttempt !== 2 ||
+    index.runtimeCorrection?.nextAttempt !== 3 ||
     index.runtimeCorrection?.maximumAttempts !== 3 ||
     index.runtimeCorrection?.authorizationReusable !== true ||
     index.runtimeCorrection?.newAuthorizationArtifactRequired !== false
@@ -191,6 +197,13 @@ export function verifyPivotStatus(): void {
   } catch (error) {
     failures.push(
       `v3 attempt 1 hard-failure evidence: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
+  try {
+    readInputLiveV3Attempt2HardFailure();
+  } catch (error) {
+    failures.push(
+      `v3 attempt 2 hard-failure evidence: ${error instanceof Error ? error.message : String(error)}`,
     );
   }
   for (const artifact of [

@@ -11,6 +11,7 @@ import {
   INPUT_LIVE_V3_PROTOCOL_PATH,
   INPUT_LIVE_V3_PROTOCOL_SHA256,
 } from "./input-field-live-v3-authorization.js";
+import { FIGMA_RUNTIME_API_AUDIT } from "./figma-runtime-portability.js";
 import { INPUT_LIVE_V3_REQUIRED_GATE_IDS } from "./input-field-live-v3-verifier.js";
 
 export const INPUT_LIVE_V3_PREFLIGHT_VERSION = "input-live-v3-preflight-v1";
@@ -36,13 +37,20 @@ export interface InputLiveV3PreflightState {
     connectedExactTargetCount: number;
     requestedFileKey: string;
   };
+  attempts: {
+    maximum: number;
+    requested: number;
+    recorded: number[];
+  };
   requiredGateIds: string[];
   plan: {
     sourceCount: number;
     plannedVariants: number[];
     plannedVariables: number[];
     plannedSceneFacts: number[];
+    plannedGeneratedDescendants: number[];
     expectedScenePlansValid: boolean[];
+    runtimeApiAuditValid: boolean;
     writerBytes: number;
     writerSha256: string;
     actualWriterBytes: number;
@@ -137,6 +145,16 @@ export function validateInputLiveV3Preflight(
   )
     failures.push("bridge mismatch");
   if (
+    state.attempts.maximum !== 3 ||
+    state.attempts.requested !== 3 ||
+    state.attempts.recorded.length !== 2 ||
+    state.attempts.recorded[0] !== 1 ||
+    state.attempts.recorded[1] !== 2
+  )
+    failures.push(
+      "attempt 3 requires exact prior attempt history [1,2] and refuses attempt 4",
+    );
+  if (
     INPUT_LIVE_V3_REQUIRED_GATE_IDS.some(
       (id) => !state.requiredGateIds.includes(id),
     ) ||
@@ -151,10 +169,14 @@ export function validateInputLiveV3Preflight(
     state.plan.plannedVariables.some((count) => count <= 0) ||
     state.plan.plannedSceneFacts.length !== 2 ||
     state.plan.plannedSceneFacts.some((count) => count <= 0) ||
+    state.plan.plannedGeneratedDescendants.length !== 2 ||
+    state.plan.plannedGeneratedDescendants.some((count) => count <= 0) ||
     state.plan.expectedScenePlansValid.length !== 2 ||
     state.plan.expectedScenePlansValid.some((valid) => !valid)
   )
     failures.push("zero or incomplete planned counts");
+  if (!state.plan.runtimeApiAuditValid)
+    failures.push("Figma runtime API/portability audit incomplete");
   if (
     state.plan.writerBytes <= 0 ||
     state.plan.writerBytes !== state.plan.actualWriterBytes ||
@@ -189,10 +211,14 @@ export function readInputLiveV3PreflightState(
   options: {
     bridgeExactTargetCount: number;
     requestedFileKey: string;
+    requestedAttempt?: number;
   },
 ): InputLiveV3PreflightState {
   const plan = JSON.parse(
     readFileSync(path.join(root, INPUT_LIVE_V3_PLAN_PATH), "utf8"),
+  ) as Record<string, any>;
+  const index = JSON.parse(
+    readFileSync(path.join(root, INPUT_LIVE_V3_ROOT, "index.json"), "utf8"),
   ) as Record<string, any>;
   const codeCommit = gitText(root, ["rev-parse", "HEAD"]);
   const adding = gitText(root, [
@@ -234,7 +260,10 @@ export function readInputLiveV3PreflightState(
           uncompressed.byteLength === artifact.uncompressedBytes &&
           sha256(uncompressed) === artifact.uncompressedSha256 &&
           parsed.facts?.length === artifact.facts &&
-          artifact.facts === source.plannedSceneFacts
+          parsed.generatedDescendants?.length ===
+            artifact.generatedDescendants &&
+          artifact.facts === source.plannedSceneFacts &&
+          artifact.generatedDescendants === source.plannedGeneratedDescendants
         );
       } catch {
         return false;
@@ -261,6 +290,15 @@ export function readInputLiveV3PreflightState(
       connectedExactTargetCount: options.bridgeExactTargetCount,
       requestedFileKey: options.requestedFileKey,
     },
+    attempts: {
+      maximum: plan.attempts?.maximum,
+      requested: options.requestedAttempt ?? 3,
+      recorded: Array.isArray(index.attemptHistory)
+        ? index.attemptHistory.map((attempt: Record<string, number>) =>
+            Number(attempt.attempt),
+          )
+        : [],
+    },
     requiredGateIds: plan.requiredGateIds,
     plan: {
       sourceCount: plan.sources.length,
@@ -273,7 +311,14 @@ export function readInputLiveV3PreflightState(
       plannedSceneFacts: plan.sources.map(
         (source: Record<string, number>) => source.plannedSceneFacts,
       ),
+      plannedGeneratedDescendants: plan.sources.map(
+        (source: Record<string, number>) => source.plannedGeneratedDescendants,
+      ),
       expectedScenePlansValid,
+      runtimeApiAuditValid:
+        JSON.stringify(plan.conformance?.runtimeApiAudit) ===
+          JSON.stringify(FIGMA_RUNTIME_API_AUDIT) &&
+        !writerBytes.toString("utf8").includes(".at("),
       writerBytes: plan.writer.bytes,
       writerSha256: plan.writer.sha256,
       actualWriterBytes: writerBytes.byteLength,
@@ -294,9 +339,11 @@ export function runInputLiveV3OfflinePreflight(): void {
   const fileKey =
     argumentValue("--file-key") ?? process.env.RECIPE_FIGMA_FILE_KEY ?? "";
   const bridgeCount = Number(argumentValue("--bridge-exact-count") ?? "1");
+  const requestedAttempt = Number(argumentValue("--attempt") ?? "3");
   const state = readInputLiveV3PreflightState(root, {
     bridgeExactTargetCount: bridgeCount,
     requestedFileKey: fileKey,
+    requestedAttempt,
   });
   const failures = validateInputLiveV3Preflight(state);
   if (failures.length > 0)

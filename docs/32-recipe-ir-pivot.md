@@ -12,20 +12,22 @@
 > authorization artifact was first committed at
 > `ad7e02d3bfaf79f757ff63085c0a24a64a5c4c7b`. The typed runner, verifier,
 > preflight, and evidence writer were committed at
-> `5e95105b16f3e30e0fb67a53a6eda7a86c105c61`. Attempt 1 decoded and evaluated
-> that exact writer and minted both 128-variant sets, then hard-failed before
-> scene extraction because the Figma sandbox's `TextDecoder` is not
-> constructible. The verifier measured zero scene facts and no objective rows.
-> Runner cleanup failed; separately recorded manual cleanup removed exactly the
-> owned page and two variable collections and restored the unrelated Scratch
-> fingerprint.
+> `5e95105b16f3e30e0fb67a53a6eda7a86c105c61`. Attempts 1 and 2 each decoded
+> and evaluated their exact committed writer and minted both 128-variant sets.
+> Attempt 1 hard-failed because the Figma sandbox's `TextDecoder` is not
+> constructible. Attempt 2 passed that correction, then hard-failed before
+> extraction on read-only descendant `I86:38597;86:38583`, generated from
+> owned instance `86:38597` and helper text `86:38583`, because the descendant
+> cannot carry direct shared plugin data. Both attempts measured zero scene
+> facts and no objective rows. Runner cleanup failed both times; separate
+> exact-ownership manual cleanup restored the unrelated Scratch fingerprint.
 > Current machine status is
 > `recipe/evidence/status-index.json`; the v3 draft is
-> `recipe/evidence/input-field-live-pivot-v3/index.json`. A portable strict
-> UTF-8 runtime and idempotent owned cleanup correction are prepared but must
-> be committed and published before attempt 2. The original authorization
-> already permits a clean descendant, so no new authorization artifact is
-> required. A technically
+> `recipe/evidence/input-field-live-pivot-v3/index.json`. A source-neutral
+> generated-descendant identity resolver and a verified, observable cleanup
+> correction are prepared but must be committed and published before the final
+> attempt 3. The original authorization already permits a clean descendant, so
+> no new authorization artifact is required. A technically
 > successful mint is not a proven bidirectional round trip until scene-derived
 > inversion and accounting pass.**
 >
@@ -73,8 +75,8 @@
 > Input-created Figma artifacts were cleaned; census and Button proof remain
 > untouched. An independent 24-specimen browser↔Figma calibration then improved
 > held-out geometry but regressed held-out pixel/ink under sane coefficient
-> bounds, so it was rejected. Input v3 attempt 1 is a hard failure; no scene or
-> objective capture was produced.**
+> bounds, so it was rejected. Input v3 attempts 1 and 2 are hard failures; no
+> scene or objective capture was produced.**
 >
 > Evidence index: immutable objective v1 is
 > `recipe/evidence/input-field-objective-comparison-v1/index.json`; corrected
@@ -173,9 +175,51 @@ collections `VariableCollectionId:86:34552` and
 `VariableCollectionId:86:35979`; unrelated Scratch state returned to fingerprint
 `10ba6b57da3cfa97` with 13 pages, 14 collections, and 11,163 variables.
 
-Attempt 2 remains pending under the maximum of three. It may run only after this
-correction is committed, published, and checked from a clean descendant of the
-existing authorization commit.
+Attempt 2 ran from correction commit
+`98de9c3ceae06881bc477e7099b47e8f5a87cf10`. Its exact 2,449,180-byte writer,
+SHA-256 `92da8f8c5ae78a870b392f9dfb3e239e82e8dc018d9abebfbcdd8118bf542811`,
+passed the portable runtime preflight and minted 256 variants. Extraction then
+refused `I86:38597;86:38583`: owned leading-adornment instance `86:38597`
+materialized a read-only `TEXT` descendant backed by helper text `86:38583`.
+That descendant has no direct shared plugin data. Expected scene facts remained
+43,726; measured scene facts, objective rows, captures, and fixed-point cycles
+remained zero. No success receipt or human packet exists.
+
+The correction derives identity only beneath an exactly owned `INSTANCE`. The
+key combines the owned ancestor key, its actual main-component identity, and
+each actual child type/index/occurrence plus nested-instance main-component
+identity. It must equal one unique precomputed plan key. Names, characters,
+geometry, paints, styles, and source IR never contribute. Unowned ordinary
+nodes, detached or missing-main-component instances, component descendants,
+unexpected or reordered children, duplicate keys, and ownership metadata
+collisions refuse.
+
+Attempt-2 runner cleanup again persisted only incomplete sentinel counts because
+its catch discarded the exception. Manual cleanup verified and removed page
+`86:38503` and collections `VariableCollectionId:86:38505` and
+`VariableCollectionId:86:39932`; Scratch returned to fingerprint
+`10ba6b57da3cfa97` with 13 pages, 14 collections, and 11,163 variables. The
+finally path now records cleanup errors, loads all pages, verifies exact shared
+ownership (never name alone), switches away through `setCurrentPageAsync`,
+removes the page before bound collections, tolerates already-removed owned
+objects, allows 120 seconds for the 2,317-node teardown instead of 30, and
+re-counts zero leftovers.
+
+Attempt 3 is the final allowed v3 attempt. Preflight requires exact history
+`[1,2]`, refuses attempt 4 or a missing prior attempt, verifies the generated
+identity plan and Plugin API audit, and requires a clean published descendant
+of the existing authorization commit.
+
+The prepared, unexecuted attempt-3 writer is 2,453,320 bytes,
+SHA-256 `c88ffc740fb91448fa37685b0a832fc7420e0e34f5838352af75c8f617abc2bc`;
+its 3,281,234-byte wrapper is
+`f378d76d33e3e59a44cf09430f1b0a2dc02078ad1c1531b01bc236b9642501be`.
+The transport envelope is
+`3af956a1cb9207f2a831114462bacebaeb4fdb2732ef4e6ae1acc2cf3a1dc843`.
+Scene facts remain locked at 22,811 MUI plus 20,915 Polaris (43,726 total);
+the separate identity-only plan adds 128 generated descendants per source.
+Conformance remains 256 variants, 152 variables, 11,547 plugin-data writes,
+37,647 property writes, and 8,192 bindings.
 
 ## 0 · The decision, in one paragraph
 

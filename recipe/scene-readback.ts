@@ -157,6 +157,185 @@ export interface ExpectedScenePlan {
   rootOwnershipKey: "root";
   facts: SceneFact[];
   typedReceipts: TypedFactReceipt[];
+  /**
+   * Identity-only expectations for read-only descendants materialized by
+   * Figma inside an owned instance. These records contain no scene facts.
+   */
+  generatedDescendants: SceneGeneratedDescendantIdentity[];
+}
+
+export interface SceneGeneratedIdentitySegment {
+  type: SceneNodeType;
+  childIndex: number;
+  occurrence: number;
+  mainComponentRef?: string;
+}
+
+export interface SceneGeneratedDescendantIdentity {
+  ownershipKey: string;
+  ownedAncestorKey: string;
+  ownedAncestorMainComponentRef: string;
+  lineage: SceneGeneratedIdentitySegment[];
+}
+
+export interface SceneIdentityNode {
+  type: SceneNodeType;
+  ownershipKey?: string;
+  runIdentity?: string;
+  adapterIdentity?: string;
+  recipeHash?: string;
+  envelopeHash?: string;
+  mainComponentRef?: string | null;
+  children: SceneIdentityNode[];
+}
+
+const encodedIdentityPart = (value: string): string =>
+  encodeURIComponent(value).replaceAll("%", "~");
+
+/**
+ * The key deliberately contains only ownership and structural identity.
+ * Visual, layout, text, paint, and style values never participate.
+ */
+export function sceneGeneratedDescendantOwnershipKey(
+  ownedAncestorKey: string,
+  ownedAncestorMainComponentRef: string,
+  lineage: readonly SceneGeneratedIdentitySegment[],
+): string {
+  const steps = lineage.map(
+    ({ type, childIndex, occurrence, mainComponentRef }) =>
+      `${childIndex}:${occurrence}:${type}:${
+        mainComponentRef === undefined
+          ? "-"
+          : encodedIdentityPart(mainComponentRef)
+      }`,
+  );
+  return `${ownedAncestorKey}/generated/${encodedIdentityPart(
+    ownedAncestorMainComponentRef,
+  )}/${steps.join("/")}`;
+}
+
+export function createSceneGeneratedDescendantIdentity(
+  ownedAncestorKey: string,
+  ownedAncestorMainComponentRef: string,
+  lineage: readonly SceneGeneratedIdentitySegment[],
+): SceneGeneratedDescendantIdentity {
+  if (lineage.length === 0)
+    throw new TypeError("generated scene lineage must not be empty");
+  return {
+    ownershipKey: sceneGeneratedDescendantOwnershipKey(
+      ownedAncestorKey,
+      ownedAncestorMainComponentRef,
+      lineage,
+    ),
+    ownedAncestorKey,
+    ownedAncestorMainComponentRef,
+    lineage: lineage.map((segment) => ({ ...segment })),
+  };
+}
+
+const identitySignature = (node: SceneIdentityNode): string =>
+  `${node.type}\0${node.type === "INSTANCE" ? (node.mainComponentRef ?? "") : ""}`;
+
+/**
+ * Offline mirror of the Figma runtime ownership resolver. It proves that an
+ * unowned node is accepted only as an exact planned descendant of one owned
+ * instance; it does not project any scene property as a fact.
+ */
+export function resolveSceneOwnershipIdentities(
+  root: SceneIdentityNode,
+  expected: readonly SceneGeneratedDescendantIdentity[],
+  owner: {
+    ownershipKey: string;
+    runIdentity: string;
+    adapterIdentity: string;
+    recipeHash: string;
+    envelopeHash: string;
+  },
+): Map<SceneIdentityNode, string> {
+  if (
+    root.type !== "INSTANCE" ||
+    root.ownershipKey !== owner.ownershipKey ||
+    root.runIdentity !== owner.runIdentity ||
+    root.adapterIdentity !== owner.adapterIdentity ||
+    root.recipeHash !== owner.recipeHash ||
+    root.envelopeHash !== owner.envelopeHash
+  ) {
+    throw new TypeError("SCENE-OWNED-INSTANCE-IDENTITY-MISMATCH");
+  }
+  if (!root.mainComponentRef)
+    throw new TypeError("SCENE-OWNED-INSTANCE-MAIN-COMPONENT-ABSENT");
+  const planned = new Map(
+    expected.map((entry) => [entry.ownershipKey, entry] as const),
+  );
+  if (planned.size !== expected.length)
+    throw new TypeError("SCENE-DERIVED-IDENTITY-PLAN-DUPLICATE");
+  const resolved = new Map<SceneIdentityNode, string>([
+    [root, root.ownershipKey],
+  ]);
+  const used = new Set<string>([root.ownershipKey]);
+  const visit = (
+    node: SceneIdentityNode,
+    lineage: SceneGeneratedIdentitySegment[],
+  ): void => {
+    const counts = new Map<string, number>();
+    node.children.forEach((child, childIndex) => {
+      if (child.ownershipKey)
+        throw new TypeError(
+          `SCENE-GENERATED-DESCENDANT-DIRECT-KEY:${child.ownershipKey}`,
+        );
+      if (child.type === "COMPONENT" || child.type === "COMPONENT_SET")
+        throw new TypeError(
+          `SCENE-GENERATED-COMPONENT-DESCENDANT:${child.type}`,
+        );
+      if (child.type === "INSTANCE" && !child.mainComponentRef)
+        throw new TypeError("SCENE-GENERATED-INSTANCE-MAIN-COMPONENT-ABSENT");
+      const signature = identitySignature(child);
+      const occurrence = counts.get(signature) ?? 0;
+      counts.set(signature, occurrence + 1);
+      const segment: SceneGeneratedIdentitySegment = {
+        type: child.type,
+        childIndex,
+        occurrence,
+        ...(child.type === "INSTANCE"
+          ? { mainComponentRef: child.mainComponentRef! }
+          : {}),
+      };
+      const childLineage = [...lineage, segment];
+      const ownershipKey = sceneGeneratedDescendantOwnershipKey(
+        root.ownershipKey!,
+        root.mainComponentRef!,
+        childLineage,
+      );
+      const expectedIdentity = planned.get(ownershipKey);
+      if (
+        expectedIdentity === undefined ||
+        expectedIdentity.ownedAncestorKey !== root.ownershipKey ||
+        expectedIdentity.ownedAncestorMainComponentRef !==
+          root.mainComponentRef ||
+        canonicalJson(expectedIdentity.lineage) !== canonicalJson(childLineage)
+      ) {
+        throw new TypeError(
+          `SCENE-DERIVED-IDENTITY-UNEXPECTED:${ownershipKey}`,
+        );
+      }
+      if (used.has(ownershipKey))
+        throw new TypeError(`SCENE-OWNERSHIP-COLLISION:${ownershipKey}`);
+      used.add(ownershipKey);
+      resolved.set(child, ownershipKey);
+      visit(child, childLineage);
+    });
+  };
+  visit(root, []);
+  const missing = expected
+    .filter((entry) => entry.ownedAncestorKey === root.ownershipKey)
+    .filter((entry) => !used.has(entry.ownershipKey));
+  if (missing.length > 0)
+    throw new TypeError(
+      `SCENE-DERIVED-IDENTITY-MISSING:${missing
+        .map((entry) => entry.ownershipKey)
+        .join(",")}`,
+    );
+  return resolved;
 }
 
 export interface SceneComparison {
@@ -329,9 +508,14 @@ export function compileExpectedScenePlan(
       node: Extract<IRNode, { kind: "instance" }>,
       ownershipKey: string,
     ) => SceneNodeSnapshot["instancePayload"] | undefined;
+    generatedDescendantLineages?: (
+      node: Extract<IRNode, { kind: "instance" }>,
+      ownershipKey: string,
+    ) => SceneGeneratedIdentitySegment[][];
   } = {},
 ): ExpectedScenePlan {
   const seeds: FactSeed[] = [];
+  const generatedDescendants: SceneGeneratedDescendantIdentity[] = [];
   const visit = (node: IRNode, key: string): void => {
     emit(seeds, key, "kind", figmaType(node), "type");
     emit(seeds, key, "name", figmaName(node), "name");
@@ -408,6 +592,16 @@ export function compileExpectedScenePlan(
     } else if (node.kind === "instance") {
       emit(seeds, key, "componentRef", node.componentRef, "main component");
       emit(seeds, key, "properties", node.properties, "componentProperties");
+      for (const lineage of options.generatedDescendantLineages?.(node, key) ??
+        []) {
+        generatedDescendants.push(
+          createSceneGeneratedDescendantIdentity(
+            key,
+            node.componentRef,
+            lineage,
+          ),
+        );
+      }
       const payload =
         options.instancePayload?.(node, key) ??
         (node.payload === undefined
@@ -452,11 +646,18 @@ export function compileExpectedScenePlan(
   ) {
     throw new TypeError("typed fact receipt IDs must be unique");
   }
+  if (
+    new Set(generatedDescendants.map((entry) => entry.ownershipKey)).size !==
+    generatedDescendants.length
+  ) {
+    throw new TypeError("generated scene ownership keys must be unique");
+  }
   return {
     version: SCENE_READBACK_VERSION,
     rootOwnershipKey: "root",
     facts: withStableOccurrences(seeds),
     typedReceipts,
+    generatedDescendants,
   };
 }
 

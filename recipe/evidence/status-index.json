@@ -1,6 +1,6 @@
 {
   "artifactVersion": "recipe-pivot-current-status-v1",
-  "status": "attempt 1 hard failure; committed runtime correction pending",
+  "status": "attempt 2 hard failure; committed descendant-ownership and cleanup correction pending",
   "supersedesStatusClaimsOnly": true,
   "historicalEvidenceRewritten": false,
   "chronology": {
@@ -58,7 +58,7 @@
       ]
     },
     "liveV3": {
-      "status": "attempt 1 hard failure; committed runtime correction pending",
+      "status": "attempt 2 hard failure; committed descendant-ownership and cleanup correction pending",
       "protocolPath": "recipe/evidence/input-field-live-pivot-v3/protocol.json",
       "protocolSha256": "f4decf46da7cd3870e247d5304d632028356580e58ce68bedcb7acb7c0e31a23",
       "antecedentCommit": "be6b01300ad99d8a29ea4c11508d192dec84bbea",
@@ -68,7 +68,7 @@
       "offlineCorrectionTask2Implemented": true,
       "runnerPrepared": true,
       "runnerCommitted": true,
-      "attemptsExecuted": 1,
+      "attemptsExecuted": 2,
       "maximumAttempts": 3,
       "attempt1": {
         "outcome": "hard-failure",
@@ -84,10 +84,25 @@
         "manualCleanupComplete": true,
         "unrelatedScratchFingerprintRestored": true
       },
+      "attempt2": {
+        "outcome": "hard-failure",
+        "codeCommit": "98de9c3ceae06881bc477e7099b47e8f5a87cf10",
+        "writerExecutionSucceeded": true,
+        "mintedVariants": 256,
+        "rootCause": "owned instance 86:38597 generated read-only TEXT descendant I86:38597;86:38583 from helper text 86:38583 without direct shared plugin data",
+        "sceneFactsExpected": 43726,
+        "sceneFactsMeasured": 0,
+        "objectiveRowsMeasured": 0,
+        "successReceiptWritten": false,
+        "runnerCleanupComplete": false,
+        "manualCleanupComplete": true,
+        "unrelatedScratchFingerprintRestored": true
+      },
       "runtimeCorrection": {
         "status": "prepared-uncommitted",
         "newAuthorizationArtifactRequired": false,
-        "nextAttempt": 2,
+        "nextAttempt": 3,
+        "finalAttempt": true,
         "mustRunFromCleanPublishedDescendant": true
       },
       "sceneDerivedLiveVerificationRun": true,

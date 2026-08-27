@@ -103,6 +103,20 @@ export const FIGMA_RUNTIME_API_AUDIT = {
     "Uint32Array",
     "eval",
   ],
+  pluginApis: [
+    "figma.loadAllPagesAsync",
+    "figma.setCurrentPageAsync",
+    "figma.variables.getLocalVariableCollectionsAsync",
+    "InstanceNode.getMainComponentAsync",
+    "BaseNode.getSharedPluginData",
+    "BaseNode.setSharedPluginData",
+  ],
+  refusedAssumptions: [
+    "shared plugin data on read-only instance descendants",
+    "removing the current page before switching pages",
+    "Array.prototype.at in emitted runtime code",
+    "cleanup completion inferred from a swallowed exception",
+  ],
   webApis: {
     TextDecoder:
       "optional; selected only after fatal-mode conformance probes and exact fallback equality",

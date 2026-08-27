@@ -200,6 +200,8 @@ export async function buildInputLiveV3Proof(): Promise<Record<string, any>> {
       uncompressedBytes: uncompressed.byteLength,
       uncompressedSha256: sha256(uncompressed),
       facts: source.expectedScenePlan.facts.length,
+      generatedDescendants:
+        source.expectedScenePlan.generatedDescendants.length,
       compressed,
     };
   });
@@ -261,6 +263,9 @@ export async function buildInputLiveV3Proof(): Promise<Record<string, any>> {
       plannedVariables: writer.sourcePlans[index]!.variables.length,
       plannedSceneFacts:
         writer.sourcePlans[index]!.expectedScenePlan.facts.length,
+      plannedGeneratedDescendants:
+        writer.sourcePlans[index]!.expectedScenePlan.generatedDescendants
+          .length,
       expectedScenePlanArtifact: {
         path: expectedPlanArtifacts[index]!.path,
         bytes: expectedPlanArtifacts[index]!.bytes,
@@ -268,6 +273,8 @@ export async function buildInputLiveV3Proof(): Promise<Record<string, any>> {
         uncompressedBytes: expectedPlanArtifacts[index]!.uncompressedBytes,
         uncompressedSha256: expectedPlanArtifacts[index]!.uncompressedSha256,
         facts: expectedPlanArtifacts[index]!.facts,
+        generatedDescendants:
+          expectedPlanArtifacts[index]!.generatedDescendants,
       },
     })),
     objective: {

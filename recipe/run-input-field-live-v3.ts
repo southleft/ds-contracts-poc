@@ -11,6 +11,7 @@ import {
 } from "./input-field-live-v3-authorization.js";
 import {
   buildInputLiveV3Attempt1ReceiptEvidence,
+  buildInputLiveV3Attempt2ReceiptEvidence,
   inputLiveV3Artifact,
   writeInputLiveV3Receipt,
   type InputLiveV3AttemptEvidence,
@@ -86,6 +87,24 @@ const values=node=>Object.fromEntries(node.name.split(",").map(part=>part.trim()
 const propertyKey=(instance,name)=>Object.keys(instance.componentProperties).find(key=>key.split("#")[0]===name);
 const plainProperties=instance=>Object.fromEntries(Object.entries(instance.componentProperties).sort(([a],[b])=>a.localeCompare(b)).map(([key,value])=>[key,value.value]));
 const snapshot=instance=>JSON.stringify({width:instance.width,height:instance.height,properties:plainProperties(instance),roles:nodes(instance).filter(node=>role(node)).map(node=>({role:role(node),type:node.type,visible:node.visible!==false,width:node.width,height:node.height,characters:node.type==="TEXT"?node.characters:undefined})).sort((a,b)=>(a.role+a.type).localeCompare(b.role+b.type))});
+const ownershipPlans=new Map(${JSON.stringify(
+  plan.sources.map((source: Record<string, any>) => [
+    source.adapterIdentity,
+    {
+      version: source.expectedScenePlan.version,
+      recipeHash: source.recipeHash,
+      envelopeHash: source.envelopeHash,
+      directOwnershipKeys: [
+        ...new Set(
+          source.expectedScenePlan.facts.map(
+            (fact: Record<string, string>) => fact.nodeOwnershipKey,
+          ),
+        ),
+      ],
+      generatedDescendants: source.expectedScenePlan.generatedDescendants,
+    },
+  ]),
+)});
 const cellGeometry=[],probes=[],readback=[],images=[],createdNodeIds=[];
 for(const set of sets){
   const adapterIdentity=get(set,"adapterIdentity"),components=[...set.children];
@@ -125,7 +144,11 @@ for(const set of sets){
   const after=snapshot(instance);
   const bindingTypesCompatible=nodes(set).every(node=>Object.values(node.boundVariables||{}).flat().every(alias=>alias&&typeof alias.id==="string"));
   probes.push({adapterIdentity,variants:components.length,visitedVariants:visited.size,switchingRestored:JSON.stringify(original)===JSON.stringify(plainProperties(instance)),textPropertiesRestored:textPropertyPassed&&JSON.stringify(original)===JSON.stringify(plainProperties(instance)),reflowPassed:!!reflowPassed,contentFillPassed:!!reflowPassed,bindingCompatibilityPassed:bindingTypesCompatible,noFakeLayoutPassed:cellGeometry.filter(cell=>cell.adapterIdentity===adapterIdentity).every(cell=>cell.noFakeLayout),exactSceneRestoration:before===after});
-  readback.push({adapterIdentity,setId:set.id,scene:await readSceneDerivedTree(set)});
+  const expectedPlan=ownershipPlans.get(adapterIdentity);
+  if(!expectedPlan)throw new Error("INPUT-V3-OWNERSHIP-PLAN-ABSENT:"+adapterIdentity);
+  readback.push({adapterIdentity,setId:set.id,scene:await readSceneDerivedTree(set,expectedPlan,{runIdentity:${JSON.stringify(
+    plan.runIdentity,
+  )},adapterIdentity,recipeHash:expectedPlan.recipeHash,envelopeHash:expectedPlan.envelopeHash})});
 }
 const capturePlan=${JSON.stringify(plan.objective.cells)};
 const captureSection=figma.createSection();captureSection.name="Input v3 deterministic objective";page.appendChild(captureSection);createdNodeIds.push(captureSection.id);
@@ -232,6 +255,7 @@ async function main(): Promise<void> {
   let writeResult: Record<string, any> | undefined;
   let verification: Record<string, any> | undefined;
   let runError: unknown;
+  let cleanupError: string | undefined;
   let cleanup: Omit<InputLiveV3AttemptEvidence["cleanup"], "artifact"> = {
     requestedNodeIds: [],
     removedNodeIds: [],
@@ -265,6 +289,7 @@ async function main(): Promise<void> {
     const preflight = readInputLiveV3PreflightState(process.cwd(), {
       bridgeExactTargetCount: exact.length,
       requestedFileKey: plan.target.fileKey,
+      requestedAttempt: ATTEMPT,
     });
     const preflightFailures = validateInputLiveV3Preflight(preflight);
     if (preflightFailures.length > 0)
@@ -319,20 +344,32 @@ async function main(): Promise<void> {
               (source: Record<string, string>) => source.adapterIdentity,
             ),
           }),
-          30_000,
+          120_000,
           plan.target.fileKey,
         );
         if (cleanupResponse?.success) cleanup = cleanupResponse.result;
-      } catch {
-        // The persisted attempt evidence records incomplete cleanup by count.
+        else
+          cleanupError =
+            cleanupResponse?.error ?? "INPUT-V3-CLEANUP-EMPTY-RESPONSE";
+      } catch (error) {
+        cleanupError = error instanceof Error ? error.message : String(error);
       }
-    }
+    } else cleanupError = "INPUT-V3-CLEANUP-BRIDGE-DISCONNECTED";
     await server.stop();
   }
   if (!writeResult || !verification) {
     const cleanupPath = `${INPUT_LIVE_V3_ROOT}/cleanup-attempt-${ATTEMPT}.json`;
     const attemptPath = `${INPUT_LIVE_V3_ROOT}/live-attempt-${ATTEMPT}.json`;
-    writeFileSync(cleanupPath, `${JSON.stringify(cleanup, null, 2)}\n`);
+    writeFileSync(
+      cleanupPath,
+      `${JSON.stringify(
+        cleanupError === undefined
+          ? cleanup
+          : { ...cleanup, error: cleanupError },
+        null,
+        2,
+      )}\n`,
+    );
     writeFileSync(
       attemptPath,
       `${JSON.stringify(
@@ -345,6 +382,7 @@ async function main(): Promise<void> {
           transport: writeResult?.transport ?? null,
           writerResult: writeResult?.result ?? null,
           cleanup,
+          cleanupError: cleanupError ?? null,
         },
         null,
         2,
@@ -644,7 +682,13 @@ async function main(): Promise<void> {
     attempts:
       ATTEMPT === 1
         ? [attemptEvidence]
-        : [buildInputLiveV3Attempt1ReceiptEvidence(), attemptEvidence],
+        : ATTEMPT === 2
+          ? [buildInputLiveV3Attempt1ReceiptEvidence(), attemptEvidence]
+          : [
+              buildInputLiveV3Attempt1ReceiptEvidence(),
+              buildInputLiveV3Attempt2ReceiptEvidence(),
+              attemptEvidence,
+            ],
     report,
     sceneProofs,
     sceneFactsArtifact: inputLiveV3Artifact(scenePath),

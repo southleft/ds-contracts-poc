@@ -232,38 +232,92 @@ const sceneInstancePayload=async node=>{
   const alignValue=value=>value==="MIN"?"start":value==="MAX"?"end":"center";
   return{text,assets,content,typography,fills,opacity:firstText&&firstText.opacity!==undefined?firstText.opacity:1,intrinsicSize:{width:main?main.width:node.width,height:main?main.height:node.height},padding:{top:main&&"paddingTop" in main?main.paddingTop:0,right:main&&"paddingRight" in main?main.paddingRight:0,bottom:main&&"paddingBottom" in main?main.paddingBottom:0,left:main&&"paddingLeft" in main?main.paddingLeft:0},alignment:{horizontal:alignValue(main&&"primaryAxisAlignItems" in main?main.primaryAxisAlignItems:"CENTER"),vertical:alignValue(main&&"counterAxisAlignItems" in main?main.counterAxisAlignItems:"CENTER")},accessibility:accessibilityMatch?JSON.parse(accessibilityMatch[1]):{relation:"none",decorative:true},source:sourceMatch?sourceMatch[1]:"scene-description-missing"};
 };
-const readSceneDerivedTree=async node=>{
-  const ownershipKey=node.getSharedPluginData(SCENE_READBACK_NS,"ownershipKey");
-  if(!ownershipKey)throw new Error("SCENE-OWNERSHIP-KEY-ABSENT:"+node.id);
-  const snapshot={
-    ownershipKey,
-    type:node.type,
-    name:node.name,
-    semanticRole:sceneRole(node),
-    width:node.width,
-    height:node.height,
-    visible:node.visible!==false,
-    opacity:node.opacity===undefined?1:node.opacity,
-    boundVariables:await sceneBindings(node),
-    children:[],
+const sceneIdentityPart=value=>encodeURIComponent(value).replace(/%/g,"~");
+const sceneMainComponentRef=async node=>{
+  if(node.type!=="INSTANCE")return undefined;
+  const main=await node.getMainComponentAsync();
+  if(!main)return null;
+  const marker=" / ",index=main.name.lastIndexOf(marker);
+  return index<0?main.name:main.name.slice(index+marker.length);
+};
+const sceneDerivedOwnershipKey=(ownerKey,ownerMainRef,lineage)=>ownerKey+"/generated/"+sceneIdentityPart(ownerMainRef)+"/"+lineage.map(step=>step.childIndex+":"+step.occurrence+":"+step.type+":"+(step.mainComponentRef===undefined?"-":sceneIdentityPart(step.mainComponentRef))).join("/");
+const readSceneDerivedTree=async(node,expectedPlan,expectedOwner)=>{
+  const directKeys=new Set(expectedPlan?(expectedPlan.directOwnershipKeys||expectedPlan.facts.map(fact=>fact.nodeOwnershipKey)):[]);
+  const expectedDerived=new Map((expectedPlan&&expectedPlan.generatedDescendants||[]).map(entry=>[entry.ownershipKey,entry]));
+  if(expectedDerived.size!==(expectedPlan&&expectedPlan.generatedDescendants||[]).length)throw new Error("SCENE-DERIVED-IDENTITY-PLAN-DUPLICATE");
+  const used=new Set();
+  const read=async(current,generatedContext)=>{
+    const explicit=current.getSharedPluginData(SCENE_READBACK_NS,"ownershipKey");
+    let ownershipKey=explicit;
+    let currentContext=generatedContext;
+    let mainComponentRef;
+    if(explicit){
+      if(generatedContext)throw new Error("SCENE-GENERATED-DESCENDANT-DIRECT-KEY:"+current.id);
+      if(expectedPlan&&!directKeys.has(explicit))throw new Error("SCENE-DIRECT-OWNERSHIP-UNEXPECTED:"+current.id+":"+explicit);
+      if(expectedOwner){
+        for(const field of ["runIdentity","adapterIdentity","recipeHash","envelopeHash"])if(current.getSharedPluginData(SCENE_READBACK_NS,field)!==expectedOwner[field])throw new Error("SCENE-DIRECT-OWNERSHIP-METADATA:"+current.id+":"+field);
+      }
+      if(current.type==="INSTANCE"){
+        mainComponentRef=await sceneMainComponentRef(current);
+        if(!mainComponentRef)throw new Error("SCENE-OWNED-INSTANCE-MAIN-COMPONENT-ABSENT:"+current.id);
+        currentContext={ownerKey:explicit,ownerMainRef:mainComponentRef,lineage:[]};
+      }
+    }else{
+      if(!generatedContext)throw new Error("SCENE-OWNERSHIP-KEY-ABSENT:"+current.id);
+      if(current.type==="COMPONENT"||current.type==="COMPONENT_SET")throw new Error("SCENE-GENERATED-COMPONENT-DESCENDANT:"+current.id);
+      mainComponentRef=await sceneMainComponentRef(current);
+      if(current.type==="INSTANCE"&&!mainComponentRef)throw new Error("SCENE-GENERATED-INSTANCE-MAIN-COMPONENT-ABSENT:"+current.id);
+      const segment={type:current.type,childIndex:generatedContext.childIndex,occurrence:generatedContext.occurrence,...(mainComponentRef?{mainComponentRef}:{})};
+      const lineage=[...generatedContext.lineage,segment];
+      ownershipKey=sceneDerivedOwnershipKey(generatedContext.ownerKey,generatedContext.ownerMainRef,lineage);
+      const planned=expectedDerived.get(ownershipKey);
+      if(!planned||planned.ownedAncestorKey!==generatedContext.ownerKey||planned.ownedAncestorMainComponentRef!==generatedContext.ownerMainRef||JSON.stringify(planned.lineage)!==JSON.stringify(lineage))throw new Error("SCENE-DERIVED-IDENTITY-UNEXPECTED:"+current.id+":"+ownershipKey);
+      currentContext={...generatedContext,lineage};
+    }
+    if(used.has(ownershipKey))throw new Error("SCENE-OWNERSHIP-COLLISION:"+ownershipKey);
+    used.add(ownershipKey);
+    const snapshot={
+      ownershipKey,
+      type:current.type,
+      name:current.name,
+      semanticRole:sceneRole(current),
+      width:current.width,
+      height:current.height,
+      visible:current.visible!==false,
+      opacity:current.opacity===undefined?1:current.opacity,
+      boundVariables:await sceneBindings(current),
+      children:[],
+    };
+    for(const field of ["layoutMode","layoutSizingHorizontal","layoutSizingVertical","primaryAxisAlignItems","counterAxisAlignItems","itemSpacing","paddingTop","paddingRight","paddingBottom","paddingLeft","minWidth","minHeight","layoutPositioning","x","y","constraints","clipsContent","strokeWeight","strokeAlign","dashPattern","characters","fontName","fontSize","lineHeight","letterSpacing","textCase","textDecoration","textAlignHorizontal","textAlignVertical"]){
+      if(field in current&&current[field]!==figma.mixed)snapshot[field]=current[field];
+    }
+    if(current.type==="TEXT"){const provenance=current.name.match(/ :: font-provenance=([^\n]+)/);if(provenance)snapshot.fontProvenance=JSON.parse(decodeURIComponent(provenance[1]));}
+    if(Array.isArray(current.fills))snapshot.fills=current.fills.map(scenePaint);
+    if(Array.isArray(current.strokes))snapshot.strokes=current.strokes.map(scenePaint);
+    if(Array.isArray(current.effects))snapshot.effects=current.effects.map(sceneEffect);
+    if("topLeftRadius" in current)snapshot.cornerRadius={topLeft:current.topLeftRadius,topRight:current.topRightRadius,bottomRight:current.bottomRightRadius,bottomLeft:current.bottomLeftRadius};
+    if(current.type==="COMPONENT")snapshot.variantProperties=sceneVariantProperties(current);
+    if(current.type==="COMPONENT_SET")snapshot.variantGroupProperties=Object.fromEntries(Object.entries(current.variantGroupProperties).map(([name,axis])=>[name,{values:[...axis.values]}]));
+    if(current.type==="INSTANCE"){
+      snapshot.componentProperties=scenePlainProperties(current);
+      snapshot.componentRef=mainComponentRef===undefined?await sceneMainComponentRef(current):mainComponentRef;
+      snapshot.instancePayload=await sceneInstancePayload(current);
+    }
+    if("children" in current){
+      const counts=new Map();
+      for(let childIndex=0;childIndex<current.children.length;childIndex++){
+        const child=current.children[childIndex],childMainRef=child.type==="INSTANCE"?await sceneMainComponentRef(child):undefined;
+        const signature=child.type+"\0"+(childMainRef||""),occurrence=counts.get(signature)||0;
+        counts.set(signature,occurrence+1);
+        const context=currentContext?{...currentContext,childIndex,occurrence}:null;
+        snapshot.children.push(await read(child,context));
+      }
+    }
+    return snapshot;
   };
-  for(const field of ["layoutMode","layoutSizingHorizontal","layoutSizingVertical","primaryAxisAlignItems","counterAxisAlignItems","itemSpacing","paddingTop","paddingRight","paddingBottom","paddingLeft","minWidth","minHeight","layoutPositioning","x","y","constraints","clipsContent","strokeWeight","strokeAlign","dashPattern","characters","fontName","fontSize","lineHeight","letterSpacing","textCase","textDecoration","textAlignHorizontal","textAlignVertical"]){
-    if(field in node&&node[field]!==figma.mixed)snapshot[field]=node[field];
-  }
-  if(node.type==="TEXT"){const provenance=node.name.match(/ :: font-provenance=([^\n]+)/);if(provenance)snapshot.fontProvenance=JSON.parse(decodeURIComponent(provenance[1]));}
-  if(Array.isArray(node.fills))snapshot.fills=node.fills.map(scenePaint);
-  if(Array.isArray(node.strokes))snapshot.strokes=node.strokes.map(scenePaint);
-  if(Array.isArray(node.effects))snapshot.effects=node.effects.map(sceneEffect);
-  if("topLeftRadius" in node)snapshot.cornerRadius={topLeft:node.topLeftRadius,topRight:node.topRightRadius,bottomRight:node.bottomRightRadius,bottomLeft:node.bottomLeftRadius};
-  if(node.type==="COMPONENT")snapshot.variantProperties=sceneVariantProperties(node);
-  if(node.type==="COMPONENT_SET")snapshot.variantGroupProperties=Object.fromEntries(Object.entries(node.variantGroupProperties).map(([name,axis])=>[name,{values:[...axis.values]}]));
-  if(node.type==="INSTANCE"){
-    const main=await node.getMainComponentAsync();
-    snapshot.componentProperties=scenePlainProperties(node);
-    snapshot.componentRef=main?main.name.split(" / ").at(-1):null;
-    snapshot.instancePayload=await sceneInstancePayload(node);
-  }
-  if("children" in node)snapshot.children=await Promise.all(node.children.map(readSceneDerivedTree));
+  const snapshot=await read(node,null);
+  const missing=[...expectedDerived.keys()].filter(key=>!used.has(key));
+  if(missing.length>0)throw new Error("SCENE-DERIVED-IDENTITY-MISSING:"+missing.join(","));
   return snapshot;
 };
 let nextSectionX=0;
@@ -437,7 +491,7 @@ for(const source of PLAN.sources){
     "input-field/message/helper":set.addComponentProperty("Helper text","TEXT",source.contentDefaults["input-field/message/helper"]),
     "input-field/message/error":set.addComponentProperty("Error text","TEXT",source.contentDefaults["input-field/message/error"]),
   };
-  const leadingHelper=[...helperByRef.values()][0],trailingHelper=[...helperByRef.values()].at(-1);
+  const helperValues=[...helperByRef.values()],leadingHelper=helperValues[0],trailingHelper=helperValues[helperValues.length-1];
   const leadingProperty=set.addComponentProperty("Leading adornment","INSTANCE_SWAP",leadingHelper.id);
   const trailingProperty=set.addComponentProperty("Trailing adornment","INSTANCE_SWAP",trailingHelper.id);
   for(const component of set.children){

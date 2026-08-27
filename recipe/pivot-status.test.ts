@@ -19,7 +19,7 @@ const fixtures = () => ({
   ),
 });
 
-test("attempt 1 remains a hard failure with authorization separated", () => {
+test("attempts 1 and 2 remain hard failures with authorization separated", () => {
   const value = fixtures();
   assert.deepEqual(
     validatePivotStatus(
@@ -29,11 +29,13 @@ test("attempt 1 remains a hard failure with authorization separated", () => {
       [
         "capture-authorization.json",
         "cleanup-attempt-1.json",
+        "cleanup-attempt-2.json",
         "conformance-report.json",
         "expected-scene-plan-mui.json.gz",
         "expected-scene-plan-polaris.json.gz",
         "index.json",
         "live-attempt-1.json",
+        "live-attempt-2.json",
         "protocol.json",
         "transport-envelope.json",
         "writer-plan.json",
@@ -79,11 +81,13 @@ test("status gate rejects chronology, success, capture, hash, and criterion lies
         [
           "capture-authorization.json",
           "cleanup-attempt-1.json",
+          "cleanup-attempt-2.json",
           "conformance-report.json",
           "expected-scene-plan-mui.json.gz",
           "expected-scene-plan-polaris.json.gz",
           "index.json",
           "live-attempt-1.json",
+          "live-attempt-2.json",
           "protocol.json",
           "transport-envelope.json",
           "writer-plan.json",

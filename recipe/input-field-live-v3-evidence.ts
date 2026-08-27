@@ -23,6 +23,12 @@ export const INPUT_LIVE_V3_ATTEMPT_1_WRITER_SHA256 =
 export const INPUT_LIVE_V3_ATTEMPT_1_WRAPPER_SHA256 =
   "8de5c99cf89b060c3b9a8c28c2345f56e2673d79e98fb55ab02d7fc24d681d6b";
 export const INPUT_LIVE_V3_ATTEMPT_1_FINGERPRINT = "10ba6b57da3cfa97";
+export const INPUT_LIVE_V3_ATTEMPT_2_CODE_COMMIT =
+  "98de9c3ceae06881bc477e7099b47e8f5a87cf10";
+export const INPUT_LIVE_V3_ATTEMPT_2_WRITER_SHA256 =
+  "92da8f8c5ae78a870b392f9dfb3e239e82e8dc018d9abebfbcdd8118bf542811";
+export const INPUT_LIVE_V3_ATTEMPT_2_WRAPPER_SHA256 =
+  "ad2ea3b369c86880f59897442cf006268ec6a98badebb1a40de74fad19330ec0";
 export const INPUT_LIVE_V3_INDEX_PATH =
   "recipe/evidence/input-field-live-pivot-v3/index.json";
 
@@ -257,10 +263,13 @@ export function readInputLiveV3Attempt1HardFailure(): InputLiveV3HardFailureEvid
     ),
   ) as Record<string, any>;
   const history = index.attemptHistory;
-  if (!Array.isArray(history) || history.length !== 1)
-    throw new Error(
-      "Input live v3 attempt history must contain attempt 1 only",
-    );
+  if (
+    !Array.isArray(history) ||
+    history.length < 1 ||
+    history.length > 2 ||
+    history[0]?.attempt !== 1
+  )
+    throw new Error("Input live v3 attempt history must begin with attempt 1");
   const entry = history[0];
   const attemptArtifact = entry?.artifacts?.attempt as
     InputLiveV3Artifact | undefined;
@@ -299,6 +308,217 @@ export function buildInputLiveV3Attempt1ReceiptEvidence(): InputLiveV3AttemptEvi
     codeCommit: INPUT_LIVE_V3_ATTEMPT_1_CODE_COMMIT,
     writerSha256: INPUT_LIVE_V3_ATTEMPT_1_WRITER_SHA256,
     wrapperSha256: INPUT_LIVE_V3_ATTEMPT_1_WRAPPER_SHA256,
+    decodedBytes: evidence.attempt.transport.decodedBytes,
+    decodedSha256: evidence.attempt.transport.decodedSha256,
+    evalBegan: evidence.attempt.transport.evalBegan,
+    evalCompleted: evidence.attempt.transport.evalCompleted,
+    createdNodeIds: evidence.attempt.writerResult.createdNodeIds,
+    mutatedNodeIds: evidence.attempt.writerResult.mutatedNodeIds,
+    resultArtifact: evidence.attemptArtifact,
+    cleanup: {
+      method: "manual-after-runner-failure",
+      requestedNodeIds: manual.requestedNodeIds,
+      removedNodeIds: manual.removedNodeIds,
+      requestedCollectionIds: manual.requestedCollectionIds,
+      removedCollectionIds: manual.removedCollectionIds,
+      remainingOwnedNodes: manual.remainingOwnedNodes,
+      remainingOwnedCollections: manual.remainingOwnedCollections,
+      complete: manual.complete,
+      artifact: evidence.cleanupArtifact,
+    },
+  };
+}
+
+export function validateInputLiveV3Attempt2HardFailure(
+  attempt: Record<string, any>,
+  cleanup: Record<string, any>,
+): string[] {
+  const failures: string[] = [];
+  const runnerCleanup = {
+    requestedNodeIds: [],
+    removedNodeIds: [],
+    requestedCollectionIds: [],
+    removedCollectionIds: [],
+    remainingOwnedNodes: -1,
+    remainingOwnedCollections: -1,
+    complete: false,
+  };
+  if (
+    attempt.artifactVersion !== "input-live-v3-attempt-v1" ||
+    attempt.attempt !== 2 ||
+    attempt.outcome !== "hard-failure" ||
+    attempt.thirdAttemptExecuted !== false
+  )
+    failures.push("attempt 2 hard-failure identity");
+  if (
+    attempt.chronology?.codeCommit !== INPUT_LIVE_V3_ATTEMPT_2_CODE_COMMIT ||
+    attempt.chronology?.authorizationCommit !==
+      "ad7e02d3bfaf79f757ff63085c0a24a64a5c4c7b" ||
+    attempt.chronology?.antecedentCommit !== INPUT_LIVE_V3_ANTECEDENT_COMMIT
+  )
+    failures.push("attempt 2 exact chronology");
+  if (
+    attempt.transport?.protocol !==
+      "ds-contracts/figma-writer-utf8-base64/v1" ||
+    attempt.transport?.payloadBytes !== 2_449_180 ||
+    attempt.transport?.decodedBytes !== 2_449_180 ||
+    attempt.transport?.expectedSha256 !==
+      INPUT_LIVE_V3_ATTEMPT_2_WRITER_SHA256 ||
+    attempt.transport?.decodedSha256 !==
+      INPUT_LIVE_V3_ATTEMPT_2_WRITER_SHA256 ||
+    attempt.transport?.evalBegan !== true ||
+    attempt.transport?.evalCompleted !== true ||
+    attempt.transport?.runtimePreflight?.portableBase64 !== true ||
+    attempt.transport?.runtimePreflight?.portableSha256 !== true ||
+    attempt.transport?.runtimePreflight?.strictUtf8 !== true
+  )
+    failures.push("attempt 2 exact committed writer execution");
+  if (
+    attempt.writerResult?.pageId !== "86:38503" ||
+    attempt.writerResult?.sources?.length !== 2 ||
+    attempt.writerResult?.sources?.some(
+      (source: Record<string, any>) =>
+        source.variantCount !== 128 || source.cellCount !== 128,
+    ) ||
+    attempt.writerResult?.createdNodeIds?.length !== 2_317
+  )
+    failures.push("attempt 2 exact minted denominator");
+  const verification = attempt.verification;
+  if (
+    attempt.error !== "Error: SCENE-OWNERSHIP-KEY-ABSENT:I86:38597;86:38583" ||
+    verification?.status !== "hard-failure" ||
+    verification?.completed !== false ||
+    verification?.failureStage !==
+      "scene-generated-descendant-ownership-before-extraction" ||
+    verification?.missingCompositeNodeId !== "I86:38597;86:38583" ||
+    verification?.ownedInstanceNodeId !== "86:38597" ||
+    verification?.sourceMainComponentDescendantNodeId !== "86:38583" ||
+    verification?.ownedInstanceOwnershipKey !==
+      "root/children/1/children/0/children/0/children/0" ||
+    verification?.ownedInstanceRole !== "input-field/slot/leading" ||
+    verification?.ownedInstanceMainComponentRef !==
+      "source/input-adornment/start" ||
+    verification?.sourceMainComponentDescendantType !== "TEXT" ||
+    verification?.expectedSceneFacts !== 43_726 ||
+    verification?.measuredSceneFacts !== 0 ||
+    verification?.measuredObjectiveRows !== 0 ||
+    verification?.capturedCells !== 0 ||
+    verification?.fixedPointCyclesMeasured !== 0
+  )
+    failures.push("attempt 2 verifier hard failure/zero measurements");
+  if (
+    attempt.artifacts?.successReceipt !== null ||
+    attempt.artifacts?.sceneDerivedFacts !== null ||
+    attempt.artifacts?.objectiveResult !== null ||
+    attempt.artifacts?.humanReviewPacket !== null ||
+    !Array.isArray(attempt.artifacts?.captures) ||
+    attempt.artifacts.captures.length !== 0
+  )
+    failures.push("attempt 2 absent success/result artifacts");
+  if (JSON.stringify(attempt.runnerCleanup) !== JSON.stringify(runnerCleanup))
+    failures.push("attempt 2 runner cleanup record");
+  if (
+    cleanup.artifactVersion !== "input-live-v3-cleanup-v1" ||
+    cleanup.attempt !== 2 ||
+    cleanup.runIdentity !== "4a074b24-e8503dd5-input-v2" ||
+    JSON.stringify(cleanup.runnerCleanup) !== JSON.stringify(runnerCleanup) ||
+    cleanup.runnerFailureEvidence?.exactError !== null ||
+    cleanup.runnerFailureEvidence?.reasonExactErrorUnavailable !==
+      "attempt-2 runner catch discarded the cleanup exception" ||
+    cleanup.runnerFailureEvidence?.persistedSentinelProvesCompletion !== false
+  )
+    failures.push("attempt 2 separate runner cleanup");
+  const manual = cleanup.manualCleanup;
+  if (
+    manual?.ownershipVerified !== true ||
+    JSON.stringify(manual?.requestedNodeIds) !== JSON.stringify(["86:38503"]) ||
+    JSON.stringify(manual?.removedNodeIds) !== JSON.stringify(["86:38503"]) ||
+    JSON.stringify(manual?.requestedCollectionIds) !==
+      JSON.stringify([
+        "VariableCollectionId:86:38505",
+        "VariableCollectionId:86:39932",
+      ]) ||
+    JSON.stringify(manual?.removedCollectionIds) !==
+      JSON.stringify([
+        "VariableCollectionId:86:38505",
+        "VariableCollectionId:86:39932",
+      ]) ||
+    manual?.remainingOwnedNodes !== 0 ||
+    manual?.remainingOwnedCollections !== 0 ||
+    manual?.complete !== true
+  )
+    failures.push("attempt 2 manual owned cleanup");
+  const fingerprint = manual?.unrelatedScratchFingerprint;
+  if (
+    fingerprint?.algorithm !== "cyrb64" ||
+    fingerprint?.before !== INPUT_LIVE_V3_ATTEMPT_1_FINGERPRINT ||
+    fingerprint?.after !== INPUT_LIVE_V3_ATTEMPT_1_FINGERPRINT ||
+    fingerprint?.exact !== true ||
+    fingerprint?.pageCount !== 13 ||
+    fingerprint?.collectionCount !== 14 ||
+    fingerprint?.variableCount !== 11_163 ||
+    fingerprint?.censusPagesUnchanged !== true ||
+    fingerprint?.retainedButtonProofUnchanged !== true
+  )
+    failures.push("attempt 2 manual cleanup fingerprint");
+  return failures;
+}
+
+export function readInputLiveV3Attempt2HardFailure(): InputLiveV3HardFailureEvidence {
+  const index = JSON.parse(
+    readFileSync(
+      resolveRepositoryEvidencePath(INPUT_LIVE_V3_INDEX_PATH),
+      "utf8",
+    ),
+  ) as Record<string, any>;
+  const history = index.attemptHistory;
+  if (
+    !Array.isArray(history) ||
+    history.length !== 2 ||
+    history[0]?.attempt !== 1 ||
+    history[1]?.attempt !== 2
+  )
+    throw new Error(
+      "Input live v3 attempt history must contain attempts 1 and 2 only",
+    );
+  const entry = history[1];
+  const attemptArtifact = entry?.artifacts?.attempt as
+    InputLiveV3Artifact | undefined;
+  const cleanupArtifact = entry?.artifacts?.cleanup as
+    InputLiveV3Artifact | undefined;
+  const artifactValidation = [
+    ...artifactFailures(attemptArtifact, "attempt 2 result"),
+    ...artifactFailures(cleanupArtifact, "attempt 2 cleanup"),
+  ];
+  if (!attemptArtifact || !cleanupArtifact || artifactValidation.length > 0)
+    throw new Error(
+      `Input live v3 attempt 2 artifact invalid:\n${artifactValidation.join("\n")}`,
+    );
+  const attempt = JSON.parse(
+    readFileSync(resolveRepositoryEvidencePath(attemptArtifact.path), "utf8"),
+  ) as Record<string, any>;
+  const cleanup = JSON.parse(
+    readFileSync(resolveRepositoryEvidencePath(cleanupArtifact.path), "utf8"),
+  ) as Record<string, any>;
+  const failures = validateInputLiveV3Attempt2HardFailure(attempt, cleanup);
+  if (failures.length > 0)
+    throw new Error(
+      `Input live v3 attempt 2 hard-failure evidence invalid:\n${failures.join("\n")}`,
+    );
+  if (existsSync(resolveRepositoryEvidencePath(INPUT_LIVE_V3_RECEIPT_PATH)))
+    throw new Error("Input live v3 attempt 2 must not have a success receipt");
+  return { attempt, cleanup, attemptArtifact, cleanupArtifact };
+}
+
+export function buildInputLiveV3Attempt2ReceiptEvidence(): InputLiveV3AttemptEvidence {
+  const evidence = readInputLiveV3Attempt2HardFailure();
+  const manual = evidence.cleanup.manualCleanup;
+  return {
+    attempt: 2,
+    outcome: "hard-failure",
+    codeCommit: INPUT_LIVE_V3_ATTEMPT_2_CODE_COMMIT,
+    writerSha256: INPUT_LIVE_V3_ATTEMPT_2_WRITER_SHA256,
+    wrapperSha256: INPUT_LIVE_V3_ATTEMPT_2_WRAPPER_SHA256,
     decodedBytes: evidence.attempt.transport.decodedBytes,
     decodedSha256: evidence.attempt.transport.decodedSha256,
     evalBegan: evidence.attempt.transport.evalBegan,

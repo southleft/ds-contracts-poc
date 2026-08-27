@@ -1,0 +1,51 @@
+{
+  "artifactVersion": "input-live-v3-cleanup-v1",
+  "attempt": 2,
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "runIdentity": "4a074b24-e8503dd5-input-v2",
+  "runnerCleanup": {
+    "requestedNodeIds": [],
+    "removedNodeIds": [],
+    "requestedCollectionIds": [],
+    "removedCollectionIds": [],
+    "remainingOwnedNodes": -1,
+    "remainingOwnedCollections": -1,
+    "complete": false
+  },
+  "runnerFailureEvidence": {
+    "exactError": null,
+    "reasonExactErrorUnavailable": "attempt-2 runner catch discarded the cleanup exception",
+    "persistedSentinelProvesCompletion": false
+  },
+  "manualCleanup": {
+    "ownershipVerified": true,
+    "requestedNodeIds": ["86:38503"],
+    "removedNodeIds": ["86:38503"],
+    "requestedCollectionIds": [
+      "VariableCollectionId:86:38505",
+      "VariableCollectionId:86:39932"
+    ],
+    "removedCollectionIds": [
+      "VariableCollectionId:86:38505",
+      "VariableCollectionId:86:39932"
+    ],
+    "remainingOwnedNodes": 0,
+    "remainingOwnedCollections": 0,
+    "complete": true,
+    "unrelatedScratchFingerprint": {
+      "algorithm": "cyrb64",
+      "before": "10ba6b57da3cfa97",
+      "after": "10ba6b57da3cfa97",
+      "exact": true,
+      "pageCount": 13,
+      "collectionCount": 14,
+      "variableCount": 11163,
+      "censusPagesUnchanged": true,
+      "retainedButtonProofUnchanged": true
+    }
+  }
+}
