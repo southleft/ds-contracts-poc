@@ -336,6 +336,9 @@ jobs:
       - name: recipe:input-field:live:v27:check (recover hug height for hidden content FIXED; hashed v26 scene-readback frozen)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:live:v27:check
+      - name: recipe:input-field:live:v28:check (omit content letterSpacing; hashed v27 scene-readback frozen)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:live:v28:check
       - name: recipe:input-field:comparison:check (128 matched source cells, independent references, 256 opaque specimens, false and ungraded)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:comparison:check
