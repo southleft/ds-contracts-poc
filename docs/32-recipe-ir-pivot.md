@@ -31,8 +31,13 @@
 > v8 antecedent bytes. V9 prepare is published at
 > `1a16642bddbb8c8a3fb44cd0e086a7ff8328e294`. The separate authorization
 > artifact is present and pins that antecedent; commit state is derived from
-> Git history. Runtime security attestation, preflight, and live execution are
-> still pending. Button overall success is false/pending.
+> Git history. V9 attempt 1 ran Scratch-only: writer accepted (2317 created
+> nodes), extract raw returned (~8.3MB), then host normalize/account refused
+> unrecognized `strokes`, `effects`, and `cornerRadius` on a component-set at
+> `recipe/scene-readback-v9.ts:1139`. That scene-readback file stays hashed;
+> unhashed `figma-ir.ts` is taught those component-set fields for attempt 2.
+> Cleanup accepted; owned Input pages are gone; no captures; no live success.
+> Button overall success is false/pending.
 > Its technical mint, usability, restoration, and 12/12 adjudication bytes are
 > retained, but the human grade is not attributable and the historical live
 > inversion/accounting was self-referential. Input overall success is false and
@@ -1712,7 +1717,7 @@ references and re-derives a legacy comparator over the frozen 24-cell matrix.
 | archetype   | progress                                                                                                                                                        | next evidence boundary                                                                           |
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | Button      | **technical mint retained; overall false/pending**                                                                                                              | scene-derived inversion/accounting, then attributable human signoff (human gate)                 |
-| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1 and v8 attempts 1-2 failed closed; v9 authorization declared pending attestation; false** | publish v9 authorize, attest, preflight, then Scratch-only live (see Remaining work §A)          |
+| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, and v9 attempt 1 failed closed; false** | v9 attempt 2 after teaching component-set strokes/effects/cornerRadius (see Remaining work §A)   |
 | Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                                                                      | matched 24-cell benchmark, Scratch-only live, then human grade (see Remaining work §C)           |
 | Data Table  | not claimed                                                                                                                                                     | human-reviewed adapters, offline cross-library proof, then Scratch-only live                     |
 | Calendar    | not claimed                                                                                                                                                     | reviewed archetype addition, then the same offline-then-live sequence                            |

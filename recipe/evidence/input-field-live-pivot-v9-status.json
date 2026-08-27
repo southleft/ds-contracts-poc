@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v9-status-v1",
-  "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+  "status": "attempt 1 failed closed; writer and extract accepted; host IR refused component-set strokes/effects/cornerRadius; cleanup complete",
   "baseCommit": "1d49f4db6db14eca0c4185326153c972d50b7127",
   "antecedent": {
     "commit": "1a16642bddbb8c8a3fb44cd0e086a7ff8328e294",
@@ -55,12 +55,16 @@
     "exactScratchReadOnlyProbeRequired": true,
     "tokenValuesForbidden": true
   },
-  "attemptsExecuted": 0,
-  "nextAttempt": 1,
+  "attemptsExecuted": 1,
+  "nextAttempt": 2,
   "maximumFutureAttempts": 3,
-  "liveExecutionOccurred": false,
-  "figmaWrites": 0,
+  "liveExecutionOccurred": true,
+  "figmaWrites": 2,
   "figmaCaptures": 0,
+  "createdNodesThenRemoved": 2317,
+  "attempt1Path": "recipe/evidence/input-field-live-pivot-v9-attempt-1.json",
+  "attempt1Sha256": "aad14b8a83c8b91935e24c06c1432d846e8d3322e66514c76acc36b9ef3c36fc",
+  "restartAsV9Attempt2WithoutComponentSetStrokeTeachingForbidden": true,
   "humanSignoff": "pending",
   "overallInputSuccess": false
 }

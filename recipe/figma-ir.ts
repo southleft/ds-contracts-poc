@@ -529,6 +529,9 @@ export interface ComponentSetNode {
   bindings?: VariableBinding[];
   visible?: boolean;
   opacity?: number;
+  strokes?: Stroke[];
+  effects?: Effect[];
+  cornerRadius?: CornerRadius;
   clipsContent?: boolean;
   variantAxes: VariantAxis[];
   children: ComponentNode[];
@@ -574,6 +577,9 @@ export const ComponentSetNodeSchema = z.strictObject({
   kind: z.literal("component-set"),
   layout: FrameLayoutSchema,
   fills: z.array(PaintSchema),
+  strokes: z.array(StrokeSchema).optional(),
+  effects: z.array(EffectSchema).optional(),
+  cornerRadius: CornerRadiusSchema.optional(),
   clipsContent: z.boolean().optional(),
   variantAxes: z.array(VariantAxisSchema).min(1),
   children: z.array(ComponentNodeSchema).min(1),

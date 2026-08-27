@@ -1,6 +1,6 @@
 {
   "artifactVersion": "recipe-pivot-current-status-v1",
-  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 authorization declared pending attestation; Button/Input false; human signoff pending",
+  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempt 1 failed closed; Button/Input false; human signoff pending",
   "supersedesStatusClaimsOnly": true,
   "historicalEvidenceRewritten": false,
   "chronology": {
@@ -462,7 +462,7 @@
       "overallInputSuccess": false
     },
     "liveV9": {
-      "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+      "status": "attempt 1 failed closed; writer and extract accepted; host IR refused component-set strokes/effects/cornerRadius; cleanup complete",
       "baseCommit": "1d49f4db6db14eca0c4185326153c972d50b7127",
       "antecedentCommit": "1a16642bddbb8c8a3fb44cd0e086a7ff8328e294",
       "protocolPath": "recipe/evidence/input-field-live-pivot-v9/protocol.json",
@@ -527,13 +527,17 @@
         "tokenValuesForbidden": true,
         "liveExecutionForbidden": true
       },
-      "attemptsExecuted": 0,
-      "nextAttempt": 1,
+      "attemptsExecuted": 1,
+      "nextAttempt": 2,
       "maximumFutureAttempts": 3,
       "humanSignoff": "pending",
-      "liveExecutionOccurred": false,
-      "figmaWrites": 0,
+      "liveExecutionOccurred": true,
+      "figmaWrites": 2,
       "figmaCaptures": 0,
+      "createdNodesThenRemoved": 2317,
+      "attempt1Path": "recipe/evidence/input-field-live-pivot-v9-attempt-1.json",
+      "attempt1Sha256": "aad14b8a83c8b91935e24c06c1432d846e8d3322e66514c76acc36b9ef3c36fc",
+      "restartAsV9Attempt2WithoutComponentSetStrokeTeachingForbidden": true,
       "overallInputSuccess": false
     }
   }

@@ -1,0 +1,46 @@
+{
+  "artifactVersion": "input-live-v9-attempt-1-v1",
+  "status": "failed closed",
+  "authorizationCommit": "58cd5c6ac08ebedc4c5a505b6f59e38efe91ac1b",
+  "codeCommit": "58cd5c6ac08ebedc4c5a505b6f59e38efe91ac1b",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 2317,
+    "pageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+    "sourceRoots": 2
+  },
+  "extract": {
+    "operatorSuccess": true,
+    "rawResponseBytes": 8364325,
+    "hostNormalizeAccount": false
+  },
+  "v8Attempt2FailureCleared": {
+    "variableAliasFills": true,
+    "boundVariableOnlyFills": true
+  },
+  "failure": {
+    "phase": "host-normalize-account",
+    "locus": "recipe/scene-readback-v9.ts:1139 IRNodeSchema ComponentSetNodeSchema",
+    "messages": [
+      "Unrecognized keys: \"strokes\", \"effects\", \"cornerRadius\""
+    ],
+    "sceneReadbackInV9AntecedentHashSet": true,
+    "figmaIrInV9AntecedentHashSet": false
+  },
+  "cleanup": {
+    "accepted": true,
+    "scratchOwnedInputPagesRemaining": 0
+  },
+  "captures": 0,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false,
+  "v9AntecedentBytesUnchanged": true,
+  "v9AuthorizationBytesUnchanged": true,
+  "nextAttempt": 2,
+  "restartAsV9Attempt2WithoutComponentSetStrokeTeachingForbidden": true
+}

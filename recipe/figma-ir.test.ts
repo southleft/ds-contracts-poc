@@ -319,6 +319,45 @@ test("component sets carry Figma-native axes and component variants", () => {
   );
 });
 
+test("component sets carry live strokes, effects, and cornerRadius like frames", () => {
+  const component = {
+    ...frame,
+    kind: "component",
+    variantProperties: { Size: "medium" },
+  } as const;
+  const liveSet = {
+    ...frame,
+    kind: "component-set",
+    strokes: [
+      {
+        weight: 1,
+        align: "inside" as const,
+        paint: { kind: "solid" as const, color: "#00000014" },
+      },
+    ],
+    effects: [
+      {
+        kind: "drop-shadow" as const,
+        color: "#00000014",
+        offsetX: 0,
+        offsetY: 1,
+        blur: 2,
+        spread: 0,
+      },
+    ],
+    cornerRadius: {
+      topLeft: 4,
+      topRight: 4,
+      bottomRight: 4,
+      bottomLeft: 4,
+    },
+    variantAxes: [{ name: "Size", values: ["small", "medium"] }],
+    children: [component],
+  };
+  assert.equal(ComponentSetNodeSchema.safeParse(liveSet).success, true);
+  assert.equal(IRNodeSchema.safeParse(liveSet).success, true);
+});
+
 test("IR_DRAWABLE_FIELDS is exactly the fields the node schemas present", () => {
   // The list is hand-maintained on purpose (figma-ir.ts). This is what keeps
   // it true: a field added to a node schema without being declared drawable
