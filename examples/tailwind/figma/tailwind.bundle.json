@@ -3911,6 +3911,17 @@
         {
           "part": "root",
           "kind": "channel",
+          "channel": "margin",
+          "value": "12px",
+          "reason": "lowered to the parent's itemSpacing (12px, bound to imported/toggle-switch/label/margin-left): CSS spells between-sibling space per CHILD and auto-layout spells it once per PARENT, so 1 sibling margin(s) become one gap — label.margin-left",
+          "variants": {
+            "count": 6,
+            "of": 6
+          }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
           "channel": "outline-color [focus-visible]",
           "value": "{imported.toggle-switch.root.outline-color-state-focus-visible}",
           "reason": "the focus-visible plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",

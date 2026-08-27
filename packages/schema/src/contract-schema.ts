@@ -418,6 +418,7 @@ export const LayoutSchema = z
      *  layoutWrap: 'WRAP'). Chip rows and tag groups wrap in every target
      *  system; the counter-axis gap rides the same `gap` token (Figma
      *  counterAxisSpacing follows itemSpacing unless a row-gap fact lands). */
+    // @lower schema.wrap-declared-and-detected
     wrap: z.boolean().optional(),
     /** G1 — the declared track lists ARE the contract fact; counts are
      *  derived (rows.length), never stored (the API's count-before-sizes
@@ -699,7 +700,14 @@ export const LITERAL_CHANNELS = new Set([
   "min-height",
   "padding-block",
   "padding-inline",
+  // `gap` is a SHORTHAND and computed style never reports one
+  // (shorthandVarSkip), so the base-plane literal fallback's guard —
+  // BASE_FALLBACK_CHANNELS.has(ch) && LITERAL_CHANNELS.has(ch) — could never
+  // be true for a real gap: the two spellings that actually arrive were in
+  // neither set. The longhands join, exactly as the padding longhands did.
   "gap",
+  "row-gap",
+  "column-gap",
   "border-radius",
   "border-width",
   "font-size",

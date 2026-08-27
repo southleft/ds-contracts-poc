@@ -27,7 +27,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 24,
@@ -45,7 +46,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "CENTER",
                 "counter": "CENTER",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 24,
@@ -113,7 +115,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 32,
@@ -131,7 +134,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "CENTER",
                 "counter": "CENTER",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 32,
@@ -199,7 +203,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 40,
@@ -217,7 +222,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "CENTER",
                 "counter": "CENTER",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -285,7 +291,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 48,
@@ -303,7 +310,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "CENTER",
                 "counter": "CENTER",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 48,
@@ -371,7 +379,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 24,
@@ -389,7 +398,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "CENTER",
                 "counter": "CENTER",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 24,
@@ -457,7 +467,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 32,
@@ -475,7 +486,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "CENTER",
                 "counter": "CENTER",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 32,
@@ -543,7 +555,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 40,
@@ -561,7 +574,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "CENTER",
                 "counter": "CENTER",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -629,7 +643,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 48,
@@ -647,7 +662,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "CENTER",
                 "counter": "CENTER",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 48,
@@ -715,7 +731,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 24,
@@ -733,7 +750,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "CENTER",
                 "counter": "CENTER",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 24,
@@ -801,7 +819,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 32,
@@ -819,7 +838,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "CENTER",
                 "counter": "CENTER",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 32,
@@ -887,7 +907,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 40,
@@ -905,7 +926,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "CENTER",
                 "counter": "CENTER",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -973,7 +995,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 48,
@@ -991,7 +1014,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "CENTER",
                 "counter": "CENTER",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 48,
@@ -1059,7 +1083,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 24,
@@ -1077,7 +1102,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "CENTER",
                 "counter": "CENTER",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 24,
@@ -1145,7 +1171,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 32,
@@ -1163,7 +1190,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "CENTER",
                 "counter": "CENTER",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 32,
@@ -1231,7 +1259,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 40,
@@ -1249,7 +1278,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "CENTER",
                 "counter": "CENTER",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 40,
@@ -1317,7 +1347,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 48,
@@ -1335,7 +1366,8 @@ const COMPONENTS = [
                 "mode": "VERTICAL",
                 "primary": "CENTER",
                 "counter": "CENTER",
-                "stretchChildren": true
+                "stretchChildren": true,
+                "blockFlow": true
               },
               "fixedHeight": {
                 "px": 48,

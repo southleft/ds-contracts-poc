@@ -62,9 +62,6 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "label",
-                  "margins": {
-                    "bottom": 8
-                  },
                   "characters": "Label",
                   "fontSize": 12,
                   "fontStyle": "Regular",
@@ -79,7 +76,10 @@ const COMPONENTS = [
                   "letterSpacing": 0.32,
                   "fontFamily": "IBM Plex Sans"
                 }
-              ]
+              ],
+              "bindings": {
+                "paddingBottom": "imported/text-input/label/margin-bottom"
+              }
             },
             {
               "type": "frame",
@@ -211,9 +211,6 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "label",
-                  "margins": {
-                    "bottom": 8
-                  },
                   "characters": "Label",
                   "fontSize": 12,
                   "fontStyle": "Regular",
@@ -228,7 +225,10 @@ const COMPONENTS = [
                   "letterSpacing": 0.32,
                   "fontFamily": "IBM Plex Sans"
                 }
-              ]
+              ],
+              "bindings": {
+                "paddingBottom": "imported/text-input/label/margin-bottom"
+              }
             },
             {
               "type": "frame",
@@ -360,9 +360,6 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "label",
-                  "margins": {
-                    "bottom": 8
-                  },
                   "characters": "Label",
                   "fontSize": 12,
                   "fontStyle": "Regular",
@@ -377,7 +374,10 @@ const COMPONENTS = [
                   "letterSpacing": 0.32,
                   "fontFamily": "IBM Plex Sans"
                 }
-              ]
+              ],
+              "bindings": {
+                "paddingBottom": "imported/text-input/label/margin-bottom"
+              }
             },
             {
               "type": "frame",
@@ -509,9 +509,6 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "label",
-                  "margins": {
-                    "bottom": 8
-                  },
                   "characters": "Label",
                   "fontSize": 12,
                   "fontStyle": "Regular",
@@ -526,7 +523,10 @@ const COMPONENTS = [
                   "letterSpacing": 0.32,
                   "fontFamily": "IBM Plex Sans"
                 }
-              ]
+              ],
+              "bindings": {
+                "paddingBottom": "imported/text-input/label/margin-bottom"
+              }
             },
             {
               "type": "frame",
@@ -666,9 +666,6 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "label",
-                  "margins": {
-                    "bottom": 8
-                  },
                   "characters": "Label",
                   "fontSize": 12,
                   "fontStyle": "Regular",
@@ -683,7 +680,10 @@ const COMPONENTS = [
                   "letterSpacing": 0.32,
                   "fontFamily": "IBM Plex Sans"
                 }
-              ]
+              ],
+              "bindings": {
+                "paddingBottom": "imported/text-input/label/margin-bottom"
+              }
             },
             {
               "type": "frame",
@@ -815,9 +815,6 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "label",
-                  "margins": {
-                    "bottom": 8
-                  },
                   "characters": "Label",
                   "fontSize": 12,
                   "fontStyle": "Regular",
@@ -832,7 +829,10 @@ const COMPONENTS = [
                   "letterSpacing": 0.32,
                   "fontFamily": "IBM Plex Sans"
                 }
-              ]
+              ],
+              "bindings": {
+                "paddingBottom": "imported/text-input/label/margin-bottom"
+              }
             },
             {
               "type": "frame",
@@ -964,9 +964,6 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "label",
-                  "margins": {
-                    "bottom": 8
-                  },
                   "characters": "Label",
                   "fontSize": 12,
                   "fontStyle": "Regular",
@@ -981,7 +978,10 @@ const COMPONENTS = [
                   "letterSpacing": 0.32,
                   "fontFamily": "IBM Plex Sans"
                 }
-              ]
+              ],
+              "bindings": {
+                "paddingBottom": "imported/text-input/label/margin-bottom"
+              }
             },
             {
               "type": "frame",
@@ -1113,9 +1113,6 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "label",
-                  "margins": {
-                    "bottom": 8
-                  },
                   "characters": "Label",
                   "fontSize": 12,
                   "fontStyle": "Regular",
@@ -1130,7 +1127,10 @@ const COMPONENTS = [
                   "letterSpacing": 0.32,
                   "fontFamily": "IBM Plex Sans"
                 }
-              ]
+              ],
+              "bindings": {
+                "paddingBottom": "imported/text-input/label/margin-bottom"
+              }
             },
             {
               "type": "frame",
@@ -2236,43 +2236,6 @@ function applyOverlay(parent, childNode, childSpec) {
   } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
 }
 
-// Round 5d: auto-layout has no per-child margin — a child carrying residual
-// margins gets its CSS MARGIN BOX as a fixed wrapper frame (clipsContent
-// false), the child placed at (left, top). Negative margins shrink the flow
-// box and let the glyph overhang — the exact CSS geometry (the Badge pip's
-// -2/-2/-8 is what keeps the real pill 20px tall). Out-of-flow children
-// (overlay / inset / absolute) and FILL-sized children keep their own
-// lowering.
-function applyMarginBox(parent, childNode, childSpec, registry) {
-  const m = childSpec.margins;
-  if (!m || childSpec.overlay || childSpec.insetOverlay || childSpec.absolute || childSpec.grow) return;
-  try {
-    if (childNode.layoutSizingHorizontal === 'FILL' || childNode.layoutSizingVertical === 'FILL') return;
-  } catch (e) { degrade('FC-RT-MARGIN-BOX-SIZING-UNREADABLE', childNode, 'layout sizing could not be read before the margin box was applied; applied as if the child were not FILL-sized', e); }
-  const t = m.top || 0, r = m.right || 0, b = m.bottom || 0, l = m.left || 0;
-  if (!t && !r && !b && !l) return;
-  const w = Math.max(childNode.width + l + r, 0.01);
-  const h = Math.max(childNode.height + t + b, 0.01);
-  const box = figma.createFrame();
-  box.name = childSpec.name + ' (margin box)';
-  box.fills = [];
-  box.clipsContent = false;
-  parent.insertChild(parent.children.indexOf(childNode), box);
-  box.resize(w, h);
-  box.appendChild(childNode);
-  childNode.x = l;
-  childNode.y = t;
-  // Wave B.4 / Polaris Button: a Show-bound child wrapped in a margin box
-  // must transfer the visible binding to the WRAPPER — hiding only the
-  // inner icon leaves the ~20px margin box in auto-layout (blank left gap).
-  if (childSpec.visibleProp && registry && registry.visibles) {
-    for (const vis of registry.visibles) {
-      if (vis.node === childNode) vis.node = box;
-    }
-    childNode.visible = true;
-  }
-}
-
 async function buildNode(spec, registry) {
   let node;
   if (spec.type === 'svg') {
@@ -2510,7 +2473,6 @@ async function buildNode(spec, registry) {
     if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
-    applyMarginBox(node, childNode, child, registry);
   }
   if (spec.type === 'root') {
     // meters: re-apply each stamped fraction against its track's LAID-OUT width
@@ -2910,7 +2872,6 @@ async function amendSet(set, C) {
         if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
         }
-    applyMarginBox(comp, childNode, childSpec, registry);
       }
       report.rebuiltVariants++;
     }

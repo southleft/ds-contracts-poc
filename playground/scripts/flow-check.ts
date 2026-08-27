@@ -221,7 +221,7 @@ const bundleTree = {
 };
 const bundleIcons = new Map([...icons, ...Object.entries(bundle.icons ?? {})]);
 const toggleReceipt = compileReceipt(toggle, bundleContracts, bundleTree, bundleIcons);
-check('ToggleSwitch code-only facts = 14', toggleReceipt.codeOnlyFacts.length === 14, String(toggleReceipt.codeOnlyFacts.length));
+check('ToggleSwitch code-only facts = 15', toggleReceipt.codeOnlyFacts.length === 15, String(toggleReceipt.codeOnlyFacts.length));
 const toggleRow = bundle.codeOnlyFacts.find((r) => r.contractId === 'flowbite.toggleswitch');
 const agreement = factsAgreeWithBundle(toggleReceipt.codeOnlyFacts, toggleRow);
 check('ToggleSwitch live facts agree with the committed bundle row', agreement.agree, agreement.detail);
@@ -239,7 +239,7 @@ check(
   check('ToggleSwitch figma-script carries the MAX/right thumb placement', excerptOf(files, '"h": "MAX"') !== null);
 }
 const bundleTotal = bundle.codeOnlyFacts.reduce((n, r) => n + r.facts.length, 0);
-check('bundle codeOnlyFacts total = 56 (docs/BETA.md, README)', bundleTotal === 56, String(bundleTotal));
+check('bundle codeOnlyFacts total = 57 (docs/BETA.md, README)', bundleTotal === 57, String(bundleTotal));
 
 // ------------------------------------------ 6. ToggleSwitch, hop 4 (stamped)
 console.log('Figma → code — ToggleSwitch (flowbite-eight.dump.json)');

@@ -730,6 +730,15 @@
       "blockStage": true
     },
     {
+      "__case": "layout: align-items / justify-content authored on a container whose display is NOT flex (here display: table) — declared REFUSED",
+      "name": "CaseLayoutOnNonFlexContainer",
+      "importName": "CaseLayoutOnNonFlexContainer",
+      "contract": "conformance/seeds/layout-on-non-flex-container.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
       "__case": "box: margin-top: 12px on the SECOND child of a flex column whose parent declares no gap — declared CARRIED",
       "name": "CaseMarginTopInFlow",
       "importName": "CaseMarginTopInFlow",

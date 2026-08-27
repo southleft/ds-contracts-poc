@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "polaris.text-field",
     "version": "0.4.0",
     "anchorKey": null,
-    "description": "TextField — generated from contract polaris.text-field v0.4.0 † (193 code-only facts — see plugin report)",
+    "description": "TextField — generated from contract polaris.text-field v0.4.0 † (194 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -149,7 +149,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "CENTER",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 60,
@@ -255,7 +256,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "fixedHeight": {
@@ -413,7 +415,8 @@ const COMPONENTS = [
                             "mode": "VERTICAL",
                             "primary": "MIN",
                             "counter": "MIN",
-                            "stretchChildren": true
+                            "stretchChildren": true,
+                            "blockFlow": true
                           },
                           "grow": true,
                           "insetOverlay": true,
@@ -458,7 +461,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "CENTER",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 52,
@@ -564,7 +568,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "fixedHeight": {
@@ -722,7 +727,8 @@ const COMPONENTS = [
                             "mode": "VERTICAL",
                             "primary": "MIN",
                             "counter": "MIN",
-                            "stretchChildren": true
+                            "stretchChildren": true,
+                            "blockFlow": true
                           },
                           "grow": true,
                           "insetOverlay": true,
@@ -769,7 +775,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "CENTER",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 60,
@@ -875,7 +882,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "fixedHeight": {
@@ -1033,7 +1041,8 @@ const COMPONENTS = [
                             "mode": "VERTICAL",
                             "primary": "MIN",
                             "counter": "MIN",
-                            "stretchChildren": true
+                            "stretchChildren": true,
+                            "blockFlow": true
                           },
                           "grow": true,
                           "insetOverlay": true,
@@ -1078,7 +1087,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "CENTER",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 52,
@@ -1184,7 +1194,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "fixedHeight": {
@@ -1342,7 +1353,8 @@ const COMPONENTS = [
                             "mode": "VERTICAL",
                             "primary": "MIN",
                             "counter": "MIN",
-                            "stretchChildren": true
+                            "stretchChildren": true,
+                            "blockFlow": true
                           },
                           "grow": true,
                           "insetOverlay": true,
@@ -1432,7 +1444,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "CENTER",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 60,
@@ -1538,7 +1551,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "fixedHeight": {
@@ -1696,7 +1710,8 @@ const COMPONENTS = [
                             "mode": "VERTICAL",
                             "primary": "MIN",
                             "counter": "MIN",
-                            "stretchChildren": true
+                            "stretchChildren": true,
+                            "blockFlow": true
                           },
                           "grow": true,
                           "insetOverlay": true,
@@ -1741,7 +1756,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "CENTER",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 60,
@@ -1847,7 +1863,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "fixedHeight": {
@@ -2005,7 +2022,8 @@ const COMPONENTS = [
                             "mode": "VERTICAL",
                             "primary": "MIN",
                             "counter": "MIN",
-                            "stretchChildren": true
+                            "stretchChildren": true,
+                            "blockFlow": true
                           },
                           "grow": true,
                           "insetOverlay": true,
@@ -2050,7 +2068,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "CENTER",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 60,
@@ -2156,7 +2175,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "fixedHeight": {
@@ -2314,7 +2334,8 @@ const COMPONENTS = [
                             "mode": "VERTICAL",
                             "primary": "MIN",
                             "counter": "MIN",
-                            "stretchChildren": true
+                            "stretchChildren": true,
+                            "blockFlow": true
                           },
                           "grow": true,
                           "insetOverlay": true,
@@ -2359,7 +2380,8 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "CENTER",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "fixedHeight": {
             "px": 60,
@@ -2465,7 +2487,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "grow": true,
                   "fixedHeight": {
@@ -2623,7 +2646,8 @@ const COMPONENTS = [
                             "mode": "VERTICAL",
                             "primary": "MIN",
                             "counter": "MIN",
-                            "stretchChildren": true
+                            "stretchChildren": true,
+                            "blockFlow": true
                           },
                           "grow": true,
                           "insetOverlay": true,
@@ -4477,6 +4501,17 @@ const COMPONENTS = [
         "channel": "inputMode [unset]",
         "value": "text",
         "reason": "defaultless axis — the library's own rendering when \"inputMode\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 1 declared values only, and a proposal read back from the canvas will call \"text\" the default (FC-UNSET-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 8,
+          "of": 8
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "margin",
+        "value": "4px",
+        "reason": "lowered to the parent's itemSpacing (4px, bound to imported/shared/size-4): CSS spells between-sibling space per CHILD and auto-layout spells it once per PARENT, so 1 sibling margin(s) become one gap — labelled__labelwrapper.margin-bottom",
         "variants": {
           "count": 8,
           "of": 8
@@ -6471,6 +6506,7 @@ async function amendComponent(comp, C) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
     applyInsetOverlay(comp, childNode, childSpec);
+    applyMarginBox(comp, childNode, childSpec, registry);
   }
   resizeOutOfFlow(comp, built);
   // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child

@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "carbon.inlinenotification",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "InlineNotification — generated from contract carbon.inlinenotification v0.2.0 † (31 code-only facts — see plugin report)",
+    "description": "InlineNotification — generated from contract carbon.inlinenotification v0.2.0 † (34 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -61,7 +61,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "CENTER",
                     "counter": "CENTER",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "clipsContent": true,
                   "children": [
@@ -207,7 +208,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "CENTER",
                     "counter": "CENTER",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "clipsContent": true,
                   "children": [
@@ -353,7 +355,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "CENTER",
                     "counter": "CENTER",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "clipsContent": true,
                   "children": [
@@ -498,7 +501,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "CENTER",
                     "counter": "CENTER",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "clipsContent": true,
                   "children": [
@@ -643,7 +647,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "CENTER",
                     "counter": "CENTER",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "clipsContent": true,
                   "children": [
@@ -788,7 +793,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "CENTER",
                     "counter": "CENTER",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "clipsContent": true,
                   "children": [
@@ -933,7 +939,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "CENTER",
                     "counter": "CENTER",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "clipsContent": true,
                   "children": [
@@ -1078,7 +1085,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "CENTER",
                     "counter": "CENTER",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "clipsContent": true,
                   "children": [
@@ -1223,7 +1231,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "CENTER",
                     "counter": "CENTER",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "clipsContent": true,
                   "children": [
@@ -1368,7 +1377,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "CENTER",
                     "counter": "CENTER",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "clipsContent": true,
                   "children": [
@@ -1513,7 +1523,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "CENTER",
                     "counter": "CENTER",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "clipsContent": true,
                   "children": [
@@ -1658,7 +1669,8 @@ const COMPONENTS = [
                     "mode": "VERTICAL",
                     "primary": "CENTER",
                     "counter": "CENTER",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "blockFlow": true
                   },
                   "clipsContent": true,
                   "children": [
@@ -1970,9 +1982,31 @@ const COMPONENTS = [
       {
         "part": "inline-notification__details",
         "kind": "channel",
+        "channel": "margin",
+        "value": "16px",
+        "reason": "lowered to the parent's itemSpacing (16px, bound to imported/inline-notification/icon/margin-right): CSS spells between-sibling space per CHILD and auto-layout spells it once per PARENT, so 1 sibling margin(s) become one gap — icon.margin-right",
+        "variants": {
+          "count": 12,
+          "of": 12
+        }
+      },
+      {
+        "part": "inline-notification__details",
+        "kind": "channel",
         "channel": "margin-left",
         "value": "13px",
         "reason": "the margin-box wrapper is skipped — a growing child (flex-grow → layoutGrow) cannot be wrapped without breaking the grow; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
+        "variants": {
+          "count": 12,
+          "of": 12
+        }
+      },
+      {
+        "part": "inline-notification__text-wrapper",
+        "kind": "channel",
+        "channel": "margin",
+        "value": "4px",
+        "reason": "lowered to the parent's itemSpacing (4px, bound to imported/inline-notification/label/margin-right): CSS spells between-sibling space per CHILD and auto-layout spells it once per PARENT, so 1 sibling margin(s) become one gap — label.margin-right",
         "variants": {
           "count": 12,
           "of": 12
@@ -2036,6 +2070,17 @@ const COMPONENTS = [
         "channel": "left",
         "value": "{imported.shared.size-0}",
         "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 12,
+          "of": 12
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "margin",
+        "value": "13px",
+        "reason": "lowered to the parent's itemSpacing (13px, bound to imported/inline-notification/inline-notification-details/margin-right): CSS spells between-sibling space per CHILD and auto-layout spells it once per PARENT, so 1 sibling margin(s) become one gap — inline-notification__details.margin-right",
         "variants": {
           "count": 12,
           "of": 12

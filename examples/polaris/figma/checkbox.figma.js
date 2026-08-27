@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "polaris.checkbox",
     "version": "0.4.0",
     "anchorKey": null,
-    "description": "Checkbox — generated from contract polaris.checkbox v0.4.0 † (117 code-only facts — see plugin report)",
+    "description": "Checkbox — generated from contract polaris.checkbox v0.4.0 † (118 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -98,12 +98,6 @@ const COMPONENTS = [
                     "px": 18,
                     "varName": "imported/shared/size-18"
                   },
-                  "margins": {
-                    "bottom": 1,
-                    "left": 1,
-                    "right": 1,
-                    "top": 1
-                  },
                   "fixedWidth": {
                     "px": 18,
                     "varName": "imported/shared/size-18"
@@ -164,7 +158,13 @@ const COMPONENTS = [
                     }
                   ]
                 }
-              ]
+              ],
+              "bindings": {
+                "paddingTop": "imported/shared/size-1",
+                "paddingRight": "imported/shared/size-1",
+                "paddingBottom": "imported/shared/size-1",
+                "paddingLeft": "imported/shared/size-1"
+              }
             },
             {
               "type": "frame",
@@ -256,12 +256,6 @@ const COMPONENTS = [
                     "px": 18,
                     "varName": "imported/shared/size-18"
                   },
-                  "margins": {
-                    "bottom": 1,
-                    "left": 1,
-                    "right": 1,
-                    "top": 1
-                  },
                   "fixedWidth": {
                     "px": 18,
                     "varName": "imported/shared/size-18"
@@ -352,7 +346,13 @@ const COMPONENTS = [
                     }
                   ]
                 }
-              ]
+              ],
+              "bindings": {
+                "paddingTop": "imported/shared/size-1",
+                "paddingRight": "imported/shared/size-1",
+                "paddingBottom": "imported/shared/size-1",
+                "paddingLeft": "imported/shared/size-1"
+              }
             },
             {
               "type": "frame",
@@ -443,12 +443,6 @@ const COMPONENTS = [
                   "fixedHeight": {
                     "px": 18,
                     "varName": "imported/shared/size-18"
-                  },
-                  "margins": {
-                    "bottom": 1,
-                    "left": 1,
-                    "right": 1,
-                    "top": 1
                   },
                   "fixedWidth": {
                     "px": 18,
@@ -552,7 +546,13 @@ const COMPONENTS = [
                     }
                   ]
                 }
-              ]
+              ],
+              "bindings": {
+                "paddingTop": "imported/shared/size-1",
+                "paddingRight": "imported/shared/size-1",
+                "paddingBottom": "imported/shared/size-1",
+                "paddingLeft": "imported/shared/size-1"
+              }
             },
             {
               "type": "frame",
@@ -1874,6 +1874,17 @@ const COMPONENTS = [
         "channel": "display",
         "value": "inline",
         "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "margin",
+        "value": "8px",
+        "reason": "lowered to the parent's itemSpacing (8px, bound to imported/checkbox/choice-control/margin-right): CSS spells between-sibling space per CHILD and auto-layout spells it once per PARENT, so 1 sibling margin(s) become one gap — choice__control.margin-right",
         "variants": {
           "count": 3,
           "of": 3
@@ -3658,6 +3669,7 @@ async function amendComponent(comp, C) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
     applyInsetOverlay(comp, childNode, childSpec);
+    applyMarginBox(comp, childNode, childSpec, registry);
   }
   resizeOutOfFlow(comp, built);
   for (const t of registry.texts) {

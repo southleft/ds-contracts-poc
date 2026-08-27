@@ -7,7 +7,7 @@
       "extract/computed/fuse.ts (styledChannels, buildBaseObs, enrichLayout)",
       "extract/computed/lib.ts (isFusable, GEOMETRY_CHANNELS, LOGICAL_ALIASES, SYNTHETIC_CHANNELS, kindOf)",
       "core/emit-figma-script.ts (applyTokens / applyLiterals / applyDeclared / layoutSpec)",
-      "conformance/MANIFEST.json (126 css-dom cases)",
+      "conformance/MANIFEST.json (127 css-dom cases)",
       "extract/figma/conformance/MANIFEST.json (157 canvas cases)",
       "extract/figma/channel-closure.json (draw-read closure)"
     ]
@@ -299,7 +299,8 @@
       "evidence": "measured",
       "conformance": [
         "align-items-baseline",
-        "flex-align-items-center"
+        "flex-align-items-center",
+        "layout-on-non-flex-container"
       ]
     },
     {

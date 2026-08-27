@@ -45,7 +45,7 @@
  *      channel entirely.
  *
  * WHAT IT DOES NOT CLAIM. A row is a CLASSIFICATION, not a proof of
- * behaviour — the conformance kits (112 css-dom + 157 canvas cases) are the
+ * behaviour — the conformance kits (127 css-dom + 157 canvas cases) are the
  * executable half, and the `evidence` field is now the honest record of how
  * many rows the executable half actually reaches. The two FC codes the table
  * mints (FC-PSEUDO-PLANE-UNREAD, FC-STATE-PLANE-UNDRIVEN) name loss classes
@@ -91,6 +91,10 @@ interface Row {
   observedAs?: string;
 }
 interface Table {
+  /** Provenance. `doors` is prose EXCEPT for the case counts two of its
+   *  entries quote from the two conformance manifests — those are DERIVED,
+   *  and `--rederive` owns them (see deriveDoors). */
+  generatedFrom?: { doors?: string[] } & Record<string, unknown>;
   propertyCount: number;
   totals: Record<string, number>;
   unclassifiedBeforeThisTable: number;
@@ -140,7 +144,7 @@ interface Table {
 const EVIDENCE_STATES = new Set(['measured', 'code-cited', 'unobservable']);
 
 export const REDERIVE_HINT =
-  'run `npm run channel-table:rederive` (it re-derives evidence and the css-dom half of `conformance` from the manifests, and leaves every hand-written field alone)';
+  'run `npm run channel-table:rederive` (it re-derives evidence, the css-dom half of `conformance`, and the case counts `generatedFrom.doors` quotes — every other hand-written field survives verbatim)';
 
 /** Every channel a CONTRACT can spell, and therefore the only channels a
  *  conformance case can ever observe end to end: the schema's three channel
@@ -165,6 +169,10 @@ interface Manifests {
   /** canvas: the case ids that exist (their checks are regexes, not channels,
    *  so a canvas cite is HAND-declared and only its existence is derivable). */
   canvasIds: Set<string>;
+  /** TOTAL cases per manifest — NOT the map sizes above. `cssChannelOf` skips
+   *  a case with no observable channel and every `__`-prefixed synthetic one,
+   *  so its size is not the denominator and must never be used as one. */
+  caseCounts: Map<string, number>;
 }
 
 export function loadManifests(readFile: (rel: string) => string | null): Manifests {
@@ -184,7 +192,49 @@ export function loadManifests(readFile: (rel: string) => string | null): Manifes
   if (canvas !== null) {
     for (const c of (JSON.parse(canvas) as { cases: Array<{ id: string }> }).cases) canvasIds.add(c.id);
   }
-  return { cssByChannel, cssChannelOf, canvasIds };
+  const caseCounts = new Map<string, number>();
+  for (const rel of MANIFEST_PATHS) {
+    const t = rel === 'conformance/MANIFEST.json' ? css : canvas;
+    if (t !== null) caseCounts.set(rel, (JSON.parse(t) as { cases: unknown[] }).cases.length);
+  }
+  return { cssByChannel, cssChannelOf, canvasIds, caseCounts };
+}
+
+/** THE TWO MANIFESTS whose case COUNT `generatedFrom.doors` quotes. A door
+ *  entry naming one of these paths carries a number that is a fact about that
+ *  file, not prose — so the remedy owns it. */
+export const MANIFEST_PATHS = ['conformance/MANIFEST.json', 'extract/figma/conformance/MANIFEST.json'] as const;
+
+/** THE DOORS DERIVATION. `generatedFrom.doors` is provenance prose, and two of
+ *  its entries embed a case count quoted from a manifest — exactly the kind of
+ *  number that rots. Until 2026-08-26 `--rederive` did not own them: it
+ *  reported "0 field(s) re-derived" and exited GREEN while the string said 112
+ *  and the manifest said 115, so the remedy CERTIFIED a register it had left
+ *  wrong. That is the defect `door-register:rederive` was repaired for on the
+ *  same day, in the same shape, and it is closed here the same way.
+ *
+ *  Returns the corrected door list plus anything it REFUSES to derive. An
+ *  entry that names a manifest but whose count this reader cannot parse is
+ *  named, never silently passed over: a derivation that declines in silence is
+ *  how the field rotted in the first place. */
+export function deriveDoors(doors: string[], m: Manifests): { doors: string[]; refusals: string[] } {
+  const refusals: string[] = [];
+  const out = doors.map((entry) => {
+    const rel = MANIFEST_PATHS.find((path) => entry.startsWith(`${path} (`));
+    if (rel === undefined) return entry; // ordinary provenance prose — untouched
+    const want = m.caseCounts.get(rel);
+    if (want === undefined) {
+      refusals.push(`generatedFrom.doors names ${rel}, which could not be read — its quoted case count cannot be derived`);
+      return entry;
+    }
+    const hit = /^(.*\()(\d+)(\D.*)$/.exec(entry);
+    if (!hit) {
+      refusals.push(`generatedFrom.doors entry for ${rel} quotes no case count this reader can find ("${entry}") — the shape is "<path> (<N> ... cases)"; fix the entry or stop naming a manifest in it`);
+      return entry;
+    }
+    return `${hit[1]}${want}${hit[3]}`;
+  });
+  return { doors: out, refusals };
 }
 
 /** THE DERIVATION. Returns what a CARRIED row's `evidence` and `conformance`
@@ -254,6 +304,20 @@ function verify(raw: string, readFile: (rel: string) => string | null): string[]
   // 4 — canonical bytes: a regeneration must be a no-op diff.
   const canonical = JSON.stringify(table, null, 2) + '\n';
   if (canonical !== raw) problems.push('spec/channel-table.json is not in canonical form (JSON.stringify(table, null, 2) + newline) — regenerate instead of hand-tweaking bytes');
+
+  // 4b — generatedFrom.doors: the case counts it quotes are DERIVED.
+  {
+    const doors = table.generatedFrom?.doors;
+    if (doors !== undefined) {
+      const d = deriveDoors(doors, loadManifests(readFile));
+      for (const r of d.refusals) problems.push(r);
+      doors.forEach((entry, i) => {
+        if (d.doors[i] !== entry) {
+          problems.push(`generatedFrom.doors[${i}] is stale: reads "${entry}", the manifest gives "${d.doors[i]}". ${REDERIVE_HINT}`);
+        }
+      });
+    }
+  }
 
   const rows = new Map<string, Row>();
   const totals: Record<string, number> = { CARRIED: 0, LEDGERED: 0, REFUSED: 0, INERT: 0 };
@@ -451,6 +515,16 @@ const raw = readFileSync(TABLE_PATH, 'utf8');
  *  resolve a generated artifact by picking a side — re-derive it.) */
 export function rederive(table: Table, m: Manifests, reachable: Set<string>): { moves: string[] } {
   const moves: string[] = [];
+  const doors = table.generatedFrom?.doors;
+  if (doors !== undefined) {
+    const d = deriveDoors(doors, m);
+    d.doors.forEach((want, i) => {
+      if (want !== doors[i]) {
+        moves.push(`generatedFrom.doors[${i}]: "${doors[i]}" → "${want}"`);
+        doors[i] = want;
+      }
+    });
+  }
   for (const r of table.properties) {
     if (r.class !== 'CARRIED') continue;
     const want = deriveEvidence(r, m, reachable);
@@ -554,6 +628,50 @@ if (process.argv.includes('--self-test')) {
     console.error(`self-test (g) FAILED: citing a case that measures another channel did not refuse. Got:\n  ${g.join('\n  ')}`);
     process.exit(1);
   }
+  // (i) a STALE case count inside generatedFrom.doors — the field the remedy
+  //     did not own until 2026-08-26, and the reason it did not is the point:
+  //     `--rederive` reported "0 field(s) re-derived" and exited GREEN while
+  //     the string said 112 and the manifest said 115. A remedy that certifies
+  //     a register it has left wrong is the door-register defect, again.
+  {
+    const staleDoors = JSON.parse(raw) as Table;
+    const doors = staleDoors.generatedFrom?.doors;
+    if (!doors || !doors.some((d) => d.startsWith('conformance/MANIFEST.json ('))) {
+      console.error('self-test (i) FAILED: generatedFrom.doors carries no conformance/MANIFEST.json entry — the planted red cannot be built');
+      process.exit(1);
+    }
+    const at = doors.findIndex((d) => d.startsWith('conformance/MANIFEST.json ('));
+    doors[at] = doors[at].replace(/\(\d+/, '(99999');
+    const i1 = verify(JSON.stringify(staleDoors, null, 2) + '\n', realRead);
+    if (!i1.some((p) => p.includes('generatedFrom.doors') && p.includes('is stale'))) {
+      console.error(`self-test (i) FAILED: a stale doors case count did not refuse. Got:\n  ${i1.join('\n  ')}`);
+      process.exit(1);
+    }
+    // …and the remedy must actually REPAIR it, back to the committed bytes.
+    const { moves } = rederive(staleDoors, loadManifests(realRead), reachableChannels());
+    if (!moves.some((mv) => mv.includes('generatedFrom.doors'))) {
+      console.error(`self-test (i) FAILED: --rederive did not NAME the doors repair it made. Got:\n  ${moves.join('\n  ')}`);
+      process.exit(1);
+    }
+    if (JSON.stringify(staleDoors.generatedFrom?.doors) !== JSON.stringify((JSON.parse(raw) as Table).generatedFrom?.doors)) {
+      console.error('self-test (i) FAILED: --rederive did not restore generatedFrom.doors to the committed bytes');
+      process.exit(1);
+    }
+  }
+  // (j) a doors entry that NAMES a manifest but quotes no parseable count —
+  //     the derivation must REFUSE BY NAME rather than shrug and pass, which
+  //     is the half of this defect that let it hide.
+  {
+    const shapeless = JSON.parse(raw) as Table;
+    const doors = shapeless.generatedFrom!.doors!;
+    const at = doors.findIndex((d) => d.startsWith('conformance/MANIFEST.json ('));
+    doors[at] = 'conformance/MANIFEST.json (the css-dom kit)';
+    const j = verify(JSON.stringify(shapeless, null, 2) + '\n', realRead);
+    if (!j.some((p) => p.includes('quotes no case count'))) {
+      console.error(`self-test (j) FAILED: a doors entry naming a manifest with no derivable count did not refuse. Got:\n  ${j.join('\n  ')}`);
+      process.exit(1);
+    }
+  }
   // (h) --rederive must REPAIR exactly what the gate refuses, byte-for-byte.
   //     Only `evidence` is scrambled: it is the fully derived field, the
   //     analogue of the door register scrambling every ordinary `ruleLine`.
@@ -581,7 +699,7 @@ if (process.argv.includes('--self-test')) {
     process.exit(1);
   }
   console.log(
-    '✔ channel-table self-test: a dropped observed row, a ghost CARRIED anchor, a non-canonical byte, a CARRIED row with no evidence state, a "measured" over-claim, a ghost case cite and a cite that measures another channel each go red by name — and --rederive restores the scrambled evidence fields byte-for-byte',
+    '✔ channel-table self-test: a dropped observed row, a ghost CARRIED anchor, a non-canonical byte, a CARRIED row with no evidence state, a "measured" over-claim, a ghost case cite, a cite that measures another channel, a STALE generatedFrom.doors case count and a doors entry that names a manifest without a derivable count each go red by name — and --rederive restores both the scrambled evidence fields and the doors counts byte-for-byte',
   );
   process.exit(0);
 }

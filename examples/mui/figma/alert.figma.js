@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "mui.alert",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Alert — generated from contract mui.alert v0.2.0 † (6 code-only facts — see plugin report)",
+    "description": "Alert — generated from contract mui.alert v0.2.0 † (7 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -1183,6 +1183,17 @@ const COMPONENTS = [
         "channel": "overflow-y",
         "value": "auto",
         "reason": "declared value outside the canvas grammar for this channel — hidden/clip clip natively (clipsContent). auto/scroll are scrolling, which exists only in code.",
+        "variants": {
+          "count": 12,
+          "of": 12
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "margin",
+        "value": "12px",
+        "reason": "lowered to the parent's itemSpacing (12px, bound to imported/alert/alert-icon/margin-right): CSS spells between-sibling space per CHILD and auto-layout spells it once per PARENT, so 1 sibling margin(s) become one gap — alert-icon.margin-right",
         "variants": {
           "count": 12,
           "of": 12

@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "fluent.switch",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Switch — generated from contract fluent.switch v0.2.0 † (28 code-only facts — see plugin report)",
+    "description": "Switch — generated from contract fluent.switch v0.2.0 † (30 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -1297,6 +1297,40 @@ const COMPONENTS = [
         "variants": {
           "count": 10,
           "of": 10
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "margin",
+        "value": "8px",
+        "reason": "lowered to the parent's itemSpacing (8px, bound to imported/shared/size-8): CSS spells between-sibling space per CHILD and auto-layout spells it once per PARENT, so 1 sibling margin(s) become one gap — indicator.margin-left",
+        "variants": {
+          "count": 2,
+          "of": 10,
+          "names": [
+            "Checked=Unchecked, Label Position=Before",
+            "Checked=Checked, Label Position=Before"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "margin",
+        "value": "8px",
+        "reason": "lowered to the parent's itemSpacing (8px, bound to imported/shared/size-8): CSS spells between-sibling space per CHILD and auto-layout spells it once per PARENT, so 1 sibling margin(s) become one gap — indicator.margin-right",
+        "variants": {
+          "count": 6,
+          "of": 10,
+          "names": [
+            "Checked=Unchecked, Label Position=After",
+            "Checked=Checked, Label Position=After",
+            "Checked=Unchecked, Label Position=After, State=Disabled",
+            "Checked=Checked, Label Position=After, State=Disabled",
+            "Checked=Unchecked, Label Position=After, State=Focus Visible",
+            "Checked=Checked, Label Position=After, State=Focus Visible"
+          ]
         }
       },
       {
@@ -2699,6 +2733,7 @@ async function amendComponent(comp, C) {
     if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
+    applyMarginBox(comp, childNode, childSpec, registry);
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);

@@ -16,13 +16,13 @@ repo it is simply absent from the denominator and scores 100%.
 
 | | |
 |---|---|
-| cases | **126** |
-| 🟢 pass | **122** |
+| cases | **127** |
+| 🟢 pass | **123** |
 | 🔴 red | **4** |
 | 🟡 yellow (UNSUPPORTED, never read) | **0** |
 | **UNSUPPORTED declared — THE RATCHET** | **17** · may only DECREASE without an explicit manifest edit |
 
-Declared dispositions: CARRIED 78 · LOWERED 5 · REFUSED 26 · UNSUPPORTED 17.
+Declared dispositions: CARRIED 78 · LOWERED 5 · REFUSED 27 · UNSUPPORTED 17.
 
 **A green gate here would mean the cases are too easy.** The point of the
 fixture is a measured frontier, and every red below is an open, named defect —
@@ -168,6 +168,7 @@ manifest.
 | 🟢 | `flex-gap` | layout | `column-gap / row-gap in px` | CARRIED | carried | PASS |
 | 🟢 | `flex-wrap-wrap` | layout | `uniform flex-wrap: wrap on a flex row narrow enough to wrap` | CARRIED | carried | PASS |
 | 🟢 | `grid-2d` | layout | `display: grid + grid-template-columns: 1fr 1fr (children AUTO-PLACED)` | CARRIED | carried | PASS |
+| 🟢 | `layout-on-non-flex-container` | layout | `align-items / justify-content authored on a container whose display is NOT flex (here display: table)` | REFUSED | refused, by name | PASS |
 | 🟢 | `antd-part-transition-channel` | motion | `.cf-a { transition: background-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) } — a transition declared on a CHILD PART, not the root (antd's `motionDurationMid` on every interactive part)` | CARRIED | carried | PASS |
 | 🟢 | `transition-channel` | motion | `transition: background-color 200ms ease` | CARRIED | carried | PASS |
 | 🟢 | `border-color-control-equal` | paint | `a border-color EQUAL to the bare control element's (a library global like shadcn's `* { border-color: var(--border) }` styles the control too) on a part that draws a real border` | CARRIED | carried | PASS |

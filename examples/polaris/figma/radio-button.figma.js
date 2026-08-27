@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "polaris.radio-button",
     "version": "0.4.0",
     "anchorKey": null,
-    "description": "RadioButton — generated from contract polaris.radio-button v0.4.0 † (100 code-only facts — see plugin report)",
+    "description": "RadioButton — generated from contract polaris.radio-button v0.4.0 † (101 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -90,12 +90,6 @@ const COMPONENTS = [
                     "px": 18,
                     "varName": "imported/shared/size-18"
                   },
-                  "margins": {
-                    "bottom": 1,
-                    "left": 1,
-                    "right": 1,
-                    "top": 1
-                  },
                   "fixedWidth": {
                     "px": 18,
                     "varName": "imported/shared/size-18"
@@ -156,7 +150,13 @@ const COMPONENTS = [
                     }
                   ]
                 }
-              ]
+              ],
+              "bindings": {
+                "paddingTop": "imported/shared/size-1",
+                "paddingRight": "imported/shared/size-1",
+                "paddingBottom": "imported/shared/size-1",
+                "paddingLeft": "imported/shared/size-1"
+              }
             },
             {
               "type": "frame",
@@ -248,12 +248,6 @@ const COMPONENTS = [
                     "px": 18,
                     "varName": "imported/shared/size-18"
                   },
-                  "margins": {
-                    "bottom": 1,
-                    "left": 1,
-                    "right": 1,
-                    "top": 1
-                  },
                   "fixedWidth": {
                     "px": 18,
                     "varName": "imported/shared/size-18"
@@ -343,7 +337,13 @@ const COMPONENTS = [
                     }
                   ]
                 }
-              ]
+              ],
+              "bindings": {
+                "paddingTop": "imported/shared/size-1",
+                "paddingRight": "imported/shared/size-1",
+                "paddingBottom": "imported/shared/size-1",
+                "paddingLeft": "imported/shared/size-1"
+              }
             },
             {
               "type": "frame",
@@ -1476,6 +1476,17 @@ const COMPONENTS = [
       },
       {
         "part": "root",
+        "kind": "channel",
+        "channel": "margin",
+        "value": "8px",
+        "reason": "lowered to the parent's itemSpacing (8px, bound to imported/radio-button/choice-control/margin-right): CSS spells between-sibling space per CHILD and auto-layout spells it once per PARENT, so 1 sibling margin(s) become one gap — choice__control.margin-right",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "root",
         "kind": "declared",
         "channel": "cursor",
         "value": "default",
@@ -2236,43 +2247,6 @@ function propagateOverflowVisible(childNode, parent) {
   }
 }
 
-// Round 5d: auto-layout has no per-child margin — a child carrying residual
-// margins gets its CSS MARGIN BOX as a fixed wrapper frame (clipsContent
-// false), the child placed at (left, top). Negative margins shrink the flow
-// box and let the glyph overhang — the exact CSS geometry (the Badge pip's
-// -2/-2/-8 is what keeps the real pill 20px tall). Out-of-flow children
-// (overlay / inset / absolute) and FILL-sized children keep their own
-// lowering.
-function applyMarginBox(parent, childNode, childSpec, registry) {
-  const m = childSpec.margins;
-  if (!m || childSpec.overlay || childSpec.insetOverlay || childSpec.absolute || childSpec.grow) return;
-  try {
-    if (childNode.layoutSizingHorizontal === 'FILL' || childNode.layoutSizingVertical === 'FILL') return;
-  } catch (e) { degrade('FC-RT-MARGIN-BOX-SIZING-UNREADABLE', childNode, 'layout sizing could not be read before the margin box was applied; applied as if the child were not FILL-sized', e); }
-  const t = m.top || 0, r = m.right || 0, b = m.bottom || 0, l = m.left || 0;
-  if (!t && !r && !b && !l) return;
-  const w = Math.max(childNode.width + l + r, 0.01);
-  const h = Math.max(childNode.height + t + b, 0.01);
-  const box = figma.createFrame();
-  box.name = childSpec.name + ' (margin box)';
-  box.fills = [];
-  box.clipsContent = false;
-  parent.insertChild(parent.children.indexOf(childNode), box);
-  box.resize(w, h);
-  box.appendChild(childNode);
-  childNode.x = l;
-  childNode.y = t;
-  // Wave B.4 / Polaris Button: a Show-bound child wrapped in a margin box
-  // must transfer the visible binding to the WRAPPER — hiding only the
-  // inner icon leaves the ~20px margin box in auto-layout (blank left gap).
-  if (childSpec.visibleProp && registry && registry.visibles) {
-    for (const vis of registry.visibles) {
-      if (vis.node === childNode) vis.node = box;
-    }
-    childNode.visible = true;
-  }
-}
-
 async function buildNode(spec, registry) {
   let node;
   if (spec.type === 'svg') {
@@ -2577,7 +2551,6 @@ async function buildNode(spec, registry) {
     if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
-    applyMarginBox(node, childNode, child, registry);
   }
   resizeOutOfFlow(node, built);
   if (spec.type === 'root') {
@@ -2980,7 +2953,6 @@ async function amendSet(set, C) {
         if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
         }
-    applyMarginBox(comp, childNode, childSpec, registry);
       }
   resizeOutOfFlow(comp, built);
       report.rebuiltVariants++;

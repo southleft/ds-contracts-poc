@@ -71,7 +71,14 @@ const PINNED: Record<string, { total: number; byKind: Record<string, number> }> 
   // event + (antd exam, 2026-08-23) the two state bindings of an UNDRAWN plane:
   // the referee refused statePreviews on this set, so its checked/disabled
   // state channels have no preview cell to land on (FC-STATE-PLANE-UNDRAWN).
-  'flowbite.toggleswitch': { total: 14, byKind: { channel: 6, declared: 7, event: 1 } },
+  // + (layout round, 2026-08-26) the margin -> itemSpacing lowering, which
+  // now NAMES itself: ToggleSwitch's label carries margin-left 12px, it
+  // lowers to a BOUND itemSpacing on the parent
+  // (imported/toggle-switch/label/margin-left survives the lowering), and
+  // until this round that was a correct-but-silent conversion. The count
+  // moves 14 -> 15 / channel 6 -> 7 because a fact that was invisible is now
+  // named, not because anything new is lost.
+  'flowbite.toggleswitch': { total: 15, byKind: { channel: 7, declared: 7, event: 1 } },
 };
 
 const tsx = path.join(ROOT, 'node_modules', '.bin', 'tsx');

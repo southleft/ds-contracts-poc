@@ -3,10 +3,10 @@
   "measuredAt": "extract/computed/out/conformance/<case>/enriched.contract.json through figma-sync/plugin/engine (mock figma) and core/propose-figma (npx tsx conformance/canvas.ts)",
   "counts": {
     "ROUND-TRIPPED": 64,
-    "NAMED": 17,
+    "NAMED": 18,
     "DRIFTED": 0,
     "HARMFUL": 0,
-    "SILENT": 1,
+    "SILENT": 0,
     "REFUSED-BY-NAME": 1,
     "SEED-ABSENT": 0
   },
@@ -683,13 +683,13 @@
       "note": ""
     },
     "margin-top-in-flow": {
-      "classification": "SILENT",
+      "classification": "NAMED",
       "channel": "margin-top",
       "seed": [
         "12px"
       ],
       "proposed": [],
-      "note": ""
+      "note": "code-only channel root.margin = 12px — lowered to the parent's itemSpacing (12px, bound to imported/shared/size-12): CSS spells between-sibling space per CHILD and auto-layout spells it once per PARENT, so 1 sibling margin(s) become one gap — b.margin-top"
     },
     "min-max-width": {
       "classification": "ROUND-TRIPPED",

@@ -20072,6 +20072,17 @@
         },
         {
           "part": "root",
+          "kind": "channel",
+          "channel": "margin",
+          "value": "12px",
+          "reason": "lowered to the parent's itemSpacing (12px, bound to imported/alert/alert-icon/margin-right): CSS spells between-sibling space per CHILD and auto-layout spells it once per PARENT, so 1 sibling margin(s) become one gap — alert-icon.margin-right",
+          "variants": {
+            "count": 12,
+            "of": 12
+          }
+        },
+        {
+          "part": "root",
           "kind": "declared",
           "channel": "transition-duration",
           "value": "0.3s",
@@ -21614,6 +21625,17 @@
           "channel": "display",
           "value": "list-item",
           "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+          "variants": {
+            "count": 1,
+            "of": 1
+          }
+        },
+        {
+          "part": "breadcrumbs-ol",
+          "kind": "channel",
+          "channel": "margin",
+          "value": "8px",
+          "reason": "lowered to the parent's itemSpacing (8px, bound to imported/shared/size-8): CSS spells between-sibling space per CHILD and auto-layout spells it once per PARENT, so 4 sibling margin(s) become one gap — label-2.margin-right, label-2.margin-left, label-4.margin-right, label-4.margin-left",
           "variants": {
             "count": 1,
             "of": 1
@@ -29755,17 +29777,6 @@
       "contractId": "mui.tooltip",
       "name": "Tooltip",
       "facts": [
-        {
-          "part": "label",
-          "kind": "channel",
-          "channel": "margin-top/margin-right/margin-left",
-          "value": "14px/2px/2px",
-          "reason": "the margin-box wrapper is skipped — a FILL-sized child cannot be wrapped in a margin box without breaking the fill; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
-          "variants": {
-            "count": 1,
-            "of": 1
-          }
-        },
         {
           "part": "label",
           "kind": "declared",

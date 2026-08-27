@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "mui.tooltip",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Tooltip — generated from contract mui.tooltip v0.2.0 † (12 code-only facts — see plugin report)",
+    "description": "Tooltip — generated from contract mui.tooltip v0.2.0 † (11 code-only facts — see plugin report)",
     "isSet": false,
     "boolProps": [
       {
@@ -32,11 +32,15 @@ const COMPONENTS = [
             "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
-            "stretchChildren": true
+            "stretchChildren": true,
+            "blockFlow": true
           },
           "bindings": {
             "minHeight": "imported/shared/size-0",
-            "minWidth": "imported/shared/size-0"
+            "minWidth": "imported/shared/size-0",
+            "paddingTop": "imported/tooltip/label/margin-top",
+            "paddingRight": "imported/tooltip/label/margin-right",
+            "paddingLeft": "imported/tooltip/label/margin-left"
           },
           "fixedWidth": {
             "px": 72.5781,
@@ -123,17 +127,6 @@ const COMPONENTS = [
       "element": "div"
     },
     "codeOnlyFacts": [
-      {
-        "part": "label",
-        "kind": "channel",
-        "channel": "margin-top/margin-right/margin-left",
-        "value": "14px/2px/2px",
-        "reason": "the margin-box wrapper is skipped — a FILL-sized child cannot be wrapped in a margin box without breaking the fill; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
-        "variants": {
-          "count": 1,
-          "of": 1
-        }
-      },
       {
         "part": "label",
         "kind": "declared",

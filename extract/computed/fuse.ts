@@ -41,6 +41,7 @@ import { PRESENCE_OFF } from './capture.js';
 import type { ComponentConfig, PropSpace, SweepResult, Interaction } from './capture.js';
 import {
   CHANNEL_TO_COMPUTED,
+  FLOW_ORDER_CHANNELS,
   GEOMETRY_CHANNELS,
   DECOR_PSEUDOS,
   flatten,
@@ -995,6 +996,7 @@ export function styledChannels(
    *  so the next vendor-prefixed construct announces itself instead of
    *  evaporating. */
   const webkitStyled = new Map<string, Set<string>>(); // channel -> parts
+  const orderStyled = new Map<string, Set<string>>(); // channel -> parts
   // ANTD EXAM (2026-08-23) — THE GEOMETRY EXCLUSION STOPS BEING SILENT PER
   // PART. Option B (docs/BETA.md) keeps width/height out of fusion as
   // environment-dependent and carries the obligation to LEDGER each drop.
@@ -1095,6 +1097,11 @@ export function styledChannels(
       // uses (differs from the control), on the channels the door refuses.
       if (p.startsWith('-webkit-') && a.baseFlat[pi].node.style[p] !== baseline(p)) {
         (webkitStyled.get(p) ?? webkitStyled.set(p, new Set()).get(p)!).add(a.partNames[pi]);
+      }
+      // @door fuse.flow-order-refusal
+      // @lower fuse.order-refused-before-mint
+      if (FLOW_ORDER_CHANNELS.has(p) && a.baseFlat[pi].node.style[p] !== baseline(p)) {
+        (orderStyled.get(p) ?? orderStyled.set(p, new Set()).get(p)!).add(a.partNames[pi]);
       }
       // @door fuse.geometry-exclusion
       if (GEOMETRY_CHANNELS.has(p) && !admit(p) && a.baseFlat[pi].node.style[p] !== baseline(p)) {
@@ -1435,6 +1442,11 @@ export function styledChannels(
     const listed = [...chans].sort(([x], [y]) => (x < y ? -1 : x > y ? 1 : 0)).map(([c, v]) => `${c} ${v}`).join(', ');
     receipts.push(
       `geometry-excluded: ${part} — ${listed} — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.`,
+    );
+  }
+  for (const [ch, parts] of [...orderStyled].sort(([x], [y]) => x.localeCompare(y))) {
+    receipts.push(
+      `flow-order-refused: ${ch} is STYLED on ${[...parts].sort().join(', ')} and is REFUSED BY NAME before minting (FLOW_ORDER_CHANNELS). CSS \`${ch}\` reorders the visual flow WITHOUT moving the DOM; Figma has only child order, which IS the DOM order, so the two are not the same fact and there is no lowering — only a refusal. It is also in no channel registry (TOKEN_CHANNELS / DECLARED_CHANNELS / LITERAL_CHANNELS), so minting it would produce a channel validateContract refuses, taking the whole component down with it — the tab-size incident, again.`,
     );
   }
   const wk = [...webkitStyled].sort(([x], [y]) => x.localeCompare(y));
@@ -1943,11 +1955,59 @@ export function enrichLayout(
     const channels = styled.get(partName);
     // @door fuse.static-part-required-for-enrichment
     if (!target || !channels) continue;
-    // only flex containers speak the layout vocabulary
+    // WHICH CONTAINERS SPEAK THE LAYOUT VOCABULARY.
+    //
+    // Until the layout round this read the BASE combo alone — `baseDisplay
+    // !== 'flex' && !== 'inline-flex'` — and `continue`d with NO receipt of
+    // any kind. Two subtractions rode on that one line:
+    //
+    //  (a) a part that is `block` at base and flex in every OTHER combo was
+    //      skipped on the base reading, though the uniformity check below
+    //      re-reads every combo and would have caught the disagreement; and
+    //  (b) every GRID container in the corpus lost its axis in silence.
+    //      `display: grid` is not in the DECLARED_CHANNELS display vocabulary
+    //      either, so nothing downstream knew the container had an axis at
+    //      all and the emitter's terminal ternary handed it a row. Fluent's
+    //      `fui-DialogBody` (grid, three block children) is exactly that: the
+    //      dialog drawn on one row, cited to this line.
+    //
+    // The display is now read per enabled combo, and every decline is named.
     // @door fuse.flex-container-only-speaks-layout
-    const baseDisplay = a.baseFlat[pi].node.style['display'];
+    const displays = new Set<string>();
+    for (const combo of enabled) {
+      const el = a.getAligned(`${combo.key}__default`)[pi];
+      if (el) displays.add(el.node.style['display']);
+    }
+    if (displays.size === 0) displays.add(a.baseFlat[pi].node.style['display']);
+    const isFlexDisplay = (d: string): boolean => d === 'flex' || d === 'inline-flex';
+    const isGridDisplay = (d: string): boolean => d === 'grid' || d === 'inline-grid';
     // @lower fuse.axis-flex-only-enrichment
-    if (baseDisplay !== 'flex' && baseDisplay !== 'inline-flex') continue;
+    if (![...displays].every(isFlexDisplay)) {
+      if ([...displays].some(isFlexDisplay)) {
+        out.receipts.push(
+          `layout-container-display-not-uniform: ${partName} is a flex container in some combos and ${[...displays].filter((d) => !isFlexDisplay(d)).join('/')} in others — no layout fact carried`,
+        );
+        continue;
+      }
+      // A grid's axis is decided UPSTREAM, in anatomy.ts: lowerGridDisplay
+      // lowers a one-track grid to a flex column and refuses the
+      // two-dimensional case by name (anatomy.grid-two-dimensional-refused),
+      // and promoteGridLayout carries a structured grid whole. Re-deciding it
+      // here would either duplicate that answer or CONTRADICT a named
+      // refusal, so this stage only says what it declined to look at.
+      if ([...displays].every(isGridDisplay)) {
+        if (target.layout?.display === undefined) {
+          out.receipts.push(
+            `layout-grid-axis-decided-upstream: ${partName} is display:${[...displays].join('/')} and carries no layout — the grid lowering in anatomy.ts already decided (and, where it refused, NAMED) this container's axis; enrichment adds nothing and invents nothing`,
+          );
+        }
+        continue;
+      }
+      out.receipts.push(
+        `layout-container-not-flex: ${partName} is display:${[...displays].join('/')} — the layout vocabulary spells flex containers only, so its axis, alignment and wrap stay code-only`,
+      );
+      continue;
+    }
     for (const [channel, spec] of Object.entries(LAYOUT_CHANNEL_TO_FIELD)) {
       if (!channels.has(channel)) continue;
       const values = new Set<string>();
@@ -2536,7 +2596,17 @@ export interface MintPrep {
  *  SET-PLANE literal carriage shares it. */
 export const BASE_FALLBACK_CHANNELS = new Set([
   'padding-left', 'padding-right', 'padding-top', 'padding-bottom',
-  'padding-block', 'padding-inline', 'gap',
+  'padding-block', 'padding-inline',
+  // `gap` was the only spelling in this set and it is a SHORTHAND: computed
+  // style enumerates longhands only (shorthandVarSkip says so in this repo's
+  // own words), so the guard `BASE_FALLBACK_CHANNELS.has(channel) &&
+  // LITERAL_CHANNELS.has(channel)` could never be true for a real gap. The
+  // two spellings that actually arrive were absent from both sets — the same
+  // defect class as an allow-list written in a vocabulary the producer does
+  // not speak. The shorthand stays: an authored `gap` reaching a non-computed
+  // path still resolves here.
+  // @lower fuse.gap-literal-fallback-misspelled
+  'gap', 'row-gap', 'column-gap',
   'height', 'width', 'min-width', 'min-height',
   'border-radius', 'border-width',
   'border-top-left-radius', 'border-top-right-radius',

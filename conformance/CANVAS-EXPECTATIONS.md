@@ -17,10 +17,10 @@ never waivable.
 |---|---|
 | cases (CARRIED + LOWERED) | **83** |
 | 🟢 round-tripped | **64** |
-| 🟢 named (dropped, and a receipt says so) | **17** |
+| 🟢 named (dropped, and a receipt says so) | **18** |
 | 🟡 refused by name (the canvas cannot host the seed, and says so) | **1** |
 | ⚪ seed-absent (nothing to round-trip) | **0** |
-| 🔴 red | **1** — SILENT 1 · DRIFTED 0 · HARMFUL 0 |
+| 🔴 red | **0** — SILENT 0 · DRIFTED 0 · HARMFUL 0 |
 
 Verdicts: **ROUND-TRIPPED** the channel came back with the seed's value (refs
 resolved; "ref" says whether the token spelling survived, "as" names a
@@ -32,13 +32,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 **HARMFUL** the manifest says no canvas spelling exists and it came back anyway ·
 **SILENT** vanished, named by nothing — never waivable.
 
-## 🔴 SILENT — 1
-
-| case | feature | construct | channel | expect | came back | ref | as | note |
-|---|---|---|---|---|---|---|---|---|
-| `margin-top-in-flow` | box | margin-top: 12px on the SECOND child of a flex column whose parent declares no gap | `margin-top` | CARRIED | — |  |  |  |
-
-## 🟢 NAMED — 17
+## 🟢 NAMED — 18
 
 | case | feature | construct | channel | expect | came back | ref | as | note |
 |---|---|---|---|---|---|---|---|---|
@@ -53,6 +47,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `grid-area-empty-slot` | grid-areas | a declared grid area with NO children (empty slot) | `grid-template-areas` | CARRIED | — |  |  | «self»:root: 2 grid child(ren) (a, b) carry EXPLICIT placement rects, not named areas — Figma has no native area names (G4: the CONTRACT owns them, the canvas carries only the rect), so an area name survives the round trip ONLY through a p… |
 | `grid-child-text-hug` | grid-sizing | a TEXT child hugging its content inside a grid cell | `__text` | CARRIED | — |  |  | code-only channel label.border-bottom-color = {imported.shared.color-663399} — per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides. |
 | `grid-named-area-slots` | grid-areas | grid-template-areas: 'header header' 'nav content' + grid-area: header on children | `grid-template-areas` | CARRIED | — |  |  | «self»:root: 3 grid child(ren) (a, b, c) carry EXPLICIT placement rects, not named areas — Figma has no native area names (G4: the CONTRACT owns them, the canvas carries only the rect), so an area name survives the round trip ONLY through… |
+| `margin-top-in-flow` | box | margin-top: 12px on the SECOND child of a flex column whose parent declares no gap | `margin-top` | CARRIED | — |  |  | code-only channel root.margin = 12px — lowered to the parent's itemSpacing (12px, bound to imported/shared/size-12): CSS spells between-sibling space per CHILD and auto-layout spells it once per PARENT, so 1 sibling margin(s) become one ga… |
 | `nonpainting-text-display-none` | invariant | a NON-PAINTING element carrying text (display: none) | `__text` | CARRIED | — |  |  | code-only declared label-2.display = none — CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack). |
 | `overlay-text-fill-pinned-size` | geometry | a TEXT-bearing part that fills a PINNED ancestor box (width/height: 100% inside a sized root) in an overlay anatomy — the shadcn.Avatar fallback shape | `width` | CARRIED | 8px, {imported.case-overlay-text-fill-pinned-size.label.width.{size}} |  |  | value came back as 8px, {imported.case-overlay-text-fill-pinned-size.label.width.{size}} (seed 24px) — «self»:root: root width binding {«self».root.width.{size}} carries as **max-width**, not width — a component's outer size is fluid-up-to… |
 | `presence-hidden-axis-geometry` | tokens | an absolute part's inset that is a clean function of ONE enum axis, with the part NOT RENDERED at one axis value (polaris.checkbox icon: top/left 0px when checked, -2px when indeterminate, absent when unchecked) | `top` | CARRIED | {imported.case-presence-hidden-axis-geometry.a.left.{checked}}, {imported.case-presence-hidden-axis-geometry.a.top.{checked}} |  |  | value came back as {imported.case-presence-hidden-axis-geometry.a.left.{checked}}, {imported.case-presence-hidden-axis-geometry.a.top.{checked}} (seed 3px) — code-only channel root.top = {imported.shared.size-0} — bound on an in-flow box (… |

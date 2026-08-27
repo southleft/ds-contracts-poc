@@ -34,11 +34,11 @@
     {
       "id": "css-dom",
       "path": "conformance/MANIFEST.json",
-      "count": 126,
+      "count": 127,
       "expectations": {
         "CARRIED": 78,
         "LOWERED": 5,
-        "REFUSED": 26,
+        "REFUSED": 27,
         "UNSUPPORTED": 17
       },
       "pinnedBecause": "RE-PINNED 2026-08-26, census/stack-to-main merging origin/main@34299be5: 108 (this branch) and 112 (main) become 126, DERIVED by `npm run conformance:build` from the case directories rather than reconciled by hand. Neither number could be picked: the two sides grew the SAME base by different case sets. From the merge base (94: CARRIED 52 / LOWERED 5 / REFUSED 19 / UNSUPPORTED 18) — THIS BRANCH adds 14 cases (9 CARRIED, 5 REFUSED) and separately reclassifies pseudo-placeholder UNSUPPORTED -> CARRIED, because RC7 made the engine carry `placeholder-color` outright; MAIN adds 18 cases (16 CARRIED, 2 REFUSED) from #63's archetype round and #66's five layout cases. The arithmetic closes on every class: CARRIED 52+9+16+1(reclass) = 78; LOWERED 5+0+0 = 5; REFUSED 19+5+2 = 26; UNSUPPORTED 18-1 = 17; 78+5+26+17 = 126, and the builder independently emits exactly that."
