@@ -66,7 +66,8 @@
 > expected plans, and its writer plan has no objective-cell/reference manifest.
 > A v5 adapter that returned success would therefore fake required semantics.
 >
-> V6 now provides the complete offline external-operator antecedent:
+> V6 now provides the complete offline external-operator antecedent at
+> `8737fab9f35aeae43b25734e8f9709a4247c379b`:
 > `recipe/input-field-live-v6-broker.ts`,
 > `recipe/input-field-live-v6-contract.ts`,
 > `recipe/run-input-field-live-v6.ts`, and
@@ -87,10 +88,31 @@
 > pinned to its independent reference and source/state/adornment strata; no
 > sample reduction is allowed, and no capture request can be issued before the
 > hash-bound technical gates. The fake operator exercises all 132 remote
-> requests offline. V6 still has no authorization, live attempt, Figma write,
-> screenshot, outcome, or target metric. V5 protocol and authorization bytes
-> remain unchanged but are semantically retired by the separate superseding
-> status artifact. Input remains false.**
+> requests offline (9/9 tests).
+>
+> The separate v6 authorization is now prepared but uncommitted at
+> `recipe/evidence/input-field-live-pivot-v6/capture-authorization.json`. It
+> pins the antecedent Git-object bytes, protocol, plans, 132-request/3-host-phase
+> denominator, both source fact roots, every phase program, 128 captures,
+> durable cleanup, and an Ed25519 public-key identity. It does not store a
+> private key and does not reuse v5 authorization. Git history, clean worktree,
+> and upstream equality establish authorization only after a distinct commit
+> and publication; before then, live execution remains forbidden.
+>
+> There is an independent security block. A Figma PAT was exposed; revocation
+> or replacement has not been asserted here. Every MCP process must be
+> restarted after rotation using owner-only mode-0600 environment-file
+> configuration. Only then may an operator create
+> `private/input-live-v6-security-attestation.json` from
+> `recipe/evidence/input-field-live-pivot-v6/operator-security-attestation-template.json`.
+> The attestation records timestamps and user assertions, a secret-free MCP
+> session identity, an exact Scratch read-only probe, absence of plaintext
+> helper paths, and a current zero-result repository secret scan. It stores no
+> token values. The current offline repository scan is zero, but that does not
+> establish account-side revocation, rotation, or MCP restart. V6 still has no
+> live attempt, Figma write, screenshot, outcome, or target metric. V5 protocol
+> and authorization bytes remain unchanged but are semantically retired by the
+> separate superseding status artifact. Input remains false.**
 >
 > Historical implementation record: **Input/Field has an offline
 > `input-field@1` recipe and a complete 128-cell matched source/legacy/React/WC

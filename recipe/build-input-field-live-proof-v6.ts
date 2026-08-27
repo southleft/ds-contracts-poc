@@ -29,6 +29,8 @@ export const INPUT_LIVE_V6_CAPTURE_MANIFEST_PATH = `${INPUT_LIVE_V6_EVIDENCE_ROO
 export const INPUT_LIVE_V6_REQUEST_MANIFEST_PATH = `${INPUT_LIVE_V6_EVIDENCE_ROOT}/request-manifest.json`;
 export const INPUT_LIVE_V6_INDEX_PATH = `${INPUT_LIVE_V6_EVIDENCE_ROOT}/index.json`;
 export const INPUT_LIVE_V6_AUTHORIZATION_TEMPLATE_PATH = `${INPUT_LIVE_V6_EVIDENCE_ROOT}/authorization-template.json`;
+export const INPUT_LIVE_V6_AUTHORIZATION_PATH = `${INPUT_LIVE_V6_EVIDENCE_ROOT}/capture-authorization.json`;
+export const INPUT_LIVE_V6_SECURITY_ATTESTATION_TEMPLATE_PATH = `${INPUT_LIVE_V6_EVIDENCE_ROOT}/operator-security-attestation-template.json`;
 export const INPUT_LIVE_V5_SUPERSEDING_STATUS_PATH =
   "recipe/evidence/input-field-live-pivot-v5-superseding-status.json";
 
@@ -502,16 +504,21 @@ export async function buildInputLiveV6Proof(
   const indexArtifacts = [
     INPUT_LIVE_V6_PROTOCOL_PATH,
     ...outputs.keys(),
+    INPUT_LIVE_V6_AUTHORIZATION_PATH,
+    INPUT_LIVE_V6_SECURITY_ATTESTATION_TEMPLATE_PATH,
     "recipe/input-field-live-v6-broker.ts",
     "recipe/input-field-live-v6-contract.ts",
     "recipe/run-input-field-live-v6.ts",
     "recipe/build-input-field-live-proof-v6.ts",
     "recipe/input-field-live-v6-broker.test.ts",
+    "recipe/input-field-live-v6-authorization.ts",
+    "recipe/input-field-live-v6-preflight.ts",
+    "recipe/input-field-live-v6-authorization.test.ts",
   ];
   const index = {
     artifactVersion: "input-live-v6-evidence-index-v1",
     status:
-      "draft uncommitted; pending separate authorization; no live outcomes",
+      "authorization-prepared-uncommitted; security-blocked; live execution forbidden; no live outcomes",
     artifacts: Object.fromEntries(
       indexArtifacts.map((artifactPath) => {
         const value =
@@ -536,7 +543,21 @@ export async function buildInputLiveV6Proof(
       hostPhases: 3,
     },
     generatedDeterministically: true,
-    authorizationPresent: false,
+    authorizationPresent: true,
+    authorizationCommitted: false,
+    authorizationEffective: false,
+    authorizationPath: INPUT_LIVE_V6_AUTHORIZATION_PATH,
+    authorizationSha256: sha256(readFileSync(INPUT_LIVE_V6_AUTHORIZATION_PATH)),
+    security: {
+      status: "blocked-pending-Figma-PAT-rotation-and-MCP-restart",
+      rotationCompleted: false,
+      mcpRestartCompleted: false,
+      liveExecutionForbidden: true,
+      attestationTemplatePath: INPUT_LIVE_V6_SECURITY_ATTESTATION_TEMPLATE_PATH,
+      runtimeAttestationPath: "private/input-live-v6-security-attestation.json",
+      currentRepositorySecretScanMatches: 0,
+      tokenValuesStored: false,
+    },
     attemptsExecuted: 0,
     liveExecutionOccurred: false,
     figmaWrites: 0,

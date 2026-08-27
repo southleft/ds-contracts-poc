@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 semantically retired; v6 complete offline antecedent and unauthorized; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 semantically retired; v6 authorization prepared uncommitted and security-blocked; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -61,19 +61,38 @@ const V6_PROTOCOL_SHA256 =
   "0d79c50a4a21763eae067ff18f2ad65bc071f2fca5af7cfd4335f775c9d5e296";
 const V6_BROKER_PATH = "recipe/input-field-live-v6-broker.ts";
 const V6_BROKER_SHA256 =
-  "3c8cf2b50ba055a86fc1118723c091f21748541b4a76bde01d1e653012457f1a";
+  "d4bdd418ac56658954fbc0ed1e3d9c4ab152d016a35740cf6c34b5ce96d26e79";
 const V6_CONTRACT_PATH = "recipe/input-field-live-v6-contract.ts";
 const V6_CONTRACT_SHA256 =
   "11741375907f0dd69678a6ba652a9a1b00b685ae47994ee88ae34e753e52144a";
 const V6_RUNNER_PATH = "recipe/run-input-field-live-v6.ts";
 const V6_RUNNER_SHA256 =
-  "0d9871ef268a2253045b13f637b4a71a0853a0d124a13484c25a4e6d5f4bfcf3";
+  "3c2ae18d2a346eb299549244322cbbfcb97667649ae6719bf2b703a8b9285673";
 const V6_TEST_PATH = "recipe/input-field-live-v6-broker.test.ts";
 const V6_TEST_SHA256 =
-  "4ac6123d06aba5356f1d48789c05a25c51db147cd2e2b21cf1894ec243b6f67d";
+  "c0a9504f0b03ae80b942c6acb1133b40bd8e9ff9cde35bae2e0bfe0dfa3d9cbc";
 const V6_INDEX_PATH = "recipe/evidence/input-field-live-pivot-v6/index.json";
 const V6_INDEX_SHA256 =
-  "95c050af82d7eb5497487eb3099dbf471039c7afaeef4c9dee60dbd5f1837657";
+  "5f57d9425a722e23e627e66de6b6b1e73e937cae946707fffe62ffb17d24f103";
+const V6_AUTHORIZATION_PATH =
+  "recipe/evidence/input-field-live-pivot-v6/capture-authorization.json";
+const V6_AUTHORIZATION_SHA256 =
+  "82f7cfadd7161419b091c632c45f1f746fa1434af03b3e154ec6ca3fc288e17c";
+const V6_AUTHORIZATION_LAYER_PATH =
+  "recipe/input-field-live-v6-authorization.ts";
+const V6_AUTHORIZATION_LAYER_SHA256 =
+  "ea3ff5871ad499fbd676e9deb89f3fa22c1a2c565236de5cb8d6a04a4986c336";
+const V6_PREFLIGHT_PATH = "recipe/input-field-live-v6-preflight.ts";
+const V6_PREFLIGHT_SHA256 =
+  "14bc407c60adf67d69ee10c63e5dfe7d06a59638d29754536428372f844224c3";
+const V6_AUTHORIZATION_TEST_PATH =
+  "recipe/input-field-live-v6-authorization.test.ts";
+const V6_AUTHORIZATION_TEST_SHA256 =
+  "640eb5af45dc184d49233fd03bf0f6b50d1a56f3b3e899ee35995e1003eaa524";
+const V6_SECURITY_ATTESTATION_TEMPLATE_PATH =
+  "recipe/evidence/input-field-live-pivot-v6/operator-security-attestation-template.json";
+const V6_SECURITY_ATTESTATION_TEMPLATE_SHA256 =
+  "7d7f1360aa5eb37788cb74063cadab247b101ee61321a4880b95d2edaf3deec1";
 const V6_PLAN_SHA256 =
   "28c22a4b86fe98e558c48278c624a229da6417b5abcbdd6587cb533197fdf199";
 const V6_CAPTURE_MANIFEST_SHA256 =
@@ -85,7 +104,7 @@ const V5_SUPERSEDING_PATH =
 const V5_SUPERSEDING_SHA256 =
   "df74b9d8971e1fab57c96926ccb0a65b9254861fa20b0d53107edd3a8589e8ba";
 const V6_STATUS =
-  "complete offline signed external-operator antecedent; uncommitted; authorization absent; live write and capture forbidden";
+  "authorization-prepared-uncommitted; security-blocked; live execution and capture forbidden";
 const V6_PROTOCOL_STATUS =
   "draft uncommitted; pending separate authorization; live write and capture forbidden";
 const V4_AUTHORIZATION_COMMIT = "bd343680b446a828190f176e525e5616752f9e5f";
@@ -263,6 +282,12 @@ export function validatePivotStatus(
     status.input?.liveV5?.semanticallyRetired !== true ||
     status.input?.liveV5?.authorizationAuthorizesAttemptNow !== false ||
     status.input?.liveV6?.status !== V6_STATUS ||
+    status.input?.liveV6?.antecedentCommit !==
+      "8737fab9f35aeae43b25734e8f9709a4247c379b" ||
+    status.input?.liveV6?.antecedentTree !==
+      "1065a502feddd59ce8d11985e3f6e14365d65bfd" ||
+    status.input?.liveV6?.antecedentTreeSha256 !==
+      "7c93434bd6e742be7f8137af68239976b1ac226ff4d27346f52c3b86d5d5de68" ||
     status.input?.liveV6?.protocolPath !== V6_PROTOCOL_PATH ||
     status.input?.liveV6?.protocolSha256 !== V6_PROTOCOL_SHA256 ||
     status.input?.liveV6?.brokerPath !== V6_BROKER_PATH ||
@@ -273,6 +298,24 @@ export function validatePivotStatus(
     status.input?.liveV6?.runnerSha256 !== V6_RUNNER_SHA256 ||
     status.input?.liveV6?.testPath !== V6_TEST_PATH ||
     status.input?.liveV6?.testSha256 !== V6_TEST_SHA256 ||
+    status.input?.liveV6?.authorizationPath !== V6_AUTHORIZATION_PATH ||
+    status.input?.liveV6?.authorizationSha256 !== V6_AUTHORIZATION_SHA256 ||
+    status.input?.liveV6?.authorizationLayerPath !==
+      V6_AUTHORIZATION_LAYER_PATH ||
+    status.input?.liveV6?.authorizationLayerSha256 !==
+      V6_AUTHORIZATION_LAYER_SHA256 ||
+    status.input?.liveV6?.preflightPath !== V6_PREFLIGHT_PATH ||
+    status.input?.liveV6?.preflightSha256 !== V6_PREFLIGHT_SHA256 ||
+    status.input?.liveV6?.authorizationTestPath !==
+      V6_AUTHORIZATION_TEST_PATH ||
+    status.input?.liveV6?.authorizationTestSha256 !==
+      V6_AUTHORIZATION_TEST_SHA256 ||
+    status.input?.liveV6?.operatorSecurityAttestationTemplatePath !==
+      V6_SECURITY_ATTESTATION_TEMPLATE_PATH ||
+    status.input?.liveV6?.operatorSecurityAttestationTemplateSha256 !==
+      V6_SECURITY_ATTESTATION_TEMPLATE_SHA256 ||
+    status.input?.liveV6?.signingPublicKeySpkiSha256 !==
+      "c5d04bf950dea3e1b62a2a274031677546e9c24bbee4cabb64773d0f1a7b3ac4" ||
     status.input?.liveV6?.evidenceIndexPath !== V6_INDEX_PATH ||
     status.input?.liveV6?.evidenceIndexSha256 !== V6_INDEX_SHA256 ||
     status.input?.liveV6?.proofPlanSha256 !== V6_PLAN_SHA256 ||
@@ -290,8 +333,26 @@ export function validatePivotStatus(
     status.input?.liveV6?.remoteRequests !== 132 ||
     status.input?.liveV6?.hostPhases !== 3 ||
     status.input?.liveV6?.cleanupRequestPersistedAfterWriter !== true ||
-    status.input?.liveV6?.authorizationPresent !== false ||
+    status.input?.liveV6?.authorizationPresent !== true ||
+    status.input?.liveV6?.authorizationCommitted !== false ||
+    status.input?.liveV6?.authorizationEffective !== false ||
+    status.input?.liveV6?.beforeCommitGate !==
+      "pending-uncommitted-authorization" ||
     status.input?.liveV6?.authorized !== false ||
+    status.input?.liveV6?.security?.status !==
+      "blocked-pending-user-account-action" ||
+    status.input?.liveV6?.security?.exposedFigmaPatRevokedOrReplaced !==
+      false ||
+    status.input?.liveV6?.security?.rotationClaimed !== false ||
+    status.input?.liveV6?.security?.mcpProcessesRestartedAfterRotation !==
+      false ||
+    status.input?.liveV6?.security
+      ?.ownerOnlyEnvironmentFileConfigurationRequired !== true ||
+    status.input?.liveV6?.security?.liveExecutionForbidden !== true ||
+    status.input?.liveV6?.security?.currentRepositorySecretScanMatches !== 0 ||
+    status.input?.liveV6?.security
+      ?.currentRepositorySecretScanEstablishesRotation !== false ||
+    status.input?.liveV6?.security?.credentialDataStored !== false ||
     status.input?.liveV6?.attemptsExecuted !== 0 ||
     status.input?.liveV6?.nextAttempt !== 1 ||
     status.input?.liveV6?.maximumAttempts !== 3 ||
@@ -402,6 +463,15 @@ export function verifyPivotStatus(): void {
     sha256(readRepositoryEvidence(V6_CONTRACT_PATH)) !== V6_CONTRACT_SHA256 ||
     sha256(readRepositoryEvidence(V6_RUNNER_PATH)) !== V6_RUNNER_SHA256 ||
     sha256(readRepositoryEvidence(V6_INDEX_PATH)) !== V6_INDEX_SHA256 ||
+    sha256(readRepositoryEvidence(V6_AUTHORIZATION_PATH)) !==
+      V6_AUTHORIZATION_SHA256 ||
+    sha256(readRepositoryEvidence(V6_AUTHORIZATION_LAYER_PATH)) !==
+      V6_AUTHORIZATION_LAYER_SHA256 ||
+    sha256(readRepositoryEvidence(V6_PREFLIGHT_PATH)) !== V6_PREFLIGHT_SHA256 ||
+    sha256(readRepositoryEvidence(V6_AUTHORIZATION_TEST_PATH)) !==
+      V6_AUTHORIZATION_TEST_SHA256 ||
+    sha256(readRepositoryEvidence(V6_SECURITY_ATTESTATION_TEMPLATE_PATH)) !==
+      V6_SECURITY_ATTESTATION_TEMPLATE_SHA256 ||
     sha256(readRepositoryEvidence(V5_SUPERSEDING_PATH)) !==
       V5_SUPERSEDING_SHA256 ||
     v6Protocol.artifactVersion !==
@@ -430,7 +500,18 @@ export function verifyPivotStatus(): void {
     v6Index.counts?.captureCells !== 128 ||
     v6Index.counts?.remoteRequests !== 132 ||
     v6Index.counts?.hostPhases !== 3 ||
-    v6Index.authorizationPresent !== false ||
+    v6Index.status !==
+      "authorization-prepared-uncommitted; security-blocked; live execution forbidden; no live outcomes" ||
+    v6Index.authorizationPresent !== true ||
+    v6Index.authorizationCommitted !== false ||
+    v6Index.authorizationEffective !== false ||
+    v6Index.authorizationPath !== V6_AUTHORIZATION_PATH ||
+    v6Index.authorizationSha256 !== V6_AUTHORIZATION_SHA256 ||
+    v6Index.security?.rotationCompleted !== false ||
+    v6Index.security?.mcpRestartCompleted !== false ||
+    v6Index.security?.liveExecutionForbidden !== true ||
+    v6Index.security?.currentRepositorySecretScanMatches !== 0 ||
+    v6Index.security?.tokenValuesStored !== false ||
     v6Index.outcomes !== null ||
     v5Superseding.artifactVersion !== "input-live-v5-superseding-status-v1" ||
     v5Superseding.authorization?.bytesChanged !== false ||

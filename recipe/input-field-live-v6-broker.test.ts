@@ -1,5 +1,9 @@
 import assert from "node:assert/strict";
-import { generateKeyPairSync, type KeyObject } from "node:crypto";
+import {
+  createPublicKey,
+  generateKeyPairSync,
+  type KeyObject,
+} from "node:crypto";
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -50,7 +54,9 @@ import {
   simulatedInputLiveV6Authorization,
 } from "./run-input-field-live-v6.js";
 
-const simulatedAuthorization = (): InputLiveV6TransactionAuthorization => ({
+const simulatedAuthorization = (
+  privateKey: KeyObject,
+): InputLiveV6TransactionAuthorization => ({
   mode: "simulated",
   protocolCommit: "1".repeat(40),
   runnerCommit: "2".repeat(40),
@@ -60,6 +66,14 @@ const simulatedAuthorization = (): InputLiveV6TransactionAuthorization => ({
   protocolSha256: "6".repeat(64),
   runnerSha256: "7".repeat(64),
   codeTreeSha256: "8".repeat(64),
+  signingPublicKeySha256: inputLiveV6Sha256(
+    createPublicKey(privateKey.export({ type: "pkcs8", format: "pem" })).export(
+      {
+        type: "spki",
+        format: "der",
+      },
+    ),
+  ),
 });
 
 const captures: InputLiveV6CaptureCell[] = Array.from(
@@ -101,7 +115,7 @@ const fixture = () => {
   const directory = mkdtempSync(path.join(os.tmpdir(), "input-live-v6-"));
   const { privateKey } = generateKeyPairSync("ed25519");
   createInputLiveV6Transaction(directory, privateKey, {
-    authorization: simulatedAuthorization(),
+    authorization: simulatedAuthorization(privateKey),
     proofPlanSha256: "9".repeat(64),
     captureManifestSha256: inputLiveV6CaptureManifestSha256(captures),
     transactionId: "00000000-0000-4000-8000-000000000006",
@@ -708,7 +722,7 @@ test("durable orchestrator resumes with active extract and surfaced cleanup", ()
       root: process.cwd(),
       transactionDirectory: directory,
       privateKey,
-      authorization: simulatedInputLiveV6Authorization(),
+      authorization: simulatedInputLiveV6Authorization(privateKey),
       attempt: 1,
       transactionId: "00000000-0000-4000-8000-000000000066",
       now: "2026-08-27T12:00:00.000Z",

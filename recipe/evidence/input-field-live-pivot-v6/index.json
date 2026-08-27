@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v6-evidence-index-v1",
-  "status": "draft uncommitted; pending separate authorization; no live outcomes",
+  "status": "authorization-prepared-uncommitted; security-blocked; live execution forbidden; no live outcomes",
   "artifacts": {
     "recipe/evidence/input-field-live-pivot-v6/protocol.json": {
       "bytes": 7215,
@@ -54,25 +54,45 @@
       "bytes": 1398,
       "sha256": "df74b9d8971e1fab57c96926ccb0a65b9254861fa20b0d53107edd3a8589e8ba"
     },
+    "recipe/evidence/input-field-live-pivot-v6/capture-authorization.json": {
+      "bytes": 7407,
+      "sha256": "82f7cfadd7161419b091c632c45f1f746fa1434af03b3e154ec6ca3fc288e17c"
+    },
+    "recipe/evidence/input-field-live-pivot-v6/operator-security-attestation-template.json": {
+      "bytes": 1428,
+      "sha256": "7d7f1360aa5eb37788cb74063cadab247b101ee61321a4880b95d2edaf3deec1"
+    },
     "recipe/input-field-live-v6-broker.ts": {
-      "bytes": 34627,
-      "sha256": "3c8cf2b50ba055a86fc1118723c091f21748541b4a76bde01d1e653012457f1a"
+      "bytes": 35424,
+      "sha256": "d4bdd418ac56658954fbc0ed1e3d9c4ab152d016a35740cf6c34b5ce96d26e79"
     },
     "recipe/input-field-live-v6-contract.ts": {
       "bytes": 40436,
       "sha256": "11741375907f0dd69678a6ba652a9a1b00b685ae47994ee88ae34e753e52144a"
     },
     "recipe/run-input-field-live-v6.ts": {
-      "bytes": 25225,
-      "sha256": "0d9871ef268a2253045b13f637b4a71a0853a0d124a13484c25a4e6d5f4bfcf3"
+      "bytes": 25916,
+      "sha256": "3c2ae18d2a346eb299549244322cbbfcb97667649ae6719bf2b703a8b9285673"
     },
     "recipe/build-input-field-live-proof-v6.ts": {
-      "bytes": 19174,
-      "sha256": "2e988bb848efb2ea384112495eb53604323cb31ff307d7600eaea187dea013a1"
+      "bytes": 20339,
+      "sha256": "ace2b639046a795bc2129e518d4741a5652d46d787be9b2db02ca01cb510a047"
     },
     "recipe/input-field-live-v6-broker.test.ts": {
-      "bytes": 22206,
-      "sha256": "4ac6123d06aba5356f1d48789c05a25c51db147cd2e2b21cf1894ec243b6f67d"
+      "bytes": 22476,
+      "sha256": "c0a9504f0b03ae80b942c6acb1133b40bd8e9ff9cde35bae2e0bfe0dfa3d9cbc"
+    },
+    "recipe/input-field-live-v6-authorization.ts": {
+      "bytes": 20752,
+      "sha256": "ea3ff5871ad499fbd676e9deb89f3fa22c1a2c565236de5cb8d6a04a4986c336"
+    },
+    "recipe/input-field-live-v6-preflight.ts": {
+      "bytes": 12574,
+      "sha256": "14bc407c60adf67d69ee10c63e5dfe7d06a59638d29754536428372f844224c3"
+    },
+    "recipe/input-field-live-v6-authorization.test.ts": {
+      "bytes": 10197,
+      "sha256": "640eb5af45dc184d49233fd03bf0f6b50d1a56f3b3e899ee35995e1003eaa524"
     }
   },
   "counts": {
@@ -84,7 +104,21 @@
     "hostPhases": 3
   },
   "generatedDeterministically": true,
-  "authorizationPresent": false,
+  "authorizationPresent": true,
+  "authorizationCommitted": false,
+  "authorizationEffective": false,
+  "authorizationPath": "recipe/evidence/input-field-live-pivot-v6/capture-authorization.json",
+  "authorizationSha256": "82f7cfadd7161419b091c632c45f1f746fa1434af03b3e154ec6ca3fc288e17c",
+  "security": {
+    "status": "blocked-pending-Figma-PAT-rotation-and-MCP-restart",
+    "rotationCompleted": false,
+    "mcpRestartCompleted": false,
+    "liveExecutionForbidden": true,
+    "attestationTemplatePath": "recipe/evidence/input-field-live-pivot-v6/operator-security-attestation-template.json",
+    "runtimeAttestationPath": "private/input-live-v6-security-attestation.json",
+    "currentRepositorySecretScanMatches": 0,
+    "tokenValuesStored": false
+  },
   "attemptsExecuted": 0,
   "liveExecutionOccurred": false,
   "figmaWrites": 0,

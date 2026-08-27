@@ -1,0 +1,50 @@
+{
+  "artifactVersion": "input-live-v6-operator-security-attestation-v1",
+  "status": "template-only; pending Figma PAT rotation and MCP restart; not a live attestation",
+  "createdAt": null,
+  "rotation": {
+    "completedAt": null,
+    "completedByUserAssertion": null,
+    "credentialType": "Figma personal access token",
+    "exposedCredentialRevokedOrReplaced": null,
+    "tokenValueStored": false
+  },
+  "mcpRestart": {
+    "completedAt": null,
+    "completedAfterRotation": null,
+    "sessionIdentity": null,
+    "sessionIdentityContainsSecrets": false,
+    "ownerOnlyEnvironmentFileConfigured": null,
+    "environmentFileMode": null,
+    "tokenValueStored": false
+  },
+  "scratchReadOnlyProbe": {
+    "completedAt": null,
+    "completedAfterMcpRestart": null,
+    "target": {
+      "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+      "fileName": "Scratch Project",
+      "editorType": "figma"
+    },
+    "readOnly": true,
+    "probe": "exact file key, file name, and editor type",
+    "result": null,
+    "figmaWrites": 0,
+    "figmaCaptures": 0
+  },
+  "plaintextHelpers": {
+    "pathsPresent": null,
+    "paths": [],
+    "confirmedAbsent": null
+  },
+  "repositorySecretScan": {
+    "completedAt": null,
+    "codeCommit": null,
+    "scope": "tracked and untracked repository files",
+    "scanner": "input-live-v6-preflight-v1",
+    "matches": null,
+    "zero": null
+  },
+  "tokenValuesStored": false,
+  "attestationSha256": null
+}

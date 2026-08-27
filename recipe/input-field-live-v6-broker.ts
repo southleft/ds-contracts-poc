@@ -72,6 +72,7 @@ export interface InputLiveV6TransactionAuthorization extends InputLiveV6CommitPi
   protocolSha256: string;
   runnerSha256: string;
   codeTreeSha256: string;
+  signingPublicKeySha256: string;
 }
 
 interface BrokerTarget {
@@ -324,6 +325,7 @@ const validateAuthorization = (
     authorization.protocolSha256,
     authorization.runnerSha256,
     authorization.codeTreeSha256,
+    authorization.signingPublicKeySha256,
   ];
   if (
     !["live", "simulated"].includes(authorization.mode) ||
@@ -348,6 +350,17 @@ const readManifest = (directory: string): InputLiveV6Manifest => {
     throw new TypeError(
       `Input live v6 antecedent result leakage: ${resultLeaks.join(",")}`,
     );
+  let signingPublicKeySha256 = "";
+  try {
+    signingPublicKeySha256 = sha256(
+      createPublicKey(manifest.signing.publicKeyPem).export({
+        type: "spki",
+        format: "der",
+      }),
+    );
+  } catch {
+    signingPublicKeySha256 = "";
+  }
   if (
     manifest.artifactVersion !== "input-live-v6-broker-manifest-v2" ||
     manifest.brokerVersion !== INPUT_LIVE_V6_BROKER_VERSION ||
@@ -362,6 +375,7 @@ const readManifest = (directory: string): InputLiveV6Manifest => {
       canonicalJson(INPUT_LIVE_V6_DYNAMIC_TOOL) ||
     manifest.signing?.algorithm !== "Ed25519" ||
     typeof manifest.signing.publicKeyPem !== "string" ||
+    signingPublicKeySha256 !== manifest.authorization.signingPublicKeySha256 ||
     manifest.cleanupRequestPersistedAfterWriter !== true
   )
     throw new TypeError("invalid Input live v6 broker manifest");
@@ -527,6 +541,19 @@ export function createInputLiveV6Transaction(
   const attempt = options.attempt ?? 1;
   if (!Number.isInteger(attempt) || attempt < 1 || attempt > 3)
     throw new TypeError("Input live v6 attempt must be 1..3");
+  const signingPublicKey = createPublicKey(
+    signingPrivateKey.export({ type: "pkcs8", format: "pem" }),
+  );
+  const signingPublicKeyPem = signingPublicKey
+    .export({ type: "spki", format: "pem" })
+    .toString();
+  const signingPublicKeySha256 = sha256(
+    signingPublicKey.export({ type: "spki", format: "der" }),
+  );
+  if (signingPublicKeySha256 !== options.authorization.signingPublicKeySha256)
+    throw new TypeError(
+      "Input live v6 private signing key does not match authorized public-key identity",
+    );
   const manifest: InputLiveV6Manifest = {
     artifactVersion: "input-live-v6-broker-manifest-v2",
     brokerVersion: INPUT_LIVE_V6_BROKER_VERSION,
@@ -542,11 +569,7 @@ export function createInputLiveV6Transaction(
     maximumAttempts: 3,
     signing: {
       algorithm: "Ed25519",
-      publicKeyPem: createPublicKey(
-        signingPrivateKey.export({ type: "pkcs8", format: "pem" }),
-      )
-        .export({ type: "spki", format: "pem" })
-        .toString(),
+      publicKeyPem: signingPublicKeyPem,
     },
     cleanupRequestPersistedAfterWriter: true,
   };

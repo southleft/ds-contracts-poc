@@ -1,6 +1,7 @@
 import {
   generateKeyPairSync,
   createPrivateKey,
+  createPublicKey,
   type KeyObject,
 } from "node:crypto";
 import {
@@ -61,6 +62,11 @@ import {
   polarisInputFieldAdapterConfig,
 } from "./fixtures/library-input-fields.js";
 import { canonicalJson } from "./normalize.js";
+import {
+  INPUT_LIVE_V6_AUTHORIZATION_PATH,
+  verifyInputLiveV6Authorization,
+} from "./input-field-live-v6-authorization.js";
+import { runInputLiveV6Preflight } from "./input-field-live-v6-preflight.js";
 import {
   collapseInputFieldRecipe,
   compileInputFieldRecipe,
@@ -697,18 +703,24 @@ export class InputLiveV6Orchestrator {
   }
 }
 
-export const simulatedInputLiveV6Authorization =
-  (): InputLiveV6TransactionAuthorization => ({
-    mode: "simulated",
-    protocolCommit: "1".repeat(40),
-    runnerCommit: "2".repeat(40),
-    authorizationCommit: "3".repeat(40),
-    codeCommit: "4".repeat(40),
-    authorizationSha256: "5".repeat(64),
-    protocolSha256: "6".repeat(64),
-    runnerSha256: "7".repeat(64),
-    codeTreeSha256: "8".repeat(64),
-  });
+export const simulatedInputLiveV6Authorization = (
+  privateKey: KeyObject,
+): InputLiveV6TransactionAuthorization => ({
+  mode: "simulated",
+  protocolCommit: "1".repeat(40),
+  runnerCommit: "2".repeat(40),
+  authorizationCommit: "3".repeat(40),
+  codeCommit: "4".repeat(40),
+  authorizationSha256: "5".repeat(64),
+  protocolSha256: "6".repeat(64),
+  runnerSha256: "7".repeat(64),
+  codeTreeSha256: "8".repeat(64),
+  signingPublicKeySha256: inputLiveV6Sha256(
+    createPublicKey(privateKey.export({ type: "pkcs8", format: "pem" })).export(
+      { type: "spki", format: "der" },
+    ),
+  ),
+});
 
 const argument = (name: string): string | undefined => {
   const index = process.argv.indexOf(name);
@@ -721,22 +733,15 @@ const argument = (name: string): string | undefined => {
 const loadLiveAuthorization = (
   file: string,
 ): InputLiveV6TransactionAuthorization => {
-  const artifact = readJson<Record<string, any>>(file);
-  if (artifact.authorized !== true)
+  const expected = path.resolve(
+    process.cwd(),
+    INPUT_LIVE_V6_AUTHORIZATION_PATH,
+  );
+  if (path.resolve(file) !== expected)
     throw new Error(
-      "Input live v6 authorization is pending; live execution and capture forbidden",
+      `Input live v6 requires exact authorization artifact ${INPUT_LIVE_V6_AUTHORIZATION_PATH}`,
     );
-  return {
-    mode: "live",
-    protocolCommit: artifact.protocolCommit,
-    runnerCommit: artifact.runnerCommit,
-    authorizationCommit: artifact.authorizationCommit,
-    codeCommit: artifact.codeCommit,
-    authorizationSha256: inputLiveV6Sha256(readFileSync(file)),
-    protocolSha256: artifact.protocolSha256,
-    runnerSha256: artifact.runnerSha256,
-    codeTreeSha256: artifact.codeTreeSha256,
-  };
+  return verifyInputLiveV6Authorization();
 };
 
 async function main(): Promise<void> {
@@ -756,12 +761,30 @@ async function main(): Promise<void> {
     const authorizationPath = argument("--authorization");
     if (!authorizationPath)
       throw new Error("--authorization is required for live initialization");
+    const securityAttestationPath = argument("--security-attestation");
+    if (!securityAttestationPath)
+      throw new Error(
+        "--security-attestation is required after Figma PAT rotation and MCP restart",
+      );
+    const attempt = Number(argument("--attempt") ?? "1");
+    const authorization = loadLiveAuthorization(authorizationPath);
+    const completedAttempts = (argument("--completed-attempts") ?? "")
+      .split(",")
+      .filter(Boolean)
+      .map(Number);
+    runInputLiveV6Preflight(
+      root,
+      authorization as ReturnType<typeof verifyInputLiveV6Authorization>,
+      securityAttestationPath,
+      attempt,
+      completedAttempts,
+    );
     const orchestrator = InputLiveV6Orchestrator.initialize({
       root,
       transactionDirectory: directory,
       privateKey,
-      authorization: loadLiveAuthorization(authorizationPath),
-      attempt: Number(argument("--attempt") ?? "1"),
+      authorization,
+      attempt,
     });
     process.stdout.write(
       `${JSON.stringify(orchestrator.nextAction(), null, 2)}\n`,
