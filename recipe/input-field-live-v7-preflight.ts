@@ -2,10 +2,7 @@ import { createHash } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 
-import {
-  INPUT_LIVE_V7_AUTHORIZATION_PATH,
-  INPUT_LIVE_V7_INDEX_PATH,
-} from "./build-input-field-live-proof-v7.js";
+import { INPUT_LIVE_V7_INDEX_PATH } from "./build-input-field-live-proof-v7.js";
 import {
   INPUT_LIVE_V7_DYNAMIC_TOOL,
   INPUT_LIVE_V7_TARGET,
@@ -13,6 +10,7 @@ import {
 import {
   validateInputLiveV7AntecedentIndex,
   verifyInputLiveV7Authorization,
+  INPUT_LIVE_V7_AUTHORIZATION_V2_PATH,
   type InputLiveV7AntecedentIndex,
   type InputLiveV7AuthorizationProof,
 } from "./input-field-live-v7-authorization.js";
@@ -24,7 +22,7 @@ export const INPUT_LIVE_V7_SECURITY_ATTESTATION_DEFAULT_PATH =
   "private/input-live-v7-security-attestation.json";
 
 export interface InputLiveV7SecurityAttestation {
-  artifactVersion: "input-live-v7-operator-security-attestation-v1";
+  artifactVersion: "input-live-v7-operator-security-attestation-v2";
   status: "complete";
   createdAt: string;
   rotation: {
@@ -32,6 +30,9 @@ export interface InputLiveV7SecurityAttestation {
     completedByUserAssertion: true;
     credentialType: "Figma personal access token";
     exposedCredentialRevokedOrReplaced: true;
+    replacementPatActiveForProject: true;
+    oldTokenRevoked: false;
+    ownerRiskAcceptance: true;
     tokenValueStored: false;
   };
   mcpRestart: {
@@ -46,10 +47,13 @@ export interface InputLiveV7SecurityAttestation {
   scratchReadOnlyProbe: {
     completedAt: string;
     completedAfterMcpRestart: true;
+    sessionIdentity: string;
     target: typeof INPUT_LIVE_V7_TARGET;
     readOnly: true;
     probe: "exact file key, file name, and editor type";
     passed: true;
+    bridgeProbePassed: true;
+    restProbePassed: true;
     figmaWrites: 0;
     figmaCaptures: 0;
   };
@@ -59,6 +63,13 @@ export interface InputLiveV7SecurityAttestation {
     scope: "tracked and untracked repository files";
     matches: 0;
     zero: true;
+  };
+  binding: {
+    authorizationPath: typeof INPUT_LIVE_V7_AUTHORIZATION_V2_PATH;
+    authorizationSha256: string;
+    authorizationCommit: string;
+    codeCommit: string;
+    signingPublicKeySha256: string;
   };
   tokenValuesStored: false;
   attestationSha256: string;
@@ -134,7 +145,7 @@ export function validateInputLiveV7SecurityAttestation(
   const createdAt = time(artifact.createdAt);
   if (
     artifact.artifactVersion !==
-      "input-live-v7-operator-security-attestation-v1" ||
+      "input-live-v7-operator-security-attestation-v2" ||
     artifact.status !== "complete"
   )
     failures.push("missing completed v7 security attestation");
@@ -143,6 +154,9 @@ export function validateInputLiveV7SecurityAttestation(
     artifact.rotation?.completedByUserAssertion !== true ||
     artifact.rotation?.credentialType !== "Figma personal access token" ||
     artifact.rotation?.exposedCredentialRevokedOrReplaced !== true ||
+    artifact.rotation?.replacementPatActiveForProject !== true ||
+    artifact.rotation?.oldTokenRevoked !== false ||
+    artifact.rotation?.ownerRiskAcceptance !== true ||
     artifact.rotation?.tokenValueStored !== false
   )
     failures.push("Figma PAT rotation/replacement assertion missing");
@@ -164,11 +178,15 @@ export function validateInputLiveV7SecurityAttestation(
     !Number.isFinite(probeAt) ||
     probeAt < restartAt ||
     artifact.scratchReadOnlyProbe?.completedAfterMcpRestart !== true ||
+    artifact.scratchReadOnlyProbe?.sessionIdentity !==
+      artifact.mcpRestart?.sessionIdentity ||
     !equalJson(artifact.scratchReadOnlyProbe?.target, INPUT_LIVE_V7_TARGET) ||
     artifact.scratchReadOnlyProbe?.readOnly !== true ||
     artifact.scratchReadOnlyProbe?.probe !==
       "exact file key, file name, and editor type" ||
     artifact.scratchReadOnlyProbe?.passed !== true ||
+    artifact.scratchReadOnlyProbe?.bridgeProbePassed !== true ||
+    artifact.scratchReadOnlyProbe?.restProbePassed !== true ||
     artifact.scratchReadOnlyProbe?.figmaWrites !== 0 ||
     artifact.scratchReadOnlyProbe?.figmaCaptures !== 0
   )
@@ -186,6 +204,17 @@ export function validateInputLiveV7SecurityAttestation(
   )
     failures.push(
       "current repository secret scan is missing, stale, or nonzero",
+    );
+  if (
+    artifact.binding?.authorizationPath !==
+      INPUT_LIVE_V7_AUTHORIZATION_V2_PATH ||
+    artifact.binding?.authorizationSha256 !== proof.authorizationSha256 ||
+    artifact.binding?.authorizationCommit !== proof.authorizationCommit ||
+    artifact.binding?.codeCommit !== proof.codeCommit ||
+    artifact.binding?.signingPublicKeySha256 !== proof.signingPublicKeySha256
+  )
+    failures.push(
+      "security attestation is stale for the replacement authorization or code commit",
     );
   if (
     !Number.isFinite(createdAt) ||
@@ -225,8 +254,10 @@ export function validateInputLiveV7ControlFlowSource(source: string): string[] {
     );
   if (!source.includes("--security-attestation"))
     failures.push("authorized runner omits required security attestation");
-  if (!source.includes("--private-key"))
-    failures.push("authorized runner omits external private signing key");
+  if (!source.includes("INPUT_LIVE_V7_OPERATOR_PRIVATE_KEY_ENV"))
+    failures.push(
+      "authorized runner omits explicit external private-key environment variable",
+    );
   return failures;
 }
 
@@ -274,8 +305,8 @@ export function runInputLiveV7Preflight(
         `v7 pinned antecedent working bytes drift: ${relativePath}`,
       );
   }
-  if (!existsSync(path.join(root, INPUT_LIVE_V7_AUTHORIZATION_PATH)))
-    failures.push("v7 authorization artifact is absent");
+  if (!existsSync(path.join(root, INPUT_LIVE_V7_AUTHORIZATION_V2_PATH)))
+    failures.push("v7 replacement authorization artifact is absent");
   const securityPath = path.resolve(root, attestationPath);
   if (!existsSync(securityPath))
     failures.push(

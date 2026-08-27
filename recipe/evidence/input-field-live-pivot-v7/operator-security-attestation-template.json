@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "input-live-v7-operator-security-attestation-v1",
+  "artifactVersion": "input-live-v7-operator-security-attestation-v2",
   "status": "template only; complete only after every prerequisite",
   "createdAt": null,
   "rotation": {
@@ -7,6 +7,9 @@
     "completedByUserAssertion": false,
     "credentialType": "Figma personal access token",
     "exposedCredentialRevokedOrReplaced": false,
+    "replacementPatActiveForProject": false,
+    "oldTokenRevoked": false,
+    "ownerRiskAcceptance": false,
     "tokenValueStored": false
   },
   "mcpRestart": {
@@ -21,6 +24,7 @@
   "scratchReadOnlyProbe": {
     "completedAt": null,
     "completedAfterMcpRestart": false,
+    "sessionIdentity": null,
     "target": {
       "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
       "fileName": "Scratch Project",
@@ -29,6 +33,8 @@
     "readOnly": true,
     "probe": "exact file key, file name, and editor type",
     "passed": false,
+    "bridgeProbePassed": false,
+    "restProbePassed": false,
     "figmaWrites": 0,
     "figmaCaptures": 0
   },
@@ -38,6 +44,13 @@
     "scope": "tracked and untracked repository files",
     "matches": null,
     "zero": false
+  },
+  "binding": {
+    "authorizationPath": "recipe/evidence/input-field-live-pivot-v7/capture-authorization-v2.json",
+    "authorizationSha256": null,
+    "authorizationCommit": null,
+    "codeCommit": null,
+    "signingPublicKeySha256": null
   },
   "tokenValuesStored": false,
   "attestationSha256": null

@@ -14,7 +14,17 @@ import {
 } from "./build-input-field-live-proof-v7.js";
 import { canonicalJson } from "./normalize.js";
 
-export type InputLiveV7HistoryExpectation = "pending" | "authorized";
+export const INPUT_LIVE_V7_FIRST_AUTHORIZATION_PATH =
+  INPUT_LIVE_V7_AUTHORIZATION_PATH;
+export const INPUT_LIVE_V7_AUTHORIZATION_V2_PATH =
+  "recipe/evidence/input-field-live-pivot-v7/capture-authorization-v2.json";
+export const INPUT_LIVE_V7_OPERATOR_PRIVATE_KEY_ENV =
+  "INPUT_LIVE_V7_OPERATOR_PRIVATE_KEY_PATH";
+export const INPUT_LIVE_V7_FIRST_AUTHORIZATION_SHA256 =
+  "43277ff2f422c9117e2f4f1b5c0fea241cc967977666529d91e0f14fd7489fda";
+
+export type InputLiveV7HistoryExpectation =
+  "pending" | "authorized" | "pending-v2" | "authorized-v2";
 
 export interface InputLiveV7AuthorizationArtifact {
   artifactVersion: "input-live-v7-capture-authorization-v1";
@@ -81,6 +91,30 @@ export interface InputLiveV7AuthorizationArtifact {
   humanSignoff: { mandatory: true; status: "pending" };
 }
 
+export interface InputLiveV7ReplacementAuthorizationArtifact extends Omit<
+  InputLiveV7AuthorizationArtifact,
+  "artifactVersion" | "status"
+> {
+  artifactVersion: "input-live-v7-capture-authorization-v2";
+  status: "replacement authorization declared; runtime security prerequisites still mandatory";
+  supersession: {
+    supersedesPath: typeof INPUT_LIVE_V7_FIRST_AUTHORIZATION_PATH;
+    supersedesSha256: typeof INPUT_LIVE_V7_FIRST_AUTHORIZATION_SHA256;
+    reason: "first authorization signer private key unavailable";
+    firstAuthorizationBytesPreserved: true;
+    firstAuthorizationUsableForExecution: false;
+    criteriaChanged: false;
+  };
+  runtimeSigning: {
+    privateKeyPathEnvironmentVariable: typeof INPUT_LIVE_V7_OPERATOR_PRIVATE_KEY_ENV;
+    explicitOwnerOnlyPathRequired: true;
+    pkcs8PemRequired: true;
+    mode0600Required: true;
+    trackedKeyRefused: true;
+    publicPrivateIdentityMatchRequired: true;
+  };
+}
+
 export interface InputLiveV7AntecedentIndex {
   artifactVersion: "input-live-v7-antecedent-index-v1";
   status: string;
@@ -104,8 +138,17 @@ export interface InputLiveV7HistoryState {
   authorizationCommit?: string;
   authorizationPresentAtCodeCommit: boolean;
   authorizationBytesMatchFirstAddition: boolean;
+  firstAuthorizationSha256?: string;
   authorizationStrictlyDescendsFromAntecedent: boolean;
   authorizationIsAncestorOfCode: boolean;
+  replacementAuthorization?: InputLiveV7ReplacementAuthorizationArtifact;
+  replacementAuthorizationAddingCommits?: string[];
+  replacementAuthorizationCommit?: string;
+  replacementAuthorizationPresentAtCodeCommit?: boolean;
+  replacementAuthorizationBytesMatchFirstAddition?: boolean;
+  replacementAuthorizationStrictlyDescendsFromAntecedent?: boolean;
+  replacementAuthorizationDescendsFromFirstAuthorization?: boolean;
+  replacementAuthorizationIsAncestorOfCode?: boolean;
   codeCommit: string;
   upstreamCommit?: string;
   clean: boolean;
@@ -118,7 +161,7 @@ export interface InputLiveV7AuthorizationProof extends InputLiveV7TransactionAut
   antecedentHashSetSha256: string;
   target: typeof INPUT_LIVE_V7_TARGET;
   expectedDynamicTool: typeof INPUT_LIVE_V7_DYNAMIC_TOOL;
-  authorizationPath: typeof INPUT_LIVE_V7_AUTHORIZATION_PATH;
+  authorizationPath: typeof INPUT_LIVE_V7_AUTHORIZATION_V2_PATH;
 }
 
 const SHA40 = /^[a-f0-9]{40}$/;
@@ -196,12 +239,15 @@ const isAncestor = (
 
 const lifecyclePath = (artifactPath: string): boolean =>
   artifactPath === INPUT_LIVE_V7_AUTHORIZATION_PATH ||
+  artifactPath === INPUT_LIVE_V7_AUTHORIZATION_V2_PATH ||
   artifactPath.endsWith("/authorization-template.json") ||
   artifactPath.endsWith("/operator-security-attestation-template.json") ||
+  artifactPath.includes("create-input-field-live-v7-security-attestation") ||
   artifactPath.includes("input-field-live-v7-authorization") ||
   artifactPath.includes("input-field-live-v7-preflight") ||
   artifactPath.includes("input-field-live-v7-authorized") ||
   artifactPath.includes("input-field-live-pivot-v7-status") ||
+  artifactPath === "package.json" ||
   artifactPath === "recipe/pivot-status.ts" ||
   artifactPath === "recipe/pivot-status.test.ts" ||
   artifactPath === "docs/32-recipe-ir-pivot.md" ||
@@ -407,6 +453,36 @@ export function buildInputLiveV7AuthorizationArtifact(options: {
   };
 }
 
+export function buildInputLiveV7ReplacementAuthorizationArtifact(options: {
+  antecedentCommit: string;
+  antecedentIndexBytes: Uint8Array;
+  signingPublicKey: KeyObject | string | Buffer;
+}): InputLiveV7ReplacementAuthorizationArtifact {
+  const first = buildInputLiveV7AuthorizationArtifact(options);
+  return {
+    ...first,
+    artifactVersion: "input-live-v7-capture-authorization-v2",
+    status:
+      "replacement authorization declared; runtime security prerequisites still mandatory",
+    supersession: {
+      supersedesPath: INPUT_LIVE_V7_FIRST_AUTHORIZATION_PATH,
+      supersedesSha256: INPUT_LIVE_V7_FIRST_AUTHORIZATION_SHA256,
+      reason: "first authorization signer private key unavailable",
+      firstAuthorizationBytesPreserved: true,
+      firstAuthorizationUsableForExecution: false,
+      criteriaChanged: false,
+    },
+    runtimeSigning: {
+      privateKeyPathEnvironmentVariable: INPUT_LIVE_V7_OPERATOR_PRIVATE_KEY_ENV,
+      explicitOwnerOnlyPathRequired: true,
+      pkcs8PemRequired: true,
+      mode0600Required: true,
+      trackedKeyRefused: true,
+      publicPrivateIdentityMatchRequired: true,
+    },
+  };
+}
+
 export function validateInputLiveV7AuthorizationArtifact(
   artifact: InputLiveV7AuthorizationArtifact | undefined,
   index: InputLiveV7AntecedentIndex | undefined,
@@ -514,6 +590,66 @@ export function validateInputLiveV7AuthorizationArtifact(
   return failures;
 }
 
+export function validateInputLiveV7ReplacementAuthorizationArtifact(
+  artifact: InputLiveV7ReplacementAuthorizationArtifact | undefined,
+  index: InputLiveV7AntecedentIndex | undefined,
+  indexSha256: string,
+): string[] {
+  if (!artifact)
+    return ["v7 replacement authorization declaration missing or malformed"];
+  const {
+    supersession,
+    runtimeSigning,
+    artifactVersion: _artifactVersion,
+    status: _status,
+    ...shared
+  } = artifact;
+  const failures = validateInputLiveV7AuthorizationArtifact(
+    {
+      ...shared,
+      artifactVersion: "input-live-v7-capture-authorization-v1",
+      status:
+        "authorization declared; runtime security prerequisites still mandatory",
+    },
+    index,
+    indexSha256,
+  ).map((failure) =>
+    failure.replace("v7 authorization", "v7 replacement authorization"),
+  );
+  if (
+    artifact.artifactVersion !== "input-live-v7-capture-authorization-v2" ||
+    artifact.status !==
+      "replacement authorization declared; runtime security prerequisites still mandatory"
+  )
+    failures.push(
+      "v7 replacement authorization declaration missing or malformed",
+    );
+  if (
+    supersession?.supersedesPath !== INPUT_LIVE_V7_FIRST_AUTHORIZATION_PATH ||
+    supersession?.supersedesSha256 !==
+      INPUT_LIVE_V7_FIRST_AUTHORIZATION_SHA256 ||
+    supersession?.reason !==
+      "first authorization signer private key unavailable" ||
+    supersession?.firstAuthorizationBytesPreserved !== true ||
+    supersession?.firstAuthorizationUsableForExecution !== false ||
+    supersession?.criteriaChanged !== false
+  )
+    failures.push(
+      "v7 replacement must supersede the unusable first signer without changing criteria",
+    );
+  if (
+    runtimeSigning?.privateKeyPathEnvironmentVariable !==
+      INPUT_LIVE_V7_OPERATOR_PRIVATE_KEY_ENV ||
+    runtimeSigning?.explicitOwnerOnlyPathRequired !== true ||
+    runtimeSigning?.pkcs8PemRequired !== true ||
+    runtimeSigning?.mode0600Required !== true ||
+    runtimeSigning?.trackedKeyRefused !== true ||
+    runtimeSigning?.publicPrivateIdentityMatchRequired !== true
+  )
+    failures.push("v7 replacement runtime signing policy weakened");
+  return failures;
+}
+
 export function validateInputLiveV7History(
   state: InputLiveV7HistoryState,
   expected: InputLiveV7HistoryExpectation,
@@ -536,6 +672,119 @@ export function validateInputLiveV7History(
     failures.push("v7 antecedent commit artifacts do not match index");
   if (!state.workingAntecedentArtifactsMatchIndex)
     failures.push("v7 antecedent working bytes drifted");
+
+  if (expected === "pending-v2" || expected === "authorized-v2") {
+    failures.push(
+      ...validateInputLiveV7AuthorizationArtifact(
+        state.authorization,
+        state.index,
+        state.indexSha256,
+      ),
+    );
+    if (
+      state.authorizationAddingCommits.length !== 1 ||
+      state.authorizationCommit !== state.authorizationAddingCommits[0] ||
+      !state.authorizationPresentAtCodeCommit ||
+      !state.authorizationBytesMatchFirstAddition ||
+      state.firstAuthorizationSha256 !==
+        INPUT_LIVE_V7_FIRST_AUTHORIZATION_SHA256 ||
+      !state.authorizationStrictlyDescendsFromAntecedent ||
+      !state.authorizationIsAncestorOfCode
+    )
+      failures.push(
+        "v7 first authorization history changed or is not preserved",
+      );
+    if (
+      state.replacementAuthorization &&
+      state.authorization?.signingPublicKey.spkiSha256 ===
+        state.replacementAuthorization.signingPublicKey.spkiSha256
+    )
+      failures.push("v7 replacement reused the unavailable first signer");
+
+    const replacementExists =
+      (state.replacementAuthorizationAddingCommits?.length ?? 0) > 0 ||
+      state.replacementAuthorizationCommit !== undefined ||
+      state.replacementAuthorizationPresentAtCodeCommit ||
+      state.replacementAuthorization !== undefined;
+    if (expected === "pending-v2") {
+      const committedReplacementExists =
+        (state.replacementAuthorizationAddingCommits?.length ?? 0) > 0 ||
+        state.replacementAuthorizationCommit !== undefined ||
+        state.replacementAuthorizationPresentAtCodeCommit;
+      if (committedReplacementExists)
+        failures.push(
+          "stale history mode: expected pending-v2 but committed replacement authorization exists",
+        );
+      if (!state.clean && !state.pendingChangesOnlyAuthorizationLifecycle)
+        failures.push(
+          "pending-v2 history contains non-lifecycle worktree changes",
+        );
+      if (state.replacementAuthorization !== undefined) {
+        failures.push(
+          ...validateInputLiveV7ReplacementAuthorizationArtifact(
+            state.replacementAuthorization,
+            state.index,
+            state.indexSha256,
+          ),
+        );
+        if (
+          state.replacementAuthorization.antecedent.commit !==
+          state.antecedentCommit
+        )
+          failures.push(
+            "pending v7 replacement authorization pins wrong antecedent commit",
+          );
+      }
+      return failures;
+    }
+
+    if (!state.clean) failures.push("dirty worktree");
+    if (!replacementExists) {
+      failures.push(
+        "stale history mode: expected authorized-v2 but replacement authorization is pending",
+      );
+      return failures;
+    }
+    if (
+      state.replacementAuthorization !== undefined &&
+      (state.replacementAuthorizationAddingCommits?.length ?? 0) === 0
+    ) {
+      failures.push("pending-uncommitted-replacement-authorization");
+      return failures;
+    }
+    failures.push(
+      ...validateInputLiveV7ReplacementAuthorizationArtifact(
+        state.replacementAuthorization,
+        state.index,
+        state.indexSha256,
+      ),
+    );
+    if (
+      state.replacementAuthorization?.antecedent.commit !==
+        state.antecedentCommit ||
+      state.replacementAuthorizationAddingCommits?.length !== 1 ||
+      state.replacementAuthorizationCommit !==
+        state.replacementAuthorizationAddingCommits?.[0]
+    )
+      failures.push("v7 replacement authorization first-add lineage mismatch");
+    if (!state.replacementAuthorizationPresentAtCodeCommit)
+      failures.push("v7 replacement authorization missing from code commit");
+    if (!state.replacementAuthorizationBytesMatchFirstAddition)
+      failures.push(
+        "v7 replacement authorization bytes changed after first addition",
+      );
+    if (!state.replacementAuthorizationStrictlyDescendsFromAntecedent)
+      failures.push(
+        "v7 replacement authorization does not strictly descend from antecedent",
+      );
+    if (!state.replacementAuthorizationDescendsFromFirstAuthorization)
+      failures.push(
+        "v7 replacement authorization does not descend from first authorization",
+      );
+    if (!state.replacementAuthorizationIsAncestorOfCode)
+      failures.push("code commit predates v7 replacement authorization");
+    return failures;
+  }
 
   const authorizationExists =
     state.authorizationAddingCommits.length > 0 ||
@@ -662,6 +911,27 @@ export function readInputLiveV7HistoryState(
         readFileSync(authorizationFile, "utf8"),
       ) as InputLiveV7AuthorizationArtifact)
     : undefined;
+  const replacementAuthorizationAddingCommits = addingCommits(
+    repositoryRoot,
+    codeCommit,
+    INPUT_LIVE_V7_AUTHORIZATION_V2_PATH,
+  );
+  const replacementAuthorizationCommit =
+    replacementAuthorizationAddingCommits[0];
+  const replacementAuthorizationAtCode = objectExists(
+    repositoryRoot,
+    codeCommit,
+    INPUT_LIVE_V7_AUTHORIZATION_V2_PATH,
+  );
+  const replacementAuthorizationFile = path.join(
+    repositoryRoot,
+    INPUT_LIVE_V7_AUTHORIZATION_V2_PATH,
+  );
+  const replacementAuthorization = existsSync(replacementAuthorizationFile)
+    ? (JSON.parse(
+        readFileSync(replacementAuthorizationFile, "utf8"),
+      ) as InputLiveV7ReplacementAuthorizationArtifact)
+    : undefined;
   const firstIndexBytes = antecedentCommit
     ? git(repositoryRoot, [
         "show",
@@ -678,6 +948,18 @@ export function readInputLiveV7HistoryState(
     ? git(repositoryRoot, [
         "show",
         `${codeCommit}:${INPUT_LIVE_V7_AUTHORIZATION_PATH}`,
+      ])
+    : Buffer.alloc(0);
+  const firstReplacementAuthorizationBytes = replacementAuthorizationCommit
+    ? git(repositoryRoot, [
+        "show",
+        `${replacementAuthorizationCommit}:${INPUT_LIVE_V7_AUTHORIZATION_V2_PATH}`,
+      ])
+    : Buffer.alloc(0);
+  const currentReplacementAuthorizationBytes = replacementAuthorizationAtCode
+    ? git(repositoryRoot, [
+        "show",
+        `${codeCommit}:${INPUT_LIVE_V7_AUTHORIZATION_V2_PATH}`,
       ])
     : Buffer.alloc(0);
   const statusEntries = git(repositoryRoot, [
@@ -721,6 +1003,10 @@ export function readInputLiveV7HistoryState(
       firstAuthorizationBytes.byteLength > 0 &&
       firstAuthorizationBytes.equals(currentAuthorizationBytes) &&
       firstAuthorizationBytes.equals(readFileSync(authorizationFile)),
+    firstAuthorizationSha256:
+      firstAuthorizationBytes.byteLength > 0
+        ? sha256(firstAuthorizationBytes)
+        : undefined,
     authorizationStrictlyDescendsFromAntecedent:
       authorizationCommit !== undefined &&
       authorizationCommit !== antecedentCommit &&
@@ -728,6 +1014,38 @@ export function readInputLiveV7HistoryState(
     authorizationIsAncestorOfCode: isAncestor(
       repositoryRoot,
       authorizationCommit,
+      codeCommit,
+    ),
+    replacementAuthorization,
+    replacementAuthorizationAddingCommits,
+    replacementAuthorizationCommit,
+    replacementAuthorizationPresentAtCodeCommit: replacementAuthorizationAtCode,
+    replacementAuthorizationBytesMatchFirstAddition:
+      firstReplacementAuthorizationBytes.byteLength > 0 &&
+      firstReplacementAuthorizationBytes.equals(
+        currentReplacementAuthorizationBytes,
+      ) &&
+      firstReplacementAuthorizationBytes.equals(
+        readFileSync(replacementAuthorizationFile),
+      ),
+    replacementAuthorizationStrictlyDescendsFromAntecedent:
+      replacementAuthorizationCommit !== undefined &&
+      replacementAuthorizationCommit !== antecedentCommit &&
+      isAncestor(
+        repositoryRoot,
+        antecedentCommit,
+        replacementAuthorizationCommit,
+      ),
+    replacementAuthorizationDescendsFromFirstAuthorization:
+      replacementAuthorizationCommit !== undefined &&
+      isAncestor(
+        repositoryRoot,
+        authorizationCommit,
+        replacementAuthorizationCommit,
+      ),
+    replacementAuthorizationIsAncestorOfCode: isAncestor(
+      repositoryRoot,
+      replacementAuthorizationCommit,
       codeCommit,
     ),
     codeCommit,
@@ -754,8 +1072,8 @@ export function verifyInputLiveV7History(
 export function verifyInputLiveV7Authorization(
   root = process.cwd(),
 ): InputLiveV7AuthorizationProof {
-  const state = verifyInputLiveV7History("authorized", root);
-  const artifact = state.authorization!;
+  const state = verifyInputLiveV7History("authorized-v2", root);
+  const artifact = state.replacementAuthorization!;
   const repositoryRoot = gitText(root, ["rev-parse", "--show-toplevel"]);
   const currentTreeBytes = git(repositoryRoot, [
     "cat-file",
@@ -766,11 +1084,13 @@ export function verifyInputLiveV7Authorization(
     mode: "live",
     protocolCommit: state.antecedentCommit!,
     runnerCommit: state.antecedentCommit!,
-    authorizationCommit: state.authorizationCommit!,
+    authorizationCommit: state.replacementAuthorizationCommit!,
     codeCommit: state.codeCommit,
     upstreamCommit: state.upstreamCommit!,
     authorizationSha256: sha256(
-      readFileSync(path.join(repositoryRoot, INPUT_LIVE_V7_AUTHORIZATION_PATH)),
+      readFileSync(
+        path.join(repositoryRoot, INPUT_LIVE_V7_AUTHORIZATION_V2_PATH),
+      ),
     ),
     protocolSha256:
       state.index!.artifacts[
@@ -784,24 +1104,24 @@ export function verifyInputLiveV7Authorization(
     antecedentHashSetSha256: state.index!.hashSetSha256,
     target: INPUT_LIVE_V7_TARGET,
     expectedDynamicTool: INPUT_LIVE_V7_DYNAMIC_TOOL,
-    authorizationPath: INPUT_LIVE_V7_AUTHORIZATION_PATH,
+    authorizationPath: INPUT_LIVE_V7_AUTHORIZATION_V2_PATH,
   };
 }
 
 const expectedMode = (): InputLiveV7HistoryExpectation => {
-  const pending = process.argv.includes("--expect-pending");
-  const authorized = process.argv.includes("--expect-authorized");
+  const pending = process.argv.includes("--expect-pending-v2");
+  const authorized = process.argv.includes("--expect-authorized-v2");
   if (pending === authorized)
     throw new Error(
-      "Choose exactly one v7 history mode: --expect-pending or --expect-authorized",
+      "Choose exactly one v7 history mode: --expect-pending-v2 or --expect-authorized-v2",
     );
-  return pending ? "pending" : "authorized";
+  return pending ? "pending-v2" : "authorized-v2";
 };
 
 if (import.meta.url === `file://${path.resolve(process.argv[1] ?? "")}`) {
   const expected = expectedMode();
   const state = verifyInputLiveV7History(expected);
   process.stdout.write(
-    `Input live v7 history ${expected}: antecedent=${state.antecedentCommit} authorization=${state.authorizationCommit ?? (state.authorization ? "pending-uncommitted" : "pending")} code=${state.codeCommit}\n`,
+    `Input live v7 history ${expected}: antecedent=${state.antecedentCommit} firstAuthorization=${state.authorizationCommit ?? "missing"} replacementAuthorization=${state.replacementAuthorizationCommit ?? (state.replacementAuthorization ? "pending-uncommitted" : "pending")} code=${state.codeCommit}\n`,
   );
 }

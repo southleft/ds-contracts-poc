@@ -108,6 +108,7 @@
     "recipe:input-field:live:v7:authorization:self-test": "node --import tsx --test recipe/input-field-live-v7-authorization.test.ts",
     "recipe:input-field:live:v7:history:verify": "tsx recipe/input-field-live-v7-authorization.ts",
     "recipe:input-field:live:v7:preflight": "tsx recipe/input-field-live-v7-preflight.ts",
+    "recipe:input-field:live:v7:attestation:create": "tsx recipe/create-input-field-live-v7-security-attestation.ts",
     "recipe:input-field:live:v7:smoke": "node --import tsx --test recipe/input-field-live-v7-broker.test.ts",
     "recipe:input-field:live:v7:lifecycle:simulate": "tsx recipe/input-field-live-v7-lifecycle-simulation.ts",
     "recipe:input-field:live:v7:check": "npm run recipe:input-field:live:v7:generated:check && npm run recipe:input-field:live:v7:authorization-template:check && npm run recipe:input-field:live:v7:authorization:self-test && npm run recipe:input-field:live:v7:smoke && npm run recipe:input-field:live:v7:lifecycle:simulate && npm run recipe:pivot-status:check",

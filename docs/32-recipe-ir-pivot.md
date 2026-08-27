@@ -91,32 +91,40 @@
 > `npm run recipe:input-field:live:v7:check` is phase-stable. Unit tests use only
 > pending/changed/committed fixtures. The separate integration command requires
 > an explicit phase: run
-> `npm run recipe:input-field:live:v7:history:verify -- --expect-pending` after
-> the antecedent commit is published, then
-> `npm run recipe:input-field:live:v7:history:verify -- --expect-authorized`
-> after a later authorization commit is published. The offline lifecycle
+> `npm run recipe:input-field:live:v7:history:verify -- --expect-pending-v2`
+> while the replacement is uncommitted, then
+> `npm run recipe:input-field:live:v7:history:verify -- --expect-authorized-v2`
+> after its later commit is published. The offline lifecycle
 > simulation creates synthetic Git antecedent and authorization commits and
 > proves that the same generated antecedent remains byte-green in both phases.
 >
-> The separate v7 authorization is now prepared against antecedent
-> `117f1cddce797393b1b705da62323615e584d54b`. Its artifact SHA-256 is
-> `43277ff2f422c9117e2f4f1b5c0fea241cc967977666529d91e0f14fd7489fda`
-> and its new Ed25519 SPKI identity SHA-256 is
-> `7a0fe64eced707be7797f7fefe030fcca73c4ae0259d4786985b24c73457780f`.
-> The precommit verifier reports `pending-uncommitted-authorization`; after the
-> parent commits and publishes these lifecycle files, verify with
-> `--expect-authorized`. Commit state is derived from Git history rather than
+> The first v7 authorization remains byte-identical at SHA-256
+> `43277ff2f422c9117e2f4f1b5c0fea241cc967977666529d91e0f14fd7489fda`,
+> but is superseded and unusable because its signer private key was not
+> retained. Criteria did not change. Replacement
+> `capture-authorization-v2.json` pins the same antecedent
+> `117f1cddce797393b1b705da62323615e584d54b`; its artifact SHA-256 is
+> `de501693a52b0d050fc1b7048a355ca9195c3ca2ab982a28fd1b9509c397e76d`
+> and its Ed25519 SPKI identity SHA-256 is
+> `8eb7c6f6fcd2bd497997028f8e026abc30d8af8507bc2b903347da892403dbcf`.
+> Runtime reads the owner-only PKCS8 key only from
+> `INPUT_LIVE_V7_OPERATOR_PRIVATE_KEY_PATH`. The precommit verifier reports
+> `pending-v2`; after the parent commits and publishes these lifecycle files,
+> verify with `--expect-authorized-v2`. Commit state is derived from Git history rather than
 > embedded in the authorization or status artifacts.
 >
-> Live use remains security-blocked until the exposed Figma PAT is revoked or
-> replaced, every MCP process is restarted after rotation, the
-> environment file is owner-only mode 0600, the tracked-and-untracked repository
-> secret scan is zero, and an exact read-only Scratch file-key/name/editor probe
-> passes. Runtime attestation must be created only after those steps and may
-> contain no token value. The safe template is
+> Read-only checks confirm the replacement PAT can read the exact Scratch
+> project, the owner accepts the residual risk with `oldTokenRevoked=false`,
+> both environment files are mode 0600, MCP reconnected after their update, and
+> exact Scratch bridge and REST probes pass. Runtime attestation must still be
+> created only after the replacement authorization/code commit is published and
+> a fresh zero-result secret scan is bound to that commit; it may contain no
+> token value. The safe template is
 > `recipe/evidence/input-field-live-pivot-v7/operator-security-attestation-template.json`;
 > the completed untracked attestation belongs at
-> `private/input-live-v7-security-attestation.json`. V7 has executed zero
+> `private/input-live-v7-security-attestation.json`. Create it post-commit with
+> `npm run recipe:input-field:live:v7:attestation:create -- --facts private/input-live-v7-post-restart-security-facts.json`.
+> V7 has executed zero
 > attempts; Input remains false.**
 >
 > Historical implementation record: **Input/Field has an offline
@@ -1564,13 +1572,13 @@ references and re-derives a legacy comparator over the frozen 24-cell matrix.
 
 #### Pivot progress
 
-| archetype   | progress                                                                                                             | next evidence boundary                                                                              |
-| ----------- | -------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| Button      | **technical mint retained; overall false/pending**                                                                   | attributable human signoff plus fresh scene-derived inversion/accounting                            |
-| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted and cleaned; v7 authorized but security-blocked; false** | rotate the exposed PAT, restart MCP, and complete the exact read-only probe before any live attempt |
-| Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                           | matched 24-cell source/legacy benchmark, then independent human grade                               |
-| Data Table  | not claimed                                                                                                          | row/column templates and matched matrix                                                             |
-| Calendar    | not claimed                                                                                                          | new archetype plus absolute acceptance                                                              |
+| archetype   | progress                                                                                                  | next evidence boundary                                                                        |
+| ----------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| Button      | **technical mint retained; overall false/pending**                                                        | attributable human signoff plus fresh scene-derived inversion/accounting                      |
+| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted and cleaned; v7 replacement prepared; false** | commit/publish v2, create its post-commit security attestation, preflight, then human signoff |
+| Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                | matched 24-cell source/legacy benchmark, then independent human grade                         |
+| Data Table  | not claimed                                                                                               | row/column templates and matched matrix                                                       |
+| Calendar    | not claimed                                                                                               | new archetype plus absolute acceptance                                                        |
 
 ### First page-scoped live writer run — blocked, 2026-08-26
 
