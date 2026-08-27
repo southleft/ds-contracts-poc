@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempt 1 failed closed; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -168,8 +168,12 @@ const V8_ATTEMPT_1_PATH =
   "recipe/evidence/input-field-live-pivot-v8-attempt-1.json";
 const V8_ATTEMPT_1_SHA256 =
   "4a8275101a1f1cd441d11c0969e9d2798ad2a496463e291d836470d9813f85b9";
+const V8_ATTEMPT_2_PATH =
+  "recipe/evidence/input-field-live-pivot-v8-attempt-2.json";
+const V8_ATTEMPT_2_SHA256 =
+  "5da53aefb6a36979a6e3f84ec05066472e41a43f8c40121ccf9c046427c85456";
 const V8_STATUS =
-  "attempt 1 failed closed; host IR refused per-side stroke weight FLOAT; cleanup complete; attempt 2 not yet authorized to start";
+  "attempt 2 failed closed; host IR refused VARIABLE_ALIAS and bound-variable-only fills; cleanup complete; do not restart v8 as-is";
 const V8_BASE_COMMIT = "5adac899b1dcde25c4c533d9686cfd665430f2f9";
 const V4_AUTHORIZATION_COMMIT = "bd343680b446a828190f176e525e5616752f9e5f";
 const V4_AUTHORIZATION_SHA256 =
@@ -570,15 +574,19 @@ export function validatePivotStatus(
       ?.cursorReadMustNotIngestSignedWriter !== true ||
     status.input?.liveV8?.security?.liveExecutionForbidden !== true ||
     status.input?.liveV8?.security?.tokenValuesForbidden !== true ||
-    status.input?.liveV8?.attemptsExecuted !== 1 ||
-    status.input?.liveV8?.nextAttempt !== 2 ||
+    status.input?.liveV8?.attemptsExecuted !== 2 ||
+    status.input?.liveV8?.nextAttempt !== 3 ||
     status.input?.liveV8?.maximumFutureAttempts !== 3 ||
     status.input?.liveV8?.liveExecutionOccurred !== true ||
-    status.input?.liveV8?.figmaWrites !== 2 ||
+    status.input?.liveV8?.figmaWrites !== 4 ||
     status.input?.liveV8?.figmaCaptures !== 0 ||
     status.input?.liveV8?.createdNodesThenRemoved !== 2317 ||
     status.input?.liveV8?.attempt1Path !== V8_ATTEMPT_1_PATH ||
     status.input?.liveV8?.attempt1Sha256 !== V8_ATTEMPT_1_SHA256 ||
+    status.input?.liveV8?.attempt2Path !== V8_ATTEMPT_2_PATH ||
+    status.input?.liveV8?.attempt2Sha256 !== V8_ATTEMPT_2_SHA256 ||
+    status.input?.liveV8
+      ?.restartAsV8Attempt3WithoutSceneReadbackTeachingForbidden !== true ||
     status.input?.liveV8?.humanSignoff !== "pending" ||
     status.input?.liveV8?.overallInputSuccess !== false
   )
@@ -984,16 +992,21 @@ export function verifyPivotStatus(): void {
     v8Status.authorization?.expectedHistoryModeAfterAuthorizationCommit !==
       "--expect-authorized" ||
     v8Status.authorization?.v7AuthorizationReusable !== false ||
-    v8Status.attemptsExecuted !== 1 ||
-    v8Status.nextAttempt !== 2 ||
+    v8Status.attemptsExecuted !== 2 ||
+    v8Status.nextAttempt !== 3 ||
     v8Status.liveExecutionOccurred !== true ||
-    v8Status.figmaWrites !== 2 ||
+    v8Status.figmaWrites !== 4 ||
     v8Status.figmaCaptures !== 0 ||
     v8Status.createdNodesThenRemoved !== 2317 ||
     v8Status.attempt1Path !== V8_ATTEMPT_1_PATH ||
     v8Status.attempt1Sha256 !== V8_ATTEMPT_1_SHA256 ||
+    v8Status.attempt2Path !== V8_ATTEMPT_2_PATH ||
+    v8Status.attempt2Sha256 !== V8_ATTEMPT_2_SHA256 ||
+    v8Status.restartAsV8Attempt3WithoutSceneReadbackTeachingForbidden !==
+      true ||
     v8Status.overallInputSuccess !== false ||
     sha256(readRepositoryEvidence(V8_ATTEMPT_1_PATH)) !== V8_ATTEMPT_1_SHA256 ||
+    sha256(readRepositoryEvidence(V8_ATTEMPT_2_PATH)) !== V8_ATTEMPT_2_SHA256 ||
     sha256(readRepositoryEvidence(V8_AUTHORIZATION_PATH)) !==
       V8_AUTHORIZATION_SHA256 ||
     v8Authorization.artifactVersion !==

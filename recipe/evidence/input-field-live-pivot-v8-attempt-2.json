@@ -1,0 +1,50 @@
+{
+  "artifactVersion": "input-live-v8-attempt-2-v1",
+  "status": "failed closed",
+  "authorizationCommit": "e163d85787c4449de269ca4314bda9c75a289395",
+  "codeCommit": "f5c91edd43afa63268ad2d1b0dcf24affc69b395",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 2317,
+    "pageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+    "sourceRoots": 2
+  },
+  "extract": {
+    "operatorSuccess": true,
+    "rawResponseBytes": 8364325,
+    "hostNormalizeAccount": false
+  },
+  "attempt1FailureCleared": {
+    "perSideStrokeWeightFloat": true
+  },
+  "observedFillKinds": {
+    "SOLID": 1770,
+    "VARIABLE_ALIAS": 1408,
+    "boundVariablesOnly": 1514
+  },
+  "failure": {
+    "phase": "host-normalize-account",
+    "locus": "recipe/scene-readback.ts:1001 IRNodeSchema PaintSchema",
+    "messages": [
+      "payload.fills.0.kind: Invalid discriminator value. Expected 'solid' | 'linear-gradient' | 'radial-gradient' | 'image'"
+    ],
+    "sceneReadbackInV8AntecedentHashSet": true
+  },
+  "cleanup": {
+    "accepted": true,
+    "scratchOwnedInputPagesRemaining": 0
+  },
+  "captures": 0,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false,
+  "v8AntecedentBytesUnchanged": true,
+  "v8AuthorizationBytesUnchanged": true,
+  "nextAttempt": 3,
+  "restartAsV8Attempt2Forbidden": true,
+  "restartAsV8Attempt3WithoutSceneReadbackTeachingForbidden": true
+}

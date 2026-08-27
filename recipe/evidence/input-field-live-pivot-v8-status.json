@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v8-status-v1",
-  "status": "attempt 1 failed closed; host IR refused per-side stroke weight FLOAT; cleanup complete; attempt 2 not yet authorized to start",
+  "status": "attempt 2 failed closed; host IR refused VARIABLE_ALIAS and bound-variable-only fills; cleanup complete; do not restart v8 as-is",
   "baseCommit": "5adac899b1dcde25c4c533d9686cfd665430f2f9",
   "antecedent": {
     "commit": "9e34ee653b07e705ef6309cc3d900add81fba47b",
@@ -57,15 +57,18 @@
     "exactScratchReadOnlyProbeRequired": true,
     "tokenValuesForbidden": true
   },
-  "attemptsExecuted": 1,
-  "nextAttempt": 2,
+  "attemptsExecuted": 2,
+  "nextAttempt": 3,
   "maximumFutureAttempts": 3,
   "liveExecutionOccurred": true,
-  "figmaWrites": 2,
+  "figmaWrites": 4,
   "figmaCaptures": 0,
   "createdNodesThenRemoved": 2317,
   "attempt1Path": "recipe/evidence/input-field-live-pivot-v8-attempt-1.json",
   "attempt1Sha256": "4a8275101a1f1cd441d11c0969e9d2798ad2a496463e291d836470d9813f85b9",
+  "attempt2Path": "recipe/evidence/input-field-live-pivot-v8-attempt-2.json",
+  "attempt2Sha256": "5da53aefb6a36979a6e3f84ec05066472e41a43f8c40121ccf9c046427c85456",
+  "restartAsV8Attempt3WithoutSceneReadbackTeachingForbidden": true,
   "humanSignoff": "pending",
   "overallInputSuccess": false
 }
