@@ -1,6 +1,6 @@
 {
   "artifactVersion": "recipe-pivot-current-status-v1",
-  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 draft antecedent; Button/Input false; human signoff pending",
+  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 authorization declared; live forbidden; Button/Input false; human signoff pending",
   "supersedesStatusClaimsOnly": true,
   "historicalEvidenceRewritten": false,
   "chronology": {
@@ -544,8 +544,9 @@
       "overallInputSuccess": false
     },
     "liveV10": {
-      "status": "draft antecedent; pending separate authorization; live execution forbidden",
+      "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
       "baseCommit": "2618e4e15cd88ad9f3428f1a8026a0fee2ede04f",
+      "antecedentCommit": "0da647b79ed8a2660b9858c6008a08cbae8dbbf3",
       "protocolPath": "recipe/evidence/input-field-live-pivot-v10/protocol.json",
       "protocolSha256": "8ffa74cf1f0fefd7d615dfa60d68b75c6dd10e4af501e6a670ef57169fa6f7a1",
       "proofPlanPath": "recipe/evidence/input-field-live-pivot-v10/proof-plan.json",
@@ -559,9 +560,13 @@
       "antecedentHashSetSha256": "c39fba6f31281ab89bfc7a6e256985b47f0c5c7133dba0d6c7700c2d36a002a2",
       "authorizationTemplatePath": "recipe/evidence/input-field-live-pivot-v10/authorization-template.json",
       "authorizationTemplateSha256": "cc37e0d6da97a40a1d076f7ecba35ed2394ba101fa007ff08bf9ffcb135af57b",
-      "authorizationPresent": false,
-      "authorizationCommitted": false,
+      "authorizationPresent": true,
+      "authorizationCommitStateDerivedByHistory": true,
       "authorizationEffective": false,
+      "authorizationPath": "recipe/evidence/input-field-live-pivot-v10/capture-authorization.json",
+      "authorizationSha256": "393996857f730419f9f92b1d2d30abaa9b5e896866e2694d50e3999c4e7b5e57",
+      "signingPublicKeySpkiSha256": "d651c665ee361bfc72f1bf671e5e45493c9a9eb7444493bc764551793909d25d",
+      "historyExpectedModeAfterAuthorizationCommit": "--expect-authorized",
       "authorizationLifecycleExcludedFromAntecedentHash": true,
       "authorizationCanBeAddedWithoutAntecedentRebuild": true,
       "v7AuthorizationReusable": false,

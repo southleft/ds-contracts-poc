@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 draft antecedent; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 authorization declared; live forbidden; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -223,9 +223,15 @@ const V10_HASH_SET_SHA256 =
   "c39fba6f31281ab89bfc7a6e256985b47f0c5c7133dba0d6c7700c2d36a002a2";
 const V10_AUTHORIZATION_TEMPLATE_SHA256 =
   "cc37e0d6da97a40a1d076f7ecba35ed2394ba101fa007ff08bf9ffcb135af57b";
+const V10_ANTECEDENT_COMMIT = "0da647b79ed8a2660b9858c6008a08cbae8dbbf3";
+const V10_AUTHORIZATION_PATH = `${V10_ROOT}/capture-authorization.json`;
+const V10_AUTHORIZATION_SHA256 =
+  "393996857f730419f9f92b1d2d30abaa9b5e896866e2694d50e3999c4e7b5e57";
+const V10_SIGNING_PUBLIC_KEY_SPKI_SHA256 =
+  "d651c665ee361bfc72f1bf671e5e45493c9a9eb7444493bc764551793909d25d";
 const V10_STATUS_PATH = "recipe/evidence/input-field-live-pivot-v10-status.json";
 const V10_STATUS =
-  "draft antecedent; pending separate authorization; live execution forbidden";
+  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
 const V10_BASE_COMMIT = "2618e4e15cd88ad9f3428f1a8026a0fee2ede04f";
 const V4_AUTHORIZATION_COMMIT = "bd343680b446a828190f176e525e5616752f9e5f";
 const V4_AUTHORIZATION_SHA256 =
@@ -725,9 +731,16 @@ export function validatePivotStatus(
     status.input?.liveV10?.antecedentHashSetSha256 !== V10_HASH_SET_SHA256 ||
     status.input?.liveV10?.authorizationTemplateSha256 !==
       V10_AUTHORIZATION_TEMPLATE_SHA256 ||
-    status.input?.liveV10?.authorizationPresent !== false ||
-    status.input?.liveV10?.authorizationCommitted !== false ||
+    status.input?.liveV10?.antecedentCommit !== V10_ANTECEDENT_COMMIT ||
+    status.input?.liveV10?.authorizationPresent !== true ||
+    status.input?.liveV10?.authorizationCommitStateDerivedByHistory !== true ||
     status.input?.liveV10?.authorizationEffective !== false ||
+    status.input?.liveV10?.authorizationPath !== V10_AUTHORIZATION_PATH ||
+    status.input?.liveV10?.authorizationSha256 !== V10_AUTHORIZATION_SHA256 ||
+    status.input?.liveV10?.signingPublicKeySpkiSha256 !==
+      V10_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    status.input?.liveV10?.historyExpectedModeAfterAuthorizationCommit !==
+      "--expect-authorized" ||
     status.input?.liveV10?.authorizationLifecycleExcludedFromAntecedentHash !==
       true ||
     status.input?.liveV10?.authorizationCanBeAddedWithoutAntecedentRebuild !==
@@ -877,6 +890,9 @@ export function verifyPivotStatus(): void {
     `${V10_ROOT}/antecedent-index.json`,
   );
   const v10Status = readRepositoryJson<Record<string, any>>(V10_STATUS_PATH);
+  const v10Authorization = readRepositoryJson<Record<string, any>>(
+    V10_AUTHORIZATION_PATH,
+  );
   const v5Superseding =
     readRepositoryJson<Record<string, any>>(V5_SUPERSEDING_PATH);
   const protocolHash = sha256(
@@ -1402,10 +1418,34 @@ export function verifyPivotStatus(): void {
     v10Status.artifactVersion !== "input-live-v10-status-v1" ||
     v10Status.status !== V10_STATUS ||
     v10Status.baseCommit !== V10_BASE_COMMIT ||
-    v10Status.authorization?.present !== false ||
-    v10Status.authorization?.committed !== false ||
+    v10Status.antecedent?.commit !== V10_ANTECEDENT_COMMIT ||
+    v10Status.authorization?.present !== true ||
+    v10Status.authorization?.commitStateDerivedByHistory !== true ||
     v10Status.authorization?.effective !== false ||
+    v10Status.authorization?.path !== V10_AUTHORIZATION_PATH ||
+    v10Status.authorization?.sha256 !== V10_AUTHORIZATION_SHA256 ||
+    v10Status.authorization?.signingPublicKeySpkiSha256 !==
+      V10_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    v10Status.authorization?.precommitHistoryState !==
+      "pending-uncommitted-authorization" ||
+    v10Status.authorization?.expectedHistoryModeAfterAuthorizationCommit !==
+      "--expect-authorized" ||
     v10Status.authorization?.v9AuthorizationReusable !== false ||
+    sha256(readRepositoryEvidence(V10_AUTHORIZATION_PATH)) !==
+      V10_AUTHORIZATION_SHA256 ||
+    v10Authorization.artifactVersion !==
+      "input-live-v10-capture-authorization-v1" ||
+    v10Authorization.authorizationId !== "input-live-v10" ||
+    v10Authorization.authorizationIntent !== true ||
+    v10Authorization.antecedent?.commit !== V10_ANTECEDENT_COMMIT ||
+    v10Authorization.antecedent?.indexSha256 !== V10_INDEX_SHA256 ||
+    v10Authorization.antecedent?.hashSetSha256 !== V10_HASH_SET_SHA256 ||
+    v10Authorization.signingPublicKey?.spkiSha256 !==
+      V10_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    v10Authorization.signingPublicKey?.privateKeyStoredInRepository !== false ||
+    v10Authorization.execution?.v9AuthorizationReusable !== false ||
+    v10Authorization.execution?.attemptsExecuted !== 0 ||
+    v10Authorization.humanSignoff?.status !== "pending" ||
     v10Status.smallestHonestDelta?.carriedV3Verifier !==
       "recipe/input-field-live-v3-verifier-v10.ts" ||
     v10Status.smallestHonestDelta?.liveHostDoesNotImportSceneReadbackTs !==
