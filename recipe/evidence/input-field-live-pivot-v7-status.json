@@ -1,0 +1,45 @@
+{
+  "artifactVersion": "input-live-v7-status-v1",
+  "status": "draft antecedent; pending separate authorization; live execution forbidden",
+  "baseCommit": "e5d6814982cbbe498ed630e7d988eae10bcb5d77",
+  "antecedent": {
+    "indexPath": "recipe/evidence/input-field-live-pivot-v7/antecedent-index.json",
+    "indexSha256": "3fa459844440098aae47432ba58108eff51edc332086b2d93de795d5f192f069",
+    "hashSetSha256": "09437c70458cda74a774dfa056cd91d0ac836d73d2e1d6a8567e6fe631df5be7",
+    "authorizationLifecycleExcluded": true,
+    "byteStableAcrossLaterAuthorization": true
+  },
+  "authorization": {
+    "present": false,
+    "committed": false,
+    "effective": false,
+    "templatePath": "recipe/evidence/input-field-live-pivot-v7/authorization-template.json",
+    "templateSha256": "b7ceb531e84d5a4002e9a4240925a15837841cc922dda4cac492e903ba07978b",
+    "expectedHistoryModeAfterAntecedentCommit": "--expect-pending",
+    "v6AuthorizationReusable": false
+  },
+  "denominator": {
+    "sourceRoots": 2,
+    "expectedSceneFacts": 43726,
+    "variants": 256,
+    "captureCells": 128,
+    "remoteRequests": 132,
+    "hostPhases": 3
+  },
+  "securityPrerequisites": {
+    "figmaPatRevokedOrReplacedRequired": true,
+    "mcpRestartAfterRotationRequired": true,
+    "ownerOnlyEnvironmentFileMode0600Required": true,
+    "repositorySecretScanZeroRequired": true,
+    "exactScratchReadOnlyProbeRequired": true,
+    "tokenValuesForbidden": true
+  },
+  "attemptsExecuted": 0,
+  "nextAttempt": 1,
+  "maximumFutureAttempts": 3,
+  "liveExecutionOccurred": false,
+  "figmaWrites": 0,
+  "figmaCaptures": 0,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false
+}

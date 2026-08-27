@@ -66,53 +66,44 @@
 > expected plans, and its writer plan has no objective-cell/reference manifest.
 > A v5 adapter that returned success would therefore fake required semantics.
 >
-> V6 now provides the complete offline external-operator antecedent at
-> `8737fab9f35aeae43b25734e8f9709a4247c379b`:
-> `recipe/input-field-live-v6-broker.ts`,
-> `recipe/input-field-live-v6-contract.ts`,
-> `recipe/run-input-field-live-v6.ts`, and
-> `recipe/evidence/input-field-live-pivot-v6/protocol.json`. Its durable state
-> machine emits one active main-lane request, stops for external execution,
-> accepts one complete persisted raw response, and resumes after restart. Every
-> request is Ed25519-signed and pins the transaction, sequence/predecessor,
-> exact `user-Figma Console` / `figma_execute` tool, exact Scratch target,
-> program and arguments, response schema/cardinality, generated plans, and
-> authorized commits. A recovery cleanup request is persisted immediately after
-> writer acceptance and remains separately available after a host crash.
+> V6's protocol and signed two-root broker are technically complete, and its
+> separate authorization history is valid: antecedent
+> `8737fab9f35aeae43b25734e8f9709a4247c379b`, authorization
+> `e5d6814982cbbe498ed630e7d988eae10bcb5d77`. The comprehensive v6 check is
+> nevertheless red after authorization because a unit self-test calls the real
+> repository verifier and asserts that authorization must still be uncommitted.
+> Its generated index also hashes authorization lifecycle files, so repairing
+> that assertion in place would drift the preserved index. No v6 live attempt
+> occurred. V6 is retired before use by
+> `recipe/evidence/input-field-live-pivot-v6-superseding-status.json`; its
+> protocol, authorization, and index bytes are unchanged.
 >
-> Extraction returns both independent source roots plus the local-variable table
-> and ownership/instance lineage. Host accounting compares MUI and Polaris
-> separately to their own 22,811- and 20,915-fact precommitted occurrence
-> multisets, then runs two collapse/recompile cycles per root. Usability covers
-> all 256 variants. Capture is 128 ordered, one-cell bounded responses, each
-> pinned to its independent reference and source/state/adornment strata; no
-> sample reduction is allowed, and no capture request can be issued before the
-> hash-bound technical gates. The fake operator exercises all 132 remote
-> requests offline (9/9 tests).
+> V7 carries the same product and broker criteria into a phase-stable antecedent:
+> two independent roots (22,811 MUI facts and 20,915 Polaris facts), 256 variant
+> probes, 128 ordered one-cell captures, 132 signed requests, exact Scratch
+> targeting, no capture before hash-bound technical gates, durable cleanup after
+> host failure, and mandatory human signoff. The immutable broker and runner are
+> separate from `input-field-live-v7-authorized.ts`, the history verifier,
+> preflight, tests, authorization template, and current status. None of those
+> lifecycle files enters
+> `recipe/evidence/input-field-live-pivot-v7/antecedent-index.json`.
 >
-> The separate v6 authorization is now prepared but uncommitted at
-> `recipe/evidence/input-field-live-pivot-v6/capture-authorization.json`. It
-> pins the antecedent Git-object bytes, protocol, plans, 132-request/3-host-phase
-> denominator, both source fact roots, every phase program, 128 captures,
-> durable cleanup, and an Ed25519 public-key identity. It does not store a
-> private key and does not reuse v5 authorization. Git history, clean worktree,
-> and upstream equality establish authorization only after a distinct commit
-> and publication; before then, live execution remains forbidden.
+> `npm run recipe:input-field:live:v7:check` is phase-stable. Unit tests use only
+> pending/changed/committed fixtures. The separate integration command requires
+> an explicit phase: run
+> `npm run recipe:input-field:live:v7:history:verify -- --expect-pending` after
+> the antecedent commit is published, then
+> `npm run recipe:input-field:live:v7:history:verify -- --expect-authorized`
+> after a later authorization commit is published. The offline lifecycle
+> simulation creates synthetic Git antecedent and authorization commits and
+> proves that the same generated antecedent remains byte-green in both phases.
 >
-> There is an independent security block. A Figma PAT was exposed; revocation
-> or replacement has not been asserted here. Every MCP process must be
-> restarted after rotation using owner-only mode-0600 environment-file
-> configuration. Only then may an operator create
-> `private/input-live-v6-security-attestation.json` from
-> `recipe/evidence/input-field-live-pivot-v6/operator-security-attestation-template.json`.
-> The attestation records timestamps and user assertions, a secret-free MCP
-> session identity, an exact Scratch read-only probe, absence of plaintext
-> helper paths, and a current zero-result repository secret scan. It stores no
-> token values. The current offline repository scan is zero, but that does not
-> establish account-side revocation, rotation, or MCP restart. V6 still has no
-> live attempt, Figma write, screenshot, outcome, or target metric. V5 protocol
-> and authorization bytes remain unchanged but are semantically retired by the
-> separate superseding status artifact. Input remains false.**
+> Future authorization remains security-blocked until the exposed Figma PAT is
+> revoked or replaced, every MCP process is restarted after rotation, the
+> environment file is owner-only mode 0600, the tracked-and-untracked repository
+> secret scan is zero, and an exact read-only Scratch file-key/name/editor probe
+> passes. Runtime attestation must be created only after those steps and may
+> contain no token value. V7 has executed zero attempts; Input remains false.**
 >
 > Historical implementation record: **Input/Field has an offline
 > `input-field@1` recipe and a complete 128-cell matched source/legacy/React/WC
@@ -180,9 +171,12 @@
 > is recorded separately at
 > `recipe/evidence/input-field-live-pivot-v5-superseding-status.json`. The v6
 > protocol, two-root expected plans, exact 128-cell manifest, 132-request
-> manifest, source-neutral programs, and pending authorization template are
-> indexed at `recipe/evidence/input-field-live-pivot-v6/index.json`. V6 live
-> execution remains forbidden pending a distinct published authorization.
+> manifest, source-neutral programs, and authorization history remain preserved
+> at `recipe/evidence/input-field-live-pivot-v6/index.json`; its lifecycle defect
+> and retirement are recorded separately. V7's authorization-independent hash
+> set is `recipe/evidence/input-field-live-pivot-v7/antecedent-index.json`, with
+> lifecycle status outside that set. V7 live execution remains forbidden pending
+> a distinct published authorization and all runtime security prerequisites.
 > The source-neutral calibration corpus, captures, result, exact-byte attempts,
 > and cleanup receipt are indexed at
 > `recipe/evidence/raster-calibration-v1/index.json`.

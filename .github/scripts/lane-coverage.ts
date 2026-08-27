@@ -82,6 +82,19 @@ const parseComposite = (body: string): string[] | null => {
  * deliberate act; the checks in this file make sure the entry stays true.
  */
 const EXCLUDED: Record<string, string> = {
+  "root:recipe:input-field:live:v6:check":
+    "Retired phase-sensitive historical composite: it is intentionally red after its published " +
+    "authorization because its self-test asserts the real repository must still be pre-authorization. " +
+    "V6 bytes are held by recipe:pivot-status:check; v7 replaces the lifecycle in the fast lane.",
+  "root:recipe:input-field:live:v6:generated:check":
+    "Retired with v6: its index hashes authorization lifecycle files. Pivot status holds every indexed " +
+    "v6 byte while v7 generated freshness excludes lifecycle files.",
+  "root:recipe:input-field:live:v6:authorization:self-test":
+    "Retired exact defect specimen. It remains on disk to prove the phase-sensitive failure class and " +
+    "is planted by the hermetic v7 authorization test.",
+  "root:recipe:input-field:live:v6:smoke":
+    "The same broker semantics run through input-field-live-v7-broker.test.ts in the v7 fast-lane " +
+    "composite; the immutable v6 broker test also remains covered by test:recipe.",
   "root:sync:spine":
     "The live drift spine: needs the FIGMA_TOKEN secret + network (Figma REST) and, with --open-pr, an " +
     "authenticated gh — none of which belong in a PR gate, and its red means 'a drifted row has no " +
@@ -132,7 +145,11 @@ const EXCLUDED: Record<string, string> = {
 };
 
 /** Tracked tests intentionally outside CI need a durable, file-specific reason. */
-const TEST_EXCLUDED: Record<string, string> = {};
+const TEST_EXCLUDED: Record<string, string> = {
+  "recipe/input-field-live-v6-authorization.test.ts":
+    "Retired exact lifecycle-defect specimen: its real-repository pending assertion is intentionally red " +
+    "after v6 authorization. V7's hermetic test reads and plants this source without executing it.",
+};
 
 // Everything below reads the lane map lane-map.ts derives from the workflow
 // files; scripts/v1-readiness.ts reads the same map to cite lanes.

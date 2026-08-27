@@ -1,0 +1,76 @@
+{
+  "artifactVersion": "input-live-v7-external-operator-protocol-v1",
+  "protocolId": "input-live-v7",
+  "status": "draft antecedent; pending separate authorization; live execution forbidden",
+  "lifecycle": {
+    "executionAntecedentImmutable": true,
+    "authorizationAddedOnlyAfterAntecedentCommit": true,
+    "authorizationExcludedFromAntecedentFreshness": true,
+    "laterAuthorizationDoesNotRecomputeAntecedent": true,
+    "v6AuthorizationReusable": false
+  },
+  "operatorBoundary": {
+    "expectedDynamicTool": {
+      "namespace": "user-Figma Console",
+      "tool": "figma_execute"
+    },
+    "target": {
+      "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+      "fileName": "Scratch Project",
+      "editorType": "figma"
+    },
+    "externalOperatorRequired": true,
+    "oneCallPerSignedRequest": true,
+    "requestSignature": "Ed25519",
+    "rawResponsePersistedBeforeAcceptance": true
+  },
+  "execution": {
+    "remoteRequests": 132,
+    "mainLaneRequests": 131,
+    "recoveryCleanupRequests": 1,
+    "hostPhases": 3,
+    "requestOrder": [
+      "writer",
+      "persist signed cleanup recovery request",
+      "extract",
+      "host normalize and account both roots",
+      "probe",
+      "host bind technical gates",
+      "capture-000 through capture-127",
+      "cleanup"
+    ],
+    "maximumFutureAttempts": 3,
+    "attemptsExecuted": 0
+  },
+  "proof": {
+    "roots": 2,
+    "sources": {
+      "mui": {
+        "expectedFacts": 22811,
+        "generatedDescendants": 128
+      },
+      "polaris": {
+        "expectedFacts": 20915,
+        "generatedDescendants": 128
+      }
+    },
+    "expectedFacts": 43726,
+    "variants": 256,
+    "captures": 128,
+    "cellsPerCaptureRequest": 1,
+    "sampleReduction": false,
+    "captureBeforeHashBoundTechnicalGates": false,
+    "durableCleanupAfterHostFailure": true,
+    "humanSignoffMandatory": true
+  },
+  "futureAuthorizationPrerequisites": {
+    "separateCommittedPublishedAuthorization": true,
+    "cleanPublishedDescendant": true,
+    "figmaPatRevokedOrReplaced": true,
+    "mcpRestartedAfterRotation": true,
+    "ownerOnlyEnvironmentFileMode0600": true,
+    "repositorySecretScanZero": true,
+    "exactScratchReadOnlyProbe": true,
+    "tokenValuesForbidden": true
+  }
+}

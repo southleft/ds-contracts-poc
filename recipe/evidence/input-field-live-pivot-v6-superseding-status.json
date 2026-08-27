@@ -1,0 +1,57 @@
+{
+  "artifactVersion": "input-live-v6-superseding-status-v1",
+  "status": "retired before live use; protocol and broker technically complete; authorization history valid; post-authorization comprehensive check phase-dependent and red",
+  "retiredBeforeLiveUse": true,
+  "supersededBy": "input-live-v7",
+  "preserved": {
+    "protocol": {
+      "path": "recipe/evidence/input-field-live-pivot-v6/protocol.json",
+      "sha256": "0d79c50a4a21763eae067ff18f2ad65bc071f2fca5af7cfd4335f775c9d5e296",
+      "bytesChanged": false
+    },
+    "authorization": {
+      "path": "recipe/evidence/input-field-live-pivot-v6/capture-authorization.json",
+      "sha256": "82f7cfadd7161419b091c632c45f1f746fa1434af03b3e154ec6ca3fc288e17c",
+      "bytesChanged": false
+    },
+    "index": {
+      "path": "recipe/evidence/input-field-live-pivot-v6/index.json",
+      "sha256": "5f57d9425a722e23e627e66de6b6b1e73e937cae946707fffe62ffb17d24f103",
+      "bytesChanged": false
+    }
+  },
+  "authorizationHistory": {
+    "antecedentCommit": "8737fab9f35aeae43b25734e8f9709a4247c379b",
+    "authorizationCommit": "e5d6814982cbbe498ed630e7d988eae10bcb5d77",
+    "authorizationStrictlyDescendsFromAntecedent": true,
+    "authorizationBytesEqualFirstAddition": true,
+    "authorizationCommitPublished": true,
+    "valid": true
+  },
+  "retirementReason": {
+    "defectClass": "non-hermetic phase-sensitive self-test",
+    "comprehensiveCheck": "recipe:input-field:live:v6:check",
+    "failingAssertion": "unit self-test requires the real repository authorization to remain uncommitted",
+    "generatedIndexAlsoHashesAuthorizationLifecycle": true,
+    "safeInPlaceRepairWouldChangePreservedV6Bytes": true
+  },
+  "technical": {
+    "protocolComplete": true,
+    "brokerComplete": true,
+    "sourceRoots": 2,
+    "expectedSceneFacts": 43726,
+    "remoteRequests": 132,
+    "captureCells": 128,
+    "durableCleanup": true,
+    "ed25519Requests": true,
+    "exactTargetBound": true,
+    "captureBeforeTechnicalGates": false,
+    "humanSignoffMandatory": true
+  },
+  "attemptsExecuted": 0,
+  "liveAttemptAuthorized": false,
+  "liveExecutionOccurred": false,
+  "figmaWrites": 0,
+  "figmaCaptures": 0,
+  "humanSignoff": "pending"
+}
