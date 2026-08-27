@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 draft antecedent pending separate authorization; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 authorization declared; live forbidden; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -380,8 +380,14 @@ const V15_AUTHORIZATION_TEMPLATE_SHA256 =
 const V15_STATUS_PATH =
   "recipe/evidence/input-field-live-pivot-v15-status.json";
 const V15_STATUS =
-  "draft antecedent; pending separate authorization; live execution forbidden";
+  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
 const V15_BASE_COMMIT = "0c56dc335dca4bf1ed5ed1ea06a2e3d1858c710e";
+const V15_ANTECEDENT_COMMIT = "c1d3f0ac38f00fd005e80ed4d9e35ff393dbad58";
+const V15_AUTHORIZATION_PATH = `${V15_ROOT}/capture-authorization.json`;
+const V15_AUTHORIZATION_SHA256 =
+  "2618b5df73ef7a1d4e4973729a99638d44ca5cd22f909b7207231982f9063374";
+const V15_SIGNING_PUBLIC_KEY_SPKI_SHA256 =
+  "ff0f180c12a7b39572bb4de024c29d90bdda3a0dafaab6e40d25a611f00afed7";
 const V14_RESTORE_SOURCE_SHA256 =
   "daa6ec8dea23b1e195c650a01fe5a44e05f531ef0949be944759bbcb2c80f2ce";
 const V14_RESTORE_BLUEPRINT_SHA256 =
@@ -1200,9 +1206,16 @@ export function validatePivotStatus(
     status.input?.liveV15?.antecedentHashSetSha256 !== V15_HASH_SET_SHA256 ||
     status.input?.liveV15?.authorizationTemplateSha256 !==
       V15_AUTHORIZATION_TEMPLATE_SHA256 ||
-    status.input?.liveV15?.authorizationPresent !== false ||
-    status.input?.liveV15?.authorizationCommitted !== false ||
+    status.input?.liveV15?.antecedentCommit !== V15_ANTECEDENT_COMMIT ||
+    status.input?.liveV15?.authorizationPresent !== true ||
+    status.input?.liveV15?.authorizationCommitStateDerivedByHistory !== true ||
     status.input?.liveV15?.authorizationEffective !== false ||
+    status.input?.liveV15?.authorizationPath !== V15_AUTHORIZATION_PATH ||
+    status.input?.liveV15?.authorizationSha256 !== V15_AUTHORIZATION_SHA256 ||
+    status.input?.liveV15?.signingPublicKeySpkiSha256 !==
+      V15_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    status.input?.liveV15?.historyExpectedModeAfterAuthorizationCommit !==
+      "--expect-authorized" ||
     status.input?.liveV15?.authorizationLifecycleExcludedFromAntecedentHash !==
       true ||
     status.input?.liveV15?.authorizationCanBeAddedWithoutAntecedentRebuild !==
@@ -2433,9 +2446,16 @@ export function verifyPivotStatus(): void {
     v15Status.artifactVersion !== "input-live-v15-status-v1" ||
     v15Status.status !== V15_STATUS ||
     v15Status.baseCommit !== V15_BASE_COMMIT ||
-    v15Status.authorization?.present !== false ||
-    v15Status.authorization?.committed !== false ||
+    v15Status.antecedent?.commit !== V15_ANTECEDENT_COMMIT ||
+    v15Status.authorization?.present !== true ||
+    v15Status.authorization?.commitStateDerivedByHistory !== true ||
     v15Status.authorization?.effective !== false ||
+    v15Status.authorization?.path !== V15_AUTHORIZATION_PATH ||
+    v15Status.authorization?.sha256 !== V15_AUTHORIZATION_SHA256 ||
+    v15Status.authorization?.signingPublicKeySpkiSha256 !==
+      V15_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    sha256(readRepositoryEvidence(V15_AUTHORIZATION_PATH)) !==
+      V15_AUTHORIZATION_SHA256 ||
     v15Status.authorization?.v14AuthorizationReusable !== false ||
     v15Status.smallestHonestDelta?.taughtTwoPassParentThenContentFillRestore !==
       true ||
