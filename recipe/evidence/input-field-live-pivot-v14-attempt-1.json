@@ -1,0 +1,55 @@
+{
+  "artifactVersion": "input-live-v14-attempt-1-v1",
+  "status": "failed closed",
+  "authorizationCommit": "eae2dfb3e884b2b71c2de6814a5586cc85b9443c",
+  "codeCommit": "eae2dfb3e884b2b71c2de6814a5586cc85b9443c",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 2317,
+    "pageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+    "sourceRoots": 2
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": false,
+    "pluginError": "INPUT-V14-RESTORE-NOT-FILL",
+    "rawResponseBytes": 115,
+    "accepted": false,
+    "extractIssued": false
+  },
+  "extract": {
+    "issued": false
+  },
+  "v13FailureNotCleared": {
+    "hashedTwoPassParentThenContentFillRestoreStillNotFill": true
+  },
+  "failure": {
+    "phase": "restore",
+    "locus": "recipe/input-field-live-v14-restore.ts and recipe/evidence/input-field-live-pivot-v14/programs/restore-blueprint.js",
+    "messages": [
+      "INPUT-V14-RESTORE-NOT-FILL"
+    ],
+    "cause": "Hashed two-pass restore ran on the minted Scratch page after writer acceptance. Parent surface/content-row FILL ran first, then content HEIGHT+FILL with hidden texts revealed only during assignment. The plugin threw INPUT-V14-RESTORE-NOT-FILL, which that program emits only after it collected 256 content texts and set layoutSizingHorizontal=FILL. Extract was not issued, so there is no live FILL/FIXED census. Do not teach the recipe to accept FIXED. Do not restart v14 attempt 2 as-is. Restore bytes are in the v14 hash set.",
+    "inputFieldRecipeInV14AntecedentHashSet": false,
+    "writerInV14AntecedentHashSet": true,
+    "restoreInV14AntecedentHashSet": true
+  },
+  "cleanup": {
+    "accepted": true,
+    "scratchOwnedInputPagesRemaining": 0
+  },
+  "captures": 0,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false,
+  "v13AntecedentBytesUnchanged": true,
+  "v14AntecedentBytesUnchanged": true,
+  "v14AuthorizationBytesUnchanged": true,
+  "nextAttempt": 2,
+  "restartAsV14Attempt2WithoutHashedRestoreChangeForbidden": true
+}

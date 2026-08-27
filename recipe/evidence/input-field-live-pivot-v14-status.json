@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v14-status-v1",
-  "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+  "status": "attempt 1 failed closed; writer accepted; hashed two-pass restore threw INPUT-V14-RESTORE-NOT-FILL; extract not issued; cleanup complete",
   "baseCommit": "75f3de450d1a9db1828edb0fb606cd86aaf208f8",
   "antecedent": {
     "commit": "961d08f94853d2b90cd3b68963f5bc113e5ae066",
@@ -75,12 +75,16 @@
     "exactScratchReadOnlyProbeRequired": true,
     "tokenValuesForbidden": true
   },
-  "attemptsExecuted": 0,
-  "nextAttempt": 1,
+  "attemptsExecuted": 1,
+  "nextAttempt": 2,
   "maximumFutureAttempts": 3,
-  "liveExecutionOccurred": false,
-  "figmaWrites": 0,
+  "liveExecutionOccurred": true,
+  "figmaWrites": 2,
   "figmaCaptures": 0,
+  "createdNodesThenRemoved": 2317,
+  "attempt1Path": "recipe/evidence/input-field-live-pivot-v14-attempt-1.json",
+  "attempt1Sha256": "84c81d777bceda7dd2dc49ab031060c7f1a7dcb4d5bfc7e1b2ed516dfc657adf",
+  "restartAsV14Attempt2WithoutHashedRestoreChangeForbidden": true,
   "humanSignoff": "pending",
   "overallInputSuccess": false
 }
