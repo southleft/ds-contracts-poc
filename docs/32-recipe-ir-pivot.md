@@ -159,8 +159,10 @@
 > for per-side stroke weights; attempt 2 cleared that and failed closed on
 > VARIABLE_ALIAS / bound-variable-only fills in hashed scene-readback.
 > Cleanup completed both times. V7 authorization is not reusable. V9 prepare
-> carries a taught scene-readback for those live fill kinds; authorization is
-> still pending and live execution is forbidden.**
+> is published at `1a16642bddbb8c8a3fb44cd0e086a7ff8328e294`. It carries a
+> taught scene-readback for those live fill kinds; authorization is still
+> pending and live execution is forbidden. The ordered remaining-work plan to
+> an honest v1 proof is in [Remaining work to v1 proof](#remaining-work-to-v1-proof-2026-08-27).**
 >
 > Historical implementation record: **Input/Field has an offline
 > `input-field@1` recipe and a complete 128-cell matched source/legacy/React/WC
@@ -255,6 +257,97 @@
 > control reuses that architecture offline only; its original-source references
 > and blind grade now exist, but no Figma mint, live canvas grade, or
 > cross-archetype success claim exists yet.
+
+## Remaining work to v1 proof (2026-08-27)
+
+This is the ordered, falsifiable plan for the rest of the pivot. It does not
+declare v1, invent live outcomes, or restamp frozen lineage bytes. Machine
+status remains `recipe/evidence/status-index.json`. Sitting start was
+`1a16642bddbb8c8a3fb44cd0e086a7ff8328e294` on `pivot/recipe-ir-v1`, clean and
+up to date with origin. Desktop Bridge was target-locked on Scratch
+`byMp6lt0Ij9b2QbkDGFwBh`. Read-only page inventory found **no live Input
+pages**. The historical Button page
+`Recipe Pivot / Button / e6a61d04-b04f4059-v4` remains and must not be
+collided with. `Y8Jhw6R49wTLuXZ0is2GmV` and every other connected file stay
+read-only. npm publish stays deferred.
+
+**Exit rule.** Continue in this order until every binary row in §F is true, or
+until a hard safety or human-only gate blocks progress. Do not cut v1 if any
+required row is false. If a hashed v9 file fails closed, open v10; do not
+patch hashed bytes in place.
+
+### A · Input live v9 closeout
+
+| step | action | exit criterion |
+| --- | --- | --- |
+| A1 | AUTHORIZE INPUT V9 as a **separate** commit. Pin a prepare-era Ed25519 operator signer. Antecedent `1a16642bddbb8c8a3fb44cd0e086a7ff8328e294`. Authorization lifecycle stays out of the antecedent hash set. | `npm run recipe:input-field:live:v9:history:verify -- --expect-authorized` after publish; `--expect-pending` is stale. Antecedent index SHA-256 remains `ef6a72fd392d2866d06136e8200d2cff750585705eafacdc41e20b95cfac2942`. Live still forbidden. |
+| A2 | Fresh private attestation only: replacement PAT + `oldTokenRevoked=false` + `ownerRiskAcceptance=true`; env files mode 0600; MCP restarted; zero-result secret scan bound to the authorize commit; Scratch-only read-only probe. Never commit `private/`. Never print tokens. | Attestation at `private/input-live-v9-security-attestation.json` validates; token values absent. |
+| A3 | Preflight, then Scratch-only live. Max 3 attempts. Transport: one-call disk operator (`private/input-live-v7-mcp-operator.mjs` or v8/v9 equivalent); `callTool(params, undefined, { timeout, maxTotalTimeout })`; honor signed writer timeout 300000; reconstruct `fileContext.editorType` from exact Scratch target; refuse empty-code envelope; do not Cursor-Read the writer or extract. Persist signed cleanup immediately after writer acceptance. | Writer + extract + host normalize/account **both** roots + gates + 128 captures + cleanup. Scene-derived verification independent of stamped IR. Zero silent losses. If a hashed file fails closed, stop that lineage and open v10. |
+| A4 | Attributable human signoff on Input. | **Human gate.** Record pending and continue other work. Do not invent a grade. Overall Input stays **false** until signed. |
+
+### B · Button closeout
+
+| step | action | exit criterion |
+| --- | --- | --- |
+| B1 | Keep the technical mint, usability, restoration, and 12/12 adjudication bytes. Do not restamp them. | Existing Button technical measurements remain byte-stable. |
+| B2 | Fresh scene-derived inversion/accounting from the live Button page, not stamped/self-selected IR. Do not collide with or rewrite that page except as an explicit later proof if required. | Silent losses derived from a prospective multiset denominator; inversion is scene-derived. |
+| B3 | Attributable human signoff on Button. | **Human gate.** Overall Button stays **false** until signed. |
+
+### C · Combobox
+
+Offline two-library proof already exists at `41e34588` (`@mui/material@9.2.0#Autocomplete`, `antd@5.29.3#Select`; 24 paired cells; 72 components / 242 instances). `npm run recipe:combobox:check` is the offline gate.
+
+| step | action | exit criterion |
+| --- | --- | --- |
+| C1 | Matched source/legacy benchmark over the frozen 24-cell matrix if still required by this document's comparison contract. Keep the legacy 4/4 over six variants as weak context only. | Source references rendered; legacy comparator re-derived on the same matrix; recipe and legacy reported together. |
+| C2 | Scratch-only live mint on the same recipe-IR + receipts bar, two real libraries. Separate authorize lineage; no Input page collision. | Writer + extract + host normalize/account + gates + captures + cleanup; named or carried; zero silent losses. |
+| C3 | Independent human grade. | **Human gate.** Combobox overall stays false/ungraded until signed. |
+
+### D · Data Table and Calendar
+
+Neither has a recipe path yet. Acquisition must be human-authored or
+human-reviewed adapters, not inferred rectangles.
+
+| step | action | exit criterion |
+| --- | --- | --- |
+| D1 | Explicit Data Table recipe + reviewed adapters for two unrelated real libraries. Offline cross-library proof first: row/column templates, declared column axis, required-facts / door / lowering / grammar coverage. | Offline gate green; every fact named or carried; no silent losses. |
+| D2 | Scratch-only Data Table live, same receipts bar. | Live mint usable; scene-derived inversion/accounting; cleanup complete. |
+| D3 | Calendar archetype addition is a reviewed minor contract change (`ARCHETYPES` in `packages/schema/src/archetype.ts` plus required-facts). Then the same offline-then-live sequence. | Calendar is no longer “undefined (0 contracts)” by proof, not by deleting the bar. |
+| D4 | Human review of Table/Calendar adapters before live if a human-authored adapter is required. | **Human gate** for adapter authorship/review only. Live still Scratch-only. |
+
+### E · Cross-library, inverse, and corpus honesty
+
+| step | action | exit criterion |
+| --- | --- | --- |
+| E1 | Keep at least one archetype vs two unrelated real libraries on the **live** path (already true offline for Input and Combobox). | Live receipts name both libraries. |
+| E2 | Inverse non-regression. The existing first-pass harness is recipe-agnostic and must not regress. | `npm run first-pass:check` (and the recipe inverse/census gates that exist for the subject) stay green. |
+| E3 | Keep publishing 117/170 recognisable and 39/170 usable-on-all-four comparisons. Recipe four vs the same measurement. Do not drop legacy numbers. | `recipe:regression:census` / census recount still report both denominators. |
+| E4 | Reconcile `docs/26-v1-definition.md` `V1-CLASS-01` / `V1-CLASS-02` with recipe capability. Docs/26 currently lists combobox/table/calendar as not v1-supported. User demand is that they **are** in v1. Resolve by proving them and then citing the green gates; do not delete or weaken the bar first. | Docs/26 rows change only when the named gate is green on a commit. |
+
+### F · v1 binary checklist
+
+v1 is complete only when every row is actually true:
+
+1. Named or carried, zero silent losses, on the whole corpus and on unseen libraries.
+2. Minted sets usable (auto-layout reflows, variants switch, tokens bound), not merely correct-looking.
+3. Journeys restated honestly: A Figma→code, B code→Figma, C reconcile — what is proven vs still open.
+4. Button, Input, Combobox, Data Table, and Calendar each have recipe-path proof plus attributable human signoff, or a named refusal a reader can act on.
+5. Docs/26 rows and this document agree; no silent reclassification.
+6. CI lanes required for release are green. npm publish remains deferred and is not a v1-proof substitute.
+
+### Human-only work (do not block the rest)
+
+- Attributable human signoff on Button and Input; later Combobox, Data Table, and Calendar.
+- Old PAT still cannot be revoked (other apps). Keep the replacement PAT and residual-risk acceptance (`oldTokenRevoked=false`, `ownerRiskAcceptance=true`).
+- Recipe acquisition review for Data Table / Calendar adapters before live if a human-authored adapter is required.
+- Final designer recognisability grades; AI raters are retired for architecture progression.
+
+### Immediate next command
+
+```
+git pull --ff-only
+# then AUTHORIZE INPUT V9 against antecedent 1a16642b
+```
 
 ## Correction task 2 — offline implementation, 2026-08-27
 
@@ -1609,11 +1702,11 @@ references and re-derives a legacy comparator over the frozen 24-cell matrix.
 
 | archetype   | progress                                                                                                                                                        | next evidence boundary                                                                           |
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| Button      | **technical mint retained; overall false/pending**                                                                                                              | attributable human signoff plus fresh scene-derived inversion/accounting                         |
-| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1 and v8 attempts 1-2 failed closed; v9 draft antecedent pending authorization; false** | authorize v9, then Scratch-only live with carried VARIABLE_ALIAS / bound-variable scene-readback |
-| Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                                                                      | matched 24-cell source/legacy benchmark, then independent human grade                            |
-| Data Table  | not claimed                                                                                                                                                     | row/column templates and matched matrix                                                          |
-| Calendar    | not claimed                                                                                                                                                     | new archetype plus absolute acceptance                                                           |
+| Button      | **technical mint retained; overall false/pending**                                                                                                              | scene-derived inversion/accounting, then attributable human signoff (human gate)                 |
+| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1 and v8 attempts 1-2 failed closed; v9 draft antecedent pending authorization; false** | authorize v9, Scratch-only live, then human signoff (see Remaining work §A)                      |
+| Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                                                                      | matched 24-cell benchmark, Scratch-only live, then human grade (see Remaining work §C)           |
+| Data Table  | not claimed                                                                                                                                                     | human-reviewed adapters, offline cross-library proof, then Scratch-only live                     |
+| Calendar    | not claimed                                                                                                                                                     | reviewed archetype addition, then the same offline-then-live sequence                            |
 
 ### First page-scoped live writer run — blocked, 2026-08-26
 
