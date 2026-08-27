@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 draft antecedent prepared; authorization pending; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 authorization declared; live forbidden; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -287,8 +287,14 @@ const V12_AUTHORIZATION_TEMPLATE_SHA256 =
   "27d88d4d5869d42a43faf887867742e8222b89addf14a7465c137ce96fce10b5";
 const V12_STATUS_PATH = "recipe/evidence/input-field-live-pivot-v12-status.json";
 const V12_STATUS =
-  "draft antecedent; pending separate authorization; live execution forbidden";
+  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
 const V12_BASE_COMMIT = "f36968a7426201961bc50fd1534b8a113a6cb700";
+const V12_ANTECEDENT_COMMIT = "8570f3e8c318977a51f5f41a7474dcc535b53b26";
+const V12_AUTHORIZATION_PATH = `${V12_ROOT}/capture-authorization.json`;
+const V12_AUTHORIZATION_SHA256 =
+  "124b04ff2daae9d62ecd1167014fefbdf6c231578e3f966b545972af4a2b8a03";
+const V12_SIGNING_PUBLIC_KEY_SPKI_SHA256 =
+  "649580fc43fa90a541d4ad4f3c7882e1854c1e15776a1aec698eb7623f325687";
 const V11_WRITER_PROGRAM_SHA256 =
   "a839d5bd2304fa18b449692676345486606bca6a79dd8bd84e8b9b307b9f7826";
 const V11_WRITER_PAYLOAD_SHA256 =
@@ -923,9 +929,16 @@ export function validatePivotStatus(
     status.input?.liveV12?.antecedentHashSetSha256 !== V12_HASH_SET_SHA256 ||
     status.input?.liveV12?.authorizationTemplateSha256 !==
       V12_AUTHORIZATION_TEMPLATE_SHA256 ||
-    status.input?.liveV12?.authorizationPresent !== false ||
-    status.input?.liveV12?.authorizationCommitted !== false ||
+    status.input?.liveV12?.antecedentCommit !== V12_ANTECEDENT_COMMIT ||
+    status.input?.liveV12?.authorizationPresent !== true ||
+    status.input?.liveV12?.authorizationCommitStateDerivedByHistory !== true ||
     status.input?.liveV12?.authorizationEffective !== false ||
+    status.input?.liveV12?.authorizationPath !== V12_AUTHORIZATION_PATH ||
+    status.input?.liveV12?.authorizationSha256 !== V12_AUTHORIZATION_SHA256 ||
+    status.input?.liveV12?.signingPublicKeySpkiSha256 !==
+      V12_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    status.input?.liveV12?.historyExpectedModeAfterAuthorizationCommit !==
+      "--expect-authorized" ||
     status.input?.liveV12?.authorizationLifecycleExcludedFromAntecedentHash !==
       true ||
     status.input?.liveV12?.authorizationCanBeAddedWithoutAntecedentRebuild !==
@@ -1803,9 +1816,16 @@ export function verifyPivotStatus(): void {
     v12Status.artifactVersion !== "input-live-v12-status-v1" ||
     v12Status.status !== V12_STATUS ||
     v12Status.baseCommit !== V12_BASE_COMMIT ||
-    v12Status.authorization?.present !== false ||
-    v12Status.authorization?.committed !== false ||
+    v12Status.antecedent?.commit !== V12_ANTECEDENT_COMMIT ||
+    v12Status.authorization?.present !== true ||
+    v12Status.authorization?.commitStateDerivedByHistory !== true ||
     v12Status.authorization?.effective !== false ||
+    v12Status.authorization?.path !== V12_AUTHORIZATION_PATH ||
+    v12Status.authorization?.sha256 !== V12_AUTHORIZATION_SHA256 ||
+    v12Status.authorization?.signingPublicKeySpkiSha256 !==
+      V12_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    sha256(readRepositoryEvidence(V12_AUTHORIZATION_PATH)) !==
+      V12_AUTHORIZATION_SHA256 ||
     v12Status.authorization?.v11AuthorizationReusable !== false ||
     v12Status.smallestHonestDelta?.taughtPostSettleContentFillRestore !==
       true ||
