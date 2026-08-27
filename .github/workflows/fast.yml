@@ -288,6 +288,9 @@ jobs:
       - name: recipe:input-field:live:v11:check (first-segment role recovery when font-provenance= is present)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:live:v11:check
+      - name: recipe:input-field:live:v12:check (post-settle content fill restore after hashed v11 writer)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:live:v12:check
       - name: recipe:input-field:comparison:check (128 matched source cells, independent references, 256 opaque specimens, false and ungraded)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:comparison:check
