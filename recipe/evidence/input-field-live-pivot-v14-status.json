@@ -1,0 +1,81 @@
+{
+  "artifactVersion": "input-live-v14-status-v1",
+  "status": "draft antecedent; pending separate authorization; live execution forbidden",
+  "baseCommit": "75f3de450d1a9db1828edb0fb606cd86aaf208f8",
+  "antecedent": {
+    "indexPath": "recipe/evidence/input-field-live-pivot-v14/antecedent-index.json",
+    "indexSha256": "5846c279ec903b48d2cbdcf3b4626f037409c6a0bd1d276e7c15edfc12c389dc",
+    "hashSetSha256": "591d3f6dff2f631969467db6a4d45ccf81db7d2e8f80af5b073d6035f17cce16",
+    "authorizationLifecycleExcluded": true,
+    "byteStableAcrossLaterAuthorization": true
+  },
+  "authorization": {
+    "present": false,
+    "committed": false,
+    "effective": false,
+    "templatePath": "recipe/evidence/input-field-live-pivot-v14/authorization-template.json",
+    "templateSha256": "16ad9316a9996feef844850a8d7001949f6f25984a0b5f37402bb88b09cb95b0",
+    "expectedHistoryModeAfterAntecedentCommit": "--expect-pending",
+    "v7AuthorizationReusable": false,
+    "v8AuthorizationReusable": false,
+    "v9AuthorizationReusable": false,
+    "v10AuthorizationReusable": false,
+    "v11AuthorizationReusable": false,
+    "v12AuthorizationReusable": false,
+    "v13AuthorizationReusable": false
+  },
+  "smallestHonestDelta": {
+    "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
+    "taughtFirstSegmentRoleRecovery": true,
+    "taughtPostSettleContentFillRestore": true,
+    "taughtPostWriterContentFillRestore": true,
+    "taughtTwoPassParentThenContentFillRestore": true,
+    "taughtHiddenTextFillReveal": true,
+    "carriedSceneReadback": "recipe/scene-readback-v14.ts",
+    "carriedSceneReadbackRuntime": "recipe/scene-readback-runtime-v14.ts",
+    "carriedV3Verifier": "recipe/input-field-live-v3-verifier-v14.ts",
+    "liveHostDoesNotImportSceneReadbackTs": true,
+    "v8SceneReadbackUnchanged": true,
+    "v9AntecedentBytesUnchanged": true,
+    "v10AntecedentBytesUnchanged": true,
+    "v11AntecedentBytesUnchanged": true,
+    "v12AntecedentBytesUnchanged": true,
+    "v13AntecedentBytesUnchanged": true,
+    "v11WriterBytesUnchanged": false,
+    "v12WriterBytesUnchanged": true,
+    "v13WriterBytesUnchanged": true,
+    "v13RestoreBytesUnchanged": true
+  },
+  "transportFacts": {
+    "oneCallDiskOperatorRequired": true,
+    "honorSignedTimeoutRequired": true,
+    "signedWriterTimeoutMs": 300000,
+    "fileContextEditorTypeReconstructedFromExactScratchTarget": true,
+    "emptyCodeEnvelopeRefused": true,
+    "cursorReadMustNotIngestSignedWriter": true
+  },
+  "denominator": {
+    "sourceRoots": 2,
+    "expectedSceneFacts": 43726,
+    "variants": 256,
+    "captureCells": 128,
+    "remoteRequests": 133,
+    "hostPhases": 3
+  },
+  "securityPrerequisites": {
+    "figmaPatRevokedOrReplacedRequired": true,
+    "mcpRestartAfterRotationRequired": true,
+    "ownerOnlyEnvironmentFileMode0600Required": true,
+    "repositorySecretScanZeroRequired": true,
+    "exactScratchReadOnlyProbeRequired": true,
+    "tokenValuesForbidden": true
+  },
+  "attemptsExecuted": 0,
+  "nextAttempt": 1,
+  "maximumFutureAttempts": 3,
+  "liveExecutionOccurred": false,
+  "figmaWrites": 0,
+  "figmaCaptures": 0,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false
+}
