@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v15-status-v1",
-  "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+  "status": "attempt 1 failed closed; writer and restore accepted; extract issued; host refused MUI content fill; cleanup complete",
   "baseCommit": "0c56dc335dca4bf1ed5ed1ea06a2e3d1858c710e",
   "antecedent": {
     "commit": "c1d3f0ac38f00fd005e80ed4d9e35ff393dbad58",
@@ -80,12 +80,16 @@
     "exactScratchReadOnlyProbeRequired": true,
     "tokenValuesForbidden": true
   },
-  "attemptsExecuted": 0,
-  "nextAttempt": 1,
+  "attemptsExecuted": 1,
+  "nextAttempt": 2,
   "maximumFutureAttempts": 3,
-  "liveExecutionOccurred": false,
-  "figmaWrites": 0,
+  "liveExecutionOccurred": true,
+  "figmaWrites": 4,
   "figmaCaptures": 0,
+  "createdNodesThenRemoved": 2317,
+  "attempt1Path": "recipe/evidence/input-field-live-pivot-v15-attempt-1.json",
+  "attempt1Sha256": "74b068d2ea29e4d3cee917ff130dc33e074f1025026fee42cf15efd1849731cb",
+  "restartAsV15Attempt2WithoutPersistedFillAfterHideForbidden": true,
   "humanSignoff": "pending",
   "overallInputSuccess": false
 }

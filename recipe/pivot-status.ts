@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 authorization declared; live forbidden; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -380,7 +380,11 @@ const V15_AUTHORIZATION_TEMPLATE_SHA256 =
 const V15_STATUS_PATH =
   "recipe/evidence/input-field-live-pivot-v15-status.json";
 const V15_STATUS =
-  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
+  "attempt 1 failed closed; writer and restore accepted; extract issued; host refused MUI content fill; cleanup complete";
+const V15_ATTEMPT_1_PATH =
+  "recipe/evidence/input-field-live-pivot-v15-attempt-1.json";
+const V15_ATTEMPT_1_SHA256 =
+  "74b068d2ea29e4d3cee917ff130dc33e074f1025026fee42cf15efd1849731cb";
 const V15_BASE_COMMIT = "0c56dc335dca4bf1ed5ed1ea06a2e3d1858c710e";
 const V15_ANTECEDENT_COMMIT = "c1d3f0ac38f00fd005e80ed4d9e35ff393dbad58";
 const V15_AUTHORIZATION_PATH = `${V15_ROOT}/capture-authorization.json`;
@@ -1241,11 +1245,16 @@ export function validatePivotStatus(
     status.input?.liveV15?.hostPhases !== 3 ||
     status.input?.liveV15?.transportFacts?.signedWriterTimeoutMs !== 300_000 ||
     status.input?.liveV15?.security?.liveExecutionForbidden !== true ||
-    status.input?.liveV15?.attemptsExecuted !== 0 ||
-    status.input?.liveV15?.nextAttempt !== 1 ||
-    status.input?.liveV15?.liveExecutionOccurred !== false ||
-    status.input?.liveV15?.figmaWrites !== 0 ||
+    status.input?.liveV15?.attemptsExecuted !== 1 ||
+    status.input?.liveV15?.nextAttempt !== 2 ||
+    status.input?.liveV15?.liveExecutionOccurred !== true ||
+    status.input?.liveV15?.figmaWrites !== 4 ||
     status.input?.liveV15?.figmaCaptures !== 0 ||
+    status.input?.liveV15?.createdNodesThenRemoved !== 2317 ||
+    status.input?.liveV15?.attempt1Path !== V15_ATTEMPT_1_PATH ||
+    status.input?.liveV15?.attempt1Sha256 !== V15_ATTEMPT_1_SHA256 ||
+    status.input?.liveV15
+      ?.restartAsV15Attempt2WithoutPersistedFillAfterHideForbidden !== true ||
     status.input?.liveV15?.humanSignoff !== "pending" ||
     status.input?.liveV15?.overallInputSuccess !== false
   )
@@ -2462,9 +2471,18 @@ export function verifyPivotStatus(): void {
     v15Status.smallestHonestDelta?.taughtHiddenTextFillReveal !== true ||
     v15Status.smallestHonestDelta?.taughtMeasureFillWhileVisible !== true ||
     v15Status.smallestHonestDelta?.v14RestoreBytesUnchanged !== true ||
-    v15Status.attemptsExecuted !== 0 ||
-    v15Status.liveExecutionOccurred !== false ||
-    v15Status.figmaWrites !== 0 ||
+    v15Status.attemptsExecuted !== 1 ||
+    v15Status.nextAttempt !== 2 ||
+    v15Status.liveExecutionOccurred !== true ||
+    v15Status.figmaWrites !== 4 ||
+    v15Status.figmaCaptures !== 0 ||
+    v15Status.createdNodesThenRemoved !== 2317 ||
+    v15Status.attempt1Path !== V15_ATTEMPT_1_PATH ||
+    v15Status.attempt1Sha256 !== V15_ATTEMPT_1_SHA256 ||
+    sha256(readRepositoryEvidence(V15_ATTEMPT_1_PATH)) !==
+      V15_ATTEMPT_1_SHA256 ||
+    v15Status.restartAsV15Attempt2WithoutPersistedFillAfterHideForbidden !==
+      true ||
     v15Status.overallInputSuccess !== false
   )
     failures.push("v15 draft antecedent/status mismatch");

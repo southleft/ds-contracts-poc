@@ -1,0 +1,71 @@
+{
+  "artifactVersion": "input-live-v15-attempt-1-v1",
+  "status": "failed closed",
+  "authorizationCommit": "4002cb3be87c52ddfa32e2fa15c6bfbdc251238b",
+  "codeCommit": "4002cb3be87c52ddfa32e2fa15c6bfbdc251238b",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 2317,
+    "pageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+    "sourceRoots": 2
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 256,
+    "fixedBefore": 24,
+    "hiddenRevealedForFill": 24,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "marker": "INPUT-TEXT-FILL-MEASURE-VISIBLE",
+    "rawResponseBytes": 976,
+    "extractIssued": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "rawResponseBytes": 8402467,
+    "hostNormalizeAccount": false
+  },
+  "v14FailureCleared": {
+    "hashedTwoPassRestoreThrewNotFill": true
+  },
+  "v12FailureNotCleared": {
+    "muiContentFillFixedAfterMeasureWhileVisibleRestore": true
+  },
+  "observedContentWidthMode": {
+    "mui": { "FILL": 104, "FIXED": 24, "HUG": 0, "total": 128 },
+    "polaris": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 }
+  },
+  "failure": {
+    "phase": "host-normalize-account",
+    "locus": "recipe/recipes/input-field.ts:1350 via recipe/input-field-live-v3-verifier-v15.ts:443",
+    "messages": [
+      "input-field@1: input-field/variant/medium/default/placeholder/false/none: input content must fill the horizontal surface"
+    ],
+    "cause": "Hashed measure-while-visible restore accepted on Scratch: restoredCount 256, hiddenRevealedForFill 24, retriedForFill 0, contentFillAfter true. Extract was issued. After visibility was restored, extract still shows MUI 104/128 FILL and 24/128 FIXED (all hidden placeholders); Polaris 128/128 FILL. Host collapse refused the same MUI content-fill check. Do not teach the recipe to accept FIXED. Do not restart v15 attempt 2 as-is. Restore bytes are in the v15 hash set.",
+    "inputFieldRecipeInV15AntecedentHashSet": false,
+    "writerInV15AntecedentHashSet": true,
+    "restoreInV15AntecedentHashSet": true
+  },
+  "cleanup": {
+    "accepted": true,
+    "remainingOwnedNodes": 0,
+    "scratchOwnedInputPagesRemaining": 0
+  },
+  "captures": 0,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false,
+  "v14AntecedentBytesUnchanged": true,
+  "v15AntecedentBytesUnchanged": true,
+  "v15AuthorizationBytesUnchanged": true,
+  "nextAttempt": 2,
+  "restartAsV15Attempt2WithoutPersistedFillAfterHideForbidden": true
+}

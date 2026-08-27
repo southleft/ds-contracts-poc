@@ -1,6 +1,6 @@
 {
   "artifactVersion": "recipe-pivot-current-status-v1",
-  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 authorization declared; live forbidden; Button/Input false; human signoff pending",
+  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; Button/Input false; human signoff pending",
   "supersedesStatusClaimsOnly": true,
   "historicalEvidenceRewritten": false,
   "chronology": {
@@ -1005,7 +1005,7 @@
       "overallInputSuccess": false
     },
     "liveV15": {
-      "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+      "status": "attempt 1 failed closed; writer and restore accepted; extract issued; host refused MUI content fill; cleanup complete",
       "baseCommit": "0c56dc335dca4bf1ed5ed1ea06a2e3d1858c710e",
       "antecedentCommit": "c1d3f0ac38f00fd005e80ed4d9e35ff393dbad58",
       "protocolPath": "recipe/evidence/input-field-live-pivot-v15/protocol.json",
@@ -1097,13 +1097,17 @@
         "tokenValuesForbidden": true,
         "liveExecutionForbidden": true
       },
-      "attemptsExecuted": 0,
-      "nextAttempt": 1,
+      "attemptsExecuted": 1,
+      "nextAttempt": 2,
       "maximumFutureAttempts": 3,
       "humanSignoff": "pending",
-      "liveExecutionOccurred": false,
-      "figmaWrites": 0,
+      "liveExecutionOccurred": true,
+      "figmaWrites": 4,
       "figmaCaptures": 0,
+      "createdNodesThenRemoved": 2317,
+      "attempt1Path": "recipe/evidence/input-field-live-pivot-v15-attempt-1.json",
+      "attempt1Sha256": "74b068d2ea29e4d3cee917ff130dc33e074f1025026fee42cf15efd1849731cb",
+      "restartAsV15Attempt2WithoutPersistedFillAfterHideForbidden": true,
       "overallInputSuccess": false
     }
   }

@@ -120,10 +120,18 @@
 > V15 is the replacement lineage: it copies the v14 stack and teaches a
 > restore that measures content FILL **while the text is still visible**,
 > then restores visibility. V14 writer and restore bytes stay frozen. Do
-> not teach FIXED. Authorization pins antecedent
-> `c1d3f0ac38f00fd005e80ed4d9e35ff393dbad58`. Live execution remains
-> forbidden until runtime security prerequisites pass. Do not restart v14
-> attempt 2 as-is.
+> not teach FIXED. V15 prepare is published at
+> `c1d3f0ac38f00fd005e80ed4d9e35ff393dbad58`. Authorization is published at
+> `4002cb3be87c52ddfa32e2fa15c6bfbdc251238b`. V15 attempt 1 ran Scratch-only:
+> writer accepted (2317 created nodes), cleanup persisted, hashed
+> measure-while-visible restore accepted (`restoredCount` 256,
+> `hiddenRevealedForFill` 24, `retriedForFill` 0), then extract issued
+> (8402467 bytes). Host collapse refused the same MUI content-fill check.
+> Extract still shows MUI 104/128 FILL and 24/128 FIXED (all hidden
+> placeholders); Polaris 128/128 FILL. Do not teach the recipe to accept
+> FIXED. Do not restart v15 attempt 2 as-is. The next lineage must not
+> patch hashed v15 restore bytes. Cleanup accepted; owned Input pages are
+> gone; no captures; no live success.
 > Button overall success is false/pending.
 > Its technical mint, usability, restoration, and 12/12 adjudication bytes are
 > retained, but the human grade is not attributable and the historical live
@@ -406,7 +414,9 @@ lineage; do not patch hashed bytes in place.
 | A5o | AUTHORIZE INPUT V14 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `961d08f94853d2b90cd3b68963f5bc113e5ae066`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `0a608d7aab9c788be5af5f06df594b567c4997f6a7dfd32ecec560082b8ae57d`; SPKI SHA-256 `6e8061a22d1464e44ecc8469ea0a5e46b0b7c26169f194c15edec85ed8bb4415`. Do not patch hashed v13 or v14 bytes. | **Done** at `eae2dfb3e884b2b71c2de6814a5586cc85b9443c`. |
 | A5p | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; active request was restore. Hashed two-pass restore threw `INPUT-V14-RESTORE-NOT-FILL`. Extract not issued. Do **not** teach FIXED. Do **not** restart v14 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
 | A5q | PREPARE INPUT V15. Copy the v14 stack. Do not patch hashed v14 restore or writer bytes. Teach restore to measure content FILL while the text is still visible, then restore visibility. Do not teach FIXED. | **Done** at `c1d3f0ac38f00fd005e80ed4d9e35ff393dbad58`. Antecedent index SHA-256 `8c944fa92e1afa2ca09c6bc6d938490e1927077d613c603cdbc1f3a5023659d7`. |
-| A5r | AUTHORIZE INPUT V15 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `c1d3f0ac38f00fd005e80ed4d9e35ff393dbad58`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `2618b5df73ef7a1d4e4973729a99638d44ca5cd22f909b7207231982f9063374`; SPKI SHA-256 `ff0f180c12a7b39572bb4de024c29d90bdda3a0dafaab6e40d25a611f00afed7`. Do not patch hashed v14 or v15 bytes. | `--expect-authorized` after publish. Then attestation + Scratch-only live. Max 3. If a hashed v15 file fails closed, open v16. |
+| A5r | AUTHORIZE INPUT V15 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `c1d3f0ac38f00fd005e80ed4d9e35ff393dbad58`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `2618b5df73ef7a1d4e4973729a99638d44ca5cd22f909b7207231982f9063374`; SPKI SHA-256 `ff0f180c12a7b39572bb4de024c29d90bdda3a0dafaab6e40d25a611f00afed7`. Do not patch hashed v14 or v15 bytes. | **Done** at `4002cb3be87c52ddfa32e2fa15c6bfbdc251238b`. |
+| A5s | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8402467 bytes). Host refused MUI content fill. Extract still MUI 104/128 FILL and 24/128 FIXED hidden placeholders; Polaris 128/128 FILL. Do **not** teach FIXED. Do **not** restart v15 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5t | PREPARE INPUT V16. Copy the v15 stack. Do not patch hashed v15 restore or writer bytes. Open a new lineage only after RECORD INPUT V15 ATTEMPT 1. Persist FILL after hidden texts are hidden again, or otherwise clear the 24 hidden MUI placeholder FIXED cells without teaching FIXED. | Open only after RECORD. If a hashed v16 file later fails closed, open v17. |
 | A6 | Attributable human signoff on Input. | **Human gate.** Record pending and continue other work. Do not invent a grade. Overall Input stays **false** until signed. |
 
 ### B · Button closeout
@@ -1829,7 +1839,7 @@ references and re-derives a legacy comparator over the frozen 24-cell matrix.
 | archetype   | progress                                                                                                                                                        | next evidence boundary                                                                           |
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | Button      | **technical mint retained; overall false/pending**                                                                                                              | scene-derived inversion/accounting, then attributable human signoff (human gate)                 |
-| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, and v14 attempt 1 failed closed; v15 authorization declared; false** | attestation + Scratch-only live v15 (see Remaining work §A) |
+| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, and v15 attempt 1 failed closed; false** | PREPARE INPUT V16 (see Remaining work §A) |
 | Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                                                                      | matched 24-cell benchmark, Scratch-only live, then human grade (see Remaining work §C)           |
 | Data Table  | not claimed                                                                                                                                                     | human-reviewed adapters, offline cross-library proof, then Scratch-only live                     |
 | Calendar    | not claimed                                                                                                                                                     | reviewed archetype addition, then the same offline-then-live sequence                            |
