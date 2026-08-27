@@ -1,0 +1,237 @@
+{
+  "version": "input-field-recognisability-calibration-v2",
+  "status": {
+    "protocol": "locked",
+    "goldPacket": "qualification-adjudicated",
+    "performancePacket": "sealed-ungraded",
+    "recognisabilityInstrument": "blocked-insufficient-qualified-raters",
+    "architecturePerformance": "not-unsealed",
+    "liveInput": "blocked",
+    "inputOverall": false
+  },
+  "failedRoundDiagnosis": {
+    "immutableEvidenceRoot": "recipe/evidence/input-field-comparison-calibrated",
+    "validGradeEnvelopes": "0/3",
+    "fleissKappa": 0.4725274725274726,
+    "hiddenDuplicateConsistency": "128/128 per rater and 128/128 majority",
+    "protocolDefectsOnly": [
+      "The blind packet described a strict envelope but did not provide a serialized fillable output template or rater-runnable preflight; all three submissions omitted or renamed required envelope fields and used a different criterion shape.",
+      "The observable rubric lacked enough quantitative anchors to force a common pass/fail standard; under high failure prevalence, raters were individually repeatable on exact duplicates while diverging on which specimens crossed the subjective materiality boundary."
+    ],
+    "excludedInferences": [
+      "No prior grade outcome is reused, repaired, transformed, or treated as performance evidence.",
+      "No performance identity, winner, consensus, axis aggregate, or implementation-labelled result is opened.",
+      "Thresholds are locked from the protocol defect analysis and objective gold construction, not tuned to a performance result."
+    ]
+  },
+  "preservation": {
+    "previousInputEvidenceModified": false,
+    "protectedTreeSnapshots": [
+      {
+        "root": "recipe/evidence/input-field-comparison",
+        "files": 902,
+        "bytes": 10959678,
+        "aggregateSha256": "97aa3f02e528aa55ad38b85b014c8e916ecdc6054235ee4fc6d1a917081ef871"
+      },
+      {
+        "root": "recipe/evidence/input-field-comparison-v2",
+        "files": 906,
+        "bytes": 11582098,
+        "aggregateSha256": "104ea1252fcc7132c4a9ab72de7418e5974f66897598483d5d8c1a4a125af190"
+      },
+      {
+        "root": "recipe/evidence/input-field-comparison-calibrated",
+        "files": 777,
+        "bytes": 9869527,
+        "aggregateSha256": "fa11a7f3ada7643c43ba6bdf95a9328965a2310f2e310fdde009d26b2d971eb1"
+      }
+    ]
+  },
+  "commitment": {
+    "protocol": "recipe/evidence/input-field-comparison-calibration-v2/protocol.json",
+    "protocolHash": "b3beb503740e31491aa4c0195ffff33eda1207362fb2d2cb4aafa848e6201ddd",
+    "calibrationCommitment": "8e6894a5b87fd2ce129f29d1a9ea041ac0792aa96a0a01528b25b2d0c0bb48c9",
+    "rubricVersion": "input-field-observable-rubric-v2",
+    "rubricHash": "08d75803555566604a76b05edbc1a2411be2661936cf61ab1371dc15bbfeccf0",
+    "gradeSchema": "recipe/evidence/input-field-comparison-calibration-v2/grade.schema.json",
+    "gradeSchemaHash": "73c10638530eff42ab54af754f1acbe94a94d3fe478321781cdb6b1256a10741",
+    "lockedBeforeAnyFreshGrade": true
+  },
+  "gold": {
+    "packet": "recipe/evidence/input-field-comparison-calibration-v2/gold/blind-packet/packet.json",
+    "packetHash": "70dd47851b2a7c19548fb666cb82eafe0be67aaca8e001d4bcac73f10767c022",
+    "randomizedBatchHash": "a4bdbd9708674df88fc27b9ce00e316537778a4c4648426fd8c9354a385f4503",
+    "sealedAnswerKey": "recipe/evidence/input-field-comparison-calibration-v2/gold/sealed-answer-key.json",
+    "sealedAnswerKeyHash": "7a5d844898442fc4e34d687041b5d29d9a162618f97b7eefa0f4e886b06c51b4",
+    "syntheticGeneratorSource": "recipe/input-field-comparison-calibration-v2.ts",
+    "syntheticGeneratorSourceHash": "75167a28f25631f165dfb6ec6aba03ffb8d496d2ce0a5efcfcd4ac9731b7923e",
+    "imageManifestHash": "f350cf4ff4c2f578934705a0dae341f6282bc89e758bf4d4b6246b92df57c1b8",
+    "counts": {
+      "cases": 24,
+      "exactOrSemanticPasses": 8,
+      "controlledMinorPasses": 4,
+      "obviousStructuralOrStateFailures": 12,
+      "expectedPass": 12,
+      "expectedFail": 12
+    },
+    "templateHashes": {
+      "RATER-CAL-V2-A": "9ea88e05f1980e2960ea380948dc3adaee09da300b70a99c2f4cc1bb9b083457",
+      "RATER-CAL-V2-B": "72a30bd4c4e12f9f0bbb1e92226e9a21551a9323d3883550273325cfc7809e1b",
+      "RATER-CAL-V2-C": "ce18c92a72832878cef699f35b14c20fb14920e450cd011cb997ff67b763222b"
+    },
+    "outcomeDisclosure": "Only after a valid gold submission, for calibration feedback before performance.",
+    "qualification": {
+      "status": "insufficient-qualified-raters",
+      "submissionsAdjudicated": 3,
+      "qualifiedRaters": [
+        "RATER-CAL-V2-B",
+        "RATER-CAL-V2-C"
+      ],
+      "qualifiedCount": 2,
+      "calibratedValidRatersRequired": 3,
+      "replacementRatersRequired": 1,
+      "performanceCommissioned": false,
+      "performanceRemainsSealedAndUngraded": true,
+      "receipts": {
+        "RATER-CAL-V2-A": {
+          "path": "recipe/evidence/input-field-comparison-calibration-v2/gold/receipts/rater-cal-v2-a.json",
+          "sha256": "474d2c13bcbb31f40dc13f9420d567a09c32c00cd0abfea37dc6108a172eeec7"
+        },
+        "RATER-CAL-V2-B": {
+          "path": "recipe/evidence/input-field-comparison-calibration-v2/gold/receipts/rater-cal-v2-b.json",
+          "sha256": "1d351c753946f615237c407ff036e0fe29b3a2b673562c8e7386364188b4c8ee"
+        },
+        "RATER-CAL-V2-C": {
+          "path": "recipe/evidence/input-field-comparison-calibration-v2/gold/receipts/rater-cal-v2-c.json",
+          "sha256": "4538e58eadc06389f87e47c126b8d4825acc211bcf5d5f8961b42d3b8e2b53fd"
+        }
+      }
+    }
+  },
+  "performance": {
+    "packet": "recipe/evidence/input-field-comparison-calibration-v2/performance/blind-packet/packet.json",
+    "packetHash": "c24f43a3c769a0b5747bbae93a098bdc762895d39d15326547ce857cc104299e",
+    "randomizedBatchHash": "9dee5601af7077d660b643c6abe9bdff9ef9550dc8193a4d5b82828a18edae42",
+    "sealedAnswerKey": "recipe/evidence/input-field-comparison-calibration-v2/performance/sealed-answer-key.json",
+    "sealedAnswerKeyHash": "31424d32a6a2f7da6bae8d67b5e515746c4ad108c8580c44d439d4bb0f9d30f9",
+    "answerKeyParsedForPerformanceResult": false,
+    "performanceIdentitiesRevealed": false,
+    "gradeWritten": false,
+    "counts": {
+      "uniqueSourceReferences": 128,
+      "referencePresentations": 384,
+      "correctedV2": 128,
+      "hiddenLegacyCopyA": 128,
+      "hiddenLegacyCopyB": 128,
+      "specimens": 384
+    },
+    "byteContinuity": {
+      "sourceReferencesMatchingPriorRound": 128,
+      "correctedV2MatchingPriorRound": 128,
+      "legacyCopyAMatchingPriorRound": 128,
+      "legacyCopyBMatchingPriorRound": 128,
+      "hiddenByteIdenticalPairs": 128,
+      "continuityHash": "f8e10fbbc610edaa155466de2b06e9669e7dfdac1edf78c6b3e8de97ffc45aad",
+      "duplicateManifestHash": "bef66299a6b968c38978f8fce12f730b4ba2084cde152746068071da3115f43f"
+    },
+    "freshOpacity": {
+      "priorPacketReused": false,
+      "taskIdsReused": 0,
+      "referenceIdsReused": 0,
+      "specimenIdsReused": 0,
+      "pathsReused": 0,
+      "freshOrder": true,
+      "packetContainsIdentityOrDuplicateLabels": false
+    },
+    "templateHashes": {
+      "RATER-CAL-V2-A": "f42100a9f8e31f0765c036ef53dad48ec589a6c4246c263879a5ce6f66e40cf8",
+      "RATER-CAL-V2-B": "544361c6824b8aec56b40b4969da54703271a388437cec2a47c2c090c998042f",
+      "RATER-CAL-V2-C": "6aa1e8b20c4d888fb19797ccf4b2b9c286271453ea450234bba6311f7dbc65c0"
+    }
+  },
+  "thresholds": {
+    "calibratedValidRatersRequired": 3,
+    "calibrationScoreMinimum": 0.95,
+    "obviousFailureScoreRequired": 1,
+    "validEnvelopeRequired": true,
+    "hiddenDuplicateAgreementPerRaterMinimum": 0.95,
+    "majorityDuplicateAgreementMinimum": 127,
+    "majorityDuplicateAgreementDenominator": 128,
+    "everyPairwiseAgreementMinimum": 0.75,
+    "fleissKappaMinimum": 0.6,
+    "maximumDuplicateCopyPassRateDelta": 0.05,
+    "majorityFailureConcreteDefectRatersMinimum": 2,
+    "failureConsequence": "Any failed prerequisite or reliability threshold keeps recognisability unusable, performance sealed, architecture progression blocked, and live Input blocked."
+  },
+  "raters": [
+    {
+      "graderId": "RATER-CAL-V2-A",
+      "status": "calibration-failed-replacement-required",
+      "goldTemplate": "recipe/evidence/input-field-comparison-calibration-v2/gold/blind-packet/templates/rater-cal-v2-a.json",
+      "goldOutput": "recipe/evidence/input-field-comparison-calibration-v2/gold/submissions/rater-cal-v2-a.json",
+      "calibrationReceipt": "recipe/evidence/input-field-comparison-calibration-v2/gold/receipts/rater-cal-v2-a.json",
+      "performanceTemplate": "recipe/evidence/input-field-comparison-calibration-v2/performance/blind-packet/templates/rater-cal-v2-a.json",
+      "performanceOutput": "recipe/evidence/input-field-comparison-calibration-v2/performance/submissions/rater-cal-v2-a.json",
+      "prompts": {
+        "gold": "Act as fresh independent rater RATER-CAL-V2-A. Phase 1 only: open recipe/evidence/input-field-comparison-calibration-v2/gold/blind-packet/packet.json, your template recipe/evidence/input-field-comparison-calibration-v2/gold/blind-packet/templates/rater-cal-v2-a.json, and images beneath recipe/evidence/input-field-comparison-calibration-v2/gold/blind-packet; do not inspect parent directories or recipe/evidence/input-field-comparison-calibration-v2/gold/sealed-answer-key.json. Apply the locked rubric to all 24 tasks in exact order, replace every null, and preserve every field and ID. Run npx tsx recipe/input-field-comparison-calibration-v2.ts --preflight gold recipe/evidence/input-field-comparison-calibration-v2/gold/submissions/rater-cal-v2-a.json and write only recipe/evidence/input-field-comparison-calibration-v2/gold/submissions/rater-cal-v2-a.json. Stop after submission. You may receive gold feedback and a signed calibration receipt; do not open the performance packet unless that receipt passes.",
+        "performance": "Phase 2 for RATER-CAL-V2-A begins only after recipe/evidence/input-field-comparison-calibration-v2/gold/receipts/rater-cal-v2-a.json says passed=true, score>=0.95, obviousStructuralStateFailureScore=1, and envelopeValid=true. Then open only recipe/evidence/input-field-comparison-calibration-v2/performance/blind-packet/packet.json, recipe/evidence/input-field-comparison-calibration-v2/performance/blind-packet/templates/rater-cal-v2-a.json, that calibration receipt, and images beneath recipe/evidence/input-field-comparison-calibration-v2/performance/blind-packet; never inspect recipe/evidence/input-field-comparison-calibration-v2/performance/sealed-answer-key.json, parent evidence, source code, prior grades, or another rater's work. Grade all 384 tasks independently in exact packet order with the unchanged locked rubric; do not compare tasks, seek repeats, infer identity, rank paths, or change thresholds. Fill the receipt binding and every grade, run npx tsx recipe/input-field-comparison-calibration-v2.ts --preflight performance recipe/evidence/input-field-comparison-calibration-v2/performance/submissions/rater-cal-v2-a.json, and write only recipe/evidence/input-field-comparison-calibration-v2/performance/submissions/rater-cal-v2-a.json. Do not adjudicate or reveal any performance identity."
+      },
+      "qualification": {
+        "receipt": {
+          "path": "recipe/evidence/input-field-comparison-calibration-v2/gold/receipts/rater-cal-v2-a.json",
+          "sha256": "474d2c13bcbb31f40dc13f9420d567a09c32c00cd0abfea37dc6108a172eeec7"
+        },
+        "score": 0.9166666666666666,
+        "obviousFailureScore": 0.9166666666666666,
+        "envelopeValid": true,
+        "passed": false
+      }
+    },
+    {
+      "graderId": "RATER-CAL-V2-B",
+      "status": "qualified-waiting-for-complete-cohort",
+      "goldTemplate": "recipe/evidence/input-field-comparison-calibration-v2/gold/blind-packet/templates/rater-cal-v2-b.json",
+      "goldOutput": "recipe/evidence/input-field-comparison-calibration-v2/gold/submissions/rater-cal-v2-b.json",
+      "calibrationReceipt": "recipe/evidence/input-field-comparison-calibration-v2/gold/receipts/rater-cal-v2-b.json",
+      "performanceTemplate": "recipe/evidence/input-field-comparison-calibration-v2/performance/blind-packet/templates/rater-cal-v2-b.json",
+      "performanceOutput": "recipe/evidence/input-field-comparison-calibration-v2/performance/submissions/rater-cal-v2-b.json",
+      "prompts": {
+        "gold": "Act as fresh independent rater RATER-CAL-V2-B. Phase 1 only: open recipe/evidence/input-field-comparison-calibration-v2/gold/blind-packet/packet.json, your template recipe/evidence/input-field-comparison-calibration-v2/gold/blind-packet/templates/rater-cal-v2-b.json, and images beneath recipe/evidence/input-field-comparison-calibration-v2/gold/blind-packet; do not inspect parent directories or recipe/evidence/input-field-comparison-calibration-v2/gold/sealed-answer-key.json. Apply the locked rubric to all 24 tasks in exact order, replace every null, and preserve every field and ID. Run npx tsx recipe/input-field-comparison-calibration-v2.ts --preflight gold recipe/evidence/input-field-comparison-calibration-v2/gold/submissions/rater-cal-v2-b.json and write only recipe/evidence/input-field-comparison-calibration-v2/gold/submissions/rater-cal-v2-b.json. Stop after submission. You may receive gold feedback and a signed calibration receipt; do not open the performance packet unless that receipt passes.",
+        "performance": "Phase 2 for RATER-CAL-V2-B begins only after recipe/evidence/input-field-comparison-calibration-v2/gold/receipts/rater-cal-v2-b.json says passed=true, score>=0.95, obviousStructuralStateFailureScore=1, and envelopeValid=true. Then open only recipe/evidence/input-field-comparison-calibration-v2/performance/blind-packet/packet.json, recipe/evidence/input-field-comparison-calibration-v2/performance/blind-packet/templates/rater-cal-v2-b.json, that calibration receipt, and images beneath recipe/evidence/input-field-comparison-calibration-v2/performance/blind-packet; never inspect recipe/evidence/input-field-comparison-calibration-v2/performance/sealed-answer-key.json, parent evidence, source code, prior grades, or another rater's work. Grade all 384 tasks independently in exact packet order with the unchanged locked rubric; do not compare tasks, seek repeats, infer identity, rank paths, or change thresholds. Fill the receipt binding and every grade, run npx tsx recipe/input-field-comparison-calibration-v2.ts --preflight performance recipe/evidence/input-field-comparison-calibration-v2/performance/submissions/rater-cal-v2-b.json, and write only recipe/evidence/input-field-comparison-calibration-v2/performance/submissions/rater-cal-v2-b.json. Do not adjudicate or reveal any performance identity."
+      },
+      "qualification": {
+        "receipt": {
+          "path": "recipe/evidence/input-field-comparison-calibration-v2/gold/receipts/rater-cal-v2-b.json",
+          "sha256": "1d351c753946f615237c407ff036e0fe29b3a2b673562c8e7386364188b4c8ee"
+        },
+        "score": 1,
+        "obviousFailureScore": 1,
+        "envelopeValid": true,
+        "passed": true
+      }
+    },
+    {
+      "graderId": "RATER-CAL-V2-C",
+      "status": "qualified-waiting-for-complete-cohort",
+      "goldTemplate": "recipe/evidence/input-field-comparison-calibration-v2/gold/blind-packet/templates/rater-cal-v2-c.json",
+      "goldOutput": "recipe/evidence/input-field-comparison-calibration-v2/gold/submissions/rater-cal-v2-c.json",
+      "calibrationReceipt": "recipe/evidence/input-field-comparison-calibration-v2/gold/receipts/rater-cal-v2-c.json",
+      "performanceTemplate": "recipe/evidence/input-field-comparison-calibration-v2/performance/blind-packet/templates/rater-cal-v2-c.json",
+      "performanceOutput": "recipe/evidence/input-field-comparison-calibration-v2/performance/submissions/rater-cal-v2-c.json",
+      "prompts": {
+        "gold": "Act as fresh independent rater RATER-CAL-V2-C. Phase 1 only: open recipe/evidence/input-field-comparison-calibration-v2/gold/blind-packet/packet.json, your template recipe/evidence/input-field-comparison-calibration-v2/gold/blind-packet/templates/rater-cal-v2-c.json, and images beneath recipe/evidence/input-field-comparison-calibration-v2/gold/blind-packet; do not inspect parent directories or recipe/evidence/input-field-comparison-calibration-v2/gold/sealed-answer-key.json. Apply the locked rubric to all 24 tasks in exact order, replace every null, and preserve every field and ID. Run npx tsx recipe/input-field-comparison-calibration-v2.ts --preflight gold recipe/evidence/input-field-comparison-calibration-v2/gold/submissions/rater-cal-v2-c.json and write only recipe/evidence/input-field-comparison-calibration-v2/gold/submissions/rater-cal-v2-c.json. Stop after submission. You may receive gold feedback and a signed calibration receipt; do not open the performance packet unless that receipt passes.",
+        "performance": "Phase 2 for RATER-CAL-V2-C begins only after recipe/evidence/input-field-comparison-calibration-v2/gold/receipts/rater-cal-v2-c.json says passed=true, score>=0.95, obviousStructuralStateFailureScore=1, and envelopeValid=true. Then open only recipe/evidence/input-field-comparison-calibration-v2/performance/blind-packet/packet.json, recipe/evidence/input-field-comparison-calibration-v2/performance/blind-packet/templates/rater-cal-v2-c.json, that calibration receipt, and images beneath recipe/evidence/input-field-comparison-calibration-v2/performance/blind-packet; never inspect recipe/evidence/input-field-comparison-calibration-v2/performance/sealed-answer-key.json, parent evidence, source code, prior grades, or another rater's work. Grade all 384 tasks independently in exact packet order with the unchanged locked rubric; do not compare tasks, seek repeats, infer identity, rank paths, or change thresholds. Fill the receipt binding and every grade, run npx tsx recipe/input-field-comparison-calibration-v2.ts --preflight performance recipe/evidence/input-field-comparison-calibration-v2/performance/submissions/rater-cal-v2-c.json, and write only recipe/evidence/input-field-comparison-calibration-v2/performance/submissions/rater-cal-v2-c.json. Do not adjudicate or reveal any performance identity."
+      },
+      "qualification": {
+        "receipt": {
+          "path": "recipe/evidence/input-field-comparison-calibration-v2/gold/receipts/rater-cal-v2-c.json",
+          "sha256": "4538e58eadc06389f87e47c126b8d4825acc211bcf5d5f8961b42d3b8e2b53fd"
+        },
+        "score": 1,
+        "obviousFailureScore": 1,
+        "envelopeValid": true,
+        "passed": true
+      }
+    }
+  ]
+}

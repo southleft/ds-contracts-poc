@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "attempt": 1,
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "wrapperPath": "recipe/evidence/input-field-live-pivot-v1/writer-wrapper-attempt-1.txt",
+  "wrapperBytes": 2262264,
+  "wrapperSha256": "5c4771b0d93b1823a48b1c61015b860674e8a04d4f25984fe7e911ccf0ddb81b",
+  "evalBegan": false,
+  "before": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma",
+    "pageCount": 13,
+    "totalTopLevelNodes": 174,
+    "proofPageMatches": 0,
+    "matchingCollections": 0,
+    "totalLocalVariables": 11163
+  },
+  "bridgeResult": {
+    "success": false,
+    "error": "Error: in setSharedPluginData: This pluginData entry exceeds 100 kB per entry limit."
+  },
+  "evalCompleted": false,
+  "error": "Error: in setSharedPluginData: This pluginData entry exceeds 100 kB per entry limit."
+}

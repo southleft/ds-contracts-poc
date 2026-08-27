@@ -1,0 +1,119 @@
+{
+  "version": 4,
+  "kind": "button-recipe-live-writer-plan",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "pageName": "Recipe Pivot / Button / e6a61d04-b04f4059-v4",
+  "runIdentity": "e6a61d04-b04f4059-v4",
+  "writer": {
+    "path": "recipe/evidence/button-live-pivot-v4/writer.js",
+    "bytes": 33977,
+    "sha256": "2cab582e5b9a7329ec6e316d9981dc13e74532ed9b4b6bd64afff56408547cd8",
+    "deterministicRegeneration": "pass-two-complete-generations"
+  },
+  "transport": {
+    "protocol": "ds-contracts/figma-writer-utf8-base64/v1",
+    "encoding": "utf8+base64",
+    "payloadBytes": 33977,
+    "payloadSha256": "2cab582e5b9a7329ec6e316d9981dc13e74532ed9b4b6bd64afff56408547cd8",
+    "envelopePath": "recipe/evidence/button-live-pivot-v4/transport-envelope.json",
+    "envelopeSha256": "a18de003510c2ce4e99428bd89ed78402ce226c2fc4811c752ff9e20d5d5debe",
+    "wrapperPath": "recipe/evidence/button-live-pivot-v4/writer-wrapper-attempt-2.txt",
+    "wrapperBytes": 50846,
+    "wrapperSha256": "11abf92e7049b42ba6023efa5e5c2e2ede489f108b8e10aed0aa1da3d736909a",
+    "preEvalChecks": [
+      "exact Scratch file key/name/editor",
+      "protocol and encoding",
+      "strict canonical base64",
+      "decoded byte length",
+      "decoded SHA-256",
+      "fatal UTF-8 decode"
+    ]
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "result": "failed-source-fixed-label-zero-width",
+      "writerPath": "recipe/evidence/button-live-pivot-v4/writer-attempt-1.js",
+      "writerSha256": "5bd3a3029cda6b68b80ea05e978be28bc2974e5f5ef881ee50be2348fec26c22",
+      "wrapperPath": "recipe/evidence/button-live-pivot-v4/writer-wrapper-attempt-1.txt",
+      "wrapperSha256": "c6f135f8f427a51249d2363cdd668d26739cd7610a5eb714894a83e2658fec21",
+      "resultPath": "recipe/evidence/button-live-pivot-v4/live-attempt-1.json",
+      "resultSha256": "7a5e8694f1c0a3ad8d5d712be00cee2891f72ece33b0090f47a16da91dcf128f",
+      "diagnosticPath": "recipe/evidence/button-live-pivot-v4/live-attempt-1-diagnostic.json",
+      "diagnosticSha256": "9e3a8dfbb79261ba8934a1261b688fa1a788f71da3c08a342b22850461af83d8",
+      "cleanupPath": "recipe/evidence/button-live-pivot-v4/cleanup-attempt-1.json",
+      "cleanupSha256": "ea326d70340286691464517a05a298902a92db70b55ef2a8bf346cf2600c1281"
+    }
+  ],
+  "pluginApi": {
+    "typingsVersion": "1.135.0",
+    "conformanceReport": "recipe/evidence/button-live-pivot-v4/conformance-report.json",
+    "conformanceReportSha256": "f9c9cc8479c0e0e2781a55680f465b5df890d70c3f2b54976935a0bac88f9cef",
+    "counts": {
+      "apiCalls": 17,
+      "propertyNames": 83,
+      "variants": 288,
+      "variables": 57,
+      "pluginDataWrites": 7003,
+      "propertyWrites": 15695,
+      "bindings": 4296
+    }
+  },
+  "sources": [
+    {
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "displayName": "Altitude",
+      "contractPath": "examples/altitude/contracts/button.contract.json",
+      "contractSha256": "43c7d78292e1f9b33585b4294f164547a54e750cc921a7d1891b039b7a345aea",
+      "recipeHash": "e6a61d04237eb5da58ea1896ec9212c8ccac356453f368eb5a9022307dc9730a",
+      "envelopeHash": "73b9c0ccc268545d711e55fd4ae3e8081e1708d6a27059e6779e42b3e81735bb",
+      "plannedVariants": 144,
+      "comparedIrFacts": 3978,
+      "responsiveness": {
+        "sourceSizing": "hug",
+        "designerResize": "fixed-width",
+        "childRole": "button/label",
+        "response": "recenter"
+      }
+    },
+    {
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "displayName": "Fluent",
+      "contractPath": "examples/fluent/contracts/button.contract.json",
+      "contractSha256": "a67391060b4babe0d28684890b30d55e5d08f37f1ffc8d3edc28c8da3c280e34",
+      "recipeHash": "b04f405938d27039519dd47db274d6830c74fc2ea4151521a9ceac9e3df0c8bb",
+      "envelopeHash": "9b5626840521a733ea2ef28b7cdc5f5d5b3b673229336ab58f11e82a0a120afd",
+      "plannedVariants": 144,
+      "comparedIrFacts": 3978,
+      "responsiveness": {
+        "sourceSizing": "hug",
+        "designerResize": "fixed-width",
+        "childRole": "button/label",
+        "response": "recenter"
+      }
+    }
+  ],
+  "immutableHistory": {
+    "v1ReceiptSha256": "863fe1af6b38fc12237b47e4deb0e5db1c298d462666e4921bd28d8bf964b652",
+    "v2ReceiptSha256": "7668e12fd95b017ad7093a279dcae2817a518c6e1a324ef800f906b9e8fc8a81",
+    "v3ReceiptSha256": "dc4c1fbd3d8de6374f2b5f4703dfe02d0d3291f6fc56544cec33f451d8a48d3c",
+    "v3VerificationSha256": "77107891d528a4c79ff73ecfa6e1226f6a482145a4db3f14c9c8fe7b062f0544",
+    "v3ReadbackSha256": "d7a958739c688dcdf3934d1c9771961a8f661515077a6ffffbddfa6fae072de8",
+    "v3CleanupSha256": "bf069a3abb8f9a9f6aca24e237c23d0e3ba1f63f56ffa81599762877ffbfb2ea"
+  },
+  "provenance": {
+    "commit": "047f66b8e134a6bc173e9336621fc1baf0e37230",
+    "branch": "pivot/recipe-ir-v1",
+    "dirty": true,
+    "dirtyStatusSha256": "8f8a60c0185e4a96999caaf95cab1ed6efc65d5f44716d39a63eb0c309aaf5c8"
+  },
+  "grading": {
+    "status": "ungraded",
+    "buttonSuccess": false,
+    "recognisabilityVerdictsAuthoredByBuilder": false
+  }
+}

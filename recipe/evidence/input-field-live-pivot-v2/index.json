@@ -1,0 +1,116 @@
+{
+  "version": 2,
+  "status": "failed-live-objective-cleaned",
+  "receipt": {
+    "path": "recipe/evidence/input-field-live-pivot-v2/receipt.json",
+    "bytes": 14951,
+    "sha256": "f636f127ac328ea2180e9ba2c04229f31bd41f85ba871c5c67ef6e18ec7e7d58"
+  },
+  "artifacts": [
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v2/v1-root-cause.json",
+      "bytes": 130985,
+      "sha256": "1af72f108db5ebe7c8d4fe9abd7d5d6eac2fe83fd27c9a23c851539caa79240f"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v2/writer-plan.json",
+      "bytes": 4009,
+      "sha256": "edc78308c6b51f21f7ede95a2ef3e91b9cb5dd60c3601bccf37269d4f8b072f9"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v2/conformance-report.json",
+      "bytes": 46906,
+      "sha256": "47e8ddfceffd4a32b6a133222193248bc7e632fff73e5b1bc5ee34be8586ae60"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v2/transport-envelope.json",
+      "bytes": 2278993,
+      "sha256": "58f972bdbccced4e739ea1a662df50b9a612b8f502e2633078087e6b02c1286a"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v2/live-verification.json",
+      "bytes": 10803,
+      "sha256": "f13cabf717bff64ab1ca91235aea54148b32c07d764d8d60668bc4c1d412e763"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v2/normalized-live-readback.json",
+      "bytes": 4121190,
+      "sha256": "342eccb194ed8530140f93a1cdc8d6f8a3dda8f8ae602aee2e10a6d3c82bc66b"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v2/objective-canvas-result.json",
+      "bytes": 314046,
+      "sha256": "19328f7438f68678f98c0cae45123a95846d4a1a5dacabb068f450d624cbafe8"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v2/layout-probe-attempt-2.json",
+      "bytes": 14960,
+      "sha256": "572e683b1097ceb798d270d06438c83c81e02b7814fedee1c66361e3adedb47a"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v2/layout-probe-restoration.json",
+      "bytes": 300,
+      "sha256": "f1b89047c97ad2cc334ae598c73494720355ae885b4c3af04cd0987a47e3125a"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v2/human-review-packet.json",
+      "bytes": 91747,
+      "sha256": "e6e1ece65ead596e297ab25a6b5724deb1e250f7a8d98cc56e02c63ed58fe4b3"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v2/writer-attempt-1.js",
+      "bytes": 1708995,
+      "sha256": "b3efd51fd85e6828ef0c0827ad632cca86420140cbd0880631300cc917ed5943"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v2/writer-wrapper-attempt-1.txt",
+      "bytes": 2284204,
+      "sha256": "c3b8ad5d296ed8ab8c9aeb6e9ae2338725f4c311b2c224bcc9e681c94d0b465c"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v2/live-attempt-1.json",
+      "bytes": 2129,
+      "sha256": "9519761427cab5e9c4cfd296bd84b5b7265a380ec3120828b257a5f82c4658a4"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v2/cleanup-attempt-1.json",
+      "bytes": 238,
+      "sha256": "a08cf95691e384676ecf82b3e050d53ba067a98ac43b48b1859a41ca450ac71b",
+      "removedPageIds": [
+        "86:22485"
+      ],
+      "removedCollectionIds": [
+        "VariableCollectionId:86:22487"
+      ],
+      "complete": true
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v2/writer.js",
+      "bytes": 1709077,
+      "sha256": "05481c74cb445a6fb55375260b65ee15cde893d19eadeed002e386776962df55"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v2/writer-wrapper-attempt-2.txt",
+      "bytes": 2284316,
+      "sha256": "589f3e625813ca43f2caf65b58f00556a2702745e0270fdbe6cfa5c106df14c0"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v2/live-attempt-2.json",
+      "bytes": 54211,
+      "sha256": "6ba2ab0608eed91492b33f150434c67c9f522d8ff806153dc92c3410891d58f1"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v2/cleanup-attempt-2.json",
+      "bytes": 275,
+      "sha256": "096da77b67d78182d965404f6204a03ad740d04f5e907dcf2a593d21d5caee3d",
+      "removedPageIds": [
+        "86:22579"
+      ],
+      "removedCollectionIds": [
+        "VariableCollectionId:86:22581",
+        "VariableCollectionId:86:24014"
+      ],
+      "complete": true
+    }
+  ]
+}

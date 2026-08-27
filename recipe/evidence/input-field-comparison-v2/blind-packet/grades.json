@@ -1,0 +1,2138 @@
+{
+  "grader": {
+    "identity": "GPT-5.6 Sol",
+    "role": "independent-visual-grader"
+  },
+  "packetProtocol": {
+    "version": "input-field-paired-source-v2",
+    "rubricHash": "ec7361423018edabd7df185c29ae518f0642e339cf84b1caaf80d0c8501a2e8b",
+    "environmentHash": "bb49d731fcb8823a1866a2a615b59ea731e95c6358a1c768cb614b7ed3d97c22",
+    "crop": "painted-union+24-css-px-white-margin",
+    "scale": 2,
+    "browser": "149.0.7827.55 (playwright chromium-1228)",
+    "fontsHash": "6fd1317c7d1f2028a8c0577d5168a48ecc8d91f7354538e11feeb9b2a97bc139",
+    "passThreshold": "independent recognisable=true for each specimen against its paired original-source reference"
+  },
+  "randomizedBatchHash": "c6885a462d0821827b76eedde273db640e7939f48ee44904fdfcf9484d3d5868",
+  "counts": {
+    "references": 128,
+    "specimens": 256,
+    "grades": 256,
+    "recognisable": 96,
+    "unrecognisable": 160
+  },
+  "grades": [
+    {
+      "specimenId": "specimen-c31ecc16f49e",
+      "referenceId": "cell-0028e28e0ba5",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-d232ced481de",
+      "referenceId": "cell-0028e28e0ba5",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-00f6f742e161",
+      "referenceId": "cell-0098da057298",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-ac9adaf942e1",
+      "referenceId": "cell-0098da057298",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Focus styling adds a blue outline around the entire label/field/helper group; the reference confines the focus ring to the input surface."
+      ]
+    },
+    {
+      "specimenId": "specimen-2c0bb34f8cd1",
+      "referenceId": "cell-00e67b27304b",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-5728aae06018",
+      "referenceId": "cell-00e67b27304b",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-76dcb74f454c",
+      "referenceId": "cell-02172f6669ad",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-e1daad73fab5",
+      "referenceId": "cell-02172f6669ad",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-3f3b3bc8437c",
+      "referenceId": "cell-06a8d8cab039",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-f9bb2ec10c76",
+      "referenceId": "cell-06a8d8cab039",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-3869fe139116",
+      "referenceId": "cell-06afcc516d92",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-6de6b5313721",
+      "referenceId": "cell-06afcc516d92",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-c01e8ea97e2b",
+      "referenceId": "cell-0840718f4032",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-c3fc51815e3d",
+      "referenceId": "cell-0840718f4032",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-3b27d00415f3",
+      "referenceId": "cell-089d58f2902b",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-3d4b55eeba0a",
+      "referenceId": "cell-089d58f2902b",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Focus styling adds a blue outline around the entire label/field/helper group; the reference confines the focus ring to the input surface."
+      ]
+    },
+    {
+      "specimenId": "specimen-012f2cca6cce",
+      "referenceId": "cell-0c5e8ec8ea13",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-9602548f1ce7",
+      "referenceId": "cell-0c5e8ec8ea13",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-75e46ec156fd",
+      "referenceId": "cell-0c8378dc6daa",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-d00d3ed5f016",
+      "referenceId": "cell-0c8378dc6daa",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-9bf99e5ea754",
+      "referenceId": "cell-0e63f49ca830",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-b2764246cab7",
+      "referenceId": "cell-0e63f49ca830",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-0133ac01e553",
+      "referenceId": "cell-0f5d8554e52c",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-c181c3b8e948",
+      "referenceId": "cell-0f5d8554e52c",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Focus styling adds a blue outline around the entire label/field/helper group; the reference confines the focus ring to the input surface."
+      ]
+    },
+    {
+      "specimenId": "specimen-742dc91c52b7",
+      "referenceId": "cell-131dac51d7a7",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-cd38dd6ac28b",
+      "referenceId": "cell-131dac51d7a7",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-0adbd51fe15c",
+      "referenceId": "cell-15b7f3f554b0",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-f35fef452fe2",
+      "referenceId": "cell-15b7f3f554b0",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-4489f8734045",
+      "referenceId": "cell-167ebcb83492",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-fd4ab316b727",
+      "referenceId": "cell-167ebcb83492",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-0c76e0526c5f",
+      "referenceId": "cell-17279523dca2",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-70c078d63086",
+      "referenceId": "cell-17279523dca2",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-0ce72ff7b65b",
+      "referenceId": "cell-19987db4fb25",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Focus styling adds a blue outline around the entire label/field/helper group; the reference confines the focus ring to the input surface."
+      ]
+    },
+    {
+      "specimenId": "specimen-c76fa093c9bb",
+      "referenceId": "cell-19987db4fb25",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-ab2655ad15c2",
+      "referenceId": "cell-1c00099e3bb4",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-b462714630be",
+      "referenceId": "cell-1c00099e3bb4",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-08fbb8dad75e",
+      "referenceId": "cell-1e1684dede14",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-5f5f42cf5092",
+      "referenceId": "cell-1e1684dede14",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Error treatment omits the leading error icon and incorrectly colors the field label red; the reference uses a neutral label with an icon-led error message."
+      ]
+    },
+    {
+      "specimenId": "specimen-21706710836a",
+      "referenceId": "cell-1ea97a23d474",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-57c0ced5b7ad",
+      "referenceId": "cell-1ea97a23d474",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-0f11b36f00e1",
+      "referenceId": "cell-2298c4a8539a",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-26f111e5288f",
+      "referenceId": "cell-2298c4a8539a",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-63064b993769",
+      "referenceId": "cell-23db6ce2e857",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-e2f08137d4a8",
+      "referenceId": "cell-23db6ce2e857",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-c9ea8f1693e7",
+      "referenceId": "cell-25ba8bad357f",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-d9d85f5f8393",
+      "referenceId": "cell-25ba8bad357f",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Focus styling adds a blue outline around the entire label/field/helper group; the reference confines the focus ring to the input surface."
+      ]
+    },
+    {
+      "specimenId": "specimen-47e06e1ff5f3",
+      "referenceId": "cell-260f124a14f1",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-f7d50bdb10d5",
+      "referenceId": "cell-260f124a14f1",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Focus styling adds a blue outline around the entire label/field/helper group; the reference confines the focus ring to the input surface."
+      ]
+    },
+    {
+      "specimenId": "specimen-d33d970b4a19",
+      "referenceId": "cell-260f8e3b1ec4",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-fc610e5adb57",
+      "referenceId": "cell-260f8e3b1ec4",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-4cb51898e796",
+      "referenceId": "cell-2a986a7e22d9",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-7e1b17db3378",
+      "referenceId": "cell-2a986a7e22d9",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-11ed651c3235",
+      "referenceId": "cell-2af96de05d10",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-f3b84a195b5f",
+      "referenceId": "cell-2af96de05d10",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Error treatment omits the leading error icon and incorrectly colors the field label red; the reference uses a neutral label with an icon-led error message."
+      ]
+    },
+    {
+      "specimenId": "specimen-060b19ac371d",
+      "referenceId": "cell-2c52871b1fc9",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-1c1bd4f30408",
+      "referenceId": "cell-2c52871b1fc9",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-978dab7be86b",
+      "referenceId": "cell-2e6cd0eec7f6",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-e4f92adad3bf",
+      "referenceId": "cell-2e6cd0eec7f6",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-7cfaa83aceaa",
+      "referenceId": "cell-2f427b9fe726",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-b36074c8e3d1",
+      "referenceId": "cell-2f427b9fe726",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-9922138fb795",
+      "referenceId": "cell-332594beb4d1",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Error treatment omits the leading error icon and incorrectly colors the field label red; the reference uses a neutral label with an icon-led error message."
+      ]
+    },
+    {
+      "specimenId": "specimen-bec0fe820333",
+      "referenceId": "cell-332594beb4d1",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-56d3b996ed52",
+      "referenceId": "cell-338c338b6a82",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-eb6eda48db1a",
+      "referenceId": "cell-338c338b6a82",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-26ce9a8c127b",
+      "referenceId": "cell-34f85d158ea8",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-d920a4fc7ede",
+      "referenceId": "cell-34f85d158ea8",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-7c2388e1104c",
+      "referenceId": "cell-35ea29e468db",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-fdec01292035",
+      "referenceId": "cell-35ea29e468db",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-5f5a42ce93f6",
+      "referenceId": "cell-363c791f5e41",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-909b291b8045",
+      "referenceId": "cell-363c791f5e41",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-542a1883367d",
+      "referenceId": "cell-39889e953a05",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-677c6a9b1d8d",
+      "referenceId": "cell-39889e953a05",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-2cfe2011c992",
+      "referenceId": "cell-3a254ea4760d",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Error treatment omits the leading error icon and incorrectly colors the field label red; the reference uses a neutral label with an icon-led error message."
+      ]
+    },
+    {
+      "specimenId": "specimen-f61b758faa9a",
+      "referenceId": "cell-3a254ea4760d",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-341c62e7b6fc",
+      "referenceId": "cell-3da0155cd252",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-50c5ce254fef",
+      "referenceId": "cell-3da0155cd252",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-0e34fd31893a",
+      "referenceId": "cell-4067e6104b16",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-6a8a9534ac6d",
+      "referenceId": "cell-4067e6104b16",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-0f318fd4630a",
+      "referenceId": "cell-40ffa45151ac",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-ccdcd54f7670",
+      "referenceId": "cell-40ffa45151ac",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-84a0ebd0e044",
+      "referenceId": "cell-44e630d862f9",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-e1859e138edb",
+      "referenceId": "cell-44e630d862f9",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-4184d68371c2",
+      "referenceId": "cell-44ff2835117c",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-dac2b4ccc218",
+      "referenceId": "cell-44ff2835117c",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Error treatment omits the leading error icon and incorrectly colors the field label red; the reference uses a neutral label with an icon-led error message."
+      ]
+    },
+    {
+      "specimenId": "specimen-b0b8f9108e93",
+      "referenceId": "cell-452fc4da7882",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-ca54a31e929b",
+      "referenceId": "cell-452fc4da7882",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-5a266717b059",
+      "referenceId": "cell-4640a6cc9f39",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-753e75f86f61",
+      "referenceId": "cell-4640a6cc9f39",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-39924a256ff8",
+      "referenceId": "cell-4792d00c0191",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-3d00df435a5f",
+      "referenceId": "cell-4792d00c0191",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-3a6960af82d1",
+      "referenceId": "cell-4b67772843f6",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-ae0db0b70380",
+      "referenceId": "cell-4b67772843f6",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Focus styling adds a blue outline around the entire label/field/helper group; the reference confines the focus ring to the input surface."
+      ]
+    },
+    {
+      "specimenId": "specimen-5aacd60d696a",
+      "referenceId": "cell-4b9ee7aba10c",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Focus styling adds a blue outline around the entire label/field/helper group; the reference confines the focus ring to the input surface."
+      ]
+    },
+    {
+      "specimenId": "specimen-625d2bd13360",
+      "referenceId": "cell-4b9ee7aba10c",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-6d3ab1672243",
+      "referenceId": "cell-4f806a0c8461",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-804296582244",
+      "referenceId": "cell-4f806a0c8461",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-53abe8389a0a",
+      "referenceId": "cell-4ffb01750d13",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-59eb3bbfb9d1",
+      "referenceId": "cell-4ffb01750d13",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-5ad9df384c8c",
+      "referenceId": "cell-5051f1e19fec",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-e96e16376c57",
+      "referenceId": "cell-5051f1e19fec",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-7f431af474b6",
+      "referenceId": "cell-5563d3ccdcee",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-98d7dfeabcc5",
+      "referenceId": "cell-5563d3ccdcee",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Error treatment omits the leading error icon and incorrectly colors the field label red; the reference uses a neutral label with an icon-led error message."
+      ]
+    },
+    {
+      "specimenId": "specimen-8ad2177ada8b",
+      "referenceId": "cell-56223037a834",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-f0c41ed38e0d",
+      "referenceId": "cell-56223037a834",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-a8088ddddc25",
+      "referenceId": "cell-57da9eb1cad5",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-d26d40603587",
+      "referenceId": "cell-57da9eb1cad5",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-ba2f8f6bc13d",
+      "referenceId": "cell-5846ac58d0de",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-d6bf82764af2",
+      "referenceId": "cell-5846ac58d0de",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Focus styling adds a blue outline around the entire label/field/helper group; the reference confines the focus ring to the input surface."
+      ]
+    },
+    {
+      "specimenId": "specimen-3edf9ffaad6d",
+      "referenceId": "cell-5a21e82ab9ec",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-c76cfee717e4",
+      "referenceId": "cell-5a21e82ab9ec",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-bbe1df551b7f",
+      "referenceId": "cell-63edb3797fcd",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-eddbaa67a06a",
+      "referenceId": "cell-63edb3797fcd",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Error treatment omits the leading error icon and incorrectly colors the field label red; the reference uses a neutral label with an icon-led error message."
+      ]
+    },
+    {
+      "specimenId": "specimen-3e0e594a5408",
+      "referenceId": "cell-6451b8688961",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-9fc82d17a863",
+      "referenceId": "cell-6451b8688961",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-35eeca6b8b25",
+      "referenceId": "cell-690303f921bc",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-b16c0ef7d0e0",
+      "referenceId": "cell-690303f921bc",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-2d7de61897ba",
+      "referenceId": "cell-69b8281d81cd",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-fa95395a383c",
+      "referenceId": "cell-69b8281d81cd",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Focus styling adds a blue outline around the entire label/field/helper group; the reference confines the focus ring to the input surface."
+      ]
+    },
+    {
+      "specimenId": "specimen-41d8c94d3ead",
+      "referenceId": "cell-6cc3fadc5262",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-7aaf87154bc2",
+      "referenceId": "cell-6cc3fadc5262",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-90da064f9b32",
+      "referenceId": "cell-6e2a2e02bfd0",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-d20c2ee43144",
+      "referenceId": "cell-6e2a2e02bfd0",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-20f8534deaa4",
+      "referenceId": "cell-6f480ce680a5",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-edc2ae3b6452",
+      "referenceId": "cell-6f480ce680a5",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-45a17649b658",
+      "referenceId": "cell-74a39f253b80",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-ed369a86bf24",
+      "referenceId": "cell-74a39f253b80",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Focus styling adds a blue outline around the entire label/field/helper group; the reference confines the focus ring to the input surface."
+      ]
+    },
+    {
+      "specimenId": "specimen-80ee6364fb40",
+      "referenceId": "cell-76a2bede9d9e",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Error treatment omits the leading error icon and incorrectly colors the field label red; the reference uses a neutral label with an icon-led error message."
+      ]
+    },
+    {
+      "specimenId": "specimen-9162861d408a",
+      "referenceId": "cell-76a2bede9d9e",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-134345e963fd",
+      "referenceId": "cell-77dfbb02283e",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-cfe1a7901a5a",
+      "referenceId": "cell-77dfbb02283e",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-912fbe4f689a",
+      "referenceId": "cell-78439b8c86db",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-c1d3df603680",
+      "referenceId": "cell-78439b8c86db",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-4320d0d7c888",
+      "referenceId": "cell-792eae90923b",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-e2ecc7b86bad",
+      "referenceId": "cell-792eae90923b",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-d2089843a3ac",
+      "referenceId": "cell-7996898dbc56",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Focus styling adds a blue outline around the entire label/field/helper group; the reference confines the focus ring to the input surface."
+      ]
+    },
+    {
+      "specimenId": "specimen-ff6c927ccee8",
+      "referenceId": "cell-7996898dbc56",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-5a4acc9567b5",
+      "referenceId": "cell-79b1b03c20a2",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-5edec6db3ba9",
+      "referenceId": "cell-79b1b03c20a2",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-815eb959b1ea",
+      "referenceId": "cell-79edb5fab1b0",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-d39d2e11e26e",
+      "referenceId": "cell-79edb5fab1b0",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-ee8b4a15a803",
+      "referenceId": "cell-7f07cc21bf6c",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-f8de2c2a18e1",
+      "referenceId": "cell-7f07cc21bf6c",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-74dd3df419cc",
+      "referenceId": "cell-805e8682f20a",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-d32d310f96ac",
+      "referenceId": "cell-805e8682f20a",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-0215dd6d0fe1",
+      "referenceId": "cell-81d4388fd7ec",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-599b8e0aae36",
+      "referenceId": "cell-81d4388fd7ec",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-8a8697927eb2",
+      "referenceId": "cell-839bb61c12fd",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Error treatment omits the leading error icon and incorrectly colors the field label red; the reference uses a neutral label with an icon-led error message."
+      ]
+    },
+    {
+      "specimenId": "specimen-8ce325497fc0",
+      "referenceId": "cell-839bb61c12fd",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-06f0ea48c167",
+      "referenceId": "cell-848dce9b1abb",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-e4b36ad403db",
+      "referenceId": "cell-848dce9b1abb",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-6663c4ce33a1",
+      "referenceId": "cell-8da4fe751827",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-d8da611bc7a0",
+      "referenceId": "cell-8da4fe751827",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-2fd2f7b869a9",
+      "referenceId": "cell-8ee31985cfed",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-d59805d8c7e5",
+      "referenceId": "cell-8ee31985cfed",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-637fb7986f6e",
+      "referenceId": "cell-91273c6e8e36",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-810270f221cc",
+      "referenceId": "cell-91273c6e8e36",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-21c6dcc9c7cf",
+      "referenceId": "cell-91af8884fc97",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Error treatment omits the leading error icon and incorrectly colors the field label red; the reference uses a neutral label with an icon-led error message."
+      ]
+    },
+    {
+      "specimenId": "specimen-db4781a6d074",
+      "referenceId": "cell-91af8884fc97",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-95a355d026fd",
+      "referenceId": "cell-937dd490298c",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-d9e410583ea8",
+      "referenceId": "cell-937dd490298c",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-907f610c72a7",
+      "referenceId": "cell-940dc4f48666",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-af47ff4ef35c",
+      "referenceId": "cell-940dc4f48666",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-c65864a43abe",
+      "referenceId": "cell-965b6e711464",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-f6f5ff8db0ff",
+      "referenceId": "cell-965b6e711464",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-574eb697985d",
+      "referenceId": "cell-a35a507e467b",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-dd715f18a5b0",
+      "referenceId": "cell-a35a507e467b",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-b7e5d0ba3716",
+      "referenceId": "cell-a8b6c9d81740",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-b970394e1e48",
+      "referenceId": "cell-a8b6c9d81740",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-d49076164984",
+      "referenceId": "cell-aab1478560db",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-fcffa0e3fa62",
+      "referenceId": "cell-aab1478560db",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-8f77d87b74c7",
+      "referenceId": "cell-ab0cb16f6071",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-a0bb9261e7c3",
+      "referenceId": "cell-ab0cb16f6071",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-004c5713373f",
+      "referenceId": "cell-abe459246845",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Error treatment omits the leading error icon and incorrectly colors the field label red; the reference uses a neutral label with an icon-led error message."
+      ]
+    },
+    {
+      "specimenId": "specimen-4a915e79acb7",
+      "referenceId": "cell-abe459246845",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-337b4572aa55",
+      "referenceId": "cell-aca37e088cc1",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-456fcdfdea4a",
+      "referenceId": "cell-aca37e088cc1",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Error treatment omits the leading error icon and incorrectly colors the field label red; the reference uses a neutral label with an icon-led error message."
+      ]
+    },
+    {
+      "specimenId": "specimen-a2347164f5ef",
+      "referenceId": "cell-aeb7bd3728a3",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-dd60eda090ef",
+      "referenceId": "cell-aeb7bd3728a3",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-4a23bf7288f5",
+      "referenceId": "cell-b18781e29cf0",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-67942de36fba",
+      "referenceId": "cell-b18781e29cf0",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-8df3dca66f04",
+      "referenceId": "cell-b4bdc1ddefe4",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-f6fb821f5628",
+      "referenceId": "cell-b4bdc1ddefe4",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-0df6b6b155f9",
+      "referenceId": "cell-b6f84171582b",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-3a1df4cc6b61",
+      "referenceId": "cell-b6f84171582b",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-16fce18046da",
+      "referenceId": "cell-b7c5e52144d3",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-9223afc89afb",
+      "referenceId": "cell-b7c5e52144d3",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-1535eedf8526",
+      "referenceId": "cell-bd393acf1d50",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-7bc1751cbf0b",
+      "referenceId": "cell-bd393acf1d50",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-810d21a18553",
+      "referenceId": "cell-be7a173524c1",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-a427f3c1ba96",
+      "referenceId": "cell-be7a173524c1",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-5936aba6d3ac",
+      "referenceId": "cell-be9cc592760d",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-7c06f69f8d47",
+      "referenceId": "cell-be9cc592760d",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-72762d0f1e3b",
+      "referenceId": "cell-bf4894b8eead",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-ef5034a0f85f",
+      "referenceId": "cell-bf4894b8eead",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-00090cf781c0",
+      "referenceId": "cell-c43aa21192b6",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-575d3a12e4b1",
+      "referenceId": "cell-c43aa21192b6",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-6b80165a0715",
+      "referenceId": "cell-c717afb2320a",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-d1a01650c8d0",
+      "referenceId": "cell-c717afb2320a",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-4689cc0f34af",
+      "referenceId": "cell-c756683bbf8a",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-cbd5a2d0971a",
+      "referenceId": "cell-c756683bbf8a",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-b3dba4d81eb8",
+      "referenceId": "cell-c75e45e3e479",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-df746e3a08e1",
+      "referenceId": "cell-c75e45e3e479",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-311e2df7f013",
+      "referenceId": "cell-c80a8c512dfd",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Error treatment omits the leading error icon and incorrectly colors the field label red; the reference uses a neutral label with an icon-led error message."
+      ]
+    },
+    {
+      "specimenId": "specimen-c32abc8449d6",
+      "referenceId": "cell-c80a8c512dfd",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-b8629ba18897",
+      "referenceId": "cell-cbb1e8d21e6f",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-e2934d2078a5",
+      "referenceId": "cell-cbb1e8d21e6f",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-22e73a6d1bc9",
+      "referenceId": "cell-cec5f68d2435",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-85a4ed8672d0",
+      "referenceId": "cell-cec5f68d2435",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-16eb0b8f4571",
+      "referenceId": "cell-cf3664c55af9",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-379c73ea217d",
+      "referenceId": "cell-cf3664c55af9",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-4db2c09768be",
+      "referenceId": "cell-d180747275d0",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Focus styling adds a blue outline around the entire label/field/helper group; the reference confines the focus ring to the input surface."
+      ]
+    },
+    {
+      "specimenId": "specimen-9d87f61b8521",
+      "referenceId": "cell-d180747275d0",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-433f77a33228",
+      "referenceId": "cell-d204c21942b2",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-8babcb3f28ed",
+      "referenceId": "cell-d204c21942b2",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-883913496d72",
+      "referenceId": "cell-d2400a337f00",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Focus styling adds a blue outline around the entire label/field/helper group; the reference confines the focus ring to the input surface."
+      ]
+    },
+    {
+      "specimenId": "specimen-94c9edb34121",
+      "referenceId": "cell-d2400a337f00",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-0e3f6dd72854",
+      "referenceId": "cell-dca1153d8d00",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-ed19cab92053",
+      "referenceId": "cell-dca1153d8d00",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-1d57b8ee4a17",
+      "referenceId": "cell-de76e7268003",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-7e8d28d23127",
+      "referenceId": "cell-de76e7268003",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-8836abc1b7ec",
+      "referenceId": "cell-e2fc670e893f",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-fc6e87fd7d2b",
+      "referenceId": "cell-e2fc670e893f",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-73bdd1fd76b2",
+      "referenceId": "cell-e450149e7804",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-e7f0700d26fa",
+      "referenceId": "cell-e450149e7804",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-4f9adcb6ef8b",
+      "referenceId": "cell-e67e7cb6b79d",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Focus styling adds a blue outline around the entire label/field/helper group; the reference confines the focus ring to the input surface."
+      ]
+    },
+    {
+      "specimenId": "specimen-8ba9d1be1c54",
+      "referenceId": "cell-e67e7cb6b79d",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-0edfb645efa3",
+      "referenceId": "cell-ebc4140fedef",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-f084e19cc69b",
+      "referenceId": "cell-ebc4140fedef",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Error treatment omits the leading error icon and incorrectly colors the field label red; the reference uses a neutral label with an icon-led error message."
+      ]
+    },
+    {
+      "specimenId": "specimen-13fe6141d603",
+      "referenceId": "cell-ec5cfc622bfe",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-a82d94e81032",
+      "referenceId": "cell-ec5cfc622bfe",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Focus styling adds a blue outline around the entire label/field/helper group; the reference confines the focus ring to the input surface."
+      ]
+    },
+    {
+      "specimenId": "specimen-82903a327f4c",
+      "referenceId": "cell-ed42e55cd620",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-9d18f2b4e1fc",
+      "referenceId": "cell-ed42e55cd620",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-6917a8a7bb25",
+      "referenceId": "cell-ef5123ff0f1e",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-d3c5e7379883",
+      "referenceId": "cell-ef5123ff0f1e",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Error treatment omits the leading error icon and incorrectly colors the field label red; the reference uses a neutral label with an icon-led error message."
+      ]
+    },
+    {
+      "specimenId": "specimen-abaf7c60256a",
+      "referenceId": "cell-f00857288843",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-f4526aa6e75d",
+      "referenceId": "cell-f00857288843",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Error treatment omits the leading error icon and incorrectly colors the field label red; the reference uses a neutral label with an icon-led error message."
+      ]
+    },
+    {
+      "specimenId": "specimen-437304973ce8",
+      "referenceId": "cell-f05a72f7471b",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-afec4f1eedc4",
+      "referenceId": "cell-f05a72f7471b",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-31b67c763890",
+      "referenceId": "cell-f36aef83c515",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-dd630cf237b6",
+      "referenceId": "cell-f36aef83c515",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-1c51636c1539",
+      "referenceId": "cell-f4572aeefe13",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-ca42bf52fbfd",
+      "referenceId": "cell-f4572aeefe13",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-5d8c02e3ac15",
+      "referenceId": "cell-f5e44894c0e7",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-ed3ad4161d34",
+      "referenceId": "cell-f5e44894c0e7",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-618f09ec40ec",
+      "referenceId": "cell-f693f9bd00cd",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-a76498d31cbb",
+      "referenceId": "cell-f693f9bd00cd",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-930032984539",
+      "referenceId": "cell-f6a6c7bd8bfb",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-b6d586e4a2ea",
+      "referenceId": "cell-f6a6c7bd8bfb",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-1da3724361d3",
+      "referenceId": "cell-fbefc39c9f5c",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-70607ff1f188",
+      "referenceId": "cell-fbefc39c9f5c",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-c05e27ee683c",
+      "referenceId": "cell-fe3db42287b1",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Uses a compressed generic text-field layout that omits or changes the reference helper/error content, adornments, required treatment, and state styling."
+      ]
+    },
+    {
+      "specimenId": "specimen-d18da67230e9",
+      "referenceId": "cell-fe3db42287b1",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-265135f78ae1",
+      "referenceId": "cell-ff35663663f6",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    },
+    {
+      "specimenId": "specimen-d14e311ae7c4",
+      "referenceId": "cell-ff35663663f6",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-4a33c1e1b404",
+      "referenceId": "cell-ff53298c8735",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-68228e32cd63",
+      "referenceId": "cell-ff53298c8735",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Renders a clipped red amount/currency error field instead of the reference content and state; label, value/adornments, and geometry are incorrect."
+      ]
+    }
+  ]
+}

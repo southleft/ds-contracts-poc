@@ -38,6 +38,7 @@
     "sync",
     "evals",
     "conformance",
+    "recipe",
     "figma-sync/plugin/engine"
   ],
   "exclude": [

@@ -1,0 +1,23 @@
+{
+  "artifactVersion": "input-live-v3-index-v1",
+  "status": "draft-uncommitted; chronology unproven; capture forbidden",
+  "captureAuthorized": false,
+  "protocol": {
+    "path": "recipe/evidence/input-field-live-pivot-v3/protocol.json",
+    "sha256": "f4decf46da7cd3870e247d5304d632028356580e58ce68bedcb7acb7c0e31a23"
+  },
+  "captureArtifacts": [],
+  "result": null,
+  "overallInputSuccess": false,
+  "offlineCorrectionTask2": {
+    "implemented": true,
+    "figmaOrCaptureRun": false,
+    "claimsLiveReadiness": false
+  },
+  "blockers": [
+    "protocol has no externally verifiable committed chronology",
+    "scene-derived live inversion/accounting has not run",
+    "typed adornment/font lowering has not been verified against a newly authorized Figma scene",
+    "attributable human signoff has not occurred"
+  ]
+}

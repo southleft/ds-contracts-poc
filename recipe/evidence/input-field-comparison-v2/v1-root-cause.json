@@ -1,0 +1,1463 @@
+{
+  "version": "input-field-v1-root-cause-v1",
+  "immutableFailure": {
+    "recipeFailures": 88,
+    "recipeSpecimens": 128,
+    "defectStatements": 271,
+    "defectClasses": {
+      "border-fill-or-state-treatment": {
+        "failedSpecimens": 46,
+        "statements": 46
+      },
+      "field-proportions": {
+        "failedSpecimens": 76,
+        "statements": 76
+      },
+      "input-outline-padding-or-alignment": {
+        "failedSpecimens": 78,
+        "statements": 78
+      },
+      "label-helper-structure-or-spacing": {
+        "failedSpecimens": 71,
+        "statements": 71
+      }
+    }
+  },
+  "groupedFailures": {
+    "sourceLibrary": {
+      "mui": {
+        "failedSpecimens": 62,
+        "defectStatements": 171,
+        "defectClasses": {
+          "border-fill-or-state-treatment": 20,
+          "field-proportions": 54,
+          "input-outline-padding-or-alignment": 52,
+          "label-helper-structure-or-spacing": 45
+        }
+      },
+      "polaris": {
+        "failedSpecimens": 26,
+        "defectStatements": 100,
+        "defectClasses": {
+          "border-fill-or-state-treatment": 26,
+          "field-proportions": 22,
+          "input-outline-padding-or-alignment": 26,
+          "label-helper-structure-or-spacing": 26
+        }
+      }
+    },
+    "size": {
+      "medium": {
+        "failedSpecimens": 46,
+        "defectStatements": 138,
+        "defectClasses": {
+          "border-fill-or-state-treatment": 24,
+          "field-proportions": 38,
+          "input-outline-padding-or-alignment": 40,
+          "label-helper-structure-or-spacing": 36
+        }
+      },
+      "small": {
+        "failedSpecimens": 42,
+        "defectStatements": 133,
+        "defectClasses": {
+          "border-fill-or-state-treatment": 22,
+          "field-proportions": 38,
+          "input-outline-padding-or-alignment": 38,
+          "label-helper-structure-or-spacing": 35
+        }
+      }
+    },
+    "state": {
+      "default": {
+        "failedSpecimens": 16,
+        "defectStatements": 37,
+        "defectClasses": {
+          "border-fill-or-state-treatment": 2,
+          "field-proportions": 16,
+          "input-outline-padding-or-alignment": 16,
+          "label-helper-structure-or-spacing": 3
+        }
+      },
+      "disabled": {
+        "failedSpecimens": 16,
+        "defectStatements": 38,
+        "defectClasses": {
+          "field-proportions": 16,
+          "input-outline-padding-or-alignment": 6,
+          "label-helper-structure-or-spacing": 16
+        }
+      },
+      "error": {
+        "failedSpecimens": 24,
+        "defectStatements": 80,
+        "defectClasses": {
+          "border-fill-or-state-treatment": 12,
+          "field-proportions": 24,
+          "input-outline-padding-or-alignment": 24,
+          "label-helper-structure-or-spacing": 20
+        }
+      },
+      "focus-visible": {
+        "failedSpecimens": 32,
+        "defectStatements": 116,
+        "defectClasses": {
+          "border-fill-or-state-treatment": 32,
+          "field-proportions": 20,
+          "input-outline-padding-or-alignment": 32,
+          "label-helper-structure-or-spacing": 32
+        }
+      }
+    },
+    "content": {
+      "placeholder": {
+        "failedSpecimens": 48,
+        "defectStatements": 151,
+        "defectClasses": {
+          "border-fill-or-state-treatment": 26,
+          "field-proportions": 42,
+          "input-outline-padding-or-alignment": 44,
+          "label-helper-structure-or-spacing": 39
+        }
+      },
+      "value": {
+        "failedSpecimens": 40,
+        "defectStatements": 120,
+        "defectClasses": {
+          "border-fill-or-state-treatment": 20,
+          "field-proportions": 34,
+          "input-outline-padding-or-alignment": 34,
+          "label-helper-structure-or-spacing": 32
+        }
+      }
+    },
+    "required": {
+      "false": {
+        "failedSpecimens": 44,
+        "defectStatements": 135,
+        "defectClasses": {
+          "border-fill-or-state-treatment": 23,
+          "field-proportions": 38,
+          "input-outline-padding-or-alignment": 39,
+          "label-helper-structure-or-spacing": 35
+        }
+      },
+      "true": {
+        "failedSpecimens": 44,
+        "defectStatements": 136,
+        "defectClasses": {
+          "border-fill-or-state-treatment": 23,
+          "field-proportions": 38,
+          "input-outline-padding-or-alignment": 39,
+          "label-helper-structure-or-spacing": 36
+        }
+      }
+    },
+    "adornments": {
+      "both": {
+        "failedSpecimens": 48,
+        "defectStatements": 151,
+        "defectClasses": {
+          "border-fill-or-state-treatment": 28,
+          "field-proportions": 36,
+          "input-outline-padding-or-alignment": 46,
+          "label-helper-structure-or-spacing": 41
+        }
+      },
+      "none": {
+        "failedSpecimens": 40,
+        "defectStatements": 120,
+        "defectClasses": {
+          "border-fill-or-state-treatment": 18,
+          "field-proportions": 40,
+          "input-outline-padding-or-alignment": 32,
+          "label-helper-structure-or-spacing": 30
+        }
+      }
+    }
+  },
+  "rootCauses": [
+    {
+      "cause": "the generic structure forced a stacked label, although the reviewed outlined source floats and notches on focus, value, or leading adornment",
+      "correctedBy": [
+        "structure.labelPlacement",
+        "structure.floatingActivation",
+        "structure.outlineTreatment",
+        "tokens.sizes.*.labelInsetX",
+        "tokens.sizes.*.labelInactiveOffsetY",
+        "tokens.sizes.*.labelFloatingOffsetY"
+      ]
+    },
+    {
+      "cause": "stale contract width was used instead of immutable original-source geometry, and adornment growth was discarded",
+      "correctedBy": [
+        "structure.sizingPolicy",
+        "tokens.sizes.*.width",
+        "tokens.sizes.*.leadingAdornmentExtent",
+        "tokens.sizes.*.trailingAdornmentExtent"
+      ]
+    },
+    {
+      "cause": "one border width and one undifferentiated shadow ring could not represent state-specific border and focus treatments",
+      "correctedBy": [
+        "tokens.states.*.borderWidth",
+        "tokens.states.*.effects",
+        "tokens.states.*.background",
+        "tokens.states.*.border"
+      ]
+    },
+    {
+      "cause": "label, input, and message metrics plus helper inset were under-acquired at the pinned viewport",
+      "correctedBy": [
+        "tokens.sizes.*.inactiveLabelFontSize",
+        "tokens.sizes.*.inactiveLabelLineHeight",
+        "tokens.sizes.*.inputFontSize",
+        "tokens.sizes.*.inputLineHeight",
+        "tokens.sizes.*.messageFontSize",
+        "tokens.sizes.*.messageLineHeight",
+        "tokens.sizes.*.helperInsetX"
+      ]
+    }
+  ],
+  "allFailures": [
+    {
+      "cellKey": "mui/size=small/state=default/content=placeholder/required=false/adornments=none",
+      "sourceLibrary": "mui",
+      "size": "small",
+      "state": "default",
+      "contentMode": "placeholder",
+      "required": "false",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=small/state=default/content=placeholder/required=false/adornments=both",
+      "sourceLibrary": "mui",
+      "size": "small",
+      "state": "default",
+      "contentMode": "placeholder",
+      "required": "false",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=small/state=default/content=placeholder/required=true/adornments=none",
+      "sourceLibrary": "mui",
+      "size": "small",
+      "state": "default",
+      "contentMode": "placeholder",
+      "required": "true",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=small/state=default/content=placeholder/required=true/adornments=both",
+      "sourceLibrary": "mui",
+      "size": "small",
+      "state": "default",
+      "contentMode": "placeholder",
+      "required": "true",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=small/state=default/content=value/required=false/adornments=none",
+      "sourceLibrary": "mui",
+      "size": "small",
+      "state": "default",
+      "contentMode": "value",
+      "required": "false",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=small/state=default/content=value/required=false/adornments=both",
+      "sourceLibrary": "mui",
+      "size": "small",
+      "state": "default",
+      "contentMode": "value",
+      "required": "false",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=small/state=default/content=value/required=true/adornments=none",
+      "sourceLibrary": "mui",
+      "size": "small",
+      "state": "default",
+      "contentMode": "value",
+      "required": "true",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=small/state=default/content=value/required=true/adornments=both",
+      "sourceLibrary": "mui",
+      "size": "small",
+      "state": "default",
+      "contentMode": "value",
+      "required": "true",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=false/adornments=none",
+      "sourceLibrary": "mui",
+      "size": "small",
+      "state": "focus-visible",
+      "contentMode": "placeholder",
+      "required": "false",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=false/adornments=both",
+      "sourceLibrary": "mui",
+      "size": "small",
+      "state": "focus-visible",
+      "contentMode": "placeholder",
+      "required": "false",
+      "adornments": "both",
+      "defects": [
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=true/adornments=none",
+      "sourceLibrary": "mui",
+      "size": "small",
+      "state": "focus-visible",
+      "contentMode": "placeholder",
+      "required": "true",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=true/adornments=both",
+      "sourceLibrary": "mui",
+      "size": "small",
+      "state": "focus-visible",
+      "contentMode": "placeholder",
+      "required": "true",
+      "adornments": "both",
+      "defects": [
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=small/state=focus-visible/content=value/required=false/adornments=none",
+      "sourceLibrary": "mui",
+      "size": "small",
+      "state": "focus-visible",
+      "contentMode": "value",
+      "required": "false",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=small/state=focus-visible/content=value/required=false/adornments=both",
+      "sourceLibrary": "mui",
+      "size": "small",
+      "state": "focus-visible",
+      "contentMode": "value",
+      "required": "false",
+      "adornments": "both",
+      "defects": [
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=small/state=focus-visible/content=value/required=true/adornments=none",
+      "sourceLibrary": "mui",
+      "size": "small",
+      "state": "focus-visible",
+      "contentMode": "value",
+      "required": "true",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=small/state=focus-visible/content=value/required=true/adornments=both",
+      "sourceLibrary": "mui",
+      "size": "small",
+      "state": "focus-visible",
+      "contentMode": "value",
+      "required": "true",
+      "adornments": "both",
+      "defects": [
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=small/state=error/content=placeholder/required=false/adornments=none",
+      "sourceLibrary": "mui",
+      "size": "small",
+      "state": "error",
+      "contentMode": "placeholder",
+      "required": "false",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=small/state=error/content=placeholder/required=false/adornments=both",
+      "sourceLibrary": "mui",
+      "size": "small",
+      "state": "error",
+      "contentMode": "placeholder",
+      "required": "false",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=small/state=error/content=placeholder/required=true/adornments=none",
+      "sourceLibrary": "mui",
+      "size": "small",
+      "state": "error",
+      "contentMode": "placeholder",
+      "required": "true",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=small/state=error/content=placeholder/required=true/adornments=both",
+      "sourceLibrary": "mui",
+      "size": "small",
+      "state": "error",
+      "contentMode": "placeholder",
+      "required": "true",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=small/state=error/content=value/required=false/adornments=none",
+      "sourceLibrary": "mui",
+      "size": "small",
+      "state": "error",
+      "contentMode": "value",
+      "required": "false",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=small/state=error/content=value/required=false/adornments=both",
+      "sourceLibrary": "mui",
+      "size": "small",
+      "state": "error",
+      "contentMode": "value",
+      "required": "false",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=small/state=error/content=value/required=true/adornments=none",
+      "sourceLibrary": "mui",
+      "size": "small",
+      "state": "error",
+      "contentMode": "value",
+      "required": "true",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=small/state=error/content=value/required=true/adornments=both",
+      "sourceLibrary": "mui",
+      "size": "small",
+      "state": "error",
+      "contentMode": "value",
+      "required": "true",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=small/state=disabled/content=placeholder/required=false/adornments=none",
+      "sourceLibrary": "mui",
+      "size": "small",
+      "state": "disabled",
+      "contentMode": "placeholder",
+      "required": "false",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=small/state=disabled/content=placeholder/required=false/adornments=both",
+      "sourceLibrary": "mui",
+      "size": "small",
+      "state": "disabled",
+      "contentMode": "placeholder",
+      "required": "false",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=small/state=disabled/content=placeholder/required=true/adornments=none",
+      "sourceLibrary": "mui",
+      "size": "small",
+      "state": "disabled",
+      "contentMode": "placeholder",
+      "required": "true",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=small/state=disabled/content=placeholder/required=true/adornments=both",
+      "sourceLibrary": "mui",
+      "size": "small",
+      "state": "disabled",
+      "contentMode": "placeholder",
+      "required": "true",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=small/state=disabled/content=value/required=false/adornments=none",
+      "sourceLibrary": "mui",
+      "size": "small",
+      "state": "disabled",
+      "contentMode": "value",
+      "required": "false",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=small/state=disabled/content=value/required=false/adornments=both",
+      "sourceLibrary": "mui",
+      "size": "small",
+      "state": "disabled",
+      "contentMode": "value",
+      "required": "false",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=small/state=disabled/content=value/required=true/adornments=none",
+      "sourceLibrary": "mui",
+      "size": "small",
+      "state": "disabled",
+      "contentMode": "value",
+      "required": "true",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=small/state=disabled/content=value/required=true/adornments=both",
+      "sourceLibrary": "mui",
+      "size": "small",
+      "state": "disabled",
+      "contentMode": "value",
+      "required": "true",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=medium/state=default/content=placeholder/required=false/adornments=none",
+      "sourceLibrary": "mui",
+      "size": "medium",
+      "state": "default",
+      "contentMode": "placeholder",
+      "required": "false",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=medium/state=default/content=placeholder/required=false/adornments=both",
+      "sourceLibrary": "mui",
+      "size": "medium",
+      "state": "default",
+      "contentMode": "placeholder",
+      "required": "false",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=medium/state=default/content=placeholder/required=true/adornments=none",
+      "sourceLibrary": "mui",
+      "size": "medium",
+      "state": "default",
+      "contentMode": "placeholder",
+      "required": "true",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=medium/state=default/content=placeholder/required=true/adornments=both",
+      "sourceLibrary": "mui",
+      "size": "medium",
+      "state": "default",
+      "contentMode": "placeholder",
+      "required": "true",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=medium/state=default/content=value/required=false/adornments=both",
+      "sourceLibrary": "mui",
+      "size": "medium",
+      "state": "default",
+      "contentMode": "value",
+      "required": "false",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=medium/state=default/content=value/required=true/adornments=both",
+      "sourceLibrary": "mui",
+      "size": "medium",
+      "state": "default",
+      "contentMode": "value",
+      "required": "true",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=false/adornments=none",
+      "sourceLibrary": "mui",
+      "size": "medium",
+      "state": "focus-visible",
+      "contentMode": "placeholder",
+      "required": "false",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=false/adornments=both",
+      "sourceLibrary": "mui",
+      "size": "medium",
+      "state": "focus-visible",
+      "contentMode": "placeholder",
+      "required": "false",
+      "adornments": "both",
+      "defects": [
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=true/adornments=none",
+      "sourceLibrary": "mui",
+      "size": "medium",
+      "state": "focus-visible",
+      "contentMode": "placeholder",
+      "required": "true",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=true/adornments=both",
+      "sourceLibrary": "mui",
+      "size": "medium",
+      "state": "focus-visible",
+      "contentMode": "placeholder",
+      "required": "true",
+      "adornments": "both",
+      "defects": [
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=medium/state=focus-visible/content=value/required=false/adornments=none",
+      "sourceLibrary": "mui",
+      "size": "medium",
+      "state": "focus-visible",
+      "contentMode": "value",
+      "required": "false",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=medium/state=focus-visible/content=value/required=false/adornments=both",
+      "sourceLibrary": "mui",
+      "size": "medium",
+      "state": "focus-visible",
+      "contentMode": "value",
+      "required": "false",
+      "adornments": "both",
+      "defects": [
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=medium/state=focus-visible/content=value/required=true/adornments=none",
+      "sourceLibrary": "mui",
+      "size": "medium",
+      "state": "focus-visible",
+      "contentMode": "value",
+      "required": "true",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=medium/state=focus-visible/content=value/required=true/adornments=both",
+      "sourceLibrary": "mui",
+      "size": "medium",
+      "state": "focus-visible",
+      "contentMode": "value",
+      "required": "true",
+      "adornments": "both",
+      "defects": [
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=medium/state=error/content=placeholder/required=false/adornments=none",
+      "sourceLibrary": "mui",
+      "size": "medium",
+      "state": "error",
+      "contentMode": "placeholder",
+      "required": "false",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=medium/state=error/content=placeholder/required=false/adornments=both",
+      "sourceLibrary": "mui",
+      "size": "medium",
+      "state": "error",
+      "contentMode": "placeholder",
+      "required": "false",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=medium/state=error/content=placeholder/required=true/adornments=none",
+      "sourceLibrary": "mui",
+      "size": "medium",
+      "state": "error",
+      "contentMode": "placeholder",
+      "required": "true",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=medium/state=error/content=placeholder/required=true/adornments=both",
+      "sourceLibrary": "mui",
+      "size": "medium",
+      "state": "error",
+      "contentMode": "placeholder",
+      "required": "true",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=medium/state=error/content=value/required=false/adornments=none",
+      "sourceLibrary": "mui",
+      "size": "medium",
+      "state": "error",
+      "contentMode": "value",
+      "required": "false",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=medium/state=error/content=value/required=false/adornments=both",
+      "sourceLibrary": "mui",
+      "size": "medium",
+      "state": "error",
+      "contentMode": "value",
+      "required": "false",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=medium/state=error/content=value/required=true/adornments=none",
+      "sourceLibrary": "mui",
+      "size": "medium",
+      "state": "error",
+      "contentMode": "value",
+      "required": "true",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=medium/state=error/content=value/required=true/adornments=both",
+      "sourceLibrary": "mui",
+      "size": "medium",
+      "state": "error",
+      "contentMode": "value",
+      "required": "true",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=false/adornments=none",
+      "sourceLibrary": "mui",
+      "size": "medium",
+      "state": "disabled",
+      "contentMode": "placeholder",
+      "required": "false",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=false/adornments=both",
+      "sourceLibrary": "mui",
+      "size": "medium",
+      "state": "disabled",
+      "contentMode": "placeholder",
+      "required": "false",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=true/adornments=none",
+      "sourceLibrary": "mui",
+      "size": "medium",
+      "state": "disabled",
+      "contentMode": "placeholder",
+      "required": "true",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=true/adornments=both",
+      "sourceLibrary": "mui",
+      "size": "medium",
+      "state": "disabled",
+      "contentMode": "placeholder",
+      "required": "true",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=medium/state=disabled/content=value/required=false/adornments=none",
+      "sourceLibrary": "mui",
+      "size": "medium",
+      "state": "disabled",
+      "contentMode": "value",
+      "required": "false",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=medium/state=disabled/content=value/required=false/adornments=both",
+      "sourceLibrary": "mui",
+      "size": "medium",
+      "state": "disabled",
+      "contentMode": "value",
+      "required": "false",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=medium/state=disabled/content=value/required=true/adornments=none",
+      "sourceLibrary": "mui",
+      "size": "medium",
+      "state": "disabled",
+      "contentMode": "value",
+      "required": "true",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference."
+      ]
+    },
+    {
+      "cellKey": "mui/size=medium/state=disabled/content=value/required=true/adornments=both",
+      "sourceLibrary": "mui",
+      "size": "medium",
+      "state": "disabled",
+      "contentMode": "value",
+      "required": "true",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference."
+      ]
+    },
+    {
+      "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=false/adornments=none",
+      "sourceLibrary": "polaris",
+      "size": "small",
+      "state": "focus-visible",
+      "contentMode": "placeholder",
+      "required": "false",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=false/adornments=both",
+      "sourceLibrary": "polaris",
+      "size": "small",
+      "state": "focus-visible",
+      "contentMode": "placeholder",
+      "required": "false",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=true/adornments=none",
+      "sourceLibrary": "polaris",
+      "size": "small",
+      "state": "focus-visible",
+      "contentMode": "placeholder",
+      "required": "true",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=true/adornments=both",
+      "sourceLibrary": "polaris",
+      "size": "small",
+      "state": "focus-visible",
+      "contentMode": "placeholder",
+      "required": "true",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "polaris/size=small/state=focus-visible/content=value/required=false/adornments=none",
+      "sourceLibrary": "polaris",
+      "size": "small",
+      "state": "focus-visible",
+      "contentMode": "value",
+      "required": "false",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "polaris/size=small/state=focus-visible/content=value/required=false/adornments=both",
+      "sourceLibrary": "polaris",
+      "size": "small",
+      "state": "focus-visible",
+      "contentMode": "value",
+      "required": "false",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "polaris/size=small/state=focus-visible/content=value/required=true/adornments=none",
+      "sourceLibrary": "polaris",
+      "size": "small",
+      "state": "focus-visible",
+      "contentMode": "value",
+      "required": "true",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "polaris/size=small/state=focus-visible/content=value/required=true/adornments=both",
+      "sourceLibrary": "polaris",
+      "size": "small",
+      "state": "focus-visible",
+      "contentMode": "value",
+      "required": "true",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "polaris/size=small/state=error/content=placeholder/required=false/adornments=both",
+      "sourceLibrary": "polaris",
+      "size": "small",
+      "state": "error",
+      "contentMode": "placeholder",
+      "required": "false",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "polaris/size=small/state=error/content=placeholder/required=true/adornments=both",
+      "sourceLibrary": "polaris",
+      "size": "small",
+      "state": "error",
+      "contentMode": "placeholder",
+      "required": "true",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "polaris/size=medium/state=default/content=placeholder/required=false/adornments=both",
+      "sourceLibrary": "polaris",
+      "size": "medium",
+      "state": "default",
+      "contentMode": "placeholder",
+      "required": "false",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "polaris/size=medium/state=default/content=placeholder/required=true/adornments=both",
+      "sourceLibrary": "polaris",
+      "size": "medium",
+      "state": "default",
+      "contentMode": "placeholder",
+      "required": "true",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=false/adornments=none",
+      "sourceLibrary": "polaris",
+      "size": "medium",
+      "state": "focus-visible",
+      "contentMode": "placeholder",
+      "required": "false",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=false/adornments=both",
+      "sourceLibrary": "polaris",
+      "size": "medium",
+      "state": "focus-visible",
+      "contentMode": "placeholder",
+      "required": "false",
+      "adornments": "both",
+      "defects": [
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=true/adornments=none",
+      "sourceLibrary": "polaris",
+      "size": "medium",
+      "state": "focus-visible",
+      "contentMode": "placeholder",
+      "required": "true",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=true/adornments=both",
+      "sourceLibrary": "polaris",
+      "size": "medium",
+      "state": "focus-visible",
+      "contentMode": "placeholder",
+      "required": "true",
+      "adornments": "both",
+      "defects": [
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=false/adornments=none",
+      "sourceLibrary": "polaris",
+      "size": "medium",
+      "state": "focus-visible",
+      "contentMode": "value",
+      "required": "false",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=false/adornments=both",
+      "sourceLibrary": "polaris",
+      "size": "medium",
+      "state": "focus-visible",
+      "contentMode": "value",
+      "required": "false",
+      "adornments": "both",
+      "defects": [
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=true/adornments=none",
+      "sourceLibrary": "polaris",
+      "size": "medium",
+      "state": "focus-visible",
+      "contentMode": "value",
+      "required": "true",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=true/adornments=both",
+      "sourceLibrary": "polaris",
+      "size": "medium",
+      "state": "focus-visible",
+      "contentMode": "value",
+      "required": "true",
+      "adornments": "both",
+      "defects": [
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "polaris/size=medium/state=error/content=placeholder/required=false/adornments=none",
+      "sourceLibrary": "polaris",
+      "size": "medium",
+      "state": "error",
+      "contentMode": "placeholder",
+      "required": "false",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "polaris/size=medium/state=error/content=placeholder/required=false/adornments=both",
+      "sourceLibrary": "polaris",
+      "size": "medium",
+      "state": "error",
+      "contentMode": "placeholder",
+      "required": "false",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "polaris/size=medium/state=error/content=placeholder/required=true/adornments=none",
+      "sourceLibrary": "polaris",
+      "size": "medium",
+      "state": "error",
+      "contentMode": "placeholder",
+      "required": "true",
+      "adornments": "none",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "polaris/size=medium/state=error/content=placeholder/required=true/adornments=both",
+      "sourceLibrary": "polaris",
+      "size": "medium",
+      "state": "error",
+      "contentMode": "placeholder",
+      "required": "true",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "polaris/size=medium/state=error/content=value/required=false/adornments=both",
+      "sourceLibrary": "polaris",
+      "size": "medium",
+      "state": "error",
+      "contentMode": "value",
+      "required": "false",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "cellKey": "polaris/size=medium/state=error/content=value/required=true/adornments=both",
+      "sourceLibrary": "polaris",
+      "size": "medium",
+      "state": "error",
+      "contentMode": "value",
+      "required": "true",
+      "adornments": "both",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    }
+  ]
+}

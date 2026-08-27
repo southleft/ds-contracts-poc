@@ -1,0 +1,70 @@
+{
+  "page": {
+    "id": "85:6138",
+    "children": 3
+  },
+  "component": {
+    "id": "85:6771",
+    "name": "Variant=secondary, Size=medium, State=default, Icons=none",
+    "width": 96,
+    "height": 100,
+    "minWidth": 96,
+    "layoutMode": "HORIZONTAL",
+    "primaryAxisSizingMode": "AUTO",
+    "layoutSizingHorizontal": "HUG",
+    "clipsContent": true
+  },
+  "label": {
+    "id": "85:6779",
+    "characters": "Button",
+    "width": 0,
+    "height": 15,
+    "x": 48,
+    "y": 42.5,
+    "visible": true,
+    "opacity": 1,
+    "fontName": {
+      "family": "SF Pro",
+      "style": "Semibold"
+    },
+    "fontSize": 14,
+    "lineHeight": {
+      "unit": "PIXELS",
+      "value": 20
+    },
+    "textAutoResize": "WIDTH_AND_HEIGHT",
+    "layoutSizingHorizontal": "HUG",
+    "layoutSizingVertical": "HUG",
+    "fills": [
+      {
+        "type": "SOLID",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "color": {
+          "r": 0.1411764770746231,
+          "g": 0.1411764770746231,
+          "b": 0.1411764770746231
+        },
+        "boundVariables": {
+          "color": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:85:6780"
+          }
+        }
+      }
+    ]
+  },
+  "matchingCollections": [
+    {
+      "id": "VariableCollectionId:85:6140",
+      "name": "Recipe Pivot / e6a61d04-b04f4059-v4 / altitude-button-reviewed-v2",
+      "variables": 17
+    },
+    {
+      "id": "VariableCollectionId:85:6765",
+      "name": "Recipe Pivot / e6a61d04-b04f4059-v4 / fluent-button-reviewed-v2",
+      "variables": 8
+    }
+  ]
+}

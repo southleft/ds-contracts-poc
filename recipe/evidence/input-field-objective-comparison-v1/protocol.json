@@ -1,0 +1,156 @@
+{
+  "version": "input-field-objective-comparison-protocol-v1",
+  "lockedBeforeMeasurement": true,
+  "lockedAt": "2026-08-27",
+  "scope": {
+    "archetype": "input / field",
+    "cells": 128,
+    "libraries": ["mui", "polaris"],
+    "axes": {
+      "Size": ["small", "medium"],
+      "State": ["default", "focus-visible", "error", "disabled"],
+      "Content": ["placeholder", "value"],
+      "Required": ["false", "true"],
+      "Adornments": ["none", "both"]
+    },
+    "reference": "the retained independent real-package source render for the exact cell",
+    "candidates": "the retained v2 opaque candidate bytes, measured without recipe/legacy identity"
+  },
+  "claims": {
+    "deterministicVisualFidelity": "Source-relative geometry and pixel/ink error over the exact 128 independent references.",
+    "structuralSemanticUsability": "Image-independent DOM, ARIA, state, role, Web Component parity, accounting, fixed-point, determinism, and no-source-branch assertions.",
+    "humanRecognisability": "Pending final independent designer review. Deterministic progression never supplies this claim."
+  },
+  "imageNormalization": {
+    "decoder": "pngjs",
+    "background": "#ffffff",
+    "alphaPolicy": "Composite every source pixel over opaque white before ink detection or comparison; output alpha is 255.",
+    "contentBox": "Bounding box of pixels with any composited sRGB channel below 250. Blank images have no content box and fail.",
+    "alignment": "Trim to each image content box, center-pad onto the union canvas with white, never crop-to-match beyond content trim, resample, scale, or translate by implementation identity.",
+    "colorDifference": {
+      "engine": "pixelmatch",
+      "exact": {
+        "threshold": 0,
+        "includeAA": true,
+        "alpha": 0.1
+      },
+      "perceptual": {
+        "threshold": 0.1,
+        "includeAA": false,
+        "alpha": 0.1
+      }
+    },
+    "inkThreshold": "A composited pixel is ink when any sRGB channel is below 250."
+  },
+  "cellMetrics": {
+    "cardinality": [
+      "decoded width and height",
+      "nonzero ink-pixel count",
+      "image-derived content box"
+    ],
+    "geometry": [
+      "signed and absolute rendered width delta",
+      "signed and absolute rendered height delta",
+      "signed and absolute retained CSS content-box width delta",
+      "signed and absolute retained CSS content-box height delta"
+    ],
+    "geometryError": "Arithmetic mean of the four absolute deltas normalized by the corresponding nonzero reference dimension.",
+    "pixelRaster": [
+      "exact differing pixels and normalized exact difference",
+      "threshold-0.1 differing pixels and normalized perceptual difference"
+    ],
+    "ink": [
+      "reference and candidate ink pixels",
+      "absolute ink-count delta normalized by the nonzero reference ink count"
+    ],
+    "pixelInkComposite": {
+      "exactDifferenceWeight": 0.5,
+      "perceptualDifferenceWeight": 0.4,
+      "inkCountDeltaWeight": 0.1,
+      "rule": "Weights are fixed and sum to one. Geometry is excluded so pixel/ink and geometry must win independently."
+    },
+    "overallWeightedError": {
+      "geometryWeight": 0.5,
+      "pixelInkWeight": 0.5,
+      "rule": "Reported in addition to, never instead of, separate geometry and pixel/ink gates."
+    },
+    "tieRule": "Two candidate errors tie only when their IEEE-754 numeric values are exactly equal; no result-dependent epsilon is introduced."
+  },
+  "structuralAssertions": {
+    "perCell": [
+      "one unique matrix cell, reference, and candidate",
+      "nonzero candidate and reference pixels",
+      "input and label exist",
+      "label-for association matches",
+      "accessible name matches",
+      "exactly one label, one input, and one message",
+      "zero or two adornments exactly as declared",
+      "placeholder/value, required, disabled, error, described-by, and focus-visible state match the declared cell"
+    ],
+    "global": [
+      "all 128 cells and every locked axis value are present",
+      "React/Web Component parity is 128/128 for nonzero, threshold-0.1 pixels, geometry, and semantic probes",
+      "both sources have nonzero acquisition facts and parameter fields with zero failures",
+      "both source recipes pass two-cycle canonical fixed point and byte-identical repeated emission",
+      "all 256 corrected recipe API/ARIA/event assertions passed",
+      "no source identity occurs in generic recipe/compiler/emitter logic",
+      "offline accounting has zero silent loss"
+    ],
+    "catastrophicRegression": "Any recipe per-cell structural/state failure where legacy passes, any missing required cell/axis/state/role, any zero-pixel recipe cell, or any failed global assertion."
+  },
+  "aggregation": {
+    "cellWeight": "Every one of the 128 cells has equal weight; hidden duplicates and controls have zero final weight.",
+    "dimensions": [
+      "overall",
+      "library",
+      "Size",
+      "State",
+      "Content",
+      "Required",
+      "Adornments"
+    ],
+    "pairedOutcomes": ["recipe-wins", "legacy-wins", "ties"],
+    "aggregateErrors": [
+      "mean geometry error",
+      "mean pixel/ink composite error",
+      "mean overall weighted error"
+    ]
+  },
+  "relativeProgressionCriteria": {
+    "denominatorExactly128": true,
+    "sameCellsCompared": true,
+    "recipeGeometryWinsGreaterThanLegacy": true,
+    "recipePixelInkWinsGreaterThanLegacy": true,
+    "recipeMeanGeometryErrorStrictlyLower": true,
+    "recipeMeanPixelInkErrorStrictlyLower": true,
+    "recipeMeanOverallWeightedErrorStrictlyLower": true,
+    "zeroMissingCellsAxesStatesRoles": true,
+    "allRecipeDomAriaWcAccountingChecksPass": true,
+    "noCatastrophicStructuralOrStateRegression": true,
+    "copiedReferenceProvenanceCanPass": false,
+    "humanRecognisabilityInferred": false,
+    "overallInputSuccessAuthorized": false
+  },
+  "antiGaming": {
+    "implementationBlindMeasurement": "The metric function receives decoded bytes, retained dimensions, and opaque candidate IDs only. It has no recipe/legacy parameter and contains no source-library or implementation branch.",
+    "identityTiming": "Candidate identity is used only after all per-candidate metrics are computed and serialized in opaque-ID order.",
+    "requiredSelfTests": [
+      "hidden byte-identical candidates produce exactly identical metric JSON",
+      "same bytes produce exactly identical metrics on repeated measurement",
+      "zero-alpha and all-white blank candidates fail nonzero/content-box checks",
+      "shifted-size candidate increases geometry error",
+      "missing-label candidate fails role assertions",
+      "wrong-state candidate fails state assertions",
+      "a copied reference is rejected by provenance even with zero visual error",
+      "changed metric weights or thresholds fail the protocol/tamper gate"
+    ],
+    "thresholdSelection": "No threshold or weight may be selected, changed, or waived after candidate results are read."
+  },
+  "decision": {
+    "engineeringMayProceedWhen": "Both deterministic visual fidelity and structural/semantic correctness pass every locked relative progression criterion.",
+    "engineeringMustStopWhen": "Either deterministic claim fails; report the next implementation correction.",
+    "inputOverall": false,
+    "humanDesignerGate": "required before release and before claiming absolute Input/Field recognisability",
+    "noFigmaClaim": true
+  }
+}

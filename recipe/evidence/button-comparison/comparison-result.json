@@ -1,0 +1,845 @@
+{
+  "artifactVersion": "button-comparison-adjudication-v1",
+  "protocolVersions": {
+    "packet": "button-paired-source-v1",
+    "grade": "button-paired-source-v1-independent-grade-v1",
+    "answerKey": "button-paired-source-v1",
+    "evidenceReceipt": 1
+  },
+  "inputHashes": {
+    "packet": "1dd49a8ce9ac4e2bacdfc8dcc1ba21d23ed7f476d369cf1b23244fe287360878",
+    "grades": "729ec3130d15d18201c0454f035a05e1ac7299098cffe71a978795662b18f961",
+    "sealedAnswerKey": "1533dafdce03bcdc5e7bb5013e8bf5a5d75e6804aeed4fa15d1bd49d02558de9",
+    "evidenceReceipt": "7e7c332d027b2645f6d64d1bad5a68fb6d3670c4eab4e90a310879e5ce028d12"
+  },
+  "integrity": {
+    "status": "passed",
+    "checks": {
+      "packetAndKeySeparated": true,
+      "packetOpaque": true,
+      "graderImplementationGuessesAbsent": true,
+      "fileHashesMatch": true,
+      "cardinalityAndOrderMatch": true,
+      "exactlyOneGradePerSpecimen": true,
+      "everyFailureHasDefects": true,
+      "answerMappingBijective": true,
+      "referenceProvenanceIndependent": true,
+      "denominatorParity": true,
+      "zeroCountMeasurementsAbsent": true,
+      "webComponentSurfaceSeparated": true
+    }
+  },
+  "sample": {
+    "complete": true,
+    "sourceLibraries": ["altitude", "fluent"],
+    "axes": ["Variant", "State"],
+    "variants": ["primary", "secondary"],
+    "states": ["default", "hover", "focus-visible"],
+    "fixed": {
+      "Size": "medium",
+      "Icons": "none",
+      "Label": "Button"
+    },
+    "sourceCells": 12,
+    "specimens": 24,
+    "cellsPerImplementation": 12,
+    "setsPerImplementation": 2,
+    "setWeighting": "a source-library set passes only when all 6 sampled cells are recognisable",
+    "cellWeighting": "each of the 12 exact source-library×variant×state cells has equal weight",
+    "excludedByName": [
+      "Size=small",
+      "Size=large",
+      "State=pressed",
+      "State=disabled",
+      "State=loading",
+      "Icons=leading",
+      "Icons=trailing",
+      "Icons=both"
+    ]
+  },
+  "sourceReferences": [
+    {
+      "cellKey": "altitude/variant=primary/state=default",
+      "screenshotHash": "400d14841474c83c7ceca18334081987f004c9e89abb33a7b477cee69ee43152",
+      "sourceId": "altitude-web-components",
+      "sourceVersionOrRevision": "1.0.2",
+      "sourceHash": "fd937c3e2db6c7e80cee6cc6139b6408dd43a814c84aa65ba9011d5d07109ddc",
+      "captureInputHash": "074107ac9a81b3b6bdb59ae783160645d706d7932df35912c312ebf3f94b8c85",
+      "independentHarness": true
+    },
+    {
+      "cellKey": "altitude/variant=primary/state=hover",
+      "screenshotHash": "49d556c2d5fb73c4da4641ad245d162bc02278fb9d0f2dd8c999b3193ea1b997",
+      "sourceId": "altitude-web-components",
+      "sourceVersionOrRevision": "1.0.2",
+      "sourceHash": "fd937c3e2db6c7e80cee6cc6139b6408dd43a814c84aa65ba9011d5d07109ddc",
+      "captureInputHash": "94b8f7ed1fd1717f4483e0497fe24902bc0b33ef02e0125db663d9f07837b479",
+      "independentHarness": true
+    },
+    {
+      "cellKey": "altitude/variant=primary/state=focus-visible",
+      "screenshotHash": "1130a287733971ae77d078d4eabb3482a10e78f554c9bbbd20bd4c28473bda98",
+      "sourceId": "altitude-web-components",
+      "sourceVersionOrRevision": "1.0.2",
+      "sourceHash": "fd937c3e2db6c7e80cee6cc6139b6408dd43a814c84aa65ba9011d5d07109ddc",
+      "captureInputHash": "1bf1516edd60fd769127ca421c38eda6e426ced35c095a0675892bd2fdff8a06",
+      "independentHarness": true
+    },
+    {
+      "cellKey": "altitude/variant=secondary/state=default",
+      "screenshotHash": "4c6797280ea4a4e7e27fa692fff3c395e6ceded9c0c73bd16e6a2757f6b22716",
+      "sourceId": "altitude-web-components",
+      "sourceVersionOrRevision": "1.0.2",
+      "sourceHash": "fd937c3e2db6c7e80cee6cc6139b6408dd43a814c84aa65ba9011d5d07109ddc",
+      "captureInputHash": "0cc33c7bb08d44bfd99ba420e8552ff1dce121969ebc7d3abd32b6ae767c79ff",
+      "independentHarness": true
+    },
+    {
+      "cellKey": "altitude/variant=secondary/state=hover",
+      "screenshotHash": "2666afdb3d8b6204bd89fefc1ea1410abdbc1a0a02e17e2edbad95138eabd1c1",
+      "sourceId": "altitude-web-components",
+      "sourceVersionOrRevision": "1.0.2",
+      "sourceHash": "fd937c3e2db6c7e80cee6cc6139b6408dd43a814c84aa65ba9011d5d07109ddc",
+      "captureInputHash": "9d6ecccb0adade09e9416b9943126d4f06f1c3962c591c0a0be3714b1c236df5",
+      "independentHarness": true
+    },
+    {
+      "cellKey": "altitude/variant=secondary/state=focus-visible",
+      "screenshotHash": "dbbd0cea74f5850bd832f9d61affe4086adc7392af24dda3fedc5f7b5fbda80d",
+      "sourceId": "altitude-web-components",
+      "sourceVersionOrRevision": "1.0.2",
+      "sourceHash": "fd937c3e2db6c7e80cee6cc6139b6408dd43a814c84aa65ba9011d5d07109ddc",
+      "captureInputHash": "e7e69cf3c30730c8379ce9e0a337ecb2b7b994040c903119d62660216da5406a",
+      "independentHarness": true
+    },
+    {
+      "cellKey": "fluent/variant=primary/state=default",
+      "screenshotHash": "08ca5bf97d214cff1942906e884d12f758fd2718a6090e1e4f429b62dda5ce9a",
+      "sourceId": "@fluentui/react-components",
+      "sourceVersionOrRevision": "9.74.5",
+      "sourceHash": "90a1881a0241887bf519ac2e8a565d641a55d85a9c4b704445d70f05d1465f09",
+      "captureInputHash": "9887b02dfc183ac1e1dfe2c40510d7b0f53781d984849dc88d1c4ee7a311479d",
+      "independentHarness": true
+    },
+    {
+      "cellKey": "fluent/variant=primary/state=hover",
+      "screenshotHash": "bc03519bd8c5b6397b85340df634e089f8649ef7144e911c27e857a3987c037c",
+      "sourceId": "@fluentui/react-components",
+      "sourceVersionOrRevision": "9.74.5",
+      "sourceHash": "90a1881a0241887bf519ac2e8a565d641a55d85a9c4b704445d70f05d1465f09",
+      "captureInputHash": "715627b92cb017d73c703b3cf1fe05381b39f59e665f462c424238b0a534f6a0",
+      "independentHarness": true
+    },
+    {
+      "cellKey": "fluent/variant=primary/state=focus-visible",
+      "screenshotHash": "08ca5bf97d214cff1942906e884d12f758fd2718a6090e1e4f429b62dda5ce9a",
+      "sourceId": "@fluentui/react-components",
+      "sourceVersionOrRevision": "9.74.5",
+      "sourceHash": "90a1881a0241887bf519ac2e8a565d641a55d85a9c4b704445d70f05d1465f09",
+      "captureInputHash": "4ef19f4f3a86b92b74baa7bc11699cdac4aee54ca11fba8d741633959342829f",
+      "independentHarness": true
+    },
+    {
+      "cellKey": "fluent/variant=secondary/state=default",
+      "screenshotHash": "3282bad706c3778adb4647c29886b2e2ff069c68feb4581768027042d6d1519a",
+      "sourceId": "@fluentui/react-components",
+      "sourceVersionOrRevision": "9.74.5",
+      "sourceHash": "90a1881a0241887bf519ac2e8a565d641a55d85a9c4b704445d70f05d1465f09",
+      "captureInputHash": "3870b0d25a32055ef27ffff0cf232456eef77dd944cefd4190f38be64920b21f",
+      "independentHarness": true
+    },
+    {
+      "cellKey": "fluent/variant=secondary/state=hover",
+      "screenshotHash": "d91406b7338b4737eb052d1cc0f645b81e02b7110ea996d8a5bf104b153d33ba",
+      "sourceId": "@fluentui/react-components",
+      "sourceVersionOrRevision": "9.74.5",
+      "sourceHash": "90a1881a0241887bf519ac2e8a565d641a55d85a9c4b704445d70f05d1465f09",
+      "captureInputHash": "5c44cb041b4d493f9afc6f9140560b63118bda9d77b6819bf718746319e37c4b",
+      "independentHarness": true
+    },
+    {
+      "cellKey": "fluent/variant=secondary/state=focus-visible",
+      "screenshotHash": "3282bad706c3778adb4647c29886b2e2ff069c68feb4581768027042d6d1519a",
+      "sourceId": "@fluentui/react-components",
+      "sourceVersionOrRevision": "9.74.5",
+      "sourceHash": "90a1881a0241887bf519ac2e8a565d641a55d85a9c4b704445d70f05d1465f09",
+      "captureInputHash": "4f3f77e0d9a113acff3f0343d92d5789d6b1a8e9fb6342b0768997327e2d6ee0",
+      "independentHarness": true
+    }
+  ],
+  "mapping": [
+    {
+      "specimenId": "specimen-8aa648f7c18d",
+      "referenceId": "cell-5c2b7c5ff6b8",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Fill is a darker saturated blue instead of the reference blue.",
+        "Label is white and lighter-weight instead of black and bold.",
+        "Button is narrower with substantially more-rounded corners."
+      ],
+      "anonymousCell": "cell-5c2b7c5ff6b8",
+      "implementation": "recipe-react",
+      "cellKey": "altitude/variant=primary/state=default",
+      "sourceLibrary": "altitude",
+      "variant": "primary",
+      "state": "default",
+      "outputHash": "68aa5a236ed13bfee9ce35232fce5101cdb8f9147afe35a1535a7a19b849134f",
+      "referenceHash": "400d14841474c83c7ceca18334081987f004c9e89abb33a7b477cee69ee43152"
+    },
+    {
+      "specimenId": "specimen-d6330393b3c8",
+      "referenceId": "cell-5c2b7c5ff6b8",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "anonymousCell": "cell-5c2b7c5ff6b8",
+      "implementation": "legacy",
+      "cellKey": "altitude/variant=primary/state=default",
+      "sourceLibrary": "altitude",
+      "variant": "primary",
+      "state": "default",
+      "outputHash": "400d14841474c83c7ceca18334081987f004c9e89abb33a7b477cee69ee43152",
+      "referenceHash": "400d14841474c83c7ceca18334081987f004c9e89abb33a7b477cee69ee43152"
+    },
+    {
+      "specimenId": "specimen-21bb1d2d543e",
+      "referenceId": "cell-a02de3213193",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Fill is a much darker saturated blue than the reference.",
+        "Label is white and lighter-weight instead of black and bold.",
+        "Button is narrower and has substantially more-rounded corners."
+      ],
+      "anonymousCell": "cell-a02de3213193",
+      "implementation": "recipe-react",
+      "cellKey": "altitude/variant=primary/state=hover",
+      "sourceLibrary": "altitude",
+      "variant": "primary",
+      "state": "hover",
+      "outputHash": "693adb739790593a1270e886b6de1165971f6b067820dd9636299742d6ae8681",
+      "referenceHash": "49d556c2d5fb73c4da4641ad245d162bc02278fb9d0f2dd8c999b3193ea1b997"
+    },
+    {
+      "specimenId": "specimen-f0bb1e0f4994",
+      "referenceId": "cell-a02de3213193",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "minorDifferences": ["Fill appears slightly lighter than the reference."],
+      "anonymousCell": "cell-a02de3213193",
+      "implementation": "legacy",
+      "cellKey": "altitude/variant=primary/state=hover",
+      "sourceLibrary": "altitude",
+      "variant": "primary",
+      "state": "hover",
+      "outputHash": "7dad57ce4e3128524a8b9c080cabbcb2b1b6331ea64ea9c8bacf799f8aebec5a",
+      "referenceHash": "49d556c2d5fb73c4da4641ad245d162bc02278fb9d0f2dd8c999b3193ea1b997"
+    },
+    {
+      "specimenId": "specimen-03962606b2a5",
+      "referenceId": "cell-236b3130acd1",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Reference dark outer focus ring and white separation gap are absent.",
+        "Label is white and lighter-weight instead of black and bold.",
+        "Button is narrower and more rounded."
+      ],
+      "anonymousCell": "cell-236b3130acd1",
+      "implementation": "recipe-react",
+      "cellKey": "altitude/variant=primary/state=focus-visible",
+      "sourceLibrary": "altitude",
+      "variant": "primary",
+      "state": "focus-visible",
+      "outputHash": "889ac9cc6360085975cc90b08464b1821753a04ace887069353ed95733628c56",
+      "referenceHash": "1130a287733971ae77d078d4eabb3482a10e78f554c9bbbd20bd4c28473bda98"
+    },
+    {
+      "specimenId": "specimen-0bc74df82a25",
+      "referenceId": "cell-236b3130acd1",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": [],
+      "minorDifferences": [
+        "Outer focus ring is bright blue rather than dark navy.",
+        "Focus-ring spacing and corner radius differ slightly."
+      ],
+      "anonymousCell": "cell-236b3130acd1",
+      "implementation": "legacy",
+      "cellKey": "altitude/variant=primary/state=focus-visible",
+      "sourceLibrary": "altitude",
+      "variant": "primary",
+      "state": "focus-visible",
+      "outputHash": "2007706c67a40c667c74fc5aa78d2fc3cf25e318944a9b6516a326df3798d02c",
+      "referenceHash": "1130a287733971ae77d078d4eabb3482a10e78f554c9bbbd20bd4c28473bda98"
+    },
+    {
+      "specimenId": "specimen-5146f97554d6",
+      "referenceId": "cell-fbf1fc1f6e9e",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Reference has a solid muted-beige fill, while specimen is white with an outline.",
+        "Label color and weight are substantially lighter.",
+        "Specimen is narrower and more rounded."
+      ],
+      "anonymousCell": "cell-fbf1fc1f6e9e",
+      "implementation": "recipe-react",
+      "cellKey": "altitude/variant=secondary/state=default",
+      "sourceLibrary": "altitude",
+      "variant": "secondary",
+      "state": "default",
+      "outputHash": "952477dd5d67bd2a38a811ab27a8bc186ea90a78fdd86d4d68a8b7488a0fe7fe",
+      "referenceHash": "4c6797280ea4a4e7e27fa692fff3c395e6ceded9c0c73bd16e6a2757f6b22716"
+    },
+    {
+      "specimenId": "specimen-f6cb4bd252d6",
+      "referenceId": "cell-fbf1fc1f6e9e",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "anonymousCell": "cell-fbf1fc1f6e9e",
+      "implementation": "legacy",
+      "cellKey": "altitude/variant=secondary/state=default",
+      "sourceLibrary": "altitude",
+      "variant": "secondary",
+      "state": "default",
+      "outputHash": "4c6797280ea4a4e7e27fa692fff3c395e6ceded9c0c73bd16e6a2757f6b22716",
+      "referenceHash": "4c6797280ea4a4e7e27fa692fff3c395e6ceded9c0c73bd16e6a2757f6b22716"
+    },
+    {
+      "specimenId": "specimen-202180a7db24",
+      "referenceId": "cell-37766fe6b534",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Reference has a solid muted-beige fill, while specimen is white with a gray outline.",
+        "Label is lighter-weight and blue-black instead of bold near-black.",
+        "Specimen is narrower and more rounded."
+      ],
+      "anonymousCell": "cell-37766fe6b534",
+      "implementation": "recipe-react",
+      "cellKey": "altitude/variant=secondary/state=hover",
+      "sourceLibrary": "altitude",
+      "variant": "secondary",
+      "state": "hover",
+      "outputHash": "0c96a43935ea179b6520058f603904429c63e422b0dcd8677a4b2a0e9f63d6a1",
+      "referenceHash": "2666afdb3d8b6204bd89fefc1ea1410abdbc1a0a02e17e2edbad95138eabd1c1"
+    },
+    {
+      "specimenId": "specimen-26e458028db3",
+      "referenceId": "cell-37766fe6b534",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Fill is blue instead of muted beige.",
+        "Specimen does not preserve the reference fill/ink treatment."
+      ],
+      "anonymousCell": "cell-37766fe6b534",
+      "implementation": "legacy",
+      "cellKey": "altitude/variant=secondary/state=hover",
+      "sourceLibrary": "altitude",
+      "variant": "secondary",
+      "state": "hover",
+      "outputHash": "7dad57ce4e3128524a8b9c080cabbcb2b1b6331ea64ea9c8bacf799f8aebec5a",
+      "referenceHash": "2666afdb3d8b6204bd89fefc1ea1410abdbc1a0a02e17e2edbad95138eabd1c1"
+    },
+    {
+      "specimenId": "specimen-08ce1f7fc603",
+      "referenceId": "cell-e2a67d4b8646",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": [],
+      "minorDifferences": [
+        "Outer focus ring is bright blue rather than dark navy.",
+        "Focus-ring spacing and corner radius differ slightly."
+      ],
+      "anonymousCell": "cell-e2a67d4b8646",
+      "implementation": "legacy",
+      "cellKey": "altitude/variant=secondary/state=focus-visible",
+      "sourceLibrary": "altitude",
+      "variant": "secondary",
+      "state": "focus-visible",
+      "outputHash": "3e373e248dae4cd6be69ed81090805d10a7b4c6f8e05416ba77fbbc750d366d5",
+      "referenceHash": "dbbd0cea74f5850bd832f9d61affe4086adc7392af24dda3fedc5f7b5fbda80d"
+    },
+    {
+      "specimenId": "specimen-ccfa80c49ed0",
+      "referenceId": "cell-e2a67d4b8646",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Muted-beige fill is missing; specimen is white.",
+        "Reference dark outer focus ring with inner separation is replaced by a thin blue border.",
+        "Label is lighter-weight and specimen is narrower."
+      ],
+      "anonymousCell": "cell-e2a67d4b8646",
+      "implementation": "recipe-react",
+      "cellKey": "altitude/variant=secondary/state=focus-visible",
+      "sourceLibrary": "altitude",
+      "variant": "secondary",
+      "state": "focus-visible",
+      "outputHash": "b27903688877513a75cfa8e0959988303daa6a44a184949f3588a1b1ec101efc",
+      "referenceHash": "dbbd0cea74f5850bd832f9d61affe4086adc7392af24dda3fedc5f7b5fbda80d"
+    },
+    {
+      "specimenId": "specimen-77c42a2b96f7",
+      "referenceId": "cell-d8eddf3831a0",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "anonymousCell": "cell-d8eddf3831a0",
+      "implementation": "legacy",
+      "cellKey": "fluent/variant=primary/state=default",
+      "sourceLibrary": "fluent",
+      "variant": "primary",
+      "state": "default",
+      "outputHash": "08ca5bf97d214cff1942906e884d12f758fd2718a6090e1e4f429b62dda5ce9a",
+      "referenceHash": "08ca5bf97d214cff1942906e884d12f758fd2718a6090e1e4f429b62dda5ce9a"
+    },
+    {
+      "specimenId": "specimen-a1a3aa0e83c7",
+      "referenceId": "cell-d8eddf3831a0",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Specimen is substantially narrower and taller, changing the button proportions and padding.",
+        "Corners are much more rounded.",
+        "Fill is brighter and label weight is lighter than the reference."
+      ],
+      "anonymousCell": "cell-d8eddf3831a0",
+      "implementation": "recipe-react",
+      "cellKey": "fluent/variant=primary/state=default",
+      "sourceLibrary": "fluent",
+      "variant": "primary",
+      "state": "default",
+      "outputHash": "68aa5a236ed13bfee9ce35232fce5101cdb8f9147afe35a1535a7a19b849134f",
+      "referenceHash": "08ca5bf97d214cff1942906e884d12f758fd2718a6090e1e4f429b62dda5ce9a"
+    },
+    {
+      "specimenId": "specimen-579fec1bcdd3",
+      "referenceId": "cell-45eabe58c2e7",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "anonymousCell": "cell-45eabe58c2e7",
+      "implementation": "legacy",
+      "cellKey": "fluent/variant=primary/state=hover",
+      "sourceLibrary": "fluent",
+      "variant": "primary",
+      "state": "hover",
+      "outputHash": "bc03519bd8c5b6397b85340df634e089f8649ef7144e911c27e857a3987c037c",
+      "referenceHash": "bc03519bd8c5b6397b85340df634e089f8649ef7144e911c27e857a3987c037c"
+    },
+    {
+      "specimenId": "specimen-ab2f7e49fbee",
+      "referenceId": "cell-45eabe58c2e7",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Specimen is substantially narrower and taller, changing the button proportions and padding.",
+        "Corners are much more rounded.",
+        "Fill is brighter and label weight is lighter than the reference."
+      ],
+      "anonymousCell": "cell-45eabe58c2e7",
+      "implementation": "recipe-react",
+      "cellKey": "fluent/variant=primary/state=hover",
+      "sourceLibrary": "fluent",
+      "variant": "primary",
+      "state": "hover",
+      "outputHash": "693adb739790593a1270e886b6de1165971f6b067820dd9636299742d6ae8681",
+      "referenceHash": "bc03519bd8c5b6397b85340df634e089f8649ef7144e911c27e857a3987c037c"
+    },
+    {
+      "specimenId": "specimen-30d6b2b882a0",
+      "referenceId": "cell-0320ddb96eed",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Specimen adds a prominent black focus outline and white inset separation absent from the reference state.",
+        "Added outline changes the overall silhouette and state-specific treatment."
+      ],
+      "anonymousCell": "cell-0320ddb96eed",
+      "implementation": "legacy",
+      "cellKey": "fluent/variant=primary/state=focus-visible",
+      "sourceLibrary": "fluent",
+      "variant": "primary",
+      "state": "focus-visible",
+      "outputHash": "2a56113461e9d45fc8c6e2015f9c13a332c161a56db309ec72eba52f220fd8ac",
+      "referenceHash": "08ca5bf97d214cff1942906e884d12f758fd2718a6090e1e4f429b62dda5ce9a"
+    },
+    {
+      "specimenId": "specimen-6ecbc1ddd294",
+      "referenceId": "cell-0320ddb96eed",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Specimen is substantially narrower and taller, changing the button proportions and padding.",
+        "Fill hue, corner radius, and label weight differ substantially from the reference."
+      ],
+      "anonymousCell": "cell-0320ddb96eed",
+      "implementation": "recipe-react",
+      "cellKey": "fluent/variant=primary/state=focus-visible",
+      "sourceLibrary": "fluent",
+      "variant": "primary",
+      "state": "focus-visible",
+      "outputHash": "889ac9cc6360085975cc90b08464b1821753a04ace887069353ed95733628c56",
+      "referenceHash": "08ca5bf97d214cff1942906e884d12f758fd2718a6090e1e4f429b62dda5ce9a"
+    },
+    {
+      "specimenId": "specimen-4cf964329867",
+      "referenceId": "cell-9cae759e7528",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Specimen is substantially narrower and taller than the reference outline button.",
+        "Corners are much more rounded.",
+        "Label is lighter-weight and blue-black instead of bold near-black."
+      ],
+      "anonymousCell": "cell-9cae759e7528",
+      "implementation": "recipe-react",
+      "cellKey": "fluent/variant=secondary/state=default",
+      "sourceLibrary": "fluent",
+      "variant": "secondary",
+      "state": "default",
+      "outputHash": "952477dd5d67bd2a38a811ab27a8bc186ea90a78fdd86d4d68a8b7488a0fe7fe",
+      "referenceHash": "3282bad706c3778adb4647c29886b2e2ff069c68feb4581768027042d6d1519a"
+    },
+    {
+      "specimenId": "specimen-ffbef11af02a",
+      "referenceId": "cell-9cae759e7528",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "anonymousCell": "cell-9cae759e7528",
+      "implementation": "legacy",
+      "cellKey": "fluent/variant=secondary/state=default",
+      "sourceLibrary": "fluent",
+      "variant": "secondary",
+      "state": "default",
+      "outputHash": "3282bad706c3778adb4647c29886b2e2ff069c68feb4581768027042d6d1519a",
+      "referenceHash": "3282bad706c3778adb4647c29886b2e2ff069c68feb4581768027042d6d1519a"
+    },
+    {
+      "specimenId": "specimen-3bd328995cb7",
+      "referenceId": "cell-ad60b5a22f4e",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "anonymousCell": "cell-ad60b5a22f4e",
+      "implementation": "legacy",
+      "cellKey": "fluent/variant=secondary/state=hover",
+      "sourceLibrary": "fluent",
+      "variant": "secondary",
+      "state": "hover",
+      "outputHash": "d91406b7338b4737eb052d1cc0f645b81e02b7110ea996d8a5bf104b153d33ba",
+      "referenceHash": "d91406b7338b4737eb052d1cc0f645b81e02b7110ea996d8a5bf104b153d33ba"
+    },
+    {
+      "specimenId": "specimen-d3834c46cdc3",
+      "referenceId": "cell-ad60b5a22f4e",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Specimen is substantially narrower and taller, changing the proportions and padding.",
+        "Corners are much more rounded.",
+        "Border is darker and label is lighter-weight than the reference."
+      ],
+      "anonymousCell": "cell-ad60b5a22f4e",
+      "implementation": "recipe-react",
+      "cellKey": "fluent/variant=secondary/state=hover",
+      "sourceLibrary": "fluent",
+      "variant": "secondary",
+      "state": "hover",
+      "outputHash": "0c96a43935ea179b6520058f603904429c63e422b0dcd8677a4b2a0e9f63d6a1",
+      "referenceHash": "d91406b7338b4737eb052d1cc0f645b81e02b7110ea996d8a5bf104b153d33ba"
+    },
+    {
+      "specimenId": "specimen-34ed18864a8d",
+      "referenceId": "cell-e57c93f01fb2",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Specimen uses a thick black outline instead of the reference thin light-gray border.",
+        "The prominent outline creates a substantially different state treatment."
+      ],
+      "anonymousCell": "cell-e57c93f01fb2",
+      "implementation": "legacy",
+      "cellKey": "fluent/variant=secondary/state=focus-visible",
+      "sourceLibrary": "fluent",
+      "variant": "secondary",
+      "state": "focus-visible",
+      "outputHash": "c75c1a624ea5a219cf792fafbb92833496a74879282efde086e623cad1f006f1",
+      "referenceHash": "3282bad706c3778adb4647c29886b2e2ff069c68feb4581768027042d6d1519a"
+    },
+    {
+      "specimenId": "specimen-8e59abe168f0",
+      "referenceId": "cell-e57c93f01fb2",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Specimen is substantially narrower and taller, with much more-rounded corners.",
+        "Border is bright blue instead of light gray.",
+        "Label is lighter-weight and blue-black instead of bold near-black."
+      ],
+      "anonymousCell": "cell-e57c93f01fb2",
+      "implementation": "recipe-react",
+      "cellKey": "fluent/variant=secondary/state=focus-visible",
+      "sourceLibrary": "fluent",
+      "variant": "secondary",
+      "state": "focus-visible",
+      "outputHash": "b27903688877513a75cfa8e0959988303daa6a44a184949f3588a1b1ec101efc",
+      "referenceHash": "3282bad706c3778adb4647c29886b2e2ff069c68feb4581768027042d6d1519a"
+    }
+  ],
+  "aggregates": {
+    "byImplementation": {
+      "legacy": {
+        "cellWeighted": {
+          "numerator": 9,
+          "denominator": 12,
+          "ratio": 0.75
+        },
+        "setWeighted": {
+          "numerator": 0,
+          "denominator": 2,
+          "ratio": 0
+        }
+      },
+      "recipeReact": {
+        "cellWeighted": {
+          "numerator": 0,
+          "denominator": 12,
+          "ratio": 0
+        },
+        "setWeighted": {
+          "numerator": 0,
+          "denominator": 2,
+          "ratio": 0
+        }
+      }
+    },
+    "bySourceLibrary": {
+      "altitude": {
+        "legacy": {
+          "numerator": 5,
+          "denominator": 6,
+          "ratio": 0.8333333333333334
+        },
+        "recipeReact": {
+          "numerator": 0,
+          "denominator": 6,
+          "ratio": 0
+        }
+      },
+      "fluent": {
+        "legacy": {
+          "numerator": 4,
+          "denominator": 6,
+          "ratio": 0.6666666666666666
+        },
+        "recipeReact": {
+          "numerator": 0,
+          "denominator": 6,
+          "ratio": 0
+        }
+      }
+    },
+    "byVariant": {
+      "primary": {
+        "legacy": {
+          "numerator": 5,
+          "denominator": 6,
+          "ratio": 0.8333333333333334
+        },
+        "recipeReact": {
+          "numerator": 0,
+          "denominator": 6,
+          "ratio": 0
+        }
+      },
+      "secondary": {
+        "legacy": {
+          "numerator": 4,
+          "denominator": 6,
+          "ratio": 0.6666666666666666
+        },
+        "recipeReact": {
+          "numerator": 0,
+          "denominator": 6,
+          "ratio": 0
+        }
+      }
+    },
+    "byState": {
+      "default": {
+        "legacy": {
+          "numerator": 4,
+          "denominator": 4,
+          "ratio": 1
+        },
+        "recipeReact": {
+          "numerator": 0,
+          "denominator": 4,
+          "ratio": 0
+        }
+      },
+      "hover": {
+        "legacy": {
+          "numerator": 3,
+          "denominator": 4,
+          "ratio": 0.75
+        },
+        "recipeReact": {
+          "numerator": 0,
+          "denominator": 4,
+          "ratio": 0
+        }
+      },
+      "focus-visible": {
+        "legacy": {
+          "numerator": 2,
+          "denominator": 4,
+          "ratio": 0.5
+        },
+        "recipeReact": {
+          "numerator": 0,
+          "denominator": 4,
+          "ratio": 0
+        }
+      }
+    },
+    "pairedCellOutcomes": {
+      "recipeBeatLegacy": 0,
+      "tiedPass": 0,
+      "tiedFail": 3,
+      "legacyBeatRecipe": 9,
+      "total": 12
+    }
+  },
+  "confidence": {
+    "overall": {
+      "low": 0,
+      "medium": 2,
+      "high": 22,
+      "total": 24
+    },
+    "byImplementation": {
+      "legacy": {
+        "low": 0,
+        "medium": 2,
+        "high": 10,
+        "total": 12
+      },
+      "recipeReact": {
+        "low": 0,
+        "medium": 0,
+        "high": 12,
+        "total": 12
+      }
+    }
+  },
+  "defects": {
+    "byImplementation": {
+      "legacy": {
+        "failedSpecimens": 3,
+        "statements": 6,
+        "classes": {
+          "border": {
+            "failedSpecimens": 1,
+            "statements": 1
+          },
+          "fill-or-color": {
+            "failedSpecimens": 2,
+            "statements": 3
+          },
+          "focus-or-state-treatment": {
+            "failedSpecimens": 2,
+            "statements": 4
+          },
+          "geometry": {
+            "failedSpecimens": 1,
+            "statements": 1
+          }
+        }
+      },
+      "recipeReact": {
+        "failedSpecimens": 12,
+        "statements": 35,
+        "classes": {
+          "border": {
+            "failedSpecimens": 3,
+            "statements": 3
+          },
+          "fill-or-color": {
+            "failedSpecimens": 11,
+            "statements": 18
+          },
+          "focus-or-state-treatment": {
+            "failedSpecimens": 5,
+            "statements": 5
+          },
+          "geometry": {
+            "failedSpecimens": 12,
+            "statements": 17
+          },
+          "typography": {
+            "failedSpecimens": 12,
+            "statements": 12
+          }
+        }
+      }
+    }
+  },
+  "webComponentParity": {
+    "includedInBlindBatch": false,
+    "recognisability": "not-blind-graded",
+    "cells": 12,
+    "nonZeroMeasurements": true
+  },
+  "structuralUsability": {
+    "offlineAssertions": {
+      "legacy": {
+        "passed": 4,
+        "denominator": 4
+      },
+      "recipeReact": {
+        "passed": 4,
+        "denominator": 4
+      }
+    },
+    "usabilityImprovement": "not-established",
+    "structuralImprovement": "not-comparable-on-a-symmetric-denominator",
+    "recipeStructuralEvidence": {
+      "axesInFullRecipe": 4,
+      "roles": [
+        "button/root",
+        "button/label",
+        "button/slot/leading",
+        "button/slot/trailing",
+        "button/loading-indicator"
+      ],
+      "emittedCells": 288
+    },
+    "pendingColumns": {
+      "liveFigma": "pending",
+      "fullUsability": "pending",
+      "fullFixedPoint": "pending"
+    }
+  },
+  "verdict": {
+    "comparison": "recipe-underperformed",
+    "recipeMatchedOrBeatLegacy": false,
+    "cellDelta": -9,
+    "setDelta": 0,
+    "allCurrentlyApplicableOfflineCriteriaPass": false,
+    "buttonSuccess": false,
+    "blockers": [
+      "recipe React recognisability 0/12 is below legacy 9/12",
+      "strict structural/usability improvement is not established on a symmetric denominator"
+    ],
+    "nextImplementationTask": "Correct recipe Button source-adapter token/geometry/state mapping (especially library-specific visual tokens without branching the archetype recipe), then regenerate a new sealed batch and obtain a fresh independent blind grade."
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "version": "input-field-recognisability-replacement-rater-v3",
+  "commitmentVersion": "input-field-replacement-commitment-v1",
+  "lockedBeforeDGrades": true,
+  "purpose": "Replace failed rater A with one fresh independent rater D while preserving valid B/C gold qualifications and every calibration-v2 and sealed-performance byte.",
+  "sourceCalibrationV2": {
+    "root": "recipe/evidence/input-field-comparison-calibration-v2",
+    "protocolPath": "recipe/evidence/input-field-comparison-calibration-v2/protocol.json",
+    "protocolHash": "b3beb503740e31491aa4c0195ffff33eda1207362fb2d2cb4aafa848e6201ddd",
+    "gradeSchemaPath": "recipe/evidence/input-field-comparison-calibration-v2/grade.schema.json",
+    "gradeSchemaHash": "73c10638530eff42ab54af754f1acbe94a94d3fe478321781cdb6b1256a10741",
+    "goldPacketPath": "recipe/evidence/input-field-comparison-calibration-v2/gold/blind-packet/packet.json",
+    "goldPacketHash": "70dd47851b2a7c19548fb666cb82eafe0be67aaca8e001d4bcac73f10767c022",
+    "goldAnswerKeyPath": "recipe/evidence/input-field-comparison-calibration-v2/gold/sealed-answer-key.json",
+    "goldAnswerKeyHash": "7a5d844898442fc4e34d687041b5d29d9a162618f97b7eefa0f4e886b06c51b4",
+    "compatibilityFields": {
+      "goldPacketHash": "70dd47851b2a7c19548fb666cb82eafe0be67aaca8e001d4bcac73f10767c022",
+      "goldRandomizedBatchHash": "a4bdbd9708674df88fc27b9ce00e316537778a4c4648426fd8c9354a385f4503",
+      "goldPacketProtocol": "recognisability-gold-calibration-v1",
+      "calibrationCommitment": "8e6894a5b87fd2ce129f29d1a9ea041ac0792aa96a0a01528b25b2d0c0bb48c9",
+      "rubricVersion": "input-field-observable-rubric-v2",
+      "rubricHash": "08d75803555566604a76b05edbc1a2411be2661936cf61ab1371dc15bbfeccf0",
+      "gradeSchemaVersion": "recognisability-grade-envelope-v2",
+      "gradeSchemaHash": "73c10638530eff42ab54af754f1acbe94a94d3fe478321781cdb6b1256a10741",
+      "exactOrderedGradesRequired": true,
+      "preflightReadsAnswerKeys": false,
+      "requiredTopLevelFields": [
+        "phase",
+        "schemaVersion",
+        "graderId",
+        "packetProtocol",
+        "packetHash",
+        "randomizedBatchHash",
+        "calibrationCommitment",
+        "rubricVersion",
+        "counts",
+        "orderedGrades"
+      ],
+      "minimumScore": 0.95,
+      "obviousFailureScoreRequired": 1,
+      "validEnvelopeRequired": true
+    },
+    "compatibilityFieldsHash": "0edc73337c9ce60f5fb91189530d83fb45a2d59a95c11c5c08a4ff061a4f7db0"
+  },
+  "importedQualifications": {
+    "RATER-CAL-V2-B": {
+      "receiptPath": "recipe/evidence/input-field-comparison-calibration-v2/gold/receipts/rater-cal-v2-b.json",
+      "receiptHash": "1d351c753946f615237c407ff036e0fe29b3a2b673562c8e7386364188b4c8ee",
+      "submissionPath": "recipe/evidence/input-field-comparison-calibration-v2/gold/submissions/rater-cal-v2-b.json",
+      "submissionHash": "8a360f77475b69593c20b27ab7d14252c0c10650d8853c1e49e42471af9c9d7a"
+    },
+    "RATER-CAL-V2-C": {
+      "receiptPath": "recipe/evidence/input-field-comparison-calibration-v2/gold/receipts/rater-cal-v2-c.json",
+      "receiptHash": "4538e58eadc06389f87e47c126b8d4825acc211bcf5d5f8961b42d3b8e2b53fd",
+      "submissionPath": "recipe/evidence/input-field-comparison-calibration-v2/gold/submissions/rater-cal-v2-c.json",
+      "submissionHash": "d687385e75ee15cbf28ae7838f28ab2b7696d2f870cfa80a7b3aa7efa10d17b4"
+    }
+  },
+  "historicalOutcome": {
+    "excludedRater": "RATER-CAL-V2-A",
+    "receiptPath": "recipe/evidence/input-field-comparison-calibration-v2/gold/receipts/rater-cal-v2-a.json",
+    "receiptHash": "474d2c13bcbb31f40dc13f9420d567a09c32c00cd0abfea37dc6108a172eeec7",
+    "correct": 22,
+    "denominator": 24,
+    "obviousFailuresCorrect": 11,
+    "obviousFailuresDenominator": 12,
+    "passed": false,
+    "relabellingForbidden": true
+  },
+  "roster": {
+    "importedQualified": ["RATER-CAL-V2-B", "RATER-CAL-V2-C"],
+    "freshReplacement": "RATER-CAL-V3-D",
+    "performanceRoster": ["RATER-CAL-V2-B", "RATER-CAL-V2-C", "RATER-CAL-V3-D"]
+  },
+  "importRule": {
+    "exactCompatibilityFieldsRequired": true,
+    "changedRelevantByteOrThresholdRequiresRequalification": true,
+    "receiptSignatureAndFileHashRequired": true,
+    "sourceSubmissionHashRequired": true,
+    "rationale": "B and C may be reused only because their immutable passing receipts bind the identical gold packet/order, rubric-bearing protocol commitment, grade schema, envelope rules, and qualification thresholds used by this replacement commitment."
+  },
+  "replacementAuthorization": {
+    "beforeDGrades": true,
+    "dMustBeFreshIndependent": true,
+    "dPriorPacketAccessForbidden": true,
+    "dPriorGradeAccessForbidden": true,
+    "dMinimumScore": 0.95,
+    "dObviousFailuresRequired": "12/12",
+    "dValidEnvelopeRequired": true,
+    "performanceRequiresImportedBAndCPlusValidD": true,
+    "performanceAccessBeforeAuthorizationForbidden": true
+  },
+  "dEnvelopeIdentityOverlay": {
+    "baseSchemaPath": "recipe/evidence/input-field-comparison-calibration-v2/grade.schema.json",
+    "baseSchemaHash": "73c10638530eff42ab54af754f1acbe94a94d3fe478321781cdb6b1256a10741",
+    "baseSchemaBytesChanged": false,
+    "onlyExtension": "graderId-is-exactly-RATER-CAL-V3-D",
+    "scoringFieldsOrConstraintsChanged": false,
+    "validatorSource": "recipe/input-field-comparison-calibration-v3.ts",
+    "rationale": "The locked v2 schema's roster-only graderId regex names A/B/C. D is validated against the identical envelope shape, packet bindings, ordered rows, criterion rules, and defect rollup, with only the assigned graderId changed to the fresh D identity; no scoring field or constraint changes."
+  },
+  "performanceContinuity": {
+    "packetPath": "recipe/evidence/input-field-comparison-calibration-v2/performance/blind-packet/packet.json",
+    "packetHash": "c24f43a3c769a0b5747bbae93a098bdc762895d39d15326547ce857cc104299e",
+    "randomizedBatchHash": "9dee5601af7077d660b643c6abe9bdff9ef9550dc8193a4d5b82828a18edae42",
+    "sealedAnswerKeyPath": "recipe/evidence/input-field-comparison-calibration-v2/performance/sealed-answer-key.json",
+    "sealedAnswerKeyHash": "31424d32a6a2f7da6bae8d67b5e515746c4ad108c8580c44d439d4bb0f9d30f9",
+    "packetBytesChanged": false,
+    "randomizedIdsOrOrderChanged": false,
+    "sealedKeyChanged": false,
+    "packetCopiedOrRebuilt": false,
+    "remainsSealedAndUngraded": true
+  },
+  "reliability": {
+    "calibratedValidRatersRequired": 3,
+    "calibrationScoreMinimum": 0.95,
+    "obviousFailureScoreRequired": 1,
+    "validEnvelopeRequired": true,
+    "hiddenDuplicateAgreementPerRaterMinimum": 0.95,
+    "majorityDuplicateAgreementMinimum": 127,
+    "majorityDuplicateAgreementDenominator": 128,
+    "everyPairwiseAgreementMinimum": 0.75,
+    "fleissKappaMinimum": 0.6,
+    "maximumDuplicateCopyPassRateDelta": 0.05,
+    "majorityFailureConcreteDefectRatersMinimum": 2,
+    "failureConsequence": "Any failed prerequisite or reliability threshold keeps recognisability unusable, performance sealed, architecture progression blocked, and live Input blocked."
+  },
+  "paths": {
+    "dGoldTemplate": "recipe/evidence/input-field-comparison-calibration-v3-replacement/gold/templates/rater-cal-v3-d.json",
+    "dGoldOutput": "recipe/evidence/input-field-comparison-calibration-v3-replacement/gold/submissions/rater-cal-v3-d.json",
+    "dQualificationReceipt": "recipe/evidence/input-field-comparison-calibration-v3-replacement/gold/receipts/rater-cal-v3-d.json",
+    "performanceTemplates": {
+      "RATER-CAL-V2-B": "recipe/evidence/input-field-comparison-calibration-v3-replacement/performance/templates/rater-cal-v2-b.json",
+      "RATER-CAL-V2-C": "recipe/evidence/input-field-comparison-calibration-v3-replacement/performance/templates/rater-cal-v2-c.json",
+      "RATER-CAL-V3-D": "recipe/evidence/input-field-comparison-calibration-v3-replacement/performance/templates/rater-cal-v3-d.json"
+    },
+    "performanceOutputs": {
+      "RATER-CAL-V2-B": "recipe/evidence/input-field-comparison-calibration-v3-replacement/performance/submissions/rater-cal-v2-b.json",
+      "RATER-CAL-V2-C": "recipe/evidence/input-field-comparison-calibration-v3-replacement/performance/submissions/rater-cal-v2-c.json",
+      "RATER-CAL-V3-D": "recipe/evidence/input-field-comparison-calibration-v3-replacement/performance/submissions/rater-cal-v3-d.json"
+    }
+  },
+  "commitment": "b5abc88083a2322c4b682e17630710d2e4457e56c17afdf07aa211548e7f593a"
+}

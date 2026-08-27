@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "attempt": 1,
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "wrapperPath": "recipe/evidence/input-field-live-pivot-v2/writer-wrapper-attempt-1.txt",
+  "wrapperBytes": 2284204,
+  "wrapperSha256": "c3b8ad5d296ed8ab8c9aeb6e9ae2338725f4c311b2c224bcc9e681c94d0b465c",
+  "evalBegan": false,
+  "before": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma",
+    "pageCount": 13,
+    "totalTopLevelNodes": 174,
+    "proofPageMatches": 0,
+    "matchingCollections": 0,
+    "totalLocalVariables": 11163
+  },
+  "bridgeResult": {
+    "success": false,
+    "error": "Error: in setBoundVariable: Property \"field\" failed validation: Invalid enum value. Expected 'height' | 'width' | 'characters' | 'itemSpacing' | 'paddingLeft' | 'paddingRight' | 'paddingTop' | 'paddingBottom' | 'visible' | 'cornerRadius' | 'topLeftRadius' | 'topRightRadius' | 'bottomLeftRadius' | 'bottomRightRadius' | 'strokeWeight' | 'strokeTopWeight' | 'strokeBottomWeight' | 'strokeLeftWeight' | 'strokeRightWeight' | 'minWidth' | 'maxWidth' | 'minHeight' | 'maxHeight' | 'counterAxisSpacing' | 'opacity' | 'gridRowGap' | 'gridColumnGap' | 'fontFamily' | 'fontSize' | 'fontStyle' | 'fontWeight' | 'letterSpacing' | 'lineHeight' | 'paragraphSpacing' | 'paragraphIndent', received 'x'"
+  },
+  "evalCompleted": false,
+  "error": "Error: in setBoundVariable: Property \"field\" failed validation: Invalid enum value. Expected 'height' | 'width' | 'characters' | 'itemSpacing' | 'paddingLeft' | 'paddingRight' | 'paddingTop' | 'paddingBottom' | 'visible' | 'cornerRadius' | 'topLeftRadius' | 'topRightRadius' | 'bottomLeftRadius' | 'bottomRightRadius' | 'strokeWeight' | 'strokeTopWeight' | 'strokeBottomWeight' | 'strokeLeftWeight' | 'strokeRightWeight' | 'minWidth' | 'maxWidth' | 'minHeight' | 'maxHeight' | 'counterAxisSpacing' | 'opacity' | 'gridRowGap' | 'gridColumnGap' | 'fontFamily' | 'fontSize' | 'fontStyle' | 'fontWeight' | 'letterSpacing' | 'lineHeight' | 'paragraphSpacing' | 'paragraphIndent', received 'x'"
+}

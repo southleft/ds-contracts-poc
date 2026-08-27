@@ -1,0 +1,129 @@
+{
+  "version": 1,
+  "status": "failed-live-proof-cleaned",
+  "receipt": {
+    "path": "recipe/evidence/input-field-live-pivot-v1/receipt.json",
+    "bytes": 13665,
+    "sha256": "775e1893b5479136de958e6c215852bd9b21ab4a71303b4da49534b1b0f55204"
+  },
+  "artifacts": [
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v1/writer-plan.json",
+      "bytes": 4859,
+      "sha256": "93c01a42a983b49c621430c97ed9fe2b66b3d3526c2eca00c725fa9dd6a8ffa1"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v1/conformance-report.json",
+      "bytes": 46832,
+      "sha256": "98c7f8f98c8863a0b6985f076eab1d28f42d5a7f0500891cbae742cb456af2c5"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v1/transport-envelope.json",
+      "bytes": 2259497,
+      "sha256": "306cc2cff3267f00e90bd5d42e54728a4867b52919dbafab7172b1192857d0b2"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v1/live-verification.json",
+      "bytes": 43421,
+      "sha256": "ab92064550708004a593331b886146a29b6d8a6d58d1700789c7739d8a77abab"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v1/normalized-live-readback.json",
+      "bytes": 4074086,
+      "sha256": "8dd4aa83e2412c4ef7403f01d69962380bc7ec9ab6260bd59545e2055744ad36"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v1/objective-canvas-result.json",
+      "bytes": 313311,
+      "sha256": "ef71cbcba2ac4bddd1bde6290b5445817998e55a1bd6ca22413aba44d5459ec6"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v1/human-review-packet.json",
+      "bytes": 91785,
+      "sha256": "a74b23719a3bd3934b580658af648303fac1b386547c1d54bfca2a4ecda5ba28"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v1/writer-attempt-1.js",
+      "bytes": 1692539,
+      "sha256": "4f709f6cfefcb22272a6449930dee78b77a318aabcaea766d3364684db28b216"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v1/writer-wrapper-attempt-1.txt",
+      "bytes": 2262264,
+      "sha256": "5c4771b0d93b1823a48b1c61015b860674e8a04d4f25984fe7e911ccf0ddb81b"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v1/live-attempt-1.json",
+      "bytes": 919,
+      "sha256": "1558a945895e40e24f0e6c6233f53f1489a10490635db0fb8fbbe87c8b396137"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v1/cleanup-attempt-1.json",
+      "bytes": 236,
+      "sha256": "9df80452d470d4509569e3469c0aaa02379b7b015ad024ee585b19370c8d730b",
+      "removedPageIds": [
+        "86:8123"
+      ],
+      "removedCollectionIds": [
+        "VariableCollectionId:86:8125"
+      ],
+      "complete": true
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v1/writer-attempt-2.js",
+      "bytes": 1693056,
+      "sha256": "a2a77513704bb7f7e0322228dd059b9c0f8b9d73388c00a4e53e8a71bf092db8"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v1/writer-wrapper-attempt-2.txt",
+      "bytes": 2262952,
+      "sha256": "ec31ef9fc7c29c48820126505de5f9b2cb6b8191e18637ab1807e1cf9ce1082d"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v1/live-attempt-2.json",
+      "bytes": 53879,
+      "sha256": "7146766235c4b4b6fa405eef9ebb39e3efc21a69bb1cc5bc2c0aed911d963d21"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v1/cleanup-attempt-2.json",
+      "bytes": 273,
+      "sha256": "6d5ec35f539cbd47a5f8bac62f3e528a70701a2887cc2aa8121e56b60154c341",
+      "removedPageIds": [
+        "86:9557"
+      ],
+      "removedCollectionIds": [
+        "VariableCollectionId:86:9559",
+        "VariableCollectionId:86:10992"
+      ],
+      "complete": true
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v1/writer.js",
+      "bytes": 1694457,
+      "sha256": "15077af39a6ebd0930d00bf99b80c23b83a1b8e02d5318ffa8bd81c3c7fbae3a"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v1/writer-wrapper-attempt-3.txt",
+      "bytes": 2264820,
+      "sha256": "0cdcc6b5f85b5ec9bae051c2ddfe6e01bbfdef0ed5af2a725e842469873f5411"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v1/live-attempt-3.json",
+      "bytes": 54211,
+      "sha256": "3c403601504bcca4d38d568d6cddac95938694cc67a2f51297f8776c7b701b61"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v1/cleanup-attempt-3.json",
+      "bytes": 275,
+      "sha256": "04fe0b6f7d76a971a4e84d3fd3f8f86114f82724c865c1003b1609f20247d065",
+      "removedPageIds": [
+        "86:16021"
+      ],
+      "removedCollectionIds": [
+        "VariableCollectionId:86:16023",
+        "VariableCollectionId:86:17456"
+      ],
+      "complete": true
+    }
+  ]
+}

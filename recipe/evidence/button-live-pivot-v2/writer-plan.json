@@ -1,0 +1,68 @@
+{
+  "version": 2,
+  "kind": "button-recipe-live-writer-plan",
+  "file": {
+    "key": "byMp6lt0Ij9b2QbkDGFwBh",
+    "name": "Scratch Project"
+  },
+  "pageName": "Recipe Pivot / Button / ae57b16a-5c52de74-v2",
+  "runIdentity": "ae57b16a-5c52de74-v2",
+  "writer": {
+    "path": "recipe/evidence/button-live-pivot-v2/writer.js",
+    "bytes": 32146,
+    "sha256": "336dbf2a0124fbd154c2dcde4013dca0db11a014f09417e83d5950cf181b686f",
+    "transportPath": "recipe/evidence/button-live-pivot-v2/writer-transport.txt",
+    "transportBytes": 26353,
+    "transportSha256": "c00992959560914b21e68430a09c6e95c4c9fd41cf939cd37d718d5056972801"
+  },
+  "pluginApi": {
+    "typingsPackage": "@figma/plugin-typings",
+    "typingsVersion": "1.135.0",
+    "conformanceReport": "recipe/evidence/button-live-pivot-v2/conformance-report.json",
+    "conformanceReportSha256": "d242819508ab6d59db01db69683af1dbdc3e6c315697406b9d9873a2884af67a",
+    "conformanceCounts": {
+      "apiCalls": 17,
+      "propertyNames": 72,
+      "variants": 288,
+      "variables": 57,
+      "pluginDataWrites": 6427,
+      "propertyWrites": 11087,
+      "bindings": 4296
+    }
+  },
+  "provenance": {
+    "commit": "047f66b8e134a6bc173e9336621fc1baf0e37230",
+    "branch": "pivot/recipe-ir-v1",
+    "dirty": true,
+    "dirtyStatusSha256": "8f8a60c0185e4a96999caaf95cab1ed6efc65d5f44716d39a63eb0c309aaf5c8"
+  },
+  "sources": [
+    {
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "displayName": "Altitude",
+      "contractPath": "examples/altitude/contracts/button.contract.json",
+      "contractHash": "43c7d78292e1f9b33585b4294f164547a54e750cc921a7d1891b039b7a345aea",
+      "recipeHash": "ae57b16ab50438ea3f00b0690933e0b7850742225afad3df275465fb7fc2b923",
+      "envelopeHash": "73b9c0ccc268545d711e55fd4ae3e8081e1708d6a27059e6779e42b3e81735bb",
+      "declaredVariantCount": 144,
+      "plannedVariantCount": 144,
+      "comparedIrFacts": 3978
+    },
+    {
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "displayName": "Fluent",
+      "contractPath": "examples/fluent/contracts/button.contract.json",
+      "contractHash": "a67391060b4babe0d28684890b30d55e5d08f37f1ffc8d3edc28c8da3c280e34",
+      "recipeHash": "5c52de7484830d735f375d52ee26d86ed6d5c24f528ff5815d41ea17fa622cc7",
+      "envelopeHash": "9b5626840521a733ea2ef28b7cdc5f5d5b3b673229336ab58f11e82a0a120afd",
+      "declaredVariantCount": 144,
+      "plannedVariantCount": 144,
+      "comparedIrFacts": 3978
+    }
+  ],
+  "grading": {
+    "status": "ungraded",
+    "buttonSuccess": false,
+    "recognisabilityVerdictsAuthoredByBuilder": false
+  }
+}

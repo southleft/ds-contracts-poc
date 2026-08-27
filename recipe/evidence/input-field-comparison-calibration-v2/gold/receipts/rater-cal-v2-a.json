@@ -1,0 +1,71 @@
+{
+  "version": "rater-calibration-receipt-v2",
+  "adjudication": "independent-objective-gold-qualification",
+  "graderId": "RATER-CAL-V2-A",
+  "submissionPath": "recipe/evidence/input-field-comparison-calibration-v2/gold/submissions/rater-cal-v2-a.json",
+  "submissionHash": "6813f52233c32be1c0853d3a4b206bce506a9a80efccb328080920cd7d339cf7",
+  "gradeHash": "6813f52233c32be1c0853d3a4b206bce506a9a80efccb328080920cd7d339cf7",
+  "goldAnswerKeyPath": "recipe/evidence/input-field-comparison-calibration-v2/gold/sealed-answer-key.json",
+  "goldAnswerKeyHash": "7a5d844898442fc4e34d687041b5d29d9a162618f97b7eefa0f4e886b06c51b4",
+  "protocolPath": "recipe/evidence/input-field-comparison-calibration-v2/protocol.json",
+  "protocolHash": "b3beb503740e31491aa4c0195ffff33eda1207362fb2d2cb4aafa848e6201ddd",
+  "gradeSchemaPath": "recipe/evidence/input-field-comparison-calibration-v2/grade.schema.json",
+  "gradeSchemaHash": "73c10638530eff42ab54af754f1acbe94a94d3fe478321781cdb6b1256a10741",
+  "templatePath": "recipe/evidence/input-field-comparison-calibration-v2/gold/blind-packet/templates/rater-cal-v2-a.json",
+  "templateHash": "9ea88e05f1980e2960ea380948dc3adaee09da300b70a99c2f4cc1bb9b083457",
+  "calibrationCommitment": "8e6894a5b87fd2ce129f29d1a9ea041ac0792aa96a0a01528b25b2d0c0bb48c9",
+  "packetHash": "70dd47851b2a7c19548fb666cb82eafe0be67aaca8e001d4bcac73f10767c022",
+  "randomizedBatchHash": "a4bdbd9708674df88fc27b9ce00e316537778a4c4648426fd8c9354a385f4503",
+  "counts": {
+    "expected": 24,
+    "submitted": 24,
+    "correct": 22,
+    "incorrect": 2,
+    "obviousStructuralStateFailures": 12,
+    "obviousStructuralStateFailuresCorrect": 11,
+    "errors": 2
+  },
+  "errors": [
+    {
+      "taskId": "task-01259519ae7d8bb77e26",
+      "submittedRecognisable": false,
+      "expectedRecognisable": true,
+      "obviousStructuralOrStateFailure": false,
+      "rationale": "Reference and specimen are byte-identical deterministic renderings."
+    },
+    {
+      "taskId": "task-00743b2dbc3357e42439",
+      "submittedRecognisable": true,
+      "expectedRecognisable": false,
+      "obviousStructuralOrStateFailure": true,
+      "rationale": "The required trailing adornment is absent."
+    }
+  ],
+  "score": 0.9166666666666666,
+  "correct": 22,
+  "denominator": 24,
+  "obviousStructuralStateFailuresCorrect": 11,
+  "obviousStructuralStateFailuresDenominator": 12,
+  "obviousFailureScore": 0.9166666666666666,
+  "obviousStructuralStateFailureScore": 0.9166666666666666,
+  "envelopeValid": true,
+  "thresholds": {
+    "minimumScore": 0.95,
+    "obviousFailureScoreRequired": 1,
+    "envelopeValidRequired": true
+  },
+  "passed": false,
+  "performanceEligibility": false,
+  "performanceBinding": {
+    "receiptPath": "recipe/evidence/input-field-comparison-calibration-v2/gold/receipts/rater-cal-v2-a.json",
+    "score": 0.9166666666666666,
+    "obviousStructuralStateFailureScore": 0.9166666666666666,
+    "passed": false
+  },
+  "performanceAccessed": false,
+  "performanceIdentityRevealed": false,
+  "signature": {
+    "algorithm": "sha256",
+    "signedPayloadHash": "6f0ebac69723ca13412731965ce2f18e593999f9b724e91b017b82d3c8db5595"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "fileName": "Scratch Project",
+  "removed": {
+    "pages": [
+      {
+        "id": "85:4813",
+        "name": "Recipe Pivot / Button / ae57b16a-5c52de74-v2",
+        "topLevelNodes": 3
+      }
+    ],
+    "collections": [
+      {
+        "id": "VariableCollectionId:85:4815",
+        "name": "Recipe Pivot / ae57b16a-5c52de74-v2 / altitude-button-reviewed-v2",
+        "variableIds": 17
+      },
+      {
+        "id": "VariableCollectionId:85:5440",
+        "name": "Recipe Pivot / ae57b16a-5c52de74-v2 / fluent-button-reviewed-v2",
+        "variableIds": 40
+      }
+    ]
+  },
+  "after": {
+    "pageCount": 12,
+    "totalTopLevelNodes": 170,
+    "proofPageMatches": 0,
+    "collectionCount": 12,
+    "totalLocalVariables": 11106,
+    "matchingCollections": 0
+  }
+}

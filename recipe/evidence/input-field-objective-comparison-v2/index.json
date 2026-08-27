@@ -1,0 +1,243 @@
+{
+  "version": "input-field-objective-comparison-index-v2",
+  "overallInputSuccess": false,
+  "liveInputEngineeringMayProceed": true,
+  "deterministicVisualFidelity": true,
+  "structuralSemanticCorrectness": true,
+  "humanRecognisability": "pending-final-independent-designer-review",
+  "protocol": {
+    "path": "recipe/evidence/input-field-objective-comparison-v1/protocol.json",
+    "sha256": "b31c69642a69da054d644a91afa2b5dd6867ffe2eef3ca36fffe0763a93d1a34"
+  },
+  "manifest": {
+    "path": "recipe/evidence/input-field-objective-comparison-v2/comparison-manifest.json",
+    "sha256": "12774dbeb8d22531950b9e9db4a3b54777faf29b3df842056be2ee430dfe48be"
+  },
+  "opaqueMeasurements": {
+    "path": "recipe/evidence/input-field-objective-comparison-v2/opaque-measurements.json",
+    "sha256": "fd6a7a87216de3aff7f582cd3b1b07bff87e0298e3ef5402dffb3de05a252e6e"
+  },
+  "identityMap": {
+    "path": "recipe/evidence/input-field-objective-comparison-v2/identity-map.json",
+    "sha256": "0cc1fe5ad3b5ae1f5d579a6f0d95cd42eb4da46f082d55aa0db7786ba6a458e3"
+  },
+  "result": {
+    "path": "recipe/evidence/input-field-objective-comparison-v2/objective-result.json",
+    "sha256": "f58c399d99947e82f41936838591fe800deb74d1c3d6845972d7a83dabe74fe9"
+  },
+  "receipt": {
+    "path": "recipe/evidence/input-field-objective-comparison-v2/receipt.json",
+    "sha256": "09b79b84067e7f954732119c87750ee4b006b5d24dfaf75cc64a783c21ce26d4"
+  },
+  "failedGradingRounds": [
+    {
+      "id": "historical-3-of-11-census",
+      "status": "context-only-separate-denominator",
+      "path": "docs/32-recipe-ir-pivot.md",
+      "result": "3/11 set-recognisable over 1,415 historical variants",
+      "relatedArtifacts": [],
+      "sha256": "e641b58cd60e0fb3a419343237c1238cd013b1a9443068ed6f3330acb9c70adb"
+    },
+    {
+      "id": "input-v1",
+      "status": "immutable-failed",
+      "path": "recipe/evidence/input-field-comparison/comparison-result.json",
+      "result": "legacy 88/128; recipe 40/128",
+      "relatedArtifacts": [
+        {
+          "path": "recipe/evidence/input-field-comparison/receipt.json",
+          "sha256": "c75a30e420240dfa885508735d593cab30dcf80a63d55954ba4b00924c96cc2f"
+        },
+        {
+          "path": "recipe/evidence/input-field-comparison/blind-packet/grades.json",
+          "sha256": "08e7c75aff2a34befa953e287cc635f753d988b84fa538df7b4975d4441e65b4"
+        }
+      ],
+      "sha256": "ad19224c96da0702f7667239ccc8bafe0db4f99272bae352f7ab06f4216792d5"
+    },
+    {
+      "id": "input-v2",
+      "status": "blocked-inter-batch-instability",
+      "path": "recipe/evidence/input-field-comparison-v2/multi-rater-adjudication.json",
+      "result": "legacy 0/128; recipe 95/128; unchanged-control instability",
+      "relatedArtifacts": [
+        {
+          "path": "recipe/evidence/input-field-comparison-v2/receipt.json",
+          "sha256": "4e218ec83e82aac420072b51d69fff7afc7b25e978e9126093436f1996bccb9c"
+        },
+        {
+          "path": "recipe/evidence/input-field-comparison-v2/comparison-result.json",
+          "sha256": "056a612c9c0071ab9c2d0525340f6f55920de92bc7591dbda26db36f256bf26e"
+        },
+        {
+          "path": "recipe/evidence/input-field-comparison-v2/blind-packet/grades.json",
+          "sha256": "fa28c85cb12fbf12531bcc76caf534b0135a0ef6a7eb4652af45bb4336daecc5"
+        },
+        {
+          "path": "recipe/evidence/input-field-comparison-v2/blind-packet/grades-rater-b.json",
+          "sha256": "71e35e2f83f24a9f45502f372164d66105d71d7f3ada5adeb4d531a7a7c27137"
+        },
+        {
+          "path": "recipe/evidence/input-field-comparison-v2/blind-packet/grades-rater-c.json",
+          "sha256": "35a848a9162464e7e12182a939a6946535cd962d3a35986add647d0aa65691fd"
+        }
+      ],
+      "sha256": "9b175adbe64006bb93e11446a1f1155827701031b76f23590d4af43d1a7c9fd9"
+    },
+    {
+      "id": "input-calibrated",
+      "status": "refused-pre-unseal",
+      "path": "recipe/evidence/input-field-comparison-calibrated/adjudication.json",
+      "result": "invalid envelopes and Fleiss kappa 0.472527",
+      "relatedArtifacts": [
+        {
+          "path": "recipe/evidence/input-field-comparison-calibrated/receipt.json",
+          "sha256": "0e1e7b662704b82a496a02b9552be8173835c207d3758497e9402658d4de3bc0"
+        },
+        {
+          "path": "recipe/evidence/input-field-comparison-calibrated/blind-packet/grades-batch-cal-a.json",
+          "sha256": "d439745124a445f48e95cd788326b65ac04cd58d0d5ac5c9eee857b87a06de33"
+        },
+        {
+          "path": "recipe/evidence/input-field-comparison-calibrated/blind-packet/grades-batch-cal-b.json",
+          "sha256": "fe3a46dca39a43d4399fa5ed4fd124e6b75b642c3aa4bad09cd945452962ce99"
+        },
+        {
+          "path": "recipe/evidence/input-field-comparison-calibrated/blind-packet/grades-batch-cal-c.json",
+          "sha256": "7fe765aedec561aafddf577be7989f63fdf2d51fa21ca455d13aedefdae404a8"
+        }
+      ],
+      "sha256": "a0312103e1c7e367978335d41e287b67d01c9c8938adff7cd08f9eee9b3a65b5"
+    },
+    {
+      "id": "input-calibration-v2",
+      "status": "qualification-incomplete",
+      "path": "recipe/evidence/input-field-comparison-calibration-v2/index.json",
+      "result": "A failed; B/C passed; performance remained sealed",
+      "relatedArtifacts": [
+        {
+          "path": "recipe/evidence/input-field-comparison-calibration-v2/receipt.json",
+          "sha256": "38531cef86fcdc47b083ea39308cf6c676ad8f18a79289d2b5f3f0dba414f85a"
+        },
+        {
+          "path": "recipe/evidence/input-field-comparison-calibration-v2/gold/receipts/rater-cal-v2-a.json",
+          "sha256": "474d2c13bcbb31f40dc13f9420d567a09c32c00cd0abfea37dc6108a172eeec7"
+        },
+        {
+          "path": "recipe/evidence/input-field-comparison-calibration-v2/gold/receipts/rater-cal-v2-b.json",
+          "sha256": "1d351c753946f615237c407ff036e0fe29b3a2b673562c8e7386364188b4c8ee"
+        },
+        {
+          "path": "recipe/evidence/input-field-comparison-calibration-v2/gold/receipts/rater-cal-v2-c.json",
+          "sha256": "4538e58eadc06389f87e47c126b8d4825acc211bcf5d5f8961b42d3b8e2b53fd"
+        },
+        {
+          "path": "recipe/evidence/input-field-comparison-calibration-v2/gold/submissions/rater-cal-v2-a.json",
+          "sha256": "6813f52233c32be1c0853d3a4b206bce506a9a80efccb328080920cd7d339cf7"
+        },
+        {
+          "path": "recipe/evidence/input-field-comparison-calibration-v2/gold/submissions/rater-cal-v2-b.json",
+          "sha256": "8a360f77475b69593c20b27ab7d14252c0c10650d8853c1e49e42471af9c9d7a"
+        },
+        {
+          "path": "recipe/evidence/input-field-comparison-calibration-v2/gold/submissions/rater-cal-v2-c.json",
+          "sha256": "d687385e75ee15cbf28ae7838f28ab2b7696d2f870cfa80a7b3aa7efa10d17b4"
+        }
+      ],
+      "sha256": "b01fb36f7604bf78335de6dc92190623221b00f04530824d5f0fbb91ffa863b4"
+    },
+    {
+      "id": "input-calibration-v3",
+      "status": "refused-pre-unseal",
+      "path": "recipe/evidence/input-field-comparison-calibration-v3-replacement/final-adjudication.json",
+      "result": "Fleiss kappa 0.409255; performance identity null",
+      "relatedArtifacts": [
+        {
+          "path": "recipe/evidence/input-field-comparison-calibration-v3-replacement/receipt.json",
+          "sha256": "672f64c07fe9e57b93bbe8db80910afc44a417f4109e59bc741f8cf7f0d1376f"
+        },
+        {
+          "path": "recipe/evidence/input-field-comparison-calibration-v3-replacement/gold/receipts/rater-cal-v3-d.json",
+          "sha256": "38bcbb445ae6361cd7db667f10b996db76b9122138502977e8f866ec993c0739"
+        },
+        {
+          "path": "recipe/evidence/input-field-comparison-calibration-v3-replacement/gold/submissions/rater-cal-v3-d.json",
+          "sha256": "42d8ff1757d264bdb952b913060383a6c6c1708dafca728942f699e82071620a"
+        },
+        {
+          "path": "recipe/evidence/input-field-comparison-calibration-v3-replacement/performance/submissions/rater-cal-v2-b.json",
+          "sha256": "7596381924042b6b6f55e9fb0b47e13a4c2c42ea1281c06b1b15b20ceaeb0434"
+        },
+        {
+          "path": "recipe/evidence/input-field-comparison-calibration-v3-replacement/performance/submissions/rater-cal-v2-c.json",
+          "sha256": "6a8bc3f213241a035abda42111b5729ce77f351e64d6e9d5ef1338b22a9222e6"
+        },
+        {
+          "path": "recipe/evidence/input-field-comparison-calibration-v3-replacement/performance/submissions/rater-cal-v3-d.json",
+          "sha256": "201aa27edae387250c037fcd8f9ac21ddafe653decff3dbcdaf7a6fb14a68a60"
+        }
+      ],
+      "sha256": "2faff1862f90bbe77ebf9d66d23f19ac0d852887a5a684fca7227c0547cfcb8f"
+    },
+    {
+      "id": "input-paired-gold-a",
+      "status": "failed-qualification-preserved",
+      "path": "recipe/evidence/input-field-paired-comparison-v1/gold/receipts/rater-pair-v1-a.json",
+      "result": "44/48",
+      "relatedArtifacts": [
+        {
+          "path": "recipe/evidence/input-field-paired-comparison-v1/gold/submissions/rater-pair-v1-a.json",
+          "sha256": "fac90561fd93cb59593bf20033ab083e00791c0a08b998beb7c83f42de53ddb8"
+        }
+      ],
+      "sha256": "0c9296786a893a8a85edb62925dfc086a386cfc89efb02b4539bce0590dac3e7"
+    },
+    {
+      "id": "input-paired-gold-b",
+      "status": "failed-qualification-preserved",
+      "path": "recipe/evidence/input-field-paired-comparison-v1/gold/receipts/rater-pair-v1-b.json",
+      "result": "42/48",
+      "relatedArtifacts": [
+        {
+          "path": "recipe/evidence/input-field-paired-comparison-v1/gold/submissions/rater-pair-v1-b.json",
+          "sha256": "75a3e97e7c5979fa1ce9c8806df152400f4d32c26563055fa281317850f45427"
+        }
+      ],
+      "sha256": "098562f20d9aab28d78dfc738af916fa21d930000edab47aede64607053e119b"
+    },
+    {
+      "id": "input-paired-gold-c",
+      "status": "failed-qualification-preserved",
+      "path": "recipe/evidence/input-field-paired-comparison-v1/gold/receipts/rater-pair-v1-c.json",
+      "result": "41/48",
+      "relatedArtifacts": [
+        {
+          "path": "recipe/evidence/input-field-paired-comparison-v1/gold/submissions/rater-pair-v1-c.json",
+          "sha256": "e44a6a3b353a2eff42136bb99c21aded4189aea4df49e73c4b6a984baa377baf"
+        },
+        {
+          "path": "recipe/evidence/input-field-paired-comparison-v1/receipt.json",
+          "sha256": "571c2cf4afce73fa7733589e9df6a8fb0c2cc96fd599c66c2bff64350f7e0868"
+        }
+      ],
+      "sha256": "6f2ea6c13effe49d8c3cb5b61c05c35bcc08811242a886f165da2a7b18342e5f"
+    },
+    {
+      "id": "button-proof",
+      "status": "separate-complete-proof",
+      "path": "recipe/evidence/button-live-pivot-v4/final-adjudication.json",
+      "result": "Button 12/12 live blind grade; not Input evidence",
+      "relatedArtifacts": [
+        {
+          "path": "recipe/evidence/button-live-pivot-v4/receipt.json",
+          "sha256": "7832103cf07d369d151c2d701c543a15a4120c236e31fe3feb999e0731d5186a"
+        },
+        {
+          "path": "recipe/evidence/button-live-pivot-v4/blind-packet/grades.json",
+          "sha256": "457c572436f71bdba8841342880ba46585540f56e9f6144bf3ead6b739692806"
+        }
+      ],
+      "sha256": "056266543d770f16feecf0eea3681a989e24cb5369e93cac278d58556d988471"
+    }
+  ]
+}

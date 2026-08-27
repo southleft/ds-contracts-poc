@@ -1,0 +1,1800 @@
+{
+  "version": "input-field-paired-source-v3",
+  "sealedFromBlindGrader": true,
+  "randomizationSeedHash": "6cc05968f06b6a13ec4af8ef074544381800043ffb807c14f0279b820a891d4a",
+  "randomizedBatchHash": "f84fab00c6d8dc3ea407de3ce6d17920d912bfea5a46bbb7cefacc5f6f6f0059",
+  "answers": [
+    {
+      "anonymousCell": "cell-b6ec176b5078",
+      "anonymousLabel": "specimen-30e1d571ad9a",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=small/state=default/content=placeholder/required=false/adornments=none",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-b6ec176b5078",
+      "anonymousLabel": "specimen-ff45a5402dce",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=small/state=default/content=placeholder/required=false/adornments=none",
+      "outputHash": "be3f1f6c190e7950488eeb2ecc13c882b37ba3d6aac66dca1a67e27b52279f36"
+    },
+    {
+      "anonymousCell": "cell-8b57376c8f8a",
+      "anonymousLabel": "specimen-85c1fbbe30fc",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=small/state=default/content=placeholder/required=false/adornments=both",
+      "outputHash": "fe61d6f6c513bc575f30aa6da28c598f524af20c300267f472e1a9d188a8fda1"
+    },
+    {
+      "anonymousCell": "cell-8b57376c8f8a",
+      "anonymousLabel": "specimen-f4ec57bf8ddf",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=small/state=default/content=placeholder/required=false/adornments=both",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-dd7664a4ac63",
+      "anonymousLabel": "specimen-2fc2d8b5d0a0",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=small/state=default/content=placeholder/required=true/adornments=none",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-dd7664a4ac63",
+      "anonymousLabel": "specimen-57fdb0d8a6a3",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=small/state=default/content=placeholder/required=true/adornments=none",
+      "outputHash": "ac47dcb94f8ab70f4a6529847b6bcebd12e9a69f5e5a3dd7fb0ca185b177296f"
+    },
+    {
+      "anonymousCell": "cell-ec8fd92f87da",
+      "anonymousLabel": "specimen-0345ab961cbf",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=small/state=default/content=placeholder/required=true/adornments=both",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-ec8fd92f87da",
+      "anonymousLabel": "specimen-b214e7901a20",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=small/state=default/content=placeholder/required=true/adornments=both",
+      "outputHash": "ae4e155c0d80e8267567d8b14671880ae4b2dc8883a05ff47c219b7fc25e697d"
+    },
+    {
+      "anonymousCell": "cell-de612780076e",
+      "anonymousLabel": "specimen-5a91187e0bcd",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=small/state=default/content=value/required=false/adornments=none",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-de612780076e",
+      "anonymousLabel": "specimen-a57de4a9b2f8",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=small/state=default/content=value/required=false/adornments=none",
+      "outputHash": "e94f5909048b34e44ec2b1601a8d9de383d0a6359db3848e3be689fb1287a6b6"
+    },
+    {
+      "anonymousCell": "cell-3744c3c6e863",
+      "anonymousLabel": "specimen-1635f899b21d",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=small/state=default/content=value/required=false/adornments=both",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-3744c3c6e863",
+      "anonymousLabel": "specimen-316538e580ea",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=small/state=default/content=value/required=false/adornments=both",
+      "outputHash": "7ab70bcd7d5773bc307c2874afb48a2ccec1c047a8af519cd5aa41b6979dfe80"
+    },
+    {
+      "anonymousCell": "cell-93c18d91a9e0",
+      "anonymousLabel": "specimen-2c85c57bb380",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=small/state=default/content=value/required=true/adornments=none",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-93c18d91a9e0",
+      "anonymousLabel": "specimen-e0499467f843",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=small/state=default/content=value/required=true/adornments=none",
+      "outputHash": "a78e3ec1a1a09428a525a47fc3c51a38627218dc2744a3e2465d9eb9930debde"
+    },
+    {
+      "anonymousCell": "cell-25e2e743e7cd",
+      "anonymousLabel": "specimen-2cb3b94c6d28",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=small/state=default/content=value/required=true/adornments=both",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-25e2e743e7cd",
+      "anonymousLabel": "specimen-dc577aaf55fd",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=small/state=default/content=value/required=true/adornments=both",
+      "outputHash": "d1948ca41d533c5b5ca0783f53d7b7e91f41a853736eb92623e9c4a92af92909"
+    },
+    {
+      "anonymousCell": "cell-19fd4b7386e7",
+      "anonymousLabel": "specimen-80663674f58c",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=false/adornments=none",
+      "outputHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee"
+    },
+    {
+      "anonymousCell": "cell-19fd4b7386e7",
+      "anonymousLabel": "specimen-f2226029da37",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=false/adornments=none",
+      "outputHash": "410a56eaaea5428d170dbaf94d94623606e21b104e04c91a7990678eab472d46"
+    },
+    {
+      "anonymousCell": "cell-8ea3c31b3bef",
+      "anonymousLabel": "specimen-02c80f57fb21",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=false/adornments=both",
+      "outputHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee"
+    },
+    {
+      "anonymousCell": "cell-8ea3c31b3bef",
+      "anonymousLabel": "specimen-853149def8e0",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=false/adornments=both",
+      "outputHash": "6b55ef04eecc014f6abd77fc87e2ddf8a0e33d32365a81e467d787c1fa9dc0a8"
+    },
+    {
+      "anonymousCell": "cell-75caea3fb208",
+      "anonymousLabel": "specimen-3cf8c5a8bb52",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=true/adornments=none",
+      "outputHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee"
+    },
+    {
+      "anonymousCell": "cell-75caea3fb208",
+      "anonymousLabel": "specimen-87f0d953dc22",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=true/adornments=none",
+      "outputHash": "5e8cea6070e9714aa5248145e0ffc6f32970bcca3f40d0850038d96db09dbf31"
+    },
+    {
+      "anonymousCell": "cell-d91392234b41",
+      "anonymousLabel": "specimen-2e6c4b8ae279",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=true/adornments=both",
+      "outputHash": "b4a5875708a1d56a379cc27c0410c6aa355a69c074ec498280608b1a92942a8e"
+    },
+    {
+      "anonymousCell": "cell-d91392234b41",
+      "anonymousLabel": "specimen-916e75c2a7db",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=true/adornments=both",
+      "outputHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee"
+    },
+    {
+      "anonymousCell": "cell-3f0264f874ab",
+      "anonymousLabel": "specimen-eca11e8f5132",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=small/state=focus-visible/content=value/required=false/adornments=none",
+      "outputHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee"
+    },
+    {
+      "anonymousCell": "cell-3f0264f874ab",
+      "anonymousLabel": "specimen-f196914b6369",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=small/state=focus-visible/content=value/required=false/adornments=none",
+      "outputHash": "262f6acd6a473093294ffbc6b8c55a0982854ab76c0c1c9904ea5533437e8381"
+    },
+    {
+      "anonymousCell": "cell-d008a4edbc42",
+      "anonymousLabel": "specimen-2909fdb6e1cc",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=small/state=focus-visible/content=value/required=false/adornments=both",
+      "outputHash": "86b7d0b9f8b3b5dab737cc92e67baef03211bfac9a1f283bb049c0a2284f6c5b"
+    },
+    {
+      "anonymousCell": "cell-d008a4edbc42",
+      "anonymousLabel": "specimen-507d732e8612",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=small/state=focus-visible/content=value/required=false/adornments=both",
+      "outputHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee"
+    },
+    {
+      "anonymousCell": "cell-390e96912949",
+      "anonymousLabel": "specimen-822eac631f56",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=small/state=focus-visible/content=value/required=true/adornments=none",
+      "outputHash": "251d4bffecfebf95b06a115024362c6adc17149264c21682191c926c430a544e"
+    },
+    {
+      "anonymousCell": "cell-390e96912949",
+      "anonymousLabel": "specimen-ba7233704302",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=small/state=focus-visible/content=value/required=true/adornments=none",
+      "outputHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee"
+    },
+    {
+      "anonymousCell": "cell-95cd7164c072",
+      "anonymousLabel": "specimen-98c06be38083",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=small/state=focus-visible/content=value/required=true/adornments=both",
+      "outputHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee"
+    },
+    {
+      "anonymousCell": "cell-95cd7164c072",
+      "anonymousLabel": "specimen-a790002b62e0",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=small/state=focus-visible/content=value/required=true/adornments=both",
+      "outputHash": "ef10dfb10ac2e30a5e699ed0da3609a31e31207541cbaa7120cea79783fc0c1c"
+    },
+    {
+      "anonymousCell": "cell-c9c6d805c65a",
+      "anonymousLabel": "specimen-508493df7fa1",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=small/state=error/content=placeholder/required=false/adornments=none",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-c9c6d805c65a",
+      "anonymousLabel": "specimen-e02612b489d8",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=small/state=error/content=placeholder/required=false/adornments=none",
+      "outputHash": "a2bafa46ffef5b4f38bf8ebf568d84d56fa5c9e9683a5a27c4a2ffc191c32afb"
+    },
+    {
+      "anonymousCell": "cell-629faf217042",
+      "anonymousLabel": "specimen-192f21a787c4",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=small/state=error/content=placeholder/required=false/adornments=both",
+      "outputHash": "a6596c5acc2c0bfc4cd621c75c01cc377d761a662fc9f03f4d9459af56b83706"
+    },
+    {
+      "anonymousCell": "cell-629faf217042",
+      "anonymousLabel": "specimen-bce6311dad91",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=small/state=error/content=placeholder/required=false/adornments=both",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-dd330665b14a",
+      "anonymousLabel": "specimen-2df9ee814cc5",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=small/state=error/content=placeholder/required=true/adornments=none",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-dd330665b14a",
+      "anonymousLabel": "specimen-3f4b796d4f1e",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=small/state=error/content=placeholder/required=true/adornments=none",
+      "outputHash": "06d3a6b3baf94c6fb9e6372cde82e1b17c4b4482ec936810d16d64fd49c2768c"
+    },
+    {
+      "anonymousCell": "cell-0b05931f89be",
+      "anonymousLabel": "specimen-4d9384f2e2ab",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=small/state=error/content=placeholder/required=true/adornments=both",
+      "outputHash": "f1af8725c9bce88c8cd7bfaf0c062385bce23c747507ef8935504cce19723496"
+    },
+    {
+      "anonymousCell": "cell-0b05931f89be",
+      "anonymousLabel": "specimen-d17fd1dc5ab2",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=small/state=error/content=placeholder/required=true/adornments=both",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-0737e3580277",
+      "anonymousLabel": "specimen-0b5346ff99ca",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=small/state=error/content=value/required=false/adornments=none",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-0737e3580277",
+      "anonymousLabel": "specimen-399e8f96672b",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=small/state=error/content=value/required=false/adornments=none",
+      "outputHash": "cc279ddc0ed1a31b7996e936dd77e6b2d873722f6a74f242b069d820d5349a0c"
+    },
+    {
+      "anonymousCell": "cell-7bf48083bb08",
+      "anonymousLabel": "specimen-a95a3009db19",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=small/state=error/content=value/required=false/adornments=both",
+      "outputHash": "eeefcf89ffb27c27ea126aaea104a72c13a846f75a1855b1b6621c14d2638258"
+    },
+    {
+      "anonymousCell": "cell-7bf48083bb08",
+      "anonymousLabel": "specimen-adc65b760e74",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=small/state=error/content=value/required=false/adornments=both",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-8f162b5331a5",
+      "anonymousLabel": "specimen-6e5aa4f12c14",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=small/state=error/content=value/required=true/adornments=none",
+      "outputHash": "825113fe4526554690fb23a999bede477608f03e84ff649b559205887a15111a"
+    },
+    {
+      "anonymousCell": "cell-8f162b5331a5",
+      "anonymousLabel": "specimen-eb287d13306d",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=small/state=error/content=value/required=true/adornments=none",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-e72279ac4d6a",
+      "anonymousLabel": "specimen-4eeeb0f63542",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=small/state=error/content=value/required=true/adornments=both",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-e72279ac4d6a",
+      "anonymousLabel": "specimen-f7893b6adda5",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=small/state=error/content=value/required=true/adornments=both",
+      "outputHash": "d8907ce8e0e3a6b60b771df07781ef1960eeba8144d7a45649ef23af0845e02e"
+    },
+    {
+      "anonymousCell": "cell-59b0fbe8adc7",
+      "anonymousLabel": "specimen-24c2ef694036",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=small/state=disabled/content=placeholder/required=false/adornments=none",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-59b0fbe8adc7",
+      "anonymousLabel": "specimen-2a2edf11f3f2",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=small/state=disabled/content=placeholder/required=false/adornments=none",
+      "outputHash": "3e065b0465e2c0f4a9ebd4fc6df679862e0bb66bf3003e69b8575d7290ef3b8d"
+    },
+    {
+      "anonymousCell": "cell-def2cf7f4bc2",
+      "anonymousLabel": "specimen-5184073a929f",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=small/state=disabled/content=placeholder/required=false/adornments=both",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-def2cf7f4bc2",
+      "anonymousLabel": "specimen-6167c399a88e",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=small/state=disabled/content=placeholder/required=false/adornments=both",
+      "outputHash": "3888863ac87d8067309d61a64bf7bcf3d00a6ac2cf5b61852e87937a76b09099"
+    },
+    {
+      "anonymousCell": "cell-b2cfd873ed2b",
+      "anonymousLabel": "specimen-24c10eed7790",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=small/state=disabled/content=placeholder/required=true/adornments=none",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-b2cfd873ed2b",
+      "anonymousLabel": "specimen-c8c878e6d0e9",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=small/state=disabled/content=placeholder/required=true/adornments=none",
+      "outputHash": "a2be637126066f4aea0e0e8fd77611478fba031cbe06547a96da5f3f80f4cf76"
+    },
+    {
+      "anonymousCell": "cell-047dd18cff93",
+      "anonymousLabel": "specimen-551cb564ec86",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=small/state=disabled/content=placeholder/required=true/adornments=both",
+      "outputHash": "2485d5b57304697b398dc2c784550389ad711241e16ca9e2703717663526b6b6"
+    },
+    {
+      "anonymousCell": "cell-047dd18cff93",
+      "anonymousLabel": "specimen-a621ea09de11",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=small/state=disabled/content=placeholder/required=true/adornments=both",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-b67d9086d81a",
+      "anonymousLabel": "specimen-38ce69d43134",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=small/state=disabled/content=value/required=false/adornments=none",
+      "outputHash": "b5e35b268025e417184d5cfae9d55933c57215c301b9c691e871b5ab5c68e113"
+    },
+    {
+      "anonymousCell": "cell-b67d9086d81a",
+      "anonymousLabel": "specimen-d5ae90efd24e",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=small/state=disabled/content=value/required=false/adornments=none",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-2544427d2b55",
+      "anonymousLabel": "specimen-68443897c91a",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=small/state=disabled/content=value/required=false/adornments=both",
+      "outputHash": "d76e86a3b8be6f69fb88441d1b98fa1b3d250a35a05b72583fc1076a7661993d"
+    },
+    {
+      "anonymousCell": "cell-2544427d2b55",
+      "anonymousLabel": "specimen-a5b31ceeeefa",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=small/state=disabled/content=value/required=false/adornments=both",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-a004a93a65c3",
+      "anonymousLabel": "specimen-7791c815ab1c",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=small/state=disabled/content=value/required=true/adornments=none",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-a004a93a65c3",
+      "anonymousLabel": "specimen-82c313de7c78",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=small/state=disabled/content=value/required=true/adornments=none",
+      "outputHash": "8732ee5304212cbca7ec7746fc5918b0c6319307c035a99b902b10252b731684"
+    },
+    {
+      "anonymousCell": "cell-d0fbcedba570",
+      "anonymousLabel": "specimen-5d961e085d7b",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=small/state=disabled/content=value/required=true/adornments=both",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-d0fbcedba570",
+      "anonymousLabel": "specimen-c15e3af12211",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=small/state=disabled/content=value/required=true/adornments=both",
+      "outputHash": "35ba73ade833aa6ce7e6ed7dc7b4e8d12ac07af4d1c1c7cfe0a108fd6c426344"
+    },
+    {
+      "anonymousCell": "cell-d85cfca978b3",
+      "anonymousLabel": "specimen-06783ae34d2a",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=medium/state=default/content=placeholder/required=false/adornments=none",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-d85cfca978b3",
+      "anonymousLabel": "specimen-f047eac9b3df",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=medium/state=default/content=placeholder/required=false/adornments=none",
+      "outputHash": "22da31f6175d3ac9bd07847787497231c78d85b10ad7b2654f25621fc43787eb"
+    },
+    {
+      "anonymousCell": "cell-d994d90a8dd7",
+      "anonymousLabel": "specimen-a65f6cb3b496",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=medium/state=default/content=placeholder/required=false/adornments=both",
+      "outputHash": "d50dff2aed8b920b65854ca6c535c91b6a888910131cb0b2a34431580d053ffc"
+    },
+    {
+      "anonymousCell": "cell-d994d90a8dd7",
+      "anonymousLabel": "specimen-b41fdc544c11",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=medium/state=default/content=placeholder/required=false/adornments=both",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-0d1288278e2e",
+      "anonymousLabel": "specimen-2920464c0127",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=medium/state=default/content=placeholder/required=true/adornments=none",
+      "outputHash": "73bd9c651de86b5cfbd69611f1dd30153df1c92853ef658c303d181e57d52992"
+    },
+    {
+      "anonymousCell": "cell-0d1288278e2e",
+      "anonymousLabel": "specimen-a9178d4fe626",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=medium/state=default/content=placeholder/required=true/adornments=none",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-8e500cfe6992",
+      "anonymousLabel": "specimen-ee3baabc8336",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=medium/state=default/content=placeholder/required=true/adornments=both",
+      "outputHash": "7b626af847239d6dfb0c244e8c73e42813090358f79018506be4e97bd7915097"
+    },
+    {
+      "anonymousCell": "cell-8e500cfe6992",
+      "anonymousLabel": "specimen-fee8a50345d1",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=medium/state=default/content=placeholder/required=true/adornments=both",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-d85f222d0e9d",
+      "anonymousLabel": "specimen-8df293f96fae",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=medium/state=default/content=value/required=false/adornments=none",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-d85f222d0e9d",
+      "anonymousLabel": "specimen-f4087b624eed",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=medium/state=default/content=value/required=false/adornments=none",
+      "outputHash": "8015f28df553bf451f36a9f6ec7c0aae81faffa0053d5e423f187d984f653e65"
+    },
+    {
+      "anonymousCell": "cell-e4bcac313392",
+      "anonymousLabel": "specimen-611c24647659",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=medium/state=default/content=value/required=false/adornments=both",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-e4bcac313392",
+      "anonymousLabel": "specimen-aca4d398782b",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=medium/state=default/content=value/required=false/adornments=both",
+      "outputHash": "d31fbc4bf98ccf6e52395859e623caf3a2653b4874ffb7cb9c98e8e2f0821368"
+    },
+    {
+      "anonymousCell": "cell-cf8d64aca9b5",
+      "anonymousLabel": "specimen-b86fb07aeb58",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=medium/state=default/content=value/required=true/adornments=none",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-cf8d64aca9b5",
+      "anonymousLabel": "specimen-cf41c4f58516",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=medium/state=default/content=value/required=true/adornments=none",
+      "outputHash": "9bd107c8c089c282336c9b378464899fa25453d34023190db1fdd02613a51b4a"
+    },
+    {
+      "anonymousCell": "cell-ad932372750e",
+      "anonymousLabel": "specimen-00a6d62b0c2f",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=medium/state=default/content=value/required=true/adornments=both",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-ad932372750e",
+      "anonymousLabel": "specimen-ba04e811b363",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=medium/state=default/content=value/required=true/adornments=both",
+      "outputHash": "7ed70e47bf81bb12b7528ab8148f5f040446c5a7752592d0f4593b8b7aeb9b0d"
+    },
+    {
+      "anonymousCell": "cell-9bd3e94a3204",
+      "anonymousLabel": "specimen-1e798aa5c4b4",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=false/adornments=none",
+      "outputHash": "516dfd7d9ef8f79b24a248bba1406fc048017d296c87d05b01dcea3ee2b5da57"
+    },
+    {
+      "anonymousCell": "cell-9bd3e94a3204",
+      "anonymousLabel": "specimen-cb9fe0d209fb",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=false/adornments=none",
+      "outputHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee"
+    },
+    {
+      "anonymousCell": "cell-d3908f956993",
+      "anonymousLabel": "specimen-24aa0821021d",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=false/adornments=both",
+      "outputHash": "c274365968ed9c9ad78c02a51514c083b04686f1455996da4dbe53e3d7b4d866"
+    },
+    {
+      "anonymousCell": "cell-d3908f956993",
+      "anonymousLabel": "specimen-a9a7a6d34f22",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=false/adornments=both",
+      "outputHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee"
+    },
+    {
+      "anonymousCell": "cell-f9982e78fbc9",
+      "anonymousLabel": "specimen-3e7aa5e551ea",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=true/adornments=none",
+      "outputHash": "7e714f8f7d048830a19ba5c159160ec634e2dffb31170795ddf3db7870bab68e"
+    },
+    {
+      "anonymousCell": "cell-f9982e78fbc9",
+      "anonymousLabel": "specimen-a7d58246f118",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=true/adornments=none",
+      "outputHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee"
+    },
+    {
+      "anonymousCell": "cell-be6ec6b0712f",
+      "anonymousLabel": "specimen-0e769136da46",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=true/adornments=both",
+      "outputHash": "71fd9cc83d7cdff260aee824ccb83c583407e9e2b40d8cfbddae46b0bd2a4ed6"
+    },
+    {
+      "anonymousCell": "cell-be6ec6b0712f",
+      "anonymousLabel": "specimen-3ae409006545",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=true/adornments=both",
+      "outputHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee"
+    },
+    {
+      "anonymousCell": "cell-272c966d0829",
+      "anonymousLabel": "specimen-498af79ee8b6",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=medium/state=focus-visible/content=value/required=false/adornments=none",
+      "outputHash": "24707049e38d9bc50bf494061082571d24321d1b1f35222a86ad5c2084c65b0d"
+    },
+    {
+      "anonymousCell": "cell-272c966d0829",
+      "anonymousLabel": "specimen-f7effcc8589d",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=medium/state=focus-visible/content=value/required=false/adornments=none",
+      "outputHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee"
+    },
+    {
+      "anonymousCell": "cell-9f62d911795e",
+      "anonymousLabel": "specimen-742592a4069f",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=medium/state=focus-visible/content=value/required=false/adornments=both",
+      "outputHash": "556d0812d5d05b974daaea43cd230bbba6fedcfea321b8c0317df47a3c4d1ad1"
+    },
+    {
+      "anonymousCell": "cell-9f62d911795e",
+      "anonymousLabel": "specimen-84512070efd6",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=medium/state=focus-visible/content=value/required=false/adornments=both",
+      "outputHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee"
+    },
+    {
+      "anonymousCell": "cell-4f2aaf3e1b45",
+      "anonymousLabel": "specimen-2c84fae9a129",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=medium/state=focus-visible/content=value/required=true/adornments=none",
+      "outputHash": "cbda37e5590943e2cc33e5c05321deaab9068f5c4b4ef63ed9633ab826a766d3"
+    },
+    {
+      "anonymousCell": "cell-4f2aaf3e1b45",
+      "anonymousLabel": "specimen-b2fb1629d28c",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=medium/state=focus-visible/content=value/required=true/adornments=none",
+      "outputHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee"
+    },
+    {
+      "anonymousCell": "cell-914b2fda057c",
+      "anonymousLabel": "specimen-27f4e80a36ef",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=medium/state=focus-visible/content=value/required=true/adornments=both",
+      "outputHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee"
+    },
+    {
+      "anonymousCell": "cell-914b2fda057c",
+      "anonymousLabel": "specimen-41a0f0d3443b",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=medium/state=focus-visible/content=value/required=true/adornments=both",
+      "outputHash": "271228445c49a9fd9ab44ba9f7234f02ef2f7b003a863bcf7043f0420aee28d7"
+    },
+    {
+      "anonymousCell": "cell-b39a0be386be",
+      "anonymousLabel": "specimen-9001a5ff2ec3",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=medium/state=error/content=placeholder/required=false/adornments=none",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-b39a0be386be",
+      "anonymousLabel": "specimen-a5cbdd650ecd",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=medium/state=error/content=placeholder/required=false/adornments=none",
+      "outputHash": "2242374e76e22f3a0b0ac778db4e1215458a582f0639cd0d0be0164e98ec8508"
+    },
+    {
+      "anonymousCell": "cell-9fc35c66f2ab",
+      "anonymousLabel": "specimen-02771b81b0d6",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=medium/state=error/content=placeholder/required=false/adornments=both",
+      "outputHash": "369214db43fcd793676da8533750ecae82605ff8f0d11d3a3a90b5ef4f509fa4"
+    },
+    {
+      "anonymousCell": "cell-9fc35c66f2ab",
+      "anonymousLabel": "specimen-382d781b5e2b",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=medium/state=error/content=placeholder/required=false/adornments=both",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-9940eda226e7",
+      "anonymousLabel": "specimen-03b2417e1191",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=medium/state=error/content=placeholder/required=true/adornments=none",
+      "outputHash": "698c1ce3d9bb3a794bd9e51e1b0dd4bcc329840b4ad19dcf47508ad830fae587"
+    },
+    {
+      "anonymousCell": "cell-9940eda226e7",
+      "anonymousLabel": "specimen-eb3c0a61ee7e",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=medium/state=error/content=placeholder/required=true/adornments=none",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-d3eca94c996e",
+      "anonymousLabel": "specimen-a28b487c906d",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=medium/state=error/content=placeholder/required=true/adornments=both",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-d3eca94c996e",
+      "anonymousLabel": "specimen-fe4f64cd53e7",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=medium/state=error/content=placeholder/required=true/adornments=both",
+      "outputHash": "31b50c5f4e7539916e81c38d037c49f2dc56ebf022b430951997aff783fb66b4"
+    },
+    {
+      "anonymousCell": "cell-6dbdebaf2ed1",
+      "anonymousLabel": "specimen-121e3c98f122",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=medium/state=error/content=value/required=false/adornments=none",
+      "outputHash": "b2e5a84a7b348402b57bedaff2c8f06157c27d2d657cc153c80a83d3e7096340"
+    },
+    {
+      "anonymousCell": "cell-6dbdebaf2ed1",
+      "anonymousLabel": "specimen-9456e4c224c6",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=medium/state=error/content=value/required=false/adornments=none",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-b329648a8d7b",
+      "anonymousLabel": "specimen-1d97ae180e10",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=medium/state=error/content=value/required=false/adornments=both",
+      "outputHash": "b3f1fdc560bd91d20087522d5e2ffbe0b22f972b94e3bc3ac77c5823b0e98b11"
+    },
+    {
+      "anonymousCell": "cell-b329648a8d7b",
+      "anonymousLabel": "specimen-5fecbea8f166",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=medium/state=error/content=value/required=false/adornments=both",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-867b9996fabd",
+      "anonymousLabel": "specimen-37ac5b23b12e",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=medium/state=error/content=value/required=true/adornments=none",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-867b9996fabd",
+      "anonymousLabel": "specimen-4bd20c3699ce",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=medium/state=error/content=value/required=true/adornments=none",
+      "outputHash": "864f4e9da9614ef5fb3e2b5f2ed6c2d95274611653ef2374a7734b6a0092a7e5"
+    },
+    {
+      "anonymousCell": "cell-84d47fcc50df",
+      "anonymousLabel": "specimen-48bf3060f490",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=medium/state=error/content=value/required=true/adornments=both",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-84d47fcc50df",
+      "anonymousLabel": "specimen-ef3a2d1ee97e",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=medium/state=error/content=value/required=true/adornments=both",
+      "outputHash": "018a3ed56eb065b28f85c4b46212af73e6e47aa71099c0b7e40afee94f814f83"
+    },
+    {
+      "anonymousCell": "cell-11b92fc087f9",
+      "anonymousLabel": "specimen-bfc4b6f1f2de",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=false/adornments=none",
+      "outputHash": "1498e37072646b0a5b31559b6cf3d1406cfbd16d954f3eae903feaaa03964eea"
+    },
+    {
+      "anonymousCell": "cell-11b92fc087f9",
+      "anonymousLabel": "specimen-e1f3c8b3bfcc",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=false/adornments=none",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-39826e58508a",
+      "anonymousLabel": "specimen-1d6a7744d8c8",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=false/adornments=both",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-39826e58508a",
+      "anonymousLabel": "specimen-a00f90eb13f8",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=false/adornments=both",
+      "outputHash": "c2aa73da1115ccd6e93a76dcdacdafcedd35795d69436eb02d54b03c78409855"
+    },
+    {
+      "anonymousCell": "cell-8c0be8b45955",
+      "anonymousLabel": "specimen-038cd85f52f8",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=true/adornments=none",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-8c0be8b45955",
+      "anonymousLabel": "specimen-2a415ac6de19",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=true/adornments=none",
+      "outputHash": "43c0fd862f06e1e1709d9f5763e759b1014ce61be199cccc9444b2f61e8d754d"
+    },
+    {
+      "anonymousCell": "cell-4d29d7dd7127",
+      "anonymousLabel": "specimen-23b852375023",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=true/adornments=both",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-4d29d7dd7127",
+      "anonymousLabel": "specimen-f8c46e6d79f7",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=true/adornments=both",
+      "outputHash": "dadf0db33b8f92f42a88d152bee1f05f4c9c1074f8eedd1c3734751459b0b3b1"
+    },
+    {
+      "anonymousCell": "cell-ea6cdbfd40a4",
+      "anonymousLabel": "specimen-79eda02adb12",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=medium/state=disabled/content=value/required=false/adornments=none",
+      "outputHash": "c4379d3ded715a05618c356ef43cd2c2665c3ae894adecf81651bbb1deb4c884"
+    },
+    {
+      "anonymousCell": "cell-ea6cdbfd40a4",
+      "anonymousLabel": "specimen-b1bb38a878b1",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=medium/state=disabled/content=value/required=false/adornments=none",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-7a38cf5040ea",
+      "anonymousLabel": "specimen-ab243f1cef98",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=medium/state=disabled/content=value/required=false/adornments=both",
+      "outputHash": "1568845a51fa6ba639747fc8487c1b10744e15dfd4fd6a41afe96daf522a8dbf"
+    },
+    {
+      "anonymousCell": "cell-7a38cf5040ea",
+      "anonymousLabel": "specimen-bedbe567429d",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=medium/state=disabled/content=value/required=false/adornments=both",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-01c7e2dc5552",
+      "anonymousLabel": "specimen-bc5226f01660",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=medium/state=disabled/content=value/required=true/adornments=none",
+      "outputHash": "0a6624b6f094ed4f7fc35b4aab7434b077f139a8bb578974ebea78d028d4b9ef"
+    },
+    {
+      "anonymousCell": "cell-01c7e2dc5552",
+      "anonymousLabel": "specimen-bfef5c188e2a",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=medium/state=disabled/content=value/required=true/adornments=none",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-deda467c64cb",
+      "anonymousLabel": "specimen-5c5e5937c0cd",
+      "implementationPath": "recipe-react",
+      "cellKey": "mui/size=medium/state=disabled/content=value/required=true/adornments=both",
+      "outputHash": "719c1a82a2b2376b02bf061836b93e205de2cb2738f0cf4a5cb030dfef18f9a8"
+    },
+    {
+      "anonymousCell": "cell-deda467c64cb",
+      "anonymousLabel": "specimen-bf96487c0cf5",
+      "implementationPath": "legacy",
+      "cellKey": "mui/size=medium/state=disabled/content=value/required=true/adornments=both",
+      "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4"
+    },
+    {
+      "anonymousCell": "cell-bd034a93ffa1",
+      "anonymousLabel": "specimen-8f52f524d8a5",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=small/state=default/content=placeholder/required=false/adornments=none",
+      "outputHash": "6c08db88dbedf9a0153063e96e3215b7c715f327e4cbcdb40de945700cade00f"
+    },
+    {
+      "anonymousCell": "cell-bd034a93ffa1",
+      "anonymousLabel": "specimen-d95d176bd258",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=small/state=default/content=placeholder/required=false/adornments=none",
+      "outputHash": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d"
+    },
+    {
+      "anonymousCell": "cell-15381f2c13d4",
+      "anonymousLabel": "specimen-0b74425449be",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=small/state=default/content=placeholder/required=false/adornments=both",
+      "outputHash": "986b8a7690b11a2d5aaeda229a738c3837032d3122a62153fb0f16853e1076f2"
+    },
+    {
+      "anonymousCell": "cell-15381f2c13d4",
+      "anonymousLabel": "specimen-d134d73ccda8",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=small/state=default/content=placeholder/required=false/adornments=both",
+      "outputHash": "653e057fa5962f7b967fc7bd49645f8b70be9fcb468a15726c9c0c2c4ed2d6e8"
+    },
+    {
+      "anonymousCell": "cell-22409a95b599",
+      "anonymousLabel": "specimen-b2c7b9bc41b5",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=small/state=default/content=placeholder/required=true/adornments=none",
+      "outputHash": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d"
+    },
+    {
+      "anonymousCell": "cell-22409a95b599",
+      "anonymousLabel": "specimen-e38eda9a705d",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=small/state=default/content=placeholder/required=true/adornments=none",
+      "outputHash": "d98b605b462a005bebeba537dd2bd5d65ad333c37f2eccacf905eccb118ad034"
+    },
+    {
+      "anonymousCell": "cell-32ecab4a038a",
+      "anonymousLabel": "specimen-863afaaa8f69",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=small/state=default/content=placeholder/required=true/adornments=both",
+      "outputHash": "20028d46d9b2ea2acf4a8621de562a20384049167df1e370c7a840da58ab259a"
+    },
+    {
+      "anonymousCell": "cell-32ecab4a038a",
+      "anonymousLabel": "specimen-c390a9554046",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=small/state=default/content=placeholder/required=true/adornments=both",
+      "outputHash": "653e057fa5962f7b967fc7bd49645f8b70be9fcb468a15726c9c0c2c4ed2d6e8"
+    },
+    {
+      "anonymousCell": "cell-b812434ad40e",
+      "anonymousLabel": "specimen-3b1fb201ca8e",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=small/state=default/content=value/required=false/adornments=none",
+      "outputHash": "14bdba503d5c7f6ec2759e0c9e5ea4175384dede79e751675f3d21109610120c"
+    },
+    {
+      "anonymousCell": "cell-b812434ad40e",
+      "anonymousLabel": "specimen-e3a56fd33ca1",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=small/state=default/content=value/required=false/adornments=none",
+      "outputHash": "78c7f2ea59c23acaf8d53b062cae186d6c881f82fdbfe0760d5c5196ebb46ee8"
+    },
+    {
+      "anonymousCell": "cell-4056f3f5fd8b",
+      "anonymousLabel": "specimen-d18f69a1d116",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=small/state=default/content=value/required=false/adornments=both",
+      "outputHash": "3dab2b86b2264d4353b8098362de3053c4fc4fde508c006bbc9c9bdbbb250903"
+    },
+    {
+      "anonymousCell": "cell-4056f3f5fd8b",
+      "anonymousLabel": "specimen-fd8a9a0b50ad",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=small/state=default/content=value/required=false/adornments=both",
+      "outputHash": "3adfedd6d356b895a95d0f88d83e3789c6fcb65217b6bde8922a12aa749d4a9c"
+    },
+    {
+      "anonymousCell": "cell-78e09f46ee32",
+      "anonymousLabel": "specimen-2a10b68b83e9",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=small/state=default/content=value/required=true/adornments=none",
+      "outputHash": "9eaaac31140d31c9c46061a9b4c1037a40aef5ed7e08e30ce59255a594bd4b25"
+    },
+    {
+      "anonymousCell": "cell-78e09f46ee32",
+      "anonymousLabel": "specimen-eb9dc3e61c7c",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=small/state=default/content=value/required=true/adornments=none",
+      "outputHash": "78c7f2ea59c23acaf8d53b062cae186d6c881f82fdbfe0760d5c5196ebb46ee8"
+    },
+    {
+      "anonymousCell": "cell-1b432023a9e7",
+      "anonymousLabel": "specimen-a26d9a8947cd",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=small/state=default/content=value/required=true/adornments=both",
+      "outputHash": "fd88c2e5d047a5cc5bacd48eb364a844226a5e3b6370ef8724bcfff14c327b08"
+    },
+    {
+      "anonymousCell": "cell-1b432023a9e7",
+      "anonymousLabel": "specimen-b53782bf96b4",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=small/state=default/content=value/required=true/adornments=both",
+      "outputHash": "3dab2b86b2264d4353b8098362de3053c4fc4fde508c006bbc9c9bdbbb250903"
+    },
+    {
+      "anonymousCell": "cell-08fe5c52f7ad",
+      "anonymousLabel": "specimen-9aff40271daa",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=false/adornments=none",
+      "outputHash": "55521195254f33e8d0097df0c06be210a4da7cf594a65e6504a08534cb356f46"
+    },
+    {
+      "anonymousCell": "cell-08fe5c52f7ad",
+      "anonymousLabel": "specimen-b888e1cb2a47",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=false/adornments=none",
+      "outputHash": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d"
+    },
+    {
+      "anonymousCell": "cell-76031cce92c2",
+      "anonymousLabel": "specimen-7113a14527b9",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=false/adornments=both",
+      "outputHash": "653e057fa5962f7b967fc7bd49645f8b70be9fcb468a15726c9c0c2c4ed2d6e8"
+    },
+    {
+      "anonymousCell": "cell-76031cce92c2",
+      "anonymousLabel": "specimen-87286d491247",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=false/adornments=both",
+      "outputHash": "0fc5816208dbe066797f362c06126c3ebaf697c1ed9ca68e75ed5d260f95738a"
+    },
+    {
+      "anonymousCell": "cell-5e38be5226b4",
+      "anonymousLabel": "specimen-1fd2ad2b02b8",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=true/adornments=none",
+      "outputHash": "59675e7c0a67b498418479e068bf62e22f1b81d2e9542a2528c309ffbc08d25a"
+    },
+    {
+      "anonymousCell": "cell-5e38be5226b4",
+      "anonymousLabel": "specimen-348046d71e82",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=true/adornments=none",
+      "outputHash": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d"
+    },
+    {
+      "anonymousCell": "cell-1acac0f28d95",
+      "anonymousLabel": "specimen-4c4088f0926a",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=true/adornments=both",
+      "outputHash": "60b29246d080cbec67135bd71538815dc4cdb37beeb6f7c1051559816481e2f2"
+    },
+    {
+      "anonymousCell": "cell-1acac0f28d95",
+      "anonymousLabel": "specimen-80260840ade6",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=true/adornments=both",
+      "outputHash": "653e057fa5962f7b967fc7bd49645f8b70be9fcb468a15726c9c0c2c4ed2d6e8"
+    },
+    {
+      "anonymousCell": "cell-4dbde3d947ab",
+      "anonymousLabel": "specimen-0500179e1c59",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=small/state=focus-visible/content=value/required=false/adornments=none",
+      "outputHash": "be32dc4f079529026b03bfabe3cfc2444c21689c41415941bc8d6878aa3b6a1b"
+    },
+    {
+      "anonymousCell": "cell-4dbde3d947ab",
+      "anonymousLabel": "specimen-05a014010a1f",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=small/state=focus-visible/content=value/required=false/adornments=none",
+      "outputHash": "74fe5e1b16fc9316e628a49a1db01880f2d2c5a8e2f47bf96da9e3feced9e1c9"
+    },
+    {
+      "anonymousCell": "cell-ef52e1caf29f",
+      "anonymousLabel": "specimen-a751e235fd6b",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=small/state=focus-visible/content=value/required=false/adornments=both",
+      "outputHash": "cf3211781d5fba4fff7ea5b35096712c098ff5234f6c70c63d0d4c0d5b6bf1cc"
+    },
+    {
+      "anonymousCell": "cell-ef52e1caf29f",
+      "anonymousLabel": "specimen-eaae860848d4",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=small/state=focus-visible/content=value/required=false/adornments=both",
+      "outputHash": "751acc011fa6506d997202ae56446ec54b71b44b07c0adb922cf61d3b497d050"
+    },
+    {
+      "anonymousCell": "cell-a92a3f6b546d",
+      "anonymousLabel": "specimen-0e6a3bf6e6dc",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=small/state=focus-visible/content=value/required=true/adornments=none",
+      "outputHash": "be32dc4f079529026b03bfabe3cfc2444c21689c41415941bc8d6878aa3b6a1b"
+    },
+    {
+      "anonymousCell": "cell-a92a3f6b546d",
+      "anonymousLabel": "specimen-33f8ceec3202",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=small/state=focus-visible/content=value/required=true/adornments=none",
+      "outputHash": "86045d8282684e68107bd2ee0dc543d3de47ca113f36dd333812dfc13faf3b56"
+    },
+    {
+      "anonymousCell": "cell-31be408ac59f",
+      "anonymousLabel": "specimen-d98745c4ca2f",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=small/state=focus-visible/content=value/required=true/adornments=both",
+      "outputHash": "69619c49e6e757be21dd23943a7ff83f4aed207df11c8547799d97bd3dacdecb"
+    },
+    {
+      "anonymousCell": "cell-31be408ac59f",
+      "anonymousLabel": "specimen-ed292136df6f",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=small/state=focus-visible/content=value/required=true/adornments=both",
+      "outputHash": "751acc011fa6506d997202ae56446ec54b71b44b07c0adb922cf61d3b497d050"
+    },
+    {
+      "anonymousCell": "cell-2ffe5574f47b",
+      "anonymousLabel": "specimen-7c298669ad57",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=small/state=error/content=placeholder/required=false/adornments=none",
+      "outputHash": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d"
+    },
+    {
+      "anonymousCell": "cell-2ffe5574f47b",
+      "anonymousLabel": "specimen-d98273eed38d",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=small/state=error/content=placeholder/required=false/adornments=none",
+      "outputHash": "245bb43c48fa8a9b7707e4eab7363d5dc417921e094406083d384412d77adaf6"
+    },
+    {
+      "anonymousCell": "cell-c02e831a75b4",
+      "anonymousLabel": "specimen-04e84604150b",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=small/state=error/content=placeholder/required=false/adornments=both",
+      "outputHash": "653e057fa5962f7b967fc7bd49645f8b70be9fcb468a15726c9c0c2c4ed2d6e8"
+    },
+    {
+      "anonymousCell": "cell-c02e831a75b4",
+      "anonymousLabel": "specimen-77a6b7472d8e",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=small/state=error/content=placeholder/required=false/adornments=both",
+      "outputHash": "0f45297e072a599f36078c6045f9c95801fc13c62099a7abf71a68ae15191504"
+    },
+    {
+      "anonymousCell": "cell-7c18bc5831c3",
+      "anonymousLabel": "specimen-297360f9f536",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=small/state=error/content=placeholder/required=true/adornments=none",
+      "outputHash": "0b6f85008330aaa6d990a51b1ba1868b469284f616bad44a1aebec93be79bd3b"
+    },
+    {
+      "anonymousCell": "cell-7c18bc5831c3",
+      "anonymousLabel": "specimen-d4c488982f80",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=small/state=error/content=placeholder/required=true/adornments=none",
+      "outputHash": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d"
+    },
+    {
+      "anonymousCell": "cell-54ba345d3ad8",
+      "anonymousLabel": "specimen-7cf6bcc9698f",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=small/state=error/content=placeholder/required=true/adornments=both",
+      "outputHash": "653e057fa5962f7b967fc7bd49645f8b70be9fcb468a15726c9c0c2c4ed2d6e8"
+    },
+    {
+      "anonymousCell": "cell-54ba345d3ad8",
+      "anonymousLabel": "specimen-b8eb0b324804",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=small/state=error/content=placeholder/required=true/adornments=both",
+      "outputHash": "c41aa34d6dec59d619ac324669811b758c0bcd6697e013373b427e1b3e3f9cb4"
+    },
+    {
+      "anonymousCell": "cell-bfcb952fb2c6",
+      "anonymousLabel": "specimen-a269ca57b160",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=small/state=error/content=value/required=false/adornments=none",
+      "outputHash": "a977ec4dd4e65605281255b641ae6cd9eff0076420cf8142b48eaef5aa9494c5"
+    },
+    {
+      "anonymousCell": "cell-bfcb952fb2c6",
+      "anonymousLabel": "specimen-e8af8fdba54d",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=small/state=error/content=value/required=false/adornments=none",
+      "outputHash": "78c7f2ea59c23acaf8d53b062cae186d6c881f82fdbfe0760d5c5196ebb46ee8"
+    },
+    {
+      "anonymousCell": "cell-0a742e0bdf3d",
+      "anonymousLabel": "specimen-71dfa3374b94",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=small/state=error/content=value/required=false/adornments=both",
+      "outputHash": "b8620cb126ce7ef40014c208fbbb14e1fda2c7f46bcf5db8bac8de37613eb855"
+    },
+    {
+      "anonymousCell": "cell-0a742e0bdf3d",
+      "anonymousLabel": "specimen-e56ed9742959",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=small/state=error/content=value/required=false/adornments=both",
+      "outputHash": "3dab2b86b2264d4353b8098362de3053c4fc4fde508c006bbc9c9bdbbb250903"
+    },
+    {
+      "anonymousCell": "cell-f6d6d10f6676",
+      "anonymousLabel": "specimen-30ad33f74c78",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=small/state=error/content=value/required=true/adornments=none",
+      "outputHash": "78c7f2ea59c23acaf8d53b062cae186d6c881f82fdbfe0760d5c5196ebb46ee8"
+    },
+    {
+      "anonymousCell": "cell-f6d6d10f6676",
+      "anonymousLabel": "specimen-4109495d13de",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=small/state=error/content=value/required=true/adornments=none",
+      "outputHash": "a5ce685f42720edb9632893c37f8500454f45dbfe1dffce256de3846fb24a7f1"
+    },
+    {
+      "anonymousCell": "cell-4fa97e34f5c6",
+      "anonymousLabel": "specimen-52fff37149b1",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=small/state=error/content=value/required=true/adornments=both",
+      "outputHash": "3dab2b86b2264d4353b8098362de3053c4fc4fde508c006bbc9c9bdbbb250903"
+    },
+    {
+      "anonymousCell": "cell-4fa97e34f5c6",
+      "anonymousLabel": "specimen-e24cfd77edc3",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=small/state=error/content=value/required=true/adornments=both",
+      "outputHash": "53a47e429979c45b3bdcf8ee353672543532ebbd6405ba0f4d0912585b407871"
+    },
+    {
+      "anonymousCell": "cell-da80d308bde5",
+      "anonymousLabel": "specimen-48c15d45e9da",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=small/state=disabled/content=placeholder/required=false/adornments=none",
+      "outputHash": "6c4f730e712a2ea9a998bcf58334f4d3d3cc3999b425dce53e55ea9b9ff66fcc"
+    },
+    {
+      "anonymousCell": "cell-da80d308bde5",
+      "anonymousLabel": "specimen-6ccb7cc737b1",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=small/state=disabled/content=placeholder/required=false/adornments=none",
+      "outputHash": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d"
+    },
+    {
+      "anonymousCell": "cell-6889b904d675",
+      "anonymousLabel": "specimen-670d785ef84b",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=small/state=disabled/content=placeholder/required=false/adornments=both",
+      "outputHash": "6b642d5c87054517a3dfe2d195b8741e1e8095e656f4c57e9632230e8902864c"
+    },
+    {
+      "anonymousCell": "cell-6889b904d675",
+      "anonymousLabel": "specimen-f0cf9f191fca",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=small/state=disabled/content=placeholder/required=false/adornments=both",
+      "outputHash": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d"
+    },
+    {
+      "anonymousCell": "cell-ddbd1b3ce9c8",
+      "anonymousLabel": "specimen-324e8eeefca2",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=small/state=disabled/content=placeholder/required=true/adornments=none",
+      "outputHash": "97e282915c062b96f9718159c01dfe04cdb7fb23b515eec741b7f3050f153fa2"
+    },
+    {
+      "anonymousCell": "cell-ddbd1b3ce9c8",
+      "anonymousLabel": "specimen-4265838fa7b2",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=small/state=disabled/content=placeholder/required=true/adornments=none",
+      "outputHash": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d"
+    },
+    {
+      "anonymousCell": "cell-9b8a81fa4d7a",
+      "anonymousLabel": "specimen-74ce35a3c055",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=small/state=disabled/content=placeholder/required=true/adornments=both",
+      "outputHash": "c50990eb5e29ee30b32df0d5f0ad1b65cd2335dec2a8dcd7c153e7951426ae1d"
+    },
+    {
+      "anonymousCell": "cell-9b8a81fa4d7a",
+      "anonymousLabel": "specimen-b09e7e2f0a1a",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=small/state=disabled/content=placeholder/required=true/adornments=both",
+      "outputHash": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d"
+    },
+    {
+      "anonymousCell": "cell-3a60a7c6bb93",
+      "anonymousLabel": "specimen-8f9dbf7065de",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=small/state=disabled/content=value/required=false/adornments=none",
+      "outputHash": "78c7f2ea59c23acaf8d53b062cae186d6c881f82fdbfe0760d5c5196ebb46ee8"
+    },
+    {
+      "anonymousCell": "cell-3a60a7c6bb93",
+      "anonymousLabel": "specimen-b51a298115ff",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=small/state=disabled/content=value/required=false/adornments=none",
+      "outputHash": "9ba843074796615d99ae5e60ae7f3403a3f654dcc7d9d5c2c22bbd4c437117dd"
+    },
+    {
+      "anonymousCell": "cell-8fc507b0274b",
+      "anonymousLabel": "specimen-6223b1130099",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=small/state=disabled/content=value/required=false/adornments=both",
+      "outputHash": "726db45d41a4dfab7b19062244039b75ad5e7fe8da1ccbad3afb268272c24935"
+    },
+    {
+      "anonymousCell": "cell-8fc507b0274b",
+      "anonymousLabel": "specimen-69eacb65ac69",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=small/state=disabled/content=value/required=false/adornments=both",
+      "outputHash": "78c7f2ea59c23acaf8d53b062cae186d6c881f82fdbfe0760d5c5196ebb46ee8"
+    },
+    {
+      "anonymousCell": "cell-1bf8d2026e41",
+      "anonymousLabel": "specimen-52596b136975",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=small/state=disabled/content=value/required=true/adornments=none",
+      "outputHash": "51a14231fa621dbeb3bc03f6f6dbb4f274c6d31b1b8485dcfdd983c5091723e1"
+    },
+    {
+      "anonymousCell": "cell-1bf8d2026e41",
+      "anonymousLabel": "specimen-adb3afdffef8",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=small/state=disabled/content=value/required=true/adornments=none",
+      "outputHash": "78c7f2ea59c23acaf8d53b062cae186d6c881f82fdbfe0760d5c5196ebb46ee8"
+    },
+    {
+      "anonymousCell": "cell-f8820d4466dd",
+      "anonymousLabel": "specimen-341a94ef80ea",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=small/state=disabled/content=value/required=true/adornments=both",
+      "outputHash": "4d98b1d36cd699362937e0578ee96e77e098ee8ccc28e546d22a579f3217ad1e"
+    },
+    {
+      "anonymousCell": "cell-f8820d4466dd",
+      "anonymousLabel": "specimen-6b4b9524bba0",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=small/state=disabled/content=value/required=true/adornments=both",
+      "outputHash": "78c7f2ea59c23acaf8d53b062cae186d6c881f82fdbfe0760d5c5196ebb46ee8"
+    },
+    {
+      "anonymousCell": "cell-8040151df61b",
+      "anonymousLabel": "specimen-2c0d3a95572c",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=medium/state=default/content=placeholder/required=false/adornments=none",
+      "outputHash": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1"
+    },
+    {
+      "anonymousCell": "cell-8040151df61b",
+      "anonymousLabel": "specimen-d66e9fcbbae1",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=medium/state=default/content=placeholder/required=false/adornments=none",
+      "outputHash": "9e0ff39b980e3dfa354cc1e83fe21b26f42d8f4cbd7c8ff18db9971bb5cf4d8b"
+    },
+    {
+      "anonymousCell": "cell-e3ab239bddbb",
+      "anonymousLabel": "specimen-8cc9cc2af64c",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=medium/state=default/content=placeholder/required=false/adornments=both",
+      "outputHash": "ecf1806314d81ac310864b9dd26a2e8b71dc9178bdf36cbbc74091bd6d7e4afa"
+    },
+    {
+      "anonymousCell": "cell-e3ab239bddbb",
+      "anonymousLabel": "specimen-e0ce877f6c4d",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=medium/state=default/content=placeholder/required=false/adornments=both",
+      "outputHash": "9b8891d7ac1d444dcd212ef76cab77d76250be7e3cc7e829beb50fb4b3efb6c1"
+    },
+    {
+      "anonymousCell": "cell-04a05001742d",
+      "anonymousLabel": "specimen-d9f0a3a31724",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=medium/state=default/content=placeholder/required=true/adornments=none",
+      "outputHash": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1"
+    },
+    {
+      "anonymousCell": "cell-04a05001742d",
+      "anonymousLabel": "specimen-df22820b5756",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=medium/state=default/content=placeholder/required=true/adornments=none",
+      "outputHash": "cdc05053c4a7d41a2483ffbde4fca6fe78bf0c3601ee30552217f38fb0212b05"
+    },
+    {
+      "anonymousCell": "cell-5458d06987a3",
+      "anonymousLabel": "specimen-34dd9276c292",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=medium/state=default/content=placeholder/required=true/adornments=both",
+      "outputHash": "4482ae91e831ff9b6129c4e517de55d8dc7bde3dc64fe530d3a8cf08dcf9c8f3"
+    },
+    {
+      "anonymousCell": "cell-5458d06987a3",
+      "anonymousLabel": "specimen-6a0a339f16de",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=medium/state=default/content=placeholder/required=true/adornments=both",
+      "outputHash": "9b8891d7ac1d444dcd212ef76cab77d76250be7e3cc7e829beb50fb4b3efb6c1"
+    },
+    {
+      "anonymousCell": "cell-bcae02f2dc8e",
+      "anonymousLabel": "specimen-13a33833096d",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=medium/state=default/content=value/required=false/adornments=none",
+      "outputHash": "e53a94e8dabe3b2a7800cc843a3edfa11fb31713d897af23ad2c0fb1fe4746ed"
+    },
+    {
+      "anonymousCell": "cell-bcae02f2dc8e",
+      "anonymousLabel": "specimen-f556c15c2e41",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=medium/state=default/content=value/required=false/adornments=none",
+      "outputHash": "9a312fef69ec739acaed83436f46da02cbccad477bdd594ca2619288c0e8207b"
+    },
+    {
+      "anonymousCell": "cell-b4ce633c3a0e",
+      "anonymousLabel": "specimen-160e6b174ef5",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=medium/state=default/content=value/required=false/adornments=both",
+      "outputHash": "c2739f33ad2225327bcf876366c9ca632a6b1fd33163602149292ed3613f6bc8"
+    },
+    {
+      "anonymousCell": "cell-b4ce633c3a0e",
+      "anonymousLabel": "specimen-227c2a0fc0f0",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=medium/state=default/content=value/required=false/adornments=both",
+      "outputHash": "e47873f8e450f45b41d7c04ba27d29c629f26606493d705f88f276ec228fd966"
+    },
+    {
+      "anonymousCell": "cell-9aae3ccd5912",
+      "anonymousLabel": "specimen-589e0c72716b",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=medium/state=default/content=value/required=true/adornments=none",
+      "outputHash": "e53a94e8dabe3b2a7800cc843a3edfa11fb31713d897af23ad2c0fb1fe4746ed"
+    },
+    {
+      "anonymousCell": "cell-9aae3ccd5912",
+      "anonymousLabel": "specimen-f64088c8ffcf",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=medium/state=default/content=value/required=true/adornments=none",
+      "outputHash": "2b1d2067d054a4fe87faaac1b01ef8e34f5bdc99533e870d1cf08b906dd60f14"
+    },
+    {
+      "anonymousCell": "cell-8cb6d1fdda8b",
+      "anonymousLabel": "specimen-03f81af86fa5",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=medium/state=default/content=value/required=true/adornments=both",
+      "outputHash": "dae82de12723adb84789fa5d1f1d29c49a7bae9c65430b4327537d3dad49b4e9"
+    },
+    {
+      "anonymousCell": "cell-8cb6d1fdda8b",
+      "anonymousLabel": "specimen-8504de705138",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=medium/state=default/content=value/required=true/adornments=both",
+      "outputHash": "c2739f33ad2225327bcf876366c9ca632a6b1fd33163602149292ed3613f6bc8"
+    },
+    {
+      "anonymousCell": "cell-666b2a681323",
+      "anonymousLabel": "specimen-64826dc6fc74",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=false/adornments=none",
+      "outputHash": "233114e3e10d0ef931f83b8ebd87e2ea37a9bfb4c62d010b3734c5e03488083f"
+    },
+    {
+      "anonymousCell": "cell-666b2a681323",
+      "anonymousLabel": "specimen-6ae11215d576",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=false/adornments=none",
+      "outputHash": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1"
+    },
+    {
+      "anonymousCell": "cell-9af70596a041",
+      "anonymousLabel": "specimen-5478a145e7c1",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=false/adornments=both",
+      "outputHash": "536f6da5a71b1d614339a7ad5da9dc8bb8e1af89a8a005a108966472896e3029"
+    },
+    {
+      "anonymousCell": "cell-9af70596a041",
+      "anonymousLabel": "specimen-6cf16501c4cc",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=false/adornments=both",
+      "outputHash": "9b8891d7ac1d444dcd212ef76cab77d76250be7e3cc7e829beb50fb4b3efb6c1"
+    },
+    {
+      "anonymousCell": "cell-1d5e1ab8b22f",
+      "anonymousLabel": "specimen-26e12b39fa2d",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=true/adornments=none",
+      "outputHash": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1"
+    },
+    {
+      "anonymousCell": "cell-1d5e1ab8b22f",
+      "anonymousLabel": "specimen-521f43cdb114",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=true/adornments=none",
+      "outputHash": "6fb7d00c9cd5506f14e83058d71bf8e15f872cd3668d0ab7cbe171967136beff"
+    },
+    {
+      "anonymousCell": "cell-8e65efaeceba",
+      "anonymousLabel": "specimen-1e15e612807b",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=true/adornments=both",
+      "outputHash": "9b8891d7ac1d444dcd212ef76cab77d76250be7e3cc7e829beb50fb4b3efb6c1"
+    },
+    {
+      "anonymousCell": "cell-8e65efaeceba",
+      "anonymousLabel": "specimen-8dd494f9d395",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=true/adornments=both",
+      "outputHash": "83a6cc9a66f9c0b9c8573b9d8117ec574d13390eca6a89e3d3c527f98f9c606e"
+    },
+    {
+      "anonymousCell": "cell-3d6eed15a06b",
+      "anonymousLabel": "specimen-80a1f871161c",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=false/adornments=none",
+      "outputHash": "4c6452dbc776a20cd2eabeb83c47459aaa581b8ed6fbc03b58de24d769a11d40"
+    },
+    {
+      "anonymousCell": "cell-3d6eed15a06b",
+      "anonymousLabel": "specimen-e76479b7f5cf",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=false/adornments=none",
+      "outputHash": "b05372a54933dbb35d03fcb5e71d9529c79be9b2b1ee0c47e2efdc92c9405a6a"
+    },
+    {
+      "anonymousCell": "cell-440cd34d2812",
+      "anonymousLabel": "specimen-703f3570fc59",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=false/adornments=both",
+      "outputHash": "137166f9e9150e2f81ad97307fb7390ca3fd8f710d8cc1694bf8cb45a96d27bb"
+    },
+    {
+      "anonymousCell": "cell-440cd34d2812",
+      "anonymousLabel": "specimen-de63f7328486",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=false/adornments=both",
+      "outputHash": "519505d9fe373259349f333a7aa02a46b2ead25e9961949e6421cf6c1b41ca75"
+    },
+    {
+      "anonymousCell": "cell-ed38a35a5c7a",
+      "anonymousLabel": "specimen-8a351c04ee16",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=true/adornments=none",
+      "outputHash": "02c3d77764ec0dac74cd80916f6084cd91f043f664a98c3a2f6e72cb6fad474f"
+    },
+    {
+      "anonymousCell": "cell-ed38a35a5c7a",
+      "anonymousLabel": "specimen-eb52694adcf2",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=true/adornments=none",
+      "outputHash": "4c6452dbc776a20cd2eabeb83c47459aaa581b8ed6fbc03b58de24d769a11d40"
+    },
+    {
+      "anonymousCell": "cell-2af50385e261",
+      "anonymousLabel": "specimen-4ba13bf47d57",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=true/adornments=both",
+      "outputHash": "e2e9510bfa352310d21bc4514c2fc787179e1c0b881cba275bce14d3162d4f1f"
+    },
+    {
+      "anonymousCell": "cell-2af50385e261",
+      "anonymousLabel": "specimen-cb2efefe7c62",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=true/adornments=both",
+      "outputHash": "137166f9e9150e2f81ad97307fb7390ca3fd8f710d8cc1694bf8cb45a96d27bb"
+    },
+    {
+      "anonymousCell": "cell-0d56dfc827a2",
+      "anonymousLabel": "specimen-770682d06b41",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=medium/state=error/content=placeholder/required=false/adornments=none",
+      "outputHash": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1"
+    },
+    {
+      "anonymousCell": "cell-0d56dfc827a2",
+      "anonymousLabel": "specimen-88ec5794b258",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=medium/state=error/content=placeholder/required=false/adornments=none",
+      "outputHash": "4d8600da2daa134245d4208313d39233f56eced090306ac7d94122c673164a86"
+    },
+    {
+      "anonymousCell": "cell-1d74e2a50fc6",
+      "anonymousLabel": "specimen-432e9b1e8e09",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=medium/state=error/content=placeholder/required=false/adornments=both",
+      "outputHash": "c7393939d95b72bf7c9a17b4a0fb379b3c5ed7d6f71902abc082d71784c6e25c"
+    },
+    {
+      "anonymousCell": "cell-1d74e2a50fc6",
+      "anonymousLabel": "specimen-fbabbc8fe517",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=medium/state=error/content=placeholder/required=false/adornments=both",
+      "outputHash": "9b8891d7ac1d444dcd212ef76cab77d76250be7e3cc7e829beb50fb4b3efb6c1"
+    },
+    {
+      "anonymousCell": "cell-d5cece4aa770",
+      "anonymousLabel": "specimen-6bcab4a9eb78",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=medium/state=error/content=placeholder/required=true/adornments=none",
+      "outputHash": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1"
+    },
+    {
+      "anonymousCell": "cell-d5cece4aa770",
+      "anonymousLabel": "specimen-c92eb252ef9e",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=medium/state=error/content=placeholder/required=true/adornments=none",
+      "outputHash": "981f1f4e173d9a785b5bd72dd35c3cdca647c36d15210e89d297799c1a1b27e1"
+    },
+    {
+      "anonymousCell": "cell-8afa2e03f862",
+      "anonymousLabel": "specimen-4e7317196702",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=medium/state=error/content=placeholder/required=true/adornments=both",
+      "outputHash": "10bfc6974a941d5d5d619aa4c723bccb77ef835cfdb1764de499f7a98d0dc262"
+    },
+    {
+      "anonymousCell": "cell-8afa2e03f862",
+      "anonymousLabel": "specimen-517ff664b51a",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=medium/state=error/content=placeholder/required=true/adornments=both",
+      "outputHash": "9b8891d7ac1d444dcd212ef76cab77d76250be7e3cc7e829beb50fb4b3efb6c1"
+    },
+    {
+      "anonymousCell": "cell-ca54ba2a11ca",
+      "anonymousLabel": "specimen-498a6e4ba1fa",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=medium/state=error/content=value/required=false/adornments=none",
+      "outputHash": "e53a94e8dabe3b2a7800cc843a3edfa11fb31713d897af23ad2c0fb1fe4746ed"
+    },
+    {
+      "anonymousCell": "cell-ca54ba2a11ca",
+      "anonymousLabel": "specimen-a84a744f42b7",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=medium/state=error/content=value/required=false/adornments=none",
+      "outputHash": "597338fd591b35979f12570a41e8a9f643665cb6062f4c4006b4062b8f49059f"
+    },
+    {
+      "anonymousCell": "cell-22e6a0c44a5d",
+      "anonymousLabel": "specimen-1637e43b9a66",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=medium/state=error/content=value/required=false/adornments=both",
+      "outputHash": "c2739f33ad2225327bcf876366c9ca632a6b1fd33163602149292ed3613f6bc8"
+    },
+    {
+      "anonymousCell": "cell-22e6a0c44a5d",
+      "anonymousLabel": "specimen-654643c67086",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=medium/state=error/content=value/required=false/adornments=both",
+      "outputHash": "c324a27be2c110248b082e9b8ac9a629a3ccb01a8fdc09dfbc5bb2efb5364bbb"
+    },
+    {
+      "anonymousCell": "cell-7cecf2d4196d",
+      "anonymousLabel": "specimen-35433bdeaf34",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=medium/state=error/content=value/required=true/adornments=none",
+      "outputHash": "e53a94e8dabe3b2a7800cc843a3edfa11fb31713d897af23ad2c0fb1fe4746ed"
+    },
+    {
+      "anonymousCell": "cell-7cecf2d4196d",
+      "anonymousLabel": "specimen-9c0fb0756763",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=medium/state=error/content=value/required=true/adornments=none",
+      "outputHash": "4bbd5b395bf289d13abb0f675bb15bf79b7045e7119346887c259db5fd93606c"
+    },
+    {
+      "anonymousCell": "cell-74c4042d31b0",
+      "anonymousLabel": "specimen-58a9937d6eb3",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=medium/state=error/content=value/required=true/adornments=both",
+      "outputHash": "b10f9bc8031d12a0776675ab0216c8ab5310a120d9a7c992d829a0cdfad019c4"
+    },
+    {
+      "anonymousCell": "cell-74c4042d31b0",
+      "anonymousLabel": "specimen-f416a3e21273",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=medium/state=error/content=value/required=true/adornments=both",
+      "outputHash": "c2739f33ad2225327bcf876366c9ca632a6b1fd33163602149292ed3613f6bc8"
+    },
+    {
+      "anonymousCell": "cell-28f44e6d4e7f",
+      "anonymousLabel": "specimen-82bedde71caa",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=medium/state=disabled/content=placeholder/required=false/adornments=none",
+      "outputHash": "3d39e16185352bdff5ce89993725764219fbb2316e95fb96b88883d88f67e1ed"
+    },
+    {
+      "anonymousCell": "cell-28f44e6d4e7f",
+      "anonymousLabel": "specimen-f262f2c4ad3c",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=medium/state=disabled/content=placeholder/required=false/adornments=none",
+      "outputHash": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1"
+    },
+    {
+      "anonymousCell": "cell-3bb17b01df33",
+      "anonymousLabel": "specimen-8a85108ad1bc",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=medium/state=disabled/content=placeholder/required=false/adornments=both",
+      "outputHash": "1825b3f87f9d552cda1991bd30f0052978a9f91eea362229981cae0d7bd2c89f"
+    },
+    {
+      "anonymousCell": "cell-3bb17b01df33",
+      "anonymousLabel": "specimen-a08a1f08fb78",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=medium/state=disabled/content=placeholder/required=false/adornments=both",
+      "outputHash": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1"
+    },
+    {
+      "anonymousCell": "cell-41d882dbeae4",
+      "anonymousLabel": "specimen-3424ab6f296c",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=medium/state=disabled/content=placeholder/required=true/adornments=none",
+      "outputHash": "c02833c91c264292fac020eb41b294fdbd69be20ae3dc675fa911599325e81a4"
+    },
+    {
+      "anonymousCell": "cell-41d882dbeae4",
+      "anonymousLabel": "specimen-70ecad082008",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=medium/state=disabled/content=placeholder/required=true/adornments=none",
+      "outputHash": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1"
+    },
+    {
+      "anonymousCell": "cell-b38e52626369",
+      "anonymousLabel": "specimen-14059d75c006",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=medium/state=disabled/content=placeholder/required=true/adornments=both",
+      "outputHash": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1"
+    },
+    {
+      "anonymousCell": "cell-b38e52626369",
+      "anonymousLabel": "specimen-6717f79e8a39",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=medium/state=disabled/content=placeholder/required=true/adornments=both",
+      "outputHash": "90a8ac8c2720511cf09981d960a241692b803409b34a061ae187937b68028d60"
+    },
+    {
+      "anonymousCell": "cell-229a766be249",
+      "anonymousLabel": "specimen-32a2444a86b2",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=medium/state=disabled/content=value/required=false/adornments=none",
+      "outputHash": "26c59c32dc4579bdf4c3953f0e513ceec082b5918befc99404c47a59e8e1bd57"
+    },
+    {
+      "anonymousCell": "cell-229a766be249",
+      "anonymousLabel": "specimen-64c76d287eba",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=medium/state=disabled/content=value/required=false/adornments=none",
+      "outputHash": "e53a94e8dabe3b2a7800cc843a3edfa11fb31713d897af23ad2c0fb1fe4746ed"
+    },
+    {
+      "anonymousCell": "cell-a0cc8f059313",
+      "anonymousLabel": "specimen-0d584669a05a",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=medium/state=disabled/content=value/required=false/adornments=both",
+      "outputHash": "0db6cb2f3b689d4c1df7b46d7ba21a2413b06afb95fc4d8b5b239245ba32d7a8"
+    },
+    {
+      "anonymousCell": "cell-a0cc8f059313",
+      "anonymousLabel": "specimen-3ede5bf5dc4b",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=medium/state=disabled/content=value/required=false/adornments=both",
+      "outputHash": "e53a94e8dabe3b2a7800cc843a3edfa11fb31713d897af23ad2c0fb1fe4746ed"
+    },
+    {
+      "anonymousCell": "cell-65c34db2ea63",
+      "anonymousLabel": "specimen-2441a28908e8",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=medium/state=disabled/content=value/required=true/adornments=none",
+      "outputHash": "e53a94e8dabe3b2a7800cc843a3edfa11fb31713d897af23ad2c0fb1fe4746ed"
+    },
+    {
+      "anonymousCell": "cell-65c34db2ea63",
+      "anonymousLabel": "specimen-2b07470e40cc",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=medium/state=disabled/content=value/required=true/adornments=none",
+      "outputHash": "febbb8a5dab2a2f8fa057cc124632253af86a3999679826537780f043205e4e9"
+    },
+    {
+      "anonymousCell": "cell-23b77f8ad4ba",
+      "anonymousLabel": "specimen-1b2cca96e74c",
+      "implementationPath": "legacy",
+      "cellKey": "polaris/size=medium/state=disabled/content=value/required=true/adornments=both",
+      "outputHash": "e53a94e8dabe3b2a7800cc843a3edfa11fb31713d897af23ad2c0fb1fe4746ed"
+    },
+    {
+      "anonymousCell": "cell-23b77f8ad4ba",
+      "anonymousLabel": "specimen-47029078deeb",
+      "implementationPath": "recipe-react",
+      "cellKey": "polaris/size=medium/state=disabled/content=value/required=true/adornments=both",
+      "outputHash": "9b182a4dbf8792b39fe410d82142e88487db891b7ff3c63de6ccb2267087b56f"
+    }
+  ]
+}

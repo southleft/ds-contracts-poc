@@ -1,0 +1,154 @@
+{
+  "version": 2,
+  "kind": "button-recipe-live-figma-proof",
+  "status": {
+    "bridgeReadOnly": "pass",
+    "offlineConformance": "pass",
+    "liveWrite": "blocked-before-execution-transport-fingerprint",
+    "writerAttemptsExecuted": 0,
+    "cleanup": "pass-no-document-artifacts-created",
+    "screenshots": "not-produced",
+    "usability": "hard-fail-zero-denominator",
+    "liveReadback": "hard-fail-zero-compared-facts",
+    "fixedPoint": "hard-fail-zero-compared-facts",
+    "liveAccounting": "hard-fail-zero-compared-facts",
+    "independentCanvasGrade": "pending",
+    "buttonSuccess": false
+  },
+  "immutableV1": {
+    "receiptPath": "recipe/evidence/button-live-pivot/receipt.json",
+    "receiptSha256": "863fe1af6b38fc12237b47e4deb0e5db1c298d462666e4921bd28d8bf964b652",
+    "planPath": "recipe/evidence/button-live-pivot/writer-plan.json",
+    "planSha256": "3490585cf531590fcf70a5daa174be7f9d103cb326e55df44e4b76c08a445518",
+    "writerPath": "recipe/evidence/button-live-pivot/writer.js",
+    "writerSha256": "45fda4b78fb5f77f6554eac02cbf54213e206d8b817610e8edcd7ca7065b33f8"
+  },
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma",
+    "bridgeTransport": "websocket",
+    "bridgePluginVersion": "1.39.0",
+    "bridgeProbeLatencyMs": 3,
+    "pageName": "Recipe Pivot / Button / ae57b16a-5c52de74-v2"
+  },
+  "before": {
+    "pageCount": 12,
+    "totalTopLevelNodes": 170,
+    "proofPageMatches": 0,
+    "collectionCount": 12,
+    "totalLocalVariables": 11106,
+    "matchingCollections": 0
+  },
+  "after": {
+    "pageCount": 12,
+    "totalTopLevelNodes": 170,
+    "proofPageMatches": 0,
+    "collectionCount": 12,
+    "totalLocalVariables": 11106,
+    "matchingCollections": 0,
+    "transportGlobalsCleared": true
+  },
+  "rootCauses": [
+    {
+      "historicalFailure": "invalid metadata namespace",
+      "pluginApiContract": "PluginDataMixin.setSharedPluginData requires a namespace of at least three alphanumeric characters; the live bridge additionally accepts underscore or period and rejected hyphen",
+      "genericRepair": "versioned namespace ds.contracts.recipe.v2 plus literal key grammar validation"
+    },
+    {
+      "historicalFailure": "unsupported figma.createAutoLayout",
+      "pluginApiContract": "@figma/plugin-typings 1.135.0 PluginAPI declares createFrame/createComponent and AutoLayoutMixin.layoutMode; it does not declare createAutoLayout",
+      "genericRepair": "create supported scene nodes and assign layoutMode, sizing, padding, spacing, wrapping, and alignment"
+    },
+    {
+      "historicalFailure": "invalid variable name",
+      "pluginApiContract": "VariablesAPI.createVariable accepts a Figma variable name, collection, and resolved type; source token identities are not passed through as names",
+      "genericRepair": "deterministic token/<type>/<sanitized-identity> grammar with a preflight reverse map and collision refusal"
+    }
+  ],
+  "artifacts": {
+    "plan": {
+      "path": "recipe/evidence/button-live-pivot-v2/writer-plan.json",
+      "sha256": "b2a0b864741b1c299d11d959ce0af1885173fb82a17a9bf92cf1feb64fc484f5"
+    },
+    "writer": {
+      "path": "recipe/evidence/button-live-pivot-v2/writer.js",
+      "bytes": 32146,
+      "sha256": "336dbf2a0124fbd154c2dcde4013dca0db11a014f09417e83d5950cf181b686f",
+      "deterministicRegeneration": "pass",
+      "executed": false
+    },
+    "transport": {
+      "path": "recipe/evidence/button-live-pivot-v2/writer-transport.txt",
+      "sha256": "c00992959560914b21e68430a09c6e95c4c9fd41cf939cd37d718d5056972801",
+      "chunksPath": "recipe/evidence/button-live-pivot-v2/writer-transport-chunks.json",
+      "chunksSha256": "c610103239d22f0249788517eaee329e4e820d69da7d7541b5c87d436660bdc1"
+    },
+    "conformance": {
+      "path": "recipe/evidence/button-live-pivot-v2/conformance-report.json",
+      "sha256": "d242819508ab6d59db01db69683af1dbdc3e6c315697406b9d9873a2884af67a",
+      "typingsVersion": "1.135.0",
+      "apiCalls": 17,
+      "propertyNames": 72,
+      "plannedVariants": 288,
+      "variables": 57,
+      "pluginDataWrites": 6427,
+      "propertyWrites": 11087,
+      "bindings": 4296
+    }
+  },
+  "transportLog": [
+    {
+      "step": "read-only target preflight",
+      "result": "pass",
+      "documentMutation": false
+    },
+    {
+      "step": "in-memory exact-writer transport",
+      "result": "failed-before-eval",
+      "expectedRuntimeFnv1a": "68686350",
+      "observedRuntimeFnv1a": "c32753a0",
+      "documentMutation": false
+    },
+    {
+      "step": "fail-closed cleanup and readback",
+      "result": "pass",
+      "documentMutation": false
+    }
+  ],
+  "sources": [
+    {
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "plannedVariants": 144,
+      "plannedPrimitiveIrFacts": 3978,
+      "mintedVariants": 0,
+      "liveComparedFacts": 0
+    },
+    {
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "plannedVariants": 144,
+      "plannedPrimitiveIrFacts": 3978,
+      "mintedVariants": 0,
+      "liveComparedFacts": 0
+    }
+  ],
+  "liveProof": {
+    "pages": [],
+    "sections": [],
+    "componentSets": [],
+    "variables": [],
+    "screenshots": [],
+    "instances": [],
+    "reflowDenominator": 0,
+    "variantSwitchingDenominator": 0,
+    "bindingDenominator": 0,
+    "noFakeLayoutDenominator": 0,
+    "restorationBeforeHash": null,
+    "restorationAfterHash": null,
+    "normalizedIrFacts": 0,
+    "canonicalCycles": 0,
+    "twoCycleStable": false,
+    "silentAccountingDenominator": 0
+  },
+  "nextTask": "Repair the exact-writer transport so its pre-execution fingerprint matches the generated transport artifact, rerun all offline gates, then execute writer v2 at most twice on Scratch Project only. Do not modify or retry v1."
+}

@@ -1,0 +1,8162 @@
+[
+  {
+    "adapterIdentity": "altitude-button-reviewed-v2",
+    "axes": {
+      "Icons": [
+        "none",
+        "leading",
+        "trailing",
+        "both"
+      ],
+      "Size": [
+        "small",
+        "medium",
+        "large"
+      ],
+      "State": [
+        "default",
+        "hover",
+        "pressed",
+        "focus-visible",
+        "disabled",
+        "loading"
+      ],
+      "Variant": [
+        "primary",
+        "secondary"
+      ]
+    },
+    "cells": [
+      [
+        1,
+        1,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        0,
+        1
+      ],
+      [
+        1,
+        1,
+        0,
+        2
+      ],
+      [
+        1,
+        1,
+        0,
+        3
+      ],
+      [
+        1,
+        1,
+        1,
+        0
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        2
+      ],
+      [
+        1,
+        1,
+        1,
+        3
+      ],
+      [
+        1,
+        1,
+        2,
+        0
+      ],
+      [
+        1,
+        1,
+        2,
+        1
+      ],
+      [
+        1,
+        1,
+        2,
+        2
+      ],
+      [
+        1,
+        1,
+        2,
+        3
+      ],
+      [
+        1,
+        1,
+        3,
+        0
+      ],
+      [
+        1,
+        1,
+        3,
+        1
+      ],
+      [
+        1,
+        1,
+        3,
+        2
+      ],
+      [
+        1,
+        1,
+        3,
+        3
+      ],
+      [
+        1,
+        1,
+        4,
+        0
+      ],
+      [
+        1,
+        1,
+        4,
+        1
+      ],
+      [
+        1,
+        1,
+        4,
+        2
+      ],
+      [
+        1,
+        1,
+        4,
+        3
+      ],
+      [
+        1,
+        1,
+        5,
+        0
+      ],
+      [
+        1,
+        1,
+        5,
+        1
+      ],
+      [
+        1,
+        1,
+        5,
+        2
+      ],
+      [
+        1,
+        1,
+        5,
+        3
+      ],
+      [
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        0,
+        0,
+        2
+      ],
+      [
+        1,
+        0,
+        0,
+        3
+      ],
+      [
+        1,
+        0,
+        1,
+        0
+      ],
+      [
+        1,
+        0,
+        1,
+        1
+      ],
+      [
+        1,
+        0,
+        1,
+        2
+      ],
+      [
+        1,
+        0,
+        1,
+        3
+      ],
+      [
+        1,
+        0,
+        2,
+        0
+      ],
+      [
+        1,
+        0,
+        2,
+        1
+      ],
+      [
+        1,
+        0,
+        2,
+        2
+      ],
+      [
+        1,
+        0,
+        2,
+        3
+      ],
+      [
+        1,
+        0,
+        3,
+        0
+      ],
+      [
+        1,
+        0,
+        3,
+        1
+      ],
+      [
+        1,
+        0,
+        3,
+        2
+      ],
+      [
+        1,
+        0,
+        3,
+        3
+      ],
+      [
+        1,
+        0,
+        4,
+        0
+      ],
+      [
+        1,
+        0,
+        4,
+        1
+      ],
+      [
+        1,
+        0,
+        4,
+        2
+      ],
+      [
+        1,
+        0,
+        4,
+        3
+      ],
+      [
+        1,
+        0,
+        5,
+        0
+      ],
+      [
+        1,
+        0,
+        5,
+        1
+      ],
+      [
+        1,
+        0,
+        5,
+        2
+      ],
+      [
+        1,
+        0,
+        5,
+        3
+      ],
+      [
+        1,
+        2,
+        0,
+        0
+      ],
+      [
+        1,
+        2,
+        0,
+        1
+      ],
+      [
+        1,
+        2,
+        0,
+        2
+      ],
+      [
+        1,
+        2,
+        0,
+        3
+      ],
+      [
+        1,
+        2,
+        1,
+        0
+      ],
+      [
+        1,
+        2,
+        1,
+        1
+      ],
+      [
+        1,
+        2,
+        1,
+        2
+      ],
+      [
+        1,
+        2,
+        1,
+        3
+      ],
+      [
+        1,
+        2,
+        2,
+        0
+      ],
+      [
+        1,
+        2,
+        2,
+        1
+      ],
+      [
+        1,
+        2,
+        2,
+        2
+      ],
+      [
+        1,
+        2,
+        2,
+        3
+      ],
+      [
+        1,
+        2,
+        3,
+        0
+      ],
+      [
+        1,
+        2,
+        3,
+        1
+      ],
+      [
+        1,
+        2,
+        3,
+        2
+      ],
+      [
+        1,
+        2,
+        3,
+        3
+      ],
+      [
+        1,
+        2,
+        4,
+        0
+      ],
+      [
+        1,
+        2,
+        4,
+        1
+      ],
+      [
+        1,
+        2,
+        4,
+        2
+      ],
+      [
+        1,
+        2,
+        4,
+        3
+      ],
+      [
+        1,
+        2,
+        5,
+        0
+      ],
+      [
+        1,
+        2,
+        5,
+        1
+      ],
+      [
+        1,
+        2,
+        5,
+        2
+      ],
+      [
+        1,
+        2,
+        5,
+        3
+      ],
+      [
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        1
+      ],
+      [
+        0,
+        1,
+        0,
+        2
+      ],
+      [
+        0,
+        1,
+        0,
+        3
+      ],
+      [
+        0,
+        1,
+        1,
+        0
+      ],
+      [
+        0,
+        1,
+        1,
+        1
+      ],
+      [
+        0,
+        1,
+        1,
+        2
+      ],
+      [
+        0,
+        1,
+        1,
+        3
+      ],
+      [
+        0,
+        1,
+        2,
+        0
+      ],
+      [
+        0,
+        1,
+        2,
+        1
+      ],
+      [
+        0,
+        1,
+        2,
+        2
+      ],
+      [
+        0,
+        1,
+        2,
+        3
+      ],
+      [
+        0,
+        1,
+        3,
+        0
+      ],
+      [
+        0,
+        1,
+        3,
+        1
+      ],
+      [
+        0,
+        1,
+        3,
+        2
+      ],
+      [
+        0,
+        1,
+        3,
+        3
+      ],
+      [
+        0,
+        1,
+        4,
+        0
+      ],
+      [
+        0,
+        1,
+        4,
+        1
+      ],
+      [
+        0,
+        1,
+        4,
+        2
+      ],
+      [
+        0,
+        1,
+        4,
+        3
+      ],
+      [
+        0,
+        1,
+        5,
+        0
+      ],
+      [
+        0,
+        1,
+        5,
+        1
+      ],
+      [
+        0,
+        1,
+        5,
+        2
+      ],
+      [
+        0,
+        1,
+        5,
+        3
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        2
+      ],
+      [
+        0,
+        0,
+        0,
+        3
+      ],
+      [
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        1
+      ],
+      [
+        0,
+        0,
+        1,
+        2
+      ],
+      [
+        0,
+        0,
+        1,
+        3
+      ],
+      [
+        0,
+        0,
+        2,
+        0
+      ],
+      [
+        0,
+        0,
+        2,
+        1
+      ],
+      [
+        0,
+        0,
+        2,
+        2
+      ],
+      [
+        0,
+        0,
+        2,
+        3
+      ],
+      [
+        0,
+        0,
+        3,
+        0
+      ],
+      [
+        0,
+        0,
+        3,
+        1
+      ],
+      [
+        0,
+        0,
+        3,
+        2
+      ],
+      [
+        0,
+        0,
+        3,
+        3
+      ],
+      [
+        0,
+        0,
+        4,
+        0
+      ],
+      [
+        0,
+        0,
+        4,
+        1
+      ],
+      [
+        0,
+        0,
+        4,
+        2
+      ],
+      [
+        0,
+        0,
+        4,
+        3
+      ],
+      [
+        0,
+        0,
+        5,
+        0
+      ],
+      [
+        0,
+        0,
+        5,
+        1
+      ],
+      [
+        0,
+        0,
+        5,
+        2
+      ],
+      [
+        0,
+        0,
+        5,
+        3
+      ],
+      [
+        0,
+        2,
+        0,
+        0
+      ],
+      [
+        0,
+        2,
+        0,
+        1
+      ],
+      [
+        0,
+        2,
+        0,
+        2
+      ],
+      [
+        0,
+        2,
+        0,
+        3
+      ],
+      [
+        0,
+        2,
+        1,
+        0
+      ],
+      [
+        0,
+        2,
+        1,
+        1
+      ],
+      [
+        0,
+        2,
+        1,
+        2
+      ],
+      [
+        0,
+        2,
+        1,
+        3
+      ],
+      [
+        0,
+        2,
+        2,
+        0
+      ],
+      [
+        0,
+        2,
+        2,
+        1
+      ],
+      [
+        0,
+        2,
+        2,
+        2
+      ],
+      [
+        0,
+        2,
+        2,
+        3
+      ],
+      [
+        0,
+        2,
+        3,
+        0
+      ],
+      [
+        0,
+        2,
+        3,
+        1
+      ],
+      [
+        0,
+        2,
+        3,
+        2
+      ],
+      [
+        0,
+        2,
+        3,
+        3
+      ],
+      [
+        0,
+        2,
+        4,
+        0
+      ],
+      [
+        0,
+        2,
+        4,
+        1
+      ],
+      [
+        0,
+        2,
+        4,
+        2
+      ],
+      [
+        0,
+        2,
+        4,
+        3
+      ],
+      [
+        0,
+        2,
+        5,
+        0
+      ],
+      [
+        0,
+        2,
+        5,
+        1
+      ],
+      [
+        0,
+        2,
+        5,
+        2
+      ],
+      [
+        0,
+        2,
+        5,
+        3
+      ]
+    ],
+    "comparedIrFacts": 3978,
+    "envelopeHash": "73b9c0ccc268545d711e55fd4ae3e8081e1708d6a27059e6779e42b3e81735bb",
+    "recipeHash": "ae57b16ab50438ea3f00b0690933e0b7850742225afad3df275465fb7fc2b923",
+    "setId": "85:5438",
+    "variants": [
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=default, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=default, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=default, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          0,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=default, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          1,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=hover, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=hover, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          1,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=hover, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          1,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=hover, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          2,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=pressed, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          2,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=pressed, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          2,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=pressed, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          2,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=pressed, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          3,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=focus-visible, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          3,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=focus-visible, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          3,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=focus-visible, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          3,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=focus-visible, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          4,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=disabled, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          4,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=disabled, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          4,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=disabled, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          4,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=disabled, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          5,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=loading, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          5,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=loading, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          5,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=loading, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          5,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=loading, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          0,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=default, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          0,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=default, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          0,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=default, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          0,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=default, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          1,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=hover, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          1,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=hover, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          1,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=hover, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          1,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=hover, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          2,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=pressed, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          2,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=pressed, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          2,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=pressed, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=pressed, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          3,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=focus-visible, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          3,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=focus-visible, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          3,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=focus-visible, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          3,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=focus-visible, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          4,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=disabled, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          4,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=disabled, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          4,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=disabled, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          4,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=disabled, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          5,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=loading, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          5,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=loading, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          5,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=loading, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          5,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=loading, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          0,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=default, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          0,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=default, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          0,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=default, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          0,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=default, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          1,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=hover, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          1,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=hover, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          1,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=hover, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          1,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=hover, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          2,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=pressed, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          2,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=pressed, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          2,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=pressed, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          2,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=pressed, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          3,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=focus-visible, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          3,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=focus-visible, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          3,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=focus-visible, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          3,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=focus-visible, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          4,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=disabled, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          4,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=disabled, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          4,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=disabled, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          4,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=disabled, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          5,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=loading, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          5,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=loading, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          5,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=loading, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          5,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=loading, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          0,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=default, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          0,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=default, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          0,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=default, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          0,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=default, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          1,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=hover, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          1,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=hover, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          1,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=hover, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          1,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=hover, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          2,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=pressed, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          2,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=pressed, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          2,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=pressed, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=pressed, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          3,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=focus-visible, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          3,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=focus-visible, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          3,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=focus-visible, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          3,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=focus-visible, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          4,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=disabled, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          4,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=disabled, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          4,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=disabled, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          4,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=disabled, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          5,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=loading, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          5,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=loading, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          5,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=loading, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          5,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=loading, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          0,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=default, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          0,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=default, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          0,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=default, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          0,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=default, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=hover, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=hover, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          1,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=hover, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=hover, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          2,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=pressed, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          2,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=pressed, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          2,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=pressed, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          2,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=pressed, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          3,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=focus-visible, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          3,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=focus-visible, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          3,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=focus-visible, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          3,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=focus-visible, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          4,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=disabled, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          4,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=disabled, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          4,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=disabled, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          4,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=disabled, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          5,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=loading, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          5,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=loading, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          5,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=loading, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          5,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=loading, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          0,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=default, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          0,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=default, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          0,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=default, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          0,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=default, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          1,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=hover, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          1,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=hover, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          1,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=hover, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          1,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=hover, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          2,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=pressed, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          2,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=pressed, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          2,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=pressed, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          2,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=pressed, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          3,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=focus-visible, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          3,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=focus-visible, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          3,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=focus-visible, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          3,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=focus-visible, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          4,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=disabled, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          4,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=disabled, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          4,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=disabled, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          4,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=disabled, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          5,
+          0
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=loading, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          5,
+          1
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=loading, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          5,
+          2
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=loading, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          5,
+          3
+        ],
+        "itemSpacing": 8,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=loading, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator",
+          "button/slot/trailing"
+        ]
+      }
+    ]
+  },
+  {
+    "adapterIdentity": "fluent-button-reviewed-v2",
+    "axes": {
+      "Icons": [
+        "none",
+        "leading",
+        "trailing",
+        "both"
+      ],
+      "Size": [
+        "small",
+        "medium",
+        "large"
+      ],
+      "State": [
+        "default",
+        "hover",
+        "pressed",
+        "focus-visible",
+        "disabled",
+        "loading"
+      ],
+      "Variant": [
+        "primary",
+        "secondary"
+      ]
+    },
+    "cells": [
+      [
+        1,
+        1,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        0,
+        1
+      ],
+      [
+        1,
+        1,
+        0,
+        2
+      ],
+      [
+        1,
+        1,
+        0,
+        3
+      ],
+      [
+        1,
+        1,
+        1,
+        0
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        2
+      ],
+      [
+        1,
+        1,
+        1,
+        3
+      ],
+      [
+        1,
+        1,
+        2,
+        0
+      ],
+      [
+        1,
+        1,
+        2,
+        1
+      ],
+      [
+        1,
+        1,
+        2,
+        2
+      ],
+      [
+        1,
+        1,
+        2,
+        3
+      ],
+      [
+        1,
+        1,
+        3,
+        0
+      ],
+      [
+        1,
+        1,
+        3,
+        1
+      ],
+      [
+        1,
+        1,
+        3,
+        2
+      ],
+      [
+        1,
+        1,
+        3,
+        3
+      ],
+      [
+        1,
+        1,
+        4,
+        0
+      ],
+      [
+        1,
+        1,
+        4,
+        1
+      ],
+      [
+        1,
+        1,
+        4,
+        2
+      ],
+      [
+        1,
+        1,
+        4,
+        3
+      ],
+      [
+        1,
+        1,
+        5,
+        0
+      ],
+      [
+        1,
+        1,
+        5,
+        1
+      ],
+      [
+        1,
+        1,
+        5,
+        2
+      ],
+      [
+        1,
+        1,
+        5,
+        3
+      ],
+      [
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        0,
+        0,
+        2
+      ],
+      [
+        1,
+        0,
+        0,
+        3
+      ],
+      [
+        1,
+        0,
+        1,
+        0
+      ],
+      [
+        1,
+        0,
+        1,
+        1
+      ],
+      [
+        1,
+        0,
+        1,
+        2
+      ],
+      [
+        1,
+        0,
+        1,
+        3
+      ],
+      [
+        1,
+        0,
+        2,
+        0
+      ],
+      [
+        1,
+        0,
+        2,
+        1
+      ],
+      [
+        1,
+        0,
+        2,
+        2
+      ],
+      [
+        1,
+        0,
+        2,
+        3
+      ],
+      [
+        1,
+        0,
+        3,
+        0
+      ],
+      [
+        1,
+        0,
+        3,
+        1
+      ],
+      [
+        1,
+        0,
+        3,
+        2
+      ],
+      [
+        1,
+        0,
+        3,
+        3
+      ],
+      [
+        1,
+        0,
+        4,
+        0
+      ],
+      [
+        1,
+        0,
+        4,
+        1
+      ],
+      [
+        1,
+        0,
+        4,
+        2
+      ],
+      [
+        1,
+        0,
+        4,
+        3
+      ],
+      [
+        1,
+        0,
+        5,
+        0
+      ],
+      [
+        1,
+        0,
+        5,
+        1
+      ],
+      [
+        1,
+        0,
+        5,
+        2
+      ],
+      [
+        1,
+        0,
+        5,
+        3
+      ],
+      [
+        1,
+        2,
+        0,
+        0
+      ],
+      [
+        1,
+        2,
+        0,
+        1
+      ],
+      [
+        1,
+        2,
+        0,
+        2
+      ],
+      [
+        1,
+        2,
+        0,
+        3
+      ],
+      [
+        1,
+        2,
+        1,
+        0
+      ],
+      [
+        1,
+        2,
+        1,
+        1
+      ],
+      [
+        1,
+        2,
+        1,
+        2
+      ],
+      [
+        1,
+        2,
+        1,
+        3
+      ],
+      [
+        1,
+        2,
+        2,
+        0
+      ],
+      [
+        1,
+        2,
+        2,
+        1
+      ],
+      [
+        1,
+        2,
+        2,
+        2
+      ],
+      [
+        1,
+        2,
+        2,
+        3
+      ],
+      [
+        1,
+        2,
+        3,
+        0
+      ],
+      [
+        1,
+        2,
+        3,
+        1
+      ],
+      [
+        1,
+        2,
+        3,
+        2
+      ],
+      [
+        1,
+        2,
+        3,
+        3
+      ],
+      [
+        1,
+        2,
+        4,
+        0
+      ],
+      [
+        1,
+        2,
+        4,
+        1
+      ],
+      [
+        1,
+        2,
+        4,
+        2
+      ],
+      [
+        1,
+        2,
+        4,
+        3
+      ],
+      [
+        1,
+        2,
+        5,
+        0
+      ],
+      [
+        1,
+        2,
+        5,
+        1
+      ],
+      [
+        1,
+        2,
+        5,
+        2
+      ],
+      [
+        1,
+        2,
+        5,
+        3
+      ],
+      [
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        1
+      ],
+      [
+        0,
+        1,
+        0,
+        2
+      ],
+      [
+        0,
+        1,
+        0,
+        3
+      ],
+      [
+        0,
+        1,
+        1,
+        0
+      ],
+      [
+        0,
+        1,
+        1,
+        1
+      ],
+      [
+        0,
+        1,
+        1,
+        2
+      ],
+      [
+        0,
+        1,
+        1,
+        3
+      ],
+      [
+        0,
+        1,
+        2,
+        0
+      ],
+      [
+        0,
+        1,
+        2,
+        1
+      ],
+      [
+        0,
+        1,
+        2,
+        2
+      ],
+      [
+        0,
+        1,
+        2,
+        3
+      ],
+      [
+        0,
+        1,
+        3,
+        0
+      ],
+      [
+        0,
+        1,
+        3,
+        1
+      ],
+      [
+        0,
+        1,
+        3,
+        2
+      ],
+      [
+        0,
+        1,
+        3,
+        3
+      ],
+      [
+        0,
+        1,
+        4,
+        0
+      ],
+      [
+        0,
+        1,
+        4,
+        1
+      ],
+      [
+        0,
+        1,
+        4,
+        2
+      ],
+      [
+        0,
+        1,
+        4,
+        3
+      ],
+      [
+        0,
+        1,
+        5,
+        0
+      ],
+      [
+        0,
+        1,
+        5,
+        1
+      ],
+      [
+        0,
+        1,
+        5,
+        2
+      ],
+      [
+        0,
+        1,
+        5,
+        3
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        2
+      ],
+      [
+        0,
+        0,
+        0,
+        3
+      ],
+      [
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        1
+      ],
+      [
+        0,
+        0,
+        1,
+        2
+      ],
+      [
+        0,
+        0,
+        1,
+        3
+      ],
+      [
+        0,
+        0,
+        2,
+        0
+      ],
+      [
+        0,
+        0,
+        2,
+        1
+      ],
+      [
+        0,
+        0,
+        2,
+        2
+      ],
+      [
+        0,
+        0,
+        2,
+        3
+      ],
+      [
+        0,
+        0,
+        3,
+        0
+      ],
+      [
+        0,
+        0,
+        3,
+        1
+      ],
+      [
+        0,
+        0,
+        3,
+        2
+      ],
+      [
+        0,
+        0,
+        3,
+        3
+      ],
+      [
+        0,
+        0,
+        4,
+        0
+      ],
+      [
+        0,
+        0,
+        4,
+        1
+      ],
+      [
+        0,
+        0,
+        4,
+        2
+      ],
+      [
+        0,
+        0,
+        4,
+        3
+      ],
+      [
+        0,
+        0,
+        5,
+        0
+      ],
+      [
+        0,
+        0,
+        5,
+        1
+      ],
+      [
+        0,
+        0,
+        5,
+        2
+      ],
+      [
+        0,
+        0,
+        5,
+        3
+      ],
+      [
+        0,
+        2,
+        0,
+        0
+      ],
+      [
+        0,
+        2,
+        0,
+        1
+      ],
+      [
+        0,
+        2,
+        0,
+        2
+      ],
+      [
+        0,
+        2,
+        0,
+        3
+      ],
+      [
+        0,
+        2,
+        1,
+        0
+      ],
+      [
+        0,
+        2,
+        1,
+        1
+      ],
+      [
+        0,
+        2,
+        1,
+        2
+      ],
+      [
+        0,
+        2,
+        1,
+        3
+      ],
+      [
+        0,
+        2,
+        2,
+        0
+      ],
+      [
+        0,
+        2,
+        2,
+        1
+      ],
+      [
+        0,
+        2,
+        2,
+        2
+      ],
+      [
+        0,
+        2,
+        2,
+        3
+      ],
+      [
+        0,
+        2,
+        3,
+        0
+      ],
+      [
+        0,
+        2,
+        3,
+        1
+      ],
+      [
+        0,
+        2,
+        3,
+        2
+      ],
+      [
+        0,
+        2,
+        3,
+        3
+      ],
+      [
+        0,
+        2,
+        4,
+        0
+      ],
+      [
+        0,
+        2,
+        4,
+        1
+      ],
+      [
+        0,
+        2,
+        4,
+        2
+      ],
+      [
+        0,
+        2,
+        4,
+        3
+      ],
+      [
+        0,
+        2,
+        5,
+        0
+      ],
+      [
+        0,
+        2,
+        5,
+        1
+      ],
+      [
+        0,
+        2,
+        5,
+        2
+      ],
+      [
+        0,
+        2,
+        5,
+        3
+      ]
+    ],
+    "comparedIrFacts": 3978,
+    "envelopeHash": "9b5626840521a733ea2ef28b7cdc5f5d5b3b673229336ab58f11e82a0a120afd",
+    "recipeHash": "5c52de7484830d735f375d52ee26d86ed6d5c24f528ff5815d41ea17fa622cc7",
+    "setId": "85:6086",
+    "variants": [
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=default, Icons=none",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=default, Icons=leading",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=default, Icons=trailing",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          0,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=default, Icons=both",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          1,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=hover, Icons=none",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=hover, Icons=leading",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          1,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=hover, Icons=trailing",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          1,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=hover, Icons=both",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          2,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=pressed, Icons=none",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          2,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=pressed, Icons=leading",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          2,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=pressed, Icons=trailing",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          2,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=pressed, Icons=both",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 17,
+        "cell": [
+          0,
+          0,
+          3,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=focus-visible, Icons=none",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 17,
+        "cell": [
+          0,
+          0,
+          3,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=focus-visible, Icons=leading",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 17,
+        "cell": [
+          0,
+          0,
+          3,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=focus-visible, Icons=trailing",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 17,
+        "cell": [
+          0,
+          0,
+          3,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=focus-visible, Icons=both",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          4,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=disabled, Icons=none",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          4,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=disabled, Icons=leading",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          4,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=disabled, Icons=trailing",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          4,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=disabled, Icons=both",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          5,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=loading, Icons=none",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          5,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=loading, Icons=leading",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          5,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=loading, Icons=trailing",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          0,
+          5,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=small, State=loading, Icons=both",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          0,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=default, Icons=none",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          0,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=default, Icons=leading",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          0,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=default, Icons=trailing",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          0,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=default, Icons=both",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          1,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=hover, Icons=none",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          1,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=hover, Icons=leading",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          1,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=hover, Icons=trailing",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          1,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=hover, Icons=both",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          2,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=pressed, Icons=none",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          2,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=pressed, Icons=leading",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          2,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=pressed, Icons=trailing",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=pressed, Icons=both",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 17,
+        "cell": [
+          0,
+          1,
+          3,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=focus-visible, Icons=none",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 17,
+        "cell": [
+          0,
+          1,
+          3,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=focus-visible, Icons=leading",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 17,
+        "cell": [
+          0,
+          1,
+          3,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=focus-visible, Icons=trailing",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 17,
+        "cell": [
+          0,
+          1,
+          3,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=focus-visible, Icons=both",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          4,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=disabled, Icons=none",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          4,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=disabled, Icons=leading",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          4,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=disabled, Icons=trailing",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          4,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=disabled, Icons=both",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          5,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=loading, Icons=none",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          5,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=loading, Icons=leading",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          5,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=loading, Icons=trailing",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          1,
+          5,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=medium, State=loading, Icons=both",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          0,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=default, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          0,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=default, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          0,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=default, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          0,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=default, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          1,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=hover, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          1,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=hover, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          1,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=hover, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          1,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=hover, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          2,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=pressed, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          2,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=pressed, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          2,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=pressed, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          2,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=pressed, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 17,
+        "cell": [
+          0,
+          2,
+          3,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=focus-visible, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 17,
+        "cell": [
+          0,
+          2,
+          3,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=focus-visible, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 17,
+        "cell": [
+          0,
+          2,
+          3,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=focus-visible, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 17,
+        "cell": [
+          0,
+          2,
+          3,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=focus-visible, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          4,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=disabled, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          4,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=disabled, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          4,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=disabled, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          4,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=disabled, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          5,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=loading, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          5,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=loading, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          5,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=loading, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          0,
+          2,
+          5,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=primary, Size=large, State=loading, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          0,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=default, Icons=none",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          0,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=default, Icons=leading",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          0,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=default, Icons=trailing",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          0,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=default, Icons=both",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          1,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=hover, Icons=none",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          1,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=hover, Icons=leading",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          1,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=hover, Icons=trailing",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          1,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=hover, Icons=both",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          2,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=pressed, Icons=none",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          2,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=pressed, Icons=leading",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          2,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=pressed, Icons=trailing",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=pressed, Icons=both",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 17,
+        "cell": [
+          1,
+          0,
+          3,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=focus-visible, Icons=none",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 17,
+        "cell": [
+          1,
+          0,
+          3,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=focus-visible, Icons=leading",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 17,
+        "cell": [
+          1,
+          0,
+          3,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=focus-visible, Icons=trailing",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 17,
+        "cell": [
+          1,
+          0,
+          3,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=focus-visible, Icons=both",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          4,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=disabled, Icons=none",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          4,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=disabled, Icons=leading",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          4,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=disabled, Icons=trailing",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          4,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=disabled, Icons=both",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          5,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=loading, Icons=none",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          5,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=loading, Icons=leading",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          5,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=loading, Icons=trailing",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          0,
+          5,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=small, State=loading, Icons=both",
+        "padding": [
+          3,
+          8,
+          3,
+          8
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          0,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=default, Icons=none",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          0,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=default, Icons=leading",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          0,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=default, Icons=trailing",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          0,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=default, Icons=both",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=hover, Icons=none",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=hover, Icons=leading",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          1,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=hover, Icons=trailing",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=hover, Icons=both",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          2,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=pressed, Icons=none",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          2,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=pressed, Icons=leading",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          2,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=pressed, Icons=trailing",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          2,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=pressed, Icons=both",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 17,
+        "cell": [
+          1,
+          1,
+          3,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=focus-visible, Icons=none",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 17,
+        "cell": [
+          1,
+          1,
+          3,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=focus-visible, Icons=leading",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 17,
+        "cell": [
+          1,
+          1,
+          3,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=focus-visible, Icons=trailing",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 17,
+        "cell": [
+          1,
+          1,
+          3,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=focus-visible, Icons=both",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          4,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=disabled, Icons=none",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          4,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=disabled, Icons=leading",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          4,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=disabled, Icons=trailing",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          4,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=disabled, Icons=both",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          5,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=loading, Icons=none",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          5,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=loading, Icons=leading",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          5,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=loading, Icons=trailing",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          1,
+          5,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=medium, State=loading, Icons=both",
+        "padding": [
+          5,
+          12,
+          5,
+          12
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          0,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=default, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          0,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=default, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          0,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=default, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          0,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=default, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          1,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=hover, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          1,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=hover, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          1,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=hover, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          1,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=hover, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          2,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=pressed, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          2,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=pressed, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          2,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=pressed, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          2,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=pressed, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 17,
+        "cell": [
+          1,
+          2,
+          3,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=focus-visible, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 17,
+        "cell": [
+          1,
+          2,
+          3,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=focus-visible, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 17,
+        "cell": [
+          1,
+          2,
+          3,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=focus-visible, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 17,
+        "cell": [
+          1,
+          2,
+          3,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=focus-visible, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          4,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=disabled, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          4,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=disabled, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          4,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=disabled, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          4,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=disabled, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/slot/leading",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          5,
+          0
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=loading, Icons=none",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          5,
+          1
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=loading, Icons=leading",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          5,
+          2
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=loading, Icons=trailing",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator",
+          "button/slot/trailing"
+        ]
+      },
+      {
+        "bindings": 18,
+        "cell": [
+          1,
+          2,
+          5,
+          3
+        ],
+        "itemSpacing": 4,
+        "layoutMode": "HORIZONTAL",
+        "name": "Variant=secondary, Size=large, State=loading, Icons=both",
+        "padding": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "roles": [
+          "button/label",
+          "button/loading-indicator",
+          "button/slot/trailing"
+        ]
+      }
+    ]
+  }
+]

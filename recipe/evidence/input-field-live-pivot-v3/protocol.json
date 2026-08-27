@@ -1,0 +1,122 @@
+{
+  "artifactVersion": "input-live-v3-protocol-v1",
+  "protocolId": "input-live-v3",
+  "status": "draft-uncommitted; chronology unproven; capture forbidden",
+  "chronology": {
+    "externallyVerifiable": false,
+    "reason": "The entire recipe/IR pivot is uncommitted. This hash proves only current internal consistency, not that the protocol predates any future measurement.",
+    "activationRequirement": "A future explicitly authorized commit must contain this exact protocol before any v3 Figma write or capture.",
+    "captureAuthorized": false
+  },
+  "implementationDependencies": {
+    "meaning": "Current uncommitted bytes required by a future authorized v3 run; hashes prove dependency identity only, never chronology.",
+    "sha256": {
+      "recipe/figma-ir.ts": "e49546f21242260d417dcf01f9bf5a74c60506f7f5adc3f48efa1cb4a6f115bd",
+      "recipe/recipes/input-field.ts": "6b3250de92cc16a7b75abcf8914ace6753f758c1ee64729c7d82bb3f2b50f24b",
+      "recipe/adapters/input-field.ts": "832a610731a42a17aab5b77bcadd9fb1b60f8934dc64f2d5d1da64d1fb77d63b",
+      "recipe/fixtures/library-input-fields.ts": "8c4d740f7e6755f7e1a13b14dd69be3d0b87eea56f7488f9bf14540d0f125d1f",
+      "recipe/output/input-field.ts": "bddb91ab49c60aba7c907dabb2d332782f108436b3cb060bf25d51fa51db4885",
+      "recipe/output-safety.ts": "4bb932edfaa0873fed52fc6e083e9238653d999865879ea2e1173ae72daf66ad",
+      "recipe/interpret.ts": "a3b2965d1f4ae647a8cfaf90b06ff4beba93cbeeb06eeb478bf39485b19ba9d7",
+      "recipe/input-field-figma-writer.ts": "cd5f1b7c4176664c6476860e45f609381bb629e799aaff5aea721140578353db",
+      "recipe/input-field-figma-writer-v2.ts": "c17315ca0509f7fa204807041b5a89f639e1f16ba26855e10d4d3976d4a112f0",
+      "recipe/scene-readback.ts": "2dfe21b7ec8d1190c69702d93ebeb0f06c8ca6e44986c128ca4487a472fcb98d",
+      "recipe/scene-readback-runtime.ts": "39ec493565c461ccc08012e6f1f95de1a05db1a5861e53aaa6965945c885c547",
+      "recipe/input-field-browser.test.ts": "3fc1fe9b962a720124f9fc274b4288aad8f5ea7f6df21fa1dec41376f423833b"
+    }
+  },
+  "denominator": {
+    "cellsPerSource": 128,
+    "sources": ["mui", "polaris"],
+    "requiredCellsPerSource": 128,
+    "missingExtraOrDuplicateCellsFail": true
+  },
+  "hardGates": {
+    "allCellsMustPass": true,
+    "requirements": [
+      "component-set structure and exact 128-cell matrix",
+      "semantic role and text correctness",
+      "all-axis instance switching and restoration",
+      "typed variable bindings with compatible target properties",
+      "exact post-probe restoration",
+      "actual adornment text and asset payload integrity",
+      "state-appropriate fill, stroke, effect, and visibility",
+      "scene-derived expected-plan accounting with zero missing, extra, mismatched, duplicate-collapsed, or unobserved facts",
+      "scene-derived two-cycle fixed point without source IR readback",
+      "no clipping beyond the locked threshold",
+      "no semantic-role overlap beyond the locked threshold"
+    ],
+    "thresholds": {
+      "dimensionError": {
+        "absolutePixels": 4,
+        "relative": 0.08,
+        "failureRule": "absolute error exceeds 4px and relative error exceeds 8%"
+      },
+      "spacingError": {
+        "absolutePixels": 4,
+        "relative": 0.2,
+        "failureRule": "absolute error exceeds 4px and relative error exceeds 20%"
+      },
+      "roleScaleError": {
+        "relative": 0.1
+      },
+      "clipping": {
+        "maximumVisibleAreaLoss": 0.05
+      },
+      "overlap": {
+        "maximumPixels": 2
+      }
+    }
+  },
+  "readbackAndAccounting": {
+    "expectedDenominatorGenerated": "before live execution from the compiled writer plan",
+    "stableFactIds": true,
+    "multisetOccurrencesPreserved": true,
+    "observedSource": "actual Figma node properties only",
+    "pluginDataAllowedOnlyFor": [
+      "recipe identity",
+      "recipe version",
+      "opaque node ownership key"
+    ],
+    "pluginDataForbiddenFor": [
+      "source IR",
+      "expected IR",
+      "axis facts",
+      "roles",
+      "text",
+      "layout",
+      "paint",
+      "bindings",
+      "instance or adornment payload"
+    ],
+    "separateTypedReceipts": ["code-only", "refused"],
+    "silentDerived": true
+  },
+  "visualRelativeProgression": {
+    "exactPixelDifference": "diagnostic-only",
+    "acceptanceMetrics": ["geometry", "perceptual", "ink"],
+    "overallRequirements": [
+      "recipe wins exceed legacy losses",
+      "recipe aggregate geometry error is lower than legacy",
+      "recipe aggregate perceptual error is lower than legacy",
+      "recipe aggregate combined perceptual-and-ink error is lower than legacy"
+    ],
+    "strata": ["source", "state", "adornment"],
+    "stratumSafeguard": "No source, state, or adornment stratum may materially regress relative to unchanged legacy.",
+    "materialRegression": {
+      "aggregateRelativeIncrease": 0.1,
+      "catastrophicCellRule": "recipe error exceeds legacy error * 1.5 + 0.02"
+    }
+  },
+  "historicalApplication": {
+    "inputLiveV2Status": "failed",
+    "reason": "V2 has incorrect adornment content and a regressing MUI pixel/ink stratum. Aggregate improvement cannot waive either hard failure.",
+    "recertified": false
+  },
+  "humanGate": {
+    "mandatory": true,
+    "requiresAttributableReviewer": true,
+    "anonymousOrBuilderAssertedSignoffAccepted": false,
+    "overallSuccessBeforeSignoff": false
+  }
+}

@@ -1,0 +1,815 @@
+{
+  "artifactVersion": "button-comparison-adjudication-v2",
+  "protocolVersions": {
+    "packet": "button-paired-source-v2",
+    "grade": "button-paired-source-v2",
+    "answerKey": "button-paired-source-v2",
+    "evidenceReceipt": 2
+  },
+  "inputHashes": {
+    "packet": "7d86ea72597f593e3d4435776708e5d1ff02f1a10345097144a4c16c14efec7d",
+    "grades": "c4ab18ab2d5d1d519214bee8ea46341a2f8163d805cc87dffc60c6989a25a84e",
+    "sealedAnswerKey": "0abb1f4c837a3ff5d5e73ab89c4e110021daabd32fa088e3eed9e39cf9d89475",
+    "evidenceReceipt": "ac1215ebc788efe917198c810a4a409f699f0d871e2fc91b5a804990bdc4c6ed"
+  },
+  "integrity": {
+    "status": "passed",
+    "checks": {
+      "packetAndKeySeparated": true,
+      "packetOpaque": true,
+      "graderImplementationGuessesAbsent": true,
+      "fileHashesMatch": true,
+      "cardinalityAndOrderMatch": true,
+      "exactlyOneGradePerSpecimen": true,
+      "everyFailureHasDefects": true,
+      "answerMappingBijective": true,
+      "referenceProvenanceIndependent": true,
+      "denominatorParity": true,
+      "zeroCountMeasurementsAbsent": true,
+      "webComponentSurfaceSeparated": true
+    }
+  },
+  "sample": {
+    "complete": true,
+    "sourceLibraries": ["altitude", "fluent"],
+    "axes": ["Variant", "State"],
+    "variants": ["primary", "secondary"],
+    "states": ["default", "hover", "focus-visible"],
+    "fixed": {
+      "Size": "medium",
+      "Icons": "none",
+      "Label": "Button"
+    },
+    "sourceCells": 12,
+    "specimens": 24,
+    "cellsPerImplementation": 12,
+    "setsPerImplementation": 2,
+    "setWeighting": "a source-library set passes only when all 6 sampled cells are recognisable",
+    "cellWeighting": "each of the 12 exact source-library×variant×state cells has equal weight",
+    "excludedByName": [
+      "Size=small",
+      "Size=large",
+      "State=pressed",
+      "State=disabled",
+      "State=loading",
+      "Icons=leading",
+      "Icons=trailing",
+      "Icons=both"
+    ]
+  },
+  "sourceReferences": [
+    {
+      "cellKey": "altitude/variant=primary/state=default",
+      "screenshotHash": "400d14841474c83c7ceca18334081987f004c9e89abb33a7b477cee69ee43152",
+      "sourceId": "altitude-web-components",
+      "sourceVersionOrRevision": "1.0.2",
+      "sourceHash": "fd937c3e2db6c7e80cee6cc6139b6408dd43a814c84aa65ba9011d5d07109ddc",
+      "captureInputHash": "074107ac9a81b3b6bdb59ae783160645d706d7932df35912c312ebf3f94b8c85",
+      "independentHarness": true
+    },
+    {
+      "cellKey": "altitude/variant=primary/state=hover",
+      "screenshotHash": "49d556c2d5fb73c4da4641ad245d162bc02278fb9d0f2dd8c999b3193ea1b997",
+      "sourceId": "altitude-web-components",
+      "sourceVersionOrRevision": "1.0.2",
+      "sourceHash": "fd937c3e2db6c7e80cee6cc6139b6408dd43a814c84aa65ba9011d5d07109ddc",
+      "captureInputHash": "94b8f7ed1fd1717f4483e0497fe24902bc0b33ef02e0125db663d9f07837b479",
+      "independentHarness": true
+    },
+    {
+      "cellKey": "altitude/variant=primary/state=focus-visible",
+      "screenshotHash": "1130a287733971ae77d078d4eabb3482a10e78f554c9bbbd20bd4c28473bda98",
+      "sourceId": "altitude-web-components",
+      "sourceVersionOrRevision": "1.0.2",
+      "sourceHash": "fd937c3e2db6c7e80cee6cc6139b6408dd43a814c84aa65ba9011d5d07109ddc",
+      "captureInputHash": "1bf1516edd60fd769127ca421c38eda6e426ced35c095a0675892bd2fdff8a06",
+      "independentHarness": true
+    },
+    {
+      "cellKey": "altitude/variant=secondary/state=default",
+      "screenshotHash": "4c6797280ea4a4e7e27fa692fff3c395e6ceded9c0c73bd16e6a2757f6b22716",
+      "sourceId": "altitude-web-components",
+      "sourceVersionOrRevision": "1.0.2",
+      "sourceHash": "fd937c3e2db6c7e80cee6cc6139b6408dd43a814c84aa65ba9011d5d07109ddc",
+      "captureInputHash": "0cc33c7bb08d44bfd99ba420e8552ff1dce121969ebc7d3abd32b6ae767c79ff",
+      "independentHarness": true
+    },
+    {
+      "cellKey": "altitude/variant=secondary/state=hover",
+      "screenshotHash": "2666afdb3d8b6204bd89fefc1ea1410abdbc1a0a02e17e2edbad95138eabd1c1",
+      "sourceId": "altitude-web-components",
+      "sourceVersionOrRevision": "1.0.2",
+      "sourceHash": "fd937c3e2db6c7e80cee6cc6139b6408dd43a814c84aa65ba9011d5d07109ddc",
+      "captureInputHash": "9d6ecccb0adade09e9416b9943126d4f06f1c3962c591c0a0be3714b1c236df5",
+      "independentHarness": true
+    },
+    {
+      "cellKey": "altitude/variant=secondary/state=focus-visible",
+      "screenshotHash": "dbbd0cea74f5850bd832f9d61affe4086adc7392af24dda3fedc5f7b5fbda80d",
+      "sourceId": "altitude-web-components",
+      "sourceVersionOrRevision": "1.0.2",
+      "sourceHash": "fd937c3e2db6c7e80cee6cc6139b6408dd43a814c84aa65ba9011d5d07109ddc",
+      "captureInputHash": "e7e69cf3c30730c8379ce9e0a337ecb2b7b994040c903119d62660216da5406a",
+      "independentHarness": true
+    },
+    {
+      "cellKey": "fluent/variant=primary/state=default",
+      "screenshotHash": "08ca5bf97d214cff1942906e884d12f758fd2718a6090e1e4f429b62dda5ce9a",
+      "sourceId": "@fluentui/react-components",
+      "sourceVersionOrRevision": "9.74.5",
+      "sourceHash": "90a1881a0241887bf519ac2e8a565d641a55d85a9c4b704445d70f05d1465f09",
+      "captureInputHash": "9887b02dfc183ac1e1dfe2c40510d7b0f53781d984849dc88d1c4ee7a311479d",
+      "independentHarness": true
+    },
+    {
+      "cellKey": "fluent/variant=primary/state=hover",
+      "screenshotHash": "bc03519bd8c5b6397b85340df634e089f8649ef7144e911c27e857a3987c037c",
+      "sourceId": "@fluentui/react-components",
+      "sourceVersionOrRevision": "9.74.5",
+      "sourceHash": "90a1881a0241887bf519ac2e8a565d641a55d85a9c4b704445d70f05d1465f09",
+      "captureInputHash": "715627b92cb017d73c703b3cf1fe05381b39f59e665f462c424238b0a534f6a0",
+      "independentHarness": true
+    },
+    {
+      "cellKey": "fluent/variant=primary/state=focus-visible",
+      "screenshotHash": "08ca5bf97d214cff1942906e884d12f758fd2718a6090e1e4f429b62dda5ce9a",
+      "sourceId": "@fluentui/react-components",
+      "sourceVersionOrRevision": "9.74.5",
+      "sourceHash": "90a1881a0241887bf519ac2e8a565d641a55d85a9c4b704445d70f05d1465f09",
+      "captureInputHash": "4ef19f4f3a86b92b74baa7bc11699cdac4aee54ca11fba8d741633959342829f",
+      "independentHarness": true
+    },
+    {
+      "cellKey": "fluent/variant=secondary/state=default",
+      "screenshotHash": "3282bad706c3778adb4647c29886b2e2ff069c68feb4581768027042d6d1519a",
+      "sourceId": "@fluentui/react-components",
+      "sourceVersionOrRevision": "9.74.5",
+      "sourceHash": "90a1881a0241887bf519ac2e8a565d641a55d85a9c4b704445d70f05d1465f09",
+      "captureInputHash": "3870b0d25a32055ef27ffff0cf232456eef77dd944cefd4190f38be64920b21f",
+      "independentHarness": true
+    },
+    {
+      "cellKey": "fluent/variant=secondary/state=hover",
+      "screenshotHash": "d91406b7338b4737eb052d1cc0f645b81e02b7110ea996d8a5bf104b153d33ba",
+      "sourceId": "@fluentui/react-components",
+      "sourceVersionOrRevision": "9.74.5",
+      "sourceHash": "90a1881a0241887bf519ac2e8a565d641a55d85a9c4b704445d70f05d1465f09",
+      "captureInputHash": "5c44cb041b4d493f9afc6f9140560b63118bda9d77b6819bf718746319e37c4b",
+      "independentHarness": true
+    },
+    {
+      "cellKey": "fluent/variant=secondary/state=focus-visible",
+      "screenshotHash": "3282bad706c3778adb4647c29886b2e2ff069c68feb4581768027042d6d1519a",
+      "sourceId": "@fluentui/react-components",
+      "sourceVersionOrRevision": "9.74.5",
+      "sourceHash": "90a1881a0241887bf519ac2e8a565d641a55d85a9c4b704445d70f05d1465f09",
+      "captureInputHash": "4f3f77e0d9a113acff3f0343d92d5789d6b1a8e9fb6342b0768997327e2d6ee0",
+      "independentHarness": true
+    }
+  ],
+  "mapping": [
+    {
+      "specimenId": "specimen-9bb1e9ecd29c",
+      "referenceId": "cell-5e670146c01f",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "anonymousCell": "cell-5e670146c01f",
+      "implementation": "recipe-react",
+      "cellKey": "altitude/variant=primary/state=default",
+      "sourceLibrary": "altitude",
+      "variant": "primary",
+      "state": "default",
+      "outputHash": "400d14841474c83c7ceca18334081987f004c9e89abb33a7b477cee69ee43152",
+      "referenceHash": "400d14841474c83c7ceca18334081987f004c9e89abb33a7b477cee69ee43152"
+    },
+    {
+      "specimenId": "specimen-aba1b084604d",
+      "referenceId": "cell-5e670146c01f",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "anonymousCell": "cell-5e670146c01f",
+      "implementation": "legacy",
+      "cellKey": "altitude/variant=primary/state=default",
+      "sourceLibrary": "altitude",
+      "variant": "primary",
+      "state": "default",
+      "outputHash": "400d14841474c83c7ceca18334081987f004c9e89abb33a7b477cee69ee43152",
+      "referenceHash": "400d14841474c83c7ceca18334081987f004c9e89abb33a7b477cee69ee43152"
+    },
+    {
+      "specimenId": "specimen-163ffa0d6083",
+      "referenceId": "cell-5962b099f23d",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "anonymousCell": "cell-5962b099f23d",
+      "implementation": "legacy",
+      "cellKey": "altitude/variant=primary/state=hover",
+      "sourceLibrary": "altitude",
+      "variant": "primary",
+      "state": "hover",
+      "outputHash": "7dad57ce4e3128524a8b9c080cabbcb2b1b6331ea64ea9c8bacf799f8aebec5a",
+      "referenceHash": "49d556c2d5fb73c4da4641ad245d162bc02278fb9d0f2dd8c999b3193ea1b997"
+    },
+    {
+      "specimenId": "specimen-ca00919d2607",
+      "referenceId": "cell-5962b099f23d",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "anonymousCell": "cell-5962b099f23d",
+      "implementation": "recipe-react",
+      "cellKey": "altitude/variant=primary/state=hover",
+      "sourceLibrary": "altitude",
+      "variant": "primary",
+      "state": "hover",
+      "outputHash": "7dad57ce4e3128524a8b9c080cabbcb2b1b6331ea64ea9c8bacf799f8aebec5a",
+      "referenceHash": "49d556c2d5fb73c4da4641ad245d162bc02278fb9d0f2dd8c999b3193ea1b997"
+    },
+    {
+      "specimenId": "specimen-7e84f6bea24c",
+      "referenceId": "cell-9a010e480e04",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "anonymousCell": "cell-9a010e480e04",
+      "implementation": "recipe-react",
+      "cellKey": "altitude/variant=primary/state=focus-visible",
+      "sourceLibrary": "altitude",
+      "variant": "primary",
+      "state": "focus-visible",
+      "outputHash": "b12fbd8122238807fc429a8b9412e76f2735e1f9bf4a0b04ef897941a835eb96",
+      "referenceHash": "1130a287733971ae77d078d4eabb3482a10e78f554c9bbbd20bd4c28473bda98"
+    },
+    {
+      "specimenId": "specimen-ec7fe9efd909",
+      "referenceId": "cell-9a010e480e04",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "The focus indicator is bright blue instead of the reference's dark navy outline, materially changing the state-specific treatment."
+      ],
+      "anonymousCell": "cell-9a010e480e04",
+      "implementation": "legacy",
+      "cellKey": "altitude/variant=primary/state=focus-visible",
+      "sourceLibrary": "altitude",
+      "variant": "primary",
+      "state": "focus-visible",
+      "outputHash": "2007706c67a40c667c74fc5aa78d2fc3cf25e318944a9b6516a326df3798d02c",
+      "referenceHash": "1130a287733971ae77d078d4eabb3482a10e78f554c9bbbd20bd4c28473bda98"
+    },
+    {
+      "specimenId": "specimen-a09f156ab971",
+      "referenceId": "cell-f9a0b7a83430",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "anonymousCell": "cell-f9a0b7a83430",
+      "implementation": "recipe-react",
+      "cellKey": "altitude/variant=secondary/state=default",
+      "sourceLibrary": "altitude",
+      "variant": "secondary",
+      "state": "default",
+      "outputHash": "4c6797280ea4a4e7e27fa692fff3c395e6ceded9c0c73bd16e6a2757f6b22716",
+      "referenceHash": "4c6797280ea4a4e7e27fa692fff3c395e6ceded9c0c73bd16e6a2757f6b22716"
+    },
+    {
+      "specimenId": "specimen-a193cc339fb1",
+      "referenceId": "cell-f9a0b7a83430",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "anonymousCell": "cell-f9a0b7a83430",
+      "implementation": "legacy",
+      "cellKey": "altitude/variant=secondary/state=default",
+      "sourceLibrary": "altitude",
+      "variant": "secondary",
+      "state": "default",
+      "outputHash": "4c6797280ea4a4e7e27fa692fff3c395e6ceded9c0c73bd16e6a2757f6b22716",
+      "referenceHash": "4c6797280ea4a4e7e27fa692fff3c395e6ceded9c0c73bd16e6a2757f6b22716"
+    },
+    {
+      "specimenId": "specimen-32fdc1160cc0",
+      "referenceId": "cell-1a371fcd7efa",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "anonymousCell": "cell-1a371fcd7efa",
+      "implementation": "recipe-react",
+      "cellKey": "altitude/variant=secondary/state=hover",
+      "sourceLibrary": "altitude",
+      "variant": "secondary",
+      "state": "hover",
+      "outputHash": "6bcb5cf80c6a72d7ecb2c37fc1fec58163ed62411ad3a13b85be9badece83464",
+      "referenceHash": "2666afdb3d8b6204bd89fefc1ea1410abdbc1a0a02e17e2edbad95138eabd1c1"
+    },
+    {
+      "specimenId": "specimen-47b75c381e82",
+      "referenceId": "cell-1a371fcd7efa",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "The button uses a saturated blue fill instead of the reference's muted beige fill, producing a substantial fill and ink mismatch."
+      ],
+      "anonymousCell": "cell-1a371fcd7efa",
+      "implementation": "legacy",
+      "cellKey": "altitude/variant=secondary/state=hover",
+      "sourceLibrary": "altitude",
+      "variant": "secondary",
+      "state": "hover",
+      "outputHash": "7dad57ce4e3128524a8b9c080cabbcb2b1b6331ea64ea9c8bacf799f8aebec5a",
+      "referenceHash": "2666afdb3d8b6204bd89fefc1ea1410abdbc1a0a02e17e2edbad95138eabd1c1"
+    },
+    {
+      "specimenId": "specimen-2b8845b0e238",
+      "referenceId": "cell-f93c65b872a0",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "anonymousCell": "cell-f93c65b872a0",
+      "implementation": "recipe-react",
+      "cellKey": "altitude/variant=secondary/state=focus-visible",
+      "sourceLibrary": "altitude",
+      "variant": "secondary",
+      "state": "focus-visible",
+      "outputHash": "bfd27b9d8c6bf9b223f6a0fe2ab812ccf35f476ca88bb61bf12b727991b40d90",
+      "referenceHash": "dbbd0cea74f5850bd832f9d61affe4086adc7392af24dda3fedc5f7b5fbda80d"
+    },
+    {
+      "specimenId": "specimen-b3fb056e4f5c",
+      "referenceId": "cell-f93c65b872a0",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "The focus indicator is bright blue instead of the reference's dark navy outline, materially changing the state-specific treatment."
+      ],
+      "anonymousCell": "cell-f93c65b872a0",
+      "implementation": "legacy",
+      "cellKey": "altitude/variant=secondary/state=focus-visible",
+      "sourceLibrary": "altitude",
+      "variant": "secondary",
+      "state": "focus-visible",
+      "outputHash": "3e373e248dae4cd6be69ed81090805d10a7b4c6f8e05416ba77fbbc750d366d5",
+      "referenceHash": "dbbd0cea74f5850bd832f9d61affe4086adc7392af24dda3fedc5f7b5fbda80d"
+    },
+    {
+      "specimenId": "specimen-13ed0dba2a44",
+      "referenceId": "cell-df45d1b49184",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "anonymousCell": "cell-df45d1b49184",
+      "implementation": "legacy",
+      "cellKey": "fluent/variant=primary/state=default",
+      "sourceLibrary": "fluent",
+      "variant": "primary",
+      "state": "default",
+      "outputHash": "08ca5bf97d214cff1942906e884d12f758fd2718a6090e1e4f429b62dda5ce9a",
+      "referenceHash": "08ca5bf97d214cff1942906e884d12f758fd2718a6090e1e4f429b62dda5ce9a"
+    },
+    {
+      "specimenId": "specimen-7cc6f4f179fa",
+      "referenceId": "cell-df45d1b49184",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "anonymousCell": "cell-df45d1b49184",
+      "implementation": "recipe-react",
+      "cellKey": "fluent/variant=primary/state=default",
+      "sourceLibrary": "fluent",
+      "variant": "primary",
+      "state": "default",
+      "outputHash": "08ca5bf97d214cff1942906e884d12f758fd2718a6090e1e4f429b62dda5ce9a",
+      "referenceHash": "08ca5bf97d214cff1942906e884d12f758fd2718a6090e1e4f429b62dda5ce9a"
+    },
+    {
+      "specimenId": "specimen-48b51424574b",
+      "referenceId": "cell-e44a2e004f11",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "anonymousCell": "cell-e44a2e004f11",
+      "implementation": "recipe-react",
+      "cellKey": "fluent/variant=primary/state=hover",
+      "sourceLibrary": "fluent",
+      "variant": "primary",
+      "state": "hover",
+      "outputHash": "bc03519bd8c5b6397b85340df634e089f8649ef7144e911c27e857a3987c037c",
+      "referenceHash": "bc03519bd8c5b6397b85340df634e089f8649ef7144e911c27e857a3987c037c"
+    },
+    {
+      "specimenId": "specimen-b55d42b0fa3c",
+      "referenceId": "cell-e44a2e004f11",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "anonymousCell": "cell-e44a2e004f11",
+      "implementation": "legacy",
+      "cellKey": "fluent/variant=primary/state=hover",
+      "sourceLibrary": "fluent",
+      "variant": "primary",
+      "state": "hover",
+      "outputHash": "bc03519bd8c5b6397b85340df634e089f8649ef7144e911c27e857a3987c037c",
+      "referenceHash": "bc03519bd8c5b6397b85340df634e089f8649ef7144e911c27e857a3987c037c"
+    },
+    {
+      "specimenId": "specimen-551a80295603",
+      "referenceId": "cell-39340b0b0154",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "anonymousCell": "cell-39340b0b0154",
+      "implementation": "recipe-react",
+      "cellKey": "fluent/variant=primary/state=focus-visible",
+      "sourceLibrary": "fluent",
+      "variant": "primary",
+      "state": "focus-visible",
+      "outputHash": "08ca5bf97d214cff1942906e884d12f758fd2718a6090e1e4f429b62dda5ce9a",
+      "referenceHash": "08ca5bf97d214cff1942906e884d12f758fd2718a6090e1e4f429b62dda5ce9a"
+    },
+    {
+      "specimenId": "specimen-7b643adfdca1",
+      "referenceId": "cell-39340b0b0154",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "The specimen adds a thick black focus outline and dark drop shadow that are absent from the reference's plain default state."
+      ],
+      "anonymousCell": "cell-39340b0b0154",
+      "implementation": "legacy",
+      "cellKey": "fluent/variant=primary/state=focus-visible",
+      "sourceLibrary": "fluent",
+      "variant": "primary",
+      "state": "focus-visible",
+      "outputHash": "2a56113461e9d45fc8c6e2015f9c13a332c161a56db309ec72eba52f220fd8ac",
+      "referenceHash": "08ca5bf97d214cff1942906e884d12f758fd2718a6090e1e4f429b62dda5ce9a"
+    },
+    {
+      "specimenId": "specimen-24f402578382",
+      "referenceId": "cell-dc13b6418bb8",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "anonymousCell": "cell-dc13b6418bb8",
+      "implementation": "recipe-react",
+      "cellKey": "fluent/variant=secondary/state=default",
+      "sourceLibrary": "fluent",
+      "variant": "secondary",
+      "state": "default",
+      "outputHash": "3282bad706c3778adb4647c29886b2e2ff069c68feb4581768027042d6d1519a",
+      "referenceHash": "3282bad706c3778adb4647c29886b2e2ff069c68feb4581768027042d6d1519a"
+    },
+    {
+      "specimenId": "specimen-99b7ee98b057",
+      "referenceId": "cell-dc13b6418bb8",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "anonymousCell": "cell-dc13b6418bb8",
+      "implementation": "legacy",
+      "cellKey": "fluent/variant=secondary/state=default",
+      "sourceLibrary": "fluent",
+      "variant": "secondary",
+      "state": "default",
+      "outputHash": "3282bad706c3778adb4647c29886b2e2ff069c68feb4581768027042d6d1519a",
+      "referenceHash": "3282bad706c3778adb4647c29886b2e2ff069c68feb4581768027042d6d1519a"
+    },
+    {
+      "specimenId": "specimen-a37e1ff096e9",
+      "referenceId": "cell-080d53e5ba51",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "anonymousCell": "cell-080d53e5ba51",
+      "implementation": "legacy",
+      "cellKey": "fluent/variant=secondary/state=hover",
+      "sourceLibrary": "fluent",
+      "variant": "secondary",
+      "state": "hover",
+      "outputHash": "d91406b7338b4737eb052d1cc0f645b81e02b7110ea996d8a5bf104b153d33ba",
+      "referenceHash": "d91406b7338b4737eb052d1cc0f645b81e02b7110ea996d8a5bf104b153d33ba"
+    },
+    {
+      "specimenId": "specimen-a580a0288961",
+      "referenceId": "cell-080d53e5ba51",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "anonymousCell": "cell-080d53e5ba51",
+      "implementation": "recipe-react",
+      "cellKey": "fluent/variant=secondary/state=hover",
+      "sourceLibrary": "fluent",
+      "variant": "secondary",
+      "state": "hover",
+      "outputHash": "d91406b7338b4737eb052d1cc0f645b81e02b7110ea996d8a5bf104b153d33ba",
+      "referenceHash": "d91406b7338b4737eb052d1cc0f645b81e02b7110ea996d8a5bf104b153d33ba"
+    },
+    {
+      "specimenId": "specimen-9d10c574e2d3",
+      "referenceId": "cell-e40acf421a66",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "anonymousCell": "cell-e40acf421a66",
+      "implementation": "recipe-react",
+      "cellKey": "fluent/variant=secondary/state=focus-visible",
+      "sourceLibrary": "fluent",
+      "variant": "secondary",
+      "state": "focus-visible",
+      "outputHash": "3282bad706c3778adb4647c29886b2e2ff069c68feb4581768027042d6d1519a",
+      "referenceHash": "3282bad706c3778adb4647c29886b2e2ff069c68feb4581768027042d6d1519a"
+    },
+    {
+      "specimenId": "specimen-ad3b3cb5c6a7",
+      "referenceId": "cell-e40acf421a66",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "The border is thick black instead of the reference's thin light-gray stroke, substantially changing the outline weight and ink."
+      ],
+      "anonymousCell": "cell-e40acf421a66",
+      "implementation": "legacy",
+      "cellKey": "fluent/variant=secondary/state=focus-visible",
+      "sourceLibrary": "fluent",
+      "variant": "secondary",
+      "state": "focus-visible",
+      "outputHash": "c75c1a624ea5a219cf792fafbb92833496a74879282efde086e623cad1f006f1",
+      "referenceHash": "3282bad706c3778adb4647c29886b2e2ff069c68feb4581768027042d6d1519a"
+    }
+  ],
+  "aggregates": {
+    "byImplementation": {
+      "legacy": {
+        "cellWeighted": {
+          "numerator": 7,
+          "denominator": 12,
+          "ratio": 0.5833333333333334
+        },
+        "setWeighted": {
+          "numerator": 0,
+          "denominator": 2,
+          "ratio": 0
+        }
+      },
+      "recipeReact": {
+        "cellWeighted": {
+          "numerator": 12,
+          "denominator": 12,
+          "ratio": 1
+        },
+        "setWeighted": {
+          "numerator": 2,
+          "denominator": 2,
+          "ratio": 1
+        }
+      }
+    },
+    "bySourceLibrary": {
+      "altitude": {
+        "legacy": {
+          "numerator": 3,
+          "denominator": 6,
+          "ratio": 0.5
+        },
+        "recipeReact": {
+          "numerator": 6,
+          "denominator": 6,
+          "ratio": 1
+        }
+      },
+      "fluent": {
+        "legacy": {
+          "numerator": 4,
+          "denominator": 6,
+          "ratio": 0.6666666666666666
+        },
+        "recipeReact": {
+          "numerator": 6,
+          "denominator": 6,
+          "ratio": 1
+        }
+      }
+    },
+    "byVariant": {
+      "primary": {
+        "legacy": {
+          "numerator": 4,
+          "denominator": 6,
+          "ratio": 0.6666666666666666
+        },
+        "recipeReact": {
+          "numerator": 6,
+          "denominator": 6,
+          "ratio": 1
+        }
+      },
+      "secondary": {
+        "legacy": {
+          "numerator": 3,
+          "denominator": 6,
+          "ratio": 0.5
+        },
+        "recipeReact": {
+          "numerator": 6,
+          "denominator": 6,
+          "ratio": 1
+        }
+      }
+    },
+    "byState": {
+      "default": {
+        "legacy": {
+          "numerator": 4,
+          "denominator": 4,
+          "ratio": 1
+        },
+        "recipeReact": {
+          "numerator": 4,
+          "denominator": 4,
+          "ratio": 1
+        }
+      },
+      "hover": {
+        "legacy": {
+          "numerator": 3,
+          "denominator": 4,
+          "ratio": 0.75
+        },
+        "recipeReact": {
+          "numerator": 4,
+          "denominator": 4,
+          "ratio": 1
+        }
+      },
+      "focus-visible": {
+        "legacy": {
+          "numerator": 0,
+          "denominator": 4,
+          "ratio": 0
+        },
+        "recipeReact": {
+          "numerator": 4,
+          "denominator": 4,
+          "ratio": 1
+        }
+      }
+    },
+    "pairedCellOutcomes": {
+      "recipeBeatLegacy": 5,
+      "tiedPass": 7,
+      "tiedFail": 0,
+      "legacyBeatRecipe": 0,
+      "total": 12
+    }
+  },
+  "confidence": {
+    "overall": {
+      "low": 0,
+      "medium": 0,
+      "high": 24,
+      "total": 24
+    },
+    "byImplementation": {
+      "legacy": {
+        "low": 0,
+        "medium": 0,
+        "high": 12,
+        "total": 12
+      },
+      "recipeReact": {
+        "low": 0,
+        "medium": 0,
+        "high": 12,
+        "total": 12
+      }
+    }
+  },
+  "defects": {
+    "byImplementation": {
+      "legacy": {
+        "failedSpecimens": 5,
+        "statements": 5,
+        "classes": {
+          "border": {
+            "failedSpecimens": 1,
+            "statements": 1
+          },
+          "fill-or-color": {
+            "failedSpecimens": 5,
+            "statements": 5
+          },
+          "focus-or-state-treatment": {
+            "failedSpecimens": 3,
+            "statements": 3
+          }
+        }
+      },
+      "recipeReact": {
+        "failedSpecimens": 0,
+        "statements": 0,
+        "classes": {}
+      }
+    }
+  },
+  "webComponentParity": {
+    "includedInBlindBatch": false,
+    "recognisability": "not-blind-graded",
+    "cells": 12,
+    "nonZeroMeasurements": true
+  },
+  "structuralUsability": {
+    "offlineAssertions": {
+      "legacy": {
+        "passed": 4,
+        "denominator": 4
+      },
+      "recipeReact": {
+        "passed": 4,
+        "denominator": 4
+      }
+    },
+    "usabilityImprovement": "not-established",
+    "structuralImprovement": "not-comparable-on-a-symmetric-denominator",
+    "recipeStructuralEvidence": {
+      "axesInFullRecipe": 4,
+      "roles": [
+        "button/root",
+        "button/label",
+        "button/slot/leading",
+        "button/slot/trailing",
+        "button/loading-indicator"
+      ],
+      "emittedCells": 288
+    },
+    "pendingColumns": {
+      "liveFigma": "pending",
+      "fullUsability": "pending",
+      "fullFixedPoint": "pending"
+    }
+  },
+  "comparisonHistory": {
+    "immutableV1": {
+      "adjudicationArtifact": "recipe/evidence/button-comparison/comparison-result.json",
+      "adjudicationHash": "46942e6814b766ecd9014df6c1f17acf40be4619171dcb08dc9bd3f41c43577d",
+      "referencesAndLegacyBytesRetained": true,
+      "legacyCellWeighted": {
+        "numerator": 9,
+        "denominator": 12,
+        "ratio": 0.75
+      },
+      "recipeReactCellWeighted": {
+        "numerator": 0,
+        "denominator": 12,
+        "ratio": 0
+      },
+      "recipeReactSetWeighted": {
+        "numerator": 0,
+        "denominator": 2,
+        "ratio": 0
+      }
+    },
+    "correctedV2": {
+      "legacyCellWeighted": {
+        "numerator": 7,
+        "denominator": 12,
+        "ratio": 0.5833333333333334
+      },
+      "recipeReactCellWeighted": {
+        "numerator": 12,
+        "denominator": 12,
+        "ratio": 1
+      },
+      "recipeReactSetWeighted": {
+        "numerator": 2,
+        "denominator": 2,
+        "ratio": 1
+      }
+    }
+  },
+  "evidenceColumns": {
+    "offlineImplementation": "passed",
+    "pairedRecognisability": "passed",
+    "webComponentParity": "passed-ungraded-recognisability",
+    "liveFigma": "pending",
+    "usability": "pending",
+    "twoCycleLiveFixedPoint": "pending",
+    "overallSuccess": false
+  },
+  "verdict": {
+    "comparison": "recipe-beat",
+    "recipeMatchedOrBeatLegacy": true,
+    "cellDelta": 5,
+    "setDelta": 2,
+    "allCurrentlyApplicableOfflineCriteriaPass": true,
+    "offlineRecognisabilityCriterionMet": true,
+    "buttonSuccess": false,
+    "blockers": [
+      "page-scoped live Figma mint/readback is pending",
+      "full usability grading is pending",
+      "two-cycle live fixed-point evidence is pending"
+    ],
+    "nextImplementationTask": "Run page-scoped live Figma mint/readback/usability using only Scratch Project."
+  }
+}

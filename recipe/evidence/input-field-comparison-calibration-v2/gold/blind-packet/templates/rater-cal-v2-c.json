@@ -1,0 +1,736 @@
+{
+  "phase": "gold-calibration",
+  "schemaVersion": "recognisability-grade-envelope-v2",
+  "graderId": "RATER-CAL-V2-C",
+  "packetProtocol": "recognisability-gold-calibration-v1",
+  "packetHash": "70dd47851b2a7c19548fb666cb82eafe0be67aaca8e001d4bcac73f10767c022",
+  "randomizedBatchHash": "a4bdbd9708674df88fc27b9ce00e316537778a4c4648426fd8c9354a385f4503",
+  "calibrationCommitment": "8e6894a5b87fd2ce129f29d1a9ea041ac0792aa96a0a01528b25b2d0c0bb48c9",
+  "rubricVersion": "input-field-observable-rubric-v2",
+  "counts": {
+    "expected": 24,
+    "submitted": null
+  },
+  "orderedGrades": [
+    {
+      "taskId": "task-9990cd8abc46a87acac3",
+      "referenceId": "reference-fd98dd1f7d581f51bbdb",
+      "specimenId": "specimen-98e7595ae4267ab0c7f6",
+      "recognisable": null,
+      "confidence": null,
+      "criteria": {
+        "required-structure-content": {
+          "verdict": null,
+          "defects": []
+        },
+        "semantic-state": {
+          "verdict": null,
+          "defects": []
+        },
+        "geometry-proportion": {
+          "verdict": null,
+          "defects": []
+        },
+        "typography-raster": {
+          "verdict": null,
+          "defects": []
+        },
+        "color-border-effects": {
+          "verdict": null,
+          "defects": []
+        }
+      },
+      "defects": []
+    },
+    {
+      "taskId": "task-20efab29353905981e12",
+      "referenceId": "reference-b71ad114ce4624b4baa3",
+      "specimenId": "specimen-03f181a3d070896360f3",
+      "recognisable": null,
+      "confidence": null,
+      "criteria": {
+        "required-structure-content": {
+          "verdict": null,
+          "defects": []
+        },
+        "semantic-state": {
+          "verdict": null,
+          "defects": []
+        },
+        "geometry-proportion": {
+          "verdict": null,
+          "defects": []
+        },
+        "typography-raster": {
+          "verdict": null,
+          "defects": []
+        },
+        "color-border-effects": {
+          "verdict": null,
+          "defects": []
+        }
+      },
+      "defects": []
+    },
+    {
+      "taskId": "task-7c2076a300c0a1db0f08",
+      "referenceId": "reference-ab79e88074bf6ecf70b3",
+      "specimenId": "specimen-b96c89ae439c93fba171",
+      "recognisable": null,
+      "confidence": null,
+      "criteria": {
+        "required-structure-content": {
+          "verdict": null,
+          "defects": []
+        },
+        "semantic-state": {
+          "verdict": null,
+          "defects": []
+        },
+        "geometry-proportion": {
+          "verdict": null,
+          "defects": []
+        },
+        "typography-raster": {
+          "verdict": null,
+          "defects": []
+        },
+        "color-border-effects": {
+          "verdict": null,
+          "defects": []
+        }
+      },
+      "defects": []
+    },
+    {
+      "taskId": "task-76eb504b8fc50cc0fcf2",
+      "referenceId": "reference-587e7165a15a9844ebbc",
+      "specimenId": "specimen-b5b0a67b51ed35274443",
+      "recognisable": null,
+      "confidence": null,
+      "criteria": {
+        "required-structure-content": {
+          "verdict": null,
+          "defects": []
+        },
+        "semantic-state": {
+          "verdict": null,
+          "defects": []
+        },
+        "geometry-proportion": {
+          "verdict": null,
+          "defects": []
+        },
+        "typography-raster": {
+          "verdict": null,
+          "defects": []
+        },
+        "color-border-effects": {
+          "verdict": null,
+          "defects": []
+        }
+      },
+      "defects": []
+    },
+    {
+      "taskId": "task-3380bb40a975966f5500",
+      "referenceId": "reference-1f8130d8aee5e29470a8",
+      "specimenId": "specimen-2f444ea5c80cb25a3d30",
+      "recognisable": null,
+      "confidence": null,
+      "criteria": {
+        "required-structure-content": {
+          "verdict": null,
+          "defects": []
+        },
+        "semantic-state": {
+          "verdict": null,
+          "defects": []
+        },
+        "geometry-proportion": {
+          "verdict": null,
+          "defects": []
+        },
+        "typography-raster": {
+          "verdict": null,
+          "defects": []
+        },
+        "color-border-effects": {
+          "verdict": null,
+          "defects": []
+        }
+      },
+      "defects": []
+    },
+    {
+      "taskId": "task-d4854d85c053f19e6484",
+      "referenceId": "reference-d6019ff4ffeb6dd664c0",
+      "specimenId": "specimen-e9a5fd569239aac28a31",
+      "recognisable": null,
+      "confidence": null,
+      "criteria": {
+        "required-structure-content": {
+          "verdict": null,
+          "defects": []
+        },
+        "semantic-state": {
+          "verdict": null,
+          "defects": []
+        },
+        "geometry-proportion": {
+          "verdict": null,
+          "defects": []
+        },
+        "typography-raster": {
+          "verdict": null,
+          "defects": []
+        },
+        "color-border-effects": {
+          "verdict": null,
+          "defects": []
+        }
+      },
+      "defects": []
+    },
+    {
+      "taskId": "task-01259519ae7d8bb77e26",
+      "referenceId": "reference-d46ac00221239e0675e7",
+      "specimenId": "specimen-f6ae7249662eefa2334a",
+      "recognisable": null,
+      "confidence": null,
+      "criteria": {
+        "required-structure-content": {
+          "verdict": null,
+          "defects": []
+        },
+        "semantic-state": {
+          "verdict": null,
+          "defects": []
+        },
+        "geometry-proportion": {
+          "verdict": null,
+          "defects": []
+        },
+        "typography-raster": {
+          "verdict": null,
+          "defects": []
+        },
+        "color-border-effects": {
+          "verdict": null,
+          "defects": []
+        }
+      },
+      "defects": []
+    },
+    {
+      "taskId": "task-516c90a2799d2616f67f",
+      "referenceId": "reference-c66b01c5995328fd8ba4",
+      "specimenId": "specimen-c9d8516c5093864bbce2",
+      "recognisable": null,
+      "confidence": null,
+      "criteria": {
+        "required-structure-content": {
+          "verdict": null,
+          "defects": []
+        },
+        "semantic-state": {
+          "verdict": null,
+          "defects": []
+        },
+        "geometry-proportion": {
+          "verdict": null,
+          "defects": []
+        },
+        "typography-raster": {
+          "verdict": null,
+          "defects": []
+        },
+        "color-border-effects": {
+          "verdict": null,
+          "defects": []
+        }
+      },
+      "defects": []
+    },
+    {
+      "taskId": "task-00743b2dbc3357e42439",
+      "referenceId": "reference-f80a271a026836d36bc3",
+      "specimenId": "specimen-ddea768bfb95e6455deb",
+      "recognisable": null,
+      "confidence": null,
+      "criteria": {
+        "required-structure-content": {
+          "verdict": null,
+          "defects": []
+        },
+        "semantic-state": {
+          "verdict": null,
+          "defects": []
+        },
+        "geometry-proportion": {
+          "verdict": null,
+          "defects": []
+        },
+        "typography-raster": {
+          "verdict": null,
+          "defects": []
+        },
+        "color-border-effects": {
+          "verdict": null,
+          "defects": []
+        }
+      },
+      "defects": []
+    },
+    {
+      "taskId": "task-bb99ea3a4b7adbc5b5b5",
+      "referenceId": "reference-b941224549e0bc90159f",
+      "specimenId": "specimen-42d9cd1acf69970b4c73",
+      "recognisable": null,
+      "confidence": null,
+      "criteria": {
+        "required-structure-content": {
+          "verdict": null,
+          "defects": []
+        },
+        "semantic-state": {
+          "verdict": null,
+          "defects": []
+        },
+        "geometry-proportion": {
+          "verdict": null,
+          "defects": []
+        },
+        "typography-raster": {
+          "verdict": null,
+          "defects": []
+        },
+        "color-border-effects": {
+          "verdict": null,
+          "defects": []
+        }
+      },
+      "defects": []
+    },
+    {
+      "taskId": "task-c8893aeb42171bac2d78",
+      "referenceId": "reference-c0eccb07e3bd8dcbbdc1",
+      "specimenId": "specimen-73130c4a1ec9a4a2161a",
+      "recognisable": null,
+      "confidence": null,
+      "criteria": {
+        "required-structure-content": {
+          "verdict": null,
+          "defects": []
+        },
+        "semantic-state": {
+          "verdict": null,
+          "defects": []
+        },
+        "geometry-proportion": {
+          "verdict": null,
+          "defects": []
+        },
+        "typography-raster": {
+          "verdict": null,
+          "defects": []
+        },
+        "color-border-effects": {
+          "verdict": null,
+          "defects": []
+        }
+      },
+      "defects": []
+    },
+    {
+      "taskId": "task-3b2f9964da023d80323a",
+      "referenceId": "reference-662c84693dc7c17bc1e8",
+      "specimenId": "specimen-1720a18dd6ba29462244",
+      "recognisable": null,
+      "confidence": null,
+      "criteria": {
+        "required-structure-content": {
+          "verdict": null,
+          "defects": []
+        },
+        "semantic-state": {
+          "verdict": null,
+          "defects": []
+        },
+        "geometry-proportion": {
+          "verdict": null,
+          "defects": []
+        },
+        "typography-raster": {
+          "verdict": null,
+          "defects": []
+        },
+        "color-border-effects": {
+          "verdict": null,
+          "defects": []
+        }
+      },
+      "defects": []
+    },
+    {
+      "taskId": "task-e11645268da5aba624f7",
+      "referenceId": "reference-d64e51463f41fa3caaab",
+      "specimenId": "specimen-072dd5d3b198d4c39632",
+      "recognisable": null,
+      "confidence": null,
+      "criteria": {
+        "required-structure-content": {
+          "verdict": null,
+          "defects": []
+        },
+        "semantic-state": {
+          "verdict": null,
+          "defects": []
+        },
+        "geometry-proportion": {
+          "verdict": null,
+          "defects": []
+        },
+        "typography-raster": {
+          "verdict": null,
+          "defects": []
+        },
+        "color-border-effects": {
+          "verdict": null,
+          "defects": []
+        }
+      },
+      "defects": []
+    },
+    {
+      "taskId": "task-7bff5fe91266db1af94e",
+      "referenceId": "reference-d5806ffa7fe0e86bdfe0",
+      "specimenId": "specimen-14d609b1414f152f3def",
+      "recognisable": null,
+      "confidence": null,
+      "criteria": {
+        "required-structure-content": {
+          "verdict": null,
+          "defects": []
+        },
+        "semantic-state": {
+          "verdict": null,
+          "defects": []
+        },
+        "geometry-proportion": {
+          "verdict": null,
+          "defects": []
+        },
+        "typography-raster": {
+          "verdict": null,
+          "defects": []
+        },
+        "color-border-effects": {
+          "verdict": null,
+          "defects": []
+        }
+      },
+      "defects": []
+    },
+    {
+      "taskId": "task-4178e92eb9bd9be4bef4",
+      "referenceId": "reference-1ce7ec93ff2711ed6a9d",
+      "specimenId": "specimen-589f7f7a972bc8a7234a",
+      "recognisable": null,
+      "confidence": null,
+      "criteria": {
+        "required-structure-content": {
+          "verdict": null,
+          "defects": []
+        },
+        "semantic-state": {
+          "verdict": null,
+          "defects": []
+        },
+        "geometry-proportion": {
+          "verdict": null,
+          "defects": []
+        },
+        "typography-raster": {
+          "verdict": null,
+          "defects": []
+        },
+        "color-border-effects": {
+          "verdict": null,
+          "defects": []
+        }
+      },
+      "defects": []
+    },
+    {
+      "taskId": "task-d7da518e290ad74ee3c5",
+      "referenceId": "reference-6add9e7f00a7135c95a1",
+      "specimenId": "specimen-335d354a23698c60d4b8",
+      "recognisable": null,
+      "confidence": null,
+      "criteria": {
+        "required-structure-content": {
+          "verdict": null,
+          "defects": []
+        },
+        "semantic-state": {
+          "verdict": null,
+          "defects": []
+        },
+        "geometry-proportion": {
+          "verdict": null,
+          "defects": []
+        },
+        "typography-raster": {
+          "verdict": null,
+          "defects": []
+        },
+        "color-border-effects": {
+          "verdict": null,
+          "defects": []
+        }
+      },
+      "defects": []
+    },
+    {
+      "taskId": "task-b067effc98889f809c33",
+      "referenceId": "reference-21790ffc5f2a6014ef7c",
+      "specimenId": "specimen-f03fba5c837747e83fe0",
+      "recognisable": null,
+      "confidence": null,
+      "criteria": {
+        "required-structure-content": {
+          "verdict": null,
+          "defects": []
+        },
+        "semantic-state": {
+          "verdict": null,
+          "defects": []
+        },
+        "geometry-proportion": {
+          "verdict": null,
+          "defects": []
+        },
+        "typography-raster": {
+          "verdict": null,
+          "defects": []
+        },
+        "color-border-effects": {
+          "verdict": null,
+          "defects": []
+        }
+      },
+      "defects": []
+    },
+    {
+      "taskId": "task-82569fd3f3bb84cefee2",
+      "referenceId": "reference-09382eee7f533acbb453",
+      "specimenId": "specimen-798aef371788a6184575",
+      "recognisable": null,
+      "confidence": null,
+      "criteria": {
+        "required-structure-content": {
+          "verdict": null,
+          "defects": []
+        },
+        "semantic-state": {
+          "verdict": null,
+          "defects": []
+        },
+        "geometry-proportion": {
+          "verdict": null,
+          "defects": []
+        },
+        "typography-raster": {
+          "verdict": null,
+          "defects": []
+        },
+        "color-border-effects": {
+          "verdict": null,
+          "defects": []
+        }
+      },
+      "defects": []
+    },
+    {
+      "taskId": "task-1461d7f1257958d94784",
+      "referenceId": "reference-4831a79959c5c852e0a1",
+      "specimenId": "specimen-589356eaec8914b09f5d",
+      "recognisable": null,
+      "confidence": null,
+      "criteria": {
+        "required-structure-content": {
+          "verdict": null,
+          "defects": []
+        },
+        "semantic-state": {
+          "verdict": null,
+          "defects": []
+        },
+        "geometry-proportion": {
+          "verdict": null,
+          "defects": []
+        },
+        "typography-raster": {
+          "verdict": null,
+          "defects": []
+        },
+        "color-border-effects": {
+          "verdict": null,
+          "defects": []
+        }
+      },
+      "defects": []
+    },
+    {
+      "taskId": "task-6d610be0812cb0e28bc9",
+      "referenceId": "reference-7a87ec2939fca5bda1b1",
+      "specimenId": "specimen-3e06b1da804dedf3e302",
+      "recognisable": null,
+      "confidence": null,
+      "criteria": {
+        "required-structure-content": {
+          "verdict": null,
+          "defects": []
+        },
+        "semantic-state": {
+          "verdict": null,
+          "defects": []
+        },
+        "geometry-proportion": {
+          "verdict": null,
+          "defects": []
+        },
+        "typography-raster": {
+          "verdict": null,
+          "defects": []
+        },
+        "color-border-effects": {
+          "verdict": null,
+          "defects": []
+        }
+      },
+      "defects": []
+    },
+    {
+      "taskId": "task-970261c50043c5b604e0",
+      "referenceId": "reference-6d166b09f55a9401ff8a",
+      "specimenId": "specimen-94ff2f81c66901fe6a30",
+      "recognisable": null,
+      "confidence": null,
+      "criteria": {
+        "required-structure-content": {
+          "verdict": null,
+          "defects": []
+        },
+        "semantic-state": {
+          "verdict": null,
+          "defects": []
+        },
+        "geometry-proportion": {
+          "verdict": null,
+          "defects": []
+        },
+        "typography-raster": {
+          "verdict": null,
+          "defects": []
+        },
+        "color-border-effects": {
+          "verdict": null,
+          "defects": []
+        }
+      },
+      "defects": []
+    },
+    {
+      "taskId": "task-126fb7b92a8c93d61b64",
+      "referenceId": "reference-91acb6ad14b13abce488",
+      "specimenId": "specimen-5901b90cc59b0268cf45",
+      "recognisable": null,
+      "confidence": null,
+      "criteria": {
+        "required-structure-content": {
+          "verdict": null,
+          "defects": []
+        },
+        "semantic-state": {
+          "verdict": null,
+          "defects": []
+        },
+        "geometry-proportion": {
+          "verdict": null,
+          "defects": []
+        },
+        "typography-raster": {
+          "verdict": null,
+          "defects": []
+        },
+        "color-border-effects": {
+          "verdict": null,
+          "defects": []
+        }
+      },
+      "defects": []
+    },
+    {
+      "taskId": "task-ff57df5399fada2542df",
+      "referenceId": "reference-c93ef72c2a86d7215ce4",
+      "specimenId": "specimen-bffd08214e9c23c7e67b",
+      "recognisable": null,
+      "confidence": null,
+      "criteria": {
+        "required-structure-content": {
+          "verdict": null,
+          "defects": []
+        },
+        "semantic-state": {
+          "verdict": null,
+          "defects": []
+        },
+        "geometry-proportion": {
+          "verdict": null,
+          "defects": []
+        },
+        "typography-raster": {
+          "verdict": null,
+          "defects": []
+        },
+        "color-border-effects": {
+          "verdict": null,
+          "defects": []
+        }
+      },
+      "defects": []
+    },
+    {
+      "taskId": "task-2bc23fe66b2b7d6c1071",
+      "referenceId": "reference-723843e404d0fa1acb6d",
+      "specimenId": "specimen-44223751e702feed9d64",
+      "recognisable": null,
+      "confidence": null,
+      "criteria": {
+        "required-structure-content": {
+          "verdict": null,
+          "defects": []
+        },
+        "semantic-state": {
+          "verdict": null,
+          "defects": []
+        },
+        "geometry-proportion": {
+          "verdict": null,
+          "defects": []
+        },
+        "typography-raster": {
+          "verdict": null,
+          "defects": []
+        },
+        "color-border-effects": {
+          "verdict": null,
+          "defects": []
+        }
+      },
+      "defects": []
+    }
+  ]
+}

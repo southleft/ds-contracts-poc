@@ -1,0 +1,190 @@
+{
+  "protocolVersion": "button-paired-source-v2",
+  "counts": {
+    "references": 12,
+    "specimens": 24,
+    "graded": 24,
+    "recognisable": 19,
+    "notRecognisable": 5
+  },
+  "grades": [
+    {
+      "specimenId": "specimen-9bb1e9ecd29c",
+      "referenceId": "cell-5e670146c01f",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-aba1b084604d",
+      "referenceId": "cell-5e670146c01f",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-163ffa0d6083",
+      "referenceId": "cell-5962b099f23d",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-ca00919d2607",
+      "referenceId": "cell-5962b099f23d",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-7e84f6bea24c",
+      "referenceId": "cell-9a010e480e04",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-ec7fe9efd909",
+      "referenceId": "cell-9a010e480e04",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "The focus indicator is bright blue instead of the reference's dark navy outline, materially changing the state-specific treatment."
+      ]
+    },
+    {
+      "specimenId": "specimen-a09f156ab971",
+      "referenceId": "cell-f9a0b7a83430",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-a193cc339fb1",
+      "referenceId": "cell-f9a0b7a83430",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-32fdc1160cc0",
+      "referenceId": "cell-1a371fcd7efa",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-47b75c381e82",
+      "referenceId": "cell-1a371fcd7efa",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "The button uses a saturated blue fill instead of the reference's muted beige fill, producing a substantial fill and ink mismatch."
+      ]
+    },
+    {
+      "specimenId": "specimen-2b8845b0e238",
+      "referenceId": "cell-f93c65b872a0",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-b3fb056e4f5c",
+      "referenceId": "cell-f93c65b872a0",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "The focus indicator is bright blue instead of the reference's dark navy outline, materially changing the state-specific treatment."
+      ]
+    },
+    {
+      "specimenId": "specimen-13ed0dba2a44",
+      "referenceId": "cell-df45d1b49184",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-7cc6f4f179fa",
+      "referenceId": "cell-df45d1b49184",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-48b51424574b",
+      "referenceId": "cell-e44a2e004f11",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-b55d42b0fa3c",
+      "referenceId": "cell-e44a2e004f11",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-551a80295603",
+      "referenceId": "cell-39340b0b0154",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-7b643adfdca1",
+      "referenceId": "cell-39340b0b0154",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "The specimen adds a thick black focus outline and dark drop shadow that are absent from the reference's plain default state."
+      ]
+    },
+    {
+      "specimenId": "specimen-24f402578382",
+      "referenceId": "cell-dc13b6418bb8",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-99b7ee98b057",
+      "referenceId": "cell-dc13b6418bb8",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-a37e1ff096e9",
+      "referenceId": "cell-080d53e5ba51",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-a580a0288961",
+      "referenceId": "cell-080d53e5ba51",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-9d10c574e2d3",
+      "referenceId": "cell-e40acf421a66",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-ad3b3cb5c6a7",
+      "referenceId": "cell-e40acf421a66",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "The border is thick black instead of the reference's thin light-gray stroke, substantially changing the outline weight and ink."
+      ]
+    }
+  ]
+}

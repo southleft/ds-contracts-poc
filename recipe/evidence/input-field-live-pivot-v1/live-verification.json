@@ -1,0 +1,1404 @@
+{
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "fileName": "Scratch Project",
+  "pageId": "86:16021",
+  "pageName": "Recipe Pivot / Input Field / e4ac8bb8-f30a3672-input-v1",
+  "proofSectionId": "86:18756",
+  "pairedSectionId": "86:18757",
+  "createdNodeIds": [
+    "86:18756",
+    "86:18757",
+    "86:18758",
+    "86:19982",
+    "86:21077",
+    "86:21078",
+    "86:21086",
+    "86:21087",
+    "86:21099",
+    "86:21100",
+    "86:21109",
+    "86:21110",
+    "86:21123",
+    "86:21124",
+    "86:21132",
+    "86:21133",
+    "86:21145",
+    "86:21146",
+    "86:21155",
+    "86:21156",
+    "86:21169",
+    "86:21170",
+    "86:21178",
+    "86:21179",
+    "86:21191",
+    "86:21192",
+    "86:21201",
+    "86:21202",
+    "86:21215",
+    "86:21216",
+    "86:21224",
+    "86:21225",
+    "86:21237",
+    "86:21238",
+    "86:21247",
+    "86:21248",
+    "86:21261",
+    "86:21262",
+    "86:21270",
+    "86:21271",
+    "86:21283",
+    "86:21284",
+    "86:21293",
+    "86:21294",
+    "86:21307",
+    "86:21308",
+    "86:21316",
+    "86:21317",
+    "86:21329",
+    "86:21330",
+    "86:21339",
+    "86:21340",
+    "86:21353",
+    "86:21354",
+    "86:21362",
+    "86:21363",
+    "86:21375",
+    "86:21376",
+    "86:21385",
+    "86:21386",
+    "86:21399",
+    "86:21400",
+    "86:21408",
+    "86:21409",
+    "86:21421",
+    "86:21422",
+    "86:21431",
+    "86:21432",
+    "86:21445",
+    "86:21446",
+    "86:21454",
+    "86:21455",
+    "86:21467",
+    "86:21468",
+    "86:21477",
+    "86:21478",
+    "86:21491",
+    "86:21492",
+    "86:21500",
+    "86:21501",
+    "86:21513",
+    "86:21514",
+    "86:21523",
+    "86:21524",
+    "86:21537",
+    "86:21538",
+    "86:21546",
+    "86:21547",
+    "86:21559",
+    "86:21560",
+    "86:21569",
+    "86:21570",
+    "86:21583",
+    "86:21584",
+    "86:21592",
+    "86:21593",
+    "86:21605",
+    "86:21606",
+    "86:21615",
+    "86:21616",
+    "86:21629",
+    "86:21630",
+    "86:21638",
+    "86:21639",
+    "86:21651",
+    "86:21652",
+    "86:21661",
+    "86:21662",
+    "86:21675",
+    "86:21676",
+    "86:21684",
+    "86:21685",
+    "86:21697",
+    "86:21698",
+    "86:21707",
+    "86:21708",
+    "86:21721",
+    "86:21722",
+    "86:21730",
+    "86:21731",
+    "86:21743",
+    "86:21744",
+    "86:21753",
+    "86:21754",
+    "86:21767",
+    "86:21768",
+    "86:21776",
+    "86:21777",
+    "86:21789",
+    "86:21790",
+    "86:21799",
+    "86:21800",
+    "86:21813",
+    "86:21814",
+    "86:21821",
+    "86:21822",
+    "86:21833",
+    "86:21834",
+    "86:21842",
+    "86:21843",
+    "86:21855",
+    "86:21856",
+    "86:21863",
+    "86:21864",
+    "86:21875",
+    "86:21876",
+    "86:21884",
+    "86:21885",
+    "86:21897",
+    "86:21898",
+    "86:21905",
+    "86:21906",
+    "86:21917",
+    "86:21918",
+    "86:21926",
+    "86:21927",
+    "86:21939",
+    "86:21940",
+    "86:21947",
+    "86:21948",
+    "86:21959",
+    "86:21960",
+    "86:21968",
+    "86:21969",
+    "86:21981",
+    "86:21982",
+    "86:21989",
+    "86:21990",
+    "86:22001",
+    "86:22002",
+    "86:22010",
+    "86:22011",
+    "86:22023",
+    "86:22024",
+    "86:22031",
+    "86:22032",
+    "86:22043",
+    "86:22044",
+    "86:22052",
+    "86:22053",
+    "86:22065",
+    "86:22066",
+    "86:22073",
+    "86:22074",
+    "86:22085",
+    "86:22086",
+    "86:22094",
+    "86:22095",
+    "86:22107",
+    "86:22108",
+    "86:22115",
+    "86:22116",
+    "86:22127",
+    "86:22128",
+    "86:22136",
+    "86:22137",
+    "86:22149",
+    "86:22150",
+    "86:22157",
+    "86:22158",
+    "86:22169",
+    "86:22170",
+    "86:22178",
+    "86:22179",
+    "86:22191",
+    "86:22192",
+    "86:22199",
+    "86:22200",
+    "86:22211",
+    "86:22212",
+    "86:22220",
+    "86:22221",
+    "86:22233",
+    "86:22234",
+    "86:22241",
+    "86:22242",
+    "86:22253",
+    "86:22254",
+    "86:22262",
+    "86:22263",
+    "86:22275",
+    "86:22276",
+    "86:22283",
+    "86:22284",
+    "86:22295",
+    "86:22296",
+    "86:22304",
+    "86:22305",
+    "86:22317",
+    "86:22318",
+    "86:22325",
+    "86:22326",
+    "86:22337",
+    "86:22338",
+    "86:22346",
+    "86:22347",
+    "86:22359",
+    "86:22360",
+    "86:22367",
+    "86:22368",
+    "86:22379",
+    "86:22380",
+    "86:22388",
+    "86:22389",
+    "86:22401",
+    "86:22402",
+    "86:22409",
+    "86:22410",
+    "86:22421",
+    "86:22422",
+    "86:22430",
+    "86:22431",
+    "86:22443",
+    "86:22444",
+    "86:22451",
+    "86:22452",
+    "86:22463",
+    "86:22464",
+    "86:22472",
+    "86:22473"
+  ],
+  "mutatedPreExistingNodeIds": [],
+  "sets": [
+    {
+      "id": "86:17454",
+      "name": "TextField / input-field@1 offline fixture",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "variants": 128
+    },
+    {
+      "id": "86:18755",
+      "name": "TextField / input-field@1 offline fixture",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "variants": 128
+    }
+  ],
+  "probes": [
+    {
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "instanceId": "86:18758",
+      "reflow": {
+        "beforeWidth": 195,
+        "grownWidth": 259,
+        "beforeSurfaceWidth": 195,
+        "grownSurfaceWidth": 259,
+        "beforeContentWidth": 118,
+        "grownContentWidth": 118,
+        "passed": false
+      },
+      "variantSwitching": {
+        "denominator": 128,
+        "visited": 128,
+        "failures": [],
+        "passed": true
+      },
+      "textProperty": {
+        "passed": true
+      },
+      "tokenBinding": {
+        "bindingFacts": 4832,
+        "passed": true
+      },
+      "noFakeLayout": {
+        "layoutNodes": 640,
+        "layoutChildren": 1088,
+        "nonAbsoluteChildren": 1088,
+        "passed": true
+      },
+      "restoration": {
+        "propertiesRestored": true,
+        "passed": true,
+        "beforeSha256": "656ed30019f0394ac3482b8487825948432c52d8891cf621752f988a82a8a277",
+        "afterSha256": "656ed30019f0394ac3482b8487825948432c52d8891cf621752f988a82a8a277"
+      }
+    },
+    {
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "instanceId": "86:19982",
+      "reflow": {
+        "beforeWidth": 211,
+        "grownWidth": 275,
+        "beforeSurfaceWidth": 211,
+        "grownSurfaceWidth": 275,
+        "beforeContentWidth": 185,
+        "grownContentWidth": 249,
+        "passed": true
+      },
+      "variantSwitching": {
+        "denominator": 128,
+        "visited": 128,
+        "failures": [],
+        "passed": true
+      },
+      "textProperty": {
+        "passed": true
+      },
+      "tokenBinding": {
+        "bindingFacts": 4864,
+        "passed": true
+      },
+      "noFakeLayout": {
+        "layoutNodes": 512,
+        "layoutChildren": 960,
+        "nonAbsoluteChildren": 960,
+        "passed": true
+      },
+      "restoration": {
+        "propertiesRestored": true,
+        "passed": true,
+        "beforeSha256": "127123188b83907ff9b2c308f505e7f8546da065b82caeec2a130ed833bc640e",
+        "afterSha256": "127123188b83907ff9b2c308f505e7f8546da065b82caeec2a130ed833bc640e"
+      }
+    }
+  ],
+  "validation": [
+    {
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "setId": "86:17454",
+      "denominator": 128,
+      "visibleStructures": 128,
+      "rolePasses": 128,
+      "stateIndicators": 128,
+      "boundsPasses": 24,
+      "overlapPasses": 128,
+      "cellFailures": [
+        {
+          "componentId": "86:16118",
+          "name": "Size=medium, State=default, Content=placeholder, Required=false, Adornments=leading",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16138",
+          "name": "Size=medium, State=default, Content=placeholder, Required=false, Adornments=both",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16159",
+          "name": "Size=medium, State=default, Content=placeholder, Required=true, Adornments=leading",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16181",
+          "name": "Size=medium, State=default, Content=placeholder, Required=true, Adornments=both",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16194",
+          "name": "Size=medium, State=default, Content=value, Required=false, Adornments=none",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16202",
+          "name": "Size=medium, State=default, Content=value, Required=false, Adornments=leading",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16212",
+          "name": "Size=medium, State=default, Content=value, Required=false, Adornments=trailing",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16222",
+          "name": "Size=medium, State=default, Content=value, Required=false, Adornments=both",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16234",
+          "name": "Size=medium, State=default, Content=value, Required=true, Adornments=none",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16243",
+          "name": "Size=medium, State=default, Content=value, Required=true, Adornments=leading",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16254",
+          "name": "Size=medium, State=default, Content=value, Required=true, Adornments=trailing",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16265",
+          "name": "Size=medium, State=default, Content=value, Required=true, Adornments=both",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16278",
+          "name": "Size=medium, State=focus-visible, Content=placeholder, Required=false, Adornments=none",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16286",
+          "name": "Size=medium, State=focus-visible, Content=placeholder, Required=false, Adornments=leading",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16296",
+          "name": "Size=medium, State=focus-visible, Content=placeholder, Required=false, Adornments=trailing",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16306",
+          "name": "Size=medium, State=focus-visible, Content=placeholder, Required=false, Adornments=both",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16318",
+          "name": "Size=medium, State=focus-visible, Content=placeholder, Required=true, Adornments=none",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16327",
+          "name": "Size=medium, State=focus-visible, Content=placeholder, Required=true, Adornments=leading",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16338",
+          "name": "Size=medium, State=focus-visible, Content=placeholder, Required=true, Adornments=trailing",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16349",
+          "name": "Size=medium, State=focus-visible, Content=placeholder, Required=true, Adornments=both",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16362",
+          "name": "Size=medium, State=focus-visible, Content=value, Required=false, Adornments=none",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16370",
+          "name": "Size=medium, State=focus-visible, Content=value, Required=false, Adornments=leading",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16380",
+          "name": "Size=medium, State=focus-visible, Content=value, Required=false, Adornments=trailing",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16390",
+          "name": "Size=medium, State=focus-visible, Content=value, Required=false, Adornments=both",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16402",
+          "name": "Size=medium, State=focus-visible, Content=value, Required=true, Adornments=none",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16411",
+          "name": "Size=medium, State=focus-visible, Content=value, Required=true, Adornments=leading",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16422",
+          "name": "Size=medium, State=focus-visible, Content=value, Required=true, Adornments=trailing",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16433",
+          "name": "Size=medium, State=focus-visible, Content=value, Required=true, Adornments=both",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16454",
+          "name": "Size=medium, State=error, Content=placeholder, Required=false, Adornments=leading",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16474",
+          "name": "Size=medium, State=error, Content=placeholder, Required=false, Adornments=both",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16495",
+          "name": "Size=medium, State=error, Content=placeholder, Required=true, Adornments=leading",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16517",
+          "name": "Size=medium, State=error, Content=placeholder, Required=true, Adornments=both",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16530",
+          "name": "Size=medium, State=error, Content=value, Required=false, Adornments=none",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16538",
+          "name": "Size=medium, State=error, Content=value, Required=false, Adornments=leading",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16548",
+          "name": "Size=medium, State=error, Content=value, Required=false, Adornments=trailing",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16558",
+          "name": "Size=medium, State=error, Content=value, Required=false, Adornments=both",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16570",
+          "name": "Size=medium, State=error, Content=value, Required=true, Adornments=none",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16579",
+          "name": "Size=medium, State=error, Content=value, Required=true, Adornments=leading",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16590",
+          "name": "Size=medium, State=error, Content=value, Required=true, Adornments=trailing",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16601",
+          "name": "Size=medium, State=error, Content=value, Required=true, Adornments=both",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16622",
+          "name": "Size=medium, State=disabled, Content=placeholder, Required=false, Adornments=leading",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16642",
+          "name": "Size=medium, State=disabled, Content=placeholder, Required=false, Adornments=both",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16663",
+          "name": "Size=medium, State=disabled, Content=placeholder, Required=true, Adornments=leading",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16685",
+          "name": "Size=medium, State=disabled, Content=placeholder, Required=true, Adornments=both",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16698",
+          "name": "Size=medium, State=disabled, Content=value, Required=false, Adornments=none",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16706",
+          "name": "Size=medium, State=disabled, Content=value, Required=false, Adornments=leading",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16716",
+          "name": "Size=medium, State=disabled, Content=value, Required=false, Adornments=trailing",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16726",
+          "name": "Size=medium, State=disabled, Content=value, Required=false, Adornments=both",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16738",
+          "name": "Size=medium, State=disabled, Content=value, Required=true, Adornments=none",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16747",
+          "name": "Size=medium, State=disabled, Content=value, Required=true, Adornments=leading",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16758",
+          "name": "Size=medium, State=disabled, Content=value, Required=true, Adornments=trailing",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16769",
+          "name": "Size=medium, State=disabled, Content=value, Required=true, Adornments=both",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16790",
+          "name": "Size=small, State=default, Content=placeholder, Required=false, Adornments=leading",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16810",
+          "name": "Size=small, State=default, Content=placeholder, Required=false, Adornments=both",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16831",
+          "name": "Size=small, State=default, Content=placeholder, Required=true, Adornments=leading",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16853",
+          "name": "Size=small, State=default, Content=placeholder, Required=true, Adornments=both",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16866",
+          "name": "Size=small, State=default, Content=value, Required=false, Adornments=none",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16874",
+          "name": "Size=small, State=default, Content=value, Required=false, Adornments=leading",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16884",
+          "name": "Size=small, State=default, Content=value, Required=false, Adornments=trailing",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16894",
+          "name": "Size=small, State=default, Content=value, Required=false, Adornments=both",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16906",
+          "name": "Size=small, State=default, Content=value, Required=true, Adornments=none",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16915",
+          "name": "Size=small, State=default, Content=value, Required=true, Adornments=leading",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16926",
+          "name": "Size=small, State=default, Content=value, Required=true, Adornments=trailing",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16937",
+          "name": "Size=small, State=default, Content=value, Required=true, Adornments=both",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16950",
+          "name": "Size=small, State=focus-visible, Content=placeholder, Required=false, Adornments=none",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16958",
+          "name": "Size=small, State=focus-visible, Content=placeholder, Required=false, Adornments=leading",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16968",
+          "name": "Size=small, State=focus-visible, Content=placeholder, Required=false, Adornments=trailing",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16978",
+          "name": "Size=small, State=focus-visible, Content=placeholder, Required=false, Adornments=both",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16990",
+          "name": "Size=small, State=focus-visible, Content=placeholder, Required=true, Adornments=none",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:16999",
+          "name": "Size=small, State=focus-visible, Content=placeholder, Required=true, Adornments=leading",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:17010",
+          "name": "Size=small, State=focus-visible, Content=placeholder, Required=true, Adornments=trailing",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:17021",
+          "name": "Size=small, State=focus-visible, Content=placeholder, Required=true, Adornments=both",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:17034",
+          "name": "Size=small, State=focus-visible, Content=value, Required=false, Adornments=none",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:17042",
+          "name": "Size=small, State=focus-visible, Content=value, Required=false, Adornments=leading",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:17052",
+          "name": "Size=small, State=focus-visible, Content=value, Required=false, Adornments=trailing",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:17062",
+          "name": "Size=small, State=focus-visible, Content=value, Required=false, Adornments=both",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:17074",
+          "name": "Size=small, State=focus-visible, Content=value, Required=true, Adornments=none",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:17083",
+          "name": "Size=small, State=focus-visible, Content=value, Required=true, Adornments=leading",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:17094",
+          "name": "Size=small, State=focus-visible, Content=value, Required=true, Adornments=trailing",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:17105",
+          "name": "Size=small, State=focus-visible, Content=value, Required=true, Adornments=both",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:17126",
+          "name": "Size=small, State=error, Content=placeholder, Required=false, Adornments=leading",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:17146",
+          "name": "Size=small, State=error, Content=placeholder, Required=false, Adornments=both",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:17167",
+          "name": "Size=small, State=error, Content=placeholder, Required=true, Adornments=leading",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:17189",
+          "name": "Size=small, State=error, Content=placeholder, Required=true, Adornments=both",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:17202",
+          "name": "Size=small, State=error, Content=value, Required=false, Adornments=none",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:17210",
+          "name": "Size=small, State=error, Content=value, Required=false, Adornments=leading",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:17220",
+          "name": "Size=small, State=error, Content=value, Required=false, Adornments=trailing",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:17230",
+          "name": "Size=small, State=error, Content=value, Required=false, Adornments=both",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:17242",
+          "name": "Size=small, State=error, Content=value, Required=true, Adornments=none",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:17251",
+          "name": "Size=small, State=error, Content=value, Required=true, Adornments=leading",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:17262",
+          "name": "Size=small, State=error, Content=value, Required=true, Adornments=trailing",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:17273",
+          "name": "Size=small, State=error, Content=value, Required=true, Adornments=both",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:17294",
+          "name": "Size=small, State=disabled, Content=placeholder, Required=false, Adornments=leading",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:17314",
+          "name": "Size=small, State=disabled, Content=placeholder, Required=false, Adornments=both",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:17335",
+          "name": "Size=small, State=disabled, Content=placeholder, Required=true, Adornments=leading",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:17357",
+          "name": "Size=small, State=disabled, Content=placeholder, Required=true, Adornments=both",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:17370",
+          "name": "Size=small, State=disabled, Content=value, Required=false, Adornments=none",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:17378",
+          "name": "Size=small, State=disabled, Content=value, Required=false, Adornments=leading",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:17388",
+          "name": "Size=small, State=disabled, Content=value, Required=false, Adornments=trailing",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:17398",
+          "name": "Size=small, State=disabled, Content=value, Required=false, Adornments=both",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:17410",
+          "name": "Size=small, State=disabled, Content=value, Required=true, Adornments=none",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:17419",
+          "name": "Size=small, State=disabled, Content=value, Required=true, Adornments=leading",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:17430",
+          "name": "Size=small, State=disabled, Content=value, Required=true, Adornments=trailing",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        },
+        {
+          "componentId": "86:17441",
+          "name": "Size=small, State=disabled, Content=value, Required=true, Adornments=both",
+          "visible": true,
+          "expectedRoles": true,
+          "surfaceIndicator": true,
+          "bounds": false,
+          "noTextOverlap": true
+        }
+      ]
+    },
+    {
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "setId": "86:18755",
+      "denominator": 128,
+      "visibleStructures": 128,
+      "rolePasses": 128,
+      "stateIndicators": 128,
+      "boundsPasses": 128,
+      "overlapPasses": 128,
+      "cellFailures": []
+    }
+  ],
+  "readback": {
+    "sources": 2,
+    "comparedIrFacts": 19470,
+    "fixedPoints": [
+      {
+        "adapterIdentity": "material-text-field-reviewed-v1",
+        "recipeHash": "e4ac8bb8272dd115d596a44251cc06d4e4ea95a99c1a5732cea23adda0ecdc4c",
+        "computedRecipeHash": "e4ac8bb8272dd115d596a44251cc06d4e4ea95a99c1a5732cea23adda0ecdc4c",
+        "envelopeHash": "c11c4f447c840c615e82c3ffb57d083ef73ab761eef0987aaf6dae319693791f",
+        "computedEnvelopeHash": "c11c4f447c840c615e82c3ffb57d083ef73ab761eef0987aaf6dae319693791f",
+        "cycle1Sha256": "b308642d9cc007d28c4fa2adc0ec8374b87a5c41139c1d8f17dbdd25fad841da",
+        "cycle2Sha256": "b308642d9cc007d28c4fa2adc0ec8374b87a5c41139c1d8f17dbdd25fad841da",
+        "stable": true,
+        "recipeHashEquivalent": true,
+        "comparedFacts": [
+          "five variant axes and complete cells",
+          "vertical field and horizontal surface auto-layout",
+          "label, required, content, message, and adornment roles",
+          "text content and typography",
+          "fills, strokes, effects, radius, and state ink",
+          "fixed/fill/hug sizing policies",
+          "all primitive-IR variable bindings",
+          "source and envelope hashes"
+        ]
+      },
+      {
+        "adapterIdentity": "commerce-text-field-reviewed-v1",
+        "recipeHash": "f30a3672046fb6db48e434bd34574b47b783fcdbaf92ec58d65994e887d11117",
+        "computedRecipeHash": "f30a3672046fb6db48e434bd34574b47b783fcdbaf92ec58d65994e887d11117",
+        "envelopeHash": "d7307be77e31d058a21ab8d144483966b42d663c3b53ceddd8fc29b2caf07716",
+        "computedEnvelopeHash": "d7307be77e31d058a21ab8d144483966b42d663c3b53ceddd8fc29b2caf07716",
+        "cycle1Sha256": "261f77c1466cb5918d3e248579328c801652ebc71087e0750a23fcc9bd7b50b0",
+        "cycle2Sha256": "261f77c1466cb5918d3e248579328c801652ebc71087e0750a23fcc9bd7b50b0",
+        "stable": true,
+        "recipeHashEquivalent": true,
+        "comparedFacts": [
+          "five variant axes and complete cells",
+          "vertical field and horizontal surface auto-layout",
+          "label, required, content, message, and adornment roles",
+          "text content and typography",
+          "fills, strokes, effects, radius, and state ink",
+          "fixed/fill/hug sizing policies",
+          "all primitive-IR variable bindings",
+          "source and envelope hashes"
+        ]
+      }
+    ]
+  },
+  "after": {
+    "pageCount": 14,
+    "totalTopLevelNodes": 178,
+    "matchingPages": 1,
+    "matchingCollections": 2,
+    "totalLocalVariables": 11321
+  },
+  "objectiveCanvas": {
+    "path": "recipe/evidence/input-field-live-pivot-v1/objective-canvas-result.json",
+    "sha256": "ef71cbcba2ac4bddd1bde6290b5445817998e55a1bd6ca22413aba44d5459ec6",
+    "denominator": 128,
+    "geometry": {
+      "liveWins": 112,
+      "legacyWins": 16
+    },
+    "pixelInk": {
+      "liveWins": 85,
+      "legacyWins": 43
+    },
+    "aggregates": {
+      "meanGeometryError": 0.013402251632062032,
+      "meanPixelInkCompositeError": 0.3434575897619288,
+      "meanOverallWeightedError": 0.1784299206969954
+    }
+  },
+  "zeroSilentAccounting": {
+    "denominator": 14064,
+    "carried": 14064,
+    "codeOnly": 0,
+    "refused": 0,
+    "silent": 0
+  }
+}

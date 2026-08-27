@@ -1,0 +1,5639 @@
+{
+  "version": "input-field-paired-performance-key-v1",
+  "revealOnlyAfterReliabilityPasses": true,
+  "randomizedBatchHash": "653eaed5834d79511209932e38a4b3235f0a4f7609e76c62ffcdb6502d6d9c8b",
+  "rows": [
+    {
+      "taskId": "task-b98c5b64ebc0352697c466f6",
+      "primaryPairId": "pair-63a35f02ef3654f16098c156",
+      "presentation": "primary",
+      "cellKey": "mui/size=medium/state=default/content=value/required=false/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "default",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-4dbcbab31cebe11794713255",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-940f6946fddffd039f25af03",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-e6001145c2113f3cb95e1f6b",
+      "primaryPairId": "pair-6ef72ecece06001dce3c50e8",
+      "presentation": "primary",
+      "cellKey": "polaris/size=small/state=error/content=value/required=true/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "error",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-274e5b278e8f00172adbb09d",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-91e374471558799737f5107b",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-d4057b9c740abce7e7b9941b",
+      "primaryPairId": "pair-ac97636fd104ebf49312a038",
+      "presentation": "primary",
+      "cellKey": "polaris/size=medium/state=disabled/content=value/required=true/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "disabled",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-b137e847f2cd739566e1aef4",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-42eb5c3a4a19d6388b532c8f",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-0307834100b0ca5bff869750",
+      "primaryPairId": "pair-5834739e98626cc5a7a48d05",
+      "presentation": "primary",
+      "cellKey": "polaris/size=small/state=disabled/content=value/required=true/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "disabled",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-dd9db3115e1fb4d3c705b458",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-e136ac56e79487b89533e37b",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-7f50ea0613bb0f48b1387995",
+      "primaryPairId": "pair-e742dbdbf34fb3a7c2891193",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=medium/state=default/content=value/required=false/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "default",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-e63b4cff55b0cc4b5fdbbbc3",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-8f807c6b631d821813889830",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-ea2dc5b9a9453fc0e3a88620",
+      "primaryPairId": "pair-a941ce24a1043b0115453f94",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=medium/state=disabled/content=value/required=false/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "disabled",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-eefc6b0c05c2200709149b6d",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-024830a6a2eeb8632beb634c",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-5f36f9d58758dae87773058d",
+      "primaryPairId": "pair-638c84f8f8a526867c884e35",
+      "presentation": "primary",
+      "cellKey": "polaris/size=small/state=disabled/content=value/required=true/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "disabled",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-b611247c03d81d034578b7e7",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-75a31f57ea2e85a0b9219da0",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-18d32e641e1c43087996bf12",
+      "primaryPairId": "pair-a146de51e6ea261765825674",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=true/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "focus-visible",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-6adb81a86f0776f2b073c672",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-6badd9af663085436e92e5b8",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-d9f8df971bc088b3770ced98",
+      "primaryPairId": "pair-a7162c44d168265babc1592b",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=false/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "disabled",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-a5f0ba6f27af97eeded54e8a",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-193953c6b073042ff8d8b4ab",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-d12e14ec7c8cb715aefc64e6",
+      "primaryPairId": "pair-cad117778d87ad6bf343cfd7",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=medium/state=disabled/content=value/required=false/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "disabled",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-e62d8c9cd029c9fffaba9c89",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-f0babd9969e58208d3fb79b0",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-c1b16b3c968d7652753ec29b",
+      "primaryPairId": "pair-d52c197fb31622b81fac2f05",
+      "presentation": "primary",
+      "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=true/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "focus-visible",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-f3b0ee0c041d82c0b4846f60",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-764f1ec3a879eb3701cc3bff",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-57f4ed5f7a1e6ba388a81cb4",
+      "primaryPairId": "pair-a5d59bddef5bf8453b671381",
+      "presentation": "primary",
+      "cellKey": "mui/size=small/state=default/content=value/required=true/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "default",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-aa3d8ffa7900e10c40dfc32c",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-88ebc597f5276dcff33c2348",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-f9b6d3bc6182dabb30ee3e8e",
+      "primaryPairId": "pair-d83d94ef9a37df770037a40a",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=small/state=error/content=value/required=true/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "error",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-68a6394267851480d6e23a0e",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-d145729cd8ee452c329b81ff",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-2897ccf2fe8398256eb8796a",
+      "primaryPairId": "pair-53f684fc7dbbbe7e82bcbdea",
+      "presentation": "primary",
+      "cellKey": "mui/size=small/state=error/content=placeholder/required=false/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "error",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-0ebfe92a2a8032ebe8eb58dc",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-22af87c4bd9245a0a881c11d",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-7151f13e0dc0eace7af74f71",
+      "primaryPairId": "pair-dac7ac97e08281eba48dff33",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=medium/state=disabled/content=value/required=true/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "disabled",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-2d8485c2d195a42ec25c8ae2",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-58eb1828cd52f005d59b98c5",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-e913f35afc65ef0f07da1011",
+      "primaryPairId": "pair-83ac0c1e67e183256234abd8",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=small/state=focus-visible/content=value/required=false/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "focus-visible",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-816b6d0ee0e2e2ae1e16601b",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-61888b3ad6a483f352d7cff6",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-e21b628dd1390934d15df3d2",
+      "primaryPairId": "pair-382f067c6aa5da0062c9697a",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=medium/state=default/content=placeholder/required=false/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "default",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-707962f47fe6130bbf1af888",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-55fbe339718e7cce2263501a",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-fadc8989b36aa5189c6d474b",
+      "primaryPairId": "pair-83ac0c1e67e183256234abd8",
+      "presentation": "primary",
+      "cellKey": "mui/size=small/state=focus-visible/content=value/required=false/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "focus-visible",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-b23547007a78bfba079f79a1",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-5ffa411f1e3b90b376a315ab",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-39c00661587fa5bc9f6168e9",
+      "primaryPairId": "pair-3c2c5c1290fcdb2032c68115",
+      "presentation": "primary",
+      "cellKey": "polaris/size=small/state=error/content=placeholder/required=true/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "error",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-c7281acb9330fa04b8cf0663",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-4e45478fd5d3b3c65b7ebed9",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-989b418b4f02e15ee777a3ff",
+      "primaryPairId": "pair-cad533698d73dec9f7f6759a",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=small/state=error/content=value/required=false/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "error",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-31d1ef45859c6ca8f9a613cb",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-3ff3afef8c0fb0f144cf22be",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-a62707670bde5a1c5737ede0",
+      "primaryPairId": "pair-47ae17714717c1f9e45bb853",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=small/state=focus-visible/content=value/required=false/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "focus-visible",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-149b530c10ec684cfdbd3416",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-9884c42eaa71447b44faf7f5",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-9450b782d69e7c6582682582",
+      "primaryPairId": "pair-4f40eaa447a1f5030dc70a97",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=small/state=disabled/content=placeholder/required=false/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "disabled",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-b970fac4f8fe6b41dab9690c",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-01bec9e326eab84b8e6c2ae5",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-14669c083f781bcd4a28bed4",
+      "primaryPairId": "pair-78e079f011b881ef15cf6d5f",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=small/state=disabled/content=placeholder/required=false/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "disabled",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-317584e728553f28b8da91da",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-71fc087a2837ff7211441899",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-c01de11d596286ba751c4609",
+      "primaryPairId": "pair-70c85792d67002e5199e29b4",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=true/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "disabled",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-a134c3a3584a14b1a9ced91d",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-a5c9b6f6143bd8325de5bc67",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-a0f7a1cbfb81a7a4b0bba7c4",
+      "primaryPairId": "pair-3d065c4cb57c05f46c61fa6f",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=medium/state=disabled/content=value/required=true/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "disabled",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-cc3344dc51588e343b000a5d",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-55d2b743d3da9467deb0767c",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-5e79273ddd80ccf8b79d0e25",
+      "primaryPairId": "pair-6b6d205f1e56ba91c63015a7",
+      "presentation": "primary",
+      "cellKey": "polaris/size=small/state=error/content=placeholder/required=false/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "error",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-fe6518c742639125bafafb3f",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-66444a124d83aae0f54c3481",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-3bc6527410a4d4656d7d045e",
+      "primaryPairId": "pair-66d8aacd3aafd94edad3ad09",
+      "presentation": "primary",
+      "cellKey": "mui/size=medium/state=default/content=placeholder/required=true/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "default",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-4d5bfa202f0503acea16af36",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-f23d9a7410ccb0de8e95d015",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-56293fef403e13cf64cf7e5b",
+      "primaryPairId": "pair-12d41a76cc624a67de9e1212",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=true/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "disabled",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-43aa25045fec89956405ccce",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-2ccd796128056e91b1054286",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-c633f489c0a0d435b493505e",
+      "primaryPairId": "pair-d0f848b2c4a72d7f6d64369e",
+      "presentation": "primary",
+      "cellKey": "polaris/size=medium/state=error/content=value/required=false/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "error",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-9024c67ae989b05c446c524f",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-2e91326a5c1aa9dc8ec1c28a",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-dca778b397f52a7c9362bf4d",
+      "primaryPairId": "pair-f8610d2eb661357100895aec",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=small/state=disabled/content=value/required=false/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "disabled",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-2d0924627ae1d27015c822f4",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-6d120c8170e5d83f24498397",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-3849ecda803e2d757d8fa509",
+      "primaryPairId": "pair-f083759fb5ba287b33ca2e03",
+      "presentation": "primary",
+      "cellKey": "polaris/size=medium/state=error/content=placeholder/required=false/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "error",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-a16d99be06ebb33560dcff74",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-7a9b814882e55911e729b0c1",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-c9bf8aafd647e2b713488228",
+      "primaryPairId": "pair-65b96547735b3bc2ae4747b9",
+      "presentation": "primary",
+      "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=false/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "disabled",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-839784311b9b39a84abb7f4d",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-1beb1a479ea341d5838b71c8",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-ee3da463a434ce403fbecae6",
+      "primaryPairId": "pair-b3951e3dd47ae8eff0f2a3f8",
+      "presentation": "primary",
+      "cellKey": "mui/size=small/state=default/content=value/required=false/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "default",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-f36d46dec5c5ca9c3883cc43",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-46e63a0c12d84c279196068b",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-f9ebb02ad4393f52b6e5ab70",
+      "primaryPairId": "pair-fe29e78c8935aa0d66e37650",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=medium/state=default/content=placeholder/required=false/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "default",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-11a9e4f25800eba5763e7820",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-5587431c94f2c313ed4658f4",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-986af55d7bb4ec180a4c65e2",
+      "primaryPairId": "pair-ae5adcf172e526198e5682ed",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=true/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "focus-visible",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-7811b7fa683c3f75cc11786d",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-6bd5cb1fe3b96262fe12ef38",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-43dbf92140d7e61424101358",
+      "primaryPairId": "pair-a59db6ddda1db153b06da0c8",
+      "presentation": "primary",
+      "cellKey": "mui/size=medium/state=default/content=placeholder/required=false/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "default",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-91e6c98030b0ee440ab659df",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-47be7d4e724bc4836adc4c99",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-9d55be809182b4b03c3e924a",
+      "primaryPairId": "pair-638c84f8f8a526867c884e35",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=small/state=disabled/content=value/required=true/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "disabled",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-3b8680e05be65d7e3de30240",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-b38490965dba90185dc0d69c",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-1d6a43515bfc3e9d0e0910b8",
+      "primaryPairId": "pair-e1b74d0faa57b4c8cd070b57",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=true/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "focus-visible",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-aa08aa77901f446ab3eab909",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-9c6701ce64b921b182dcb19c",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-29fcb3668fb6af33b01125e8",
+      "primaryPairId": "pair-59874873339a1d30abb8424e",
+      "presentation": "primary",
+      "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=true/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "focus-visible",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-b3b55dc8a20abd42d3e292d6",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-85593e2c871933e37b02d7dc",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-aa8207c8c6518a1832e20134",
+      "primaryPairId": "pair-accb59f778cdc5ccbe4cb6ed",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=medium/state=error/content=value/required=false/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "error",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-3d04c7b84d1939c8212110bf",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-7b2e0386c422918e955a53db",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-e7cc36132495b93cc189512a",
+      "primaryPairId": "pair-08d86def2dab7a9f5f3b670b",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=small/state=focus-visible/content=value/required=true/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "focus-visible",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-e0f099e97193314a24ac1997",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-32789463d2a14cbf1df39162",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-50385bc55bf5be14e6504dff",
+      "primaryPairId": "pair-08d86def2dab7a9f5f3b670b",
+      "presentation": "primary",
+      "cellKey": "mui/size=small/state=focus-visible/content=value/required=true/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "focus-visible",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-02722e2079e4701652fa7db9",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-642a95f24e2f7c8db49e0dbe",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-4cb4e77f8429f407930d7584",
+      "primaryPairId": "pair-12d41a76cc624a67de9e1212",
+      "presentation": "primary",
+      "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=true/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "disabled",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-265f142e11a61498d506a043",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-ae61f77172bd0f86f1292032",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-4b61320b4fc5637adafd4226",
+      "primaryPairId": "pair-a35b00e503a3e3ac1579d1e0",
+      "presentation": "primary",
+      "cellKey": "polaris/size=small/state=error/content=value/required=false/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "error",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-7723cf337742e166570c14a8",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-39deaea4a96be3cd55d2e7e3",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-0afbc3771a62445ae0793044",
+      "primaryPairId": "pair-7b348c7e531dd744583ce174",
+      "presentation": "primary",
+      "cellKey": "mui/size=small/state=disabled/content=placeholder/required=true/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "disabled",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-cfcf2b26c74e258191829cf8",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-6057b8bf11d4ac6e3abc2d2d",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-d1990859076c99428e80ce35",
+      "primaryPairId": "pair-a146de51e6ea261765825674",
+      "presentation": "primary",
+      "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=true/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "focus-visible",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-29ac042d1d59a1f30679932e",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-e7cefacdd87afda7680fc3d9",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-5db5138f0257db289a8242dc",
+      "primaryPairId": "pair-f688110f9abe6f0ff201d4cd",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=medium/state=error/content=value/required=true/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "error",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-c5220415022d2fff559145ad",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-a710cc836328860401782ab3",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-975e4a115bd942fb9a33d383",
+      "primaryPairId": "pair-79884a99db00c3982d34a6ad",
+      "presentation": "primary",
+      "cellKey": "mui/size=small/state=disabled/content=value/required=false/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "disabled",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-fe279e5ff66cf836e864aec1",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-7a6ad566cdaea7891de3a77a",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-7d8655350232f999581def0a",
+      "primaryPairId": "pair-66d8aacd3aafd94edad3ad09",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=medium/state=default/content=placeholder/required=true/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "default",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-f285c7529b33137b317a75f4",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-2ec08428c6625e33cf9610db",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-2bdb5278b7da4eeef4a3186c",
+      "primaryPairId": "pair-968c53c4333b73dde4b98a1f",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=small/state=disabled/content=value/required=true/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "disabled",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-788b37706d657fa7cacc5da5",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-3215bb3157aacc793c911d32",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-c764b46502ef9bf6aa85ff0a",
+      "primaryPairId": "pair-1a273c4689b0875af0706fe6",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=medium/state=default/content=placeholder/required=true/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "default",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-fdc0f33080c8a2b5035a7ea2",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-af293c2aa816c4bbd67d7826",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-ebe22962fdca16f6c985fedf",
+      "primaryPairId": "pair-78ed7c3452c9b7da2cd993c1",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=medium/state=default/content=value/required=false/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "default",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-5f0275b7305826003372d19a",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-4439d12ef99cbdd3d4ce42af",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-f846268b04c38cf654b033b6",
+      "primaryPairId": "pair-cac3cafcf53ac57052ed62c2",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=small/state=error/content=value/required=false/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "error",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-3d09041052bc178a7e805700",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-2493ae374464ef42a254c455",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-d5f4937b74540a33fd1f46f0",
+      "primaryPairId": "pair-7b348c7e531dd744583ce174",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=small/state=disabled/content=placeholder/required=true/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "disabled",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-3a711be127db8cab63e1b2c9",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-5314053c9b0b500a2a399340",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-d632bec2d0389fade6e69fde",
+      "primaryPairId": "pair-26905c7336da179788d84193",
+      "presentation": "primary",
+      "cellKey": "polaris/size=medium/state=default/content=placeholder/required=true/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "default",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-4bfa2df166e75ddb0b1a214d",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-4eeb2e427ea436e30c91047d",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-c0fd9790f0a84bfc1913be9a",
+      "primaryPairId": "pair-cac3cafcf53ac57052ed62c2",
+      "presentation": "primary",
+      "cellKey": "mui/size=small/state=error/content=value/required=false/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "error",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-f722a3f36306087346f4dce8",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-789a04b86d968173019af3fe",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-5807715776a9bd32ce8c2bca",
+      "primaryPairId": "pair-0d66501ca8cd284285f4313e",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=medium/state=disabled/content=value/required=true/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "disabled",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-9c66d04f82eb07b7fe093750",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-2c3eab1803ab41d27bfa7194",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-50d5ec578eccb255b68b53e8",
+      "primaryPairId": "pair-a38e2f5cc11c933a64166bff",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=true/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "focus-visible",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-57e8a8db407fc102dd60008e",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-cdd5919be9ce85cf4d6e988a",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-7057c179267377e4f3512938",
+      "primaryPairId": "pair-81074daaf4cbbef71c2e9d6f",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=medium/state=default/content=value/required=true/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "default",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-76794749088b9c00c99fa6a8",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-15f80b45b7f3be117bb2fb81",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-aba2f5a9057d84cbd4b295ca",
+      "primaryPairId": "pair-d9af4c698a7b6d9d3ae3f170",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=small/state=default/content=value/required=true/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "default",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-eed3538b1f3b33887cbee606",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-bdc3fe934dc132929563b09e",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-14cd7110f595b8bfa6a1a0c7",
+      "primaryPairId": "pair-40390b1515b43786034660f4",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=false/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "focus-visible",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-204cc57cd94ebd27ef533cd5",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-6ef2680f3027325ef2b723bd",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-6686b7f4f6b9687c492dbfbe",
+      "primaryPairId": "pair-4c5ec07a2a58501a0acd38d8",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=medium/state=default/content=placeholder/required=true/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "default",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-92d2e116d547cc16d3362c3f",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-0bde2909d095d62c6b5782d8",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-477957312e64d7c294d65dfb",
+      "primaryPairId": "pair-f071208cf2cebecb9a456ffa",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=small/state=error/content=placeholder/required=false/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "error",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-399309635bc419dc686bdba2",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-8ea43bc2213a113ec4d7e414",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-a200eb97c3526399d5dc8cef",
+      "primaryPairId": "pair-14a9940fa9fc1ef5d0cdc883",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=small/state=disabled/content=placeholder/required=true/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "disabled",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-d519f45b06611df4257151f6",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-6baca2954b2d4bb8a70485e9",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-22d16d56e0e6c00f2d874c63",
+      "primaryPairId": "pair-70c85792d67002e5199e29b4",
+      "presentation": "primary",
+      "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=true/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "disabled",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-f1fd1635cd0a078690f4b069",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-50b6fdd360f593821e14e7bf",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-55fbeed22e65b22c7784e652",
+      "primaryPairId": "pair-5a2b70aad4738b2197fa5517",
+      "presentation": "primary",
+      "cellKey": "polaris/size=small/state=disabled/content=placeholder/required=true/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "disabled",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-6e81fbd394de38cb0ce5b3d3",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-bfde844a242353fda94f7bc5",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-c80dcdad1a586d92c0da4306",
+      "primaryPairId": "pair-384aa7898e3df7aa4c606899",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=medium/state=error/content=placeholder/required=true/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "error",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-3f2067a92619f2d4cbe5c9ec",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-2f84a45b5052c391781e19f2",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-42a57a62bf2d0bf9eac17351",
+      "primaryPairId": "pair-0c36496a6b40b7a1ad1d5fe0",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=medium/state=error/content=value/required=false/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "error",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-c975359301ae1c7b433ad247",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-130a7bcadca12f131c5209c2",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-9441187c0893f681ca4e87e1",
+      "primaryPairId": "pair-2920377c585db7123df34f4c",
+      "presentation": "primary",
+      "cellKey": "mui/size=small/state=disabled/content=value/required=false/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "disabled",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-e518c090adc7de2c0a143da9",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-aa22807ac99a95c0cdea60a7",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-4a8ea29e930acbc4c8c59885",
+      "primaryPairId": "pair-60e9648770b970c69fe95ff9",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=medium/state=error/content=placeholder/required=true/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "error",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-aba4dffa13326d5e1017ad96",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-4c9a0ef0f6c21f801616eca4",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-942ea5070656e070a021a6c3",
+      "primaryPairId": "pair-f8894080c2cabb2441044811",
+      "presentation": "primary",
+      "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=false/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "focus-visible",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-1750282461c040d9043d308b",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-d44fc595fb8c40e339f97162",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-472b7efaeef822a97e4b0af6",
+      "primaryPairId": "pair-81074daaf4cbbef71c2e9d6f",
+      "presentation": "primary",
+      "cellKey": "polaris/size=medium/state=default/content=value/required=true/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "default",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-60f3ed2bb65e94a5a5b32026",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-655be03522dd513526d04ecc",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-2b6a16fcf1f5ee0e70d991c6",
+      "primaryPairId": "pair-51a96db103f0c375d0eedeff",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=medium/state=disabled/content=placeholder/required=false/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "disabled",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-5ec7d3b83ebdac17c1ce0b41",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-99b08a7cac5eee0b7450ff32",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-2aeb100199c4f669eccfae6c",
+      "primaryPairId": "pair-accb59f778cdc5ccbe4cb6ed",
+      "presentation": "primary",
+      "cellKey": "mui/size=medium/state=error/content=value/required=false/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "error",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-496601c298e598515885506b",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-872e149382bfec788a1f6f0e",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-caf5cc8fe74282ee6c4be89f",
+      "primaryPairId": "pair-0071ae8c6912955b8e3efc97",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=medium/state=disabled/content=placeholder/required=false/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "disabled",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-fb39dd13fc6af87d578182a1",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-cf44e6af594db464de5e3ce5",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-e0ed4893a79841ac96100cab",
+      "primaryPairId": "pair-54f0d4543bbc3e109fc3947e",
+      "presentation": "primary",
+      "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=false/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "focus-visible",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-1517e47c2705c80f93997b90",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-a695b16cac0c92dbf170af81",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-ef9d2bd297e018df86f43832",
+      "primaryPairId": "pair-40390b1515b43786034660f4",
+      "presentation": "primary",
+      "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=false/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "focus-visible",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-c80328003eec08df5c4a469f",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-dd690a96c6d59d98627f54c8",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-ceb5b5f1a4430e3e74ec998f",
+      "primaryPairId": "pair-ac97636fd104ebf49312a038",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=medium/state=disabled/content=value/required=true/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "disabled",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-18c22f97abf97b6dfd90f3c6",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-cabdd3e8ba539299c1eba3ec",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-f1ed7acbe495b25a54c0dfae",
+      "primaryPairId": "pair-6e92570252ed92f058576695",
+      "presentation": "primary",
+      "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=true/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "focus-visible",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-0f61e610c15463721530ed7a",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-b2478ee0f0aafa9441723dbc",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-be43e30ac10cdbe582d232c1",
+      "primaryPairId": "pair-5834739e98626cc5a7a48d05",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=small/state=disabled/content=value/required=true/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "disabled",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-1d92099f28cd7fd37dcfdbda",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-a150c655b3986ec88417fe6a",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-4c34c09534c1a7e9b26e4896",
+      "primaryPairId": "pair-e742dbdbf34fb3a7c2891193",
+      "presentation": "primary",
+      "cellKey": "polaris/size=medium/state=default/content=value/required=false/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "default",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-ef3dde69e6a6d7adfe2d0c30",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-49386e542d8a69d3918769d7",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-216ff2716817f71c52f4b11f",
+      "primaryPairId": "pair-66a4b8bb592619d7a70c49ae",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=true/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "focus-visible",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-ae4de1cfafe5e1d66014b514",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-33251d0bc534c1b32dcc8619",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-bdffa5c5f5dba35617a24cbc",
+      "primaryPairId": "pair-79884a99db00c3982d34a6ad",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=small/state=disabled/content=value/required=false/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "disabled",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-426d788c3263075df6325f63",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-28261ce7aa068a2e46e9ebe8",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-d0a683491cb780ff7163224c",
+      "primaryPairId": "pair-6c0709b0ae315d6d8e171d4d",
+      "presentation": "primary",
+      "cellKey": "mui/size=small/state=disabled/content=placeholder/required=false/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "disabled",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-4fba5288daf0759f589b8536",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-873635ad6e0f4737ff3c23eb",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-bba8a2e1a20a20426e46d9f6",
+      "primaryPairId": "pair-b85e9d6b875306d0099b0dc7",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=small/state=error/content=placeholder/required=true/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "error",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-3f8b469ee5a1e5a158170048",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-edcd0761972462d088eb85df",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-247a539e5ce6e9876d097805",
+      "primaryPairId": "pair-31d490116fbdb71dea0cb565",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=medium/state=disabled/content=placeholder/required=true/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "disabled",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-99b595180272f4e1988517b9",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-9b733e4f26d3af559447f7b7",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-b61b79e20994f24e582b874f",
+      "primaryPairId": "pair-95bd36d4911ffab26cf329bb",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=medium/state=error/content=value/required=true/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "error",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-35182db2482acb2c3f659ea8",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-5ec357eb1ee7694a5d4bfc7a",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-7bce1d036c0b4c56ca287b38",
+      "primaryPairId": "pair-65b96547735b3bc2ae4747b9",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=false/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "disabled",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-5d3dec6176965c6dbfccc1e0",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-2a037527d6994c5701115093",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-0f8d1d316eaa456accbacf0f",
+      "primaryPairId": "pair-4d7600a7f400ac11c992743f",
+      "presentation": "primary",
+      "cellKey": "polaris/size=small/state=disabled/content=value/required=false/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "disabled",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-b36f3265aa6accdf0d13cf2b",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-6a3e1fbea9fcd19eb96928e0",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-0ca107fb34458668cfcf3485",
+      "primaryPairId": "pair-929988cf02dc4a0796bb6abc",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=small/state=focus-visible/content=value/required=false/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "focus-visible",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-35696cf65564b56b056cccef",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-8197cfef2c083b11c7547964",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-9a351dc122335403f3474c41",
+      "primaryPairId": "pair-a38e2f5cc11c933a64166bff",
+      "presentation": "primary",
+      "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=true/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "focus-visible",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-5ab39612fbaac787bcde6478",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-8e40f0929703467af599d7fe",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-a4e051b321ea5a6ba6b361d7",
+      "primaryPairId": "pair-583ff321036fa9977de75935",
+      "presentation": "primary",
+      "cellKey": "polaris/size=small/state=default/content=placeholder/required=false/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "default",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-b445dbc4dc836483e92f97a7",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-8977a305fff5a6a51bd8e9ac",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-71297ee88e17e39fd611d23c",
+      "primaryPairId": "pair-59d74b284285d751c018b33c",
+      "presentation": "primary",
+      "cellKey": "polaris/size=medium/state=error/content=placeholder/required=false/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "error",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-faa3ad316d3499d0a950370b",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-1ea9d1d346ef8658f999e5a8",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-d4ffeeeb49dc9f394a15f4e0",
+      "primaryPairId": "pair-0071ae8c6912955b8e3efc97",
+      "presentation": "primary",
+      "cellKey": "polaris/size=medium/state=disabled/content=placeholder/required=false/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "disabled",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-25287bce21aba313d4722ec1",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-e735c8b55aea46fb9a6d4cfb",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-41311a1270ed52a4e7311237",
+      "primaryPairId": "pair-65cd3587c1a86a91a03da1cf",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=medium/state=default/content=value/required=true/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "default",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-94bda54cc1f830e1f2ab7b99",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-69c67dfd127e23eccd6f6de8",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-8a4c953f6dea707f27a28ab6",
+      "primaryPairId": "pair-cad117778d87ad6bf343cfd7",
+      "presentation": "primary",
+      "cellKey": "polaris/size=medium/state=disabled/content=value/required=false/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "disabled",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-1ad669c805f0085bc782e2a6",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-6e163779bb99658e76a71409",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-29c16709e5fc74d40addc3a1",
+      "primaryPairId": "pair-2096a87d6c9b72d70369c28b",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=medium/state=disabled/content=value/required=false/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "disabled",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-072d4e58544fb2a7a83535f5",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-e285eded312d720676a5ddfb",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-5f7413356984e28479e861ca",
+      "primaryPairId": "pair-da08dcf6efbc5d2acf01ca36",
+      "presentation": "primary",
+      "cellKey": "mui/size=small/state=focus-visible/content=value/required=true/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "focus-visible",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-c72407a02b60f020aa0e5ef3",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-0a8b6f5da7af45ad85f3e201",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-45c20f0a12ca454d09e8158b",
+      "primaryPairId": "pair-36fca59f18d8c62dd7f54543",
+      "presentation": "primary",
+      "cellKey": "mui/size=small/state=error/content=placeholder/required=true/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "error",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-0fdf61e5b15e462bc7b4cbbc",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-0192912ca6a98cfab5d4fd13",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-f0111883c33d77330257be90",
+      "primaryPairId": "pair-f2847b2cfc4dbbb9d781cd61",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=false/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "focus-visible",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-08046b8fc1f62f2433a0c5ab",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-87b326a8eebec9825ec02eeb",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-45c319cbb364e7100dbb9e03",
+      "primaryPairId": "pair-2dc65644ca8356c6625b5544",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=medium/state=default/content=value/required=true/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "default",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-08ad3cc17bc9c1070cb238b6",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-638e91b11ba0626b37bc2c85",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-dcdf270020929db4b1e2bd0e",
+      "primaryPairId": "pair-ad68c0c97d8f94df20613cfc",
+      "presentation": "primary",
+      "cellKey": "mui/size=medium/state=focus-visible/content=value/required=true/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "focus-visible",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-5fb31a9254ed96de6d6e04b7",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-e74dac73c80da40378cc40dc",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-bc261bd8cfdf220766add59c",
+      "primaryPairId": "pair-f2847b2cfc4dbbb9d781cd61",
+      "presentation": "primary",
+      "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=false/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "focus-visible",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-fdeeda4547a19e9144d22feb",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-d1ad35b143ea51be2cda57d0",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-4f5577313c9269d83da8c345",
+      "primaryPairId": "pair-3e9feb84013ce527a5655dbf",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=false/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "focus-visible",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-c89ee4629121cd535a97eef0",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-df1521dbc28bd5f7092c2ec6",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-a58a9f19f8c3dc8396019e06",
+      "primaryPairId": "pair-1a273c4689b0875af0706fe6",
+      "presentation": "primary",
+      "cellKey": "polaris/size=medium/state=default/content=placeholder/required=true/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "default",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-ae7c57e185a4eeb354a16751",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-5c88b729831b3fc41e389eee",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-ab4fbb861b60f32528dd359f",
+      "primaryPairId": "pair-5bf4e50f6664a423df6c3d25",
+      "presentation": "primary",
+      "cellKey": "polaris/size=small/state=default/content=value/required=true/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "default",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-eeaef1bcfc0a25141080260d",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-2532ff371d01168375643eb1",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-0c7344abc341d6f8627ea2bc",
+      "primaryPairId": "pair-2ff4cc76eef451021f9c6627",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=medium/state=default/content=value/required=false/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "default",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-3cb3bc8da3c4990f60f6f675",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-3bb5f1d345e03c31a9474982",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-1b0a09b864add2dfaf150a38",
+      "primaryPairId": "pair-8aa081bf6bd80f98c6a38b20",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=small/state=default/content=value/required=false/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "default",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-3afd0cb3c2cc16ce6ea0ac91",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-e5a3efc25ae73b728ac348b1",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-358c12465a6e08a114d795ce",
+      "primaryPairId": "pair-a59db6ddda1db153b06da0c8",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=medium/state=default/content=placeholder/required=false/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "default",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-8bee36372dbf20250577f4f0",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-613082f328fb551a5d344a7b",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-5f0d527b22a257f82ea8e6df",
+      "primaryPairId": "pair-1bada8370edc347e70348bdc",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=medium/state=error/content=placeholder/required=true/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "error",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-ba6fb6151b0b8d7df11bea28",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-67e81425d40610376f2bd517",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-34581b9ff573602b2db75c90",
+      "primaryPairId": "pair-2dc65644ca8356c6625b5544",
+      "presentation": "primary",
+      "cellKey": "mui/size=medium/state=default/content=value/required=true/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "default",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-b95fe2bd7bfb7517c4b56f64",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-b75637a28c44b001415d3618",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-1f73b850b9825c3c371fd2af",
+      "primaryPairId": "pair-84bc084ef612b700d4df19b5",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=medium/state=error/content=placeholder/required=true/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "error",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-ab19a036c21ec64c1decf55c",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-e0a108313c77056bc27622a7",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-209a160399b40df0f30a78cf",
+      "primaryPairId": "pair-3e9feb84013ce527a5655dbf",
+      "presentation": "primary",
+      "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=false/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "focus-visible",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-3088be634b4485953b9e9266",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-ae9401ad38f2ab09d8ff0ff8",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-1228cf15b26f4c176c15399f",
+      "primaryPairId": "pair-5a2b70aad4738b2197fa5517",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=small/state=disabled/content=placeholder/required=true/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "disabled",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-acc7c63df94c380fae87cedd",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-363d6a1929c827f2e7a9cf4a",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-84c6fa485df5021bbcbc61a3",
+      "primaryPairId": "pair-b3951e3dd47ae8eff0f2a3f8",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=small/state=default/content=value/required=false/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "default",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-57061032ee2af02fcac4c847",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-cfb92815cbb1611b64a2178e",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-fd9f95059fab54735364ee9f",
+      "primaryPairId": "pair-a7162c44d168265babc1592b",
+      "presentation": "primary",
+      "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=false/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "disabled",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-747ee7bf7dd2e280ce39004b",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-e00c30383adea53f2f55a294",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-892fa904d5faaec1b87bf441",
+      "primaryPairId": "pair-5459a98791c14d1e1d70529f",
+      "presentation": "primary",
+      "cellKey": "polaris/size=small/state=focus-visible/content=value/required=true/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "focus-visible",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-d7c27ae32feb485148ff87fc",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-9657575dcc1bb20ca9856f53",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-8287e357f63631fad394b243",
+      "primaryPairId": "pair-4f40eaa447a1f5030dc70a97",
+      "presentation": "primary",
+      "cellKey": "mui/size=small/state=disabled/content=placeholder/required=false/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "disabled",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-433a3f72a655e0c8df7e9b59",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-fc448530fb89c563216b4d86",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-c247c7fe0ad915e0cd4e49a0",
+      "primaryPairId": "pair-f8894080c2cabb2441044811",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=false/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "focus-visible",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-fed93b583fb9a90044d886c5",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-cf26ed924d6adae2033dd5e7",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-9a2c2f15b96b617693a538f0",
+      "primaryPairId": "pair-1bd8ccb4f4a7feb03d34fbed",
+      "presentation": "primary",
+      "cellKey": "polaris/size=medium/state=disabled/content=placeholder/required=true/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "disabled",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-bdb51f3b9939fbf45d5ac1b9",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-3ab93b32fcb376c075882b2c",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-6108c75e42b4dde393ea4a59",
+      "primaryPairId": "pair-00a401f7714d3c5cdf2e6ea7",
+      "presentation": "primary",
+      "cellKey": "mui/size=medium/state=default/content=placeholder/required=false/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "default",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-4464a48c380ee4505e98d164",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-0825921391c194cce20b93da",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-df8b5571b0e75f94e4630144",
+      "primaryPairId": "pair-ed24b11f8ff18130e0e80fbf",
+      "presentation": "primary",
+      "cellKey": "mui/size=medium/state=focus-visible/content=value/required=true/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "focus-visible",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-ac1539463264ca0d7b0f9c6d",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-74d7d8bb7059cc22589cd69e",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-dc2be06b1450c75ae71281ff",
+      "primaryPairId": "pair-6c410b5a608b217636f81278",
+      "presentation": "primary",
+      "cellKey": "polaris/size=small/state=disabled/content=placeholder/required=false/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "disabled",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-8c4217615da50606be54a198",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-a7df823f3f730e6892e9d19f",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-9cc43fe1aa819252f732b474",
+      "primaryPairId": "pair-84bc084ef612b700d4df19b5",
+      "presentation": "primary",
+      "cellKey": "polaris/size=medium/state=error/content=placeholder/required=true/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "error",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-80e629d0416c77b450495883",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-9fcc10f492e64c7ac4eb412c",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-0412ed08c35732f9e9042c78",
+      "primaryPairId": "pair-65cd3587c1a86a91a03da1cf",
+      "presentation": "primary",
+      "cellKey": "polaris/size=medium/state=default/content=value/required=true/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "default",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-b529d1f1e44dc341c8164b1a",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-fb783ef513c68e9f7f542d6c",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-5afb1c7886b658bf3bf277cd",
+      "primaryPairId": "pair-0072408d24ef008f19c69aa2",
+      "presentation": "primary",
+      "cellKey": "polaris/size=small/state=disabled/content=placeholder/required=true/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "disabled",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-08678b936db26ec17ec4292f",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-057f31803fb523fa7938723b",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-253a46cf0fbba3c1242cb603",
+      "primaryPairId": "pair-6c410b5a608b217636f81278",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=small/state=disabled/content=placeholder/required=false/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "disabled",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-783d136139d0a5d42ea04fdf",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-03e201a956219847b251dbc1",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-28d27844f65a3c29d308f7ad",
+      "primaryPairId": "pair-583ff321036fa9977de75935",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=small/state=default/content=placeholder/required=false/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "default",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-69bb4a0da519c2ebbe2cfa22",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-33a01743f0522af67f81fa49",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-34a4f59ed7e023eebc49d341",
+      "primaryPairId": "pair-aae291cffff7e8cf792610a3",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=medium/state=error/content=value/required=true/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "error",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-1b07814433ce0ab5c819eaf9",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-137e50f39cf7c67055088322",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-e13eb5bc9aedec96d9fd8733",
+      "primaryPairId": "pair-f8df0b83612b394c2afbf95a",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=small/state=default/content=placeholder/required=true/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "default",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-a243c2843c2d51120eae7bc5",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-4a0a1270965f93738397d86d",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-1b1491b7866dd8710f2a9283",
+      "primaryPairId": "pair-a35b00e503a3e3ac1579d1e0",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=small/state=error/content=value/required=false/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "error",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-5e2179fcf6248119276fe582",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-44ed284e756560ecae101ced",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-a4cc8e69e60cba0db1e9f76b",
+      "primaryPairId": "pair-0d66501ca8cd284285f4313e",
+      "presentation": "primary",
+      "cellKey": "mui/size=medium/state=disabled/content=value/required=true/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "disabled",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-d8928e39e4df89fa6a92bb71",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-02ccd92b8b881b27283cc400",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-981f4eac03ff3b8f1bafbb0c",
+      "primaryPairId": "pair-6460c921263b95d8d50bf0b4",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=medium/state=disabled/content=value/required=false/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "disabled",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-26b7641731b8e6f47b298c14",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-cfa8cc66086644c9839464ae",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-4194262d33204a464d206aa9",
+      "primaryPairId": "pair-c34157dc6250058d746f9d80",
+      "presentation": "primary",
+      "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=false/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "focus-visible",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-a41278c33e4a4bb08503d9f7",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-c229f67c29966e0147f1e3e0",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-10304322fdc34e6a2f52bead",
+      "primaryPairId": "pair-4d7600a7f400ac11c992743f",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=small/state=disabled/content=value/required=false/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "disabled",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-a8c0dc9221ef4a88ff510e3f",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-72de2c1e27713135b4b7c92d",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-18b5ce8075fd7203900451cc",
+      "primaryPairId": "pair-63a35f02ef3654f16098c156",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=medium/state=default/content=value/required=false/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "default",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-71fb4568048ee4f59f6321d9",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-d084498d9021178b1a1d18ad",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-8ec8be7d0253a0afcc65e357",
+      "primaryPairId": "pair-f9789ca3edc0b8af67d7a3f2",
+      "presentation": "primary",
+      "cellKey": "mui/size=small/state=default/content=placeholder/required=true/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "default",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-f5452892b7f74c7e034e32b7",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-93a3d08a2da61aac5b2953d5",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-0db5c60de7fbd70bb96e5f57",
+      "primaryPairId": "pair-8b4686c073ea05f55a3fa48f",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=medium/state=error/content=placeholder/required=false/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "error",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-48b34a88ccc700639bb04e21",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-dc6fc434b74e330410e28ab2",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-f0bc808fdcc8f643213bdf45",
+      "primaryPairId": "pair-d7c0763a18da531889c20924",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=false/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "focus-visible",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-347fc84a710ee8c383884326",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-385ad28ee3ac16094bec48af",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-b5a7bfa2950a5cc6844ca7ce",
+      "primaryPairId": "pair-929988cf02dc4a0796bb6abc",
+      "presentation": "primary",
+      "cellKey": "polaris/size=small/state=focus-visible/content=value/required=false/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "focus-visible",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-1cd08f6a4dd1d43705ffc74c",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-a5707855e91d7457235d5745",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-41a577b7bb3a6342510adbfb",
+      "primaryPairId": "pair-6e92570252ed92f058576695",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=true/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "focus-visible",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-1e1fc6d078430404919d53bd",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-d791455ec67e815367acb4f3",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-015b9a447fa747cc26a124e3",
+      "primaryPairId": "pair-f164c9d94b8e3e582b224efe",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=small/state=default/content=placeholder/required=false/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "default",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-019ae05fc79f9fcd551bc439",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-0b5042ae4145096b4fb38244",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-3081ed104484240e45019862",
+      "primaryPairId": "pair-38d737c8aa4e845a2c7517c2",
+      "presentation": "primary",
+      "cellKey": "polaris/size=small/state=focus-visible/content=value/required=true/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "focus-visible",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-98b2a3ab45b9e35a6279703e",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-855e0dee2ef08bc3f969aac9",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-65e7b430dc595142289bcd37",
+      "primaryPairId": "pair-c532ddbe1536424dc19d9055",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=small/state=disabled/content=value/required=true/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "disabled",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-9ea6e620eca983490d3cd784",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-4b6ce1d84d5c9e266843d38d",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-5691961cc557789c324f20ff",
+      "primaryPairId": "pair-ee24b8765135044cdb07ece0",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=small/state=default/content=placeholder/required=false/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "default",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-8b678035647500056aaad969",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-e0f8047a83cda2dd8456e9e6",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-45439139d7fa3fe1f9373f20",
+      "primaryPairId": "pair-fbd18920a806f41bf275454d",
+      "presentation": "primary",
+      "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=false/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "focus-visible",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-d6242ad68bb2945ef39a15be",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-1292400aba0f6b36c3f6dc74",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-3318b853cf537c90bf733a20",
+      "primaryPairId": "pair-5fb9af703417e2fb7c89d6ef",
+      "presentation": "primary",
+      "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=true/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "focus-visible",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-6eebaf3068465c09680d96b4",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-cb329313ff453fe2a092a4ab",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-d02d6fbb12cc47f8364ee842",
+      "primaryPairId": "pair-d75ba1bdbe9e6c8352d7275f",
+      "presentation": "primary",
+      "cellKey": "polaris/size=medium/state=error/content=value/required=true/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "error",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-53e91f9d2c3522b6717064c2",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-32949add689bbb709fbcfb6a",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-aca45143dbddeecd50ef47e2",
+      "primaryPairId": "pair-fea1762119c8cc90fb8deaf7",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=small/state=error/content=placeholder/required=true/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "error",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-4897111d676fde3134ef1b1c",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-6cc9d3e554ae23d48c25660b",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-c26c70baea87ba35ca25bc4d",
+      "primaryPairId": "pair-26905c7336da179788d84193",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=medium/state=default/content=placeholder/required=true/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "default",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-391d0c9c0685f6d8fff323c3",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-567d6eefcae9c1f12790e5b0",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-b0d99bbfd1dc088885f51ee0",
+      "primaryPairId": "pair-b85e9d6b875306d0099b0dc7",
+      "presentation": "primary",
+      "cellKey": "polaris/size=small/state=error/content=placeholder/required=true/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "error",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-135c5781834e3d592892a9e2",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-f4245f845c44312739ec66bf",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-e06eb724d1cb32878b205ad0",
+      "primaryPairId": "pair-456eeace94b6678703b4c4c1",
+      "presentation": "primary",
+      "cellKey": "mui/size=medium/state=focus-visible/content=value/required=false/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "focus-visible",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-0cab803ca138a5b68d042668",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-466ba9beec2b75edcde0e18c",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-d50c03b159a20d9af527f99a",
+      "primaryPairId": "pair-384aa7898e3df7aa4c606899",
+      "presentation": "primary",
+      "cellKey": "mui/size=medium/state=error/content=placeholder/required=true/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "error",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-4f7efa433204bb8d8f02fece",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-ae3657abac6b1b5f77721f71",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-b80cff19fbbef30d38d0cfbb",
+      "primaryPairId": "pair-f083759fb5ba287b33ca2e03",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=medium/state=error/content=placeholder/required=false/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "error",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-1f5b4d86d3e5534963494a06",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-f218abbca2f5dbe979bbdfb4",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-d83b8a9732ee2e9397f24d88",
+      "primaryPairId": "pair-9dd1eba61b91bb5b6641b395",
+      "presentation": "primary",
+      "cellKey": "polaris/size=small/state=error/content=value/required=true/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "error",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-c63c08ca9f78f1dc4b61c116",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-f68a108aafd759f5063c7fa5",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-9bca46f1efd42511834115a0",
+      "primaryPairId": "pair-2794dae5a029131c293d0467",
+      "presentation": "primary",
+      "cellKey": "polaris/size=small/state=default/content=value/required=false/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "default",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-1b2d297f368ccb361222ebbf",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-5a5c6427bea7529aa6e56b61",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-2710b1961091e577c926201b",
+      "primaryPairId": "pair-8233d9db06b5a077d5a63b71",
+      "presentation": "primary",
+      "cellKey": "mui/size=medium/state=error/content=value/required=false/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "error",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-63b8c7bbdc67f299bca7a706",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-96a2af9eef6a76b46aeee6a8",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-8b8574f014a58251f6d37502",
+      "primaryPairId": "pair-60e9648770b970c69fe95ff9",
+      "presentation": "primary",
+      "cellKey": "mui/size=medium/state=error/content=placeholder/required=true/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "error",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-f34afdc4ee05094004faa877",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-5afb7ef6dc6bc45faff051cf",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-f1da87960f214c3e5a399f08",
+      "primaryPairId": "pair-4c5ec07a2a58501a0acd38d8",
+      "presentation": "primary",
+      "cellKey": "mui/size=medium/state=default/content=placeholder/required=true/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "default",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-1f2c698e574ae030a7b2cfae",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-649a40cf079d78f755fe299f",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-bd59f99cd8bfc6349592f4f4",
+      "primaryPairId": "pair-968c53c4333b73dde4b98a1f",
+      "presentation": "primary",
+      "cellKey": "mui/size=small/state=disabled/content=value/required=true/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "disabled",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-f333d2e74c9aded4da6c75a5",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-0c0e780cec7934568800b9df",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-bece1fc8cd77968b5ba690a2",
+      "primaryPairId": "pair-54f0d4543bbc3e109fc3947e",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=false/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "focus-visible",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-09671865dd5d0753c29ac3db",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-5950604200806e9de22d9471",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-503d6301ab7625916570d8dd",
+      "primaryPairId": "pair-0c36496a6b40b7a1ad1d5fe0",
+      "presentation": "primary",
+      "cellKey": "polaris/size=medium/state=error/content=value/required=false/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "error",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-c2451255ddc35df89cd4a191",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-5c1292870a13916f51f28a13",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-682e95df313ceb1c86061ed7",
+      "primaryPairId": "pair-b2d91a2f8abb966856bf09e5",
+      "presentation": "primary",
+      "cellKey": "mui/size=medium/state=focus-visible/content=value/required=false/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "focus-visible",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-279943f2ff038e1032f3c45d",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-71117e074d4ab8abe0047c22",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-12297c44d081cead0aa3b2a6",
+      "primaryPairId": "pair-95bd36d4911ffab26cf329bb",
+      "presentation": "primary",
+      "cellKey": "mui/size=medium/state=error/content=value/required=true/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "error",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-68a7935bb13ade5e74d0f296",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-0a7ad0eddd016b356a030f30",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-0befc36b10d37139cf0f3020",
+      "primaryPairId": "pair-59874873339a1d30abb8424e",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=true/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "focus-visible",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-52e0abdf2d0a5e9d1e44e12a",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-683f666653a6a2d0ddfc80a5",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-20f18d9c541132af0d278aa4",
+      "primaryPairId": "pair-d75ba1bdbe9e6c8352d7275f",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=medium/state=error/content=value/required=true/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "error",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-ec0d4986c74501c0728f060d",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-97c16339cdb2114390bbaabb",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-d60a728d58926417ea765ac0",
+      "primaryPairId": "pair-456eeace94b6678703b4c4c1",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=medium/state=focus-visible/content=value/required=false/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "focus-visible",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-233e7a78336d1469b0b1a0bd",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-65c5d3bdb5a8fd613391e5c1",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-cf4abd15f1b832b6af4e35bf",
+      "primaryPairId": "pair-d83d94ef9a37df770037a40a",
+      "presentation": "primary",
+      "cellKey": "mui/size=small/state=error/content=value/required=true/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "error",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-ff28dabbd2a6ba32c7ca3cc5",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-492c2754a90e0da8f82daaf6",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-0a11b09992f77c7170650af2",
+      "primaryPairId": "pair-f164c9d94b8e3e582b224efe",
+      "presentation": "primary",
+      "cellKey": "mui/size=small/state=default/content=placeholder/required=false/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "default",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-59b9058fa547a7e979b6c5b1",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-c4287ebfc808dcbf118fd9cc",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-68994921980631fccf54f6f5",
+      "primaryPairId": "pair-4af798fdcdb020231ca57de5",
+      "presentation": "primary",
+      "cellKey": "mui/size=small/state=error/content=value/required=true/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "error",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-c53959a9e1e61a38a5f99923",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-c2aab3802e17d39769aa25d1",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-f3ed33d2a484078eff204428",
+      "primaryPairId": "pair-8aa081bf6bd80f98c6a38b20",
+      "presentation": "primary",
+      "cellKey": "polaris/size=small/state=default/content=value/required=false/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "default",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-2669d679d35c8582dd53df15",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-b148dc352ac442a8a75a3656",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-e97ac2aa7ed9fc863c864ae7",
+      "primaryPairId": "pair-d9af4c698a7b6d9d3ae3f170",
+      "presentation": "primary",
+      "cellKey": "mui/size=small/state=default/content=value/required=true/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "default",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-a985662d9fd3f44f77918b8b",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-9be8b7d3b9d1d99931556f11",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-784fd3ed7a9b3630c8841682",
+      "primaryPairId": "pair-6ef72ecece06001dce3c50e8",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=small/state=error/content=value/required=true/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "error",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-c746d0e5e6938a2ce59a4dea",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-667896207a382d04d338417b",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-1371ac6b3378118c6fbd33d4",
+      "primaryPairId": "pair-2920377c585db7123df34f4c",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=small/state=disabled/content=value/required=false/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "disabled",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-f01ac4b84bc3f13cb17d6afc",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-bf3d83c5800813eb6c1506cd",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-37beb2208168897eb034579b",
+      "primaryPairId": "pair-6c0709b0ae315d6d8e171d4d",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=small/state=disabled/content=placeholder/required=false/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "disabled",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-031e4737182af4343b196526",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-e275ba62369505e830608270",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-1b621d3afa84c9dbb7151212",
+      "primaryPairId": "pair-2794dae5a029131c293d0467",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=small/state=default/content=value/required=false/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "default",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-3086fb8466ace78c6e0134aa",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-5dbc30a140155aa41d0cd560",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-42712a3fcb6fcc6741990b7a",
+      "primaryPairId": "pair-fea1762119c8cc90fb8deaf7",
+      "presentation": "primary",
+      "cellKey": "mui/size=small/state=error/content=placeholder/required=true/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "error",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-4c96eb0fb49a9c0809f0cbd1",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-6e3a207e53a74f0f0da0df16",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-da453e124d07a94a0a90b139",
+      "primaryPairId": "pair-cad533698d73dec9f7f6759a",
+      "presentation": "primary",
+      "cellKey": "mui/size=small/state=error/content=value/required=false/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "error",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-501aa45b4beaff93039c7275",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-3e0d582ae0f443fe555dc5f6",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-fd8875af6fc52285fbeba97b",
+      "primaryPairId": "pair-f9789ca3edc0b8af67d7a3f2",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=small/state=default/content=placeholder/required=true/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "default",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-5fb02ad75c7406d9f9f2a618",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-8b5c4f12725483b827d9751f",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-7310710ad2ae7d597f1eb13a",
+      "primaryPairId": "pair-2261f286f73676a7eba89994",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=small/state=default/content=value/required=false/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "default",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-8f7c92fcfd8cc105c218ae0a",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-cd5409b6a5f724c8ba05dcce",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-e1ad9f4fa55caccca096a0a4",
+      "primaryPairId": "pair-2ff4cc76eef451021f9c6627",
+      "presentation": "primary",
+      "cellKey": "polaris/size=medium/state=default/content=value/required=false/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "default",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-b00e22a71002ed528697b8e7",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-17821b12b799152dfed86402",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-af88816d682edd3cadb5709f",
+      "primaryPairId": "pair-9dd1eba61b91bb5b6641b395",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=small/state=error/content=value/required=true/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "error",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-31cd3bd72d3bb3773096fc00",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-261bea03fedcb25a138d4470",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-d4513ed728e096d199147492",
+      "primaryPairId": "pair-ed24b11f8ff18130e0e80fbf",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=medium/state=focus-visible/content=value/required=true/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "focus-visible",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-0801fb271b344fa96425e519",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-27f8322d8b123fe455d6fa6d",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-c5511c1c2c1110850dff29d8",
+      "primaryPairId": "pair-dac7ac97e08281eba48dff33",
+      "presentation": "primary",
+      "cellKey": "mui/size=medium/state=disabled/content=value/required=true/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "disabled",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-6e165d9a4b1c0e20d21ce1d7",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-101b833e4c9137d60430c7f1",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-238353a74df1470d1adf3028",
+      "primaryPairId": "pair-53f684fc7dbbbe7e82bcbdea",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=small/state=error/content=placeholder/required=false/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "error",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-2272ff31a186a7a193652dc7",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-804a9067d2038ab3add6997d",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-d572d08f9ccc68e42f20bd92",
+      "primaryPairId": "pair-64e035f475e6331de1729bdf",
+      "presentation": "primary",
+      "cellKey": "polaris/size=small/state=error/content=value/required=false/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "error",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-0d9024a78613b2830d074d88",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-62a36e9861f11c73ee434ab3",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-f33cf1a8a449f9db9a2f6077",
+      "primaryPairId": "pair-78e079f011b881ef15cf6d5f",
+      "presentation": "primary",
+      "cellKey": "polaris/size=small/state=disabled/content=placeholder/required=false/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "disabled",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-5e168eccb5ced2f3a3f21d5c",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-9002f918ba12a72ce220520e",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-e74a42498547d8139e743b1e",
+      "primaryPairId": "pair-5ee7ba647678b9b80af4393e",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=small/state=error/content=placeholder/required=false/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "error",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-0054e9f72f329ae417563864",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-2136c7f12beb782d02528f36",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-a89c023d664eb3d64150e8c6",
+      "primaryPairId": "pair-00a401f7714d3c5cdf2e6ea7",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=medium/state=default/content=placeholder/required=false/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "default",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-f3fcf386647536d1dc4169d1",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-eebc4bd172ffc6a0fc0cb674",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-8941a140f6947f3bc56acb29",
+      "primaryPairId": "pair-f8610d2eb661357100895aec",
+      "presentation": "primary",
+      "cellKey": "polaris/size=small/state=disabled/content=value/required=false/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "disabled",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-28f9315e4a7ae9622d714d77",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-caee9e3814e314b4a852dc70",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-feb690e8aab7830c40ed45e5",
+      "primaryPairId": "pair-4af798fdcdb020231ca57de5",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=small/state=error/content=value/required=true/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "error",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-751f7a62c2645a528d738593",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-2da1e361de80cd29f818c92c",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-78a687a7b3b057eaf6be3328",
+      "primaryPairId": "pair-30cc1cfaacc059a2455647f8",
+      "presentation": "primary",
+      "cellKey": "mui/size=small/state=default/content=placeholder/required=false/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "default",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-2a72a5e8304752dd21485fdc",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-4c51804993c7db4198a7c5be",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-9a9e54626c49013623ba0097",
+      "primaryPairId": "pair-a5d59bddef5bf8453b671381",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=small/state=default/content=value/required=true/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "default",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-a05c82eed2fe2392e291b091",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-ce90663dbadff7b5da18a43b",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-6adc6357ea502b5ec9ef54bd",
+      "primaryPairId": "pair-f071208cf2cebecb9a456ffa",
+      "presentation": "primary",
+      "cellKey": "polaris/size=small/state=error/content=placeholder/required=false/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "error",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-83d24bdb7dcad1989eac18b3",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-af32f128cf3bf4bfb9feba45",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-b35671a7a7f1cc4021505b4a",
+      "primaryPairId": "pair-d52c197fb31622b81fac2f05",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=true/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "focus-visible",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-0e83bd57c19e1c11a3bee762",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-430cfab1d037b6ca91b68e20",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-32a466c9116b88944f4c4511",
+      "primaryPairId": "pair-62d67af606e37f6dde8ea13d",
+      "presentation": "primary",
+      "cellKey": "mui/size=small/state=default/content=placeholder/required=true/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "default",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-aa5e64d4348084e3a43e9115",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-15b6f43118485b9efeb97772",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-1088aa5ab1d44c810b9f062c",
+      "primaryPairId": "pair-aae291cffff7e8cf792610a3",
+      "presentation": "primary",
+      "cellKey": "polaris/size=medium/state=error/content=value/required=true/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "error",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-793d9a0e1cc1e25acaac3321",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-3d7b4faf3baa3f9e6b378779",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-2e81e8416d2beea037986af1",
+      "primaryPairId": "pair-db0fd405c51244c1ded16c88",
+      "presentation": "primary",
+      "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=false/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "focus-visible",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-6eb9e2a3e0ce655466db91c7",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-c8dc14df2040803b2fc3cb3a",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-3048ec6e322eda5a38a166ba",
+      "primaryPairId": "pair-30cc1cfaacc059a2455647f8",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=small/state=default/content=placeholder/required=false/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "default",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-7c8ef7a42170de1b95345741",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-17bcd930f932a3bd73b3954c",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-54ea6efa1738e48aaca66eaf",
+      "primaryPairId": "pair-78ed7c3452c9b7da2cd993c1",
+      "presentation": "primary",
+      "cellKey": "mui/size=medium/state=default/content=value/required=false/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "default",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-b2152547d87a3e97c6e6552c",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-d4aee215742c0c0e1cad0e7d",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-6938cb65272eb48e8877f457",
+      "primaryPairId": "pair-5ee7ba647678b9b80af4393e",
+      "presentation": "primary",
+      "cellKey": "mui/size=small/state=error/content=placeholder/required=false/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "error",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-02f71615cfe3466b06231c4a",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-9d64d97de7c36b183bbab789",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-4a06ad46b8624797dd05a115",
+      "primaryPairId": "pair-baae7b5c5f25776201218d2b",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=small/state=default/content=value/required=true/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "default",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-0e8bc2f8f1495c7baca21e6a",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-d97cfc93f7acd7667af067ec",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-e4d7db50f91e448bebc75336",
+      "primaryPairId": "pair-64e035f475e6331de1729bdf",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=small/state=error/content=value/required=false/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "error",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-664a930474e76545c02a2eea",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-e5ce1ab40d56c78d6926e248",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-f123b2d99d30faba48b28d74",
+      "primaryPairId": "pair-fe29e78c8935aa0d66e37650",
+      "presentation": "primary",
+      "cellKey": "polaris/size=medium/state=default/content=placeholder/required=false/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "default",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-83dc3015b317fa661b20d45c",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-b4920b4900512bfd456f2cfe",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-725db40e4bef48691831ebc4",
+      "primaryPairId": "pair-47ae17714717c1f9e45bb853",
+      "presentation": "primary",
+      "cellKey": "polaris/size=small/state=focus-visible/content=value/required=false/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "focus-visible",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-653f27140b0d6f535bab426f",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-605aff631d63a4e67c41ab44",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-cb35a2223400a093ee36bd6c",
+      "primaryPairId": "pair-baae7b5c5f25776201218d2b",
+      "presentation": "primary",
+      "cellKey": "polaris/size=small/state=default/content=value/required=true/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "default",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-ea95fd64c102d3b058a7d809",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-07a3f8a2dafc063c8560f7a8",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-ec6798ae9019633c78ada540",
+      "primaryPairId": "pair-5fb9af703417e2fb7c89d6ef",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=true/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "focus-visible",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-08802f96276c2605b912187f",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-224f510635f2cda27190e8ca",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-03d05aadaaf61a5de6942564",
+      "primaryPairId": "pair-51a96db103f0c375d0eedeff",
+      "presentation": "primary",
+      "cellKey": "polaris/size=medium/state=disabled/content=placeholder/required=false/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "disabled",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-6233806f2cbc672931fa8f8e",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-527f58dcdd8a143fab837286",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-9d7a4c40635c1a30f4aa09af",
+      "primaryPairId": "pair-1bada8370edc347e70348bdc",
+      "presentation": "primary",
+      "cellKey": "polaris/size=medium/state=error/content=placeholder/required=true/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "error",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-9fe287d3bec85e70f010f5d6",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-b6e4eeb47b3d1487c5c172c9",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-c2b948befe402052153fa588",
+      "primaryPairId": "pair-b605209e707932d680adc13f",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=small/state=default/content=placeholder/required=true/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "default",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-2cd0ec49872e2db5e56ecfd3",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-caea7b9622222d67717456db",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-f5046aee9d81f003fb81cfb4",
+      "primaryPairId": "pair-f688110f9abe6f0ff201d4cd",
+      "presentation": "primary",
+      "cellKey": "mui/size=medium/state=error/content=value/required=true/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "error",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-8e6178e6ec0638c7078591f2",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-ca8ec649f2fefbd717216539",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-8c4ae8a3d426d58518e934b4",
+      "primaryPairId": "pair-2261f286f73676a7eba89994",
+      "presentation": "primary",
+      "cellKey": "mui/size=small/state=default/content=value/required=false/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "default",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-4f33e70256ab162ab1c59291",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-0c26277ea1c6cd1169e9af30",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-4384270d786ca135cfb5d08f",
+      "primaryPairId": "pair-c572d0aa5a6e5932c42cdb52",
+      "presentation": "primary",
+      "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=false/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "focus-visible",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-55afddef9889f20b15637a23",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-70a726a87b6f5bc8ad269f77",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-ef514fab97c3335e78453382",
+      "primaryPairId": "pair-d7c0763a18da531889c20924",
+      "presentation": "primary",
+      "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=false/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "focus-visible",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-388ddbcb1d918cfa922d73f9",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-d6fd67a4bac967209f6b5de5",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-6a7653fd43021a3285680e51",
+      "primaryPairId": "pair-b9819c896eb50b5857f1e5b0",
+      "presentation": "primary",
+      "cellKey": "mui/size=small/state=focus-visible/content=value/required=false/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "focus-visible",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-507c11994e635fe7a6159760",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-1cb5853170c55e3d5b4593be",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-cd4e33cddaf6df13c89f4438",
+      "primaryPairId": "pair-d741a80909338393b62fbd59",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=true/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "focus-visible",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-23e453a6722988eefc5c2cfb",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-39cefb2ea654f861923aa659",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-aad11baaa133832125d4e71a",
+      "primaryPairId": "pair-ca712fd67dbfa2a2d8026bf3",
+      "presentation": "primary",
+      "cellKey": "mui/size=medium/state=default/content=value/required=true/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "default",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-2a7348e905973374fc2fb9f7",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-725e8a5a1fdc58c4b151fd8a",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-24480c09775c4c78e570dbe6",
+      "primaryPairId": "pair-c572d0aa5a6e5932c42cdb52",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=false/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "focus-visible",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-290ce2ef1c9edbddb9da9452",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-98434fe2a4ea628ec7a12498",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-15dd14595cf79e3ad86cc67c",
+      "primaryPairId": "pair-c34157dc6250058d746f9d80",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=false/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "focus-visible",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-6c077a35e17e219e1b186a64",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-2564f4d8e8b1ddcdd9d51303",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-cd5de022304edd5f57fed1c3",
+      "primaryPairId": "pair-62d67af606e37f6dde8ea13d",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=small/state=default/content=placeholder/required=true/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "default",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-651a75a45ebefc2b43c182d2",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-00599aea4e872f01b32ed629",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-94640b56856738a874cf3a41",
+      "primaryPairId": "pair-b9819c896eb50b5857f1e5b0",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=small/state=focus-visible/content=value/required=false/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "focus-visible",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-0e449f880a7a0cce7d2c6256",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-4d8564ce41e1308e84480280",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-0133f2d5a664ff1f70f9e1b5",
+      "primaryPairId": "pair-f8506abbefe28c08e4a9f50e",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=medium/state=error/content=placeholder/required=false/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "error",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-9f49e33684aa2ea1ed2cdb26",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-27445573a68eff943b6fc7f6",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-8697ea71e70cf47ba939323d",
+      "primaryPairId": "pair-d741a80909338393b62fbd59",
+      "presentation": "primary",
+      "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=true/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "focus-visible",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-8d4dcded634107b12dbeb6ea",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-490f11a4fcc9840a254a837b",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-9eb64dbbf3fc09cf415c99f4",
+      "primaryPairId": "pair-66a4b8bb592619d7a70c49ae",
+      "presentation": "primary",
+      "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=true/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "focus-visible",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-2e68213b5709b5a24af9f584",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-97a8f67dc5bfc92af5b27c54",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-ad47d06c93a5ed9d096ca161",
+      "primaryPairId": "pair-d0f848b2c4a72d7f6d64369e",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=medium/state=error/content=value/required=false/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "error",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-7f39feacd59db9ba606ed498",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-523c42fdcf28a566c346e3cf",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-ce9eecf5ea1058a0deeaf806",
+      "primaryPairId": "pair-ad68c0c97d8f94df20613cfc",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=medium/state=focus-visible/content=value/required=true/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "focus-visible",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-40fb9a60cd2351c3b0f0037f",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-5cc2f7909feb425b9b024d17",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-67f75689528f08c15371fd9f",
+      "primaryPairId": "pair-2096a87d6c9b72d70369c28b",
+      "presentation": "primary",
+      "cellKey": "mui/size=medium/state=disabled/content=value/required=false/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "disabled",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-2c2ba500864f33ed91c17c08",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-a3e0a451bf0222500beeb2bc",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-62250ba4df6e30a1063e98e6",
+      "primaryPairId": "pair-6b6d205f1e56ba91c63015a7",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=small/state=error/content=placeholder/required=false/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "error",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-d47dff917eff22a008073dff",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-899c070ac10bf88ed4c842ec",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-aefcc56ade1618740796be84",
+      "primaryPairId": "pair-1bd8ccb4f4a7feb03d34fbed",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=medium/state=disabled/content=placeholder/required=true/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "disabled",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-4ab77d84d28d29117107eb6b",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-69205a4e31b57123f858b8c2",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-3452b71f3fd61cbff9a016fc",
+      "primaryPairId": "pair-382f067c6aa5da0062c9697a",
+      "presentation": "primary",
+      "cellKey": "polaris/size=medium/state=default/content=placeholder/required=false/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "default",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-caf453770233bb945ec4b8ad",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-f1fb2da13f45b8fc39f496cd",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-793819afd3081b69a26566f5",
+      "primaryPairId": "pair-5459a98791c14d1e1d70529f",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=small/state=focus-visible/content=value/required=true/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "focus-visible",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-b0c712e21fe35ca1626bc250",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-2d6fbbb050487f15e23aa350",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-6357a103f6cc8d5db2ac5c58",
+      "primaryPairId": "pair-ca712fd67dbfa2a2d8026bf3",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=medium/state=default/content=value/required=true/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "default",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-56a1b1a63adc8d6b5e7cbd2f",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-feb4b9b80452f4913e99226c",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-a5b5c53f58a30691a4692abd",
+      "primaryPairId": "pair-59d74b284285d751c018b33c",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=medium/state=error/content=placeholder/required=false/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "error",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-93a29d3653ab762730f9df80",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-5c388f324860c5d8c321555f",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-c01ee051189a4b3a3337f435",
+      "primaryPairId": "pair-0072408d24ef008f19c69aa2",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=small/state=disabled/content=placeholder/required=true/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "disabled",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-eaced51b438e2f0d0578fa30",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-130e10738d73e83f605571b7",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-04ab3be16ca9b8c42f261437",
+      "primaryPairId": "pair-14a9940fa9fc1ef5d0cdc883",
+      "presentation": "primary",
+      "cellKey": "mui/size=small/state=disabled/content=placeholder/required=true/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "disabled",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-c3b8cf747c9c00e921789fe3",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-a73d5f9c6c68647d93de845b",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-2cfed562d88ffd84417494da",
+      "primaryPairId": "pair-3c2c5c1290fcdb2032c68115",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=small/state=error/content=placeholder/required=true/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "error",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-82e4999e42dbcec66760db12",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-607ccdd2aaaddae9772e1993",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-73c139c09ad801ae91978f0a",
+      "primaryPairId": "pair-ee24b8765135044cdb07ece0",
+      "presentation": "primary",
+      "cellKey": "polaris/size=small/state=default/content=placeholder/required=false/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "default",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-59cf4a6678121cf2acf6c299",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-4c7d6a22e385f3ae7cfa95c8",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-59b485410674a7799956d6fb",
+      "primaryPairId": "pair-8b4686c073ea05f55a3fa48f",
+      "presentation": "primary",
+      "cellKey": "mui/size=medium/state=error/content=placeholder/required=false/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "error",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-630a832a361238b97f681782",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-79cdcc7dae72cf8ae1d31338",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-18124ed7ec7f403ef93c8a63",
+      "primaryPairId": "pair-31d490116fbdb71dea0cb565",
+      "presentation": "primary",
+      "cellKey": "polaris/size=medium/state=disabled/content=placeholder/required=true/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "disabled",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-afac5de2f25d2eb5060d15f4",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-6f0acb4ef8b713377c061c32",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-1b47c41bc2625346d4eef4f8",
+      "primaryPairId": "pair-e1b74d0faa57b4c8cd070b57",
+      "presentation": "primary",
+      "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=true/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "focus-visible",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-5318a3fe550c7615fc38e374",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-cd3e852f82dd2f84bbf9ce1e",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-d679de0e471a5ebfbca8c559",
+      "primaryPairId": "pair-6460c921263b95d8d50bf0b4",
+      "presentation": "primary",
+      "cellKey": "mui/size=medium/state=disabled/content=value/required=false/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "disabled",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-e7dfbe4195fd1c2734707397",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-690b855b3a2cbc6356b9ad2e",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-c941eb58101025f1bb268546",
+      "primaryPairId": "pair-b605209e707932d680adc13f",
+      "presentation": "primary",
+      "cellKey": "polaris/size=small/state=default/content=placeholder/required=true/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "default",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-120f7d9eb6f1c92dc9c18335",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-412e3520361ea5723f7439e5",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-7f252c7f195c8e4404d7265d",
+      "primaryPairId": "pair-8233d9db06b5a077d5a63b71",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=medium/state=error/content=value/required=false/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "error",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-c8fef848d0710ef4618ea814",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-cdcae3ac81328e71b9a6ec30",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-b20d1661b1cf7a809fea5ce1",
+      "primaryPairId": "pair-38d737c8aa4e845a2c7517c2",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=small/state=focus-visible/content=value/required=true/adornments=both",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "focus-visible",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-a5831bd77d665bfda4514c9e",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-f65640fbbb0ade8d2be7ae3e",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-eef5862499985b10057893d8",
+      "primaryPairId": "pair-f8506abbefe28c08e4a9f50e",
+      "presentation": "primary",
+      "cellKey": "mui/size=medium/state=error/content=placeholder/required=false/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "error",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-730f8f0e1adc95eb93805987",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-f41d1fd58b9e6fd901567b55",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-0e3742f8200d4396cd110964",
+      "primaryPairId": "pair-ae5adcf172e526198e5682ed",
+      "presentation": "primary",
+      "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=true/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "focus-visible",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-5c0ed25b7c50d2f79ce7dfe2",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-458cf6a3bd999535cb11d7c2",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-8b496233a87d2d8d13844eb1",
+      "primaryPairId": "pair-da08dcf6efbc5d2acf01ca36",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=small/state=focus-visible/content=value/required=true/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "focus-visible",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-a06a7ac9a606d5d5f2ed7dcd",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-baa942e3e89a1a4ce5df0e18",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-74db6155a973e8c1155a569a",
+      "primaryPairId": "pair-5bf4e50f6664a423df6c3d25",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=small/state=default/content=value/required=true/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "default",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-56aafc26737db73f05b9b063",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-9c4ce69cefe6ea6b57ea2831",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-aaa06278697351d1d0fb9e5c",
+      "primaryPairId": "pair-b2d91a2f8abb966856bf09e5",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=medium/state=focus-visible/content=value/required=false/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "focus-visible",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-0b5ec509d1a59ccd6dc06299",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-225baa250e0c2c1383ce41ca",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-17683a2e2571b76ebbd40a4d",
+      "primaryPairId": "pair-36fca59f18d8c62dd7f54543",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=small/state=error/content=placeholder/required=true/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "error",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-8fc69a562f823f273aed18e9",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-9fd7e2ce6b1b744ea6aeeff8",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-2336148dc00de3f55b0b899c",
+      "primaryPairId": "pair-c532ddbe1536424dc19d9055",
+      "presentation": "primary",
+      "cellKey": "mui/size=small/state=disabled/content=value/required=true/adornments=none",
+      "source": "mui",
+      "axes": {
+        "Size": "small",
+        "State": "disabled",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-0107bccd7bcfbae2c820c747",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-55f766da064c60e55abca694",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-d804040a58c8dfe6b3773a86",
+      "primaryPairId": "pair-f8df0b83612b394c2afbf95a",
+      "presentation": "primary",
+      "cellKey": "polaris/size=small/state=default/content=placeholder/required=true/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "small",
+        "State": "default",
+        "Content": "placeholder",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-561ce7225ce3ff0c9b1ca3a6",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-6ab3d868625075c9e4c11ca4",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-0f76e6e09b0d9ecc5a68c9c7",
+      "primaryPairId": "pair-a941ce24a1043b0115453f94",
+      "presentation": "primary",
+      "cellKey": "polaris/size=medium/state=disabled/content=value/required=false/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "disabled",
+        "Content": "value",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-381c5224f7473369b6acf70b",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-0caf2871ae4ee11b949a11d1",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-a749b4184ef8d65a6f549771",
+      "primaryPairId": "pair-3d065c4cb57c05f46c61fa6f",
+      "presentation": "primary",
+      "cellKey": "polaris/size=medium/state=disabled/content=value/required=true/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "disabled",
+        "Content": "value",
+        "Required": "true",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-e0c2080a0875468ab8fe1e29",
+        "identity": "recipe"
+      },
+      "right": {
+        "candidateId": "candidate-80d34f298ef8966d5977a7e1",
+        "identity": "legacy"
+      }
+    },
+    {
+      "taskId": "task-332d4ef97e460da1908001ff",
+      "primaryPairId": "pair-db0fd405c51244c1ded16c88",
+      "presentation": "side-swapped",
+      "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=false/adornments=both",
+      "source": "mui",
+      "axes": {
+        "Size": "medium",
+        "State": "focus-visible",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "both"
+      },
+      "left": {
+        "candidateId": "candidate-487befd62153dc7bfabd5c8e",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-62943486c573c99869bcd223",
+        "identity": "recipe"
+      }
+    },
+    {
+      "taskId": "task-318341fc53747712bd6850ac",
+      "primaryPairId": "pair-fbd18920a806f41bf275454d",
+      "presentation": "side-swapped",
+      "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=false/adornments=none",
+      "source": "polaris",
+      "axes": {
+        "Size": "medium",
+        "State": "focus-visible",
+        "Content": "placeholder",
+        "Required": "false",
+        "Adornments": "none"
+      },
+      "left": {
+        "candidateId": "candidate-64e02e6236287a613d844b6e",
+        "identity": "legacy"
+      },
+      "right": {
+        "candidateId": "candidate-a5e8778651a838637b618f7c",
+        "identity": "recipe"
+      }
+    }
+  ]
+}

@@ -1,0 +1,4328 @@
+{
+  "version": "input-field-performance-blind-v3",
+  "phase": "performance",
+  "status": "opaque-ungraded",
+  "calibrationCommitment": "8e6894a5b87fd2ce129f29d1a9ea041ac0792aa96a0a01528b25b2d0c0bb48c9",
+  "rubricVersion": "input-field-observable-rubric-v2",
+  "rubric": {
+    "version": "input-field-observable-rubric-v2",
+    "decisionOrder": [
+      {
+        "category": "required-structure-content",
+        "requiredObservations": [
+          "The input surface, label, visible value or placeholder, required marker when shown, helper or error message, and expected leading/trailing adornments occupy the same semantic roles as the reference.",
+          "Missing, substituted, extra, role-swapped, or unreadable required parts fail."
+        ],
+        "failWhen": "Any role-defining part or supplied visible content is missing, substituted, extra, or no longer recognisable."
+      },
+      {
+        "category": "semantic-state",
+        "requiredObservations": [
+          "Default, focus, error, and disabled cues are compared as semantic states, not merely as colors.",
+          "The specimen may not omit, add, or substitute the reference state."
+        ],
+        "failWhen": "Any wrong or missing semantic state cue fails regardless of raster or color distance."
+      },
+      {
+        "category": "geometry-proportion",
+        "requiredObservations": [
+          "Compare overall silhouette, field surface dimensions, padding, alignment, gaps, adornment scale, label/message position, clipping, and overlap.",
+          "Use the locked quantitative guardrails when coordinates can be read; obvious clipping or overlap remains a failure without measurement tooling."
+        ],
+        "failWhen": "A dimension, spacing, scale, clipping, or overlap guardrail is exceeded and materially changes the visible component."
+      },
+      {
+        "category": "typography-raster",
+        "requiredObservations": [
+          "Compare visible hierarchy, line count, wrapping, baseline, weight class, size class, and emphasis.",
+          "Antialiasing, subpixel rasterization, and glyph-edge shifts within the locked allowance are minor."
+        ],
+        "failWhen": "Typography changes hierarchy, semantic emphasis, wrapping, line count, alignment, or exceeds the minor raster allowance."
+      },
+      {
+        "category": "color-border-effects",
+        "requiredObservations": [
+          "Compare fill, ink, border width/style, focus effect, error treatment, and disabled opacity.",
+          "Small color deltas may be minor only when structure, hierarchy, contrast role, and semantic state stay recognisable."
+        ],
+        "failWhen": "A treatment changes semantic state, contrast role, border/effect class, or exceeds minor tolerance in a visibly material way."
+      }
+    ],
+    "quantitativeGuardrails": {
+      "geometry": {
+        "overallWidthOrHeightRelativeTolerance": 0.08,
+        "overallWidthOrHeightAbsoluteTolerancePx": 4,
+        "localSpacingAbsoluteTolerancePx": 4,
+        "localSpacingRelativeTolerance": 0.2,
+        "materialScaleDelta": 0.1,
+        "severeRequiredPartClippingArea": 0.05,
+        "requiredPartOverlapTolerancePx": 2
+      },
+      "rasterAndTypography": {
+        "permittedGlyphEdgeShiftPx": 1,
+        "wrappingOrLineCountChange": "fail",
+        "hierarchyOrSemanticEmphasisChange": "fail"
+      },
+      "color": {
+        "minorPerChannelSrgbDeltaMaximum": 12,
+        "minorEuclideanSrgbDeltaMaximum": 20,
+        "semanticStateCueChange": "fail-regardless-of-delta"
+      }
+    },
+    "precedence": [
+      "Required structure/content and semantic state rules override all numeric minor tolerances.",
+      "For overall width/height, a deviation is material only when it exceeds both 4 px and 8% of the reference dimension.",
+      "For local spacing, a deviation is material when it exceeds both 4 px and 20% of the reference spacing.",
+      "Any required-part clipping above 5% of that part's visible area, or required-part overlap above 2 px, fails.",
+      "A scale change above 10% for a role-defining part fails.",
+      "A color delta within both stated sRGB limits is minor only when state, structure, hierarchy, and contrast role are unchanged."
+    ],
+    "passRule": "recognisable=true only when required structure/content and semantic state match, no geometry/proportion failure exists, and all typography/raster and color/border/effect differences are match or minor. Every fail verdict requires a concrete observable defect; top-level defects are the ordered concatenation of criterion defects.",
+    "rationale": "The first round showed perfect exact-duplicate consistency but insufficient common-standard agreement under high failure prevalence. These limits turn role/state failures into categorical decisions while allowing known non-semantic raster variation."
+  },
+  "instructions": [
+    "Begin only after receiving a passing calibration receipt for your same graderId.",
+    "Use only this performance blind-packet directory, your calibration receipt, and the locked rubric. Never inspect parent evidence, prior grades, source code, or any sealed performance key.",
+    "Grade all 384 opaque pairs independently in packet order. Do not compare tasks, search for repetitions, infer identities, rank implementations, or change thresholds.",
+    "Copy your assigned template, fill the calibration receipt fields and every grade, preserve exact fields/order/IDs, then run preflight before writing only the assigned performance submission path."
+  ],
+  "gradeSchema": "recipe/evidence/input-field-comparison-calibration-v2/grade.schema.json",
+  "preflight": "npx tsx recipe/input-field-comparison-calibration-v2.ts --preflight <gold|performance> <completed-grade.json>",
+  "assignedTemplates": {
+    "RATER-CAL-V2-A": "recipe/evidence/input-field-comparison-calibration-v2/performance/blind-packet/templates/rater-cal-v2-a.json",
+    "RATER-CAL-V2-B": "recipe/evidence/input-field-comparison-calibration-v2/performance/blind-packet/templates/rater-cal-v2-b.json",
+    "RATER-CAL-V2-C": "recipe/evidence/input-field-comparison-calibration-v2/performance/blind-packet/templates/rater-cal-v2-c.json"
+  },
+  "counts": {
+    "tasks": 384,
+    "referencePresentations": 384,
+    "specimenPresentations": 384
+  },
+  "tasks": [
+    {
+      "taskId": "task-e057e491f7b903b4dcce",
+      "reference": {
+        "referenceId": "reference-657bec0139238e551273",
+        "image": "references/reference-657bec0139238e551273.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-3b4f652a14a280592e0f",
+        "image": "specimens/specimen-3b4f652a14a280592e0f.png"
+      }
+    },
+    {
+      "taskId": "task-e72d8b12a5371bcc2b62",
+      "reference": {
+        "referenceId": "reference-40e3a73be6e383b027ff",
+        "image": "references/reference-40e3a73be6e383b027ff.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-a7859cd3981979a4c643",
+        "image": "specimens/specimen-a7859cd3981979a4c643.png"
+      }
+    },
+    {
+      "taskId": "task-679fc98df2e37ef7c15d",
+      "reference": {
+        "referenceId": "reference-f21a4b54c7c1246b666b",
+        "image": "references/reference-f21a4b54c7c1246b666b.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-0eaa2860dfdbec263c0f",
+        "image": "specimens/specimen-0eaa2860dfdbec263c0f.png"
+      }
+    },
+    {
+      "taskId": "task-cefebf94f24c336d7cf9",
+      "reference": {
+        "referenceId": "reference-eb7d3dd23bc171cb2bfb",
+        "image": "references/reference-eb7d3dd23bc171cb2bfb.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-cb097daaab0cabcda3ea",
+        "image": "specimens/specimen-cb097daaab0cabcda3ea.png"
+      }
+    },
+    {
+      "taskId": "task-297243d9317bb3284f91",
+      "reference": {
+        "referenceId": "reference-bebfb6f96074515859f0",
+        "image": "references/reference-bebfb6f96074515859f0.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-a837f2d3ffcb960e6482",
+        "image": "specimens/specimen-a837f2d3ffcb960e6482.png"
+      }
+    },
+    {
+      "taskId": "task-7dcbc70d05efbbd64c00",
+      "reference": {
+        "referenceId": "reference-f571d5980ffd6b61fa4b",
+        "image": "references/reference-f571d5980ffd6b61fa4b.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-2517414f7242e35af55f",
+        "image": "specimens/specimen-2517414f7242e35af55f.png"
+      }
+    },
+    {
+      "taskId": "task-7508e3550a56482d7618",
+      "reference": {
+        "referenceId": "reference-a7239bedf58b7d1b351d",
+        "image": "references/reference-a7239bedf58b7d1b351d.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-95a560a6a5df31d0ee10",
+        "image": "specimens/specimen-95a560a6a5df31d0ee10.png"
+      }
+    },
+    {
+      "taskId": "task-a3504e196e1c101c09a8",
+      "reference": {
+        "referenceId": "reference-980aeebe95ea5c14e6ca",
+        "image": "references/reference-980aeebe95ea5c14e6ca.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-b0ed5ee1aec83286af14",
+        "image": "specimens/specimen-b0ed5ee1aec83286af14.png"
+      }
+    },
+    {
+      "taskId": "task-a9b7c4474b2883826786",
+      "reference": {
+        "referenceId": "reference-b4703d146fc7f796f332",
+        "image": "references/reference-b4703d146fc7f796f332.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-1b7daf7394eab75616b1",
+        "image": "specimens/specimen-1b7daf7394eab75616b1.png"
+      }
+    },
+    {
+      "taskId": "task-fa611db67eef362e2d73",
+      "reference": {
+        "referenceId": "reference-053c9706f62358d24ebb",
+        "image": "references/reference-053c9706f62358d24ebb.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-48dc7e5e9fc488ed09e3",
+        "image": "specimens/specimen-48dc7e5e9fc488ed09e3.png"
+      }
+    },
+    {
+      "taskId": "task-eff806f5fc19ae3c3a27",
+      "reference": {
+        "referenceId": "reference-b8b16633ae26f816eb9c",
+        "image": "references/reference-b8b16633ae26f816eb9c.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-3ea94891e71a0a604dcc",
+        "image": "specimens/specimen-3ea94891e71a0a604dcc.png"
+      }
+    },
+    {
+      "taskId": "task-75367fed65e596da8172",
+      "reference": {
+        "referenceId": "reference-d5e5c37cc448cb11980b",
+        "image": "references/reference-d5e5c37cc448cb11980b.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-a7181b9dd42354cfb182",
+        "image": "specimens/specimen-a7181b9dd42354cfb182.png"
+      }
+    },
+    {
+      "taskId": "task-cbe1a5a4647d84bab5c9",
+      "reference": {
+        "referenceId": "reference-75250079fcfd9bd42c61",
+        "image": "references/reference-75250079fcfd9bd42c61.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-f231283c4a27054945c0",
+        "image": "specimens/specimen-f231283c4a27054945c0.png"
+      }
+    },
+    {
+      "taskId": "task-1fa7d471596fac364ba1",
+      "reference": {
+        "referenceId": "reference-03cfb51ae3cad4f16512",
+        "image": "references/reference-03cfb51ae3cad4f16512.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-7f72a2f8bf526f73b481",
+        "image": "specimens/specimen-7f72a2f8bf526f73b481.png"
+      }
+    },
+    {
+      "taskId": "task-23659aae5ee1cb7347c6",
+      "reference": {
+        "referenceId": "reference-29e81c058f6eb46c4e37",
+        "image": "references/reference-29e81c058f6eb46c4e37.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-4fa502a097ecb60a9fca",
+        "image": "specimens/specimen-4fa502a097ecb60a9fca.png"
+      }
+    },
+    {
+      "taskId": "task-b042b6d8b2ac762f08b5",
+      "reference": {
+        "referenceId": "reference-f3e5f5d4af0e51cee2a1",
+        "image": "references/reference-f3e5f5d4af0e51cee2a1.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-d1a05ef66a3fa57ab0be",
+        "image": "specimens/specimen-d1a05ef66a3fa57ab0be.png"
+      }
+    },
+    {
+      "taskId": "task-33a01ca5bb5e54b4d382",
+      "reference": {
+        "referenceId": "reference-d0c80de4a1912ca42ae5",
+        "image": "references/reference-d0c80de4a1912ca42ae5.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-9f66e5d80937c0c15c0a",
+        "image": "specimens/specimen-9f66e5d80937c0c15c0a.png"
+      }
+    },
+    {
+      "taskId": "task-1e6b5449ee20e7b999b7",
+      "reference": {
+        "referenceId": "reference-8dbdc49ba9a5b75e6f3b",
+        "image": "references/reference-8dbdc49ba9a5b75e6f3b.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-e261b870cc30ece0283d",
+        "image": "specimens/specimen-e261b870cc30ece0283d.png"
+      }
+    },
+    {
+      "taskId": "task-e99592afea23b60d800f",
+      "reference": {
+        "referenceId": "reference-5d396242f66ade990dc0",
+        "image": "references/reference-5d396242f66ade990dc0.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-91a4249da1c6f4fb4a07",
+        "image": "specimens/specimen-91a4249da1c6f4fb4a07.png"
+      }
+    },
+    {
+      "taskId": "task-61682fafcb9657869f8b",
+      "reference": {
+        "referenceId": "reference-af6d45571378f48e9910",
+        "image": "references/reference-af6d45571378f48e9910.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-04eae2eb6d3a846a1425",
+        "image": "specimens/specimen-04eae2eb6d3a846a1425.png"
+      }
+    },
+    {
+      "taskId": "task-66352ff601f813ad94ff",
+      "reference": {
+        "referenceId": "reference-b2b77b97f3fa52fa3a7e",
+        "image": "references/reference-b2b77b97f3fa52fa3a7e.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-c85122b4266ca24a823c",
+        "image": "specimens/specimen-c85122b4266ca24a823c.png"
+      }
+    },
+    {
+      "taskId": "task-d5ce048400dec725edb1",
+      "reference": {
+        "referenceId": "reference-2555e8cd828588be66b7",
+        "image": "references/reference-2555e8cd828588be66b7.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-e80a8bf3233ef04bc689",
+        "image": "specimens/specimen-e80a8bf3233ef04bc689.png"
+      }
+    },
+    {
+      "taskId": "task-bd69705013ee31cb579b",
+      "reference": {
+        "referenceId": "reference-a1d606f2e6faa826761e",
+        "image": "references/reference-a1d606f2e6faa826761e.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-70becd7725586e54259b",
+        "image": "specimens/specimen-70becd7725586e54259b.png"
+      }
+    },
+    {
+      "taskId": "task-40c64de40e5cee0ffab3",
+      "reference": {
+        "referenceId": "reference-428b07045e1ce7babdc6",
+        "image": "references/reference-428b07045e1ce7babdc6.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-72fe75a48be302b8f061",
+        "image": "specimens/specimen-72fe75a48be302b8f061.png"
+      }
+    },
+    {
+      "taskId": "task-e5db41d0a10205a90727",
+      "reference": {
+        "referenceId": "reference-7c1c4383b10ceb963fc7",
+        "image": "references/reference-7c1c4383b10ceb963fc7.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-9b05ece3fc44afd49485",
+        "image": "specimens/specimen-9b05ece3fc44afd49485.png"
+      }
+    },
+    {
+      "taskId": "task-cc236673b27e7f17e108",
+      "reference": {
+        "referenceId": "reference-80447fe82570f74479d9",
+        "image": "references/reference-80447fe82570f74479d9.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-c34ca44c65cd48a95cd7",
+        "image": "specimens/specimen-c34ca44c65cd48a95cd7.png"
+      }
+    },
+    {
+      "taskId": "task-bc1fd404accebd870a66",
+      "reference": {
+        "referenceId": "reference-a0c422c3924928a92264",
+        "image": "references/reference-a0c422c3924928a92264.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-c49b30abfe7c86219355",
+        "image": "specimens/specimen-c49b30abfe7c86219355.png"
+      }
+    },
+    {
+      "taskId": "task-b5b57b707b2044c7bb6d",
+      "reference": {
+        "referenceId": "reference-aafc4ab85799b7eb0eaf",
+        "image": "references/reference-aafc4ab85799b7eb0eaf.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-54d46bff86f60d4094f3",
+        "image": "specimens/specimen-54d46bff86f60d4094f3.png"
+      }
+    },
+    {
+      "taskId": "task-f88e7318f9f34238f230",
+      "reference": {
+        "referenceId": "reference-880b3dbaf672487a4a40",
+        "image": "references/reference-880b3dbaf672487a4a40.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-d7d3b795532ca0445404",
+        "image": "specimens/specimen-d7d3b795532ca0445404.png"
+      }
+    },
+    {
+      "taskId": "task-2c1d5595e40405be1a10",
+      "reference": {
+        "referenceId": "reference-ca47136ebd08adc544c7",
+        "image": "references/reference-ca47136ebd08adc544c7.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-3c6f994b9d1ee86ee5a4",
+        "image": "specimens/specimen-3c6f994b9d1ee86ee5a4.png"
+      }
+    },
+    {
+      "taskId": "task-28ff0e982770a24a2d4c",
+      "reference": {
+        "referenceId": "reference-f29a00ac4245351367f6",
+        "image": "references/reference-f29a00ac4245351367f6.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-296c9a31ee8990485dbd",
+        "image": "specimens/specimen-296c9a31ee8990485dbd.png"
+      }
+    },
+    {
+      "taskId": "task-4108b8804b38276bf54f",
+      "reference": {
+        "referenceId": "reference-24ffe5fcfad0bc6197fe",
+        "image": "references/reference-24ffe5fcfad0bc6197fe.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-37338b2addeadaaab476",
+        "image": "specimens/specimen-37338b2addeadaaab476.png"
+      }
+    },
+    {
+      "taskId": "task-34fad51557895aea0066",
+      "reference": {
+        "referenceId": "reference-b07d45a193740c2b24e9",
+        "image": "references/reference-b07d45a193740c2b24e9.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-2e14cd5455620d31c6d5",
+        "image": "specimens/specimen-2e14cd5455620d31c6d5.png"
+      }
+    },
+    {
+      "taskId": "task-118d4d74c7e9066740a3",
+      "reference": {
+        "referenceId": "reference-de455a8c239ca6c06fc2",
+        "image": "references/reference-de455a8c239ca6c06fc2.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-7ff8e50665ff2b9b31c7",
+        "image": "specimens/specimen-7ff8e50665ff2b9b31c7.png"
+      }
+    },
+    {
+      "taskId": "task-4e1b7b3e24ed5b68ceec",
+      "reference": {
+        "referenceId": "reference-667317e4c94dc123a24f",
+        "image": "references/reference-667317e4c94dc123a24f.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-7d6c9fa5bc5e0d39fd79",
+        "image": "specimens/specimen-7d6c9fa5bc5e0d39fd79.png"
+      }
+    },
+    {
+      "taskId": "task-f10308d75a1d6696a3b3",
+      "reference": {
+        "referenceId": "reference-5a288dd5027fc19bac9a",
+        "image": "references/reference-5a288dd5027fc19bac9a.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-acff3701b0f29d56100b",
+        "image": "specimens/specimen-acff3701b0f29d56100b.png"
+      }
+    },
+    {
+      "taskId": "task-ea2b7f7e9120d27fae2b",
+      "reference": {
+        "referenceId": "reference-fe091d488d3d2461bf0b",
+        "image": "references/reference-fe091d488d3d2461bf0b.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-0629b98961064238ac94",
+        "image": "specimens/specimen-0629b98961064238ac94.png"
+      }
+    },
+    {
+      "taskId": "task-1b9a26fa12def1fb5555",
+      "reference": {
+        "referenceId": "reference-d6be977e50a0d4a9f854",
+        "image": "references/reference-d6be977e50a0d4a9f854.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-0d2ee25959f8b44b8224",
+        "image": "specimens/specimen-0d2ee25959f8b44b8224.png"
+      }
+    },
+    {
+      "taskId": "task-f72bffba7148cd9058c3",
+      "reference": {
+        "referenceId": "reference-1bf6e71f9bc572af93b9",
+        "image": "references/reference-1bf6e71f9bc572af93b9.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-905fd4045c24c91d5c57",
+        "image": "specimens/specimen-905fd4045c24c91d5c57.png"
+      }
+    },
+    {
+      "taskId": "task-bd7a86aa2815f635cfe6",
+      "reference": {
+        "referenceId": "reference-011e5dfff6b17e94e184",
+        "image": "references/reference-011e5dfff6b17e94e184.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-a64f2dd0c190e4ca077d",
+        "image": "specimens/specimen-a64f2dd0c190e4ca077d.png"
+      }
+    },
+    {
+      "taskId": "task-f1514b4c455fa5e4a588",
+      "reference": {
+        "referenceId": "reference-9978df34a944ab9b8680",
+        "image": "references/reference-9978df34a944ab9b8680.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-5c4a0128686d430ef4bd",
+        "image": "specimens/specimen-5c4a0128686d430ef4bd.png"
+      }
+    },
+    {
+      "taskId": "task-6e850a1086160170f53a",
+      "reference": {
+        "referenceId": "reference-ca5514d278746277a5ce",
+        "image": "references/reference-ca5514d278746277a5ce.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-c577de955ad3e56b4a55",
+        "image": "specimens/specimen-c577de955ad3e56b4a55.png"
+      }
+    },
+    {
+      "taskId": "task-0bd437119339d5af6128",
+      "reference": {
+        "referenceId": "reference-8fc0195c5bac303f982d",
+        "image": "references/reference-8fc0195c5bac303f982d.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-917da31841762938deee",
+        "image": "specimens/specimen-917da31841762938deee.png"
+      }
+    },
+    {
+      "taskId": "task-d2830946268901b5fd5b",
+      "reference": {
+        "referenceId": "reference-6f6d8d6fc64cebc41ba2",
+        "image": "references/reference-6f6d8d6fc64cebc41ba2.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-0ba098c77e1fb8007008",
+        "image": "specimens/specimen-0ba098c77e1fb8007008.png"
+      }
+    },
+    {
+      "taskId": "task-bcf8b60ea25f224e3cf9",
+      "reference": {
+        "referenceId": "reference-cb98e4a388334e4150d5",
+        "image": "references/reference-cb98e4a388334e4150d5.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-be24e6ffcdb6b96fc95d",
+        "image": "specimens/specimen-be24e6ffcdb6b96fc95d.png"
+      }
+    },
+    {
+      "taskId": "task-749ce38b565947876bde",
+      "reference": {
+        "referenceId": "reference-90c28e03bacb6be2b5c4",
+        "image": "references/reference-90c28e03bacb6be2b5c4.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-e0aa11c726f8a1e8cb36",
+        "image": "specimens/specimen-e0aa11c726f8a1e8cb36.png"
+      }
+    },
+    {
+      "taskId": "task-cd098c51543867d6ee99",
+      "reference": {
+        "referenceId": "reference-27934a9d81a4aeb7c750",
+        "image": "references/reference-27934a9d81a4aeb7c750.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-dc0a2771e548031dce07",
+        "image": "specimens/specimen-dc0a2771e548031dce07.png"
+      }
+    },
+    {
+      "taskId": "task-6170b365d00d2eff4219",
+      "reference": {
+        "referenceId": "reference-a4808e39b1a1be87ed54",
+        "image": "references/reference-a4808e39b1a1be87ed54.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-7516aa3709da30095948",
+        "image": "specimens/specimen-7516aa3709da30095948.png"
+      }
+    },
+    {
+      "taskId": "task-183c2b387ce5abf1282c",
+      "reference": {
+        "referenceId": "reference-408f0a209cf97a878220",
+        "image": "references/reference-408f0a209cf97a878220.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-bd884dde0470ef84d41a",
+        "image": "specimens/specimen-bd884dde0470ef84d41a.png"
+      }
+    },
+    {
+      "taskId": "task-b4d0357dce6813c0fa02",
+      "reference": {
+        "referenceId": "reference-ff13f493bebf785660de",
+        "image": "references/reference-ff13f493bebf785660de.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-4fdd435f7d8ab6e1691d",
+        "image": "specimens/specimen-4fdd435f7d8ab6e1691d.png"
+      }
+    },
+    {
+      "taskId": "task-bc7ed24b04e3b6519b13",
+      "reference": {
+        "referenceId": "reference-0d07a114e726d5c536e5",
+        "image": "references/reference-0d07a114e726d5c536e5.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-cd5588f71550851d8730",
+        "image": "specimens/specimen-cd5588f71550851d8730.png"
+      }
+    },
+    {
+      "taskId": "task-c1d10782c92db9329b9d",
+      "reference": {
+        "referenceId": "reference-fd7d78ef9ccb31bf9e6b",
+        "image": "references/reference-fd7d78ef9ccb31bf9e6b.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-f23e12730183492741e3",
+        "image": "specimens/specimen-f23e12730183492741e3.png"
+      }
+    },
+    {
+      "taskId": "task-6a9ec782b772d9ed43e6",
+      "reference": {
+        "referenceId": "reference-07ecfa97c65b521d8a7f",
+        "image": "references/reference-07ecfa97c65b521d8a7f.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-ded919c6d4ac089ff271",
+        "image": "specimens/specimen-ded919c6d4ac089ff271.png"
+      }
+    },
+    {
+      "taskId": "task-ac3dbb41d4fb8bd26666",
+      "reference": {
+        "referenceId": "reference-dff09a9ff972d1ce1cfc",
+        "image": "references/reference-dff09a9ff972d1ce1cfc.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-a19e208b66effda14cb3",
+        "image": "specimens/specimen-a19e208b66effda14cb3.png"
+      }
+    },
+    {
+      "taskId": "task-3d26c4ec52b7431998f6",
+      "reference": {
+        "referenceId": "reference-ad10fcf138afadeeb33a",
+        "image": "references/reference-ad10fcf138afadeeb33a.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-b0ec9ff59f5c1cdf6f1a",
+        "image": "specimens/specimen-b0ec9ff59f5c1cdf6f1a.png"
+      }
+    },
+    {
+      "taskId": "task-aadc957cd67c1a65b3c0",
+      "reference": {
+        "referenceId": "reference-5d92a04bc7cfdeaa6ac2",
+        "image": "references/reference-5d92a04bc7cfdeaa6ac2.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-b3c328085abb7d29bcc8",
+        "image": "specimens/specimen-b3c328085abb7d29bcc8.png"
+      }
+    },
+    {
+      "taskId": "task-ffa56b9a6cc20835cfeb",
+      "reference": {
+        "referenceId": "reference-ddaf9e711d2a8340cd64",
+        "image": "references/reference-ddaf9e711d2a8340cd64.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-b7bf2c696426d4c0f38d",
+        "image": "specimens/specimen-b7bf2c696426d4c0f38d.png"
+      }
+    },
+    {
+      "taskId": "task-9647eea1ee0988b48056",
+      "reference": {
+        "referenceId": "reference-3da906c766f6f7633972",
+        "image": "references/reference-3da906c766f6f7633972.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-3d20425d72ad2cf992da",
+        "image": "specimens/specimen-3d20425d72ad2cf992da.png"
+      }
+    },
+    {
+      "taskId": "task-c07ef71f27253117c0bb",
+      "reference": {
+        "referenceId": "reference-207c24277bc1108f3cc6",
+        "image": "references/reference-207c24277bc1108f3cc6.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-8f0e4850e82a0399af7b",
+        "image": "specimens/specimen-8f0e4850e82a0399af7b.png"
+      }
+    },
+    {
+      "taskId": "task-3d815fb46290433707e3",
+      "reference": {
+        "referenceId": "reference-aa790aee83573fc55e27",
+        "image": "references/reference-aa790aee83573fc55e27.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-dc40492bf7a11b3b4ff4",
+        "image": "specimens/specimen-dc40492bf7a11b3b4ff4.png"
+      }
+    },
+    {
+      "taskId": "task-ea4ed1f0bef79bd027c5",
+      "reference": {
+        "referenceId": "reference-ca2e6bf817372da5a481",
+        "image": "references/reference-ca2e6bf817372da5a481.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-e5fc7535f2675ca092a1",
+        "image": "specimens/specimen-e5fc7535f2675ca092a1.png"
+      }
+    },
+    {
+      "taskId": "task-5469c92397d50099ae13",
+      "reference": {
+        "referenceId": "reference-a67cb53ac7cbe39eb9c3",
+        "image": "references/reference-a67cb53ac7cbe39eb9c3.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-1e1dddda1cf23b05a896",
+        "image": "specimens/specimen-1e1dddda1cf23b05a896.png"
+      }
+    },
+    {
+      "taskId": "task-d729762f177720f50781",
+      "reference": {
+        "referenceId": "reference-3d3ae191c6b80d87b318",
+        "image": "references/reference-3d3ae191c6b80d87b318.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-928c8d148a8cd6040039",
+        "image": "specimens/specimen-928c8d148a8cd6040039.png"
+      }
+    },
+    {
+      "taskId": "task-548fb26379ceef15ab47",
+      "reference": {
+        "referenceId": "reference-5ef07d7ce20be029d0d9",
+        "image": "references/reference-5ef07d7ce20be029d0d9.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-d3a6d41b961b386c75a5",
+        "image": "specimens/specimen-d3a6d41b961b386c75a5.png"
+      }
+    },
+    {
+      "taskId": "task-0938b14c2979d2e149eb",
+      "reference": {
+        "referenceId": "reference-543d758a245283e7294d",
+        "image": "references/reference-543d758a245283e7294d.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-e26b794068f27b42d2df",
+        "image": "specimens/specimen-e26b794068f27b42d2df.png"
+      }
+    },
+    {
+      "taskId": "task-fce05e2feb74e86a1f8c",
+      "reference": {
+        "referenceId": "reference-a01b6be2a1a8633710f6",
+        "image": "references/reference-a01b6be2a1a8633710f6.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-7dc83d4a704cbba967be",
+        "image": "specimens/specimen-7dc83d4a704cbba967be.png"
+      }
+    },
+    {
+      "taskId": "task-785a9d40924a009d4b07",
+      "reference": {
+        "referenceId": "reference-5f8c26e0cd15209d19cc",
+        "image": "references/reference-5f8c26e0cd15209d19cc.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-6437631465bc79f6ef89",
+        "image": "specimens/specimen-6437631465bc79f6ef89.png"
+      }
+    },
+    {
+      "taskId": "task-be4ee80256e78ae3e45b",
+      "reference": {
+        "referenceId": "reference-7170691ecd694defef11",
+        "image": "references/reference-7170691ecd694defef11.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-417211188c339aaa99ef",
+        "image": "specimens/specimen-417211188c339aaa99ef.png"
+      }
+    },
+    {
+      "taskId": "task-9e3bf1b4c610e5aeeeee",
+      "reference": {
+        "referenceId": "reference-7cca067e55a085380878",
+        "image": "references/reference-7cca067e55a085380878.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-ada4028888331f31d42b",
+        "image": "specimens/specimen-ada4028888331f31d42b.png"
+      }
+    },
+    {
+      "taskId": "task-99034eb0b049a2bb8eea",
+      "reference": {
+        "referenceId": "reference-39b0acdf3b97e7bb8619",
+        "image": "references/reference-39b0acdf3b97e7bb8619.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-91956daee5543a053945",
+        "image": "specimens/specimen-91956daee5543a053945.png"
+      }
+    },
+    {
+      "taskId": "task-f9ed3c0e213ce38e46b0",
+      "reference": {
+        "referenceId": "reference-c0b683586848aa347fbb",
+        "image": "references/reference-c0b683586848aa347fbb.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-a611e26e6d2c53c9e734",
+        "image": "specimens/specimen-a611e26e6d2c53c9e734.png"
+      }
+    },
+    {
+      "taskId": "task-07ac9e9d4da7c436a7cf",
+      "reference": {
+        "referenceId": "reference-9d204c53eb69f26a7ba5",
+        "image": "references/reference-9d204c53eb69f26a7ba5.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-233386ccb3f2991f23ac",
+        "image": "specimens/specimen-233386ccb3f2991f23ac.png"
+      }
+    },
+    {
+      "taskId": "task-68f7591481284387eefd",
+      "reference": {
+        "referenceId": "reference-048bd787a494ef087c00",
+        "image": "references/reference-048bd787a494ef087c00.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-ca208b861d9948584590",
+        "image": "specimens/specimen-ca208b861d9948584590.png"
+      }
+    },
+    {
+      "taskId": "task-d230ae152b54b36a48d5",
+      "reference": {
+        "referenceId": "reference-d94cb98c2b6cc230aeab",
+        "image": "references/reference-d94cb98c2b6cc230aeab.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-7dc3a88464c84d3919a7",
+        "image": "specimens/specimen-7dc3a88464c84d3919a7.png"
+      }
+    },
+    {
+      "taskId": "task-722ec197559922960535",
+      "reference": {
+        "referenceId": "reference-1be3394e7afd8c166fca",
+        "image": "references/reference-1be3394e7afd8c166fca.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-1681b1e2a07969d9916a",
+        "image": "specimens/specimen-1681b1e2a07969d9916a.png"
+      }
+    },
+    {
+      "taskId": "task-0a911032335c55a22688",
+      "reference": {
+        "referenceId": "reference-15db5df328456c467be9",
+        "image": "references/reference-15db5df328456c467be9.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-f6137a6d37c9bc132843",
+        "image": "specimens/specimen-f6137a6d37c9bc132843.png"
+      }
+    },
+    {
+      "taskId": "task-3119a51dff79a9012ba3",
+      "reference": {
+        "referenceId": "reference-48285b4a09efa53a5be3",
+        "image": "references/reference-48285b4a09efa53a5be3.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-f31f12126036595489bd",
+        "image": "specimens/specimen-f31f12126036595489bd.png"
+      }
+    },
+    {
+      "taskId": "task-67d18700078ccebb8a81",
+      "reference": {
+        "referenceId": "reference-1d23abc7719c58465f58",
+        "image": "references/reference-1d23abc7719c58465f58.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-1e2d51fb784ef43d592b",
+        "image": "specimens/specimen-1e2d51fb784ef43d592b.png"
+      }
+    },
+    {
+      "taskId": "task-135d7c810d0824ebc052",
+      "reference": {
+        "referenceId": "reference-7e02a5c44628f32c8052",
+        "image": "references/reference-7e02a5c44628f32c8052.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-91dd2ad38474b8a2623b",
+        "image": "specimens/specimen-91dd2ad38474b8a2623b.png"
+      }
+    },
+    {
+      "taskId": "task-78387a16114d20acae47",
+      "reference": {
+        "referenceId": "reference-b06be78b013479ebe9a3",
+        "image": "references/reference-b06be78b013479ebe9a3.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-923c5291fef3415e4c8e",
+        "image": "specimens/specimen-923c5291fef3415e4c8e.png"
+      }
+    },
+    {
+      "taskId": "task-7205d2885affdc486bbf",
+      "reference": {
+        "referenceId": "reference-eb7a50ce40b002ba5fa9",
+        "image": "references/reference-eb7a50ce40b002ba5fa9.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-c1f41d342d47f4f4a477",
+        "image": "specimens/specimen-c1f41d342d47f4f4a477.png"
+      }
+    },
+    {
+      "taskId": "task-0d0b0dd73866065709b0",
+      "reference": {
+        "referenceId": "reference-63dceafbebd4c1ee4de3",
+        "image": "references/reference-63dceafbebd4c1ee4de3.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-08690207c07c9f5465f1",
+        "image": "specimens/specimen-08690207c07c9f5465f1.png"
+      }
+    },
+    {
+      "taskId": "task-fa9f0efaab88f2ff87a8",
+      "reference": {
+        "referenceId": "reference-d60da6594caf4f8198ea",
+        "image": "references/reference-d60da6594caf4f8198ea.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-eaa1a624f5ebe618c05d",
+        "image": "specimens/specimen-eaa1a624f5ebe618c05d.png"
+      }
+    },
+    {
+      "taskId": "task-bed777133630bcedb1f8",
+      "reference": {
+        "referenceId": "reference-99a12516b183486b1226",
+        "image": "references/reference-99a12516b183486b1226.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-990d58899215c9dccf55",
+        "image": "specimens/specimen-990d58899215c9dccf55.png"
+      }
+    },
+    {
+      "taskId": "task-1e2d5ee97f867c87b9dc",
+      "reference": {
+        "referenceId": "reference-cb719e41d6faae5d8310",
+        "image": "references/reference-cb719e41d6faae5d8310.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-a72425f3e1a93977e07b",
+        "image": "specimens/specimen-a72425f3e1a93977e07b.png"
+      }
+    },
+    {
+      "taskId": "task-77450a8cb500e8a680fd",
+      "reference": {
+        "referenceId": "reference-df1b110e1bea9455ce23",
+        "image": "references/reference-df1b110e1bea9455ce23.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-59a1fcca769a7822ab59",
+        "image": "specimens/specimen-59a1fcca769a7822ab59.png"
+      }
+    },
+    {
+      "taskId": "task-a24ad261260dcf2cbefb",
+      "reference": {
+        "referenceId": "reference-9b2b171b47ec1c7d062c",
+        "image": "references/reference-9b2b171b47ec1c7d062c.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-0839dd6113694745ecab",
+        "image": "specimens/specimen-0839dd6113694745ecab.png"
+      }
+    },
+    {
+      "taskId": "task-ae40aa38f32ff2a45ae3",
+      "reference": {
+        "referenceId": "reference-134269540b36013acb4a",
+        "image": "references/reference-134269540b36013acb4a.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-684129c8a6be329606fe",
+        "image": "specimens/specimen-684129c8a6be329606fe.png"
+      }
+    },
+    {
+      "taskId": "task-788fa06c2446b539b096",
+      "reference": {
+        "referenceId": "reference-66aec52f1d1e7027a6cb",
+        "image": "references/reference-66aec52f1d1e7027a6cb.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-aa14728870b3685f869a",
+        "image": "specimens/specimen-aa14728870b3685f869a.png"
+      }
+    },
+    {
+      "taskId": "task-8a1f26669fa9ed56b570",
+      "reference": {
+        "referenceId": "reference-4cb5e47a59b170f99baf",
+        "image": "references/reference-4cb5e47a59b170f99baf.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-163db1602b72468fdeed",
+        "image": "specimens/specimen-163db1602b72468fdeed.png"
+      }
+    },
+    {
+      "taskId": "task-798ea7b3c4222a2e30a0",
+      "reference": {
+        "referenceId": "reference-f72bde38c0388aae9d3b",
+        "image": "references/reference-f72bde38c0388aae9d3b.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-65b40d4149c857b6e177",
+        "image": "specimens/specimen-65b40d4149c857b6e177.png"
+      }
+    },
+    {
+      "taskId": "task-cc02bd0e911e95aad143",
+      "reference": {
+        "referenceId": "reference-b13939acf8d2b4f73bd5",
+        "image": "references/reference-b13939acf8d2b4f73bd5.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-7d192f725ee53bb7b94f",
+        "image": "specimens/specimen-7d192f725ee53bb7b94f.png"
+      }
+    },
+    {
+      "taskId": "task-f1acb2b4a3143446eee4",
+      "reference": {
+        "referenceId": "reference-603526d2895ae2edf6fb",
+        "image": "references/reference-603526d2895ae2edf6fb.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-dba26e29ce8fd5906620",
+        "image": "specimens/specimen-dba26e29ce8fd5906620.png"
+      }
+    },
+    {
+      "taskId": "task-8e934114097966e80b7c",
+      "reference": {
+        "referenceId": "reference-a7ba4bed4ba032a10d06",
+        "image": "references/reference-a7ba4bed4ba032a10d06.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-6f714f05e2346062556a",
+        "image": "specimens/specimen-6f714f05e2346062556a.png"
+      }
+    },
+    {
+      "taskId": "task-b6e723824ff530e64f2b",
+      "reference": {
+        "referenceId": "reference-0fa4e7a131ae29b626cb",
+        "image": "references/reference-0fa4e7a131ae29b626cb.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-4b1a5896874cf75e5e9e",
+        "image": "specimens/specimen-4b1a5896874cf75e5e9e.png"
+      }
+    },
+    {
+      "taskId": "task-2dde1361eaf72d139e25",
+      "reference": {
+        "referenceId": "reference-cadce1e4090d0cb81df6",
+        "image": "references/reference-cadce1e4090d0cb81df6.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-d4750f6e8ef4b556beb8",
+        "image": "specimens/specimen-d4750f6e8ef4b556beb8.png"
+      }
+    },
+    {
+      "taskId": "task-cc4d3b070577ac0cb4bc",
+      "reference": {
+        "referenceId": "reference-e0a56df9c072ecf7abfb",
+        "image": "references/reference-e0a56df9c072ecf7abfb.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-da0d62eb78cf401e8ebf",
+        "image": "specimens/specimen-da0d62eb78cf401e8ebf.png"
+      }
+    },
+    {
+      "taskId": "task-5705d09db847adec51c6",
+      "reference": {
+        "referenceId": "reference-6a395914d753cca1e51c",
+        "image": "references/reference-6a395914d753cca1e51c.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-e3530fbde4d32252d70c",
+        "image": "specimens/specimen-e3530fbde4d32252d70c.png"
+      }
+    },
+    {
+      "taskId": "task-43c8f8c1afdd3e175b7e",
+      "reference": {
+        "referenceId": "reference-a4e24030dbe0b56d029a",
+        "image": "references/reference-a4e24030dbe0b56d029a.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-fa8ae1249527257256f4",
+        "image": "specimens/specimen-fa8ae1249527257256f4.png"
+      }
+    },
+    {
+      "taskId": "task-47b6ab6f01aca19085bb",
+      "reference": {
+        "referenceId": "reference-a7c756cea250934d2fcb",
+        "image": "references/reference-a7c756cea250934d2fcb.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-079520a260208a3bb14a",
+        "image": "specimens/specimen-079520a260208a3bb14a.png"
+      }
+    },
+    {
+      "taskId": "task-be29f0d2a89143a2a120",
+      "reference": {
+        "referenceId": "reference-04e01f87d29b5aa83d4e",
+        "image": "references/reference-04e01f87d29b5aa83d4e.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-28547c01772aedcb4d8e",
+        "image": "specimens/specimen-28547c01772aedcb4d8e.png"
+      }
+    },
+    {
+      "taskId": "task-2b9f36c6b87752875cf9",
+      "reference": {
+        "referenceId": "reference-a51dedb49d9e1300e914",
+        "image": "references/reference-a51dedb49d9e1300e914.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-7e03183d051e56b2695f",
+        "image": "specimens/specimen-7e03183d051e56b2695f.png"
+      }
+    },
+    {
+      "taskId": "task-96c64d6f5728755a74a0",
+      "reference": {
+        "referenceId": "reference-3b7d1704ba0c72759c8d",
+        "image": "references/reference-3b7d1704ba0c72759c8d.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-e7e746f878954419b6b4",
+        "image": "specimens/specimen-e7e746f878954419b6b4.png"
+      }
+    },
+    {
+      "taskId": "task-66cb3f3726cd885ea38a",
+      "reference": {
+        "referenceId": "reference-23e85f752e4806539515",
+        "image": "references/reference-23e85f752e4806539515.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-a87c93f2ac187bd45f92",
+        "image": "specimens/specimen-a87c93f2ac187bd45f92.png"
+      }
+    },
+    {
+      "taskId": "task-9c38e0009584069f071b",
+      "reference": {
+        "referenceId": "reference-c79cc9bdd4f0e017f158",
+        "image": "references/reference-c79cc9bdd4f0e017f158.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-aefe7243a50993eddff5",
+        "image": "specimens/specimen-aefe7243a50993eddff5.png"
+      }
+    },
+    {
+      "taskId": "task-93035b939311d3dc506f",
+      "reference": {
+        "referenceId": "reference-8127b62aa90e114c689d",
+        "image": "references/reference-8127b62aa90e114c689d.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-860f73f9e25df0b0f047",
+        "image": "specimens/specimen-860f73f9e25df0b0f047.png"
+      }
+    },
+    {
+      "taskId": "task-568e8d67bc14c280e61b",
+      "reference": {
+        "referenceId": "reference-a8200f912586018d13e7",
+        "image": "references/reference-a8200f912586018d13e7.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-ed61a5823baaf7f4dd7f",
+        "image": "specimens/specimen-ed61a5823baaf7f4dd7f.png"
+      }
+    },
+    {
+      "taskId": "task-5c9a89759bda6a6cc5fa",
+      "reference": {
+        "referenceId": "reference-fad7c4cc4b317f3aa82c",
+        "image": "references/reference-fad7c4cc4b317f3aa82c.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-06bdb71335e58d70237d",
+        "image": "specimens/specimen-06bdb71335e58d70237d.png"
+      }
+    },
+    {
+      "taskId": "task-489be8045c616517cd28",
+      "reference": {
+        "referenceId": "reference-d028290f4f07ad84db95",
+        "image": "references/reference-d028290f4f07ad84db95.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-65ee327e49feb8887c15",
+        "image": "specimens/specimen-65ee327e49feb8887c15.png"
+      }
+    },
+    {
+      "taskId": "task-d5bf26b94c6a7f27d578",
+      "reference": {
+        "referenceId": "reference-741c1ebb3f069ccd8af5",
+        "image": "references/reference-741c1ebb3f069ccd8af5.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-a1d75821574e61ab24ec",
+        "image": "specimens/specimen-a1d75821574e61ab24ec.png"
+      }
+    },
+    {
+      "taskId": "task-f3051ba302c33d25ddbb",
+      "reference": {
+        "referenceId": "reference-52b5cdbfaf3c52d1cd5d",
+        "image": "references/reference-52b5cdbfaf3c52d1cd5d.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-11e2d6b23a1c36342fe1",
+        "image": "specimens/specimen-11e2d6b23a1c36342fe1.png"
+      }
+    },
+    {
+      "taskId": "task-50596466f4b9c3df33c1",
+      "reference": {
+        "referenceId": "reference-afa8a8484396d5c505de",
+        "image": "references/reference-afa8a8484396d5c505de.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-fd024e68ea76a93b9fdf",
+        "image": "specimens/specimen-fd024e68ea76a93b9fdf.png"
+      }
+    },
+    {
+      "taskId": "task-60ae268c06d16012cca2",
+      "reference": {
+        "referenceId": "reference-e4d6b7d7801846abdda8",
+        "image": "references/reference-e4d6b7d7801846abdda8.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-31fe954d4af78f7ef94f",
+        "image": "specimens/specimen-31fe954d4af78f7ef94f.png"
+      }
+    },
+    {
+      "taskId": "task-73243c2c81089a33db7d",
+      "reference": {
+        "referenceId": "reference-4b88adafa7dc4268fdf5",
+        "image": "references/reference-4b88adafa7dc4268fdf5.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-f472e25324974d39e481",
+        "image": "specimens/specimen-f472e25324974d39e481.png"
+      }
+    },
+    {
+      "taskId": "task-f8514c075e968607a403",
+      "reference": {
+        "referenceId": "reference-c5a6b2e14d6605a574c2",
+        "image": "references/reference-c5a6b2e14d6605a574c2.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-59123e985e772428b228",
+        "image": "specimens/specimen-59123e985e772428b228.png"
+      }
+    },
+    {
+      "taskId": "task-2192218859b7e6ad87ac",
+      "reference": {
+        "referenceId": "reference-fc283efa12f4000656df",
+        "image": "references/reference-fc283efa12f4000656df.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-e6f20d3b57ae4fd191a5",
+        "image": "specimens/specimen-e6f20d3b57ae4fd191a5.png"
+      }
+    },
+    {
+      "taskId": "task-40e423d7447766235e9b",
+      "reference": {
+        "referenceId": "reference-76b7e330ac8740ae46fc",
+        "image": "references/reference-76b7e330ac8740ae46fc.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-9d50053dd35d62fda831",
+        "image": "specimens/specimen-9d50053dd35d62fda831.png"
+      }
+    },
+    {
+      "taskId": "task-8db27421dfdd319551e2",
+      "reference": {
+        "referenceId": "reference-58dcc806fcaa6ef2676c",
+        "image": "references/reference-58dcc806fcaa6ef2676c.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-e9f54494a3495cf3ada2",
+        "image": "specimens/specimen-e9f54494a3495cf3ada2.png"
+      }
+    },
+    {
+      "taskId": "task-735dcc32b4633681944b",
+      "reference": {
+        "referenceId": "reference-809ade20f6bdc7202008",
+        "image": "references/reference-809ade20f6bdc7202008.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-ba09ccba2a3a1c5c03ad",
+        "image": "specimens/specimen-ba09ccba2a3a1c5c03ad.png"
+      }
+    },
+    {
+      "taskId": "task-1b76b7b5cd54dffe0641",
+      "reference": {
+        "referenceId": "reference-049553cfc1fd50426b07",
+        "image": "references/reference-049553cfc1fd50426b07.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-1431080ad0d5b2b525b5",
+        "image": "specimens/specimen-1431080ad0d5b2b525b5.png"
+      }
+    },
+    {
+      "taskId": "task-1228767f06ab413fa121",
+      "reference": {
+        "referenceId": "reference-811e536751aee400635e",
+        "image": "references/reference-811e536751aee400635e.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-42da9591ca201ad8acda",
+        "image": "specimens/specimen-42da9591ca201ad8acda.png"
+      }
+    },
+    {
+      "taskId": "task-b27393165c4d72625331",
+      "reference": {
+        "referenceId": "reference-da00a21c7464be0cd40e",
+        "image": "references/reference-da00a21c7464be0cd40e.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-e44384bd257a8d79567a",
+        "image": "specimens/specimen-e44384bd257a8d79567a.png"
+      }
+    },
+    {
+      "taskId": "task-341c0b02d6317a590356",
+      "reference": {
+        "referenceId": "reference-0d54fc84373ba1e1cff9",
+        "image": "references/reference-0d54fc84373ba1e1cff9.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-10663b4d17b915b7d192",
+        "image": "specimens/specimen-10663b4d17b915b7d192.png"
+      }
+    },
+    {
+      "taskId": "task-55bf58bcf0af4b74e12f",
+      "reference": {
+        "referenceId": "reference-f7678914bc9256d92367",
+        "image": "references/reference-f7678914bc9256d92367.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-86f72bac203eec87df66",
+        "image": "specimens/specimen-86f72bac203eec87df66.png"
+      }
+    },
+    {
+      "taskId": "task-f30b869027fc472eac92",
+      "reference": {
+        "referenceId": "reference-837d8aa6e72d01403807",
+        "image": "references/reference-837d8aa6e72d01403807.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-a5eebca487a1c52c7291",
+        "image": "specimens/specimen-a5eebca487a1c52c7291.png"
+      }
+    },
+    {
+      "taskId": "task-661d3dc667f62c558ac1",
+      "reference": {
+        "referenceId": "reference-73d27d72057230bcc2ce",
+        "image": "references/reference-73d27d72057230bcc2ce.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-890472b41e02089f694a",
+        "image": "specimens/specimen-890472b41e02089f694a.png"
+      }
+    },
+    {
+      "taskId": "task-3da62c53abd5ab9e5166",
+      "reference": {
+        "referenceId": "reference-8281a2df8b6214f5d319",
+        "image": "references/reference-8281a2df8b6214f5d319.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-49325c06db6e6457f619",
+        "image": "specimens/specimen-49325c06db6e6457f619.png"
+      }
+    },
+    {
+      "taskId": "task-f884c66eabd60acef73f",
+      "reference": {
+        "referenceId": "reference-8fd808dd5f3de3b844d0",
+        "image": "references/reference-8fd808dd5f3de3b844d0.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-d92c980ddd28159cdd45",
+        "image": "specimens/specimen-d92c980ddd28159cdd45.png"
+      }
+    },
+    {
+      "taskId": "task-655ca82ac3761d8d9966",
+      "reference": {
+        "referenceId": "reference-26be1ccdc1eccda142f2",
+        "image": "references/reference-26be1ccdc1eccda142f2.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-3f557efc500d8507b53c",
+        "image": "specimens/specimen-3f557efc500d8507b53c.png"
+      }
+    },
+    {
+      "taskId": "task-c5160c1927c2ca3b38dc",
+      "reference": {
+        "referenceId": "reference-f5bfc001876b289e7248",
+        "image": "references/reference-f5bfc001876b289e7248.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-f4038150556bf8db1c9a",
+        "image": "specimens/specimen-f4038150556bf8db1c9a.png"
+      }
+    },
+    {
+      "taskId": "task-ddfaa259d3c28d61fd43",
+      "reference": {
+        "referenceId": "reference-64508b2ac640b6a02cf7",
+        "image": "references/reference-64508b2ac640b6a02cf7.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-4605fef16a7f05e69b15",
+        "image": "specimens/specimen-4605fef16a7f05e69b15.png"
+      }
+    },
+    {
+      "taskId": "task-bdcca674c67ed66b5670",
+      "reference": {
+        "referenceId": "reference-fcd9ab8f94ac767106ea",
+        "image": "references/reference-fcd9ab8f94ac767106ea.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-67a7b362979b9b8736a6",
+        "image": "specimens/specimen-67a7b362979b9b8736a6.png"
+      }
+    },
+    {
+      "taskId": "task-b0b0be3285773a84d9c4",
+      "reference": {
+        "referenceId": "reference-6b1ed85c40a90ebd191d",
+        "image": "references/reference-6b1ed85c40a90ebd191d.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-c011f369a9bfc6009ba6",
+        "image": "specimens/specimen-c011f369a9bfc6009ba6.png"
+      }
+    },
+    {
+      "taskId": "task-de9dbc263e97ce6e372a",
+      "reference": {
+        "referenceId": "reference-d99a3e736d40c084483d",
+        "image": "references/reference-d99a3e736d40c084483d.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-8487a91f4a901881192e",
+        "image": "specimens/specimen-8487a91f4a901881192e.png"
+      }
+    },
+    {
+      "taskId": "task-a26eeaaa9f7cb242d304",
+      "reference": {
+        "referenceId": "reference-301bf970ebb00d90d244",
+        "image": "references/reference-301bf970ebb00d90d244.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-3740de92cc13f2ddbd1a",
+        "image": "specimens/specimen-3740de92cc13f2ddbd1a.png"
+      }
+    },
+    {
+      "taskId": "task-d64a0df57fc2591c7dfa",
+      "reference": {
+        "referenceId": "reference-d763143350b8052f1e8c",
+        "image": "references/reference-d763143350b8052f1e8c.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-2b98a8c3ee8fee21e118",
+        "image": "specimens/specimen-2b98a8c3ee8fee21e118.png"
+      }
+    },
+    {
+      "taskId": "task-58782a8531aec20cc284",
+      "reference": {
+        "referenceId": "reference-3fc13b99124014e7867b",
+        "image": "references/reference-3fc13b99124014e7867b.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-4bd09281acf74355ca4d",
+        "image": "specimens/specimen-4bd09281acf74355ca4d.png"
+      }
+    },
+    {
+      "taskId": "task-d38ef56bdee2021fdc22",
+      "reference": {
+        "referenceId": "reference-87038ffdbe0769abd53f",
+        "image": "references/reference-87038ffdbe0769abd53f.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-47e97a9c07e7adb9c42b",
+        "image": "specimens/specimen-47e97a9c07e7adb9c42b.png"
+      }
+    },
+    {
+      "taskId": "task-f1d7797bb233a7cd0a32",
+      "reference": {
+        "referenceId": "reference-a2c731513dd852018e45",
+        "image": "references/reference-a2c731513dd852018e45.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-94fef8343d045b419a18",
+        "image": "specimens/specimen-94fef8343d045b419a18.png"
+      }
+    },
+    {
+      "taskId": "task-9f5b5f4f04f34d130a46",
+      "reference": {
+        "referenceId": "reference-6eb01b20112c322e3e18",
+        "image": "references/reference-6eb01b20112c322e3e18.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-45b8b14c662b102f0eac",
+        "image": "specimens/specimen-45b8b14c662b102f0eac.png"
+      }
+    },
+    {
+      "taskId": "task-9971017e2f2ff29e5f50",
+      "reference": {
+        "referenceId": "reference-b656a8508e5d252641c6",
+        "image": "references/reference-b656a8508e5d252641c6.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-77da1eda1cafaf5843eb",
+        "image": "specimens/specimen-77da1eda1cafaf5843eb.png"
+      }
+    },
+    {
+      "taskId": "task-3dbcc13ce1f54193a35c",
+      "reference": {
+        "referenceId": "reference-13763be6fc2adc897dba",
+        "image": "references/reference-13763be6fc2adc897dba.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-014a3e8b325416b81b69",
+        "image": "specimens/specimen-014a3e8b325416b81b69.png"
+      }
+    },
+    {
+      "taskId": "task-fc7e096156b82f7e3209",
+      "reference": {
+        "referenceId": "reference-efd42f3a891c6a75eb6e",
+        "image": "references/reference-efd42f3a891c6a75eb6e.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-1c54e2601eea1a03f3c2",
+        "image": "specimens/specimen-1c54e2601eea1a03f3c2.png"
+      }
+    },
+    {
+      "taskId": "task-54e2eb015e3d27d748aa",
+      "reference": {
+        "referenceId": "reference-0e25ec77c181ed29568a",
+        "image": "references/reference-0e25ec77c181ed29568a.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-19ff05a400d7e50ba9da",
+        "image": "specimens/specimen-19ff05a400d7e50ba9da.png"
+      }
+    },
+    {
+      "taskId": "task-d772d41168e905158a5f",
+      "reference": {
+        "referenceId": "reference-019a766d4c09a45a6eea",
+        "image": "references/reference-019a766d4c09a45a6eea.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-c5f259c4f7bb5be73c81",
+        "image": "specimens/specimen-c5f259c4f7bb5be73c81.png"
+      }
+    },
+    {
+      "taskId": "task-a332d5147e9bf6913076",
+      "reference": {
+        "referenceId": "reference-9f8779ba73dd934d499e",
+        "image": "references/reference-9f8779ba73dd934d499e.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-ae4750e062fbbdd3a780",
+        "image": "specimens/specimen-ae4750e062fbbdd3a780.png"
+      }
+    },
+    {
+      "taskId": "task-21baef84884dba79abd8",
+      "reference": {
+        "referenceId": "reference-b679d1d019e51e0c66c5",
+        "image": "references/reference-b679d1d019e51e0c66c5.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-e40af0f5ff44dc0a9fa9",
+        "image": "specimens/specimen-e40af0f5ff44dc0a9fa9.png"
+      }
+    },
+    {
+      "taskId": "task-74cc92e4daf72f8efc80",
+      "reference": {
+        "referenceId": "reference-fecc74d3bbcd3aa695fa",
+        "image": "references/reference-fecc74d3bbcd3aa695fa.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-c298d2dbca01d9564266",
+        "image": "specimens/specimen-c298d2dbca01d9564266.png"
+      }
+    },
+    {
+      "taskId": "task-5f609e8dc08a3322b962",
+      "reference": {
+        "referenceId": "reference-fb62ebac822b904077fd",
+        "image": "references/reference-fb62ebac822b904077fd.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-71ff808125f0dca80f03",
+        "image": "specimens/specimen-71ff808125f0dca80f03.png"
+      }
+    },
+    {
+      "taskId": "task-b909559a119e15cb6ad1",
+      "reference": {
+        "referenceId": "reference-85c590f5725af451c09a",
+        "image": "references/reference-85c590f5725af451c09a.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-3f55849265ea5d83eed0",
+        "image": "specimens/specimen-3f55849265ea5d83eed0.png"
+      }
+    },
+    {
+      "taskId": "task-3ae10ef1c8b3de8b5afa",
+      "reference": {
+        "referenceId": "reference-c9c472f6329dbd6e14a8",
+        "image": "references/reference-c9c472f6329dbd6e14a8.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-0af28431d96e3f6bc4d2",
+        "image": "specimens/specimen-0af28431d96e3f6bc4d2.png"
+      }
+    },
+    {
+      "taskId": "task-c94ab9ee1dace46edb0f",
+      "reference": {
+        "referenceId": "reference-cb1f90886d54ad3de620",
+        "image": "references/reference-cb1f90886d54ad3de620.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-2110ec973aaa4ec026ff",
+        "image": "specimens/specimen-2110ec973aaa4ec026ff.png"
+      }
+    },
+    {
+      "taskId": "task-545092dbfa84313a5611",
+      "reference": {
+        "referenceId": "reference-3503d27c3290d35609b6",
+        "image": "references/reference-3503d27c3290d35609b6.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-8f25863296b5b1bc2f09",
+        "image": "specimens/specimen-8f25863296b5b1bc2f09.png"
+      }
+    },
+    {
+      "taskId": "task-c2a79252cdb4cbd33d4c",
+      "reference": {
+        "referenceId": "reference-c05063633ab4a32b2316",
+        "image": "references/reference-c05063633ab4a32b2316.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-fd1fcf95e21a4cecce30",
+        "image": "specimens/specimen-fd1fcf95e21a4cecce30.png"
+      }
+    },
+    {
+      "taskId": "task-37d8028105be186f3354",
+      "reference": {
+        "referenceId": "reference-a67f5466f30616245a44",
+        "image": "references/reference-a67f5466f30616245a44.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-a8021b4818d10b8aac71",
+        "image": "specimens/specimen-a8021b4818d10b8aac71.png"
+      }
+    },
+    {
+      "taskId": "task-fa4bbe595369abe35462",
+      "reference": {
+        "referenceId": "reference-6ba4552a873c059972c9",
+        "image": "references/reference-6ba4552a873c059972c9.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-7de81e20393310ee3e18",
+        "image": "specimens/specimen-7de81e20393310ee3e18.png"
+      }
+    },
+    {
+      "taskId": "task-6eed3771a4919a3fcaa4",
+      "reference": {
+        "referenceId": "reference-64aa1a48f0b3e04d202d",
+        "image": "references/reference-64aa1a48f0b3e04d202d.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-2bd1605bbb917d5b96eb",
+        "image": "specimens/specimen-2bd1605bbb917d5b96eb.png"
+      }
+    },
+    {
+      "taskId": "task-656b5fdfcbc278889dbb",
+      "reference": {
+        "referenceId": "reference-4e21b8df98c0ab5f55b2",
+        "image": "references/reference-4e21b8df98c0ab5f55b2.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-aeb334e63fab7bace534",
+        "image": "specimens/specimen-aeb334e63fab7bace534.png"
+      }
+    },
+    {
+      "taskId": "task-485d151d6d4153ee24b3",
+      "reference": {
+        "referenceId": "reference-2dc47a21d18d7d7692c8",
+        "image": "references/reference-2dc47a21d18d7d7692c8.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-c153235914afcf889cf5",
+        "image": "specimens/specimen-c153235914afcf889cf5.png"
+      }
+    },
+    {
+      "taskId": "task-c0108d73fda4a69e3f03",
+      "reference": {
+        "referenceId": "reference-b8493e029163eb99f986",
+        "image": "references/reference-b8493e029163eb99f986.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-e401e6934a082286c4ef",
+        "image": "specimens/specimen-e401e6934a082286c4ef.png"
+      }
+    },
+    {
+      "taskId": "task-881aeb42cda9110ca1db",
+      "reference": {
+        "referenceId": "reference-0fe4ea66a8681ffda6de",
+        "image": "references/reference-0fe4ea66a8681ffda6de.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-159ec8175732cdec9f4a",
+        "image": "specimens/specimen-159ec8175732cdec9f4a.png"
+      }
+    },
+    {
+      "taskId": "task-470bd966b05f9c03f9b8",
+      "reference": {
+        "referenceId": "reference-6cf4c546f173a6e8187b",
+        "image": "references/reference-6cf4c546f173a6e8187b.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-5adef006943d72f9bf9a",
+        "image": "specimens/specimen-5adef006943d72f9bf9a.png"
+      }
+    },
+    {
+      "taskId": "task-31acfb4359dda8389218",
+      "reference": {
+        "referenceId": "reference-96717afb4c60e265e4e1",
+        "image": "references/reference-96717afb4c60e265e4e1.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-510402d426586fab8160",
+        "image": "specimens/specimen-510402d426586fab8160.png"
+      }
+    },
+    {
+      "taskId": "task-b64fd1a0a60689ef0d76",
+      "reference": {
+        "referenceId": "reference-a49ad703d9df3e9ac7f9",
+        "image": "references/reference-a49ad703d9df3e9ac7f9.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-bff3192ad55b405a466d",
+        "image": "specimens/specimen-bff3192ad55b405a466d.png"
+      }
+    },
+    {
+      "taskId": "task-5156e35de7d8c33b3a00",
+      "reference": {
+        "referenceId": "reference-71bab0147c83f5e1c72e",
+        "image": "references/reference-71bab0147c83f5e1c72e.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-5b080716c2a09168d93f",
+        "image": "specimens/specimen-5b080716c2a09168d93f.png"
+      }
+    },
+    {
+      "taskId": "task-af181d818e9c5c8a9fc6",
+      "reference": {
+        "referenceId": "reference-47207a1840b328c9e7ff",
+        "image": "references/reference-47207a1840b328c9e7ff.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-fb2264852b1ab6cbf933",
+        "image": "specimens/specimen-fb2264852b1ab6cbf933.png"
+      }
+    },
+    {
+      "taskId": "task-dfa8dc473562024d47fe",
+      "reference": {
+        "referenceId": "reference-5cf1f48dbe84c2f95fb5",
+        "image": "references/reference-5cf1f48dbe84c2f95fb5.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-4ea0af25087efa537e48",
+        "image": "specimens/specimen-4ea0af25087efa537e48.png"
+      }
+    },
+    {
+      "taskId": "task-8e703ee16f05c68f722a",
+      "reference": {
+        "referenceId": "reference-efbe7dc16fe3a5cdbedf",
+        "image": "references/reference-efbe7dc16fe3a5cdbedf.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-2f0d3b63ade9814a0648",
+        "image": "specimens/specimen-2f0d3b63ade9814a0648.png"
+      }
+    },
+    {
+      "taskId": "task-57cfdf66fcf23c46267b",
+      "reference": {
+        "referenceId": "reference-94ddda285c8afcac8ce1",
+        "image": "references/reference-94ddda285c8afcac8ce1.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-5e3be956363290f3a912",
+        "image": "specimens/specimen-5e3be956363290f3a912.png"
+      }
+    },
+    {
+      "taskId": "task-be4cd4eae0ca326399fa",
+      "reference": {
+        "referenceId": "reference-6584ff3c7372fa0ec5c0",
+        "image": "references/reference-6584ff3c7372fa0ec5c0.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-3a6904c3a1675571cb8d",
+        "image": "specimens/specimen-3a6904c3a1675571cb8d.png"
+      }
+    },
+    {
+      "taskId": "task-d112b33b3dcb8f0b0e35",
+      "reference": {
+        "referenceId": "reference-407c7f8554bacb24a78b",
+        "image": "references/reference-407c7f8554bacb24a78b.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-49d9a7ae5e989d70c574",
+        "image": "specimens/specimen-49d9a7ae5e989d70c574.png"
+      }
+    },
+    {
+      "taskId": "task-4b9f738ee486b909a835",
+      "reference": {
+        "referenceId": "reference-b6db37fc107269ad2c55",
+        "image": "references/reference-b6db37fc107269ad2c55.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-f9b75a6eaa7666f5bcf1",
+        "image": "specimens/specimen-f9b75a6eaa7666f5bcf1.png"
+      }
+    },
+    {
+      "taskId": "task-7416f33b4bbbec70e392",
+      "reference": {
+        "referenceId": "reference-eeaada3801d7488ecf37",
+        "image": "references/reference-eeaada3801d7488ecf37.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-82ffd00a911ef4738a95",
+        "image": "specimens/specimen-82ffd00a911ef4738a95.png"
+      }
+    },
+    {
+      "taskId": "task-8313e5f8610f61ce27fd",
+      "reference": {
+        "referenceId": "reference-7770af2c7aa1ef0731fc",
+        "image": "references/reference-7770af2c7aa1ef0731fc.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-641b2b9b1b326ca724ce",
+        "image": "specimens/specimen-641b2b9b1b326ca724ce.png"
+      }
+    },
+    {
+      "taskId": "task-e52f26769e3a7664b6b6",
+      "reference": {
+        "referenceId": "reference-7fca80c3b0c719363b47",
+        "image": "references/reference-7fca80c3b0c719363b47.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-6dbc11feac556f8dbff3",
+        "image": "specimens/specimen-6dbc11feac556f8dbff3.png"
+      }
+    },
+    {
+      "taskId": "task-6b5dd5f5b8b5a491470c",
+      "reference": {
+        "referenceId": "reference-01c65cb5aa1c5c579db1",
+        "image": "references/reference-01c65cb5aa1c5c579db1.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-dbf67911cbfb84899f8f",
+        "image": "specimens/specimen-dbf67911cbfb84899f8f.png"
+      }
+    },
+    {
+      "taskId": "task-d201466d11ca38ff969e",
+      "reference": {
+        "referenceId": "reference-f6a0dba84223df6b856f",
+        "image": "references/reference-f6a0dba84223df6b856f.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-e373f7f8b0ce7c734783",
+        "image": "specimens/specimen-e373f7f8b0ce7c734783.png"
+      }
+    },
+    {
+      "taskId": "task-a4eeba7b3347172c2746",
+      "reference": {
+        "referenceId": "reference-18694c05fe483d5103f2",
+        "image": "references/reference-18694c05fe483d5103f2.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-6e93291a6addf77d4f83",
+        "image": "specimens/specimen-6e93291a6addf77d4f83.png"
+      }
+    },
+    {
+      "taskId": "task-19bb55fed2430cb0836d",
+      "reference": {
+        "referenceId": "reference-2967ed4d87697abe08db",
+        "image": "references/reference-2967ed4d87697abe08db.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-cf60df97c64a723a788e",
+        "image": "specimens/specimen-cf60df97c64a723a788e.png"
+      }
+    },
+    {
+      "taskId": "task-7d4736bd066030aaf0fb",
+      "reference": {
+        "referenceId": "reference-1105a916f56dd12ce118",
+        "image": "references/reference-1105a916f56dd12ce118.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-032153c8a45bac03a5d2",
+        "image": "specimens/specimen-032153c8a45bac03a5d2.png"
+      }
+    },
+    {
+      "taskId": "task-8c803630588e5e089ddd",
+      "reference": {
+        "referenceId": "reference-7d393fcccbc8a49e2d01",
+        "image": "references/reference-7d393fcccbc8a49e2d01.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-24efa7e95bd7420d8bcc",
+        "image": "specimens/specimen-24efa7e95bd7420d8bcc.png"
+      }
+    },
+    {
+      "taskId": "task-048615195485ae2e89ca",
+      "reference": {
+        "referenceId": "reference-8b70db53a2320fe2e68f",
+        "image": "references/reference-8b70db53a2320fe2e68f.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-6a815618b2dd465c1592",
+        "image": "specimens/specimen-6a815618b2dd465c1592.png"
+      }
+    },
+    {
+      "taskId": "task-eef9e22eafc0fe7c15d3",
+      "reference": {
+        "referenceId": "reference-e195508b576ad40aa52c",
+        "image": "references/reference-e195508b576ad40aa52c.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-3d1b6b1e54396dca20df",
+        "image": "specimens/specimen-3d1b6b1e54396dca20df.png"
+      }
+    },
+    {
+      "taskId": "task-82144617be2a19ed7945",
+      "reference": {
+        "referenceId": "reference-db2d050ada3589d0bece",
+        "image": "references/reference-db2d050ada3589d0bece.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-e790608956ece767ecc7",
+        "image": "specimens/specimen-e790608956ece767ecc7.png"
+      }
+    },
+    {
+      "taskId": "task-7e5ffc319f28dcd34532",
+      "reference": {
+        "referenceId": "reference-132a91af7b6356068d42",
+        "image": "references/reference-132a91af7b6356068d42.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-f92018bca74a1807ff7e",
+        "image": "specimens/specimen-f92018bca74a1807ff7e.png"
+      }
+    },
+    {
+      "taskId": "task-39d020a15168f95519d2",
+      "reference": {
+        "referenceId": "reference-9943cdfd7044c7fd783a",
+        "image": "references/reference-9943cdfd7044c7fd783a.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-2c1cbb2ab0035b66e1f1",
+        "image": "specimens/specimen-2c1cbb2ab0035b66e1f1.png"
+      }
+    },
+    {
+      "taskId": "task-a824e8ba4785d7585d27",
+      "reference": {
+        "referenceId": "reference-3c9f4e5b8fa69b818140",
+        "image": "references/reference-3c9f4e5b8fa69b818140.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-6b470b44729a9367db9b",
+        "image": "specimens/specimen-6b470b44729a9367db9b.png"
+      }
+    },
+    {
+      "taskId": "task-351ceeddfcc2a1567eed",
+      "reference": {
+        "referenceId": "reference-9c4ed6da9da661b15d3c",
+        "image": "references/reference-9c4ed6da9da661b15d3c.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-0ecab15445832b297b07",
+        "image": "specimens/specimen-0ecab15445832b297b07.png"
+      }
+    },
+    {
+      "taskId": "task-104414de5246e9d49d80",
+      "reference": {
+        "referenceId": "reference-b37a07900726eb6928c1",
+        "image": "references/reference-b37a07900726eb6928c1.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-9473d6af6dfa04d6d317",
+        "image": "specimens/specimen-9473d6af6dfa04d6d317.png"
+      }
+    },
+    {
+      "taskId": "task-24838648de7636cd0bdc",
+      "reference": {
+        "referenceId": "reference-666bd0a26907af386cad",
+        "image": "references/reference-666bd0a26907af386cad.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-91da7aab3eabb5c76af7",
+        "image": "specimens/specimen-91da7aab3eabb5c76af7.png"
+      }
+    },
+    {
+      "taskId": "task-43774022933fdb53be48",
+      "reference": {
+        "referenceId": "reference-c1f40104e92f66486f8a",
+        "image": "references/reference-c1f40104e92f66486f8a.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-6bb0894cdbf3e39230de",
+        "image": "specimens/specimen-6bb0894cdbf3e39230de.png"
+      }
+    },
+    {
+      "taskId": "task-af9e2b473b4132860159",
+      "reference": {
+        "referenceId": "reference-ca2d50f8f62794cd7059",
+        "image": "references/reference-ca2d50f8f62794cd7059.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-f4e2cd4cae5cea537851",
+        "image": "specimens/specimen-f4e2cd4cae5cea537851.png"
+      }
+    },
+    {
+      "taskId": "task-a72abd1cc8a86dbcc1a1",
+      "reference": {
+        "referenceId": "reference-ffa22d27c504f2a877d0",
+        "image": "references/reference-ffa22d27c504f2a877d0.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-cc246b9fe9b2b61297d5",
+        "image": "specimens/specimen-cc246b9fe9b2b61297d5.png"
+      }
+    },
+    {
+      "taskId": "task-222e1585b44e5929f0c4",
+      "reference": {
+        "referenceId": "reference-5858d959810f1e02b4b9",
+        "image": "references/reference-5858d959810f1e02b4b9.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-48802781bee0fb23f528",
+        "image": "specimens/specimen-48802781bee0fb23f528.png"
+      }
+    },
+    {
+      "taskId": "task-471882e1c752e8f97385",
+      "reference": {
+        "referenceId": "reference-b56be6db38dfc7f86e0a",
+        "image": "references/reference-b56be6db38dfc7f86e0a.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-1f523e5d508e674779a3",
+        "image": "specimens/specimen-1f523e5d508e674779a3.png"
+      }
+    },
+    {
+      "taskId": "task-6ac75a9d701d8715c2de",
+      "reference": {
+        "referenceId": "reference-48e7b4c5794d4dcb127d",
+        "image": "references/reference-48e7b4c5794d4dcb127d.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-afadc46726a4c9e82523",
+        "image": "specimens/specimen-afadc46726a4c9e82523.png"
+      }
+    },
+    {
+      "taskId": "task-05db4c22bc29b734db1a",
+      "reference": {
+        "referenceId": "reference-59441cfff8b55a0feddb",
+        "image": "references/reference-59441cfff8b55a0feddb.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-a8fc22072aa728fcb692",
+        "image": "specimens/specimen-a8fc22072aa728fcb692.png"
+      }
+    },
+    {
+      "taskId": "task-d90337952f2a6b8a4241",
+      "reference": {
+        "referenceId": "reference-4266ada8e76a73b40f24",
+        "image": "references/reference-4266ada8e76a73b40f24.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-61f7422bbd3c4d6903dc",
+        "image": "specimens/specimen-61f7422bbd3c4d6903dc.png"
+      }
+    },
+    {
+      "taskId": "task-92976b9cc13b38bc237c",
+      "reference": {
+        "referenceId": "reference-0e22b20e8968ad24c2aa",
+        "image": "references/reference-0e22b20e8968ad24c2aa.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-dbc8bb268b4c3a02a599",
+        "image": "specimens/specimen-dbc8bb268b4c3a02a599.png"
+      }
+    },
+    {
+      "taskId": "task-299f55d9061d7dcd1ef4",
+      "reference": {
+        "referenceId": "reference-f74e22658c7039d03ddc",
+        "image": "references/reference-f74e22658c7039d03ddc.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-371728b78c599180de18",
+        "image": "specimens/specimen-371728b78c599180de18.png"
+      }
+    },
+    {
+      "taskId": "task-48fe4b775c0e0e8dc673",
+      "reference": {
+        "referenceId": "reference-1c72ef57f8f3e246468a",
+        "image": "references/reference-1c72ef57f8f3e246468a.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-178799f45e95d5716952",
+        "image": "specimens/specimen-178799f45e95d5716952.png"
+      }
+    },
+    {
+      "taskId": "task-d45d2567520636924961",
+      "reference": {
+        "referenceId": "reference-7df38040637061f1040b",
+        "image": "references/reference-7df38040637061f1040b.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-068acec34d5dae209e63",
+        "image": "specimens/specimen-068acec34d5dae209e63.png"
+      }
+    },
+    {
+      "taskId": "task-7cee2b6d19fe596e2499",
+      "reference": {
+        "referenceId": "reference-89f863ecea478501d3c6",
+        "image": "references/reference-89f863ecea478501d3c6.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-60dde9d65a8f3b8fad75",
+        "image": "specimens/specimen-60dde9d65a8f3b8fad75.png"
+      }
+    },
+    {
+      "taskId": "task-7b564ef38285bd65a726",
+      "reference": {
+        "referenceId": "reference-27050a12a691a9f95c85",
+        "image": "references/reference-27050a12a691a9f95c85.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-c2a79eaada35c0a1a68e",
+        "image": "specimens/specimen-c2a79eaada35c0a1a68e.png"
+      }
+    },
+    {
+      "taskId": "task-7be00bf27529611f7f48",
+      "reference": {
+        "referenceId": "reference-e45d4c074db0dc0e0670",
+        "image": "references/reference-e45d4c074db0dc0e0670.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-22338641185af1312337",
+        "image": "specimens/specimen-22338641185af1312337.png"
+      }
+    },
+    {
+      "taskId": "task-a51db4531e97e0589fe2",
+      "reference": {
+        "referenceId": "reference-a146858bd6ae30d92391",
+        "image": "references/reference-a146858bd6ae30d92391.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-95fe7e38f437675a5aee",
+        "image": "specimens/specimen-95fe7e38f437675a5aee.png"
+      }
+    },
+    {
+      "taskId": "task-e5d0b2fb0e4dde8a1661",
+      "reference": {
+        "referenceId": "reference-6d7a5f0a00616e3415d1",
+        "image": "references/reference-6d7a5f0a00616e3415d1.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-c5128c1e5bb0cc5cc055",
+        "image": "specimens/specimen-c5128c1e5bb0cc5cc055.png"
+      }
+    },
+    {
+      "taskId": "task-02e690c1645d16b2377f",
+      "reference": {
+        "referenceId": "reference-868c7551508679480028",
+        "image": "references/reference-868c7551508679480028.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-0574dc62a6d639cf61b2",
+        "image": "specimens/specimen-0574dc62a6d639cf61b2.png"
+      }
+    },
+    {
+      "taskId": "task-d414cd79874998ae49e5",
+      "reference": {
+        "referenceId": "reference-6ec5496ef3c9eb4c71d6",
+        "image": "references/reference-6ec5496ef3c9eb4c71d6.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-eaa086028f5fb3f3f06f",
+        "image": "specimens/specimen-eaa086028f5fb3f3f06f.png"
+      }
+    },
+    {
+      "taskId": "task-036697bd5f5605638e8e",
+      "reference": {
+        "referenceId": "reference-d4a69f776e44c1ca0273",
+        "image": "references/reference-d4a69f776e44c1ca0273.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-8a15717e858783e814ee",
+        "image": "specimens/specimen-8a15717e858783e814ee.png"
+      }
+    },
+    {
+      "taskId": "task-c87118262c109f522673",
+      "reference": {
+        "referenceId": "reference-1374d5cf7b10a9236895",
+        "image": "references/reference-1374d5cf7b10a9236895.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-11c0d18702feeef917b4",
+        "image": "specimens/specimen-11c0d18702feeef917b4.png"
+      }
+    },
+    {
+      "taskId": "task-1c79691e22382038c29c",
+      "reference": {
+        "referenceId": "reference-80b1ca2da80c36efe837",
+        "image": "references/reference-80b1ca2da80c36efe837.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-6ebfe7803ffd773e380c",
+        "image": "specimens/specimen-6ebfe7803ffd773e380c.png"
+      }
+    },
+    {
+      "taskId": "task-869129fccff2c50eaeb2",
+      "reference": {
+        "referenceId": "reference-86b2fc535ae7cffda7db",
+        "image": "references/reference-86b2fc535ae7cffda7db.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-2f1d0d7a59665229b2f7",
+        "image": "specimens/specimen-2f1d0d7a59665229b2f7.png"
+      }
+    },
+    {
+      "taskId": "task-5fbb853d1ad6d18ed5d9",
+      "reference": {
+        "referenceId": "reference-cd16ac51feaa06935338",
+        "image": "references/reference-cd16ac51feaa06935338.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-b226cf796f4f590b0aa0",
+        "image": "specimens/specimen-b226cf796f4f590b0aa0.png"
+      }
+    },
+    {
+      "taskId": "task-13f8327d1be4f24525a0",
+      "reference": {
+        "referenceId": "reference-c6bd7396164a22a1b5c0",
+        "image": "references/reference-c6bd7396164a22a1b5c0.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-e4250af3629a0175c15e",
+        "image": "specimens/specimen-e4250af3629a0175c15e.png"
+      }
+    },
+    {
+      "taskId": "task-5d3c0a06a560ae0580a8",
+      "reference": {
+        "referenceId": "reference-83468d2eeabf8d64335e",
+        "image": "references/reference-83468d2eeabf8d64335e.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-786112ce4c01d7f0c873",
+        "image": "specimens/specimen-786112ce4c01d7f0c873.png"
+      }
+    },
+    {
+      "taskId": "task-1d7592e5022fea618ae5",
+      "reference": {
+        "referenceId": "reference-bd63ff21e90b76c1d887",
+        "image": "references/reference-bd63ff21e90b76c1d887.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-e76949fea674c8a6e35d",
+        "image": "specimens/specimen-e76949fea674c8a6e35d.png"
+      }
+    },
+    {
+      "taskId": "task-d23e5f0db92cf46b788a",
+      "reference": {
+        "referenceId": "reference-928d1be64bf16c2bf82b",
+        "image": "references/reference-928d1be64bf16c2bf82b.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-a3fa55ceb7fde7b7c68c",
+        "image": "specimens/specimen-a3fa55ceb7fde7b7c68c.png"
+      }
+    },
+    {
+      "taskId": "task-9e493ce0c37c566225f7",
+      "reference": {
+        "referenceId": "reference-252feefefac7c8175180",
+        "image": "references/reference-252feefefac7c8175180.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-0c99b27fc27ccdcd421c",
+        "image": "specimens/specimen-0c99b27fc27ccdcd421c.png"
+      }
+    },
+    {
+      "taskId": "task-e6024b98106f3f117121",
+      "reference": {
+        "referenceId": "reference-6a77e44455db0111a4a4",
+        "image": "references/reference-6a77e44455db0111a4a4.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-cd30cfb55b0c46ad7383",
+        "image": "specimens/specimen-cd30cfb55b0c46ad7383.png"
+      }
+    },
+    {
+      "taskId": "task-9db32d1125ac93ce5934",
+      "reference": {
+        "referenceId": "reference-9293563cae468f57ab7f",
+        "image": "references/reference-9293563cae468f57ab7f.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-394382cbb6bc824b43bc",
+        "image": "specimens/specimen-394382cbb6bc824b43bc.png"
+      }
+    },
+    {
+      "taskId": "task-59afa626c990ca5df7e6",
+      "reference": {
+        "referenceId": "reference-0fdf2e6ae5e91b5de1c7",
+        "image": "references/reference-0fdf2e6ae5e91b5de1c7.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-78cbac384f023f299c09",
+        "image": "specimens/specimen-78cbac384f023f299c09.png"
+      }
+    },
+    {
+      "taskId": "task-a1468646be34af1b7d49",
+      "reference": {
+        "referenceId": "reference-06237266f3688e3b0cb6",
+        "image": "references/reference-06237266f3688e3b0cb6.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-64bc14c38765336d9f9b",
+        "image": "specimens/specimen-64bc14c38765336d9f9b.png"
+      }
+    },
+    {
+      "taskId": "task-db689e670c0737c603b3",
+      "reference": {
+        "referenceId": "reference-db571d5e6f075714b1ea",
+        "image": "references/reference-db571d5e6f075714b1ea.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-56eb86f41ee9377463cc",
+        "image": "specimens/specimen-56eb86f41ee9377463cc.png"
+      }
+    },
+    {
+      "taskId": "task-44b18dbfd3156fd9d869",
+      "reference": {
+        "referenceId": "reference-6f43bb0dc0081bbe5ba9",
+        "image": "references/reference-6f43bb0dc0081bbe5ba9.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-6fe768f2207e318524b7",
+        "image": "specimens/specimen-6fe768f2207e318524b7.png"
+      }
+    },
+    {
+      "taskId": "task-6713777c5c10dac2c5ca",
+      "reference": {
+        "referenceId": "reference-931552ed74b19ba4e58a",
+        "image": "references/reference-931552ed74b19ba4e58a.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-aacbe8b37ff8e384ec67",
+        "image": "specimens/specimen-aacbe8b37ff8e384ec67.png"
+      }
+    },
+    {
+      "taskId": "task-30ef60ae7acae3fcc209",
+      "reference": {
+        "referenceId": "reference-61b76a7a9f7ac517cc8b",
+        "image": "references/reference-61b76a7a9f7ac517cc8b.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-847caa596d6fa8ee909a",
+        "image": "specimens/specimen-847caa596d6fa8ee909a.png"
+      }
+    },
+    {
+      "taskId": "task-7abb6faa18476e0154d5",
+      "reference": {
+        "referenceId": "reference-6f2e09bbb7d1dd53f954",
+        "image": "references/reference-6f2e09bbb7d1dd53f954.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-833cbd2e6da8738a05ac",
+        "image": "specimens/specimen-833cbd2e6da8738a05ac.png"
+      }
+    },
+    {
+      "taskId": "task-d877bae6f2cd8f2c0140",
+      "reference": {
+        "referenceId": "reference-3d6d186873c9eb07c51e",
+        "image": "references/reference-3d6d186873c9eb07c51e.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-f647edc19d147ed56055",
+        "image": "specimens/specimen-f647edc19d147ed56055.png"
+      }
+    },
+    {
+      "taskId": "task-740d2976317f218b3765",
+      "reference": {
+        "referenceId": "reference-f0534549960864817531",
+        "image": "references/reference-f0534549960864817531.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-01e23f71b1a827f07a73",
+        "image": "specimens/specimen-01e23f71b1a827f07a73.png"
+      }
+    },
+    {
+      "taskId": "task-33af8f4cb34cefe556d1",
+      "reference": {
+        "referenceId": "reference-ff3800d66bc6bfb309d0",
+        "image": "references/reference-ff3800d66bc6bfb309d0.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-6806d24e9b18df787829",
+        "image": "specimens/specimen-6806d24e9b18df787829.png"
+      }
+    },
+    {
+      "taskId": "task-e79ebb2343203bb25c68",
+      "reference": {
+        "referenceId": "reference-567d71e3c2412a235c8c",
+        "image": "references/reference-567d71e3c2412a235c8c.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-6357681a2610dbb385af",
+        "image": "specimens/specimen-6357681a2610dbb385af.png"
+      }
+    },
+    {
+      "taskId": "task-71296aced2acac7465ba",
+      "reference": {
+        "referenceId": "reference-fc79b0e12a416869a252",
+        "image": "references/reference-fc79b0e12a416869a252.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-1dd22fecc11ee19919c1",
+        "image": "specimens/specimen-1dd22fecc11ee19919c1.png"
+      }
+    },
+    {
+      "taskId": "task-4c53592a5f35f4f3b39a",
+      "reference": {
+        "referenceId": "reference-d8b805f07efdd4115682",
+        "image": "references/reference-d8b805f07efdd4115682.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-7ac25186c1eb65bab1f0",
+        "image": "specimens/specimen-7ac25186c1eb65bab1f0.png"
+      }
+    },
+    {
+      "taskId": "task-9df7af9348a296420058",
+      "reference": {
+        "referenceId": "reference-dce3606261c3e77e7c04",
+        "image": "references/reference-dce3606261c3e77e7c04.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-94aea0b476fcdf1ecc3d",
+        "image": "specimens/specimen-94aea0b476fcdf1ecc3d.png"
+      }
+    },
+    {
+      "taskId": "task-e26445d554002ea4329e",
+      "reference": {
+        "referenceId": "reference-b29112b25cb79af324e3",
+        "image": "references/reference-b29112b25cb79af324e3.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-51bf82939a7f9b004ad7",
+        "image": "specimens/specimen-51bf82939a7f9b004ad7.png"
+      }
+    },
+    {
+      "taskId": "task-3bb07dba757845145500",
+      "reference": {
+        "referenceId": "reference-3be2c3e095c5e98280ae",
+        "image": "references/reference-3be2c3e095c5e98280ae.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-53ae8ae8027493c84109",
+        "image": "specimens/specimen-53ae8ae8027493c84109.png"
+      }
+    },
+    {
+      "taskId": "task-b9a2fc4375505376af4d",
+      "reference": {
+        "referenceId": "reference-be0e01da788edaee35c5",
+        "image": "references/reference-be0e01da788edaee35c5.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-6e4c09cba476ff838f29",
+        "image": "specimens/specimen-6e4c09cba476ff838f29.png"
+      }
+    },
+    {
+      "taskId": "task-e5b2cd2c557eb09e5a55",
+      "reference": {
+        "referenceId": "reference-087f4f0561ec66387a9c",
+        "image": "references/reference-087f4f0561ec66387a9c.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-9cd44bb3b812a7265b22",
+        "image": "specimens/specimen-9cd44bb3b812a7265b22.png"
+      }
+    },
+    {
+      "taskId": "task-628d5e72e9ac5e09ba16",
+      "reference": {
+        "referenceId": "reference-2b9bc37d8ec978b16dc6",
+        "image": "references/reference-2b9bc37d8ec978b16dc6.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-1227053fc402cb600eee",
+        "image": "specimens/specimen-1227053fc402cb600eee.png"
+      }
+    },
+    {
+      "taskId": "task-47308dd028c964761a32",
+      "reference": {
+        "referenceId": "reference-6ba63f2d2dbae834b73e",
+        "image": "references/reference-6ba63f2d2dbae834b73e.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-84ec5b018f5583b810c1",
+        "image": "specimens/specimen-84ec5b018f5583b810c1.png"
+      }
+    },
+    {
+      "taskId": "task-2cecbea81d6a5da85c80",
+      "reference": {
+        "referenceId": "reference-7e789e007ac6d020c358",
+        "image": "references/reference-7e789e007ac6d020c358.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-469ff6f103477abe1522",
+        "image": "specimens/specimen-469ff6f103477abe1522.png"
+      }
+    },
+    {
+      "taskId": "task-42be64c7efacf516a778",
+      "reference": {
+        "referenceId": "reference-c41efdac0d5bcef028ce",
+        "image": "references/reference-c41efdac0d5bcef028ce.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-cd12189029a7c9f7ff39",
+        "image": "specimens/specimen-cd12189029a7c9f7ff39.png"
+      }
+    },
+    {
+      "taskId": "task-3775de783ad931d5a0db",
+      "reference": {
+        "referenceId": "reference-4ec21a3c2855f842b5f5",
+        "image": "references/reference-4ec21a3c2855f842b5f5.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-3487584355d199c2a791",
+        "image": "specimens/specimen-3487584355d199c2a791.png"
+      }
+    },
+    {
+      "taskId": "task-1d7380cfedfa4627c64a",
+      "reference": {
+        "referenceId": "reference-61491b71db9d44a5714a",
+        "image": "references/reference-61491b71db9d44a5714a.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-10d679376ca3519a84c2",
+        "image": "specimens/specimen-10d679376ca3519a84c2.png"
+      }
+    },
+    {
+      "taskId": "task-4b2e00206b2490ef54e4",
+      "reference": {
+        "referenceId": "reference-150834356ffcc30d9bef",
+        "image": "references/reference-150834356ffcc30d9bef.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-bc7794a02fb1769d6980",
+        "image": "specimens/specimen-bc7794a02fb1769d6980.png"
+      }
+    },
+    {
+      "taskId": "task-c6cd2d6c5c4e235d1dc8",
+      "reference": {
+        "referenceId": "reference-a29e47a624a58f585b83",
+        "image": "references/reference-a29e47a624a58f585b83.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-9ce2e9ebdaa3fd816458",
+        "image": "specimens/specimen-9ce2e9ebdaa3fd816458.png"
+      }
+    },
+    {
+      "taskId": "task-734173fe4128be48b8f7",
+      "reference": {
+        "referenceId": "reference-f45e87b574efcefdca49",
+        "image": "references/reference-f45e87b574efcefdca49.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-c3be47d9f581eb919a10",
+        "image": "specimens/specimen-c3be47d9f581eb919a10.png"
+      }
+    },
+    {
+      "taskId": "task-935e55bb27ddc414e74e",
+      "reference": {
+        "referenceId": "reference-f5d6f8bef858b65e067b",
+        "image": "references/reference-f5d6f8bef858b65e067b.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-e18e298ec6c2a18e68ab",
+        "image": "specimens/specimen-e18e298ec6c2a18e68ab.png"
+      }
+    },
+    {
+      "taskId": "task-b598e8c1d47870157fac",
+      "reference": {
+        "referenceId": "reference-7f62268e83e47d635a16",
+        "image": "references/reference-7f62268e83e47d635a16.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-b312b36d1b40b9c59bab",
+        "image": "specimens/specimen-b312b36d1b40b9c59bab.png"
+      }
+    },
+    {
+      "taskId": "task-2d7b284978f5e5a1bc33",
+      "reference": {
+        "referenceId": "reference-704e6edb73cde9d65a03",
+        "image": "references/reference-704e6edb73cde9d65a03.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-16e3952338b2d4ebc6b0",
+        "image": "specimens/specimen-16e3952338b2d4ebc6b0.png"
+      }
+    },
+    {
+      "taskId": "task-2a0af19e2a5905f6dc3d",
+      "reference": {
+        "referenceId": "reference-910a722ed1be75c0417a",
+        "image": "references/reference-910a722ed1be75c0417a.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-708481689e54f9d14e4d",
+        "image": "specimens/specimen-708481689e54f9d14e4d.png"
+      }
+    },
+    {
+      "taskId": "task-0099db2c6d3803900d22",
+      "reference": {
+        "referenceId": "reference-4302f8dac76b4e6eb2a5",
+        "image": "references/reference-4302f8dac76b4e6eb2a5.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-6537f53c37ebffb7d0da",
+        "image": "specimens/specimen-6537f53c37ebffb7d0da.png"
+      }
+    },
+    {
+      "taskId": "task-33d7daa97a88593092a7",
+      "reference": {
+        "referenceId": "reference-44dd4f1e9b42feb3eaa7",
+        "image": "references/reference-44dd4f1e9b42feb3eaa7.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-444fe8da990d18eec5be",
+        "image": "specimens/specimen-444fe8da990d18eec5be.png"
+      }
+    },
+    {
+      "taskId": "task-e6c3e6b87ce336248ed7",
+      "reference": {
+        "referenceId": "reference-ee1c38dd563f37730e0c",
+        "image": "references/reference-ee1c38dd563f37730e0c.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-6ac505e039e42d80a41d",
+        "image": "specimens/specimen-6ac505e039e42d80a41d.png"
+      }
+    },
+    {
+      "taskId": "task-14bcc86c9f0b46552060",
+      "reference": {
+        "referenceId": "reference-73966a61c2cd57606698",
+        "image": "references/reference-73966a61c2cd57606698.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-df04a1d7448aecb23f7a",
+        "image": "specimens/specimen-df04a1d7448aecb23f7a.png"
+      }
+    },
+    {
+      "taskId": "task-6a227cb2f2737fbe5d54",
+      "reference": {
+        "referenceId": "reference-efc1b37efb77735e1a59",
+        "image": "references/reference-efc1b37efb77735e1a59.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-e538503c80dc3c4ec6d1",
+        "image": "specimens/specimen-e538503c80dc3c4ec6d1.png"
+      }
+    },
+    {
+      "taskId": "task-dd3d33730dbf6b4762f8",
+      "reference": {
+        "referenceId": "reference-5ce203ac202f463515c7",
+        "image": "references/reference-5ce203ac202f463515c7.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-8fe7638019488488d03a",
+        "image": "specimens/specimen-8fe7638019488488d03a.png"
+      }
+    },
+    {
+      "taskId": "task-e4b5c6d73d8575c0bbab",
+      "reference": {
+        "referenceId": "reference-aed6d17f019e65885eca",
+        "image": "references/reference-aed6d17f019e65885eca.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-8226227346d21d030db0",
+        "image": "specimens/specimen-8226227346d21d030db0.png"
+      }
+    },
+    {
+      "taskId": "task-1a755081ad7a1de466a1",
+      "reference": {
+        "referenceId": "reference-95d8521f97dacfa4e838",
+        "image": "references/reference-95d8521f97dacfa4e838.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-2880c9082335fae73141",
+        "image": "specimens/specimen-2880c9082335fae73141.png"
+      }
+    },
+    {
+      "taskId": "task-cc4a3ee7d6d37360566d",
+      "reference": {
+        "referenceId": "reference-798cc827ff2587aa4785",
+        "image": "references/reference-798cc827ff2587aa4785.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-c574e1f231b81a4c03d5",
+        "image": "specimens/specimen-c574e1f231b81a4c03d5.png"
+      }
+    },
+    {
+      "taskId": "task-b1479416312e9511f173",
+      "reference": {
+        "referenceId": "reference-8d103f150536386c8c44",
+        "image": "references/reference-8d103f150536386c8c44.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-d2c8f37f7a2751cab5ce",
+        "image": "specimens/specimen-d2c8f37f7a2751cab5ce.png"
+      }
+    },
+    {
+      "taskId": "task-31a754ee6f42cabadac5",
+      "reference": {
+        "referenceId": "reference-06cc15ed0474c21d0207",
+        "image": "references/reference-06cc15ed0474c21d0207.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-a0ac8698c93057c03ce9",
+        "image": "specimens/specimen-a0ac8698c93057c03ce9.png"
+      }
+    },
+    {
+      "taskId": "task-c48bb25204297c9a59ef",
+      "reference": {
+        "referenceId": "reference-801e1bbd8eeee94380a1",
+        "image": "references/reference-801e1bbd8eeee94380a1.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-5d98d811b1f8c454b87f",
+        "image": "specimens/specimen-5d98d811b1f8c454b87f.png"
+      }
+    },
+    {
+      "taskId": "task-2c42ba86bbfaa07dce1c",
+      "reference": {
+        "referenceId": "reference-39d9b29694fc79d470b2",
+        "image": "references/reference-39d9b29694fc79d470b2.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-b5e8cb44e423191b07c9",
+        "image": "specimens/specimen-b5e8cb44e423191b07c9.png"
+      }
+    },
+    {
+      "taskId": "task-a83080112f08fe623ca4",
+      "reference": {
+        "referenceId": "reference-9a00b10e99d16256d4b5",
+        "image": "references/reference-9a00b10e99d16256d4b5.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-1981c0e235a9c6d0fbaa",
+        "image": "specimens/specimen-1981c0e235a9c6d0fbaa.png"
+      }
+    },
+    {
+      "taskId": "task-3cc813de8b29926297b5",
+      "reference": {
+        "referenceId": "reference-304fbdcaf6e53ae1c53b",
+        "image": "references/reference-304fbdcaf6e53ae1c53b.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-b1a026a4c5a6efc9fbd5",
+        "image": "specimens/specimen-b1a026a4c5a6efc9fbd5.png"
+      }
+    },
+    {
+      "taskId": "task-b5b49fa160d32ab1198e",
+      "reference": {
+        "referenceId": "reference-c2741525ed154e842574",
+        "image": "references/reference-c2741525ed154e842574.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-ede37ce6b7e4ef2f28ca",
+        "image": "specimens/specimen-ede37ce6b7e4ef2f28ca.png"
+      }
+    },
+    {
+      "taskId": "task-26c01fab8edacd0ef3e2",
+      "reference": {
+        "referenceId": "reference-271a0a85ba53c993d5f1",
+        "image": "references/reference-271a0a85ba53c993d5f1.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-0b588fa1623efdc846c7",
+        "image": "specimens/specimen-0b588fa1623efdc846c7.png"
+      }
+    },
+    {
+      "taskId": "task-19e854c589cb9aede9a5",
+      "reference": {
+        "referenceId": "reference-3dac5b34fe177fe098fd",
+        "image": "references/reference-3dac5b34fe177fe098fd.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-83b8a418a13fc30b9b5f",
+        "image": "specimens/specimen-83b8a418a13fc30b9b5f.png"
+      }
+    },
+    {
+      "taskId": "task-45eb8784bec9489783d6",
+      "reference": {
+        "referenceId": "reference-5af8d2e6552e05523ed3",
+        "image": "references/reference-5af8d2e6552e05523ed3.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-20ef321d72c8f0927925",
+        "image": "specimens/specimen-20ef321d72c8f0927925.png"
+      }
+    },
+    {
+      "taskId": "task-8ccbb915c9f83de140b2",
+      "reference": {
+        "referenceId": "reference-cf953aa498d210e8654d",
+        "image": "references/reference-cf953aa498d210e8654d.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-fbef2be652cc8bb62e3d",
+        "image": "specimens/specimen-fbef2be652cc8bb62e3d.png"
+      }
+    },
+    {
+      "taskId": "task-717cc70093366d0ae66c",
+      "reference": {
+        "referenceId": "reference-4349be53b179e55fff7f",
+        "image": "references/reference-4349be53b179e55fff7f.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-392e6f0f6019519c983e",
+        "image": "specimens/specimen-392e6f0f6019519c983e.png"
+      }
+    },
+    {
+      "taskId": "task-c2baed7ce2c57dd01049",
+      "reference": {
+        "referenceId": "reference-b7876309aefd97ae58b8",
+        "image": "references/reference-b7876309aefd97ae58b8.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-faa252b3a8530babbd09",
+        "image": "specimens/specimen-faa252b3a8530babbd09.png"
+      }
+    },
+    {
+      "taskId": "task-78912e604222c30a8295",
+      "reference": {
+        "referenceId": "reference-791d49cbd7a781dced12",
+        "image": "references/reference-791d49cbd7a781dced12.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-71b0426c6025118df327",
+        "image": "specimens/specimen-71b0426c6025118df327.png"
+      }
+    },
+    {
+      "taskId": "task-35c415b86efde636318f",
+      "reference": {
+        "referenceId": "reference-bf9b214df18344c07061",
+        "image": "references/reference-bf9b214df18344c07061.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-3476cc7e60ad1657c778",
+        "image": "specimens/specimen-3476cc7e60ad1657c778.png"
+      }
+    },
+    {
+      "taskId": "task-99c80700867d96ceeb9b",
+      "reference": {
+        "referenceId": "reference-025227e62e6cf1e31469",
+        "image": "references/reference-025227e62e6cf1e31469.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-117e6d4569499d05ba9b",
+        "image": "specimens/specimen-117e6d4569499d05ba9b.png"
+      }
+    },
+    {
+      "taskId": "task-d2958d4c5060801d5c32",
+      "reference": {
+        "referenceId": "reference-1a2304dd40ec56e7cd1b",
+        "image": "references/reference-1a2304dd40ec56e7cd1b.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-15a79d33f20becb97cb3",
+        "image": "specimens/specimen-15a79d33f20becb97cb3.png"
+      }
+    },
+    {
+      "taskId": "task-3543296db5937bed89f3",
+      "reference": {
+        "referenceId": "reference-e456f18985bca9070e84",
+        "image": "references/reference-e456f18985bca9070e84.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-8b86986869c87d617b22",
+        "image": "specimens/specimen-8b86986869c87d617b22.png"
+      }
+    },
+    {
+      "taskId": "task-607e65ac6138ebe8d6e3",
+      "reference": {
+        "referenceId": "reference-b85bc3308a2396ca8d94",
+        "image": "references/reference-b85bc3308a2396ca8d94.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-f9255497d83084da2068",
+        "image": "specimens/specimen-f9255497d83084da2068.png"
+      }
+    },
+    {
+      "taskId": "task-cc66098a5b3dd309a46a",
+      "reference": {
+        "referenceId": "reference-f272c81faeab38d41c5b",
+        "image": "references/reference-f272c81faeab38d41c5b.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-c19888bd3f472ce79e16",
+        "image": "specimens/specimen-c19888bd3f472ce79e16.png"
+      }
+    },
+    {
+      "taskId": "task-7c07cdec6d9c50cc7fda",
+      "reference": {
+        "referenceId": "reference-d77146f96d40f6aeffca",
+        "image": "references/reference-d77146f96d40f6aeffca.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-4c7df383aa90b27812f0",
+        "image": "specimens/specimen-4c7df383aa90b27812f0.png"
+      }
+    },
+    {
+      "taskId": "task-8eacbdd63a57438b56b0",
+      "reference": {
+        "referenceId": "reference-53a57a4240743bdf5114",
+        "image": "references/reference-53a57a4240743bdf5114.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-74d4bd202add964a20a1",
+        "image": "specimens/specimen-74d4bd202add964a20a1.png"
+      }
+    },
+    {
+      "taskId": "task-8d636f70d22c403fc5cf",
+      "reference": {
+        "referenceId": "reference-5f8e5341052dd5f1f4be",
+        "image": "references/reference-5f8e5341052dd5f1f4be.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-76797b82a59daa273cfb",
+        "image": "specimens/specimen-76797b82a59daa273cfb.png"
+      }
+    },
+    {
+      "taskId": "task-89103624774e59572011",
+      "reference": {
+        "referenceId": "reference-5dcc2523e7cb930559cd",
+        "image": "references/reference-5dcc2523e7cb930559cd.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-d4e4c39b002c381ccd5a",
+        "image": "specimens/specimen-d4e4c39b002c381ccd5a.png"
+      }
+    },
+    {
+      "taskId": "task-f2ab3bb2b31d7a863496",
+      "reference": {
+        "referenceId": "reference-314dc0d8d3fd3a23a506",
+        "image": "references/reference-314dc0d8d3fd3a23a506.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-f09b1186d60e5cb01aa5",
+        "image": "specimens/specimen-f09b1186d60e5cb01aa5.png"
+      }
+    },
+    {
+      "taskId": "task-128dcc771565af6274af",
+      "reference": {
+        "referenceId": "reference-93ae03bfdeb680c6ce17",
+        "image": "references/reference-93ae03bfdeb680c6ce17.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-4472f3483dfdc22a7998",
+        "image": "specimens/specimen-4472f3483dfdc22a7998.png"
+      }
+    },
+    {
+      "taskId": "task-7035cdc38c1d0f775d00",
+      "reference": {
+        "referenceId": "reference-a7d8830cd91fd9d24682",
+        "image": "references/reference-a7d8830cd91fd9d24682.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-e7f515c23e1b46037fe3",
+        "image": "specimens/specimen-e7f515c23e1b46037fe3.png"
+      }
+    },
+    {
+      "taskId": "task-073cb122ff12af9c3606",
+      "reference": {
+        "referenceId": "reference-b3b6703d0397467a3bce",
+        "image": "references/reference-b3b6703d0397467a3bce.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-efdba60d42146468ba7f",
+        "image": "specimens/specimen-efdba60d42146468ba7f.png"
+      }
+    },
+    {
+      "taskId": "task-c16e7f7238f5cd7c2b86",
+      "reference": {
+        "referenceId": "reference-1c62be59a5df7fa15c0d",
+        "image": "references/reference-1c62be59a5df7fa15c0d.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-9a374e6f1e39bf7ca1a5",
+        "image": "specimens/specimen-9a374e6f1e39bf7ca1a5.png"
+      }
+    },
+    {
+      "taskId": "task-c39a5fc396305a802f04",
+      "reference": {
+        "referenceId": "reference-ff1fb3e9df592064e4e3",
+        "image": "references/reference-ff1fb3e9df592064e4e3.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-11081d8d71b508c06f85",
+        "image": "specimens/specimen-11081d8d71b508c06f85.png"
+      }
+    },
+    {
+      "taskId": "task-4aa02640e12f8da794db",
+      "reference": {
+        "referenceId": "reference-e7ce27357c364eba6cfa",
+        "image": "references/reference-e7ce27357c364eba6cfa.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-cd7daba9e03087ba9152",
+        "image": "specimens/specimen-cd7daba9e03087ba9152.png"
+      }
+    },
+    {
+      "taskId": "task-b599dc386bff30499b9b",
+      "reference": {
+        "referenceId": "reference-0c0104cf03b2a84dd05d",
+        "image": "references/reference-0c0104cf03b2a84dd05d.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-5fadf78588714b2222b4",
+        "image": "specimens/specimen-5fadf78588714b2222b4.png"
+      }
+    },
+    {
+      "taskId": "task-742884fb894819959037",
+      "reference": {
+        "referenceId": "reference-eb6702c92a66485d2a0e",
+        "image": "references/reference-eb6702c92a66485d2a0e.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-f41a3e15e72c3ee66916",
+        "image": "specimens/specimen-f41a3e15e72c3ee66916.png"
+      }
+    },
+    {
+      "taskId": "task-cdc0c823eebee972b92f",
+      "reference": {
+        "referenceId": "reference-f1bbd9e4a913b5a84037",
+        "image": "references/reference-f1bbd9e4a913b5a84037.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-c22a9aa8b311b3ea3fa4",
+        "image": "specimens/specimen-c22a9aa8b311b3ea3fa4.png"
+      }
+    },
+    {
+      "taskId": "task-6c3baddf55a2ac751f92",
+      "reference": {
+        "referenceId": "reference-bf0af16cf30b9a9c0c1b",
+        "image": "references/reference-bf0af16cf30b9a9c0c1b.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-95e77cb478533e89cdfb",
+        "image": "specimens/specimen-95e77cb478533e89cdfb.png"
+      }
+    },
+    {
+      "taskId": "task-d6a8bde4d88d001c21a6",
+      "reference": {
+        "referenceId": "reference-9c0b36cd81149785e25b",
+        "image": "references/reference-9c0b36cd81149785e25b.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-be88cfa769fd7edf309e",
+        "image": "specimens/specimen-be88cfa769fd7edf309e.png"
+      }
+    },
+    {
+      "taskId": "task-1ee0348bd50956522aaa",
+      "reference": {
+        "referenceId": "reference-364200206b70bb49e2c9",
+        "image": "references/reference-364200206b70bb49e2c9.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-920f061d49a573d564a8",
+        "image": "specimens/specimen-920f061d49a573d564a8.png"
+      }
+    },
+    {
+      "taskId": "task-048a2754a6140e38cb4c",
+      "reference": {
+        "referenceId": "reference-dfcc535bc08a3b9610d6",
+        "image": "references/reference-dfcc535bc08a3b9610d6.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-3995421a3f258f7467d6",
+        "image": "specimens/specimen-3995421a3f258f7467d6.png"
+      }
+    },
+    {
+      "taskId": "task-48a7602f21585deb6f7f",
+      "reference": {
+        "referenceId": "reference-e197d8a2f700908be041",
+        "image": "references/reference-e197d8a2f700908be041.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-c0a9b76094a8455626d2",
+        "image": "specimens/specimen-c0a9b76094a8455626d2.png"
+      }
+    },
+    {
+      "taskId": "task-9006ffd34b4893edba16",
+      "reference": {
+        "referenceId": "reference-d9b20cb50e9b4b2e6e97",
+        "image": "references/reference-d9b20cb50e9b4b2e6e97.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-49b194fc792776ba7b5b",
+        "image": "specimens/specimen-49b194fc792776ba7b5b.png"
+      }
+    },
+    {
+      "taskId": "task-0f3baf7bc0caeb3154e5",
+      "reference": {
+        "referenceId": "reference-1255b4eea2a427c8273d",
+        "image": "references/reference-1255b4eea2a427c8273d.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-ce29805d5f8600f56354",
+        "image": "specimens/specimen-ce29805d5f8600f56354.png"
+      }
+    },
+    {
+      "taskId": "task-1ad60b4d445f6968dd51",
+      "reference": {
+        "referenceId": "reference-25a25b9a57243e909c49",
+        "image": "references/reference-25a25b9a57243e909c49.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-b776760b37c1912432aa",
+        "image": "specimens/specimen-b776760b37c1912432aa.png"
+      }
+    },
+    {
+      "taskId": "task-afbdc67bd08496646224",
+      "reference": {
+        "referenceId": "reference-2d69a2fc2b0c5405a7ca",
+        "image": "references/reference-2d69a2fc2b0c5405a7ca.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-1b5ee633241ecbc43d57",
+        "image": "specimens/specimen-1b5ee633241ecbc43d57.png"
+      }
+    },
+    {
+      "taskId": "task-7e9a131ea669dc971994",
+      "reference": {
+        "referenceId": "reference-ae2b1043ba814c27e1bf",
+        "image": "references/reference-ae2b1043ba814c27e1bf.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-60dd4233c6ed49d63c13",
+        "image": "specimens/specimen-60dd4233c6ed49d63c13.png"
+      }
+    },
+    {
+      "taskId": "task-a5ca4465ab08090a4d59",
+      "reference": {
+        "referenceId": "reference-19ad84db65f2c20aeb13",
+        "image": "references/reference-19ad84db65f2c20aeb13.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-6812901602065722df0c",
+        "image": "specimens/specimen-6812901602065722df0c.png"
+      }
+    },
+    {
+      "taskId": "task-22d4b2c71068ecb826d1",
+      "reference": {
+        "referenceId": "reference-f2c52eb5e2c9c0a8908a",
+        "image": "references/reference-f2c52eb5e2c9c0a8908a.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-83c1ae06585555a5687f",
+        "image": "specimens/specimen-83c1ae06585555a5687f.png"
+      }
+    },
+    {
+      "taskId": "task-7809d154c657f52e88c6",
+      "reference": {
+        "referenceId": "reference-220180f323f850dd998c",
+        "image": "references/reference-220180f323f850dd998c.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-b3d59d4f83a546e67629",
+        "image": "specimens/specimen-b3d59d4f83a546e67629.png"
+      }
+    },
+    {
+      "taskId": "task-399584fbb6d75797054b",
+      "reference": {
+        "referenceId": "reference-6f10ee5d7a0211a4c468",
+        "image": "references/reference-6f10ee5d7a0211a4c468.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-68305ec5ab5953880849",
+        "image": "specimens/specimen-68305ec5ab5953880849.png"
+      }
+    },
+    {
+      "taskId": "task-553ed33f76611f177c4d",
+      "reference": {
+        "referenceId": "reference-cc27381ae83e80cda499",
+        "image": "references/reference-cc27381ae83e80cda499.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-1b0ca666494b1f695bdc",
+        "image": "specimens/specimen-1b0ca666494b1f695bdc.png"
+      }
+    },
+    {
+      "taskId": "task-34ca86d34b1278062eb4",
+      "reference": {
+        "referenceId": "reference-b3daeffa7e556f076893",
+        "image": "references/reference-b3daeffa7e556f076893.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-96393c99972f70dd7df6",
+        "image": "specimens/specimen-96393c99972f70dd7df6.png"
+      }
+    },
+    {
+      "taskId": "task-1d3ee9d52a73e0ba1086",
+      "reference": {
+        "referenceId": "reference-935c6b2c21c96e8f9303",
+        "image": "references/reference-935c6b2c21c96e8f9303.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-11978443bbb51d6f7fbf",
+        "image": "specimens/specimen-11978443bbb51d6f7fbf.png"
+      }
+    },
+    {
+      "taskId": "task-39dd9a3d1bc3e4692cbf",
+      "reference": {
+        "referenceId": "reference-752b1dd5c3634e7c4c9f",
+        "image": "references/reference-752b1dd5c3634e7c4c9f.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-c2ba9abfef4ee08454ee",
+        "image": "specimens/specimen-c2ba9abfef4ee08454ee.png"
+      }
+    },
+    {
+      "taskId": "task-8382d27abe3025ca9bdb",
+      "reference": {
+        "referenceId": "reference-dde44702f46292689161",
+        "image": "references/reference-dde44702f46292689161.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-3d0ee1e0d7ea8ee3afe8",
+        "image": "specimens/specimen-3d0ee1e0d7ea8ee3afe8.png"
+      }
+    },
+    {
+      "taskId": "task-56cf845a24a33175071a",
+      "reference": {
+        "referenceId": "reference-da53a6ae0e69323d6a1a",
+        "image": "references/reference-da53a6ae0e69323d6a1a.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-52dc936b71f100bd669e",
+        "image": "specimens/specimen-52dc936b71f100bd669e.png"
+      }
+    },
+    {
+      "taskId": "task-a92f7ebc351a3301268e",
+      "reference": {
+        "referenceId": "reference-02a6343268b46401815a",
+        "image": "references/reference-02a6343268b46401815a.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-f06033340d10686f5531",
+        "image": "specimens/specimen-f06033340d10686f5531.png"
+      }
+    },
+    {
+      "taskId": "task-3330d588843282b42d46",
+      "reference": {
+        "referenceId": "reference-4d9bc0787c88d6df8ddc",
+        "image": "references/reference-4d9bc0787c88d6df8ddc.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-9ee4f921ad9abb8d605c",
+        "image": "specimens/specimen-9ee4f921ad9abb8d605c.png"
+      }
+    },
+    {
+      "taskId": "task-6073e2e6b877c3de4788",
+      "reference": {
+        "referenceId": "reference-509655c8b94d44a3a067",
+        "image": "references/reference-509655c8b94d44a3a067.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-c30faa5121076031ba27",
+        "image": "specimens/specimen-c30faa5121076031ba27.png"
+      }
+    },
+    {
+      "taskId": "task-099cebe859eadfd41b6d",
+      "reference": {
+        "referenceId": "reference-4573e543fbeea23f7b8c",
+        "image": "references/reference-4573e543fbeea23f7b8c.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-8cd5efccca1bbd756514",
+        "image": "specimens/specimen-8cd5efccca1bbd756514.png"
+      }
+    },
+    {
+      "taskId": "task-d29a4057324fcc75e6ac",
+      "reference": {
+        "referenceId": "reference-4dd7f98df91b0023af43",
+        "image": "references/reference-4dd7f98df91b0023af43.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-98e91825461e4cf119de",
+        "image": "specimens/specimen-98e91825461e4cf119de.png"
+      }
+    },
+    {
+      "taskId": "task-d2ff0be2d73329d4dd8e",
+      "reference": {
+        "referenceId": "reference-f37ff255b8eea09b3d32",
+        "image": "references/reference-f37ff255b8eea09b3d32.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-4efa2cb4a02f71bf57af",
+        "image": "specimens/specimen-4efa2cb4a02f71bf57af.png"
+      }
+    },
+    {
+      "taskId": "task-6169cc6c9d20120e50a4",
+      "reference": {
+        "referenceId": "reference-c9a8e18c5ab0797dd5ec",
+        "image": "references/reference-c9a8e18c5ab0797dd5ec.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-0693c79b8a424df98ef8",
+        "image": "specimens/specimen-0693c79b8a424df98ef8.png"
+      }
+    },
+    {
+      "taskId": "task-ff8932ceadc03ed1b392",
+      "reference": {
+        "referenceId": "reference-d2278bc32b5be39a57a3",
+        "image": "references/reference-d2278bc32b5be39a57a3.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-f9d09ea3d86ef43d9c72",
+        "image": "specimens/specimen-f9d09ea3d86ef43d9c72.png"
+      }
+    },
+    {
+      "taskId": "task-9051f22642f3dc3d7d0e",
+      "reference": {
+        "referenceId": "reference-40fd0d9f5f407e058b20",
+        "image": "references/reference-40fd0d9f5f407e058b20.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-c13691a1b86d287f233e",
+        "image": "specimens/specimen-c13691a1b86d287f233e.png"
+      }
+    },
+    {
+      "taskId": "task-18f4faa1410786a3b365",
+      "reference": {
+        "referenceId": "reference-f704db3da9300c6a56fe",
+        "image": "references/reference-f704db3da9300c6a56fe.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-2b76514d2165426f1fe4",
+        "image": "specimens/specimen-2b76514d2165426f1fe4.png"
+      }
+    },
+    {
+      "taskId": "task-7f0225da0b3c763a02ce",
+      "reference": {
+        "referenceId": "reference-1e42270d858feb6036f7",
+        "image": "references/reference-1e42270d858feb6036f7.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-f080eea9835ca48841ca",
+        "image": "specimens/specimen-f080eea9835ca48841ca.png"
+      }
+    },
+    {
+      "taskId": "task-e4f7fdb370e47d815f47",
+      "reference": {
+        "referenceId": "reference-2a3c878b6b9855e485ec",
+        "image": "references/reference-2a3c878b6b9855e485ec.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-3af84e7597789eb5aafe",
+        "image": "specimens/specimen-3af84e7597789eb5aafe.png"
+      }
+    },
+    {
+      "taskId": "task-c3ba7b31a4265f93552a",
+      "reference": {
+        "referenceId": "reference-566e67bd9d9f3333920f",
+        "image": "references/reference-566e67bd9d9f3333920f.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-c61e51d9c8a7245d5447",
+        "image": "specimens/specimen-c61e51d9c8a7245d5447.png"
+      }
+    },
+    {
+      "taskId": "task-6e1ca7f845b5be8eda4d",
+      "reference": {
+        "referenceId": "reference-f08250ded8d5e1c6649d",
+        "image": "references/reference-f08250ded8d5e1c6649d.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-952d026a006f533fe1e1",
+        "image": "specimens/specimen-952d026a006f533fe1e1.png"
+      }
+    },
+    {
+      "taskId": "task-c1f8b154bc5db3589857",
+      "reference": {
+        "referenceId": "reference-1b8d9163d2283de0006f",
+        "image": "references/reference-1b8d9163d2283de0006f.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-0a36dbeafdd1c629a8de",
+        "image": "specimens/specimen-0a36dbeafdd1c629a8de.png"
+      }
+    },
+    {
+      "taskId": "task-7fe74c8ca2bd20f44570",
+      "reference": {
+        "referenceId": "reference-0805a5ec35225dfcd64f",
+        "image": "references/reference-0805a5ec35225dfcd64f.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-39d059332db18e5abda1",
+        "image": "specimens/specimen-39d059332db18e5abda1.png"
+      }
+    },
+    {
+      "taskId": "task-c30ce6761cbbfad0856e",
+      "reference": {
+        "referenceId": "reference-bbb87c723e124cb62a9b",
+        "image": "references/reference-bbb87c723e124cb62a9b.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-de7ed1de3614d8d34a10",
+        "image": "specimens/specimen-de7ed1de3614d8d34a10.png"
+      }
+    },
+    {
+      "taskId": "task-275b1dfbd139de59684f",
+      "reference": {
+        "referenceId": "reference-f7bcad3bcef2058b6ce9",
+        "image": "references/reference-f7bcad3bcef2058b6ce9.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-23c72fea8859f33cf848",
+        "image": "specimens/specimen-23c72fea8859f33cf848.png"
+      }
+    },
+    {
+      "taskId": "task-bc14cc283d479d74db62",
+      "reference": {
+        "referenceId": "reference-2b42c4c66c6ba3520bc5",
+        "image": "references/reference-2b42c4c66c6ba3520bc5.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-f7b1fec80c5ba2488af9",
+        "image": "specimens/specimen-f7b1fec80c5ba2488af9.png"
+      }
+    },
+    {
+      "taskId": "task-7db3f827662385515548",
+      "reference": {
+        "referenceId": "reference-6acb438eee89047e9642",
+        "image": "references/reference-6acb438eee89047e9642.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-ed7df0edfdddac29f0dd",
+        "image": "specimens/specimen-ed7df0edfdddac29f0dd.png"
+      }
+    },
+    {
+      "taskId": "task-92a19bb2b96e15ce9723",
+      "reference": {
+        "referenceId": "reference-5459d34b2d11a1aa480e",
+        "image": "references/reference-5459d34b2d11a1aa480e.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-3f1b426831b4d2d16db0",
+        "image": "specimens/specimen-3f1b426831b4d2d16db0.png"
+      }
+    },
+    {
+      "taskId": "task-fbd8ae91d439fc2dcf0e",
+      "reference": {
+        "referenceId": "reference-79c7da3835d0a897e9ea",
+        "image": "references/reference-79c7da3835d0a897e9ea.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-497ae94efe56eb6313ed",
+        "image": "specimens/specimen-497ae94efe56eb6313ed.png"
+      }
+    },
+    {
+      "taskId": "task-dc422ee1e7614f1eb4e2",
+      "reference": {
+        "referenceId": "reference-ec7077a14229497f4e7e",
+        "image": "references/reference-ec7077a14229497f4e7e.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-9d0ed69f771233dee2ce",
+        "image": "specimens/specimen-9d0ed69f771233dee2ce.png"
+      }
+    },
+    {
+      "taskId": "task-d7a6c845fcec165eeb67",
+      "reference": {
+        "referenceId": "reference-8f7b35bc20e54240b079",
+        "image": "references/reference-8f7b35bc20e54240b079.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-063d6641aa79069d4648",
+        "image": "specimens/specimen-063d6641aa79069d4648.png"
+      }
+    },
+    {
+      "taskId": "task-29ccf1c5f66b0818d08a",
+      "reference": {
+        "referenceId": "reference-789c3537da1a29fce4b2",
+        "image": "references/reference-789c3537da1a29fce4b2.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-f8afb392f12d6f112ed1",
+        "image": "specimens/specimen-f8afb392f12d6f112ed1.png"
+      }
+    },
+    {
+      "taskId": "task-0ae152c920cf665a7b52",
+      "reference": {
+        "referenceId": "reference-6c13645183369a81cef7",
+        "image": "references/reference-6c13645183369a81cef7.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-bd3dbaf25c12a19f1ad4",
+        "image": "specimens/specimen-bd3dbaf25c12a19f1ad4.png"
+      }
+    },
+    {
+      "taskId": "task-7a2cc79364021b88da75",
+      "reference": {
+        "referenceId": "reference-e4b0169ff7de3f409931",
+        "image": "references/reference-e4b0169ff7de3f409931.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-191d00310c95ffd9ed43",
+        "image": "specimens/specimen-191d00310c95ffd9ed43.png"
+      }
+    },
+    {
+      "taskId": "task-82e7ecc132584c2524ae",
+      "reference": {
+        "referenceId": "reference-04e7be14d12ac7362f8f",
+        "image": "references/reference-04e7be14d12ac7362f8f.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-3afb415e939bd8381435",
+        "image": "specimens/specimen-3afb415e939bd8381435.png"
+      }
+    },
+    {
+      "taskId": "task-f98f58a5dee34a479737",
+      "reference": {
+        "referenceId": "reference-d49f851fde8fc431e166",
+        "image": "references/reference-d49f851fde8fc431e166.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-f8bed6ff0f1853f3ef86",
+        "image": "specimens/specimen-f8bed6ff0f1853f3ef86.png"
+      }
+    },
+    {
+      "taskId": "task-8177aac605182d0ff3e7",
+      "reference": {
+        "referenceId": "reference-e68f1e42916e1ab74207",
+        "image": "references/reference-e68f1e42916e1ab74207.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-7b8dac82bf64bc9a7696",
+        "image": "specimens/specimen-7b8dac82bf64bc9a7696.png"
+      }
+    },
+    {
+      "taskId": "task-28e4bf10bbd8d9e325ea",
+      "reference": {
+        "referenceId": "reference-2d88e752e110db847b95",
+        "image": "references/reference-2d88e752e110db847b95.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-b2ee7a0a59938e8c56bd",
+        "image": "specimens/specimen-b2ee7a0a59938e8c56bd.png"
+      }
+    },
+    {
+      "taskId": "task-5f2fafed86a3acb0a6c9",
+      "reference": {
+        "referenceId": "reference-f8685b523685ec59a439",
+        "image": "references/reference-f8685b523685ec59a439.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-d090ae9aeab5666b3d82",
+        "image": "specimens/specimen-d090ae9aeab5666b3d82.png"
+      }
+    },
+    {
+      "taskId": "task-68c576256f50b7f743dd",
+      "reference": {
+        "referenceId": "reference-9ffce0122e84d5d89669",
+        "image": "references/reference-9ffce0122e84d5d89669.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-802330e2cdd620d8f2c3",
+        "image": "specimens/specimen-802330e2cdd620d8f2c3.png"
+      }
+    },
+    {
+      "taskId": "task-a13aba39ffd5cea527ea",
+      "reference": {
+        "referenceId": "reference-5b85aaf801945b6482e3",
+        "image": "references/reference-5b85aaf801945b6482e3.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-1adabc5e079e214f42e2",
+        "image": "specimens/specimen-1adabc5e079e214f42e2.png"
+      }
+    },
+    {
+      "taskId": "task-9fc5461b348333d8fc3f",
+      "reference": {
+        "referenceId": "reference-7b6ccdca7048d03adc69",
+        "image": "references/reference-7b6ccdca7048d03adc69.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-f64a0de70ddd4f898b53",
+        "image": "specimens/specimen-f64a0de70ddd4f898b53.png"
+      }
+    },
+    {
+      "taskId": "task-015d0d813476b2083872",
+      "reference": {
+        "referenceId": "reference-aeaa84c5857c01193dfa",
+        "image": "references/reference-aeaa84c5857c01193dfa.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-87911d192de1196461a3",
+        "image": "specimens/specimen-87911d192de1196461a3.png"
+      }
+    },
+    {
+      "taskId": "task-aa49086a1996882f71fd",
+      "reference": {
+        "referenceId": "reference-e304f1b005df7bcb73ca",
+        "image": "references/reference-e304f1b005df7bcb73ca.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-12426f0ac23544c39f4e",
+        "image": "specimens/specimen-12426f0ac23544c39f4e.png"
+      }
+    },
+    {
+      "taskId": "task-2322db204e3e441e6f61",
+      "reference": {
+        "referenceId": "reference-e1a1ef0ec323768dc040",
+        "image": "references/reference-e1a1ef0ec323768dc040.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-6abdb67022507ec3c02d",
+        "image": "specimens/specimen-6abdb67022507ec3c02d.png"
+      }
+    },
+    {
+      "taskId": "task-6dabaa400661c1215148",
+      "reference": {
+        "referenceId": "reference-a0e5cb698fd957e9db14",
+        "image": "references/reference-a0e5cb698fd957e9db14.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-de89ac335485a4d1c672",
+        "image": "specimens/specimen-de89ac335485a4d1c672.png"
+      }
+    },
+    {
+      "taskId": "task-83011b593e3a8a2ceede",
+      "reference": {
+        "referenceId": "reference-6c8f6fc1ddecd0e41756",
+        "image": "references/reference-6c8f6fc1ddecd0e41756.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-3cdcbb76c5964058d157",
+        "image": "specimens/specimen-3cdcbb76c5964058d157.png"
+      }
+    },
+    {
+      "taskId": "task-6bd707964e58cab02c1e",
+      "reference": {
+        "referenceId": "reference-664e2ab37588afdeb945",
+        "image": "references/reference-664e2ab37588afdeb945.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-cb1f7be982449abf1093",
+        "image": "specimens/specimen-cb1f7be982449abf1093.png"
+      }
+    },
+    {
+      "taskId": "task-0b4bd2286f3806843d4d",
+      "reference": {
+        "referenceId": "reference-0ee4c46f4fd4e05d2c2d",
+        "image": "references/reference-0ee4c46f4fd4e05d2c2d.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-e924ea48e693a4fd9e5e",
+        "image": "specimens/specimen-e924ea48e693a4fd9e5e.png"
+      }
+    },
+    {
+      "taskId": "task-7d262b5298816c10c91f",
+      "reference": {
+        "referenceId": "reference-6336b8e409bea31d86d0",
+        "image": "references/reference-6336b8e409bea31d86d0.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-461b28c4e5e9c8e29379",
+        "image": "specimens/specimen-461b28c4e5e9c8e29379.png"
+      }
+    },
+    {
+      "taskId": "task-1e57c82513099f41c667",
+      "reference": {
+        "referenceId": "reference-f2b1eb51b76fe04d1e8a",
+        "image": "references/reference-f2b1eb51b76fe04d1e8a.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-7fb84a072cb08633de10",
+        "image": "specimens/specimen-7fb84a072cb08633de10.png"
+      }
+    },
+    {
+      "taskId": "task-b8ce1808fc4da09f190a",
+      "reference": {
+        "referenceId": "reference-edf92624326d4d8adbc7",
+        "image": "references/reference-edf92624326d4d8adbc7.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-de71a43b4b3e9e8c27bc",
+        "image": "specimens/specimen-de71a43b4b3e9e8c27bc.png"
+      }
+    },
+    {
+      "taskId": "task-f036bbd48581a8dbec2b",
+      "reference": {
+        "referenceId": "reference-0e99325030565e09381f",
+        "image": "references/reference-0e99325030565e09381f.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-999e5520ded33bc6306d",
+        "image": "specimens/specimen-999e5520ded33bc6306d.png"
+      }
+    },
+    {
+      "taskId": "task-0c02cad9728ec8732d54",
+      "reference": {
+        "referenceId": "reference-005a17a4aa71a9bea627",
+        "image": "references/reference-005a17a4aa71a9bea627.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-0fcf9cb3cca1075c601b",
+        "image": "specimens/specimen-0fcf9cb3cca1075c601b.png"
+      }
+    },
+    {
+      "taskId": "task-ccd63fc5cbc606400e67",
+      "reference": {
+        "referenceId": "reference-95d23e35d6a6cd86539d",
+        "image": "references/reference-95d23e35d6a6cd86539d.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-1ee32a9469dfeda8a679",
+        "image": "specimens/specimen-1ee32a9469dfeda8a679.png"
+      }
+    },
+    {
+      "taskId": "task-ba3cc0148388d1548776",
+      "reference": {
+        "referenceId": "reference-2f3e8f39d69547a8709c",
+        "image": "references/reference-2f3e8f39d69547a8709c.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-3b3b6fd3511278bd00f7",
+        "image": "specimens/specimen-3b3b6fd3511278bd00f7.png"
+      }
+    },
+    {
+      "taskId": "task-311729078b228f05bb0d",
+      "reference": {
+        "referenceId": "reference-4358fb2502472ad7cab2",
+        "image": "references/reference-4358fb2502472ad7cab2.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-771d602c9b70a12fbaa8",
+        "image": "specimens/specimen-771d602c9b70a12fbaa8.png"
+      }
+    },
+    {
+      "taskId": "task-7d40789cbe00b4bbeede",
+      "reference": {
+        "referenceId": "reference-12152250363fb9518ca6",
+        "image": "references/reference-12152250363fb9518ca6.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-eae02f73ea7749058f9d",
+        "image": "specimens/specimen-eae02f73ea7749058f9d.png"
+      }
+    },
+    {
+      "taskId": "task-40f608662768c0948abd",
+      "reference": {
+        "referenceId": "reference-ec7854f7e3c68379cd7c",
+        "image": "references/reference-ec7854f7e3c68379cd7c.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-517948f4ad81ce201241",
+        "image": "specimens/specimen-517948f4ad81ce201241.png"
+      }
+    },
+    {
+      "taskId": "task-cdc778c2e7f0e8aad9f2",
+      "reference": {
+        "referenceId": "reference-817277d48e6faf51216b",
+        "image": "references/reference-817277d48e6faf51216b.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-816a626fb6f2c05c7b73",
+        "image": "specimens/specimen-816a626fb6f2c05c7b73.png"
+      }
+    },
+    {
+      "taskId": "task-7326d0ae125765d24462",
+      "reference": {
+        "referenceId": "reference-2316048e6e3446cea27d",
+        "image": "references/reference-2316048e6e3446cea27d.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-85c4d2c5220e61c02c5c",
+        "image": "specimens/specimen-85c4d2c5220e61c02c5c.png"
+      }
+    },
+    {
+      "taskId": "task-2f862f6839129ca93f96",
+      "reference": {
+        "referenceId": "reference-3a0ded5a2ecdda2b7862",
+        "image": "references/reference-3a0ded5a2ecdda2b7862.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-0e147ee4bc8eb732654f",
+        "image": "specimens/specimen-0e147ee4bc8eb732654f.png"
+      }
+    },
+    {
+      "taskId": "task-60093e6b1e9cd7cd2dc8",
+      "reference": {
+        "referenceId": "reference-0619236425a75bb573d0",
+        "image": "references/reference-0619236425a75bb573d0.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-7492aed8cc4f2a9d15e6",
+        "image": "specimens/specimen-7492aed8cc4f2a9d15e6.png"
+      }
+    },
+    {
+      "taskId": "task-c51c9f4d55a5b17bc6fd",
+      "reference": {
+        "referenceId": "reference-af623523e193f34f49dd",
+        "image": "references/reference-af623523e193f34f49dd.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-7e99176324809635af7d",
+        "image": "specimens/specimen-7e99176324809635af7d.png"
+      }
+    },
+    {
+      "taskId": "task-0261cf055265825307d0",
+      "reference": {
+        "referenceId": "reference-1f81039e0625be26ff40",
+        "image": "references/reference-1f81039e0625be26ff40.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-2fc470a2ccbd272612ab",
+        "image": "specimens/specimen-2fc470a2ccbd272612ab.png"
+      }
+    },
+    {
+      "taskId": "task-45f905a7b53aad96b597",
+      "reference": {
+        "referenceId": "reference-2a28006c609d665d1e15",
+        "image": "references/reference-2a28006c609d665d1e15.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-964abcdc5f30ed3a911f",
+        "image": "specimens/specimen-964abcdc5f30ed3a911f.png"
+      }
+    },
+    {
+      "taskId": "task-4524b0fc359d5c91a50b",
+      "reference": {
+        "referenceId": "reference-cc5e89e05433f890de61",
+        "image": "references/reference-cc5e89e05433f890de61.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-29bb7ec6218fc1fcfba6",
+        "image": "specimens/specimen-29bb7ec6218fc1fcfba6.png"
+      }
+    },
+    {
+      "taskId": "task-8251a7a34fe9a144fdd6",
+      "reference": {
+        "referenceId": "reference-d1eb4f6a498add4cf037",
+        "image": "references/reference-d1eb4f6a498add4cf037.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-6fbbc2b529e5f4f4ee0e",
+        "image": "specimens/specimen-6fbbc2b529e5f4f4ee0e.png"
+      }
+    },
+    {
+      "taskId": "task-6857fa38d86c42541534",
+      "reference": {
+        "referenceId": "reference-a7107e7162c529ee9e7a",
+        "image": "references/reference-a7107e7162c529ee9e7a.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-49038780dd540b6086f0",
+        "image": "specimens/specimen-49038780dd540b6086f0.png"
+      }
+    },
+    {
+      "taskId": "task-d970a4d445f8c6724717",
+      "reference": {
+        "referenceId": "reference-63e9f4e5f81ac8716867",
+        "image": "references/reference-63e9f4e5f81ac8716867.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-06889322f00bcefc617a",
+        "image": "specimens/specimen-06889322f00bcefc617a.png"
+      }
+    },
+    {
+      "taskId": "task-d80a41c25aee10178de8",
+      "reference": {
+        "referenceId": "reference-8ce4b5df498ee6394dfe",
+        "image": "references/reference-8ce4b5df498ee6394dfe.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-baf267c772dbc73e9543",
+        "image": "specimens/specimen-baf267c772dbc73e9543.png"
+      }
+    },
+    {
+      "taskId": "task-87ffa7185617f72d09bb",
+      "reference": {
+        "referenceId": "reference-8b6b5838eebc9af52ef7",
+        "image": "references/reference-8b6b5838eebc9af52ef7.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-930c0ef116948da3557b",
+        "image": "specimens/specimen-930c0ef116948da3557b.png"
+      }
+    },
+    {
+      "taskId": "task-e7138d6a545b78d3bac6",
+      "reference": {
+        "referenceId": "reference-ced94a996292a154c936",
+        "image": "references/reference-ced94a996292a154c936.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-44696783e83056b886a0",
+        "image": "specimens/specimen-44696783e83056b886a0.png"
+      }
+    },
+    {
+      "taskId": "task-9973835f35e461cf2d38",
+      "reference": {
+        "referenceId": "reference-f6a5aae3e7648ee509b3",
+        "image": "references/reference-f6a5aae3e7648ee509b3.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-747d69ccc56ad832ec09",
+        "image": "specimens/specimen-747d69ccc56ad832ec09.png"
+      }
+    },
+    {
+      "taskId": "task-4f38b5031b6e4ba19beb",
+      "reference": {
+        "referenceId": "reference-7fa90fcf04b828eb36dd",
+        "image": "references/reference-7fa90fcf04b828eb36dd.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-683d3104d84c94d20749",
+        "image": "specimens/specimen-683d3104d84c94d20749.png"
+      }
+    },
+    {
+      "taskId": "task-e60c91a5d99e0feabd2e",
+      "reference": {
+        "referenceId": "reference-3ba9d371e7d1dbf70e60",
+        "image": "references/reference-3ba9d371e7d1dbf70e60.png"
+      },
+      "specimen": {
+        "specimenId": "specimen-e8bb128b6f4a7cad83c1",
+        "image": "specimens/specimen-e8bb128b6f4a7cad83c1.png"
+      }
+    }
+  ],
+  "randomizedBatchHash": "9dee5601af7077d660b643c6abe9bdff9ef9550dc8193a4d5b82828a18edae42"
+}

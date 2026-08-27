@@ -1,0 +1,3740 @@
+{
+  "version": "input-field-paired-source-v3",
+  "status": "awaiting-independent-blind-grade",
+  "instructions": [
+    "Use only this blind-packet directory. Do not inspect parent directories, source code, or any answer key.",
+    "For every opaque cell, compare both opaque specimens independently with its reference.",
+    "Set recognisable to true or false, list concrete defects for every false result, and record low, medium, or high confidence.",
+    "Do not rank specimens, infer implementation identity, or lower the 256-specimen scope."
+  ],
+  "protocol": {
+    "version": "input-field-paired-source-v3",
+    "rubricHash": "ec7361423018edabd7df185c29ae518f0642e339cf84b1caaf80d0c8501a2e8b",
+    "environmentHash": "bb49d731fcb8823a1866a2a615b59ea731e95c6358a1c768cb614b7ed3d97c22",
+    "crop": "painted-union+24-css-px-white-margin",
+    "scale": 2,
+    "browser": "149.0.7827.55 (playwright chromium-1228)",
+    "fontsHash": "6fd1317c7d1f2028a8c0577d5168a48ecc8d91f7354538e11feeb9b2a97bc139",
+    "passThreshold": "independent recognisable=true for each specimen against its paired original-source reference"
+  },
+  "randomizedBatchHash": "f84fab00c6d8dc3ea407de3ce6d17920d912bfea5a46bbb7cefacc5f6f6f0059",
+  "counts": {
+    "references": 128,
+    "specimens": 256,
+    "specimensPerReference": 2
+  },
+  "cells": [
+    {
+      "anonymousCell": "cell-01c7e2dc5552",
+      "reference": {
+        "image": "references/cell-01c7e2dc5552.png",
+        "screenshotHash": "5485004c8b02a32ae3c69161c15f5ef501d431623b5ebf4e4142ce29235de6ab"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-bc5226f01660",
+          "image": "specimens/specimen-bc5226f01660.png",
+          "outputHash": "0a6624b6f094ed4f7fc35b4aab7434b077f139a8bb578974ebea78d028d4b9ef",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-bfef5c188e2a",
+          "image": "specimens/specimen-bfef5c188e2a.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-047dd18cff93",
+      "reference": {
+        "image": "references/cell-047dd18cff93.png",
+        "screenshotHash": "67c792067f73d6f124e55aeb304a594e0c9371d80b18d9306779ed204c5af546"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-551cb564ec86",
+          "image": "specimens/specimen-551cb564ec86.png",
+          "outputHash": "2485d5b57304697b398dc2c784550389ad711241e16ca9e2703717663526b6b6",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-a621ea09de11",
+          "image": "specimens/specimen-a621ea09de11.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-04a05001742d",
+      "reference": {
+        "image": "references/cell-04a05001742d.png",
+        "screenshotHash": "f610505148d248935bc440ac0aaa882b890838b73958c024bd01fa4d34025d73"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-d9f0a3a31724",
+          "image": "specimens/specimen-d9f0a3a31724.png",
+          "outputHash": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-df22820b5756",
+          "image": "specimens/specimen-df22820b5756.png",
+          "outputHash": "cdc05053c4a7d41a2483ffbde4fca6fe78bf0c3601ee30552217f38fb0212b05",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-0737e3580277",
+      "reference": {
+        "image": "references/cell-0737e3580277.png",
+        "screenshotHash": "4b49dd2dcde912e019c92987f13739b0eda3323f9083802d68569544499f605e"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-0b5346ff99ca",
+          "image": "specimens/specimen-0b5346ff99ca.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-399e8f96672b",
+          "image": "specimens/specimen-399e8f96672b.png",
+          "outputHash": "cc279ddc0ed1a31b7996e936dd77e6b2d873722f6a74f242b069d820d5349a0c",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-08fe5c52f7ad",
+      "reference": {
+        "image": "references/cell-08fe5c52f7ad.png",
+        "screenshotHash": "8e0ec81edc25c409e989b370b6a34aaa4a72ed7d73fb9cc588420a6ce57bf2ef"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-9aff40271daa",
+          "image": "specimens/specimen-9aff40271daa.png",
+          "outputHash": "55521195254f33e8d0097df0c06be210a4da7cf594a65e6504a08534cb356f46",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-b888e1cb2a47",
+          "image": "specimens/specimen-b888e1cb2a47.png",
+          "outputHash": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-0a742e0bdf3d",
+      "reference": {
+        "image": "references/cell-0a742e0bdf3d.png",
+        "screenshotHash": "a057d803fc3f113f6ef4107bc330c228931d44572f74ef0e49656ad47662ba1d"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-71dfa3374b94",
+          "image": "specimens/specimen-71dfa3374b94.png",
+          "outputHash": "b8620cb126ce7ef40014c208fbbb14e1fda2c7f46bcf5db8bac8de37613eb855",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-e56ed9742959",
+          "image": "specimens/specimen-e56ed9742959.png",
+          "outputHash": "3dab2b86b2264d4353b8098362de3053c4fc4fde508c006bbc9c9bdbbb250903",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-0b05931f89be",
+      "reference": {
+        "image": "references/cell-0b05931f89be.png",
+        "screenshotHash": "bc5866037650b3a8d50598c287063036214c9d6c78f1d2b06a3cbb3e81eaf4ad"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-4d9384f2e2ab",
+          "image": "specimens/specimen-4d9384f2e2ab.png",
+          "outputHash": "f1af8725c9bce88c8cd7bfaf0c062385bce23c747507ef8935504cce19723496",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-d17fd1dc5ab2",
+          "image": "specimens/specimen-d17fd1dc5ab2.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-0d1288278e2e",
+      "reference": {
+        "image": "references/cell-0d1288278e2e.png",
+        "screenshotHash": "bfa1b4ff562461707991b12ec82e7846725d1fe59506081ad8e073db02208679"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-2920464c0127",
+          "image": "specimens/specimen-2920464c0127.png",
+          "outputHash": "73bd9c651de86b5cfbd69611f1dd30153df1c92853ef658c303d181e57d52992",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-a9178d4fe626",
+          "image": "specimens/specimen-a9178d4fe626.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-0d56dfc827a2",
+      "reference": {
+        "image": "references/cell-0d56dfc827a2.png",
+        "screenshotHash": "6389ce73c26a317ab3f1a3ad14fab0d6683fbb5d79a56c33e703bc39eba3f3bf"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-770682d06b41",
+          "image": "specimens/specimen-770682d06b41.png",
+          "outputHash": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-88ec5794b258",
+          "image": "specimens/specimen-88ec5794b258.png",
+          "outputHash": "4d8600da2daa134245d4208313d39233f56eced090306ac7d94122c673164a86",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-11b92fc087f9",
+      "reference": {
+        "image": "references/cell-11b92fc087f9.png",
+        "screenshotHash": "ff8f021380a4d27eb0d81412f0a0e0cbb5c2dde40913b32bba3221fe8569acd5"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-bfc4b6f1f2de",
+          "image": "specimens/specimen-bfc4b6f1f2de.png",
+          "outputHash": "1498e37072646b0a5b31559b6cf3d1406cfbd16d954f3eae903feaaa03964eea",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-e1f3c8b3bfcc",
+          "image": "specimens/specimen-e1f3c8b3bfcc.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-15381f2c13d4",
+      "reference": {
+        "image": "references/cell-15381f2c13d4.png",
+        "screenshotHash": "f0ee65ef2d594ff73484a90f6e31cfd15a1d9d943b9978ec3b5ca95ec89b146e"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-0b74425449be",
+          "image": "specimens/specimen-0b74425449be.png",
+          "outputHash": "986b8a7690b11a2d5aaeda229a738c3837032d3122a62153fb0f16853e1076f2",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-d134d73ccda8",
+          "image": "specimens/specimen-d134d73ccda8.png",
+          "outputHash": "653e057fa5962f7b967fc7bd49645f8b70be9fcb468a15726c9c0c2c4ed2d6e8",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-19fd4b7386e7",
+      "reference": {
+        "image": "references/cell-19fd4b7386e7.png",
+        "screenshotHash": "245665f5195a653d28aee1d635806de78ce083a6da2f3ac6023c123e58f0bb02"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-80663674f58c",
+          "image": "specimens/specimen-80663674f58c.png",
+          "outputHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-f2226029da37",
+          "image": "specimens/specimen-f2226029da37.png",
+          "outputHash": "410a56eaaea5428d170dbaf94d94623606e21b104e04c91a7990678eab472d46",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-1acac0f28d95",
+      "reference": {
+        "image": "references/cell-1acac0f28d95.png",
+        "screenshotHash": "4804c93668ee77a64422c765a04d14a6f81cfb3a6eefd92073eb4488472cea1b"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-4c4088f0926a",
+          "image": "specimens/specimen-4c4088f0926a.png",
+          "outputHash": "60b29246d080cbec67135bd71538815dc4cdb37beeb6f7c1051559816481e2f2",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-80260840ade6",
+          "image": "specimens/specimen-80260840ade6.png",
+          "outputHash": "653e057fa5962f7b967fc7bd49645f8b70be9fcb468a15726c9c0c2c4ed2d6e8",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-1b432023a9e7",
+      "reference": {
+        "image": "references/cell-1b432023a9e7.png",
+        "screenshotHash": "670dfb3749c33c64a3e709dffbdd1e9b95f872ce32fc554e3b5ec99a9c51f73b"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-a26d9a8947cd",
+          "image": "specimens/specimen-a26d9a8947cd.png",
+          "outputHash": "fd88c2e5d047a5cc5bacd48eb364a844226a5e3b6370ef8724bcfff14c327b08",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-b53782bf96b4",
+          "image": "specimens/specimen-b53782bf96b4.png",
+          "outputHash": "3dab2b86b2264d4353b8098362de3053c4fc4fde508c006bbc9c9bdbbb250903",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-1bf8d2026e41",
+      "reference": {
+        "image": "references/cell-1bf8d2026e41.png",
+        "screenshotHash": "b265ff2c6c5a3676708c6b23784e8123a4bb6c48333881155904366469f7d9a2"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-52596b136975",
+          "image": "specimens/specimen-52596b136975.png",
+          "outputHash": "51a14231fa621dbeb3bc03f6f6dbb4f274c6d31b1b8485dcfdd983c5091723e1",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-adb3afdffef8",
+          "image": "specimens/specimen-adb3afdffef8.png",
+          "outputHash": "78c7f2ea59c23acaf8d53b062cae186d6c881f82fdbfe0760d5c5196ebb46ee8",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-1d5e1ab8b22f",
+      "reference": {
+        "image": "references/cell-1d5e1ab8b22f.png",
+        "screenshotHash": "2f9e0713d1b9ceebc76a2a68438e61f3c57e0fb3f7b16e81be2b2674ec16b59d"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-26e12b39fa2d",
+          "image": "specimens/specimen-26e12b39fa2d.png",
+          "outputHash": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-521f43cdb114",
+          "image": "specimens/specimen-521f43cdb114.png",
+          "outputHash": "6fb7d00c9cd5506f14e83058d71bf8e15f872cd3668d0ab7cbe171967136beff",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-1d74e2a50fc6",
+      "reference": {
+        "image": "references/cell-1d74e2a50fc6.png",
+        "screenshotHash": "c9cfd530aeb3ff3681b133d28e5d85322640bc01f7ceec459640d5d48383657c"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-432e9b1e8e09",
+          "image": "specimens/specimen-432e9b1e8e09.png",
+          "outputHash": "c7393939d95b72bf7c9a17b4a0fb379b3c5ed7d6f71902abc082d71784c6e25c",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-fbabbc8fe517",
+          "image": "specimens/specimen-fbabbc8fe517.png",
+          "outputHash": "9b8891d7ac1d444dcd212ef76cab77d76250be7e3cc7e829beb50fb4b3efb6c1",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-22409a95b599",
+      "reference": {
+        "image": "references/cell-22409a95b599.png",
+        "screenshotHash": "3202013a7cb27f5aadf13e317e087c64c499db5bed2ce23b5fdee7c64458b3c4"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-b2c7b9bc41b5",
+          "image": "specimens/specimen-b2c7b9bc41b5.png",
+          "outputHash": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-e38eda9a705d",
+          "image": "specimens/specimen-e38eda9a705d.png",
+          "outputHash": "d98b605b462a005bebeba537dd2bd5d65ad333c37f2eccacf905eccb118ad034",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-229a766be249",
+      "reference": {
+        "image": "references/cell-229a766be249.png",
+        "screenshotHash": "9574dbd5cc0864ba0a56b727c0697002e18979fedc696fcf0baa60d2f1f6a6ed"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-32a2444a86b2",
+          "image": "specimens/specimen-32a2444a86b2.png",
+          "outputHash": "26c59c32dc4579bdf4c3953f0e513ceec082b5918befc99404c47a59e8e1bd57",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-64c76d287eba",
+          "image": "specimens/specimen-64c76d287eba.png",
+          "outputHash": "e53a94e8dabe3b2a7800cc843a3edfa11fb31713d897af23ad2c0fb1fe4746ed",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-22e6a0c44a5d",
+      "reference": {
+        "image": "references/cell-22e6a0c44a5d.png",
+        "screenshotHash": "85e48947dfaa5df338cc30d19d590145083d19dd4b7a34a41daa7827eef001bf"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-1637e43b9a66",
+          "image": "specimens/specimen-1637e43b9a66.png",
+          "outputHash": "c2739f33ad2225327bcf876366c9ca632a6b1fd33163602149292ed3613f6bc8",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-654643c67086",
+          "image": "specimens/specimen-654643c67086.png",
+          "outputHash": "c324a27be2c110248b082e9b8ac9a629a3ccb01a8fdc09dfbc5bb2efb5364bbb",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-23b77f8ad4ba",
+      "reference": {
+        "image": "references/cell-23b77f8ad4ba.png",
+        "screenshotHash": "c32deed253d855c6d7f48d1a6b686cef21ae893a0b559e0463e6739fc2b4cdd3"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-1b2cca96e74c",
+          "image": "specimens/specimen-1b2cca96e74c.png",
+          "outputHash": "e53a94e8dabe3b2a7800cc843a3edfa11fb31713d897af23ad2c0fb1fe4746ed",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-47029078deeb",
+          "image": "specimens/specimen-47029078deeb.png",
+          "outputHash": "9b182a4dbf8792b39fe410d82142e88487db891b7ff3c63de6ccb2267087b56f",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-2544427d2b55",
+      "reference": {
+        "image": "references/cell-2544427d2b55.png",
+        "screenshotHash": "d4927e52fa3f0a3b794c488c767167e1a901887c410307d03f5e736481de444e"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-68443897c91a",
+          "image": "specimens/specimen-68443897c91a.png",
+          "outputHash": "d76e86a3b8be6f69fb88441d1b98fa1b3d250a35a05b72583fc1076a7661993d",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-a5b31ceeeefa",
+          "image": "specimens/specimen-a5b31ceeeefa.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-25e2e743e7cd",
+      "reference": {
+        "image": "references/cell-25e2e743e7cd.png",
+        "screenshotHash": "f9c9423f6086c8b00438805b3c7865fe2b953694e0a2f1ff07a6f39ef3afba27"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-2cb3b94c6d28",
+          "image": "specimens/specimen-2cb3b94c6d28.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-dc577aaf55fd",
+          "image": "specimens/specimen-dc577aaf55fd.png",
+          "outputHash": "d1948ca41d533c5b5ca0783f53d7b7e91f41a853736eb92623e9c4a92af92909",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-272c966d0829",
+      "reference": {
+        "image": "references/cell-272c966d0829.png",
+        "screenshotHash": "e79638b516c0eadab342ff24e8275cccf2f584bc2f601a70f0bffa4eac464b2b"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-498af79ee8b6",
+          "image": "specimens/specimen-498af79ee8b6.png",
+          "outputHash": "24707049e38d9bc50bf494061082571d24321d1b1f35222a86ad5c2084c65b0d",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-f7effcc8589d",
+          "image": "specimens/specimen-f7effcc8589d.png",
+          "outputHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-28f44e6d4e7f",
+      "reference": {
+        "image": "references/cell-28f44e6d4e7f.png",
+        "screenshotHash": "c82e4605a80c7246f84c0afa193794d61acd0c926fd71b9da5407b9d91dc8d09"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-82bedde71caa",
+          "image": "specimens/specimen-82bedde71caa.png",
+          "outputHash": "3d39e16185352bdff5ce89993725764219fbb2316e95fb96b88883d88f67e1ed",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-f262f2c4ad3c",
+          "image": "specimens/specimen-f262f2c4ad3c.png",
+          "outputHash": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-2af50385e261",
+      "reference": {
+        "image": "references/cell-2af50385e261.png",
+        "screenshotHash": "34f4cf97b9391139d61df84b0e95d538aeeadef1feccd7fa2eb2c15d0b111b99"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-4ba13bf47d57",
+          "image": "specimens/specimen-4ba13bf47d57.png",
+          "outputHash": "e2e9510bfa352310d21bc4514c2fc787179e1c0b881cba275bce14d3162d4f1f",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-cb2efefe7c62",
+          "image": "specimens/specimen-cb2efefe7c62.png",
+          "outputHash": "137166f9e9150e2f81ad97307fb7390ca3fd8f710d8cc1694bf8cb45a96d27bb",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-2ffe5574f47b",
+      "reference": {
+        "image": "references/cell-2ffe5574f47b.png",
+        "screenshotHash": "9c4172e848f61c5938e1b9244b888e7d07bff8c644c2c7bc63c8626095fd8449"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-7c298669ad57",
+          "image": "specimens/specimen-7c298669ad57.png",
+          "outputHash": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-d98273eed38d",
+          "image": "specimens/specimen-d98273eed38d.png",
+          "outputHash": "245bb43c48fa8a9b7707e4eab7363d5dc417921e094406083d384412d77adaf6",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-31be408ac59f",
+      "reference": {
+        "image": "references/cell-31be408ac59f.png",
+        "screenshotHash": "7dec63441dcbb31ffd9057f54aea31c3116f5dcda1dfd0c8f3e2fe166ea89658"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-d98745c4ca2f",
+          "image": "specimens/specimen-d98745c4ca2f.png",
+          "outputHash": "69619c49e6e757be21dd23943a7ff83f4aed207df11c8547799d97bd3dacdecb",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-ed292136df6f",
+          "image": "specimens/specimen-ed292136df6f.png",
+          "outputHash": "751acc011fa6506d997202ae56446ec54b71b44b07c0adb922cf61d3b497d050",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-32ecab4a038a",
+      "reference": {
+        "image": "references/cell-32ecab4a038a.png",
+        "screenshotHash": "286799e6ec36709b9808f968815311302b2df7b149bea07d9e1d7f6a7e3b31fe"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-863afaaa8f69",
+          "image": "specimens/specimen-863afaaa8f69.png",
+          "outputHash": "20028d46d9b2ea2acf4a8621de562a20384049167df1e370c7a840da58ab259a",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-c390a9554046",
+          "image": "specimens/specimen-c390a9554046.png",
+          "outputHash": "653e057fa5962f7b967fc7bd49645f8b70be9fcb468a15726c9c0c2c4ed2d6e8",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-3744c3c6e863",
+      "reference": {
+        "image": "references/cell-3744c3c6e863.png",
+        "screenshotHash": "47446a7cdb765d5b1f39839bb759eabce0860e8dd54cc635a659ac677bb08ad5"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-1635f899b21d",
+          "image": "specimens/specimen-1635f899b21d.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-316538e580ea",
+          "image": "specimens/specimen-316538e580ea.png",
+          "outputHash": "7ab70bcd7d5773bc307c2874afb48a2ccec1c047a8af519cd5aa41b6979dfe80",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-390e96912949",
+      "reference": {
+        "image": "references/cell-390e96912949.png",
+        "screenshotHash": "aa6824ed7033dde50ab8ee54cbce37f6dd9c8b47e14d167aaca606718ac3aa41"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-822eac631f56",
+          "image": "specimens/specimen-822eac631f56.png",
+          "outputHash": "251d4bffecfebf95b06a115024362c6adc17149264c21682191c926c430a544e",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-ba7233704302",
+          "image": "specimens/specimen-ba7233704302.png",
+          "outputHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-39826e58508a",
+      "reference": {
+        "image": "references/cell-39826e58508a.png",
+        "screenshotHash": "81ddfcaa23ed8382ca0088ef0247003c761b24fc51b8a86611ebd5cd5d479c7d"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-1d6a7744d8c8",
+          "image": "specimens/specimen-1d6a7744d8c8.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-a00f90eb13f8",
+          "image": "specimens/specimen-a00f90eb13f8.png",
+          "outputHash": "c2aa73da1115ccd6e93a76dcdacdafcedd35795d69436eb02d54b03c78409855",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-3a60a7c6bb93",
+      "reference": {
+        "image": "references/cell-3a60a7c6bb93.png",
+        "screenshotHash": "6f7ae7ef3837fa6df093b439ec25bc2b300fb81406d4a345a466ba4c51964dbf"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-8f9dbf7065de",
+          "image": "specimens/specimen-8f9dbf7065de.png",
+          "outputHash": "78c7f2ea59c23acaf8d53b062cae186d6c881f82fdbfe0760d5c5196ebb46ee8",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-b51a298115ff",
+          "image": "specimens/specimen-b51a298115ff.png",
+          "outputHash": "9ba843074796615d99ae5e60ae7f3403a3f654dcc7d9d5c2c22bbd4c437117dd",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-3bb17b01df33",
+      "reference": {
+        "image": "references/cell-3bb17b01df33.png",
+        "screenshotHash": "b0561252a96058242e37711c1de19965949af0f066dc36970c572bfc9074104b"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-8a85108ad1bc",
+          "image": "specimens/specimen-8a85108ad1bc.png",
+          "outputHash": "1825b3f87f9d552cda1991bd30f0052978a9f91eea362229981cae0d7bd2c89f",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-a08a1f08fb78",
+          "image": "specimens/specimen-a08a1f08fb78.png",
+          "outputHash": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-3d6eed15a06b",
+      "reference": {
+        "image": "references/cell-3d6eed15a06b.png",
+        "screenshotHash": "fefafe26c9683447cde2615b49b632a75cc3830c1e76143dea394faa689bce5b"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-80a1f871161c",
+          "image": "specimens/specimen-80a1f871161c.png",
+          "outputHash": "4c6452dbc776a20cd2eabeb83c47459aaa581b8ed6fbc03b58de24d769a11d40",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-e76479b7f5cf",
+          "image": "specimens/specimen-e76479b7f5cf.png",
+          "outputHash": "b05372a54933dbb35d03fcb5e71d9529c79be9b2b1ee0c47e2efdc92c9405a6a",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-3f0264f874ab",
+      "reference": {
+        "image": "references/cell-3f0264f874ab.png",
+        "screenshotHash": "8df74459a49bfb9b2eef475dfdbe656d1caca61c71e9467d69a2b93ab2e4fd45"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-eca11e8f5132",
+          "image": "specimens/specimen-eca11e8f5132.png",
+          "outputHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-f196914b6369",
+          "image": "specimens/specimen-f196914b6369.png",
+          "outputHash": "262f6acd6a473093294ffbc6b8c55a0982854ab76c0c1c9904ea5533437e8381",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-4056f3f5fd8b",
+      "reference": {
+        "image": "references/cell-4056f3f5fd8b.png",
+        "screenshotHash": "d26df25224b5979cb795c6edca3ba03153e2fafea81d871ec1b827fbc77a94e3"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-d18f69a1d116",
+          "image": "specimens/specimen-d18f69a1d116.png",
+          "outputHash": "3dab2b86b2264d4353b8098362de3053c4fc4fde508c006bbc9c9bdbbb250903",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-fd8a9a0b50ad",
+          "image": "specimens/specimen-fd8a9a0b50ad.png",
+          "outputHash": "3adfedd6d356b895a95d0f88d83e3789c6fcb65217b6bde8922a12aa749d4a9c",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-41d882dbeae4",
+      "reference": {
+        "image": "references/cell-41d882dbeae4.png",
+        "screenshotHash": "5d0dd7531ab905d42c1bd0f05c9520ba15cc55015fa094bd92c86b5551012bdc"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-3424ab6f296c",
+          "image": "specimens/specimen-3424ab6f296c.png",
+          "outputHash": "c02833c91c264292fac020eb41b294fdbd69be20ae3dc675fa911599325e81a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-70ecad082008",
+          "image": "specimens/specimen-70ecad082008.png",
+          "outputHash": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-440cd34d2812",
+      "reference": {
+        "image": "references/cell-440cd34d2812.png",
+        "screenshotHash": "d80d9ca81d89485f155c633b574edf226164300a17718206c4041a8651d5f034"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-703f3570fc59",
+          "image": "specimens/specimen-703f3570fc59.png",
+          "outputHash": "137166f9e9150e2f81ad97307fb7390ca3fd8f710d8cc1694bf8cb45a96d27bb",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-de63f7328486",
+          "image": "specimens/specimen-de63f7328486.png",
+          "outputHash": "519505d9fe373259349f333a7aa02a46b2ead25e9961949e6421cf6c1b41ca75",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-4d29d7dd7127",
+      "reference": {
+        "image": "references/cell-4d29d7dd7127.png",
+        "screenshotHash": "23b6fa536e1335f3c19d46947860d037cfcd61540525ea59e4d2da392669d6b9"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-23b852375023",
+          "image": "specimens/specimen-23b852375023.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-f8c46e6d79f7",
+          "image": "specimens/specimen-f8c46e6d79f7.png",
+          "outputHash": "dadf0db33b8f92f42a88d152bee1f05f4c9c1074f8eedd1c3734751459b0b3b1",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-4dbde3d947ab",
+      "reference": {
+        "image": "references/cell-4dbde3d947ab.png",
+        "screenshotHash": "10f6053721a740c23ac88808763001e178914dec66cbbb1937d5c6b43bc2b5dd"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-0500179e1c59",
+          "image": "specimens/specimen-0500179e1c59.png",
+          "outputHash": "be32dc4f079529026b03bfabe3cfc2444c21689c41415941bc8d6878aa3b6a1b",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-05a014010a1f",
+          "image": "specimens/specimen-05a014010a1f.png",
+          "outputHash": "74fe5e1b16fc9316e628a49a1db01880f2d2c5a8e2f47bf96da9e3feced9e1c9",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-4f2aaf3e1b45",
+      "reference": {
+        "image": "references/cell-4f2aaf3e1b45.png",
+        "screenshotHash": "3eeaf785db102e606d3116bc0e3462ff98aa6ae9f790df721e18ab7b00bbd30d"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-2c84fae9a129",
+          "image": "specimens/specimen-2c84fae9a129.png",
+          "outputHash": "cbda37e5590943e2cc33e5c05321deaab9068f5c4b4ef63ed9633ab826a766d3",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-b2fb1629d28c",
+          "image": "specimens/specimen-b2fb1629d28c.png",
+          "outputHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-4fa97e34f5c6",
+      "reference": {
+        "image": "references/cell-4fa97e34f5c6.png",
+        "screenshotHash": "73ab4b5713829eb2ea93fbeeec25775054e5f0f53efc86dd1362c02dfcbb2203"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-52fff37149b1",
+          "image": "specimens/specimen-52fff37149b1.png",
+          "outputHash": "3dab2b86b2264d4353b8098362de3053c4fc4fde508c006bbc9c9bdbbb250903",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-e24cfd77edc3",
+          "image": "specimens/specimen-e24cfd77edc3.png",
+          "outputHash": "53a47e429979c45b3bdcf8ee353672543532ebbd6405ba0f4d0912585b407871",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-5458d06987a3",
+      "reference": {
+        "image": "references/cell-5458d06987a3.png",
+        "screenshotHash": "31a709a52196009471e80dd903f570f5fdc7b54171907da9d8b18fe07fbdbf21"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-34dd9276c292",
+          "image": "specimens/specimen-34dd9276c292.png",
+          "outputHash": "4482ae91e831ff9b6129c4e517de55d8dc7bde3dc64fe530d3a8cf08dcf9c8f3",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-6a0a339f16de",
+          "image": "specimens/specimen-6a0a339f16de.png",
+          "outputHash": "9b8891d7ac1d444dcd212ef76cab77d76250be7e3cc7e829beb50fb4b3efb6c1",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-54ba345d3ad8",
+      "reference": {
+        "image": "references/cell-54ba345d3ad8.png",
+        "screenshotHash": "717def74e6a7c5e20f1ae7192d4820fe35f508a43298393aee44e66f03ad0bac"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-7cf6bcc9698f",
+          "image": "specimens/specimen-7cf6bcc9698f.png",
+          "outputHash": "653e057fa5962f7b967fc7bd49645f8b70be9fcb468a15726c9c0c2c4ed2d6e8",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-b8eb0b324804",
+          "image": "specimens/specimen-b8eb0b324804.png",
+          "outputHash": "c41aa34d6dec59d619ac324669811b758c0bcd6697e013373b427e1b3e3f9cb4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-59b0fbe8adc7",
+      "reference": {
+        "image": "references/cell-59b0fbe8adc7.png",
+        "screenshotHash": "b6c60e381acca382f08f6279ab94bc392ad9bdbeaa894752d414b883d0c72cd4"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-24c2ef694036",
+          "image": "specimens/specimen-24c2ef694036.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-2a2edf11f3f2",
+          "image": "specimens/specimen-2a2edf11f3f2.png",
+          "outputHash": "3e065b0465e2c0f4a9ebd4fc6df679862e0bb66bf3003e69b8575d7290ef3b8d",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-5e38be5226b4",
+      "reference": {
+        "image": "references/cell-5e38be5226b4.png",
+        "screenshotHash": "0b4c7044fa40c57d0dc4a7a6bb90afd4e1301259519a2bc2b0bbbc7870d23bd6"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-1fd2ad2b02b8",
+          "image": "specimens/specimen-1fd2ad2b02b8.png",
+          "outputHash": "59675e7c0a67b498418479e068bf62e22f1b81d2e9542a2528c309ffbc08d25a",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-348046d71e82",
+          "image": "specimens/specimen-348046d71e82.png",
+          "outputHash": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-629faf217042",
+      "reference": {
+        "image": "references/cell-629faf217042.png",
+        "screenshotHash": "b862ca1d678f4f97aa9dc8bf9d60ea967edc85206880c51047f7304832a10972"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-192f21a787c4",
+          "image": "specimens/specimen-192f21a787c4.png",
+          "outputHash": "a6596c5acc2c0bfc4cd621c75c01cc377d761a662fc9f03f4d9459af56b83706",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-bce6311dad91",
+          "image": "specimens/specimen-bce6311dad91.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-65c34db2ea63",
+      "reference": {
+        "image": "references/cell-65c34db2ea63.png",
+        "screenshotHash": "2073defe23b4ec9a4326a52bc80ea39bf131786ca6f47a24f061dac51ff0a50b"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-2441a28908e8",
+          "image": "specimens/specimen-2441a28908e8.png",
+          "outputHash": "e53a94e8dabe3b2a7800cc843a3edfa11fb31713d897af23ad2c0fb1fe4746ed",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-2b07470e40cc",
+          "image": "specimens/specimen-2b07470e40cc.png",
+          "outputHash": "febbb8a5dab2a2f8fa057cc124632253af86a3999679826537780f043205e4e9",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-666b2a681323",
+      "reference": {
+        "image": "references/cell-666b2a681323.png",
+        "screenshotHash": "5ad28305223d10251939913d088b251c065b8356b8cd563253b00566a74ef2ef"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-64826dc6fc74",
+          "image": "specimens/specimen-64826dc6fc74.png",
+          "outputHash": "233114e3e10d0ef931f83b8ebd87e2ea37a9bfb4c62d010b3734c5e03488083f",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-6ae11215d576",
+          "image": "specimens/specimen-6ae11215d576.png",
+          "outputHash": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-6889b904d675",
+      "reference": {
+        "image": "references/cell-6889b904d675.png",
+        "screenshotHash": "4ec85d9f40c6107afaa3f8e054748a69cef4f5ea0fd1884e1ac67c3570e72da8"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-670d785ef84b",
+          "image": "specimens/specimen-670d785ef84b.png",
+          "outputHash": "6b642d5c87054517a3dfe2d195b8741e1e8095e656f4c57e9632230e8902864c",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-f0cf9f191fca",
+          "image": "specimens/specimen-f0cf9f191fca.png",
+          "outputHash": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-6dbdebaf2ed1",
+      "reference": {
+        "image": "references/cell-6dbdebaf2ed1.png",
+        "screenshotHash": "749d83fbc4fb14ab75eece3dca22a77412d4ace431e7dd88b4f9d70285362de3"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-121e3c98f122",
+          "image": "specimens/specimen-121e3c98f122.png",
+          "outputHash": "b2e5a84a7b348402b57bedaff2c8f06157c27d2d657cc153c80a83d3e7096340",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-9456e4c224c6",
+          "image": "specimens/specimen-9456e4c224c6.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-74c4042d31b0",
+      "reference": {
+        "image": "references/cell-74c4042d31b0.png",
+        "screenshotHash": "dc454bf2552e5145f9eca1109427b23322ae6586a678a8f585963b91bb889371"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-58a9937d6eb3",
+          "image": "specimens/specimen-58a9937d6eb3.png",
+          "outputHash": "b10f9bc8031d12a0776675ab0216c8ab5310a120d9a7c992d829a0cdfad019c4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-f416a3e21273",
+          "image": "specimens/specimen-f416a3e21273.png",
+          "outputHash": "c2739f33ad2225327bcf876366c9ca632a6b1fd33163602149292ed3613f6bc8",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-75caea3fb208",
+      "reference": {
+        "image": "references/cell-75caea3fb208.png",
+        "screenshotHash": "83ba22e1f730b90fe278dc4bed727f69848bb3670767532837ca97808ce837ae"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-3cf8c5a8bb52",
+          "image": "specimens/specimen-3cf8c5a8bb52.png",
+          "outputHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-87f0d953dc22",
+          "image": "specimens/specimen-87f0d953dc22.png",
+          "outputHash": "5e8cea6070e9714aa5248145e0ffc6f32970bcca3f40d0850038d96db09dbf31",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-76031cce92c2",
+      "reference": {
+        "image": "references/cell-76031cce92c2.png",
+        "screenshotHash": "706ad9bac1d587367d411a22cbe625babaa2c670b3d2cf3bdd33604ff3de7e27"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-7113a14527b9",
+          "image": "specimens/specimen-7113a14527b9.png",
+          "outputHash": "653e057fa5962f7b967fc7bd49645f8b70be9fcb468a15726c9c0c2c4ed2d6e8",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-87286d491247",
+          "image": "specimens/specimen-87286d491247.png",
+          "outputHash": "0fc5816208dbe066797f362c06126c3ebaf697c1ed9ca68e75ed5d260f95738a",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-78e09f46ee32",
+      "reference": {
+        "image": "references/cell-78e09f46ee32.png",
+        "screenshotHash": "6d875b2747a44b3a03a96eafe7df1d376b688681b41a95348ef6065043feece1"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-2a10b68b83e9",
+          "image": "specimens/specimen-2a10b68b83e9.png",
+          "outputHash": "9eaaac31140d31c9c46061a9b4c1037a40aef5ed7e08e30ce59255a594bd4b25",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-eb9dc3e61c7c",
+          "image": "specimens/specimen-eb9dc3e61c7c.png",
+          "outputHash": "78c7f2ea59c23acaf8d53b062cae186d6c881f82fdbfe0760d5c5196ebb46ee8",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-7a38cf5040ea",
+      "reference": {
+        "image": "references/cell-7a38cf5040ea.png",
+        "screenshotHash": "aca24c6b3a27eb0db7c7d4a28e347d9da8290f35e463a363ee6a89df587ff244"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-ab243f1cef98",
+          "image": "specimens/specimen-ab243f1cef98.png",
+          "outputHash": "1568845a51fa6ba639747fc8487c1b10744e15dfd4fd6a41afe96daf522a8dbf",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-bedbe567429d",
+          "image": "specimens/specimen-bedbe567429d.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-7bf48083bb08",
+      "reference": {
+        "image": "references/cell-7bf48083bb08.png",
+        "screenshotHash": "87d1bb317674afa08928b7f32dff4c71317854e533edcb1c8762b3b6d782ea5c"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-a95a3009db19",
+          "image": "specimens/specimen-a95a3009db19.png",
+          "outputHash": "eeefcf89ffb27c27ea126aaea104a72c13a846f75a1855b1b6621c14d2638258",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-adc65b760e74",
+          "image": "specimens/specimen-adc65b760e74.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-7c18bc5831c3",
+      "reference": {
+        "image": "references/cell-7c18bc5831c3.png",
+        "screenshotHash": "82c1220ecf0e6407ff3e94939f306a1499283c5d35f4f7103a01531e936bb8d8"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-297360f9f536",
+          "image": "specimens/specimen-297360f9f536.png",
+          "outputHash": "0b6f85008330aaa6d990a51b1ba1868b469284f616bad44a1aebec93be79bd3b",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-d4c488982f80",
+          "image": "specimens/specimen-d4c488982f80.png",
+          "outputHash": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-7cecf2d4196d",
+      "reference": {
+        "image": "references/cell-7cecf2d4196d.png",
+        "screenshotHash": "49d12648475adfb3146692f101ee28c558ec80ac2c3d476bee4185151292b4bf"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-35433bdeaf34",
+          "image": "specimens/specimen-35433bdeaf34.png",
+          "outputHash": "e53a94e8dabe3b2a7800cc843a3edfa11fb31713d897af23ad2c0fb1fe4746ed",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-9c0fb0756763",
+          "image": "specimens/specimen-9c0fb0756763.png",
+          "outputHash": "4bbd5b395bf289d13abb0f675bb15bf79b7045e7119346887c259db5fd93606c",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-8040151df61b",
+      "reference": {
+        "image": "references/cell-8040151df61b.png",
+        "screenshotHash": "4e01db31bff1ebbcc0c47b01d449c060615f8d119a08f13a89cc66dcefcaa357"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-2c0d3a95572c",
+          "image": "specimens/specimen-2c0d3a95572c.png",
+          "outputHash": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-d66e9fcbbae1",
+          "image": "specimens/specimen-d66e9fcbbae1.png",
+          "outputHash": "9e0ff39b980e3dfa354cc1e83fe21b26f42d8f4cbd7c8ff18db9971bb5cf4d8b",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-84d47fcc50df",
+      "reference": {
+        "image": "references/cell-84d47fcc50df.png",
+        "screenshotHash": "e4d7d279d6808adb5170aaa26f7e26602d1f9ea5d10c48c603f932d144b49d3c"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-48bf3060f490",
+          "image": "specimens/specimen-48bf3060f490.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-ef3a2d1ee97e",
+          "image": "specimens/specimen-ef3a2d1ee97e.png",
+          "outputHash": "018a3ed56eb065b28f85c4b46212af73e6e47aa71099c0b7e40afee94f814f83",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-867b9996fabd",
+      "reference": {
+        "image": "references/cell-867b9996fabd.png",
+        "screenshotHash": "8002899441fe70fca2a72c9f2b2f404a83997d5115f229d738895c93e894a8bb"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-37ac5b23b12e",
+          "image": "specimens/specimen-37ac5b23b12e.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-4bd20c3699ce",
+          "image": "specimens/specimen-4bd20c3699ce.png",
+          "outputHash": "864f4e9da9614ef5fb3e2b5f2ed6c2d95274611653ef2374a7734b6a0092a7e5",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-8afa2e03f862",
+      "reference": {
+        "image": "references/cell-8afa2e03f862.png",
+        "screenshotHash": "d5e05d24374ddd48a3f9d1e72a555a1aaa91f0c1854c42cb681207bd7d0a4417"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-4e7317196702",
+          "image": "specimens/specimen-4e7317196702.png",
+          "outputHash": "10bfc6974a941d5d5d619aa4c723bccb77ef835cfdb1764de499f7a98d0dc262",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-517ff664b51a",
+          "image": "specimens/specimen-517ff664b51a.png",
+          "outputHash": "9b8891d7ac1d444dcd212ef76cab77d76250be7e3cc7e829beb50fb4b3efb6c1",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-8b57376c8f8a",
+      "reference": {
+        "image": "references/cell-8b57376c8f8a.png",
+        "screenshotHash": "0eee71646b24a4a8d18a10f1f8f75a59b7aab548abb4ed1f154ded8dd20dd289"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-85c1fbbe30fc",
+          "image": "specimens/specimen-85c1fbbe30fc.png",
+          "outputHash": "fe61d6f6c513bc575f30aa6da28c598f524af20c300267f472e1a9d188a8fda1",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-f4ec57bf8ddf",
+          "image": "specimens/specimen-f4ec57bf8ddf.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-8c0be8b45955",
+      "reference": {
+        "image": "references/cell-8c0be8b45955.png",
+        "screenshotHash": "6112e442bfb0a587b27c6296d3cec2121e344ce842a1ba1c7d6892fb9c293d48"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-038cd85f52f8",
+          "image": "specimens/specimen-038cd85f52f8.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-2a415ac6de19",
+          "image": "specimens/specimen-2a415ac6de19.png",
+          "outputHash": "43c0fd862f06e1e1709d9f5763e759b1014ce61be199cccc9444b2f61e8d754d",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-8cb6d1fdda8b",
+      "reference": {
+        "image": "references/cell-8cb6d1fdda8b.png",
+        "screenshotHash": "6a83e925b899db9c28df1e00b3bcfe263ec49a57f5b07f5655ca6fd56156a5a0"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-03f81af86fa5",
+          "image": "specimens/specimen-03f81af86fa5.png",
+          "outputHash": "dae82de12723adb84789fa5d1f1d29c49a7bae9c65430b4327537d3dad49b4e9",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-8504de705138",
+          "image": "specimens/specimen-8504de705138.png",
+          "outputHash": "c2739f33ad2225327bcf876366c9ca632a6b1fd33163602149292ed3613f6bc8",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-8e500cfe6992",
+      "reference": {
+        "image": "references/cell-8e500cfe6992.png",
+        "screenshotHash": "fd53e751d1b2fe07f2590d43f66b914daf9e58428c08ec3dc807db15a868f8b8"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-ee3baabc8336",
+          "image": "specimens/specimen-ee3baabc8336.png",
+          "outputHash": "7b626af847239d6dfb0c244e8c73e42813090358f79018506be4e97bd7915097",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-fee8a50345d1",
+          "image": "specimens/specimen-fee8a50345d1.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-8e65efaeceba",
+      "reference": {
+        "image": "references/cell-8e65efaeceba.png",
+        "screenshotHash": "4c193d5c4002ca13753e318dbe39ea0b8989dc89575d0e212901440b8dc943db"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-1e15e612807b",
+          "image": "specimens/specimen-1e15e612807b.png",
+          "outputHash": "9b8891d7ac1d444dcd212ef76cab77d76250be7e3cc7e829beb50fb4b3efb6c1",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-8dd494f9d395",
+          "image": "specimens/specimen-8dd494f9d395.png",
+          "outputHash": "83a6cc9a66f9c0b9c8573b9d8117ec574d13390eca6a89e3d3c527f98f9c606e",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-8ea3c31b3bef",
+      "reference": {
+        "image": "references/cell-8ea3c31b3bef.png",
+        "screenshotHash": "98b68ff6a8a8404b962933d435ac626a6cb372b561462ba4947d8bae25b2604b"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-02c80f57fb21",
+          "image": "specimens/specimen-02c80f57fb21.png",
+          "outputHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-853149def8e0",
+          "image": "specimens/specimen-853149def8e0.png",
+          "outputHash": "6b55ef04eecc014f6abd77fc87e2ddf8a0e33d32365a81e467d787c1fa9dc0a8",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-8f162b5331a5",
+      "reference": {
+        "image": "references/cell-8f162b5331a5.png",
+        "screenshotHash": "b90f9615cedea245b837109dd49a0171f8e4149561f09e10b858ec3e4faf5c4b"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-6e5aa4f12c14",
+          "image": "specimens/specimen-6e5aa4f12c14.png",
+          "outputHash": "825113fe4526554690fb23a999bede477608f03e84ff649b559205887a15111a",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-eb287d13306d",
+          "image": "specimens/specimen-eb287d13306d.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-8fc507b0274b",
+      "reference": {
+        "image": "references/cell-8fc507b0274b.png",
+        "screenshotHash": "7c04e91c281da9f6738831d277fbe8ba466e4214f3c2efb9120b7ad7bf808f03"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-6223b1130099",
+          "image": "specimens/specimen-6223b1130099.png",
+          "outputHash": "726db45d41a4dfab7b19062244039b75ad5e7fe8da1ccbad3afb268272c24935",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-69eacb65ac69",
+          "image": "specimens/specimen-69eacb65ac69.png",
+          "outputHash": "78c7f2ea59c23acaf8d53b062cae186d6c881f82fdbfe0760d5c5196ebb46ee8",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-914b2fda057c",
+      "reference": {
+        "image": "references/cell-914b2fda057c.png",
+        "screenshotHash": "255349dbfc1171b90e7104abb63deadea8196edab5df6023cb06a20d4c031b9f"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-27f4e80a36ef",
+          "image": "specimens/specimen-27f4e80a36ef.png",
+          "outputHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-41a0f0d3443b",
+          "image": "specimens/specimen-41a0f0d3443b.png",
+          "outputHash": "271228445c49a9fd9ab44ba9f7234f02ef2f7b003a863bcf7043f0420aee28d7",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-93c18d91a9e0",
+      "reference": {
+        "image": "references/cell-93c18d91a9e0.png",
+        "screenshotHash": "4e937da0e5a305e74564f8154a0d98f765fa3cb0eff022453d6101814558f823"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-2c85c57bb380",
+          "image": "specimens/specimen-2c85c57bb380.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-e0499467f843",
+          "image": "specimens/specimen-e0499467f843.png",
+          "outputHash": "a78e3ec1a1a09428a525a47fc3c51a38627218dc2744a3e2465d9eb9930debde",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-95cd7164c072",
+      "reference": {
+        "image": "references/cell-95cd7164c072.png",
+        "screenshotHash": "7fb7adfa6f3a4dd960df2ce21e83ecba1229def617dea1d623a2a7117fce22a0"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-98c06be38083",
+          "image": "specimens/specimen-98c06be38083.png",
+          "outputHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-a790002b62e0",
+          "image": "specimens/specimen-a790002b62e0.png",
+          "outputHash": "ef10dfb10ac2e30a5e699ed0da3609a31e31207541cbaa7120cea79783fc0c1c",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-9940eda226e7",
+      "reference": {
+        "image": "references/cell-9940eda226e7.png",
+        "screenshotHash": "1c67027bf48918429afa2a4ee1980a0812ab6b37ec0bbfed0b05e93f54ae99e8"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-03b2417e1191",
+          "image": "specimens/specimen-03b2417e1191.png",
+          "outputHash": "698c1ce3d9bb3a794bd9e51e1b0dd4bcc329840b4ad19dcf47508ad830fae587",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-eb3c0a61ee7e",
+          "image": "specimens/specimen-eb3c0a61ee7e.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-9aae3ccd5912",
+      "reference": {
+        "image": "references/cell-9aae3ccd5912.png",
+        "screenshotHash": "fef166345ce4e5d3f883199928ffe115e053068f68f023803d86e3e79467a313"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-589e0c72716b",
+          "image": "specimens/specimen-589e0c72716b.png",
+          "outputHash": "e53a94e8dabe3b2a7800cc843a3edfa11fb31713d897af23ad2c0fb1fe4746ed",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-f64088c8ffcf",
+          "image": "specimens/specimen-f64088c8ffcf.png",
+          "outputHash": "2b1d2067d054a4fe87faaac1b01ef8e34f5bdc99533e870d1cf08b906dd60f14",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-9af70596a041",
+      "reference": {
+        "image": "references/cell-9af70596a041.png",
+        "screenshotHash": "0b56317b0b875800208aa7988751a2eb2135dcb2851fdd662d6d33caeb9af39a"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-5478a145e7c1",
+          "image": "specimens/specimen-5478a145e7c1.png",
+          "outputHash": "536f6da5a71b1d614339a7ad5da9dc8bb8e1af89a8a005a108966472896e3029",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-6cf16501c4cc",
+          "image": "specimens/specimen-6cf16501c4cc.png",
+          "outputHash": "9b8891d7ac1d444dcd212ef76cab77d76250be7e3cc7e829beb50fb4b3efb6c1",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-9b8a81fa4d7a",
+      "reference": {
+        "image": "references/cell-9b8a81fa4d7a.png",
+        "screenshotHash": "12cdc7f1b4f1f086034d734d9ebe0da969e314b243dbfc3579a6eee9907c6c40"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-74ce35a3c055",
+          "image": "specimens/specimen-74ce35a3c055.png",
+          "outputHash": "c50990eb5e29ee30b32df0d5f0ad1b65cd2335dec2a8dcd7c153e7951426ae1d",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-b09e7e2f0a1a",
+          "image": "specimens/specimen-b09e7e2f0a1a.png",
+          "outputHash": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-9bd3e94a3204",
+      "reference": {
+        "image": "references/cell-9bd3e94a3204.png",
+        "screenshotHash": "03c051b9e1736452a85f52c7dacccf26ad170a48bd5492fbb83f76ad4402855b"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-1e798aa5c4b4",
+          "image": "specimens/specimen-1e798aa5c4b4.png",
+          "outputHash": "516dfd7d9ef8f79b24a248bba1406fc048017d296c87d05b01dcea3ee2b5da57",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-cb9fe0d209fb",
+          "image": "specimens/specimen-cb9fe0d209fb.png",
+          "outputHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-9f62d911795e",
+      "reference": {
+        "image": "references/cell-9f62d911795e.png",
+        "screenshotHash": "9a40a59da91d32a658c3cfb29f04565f8c3782d44fecf3c0f8655aabc3fd344f"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-742592a4069f",
+          "image": "specimens/specimen-742592a4069f.png",
+          "outputHash": "556d0812d5d05b974daaea43cd230bbba6fedcfea321b8c0317df47a3c4d1ad1",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-84512070efd6",
+          "image": "specimens/specimen-84512070efd6.png",
+          "outputHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-9fc35c66f2ab",
+      "reference": {
+        "image": "references/cell-9fc35c66f2ab.png",
+        "screenshotHash": "494d912d62aafd57119acbaeaf7f9bd70c1adddccf7d1ff517cc20c64ee214d8"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-02771b81b0d6",
+          "image": "specimens/specimen-02771b81b0d6.png",
+          "outputHash": "369214db43fcd793676da8533750ecae82605ff8f0d11d3a3a90b5ef4f509fa4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-382d781b5e2b",
+          "image": "specimens/specimen-382d781b5e2b.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-a004a93a65c3",
+      "reference": {
+        "image": "references/cell-a004a93a65c3.png",
+        "screenshotHash": "b9757dccbbe9db6a5aa35d611e4a6be5aa3ad3fb59b6a46edadd565fb3b2cd15"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-7791c815ab1c",
+          "image": "specimens/specimen-7791c815ab1c.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-82c313de7c78",
+          "image": "specimens/specimen-82c313de7c78.png",
+          "outputHash": "8732ee5304212cbca7ec7746fc5918b0c6319307c035a99b902b10252b731684",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-a0cc8f059313",
+      "reference": {
+        "image": "references/cell-a0cc8f059313.png",
+        "screenshotHash": "518f8f2b9468d48292a7905040a5c21d2abea34565295d31e0cbbce3ccedab75"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-0d584669a05a",
+          "image": "specimens/specimen-0d584669a05a.png",
+          "outputHash": "0db6cb2f3b689d4c1df7b46d7ba21a2413b06afb95fc4d8b5b239245ba32d7a8",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-3ede5bf5dc4b",
+          "image": "specimens/specimen-3ede5bf5dc4b.png",
+          "outputHash": "e53a94e8dabe3b2a7800cc843a3edfa11fb31713d897af23ad2c0fb1fe4746ed",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-a92a3f6b546d",
+      "reference": {
+        "image": "references/cell-a92a3f6b546d.png",
+        "screenshotHash": "5cc52e8e8a32aeb63beda6840dc38e08110b09d9813278a188374b973b23808e"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-0e6a3bf6e6dc",
+          "image": "specimens/specimen-0e6a3bf6e6dc.png",
+          "outputHash": "be32dc4f079529026b03bfabe3cfc2444c21689c41415941bc8d6878aa3b6a1b",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-33f8ceec3202",
+          "image": "specimens/specimen-33f8ceec3202.png",
+          "outputHash": "86045d8282684e68107bd2ee0dc543d3de47ca113f36dd333812dfc13faf3b56",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-ad932372750e",
+      "reference": {
+        "image": "references/cell-ad932372750e.png",
+        "screenshotHash": "dc645c6d096293e049a8d1a1fb031e62efdd226fb72771a910cda4a2a177a178"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-00a6d62b0c2f",
+          "image": "specimens/specimen-00a6d62b0c2f.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-ba04e811b363",
+          "image": "specimens/specimen-ba04e811b363.png",
+          "outputHash": "7ed70e47bf81bb12b7528ab8148f5f040446c5a7752592d0f4593b8b7aeb9b0d",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-b2cfd873ed2b",
+      "reference": {
+        "image": "references/cell-b2cfd873ed2b.png",
+        "screenshotHash": "8415e643a23ac2ece9e8386ea4bcc090cad0dd3e4d8e14d9308e47f8926aeb57"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-24c10eed7790",
+          "image": "specimens/specimen-24c10eed7790.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-c8c878e6d0e9",
+          "image": "specimens/specimen-c8c878e6d0e9.png",
+          "outputHash": "a2be637126066f4aea0e0e8fd77611478fba031cbe06547a96da5f3f80f4cf76",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-b329648a8d7b",
+      "reference": {
+        "image": "references/cell-b329648a8d7b.png",
+        "screenshotHash": "d470fa578ffbda89719c871ae4b62e336ae36fe8a51b72eca6572dcacaef26e5"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-1d97ae180e10",
+          "image": "specimens/specimen-1d97ae180e10.png",
+          "outputHash": "b3f1fdc560bd91d20087522d5e2ffbe0b22f972b94e3bc3ac77c5823b0e98b11",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-5fecbea8f166",
+          "image": "specimens/specimen-5fecbea8f166.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-b38e52626369",
+      "reference": {
+        "image": "references/cell-b38e52626369.png",
+        "screenshotHash": "26f19958972b0841ea7aecad1bb1d4d9407afd956c1ee7e7704b1462a8cf0ae4"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-14059d75c006",
+          "image": "specimens/specimen-14059d75c006.png",
+          "outputHash": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-6717f79e8a39",
+          "image": "specimens/specimen-6717f79e8a39.png",
+          "outputHash": "90a8ac8c2720511cf09981d960a241692b803409b34a061ae187937b68028d60",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-b39a0be386be",
+      "reference": {
+        "image": "references/cell-b39a0be386be.png",
+        "screenshotHash": "774b8125b6a2054647f18406762da1d7442f278501da2a869ee622e21d06442a"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-9001a5ff2ec3",
+          "image": "specimens/specimen-9001a5ff2ec3.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-a5cbdd650ecd",
+          "image": "specimens/specimen-a5cbdd650ecd.png",
+          "outputHash": "2242374e76e22f3a0b0ac778db4e1215458a582f0639cd0d0be0164e98ec8508",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-b4ce633c3a0e",
+      "reference": {
+        "image": "references/cell-b4ce633c3a0e.png",
+        "screenshotHash": "62c342f1e3dd7acddc2548217e3b4591bfdc1d210cf1f0b3970178e9255fcb6e"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-160e6b174ef5",
+          "image": "specimens/specimen-160e6b174ef5.png",
+          "outputHash": "c2739f33ad2225327bcf876366c9ca632a6b1fd33163602149292ed3613f6bc8",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-227c2a0fc0f0",
+          "image": "specimens/specimen-227c2a0fc0f0.png",
+          "outputHash": "e47873f8e450f45b41d7c04ba27d29c629f26606493d705f88f276ec228fd966",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-b67d9086d81a",
+      "reference": {
+        "image": "references/cell-b67d9086d81a.png",
+        "screenshotHash": "20032b850f3bde59d047359f299f6e29e491e7feb4143c32f343d71b36f37248"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-38ce69d43134",
+          "image": "specimens/specimen-38ce69d43134.png",
+          "outputHash": "b5e35b268025e417184d5cfae9d55933c57215c301b9c691e871b5ab5c68e113",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-d5ae90efd24e",
+          "image": "specimens/specimen-d5ae90efd24e.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-b6ec176b5078",
+      "reference": {
+        "image": "references/cell-b6ec176b5078.png",
+        "screenshotHash": "aefcc710833dd60c4206a22667ee7724293b54f3b48ffff6309f6b786ac6bcc8"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-30e1d571ad9a",
+          "image": "specimens/specimen-30e1d571ad9a.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-ff45a5402dce",
+          "image": "specimens/specimen-ff45a5402dce.png",
+          "outputHash": "be3f1f6c190e7950488eeb2ecc13c882b37ba3d6aac66dca1a67e27b52279f36",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-b812434ad40e",
+      "reference": {
+        "image": "references/cell-b812434ad40e.png",
+        "screenshotHash": "26c88f37f76a86ba9cb18dff32396497c5a109ea6767b049730f3946d63f4e37"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-3b1fb201ca8e",
+          "image": "specimens/specimen-3b1fb201ca8e.png",
+          "outputHash": "14bdba503d5c7f6ec2759e0c9e5ea4175384dede79e751675f3d21109610120c",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-e3a56fd33ca1",
+          "image": "specimens/specimen-e3a56fd33ca1.png",
+          "outputHash": "78c7f2ea59c23acaf8d53b062cae186d6c881f82fdbfe0760d5c5196ebb46ee8",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-bcae02f2dc8e",
+      "reference": {
+        "image": "references/cell-bcae02f2dc8e.png",
+        "screenshotHash": "af6b151a7fd62568a9eb5e7eb49b1a91e1c881fdbb22fdca4b9e4d1f752a6f48"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-13a33833096d",
+          "image": "specimens/specimen-13a33833096d.png",
+          "outputHash": "e53a94e8dabe3b2a7800cc843a3edfa11fb31713d897af23ad2c0fb1fe4746ed",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-f556c15c2e41",
+          "image": "specimens/specimen-f556c15c2e41.png",
+          "outputHash": "9a312fef69ec739acaed83436f46da02cbccad477bdd594ca2619288c0e8207b",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-bd034a93ffa1",
+      "reference": {
+        "image": "references/cell-bd034a93ffa1.png",
+        "screenshotHash": "72194d0640c5c86e8a1373e79958b40eb628fa0296e6bd56a2ac76f6f2f28399"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-8f52f524d8a5",
+          "image": "specimens/specimen-8f52f524d8a5.png",
+          "outputHash": "6c08db88dbedf9a0153063e96e3215b7c715f327e4cbcdb40de945700cade00f",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-d95d176bd258",
+          "image": "specimens/specimen-d95d176bd258.png",
+          "outputHash": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-be6ec6b0712f",
+      "reference": {
+        "image": "references/cell-be6ec6b0712f.png",
+        "screenshotHash": "bc6ac44d7785d8da40b3aee1d4d7b6551ba658366d50a620f8b491518b27f46b"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-0e769136da46",
+          "image": "specimens/specimen-0e769136da46.png",
+          "outputHash": "71fd9cc83d7cdff260aee824ccb83c583407e9e2b40d8cfbddae46b0bd2a4ed6",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-3ae409006545",
+          "image": "specimens/specimen-3ae409006545.png",
+          "outputHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-bfcb952fb2c6",
+      "reference": {
+        "image": "references/cell-bfcb952fb2c6.png",
+        "screenshotHash": "49a54ab6a4dd625a2319affdeebc0bed37ec7fa97041d08282b9ee3db6d14a85"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-a269ca57b160",
+          "image": "specimens/specimen-a269ca57b160.png",
+          "outputHash": "a977ec4dd4e65605281255b641ae6cd9eff0076420cf8142b48eaef5aa9494c5",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-e8af8fdba54d",
+          "image": "specimens/specimen-e8af8fdba54d.png",
+          "outputHash": "78c7f2ea59c23acaf8d53b062cae186d6c881f82fdbfe0760d5c5196ebb46ee8",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-c02e831a75b4",
+      "reference": {
+        "image": "references/cell-c02e831a75b4.png",
+        "screenshotHash": "daad7ea160db6a2d461197c01d1e6bb58ca557d77b95e463bbab1f4273f45087"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-04e84604150b",
+          "image": "specimens/specimen-04e84604150b.png",
+          "outputHash": "653e057fa5962f7b967fc7bd49645f8b70be9fcb468a15726c9c0c2c4ed2d6e8",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-77a6b7472d8e",
+          "image": "specimens/specimen-77a6b7472d8e.png",
+          "outputHash": "0f45297e072a599f36078c6045f9c95801fc13c62099a7abf71a68ae15191504",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-c9c6d805c65a",
+      "reference": {
+        "image": "references/cell-c9c6d805c65a.png",
+        "screenshotHash": "83867811659cc6966b25addc0c4ee33362f8eea74b4803358a94f201f96afd53"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-508493df7fa1",
+          "image": "specimens/specimen-508493df7fa1.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-e02612b489d8",
+          "image": "specimens/specimen-e02612b489d8.png",
+          "outputHash": "a2bafa46ffef5b4f38bf8ebf568d84d56fa5c9e9683a5a27c4a2ffc191c32afb",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-ca54ba2a11ca",
+      "reference": {
+        "image": "references/cell-ca54ba2a11ca.png",
+        "screenshotHash": "e283802266112d88c48109271684eab36b696a04dcf182132182f46447e8cf9a"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-498a6e4ba1fa",
+          "image": "specimens/specimen-498a6e4ba1fa.png",
+          "outputHash": "e53a94e8dabe3b2a7800cc843a3edfa11fb31713d897af23ad2c0fb1fe4746ed",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-a84a744f42b7",
+          "image": "specimens/specimen-a84a744f42b7.png",
+          "outputHash": "597338fd591b35979f12570a41e8a9f643665cb6062f4c4006b4062b8f49059f",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-cf8d64aca9b5",
+      "reference": {
+        "image": "references/cell-cf8d64aca9b5.png",
+        "screenshotHash": "dc942e272c2aed05aafc5341716d418ab1d14ad0840141c0f65ea10f408c277b"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-b86fb07aeb58",
+          "image": "specimens/specimen-b86fb07aeb58.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-cf41c4f58516",
+          "image": "specimens/specimen-cf41c4f58516.png",
+          "outputHash": "9bd107c8c089c282336c9b378464899fa25453d34023190db1fdd02613a51b4a",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-d008a4edbc42",
+      "reference": {
+        "image": "references/cell-d008a4edbc42.png",
+        "screenshotHash": "3c4f6ffb3a6732c09f23192ac8c94072df1152880ccf11da455bec6e7be12ce7"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-2909fdb6e1cc",
+          "image": "specimens/specimen-2909fdb6e1cc.png",
+          "outputHash": "86b7d0b9f8b3b5dab737cc92e67baef03211bfac9a1f283bb049c0a2284f6c5b",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-507d732e8612",
+          "image": "specimens/specimen-507d732e8612.png",
+          "outputHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-d0fbcedba570",
+      "reference": {
+        "image": "references/cell-d0fbcedba570.png",
+        "screenshotHash": "adc3b93b1d49ca7afef27f13b58486b66a1e0290fc3d10b0ba6c8edc186b298d"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-5d961e085d7b",
+          "image": "specimens/specimen-5d961e085d7b.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-c15e3af12211",
+          "image": "specimens/specimen-c15e3af12211.png",
+          "outputHash": "35ba73ade833aa6ce7e6ed7dc7b4e8d12ac07af4d1c1c7cfe0a108fd6c426344",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-d3908f956993",
+      "reference": {
+        "image": "references/cell-d3908f956993.png",
+        "screenshotHash": "0c472eb464827adb3d8fa8be66dd2b035c84124451a4082b03beee6cdd884555"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-24aa0821021d",
+          "image": "specimens/specimen-24aa0821021d.png",
+          "outputHash": "c274365968ed9c9ad78c02a51514c083b04686f1455996da4dbe53e3d7b4d866",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-a9a7a6d34f22",
+          "image": "specimens/specimen-a9a7a6d34f22.png",
+          "outputHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-d3eca94c996e",
+      "reference": {
+        "image": "references/cell-d3eca94c996e.png",
+        "screenshotHash": "7d9153b2459d3269954c6da44351f38c53fad1ecf5bf14391cd38b1a3474da23"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-a28b487c906d",
+          "image": "specimens/specimen-a28b487c906d.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-fe4f64cd53e7",
+          "image": "specimens/specimen-fe4f64cd53e7.png",
+          "outputHash": "31b50c5f4e7539916e81c38d037c49f2dc56ebf022b430951997aff783fb66b4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-d5cece4aa770",
+      "reference": {
+        "image": "references/cell-d5cece4aa770.png",
+        "screenshotHash": "2f2490a4fc83128b0bf6fd8985188f241e07146663e31698a659806138c92a40"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-6bcab4a9eb78",
+          "image": "specimens/specimen-6bcab4a9eb78.png",
+          "outputHash": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-c92eb252ef9e",
+          "image": "specimens/specimen-c92eb252ef9e.png",
+          "outputHash": "981f1f4e173d9a785b5bd72dd35c3cdca647c36d15210e89d297799c1a1b27e1",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-d85cfca978b3",
+      "reference": {
+        "image": "references/cell-d85cfca978b3.png",
+        "screenshotHash": "81e1728c049774586f8dffddb5a66561afe74050076605096bc9167d4a7c9e02"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-06783ae34d2a",
+          "image": "specimens/specimen-06783ae34d2a.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-f047eac9b3df",
+          "image": "specimens/specimen-f047eac9b3df.png",
+          "outputHash": "22da31f6175d3ac9bd07847787497231c78d85b10ad7b2654f25621fc43787eb",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-d85f222d0e9d",
+      "reference": {
+        "image": "references/cell-d85f222d0e9d.png",
+        "screenshotHash": "adc83a441ef297d916e0fe46b387a61d6427f6d8fff68d50b50d1acd8805e769"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-8df293f96fae",
+          "image": "specimens/specimen-8df293f96fae.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-f4087b624eed",
+          "image": "specimens/specimen-f4087b624eed.png",
+          "outputHash": "8015f28df553bf451f36a9f6ec7c0aae81faffa0053d5e423f187d984f653e65",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-d91392234b41",
+      "reference": {
+        "image": "references/cell-d91392234b41.png",
+        "screenshotHash": "211a409ccf77497c768623351db20d08b76c6b21ef9c2440358ee849fb67416d"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-2e6c4b8ae279",
+          "image": "specimens/specimen-2e6c4b8ae279.png",
+          "outputHash": "b4a5875708a1d56a379cc27c0410c6aa355a69c074ec498280608b1a92942a8e",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-916e75c2a7db",
+          "image": "specimens/specimen-916e75c2a7db.png",
+          "outputHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-d994d90a8dd7",
+      "reference": {
+        "image": "references/cell-d994d90a8dd7.png",
+        "screenshotHash": "f389a97a4a80a044bb01f5f465ac282d8208dbec2d44de646f28c5fe60d49cd8"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-a65f6cb3b496",
+          "image": "specimens/specimen-a65f6cb3b496.png",
+          "outputHash": "d50dff2aed8b920b65854ca6c535c91b6a888910131cb0b2a34431580d053ffc",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-b41fdc544c11",
+          "image": "specimens/specimen-b41fdc544c11.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-da80d308bde5",
+      "reference": {
+        "image": "references/cell-da80d308bde5.png",
+        "screenshotHash": "15225364e2ccbbb6351b7d356fb8b64b47fa83848d10afc55297d8680df06941"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-48c15d45e9da",
+          "image": "specimens/specimen-48c15d45e9da.png",
+          "outputHash": "6c4f730e712a2ea9a998bcf58334f4d3d3cc3999b425dce53e55ea9b9ff66fcc",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-6ccb7cc737b1",
+          "image": "specimens/specimen-6ccb7cc737b1.png",
+          "outputHash": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-dd330665b14a",
+      "reference": {
+        "image": "references/cell-dd330665b14a.png",
+        "screenshotHash": "fc5e1f10dbee10831bc00fde4c4d9b0a29086fc6ef54ad3a1690baed64874cba"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-2df9ee814cc5",
+          "image": "specimens/specimen-2df9ee814cc5.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-3f4b796d4f1e",
+          "image": "specimens/specimen-3f4b796d4f1e.png",
+          "outputHash": "06d3a6b3baf94c6fb9e6372cde82e1b17c4b4482ec936810d16d64fd49c2768c",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-dd7664a4ac63",
+      "reference": {
+        "image": "references/cell-dd7664a4ac63.png",
+        "screenshotHash": "2a15d1285d7002c6fdfeca24a93c8b0cbb89ee8de2aa29214bec939c69110b0c"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-2fc2d8b5d0a0",
+          "image": "specimens/specimen-2fc2d8b5d0a0.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-57fdb0d8a6a3",
+          "image": "specimens/specimen-57fdb0d8a6a3.png",
+          "outputHash": "ac47dcb94f8ab70f4a6529847b6bcebd12e9a69f5e5a3dd7fb0ca185b177296f",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-ddbd1b3ce9c8",
+      "reference": {
+        "image": "references/cell-ddbd1b3ce9c8.png",
+        "screenshotHash": "41ddacd3fc0af2b86313d9045ce5c3b8d774804ed20f7f98cd3efc850f37c96f"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-324e8eeefca2",
+          "image": "specimens/specimen-324e8eeefca2.png",
+          "outputHash": "97e282915c062b96f9718159c01dfe04cdb7fb23b515eec741b7f3050f153fa2",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-4265838fa7b2",
+          "image": "specimens/specimen-4265838fa7b2.png",
+          "outputHash": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-de612780076e",
+      "reference": {
+        "image": "references/cell-de612780076e.png",
+        "screenshotHash": "54913f6424d935e6b283800350dc7295e3229e6261395575893fc7686d41532b"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-5a91187e0bcd",
+          "image": "specimens/specimen-5a91187e0bcd.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-a57de4a9b2f8",
+          "image": "specimens/specimen-a57de4a9b2f8.png",
+          "outputHash": "e94f5909048b34e44ec2b1601a8d9de383d0a6359db3848e3be689fb1287a6b6",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-deda467c64cb",
+      "reference": {
+        "image": "references/cell-deda467c64cb.png",
+        "screenshotHash": "bf3c84500f2a380d3c9e7be2487cc2574c88e2a0a9f7bbb3c21d84317e07fc5f"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-5c5e5937c0cd",
+          "image": "specimens/specimen-5c5e5937c0cd.png",
+          "outputHash": "719c1a82a2b2376b02bf061836b93e205de2cb2738f0cf4a5cb030dfef18f9a8",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-bf96487c0cf5",
+          "image": "specimens/specimen-bf96487c0cf5.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-def2cf7f4bc2",
+      "reference": {
+        "image": "references/cell-def2cf7f4bc2.png",
+        "screenshotHash": "1e944bc0f9a9e4217fe45c1f1f2fa093a9ded460c99d69ee565eec425e3a5333"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-5184073a929f",
+          "image": "specimens/specimen-5184073a929f.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-6167c399a88e",
+          "image": "specimens/specimen-6167c399a88e.png",
+          "outputHash": "3888863ac87d8067309d61a64bf7bcf3d00a6ac2cf5b61852e87937a76b09099",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-e3ab239bddbb",
+      "reference": {
+        "image": "references/cell-e3ab239bddbb.png",
+        "screenshotHash": "b3bb74ae1db307be4695a86c21ea1580c83e22d06a2e48dba2eb8cf755a4bc13"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-8cc9cc2af64c",
+          "image": "specimens/specimen-8cc9cc2af64c.png",
+          "outputHash": "ecf1806314d81ac310864b9dd26a2e8b71dc9178bdf36cbbc74091bd6d7e4afa",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-e0ce877f6c4d",
+          "image": "specimens/specimen-e0ce877f6c4d.png",
+          "outputHash": "9b8891d7ac1d444dcd212ef76cab77d76250be7e3cc7e829beb50fb4b3efb6c1",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-e4bcac313392",
+      "reference": {
+        "image": "references/cell-e4bcac313392.png",
+        "screenshotHash": "caebb71ef67dd8cb9247d6f88b1c966adceb76aa7b5ec1e94a906704500bd0a2"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-611c24647659",
+          "image": "specimens/specimen-611c24647659.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-aca4d398782b",
+          "image": "specimens/specimen-aca4d398782b.png",
+          "outputHash": "d31fbc4bf98ccf6e52395859e623caf3a2653b4874ffb7cb9c98e8e2f0821368",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-e72279ac4d6a",
+      "reference": {
+        "image": "references/cell-e72279ac4d6a.png",
+        "screenshotHash": "7a0d24bd12ba82a36ad4a8b7571d69df30017f9a2e0f21e4186c86e485f84c6c"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-4eeeb0f63542",
+          "image": "specimens/specimen-4eeeb0f63542.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-f7893b6adda5",
+          "image": "specimens/specimen-f7893b6adda5.png",
+          "outputHash": "d8907ce8e0e3a6b60b771df07781ef1960eeba8144d7a45649ef23af0845e02e",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-ea6cdbfd40a4",
+      "reference": {
+        "image": "references/cell-ea6cdbfd40a4.png",
+        "screenshotHash": "ee8988ac2d45fba32468b1d2105a69e85ed2b77521d4f573dbc2b2a9fa834294"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-79eda02adb12",
+          "image": "specimens/specimen-79eda02adb12.png",
+          "outputHash": "c4379d3ded715a05618c356ef43cd2c2665c3ae894adecf81651bbb1deb4c884",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-b1bb38a878b1",
+          "image": "specimens/specimen-b1bb38a878b1.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-ec8fd92f87da",
+      "reference": {
+        "image": "references/cell-ec8fd92f87da.png",
+        "screenshotHash": "7d7691f8de414a777c26bf47a427e9c4ebf64fc9642606766442e4ca65e29398"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-0345ab961cbf",
+          "image": "specimens/specimen-0345ab961cbf.png",
+          "outputHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-b214e7901a20",
+          "image": "specimens/specimen-b214e7901a20.png",
+          "outputHash": "ae4e155c0d80e8267567d8b14671880ae4b2dc8883a05ff47c219b7fc25e697d",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-ed38a35a5c7a",
+      "reference": {
+        "image": "references/cell-ed38a35a5c7a.png",
+        "screenshotHash": "b920db6c6c6ca25a469fdcb0fc5c606c1bbfeac4313e1152a720ff24cb6f95e3"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-8a351c04ee16",
+          "image": "specimens/specimen-8a351c04ee16.png",
+          "outputHash": "02c3d77764ec0dac74cd80916f6084cd91f043f664a98c3a2f6e72cb6fad474f",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-eb52694adcf2",
+          "image": "specimens/specimen-eb52694adcf2.png",
+          "outputHash": "4c6452dbc776a20cd2eabeb83c47459aaa581b8ed6fbc03b58de24d769a11d40",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-ef52e1caf29f",
+      "reference": {
+        "image": "references/cell-ef52e1caf29f.png",
+        "screenshotHash": "eaf25d27607ff56667c6771564b6d4d3384b8acc2292a2543888a95c2fff612a"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-a751e235fd6b",
+          "image": "specimens/specimen-a751e235fd6b.png",
+          "outputHash": "cf3211781d5fba4fff7ea5b35096712c098ff5234f6c70c63d0d4c0d5b6bf1cc",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-eaae860848d4",
+          "image": "specimens/specimen-eaae860848d4.png",
+          "outputHash": "751acc011fa6506d997202ae56446ec54b71b44b07c0adb922cf61d3b497d050",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-f6d6d10f6676",
+      "reference": {
+        "image": "references/cell-f6d6d10f6676.png",
+        "screenshotHash": "2e86426f069965960287834b1826cbb9469a1c9352ce6d0b6f9a1d5ba6384928"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-30ad33f74c78",
+          "image": "specimens/specimen-30ad33f74c78.png",
+          "outputHash": "78c7f2ea59c23acaf8d53b062cae186d6c881f82fdbfe0760d5c5196ebb46ee8",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-4109495d13de",
+          "image": "specimens/specimen-4109495d13de.png",
+          "outputHash": "a5ce685f42720edb9632893c37f8500454f45dbfe1dffce256de3846fb24a7f1",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-f8820d4466dd",
+      "reference": {
+        "image": "references/cell-f8820d4466dd.png",
+        "screenshotHash": "471a270a12f753af04094b2f0e6e8c28e99d3c52d625ab5e7475c0d543d37baa"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-341a94ef80ea",
+          "image": "specimens/specimen-341a94ef80ea.png",
+          "outputHash": "4d98b1d36cd699362937e0578ee96e77e098ee8ccc28e546d22a579f3217ad1e",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-6b4b9524bba0",
+          "image": "specimens/specimen-6b4b9524bba0.png",
+          "outputHash": "78c7f2ea59c23acaf8d53b062cae186d6c881f82fdbfe0760d5c5196ebb46ee8",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    },
+    {
+      "anonymousCell": "cell-f9982e78fbc9",
+      "reference": {
+        "image": "references/cell-f9982e78fbc9.png",
+        "screenshotHash": "9769bf3f90f1ac2055ec97d06d96dcfeba1c117505e1e07403bdac88615c52a9"
+      },
+      "specimens": [
+        {
+          "anonymousLabel": "specimen-3e7aa5e551ea",
+          "image": "specimens/specimen-3e7aa5e551ea.png",
+          "outputHash": "7e714f8f7d048830a19ba5c159160ec634e2dffb31170795ddf3db7870bab68e",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        },
+        {
+          "anonymousLabel": "specimen-a7d58246f118",
+          "image": "specimens/specimen-a7d58246f118.png",
+          "outputHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+          "grade": {
+            "recognisable": null,
+            "defects": [],
+            "confidence": null
+          }
+        }
+      ]
+    }
+  ]
+}

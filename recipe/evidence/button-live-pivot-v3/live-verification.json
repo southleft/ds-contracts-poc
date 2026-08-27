@@ -1,0 +1,181 @@
+{
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "fileName": "Scratch Project",
+  "pageId": "85:4813",
+  "pageName": "Recipe Pivot / Button / ae57b16a-5c52de74-v2",
+  "createdNodeIds": [
+    "85:6129",
+    "85:6130",
+    "85:6134"
+  ],
+  "mutatedNodeIds": [],
+  "proofSectionId": "85:6129",
+  "sets": [
+    {
+      "id": "85:5438",
+      "name": "Button / button@1 proof",
+      "variants": 144
+    },
+    {
+      "id": "85:6086",
+      "name": "Button / button@1 proof",
+      "variants": 144
+    }
+  ],
+  "instances": [
+    {
+      "id": "85:6130",
+      "setId": "85:5438",
+      "adapterIdentity": "altitude-button-reviewed-v2"
+    },
+    {
+      "id": "85:6134",
+      "setId": "85:6086",
+      "adapterIdentity": "fluent-button-reviewed-v2"
+    }
+  ],
+  "screenshots": [
+    {
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "nodeId": "85:6130",
+      "path": "recipe/evidence/button-live-pivot-v3/screenshots/altitude-button-reviewed-v2.png",
+      "bytes": 1926,
+      "sha256": "52658cb274a817479cc9eb3937206af92a4dbcbaa6a253e7189a7b3c381448c9"
+    },
+    {
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "nodeId": "85:6134",
+      "path": "recipe/evidence/button-live-pivot-v3/screenshots/fluent-button-reviewed-v2.png",
+      "bytes": 682,
+      "sha256": "225d536025d8e182a893bf65219d4d38986fd6dcfe227cbc44327707a5f02413"
+    }
+  ],
+  "probes": [
+    {
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "reflow": {
+        "passed": true,
+        "beforeWidth": 83,
+        "afterWidth": 314
+      },
+      "variantSwitching": {
+        "passed": true,
+        "beforeMain": "85:4821",
+        "afterMain": "85:5132"
+      },
+      "tokenBinding": {
+        "passed": true,
+        "bindingFacts": 2592
+      },
+      "noFakeLayout": {
+        "passed": true,
+        "components": 144,
+        "layoutChildren": 300,
+        "nonAbsoluteChildren": 300
+      },
+      "before": {
+        "mainComponentId": "85:4821",
+        "mainComponentName": "Variant=secondary, Size=medium, State=default, Icons=none",
+        "width": 83,
+        "height": 40,
+        "properties": {
+          "Icons": "none",
+          "Label#85:5": "Button",
+          "Leading icon#85:150": "85:4817",
+          "Size": "medium",
+          "State": "default",
+          "Trailing icon#85:295": "85:4817",
+          "Variant": "secondary"
+        }
+      },
+      "after": {
+        "mainComponentId": "85:4821",
+        "mainComponentName": "Variant=secondary, Size=medium, State=default, Icons=none",
+        "width": 83,
+        "height": 40,
+        "properties": {
+          "Icons": "none",
+          "Label#85:5": "Button",
+          "Leading icon#85:150": "85:4817",
+          "Size": "medium",
+          "State": "default",
+          "Trailing icon#85:295": "85:4817",
+          "Variant": "secondary"
+        }
+      },
+      "restored": true,
+      "restorationBeforeSha256": "4c2476e138603b6ee9d581aeffdae79a592160f8d51b7a6f61da8d767c255600",
+      "restorationAfterSha256": "4c2476e138603b6ee9d581aeffdae79a592160f8d51b7a6f61da8d767c255600"
+    },
+    {
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "reflow": {
+        "passed": false,
+        "beforeWidth": 96,
+        "afterWidth": 96
+      },
+      "variantSwitching": {
+        "passed": true,
+        "beforeMain": "85:5446",
+        "afterMain": "85:5775"
+      },
+      "tokenBinding": {
+        "passed": true,
+        "bindingFacts": 2568
+      },
+      "noFakeLayout": {
+        "passed": true,
+        "components": 144,
+        "layoutChildren": 300,
+        "nonAbsoluteChildren": 300
+      },
+      "before": {
+        "mainComponentId": "85:5446",
+        "mainComponentName": "Variant=secondary, Size=medium, State=default, Icons=none",
+        "width": 96,
+        "height": 27,
+        "properties": {
+          "Icons": "none",
+          "Label#85:440": "Button",
+          "Leading icon#85:585": "85:5442",
+          "Size": "medium",
+          "State": "default",
+          "Trailing icon#85:730": "85:5442",
+          "Variant": "secondary"
+        }
+      },
+      "after": {
+        "mainComponentId": "85:5446",
+        "mainComponentName": "Variant=secondary, Size=medium, State=default, Icons=none",
+        "width": 96,
+        "height": 27,
+        "properties": {
+          "Icons": "none",
+          "Label#85:440": "Button",
+          "Leading icon#85:585": "85:5442",
+          "Size": "medium",
+          "State": "default",
+          "Trailing icon#85:730": "85:5442",
+          "Variant": "secondary"
+        }
+      },
+      "restored": true,
+      "restorationBeforeSha256": "686abc721b266b4f00481c7205738ced3c75de8be6f50557b047f0c4f18e1664",
+      "restorationAfterSha256": "686abc721b266b4f00481c7205738ced3c75de8be6f50557b047f0c4f18e1664"
+    }
+  ],
+  "readback": {
+    "comparedFacts": 7956,
+    "observedFacts": 10368,
+    "canonicalCycle1Sha256": "ceddaec224130655fda8066653f4c1ae0766fb13b7dc267d3888d047cfad689e",
+    "canonicalCycle2Sha256": "ceddaec224130655fda8066653f4c1ae0766fb13b7dc267d3888d047cfad689e",
+    "twoCompleteCyclesStable": true
+  },
+  "zeroSilentAccounting": {
+    "denominator": 10368,
+    "carried": 10368,
+    "codeOnly": 0,
+    "namedRefused": 0,
+    "silent": 0
+  }
+}

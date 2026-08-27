@@ -223,6 +223,129 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run test:playground
 
+      # The recipe/IR pivot's Phase 0 surface (docs/32-recipe-ir-pivot.md): the
+      # primitive Figma IR, canonical envelope, normalization, and hashing.
+      # Named here on the day it is added rather than later — an experimental
+      # path is still a surface, and this repo's recurring lesson is that
+      # UNGATED SURFACES ROT. The two properties under test are the ones the
+      # pivot dies without: the IR vocabulary is CLOSED (no CSS passthrough
+      # survives a node schema) and the envelope's account of every input fact
+      # is TOTAL in both directions (no silent loss, no fabricated disclosure).
+      - name: test experimental recipe path (docs/32)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run test:recipe
+      - name: recipe:normalize:check (canonical JSON is idempotent and key-order-insensitive)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:normalize:check
+      - name: recipe:hash:check (domain-separated SHA-256 is stable and mutation-sensitive)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:hash:check
+      - name: recipe:button:check (button@1 compiles and collapses as a two-cycle fixed point)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:button:check
+      - name: recipe:input-field:check (input-field@1 is offline-only, total, semantic, and adversarially falsified)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:check
+      - name: recipe:input-field:browser:check (controlled/uncontrolled and stable-shadow lifecycle plus visual regions)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:browser:check
+      - name: recipe:scene-readback:check (planned facts are compared only with actual scene properties)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:scene-readback:check
+      - name: recipe:pivot-status:check (Button false, Input blocked, v3 draft uncommitted and capture forbidden)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:pivot-status:check
+      - name: recipe:input-field:comparison:check (128 matched source cells, independent references, 256 opaque specimens, false and ungraded)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:comparison:check
+      - name: recipe:input-field:comparison:v2:check (v1 bytes preserved, corrected packet sealed and ungraded)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:comparison:v2:check
+      - name: recipe:input-field:comparison:v2:multi-rater:check (reliability, consensus, and unchanged-control instability)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:comparison:v2:multi-rater:check
+      - name: recipe:input-field:comparison:calibrated:check (hidden duplicate packet, locked thresholds, and no double weighting)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:comparison:calibrated:check
+      - name: recipe:input-field:comparison:calibration:v2:check (objective gold qualification, strict envelopes, and fresh sealed performance packet)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:comparison:calibration:v2:check
+      - name: recipe:input-field:comparison:calibration:v3:check (imports exact B/C qualifications, excludes failed A, and blocks performance pending fresh D)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:comparison:calibration:v3:check
+      - name: recipe:input-field:comparison:calibration:v3:adjudicate:check (opaque reliability fails closed before identity)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:comparison:calibration:v3:adjudicate:check
+      - name: recipe:input-field:paired:check (objective GOLD, side-swapped pairs, sealed key, and no double weighting)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:paired:check
+      - name: recipe:input-field:paired:qualification:verify (deterministic scores, replacement gate, performance still sealed)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:paired:qualification:verify
+      - name: recipe:input-field:objective:check (locked source-relative metrics, structural gates, failed-round preservation, and fail-closed progress)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:objective:check
+      - name: recipe:input-field:objective:v2:check (same locked comparator, corrected v3 bytes, all progression criteria)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:objective:v2:check
+      - name: recipe:input-field:live:v1:check (failed Scratch proof is cleaned, complete, false, and tamper-evident)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:live:v1:check
+      - name: recipe:input-field:live:v1:self-test (writer structure, API, target, count, cleanup, and success lies go red)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:live:v1:self-test
+      - name: recipe:input-field:live:v2:check (reflow and bounds pass; failed raster proof is cleaned and false)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:live:v2:check
+      - name: recipe:input-field:live:v2:self-test (overlay, reflow, font, restore, target, and cleanup plants go red)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:live:v2:self-test
+      - name: recipe:raster-calibration:check (independent held-out browser-Figma calibration evidence remains exact)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:raster-calibration:check
+      - name: recipe:raster-calibration:self-test (overfit, identity, coefficient, font, leakage, count, and weight plants go red)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:raster-calibration:self-test
+      - name: recipe:acquisition:check (every selected Button source fact lands by field)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:acquisition:check
+      - name: recipe:figma-writer:check (closed primitive IR lowers to a page-scoped full Button plan)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:figma-writer:check
+      - name: recipe:live-receipt:check (capped live failure is cleaned and cannot claim Button success)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:live-receipt:check
+      - name: recipe:live-receipt:self-test (wrong file, forged success, omission, mislabel, and fake live facts go red)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:live-receipt:self-test
+      - name: recipe:live-receipt-v2:check (versioned repair preserves v1 and fails closed before execution)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:live-receipt-v2:check
+      - name: recipe:live-receipt-v2:self-test (wrong file, forged execution, artifacts, after-state, and success go red)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:live-receipt-v2:self-test
+      - name: recipe:live-receipt-v3:check (exact-byte execution, live evidence, and cleanup remain tamper-evident)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:live-receipt-v3:check
+      - name: recipe:live-receipt-v3:self-test (transport, probe, accounting, cleanup, and success forgeries go red)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:live-receipt-v3:self-test
+      - name: recipe:live-receipt-v4:check (responsive live proof and sealed packet remain tamper-evident)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:live-receipt-v4:check
+      - name: recipe:live-receipt-v4:self-test (history, geometry, packet, grade, and success forgeries go red)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:live-receipt-v4:self-test
+      - name: recipe:button-live-v4:check (historical bytes retained; current Button overall status is false/pending)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:button-live-v4:check
+      - name: recipe:button-live-v4:self-test (stale bytes, mapping, arithmetic, provenance, and missing columns go red)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:button-live-v4:self-test
+      - name: recipe:comparison:check (matched denominators, blind adjudication, and tamper refusal)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:comparison:check
+
       # Sits immediately before docs:check because docs:check GATES every "N/N
       # pass" claim in the documentation against evals/results.json — so if that
       # record is stale relative to the registry, docs:check is validating a

@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "kind": "button-recipe-live-writer-plan",
+  "file": {
+    "key": "byMp6lt0Ij9b2QbkDGFwBh",
+    "name": "Scratch Project"
+  },
+  "pageName": "Recipe Pivot / Button / ae57b16a-5c52de74",
+  "runIdentity": "ae57b16a-5c52de74",
+  "writer": {
+    "path": "recipe/evidence/button-live-pivot/writer.js",
+    "bytes": 29481,
+    "sha256": "45fda4b78fb5f77f6554eac02cbf54213e206d8b817610e8edcd7ca7065b33f8"
+  },
+  "provenance": {
+    "commit": "047f66b8e134a6bc173e9336621fc1baf0e37230",
+    "branch": "pivot/recipe-ir-v1",
+    "dirty": true,
+    "dirtyStatusSha256": "5d1c5691c4eb8a54dca14f8c5a0eea3f62171232fb40dcc0ea72508d3c42d2a3"
+  },
+  "sources": [
+    {
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "displayName": "Altitude",
+      "contractPath": "examples/altitude/contracts/button.contract.json",
+      "contractHash": "43c7d78292e1f9b33585b4294f164547a54e750cc921a7d1891b039b7a345aea",
+      "recipeHash": "ae57b16ab50438ea3f00b0690933e0b7850742225afad3df275465fb7fc2b923",
+      "envelopeHash": "73b9c0ccc268545d711e55fd4ae3e8081e1708d6a27059e6779e42b3e81735bb",
+      "declaredVariantCount": 144,
+      "plannedVariantCount": 144,
+      "comparedIrFacts": 3978
+    },
+    {
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "displayName": "Fluent",
+      "contractPath": "examples/fluent/contracts/button.contract.json",
+      "contractHash": "a67391060b4babe0d28684890b30d55e5d08f37f1ffc8d3edc28c8da3c280e34",
+      "recipeHash": "5c52de7484830d735f375d52ee26d86ed6d5c24f528ff5815d41ea17fa622cc7",
+      "envelopeHash": "9b5626840521a733ea2ef28b7cdc5f5d5b3b673229336ab58f11e82a0a120afd",
+      "declaredVariantCount": 144,
+      "plannedVariantCount": 144,
+      "comparedIrFacts": 3978
+    }
+  ],
+  "grading": {
+    "status": "ungraded",
+    "buttonSuccess": false,
+    "recognisabilityVerdictsAuthoredByBuilder": false
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "artifactVersion": "recipe-pivot-current-status-v1",
+  "status": "draft-uncommitted; chronology unproven; capture forbidden",
+  "supersedesStatusClaimsOnly": true,
+  "historicalEvidenceRewritten": false,
+  "chronology": {
+    "externallyVerifiable": false,
+    "hashMeaning": "Hashes prove current internal byte consistency only. They do not prove chronology, immutability, or predeclaration while the pivot is uncommitted."
+  },
+  "button": {
+    "overallSuccess": false,
+    "status": "pending",
+    "technicalMintAndUsabilityMetricsPreserved": true,
+    "blockers": [
+      "no attributable human signoff",
+      "historical v4 inversion read stamped/self-selected data rather than a complete scene-derived IR",
+      "historical v4 accounting assigned silent=0 instead of deriving it from a prospective multiset denominator"
+    ],
+    "supersededHistoricalArtifacts": [
+      {
+        "path": "recipe/evidence/button-live-pivot-v4/final-adjudication.json",
+        "sha256": "056266543d770f16feecf0eea3681a989e24cb5369e93cac278d58556d988471",
+        "historicalClaim": "buttonSuccess=true",
+        "currentInterpretation": "historical adjudication bytes retained; overall PASS revoked"
+      },
+      {
+        "path": "recipe/evidence/button-live-pivot-v4/receipt.json",
+        "sha256": "7832103cf07d369d151c2d701c543a15a4120c236e31fe3feb999e0731d5186a",
+        "historicalClaim": "technical mint complete, pre-grade buttonSuccess=false",
+        "currentInterpretation": "technical measurements retained; inversion/accounting are not re-certified"
+      }
+    ]
+  },
+  "input": {
+    "overallSuccess": false,
+    "status": "blocked",
+    "liveV2": {
+      "result": "failed",
+      "aggregateImprovementPreserved": true,
+      "blockingDefects": [
+        "adornment content mismatch",
+        "MUI visual stratum regression",
+        "self-referential inversion/accounting",
+        "no human signoff"
+      ],
+      "historicalArtifacts": [
+        {
+          "path": "recipe/evidence/input-field-live-pivot-v2/receipt.json",
+          "sha256": "f636f127ac328ea2180e9ba2c04229f31bd41f85ba871c5c67ef6e18ec7e7d58"
+        },
+        {
+          "path": "recipe/evidence/input-field-live-pivot-v2/index.json",
+          "sha256": "b5571605d2e4ef400806c92e2b55bdc86e9c63ec027906488783356535deb268"
+        }
+      ]
+    },
+    "liveV3": {
+      "status": "draft-uncommitted; chronology unproven; capture forbidden",
+      "protocolPath": "recipe/evidence/input-field-live-pivot-v3/protocol.json",
+      "protocolSha256": "f4decf46da7cd3870e247d5304d632028356580e58ce68bedcb7acb7c0e31a23",
+      "captureAuthorized": false,
+      "offlineCorrectionTask2Implemented": true,
+      "sceneDerivedLiveVerificationRun": false
+    }
+  }
+}

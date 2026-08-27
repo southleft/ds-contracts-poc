@@ -1,0 +1,187 @@
+{
+  "version": 4,
+  "kind": "button-recipe-live-figma-proof",
+  "status": {
+    "bridgeReadOnly": "pass-exact-scratch",
+    "offlineConformance": "pass",
+    "exactByteTransport": "pass",
+    "liveWrite": "pass-artifacts-kept",
+    "writerAttemptsExecuted": 2,
+    "usability": "pass-both-sources-all-four-assertions",
+    "labelValidation": "pass-288-of-288",
+    "liveReadback": "pass",
+    "fixedPoint": "pass-two-cycles",
+    "liveAccounting": "pass-nonzero-denominator",
+    "pairedScreenshots": "pass-12-live-plus-12-source-references",
+    "independentCanvasGrade": "pending-ungraded-sealed-packet",
+    "buttonSuccess": false
+  },
+  "immutableHistory": {
+    "v1Receipt": {
+      "path": "recipe/evidence/button-live-pivot/receipt.json",
+      "sha256": "863fe1af6b38fc12237b47e4deb0e5db1c298d462666e4921bd28d8bf964b652"
+    },
+    "v2Receipt": {
+      "path": "recipe/evidence/button-live-pivot-v2/receipt.json",
+      "sha256": "7668e12fd95b017ad7093a279dcae2817a518c6e1a324ef800f906b9e8fc8a81"
+    },
+    "v3Receipt": {
+      "path": "recipe/evidence/button-live-pivot-v3/receipt.json",
+      "sha256": "dc4c1fbd3d8de6374f2b5f4703dfe02d0d3291f6fc56544cec33f451d8a48d3c"
+    },
+    "v3Verification": {
+      "path": "recipe/evidence/button-live-pivot-v3/live-verification.json",
+      "sha256": "77107891d528a4c79ff73ecfa6e1226f6a482145a4db3f14c9c8fe7b062f0544"
+    }
+  },
+  "diagnosis": {
+    "v3FluentSymptom": "The Fluent instance stayed at its 96px source min-width during a long-label override and its representative export had no visible label.",
+    "rootCause": "The selected SF Pro Semibold fallback accepted loadFontAsync but produced a live TextNode with characters='Button', height=15, and width=0. The clipped HUG component therefore had no horizontal label geometry to reflow. The source min-width token was not a fixed-width intent: Fluent remained HUG with a 96px minimum.",
+    "genericRepair": "The shared writer now evaluates the ordered source font stack by rendered positive label geometry, rejects all zero-width candidates, and records the resolved font. Fluent deterministically advanced to Roboto SemiBold. Every component and label explicitly restores HUG sizing and centered alignment after variant combination.",
+    "designerResizeSemantics": "Source HUG describes the default intrinsic size. A designer width drag changes the instance primary axis to FIXED; the proof grows the root under that mode, requires the declared label center to move by half the width delta, then restores AUTO/HUG and the exact before hash."
+  },
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma",
+    "pageId": "85:6781",
+    "pageName": "Recipe Pivot / Button / e6a61d04-b04f4059-v4",
+    "proofSectionId": "85:8089",
+    "pairedSectionId": "85:8090"
+  },
+  "census": {
+    "before": {
+      "pageCount": 12,
+      "totalTopLevelNodes": 170,
+      "collectionCount": 12,
+      "totalLocalVariables": 11106,
+      "proofPageMatches": 0,
+      "matchingCollections": 0
+    },
+    "after": {
+      "pageCount": 13,
+      "totalTopLevelNodes": 174,
+      "collectionCount": 14,
+      "totalLocalVariables": 11163,
+      "proofPageMatches": 1,
+      "matchingCollections": 2
+    },
+    "preExistingNodeIdsMutated": [],
+    "preExistingPagesOrNodesRemoved": 0,
+    "v4ArtifactsKeptForIndependentGrading": true
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "result": "failed-source-fixed-then-cleaned",
+      "evalBegan": true,
+      "evalCompleted": false,
+      "writerPath": "recipe/evidence/button-live-pivot-v4/writer-attempt-1.js",
+      "writerBytes": 33142,
+      "writerSha256": "5bd3a3029cda6b68b80ea05e978be28bc2974e5f5ef881ee50be2348fec26c22",
+      "wrapperPath": "recipe/evidence/button-live-pivot-v4/writer-wrapper-attempt-1.txt",
+      "wrapperSha256": "c6f135f8f427a51249d2363cdd668d26739cd7610a5eb714894a83e2658fec21",
+      "resultPath": "recipe/evidence/button-live-pivot-v4/live-attempt-1.json",
+      "resultSha256": "7a5e8694f1c0a3ad8d5d712be00cee2891f72ece33b0090f47a16da91dcf128f",
+      "diagnosticPath": "recipe/evidence/button-live-pivot-v4/live-attempt-1-diagnostic.json",
+      "diagnosticSha256": "9e3a8dfbb79261ba8934a1261b688fa1a788f71da3c08a342b22850461af83d8",
+      "cleanupPath": "recipe/evidence/button-live-pivot-v4/cleanup-attempt-1.json",
+      "cleanupSha256": "ea326d70340286691464517a05a298902a92db70b55ef2a8bf346cf2600c1281"
+    },
+    {
+      "attempt": 2,
+      "result": "writer-executed",
+      "evalBegan": true,
+      "evalCompleted": true,
+      "writerPath": "recipe/evidence/button-live-pivot-v4/writer.js",
+      "writerBytes": 33977,
+      "writerSha256": "2cab582e5b9a7329ec6e316d9981dc13e74532ed9b4b6bd64afff56408547cd8",
+      "wrapperPath": "recipe/evidence/button-live-pivot-v4/writer-wrapper-attempt-2.txt",
+      "wrapperBytes": 50846,
+      "wrapperSha256": "11abf92e7049b42ba6023efa5e5c2e2ede489f108b8e10aed0aa1da3d736909a",
+      "decodedBytes": 33977,
+      "decodedSha256": "2cab582e5b9a7329ec6e316d9981dc13e74532ed9b4b6bd64afff56408547cd8",
+      "resultPath": "recipe/evidence/button-live-pivot-v4/live-attempt-2.json",
+      "resultSha256": "ccab60879f492e199ba67ad8dd4803790d486624da5b5a86d560b2874e079abc"
+    }
+  ],
+  "writer": {
+    "planPath": "recipe/evidence/button-live-pivot-v4/writer-plan.json",
+    "planSha256": "16097cc350a12d8a6f7d38648eff6a674d3b3b5fcaf823ac4dc9a8774c159ec8",
+    "transportEnvelopePath": "recipe/evidence/button-live-pivot-v4/transport-envelope.json",
+    "transportEnvelopeSha256": "a18de003510c2ce4e99428bd89ed78402ce226c2fc4811c752ff9e20d5d5debe",
+    "conformancePath": "recipe/evidence/button-live-pivot-v4/conformance-report.json",
+    "conformanceSha256": "f9c9cc8479c0e0e2781a55680f465b5df890d70c3f2b54976935a0bac88f9cef",
+    "counts": {
+      "apiCalls": 17,
+      "propertyNames": 83,
+      "variants": 288,
+      "variables": 57,
+      "pluginDataWrites": 7003,
+      "propertyWrites": 15695,
+      "bindings": 4296
+    }
+  },
+  "live": {
+    "componentSets": [
+      {
+        "id": "85:7406",
+        "adapterIdentity": "altitude-button-reviewed-v2",
+        "variants": 144,
+        "variables": 17,
+        "resolvedDefaultFont": "IBM Plex Sans SemiBold"
+      },
+      {
+        "id": "85:8054",
+        "adapterIdentity": "fluent-button-reviewed-v2",
+        "variants": 144,
+        "variables": 40,
+        "resolvedDefaultFont": "Roboto SemiBold"
+      }
+    ],
+    "usability": {
+      "denominatorSets": 2,
+      "resizePassed": 2,
+      "variantSwitchingPassed": 2,
+      "tokenBindingPassed": 2,
+      "noFakeLayoutPassed": 2,
+      "restorationPassed": 2,
+      "labelsValidated": 288,
+      "labelDenominator": 288,
+      "layoutChildren": 600,
+      "nonAbsoluteChildren": 600,
+      "bindingFacts": 5160
+    },
+    "readback": {
+      "comparedFacts": 7956,
+      "observedFacts": 13248,
+      "canonicalCycles": 2,
+      "canonicalCycle1Sha256": "e450fb2bfd2380abb1376c9cc5bd9c6d0860fd11afb7e66803d14bf7c5aa81bd",
+      "canonicalCycle2Sha256": "e450fb2bfd2380abb1376c9cc5bd9c6d0860fd11afb7e66803d14bf7c5aa81bd",
+      "twoCycleStable": true
+    },
+    "zeroSilentAccounting": {
+      "denominator": 13248,
+      "carried": 13248,
+      "codeOnly": 0,
+      "namedRefused": 0,
+      "silent": 0
+    },
+    "verificationPath": "recipe/evidence/button-live-pivot-v4/live-verification.json",
+    "verificationSha256": "17a2d9327cd9c75171e4fca8f5c68bfe41f3010bb2ca818c6c195fbed4475aca",
+    "normalizedReadbackPath": "recipe/evidence/button-live-pivot-v4/normalized-live-readback.json",
+    "normalizedReadbackSha256": "d077fcc8fb1c8933da5ecd2ac2ea33a4a2c33fb75c7afe12d376fdfbb494904a"
+  },
+  "grading": {
+    "status": "awaiting-independent-blind-grade",
+    "pairedLiveCells": 12,
+    "wholeSetScreenshots": 2,
+    "packetPath": "recipe/evidence/button-live-pivot-v4/blind-packet/packet.json",
+    "packetSha256": "054763d1602ba476414fd072701410200c0c3006d37d77ea5a7831abfba58e46",
+    "sealedAnswerKeyPath": "recipe/evidence/button-live-pivot-v4/sealed-answer-key.json",
+    "sealedAnswerKeySha256": "666fd30a9bd134a6ab7dd049e8f2ce24e7552e50c7669a1b6af8d56662edf153",
+    "gradedByBuilder": false,
+    "buttonSuccess": false
+  },
+  "nextTask": "Run an independent blind recognisability grade using only the v4 blind-packet directory. Button remains false until all 12 live specimens pass."
+}

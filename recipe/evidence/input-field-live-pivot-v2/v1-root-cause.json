@@ -1,0 +1,4637 @@
+{
+  "version": 2,
+  "kind": "input-field-live-v1-root-cause",
+  "immutableInputs": [
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v1/receipt.json",
+      "bytes": 13665,
+      "sha256": "775e1893b5479136de958e6c215852bd9b21ab4a71303b4da49534b1b0f55204"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v1/live-verification.json",
+      "bytes": 43421,
+      "sha256": "ab92064550708004a593331b886146a29b6d8a6d58d1700789c7739d8a77abab"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v1/normalized-live-readback.json",
+      "bytes": 4074086,
+      "sha256": "8dd4aa83e2412c4ef7403f01d69962380bc7ec9ab6260bd59545e2055744ad36"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v1/objective-canvas-result.json",
+      "bytes": 313311,
+      "sha256": "ef71cbcba2ac4bddd1bde6290b5445817998e55a1bd6ca22413aba44d5459ec6"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v1/human-review-packet.json",
+      "bytes": 91785,
+      "sha256": "a74b23719a3bd3934b580658af648303fac1b386547c1d54bfca2a4ecda5ba28"
+    }
+  ],
+  "denominators": {
+    "pairedCells": 128,
+    "liveVariants": 256,
+    "materialBounds": 128,
+    "materialSceneFacts": 128
+  },
+  "reflow": [
+    {
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "beforeWidth": 195,
+      "grownWidth": 259,
+      "beforeSurfaceWidth": 195,
+      "grownSurfaceWidth": 259,
+      "beforeContentWidth": 118,
+      "grownContentWidth": 118,
+      "passed": false,
+      "rootCause": "floating content text was converted to intrinsic width after the component text property reference; its content row filled, but the role leaf did not retain FILL"
+    },
+    {
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "beforeWidth": 211,
+      "grownWidth": 275,
+      "beforeSurfaceWidth": 211,
+      "grownSurfaceWidth": 275,
+      "beforeContentWidth": 185,
+      "grownContentWidth": 249,
+      "passed": true,
+      "rootCause": null
+    }
+  ],
+  "materialBounds": {
+    "passed": 24,
+    "failed": 104,
+    "byAxis": {
+      "Size": {
+        "medium": 52,
+        "small": 52
+      },
+      "State": {
+        "default": 24,
+        "focus-visible": 32,
+        "error": 24,
+        "disabled": 24
+      },
+      "Content": {
+        "placeholder": 40,
+        "value": 64
+      },
+      "Required": {
+        "false": 52,
+        "true": 52
+      },
+      "Adornments": {
+        "leading": 32,
+        "both": 32,
+        "none": 20,
+        "trailing": 20
+      }
+    },
+    "rootCause": "the floating/notched label was represented as an ordinary in-flow row inside a fixed-height surface; active label plus content exceeded the declared surface/component box in 104 variants",
+    "sceneFacts": [
+      {
+        "cell": [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "width": 195,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/surface",
+          "input-field/variant/medium/default/placeholder/false/none"
+        ],
+        "bindings": 33
+      },
+      {
+        "cell": [
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "width": 212,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/leading",
+          "input-field/surface",
+          "input-field/variant/medium/default/placeholder/false/leading"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          1,
+          0,
+          0,
+          0,
+          2
+        ],
+        "width": 234,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/medium/default/placeholder/false/trailing"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          1,
+          0,
+          0,
+          0,
+          3
+        ],
+        "width": 251,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/leading",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/medium/default/placeholder/false/both"
+        ],
+        "bindings": 40
+      },
+      {
+        "cell": [
+          1,
+          0,
+          0,
+          1,
+          0
+        ],
+        "width": 195,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/surface",
+          "input-field/variant/medium/default/placeholder/true/none"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          1,
+          0,
+          0,
+          1,
+          1
+        ],
+        "width": 212,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/leading",
+          "input-field/surface",
+          "input-field/variant/medium/default/placeholder/true/leading"
+        ],
+        "bindings": 39
+      },
+      {
+        "cell": [
+          1,
+          0,
+          0,
+          1,
+          2
+        ],
+        "width": 234,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/medium/default/placeholder/true/trailing"
+        ],
+        "bindings": 39
+      },
+      {
+        "cell": [
+          1,
+          0,
+          0,
+          1,
+          3
+        ],
+        "width": 251,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/leading",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/medium/default/placeholder/true/both"
+        ],
+        "bindings": 43
+      },
+      {
+        "cell": [
+          1,
+          0,
+          1,
+          0,
+          0
+        ],
+        "width": 195,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/surface",
+          "input-field/variant/medium/default/value/false/none"
+        ],
+        "bindings": 33
+      },
+      {
+        "cell": [
+          1,
+          0,
+          1,
+          0,
+          1
+        ],
+        "width": 212,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/leading",
+          "input-field/surface",
+          "input-field/variant/medium/default/value/false/leading"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          1,
+          0,
+          1,
+          0,
+          2
+        ],
+        "width": 234,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/medium/default/value/false/trailing"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          1,
+          0,
+          1,
+          0,
+          3
+        ],
+        "width": 251,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/leading",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/medium/default/value/false/both"
+        ],
+        "bindings": 40
+      },
+      {
+        "cell": [
+          1,
+          0,
+          1,
+          1,
+          0
+        ],
+        "width": 195,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/surface",
+          "input-field/variant/medium/default/value/true/none"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        "width": 212,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/leading",
+          "input-field/surface",
+          "input-field/variant/medium/default/value/true/leading"
+        ],
+        "bindings": 39
+      },
+      {
+        "cell": [
+          1,
+          0,
+          1,
+          1,
+          2
+        ],
+        "width": 234,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/medium/default/value/true/trailing"
+        ],
+        "bindings": 39
+      },
+      {
+        "cell": [
+          1,
+          0,
+          1,
+          1,
+          3
+        ],
+        "width": 251,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/leading",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/medium/default/value/true/both"
+        ],
+        "bindings": 43
+      },
+      {
+        "cell": [
+          1,
+          1,
+          0,
+          0,
+          0
+        ],
+        "width": 195,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/surface",
+          "input-field/variant/medium/focus-visible/placeholder/false/none"
+        ],
+        "bindings": 33
+      },
+      {
+        "cell": [
+          1,
+          1,
+          0,
+          0,
+          1
+        ],
+        "width": 212,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/leading",
+          "input-field/surface",
+          "input-field/variant/medium/focus-visible/placeholder/false/leading"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          1,
+          1,
+          0,
+          0,
+          2
+        ],
+        "width": 234,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/medium/focus-visible/placeholder/false/trailing"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          1,
+          1,
+          0,
+          0,
+          3
+        ],
+        "width": 251,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/leading",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/medium/focus-visible/placeholder/false/both"
+        ],
+        "bindings": 40
+      },
+      {
+        "cell": [
+          1,
+          1,
+          0,
+          1,
+          0
+        ],
+        "width": 195,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/surface",
+          "input-field/variant/medium/focus-visible/placeholder/true/none"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          1,
+          1,
+          0,
+          1,
+          1
+        ],
+        "width": 212,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/leading",
+          "input-field/surface",
+          "input-field/variant/medium/focus-visible/placeholder/true/leading"
+        ],
+        "bindings": 39
+      },
+      {
+        "cell": [
+          1,
+          1,
+          0,
+          1,
+          2
+        ],
+        "width": 234,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/medium/focus-visible/placeholder/true/trailing"
+        ],
+        "bindings": 39
+      },
+      {
+        "cell": [
+          1,
+          1,
+          0,
+          1,
+          3
+        ],
+        "width": 251,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/leading",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/medium/focus-visible/placeholder/true/both"
+        ],
+        "bindings": 43
+      },
+      {
+        "cell": [
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        "width": 195,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/surface",
+          "input-field/variant/medium/focus-visible/value/false/none"
+        ],
+        "bindings": 33
+      },
+      {
+        "cell": [
+          1,
+          1,
+          1,
+          0,
+          1
+        ],
+        "width": 212,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/leading",
+          "input-field/surface",
+          "input-field/variant/medium/focus-visible/value/false/leading"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          1,
+          1,
+          1,
+          0,
+          2
+        ],
+        "width": 234,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/medium/focus-visible/value/false/trailing"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          1,
+          1,
+          1,
+          0,
+          3
+        ],
+        "width": 251,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/leading",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/medium/focus-visible/value/false/both"
+        ],
+        "bindings": 40
+      },
+      {
+        "cell": [
+          1,
+          1,
+          1,
+          1,
+          0
+        ],
+        "width": 195,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/surface",
+          "input-field/variant/medium/focus-visible/value/true/none"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "width": 212,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/leading",
+          "input-field/surface",
+          "input-field/variant/medium/focus-visible/value/true/leading"
+        ],
+        "bindings": 39
+      },
+      {
+        "cell": [
+          1,
+          1,
+          1,
+          1,
+          2
+        ],
+        "width": 234,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/medium/focus-visible/value/true/trailing"
+        ],
+        "bindings": 39
+      },
+      {
+        "cell": [
+          1,
+          1,
+          1,
+          1,
+          3
+        ],
+        "width": 251,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/leading",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/medium/focus-visible/value/true/both"
+        ],
+        "bindings": 43
+      },
+      {
+        "cell": [
+          1,
+          2,
+          0,
+          0,
+          0
+        ],
+        "width": 195,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/error",
+          "input-field/surface",
+          "input-field/variant/medium/error/placeholder/false/none"
+        ],
+        "bindings": 33
+      },
+      {
+        "cell": [
+          1,
+          2,
+          0,
+          0,
+          1
+        ],
+        "width": 212,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/error",
+          "input-field/slot/leading",
+          "input-field/surface",
+          "input-field/variant/medium/error/placeholder/false/leading"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          1,
+          2,
+          0,
+          0,
+          2
+        ],
+        "width": 234,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/error",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/medium/error/placeholder/false/trailing"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          1,
+          2,
+          0,
+          0,
+          3
+        ],
+        "width": 251,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/error",
+          "input-field/slot/leading",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/medium/error/placeholder/false/both"
+        ],
+        "bindings": 40
+      },
+      {
+        "cell": [
+          1,
+          2,
+          0,
+          1,
+          0
+        ],
+        "width": 195,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/error",
+          "input-field/required-indicator",
+          "input-field/surface",
+          "input-field/variant/medium/error/placeholder/true/none"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          1,
+          2,
+          0,
+          1,
+          1
+        ],
+        "width": 212,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/error",
+          "input-field/required-indicator",
+          "input-field/slot/leading",
+          "input-field/surface",
+          "input-field/variant/medium/error/placeholder/true/leading"
+        ],
+        "bindings": 39
+      },
+      {
+        "cell": [
+          1,
+          2,
+          0,
+          1,
+          2
+        ],
+        "width": 234,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/error",
+          "input-field/required-indicator",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/medium/error/placeholder/true/trailing"
+        ],
+        "bindings": 39
+      },
+      {
+        "cell": [
+          1,
+          2,
+          0,
+          1,
+          3
+        ],
+        "width": 251,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/error",
+          "input-field/required-indicator",
+          "input-field/slot/leading",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/medium/error/placeholder/true/both"
+        ],
+        "bindings": 43
+      },
+      {
+        "cell": [
+          1,
+          2,
+          1,
+          0,
+          0
+        ],
+        "width": 195,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/error",
+          "input-field/surface",
+          "input-field/variant/medium/error/value/false/none"
+        ],
+        "bindings": 33
+      },
+      {
+        "cell": [
+          1,
+          2,
+          1,
+          0,
+          1
+        ],
+        "width": 212,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/error",
+          "input-field/slot/leading",
+          "input-field/surface",
+          "input-field/variant/medium/error/value/false/leading"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          1,
+          2,
+          1,
+          0,
+          2
+        ],
+        "width": 234,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/error",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/medium/error/value/false/trailing"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          1,
+          2,
+          1,
+          0,
+          3
+        ],
+        "width": 251,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/error",
+          "input-field/slot/leading",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/medium/error/value/false/both"
+        ],
+        "bindings": 40
+      },
+      {
+        "cell": [
+          1,
+          2,
+          1,
+          1,
+          0
+        ],
+        "width": 195,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/error",
+          "input-field/required-indicator",
+          "input-field/surface",
+          "input-field/variant/medium/error/value/true/none"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          1,
+          2,
+          1,
+          1,
+          1
+        ],
+        "width": 212,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/error",
+          "input-field/required-indicator",
+          "input-field/slot/leading",
+          "input-field/surface",
+          "input-field/variant/medium/error/value/true/leading"
+        ],
+        "bindings": 39
+      },
+      {
+        "cell": [
+          1,
+          2,
+          1,
+          1,
+          2
+        ],
+        "width": 234,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/error",
+          "input-field/required-indicator",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/medium/error/value/true/trailing"
+        ],
+        "bindings": 39
+      },
+      {
+        "cell": [
+          1,
+          2,
+          1,
+          1,
+          3
+        ],
+        "width": 251,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/error",
+          "input-field/required-indicator",
+          "input-field/slot/leading",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/medium/error/value/true/both"
+        ],
+        "bindings": 43
+      },
+      {
+        "cell": [
+          1,
+          3,
+          0,
+          0,
+          0
+        ],
+        "width": 195,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/surface",
+          "input-field/variant/medium/disabled/placeholder/false/none"
+        ],
+        "bindings": 33
+      },
+      {
+        "cell": [
+          1,
+          3,
+          0,
+          0,
+          1
+        ],
+        "width": 212,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/leading",
+          "input-field/surface",
+          "input-field/variant/medium/disabled/placeholder/false/leading"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          1,
+          3,
+          0,
+          0,
+          2
+        ],
+        "width": 234,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/medium/disabled/placeholder/false/trailing"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          1,
+          3,
+          0,
+          0,
+          3
+        ],
+        "width": 251,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/leading",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/medium/disabled/placeholder/false/both"
+        ],
+        "bindings": 40
+      },
+      {
+        "cell": [
+          1,
+          3,
+          0,
+          1,
+          0
+        ],
+        "width": 195,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/surface",
+          "input-field/variant/medium/disabled/placeholder/true/none"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          1,
+          3,
+          0,
+          1,
+          1
+        ],
+        "width": 212,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/leading",
+          "input-field/surface",
+          "input-field/variant/medium/disabled/placeholder/true/leading"
+        ],
+        "bindings": 39
+      },
+      {
+        "cell": [
+          1,
+          3,
+          0,
+          1,
+          2
+        ],
+        "width": 234,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/medium/disabled/placeholder/true/trailing"
+        ],
+        "bindings": 39
+      },
+      {
+        "cell": [
+          1,
+          3,
+          0,
+          1,
+          3
+        ],
+        "width": 251,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/leading",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/medium/disabled/placeholder/true/both"
+        ],
+        "bindings": 43
+      },
+      {
+        "cell": [
+          1,
+          3,
+          1,
+          0,
+          0
+        ],
+        "width": 195,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/surface",
+          "input-field/variant/medium/disabled/value/false/none"
+        ],
+        "bindings": 33
+      },
+      {
+        "cell": [
+          1,
+          3,
+          1,
+          0,
+          1
+        ],
+        "width": 212,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/leading",
+          "input-field/surface",
+          "input-field/variant/medium/disabled/value/false/leading"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          1,
+          3,
+          1,
+          0,
+          2
+        ],
+        "width": 234,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/medium/disabled/value/false/trailing"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          1,
+          3,
+          1,
+          0,
+          3
+        ],
+        "width": 251,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/leading",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/medium/disabled/value/false/both"
+        ],
+        "bindings": 40
+      },
+      {
+        "cell": [
+          1,
+          3,
+          1,
+          1,
+          0
+        ],
+        "width": 195,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/surface",
+          "input-field/variant/medium/disabled/value/true/none"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          1,
+          3,
+          1,
+          1,
+          1
+        ],
+        "width": 212,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/leading",
+          "input-field/surface",
+          "input-field/variant/medium/disabled/value/true/leading"
+        ],
+        "bindings": 39
+      },
+      {
+        "cell": [
+          1,
+          3,
+          1,
+          1,
+          2
+        ],
+        "width": 234,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/medium/disabled/value/true/trailing"
+        ],
+        "bindings": 39
+      },
+      {
+        "cell": [
+          1,
+          3,
+          1,
+          1,
+          3
+        ],
+        "width": 251,
+        "height": 79,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/leading",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/medium/disabled/value/true/both"
+        ],
+        "bindings": 43
+      },
+      {
+        "cell": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "width": 195,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/surface",
+          "input-field/variant/small/default/placeholder/false/none"
+        ],
+        "bindings": 33
+      },
+      {
+        "cell": [
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "width": 212,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/leading",
+          "input-field/surface",
+          "input-field/variant/small/default/placeholder/false/leading"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          0,
+          0,
+          0,
+          0,
+          2
+        ],
+        "width": 234,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/small/default/placeholder/false/trailing"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          0,
+          0,
+          0,
+          0,
+          3
+        ],
+        "width": 251,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/leading",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/small/default/placeholder/false/both"
+        ],
+        "bindings": 40
+      },
+      {
+        "cell": [
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "width": 195,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/surface",
+          "input-field/variant/small/default/placeholder/true/none"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        "width": 212,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/leading",
+          "input-field/surface",
+          "input-field/variant/small/default/placeholder/true/leading"
+        ],
+        "bindings": 39
+      },
+      {
+        "cell": [
+          0,
+          0,
+          0,
+          1,
+          2
+        ],
+        "width": 234,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/small/default/placeholder/true/trailing"
+        ],
+        "bindings": 39
+      },
+      {
+        "cell": [
+          0,
+          0,
+          0,
+          1,
+          3
+        ],
+        "width": 251,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/leading",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/small/default/placeholder/true/both"
+        ],
+        "bindings": 43
+      },
+      {
+        "cell": [
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "width": 195,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/surface",
+          "input-field/variant/small/default/value/false/none"
+        ],
+        "bindings": 33
+      },
+      {
+        "cell": [
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "width": 212,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/leading",
+          "input-field/surface",
+          "input-field/variant/small/default/value/false/leading"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          0,
+          0,
+          1,
+          0,
+          2
+        ],
+        "width": 234,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/small/default/value/false/trailing"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          0,
+          0,
+          1,
+          0,
+          3
+        ],
+        "width": 251,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/leading",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/small/default/value/false/both"
+        ],
+        "bindings": 40
+      },
+      {
+        "cell": [
+          0,
+          0,
+          1,
+          1,
+          0
+        ],
+        "width": 195,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/surface",
+          "input-field/variant/small/default/value/true/none"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          0,
+          0,
+          1,
+          1,
+          1
+        ],
+        "width": 212,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/leading",
+          "input-field/surface",
+          "input-field/variant/small/default/value/true/leading"
+        ],
+        "bindings": 39
+      },
+      {
+        "cell": [
+          0,
+          0,
+          1,
+          1,
+          2
+        ],
+        "width": 234,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/small/default/value/true/trailing"
+        ],
+        "bindings": 39
+      },
+      {
+        "cell": [
+          0,
+          0,
+          1,
+          1,
+          3
+        ],
+        "width": 251,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/leading",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/small/default/value/true/both"
+        ],
+        "bindings": 43
+      },
+      {
+        "cell": [
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        "width": 195,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/surface",
+          "input-field/variant/small/focus-visible/placeholder/false/none"
+        ],
+        "bindings": 33
+      },
+      {
+        "cell": [
+          0,
+          1,
+          0,
+          0,
+          1
+        ],
+        "width": 212,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/leading",
+          "input-field/surface",
+          "input-field/variant/small/focus-visible/placeholder/false/leading"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          0,
+          1,
+          0,
+          0,
+          2
+        ],
+        "width": 234,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/small/focus-visible/placeholder/false/trailing"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          0,
+          1,
+          0,
+          0,
+          3
+        ],
+        "width": 251,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/leading",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/small/focus-visible/placeholder/false/both"
+        ],
+        "bindings": 40
+      },
+      {
+        "cell": [
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        "width": 195,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/surface",
+          "input-field/variant/small/focus-visible/placeholder/true/none"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          0,
+          1,
+          0,
+          1,
+          1
+        ],
+        "width": 212,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/leading",
+          "input-field/surface",
+          "input-field/variant/small/focus-visible/placeholder/true/leading"
+        ],
+        "bindings": 39
+      },
+      {
+        "cell": [
+          0,
+          1,
+          0,
+          1,
+          2
+        ],
+        "width": 234,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/small/focus-visible/placeholder/true/trailing"
+        ],
+        "bindings": 39
+      },
+      {
+        "cell": [
+          0,
+          1,
+          0,
+          1,
+          3
+        ],
+        "width": 251,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/leading",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/small/focus-visible/placeholder/true/both"
+        ],
+        "bindings": 43
+      },
+      {
+        "cell": [
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        "width": 195,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/surface",
+          "input-field/variant/small/focus-visible/value/false/none"
+        ],
+        "bindings": 33
+      },
+      {
+        "cell": [
+          0,
+          1,
+          1,
+          0,
+          1
+        ],
+        "width": 212,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/leading",
+          "input-field/surface",
+          "input-field/variant/small/focus-visible/value/false/leading"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          0,
+          1,
+          1,
+          0,
+          2
+        ],
+        "width": 234,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/small/focus-visible/value/false/trailing"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          0,
+          1,
+          1,
+          0,
+          3
+        ],
+        "width": 251,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/leading",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/small/focus-visible/value/false/both"
+        ],
+        "bindings": 40
+      },
+      {
+        "cell": [
+          0,
+          1,
+          1,
+          1,
+          0
+        ],
+        "width": 195,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/surface",
+          "input-field/variant/small/focus-visible/value/true/none"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          0,
+          1,
+          1,
+          1,
+          1
+        ],
+        "width": 212,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/leading",
+          "input-field/surface",
+          "input-field/variant/small/focus-visible/value/true/leading"
+        ],
+        "bindings": 39
+      },
+      {
+        "cell": [
+          0,
+          1,
+          1,
+          1,
+          2
+        ],
+        "width": 234,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/small/focus-visible/value/true/trailing"
+        ],
+        "bindings": 39
+      },
+      {
+        "cell": [
+          0,
+          1,
+          1,
+          1,
+          3
+        ],
+        "width": 251,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/leading",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/small/focus-visible/value/true/both"
+        ],
+        "bindings": 43
+      },
+      {
+        "cell": [
+          0,
+          2,
+          0,
+          0,
+          0
+        ],
+        "width": 195,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/error",
+          "input-field/surface",
+          "input-field/variant/small/error/placeholder/false/none"
+        ],
+        "bindings": 33
+      },
+      {
+        "cell": [
+          0,
+          2,
+          0,
+          0,
+          1
+        ],
+        "width": 212,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/error",
+          "input-field/slot/leading",
+          "input-field/surface",
+          "input-field/variant/small/error/placeholder/false/leading"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          0,
+          2,
+          0,
+          0,
+          2
+        ],
+        "width": 234,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/error",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/small/error/placeholder/false/trailing"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          0,
+          2,
+          0,
+          0,
+          3
+        ],
+        "width": 251,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/error",
+          "input-field/slot/leading",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/small/error/placeholder/false/both"
+        ],
+        "bindings": 40
+      },
+      {
+        "cell": [
+          0,
+          2,
+          0,
+          1,
+          0
+        ],
+        "width": 195,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/error",
+          "input-field/required-indicator",
+          "input-field/surface",
+          "input-field/variant/small/error/placeholder/true/none"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          0,
+          2,
+          0,
+          1,
+          1
+        ],
+        "width": 212,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/error",
+          "input-field/required-indicator",
+          "input-field/slot/leading",
+          "input-field/surface",
+          "input-field/variant/small/error/placeholder/true/leading"
+        ],
+        "bindings": 39
+      },
+      {
+        "cell": [
+          0,
+          2,
+          0,
+          1,
+          2
+        ],
+        "width": 234,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/error",
+          "input-field/required-indicator",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/small/error/placeholder/true/trailing"
+        ],
+        "bindings": 39
+      },
+      {
+        "cell": [
+          0,
+          2,
+          0,
+          1,
+          3
+        ],
+        "width": 251,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/error",
+          "input-field/required-indicator",
+          "input-field/slot/leading",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/small/error/placeholder/true/both"
+        ],
+        "bindings": 43
+      },
+      {
+        "cell": [
+          0,
+          2,
+          1,
+          0,
+          0
+        ],
+        "width": 195,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/error",
+          "input-field/surface",
+          "input-field/variant/small/error/value/false/none"
+        ],
+        "bindings": 33
+      },
+      {
+        "cell": [
+          0,
+          2,
+          1,
+          0,
+          1
+        ],
+        "width": 212,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/error",
+          "input-field/slot/leading",
+          "input-field/surface",
+          "input-field/variant/small/error/value/false/leading"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          0,
+          2,
+          1,
+          0,
+          2
+        ],
+        "width": 234,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/error",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/small/error/value/false/trailing"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          0,
+          2,
+          1,
+          0,
+          3
+        ],
+        "width": 251,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/error",
+          "input-field/slot/leading",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/small/error/value/false/both"
+        ],
+        "bindings": 40
+      },
+      {
+        "cell": [
+          0,
+          2,
+          1,
+          1,
+          0
+        ],
+        "width": 195,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/error",
+          "input-field/required-indicator",
+          "input-field/surface",
+          "input-field/variant/small/error/value/true/none"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          0,
+          2,
+          1,
+          1,
+          1
+        ],
+        "width": 212,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/error",
+          "input-field/required-indicator",
+          "input-field/slot/leading",
+          "input-field/surface",
+          "input-field/variant/small/error/value/true/leading"
+        ],
+        "bindings": 39
+      },
+      {
+        "cell": [
+          0,
+          2,
+          1,
+          1,
+          2
+        ],
+        "width": 234,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/error",
+          "input-field/required-indicator",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/small/error/value/true/trailing"
+        ],
+        "bindings": 39
+      },
+      {
+        "cell": [
+          0,
+          2,
+          1,
+          1,
+          3
+        ],
+        "width": 251,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/error",
+          "input-field/required-indicator",
+          "input-field/slot/leading",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/small/error/value/true/both"
+        ],
+        "bindings": 43
+      },
+      {
+        "cell": [
+          0,
+          3,
+          0,
+          0,
+          0
+        ],
+        "width": 195,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/surface",
+          "input-field/variant/small/disabled/placeholder/false/none"
+        ],
+        "bindings": 33
+      },
+      {
+        "cell": [
+          0,
+          3,
+          0,
+          0,
+          1
+        ],
+        "width": 212,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/leading",
+          "input-field/surface",
+          "input-field/variant/small/disabled/placeholder/false/leading"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          0,
+          3,
+          0,
+          0,
+          2
+        ],
+        "width": 234,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/small/disabled/placeholder/false/trailing"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          0,
+          3,
+          0,
+          0,
+          3
+        ],
+        "width": 251,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/leading",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/small/disabled/placeholder/false/both"
+        ],
+        "bindings": 40
+      },
+      {
+        "cell": [
+          0,
+          3,
+          0,
+          1,
+          0
+        ],
+        "width": 195,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/surface",
+          "input-field/variant/small/disabled/placeholder/true/none"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          0,
+          3,
+          0,
+          1,
+          1
+        ],
+        "width": 212,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/leading",
+          "input-field/surface",
+          "input-field/variant/small/disabled/placeholder/true/leading"
+        ],
+        "bindings": 39
+      },
+      {
+        "cell": [
+          0,
+          3,
+          0,
+          1,
+          2
+        ],
+        "width": 234,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/small/disabled/placeholder/true/trailing"
+        ],
+        "bindings": 39
+      },
+      {
+        "cell": [
+          0,
+          3,
+          0,
+          1,
+          3
+        ],
+        "width": 251,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/placeholder",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/leading",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/small/disabled/placeholder/true/both"
+        ],
+        "bindings": 43
+      },
+      {
+        "cell": [
+          0,
+          3,
+          1,
+          0,
+          0
+        ],
+        "width": 195,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/surface",
+          "input-field/variant/small/disabled/value/false/none"
+        ],
+        "bindings": 33
+      },
+      {
+        "cell": [
+          0,
+          3,
+          1,
+          0,
+          1
+        ],
+        "width": 212,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/leading",
+          "input-field/surface",
+          "input-field/variant/small/disabled/value/false/leading"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          0,
+          3,
+          1,
+          0,
+          2
+        ],
+        "width": 234,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/small/disabled/value/false/trailing"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          0,
+          3,
+          1,
+          0,
+          3
+        ],
+        "width": 251,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/slot/leading",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/small/disabled/value/false/both"
+        ],
+        "bindings": 40
+      },
+      {
+        "cell": [
+          0,
+          3,
+          1,
+          1,
+          0
+        ],
+        "width": 195,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/surface",
+          "input-field/variant/small/disabled/value/true/none"
+        ],
+        "bindings": 36
+      },
+      {
+        "cell": [
+          0,
+          3,
+          1,
+          1,
+          1
+        ],
+        "width": 212,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/leading",
+          "input-field/surface",
+          "input-field/variant/small/disabled/value/true/leading"
+        ],
+        "bindings": 39
+      },
+      {
+        "cell": [
+          0,
+          3,
+          1,
+          1,
+          2
+        ],
+        "width": 234,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/small/disabled/value/true/trailing"
+        ],
+        "bindings": 39
+      },
+      {
+        "cell": [
+          0,
+          3,
+          1,
+          1,
+          3
+        ],
+        "width": 251,
+        "height": 64,
+        "layoutMode": "VERTICAL",
+        "primaryAxisSizingMode": "AUTO",
+        "roles": [
+          "input-field/content-row",
+          "input-field/content/value",
+          "input-field/label",
+          "input-field/label-row",
+          "input-field/message-container",
+          "input-field/message/helper",
+          "input-field/required-indicator",
+          "input-field/slot/leading",
+          "input-field/slot/trailing",
+          "input-field/surface",
+          "input-field/variant/small/disabled/value/true/both"
+        ],
+        "bindings": 43
+      }
+    ]
+  },
+  "materialDimensionalDeltasByAxis": {
+    "size": {
+      "small": {
+        "count": 32,
+        "meanWidthDelta": 0.0078125,
+        "meanHeightDelta": -8.15625
+      },
+      "medium": {
+        "count": 32,
+        "meanWidthDelta": 0.0078125,
+        "meanHeightDelta": -8.15625
+      }
+    },
+    "state": {
+      "default": {
+        "count": 16,
+        "meanWidthDelta": 0.0078125,
+        "meanHeightDelta": -7.90625
+      },
+      "focus-visible": {
+        "count": 16,
+        "meanWidthDelta": 0.0078125,
+        "meanHeightDelta": -8.90625
+      },
+      "error": {
+        "count": 16,
+        "meanWidthDelta": 0.0078125,
+        "meanHeightDelta": -7.90625
+      },
+      "disabled": {
+        "count": 16,
+        "meanWidthDelta": 0.0078125,
+        "meanHeightDelta": -7.90625
+      }
+    },
+    "content": {
+      "placeholder": {
+        "count": 32,
+        "meanWidthDelta": 0.0078125,
+        "meanHeightDelta": -7.40625
+      },
+      "value": {
+        "count": 32,
+        "meanWidthDelta": 0.0078125,
+        "meanHeightDelta": -8.90625
+      }
+    },
+    "required": {
+      "false": {
+        "count": 32,
+        "meanWidthDelta": 0.0078125,
+        "meanHeightDelta": -8.15625
+      },
+      "true": {
+        "count": 32,
+        "meanWidthDelta": 0.0078125,
+        "meanHeightDelta": -8.15625
+      }
+    },
+    "adornments": {
+      "none": {
+        "count": 32,
+        "meanWidthDelta": 0,
+        "meanHeightDelta": -7.40625
+      },
+      "both": {
+        "count": 32,
+        "meanWidthDelta": 0.015625,
+        "meanHeightDelta": -8.90625
+      }
+    }
+  },
+  "geometryLosses": {
+    "count": 16,
+    "byAxis": {
+      "library": {
+        "mui": 16
+      },
+      "size": {
+        "medium": 16
+      },
+      "state": {
+        "default": 4,
+        "focus-visible": 4,
+        "error": 4,
+        "disabled": 4
+      },
+      "content": {
+        "placeholder": 8,
+        "value": 8
+      },
+      "required": {
+        "false": 8,
+        "true": 8
+      },
+      "adornments": {
+        "both": 16
+      }
+    },
+    "meanErrors": {
+      "geometry": 0.02534439414800667,
+      "pixelInk": 0.16648632818961046
+    },
+    "cells": [
+      {
+        "cellKey": "mui/size=medium/state=default/content=placeholder/required=false/adornments=both",
+        "geometryError": 0.025344394148006676,
+        "pixelInkCompositeError": 0.1658126230481176,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 79
+        },
+        "referenceImageInk": 7921,
+        "liveImageInk": 10822,
+        "exactDifference": 0.1679632182171787,
+        "perceptualDifference": 0.11301712580955797,
+        "normalizedInkCountDelta": 0.36624163615705085
+      },
+      {
+        "cellKey": "mui/size=medium/state=default/content=placeholder/required=true/adornments=both",
+        "geometryError": 0.025344394148006676,
+        "pixelInkCompositeError": 0.16543272534327882,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 79
+        },
+        "referenceImageInk": 7959,
+        "liveImageInk": 10827,
+        "exactDifference": 0.16839750004720455,
+        "perceptualDifference": 0.1129982439908612,
+        "normalizedInkCountDelta": 0.36034677723332076
+      },
+      {
+        "cellKey": "mui/size=medium/state=default/content=value/required=false/adornments=both",
+        "geometryError": 0.025344394148006676,
+        "pixelInkCompositeError": 0.1574918691649551,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 79
+        },
+        "referenceImageInk": 6692,
+        "liveImageInk": 9709,
+        "exactDifference": 0.14464417212665923,
+        "perceptualDifference": 0.10021525273314326,
+        "normalizedInkCountDelta": 0.45083682008368203
+      },
+      {
+        "cellKey": "mui/size=medium/state=default/content=value/required=true/adornments=both",
+        "geometryError": 0.025344394148006676,
+        "pixelInkCompositeError": 0.1569565569191583,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 79
+        },
+        "referenceImageInk": 6730,
+        "liveImageInk": 9714,
+        "exactDifference": 0.14507845395668512,
+        "perceptualDifference": 0.10019637091444648,
+        "normalizedInkCountDelta": 0.44338781575037145
+      },
+      {
+        "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=false/adornments=both",
+        "geometryError": 0.025344394148006676,
+        "pixelInkCompositeError": 0.19227926246487223,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 79
+        },
+        "referenceImageInk": 10102,
+        "liveImageInk": 13218,
+        "exactDifference": 0.2037914691943128,
+        "perceptualDifference": 0.1488453767866921,
+        "normalizedInkCountDelta": 0.30845377153039
+      },
+      {
+        "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=true/adornments=both",
+        "geometryError": 0.025344394148006676,
+        "pixelInkCompositeError": 0.19216353597900482,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 79
+        },
+        "referenceImageInk": 10109,
+        "liveImageInk": 13223,
+        "exactDifference": 0.20391420101584184,
+        "perceptualDifference": 0.14850550405015012,
+        "normalizedInkCountDelta": 0.3080423385102384
+      },
+      {
+        "cellKey": "mui/size=medium/state=focus-visible/content=value/required=false/adornments=both",
+        "geometryError": 0.025344394148006676,
+        "pixelInkCompositeError": 0.1717540932082607,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 79
+        },
+        "referenceImageInk": 12466,
+        "liveImageInk": 12105,
+        "exactDifference": 0.20741677838409395,
+        "perceptualDifference": 0.1628745680783973,
+        "normalizedInkCountDelta": 0.02895876784854805
+      },
+      {
+        "cellKey": "mui/size=medium/state=focus-visible/content=value/required=true/adornments=both",
+        "geometryError": 0.025344394148006676,
+        "pixelInkCompositeError": 0.17169863991245923,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 79
+        },
+        "referenceImageInk": 12473,
+        "liveImageInk": 12110,
+        "exactDifference": 0.2075489511149714,
+        "perceptualDifference": 0.16253469534185533,
+        "normalizedInkCountDelta": 0.029102862182313796
+      },
+      {
+        "cellKey": "mui/size=medium/state=error/content=placeholder/required=false/adornments=both",
+        "geometryError": 0.025344394148006676,
+        "pixelInkCompositeError": 0.16370568735885954,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 79
+        },
+        "referenceImageInk": 7659,
+        "liveImageInk": 10582,
+        "exactDifference": 0.16257245897924888,
+        "perceptualDifference": 0.11063801665376409,
+        "normalizedInkCountDelta": 0.38164251207729466
+      },
+      {
+        "cellKey": "mui/size=medium/state=error/content=placeholder/required=true/adornments=both",
+        "geometryError": 0.025344394148006676,
+        "pixelInkCompositeError": 0.16327269998219107,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 79
+        },
+        "referenceImageInk": 7698,
+        "liveImageInk": 10587,
+        "exactDifference": 0.16300674080927474,
+        "perceptualDifference": 0.11060025301637054,
+        "normalizedInkCountDelta": 0.3752922837100546
+      },
+      {
+        "cellKey": "mui/size=medium/state=error/content=value/required=false/adornments=both",
+        "geometryError": 0.025344394148006676,
+        "pixelInkCompositeError": 0.15602399435741957,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 79
+        },
+        "referenceImageInk": 6430,
+        "liveImageInk": 9469,
+        "exactDifference": 0.13925341288872944,
+        "perceptualDifference": 0.09783614357734938,
+        "normalizedInkCountDelta": 0.47262830482115087
+      },
+      {
+        "cellKey": "mui/size=medium/state=error/content=value/required=true/adornments=both",
+        "geometryError": 0.025344394148006676,
+        "pixelInkCompositeError": 0.15541551035715623,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 79
+        },
+        "referenceImageInk": 6469,
+        "liveImageInk": 9474,
+        "exactDifference": 0.1396876947187553,
+        "perceptualDifference": 0.09779837993995581,
+        "normalizedInkCountDelta": 0.4645231102179626
+      },
+      {
+        "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=false/adornments=both",
+        "geometryError": 0.025344394148006676,
+        "pixelInkCompositeError": 0.16764708608190645,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 79
+        },
+        "referenceImageInk": 7801,
+        "liveImageInk": 10822,
+        "exactDifference": 0.16744396820301732,
+        "perceptualDifference": 0.1129982439908612,
+        "normalizedInkCountDelta": 0.38725804384053325
+      },
+      {
+        "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=true/adornments=both",
+        "geometryError": 0.025344394148006676,
+        "pixelInkCompositeError": 0.16721808649915282,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 79
+        },
+        "referenceImageInk": 7840,
+        "liveImageInk": 10827,
+        "exactDifference": 0.16786880912369478,
+        "perceptualDifference": 0.11296048035346765,
+        "normalizedInkCountDelta": 0.3809948979591837
+      },
+      {
+        "cellKey": "mui/size=medium/state=disabled/content=value/required=false/adornments=both",
+        "geometryError": 0.025344394148006676,
+        "pixelInkCompositeError": 0.15874685392416177,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 79
+        },
+        "referenceImageInk": 6627,
+        "liveImageInk": 9709,
+        "exactDifference": 0.14432318120881404,
+        "perceptualDifference": 0.10019637091444648,
+        "normalizedInkCountDelta": 0.4650671495397616
+      },
+      {
+        "cellKey": "mui/size=medium/state=disabled/content=value/required=true/adornments=both",
+        "geometryError": 0.025344394148006676,
+        "pixelInkCompositeError": 0.15816202643281266,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 79
+        },
+        "referenceImageInk": 6666,
+        "liveImageInk": 9714,
+        "exactDifference": 0.1447480221294915,
+        "perceptualDifference": 0.10015860727705292,
+        "normalizedInkCountDelta": 0.45724572457245727
+      }
+    ]
+  },
+  "pixelInkLosses": {
+    "count": 43,
+    "byAxis": {
+      "library": {
+        "mui": 43
+      },
+      "size": {
+        "small": 24,
+        "medium": 19
+      },
+      "state": {
+        "default": 11,
+        "focus-visible": 14,
+        "error": 8,
+        "disabled": 10
+      },
+      "content": {
+        "placeholder": 20,
+        "value": 23
+      },
+      "required": {
+        "false": 21,
+        "true": 22
+      },
+      "adornments": {
+        "both": 30,
+        "none": 13
+      }
+    },
+    "meanErrors": {
+      "geometry": 0.02824829166050457,
+      "pixelInk": 0.1661660213178876
+    },
+    "cells": [
+      {
+        "cellKey": "mui/size=small/state=default/content=placeholder/required=false/adornments=both",
+        "geometryError": 0.03055564087174005,
+        "pixelInkCompositeError": 0.1799564499060841,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 72.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 64
+        },
+        "referenceImageInk": 7793,
+        "liveImageInk": 10694,
+        "exactDifference": 0.1868327793797187,
+        "perceptualDifference": 0.12328586207655566,
+        "normalizedInkCountDelta": 0.37225715385602465
+      },
+      {
+        "cellKey": "mui/size=small/state=default/content=placeholder/required=true/adornments=both",
+        "geometryError": 0.03055564087174005,
+        "pixelInkCompositeError": 0.17959873621891523,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 72.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 64
+        },
+        "referenceImageInk": 7831,
+        "liveImageInk": 10699,
+        "exactDifference": 0.187339041623561,
+        "perceptualDifference": 0.12326385067464947,
+        "normalizedInkCountDelta": 0.3662367513727493
+      },
+      {
+        "cellKey": "mui/size=small/state=default/content=value/required=false/adornments=none",
+        "geometryError": 0.030540077153879127,
+        "pixelInkCompositeError": 0.10782901055095437,
+        "referenceContentBox": {
+          "width": 195,
+          "height": 72.90625
+        },
+        "liveContentBox": {
+          "width": 195,
+          "height": 64
+        },
+        "referenceImageInk": 5165,
+        "liveImageInk": 4653,
+        "exactDifference": 0.1323558577702224,
+        "perceptualDifference": 0.07934551636209095,
+        "normalizedInkCountDelta": 0.09912875121006777
+      },
+      {
+        "cellKey": "mui/size=small/state=default/content=value/required=false/adornments=both",
+        "geometryError": 0.03055564087174005,
+        "pixelInkCompositeError": 0.1703129409029002,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 72.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 64
+        },
+        "referenceImageInk": 6564,
+        "liveImageInk": 9581,
+        "exactDifference": 0.16093636503708922,
+        "perceptualDifference": 0.10970482710043802,
+        "normalizedInkCountDelta": 0.4596282754418038
+      },
+      {
+        "cellKey": "mui/size=small/state=default/content=value/required=true/adornments=none",
+        "geometryError": 0.030540077153879127,
+        "pixelInkCompositeError": 0.10869260400593259,
+        "referenceContentBox": {
+          "width": 195,
+          "height": 72.90625
+        },
+        "liveContentBox": {
+          "width": 195,
+          "height": 64
+        },
+        "referenceImageInk": 5203,
+        "liveImageInk": 4658,
+        "exactDifference": 0.13299334183312084,
+        "perceptualDifference": 0.07930301742456439,
+        "normalizedInkCountDelta": 0.10474726119546415
+      },
+      {
+        "cellKey": "mui/size=small/state=default/content=value/required=true/adornments=both",
+        "geometryError": 0.03055564087174005,
+        "pixelInkCompositeError": 0.16978736178918385,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 72.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 64
+        },
+        "referenceImageInk": 6602,
+        "liveImageInk": 9586,
+        "exactDifference": 0.16143162157997842,
+        "perceptualDifference": 0.10968281569853185,
+        "normalizedInkCountDelta": 0.4519842471978188
+      },
+      {
+        "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=false/adornments=none",
+        "geometryError": 0.030540077153879127,
+        "pixelInkCompositeError": 0.16075432776617343,
+        "referenceContentBox": {
+          "width": 195,
+          "height": 72.90625
+        },
+        "liveContentBox": {
+          "width": 195,
+          "height": 64
+        },
+        "referenceImageInk": 8038,
+        "liveImageInk": 7586,
+        "exactDifference": 0.20313075506445671,
+        "perceptualDifference": 0.13391415214619634,
+        "normalizedInkCountDelta": 0.056232893754665336
+      },
+      {
+        "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=false/adornments=both",
+        "geometryError": 0.03055564087174005,
+        "pixelInkCompositeError": 0.20875220979742748,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 72.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 64
+        },
+        "referenceImageInk": 9846,
+        "liveImageInk": 12962,
+        "exactDifference": 0.22501155598600076,
+        "perceptualDifference": 0.161497655785697,
+        "normalizedInkCountDelta": 0.31647369490148286
+      },
+      {
+        "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=true/adornments=none",
+        "geometryError": 0.030540077153879127,
+        "pixelInkCompositeError": 0.1606623812030554,
+        "referenceContentBox": {
+          "width": 195,
+          "height": 72.90625
+        },
+        "liveContentBox": {
+          "width": 195,
+          "height": 64
+        },
+        "referenceImageInk": 8045,
+        "liveImageInk": 7591,
+        "exactDifference": 0.20331491712707184,
+        "perceptualDifference": 0.1334041648958776,
+        "normalizedInkCountDelta": 0.05643256681168428
+      },
+      {
+        "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=true/adornments=both",
+        "geometryError": 0.03055564087174005,
+        "pixelInkCompositeError": 0.20862248270504863,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 72.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 64
+        },
+        "referenceImageInk": 9853,
+        "liveImageInk": 12967,
+        "exactDifference": 0.22515463009839096,
+        "perceptualDifference": 0.1611014505513856,
+        "normalizedInkCountDelta": 0.3160458743529889
+      },
+      {
+        "cellKey": "mui/size=small/state=focus-visible/content=value/required=false/adornments=none",
+        "geometryError": 0.030540077153879127,
+        "pixelInkCompositeError": 0.20946650923890836,
+        "referenceContentBox": {
+          "width": 195,
+          "height": 72.90625
+        },
+        "liveContentBox": {
+          "width": 195,
+          "height": 64
+        },
+        "referenceImageInk": 10370,
+        "liveImageInk": 6473,
+        "exactDifference": 0.21446380507153986,
+        "perceptualDifference": 0.16163762572602353,
+        "normalizedInkCountDelta": 0.37579556412729026
+      },
+      {
+        "cellKey": "mui/size=small/state=focus-visible/content=value/required=false/adornments=both",
+        "geometryError": 0.03055564087174005,
+        "pixelInkCompositeError": 0.19244504797629317,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 72.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 64
+        },
+        "referenceImageInk": 12210,
+        "liveImageInk": 11849,
+        "exactDifference": 0.23337588871035198,
+        "perceptualDifference": 0.18200127666131055,
+        "normalizedInkCountDelta": 0.029565929565929565
+      },
+      {
+        "cellKey": "mui/size=small/state=focus-visible/content=value/required=true/adornments=none",
+        "geometryError": 0.030540077153879127,
+        "pixelInkCompositeError": 0.20936835160599254,
+        "referenceContentBox": {
+          "width": 195,
+          "height": 72.90625
+        },
+        "liveContentBox": {
+          "width": 195,
+          "height": 64
+        },
+        "referenceImageInk": 10377,
+        "liveImageInk": 6478,
+        "exactDifference": 0.21467629975917268,
+        "perceptualDifference": 0.16114180478821363,
+        "normalizedInkCountDelta": 0.37573479811120747
+      },
+      {
+        "cellKey": "mui/size=small/state=focus-visible/content=value/required=true/adornments=both",
+        "geometryError": 0.03055564087174005,
+        "pixelInkCompositeError": 0.19252685933795494,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 72.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 64
+        },
+        "referenceImageInk": 12217,
+        "liveImageInk": 11854,
+        "exactDifference": 0.23369505403799168,
+        "perceptualDifference": 0.18177015694129559,
+        "normalizedInkCountDelta": 0.02971269542440861
+      },
+      {
+        "cellKey": "mui/size=small/state=error/content=placeholder/required=false/adornments=both",
+        "geometryError": 0.03055564087174005,
+        "pixelInkCompositeError": 0.1782826519805829,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 72.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 64
+        },
+        "referenceImageInk": 7531,
+        "liveImageInk": 10454,
+        "exactDifference": 0.18164909423081155,
+        "perceptualDifference": 0.12161299553168542,
+        "normalizedInkCountDelta": 0.3881290665250299
+      },
+      {
+        "cellKey": "mui/size=small/state=error/content=placeholder/required=true/adornments=both",
+        "geometryError": 0.03055564087174005,
+        "pixelInkCompositeError": 0.17786907181988965,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 72.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 64
+        },
+        "referenceImageInk": 7570,
+        "liveImageInk": 10459,
+        "exactDifference": 0.18215535647465386,
+        "perceptualDifference": 0.12156897272787304,
+        "normalizedInkCountDelta": 0.3816380449141347
+      },
+      {
+        "cellKey": "mui/size=small/state=error/content=value/required=false/adornments=both",
+        "geometryError": 0.03055564087174005,
+        "pixelInkCompositeError": 0.16923707181684758,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 72.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 64
+        },
+        "referenceImageInk": 6302,
+        "liveImageInk": 9341,
+        "exactDifference": 0.15566463428055732,
+        "perceptualDifference": 0.10795492064889613,
+        "normalizedInkCountDelta": 0.4822278641701047
+      },
+      {
+        "cellKey": "mui/size=small/state=error/content=value/required=true/adornments=both",
+        "geometryError": 0.03055564087174005,
+        "pixelInkCompositeError": 0.1686343061267951,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 72.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 64
+        },
+        "referenceImageInk": 6341,
+        "liveImageInk": 9346,
+        "exactDifference": 0.15615989082344656,
+        "perceptualDifference": 0.10791089784508376,
+        "normalizedInkCountDelta": 0.4739000157703832
+      },
+      {
+        "cellKey": "mui/size=small/state=disabled/content=placeholder/required=false/adornments=both",
+        "geometryError": 0.03055564087174005,
+        "pixelInkCompositeError": 0.18239751058244835,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 72.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 64
+        },
+        "referenceImageInk": 7673,
+        "liveImageInk": 10694,
+        "exactDifference": 0.1874931214369043,
+        "perceptualDifference": 0.12319781646893091,
+        "normalizedInkCountDelta": 0.39371823276423823
+      },
+      {
+        "cellKey": "mui/size=small/state=disabled/content=placeholder/required=true/adornments=both",
+        "geometryError": 0.03055564087174005,
+        "pixelInkCompositeError": 0.18198755292897323,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 72.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 64
+        },
+        "referenceImageInk": 7712,
+        "liveImageInk": 10699,
+        "exactDifference": 0.18798837797979354,
+        "perceptualDifference": 0.12315379366511853,
+        "normalizedInkCountDelta": 0.38731846473029047
+      },
+      {
+        "cellKey": "mui/size=small/state=disabled/content=value/required=false/adornments=none",
+        "geometryError": 0.030540077153879127,
+        "pixelInkCompositeError": 0.10626162945338707,
+        "referenceContentBox": {
+          "width": 195,
+          "height": 72.90625
+        },
+        "liveContentBox": {
+          "width": 195,
+          "height": 64
+        },
+        "referenceImageInk": 5105,
+        "liveImageInk": 4653,
+        "exactDifference": 0.13163337583227086,
+        "perceptualDifference": 0.07897719223686074,
+        "normalizedInkCountDelta": 0.08854064642507346
+      },
+      {
+        "cellKey": "mui/size=small/state=disabled/content=value/required=false/adornments=both",
+        "geometryError": 0.03055564087174005,
+        "pixelInkCompositeError": 0.17249366718351858,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 72.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 64
+        },
+        "referenceImageInk": 6499,
+        "liveImageInk": 9581,
+        "exactDifference": 0.16158570139332173,
+        "perceptualDifference": 0.11069534018621646,
+        "normalizedInkCountDelta": 0.4742268041237113
+      },
+      {
+        "cellKey": "mui/size=small/state=disabled/content=value/required=true/adornments=none",
+        "geometryError": 0.030540077153879127,
+        "pixelInkCompositeError": 0.10715154120887777,
+        "referenceContentBox": {
+          "width": 195,
+          "height": 72.90625
+        },
+        "liveContentBox": {
+          "width": 195,
+          "height": 64
+        },
+        "referenceImageInk": 5144,
+        "liveImageInk": 4658,
+        "exactDifference": 0.1322708598951693,
+        "perceptualDifference": 0.07892052698682533,
+        "normalizedInkCountDelta": 0.09447900466562986
+      },
+      {
+        "cellKey": "mui/size=small/state=disabled/content=value/required=true/adornments=both",
+        "geometryError": 0.03055564087174005,
+        "pixelInkCompositeError": 0.17192076731598913,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 72.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 64
+        },
+        "referenceImageInk": 6538,
+        "liveImageInk": 9586,
+        "exactDifference": 0.16208095793621097,
+        "perceptualDifference": 0.11065131738240408,
+        "normalizedInkCountDelta": 0.46619761394921994
+      },
+      {
+        "cellKey": "mui/size=medium/state=default/content=placeholder/required=false/adornments=both",
+        "geometryError": 0.025344394148006676,
+        "pixelInkCompositeError": 0.1658126230481176,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 79
+        },
+        "referenceImageInk": 7921,
+        "liveImageInk": 10822,
+        "exactDifference": 0.1679632182171787,
+        "perceptualDifference": 0.11301712580955797,
+        "normalizedInkCountDelta": 0.36624163615705085
+      },
+      {
+        "cellKey": "mui/size=medium/state=default/content=placeholder/required=true/adornments=both",
+        "geometryError": 0.025344394148006676,
+        "pixelInkCompositeError": 0.16543272534327882,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 79
+        },
+        "referenceImageInk": 7959,
+        "liveImageInk": 10827,
+        "exactDifference": 0.16839750004720455,
+        "perceptualDifference": 0.1129982439908612,
+        "normalizedInkCountDelta": 0.36034677723332076
+      },
+      {
+        "cellKey": "mui/size=medium/state=default/content=value/required=false/adornments=both",
+        "geometryError": 0.025344394148006676,
+        "pixelInkCompositeError": 0.1574918691649551,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 79
+        },
+        "referenceImageInk": 6692,
+        "liveImageInk": 9709,
+        "exactDifference": 0.14464417212665923,
+        "perceptualDifference": 0.10021525273314326,
+        "normalizedInkCountDelta": 0.45083682008368203
+      },
+      {
+        "cellKey": "mui/size=medium/state=default/content=value/required=true/adornments=none",
+        "geometryError": 0.025328830430145752,
+        "pixelInkCompositeError": 0.0954425688745206,
+        "referenceContentBox": {
+          "width": 195,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 195,
+          "height": 79
+        },
+        "referenceImageInk": 5331,
+        "liveImageInk": 4786,
+        "exactDifference": 0.11548183254344392,
+        "perceptualDifference": 0.0686960748572123,
+        "normalizedInkCountDelta": 0.10223222659913712
+      },
+      {
+        "cellKey": "mui/size=medium/state=default/content=value/required=true/adornments=both",
+        "geometryError": 0.025344394148006676,
+        "pixelInkCompositeError": 0.1569565569191583,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 79
+        },
+        "referenceImageInk": 6730,
+        "liveImageInk": 9714,
+        "exactDifference": 0.14507845395668512,
+        "perceptualDifference": 0.10019637091444648,
+        "normalizedInkCountDelta": 0.44338781575037145
+      },
+      {
+        "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=false/adornments=none",
+        "geometryError": 0.025328830430145752,
+        "pixelInkCompositeError": 0.14296096342509154,
+        "referenceContentBox": {
+          "width": 195,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 195,
+          "height": 79
+        },
+        "referenceImageInk": 8294,
+        "liveImageInk": 7842,
+        "exactDifference": 0.17943857090776522,
+        "perceptualDifference": 0.11947988820026735,
+        "normalizedInkCountDelta": 0.05449722691102001
+      },
+      {
+        "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=false/adornments=both",
+        "geometryError": 0.025344394148006676,
+        "pixelInkCompositeError": 0.19227926246487223,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 79
+        },
+        "referenceImageInk": 10102,
+        "liveImageInk": 13218,
+        "exactDifference": 0.2037914691943128,
+        "perceptualDifference": 0.1488453767866921,
+        "normalizedInkCountDelta": 0.30845377153039
+      },
+      {
+        "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=true/adornments=none",
+        "geometryError": 0.025328830430145752,
+        "pixelInkCompositeError": 0.1428844593654806,
+        "referenceContentBox": {
+          "width": 195,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 195,
+          "height": 79
+        },
+        "referenceImageInk": 8301,
+        "liveImageInk": 7847,
+        "exactDifference": 0.1795965487908616,
+        "perceptualDifference": 0.11904241098553894,
+        "normalizedInkCountDelta": 0.05469220575834237
+      },
+      {
+        "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=true/adornments=both",
+        "geometryError": 0.025344394148006676,
+        "pixelInkCompositeError": 0.19216353597900482,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 79
+        },
+        "referenceImageInk": 10109,
+        "liveImageInk": 13223,
+        "exactDifference": 0.20391420101584184,
+        "perceptualDifference": 0.14850550405015012,
+        "normalizedInkCountDelta": 0.3080423385102384
+      },
+      {
+        "cellKey": "mui/size=medium/state=focus-visible/content=value/required=false/adornments=none",
+        "geometryError": 0.025328830430145752,
+        "pixelInkCompositeError": 0.1843033119089167,
+        "referenceContentBox": {
+          "width": 195,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 195,
+          "height": 79
+        },
+        "referenceImageInk": 10626,
+        "liveImageInk": 6729,
+        "exactDifference": 0.18461538461538463,
+        "perceptualDifference": 0.1383035605784421,
+        "normalizedInkCountDelta": 0.36674195369847545
+      },
+      {
+        "cellKey": "mui/size=medium/state=focus-visible/content=value/required=true/adornments=none",
+        "geometryError": 0.025328830430145752,
+        "pixelInkCompositeError": 0.184208051759977,
+        "referenceContentBox": {
+          "width": 195,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 195,
+          "height": 79
+        },
+        "referenceImageInk": 10633,
+        "liveImageInk": 6734,
+        "exactDifference": 0.18478551464333454,
+        "perceptualDifference": 0.1378660833637137,
+        "normalizedInkCountDelta": 0.3666886109282423
+      },
+      {
+        "cellKey": "mui/size=medium/state=error/content=placeholder/required=false/adornments=both",
+        "geometryError": 0.025344394148006676,
+        "pixelInkCompositeError": 0.16370568735885954,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 79
+        },
+        "referenceImageInk": 7659,
+        "liveImageInk": 10582,
+        "exactDifference": 0.16257245897924888,
+        "perceptualDifference": 0.11063801665376409,
+        "normalizedInkCountDelta": 0.38164251207729466
+      },
+      {
+        "cellKey": "mui/size=medium/state=error/content=placeholder/required=true/adornments=both",
+        "geometryError": 0.025344394148006676,
+        "pixelInkCompositeError": 0.16327269998219107,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 79
+        },
+        "referenceImageInk": 7698,
+        "liveImageInk": 10587,
+        "exactDifference": 0.16300674080927474,
+        "perceptualDifference": 0.11060025301637054,
+        "normalizedInkCountDelta": 0.3752922837100546
+      },
+      {
+        "cellKey": "mui/size=medium/state=error/content=value/required=false/adornments=both",
+        "geometryError": 0.025344394148006676,
+        "pixelInkCompositeError": 0.15602399435741957,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 79
+        },
+        "referenceImageInk": 6430,
+        "liveImageInk": 9469,
+        "exactDifference": 0.13925341288872944,
+        "perceptualDifference": 0.09783614357734938,
+        "normalizedInkCountDelta": 0.47262830482115087
+      },
+      {
+        "cellKey": "mui/size=medium/state=error/content=value/required=true/adornments=both",
+        "geometryError": 0.025344394148006676,
+        "pixelInkCompositeError": 0.15541551035715623,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 79
+        },
+        "referenceImageInk": 6469,
+        "liveImageInk": 9474,
+        "exactDifference": 0.1396876947187553,
+        "perceptualDifference": 0.09779837993995581,
+        "normalizedInkCountDelta": 0.4645231102179626
+      },
+      {
+        "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=false/adornments=both",
+        "geometryError": 0.025344394148006676,
+        "pixelInkCompositeError": 0.16764708608190645,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 79
+        },
+        "referenceImageInk": 7801,
+        "liveImageInk": 10822,
+        "exactDifference": 0.16744396820301732,
+        "perceptualDifference": 0.1129982439908612,
+        "normalizedInkCountDelta": 0.38725804384053325
+      },
+      {
+        "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=true/adornments=both",
+        "geometryError": 0.025344394148006676,
+        "pixelInkCompositeError": 0.16721808649915282,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 79
+        },
+        "referenceImageInk": 7840,
+        "liveImageInk": 10827,
+        "exactDifference": 0.16786880912369478,
+        "perceptualDifference": 0.11296048035346765,
+        "normalizedInkCountDelta": 0.3809948979591837
+      },
+      {
+        "cellKey": "mui/size=medium/state=disabled/content=value/required=false/adornments=both",
+        "geometryError": 0.025344394148006676,
+        "pixelInkCompositeError": 0.15874685392416177,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 79
+        },
+        "referenceImageInk": 6627,
+        "liveImageInk": 9709,
+        "exactDifference": 0.14432318120881404,
+        "perceptualDifference": 0.10019637091444648,
+        "normalizedInkCountDelta": 0.4650671495397616
+      },
+      {
+        "cellKey": "mui/size=medium/state=disabled/content=value/required=true/adornments=both",
+        "geometryError": 0.025344394148006676,
+        "pixelInkCompositeError": 0.15816202643281266,
+        "referenceContentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        },
+        "liveContentBox": {
+          "width": 251,
+          "height": 79
+        },
+        "referenceImageInk": 6666,
+        "liveImageInk": 9714,
+        "exactDifference": 0.1447480221294915,
+        "perceptualDifference": 0.10015860727705292,
+        "normalizedInkCountDelta": 0.45724572457245727
+      }
+    ]
+  },
+  "v2RasterLosses": {
+    "geometry": {
+      "library": {
+        "mui": 16
+      },
+      "size": {
+        "medium": 16
+      },
+      "state": {
+        "default": 4,
+        "focus-visible": 4,
+        "error": 4,
+        "disabled": 4
+      },
+      "content": {
+        "placeholder": 8,
+        "value": 8
+      },
+      "required": {
+        "false": 8,
+        "true": 8
+      },
+      "adornments": {
+        "both": 16
+      }
+    },
+    "pixelInk": {
+      "library": {
+        "mui": 41
+      },
+      "size": {
+        "small": 23,
+        "medium": 18
+      },
+      "state": {
+        "default": 10,
+        "focus-visible": 14,
+        "error": 8,
+        "disabled": 9
+      },
+      "content": {
+        "placeholder": 20,
+        "value": 21
+      },
+      "required": {
+        "false": 20,
+        "true": 21
+      },
+      "adornments": {
+        "both": 30,
+        "none": 11
+      }
+    }
+  },
+  "modelDefects": [
+    {
+      "id": "floating-overlay-unmodeled",
+      "evidence": "input-field@1 encodes negative floating offsets as padding and the v1 writer clamps negative padding to zero; Plugin API output therefore cannot reproduce the declared notch/overlay geometry",
+      "fix": "add explicit recipe-owned overlay positioning with constraints and declared overhang; lower it to ABSOLUTE only for nodes carrying that primitive"
+    },
+    {
+      "id": "content-fill-lost-after-component-property",
+      "evidence": "MUI root and surface grew by 64px while content stayed 118px; Polaris content grew by 64px",
+      "fix": "reassert FILL sizing on content rows and role text after component-property references are attached"
+    },
+    {
+      "id": "font-and-capture-raster-drift",
+      "evidence": "complete pixel/ink losses are enumerated by source/state/axis below; exact and perceptual deltas remain nonzero even where geometry wins",
+      "fix": "record resolved font metrics and refuse a fallback whose measured glyph geometry differs from adapter-declared reference metrics beyond explicit tolerances"
+    }
+  ],
+  "hardStopEvaluation": {
+    "sourceSpecificGenericBranchRequired": false,
+    "reason": "all defects are selected by generic structure/sizing/font parameters already supplied by explicit adapters"
+  }
+}

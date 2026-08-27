@@ -1,0 +1,787 @@
+{
+  "version": "paired-comparison-gold-v1",
+  "protocolVersion": "input-field-relative-fidelity-v1",
+  "phase": "gold",
+  "status": "opaque-ungraded",
+  "protocolCommitment": "64f071edba0bf024ace7cd5875838727120092854db041ecb17a8aca89d707c8",
+  "rubricVersion": "input-field-paired-observable-rubric-v1",
+  "rubric": {
+    "version": "input-field-paired-observable-rubric-v1",
+    "claim": "Choose which opaque candidate is closer to the independent original-source reference for this exact cell; this is relative fidelity, not absolute recognisability.",
+    "decisionOrder": [
+      {
+        "rank": 1,
+        "category": "structure-and-state",
+        "rule": "Required roles, visible content, adornments, and semantic state dominate every lower-ranked difference."
+      },
+      {
+        "rank": 2,
+        "category": "geometry-and-proportions",
+        "rule": "Compare silhouette, dimensions, padding, gaps, alignment, scale, clipping, and overlap."
+      },
+      {
+        "rank": 3,
+        "category": "labels-helpers-adornments",
+        "rule": "Compare wording, role placement, required marker, helper/error message, and leading/trailing adornments."
+      },
+      {
+        "rank": 4,
+        "category": "typography",
+        "rule": "Compare hierarchy, line count, wrapping, baseline, size, and weight; raster-only shifts may be tolerated."
+      },
+      {
+        "rank": 5,
+        "category": "border-fill-focus-error",
+        "rule": "Compare border/fill classes and focus, error, and disabled treatments after all higher ranks."
+      }
+    ],
+    "materialityTolerances": {
+      "overallWidthOrHeight": "material only when deviation exceeds both 4 px and 8% of the reference dimension",
+      "localSpacing": "material only when deviation exceeds both 4 px and 20% of the reference spacing",
+      "roleDefiningScale": "material above 10%",
+      "clipping": "material above 5% of a required part's visible area",
+      "overlap": "material above 2 px between required parts",
+      "glyphEdgeShift": "within 1 px is immaterial when hierarchy and wrapping stay unchanged",
+      "color": "immaterial only within both 12 per-channel sRGB and 20 Euclidean sRGB, with semantic state and contrast role unchanged"
+    },
+    "choiceRule": "At the first ranked category that distinguishes candidates, choose the candidate with fewer or smaller material defects relative to the reference. A candidate can be closer even when neither would pass an absolute gate. 'Both fail' is not a valid reason to avoid choosing.",
+    "tieRule": "Choose tie only when neither candidate is distinguished at any ranked category and their residual difference magnitudes are equivalent within 1 px geometry, 1% role scale, 1 px glyph shift, and 2 per-channel/3 Euclidean sRGB. The tie basis must name the measured tolerance or exact equality.",
+    "rationaleRule": "Every non-tie names the decisive ranked difference and at least one concrete defect in the losing candidate. Never infer candidate provenance or compare tasks."
+  },
+  "instructions": [
+    "For each task compare the independent reference with opaque Candidate Left and Candidate Right.",
+    "Use the locked decision order and materiality tolerances. Choose left, right, or tie; never infer provenance.",
+    "A non-tie requires decisive differences and concrete defects in the losing candidate. A tie requires a measured tolerance or exact-equality basis.",
+    "Do not compare tasks, search parent directories, inspect keys, or infer hidden controls."
+  ],
+  "gradeSchema": "recipe/evidence/input-field-paired-comparison-v1/grade.schema.json",
+  "preflight": "npx tsx recipe/input-field-paired-comparison-v1.ts --preflight <grade-file>",
+  "counts": {
+    "tasks": 48,
+    "primaryTasks": 24,
+    "sideSwappedHiddenDuplicates": 24
+  },
+  "randomizedBatchHash": "de2e95a6377830cc2da0020b05564c0e03592478f7bcfe6944515b343112c963",
+  "tasks": [
+    {
+      "taskId": "task-259f9336e4f11ec4da1d84b4",
+      "reference": {
+        "referenceId": "reference-94707499f796e38077e34b1a",
+        "image": "images/image-1541fe2aea0d5763f7693520.png"
+      },
+      "left": {
+        "candidateId": "candidate-f8d253c99b40cf46e28650d9",
+        "image": "images/image-4422efbafe07b4b2ce44392d.png"
+      },
+      "right": {
+        "candidateId": "candidate-045ea2fe74764bc4c1efefec",
+        "image": "images/image-b79029a1fd8a64e1e42bc5a4.png"
+      }
+    },
+    {
+      "taskId": "task-1af621bc171363951343aecb",
+      "reference": {
+        "referenceId": "reference-427a99a063ae03859d3755f4",
+        "image": "images/image-8aa50deaa3500c0a7c692e61.png"
+      },
+      "left": {
+        "candidateId": "candidate-78a7218512a61a3b15556882",
+        "image": "images/image-9be72bdce83e58b2c7eec2f9.png"
+      },
+      "right": {
+        "candidateId": "candidate-ddc341014c1375ba8a21b9a2",
+        "image": "images/image-c2a49341f4f758bf7faeba8e.png"
+      }
+    },
+    {
+      "taskId": "task-7d484ec87772b06e33ecef26",
+      "reference": {
+        "referenceId": "reference-579f3d0491ff659f22e9800e",
+        "image": "images/image-fbfebfad6c45f490586334bf.png"
+      },
+      "left": {
+        "candidateId": "candidate-f1fc2fe2af2153c10d34fdee",
+        "image": "images/image-83d2a1390ef91c68c660e1a1.png"
+      },
+      "right": {
+        "candidateId": "candidate-3c43cf88d9e9df5c7bc8cdb8",
+        "image": "images/image-3415ea6de671cafe6ca0904b.png"
+      }
+    },
+    {
+      "taskId": "task-7a3115734c12736aa30c0599",
+      "reference": {
+        "referenceId": "reference-f9a3106ad70c8797edad13a8",
+        "image": "images/image-ec512da89fbe823db001c129.png"
+      },
+      "left": {
+        "candidateId": "candidate-c813ca0fdea32d9b6ddb0626",
+        "image": "images/image-425adf6e129e1985fcd1cc0c.png"
+      },
+      "right": {
+        "candidateId": "candidate-d0e67c100eca529af469d90d",
+        "image": "images/image-4ba41473c11ba1d59a6c9b5a.png"
+      }
+    },
+    {
+      "taskId": "task-80e3b154882e2eaf8303487b",
+      "reference": {
+        "referenceId": "reference-4c5fd25fcc2546f694fd0b35",
+        "image": "images/image-962efe2e751f027b626a72c8.png"
+      },
+      "left": {
+        "candidateId": "candidate-17c33b245d0308821f075619",
+        "image": "images/image-9029de75e47045238031d951.png"
+      },
+      "right": {
+        "candidateId": "candidate-4c6c0286bbe64a12a7938742",
+        "image": "images/image-131951c25502789e8d425ca3.png"
+      }
+    },
+    {
+      "taskId": "task-7c83af503888af50ab086ada",
+      "reference": {
+        "referenceId": "reference-8f724d0f76c4475c76272afe",
+        "image": "images/image-88b85b481084006632a36da7.png"
+      },
+      "left": {
+        "candidateId": "candidate-d5587bf0fbb4c07c4637eb1c",
+        "image": "images/image-a0f8926d97b7516fc016fe7d.png"
+      },
+      "right": {
+        "candidateId": "candidate-6f6581957d5a1d6b6b8c889d",
+        "image": "images/image-9a9fcfa6b4e7a1c1cdc94400.png"
+      }
+    },
+    {
+      "taskId": "task-9be4a9f37eb5cb3daafa4d13",
+      "reference": {
+        "referenceId": "reference-dbddd5ecdfc2adf3a7cf964d",
+        "image": "images/image-fd6aa081f0bbb68b4e85b804.png"
+      },
+      "left": {
+        "candidateId": "candidate-4873c417631ffa73b3ba8285",
+        "image": "images/image-499f2bbc2878896a358190ba.png"
+      },
+      "right": {
+        "candidateId": "candidate-1e802616fab2a7be6b96d0d6",
+        "image": "images/image-9f81497bcb5bdcf1f2f0923b.png"
+      }
+    },
+    {
+      "taskId": "task-9e68b2e10cd59369bb862718",
+      "reference": {
+        "referenceId": "reference-04fab407babcbff570f31fc5",
+        "image": "images/image-71c1f2dd15f925cf9d462aaa.png"
+      },
+      "left": {
+        "candidateId": "candidate-b0a38837d3d032da051a67c9",
+        "image": "images/image-eb6a34784cdfa4208575e89e.png"
+      },
+      "right": {
+        "candidateId": "candidate-3e6691a0be3ecba9dc60f14f",
+        "image": "images/image-9c26c74388752783d87900f9.png"
+      }
+    },
+    {
+      "taskId": "task-ae3f1bf36f747b271dd5f0fb",
+      "reference": {
+        "referenceId": "reference-f0d631f65afaaae2fb78c79e",
+        "image": "images/image-fbba0f34b9f5e83d44a04fe2.png"
+      },
+      "left": {
+        "candidateId": "candidate-ae1019777e3186af5b1e0d3d",
+        "image": "images/image-d33109598a93c48154a3c56f.png"
+      },
+      "right": {
+        "candidateId": "candidate-407f9ed342355ca90266bfd0",
+        "image": "images/image-3579dbbe11aacc435a3d764b.png"
+      }
+    },
+    {
+      "taskId": "task-db3c41e9fcca1366b96e0b18",
+      "reference": {
+        "referenceId": "reference-d168c9fd548b1f460dc63045",
+        "image": "images/image-4a1f5d3396df14b909de7b32.png"
+      },
+      "left": {
+        "candidateId": "candidate-591d4f18cfbf32aa4a813fcd",
+        "image": "images/image-936f84020688a8562f428a26.png"
+      },
+      "right": {
+        "candidateId": "candidate-ac417731a20e2c6693495e7f",
+        "image": "images/image-6bd4746679ff6b9366af3085.png"
+      }
+    },
+    {
+      "taskId": "task-7167c01ba3e548e527956c3c",
+      "reference": {
+        "referenceId": "reference-07c92a13f058eb71a31ede5a",
+        "image": "images/image-14ec20ea78adf688bd1d3ad4.png"
+      },
+      "left": {
+        "candidateId": "candidate-fc1b2f0c1c3c6306eca0f1ad",
+        "image": "images/image-04285ca87fb30e7dfeabfc79.png"
+      },
+      "right": {
+        "candidateId": "candidate-42a4991e79d369312e0487d9",
+        "image": "images/image-01ef6b2189383d77a9a3e48a.png"
+      }
+    },
+    {
+      "taskId": "task-27b7edb0ccf420ecb9a40e99",
+      "reference": {
+        "referenceId": "reference-50ca442b86ce0c0ef71d76a4",
+        "image": "images/image-a246ea93e5b82c4ad1d848f7.png"
+      },
+      "left": {
+        "candidateId": "candidate-d89af3b9e1980ec845cd9ffd",
+        "image": "images/image-f4f906c51ba732027ce5b2ea.png"
+      },
+      "right": {
+        "candidateId": "candidate-ee1082beb44a56bbc441cb4e",
+        "image": "images/image-e1b162a996fb338d2277e3e2.png"
+      }
+    },
+    {
+      "taskId": "task-02f59bf03e4d7eca134cfbf2",
+      "reference": {
+        "referenceId": "reference-9252df4d7bdf4ee68bf29777",
+        "image": "images/image-c99ce6e91c17265c3cb5c845.png"
+      },
+      "left": {
+        "candidateId": "candidate-94955870124e5b3496d2f852",
+        "image": "images/image-ac00d9a7b7748b9a0cac3ff6.png"
+      },
+      "right": {
+        "candidateId": "candidate-a0f836cb37e080b878dcf7aa",
+        "image": "images/image-f26e548817d906702cc4daed.png"
+      }
+    },
+    {
+      "taskId": "task-43a9ca53ec811ec710090a17",
+      "reference": {
+        "referenceId": "reference-595d20d7d1670c56c1a179e1",
+        "image": "images/image-38d80e40c7742c8ecfe56032.png"
+      },
+      "left": {
+        "candidateId": "candidate-1649b79faf7b0524198cc7d6",
+        "image": "images/image-ed8a837e26f29b658eb0065a.png"
+      },
+      "right": {
+        "candidateId": "candidate-20763dd5f470e332fbb7371d",
+        "image": "images/image-af132a78819ac09f9db05f80.png"
+      }
+    },
+    {
+      "taskId": "task-b90701a555a792cd02e0d8aa",
+      "reference": {
+        "referenceId": "reference-127e25220aebb1a5cb422234",
+        "image": "images/image-1886552327993ae02e197041.png"
+      },
+      "left": {
+        "candidateId": "candidate-4f8ec32ccc9617b606a2dbcc",
+        "image": "images/image-4ddc78b28e8ee549bbf4f707.png"
+      },
+      "right": {
+        "candidateId": "candidate-ab6ea7c50aedec89d1588fd2",
+        "image": "images/image-6eba435bbce70f3db6659988.png"
+      }
+    },
+    {
+      "taskId": "task-b0bc8dc11f744a5f49a569f9",
+      "reference": {
+        "referenceId": "reference-c1271ddfd7a357563f9354e7",
+        "image": "images/image-3cde3629fc72971cf3da5a8a.png"
+      },
+      "left": {
+        "candidateId": "candidate-09a9d8e23ad8b7ce3a58530a",
+        "image": "images/image-52562dfb94da8aabcb28e407.png"
+      },
+      "right": {
+        "candidateId": "candidate-79924d297521229e14ca5699",
+        "image": "images/image-ac2649facb31ea3ba86c3b9e.png"
+      }
+    },
+    {
+      "taskId": "task-8d4a981dd589284c5e65187d",
+      "reference": {
+        "referenceId": "reference-abb7bde4be2db89a98fb8eb3",
+        "image": "images/image-8f3405f6a567ff0e4853618f.png"
+      },
+      "left": {
+        "candidateId": "candidate-241a7d4060f5ee4f0b5b2a89",
+        "image": "images/image-8d852f0dbceb93fa140a7a58.png"
+      },
+      "right": {
+        "candidateId": "candidate-b43aa9c2011bd3534dbac3bd",
+        "image": "images/image-df530ba3fbefc6908776e8ed.png"
+      }
+    },
+    {
+      "taskId": "task-cc61fbfeac9017c050b796ef",
+      "reference": {
+        "referenceId": "reference-7065197051bb5c312eb77c25",
+        "image": "images/image-ea12265d769c00f8ac855bd1.png"
+      },
+      "left": {
+        "candidateId": "candidate-56f9950da4a5a06ed547503f",
+        "image": "images/image-d33696e593517a43e6ac9292.png"
+      },
+      "right": {
+        "candidateId": "candidate-a2395abd13e03e507f60b0ef",
+        "image": "images/image-72be996760a19c5b34092aed.png"
+      }
+    },
+    {
+      "taskId": "task-39155594ca9eb749658a16b7",
+      "reference": {
+        "referenceId": "reference-bc646beb35939c70451da666",
+        "image": "images/image-673e3e33aada9be52effedef.png"
+      },
+      "left": {
+        "candidateId": "candidate-b487d2f4adc9293316514490",
+        "image": "images/image-b733d1761f3c79058d7715b4.png"
+      },
+      "right": {
+        "candidateId": "candidate-dda78a29c7f1d36283cc930f",
+        "image": "images/image-ddc67c943acced14f3bec2f5.png"
+      }
+    },
+    {
+      "taskId": "task-f01411cda38b2a898824c81d",
+      "reference": {
+        "referenceId": "reference-829affcf4d95ceecd23068fd",
+        "image": "images/image-19c1ae462de04238b4f58ab4.png"
+      },
+      "left": {
+        "candidateId": "candidate-fd165acdcba6f0caeb73e45c",
+        "image": "images/image-cb03991943325ad2999ec6c0.png"
+      },
+      "right": {
+        "candidateId": "candidate-59f0d8aa2d28af61fd340de8",
+        "image": "images/image-a04ae986cf41bfec8f2a1aeb.png"
+      }
+    },
+    {
+      "taskId": "task-336c78312a11e3dc70e4654c",
+      "reference": {
+        "referenceId": "reference-d714d2042eff2d6cd5003298",
+        "image": "images/image-cbfe073bf7b0c1d527f7e5f1.png"
+      },
+      "left": {
+        "candidateId": "candidate-1c14994d98dd0065b6c694bf",
+        "image": "images/image-aa16c7bf00c3a88b1c67c6e2.png"
+      },
+      "right": {
+        "candidateId": "candidate-177381c61c77b242328b6d5c",
+        "image": "images/image-42d6dfcecf7169ab3a3b6206.png"
+      }
+    },
+    {
+      "taskId": "task-39ffc344ddb3ed6ad16632b4",
+      "reference": {
+        "referenceId": "reference-f8296ff3fa06686dd9940876",
+        "image": "images/image-522ddcda57e9bd5399c4f4fc.png"
+      },
+      "left": {
+        "candidateId": "candidate-c99b1e6d51033af3f3b08351",
+        "image": "images/image-fde4b8c98875eb62587e8dd4.png"
+      },
+      "right": {
+        "candidateId": "candidate-54d8100b0113f38a2899ef7a",
+        "image": "images/image-cb9a55a8f00d27046a4080c4.png"
+      }
+    },
+    {
+      "taskId": "task-ff260d34befb62a8ebc89735",
+      "reference": {
+        "referenceId": "reference-64140e0b8c1bdeeb22961f1b",
+        "image": "images/image-f19d9c002ddbe2f557a95e09.png"
+      },
+      "left": {
+        "candidateId": "candidate-107746036d1558c79f2d55a6",
+        "image": "images/image-2f0834df724f6a4eb77ab08d.png"
+      },
+      "right": {
+        "candidateId": "candidate-f4133b2b094b84b773d67c37",
+        "image": "images/image-6674a94155ad170f6d924ed8.png"
+      }
+    },
+    {
+      "taskId": "task-890718ad8d964f109591b4e5",
+      "reference": {
+        "referenceId": "reference-777891850f98fd2b8e067295",
+        "image": "images/image-2ad71477e1779ed62eb41d05.png"
+      },
+      "left": {
+        "candidateId": "candidate-0fb89ecdaa36e10afa3ff33a",
+        "image": "images/image-bc6c6f64d465aec069ef5362.png"
+      },
+      "right": {
+        "candidateId": "candidate-84751a92dc12f5734f2b75b8",
+        "image": "images/image-5ca38a74f540c99144f04e01.png"
+      }
+    },
+    {
+      "taskId": "task-aa58f7b6ab22bd445c4d9041",
+      "reference": {
+        "referenceId": "reference-8ba235503f3699d0aa4b9f75",
+        "image": "images/image-d168eb9db2adc4a7b0753b11.png"
+      },
+      "left": {
+        "candidateId": "candidate-12305f6a6135063d3d69ebd5",
+        "image": "images/image-87e254d86c411dae949d902b.png"
+      },
+      "right": {
+        "candidateId": "candidate-902a1c1635ff68d8ef4725f6",
+        "image": "images/image-3f8eb82fb07eb0c3fcac1cdc.png"
+      }
+    },
+    {
+      "taskId": "task-6dabb60cee0bbd0177a646a5",
+      "reference": {
+        "referenceId": "reference-ee162072002a2f0ec4fcb501",
+        "image": "images/image-e4caae0e45b48abdcb5d330d.png"
+      },
+      "left": {
+        "candidateId": "candidate-fd5b7b8c45b0c0730cbb65f0",
+        "image": "images/image-bb7394823b3475854882a62f.png"
+      },
+      "right": {
+        "candidateId": "candidate-a94e1757ce9515c62dc47144",
+        "image": "images/image-bac3654466bcbaa49bd666da.png"
+      }
+    },
+    {
+      "taskId": "task-15c978c97abb865721d55da7",
+      "reference": {
+        "referenceId": "reference-fbc74cb7b89af22985c91463",
+        "image": "images/image-a0d29970dbfb2c0a1b70d6b0.png"
+      },
+      "left": {
+        "candidateId": "candidate-06f0fcb4bfbdcaa72bd4fdd0",
+        "image": "images/image-f2761bea492a6d8e54f6c382.png"
+      },
+      "right": {
+        "candidateId": "candidate-65a395040fe2100122dab27e",
+        "image": "images/image-0552b88643e8ebbcafdfabff.png"
+      }
+    },
+    {
+      "taskId": "task-adb9cbde393bc2d5ca91fd50",
+      "reference": {
+        "referenceId": "reference-dd397abc3a3b76513cd325f1",
+        "image": "images/image-52ea66fb0aadeb38d82ac317.png"
+      },
+      "left": {
+        "candidateId": "candidate-6dcb52a58569dc5fb8acd52d",
+        "image": "images/image-467b8c9ee48c9e46733af0b9.png"
+      },
+      "right": {
+        "candidateId": "candidate-630cbba4c3fa35fbe363ea39",
+        "image": "images/image-6bd660b5bc1d683aa8a80a72.png"
+      }
+    },
+    {
+      "taskId": "task-4c4d61b27546b998acd74c95",
+      "reference": {
+        "referenceId": "reference-18091876c9d0e5bc1e0db08f",
+        "image": "images/image-90b36850e4dc16db4819285b.png"
+      },
+      "left": {
+        "candidateId": "candidate-60190e9c60752c9ca2731fed",
+        "image": "images/image-b1d8b70cf2d34eddefb914f9.png"
+      },
+      "right": {
+        "candidateId": "candidate-6673342fd684b5979b563827",
+        "image": "images/image-0c0e76a5276582d929c978a0.png"
+      }
+    },
+    {
+      "taskId": "task-4bdfd926e26ad180782c183e",
+      "reference": {
+        "referenceId": "reference-3567b1179364eb634b33f570",
+        "image": "images/image-246b140bc7c5a8a2091208d2.png"
+      },
+      "left": {
+        "candidateId": "candidate-2d579080219ee1700daf3546",
+        "image": "images/image-2945bef7ffb6ca16a5fb1625.png"
+      },
+      "right": {
+        "candidateId": "candidate-ae80005c5ea5c19ebb42bb92",
+        "image": "images/image-4f6eeecb5e9f546b0ffc409f.png"
+      }
+    },
+    {
+      "taskId": "task-5350a1f7f73ba2e1fbdd61ea",
+      "reference": {
+        "referenceId": "reference-0e8f4df51cf2a941cc9d0229",
+        "image": "images/image-06abe1a4ff5d862f6af56a75.png"
+      },
+      "left": {
+        "candidateId": "candidate-bd5dbb8d54521e4af76609eb",
+        "image": "images/image-e441ff28121680ea80c183bd.png"
+      },
+      "right": {
+        "candidateId": "candidate-bb1282a1faf728dd9acbe5a7",
+        "image": "images/image-256f61147eda6e291c345fba.png"
+      }
+    },
+    {
+      "taskId": "task-5cd9fe961ef90e5c34a674d2",
+      "reference": {
+        "referenceId": "reference-b1bf5daf3c0556735db84a87",
+        "image": "images/image-9be647c989c1e3678d7b32f3.png"
+      },
+      "left": {
+        "candidateId": "candidate-a3611731ebcde7220e6e2737",
+        "image": "images/image-a2ffb1f7d2d9eb877ddbff43.png"
+      },
+      "right": {
+        "candidateId": "candidate-9f2ce3a52c7285a4d9f9ec1a",
+        "image": "images/image-afe24640692e3d3193d9c8ef.png"
+      }
+    },
+    {
+      "taskId": "task-6847d246bf136daec081d8bf",
+      "reference": {
+        "referenceId": "reference-ab3a0c6f2fe544537791e569",
+        "image": "images/image-eb4309fe5a1d0f6e71a484fe.png"
+      },
+      "left": {
+        "candidateId": "candidate-6286d3cd17c664108be65484",
+        "image": "images/image-3dee7c01d8d0638becc7235a.png"
+      },
+      "right": {
+        "candidateId": "candidate-5ca8227d9222aa5eab1ce6d5",
+        "image": "images/image-e567eaa5c0a31ea2b5e84e50.png"
+      }
+    },
+    {
+      "taskId": "task-5eb905de982d529c803e08c3",
+      "reference": {
+        "referenceId": "reference-95abcef6ba7c14ad42a03739",
+        "image": "images/image-fa4815c9fd84a9ef9e49e923.png"
+      },
+      "left": {
+        "candidateId": "candidate-ab3d03af8d5fda034173dc4c",
+        "image": "images/image-171f7c7b1e8c0448479f0233.png"
+      },
+      "right": {
+        "candidateId": "candidate-8cf78b48672a522dae877a8f",
+        "image": "images/image-72b6e872da6487efcec14989.png"
+      }
+    },
+    {
+      "taskId": "task-f7a734df3fc7a093d06e9ea3",
+      "reference": {
+        "referenceId": "reference-cf71f4a1214d5b126357dabc",
+        "image": "images/image-12b7c56582b783437f26a746.png"
+      },
+      "left": {
+        "candidateId": "candidate-e1c77a643626509f79e4202b",
+        "image": "images/image-c4e9299d91c510f8f5c6c2d1.png"
+      },
+      "right": {
+        "candidateId": "candidate-1319e58589b253c5f694a625",
+        "image": "images/image-0458860c3b9bdfca15ff6356.png"
+      }
+    },
+    {
+      "taskId": "task-4a14236fde0c1c5fa64c0492",
+      "reference": {
+        "referenceId": "reference-9624e479f097dfbeddc7b605",
+        "image": "images/image-4bd3dc30b2a6c7e301e407a9.png"
+      },
+      "left": {
+        "candidateId": "candidate-80a6f6df8bae00fa19451408",
+        "image": "images/image-636dd9dd317293e611c2e53a.png"
+      },
+      "right": {
+        "candidateId": "candidate-80ca03c8370389a958a18db4",
+        "image": "images/image-ff7879dc0a928c603ac4e001.png"
+      }
+    },
+    {
+      "taskId": "task-9601e349614e67af17a291f2",
+      "reference": {
+        "referenceId": "reference-e00ce957f2970b5a24e1918c",
+        "image": "images/image-4c14e0e1c76cc773501857d7.png"
+      },
+      "left": {
+        "candidateId": "candidate-99db65440bda950c8707f79c",
+        "image": "images/image-59d15e6b8f4bb61dc1a803c3.png"
+      },
+      "right": {
+        "candidateId": "candidate-e9187a0c3bb7a4b156a07902",
+        "image": "images/image-bf6804dcd9a88c4477244520.png"
+      }
+    },
+    {
+      "taskId": "task-b7f8c879dec951571d1bb4ce",
+      "reference": {
+        "referenceId": "reference-3a9d8a3b6a6b038a6c1e7eb4",
+        "image": "images/image-f34f4010db2a705a2175660f.png"
+      },
+      "left": {
+        "candidateId": "candidate-1c2654e45affd85bcbaf6541",
+        "image": "images/image-e5ee50517ed83c911a87072b.png"
+      },
+      "right": {
+        "candidateId": "candidate-3a840f7871537e84c59c3e26",
+        "image": "images/image-39d5cb35b9f04c0433302a04.png"
+      }
+    },
+    {
+      "taskId": "task-afc3683608778c7bf15253bc",
+      "reference": {
+        "referenceId": "reference-91566ca7fa5f02adb9e7d33b",
+        "image": "images/image-1985c2e7125aca718d5799ae.png"
+      },
+      "left": {
+        "candidateId": "candidate-ef125035462bff4a01c73059",
+        "image": "images/image-e477d4533b1345b3c5a4fbb5.png"
+      },
+      "right": {
+        "candidateId": "candidate-1dd8f922ea103a304e8c6346",
+        "image": "images/image-7b6798fa09cac8b8a08749c5.png"
+      }
+    },
+    {
+      "taskId": "task-ffca121f0a312ed10451e722",
+      "reference": {
+        "referenceId": "reference-cb888e7dd1dc85644a7ce364",
+        "image": "images/image-7a7e10763f3b57542741600c.png"
+      },
+      "left": {
+        "candidateId": "candidate-66876fe72f90753861db3db3",
+        "image": "images/image-7dd2e87feab55e3ce81e0c49.png"
+      },
+      "right": {
+        "candidateId": "candidate-afdb2cb589375672c8781696",
+        "image": "images/image-f6403a844ffeaf71237090b6.png"
+      }
+    },
+    {
+      "taskId": "task-a0a7855f2058da3aa05afdd8",
+      "reference": {
+        "referenceId": "reference-47527155bf380c7f911770b0",
+        "image": "images/image-50769e60ae95471c781a3dd9.png"
+      },
+      "left": {
+        "candidateId": "candidate-671e34f1460a2525d076d3ee",
+        "image": "images/image-00a3cfbe36b84747dbd0e4a5.png"
+      },
+      "right": {
+        "candidateId": "candidate-b0e27c9d13e9f9db15b2063b",
+        "image": "images/image-ee985dbab041b4e81ab94f17.png"
+      }
+    },
+    {
+      "taskId": "task-4359e0d8e46a7630ebe84309",
+      "reference": {
+        "referenceId": "reference-4ae44ba815e34c7f208b95b7",
+        "image": "images/image-978121cb790a5909f39b60ad.png"
+      },
+      "left": {
+        "candidateId": "candidate-bc365a73c3c6cd76e42af946",
+        "image": "images/image-578df3c36c977ce5d0bbd231.png"
+      },
+      "right": {
+        "candidateId": "candidate-71d68e2c2b3cf41184df36ab",
+        "image": "images/image-9c1ead81ac7e1e2e04f76628.png"
+      }
+    },
+    {
+      "taskId": "task-bcd0a8cb3e4dd32cff5ec1ef",
+      "reference": {
+        "referenceId": "reference-178cd19dd21e239df3222a4b",
+        "image": "images/image-2b37bddabb09331e00539aa5.png"
+      },
+      "left": {
+        "candidateId": "candidate-e8eaaea304fca939d3e02a78",
+        "image": "images/image-0a8ca712af20c83653cb108e.png"
+      },
+      "right": {
+        "candidateId": "candidate-e2a987c3cd5e19325427f424",
+        "image": "images/image-f60c10ef8fd562135426a972.png"
+      }
+    },
+    {
+      "taskId": "task-38cd269163f7f82119c0560f",
+      "reference": {
+        "referenceId": "reference-ec3edf9293675ea7a5f27fb4",
+        "image": "images/image-bb62f9ddce12bdb03c68c491.png"
+      },
+      "left": {
+        "candidateId": "candidate-127022505a3c99b2b56553cf",
+        "image": "images/image-a145386e3f93ae2f85f7f86a.png"
+      },
+      "right": {
+        "candidateId": "candidate-602787ab85b40808540aa2ed",
+        "image": "images/image-05590520c5af72240a70cb40.png"
+      }
+    },
+    {
+      "taskId": "task-6765eb31c71b9f0caafddd4b",
+      "reference": {
+        "referenceId": "reference-d852f0ad41a507ec5cd187ca",
+        "image": "images/image-4207638229e3171bc5ff54eb.png"
+      },
+      "left": {
+        "candidateId": "candidate-9a2bcb5fdde6266c09fda777",
+        "image": "images/image-3953bb5fe9366c78f944c1ff.png"
+      },
+      "right": {
+        "candidateId": "candidate-01b8576b4c82f2861228afae",
+        "image": "images/image-95787ddb9ce5202c7d1e17d6.png"
+      }
+    },
+    {
+      "taskId": "task-e24f4253e97c96004270e477",
+      "reference": {
+        "referenceId": "reference-004b4427e98ffb2358bed2f8",
+        "image": "images/image-0e65d3d361dc13d828db05dc.png"
+      },
+      "left": {
+        "candidateId": "candidate-4a1b1391a6b10d781969cf98",
+        "image": "images/image-313dc2f4509f48a0de77959b.png"
+      },
+      "right": {
+        "candidateId": "candidate-aba0ab0ef4a370390a29448c",
+        "image": "images/image-25a135fdf9c6abae7ee4189e.png"
+      }
+    },
+    {
+      "taskId": "task-a4b31b99436a479d064ed261",
+      "reference": {
+        "referenceId": "reference-01818c3a18f95543ca0f2f2e",
+        "image": "images/image-07699595a67daf91f97d2de2.png"
+      },
+      "left": {
+        "candidateId": "candidate-04dbbb0940de44cd72c633ea",
+        "image": "images/image-7cabe1060a9ab741e092aa0d.png"
+      },
+      "right": {
+        "candidateId": "candidate-65947e0dc183531f8da600ad",
+        "image": "images/image-2f6cce6d0815d3c3a7e36af0.png"
+      }
+    },
+    {
+      "taskId": "task-076195318cb455a8d414d1b3",
+      "reference": {
+        "referenceId": "reference-16d3331fcdd0f125f3ec592f",
+        "image": "images/image-a83dbf74e40202062570cdd5.png"
+      },
+      "left": {
+        "candidateId": "candidate-1bceb68072d14e6986e14bad",
+        "image": "images/image-346b9fe6d2467f0898cf6405.png"
+      },
+      "right": {
+        "candidateId": "candidate-f0683428776fddd7eae0a5a4",
+        "image": "images/image-f76411fea49bb2e3640e213a.png"
+      }
+    }
+  ]
+}

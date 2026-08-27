@@ -1,0 +1,561 @@
+{
+  "artifactVersion": "button-live-final-adjudication-v4",
+  "inputHashes": {
+    "packet": "054763d1602ba476414fd072701410200c0c3006d37d77ea5a7831abfba58e46",
+    "grades": "457c572436f71bdba8841342880ba46585540f56e9f6144bf3ead6b739692806",
+    "sealedAnswerKey": "666fd30a9bd134a6ab7dd049e8f2ce24e7552e50c7669a1b6af8d56662edf153",
+    "preGradeReceipt": "7832103cf07d369d151c2d701c543a15a4120c236e31fe3feb999e0731d5186a",
+    "liveVerification": "17a2d9327cd9c75171e4fca8f5c68bfe41f3010bb2ca818c6c195fbed4475aca",
+    "normalizedReadback": "d077fcc8fb1c8933da5ecd2ac2ea33a4a2c33fb75c7afe12d376fdfbb494904a",
+    "writerPlan": "16097cc350a12d8a6f7d38648eff6a674d3b3b5fcaf823ac4dc9a8774c159ec8",
+    "transportEnvelope": "a18de003510c2ce4e99428bd89ed78402ce226c2fc4811c752ff9e20d5d5debe",
+    "writer": "2cab582e5b9a7329ec6e316d9981dc13e74532ed9b4b6bd64afff56408547cd8",
+    "wrapper": "11abf92e7049b42ba6023efa5e5c2e2ede489f108b8e10aed0aa1da3d736909a",
+    "conformance": "f9c9cc8479c0e0e2781a55680f465b5df890d70c3f2b54976935a0bac88f9cef",
+    "liveAttempt2": "ccab60879f492e199ba67ad8dd4803790d486624da5b5a86d560b2874e079abc",
+    "offlineV1Adjudication": "46942e6814b766ecd9014df6c1f17acf40be4619171dcb08dc9bd3f41c43577d",
+    "offlineV2Adjudication": "e23ccd3e7c58c9a2001f0466d926346ed4a44f46ca83673e10160517ba4fd5d2",
+    "liveV1Receipt": "863fe1af6b38fc12237b47e4deb0e5db1c298d462666e4921bd28d8bf964b652",
+    "liveV2Receipt": "7668e12fd95b017ad7093a279dcae2817a518c6e1a324ef800f906b9e8fc8a81",
+    "liveV3Receipt": "dc4c1fbd3d8de6374f2b5f4703dfe02d0d3291f6fc56544cec33f451d8a48d3c",
+    "genericAdapter": "c9358a5e0a524acd855c393afe3cf4cd16ab4866a94bbe962192c17ff7758833",
+    "genericRecipe": "bae19303d86216298ef5e2d337c247f6ea403942e194750c849219ce916acb6c",
+    "genericOutput": "d3a6ac66f9202a90243e8af77b2a040378520671110521ca5ed6ca9cc6ebb238",
+    "reviewedFixtures": "39d48269593bdc4c265a0998068e6bdf81103bed8b9bc2f13fc3c11176460398"
+  },
+  "integrity": {
+    "status": "passed",
+    "checks": {
+      "packetGradeKeyReceiptHashesMatch": true,
+      "packetAndKeySeparated": true,
+      "packetOpaqueAndUngraded": true,
+      "noImplementationGuesses": true,
+      "requiredFieldsComplete": true,
+      "cardinalityAndOrderMatch": true,
+      "gradeArithmeticValid": true,
+      "answerMappingBijective": true,
+      "twelveNonzeroPairs": true,
+      "originalReferenceProvenanceIndependent": true,
+      "writerAndTransportHashesMatch": true,
+      "scratchFilePageSetIdsMatch": true,
+      "screenshotsMatch": true,
+      "usabilityAndRestorationMatch": true,
+      "readbackAndFixedPointMatch": true,
+      "zeroSilentAccountingMatches": true,
+      "immutableFailureHistoryRetained": true
+    }
+  },
+  "unsealedMapping": [
+    {
+      "anonymousCell": "cell-e9fe00a5179d",
+      "specimenId": "specimen-3c2155846f05",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "sourceLibrary": "fluent",
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "hover",
+      "liveNodeId": "85:8119",
+      "sourceReferencePath": "recipe/evidence/button-comparison-v2/source-reference/fluent__variant-secondary__state-hover.png",
+      "liveEvidencePath": "recipe/evidence/button-live-pivot-v4/screenshots/cells/fluent-button-reviewed-v2__variant-secondary__state-hover.png",
+      "sourceReferenceSha256": "d91406b7338b4737eb052d1cc0f645b81e02b7110ea996d8a5bf104b153d33ba",
+      "liveEvidenceSha256": "7d6bab82374569e08eb8a3d155736c178727ad1c3e14db06b2832f67187a89e9"
+    },
+    {
+      "anonymousCell": "cell-030eaf529e3a",
+      "specimenId": "specimen-082b942ece71",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "sourceLibrary": "altitude",
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "focus-visible",
+      "liveNodeId": "85:8105",
+      "sourceReferencePath": "recipe/evidence/button-comparison-v2/source-reference/altitude__variant-secondary__state-focus-visible.png",
+      "liveEvidencePath": "recipe/evidence/button-live-pivot-v4/screenshots/cells/altitude-button-reviewed-v2__variant-secondary__state-focus-visible.png",
+      "sourceReferenceSha256": "dbbd0cea74f5850bd832f9d61affe4086adc7392af24dda3fedc5f7b5fbda80d",
+      "liveEvidenceSha256": "6e137eb5d116c1d1b1bfe415c021a15899df1f036131d51bc289cf994356035f"
+    },
+    {
+      "anonymousCell": "cell-5eaa940d0be5",
+      "specimenId": "specimen-72621c5fc797",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "sourceLibrary": "fluent",
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "default",
+      "liveNodeId": "85:8117",
+      "sourceReferencePath": "recipe/evidence/button-comparison-v2/source-reference/fluent__variant-secondary__state-default.png",
+      "liveEvidencePath": "recipe/evidence/button-live-pivot-v4/screenshots/cells/fluent-button-reviewed-v2__variant-secondary__state-default.png",
+      "sourceReferenceSha256": "3282bad706c3778adb4647c29886b2e2ff069c68feb4581768027042d6d1519a",
+      "liveEvidenceSha256": "2d8550b0d962136720f3912eb15ef1a45f1024f5bb19685d91f8dc14421e881a"
+    },
+    {
+      "anonymousCell": "cell-f495272b6e92",
+      "specimenId": "specimen-6759eb8e7af7",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "sourceLibrary": "fluent",
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "primary",
+      "state": "focus-visible",
+      "liveNodeId": "85:8115",
+      "sourceReferencePath": "recipe/evidence/button-comparison-v2/source-reference/fluent__variant-primary__state-focus-visible.png",
+      "liveEvidencePath": "recipe/evidence/button-live-pivot-v4/screenshots/cells/fluent-button-reviewed-v2__variant-primary__state-focus-visible.png",
+      "sourceReferenceSha256": "08ca5bf97d214cff1942906e884d12f758fd2718a6090e1e4f429b62dda5ce9a",
+      "liveEvidenceSha256": "ed675c367b1eccd6eab7e49c8e3f4f54cfa7ed51a71abad1d8fdcba8c8bfe806"
+    },
+    {
+      "anonymousCell": "cell-56651013d52a",
+      "specimenId": "specimen-e477a34f8ef1",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "sourceLibrary": "altitude",
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "primary",
+      "state": "focus-visible",
+      "liveNodeId": "85:8099",
+      "sourceReferencePath": "recipe/evidence/button-comparison-v2/source-reference/altitude__variant-primary__state-focus-visible.png",
+      "liveEvidencePath": "recipe/evidence/button-live-pivot-v4/screenshots/cells/altitude-button-reviewed-v2__variant-primary__state-focus-visible.png",
+      "sourceReferenceSha256": "1130a287733971ae77d078d4eabb3482a10e78f554c9bbbd20bd4c28473bda98",
+      "liveEvidenceSha256": "0f372ca093132d7a2caefee95768b67cb1261136e3ca0d8540a010e33791475a"
+    },
+    {
+      "anonymousCell": "cell-9de488e11f1d",
+      "specimenId": "specimen-113ff7d3a70c",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "sourceLibrary": "fluent",
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "primary",
+      "state": "default",
+      "liveNodeId": "85:8111",
+      "sourceReferencePath": "recipe/evidence/button-comparison-v2/source-reference/fluent__variant-primary__state-default.png",
+      "liveEvidencePath": "recipe/evidence/button-live-pivot-v4/screenshots/cells/fluent-button-reviewed-v2__variant-primary__state-default.png",
+      "sourceReferenceSha256": "08ca5bf97d214cff1942906e884d12f758fd2718a6090e1e4f429b62dda5ce9a",
+      "liveEvidenceSha256": "ed675c367b1eccd6eab7e49c8e3f4f54cfa7ed51a71abad1d8fdcba8c8bfe806"
+    },
+    {
+      "anonymousCell": "cell-b119c22e9e57",
+      "specimenId": "specimen-914c41c8f555",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "sourceLibrary": "altitude",
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "default",
+      "liveNodeId": "85:8101",
+      "sourceReferencePath": "recipe/evidence/button-comparison-v2/source-reference/altitude__variant-secondary__state-default.png",
+      "liveEvidencePath": "recipe/evidence/button-live-pivot-v4/screenshots/cells/altitude-button-reviewed-v2__variant-secondary__state-default.png",
+      "sourceReferenceSha256": "4c6797280ea4a4e7e27fa692fff3c395e6ceded9c0c73bd16e6a2757f6b22716",
+      "liveEvidenceSha256": "52658cb274a817479cc9eb3937206af92a4dbcbaa6a253e7189a7b3c381448c9"
+    },
+    {
+      "anonymousCell": "cell-5f9749142cba",
+      "specimenId": "specimen-1638caef312a",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "sourceLibrary": "fluent",
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "primary",
+      "state": "hover",
+      "liveNodeId": "85:8113",
+      "sourceReferencePath": "recipe/evidence/button-comparison-v2/source-reference/fluent__variant-primary__state-hover.png",
+      "liveEvidencePath": "recipe/evidence/button-live-pivot-v4/screenshots/cells/fluent-button-reviewed-v2__variant-primary__state-hover.png",
+      "sourceReferenceSha256": "bc03519bd8c5b6397b85340df634e089f8649ef7144e911c27e857a3987c037c",
+      "liveEvidenceSha256": "1a5aa90466656d0fa718e49264dff5667c54677417b6e38b95fcda3459daa554"
+    },
+    {
+      "anonymousCell": "cell-e1f00bba996c",
+      "specimenId": "specimen-a1d8c4b847c7",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "sourceLibrary": "fluent",
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "focus-visible",
+      "liveNodeId": "85:8121",
+      "sourceReferencePath": "recipe/evidence/button-comparison-v2/source-reference/fluent__variant-secondary__state-focus-visible.png",
+      "liveEvidencePath": "recipe/evidence/button-live-pivot-v4/screenshots/cells/fluent-button-reviewed-v2__variant-secondary__state-focus-visible.png",
+      "sourceReferenceSha256": "3282bad706c3778adb4647c29886b2e2ff069c68feb4581768027042d6d1519a",
+      "liveEvidenceSha256": "2d8550b0d962136720f3912eb15ef1a45f1024f5bb19685d91f8dc14421e881a"
+    },
+    {
+      "anonymousCell": "cell-15c725e7f09e",
+      "specimenId": "specimen-05f8b77d43f8",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "sourceLibrary": "altitude",
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "primary",
+      "state": "hover",
+      "liveNodeId": "85:8097",
+      "sourceReferencePath": "recipe/evidence/button-comparison-v2/source-reference/altitude__variant-primary__state-hover.png",
+      "liveEvidencePath": "recipe/evidence/button-live-pivot-v4/screenshots/cells/altitude-button-reviewed-v2__variant-primary__state-hover.png",
+      "sourceReferenceSha256": "49d556c2d5fb73c4da4641ad245d162bc02278fb9d0f2dd8c999b3193ea1b997",
+      "liveEvidenceSha256": "e89fec3dd2aaae4e7304f5cd5510d5fceb28b3d3b4bcfb05520228d91231587d"
+    },
+    {
+      "anonymousCell": "cell-ba92c7c0417a",
+      "specimenId": "specimen-0ecabcba3f79",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "sourceLibrary": "altitude",
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "hover",
+      "liveNodeId": "85:8103",
+      "sourceReferencePath": "recipe/evidence/button-comparison-v2/source-reference/altitude__variant-secondary__state-hover.png",
+      "liveEvidencePath": "recipe/evidence/button-live-pivot-v4/screenshots/cells/altitude-button-reviewed-v2__variant-secondary__state-hover.png",
+      "sourceReferenceSha256": "2666afdb3d8b6204bd89fefc1ea1410abdbc1a0a02e17e2edbad95138eabd1c1",
+      "liveEvidenceSha256": "60ab9c6a768cfec98a4e5a77e494f6871039f0399d21b134aec80aceab1e4398"
+    },
+    {
+      "anonymousCell": "cell-fb6f8afd9090",
+      "specimenId": "specimen-7c254eacb1b0",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "sourceLibrary": "altitude",
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "primary",
+      "state": "default",
+      "liveNodeId": "85:8095",
+      "sourceReferencePath": "recipe/evidence/button-comparison-v2/source-reference/altitude__variant-primary__state-default.png",
+      "liveEvidencePath": "recipe/evidence/button-live-pivot-v4/screenshots/cells/altitude-button-reviewed-v2__variant-primary__state-default.png",
+      "sourceReferenceSha256": "400d14841474c83c7ceca18334081987f004c9e89abb33a7b477cee69ee43152",
+      "liveEvidenceSha256": "1dee591b4c3d8df989f738499fa457ad2ef930a3f3302b0f9e9cedd6c50db911"
+    }
+  ],
+  "aggregates": {
+    "overall": {
+      "numerator": 12,
+      "denominator": 12,
+      "ratio": 1
+    },
+    "bySourceLibrary": {
+      "altitude": {
+        "numerator": 6,
+        "denominator": 6,
+        "ratio": 1
+      },
+      "fluent": {
+        "numerator": 6,
+        "denominator": 6,
+        "ratio": 1
+      }
+    },
+    "byVariant": {
+      "primary": {
+        "numerator": 6,
+        "denominator": 6,
+        "ratio": 1
+      },
+      "secondary": {
+        "numerator": 6,
+        "denominator": 6,
+        "ratio": 1
+      }
+    },
+    "byState": {
+      "default": {
+        "numerator": 4,
+        "denominator": 4,
+        "ratio": 1
+      },
+      "hover": {
+        "numerator": 4,
+        "denominator": 4,
+        "ratio": 1
+      },
+      "focus-visible": {
+        "numerator": 4,
+        "denominator": 4,
+        "ratio": 1
+      }
+    },
+    "confidence": {
+      "overall": {
+        "low": 0,
+        "medium": 0,
+        "high": 12,
+        "total": 12
+      },
+      "bySourceLibrary": {
+        "altitude": {
+          "low": 0,
+          "medium": 0,
+          "high": 6,
+          "total": 6
+        },
+        "fluent": {
+          "low": 0,
+          "medium": 0,
+          "high": 6,
+          "total": 6
+        }
+      },
+      "byVariant": {
+        "primary": {
+          "low": 0,
+          "medium": 0,
+          "high": 6,
+          "total": 6
+        },
+        "secondary": {
+          "low": 0,
+          "medium": 0,
+          "high": 6,
+          "total": 6
+        }
+      },
+      "byState": {
+        "default": {
+          "low": 0,
+          "medium": 0,
+          "high": 4,
+          "total": 4
+        },
+        "hover": {
+          "low": 0,
+          "medium": 0,
+          "high": 4,
+          "total": 4
+        },
+        "focus-visible": {
+          "low": 0,
+          "medium": 0,
+          "high": 4,
+          "total": 4
+        }
+      }
+    }
+  },
+  "evidenceColumns": {
+    "explicitRecipeSelection": {
+      "status": "passed",
+      "evidence": {
+        "selections": [
+          {
+            "library": "altitude",
+            "recipe": "button@1",
+            "selectedBy": "recipe-pivot-altitude-review",
+            "mechanism": "reviewed-config",
+            "source": "recipe/fixtures/library-buttons.ts#altitudeButtonAdapterConfig",
+            "reviewedAt": "2026-08-26T00:00:00.000Z",
+            "manualCost": {
+              "value": 24,
+              "unit": "reviewed-mapping",
+              "note": "24 source-to-button@1 decisions reviewed; no recipe inference"
+            },
+            "mappings": 20
+          },
+          {
+            "library": "fluent",
+            "recipe": "button@1",
+            "selectedBy": "recipe-pivot-fluent-review",
+            "mechanism": "reviewed-config",
+            "source": "recipe/fixtures/library-buttons.ts#fluentButtonAdapterConfig",
+            "reviewedAt": "2026-08-26T00:00:00.000Z",
+            "manualCost": {
+              "value": 27,
+              "unit": "reviewed-mapping",
+              "note": "27 source-to-button@1 decisions reviewed; no recipe inference"
+            },
+            "mappings": 19
+          }
+        ],
+        "totalReviewedMappingCost": 51,
+        "inferenceUsed": false
+      }
+    },
+    "unrelatedAdaptersNoSourceBranches": {
+      "status": "passed",
+      "evidence": {
+        "adapters": [
+          {
+            "library": "altitude",
+            "sourcePath": "examples/altitude/contracts/button.contract.json",
+            "selectedFacts": 13
+          },
+          {
+            "library": "fluent",
+            "sourcePath": "examples/fluent/contracts/button.contract.json",
+            "selectedFacts": 13
+          }
+        ],
+        "genericFilesScanned": [
+          "recipe/adapters/button.ts",
+          "recipe/recipes/button.ts",
+          "recipe/output/button.ts"
+        ],
+        "forbiddenSourceIdentityMatches": 0
+      }
+    },
+    "offlineReactPairedGrade": {
+      "status": "passed",
+      "evidence": {
+        "correctedRecipeReact": "12/12",
+        "unchangedLegacy": "7/12",
+        "immutableV1RecipeReact": "0/12"
+      }
+    },
+    "webComponentParity": {
+      "status": "passed",
+      "evidence": {
+        "cells": 12,
+        "nonzeroCells": 12,
+        "recognisability": "not-blind-graded"
+      }
+    },
+    "liveFigmaMint": {
+      "status": "passed",
+      "evidence": {
+        "componentSets": 2,
+        "variants": 288,
+        "variables": 57,
+        "bindings": 4296
+      }
+    },
+    "liveUsability": {
+      "status": "passed",
+      "evidence": {
+        "sources": 2,
+        "reflow": "2/2",
+        "variantSwitching": "2/2",
+        "tokenBinding": "2/2",
+        "noFakeLayout": "2/2",
+        "labels": "288/288",
+        "inFlowChildren": "600/600",
+        "bindingFacts": 5160
+      }
+    },
+    "exactProbeRestoration": {
+      "status": "passed",
+      "evidence": {
+        "sources": "2/2",
+        "altitudeHash": "d31a1b1bb0958dfa782ff8bea4168e47724b4624433960fd09a46b3b1e23db66",
+        "fluentHash": "909e288e6b75ca7c5156252a6da9271545acb49c208d3983faa2bd4e40d52302"
+      }
+    },
+    "liveReadbackFixedPoint": {
+      "status": "passed",
+      "evidence": {
+        "comparedFacts": 7956,
+        "observedFacts": 13248,
+        "cycles": 2,
+        "canonicalSha256": "e450fb2bfd2380abb1376c9cc5bd9c6d0860fd11afb7e66803d14bf7c5aa81bd"
+      }
+    },
+    "zeroSilentAccounting": {
+      "status": "passed",
+      "evidence": {
+        "denominator": 13248,
+        "carried": 13248,
+        "codeOnly": 0,
+        "namedRefused": 0,
+        "silent": 0
+      }
+    },
+    "independentLiveCanvasGrade": {
+      "status": "passed",
+      "evidence": {
+        "recognisable": "12/12",
+        "confidence": {
+          "high": 12,
+          "medium": 0,
+          "low": 0
+        },
+        "gradeBytesUnchanged": true
+      }
+    },
+    "independentSourceReferences": {
+      "status": "passed",
+      "evidence": {
+        "references": 12,
+        "independentHarnessReferences": 12,
+        "originalSourceFamily": "button-comparison-v2 original external-library source renders",
+        "underTestPathsUsedAsReferences": 0
+      }
+    }
+  },
+  "retainedScratchArtifacts": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "pageId": "85:6781",
+    "pageName": "Recipe Pivot / Button / e6a61d04-b04f4059-v4",
+    "proofSectionId": "85:8089",
+    "pairedSectionId": "85:8090",
+    "componentSetIds": ["85:7406", "85:8054"],
+    "representativeInstanceIds": ["85:8091", "85:8107"],
+    "pairedCellNodeIds": [
+      "85:8095",
+      "85:8097",
+      "85:8099",
+      "85:8101",
+      "85:8103",
+      "85:8105",
+      "85:8111",
+      "85:8113",
+      "85:8115",
+      "85:8117",
+      "85:8119",
+      "85:8121"
+    ]
+  },
+  "history": {
+    "offlineV1": {
+      "result": "recipe React 0/12; legacy 9/12; retained failure",
+      "sha256": "46942e6814b766ecd9014df6c1f17acf40be4619171dcb08dc9bd3f41c43577d"
+    },
+    "offlineV2": {
+      "result": "recipe React 12/12; unchanged legacy 7/12",
+      "sha256": "e23ccd3e7c58c9a2001f0466d926346ed4a44f46ca83673e10160517ba4fd5d2"
+    },
+    "liveV1": {
+      "result": "failed after three capped writer attempts",
+      "sha256": "863fe1af6b38fc12237b47e4deb0e5db1c298d462666e4921bd28d8bf964b652"
+    },
+    "liveV2": {
+      "result": "failed closed before execution",
+      "sha256": "7668e12fd95b017ad7093a279dcae2817a518c6e1a324ef800f906b9e8fc8a81"
+    },
+    "liveV3": {
+      "result": "failed Fluent reflow/zero-width label; cleaned",
+      "sha256": "dc4c1fbd3d8de6374f2b5f4703dfe02d0d3291f6fc56544cec33f451d8a48d3c"
+    },
+    "liveV4PreGradeReceipt": {
+      "result": "complete live proof pending independent grade",
+      "sha256": "7832103cf07d369d151c2d701c543a15a4120c236e31fe3feb999e0731d5186a"
+    }
+  },
+  "proofBoundary": {
+    "proves": "The button@1 recipe protocol passes one Button archetype over two unrelated real libraries on one matched 12-cell slice, including offline outputs and a retained live Scratch mint.",
+    "doesNotProve": [
+      "Input/Field",
+      "Combobox",
+      "Data Table",
+      "Calendar",
+      "any library beyond Altitude and Fluent",
+      "any Button cell outside the fixed medium/no-icons default-hover-focus-visible matched slice"
+    ]
+  },
+  "verdict": {
+    "buttonSuccess": true,
+    "completedColumns": 11,
+    "requiredColumns": 11,
+    "blockers": [],
+    "nextTask": "Design the Input/Field recipe as the difficult control, starting offline and reusing the proven protocol."
+  }
+}

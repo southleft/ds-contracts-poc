@@ -1,0 +1,50 @@
+{
+  "version": "replacement-rater-calibration-receipt-v3",
+  "graderId": "RATER-CAL-V3-D",
+  "sourceCompatibilityFieldsHash": "0edc73337c9ce60f5fb91189530d83fb45a2d59a95c11c5c08a4ff061a4f7db0",
+  "sourceGoldPacketHash": "70dd47851b2a7c19548fb666cb82eafe0be67aaca8e001d4bcac73f10767c022",
+  "sourceGoldAnswerKeyHash": "7a5d844898442fc4e34d687041b5d29d9a162618f97b7eefa0f4e886b06c51b4",
+  "sourceProtocolHash": "b3beb503740e31491aa4c0195ffff33eda1207362fb2d2cb4aafa848e6201ddd",
+  "sourceRubricHash": "08d75803555566604a76b05edbc1a2411be2661936cf61ab1371dc15bbfeccf0",
+  "sourceGradeSchemaHash": "73c10638530eff42ab54af754f1acbe94a94d3fe478321781cdb6b1256a10741",
+  "replacementProtocolHash": "cfb8b7307397e0434b0f68a5226e4ae2e4255faae9422b60c947ff92350e12b0",
+  "replacementCommitment": "b5abc88083a2322c4b682e17630710d2e4457e56c17afdf07aa211548e7f593a",
+  "templateHash": "084ad041fccd30ef9efc9377bbf64b1b85a059581a3fa2f203a321ba9d9437f9",
+  "submissionPath": "recipe/evidence/input-field-comparison-calibration-v3-replacement/gold/submissions/rater-cal-v3-d.json",
+  "submissionHash": "42d8ff1757d264bdb952b913060383a6c6c1708dafca728942f699e82071620a",
+  "counts": {
+    "expected": 24,
+    "submitted": 24,
+    "correct": 23,
+    "obviousStructuralStateFailures": 12,
+    "obviousStructuralStateFailuresCorrect": 12
+  },
+  "score": 0.9583333333333334,
+  "obviousFailureScore": 1,
+  "obviousStructuralStateFailureScore": 1,
+  "envelopeValid": true,
+  "passed": true,
+  "performanceEligibility": true,
+  "performanceBinding": {
+    "receiptPath": "recipe/evidence/input-field-comparison-calibration-v3-replacement/gold/receipts/rater-cal-v3-d.json",
+    "score": 0.9583333333333334,
+    "obviousStructuralStateFailureScore": 1,
+    "passed": true
+  },
+  "performanceAccessed": false,
+  "priorGoldPacketAccess": false,
+  "priorGradeAccess": false,
+  "errors": [
+    {
+      "taskId": "task-01259519ae7d8bb77e26",
+      "submittedRecognisable": false,
+      "expectedRecognisable": true,
+      "obviousStructuralOrStateFailure": false,
+      "rationale": "Reference and specimen are byte-identical deterministic renderings."
+    }
+  ],
+  "signature": {
+    "algorithm": "sha256",
+    "signedPayloadHash": "50c3c77749ac046d43a9447a365cb2af8cc467aaf4515e11b80b9aabc6a737ca"
+  }
+}

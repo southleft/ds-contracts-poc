@@ -1,0 +1,1215 @@
+{
+  "version": 1,
+  "archetype": "input / field",
+  "status": "adjudicated-failed-offline-recognisability",
+  "overall": false,
+  "gradeWritten": true,
+  "receipt": "recipe/evidence/input-field-comparison/receipt.json",
+  "receiptHash": "c75a30e420240dfa885508735d593cab30dcf80a63d55954ba4b00924c96cc2f",
+  "packet": "recipe/evidence/input-field-comparison/blind-packet/packet.json",
+  "packetHash": "6920d34ba3faec0fd03b6bdd8c8efcbb8b8e81f1e86c709e8021da31e83cd61f",
+  "grades": "recipe/evidence/input-field-comparison/blind-packet/grades.json",
+  "gradesHash": "08e7c75aff2a34befa953e287cc635f753d988b84fa538df7b4975d4441e65b4",
+  "sealedAnswerKey": "recipe/evidence/input-field-comparison/sealed-answer-key.json",
+  "sealedAnswerKeyHash": "7b7d35efadf58e23e8224e92197e4f92d42b05812f496332bf2f1e2e4e400eb9",
+  "comparisonResult": "recipe/evidence/input-field-comparison/comparison-result.json",
+  "comparisonResultHash": "ad19224c96da0702f7667239ccc8bafe0db4f99272bae352f7ab06f4216792d5",
+  "offlineResult": {
+    "legacyCellWeighted": "88/128",
+    "recipeReactCellWeighted": "40/128",
+    "legacyCompleteSetWeighted": "0/2",
+    "recipeReactCompleteSetWeighted": "0/2",
+    "recipeBeatLegacy": 40,
+    "tiedPass": 0,
+    "tiedFail": 0,
+    "legacyBeatRecipe": 88,
+    "offlineDifficultControlCriterion": "failed"
+  },
+  "evidenceColumns": {
+    "offlineImplementation": "passed",
+    "pairedBlindRecognisability": "failed",
+    "webComponentParity": "passed-parity-only",
+    "liveFigma": "pending",
+    "reflow": "pending",
+    "variantSwitching": "pending",
+    "tokenBinding": "pending",
+    "noFakeLayout": "pending",
+    "liveTwoCycleFixedPoint": "pending",
+    "accounting": "passed-offline-pending-live",
+    "liveCanvasGrade": "pending",
+    "overallInputSuccess": false
+  },
+  "counts": {
+    "sourceReferences": 128,
+    "legacyOutputs": 128,
+    "recipeReactOutputs": 128,
+    "recipeWebComponentOutputs": 128,
+    "blindReferences": 128,
+    "blindSpecimens": 256
+  },
+  "comparisonCompleteness": {
+    "sourceCells": "128/128",
+    "legacyCells": "128/128",
+    "recipeReactCells": "128/128",
+    "recipeWebComponentCells": "128/128",
+    "packetReferences": "128/128",
+    "packetSpecimens": "256/256",
+    "exactDenominatorParity": true,
+    "claimsRestrictedToFrozenMatrix": true,
+    "legacyCellSupport": [
+      {
+        "cellKey": "mui/size=small/state=default/content=placeholder/required=false/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=small/state=default/content=placeholder/required=false/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=small/state=default/content=placeholder/required=true/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=small/state=default/content=placeholder/required=true/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=small/state=default/content=value/required=false/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=small/state=default/content=value/required=false/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=small/state=default/content=value/required=true/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=small/state=default/content=value/required=true/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=false/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=false/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=true/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=true/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=small/state=focus-visible/content=value/required=false/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=small/state=focus-visible/content=value/required=false/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=small/state=focus-visible/content=value/required=true/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=small/state=focus-visible/content=value/required=true/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=small/state=error/content=placeholder/required=false/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=small/state=error/content=placeholder/required=false/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=small/state=error/content=placeholder/required=true/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=small/state=error/content=placeholder/required=true/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=small/state=error/content=value/required=false/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=small/state=error/content=value/required=false/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=small/state=error/content=value/required=true/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=small/state=error/content=value/required=true/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=small/state=disabled/content=placeholder/required=false/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=small/state=disabled/content=placeholder/required=false/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=small/state=disabled/content=placeholder/required=true/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=small/state=disabled/content=placeholder/required=true/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=small/state=disabled/content=value/required=false/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=small/state=disabled/content=value/required=false/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=small/state=disabled/content=value/required=true/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=small/state=disabled/content=value/required=true/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=medium/state=default/content=placeholder/required=false/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=medium/state=default/content=placeholder/required=false/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=medium/state=default/content=placeholder/required=true/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=medium/state=default/content=placeholder/required=true/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=medium/state=default/content=value/required=false/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=medium/state=default/content=value/required=false/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=medium/state=default/content=value/required=true/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=medium/state=default/content=value/required=true/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=false/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=false/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=true/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=true/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=medium/state=focus-visible/content=value/required=false/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=medium/state=focus-visible/content=value/required=false/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=medium/state=focus-visible/content=value/required=true/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=medium/state=focus-visible/content=value/required=true/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=medium/state=error/content=placeholder/required=false/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=medium/state=error/content=placeholder/required=false/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=medium/state=error/content=placeholder/required=true/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=medium/state=error/content=placeholder/required=true/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=medium/state=error/content=value/required=false/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=medium/state=error/content=value/required=false/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=medium/state=error/content=value/required=true/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=medium/state=error/content=value/required=true/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=false/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=false/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=true/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=true/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=medium/state=disabled/content=value/required=false/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=medium/state=disabled/content=value/required=false/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=medium/state=disabled/content=value/required=true/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "mui/size=medium/state=disabled/content=value/required=true/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State (legacy contract captured error as a fixed source prop)",
+          "Content (legacy contract carries no value or placeholder prop)",
+          "Required (legacy contract carries no required prop)",
+          "Adornments (legacy contract captured both as fixed nested instances)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=small/state=default/content=placeholder/required=false/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=small/state=default/content=placeholder/required=false/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=small/state=default/content=placeholder/required=true/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=small/state=default/content=placeholder/required=true/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=small/state=default/content=value/required=false/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=small/state=default/content=value/required=false/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=small/state=default/content=value/required=true/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=small/state=default/content=value/required=true/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=false/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=false/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=true/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=true/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=small/state=focus-visible/content=value/required=false/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=small/state=focus-visible/content=value/required=false/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=small/state=focus-visible/content=value/required=true/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=small/state=focus-visible/content=value/required=true/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=small/state=error/content=placeholder/required=false/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=small/state=error/content=placeholder/required=false/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=small/state=error/content=placeholder/required=true/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=small/state=error/content=placeholder/required=true/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=small/state=error/content=value/required=false/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=small/state=error/content=value/required=false/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=small/state=error/content=value/required=true/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=small/state=error/content=value/required=true/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=small/state=disabled/content=placeholder/required=false/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=small/state=disabled/content=placeholder/required=false/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=small/state=disabled/content=placeholder/required=true/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=small/state=disabled/content=placeholder/required=true/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=small/state=disabled/content=value/required=false/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=small/state=disabled/content=value/required=false/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=small/state=disabled/content=value/required=true/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=small/state=disabled/content=value/required=true/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=medium/state=default/content=placeholder/required=false/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=medium/state=default/content=placeholder/required=false/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=medium/state=default/content=placeholder/required=true/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=medium/state=default/content=placeholder/required=true/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=medium/state=default/content=value/required=false/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=medium/state=default/content=value/required=false/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=medium/state=default/content=value/required=true/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=medium/state=default/content=value/required=true/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=false/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=false/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=true/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=true/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=false/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=false/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=true/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=true/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=medium/state=error/content=placeholder/required=false/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=medium/state=error/content=placeholder/required=false/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=medium/state=error/content=placeholder/required=true/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=medium/state=error/content=placeholder/required=true/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=medium/state=error/content=value/required=false/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=medium/state=error/content=value/required=false/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=medium/state=error/content=value/required=true/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=medium/state=error/content=value/required=true/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=medium/state=disabled/content=placeholder/required=false/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=medium/state=disabled/content=placeholder/required=false/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=medium/state=disabled/content=placeholder/required=true/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=medium/state=disabled/content=placeholder/required=true/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=medium/state=disabled/content=value/required=false/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=medium/state=disabled/content=value/required=false/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=medium/state=disabled/content=value/required=true/adornments=none",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      },
+      {
+        "cellKey": "polaris/size=medium/state=disabled/content=value/required=true/adornments=both",
+        "outputPresent": true,
+        "unsupportedMappings": [
+          "State=error (legacy contract carries no error prop or error message)",
+          "Helper text (legacy contract carries no helpText prop)"
+        ]
+      }
+    ],
+    "nonComparableBlockers": []
+  }
+}

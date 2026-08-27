@@ -1,0 +1,248 @@
+{
+  "protocolVersion": "button-paired-source-v1-independent-grade-v1",
+  "packetVersion": "button-paired-source-v1",
+  "counts": {
+    "references": 12,
+    "specimens": 24,
+    "graded": 24,
+    "recognisable": 9,
+    "notRecognisable": 15
+  },
+  "grades": [
+    {
+      "specimenId": "specimen-8aa648f7c18d",
+      "referenceId": "cell-5c2b7c5ff6b8",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Fill is a darker saturated blue instead of the reference blue.",
+        "Label is white and lighter-weight instead of black and bold.",
+        "Button is narrower with substantially more-rounded corners."
+      ]
+    },
+    {
+      "specimenId": "specimen-d6330393b3c8",
+      "referenceId": "cell-5c2b7c5ff6b8",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-21bb1d2d543e",
+      "referenceId": "cell-a02de3213193",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Fill is a much darker saturated blue than the reference.",
+        "Label is white and lighter-weight instead of black and bold.",
+        "Button is narrower and has substantially more-rounded corners."
+      ]
+    },
+    {
+      "specimenId": "specimen-f0bb1e0f4994",
+      "referenceId": "cell-a02de3213193",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": [],
+      "minorDifferences": [
+        "Fill appears slightly lighter than the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-03962606b2a5",
+      "referenceId": "cell-236b3130acd1",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Reference dark outer focus ring and white separation gap are absent.",
+        "Label is white and lighter-weight instead of black and bold.",
+        "Button is narrower and more rounded."
+      ]
+    },
+    {
+      "specimenId": "specimen-0bc74df82a25",
+      "referenceId": "cell-236b3130acd1",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": [],
+      "minorDifferences": [
+        "Outer focus ring is bright blue rather than dark navy.",
+        "Focus-ring spacing and corner radius differ slightly."
+      ]
+    },
+    {
+      "specimenId": "specimen-5146f97554d6",
+      "referenceId": "cell-fbf1fc1f6e9e",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Reference has a solid muted-beige fill, while specimen is white with an outline.",
+        "Label color and weight are substantially lighter.",
+        "Specimen is narrower and more rounded."
+      ]
+    },
+    {
+      "specimenId": "specimen-f6cb4bd252d6",
+      "referenceId": "cell-fbf1fc1f6e9e",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-202180a7db24",
+      "referenceId": "cell-37766fe6b534",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Reference has a solid muted-beige fill, while specimen is white with a gray outline.",
+        "Label is lighter-weight and blue-black instead of bold near-black.",
+        "Specimen is narrower and more rounded."
+      ]
+    },
+    {
+      "specimenId": "specimen-26e458028db3",
+      "referenceId": "cell-37766fe6b534",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Fill is blue instead of muted beige.",
+        "Specimen does not preserve the reference fill/ink treatment."
+      ]
+    },
+    {
+      "specimenId": "specimen-08ce1f7fc603",
+      "referenceId": "cell-e2a67d4b8646",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": [],
+      "minorDifferences": [
+        "Outer focus ring is bright blue rather than dark navy.",
+        "Focus-ring spacing and corner radius differ slightly."
+      ]
+    },
+    {
+      "specimenId": "specimen-ccfa80c49ed0",
+      "referenceId": "cell-e2a67d4b8646",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Muted-beige fill is missing; specimen is white.",
+        "Reference dark outer focus ring with inner separation is replaced by a thin blue border.",
+        "Label is lighter-weight and specimen is narrower."
+      ]
+    },
+    {
+      "specimenId": "specimen-77c42a2b96f7",
+      "referenceId": "cell-d8eddf3831a0",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-a1a3aa0e83c7",
+      "referenceId": "cell-d8eddf3831a0",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Specimen is substantially narrower and taller, changing the button proportions and padding.",
+        "Corners are much more rounded.",
+        "Fill is brighter and label weight is lighter than the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-579fec1bcdd3",
+      "referenceId": "cell-45eabe58c2e7",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-ab2f7e49fbee",
+      "referenceId": "cell-45eabe58c2e7",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Specimen is substantially narrower and taller, changing the button proportions and padding.",
+        "Corners are much more rounded.",
+        "Fill is brighter and label weight is lighter than the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-30d6b2b882a0",
+      "referenceId": "cell-0320ddb96eed",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Specimen adds a prominent black focus outline and white inset separation absent from the reference state.",
+        "Added outline changes the overall silhouette and state-specific treatment."
+      ]
+    },
+    {
+      "specimenId": "specimen-6ecbc1ddd294",
+      "referenceId": "cell-0320ddb96eed",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Specimen is substantially narrower and taller, changing the button proportions and padding.",
+        "Fill hue, corner radius, and label weight differ substantially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-4cf964329867",
+      "referenceId": "cell-9cae759e7528",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Specimen is substantially narrower and taller than the reference outline button.",
+        "Corners are much more rounded.",
+        "Label is lighter-weight and blue-black instead of bold near-black."
+      ]
+    },
+    {
+      "specimenId": "specimen-ffbef11af02a",
+      "referenceId": "cell-9cae759e7528",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-3bd328995cb7",
+      "referenceId": "cell-ad60b5a22f4e",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-d3834c46cdc3",
+      "referenceId": "cell-ad60b5a22f4e",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Specimen is substantially narrower and taller, changing the proportions and padding.",
+        "Corners are much more rounded.",
+        "Border is darker and label is lighter-weight than the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-34ed18864a8d",
+      "referenceId": "cell-e57c93f01fb2",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Specimen uses a thick black outline instead of the reference thin light-gray border.",
+        "The prominent outline creates a substantially different state treatment."
+      ]
+    },
+    {
+      "specimenId": "specimen-8e59abe168f0",
+      "referenceId": "cell-e57c93f01fb2",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Specimen is substantially narrower and taller, with much more-rounded corners.",
+        "Border is bright blue instead of light gray.",
+        "Label is lighter-weight and blue-black instead of bold near-black."
+      ]
+    }
+  ]
+}
