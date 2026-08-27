@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 draft antecedent pending separate authorization; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 authorization declared; live forbidden; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -560,8 +560,14 @@ const V21_AUTHORIZATION_TEMPLATE_SHA256 =
 const V21_STATUS_PATH =
   "recipe/evidence/input-field-live-pivot-v21-status.json";
 const V21_STATUS =
-  "draft antecedent; pending separate authorization; live execution forbidden";
+  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
 const V21_BASE_COMMIT = "1cc5177e6d76e92f4950a674d3370959557f03c8";
+const V21_ANTECEDENT_COMMIT = "21fd65bb5a1f9874b96de05547dc092298738f59";
+const V21_AUTHORIZATION_PATH = `${V21_ROOT}/capture-authorization.json`;
+const V21_AUTHORIZATION_SHA256 =
+  "15afeb3ecab3bc6493f6738a07c97e69f8bbe628afe92538a0c9bb807f865d3a";
+const V21_SIGNING_PUBLIC_KEY_SPKI_SHA256 =
+  "d26147dd1a658f2a3d585437c44105eabe7dfe3abfeac349a138e1163175d09f";
 const V20_SCENE_READBACK_SHA256 =
   "fb0a1934792454ca2cd2a925f70a0ce117b2cd6ed72076196f5f98aeefbacbb8";
 const V19_SCENE_READBACK_SHA256 =
@@ -1762,9 +1768,16 @@ export function validatePivotStatus(
     status.input?.liveV21?.antecedentHashSetSha256 !== V21_HASH_SET_SHA256 ||
     status.input?.liveV21?.authorizationTemplateSha256 !==
       V21_AUTHORIZATION_TEMPLATE_SHA256 ||
-    status.input?.liveV21?.authorizationPresent !== false ||
-    status.input?.liveV21?.authorizationCommitted !== false ||
+    status.input?.liveV21?.antecedentCommit !== V21_ANTECEDENT_COMMIT ||
+    status.input?.liveV21?.authorizationPresent !== true ||
+    status.input?.liveV21?.authorizationCommitStateDerivedByHistory !== true ||
     status.input?.liveV21?.authorizationEffective !== false ||
+    status.input?.liveV21?.authorizationPath !== V21_AUTHORIZATION_PATH ||
+    status.input?.liveV21?.authorizationSha256 !== V21_AUTHORIZATION_SHA256 ||
+    status.input?.liveV21?.signingPublicKeySpkiSha256 !==
+      V21_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    status.input?.liveV21?.historyExpectedModeAfterAuthorizationCommit !==
+      "--expect-authorized" ||
     status.input?.liveV21?.authorizationLifecycleExcludedFromAntecedentHash !==
       true ||
     status.input?.liveV21?.authorizationCanBeAddedWithoutAntecedentRebuild !==
@@ -3704,9 +3717,16 @@ export function verifyPivotStatus(): void {
     v21Status.artifactVersion !== "input-live-v21-status-v1" ||
     v21Status.status !== V21_STATUS ||
     v21Status.baseCommit !== V21_BASE_COMMIT ||
-    v21Status.authorization?.present !== false ||
-    v21Status.authorization?.committed !== false ||
+    v21Status.antecedent?.commit !== V21_ANTECEDENT_COMMIT ||
+    v21Status.authorization?.present !== true ||
+    v21Status.authorization?.commitStateDerivedByHistory !== true ||
     v21Status.authorization?.effective !== false ||
+    v21Status.authorization?.path !== V21_AUTHORIZATION_PATH ||
+    v21Status.authorization?.sha256 !== V21_AUTHORIZATION_SHA256 ||
+    v21Status.authorization?.signingPublicKeySpkiSha256 !==
+      V21_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    sha256(readRepositoryEvidence(V21_AUTHORIZATION_PATH)) !==
+      V21_AUTHORIZATION_SHA256 ||
     v21Status.authorization?.v20AuthorizationReusable !== false ||
     v21Status.smallestHonestDelta?.taughtSurfaceLayoutHeightFromHeightValue !==
       true ||
