@@ -1,7 +1,12 @@
 import { createHash } from "node:crypto";
+import { execFileSync } from "node:child_process";
 import { readdirSync } from "node:fs";
 import path from "node:path";
 
+import {
+  INPUT_LIVE_V3_ATTEMPT_1_CODE_COMMIT,
+  readInputLiveV3Attempt1HardFailure,
+} from "./input-field-live-v3-evidence.js";
 import {
   readRepositoryEvidence,
   readRepositoryJson,
@@ -17,14 +22,17 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "criterion and authorization committed; runner prepared-uncommitted; capture not yet run";
-const V3_INDEX_STATUS = "runner prepared-uncommitted; capture not yet run";
+  "attempt 1 hard failure; committed runtime correction pending";
+const V3_INDEX_STATUS =
+  "attempt 1 hard failure; committed runtime correction pending";
 const V3_PREPARED_FILES = [
   "capture-authorization.json",
   "conformance-report.json",
+  "cleanup-attempt-1.json",
   "expected-scene-plan-mui.json.gz",
   "expected-scene-plan-polaris.json.gz",
   "index.json",
+  "live-attempt-1.json",
   "protocol.json",
   "transport-envelope.json",
   "writer-plan.json",
@@ -60,9 +68,9 @@ export function validatePivotStatus(
     fail("chronology overclaim");
   if (
     protocol.chronology?.captureAuthorized !== false ||
-    index.captureAuthorized !== false ||
+    index.captureAuthorized !== true ||
     status.input?.liveV3?.captureAuthorizationDerivedByGate !== true ||
-    status.input?.liveV3?.captureOccurred !== false
+    status.input?.liveV3?.captureOccurred !== true
   )
     fail("capture authorization/status");
   if (
@@ -95,12 +103,21 @@ export function validatePivotStatus(
   )
     fail("protocol hash");
   if (
-    index.result !== null ||
+    index.result?.status !== "hard-failure" ||
+    index.result?.attempt !== 1 ||
+    index.result?.writerExecutionSucceeded !== true ||
+    index.result?.mintedVariants !== 256 ||
+    index.result?.verifierCompleted !== false ||
+    index.result?.sceneFactsExpected !== 43_726 ||
+    index.result?.sceneFactsMeasured !== 0 ||
+    index.result?.objectiveRowsMeasured !== 0 ||
+    index.result?.capturedCells !== 0 ||
+    index.result?.successReceiptWritten !== false ||
     index.overallInputSuccess !== false ||
     !Array.isArray(index.captureArtifacts) ||
-    index.captureArtifacts.length !== 0
+    index.captureArtifacts.length !== 2
   )
-    fail("v3 result must be absent");
+    fail("v3 attempt 1 hard-failure result");
   const unexpected = v3Files.filter(
     (file) =>
       !V3_PREPARED_FILES.includes(file as (typeof V3_PREPARED_FILES)[number]),
@@ -134,15 +151,47 @@ export function verifyPivotStatus(): void {
   )) {
     if (
       typeof dependencyHash !== "string" ||
-      sha256(readRepositoryEvidence(dependencyPath)) !== dependencyHash
+      sha256(
+        execFileSync(
+          "git",
+          ["show", `${INPUT_LIVE_V3_ATTEMPT_1_CODE_COMMIT}:${dependencyPath}`],
+          { encoding: "buffer" },
+        ),
+      ) !== dependencyHash
     ) {
-      failures.push(`v3 dependency hash mismatch: ${dependencyPath}`);
+      failures.push(`v3 attempt-1 dependency hash mismatch: ${dependencyPath}`);
     }
   }
   if (
     Object.keys(protocol.implementationDependencies?.sha256 ?? {}).length === 0
   ) {
     failures.push("v3 implementation dependency denominator is zero");
+  }
+  for (const [dependencyPath, dependencyHash] of Object.entries(
+    index.runtimeCorrection?.dependencies ?? {},
+  )) {
+    if (
+      typeof dependencyHash !== "string" ||
+      sha256(readRepositoryEvidence(dependencyPath)) !== dependencyHash
+    )
+      failures.push(
+        `v3 correction dependency hash mismatch: ${dependencyPath}`,
+      );
+  }
+  if (
+    Object.keys(index.runtimeCorrection?.dependencies ?? {}).length === 0 ||
+    index.runtimeCorrection?.nextAttempt !== 2 ||
+    index.runtimeCorrection?.maximumAttempts !== 3 ||
+    index.runtimeCorrection?.authorizationReusable !== true ||
+    index.runtimeCorrection?.newAuthorizationArtifactRequired !== false
+  )
+    failures.push("v3 correction dependency/attempt status");
+  try {
+    readInputLiveV3Attempt1HardFailure();
+  } catch (error) {
+    failures.push(
+      `v3 attempt 1 hard-failure evidence: ${error instanceof Error ? error.message : String(error)}`,
+    );
   }
   for (const artifact of [
     ...status.button.supersededHistoricalArtifacts,

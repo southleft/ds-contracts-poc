@@ -19,6 +19,7 @@ import {
   polarisInputFieldAdapterConfig,
 } from "./fixtures/library-input-fields.js";
 import { validateFigmaWriterConformance } from "./figma-writer-conformance.js";
+import { FIGMA_RUNTIME_API_AUDIT } from "./figma-runtime-portability.js";
 import { hashRecipeInstance } from "./recipe.js";
 import {
   compileInputFieldRecipe,
@@ -181,6 +182,10 @@ export async function buildInputLiveV3Proof(): Promise<Record<string, any>> {
     "recipe/input-field-live-v3-preflight.ts",
     "recipe/input-field-live-v3-verifier.ts",
     "recipe/input-field-live-v3-evidence.ts",
+    "recipe/input-field-live-v3-cleanup.ts",
+    "recipe/figma-runtime-portability.ts",
+    "recipe/scene-readback-runtime.ts",
+    "recipe/writer-transport.ts",
     "recipe/run-input-field-live-v3.ts",
   ];
   const expectedPlanArtifacts = writer.sourcePlans.map((source, index) => {
@@ -241,6 +246,7 @@ export async function buildInputLiveV3Proof(): Promise<Record<string, any>> {
     conformance: {
       path: CONFORMANCE_PATH,
       counts: conformance.counts,
+      runtimeApiAudit: FIGMA_RUNTIME_API_AUDIT,
     },
     requiredGateIds: [...INPUT_LIVE_V3_REQUIRED_GATE_IDS],
     sources: sources.map((source, index) => ({

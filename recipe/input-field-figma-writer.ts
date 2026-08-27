@@ -487,7 +487,7 @@ for(const source of PLAN.sources){
   const oldSections=page.children.filter(node=>node.type==="SECTION"&&getSharedData(node,"adapterIdentity")===source.adapterIdentity&&getSharedData(node,"recipeHash")===source.recipeHash);
   for(const old of oldSections){
     const collectionId=getSharedData(old,"variableCollectionId");
-    if(collectionId){const collection=await figma.variables.getVariableCollectionByIdAsync(collectionId);if(collection&&!collection.remote)collection.remove();}
+    if(collectionId){const collection=await figma.variables.getVariableCollectionByIdAsync(collectionId);if(collection&&!collection.remote){if(getSharedData(collection,"collectionOwner")!==PAGE_OWNER+"/variable-collection"||getSharedData(collection,"runIdentity")!==PLAN.runIdentity)throw new Error("INPUT-VARIABLE-COLLECTION-OWNERSHIP-COLLISION:"+collection.id);collection.remove();}}
     old.remove();
   }
   const section=figma.createSection();
@@ -500,6 +500,9 @@ for(const source of PLAN.sources){
   const localCollections=figma.variables.getLocalVariableCollectionsAsync?await figma.variables.getLocalVariableCollectionsAsync():[];
   if(localCollections.some(candidate=>candidate.name===collectionName))throw new Error("INPUT-VARIABLE-COLLECTION-COLLISION:"+collectionName);
   const collection=figma.variables.createVariableCollection(collectionName);
+  setSharedData(collection,"collectionOwner",PAGE_OWNER+"/variable-collection");
+  setSharedData(collection,"runIdentity",PLAN.runIdentity);
+  setSharedData(collection,"adapterIdentity",source.adapterIdentity);
   collection.renameMode(collection.modes[0].modeId,"Default");
   collection.hiddenFromPublishing=true;
   setSharedData(section,"variableCollectionId",collection.id);

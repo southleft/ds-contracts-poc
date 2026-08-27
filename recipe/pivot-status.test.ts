@@ -19,7 +19,7 @@ const fixtures = () => ({
   ),
 });
 
-test("committed v3 criterion remains false with capture authorization separated", () => {
+test("attempt 1 remains a hard failure with authorization separated", () => {
   const value = fixtures();
   assert.deepEqual(
     validatePivotStatus(
@@ -28,10 +28,12 @@ test("committed v3 criterion remains false with capture authorization separated"
       value.index,
       [
         "capture-authorization.json",
+        "cleanup-attempt-1.json",
         "conformance-report.json",
         "expected-scene-plan-mui.json.gz",
         "expected-scene-plan-polaris.json.gz",
         "index.json",
+        "live-attempt-1.json",
         "protocol.json",
         "transport-envelope.json",
         "writer-plan.json",
@@ -76,10 +78,12 @@ test("status gate rejects chronology, success, capture, hash, and criterion lies
         value.index,
         [
           "capture-authorization.json",
+          "cleanup-attempt-1.json",
           "conformance-report.json",
           "expected-scene-plan-mui.json.gz",
           "expected-scene-plan-polaris.json.gz",
           "index.json",
+          "live-attempt-1.json",
           "protocol.json",
           "transport-envelope.json",
           "writer-plan.json",

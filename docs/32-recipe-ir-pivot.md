@@ -11,10 +11,21 @@
 > `input-live-v3` criterion bytes before capture authorization. A separate
 > authorization artifact was first committed at
 > `ad7e02d3bfaf79f757ff63085c0a24a64a5c4c7b`. The typed runner, verifier,
-> preflight, and evidence writer are prepared-uncommitted; capture has not run.
+> preflight, and evidence writer were committed at
+> `5e95105b16f3e30e0fb67a53a6eda7a86c105c61`. Attempt 1 decoded and evaluated
+> that exact writer and minted both 128-variant sets, then hard-failed before
+> scene extraction because the Figma sandbox's `TextDecoder` is not
+> constructible. The verifier measured zero scene facts and no objective rows.
+> Runner cleanup failed; separately recorded manual cleanup removed exactly the
+> owned page and two variable collections and restored the unrelated Scratch
+> fingerprint.
 > Current machine status is
 > `recipe/evidence/status-index.json`; the v3 draft is
-> `recipe/evidence/input-field-live-pivot-v3/index.json`. A technically
+> `recipe/evidence/input-field-live-pivot-v3/index.json`. A portable strict
+> UTF-8 runtime and idempotent owned cleanup correction are prepared but must
+> be committed and published before attempt 2. The original authorization
+> already permits a clean descendant, so no new authorization artifact is
+> required. A technically
 > successful mint is not a proven bidirectional round trip until scene-derived
 > inversion and accounting pass.**
 >
@@ -62,7 +73,8 @@
 > Input-created Figma artifacts were cleaned; census and Button proof remain
 > untouched. An independent 24-specimen browser↔Figma calibration then improved
 > held-out geometry but regressed held-out pixel/ink under sane coefficient
-> bounds, so it was rejected. No Input v3 capture has occurred.**
+> bounds, so it was rejected. Input v3 attempt 1 is a hard failure; no scene or
+> objective capture was produced.**
 >
 > Evidence index: immutable objective v1 is
 > `recipe/evidence/input-field-objective-comparison-v1/index.json`; corrected
@@ -128,9 +140,42 @@ future scene-readback instrumentation. Scene accounting compares the complete
 adornment payload and visual fields with stable occurrence IDs.
 
 This remains offline preparation only. Button overall remains false/pending and
-Input remains blocked. The v3 runner is prepared-uncommitted; no Figma v3 write
-or capture occurred. The prospective v3 criterion bytes, semantics, thresholds,
-antecedent, and authorization artifact are unchanged.
+Input remains blocked. The v3 runner was committed before attempt 1. That writer
+minted 2×128 variants, but verification failed before extraction and measured
+zero facts. The prospective v3 criterion bytes, semantics, thresholds,
+antecedent, and authorization artifact remain unchanged.
+
+## Attempt 1 correction — Figma runtime portability, 2026-08-27
+
+Attempt 1 used code commit
+`5e95105b16f3e30e0fb67a53a6eda7a86c105c61`. Its exact 2,440,411-byte writer
+decoded to SHA-256
+`e831b450b450a0b9fc0d086bc33a428ca473fed12616d3cf0b82ada8f4f16f24`,
+evaluated, and minted both 128-variant sets. Scene verification then failed at
+`recipe/scene-readback-runtime.ts:35`: the Figma sandbox exposed no
+constructible `TextDecoder`. Expected scene facts were 43,726; measured scene
+facts, objective rows, captures, and fixed-point cycles were all zero. No
+success receipt or human packet exists.
+
+The correction replaces that assumption with an RFC 3629 decoder that refuses
+invalid lead, continuation, overlong, surrogate, out-of-range, and truncated
+sequences by name. Native `TextDecoder` is optional and is selected only after
+fatal-mode probes and exact equality with the fallback. Base64 and SHA-256 are
+portable audited implementations; `TextEncoder`, `atob`/`btoa`, Web Crypto,
+`structuredClone`, `Buffer`, compression streams, fetch, URL, Blob, and
+FileReader are not runtime dependencies.
+
+Cleanup now marks variable collections with exact ownership, switches away
+from an owned current page before removal, rejects name collisions without
+ownership, and is idempotent. The failed runner cleanup and successful manual
+cleanup remain separate evidence. Manual cleanup removed page `86:34550` and
+collections `VariableCollectionId:86:34552` and
+`VariableCollectionId:86:35979`; unrelated Scratch state returned to fingerprint
+`10ba6b57da3cfa97` with 13 pages, 14 collections, and 11,163 variables.
+
+Attempt 2 remains pending under the maximum of three. It may run only after this
+correction is committed, published, and checked from a clean descendant of the
+existing authorization commit.
 
 ## 0 · The decision, in one paragraph
 

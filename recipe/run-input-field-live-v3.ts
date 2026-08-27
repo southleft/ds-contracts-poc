@@ -10,10 +10,12 @@ import {
   INPUT_LIVE_V3_PROTOCOL_PATH,
 } from "./input-field-live-v3-authorization.js";
 import {
+  buildInputLiveV3Attempt1ReceiptEvidence,
   inputLiveV3Artifact,
   writeInputLiveV3Receipt,
   type InputLiveV3AttemptEvidence,
 } from "./input-field-live-v3-evidence.js";
+import { buildInputLiveV3CleanupRuntime } from "./input-field-live-v3-cleanup.js";
 import {
   INPUT_LIVE_V3_ROOT,
   readInputLiveV3PreflightState,
@@ -51,7 +53,7 @@ const BRIDGE_ROOT =
 const PORT = Number(process.env.RECIPE_BRIDGE_PORT ?? 9230);
 const ATTEMPT = Number(
   process.argv.find((value) => value.startsWith("--attempt="))?.split("=")[1] ??
-    "1",
+    "2",
 );
 
 const sha256 = (value: Uint8Array): string =>
@@ -184,6 +186,15 @@ const roleScaleMismatch = (
 async function main(): Promise<void> {
   if (!Number.isInteger(ATTEMPT) || ATTEMPT < 1 || ATTEMPT > 3)
     throw new Error("Input live v3 attempt must be 1..3");
+  const recordedAttempts = json(`${INPUT_LIVE_V3_ROOT}/index.json`)
+    .attemptHistory as unknown[];
+  if (
+    !Array.isArray(recordedAttempts) ||
+    ATTEMPT !== recordedAttempts.length + 1
+  )
+    throw new Error(
+      `Input live v3 attempt chronology refused: expected ${recordedAttempts.length + 1}, received ${ATTEMPT}`,
+    );
   const plan = json(PLAN_PATH);
   for (const source of plan.sources as Array<Record<string, any>>) {
     const artifact = source.expectedScenePlanArtifact;
@@ -284,12 +295,30 @@ async function main(): Promise<void> {
   } catch (error) {
     runError = error;
   } finally {
-    if (server.getConnectedFiles().length > 0) {
+    if (
+      server
+        .getConnectedFiles()
+        .some(
+          (file: { fileKey: string; fileName: string }) =>
+            file.fileKey === plan.target.fileKey &&
+            file.fileName === plan.target.fileName,
+        )
+    ) {
       try {
         const connector = new WebSocketConnector(server);
         await connector.initialize();
         const cleanupResponse = await connector.executeCodeViaUI(
-          `await figma.loadAllPagesAsync();const NS=${JSON.stringify(NS)},get=(node,key)=>node.getSharedPluginData(NS,key),pages=figma.root.children.filter(page=>get(page,"pageOwner")==="recipe/input-field/"+${JSON.stringify(plan.runIdentity)}),collections=(await figma.variables.getLocalVariableCollectionsAsync()).filter(collection=>collection.name.includes(${JSON.stringify(plan.runIdentity)})),requestedNodeIds=pages.map(node=>node.id),requestedCollectionIds=collections.map(item=>item.id);for(const page of pages)page.remove();for(const collection of collections)collection.remove();const remainingPages=figma.root.children.filter(page=>get(page,"pageOwner")==="recipe/input-field/"+${JSON.stringify(plan.runIdentity)}),remainingCollections=(await figma.variables.getLocalVariableCollectionsAsync()).filter(collection=>collection.name.includes(${JSON.stringify(plan.runIdentity)}));return{requestedNodeIds,removedNodeIds:requestedNodeIds,requestedCollectionIds,removedCollectionIds:requestedCollectionIds,remainingOwnedNodes:remainingPages.length,remainingOwnedCollections:remainingCollections.length,complete:remainingPages.length===0&&remainingCollections.length===0};`,
+          buildInputLiveV3CleanupRuntime({
+            fileKey: plan.target.fileKey,
+            fileName: plan.target.fileName,
+            editorType: plan.target.editorType,
+            namespace: NS,
+            pageName: plan.pageName,
+            runIdentity: plan.runIdentity,
+            adapterIdentities: plan.sources.map(
+              (source: Record<string, string>) => source.adapterIdentity,
+            ),
+          }),
           30_000,
           plan.target.fileKey,
         );
@@ -561,6 +590,8 @@ async function main(): Promise<void> {
   writeFileSync(attemptPath, `${JSON.stringify(attemptRecord, null, 2)}\n`);
   const attemptEvidence: InputLiveV3AttemptEvidence = {
     attempt: ATTEMPT,
+    outcome: "technical-complete",
+    codeCommit: git("rev-parse", "HEAD"),
     writerSha256: plan.writer.sha256,
     wrapperSha256: plan.transport.wrapperSha256,
     decodedBytes: transport.decodedBytes,
@@ -570,7 +601,11 @@ async function main(): Promise<void> {
     createdNodeIds: writeResult.result.createdNodeIds,
     mutatedNodeIds: writeResult.result.mutatedNodeIds,
     resultArtifact: inputLiveV3Artifact(attemptPath),
-    cleanup: { ...cleanup, artifact: inputLiveV3Artifact(cleanupPath) },
+    cleanup: {
+      ...cleanup,
+      method: "runner",
+      artifact: inputLiveV3Artifact(cleanupPath),
+    },
   };
   const authorizationCommit = git(
     "log",
@@ -606,7 +641,10 @@ async function main(): Promise<void> {
       retentionReason:
         "technical evidence captured locally; owned Scratch artifacts cleaned pending human signoff",
     },
-    attempts: [attemptEvidence],
+    attempts:
+      ATTEMPT === 1
+        ? [attemptEvidence]
+        : [buildInputLiveV3Attempt1ReceiptEvidence(), attemptEvidence],
     report,
     sceneProofs,
     sceneFactsArtifact: inputLiveV3Artifact(scenePath),

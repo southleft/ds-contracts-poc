@@ -1,8 +1,12 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import test from "node:test";
 
-import { validateInputLiveV3Evidence } from "./input-field-live-v3-evidence.js";
+import {
+  readInputLiveV3Attempt1HardFailure,
+  validateInputLiveV3Attempt1HardFailure,
+  validateInputLiveV3Evidence,
+} from "./input-field-live-v3-evidence.js";
 import {
   validateInputLiveV3Preflight,
   type InputLiveV3PreflightState,
@@ -471,6 +475,76 @@ test("evidence validation rejects partial cleanup", () => {
     historicalEvidenceUnchanged: true,
   });
   assert.match(failures.join("\n"), /partial cleanup/);
+});
+
+test("attempt 1 exact artifacts validate only as a hard failure", () => {
+  const evidence = readInputLiveV3Attempt1HardFailure();
+  assert.equal(
+    evidence.attemptArtifact.sha256,
+    "28100f55a183c6dd346c9c0d4adb394eb33705881e1ad302d5a3dd174653a698",
+  );
+  assert.equal(
+    evidence.cleanupArtifact.sha256,
+    "5aa381b9c7d82431d8a5861a678e2e6949b0977adaa66a17e1f4c73eeb4df2b3",
+  );
+  assert.equal(evidence.attempt.verification.measuredSceneFacts, 0);
+  assert.equal(evidence.attempt.writerResult.sources[0].variantCount, 128);
+  assert.equal(evidence.attempt.writerResult.sources[1].variantCount, 128);
+  assert.equal(
+    evidence.cleanup.manualCleanup.unrelatedScratchFingerprint.before,
+    evidence.cleanup.manualCleanup.unrelatedScratchFingerprint.after,
+  );
+  assert.equal(evidence.cleanup.runnerCleanup.complete, false);
+  assert.equal(evidence.cleanup.manualCleanup.complete, true);
+  assert.equal(
+    existsSync("recipe/evidence/input-field-live-pivot-v3/receipt.json"),
+    false,
+  );
+});
+
+test("attempt 1 missing result fields, success claims, and fingerprint tampering refuse", () => {
+  const evidence = readInputLiveV3Attempt1HardFailure();
+  const plants: Array<{
+    pattern: RegExp;
+    mutate: (
+      attempt: Record<string, any>,
+      cleanup: Record<string, any>,
+    ) => void;
+  }> = [
+    {
+      pattern: /verifier hard failure\/zero measurements/,
+      mutate: (attempt) => {
+        delete attempt.verification.measuredSceneFacts;
+      },
+    },
+    {
+      pattern: /absent success\/result artifacts/,
+      mutate: (attempt) => {
+        attempt.artifacts.successReceipt = { path: "forged" };
+      },
+    },
+    {
+      pattern: /manual cleanup fingerprint/,
+      mutate: (_attempt, cleanup) => {
+        cleanup.manualCleanup.unrelatedScratchFingerprint.after = "forged";
+      },
+    },
+    {
+      pattern: /hard-failure identity/,
+      mutate: (attempt) => {
+        attempt.outcome = "passed";
+      },
+    },
+  ];
+  for (const plant of plants) {
+    const attempt = structuredClone(evidence.attempt);
+    const cleanup = structuredClone(evidence.cleanup);
+    plant.mutate(attempt, cleanup);
+    assert.match(
+      validateInputLiveV3Attempt1HardFailure(attempt, cleanup).join("\n"),
+      plant.pattern,
+    );
+  }
 });
 
 test("runner contains no posthoc threshold constants or source rewriting", () => {

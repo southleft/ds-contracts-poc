@@ -1,14 +1,59 @@
 {
   "artifactVersion": "input-live-v3-index-v1",
-  "status": "runner prepared-uncommitted; capture not yet run",
-  "captureAuthorized": false,
+  "status": "attempt 1 hard failure; committed runtime correction pending",
+  "captureAuthorized": true,
   "protocol": {
     "path": "recipe/evidence/input-field-live-pivot-v3/protocol.json",
     "sha256": "f4decf46da7cd3870e247d5304d632028356580e58ce68bedcb7acb7c0e31a23"
   },
-  "captureArtifacts": [],
-  "result": null,
+  "captureArtifacts": [
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v3/live-attempt-1.json",
+      "bytes": 44902,
+      "sha256": "28100f55a183c6dd346c9c0d4adb394eb33705881e1ad302d5a3dd174653a698"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v3/cleanup-attempt-1.json",
+      "bytes": 1246,
+      "sha256": "5aa381b9c7d82431d8a5861a678e2e6949b0977adaa66a17e1f4c73eeb4df2b3"
+    }
+  ],
+  "result": {
+    "status": "hard-failure",
+    "attempt": 1,
+    "writerExecutionSucceeded": true,
+    "mintedVariants": 256,
+    "verifierCompleted": false,
+    "sceneFactsExpected": 43726,
+    "sceneFactsMeasured": 0,
+    "objectiveRowsMeasured": 0,
+    "capturedCells": 0,
+    "successReceiptWritten": false
+  },
   "overallInputSuccess": false,
+  "attemptHistory": [
+    {
+      "attempt": 1,
+      "outcome": "hard-failure",
+      "codeCommit": "5e95105b16f3e30e0fb67a53a6eda7a86c105c61",
+      "writerSha256": "e831b450b450a0b9fc0d086bc33a428ca473fed12616d3cf0b82ada8f4f16f24",
+      "rootCause": "Figma sandbox TextDecoder is not constructible in scene variable identity decoding",
+      "runnerCleanupComplete": false,
+      "manualCleanupComplete": true,
+      "artifacts": {
+        "attempt": {
+          "path": "recipe/evidence/input-field-live-pivot-v3/live-attempt-1.json",
+          "bytes": 44902,
+          "sha256": "28100f55a183c6dd346c9c0d4adb394eb33705881e1ad302d5a3dd174653a698"
+        },
+        "cleanup": {
+          "path": "recipe/evidence/input-field-live-pivot-v3/cleanup-attempt-1.json",
+          "bytes": 1246,
+          "sha256": "5aa381b9c7d82431d8a5861a678e2e6949b0977adaa66a17e1f4c73eeb4df2b3"
+        }
+      }
+    }
+  ],
   "offlineCorrectionTask2": {
     "implemented": true,
     "figmaOrCaptureRun": false,
@@ -16,13 +61,32 @@
   },
   "runnerPreparation": {
     "prepared": true,
-    "committed": false,
+    "committed": true,
     "figmaOrCaptureRun": false,
     "generatedPlan": "recipe/evidence/input-field-live-pivot-v3/writer-plan.json"
   },
+  "runtimeCorrection": {
+    "status": "prepared-uncommitted; commit required before attempt 2",
+    "figmaOrCaptureRun": false,
+    "nextAttempt": 2,
+    "maximumAttempts": 3,
+    "authorizationReusable": true,
+    "newAuthorizationArtifactRequired": false,
+    "dependencies": {
+      "recipe/figma-runtime-portability.ts": "f92690e582535dc414c1e030271f39e46ef6f8be6cf3b5c4a3267d50060b50f2",
+      "recipe/scene-readback-runtime.ts": "b93550ee6454afa710cdfdd98139593b5a62d135162f1cdb77833e411691a937",
+      "recipe/input-field-figma-writer.ts": "e80e08db0dc8a34355c21e90c179ba474330dd7446f225d42bd0caa49165f9fd",
+      "recipe/writer-transport.ts": "e6762b86d9e4d4a1e0369405cb299cf411d952cf35de09ca31f83449d8d4e9e3",
+      "recipe/input-field-live-v3-cleanup.ts": "ac9d76dd92250be8eefe13c4a32bd660105140e936ae0ba04b01c29254372ffc",
+      "recipe/run-input-field-live-v3.ts": "19f34c87a09d1e0a891f4d29f6105c910c06ef218a17c1426d4b81d4814d9a91",
+      "recipe/input-field-live-v3-evidence.ts": "ef9d12980ace5713962b1784aa9072fd9fb35df0c5f598ac6b00b3ef28769a07",
+      "recipe/build-input-field-live-proof-v3.ts": "f5338484ea2272bd2b6ea0e3434ccb4ec38acc836e843ee0df52f997164f2215"
+    }
+  },
   "blockers": [
-    "runner and verifier scaffolding are not yet committed as a clean authorization descendant",
-    "scene-derived live inversion/accounting has not run",
+    "runtime correction must be committed and published as a clean authorization descendant",
+    "attempt 1 verifier failed before scene extraction; zero scene facts were measured",
+    "attempt 2 has not run",
     "typed adornment/font lowering has not been verified against a newly authorized Figma scene",
     "attributable human signoff has not occurred"
   ]

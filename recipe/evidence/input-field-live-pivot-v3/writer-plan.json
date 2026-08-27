@@ -22,8 +22,8 @@
   },
   "writer": {
     "path": "recipe/evidence/input-field-live-pivot-v3/writer.js",
-    "bytes": 2440411,
-    "sha256": "e831b450b450a0b9fc0d086bc33a428ca473fed12616d3cf0b82ada8f4f16f24",
+    "bytes": 2449180,
+    "sha256": "92da8f8c5ae78a870b392f9dfb3e239e82e8dc018d9abebfbcdd8118bf542811",
     "deterministicGenerations": 2,
     "writerProgramVersion": 2,
     "executionProtocolVersion": 3
@@ -31,12 +31,12 @@
   "transport": {
     "protocol": "ds-contracts/figma-writer-utf8-base64/v1",
     "envelopePath": "recipe/evidence/input-field-live-pivot-v3/transport-envelope.json",
-    "envelopeSha256": "4cfb445a68901121c4fb532d6737c3fcee5bf94b4b4336658b1a78ae0514c27d",
-    "payloadBytes": 2440411,
-    "payloadSha256": "e831b450b450a0b9fc0d086bc33a428ca473fed12616d3cf0b82ada8f4f16f24",
+    "envelopeSha256": "962a8585064d844d023a1ccdc25955e387442712497826cb733b36c460b856a0",
+    "payloadBytes": 2449180,
+    "payloadSha256": "92da8f8c5ae78a870b392f9dfb3e239e82e8dc018d9abebfbcdd8118bf542811",
     "wrapperPath": "recipe/evidence/input-field-live-pivot-v3/writer-wrapper.txt",
-    "wrapperBytes": 3259428,
-    "wrapperSha256": "8de5c99cf89b060c3b9a8c28c2345f56e2673d79e98fb55ab02d7fc24d681d6b"
+    "wrapperBytes": 3275714,
+    "wrapperSha256": "ad2ea3b369c86880f59897442cf006268ec6a98badebb1a40de74fad19330ec0"
   },
   "conformance": {
     "path": "recipe/evidence/input-field-live-pivot-v3/conformance-report.json",
@@ -45,9 +45,43 @@
       "propertyNames": 58,
       "variants": 256,
       "variables": 152,
-      "pluginDataWrites": 11541,
+      "pluginDataWrites": 11547,
       "propertyWrites": 37647,
       "bindings": 8192
+    },
+    "runtimeApiAudit": {
+      "artifactVersion": "figma-runtime-api-audit-v1",
+      "requiredEcmaBuiltins": [
+        "Array",
+        "DataView",
+        "JSON",
+        "Map",
+        "Math.imul",
+        "Object.entries",
+        "Object.fromEntries",
+        "Promise",
+        "Set",
+        "String.fromCharCode",
+        "Uint8Array",
+        "Uint32Array",
+        "eval"
+      ],
+      "webApis": {
+        "TextDecoder": "optional; selected only after fatal-mode conformance probes and exact fallback equality",
+        "TextEncoder": "not used",
+        "atob": "not used; strict portable base64 decoder",
+        "btoa": "not used",
+        "crypto": "not used; audited portable SHA-256",
+        "subtle": "not used; audited portable SHA-256",
+        "structuredClone": "not used",
+        "Buffer": "host-only; never emitted into Figma runtime",
+        "CompressionStream": "not used",
+        "DecompressionStream": "not used",
+        "fetch": "not used",
+        "URL": "not used",
+        "Blob": "not used",
+        "FileReader": "not used"
+      }
     }
   },
   "requiredGateIds": [
@@ -3599,11 +3633,15 @@
     "deterministicOrderSha256": "84bde61f9d04efaf7d02fe2527e5f48dd10f59372a10a387fbbfca25998cee8e"
   },
   "moduleHashes": {
-    "recipe/build-input-field-live-proof-v3.ts": "a200203552ddb42af284f99d67de0f8fce9f780330594b4c9973ee339b196c20",
+    "recipe/build-input-field-live-proof-v3.ts": "f5338484ea2272bd2b6ea0e3434ccb4ec38acc836e843ee0df52f997164f2215",
     "recipe/input-field-live-v3-preflight.ts": "c27323fbd6d025b26c1a1baac1d6f8e1666615e132d5c56279008fcdb6943efd",
     "recipe/input-field-live-v3-verifier.ts": "edee6b8c3ab8c3932c41ad966b07402a43ed951bca5de2a9f6749b3376744580",
-    "recipe/input-field-live-v3-evidence.ts": "842cc2b2ab0ca97c3301d8b3128f39c2246ed315ff865af4decc9215a60edf53",
-    "recipe/run-input-field-live-v3.ts": "c4614008e12a68c841950b8f1350000225713f65523c08f080ec59ba2f7ce7f1"
+    "recipe/input-field-live-v3-evidence.ts": "ef9d12980ace5713962b1784aa9072fd9fb35df0c5f598ac6b00b3ef28769a07",
+    "recipe/input-field-live-v3-cleanup.ts": "ac9d76dd92250be8eefe13c4a32bd660105140e936ae0ba04b01c29254372ffc",
+    "recipe/figma-runtime-portability.ts": "f92690e582535dc414c1e030271f39e46ef6f8be6cf3b5c4a3267d50060b50f2",
+    "recipe/scene-readback-runtime.ts": "b93550ee6454afa710cdfdd98139593b5a62d135162f1cdb77833e411691a937",
+    "recipe/writer-transport.ts": "e6762b86d9e4d4a1e0369405cb299cf411d952cf35de09ca31f83449d8d4e9e3",
+    "recipe/run-input-field-live-v3.ts": "19f34c87a09d1e0a891f4d29f6105c910c06ef218a17c1426d4b81d4814d9a91"
   },
   "attempts": {
     "maximum": 3

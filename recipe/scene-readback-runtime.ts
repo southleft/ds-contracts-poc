@@ -1,3 +1,5 @@
+import { FIGMA_PORTABLE_RUNTIME } from "./figma-runtime-portability.js";
+
 /**
  * Runtime injected into future live verifiers. Plugin data is read only for
  * the opaque ownership key used to join a node to the pre-execution plan.
@@ -9,6 +11,8 @@ export function buildFigmaSceneReadbackRuntime(namespace: string): string {
   }
   return String.raw`
 const SCENE_READBACK_NS=${JSON.stringify(namespace)};
+${FIGMA_PORTABLE_RUNTIME}
+const sceneRuntimePreflight=runtimePreflight();
 const sceneHexByte=value=>Math.round(Math.max(0,Math.min(1,value))*255).toString(16).padStart(2,"0");
 const sceneColor=(color,opacity=1)=>"#"+sceneHexByte(color.r)+sceneHexByte(color.g)+sceneHexByte(color.b)+sceneHexByte((color.a===undefined?1:color.a)*opacity);
 const sceneRole=node=>{
@@ -32,7 +36,7 @@ const sceneVariableIdentity=name=>{
   const match=name.match(/^token\/(?:color|float)\/id-([0-9a-f]+)$/);
   if(!match||match[1].length%2!==0)throw new Error("NONREVERSIBLE-SCENE-VARIABLE-NAME:"+name);
   const bytes=new Uint8Array(match[1].match(/../g).map(byte=>parseInt(byte,16)));
-  return new TextDecoder().decode(bytes);
+  return runtimeDecodeUtf8(bytes,"SCENE-VARIABLE-UTF8").value;
 };
 const sceneVariable=async(field,alias)=>{
   const variable=alias&&alias.id?await figma.variables.getVariableByIdAsync(alias.id):null;
