@@ -43,8 +43,12 @@
 > fills). `scene-readback.ts` is not in the v9 antecedent hash set, but the
 > v3 verifier that calls it is hashed and must not be patched in place.
 > Cleanup accepted; owned Input pages are gone; no captures; no live success.
-> Do not restart v9 attempt 3 as-is. Open v10 with a carried verifier that does
-> not invoke v8 `scene-readback.ts` on the live extract.
+> Do not restart v9 attempt 3 as-is. V10 is the replacement lineage: it copies
+> the v9 stack and carries `scene-readback-v10.ts` plus
+> `input-field-live-v3-verifier-v10.ts` so live host normalize/account does not
+> call hashed `scene-readback.ts`. V10 prepare is drafted; live execution
+> remains forbidden until a later AUTHORIZE commit. Writer bytes stay frozen
+> from v8/v9.
 > Button overall success is false/pending.
 > Its technical mint, usability, restoration, and 12/12 adjudication bytes are
 > retained, but the human grade is not attributable and the historical live
@@ -180,8 +184,10 @@
 > `--expect-authorized`. V9 attempt 1 failed closed on component-set
 > strokes/effects/cornerRadius; attempt 2 cleared that and failed closed on the
 > hashed v3 verifier still calling v8 `scene-readback.ts`. Cleanup completed
-> both times. V7 and v8 authorization are not reusable. Do not restart v9
-> attempt 3 as-is. The ordered remaining-work plan to an honest v1 proof is in
+> both times. V7, v8, and v9 authorization are not reusable. Do not restart v9
+> attempt 3 as-is. V10 prepare is drafted on this branch; verify with
+> `--expect-pending` after the prepare commit. The ordered remaining-work plan
+> to an honest v1 proof is in
 > [Remaining work to v1 proof](#remaining-work-to-v1-proof-2026-08-27).**
 >
 > Historical implementation record: **Input/Field has an offline
@@ -302,7 +308,8 @@ lineage; do not patch hashed bytes in place.
 | A2 | Fresh private attestation only: replacement PAT + `oldTokenRevoked=false` + `ownerRiskAcceptance=true`; env files mode 0600; MCP restarted; zero-result secret scan bound to the authorize/code commit; Scratch-only read-only probe. Never commit `private/`. Never print tokens. | Attestations at `private/input-live-v9-security-attestation.json` (bound to authorize) and `private/input-live-v9-security-attestation-attempt-2.json` (bound to `1c80badc`) stay untracked. |
 | A3 | Attempt 1 Scratch-only live. | **Failed closed.** Writer + extract accepted (2317 nodes, 8364325-byte extract); host IR refused component-set `strokes`/`effects`/`cornerRadius`. Cleanup accepted. Taught unhashed `figma-ir.ts`. RECORD `1c80badc`. |
 | A4 | Attempt 2 Scratch-only live after that IR teaching. | **Failed closed.** Writer + extract accepted again; component-set fields cleared; host still ran hashed `input-field-live-v3-verifier.ts` → v8 `scene-readback.ts` and refused `payload.fills.0.kind`. Cleanup accepted. Do **not** restart v9 attempt 3 as-is. |
-| A5 | PREPARE INPUT V10. Copy the v9 stack. Carry scene-readback-v10 **and** a verifier/contract that does not invoke v8 `scene-readback.ts` on live extract. Keep v9 hashed bytes frozen. Separate AUTHORIZE, then attestation + Scratch-only live. Max 3 v10 attempts. Same transport facts. | Writer + extract + host normalize/account **both** roots + gates + 128 captures + cleanup. Scene-derived verification independent of stamped IR. Zero silent losses. If a hashed v10 file fails closed, open v11. |
+| A5 | PREPARE INPUT V10. Copy the v9 stack. Carry scene-readback-v10 **and** `input-field-live-v3-verifier-v10.ts` so live host does not invoke v8 `scene-readback.ts`. Keep v9 hashed bytes frozen. Writer bytes frozen from v8/v9. | Draft antecedent generated; `--expect-pending` after publish. Live still forbidden. |
+| A5b | AUTHORIZE INPUT V10 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent = v10 prepare commit. Auth lifecycle stays out of the hash set. | `--expect-authorized` after publish. Then attestation + Scratch-only live. Max 3 attempts. Same transport facts. Writer + extract + host normalize/account **both** roots + gates + 128 captures + cleanup. Scene-derived verification independent of stamped IR. Zero silent losses. If a hashed v10 file fails closed, open v11. |
 | A6 | Attributable human signoff on Input. | **Human gate.** Record pending and continue other work. Do not invent a grade. Overall Input stays **false** until signed. |
 
 ### B · Button closeout
@@ -364,11 +371,12 @@ v1 is complete only when every row is actually true:
 
 ### Immediate next command
 
-After RECORD INPUT V9 ATTEMPT 2 is published:
+After PREPARE INPUT V10 is published:
 
 ```
 git pull --ff-only
-# PREPARE INPUT V10 — stop calling hashed scene-readback.ts from the live host path
+npm run recipe:input-field:live:v10:history:verify -- --expect-pending
+# then AUTHORIZE INPUT V10 — pin a prepare-era operator signer; live remains forbidden
 ```
 
 ## Correction task 2 — offline implementation, 2026-08-27
@@ -1725,7 +1733,7 @@ references and re-derives a legacy comparator over the frozen 24-cell matrix.
 | archetype   | progress                                                                                                                                                        | next evidence boundary                                                                           |
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | Button      | **technical mint retained; overall false/pending**                                                                                                              | scene-derived inversion/accounting, then attributable human signoff (human gate)                 |
-| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, and v9 attempts 1-2 failed closed; false** | PREPARE INPUT V10 with a carried verifier that does not call v8 `scene-readback.ts` (see Remaining work §A) |
+| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, and v9 attempts 1-2 failed closed; v10 draft antecedent; false** | AUTHORIZE INPUT V10, then Scratch-only live (see Remaining work §A) |
 | Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                                                                      | matched 24-cell benchmark, Scratch-only live, then human grade (see Remaining work §C)           |
 | Data Table  | not claimed                                                                                                                                                     | human-reviewed adapters, offline cross-library proof, then Scratch-only live                     |
 | Calendar    | not claimed                                                                                                                                                     | reviewed archetype addition, then the same offline-then-live sequence                            |
