@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 authorization declared; live forbidden; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -530,7 +530,11 @@ const V20_AUTHORIZATION_TEMPLATE_SHA256 =
 const V20_STATUS_PATH =
   "recipe/evidence/input-field-live-pivot-v20-status.json";
 const V20_STATUS =
-  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
+  "attempt 1 failed closed; writer and restore accepted; extract issued; host refused surface layout.height.value; cleanup complete";
+const V20_ATTEMPT_1_PATH =
+  "recipe/evidence/input-field-live-pivot-v20-attempt-1.json";
+const V20_ATTEMPT_1_SHA256 =
+  "20288480b8dbaa83db4b2c1e9ea0668c13b3079f79d2df6283a6828b4144f571";
 const V20_BASE_COMMIT = "4e0e582d2b64202d07a99a5471bc5ff40b87bb9c";
 const V20_ANTECEDENT_COMMIT = "d49f2da22d897b4a42e1a0e0f8ef302c61383417";
 const V20_AUTHORIZATION_PATH = `${V20_ROOT}/capture-authorization.json`;
@@ -1712,11 +1716,16 @@ export function validatePivotStatus(
     status.input?.liveV20?.hostPhases !== 3 ||
     status.input?.liveV20?.transportFacts?.signedWriterTimeoutMs !== 300_000 ||
     status.input?.liveV20?.security?.liveExecutionForbidden !== true ||
-    status.input?.liveV20?.attemptsExecuted !== 0 ||
-    status.input?.liveV20?.nextAttempt !== 1 ||
-    status.input?.liveV20?.liveExecutionOccurred !== false ||
-    status.input?.liveV20?.figmaWrites !== 0 ||
+    status.input?.liveV20?.attemptsExecuted !== 1 ||
+    status.input?.liveV20?.nextAttempt !== 2 ||
+    status.input?.liveV20?.liveExecutionOccurred !== true ||
+    status.input?.liveV20?.figmaWrites !== 4 ||
     status.input?.liveV20?.figmaCaptures !== 0 ||
+    status.input?.liveV20?.createdNodesThenRemoved !== 2317 ||
+    status.input?.liveV20?.attempt1Path !== V20_ATTEMPT_1_PATH ||
+    status.input?.liveV20?.attempt1Sha256 !== V20_ATTEMPT_1_SHA256 ||
+    status.input?.liveV20
+      ?.restartAsV20Attempt2WithoutSurfaceLayoutHeightForbidden !== true ||
     status.input?.liveV20?.humanSignoff !== "pending" ||
     status.input?.liveV20?.overallInputSuccess !== false
   )
@@ -3524,9 +3533,18 @@ export function verifyPivotStatus(): void {
       true ||
     v20Status.smallestHonestDelta?.v19SceneReadbackUnchanged !== true ||
     v20Status.smallestHonestDelta?.v16ExtractBytesUnchanged !== true ||
-    v20Status.attemptsExecuted !== 0 ||
-    v20Status.liveExecutionOccurred !== false ||
-    v20Status.figmaWrites !== 0 ||
+    v20Status.attemptsExecuted !== 1 ||
+    v20Status.nextAttempt !== 2 ||
+    v20Status.liveExecutionOccurred !== true ||
+    v20Status.figmaWrites !== 4 ||
+    v20Status.figmaCaptures !== 0 ||
+    v20Status.createdNodesThenRemoved !== 2317 ||
+    v20Status.attempt1Path !== V20_ATTEMPT_1_PATH ||
+    v20Status.attempt1Sha256 !== V20_ATTEMPT_1_SHA256 ||
+    sha256(readRepositoryEvidence(V20_ATTEMPT_1_PATH)) !==
+      V20_ATTEMPT_1_SHA256 ||
+    v20Status.restartAsV20Attempt2WithoutSurfaceLayoutHeightForbidden !==
+      true ||
     v20Status.overallInputSuccess !== false
   )
     failures.push("v20 draft antecedent/status mismatch");

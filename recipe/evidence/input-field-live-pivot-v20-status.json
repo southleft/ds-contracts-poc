@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v20-status-v1",
-  "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+  "status": "attempt 1 failed closed; writer and restore accepted; extract issued; host refused surface layout.height.value; cleanup complete",
   "baseCommit": "4e0e582d2b64202d07a99a5471bc5ff40b87bb9c",
   "antecedent": {
     "commit": "d49f2da22d897b4a42e1a0e0f8ef302c61383417",
@@ -105,12 +105,16 @@
     "exactScratchReadOnlyProbeRequired": true,
     "tokenValuesForbidden": true
   },
-  "attemptsExecuted": 0,
-  "nextAttempt": 1,
+  "attemptsExecuted": 1,
+  "nextAttempt": 2,
   "maximumFutureAttempts": 3,
-  "liveExecutionOccurred": false,
-  "figmaWrites": 0,
+  "liveExecutionOccurred": true,
+  "figmaWrites": 4,
   "figmaCaptures": 0,
+  "createdNodesThenRemoved": 2317,
+  "attempt1Path": "recipe/evidence/input-field-live-pivot-v20-attempt-1.json",
+  "attempt1Sha256": "20288480b8dbaa83db4b2c1e9ea0668c13b3079f79d2df6283a6828b4144f571",
+  "restartAsV20Attempt2WithoutSurfaceLayoutHeightForbidden": true,
   "humanSignoff": "pending",
   "overallInputSuccess": false
 }
