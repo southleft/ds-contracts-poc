@@ -66,10 +66,21 @@
 > captures; no live success. Do not restart v10 attempt 3 as-is. V11 is the
 > replacement lineage: it copies the v10 stack and recovers text roles from
 > the first \` :: \` name segment even when a later \`font-provenance=\`
-> segment is present. Writer bytes stay frozen from v8/v9/v10. Live
-> The separate authorization artifact pins that antecedent; commit state is
-> derived from Git history. Live execution remains forbidden until runtime
-> security prerequisites pass.
+> segment is present. Writer bytes stay frozen from v8/v9/v10. V11 prepare
+> is published at `f1861d527dd09345c56ee862de7776fbc4d0a7a2`. Authorization
+> is published at `41fc8c77e01a670a38d5cdfb97feba80b638f72e`. V11 attempt 1
+> ran Scratch-only: writer accepted (2317 created nodes), extract raw
+> returned (8402407 bytes), hashed first-segment role recovery cleared the
+> helper-text refusal, then host collapse refused
+> `input content must fill the horizontal surface` on MUI
+> `medium/default/placeholder/false/none`. Extract shows MUI content
+> 104/128 FILL and 24/128 FIXED (all placeholder, Adornments none or
+> trailing); Polaris 128/128 FILL. Frozen writer already sets those texts to
+> FILL after property bind; Figma later reports FIXED. Do not teach the
+> recipe to accept FIXED. Do not restart v11 attempt 2 as-is. Writer bytes
+> are in the v11 hash set; the next lineage must re-assert FILL after the
+> component set settles. Cleanup accepted; owned Input pages are gone; no
+> captures; no live success.
 > Button overall success is false/pending.
 > Its technical mint, usability, restoration, and 12/12 adjudication bytes are
 > retained, but the human grade is not attributable and the historical live
@@ -209,9 +220,12 @@
 > attempt 3 as-is. V10 prepare is published at
 > `0da647b79ed8a2660b9858c6008a08cbae8dbbf3`. Authorization is present at
 > `recipe/evidence/input-field-live-pivot-v10/capture-authorization.json`;
-> verify `--expect-authorized` after the authorization commit. Live remains
-> forbidden until attestation and preflight pass. The ordered remaining-work
-> plan to an honest v1 proof is in
+> verify `--expect-authorized` after the authorization commit. V10 attempts
+> 1-2 failed closed. V11 prepare is published at
+> `f1861d527dd09345c56ee862de7776fbc4d0a7a2`. Authorization is published at
+> `41fc8c77e01a670a38d5cdfb97feba80b638f72e`. V11 attempt 1 failed closed on
+> MUI content fill (24 placeholder texts FIXED); do not restart attempt 2
+> as-is. The ordered remaining-work plan to an honest v1 proof is in
 > [Remaining work to v1 proof](#remaining-work-to-v1-proof-2026-08-27).**
 >
 > Historical implementation record: **Input/Field has an offline
@@ -337,7 +351,9 @@ lineage; do not patch hashed bytes in place.
 | A5c | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer + extract accepted (2317 nodes, 8364327-byte extract). Hashed `scene-readback.ts` path cleared. Host collapse refused Size axis order `medium,small` vs declared `small,medium` in unhashed `recipes/input-field.ts`. Cleanup accepted. Teach axis-value order as non-structural, then attempt 2. |
 | A5d | Attempt 2 Scratch-only live after Size-axis teaching. | **Failed closed.** Writer + extract accepted (2317 nodes, 8364327-byte extract). Size axis order cleared. Host collapse refused `input-field/message/helper` because hashed `sceneRole` drops roles when `font-provenance=` is in the name. Helper text present on 256/256 variants; first-segment role recoverable. Cleanup accepted. Do **not** restart v10 attempt 3 as-is. |
 | A5e | PREPARE INPUT V11. Copy the v10 stack. Carry scene-readback-v11 + runtime that recover role/label from the first ` :: ` segment even when later segments contain `font-provenance=`. Keep v10 hashed bytes frozen. Writer bytes frozen from v8/v9/v10. | **Done** at `f1861d527dd09345c56ee862de7776fbc4d0a7a2`. Antecedent index SHA-256 `65ca9866da8fc90f354ceb53d57dc383f64d9f39d9b9f9ad3752df499c9628c7`. |
-| A5f | AUTHORIZE INPUT V11 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `f1861d527dd09345c56ee862de7776fbc4d0a7a2`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `c681d7178be473943f4863d59bd30af9de435c23189a9392d2cbc0be3bc0a818`; SPKI SHA-256 `d4b38596d2015c2c732c304071946fe7b9a8fe2827813415165ceeb416a76a02`. | `--expect-authorized` after publish. Then attestation + Scratch-only live. Max 3. Same transport facts. Writer + extract + host normalize/account **both** roots + gates + 128 captures + cleanup. Scene-derived verification independent of stamped IR. Zero silent losses. If a hashed v11 file fails closed, open v12. |
+| A5f | AUTHORIZE INPUT V11 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `f1861d527dd09345c56ee862de7776fbc4d0a7a2`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `c681d7178be473943f4863d59bd30af9de435c23189a9392d2cbc0be3bc0a818`; SPKI SHA-256 `d4b38596d2015c2c732c304071946fe7b9a8fe2827813415165ceeb416a76a02`. | **Done** at `41fc8c77e01a670a38d5cdfb97feba80b638f72e`. |
+| A5g | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer + extract accepted (2317 nodes, 8402407-byte extract). First-segment role recovery cleared. Host collapse refused MUI content fill: 24 placeholder texts extract as FIXED (Adornments none/trailing); Polaris 128/128 FILL. Frozen writer already set FILL after bind. Do **not** teach the recipe to accept FIXED. Do **not** restart v11 attempt 2 as-is. |
+| A5h | PREPARE INPUT V12. Copy the v11 stack. Carry a writer that re-asserts placeholder/value `layoutSizingHorizontal=FILL` after the component set settles. Keep v11 hashed bytes frozen, including the v11 writer payload. | Open only after RECORD INPUT V11 ATTEMPT 1. If a hashed v12 file later fails closed, open v13. |
 | A6 | Attributable human signoff on Input. | **Human gate.** Record pending and continue other work. Do not invent a grade. Overall Input stays **false** until signed. |
 
 ### B · Button closeout
@@ -1760,7 +1776,7 @@ references and re-derives a legacy comparator over the frozen 24-cell matrix.
 | archetype   | progress                                                                                                                                                        | next evidence boundary                                                                           |
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | Button      | **technical mint retained; overall false/pending**                                                                                                              | scene-derived inversion/accounting, then attributable human signoff (human gate)                 |
-| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, and v10 attempts 1-2 failed closed; v11 authorization declared; false** | attestation + Scratch-only live v11 (see Remaining work §A) |
+| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, and v11 attempt 1 failed closed; false** | RECORD v11 attempt 1, then PREPARE INPUT V12 (see Remaining work §A) |
 | Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                                                                      | matched 24-cell benchmark, Scratch-only live, then human grade (see Remaining work §C)           |
 | Data Table  | not claimed                                                                                                                                                     | human-reviewed adapters, offline cross-library proof, then Scratch-only live                     |
 | Calendar    | not claimed                                                                                                                                                     | reviewed archetype addition, then the same offline-then-live sequence                            |
