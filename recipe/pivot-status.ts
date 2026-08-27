@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 draft antecedent pending separate authorization; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -392,6 +392,32 @@ const V15_AUTHORIZATION_SHA256 =
   "2618b5df73ef7a1d4e4973729a99638d44ca5cd22f909b7207231982f9063374";
 const V15_SIGNING_PUBLIC_KEY_SPKI_SHA256 =
   "ff0f180c12a7b39572bb4de024c29d90bdda3a0dafaab6e40d25a611f00afed7";
+const V16_ROOT = "recipe/evidence/input-field-live-pivot-v16";
+const V16_PROTOCOL_SHA256 =
+  "9e1d5d1db0dc925e1241b2088d0ad39d1ea38e7c19f8c09b70e8b9ce9de5b094";
+const V16_PLAN_SHA256 =
+  "a022f4b8a2723f563473d2fec2f60620ea261a8a5e3629a271047ee7f48486c6";
+const V16_CAPTURE_MANIFEST_SHA256 =
+  "53d9d94390d2e65872e05f325f962f5637bcb08224622eb4966727f34b00a977";
+const V16_REQUEST_MANIFEST_SHA256 =
+  "35acb1c81419122bb9a6630f35ace4c7b19af23913b657c9f9f634f465d15522";
+const V16_INDEX_SHA256 =
+  "f9eabfeecb2e4b7d81e3d43c4dfd4666e99f079e86d15eb8ce63e0e020a5c392";
+const V16_HASH_SET_SHA256 =
+  "ef4075e4fd16392e011756f4004b51c5eb4dce6c49f5c36d1d6a87d2e68666bd";
+const V16_AUTHORIZATION_TEMPLATE_SHA256 =
+  "86d7939cf3bc628861da6eb9317686b182fb322edba69bf134de88b4ea486629";
+const V16_STATUS_PATH =
+  "recipe/evidence/input-field-live-pivot-v16-status.json";
+const V16_STATUS =
+  "draft antecedent; pending separate authorization; live execution forbidden";
+const V16_BASE_COMMIT = "72a3c5d8b9bbce9e53b730374d4a0796aa33a2be";
+const V15_RESTORE_SOURCE_SHA256 =
+  "005196311279494e58dd419c5c7626aaa55617b540ef825442df478891d469fc";
+const V15_RESTORE_BLUEPRINT_SHA256 =
+  "da9775162035d50aa60c9539467dec2e6b7d9d50f82b9fedd6b6df7b0d7afee9";
+const V15_RUNTIME_SOURCE_SHA256 =
+  "b8d80b16f6371fe865fa09770d8aec5d653ccf8049a78be695d19d822f089ec1";
 const V14_RESTORE_SOURCE_SHA256 =
   "daa6ec8dea23b1e195c650a01fe5a44e05f531ef0949be944759bbcb2c80f2ce";
 const V14_RESTORE_BLUEPRINT_SHA256 =
@@ -1256,9 +1282,57 @@ export function validatePivotStatus(
     status.input?.liveV15
       ?.restartAsV15Attempt2WithoutPersistedFillAfterHideForbidden !== true ||
     status.input?.liveV15?.humanSignoff !== "pending" ||
-    status.input?.liveV15?.overallInputSuccess !== false
+    status.input?.liveV15?.overallInputSuccess !== false ||
+    status.input?.liveV16?.status !== V16_STATUS ||
+    status.input?.liveV16?.baseCommit !== V16_BASE_COMMIT ||
+    status.input?.liveV16?.protocolSha256 !== V16_PROTOCOL_SHA256 ||
+    status.input?.liveV16?.proofPlanSha256 !== V16_PLAN_SHA256 ||
+    status.input?.liveV16?.captureManifestSha256 !==
+      V16_CAPTURE_MANIFEST_SHA256 ||
+    status.input?.liveV16?.requestManifestSha256 !==
+      V16_REQUEST_MANIFEST_SHA256 ||
+    status.input?.liveV16?.antecedentIndexSha256 !== V16_INDEX_SHA256 ||
+    status.input?.liveV16?.antecedentHashSetSha256 !== V16_HASH_SET_SHA256 ||
+    status.input?.liveV16?.authorizationTemplateSha256 !==
+      V16_AUTHORIZATION_TEMPLATE_SHA256 ||
+    status.input?.liveV16?.authorizationPresent !== false ||
+    status.input?.liveV16?.authorizationCommitted !== false ||
+    status.input?.liveV16?.authorizationEffective !== false ||
+    status.input?.liveV16?.authorizationLifecycleExcludedFromAntecedentHash !==
+      true ||
+    status.input?.liveV16?.authorizationCanBeAddedWithoutAntecedentRebuild !==
+      true ||
+    status.input?.liveV16?.v15AuthorizationReusable !== false ||
+    status.input?.liveV16?.v15AntecedentBytesUnchanged !== true ||
+    status.input?.liveV16?.taughtMeasureFillWhileVisible !== true ||
+    status.input?.liveV16?.taughtExtractMeasureHiddenContentFillWhileVisible !==
+      true ||
+    status.input?.liveV16?.v15WriterBytesUnchanged !== true ||
+    status.input?.liveV16?.v15RestoreBytesUnchanged !== true ||
+    status.input?.liveV16?.v15RuntimeBytesUnchanged !== true ||
+    status.input?.liveV16?.sceneReadbackCarried !== true ||
+    status.input?.liveV16?.carriedV3Verifier !== true ||
+    status.input?.liveV16?.liveHostDoesNotImportSceneReadbackTs !== true ||
+    status.input?.liveV16?.carriedSceneReadback !==
+      "recipe/scene-readback-v16.ts" ||
+    status.input?.liveV16?.carriedV3VerifierPath !==
+      "recipe/input-field-live-v3-verifier-v16.ts" ||
+    status.input?.liveV16?.sourceRoots !== 2 ||
+    status.input?.liveV16?.expectedSceneFacts !== 43_726 ||
+    status.input?.liveV16?.captureCells !== 128 ||
+    status.input?.liveV16?.remoteRequests !== 133 ||
+    status.input?.liveV16?.hostPhases !== 3 ||
+    status.input?.liveV16?.transportFacts?.signedWriterTimeoutMs !== 300_000 ||
+    status.input?.liveV16?.security?.liveExecutionForbidden !== true ||
+    status.input?.liveV16?.attemptsExecuted !== 0 ||
+    status.input?.liveV16?.nextAttempt !== 1 ||
+    status.input?.liveV16?.liveExecutionOccurred !== false ||
+    status.input?.liveV16?.figmaWrites !== 0 ||
+    status.input?.liveV16?.figmaCaptures !== 0 ||
+    status.input?.liveV16?.humanSignoff !== "pending" ||
+    status.input?.liveV16?.overallInputSuccess !== false
   )
-    fail("v3 exhausted/v4-v15 current status");
+    fail("v3 exhausted/v4-v16 current status");
   const unexpected = v3Files.filter(
     (file) =>
       !V3_PREPARED_FILES.includes(file as (typeof V3_PREPARED_FILES)[number]),
@@ -1398,6 +1472,13 @@ export function verifyPivotStatus(): void {
     `${V15_ROOT}/antecedent-index.json`,
   );
   const v15Status = readRepositoryJson<Record<string, any>>(V15_STATUS_PATH);
+  const v16Protocol = readRepositoryJson<Record<string, any>>(
+    `${V16_ROOT}/protocol.json`,
+  );
+  const v16Index = readRepositoryJson<Record<string, any>>(
+    `${V16_ROOT}/antecedent-index.json`,
+  );
+  const v16Status = readRepositoryJson<Record<string, any>>(V16_STATUS_PATH);
   const v5Superseding =
     readRepositoryJson<Record<string, any>>(V5_SUPERSEDING_PATH);
   const protocolHash = sha256(
@@ -2539,6 +2620,104 @@ export function verifyPivotStatus(): void {
   )
     failures.push(
       "v14 hashed host-path, writer, or restore bytes restamped while preparing v15",
+    );
+  if (
+    sha256(readRepositoryEvidence(`${V16_ROOT}/protocol.json`)) !==
+      V16_PROTOCOL_SHA256 ||
+    sha256(readRepositoryEvidence(`${V16_ROOT}/proof-plan.json`)) !==
+      V16_PLAN_SHA256 ||
+    sha256(readRepositoryEvidence(`${V16_ROOT}/capture-manifest.json`)) !==
+      V16_CAPTURE_MANIFEST_SHA256 ||
+    sha256(readRepositoryEvidence(`${V16_ROOT}/request-manifest.json`)) !==
+      V16_REQUEST_MANIFEST_SHA256 ||
+    sha256(readRepositoryEvidence(`${V16_ROOT}/antecedent-index.json`)) !==
+      V16_INDEX_SHA256 ||
+    sha256(
+      readRepositoryEvidence(`${V16_ROOT}/authorization-template.json`),
+    ) !== V16_AUTHORIZATION_TEMPLATE_SHA256 ||
+    v16Protocol.hostNormalization?.carriedSceneReadback !==
+      "recipe/scene-readback-v16.ts" ||
+    v16Protocol.hostNormalization?.taughtMeasureFillWhileVisible !== true ||
+    v16Protocol.hostNormalization
+      ?.taughtExtractMeasureHiddenContentFillWhileVisible !== true ||
+    v16Protocol.hostNormalization?.v15RestoreBytesUnchanged !== true ||
+    v16Protocol.hostNormalization?.v15RuntimeBytesUnchanged !== true ||
+    v16Protocol.execution?.remoteRequests !== 133 ||
+    v16Index.hashSetSha256 !== V16_HASH_SET_SHA256 ||
+    v16Index.authorizationCanBeAddedWithoutAntecedentRebuild !== true ||
+    v16Status.artifactVersion !== "input-live-v16-status-v1" ||
+    v16Status.status !== V16_STATUS ||
+    v16Status.baseCommit !== V16_BASE_COMMIT ||
+    v16Status.authorization?.present !== false ||
+    v16Status.authorization?.committed !== false ||
+    v16Status.authorization?.effective !== false ||
+    v16Status.authorization?.v15AuthorizationReusable !== false ||
+    v16Status.smallestHonestDelta?.taughtMeasureFillWhileVisible !== true ||
+    v16Status.smallestHonestDelta
+      ?.taughtExtractMeasureHiddenContentFillWhileVisible !== true ||
+    v16Status.smallestHonestDelta?.v15RestoreBytesUnchanged !== true ||
+    v16Status.smallestHonestDelta?.v15RuntimeBytesUnchanged !== true ||
+    v16Status.attemptsExecuted !== 0 ||
+    v16Status.liveExecutionOccurred !== false ||
+    v16Status.figmaWrites !== 0 ||
+    v16Status.overallInputSuccess !== false
+  )
+    failures.push("v16 draft antecedent/status mismatch");
+  for (const [artifactPath, metadata] of Object.entries(
+    v16Index.artifacts ?? {},
+  ) as Array<[string, { bytes: number; sha256: string }]>) {
+    const artifact = readRepositoryEvidence(artifactPath);
+    if (
+      artifact.byteLength !== metadata.bytes ||
+      sha256(artifact) !== metadata.sha256
+    )
+      failures.push(`v16 indexed artifact hash mismatch: ${artifactPath}`);
+    if (
+      artifactPath.includes("input-field-live-v16-authorization") ||
+      artifactPath.includes("input-field-live-v16-preflight") ||
+      artifactPath.includes("input-field-live-v16-authorized") ||
+      artifactPath.endsWith("capture-authorization.json") ||
+      artifactPath.endsWith("status-index.json")
+    )
+      failures.push(`v16 authorization lifecycle indexed: ${artifactPath}`);
+  }
+  if (
+    !v16Index.artifacts?.["recipe/scene-readback-v16.ts"] ||
+    !v16Index.artifacts?.["recipe/scene-readback-runtime-v16.ts"] ||
+    !v16Index.artifacts?.["recipe/input-field-live-v3-verifier-v16.ts"] ||
+    !v16Index.artifacts?.["recipe/input-field-live-v16-restore.ts"] ||
+    !v16Index.artifacts?.[`${V16_ROOT}/programs/restore-blueprint.js`] ||
+    !v16Index.artifacts?.[`${V16_ROOT}/programs/writer-payload.js`] ||
+    v16Index.artifacts?.["recipe/scene-readback.ts"] ||
+    v16Index.artifacts?.["recipe/scene-readback-v15.ts"] ||
+    v16Index.artifacts?.["recipe/input-field-live-v3-verifier.ts"] ||
+    v16Index.artifacts?.["recipe/input-field-live-v3-verifier-v15.ts"] ||
+    v16Index.artifacts?.["recipe/input-field-live-v15-restore.ts"]
+  )
+    failures.push(
+      "v16 must hash carried scene-readback-v16 and leave hashed v15 restore/runtime out",
+    );
+  if (
+    sha256(readRepositoryEvidence("recipe/input-field-live-v15-restore.ts")) !==
+      V15_RESTORE_SOURCE_SHA256 ||
+    sha256(
+      readRepositoryEvidence(`${V15_ROOT}/programs/restore-blueprint.js`),
+    ) !== V15_RESTORE_BLUEPRINT_SHA256 ||
+    sha256(readRepositoryEvidence("recipe/scene-readback-runtime-v15.ts")) !==
+      V15_RUNTIME_SOURCE_SHA256 ||
+    sha256(readRepositoryEvidence(`${V15_ROOT}/programs/writer.txt`)) !==
+      V12_WRITER_PROGRAM_SHA256 ||
+    sha256(readRepositoryEvidence(`${V16_ROOT}/programs/writer.txt`)) !==
+      V12_WRITER_PROGRAM_SHA256 ||
+    sha256(readRepositoryEvidence("recipe/scene-readback-v15.ts")) !==
+      v15Index.artifacts?.["recipe/scene-readback-v15.ts"]?.sha256 ||
+    sha256(
+      readRepositoryEvidence("recipe/input-field-live-v3-verifier-v15.ts"),
+    ) !==
+      v15Index.artifacts?.["recipe/input-field-live-v3-verifier-v15.ts"]?.sha256
+  )
+    failures.push(
+      "v15 hashed host-path, writer, restore, or runtime bytes restamped while preparing v16",
     );
   if (
     v5Index.artifactVersion !== "input-live-v5-index-v1" ||
