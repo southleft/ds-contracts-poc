@@ -6,10 +6,12 @@
 > retained, but the human grade is not attributable and the historical live
 > inversion/accounting was self-referential. Input overall success is false and
 > blocked: live v2 improved aggregate geometry and pixel/ink versus legacy but
-> still fails adornment-content and MUI-stratum safeguards. The prospective
-> `input-live-v3` protocol is `draft-uncommitted; chronology unproven; capture
-forbidden`. No hash in this uncommitted pivot proves chronology, immutability,
-> or predeclaration. Current machine status is
+> still fails adornment-content and MUI-stratum safeguards. Commit
+> `be6b01300ad99d8a29ea4c11508d192dec84bbea` now fixes the exact prospective
+> `input-live-v3` criterion bytes before capture authorization. A separate
+> authorization artifact is pending its own commit; until Git history contains
+> that first-add commit, the gate reports `pending-uncommitted-authorization`
+> and capture remains forbidden. Current machine status is
 > `recipe/evidence/status-index.json`; the v3 draft is
 > `recipe/evidence/input-field-live-pivot-v3/index.json`. A technically
 > successful mint is not a proven bidirectional round trip until scene-derived
@@ -59,7 +61,7 @@ forbidden`. No hash in this uncommitted pivot proves chronology, immutability,
 > Input-created Figma artifacts were cleaned; census and Button proof remain
 > untouched. An independent 24-specimen browser↔Figma calibration then improved
 > held-out geometry but regressed held-out pixel/ink under sane coefficient
-> bounds, so it was rejected and Input v3 remains unauthorized.**
+> bounds, so it was rejected. No Input v3 capture has occurred.**
 >
 > Evidence index: immutable objective v1 is
 > `recipe/evidence/input-field-objective-comparison-v1/index.json`; corrected
@@ -1271,19 +1273,19 @@ samples rather than this two-package, 128-cell paired denominator.
 
 ##### Input/Field evidence index
 
-| version        | offline implementation | paired blind recognisability                                                       | WC parity                                               | live Figma  | accounting                                              | overall Input success |
-| -------------- | ---------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------- | ----------- | ------------------------------------------------------- | --------------------- |
-| v1             | pass                   | **fail** — 40/128 < 88/128                                                         | 128/128 byte/pixel/geometry/semantic; parity only       | pending     | offline pass; live pending                              | **false**             |
-| v2             | pass                   | **blocked** — reliable 95/128 > 0/128 consensus, unresolved unchanged-legacy swing | 128/128 perceptual-pixel/geometry/semantic; parity only | pending     | 89/89 fields/source; no loss                            | **false**             |
-| calibrated     | unchanged              | **refused pre-unseal** — invalid grade envelopes; Fleiss κ 0.473 < 0.60            | unchanged                                               | blocked     | unchanged                                               | **false**             |
-| calibration v2 | unchanged              | **incomplete** — A failed 22/24 and 11/12; B/C passed 24/24; performance sealed    | unchanged                                               | blocked     | unchanged                                               | **false**             |
-| replacement v3 | unchanged              | **refused pre-unseal** — 3 valid envelopes; Fleiss κ 0.409255 < 0.60               | unchanged parity-only                                   | blocked     | unchanged                                               | **false**             |
-| paired v1      | unchanged              | **qualification failed** — 44/48, 42/48, 41/48; performance key remains sealed     | unchanged parity-only                                   | blocked     | offline pass; live pending                              | **false**             |
-| objective v1   | unchanged v2 bytes     | human recognisability pending; deterministic visual gate **failed**                | 128/128 parity; structure 128/128                       | blocked     | offline pass; live pending                              | **false**             |
-| objective v2   | pass                   | human recognisability pending; deterministic offline visual gate **passed**        | 128/128 parity; structure 128/128                       | authorized  | offline pass; live pending                              | **false**             |
-| live v1        | pass                   | 128 source/live pairs retained locally; ungraded and not AI-graded                 | live validation failed; artifacts cleaned               | **failed**  | live 14,064/14,064 accounted                            | **false**             |
-| live v2        | pass                   | aggregate-better than legacy; adornment content and MUI stratum **failed**         | historical structure/usability metrics retained         | **failed**  | historical self-referential account is not re-certified | **false**             |
-| live v3 draft  | pending                | capture forbidden                                                                  | scene-derived protocol only; no capture                 | **blocked** | prospective multiset account                            | **false**             |
+| version        | offline implementation | paired blind recognisability                                                         | WC parity                                               | live Figma  | accounting                                              | overall Input success |
+| -------------- | ---------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------- | ----------- | ------------------------------------------------------- | --------------------- |
+| v1             | pass                   | **fail** — 40/128 < 88/128                                                           | 128/128 byte/pixel/geometry/semantic; parity only       | pending     | offline pass; live pending                              | **false**             |
+| v2             | pass                   | **blocked** — reliable 95/128 > 0/128 consensus, unresolved unchanged-legacy swing   | 128/128 perceptual-pixel/geometry/semantic; parity only | pending     | 89/89 fields/source; no loss                            | **false**             |
+| calibrated     | unchanged              | **refused pre-unseal** — invalid grade envelopes; Fleiss κ 0.473 < 0.60              | unchanged                                               | blocked     | unchanged                                               | **false**             |
+| calibration v2 | unchanged              | **incomplete** — A failed 22/24 and 11/12; B/C passed 24/24; performance sealed      | unchanged                                               | blocked     | unchanged                                               | **false**             |
+| replacement v3 | unchanged              | **refused pre-unseal** — 3 valid envelopes; Fleiss κ 0.409255 < 0.60                 | unchanged parity-only                                   | blocked     | unchanged                                               | **false**             |
+| paired v1      | unchanged              | **qualification failed** — 44/48, 42/48, 41/48; performance key remains sealed       | unchanged parity-only                                   | blocked     | offline pass; live pending                              | **false**             |
+| objective v1   | unchanged v2 bytes     | human recognisability pending; deterministic visual gate **failed**                  | 128/128 parity; structure 128/128                       | blocked     | offline pass; live pending                              | **false**             |
+| objective v2   | pass                   | human recognisability pending; deterministic offline visual gate **passed**          | 128/128 parity; structure 128/128                       | authorized  | offline pass; live pending                              | **false**             |
+| live v1        | pass                   | 128 source/live pairs retained locally; ungraded and not AI-graded                   | live validation failed; artifacts cleaned               | **failed**  | live 14,064/14,064 accounted                            | **false**             |
+| live v2        | pass                   | aggregate-better than legacy; adornment content and MUI stratum **failed**           | historical structure/usability metrics retained         | **failed**  | historical self-referential account is not re-certified | **false**             |
+| live v3        | pending                | criterion committed; authorization artifact pending its first-add commit; no capture | scene-derived protocol only; no capture                 | **blocked** | prospective multiset account                            | **false**             |
 
 Input/Field v1 remains a failed historical result. V2's internally reliable
 consensus meets the within-batch arithmetic criterion without a denominator
@@ -1560,14 +1562,32 @@ Visual inspection also found incorrect adornment payload and a regressing MUI
 pixel/ink stratum. V2 therefore remains failed under both the old recorded rule
 and the prospective v3 safeguards.
 
-### Prospective Input live v3 criterion — capture forbidden
+### Prospective Input live v3 criterion and two-commit authorization
 
-`recipe/evidence/input-field-live-pivot-v3/protocol.json` records the next
-criterion before any new capture exists in this worktree. Its SHA-256 is
+Commit `be6b01300ad99d8a29ea4c11508d192dec84bbea` records
+`recipe/evidence/input-field-live-pivot-v3/protocol.json` before any new
+capture. The exact committed Git-object bytes have SHA-256
 `f4decf46da7cd3870e247d5304d632028356580e58ce68bedcb7acb7c0e31a23`.
-The exact status is `draft-uncommitted; chronology unproven; capture forbidden`.
-That hash proves internal consistency only. A future authorized commit must
-establish externally verifiable chronology before any v3 Figma write/capture.
+The protocol's retained draft status bytes are not rewritten: the commit around
+them is the externally visible antecedent, while a second commit must add
+`recipe/evidence/input-field-live-pivot-v3/capture-authorization.json`.
+The authorization commit is discovered, never embedded, as the unique first
+addition returned by
+`git log --reverse --diff-filter=A --format=%H -- recipe/evidence/input-field-live-pivot-v3/capture-authorization.json`.
+It must strictly descend from the antecedent. A capture `codeCommit` must equal
+that authorization commit or be a clean descendant containing identical
+authorization and protocol bytes.
+
+The authorization artifact exists in the authoring tree but is not externally
+established until its parent change is committed. Before that commit,
+`npm run recipe:input-field:live:v3:authorization:check -- --capture-code-commit HEAD`
+must fail by name with `pending-uncommitted-authorization`. After committing
+from a clean tree, run that exact command again; only a green result authorizes
+the separately handed-off capture runner, and only for Figma file key
+`byMp6lt0Ij9b2QbkDGFwBh`. A later receipt must record the antecedent,
+discovered authorization, and capture code commits and must itself descend from
+the authorization commit. No receipt or observed capture data exists now.
+
 The hash changed only because correction-task implementation dependency hashes
 were added; criterion semantics and thresholds below did not change.
 
@@ -1708,7 +1728,8 @@ or a network.
 | `recipe:input-field:objective:check`                            | the locked protocol, exact 128-cell manifest, source/candidate/environment bytes, opaque measurements, identity timing, fixed metric weights, per-cell dimensions/nonzero/pixel/ink/structure assertions, aggregate arithmetic, historical evidence index, or fail-closed progress decision drifts.                              |
 | `recipe:ir:closed:check`                                        | an IR field has no named Figma Plugin API assignment in the interpreter.                                                                                                                                                                                                                                                         |
 | `recipe:scene-readback:check`                                   | expected-plan occurrences collapse, actual scene layout/binding/text/payload/axis/children drift is missed, plugin-data source IR can mask a mutation, or the scene-derived two-cycle fixed point is unstable.                                                                                                                   |
-| `recipe:pivot-status:check`                                     | Button or Input is promoted, v2 is re-certified, chronology is overstated, the prospective criterion hash drifts, or any v3 capture/result appears before authorization.                                                                                                                                                         |
+| `recipe:pivot-status:check`                                     | Button or Input is promoted, v2 is re-certified, committed criterion chronology is misstated, the prospective criterion hash drifts, or any v3 capture/result appears before authorization.                                                                                                                                      |
+| `recipe:input-field:live:v3:authorization:check`                | antecedent/capture protocol bytes or thresholds drift, Git ancestry is wrong, the authorization first-add commit is absent/non-unique/changed, the tree is dirty, a required scene/Task 2 gate or exact Figma key changes, posthoc data leaks into authorization, or a receipt predates authorization.                           |
 | `recipe:regression:census`                                      | the legacy-adapter census changes without its committed table changing (a decrease-only ratchet on carried facts).                                                                                                                                                                                                               |
 
 Phase 0 shipped the schema, normalization, and hash tests. Phase 1 adds

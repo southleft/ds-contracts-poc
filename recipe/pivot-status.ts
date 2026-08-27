@@ -16,6 +16,8 @@ export const PIVOT_STATUS_PATH = "recipe/evidence/status-index.json";
 const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
+const STATUS_INDEX_STATUS =
+  "criterion committed; authorization is git-history-derived; no capture has occurred";
 const sha256 = (bytes: Uint8Array): string =>
   createHash("sha256").update(bytes).digest("hex");
 
@@ -31,22 +33,25 @@ export function validatePivotStatus(
     failures.push(message);
   };
   if (
-    status.status !== DRAFT_STATUS ||
+    status.status !== STATUS_INDEX_STATUS ||
     protocol.status !== DRAFT_STATUS ||
     index.status !== DRAFT_STATUS
   )
-    fail("uncommitted chronology status");
+    fail("criterion/authorization chronology status");
   if (
-    status.chronology?.externallyVerifiable !== false ||
+    status.chronology?.externallyVerifiable !== true ||
+    status.chronology?.antecedentCommit !==
+      "be6b01300ad99d8a29ea4c11508d192dec84bbea" ||
     protocol.chronology?.externallyVerifiable !== false
   )
     fail("chronology overclaim");
   if (
     protocol.chronology?.captureAuthorized !== false ||
     index.captureAuthorized !== false ||
-    status.input?.liveV3?.captureAuthorized !== false
+    status.input?.liveV3?.captureAuthorizationDerivedByGate !== true ||
+    status.input?.liveV3?.captureOccurred !== false
   )
-    fail("capture must remain forbidden");
+    fail("capture authorization/status");
   if (
     status.button?.overallSuccess !== false ||
     status.button?.status !== "pending" ||
@@ -84,7 +89,10 @@ export function validatePivotStatus(
   )
     fail("v3 result must be absent");
   const unexpected = v3Files.filter(
-    (file) => !["index.json", "protocol.json"].includes(file),
+    (file) =>
+      !["capture-authorization.json", "index.json", "protocol.json"].includes(
+        file,
+      ),
   );
   if (unexpected.length > 0)
     fail(`capture forbidden; unexpected v3 artifacts: ${unexpected.join(",")}`);
@@ -136,7 +144,7 @@ export function verifyPivotStatus(): void {
   if (failures.length > 0)
     throw new Error(`recipe pivot status invalid:\n${failures.join("\n")}`);
   process.stdout.write(
-    `Recipe pivot status: Button false/pending; Input blocked; ${DRAFT_STATUS}\n`,
+    `Recipe pivot status: Button false/pending; Input blocked; ${STATUS_INDEX_STATUS}\n`,
   );
 }
 

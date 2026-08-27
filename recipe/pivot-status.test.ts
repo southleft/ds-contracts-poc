@@ -19,14 +19,14 @@ const fixtures = () => ({
   ),
 });
 
-test("prospective v3 protocol is uncommitted, false, and capture-forbidden", () => {
+test("committed v3 criterion remains false with capture authorization separated", () => {
   const value = fixtures();
   assert.deepEqual(
     validatePivotStatus(
       value.status,
       value.protocol,
       value.index,
-      ["index.json", "protocol.json"],
+      ["capture-authorization.json", "index.json", "protocol.json"],
       INPUT_LIVE_V3_PROTOCOL_SHA256,
     ),
     [],
@@ -36,7 +36,7 @@ test("prospective v3 protocol is uncommitted, false, and capture-forbidden", () 
 test("status gate rejects chronology, success, capture, hash, and criterion lies", () => {
   const plants: Array<(value: ReturnType<typeof fixtures>) => void> = [
     (value) => {
-      value.status.chronology.externallyVerifiable = true;
+      value.status.chronology.externallyVerifiable = false;
     },
     (value) => {
       value.status.button.overallSuccess = true;
@@ -63,7 +63,7 @@ test("status gate rejects chronology, success, capture, hash, and criterion lies
         value.status,
         value.protocol,
         value.index,
-        ["index.json", "protocol.json"],
+        ["capture-authorization.json", "index.json", "protocol.json"],
         INPUT_LIVE_V3_PROTOCOL_SHA256,
       ).length > 0,
     );
@@ -74,7 +74,12 @@ test("status gate rejects chronology, success, capture, hash, and criterion lies
       value.status,
       value.protocol,
       value.index,
-      ["index.json", "protocol.json", "capture.png"],
+      [
+        "capture-authorization.json",
+        "index.json",
+        "protocol.json",
+        "capture.png",
+      ],
       "0".repeat(64),
     ).length >= 2,
   );

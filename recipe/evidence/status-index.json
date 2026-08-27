@@ -1,11 +1,14 @@
 {
   "artifactVersion": "recipe-pivot-current-status-v1",
-  "status": "draft-uncommitted; chronology unproven; capture forbidden",
+  "status": "criterion committed; authorization is git-history-derived; no capture has occurred",
   "supersedesStatusClaimsOnly": true,
   "historicalEvidenceRewritten": false,
   "chronology": {
-    "externallyVerifiable": false,
-    "hashMeaning": "Hashes prove current internal byte consistency only. They do not prove chronology, immutability, or predeclaration while the pivot is uncommitted."
+    "externallyVerifiable": true,
+    "antecedentCommit": "be6b01300ad99d8a29ea4c11508d192dec84bbea",
+    "hashMeaning": "Commit be6b01300ad99d8a29ea4c11508d192dec84bbea externally fixes the exact prospective Input live v3 criterion bytes before authorization.",
+    "twoCommitModel": "The antecedent commit fixes the criterion; the unique later commit that first adds the authorization artifact authorizes capture from itself or a clean descendant.",
+    "authorizationEstablishment": "Derived at verification time from Git history; an uncommitted artifact reports pending-uncommitted-authorization and establishes no authorization."
   },
   "button": {
     "overallSuccess": false,
@@ -55,10 +58,13 @@
       ]
     },
     "liveV3": {
-      "status": "draft-uncommitted; chronology unproven; capture forbidden",
+      "status": "criterion committed; authorization requires the committed first-add artifact; no capture has occurred",
       "protocolPath": "recipe/evidence/input-field-live-pivot-v3/protocol.json",
       "protocolSha256": "f4decf46da7cd3870e247d5304d632028356580e58ce68bedcb7acb7c0e31a23",
-      "captureAuthorized": false,
+      "antecedentCommit": "be6b01300ad99d8a29ea4c11508d192dec84bbea",
+      "captureAuthorizationPath": "recipe/evidence/input-field-live-pivot-v3/capture-authorization.json",
+      "captureAuthorizationDerivedByGate": true,
+      "captureOccurred": false,
       "offlineCorrectionTask2Implemented": true,
       "sceneDerivedLiveVerificationRun": false
     }
