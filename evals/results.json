@@ -1,9 +1,9 @@
 {
   "passed": 227,
   "total": 230,
-  "commit": "181d0ab2e260130a03af38bcb6fb415ef038beda",
+  "commit": "0c86356d05cd09bebe672baa2e7c61ab5b4fc633",
   "dirty": false,
-  "recordedAt": "2026-08-26",
+  "recordedAt": "2026-08-27",
   "results": [
     {
       "id": "refuse-unknown-token-reference",
