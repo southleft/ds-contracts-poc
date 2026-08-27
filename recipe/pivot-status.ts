@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 draft antecedent pending separate authorization; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -656,6 +656,28 @@ const V24_ATTEMPT_1_PATH =
 const V24_ATTEMPT_1_SHA256 =
   "b24de818261cc88d84b30d6dea2f11902893fae321e24e127588113bc3ea5cc8";
 const V24_BASE_COMMIT = "824cdd6a2bffe4bd67ee6757cd1a86c8bfac21aa";
+const V24_SCENE_READBACK_SHA256_PIN =
+  "f8efe1c1dbfb7a8013716be81855971f05cc17c7653a81a8a97a2dde4f93c2ae";
+const V25_ROOT = "recipe/evidence/input-field-live-pivot-v25";
+const V25_PROTOCOL_SHA256 =
+  "ae5287f5eab58d53a9ff14cfe06bfd45b2bbb1c8ba75996bff4d405d3c65f8cc";
+const V25_PLAN_SHA256 =
+  "ed1344a20d9c9883c8c1c3cf6c4584a1799d0f12cc39dce1b343322c9a91b26f";
+const V25_CAPTURE_MANIFEST_SHA256 =
+  "98b61b718b70951491c09375b9706bc63dc30112cc0a6b0115356e033ae0232e";
+const V25_REQUEST_MANIFEST_SHA256 =
+  "c15b390bbd1276623417ec8df98ea497c67540db48c83a37557e383b39bec4dd";
+const V25_INDEX_SHA256 =
+  "232e19729f42c08cd6a00713d377d0798190dd4bf31548bbfcc76782d5cec76c";
+const V25_HASH_SET_SHA256 =
+  "474cf5b321e3728d6afb5d035e6967c75165a4b76be1f5d98cf259300b166230";
+const V25_AUTHORIZATION_TEMPLATE_SHA256 =
+  "f40c82633e04f41bb646b61f90efc1b036e9406bc11da8e9f5f14c306cf651ac";
+const V25_STATUS_PATH =
+  "recipe/evidence/input-field-live-pivot-v25-status.json";
+const V25_STATUS =
+  "draft antecedent; pending separate authorization; live execution forbidden";
+const V25_BASE_COMMIT = "316a81051cdc9f95e28d9410e03eb56e1bad57b5";
 const V24_ANTECEDENT_COMMIT = "753eef85aa026561542e45f492bf25b9ac84b599";
 const V24_AUTHORIZATION_PATH = `${V24_ROOT}/capture-authorization.json`;
 const V24_AUTHORIZATION_SHA256 =
@@ -2096,9 +2118,58 @@ export function validatePivotStatus(
     status.input?.liveV24
       ?.restartAsV24Attempt2WithoutSurfaceBindingsFieldForbidden !== true ||
     status.input?.liveV24?.humanSignoff !== "pending" ||
-    status.input?.liveV24?.overallInputSuccess !== false
+    status.input?.liveV24?.overallInputSuccess !== false ||
+    status.input?.liveV25?.status !== V25_STATUS ||
+    status.input?.liveV25?.baseCommit !== V25_BASE_COMMIT ||
+    status.input?.liveV25?.protocolSha256 !== V25_PROTOCOL_SHA256 ||
+    status.input?.liveV25?.proofPlanSha256 !== V25_PLAN_SHA256 ||
+    status.input?.liveV25?.captureManifestSha256 !==
+      V25_CAPTURE_MANIFEST_SHA256 ||
+    status.input?.liveV25?.requestManifestSha256 !==
+      V25_REQUEST_MANIFEST_SHA256 ||
+    status.input?.liveV25?.antecedentIndexSha256 !== V25_INDEX_SHA256 ||
+    status.input?.liveV25?.antecedentHashSetSha256 !== V25_HASH_SET_SHA256 ||
+    status.input?.liveV25?.authorizationTemplateSha256 !==
+      V25_AUTHORIZATION_TEMPLATE_SHA256 ||
+    status.input?.liveV25?.authorizationPresent !== false ||
+    status.input?.liveV25?.authorizationCommitted !== false ||
+    status.input?.liveV25?.authorizationEffective !== false ||
+    status.input?.liveV25?.authorizationLifecycleExcludedFromAntecedentHash !==
+      true ||
+    status.input?.liveV25?.authorizationCanBeAddedWithoutAntecedentRebuild !==
+      true ||
+    status.input?.liveV25?.v24AuthorizationReusable !== false ||
+    status.input?.liveV25?.v24AntecedentBytesUnchanged !== true ||
+    status.input?.liveV25?.v24SceneReadbackUnchanged !== true ||
+    status.input?.liveV25?.taughtSurfaceBindingCompileOrder !== true ||
+    status.input?.liveV25?.taughtSurfaceBindingExtrasDropped !== true ||
+    status.input?.liveV25?.v16WriterBytesUnchanged !== true ||
+    status.input?.liveV25?.v16RestoreBytesUnchanged !== true ||
+    status.input?.liveV25?.v16RuntimeBytesUnchanged !== true ||
+    status.input?.liveV25?.v16ExtractBytesUnchanged !== true ||
+    status.input?.liveV25?.sceneReadbackCarried !== true ||
+    status.input?.liveV25?.carriedV3Verifier !== true ||
+    status.input?.liveV25?.liveHostDoesNotImportSceneReadbackTs !== true ||
+    status.input?.liveV25?.carriedSceneReadback !==
+      "recipe/scene-readback-v25.ts" ||
+    status.input?.liveV25?.carriedV3VerifierPath !==
+      "recipe/input-field-live-v3-verifier-v25.ts" ||
+    status.input?.liveV25?.sourceRoots !== 2 ||
+    status.input?.liveV25?.expectedSceneFacts !== 43_726 ||
+    status.input?.liveV25?.captureCells !== 128 ||
+    status.input?.liveV25?.remoteRequests !== 133 ||
+    status.input?.liveV25?.hostPhases !== 3 ||
+    status.input?.liveV25?.transportFacts?.signedWriterTimeoutMs !== 300_000 ||
+    status.input?.liveV25?.security?.liveExecutionForbidden !== true ||
+    status.input?.liveV25?.attemptsExecuted !== 0 ||
+    status.input?.liveV25?.nextAttempt !== 1 ||
+    status.input?.liveV25?.liveExecutionOccurred !== false ||
+    status.input?.liveV25?.figmaWrites !== 0 ||
+    status.input?.liveV25?.figmaCaptures !== 0 ||
+    status.input?.liveV25?.humanSignoff !== "pending" ||
+    status.input?.liveV25?.overallInputSuccess !== false
   )
-    fail("v3 exhausted/v4-v24 current status");
+    fail("v3 exhausted/v4-v25 current status");
   const unexpected = v3Files.filter(
     (file) =>
       !V3_PREPARED_FILES.includes(file as (typeof V3_PREPARED_FILES)[number]),
@@ -2301,6 +2372,13 @@ export function verifyPivotStatus(): void {
     `${V24_ROOT}/antecedent-index.json`,
   );
   const v24Status = readRepositoryJson<Record<string, any>>(V24_STATUS_PATH);
+  const v25Protocol = readRepositoryJson<Record<string, any>>(
+    `${V25_ROOT}/protocol.json`,
+  );
+  const v25Index = readRepositoryJson<Record<string, any>>(
+    `${V25_ROOT}/antecedent-index.json`,
+  );
+  const v25Status = readRepositoryJson<Record<string, any>>(V25_STATUS_PATH);
   const v5Superseding =
     readRepositoryJson<Record<string, any>>(V5_SUPERSEDING_PATH);
   const protocolHash = sha256(
@@ -4451,6 +4529,111 @@ export function verifyPivotStatus(): void {
   )
     failures.push(
       "v16/v23 hashed writer, restore, runtime, extract, or scene-readback restamped while preparing v24",
+    );
+  if (
+    sha256(readRepositoryEvidence(`${V25_ROOT}/protocol.json`)) !==
+      V25_PROTOCOL_SHA256 ||
+    sha256(readRepositoryEvidence(`${V25_ROOT}/proof-plan.json`)) !==
+      V25_PLAN_SHA256 ||
+    sha256(readRepositoryEvidence(`${V25_ROOT}/capture-manifest.json`)) !==
+      V25_CAPTURE_MANIFEST_SHA256 ||
+    sha256(readRepositoryEvidence(`${V25_ROOT}/request-manifest.json`)) !==
+      V25_REQUEST_MANIFEST_SHA256 ||
+    sha256(readRepositoryEvidence(`${V25_ROOT}/antecedent-index.json`)) !==
+      V25_INDEX_SHA256 ||
+    sha256(
+      readRepositoryEvidence(`${V25_ROOT}/authorization-template.json`),
+    ) !== V25_AUTHORIZATION_TEMPLATE_SHA256 ||
+    v25Protocol.hostNormalization?.carriedSceneReadback !==
+      "recipe/scene-readback-v25.ts" ||
+    v25Protocol.hostNormalization?.taughtSurfaceBindingCompileOrder !==
+      true ||
+    v25Protocol.hostNormalization?.taughtSurfaceBindingExtrasDropped !==
+      true ||
+    v25Protocol.hostNormalization?.v24SceneReadbackUnchanged !== true ||
+    v25Protocol.hostNormalization?.v16ExtractBytesUnchanged !== true ||
+    v25Protocol.execution?.remoteRequests !== 133 ||
+    v25Index.hashSetSha256 !== V25_HASH_SET_SHA256 ||
+    v25Index.authorizationCanBeAddedWithoutAntecedentRebuild !== true ||
+    v25Status.artifactVersion !== "input-live-v25-status-v1" ||
+    v25Status.status !== V25_STATUS ||
+    v25Status.baseCommit !== V25_BASE_COMMIT ||
+    v25Status.authorization?.present !== false ||
+    v25Status.authorization?.committed !== false ||
+    v25Status.authorization?.effective !== false ||
+    v25Status.authorization?.v24AuthorizationReusable !== false ||
+    v25Status.smallestHonestDelta?.taughtSurfaceBindingCompileOrder !==
+      true ||
+    v25Status.smallestHonestDelta?.taughtSurfaceBindingExtrasDropped !==
+      true ||
+    v25Status.smallestHonestDelta?.v24SceneReadbackUnchanged !== true ||
+    v25Status.smallestHonestDelta?.v16ExtractBytesUnchanged !== true ||
+    v25Status.attemptsExecuted !== 0 ||
+    v25Status.liveExecutionOccurred !== false ||
+    v25Status.figmaWrites !== 0 ||
+    v25Status.overallInputSuccess !== false
+  )
+    failures.push("v25 draft antecedent/status mismatch");
+  for (const [artifactPath, metadata] of Object.entries(
+    v25Index.artifacts ?? {},
+  ) as Array<[string, { bytes: number; sha256: string }]>) {
+    const artifact = readRepositoryEvidence(artifactPath);
+    if (
+      artifact.byteLength !== metadata.bytes ||
+      sha256(artifact) !== metadata.sha256
+    )
+      failures.push(`v25 indexed artifact hash mismatch: ${artifactPath}`);
+    if (
+      artifactPath.includes("input-field-live-v25-authorization") ||
+      artifactPath.includes("input-field-live-v25-preflight") ||
+      artifactPath.includes("input-field-live-v25-authorized") ||
+      artifactPath.endsWith("capture-authorization.json") ||
+      artifactPath.endsWith("status-index.json")
+    )
+      failures.push(`v25 authorization lifecycle indexed: ${artifactPath}`);
+  }
+  if (
+    !v25Index.artifacts?.["recipe/scene-readback-v25.ts"] ||
+    !v25Index.artifacts?.["recipe/scene-readback-runtime-v25.ts"] ||
+    !v25Index.artifacts?.["recipe/input-field-live-v3-verifier-v25.ts"] ||
+    !v25Index.artifacts?.["recipe/input-field-live-v25-restore.ts"] ||
+    !v25Index.artifacts?.[`${V25_ROOT}/programs/restore-blueprint.js`] ||
+    !v25Index.artifacts?.[`${V25_ROOT}/programs/writer-payload.js`] ||
+    v25Index.artifacts?.["recipe/scene-readback.ts"] ||
+    v25Index.artifacts?.["recipe/scene-readback-v24.ts"] ||
+    v25Index.artifacts?.["recipe/input-field-live-v3-verifier.ts"] ||
+    v25Index.artifacts?.["recipe/input-field-live-v3-verifier-v24.ts"] ||
+    v25Index.artifacts?.["recipe/input-field-live-v24-restore.ts"]
+  )
+    failures.push(
+      "v25 must hash carried scene-readback-v25 and leave hashed v24 restore/runtime out",
+    );
+  if (
+    sha256(readRepositoryEvidence("recipe/scene-readback-v24.ts")) !==
+      V24_SCENE_READBACK_SHA256_PIN ||
+    sha256(readRepositoryEvidence("recipe/scene-readback-v23.ts")) !==
+      V23_SCENE_READBACK_SHA256 ||
+    sha256(readRepositoryEvidence("recipe/scene-readback-v22.ts")) !==
+      V22_SCENE_READBACK_SHA256 ||
+    sha256(readRepositoryEvidence("recipe/scene-readback-v21.ts")) !==
+      V21_SCENE_READBACK_SHA256 ||
+    sha256(readRepositoryEvidence("recipe/scene-readback-v20.ts")) !==
+      V20_SCENE_READBACK_SHA256 ||
+    sha256(readRepositoryEvidence("recipe/scene-readback-v19.ts")) !==
+      V19_SCENE_READBACK_SHA256 ||
+    sha256(readRepositoryEvidence(`${V25_ROOT}/programs/writer.txt`)) !==
+      V12_WRITER_PROGRAM_SHA256 ||
+    sha256(readRepositoryEvidence("recipe/scene-readback-runtime-v25.ts")) !==
+      V16_RUNTIME_SOURCE_SHA256 ||
+    sha256(
+      readRepositoryEvidence(`${V16_ROOT}/programs/extract-blueprint.js`),
+    ) !== V16_EXTRACT_BLUEPRINT_SHA256 ||
+    sha256(
+      readRepositoryEvidence(`${V16_ROOT}/programs/restore-blueprint.js`),
+    ) !== V16_RESTORE_BLUEPRINT_SHA256
+  )
+    failures.push(
+      "v16/v24 hashed writer, restore, runtime, extract, or scene-readback restamped while preparing v25",
     );
   if (
     v5Index.artifactVersion !== "input-live-v5-index-v1" ||
