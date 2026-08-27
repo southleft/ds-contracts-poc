@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v23-status-v1",
-  "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+  "status": "attempt 1 failed closed; writer and restore accepted; extract issued; host refused surface bindings.length; cleanup complete",
   "baseCommit": "033c94d7a0a6bdba07be064e2e79ce377a6e75d7",
   "antecedent": {
     "commit": "7817a11e1340cb386030b4a9d05fde2d6fc72e22",
@@ -117,12 +117,16 @@
     "exactScratchReadOnlyProbeRequired": true,
     "tokenValuesForbidden": true
   },
-  "attemptsExecuted": 0,
-  "nextAttempt": 1,
+  "attemptsExecuted": 1,
+  "nextAttempt": 2,
   "maximumFutureAttempts": 3,
-  "liveExecutionOccurred": false,
-  "figmaWrites": 0,
+  "liveExecutionOccurred": true,
+  "figmaWrites": 4,
   "figmaCaptures": 0,
+  "createdNodesThenRemoved": 2317,
+  "attempt1Path": "recipe/evidence/input-field-live-pivot-v23-attempt-1.json",
+  "attempt1Sha256": "39e3c76ab9d795c304343c40e99deb8882b5b0a2b94edc91556cc4e53b08f452",
+  "restartAsV23Attempt2WithoutSurfaceBindingsLengthForbidden": true,
   "humanSignoff": "pending",
   "overallInputSuccess": false
 }
