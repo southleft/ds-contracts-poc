@@ -136,10 +136,20 @@
 > extract to measure hidden content `layoutSizingHorizontal` **while the
 > text is still visible**, then restore visibility before other fields.
 > V15 writer, restore, and extract-runtime bytes stay frozen. Do not teach
-> FIXED. Authorization pins antecedent
-> `a764804c4191d161d08ab9527938ce6d29009af7`. Live execution remains
-> forbidden until runtime security prerequisites pass. Do not restart v15
-> attempt 2 as-is.
+> FIXED. V16 prepare is published at
+> `a764804c4191d161d08ab9527938ce6d29009af7`. Authorization is published at
+> `8511c9ca722c9f30c526ce5eb99fa9f4e485d9ec`. V16 attempt 1 ran Scratch-only:
+> writer accepted (2317 created nodes), cleanup persisted, hashed
+> measure-while-visible restore accepted (`restoredCount` 256,
+> `hiddenRevealedForFill` 24, `retriedForFill` 0), then extract issued
+> (8402443 bytes). Hidden-content FILL teaching cleared the v15 24 MUI
+> FIXED cells: MUI 128/128 FILL, Polaris 128/128 FILL. Host collapse then
+> refused leading-slot solid paint. All 64+64 leading slot frames extract
+> with empty `fills[]`; SOLID paint is on the adornment-content child and
+> `instancePayload.fills`. Do not teach FIXED. Do not restart v16 attempt 2
+> as-is. The next lineage must not patch hashed v16 extract/runtime bytes.
+> Cleanup accepted; owned Input pages are gone; no captures; no live
+> success.
 > Button overall success is false/pending.
 > Its technical mint, usability, restoration, and 12/12 adjudication bytes are
 > retained, but the human grade is not attributable and the historical live
@@ -425,7 +435,9 @@ lineage; do not patch hashed bytes in place.
 | A5r | AUTHORIZE INPUT V15 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `c1d3f0ac38f00fd005e80ed4d9e35ff393dbad58`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `2618b5df73ef7a1d4e4973729a99638d44ca5cd22f909b7207231982f9063374`; SPKI SHA-256 `ff0f180c12a7b39572bb4de024c29d90bdda3a0dafaab6e40d25a611f00afed7`. Do not patch hashed v14 or v15 bytes. | **Done** at `4002cb3be87c52ddfa32e2fa15c6bfbdc251238b`. |
 | A5s | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8402467 bytes). Host refused MUI content fill. Extract still MUI 104/128 FILL and 24/128 FIXED hidden placeholders; Polaris 128/128 FILL. Do **not** teach FIXED. Do **not** restart v15 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
 | A5t | PREPARE INPUT V16. Copy the v15 stack. Do not patch hashed v15 restore, writer, or extract-runtime bytes. Teach extract to measure hidden content FILL while the text is still visible, then restore visibility. Do not teach FIXED. | **Done** at `a764804c4191d161d08ab9527938ce6d29009af7`. Antecedent index SHA-256 `f9eabfeecb2e4b7d81e3d43c4dfd4666e99f079e86d15eb8ce63e0e020a5c392`. |
-| A5u | AUTHORIZE INPUT V16 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `a764804c4191d161d08ab9527938ce6d29009af7`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `377ae973efecf53cbb3684ec449dd4f9f388ce36ad5e19572e681fb85ba15f8f`; SPKI SHA-256 `cf89747d6dc04c6944170c2e4ea1450055eaabebeb6ba72aec05c049f1fa7ae0`. Do not patch hashed v15 or v16 bytes. | `--expect-authorized` after publish. Then attestation + Scratch-only live. Max 3. If a hashed v16 file fails closed, open v17. |
+| A5u | AUTHORIZE INPUT V16 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `a764804c4191d161d08ab9527938ce6d29009af7`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `377ae973efecf53cbb3684ec449dd4f9f388ce36ad5e19572e681fb85ba15f8f`; SPKI SHA-256 `cf89747d6dc04c6944170c2e4ea1450055eaabebeb6ba72aec05c049f1fa7ae0`. Do not patch hashed v15 or v16 bytes. | **Done** at `8511c9ca722c9f30c526ce5eb99fa9f4e485d9ec`. |
+| A5v | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8402443 bytes). Hidden FIXED cleared: MUI 128/128 FILL, Polaris 128/128 FILL. Host refused leading-slot solid paint (`fills[0]` empty on 64+64 slot frames; SOLID is on the child/`instancePayload`). Do **not** teach FIXED. Do **not** restart v16 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5w | PREPARE INPUT V17. Copy the v16 stack. Do not patch hashed v16 extract, restore, writer, or runtime bytes. Teach extract/host to surface leading-slot solid paint from the adornment-content child or `instancePayload.fills`. Do not teach FIXED. | Open only after RECORD. If a hashed v17 file later fails closed, open v18. |
 | A6 | Attributable human signoff on Input. | **Human gate.** Record pending and continue other work. Do not invent a grade. Overall Input stays **false** until signed. |
 
 ### B · Button closeout
@@ -1848,7 +1860,7 @@ references and re-derives a legacy comparator over the frozen 24-cell matrix.
 | archetype   | progress                                                                                                                                                        | next evidence boundary                                                                           |
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | Button      | **technical mint retained; overall false/pending**                                                                                                              | scene-derived inversion/accounting, then attributable human signoff (human gate)                 |
-| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, and v15 attempt 1 failed closed; v16 authorization declared; false** | attestation + Scratch-only live v16 (see Remaining work §A) |
+| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, and v16 attempt 1 failed closed; false** | PREPARE INPUT V17 (see Remaining work §A) |
 | Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                                                                      | matched 24-cell benchmark, Scratch-only live, then human grade (see Remaining work §C)           |
 | Data Table  | not claimed                                                                                                                                                     | human-reviewed adapters, offline cross-library proof, then Scratch-only live                     |
 | Calendar    | not claimed                                                                                                                                                     | reviewed archetype addition, then the same offline-then-live sequence                            |

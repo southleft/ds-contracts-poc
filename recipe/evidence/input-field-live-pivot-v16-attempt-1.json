@@ -1,0 +1,76 @@
+{
+  "artifactVersion": "input-live-v16-attempt-1-v1",
+  "status": "failed closed",
+  "authorizationCommit": "8511c9ca722c9f30c526ce5eb99fa9f4e485d9ec",
+  "codeCommit": "8511c9ca722c9f30c526ce5eb99fa9f4e485d9ec",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 2317,
+    "pageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+    "sourceRoots": 2
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 256,
+    "fixedBefore": 24,
+    "hiddenRevealedForFill": 24,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "marker": "INPUT-TEXT-FILL-MEASURE-VISIBLE",
+    "rawResponseBytes": 976,
+    "extractIssued": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "rawResponseBytes": 8402443,
+    "hostNormalizeAccount": false,
+    "marker": "INPUT-EXTRACT-MEASURE-HIDDEN-CONTENT-FILL"
+  },
+  "v15FailureCleared": {
+    "hiddenMuiPlaceholderFixedAfterExtractMeasureWhileVisible": true
+  },
+  "observedContentWidthMode": {
+    "mui": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 },
+    "polaris": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 }
+  },
+  "observedLeadingSlotFills": {
+    "mui": { "empty": 64, "solid": 0, "total": 64 },
+    "polaris": { "empty": 64, "solid": 0, "total": 64 }
+  },
+  "failure": {
+    "phase": "host-normalize-account",
+    "locus": "recipe/recipes/input-field.ts:1104 via recipe/input-field-live-v3-verifier-v16.ts:443",
+    "messages": [
+      "input-field@1: input-field/slot/leading: fills[0] must be a solid paint"
+    ],
+    "cause": "Hashed extract measured hidden content FILL while visible. Restore accepted on Scratch: restoredCount 256, hiddenRevealedForFill 24, retriedForFill 0, contentFillAfter true. Extract was issued (8402443 bytes). Content-width census is now MUI 128/128 FILL and Polaris 128/128 FILL — the v15 24 hidden MUI FIXED cells are cleared. Host collapse then refused leading-slot solid paint. All 64+64 leading slot frames extract with empty fills[]; SOLID paint is on the adornment-content child and instancePayload.fills. The same empty leading-slot fills were present in the v15 extract and were masked by the earlier content-fill refusal. Do not teach FIXED. Do not restart v16 attempt 2 as-is. Extract/runtime bytes are in the v16 hash set.",
+    "inputFieldRecipeInV16AntecedentHashSet": false,
+    "writerInV16AntecedentHashSet": true,
+    "restoreInV16AntecedentHashSet": true,
+    "extractRuntimeInV16AntecedentHashSet": true
+  },
+  "cleanup": {
+    "accepted": true,
+    "remainingOwnedNodes": 0,
+    "scratchOwnedInputPagesRemaining": 0
+  },
+  "captures": 0,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false,
+  "v14AntecedentBytesUnchanged": true,
+  "v15AntecedentBytesUnchanged": true,
+  "v15AuthorizationBytesUnchanged": true,
+  "v16AntecedentBytesUnchanged": true,
+  "v16AuthorizationBytesUnchanged": true,
+  "nextAttempt": 2,
+  "restartAsV16Attempt2WithoutLeadingSlotSolidPaintForbidden": true
+}

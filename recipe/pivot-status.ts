@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 authorization declared; live forbidden; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -410,7 +410,11 @@ const V16_AUTHORIZATION_TEMPLATE_SHA256 =
 const V16_STATUS_PATH =
   "recipe/evidence/input-field-live-pivot-v16-status.json";
 const V16_STATUS =
-  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
+  "attempt 1 failed closed; writer and restore accepted; extract issued; hidden FIXED cleared; host refused leading slot solid paint; cleanup complete";
+const V16_ATTEMPT_1_PATH =
+  "recipe/evidence/input-field-live-pivot-v16-attempt-1.json";
+const V16_ATTEMPT_1_SHA256 =
+  "25518ea2ae4837c1787c7a6076118961b6a255d1bbd3cb56480ac26d344cf23a";
 const V16_BASE_COMMIT = "72a3c5d8b9bbce9e53b730374d4a0796aa33a2be";
 const V16_ANTECEDENT_COMMIT = "a764804c4191d161d08ab9527938ce6d29009af7";
 const V16_AUTHORIZATION_PATH = `${V16_ROOT}/capture-authorization.json`;
@@ -1337,11 +1341,16 @@ export function validatePivotStatus(
     status.input?.liveV16?.hostPhases !== 3 ||
     status.input?.liveV16?.transportFacts?.signedWriterTimeoutMs !== 300_000 ||
     status.input?.liveV16?.security?.liveExecutionForbidden !== true ||
-    status.input?.liveV16?.attemptsExecuted !== 0 ||
-    status.input?.liveV16?.nextAttempt !== 1 ||
-    status.input?.liveV16?.liveExecutionOccurred !== false ||
-    status.input?.liveV16?.figmaWrites !== 0 ||
+    status.input?.liveV16?.attemptsExecuted !== 1 ||
+    status.input?.liveV16?.nextAttempt !== 2 ||
+    status.input?.liveV16?.liveExecutionOccurred !== true ||
+    status.input?.liveV16?.figmaWrites !== 4 ||
     status.input?.liveV16?.figmaCaptures !== 0 ||
+    status.input?.liveV16?.createdNodesThenRemoved !== 2317 ||
+    status.input?.liveV16?.attempt1Path !== V16_ATTEMPT_1_PATH ||
+    status.input?.liveV16?.attempt1Sha256 !== V16_ATTEMPT_1_SHA256 ||
+    status.input?.liveV16
+      ?.restartAsV16Attempt2WithoutLeadingSlotSolidPaintForbidden !== true ||
     status.input?.liveV16?.humanSignoff !== "pending" ||
     status.input?.liveV16?.overallInputSuccess !== false
   )
@@ -2677,9 +2686,18 @@ export function verifyPivotStatus(): void {
       ?.taughtExtractMeasureHiddenContentFillWhileVisible !== true ||
     v16Status.smallestHonestDelta?.v15RestoreBytesUnchanged !== true ||
     v16Status.smallestHonestDelta?.v15RuntimeBytesUnchanged !== true ||
-    v16Status.attemptsExecuted !== 0 ||
-    v16Status.liveExecutionOccurred !== false ||
-    v16Status.figmaWrites !== 0 ||
+    v16Status.attemptsExecuted !== 1 ||
+    v16Status.nextAttempt !== 2 ||
+    v16Status.liveExecutionOccurred !== true ||
+    v16Status.figmaWrites !== 4 ||
+    v16Status.figmaCaptures !== 0 ||
+    v16Status.createdNodesThenRemoved !== 2317 ||
+    v16Status.attempt1Path !== V16_ATTEMPT_1_PATH ||
+    v16Status.attempt1Sha256 !== V16_ATTEMPT_1_SHA256 ||
+    sha256(readRepositoryEvidence(V16_ATTEMPT_1_PATH)) !==
+      V16_ATTEMPT_1_SHA256 ||
+    v16Status.restartAsV16Attempt2WithoutLeadingSlotSolidPaintForbidden !==
+      true ||
     v16Status.overallInputSuccess !== false
   )
     failures.push("v16 draft antecedent/status mismatch");
