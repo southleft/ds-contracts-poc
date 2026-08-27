@@ -34,6 +34,37 @@
       }
     ]
   },
+  "combobox": {
+    "overallSuccess": false,
+    "status": "offline-technical-proof-ungraded",
+    "recipe": {
+      "id": "combobox",
+      "version": 1,
+      "selection": "explicit-reviewed-config",
+      "sources": ["@mui/material@9.2.0#Autocomplete", "antd@5.29.3#Select"],
+      "sourceReferencesRendered": false,
+      "aiGraded": false,
+      "liveFigma": false
+    },
+    "legacyContext": {
+      "recognisableSets": "4/4",
+      "variants": 6,
+      "interpretation": "weak baseline context only; not the recipe target"
+    },
+    "offlineProof": {
+      "pairedCellsPlanned": 24,
+      "comboboxVariants": 64,
+      "optionVariants": 8,
+      "components": 72,
+      "instances": 242,
+      "canonicalCycles": 2
+    },
+    "blockers": [
+      "matched source and legacy references have not been rendered",
+      "no independent human recognisability grade",
+      "no live Figma mint or scene-derived inversion/accounting"
+    ]
+  },
   "input": {
     "overallSuccess": false,
     "status": "blocked",

@@ -249,6 +249,9 @@ jobs:
       - name: recipe:input-field:browser:check (controlled/uncontrolled and stable-shadow lifecycle plus visual regions)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:browser:check
+      - name: recipe:combobox:check (two-source detached-listbox IR, fixed point, accounting, and behavior)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:combobox:check
       - name: recipe:scene-readback:check (planned facts are compared only with actual scene properties)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:scene-readback:check

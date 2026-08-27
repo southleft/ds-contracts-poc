@@ -1497,15 +1497,80 @@ legacy comparator). All Input-created Scratch artifacts were therefore
 cleaned. Overall Input success remains false and final human designer
 recognisability remains pending.
 
+#### Combobox offline technical proof — ungraded, 2026-08-27
+
+The first hard archetype now has an explicitly selected
+`{ id: "combobox", version: 1 }` recipe. The selected real-library sources are
+the pinned `@mui/material@9.2.0` `Autocomplete` and `antd@5.29.3` `Select`.
+Both package APIs and source files were reviewed directly. Both sources support
+multiple selection, but `combobox@1` deliberately proves the comparable
+single-select slice; multiple/tags are named source refusals rather than a
+partially aligned axis.
+
+The exact designer edit surface is six variant properties:
+`Size = small | medium`, `Appearance = outlined | filled`,
+`Open = false | true`,
+`Field state = default | disabled | error | loading`,
+`Content = options | empty`, and the nested option component's
+`Option state = default | highlighted | selected | disabled`; six text
+properties (`Label`, `Placeholder`, `Helper text`, `Error text`, `Empty text`,
+`Loading text`); four instance swaps (`Leading control`, `Clear indicator`,
+`Popup indicator`, `Selected indicator`); and option instance properties
+`Label`, `Value`, and `Disabled`. Root resize is fixed-width, the trigger fills
+the root, the overlay matches trigger width, and vertical sizing hugs content.
+Unknown structural edits are refused.
+
+Compilation produces a horizontal recipe-library frame containing a 64-variant
+combobox set and an eight-variant option set (two sizes × four option states):
+**72 components and 242 instances**. Every open variant has a separate
+fill-width vertical listbox overlay with explicit absolute positioning,
+left/top constraints, `x=0`, and a positive below-trigger offset. Normal open
+cells repeat four instances of `combobox@1/option`; they do not flatten options
+into unrelated frames. Trigger, overlay, option, typography, radius, spacing,
+size, state, and appearance values carry variable bindings and explicit font
+provenance.
+
+The inverse runs only after exact reviewed recipe selection. It rejects missing
+trigger/listbox/option sets, open/overlay disagreement, broken anchors,
+non-instance repetition, dead/unknown axes, selected/highlighted collapse, fake
+layout, missing bindings, malformed option data, unknown roles, and hand-built
+rectangles. Recompile/collapse holds a canonical two-cycle fixed point for both
+adapters. Each reviewed source occurrence is independently accounted to a
+shared-IR landing, code extension, or named refusal using a stable occurrence
+id; omission, mislabelling, duplicate occurrence, and duplicate-collapse
+plants are red.
+
+The paired proof protocol was frozen before results at **12 cells per source,
+24 total**. It covers both sizes and appearances; closed and open; default,
+disabled, error, and loading field states; options and empty content; all four
+option states; label/helper/error; controls; and detached overlay/listbox
+roles. Expected full structure is 64 combobox variants, eight option variants,
+72 components, 48 repeated option occurrences, and 242 instances. A zero-axis
+closed stub cannot enter the protocol.
+
+Generated React and Web Component proofs implement editable query, single
+selection, open/close, disabled-option skipping, ArrowUp/ArrowDown/Enter/Escape,
+`aria-expanded`, `aria-controls`, `aria-activedescendant`, label/helper/error
+relationships, focus retention, stable input nodes/carets, and safe
+text/CSS/token handling. This is a bounded proof widget, not a production
+widget library.
+
+No source reference was rendered or graded, no Figma/MCP call occurred, and no
+live artifact exists. The old 4/4 recognisable legacy census result over only
+six variants is retained verbatim as weak context, not accepted as the target.
+Combobox overall success remains **false/ungraded/no-live**. The next handoff
+is a separately authorized matched benchmark that renders both source
+references and re-derives a legacy comparator over the frozen 24-cell matrix.
+
 #### Pivot progress
 
-| archetype   | progress                                                                                                          | next evidence boundary                                                                                         |
-| ----------- | ----------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| Button      | **technical mint retained; overall false/pending**                                                                | attributable human signoff plus fresh scene-derived inversion/accounting                                       |
-| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted and cleaned; v4 authorization pending commit; false** | parent commits the separate authorization, pushes it, and runs the history/upstream preflight before attempt 1 |
-| Combobox    | not claimed                                                                                                       | detached listbox/popover structure                                                                             |
-| Data Table  | not claimed                                                                                                       | row/column templates and matched matrix                                                                        |
-| Calendar    | not claimed                                                                                                       | new archetype plus absolute acceptance                                                                         |
+| archetype   | progress                                                                                                             | next evidence boundary                                                                              |
+| ----------- | -------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| Button      | **technical mint retained; overall false/pending**                                                                   | attributable human signoff plus fresh scene-derived inversion/accounting                            |
+| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted and cleaned; v7 authorized but security-blocked; false** | rotate the exposed PAT, restart MCP, and complete the exact read-only probe before any live attempt |
+| Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                           | matched 24-cell source/legacy benchmark, then independent human grade                               |
+| Data Table  | not claimed                                                                                                          | row/column templates and matched matrix                                                             |
+| Calendar    | not claimed                                                                                                          | new archetype plus absolute acceptance                                                              |
 
 ### First page-scoped live writer run — blocked, 2026-08-26
 

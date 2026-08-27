@@ -313,3 +313,185 @@ export function measureInputFieldRequiredFacts(
     };
   });
 }
+
+const comboboxSet = (root: FrameNode): ComponentSetNode | undefined => {
+  const node = root.children.find((child) => child.role === "combobox/set");
+  return node?.kind === "component-set" ? node : undefined;
+};
+
+const comboboxMappings = [
+  {
+    id: "select/box-grammar",
+    landing: "every combobox/trigger carries a fill and stroke",
+    measure: (root: FrameNode) =>
+      comboboxSet(root)?.children.every((component) => {
+        const trigger = component.children.find(
+          (child) => child.role === "combobox/trigger",
+        );
+        return (
+          trigger?.kind === "frame" &&
+          trigger.fills.length > 0 &&
+          (trigger.strokes?.length ?? 0) > 0
+        );
+      }) === true,
+  },
+  {
+    id: "select/padding-inline",
+    landing:
+      "every trigger carries positive bound left/right auto-layout padding",
+    measure: (root: FrameNode) =>
+      comboboxSet(root)?.children.every((component) => {
+        const trigger = component.children.find(
+          (child) => child.role === "combobox/trigger",
+        );
+        return (
+          trigger?.kind === "frame" &&
+          trigger.layout.padding.left > 0 &&
+          trigger.layout.padding.right > 0 &&
+          trigger.bindings?.some(
+            (binding) => binding.field === "layout.padding.left",
+          ) &&
+          trigger.bindings.some(
+            (binding) => binding.field === "layout.padding.right",
+          )
+        );
+      }) === true,
+  },
+  {
+    id: "select/width-rule",
+    landing:
+      "every variant has fixed root width and a fill-width trigger/overlay",
+    measure: (root: FrameNode) =>
+      comboboxSet(root)?.children.every((component) => {
+        const trigger = component.children.find(
+          (child) => child.role === "combobox/trigger",
+        );
+        const overlay = component.children.find(
+          (child) => child.role === "combobox/overlay",
+        );
+        return (
+          component.layout.width.mode === "fixed" &&
+          trigger?.kind === "frame" &&
+          trigger.layout.width.mode === "fill" &&
+          (overlay === undefined ||
+            (overlay.kind === "frame" && overlay.layout.width.mode === "fixed"))
+        );
+      }) === true,
+  },
+  {
+    id: "select/chevron",
+    landing: "every trigger carries a popup-indicator instance",
+    measure: (root: FrameNode) =>
+      comboboxSet(root)?.children.every((component) => {
+        let found = false;
+        const visit = (node: IRNode): void => {
+          if (
+            node.kind === "instance" &&
+            node.role === "combobox/control/popup"
+          )
+            found = true;
+          if (
+            node.kind === "frame" ||
+            node.kind === "component" ||
+            node.kind === "component-set"
+          )
+            for (const child of node.children) visit(child);
+        };
+        visit(component);
+        return found;
+      }) === true,
+  },
+  {
+    id: "select/height",
+    landing: "every trigger has positive fixed height and binding",
+    measure: (root: FrameNode) =>
+      comboboxSet(root)?.children.every((component) => {
+        const trigger = component.children.find(
+          (child) => child.role === "combobox/trigger",
+        );
+        return (
+          trigger?.kind === "frame" &&
+          trigger.layout.height.mode === "fixed" &&
+          trigger.layout.height.value > 0 &&
+          trigger.bindings?.some(
+            (binding) => binding.field === "layout.height.value",
+          )
+        );
+      }) === true,
+  },
+] as const;
+
+const comboboxRecipeMappings = [
+  {
+    id: "select/detached-listbox",
+    landing:
+      "every open variant has one explicitly anchored absolute overlay/listbox",
+    measure: (root: FrameNode) =>
+      comboboxSet(root)?.children.every((component) => {
+        const open = component.variantProperties.Open === "true";
+        const overlay = component.children.find(
+          (child) => child.role === "combobox/overlay",
+        );
+        return open
+          ? overlay?.kind === "frame" &&
+              overlay.layout.positioning === "absolute" &&
+              overlay.layout.offset !== undefined &&
+              overlay.children.some(
+                (child) => child.role === "combobox/listbox",
+              )
+          : overlay === undefined;
+      }) === true,
+  },
+  {
+    id: "select/option-instance-repetition",
+    landing: "open options cells repeat four instances of combobox@1/option",
+    measure: (root: FrameNode) => {
+      const set = comboboxSet(root);
+      if (!set) return false;
+      const cells = set.children.filter(
+        (component) =>
+          component.variantProperties.Open === "true" &&
+          component.variantProperties.Content === "options" &&
+          component.variantProperties["Field state"] !== "loading",
+      );
+      return (
+        cells.length > 0 &&
+        cells.every((component) => {
+          let count = 0;
+          const visit = (node: IRNode): void => {
+            if (
+              node.kind === "instance" &&
+              node.componentRef === "combobox@1/option"
+            )
+              count += 1;
+            if (
+              node.kind === "frame" ||
+              node.kind === "component" ||
+              node.kind === "component-set"
+            )
+              for (const child of node.children) visit(child);
+          };
+          visit(component);
+          return count === 4;
+        })
+      );
+    },
+  },
+] as const;
+
+export function measureComboboxRequiredFacts(
+  root: FrameNode,
+): RecipeRequiredFactLanding[] {
+  const seeded = new Set(
+    [
+      ...ARCHETYPE_REQUIRED_FACTS["select / combobox"].required,
+      ...ARCHETYPE_REQUIRED_FACTS["select / combobox"].expected,
+    ].map((fact) => fact.id),
+  );
+  assertCompleteRequiredFactMapping("combobox@1", seeded, comboboxMappings);
+  return [...comboboxMappings, ...comboboxRecipeMappings].map((mapping) => ({
+    requiredFactId: mapping.id,
+    status: mapping.measure(root) ? "measured" : "missing",
+    landing: mapping.landing,
+  }));
+}

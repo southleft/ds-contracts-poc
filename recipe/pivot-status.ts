@@ -194,6 +194,17 @@ export function validatePivotStatus(
   if (
     status.button?.overallSuccess !== false ||
     status.button?.status !== "pending" ||
+    status.combobox?.overallSuccess !== false ||
+    status.combobox?.status !== "offline-technical-proof-ungraded" ||
+    status.combobox?.recipe?.sourceReferencesRendered !== false ||
+    status.combobox?.recipe?.aiGraded !== false ||
+    status.combobox?.recipe?.liveFigma !== false ||
+    status.combobox?.legacyContext?.variants !== 6 ||
+    status.combobox?.offlineProof?.pairedCellsPlanned !== 24 ||
+    status.combobox?.offlineProof?.comboboxVariants !== 64 ||
+    status.combobox?.offlineProof?.optionVariants !== 8 ||
+    status.combobox?.offlineProof?.components !== 72 ||
+    status.combobox?.offlineProof?.instances !== 242 ||
     status.input?.overallSuccess !== false ||
     status.input?.status !== "blocked" ||
     status.input?.liveV2?.result !== "failed"
